@@ -1,0 +1,21 @@
+# Rule exercise: Rule 3 — no self-reference
+# Expected lint output: EXIT 2, errors:
+#   ERROR [software-engineering/self-ref-page] derived_from: page lists itself
+# Represents: synthetic corpus page with slug 'self-ref-page'
+# Note: 'microservices' entry is valid and produces no finding (control)
+
+type: synthesis
+domain: software-engineering
+status: draft
+sources:
+  - path: raw/web/source.md
+    channel: web
+    ingested_at: 2026-05-22
+derived_from:
+  - microservices        # valid reference — control
+  - self-ref-page        # INVALID — page slug cannot appear in its own derived_from
+tags:
+  - corpus/software-engineering
+  - synthesis
+created: 2026-05-22
+updated: 2026-05-22

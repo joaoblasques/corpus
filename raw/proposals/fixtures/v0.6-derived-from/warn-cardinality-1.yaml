@@ -1,0 +1,23 @@
+# Rule exercise: Rule 5 — cardinality-1 warning
+# Expected lint output: EXIT 1, warnings:
+#   WARN [data-engineering/scd2-synthesis] derived_from: single entry 'scd2' — consider an inline wikilink instead
+# Note: no errors; EXIT 1 not EXIT 2
+# Derived slug: scd2 → corpus/data-engineering/scd2.md (exists — Rule 1 passes)
+
+type: synthesis
+domain: data-engineering
+status: draft
+sources:
+  - path: raw/web/dimensional-history-patterns.md
+    channel: web
+    ingested_at: 2026-05-22
+  - path: raw/web/scd-design-tradeoffs.md
+    channel: web
+    ingested_at: 2026-05-22
+derived_from:
+  - scd2                 # single entry — triggers Rule 5 cardinality warning
+tags:
+  - corpus/data-engineering
+  - synthesis
+created: 2026-05-22
+updated: 2026-05-22

@@ -1,0 +1,21 @@
+# Rule exercise: Rule 2 — acyclicity (cycle participant B)
+# Read together with fail-cycle-a.yaml; the two files form the complete cycle:
+#   cycle-node-alpha -> cycle-node-beta -> cycle-node-alpha
+# Expected lint output (combined graph): EXIT 2, errors:
+#   ERROR derived_from: cycle detected: cycle-node-alpha -> cycle-node-beta -> cycle-node-alpha
+# Represents: synthetic corpus page with slug 'cycle-node-beta'
+
+type: synthesis
+domain: software-engineering
+status: draft
+sources:
+  - path: raw/web/source-beta.md
+    channel: web
+    ingested_at: 2026-05-22
+derived_from:
+  - cycle-node-alpha     # points back to fail-cycle-a; closes the cycle
+tags:
+  - corpus/software-engineering
+  - synthesis
+created: 2026-05-22
+updated: 2026-05-22

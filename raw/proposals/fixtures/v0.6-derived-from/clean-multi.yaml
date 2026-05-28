@@ -1,0 +1,29 @@
+# Rule exercise: none — all rules pass
+# Expected lint output: EXIT 0, no findings
+# Validates: cardinality ≥ 2 clean pass; derived slugs are real corpus pages
+# Derived slugs: microservices → corpus/software-engineering/microservices.md (exists)
+#                kubernetes   → corpus/software-engineering/kubernetes.md (exists)
+
+type: synthesis
+domain: software-engineering
+status: draft
+sources:
+  - path: raw/web/distributed-systems-overview.md
+    channel: web
+    ingested_at: 2026-05-22
+  - path: raw/web/network-resilience-patterns.md
+    channel: web
+    ingested_at: 2026-05-22
+  - path: raw/web/service-mesh-intro.md
+    channel: web
+    ingested_at: 2026-05-22
+derived_from:
+  - microservices
+  - kubernetes
+aliases:
+  - distributed systems resilience synthesis
+tags:
+  - corpus/software-engineering
+  - synthesis
+created: 2026-05-22
+updated: 2026-05-22

@@ -1,0 +1,21 @@
+# OS / editor
+.DS_Store
+.obsidian/workspace*
+.obsidian/cache
+
+# Raw source material (personal ingestion channels — not committed to standalone repo)
+raw/_inbox/*
+raw/matter/*
+raw/notes/*
+raw/web/*
+raw/youtube/*
+raw/sources/*
+
+# Keep .gitkeep markers so channel dirs survive clone
+!**/.gitkeep
+
+# Python
+__pycache__/
+.pytest_cache/
+*.pyc
+*.pyo

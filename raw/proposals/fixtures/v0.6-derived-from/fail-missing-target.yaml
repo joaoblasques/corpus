@@ -1,0 +1,22 @@
+# Rule exercise: Rule 1 — existence
+# Expected lint output: EXIT 2, errors:
+#   ERROR [software-engineering/distributed-systems-analysis] derived_from: target 'cap-theorem' not found in corpus
+#   ERROR [software-engineering/distributed-systems-analysis] derived_from: target 'eventual-consistency' not found in corpus
+# Note: 'microservices' is a valid slug and produces no finding (control)
+
+type: synthesis
+domain: software-engineering
+status: draft
+sources:
+  - path: raw/web/distributed-systems-paper.md
+    channel: web
+    ingested_at: 2026-05-22
+derived_from:
+  - microservices        # valid — corpus/software-engineering/microservices.md exists
+  - cap-theorem          # INVALID — no corpus page with this slug
+  - eventual-consistency # INVALID — no corpus page with this slug
+tags:
+  - corpus/software-engineering
+  - synthesis
+created: 2026-05-22
+updated: 2026-05-22

@@ -1,0 +1,21 @@
+# Rule exercise: Rule 4 — no source substitution
+# Expected lint output: EXIT 2, errors:
+#   ERROR [ai-engineering/retrieval-synthesis] derived_from: status:mature but sources: absent or empty — derived_from entries do not count toward graduation
+# Trigger: status:mature + sources: absent + derived_from: non-empty
+# Derived slugs: rag, agent-memory, llm — all exist in corpus/ai-engineering/ (valid for Rule 1)
+# sources: is intentionally absent — this is what triggers Rule 4
+
+type: synthesis
+domain: ai-engineering
+status: mature
+derived_from:
+  - rag
+  - agent-memory
+  - llm
+aliases:
+  - retrieval synthesis
+tags:
+  - corpus/ai-engineering
+  - synthesis
+created: 2026-05-22
+updated: 2026-05-22

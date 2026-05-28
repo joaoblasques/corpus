@@ -1,0 +1,29 @@
+# Rule exercise: none — all rules pass
+# Expected lint output: EXIT 0, no findings
+# Validates: sources: and derived_from: are orthogonal; both present is valid
+# Derived slugs: rag, agent-memory, context-engineering — all exist in corpus/ai-engineering/
+
+type: concept
+domain: ai-engineering
+status: draft
+sources:
+  - path: raw/web/rag-architectures-overview.md
+    channel: web
+    ingested_at: 2026-05-22
+  - path: raw/web/memory-retrieval-patterns.md
+    channel: web
+    ingested_at: 2026-05-22
+  - path: raw/web/context-augmentation-techniques.md
+    channel: web
+    ingested_at: 2026-05-22
+derived_from:
+  - rag
+  - agent-memory
+  - context-engineering
+aliases:
+  - retrieval and memory synthesis
+tags:
+  - corpus/ai-engineering
+  - concept
+created: 2026-05-22
+updated: 2026-05-22
