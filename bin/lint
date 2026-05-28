@@ -1,0 +1,124 @@
+#!/usr/bin/env python3
+"""Lint a Corpus directory tree for broken wikilinks and orphan pages."""
+
+import argparse
+import re
+import sys
+import traceback
+from pathlib import Path
+
+
+class _Parser(argparse.ArgumentParser):
+    def error(self, message):
+        self.print_usage(sys.stderr)
+        print(f"lint: error: {message}", file=sys.stderr)
+        sys.exit(3)
+
+
+def main(corpus_root: Path) -> int:
+    errors = []
+    warnings = []
+
+    pages = {}
+    alias_map = {}
+
+    for md in corpus_root.rglob("*.md"):
+        slug = str(md.relative_to(corpus_root)).replace(".md", "")
+        content = md.read_text()
+        fm_match = re.match(r'^---\n(.*?)\n---', content, re.DOTALL)
+        aliases = []
+        if fm_match:
+            for line in fm_match.group(1).splitlines():
+                m = re.match(r'\s+-\s+(.+)', line)
+                if m:
+                    val = m.group(1).strip()
+                    if '/' not in val and not val.startswith('corpus/') \
+                       and not val.startswith('synthesis') \
+                       and not val.startswith('entity') \
+                       and not val.startswith('concept') \
+                       and not val.startswith('hub') \
+                       and not val.startswith('source'):
+                        aliases.append(val)
+        pages[slug] = {"path": md, "aliases": aliases, "content": content}
+
+    for slug, info in pages.items():
+        for alias in info["aliases"]:
+            if alias not in alias_map:
+                alias_map[alias] = []
+            alias_map[alias].append(slug)
+
+    # Fix: [^\]|\\]+? excludes backslash from slug capture, preventing
+    # BROKEN_LINK false positives on \|-escaped wikilinks in tables.
+    wikilink_pat = re.compile(r'\[\[([^\]|\\]+?)(?:\|[^\]]+)?\]\]')
+
+    for slug, info in pages.items():
+        for m in wikilink_pat.finditer(info["content"]):
+            target = m.group(1).strip()
+            if target.startswith("03_Resources/") or target.startswith("raw/"):
+                continue
+            target_slug = target.replace(".md", "")
+            if target_slug not in pages:
+                errors.append(f"BROKEN_LINK [{slug}] → [[{target}]] (target not found)")
+
+    inbound = {slug: 0 for slug in pages}
+    for slug, info in pages.items():
+        for m in wikilink_pat.finditer(info["content"]):
+            target = m.group(1).strip().replace(".md", "")
+            if target in inbound:
+                inbound[target] += 1
+
+    for slug, count in inbound.items():
+        if count == 0 and not slug.endswith("/README"):
+            warnings.append(f"ORPHAN [{slug}] (no inbound links)")
+
+    print(f"Lint: {len(errors)} errors, {len(warnings)} warnings")
+    if errors:
+        for e in errors:
+            print(f"  ERROR: {e}")
+    if warnings:
+        for w in warnings:
+            print(f"  WARN:  {w}")
+    if not errors and not warnings:
+        print("  Clean.")
+
+    # Exit codes: 0=clean, 1=warnings only, 2=errors present.
+    # Exit 3 is reserved for internal/usage error (handled in __main__).
+    if errors:
+        return 2
+    if warnings:
+        return 1
+    return 0
+
+
+if __name__ == "__main__":
+    parser = _Parser(
+        description="Lint a Corpus directory tree for broken wikilinks and orphan pages.",
+        epilog=(
+            "Exit codes:\n"
+            "  0 — clean (no errors, no warnings)\n"
+            "  1 — warnings only (orphans, no broken links)\n"
+            "  2 — errors present (broken links; warnings may also be present)\n"
+            "  3 — internal error or usage error (unhandled exception,\n"
+            "      unreadable path, bad CLI args)"
+        ),
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    parser.add_argument(
+        "path",
+        nargs="?",
+        default="corpus",
+        help="path to the corpus directory (default: corpus)",
+    )
+    args = parser.parse_args()
+
+    corpus_path = Path(args.path)
+    if not corpus_path.is_dir():
+        print(f"lint: not a directory: {args.path}", file=sys.stderr)
+        sys.exit(3)
+
+    try:
+        sys.exit(main(corpus_path))
+    except Exception as e:
+        traceback.print_exc(file=sys.stderr)
+        print(f"lint: internal error: {e!r}", file=sys.stderr)
+        sys.exit(3)
