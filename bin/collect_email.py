@@ -54,3 +54,47 @@ def already_collected(message_id: str, search_dirs: list[Path] | None = None) ->
             except (OSError, UnicodeDecodeError):
                 continue
     return False
+
+
+def yaml_scalar(value: str) -> str:
+    value = (value or "").replace("\n", " ").strip()
+    needs_quote = (
+        value == ""
+        or value[:1] in "-?:#&*!|>%@`"
+        or bool(re.search(r'[:#\[\]{}",]', value))
+    )
+    if needs_quote:
+        return '"' + value.replace("\\", "\\\\").replace('"', '\\"') + '"'
+    return value
+
+
+def build_document(meta: dict, body: str) -> str:
+    lines = [
+        "---",
+        "channel: email",
+        "source: gmail",
+        f"gmail_message_id: {meta['gmail_message_id']}",
+        f"from: {yaml_scalar(meta['from'])}",
+        f"subject: {yaml_scalar(meta['subject'])}",
+        f"date_received: {meta['date_received']}",
+    ]
+    if meta.get("url"):
+        lines.append(f"url: {meta['url']}")
+    lines.append(f"pointer: {'true' if meta.get('pointer') else 'false'}")
+    lines.append(f"collected_at: {meta['collected_at']}")
+    lines.append("---")
+    lines.append("")
+    lines.append(body.strip())
+    lines.append("")
+    return "\n".join(lines)
+
+
+def target_filename(date_received: str, subject: str, message_id: str,
+                    inbox: Path | None = None) -> Path:
+    base = inbox if inbox is not None else INBOX
+    slug = slugify(subject)
+    candidate = base / f"email-{date_received}-{slug}.md"
+    if candidate.exists():
+        suffix = re.sub(r"[^a-z0-9]+", "", message_id.lower())[:8] or "x"
+        candidate = base / f"email-{date_received}-{slug}-{suffix}.md"
+    return candidate
