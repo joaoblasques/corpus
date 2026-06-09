@@ -43,7 +43,7 @@ def detect_pointer(body: str) -> tuple[bool, str | None]:
 
 def already_collected(message_id: str, search_dirs: list[Path] | None = None) -> bool:
     dirs = search_dirs if search_dirs is not None else DEDUP_DIRS
-    needle = f"gmail_message_id: {message_id}"
+    needle = f"gmail_message_id: {message_id}\n"
     for d in dirs:
         if not d.exists():
             continue
@@ -57,7 +57,7 @@ def already_collected(message_id: str, search_dirs: list[Path] | None = None) ->
 
 
 def yaml_scalar(value: str) -> str:
-    value = (value or "").replace("\n", " ").strip()
+    value = (value or "").replace("\n", " ").replace("\t", " ").strip()
     needs_quote = (
         value == ""
         or value[:1] in "-?:#&*!|>%@`"
@@ -73,6 +73,7 @@ def build_document(meta: dict, body: str) -> str:
         "---",
         "channel: email",
         "source: gmail",
+        # gmail_message_id and date_received are trusted alphanumeric/ISO-date values (not routed through yaml_scalar).
         f"gmail_message_id: {meta['gmail_message_id']}",
         f"from: {yaml_scalar(meta['from'])}",
         f"subject: {yaml_scalar(meta['subject'])}",
@@ -95,6 +96,7 @@ def target_filename(date_received: str, subject: str, message_id: str,
     slug = slugify(subject)
     candidate = base / f"email-{date_received}-{slug}.md"
     if candidate.exists():
+        # Handles a single collision level; same-id reprocessing is blocked upstream by already_collected.
         suffix = re.sub(r"[^a-z0-9]+", "", message_id.lower())[:8] or "x"
         candidate = base / f"email-{date_received}-{slug}-{suffix}.md"
     return candidate
@@ -125,7 +127,6 @@ def main(argv=None) -> int:
     p.add_argument("--collected-at", required=True)
     p.add_argument("--body-file", required=True)
     args = p.parse_args(argv)
-    body = Path(args.body_file).read_text(encoding="utf-8")
     meta = {
         "gmail_message_id": args.message_id,
         "from": args.sender,
@@ -133,7 +134,13 @@ def main(argv=None) -> int:
         "date_received": args.date_received,
         "collected_at": args.collected_at,
     }
-    print(json.dumps(write_collected(meta, body)))
+    try:
+        body = Path(args.body_file).read_text(encoding="utf-8")
+        result = write_collected(meta, body)
+    except Exception as e:
+        print(json.dumps({"status": "error", "error": str(e)}))
+        return 1
+    print(json.dumps(result))
     return 0
 
 

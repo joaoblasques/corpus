@@ -105,6 +105,7 @@ def test_target_filename_collision_appends_id(tmp_path):
     second = ce.target_filename("2026-06-09", "Hello: a test", "ZZZ999", tmp_path)
     assert first != second
     assert "email-2026-06-09-hello-a-test" in first.name
+    assert "zzz999" in second.name
 
 
 def test_write_collected_writes_file(tmp_path):
@@ -148,3 +149,42 @@ def test_cli_writes_and_prints_json(tmp_path, monkeypatch, capsys):
     out = json.loads(capsys.readouterr().out)
     assert out["status"] == "written"
     assert Path(out["path"]).exists()
+
+
+# Fix 1: dedup needle prefix bug — short id must not false-match a longer one
+def test_already_collected_no_prefix_match(tmp_path):
+    d = tmp_path / "inbox"
+    d.mkdir()
+    (d / "email-2026-06-09-x.md").write_text(
+        "---\ngmail_message_id: ABC123\n---\nbody\n", encoding="utf-8"
+    )
+    # "ABC12" is a strict prefix of "ABC123" — must NOT be treated as collected
+    assert ce.already_collected("ABC12", [d]) is False
+
+
+# Fix 2: tabs in yaml_scalar must be normalized to spaces
+def test_yaml_scalar_no_tab():
+    result = ce.yaml_scalar("a\tb")
+    assert "\t" not in result
+
+
+# Fix 4: yaml_scalar("") returns '""'
+def test_yaml_scalar_empty_returns_quoted_empty():
+    assert ce.yaml_scalar("") == '""'
+
+
+# Fix 3: CLI returns 1 and prints error JSON when body-file does not exist
+def test_cli_error_on_missing_body_file(tmp_path, monkeypatch, capsys):
+    inbox = tmp_path / "_inbox"
+    monkeypatch.setattr(ce, "INBOX", inbox)
+    monkeypatch.setattr(ce, "DEDUP_DIRS", [inbox])
+    missing = str(tmp_path / "does_not_exist.md")
+    rc = ce.main([
+        "--message-id", "ERR1", "--from", "a@b.com", "--subject", "Subj",
+        "--date", "2026-06-09", "--collected-at", "2026-06-09",
+        "--body-file", missing,
+    ])
+    assert rc == 1
+    out = json.loads(capsys.readouterr().out)
+    assert out["status"] == "error"
+    assert "error" in out
