@@ -28,3 +28,14 @@ def slugify(text: str, max_len: int = 60) -> str:
     if len(text) > max_len:
         text = text[:max_len].rstrip("-")
     return text or "untitled"
+
+
+def detect_pointer(body: str) -> tuple[bool, str | None]:
+    """A body is a 'pointer' if it is dominated by a link (little other prose)."""
+    urls = URL_RE.findall(body or "")
+    if not urls:
+        return False, None
+    prose = URL_RE.sub("", body).strip()
+    if len(prose) <= POINTER_MAX_PROSE:
+        return True, urls[0]
+    return False, None

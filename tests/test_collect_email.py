@@ -20,3 +20,22 @@ def test_slugify_truncates_without_trailing_hyphen():
 
 def test_slugify_empty_is_untitled():
     assert ce.slugify("!!!") == "untitled"
+
+
+def test_detect_pointer_true_for_bare_link():
+    ok, url = ce.detect_pointer("Check this out: https://example.com/article")
+    assert ok is True
+    assert url == "https://example.com/article"
+
+
+def test_detect_pointer_false_for_prose_newsletter():
+    body = "Welcome to the weekly digest. " * 20 + "More at https://example.com"
+    ok, url = ce.detect_pointer(body)
+    assert ok is False
+    assert url is None
+
+
+def test_detect_pointer_false_when_no_url():
+    ok, url = ce.detect_pointer("Just some text, no links here.")
+    assert ok is False
+    assert url is None
