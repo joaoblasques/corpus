@@ -343,3 +343,9 @@ Out of scope for this commit (deferred):
 - gaps surfaced: (1) Claude Code mechanics (slash commands, hooks, settings.json, MCP) lightly covered; (2) no official Anthropic/Claude Code docs ingested; (3) no record of user's actual setup. Logged as highest-leverage next sources to deepen the "Claude" cluster.
 - context: executed as sub-project A of the corpus-direction brainstorm (validate the consumption half of the loop). A closed; consumption loop proven end-to-end.
 - v0.6 note: this synthesis page is another instance motivating the draft derived_from: field (internal provenance currently expressed only in prose + inline wikilinks).
+
+## [2026-06-09] config | add email channel
+
+- Added `email` channel → `raw/email/` to corpus/_config.md (channel-labels table + email-collection note).
+- Created raw/email/ (with .gitkeep).
+- Supports the /collect-email collector (sub-project B): captures starred Gmail into raw/_inbox/ (channel email), routed to raw/email/ by Branch A ingest.

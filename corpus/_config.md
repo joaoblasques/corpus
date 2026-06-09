@@ -52,3 +52,6 @@ Rules:
 | `web` | `raw/web/` | — |
 | `notes` | `raw/notes/` (no PARA home) | `03_Resources/Articles/`, `03_Resources/Study Notes/` |
 | `inbox` | `raw/_inbox/` (transient) | — |
+| `email` | `raw/email/` (collected via `/collect-email`) | — |
+
+**Email collection**: starred Gmail messages are captured by the `/collect-email` skill into `raw/_inbox/` (channel `email`), then routed to `raw/email/` by the normal Branch A ingest flow. The skill writes a `gmail_message_id` frontmatter field used for dedup; it is not part of the §2 source-stamp spec.
