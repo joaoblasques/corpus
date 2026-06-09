@@ -39,3 +39,22 @@ def test_detect_pointer_false_when_no_url():
     ok, url = ce.detect_pointer("Just some text, no links here.")
     assert ok is False
     assert url is None
+
+
+def test_already_collected_finds_existing(tmp_path):
+    d = tmp_path / "inbox"
+    d.mkdir()
+    (d / "email-2026-06-09-x.md").write_text(
+        "---\ngmail_message_id: ABC123\n---\nbody\n", encoding="utf-8"
+    )
+    assert ce.already_collected("ABC123", [d]) is True
+
+
+def test_already_collected_absent(tmp_path):
+    d = tmp_path / "inbox"
+    d.mkdir()
+    assert ce.already_collected("NOPE", [d]) is False
+
+
+def test_already_collected_ignores_missing_dirs(tmp_path):
+    assert ce.already_collected("X", [tmp_path / "does-not-exist"]) is False

@@ -39,3 +39,18 @@ def detect_pointer(body: str) -> tuple[bool, str | None]:
     if len(prose) <= POINTER_MAX_PROSE:
         return True, urls[0]
     return False, None
+
+
+def already_collected(message_id: str, search_dirs: list[Path] | None = None) -> bool:
+    dirs = search_dirs if search_dirs is not None else DEDUP_DIRS
+    needle = f"gmail_message_id: {message_id}"
+    for d in dirs:
+        if not d.exists():
+            continue
+        for md in d.glob("*.md"):
+            try:
+                if needle in md.read_text(encoding="utf-8"):
+                    return True
+            except (OSError, UnicodeDecodeError):
+                continue
+    return False
