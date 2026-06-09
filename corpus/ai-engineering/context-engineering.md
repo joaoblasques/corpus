@@ -12,6 +12,9 @@ sources:
   - path: 03_Resources/Study Notes/Claude Code - Solving the Memory Problem with Context Engineering.md
     channel: notes
     ingested_at: 2026-05-21
+  - path: raw/youtube/How AI agents & Claude skills work (Clearly Explained).md
+    channel: youtube
+    ingested_at: 2026-06-09
 aliases:
   - context engineering
   - context window engineering
@@ -19,7 +22,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-07
-updated: 2026-05-21
+updated: 2026-06-09
 ---
 
 # Context Engineering
@@ -51,6 +54,16 @@ In practice, this means CLAUDE.md functions as long-term memory (always in scope
 
 See [[ai-engineering/ai-agent|AI Agent]] for how context slots into the broader agent architecture. See [[ai-engineering/context-window-management|Context Window Management]] for operational strategies (compaction, resets, sub-agents) when context fills.
 
+## "Less is more" — what belongs in context
+
+One practitioner framing pushes minimalism: rely on the model's strengths and spend context only on **what is unique to you** [^src4].
+
+- **Code is context.** "Code itself has become context" — telling an agent which framework a codebase uses is redundant when it can read the code. A solid template or foundation acts as context the agent builds on [^src4].
+- **Don't encode general knowledge.** "Don't tell the model use React. It knows to use React." Reserve instructions for what the model *can't* infer — your specific workflow, taste, currency, methodology [^src4].
+- **Performance, not just cost.** A fuller window degrades output quality, so minimal context is also a quality lever — see [[ai-engineering/context-window-management|Context Window Management]] [^src4].
+
+This complements the [[ai-engineering/agent-skills|Agent Skills]] argument: codify your unique workflow into skills (loaded on demand) rather than always-on instruction files.
+
 ## Related concepts (referenced in source 1, not yet ingested)
 
 - `context-engineering-ace-self-improving-llm-workflows` — agentic/self-improving applications of context engineering
@@ -64,6 +77,7 @@ See [[ai-engineering/ai-agent|AI Agent]] for how context slots into the broader 
 - [[ai-engineering/tool-calling|Tool Calling]]
 - [[ai-engineering/rag|RAG]] — implements the "Retrieved context" component
 - [[ai-engineering/context-window-management|Context Window Management]] — operational strategies when context fills (compaction, sub-agents, resets)
+- [[ai-engineering/agent-skills|Agent Skills]] — codifying unique workflow into on-demand skills rather than always-on context
 - [[ai-engineering/agent-memory|Agent Memory]] — the two-tier memory model that context engineering operates on
 - [[ai-engineering/tool-calling-and-context-engineering|Tool Calling & Context Engineering]] — synthesis: structural relationship between tool results and context window management
 
@@ -72,3 +86,4 @@ See [[ai-engineering/ai-agent|AI Agent]] for how context slots into the broader 
 [^src1]: [[03_Resources/Articles/Context Engineering|Context Engineering]]
 [^src2]: [[03_Resources/Study Notes/AI Agents - Complete Course Beginner to Pro|AI Agents - Complete Course Beginner to Pro]]
 [^src3]: [[03_Resources/Study Notes/Claude Code - Solving the Memory Problem with Context Engineering|Claude Code - Solving the Memory Problem with Context Engineering]]
+[^src4]: [How AI agents & Claude skills work (Clearly Explained)](<../../raw/youtube/How AI agents & Claude skills work (Clearly Explained).md>) — Greg Isenberg × Ras Mic, YouTube

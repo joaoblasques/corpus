@@ -6,6 +6,9 @@ sources:
   - path: 03_Resources/Study Notes/Claude Code - Solving the Memory Problem with Context Engineering.md
     channel: notes
     ingested_at: 2026-05-21
+  - path: raw/youtube/How AI agents & Claude skills work (Clearly Explained).md
+    channel: youtube
+    ingested_at: 2026-06-09
 aliases:
   - context window management
   - context management
@@ -15,7 +18,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-21
-updated: 2026-05-21
+updated: 2026-06-09
 ---
 
 # Context Window Management
@@ -80,12 +83,22 @@ Counterintuitive: verbose instructions *hurt* performance. Extra tokens add to c
 
 Not every iteration needs the same tool. Rapid back-and-forth revisions consume context fast — route those to lighter editors; reserve the main agent for building from specs [^src1].
 
+### 6. Progressive disclosure via skills
+
+Putting reusable instructions in a skill rather than an always-on `AGENTS.md`/`CLAUDE.md` file keeps the window lean: only the skill's name + description occupy context until it's invoked, at which point the body loads on demand [^src2]. One measured example: 944 tokens as an always-on file vs 53 tokens as a skill's name + description [^src2]. See [[ai-engineering/agent-skills|Agent Skills]].
+
+## Why a lean window matters
+
+Token efficiency is not only about cost. The source's framing: **"the model will get dumb as the context window closes"** — quality degrades as the window fills [^src2]. Practical target: keep usage roughly between the baseline already consumed by the system prompt (~10%) and ~70%; the closer to 90–100%, the worse the agent performs [^src2]. This is the performance argument (beyond cost) for compaction, sub-agents, and progressive disclosure.
+
 ## See also
 
 - [[ai-engineering/context-engineering|Context Engineering]] — governs how context is assembled at inference time
+- [[ai-engineering/agent-skills|Agent Skills]] — progressive disclosure as a context-saving technique
 - [[ai-engineering/agent-memory|Agent Memory]] — the two-tier memory model (short-term / long-term)
 - [[ai-engineering/ai-agent|AI Agent]] — the agentic loop that generates context growth
 
 ---
 
 [^src1]: [[03_Resources/Study Notes/Claude Code - Solving the Memory Problem with Context Engineering|Claude Code - Solving the Memory Problem with Context Engineering]]
+[^src2]: [How AI agents & Claude skills work (Clearly Explained)](<../../raw/youtube/How AI agents & Claude skills work (Clearly Explained).md>) — Greg Isenberg × Ras Mic, YouTube
