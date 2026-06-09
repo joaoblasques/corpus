@@ -98,3 +98,44 @@ def target_filename(date_received: str, subject: str, message_id: str,
         suffix = re.sub(r"[^a-z0-9]+", "", message_id.lower())[:8] or "x"
         candidate = base / f"email-{date_received}-{slug}-{suffix}.md"
     return candidate
+
+
+def write_collected(meta: dict, body: str, inbox: Path | None = None,
+                    dedup_dirs: list[Path] | None = None) -> dict:
+    if already_collected(meta["gmail_message_id"], dedup_dirs):
+        return {"status": "duplicate", "gmail_message_id": meta["gmail_message_id"]}
+    pointer, url = detect_pointer(body)
+    meta = {**meta, "pointer": pointer, "url": url}
+    base = inbox if inbox is not None else INBOX
+    base.mkdir(parents=True, exist_ok=True)
+    path = target_filename(meta["date_received"], meta["subject"],
+                           meta["gmail_message_id"], base)
+    path.write_text(build_document(meta, body), encoding="utf-8")
+    return {"status": "written", "path": str(path), "pointer": pointer, "url": url}
+
+
+def main(argv=None) -> int:
+    p = argparse.ArgumentParser(
+        description="Write a starred Gmail message into raw/_inbox/ (idempotent)."
+    )
+    p.add_argument("--message-id", required=True)
+    p.add_argument("--from", dest="sender", required=True)
+    p.add_argument("--subject", required=True)
+    p.add_argument("--date", dest="date_received", required=True)
+    p.add_argument("--collected-at", required=True)
+    p.add_argument("--body-file", required=True)
+    args = p.parse_args(argv)
+    body = Path(args.body_file).read_text(encoding="utf-8")
+    meta = {
+        "gmail_message_id": args.message_id,
+        "from": args.sender,
+        "subject": args.subject,
+        "date_received": args.date_received,
+        "collected_at": args.collected_at,
+    }
+    print(json.dumps(write_collected(meta, body)))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -1,3 +1,4 @@
+import json
 import sys
 from pathlib import Path
 
@@ -104,3 +105,46 @@ def test_target_filename_collision_appends_id(tmp_path):
     second = ce.target_filename("2026-06-09", "Hello: a test", "ZZZ999", tmp_path)
     assert first != second
     assert "email-2026-06-09-hello-a-test" in first.name
+
+
+def test_write_collected_writes_file(tmp_path):
+    inbox = tmp_path / "_inbox"
+    res = ce.write_collected(_meta(), "Newsletter body here.", inbox=inbox, dedup_dirs=[inbox])
+    assert res["status"] == "written"
+    p = Path(res["path"])
+    assert p.exists()
+    assert "gmail_message_id: ABC123" in p.read_text(encoding="utf-8")
+
+
+def test_write_collected_dedup_skips(tmp_path):
+    inbox = tmp_path / "_inbox"
+    ce.write_collected(_meta(), "body", inbox=inbox, dedup_dirs=[inbox])
+    res2 = ce.write_collected(_meta(), "body", inbox=inbox, dedup_dirs=[inbox])
+    assert res2["status"] == "duplicate"
+    assert len(list(inbox.glob("*.md"))) == 1
+
+
+def test_write_collected_sets_pointer(tmp_path):
+    inbox = tmp_path / "_inbox"
+    res = ce.write_collected(
+        _meta(gmail_message_id="PTR1"), "https://example.com/x", inbox=inbox, dedup_dirs=[inbox]
+    )
+    assert res["pointer"] is True
+    assert res["url"] == "https://example.com/x"
+
+
+def test_cli_writes_and_prints_json(tmp_path, monkeypatch, capsys):
+    inbox = tmp_path / "_inbox"
+    monkeypatch.setattr(ce, "INBOX", inbox)
+    monkeypatch.setattr(ce, "DEDUP_DIRS", [inbox])
+    body_file = tmp_path / "body.md"
+    body_file.write_text("Hello body", encoding="utf-8")
+    rc = ce.main([
+        "--message-id", "CLI1", "--from", "a@b.com", "--subject", "Subj",
+        "--date", "2026-06-09", "--collected-at", "2026-06-09",
+        "--body-file", str(body_file),
+    ])
+    assert rc == 0
+    out = json.loads(capsys.readouterr().out)
+    assert out["status"] == "written"
+    assert Path(out["path"]).exists()
