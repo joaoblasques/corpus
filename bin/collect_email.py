@@ -82,6 +82,33 @@ def select_links(body: str) -> list[dict]:
     return out
 
 
+LEARN_RE = re.compile(
+    r"(?i)\b(guide|tutorial|how[\s-]?to|explained?|introduction|deep[\s-]?dive|"
+    r"fundamentals|concept|primer|walkthrough|learn|course|patterns?|reference|"
+    r"cheat[\s-]?sheet|build(ing)?)\b"
+)
+NEWS_RE = re.compile(
+    r"(?i)(\bannounce[ds]?\b|\blaunch(es|ed)?\b|\braises?\b|\braised\b|\bfunding\b|"
+    r"\bseries [a-d]\b|\bacqui(re|res|red|sition)\b|\bvaluation\b|\bhires?\b|"
+    r"\bappoints?\b|\$\d+\s?(m|b|million|billion)\b)"
+)
+
+
+def heuristic_score(url: str, description: str) -> int:
+    """Pure 0-10 learning-utility score; fallback when LLM ranking is unavailable."""
+    text = f"{url} {description}".lower()
+    score = 5
+    if "github.com" in text:
+        score += 3
+    if re.search(r"(docs?\.|/docs/|readthedocs|\.dev/)", text):
+        score += 1
+    if LEARN_RE.search(text):
+        score += 2
+    if NEWS_RE.search(text):
+        score -= 3
+    return max(0, min(10, score))
+
+
 def already_collected(message_id: str, search_dirs: list[Path] | None = None) -> bool:
     dirs = search_dirs if search_dirs is not None else DEDUP_DIRS
     needle = f"gmail_message_id: {message_id}\n"

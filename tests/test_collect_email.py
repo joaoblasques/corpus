@@ -213,3 +213,17 @@ def test_select_links_dedups():
 
 def test_select_links_skips_images():
     assert ce.select_links("logo https://cdn.example.com/logo.png") == []
+
+
+def test_heuristic_score_boosts_learning_and_github():
+    s = ce.heuristic_score("https://github.com/org/rag-toolkit", "A practical RAG tutorial")
+    assert s >= 8
+
+
+def test_heuristic_score_penalizes_news():
+    s = ce.heuristic_score("https://news.example.com/x", "NVIDIA announces new data center, raises $40M")
+    assert s <= 3
+
+
+def test_heuristic_score_clamped_0_10():
+    assert 0 <= ce.heuristic_score("https://x.example.com", "") <= 10
