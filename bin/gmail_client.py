@@ -41,6 +41,11 @@ SCOPES = ["https://www.googleapis.com/auth/gmail.modify"]
 
 sys.path.insert(0, str(BIN))
 import collect_email as ce  # noqa: E402
+import rank_links as rl  # noqa: E402
+import fetch_link as fl  # noqa: E402
+
+WEB_DIR = ROOT / "raw" / "web"
+YT_DIR = ROOT / "raw" / "youtube"
 
 
 # --------------------------------------------------------------------------
@@ -213,12 +218,75 @@ def cmd_archive(args) -> int:
     return 0
 
 
+def enrich_email(email_path: str, message_id: str, body: str,
+                 collected_at: str, max_links: int) -> dict:
+    """Follow useful links in one email: select -> rank -> fetch -> write +
+    patch the parent email's links: frontmatter. Best-effort; never raises."""
+    candidates = ce.select_links(body)
+    if not candidates:
+        return {"captured": 0, "skipped": 0}
+    dispositions = rl.rank(candidates, max_links=max_links, floor=4)
+    captured = skipped = 0
+    for d in dispositions:
+        if not d["fetch"]:
+            skipped += 1
+            continue
+        try:
+            resolved = fl.resolve(d["url"])
+            kind = fl.classify(resolved)
+            if kind == "unsupported":
+                d.update(fetch=False, reason="unsupported")
+                skipped += 1
+                continue
+            base = WEB_DIR if kind == "article" else YT_DIR
+            base.mkdir(parents=True, exist_ok=True)
+            if _url_seen(resolved):
+                d.update(fetch=False, reason="duplicate")
+                skipped += 1
+                continue
+            content = fl.fetch(resolved)
+            target = ce.link_target(content["title"], base, message_id)
+            doc = ce.build_link_document(
+                {"channel": content["channel"], "source_url": resolved,
+                 "via_email": message_id, "score": d["score"],
+                 "collected_at": collected_at},
+                content["text"],
+            )
+            target.write_text(doc, encoding="utf-8")
+            d["file"] = str(target.relative_to(ROOT))
+            captured += 1
+        except Exception:
+            d.update(fetch=False, reason="fetch-failed")
+            skipped += 1
+    try:
+        ce.add_links_frontmatter(email_path, dispositions)
+    except Exception:
+        pass
+    return {"captured": captured, "skipped": skipped}
+
+
+def _url_seen(resolved: str) -> bool:
+    """Dedup against source_url already written in any raw/web or raw/youtube file."""
+    needle = f"source_url: {resolved}\n"
+    for d in (WEB_DIR, YT_DIR):
+        if not d.exists():
+            continue
+        for md in d.glob("*.md"):
+            try:
+                if needle in md.read_text(encoding="utf-8"):
+                    return True
+            except (OSError, UnicodeDecodeError):
+                continue
+    return False
+
+
 def cmd_run(args) -> int:
     service = get_service()
     collected_at = args.collected_at or datetime.date.today().isoformat()
     messages = list_starred_messages(service, args.max)
     found = len(messages)
     written = dup = failed = archived = 0
+    links_captured = links_skipped = 0
     paths: list[str] = []
     for full in messages:
         info = parse_message(full)
@@ -253,9 +321,16 @@ def cmd_run(args) -> int:
             except Exception:
                 # Write succeeded but archive failed — leave it starred, not fatal.
                 pass
+        # Enrich with linked content AFTER archive (best-effort; also runs in dry-run).
+        if not args.no_links and status == "written":
+            e = enrich_email(res["path"], info["message_id"], info["body"],
+                             collected_at, args.max_links)
+            links_captured += e["captured"]
+            links_skipped += e["skipped"]
     print(json.dumps({
         "found": found, "written": written, "duplicate": dup,
         "failed": failed, "archived": archived,
+        "links_captured": links_captured, "links_skipped": links_skipped,
         "dry_run": bool(args.dry_run), "paths": paths,
     }, indent=2))
     return 0
@@ -279,6 +354,8 @@ def main(argv=None) -> int:
     pr.add_argument("--max", type=int, default=None, help="Cap messages this run.")
     pr.add_argument("--collected-at", default=None, help="Override YYYY-MM-DD stamp.")
     pr.add_argument("--dry-run", action="store_true", help="Collect but do not mutate Gmail.")
+    pr.add_argument("--no-links", action="store_true", help="Skip link-following enrichment.")
+    pr.add_argument("--max-links", type=int, default=10, help="Max links fetched per email.")
     pr.set_defaults(func=cmd_run)
 
     args = p.parse_args(argv)
