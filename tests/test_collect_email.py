@@ -249,6 +249,21 @@ def test_link_target_slugifies_title(tmp_path):
     assert p.name == "rag-patterns.md"
 
 
+# I3: 3+ same-title links must yield distinct files even when the hint collides
+# (same hint, or empty hint) — the old single-collision-level logic overwrote.
+def test_link_target_three_collisions_are_distinct(tmp_path):
+    hint = "https://a.example.com/rag"  # identical hint each time -> worst case
+    paths = []
+    for _ in range(3):
+        p = ce.link_target("RAG Patterns", tmp_path, hint)
+        p.write_text("x", encoding="utf-8")  # materialize so the next call collides
+        paths.append(p)
+    assert len(set(paths)) == 3
+    assert all(p.exists() for p in paths)
+    # Every distinct path is its own file — nothing was overwritten.
+    assert len(list(tmp_path.glob("*.md"))) == 3
+
+
 def test_add_links_frontmatter_inserts_block(tmp_path):
     f = tmp_path / "email.md"
     f.write_text("---\nchannel: email\nsubject: Hi\n---\n\nBody\n", encoding="utf-8")

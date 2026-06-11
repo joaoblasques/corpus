@@ -9,6 +9,7 @@ script reports a successful write.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import unicodedata
@@ -128,9 +129,14 @@ def build_link_document(meta: dict, text: str) -> str:
 def link_target(title: str, base_dir: Path, message_hint: str = "") -> Path:
     slug = slugify(title)
     candidate = base_dir / f"{slug}.md"
-    if candidate.exists():
-        suffix = re.sub(r"[^a-z0-9]+", "", message_hint.lower())[:8] or "x"
-        candidate = base_dir / f"{slug}-{suffix}.md"
+    if not candidate.exists():
+        return candidate
+    h = hashlib.sha1(message_hint.encode("utf-8")).hexdigest()[:8] if message_hint else "x"
+    candidate = base_dir / f"{slug}-{h}.md"
+    n = 2
+    while candidate.exists():
+        candidate = base_dir / f"{slug}-{h}-{n}.md"
+        n += 1
     return candidate
 
 

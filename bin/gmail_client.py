@@ -246,7 +246,7 @@ def enrich_email(email_path: str, message_id: str, body: str,
                     skipped += 1
                     continue
                 content = fl.fetch(resolved)
-                target = ce.link_target(content["title"], base, message_id)
+                target = ce.link_target(content["title"], base, resolved)
                 doc = ce.build_link_document(
                     {"channel": content["channel"], "source_url": resolved,
                      "via_email": message_id, "score": d["score"],
