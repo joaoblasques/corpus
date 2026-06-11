@@ -109,6 +109,53 @@ def heuristic_score(url: str, description: str) -> int:
     return max(0, min(10, score))
 
 
+def build_link_document(meta: dict, text: str) -> str:
+    lines = [
+        "---",
+        f"channel: {meta['channel']}",
+        f"source_url: {meta['source_url']}",
+        f"via_email: {meta['via_email']}",
+        f"utility_score: {meta['score']}",
+        f"collected_at: {meta['collected_at']}",
+        "---",
+        "",
+        text.strip(),
+        "",
+    ]
+    return "\n".join(lines)
+
+
+def link_target(title: str, base_dir: Path, message_hint: str = "") -> Path:
+    slug = slugify(title)
+    candidate = base_dir / f"{slug}.md"
+    if candidate.exists():
+        suffix = re.sub(r"[^a-z0-9]+", "", message_hint.lower())[:8] or "x"
+        candidate = base_dir / f"{slug}-{suffix}.md"
+    return candidate
+
+
+def add_links_frontmatter(path: str, links: list[dict]) -> None:
+    """Insert a `links:` block before the closing `---` of an existing file's
+    frontmatter. Each entry is a one-line flow mapping for compactness."""
+    p = Path(path)
+    content = p.read_text(encoding="utf-8")
+    block = ["links:"]
+    for d in links:
+        parts = [
+            f"url: {d['url']}",
+            f"fetched: {'true' if d.get('file') else 'false'}",
+            f"score: {d.get('score', 0)}",
+        ]
+        if d.get("file"):
+            parts.append(f"file: {d['file']}")
+        if d.get("reason"):
+            parts.append(f"reason: {d['reason']}")
+        block.append("  - {" + ", ".join(parts) + "}")
+    closing = content.index("\n---", content.index("---") + 3)
+    p.write_text(content[:closing] + "\n" + "\n".join(block) + content[closing:],
+                 encoding="utf-8")
+
+
 def already_collected(message_id: str, search_dirs: list[Path] | None = None) -> bool:
     dirs = search_dirs if search_dirs is not None else DEDUP_DIRS
     needle = f"gmail_message_id: {message_id}\n"

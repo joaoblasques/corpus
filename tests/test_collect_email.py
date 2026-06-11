@@ -227,3 +227,36 @@ def test_heuristic_score_penalizes_news():
 
 def test_heuristic_score_clamped_0_10():
     assert 0 <= ce.heuristic_score("https://x.example.com", "") <= 10
+
+
+def test_build_link_document_has_provenance():
+    doc = ce.build_link_document(
+        {"channel": "web", "source_url": "https://x.example.com/a",
+         "via_email": "MSG1", "score": 9, "collected_at": "2026-06-11"},
+        "Article body text.",
+    )
+    assert "channel: web" in doc
+    assert "source_url: https://x.example.com/a" in doc
+    assert "via_email: MSG1" in doc
+    assert "utility_score: 9" in doc
+    assert doc.rstrip().endswith("Article body text.")
+
+
+def test_link_target_slugifies_title(tmp_path):
+    p = ce.link_target("RAG Patterns!", tmp_path)
+    assert p.name == "rag-patterns.md"
+
+
+def test_add_links_frontmatter_inserts_block(tmp_path):
+    f = tmp_path / "email.md"
+    f.write_text("---\nchannel: email\nsubject: Hi\n---\n\nBody\n", encoding="utf-8")
+    ce.add_links_frontmatter(str(f), [
+        {"url": "https://x.example.com/a", "score": 9, "file": "raw/web/a.md", "reason": None},
+        {"url": "https://x.example.com/b", "score": 2, "file": None, "reason": "low-utility"},
+    ])
+    out = f.read_text(encoding="utf-8")
+    assert "links:" in out
+    assert "fetched: true" in out and "file: raw/web/a.md" in out
+    assert "reason: low-utility" in out
+    assert out.index("links:") < out.index("\n---")  # inside frontmatter
+    assert out.rstrip().endswith("Body")
