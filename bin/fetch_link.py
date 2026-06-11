@@ -10,7 +10,7 @@ MAX_BYTES = 2_000_000
 
 YT_RE = re.compile(
     r"(?i)(?:youtube\.com/watch\?[^ ]*v=|youtu\.be/|youtube\.com/shorts/)"
-    r"([A-Za-z0-9_-]{6,})"
+    r"([A-Za-z0-9_-]{11})"
 )
 PDF_RE = re.compile(r"(?i)\.pdf(\?|$)")
 
