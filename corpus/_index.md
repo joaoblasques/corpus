@@ -1,6 +1,6 @@
 # Corpus Index
 
-> Last updated: 2026-05-22 | Total pages: 37 | Total sources: 19
+> Last updated: 2026-06-09 14:10 | Total pages: 48 | Total sources: 24
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
@@ -21,8 +21,11 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[ai-engineering/agent-memory|Agent Memory]] — concept · draft · short-term (context window) + long-term (vector DB / CLAUDE.md) memory tiers
 - [[ai-engineering/mcp|MCP]] — concept · stub · Model Context Protocol; coordination layer for agents, tools, and memory
 - [[ai-engineering/context-window-management|Context Window Management]] — concept · draft · compaction, sub-agents, resets; what to keep/compress/drop when context fills
+- [[ai-engineering/agent-skills|Agent Skills]] — concept · draft · skill.md, progressive disclosure, recursive skill-building; skills vs always-on AGENTS.md
 - [[ai-engineering/vector-database|Vector Database]] — concept · stub · storage layer for embedding vectors; used in RAG pipelines and agent long-term memory
 - [[ai-engineering/tool-calling-and-context-engineering|Tool Calling & Context Engineering]] — synthesis · draft · how tool results feed the context loop; compounding-window problem
+- [[ai-engineering/optimizing-claude|Optimizing a Claude Setup]] — synthesis · draft · context economy as organizing principle; skills, sub-agents, concise specs; filed back from a query
+- [[ai-engineering/sources/how-ai-agents-and-skills-work|How AI agents & Claude skills work]] — source · draft · Isenberg × Ras Mic; skills, progressive disclosure, less-is-more context
 
 ### data-engineering
 - [[data-engineering/README|Data Engineering]] — hub · draft · ETL/ELT, data modeling, Spark, Iceberg
@@ -48,7 +51,26 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[software-engineering/software-design-principles|Software Design Principles]] — concept · draft · SRP, cohesion, loose coupling, dependency injection, open/closed; 8 principles separating maintainable from fragile code
 - [[software-engineering/data-structures|Data Structures and Big O Notation]] — concept · draft · O(1)/O(log n)/O(n)/O(n²) complexity classes; time-complexity trade-off table for 8 core data structures
 
+### mlops
+- [[mlops/README|MLOps]] — hub · draft · engineering substrate: environment, version control, compute, infrastructure-as-code (provisional)
+- [[mlops/dev-environment-stack|Dev Environment Stack]] — concept · draft · four-layer dependency stack (OS → pkg mgrs → runtimes → AI libs); venv isolation; bottom-up install
+- [[mlops/gpu-and-vram|GPU & VRAM]] — concept · draft · why GPUs win for ML, VRAM as the hard ceiling, fp16 rule, training ≈ 6× inference, LoRA
+- [[mlops/cloud-gpu-providers|Cloud GPU Providers]] — concept · draft · Colab/RunPod/Lambda/Vast.ai comparison; reliability-vs-cost escalation ladder
+- [[mlops/infrastructure-as-code|Infrastructure as Code]] — concept · draft · declarative infra; desired-vs-current-state reconciliation; "git for infrastructure"
+- [[mlops/uv|uv]] — entity · stub · fast Python package manager + venv tool; canonical Layer-2 tool in the dev stack
+- [[mlops/git|Git]] — entity · draft · content-addressed snapshot store; branch-per-task workflow; ML-aware .gitignore
+- [[mlops/terraform|Terraform]] — entity · draft · HCL IaC tool; providers/resources/data/output, .tfstate, .tfvars, remote backends
+
 ## Recent additions
+- 2026-06-09: [[ai-engineering/optimizing-claude]] (new synthesis — filed back from query "how to optimize my Claude setup")
+- 2026-06-09: [[mlops/README]] (new domain — Batch 4; provisional)
+- 2026-06-09: [[mlops/dev-environment-stack]], [[mlops/uv]] (new — Batch 4 File 1)
+- 2026-06-09: [[mlops/git]] (new — Batch 4 File 2)
+- 2026-06-09: [[mlops/gpu-and-vram]], [[mlops/cloud-gpu-providers]] (new — Batch 4 File 3)
+- 2026-06-09: [[mlops/infrastructure-as-code]], [[mlops/terraform]] (new — Batch 4 File 5)
+- 2026-06-09: [[ai-engineering/agent-skills]] (new — Batch 4 File 4)
+- 2026-06-09: [[ai-engineering/sources/how-ai-agents-and-skills-work]] (new source summary — Batch 4 File 4)
+- 2026-06-09: [[ai-engineering/context-window-management]], [[ai-engineering/context-engineering]], [[ai-engineering/ai-agent]], [[ai-engineering/multi-agent-systems]] (updated, +1 source each — Batch 4 File 4)
 - 2026-05-21: [[software-engineering/kubernetes]] (new — Batch 3 File 5)
 - 2026-05-21: [[data-engineering/sql-window-functions]] (new — Batch 3 File 4, routed to data-engineering)
 - 2026-05-21: [[software-engineering/fastapi]] (new — Batch 3 File 3)

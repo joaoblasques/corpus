@@ -287,3 +287,65 @@ Out of scope for this commit (deferred):
 - `.claude/settings.local.json` allow-list path updates
 - Git remote rename
 - Commit history rewrite
+
+## [2026-06-09 13:58] domain | create: mlops (provisional)
+
+- New provisional domain `mlops` created under §9 provisional rule. User confirmed via Batch 4 inbox survey + new-domain question.
+- Rationale: 4 inbox sources (AIEFS Phase 00 lessons 01/02/03 + IaC/Terraform article) fit no existing content domain; coherent "engineering substrate / infra & tooling" cluster (environment, version control, compute, IaC).
+- provisional: true — retained one cycle because 3 of 4 seed sources share a single origin (one course). 30-day review: 2026-07-09.
+- Hub created: corpus/mlops/README.md. _domains.md section + decision-log entry added.
+
+## [2026-06-09 13:58] ingest | Dev Environment — The Four-Layer Stack (AIEFS Phase 00 / 01)
+
+- source: raw/notes/00-01-dev-environment-kb.md
+- channel: notes (first-party course KB; Branch A inbox → moved to raw/notes/)
+- domain: mlops
+- new pages: mlops/dev-environment-stack.md (concept), mlops/uv.md (entity, stub)
+- notes: four-layer stack, venv invariant, checks-as-data verify pattern, CUDA-wheel pitfall. uv flagged for expansion when a uv-primary source arrives.
+
+## [2026-06-09 13:58] ingest | Git & Collaboration (AIEFS Phase 00 / 02)
+
+- source: raw/notes/00-02-git-and-collaboration-kb.md
+- channel: notes (Branch A inbox → raw/notes/)
+- domain: mlops
+- new pages: mlops/git.md (entity)
+- notes: content-addressed model, branch-per-task workflow, ML-aware .gitignore, DVC/LFS forward-ref (data-management source not yet ingested).
+
+## [2026-06-09 13:58] ingest | GPU Setup and Cloud Options (AIEFS Phase 00 / 03)
+
+- source: raw/notes/00-03-gpu-setup-and-cloud-kb.md
+- channel: notes (Branch A inbox → raw/notes/)
+- domain: mlops
+- new pages: mlops/gpu-and-vram.md (concept), mlops/cloud-gpu-providers.md (concept)
+- notes: fp16 VRAM math, training≈6×inference, LoRA (forward-ref to fine-tuning phase), provider pricing snapshot (May 2026, marked drift-prone).
+
+## [2026-06-09 13:58] ingest | How AI agents & Claude skills work (Clearly Explained)
+
+- source: raw/youtube/How AI agents & Claude skills work (Clearly Explained).md
+- channel: youtube (Branch A inbox → raw/youtube/)
+- domain: ai-engineering
+- new pages: ai-engineering/agent-skills.md (concept), ai-engineering/sources/how-ai-agents-and-skills-work.md (source summary — substantive 8k-word opinionated talk)
+- pages touched: context-window-management.md, context-engineering.md, ai-agent.md, multi-agent-systems.md (+1 source each)
+- notes: opinionated practitioner stance (Ras Mic). agent-skills page + context-engineering update flag the tension with corpus sources that treat CLAUDE.md as valuable long-term memory — not presented as settled fact.
+
+## [2026-06-09 13:58] ingest | IaC fundamentals for data engineers
+
+- source: raw/web/IaC (Infrastructure-as-Code) fundamentals for data engineers.md
+- channel: web (Branch A inbox → raw/web/)
+- domain: mlops
+- new pages: mlops/infrastructure-as-code.md (concept), mlops/terraform.md (entity)
+- notes: startdataengineering.com (Joseph Machado). Tutorial → no source-summary page (§8.1 step 6 exclusion); concept + entity pages capture it. Cross-linked to data-engineering (provisions S3/EC2/EMR).
+
+## [2026-06-09 14:10] query | how to optimize my Claude setup for efficiency & productivity
+
+- query answered from corpus pages: agent-skills, context-window-management, context-engineering, multi-agent-systems, ai-agent.
+- synthesis filed back (user-approved): ai-engineering/optimizing-claude.md (synthesis, sources: [] — derives from corpus pages; provenance transitive).
+- gaps surfaced: (1) Claude Code mechanics (slash commands, hooks, settings.json, MCP) lightly covered; (2) no official Anthropic/Claude Code docs ingested; (3) no record of user's actual setup. Logged as highest-leverage next sources to deepen the "Claude" cluster.
+- context: executed as sub-project A of the corpus-direction brainstorm (validate the consumption half of the loop). A closed; consumption loop proven end-to-end.
+- v0.6 note: this synthesis page is another instance motivating the draft derived_from: field (internal provenance currently expressed only in prose + inline wikilinks).
+
+## [2026-06-09] config | add email channel
+
+- Added `email` channel → `raw/email/` to corpus/_config.md (channel-labels table + email-collection note).
+- Created raw/email/ (with .gitkeep).
+- Supports the /collect-email collector (sub-project B): captures starred Gmail into raw/_inbox/ (channel email), routed to raw/email/ by Branch A ingest.

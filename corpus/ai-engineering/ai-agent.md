@@ -12,6 +12,9 @@ sources:
   - path: 03_Resources/Study Notes/AI Dev - Agentic AI Architecture Explained.md
     channel: notes
     ingested_at: 2026-05-21
+  - path: raw/youtube/How AI agents & Claude skills work (Clearly Explained).md
+    channel: youtube
+    ingested_at: 2026-06-09
 aliases:
   - ai agent
   - agentic AI
@@ -20,7 +23,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-07
-updated: 2026-05-21
+updated: 2026-06-09
 ---
 
 # AI Agent
@@ -83,6 +86,12 @@ Key metrics: task success rate, tool call accuracy, latency and cost per task, r
 
 See [[ai-engineering/agent-evaluation|Agent Evaluation]] for full treatment of evaluation patterns, golden datasets, and the production feedback loop.
 
+## Mental model: agents are new employees, not magic boxes
+
+A complementary framing for *working with* agents [^src4]: LLMs don't reason the way humans do — they **predict tokens**, mapping input onto a vector space and returning the closest resemblance. The implication is operational, not philosophical: an agent "will mimic you perfectly, but you've given it nothing to mimic" unless you supply a worked example. So treat a new agent like a **new employee** — give it the workflow, let it fail, correct it, and codify the result (see [[ai-engineering/agent-skills|Agent Skills]] for the recursive skill-building loop this motivates).
+
+The same source reframes capability: with strong models, differentiation now comes from **the harness, tools, and context** around the model, plus the user's unique workflow — not from model choice alone [^src4]. See [[ai-engineering/context-engineering|Context Engineering]].
+
 ## Production concerns
 
 - **Security**: sandbox code execution (Docker, strict limits); whitelist safe libraries; validate inputs, scan outputs for PII/keys [^src1]
@@ -92,6 +101,7 @@ See [[ai-engineering/agent-evaluation|Agent Evaluation]] for full treatment of e
 ## See also
 
 - [[ai-engineering/context-engineering|Context Engineering]] — the highest-leverage skill in agent development
+- [[ai-engineering/agent-skills|Agent Skills]] — codifying workflow into on-demand skills; the recursive build loop
 - [[ai-engineering/tool-calling|Tool Calling]] — how agents interact with tools
 - [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] — patterns for multiple cooperating agents
 - [[ai-engineering/langgraph|LangGraph]] — recommended framework for production multi-agent systems
@@ -106,3 +116,4 @@ See [[ai-engineering/agent-evaluation|Agent Evaluation]] for full treatment of e
 [^src1]: [[03_Resources/Study Notes/AI Agents - Complete Course Beginner to Pro|AI Agents - Complete Course Beginner to Pro]]
 [^src2]: [[03_Resources/Study Notes/LangSmith - Debugging and Evaluating AI Agents|LangSmith - Debugging and Evaluating AI Agents]]
 [^src3]: [[03_Resources/Study Notes/AI Dev - Agentic AI Architecture Explained|AI Dev - Agentic AI Architecture Explained]]
+[^src4]: [How AI agents & Claude skills work (Clearly Explained)](<../../raw/youtube/How AI agents & Claude skills work (Clearly Explained).md>) — Greg Isenberg × Ras Mic, YouTube
