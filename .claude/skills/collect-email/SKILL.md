@@ -46,8 +46,11 @@ rules above are enforced by the program, not by following these steps by hand.
      `gmail_message_id` means re-running never double-writes).
 
 ## Notes
-- This skill does NOT follow links inside emails (pointer emails are captured with
-  their URL recorded in frontmatter; following is a future enhancement).
+- Link-following is ON by default: useful links inside an email are ranked by
+  learning-utility (Haiku, heuristic fallback), quality-floored, capped at 10, and
+  captured into raw/web / raw/youtube with `via_email` provenance. Disable with
+  `--no-links`; change the cap with `--max-links N`. Depth-1 only (links inside
+  fetched pages are never followed).
 - Run via `/loop <interval> /collect-email` to probe on a cadence. Because the
   transport is an owned credential (not the session connector), `run` also works
   headless — a future cron/CI path.
