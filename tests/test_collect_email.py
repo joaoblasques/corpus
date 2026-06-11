@@ -188,3 +188,28 @@ def test_cli_error_on_missing_body_file(tmp_path, monkeypatch, capsys):
     out = json.loads(capsys.readouterr().out)
     assert out["status"] == "error"
     assert "error" in out
+
+
+def test_select_links_extracts_url_and_description():
+    body = "Agentic AI Flywheels [ https://news.example.com/flywheels ] (15 min read)\nHow evals create a flywheel."
+    links = ce.select_links(body)
+    assert len(links) == 1
+    assert links[0]["url"] == "https://news.example.com/flywheels"
+    assert "Agentic AI Flywheels" in links[0]["description"]
+
+
+def test_select_links_drops_noise():
+    body = ("Unsubscribe https://list.example.com/unsubscribe?id=9\n"
+            "Follow us https://twitter.com/example\n"
+            "Real article https://blog.example.com/post")
+    urls = [l["url"] for l in ce.select_links(body)]
+    assert urls == ["https://blog.example.com/post"]
+
+
+def test_select_links_dedups():
+    body = "A https://x.example.com/a\nB https://x.example.com/a"
+    assert len(ce.select_links("https://x.example.com/a " + body)) == 1
+
+
+def test_select_links_skips_images():
+    assert ce.select_links("logo https://cdn.example.com/logo.png") == []

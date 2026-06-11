@@ -41,6 +41,47 @@ def detect_pointer(body: str) -> tuple[bool, str | None]:
     return False, None
 
 
+NOISE_URL_RE = re.compile(
+    r"(?i)(unsubscribe|list-manage|mailchi\.mp|/sub/|/profile|update.*profile|"
+    r"twitter\.com|x\.com|facebook\.com|linkedin\.com|instagram\.com|t\.me|"
+    r"mailto:)"
+)
+NOISE_TEXT_RE = re.compile(
+    r"(?i)(unsubscribe|view (this )?(post|email) (on|in) the web|view in browser|"
+    r"manage (your )?subscription|update your profile)"
+)
+IMG_EXT_RE = re.compile(r"(?i)\.(png|jpe?g|gif|svg|webp|ico)(\?|$)")
+
+
+def select_links(body: str) -> list[dict]:
+    """Pure: extract content links with a nearby description, drop noise, dedup.
+
+    Resolution of redirect wrappers and a second-pass filter happen later in the
+    fetch stage (they require the network); this stays deterministic and testable.
+    """
+    lines = (body or "").splitlines()
+    seen: set[str] = set()
+    out: list[dict] = []
+    for i, line in enumerate(lines):
+        for m in URL_RE.finditer(line):
+            url = m.group(0).rstrip(").,]>”\"'")
+            if url in seen or NOISE_URL_RE.search(url) or IMG_EXT_RE.search(url):
+                continue
+            desc = re.sub(r"[\[\]]", " ", URL_RE.sub("", line))
+            desc = re.sub(r"\s+", " ", desc).strip()
+            if len(desc) < 8:
+                for j in range(i + 1, min(i + 3, len(lines))):
+                    nxt = lines[j].strip()
+                    if nxt and not URL_RE.search(nxt):
+                        desc = nxt
+                        break
+            if NOISE_TEXT_RE.search(desc):
+                continue
+            seen.add(url)
+            out.append({"url": url, "description": desc[:300]})
+    return out
+
+
 def already_collected(message_id: str, search_dirs: list[Path] | None = None) -> bool:
     dirs = search_dirs if search_dirs is not None else DEDUP_DIRS
     needle = f"gmail_message_id: {message_id}\n"
