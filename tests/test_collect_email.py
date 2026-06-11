@@ -2,6 +2,8 @@ import json
 import sys
 from pathlib import Path
 
+import yaml
+
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "bin"))
 import collect_email as ce  # noqa: E402
 
@@ -260,3 +262,18 @@ def test_add_links_frontmatter_inserts_block(tmp_path):
     assert "reason: low-utility" in out
     assert out.index("links:") < out.index("\n---")  # inside frontmatter
     assert out.rstrip().endswith("Body")
+
+
+# I2: a url with YAML-special chars (comma, braces, colon) must stay valid YAML.
+def test_add_links_frontmatter_quotes_special_url(tmp_path):
+    f = tmp_path / "email.md"
+    f.write_text("---\nchannel: email\nsubject: Hi\n---\n\nBody\n", encoding="utf-8")
+    url = "https://ex.com/a?x={1,2}:b,c"
+    ce.add_links_frontmatter(str(f), [
+        {"url": url, "score": 7, "file": url, "reason": None},
+    ])
+    out = f.read_text(encoding="utf-8")
+    frontmatter = out.split("---", 2)[1]
+    data = yaml.safe_load(frontmatter)
+    assert data["links"][0]["url"] == url
+    assert data["links"][0]["file"] == url

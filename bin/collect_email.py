@@ -142,12 +142,12 @@ def add_links_frontmatter(path: str, links: list[dict]) -> None:
     block = ["links:"]
     for d in links:
         parts = [
-            f"url: {d['url']}",
+            f"url: {yaml_scalar(d['url'])}",
             f"fetched: {'true' if d.get('file') else 'false'}",
             f"score: {d.get('score', 0)}",
         ]
         if d.get("file"):
-            parts.append(f"file: {d['file']}")
+            parts.append(f"file: {yaml_scalar(d['file'])}")
         if d.get("reason"):
             parts.append(f"reason: {d['reason']}")
         block.append("  - {" + ", ".join(parts) + "}")
