@@ -9,15 +9,21 @@ sources:
   - path: 03_Resources/Study Notes/Dimensional Data Modeling - Idempotent Pipelines and SCD Patterns.md
     channel: notes
     ingested_at: 2026-05-21
+  - path: raw/web/stop-using-slowly-changing-dimensions-part-1.md
+    channel: web
+    ingested_at: 2026-06-11
 aliases:
   - SCD2
   - Slowly Changing Dimension Type 2
   - slowly changing dimension
+  - date stamping
+  - date-stamping
+  - snapshots
 tags:
   - corpus/data-engineering
   - concept
 created: 2026-05-07
-updated: 2026-05-21
+updated: 2026-06-11
 ---
 
 # SCD2 (Slowly Changing Dimension Type 2)
@@ -77,9 +83,21 @@ Prefer `9999-12-31` over `NULL` for the current row's `end_date` — enables `BE
 
 SCDs must be **tables** — never views or stored procedures [^src2].
 
+## Critique: date-stamping as a simpler alternative
+
+A counterpoint argues SCD2 is an outdated solution and that **date-stamping** every table is simpler and more powerful [^src3]. The premise: > "STORAGE IS CHEAP! (And your data team's time is expensive)" [^src3]. Rather than maintaining `valid_from`/`valid_to`/`is_current` columns and MERGE logic, take a dated snapshot of each source daily (Meta did this from MySQL into Hive: a daily snapshot with a date stamp) [^src3].
+
+Claimed benefits over SCD2 [^src3]:
+
+- **Resilient pipelines** — each day's partition is independent and re-runnable
+- **History for free** — every snapshot is preserved, giving a "time machine" without closing/opening rows
+- **Fewer bugs** — no risk of a half-applied SCD2 update; ~90% fewer bugs claimed
+- **Tool-agnostic** — works with Hive metastore, [[data-engineering/apache-iceberg|Iceberg]], Delta, or Hudi
+
+This is the *functional data engineering* lineage (Maxime Beauchemin), repackaged as date-stamping as the organizing principle, not an afterthought [^src3]. The trade-off is storage volume: daily full snapshots duplicate unchanged rows, which is precisely the cost SCD2 was designed to avoid at very large scale — see the "When to skip SCD entirely" thresholds above [^src2]. The two views agree on the boundary: SCD2 only pays off where storage savings outweigh complexity.
+
 ## Not-yet-ingested related sources
 
-- `Modern Data Warehousing - Stop Using SCD Part 1` — counterpoint on SCD usage
 - `scd2-joining-fact-dimension-tables` — querying SCD2 tables (companion article)
 
 ## See also
@@ -94,3 +112,4 @@ SCDs must be **tables** — never views or stored procedures [^src2].
 
 [^src1]: [[03_Resources/Articles/scd2-table-creation-merge-into-spark-iceberg|SCD2 Table Creation with MERGE INTO in Spark and Iceberg]]
 [^src2]: [[03_Resources/Study Notes/Dimensional Data Modeling - Idempotent Pipelines and SCD Patterns|Dimensional Data Modeling - Idempotent Pipelines and SCD Patterns]]
+[^src3]: [Stop Using Slowly Changing Dimensions (Part 1)](../../raw/web/stop-using-slowly-changing-dimensions-part-1.md)

@@ -356,3 +356,14 @@ Out of scope for this commit (deferred):
 - §4 + new §7.1: v2 claim-lifecycle fields/conventions (`confidence`, `last_confirmed`, `supersedes`/`superseded_by`, contradiction-on-write, typed relationships).
 - Grounded in deep research filed at docs/research/2026-06-11-llm-wiki-ingest-best-practices.md (Karpathy LLM-wiki + rohitg00 v2; MOC/Zettelkasten/PARA; large-batch entity-resolution & orchestration).
 - Motivation: ingest the 136-source collected backlog (sub-project B output) without structural drift. Pipeline executes immediately after this entry.
+
+## [2026-06-11] ingest | email-backlog wave 1 — data-engineering cluster
+
+- pipeline: v0.6 optimized batch (Phase 0–5), Coordinator + 5 parallel per-batch workers.
+- sources: 65 data-engineering sources surveyed → 48 consumed, 17 skipped (promo/digest/stub/Amazon book pages).
+- channels: 15 emails (moved raw/_inbox → raw/email, stamped), 33 web captures (stamped in place).
+- new pages (13): apache-spark, databricks, duckdb, data-orchestration, open-table-formats, medallion-architecture, change-data-capture, materialized-views, data-quality, query-engine-routing, data-engineer-role, claude-code-for-data-engineering, ai-observability-data-pipeline.
+- updated pages (6): dbt (+7 src), dimensional-modeling, scd2, apache-iceberg, data-lake, pipeline-layers.
+- source summaries (2): sources/dbt-kimball-project, sources/aws-duckdb-etl-fargate.
+- cross-domain (DE-primary, link from ai-engineering later): claude-code-for-data-engineering, ai-observability-data-pipeline.
+- notes: data-diff flagged deprecated; CDC page has an [unsourced] marker where the captured email excerpt was truncated; vendor benchmark figures (Databricks/Greybeam) marked vendor-reported. Remaining inbox: 121 sources (ai-engineering + other clusters) for future waves.

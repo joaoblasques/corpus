@@ -6,20 +6,54 @@ sources:
   - path: 03_Resources/Study Notes/Dimensional Data Modeling - Idempotent Pipelines and SCD Patterns.md
     channel: notes
     ingested_at: 2026-05-21
+  - path: raw/_inbox/email-2025-09-09-learn-the-kimball-dimensional-modeling-with-a-dbt-project.md
+    channel: email
+    ingested_at: 2026-06-11
+  - path: raw/web/data-identity-politics-and-the-kimball-vs-inmon-war.md
+    channel: web
+    ingested_at: 2026-06-11
 aliases:
   - dimensional modeling
   - dimensional data modeling
   - fact and dimension tables
+  - Kimball
+  - Kimball method
+  - star schema
+  - grain
 tags:
   - corpus/data-engineering
   - concept
 created: 2026-05-21
-updated: 2026-05-21
+updated: 2026-06-11
 ---
 
 # Dimensional Modeling
 
-**TL;DR**: A data modeling approach structuring analytical data as facts (measurable events) and dimensions (context/attributes), optimized for analytical query patterns. SCD Type 2 is the canonical dimension pattern for tracking history [^src1].
+**TL;DR**: A data modeling approach structuring analytical data as facts (measurable events) and dimensions (context/attributes), optimized for analytical query patterns. SCD Type 2 is the canonical dimension pattern for tracking history [^src1]. Introduced by Ralph Kimball in the 1996 *Data Warehouse Toolkit*; popular because it aligns with how business users think — in measurable metrics observed across contexts (product, region, time) [^src2].
+
+## Star schema
+
+The dimensional model is implemented as a **star schema**: a central fact table surrounded by multiple dimension tables, named for its star-like shape [^src2].
+
+- **Fact table** — central; stores performance measurements from business-process events. Each row is a measurement event holding *foreign keys* (links to dimensions) and *measures* (numeric values: revenue, quantity, profit). Kimball recommends storing the lowest-level measurements for flexibility [^src2].
+- **Dimension table** — provides context (the "who, what, where, when, how, why"). Each focuses on one business dimension (product, country, date) and has a single primary key, distributed to fact tables as a foreign key. Without dimensions, a metric like revenue gives no insight [^src2].
+
+## Grain
+
+The **grain** is the level of detail represented by a single fact-table row [^src2]. > "all rows must be at the same grain level" [^src2]. Declaring the grain (transaction vs. daily summary vs. monthly aggregate) early ensures consistency and scalability.
+
+## The Kimball four-step design process
+
+A bottom-up sequence where each step builds on the last [^src2]:
+
+1. **Select the business process** — identify the activity to analyze (sales, customer interactions).
+2. **Declare the grain** — define the level of detail of a fact row.
+3. **Identify the dimensions** — descriptive attributes (product, time, customer demographics).
+4. **Identify the facts** — the quantitative measures tied to the process (revenue, profit).
+
+## Kimball vs. Inmon (the resolved war)
+
+The 1990s "Kimball vs. Inmon war" over data-warehouse methodology is largely settled: > "the industry didn't choose Kimball or Inmon. It chose both" [^src3]. Modern lakehouse architectures commonly use Inmon-style governance for raw/bronze layers and Kimball-style dimensional models (star schemas) for gold/serving layers [^src3]. See [[data-engineering/medallion-architecture|medallion architecture]] — the gold layer is where star schemas typically live, though medallion does not mandate any particular model.
 
 ## SCD type comparison
 
@@ -114,8 +148,12 @@ SCDs must be **tables**, never views or stored procedures [^src1].
 - [[data-engineering/idempotent-pipelines|Idempotent Pipelines]] — SCD2 requires idempotent pipeline design
 - [[data-engineering/merge-into|MERGE INTO]] — the Spark SQL mechanism for applying SCD2 updates atomically
 - [[data-engineering/sql-window-functions|SQL Window Functions]] — LAG and cumulative SUM reference; the functions that power the streak_identifier pattern
+- [[data-engineering/medallion-architecture|Medallion Architecture]] — gold layer is a common home for star schemas; orthogonal to modeling choice
+- [[data-engineering/dbt|dbt]] — common tool for implementing Kimball models in SQL
 - [[data-engineering/README|Data Engineering hub]]
 
 ---
 
 [^src1]: [[03_Resources/Study Notes/Dimensional Data Modeling - Idempotent Pipelines and SCD Patterns|Dimensional Data Modeling - Idempotent Pipelines and SCD Patterns]]
+[^src2]: [Learn the Kimball dimensional modeling with a dbt project](../../raw/email/email-2025-09-09-learn-the-kimball-dimensional-modeling-with-a-dbt-project.md)
+[^src3]: [Data Identity Politics and The Kimball vs. Inmon War](../../raw/web/data-identity-politics-and-the-kimball-vs-inmon-war.md)

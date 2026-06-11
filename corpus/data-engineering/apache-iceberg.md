@@ -9,15 +9,20 @@ sources:
   - path: 03_Resources/Study Notes/Data Lake Fundamentals - Apache Iceberg and Parquet.md
     channel: notes
     ingested_at: 2026-05-21
+  - path: raw/_inbox/email-2025-09-24-understanding-open-table-formats-with-apache-iceberg.md
+    channel: email
+    ingested_at: 2026-06-11
 aliases:
   - Apache Iceberg
   - Iceberg
   - iceberg
+  - open table format
+  - OTF
 tags:
   - corpus/data-engineering
   - entity
 created: 2026-05-07
-updated: 2026-05-21
+updated: 2026-06-11
 ---
 
 # Apache Iceberg
@@ -25,6 +30,12 @@ updated: 2026-05-21
 **TL;DR**: Open table format that adds a transactional metadata layer on top of [[data-engineering/parquet|Parquet]] files in object storage — giving data lakes ACID transactions, schema evolution, time travel, and partition pruning without a traditional database engine [^src1][^src2].
 
 Iceberg is the **table format layer**. Parquet is the **file format layer** underneath it.
+
+## Open table format positioning
+
+Iceberg is one of three major **open table formats (OTFs)** — alongside Apache Hudi and Delta Lake — distinct from **file formats** (Parquet, ORC) [^src3]. The distinction is the recurring source of confusion: an OTF is not merely "a pointer to some metadata files"; it is a specification layer that turns a directory of files into a table with transactional semantics [^src3]. See [[data-engineering/open-table-formats|open table formats]] for the cross-format comparison; this page covers the Iceberg-specific implementation.
+
+The "open" in OTF means the format is a published standard, not tied to one vendor's engine — multiple query engines (Trino, Spark, DuckDB, etc.) can read and write the same table, which underpins the open-data-infrastructure / lakehouse story [^src3].
 
 ## Key features
 
@@ -92,9 +103,11 @@ SHOW STATS FOR (
 - [[data-engineering/merge-into|MERGE INTO]] — Spark SQL operation enabled by Iceberg
 - [[data-engineering/scd2|SCD2]] — primary use case combining Iceberg + MERGE INTO
 - [[data-engineering/data-lake|Data Lake / Lakehouse]] — architecture context for Iceberg
+- [[data-engineering/open-table-formats|Open Table Formats]] — Iceberg vs. Hudi vs. Delta Lake comparison
 - [[data-engineering/README|Data Engineering hub]]
 
 ---
 
 [^src1]: [[03_Resources/Articles/scd2-table-creation-merge-into-spark-iceberg|SCD2 Table Creation with MERGE INTO in Spark and Iceberg]]
 [^src2]: [[03_Resources/Study Notes/Data Lake Fundamentals - Apache Iceberg and Parquet|Data Lake Fundamentals - Apache Iceberg and Parquet]]
+[^src3]: [Understanding Open Table Formats with Apache Iceberg](../../raw/email/email-2025-09-24-understanding-open-table-formats-with-apache-iceberg.md)
