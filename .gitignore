@@ -19,3 +19,11 @@ __pycache__/
 .pytest_cache/
 *.pyc
 *.pyo
+
+# Gmail OAuth secrets (owned-credential transport for collect-email) — never commit
+bin/credentials.json
+bin/token.json
+
+# Secrets / API keys — never commit
+.env
+.env.*

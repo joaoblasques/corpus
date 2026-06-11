@@ -13,40 +13,43 @@ file, then de-star and archive it. Collection only — never ingest into `corpus
 - On any failure for one email: skip it, leave it starred, continue with the rest.
 - Write only to `raw/_inbox/`. Never touch `corpus/` or the vault.
 
+## Transport: owned Gmail credential (not the hosted connector)
+
+Gmail access goes through `bin/gmail_client.py`, which uses the user's OWN Google
+OAuth credential with `gmail.modify` scope. The hosted claude.ai Gmail connector is
+**read-only** and cannot de-star/archive, so it is not used here. One-time setup
+(`bin/credentials.json` + `python3 bin/gmail_client.py auth`) is documented in the
+plan; if `bin/token.json` is missing, tell the user to run that auth step first.
+
+`gmail_client.py run` performs the entire loop in code — search starred → write each
+via `collect_email.py` → de-star/archive only after a confirmed write — so the safety
+rules above are enforced by the program, not by following these steps by hand.
+
 ## Procedure
 
-1. Find starred mail: call `mcp__claude_ai_Gmail__search_threads` with query `is:starred`.
-   If none, report "0 starred" and stop.
-2. For each thread, call `mcp__claude_ai_Gmail__get_thread` and identify the
-   **starred message(s)** within it. Process each starred message:
-   a. Extract: `message_id`, `from` (display + address), `subject`,
-      `date_received` (YYYY-MM-DD), and the body as plain text/markdown.
-   b. Write the body to a temp file, e.g. `/tmp/collect-email-body.md`.
-   c. Run the deterministic writer (it handles dedup, pointer detection,
-      frontmatter, filename, and the write):
-      ```bash
-      python3 bin/collect_email.py \
-        --message-id "<message_id>" \
-        --from "<from>" \
-        --subject "<subject>" \
-        --date "<date_received>" \
-        --collected-at "$(date +%Y-%m-%d)" \
-        --body-file /tmp/collect-email-body.md
-      ```
-   d. Parse the JSON it prints:
-      - `{"status":"written", "path":...}` → confirm the file exists, then go to step 3.
-      - `{"status":"duplicate"}` → already collected on a prior run; go straight to
-        step 3 to finish archiving (idempotent retry).
-      - anything else / error → record as failed, leave the email starred, skip step 3.
-3. De-star and archive (only reached on written/duplicate):
-   - `mcp__claude_ai_Gmail__unlabel_message` removing `STARRED`.
-   - `mcp__claude_ai_Gmail__unlabel_message` removing `INBOX` (archive).
-4. Report a one-line tally: `<N> starred found · <M> collected · <K> skipped (dup) · <F> failed (left starred)`, then list the created file paths.
+1. Preflight: confirm `bin/token.json` exists. If not, stop and tell the user to run
+   `python3 bin/gmail_client.py auth` (one-time browser consent).
+2. **Dry run first** (collects, does not touch Gmail):
+   ```bash
+   python3 bin/gmail_client.py run --dry-run
+   ```
+   Review the JSON tally and the written file paths in `raw/_inbox/`.
+3. Real run (collects, then de-stars + archives each collected message):
+   ```bash
+   python3 bin/gmail_client.py run
+   ```
+   For a first cautious live run, cap it: `python3 bin/gmail_client.py run --max 1`.
+4. Report the JSON tally it prints:
+   `found · written · duplicate · failed · archived`, then list `paths`.
+   - `written`/`duplicate` messages are archived (or, with `--dry-run`, left alone).
+   - `failed` messages are left starred for a later retry (idempotent — dedup by
+     `gmail_message_id` means re-running never double-writes).
 
 ## Notes
 - This skill does NOT follow links inside emails (pointer emails are captured with
   their URL recorded in frontmatter; following is a future enhancement).
-- Run via `/loop <interval> /collect-email` to probe on a cadence within an active
-  Claude Code session (the Gmail connector is available there).
+- Run via `/loop <interval> /collect-email` to probe on a cadence. Because the
+  transport is an owned credential (not the session connector), `run` also works
+  headless — a future cron/CI path.
 - After collection, run the normal corpus ingest on `raw/_inbox/` when you choose;
   ingest then routes files to `raw/email/`.
