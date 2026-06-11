@@ -349,3 +349,10 @@ Out of scope for this commit (deferred):
 - Added `email` channel → `raw/email/` to corpus/_config.md (channel-labels table + email-collection note).
 - Created raw/email/ (with .gitkeep).
 - Supports the /collect-email collector (sub-project B): captures starred Gmail into raw/_inbox/ (channel email), routed to raw/email/ by Branch A ingest.
+
+## [2026-06-11] schema | v0.5 → v0.6 — optimized batch-ingest pipeline + claim lifecycle
+
+- §8.1 batch path (N>10) rewritten as the cluster-based Phase 0–5 pipeline (pre-flight → survey/cluster → global entity registry → per-cluster ingest → integrate → verify); added the Coordinator-owns-shared-files rule for parallel per-domain workers.
+- §4 + new §7.1: v2 claim-lifecycle fields/conventions (`confidence`, `last_confirmed`, `supersedes`/`superseded_by`, contradiction-on-write, typed relationships).
+- Grounded in deep research filed at docs/research/2026-06-11-llm-wiki-ingest-best-practices.md (Karpathy LLM-wiki + rohitg00 v2; MOC/Zettelkasten/PARA; large-batch entity-resolution & orchestration).
+- Motivation: ingest the 136-source collected backlog (sub-project B output) without structural drift. Pipeline executes immediately after this entry.

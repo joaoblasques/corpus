@@ -1,4 +1,4 @@
-# CLAUDE.md — LLM Corpus Schema (v0.5)
+# CLAUDE.md — LLM Corpus Schema (v0.6)
 
 You are the maintainer of a personal knowledge corpus inspired by Karpathy's LLM-Wiki pattern. **This file is your operating manual. Read it fully before any corpus operation.** When the user invokes you in this directory, your first action is to (re)read this file, then `corpus/_index.md`, `corpus/_domains.md`, and `corpus/_config.md`.
 
@@ -90,10 +90,18 @@ tags:
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 provisional: true | false  # optional; only on hub pages in provisional domains; mirrors corpus/_domains.md
+confidence: 0.0-1.0         # optional (v0.6); confidence in the page's core claims
+last_confirmed: YYYY-MM-DD  # optional (v0.6); most recent date a source reconfirmed the claims
+supersedes:                 # optional (v0.6); page(s) this one replaces
+  - corpus/<domain>/<old-page>.md
+superseded_by:              # optional (v0.6); page that replaced this one (stale stub kept)
+  - corpus/<domain>/<new-page>.md
 ---
 ```
 
 **`aliases`** is critical for entity dedup. Always populate when you know variants ("GPT-4", "gpt4", "GPT 4").
+
+**Claim-lifecycle fields (v0.6)** — `confidence`, `last_confirmed`, `supersedes`, `superseded_by` are optional and managed per §7.1. Use them to track staleness and supersession; omit when not meaningful.
 
 **`sources` migration note**: existing pages use the old flat `- raw/<path>` format. Migrate to the structured form when you next touch the page (re-ingest, update, lint). Do not mass-update all pages in one pass without user approval.
 
@@ -145,6 +153,15 @@ If you can't cite a claim, mark it: `> [unsourced — please verify]`.
 
 When a corpus page would benefit from context not present in the source (background, definitions, related concepts), prefer linking to other corpus pages over inserting unsourced claims. If unsourced material is truly necessary, mark it `[unsourced]` and keep it minimal. The corpus should compress what sources say, not invent what they don't.
 
+### 7.1 Claim lifecycle (v0.6)
+
+Sources age and disagree. Manage claims over time, not only at write:
+
+- **Confirmation & confidence.** A page may carry `last_confirmed` (most recent date a source reconfirmed its core claims) and `confidence` (0–1). Re-ingesting a corroborating source refreshes `last_confirmed`; conflicting newer evidence lowers `confidence` until resolved.
+- **Supersession over deletion.** When new information replaces old, do not silently overwrite. Mark the old page/claim stale, set `superseded_by:` on it and `supersedes:` on the replacement, and keep the stale stub with a timestamp and a forward link. History stays auditable.
+- **Contradiction detection on write (not only lint).** When an ingest writes a claim that conflicts with an existing page, surface it *during* ingest: prefer the higher-authority / more-recent / better-supported claim, and when genuinely unsettled create a `synthesis` page naming the disagreement (§7) rather than silently picking one.
+- **Typed relationships.** When a source supports it, capture the *type* of a link, not just the link — e.g. `uses`, `depends-on`, `supersedes`, `contradicts`, `caused`, `fixed` — in the link's surrounding prose, so the graph encodes meaning, not mere adjacency.
+
 ---
 
 ## 8. Operations
@@ -194,11 +211,16 @@ For **Branch B only**: before reading the source, check its frontmatter for `cor
     - **Branch B (PARA-native)**: do nothing further. File stays in its PARA home.
     - **Branch C (raw-channel)**: do nothing further.
 
-**Batch ingest (N>10)**: do a **survey pass first**.
-- Read titles, tags, and first paragraph of each source.
-- Propose any new domains needed.
-- Surface to user for confirmation.
-- Only then start per-source ingestion.
+**Batch ingest (N>10)** — use the **optimized cluster-based pipeline** (v0.6). Source-by-source ingestion does not scale past ~10 heterogeneous sources; route by *cluster*, dedup *globally before writing*, and process *cluster-by-cluster*. You act as **Coordinator**; per-domain **workers** may run in parallel.
+
+- **Phase 0 — Pre-flight (Coordinator).** Re-read CLAUDE.md, `_index.md`, `_domains.md`, `_config.md`. Enumerate idempotency: for every source check the `corpus_ingested` stamp / PARA-native collision (§9). Produce a skip/force/append list; surface it (default skip).
+- **Phase 1 — Survey & cluster (Coordinator).** Build a condensed record per source (`title + tags/playlist + first paragraph` — do NOT read full bodies yet). Cluster all records thematically in one pass. Decide routing per cluster, passing `_domains.md` as the constraint set: maps to existing domain → route there (default); ≥3 sources, distinct, no fit → propose new domain (confirm); 1–2 sources + confirmed growth → provisional domain; <3, no growth → fold into nearest domain as pages (never a one-off domain). **Surface the cluster→domain map + new-domain proposals and get user confirmation before writing.** Log domain decisions to `_domains.md`.
+- **Phase 2 — Global entity registry (Coordinator).** Extract candidate entities/concepts per source (cap 3–10). Dedup *before any page is written*: reconcile against existing `_index.md` entities and across clusters by name + alias similarity. Build a registry `{canonical-slug → aliases, domain, page-path}` — this prevents duplicate pages at the source.
+- **Phase 3 — Per-cluster ingest (Workers, one domain each — parallelizable).** Per cluster, to completion: read full bodies now (honor Matter highlights §10.1, YouTube timestamps §10.2); create/update pages **using the registry** (no new dupes); citation gate on every claim (§7 — a page failing it is not written); aim for the natural **10–15 page cascade** (touching 1–2 pages signals under-extraction); link intra-cluster first, then to existing pages via registry/index, then **link every new page from its domain hub** (`README.md`) — no orphans. Lower the source-summary bar: write a `source` page whenever it keeps the index queryable, not only for >1000-word items. Workers return **deltas**; workers DO NOT write shared files.
+- **Phase 4 — Integrate (Coordinator, serialized).** Apply source stamps (§2); update `_index.md` once from all deltas; append `_log.md` (§12); move processed `raw/_inbox/` files to channel folders (§8.1 step 10A).
+- **Phase 5 — Verification (Coordinator = lint §8.3, scoped to touched domains).** Orphans (0 inbound hub links → link or flag); duplicate entities (alias overlap → merge); contradictions (→ synthesis page); stubs; domain health; provisional review. Apply safe fixes; surface the rest.
+
+> **Coordinator-owns-shared-files rule (v0.6, parallel ingest).** Only the Coordinator writes the global files `corpus/_index.md`, `corpus/_log.md`, `corpus/_domains.md`, `corpus/_config.md`. Workers own **disjoint domains** (one-writer-per-domain) and return structured deltas the Coordinator serializes. A cross-domain entity page is owned by exactly one worker (its primary domain) and linked from the other domain's hub. This eliminates write conflicts by construction.
 
 ### 8.2 Query
 
@@ -411,4 +433,5 @@ Pages are **dense reference**, not blog posts.
 - v0.3 — §7 unsourced claim guidance; added raw/notes/ channel for first-party vault notes
 - v0.4 — §4 formalized `provisional` as optional frontmatter field on hub pages
 - v0.5 — §2 narrow write exception for source stamping (3 fields only); §8.1 PARA-native ingest path (in-place, no raw/ copy); §4 structured `sources:` field; §6 citation format for PARA-native paths; §9 collision rule for re-ingest guard; new `corpus/_config.md`. Rationale: eliminate duplication between `raw/<channel>/` and PARA folders for files with a canonical PARA home.
+- v0.6 — §8.1 optimized cluster-based batch-ingest pipeline (Phase 0–5: pre-flight → survey/cluster → global entity registry → per-cluster ingest → integrate → verify) with the Coordinator-owns-shared-files rule for parallel per-domain workers; §4 + new §7.1 v2 claim-lifecycle (`confidence`, `last_confirmed`, `supersedes`/`superseded_by`, contradiction-on-write, typed relationships). Rationale: scale ingest past ~10 heterogeneous sources without structural drift, and manage claim staleness/disagreement over time. Grounded in deep research on Karpathy's LLM-wiki pattern (+ rohitg00 v2), MOC/Zettelkasten/PARA architecture, and large-batch entity-resolution & multi-agent-orchestration best practices (filed in `docs/research/2026-06-11-llm-wiki-ingest-best-practices.md`).
 - Co-evolve with user. Bump version + log entry on every change.
