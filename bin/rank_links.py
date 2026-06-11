@@ -23,7 +23,11 @@ def load_env(path: str | None = None) -> None:
     p = pathlib.Path(path) if path else (BIN.parent / ".env")
     if not p.exists():
         return
-    for line in p.read_text(encoding="utf-8").splitlines():
+    try:
+        text = p.read_text(encoding="utf-8")
+    except (OSError, UnicodeDecodeError):
+        return
+    for line in text.splitlines():
         line = line.strip()
         if line and not line.startswith("#") and "=" in line:
             k, v = line.split("=", 1)
