@@ -1,6 +1,6 @@
 # Corpus Index
 
-> Last updated: 2026-06-12 | Total pages: 77 | Total sources: 169
+> Last updated: 2026-06-12 | Total pages: 92 | Total sources: 201
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
@@ -79,6 +79,11 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[software-engineering/distributed-systems-fallacies|Distributed Systems Fallacies]] — concept · draft · eight fallacies of distributed computing; sourced failure modes for network reliability, latency, security, topology
 - [[software-engineering/software-design-principles|Software Design Principles]] — concept · draft · SRP, cohesion, loose coupling, dependency injection, open/closed; 8 principles separating maintainable from fragile code
 - [[software-engineering/data-structures|Data Structures and Big O Notation]] — concept · draft · O(1)/O(log n)/O(n)/O(n²) complexity classes; time-complexity trade-off table for 8 core data structures
+- [[software-engineering/cap-theorem|CAP Theorem]] — concept · draft · pick CP or AP under partitions; CAP vs ACID
+- [[software-engineering/ai-risk-architecture|AI Risk Architecture]] — concept · draft · data/output/action risk; risk is a system property
+- [[software-engineering/engineering-craft|Engineering Craft]] — concept · draft · resourcefulness, curiosity, persistence
+- [[software-engineering/developer-tooling|Developer Tooling]] — concept · draft · Xonsh, Git internals, backend platforms
+- [[software-engineering/ai-assisted-development|AI-Assisted Development]] — synthesis · draft · fundamentals under AI; write→review shift; deterministic guardrails
 
 ### mlops
 - [[mlops/README|MLOps]] — hub · draft · engineering substrate: environment, version control, compute, infrastructure-as-code (provisional)
@@ -89,6 +94,20 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[mlops/uv|uv]] — entity · stub · fast Python package manager + venv tool; canonical Layer-2 tool in the dev stack
 - [[mlops/git|Git]] — entity · draft · content-addressed snapshot store; branch-per-task workflow; ML-aware .gitignore
 - [[mlops/terraform|Terraform]] — entity · draft · HCL IaC tool; providers/resources/data/output, .tfstate, .tfvars, remote backends
+
+### productivity
+- [[productivity/README|Productivity]] — hub · draft · personal & professional effectiveness for knowledge workers (provisional)
+- [[productivity/mental-models|Mental Models]] — concept · draft · Circle of Competence + thought experiments
+- [[productivity/learning-to-learn|Learning to Learn]] — concept · draft · growth without a mentor; writing-to-process; cross-training
+- [[productivity/shipping-and-scope|Shipping and Scope]] — concept · draft · good-enough; "done is an agreement"; perfectionism
+- [[productivity/working-with-stakeholders|Working with Stakeholders]] — concept · draft · stakeholder trust and relationship management
+- [[productivity/ai-augmented-knowledge-work|AI-Augmented Knowledge Work]] — concept · draft · standing context, voice files, loop engineering
+
+### ai-business
+- [[ai-business/README|AI Business]] — hub · draft · career, monetization, and business in the AI era (provisional)
+- [[ai-business/technical-career|Navigating a Technical Career]] — concept · draft · portfolio signals, interviews, prioritization-as-leverage
+- [[ai-business/monetizing-code|Monetizing Code]] — concept · draft · sell a result not code; offer positioning
+- [[ai-business/ai-and-the-job-market|AI and the Job Market]] — synthesis · draft · AI-as-utility; future-proofing an engineering career
 
 ## Recent additions
 - 2026-06-09: [[ai-engineering/optimizing-claude]] (new synthesis — filed back from query "how to optimize my Claude setup")

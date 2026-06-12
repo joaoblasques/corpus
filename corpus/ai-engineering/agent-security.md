@@ -12,6 +12,9 @@ sources:
   - path: raw/web/auth-md-open-protocol-for-agent-registration.md
     channel: web
     ingested_at: 2026-06-12
+  - path: raw/web/i-built-a-vulnerable-app-and-spent-1-500-seeing-if-llms-coul.md
+    channel: web
+    ingested_at: 2026-06-12
 aliases:
   - prompt injection
   - LLM security
@@ -69,6 +72,20 @@ A code-driven guardrail that blocks execution if the user rejects an action, bre
 
 Coding-agent harnesses add their own real-time security passes. Anthropic's security plugin reviews Claude's edits as they happen and sends vulnerabilities back for immediate fix: every file write triggers a scan, a model double-checks diffs at turn end, high-severity issues are fed back for fixing, and on git commit an agentic reviewer traces data flow to catch cross-file bugs like IDOR or SSRF [^src1]. (See [[ai-engineering/claude-code|Claude Code]].) On the exfiltration side, ChatGPT's "Lockdown Mode" can't stop an injection from landing but "seals the exits," cutting the outbound requests attackers use to siphon data — at the cost of disabling agent mode, deep research, and downloads [^src1].
 
+## Offensive use: agents as AppSec testers
+
+The same agent capabilities that need hardening can be turned outward — pointing a coding agent at an app to *find* the vulnerabilities. One security researcher built a deliberately vulnerable book-review app (FastAPI backend, React Native/Expo Hermes-exported Android app) with a flag hidden in private reviews, then spent ~$1,500 running multiple LLMs as autonomous attackers to see if they could reproduce a real-world exploit class [^src4].
+
+The planted bug: the API itself was hardened, but the app shipped a `google-services.json` exposing Firebase config, letting an attacker sign up directly against Firebase and read the Firestore DB — **Broken Access Control / Missing Object-Level Authorization**, which the author reports seeing "in the wild" on Firebase and Supabase apps with a hardened API but wide-open data layer [^src4].
+
+### What it tells us about agents-as-attackers
+
+- **It works, unevenly.** Of ten models given ten runs each, GPT-5.5 solved 7/10; Claude Sonnet 4.6 and Claude Opus 4.8 each 2/10; several models (Gemini, MiniMax, DeepSeek Flash) solved 0/10 [^src4]. Not a scientific eval, but a useful signal that capability varies widely.
+- **The hard part is approach, not skill.** Failing runs typically fixated on the API/app surface and never pivoted to the real attack vector (Firebase) — or found Firebase but tried to use its credentials *against the API* instead of directly [^src4]. The author had to use harness extensions to "force models to keep trying" rather than report "API seems secure" [^src4].
+- **Safety guardrails interfere with legitimate testing.** Some models gave immediate refusals (Gemini 3.1 Pro: ~9k median tokens/run vs 100k+ for engaged runs) [^src4]. Others showed "late refusals" — Claude Opus "got so close... but security guardrails ended the session early" [^src4]. An OpenAI account "already approved for security research" avoided refusals [^src4]. The same models also hesitated to act against a live DB: most "had momentary blips of 'This would affect the live database so I'm not going to do that'" [^src4].
+
+**Defensive takeaway for builders**: a hardened API is not enough if the data layer (Firebase/Supabase) is directly reachable — the least-privilege and scoped-access principles above apply to the *backend-as-a-service* layer, not just your own endpoints. Assume an attacker can run a capable agent against your shipped client and any config it bundles.
+
 ## Agent identity and registration (auth.md)
 
 As agents act on behalf of users, identity becomes a security surface. **auth.md** is an open protocol (authored by WorkOS, not tied to its infrastructure) for agent registration without a sign-up form [^src3]. An app hosts a Markdown file at `https://yourapp.com/auth.md` declaring supported flows, scopes, and how to register [^src3]. Two flows [^src3]:
@@ -90,3 +107,4 @@ It issues a scoped, short-lived, revocable access token over standard OAuth, com
 [^src1]: [Building Secure AI Agents: From Prompt Injection to Production Guardrails (email)](../../raw/email/email-2026-05-28-building-secure-ai-agents-from-prompt-injection-to-productio.md)
 [^src2]: [Secure LLMs for Data Engineers: How to prevent Prompt Injection](../../raw/web/secure-llms-how-to-prevent-prompt-injection.md)
 [^src3]: [auth.md — open protocol for agent registration](../../raw/web/auth-md-open-protocol-for-agent-registration.md)
+[^src4]: [I built a vulnerable app and spent $1,500 seeing if LLMs could hack it](../../raw/web/i-built-a-vulnerable-app-and-spent-1-500-seeing-if-llms-coul.md) — Kasra

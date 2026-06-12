@@ -6,6 +6,9 @@ sources:
   - path: 03_Resources/Study Notes/Python - Production Code Principles Senior Developer.md
     channel: notes
     ingested_at: 2026-05-21
+  - path: raw/_inbox/email-2026-06-09-design-patterns-suck.md
+    channel: email
+    ingested_at: 2026-06-12
 aliases:
   - software design principles
   - clean code principles
@@ -14,11 +17,14 @@ aliases:
   - SRP
   - open/closed principle
   - dependency injection
+  - design patterns
+  - Gang of Four
+  - GoF
 tags:
   - corpus/software-engineering
   - concept
 created: 2026-05-21
-updated: 2026-05-21
+updated: 2026-06-12
 ---
 
 # Software Design Principles
@@ -54,6 +60,18 @@ class OrderService:
         self.db = database
 ```
 
+## Design patterns: vocabulary, not dogma
+
+A contrasting source argues the Gang of Four's 23 patterns (1994) have been "elevated from useful vocabulary into something closer to dogma" — taught as universal solutions, applied where unneeded, treated as a mark of good engineering [^src2]. Its central claim:
+
+> "Design patterns aren't solving problems with your code; they're solving problems with your language." [^src2]
+
+Many GoF patterns are workarounds for missing language features [^src2]. Java's verbose ~15-line `Singleton` collapses to `object Logger` in Scala; a Factory is "just Java's refusal to give you proper constructors"; an Observer is trivial when functions are first-class. "In a language that's expressive enough, patterns either become trivial or ... just don't exist." [^src2] This is framed as the **Gosling vs Guido philosophy**: Java was built rigid to protect average developers from themselves (patterns route everything through class hierarchies), while Python optimizes for clarity and gives direct tools (first-class functions, decorators, context managers, duck typing) [^src2].
+
+**The honest value of patterns**: "giving a short name to a big idea" — it's easier to say "that's a facade" than re-explain a wrapper each time [^src2]. Patterns are "for talking about code that's already written," not a checklist to apply [^src2]. The failure mode is **overengineering** — shoehorning patterns in solves "imaginary problems," producing labyrinths of interfaces. The evaluation rule is the **simplicity principle** above: weigh the technique's benefit against its cost. "If your solution needs a diagram to explain it, you've gone too far." [^src2] A developer who internalizes separation of concerns, encapsulation, and composition over inheritance "will write clean code naturally, even if they've never heard the word 'Singleton'" [^src2].
+
+This connects to the maintainability cost of AI-generated code — see [[software-engineering/ai-assisted-development|AI-Assisted Development]], where the same simplicity discipline guards against AI-amplified over-abstraction.
+
 ## Relationship to architecture-level patterns
 
 SRP and cohesion operate at the code level, but the same principle drives [[software-engineering/microservices|microservices]] decomposition at the service level — each service should have one reason to change, with clear boundaries and limited proliferation. Hype-driven microservices adoption often violates the simplicity principle: services are added before the complexity is warranted [^src1].
@@ -62,8 +80,10 @@ SRP and cohesion operate at the code level, but the same principle drives [[soft
 
 - [[software-engineering/microservices|Microservices]] — service-level application of SRP, cohesion, and loose coupling
 - [[software-engineering/distributed-systems-fallacies|Distributed Systems Fallacies]] — distributed context where defensibility (explicit failure handling) becomes critical
+- [[software-engineering/ai-assisted-development|AI-Assisted Development]] — deep modules, simplicity, and testability under AI code generation
 - [[software-engineering/README|Software Architecture hub]]
 
 ---
 
 [^src1]: [[03_Resources/Study Notes/Python - Production Code Principles Senior Developer|Python - Production Code Principles Senior Developer]]
+[^src2]: [Design Patterns Suck](../../raw/email/email-2026-06-09-design-patterns-suck.md)

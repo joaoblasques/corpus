@@ -379,3 +379,13 @@ Out of scope for this commit (deferred):
 - cross-domain (B6, data-engineering-primary): NEW agentic-data-modeling; UPDATED claude-code-for-data-engineering (+6 src). Linked to ai-engineering/claude-code.
 - dedup: model releases (Opus 4.8, Fable 5, Mythos 5) kept as sections in anthropic, not separate pages; pi-coding-agent (×3), playwright-testing (×2), cowork (×2), zazencodes-skills (×2) deduped to single pages.
 - notes: prompt-engineering kept distinct from context-engineering; grep-vs-vector handled as a section in agentic-search (not a synthesis); a few [unsourced] markers where captured pages were JS-gated/login stubs. ai-engineering now ~38 pages (sub-hubs justified, no split). Remaining inbox: 94 sources (software/mlops/productivity/etc.) for future waves.
+
+## [2026-06-12] ingest | email-backlog wave 3 — distinct clusters (SE + productivity + ai-business)
+
+- pipeline: v0.6 optimized batch, Coordinator + 4 parallel per-cluster workers (disjoint domains).
+- scope correction: 342 sources remain un-ingested (not 94); the large DE/AI tail deferred. Wave 3 took the 42 distinct-cluster sources.
+- domains: NEW provisional `productivity` and `ai-business` created (§9; ai-business supersedes the 2026-05-07 career rejection). software-engineering topped up; security folded into ai-engineering.
+- new pages (13): software-engineering — cap-theorem, ai-assisted-development, ai-risk-architecture, engineering-craft, developer-tooling; productivity — mental-models, learning-to-learn, shipping-and-scope, working-with-stakeholders, ai-augmented-knowledge-work; ai-business — technical-career, monetizing-code, ai-and-the-job-market.
+- updated (2): software-design-principles (design-patterns section), ai-engineering/agent-security (offensive AppSec / LLMs-finding-vulns).
+- skipped: promo/sponsored newsletters (Hermes, declutter/Google Tips, Fathom), empty landing pages (50-hacks, cowork academy), Instagram/SSD exploit news. 3 mis-bucketed sources (Claude /goal, DIP tutorial, Kafka HOL-blocking) flagged for ai-engineering/software-engineering/data-engineering in later waves.
+- corpus now 92 pages across 6 domains. Remaining inbox: 71 sources (mostly DE/AI tail + a few mlops) for future waves.

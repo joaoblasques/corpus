@@ -52,6 +52,8 @@ Each entry: `[YYYY-MM-DD] action | domain | rationale`.
 - [2026-05-22] graduate | software-engineering | 5 sources, 6 content pages; ≥3 source threshold met. Same qualitative criteria as data-engineering graduation. distributed-systems-fallacies stub flagged for expansion (next session).
 - [2026-05-07] defer | career (candidate) | remote-job-boards file moved to raw/web/ without corpus page. <3 sources to justify domain. Revisit when 2nd career source arrives.
 - [2026-06-09] create | mlops | Provisional rule: 4 sources (AIEFS Phase 00 lessons 01/02/03 + IaC/Terraform article) that fit no existing domain; coherent "engineering substrate / infra & tooling" cluster. User confirmed via Batch 4 survey + new-domain question. Provisional flag retained one cycle (3 of 4 sources share one origin); 30-day review 2026-07-09.
+- [2026-06-12] create | productivity | Standard rule: 13 sources in the wave-3 email-backlog cluster (mental models, time/focus, note-taking, working effectively, stakeholder management) fitting no engineering domain; conceptually distinct. Provisional; 30-day review 2026-07-12. User confirmed wave-3 scope (remote-control session).
+- [2026-06-12] create | ai-business | Standard rule: 11 sources (career growth, interviews, monetizing technical skills, AI's impact on jobs/consulting). Supersedes the 2026-05-07 "career" rejection (revisit threshold was a 2nd career source; now 11). Provisional; 30-day review 2026-07-12. User confirmed wave-3 scope.
 
 ---
 
