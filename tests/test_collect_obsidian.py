@@ -72,3 +72,29 @@ def test_build_url_source():
     assert "source_url: https://a.com/x" in doc
     assert "via_vault_list: 00_Inbox/Clippings/articles to process.md" in doc
     assert doc.rstrip().endswith("Article body")
+
+
+def test_fm_field():
+    assert co.fm_field("---\nvault_origin: a/b.md\n---\n", "vault_origin") == "a/b.md"
+    assert co.fm_field("no fm", "vault_origin") is None
+
+
+def test_is_vault_note_ingested(tmp_path):
+    a = tmp_path / "a.md"; a.write_text("---\ncorpus_ingested: true\n---\nx", encoding="utf-8")
+    b = tmp_path / "b.md"; b.write_text("---\ntitle: x\n---\ny", encoding="utf-8")
+    assert co.is_vault_note_ingested(str(a)) is True
+    assert co.is_vault_note_ingested(str(b)) is False
+
+
+def test_already_collected_vault(tmp_path):
+    d = tmp_path / "inbox"; d.mkdir()
+    (d / "notes-x.md").write_text("---\nvault_origin: 03_Resources/Articles/X.md\n---\n", encoding="utf-8")
+    assert co.already_collected_vault("03_Resources/Articles/X.md", [d]) is True
+    assert co.already_collected_vault("03_Resources/Articles/Y.md", [d]) is False
+
+
+def test_url_already_collected(tmp_path):
+    d = tmp_path / "web"; d.mkdir()
+    (d / "web-x.md").write_text("---\nsource_url: https://a.com/x\n---\n", encoding="utf-8")
+    assert co.url_already_collected("https://a.com/x", [d]) is True
+    assert co.url_already_collected("https://a.com/z", [d]) is False

@@ -109,3 +109,38 @@ def build_url_source(meta: dict, body: str) -> str:
         f"collected_at: {meta['collected_at']}", "---", "", body.strip(), "",
     ]
     return "\n".join(lines)
+
+
+def fm_field(text: str, key: str):
+    m = re.search(rf"^{re.escape(key)}:\s*(.+)$", text, re.M)
+    return m.group(1).strip() if m else None
+
+
+def is_vault_note_ingested(abs_path: str) -> bool:
+    try:
+        t = Path(abs_path).read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return False
+    return "corpus_ingested: true" in t
+
+
+def _raw_sources(dirs=None):
+    for d in (dirs if dirs is not None else DEDUP_DIRS):
+        p = Path(d)
+        if not p.exists():
+            continue
+        for md in p.glob("*.md"):
+            try:
+                yield md, md.read_text(encoding="utf-8", errors="replace")
+            except (OSError, UnicodeDecodeError):
+                continue
+
+
+def already_collected_vault(rel_path: str, dirs=None) -> bool:
+    needle = f"vault_origin: {rel_path}\n"
+    return any(needle in t for _, t in _raw_sources(dirs))
+
+
+def url_already_collected(url: str, dirs=None) -> bool:
+    needle = f"source_url: {url}\n"
+    return any(needle in t for _, t in _raw_sources(dirs))
