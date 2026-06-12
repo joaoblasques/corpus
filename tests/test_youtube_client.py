@@ -28,6 +28,24 @@ def test_list_playlist_items_maps_fields():
     assert items[0]["published"] == "2026-06-01"
 
 
+def test_list_playlist_items_skips_malformed(monkeypatch):
+    # I1: first item lacks resourceId (deleted/private) -> skipped, not a KeyError.
+    svc = MagicMock()
+    svc.playlistItems().list.return_value = _FakeReq({
+        "items": [
+            {"id": "BAD", "snippet": {"title": "Gone"}},  # no resourceId
+            {"id": "ITEM2",
+             "snippet": {"title": "Vid B", "resourceId": {"videoId": "VB"},
+                         "videoOwnerChannelTitle": "Chan B"},
+             "contentDetails": {"videoPublishedAt": "2026-06-02T00:00:00Z"},
+             "status": {"privacyStatus": "public"}},
+        ]})
+    svc.playlistItems().list_next.return_value = None
+    items = list(yc.list_playlist_items(svc, "PL1"))
+    assert len(items) == 1
+    assert items[0]["video_id"] == "VB"
+
+
 def test_delete_playlist_item_404_is_success():
     from googleapiclient.errors import HttpError
     svc = MagicMock()

@@ -60,10 +60,13 @@ def list_playlist_items(service, playlist_id):
     while req is not None:
         resp = req.execute()
         for it in resp.get("items", []):
-            sn = it["snippet"]
+            sn = it.get("snippet", {})
+            video_id = sn.get("resourceId", {}).get("videoId")
+            if not video_id:
+                continue
             yield {
-                "playlist_item_id": it["id"],
-                "video_id": sn["resourceId"]["videoId"],
+                "playlist_item_id": it.get("id"),
+                "video_id": video_id,
                 "title": sn.get("title", ""),
                 "channel_name": sn.get("videoOwnerChannelTitle", ""),
                 "published": (it.get("contentDetails", {}).get("videoPublishedAt", "") or "")[:10],
