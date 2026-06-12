@@ -111,8 +111,23 @@ def build_url_source(meta: dict, body: str) -> str:
     return "\n".join(lines)
 
 
+def _frontmatter(text: str) -> str:
+    """Return only the text inside the leading `---\\n ... \\n---` block.
+
+    Empty string if the file doesn't start with `---` or has no closing `---`.
+    This prevents body content (e.g. an article quoting this system's frontmatter)
+    from being mistaken for the file's own frontmatter.
+    """
+    if not text.startswith("---"):
+        return ""
+    end = text.find("\n---", 3)
+    if end == -1:
+        return ""
+    return text[3:end].strip("\n")
+
+
 def fm_field(text: str, key: str):
-    m = re.search(rf"^{re.escape(key)}:\s*(.+)$", text, re.M)
+    m = re.search(rf"^{re.escape(key)}:\s*(.+)$", _frontmatter(text), re.M)
     return m.group(1).strip() if m else None
 
 
@@ -121,7 +136,7 @@ def is_vault_note_ingested(abs_path: str) -> bool:
         t = Path(abs_path).read_text(encoding="utf-8", errors="replace")
     except OSError:
         return False
-    return "corpus_ingested: true" in t
+    return "corpus_ingested: true" in _frontmatter(t)
 
 
 def _raw_sources(dirs=None):

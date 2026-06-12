@@ -86,6 +86,38 @@ def test_is_vault_note_ingested(tmp_path):
     assert co.is_vault_note_ingested(str(b)) is False
 
 
+def test_frontmatter_extracts_only_leading_block():
+    assert co._frontmatter("---\na: 1\n---\nbody x\n") == "a: 1"
+    assert co._frontmatter("no fm at all") == ""
+    assert co._frontmatter("---\na: 1\nno closing fence") == ""
+
+
+def test_is_vault_note_ingested_ignores_body(tmp_path):
+    # corpus_ingested in BODY (after closing ---) must not count as ingested
+    f = tmp_path / "a.md"
+    f.write_text("---\ntitle: x\n---\nThis article discusses corpus_ingested: true in the system.\n",
+                 encoding="utf-8")
+    assert co.is_vault_note_ingested(str(f)) is False
+
+
+def test_fm_field_ignores_body():
+    # a body line that literally starts with `vault_origin:` (e.g. a code block in
+    # an article about this very system) must NOT be picked up
+    text = "---\ntitle: x\n---\nExample frontmatter:\nvault_origin: 03_Resources/Articles/WRONG.md\n"
+    assert co.fm_field(text, "vault_origin") is None
+    # real frontmatter value is still returned
+    assert co.fm_field("---\nvault_origin: a/b.md\n---\nbody", "vault_origin") == "a/b.md"
+
+
+def test_reapable_ignores_body_vault_origin(tmp_path):
+    raw = tmp_path / "raw"; raw.mkdir()
+    (raw / "n.md").write_text(
+        "---\ncorpus_ingested: true\n---\nExample frontmatter:\nvault_origin: 03_Resources/Articles/WRONG.md\n",
+        encoding="utf-8")
+    r = co.reapable([raw])
+    assert "03_Resources/Articles/WRONG.md" not in r["vault_notes"]
+
+
 def test_already_collected_vault(tmp_path):
     d = tmp_path / "inbox"; d.mkdir()
     (d / "notes-x.md").write_text("---\nvault_origin: 03_Resources/Articles/X.md\n---\n", encoding="utf-8")
