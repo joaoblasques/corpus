@@ -101,6 +101,34 @@ def test_run_collects_and_removes_only_with_transcript(tmp_path, monkeypatch):
     assert (tmp_path / "youtube-V2-b.md").exists()  # kept, recorded with disabled status
 
 
+def test_run_stops_on_quota_error(tmp_path, monkeypatch):
+    # I2: a 403 quota/rate-limit HttpError from delete must stop the run gracefully,
+    # not get swallowed as failed+continue. Second video's delete is never attempted.
+    from googleapiclient.errors import HttpError
+    monkeypatch.setattr(yc.cy, "INBOX", tmp_path)
+    monkeypatch.setattr(yc.cy, "DEDUP_DIRS", [tmp_path])
+    monkeypatch.setattr(yc, "load_config", lambda: {
+        "playlists": [{"id": "PL1", "name": "AI", "policy": "collect-remove"}],
+        "default_policy": "ignore"})
+    monkeypatch.setattr(yc, "get_service", lambda: "SVC")
+    monkeypatch.setattr(yc, "list_playlist_items", lambda svc, pid: iter([
+        {"playlist_item_id": "I1", "video_id": "V1", "title": "A", "channel_name": "C",
+         "published": "2026-06-01", "privacy": "public"},
+        {"playlist_item_id": "I2", "video_id": "V2", "title": "B", "channel_name": "C",
+         "published": "2026-06-01", "privacy": "public"}]))
+    monkeypatch.setattr(yc, "extract_transcript", lambda vid: ("[00:00](x) hi", "ok"))
+    attempted = []
+
+    def fake_delete(svc, iid):
+        attempted.append(iid)
+        resp = MagicMock(); resp.status = 403
+        raise HttpError(resp, b"quotaExceeded")
+    monkeypatch.setattr(yc, "delete_playlist_item", fake_delete)
+    rc = yc.cmd_run(yc._args(["run", "--sleep", "0"]))
+    assert rc == 0
+    assert attempted == ["I1"]  # stopped after first; second delete never attempted
+
+
 def test_run_unknown_status_duplicate_not_removed(tmp_path, monkeypatch):
     # C1: a prior file matches the dedup needle but has NO transcript_status line.
     # collected_status -> None; the delete guard must fail closed (not delete).

@@ -169,6 +169,8 @@ def cmd_list_playlists(_args) -> int:
 
 
 def cmd_run(args) -> int:
+    from googleapiclient.errors import HttpError
+
     service = get_service()
     cfg = load_config()
     collected_at = args.collected_at or datetime.date.today().isoformat()
@@ -178,7 +180,10 @@ def cmd_run(args) -> int:
     if args.playlist:
         targets = [p for p in targets if p["id"] == args.playlist]
     processed = 0
+    stopped = None
     for pl in targets:
+        if stopped:
+            break
         policy = pl["policy"]
         t["playlists"] += 1
         for item in list_playlist_items(service, pl["id"]):
@@ -213,10 +218,19 @@ def cmd_run(args) -> int:
                     t["kept"] += 1
                 if args.sleep:
                     time.sleep(args.sleep)
+            except HttpError as e:
+                status_code = getattr(getattr(e, "resp", None), "status", None)
+                if status_code in (403, 429, 503):
+                    stopped = "quota_or_rate_limit"
+                    break
+                t["failed"] += 1
             except Exception:
                 t["failed"] += 1
     ignored = [p["name"] for p in cfg["playlists"] if p.get("policy") == "ignore"]
-    print(json.dumps({**t, "dry_run": bool(args.dry_run), "ignored_playlists": ignored}, indent=2))
+    out = {**t, "dry_run": bool(args.dry_run), "ignored_playlists": ignored}
+    if stopped:
+        out["stopped"] = stopped
+    print(json.dumps(out, indent=2))
     return 0
 
 
