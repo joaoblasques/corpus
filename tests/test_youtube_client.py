@@ -75,6 +75,34 @@ def test_extract_transcript_ok(monkeypatch):
     assert "hello" in body and "world" in body
 
 
+def test_extract_transcript_inner_block_falls_through_to_ytdlp(monkeypatch):
+    # M2: fetch raises NoTranscriptFound, then api.list() raises a blocked-type error.
+    # The inner branch must fall through to yt-dlp rather than returning none_found.
+    import youtube_transcript_api as yta
+
+    class FakeApi:
+        def fetch(self, *a, **k): raise yta._errors.NoTranscriptFound("V", [], None)
+        def list(self, *a, **k): raise yta._errors.RequestBlocked("V")
+    monkeypatch.setattr(yc, "_transcript_api", lambda: FakeApi())
+    monkeypatch.setattr(yc, "_ytdlp_transcript", lambda vid: "[00:00](x) recovered")
+    body, status = yc.extract_transcript("V")
+    assert status == "ok"
+    assert "recovered" in body
+
+
+def test_extract_transcript_inner_block_ytdlp_empty(monkeypatch):
+    # M2: blocked in inner branch and yt-dlp yields nothing -> "blocked", not "none_found".
+    import youtube_transcript_api as yta
+
+    class FakeApi:
+        def fetch(self, *a, **k): raise yta._errors.NoTranscriptFound("V", [], None)
+        def list(self, *a, **k): raise yta._errors.RequestBlocked("V")
+    monkeypatch.setattr(yc, "_transcript_api", lambda: FakeApi())
+    monkeypatch.setattr(yc, "_ytdlp_transcript", lambda vid: "")
+    body, status = yc.extract_transcript("V")
+    assert body == "" and status == "blocked"
+
+
 def test_run_collects_and_removes_only_with_transcript(tmp_path, monkeypatch):
     # one tech playlist, two videos: one with transcript (removed), one without (kept)
     monkeypatch.setattr(yc.cy, "INBOX", tmp_path)

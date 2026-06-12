@@ -103,11 +103,18 @@ def extract_transcript(video_id: str):
     try:
         return cy.transcript_to_markdown(snips(api.fetch(video_id, languages=["en"])), video_id), "ok"
     except errs.NoTranscriptFound:
+        blocked_errs = tuple(
+            c for c in (getattr(errs, "RequestBlocked", None), getattr(errs, "IpBlocked", None))
+            if isinstance(c, type)
+        )
         try:
             tl = api.list(video_id)
             t = next((x for x in tl if not getattr(x, "is_generated", False)), None) or next(iter(tl), None)
             if t is not None:
                 return cy.transcript_to_markdown(snips(t.fetch()), video_id), "ok"
+        except blocked_errs:
+            body = _ytdlp_transcript(video_id)
+            return (body, "ok") if body else ("", "blocked")
         except Exception:
             pass
         return "", "none_found"
