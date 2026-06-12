@@ -1,4 +1,4 @@
-# CLAUDE.md — LLM Corpus Schema (v0.6)
+# CLAUDE.md — LLM Corpus Schema (v0.7)
 
 You are the maintainer of a personal knowledge corpus inspired by Karpathy's LLM-Wiki pattern. **This file is your operating manual. Read it fully before any corpus operation.** When the user invokes you in this directory, your first action is to (re)read this file, then `corpus/_index.md`, `corpus/_domains.md`, and `corpus/_config.md`.
 
@@ -50,6 +50,8 @@ Three layers:
 > **No other changes to source files are permitted:** no body edits, no other frontmatter keys, no renames, no moves.
 
 > **Inbox-move exception.** After completing an ingest of a file from `raw/_inbox/`, you may move (not copy, not edit) that file to the appropriate `raw/<channel>/` subfolder per §8.1 step 10A. This is the only write outside `corpus/` permitted beyond the stamp exception.
+
+> **Vault-removal exception (v0.7).** After a vault source note's content has been collected into `raw/` and that raw source is confirmed `corpus_ingested`, the `collect-obsidian` reaper may delete the original vault note (or strike a processed URL from a vault list file). This is the only deletion of a source file permitted; it applies only to the configured `vault_root` paths, is gated on `corpus_ingested`, and is recoverable from the vault's own git history. The reaper stages (`git rm`) but never commits the vault.
 
 If a query result is worth keeping, save it as a corpus page; do not write to `01_Projects/`, `02_Areas/`, or anywhere else in the user's vault.
 
@@ -411,6 +413,7 @@ These are the patterns that erode the corpus's integrity. If you catch yourself 
 - **An ingest about to touch 20+ pages** → pause, ask user; this is invasive and may indicate bad routing.
 - **Filing a claim with no source** → either find the source, mark `[unsourced]`, or don't write the claim.
 - **Creating a domain with <3 sources without provisional flag** → fold into a page within an existing domain instead.
+- **Deleting a vault note before its raw source is `corpus_ingested`** → stop; re-read the §2 vault-removal exception.
 
 ---
 
@@ -434,4 +437,5 @@ Pages are **dense reference**, not blog posts.
 - v0.4 — §4 formalized `provisional` as optional frontmatter field on hub pages
 - v0.5 — §2 narrow write exception for source stamping (3 fields only); §8.1 PARA-native ingest path (in-place, no raw/ copy); §4 structured `sources:` field; §6 citation format for PARA-native paths; §9 collision rule for re-ingest guard; new `corpus/_config.md`. Rationale: eliminate duplication between `raw/<channel>/` and PARA folders for files with a canonical PARA home.
 - v0.6 — §8.1 optimized cluster-based batch-ingest pipeline (Phase 0–5: pre-flight → survey/cluster → global entity registry → per-cluster ingest → integrate → verify) with the Coordinator-owns-shared-files rule for parallel per-domain workers; §4 + new §7.1 v2 claim-lifecycle (`confidence`, `last_confirmed`, `supersedes`/`superseded_by`, contradiction-on-write, typed relationships). Rationale: scale ingest past ~10 heterogeneous sources without structural drift, and manage claim staleness/disagreement over time. Grounded in deep research on Karpathy's LLM-wiki pattern (+ rohitg00 v2), MOC/Zettelkasten/PARA architecture, and large-batch entity-resolution & multi-agent-orchestration best practices (filed in `docs/research/2026-06-11-llm-wiki-ingest-best-practices.md`).
+- v0.7 — §2 vault-removal exception for the collect-obsidian reaper (gated on `corpus_ingested`; vault git-recoverable; never auto-commits); §13 failure-mode bullet. Rationale: let the Obsidian vault be decluttered as its knowledge lands in the corpus.
 - Co-evolve with user. Bump version + log entry on every change.

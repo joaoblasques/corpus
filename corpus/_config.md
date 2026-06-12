@@ -55,3 +55,12 @@ Rules:
 | `email` | `raw/email/` (collected via `/collect-email`) | — |
 
 **Email collection**: starred Gmail messages are captured by the `/collect-email` skill into `raw/_inbox/` (channel `email`), then routed to `raw/email/` by the normal Branch A ingest flow. The skill writes a `gmail_message_id` frontmatter field used for dedup; it is not part of the §2 source-stamp spec.
+
+---
+
+## Obsidian vault collection (collect-obsidian)
+
+- `vault_root`: `/Users/jonasblasques/Dev/second-brain`
+- **Include:** `03_Resources/{Articles, Books, Study Notes, Snippets, Prompt Templates}`, `00_Inbox/Clippings/`.
+- **Exclude:** `03_Resources/llm-wiki-system` (corpus mirror), `01_Projects`, `02_Areas`, `04_Archive`, rest of `00_Inbox`, `*_processed.md`, `README.md`, binaries.
+- The `/collect-obsidian` skill copies these into `raw/_inbox/` (channel `notes`; URL-list links → `web`), and — after `corpus_ingested` — removes the vault original (git-recoverable, not auto-committed). The authoritative include/exclude policy lives in `bin/collect_obsidian.py`.
