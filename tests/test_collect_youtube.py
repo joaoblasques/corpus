@@ -75,3 +75,40 @@ def test_dedup_vtt_strips_tags_and_rolling_dups():
     snips = cy.dedup_vtt(vtt)
     assert [s["text"] for s in snips] == ["hello there", "next line"]
     assert snips[0]["start"] == 0 and snips[1]["start"] == 4
+
+
+def test_target_filename(tmp_path):
+    p = cy.target_filename("VID123", "My Talk!", tmp_path)
+    assert p.name == "youtube-VID123-my-talk.md"
+
+
+def test_build_document_frontmatter():
+    doc = cy.build_document({
+        "video_id": "VID123", "title": "My: Talk", "channel_name": "Chan",
+        "published": "2026-06-01", "playlist": "AI", "transcript_status": "ok",
+        "collected_at": "2026-06-12",
+    }, "[00:00](https://youtu.be/VID123?t=0) hi")
+    assert "channel: youtube" in doc
+    assert "youtube_video_id: VID123" in doc
+    assert "url: https://youtu.be/VID123" in doc
+    assert 'title: "My: Talk"' in doc
+    assert "transcript_status: ok" in doc
+    assert doc.rstrip().endswith("hi")
+
+
+def test_build_document_no_transcript_note():
+    doc = cy.build_document({
+        "video_id": "V", "title": "T", "channel_name": "", "published": "",
+        "playlist": "AI", "transcript_status": "disabled", "collected_at": "2026-06-12",
+    }, "")
+    assert "_No transcript available._" in doc
+
+
+def test_already_collected_and_status(tmp_path):
+    d = tmp_path / "inbox"; d.mkdir()
+    (d / "youtube-VID9-x.md").write_text(
+        "---\nyoutube_video_id: VID9\ntranscript_status: ok\n---\nbody\n", encoding="utf-8")
+    assert cy.already_collected("VID9", [d]) is True
+    assert cy.already_collected("NOPE", [d]) is False
+    assert cy.collected_status("VID9", [d]) == "ok"
+    assert cy.collected_status("NOPE", [d]) is None

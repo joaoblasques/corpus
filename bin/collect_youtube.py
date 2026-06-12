@@ -114,3 +114,56 @@ def dedup_vtt(vtt_text: str) -> list:
             buf.append(line)
     flush()
     return snippets
+
+
+def target_filename(video_id: str, title: str, base=None) -> Path:
+    base = base if base is not None else INBOX
+    return base / f"youtube-{video_id}-{slugify(title)}.md"
+
+
+def build_document(meta: dict, body: str) -> str:
+    lines = [
+        "---",
+        "channel: youtube",
+        "source: youtube",
+        f"youtube_video_id: {meta['video_id']}",
+        f"url: https://youtu.be/{meta['video_id']}",
+        f"title: {yaml_scalar(meta['title'])}",
+        f"channel_name: {yaml_scalar(meta.get('channel_name', ''))}",
+        f"published: {meta.get('published', '')}",
+        f"playlist: {yaml_scalar(meta.get('playlist', ''))}",
+        f"transcript_status: {meta['transcript_status']}",
+        f"collected_at: {meta['collected_at']}",
+        "---",
+        "",
+        body.strip() if body and body.strip() else "_No transcript available._",
+        "",
+    ]
+    return "\n".join(lines)
+
+
+def _scan(video_id, dirs):
+    needle = f"youtube_video_id: {video_id}\n"
+    for d in (dirs if dirs is not None else DEDUP_DIRS):
+        if not Path(d).exists():
+            continue
+        for md in Path(d).glob("*.md"):
+            try:
+                t = md.read_text(encoding="utf-8")
+            except (OSError, UnicodeDecodeError):
+                continue
+            if needle in t:
+                return t
+    return None
+
+
+def already_collected(video_id: str, dirs=None) -> bool:
+    return _scan(video_id, dirs) is not None
+
+
+def collected_status(video_id: str, dirs=None):
+    t = _scan(video_id, dirs)
+    if t is None:
+        return None
+    m = re.search(r"^transcript_status:\s*(\S+)", t, re.M)
+    return m.group(1) if m else None
