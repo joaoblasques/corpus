@@ -45,3 +45,30 @@ def test_read_note_no_frontmatter_uses_stem(tmp_path):
     f.write_text("plain body", encoding="utf-8")
     title, tags, body = co.read_note(str(f))
     assert title == "Just A Note" and tags == [] and body.strip() == "plain body"
+
+
+def test_note_filename(tmp_path):
+    p = co.note_filename("03_Resources/Articles/Clean Code!.md", tmp_path)
+    assert p.name == "notes-clean-code.md"
+
+
+def test_build_note_source():
+    doc = co.build_note_source(
+        {"vault_origin": "03_Resources/Articles/Clean Code.md", "title": "Clean: Code",
+         "tags": ["python"], "collected_at": "2026-06-12"}, "Body text.")
+    assert "channel: notes" in doc
+    assert "source: obsidian" in doc
+    assert "vault_origin: 03_Resources/Articles/Clean Code.md" in doc
+    assert 'title: "Clean: Code"' in doc
+    assert "  - python" in doc
+    assert doc.rstrip().endswith("Body text.")
+
+
+def test_build_url_source():
+    doc = co.build_url_source(
+        {"source_url": "https://a.com/x", "via_vault_list": "00_Inbox/Clippings/articles to process.md",
+         "title": "A", "collected_at": "2026-06-12"}, "Article body")
+    assert "channel: web" in doc
+    assert "source_url: https://a.com/x" in doc
+    assert "via_vault_list: 00_Inbox/Clippings/articles to process.md" in doc
+    assert doc.rstrip().endswith("Article body")

@@ -71,3 +71,41 @@ def read_note(abs_path: str):
     if not title:
         title = Path(abs_path).stem
     return title, tags, body
+
+
+def note_filename(rel_path: str, base=None) -> Path:
+    base = base if base is not None else INBOX
+    stem = rel_path.rsplit("/", 1)[-1]
+    if stem.endswith(".md"):
+        stem = stem[:-3]
+    return base / f"notes-{slugify(stem)}.md"
+
+
+def url_filename(url: str, title: str, base=None) -> Path:
+    base = base if base is not None else INBOX
+    return base / f"web-{slugify(title or url)}.md"
+
+
+def build_note_source(meta: dict, body: str) -> str:
+    lines = [
+        "---", "channel: notes", "source: obsidian",
+        f"vault_origin: {meta['vault_origin']}",
+        f"title: {yaml_scalar(meta.get('title', ''))}",
+    ]
+    tags = meta.get("tags") or []
+    if tags:
+        lines.append("tags:")
+        lines += [f"  - {t}" for t in tags]
+    lines += [f"collected_at: {meta['collected_at']}", "---", "", body.strip(), ""]
+    return "\n".join(lines)
+
+
+def build_url_source(meta: dict, body: str) -> str:
+    lines = [
+        "---", "channel: web", "source: obsidian-list",
+        f"source_url: {meta['source_url']}",
+        f"via_vault_list: {meta['via_vault_list']}",
+        f"title: {yaml_scalar(meta.get('title', ''))}",
+        f"collected_at: {meta['collected_at']}", "---", "", body.strip(), "",
+    ]
+    return "\n".join(lines)
