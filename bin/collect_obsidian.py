@@ -144,3 +144,36 @@ def already_collected_vault(rel_path: str, dirs=None) -> bool:
 def url_already_collected(url: str, dirs=None) -> bool:
     needle = f"source_url: {url}\n"
     return any(needle in t for _, t in _raw_sources(dirs))
+
+
+def discover(vault_root=None, dedup_dirs=None) -> list:
+    root = Path(vault_root) if vault_root else VAULT_ROOT
+    out = []
+    for inc in INCLUDE_DIRS:
+        base = root / inc
+        if not base.exists():
+            continue
+        for f in sorted(base.rglob("*.md")):
+            rel = str(f.relative_to(root))
+            if not is_included(rel):
+                continue
+            if is_vault_note_ingested(str(f)):
+                continue
+            if already_collected_vault(rel, dedup_dirs):
+                continue
+            out.append({"rel_path": rel, "abs_path": str(f), "kind": classify(rel)})
+    return out
+
+
+def reapable(dedup_dirs=None) -> dict:
+    notes, url_strikes = [], []
+    for _, t in _raw_sources(dedup_dirs):
+        if "corpus_ingested: true" not in t:
+            continue
+        vo = fm_field(t, "vault_origin")
+        if vo:
+            notes.append(vo)
+        vl, su = fm_field(t, "via_vault_list"), fm_field(t, "source_url")
+        if vl and su:
+            url_strikes.append((vl, su))
+    return {"vault_notes": notes, "url_strikes": url_strikes}

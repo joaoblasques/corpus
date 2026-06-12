@@ -98,3 +98,46 @@ def test_url_already_collected(tmp_path):
     (d / "web-x.md").write_text("---\nsource_url: https://a.com/x\n---\n", encoding="utf-8")
     assert co.url_already_collected("https://a.com/x", [d]) is True
     assert co.url_already_collected("https://a.com/z", [d]) is False
+
+
+def _vault(tmp_path):
+    v = tmp_path / "vault"
+    (v / "03_Resources/Articles").mkdir(parents=True)
+    (v / "03_Resources/llm-wiki-system").mkdir(parents=True)
+    (v / "00_Inbox/Clippings").mkdir(parents=True)
+    (v / "01_Projects").mkdir(parents=True)
+    (v / "03_Resources/Articles/New.md").write_text("---\ntitle: New\n---\nbody", encoding="utf-8")
+    (v / "03_Resources/Articles/Done.md").write_text("---\ncorpus_ingested: true\n---\nx", encoding="utf-8")
+    (v / "03_Resources/llm-wiki-system/CLAUDE.md").write_text("mirror", encoding="utf-8")
+    (v / "01_Projects/task.md").write_text("task", encoding="utf-8")
+    (v / "00_Inbox/Clippings/articles to process.md").write_text("https://a.com/x\n", encoding="utf-8")
+    return v
+
+
+def test_discover_filters(tmp_path):
+    v = _vault(tmp_path)
+    found = co.discover(v, dedup_dirs=[tmp_path / "none"])
+    rels = {(d["rel_path"], d["kind"]) for d in found}
+    assert ("03_Resources/Articles/New.md", "note") in rels
+    assert ("00_Inbox/Clippings/articles to process.md", "url-list") in rels
+    assert "03_Resources/Articles/Done.md" not in {r for r, _ in rels}        # already ingested
+    assert "03_Resources/llm-wiki-system/CLAUDE.md" not in {r for r, _ in rels}  # excluded
+    assert "01_Projects/task.md" not in {r for r, _ in rels}                   # not a knowledge dir
+
+
+def test_discover_skips_already_collected(tmp_path):
+    v = _vault(tmp_path)
+    raw = tmp_path / "raw"; raw.mkdir()
+    (raw / "notes-new.md").write_text("---\nvault_origin: 03_Resources/Articles/New.md\n---\n", encoding="utf-8")
+    rels = {d["rel_path"] for d in co.discover(v, dedup_dirs=[raw])}
+    assert "03_Resources/Articles/New.md" not in rels   # already collected → skipped
+
+
+def test_reapable_selects_only_ingested(tmp_path):
+    raw = tmp_path / "raw"; raw.mkdir()
+    (raw / "notes-a.md").write_text("---\ncorpus_ingested: true\nvault_origin: 03_Resources/Articles/A.md\n---\n", encoding="utf-8")
+    (raw / "notes-b.md").write_text("---\nvault_origin: 03_Resources/Articles/B.md\n---\n", encoding="utf-8")  # NOT ingested
+    (raw / "web-u.md").write_text("---\ncorpus_ingested: true\nvia_vault_list: 00_Inbox/Clippings/articles to process.md\nsource_url: https://a.com/x\n---\n", encoding="utf-8")
+    r = co.reapable([raw])
+    assert r["vault_notes"] == ["03_Resources/Articles/A.md"]                 # B excluded (not ingested)
+    assert r["url_strikes"] == [("00_Inbox/Clippings/articles to process.md", "https://a.com/x")]
