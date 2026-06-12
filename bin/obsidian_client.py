@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import datetime
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -91,11 +92,23 @@ def _strike_url(vault_root: Path, list_rel: str, url: str) -> None:
         ledger.write_text(prev + url + "\n", encoding="utf-8")
 
 
+def _under_vault(vault: Path, rel: str) -> bool:
+    """Defense-in-depth: reject traversal / absolute paths escaping the vault."""
+    if os.path.isabs(rel) or ".." in os.path.normpath(rel).split(os.sep):
+        return False
+    try:
+        return (vault / rel).resolve().is_relative_to(vault.resolve())
+    except (OSError, ValueError):
+        return False
+
+
 def cmd_reap(args) -> int:
     vault = Path(args.vault) if args.vault else co.VAULT_ROOT
     r = co.reapable()
     t = {"notes_removed": 0, "urls_struck": 0}
     for rel in r["vault_notes"]:
+        if not _under_vault(vault, rel):
+            continue
         if (vault / rel).exists() and not args.dry_run:
             git_rm(vault, rel)
             t["notes_removed"] += 1

@@ -94,6 +94,22 @@ def test_strike_url_removes_prefixed_lines_and_dedups_ledger(tmp_path):
     assert ledger2.count("https://a.com/x") == 1
 
 
+def test_reap_rejects_path_traversal(tmp_path, monkeypatch):
+    vault = tmp_path / "vault"
+    (vault / "03_Resources/Articles").mkdir(parents=True)
+    # plant a target outside the vault that the traversal would resolve to
+    outside = tmp_path / "etc"; outside.mkdir()
+    (outside / "x.md").write_text("secret", encoding="utf-8")
+    raw = tmp_path / "raw"; raw.mkdir()
+    (raw / "evil.md").write_text(
+        "---\ncorpus_ingested: true\nvault_origin: ../etc/x.md\n---\n", encoding="utf-8")
+    monkeypatch.setattr(oc.co, "DEDUP_DIRS", [raw])
+    calls = []
+    monkeypatch.setattr(oc, "git_rm", lambda vault_root, rel: calls.append(rel))
+    oc.cmd_reap(oc._args(["reap", "--vault", str(vault)]))
+    assert calls == []   # traversal outside vault must never reach git_rm
+
+
 def test_reap_dry_run_changes_nothing(tmp_path, monkeypatch):
     vault = tmp_path / "vault"; (vault / "03_Resources/Articles").mkdir(parents=True)
     raw = tmp_path / "raw"; raw.mkdir()
