@@ -47,8 +47,9 @@ def cmd_collect(args) -> int:
                 t["notes"] += 1
             else:  # url-list
                 urls = co.parse_url_list(Path(d["abs_path"]).read_text(encoding="utf-8", errors="replace"))
+                ledger = Path(d["abs_path"]).parent / "articles_processed.md"
                 for url in urls:
-                    if co.url_already_collected(url):
+                    if co.url_already_collected(url) or co.url_in_ledger(url, ledger):
                         t["skipped"] += 1
                         continue
                     content = fetch_url(url)

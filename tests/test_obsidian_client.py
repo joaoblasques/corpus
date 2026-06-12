@@ -22,6 +22,29 @@ def test_collect_copies_note_and_fetches_url(tmp_path, monkeypatch):
     assert any(n.startswith("web-art") for n in files)
 
 
+def test_collect_skips_urls_in_processed_ledger(tmp_path, monkeypatch):
+    vault = tmp_path / "vault"
+    (vault / "00_Inbox/Clippings").mkdir(parents=True)
+    (vault / "00_Inbox/Clippings/articles to process.md").write_text(
+        "https://a.com/x\nhttps://b.com/y\n", encoding="utf-8")
+    # ledger already lists one url -> it must be skipped (no fetch)
+    (vault / "00_Inbox/Clippings/articles_processed.md").write_text(
+        "https://a.com/x\n", encoding="utf-8")
+    inbox = tmp_path / "inbox"; inbox.mkdir()
+    monkeypatch.setattr(oc.co, "INBOX", inbox)
+    monkeypatch.setattr(oc.co, "DEDUP_DIRS", [inbox])
+    fetched = []
+
+    def fake_fetch(url):
+        fetched.append(url)
+        return {"title": "T", "text": "body", "channel": "web"}
+
+    monkeypatch.setattr(oc, "fetch_url", fake_fetch)
+    oc.cmd_collect(oc._args(["collect", "--vault", str(vault)]))
+    assert "https://a.com/x" not in fetched   # in ledger -> skipped
+    assert "https://b.com/y" in fetched
+
+
 def test_collect_dry_run_writes_nothing(tmp_path, monkeypatch):
     vault = tmp_path / "vault"
     (vault / "03_Resources/Articles").mkdir(parents=True)

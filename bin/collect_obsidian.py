@@ -161,6 +161,15 @@ def url_already_collected(url: str, dirs=None) -> bool:
     return any(needle in t for _, t in _raw_sources(dirs))
 
 
+def url_in_ledger(url: str, ledger_path) -> bool:
+    """True if `url` appears in the per-list articles_processed.md ledger."""
+    p = Path(ledger_path)
+    try:
+        return url in p.read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return False
+
+
 def discover(vault_root=None, dedup_dirs=None) -> list:
     root = Path(vault_root) if vault_root else VAULT_ROOT
     out = []
