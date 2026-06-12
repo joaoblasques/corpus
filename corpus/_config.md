@@ -1,7 +1,7 @@
 ---
 type: config
 created: 2026-05-20
-updated: 2026-05-20
+updated: 2026-06-12
 ---
 
 # Corpus Config
@@ -55,6 +55,8 @@ Rules:
 | `email` | `raw/email/` (collected via `/collect-email`) | — |
 
 **Email collection**: starred Gmail messages are captured by the `/collect-email` skill into `raw/_inbox/` (channel `email`), then routed to `raw/email/` by the normal Branch A ingest flow. The skill writes a `gmail_message_id` frontmatter field used for dedup; it is not part of the §2 source-stamp spec.
+
+**Query intake (`via_query`)**: the `/query` operation (§8.2) tops up thin coverage by fetching web sources to answer a gap. Each fetched source is auto-queued into `raw/_inbox/` (channel `web`, or `youtube` for video URLs) carrying a `via_query` frontmatter field (the originating question) for provenance, deduped by `source_url`. These drain into the corpus on the next normal Branch-A ingest. `via_query` is collector provenance, not part of the §2 source-stamp spec.
 
 ---
 
