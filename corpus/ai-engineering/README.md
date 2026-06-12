@@ -54,6 +54,11 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 ### Sources
 - [[ai-engineering/sources/how-ai-agents-and-skills-work|How AI agents & Claude skills work]] — source · draft · Isenberg × Ras Mic; skills, progressive disclosure, less-is-more context
 
+### Cross-domain (primary home in data-engineering)
+- [[data-engineering/claude-code-for-data-engineering|Claude Code for Data Engineering]] — synthesis · AI-assisted dbt / data workflows
+- [[data-engineering/ai-observability-data-pipeline|AI Observability as a Data Pipeline]] — synthesis · LLM-eval as a data pipeline
+- [[data-engineering/agentic-data-modeling|Agentic Data Modeling]] — synthesis · AI agents for schema design & change-impact analysis
+
 ## Sources ingested
 - [[03_Resources/Articles/Context Engineering|Context Engineering]] — stub article note, 2025-10-27
 - [[03_Resources/Study Notes/AI Agents - Complete Course Beginner to Pro|AI Agents - Complete Course Beginner to Pro]] — YouTube course study note, 2026-03-16
