@@ -134,3 +134,108 @@ def _ytdlp_transcript(video_id: str) -> str:
             return cy.transcript_to_markdown(cy.dedup_vtt(Path(vtts[0]).read_text(encoding="utf-8")), video_id)
         except Exception:
             return ""
+
+
+def load_config() -> dict:
+    return cy.load_policy_config(PLAYLISTS_CFG)
+
+
+def cmd_auth(_args) -> int:
+    get_service()
+    print(json.dumps({"status": "authorized", "token": str(YT_TOKEN)}))
+    return 0
+
+
+def cmd_list_playlists(_args) -> int:
+    import yaml
+    service = get_service()
+    found = list(list_my_playlists(service))
+    cfg = load_config()
+    known = {p.get("id") for p in cfg["playlists"]}
+    for p in found:
+        if p["id"] not in known:
+            cfg["playlists"].append({"id": p["id"], "name": p["name"], "policy": "ignore"})
+    body = ("# policy per playlist: collect-remove | collect-keep | ignore\n"
+            + yaml.safe_dump({"playlists": cfg["playlists"],
+                              "default_policy": cfg.get("default_policy", "ignore")},
+                             sort_keys=False, allow_unicode=True))
+    PLAYLISTS_CFG.write_text(body, encoding="utf-8")
+    print(json.dumps({"playlists": len(found), "config": str(PLAYLISTS_CFG),
+                      "note": "set each playlist's policy, then run"}))
+    return 0
+
+
+def cmd_run(args) -> int:
+    service = get_service()
+    cfg = load_config()
+    collected_at = args.collected_at or datetime.date.today().isoformat()
+    t = {"playlists": 0, "collected": 0, "duplicate": 0, "no_transcript": 0,
+         "removed": 0, "kept": 0, "failed": 0}
+    targets = [p for p in cfg["playlists"] if p.get("policy") in ("collect-remove", "collect-keep")]
+    if args.playlist:
+        targets = [p for p in targets if p["id"] == args.playlist]
+    processed = 0
+    for pl in targets:
+        policy = pl["policy"]
+        t["playlists"] += 1
+        for item in list_playlist_items(service, pl["id"]):
+            if args.max and processed >= args.max:
+                break
+            processed += 1
+            vid = item["video_id"]
+            try:
+                if cy.already_collected(vid):
+                    t["duplicate"] += 1
+                    status = cy.collected_status(vid) or "ok"
+                else:
+                    body, status = extract_transcript(vid)
+                    meta = {"video_id": vid, "title": item["title"],
+                            "channel_name": item["channel_name"], "published": item["published"],
+                            "playlist": pl["name"], "transcript_status": status,
+                            "collected_at": collected_at}
+                    path = cy.target_filename(vid, item["title"])
+                    path.parent.mkdir(parents=True, exist_ok=True)
+                    path.write_text(cy.build_document(meta, body), encoding="utf-8")
+                    if not path.exists():
+                        t["failed"] += 1
+                        continue
+                    t["collected"] += 1
+                    if status != "ok":
+                        t["no_transcript"] += 1
+                # Safety rule: remove ONLY for collect-remove, ONLY with a transcript, never on dry-run.
+                if policy == "collect-remove" and status == "ok" and not args.dry_run:
+                    if delete_playlist_item(service, item["playlist_item_id"]):
+                        t["removed"] += 1
+                else:
+                    t["kept"] += 1
+                if args.sleep:
+                    time.sleep(args.sleep)
+            except Exception:
+                t["failed"] += 1
+    ignored = [p["name"] for p in cfg["playlists"] if p.get("policy") == "ignore"]
+    print(json.dumps({**t, "dry_run": bool(args.dry_run), "ignored_playlists": ignored}, indent=2))
+    return 0
+
+
+def _args(argv):
+    p = argparse.ArgumentParser(description="Owned-credential YouTube playlist collector.")
+    sub = p.add_subparsers(dest="cmd", required=True)
+    sub.add_parser("auth").set_defaults(func=cmd_auth)
+    sub.add_parser("list-playlists").set_defaults(func=cmd_list_playlists)
+    pr = sub.add_parser("run")
+    pr.add_argument("--dry-run", action="store_true")
+    pr.add_argument("--max", type=int, default=None)
+    pr.add_argument("--playlist", default=None)
+    pr.add_argument("--sleep", type=float, default=2.0)
+    pr.add_argument("--collected-at", default=None)
+    pr.set_defaults(func=cmd_run)
+    return p.parse_args(argv)
+
+
+def main(argv=None) -> int:
+    args = _args(argv)
+    return args.func(args)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

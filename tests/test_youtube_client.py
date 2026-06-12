@@ -55,3 +55,45 @@ def test_extract_transcript_ok(monkeypatch):
     body, status = yc.extract_transcript("VID")
     assert status == "ok"
     assert "hello" in body and "world" in body
+
+
+def test_run_collects_and_removes_only_with_transcript(tmp_path, monkeypatch):
+    # one tech playlist, two videos: one with transcript (removed), one without (kept)
+    monkeypatch.setattr(yc.cy, "INBOX", tmp_path)
+    monkeypatch.setattr(yc.cy, "DEDUP_DIRS", [tmp_path])
+    monkeypatch.setattr(yc, "load_config", lambda: {
+        "playlists": [{"id": "PL1", "name": "AI", "policy": "collect-remove"}],
+        "default_policy": "ignore"})
+    monkeypatch.setattr(yc, "get_service", lambda: "SVC")
+    monkeypatch.setattr(yc, "list_playlist_items", lambda svc, pid: iter([
+        {"playlist_item_id": "I1", "video_id": "V1", "title": "A", "channel_name": "C",
+         "published": "2026-06-01", "privacy": "public"},
+        {"playlist_item_id": "I2", "video_id": "V2", "title": "B", "channel_name": "C",
+         "published": "2026-06-01", "privacy": "public"}]))
+    monkeypatch.setattr(yc, "extract_transcript",
+                        lambda vid: ("[00:00](x) hi", "ok") if vid == "V1" else ("", "disabled"))
+    deleted = []
+    monkeypatch.setattr(yc, "delete_playlist_item", lambda svc, iid: deleted.append(iid) or True)
+
+    args = yc._args(["run", "--sleep", "0"])
+    rc = yc.cmd_run(args)
+    assert rc == 0
+    assert deleted == ["I1"]                      # only the one WITH a transcript removed
+    assert (tmp_path / "youtube-V1-a.md").exists()
+    assert (tmp_path / "youtube-V2-b.md").exists()  # kept, recorded with disabled status
+
+
+def test_run_dry_run_never_deletes(tmp_path, monkeypatch):
+    monkeypatch.setattr(yc.cy, "INBOX", tmp_path)
+    monkeypatch.setattr(yc.cy, "DEDUP_DIRS", [tmp_path])
+    monkeypatch.setattr(yc, "load_config", lambda: {
+        "playlists": [{"id": "PL1", "name": "AI", "policy": "collect-remove"}], "default_policy": "ignore"})
+    monkeypatch.setattr(yc, "get_service", lambda: "SVC")
+    monkeypatch.setattr(yc, "list_playlist_items", lambda svc, pid: iter([
+        {"playlist_item_id": "I1", "video_id": "V1", "title": "A", "channel_name": "C",
+         "published": "2026-06-01", "privacy": "public"}]))
+    monkeypatch.setattr(yc, "extract_transcript", lambda vid: ("[00:00](x) hi", "ok"))
+    deleted = []
+    monkeypatch.setattr(yc, "delete_playlist_item", lambda svc, iid: deleted.append(iid) or True)
+    rc = yc.cmd_run(yc._args(["run", "--dry-run", "--sleep", "0"]))
+    assert rc == 0 and deleted == []
