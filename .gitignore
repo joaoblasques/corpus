@@ -27,3 +27,7 @@ bin/token.json
 # Secrets / API keys — never commit
 .env
 .env.*
+
+# YouTube collector — personal token + playlist policy config
+bin/youtube_token.json
+bin/youtube_playlists.yaml
