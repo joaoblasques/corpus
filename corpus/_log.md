@@ -397,3 +397,8 @@ Out of scope for this commit (deferred):
 - new pages (4): data-engineering — data-ingestion-patterns, incremental-pipeline-design; ai-engineering — learning-ai-engineering (synthesis), web-scraping (stub).
 - updated (10): data-engineering — kafka (+share-groups/HOL-blocking), materialized-views (+IVM/DBSP), scd2 (+part-2 datestamping), idempotent-pipelines (+functional DE); ai-engineering — agent-skills, multi-agent-systems (+Grab/GenAI_Agents), context-engineering (+ktx), llm (+DiffusionGemma/Command-A), claude-code (+2.1.139), ai-agent (+agent-mode/ApplyPilot).
 - corpus now ~96 pages, 6 domains. Diminishing returns flagged: remaining backlog is largely duplicates/digests of already-covered topics.
+
+## [2026-06-12] schema | v0.6 → v0.7 — collect-obsidian vault-removal exception
+
+- §2 vault-removal exception (the collect-obsidian reaper may delete a vault source after its raw copy is `corpus_ingested`; gated, git-recoverable, never auto-commits); §13 failure-mode bullet; §15 version entry; `_config.md` vault_root + scope.
+- Enables the third collector (`collect-obsidian`): copy reference-layer vault notes to raw/_inbox, fetch URL-list links, ingest, then reap originals.
