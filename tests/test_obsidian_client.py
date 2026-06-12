@@ -53,6 +53,24 @@ def test_reap_removes_only_ingested(tmp_path, monkeypatch):
     assert "https://a.com/x" in (listf / "articles_processed.md").read_text()      # appended to ledger
 
 
+def test_strike_url_removes_prefixed_lines_and_dedups_ledger(tmp_path):
+    listf = tmp_path / "articles to process.md"
+    listf.write_text("- https://a.com/x\nhttps://b.com/y.\n", encoding="utf-8")
+    # strike each url; the list lines carry `- ` prefix / trailing `.`
+    oc._strike_url(tmp_path, "articles to process.md", "https://a.com/x")
+    oc._strike_url(tmp_path, "articles to process.md", "https://b.com/y")
+    remaining = listf.read_text()
+    assert "https://a.com/x" not in remaining
+    assert "https://b.com/y" not in remaining
+    ledger = (tmp_path / "articles_processed.md").read_text()
+    assert ledger.count("https://a.com/x") == 1
+    assert ledger.count("https://b.com/y") == 1
+    # idempotent: calling again for an already-struck url does not double-append
+    oc._strike_url(tmp_path, "articles to process.md", "https://a.com/x")
+    ledger2 = (tmp_path / "articles_processed.md").read_text()
+    assert ledger2.count("https://a.com/x") == 1
+
+
 def test_reap_dry_run_changes_nothing(tmp_path, monkeypatch):
     vault = tmp_path / "vault"; (vault / "03_Resources/Articles").mkdir(parents=True)
     raw = tmp_path / "raw"; raw.mkdir()

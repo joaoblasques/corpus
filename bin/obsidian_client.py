@@ -78,11 +78,16 @@ def git_rm(vault_root: Path, rel_path: str) -> None:
 def _strike_url(vault_root: Path, list_rel: str, url: str) -> None:
     listf = vault_root / list_rel
     if listf.exists():
-        lines = [ln for ln in listf.read_text(encoding="utf-8").splitlines() if ln.strip() != url]
-        listf.write_text("\n".join(lines) + "\n", encoding="utf-8")
+        original = listf.read_text(encoding="utf-8").splitlines()
+        # List lines often carry a `- ` prefix or trailing punctuation, so the
+        # cleaned url won't match exactly — strike any line that CONTAINS it.
+        kept = [ln for ln in original if url not in ln]
+        if len(kept) != len(original):  # only rewrite if something was removed
+            listf.write_text("\n".join(kept) + "\n", encoding="utf-8")
     ledger = listf.parent / "articles_processed.md"
     prev = ledger.read_text(encoding="utf-8") if ledger.exists() else ""
-    ledger.write_text(prev + url + "\n", encoding="utf-8")
+    if url not in prev:  # don't double-append on repeated reap
+        ledger.write_text(prev + url + "\n", encoding="utf-8")
 
 
 def cmd_reap(args) -> int:
