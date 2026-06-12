@@ -30,3 +30,33 @@ def test_load_policy_config_parses(tmp_path):
     cfg = cy.load_policy_config(p)
     assert cfg["playlists"][0]["id"] == "PL1"
     assert cy.resolve_policy("PL1", cfg) == "collect-remove"
+
+
+def test_hms():
+    assert cy.hms(65) == "01:05"
+    assert cy.hms(3725) == "01:02:05"
+
+
+def test_ts_anchor():
+    assert cy.ts_anchor(90, "abc123") == "[01:30](https://youtu.be/abc123?t=90)"
+
+
+def test_clean_snippets_drops_empty_dups_and_noise():
+    snips = [{"start": 0, "text": "Hello"}, {"start": 2, "text": "Hello"},
+             {"start": 4, "text": "[Music]"}, {"start": 6, "text": " World \n"}]
+    out = cy.clean_snippets(snips)
+    assert [s["text"] for s in out] == ["Hello", "World"]
+
+
+def test_group_snippets_windows():
+    snips = [{"start": 0, "text": "a"}, {"start": 10, "text": "b"}, {"start": 30, "text": "c"}]
+    groups = cy.group_snippets(snips, window=25)
+    assert [g["texts"] for g in groups] == [["a", "b"], ["c"]]
+    assert groups[1]["start"] == 30
+
+
+def test_transcript_to_markdown():
+    snips = [{"start": 0, "text": "intro"}, {"start": 30, "text": "next"}]
+    md = cy.transcript_to_markdown(snips, "vid", window=25)
+    assert "[00:00](https://youtu.be/vid?t=0) intro" in md
+    assert "[00:30](https://youtu.be/vid?t=30) next" in md

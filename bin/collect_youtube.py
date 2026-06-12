@@ -37,3 +37,49 @@ def resolve_policy(playlist_id: str, config: dict) -> str:
         if pl.get("id") == playlist_id:
             return pl.get("policy", "ignore")
     return config.get("default_policy", "ignore")
+
+
+NOISE_RE = re.compile(r"\[(music|applause|laughter|inaudible)\]", re.I)
+
+
+def hms(seconds) -> str:
+    seconds = int(seconds)
+    h, rem = divmod(seconds, 3600)
+    m, s = divmod(rem, 60)
+    return f"{h:02d}:{m:02d}:{s:02d}" if h else f"{m:02d}:{s:02d}"
+
+
+def ts_anchor(seconds, video_id) -> str:
+    return f"[{hms(seconds)}](https://youtu.be/{video_id}?t={int(seconds)})"
+
+
+def clean_snippets(snippets: list) -> list:
+    """Drop empties, strip noise markers, collapse whitespace, drop consecutive dups."""
+    out, prev = [], None
+    for s in snippets:
+        text = NOISE_RE.sub("", s.get("text") or "").replace("\n", " ")
+        text = re.sub(r"\s+", " ", text).strip()
+        if not text or text == prev:
+            continue
+        prev = text
+        out.append({"start": float(s.get("start", 0)), "text": text})
+    return out
+
+
+def group_snippets(snippets: list, window: int = 25) -> list:
+    """Group cleaned snippets into ~window-second paragraphs, anchored by first start."""
+    groups, cur = [], None
+    for s in snippets:
+        if cur is None or s["start"] - cur["start"] >= window:
+            cur = {"start": s["start"], "texts": [s["text"]]}
+            groups.append(cur)
+        else:
+            cur["texts"].append(s["text"])
+    return groups
+
+
+def transcript_to_markdown(snippets: list, video_id: str, window: int = 25) -> str:
+    groups = group_snippets(clean_snippets(snippets), window)
+    return "\n\n".join(
+        f"{ts_anchor(g['start'], video_id)} {' '.join(g['texts'])}" for g in groups
+    )
