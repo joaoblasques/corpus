@@ -186,7 +186,7 @@ def cmd_run(args) -> int:
             try:
                 if cy.already_collected(vid):
                     t["duplicate"] += 1
-                    status = cy.collected_status(vid) or "ok"
+                    status = cy.collected_status(vid) or "unknown"
                 else:
                     body, status = extract_transcript(vid)
                     meta = {"video_id": vid, "title": item["title"],

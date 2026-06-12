@@ -83,6 +83,27 @@ def test_run_collects_and_removes_only_with_transcript(tmp_path, monkeypatch):
     assert (tmp_path / "youtube-V2-b.md").exists()  # kept, recorded with disabled status
 
 
+def test_run_unknown_status_duplicate_not_removed(tmp_path, monkeypatch):
+    # C1: a prior file matches the dedup needle but has NO transcript_status line.
+    # collected_status -> None; the delete guard must fail closed (not delete).
+    monkeypatch.setattr(yc.cy, "INBOX", tmp_path)
+    monkeypatch.setattr(yc.cy, "DEDUP_DIRS", [tmp_path])
+    (tmp_path / "youtube-V1-a.md").write_text(
+        "---\nyoutube_video_id: V1\n---\n\nbody\n", encoding="utf-8")
+    monkeypatch.setattr(yc, "load_config", lambda: {
+        "playlists": [{"id": "PL1", "name": "AI", "policy": "collect-remove"}],
+        "default_policy": "ignore"})
+    monkeypatch.setattr(yc, "get_service", lambda: "SVC")
+    monkeypatch.setattr(yc, "list_playlist_items", lambda svc, pid: iter([
+        {"playlist_item_id": "I1", "video_id": "V1", "title": "A", "channel_name": "C",
+         "published": "2026-06-01", "privacy": "public"}]))
+    deleted = []
+    monkeypatch.setattr(yc, "delete_playlist_item", lambda svc, iid: deleted.append(iid) or True)
+    rc = yc.cmd_run(yc._args(["run", "--sleep", "0"]))
+    assert rc == 0
+    assert deleted == []  # unknown-status duplicate must NOT be removed
+
+
 def test_run_dry_run_never_deletes(tmp_path, monkeypatch):
     monkeypatch.setattr(yc.cy, "INBOX", tmp_path)
     monkeypatch.setattr(yc.cy, "DEDUP_DIRS", [tmp_path])
