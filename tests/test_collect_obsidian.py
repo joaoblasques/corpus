@@ -23,3 +23,25 @@ def test_classify():
     assert co.classify("00_Inbox/Clippings/articles to process.md") == "url-list"
     assert co.classify("00_Inbox/Clippings/TO SCRAPE.md") == "url-list"
     assert co.classify("03_Resources/Articles/Clean Code.md") == "note"
+
+
+def test_parse_url_list():
+    text = "\nhttps://a.com/x\n\nsome prose\nhttps://b.com/y?z=1\nhttps://a.com/x\n"
+    assert co.parse_url_list(text) == ["https://a.com/x", "https://b.com/y?z=1"]
+
+
+def test_read_note_extracts_title_tags_body(tmp_path):
+    f = tmp_path / "n.md"
+    f.write_text("---\ntitle: \"Clean Code\"\ntags:\n  - python\n  - clean-code\n---\n\nBody line.\n",
+                 encoding="utf-8")
+    title, tags, body = co.read_note(str(f))
+    assert title == "Clean Code"
+    assert tags == ["python", "clean-code"]
+    assert body.strip() == "Body line."
+
+
+def test_read_note_no_frontmatter_uses_stem(tmp_path):
+    f = tmp_path / "Just A Note.md"
+    f.write_text("plain body", encoding="utf-8")
+    title, tags, body = co.read_note(str(f))
+    assert title == "Just A Note" and tags == [] and body.strip() == "plain body"

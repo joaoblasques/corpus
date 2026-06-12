@@ -42,3 +42,32 @@ def is_included(rel_path: str) -> bool:
 
 def classify(rel_path: str) -> str:
     return "url-list" if rel_path.rsplit("/", 1)[-1] in URL_LIST_NAMES else "note"
+
+
+def parse_url_list(text: str) -> list:
+    seen, out = set(), []
+    for m in URL_RE.finditer(text or ""):
+        u = m.group(0).rstrip(".,)")
+        if u not in seen:
+            seen.add(u)
+            out.append(u)
+    return out
+
+
+def read_note(abs_path: str):
+    """Return (title, tags, body) — splits the note's own frontmatter off the body."""
+    t = Path(abs_path).read_text(encoding="utf-8", errors="replace")
+    title, tags, body = "", [], t
+    if t.startswith("---"):
+        end = t.find("\n---", 3)
+        if end != -1:
+            fm, body = t[3:end], t[end + 4:].lstrip("\n")
+            tm = re.search(r"^title:\s*(.+)$", fm, re.M)
+            if tm:
+                title = tm.group(1).strip().strip('"')
+            tg = re.search(r"^tags:\s*\n((?:\s*-\s*.+\n?)+)", fm, re.M)
+            if tg:
+                tags = [re.sub(r"^\s*-\s*", "", ln).strip() for ln in tg.group(1).splitlines() if ln.strip()]
+    if not title:
+        title = Path(abs_path).stem
+    return title, tags, body
