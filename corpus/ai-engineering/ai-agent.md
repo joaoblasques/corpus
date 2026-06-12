@@ -45,7 +45,6 @@ aliases:
   - LLM agent
   - agent mode
   - autonomous agent
-  - agent harness
   - agent OS
 tags:
   - corpus/ai-engineering

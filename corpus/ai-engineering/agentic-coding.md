@@ -114,6 +114,7 @@ An open tension McKinney raises: if seniors no longer write much code (he review
 - [[ai-engineering/context-engineering|Context Engineering]] — supply unique workflow, not general knowledge
 - [[ai-engineering/mcp|MCP]] — connecting agents to external systems
 - [[ai-engineering/ai-agent|AI Agent]] — the ReAct loop and agent fundamentals
+- [[software-engineering/ai-assisted-development|AI-Assisted Development]] (software-engineering) — the software-craft counterpart: fundamentals, the write→review shift, deterministic guardrails
 - [[ai-engineering/README|AI Engineering hub]]
 
 ---

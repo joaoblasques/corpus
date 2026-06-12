@@ -68,6 +68,7 @@ This mirrors the architectural argument that AI risk is bounded by the system, n
 
 ## See also
 
+- [[ai-engineering/agentic-coding|Agentic Coding]] (ai-engineering) — the agent-orchestration counterpart: coding-agent harness, skills, and workflow mechanics
 - [[software-engineering/ai-risk-architecture|AI Risk Architecture]] — pairing probabilistic components with deterministic checks at the system level
 - [[software-engineering/software-design-principles|Software Design Principles]] — deep modules, simplicity, and testability that AI coding stresses
 - [[software-engineering/engineering-craft|Engineering Craft]] — the durable human skills (resourcefulness, persistence) under AI

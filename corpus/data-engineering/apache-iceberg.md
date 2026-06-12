@@ -16,8 +16,6 @@ aliases:
   - Apache Iceberg
   - Iceberg
   - iceberg
-  - open table format
-  - OTF
 tags:
   - corpus/data-engineering
   - entity
