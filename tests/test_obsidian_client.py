@@ -31,3 +31,34 @@ def test_collect_dry_run_writes_nothing(tmp_path, monkeypatch):
     monkeypatch.setattr(oc.co, "DEDUP_DIRS", [inbox])
     oc.cmd_collect(oc._args(["collect", "--vault", str(vault), "--dry-run"]))
     assert list(inbox.glob("*.md")) == []
+
+
+def test_reap_removes_only_ingested(tmp_path, monkeypatch):
+    vault = tmp_path / "vault"
+    (vault / "03_Resources/Articles").mkdir(parents=True)
+    note = vault / "03_Resources/Articles/A.md"; note.write_text("x", encoding="utf-8")
+    listf = vault / "00_Inbox/Clippings"; listf.mkdir(parents=True)
+    (listf / "articles to process.md").write_text("https://a.com/x\nhttps://b.com/y\n", encoding="utf-8")
+    raw = tmp_path / "raw"; raw.mkdir()
+    (raw / "notes-a.md").write_text("---\ncorpus_ingested: true\nvault_origin: 03_Resources/Articles/A.md\n---\n", encoding="utf-8")
+    (raw / "web-x.md").write_text("---\ncorpus_ingested: true\nvia_vault_list: 00_Inbox/Clippings/articles to process.md\nsource_url: https://a.com/x\n---\n", encoding="utf-8")
+    monkeypatch.setattr(oc.co, "DEDUP_DIRS", [raw])
+    calls = []
+    monkeypatch.setattr(oc, "git_rm", lambda vault_root, rel: calls.append(rel))
+    rc = oc.cmd_reap(oc._args(["reap", "--vault", str(vault)]))
+    assert rc == 0
+    assert calls == ["03_Resources/Articles/A.md"]                       # note staged for deletion
+    remaining = (listf / "articles to process.md").read_text()
+    assert "https://a.com/x" not in remaining and "https://b.com/y" in remaining  # processed URL struck
+    assert "https://a.com/x" in (listf / "articles_processed.md").read_text()      # appended to ledger
+
+
+def test_reap_dry_run_changes_nothing(tmp_path, monkeypatch):
+    vault = tmp_path / "vault"; (vault / "03_Resources/Articles").mkdir(parents=True)
+    raw = tmp_path / "raw"; raw.mkdir()
+    (raw / "notes-a.md").write_text("---\ncorpus_ingested: true\nvault_origin: 03_Resources/Articles/A.md\n---\n", encoding="utf-8")
+    monkeypatch.setattr(oc.co, "DEDUP_DIRS", [raw])
+    calls = []
+    monkeypatch.setattr(oc, "git_rm", lambda vault_root, rel: calls.append(rel))
+    oc.cmd_reap(oc._args(["reap", "--vault", str(vault), "--dry-run"]))
+    assert calls == []

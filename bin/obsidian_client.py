@@ -69,6 +69,42 @@ def cmd_collect(args) -> int:
     return 0
 
 
+def git_rm(vault_root: Path, rel_path: str) -> None:
+    """Stage a deletion in the vault (recoverable; NOT committed)."""
+    subprocess.run(["git", "-C", str(vault_root), "rm", "--quiet", rel_path],
+                   capture_output=True, check=False)
+
+
+def _strike_url(vault_root: Path, list_rel: str, url: str) -> None:
+    listf = vault_root / list_rel
+    if listf.exists():
+        lines = [ln for ln in listf.read_text(encoding="utf-8").splitlines() if ln.strip() != url]
+        listf.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    ledger = listf.parent / "articles_processed.md"
+    prev = ledger.read_text(encoding="utf-8") if ledger.exists() else ""
+    ledger.write_text(prev + url + "\n", encoding="utf-8")
+
+
+def cmd_reap(args) -> int:
+    vault = Path(args.vault) if args.vault else co.VAULT_ROOT
+    r = co.reapable()
+    t = {"notes_removed": 0, "urls_struck": 0}
+    for rel in r["vault_notes"]:
+        if (vault / rel).exists() and not args.dry_run:
+            git_rm(vault, rel)
+            t["notes_removed"] += 1
+        elif args.dry_run and (vault / rel).exists():
+            t["notes_removed"] += 1
+    for list_rel, url in r["url_strikes"]:
+        if not args.dry_run:
+            _strike_url(vault, list_rel, url)
+        t["urls_struck"] += 1
+    print(json.dumps({**t, "dry_run": bool(args.dry_run),
+                      "note": "vault deletions are staged, not committed — review and commit in the vault"},
+                     indent=2))
+    return 0
+
+
 def _args(argv):
     p = argparse.ArgumentParser(description="Obsidian vault → corpus collector.")
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -78,6 +114,10 @@ def _args(argv):
     pc.add_argument("--max", type=int, default=None)
     pc.add_argument("--path", default=None)
     pc.set_defaults(func=cmd_collect)
+    pr = sub.add_parser("reap")
+    pr.add_argument("--vault", default=None)
+    pr.add_argument("--dry-run", action="store_true")
+    pr.set_defaults(func=cmd_reap)
     return p.parse_args(argv)
 
 
