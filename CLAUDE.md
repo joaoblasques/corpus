@@ -224,15 +224,18 @@ For **Branch B only**: before reading the source, check its frontmatter for `cor
 
 > **Coordinator-owns-shared-files rule (v0.6, parallel ingest).** Only the Coordinator writes the global files `corpus/_index.md`, `corpus/_log.md`, `corpus/_domains.md`, `corpus/_config.md`. Workers own **disjoint domains** (one-writer-per-domain) and return structured deltas the Coordinator serializes. A cross-domain entity page is owned by exactly one worker (its primary domain) and linked from the other domain's hub. This eliminates write conflicts by construction.
 
-### 8.2 Query
+### 8.2 Query (the `/query` operation)
 
-**Triggered by**: user asks a question.
+**Triggered by**: user asks a factual-recall question ("what did I learn about X?"). The `query` skill (`.claude/skills/query/SKILL.md`) drives this; the deterministic helper `bin/query.py` performs the mechanical I/O (queueing fetched web sources, appending gap-log entries).
 
-1. Read `corpus/_index.md` to find candidate pages.
-2. Read those pages.
-3. Synthesize an answer with inline citations to **corpus pages** (which transitively link to raw sources).
-4. If your synthesis is non-trivial — comparison, novel connection, derived insight — **offer to file it back** as a `synthesis` page. Don't save without asking.
-5. Note in the log if the query revealed gaps (concept referenced but no page, missing cross-reference, contradiction surfaced).
+1. **Retrieve** — read `corpus/_index.md` and select candidate pages by topic + `aliases` (LLM selection over the index — no separate keyword index), then read them.
+2. **Coverage gate** — if the corpus fully covers the question, answer from those pages **only**: no web fetch, no `raw/_inbox/` write, no log entry. A covered query is read-only.
+3. **Answer with provenance** — every non-trivial corpus claim carries an inline citation to the corpus page(s) it came from (§7). Never present the model's general knowledge as a corpus claim.
+4. **Gap top-up** — when coverage is thin/missing, discover up to 3 candidate URLs (WebSearch) and fetch each via `bin/query.py fetch-and-queue` (which wraps `bin/fetch_link.py`). Claims drawn from fetched sources are labelled **`[fresh — not yet in corpus]`**, visually distinct from cited corpus claims. Fetched sources are auto-queued to `raw/_inbox/` (channel `web`, `via_query` provenance), deduped by `source_url` — no per-query confirmation. A web-fetch failure (paywalled/blocked) is stated plainly; nothing is fabricated or queued for that source.
+5. **Log the gap** — a query that hits a gap appends a `query` entry to `corpus/_log.md` (via `bin/query.py log-gap`) recording the question and what the corpus did not cover.
+6. **Offer file-back** — when the answer is non-trivial/derived (drew on 2+ corpus pages or incorporated kept web top-up), **offer** to save it as a `synthesis` page. Write the page only on approval, following §3/§4 conventions and updating `_index.md`/`_log.md`. A single-page restatement is trivial — don't offer.
+
+`/query` is therefore a **third intake channel**: gap top-ups queue web sources into `raw/_inbox/` (channel `web`, marked `via_query`) that drain into the corpus on the next normal Branch-A ingest. It is an interactive session operation — not headless.
 
 ### 8.3 Lint
 
@@ -438,4 +441,5 @@ Pages are **dense reference**, not blog posts.
 - v0.5 — §2 narrow write exception for source stamping (3 fields only); §8.1 PARA-native ingest path (in-place, no raw/ copy); §4 structured `sources:` field; §6 citation format for PARA-native paths; §9 collision rule for re-ingest guard; new `corpus/_config.md`. Rationale: eliminate duplication between `raw/<channel>/` and PARA folders for files with a canonical PARA home.
 - v0.6 — §8.1 optimized cluster-based batch-ingest pipeline (Phase 0–5: pre-flight → survey/cluster → global entity registry → per-cluster ingest → integrate → verify) with the Coordinator-owns-shared-files rule for parallel per-domain workers; §4 + new §7.1 v2 claim-lifecycle (`confidence`, `last_confirmed`, `supersedes`/`superseded_by`, contradiction-on-write, typed relationships). Rationale: scale ingest past ~10 heterogeneous sources without structural drift, and manage claim staleness/disagreement over time. Grounded in deep research on Karpathy's LLM-wiki pattern (+ rohitg00 v2), MOC/Zettelkasten/PARA architecture, and large-batch entity-resolution & multi-agent-orchestration best practices (filed in `docs/research/2026-06-11-llm-wiki-ingest-best-practices.md`).
 - v0.7 — §2 vault-removal exception for the collect-obsidian reaper (gated on `corpus_ingested`; vault git-recoverable; never auto-commits); §13 failure-mode bullet. Rationale: let the Obsidian vault be decluttered as its knowledge lands in the corpus.
+- v0.8 — §8.2 operationalized into the `/query` operation: LLM index-selection retrieval, a read-only coverage gate, labelled `[fresh — not yet in corpus]` web top-up auto-queued to `raw/_inbox/` (channel `web`, `via_query`) deduped by `source_url`, gap logging, and approval-gated synthesis file-back — backed by the `query` skill + `bin/query.py` helper. Rationale: turn the thin Query stub into a trustworthy, self-feeding factual-recall loop (the Query & consumption track).
 - Co-evolve with user. Bump version + log entry on every change.

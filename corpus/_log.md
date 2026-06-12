@@ -402,3 +402,8 @@ Out of scope for this commit (deferred):
 
 - §2 vault-removal exception (the collect-obsidian reaper may delete a vault source after its raw copy is `corpus_ingested`; gated, git-recoverable, never auto-commits); §13 failure-mode bullet; §15 version entry; `_config.md` vault_root + scope.
 - Enables the third collector (`collect-obsidian`): copy reference-layer vault notes to raw/_inbox, fetch URL-list links, ingest, then reap originals.
+
+## [2026-06-12 16:30] schema | v0.8 — operationalized §8.2 /query
+- §8.2 rewritten as the `/query` operation: LLM index-selection retrieval; read-only coverage gate; labelled web top-up (`[fresh — not yet in corpus]`) auto-queued to `raw/_inbox/` (channel `web`, `via_query`) deduped by `source_url`; gap logging; approval-gated synthesis file-back.
+- backed by `.claude/skills/query/SKILL.md` + `bin/query.py` (web-source queue + gap log + CLI).
+- config: added `via_query` provenance + `/query` intake note to `corpus/_config.md`.
