@@ -1,6 +1,6 @@
 # Corpus Index
 
-> Last updated: 2026-06-12 | Total pages: 92 | Total sources: 201
+> Last updated: 2026-06-12 | Total pages: 96 | Total sources: 222
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
@@ -39,6 +39,8 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[ai-engineering/agent-testing|Agent Testing]] — concept · draft · verification loops, Playwright, bug-regression evidence
 - [[ai-engineering/claude-md-conventions|CLAUDE.md Conventions]] — concept · draft · CLAUDE.md/AGENTS.md/cursor rules; attention budget; cross-platform skills
 - [[ai-engineering/agent-ui|Agent UI]] — concept · draft · chat + workbench shells for agent-centric apps
+- [[ai-engineering/learning-ai-engineering|Learning AI Engineering]] — synthesis · draft · two learning paths; context > prompts
+- [[ai-engineering/web-scraping|Scrapling (Web Scraping)]] — entity · stub · adaptive Python scraper; MCP extract-before-LLM
 
 ### data-engineering
 - [[data-engineering/README|Data Engineering]] — hub · draft · ETL/ELT, data modeling, Spark, Iceberg
@@ -63,6 +65,8 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[data-engineering/change-data-capture|Change Data Capture (CDC)]] — concept · draft · full load vs incremental vs CDC; capturing deletes, latency
 - [[data-engineering/materialized-views|Materialized Views]] — concept · draft · cross-platform MV synthesis; incremental vs full refresh
 - [[data-engineering/data-quality|Data Quality]] — concept · draft · 6-step clean-warehouse framework; data contracts; schema-aware validation
+- [[data-engineering/data-ingestion-patterns|Data Ingestion Patterns]] — concept · draft · stream-via-event-log vs batch-extract
+- [[data-engineering/incremental-pipeline-design|Incremental Pipeline Design]] — concept · draft · timestamp extraction, model-driven load, parallel backfill
 - [[data-engineering/query-engine-routing|Query-Engine Routing]] — synthesis · draft · multi-engine routing over Iceberg; cost-based routing
 - [[data-engineering/data-engineer-role|The Data Engineer Role]] — synthesis · draft · value = business impact + technical fundamentals; seniority
 - [[data-engineering/claude-code-for-data-engineering|Claude Code for Data Engineering]] — synthesis · draft · AI-assisted dbt scaffolding; PRD→ERD→dbt (cross-domain)

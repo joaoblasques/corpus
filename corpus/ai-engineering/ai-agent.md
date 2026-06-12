@@ -39,6 +39,9 @@ sources:
   - path: raw/email/email-2026-06-10-how-to-build-a-serverless-ai-agent-with-pi.md
     channel: email
     ingested_at: 2026-06-12
+  - path: raw/web/github-mvanhorn-last30days-skill-ai-agent-skill-that-researc.md
+    channel: web
+    ingested_at: 2026-06-12
 aliases:
   - ai agent
   - agentic AI
@@ -135,6 +138,8 @@ The same source reframes capability: with strong models, differentiation now com
 
 The quality/latency/cost triangle and the security concerns below apply directly to such autonomous agents (CAPTCHA-blocked applications "fail gracefully" rather than escalating) [^src6].
 
+Another agent-mode pattern is **agent-as-search-orchestrator**: `/last30days` is a skill that, given any topic, has the agent first *resolve who matters* (X handles, GitHub repos, subreddits, YouTube channels) and then fan out parallel searches across a dozen walled-garden platforms (Reddit, X, YouTube, TikTok, HN, Polymarket, GitHub), scoring results by real engagement and synthesizing one cited brief [^src11]. The framed unlock is exactly the agentic loop applied to retrieval: "Not one better search engine. A dozen disconnected platforms, bridged by an agent" — each platform has its own API and auth, but an agent with the user's keys can query them all at once [^src11]. It runs cross-harness via the open Agent Skills CLI (50+ hosts) and is distributed as both a Claude Code marketplace plugin and an `npx skills` package (see [[ai-engineering/agent-skills|Agent Skills]]) [^src11]. This is also a concrete [[ai-engineering/agentic-search|Agentic Search]] instance.
+
 ## The agent harness: minimal, self-modifying runtimes
 
 A growing view holds that with strong models, differentiation comes from the **harness** — the runtime, tools, and context around the model — not the model alone (see [[ai-engineering/context-engineering|Context Engineering]]). **Pi** is an open-source exemplar: "a minimal agent harness" whose thesis is "adapt Pi to your workflows, not the other way around" [^src7]. Defining properties [^src7]:
@@ -189,3 +194,4 @@ A live debate concerns whether a folder of files is sufficient agent state, or w
 [^src8]: [How to Build a Serverless AI Agent with Pi](../../raw/email/email-2026-06-10-how-to-build-a-serverless-ai-agent-with-pi.md)
 [^src9]: [Q00/ouroboros — the Agent OS for spec-first AI coding workflows](../../raw/web/github-q00-ouroboros-agent-os-stop-prompting-start-specifyin.md)
 [^src10]: [Episode 295: Agentic Architecture — Why Files Aren't Always Enough](../../raw/web/episode-295-agentic-architecture-why-files-aren-t-always-eno.md)
+[^src11]: [mvanhorn/last30days-skill — AI agent skill that researches any topic across platforms](../../raw/web/github-mvanhorn-last30days-skill-ai-agent-skill-that-researc.md) — GitHub

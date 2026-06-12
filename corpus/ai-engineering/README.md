@@ -45,9 +45,11 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [[ai-engineering/claude-code|Claude Code]] — entity · draft · Anthropic CLI coding agent; harness, large-codebase practices, model config, security review
 - [[ai-engineering/claude-cowork|Claude Cowork]] — entity · draft · **sub-hub** · Cowork desktop product; workspace folder, CLAUDE.md/MEMORY.md, Toolkit/workstations
 - [[ai-engineering/anthropic|Anthropic]] — entity · draft · Anthropic + Claude model lineup (Opus 4.8, Fable 5, Mythos 5)
+- [[ai-engineering/web-scraping|Scrapling (Web Scraping)]] — entity · stub · adaptive Python scraper; MCP extract-before-LLM token minimization
 
 ### Syntheses
 - [[ai-engineering/agentic-coding|Agentic Coding]] — synthesis · draft · **sub-hub** · coding-agent orchestration; conductor→orchestrator, AX, the verification bottleneck
+- [[ai-engineering/learning-ai-engineering|Learning AI Engineering]] — synthesis · draft · two learning paths (generalist ladder + data-engineer curriculum); context > prompts
 - [[ai-engineering/tool-calling-and-context-engineering|Tool Calling & Context Engineering]] — synthesis · draft · how tool results feed the context loop; the compounding-window problem
 - [[ai-engineering/optimizing-claude|Optimizing a Claude Setup]] — synthesis · draft · context economy as the organizing principle; skills, sub-agents, concise specs; filed back from a query
 

@@ -15,16 +15,23 @@ sources:
   - path: raw/web/working-with-materialized-views.md
     channel: web
     ingested_at: 2026-06-11
+  - path: raw/web/everything-you-need-to-know-about-incremental-view-maintenan.md
+    channel: web
+    ingested_at: 2026-06-12
 aliases:
   - materialized view
   - incremental materialized view
   - incremental refresh
   - MV
+  - IVM
+  - incremental view maintenance
+  - differential dataflow
+  - DBSP
 tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-11
-updated: 2026-06-11
+updated: 2026-06-12
 ---
 
 # Materialized Views
@@ -98,6 +105,26 @@ MVs cost on three axes — **querying, maintenance/refresh, and storage** [^src2
 - **Cross-platform JOIN behavior differs sharply**: forbidden in Snowflake, snapshot-only on the right side in ClickHouse incremental MVs, supported but incrementality-sensitive in Databricks [^src1][^src3][^src4].
 - **CDC base tables** (BigQuery) need `max_staleness` tuning and disable smart tuning [^src2].
 
+## Incremental view maintenance (IVM): the delta principle
+
+The platform sections above are the productized face of a deeper idea: **incremental view maintenance** [^src5]. A plain MV trades freshness for read latency — refreshing the whole dataset periodically — so a single changed row forces reprocessing all source data (`SELECT COUNT(*)` recounts every row to learn one row was inserted) [^src5]. IVM instead reprocesses **only the view data affected by the change (the delta)**, which the DBSP paper frames as a speedup of `O(|DB|/|ΔDB|)` — for `|DB|≈10⁹` and `|ΔDB|≈10²` that is ~10 million times faster [^src5]. Cheap deltas let MVs refresh on every change, keeping the view fresh while reads still hit pre-computed data [^src5]. Two design questions define an IVM engine: **when** to update (schedule, ad-hoc, or — most commonly — a trigger/sensor watching for changed data, the same role Airflow triggers play in a warehouse) and **how to know what to update** [^src5].
+
+### Why hand-written deltas and bag algebra fall short
+
+Hand-coded triggers (e.g. a Postgres `AFTER INSERT` trigger that upserts into `customer_order_totals`) work for simple cases but break down for joins, window functions, and recursion [^src5]. The systematic alternative is **bag (relational) algebra**: translate the view's SQL into select/project/join/union/difference operators, then mathematically derive how inserts/deletes (deltas) propagate to the view [^src5]. This preserves SQL ergonomics but is **no longer cheap** for complex, recursive, or nested queries — expressiveness traded for cost [^src5].
+
+### The modern dataflow stack: timely → differential → DBSP
+
+Three influential papers underpin most recent IVM products, forming a flexibility-vs-simplicity ladder [^src5]:
+
+- **Timely dataflow** (Naiad) — the lowest, most flexible layer. Models time as a vector of `(epoch, loop counter)` so deeply nested loops (graph algorithms) are easy, and uses **out-of-band watermark broadcasts** (data and control planes separated) so tasks get a global view of progress and compute concurrently rather than cascading punctuations sequentially [^src5]. API is four methods (`SendBy`, `NotifyAt`, `OnRecv`, `OnNotify`) — "a powerful but low-level framework," like Hadoop Map/Reduce [^src5].
+- **Differential dataflow** — built on timely. Introduces **differential computation**: state varies over a *partially ordered* set of versions (not a linear sequence) and updates are retained in an indexed structure rather than consolidated into a "current" state, letting the engine selectively reuse prior computation [^src5]. Standard SQL-like operators (joins, aggregations, recursion) are built on top, so developers express views in SQL/Datalog [^src5].
+- **DBSP** — built on digital-signal-processing intuition. Just as any logic circuit reduces to NAND gates, DBSP shows four operators (lift, delay `z⁻¹`, plus two for recursion) are functionally complete for relational algebra, so **arbitrary batch SQL can be mechanically converted into an incremental DBSP circuit** [^src5]. It constrains time/state management for a simpler model, giving up some of differential dataflow's concurrency in exchange [^src5].
+
+### Who uses what, and the gap
+
+**Materialize** is built directly on differential dataflow; newer entrants like **Feldera** are built on DBSP [^src5]. The broader IVM landscape includes Postgres's (semi-working) `pg_ivm`, Epsio, Bytewax, ClickHouse IVMs, dbt incremental models (still batch-based), and frontend sync engines (Zero, ElectricSQL) that increasingly resemble IVM engines [^src5]. The honest caveat: IVM in stream processors is still a work in progress, many databases have incomplete implementations, and a real **Postgres** IVM "would be a very big deal" — differential dataflow's complexity has kept it niche, and SQL-frontend products are what make it accessible [^src5].
+
 ## Related
 
 - [[data-engineering/change-data-capture|Change data capture]] — MVs over CDC-active base tables carry extra limitations.
@@ -108,3 +135,4 @@ MVs cost on three axes — **querying, maintenance/refresh, and storage** [^src2
 [^src2]: [Introduction to materialized views (BigQuery / Google Cloud)](../../raw/web/introduction-to-materialized-views-bigquery-google-cloud-doc.md)
 [^src3]: [Incremental refresh for materialized views (Databricks on AWS)](../../raw/web/incremental-refresh-for-materialized-views-databricks-on-aws.md)
 [^src4]: [Working with Materialized Views (Snowflake docs)](../../raw/web/working-with-materialized-views.md)
+[^src5]: [Everything You Need to Know About Incremental View Maintenance](../../raw/web/everything-you-need-to-know-about-incremental-view-maintenan.md)

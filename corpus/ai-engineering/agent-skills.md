@@ -18,6 +18,9 @@ sources:
   - path: raw/web/github-luongnv89-asm-the-universal-skill-manager-for-ai-codi.md
     channel: web
     ingested_at: 2026-06-12
+  - path: raw/web/agent-skills.md
+    channel: web
+    ingested_at: 2026-06-12
 aliases:
   - agent skills
   - Claude skills
@@ -28,6 +31,8 @@ aliases:
   - skill manager
   - SKILL.md
   - skills-as-SDLC
+  - anti-rationalization tables
+  - process over prose
 tags:
   - corpus/ai-engineering
   - concept
@@ -105,6 +110,28 @@ As teams accumulate skills across multiple agents, skill management becomes its 
 
 **Where to find/learn skills**: the official Anthropic marketplace via `/plugin marketplace add anthropics/skills` (pre-installed in claude.ai), plus `skill-creator` — "a skill... that creates skills" following Anthropic's formatting/packaging best practices [^src2]. The recommended single learning resource is Anthropic's "Agent Skills" Deep Learning course [^src2].
 
+## What a skill *is* — workflow, not reference (Process over prose)
+
+A fifth source (Addy Osmani's `agent-skills`, 27K★) sharpens the definition: a skill is **"a markdown file with frontmatter that gets injected into the agent's context when the situation calls for it"** — "somewhere between a system-prompt fragment and a runbook" [^src5]. The load-bearing distinction is **workflow vs reference**: a skill is *not* "everything you should know about testing"; it is "a sequence of steps the agent follows, with checkpoints that produce evidence, ending in a defined exit criterion" [^src5].
+
+> "If you put a 2,000-word essay on testing best practices into the agent's context, the agent reads it, generates plausible-looking text, and skips the actual testing. If you put a workflow there... the agent has something to do, and you have something to verify." [^src5]
+
+This is the same failure that makes "AI rules" repos do nothing in practice: **the rules are essays** [^src5]. Process over prose, workflows over reference, steps-with-exit-criteria over essays-without-them [^src5].
+
+## Skills as encoded SDLC
+
+Osmani's library organizes ~20 skills around six lifecycle phases with slash-command entry points — Define (`/spec`), Plan (`/plan`), Build (`/build`), Verify (`/test`), Review (`/review`), Ship (`/ship`), plus `/code-simplify` across the bottom [^src5]. The claim: this is the **same SDLC every functioning org runs** (Google's design-doc → review → implementation → readability-review → launch-checklist; Amazon's working-backwards memo and bar raiser) — and the thing agents skip by default [^src5]. The router (`using-agent-skills`) activates only the skills the task's actual scope needs: ~3 for a bug fix, ~11 for a complex feature [^src5].
+
+### The five load-bearing principles [^src5]
+
+1. **Process over prose** — workflows are agent-actionable; essays are not.
+2. **Anti-rationalization tables** (the most distinctive decision) — each skill ships a table of excuses paired with pre-written rebuttals, because *"LLMs are excellent at rationalisation"* and will produce a plausible paragraph explaining why this task doesn't need a spec/test/review. E.g. "I'll write tests later." → "Later is the load-bearing word. There is no later." The pattern works for human teams too: "Anti-rationalization tables are pre-written rebuttals to lies the agent hasn't yet told" [^src5].
+3. **Verification is non-negotiable** — every skill terminates in concrete evidence (tests pass, clean build, runtime trace, reviewer sign-off); "seems right" never closes the loop. Same principle as [[ai-engineering/agent-testing|Agent Testing]].
+4. **Progressive disclosure** — don't load all 20 skills at start; the router loads what's relevant ("a twenty-skill library into a 5K-token slot without poisoning the well") [^src5].
+5. **Scope discipline** — *"touch only what you're asked to touch."* Named "the single biggest determinant of whether an agent's PR is mergeable" [^src5].
+
+The "Google DNA": individual skills encode published practices — Hyrum's Law (api-and-interface-design), the test pyramid + Beyoncé Rule + DAMP-over-DRY (TDD), ~100-line PR sizing with Critical/Nit/Optional/FYI labels (code review), Chesterton's Fence (simplification), trunk-based development, Shift Left + feature flags [^src5]. The point: "a frontier model has read the phrase 'Hyrum's Law'... but it does not apply Hyrum's Law when it's designing your API at 3am" [^src5]. Skills matter **more for long-running agents** — a skipped test in a 30-hour run becomes "a debugging archaeology project at the end" [^src5]. The portable `SKILL.md` format is the payoff: write the workflow once, any harness (Claude Code, Cursor rules, Gemini CLI, Codex) enforces it [^src5].
+
 ## See also
 
 - [[ai-engineering/context-window-management|Context Window Management]] — why a lean window matters; sub-agents
@@ -124,3 +151,4 @@ As teams accumulate skills across multiple agents, skill management becomes its 
 [^src2]: [What's the real deal about SKILLs (This is not a 'MCP is dead' post)](../../raw/web/what-s-the-real-deal-about-skills-this-is-not-a-mcp-is-dead.md) — Alejandro Aboy, The Pipe and the Line
 [^src3]: [agent-skills: a central, version-controlled home for coding agent skills](../../raw/web/github-zazencodes-agent-skills-a-central-version-controlled.md) — zazencodes/agent-skills, GitHub
 [^src4]: [agent-skill-manager (asm): the universal skill manager for AI coding agents](../../raw/web/github-luongnv89-asm-the-universal-skill-manager-for-ai-codi.md) — luongnv89/asm, GitHub
+[^src5]: [Agent Skills](../../raw/web/agent-skills.md) — Addy Osmani, addyosmani.com (github.com/addyosmani/agent-skills)

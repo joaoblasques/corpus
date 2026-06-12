@@ -9,16 +9,24 @@ sources:
   - path: raw/youtube/How AI agents & Claude skills work (Clearly Explained).md
     channel: youtube
     ingested_at: 2026-06-09
+  - path: raw/_inbox/email-2026-05-28-how-grab-reclaimed-hundreds-of-data-engineering-hours-with-m.md
+    channel: inbox
+    ingested_at: 2026-06-12
+  - path: raw/web/github-nirdiamant-genai-agents-50-tutorials-and-implementati.md
+    channel: web
+    ingested_at: 2026-06-12
 aliases:
   - multi-agent
   - multi-agent system
   - agent orchestration
   - sub-agents
+  - brain-hands separation
+  - specialist agents
 tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-07
-updated: 2026-06-09
+updated: 2026-06-12
 ---
 
 # Multi-Agent Systems
@@ -60,6 +68,33 @@ Three modes [^src1]:
 
 A practitioner caution on *when* to add agents [^src2]: don't stand up "15 sub-agents, 30 skills" before you have working single-agent workflows. The recommended path is to **start with one main agent**, build up skills through hands-on iteration, and add a sub-agent only once a workflow is proven and the sub-agent will carry real skills and context. The guiding phrase: scale for productivity, not for what looks cool. A purpose-built sub-agent (e.g. one for marketing, one for business) earns its coordination cost; a speculative fleet does not. See [[ai-engineering/agent-skills|Agent Skills]] for the skill-building prerequisite.
 
+## Case study: Grab's specialist-agent support system
+
+Grab's Analytics Data Warehouse team (1,000+ monthly users, 15,000+ tables) was spending ~40% of engineering time on repetitive "quick question" support; they replaced it with a multi-agent system, dropping resolution from hours to minutes and reclaiming several FTEs [^src3]. The design validates several patterns on this page at production scale.
+
+**Separate the reasoning layer from the action layer** — "the 'brain' is decoupled from the 'hands'" [^src3]. The LLM interprets and plans; specialist agents do the work. A **Classifier** routes each Slack question to the agents it needs, then a **Summarizer** merges findings [^src3]:
+
+| Agent | Job |
+|---|---|
+| **Data Agent** | Queries Trino/Hive/Delta Lake; validates SQL before execution |
+| **Code Search Agent** | Traces transformations and table lineage in GitLab |
+| **On-call Agent** | Checks incidents, pipeline health, Slack/Confluence |
+| **Enhancement Agent** | Drafts pipeline code changes as merge requests (human-approved) |
+
+**Why specialists beat one giant agent** [^src3]: a monolith means "every new tool increases prompt complexity," and a failure is hard to localize across classification, data access, code search, reasoning, or summarization. Specialists are independently improvable and debuggable — "the choice was obvious. When replacing a manual process that used to take hours, a few minutes of agent coordination is not a serious downside." This is the supervisor/worker pattern with a classifier-driven router on top.
+
+**Production lessons** (each maps to a pitfall above) [^src3]:
+- **Context discipline across handoffs.** "In multi-agent systems, context grows quickly." The orchestrator cleans context between agents — "removes unnecessary tokens and invokes the next agent" — tracks tokens with [[ai-engineering/structured-outputs|tiktoken]], summarizes earlier messages on overflow while preserving the original question, and prunes [[ai-engineering/rag|RAG]] context (small LLMs extract snippets rather than passing whole files). See [[ai-engineering/context-window-management|Context Window Management]].
+- **Fewer, sharper tools.** An early version had 30+ generic-API tools whose descriptions and outputs bloated the prompt; redesigning tools around real usage and trimming outputs improved responsiveness. See [[ai-engineering/tool-calling|Tool Calling]].
+- **Guardrails assuming agents are *not* safe.** Classifier PII checks, SQL validation (blocks risky DDL/DML, enforces timeouts), and no direct commits to main — all Enhancement-Agent changes go through reviewed MRs in a test environment. See [[ai-engineering/agent-security|Agent Security]].
+- **Human review designed in, not bolted on.** Reviewers approve/reject/refine/re-route/annotate; answers post immediately but are labeled **"unreviewed"** so users get speed without false authority. Annotations feed offline evals — "tested against real failure cases rather than only synthetic examples." See [[ai-engineering/agent-evaluation|Agent Evaluation]].
+
+Stack: FastAPI, [[ai-engineering/langgraph|LangGraph]] (chosen because the agents "needed to loop, pass work to each other... and maintain state"), Redis, PostgreSQL [^src3].
+
+## Worked implementations (GenAI_Agents)
+
+NirDiamant's `GenAI_Agents` (52+ tutorials) is a large reference catalog of agent and multi-agent implementations, the majority built on [[ai-engineering/langgraph|LangGraph]] for stateful workflow orchestration [^src4]. Recurring multi-agent shapes across the collection: supervisor/coordinator + specialist workers (ATLAS academic system: Coordinator/Planner/Notewriter/Advisor), role-based crews (AutoGen research team: admin/developer/planner/executor/QA; OpenAI Swarm blog team: researcher/planner/writer/editor), and CrewAI inventory agents [^src4]. The catalog also pairs with companion resources on RAG (40+ notebooks) and agent memory (30 notebooks on vector stores, graphs, Mem0, Zep) — see [[ai-engineering/agent-memory|Agent Memory]] [^src4].
+
 ## See also
 
 - [[ai-engineering/ai-agent|AI Agent]] — single-agent building block
@@ -71,3 +106,5 @@ A practitioner caution on *when* to add agents [^src2]: don't stand up "15 sub-a
 
 [^src1]: [[03_Resources/Study Notes/AI Agents - Complete Course Beginner to Pro|AI Agents - Complete Course Beginner to Pro]]
 [^src2]: [How AI agents & Claude skills work (Clearly Explained)](<../../raw/youtube/How AI agents & Claude skills work (Clearly Explained).md>) — Greg Isenberg × Ras Mic, YouTube
+[^src3]: [How Grab Reclaimed Hundreds of Data Engineering Hours With Multi-Agent AI](../../raw/email/email-2026-05-28-how-grab-reclaimed-hundreds-of-data-engineering-hours-with-m.md) — Chief Data Tinkerer
+[^src4]: [NirDiamant/GenAI_Agents — 52+ tutorials and implementations](../../raw/web/github-nirdiamant-genai-agents-50-tutorials-and-implementati.md) — GitHub

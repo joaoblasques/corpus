@@ -29,6 +29,8 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [[data-engineering/change-data-capture|Change Data Capture (CDC)]] — concept · draft · full load vs incremental vs CDC; capturing deletes, latency
 - [[data-engineering/materialized-views|Materialized Views]] — concept · draft · cross-platform MV synthesis; incremental vs full refresh; limitations
 - [[data-engineering/data-quality|Data Quality]] — concept · draft · 6-step clean-warehouse framework; data contracts; schema-aware validation
+- [[data-engineering/data-ingestion-patterns|Data Ingestion Patterns]] — concept · draft · two ingestion patterns: stream via event log vs batch extract
+- [[data-engineering/incremental-pipeline-design|Incremental Pipeline Design]] — concept · draft · timestamp-driven extraction, model-driven load, parallel backfilling
 
 ### Entities
 - [[data-engineering/postgres|PostgreSQL]] — entity · draft · relational database as full-stack data platform via extensions (pgvector, pgcron, tsvector, etc.)

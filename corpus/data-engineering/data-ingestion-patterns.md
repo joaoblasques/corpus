@@ -1,0 +1,51 @@
+---
+type: concept
+domain: data-engineering
+status: draft
+sources:
+  - path: raw/email/email-2026-05-06-how-companies-ingest-data-2-key-patterns.md
+    channel: email
+    ingested_at: 2026-06-12
+aliases:
+  - data ingestion patterns
+  - data loading patterns
+  - stream ingestion
+  - batch ingestion
+  - data ingestion
+tags:
+  - corpus/data-engineering
+  - concept
+created: 2026-06-12
+updated: 2026-06-12
+---
+
+# Data Ingestion Patterns
+
+**TL;DR.** Most companies ingest data in one of **two ways**: (1) **stream** data into a cloud store via an event log like Kafka, or (2) **extract** data from source systems in **batch** [^src1]. The two differ in latency, ordering, and operational shape; the choice is driven by how fresh the data must be and how the source exposes change.
+
+## The two patterns
+
+| Pattern | Mechanism | Typical use |
+|---|---|---|
+| **Stream into a cloud store via an event log** | Events are produced to an append log (e.g. [[data-engineering/kafka|Kafka]]); consumers land them in a cloud store / lakehouse continuously | High-velocity, low-latency data where freshness matters [^src1] |
+| **Batch extract from source systems** | Periodically pull rows from operational databases / APIs / files on a schedule | Periodic loads from OLTP systems, SaaS APIs, third-party dumps [^src1] |
+
+These two patterns are the entry point of the pipeline — the **bronze/raw** stage of the [[data-engineering/medallion-architecture|medallion architecture]] — and feed everything downstream (cleansing, modeling, serving).
+
+## Relation to other pages
+
+- **Streaming** ingestion is the [[data-engineering/kafka|Kafka]] / event-log path; its load mechanics (append-only, at-most-once settings for de-duplicated downstream data) are covered under stream load strategies in [[data-engineering/incremental-pipeline-design|Incremental Pipeline Design]].
+- **Batch** ingestion is the extract path; *how* to extract incrementally (timestamp columns, primary-key / hash diffing) and *how* to load (overwrite-partition, row-based update, append) is the subject of [[data-engineering/incremental-pipeline-design|Incremental Pipeline Design]].
+- The distinction also tracks the [[data-engineering/change-data-capture|CDC]] vs full-load vs incremental axis: CDC is one way a streaming source exposes change.
+
+## See also
+
+- [[data-engineering/incremental-pipeline-design|Incremental Pipeline Design]] — extract/load/backfill design for batch pipelines
+- [[data-engineering/kafka|Apache Kafka]] — the streaming-ingestion event log
+- [[data-engineering/change-data-capture|Change Data Capture]] — capturing change from operational sources
+- [[data-engineering/medallion-architecture|Medallion Architecture]] — where ingestion sits in the pipeline
+- [[data-engineering/README|Data Engineering hub]]
+
+---
+
+[^src1]: [How Companies Ingest Data: 2 Key Patterns](../../raw/email/email-2026-05-06-how-companies-ingest-data-2-key-patterns.md)

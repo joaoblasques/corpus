@@ -389,3 +389,11 @@ Out of scope for this commit (deferred):
 - updated (2): software-design-principles (design-patterns section), ai-engineering/agent-security (offensive AppSec / LLMs-finding-vulns).
 - skipped: promo/sponsored newsletters (Hermes, declutter/Google Tips, Fathom), empty landing pages (50-hacks, cowork academy), Instagram/SSD exploit news. 3 mis-bucketed sources (Claude /goal, DIP tutorial, Kafka HOL-blocking) flagged for ai-engineering/software-engineering/data-engineering in later waves.
 - corpus now 92 pages across 6 domains. Remaining inbox: 71 sources (mostly DE/AI tail + a few mlops) for future waves.
+
+## [2026-06-12] ingest | email-backlog wave 4 — data-engineering + ai-engineering tail top-up
+
+- pipeline: v0.6 batch, 2 parallel per-domain workers (disjoint domains). Pure top-up — no new domains.
+- scope: the clean DE tail (24) + AI tail (29) the wave-1/2 keyword nets missed; ~21 sources consumed, the rest skipped as duplicate email/web pairs, newsletter digests, event/book promos. A messy ~250-source "other" bucket (mostly more dupes/digests + mis-keyworded DE/AI) remains deferred.
+- new pages (4): data-engineering — data-ingestion-patterns, incremental-pipeline-design; ai-engineering — learning-ai-engineering (synthesis), web-scraping (stub).
+- updated (10): data-engineering — kafka (+share-groups/HOL-blocking), materialized-views (+IVM/DBSP), scd2 (+part-2 datestamping), idempotent-pipelines (+functional DE); ai-engineering — agent-skills, multi-agent-systems (+Grab/GenAI_Agents), context-engineering (+ktx), llm (+DiffusionGemma/Command-A), claude-code (+2.1.139), ai-agent (+agent-mode/ApplyPilot).
+- corpus now ~96 pages, 6 domains. Diminishing returns flagged: remaining backlog is largely duplicates/digests of already-covered topics.

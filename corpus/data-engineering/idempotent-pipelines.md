@@ -6,15 +6,21 @@ sources:
   - path: 03_Resources/Study Notes/Dimensional Data Modeling - Idempotent Pipelines and SCD Patterns.md
     channel: notes
     ingested_at: 2026-05-21
+  - path: raw/email/email-2025-11-04-scd-2-considered-harmful-part-2.md
+    channel: email
+    ingested_at: 2026-06-12
 aliases:
   - idempotent pipeline
   - idempotency
   - pipeline idempotency
+  - functional data engineering
+  - datestamps
+  - ds column
 tags:
   - corpus/data-engineering
   - concept
 created: 2026-05-21
-updated: 2026-05-21
+updated: 2026-06-12
 ---
 
 # Idempotent Pipelines
@@ -59,12 +65,27 @@ Full reload is easier to make idempotent. Incremental pipelines require explicit
 
 SCD Type 2 is the only acceptable type for analytics history tracking that maintains idempotency [^src1]. See [[data-engineering/scd2|SCD2]].
 
+## Functional data engineering and datestamps
+
+"Idempotent" is the operational face of **functional data engineering** (Maxime Beauchemin): pipelines that, like pure functions, give the same output for the same input and rely on **no hidden/secret state** [^src2]. The practical implementation is **datestamps** — append a `ds` column recording the date the data was valid/ingested, never overwrite [^src2]:
+
+- The rawest upstream data is never deleted — keep appending with datestamps [^src2].
+- A pipeline runs identically in daily and backfill mode (same SQL, different `ds` parameter — `WHERE ds='{{ ds }}'` injected by the orchestrator) [^src2].
+- Bugs are fixed by correcting the pipeline and re-running the affected `ds` range; the corrected partition overwrites the bad one [^src2].
+- Time travel is built in: filter to any `ds` [^src2].
+
+### Parallel backfills as the payoff
+
+The clearest proof of idempotency is the backfill. When each day reads and writes only its own `ds` partition with **no dependency on the previous day**, an orchestrator can launch the whole range **in parallel** — the entire month finishes in roughly the time of one day's run, using the exact same SQL as the daily job [^src2]. The anti-pattern to avoid: a task that depends on the **previous day's partition of its own table**, which forces sequential, un-parallelizable backfills (the `depends_on_past=True` chain) [^src2]. This is sometimes unavoidable for cumulative metrics, but most dimension tables should recompute from raw each day and keep `depends_on_past=False` [^src2]. See [[data-engineering/scd2|SCD2]] for how this critique applies to slowly-changing dimensions specifically.
+
 ## See also
 
-- [[data-engineering/scd2|SCD2]] — idempotent history-preserving dimension pattern
+- [[data-engineering/scd2|SCD2]] — idempotent history-preserving dimension pattern; datestamps vs valid_from/valid_to
 - [[data-engineering/dimensional-modeling|Dimensional Modeling]] — the data modeling context in which idempotency matters most
+- [[data-engineering/incremental-pipeline-design|Incremental Pipeline Design]] — extraction, load, and backfill design decisions
 - [[data-engineering/README|Data Engineering hub]]
 
 ---
 
 [^src1]: [[03_Resources/Study Notes/Dimensional Data Modeling - Idempotent Pipelines and SCD Patterns|Dimensional Data Modeling - Idempotent Pipelines and SCD Patterns]]
+[^src2]: [SCD-2 considered harmful! Part 2](../../raw/email/email-2025-11-04-scd-2-considered-harmful-part-2.md)

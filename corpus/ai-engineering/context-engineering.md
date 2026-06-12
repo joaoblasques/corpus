@@ -15,14 +15,30 @@ sources:
   - path: raw/youtube/How AI agents & Claude skills work (Clearly Explained).md
     channel: youtube
     ingested_at: 2026-06-09
+  - path: raw/_inbox/email-2026-06-03-fwd-introduction-to-ktx-the-open-source-context-layer-for-da.md
+    channel: inbox
+    ingested_at: 2026-06-12
+  - path: raw/web/how-ingestion-works.md
+    channel: web
+    ingested_at: 2026-06-12
+  - path: raw/web/introduction-to-ktx-the-open-source-context-layer-for-data-a.md
+    channel: web
+    ingested_at: 2026-06-12
+  - path: raw/web/github-kaelio-ktx-ktx-is-an-executable-context-layer-for-dat.md
+    channel: web
+    ingested_at: 2026-06-12
 aliases:
   - context engineering
   - context window engineering
+  - context layer
+  - semantic layer
+  - executable context
+  - ktx
 tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-07
-updated: 2026-06-09
+updated: 2026-06-12
 ---
 
 # Context Engineering
@@ -64,6 +80,24 @@ One practitioner framing pushes minimalism: rely on the model's strengths and sp
 
 This complements the [[ai-engineering/agent-skills|Agent Skills]] argument: codify your unique workflow into skills (loaded on demand) rather than always-on instruction files.
 
+## A dedicated context layer for data agents (ktx)
+
+A productized form of context engineering: a standing **context layer** that an agent consults *before* it acts, rather than rediscovering context every task. ktx (by Kaelio, YC-backed) targets the gap where "the agent isn't dumb, it's blind" — it can see a warehouse schema but not "the agreed-upon definitions, which joins are safe, what 'active customer' means" [^src5]. The result is plausible-but-wrong output: "The query runs without errors. It simply uses the wrong joins, filters, or metric logic, and nothing tells you that until someone checks the numbers" [^src5].
+
+The architecture pairs two committed, git-tracked layers [^src5][^src6]:
+
+| Layer | Contents | For |
+|---|---|---|
+| `semantic-layer/*.yaml` | **Executable** definitions: tables, grain, joins, measures, dimensions, filters | A compiler turns these into dialect-correct SQL, so agents never rewrite canonical queries from scratch |
+| `wiki/*.md` | **Searchable** business knowledge: metric definitions, caveats, reporting policies, historical decisions | Human-reviewable; gives agents the *why* behind the data |
+
+Three principles generalize the context-engineering thesis [^src5][^src6]:
+- **Context as code.** Definitions live as plain files committed to Git — "diffable, mergeable, and reviewable exactly like code" — not in a separate platform. Self-improving ingest reconciles new warehouse/BI evidence with already-approved definitions.
+- **Approved definitions over inference.** Instead of generating SQL immediately, the agent searches the wiki for context, finds the approved metric in the semantic layer, compiles it, then executes — turning "a plausible answer" into "a correct one" for governed metrics like revenue or ARR [^src5].
+- **Agent-native access.** Exposed via CLI *and* an [[ai-engineering/mcp|MCP]] server, so Claude Code, Cursor, Codex, and any MCP client (and frameworks like LangChain) consume the same context; all DB connections are read-only [^src5][^src6].
+
+The caveat is the core context-engineering truth: "a context layer is only as strong as the context that exists" — ktx surfaces and organizes what a team already knows but cannot invent missing definitions [^src5]. This is the data-warehouse instance of the same principle that drives [[ai-engineering/rag|RAG]] and [[ai-engineering/agent-memory|Agent Memory]]: agents need the metadata and business context that give data meaning, not just access.
+
 ## Related concepts (referenced in source 1, not yet ingested)
 
 - `context-engineering-ace-self-improving-llm-workflows` — agentic/self-improving applications of context engineering
@@ -87,3 +121,5 @@ This complements the [[ai-engineering/agent-skills|Agent Skills]] argument: codi
 [^src2]: [[03_Resources/Study Notes/AI Agents - Complete Course Beginner to Pro|AI Agents - Complete Course Beginner to Pro]]
 [^src3]: [[03_Resources/Study Notes/Claude Code - Solving the Memory Problem with Context Engineering|Claude Code - Solving the Memory Problem with Context Engineering]]
 [^src4]: [How AI agents & Claude skills work (Clearly Explained)](<../../raw/youtube/How AI agents & Claude skills work (Clearly Explained).md>) — Greg Isenberg × Ras Mic, YouTube
+[^src5]: [Introduction to ktx: The Open-Source Context Layer for Data Agents](../../raw/email/email-2026-06-03-fwd-introduction-to-ktx-the-open-source-context-layer-for-da.md) — Pipeline to Insights (Substack)
+[^src6]: [ktx — Make analytics context usable by agents (docs)](../../raw/web/how-ingestion-works.md) — docs.kaelio.com
