@@ -15,15 +15,43 @@ sources:
   - path: raw/youtube/How AI agents & Claude skills work (Clearly Explained).md
     channel: youtube
     ingested_at: 2026-06-09
+  - path: raw/web/agent-mode-autonomous-ai-agents-for-real-world-tasks.md
+    channel: web
+    ingested_at: 2026-06-12
+  - path: raw/web/github-pickle-pixel-applypilot-ai-agent-that-applies-to-jobs.md
+    channel: web
+    ingested_at: 2026-06-12
+  - path: raw/web/github-q00-ouroboros-agent-os-stop-prompting-start-specifyin.md
+    channel: web
+    ingested_at: 2026-06-12
+  - path: raw/web/episode-295-agentic-architecture-why-files-aren-t-always-eno.md
+    channel: web
+    ingested_at: 2026-06-12
+  - path: raw/web/pi-coding-agent.md
+    channel: web
+    ingested_at: 2026-06-12
+  - path: raw/web/pi-coding-agent-2ef78af5.md
+    channel: web
+    ingested_at: 2026-06-12
+  - path: raw/web/pi-coding-agent-49b08ba6.md
+    channel: web
+    ingested_at: 2026-06-12
+  - path: raw/email/email-2026-06-10-how-to-build-a-serverless-ai-agent-with-pi.md
+    channel: email
+    ingested_at: 2026-06-12
 aliases:
   - ai agent
   - agentic AI
   - LLM agent
+  - agent mode
+  - autonomous agent
+  - agent harness
+  - agent OS
 tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-07
-updated: 2026-06-09
+updated: 2026-06-12
 ---
 
 # AI Agent
@@ -98,6 +126,42 @@ The same source reframes capability: with strong models, differentiation now com
 - **Reliability**: circuit breakers for infinite loops; retry with exponential backoff; structured outputs over raw text [^src1]
 - **Quality/latency/cost triangle**: more powerful model = better quality + higher cost; parallel agents = lower latency + higher cost; caching = lower cost + potential staleness [^src1]
 
+## Agent mode & autonomous task agents
+
+"Agent mode" is the productized form of the agent loop: a single chat surface ("What would you like to do?") that accepts a goal and runs autonomously toward it [^src5]. The pattern's reach is shown by **ApplyPilot**, a fully autonomous, open-source job-application agent that "applied to 1,000 jobs in 2 days" via a 6-stage pipeline — discover, enrich, score, tailor, cover-letter, auto-apply [^src6]. Its auto-apply stage is concrete agentic execution: Claude Code drives a Chrome instance through a Playwright MCP server, navigating forms, uploading documents, answering screening questions, and submitting hands-free [^src6]. Design notes worth generalizing [^src6]:
+
+- **Staged + independent**: each stage runs alone or as a pipeline, with a `--dry-run` that fills forms without submitting — a safety gate for autonomous browser action.
+- **Parallelism via workers** (`-w N`) for both discovery and browser submission.
+- **Bounded fabrication**: the resume-tailoring stage reorganizes and emphasizes but "never fabricates" — a guardrail baked into the prompt contract.
+
+The quality/latency/cost triangle and the security concerns below apply directly to such autonomous agents (CAPTCHA-blocked applications "fail gracefully" rather than escalating) [^src6].
+
+## The agent harness: minimal, self-modifying runtimes
+
+A growing view holds that with strong models, differentiation comes from the **harness** — the runtime, tools, and context around the model — not the model alone (see [[ai-engineering/context-engineering|Context Engineering]]). **Pi** is an open-source exemplar: "a minimal agent harness" whose thesis is "adapt Pi to your workflows, not the other way around" [^src7]. Defining properties [^src7]:
+
+- **Skips defaults like sub-agents and plan mode** — you ask Pi to build them, or install a package that adds them. Extensions are TypeScript modules with access to tools, commands, events, and the TUI.
+- **Self-modifying**: "Have Pi manipulate itself in place, hit `/reload`, and keep going." The agent can add its own commands, tools, and providers on the fly.
+- **Four run modes**: interactive TUI, print/JSON (for scripts), RPC (JSON over stdin/stdout), and SDK (embed in apps).
+- **Context-engineering surface**: minimal system prompt, `AGENTS.md` project instructions, `SYSTEM.md` per-project prompt override, customizable compaction, and on-demand skills with progressive disclosure that doesn't bust the prompt cache [^src7].
+
+This harness is deployable as a **serverless agent**: app code is separated from cloud memory (GitHub for app/agent files, cloud object storage for data), wrapped in a thin web chat UI, and deployed to a cloud run target with shared-password protection [^src8]. Pi is also a first-class backend in multi-runtime tools like Boring UI (see [[ai-engineering/agent-ui|Agent UI]]) and Ouroboros (below).
+
+## Spec-driven agent OS
+
+A distinct architectural layer treats agent work as an **operating system**: a replayable, observable, policy-bound execution contract rather than ad-hoc prompting. **Ouroboros** is "the Agent OS for replayable, specification-first AI coding workflows" with a five-phase loop — **interview → seed → execute → evaluate → evolve** [^src9]. Core ideas [^src9]:
+
+- **"Most AI coding fails at the input, not the output"** — the bottleneck is human clarity, not model capability. A Socratic interview exposes hidden assumptions before any code is written.
+- **Two mathematical gates**: an *Ambiguity Score* (≤ 0.2 weighted-clarity threshold) must be met before a Seed spec is generated; an *Ontology Convergence* score (≥ 0.95 similarity across generations) decides when the evolutionary loop stops.
+- **Immutable seed spec** locks intent so architecture doesn't drift mid-build; a 3-stage evaluation gate (Mechanical → Semantic → Multi-Model Consensus) replaces "looks good" QA.
+- **OS layering**: a stable kernel (Seed, Ledger, Runtime, MCP) under user-level plugins (PR ops, Jira sync, releases) under a terminal shell — every action becomes a ledger-recorded, replayable event regardless of which LLM executes it [^src9].
+
+Ouroboros and Pi both target **runtime portability** — one workflow spec, many execution engines (Claude Code, Codex, Gemini, Copilot, Pi, and more) [^src7][^src9]. This is the agent-side analog of the cross-platform convention work in [[ai-engineering/claude-md-conventions|CLAUDE.md & Agent Instruction Conventions]].
+
+## Files vs database: the agent-memory architecture debate
+
+A live debate concerns whether a folder of files is sufficient agent state, or whether agents need a database [^src10]. The "files are all you need" position (Karpathy's evolving-markdown LLM knowledge base, LlamaIndex) is contrasted with the limits of file-based workflows and **massive context windows that "tend to collapse"** as they fill [^src10]. The same source reinforces the **model-vs-harness** framing and "context rot and tool loadouts" as first-order concerns [^src10]. See [[ai-engineering/agent-memory|Agent Memory]] and [[ai-engineering/context-window-management|Context Window Management]] for the underlying mechanics.
+
 ## See also
 
 - [[ai-engineering/context-engineering|Context Engineering]] — the highest-leverage skill in agent development
@@ -110,6 +174,9 @@ The same source reframes capability: with strong models, differentiation now com
 - [[ai-engineering/langsmith|LangSmith]] — platform for agent observability and evaluation
 - [[ai-engineering/agent-memory|Agent Memory]] — short-term (context window) and long-term (vector DB) memory
 - [[ai-engineering/mcp|MCP]] — coordination protocol for agents, tools, and memory
+- [[ai-engineering/agent-ui|Agent UI]] — chat + workbench shells for agent-centric apps (Boring UI on Pi)
+- [[ai-engineering/claude-md-conventions|CLAUDE.md & Agent Instruction Conventions]] — configuring the harness; cross-platform portability
+- [[ai-engineering/agent-testing|Agent Testing]] — verification loops that keep autonomous agents honest
 
 ---
 
@@ -117,3 +184,9 @@ The same source reframes capability: with strong models, differentiation now com
 [^src2]: [[03_Resources/Study Notes/LangSmith - Debugging and Evaluating AI Agents|LangSmith - Debugging and Evaluating AI Agents]]
 [^src3]: [[03_Resources/Study Notes/AI Dev - Agentic AI Architecture Explained|AI Dev - Agentic AI Architecture Explained]]
 [^src4]: [How AI agents & Claude skills work (Clearly Explained)](<../../raw/youtube/How AI agents & Claude skills work (Clearly Explained).md>) — Greg Isenberg × Ras Mic, YouTube
+[^src5]: [Agent Mode — Autonomous AI Agents for Real-World Tasks](../../raw/web/agent-mode-autonomous-ai-agents-for-real-world-tasks.md)
+[^src6]: [Pickle-Pixel/ApplyPilot — AI agent that applies to jobs](../../raw/web/github-pickle-pixel-applypilot-ai-agent-that-applies-to-jobs.md)
+[^src7]: [Pi — a minimal agent harness](../../raw/web/pi-coding-agent.md)
+[^src8]: [How to Build a Serverless AI Agent with Pi](../../raw/email/email-2026-06-10-how-to-build-a-serverless-ai-agent-with-pi.md)
+[^src9]: [Q00/ouroboros — the Agent OS for spec-first AI coding workflows](../../raw/web/github-q00-ouroboros-agent-os-stop-prompting-start-specifyin.md)
+[^src10]: [Episode 295: Agentic Architecture — Why Files Aren't Always Enough](../../raw/web/episode-295-agentic-architecture-why-files-aren-t-always-eno.md)

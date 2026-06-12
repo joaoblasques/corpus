@@ -9,17 +9,26 @@ sources:
   - path: 03_Resources/Study Notes/Claude Code - Solving the Memory Problem with Context Engineering.md
     channel: notes
     ingested_at: 2026-05-21
+  - path: raw/web/zep-a-temporal-knowledge-graph-architecture-for-agent-memory.md
+    channel: web
+    ingested_at: 2026-06-12
+  - path: raw/web/rushdb-2-0-memory-infrastructure-for-the-agentic-era-rushdb.md
+    channel: web
+    ingested_at: 2026-06-12
 aliases:
   - agent memory
   - memory
   - short-term memory
   - long-term memory
   - vector memory
+  - temporal knowledge graph
+  - bi-temporal memory
+  - memory infrastructure
 tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-21
-updated: 2026-05-21
+updated: 2026-06-12
 ---
 
 # Agent Memory
@@ -49,6 +58,31 @@ A document like CLAUDE.md acts as long-term memory — written once, available t
 
 > "CLAUDE.md = long-term memory (always available). Context window = short-term memory (what's happening right now)." [^src2]
 
+### Temporal knowledge graph (the third pattern)
+
+Plain vector-store memory is a "hoarder": three facts — "Priya is evaluating," "Priya's blocker is SOC 2," "SOC 2 shipped in Q2" — are stored as disconnected blobs, so a query for "is Priya ready to buy?" retrieves whichever chunks sound similar and never connects the blocker to the fix [^src5]. The structural fix is a **temporal knowledge graph**: decompose facts into nodes (entities), attributes, and **edges** (relationships), then store them as a walkable graph instead of inert prose [^src5].
+
+The defining feature is **bi-temporal edges**: each edge carries the period for which it was true, not just the claim that it is. When a fact changes, the system marks the old edge expired, dates the new one, and keeps both — giving memory a sense of before and after [^src5]. Retrieval then traverses only the relevant subgraph and silently filters for what is currently true.
+
+**Zep** is a memory-layer service built on this architecture, powered by its core engine **Graphiti** — a temporally-aware knowledge graph that synthesizes unstructured conversational data and structured business data while maintaining historical relationships [^src3]. Where standard RAG frameworks are "limited to static document retrieval," Zep handles dynamic knowledge integration from ongoing conversations [^src3]:
+
+- Beats prior SOTA MemGPT on the Deep Memory Retrieval benchmark (94.8% vs 93.4%) [^src3].
+- On the harder LongMemEval benchmark, up to 18.5% accuracy improvement while **reducing response latency by 90%** vs baseline, strongest on cross-session synthesis and long-term context maintenance [^src3].
+
+This is the same graph-over-flat-vectors insight as GraphRAG applied to memory — see [[ai-engineering/rag|RAG]] (GraphRAG section).
+
+### Memory infrastructure (the data layer)
+
+A trend treats the data layer and the memory layer as the same thing: agents, humans, and applications all read and write the same graph with the same query language [^src4]. **RushDB 2.0** exemplifies this — "memory infrastructure for the agentic era" — folding what used to be four separate concerns (vector store, embedding pipeline, sync, graph DB) into one system [^src4]:
+
+- **Native semantic search** built into the graph; embedding indexes are first-class on any string property, with prefilter mode (filter by structured `where` first, then rank by similarity) [^src4].
+- **Ontology API** — `getOntologyMarkdown` surfaces labels, types, value ranges, and the relationship map at session start, so MCP agents stop hallucinating field names [^src4].
+- **MCP server + OAuth** and a packaged `rushdb-agent-memory` skill teaching the store → link → recall pattern with a label taxonomy (SESSION, DECISION, ENTITY, TASK, PREFERENCE) [^src4].
+
+> The goal: "a world where the data layer and the memory layer are the same thing" [^src4].
+
+Both Zep/Graphiti and RushDB build on graph databases like Neo4j for storing nodes and edges at scale [^src4][^src3].
+
 ## The "Learn" loop step
 
 In the 4-step agentic loop (Perceive → Reason → Act → **Learn**), the Learn step stores outcomes to long-term memory. This enables an agent to improve at similar tasks over time [^src1].
@@ -57,10 +91,15 @@ In the 4-step agentic loop (Perceive → Reason → Act → **Learn**), the Lear
 
 - [[ai-engineering/context-window-management|Context Window Management]] — strategies for what to keep, compress, or drop from short-term memory
 - [[ai-engineering/context-engineering|Context Engineering]] — governs how context is assembled at inference time
-- [[ai-engineering/rag|RAG]] — long-term memory retrieval is structurally identical to RAG
+- [[ai-engineering/rag|RAG]] — long-term memory retrieval is structurally identical to RAG; GraphRAG mirrors temporal-graph memory
+- [[ai-engineering/agentic-search|Agentic Search]] — AI-native search uses the same hybrid-retrieval-over-subgraph pattern
+- [[ai-engineering/vector-database|Vector Database]] — the flat-vector storage layer that temporal graphs improve upon
 - [[ai-engineering/ai-agent|AI Agent]] — memory is one of the four core agent components
 
 ---
 
 [^src1]: [[03_Resources/Study Notes/AI Dev - Agentic AI Architecture Explained|AI Dev - Agentic AI Architecture Explained]]
 [^src2]: [[03_Resources/Study Notes/Claude Code - Solving the Memory Problem with Context Engineering|Claude Code - Solving the Memory Problem with Context Engineering]]
+[^src3]: [Zep: A Temporal Knowledge Graph Architecture for Agent Memory](../../raw/web/zep-a-temporal-knowledge-graph-architecture-for-agent-memory.md)
+[^src4]: [RushDB 2.0: Memory Infrastructure for the Agentic Era](../../raw/web/rushdb-2-0-memory-infrastructure-for-the-agentic-era-rushdb.md)
+[^src5]: [But Context First: A Field Guide to AI-Native Search](../../raw/email/email-2026-05-28-but-context-first-a-field-guide-to-ai-native-search.md)

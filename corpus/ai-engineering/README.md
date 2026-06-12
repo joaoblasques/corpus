@@ -6,12 +6,12 @@ tags:
   - corpus/ai-engineering
   - hub
 created: 2026-05-07
-updated: 2026-06-09
+updated: 2026-06-12
 ---
 
 # AI Engineering
 
-Domain covering LLM internals, agent design, context management, prompt engineering, and AI system architecture.
+Domain covering LLM internals, agent design, agentic coding, context & prompt engineering, the Claude tooling stack, and AI system architecture. Substantially expanded in the 2026-06-12 email-backlog ingest (wave 2). Two sub-hubs organize the larger clusters: [[ai-engineering/agentic-coding|Agentic Coding]] (coding agents, harness, skills) and [[ai-engineering/claude-cowork|Claude Cowork]] (the Cowork product + toolkit).
 
 ## Pages
 
@@ -28,13 +28,26 @@ Domain covering LLM internals, agent design, context management, prompt engineer
 - [[ai-engineering/mcp|MCP]] — concept · stub · Model Context Protocol; coordination layer for agents, tools, and memory
 - [[ai-engineering/context-window-management|Context Window Management]] — concept · draft · compaction, sub-agents, resets; what to keep/compress/drop when context fills
 - [[ai-engineering/agent-skills|Agent Skills]] — concept · draft · skill.md files, progressive disclosure, recursive skill-building; skills vs always-on AGENTS.md
-- [[ai-engineering/vector-database|Vector Database]] — concept · stub · storage layer for embedding vectors; used in RAG and agent long-term memory
+- [[ai-engineering/vector-database|Vector Database]] — concept · draft · storage layer for embedding vectors; HNSW, indexing at scale; used in RAG and agent memory
+- [[ai-engineering/agent-harness|Agent Harness]] — concept · draft · the scaffolding around the model; "harness > model"; the ratchet, harness-as-a-service
+- [[ai-engineering/prompt-engineering|Prompt Engineering]] — concept · draft · crafting instructions/examples/XML to steer output; distinct from context-engineering
+- [[ai-engineering/agent-security|Agent Security]] — concept · draft · prompt injection, guardrails, defense-in-depth, agent auth
+- [[ai-engineering/structured-outputs|Structured Outputs]] — concept · draft · schema-enforced LLM output (Instructor); tokenization (tiktoken)
+- [[ai-engineering/agentic-search|Agentic Search]] — concept · draft · AI-native/agent-orchestrated retrieval; grep-vs-vector + harness nuance
+- [[ai-engineering/agent-testing|Agent Testing]] — concept · draft · verification loops, Playwright, agent honesty / bug-regression evidence
+- [[ai-engineering/claude-md-conventions|CLAUDE.md Conventions]] — concept · draft · CLAUDE.md/AGENTS.md/cursor rules; attention budget; cross-platform skills/plugins
+- [[ai-engineering/agent-ui|Agent UI]] — concept · draft · chat + workbench shells for agent-centric apps
+- [[ai-engineering/claude-api|Claude API]] — concept · draft · Claude Messages API in Python; system prompts, structured output
 
 ### Entities
 - [[ai-engineering/langgraph|LangGraph]] — entity · stub · production framework for stateful multi-agent workflows
 - [[ai-engineering/langsmith|LangSmith]] — entity · draft · agent engineering platform for debugging, evaluation, and observability
+- [[ai-engineering/claude-code|Claude Code]] — entity · draft · Anthropic CLI coding agent; harness, large-codebase practices, model config, security review
+- [[ai-engineering/claude-cowork|Claude Cowork]] — entity · draft · **sub-hub** · Cowork desktop product; workspace folder, CLAUDE.md/MEMORY.md, Toolkit/workstations
+- [[ai-engineering/anthropic|Anthropic]] — entity · draft · Anthropic + Claude model lineup (Opus 4.8, Fable 5, Mythos 5)
 
 ### Syntheses
+- [[ai-engineering/agentic-coding|Agentic Coding]] — synthesis · draft · **sub-hub** · coding-agent orchestration; conductor→orchestrator, AX, the verification bottleneck
 - [[ai-engineering/tool-calling-and-context-engineering|Tool Calling & Context Engineering]] — synthesis · draft · how tool results feed the context loop; the compounding-window problem
 - [[ai-engineering/optimizing-claude|Optimizing a Claude Setup]] — synthesis · draft · context economy as the organizing principle; skills, sub-agents, concise specs; filed back from a query
 

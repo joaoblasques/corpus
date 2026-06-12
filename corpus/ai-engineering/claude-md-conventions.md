@@ -1,0 +1,137 @@
+---
+type: concept
+domain: ai-engineering
+status: draft
+sources:
+  - path: raw/web/github-abhishekray07-claude-md-templates-claude-md-best-prac.md
+    channel: web
+    ingested_at: 2026-06-12
+  - path: raw/web/github-multica-ai-andrej-karpathy-skills-a-single-claude-md.md
+    channel: web
+    ingested_at: 2026-06-12
+  - path: raw/email/email-2026-05-17-multica-ai-andrej-karpathy-skills-a-single-claude-md-file-to.md
+    channel: email
+    ingested_at: 2026-06-12
+  - path: raw/web/cursor-rules-in-action-how-our-engineers-use-it-at-atlan.md
+    channel: web
+    ingested_at: 2026-06-12
+  - path: raw/email/email-2026-04-17-cross-platform-agent-skills-guide-claude-code-codex-cursor-c.md
+    channel: email
+    ingested_at: 2026-06-12
+  - path: raw/web/github-cursor-plugins-cursor-plugin-specification-and-offici.md
+    channel: web
+    ingested_at: 2026-06-12
+aliases:
+  - CLAUDE.md
+  - AGENTS.md
+  - cursor rules
+  - .mdc rules
+  - agent instruction files
+  - claude.md best practices
+  - cross-platform skills
+tags:
+  - corpus/ai-engineering
+  - concept
+created: 2026-06-12
+updated: 2026-06-12
+---
+
+# CLAUDE.md & Agent Instruction Conventions
+
+**TL;DR**: Coding agents read project conventions from markdown instruction files — `CLAUDE.md` (Claude Code), `AGENTS.md` (generic), and `.cursor/rules/*.mdc` (Cursor). The governing constraint is an **attention budget**: every line competes for a model's limited reliable-instruction capacity, so these files must be lean, assertive, and scoped [^src1]. A parallel goal is making the same conventions portable across agents (Claude Code, Codex, Cursor, Copilot) [^src3].
+
+## The file hierarchy (Claude Code)
+
+Claude Code reads instructions from three scopes, concatenated into context at session start [^src1]:
+
+| File | Scope | Use for |
+|---|---|---|
+| `~/.claude/CLAUDE.md` | Global (every project) | Personal preferences — "always run tests", "ask before committing". Keep under ~15 lines |
+| `.claude/CLAUDE.md` | Project (committed to git) | Stack, structure, commands, team conventions, domain knowledge |
+| `./CLAUDE.local.md` | Local (gitignored) | Personal overrides — your terminal, your MCP servers |
+
+Files are concatenated, not overridden; on conflict the model follows the **last** one read, and `CLAUDE.local.md` loads after `CLAUDE.md` so personal notes get the final word at each level [^src1]. Subdirectory `CLAUDE.md` files (e.g. `src/auth/CLAUDE.md`) load **on demand** only when working in that directory, keeping the root file lean [^src1].
+
+## The attention budget — why less is more
+
+Claude Code's system prompt already contains ~50 instructions — "a third of the ~150–200 instruction limit frontier models can reliably follow" [^src1]. The practical benchmark: if a project `CLAUDE.md` exceeds ~80 lines (HumanLayer keeps theirs under 60), the model "starts ignoring parts of it" [^src1]. This is the same context-rot constraint covered in [[ai-engineering/context-window-management|Context Window Management]].
+
+### What to put where
+
+| Rule | Scope | Why |
+|---|---|---|
+| "Run tests after changes" | Global | Wanted everywhere |
+| "Use shadcn/ui components" | Project | Team convention |
+| "Never use `any` in TypeScript" | Project | Team standard |
+| "Prices are in `src/lib/config`" | Project | Domain knowledge |
+| "I use Ghostty terminal" | Local | Only you need it |
+
+### Anti-patterns to cut [^src1]
+
+- **Personality instructions** ("be a senior engineer", "think step by step") — wastes tokens; the harness already has strong system instructions.
+- **`@-mentioning` docs** — `@docs/api-guide.md` embeds the whole file every session. Instead pitch when to read it: "For Stripe issues, see `docs/stripe-guide.md`."
+- **Formatting rules a formatter already enforces** — use a hook, not a `CLAUDE.md` line. (But concrete style rules like "2-space indentation" are valid if you have *no* formatter.)
+- **Duplicate rules** across global and project files.
+
+### Advisory vs deterministic
+
+`CLAUDE.md` is **advisory** — the model may or may not follow it. For guarantees (formatting, key-leak checks), use **hooks**, which the harness executes deterministically [^src1]. Auto-memory (`~/.claude/projects/<project>/memory/`) also loads at session start; don't hand-write things the agent learns on its own [^src1].
+
+## The self-improvement loop
+
+The single most impactful habit: after every correction, end with *"Update CLAUDE.md so you don't make that mistake again"* — the file becomes a living document that gets smarter each session [^src1]. Cursor has a direct analog: `/Generate Cursor Rules` turns a productive chat into a reusable `.mdc` rule [^src2].
+
+## Cursor rules (`.cursor/rules/*.mdc`)
+
+Cursor stores conventions as `.mdc` files in `.cursor/rules/`, with four activation types [^src2]:
+
+| Rule type | When applied | Best for |
+|---|---|---|
+| **Always** | Every interaction | Core project patterns, meta-rules |
+| **Auto Attached** | File-pattern (glob) match | File-specific rules (e.g. all `.ts` files) |
+| **Agent Requested** | When the AI judges it relevant (needs a good description) | Workflows, processes |
+| **Manual** | Invoked explicitly with `@rule-name.mdc` | Specialized one-off helpers |
+
+Atlan's engineers recommend every AI-native project cover four rule kinds: **Project** (what the project is, structure), **Tech Stack** (how the team writes code), **Micro Workflow** (team habits — logging, feature flags, migrations), and **Meta Rules** (how to prioritize/resolve conflicts between rules) [^src2].
+
+**Writing philosophy** [^src2]:
+- **Be assertive, not suggestive** — "Always define TypeScript interfaces for component props", not "Consider using interfaces". LLMs don't handle nuance; vague rules get ignored.
+- **Place important context last** — LLMs prioritize the end of a rule file; order as *what → how → why*.
+- **Extract reusable patterns** with `@include ../shared/setup.md` to stay DRY.
+- **~1 concept per rule, under 50–80 lines.** Review monthly — "rules are code".
+
+Note the convergent benchmark: both Claude Code and Cursor land on **~80 lines / one concept** as the ceiling before instructions get dropped [^src1][^src2].
+
+## The Karpathy-derived CLAUDE.md
+
+A widely-shared single `CLAUDE.md` distills Andrej Karpathy's observations on LLM coding pitfalls — that models "make wrong assumptions… and just run along with them without checking" and "like to overcomplicate code… implement a bloated construction over 1000 lines when 100 would do" [^src4]. Four principles address these [^src4]:
+
+| Principle | Addresses |
+|---|---|
+| **Think Before Coding** | State assumptions, present interpretations, push back, stop when confused |
+| **Simplicity First** | No speculative features/abstractions; "if 200 lines could be 50, rewrite it" |
+| **Surgical Changes** | Touch only what the request requires; don't refactor or delete pre-existing dead code |
+| **Goal-Driven Execution** | Transform "fix the bug" into "write a failing test, then make it pass" |
+
+The fourth captures Karpathy's "give it success criteria and watch it go" — strong, verifiable criteria let the model loop independently (see [[ai-engineering/agent-testing|Agent Testing]]) [^src4]. It ships both as a Claude Code plugin and as a `CLAUDE.md`, plus a committed `.cursor/rules/karpathy-guidelines.mdc` so the same rules apply in Cursor — an early example of cross-platform convention sharing [^src4].
+
+## Cross-platform conventions
+
+The newer frontier is keeping one set of conventions working across **Claude Code, Codex, Cursor, Copilot, and Antigravity** [^src3]. The pattern: a central, version-controlled monorepo of agent skills that each tool picks up automatically, so changes "stay in sync everywhere" without per-tool reconfiguration [^src3]. See [[ai-engineering/agent-skills|Agent Skills]] for the skill mechanic this builds on.
+
+**Cursor plugins** formalize this on Cursor's side: each plugin is a directory with a `.cursor-plugin/plugin.json` manifest and may contain `skills/` (`SKILL.md` with frontmatter), `rules/` (`.mdc` files), and `mcp.json` — bundling skills, rules, and MCP servers into one installable, marketplace-distributable unit [^src5]. Notable official plugins include `continual-learning` (incremental transcript-driven `AGENTS.md` memory updates), `cli-for-agent` (patterns for CLIs agents can run reliably), and `orchestrate` (fan tasks across parallel cloud agents) [^src5].
+
+## Related
+
+- [[ai-engineering/agent-skills|Agent Skills]] — progressive disclosure; skills vs always-on instruction files
+- [[ai-engineering/context-window-management|Context Window Management]] — the attention-budget constraint
+- [[ai-engineering/agent-testing|Agent Testing]] — the verification loop Goal-Driven Execution depends on
+- [[ai-engineering/ai-agent|AI Agent]] — instruction files configure the agent's harness
+
+---
+
+[^src1]: [abhishekray07/claude-md-templates — CLAUDE.md best practices](../../raw/web/github-abhishekray07-claude-md-templates-claude-md-best-prac.md)
+[^src2]: [Cursor Rules in Action: How Our Engineers Use It at Atlan](../../raw/web/cursor-rules-in-action-how-our-engineers-use-it-at-atlan.md)
+[^src3]: [Cross-Platform Agent Skills Guide: Claude Code, Codex, Cursor & Copilot](../../raw/email/email-2026-04-17-cross-platform-agent-skills-guide-claude-code-codex-cursor-c.md)
+[^src4]: [multica-ai/andrej-karpathy-skills — A single CLAUDE.md file](../../raw/web/github-multica-ai-andrej-karpathy-skills-a-single-claude-md.md)
+[^src5]: [cursor/plugins — Cursor Plugin Specification and Official Plugins](../../raw/web/github-cursor-plugins-cursor-plugin-specification-and-offici.md)

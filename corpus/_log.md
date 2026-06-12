@@ -367,3 +367,15 @@ Out of scope for this commit (deferred):
 - source summaries (2): sources/dbt-kimball-project, sources/aws-duckdb-etl-fargate.
 - cross-domain (DE-primary, link from ai-engineering later): claude-code-for-data-engineering, ai-observability-data-pipeline.
 - notes: data-diff flagged deprecated; CDC page has an [unsourced] marker where the captured email excerpt was truncated; vendor benchmark figures (Databricks/Greybeam) marked vendor-reported. Remaining inbox: 121 sources (ai-engineering + other clusters) for future waves.
+
+## [2026-06-12] ingest | email-backlog wave 2 — ai-engineering cluster
+
+- pipeline: v0.6 optimized batch (Phase 0–5), Coordinator + 6 parallel per-batch workers; planner-led survey/registry first.
+- sources: 121 ai-engineering sources surveyed → 96 consumed, ~25 skipped (promo/event/login-stub/off-cluster model cards).
+- channels: 27 emails (moved raw/_inbox → raw/email, stamped), 69 web captures (stamped in place).
+- domain decision (§9): kept all in ai-engineering (no new domain); added two sub-hubs — agentic-coding (synthesis) and claude-cowork (entity). User-confirmed.
+- new ai-engineering pages (13): agent-harness, agentic-coding (sub-hub), claude-code, claude-cowork (sub-hub), anthropic, claude-api, prompt-engineering, agent-security, structured-outputs, agentic-search, agent-testing, claude-md-conventions, agent-ui.
+- updated ai-engineering pages (7): agent-skills, mcp (stub→draft), rag, agent-memory, vector-database (stub→draft), agent-evaluation, ai-agent.
+- cross-domain (B6, data-engineering-primary): NEW agentic-data-modeling; UPDATED claude-code-for-data-engineering (+6 src). Linked to ai-engineering/claude-code.
+- dedup: model releases (Opus 4.8, Fable 5, Mythos 5) kept as sections in anthropic, not separate pages; pi-coding-agent (×3), playwright-testing (×2), cowork (×2), zazencodes-skills (×2) deduped to single pages.
+- notes: prompt-engineering kept distinct from context-engineering; grep-vs-vector handled as a section in agentic-search (not a synthesis); a few [unsourced] markers where captured pages were JS-gated/login stubs. ai-engineering now ~38 pages (sub-hubs justified, no split). Remaining inbox: 94 sources (software/mlops/productivity/etc.) for future waves.
