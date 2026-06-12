@@ -53,17 +53,20 @@ def cmd_collect(args) -> int:
                     if co.url_already_collected(url) or co.url_in_ledger(url, ledger):
                         t["skipped"] += 1
                         continue
+                    if args.dry_run:
+                        # Count as discovered; do not hit the network on a dry run.
+                        t["urls"] += 1
+                        continue
                     content = fetch_url(url)
                     if not content or not content.get("text"):
                         t["url_failed"] += 1
                         continue
-                    if not args.dry_run:
-                        path = co.url_filename(url, content.get("title", ""))
-                        path.parent.mkdir(parents=True, exist_ok=True)
-                        path.write_text(co.build_url_source(
-                            {"source_url": url, "via_vault_list": d["rel_path"],
-                             "title": content.get("title", ""), "collected_at": collected_at},
-                            content["text"]), encoding="utf-8")
+                    path = co.url_filename(url, content.get("title", ""))
+                    path.parent.mkdir(parents=True, exist_ok=True)
+                    path.write_text(co.build_url_source(
+                        {"source_url": url, "via_vault_list": d["rel_path"],
+                         "title": content.get("title", ""), "collected_at": collected_at},
+                        content["text"]), encoding="utf-8")
                     t["urls"] += 1
         except Exception:
             t["skipped"] += 1

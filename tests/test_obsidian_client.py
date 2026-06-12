@@ -110,6 +110,22 @@ def test_reap_rejects_path_traversal(tmp_path, monkeypatch):
     assert calls == []   # traversal outside vault must never reach git_rm
 
 
+def test_collect_dry_run_does_not_fetch(tmp_path, monkeypatch):
+    vault = tmp_path / "vault"
+    (vault / "00_Inbox/Clippings").mkdir(parents=True)
+    (vault / "00_Inbox/Clippings/articles to process.md").write_text(
+        "https://a.com/x\n", encoding="utf-8")
+    inbox = tmp_path / "inbox"; inbox.mkdir()
+    monkeypatch.setattr(oc.co, "INBOX", inbox)
+    monkeypatch.setattr(oc.co, "DEDUP_DIRS", [inbox])
+
+    fetched = []
+    monkeypatch.setattr(oc, "fetch_url", lambda url: fetched.append(url) or {"text": "x", "title": "t"})
+    rc = oc.cmd_collect(oc._args(["collect", "--vault", str(vault), "--dry-run"]))
+    assert rc == 0
+    assert fetched == []   # no network under --dry-run
+
+
 def test_reap_dry_run_changes_nothing(tmp_path, monkeypatch):
     vault = tmp_path / "vault"; (vault / "03_Resources/Articles").mkdir(parents=True)
     raw = tmp_path / "raw"; raw.mkdir()
