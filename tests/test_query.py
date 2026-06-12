@@ -66,9 +66,25 @@ def test_already_queued_missing_dir_skipped(tmp_path):
     assert query.already_queued("https://a.com/x", [missing]) is False
 
 
-def test_dedup_dirs_constant_defaults():
-    names = [p.name for p in query.DEDUP_DIRS]
-    assert names == ["_inbox", "web", "youtube"]
+def test_dedup_finds_match_in_youtube_dir(tmp_path):
+    # Behavior check: a source already living in the youtube dedup dir is found,
+    # proving youtube participates in dedup (not asserting the literal constant).
+    inbox = tmp_path / "_inbox"
+    web = tmp_path / "web"
+    youtube = tmp_path / "youtube"
+    youtube.mkdir()
+    (youtube / "transcript.md").write_text(
+        f"source_url: {query.ce.yaml_scalar('https://youtu.be/abcdefghijk')}\n",
+        encoding="utf-8",
+    )
+    assert query.already_queued(
+        "https://youtu.be/abcdefghijk", [inbox, web, youtube]
+    ) is True
+
+
+def test_dedup_dirs_constant_includes_expected_dirs():
+    names = {p.name for p in query.DEDUP_DIRS}
+    assert {"_inbox", "web", "youtube"} <= names
 
 
 # ===== UNIT 2 — build_web_document =====
@@ -89,6 +105,28 @@ def test_build_web_document_structure():
     # frontmatter closes then stripped body
     assert "---\n\nthe body\n" in out
     assert out.endswith("\n")
+
+
+def test_build_web_document_emits_youtube_channel():
+    meta = {
+        "channel": "youtube",
+        "source_url": "https://a.com/x",
+        "via_query": "q",
+        "fetched_at": "2026-06-12",
+    }
+    out = query.build_web_document(meta, "body")
+    assert "channel: youtube" in out
+    assert "channel: web" not in out
+
+
+def test_build_web_document_defaults_channel_web():
+    meta = {
+        "source_url": "https://a.com/x",
+        "via_query": "q",
+        "fetched_at": "2026-06-12",
+    }
+    out = query.build_web_document(meta, "body")
+    assert "channel: web" in out
 
 
 def test_build_web_document_quotes_question_with_colon():
@@ -126,7 +164,8 @@ def _article(title="My Article"):
 def test_queue_source_writes_file(tmp_path):
     inbox = tmp_path / "_inbox"
     res = query.queue_source(
-        "what is X", _article(), inbox=inbox, dedup_dirs=[inbox], at="2026-06-12"
+        "what is X", _article(), "https://a.com/x",
+        inbox=inbox, dedup_dirs=[inbox], at="2026-06-12"
     )
     assert res["status"] == "written"
     assert res["source_url"] == "https://a.com/x"
@@ -135,6 +174,23 @@ def test_queue_source_writes_file(tmp_path):
     content = p.read_text(encoding="utf-8")
     assert "via_query: what is X" in content
     assert 'source_url: "https://a.com/x"' in content
+    assert "channel: web" in content
+
+
+def test_queue_source_writes_youtube_channel(tmp_path):
+    inbox = tmp_path / "_inbox"
+    yt = {
+        "title": "YouTube abc",
+        "text": "[00:00] hi",
+        "channel": "youtube",
+    }
+    res = query.queue_source(
+        "what is X", yt, "https://youtu.be/abcdefghijk",
+        inbox=inbox, dedup_dirs=[inbox], at="2026-06-12"
+    )
+    assert res["status"] == "written"
+    content = Path(res["path"]).read_text(encoding="utf-8")
+    assert "channel: youtube" in content
 
 
 def test_queue_source_duplicate_writes_nothing(tmp_path):
@@ -145,7 +201,8 @@ def test_queue_source_duplicate_writes_nothing(tmp_path):
     )
     before = set(inbox.glob("*.md"))
     res = query.queue_source(
-        "what is X", _article(), inbox=inbox, dedup_dirs=[inbox], at="2026-06-12"
+        "what is X", _article(), "https://a.com/x",
+        inbox=inbox, dedup_dirs=[inbox], at="2026-06-12"
     )
     assert res["status"] == "duplicate"
     assert res["source_url"] == "https://a.com/x"
@@ -154,10 +211,14 @@ def test_queue_source_duplicate_writes_nothing(tmp_path):
 
 def test_queue_source_collision_distinct_paths(tmp_path):
     inbox = tmp_path / "_inbox"
-    a = dict(_article(), source_url="https://a.com/one")
-    b = dict(_article(), source_url="https://a.com/two")
-    r1 = query.queue_source("q", a, inbox=inbox, dedup_dirs=[inbox], at="2026-06-12")
-    r2 = query.queue_source("q", b, inbox=inbox, dedup_dirs=[inbox], at="2026-06-12")
+    a = _article()
+    b = _article()
+    r1 = query.queue_source(
+        "q", a, "https://a.com/one", inbox=inbox, dedup_dirs=[inbox], at="2026-06-12"
+    )
+    r2 = query.queue_source(
+        "q", b, "https://a.com/two", inbox=inbox, dedup_dirs=[inbox], at="2026-06-12"
+    )
     assert r1["status"] == "written"
     assert r2["status"] == "written"
     assert r1["path"] != r2["path"]

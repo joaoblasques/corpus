@@ -42,9 +42,10 @@ def already_queued(source_url: str, search_dirs: list[Path] | None = None) -> bo
 
 
 def build_web_document(meta: dict, text: str) -> str:
+    # channel is a trusted literal ("web"/"youtube"), so no yaml_scalar quoting.
     lines = [
         "---",
-        "channel: web",
+        f"channel: {meta.get('channel', 'web')}",
         f"source_url: {ce.yaml_scalar(meta['source_url'])}",
         f"via_query: {ce.yaml_scalar(meta['via_query'])}",
         f"fetched_at: {meta['fetched_at']}",
@@ -56,13 +57,15 @@ def build_web_document(meta: dict, text: str) -> str:
     return "\n".join(lines)
 
 
-def queue_source(question: str, fetch_result: dict, inbox: Path | None = None,
+def queue_source(question: str, fetch_result: dict, source_url: str,
+                 inbox: Path | None = None,
                  dedup_dirs: list[Path] | None = None, at: str | None = None) -> dict:
-    source_url = fetch_result["source_url"]
     if already_queued(source_url, dedup_dirs):
         return {"status": "duplicate", "source_url": source_url}
     fetched_at = at or datetime.date.today().isoformat()
-    meta = {"source_url": source_url, "via_query": question, "fetched_at": fetched_at}
+    channel = fetch_result.get("channel", "web")
+    meta = {"channel": channel, "source_url": source_url,
+            "via_query": question, "fetched_at": fetched_at}
     base = inbox if inbox is not None else INBOX
     base.mkdir(parents=True, exist_ok=True)
     path = ce.link_target(fetch_result["title"], base, message_hint=source_url)
@@ -114,9 +117,8 @@ def main(argv=None) -> int:
         except Exception as e:
             print(json.dumps({"status": "error", "error": str(e), "url": args.url}))
             return 1
-        fetched["source_url"] = args.url
         inbox = Path(args.inbox) if args.inbox else None
-        result = queue_source(args.question, fetched, inbox=inbox)
+        result = queue_source(args.question, fetched, args.url, inbox=inbox)
         print(json.dumps(result))
         return 0
 
@@ -125,8 +127,6 @@ def main(argv=None) -> int:
         log_gap(args.question, args.note, queued, args.at)
         print(json.dumps({"status": "logged"}))
         return 0
-
-    return 1
 
 
 if __name__ == "__main__":
