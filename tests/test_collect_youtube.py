@@ -60,3 +60,18 @@ def test_transcript_to_markdown():
     md = cy.transcript_to_markdown(snips, "vid", window=25)
     assert "[00:00](https://youtu.be/vid?t=0) intro" in md
     assert "[00:30](https://youtu.be/vid?t=30) next" in md
+
+
+def test_dedup_vtt_strips_tags_and_rolling_dups():
+    vtt = (
+        "WEBVTT\n\n"
+        "00:00:00.000 --> 00:00:02.000\n"
+        "<c>hello</c> there\n\n"
+        "00:00:02.000 --> 00:00:04.000\n"
+        "hello there\n\n"                # rolling duplicate of previous cue
+        "00:00:04.000 --> 00:00:06.000\n"
+        "next line\n"
+    )
+    snips = cy.dedup_vtt(vtt)
+    assert [s["text"] for s in snips] == ["hello there", "next line"]
+    assert snips[0]["start"] == 0 and snips[1]["start"] == 4

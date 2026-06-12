@@ -83,3 +83,34 @@ def transcript_to_markdown(snippets: list, video_id: str, window: int = 25) -> s
     return "\n\n".join(
         f"{ts_anchor(g['start'], video_id)} {' '.join(g['texts'])}" for g in groups
     )
+
+
+_VTT_TS = re.compile(r"(\d{2}):(\d{2}):(\d{2})\.\d{3}\s*-->")
+
+
+def dedup_vtt(vtt_text: str) -> list:
+    """Parse a WebVTT body into [{start,text}], stripping inline tags and rolling dups."""
+    snippets, last = [], None
+    cur_start, buf = None, []
+
+    def flush():
+        nonlocal cur_start, buf, last
+        if cur_start is None:
+            return
+        text = re.sub(r"<[^>]+>", "", " ".join(buf))
+        text = re.sub(r"\s+", " ", text).strip()
+        if text and text != last:
+            snippets.append({"start": cur_start, "text": text})
+            last = text
+        cur_start, buf = None, []
+
+    for raw in vtt_text.splitlines():
+        line = raw.strip()
+        m = _VTT_TS.match(line)
+        if m:
+            flush()
+            cur_start = int(m.group(1)) * 3600 + int(m.group(2)) * 60 + int(m.group(3))
+        elif line and "WEBVTT" not in line and "-->" not in line and not line.isdigit():
+            buf.append(line)
+    flush()
+    return snippets
