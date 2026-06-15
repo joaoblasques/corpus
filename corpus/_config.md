@@ -1,7 +1,7 @@
 ---
 type: config
 created: 2026-05-20
-updated: 2026-06-12
+updated: 2026-06-15
 ---
 
 # Corpus Config
@@ -66,3 +66,33 @@ Rules:
 - **Include:** `03_Resources/{Articles, Books, Study Notes, Snippets, Prompt Templates}`, `00_Inbox/Clippings/`.
 - **Exclude:** `03_Resources/llm-wiki-system` (corpus mirror), `01_Projects`, `02_Areas`, `04_Archive`, rest of `00_Inbox`, `*_processed.md`, `README.md`, binaries.
 - The `/collect-obsidian` skill copies these into `raw/_inbox/` (channel `notes`; URL-list links → `web`), and — after `corpus_ingested` — removes the vault original (git-recoverable, not auto-committed). The authoritative include/exclude policy lives in `bin/collect_obsidian.py`.
+
+---
+
+## Scheduled automation (daily collection + ingest)
+
+The corpus runs a daily unattended pipeline via a macOS LaunchAgent:
+
+1. **Collection** — gmail, obsidian, and (when configured) youtube collectors run.
+2. **Ingest** — bounded headless Claude `/ingest-auto` processes up to 20 inbox items.
+3. **Commit/push** — `corpus/` changes are staged, committed, and pushed (R10: never `raw/`).
+4. **Log** — each run appends a `config | scheduled run` entry to `corpus/_log.md`.
+
+**Entrypoint:** `python3 bin/scheduled_run.py run` (default: `--max 20 --timeout 600`).
+
+**Schedule:** daily at 08:00 via `StartCalendarInterval`. If the Mac is asleep at that time, launchd fires the job exactly once on the next wake — no flood of back-to-back runs.
+
+**Installed plist:** `~/Library/LaunchAgents/com.corpus.daily.plist` — lives on the local Mac only; NOT committed to the repo.
+
+**Repo ships:** `automation/com.corpus.daily.plist.template` + `automation/install_schedule.sh`.
+
+| Action | Command |
+|---|---|
+| Install / re-install | `bash automation/install_schedule.sh` |
+| Uninstall | `bash automation/install_schedule.sh uninstall` |
+| Verify registered | `launchctl print gui/$(id -u)/com.corpus.daily` |
+| Force a manual run | `launchctl kickstart -k gui/$(id -u)/com.corpus.daily` |
+| Disable (keep plist) | `launchctl disable gui/$(id -u)/com.corpus.daily` |
+| Tail run log | `tail -f raw/.scheduled_run.log` |
+
+Log path `raw/.scheduled_run.log` is gitignored.

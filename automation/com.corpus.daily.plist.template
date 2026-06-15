@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+    "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.corpus.daily</string>
+
+    <!--
+        StartCalendarInterval fires the job at the specified wall-clock time each day.
+        ASLEEP / CATCH-UP SEMANTICS: if the Mac is asleep at 08:00, launchd fires the
+        job exactly once on the next wake — satisfying R3 (one catch-up run, not a
+        flood).  Missed intervals do NOT accumulate; only the most recent missed fire
+        is replayed.
+    -->
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>8</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+
+    <!-- Do NOT run immediately on bootstrap — wait for the next scheduled time. -->
+    <key>RunAtLoad</key>
+    <false/>
+
+    <!--
+        WorkingDirectory must be absolute; launchd spawns jobs with a minimal
+        environment and no shell PATH, so relative paths would fail silently.
+    -->
+    <key>WorkingDirectory</key>
+    <string>__REPO_ROOT__</string>
+
+    <!--
+        ProgramArguments must use absolute paths for the interpreter.
+        The script path is prefixed with __REPO_ROOT__ for robustness even though
+        WorkingDirectory is already set.
+    -->
+    <key>ProgramArguments</key>
+    <array>
+        <string>__PYTHON__</string>
+        <string>__REPO_ROOT__/bin/scheduled_run.py</string>
+        <string>run</string>
+    </array>
+
+    <!--
+        Both stdout and stderr go to the gitignored run-log so every run is
+        auditable without polluting the repo.
+    -->
+    <key>StandardOutPath</key>
+    <string>__REPO_ROOT__/raw/.scheduled_run.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>__REPO_ROOT__/raw/.scheduled_run.log</string>
+</dict>
+</plist>

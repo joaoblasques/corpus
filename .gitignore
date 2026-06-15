@@ -32,3 +32,8 @@ bin/token.json
 # YouTube collector — personal token + playlist policy config
 bin/youtube_token.json
 bin/youtube_playlists.yaml
+
+# Scheduled-run lock + log — single-flight artifacts, always local
+# Note: raw/_inbox/_REVIEW.md is already covered by the raw/_inbox/* rule above.
+raw/.scheduled_run.lock
+raw/.scheduled_run.log
