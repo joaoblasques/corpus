@@ -440,6 +440,29 @@ class TestRunIngest:
         assert result["deferred"] == 0
 
 
+class TestParseIngestCounts:
+    """_parse_ingest_counts extracts (ingested, deferred) from the skill result text."""
+
+    def test_pure_json_result(self):
+        text = '{"ingested": 2, "deferred": 1, "pages_created": 0, "pages_updated": 2}'
+        assert scheduled_run._parse_ingest_counts(text) == (2, 1)
+
+    def test_prose_then_trailing_json(self):
+        text = 'Ingested 2 sources, deferred 1.\n{"ingested": 2, "deferred": 1}'
+        assert scheduled_run._parse_ingest_counts(text) == (2, 1)
+
+    def test_prose_only_returns_zero(self):
+        text = "ingest-auto complete: 2 ingested, 1 deferred"  # no JSON object
+        assert scheduled_run._parse_ingest_counts(text) == (0, 0)
+
+    def test_dict_input(self):
+        assert scheduled_run._parse_ingest_counts({"ingested": 5, "deferred": 3}) == (5, 3)
+
+    def test_empty_or_non_string(self):
+        assert scheduled_run._parse_ingest_counts("") == (0, 0)
+        assert scheduled_run._parse_ingest_counts(None) == (0, 0)
+
+
 # ---------------------------------------------------------------------------
 # write_run_report tests
 # ---------------------------------------------------------------------------
@@ -699,6 +722,11 @@ class TestCommitAndPush:
         subcommands = [c[1] for c in calls if len(c) > 1]
         assert subcommands == ["status", "add", "commit", "push"], (
             f"expected [status, add, commit, push], got {subcommands}"
+        )
+        # Push must be explicit (origin HEAD) so it works without upstream tracking.
+        push_cmd = next(c for c in calls if len(c) > 1 and c[1] == "push")
+        assert push_cmd[2:] == ["origin", "HEAD"], (
+            f"expected `git push origin HEAD`, got {push_cmd}"
         )
 
     def test_commit_message_contains_timestamp_and_counts(self, tmp_path):

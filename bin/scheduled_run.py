@@ -313,8 +313,9 @@ def run_ingest(
     prompt = (
         f"Use the /ingest-auto skill. "
         f"Ingest items from raw/_inbox/ — process at most {max_n} items this run. "
-        f"Follow all steps in the skill. When done, output a JSON summary with keys: "
-        f"ingested (int), deferred (int), pages_created (list of str)."
+        f"Follow all steps in the skill. Your FINAL message must be EXACTLY one flat "
+        f'JSON object and nothing else: {{"ingested": <int>, "deferred": <int>, '
+        f'"pages_created": <int>, "pages_updated": <int>}}'
     )
 
     cmd = [
@@ -365,19 +366,42 @@ def run_ingest(
             "error": envelope.get("result", "claude reported is_error=true"),
         }
 
-    # Try to extract structured summary from .result (skill outputs JSON in result).
-    result_text = envelope.get("result", "")
-    ingested = 0
-    deferred = 0
-    try:
-        # The skill is asked to output JSON — try to parse it from result.
-        inner = json.loads(result_text) if isinstance(result_text, str) else result_text
-        ingested = int(inner.get("ingested", 0))
-        deferred = int(inner.get("deferred", 0))
-    except (json.JSONDecodeError, TypeError, ValueError, AttributeError):
-        pass  # result wasn't JSON / null / non-dict — still count as ok, counts stay 0
-
+    # Extract structured counts from .result (skill ends with a JSON summary).
+    ingested, deferred = _parse_ingest_counts(envelope.get("result", ""))
     return {"status": "ok", "ingested": ingested, "deferred": deferred}
+
+
+def _parse_ingest_counts(result_text) -> tuple[int, int]:
+    """Extract (ingested, deferred) from the /ingest-auto skill's result text.
+
+    The skill is instructed to END with a flat JSON object
+    ``{"ingested": N, "deferred": M, ...}``. Parse it directly; if the agent
+    prefixed prose, fall back to the last ``{...}`` object in the text. Returns
+    (0, 0) when nothing parseable is present.
+    """
+    if isinstance(result_text, dict):
+        try:
+            return int(result_text.get("ingested", 0)), int(result_text.get("deferred", 0))
+        except (TypeError, ValueError):
+            return 0, 0
+    if not isinstance(result_text, str):
+        return 0, 0
+
+    candidates = [result_text.strip()]
+    flat_objects = re.findall(r"\{[^{}]*\}", result_text)  # flat JSON objects only
+    if flat_objects:
+        candidates.append(flat_objects[-1])  # trailing object, when prose precedes it
+    for cand in candidates:
+        try:
+            obj = json.loads(cand)
+        except (json.JSONDecodeError, TypeError, ValueError):
+            continue
+        if isinstance(obj, dict) and ("ingested" in obj or "deferred" in obj):
+            try:
+                return int(obj.get("ingested", 0)), int(obj.get("deferred", 0))
+            except (TypeError, ValueError):
+                return 0, 0
+    return 0, 0
 
 
 # ---------------------------------------------------------------------------
@@ -477,9 +501,11 @@ def commit_and_push(
         sha = m.group(1)
 
     # --- Push ---
+    # Push the current HEAD explicitly to origin so it works even when the
+    # branch has no upstream tracking configured (launchd / fresh clones).
     try:
         push_proc = _run(
-            [GIT_BIN, "push"],
+            [GIT_BIN, "push", "origin", "HEAD"],
             capture_output=True,
             text=True,
             cwd=str(root),
