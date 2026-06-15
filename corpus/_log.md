@@ -422,3 +422,4 @@ Out of scope for this commit (deferred):
 - verification: 35/35 new pages present; 0 orphans (all hub-linked); 0 cross-domain slug collisions; 0 broken citation paths (428 checked).
 - corpus now 131 pages across 6 domains. mlops jumped to 17 pages / 16 new sources — strong graduation candidate at its 2026-07-09 provisional review.
 - follow-up: 1064 blocked youtube stubs await a throttled re-collection; collector needs a tweak to re-fetch on `status: blocked` (it currently dedupes by video-id and would skip them as already-collected).
+
