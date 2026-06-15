@@ -104,7 +104,7 @@ class TestCLI:
     def _run_cli(self, *args, lock_path: Path | None = None):
         """Helper: invoke the CLI in a subprocess and return (returncode, stdout)."""
         cmd = [sys.executable, str(Path(__file__).resolve().parent.parent / "bin" / "scheduled_run.py")]
-        if lock_path:
+        if lock_path is not None:
             cmd += ["--lock-path", str(lock_path)]
         cmd += list(args)
         result = subprocess.run(cmd, capture_output=True, text=True)
@@ -128,3 +128,14 @@ class TestCLI:
         lock = tmp_path / ".cli_test.lock"
         self._run_cli("run", lock_path=lock)
         assert not lock.exists(), "lock file should be cleaned up after CLI run"
+
+    def test_run_subcommand_skips_when_lock_already_held(self, tmp_path):
+        """The `run` subcommand exits 0 and reports skipped/lock_held when lock pre-exists."""
+        lock = tmp_path / ".cli_test.lock"
+        # Simulate a lock already held by another process.
+        lock.write_text("pid=99999\n", encoding="utf-8")
+        rc, out = self._run_cli("run", lock_path=lock)
+        assert rc == 0, f"expected exit 0 when lock is held, got {rc}"
+        parsed = json.loads(out)
+        assert parsed.get("status") == "skipped", f"expected status='skipped', got {parsed}"
+        assert parsed.get("reason") == "lock_held", f"expected reason='lock_held', got {parsed}"

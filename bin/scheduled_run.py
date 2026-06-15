@@ -45,9 +45,11 @@ def acquire_lock(lock_path: Path) -> bool:
     try:
         content = f"pid={os.getpid()}\n"
         os.write(fd, content.encode())
-    finally:
+    except BaseException:
         os.close(fd)
-
+        lock_path.unlink(missing_ok=True)
+        raise
+    os.close(fd)
     return True
 
 
@@ -80,6 +82,7 @@ def _build_parser() -> argparse.ArgumentParser:
     run_p.add_argument(
         "--dry-run",
         action="store_true",
+        # NOTE: args.dry_run is wired but not yet consumed; U3/U5 will branch on it.
         help="Acquire the lock and report status without running collectors.",
     )
 
