@@ -112,3 +112,38 @@ def test_already_collected_and_status(tmp_path):
     assert cy.already_collected("NOPE", [d]) is False
     assert cy.collected_status("VID9", [d]) == "ok"
     assert cy.collected_status("NOPE", [d]) is None
+
+
+def _seed(dirs_parent, video_id, status):
+    d = dirs_parent / "inbox"
+    d.mkdir(exist_ok=True)
+    (d / f"youtube-{video_id}-x.md").write_text(
+        f"---\nyoutube_video_id: {video_id}\ntranscript_status: {status}\n---\nbody\n",
+        encoding="utf-8")
+    return d
+
+
+def test_should_collect_never_collected(tmp_path):
+    d = _seed(tmp_path, "VID1", "ok")
+    assert cy.should_collect("NEW", refetch_blocked=False, dirs=[d]) is True
+    assert cy.should_collect("NEW", refetch_blocked=True, dirs=[d]) is True
+
+
+def test_should_collect_ok_is_skipped(tmp_path):
+    d = _seed(tmp_path, "OKV", "ok")
+    assert cy.should_collect("OKV", refetch_blocked=False, dirs=[d]) is False
+    assert cy.should_collect("OKV", refetch_blocked=True, dirs=[d]) is False
+
+
+def test_should_collect_blocked_only_refetched_with_flag(tmp_path):
+    d = _seed(tmp_path, "BLK", "blocked")
+    # default: a blocked stub still counts as collected (current behavior preserved)
+    assert cy.should_collect("BLK", refetch_blocked=False, dirs=[d]) is False
+    # with the flag: a blocked stub is re-fetched
+    assert cy.should_collect("BLK", refetch_blocked=True, dirs=[d]) is True
+
+
+def test_should_collect_disabled_never_refetched(tmp_path):
+    # 'disabled' = genuinely no captions; never worth retrying even with the flag
+    d = _seed(tmp_path, "DIS", "disabled")
+    assert cy.should_collect("DIS", refetch_blocked=True, dirs=[d]) is False
