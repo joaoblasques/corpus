@@ -151,7 +151,8 @@ def run_collectors(
         else:
             try:
                 data = json.loads(proc.stdout)
-                collected = data.get("written", 0)
+                # obsidian emits {"notes": N, "urls": M, ...} — no "written" key
+                collected = data.get("notes", 0) + data.get("urls", 0)
             except (json.JSONDecodeError, AttributeError):
                 collected = 0
             results["obsidian"] = {"status": "ok", "collected": collected}
@@ -177,7 +178,8 @@ def run_collectors(
             else:
                 try:
                     data = json.loads(proc.stdout)
-                    collected = data.get("written", 0)
+                    # youtube emits {"collected": N, ...} — no "written" key
+                    collected = data.get("collected", 0)
                 except (json.JSONDecodeError, AttributeError):
                     collected = 0
                 results["youtube"] = {"status": "ok", "collected": collected}
@@ -185,6 +187,99 @@ def run_collectors(
             results["youtube"] = {"status": "failed", "collected": 0, "error": str(exc)}
 
     return results
+
+
+# ---------------------------------------------------------------------------
+# Inbox relocation  (I1)
+# ---------------------------------------------------------------------------
+
+# Channel → subdirectory name mapping.
+_CHANNEL_DIR: dict[str, str] = {
+    "youtube": "youtube",
+    "email": "email",
+    "web": "web",
+    "matter": "matter",
+    "notes": "notes",
+}
+
+
+def move_processed_inbox(
+    inbox_dir: Path | None = None,
+    raw_dir: Path | None = None,
+    *,
+    _mover=None,
+) -> dict:
+    """Relocate stamped inbox files to their channel subdirectory under raw/.
+
+    Scans <inbox_dir>/*.md for files whose YAML frontmatter contains
+    ``corpus_ingested: true``.  For each match, reads the ``channel:`` field
+    and moves the file to ``<raw_dir>/<channel>/<filename>``.
+
+    Files that are unstamped or carry an unknown/missing channel are left in
+    place (skipped).  The destination directory is created if absent.
+
+    Args:
+        inbox_dir: Directory to scan (default: ROOT/raw/_inbox).
+        raw_dir: Parent raw directory (default: ROOT/raw).
+        _mover: Injectable callable(src: Path, dst: Path) replacing shutil.move.
+
+    Returns:
+        {"moved": int, "by_channel": {channel: count}, "skipped": int}
+    """
+    _move = _mover if _mover is not None else shutil.move
+    inbox = inbox_dir if inbox_dir is not None else ROOT / "raw" / "_inbox"
+    raw = raw_dir if raw_dir is not None else ROOT / "raw"
+
+    moved = 0
+    skipped = 0
+    by_channel: dict[str, int] = {}
+
+    for md_file in sorted(inbox.glob("*.md")):
+        stamped = False
+        channel = None
+        try:
+            text = md_file.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            skipped += 1
+            continue
+
+        # Lightweight YAML frontmatter scan — match on literal lines only.
+        in_front = False
+        for line in text.splitlines():
+            if line.strip() == "---":
+                if not in_front:
+                    in_front = True
+                    continue
+                else:
+                    break  # end of frontmatter block
+            if not in_front:
+                break  # no opening --- found
+            if line.startswith("corpus_ingested: true"):
+                stamped = True
+            if line.startswith("channel:"):
+                channel = line.split(":", 1)[1].strip()
+
+        if not stamped:
+            skipped += 1
+            continue
+
+        if channel not in _CHANNEL_DIR:
+            skipped += 1
+            continue
+
+        dest_dir = raw / _CHANNEL_DIR[channel]
+        dest_dir.mkdir(parents=True, exist_ok=True)
+        dest = dest_dir / md_file.name
+        try:
+            _move(md_file, dest)
+        except OSError:
+            skipped += 1
+            continue
+
+        moved += 1
+        by_channel[channel] = by_channel.get(channel, 0) + 1
+
+    return {"moved": moved, "by_channel": by_channel, "skipped": skipped}
 
 
 # ---------------------------------------------------------------------------
@@ -530,6 +625,15 @@ def main(argv=None) -> int:
                     max_n=args.max,
                     timeout_s=args.timeout,
                 )
+
+                # I1: relocate stamped inbox files — orchestrator does this
+                # deterministically (headless agent has no move/bash tool).
+                # Failure here must NOT abort the run.
+                try:
+                    tallies["inbox_move"] = move_processed_inbox()
+                except Exception as exc:  # noqa: BLE001
+                    tallies["inbox_move"] = {"moved": 0, "by_channel": {}, "skipped": 0,
+                                             "error": str(exc)}
 
                 # U5 SEAM: commit/push — scoped to corpus/ only (R10).
                 # Push failures are recorded in tallies but must NOT propagate.

@@ -203,8 +203,8 @@ class TestRunCollectors:
             script = cmd[1] if len(cmd) > 1 else ""
             if "gmail" in script:
                 return _make_proc(returncode=1, stderr="auth error")
-            # obsidian succeeds
-            return _make_proc(returncode=0, stdout=json.dumps({"written": 3}))
+            # obsidian succeeds — emits notes+urls keys (not "written")
+            return _make_proc(returncode=0, stdout=json.dumps({"notes": 2, "urls": 1}))
 
         result = scheduled_run.run_collectors(
             youtube_token_path=no_token,
@@ -262,7 +262,12 @@ class TestRunCollectors:
 
         def fake_run(cmd, **kwargs):
             calls.append(cmd)
-            return _make_proc(returncode=0, stdout=json.dumps({"written": 5}))
+            script = cmd[1] if len(cmd) > 1 else ""
+            if "youtube_client.py" in script:
+                # youtube emits {"collected": N, ...}
+                return _make_proc(returncode=0, stdout=json.dumps({"collected": 5}))
+            # other clients (gmail, obsidian) — return benign output
+            return _make_proc(returncode=0, stdout=json.dumps({"notes": 0, "urls": 0, "written": 0}))
 
         result = scheduled_run.run_collectors(
             youtube_token_path=token,
@@ -967,3 +972,250 @@ class TestCommitAndPushRunIntegration:
         assert "commit" in tallies_seen, f"'commit' key missing from tallies passed to report: {tallies_seen}"
         assert tallies_seen["commit"].get("status") == "committed"
         assert tallies_seen["commit"].get("sha") == "deadbeef"
+
+
+# ---------------------------------------------------------------------------
+# I1 — move_processed_inbox tests
+# ---------------------------------------------------------------------------
+
+class TestMoveProcessedInbox:
+    """Tests for scheduled_run.move_processed_inbox."""
+
+    def _write_stamped(self, path: Path, channel: str) -> None:
+        """Write a minimal inbox markdown file with corpus_ingested stamp."""
+        path.write_text(
+            f"---\nchannel: {channel}\ncorpus_ingested: true\ncorpus_ingested_at: 2026-06-15\n---\n\nBody.\n",
+            encoding="utf-8",
+        )
+
+    def _write_unstamped(self, path: Path, channel: str = "web") -> None:
+        """Write an inbox file WITHOUT the corpus_ingested stamp."""
+        path.write_text(
+            f"---\nchannel: {channel}\n---\n\nNot yet ingested.\n",
+            encoding="utf-8",
+        )
+
+    def test_stamped_youtube_moved_to_raw_youtube(self, tmp_path):
+        """A stamped channel=youtube file is moved to raw/youtube/."""
+        inbox = tmp_path / "_inbox"
+        inbox.mkdir()
+        raw = tmp_path / "raw"
+        src = inbox / "yt-video.md"
+        self._write_stamped(src, "youtube")
+
+        result = scheduled_run.move_processed_inbox(inbox_dir=inbox, raw_dir=raw)
+
+        assert not src.exists(), "source should be gone after move"
+        dest = raw / "youtube" / "yt-video.md"
+        assert dest.exists(), f"dest not found at {dest}"
+        assert result["moved"] == 1
+        assert result["by_channel"].get("youtube") == 1
+        assert result["skipped"] == 0
+
+    def test_stamped_email_moved_to_raw_email(self, tmp_path):
+        """A stamped channel=email file is moved to raw/email/."""
+        inbox = tmp_path / "_inbox"
+        inbox.mkdir()
+        raw = tmp_path / "raw"
+        src = inbox / "gmail-msg.md"
+        self._write_stamped(src, "email")
+
+        result = scheduled_run.move_processed_inbox(inbox_dir=inbox, raw_dir=raw)
+
+        assert not src.exists()
+        assert (raw / "email" / "gmail-msg.md").exists()
+        assert result["moved"] == 1
+        assert result["by_channel"].get("email") == 1
+
+    def test_unstamped_file_left_in_place(self, tmp_path):
+        """An unstamped file (no corpus_ingested: true) is skipped — stays in inbox."""
+        inbox = tmp_path / "_inbox"
+        inbox.mkdir()
+        raw = tmp_path / "raw"
+        src = inbox / "pending.md"
+        self._write_unstamped(src, "web")
+
+        result = scheduled_run.move_processed_inbox(inbox_dir=inbox, raw_dir=raw)
+
+        assert src.exists(), "unstamped file should remain in inbox"
+        assert result["moved"] == 0
+        assert result["skipped"] == 1
+
+    def test_stamped_unknown_channel_left_in_place(self, tmp_path):
+        """A stamped file with an unrecognised/missing channel is skipped."""
+        inbox = tmp_path / "_inbox"
+        inbox.mkdir()
+        raw = tmp_path / "raw"
+        src = inbox / "oddball.md"
+        src.write_text(
+            "---\ncorpus_ingested: true\ncorpus_ingested_at: 2026-06-15\n---\n\nNo channel field.\n",
+            encoding="utf-8",
+        )
+
+        result = scheduled_run.move_processed_inbox(inbox_dir=inbox, raw_dir=raw)
+
+        assert src.exists(), "unknown-channel file should remain in inbox"
+        assert result["moved"] == 0
+        assert result["skipped"] == 1
+
+    def test_mixed_batch_correct_tally(self, tmp_path):
+        """Mixed batch: two stamped (youtube, email) + one unstamped + one unknown channel."""
+        inbox = tmp_path / "_inbox"
+        inbox.mkdir()
+        raw = tmp_path / "raw"
+
+        a = inbox / "a.md"
+        self._write_stamped(a, "youtube")
+        b = inbox / "b.md"
+        self._write_stamped(b, "email")
+        c = inbox / "c.md"
+        self._write_unstamped(c)
+        d = inbox / "d.md"
+        d.write_text(
+            "---\ncorpus_ingested: true\nchannel: galactic\n---\n\nBody.\n",
+            encoding="utf-8",
+        )
+
+        result = scheduled_run.move_processed_inbox(inbox_dir=inbox, raw_dir=raw)
+
+        assert not a.exists()
+        assert not b.exists()
+        assert c.exists()
+        assert d.exists()
+        assert result["moved"] == 2
+        assert result["by_channel"] == {"youtube": 1, "email": 1}
+        assert result["skipped"] == 2
+
+    def test_destination_dir_created_if_missing(self, tmp_path):
+        """Destination raw/<channel>/ directory is created if it does not exist."""
+        inbox = tmp_path / "_inbox"
+        inbox.mkdir()
+        raw = tmp_path / "raw"
+        # raw/web/ does NOT pre-exist
+        assert not (raw / "web").exists()
+
+        src = inbox / "clip.md"
+        self._write_stamped(src, "web")
+
+        scheduled_run.move_processed_inbox(inbox_dir=inbox, raw_dir=raw)
+
+        assert (raw / "web" / "clip.md").exists()
+
+    def test_injectable_mover_called_with_src_and_dest(self, tmp_path):
+        """The _mover seam is called with (src_path, dest_path) for each file to move."""
+        inbox = tmp_path / "_inbox"
+        inbox.mkdir()
+        raw = tmp_path / "raw"
+        src = inbox / "note.md"
+        self._write_stamped(src, "notes")
+
+        moves = []
+
+        def fake_mover(s, d):
+            moves.append((s, d))
+
+        scheduled_run.move_processed_inbox(inbox_dir=inbox, raw_dir=raw, _mover=fake_mover)
+
+        assert len(moves) == 1
+        assert moves[0][0] == src
+        assert moves[0][1] == raw / "notes" / "note.md"
+
+    def test_move_processed_inbox_failure_does_not_propagate_out_of_run(self, tmp_path):
+        """If move_processed_inbox raises, run() still completes and releases lock."""
+        lock = tmp_path / ".test.lock"
+        log = tmp_path / "_log.md"
+
+        def boom(**kwargs):
+            raise RuntimeError("disk full")
+
+        with (
+            patch.object(scheduled_run, "run_collectors", return_value={
+                "gmail": {"status": "ok", "collected": 1},
+            }),
+            patch.object(scheduled_run, "run_ingest", return_value={
+                "status": "ok", "ingested": 1, "deferred": 0,
+            }),
+            patch.object(scheduled_run, "commit_and_push", return_value={"status": "nothing-to-commit"}),
+            patch.object(scheduled_run, "move_processed_inbox", side_effect=RuntimeError("disk full")),
+            patch.object(scheduled_run, "LOG_PATH", log),
+        ):
+            rc = scheduled_run.main(["--lock-path", str(lock), "run"])
+
+        assert rc == 0, f"expected rc=0 even when move_processed_inbox raises, got {rc}"
+        assert not lock.exists(), "lock must be released even after move failure"
+
+
+# ---------------------------------------------------------------------------
+# I2 — correct collector keys in run_collectors
+# ---------------------------------------------------------------------------
+
+class TestRunCollectorsCorrectKeys:
+    """Verify run_collectors extracts the right JSON keys per channel."""
+
+    def test_obsidian_collected_is_notes_plus_urls(self, tmp_path):
+        """obsidian collected = notes + urls (not 'written')."""
+        no_token = tmp_path / "no_token.json"
+
+        def fake_run(cmd, **kwargs):
+            script = cmd[1] if len(cmd) > 1 else ""
+            if "obsidian_client.py" in script:
+                return _make_proc(returncode=0, stdout=json.dumps(
+                    {"notes": 3, "urls": 2, "url_failed": 0, "skipped": 1,
+                     "dry_run": False, "discovered": 6}
+                ))
+            return _make_proc(returncode=0, stdout=json.dumps({"written": 0}))
+
+        result = scheduled_run.run_collectors(
+            youtube_token_path=no_token,
+            _subprocess_run=fake_run,
+        )
+
+        assert result["obsidian"]["status"] == "ok"
+        assert result["obsidian"]["collected"] == 5, (
+            f"expected notes(3)+urls(2)=5, got {result['obsidian']['collected']}"
+        )
+
+    def test_youtube_collected_uses_collected_key(self, tmp_path):
+        """youtube collected = data['collected'] (not 'written')."""
+        token = tmp_path / "youtube_token.json"
+        token.write_text("{}", encoding="utf-8")
+
+        def fake_run(cmd, **kwargs):
+            script = cmd[1] if len(cmd) > 1 else ""
+            if "youtube_client.py" in script:
+                return _make_proc(returncode=0, stdout=json.dumps(
+                    {"playlists": 1, "collected": 7, "duplicate": 2, "no_transcript": 0,
+                     "removed": 5, "kept": 2, "failed": 0, "dry_run": False,
+                     "ignored_playlists": []}
+                ))
+            return _make_proc(returncode=0, stdout=json.dumps({"written": 0}))
+
+        result = scheduled_run.run_collectors(
+            youtube_token_path=token,
+            _subprocess_run=fake_run,
+        )
+
+        assert result["youtube"]["status"] == "ok"
+        assert result["youtube"]["collected"] == 7, (
+            f"expected collected=7, got {result['youtube']['collected']}"
+        )
+
+    def test_gmail_collected_uses_written_key(self, tmp_path):
+        """gmail collected = data['written'] (unchanged)."""
+        no_token = tmp_path / "no_token.json"
+
+        def fake_run(cmd, **kwargs):
+            script = cmd[1] if len(cmd) > 1 else ""
+            if "gmail_client.py" in script:
+                return _make_proc(returncode=0, stdout=json.dumps({"written": 4}))
+            return _make_proc(returncode=0, stdout=json.dumps({"notes": 0, "urls": 0}))
+
+        result = scheduled_run.run_collectors(
+            youtube_token_path=no_token,
+            _subprocess_run=fake_run,
+        )
+
+        assert result["gmail"]["status"] == "ok"
+        assert result["gmail"]["collected"] == 4, (
+            f"expected written=4, got {result['gmail']['collected']}"
+        )

@@ -154,9 +154,16 @@ are NEVER written by this skill (Safety Rule 1).
 For each successfully ingested source (serialized, Coordinator):
 - Stamp the source file: `corpus_ingested: true`, `corpus_ingested_at: <today>`,
   `corpus_pages: [list]`.
-- Move the file from `raw/_inbox/` to the appropriate `raw/<channel>/` subfolder
-  (matter → `raw/matter/`, youtube → `raw/youtube/`, web/email/notes → `raw/web/` or
-  `raw/notes/` per the channel frontmatter field; if ambiguous, use `raw/web/`).
+- **File relocation (headless vs interactive):**
+  - **Headless mode** (invoked by `bin/scheduled_run.py`): do **not** move files.
+    Leave the stamped file in `raw/_inbox/`. The orchestrator
+    (`bin/scheduled_run.py::move_processed_inbox`) reads the stamp and the `channel:`
+    frontmatter field after the skill exits, then relocates files deterministically.
+    The stamp itself is the re-ingest guard (CLAUDE.md §9).
+  - **Interactive mode** (manual run): you may move the file from `raw/_inbox/` to the
+    appropriate `raw/<channel>/` subfolder (matter → `raw/matter/`, youtube →
+    `raw/youtube/`, web/email/notes → `raw/web/` or `raw/notes/` per the channel
+    frontmatter field; if ambiguous, use `raw/web/`), following CLAUDE.md §8.1 step 10A.
 - Update `corpus/_index.md` once from all worker deltas.
 - Append an `ingest` entry to `corpus/_log.md` (CLAUDE.md §12):
   ```

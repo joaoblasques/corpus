@@ -251,3 +251,48 @@ class TestMain:
         captured = capsys.readouterr()
         line = captured.out.strip()
         assert "1 awaiting your decision" in line
+
+
+# ---------------------------------------------------------------------------
+# M1 — latest_run_summary with T-format timestamps
+# ---------------------------------------------------------------------------
+
+class TestLatestRunSummaryTFormat:
+    """M1: latest_run_summary must extract only the date when the timestamp uses T-separator."""
+
+    def test_iso_t_format_date_extracted_correctly(self):
+        """Timestamp '2026-06-15T08:00' → date field is '2026-06-15' (not the full string)."""
+        log = (
+            "## [2026-06-15T08:00] config | scheduled run\n"
+            "- collectors:\n"
+            "  - gmail: 3 collected · status=ok\n"
+            "- ingest:\n"
+            "  - ingest: 2 ingested · 0 deferred · status=ok\n"
+        )
+        result = pending_review.latest_run_summary(log)
+        assert result is not None
+        assert result["date"] == "2026-06-15", (
+            f"expected '2026-06-15', got {result['date']!r}"
+        )
+
+    def test_iso_t_format_build_line_renders_date_only(self):
+        """build_line with a T-format date shows only YYYY-MM-DD in the output line."""
+        summary = {"date": "2026-06-15", "collected": 3, "ingested": 2}
+        line = pending_review.build_line(summary, 0)
+        assert "2026-06-15T08:00" not in line, (
+            "full ISO timestamp should not appear in output; only the date part"
+        )
+        assert "2026-06-15" in line
+
+    def test_space_separator_timestamp_still_works(self):
+        """Existing space-separator format '2026-06-15 08:00' still yields date '2026-06-15'."""
+        log = (
+            "## [2026-06-15 08:00] config | scheduled run\n"
+            "- collectors:\n"
+            "  - gmail: 1 collected · status=ok\n"
+            "- ingest:\n"
+            "  - ingest: 1 ingested · 0 deferred · status=ok\n"
+        )
+        result = pending_review.latest_run_summary(log)
+        assert result is not None
+        assert result["date"] == "2026-06-15"

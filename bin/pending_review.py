@@ -53,9 +53,9 @@ def latest_run_summary(log_text: str) -> dict | None:
         return None
 
     last_match = matches[-1]
-    date_str = last_match.group(1)  # e.g. "2026-06-15 08:00"
-    # Keep only the date part for display
-    date_display = date_str.split()[0] if date_str else date_str
+    date_str = last_match.group(1)  # e.g. "2026-06-15 08:00" or "2026-06-15T08:00"
+    # Keep only the date part for display — split on T or space (ISO 8601 variants)
+    date_display = re.split(r"[T ]", date_str)[0] if date_str else date_str
 
     # Slice the block text from the header to the next "## " or end-of-string
     block_start = last_match.start()
