@@ -13,8 +13,11 @@ This is the corpus's pre-push guardrail: the scope of what it may do is narrow a
 
 1. **Writes are confined to two locations only:**
    - `corpus/` — ungated corpus pages, plus `_index.md` and `_log.md` per the normal
-     ingest (CLAUDE.md §8.1). No other path inside `corpus/` is off-limits, but no path
-     outside `corpus/` may be written.
+     ingest (CLAUDE.md §8.1). **`corpus/_domains.md` is NEVER written in an unattended
+     run** — domain records are Coordinator-owned and may not be modified without the user
+     present (CLAUDE.md §8.1 Coordinator-owns-shared-files rule). (`corpus/_index.md` and
+     `corpus/_log.md` ARE written as part of normal ingest integration — those remain
+     allowed.) No path outside `corpus/` may be written.
    - `raw/_inbox/_REVIEW.md` — the deferral queue, append-only. This is the only write
      permitted outside `corpus/`.
 2. **No new domains, ever.** This skill cannot create a new domain or mark one provisional.
@@ -34,8 +37,9 @@ This is the corpus's pre-push guardrail: the scope of what it may do is narrow a
 - Deduplicating via the global entity registry built in Phase 2.
 - Cross-linking pages (intra-cluster, then to existing corpus pages) and linking new pages
   from their domain hub (`README.md`) so no orphans are created.
-- Running Phase-5 lint checks on touched domains and applying safe fixes (orphan linking,
-  alias merges where unambiguous).
+- Running Phase-5 lint checks on touched domains and applying the two enumerated safe fixes
+  (orphan linking from hub, exact-duplicate wikilink removal). All other lint actions are
+  flagged for review only — never auto-applied unattended.
 - Stamping processed source files (`corpus_ingested`, `corpus_ingested_at`, `corpus_pages`)
   and moving them from `raw/_inbox/` to the appropriate `raw/<channel>/` subfolder.
 - Appending to `corpus/_index.md`, `corpus/_log.md`, and `raw/_inbox/_REVIEW.md`.
@@ -47,9 +51,9 @@ these four conditions. Do not attempt partial ingest; defer the entire source.
 
 | # | Trigger | Detection |
 |---|---|---|
-| G1 | **New or provisional domain needed** | Source fits no existing domain in `corpus/_domains.md` after good-faith matching (CLAUDE.md §9) |
-| G2 | **20+ page cascade** | Phase-2 entity extraction projects ≥20 pages touched for this source (CLAUDE.md §13) |
-| G3 | **Contradiction-synthesis judgment** | A claim in the source conflicts with an existing corpus page (CLAUDE.md §7.1) |
+| G1 | **No plausible existing domain** | Source cannot fit ANY existing domain in `corpus/_domains.md` — even imperfectly (CLAUDE.md §9 bias: route if any fit is plausible, defer ONLY when no existing domain is plausible at all) |
+| G2 | **20+ page cascade** | The count of unique pages (new + existing) that would be created or updated for this source in the Phase-2 registry reaches or exceeds 20 (CLAUDE.md §13) |
+| G3 | **Contradiction with existing page** | A claim in the source conflicts with an existing corpus page; resolving it requires a synthesis judgment (CLAUDE.md §7.1) |
 | G4 | **PARA-native collision** | Source frontmatter carries `corpus_ingested: true` (CLAUDE.md §9, collision rule) |
 
 Plus the standing bias-to-defer clause: **if routing or coverage is uncertain for any reason
@@ -89,9 +93,11 @@ Each line: `- DEFER <trigger>: <filename> — <reason>`
 ## Procedure
 
 ### Step 1 — Read the constraint set
-Read `CLAUDE.md` §8.1 (batch ingest pipeline), `corpus/_index.md`, `corpus/_domains.md`.
-These three files define the allowed write space and the existing domain routing targets.
-Do not proceed without them.
+Read `CLAUDE.md` §8.1 (batch ingest pipeline), `corpus/_index.md`, `corpus/_domains.md`,
+and `corpus/_config.md`. These four files define the allowed write space, the existing domain
+routing targets, and the PARA-native path list needed to detect G4 collisions and
+Safety-Rule-5 "looks-like-PARA-native" cases (CLAUDE.md §8.1 Phase 0). Do not proceed
+without all four.
 
 ### Step 2 — Pre-flight (Phase 0)
 List all files in `raw/_inbox/` excluding `_REVIEW.md` itself. Count them.
@@ -107,16 +113,20 @@ For each non-deferred candidate, read only the title, tags/playlist field, and f
 paragraph (do NOT read full bodies yet). Cluster thematically. Attempt to route each cluster
 to an existing domain in `corpus/_domains.md`.
 - Clear fit → queue for ingest.
-- No fit after good-faith matching → mark every source in that cluster as G1 deferred.
-- Uncertain fit → mark each uncertain source as UNCERTAIN deferred.
+- Imperfect but plausible fit → queue for ingest (route there; §9 default is to route, not
+  defer-to-new-domain).
+- No existing domain is plausible at all → mark every source in that cluster as G1 deferred.
+- Genuinely uncertain across multiple domains → mark each uncertain source as UNCERTAIN
+  deferred.
 
 ### Step 4 — Global entity registry (Phase 2)
 For queued sources only, extract 3–10 candidate entities/concepts per source (condensed read).
 Dedup against `corpus/_index.md` and across clusters by name + alias similarity. Build the
 registry `{canonical-slug → aliases, domain, page-path}`.
 
-If entity extraction for a source projects ≥20 pages to touch → mark that source G2
-deferred; remove it from the queue; do not include its entities in the registry.
+If the count of unique pages (new + existing) that would be created or updated for a source
+reaches or exceeds 20 → mark that source G2 deferred; remove it from the queue; do not
+include its entities in the registry.
 
 ### Step 5 — Per-cluster ingest (Phase 3)
 For each queued cluster:
@@ -126,15 +136,19 @@ For each queued cluster:
    cite the source (CLAUDE.md §7 — if a claim cannot be cited, omit it or mark
    `[unsourced]`).
 3. During write, check every claim against existing corpus pages for contradictions
-   (CLAUDE.md §7.1). Any contradiction found → **stop writing that source**, mark it G3
-   deferred, discard all partial writes for that source, and continue with the next source.
+   (CLAUDE.md §7.1). Any contradiction found → **do not write the contradiction-synthesis
+   and do not overwrite or modify the conflicting existing page**; any ungated factual pages
+   already written for this source remain as-is (they cannot be un-written mid-run); defer
+   the source to `_REVIEW.md` with a G3 note that names the conflicting source file and the
+   existing corpus page; then continue with the next source. What is deferred is the
+   *contradiction resolution*, not necessarily every page from the source.
 4. Cross-link pages. Link every new page from its domain hub (`README.md`) — no orphans.
 5. Write source-summary pages (`type: source`) when the source warrants standalone treatment;
    this is low-bar unattended (write if it keeps the index queryable).
 
-Workers own disjoint domains. Shared files (`_index.md`, `_log.md`, `_domains.md`,
-`_config.md`) are written only in Phase 4 (Coordinator-owns-shared-files rule,
-CLAUDE.md §8.1).
+Workers own disjoint domains. Shared files (`_index.md` and `_log.md`) are written only in
+Phase 4 (Coordinator-owns-shared-files rule, CLAUDE.md §8.1). `_domains.md` and `_config.md`
+are NEVER written by this skill (Safety Rule 1).
 
 ### Step 6 — Integrate (Phase 4)
 For each successfully ingested source (serialized, Coordinator):
@@ -156,13 +170,27 @@ For each successfully ingested source (serialized, Coordinator):
   ```
 
 ### Step 7 — Verify (Phase 5)
-Run lint checks scoped to touched domains only (CLAUDE.md §8.3):
-- Orphans (no inbound hub link → link from hub).
-- Duplicate entities (alias overlap → merge if unambiguous; defer if judgment needed).
-- Stubs older than 14 days → flag in the run report, do not auto-archive.
-- Provisional domains → flag if >30 days and <3 sources; do not auto-merge.
+Run lint checks scoped to touched domains only (CLAUDE.md §8.3). In unattended mode the
+ONLY auto-applied fixes are:
 
-Apply only unambiguous safe fixes. Surface anything requiring judgment in the run report.
+- **(a) Orphan linking** — if a new page has no inbound link from its domain hub `README.md`,
+  add the link. This is safe: it only adds a wikilink to an already-written page.
+- **(b) Exact-duplicate wikilink removal** — if the same wikilink appears more than once in a
+  hub page, remove the duplicates. This is safe: no semantic change.
+
+Everything else is recorded in the run report and left for human review — NEVER applied
+unattended:
+
+- Alias merges (even when seemingly unambiguous).
+- Page splits or consolidations.
+- Archive proposals for old stubs.
+- Domain-health or provisional-domain changes.
+- Any contradiction or synthesis resolution.
+
+Specific flags to surface in the run report (do not auto-fix):
+
+- Stubs older than 14 days → flag, do not archive.
+- Provisional domains >30 days and <3 sources → flag, do not merge.
 
 ### Step 8 — Finalize the review queue
 Write (or append to) `raw/_inbox/_REVIEW.md` with all deferred sources from this run.
