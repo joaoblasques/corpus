@@ -6,15 +6,19 @@ sources:
   - path: 03_Resources/Study Notes/Data Lake Fundamentals - Apache Iceberg and Parquet.md
     channel: notes
     ingested_at: 2026-05-21
+  - path: raw/web/what-is-open-data-infrastructure-blog-fivetran.md
+    channel: web
+    ingested_at: 2026-06-11
 aliases:
   - data lake
   - lakehouse
   - data lakehouse
+  - open lake foundation
 tags:
   - corpus/data-engineering
   - concept
 created: 2026-05-21
-updated: 2026-05-21
+updated: 2026-06-11
 ---
 
 # Data Lake / Lakehouse
@@ -42,6 +46,12 @@ The lakehouse pattern adds an **open table format** (Iceberg, Delta Lake, or Hud
 
 The underlying files remain [[data-engineering/parquet|Parquet]] — the table format just manages them [^src1].
 
+### The lake as a unified, open foundation
+
+A complementary framing positions the open data lake as the **single universal storage layer** where enterprise data is landed once in open formats, with compute engines and tools evolving on top of a pluggable foundation [^src2]. > "the lake becomes the universal source of truth" [^src2]. The defining moves are storing data once in open table formats (Iceberg, Delta Lake) and separating storage from compute, which avoids vendor-controlled access paths, minimizes data duplication, and preserves cost control [^src2]. This is the lakehouse definition viewed from the open-data-infrastructure angle: the lake plus open table formats is what lets analytics, ML, vector retrieval, and AI agents operate against the same data without copying it between systems [^src2].
+
+> The broader open-data-infrastructure pattern (separating storage/compute/transformation/consumption into pluggable layers) and the medallion/open-table-format machinery are owned elsewhere; this page cites only the lakehouse-as-open-foundation definition.
+
 ## Cost hierarchy
 
 ```
@@ -60,8 +70,10 @@ The most important cost optimization is minimizing data read — achieved throug
 
 - [[data-engineering/parquet|Parquet]] — the file format layer
 - [[data-engineering/apache-iceberg|Apache Iceberg]] — the primary open table format covered here
+- [[data-engineering/open-table-formats|Open Table Formats]] — the format layer that promotes a lake to a lakehouse
 - [[data-engineering/README|Data Engineering hub]]
 
 ---
 
 [^src1]: [[03_Resources/Study Notes/Data Lake Fundamentals - Apache Iceberg and Parquet|Data Lake Fundamentals - Apache Iceberg and Parquet]]
+[^src2]: [What is Open Data Infrastructure?](../../raw/web/what-is-open-data-infrastructure-blog-fivetran.md)

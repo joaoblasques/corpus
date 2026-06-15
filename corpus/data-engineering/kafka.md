@@ -6,15 +6,33 @@ sources:
   - path: 03_Resources/Study Notes/Kafka Tutorial for Beginners - Core Concepts.md
     channel: notes
     ingested_at: 2026-05-21
+  - path: raw/web/kafka-share-groups-and-parallelizing-consumption-part-1-tuni.md
+    channel: web
+    ingested_at: 2026-06-12
+  - path: raw/web/can-kafka-queues-make-consumers-faster-part-2-head-of-line-b.md
+    channel: web
+    ingested_at: 2026-06-12
+  - path: raw/web/introducing-dimster-a-performance-benchmarking-tool-for-apac.md
+    channel: web
+    ingested_at: 2026-06-12
+  - path: raw/email/email-2026-05-14-duckdb-goes-remote-when-lakehouses-guess-netflix-tames-data.md
+    channel: email
+    ingested_at: 2026-06-15
+  - path: raw/email/email-2026-05-28-slashing-snowflake-costs-open-source-agent-tradeoffs-kafkas.md
+    channel: email
+    ingested_at: 2026-06-15
 aliases:
   - Apache Kafka
   - Kafka
   - kafka
+  - share groups
+  - Kafka Queues
+  - head-of-line blocking
 tags:
   - corpus/data-engineering
   - entity
 created: 2026-05-21
-updated: 2026-05-21
+updated: 2026-06-15
 ---
 
 # Apache Kafka
@@ -72,10 +90,39 @@ Library for real-time transformations, aggregations, joins, and filtering on dat
 
 Kafka historically used Apache ZooKeeper for cluster coordination. Kafka 3.0+ uses **KRaFt** — a native Raft-based consensus protocol that removes the ZooKeeper dependency, simplifying deployment [^src1].
 
+## Share Groups (Kafka Queues) and parallelism beyond partitions
+
+With classic **consumer groups**, partition count is the parallelism ceiling: a topic with 4 partitions can be processed by at most 4 instances in the same group, because only one instance processes a partition at a time [^src2]. Kafka 4.x adds **share groups** (a.k.a. "Kafka Queues"), a new primitive where a share group can have **more active instances than partitions** [^src2].
+
+### Head-of-line blocking
+
+The core motivation is **head-of-line blocking**: because one instance owns a partition, *any* delay in processing stalls the entire partition [^src2]. Example: a pipeline that calls an external enrichment API for ~half its records — if that API is briefly unavailable, the consumer can't process any messages, even ones that don't need enrichment [^src2]. Benchmarks show share groups provide little advantage when processing has no delay, but once you add realistic per-message processing time (modelling IO), share groups scale **linearly** as instances are added — at least 8x throughput observed going from 4 to 32 instances, with no per-instance overhead [^src2]. The decisive **downside is losing ordering guarantees**: several instances consume from the same partition, so order is no longer preserved — a deal-breaker for many systems [^src2].
+
+### The `max.poll.records` trap (the new bottleneck)
+
+With share groups the parallelism bottleneck shifts from partition count to the **inflight record budget** and the **size of fetch requests** [^src3]. Two configs dominate [^src3]:
+
+- `group.share.partition.max.record.locks` (broker-side) — how many records can be locked/inflight per partition (default 2000, max 10000).
+- `max.poll.records` (consumer) — records returned per poll (default 500).
+
+With the default 500, a single consumer can grab 25% of a 2000-record budget; at 5 ms/record that batch takes 2.5 s, during which other consumers sit idle [^src3]. This produces a **greedy-capture regime**: a few consumers hog large batches while the rest starve, collapsing 300 consumers across 6 partitions to ~24 effective consumers (~4800 msg/s vs a 60K theoretical max) [^src3]. At low load the system can instead drift into **accidental fair-sharing** (small batches spread evenly), which *looks* healthy but is fragile and can suddenly degrade — "consumption may look fine for a long time, but suddenly degrade" [^src3].
+
+**Rule of thumb** [^src3]: set `max.poll.records ≈ group.share.partition.max.record.locks / consumers-per-partition`, then go somewhat lower to absorb timing variance, fetch skew, and backlog. For very long processing (>1 s) drop it to 1; or raise `max.record.locks` for a more forgiving budget. The default of 500 is "arguably the wrong value for share groups" — there is no broker-side fair-sharing enforcement yet [^src3].
+
+### Dimster (benchmarking)
+
+These findings were produced with **Dimster** (DIMensional teSTER), an open-source Kafka-centric performance benchmarking tool [^src4]. Its design idea is **dimensional testing**: treat each config/workload aspect (batch size, acks, consumer count, partition count, produce rate) as a dimension in N-dimensional space and run identical benchmarks sweeping one or two dimensions at a time [^src4]. It ships four test modes — **run** (fixed throughput + live interaction to mutate a running workload), **explore** (find peak sustainable throughput under a latency target), **drain-backlog**, and **correctness** (detect loss, corruption, out-of-order, duplicates) — and emits self-contained, reproducible result bundles (JSON/CSV, source configs, broker logs, charts, Grafana-as-HTML) [^src4]. It uses Kubernetes as a standardized runtime (minikube/k3d locally up to EKS/GKE) [^src4]. In an explore test, a 300-member share group hit 95% of theoretical max on only 10 partitions, where a consumer group needed 300 partitions [^src4].
+
 ## See also
 
+- [[data-engineering/idempotent-pipelines|Idempotent Pipelines]] — append-only stream ingestion with at-most-once settings
 - [[data-engineering/README|Data Engineering hub]]
 
 ---
 
 [^src1]: [[03_Resources/Study Notes/Kafka Tutorial for Beginners - Core Concepts|Kafka Tutorial for Beginners - Core Concepts]]
+[^src2]: [Can Kafka Queues Make Consumers Faster? Part 2: Head-Of-Line Blocking](../../raw/web/can-kafka-queues-make-consumers-faster-part-2-head-of-line-b.md)
+[^src3]: [Kafka Share Groups and Parallelizing Consumption — Part 1: Tuning max.poll.records](../../raw/web/kafka-share-groups-and-parallelizing-consumption-part-1-tuni.md)
+[^src4]: [Introducing Dimster, a performance benchmarking tool for Apache Kafka](../../raw/web/introducing-dimster-a-performance-benchmarking-tool-for-apac.md)
+[^src5]: [TLDR Data — Kafka Queues / Head-of-Line Blocking (newsletter origin)](../../raw/email/email-2026-05-14-duckdb-goes-remote-when-lakehouses-guess-netflix-tames-data.md)
+[^src6]: [TLDR Data — Kafka's New Bottleneck / Share Groups (newsletter origin)](../../raw/email/email-2026-05-28-slashing-snowflake-costs-open-source-agent-tradeoffs-kafkas.md)

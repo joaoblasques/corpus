@@ -1,7 +1,7 @@
 ---
 type: config
 created: 2026-05-20
-updated: 2026-05-20
+updated: 2026-06-12
 ---
 
 # Corpus Config
@@ -52,3 +52,17 @@ Rules:
 | `web` | `raw/web/` | — |
 | `notes` | `raw/notes/` (no PARA home) | `03_Resources/Articles/`, `03_Resources/Study Notes/` |
 | `inbox` | `raw/_inbox/` (transient) | — |
+| `email` | `raw/email/` (collected via `/collect-email`) | — |
+
+**Email collection**: starred Gmail messages are captured by the `/collect-email` skill into `raw/_inbox/` (channel `email`), then routed to `raw/email/` by the normal Branch A ingest flow. The skill writes a `gmail_message_id` frontmatter field used for dedup; it is not part of the §2 source-stamp spec.
+
+**Query intake (`via_query`)**: the `/query` operation (§8.2) tops up thin coverage by fetching web sources to answer a gap. Each fetched source is auto-queued into `raw/_inbox/` (channel `web`, or `youtube` for video URLs) carrying a `via_query` frontmatter field (the originating question) for provenance, deduped by `source_url`. These drain into the corpus on the next normal Branch-A ingest. `via_query` is collector provenance, not part of the §2 source-stamp spec.
+
+---
+
+## Obsidian vault collection (collect-obsidian)
+
+- `vault_root`: `/Users/jonasblasques/Dev/second-brain`
+- **Include:** `03_Resources/{Articles, Books, Study Notes, Snippets, Prompt Templates}`, `00_Inbox/Clippings/`.
+- **Exclude:** `03_Resources/llm-wiki-system` (corpus mirror), `01_Projects`, `02_Areas`, `04_Archive`, rest of `00_Inbox`, `*_processed.md`, `README.md`, binaries.
+- The `/collect-obsidian` skill copies these into `raw/_inbox/` (channel `notes`; URL-list links → `web`), and — after `corpus_ingested` — removes the vault original (git-recoverable, not auto-committed). The authoritative include/exclude policy lives in `bin/collect_obsidian.py`.

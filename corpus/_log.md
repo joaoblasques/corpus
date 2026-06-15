@@ -287,3 +287,138 @@ Out of scope for this commit (deferred):
 - `.claude/settings.local.json` allow-list path updates
 - Git remote rename
 - Commit history rewrite
+
+## [2026-06-09 13:58] domain | create: mlops (provisional)
+
+- New provisional domain `mlops` created under §9 provisional rule. User confirmed via Batch 4 inbox survey + new-domain question.
+- Rationale: 4 inbox sources (AIEFS Phase 00 lessons 01/02/03 + IaC/Terraform article) fit no existing content domain; coherent "engineering substrate / infra & tooling" cluster (environment, version control, compute, IaC).
+- provisional: true — retained one cycle because 3 of 4 seed sources share a single origin (one course). 30-day review: 2026-07-09.
+- Hub created: corpus/mlops/README.md. _domains.md section + decision-log entry added.
+
+## [2026-06-09 13:58] ingest | Dev Environment — The Four-Layer Stack (AIEFS Phase 00 / 01)
+
+- source: raw/notes/00-01-dev-environment-kb.md
+- channel: notes (first-party course KB; Branch A inbox → moved to raw/notes/)
+- domain: mlops
+- new pages: mlops/dev-environment-stack.md (concept), mlops/uv.md (entity, stub)
+- notes: four-layer stack, venv invariant, checks-as-data verify pattern, CUDA-wheel pitfall. uv flagged for expansion when a uv-primary source arrives.
+
+## [2026-06-09 13:58] ingest | Git & Collaboration (AIEFS Phase 00 / 02)
+
+- source: raw/notes/00-02-git-and-collaboration-kb.md
+- channel: notes (Branch A inbox → raw/notes/)
+- domain: mlops
+- new pages: mlops/git.md (entity)
+- notes: content-addressed model, branch-per-task workflow, ML-aware .gitignore, DVC/LFS forward-ref (data-management source not yet ingested).
+
+## [2026-06-09 13:58] ingest | GPU Setup and Cloud Options (AIEFS Phase 00 / 03)
+
+- source: raw/notes/00-03-gpu-setup-and-cloud-kb.md
+- channel: notes (Branch A inbox → raw/notes/)
+- domain: mlops
+- new pages: mlops/gpu-and-vram.md (concept), mlops/cloud-gpu-providers.md (concept)
+- notes: fp16 VRAM math, training≈6×inference, LoRA (forward-ref to fine-tuning phase), provider pricing snapshot (May 2026, marked drift-prone).
+
+## [2026-06-09 13:58] ingest | How AI agents & Claude skills work (Clearly Explained)
+
+- source: raw/youtube/How AI agents & Claude skills work (Clearly Explained).md
+- channel: youtube (Branch A inbox → raw/youtube/)
+- domain: ai-engineering
+- new pages: ai-engineering/agent-skills.md (concept), ai-engineering/sources/how-ai-agents-and-skills-work.md (source summary — substantive 8k-word opinionated talk)
+- pages touched: context-window-management.md, context-engineering.md, ai-agent.md, multi-agent-systems.md (+1 source each)
+- notes: opinionated practitioner stance (Ras Mic). agent-skills page + context-engineering update flag the tension with corpus sources that treat CLAUDE.md as valuable long-term memory — not presented as settled fact.
+
+## [2026-06-09 13:58] ingest | IaC fundamentals for data engineers
+
+- source: raw/web/IaC (Infrastructure-as-Code) fundamentals for data engineers.md
+- channel: web (Branch A inbox → raw/web/)
+- domain: mlops
+- new pages: mlops/infrastructure-as-code.md (concept), mlops/terraform.md (entity)
+- notes: startdataengineering.com (Joseph Machado). Tutorial → no source-summary page (§8.1 step 6 exclusion); concept + entity pages capture it. Cross-linked to data-engineering (provisions S3/EC2/EMR).
+
+## [2026-06-09 14:10] query | how to optimize my Claude setup for efficiency & productivity
+
+- query answered from corpus pages: agent-skills, context-window-management, context-engineering, multi-agent-systems, ai-agent.
+- synthesis filed back (user-approved): ai-engineering/optimizing-claude.md (synthesis, sources: [] — derives from corpus pages; provenance transitive).
+- gaps surfaced: (1) Claude Code mechanics (slash commands, hooks, settings.json, MCP) lightly covered; (2) no official Anthropic/Claude Code docs ingested; (3) no record of user's actual setup. Logged as highest-leverage next sources to deepen the "Claude" cluster.
+- context: executed as sub-project A of the corpus-direction brainstorm (validate the consumption half of the loop). A closed; consumption loop proven end-to-end.
+- v0.6 note: this synthesis page is another instance motivating the draft derived_from: field (internal provenance currently expressed only in prose + inline wikilinks).
+
+## [2026-06-09] config | add email channel
+
+- Added `email` channel → `raw/email/` to corpus/_config.md (channel-labels table + email-collection note).
+- Created raw/email/ (with .gitkeep).
+- Supports the /collect-email collector (sub-project B): captures starred Gmail into raw/_inbox/ (channel email), routed to raw/email/ by Branch A ingest.
+
+## [2026-06-11] schema | v0.5 → v0.6 — optimized batch-ingest pipeline + claim lifecycle
+
+- §8.1 batch path (N>10) rewritten as the cluster-based Phase 0–5 pipeline (pre-flight → survey/cluster → global entity registry → per-cluster ingest → integrate → verify); added the Coordinator-owns-shared-files rule for parallel per-domain workers.
+- §4 + new §7.1: v2 claim-lifecycle fields/conventions (`confidence`, `last_confirmed`, `supersedes`/`superseded_by`, contradiction-on-write, typed relationships).
+- Grounded in deep research filed at docs/research/2026-06-11-llm-wiki-ingest-best-practices.md (Karpathy LLM-wiki + rohitg00 v2; MOC/Zettelkasten/PARA; large-batch entity-resolution & orchestration).
+- Motivation: ingest the 136-source collected backlog (sub-project B output) without structural drift. Pipeline executes immediately after this entry.
+
+## [2026-06-11] ingest | email-backlog wave 1 — data-engineering cluster
+
+- pipeline: v0.6 optimized batch (Phase 0–5), Coordinator + 5 parallel per-batch workers.
+- sources: 65 data-engineering sources surveyed → 48 consumed, 17 skipped (promo/digest/stub/Amazon book pages).
+- channels: 15 emails (moved raw/_inbox → raw/email, stamped), 33 web captures (stamped in place).
+- new pages (13): apache-spark, databricks, duckdb, data-orchestration, open-table-formats, medallion-architecture, change-data-capture, materialized-views, data-quality, query-engine-routing, data-engineer-role, claude-code-for-data-engineering, ai-observability-data-pipeline.
+- updated pages (6): dbt (+7 src), dimensional-modeling, scd2, apache-iceberg, data-lake, pipeline-layers.
+- source summaries (2): sources/dbt-kimball-project, sources/aws-duckdb-etl-fargate.
+- cross-domain (DE-primary, link from ai-engineering later): claude-code-for-data-engineering, ai-observability-data-pipeline.
+- notes: data-diff flagged deprecated; CDC page has an [unsourced] marker where the captured email excerpt was truncated; vendor benchmark figures (Databricks/Greybeam) marked vendor-reported. Remaining inbox: 121 sources (ai-engineering + other clusters) for future waves.
+
+## [2026-06-12] ingest | email-backlog wave 2 — ai-engineering cluster
+
+- pipeline: v0.6 optimized batch (Phase 0–5), Coordinator + 6 parallel per-batch workers; planner-led survey/registry first.
+- sources: 121 ai-engineering sources surveyed → 96 consumed, ~25 skipped (promo/event/login-stub/off-cluster model cards).
+- channels: 27 emails (moved raw/_inbox → raw/email, stamped), 69 web captures (stamped in place).
+- domain decision (§9): kept all in ai-engineering (no new domain); added two sub-hubs — agentic-coding (synthesis) and claude-cowork (entity). User-confirmed.
+- new ai-engineering pages (13): agent-harness, agentic-coding (sub-hub), claude-code, claude-cowork (sub-hub), anthropic, claude-api, prompt-engineering, agent-security, structured-outputs, agentic-search, agent-testing, claude-md-conventions, agent-ui.
+- updated ai-engineering pages (7): agent-skills, mcp (stub→draft), rag, agent-memory, vector-database (stub→draft), agent-evaluation, ai-agent.
+- cross-domain (B6, data-engineering-primary): NEW agentic-data-modeling; UPDATED claude-code-for-data-engineering (+6 src). Linked to ai-engineering/claude-code.
+- dedup: model releases (Opus 4.8, Fable 5, Mythos 5) kept as sections in anthropic, not separate pages; pi-coding-agent (×3), playwright-testing (×2), cowork (×2), zazencodes-skills (×2) deduped to single pages.
+- notes: prompt-engineering kept distinct from context-engineering; grep-vs-vector handled as a section in agentic-search (not a synthesis); a few [unsourced] markers where captured pages were JS-gated/login stubs. ai-engineering now ~38 pages (sub-hubs justified, no split). Remaining inbox: 94 sources (software/mlops/productivity/etc.) for future waves.
+
+## [2026-06-12] ingest | email-backlog wave 3 — distinct clusters (SE + productivity + ai-business)
+
+- pipeline: v0.6 optimized batch, Coordinator + 4 parallel per-cluster workers (disjoint domains).
+- scope correction: 342 sources remain un-ingested (not 94); the large DE/AI tail deferred. Wave 3 took the 42 distinct-cluster sources.
+- domains: NEW provisional `productivity` and `ai-business` created (§9; ai-business supersedes the 2026-05-07 career rejection). software-engineering topped up; security folded into ai-engineering.
+- new pages (13): software-engineering — cap-theorem, ai-assisted-development, ai-risk-architecture, engineering-craft, developer-tooling; productivity — mental-models, learning-to-learn, shipping-and-scope, working-with-stakeholders, ai-augmented-knowledge-work; ai-business — technical-career, monetizing-code, ai-and-the-job-market.
+- updated (2): software-design-principles (design-patterns section), ai-engineering/agent-security (offensive AppSec / LLMs-finding-vulns).
+- skipped: promo/sponsored newsletters (Hermes, declutter/Google Tips, Fathom), empty landing pages (50-hacks, cowork academy), Instagram/SSD exploit news. 3 mis-bucketed sources (Claude /goal, DIP tutorial, Kafka HOL-blocking) flagged for ai-engineering/software-engineering/data-engineering in later waves.
+- corpus now 92 pages across 6 domains. Remaining inbox: 71 sources (mostly DE/AI tail + a few mlops) for future waves.
+
+## [2026-06-12] ingest | email-backlog wave 4 — data-engineering + ai-engineering tail top-up
+
+- pipeline: v0.6 batch, 2 parallel per-domain workers (disjoint domains). Pure top-up — no new domains.
+- scope: the clean DE tail (24) + AI tail (29) the wave-1/2 keyword nets missed; ~21 sources consumed, the rest skipped as duplicate email/web pairs, newsletter digests, event/book promos. A messy ~250-source "other" bucket (mostly more dupes/digests + mis-keyworded DE/AI) remains deferred.
+- new pages (4): data-engineering — data-ingestion-patterns, incremental-pipeline-design; ai-engineering — learning-ai-engineering (synthesis), web-scraping (stub).
+- updated (10): data-engineering — kafka (+share-groups/HOL-blocking), materialized-views (+IVM/DBSP), scd2 (+part-2 datestamping), idempotent-pipelines (+functional DE); ai-engineering — agent-skills, multi-agent-systems (+Grab/GenAI_Agents), context-engineering (+ktx), llm (+DiffusionGemma/Command-A), claude-code (+2.1.139), ai-agent (+agent-mode/ApplyPilot).
+- corpus now ~96 pages, 6 domains. Diminishing returns flagged: remaining backlog is largely duplicates/digests of already-covered topics.
+
+## [2026-06-12] schema | v0.6 → v0.7 — collect-obsidian vault-removal exception
+
+- §2 vault-removal exception (the collect-obsidian reaper may delete a vault source after its raw copy is `corpus_ingested`; gated, git-recoverable, never auto-commits); §13 failure-mode bullet; §15 version entry; `_config.md` vault_root + scope.
+- Enables the third collector (`collect-obsidian`): copy reference-layer vault notes to raw/_inbox, fetch URL-list links, ingest, then reap originals.
+
+## [2026-06-12 16:30] schema | v0.8 — operationalized §8.2 /query
+- §8.2 rewritten as the `/query` operation: LLM index-selection retrieval; read-only coverage gate; labelled web top-up (`[fresh — not yet in corpus]`) auto-queued to `raw/_inbox/` (channel `web`, `via_query`) deduped by `source_url`; gap logging; approval-gated synthesis file-back.
+- backed by `.claude/skills/query/SKILL.md` + `bin/query.py` (web-source queue + gap log + CLI).
+- config: added `via_query` provenance + `/query` intake note to `corpus/_config.md`.
+
+## [2026-06-15] ingest | youtube + email batch — v0.6 cluster pipeline (4 parallel workers)
+
+- trigger: user — "ingest what we have in the collected buckets" after the full collect-youtube run.
+- collection: full `collect-youtube` run removed 27 videos, collected 1107 (but 1064 `blocked` by YouTube transcript rate-limiting + 16 `disabled`); only 30 transcripts came back `ok`. Blocked videos remain in their playlists (removal requires a transcript) — recoverable via a throttled re-collection later.
+- scope: 93 ingestable sources (30 youtube-ok + 63 email); 73 routed to workers, 20 pre-skipped (spam/personal/PT-tax-health/promo + 2 off-topic Music Theory). The 1080 transcript-less youtube stubs left in raw/_inbox/.
+- pipeline: v0.6 optimized batch (§8.1), Coordinator + 4 parallel per-domain workers (disjoint domains): data-engineering, ai-engineering, mlops, (software-engineering + productivity + ai-business). User confirmed cluster→domain map, cloud-certs→mlops, Music-Theory skip, and one coordinated parallel run.
+- new pages (35): ai-engineering (10) — ai-fundamentals, machine-learning, neural-network, statistics-for-ml, ai-product-management, agentic-workflow, vibe-coding, agi, sources/cs50-ai-with-python, sources/internal-operating-system-claude-projects; data-engineering (12) — storage-fundamentals, data-engineering-best-practices, python-for-data-engineering, de-portfolio-projects, cicd-for-data-infrastructure, data-migration-at-scale, data-modeling-meaning, semantic-layer, ingestr, progressive-disclosure-analytics-agents, ai-impact-on-data-engineering, sources/sql-funnel-analysis-project; mlops (9) — cli-tools, terminal-and-shell, vs-code, linux-commands, python, cloud-computing-fundamentals, aws, azure, gcp; software-engineering (1) — algorithms; productivity (1) — obsidian-pkm; ai-business (2) — ai-spreadsheets, ai-job-search.
+- updated (~19): ai-eng — learning-ai-engineering, prompt-engineering, agent-harness, agent-security, agent-memory, agentic-coding, agent-skills; DE — dbt, query-engine-routing, materialized-views, kafka, medallion-architecture; mlops — infrastructure-as-code, git; SE — data-structures; ai-business — ai-and-the-job-market; + 6 domain hub READMEs.
+- sources ingested: 62 (27 youtube → raw/youtube/, 35 email → raw/email/; many email pointers cited their fetched raw/web/ articles). All stamped corpus_ingested 2026-06-15.
+- skipped at citation gate (9): emails that were pure promo / no-fetched-substance (self-serve-data-platform, aws-masterclass forward, learn-to-vibe-code, jupyter-ai, skill-recommendations, ai-knows-vs-does, ais-uneasy-promise [DE-owned], declutter-your-day) + ai-side-hustles youtube (1-line transcript).
+- contradictions (in-page per §7.1): tmux-default-keybindings philosophy (cli-tools), "serverless" definition drift (cloud-computing-fundamentals), prompt-vs-context emphasis (learning-ai-engineering). None needed a standalone synthesis.
+- verification: 35/35 new pages present; 0 orphans (all hub-linked); 0 cross-domain slug collisions; 0 broken citation paths (428 checked).
+- corpus now 131 pages across 6 domains. mlops jumped to 17 pages / 16 new sources — strong graduation candidate at its 2026-07-09 provisional review.
+- follow-up: 1064 blocked youtube stubs await a throttled re-collection; collector needs a tweak to re-fetch on `status: blocked` (it currently dedupes by video-id and would skip them as already-collected).

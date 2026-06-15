@@ -24,6 +24,14 @@ Domain covering software engineering practice from foundational CS through deplo
 - [[software-engineering/distributed-systems-fallacies|Distributed Systems Fallacies]] — concept · draft · eight fallacies; sourced failure modes for network reliability, latency, topology change, and security; fallacies 3/6/7/8 awaiting dedicated source
 - [[software-engineering/software-design-principles|Software Design Principles]] — concept · draft · 8 code-level principles (SRP, cohesion, loose coupling, DI, open/closed, simplicity) separating maintainable from fragile code
 - [[software-engineering/data-structures|Data Structures and Big O Notation]] — concept · draft · time complexity classes and trade-off table for 8 core data structures
+- [[software-engineering/algorithms|Algorithms (Strategies, Not Tricks)]] — concept · draft · recursion, binary search (divide & conquer), dynamic programming / memoization; strategies-not-tricks framing
+- [[software-engineering/cap-theorem|CAP Theorem]] — concept · draft · pick CP or AP under network partitions; CAP vs ACID consistency
+- [[software-engineering/ai-risk-architecture|AI Risk Architecture]] — concept · draft · data/output/action risk; risk is a system property, not a component
+- [[software-engineering/engineering-craft|Engineering Craft]] — concept · draft · resourcefulness, curiosity, persistence through difficulty
+- [[software-engineering/developer-tooling|Developer Tooling]] — concept · draft · Xonsh shell, Git internals trivia, backend platforms
+
+### Syntheses
+- [[software-engineering/ai-assisted-development|AI-Assisted Development]] — synthesis · draft · fundamentals under AI; the write→review shift; deterministic guardrails for AI code
 
 ## Sources ingested
 - [[03_Resources/Articles/Disasters in a Microservices World|Disasters I've Seen in a Microservices World]] — article note, João Alves / Hey World, 2025-10-30

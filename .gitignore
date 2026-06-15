@@ -10,6 +10,7 @@ raw/notes/*
 raw/web/*
 raw/youtube/*
 raw/sources/*
+raw/email/*
 
 # Keep .gitkeep markers so channel dirs survive clone
 !**/.gitkeep
@@ -19,3 +20,15 @@ __pycache__/
 .pytest_cache/
 *.pyc
 *.pyo
+
+# Gmail OAuth secrets (owned-credential transport for collect-email) — never commit
+bin/credentials.json
+bin/token.json
+
+# Secrets / API keys — never commit
+.env
+.env.*
+
+# YouTube collector — personal token + playlist policy config
+bin/youtube_token.json
+bin/youtube_playlists.yaml
