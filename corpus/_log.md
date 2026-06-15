@@ -423,3 +423,14 @@ Out of scope for this commit (deferred):
 - corpus now 131 pages across 6 domains. mlops jumped to 17 pages / 16 new sources — strong graduation candidate at its 2026-07-09 provisional review.
 - follow-up: 1064 blocked youtube stubs await a throttled re-collection; collector needs a tweak to re-fetch on `status: blocked` (it currently dedupes by video-id and would skip them as already-collected).
 
+
+## [2026-06-15 23:14] ingest | ingest-auto safe pass (3 candidates: 2 ingested, 1 deferred)
+- mode: interactive safe pass (Branch A, --max 3); oldest-3-by-mtime from raw/_inbox/
+- ingested (2):
+  - email-2026-06-10-joao-here-s-another-challenge-for-you.md (Tech With Tim) → software-engineering | pages: software-design-principles (updated, +Dependency Inversion Principle worked example: Notifier abstraction, inject concrete notifier) | moved to raw/email/
+  - email-2026-06-09-post-call-admin-done-in-one-click.md (Return My Time) → ai-engineering | pages: claude-cowork (updated, +post-call-wrapup skill worked example: Drive/Notion/Gmail connectors, "never send, always draft", calibration-by-correction; operator note: Opus 4.8 now default across Max/Team/API) | moved to raw/email/
+- deferred (1): email-2026-06-11-who-s-actually-in-charge-of-ai.md — UNCERTAIN (TDS newsletter digest; no extractable body, topics span multiple domains, real content in separately-fetched linked articles) → raw/_inbox/_REVIEW.md
+- new pages: none (2 existing pages updated; +2 sources)
+- domains touched: software-engineering, ai-engineering
+- verify: no new pages → no orphans; no contradictions (both updates reinforce existing claims); _domains.md NOT modified (unattended-rule respected)
+- notes: ingest-auto run; 2 processed, 1 deferred; ~1750 inbox items remain for future runs

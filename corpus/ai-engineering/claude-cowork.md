@@ -45,6 +45,9 @@ sources:
   - path: raw/web/shared-cowork-toolkit-templates-d6.md
     channel: web
     ingested_at: 2026-06-12
+  - path: raw/email/email-2026-06-09-post-call-admin-done-in-one-click.md
+    channel: email
+    ingested_at: 2026-06-15
 aliases:
   - Claude Cowork
   - Cowork
@@ -131,6 +134,12 @@ Memory discipline: 1–2 sentences per entry; a 150-line ceiling on root MEMORY.
 
 If the process requires your judgment along the way, it's a **workstation**; if you already know exactly what the output should be and just need execution, it's a **skill** [^src11]. See [[ai-engineering/agent-skills|Agent Skills]].
 
+### Worked example: a post-call wrap-up skill
+
+A concrete end-to-end skill build (≈30–45 min) shows the skill + connector pattern in practice [^src16]. The skill, `post-call-wrapup`, takes a meeting transcript and outputs four things: top-3 takeaways, action items with owner + due date, a client-facing follow-up email draft, and a standardized file name (`ClientName-YYYY-MM-DD`) [^src16]. It uses three built-in connectors — Google Drive (file the transcript), Notion (append takeaways/action items to the client's page under a dated heading), and Gmail (save the follow-up as a draft) [^src16].
+
+Two patterns reinforce the rest of this page: the guardrail **"Never send. Always draft."** mirrors the Gmail-connector discipline (the connector reads and drafts but you hit send) [^src16][^src10], and **calibration-by-correction** — "whatever it got wrong, tell it once; by the second call it is calibrated to how you actually write" — is the same accumulating-memory mechanism that makes a workspace improve over time [^src16][^src11]. (An operator note in the same source records that **Claude Opus 4.8 became the default across Max, Team, and the API**, enabling scheduled multi-step agent workflows that run sub-agents hands-off [^src16].)
+
 ## Other guides
 
 `claude101.com` collects free Cowork-adjacent guides (Cowork setup, Cowork + Projects, slides, skills, sounding like you, avoiding usage limits) [^src8].
@@ -156,3 +165,4 @@ If the process requires your judgment along the way, it's a **workstation**; if 
 [^src13]: [Cowork Toolkit templates — Day 1](../../raw/web/shared-cowork-toolkit-templates-d1.md)
 [^src14]: [Cowork Toolkit templates — Day 2](../../raw/web/shared-cowork-toolkit-templates-d2.md)
 [^src15]: [Cowork Toolkit templates — Day 6](../../raw/web/shared-cowork-toolkit-templates-d6.md)
+[^src16]: [Post-call admin, done in one click (Return My Time)](../../raw/email/email-2026-06-09-post-call-admin-done-in-one-click.md)

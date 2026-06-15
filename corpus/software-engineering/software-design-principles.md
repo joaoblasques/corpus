@@ -9,6 +9,9 @@ sources:
   - path: raw/_inbox/email-2026-06-09-design-patterns-suck.md
     channel: email
     ingested_at: 2026-06-12
+  - path: raw/email/email-2026-06-10-joao-here-s-another-challenge-for-you.md
+    channel: email
+    ingested_at: 2026-06-15
 aliases:
   - software design principles
   - clean code principles
@@ -17,6 +20,8 @@ aliases:
   - SRP
   - open/closed principle
   - dependency injection
+  - dependency inversion principle
+  - DIP
   - design patterns
   - Gang of Four
   - GoF
@@ -24,7 +29,7 @@ tags:
   - corpus/software-engineering
   - concept
 created: 2026-05-21
-updated: 2026-06-12
+updated: 2026-06-15
 ---
 
 # Software Design Principles
@@ -60,6 +65,27 @@ class OrderService:
         self.db = database
 ```
 
+### Dependency Inversion Principle (worked example)
+
+The principle behind injection: **"High-level modules should not depend directly on low-level modules. Both should depend on abstractions."** [^src3] A `UserService` that constructs its own `EmailNotifier()` internally is tightly coupled — it can *only* send email, and adding SMS or push requires editing `UserService` itself [^src3]. The fix is to depend on an abstract `Notifier` interface and inject the concrete notifier:
+
+```python
+class Notifier:
+    def send(self, message: str):
+        raise NotImplementedError
+
+class EmailNotifier(Notifier): ...
+class SMSNotifier(Notifier): ...
+
+class UserService:
+    def __init__(self, notifier: Notifier):   # depends on an abstraction
+        self.notifier = notifier
+
+service = UserService(SMSNotifier())          # swap implementations freely
+```
+
+`UserService` now only cares that the injected object has a `send` method; the notification channel can be swapped or extended without rewriting it [^src3]. The source is candid about the cost: for a tiny script this *is* extra code, but "as your codebase grows, this kind of separation makes your code easier to change, easier to test, and much easier to extend" [^src3] — the same benefit-vs-cost judgment the **simplicity principle** above demands.
+
 ## Design patterns: vocabulary, not dogma
 
 A contrasting source argues the Gang of Four's 23 patterns (1994) have been "elevated from useful vocabulary into something closer to dogma" — taught as universal solutions, applied where unneeded, treated as a mark of good engineering [^src2]. Its central claim:
@@ -87,3 +113,4 @@ SRP and cohesion operate at the code level, but the same principle drives [[soft
 
 [^src1]: [[03_Resources/Study Notes/Python - Production Code Principles Senior Developer|Python - Production Code Principles Senior Developer]]
 [^src2]: [Design Patterns Suck](../../raw/email/email-2026-06-09-design-patterns-suck.md)
+[^src3]: [Tech With Tim — "Joao, here's another challenge for you" (Dependency Inversion)](../../raw/email/email-2026-06-10-joao-here-s-another-challenge-for-you.md)

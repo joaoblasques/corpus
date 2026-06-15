@@ -1,6 +1,6 @@
 # Corpus Index
 
-> Last updated: 2026-06-15 | Total pages: 131 | Total sources: 284
+> Last updated: 2026-06-15 | Total pages: 131 | Total sources: 286
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
@@ -149,6 +149,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[ai-business/ai-job-search|Finding a Job Using AI]] — concept · draft · AI career-strategist projects + autonomous apply (ApplyPilot); quality over volume
 
 ## Recent additions
+- 2026-06-15: **ingest-auto safe pass (3 candidates, 2 ingested, 1 deferred)** — software-engineering/[[software-engineering/software-design-principles]] (updated, +1 source — DIP worked example); ai-engineering/[[ai-engineering/claude-cowork]] (updated, +1 source — post-call-wrapup skill example)
 - 2026-06-15: **YouTube + email batch (v0.6 cluster pipeline, 4 parallel workers)** — 35 new pages, ~19 updated, 62 sources ingested (27 YouTube transcripts + 35 email/web), 9 skipped at the citation gate.
 - 2026-06-15: ai-engineering — [[ai-engineering/ai-fundamentals]], [[ai-engineering/machine-learning]], [[ai-engineering/neural-network]], [[ai-engineering/statistics-for-ml]], [[ai-engineering/ai-product-management]], [[ai-engineering/agentic-workflow]], [[ai-engineering/vibe-coding]], [[ai-engineering/agi]] (new); +2 source pages; learning-ai-engineering, prompt-engineering, agent-harness, agent-security, agent-memory, agentic-coding, agent-skills (updated)
 - 2026-06-15: data-engineering — storage-fundamentals, data-engineering-best-practices, python-for-data-engineering, de-portfolio-projects, cicd-for-data-infrastructure, data-migration-at-scale, data-modeling-meaning, semantic-layer, ingestr, progressive-disclosure-analytics-agents, ai-impact-on-data-engineering (new); +1 source page; dbt, query-engine-routing, materialized-views, kafka, medallion-architecture (updated)
