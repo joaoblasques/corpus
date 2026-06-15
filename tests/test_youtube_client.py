@@ -178,6 +178,54 @@ def test_run_unknown_status_duplicate_not_removed(tmp_path, monkeypatch):
     assert deleted == []  # unknown-status duplicate must NOT be removed
 
 
+def test_run_refetch_blocked_reextracts_and_removes(tmp_path, monkeypatch):
+    # A prior 'blocked' stub for V1 exists (rate-limit artifact). With --refetch-blocked
+    # the run re-extracts; the transcript now succeeds, the stub is overwritten to status
+    # 'ok', and (collect-remove) the video is finally removed.
+    monkeypatch.setattr(yc.cy, "INBOX", tmp_path)
+    monkeypatch.setattr(yc.cy, "DEDUP_DIRS", [tmp_path])
+    (tmp_path / "youtube-V1-a.md").write_text(
+        "---\nyoutube_video_id: V1\ntranscript_status: blocked\n---\n\n_No transcript available._\n",
+        encoding="utf-8")
+    monkeypatch.setattr(yc, "load_config", lambda: {
+        "playlists": [{"id": "PL1", "name": "AI", "policy": "collect-remove"}],
+        "default_policy": "ignore"})
+    monkeypatch.setattr(yc, "get_service", lambda: "SVC")
+    monkeypatch.setattr(yc, "list_playlist_items", lambda svc, pid: iter([
+        {"playlist_item_id": "I1", "video_id": "V1", "title": "A", "channel_name": "C",
+         "published": "2026-06-01", "privacy": "public"}]))
+    monkeypatch.setattr(yc, "extract_transcript", lambda vid: ("[00:00](x) recovered", "ok"))
+    deleted = []
+    monkeypatch.setattr(yc, "delete_playlist_item", lambda svc, iid: deleted.append(iid) or True)
+    rc = yc.cmd_run(yc._args(["run", "--refetch-blocked", "--sleep", "0"]))
+    assert rc == 0
+    assert deleted == ["I1"]                                          # re-fetched -> ok -> removed
+    assert "recovered" in (tmp_path / "youtube-V1-a.md").read_text()  # stub overwritten
+
+
+def test_run_blocked_stub_not_refetched_by_default(tmp_path, monkeypatch):
+    # Without the flag, a blocked stub stays a duplicate: not re-fetched, not removed.
+    monkeypatch.setattr(yc.cy, "INBOX", tmp_path)
+    monkeypatch.setattr(yc.cy, "DEDUP_DIRS", [tmp_path])
+    (tmp_path / "youtube-V1-a.md").write_text(
+        "---\nyoutube_video_id: V1\ntranscript_status: blocked\n---\n\n_No transcript available._\n",
+        encoding="utf-8")
+    monkeypatch.setattr(yc, "load_config", lambda: {
+        "playlists": [{"id": "PL1", "name": "AI", "policy": "collect-remove"}],
+        "default_policy": "ignore"})
+    monkeypatch.setattr(yc, "get_service", lambda: "SVC")
+    monkeypatch.setattr(yc, "list_playlist_items", lambda svc, pid: iter([
+        {"playlist_item_id": "I1", "video_id": "V1", "title": "A", "channel_name": "C",
+         "published": "2026-06-01", "privacy": "public"}]))
+    called = []
+    monkeypatch.setattr(yc, "extract_transcript", lambda vid: called.append(vid) or ("x", "ok"))
+    deleted = []
+    monkeypatch.setattr(yc, "delete_playlist_item", lambda svc, iid: deleted.append(iid) or True)
+    rc = yc.cmd_run(yc._args(["run", "--sleep", "0"]))
+    assert rc == 0
+    assert called == [] and deleted == []   # blocked stub left untouched
+
+
 def test_run_dry_run_never_deletes(tmp_path, monkeypatch):
     monkeypatch.setattr(yc.cy, "INBOX", tmp_path)
     monkeypatch.setattr(yc.cy, "DEDUP_DIRS", [tmp_path])

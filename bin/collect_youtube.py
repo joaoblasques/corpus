@@ -167,3 +167,18 @@ def collected_status(video_id: str, dirs=None):
         return None
     m = re.search(r"^transcript_status:\s*(\S+)", t, re.M)
     return m.group(1) if m else None
+
+
+def should_collect(video_id: str, refetch_blocked: bool = False, dirs=None) -> bool:
+    """Whether to (re)fetch this video's transcript.
+
+    True when never collected; also True for an existing ``blocked`` stub when
+    ``refetch_blocked`` is set (those are rate-limit artifacts worth retrying).
+    A ``disabled`` status (genuinely no captions) is never re-fetched.
+    """
+    status = collected_status(video_id, dirs)
+    if status is None:
+        return True
+    if refetch_blocked and status == "blocked":
+        return True
+    return False

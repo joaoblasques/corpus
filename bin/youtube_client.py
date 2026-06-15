@@ -199,7 +199,7 @@ def cmd_run(args) -> int:
             processed += 1
             vid = item["video_id"]
             try:
-                if cy.already_collected(vid):
+                if not cy.should_collect(vid, args.refetch_blocked):
                     t["duplicate"] += 1
                     status = cy.collected_status(vid) or "unknown"
                 else:
@@ -252,6 +252,9 @@ def _args(argv):
     pr.add_argument("--playlist", default=None)
     pr.add_argument("--sleep", type=float, default=2.0)
     pr.add_argument("--collected-at", default=None)
+    pr.add_argument("--refetch-blocked", action="store_true",
+                    help="re-fetch transcripts for videos previously saved with "
+                         "transcript_status: blocked (rate-limit artifacts)")
     pr.set_defaults(func=cmd_run)
     return p.parse_args(argv)
 
