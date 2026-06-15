@@ -272,8 +272,8 @@ def run_ingest(
         inner = json.loads(result_text) if isinstance(result_text, str) else result_text
         ingested = int(inner.get("ingested", 0))
         deferred = int(inner.get("deferred", 0))
-    except (json.JSONDecodeError, TypeError, ValueError):
-        pass  # result wasn't JSON — still count as ok, counts stay 0
+    except (json.JSONDecodeError, TypeError, ValueError, AttributeError):
+        pass  # result wasn't JSON / null / non-dict — still count as ok, counts stay 0
 
     return {"status": "ok", "ingested": ingested, "deferred": deferred}
 

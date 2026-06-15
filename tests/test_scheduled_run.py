@@ -378,6 +378,62 @@ class TestRunIngest:
             f"expected fake_bin as first cmd arg, got {captured['cmd'][0]!r}"
         )
 
+    # --- Graceful-degradation contract tests (I1 fix + M3) ---
+
+    def test_result_null_does_not_raise(self, tmp_path):
+        """I1: envelope with result=null (JSON null → Python None) must not raise AttributeError.
+
+        Expected: status=ok, ingested=0, deferred=0 (graceful degradation).
+        """
+        def fake_run(cmd, **kwargs):
+            # json.dumps renders None as JSON null
+            envelope = json.dumps({"result": None, "is_error": False})
+            return _make_proc(returncode=0, stdout=envelope)
+
+        with patch("rank_links.load_env"):
+            result = scheduled_run.run_ingest(
+                max_n=5,
+                timeout_s=60,
+                _subprocess_run=fake_run,
+            )
+
+        assert result["status"] == "ok", f"expected status=ok, got {result}"
+        assert result["ingested"] == 0, f"expected ingested=0, got {result}"
+        assert result["deferred"] == 0, f"expected deferred=0, got {result}"
+
+    def test_result_plain_text_degrades_gracefully(self, tmp_path):
+        """M3: envelope whose result is plain non-JSON text does not raise and yields ok + zero counts."""
+        def fake_run(cmd, **kwargs):
+            envelope = json.dumps({"result": "Done. 3 pages.", "is_error": False})
+            return _make_proc(returncode=0, stdout=envelope)
+
+        with patch("rank_links.load_env"):
+            result = scheduled_run.run_ingest(
+                max_n=5,
+                timeout_s=60,
+                _subprocess_run=fake_run,
+            )
+
+        assert result["status"] == "ok", f"expected status=ok for plain-text result, got {result}"
+        assert result["ingested"] == 0
+        assert result["deferred"] == 0
+
+    def test_empty_stdout_records_failed(self, tmp_path):
+        """M3: returncode 0 but empty (non-JSON) stdout → status=failed (outer JSONDecodeError path)."""
+        def fake_run(cmd, **kwargs):
+            return _make_proc(returncode=0, stdout="")
+
+        with patch("rank_links.load_env"):
+            result = scheduled_run.run_ingest(
+                max_n=5,
+                timeout_s=60,
+                _subprocess_run=fake_run,
+            )
+
+        assert result["status"] == "failed", f"expected status=failed for empty stdout, got {result}"
+        assert result["ingested"] == 0
+        assert result["deferred"] == 0
+
 
 # ---------------------------------------------------------------------------
 # write_run_report tests
