@@ -8,8 +8,9 @@ U3 adds: run_collectors (gmail + obsidian + youtube with per-channel isolation),
 run_ingest (bounded headless claude /ingest-auto), write_run_report (append to
 corpus/_log.md), and wires them into the `run` CLI subcommand.
 
-U5 (commit/push) will slot in after run_ingest and before write_run_report —
-the seam is marked "U5 SEAM" below.
+U5 adds: commit_and_push — stages corpus/ only (R10), commits with a clear
+revertable message, and pushes to the current branch's remote.  Wired into
+`run` between ingest and write_run_report.
 """
 from __future__ import annotations
 
@@ -17,6 +18,8 @@ import argparse
 import datetime
 import json
 import os
+import re
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -29,6 +32,10 @@ LOCK_PATH = ROOT / "raw" / ".scheduled_run.lock"
 
 # Absolute path to the claude binary — launchd has no shell PATH.
 CLAUDE_BIN = Path.home() / ".claude" / "local" / "claude"
+
+# Absolute path to git binary — resolved once at import time so that launchd
+# (which has no shell PATH) can always find it.
+GIT_BIN = shutil.which("git") or "/usr/bin/git"
 
 # Default youtube token path (injectable for tests)
 YOUTUBE_TOKEN_PATH = BIN / "youtube_token.json"
@@ -279,6 +286,123 @@ def run_ingest(
 
 
 # ---------------------------------------------------------------------------
+# Commit / push  (U5)
+# ---------------------------------------------------------------------------
+
+def commit_and_push(
+    at: str,
+    tallies: dict,
+    *,
+    repo_root: Path | None = None,
+    _subprocess_run=None,
+) -> dict:
+    """Stage corpus/ changes, commit, and push to the current branch's remote.
+
+    Stages ONLY `corpus/` — never `raw/` or `.` (R10 guarantee).
+
+    Args:
+        at: ISO timestamp string used in the commit message.
+        tallies: Current run tallies dict (used to build per-channel counts in
+                 the commit message).
+        repo_root: Root of the git repo (defaults to ROOT).
+        _subprocess_run: Injectable seam for subprocess.run (used in tests).
+
+    Returns:
+        dict with key "status": "committed" | "nothing-to-commit" | "push-failed".
+        On "committed" or "push-failed", also includes "sha" and/or "push_error".
+    """
+    _run = _subprocess_run if _subprocess_run is not None else subprocess.run
+    root = repo_root if repo_root is not None else ROOT
+
+    # --- Detect whether corpus/ has any changes (staged or unstaged) ---
+    try:
+        status_proc = _run(
+            [GIT_BIN, "status", "--porcelain", "--", "corpus/"],
+            capture_output=True,
+            text=True,
+            cwd=str(root),
+        )
+    except Exception as exc:  # noqa: BLE001
+        return {"status": "push-failed", "push_error": f"git status failed: {exc}"}
+
+    if not (status_proc.stdout or "").strip():
+        return {"status": "nothing-to-commit"}
+
+    # --- Build human-readable per-channel counts for the commit message ---
+    collectors = tallies.get("collectors", {})
+    channel_parts = []
+    for channel, info in collectors.items():
+        n = info.get("collected", 0)
+        channel_parts.append(f"{channel}={n}")
+    ingest = tallies.get("ingest", {})
+    channel_parts.append(f"ingested={ingest.get('ingested', 0)}")
+    counts_str = ", ".join(channel_parts) if channel_parts else "no counts"
+
+    commit_msg = f"chore(auto-ingest): scheduled run {at} — {counts_str}"
+
+    # --- Stage ONLY corpus/ (R10: never raw/ or .) ---
+    try:
+        add_proc = _run(
+            [GIT_BIN, "add", "corpus/"],
+            capture_output=True,
+            text=True,
+            cwd=str(root),
+        )
+    except Exception as exc:  # noqa: BLE001
+        return {"status": "push-failed", "push_error": f"git add failed: {exc}"}
+
+    if add_proc.returncode != 0:
+        return {
+            "status": "push-failed",
+            "push_error": f"git add failed (exit {add_proc.returncode}): {add_proc.stderr.strip()}",
+        }
+
+    # --- Commit ---
+    try:
+        commit_proc = _run(
+            [GIT_BIN, "commit", "-m", commit_msg],
+            capture_output=True,
+            text=True,
+            cwd=str(root),
+        )
+    except Exception as exc:  # noqa: BLE001
+        return {"status": "push-failed", "push_error": f"git commit failed: {exc}"}
+
+    if commit_proc.returncode != 0:
+        return {
+            "status": "push-failed",
+            "push_error": f"git commit failed (exit {commit_proc.returncode}): {commit_proc.stderr.strip()}",
+        }
+
+    # Extract the short SHA from commit output (e.g. "[main abc1234] ...")
+    sha = ""
+    commit_out = commit_proc.stdout or ""
+    m = re.search(r"\[(?:[^\]]+)\s+([0-9a-f]+)\]", commit_out)
+    if m:
+        sha = m.group(1)
+
+    # --- Push ---
+    try:
+        push_proc = _run(
+            [GIT_BIN, "push"],
+            capture_output=True,
+            text=True,
+            cwd=str(root),
+        )
+    except Exception as exc:  # noqa: BLE001
+        return {"status": "push-failed", "sha": sha, "push_error": f"git push raised: {exc}"}
+
+    if push_proc.returncode != 0:
+        return {
+            "status": "push-failed",
+            "sha": sha,
+            "push_error": f"git push exit {push_proc.returncode}: {push_proc.stderr.strip()}",
+        }
+
+    return {"status": "committed", "sha": sha}
+
+
+# ---------------------------------------------------------------------------
 # Run report
 # ---------------------------------------------------------------------------
 
@@ -291,8 +415,9 @@ def write_run_report(
     """Append a scheduled run summary block to corpus/_log.md.
 
     Args:
-        tallies: dict with keys "collectors" (output of run_collectors) and
-                 "ingest" (output of run_ingest).
+        tallies: dict with keys "collectors" (output of run_collectors),
+                 "ingest" (output of run_ingest), and optionally "commit"
+                 (output of commit_and_push).
         at: ISO timestamp string for the log entry header.
         log_path: Path to _log.md (defaults to LOG_PATH); tests pass tmp_path.
     """
@@ -300,6 +425,7 @@ def write_run_report(
 
     collectors = tallies.get("collectors", {})
     ingest = tallies.get("ingest", {})
+    commit = tallies.get("commit", {})
 
     # Per-channel lines
     channel_lines = []
@@ -322,6 +448,18 @@ def write_run_report(
         f"- collectors:\n{channels_text}\n"
         f"- ingest:\n{ingest_line}\n"
     )
+
+    # Include commit/push line when present
+    if commit:
+        commit_status = commit.get("status", "unknown")
+        commit_line = f"  - commit: status={commit_status}"
+        sha = commit.get("sha", "")
+        if sha:
+            commit_line += f" · sha={sha}"
+        push_error = commit.get("push_error", "")
+        if push_error:
+            commit_line += f" · error={push_error}"
+        block += f"- commit/push:\n{commit_line}\n"
 
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("a", encoding="utf-8") as f:
@@ -379,11 +517,12 @@ def main(argv=None) -> int:
             print(json.dumps({"status": "skipped", "reason": "lock_held"}))
             return 0
 
-        tallies: dict = {"collectors": {}, "ingest": {}}
+        tallies: dict = {"collectors": {}, "ingest": {}, "commit": {}}
         try:
             if args.dry_run:
                 tallies["collectors"] = {"dry_run": {"status": "skipped", "collected": 0}}
                 tallies["ingest"] = {"status": "skipped", "ingested": 0, "deferred": 0}
+                tallies["commit"] = {"status": "skipped"}
             else:
                 tallies["collectors"] = run_collectors()
 
@@ -392,7 +531,15 @@ def main(argv=None) -> int:
                     timeout_s=args.timeout,
                 )
 
-            # U5 SEAM: commit/push goes here (after ingest, before report).
+                # U5 SEAM: commit/push — scoped to corpus/ only (R10).
+                # Push failures are recorded in tallies but must NOT propagate.
+                try:
+                    tallies["commit"] = commit_and_push(
+                        at=datetime.datetime.now().isoformat(timespec="minutes"),
+                        tallies=tallies,
+                    )
+                except Exception as exc:  # noqa: BLE001
+                    tallies["commit"] = {"status": "push-failed", "push_error": str(exc)}
 
             at = datetime.datetime.now().isoformat(timespec="minutes")
             write_run_report(tallies, at=at)
@@ -404,6 +551,7 @@ def main(argv=None) -> int:
             "dry_run": bool(args.dry_run),
             "collectors": tallies.get("collectors", {}),
             "ingest": tallies.get("ingest", {}),
+            "commit": tallies.get("commit", {}),
         }
         print(json.dumps(summary))
         return 0

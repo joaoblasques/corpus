@@ -625,6 +625,7 @@ class TestRunIntegration:
         with (
             patch.object(scheduled_run, "run_collectors", return_value=self._mock_collectors()),
             patch.object(scheduled_run, "run_ingest", return_value=self._mock_ingest()),
+            patch.object(scheduled_run, "commit_and_push", return_value={"status": "nothing-to-commit"}),
             patch.object(scheduled_run, "LOG_PATH", log),
         ):
             scheduled_run.main(["--lock-path", str(lock), "run"])
@@ -634,3 +635,335 @@ class TestRunIntegration:
         assert parsed["status"] == "ok"
         assert "collectors" in parsed
         assert "ingest" in parsed
+
+
+# ---------------------------------------------------------------------------
+# commit_and_push tests  (U5)
+# ---------------------------------------------------------------------------
+
+class TestCommitAndPush:
+    """Tests for commit_and_push — git is fully mocked (no live git/network)."""
+
+    AT = "2026-06-15T10:30"
+
+    def _make_tallies(self, gmail=2, obsidian=1, ingested=3):
+        return {
+            "collectors": {
+                "gmail": {"status": "ok", "collected": gmail},
+                "obsidian": {"status": "ok", "collected": obsidian},
+            },
+            "ingest": {"status": "ok", "ingested": ingested, "deferred": 0},
+        }
+
+    def _make_proc(self, returncode=0, stdout="", stderr=""):
+        p = MagicMock()
+        p.returncode = returncode
+        p.stdout = stdout
+        p.stderr = stderr
+        return p
+
+    # ------------------------------------------------------------------
+    # Scenario 1: corpus/ has changes → add → commit → push → committed
+    # ------------------------------------------------------------------
+
+    def test_changed_corpus_triggers_add_commit_push(self, tmp_path):
+        """When corpus/ has changes, git add corpus/ → commit → push are called."""
+        calls = []
+
+        def fake_run(cmd, **kwargs):
+            calls.append(list(cmd))
+            subcmd = cmd[1] if len(cmd) > 1 else ""
+            if subcmd == "status":
+                return self._make_proc(stdout=" M corpus/_log.md\n")
+            if subcmd == "add":
+                return self._make_proc()
+            if subcmd == "commit":
+                return self._make_proc(stdout="[feat/scheduled-automation abc1234] chore(auto-ingest): ...\n")
+            if subcmd == "push":
+                return self._make_proc()
+            return self._make_proc()
+
+        result = scheduled_run.commit_and_push(
+            at=self.AT,
+            tallies=self._make_tallies(),
+            _subprocess_run=fake_run,
+        )
+
+        assert result["status"] == "committed", f"expected committed, got {result}"
+        # Verify the sequence: status → add → commit → push
+        subcommands = [c[1] for c in calls if len(c) > 1]
+        assert subcommands == ["status", "add", "commit", "push"], (
+            f"expected [status, add, commit, push], got {subcommands}"
+        )
+
+    def test_commit_message_contains_timestamp_and_counts(self, tmp_path):
+        """Commit message contains the AT timestamp and per-channel counts."""
+        commit_msgs = []
+
+        def fake_run(cmd, **kwargs):
+            subcmd = cmd[1] if len(cmd) > 1 else ""
+            if subcmd == "status":
+                return self._make_proc(stdout=" M corpus/_log.md\n")
+            if subcmd == "add":
+                return self._make_proc()
+            if subcmd == "commit":
+                # -m <message> is at index 3
+                commit_msgs.append(cmd[3] if len(cmd) > 3 else "")
+                return self._make_proc(stdout="[main abc5678] ...\n")
+            if subcmd == "push":
+                return self._make_proc()
+            return self._make_proc()
+
+        scheduled_run.commit_and_push(
+            at=self.AT,
+            tallies=self._make_tallies(gmail=2, obsidian=1, ingested=3),
+            _subprocess_run=fake_run,
+        )
+
+        assert commit_msgs, "no commit message captured"
+        msg = commit_msgs[0]
+        assert self.AT in msg, f"timestamp {self.AT!r} not in commit message: {msg!r}"
+        assert "gmail=2" in msg, f"gmail count not in commit message: {msg!r}"
+        assert "ingested=3" in msg, f"ingested count not in commit message: {msg!r}"
+
+    # ------------------------------------------------------------------
+    # Scenario 2: corpus/ unchanged → no-op
+    # ------------------------------------------------------------------
+
+    def test_unchanged_corpus_returns_nothing_to_commit(self, tmp_path):
+        """When corpus/ has no changes, returns nothing-to-commit without add/commit/push."""
+        calls = []
+
+        def fake_run(cmd, **kwargs):
+            calls.append(list(cmd))
+            subcmd = cmd[1] if len(cmd) > 1 else ""
+            if subcmd == "status":
+                return self._make_proc(stdout="")  # empty = no changes
+            return self._make_proc()
+
+        result = scheduled_run.commit_and_push(
+            at=self.AT,
+            tallies=self._make_tallies(),
+            _subprocess_run=fake_run,
+        )
+
+        assert result["status"] == "nothing-to-commit", f"expected nothing-to-commit, got {result}"
+        # Only status was called; add/commit/push were not
+        subcommands = [c[1] for c in calls if len(c) > 1]
+        assert "add" not in subcommands, f"git add should not be called when nothing changed: {subcommands}"
+        assert "commit" not in subcommands
+        assert "push" not in subcommands
+
+    # ------------------------------------------------------------------
+    # Scenario 3: R10 — add is SCOPED to corpus/ only
+    # ------------------------------------------------------------------
+
+    def test_add_is_scoped_to_corpus_not_raw_or_dot(self, tmp_path):
+        """git add args contain 'corpus/' and do NOT contain 'raw/' or '.'  (R10 guarantee)."""
+        add_args_captured = []
+
+        def fake_run(cmd, **kwargs):
+            subcmd = cmd[1] if len(cmd) > 1 else ""
+            if subcmd == "status":
+                return self._make_proc(stdout=" M corpus/_log.md\n")
+            if subcmd == "add":
+                add_args_captured.extend(cmd[2:])  # everything after 'git add'
+                return self._make_proc()
+            if subcmd == "commit":
+                return self._make_proc(stdout="[main abc1234] ...\n")
+            if subcmd == "push":
+                return self._make_proc()
+            return self._make_proc()
+
+        scheduled_run.commit_and_push(
+            at=self.AT,
+            tallies=self._make_tallies(),
+            _subprocess_run=fake_run,
+        )
+
+        assert add_args_captured, "git add was never called (R10 test prerequisite failed)"
+        assert "corpus/" in add_args_captured, (
+            f"'corpus/' not in git add args: {add_args_captured}"
+        )
+        assert "raw/" not in add_args_captured, (
+            f"'raw/' must NOT be in git add args: {add_args_captured}  (R10 violation)"
+        )
+        assert "." not in add_args_captured, (
+            f"'.' must NOT be in git add args: {add_args_captured}  (R10 violation)"
+        )
+
+    # ------------------------------------------------------------------
+    # Scenario 4: push failure is recorded, does not propagate
+    # ------------------------------------------------------------------
+
+    def test_push_failure_recorded_in_result_not_raised(self, tmp_path):
+        """A non-zero push exit is recorded as push-failed in the result dict."""
+
+        def fake_run(cmd, **kwargs):
+            subcmd = cmd[1] if len(cmd) > 1 else ""
+            if subcmd == "status":
+                return self._make_proc(stdout=" M corpus/_log.md\n")
+            if subcmd == "add":
+                return self._make_proc()
+            if subcmd == "commit":
+                return self._make_proc(stdout="[main abc1234] ...\n")
+            if subcmd == "push":
+                return self._make_proc(returncode=1, stderr="error: failed to push some refs")
+            return self._make_proc()
+
+        result = scheduled_run.commit_and_push(
+            at=self.AT,
+            tallies=self._make_tallies(),
+            _subprocess_run=fake_run,
+        )
+
+        assert result["status"] == "push-failed", f"expected push-failed, got {result}"
+        assert "push_error" in result, f"push_error missing from result: {result}"
+
+    def test_push_exception_recorded_in_result_not_raised(self, tmp_path):
+        """A push call that raises is caught and recorded, not propagated."""
+
+        def fake_run(cmd, **kwargs):
+            subcmd = cmd[1] if len(cmd) > 1 else ""
+            if subcmd == "status":
+                return self._make_proc(stdout=" M corpus/_log.md\n")
+            if subcmd == "add":
+                return self._make_proc()
+            if subcmd == "commit":
+                return self._make_proc(stdout="[main abc1234] ...\n")
+            if subcmd == "push":
+                raise OSError("network unreachable")
+            return self._make_proc()
+
+        result = scheduled_run.commit_and_push(
+            at=self.AT,
+            tallies=self._make_tallies(),
+            _subprocess_run=fake_run,
+        )
+
+        assert result["status"] == "push-failed", f"expected push-failed, got {result}"
+        assert "network unreachable" in result.get("push_error", ""), (
+            f"error message not captured: {result}"
+        )
+
+    # ------------------------------------------------------------------
+    # Scenario 5: --dry-run skips commit_and_push entirely
+    # ------------------------------------------------------------------
+
+    def test_dry_run_skips_commit_and_push(self, tmp_path, capsys):
+        """--dry-run does not call commit_and_push (consistent with U3 dry-run pattern)."""
+        lock = tmp_path / ".dry.lock"
+        log = tmp_path / "_log.md"
+
+        commit_mock = MagicMock(return_value={"status": "committed"})
+
+        with (
+            patch.object(scheduled_run, "run_collectors"),
+            patch.object(scheduled_run, "run_ingest"),
+            patch.object(scheduled_run, "commit_and_push", commit_mock),
+            patch.object(scheduled_run, "LOG_PATH", log),
+        ):
+            scheduled_run.main(["--lock-path", str(lock), "run", "--dry-run"])
+
+        commit_mock.assert_not_called()
+
+
+# ---------------------------------------------------------------------------
+# commit_and_push containment in run() — integration
+# ---------------------------------------------------------------------------
+
+class TestCommitAndPushRunIntegration:
+    """Integration tests verifying commit_and_push wiring inside run()."""
+
+    def _mock_collectors(self):
+        return {
+            "gmail": {"status": "ok", "collected": 2},
+            "obsidian": {"status": "ok", "collected": 1},
+            "youtube": {"status": "not configured", "collected": 0},
+        }
+
+    def _mock_ingest(self):
+        return {"status": "ok", "ingested": 3, "deferred": 0}
+
+    def test_run_happy_path_invokes_commit_and_push(self, tmp_path):
+        """run() calls commit_and_push between ingest and write_run_report."""
+        lock = tmp_path / ".test.lock"
+        log = tmp_path / "_log.md"
+
+        commit_mock = MagicMock(return_value={"status": "committed", "sha": "abc1234"})
+
+        call_order = []
+
+        def collector_side_effect():
+            call_order.append("collectors")
+            return self._mock_collectors()
+
+        def ingest_side_effect(**kwargs):
+            call_order.append("ingest")
+            return self._mock_ingest()
+
+        def commit_side_effect(**kwargs):
+            call_order.append("commit")
+            return {"status": "committed", "sha": "abc1234"}
+
+        def report_side_effect(tallies, at, **kwargs):
+            call_order.append("report")
+
+        with (
+            patch.object(scheduled_run, "run_collectors", side_effect=collector_side_effect),
+            patch.object(scheduled_run, "run_ingest", side_effect=ingest_side_effect),
+            patch.object(scheduled_run, "commit_and_push", side_effect=commit_side_effect),
+            patch.object(scheduled_run, "write_run_report", side_effect=report_side_effect),
+            patch.object(scheduled_run, "LOG_PATH", log),
+        ):
+            rc = scheduled_run.main(["--lock-path", str(lock), "run"])
+
+        assert rc == 0
+        assert call_order == ["collectors", "ingest", "commit", "report"], (
+            f"unexpected call order: {call_order}"
+        )
+        assert not lock.exists(), "lock should be released"
+
+    def test_push_failure_does_not_propagate_out_of_run(self, tmp_path):
+        """A push failure inside commit_and_push does not propagate — run still completes."""
+        lock = tmp_path / ".test.lock"
+        log = tmp_path / "_log.md"
+
+        def commit_raises(**kwargs):
+            raise RuntimeError("unexpected internal error in commit_and_push")
+
+        with (
+            patch.object(scheduled_run, "run_collectors", return_value=self._mock_collectors()),
+            patch.object(scheduled_run, "run_ingest", return_value=self._mock_ingest()),
+            patch.object(scheduled_run, "commit_and_push", side_effect=commit_raises),
+            patch.object(scheduled_run, "LOG_PATH", log),
+        ):
+            rc = scheduled_run.main(["--lock-path", str(lock), "run"])
+
+        # run must complete normally (rc=0), report written, lock released
+        assert rc == 0, f"expected rc=0 even after commit_and_push raises, got {rc}"
+        assert not lock.exists(), "lock should be released even after commit_and_push failure"
+        # Report should still have been written
+        assert log.exists(), "log should still be written even after commit_and_push raises"
+
+    def test_commit_result_folded_into_tallies_for_report(self, tmp_path):
+        """commit result is stored in tallies['commit'] so write_run_report can include it."""
+        lock = tmp_path / ".test.lock"
+        log = tmp_path / "_log.md"
+
+        tallies_seen = {}
+
+        def report_side_effect(tallies, at, **kwargs):
+            tallies_seen.update(tallies)
+
+        with (
+            patch.object(scheduled_run, "run_collectors", return_value=self._mock_collectors()),
+            patch.object(scheduled_run, "run_ingest", return_value=self._mock_ingest()),
+            patch.object(scheduled_run, "commit_and_push", return_value={"status": "committed", "sha": "deadbeef"}),
+            patch.object(scheduled_run, "write_run_report", side_effect=report_side_effect),
+        ):
+            scheduled_run.main(["--lock-path", str(lock), "run"])
+
+        assert "commit" in tallies_seen, f"'commit' key missing from tallies passed to report: {tallies_seen}"
+        assert tallies_seen["commit"].get("status") == "committed"
+        assert tallies_seen["commit"].get("sha") == "deadbeef"
