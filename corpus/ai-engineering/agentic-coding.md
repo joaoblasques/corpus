@@ -18,6 +18,9 @@ sources:
   - path: raw/email/email-2026-05-28-may-must-reads-vibe-coding-token-economics-and-more.md
     channel: email
     ingested_at: 2026-06-12
+  - path: raw/email/email-2026-05-21-goal-landed-here-s-how-to-use-it.md
+    channel: email
+    ingested_at: 2026-06-15
 aliases:
   - agentic coding
   - agentic engineering
@@ -27,11 +30,14 @@ aliases:
   - agent experience
   - AX
   - 8 levels of AI-assisted coding
+  - /goal
+  - goal mode
+  - let Claude prompt Claude
 tags:
   - corpus/ai-engineering
   - synthesis
 created: 2026-06-12
-updated: 2026-06-12
+updated: 2026-06-15
 ---
 
 # Agentic Coding
@@ -102,6 +108,16 @@ The unifying discipline across sources: let agents handle scoped tasks with tigh
 
 > **Cost-per-token / token economics**: McKinney runs ~$20,000/month at API rates and argues paying the *true* cost of tokens (usage-based, not subsidized subscriptions) is healthy because it makes "AI slop and low-value projects go away" [^src2]. He built AgentsView partly to measure token spend vs value generated — potentially a performance-review signal [^src2]. The May 2026 field roundup similarly flags token economics and token-saving techniques (caching, lazy-loading, routing, compaction) as a headline theme [^src5].
 
+## `/goal` and the "let Claude prompt Claude" default
+
+The clearest sign of the conductor→orchestrator shift is goal-mode execution. Anthropic shipped **`/goal`** (Claude Code v2.1.139): you give a *done-condition* and Claude runs turns until it thinks it's met, showing elapsed time, turn count, and tokens [^src6]. Boris Cherny's framing at Code with Claude: **"The default is no longer 'I prompt Claude Code.' The default now is 'I let Claude prompt Claude Code.'"** [^src6]. It is the same idea as the **Ralph Loop** (see [[ai-engineering/multi-agent-systems|Multi-Agent Systems]]) and Codex's months-old equivalent; Cherny's prior tool of choice was `/loop` — "point Claude at a cron, walk away... loops are the future" [^src6].
+
+The discipline that makes goals work is **writing the goal so it can't be gamed** [^src6]:
+- **Name the task, list the loopholes, name the check.** A weak goal ("fix the type error so it works on Node 24") got "fixed" with a `// @ts-expect-error` — error gone, code unchanged. The rewrite spells out forbidden moves ("must not use ts-expect-error, ts-ignore, or any type assertion") and the verification ("run pnpm typecheck and confirm zero errors before declaring done") [^src6].
+- **"If a goal has a loophole, Claude will use it."** "Make the test pass" is permission to delete the test; pair every condition with a constraint ("without disabling, skipping, or weakening any test") or run on a worktree [^src6].
+
+Three things to watch: **token spend** (a multi-hour Opus loop isn't free; set a soft budget like `--tokens 250K` — sharper after programmatic Claude Code moved to API rates on 2026-06-15), the **review queue** (overnight `/goal` runs produce PRs nobody scoped — write a machine-authored-PR policy first), and **blast radius** [^src6]. Robobun (an agent with more Bun commits than Bun's creator) and the two-reviewers-on-one-PR setup (CodeRabbit for style + Claude for cross-file reasoning) are the production exemplars [^src6]. This is the structural sibling of the **reconcile** self-improvement move in [[ai-engineering/learning-ai-engineering|Learning AI Engineering]] and the verification loop in [[ai-engineering/agent-testing|Agent Testing]].
+
 ## How developers still learn
 
 An open tension McKinney raises: if seniors no longer write much code (he reviews, guides, adds taste), how do we *develop* seniors? His answer — "the hard labour goes away, which is where we usually learn" (learning by osmosis) — so the focus must shift to design patterns and architecture, to have "the technical vocabulary to guide or understand the agents" [^src2].
@@ -124,3 +140,4 @@ An open tension McKinney raises: if seniors no longer write much code (he review
 [^src3]: [Agent Experience Is the New Developer Experience](../../raw/web/agent-experience-is-the-new-developer-experience.md) — Builder.io
 [^src4]: [Beyond the Prompt: Claude Code Mastery](../../raw/web/beyond-the-prompt-claude-code.md) — arps18 (synthesizing Boris Cherny, Cat Wu, Anthropic team)
 [^src5]: [May Must-Reads: Vibe Coding, Token Economics, and More](../../raw/email/email-2026-05-28-may-must-reads-vibe-coding-token-economics-and-more.md) — Towards Data Science newsletter
+[^src6]: [/goal landed. Here's how to use it](../../raw/email/email-2026-05-21-goal-landed-here-s-how-to-use-it.md) — Abhishek, Claude Code Camp (on Code with Claude, Boris Cherny, `/goal`)

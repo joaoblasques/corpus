@@ -27,6 +27,18 @@ sources:
   - path: raw/email/email-2026-05-14-how-to-connect-data-models-to-your-bi-with-claude-code-dbt-e.md
     channel: email
     ingested_at: 2026-06-11
+  - path: raw/email/email-2025-10-01-uplevel-your-dbt-workflow-with-these-tools-and-techniques.md
+    channel: email
+    ingested_at: 2026-06-15
+  - path: raw/email/email-2026-05-15-how-to-learn-dbt-cheap-and-fast.md
+    channel: email
+    ingested_at: 2026-06-15
+  - path: raw/email/email-2026-05-14-get-hands-on-with-dbt-virtual-events-and-interactive-worksho.md
+    channel: email
+    ingested_at: 2026-06-15
+  - path: raw/email/email-2026-06-04-dbt-core-v2-alpha-cart-prediction-with-llms-ray-vs-daft.md
+    channel: email
+    ingested_at: 2026-06-15
 aliases:
   - dbt
   - data build tool
@@ -34,7 +46,7 @@ tags:
   - corpus/data-engineering
   - entity
 created: 2026-05-21
-updated: 2026-06-11
+updated: 2026-06-15
 ---
 
 # dbt (data build tool)
@@ -181,6 +193,14 @@ dbt Core **v2.0** (first alpha, 2026) rebuilds dbt Core on the same foundation a
 
 The "two-engine era" is ending: Core and Fusion now share a runtime [^src8]. Two free v2 distributions exist — **Fusion** (precompiled binary, contains some proprietary code, includes a built-in SQL linter, premium features unlocked via free login or paid plan) and a **pure Apache-2.0 dbt Core** built from the open repo [^src8]. dbt Labs recommends Fusion for almost all users; pure dbt Core targets teams with license constraints or those building on the OSS code [^src8]. Business logic remains portable across both [^src8]. Migration aids: `dbt-autofix`, an agent skill for upgrades, and a Fusion-powered parser available in v1.12 (`dbt parse --use-v2-parser`) [^src8]. The old Python `dbt-core` (v1.12 beta and earlier) remains available on PyPI/GitHub [^src8].
 
+### Fivetran + dbt Labs merger (2026)
+
+dbt Core v2.0 shipped alongside the completed **Fivetran + dbt Labs merger** ("to create the data infrastructure for trusted AI agents") [^src9]. Combined first innovations announced: dbt Core v2.0 (open-sourcing the Fusion runtime), **dbt State** (a caching layer claimed to cut underlying infra costs >30%), **dbt Wizard** (beta — autonomous model authoring/refactoring/debugging), and an **Agents Schema** open standard for agentic context [^src9]. Note: vendor (sponsor) framing — claims are promotional.
+
+## Why dbt exists / learning it
+
+dbt was created because storage got cheaper and SQL OLAP systems more powerful, shifting **ETL → ELT** and moving transformation *inside* the warehouse, written in SQL — democratised so analysts/analytics engineers (not only strong coders) can transform data [^src10]. But that logic still needs to be **tested, modularised, and documented**, which is dbt's purpose [^src10]. A dbt model is "purely Jinja + SQL," so it can be version-controlled, rolled back, and CI/CD-deployed like application code [^src10]. With just **dbt + Airflow + a cloud warehouse**, a company can build a complete analytics pipeline — making dbt one of the most in-demand DE tools [^src10]. Learning resources noted: the `learn_dbt` CLI tool (49 hands-on exercises run locally) [^src10], and dbt Labs' free **"Zero to dbt"** live workshops and on-demand demos [^src11].
+
 ## Community criticism (2022 love-letter)
 
 A widely-read 2022 essay framed concerns as **community, core, and cloud** problems, in the context of dbt Labs' rapid VC funding ($30M Series B Nov 2020 → $222M round Feb 2022) and the pressure to generate revenue [^src6]:
@@ -211,3 +231,6 @@ Several of these — Rust parser/language spec, the language server experience, 
 [^src6]: [We need to talk about dbt](../../raw/web/we-need-to-talk-about-dbt.md)
 [^src7]: [How to connect data models to your BI with Claude Code, dbt exposures & MCPs](../../raw/email/email-2026-05-14-how-to-connect-data-models-to-your-bi-with-claude-code-dbt-e.md)
 [^src8]: [dbt Core v2 is here: still open source, now rebuilt for what's next](../../raw/web/dbt-core-v2-is-here-still-open-source-now-rebuilt-for-what-s.md)
+[^src9]: [TLDR Data — dbt Core v2 Alpha / Fivetran + dbt Labs merger (newsletter)](../../raw/email/email-2026-06-04-dbt-core-v2-alpha-cart-prediction-with-llms-ray-vs-daft.md)
+[^src10]: [How to learn dbt cheap and fast (Vu Trinh)](../../raw/email/email-2026-05-15-how-to-learn-dbt-cheap-and-fast.md)
+[^src11]: [Get Hands-On with dbt: Virtual Events and Interactive Workshops (dbt Labs)](../../raw/email/email-2026-05-14-get-hands-on-with-dbt-virtual-events-and-interactive-worksho.md)

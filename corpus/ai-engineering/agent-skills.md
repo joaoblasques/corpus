@@ -143,6 +143,7 @@ The "Google DNA": individual skills encode published practices — Hyrum's Law (
 - [[ai-engineering/mcp|MCP]] — skills tell the agent *how/when* to use MCP tools
 - [[ai-engineering/rag|RAG]] — combine skills with RAG/MCP on demand
 - [[ai-engineering/sources/how-ai-agents-and-skills-work|Source: How AI agents & Claude skills work]]
+- [[ai-engineering/sources/internal-operating-system-claude-projects|Source: 4 Claude Projects / Internal OS]] — skills as reusable processes (`ask-the-board`, `ingest-resource`, `/improve-system`)
 - [[ai-engineering/README|AI Engineering hub]]
 
 ---

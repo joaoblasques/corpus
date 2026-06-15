@@ -9,6 +9,9 @@ sources:
   - path: raw/web/future-proof-your-career-as-an-engineer-in-gen-ai-world.md
     channel: web
     ingested_at: 2026-06-12
+  - path: raw/email/email-2026-06-01-the-subtle-art-of-finding-a-job-using-ai.md
+    channel: email
+    ingested_at: 2026-06-15
 aliases:
   - AI replacing workers
   - future-proofing engineering career
@@ -18,7 +21,7 @@ tags:
   - corpus/ai-business
   - synthesis
 created: 2026-06-12
-updated: 2026-06-12
+updated: 2026-06-15
 ---
 
 # AI and the Job Market
@@ -70,11 +73,18 @@ Neither source provides hard data — both are explicitly opinion/trend pieces (
 - SeattleDataGuy's piece contains an embedded promo for his consultancy (CodeStrap) and a sponsor (Greybeam); the consultant-demand argument is self-interested but well-reasoned [^src1].
 - The Engineering Leadership content is a paid post; most actionable detail (specific resources per skill) is behind a paywall and not captured here [^src2].
 
+## The demand side: how candidates respond
+
+A third source (a job-search how-to) shows the *worker-side* corollary of the utility thesis: AI's value in a job hunt is also in *applying* it well, not in raw volume. "Spraying generic applications doesn't work anymore — recruiters and their AI screeners can smell it"; the winning move is AI that **scores and tailors** each application against a real, honestly-described profile [^src3]. This is the same "apply AI to messy real context" edge, viewed from the candidate's chair — and it confirms both sources' read that legibility and fit, not output volume, are what get rewarded. The mechanics are split out into [[ai-business/ai-job-search|Finding a Job Using AI]].
+
 ## Related
 
 - [[ai-business/monetizing-code|Monetizing Code]] — "build the appliances" = finding monetizable AI workflows.
 - [[ai-business/technical-career|Navigating a Technical Career]] — depth + visibility as the promotion lever.
+- [[ai-business/ai-job-search|Finding a Job Using AI]] — the candidate-side playbook (career-strategist projects; autonomous apply).
+- [[ai-business/ai-spreadsheets|AI Spreadsheets & the Data-Skill Shift]] — a concrete instance of the tool-operation → AI-direction skill shift.
 - [[software-engineering/README|Software Engineering]] — the "shallow understanding" trend in junior engineers.
 
 [^src1]: [If AI Can Replace Workers, Why Is It Hiring Consultants?](../../raw/email/email-2026-05-26-if-ai-can-replace-workers-why-is-it-hiring-consultants.md)
 [^src2]: [Future Proof Your Career as an Engineer in Gen AI World](../../raw/web/future-proof-your-career-as-an-engineer-in-gen-ai-world.md)
+[^src3]: [The Subtle Art of Finding a Job Using AI](../../raw/email/email-2026-06-01-the-subtle-art-of-finding-a-job-using-ai.md)

@@ -68,6 +68,7 @@ When large files genuinely *should* be versioned (datasets, golden eval sets), t
 ## See also
 
 - [[mlops/dev-environment-stack|Dev Environment Stack]] — Git is a Layer-1 system-foundation tool
+- [[mlops/cli-tools|CLI Tools]] — the GitHub CLI (`gh`), `pass` (git-backed secrets), and `delta` (git diffs) build on Git
 - [[mlops/README|MLOps hub]]
 
 ---

@@ -18,6 +18,9 @@ sources:
   - path: raw/web/everything-you-need-to-know-about-incremental-view-maintenan.md
     channel: web
     ingested_at: 2026-06-12
+  - path: raw/email/email-2026-05-21-quick-insights-on-materialized-views.md
+    channel: email
+    ingested_at: 2026-06-15
 aliases:
   - materialized view
   - incremental materialized view
@@ -31,7 +34,7 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-11
-updated: 2026-06-12
+updated: 2026-06-15
 ---
 
 # Materialized Views
@@ -136,3 +139,4 @@ Three influential papers underpin most recent IVM products, forming a flexibilit
 [^src3]: [Incremental refresh for materialized views (Databricks on AWS)](../../raw/web/incremental-refresh-for-materialized-views-databricks-on-aws.md)
 [^src4]: [Working with Materialized Views (Snowflake docs)](../../raw/web/working-with-materialized-views.md)
 [^src5]: [Everything You Need to Know About Incremental View Maintenance](../../raw/web/everything-you-need-to-know-about-incremental-view-maintenan.md)
+[^src6]: [Quick insights on materialized views (Vu Trinh, newsletter origin)](../../raw/email/email-2026-05-21-quick-insights-on-materialized-views.md)

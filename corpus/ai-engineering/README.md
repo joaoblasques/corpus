@@ -6,16 +6,23 @@ tags:
   - corpus/ai-engineering
   - hub
 created: 2026-05-07
-updated: 2026-06-12
+updated: 2026-06-15
 ---
 
 # AI Engineering
 
-Domain covering LLM internals, agent design, agentic coding, context & prompt engineering, the Claude tooling stack, and AI system architecture. Substantially expanded in the 2026-06-12 email-backlog ingest (wave 2). Two sub-hubs organize the larger clusters: [[ai-engineering/agentic-coding|Agentic Coding]] (coding agents, harness, skills) and [[ai-engineering/claude-cowork|Claude Cowork]] (the Cowork product + toolkit).
+Domain covering LLM internals, agent design, agentic coding, context & prompt engineering, the Claude tooling stack, and AI system architecture. Substantially expanded in the 2026-06-12 email-backlog ingest (wave 2). Two sub-hubs organize the larger clusters: [[ai-engineering/agentic-coding|Agentic Coding]] (coding agents, harness, skills) and [[ai-engineering/claude-cowork|Claude Cowork]] (the Cowork product + toolkit). The 2026-06-15 YouTube-course + email-backlog ingest added the AI-fundamentals base ([[ai-engineering/ai-fundamentals|AI Fundamentals]], [[ai-engineering/machine-learning|Machine Learning]], [[ai-engineering/neural-network|Neural Networks]], [[ai-engineering/statistics-for-ml|Statistics for ML]]) and the product/workflow layer ([[ai-engineering/ai-product-management|AI Product Management]], [[ai-engineering/agentic-workflow|Agentic Workflows]], [[ai-engineering/vibe-coding|Vibe Coding]]).
 
 ## Pages
 
 ### Concepts
+- [[ai-engineering/ai-fundamentals|AI Fundamentals]] — concept · draft · classical + modern AI scaffold: search, logic, uncertainty, optimization, learning
+- [[ai-engineering/machine-learning|Machine Learning]] — concept · draft · supervised/unsupervised/RL; overfitting; RAG-vs-fine-tuning
+- [[ai-engineering/neural-network|Neural Networks]] — concept · draft · perceptron→backprop→CNN/RNN; reasoning & multimodal models
+- [[ai-engineering/statistics-for-ml|Statistics & Probability for ML]] — concept · draft · distributions, inference, regression — the math under ML
+- [[ai-engineering/agentic-workflow|Agentic Workflows]] — concept · draft · describe-what-not-how; WAT framework; deterministic vs non-deterministic
+- [[ai-engineering/vibe-coding|Vibe Coding]] — concept · draft · vibe coding vs spec-driven development; "ask me questions first"
+- [[ai-engineering/agi|AGI]] — concept · stub · ANI/AGI/ASI; the AGI-by-2030 forecast; future-of-work framing
 - [[ai-engineering/context-engineering|Context Engineering]] — concept · draft · dynamically building and optimizing LLM inputs at inference time
 - [[ai-engineering/ai-agent|AI Agent]] — concept · draft · LLM + tools + memory + orchestration in an iterative loop
 - [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] — concept · draft · patterns for multiple cooperating agents (sequential, parallel, supervisor, data-driven)
@@ -52,9 +59,12 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [[ai-engineering/learning-ai-engineering|Learning AI Engineering]] — synthesis · draft · two learning paths (generalist ladder + data-engineer curriculum); context > prompts
 - [[ai-engineering/tool-calling-and-context-engineering|Tool Calling & Context Engineering]] — synthesis · draft · how tool results feed the context loop; the compounding-window problem
 - [[ai-engineering/optimizing-claude|Optimizing a Claude Setup]] — synthesis · draft · context economy as the organizing principle; skills, sub-agents, concise specs; filed back from a query
+- [[ai-engineering/ai-product-management|AI Product Management]] — synthesis · draft · GenAI value stack; AIPM taxonomy; "we are all going to be AI managers"
 
 ### Sources
 - [[ai-engineering/sources/how-ai-agents-and-skills-work|How AI agents & Claude skills work]] — source · draft · Isenberg × Ras Mic; skills, progressive disclosure, less-is-more context
+- [[ai-engineering/sources/cs50-ai-with-python|Harvard CS50's AI with Python]] — source · draft · classical+modern AI curriculum (search, logic, ML, neural nets, NLP)
+- [[ai-engineering/sources/internal-operating-system-claude-projects|4 Claude Projects / Internal OS]] — source · draft · knowledge+skills+ingest+improve loop = the LLM-Wiki pattern
 
 ### Cross-domain (primary home in data-engineering)
 - [[data-engineering/claude-code-for-data-engineering|Claude Code for Data Engineering]] — synthesis · AI-assisted dbt / data workflows

@@ -15,6 +15,12 @@ sources:
   - path: raw/web/introducing-dimster-a-performance-benchmarking-tool-for-apac.md
     channel: web
     ingested_at: 2026-06-12
+  - path: raw/email/email-2026-05-14-duckdb-goes-remote-when-lakehouses-guess-netflix-tames-data.md
+    channel: email
+    ingested_at: 2026-06-15
+  - path: raw/email/email-2026-05-28-slashing-snowflake-costs-open-source-agent-tradeoffs-kafkas.md
+    channel: email
+    ingested_at: 2026-06-15
 aliases:
   - Apache Kafka
   - Kafka
@@ -26,7 +32,7 @@ tags:
   - corpus/data-engineering
   - entity
 created: 2026-05-21
-updated: 2026-06-12
+updated: 2026-06-15
 ---
 
 # Apache Kafka
@@ -118,3 +124,5 @@ These findings were produced with **Dimster** (DIMensional teSTER), an open-sour
 [^src2]: [Can Kafka Queues Make Consumers Faster? Part 2: Head-Of-Line Blocking](../../raw/web/can-kafka-queues-make-consumers-faster-part-2-head-of-line-b.md)
 [^src3]: [Kafka Share Groups and Parallelizing Consumption — Part 1: Tuning max.poll.records](../../raw/web/kafka-share-groups-and-parallelizing-consumption-part-1-tuni.md)
 [^src4]: [Introducing Dimster, a performance benchmarking tool for Apache Kafka](../../raw/web/introducing-dimster-a-performance-benchmarking-tool-for-apac.md)
+[^src5]: [TLDR Data — Kafka Queues / Head-of-Line Blocking (newsletter origin)](../../raw/email/email-2026-05-14-duckdb-goes-remote-when-lakehouses-guess-netflix-tames-data.md)
+[^src6]: [TLDR Data — Kafka's New Bottleneck / Share Groups (newsletter origin)](../../raw/email/email-2026-05-28-slashing-snowflake-costs-open-source-agent-tradeoffs-kafkas.md)

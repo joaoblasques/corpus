@@ -21,17 +21,22 @@ sources:
   - path: raw/email/email-2025-11-04-practical-prompt-engineering-tips-from-sabrina-on-the-github.md
     channel: inbox
     ingested_at: 2026-06-12
+  - path: raw/email/email-2026-06-07-being-good-at-ai-is-stupidly-simple.md
+    channel: email
+    ingested_at: 2026-06-15
 aliases:
   - prompting
   - prompt design
   - few-shot prompting
   - zero-shot prompting
   - chain-of-thought
+  - AskUserQuestion
+  - ask me questions first
 tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-12
-updated: 2026-06-12
+updated: 2026-06-15
 ---
 
 # Prompt Engineering
@@ -90,6 +95,10 @@ Newer Claude models follow instructions literally and are more responsive to the
 
 OpenAI's Codex guidance converges on similar themes for agentic coding: a starter prompt covering "autonomy and persistence, codebase exploration, tool use, and frontend quality," with the note to *remove* prompting for upfront plans or status preambles because it "can cause the model to stop abruptly before the rollout is complete" [^src3]. Codex also documents **metaprompting** — asking the model at the end of a turn how to improve its own instructions, then generalizing the suggestions across several runs [^src3].
 
+## The "ask me questions first" pattern (model-led elicitation)
+
+The single most useful trick for non-technical users inverts the prompt entirely: instead of writing a good prompt, append **"ask me questions first"** so the model interviews *you* — Claude's `AskUserQuestion` tool surfaces 3–5 clickable questions and builds context from your answers, "and you're already using AI better than 99.9% of the population" [^src7]. Going pro: "give me 3 different strategies" lets the model lay out options for you to pick [^src7]. This is the elicitation counterpart to the [[ai-engineering/agent-harness|harness]] principle that models should *manage their confusion and ask for clarification* rather than guessing silently — and it overlaps with the [[ai-engineering/vibe-coding|spec-driven]] habit of pinning down intent before building. (The "interview me" framing also drives the project-setup loop in [[ai-engineering/ai-product-management|AI Product Management]].)
+
 ## Practical gotchas
 
 - The same prompt can give different results each time — that is the non-deterministic nature of LLMs [^src5].
@@ -113,3 +122,4 @@ OpenAI's Codex guidance converges on similar themes for agentic coding: a starte
 [^src3]: [Codex prompting guide](../../raw/web/codex-prompting-guide.md)
 [^src5]: [Practical Prompt Engineering tips from Sabrina (email)](../../raw/email/email-2025-11-04-practical-prompt-engineering-tips-from-sabrina-on-the-github.md)
 [^src6]: [Write better prompts for Cursor, Claude, Copilot (Frontend Masters)](../../raw/web/write-better-prompts-for-cursor-claude-copilot.md)
+[^src7]: [Being good at AI is (stupidly) simple](../../raw/email/email-2026-06-07-being-good-at-ai-is-stupidly-simple.md) — Ruben Hassid

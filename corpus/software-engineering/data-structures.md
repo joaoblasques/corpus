@@ -61,6 +61,7 @@ updated: 2026-05-21
 
 ## See also
 
+- [[software-engineering/algorithms|Algorithms (Strategies, Not Tricks)]] — recursion, binary search, and DP/memoization that operate over these structures and trade in these complexity classes
 - [[software-engineering/software-design-principles|Software Design Principles]] — code-level design choices that interact with structure selection (e.g., encapsulation of data structure internals)
 - [[software-engineering/README|Software Architecture hub]]
 

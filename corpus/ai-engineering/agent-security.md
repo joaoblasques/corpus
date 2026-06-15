@@ -15,17 +15,25 @@ sources:
   - path: raw/web/i-built-a-vulnerable-app-and-spent-1-500-seeing-if-llms-coul.md
     channel: web
     ingested_at: 2026-06-12
+  - path: raw/web/catch-security-issues-as-claude-writes-code-claude-code-docs.md
+    channel: web
+    ingested_at: 2026-06-15
+  - path: raw/email/email-2026-06-08-how-openai-engineers-prompt.md
+    channel: email
+    ingested_at: 2026-06-15
 aliases:
   - prompt injection
   - LLM security
   - AI guardrails
   - agent hardening
   - auth.md
+  - lockdown mode
+  - security-guidance plugin
 tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-12
-updated: 2026-06-12
+updated: 2026-06-15
 ---
 
 # Agent Security
@@ -70,7 +78,7 @@ A code-driven guardrail that blocks execution if the user rejects an action, bre
 
 ## Production hardening at the harness level
 
-Coding-agent harnesses add their own real-time security passes. Anthropic's security plugin reviews Claude's edits as they happen and sends vulnerabilities back for immediate fix: every file write triggers a scan, a model double-checks diffs at turn end, high-severity issues are fed back for fixing, and on git commit an agentic reviewer traces data flow to catch cross-file bugs like IDOR or SSRF [^src1]. (See [[ai-engineering/claude-code|Claude Code]].) On the exfiltration side, ChatGPT's "Lockdown Mode" can't stop an injection from landing but "seals the exits," cutting the outbound requests attackers use to siphon data — at the cost of disabling agent mode, deep research, and downloads [^src1].
+Coding-agent harnesses add their own real-time security passes. Anthropic's `security-guidance` plugin reviews Claude's edits as they happen and sends vulnerabilities back for immediate fix: every file write triggers a scan, a model double-checks diffs at turn end, high-severity issues are fed back for fixing, and on git commit an agentic reviewer traces data flow to catch cross-file bugs like IDOR or cross-file SSRF [^src5]. (See [[ai-engineering/claude-code|Claude Code]].) On the exfiltration side, ChatGPT's **Lockdown Mode** can't stop an injection from landing but "seals the exits," cutting the outbound requests attackers use to siphon data — at the cost of disabling agent mode, deep research, and downloads [^src6].
 
 ## Offensive use: agents as AppSec testers
 
@@ -108,3 +116,5 @@ It issues a scoped, short-lived, revocable access token over standard OAuth, com
 [^src2]: [Secure LLMs for Data Engineers: How to prevent Prompt Injection](../../raw/web/secure-llms-how-to-prevent-prompt-injection.md)
 [^src3]: [auth.md — open protocol for agent registration](../../raw/web/auth-md-open-protocol-for-agent-registration.md)
 [^src4]: [I built a vulnerable app and spent $1,500 seeing if LLMs could hack it](../../raw/web/i-built-a-vulnerable-app-and-spent-1-500-seeing-if-llms-coul.md) — Kasra
+[^src5]: [Catch security issues as Claude writes code (Claude Code docs)](../../raw/web/catch-security-issues-as-claude-writes-code-claude-code-docs.md) — Anthropic, via [How OpenAI engineers prompt](../../raw/email/email-2026-06-08-how-openai-engineers-prompt.md)
+[^src6]: [How OpenAI engineers prompt](../../raw/email/email-2026-06-08-how-openai-engineers-prompt.md) — The Code (on ChatGPT Lockdown Mode)

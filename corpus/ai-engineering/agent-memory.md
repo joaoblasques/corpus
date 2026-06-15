@@ -15,6 +15,9 @@ sources:
   - path: raw/web/rushdb-2-0-memory-infrastructure-for-the-agentic-era-rushdb.md
     channel: web
     ingested_at: 2026-06-12
+  - path: raw/email/email-2026-05-14-what-agents-need-memory-context-and-more.md
+    channel: email
+    ingested_at: 2026-06-15
 aliases:
   - agent memory
   - memory
@@ -24,11 +27,14 @@ aliases:
   - temporal knowledge graph
   - bi-temporal memory
   - memory infrastructure
+  - portable memory
+  - vault architecture
+  - unified agentic memory
 tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-21
-updated: 2026-06-12
+updated: 2026-06-15
 ---
 
 # Agent Memory
@@ -87,6 +93,14 @@ Both Zep/Graphiti and RushDB build on graph databases like Neo4j for storing nod
 
 In the 4-step agentic loop (Perceive → Reason → Act → **Learn**), the Learn step stores outcomes to long-term memory. This enables an agent to improve at similar tasks over time [^src1].
 
+## Portable memory across harnesses
+
+A recurring 2026 theme is making memory **portable** rather than locked to one tool. The framing: agents need "the best approximation of the abilities that make humans nimble and versatile: memory, transferable context, and a nuanced understanding of the task" [^src6]. Two patterns surfaced together [^src6]:
+- **A portable knowledge layer ("vault architecture")** — an external, auto-updated store of context the agent reads from, decoupled from any single chat/session, so you don't "start from scratch every single time."
+- **Unified agentic memory via hooks** — even when a tool ships built-in memory, maintaining and *moving it between platforms* is the hard part; lifecycle hooks (`SessionStart`/`Stop`) that save and load context make memory portable across harnesses.
+
+This is the memory-layer counterpart to the harness-level persistence hooks in [[ai-engineering/agent-harness|Agent Harness]] (ECC's memory-persistence hooks) and the knowledge-folder pattern in the [[ai-engineering/sources/internal-operating-system-claude-projects|internal-operating-system]] approach — and it mirrors the `CLAUDE.md`/`MEMORY.md` files of [[ai-engineering/claude-cowork|Claude Cowork]].
+
 ## See also
 
 - [[ai-engineering/context-window-management|Context Window Management]] — strategies for what to keep, compress, or drop from short-term memory
@@ -103,3 +117,4 @@ In the 4-step agentic loop (Perceive → Reason → Act → **Learn**), the Lear
 [^src3]: [Zep: A Temporal Knowledge Graph Architecture for Agent Memory](../../raw/web/zep-a-temporal-knowledge-graph-architecture-for-agent-memory.md)
 [^src4]: [RushDB 2.0: Memory Infrastructure for the Agentic Era](../../raw/web/rushdb-2-0-memory-infrastructure-for-the-agentic-era-rushdb.md)
 [^src5]: [But Context First: A Field Guide to AI-Native Search](../../raw/email/email-2026-05-28-but-context-first-a-field-guide-to-ai-native-search.md)
+[^src6]: [What Agents Need: Memory, Context, and More](../../raw/email/email-2026-05-14-what-agents-need-memory-context-and-more.md) — Towards Data Science newsletter

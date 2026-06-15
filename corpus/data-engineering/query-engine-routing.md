@@ -9,6 +9,12 @@ sources:
   - path: raw/web/greybeam-drop-in-query-engines-for-snowflake.md
     channel: web
     ingested_at: 2026-06-11
+  - path: raw/web/the-rise-of-multi-query-engines-how-ai-opens-up-more-options.md
+    channel: web
+    ingested_at: 2026-06-15
+  - path: raw/email/email-2026-06-04-dbt-core-v2-alpha-cart-prediction-with-llms-ray-vs-daft.md
+    channel: email
+    ingested_at: 2026-06-15
 aliases:
   - query routing
   - multi-engine
@@ -18,7 +24,7 @@ tags:
   - corpus/data-engineering
   - synthesis
 created: 2026-06-11
-updated: 2026-06-11
+updated: 2026-06-15
 ---
 
 # Query-Engine Routing
@@ -96,6 +102,18 @@ Guardrails (ReadOnlyGuard, RowLimitGuard, CostEstimateGuard, PIIMaskGuard, Human
 
 **Synthesis.** Both implement the same thesis — *most analytical queries are small and do not need a warehouse, so route them to a cheaper engine over open Iceberg storage* — but at different layers. QueryFlux/LakeOps is an open, self-hosted control plane for a full multi-engine lakehouse; Greybeam is a closed, zero-config wedge specifically in front of Snowflake. Both rely on Iceberg as the portability substrate, both use SQL translation + automatic routing + warehouse fallback, and both are moving from heuristic toward learned routing. Note both sources are vendor materials promoting their own products; cost-savings percentages are vendor-reported.
 
+## Why now: AI agents as the new query driver
+
+A third source (Greybeam's CEO) frames the *timing*: **AI agents are becoming the primary consumers of data infrastructure** — not analysts or dbt jobs [^src3]. A single user question ("why did revenue drop in APAC?") fires **6–12 agent queries** (metadata discovery, schema inspection, candidate SQL, execution, validation, drill-downs) before the user sees an answer [^src3]. These are small, read-heavy aggregations that don't need distributed compute — yet per-credit billing (Snowflake's 60-second minimum window, re-triggered on each burst after auto-suspend) makes the bill grow disproportionately to value [^src3].
+
+Why neither obvious fix works [^src3]:
+- **"Optimize harder"** (right-size warehouses, tune auto-suspend) has a ceiling — the floor is your cost-per-credit.
+- **"Migrate off"** to DuckDB loses the platform (no RBAC, governance, sharing, ecosystem); migrating warehouses is a multi-quarter bet with no cost guarantee.
+
+**Multi-engine is the middle path** — keep the familiar Snowflake DX while routing eligible queries to a cheaper engine over open Iceberg storage [^src3]. Three things made it practical: Iceberg crossing the adoption threshold (any engine reads the tables), workload data confirming the profile (~99% of queries scan <100 GB), and matured routing infrastructure [^src3]. Reported result: Headset cut Snowflake costs **92%** routing eligible queries to DuckDB via Greybeam [^src3]. The bar: "if your team has to think about which engine runs a query, multi-engine isn't working" — complexity lives in the routing layer [^src3]. The June-2026 TLDR roundup echoes this: AI creates more small bursty queries, so multi-engine routing cuts cost by sending each query to the best engine while keeping familiar workflows [^src4].
+
+> Source [^src3] is also vendor material (Greybeam guest post) — cost figures are vendor-reported.
+
 ## Related
 
 - [[data-engineering/apache-iceberg|Apache Iceberg]] — the multi-engine substrate
@@ -105,3 +123,5 @@ Guardrails (ReadOnlyGuard, RowLimitGuard, CostEstimateGuard, PIIMaskGuard, Human
 
 [^src1]: [Routing multiple query engines with Iceberg (LakeOps)](../../raw/web/routing-multiple-query-engines-with-iceberg-lakeops-blog.md)
 [^src2]: [Greybeam: drop-in query engines for Snowflake](../../raw/web/greybeam-drop-in-query-engines-for-snowflake.md)
+[^src3]: [The Rise of Multi-Query Engines (Kyle Cheung, Greybeam)](../../raw/web/the-rise-of-multi-query-engines-how-ai-opens-up-more-options.md)
+[^src4]: [TLDR Data — The Rise of Multi-Query Engines (newsletter)](../../raw/email/email-2026-06-04-dbt-core-v2-alpha-cart-prediction-with-llms-ray-vs-daft.md)

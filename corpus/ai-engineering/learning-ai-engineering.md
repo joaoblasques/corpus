@@ -9,17 +9,31 @@ sources:
   - path: raw/_inbox/email-2026-04-16-becoming-a-data-ai-engineer-the-complete-guide.md
     channel: inbox
     ingested_at: 2026-06-12
+  - path: raw/youtube/youtube-msFxQ7OYPj8-how-i-d-learn-ai-from-scratch-in-2026-skip-the-useless-80.md
+    channel: youtube
+    ingested_at: 2026-06-15
+  - path: raw/email/email-2026-06-04-here-s-how-i-d-learn-machine-learning-in-2026.md
+    channel: email
+    ingested_at: 2026-06-15
+  - path: raw/email/email-2026-05-02-this-is-how-i-d-use-ai-to-learn-python-in-2026.md
+    channel: email
+    ingested_at: 2026-06-15
+  - path: raw/web/github-rohitg00-ai-engineering-from-scratch-learn-it-build-i.md
+    channel: web
+    ingested_at: 2026-06-15
 aliases:
   - learning AI
   - learning AI engineering
   - AI learning path
   - becoming an AI engineer
   - learn AI from scratch
+  - learn machine learning
+  - learn AI to learn Python
 tags:
   - corpus/ai-engineering
   - synthesis
 created: 2026-06-12
-updated: 2026-06-12
+updated: 2026-06-15
 ---
 
 # Learning AI Engineering
@@ -52,7 +66,27 @@ Alejandro Aboy organizes a year of building production agents into one path, anc
 - "pgvector is probably all you need for RAG." Model updates will break your agent — "pin versions, always have a rollback plan."
 - **MetadataOps**: "Documentation is now a prompt. Vague metadata equals hallucinations." Add "Can an AI understand this?" to your definition of done [^src2].
 
-## Where the two paths agree
+## Path 3: The projects → AI-system ladder (the video version)
+
+The video version of Path 1 sharpens the third rung into a concrete three-level model [^src3]:
+1. **One model, go deep** — same convergence argument (models cluster in capability; pick by paid-tier access, work-fit, and vibes; always default to the most capable model).
+2. **Context in Projects** — a *project* has three parts: instructions (rules that always apply), knowledge files (reference docs), and memory (auto-updated milestones). Prefer `.md` over PDF — "easier for the AI to read and cheaper to process."
+3. **An AI system** — connects projects so the AI spots cross-project patterns *and* updates itself from feedback. The tool ladder by setup cost: Gemini Spark (zero setup, pre-connected) → [[ai-engineering/claude-cowork|Claude Cowork]] (non-technical, some setup) → [[ai-engineering/claude-code|Claude Code]]/Codex ("Cowork on steroids," needs code comfort). A model's *model-selector complexity* is "a pretty good signal for who it's for" [^src3].
+
+The **reconcile** move recurs as the self-improvement mechanism: share your edited final draft back, tell the AI to reconcile it with its initial output, and it proposes rules to remember — learnings compound over time [^src3]. This is the consumer-facing version of the [[ai-engineering/agent-harness|harness]] ratchet.
+
+## Path 4: The deep-build curriculum (build it from scratch)
+
+For learners who want to understand AI *internals*, not just call APIs, the `ai-engineering-from-scratch` curriculum (503 lessons, 20 phases) sequences the whole stack bottom-up: math foundations → classical ML → deep-learning core → transformers → LLMs → engineering → tools/protocols → agents [^src5]. Its pedagogy is the **Build It / Use It split** — implement each algorithm from raw math first, then run the same thing through the production library — so "by the time PyTorch shows up, you already know what it's doing under the hood" [^src5]. Every lesson ships a reusable artifact (prompt, skill, agent, MCP server) [^src5]. See [[ai-engineering/ai-fundamentals|AI Fundamentals]], [[ai-engineering/machine-learning|Machine Learning]], [[ai-engineering/neural-network|Neural Networks]].
+
+## The prerequisite ladders (Python, then ML)
+
+Two narrower "how I'd learn X in 2026" guides feed the front of these paths [^src4][^src6]:
+
+- **Python first** — fundamentals (variables, loops, functions, lists/dicts, error handling) until you can write a 40–50 line program *without a tutorial open*; then use AI as a **tutor that gives you reps, not answers** ("make it give you reps instead of answers"); build small projects; learn OOP *after* you feel the mess; pick one direction (AI apps, backend, automation, data) [^src4].
+- **ML in the right order** — Python → NumPy/pandas/Matplotlib → the *practical* math you actually need (vectors, distributions, Bayes, gradients — not every proof) → core ML algorithms with scikit-learn → deep learning with PyTorch → production skills (Docker, FastAPI, model serving, monitoring, CI/CD, experiment tracking) [^src6]. Recurring rule: "spend more time building than watching." The math and production layers map to [[ai-engineering/statistics-for-ml|Statistics for ML]] and the [[mlops/README|MLOps]] domain respectively.
+
+## Where the paths agree
 
 | Claim | Generalist framing [^src1] | Engineer framing [^src2] |
 |---|---|---|
@@ -63,10 +97,13 @@ Alejandro Aboy organizes a year of building production agents into one path, anc
 
 ## See also
 
-- [[ai-engineering/context-engineering|Context Engineering]] — the discipline both paths converge on
+- [[ai-engineering/ai-fundamentals|AI Fundamentals]] — the classical-AI base (search, logic, uncertainty) under all of this
+- [[ai-engineering/machine-learning|Machine Learning]] · [[ai-engineering/neural-network|Neural Networks]] · [[ai-engineering/statistics-for-ml|Statistics for ML]] — the deep-build prerequisites
+- [[ai-engineering/context-engineering|Context Engineering]] — the discipline the paths converge on
 - [[ai-engineering/rag|RAG]] — the data-engineer's on-ramp; "the ETL of AI"
-- [[ai-engineering/prompt-engineering|Prompt Engineering]] — the lever both paths de-emphasize relative to context
+- [[ai-engineering/prompt-engineering|Prompt Engineering]] — the lever the paths de-emphasize relative to context
 - [[ai-engineering/agent-skills|Agent Skills]] — "progressive disclosure for agents"
+- [[ai-engineering/vibe-coding|Vibe Coding]] — the beginner build-and-iterate entry point
 - [[ai-engineering/claude-cowork|Claude Cowork]] / [[ai-engineering/claude-code|Claude Code]] — the recommended "build a system" tools
 - [[ai-engineering/README|AI Engineering hub]]
 
@@ -74,3 +111,7 @@ Alejandro Aboy organizes a year of building production agents into one path, anc
 
 [^src1]: [How I'd Learn AI From Scratch in 2026](../../raw/email/email-2026-06-09-how-i-d-learn-ai-from-scratch-in-2026.md) — Jeff Su
 [^src2]: [Becoming a Data & AI Engineer — The Complete Guide](../../raw/email/email-2026-04-16-becoming-a-data-ai-engineer-the-complete-guide.md) — Alejandro Aboy, The Pipe & The Line
+[^src3]: [How I'd Learn AI From Scratch in 2026 (skip the useless 80%)](../../raw/youtube/youtube-msFxQ7OYPj8-how-i-d-learn-ai-from-scratch-in-2026-skip-the-useless-80.md) — Jeff Su (video)
+[^src4]: [This is how I'd use AI to learn Python in 2026](../../raw/email/email-2026-05-02-this-is-how-i-d-use-ai-to-learn-python-in-2026.md) — Tech With Tim
+[^src5]: [ai-engineering-from-scratch](../../raw/web/github-rohitg00-ai-engineering-from-scratch-learn-it-build-i.md) — Rohit Ghumare
+[^src6]: [Here's how I'd learn machine learning in 2026](../../raw/email/email-2026-06-04-here-s-how-i-d-learn-machine-learning-in-2026.md) — Tech With Tim

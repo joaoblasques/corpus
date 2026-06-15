@@ -9,6 +9,9 @@ sources:
   - path: raw/web/data-identity-politics-and-the-kimball-vs-inmon-war.md
     channel: web
     ingested_at: 2026-06-11
+  - path: raw/email/email-2025-11-20-the-medallion-data-architecture-pros-cons.md
+    channel: email
+    ingested_at: 2026-06-15
 aliases:
   - medallion
   - bronze silver gold
@@ -18,12 +21,14 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-11
-updated: 2026-06-11
+updated: 2026-06-15
 ---
 
 # Medallion Architecture
 
 **TL;DR.** Medallion (bronze → silver → gold) is a set of **data lifecycle stages**, not a data model. Popularized by Databricks in the early 2020s, it describes how data is progressively refined as it traverses an analytical pipeline, usually under ELT [^src1]. The stages are **model-agnostic**: at no point does the medallion prescribe how data is modeled (star schema, Data Vault, 3NF, OBT, etc.) [^src1]. Medallion owns the *pipeline*; data modeling owns the *entities, grain, and keys*. They are orthogonal concerns [^src1]. In the modern lakehouse, the Kimball-vs-Inmon debate dissolves into a synthesis: Inmon-style governance for raw/bronze layers, Kimball-style dimensional models for gold/serving [^src2].
+
+A common practitioner pain point reinforces the "lifecycle not model" framing: teams struggle to implement medallion correctly — unsure which logic belongs in which layer, or letting naming drift until the scheme is more complicated than it needs to be [^src3].
 
 ## The three stages
 
@@ -82,3 +87,4 @@ Why no equivalent wars today? Fewer big ideas held practitioner mindshare back t
 
 [^src1]: [Medallion Architecture is NOT a Data Model](../../raw/email/email-2025-09-08-medallion-architecture-is-not-a-data-model.md)
 [^src2]: [Data Identity Politics and The Kimball vs. Inmon War](../../raw/web/data-identity-politics-and-the-kimball-vs-inmon-war.md)
+[^src3]: [The Medallion Data Architecture (Pros & Cons) (KahanDataSolutions)](../../raw/email/email-2025-11-20-the-medallion-data-architecture-pros-cons.md)

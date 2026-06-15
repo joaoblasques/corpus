@@ -15,6 +15,15 @@ sources:
   - path: raw/email/email-2026-03-31-affaan-m-everything-claude-code-the-agent-harness-performanc.md
     channel: email
     ingested_at: 2026-06-12
+  - path: raw/web/how-claude-code-works-in-large-codebases-best-practices-and.md
+    channel: web
+    ingested_at: 2026-06-15
+  - path: raw/email/email-2026-05-28-the-harness-matters-more-than-the-model.md
+    channel: email
+    ingested_at: 2026-06-15
+  - path: raw/web/antirez.md
+    channel: web
+    ingested_at: 2026-06-15
 aliases:
   - harness
   - agent harness
@@ -109,6 +118,17 @@ As models improve, the space of interesting harness combinations doesn't shrink 
 
 A related feedback loop: today's agent products are post-trained *with harnesses in the loop*, so the model gets specifically better at filesystem ops, bash, planning, and subagent dispatch — which is why the same model feels different across harnesses, and why changing a tool's logic (`apply_patch` vs `str_replace`) can cause regressions [^src1].
 
+## Anthropic's "Claude Code at scale" guidance
+
+Anthropic's own large-codebase post makes the harness thesis first-party: **"the ecosystem built around the model — the harness — determines how Claude Code performs more than the model alone"** [^src5]. Two concrete points reinforce earlier sections:
+
+- **No index by design.** Claude Code doesn't embed or upload the codebase; it greps, lists directories, reads files, and follows references the way a developer would. The rationale is staleness: "by the time a developer queries the index, it reflects the codebase as it existed weeks, days, or even hours before. Retrieval returns a function the team renamed two weeks ago" [^src5]. The tradeoff: it works best "when Claude has enough starting context to know where to look," so the burden on a big/unfamiliar repo is on *you* (the harness), not the model [^src5]. See [[ai-engineering/agentic-search|Agentic Search]] for the grep-vs-index debate; codegraph is the week's attempt to bolt a local knowledge graph back on via MCP [^src5].
+- **The CLAUDE.md operating rules** [^src5]: keep the root file thin ("pointers and critical gotchas only; everything else drifts into noise"), push local conventions into subdirectory files that load as Claude walks the tree, codify build/test commands so Claude can't guess, tell Claude to "update CLAUDE.md so you don't repeat this" after a mistake, and **re-read it after model upgrades** — an old single-file-refactor rule that helped a weaker model can block a stronger one from cross-file edits it's now good at (Anthropic suggests a review every 3–6 months). The summary: "give Claude a thin map and a way to check its own work, then get out of the way" [^src5]. These overlap with [[ai-engineering/claude-md-conventions|CLAUDE.md Conventions]].
+
+### The QA-agent harness pattern
+
+A specific high-value harness component: a **QA agent layered on top of existing tests** rather than replacing them. Salvatore Sanfilippo's pattern — the LLM agent reads new commits, analyzes the impact, stands up an environment (e.g. replication + persistence), and simulates days of multi-user traffic to surface what looks broken — "tests like a real user" and catches the performance/UX issues rigid scripts miss [^src6]. The setup is a single Markdown file with goals and SSH details, instructing the agent to compare the new branch against the last stable release and flag *relative* regressions (e.g. speed drops) without hardcoded limits [^src6]. This is the harness-side complement to [[ai-engineering/agent-testing|Agent Testing]].
+
 ## Harness-as-a-Service (HaaS)
 
 Trivedy's framing: the industry is moving from building on **LLM APIs** (which return a completion) to building on **harness APIs** (which return a runtime) — the Claude Agent SDK, Codex SDK, and OpenAI Agents SDK all point the same way, shipping the loop, tools, context management, hooks, and sandbox primitives out of the box [^src1]. The default path shifts from "build your own loop and tool-calling" to "pick a harness framework, configure the four pillars (system prompt, tools, context, subagents), and put effort into domain-specific design" [^src1]. Trivedy's argument for starting messy: "good agent building is an exercise in iteration. You can't do iterations if you don't have a v0.1" [^src1].
@@ -140,3 +160,5 @@ A concrete, shipping harness system is **ECC (everything-claude-code)** by Affaa
 [^src2]: [Is Grep All You Need? The Harness Matters More Than the Search](../../raw/web/is-grep-all-you-need-the-harness-matters-more-than-the-searc.md) — StackSweep, on a PwC LongMemEval study
 [^src3]: [everything-claude-code (ECC): the agent harness performance optimization system](../../raw/web/github-affaan-m-ecc-the-agent-harness-performance-optimizati.md) — affaan-m/ECC, GitHub
 [^src4]: [affaan-m/everything-claude-code (email pointer)](../../raw/email/email-2026-03-31-affaan-m-everything-claude-code-the-agent-harness-performanc.md) — email, Gmail
+[^src5]: [How Claude Code works in large codebases: best practices](../../raw/web/how-claude-code-works-in-large-codebases-best-practices-and.md) — Anthropic, via [The harness matters more than the model](../../raw/email/email-2026-05-28-the-harness-matters-more-than-the-model.md) (Claude Code Camp)
+[^src6]: [Coding with LLMs: the QA agent pattern](../../raw/web/antirez.md) — Salvatore Sanfilippo (antirez), via [How OpenAI engineers prompt](../../raw/email/email-2026-06-08-how-openai-engineers-prompt.md)

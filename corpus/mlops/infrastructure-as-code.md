@@ -6,15 +6,27 @@ sources:
   - path: raw/web/IaC (Infrastructure-as-Code) fundamentals for data engineers.md
     channel: web
     ingested_at: 2026-06-09
+  - path: raw/youtube/youtube-OGYEXGy8ca4-aws-explained-the-most-important-aws-services-to-know.md
+    channel: youtube
+    ingested_at: 2026-06-15
+  - path: raw/youtube/youtube-ZaA0kNm18pE-cloud-computing-explained-the-most-important-concepts-to-kno.md
+    channel: youtube
+    ingested_at: 2026-06-15
+  - path: raw/youtube/youtube--pX5PjIYTJs-az-900-azure-fundamentals-full-course-2025-azure-complete-tu.md
+    channel: youtube
+    ingested_at: 2026-06-15
 aliases:
   - IaC
   - infrastructure as code
   - infrastructure-as-code
+  - CloudFormation
+  - AWS CDK
+  - ARM templates
 tags:
   - corpus/mlops
   - concept
 created: 2026-06-09
-updated: 2026-06-09
+updated: 2026-06-15
 ---
 
 # Infrastructure as Code
@@ -45,12 +57,25 @@ Real projects parameterize infrastructure per environment (dev/staging/prod) via
 
 A tool only tracks infrastructure *it* created — resources made by other tools or by hand are unmanaged and invisible to its state [^src1]. The source's closing caution: don't blindly prompt an LLM to write infra config — only you have the context for what needs to be built [^src1].
 
+## Declarative vs. imperative (provider-native tools)
+
+The cloud overviews motivate IaC by the pain of clicking through a console: error-prone, hard to replicate to a new region, and unauditable (no code review) [^src2][^src3]. Two flavors recur [^src2][^src3]:
+
+- **Declarative** — describe the desired end state in a template; the provider creates it. **AWS CloudFormation** (YAML/JSON templates) and **Azure ARM templates** (JSON) are examples [^src2][^src3].
+- **Imperative / programmatic** — write infra in a real programming language with loops/conditionals. **AWS CDK** (Cloud Development Kit, in Python/TS/Java/etc.) compiles down to CloudFormation and is favored over raw CloudFormation, which "kind of sucks to use" and grows unwieldy [^src2][^src3].
+
+[[mlops/terraform|Terraform]] is the cross-provider third-party option (one tool targeting AWS/Azure/GCP); the AWS-centric source recommends CDK *if you're all-in on AWS*, Terraform for multi-cloud [^src2]. Putting IaC in source control enables code review of infra changes — the discipline IaC exists to provide [^src2][^src3].
+
 ## See also
 
-- [[mlops/terraform|Terraform]] — the IaC tool this concept is taught through
+- [[mlops/terraform|Terraform]] — the cross-provider IaC tool this concept is taught through
+- [[mlops/aws|AWS]] — CloudFormation/CDK · [[mlops/azure|Azure]] — ARM templates · [[mlops/gcp|GCP]]
+- [[mlops/cloud-computing-fundamentals|Cloud Computing Fundamentals]] — IaC sits over the resources defined there
 - [[data-engineering/README|Data Engineering]] — IaC provisions the cloud data infrastructure (S3, EC2/EMR) pipelines run on
 - [[mlops/README|MLOps hub]]
 
 ---
 
 [^src1]: [IaC fundamentals for data engineers](<../../raw/web/IaC (Infrastructure-as-Code) fundamentals for data engineers.md>)
+[^src2]: [AWS Explained (Be A Better Dev)](../../raw/youtube/youtube-OGYEXGy8ca4-aws-explained-the-most-important-aws-services-to-know.md#t=54:43) — CloudFormation vs. CDK [[55:35](../../raw/youtube/youtube-OGYEXGy8ca4-aws-explained-the-most-important-aws-services-to-know.md#t=55:35)]
+[^src3]: [Cloud Computing Explained (Be A Better Dev)](../../raw/youtube/youtube-ZaA0kNm18pE-cloud-computing-explained-the-most-important-concepts-to-kno.md#t=36:15) — declarative vs. imperative IaC [[39:18](../../raw/youtube/youtube-ZaA0kNm18pE-cloud-computing-explained-the-most-important-concepts-to-kno.md#t=39:18)]; Azure ARM mention from [AZ-900 File2](../../raw/youtube/youtube--pX5PjIYTJs-az-900-azure-fundamentals-full-course-2025-azure-complete-tu.md#t=23:11)

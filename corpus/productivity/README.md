@@ -22,3 +22,4 @@ Personal and professional effectiveness for knowledge workers: mental models, ti
 - [[productivity/shipping-and-scope|Shipping and Scope]] — concept · draft · good-enough, "done is an agreement," perfectionism, post-launch contract
 - [[productivity/working-with-stakeholders|Working with Stakeholders]] — concept · draft · stakeholder trust and relationship management
 - [[productivity/ai-augmented-knowledge-work|AI-Augmented Knowledge Work]] — concept · draft · standing context, voice files, loop engineering
+- [[productivity/obsidian-pkm|Obsidian & Personal Knowledge Management]] — concept · draft · local-first Markdown vault; linking over filing; emergent structure, MOCs, graph, canvas
