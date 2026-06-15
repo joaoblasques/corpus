@@ -434,3 +434,19 @@ Out of scope for this commit (deferred):
 - domains touched: software-engineering, ai-engineering
 - verify: no new pages → no orphans; no contradictions (both updates reinforce existing claims); _domains.md NOT modified (unattended-rule respected)
 - notes: ingest-auto run; 2 processed, 1 deferred; ~1750 inbox items remain for future runs
+
+## [2026-06-15T23:14] config | scheduled run
+- collectors:
+  - gmail: 82 collected · status=ok
+  - obsidian: 560 collected · status=ok
+  - youtube: 1 collected · status=ok
+- ingest:
+  - ingest: 0 ingested · 0 deferred · status=ok
+- commit/push:
+  - commit: status=push-failed · sha=417adf4 · error=git push exit 128: fatal: The current branch main has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin main
+
+To have this happen automatically for branches without a tracking
+upstream, see 'push.autoSetupRemote' in 'git help config'.
