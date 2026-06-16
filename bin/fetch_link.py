@@ -13,6 +13,41 @@ YT_RE = re.compile(
     r"([A-Za-z0-9_-]{11})"
 )
 PDF_RE = re.compile(r"(?i)\.pdf(\?|$)")
+# github.com/<owner>/<repo>/blob/<branch>/<path> → raw.githubusercontent.com/...
+GITHUB_BLOB_RE = re.compile(r"(?i)^https?://github\.com/([^/]+)/([^/]+)/blob/(.+)$")
+
+
+_RAW_HOST_RE = re.compile(r"(?i)^https?://(?:raw\.githubusercontent\.com|gist\.githubusercontent\.com)/")
+
+
+def github_raw(url: str) -> str | None:
+    """Rewrite a GitHub blob URL to its raw.githubusercontent.com form.
+
+    The blob page is a JS-heavy HTML shell trafilatura extracts nothing from
+    (→ fetch-failed); the raw URL serves the plain markdown/code directly.
+    Returns None for non-blob / non-GitHub URLs.
+    """
+    m = GITHUB_BLOB_RE.match(url or "")
+    if not m:
+        return None
+    owner, repo, rest = m.groups()
+    rest = rest.split("#", 1)[0].split("?", 1)[0]
+    return f"https://raw.githubusercontent.com/{owner}/{repo}/{rest}"
+
+
+def raw_text_url(url: str) -> str | None:
+    """The plain-text URL to fetch for source-text hosts, or None.
+
+    Routes GitHub blob pages (rewritten) and already-raw hosts
+    (raw/gist.githubusercontent.com) to `fetch_text` so trafilatura — which
+    extracts nothing from raw markdown/code — is bypassed.
+    """
+    rewritten = github_raw(url)
+    if rewritten:
+        return rewritten
+    if _RAW_HOST_RE.match(url or ""):
+        return url
+    return None
 
 
 def youtube_id(url: str) -> str | None:
@@ -72,6 +107,26 @@ def fetch_article(url: str, client=None) -> dict:
     return extract_article(html, url)
 
 
+def fetch_text(url: str, orig: str | None = None, client=None) -> dict:
+    """Fetch a plain-text/markdown/code resource (e.g. a raw GitHub file) directly.
+
+    Skips trafilatura — the content is already clean source text, not HTML to
+    extract an article from. Title is the file basename.
+    """
+    c = _client(client)
+    try:
+        r = c.get(url)
+        r.raise_for_status()
+        text = r.text[:MAX_BYTES]
+    finally:
+        if client is None:
+            c.close()
+    if not text.strip():
+        raise ValueError("empty fetch")
+    title = url.rstrip("/").split("/")[-1] or (orig or url)
+    return {"title": title, "text": text, "channel": "web"}
+
+
 def fetch_youtube(url: str) -> dict:
     from youtube_transcript_api import YouTubeTranscriptApi
     vid = youtube_id(url)
@@ -88,5 +143,8 @@ def fetch(url: str) -> dict:
     if kind == "youtube":
         return fetch_youtube(url)
     if kind == "article":
+        rt = raw_text_url(url)
+        if rt:
+            return fetch_text(rt, url)
         return fetch_article(url)
     raise ValueError(f"unsupported url: {url}")
