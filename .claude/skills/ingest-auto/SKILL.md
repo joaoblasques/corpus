@@ -59,6 +59,33 @@ these four conditions. Do not attempt partial ingest; defer the entire source.
 Plus the standing bias-to-defer clause: **if routing or coverage is uncertain for any reason
 not listed above, defer rather than write.**
 
+## Pointer sources (resolve to the fetched companion)
+
+Some inbox emails are **pointers**: frontmatter `pointer: true`, a body that is only a URL,
+and a `links:` list. The real content is NOT in the email — the collector fetched it to a
+companion file named in a `links:` entry with `fetched: true` and `file: raw/web/<name>.md`.
+A pointer email is therefore *not* an empty stub: it must be resolved to its companion, never
+skipped as content-less and never extracted from the bare URL/title.
+
+For any candidate with `pointer: true`:
+
+1. **Find the companion.** In `links:`, take the entries with `fetched: true` and a
+   `file: raw/web/<name>.md`.
+2. **Exactly one substantive fetched companion → resolve and extract from IT.** Read
+   `raw/web/<name>.md` and extract entities/claims from the **companion body**, not the email.
+   Route using the companion's content. Cite the **companion** as the source in `sources:` and
+   footnotes (`channel: web`, `path: raw/web/<name>.md`) — it holds the actual article. Stamp
+   BOTH the pointer email and the companion file with `corpus_ingested`, `corpus_ingested_at`,
+   and the same `corpus_pages` list.
+3. **No fetched companion (none present, or the named file is missing/empty) → DEFER**
+   (trigger `UNCERTAIN`, reason "pointer with no fetched companion — nothing to extract").
+   **Never fabricate from the bare URL or subject line.** Inventing content a source does not
+   contain — e.g. a speculative "topics likely include…" section — is the corpus's worst
+   failure mode (CLAUDE.md §7, §13). When in doubt here, defer.
+4. **Multiple fetched companions spanning different topics (a digest/newsletter) → DEFER**
+   (`G1`/`UNCERTAIN`): a digest is not a single-article pointer, and routing its many articles
+   is a judgment call. Its companions are separate `raw/web/` sources in their own right.
+
 ## Deferral queue format
 
 When a source is deferred, append exactly one line to `raw/_inbox/_REVIEW.md`:
@@ -110,14 +137,18 @@ list all files in `raw/_inbox/` excluding `_REVIEW.md` itself. Count them.
 
 Either way, skip files that have no substantive body (e.g. YouTube stubs with
 `transcript_status: blocked`/`disabled` and a `_No transcript available._` body)
-and any already stamped `corpus_ingested: true`.
+and any already stamped `corpus_ingested: true`. **A `pointer: true` email is NOT a
+content-less stub** — its body is just a URL, but its content lives in a fetched
+`raw/web/` companion; resolve it per **Pointer sources**, do not skip it.
 
 For every candidate source (up to N), check its frontmatter for `corpus_ingested: true`.
 Any hit → mark as G4 deferred immediately; do not read further.
 
 ### Step 3 — Survey & cluster (Phase 1)
 For each non-deferred candidate, read only the title, tags/playlist field, and first
-paragraph (do NOT read full bodies yet). Cluster thematically. Attempt to route each cluster
+paragraph (do NOT read full bodies yet). **For a `pointer: true` candidate the email body is
+empty — survey its fetched companion's (`raw/web/<name>.md`) title and first paragraph
+instead** (see **Pointer sources**). Cluster thematically. Attempt to route each cluster
 to an existing domain in `corpus/_domains.md`.
 - Clear fit → queue for ingest.
 - Imperfect but plausible fit → queue for ingest (route there; §9 default is to route, not
@@ -138,7 +169,9 @@ include its entities in the registry.
 ### Step 5 — Per-cluster ingest (Phase 3)
 For each queued cluster:
 1. Read full source bodies (honor Matter highlights per CLAUDE.md §10.1, YouTube timestamps
-   per §10.2).
+   per §10.2). **For `pointer: true` sources, read and extract from the resolved
+   `raw/web/` companion body, not the email** (see **Pointer sources**); if no fetched
+   companion exists, that source was already deferred in Step 3 — do not fabricate.
 2. Create or update entity/concept pages using the registry. Every non-trivial claim must
    cite the source (CLAUDE.md §7 — if a claim cannot be cited, omit it or mark
    `[unsourced]`).
@@ -160,7 +193,8 @@ are NEVER written by this skill (Safety Rule 1).
 ### Step 6 — Integrate (Phase 4)
 For each successfully ingested source (serialized, Coordinator):
 - Stamp the source file: `corpus_ingested: true`, `corpus_ingested_at: <today>`,
-  `corpus_pages: [list]`.
+  `corpus_pages: [list]`. **For a resolved pointer, stamp BOTH the pointer email and its
+  `raw/web/` companion** with the same three fields (see **Pointer sources**).
 - **File relocation (headless vs interactive):**
   - **Headless mode** (invoked by `bin/scheduled_run.py`): do **not** move files.
     Leave the stamped file in `raw/_inbox/`. The orchestrator

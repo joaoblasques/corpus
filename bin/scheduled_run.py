@@ -349,13 +349,31 @@ def run_ingest(
     select = _select_candidates if _select_candidates is not None else ingest_candidates.select_candidates
     binary = claude_bin if claude_bin is not None else CLAUDE_BIN
 
-    candidates = [p.name for p in select(limit=max_n)]
-    if not candidates:
+    cand_paths = select(limit=max_n)
+    if not cand_paths:
         return {"status": "ok", "ingested": 0, "deferred": 0, "note": "no_candidates"}
 
-    listing = "\n".join(f"- {n}" for n in candidates)
+    # Deterministically resolve pointer emails to their fetched raw/web companion
+    # and hand the agent the companion path, so it extracts from real content
+    # instead of fabricating from the bare URL (the load-bearing step stays in
+    # tested Python, not agent judgment).
+    def _rel(c: Path) -> str:
+        try:
+            return c.relative_to(ROOT).as_posix()
+        except ValueError:
+            return c.as_posix()
+
+    lines = []
+    for p in cand_paths:
+        companions = ingest_candidates.fetched_companions(p)
+        if companions:
+            comp = ", ".join(_rel(c) for c in companions)
+            lines.append(f"- {p.name}  (pointer → extract from its fetched companion: {comp})")
+        else:
+            lines.append(f"- {p.name}")
+    listing = "\n".join(lines)
     prompt = (
-        f"Use the /ingest-auto skill. Process EXACTLY these {len(candidates)} files "
+        f"Use the /ingest-auto skill. Process EXACTLY these {len(cand_paths)} files "
         f"in raw/_inbox/ (already filtered to substantive, un-ingested sources) — "
         f"do NOT survey or process any other inbox files:\n{listing}\n"
         f"Follow all steps in the skill. Your FINAL message must be EXACTLY one flat "

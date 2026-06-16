@@ -346,6 +346,48 @@ class TestRunIngest:
         assert result["status"] == "ok"
         assert result["ingested"] == 3
 
+    def test_pointer_candidate_annotated_with_companion(self):
+        """A pointer candidate is annotated in the prompt with its resolved
+        raw/web companion path, so the agent extracts from content, not the URL."""
+        captured = {}
+
+        def fake_run(cmd, **kwargs):
+            captured["cmd"] = cmd
+            envelope = json.dumps({"result": json.dumps({"ingested": 1, "deferred": 0}),
+                                   "is_error": False})
+            return _make_proc(returncode=0, stdout=envelope)
+
+        with patch.object(scheduled_run.ingest_candidates, "fetched_companions",
+                          lambda p, *a, **k: [Path("raw/web/article.md")]):
+            scheduled_run.run_ingest(
+                max_n=3, timeout_s=10, _subprocess_run=fake_run,
+                _select_candidates=lambda limit: [Path("raw/_inbox/ptr.md")])
+
+        prompt = captured["cmd"][2]
+        assert "ptr.md" in prompt
+        assert "raw/web/article.md" in prompt
+        assert "pointer" in prompt.lower()
+
+    def test_non_pointer_candidate_not_annotated(self):
+        """A plain candidate (no fetched companion) gets no pointer annotation."""
+        captured = {}
+
+        def fake_run(cmd, **kwargs):
+            captured["cmd"] = cmd
+            envelope = json.dumps({"result": json.dumps({"ingested": 1, "deferred": 0}),
+                                   "is_error": False})
+            return _make_proc(returncode=0, stdout=envelope)
+
+        with patch.object(scheduled_run.ingest_candidates, "fetched_companions",
+                          lambda p, *a, **k: []):
+            scheduled_run.run_ingest(
+                max_n=3, timeout_s=10, _subprocess_run=fake_run,
+                _select_candidates=lambda limit: [Path("raw/_inbox/plain.md")])
+
+        prompt = captured["cmd"][2]
+        assert "plain.md" in prompt
+        assert "pointer" not in prompt.lower()
+
     def test_no_model_flag_by_default(self):
         """With no model configured, the invocation carries no --model flag
         (inherits the session default — current Opus behaviour)."""
