@@ -42,3 +42,34 @@ def test_complete_mechanical_returns_local_text(tmp_path):
     assert res["model"] == "qwen2.5:3b"
     assert '"scores"' in res["text"]
     assert res["error"] is None
+
+
+import urllib.error
+
+
+def test_complete_returns_not_ok_when_ollama_down(tmp_path):
+    boom = urllib.error.URLError("Connection refused")
+    with patch.object(llm.urllib.request, "urlopen", side_effect=boom):
+        res = llm.complete("x", tier="mechanical", task="unit",
+                           log_path=tmp_path / "u.jsonl")
+    assert res["ok"] is False
+    assert res["provider"] is None
+    assert "ollama" in res["error"]
+
+
+def test_complete_returns_not_ok_on_timeout(tmp_path):
+    with patch.object(llm.urllib.request, "urlopen", side_effect=TimeoutError("slow")):
+        res = llm.complete("x", tier="mechanical", task="unit",
+                           log_path=tmp_path / "u.jsonl")
+    assert res["ok"] is False
+    assert "ollama" in res["error"]
+
+
+def test_prefer_local_false_skips_ollama(tmp_path, monkeypatch):
+    monkeypatch.setattr(llm.cfg, "PREFER_LOCAL", False)
+    # urlopen must NOT be called when PREFER_LOCAL is off
+    with patch.object(llm.urllib.request, "urlopen", side_effect=AssertionError("called")):
+        res = llm.complete("x", tier="mechanical", task="unit",
+                           log_path=tmp_path / "u.jsonl")
+    assert res["ok"] is False
+    assert res["provider"] is None
