@@ -37,6 +37,9 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [[ai-engineering/agent-skills|Agent Skills]] — concept · draft · skill.md files, progressive disclosure, recursive skill-building; skills vs always-on AGENTS.md
 - [[ai-engineering/vector-database|Vector Database]] — concept · draft · storage layer for embedding vectors; HNSW, indexing at scale; used in RAG and agent memory
 - [[ai-engineering/agent-harness|Agent Harness]] — concept · draft · the scaffolding around the model; "harness > model"; the ratchet, harness-as-a-service
+- [[ai-engineering/long-running-agents|Long-Running Agents]] — concept · draft · agents progressing over hours/days across sessions; three walls, brain/hands/session split, five production patterns
+- [[ai-engineering/ralph-loop|Ralph Loop]] — concept · draft · Huntley's Bash-loop coding technique; one task per loop, state on disk, generate-then-backpressure, eventual consistency
+- [[ai-engineering/agent-cost-management|Agent Cost Management]] — concept · draft · cost-per-completed-task economics; re-sent context (62% of bills), context rot, the hidden 80%, prompt caching
 - [[ai-engineering/prompt-engineering|Prompt Engineering]] — concept · draft · crafting instructions/examples/XML to steer output; distinct from context-engineering
 - [[ai-engineering/agent-security|Agent Security]] — concept · draft · prompt injection, guardrails, defense-in-depth, agent auth
 - [[ai-engineering/structured-outputs|Structured Outputs]] — concept · draft · schema-enforced LLM output (Instructor); tokenization (tiktoken)

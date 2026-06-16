@@ -1,6 +1,6 @@
 # Corpus Index
 
-> Last updated: 2026-06-16 | Total pages: 135 | Total sources: 287
+> Last updated: 2026-06-16 | Total pages: 143 | Total sources: 295
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
@@ -27,6 +27,9 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[ai-engineering/optimizing-claude|Optimizing a Claude Setup]] — synthesis · draft · context economy as organizing principle; skills, sub-agents, concise specs; filed back from a query
 - [[ai-engineering/sources/how-ai-agents-and-skills-work|How AI agents & Claude skills work]] — source · draft · Isenberg × Ras Mic; skills, progressive disclosure, less-is-more context
 - [[ai-engineering/agent-harness|Agent Harness]] — concept · draft · the scaffolding around the model; "harness > model"; the ratchet, HaaS
+- [[ai-engineering/ralph-loop|Ralph Loop]] — concept · draft · Huntley's Bash-loop coding technique; one task per loop, state on disk, generate-then-backpressure
+- [[ai-engineering/long-running-agents|Long-Running Agents]] — concept · draft · agents progressing over hours/days across sessions; three walls, brain/hands/session split, five patterns
+- [[ai-engineering/agent-cost-management|Agent Cost Management]] — concept · draft · cost-per-completed-task; re-sent context (62% of bills), context rot, prompt caching
 - [[ai-engineering/agentic-coding|Agentic Coding]] — synthesis · draft · sub-hub: coding-agent orchestration; conductor→orchestrator, AX, verification bottleneck
 - [[ai-engineering/claude-code|Claude Code]] — entity · draft · Anthropic CLI coding agent; harness, large-codebase practices, security review
 - [[ai-engineering/claude-cowork|Claude Cowork]] — entity · draft · sub-hub: Cowork desktop product; workspace folder, CLAUDE.md/MEMORY.md, Toolkit
@@ -63,6 +66,9 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[data-engineering/data-lake|Data Lake / Lakehouse]] — concept · draft · object-storage lake + table format metadata wrapper; cost hierarchy
 - [[data-engineering/idempotent-pipelines|Idempotent Pipelines]] — concept · draft · same-input-same-output guarantee; pitfalls, fixes, SCD idempotency
 - [[data-engineering/dimensional-modeling|Dimensional Modeling]] — concept · draft · fact + dimension tables; SCD types; streak_identifier pattern
+- [[data-engineering/data-mart|Data Mart]] — concept · draft · community-specific DSS store; Demarest hybrid warehouse+marting model, schema explosion
+- [[data-engineering/postgresql-views|PostgreSQL Views]] — concept · draft · views as rewrite-rule macros (pg_rewrite); SELECT * trap, security_invoker/RLS, schema-evolution pain
+- [[data-engineering/etl-pipeline|ETL Pipeline]] — concept · draft · extract/transform/load; ETL vs ELT vs data pipeline; batch vs real-time; 2026 tools
 - [[data-engineering/postgres|PostgreSQL]] — entity · draft · relational database as full-stack data platform via extensions
 - [[data-engineering/kafka|Apache Kafka]] — entity · draft · event streaming platform; topics, partitions, consumer groups, KRaFt
 - [[data-engineering/dbt|dbt]] — entity · draft · SQL-first transformation framework; sources vs models; layer materializations
@@ -113,6 +119,8 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[software-engineering/ai-risk-architecture|AI Risk Architecture]] — concept · draft · data/output/action risk; risk is a system property
 - [[software-engineering/engineering-craft|Engineering Craft]] — concept · draft · resourcefulness, curiosity, persistence
 - [[software-engineering/compiler-warning-management|Compiler-Warning Management]] — concept · draft · Git's `false_but_the_compiler_does_not_know_it_` trick; suppress a specific false-positive warning without disabling it globally
+- [[software-engineering/local-first-sync-architecture|Local-First Sync Architecture]] — concept · draft · browser-as-database + optimistic mutations + granular reactivity; server as sync target (reverse-engineered from Linear)
+- [[software-engineering/test-case-reduction|Test-Case Reduction]] — concept · draft · auto-shrink a failing input to a minimal reproducer via an interestingness test; ddmin/creduce/Shrink Ray
 - [[software-engineering/ai-assisted-development|AI-Assisted Development]] — synthesis · draft · fundamentals under AI; write→review shift; deterministic guardrails
 - [[software-engineering/algorithms|Algorithms (Strategies, Not Tricks)]] — concept · draft · recursion, binary search (divide & conquer), dynamic programming / memoization
 
@@ -214,3 +222,11 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - 2026-06-16: [[software-engineering/compiler-warning-management]] (new, split from developer-tooling)
 - 2026-06-16: [[software-engineering/insforge]] (new, split from developer-tooling)
 - 2026-06-16: [[ai-engineering/hermes]] (new, ingest)
+- 2026-06-16: [[ai-engineering/ralph-loop]] (new, web-backlog ingest)
+- 2026-06-16: [[ai-engineering/long-running-agents]] (new, web-backlog ingest)
+- 2026-06-16: [[ai-engineering/agent-cost-management]] (new, web-backlog ingest)
+- 2026-06-16: [[data-engineering/data-mart]] (new, web-backlog ingest)
+- 2026-06-16: [[data-engineering/postgresql-views]] (new, web-backlog ingest)
+- 2026-06-16: [[data-engineering/etl-pipeline]] (new, web-backlog ingest)
+- 2026-06-16: [[software-engineering/local-first-sync-architecture]] (new, web-backlog ingest)
+- 2026-06-16: [[software-engineering/test-case-reduction]] (new, web-backlog ingest)

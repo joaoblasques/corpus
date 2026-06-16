@@ -39,6 +39,9 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [[data-engineering/data-migration-at-scale|Data Migration at Scale]] — concept · draft · Shadow → Reverse Shadow → Cleanup; row-count/checksum verification; CDC rollback
 - [[data-engineering/data-modeling-meaning|Meaning in Data Modeling]] — concept · draft · semantics, taxonomy, ontology, metadata (Joe Reis)
 - [[data-engineering/semantic-layer|Semantic Layer]] — concept · draft · metric/knowledge layer as critical AI infra; data teams → context teams; agentic architect
+- [[data-engineering/etl-pipeline|ETL Pipeline]] — concept · draft · Extract/Transform/Load; ETL vs ELT vs data pipeline; batch vs streaming; 2026 tools & trends
+- [[data-engineering/data-mart|Data Mart]] — concept · draft · community-specific DSS store; Demarest's hybrid warehouse+marting multitiered model; schema explosion
+- [[data-engineering/postgresql-views|PostgreSQL Views]] — concept · draft · views as rewrite rules (pg_rewrite macros); inlining, SELECT * trap, security_invoker, schema-evolution pain
 
 ### Entities
 - [[data-engineering/postgres|PostgreSQL]] — entity · draft · relational database as full-stack data platform via extensions (pgvector, pgcron, tsvector, etc.)

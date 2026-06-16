@@ -547,3 +547,13 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - pages touched: [ai-engineering/README.md, ai-engineering/hermes.md, _index.md]
 - new pages: [ai-engineering/hermes.md]
 - notes: thin sponsored newsletter (video outline); created honest stub entity for the Hermes self-hosted coding agent (VPS/Docker, Telegram control, GitHub Actions deploy), fully cited; disambiguated from the React Native Hermes JS engine in agent-security.md. Stamped + moved source to raw/email/.
+
+## [2026-06-16 21:45] ingest | web-backlog batch (8 sources, 3 parallel domain workers)
+- context: ~25 substantive articles were fetched into raw/web/ via email link-following but never ingested (the inbox-only candidate selector never scans raw/web). Wave 1 of draining that backlog.
+- method: v0.6 cluster batch ingest; Coordinator + 3 parallel per-domain workers (one writer per domain); new-page focus for quality control; Coordinator integrated shared files + lint-gate.
+- ai-engineering (3 new): ralph-loop (fills the flagged "Ralph Loop" implicit-concept gap), long-running-agents, agent-cost-management
+- data-engineering (3 new): data-mart, postgresql-views, etl-pipeline
+- software-engineering (2 new): local-first-sync-architecture (Linear breakdown), test-case-reduction
+- sources stamped (raw/web, corpus_ingested); domain hubs updated by workers; _index/_log by Coordinator. Total pages 135→143, sources 287→295.
+- deterministic lint after: 0 broken wikilinks · 0 broken citations · 0 orphans · 6 stubs (clean). Spot-checked ralph-loop (22 citations, dense per-claim provenance).
+- deferred-updates noted by workers (NOT applied this wave): agent-harness + context-window-management could absorb long-running/cost specifics; claude-models has concrete Sonnet 4.6 pricing; postgres.md could cross-ref postgresql-views.
