@@ -460,3 +460,13 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   - ingest: 0 ingested · 0 deferred · status=failed · error=claude exit 1
 - commit/push:
   - commit: status=nothing-to-commit
+
+## [2026-06-16T07:15] config | scheduled run
+- collectors:
+  - gmail: 0 collected · status=ok
+  - obsidian: 2 collected · status=ok
+  - youtube: 0 collected · status=ok
+- ingest:
+  - ingest: 0 ingested · 0 deferred · status=failed · error=claude exit 1
+- commit/push:
+  - commit: status=nothing-to-commit
