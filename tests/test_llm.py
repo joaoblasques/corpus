@@ -126,3 +126,51 @@ def test_haiku_not_used_when_disabled(tmp_path, monkeypatch):
                            log_path=tmp_path / "u.jsonl")
     haiku.assert_not_called()
     assert res["ok"] is False
+
+
+def test_openrouter_used_when_enabled_and_local_fails(tmp_path, monkeypatch):
+    monkeypatch.setattr(llm.cfg, "MECHANICAL_OPENROUTER_FALLBACK", True)
+    monkeypatch.setenv("OPENROUTER_API_KEY", "sk-or-test")
+    with (
+        patch.object(llm.urllib.request, "urlopen",
+                     side_effect=urllib.error.URLError("ollama down")),
+        patch.object(llm, "_openrouter_generate", return_value='{"scores":[]}') as orp,
+    ):
+        res = llm.complete("x", tier="mechanical", task="unit", log_path=tmp_path / "u.jsonl")
+    orp.assert_called_once()
+    assert res["ok"] is True
+    assert res["provider"] == "openrouter"
+    assert res["model"] == llm.cfg.OPENROUTER_MODEL
+
+
+def test_openrouter_not_used_when_disabled(tmp_path, monkeypatch):
+    monkeypatch.setattr(llm.cfg, "MECHANICAL_OPENROUTER_FALLBACK", False)
+    monkeypatch.setenv("OPENROUTER_API_KEY", "sk-or-test")
+    with (
+        patch.object(llm.urllib.request, "urlopen", side_effect=urllib.error.URLError("down")),
+        patch.object(llm, "_openrouter_generate", side_effect=AssertionError("called")) as orp,
+    ):
+        res = llm.complete("x", tier="mechanical", task="unit", log_path=tmp_path / "u.jsonl")
+    orp.assert_not_called()
+    assert res["ok"] is False
+
+
+def test_openrouter_skipped_without_api_key(tmp_path, monkeypatch):
+    monkeypatch.setattr(llm.cfg, "MECHANICAL_OPENROUTER_FALLBACK", True)
+    monkeypatch.delenv("OPENROUTER_API_KEY", raising=False)
+    with (
+        patch.object(llm.urllib.request, "urlopen", side_effect=urllib.error.URLError("down")),
+        patch.object(llm, "_openrouter_generate", side_effect=AssertionError("called")) as orp,
+    ):
+        res = llm.complete("x", tier="mechanical", task="unit", log_path=tmp_path / "u.jsonl")
+    orp.assert_not_called()
+    assert res["ok"] is False
+
+
+def test_openrouter_generate_extracts_message_content(monkeypatch):
+    monkeypatch.setenv("OPENROUTER_API_KEY", "sk-or-test")
+    payload = {"choices": [{"message": {"content": "hello-from-openrouter"}}]}
+    with patch.object(llm.urllib.request, "urlopen", return_value=_FakeResp(payload)):
+        text = llm._openrouter_generate("hi", "some/model:free", system=None,
+                                        timeout=30, as_json=False)
+    assert text == "hello-from-openrouter"
