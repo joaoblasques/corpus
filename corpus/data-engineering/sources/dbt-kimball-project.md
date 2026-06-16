@@ -71,4 +71,4 @@ The project documents warehouse SQL-dialect differences worth knowing for cross-
 
 ---
 
-[^src1]: [vutrinh274/dbt_kimball](../../raw/web/github-vutrinh274-dbt-kimball.md)
+[^src1]: [vutrinh274/dbt_kimball](../../../raw/web/github-vutrinh274-dbt-kimball.md)

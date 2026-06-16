@@ -52,4 +52,4 @@ Order: `terraform apply` (as the infra role) → `build_and_deploy.sh` to push t
 
 ---
 
-[^src1]: [Complete End-To-End Build of ETL Pipeline in AWS](../../raw/web/complete-end-to-end-build-of-etl-pipeline-in-aws.md)
+[^src1]: [Complete End-To-End Build of ETL Pipeline in AWS](../../../raw/web/complete-end-to-end-build-of-etl-pipeline-in-aws.md)
