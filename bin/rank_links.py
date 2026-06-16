@@ -15,7 +15,6 @@ BIN = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(BIN))
 import collect_email as ce  # noqa: E402
 
-RANK_MODEL = "claude-haiku-4-5-20251001"
 
 
 def load_env(path: str | None = None) -> None:
