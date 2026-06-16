@@ -76,3 +76,44 @@ def test_never_selects_the_review_file_itself(tmp_path):
 def test_no_review_file_excludes_nothing(tmp_path):
     _write(tmp_path, "email-a.md", frontmatter="channel: email")
     assert [p.name for p in ic.select_candidates(tmp_path, limit=10)] == ["email-a.md"]
+
+
+# --- pointer → fetched-companion resolution -------------------------------
+
+def test_is_pointer_true_and_false(tmp_path):
+    ptr = _write(tmp_path, "p.md", frontmatter="channel: email\npointer: true")
+    plain = _write(tmp_path, "q.md", frontmatter="channel: email\npointer: false")
+    assert ic.is_pointer(ptr) is True
+    assert ic.is_pointer(plain) is False
+    assert ic.is_pointer(_write(tmp_path, "r.md", frontmatter="channel: email")) is False
+
+
+def test_fetched_companions_returns_existing_web_file(tmp_path):
+    web = tmp_path / "raw" / "web"
+    web.mkdir(parents=True)
+    (web / "article.md").write_text("real content\n", encoding="utf-8")
+    fm = ('channel: email\npointer: true\nlinks:\n'
+          '  - {url: "http://x", fetched: true, score: 8, file: raw/web/article.md}')
+    ptr = _write(tmp_path, "p.md", frontmatter=fm)
+    got = ic.fetched_companions(ptr, root=tmp_path)
+    assert [p.name for p in got] == ["article.md"]
+
+
+def test_fetched_companions_skips_unfetched_and_missing(tmp_path):
+    (tmp_path / "raw" / "web").mkdir(parents=True)
+    fm = ('channel: email\npointer: true\nlinks:\n'
+          '  - {url: "http://x", fetched: false, score: 7, reason: over-cap}\n'
+          '  - {url: "http://y", fetched: true, score: 8, file: raw/web/missing.md}')
+    ptr = _write(tmp_path, "p.md", frontmatter=fm)
+    # fetched:false excluded; fetched:true but file absent on disk excluded
+    assert ic.fetched_companions(ptr, root=tmp_path) == []
+
+
+def test_fetched_companions_empty_for_non_pointer(tmp_path):
+    web = tmp_path / "raw" / "web"
+    web.mkdir(parents=True)
+    (web / "article.md").write_text("x\n", encoding="utf-8")
+    fm = ('channel: email\nlinks:\n'
+          '  - {url: "http://x", fetched: true, file: raw/web/article.md}')
+    plain = _write(tmp_path, "q.md", frontmatter=fm)
+    assert ic.fetched_companions(plain, root=tmp_path) == []

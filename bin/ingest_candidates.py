@@ -19,6 +19,10 @@ _STAMP_RE = re.compile(r"^corpus_ingested:\s*true\s*$", re.M | re.I)
 _STATUS_RE = re.compile(r"^transcript_status:\s*(\S+)", re.M)
 # `/ingest-auto` deferral line: "- DEFER <trigger>: <filename> — <reason>"
 _DEFER_RE = re.compile(r"^-\s*DEFER\s+\S+:\s*(\S+)", re.M)
+_POINTER_RE = re.compile(r"^pointer:\s*true\s*$", re.M | re.I)
+# A `links:` flow-entry with fetched:true carries `file: raw/web/<name>.md`; both
+# keys live in the same `- {…}` line. Match the file only when fetched:true is present.
+_FETCHED_FILE_RE = re.compile(r"fetched:\s*true[^}]*?file:\s*([^\s,}]+\.md)")
 
 REVIEW_FILE = "_REVIEW.md"
 
@@ -32,6 +36,41 @@ def deferred_filenames(review_path) -> set[str]:
         return set(_DEFER_RE.findall(p.read_text(encoding="utf-8")))
     except OSError:
         return set()
+
+
+def is_pointer(path: Path) -> bool:
+    """True if the source is a pointer email (frontmatter `pointer: true`).
+
+    Pointer emails carry no body of their own — only a URL — and their content
+    lives in a fetched `raw/web/` companion (see `fetched_companions`).
+    """
+    try:
+        return bool(_POINTER_RE.search(path.read_text(encoding="utf-8", errors="ignore")[:4000]))
+    except OSError:
+        return False
+
+
+def fetched_companions(path: Path, root: Path | None = None) -> list[Path]:
+    """Resolved `raw/web/` companion files for a pointer source.
+
+    Returns the on-disk files named by `links:` entries that have BOTH
+    `fetched: true` and a `file: raw/web/<name>.md`. Non-pointer sources, unfetched
+    links, and named-but-absent files yield nothing — so a pointer with no fetched
+    companion returns ``[]`` (the caller defers rather than fabricating).
+    """
+    base = root if root is not None else ROOT
+    try:
+        head = path.read_text(encoding="utf-8", errors="ignore")[:8000]
+    except OSError:
+        return []
+    if not _POINTER_RE.search(head):
+        return []
+    out = []
+    for rel in _FETCHED_FILE_RE.findall(head):
+        companion = base / rel
+        if companion.is_file():
+            out.append(companion)
+    return out
 
 
 def is_ingestable(path: Path) -> bool:
