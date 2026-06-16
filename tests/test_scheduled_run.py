@@ -443,6 +443,28 @@ class TestRunIngest:
         assert result["deferred"] == 0
 
 
+class TestRunIngestUsesSubscription:
+    """The headless ingest must NOT receive ANTHROPIC_API_KEY — it should use the
+    Claude Code subscription (OAuth), not metered API billing."""
+
+    def test_api_key_stripped_from_subprocess_env(self, tmp_path, monkeypatch):
+        monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-must-not-leak")
+        monkeypatch.setenv("PATH", "/usr/bin:/bin")
+        captured = {}
+
+        def fake_run(cmd, **kwargs):
+            captured.update(kwargs)
+            envelope = json.dumps({"result": '{"ingested":0,"deferred":0}', "is_error": False})
+            return _make_proc(stdout=envelope)
+
+        res = scheduled_run.run_ingest(max_n=1, timeout_s=10, _subprocess_run=fake_run)
+        assert res["status"] == "ok"
+        env = captured.get("env")
+        assert env is not None, "run_ingest must pass an explicit env to the subprocess"
+        assert "ANTHROPIC_API_KEY" not in env, "API key must not leak to the headless claude"
+        assert "PATH" in env, "non-secret env must be preserved (claude needs PATH/HOME)"
+
+
 class TestParseIngestCounts:
     """_parse_ingest_counts extracts (ingested, deferred) from the skill result text."""
 

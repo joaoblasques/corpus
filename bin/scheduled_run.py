@@ -326,9 +326,6 @@ def run_ingest(
     Returns:
         dict with keys: status ("ok"|"failed"|"timeout"), ingested, deferred, error.
     """
-    from rank_links import load_env  # reuse load_env from rank_links.py
-    load_env()
-
     _run = _subprocess_run if _subprocess_run is not None else subprocess.run
     binary = claude_bin if claude_bin is not None else CLAUDE_BIN
 
@@ -348,6 +345,10 @@ def run_ingest(
         "--allowedTools", "Read", "Write", "Edit", "Glob", "Grep", "LS",
     ]
 
+    # Use the Claude Code subscription (OAuth) for the headless ingest: strip
+    # ANTHROPIC_API_KEY from the child env so it does NOT bill metered API
+    # credits. stdin=DEVNULL avoids claude's 3s "no stdin" wait.
+    child_env = {k: v for k, v in os.environ.items() if k != "ANTHROPIC_API_KEY"}
     try:
         proc = _run(
             cmd,
@@ -355,6 +356,8 @@ def run_ingest(
             text=True,
             timeout=timeout_s,
             cwd=str(ROOT),
+            env=child_env,
+            stdin=subprocess.DEVNULL,
         )
     except subprocess.TimeoutExpired:
         # Overflow stays in raw/_inbox/ for the next run — no cleanup needed.
