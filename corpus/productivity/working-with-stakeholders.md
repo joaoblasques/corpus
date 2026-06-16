@@ -17,7 +17,7 @@ tags:
   - corpus/productivity
   - concept
 created: 2026-06-12
-updated: 2026-06-12
+updated: 2026-06-16
 ---
 
 # Working with Stakeholders
@@ -40,9 +40,9 @@ A stakeholder remembers two things: whether your work was good, and whether you 
 
 ## Manage the relationship after delivery
 
-- **Read the feedback shift**: when feedback moves from "can we change this?" to "this looks great, when can we roll it out?", the stakeholder has stopped hunting for gaps — the agreement is reached [^src2].
-- **Ask the right closing question**: "is there anything critical missing?" rather than open-ended invitations to scope creep [^src2].
-- **Set a post-launch contract**: commit to fixing genuine bugs and a two-week proactive check-in; route everything else to a backlog. "A stakeholder who knows what to expect from you after launch trusts you more" — both the engineer who disappears and the one who commits to everything indefinitely damage the relationship [^src2].
+What converts a *delivered* project into *trust* is what happens after "done": reading when the stakeholder has stopped hunting for gaps, asking only what is **critical** rather than inviting scope creep, and setting clear expectations for post-launch support. The mechanics of all three — the feedback shift, the "is there anything critical missing?" closing question, and the post-launch contract — live in [[productivity/shipping-and-scope|Shipping and Scope]].
+
+The relationship point layered on top of those mechanics: "a stakeholder who knows what to expect from you after launch trusts you more" — both the engineer who disappears and the one who commits to everything indefinitely damage the relationship [^src2].
 
 ## Related
 

@@ -534,3 +534,8 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   - claude-models.md (entity, NEW) — model lineup table, Opus 4.8, Fable 5/Mythos 5, launch controversy (src4-9)
   footnote labels preserved across split to avoid transcription drift; bidirectional See-also links; README + _index updated (Total pages 133→134)
 - deterministic lint after: 0 broken wikilinks · 0 broken citations · 0 orphans · 5 stubs (clean)
+
+## [2026-06-16 21:05] lint | dedupe productivity shipping-and-scope ↔ working-with-stakeholders
+- both pages restated the same email-2026-06-11 mechanics (feedback shift, "critical missing?" closing question, post-launch contract)
+- shipping-and-scope.md owns the scoping mechanics; rewrote working-with-stakeholders.md "Manage the relationship after delivery" to delegate the shared tactics to it and keep only the relationship-specific trust framing (still cited to [^src2])
+- no provenance lost (delegated mechanics fully cited in shipping-and-scope from the same source); lint clean
