@@ -86,6 +86,28 @@ def release_lock(lock_path: Path) -> None:
 
 
 # ---------------------------------------------------------------------------
+# Branch guard — a scheduled run must operate on main only, never auto-commit
+# an ingest onto whatever feature branch happens to be checked out.
+# ---------------------------------------------------------------------------
+
+MAIN_BRANCH = "main"
+
+
+def current_branch(repo=None, *, _subprocess_run=None) -> str | None:
+    """Return the current git branch name, or None if it can't be determined."""
+    _run = _subprocess_run if _subprocess_run is not None else subprocess.run
+    root = repo if repo is not None else ROOT
+    try:
+        proc = _run([GIT_BIN, "rev-parse", "--abbrev-ref", "HEAD"],
+                    capture_output=True, text=True, cwd=str(root))
+    except Exception:  # noqa: BLE001
+        return None
+    if proc.returncode != 0:
+        return None
+    return proc.stdout.strip() or None
+
+
+# ---------------------------------------------------------------------------
 # Collectors
 # ---------------------------------------------------------------------------
 
@@ -633,6 +655,16 @@ def main(argv=None) -> int:
     lock_path: Path = args.lock_path
 
     if args.command == "run":
+        # A real run must operate on `main` — never auto-commit an ingest onto a
+        # feature branch that happens to be checked out. (Dry-run is read-only;
+        # set SCHEDULED_RUN_ALLOW_ANY_BRANCH=1 to override for a deliberate run.)
+        if (not args.dry_run
+                and not os.environ.get("SCHEDULED_RUN_ALLOW_ANY_BRANCH")
+                and current_branch() != MAIN_BRANCH):
+            print(json.dumps({"status": "skipped", "reason": "not_on_main",
+                              "branch": current_branch()}))
+            return 0
+
         acquired = acquire_lock(lock_path)
         if not acquired:
             print(json.dumps({"status": "skipped", "reason": "lock_held"}))

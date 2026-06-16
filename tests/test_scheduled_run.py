@@ -154,10 +154,13 @@ class TestCLI:
         self._run_cli("run", "--dry-run", lock_path=lock, log_path=log)
         assert not lock.exists(), "lock file should be cleaned up after CLI run"
 
-    def test_run_subcommand_skips_when_lock_already_held(self, tmp_path):
+    def test_run_subcommand_skips_when_lock_already_held(self, tmp_path, monkeypatch):
         """The `run` subcommand exits 0 and reports skipped/lock_held when lock pre-exists."""
         lock = tmp_path / ".cli_test.lock"
         log = tmp_path / "_log.md"
+        # Bypass the on-main branch guard so this test is branch-independent
+        # (it exercises the lock path, not the branch guard).
+        monkeypatch.setenv("SCHEDULED_RUN_ALLOW_ANY_BRANCH", "1")
         # Simulate a lock already held by another process.
         lock.write_text("pid=99999\n", encoding="utf-8")
         rc, out = self._run_cli("run", lock_path=lock, log_path=log)
@@ -538,8 +541,86 @@ class TestWriteRunReport:
 # run() / main() integration tests (all external calls mocked)
 # ---------------------------------------------------------------------------
 
+class TestBranchGuard:
+    """A real scheduled run must operate on `main` only."""
+
+    def test_current_branch_parses_name(self):
+        run = MagicMock(return_value=_make_proc(stdout="feature/x\n"))
+        assert scheduled_run.current_branch(_subprocess_run=run) == "feature/x"
+
+    def test_current_branch_none_on_git_failure(self):
+        run = MagicMock(return_value=_make_proc(returncode=128, stdout="", stderr="boom"))
+        assert scheduled_run.current_branch(_subprocess_run=run) is None
+
+    def test_run_skips_when_not_on_main(self, tmp_path, monkeypatch):
+        monkeypatch.delenv("SCHEDULED_RUN_ALLOW_ANY_BRANCH", raising=False)
+        collectors = MagicMock()
+        with (
+            patch.object(scheduled_run, "current_branch", lambda *a, **k: "feature/x"),
+            patch.object(scheduled_run, "run_collectors", collectors),
+            patch.object(scheduled_run, "acquire_lock", MagicMock()) as acq,
+        ):
+            rc = scheduled_run.main(["--lock-path", str(tmp_path / ".l"), "run"])
+        assert rc == 0
+        collectors.assert_not_called()   # never ran the pipeline
+        acq.assert_not_called()          # guard returns before acquiring the lock
+
+    def test_run_proceeds_on_main(self, tmp_path, monkeypatch):
+        monkeypatch.delenv("SCHEDULED_RUN_ALLOW_ANY_BRANCH", raising=False)
+        collectors = MagicMock(return_value={"gmail": {"status": "ok", "collected": 0}})
+        with (
+            patch.object(scheduled_run, "current_branch", lambda *a, **k: "main"),
+            patch.object(scheduled_run, "run_collectors", collectors),
+            patch.object(scheduled_run, "run_ingest",
+                         MagicMock(return_value={"status": "ok", "ingested": 0, "deferred": 0})),
+            patch.object(scheduled_run, "move_processed_inbox", MagicMock(return_value={})),
+            patch.object(scheduled_run, "commit_and_push",
+                         MagicMock(return_value={"status": "nothing-to-commit"})),
+            patch.object(scheduled_run, "LOG_PATH", tmp_path / "_log.md"),
+        ):
+            rc = scheduled_run.main(["--lock-path", str(tmp_path / ".l"), "run"])
+        assert rc == 0
+        collectors.assert_called_once()
+
+    def test_dry_run_not_blocked_off_main(self, tmp_path):
+        acq = MagicMock(return_value=True)
+        with (
+            patch.object(scheduled_run, "current_branch", lambda *a, **k: "feature/x"),
+            patch.object(scheduled_run, "acquire_lock", acq),
+            patch.object(scheduled_run, "release_lock", MagicMock()),
+            patch.object(scheduled_run, "LOG_PATH", tmp_path / "_log.md"),
+        ):
+            rc = scheduled_run.main(["--lock-path", str(tmp_path / ".l"), "run", "--dry-run"])
+        assert rc == 0
+        acq.assert_called_once()   # dry-run is read-only → guard does not block it
+
+    def test_env_override_allows_off_main_run(self, tmp_path, monkeypatch):
+        monkeypatch.setenv("SCHEDULED_RUN_ALLOW_ANY_BRANCH", "1")
+        collectors = MagicMock(return_value={"gmail": {"status": "ok", "collected": 0}})
+        with (
+            patch.object(scheduled_run, "current_branch", lambda *a, **k: "feature/x"),
+            patch.object(scheduled_run, "run_collectors", collectors),
+            patch.object(scheduled_run, "run_ingest",
+                         MagicMock(return_value={"status": "ok", "ingested": 0, "deferred": 0})),
+            patch.object(scheduled_run, "move_processed_inbox", MagicMock(return_value={})),
+            patch.object(scheduled_run, "commit_and_push",
+                         MagicMock(return_value={"status": "nothing-to-commit"})),
+            patch.object(scheduled_run, "LOG_PATH", tmp_path / "_log.md"),
+        ):
+            rc = scheduled_run.main(["--lock-path", str(tmp_path / ".l"), "run"])
+        assert rc == 0
+        collectors.assert_called_once()   # override bypasses the guard
+
+
 class TestRunIntegration:
     """Test the full run() happy path and failure scenarios with all externals mocked."""
+
+    @pytest.fixture(autouse=True)
+    def _on_main(self):
+        # Real runs are gated on the `main` branch; pin it so these tests are
+        # deterministic regardless of the checked-out branch.
+        with patch.object(scheduled_run, "current_branch", lambda *a, **k: "main"):
+            yield
 
     def _mock_collectors(self):
         return {
@@ -922,6 +1003,11 @@ class TestCommitAndPush:
 
 class TestCommitAndPushRunIntegration:
     """Integration tests verifying commit_and_push wiring inside run()."""
+
+    @pytest.fixture(autouse=True)
+    def _on_main(self):
+        with patch.object(scheduled_run, "current_branch", lambda *a, **k: "main"):
+            yield
 
     def _mock_collectors(self):
         return {
