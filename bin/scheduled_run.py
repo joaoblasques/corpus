@@ -716,20 +716,18 @@ def main(argv=None) -> int:
                     tallies["inbox_move"] = {"moved": 0, "by_channel": {}, "skipped": 0,
                                              "error": str(exc)}
 
-                # U5 SEAM: commit/push — scoped to corpus/ only (R10).
-                # Push failures are recorded in tallies but must NOT propagate.
-                try:
-                    tallies["commit"] = commit_and_push(
-                        at=datetime.datetime.now().isoformat(timespec="minutes"),
-                        tallies=tallies,
-                    )
-                except Exception as exc:  # noqa: BLE001
-                    tallies["commit"] = {"status": "push-failed", "push_error": str(exc)}
-
-            # A dry-run is a side-effect-free preview: never append to the real log.
-            if not args.dry_run:
+                # Write the run report BEFORE committing so it lands in the SAME
+                # commit as the ingested pages — no dangling uncommitted _log.md
+                # left between runs. (Commit status lives in git history + stdout.)
                 at = datetime.datetime.now().isoformat(timespec="minutes")
                 write_run_report(tallies, at=at)
+
+                # U5 SEAM: commit/push — scoped to corpus/ only (R10), now also
+                # carrying the report block. Push failures are recorded, not raised.
+                try:
+                    tallies["commit"] = commit_and_push(at=at, tallies=tallies)
+                except Exception as exc:  # noqa: BLE001
+                    tallies["commit"] = {"status": "push-failed", "push_error": str(exc)}
         finally:
             release_lock(lock_path)
 

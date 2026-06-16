@@ -1124,7 +1124,9 @@ class TestCommitAndPushRunIntegration:
             rc = scheduled_run.main(["--lock-path", str(lock), "run"])
 
         assert rc == 0
-        assert call_order == ["collectors", "ingest", "commit", "report"], (
+        # Report is written BEFORE the commit so it lands in the same commit
+        # (no dangling uncommitted _log.md between runs).
+        assert call_order == ["collectors", "ingest", "report", "commit"], (
             f"unexpected call order: {call_order}"
         )
         assert not lock.exists(), "lock should be released"
@@ -1151,27 +1153,34 @@ class TestCommitAndPushRunIntegration:
         # Report should still have been written
         assert log.exists(), "log should still be written even after commit_and_push raises"
 
-    def test_commit_result_folded_into_tallies_for_report(self, tmp_path):
-        """commit result is stored in tallies['commit'] so write_run_report can include it."""
+    def test_report_written_before_commit_with_no_commit_status(self, tmp_path):
+        """The report is written before commit_and_push (so it's committed in the
+        same commit), and therefore does NOT yet carry a commit status."""
         lock = tmp_path / ".test.lock"
-        log = tmp_path / "_log.md"
 
-        tallies_seen = {}
+        order = []
+        tallies_at_report = {}
 
         def report_side_effect(tallies, at, **kwargs):
-            tallies_seen.update(tallies)
+            order.append("report")
+            tallies_at_report.update({k: dict(v) if isinstance(v, dict) else v
+                                      for k, v in tallies.items()})
+
+        def commit_side_effect(**kwargs):
+            order.append("commit")
+            return {"status": "committed", "sha": "deadbeef"}
 
         with (
             patch.object(scheduled_run, "run_collectors", return_value=self._mock_collectors()),
             patch.object(scheduled_run, "run_ingest", return_value=self._mock_ingest()),
-            patch.object(scheduled_run, "commit_and_push", return_value={"status": "committed", "sha": "deadbeef"}),
+            patch.object(scheduled_run, "commit_and_push", side_effect=commit_side_effect),
             patch.object(scheduled_run, "write_run_report", side_effect=report_side_effect),
         ):
             scheduled_run.main(["--lock-path", str(lock), "run"])
 
-        assert "commit" in tallies_seen, f"'commit' key missing from tallies passed to report: {tallies_seen}"
-        assert tallies_seen["commit"].get("status") == "committed"
-        assert tallies_seen["commit"].get("sha") == "deadbeef"
+        assert order == ["report", "commit"], f"report must precede commit: {order}"
+        # commit hadn't run yet when the report was written → no commit status in it
+        assert tallies_at_report.get("commit", {}) == {}
 
 
 # ---------------------------------------------------------------------------
