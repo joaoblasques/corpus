@@ -187,6 +187,7 @@ def cmd_run(args) -> int:
     if args.playlist:
         targets = [p for p in targets if p["id"] == args.playlist]
     processed = 0
+    refetched = 0  # count of blocked-stub refetches this run (capped by --refetch-max)
     stopped = None
     for pl in targets:
         if stopped:
@@ -200,7 +201,17 @@ def cmd_run(args) -> int:
             vid = item["video_id"]
             fetched = False  # only throttle after an actual transcript fetch
             try:
-                if not cy.should_collect(vid, args.refetch_blocked):
+                do_collect = cy.should_collect(vid, args.refetch_blocked)
+                # Honor the blocked-refetch cap: once --refetch-max refetches are
+                # done, leave further blocked stubs as duplicates for the next run.
+                if (do_collect and args.refetch_blocked
+                        and args.refetch_max is not None
+                        and cy.collected_status(vid) == "blocked"):
+                    if refetched >= args.refetch_max:
+                        do_collect = False
+                    else:
+                        refetched += 1
+                if not do_collect:
                     t["duplicate"] += 1
                     status = cy.collected_status(vid) or "unknown"
                 else:
@@ -259,6 +270,10 @@ def _args(argv):
     pr.add_argument("--refetch-blocked", action="store_true",
                     help="re-fetch transcripts for videos previously saved with "
                          "transcript_status: blocked (rate-limit artifacts)")
+    pr.add_argument("--refetch-max", type=int, default=None,
+                    help="cap the number of blocked-stub refetches this run (only "
+                         "meaningful with --refetch-blocked); default unlimited. Keep "
+                         "small in scheduled runs to avoid re-triggering the rate limit.")
     pr.set_defaults(func=cmd_run)
     return p.parse_args(argv)
 

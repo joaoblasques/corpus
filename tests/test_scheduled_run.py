@@ -284,6 +284,23 @@ class TestRunCollectors:
         assert result["youtube"]["status"] == "ok"
         assert result["youtube"]["collected"] == 5
 
+    def test_youtube_invocation_recovers_blocked_capped(self, tmp_path):
+        """The daily youtube run drains a small, capped batch of blocked transcripts."""
+        token = tmp_path / "youtube_token.json"
+        token.write_text("{}", encoding="utf-8")
+        yt_cmd = {}
+
+        def fake_run(cmd, **kwargs):
+            if any("youtube_client.py" in str(x) for x in cmd):
+                yt_cmd["cmd"] = cmd
+                return _make_proc(returncode=0, stdout=json.dumps({"collected": 0}))
+            return _make_proc(returncode=0, stdout=json.dumps({"notes": 0, "urls": 0, "written": 0}))
+
+        scheduled_run.run_collectors(youtube_token_path=token, _subprocess_run=fake_run)
+        cmd = yt_cmd["cmd"]
+        assert "--refetch-blocked" in cmd, f"daily run should recover blocked stubs: {cmd}"
+        assert "--refetch-max" in cmd and "15" in cmd, f"recovery must be capped: {cmd}"
+
 
 # ---------------------------------------------------------------------------
 # run_ingest tests
