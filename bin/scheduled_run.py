@@ -320,6 +320,7 @@ def run_ingest(
     timeout_s: int,
     *,
     claude_bin: Path | None = None,
+    model: str | None = None,
     _subprocess_run=None,
     _select_candidates=None,
 ) -> dict:
@@ -334,6 +335,10 @@ def run_ingest(
         max_n: Maximum inbox items to ingest in this run.
         timeout_s: Wall-clock timeout in seconds passed to subprocess.run.
         claude_bin: Path to the claude binary (defaults to CLAUDE_BIN).
+        model: Claude model alias for the headless ingest. When None, falls back
+            to $SCHEDULED_RUN_INGEST_MODEL, and when that is also unset no --model
+            flag is passed (the agent inherits the session default — Opus). Set to
+            a cheaper tier (e.g. "claude-haiku-4-5") to cut per-run ingest cost.
         _subprocess_run: Injectable seam for subprocess.run (used in tests).
         _select_candidates: Injectable seam for candidate selection (tests).
 
@@ -365,6 +370,13 @@ def run_ingest(
         "--permission-mode", "bypassPermissions",
         "--allowedTools", "Read", "Write", "Edit", "Glob", "Grep", "LS",
     ]
+
+    # Optional cheaper-model override for the (dominant) ingest cost. Unset →
+    # no flag → session default (Opus). $SCHEDULED_RUN_INGEST_MODEL lets the
+    # unattended job opt into a cheaper tier without a code change.
+    effective_model = model if model is not None else os.environ.get("SCHEDULED_RUN_INGEST_MODEL")
+    if effective_model:
+        cmd += ["--model", effective_model]
 
     # Use the Claude Code subscription (OAuth) for the headless ingest: strip
     # ANTHROPIC_API_KEY from the child env so it does NOT bill metered API
