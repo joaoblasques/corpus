@@ -34,6 +34,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [[data-engineering/storage-fundamentals|Storage Fundamentals]] — concept · draft · storage hierarchy; file/block/object; row vs columnar serialisation
 - [[data-engineering/data-engineering-best-practices|Data Engineering Best Practices]] — concept · draft · six pipeline best practices: 3-hop, DQ, idempotency, DRY, metadata, tests
 - [[data-engineering/python-for-data-engineering|Python for Data Engineering]] — concept · draft · disk vs memory; Python as glue across ETL/DQ/test/orchestrate
+- [[data-engineering/pipeline-coding-patterns|Pipeline Coding Patterns (Python)]] — concept · draft · code design patterns for DE: Factory, Strategy, Singleton/Object pool, functional design, context managers, typing/dataclasses, pytest, decorators
 - [[data-engineering/de-portfolio-projects|DE Portfolio Projects]] — concept · draft · runnable batch/stream/event-driven projects; stack-comparison matrix
 - [[data-engineering/cicd-for-data-infrastructure|CI/CD for Data Infrastructure]] — concept · draft · CI plan→PR, CD apply-dev→human-gate→prod; GitHub Actions + Terraform
 - [[data-engineering/data-migration-at-scale|Data Migration at Scale]] — concept · draft · Shadow → Reverse Shadow → Cleanup; row-count/checksum verification; CDC rollback

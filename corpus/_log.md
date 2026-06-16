@@ -565,3 +565,8 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - Coordinator lint-gate caught + fixed 1 broken citation (sources/ page needs ../../../raw not ../../raw — depth bug); re-lint clean.
 - sources stamped; hubs updated by workers; _index/_log by Coordinator. Total pages 143→151, sources 295→303.
 - deterministic lint after: 0 broken wikilinks · 0 broken citations · 0 orphans · 6 stubs (clean).
+
+## [2026-06-16 22:20] ingest | web-backlog batch wave 3 (2 sources, 2 workers)
+- ai-business (1 new): ai-economics-bubble (concept) — Zitron's GenAI unit-economics bear case; confidence 0.5 (opinion piece, attributed)
+- data-engineering (1 new): pipeline-coding-patterns (concept) — Python code patterns for pipelines
+- Coordinator enforced §7 one-verbatim-quote rule on pipeline-coding-patterns (paraphrased the 2nd quote). Total pages 151→153, sources 303→305. Lint clean.

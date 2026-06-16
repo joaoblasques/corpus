@@ -1,6 +1,6 @@
 # Corpus Index
 
-> Last updated: 2026-06-16 | Total pages: 151 | Total sources: 303
+> Last updated: 2026-06-16 | Total pages: 153 | Total sources: 305
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
@@ -79,6 +79,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[data-engineering/kafka|Apache Kafka]] — entity · draft · event streaming platform; topics, partitions, consumer groups, KRaFt
 - [[data-engineering/dbt|dbt]] — entity · draft · SQL-first transformation framework; sources vs models; layer materializations
 - [[data-engineering/pipeline-layers|Pipeline Layers]] — concept · draft · staging → warehouse → marts ELT separation; Raw DB vs Analytics DB
+- [[data-engineering/pipeline-coding-patterns|Pipeline Coding Patterns]] — concept · draft · Python code patterns for pipelines: functional design, Factory/Strategy/Singleton, context managers
 - [[data-engineering/sql-window-functions|SQL Window Functions]] — concept · draft · ROW_NUMBER/RANK/DENSE_RANK, LAG/LEAD, running aggregates, frame clauses; DE interview reference
 - [[data-engineering/apache-spark|Apache Spark]] — entity · draft · distributed engine on immutable RDDs + lazy DAG; DataFrames/Catalyst/Tungsten; caching, OOM tuning
 - [[data-engineering/databricks|Databricks]] — entity · draft · lakehouse platform; Unity Catalog, Liquid Clustering, Lakeflow, cost
@@ -165,6 +166,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[ai-business/technical-career|Navigating a Technical Career]] — concept · draft · portfolio signals, interviews, prioritization-as-leverage
 - [[ai-business/monetizing-code|Monetizing Code]] — concept · draft · sell a result not code; offer positioning
 - [[ai-business/ai-and-the-job-market|AI and the Job Market]] — synthesis · draft · AI-as-utility; future-proofing an engineering career
+- [[ai-business/ai-economics-bubble|AI Economics & the Bubble Question]] — concept · draft · Zitron's bear case on GenAI unit economics; token-billing spend caps as a demand signal
 - [[ai-business/ai-spreadsheets|AI Spreadsheets & the Data-Skill Shift]] — concept · draft · "stop learning Excel"; assumptions-first build spec + standing context
 - [[ai-business/ai-job-search|Finding a Job Using AI]] — concept · draft · AI career-strategist projects + autonomous apply (ApplyPilot); quality over volume
 
@@ -246,3 +248,5 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - 2026-06-16: [[data-engineering/graph-databases]] (new, web-backlog wave 2)
 - 2026-06-16: [[mlops/drift-detection]] (new, web-backlog wave 2)
 - 2026-06-16: [[mlops/python-built-in-functions]] (new, web-backlog wave 2)
+- 2026-06-16: [[ai-business/ai-economics-bubble]] (new, web-backlog wave 3)
+- 2026-06-16: [[data-engineering/pipeline-coding-patterns]] (new, web-backlog wave 3)
