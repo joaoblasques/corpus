@@ -24,6 +24,7 @@ import subprocess
 import sys
 from pathlib import Path
 
+import corpus_lint  # bin/ is on sys.path for callers
 import ingest_candidates  # bin/ is on sys.path for callers
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -612,6 +613,17 @@ def write_run_report(
         f"- ingest:\n{ingest_line}\n"
     )
 
+    # Post-ingest corpus integrity check (deterministic backstop on the agent's work).
+    lint = tallies.get("lint")
+    if lint:
+        if "error" in lint:
+            block += f"- lint:\n  - error={lint['error']}\n"
+        else:
+            bw, bc = lint.get("broken_wikilinks", 0), lint.get("broken_citations", 0)
+            flag = "  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py" if (bw or bc) else ""
+            block += (f"- lint:\n  - {bw} broken wikilinks · {bc} broken citations · "
+                      f"{lint.get('orphans', 0)} orphans · {lint.get('stubs', 0)} stubs{flag}\n")
+
     # Include commit/push line when present
     if commit:
         commit_status = commit.get("status", "unknown")
@@ -712,6 +724,21 @@ def main(argv=None) -> int:
                 except Exception as exc:  # noqa: BLE001
                     tallies["inbox_move"] = {"moved": 0, "by_channel": {}, "skipped": 0,
                                              "error": str(exc)}
+
+                # Post-ingest integrity backstop: deterministically lint the corpus
+                # the unattended agent just wrote to, and record any broken
+                # links/citations in the run report. Non-blocking — alerts, never
+                # aborts (a failed lint must not lose the committed ingest).
+                try:
+                    report = corpus_lint.lint()
+                    tallies["lint"] = {
+                        "broken_wikilinks": len(report["broken_wikilinks"]),
+                        "broken_citations": len(report["broken_citations"]),
+                        "orphans": len(report["orphans"]),
+                        "stubs": len(report["stubs"]),
+                    }
+                except Exception as exc:  # noqa: BLE001
+                    tallies["lint"] = {"error": str(exc)}
 
                 # Write the run report BEFORE committing so it lands in the SAME
                 # commit as the ingested pages — no dangling uncommitted _log.md
