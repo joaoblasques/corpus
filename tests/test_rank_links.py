@@ -26,10 +26,42 @@ def test_rank_caps_top_n(monkeypatch):
 
 
 def test_rank_fallback_used_without_key(monkeypatch):
-    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
     monkeypatch.setattr(rl, "load_env", lambda *a, **k: None)
+    import llm
+    monkeypatch.setattr(
+        llm, "complete",
+        lambda *a, **k: {"text": "", "provider": None, "model": None,
+                         "ok": False, "error": "ollama: down"},
+    )
     scores = rl.score_candidates([{"url": "https://github.com/x/y", "description": "tutorial"}])
     assert scores[0] >= 8  # heuristic path
+
+
+def test_score_candidates_uses_router_local(monkeypatch):
+    """When the router returns ok=True with scores JSON, those scores are used."""
+    monkeypatch.setattr(rl, "load_env", lambda *a, **k: None)
+    import llm
+    monkeypatch.setattr(
+        llm, "complete",
+        lambda *a, **k: {"text": '{"scores":[{"index":0,"score":9}]}',
+                         "provider": "ollama", "model": "qwen2.5:3b",
+                         "ok": True, "error": None},
+    )
+    scores = rl.score_candidates([{"url": "https://x/y", "description": "deep tutorial"}])
+    assert scores == [9]
+
+
+def test_score_candidates_falls_back_to_heuristic_when_router_not_ok(monkeypatch):
+    """When the router returns ok=False, fall back to the heuristic scorer."""
+    monkeypatch.setattr(rl, "load_env", lambda *a, **k: None)
+    import llm
+    monkeypatch.setattr(
+        llm, "complete",
+        lambda *a, **k: {"text": "", "provider": None, "model": None,
+                         "ok": False, "error": "ollama: down"},
+    )
+    scores = rl.score_candidates([{"url": "https://github.com/x/y", "description": "tutorial"}])
+    assert scores[0] >= 8  # heuristic path for a GitHub tutorial
 
 
 def test_rank_sorts_by_score_desc(monkeypatch):

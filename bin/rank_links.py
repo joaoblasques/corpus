@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """rank_links.py — score candidate links by learning utility, apply floor + cap.
 
-Primary path: one Anthropic Haiku call ranks links by knowledge/learning utility.
-Fallback (no ANTHROPIC_API_KEY or API error): collect_email.heuristic_score.
+Primary path: routes through bin/llm.py (local Ollama → ok=True → scores used).
+Fallback (router ok=False or any error): collect_email.heuristic_score.
 """
 from __future__ import annotations
 
@@ -35,7 +35,7 @@ def load_env(path: str | None = None) -> None:
 
 
 def _llm_scores(candidates: list[dict]) -> list[int]:
-    import anthropic
+    import llm  # bin/ is on sys.path
 
     listing = "\n".join(
         f"{i}. {c['url']} — {c['description']}" for i, c in enumerate(candidates)
@@ -48,12 +48,11 @@ def _llm_scores(candidates: list[dict]) -> list[int]:
         f"{listing}\n\n"
         'Respond with ONLY JSON: {"scores":[{"index":0,"score":7}, ...]}'
     )
-    client = anthropic.Anthropic()
-    resp = client.messages.create(
-        model=RANK_MODEL, max_tokens=1024,
-        messages=[{"role": "user", "content": prompt}],
-    )
-    text = "".join(b.text for b in resp.content if getattr(b, "type", "") == "text")
+    res = llm.complete(prompt, tier="mechanical", task="rank_links",
+                       schema={"scores": []}, max_tokens=1024)
+    if not res["ok"]:
+        raise RuntimeError(res["error"] or "llm router unavailable")
+    text = res["text"]
     data = json.loads(text[text.index("{"): text.rindex("}") + 1])
     scores = {int(s["index"]): int(s["score"]) for s in data["scores"]}
     return [max(0, min(10, scores.get(i, 0))) for i in range(len(candidates))]
@@ -61,12 +60,10 @@ def _llm_scores(candidates: list[dict]) -> list[int]:
 
 def score_candidates(candidates: list[dict]) -> list[int]:
     load_env()
-    if os.environ.get("ANTHROPIC_API_KEY"):
-        try:
-            return _llm_scores(candidates)
-        except Exception:
-            pass
-    return [ce.heuristic_score(c["url"], c["description"]) for c in candidates]
+    try:
+        return _llm_scores(candidates)
+    except Exception:
+        return [ce.heuristic_score(c["url"], c["description"]) for c in candidates]
 
 
 def rank(candidates: list[dict], max_links: int = 10, floor: int = 4) -> list[dict]:
