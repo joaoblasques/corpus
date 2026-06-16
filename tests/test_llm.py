@@ -73,3 +73,28 @@ def test_prefer_local_false_skips_ollama(tmp_path, monkeypatch):
                            log_path=tmp_path / "u.jsonl")
     assert res["ok"] is False
     assert res["provider"] is None
+
+
+def test_complete_appends_usage_log(tmp_path):
+    log = tmp_path / "u.jsonl"
+    payload = {"response": "ok"}
+    with patch.object(llm.urllib.request, "urlopen", return_value=_FakeResp(payload)):
+        llm.complete("x", tier="mechanical", task="rank_links", log_path=log)
+    lines = log.read_text(encoding="utf-8").strip().splitlines()
+    assert len(lines) == 1
+    rec = json.loads(lines[0])
+    assert rec["task"] == "rank_links"
+    assert rec["tier"] == "mechanical"
+    assert rec["provider"] == "ollama"
+    assert rec["ok"] is True
+    assert "latency_ms" in rec and "at" in rec
+
+
+def test_usage_log_records_failures_too(tmp_path):
+    log = tmp_path / "u.jsonl"
+    with patch.object(llm.urllib.request, "urlopen",
+                      side_effect=urllib.error.URLError("down")):
+        llm.complete("x", tier="mechanical", task="rank_links", log_path=log)
+    rec = json.loads(log.read_text(encoding="utf-8").strip())
+    assert rec["ok"] is False
+    assert rec["provider"] is None

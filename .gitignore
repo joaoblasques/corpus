@@ -37,3 +37,6 @@ bin/youtube_playlists.yaml
 # Note: raw/_inbox/_REVIEW.md is already covered by the raw/_inbox/* rule above.
 raw/.scheduled_run.lock
 raw/.scheduled_run.log
+
+# local-first LLM router usage log
+raw/.llm_usage.jsonl
