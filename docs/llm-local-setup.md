@@ -13,11 +13,24 @@ keeps content on-machine.
 
 ## How it routes
 - `bin/llm_config.py` maps capability tiers to models and holds the switches.
-- `mechanical` tier → `qwen2.5:3b` (local). On failure → caller's fallback
-  (rank_links → heuristic). Optional Claude Haiku middle tier: set
-  `MECHANICAL_HAIKU_FALLBACK = True`.
+- `mechanical` tier chain: **local Ollama (`qwen2.5:3b`)** → *optional* OpenRouter
+  free → *optional* Claude Haiku → caller's fallback (rank_links → heuristic).
+  Both optional tiers are **off by default**.
 - High-judgment work (agentic ingest, interactive ops) does NOT route here.
 - Disable all local routing: set `PREFER_LOCAL = False` in `bin/llm_config.py`.
+
+### Optional: OpenRouter free hosted fallback
+A faster alternative to the local CPU when Ollama is down/slow, at $0 — but
+hosted. To enable:
+1. Get a key at https://openrouter.ai and export `OPENROUTER_API_KEY`.
+2. Set `MECHANICAL_OPENROUTER_FALLBACK = True` in `bin/llm_config.py`
+   (model defaults to `meta-llama/llama-3.3-70b-instruct:free`).
+
+> **PRIVACY:** OpenRouter's *free* models may be logged / trained on by the
+> downstream provider. Your corpus is personal — do NOT enable this for private
+> content unless you've reviewed OpenRouter's data settings (opt out of training
+> in your account; restrict to no-logging providers). Local Ollama stays the
+> private, $0 default. Free tier is also rate-limited (~20 req/min, 50–1000/day).
 
 ## Measuring savings
 `python3 bin/llm_usage.py` prints how many calls ran local vs Claude

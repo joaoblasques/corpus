@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import datetime
 import json
+import os
 import time
 import urllib.error
 import urllib.request
@@ -39,6 +40,30 @@ def _ollama_generate(prompt: str, model: str, *, system, timeout, as_json: bool)
     with urllib.request.urlopen(req, timeout=timeout) as resp:
         payload = json.loads(resp.read().decode("utf-8"))
     return payload.get("response", "")
+
+
+def _openrouter_generate(prompt: str, model: str, *, system, timeout, as_json: bool) -> str:
+    """Call OpenRouter's OpenAI-compatible chat endpoint with a `:free` model.
+
+    Needs OPENROUTER_API_KEY in the env. Stdlib urllib (no new dependency).
+    """
+    messages = ([{"role": "system", "content": system}] if system else []) + \
+               [{"role": "user", "content": prompt}]
+    body = {"model": model, "messages": messages, "temperature": 0.0}
+    if as_json:
+        body["response_format"] = {"type": "json_object"}
+    data = json.dumps(body).encode("utf-8")
+    req = urllib.request.Request(
+        f"{cfg.OPENROUTER_HOST}/chat/completions",
+        data=data,
+        headers={
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {os.environ.get('OPENROUTER_API_KEY', '')}",
+        },
+    )
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        payload = json.loads(resp.read().decode("utf-8"))
+    return payload["choices"][0]["message"]["content"]
 
 
 def _haiku(prompt: str, *, system: str | None, max_tokens: int) -> str:
@@ -74,6 +99,18 @@ def complete(prompt: str, *, tier: str, task: str | None = None, schema=None,
         except (urllib.error.URLError, TimeoutError, OSError,
                 json.JSONDecodeError, ValueError) as exc:
             result["error"] = f"ollama: {exc}"
+
+    # Opt-in hosted free fallback for mechanical: OpenRouter (needs an API key).
+    if (not result["ok"] and tier == "mechanical"
+            and cfg.MECHANICAL_OPENROUTER_FALLBACK
+            and os.environ.get("OPENROUTER_API_KEY")):
+        try:
+            text = _openrouter_generate(prompt, cfg.OPENROUTER_MODEL, system=system,
+                                        timeout=timeout, as_json=schema is not None)
+            result = {"text": text, "provider": "openrouter",
+                      "model": cfg.OPENROUTER_MODEL, "ok": True, "error": result["error"]}
+        except Exception as exc:  # noqa: BLE001 — fall through to next fallback
+            result["error"] = f"{result['error']}; openrouter: {exc}"
 
     # Opt-in middle tier for mechanical: try Claude Haiku if local failed.
     if not result["ok"] and tier == "mechanical" and cfg.MECHANICAL_HAIKU_FALLBACK:
