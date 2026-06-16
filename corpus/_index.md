@@ -1,6 +1,6 @@
 # Corpus Index
 
-> Last updated: 2026-06-16 | Total pages: 153 | Total sources: 305
+> Last updated: 2026-06-16 | Total pages: 154 | Total sources: 306
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
@@ -17,7 +17,8 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[ai-engineering/agent-evaluation|Agent Evaluation]] — concept · draft · online/offline evaluation, LLM-as-judge, golden datasets, production feedback loop
 - [[ai-engineering/rag|RAG]] — concept · draft · retrieval-augmented generation; solving LLM knowledge cutoff and hallucination via context injection
 - [[ai-engineering/llm|LLM]] — concept · draft · next-token prediction, parameters, training phases (pre-training + RLHF)
-- [[ai-engineering/transformer|Transformer]] — concept · stub · attention-based architecture underlying all modern LLMs
+- [[ai-engineering/transformer|Transformer]] — concept · draft · transformer internals: tokenization, embeddings, RoPE, attention (Q/K/V, GQA, KV cache), FFN, residual stream, next-token loop
+- [[ai-engineering/mixture-of-experts|Mixture of Experts]] — concept · draft · parallel expert FFNs + router activating a few per token; scale params without scaling per-token compute (Mixtral 8x7B)
 - [[ai-engineering/agent-memory|Agent Memory]] — concept · draft · short-term (context window) + long-term (vector DB / CLAUDE.md) memory tiers
 - [[ai-engineering/mcp|MCP]] — concept · stub · Model Context Protocol; coordination layer for agents, tools, and memory
 - [[ai-engineering/context-window-management|Context Window Management]] — concept · draft · compaction, sub-agents, resets; what to keep/compress/drop when context fills
@@ -250,3 +251,5 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - 2026-06-16: [[mlops/python-built-in-functions]] (new, web-backlog wave 2)
 - 2026-06-16: [[ai-business/ai-economics-bubble]] (new, web-backlog wave 3)
 - 2026-06-16: [[data-engineering/pipeline-coding-patterns]] (new, web-backlog wave 3)
+- 2026-06-16: [[ai-engineering/transformer]] (expanded stub→draft, web-backlog)
+- 2026-06-16: [[ai-engineering/mixture-of-experts]] (new, web-backlog)

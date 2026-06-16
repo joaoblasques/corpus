@@ -570,3 +570,10 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - ai-business (1 new): ai-economics-bubble (concept) — Zitron's GenAI unit-economics bear case; confidence 0.5 (opinion piece, attributed)
 - data-engineering (1 new): pipeline-coding-patterns (concept) — Python code patterns for pipelines
 - Coordinator enforced §7 one-verbatim-quote rule on pipeline-coding-patterns (paraphrased the 2nd quote). Total pages 151→153, sources 303→305. Lint clean.
+
+## [2026-06-16 22:40] ingest | how-llms-actually-work → expand transformer + new MoE page
+- source: raw/web/how-llms-actually-work.md (rich transformer-internals walkthrough)
+- ai-engineering/transformer.md: EXPANDED stub→draft (preserved existing [^src1] study-note citation; added web source as [^src2]) — tokenization, embeddings, RoPE, attention (Q/K/V, softmax, causal masking, induction heads, n² cost), multi-head (GQA, KV cache), FFN (SwiGLU, ROME), residual stream+layernorm, next-token loop. Also fills the flagged lost-in-the-middle reference.
+- ai-engineering/mixture-of-experts.md: NEW concept (fills flagged MoE implicit-concept gap) — Mixtral 8x7B router/experts.
+- source stamped (→ 2 pages); README updated by worker; _index/_log by Coordinator. Total pages 153→154, sources 305→306. stubs 6→5.
+- deterministic lint after: 0 broken wikilinks · 0 broken citations · 0 orphans · 5 stubs (clean).

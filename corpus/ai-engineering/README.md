@@ -30,7 +30,8 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [[ai-engineering/agent-evaluation|Agent Evaluation]] — concept · draft · online/offline evaluation, LLM-as-judge, golden datasets, production feedback loop
 - [[ai-engineering/rag|RAG]] — concept · draft · retrieval-augmented generation; solving LLM knowledge cutoff and hallucination via context injection
 - [[ai-engineering/llm|LLM]] — concept · draft · next-token prediction, parameters, training phases (pre-training + RLHF)
-- [[ai-engineering/transformer|Transformer]] — concept · stub · attention-based architecture underlying all modern LLMs
+- [[ai-engineering/transformer|Transformer]] — concept · draft · attention-based architecture underlying all modern LLMs; tokenize→embed→position→attention→FFN→next-token
+- [[ai-engineering/mixture-of-experts|Mixture of Experts]] — concept · draft · sparse FFN variant: many expert networks + router, few activated per token; scale params without scaling compute
 - [[ai-engineering/agent-memory|Agent Memory]] — concept · draft · short-term (context window) + long-term (vector DB / CLAUDE.md) memory tiers
 - [[ai-engineering/mcp|MCP]] — concept · stub · Model Context Protocol; coordination layer for agents, tools, and memory
 - [[ai-engineering/context-window-management|Context Window Management]] — concept · draft · compaction, sub-agents, resets; what to keep/compress/drop when context fills
