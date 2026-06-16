@@ -346,6 +346,39 @@ class TestRunIngest:
         assert result["status"] == "ok"
         assert result["ingested"] == 3
 
+    def test_nonzero_exit_with_success_envelope_is_ok(self):
+        """claude --print can exit non-zero on a fully successful agentic run;
+        run_ingest must trust the envelope's is_error, not the exit code."""
+        def fake_run(cmd, **kwargs):
+            envelope = json.dumps({
+                "result": json.dumps({"ingested": 2, "deferred": 1}),
+                "is_error": False, "terminal_reason": "completed"})
+            return _make_proc(returncode=1, stdout=envelope)  # exit 1, success envelope
+
+        res = scheduled_run.run_ingest(max_n=3, timeout_s=10, _subprocess_run=fake_run)
+        assert res["status"] == "ok", f"exit-1 with success envelope must be ok: {res}"
+        assert res["ingested"] == 2
+        assert res["deferred"] == 1
+
+    def test_nonzero_exit_with_no_envelope_is_failed(self):
+        """A non-zero exit with no parseable envelope (genuine crash) is a failure."""
+        def fake_run(cmd, **kwargs):
+            return _make_proc(returncode=1, stdout="", stderr="segfault")
+
+        res = scheduled_run.run_ingest(max_n=3, timeout_s=10, _subprocess_run=fake_run)
+        assert res["status"] == "failed"
+        assert "segfault" in res["error"] or "exit 1" in res["error"]
+
+    def test_nonzero_exit_with_is_error_envelope_is_failed(self):
+        """A non-zero exit whose envelope reports is_error=true is a real failure."""
+        def fake_run(cmd, **kwargs):
+            envelope = json.dumps({"result": "rate limit reached", "is_error": True})
+            return _make_proc(returncode=1, stdout=envelope)
+
+        res = scheduled_run.run_ingest(max_n=3, timeout_s=10, _subprocess_run=fake_run)
+        assert res["status"] == "failed"
+        assert "rate limit" in res["error"]
+
     def test_no_candidates_skips_claude(self):
         """With no substantive candidates, run_ingest returns without calling claude."""
         called = []

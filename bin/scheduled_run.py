@@ -383,23 +383,20 @@ def run_ingest(
         # Overflow stays in raw/_inbox/ for the next run — no cleanup needed.
         return {"status": "timeout", "ingested": 0, "deferred": max_n, "error": "timeout"}
 
-    if proc.returncode != 0:
-        return {
-            "status": "failed",
-            "ingested": 0,
-            "deferred": 0,
-            "error": proc.stderr.strip() or f"claude exit {proc.returncode}",
-        }
-
-    # Parse the JSON envelope claude outputs in --output-format json mode.
+    # NOTE: `claude --print` can exit NON-ZERO even on a fully successful agentic
+    # run (long ingests complete, write pages, is_error=false, yet exit 1). The
+    # authoritative signal is the JSON envelope's `is_error`, NOT the exit code.
+    # So parse the envelope first; only treat a non-zero exit as failure when
+    # there is no parseable envelope (a genuine crash before output).
     try:
         envelope = json.loads(proc.stdout)
-    except json.JSONDecodeError:
+    except (json.JSONDecodeError, ValueError):
         return {
             "status": "failed",
             "ingested": 0,
             "deferred": 0,
-            "error": f"non-JSON claude output: {proc.stdout[:200]}",
+            "error": (proc.stderr.strip()
+                      or f"claude exit {proc.returncode}, no JSON envelope: {proc.stdout[:200]}"),
         }
 
     is_error = envelope.get("is_error", False)
