@@ -14,7 +14,7 @@ tags:
   - corpus/data-engineering
   - entity
 created: 2026-05-21
-updated: 2026-05-21
+updated: 2026-06-16
 ---
 
 # PostgreSQL (Postgres)
@@ -55,6 +55,7 @@ This is not a universal answer — at large scale or with specialized access pat
 
 ## See also
 
+- [[data-engineering/postgresql-views|PostgreSQL Views]] — views as rewrite-rule macros; the `SELECT *` trap, `security_invoker`/RLS, schema-evolution pain
 - [[data-engineering/README|Data Engineering hub]]
 
 ---
