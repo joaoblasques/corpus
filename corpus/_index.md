@@ -1,6 +1,6 @@
 # Corpus Index
 
-> Last updated: 2026-06-16 | Total pages: 133 | Total sources: 286
+> Last updated: 2026-06-16 | Total pages: 134 | Total sources: 286
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
@@ -30,7 +30,8 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[ai-engineering/agentic-coding|Agentic Coding]] — synthesis · draft · sub-hub: coding-agent orchestration; conductor→orchestrator, AX, verification bottleneck
 - [[ai-engineering/claude-code|Claude Code]] — entity · draft · Anthropic CLI coding agent; harness, large-codebase practices, security review
 - [[ai-engineering/claude-cowork|Claude Cowork]] — entity · draft · sub-hub: Cowork desktop product; workspace folder, CLAUDE.md/MEMORY.md, Toolkit
-- [[ai-engineering/anthropic|Anthropic]] — entity · draft · Anthropic + Claude lineup (Opus 4.8, Fable 5, Mythos 5)
+- [[ai-engineering/anthropic|Anthropic]] — entity · draft · the lab: company, funding/valuation, learning resources
+- [[ai-engineering/claude-models|Claude Model Lineup]] — entity · draft · Claude family (Haiku → Sonnet → Opus → Fable/Mythos); aliases, 1M context, Opus 4.8, Fable 5/Mythos 5
 - [[ai-engineering/claude-api|Claude API]] — concept · draft · Claude Messages API in Python; system prompts, structured output
 - [[ai-engineering/prompt-engineering|Prompt Engineering]] — concept · draft · crafting instructions/examples/XML; distinct from context-engineering
 - [[ai-engineering/agent-security|Agent Security]] — concept · draft · prompt injection, guardrails, defense-in-depth, agent auth

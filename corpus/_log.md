@@ -527,3 +527,10 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   content + citations moved verbatim; old page git-rm'd; inbound link in ai-assisted-development.md repointed to insforge; README + _index updated (Total pages 131→133)
 - reclassified data-engineering/ingestr.md stub→draft (60-line entity with real content; stubs 6→5)
 - deterministic lint after: 0 broken wikilinks · 0 broken citations · 0 orphans · 5 stubs (clean)
+
+## [2026-06-16 20:55] lint | split anthropic.md → company + claude-models lineup
+- split ai-engineering/anthropic.md (mixed company + full model lineup) into:
+  - anthropic.md (entity) — kept: company, funding/valuation, learning resources (src1-4)
+  - claude-models.md (entity, NEW) — model lineup table, Opus 4.8, Fable 5/Mythos 5, launch controversy (src4-9)
+  footnote labels preserved across split to avoid transcription drift; bidirectional See-also links; README + _index updated (Total pages 133→134)
+- deterministic lint after: 0 broken wikilinks · 0 broken citations · 0 orphans · 5 stubs (clean)
