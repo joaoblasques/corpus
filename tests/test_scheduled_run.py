@@ -346,6 +346,51 @@ class TestRunIngest:
         assert result["status"] == "ok"
         assert result["ingested"] == 3
 
+    def test_no_model_flag_by_default(self):
+        """With no model configured, the invocation carries no --model flag
+        (inherits the session default — current Opus behaviour)."""
+        captured = {}
+
+        def fake_run(cmd, **kwargs):
+            captured["cmd"] = cmd
+            envelope = json.dumps({"result": json.dumps({"ingested": 1, "deferred": 0}),
+                                   "is_error": False})
+            return _make_proc(returncode=0, stdout=envelope)
+
+        scheduled_run.run_ingest(max_n=3, timeout_s=10, _subprocess_run=fake_run, model=None)
+        assert "--model" not in captured["cmd"]
+
+    def test_model_flag_passed_when_configured(self):
+        """A configured model (e.g. the cheap Haiku tier) is forwarded as --model."""
+        captured = {}
+
+        def fake_run(cmd, **kwargs):
+            captured["cmd"] = cmd
+            envelope = json.dumps({"result": json.dumps({"ingested": 1, "deferred": 0}),
+                                   "is_error": False})
+            return _make_proc(returncode=0, stdout=envelope)
+
+        scheduled_run.run_ingest(max_n=3, timeout_s=10, _subprocess_run=fake_run,
+                                 model="claude-haiku-4-5")
+        cmd = captured["cmd"]
+        assert "--model" in cmd
+        assert cmd[cmd.index("--model") + 1] == "claude-haiku-4-5"
+
+    def test_model_defaults_from_env(self, monkeypatch):
+        """When model arg is omitted, SCHEDULED_RUN_INGEST_MODEL selects it."""
+        monkeypatch.setenv("SCHEDULED_RUN_INGEST_MODEL", "claude-haiku-4-5")
+        captured = {}
+
+        def fake_run(cmd, **kwargs):
+            captured["cmd"] = cmd
+            envelope = json.dumps({"result": json.dumps({"ingested": 1, "deferred": 0}),
+                                   "is_error": False})
+            return _make_proc(returncode=0, stdout=envelope)
+
+        scheduled_run.run_ingest(max_n=3, timeout_s=10, _subprocess_run=fake_run)
+        cmd = captured["cmd"]
+        assert "--model" in cmd and cmd[cmd.index("--model") + 1] == "claude-haiku-4-5"
+
     def test_nonzero_exit_with_success_envelope_is_ok(self):
         """claude --print can exit non-zero on a fully successful agentic run;
         run_ingest must trust the envelope's is_error, not the exit code."""
