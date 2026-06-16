@@ -189,7 +189,11 @@ def run_collectors(
     else:
         try:
             proc = _run(
-                [sys.executable, str(BIN / "youtube_client.py"), "run"],
+                # Recover a small, throttled batch of blocked transcripts each run
+                # (capped so it doesn't re-trigger the transcript rate limit). The
+                # recovered videos become ingest candidates on following runs.
+                [sys.executable, str(BIN / "youtube_client.py"), "run",
+                 "--refetch-blocked", "--refetch-max", "15"],
                 capture_output=True,
                 text=True,
             )

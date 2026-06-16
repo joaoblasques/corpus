@@ -283,3 +283,42 @@ def test_run_no_sleep_on_duplicate(tmp_path, monkeypatch):
     rc = yc.cmd_run(yc._args(["run", "--sleep", "2"]))
     assert rc == 0
     assert slept == [], "duplicates must not be throttled (no fetch happened)"
+
+
+def _seed_blocked(tmp_path, *vids):
+    for vid in vids:
+        (tmp_path / f"youtube-{vid}-x.md").write_text(
+            f"---\nyoutube_video_id: {vid}\ntranscript_status: blocked\n---\n"
+            "_No transcript available._\n", encoding="utf-8")
+
+
+def _blocked_run_setup(tmp_path, monkeypatch, vids):
+    monkeypatch.setattr(yc.cy, "INBOX", tmp_path)
+    monkeypatch.setattr(yc.cy, "DEDUP_DIRS", [tmp_path])
+    _seed_blocked(tmp_path, *vids)
+    monkeypatch.setattr(yc, "load_config", lambda: {
+        "playlists": [{"id": "PL1", "name": "AI", "policy": "collect-keep"}],
+        "default_policy": "ignore"})
+    monkeypatch.setattr(yc, "get_service", lambda: "SVC")
+    monkeypatch.setattr(yc, "list_playlist_items", lambda svc, pid: iter([
+        {"playlist_item_id": f"I{i}", "video_id": v, "title": "A", "channel_name": "C",
+         "published": "2026-06-01", "privacy": "public"} for i, v in enumerate(vids)]))
+    monkeypatch.setattr(yc.time, "sleep", lambda s: None)
+    calls = []
+    monkeypatch.setattr(yc, "extract_transcript",
+                        lambda vid: calls.append(vid) or ("[00:00](x) hi", "ok"))
+    return calls
+
+
+def test_run_refetch_max_caps_refetches(tmp_path, monkeypatch):
+    calls = _blocked_run_setup(tmp_path, monkeypatch, ["VB1", "VB2", "VB3"])
+    rc = yc.cmd_run(yc._args(["run", "--refetch-blocked", "--refetch-max", "1", "--sleep", "0"]))
+    assert rc == 0
+    assert calls == ["VB1"], "only 1 blocked stub should be refetched at cap=1"
+
+
+def test_run_refetch_unlimited_without_cap(tmp_path, monkeypatch):
+    calls = _blocked_run_setup(tmp_path, monkeypatch, ["VB1", "VB2", "VB3"])
+    rc = yc.cmd_run(yc._args(["run", "--refetch-blocked", "--sleep", "0"]))
+    assert rc == 0
+    assert calls == ["VB1", "VB2", "VB3"], "no cap → all blocked stubs refetched"
