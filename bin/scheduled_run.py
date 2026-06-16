@@ -645,8 +645,10 @@ def main(argv=None) -> int:
                 except Exception as exc:  # noqa: BLE001
                     tallies["commit"] = {"status": "push-failed", "push_error": str(exc)}
 
-            at = datetime.datetime.now().isoformat(timespec="minutes")
-            write_run_report(tallies, at=at)
+            # A dry-run is a side-effect-free preview: never append to the real log.
+            if not args.dry_run:
+                at = datetime.datetime.now().isoformat(timespec="minutes")
+                write_run_report(tallies, at=at)
         finally:
             release_lock(lock_path)
 

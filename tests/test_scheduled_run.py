@@ -600,6 +600,21 @@ class TestRunIntegration:
         ingest_mock.assert_not_called()
         assert not lock.exists()
 
+    def test_dry_run_does_not_write_log(self, tmp_path):
+        """--dry-run must be side-effect-free: no run-report block appended to the log."""
+        lock = tmp_path / ".dry.lock"
+        log = tmp_path / "_log.md"
+
+        with (
+            patch.object(scheduled_run, "run_collectors", MagicMock()),
+            patch.object(scheduled_run, "run_ingest", MagicMock()),
+            patch.object(scheduled_run, "LOG_PATH", log),
+        ):
+            rc = scheduled_run.main(["--lock-path", str(lock), "run", "--dry-run"])
+
+        assert rc == 0
+        assert not log.exists()  # dry-run writes nothing to the real log
+
     def test_run_max_and_timeout_forwarded_to_ingest(self, tmp_path):
         """--max and --timeout CLI args are forwarded to run_ingest."""
         lock = tmp_path / ".test.lock"
