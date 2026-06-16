@@ -24,6 +24,9 @@ sources:
   - path: raw/web/antirez.md
     channel: web
     ingested_at: 2026-06-15
+  - path: raw/email/email-2026-05-28-launching-boring-ui.md
+    channel: email
+    ingested_at: 2026-06-16
 aliases:
   - harness
   - agent harness
@@ -36,7 +39,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-12
-updated: 2026-06-12
+updated: 2026-06-16
 ---
 
 # Agent Harness
@@ -57,6 +60,8 @@ Concretely, a harness includes [^src1]:
 - Observability (logs, traces, cost and latency metering)
 
 Claude Code, Cursor, Codex, Aider, Cline are all harnesses; the model underneath is sometimes the same, but the behavior you experience is dominated by what the harness does [^src1]. Simon Willison's reduction of the core loop: an agent "runs tools in a loop to achieve a goal" — the skill is in the design of both the tools and the loop [^src1].
+
+**Pi** (Mario Zechner) is a notable open-source harness in this class — described as "super lightweight and built to be highly extensible," provider-agnostic, and embeddable via a Node.js SDK [^src7]. It is the runtime Boring UI builds on (Boring UI *uses* Pi as its agent harness and extends Pi's plugin model), a concrete case of a product picking an existing harness rather than rolling its own loop [^src7]. See [[ai-engineering/agent-ui|Agent UI]].
 
 ## The harness beats the model (evidence)
 
@@ -162,3 +167,4 @@ A concrete, shipping harness system is **ECC (everything-claude-code)** by Affaa
 [^src4]: [affaan-m/everything-claude-code (email pointer)](../../raw/email/email-2026-03-31-affaan-m-everything-claude-code-the-agent-harness-performanc.md) — email, Gmail
 [^src5]: [How Claude Code works in large codebases: best practices](../../raw/web/how-claude-code-works-in-large-codebases-best-practices-and.md) — Anthropic, via [The harness matters more than the model](../../raw/email/email-2026-05-28-the-harness-matters-more-than-the-model.md) (Claude Code Camp)
 [^src6]: [Coding with LLMs: the QA agent pattern](../../raw/web/antirez.md) — Salvatore Sanfilippo (antirez), via [How OpenAI engineers prompt](../../raw/email/email-2026-06-08-how-openai-engineers-prompt.md)
+[^src7]: [Launching Boring UI](../../raw/email/email-2026-05-28-launching-boring-ui.md) — Julien Hurault, on Pi as the harness behind Boring UI

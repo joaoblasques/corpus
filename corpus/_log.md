@@ -480,3 +480,27 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   - ingest: 0 ingested · 0 deferred · status=failed · error=claude exit 1
 - commit/push:
   - commit: status=committed · sha=9eac409
+
+## [2026-06-16 09:10] ingest | Launching Boring UI
+- source: raw/email/email-2026-05-28-launching-boring-ui.md
+- channel: email
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/agent-ui.md, corpus/ai-engineering/agent-harness.md]
+- new pages: []
+- notes: ingest-auto run; 2 processed, 1 deferred. Launch announcement reinforces existing Boring UI coverage (GitHub repo already ingested into agent-ui); added author "why/boring" thesis + skill-sharing-platform vision to agent-ui, and Pi harness (Mario Zechner) attribution to agent-ui + agent-harness (typed link: Boring UI uses Pi). No duplicate Boring UI entity created.
+
+## [2026-06-16 09:10] ingest | AI that knows things vs. AI that does things
+- source: raw/email/email-2026-05-30-ai-that-knows-things-vs-ai-that-does-things.md
+- channel: email
+- domain: ai-business
+- pages touched: [corpus/ai-business/monetizing-code.md]
+- new pages: []
+- notes: ingest-auto run; 2 processed, 1 deferred. Added "AI that does things / assessment as sales mechanism" section to monetizing-code (knows-vs-does distinction, assessment-as-pitch, pull-and-tune prebuilt skills, $0→$200→$1000 ladder). Promo framing flagged (AI Operator Academy course funnel). Same Return My Time sender as src3.
+
+## [2026-06-16 09:10] ingest | ingest-auto deferral
+- source: raw/_inbox/email-2026-06-02-instagram-exploit-spying-through-ssds-code-is-cheap.md
+- channel: email
+- domain: (deferred)
+- pages touched: []
+- new pages: []
+- notes: DEFER UNCERTAIN — TLDR Dev digest spanning security side-channels (Instagram AI-bot exploit, SSD FROST tracking), Unix /proc/mem trivia, AI-coding opinion, D-lang game engine, OSINT tooling, recruiting, jujutsu VCS; no coherent single-domain fit, bulk maps to no existing domain. Linked articles already separate raw/web sources.
