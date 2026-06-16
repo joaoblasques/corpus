@@ -240,3 +240,46 @@ def test_run_dry_run_never_deletes(tmp_path, monkeypatch):
     monkeypatch.setattr(yc, "delete_playlist_item", lambda svc, iid: deleted.append(iid) or True)
     rc = yc.cmd_run(yc._args(["run", "--dry-run", "--sleep", "0"]))
     assert rc == 0 and deleted == []
+
+
+def test_run_sleeps_after_fetch(tmp_path, monkeypatch):
+    # A fresh video is fetched -> throttle (sleep) once.
+    monkeypatch.setattr(yc.cy, "INBOX", tmp_path)
+    monkeypatch.setattr(yc.cy, "DEDUP_DIRS", [tmp_path])
+    monkeypatch.setattr(yc, "load_config", lambda: {
+        "playlists": [{"id": "PL1", "name": "AI", "policy": "collect-keep"}],
+        "default_policy": "ignore"})
+    monkeypatch.setattr(yc, "get_service", lambda: "SVC")
+    monkeypatch.setattr(yc, "list_playlist_items", lambda svc, pid: iter([
+        {"playlist_item_id": "I1", "video_id": "VNEW", "title": "A", "channel_name": "C",
+         "published": "2026-06-01", "privacy": "public"}]))
+    monkeypatch.setattr(yc, "extract_transcript", lambda vid: ("[00:00](x) hi", "ok"))
+    slept = []
+    monkeypatch.setattr(yc.time, "sleep", lambda s: slept.append(s))
+    rc = yc.cmd_run(yc._args(["run", "--sleep", "2"]))
+    assert rc == 0
+    assert slept == [2.0], "must throttle after a real fetch"
+
+
+def test_run_no_sleep_on_duplicate(tmp_path, monkeypatch):
+    # A previously-collected video is a duplicate -> no fetch -> no sleep (fast).
+    monkeypatch.setattr(yc.cy, "INBOX", tmp_path)
+    monkeypatch.setattr(yc.cy, "DEDUP_DIRS", [tmp_path])
+    (tmp_path / "youtube-VDUP-x.md").write_text(
+        "---\nyoutube_video_id: VDUP\ntranscript_status: ok\n---\nbody\n", encoding="utf-8")
+    monkeypatch.setattr(yc, "load_config", lambda: {
+        "playlists": [{"id": "PL1", "name": "AI", "policy": "collect-keep"}],
+        "default_policy": "ignore"})
+    monkeypatch.setattr(yc, "get_service", lambda: "SVC")
+    monkeypatch.setattr(yc, "list_playlist_items", lambda svc, pid: iter([
+        {"playlist_item_id": "I1", "video_id": "VDUP", "title": "A", "channel_name": "C",
+         "published": "2026-06-01", "privacy": "public"}]))
+
+    def _boom(vid):
+        raise AssertionError("must not fetch a duplicate")
+    monkeypatch.setattr(yc, "extract_transcript", _boom)
+    slept = []
+    monkeypatch.setattr(yc.time, "sleep", lambda s: slept.append(s))
+    rc = yc.cmd_run(yc._args(["run", "--sleep", "2"]))
+    assert rc == 0
+    assert slept == [], "duplicates must not be throttled (no fetch happened)"

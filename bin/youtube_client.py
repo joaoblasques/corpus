@@ -198,11 +198,13 @@ def cmd_run(args) -> int:
                 break
             processed += 1
             vid = item["video_id"]
+            fetched = False  # only throttle after an actual transcript fetch
             try:
                 if not cy.should_collect(vid, args.refetch_blocked):
                     t["duplicate"] += 1
                     status = cy.collected_status(vid) or "unknown"
                 else:
+                    fetched = True
                     body, status = extract_transcript(vid)
                     meta = {"video_id": vid, "title": item["title"],
                             "channel_name": item["channel_name"], "published": item["published"],
@@ -223,7 +225,9 @@ def cmd_run(args) -> int:
                         t["removed"] += 1
                 else:
                     t["kept"] += 1
-                if args.sleep:
+                # Throttle only the rate-limit-sensitive fetches, not duplicates:
+                # a steady-state daily run is mostly duplicates and should be fast.
+                if args.sleep and fetched:
                     time.sleep(args.sleep)
             except HttpError as e:
                 status_code = getattr(getattr(e, "resp", None), "status", None)
