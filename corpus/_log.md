@@ -511,3 +511,10 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - decision: no corpus page — both are container emails (TDS newsletter digest of teaser blurbs + tracking links; one-line pointer email). No extractable body; fabricating pages would breach §7 provenance.
 - disposition: stamped corpus_ingested:true / corpus_pages:[] and filed from raw/_inbox/ to raw/email/. Substantive content already captured as separate raw/web/ fetched sources (drain on their own ingest).
 - queue: cleared (raw/_inbox/_REVIEW.md now empty).
+
+## [2026-06-16 18:05] lint | full corpus audit (§8.3, 135 pages, 6 domains)
+- scope: deterministic linter + 6 parallel per-domain judgment audits
+- deterministic: 0 broken wikilinks · 0 broken citations · 0 orphans · 6 stubs (clean)
+- safe fix applied: removed duplicate `algorithms` alias from software-engineering/data-structures.md (canonical owner is algorithms.md)
+- verified-false: agent "missing from README" claims for ai-product-management + 6 data-engineering syntheses — all slugs ARE present in their hubs (linter authoritative: 0 orphans)
+- surfaced for approval (not auto-applied): topic-mixed splits (ai-engineering/anthropic.md model-lineup, software-engineering/developer-tooling.md xonsh/compiler-trick/InsForge); productivity shipping-and-scope vs working-with-stakeholders shared-tactic dedupe; implicit-concept pages (Ralph Loop, Lost-in-the-Middle, MoE; partition-pruning, metadata-layer); stale stubs needing source ingestion (langgraph 40d, microservices 40d, transformer, uv); ingestr stub→draft reclassification

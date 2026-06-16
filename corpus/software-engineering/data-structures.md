@@ -10,7 +10,6 @@ aliases:
   - data structures
   - Big O notation
   - time complexity
-  - algorithms
   - arrays
   - linked lists
   - hashmaps
@@ -20,7 +19,7 @@ tags:
   - corpus/software-engineering
   - concept
 created: 2026-05-21
-updated: 2026-05-21
+updated: 2026-06-16
 ---
 
 # Data Structures and Big O Notation
