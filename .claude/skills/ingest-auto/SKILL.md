@@ -100,10 +100,17 @@ Safety-Rule-5 "looks-like-PARA-native" cases (CLAUDE.md §8.1 Phase 0). Do not p
 without all four.
 
 ### Step 2 — Pre-flight (Phase 0)
-List all files in `raw/_inbox/` excluding `_REVIEW.md` itself. Count them.
+**If the invocation names an explicit list of files to process** (the scheduled
+orchestrator pre-filters to substantive, un-ingested sources and passes them in),
+process EXACTLY those — do NOT survey or touch any other inbox file. Otherwise:
+list all files in `raw/_inbox/` excluding `_REVIEW.md` itself. Count them.
 - If count = 0: report "inbox empty, nothing to do" and stop.
 - If count > `--max`: note the overflow; you will process the first N by modification time
   (oldest first) and leave the rest for the next run.
+
+Either way, skip files that have no substantive body (e.g. YouTube stubs with
+`transcript_status: blocked`/`disabled` and a `_No transcript available._` body)
+and any already stamped `corpus_ingested: true`.
 
 For every candidate source (up to N), check its frontmatter for `corpus_ingested: true`.
 Any hit → mark as G4 deferred immediately; do not read further.
