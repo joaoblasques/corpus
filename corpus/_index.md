@@ -1,6 +1,6 @@
 # Corpus Index
 
-> Last updated: 2026-06-16 | Total pages: 154 | Total sources: 306
+> Last updated: 2026-06-16 | Total pages: 154 | Total sources: 307
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
@@ -253,3 +253,4 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - 2026-06-16: [[data-engineering/pipeline-coding-patterns]] (new, web-backlog wave 3)
 - 2026-06-16: [[ai-engineering/transformer]] (expanded stub→draft, web-backlog)
 - 2026-06-16: [[ai-engineering/mixture-of-experts]] (new, web-backlog)
+- 2026-06-16: [[data-engineering/parquet]] (updated +1 source, web-backlog enrichment)

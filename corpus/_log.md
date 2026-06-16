@@ -577,3 +577,9 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - ai-engineering/mixture-of-experts.md: NEW concept (fills flagged MoE implicit-concept gap) — Mixtral 8x7B router/experts.
 - source stamped (→ 2 pages); README updated by worker; _index/_log by Coordinator. Total pages 153→154, sources 305→306. stubs 6→5.
 - deterministic lint after: 0 broken wikilinks · 0 broken citations · 0 orphans · 5 stubs (clean).
+
+## [2026-06-16 22:55] ingest | apache-parquet-for-data-engineers → enrich parquet.md
+- source: raw/web/apache-parquet-for-data-engineers-optimized-data-storage.md (~5000-word internals deep-dive)
+- data-engineering/parquet.md: ADDITIVE enrichment (preserved existing [^src1] study-note content; added web source [^src2]) — physical layout (row groups/column chunks/pages), encoding (dictionary), compression codecs, predicate pushdown via min/max stats, footer metadata, Dremel nested model, data types, limitations. Cross-linked query-engine-routing.
+- Coordinator enforced §7 one-quote rule (removed a redundant 2nd quote). source stamped. sources 306→307; pages unchanged.
+- deterministic lint after: 0 broken wikilinks · 0 broken citations · 0 orphans · 5 stubs (clean).
