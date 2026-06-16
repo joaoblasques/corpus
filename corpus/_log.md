@@ -518,3 +518,12 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - safe fix applied: removed duplicate `algorithms` alias from software-engineering/data-structures.md (canonical owner is algorithms.md)
 - verified-false: agent "missing from README" claims for ai-product-management + 6 data-engineering syntheses — all slugs ARE present in their hubs (linter authoritative: 0 orphans)
 - surfaced for approval (not auto-applied): topic-mixed splits (ai-engineering/anthropic.md model-lineup, software-engineering/developer-tooling.md xonsh/compiler-trick/InsForge); productivity shipping-and-scope vs working-with-stakeholders shared-tactic dedupe; implicit-concept pages (Ralph Loop, Lost-in-the-Middle, MoE; partition-pruning, metadata-layer); stale stubs needing source ingestion (langgraph 40d, microservices 40d, transformer, uv); ingestr stub→draft reclassification
+
+## [2026-06-16 19:15] lint | apply approved fixes — split developer-tooling, reclassify ingestr
+- split software-engineering/developer-tooling.md (3 unrelated topics) into:
+  - xonsh.md (entity) — Python-superset shell [^src1 = email]
+  - compiler-warning-management.md (concept) — Git's false_but_the_compiler_does_not_know_it_ trick [^src1 = web]
+  - insforge.md (entity) — agent-operated backend platform [^src1 = web, 2 source files]
+  content + citations moved verbatim; old page git-rm'd; inbound link in ai-assisted-development.md repointed to insforge; README + _index updated (Total pages 131→133)
+- reclassified data-engineering/ingestr.md stub→draft (60-line entity with real content; stubs 6→5)
+- deterministic lint after: 0 broken wikilinks · 0 broken citations · 0 orphans · 5 stubs (clean)

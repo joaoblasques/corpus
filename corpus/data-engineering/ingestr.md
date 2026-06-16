@@ -1,7 +1,7 @@
 ---
 type: entity
 domain: data-engineering
-status: stub
+status: draft
 sources:
   - path: raw/web/github-bruin-data-ingestr-ingestr-is-a-cli-tool-to-copy-data.md
     channel: web
@@ -16,7 +16,7 @@ tags:
   - corpus/data-engineering
   - entity
 created: 2026-06-15
-updated: 2026-06-15
+updated: 2026-06-16
 ---
 
 # ingestr

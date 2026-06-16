@@ -1,6 +1,6 @@
 # Corpus Index
 
-> Last updated: 2026-06-15 | Total pages: 131 | Total sources: 286
+> Last updated: 2026-06-16 | Total pages: 133 | Total sources: 286
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
@@ -101,6 +101,8 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[software-engineering/README|Software Engineering]] — hub · draft · foundational CS through deployment infrastructure; design principles, distributed systems, container orchestration
 - [[software-engineering/fastapi|FastAPI]] — entity · draft · Python API framework; Pydantic validation, Depends() injection, JWT auth, SQLAlchemy ORM
 - [[software-engineering/kubernetes|Kubernetes]] — entity · draft · container orchestration; Pod/Deployment/Service/StatefulSet; microservices runtime
+- [[software-engineering/xonsh|Xonsh]] — entity · draft · a Python-superset shell; objects/imports/stdlib alongside cd, pipes, aliases
+- [[software-engineering/insforge|InsForge]] — entity · draft · all-in-one open-source backend operated by a coding agent via MCP or CLI + Skills
 - [[software-engineering/microservices|Microservices]] — concept · draft · service granularity, hype-driven adoption, shared DB misuse, eventual consistency
 - [[software-engineering/distributed-systems-fallacies|Distributed Systems Fallacies]] — concept · draft · eight fallacies of distributed computing; sourced failure modes for network reliability, latency, security, topology
 - [[software-engineering/software-design-principles|Software Design Principles]] — concept · draft · SRP, cohesion, loose coupling, dependency injection, open/closed; 8 principles separating maintainable from fragile code
@@ -108,7 +110,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[software-engineering/cap-theorem|CAP Theorem]] — concept · draft · pick CP or AP under partitions; CAP vs ACID
 - [[software-engineering/ai-risk-architecture|AI Risk Architecture]] — concept · draft · data/output/action risk; risk is a system property
 - [[software-engineering/engineering-craft|Engineering Craft]] — concept · draft · resourcefulness, curiosity, persistence
-- [[software-engineering/developer-tooling|Developer Tooling]] — concept · draft · Xonsh, Git internals, backend platforms
+- [[software-engineering/compiler-warning-management|Compiler-Warning Management]] — concept · draft · Git's `false_but_the_compiler_does_not_know_it_` trick; suppress a specific false-positive warning without disabling it globally
 - [[software-engineering/ai-assisted-development|AI-Assisted Development]] — synthesis · draft · fundamentals under AI; write→review shift; deterministic guardrails
 - [[software-engineering/algorithms|Algorithms (Strategies, Not Tricks)]] — concept · draft · recursion, binary search (divide & conquer), dynamic programming / memoization
 

@@ -29,7 +29,7 @@ tags:
   - corpus/software-engineering
   - synthesis
 created: 2026-06-12
-updated: 2026-06-12
+updated: 2026-06-16
 ---
 
 # AI-Assisted Development
@@ -72,7 +72,7 @@ This mirrors the architectural argument that AI risk is bounded by the system, n
 - [[software-engineering/ai-risk-architecture|AI Risk Architecture]] — pairing probabilistic components with deterministic checks at the system level
 - [[software-engineering/software-design-principles|Software Design Principles]] — deep modules, simplicity, and testability that AI coding stresses
 - [[software-engineering/engineering-craft|Engineering Craft]] — the durable human skills (resourcefulness, persistence) under AI
-- [[software-engineering/developer-tooling|Developer Tooling]] — CLI/agent backend tooling
+- [[software-engineering/insforge|InsForge]] — agent-operated backend platform (DB/auth/storage/compute via MCP or CLI)
 - [[software-engineering/README|Software Engineering hub]]
 
 ---

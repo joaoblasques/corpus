@@ -1,0 +1,38 @@
+---
+type: entity
+domain: software-engineering
+status: draft
+sources:
+  - path: raw/web/github-insforge-insforge-the-all-in-one-open-source-backend.md
+    channel: web
+    ingested_at: 2026-06-12
+  - path: raw/web/github-insforge-insforge-the-all-in-one-open-source-backend-8134e1ae.md
+    channel: web
+    ingested_at: 2026-06-12
+aliases:
+  - InsForge
+  - insforge
+  - agent-operated backend
+tags:
+  - corpus/software-engineering
+  - entity
+created: 2026-06-12
+updated: 2026-06-16
+---
+
+# InsForge — backend platform for agentic coding
+
+**TL;DR**: An all-in-one, open-source backend platform built to be operated by a coding agent — database, auth, storage, compute, hosting, and an AI gateway — driven through an MCP server or a CLI + Skills so agents "operate the backend like backend engineers."
+
+"The all-in-one, open-source backend platform for agentic coding" — it gives a coding agent database, auth, storage, compute, hosting, and an AI gateway to ship full-stack apps end-to-end [^src1]. Agents drive it through one of two interfaces: an **MCP server** (exposes operations as tools any MCP-compatible agent can call) or a **CLI + Skills** (cloud only) [^src1]. Both let agents "operate the backend like backend engineers" — reading schemas, metadata, and runtime logs, and configuring primitives (deploy edge functions, run migrations, create buckets, set up auth) [^src1].
+
+Primitives: Postgres database, S3-compatible storage, OpenAI-compatible model gateway across providers, edge functions, long-running container compute (private preview), and site deployment [^src1]. Self-hostable via Docker Compose; Apache 2.0 licensed [^src1]. It is a backend analogue to the agent-operated tooling pattern in [[software-engineering/ai-assisted-development|AI-assisted development]].
+
+## See also
+
+- [[software-engineering/ai-assisted-development|AI-Assisted Development]] — agent-operated CLI/MCP tooling and review agents
+- [[software-engineering/README|Software Engineering hub]]
+
+---
+
+[^src1]: [InsForge — the all-in-one open source backend](../../raw/web/github-insforge-insforge-the-all-in-one-open-source-backend.md)
