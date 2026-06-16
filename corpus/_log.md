@@ -539,3 +539,11 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - both pages restated the same email-2026-06-11 mechanics (feedback shift, "critical missing?" closing question, post-launch contract)
 - shipping-and-scope.md owns the scoping mechanics; rewrote working-with-stakeholders.md "Manage the relationship after delivery" to delegate the shared tactics to it and keep only the relationship-specific trust framing (still cited to [^src2])
 - no provenance lost (delegated mechanics fully cited in shipping-and-scope from the same source); lint clean
+
+## [2026-06-16 21:20] ingest | How I use Hermes as a Lead Developer
+- source: raw/email/email-2026-05-27-how-i-use-hermes-as-a-lead-developer.md
+- channel: email
+- domain: ai-engineering
+- pages touched: [ai-engineering/README.md, ai-engineering/hermes.md, _index.md]
+- new pages: [ai-engineering/hermes.md]
+- notes: thin sponsored newsletter (video outline); created honest stub entity for the Hermes self-hosted coding agent (VPS/Docker, Telegram control, GitHub Actions deploy), fully cited; disambiguated from the React Native Hermes JS engine in agent-security.md. Stamped + moved source to raw/email/.

@@ -54,6 +54,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [[ai-engineering/anthropic|Anthropic]] — entity · draft · the lab: company, funding/valuation, learning resources
 - [[ai-engineering/claude-models|Claude Model Lineup]] — entity · draft · Claude family (Haiku → Sonnet → Opus → Fable/Mythos); aliases, 1M context, Opus 4.8, Fable 5/Mythos 5
 - [[ai-engineering/web-scraping|Scrapling (Web Scraping)]] — entity · stub · adaptive Python scraper; MCP extract-before-LLM token minimization
+- [[ai-engineering/hermes|Hermes]] — entity · stub · self-hosted coding agent run on a VPS, controlled over Telegram; phone-first "lead developer"
 
 ### Syntheses
 - [[ai-engineering/agentic-coding|Agentic Coding]] — synthesis · draft · **sub-hub** · coding-agent orchestration; conductor→orchestrator, AX, the verification bottleneck
