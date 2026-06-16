@@ -1,6 +1,6 @@
 # Corpus Index
 
-> Last updated: 2026-06-16 | Total pages: 143 | Total sources: 295
+> Last updated: 2026-06-16 | Total pages: 151 | Total sources: 303
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
@@ -30,6 +30,8 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[ai-engineering/ralph-loop|Ralph Loop]] — concept · draft · Huntley's Bash-loop coding technique; one task per loop, state on disk, generate-then-backpressure
 - [[ai-engineering/long-running-agents|Long-Running Agents]] — concept · draft · agents progressing over hours/days across sessions; three walls, brain/hands/session split, five patterns
 - [[ai-engineering/agent-cost-management|Agent Cost Management]] — concept · draft · cost-per-completed-task; re-sent context (62% of bills), context rot, prompt caching
+- [[ai-engineering/sandcastle|Sandcastle]] — entity · draft · TypeScript library to orchestrate sandboxed AFK coding agents (Docker/Podman/Vercel; worktrees, session capture/resume)
+- [[ai-engineering/codegraph|CodeGraph]] — entity · draft · 100%-local pre-indexed code knowledge graph over MCP (tree-sitter→SQLite); graph queries replace agent grep/read
 - [[ai-engineering/agentic-coding|Agentic Coding]] — synthesis · draft · sub-hub: coding-agent orchestration; conductor→orchestrator, AX, verification bottleneck
 - [[ai-engineering/claude-code|Claude Code]] — entity · draft · Anthropic CLI coding agent; harness, large-codebase practices, security review
 - [[ai-engineering/claude-cowork|Claude Cowork]] — entity · draft · sub-hub: Cowork desktop product; workspace folder, CLAUDE.md/MEMORY.md, Toolkit
@@ -55,6 +57,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[ai-engineering/vibe-coding|Vibe Coding]] — concept · draft · vibe coding vs spec-driven development; "ask me questions first"
 - [[ai-engineering/agi|AGI]] — concept · stub · ANI/AGI/ASI; AGI-by-2030 forecast; future-of-work framing
 - [[ai-engineering/sources/cs50-ai-with-python|Harvard CS50's AI with Python]] — source · draft · classical+modern AI curriculum
+- [[ai-engineering/sources/grab-multi-agent-data-warehouse-support|Grab Multi-Agent DW Support]] — source · draft · production 5-agent data-warehouse support system (FastAPI+LangGraph); six hardening lessons
 - [[ai-engineering/sources/internal-operating-system-claude-projects|4 Claude Projects / Internal OS]] — source · draft · knowledge+skills+ingest+improve = LLM-Wiki pattern
 
 ### data-engineering
@@ -69,6 +72,9 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[data-engineering/data-mart|Data Mart]] — concept · draft · community-specific DSS store; Demarest hybrid warehouse+marting model, schema explosion
 - [[data-engineering/postgresql-views|PostgreSQL Views]] — concept · draft · views as rewrite-rule macros (pg_rewrite); SELECT * trap, security_invoker/RLS, schema-evolution pain
 - [[data-engineering/etl-pipeline|ETL Pipeline]] — concept · draft · extract/transform/load; ETL vs ELT vs data pipeline; batch vs real-time; 2026 tools
+- [[data-engineering/redis|Redis]] — entity · draft · in-memory data store; the 8.8 array type (position-as-data-model), array-vs-list/hash/set decision rules
+- [[data-engineering/mondaydb|mondayDB]] — entity · draft · monday.com's DuckDB-powered columnar HTAP serving layer; CQRS, external WAL, Ranja routing
+- [[data-engineering/graph-databases|Graph Databases]] — concept · draft · RDF/OWL vs labeled property graph; index-free adjacency, GQL standard, selection framework
 - [[data-engineering/postgres|PostgreSQL]] — entity · draft · relational database as full-stack data platform via extensions
 - [[data-engineering/kafka|Apache Kafka]] — entity · draft · event streaming platform; topics, partitions, consumer groups, KRaFt
 - [[data-engineering/dbt|dbt]] — entity · draft · SQL-first transformation framework; sources vs models; layer materializations
@@ -131,6 +137,8 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[mlops/cloud-gpu-providers|Cloud GPU Providers]] — concept · draft · Colab/RunPod/Lambda/Vast.ai comparison; reliability-vs-cost escalation ladder
 - [[mlops/infrastructure-as-code|Infrastructure as Code]] — concept · draft · declarative infra; desired-vs-current-state reconciliation; "git for infrastructure"
 - [[mlops/uv|uv]] — entity · stub · fast Python package manager + venv tool; canonical Layer-2 tool in the dev stack
+- [[mlops/drift-detection|Drift Detection]] — concept · draft · model monitoring; univariate drift metric selection (JS, Wasserstein, Hellinger, KS, Chi-2)
+- [[mlops/python-built-in-functions|Python Built-in Functions]] — concept · draft · the builtins scope: constructors, iterable tools, I/O, introspection (complements python.md)
 - [[mlops/git|Git]] — entity · draft · content-addressed snapshot store; branch-per-task workflow; ML-aware .gitignore
 - [[mlops/terraform|Terraform]] — entity · draft · HCL IaC tool; providers/resources/data/output, .tfstate, .tfvars, remote backends
 - [[mlops/cli-tools|CLI Tools]] — concept · draft · modern terminal tools (zoxide, ripgrep, fd, bat, eza, fzf, tmux, jq, gh, pass)
@@ -230,3 +238,11 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - 2026-06-16: [[data-engineering/etl-pipeline]] (new, web-backlog ingest)
 - 2026-06-16: [[software-engineering/local-first-sync-architecture]] (new, web-backlog ingest)
 - 2026-06-16: [[software-engineering/test-case-reduction]] (new, web-backlog ingest)
+- 2026-06-16: [[ai-engineering/sandcastle]] (new, web-backlog wave 2)
+- 2026-06-16: [[ai-engineering/codegraph]] (new, web-backlog wave 2)
+- 2026-06-16: [[ai-engineering/sources/grab-multi-agent-data-warehouse-support]] (new, web-backlog wave 2)
+- 2026-06-16: [[data-engineering/redis]] (new, web-backlog wave 2)
+- 2026-06-16: [[data-engineering/mondaydb]] (new, web-backlog wave 2)
+- 2026-06-16: [[data-engineering/graph-databases]] (new, web-backlog wave 2)
+- 2026-06-16: [[mlops/drift-detection]] (new, web-backlog wave 2)
+- 2026-06-16: [[mlops/python-built-in-functions]] (new, web-backlog wave 2)

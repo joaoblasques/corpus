@@ -37,6 +37,8 @@ The engineering substrate for building ML and software systems: how the developm
 - [[mlops/terminal-and-shell|Terminal & Shell]] — concept · draft · Alacritty/iTerm2, zsh, Powerlevel10k, nerd fonts, zsh plugins & power-user hacks
 - [[mlops/linux-commands|Linux Commands]] — concept · draft · the 20% of Linux commands for 80% of work; navigation, pipes, grep, file permissions, vim
 - [[mlops/python|Python]] — concept · draft · general-purpose Python language reference: data types, type annotations, functions, classes, dunder methods
+- [[mlops/python-built-in-functions|Python Built-in Functions]] — concept · draft · the `builtins` scope catalog: math, type construction, collections, iterables (map/filter/zip/enumerate), I/O, OOP/introspection
+- [[mlops/drift-detection|Drift Detection]] — concept · draft · model-monitoring: reference vs. analysis samples; univariate drift metrics (JS, Wasserstein, Hellinger, L-Infinity, KS, Chi-2) and their tradeoffs
 
 ## Sources ingested
 - [AI Engineering from Scratch — Phase 00 / 01 Dev Environment](../../raw/notes/00-01-dev-environment-kb.md) — first-party course note, 2026-05-25

@@ -557,3 +557,11 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - sources stamped (raw/web, corpus_ingested); domain hubs updated by workers; _index/_log by Coordinator. Total pages 135→143, sources 287→295.
 - deterministic lint after: 0 broken wikilinks · 0 broken citations · 0 orphans · 6 stubs (clean). Spot-checked ralph-loop (22 citations, dense per-claim provenance).
 - deferred-updates noted by workers (NOT applied this wave): agent-harness + context-window-management could absorb long-running/cost specifics; claude-models has concrete Sonnet 4.6 pricing; postgres.md could cross-ref postgresql-views.
+
+## [2026-06-16 22:05] ingest | web-backlog batch wave 2 (8 sources, 3 parallel domain workers)
+- ai-engineering (3 new): sandcastle (entity), codegraph (entity), sources/grab-multi-agent-data-warehouse-support (source case study)
+- data-engineering (3 new): redis (entity, 8.8 array type), mondaydb (entity, DuckDB HTAP), graph-databases (concept, RDF vs LPG)
+- mlops (2 new): drift-detection (concept), python-built-in-functions (concept, complements python.md)
+- Coordinator lint-gate caught + fixed 1 broken citation (sources/ page needs ../../../raw not ../../raw — depth bug); re-lint clean.
+- sources stamped; hubs updated by workers; _index/_log by Coordinator. Total pages 143→151, sources 295→303.
+- deterministic lint after: 0 broken wikilinks · 0 broken citations · 0 orphans · 6 stubs (clean).

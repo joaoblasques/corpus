@@ -42,6 +42,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [[data-engineering/etl-pipeline|ETL Pipeline]] — concept · draft · Extract/Transform/Load; ETL vs ELT vs data pipeline; batch vs streaming; 2026 tools & trends
 - [[data-engineering/data-mart|Data Mart]] — concept · draft · community-specific DSS store; Demarest's hybrid warehouse+marting multitiered model; schema explosion
 - [[data-engineering/postgresql-views|PostgreSQL Views]] — concept · draft · views as rewrite rules (pg_rewrite macros); inlining, SELECT * trap, security_invoker, schema-evolution pain
+- [[data-engineering/graph-databases|Graph Databases (RDF vs LPG)]] — concept · draft · RDF/OWL vs labeled property graph decision framework; index-free adjacency, RDF 1.2, GQL, workload-dependent benchmarks
 
 ### Entities
 - [[data-engineering/postgres|PostgreSQL]] — entity · draft · relational database as full-stack data platform via extensions (pgvector, pgcron, tsvector, etc.)
@@ -53,6 +54,8 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [[data-engineering/databricks|Databricks]] — entity · draft · lakehouse platform; Unity Catalog, Liquid Clustering, Lakeflow, cost
 - [[data-engineering/duckdb|DuckDB]] — entity · draft · embedded OLAP engine; Quack protocol, DuckLake, MotherDuck
 - [[data-engineering/ingestr|ingestr]] — entity · stub · Bruin CLI ELT tool; copy any source → any destination, incremental loading
+- [[data-engineering/redis|Redis]] — entity · draft · in-memory store; new 8.8 array type for position-as-data-model (groups of 4096, free gaps, ARRING/ARGREP/AROP)
+- [[data-engineering/mondaydb|mondayDB]] — entity · draft · monday.com's DuckDB-powered columnar HTAP serving layer; CQRS, external WAL, sync-then-query, rendezvous-hash routing
 
 ### Syntheses
 - [[data-engineering/query-engine-routing|Query-Engine Routing]] — synthesis · draft · multi-engine routing over Iceberg; SQL-dialect translation; cost-based routing
