@@ -504,3 +504,10 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - pages touched: []
 - new pages: []
 - notes: DEFER UNCERTAIN — TLDR Dev digest spanning security side-channels (Instagram AI-bot exploit, SSD FROST tracking), Unix /proc/mem trivia, AI-coding opinion, D-lang game engine, OSINT tooling, recruiting, jujutsu VCS; no coherent single-domain fit, bulk maps to no existing domain. Linked articles already separate raw/web sources.
+
+## [2026-06-16 16:40] lint | _REVIEW.md deferral-queue resolution (2 items)
+- op: manual review pass over raw/_inbox/_REVIEW.md
+- items: email-2026-06-11-who-s-actually-in-charge-of-ai.md; email-2026-06-08-como-por-a-ia-a-auditar-os-teus-gastos-sem-dar-cabo-da-tua-p.md
+- decision: no corpus page — both are container emails (TDS newsletter digest of teaser blurbs + tracking links; one-line pointer email). No extractable body; fabricating pages would breach §7 provenance.
+- disposition: stamped corpus_ingested:true / corpus_pages:[] and filed from raw/_inbox/ to raw/email/. Substantive content already captured as separate raw/web/ fetched sources (drain on their own ingest).
+- queue: cleared (raw/_inbox/_REVIEW.md now empty).
