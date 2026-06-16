@@ -98,3 +98,31 @@ def test_usage_log_records_failures_too(tmp_path):
     rec = json.loads(log.read_text(encoding="utf-8").strip())
     assert rec["ok"] is False
     assert rec["provider"] is None
+
+
+def test_haiku_fallback_used_when_enabled_and_local_fails(tmp_path, monkeypatch):
+    monkeypatch.setattr(llm.cfg, "MECHANICAL_HAIKU_FALLBACK", True)
+    with (
+        patch.object(llm.urllib.request, "urlopen",
+                     side_effect=urllib.error.URLError("down")),
+        patch.object(llm, "_haiku", return_value='{"scores":[]}') as haiku,
+    ):
+        res = llm.complete("x", tier="mechanical", task="unit",
+                           log_path=tmp_path / "u.jsonl")
+    haiku.assert_called_once()
+    assert res["ok"] is True
+    assert res["provider"] == "anthropic"
+    assert res["model"] == llm.cfg.HAIKU_MODEL
+
+
+def test_haiku_not_used_when_disabled(tmp_path, monkeypatch):
+    monkeypatch.setattr(llm.cfg, "MECHANICAL_HAIKU_FALLBACK", False)
+    with (
+        patch.object(llm.urllib.request, "urlopen",
+                     side_effect=urllib.error.URLError("down")),
+        patch.object(llm, "_haiku", side_effect=AssertionError("called")) as haiku,
+    ):
+        res = llm.complete("x", tier="mechanical", task="unit",
+                           log_path=tmp_path / "u.jsonl")
+    haiku.assert_not_called()
+    assert res["ok"] is False

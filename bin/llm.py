@@ -41,6 +41,17 @@ def _ollama_generate(prompt: str, model: str, *, system, timeout, as_json: bool)
     return payload.get("response", "")
 
 
+def _haiku(prompt: str, *, system: str | None, max_tokens: int) -> str:
+    import anthropic  # only imported when the Haiku tier is actually used
+    client = anthropic.Anthropic()
+    kwargs = {"model": cfg.HAIKU_MODEL, "max_tokens": max_tokens,
+              "messages": [{"role": "user", "content": prompt}]}
+    if system:
+        kwargs["system"] = system
+    resp = client.messages.create(**kwargs)
+    return "".join(b.text for b in resp.content if getattr(b, "type", "") == "text")
+
+
 def complete(prompt: str, *, tier: str, task: str | None = None, schema=None,
              system: str | None = None, max_tokens: int = 1024,
              temperature: float = 0.0, log_path=None) -> dict:
@@ -63,6 +74,15 @@ def complete(prompt: str, *, tier: str, task: str | None = None, schema=None,
         except (urllib.error.URLError, TimeoutError, OSError,
                 json.JSONDecodeError, ValueError) as exc:
             result["error"] = f"ollama: {exc}"
+
+    # Opt-in middle tier for mechanical: try Claude Haiku if local failed.
+    if not result["ok"] and tier == "mechanical" and cfg.MECHANICAL_HAIKU_FALLBACK:
+        try:
+            text = _haiku(prompt, system=system, max_tokens=max_tokens)
+            result = {"text": text, "provider": "anthropic",
+                      "model": cfg.HAIKU_MODEL, "ok": True, "error": result["error"]}
+        except Exception as exc:  # noqa: BLE001 — fall through to ok=False
+            result["error"] = f"{result['error']}; haiku: {exc}"
 
     _log_usage(tier, task, result, time.monotonic() - started, log_path=log_path)
     return result
