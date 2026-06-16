@@ -208,17 +208,21 @@ If there are no deferred sources, append a note:
 so the file records a clean run.
 
 ### Step 9 — Report
-Output a run summary to stdout (captured by `bin/scheduled_run.py`):
+Your **final message MUST be exactly one flat JSON object and nothing else** (no
+prose before or after it) so `bin/scheduled_run.py` can parse the run result:
 
+```json
+{"ingested": K, "deferred": D, "pages_created": X, "pages_updated": Y}
 ```
-ingest-auto complete
-  processed: N / M candidates (--max bound: N)
-  ingested:  K sources
-  deferred:  D sources (see raw/_inbox/_REVIEW.md)
-  pages new: X | pages updated: Y
-  domains touched: [list]
-  deferred breakdown: G1=n G2=n G3=n G4=n UNCERTAIN=n
-```
+
+- `ingested` — sources fully ingested this run.
+- `deferred` — sources written to `raw/_inbox/_REVIEW.md` this run.
+- `pages_created` / `pages_updated` — corpus page counts.
+
+Do not wrap it in markdown fences, and do not add a human-readable summary in the
+final message — the JSON object is the entire final output. (When run interactively
+you may still narrate progress in earlier turns; only the LAST message must be the
+bare JSON object.)
 
 ## Notes
 
