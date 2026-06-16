@@ -215,6 +215,32 @@ def run_collectors(
         except Exception as exc:  # noqa: BLE001
             results["youtube"] = {"status": "failed", "collected": 0, "error": str(exc)}
 
+    # --- Email link re-fetch (self-heal transient fetch-failures) ---
+    # Retry high-score links that failed to fetch at collection time so their
+    # pointer email gains a companion and becomes ingestable instead of deferring
+    # forever. Mirrors the youtube --refetch-blocked self-heal; capped so it never
+    # re-triggers a host rate limit. Genuinely-blocked URLs stay marked.
+    try:
+        proc = _run(
+            [sys.executable, str(BIN / "refetch_links.py"), "--min-score", "8", "--max", "10"],
+            capture_output=True,
+            text=True,
+        )
+        if proc.returncode != 0:
+            results["links_refetch"] = {
+                "status": "failed", "refetched": 0,
+                "error": proc.stderr.strip() or f"exit {proc.returncode}",
+            }
+        else:
+            try:
+                data = json.loads(proc.stdout)
+                refetched = data.get("refetched", 0)
+            except (json.JSONDecodeError, AttributeError):
+                refetched = 0
+            results["links_refetch"] = {"status": "ok", "refetched": refetched}
+    except Exception as exc:  # noqa: BLE001
+        results["links_refetch"] = {"status": "failed", "refetched": 0, "error": str(exc)}
+
     return results
 
 
@@ -524,7 +550,7 @@ def commit_and_push(
     collectors = tallies.get("collectors", {})
     channel_parts = []
     for channel, info in collectors.items():
-        n = info.get("collected", 0)
+        n = info.get("collected", info.get("refetched", 0))
         channel_parts.append(f"{channel}={n}")
     ingest = tallies.get("ingest", {})
     channel_parts.append(f"ingested={ingest.get('ingested', 0)}")
@@ -625,8 +651,11 @@ def write_run_report(
     channel_lines = []
     for channel, info in collectors.items():
         status = info.get("status", "unknown")
-        collected = info.get("collected", 0)
-        channel_lines.append(f"  - {channel}: {collected} collected · status={status}")
+        if "refetched" in info:
+            channel_lines.append(f"  - {channel}: {info['refetched']} refetched · status={status}")
+        else:
+            collected = info.get("collected", 0)
+            channel_lines.append(f"  - {channel}: {collected} collected · status={status}")
 
     ingested = ingest.get("ingested", 0)
     deferred = ingest.get("deferred", 0)

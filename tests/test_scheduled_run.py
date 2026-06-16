@@ -301,6 +301,36 @@ class TestRunCollectors:
         assert "--refetch-blocked" in cmd, f"daily run should recover blocked stubs: {cmd}"
         assert "--refetch-max" in cmd and "15" in cmd, f"recovery must be capped: {cmd}"
 
+    def test_link_refetch_invoked_and_recorded(self, tmp_path):
+        """run_collectors runs the capped email-link refetch and records its count."""
+        no_token = tmp_path / "no_token.json"
+        rf_cmd = {}
+
+        def fake_run(cmd, **kwargs):
+            if any("refetch_links.py" in str(x) for x in cmd):
+                rf_cmd["cmd"] = cmd
+                return _make_proc(returncode=0, stdout=json.dumps({"refetched": 3, "failed": 1}))
+            return _make_proc(returncode=0, stdout=json.dumps({"written": 0, "notes": 0, "urls": 0}))
+
+        result = scheduled_run.run_collectors(youtube_token_path=no_token, _subprocess_run=fake_run)
+        cmd = rf_cmd["cmd"]
+        assert "--min-score" in cmd and "--max" in cmd, f"refetch must be score-floored and capped: {cmd}"
+        assert result["links_refetch"]["status"] == "ok"
+        assert result["links_refetch"]["refetched"] == 3
+
+    def test_link_refetch_failure_isolated(self, tmp_path):
+        """A failing refetch leg is recorded without aborting the rest of collection."""
+        no_token = tmp_path / "no_token.json"
+
+        def fake_run(cmd, **kwargs):
+            if any("refetch_links.py" in str(x) for x in cmd):
+                return _make_proc(returncode=1, stderr="boom")
+            return _make_proc(returncode=0, stdout=json.dumps({"written": 1, "notes": 0, "urls": 0}))
+
+        result = scheduled_run.run_collectors(youtube_token_path=no_token, _subprocess_run=fake_run)
+        assert result["links_refetch"]["status"] == "failed"
+        assert result["gmail"]["status"] == "ok"
+
 
 # ---------------------------------------------------------------------------
 # run_ingest tests
