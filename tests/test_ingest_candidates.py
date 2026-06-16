@@ -54,3 +54,25 @@ def test_orders_oldest_first(tmp_path):
 
 def test_empty_inbox(tmp_path):
     assert ic.select_candidates(tmp_path, limit=10) == []
+
+
+def test_excludes_deferred_sources(tmp_path):
+    _write(tmp_path, "email-keep.md", frontmatter="channel: email")
+    _write(tmp_path, "email-deferred.md", frontmatter="channel: email")
+    (tmp_path / "_REVIEW.md").write_text(
+        "# Review queue\n- DEFER UNCERTAIN: email-deferred.md — newsletter blurb, no body\n",
+        encoding="utf-8")
+    got = {p.name for p in ic.select_candidates(tmp_path, limit=10)}
+    assert got == {"email-keep.md"}, "already-deferred sources must not be re-selected"
+
+
+def test_never_selects_the_review_file_itself(tmp_path):
+    (tmp_path / "_REVIEW.md").write_text("# Review queue\n", encoding="utf-8")
+    _write(tmp_path, "email-a.md", frontmatter="channel: email")
+    got = {p.name for p in ic.select_candidates(tmp_path, limit=10)}
+    assert got == {"email-a.md"}, "_REVIEW.md must never be an ingest candidate"
+
+
+def test_no_review_file_excludes_nothing(tmp_path):
+    _write(tmp_path, "email-a.md", frontmatter="channel: email")
+    assert [p.name for p in ic.select_candidates(tmp_path, limit=10)] == ["email-a.md"]

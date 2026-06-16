@@ -17,6 +17,21 @@ INBOX = ROOT / "raw" / "_inbox"
 
 _STAMP_RE = re.compile(r"^corpus_ingested:\s*true\s*$", re.M | re.I)
 _STATUS_RE = re.compile(r"^transcript_status:\s*(\S+)", re.M)
+# `/ingest-auto` deferral line: "- DEFER <trigger>: <filename> — <reason>"
+_DEFER_RE = re.compile(r"^-\s*DEFER\s+\S+:\s*(\S+)", re.M)
+
+REVIEW_FILE = "_REVIEW.md"
+
+
+def deferred_filenames(review_path) -> set[str]:
+    """Filenames already deferred to the review queue (skip re-litigating them)."""
+    p = Path(review_path)
+    if not p.exists():
+        return set()
+    try:
+        return set(_DEFER_RE.findall(p.read_text(encoding="utf-8")))
+    except OSError:
+        return set()
 
 
 def is_ingestable(path: Path) -> bool:
@@ -44,7 +59,11 @@ def select_candidates(inbox_dir=None, limit: int = 20) -> list[Path]:
     inbox = Path(inbox_dir) if inbox_dir is not None else INBOX
     if not inbox.exists():
         return []
-    files = [p for p in inbox.glob("*.md") if is_ingestable(p)]
+    deferred = deferred_filenames(inbox / REVIEW_FILE)
+    files = [
+        p for p in inbox.glob("*.md")
+        if p.name != REVIEW_FILE and p.name not in deferred and is_ingestable(p)
+    ]
     files.sort(key=lambda p: p.stat().st_mtime)
     return files[:limit]
 
