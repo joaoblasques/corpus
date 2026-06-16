@@ -440,6 +440,12 @@ Pages are **dense reference**, not blog posts.
 
 ---
 
+## 14.5 Engineering notes
+
+`docs/solutions/` holds engineering learnings for this repo's own tooling (collectors, `bin/` scripts, the scheduled automation) — documented past problems and decisions organized by category with YAML frontmatter (`module`, `tags`, `problem_type`). Relevant when debugging or extending the Python tooling, separate from the corpus data discipline above.
+
+---
+
 ## 15. Version
 
 - v0.1 — initial schema
