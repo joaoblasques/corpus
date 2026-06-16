@@ -943,6 +943,24 @@ class TestRunIntegration:
             call_kwargs.args and call_kwargs.args[1] == 45
         ), f"timeout_s=45 not forwarded: {call_kwargs}"
 
+    def test_default_max_is_cost_bounded(self, tmp_path):
+        """Unattended runs default to a cost-bounded --max (caps per-run ingest burn)."""
+        lock = tmp_path / ".test.lock"
+        log = tmp_path / "_log.md"
+
+        ingest_mock = MagicMock(return_value=self._mock_ingest())
+
+        with (
+            patch.object(scheduled_run, "run_collectors", return_value=self._mock_collectors()),
+            patch.object(scheduled_run, "run_ingest", ingest_mock),
+            patch.object(scheduled_run, "LOG_PATH", log),
+        ):
+            scheduled_run.main(["--lock-path", str(lock), "run"])  # no --max
+
+        call = ingest_mock.call_args
+        forwarded = call.kwargs.get("max_n", call.args[0] if call.args else None)
+        assert forwarded == 6, f"default --max should be the cost-bounded 6, got {forwarded}"
+
     def test_run_output_json_contains_summary(self, tmp_path, capsys):
         """The run subcommand prints a JSON summary to stdout."""
         lock = tmp_path / ".test.lock"

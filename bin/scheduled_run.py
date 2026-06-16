@@ -667,8 +667,11 @@ def _build_parser() -> argparse.ArgumentParser:
     run_p.add_argument(
         "--max",
         type=int,
-        default=20,
-        help="Maximum inbox items to ingest per run (default: 20).",
+        default=6,
+        help="Maximum inbox items to ingest per run (default: 6). Cost-bounded: "
+             "the headless Opus ingest is the dominant per-run cost, so the "
+             "unattended default caps any single run's burn. A larger backlog "
+             "(e.g. recovered transcripts) drains over successive daily runs.",
     )
     run_p.add_argument(
         "--timeout",
