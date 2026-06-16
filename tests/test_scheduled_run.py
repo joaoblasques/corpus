@@ -290,8 +290,17 @@ class TestRunCollectors:
 # ---------------------------------------------------------------------------
 
 class TestRunIngest:
+    @pytest.fixture(autouse=True)
+    def _candidates(self):
+        # Pin a non-empty candidate set so run_ingest reaches the subprocess
+        # deterministically (real inbox is irrelevant to these tests).
+        with patch.object(scheduled_run.ingest_candidates, "select_candidates",
+                          lambda limit=20: [Path("raw/_inbox/cand.md")]):
+            yield
+
     def test_builds_bounded_invocation(self, tmp_path):
-        """run_ingest passes --max N in the command and timeout=<timeout_s> to subprocess."""
+        """run_ingest passes max_n to candidate selection, lists candidates in the
+        prompt, and passes timeout=<timeout_s> to subprocess."""
         captured = {}
 
         def fake_run(cmd, **kwargs):
@@ -301,21 +310,38 @@ class TestRunIngest:
             envelope = json.dumps({"result": result_json, "is_error": False})
             return _make_proc(returncode=0, stdout=envelope)
 
-        with patch("rank_links.load_env"):
-            result = scheduled_run.run_ingest(
-                max_n=7,
-                timeout_s=120,
-                _subprocess_run=fake_run,
-            )
+        sel = {}
 
-        cmd = captured["cmd"]
-        cmd_str = " ".join(cmd)
-        assert "7" in cmd_str, f"expected max bound 7 in cmd: {cmd_str}"
-        assert captured["kwargs"].get("timeout") == 120, (
-            f"expected timeout=120, got {captured['kwargs']}"
+        def fake_select(limit):
+            sel["limit"] = limit
+            return [Path("raw/_inbox/cand.md")]
+
+        result = scheduled_run.run_ingest(
+            max_n=7,
+            timeout_s=120,
+            _subprocess_run=fake_run,
+            _select_candidates=fake_select,
         )
+
+        assert sel["limit"] == 7, "max_n must bound candidate selection"
+        assert "cand.md" in " ".join(captured["cmd"]), "candidate must be listed in the prompt"
+        assert captured["kwargs"].get("timeout") == 120
         assert result["status"] == "ok"
         assert result["ingested"] == 3
+
+    def test_no_candidates_skips_claude(self):
+        """With no substantive candidates, run_ingest returns without calling claude."""
+        called = []
+        res = scheduled_run.run_ingest(
+            max_n=20,
+            timeout_s=120,
+            _subprocess_run=lambda *a, **k: called.append(1),
+            _select_candidates=lambda limit: [],
+        )
+        assert called == [], "claude must not be invoked when there are no candidates"
+        assert res["status"] == "ok"
+        assert res["ingested"] == 0
+        assert res.get("note") == "no_candidates"
 
     def test_timeout_records_failure_queues_nothing(self, tmp_path):
         """A TimeoutExpired records failure status; nothing extra is queued."""
@@ -446,6 +472,12 @@ class TestRunIngest:
 class TestRunIngestUsesSubscription:
     """The headless ingest must NOT receive ANTHROPIC_API_KEY — it should use the
     Claude Code subscription (OAuth), not metered API billing."""
+
+    @pytest.fixture(autouse=True)
+    def _candidates(self):
+        with patch.object(scheduled_run.ingest_candidates, "select_candidates",
+                          lambda limit=20: [Path("raw/_inbox/cand.md")]):
+            yield
 
     def test_api_key_stripped_from_subprocess_env(self, tmp_path, monkeypatch):
         monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-must-not-leak")

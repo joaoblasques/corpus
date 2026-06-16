@@ -24,6 +24,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+import ingest_candidates  # bin/ is on sys.path for callers
+
 ROOT = Path(__file__).resolve().parent.parent
 BIN = ROOT / "bin"
 
@@ -314,24 +316,38 @@ def run_ingest(
     *,
     claude_bin: Path | None = None,
     _subprocess_run=None,
+    _select_candidates=None,
 ) -> dict:
-    """Invoke the headless claude /ingest-auto skill with a bounded item count.
+    """Invoke the headless claude /ingest-auto skill on a bounded candidate set.
+
+    A deterministic pre-filter (ingest_candidates.select_candidates) drops
+    content-less stubs (e.g. blocked/disabled YouTube transcripts) and
+    already-ingested sources, so the --max budget targets substantive sources.
+    When there are no candidates, the claude call is skipped entirely.
 
     Args:
         max_n: Maximum inbox items to ingest in this run.
         timeout_s: Wall-clock timeout in seconds passed to subprocess.run.
         claude_bin: Path to the claude binary (defaults to CLAUDE_BIN).
         _subprocess_run: Injectable seam for subprocess.run (used in tests).
+        _select_candidates: Injectable seam for candidate selection (tests).
 
     Returns:
         dict with keys: status ("ok"|"failed"|"timeout"), ingested, deferred, error.
     """
     _run = _subprocess_run if _subprocess_run is not None else subprocess.run
+    select = _select_candidates if _select_candidates is not None else ingest_candidates.select_candidates
     binary = claude_bin if claude_bin is not None else CLAUDE_BIN
 
+    candidates = [p.name for p in select(limit=max_n)]
+    if not candidates:
+        return {"status": "ok", "ingested": 0, "deferred": 0, "note": "no_candidates"}
+
+    listing = "\n".join(f"- {n}" for n in candidates)
     prompt = (
-        f"Use the /ingest-auto skill. "
-        f"Ingest items from raw/_inbox/ — process at most {max_n} items this run. "
+        f"Use the /ingest-auto skill. Process EXACTLY these {len(candidates)} files "
+        f"in raw/_inbox/ (already filtered to substantive, un-ingested sources) — "
+        f"do NOT survey or process any other inbox files:\n{listing}\n"
         f"Follow all steps in the skill. Your FINAL message must be EXACTLY one flat "
         f'JSON object and nothing else: {{"ingested": <int>, "deferred": <int>, '
         f'"pages_created": <int>, "pages_updated": <int>}}'
