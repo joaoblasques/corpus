@@ -640,6 +640,56 @@ class TestWriteRunReport:
         text = log.read_text(encoding="utf-8")
         assert "timeout" in text
 
+    def test_lint_line_clean(self, tmp_path):
+        """A clean lint result renders a lint line without an integrity flag."""
+        log = tmp_path / "_log.md"
+        tallies = self._make_tallies()
+        tallies["lint"] = {"broken_wikilinks": 0, "broken_citations": 0,
+                           "orphans": 2, "stubs": 5}
+        scheduled_run.write_run_report(tallies, at="2026-06-15T10:00", log_path=log)
+
+        text = log.read_text(encoding="utf-8")
+        assert "- lint:" in text
+        assert "0 broken wikilinks" in text
+        assert "2 orphans" in text
+        assert "5 stubs" in text
+        assert "INTEGRITY ISSUES" not in text
+
+    def test_lint_line_flags_integrity_issues(self, tmp_path):
+        """Broken wikilinks/citations trigger the INTEGRITY ISSUES flag."""
+        log = tmp_path / "_log.md"
+        tallies = self._make_tallies()
+        tallies["lint"] = {"broken_wikilinks": 1, "broken_citations": 2,
+                           "orphans": 0, "stubs": 0}
+        scheduled_run.write_run_report(tallies, at="2026-06-15T10:00", log_path=log)
+
+        text = log.read_text(encoding="utf-8")
+        assert "- lint:" in text
+        assert "1 broken wikilinks" in text
+        assert "2 broken citations" in text
+        assert "INTEGRITY ISSUES" in text
+        assert "bin/corpus_lint.py" in text
+
+    def test_lint_error_contained_in_block(self, tmp_path):
+        """A lint failure is recorded as an error line, not raised."""
+        log = tmp_path / "_log.md"
+        tallies = self._make_tallies()
+        tallies["lint"] = {"error": "boom"}
+        scheduled_run.write_run_report(tallies, at="2026-06-15T10:00", log_path=log)
+
+        text = log.read_text(encoding="utf-8")
+        assert "- lint:" in text
+        assert "error=boom" in text
+        assert "INTEGRITY ISSUES" not in text
+
+    def test_no_lint_line_when_absent(self, tmp_path):
+        """No lint key (e.g. dry run) → no lint line at all."""
+        log = tmp_path / "_log.md"
+        tallies = self._make_tallies()
+        scheduled_run.write_run_report(tallies, at="2026-06-15T10:00", log_path=log)
+
+        assert "- lint:" not in log.read_text(encoding="utf-8")
+
 
 # ---------------------------------------------------------------------------
 # run() / main() integration tests (all external calls mocked)
@@ -722,8 +772,13 @@ class TestRunIntegration:
     @pytest.fixture(autouse=True)
     def _on_main(self):
         # Real runs are gated on the `main` branch; pin it so these tests are
-        # deterministic regardless of the checked-out branch.
-        with patch.object(scheduled_run, "current_branch", lambda *a, **k: "main"):
+        # deterministic regardless of the checked-out branch. Also stub the
+        # post-ingest lint so these tests don't scan the real corpus.
+        empty_lint = {"broken_wikilinks": [], "broken_citations": [], "orphans": [], "stubs": []}
+        with (
+            patch.object(scheduled_run, "current_branch", lambda *a, **k: "main"),
+            patch.object(scheduled_run.corpus_lint, "lint", lambda *a, **k: empty_lint),
+        ):
             yield
 
     def _mock_collectors(self):
@@ -757,6 +812,49 @@ class TestRunIntegration:
         assert not lock.exists(), "lock should be released after run"
         log_text = log.read_text(encoding="utf-8")
         assert "scheduled run" in log_text
+
+    def test_lint_result_lands_in_report(self, tmp_path):
+        """A full run lints the corpus and flags integrity issues in the report."""
+        lock = tmp_path / ".test.lock"
+        log = tmp_path / "_log.md"
+
+        broken = {"broken_wikilinks": [("corpus/x/p.md", "x/missing")],
+                  "broken_citations": [], "orphans": [], "stubs": []}
+
+        with (
+            patch.object(scheduled_run, "run_collectors", MagicMock(return_value=self._mock_collectors())),
+            patch.object(scheduled_run, "run_ingest", MagicMock(return_value=self._mock_ingest())),
+            patch.object(scheduled_run.corpus_lint, "lint", lambda *a, **k: broken),
+            patch.object(scheduled_run, "LOG_PATH", log),
+        ):
+            rc = scheduled_run.main(["--lock-path", str(lock), "run"])
+
+        assert rc == 0
+        log_text = log.read_text(encoding="utf-8")
+        assert "- lint:" in log_text
+        assert "1 broken wikilinks" in log_text
+        assert "INTEGRITY ISSUES" in log_text
+
+    def test_lint_failure_does_not_abort_run(self, tmp_path):
+        """If the lint step raises, the run still completes and records the error."""
+        lock = tmp_path / ".test.lock"
+        log = tmp_path / "_log.md"
+
+        def boom_lint(*a, **k):
+            raise RuntimeError("lint blew up")
+
+        with (
+            patch.object(scheduled_run, "run_collectors", MagicMock(return_value=self._mock_collectors())),
+            patch.object(scheduled_run, "run_ingest", MagicMock(return_value=self._mock_ingest())),
+            patch.object(scheduled_run.corpus_lint, "lint", boom_lint),
+            patch.object(scheduled_run, "LOG_PATH", log),
+        ):
+            rc = scheduled_run.main(["--lock-path", str(lock), "run"])
+
+        assert rc == 0, "lint failure must not abort the run"
+        assert not lock.exists(), "lock should still be released"
+        log_text = log.read_text(encoding="utf-8")
+        assert "error=lint blew up" in log_text
 
     def test_lock_released_even_when_step_raises(self, tmp_path):
         """Lock is released in finally even if a step raises an exception."""
@@ -1110,7 +1208,11 @@ class TestCommitAndPushRunIntegration:
 
     @pytest.fixture(autouse=True)
     def _on_main(self):
-        with patch.object(scheduled_run, "current_branch", lambda *a, **k: "main"):
+        empty_lint = {"broken_wikilinks": [], "broken_citations": [], "orphans": [], "stubs": []}
+        with (
+            patch.object(scheduled_run, "current_branch", lambda *a, **k: "main"),
+            patch.object(scheduled_run.corpus_lint, "lint", lambda *a, **k: empty_lint),
+        ):
             yield
 
     def _mock_collectors(self):
