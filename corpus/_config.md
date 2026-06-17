@@ -63,8 +63,16 @@ Rules:
 ## Obsidian vault collection (collect-obsidian)
 
 - `vault_root`: `/Users/jonasblasques/Dev/second-brain`
-- **Include:** `03_Resources/{Articles, Books, Study Notes, Snippets, Prompt Templates}`, `00_Inbox/Clippings/`.
-- **Exclude:** `03_Resources/llm-wiki-system` (corpus mirror), `01_Projects`, `02_Areas`, `04_Archive`, rest of `00_Inbox`, `*_processed.md`, `README.md`, binaries.
+- **Include (collect → reap):** `Clippings/` (top-level), `00_Inbox/Clippings/`,
+  `03_Resources/{Books, Snippets, Prompt Templates}`, `06_Metadata/Reference/`.
+- **PARA-native (ingested in place, never reaped):** `03_Resources/Articles/`,
+  `03_Resources/Study Notes/` — these keep their in-vault citations.
+- **Exclude:** `03_Resources/llm-wiki-system` (corpus mirror), `01_Projects`, `02_Areas`,
+  `04_Archive`, `06_Metadata/{Templates, SETUP_COMPLETE.md, README.md}`, rest of `00_Inbox`,
+  `*_processed.md`, `README.md`, binaries.
+- Inline external links in note bodies are fetched (channel `web`, provenance
+  `via_vault_note`, deduped, asset/auth-walled links skipped, capped at 10/note), in addition
+  to dedicated URL-list files (`articles to process.md`, `TO SCRAPE.md`).
 - The `/collect-obsidian` skill copies these into `raw/_inbox/` (channel `notes`; URL-list links → `web`), and — after `corpus_ingested` — removes the vault original (git-recoverable, not auto-committed). The authoritative include/exclude policy lives in `bin/collect_obsidian.py`.
 
 ---
