@@ -643,3 +643,12 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - pages updated (5): claude-cowork (getting-started guidance), claude-code (auto mode + agent view + dynamic workflows), agent-harness (self-generating harnesses), agentic-workflow (orchestration patterns), agent-ui (multi-session/agent view)
 - lint: clean — 0 broken wikilinks · 0 broken citations · 0 orphans
 - cycle: first real run of the new collect→ingest→reap flow on the extended collector (top-level Clippings now in scope). After this commit the 5 vault notes are reaped (git rm, staged not committed in the vault).
+
+## [2026-06-17 17:35] ingest | Obsidian Clippings drain batch 2 — 12 notes (collect→ingest→reap)
+- source: raw/notes/notes-clippings-{every-claude-code-command-118, deploying-claude-across-the-enterprise-with-claude-cowork(+-1 dup), collaborate-with-claude-across-excel-powerpoint-word-and-out, claude-for-the-legal-industry, claude-security-is-now-in-public-beta, claude-managed-agents-get-to-production-10x-faster, claude-carousel-generator-prompt(SKIPPED, pages:[]), built-in-memory-for-claude-managed-agents, building-agents-that-reach-production-systems-with-mcp, building-ai-agents-for-the-enterprise, best-practices-for-using-claude-opus-4-7-with-claude-code}.md
+- channel: notes (collect-obsidian, top-level Clippings, --max 12; inline-link web sources queued in raw/_inbox)
+- domain: ai-engineering
+- new pages (1): claude-managed-agents
+- updated (6): claude-code (118-command taxonomy + Opus 4.7 usage), claude-models (Opus 4.7), agent-security (Claude Security beta), mcp (production patterns), claude-cowork (enterprise/M365/legal), agent-memory (filesystem memory)
+- skipped: claude-carousel-generator-prompt (pure prompt template, no §7-citable claims; stamped corpus_pages:[] and reaped)
+- lint: clean — 0 broken wikilinks · 0 broken citations · 0 orphans

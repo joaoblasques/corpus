@@ -54,6 +54,21 @@ sources:
   - path: raw/notes/notes-clippings-best-practices-for-getting-started-with-claude-cowork.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/notes/notes-clippings-deploying-claude-across-the-enterprise-with-claude-cowork.md
+    channel: notes
+    ingested_at: 2026-06-17
+  - path: raw/notes/notes-clippings-deploying-claude-across-the-enterprise-with-claude-cowork-1.md
+    channel: notes
+    ingested_at: 2026-06-17
+  - path: raw/notes/notes-clippings-collaborate-with-claude-across-excel-powerpoint-word-and-out.md
+    channel: notes
+    ingested_at: 2026-06-17
+  - path: raw/notes/notes-clippings-claude-for-the-legal-industry.md
+    channel: notes
+    ingested_at: 2026-06-17
+  - path: raw/notes/notes-clippings-building-ai-agents-for-the-enterprise.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - Claude Cowork
   - Cowork
@@ -148,6 +163,49 @@ A concrete end-to-end skill build (≈30–45 min) shows the skill + connector p
 
 Two patterns reinforce the rest of this page: the guardrail **"Never send. Always draft."** mirrors the Gmail-connector discipline (the connector reads and drafts but you hit send) [^src16][^src10], and **calibration-by-correction** — "whatever it got wrong, tell it once; by the second call it is calibrated to how you actually write" — is the same accumulating-memory mechanism that makes a workspace improve over time [^src16][^src11]. (An operator note in the same source records that **Claude Opus 4.8 became the default across Max, Team, and the API**, enabling scheduled multi-step agent workflows that run sub-agents hands-off [^src16].)
 
+## Enterprise deployment (Anthropic's deployment guide)
+
+Anthropic released a guide for deploying Cowork across a business function, with patterns drawn from Anthropic's own teams and customers including Thomson Reuters, Zapier, Jamf, L'Oréal, Lyft, and Rakuten [^src19][^src21].
+
+**Five-level adoption maturity model** [^src19]:
+1. Chat Q&A — individual, ad-hoc question-answering.
+2. File-aware tasks — Cowork reads local files and connected apps to produce outputs.
+3. Pilot use cases — structured pilots with a champion team; single-function deployments.
+4. Department-wide workflows — recurring tasks, scheduled automation, shared workspace conventions.
+5. Department-wide plugins — custom plugins encoding institutional knowledge, connecting proprietary systems.
+
+**Six-month deployment framework** [^src19][^src21]:
+- Months 1–2: identify champion teams and first use cases; run structured pilot evaluation.
+- Months 3–4: expand to a second function; build shared CLAUDE.md / plugin templates.
+- Months 5–6: org-wide rollout; plugin marketplace; embed into official processes.
+
+**The "agentic thinking divide"** [^src21]: the enterprises pulling ahead are embedding agentic AI into how employees work, encoding institutional knowledge into systems that compound over time. The contrast: AI deployments that produce incremental gains that plateau vs. those that compound — the difference is whether you're building toward autonomous workflows or staying in a chat-prompt loop.
+
+**Claude Cowork as the non-developer deployment vehicle:** the guide explicitly frames Cowork as the path for taking capabilities that previously required a custom build (long-running agents, multi-agent pipelines, MCP connectors) and making them available to "every team in your organization, without requiring a custom build for each one" [^src21].
+
+## Claude for Microsoft 365
+
+Claude integrates natively with Excel, PowerPoint, Word, and Outlook as add-ins deployed from Microsoft AppSource [^src20]:
+
+- **Excel, PowerPoint, Word**: generally available to all paid plans (Mac and Windows). One AppSource listing covers all three.
+- **Outlook**: public beta on all paid plans. Triages inbox (sorts by: needs response, can draft, noise), writes replies as drafts with recipients/subject/body filled in, checks attendee availability for calendar invites. Opens attachments in Word or Excel with full prior context carried over.
+- **Cross-app context**: Claude moves between apps without re-explanation — triage an email in Outlook, open the attachment in Word, build the analysis in Excel, turn it into a deck in PowerPoint [^src20].
+
+**Enterprise controls** [^src20]:
+- **OpenTelemetry export** — configure a custom OTel collector to stream all prompts, tool calls, and document references to your security team's own infrastructure.
+- **Analytics API** — breaks out activity per user, per app, per day.
+- LLM gateway routing: traffic can route through an existing gateway to Claude models on Amazon Bedrock, Google Cloud Vertex AI, or Microsoft Foundry.
+- Microsoft 365 Copilot customers can also access Claude models directly in Excel and PowerPoint.
+
+## Legal vertical: Claude for the legal industry
+
+Legal professionals became the most engaged Claude Cowork users of any knowledge-work function after Anthropic's first legal plugin release [^src22]. The legal stack uses:
+- **20+ MCP connectors** to legal systems: contract lifecycle (Docusign, Ironclad, Definely), deal rooms (Box, Datasite), document management (iManage, NetDocuments), e-discovery (Consilio, Everlaw, Relativity), legal research (Thomson Reuters CoCounsel, Harvey, Midpage, Trellis), IP (Solve Intelligence) [^src22].
+- **12 practice-area plugins** — each runs a setup interview that learns the team's playbook, escalation chain, and house style. Plugins include: Commercial Legal, Corporate Legal, Employment Legal, Privacy Legal, Product Legal, Regulatory Legal, AI Governance Legal, IP Legal, Litigation Legal, Law Student, Legal Clinic, Legal Builder Hub [^src22].
+- **Claude Works in Microsoft apps**: context flows from Word redlines to Outlook cover notes to Excel checklists to PowerPoint board summaries without re-explanation [^src22].
+
+A subset of practice-area plugins (Commercial Legal, Corporate Legal, Litigation Legal, Product Legal) are also available as cookbooks for deployment as [[ai-engineering/claude-managed-agents|Managed Agents]] via the Claude Platform [^src22].
+
 ## Other guides
 
 `claude101.com` collects free Cowork-adjacent guides (Cowork setup, Cowork + Projects, slides, skills, sounding like you, avoiding usage limits) [^src8].
@@ -180,6 +238,8 @@ Austin Lau (Anthropic growth team) offers a first-party framework for when to re
 
 - [[ai-engineering/claude-code|Claude Code]] — the developer counterpart; capabilities land here first
 - [[ai-engineering/anthropic|Anthropic]] — provider and model lineup
+- [[ai-engineering/claude-managed-agents|Claude Managed Agents]] — some legal practice-area plugins deploy as Managed Agents
+- [[ai-engineering/mcp|MCP]] — the protocol underlying Cowork's 20+ legal connectors and all external app integrations
 - [[ai-engineering/context-window-management|Context Window Management]], [[ai-engineering/agent-skills|Agent Skills]]
 
 [^src1]: [Cowork (Ruben Hassid)](../../raw/web/cowork.md)
@@ -200,3 +260,7 @@ Austin Lau (Anthropic growth team) offers a first-party framework for when to re
 [^src16]: [Post-call admin, done in one click (Return My Time)](../../raw/email/email-2026-06-09-post-call-admin-done-in-one-click.md)
 [^src17]: [Day 7: You built the foundation. Here's the shortcut to the rest.](../../raw/email/email-2026-05-06-day-7-you-built-the-foundation-here-s-the-shortcut-to-the-re.md)
 [^src18]: [Best practices for getting started with Claude Cowork](../../raw/notes/notes-clippings-best-practices-for-getting-started-with-claude-cowork.md) — Austin Lau, Anthropic growth team
+[^src19]: [Deploying Claude across the enterprise with Claude Cowork](../../raw/notes/notes-clippings-deploying-claude-across-the-enterprise-with-claude-cowork.md) — Anthropic (guide announcement)
+[^src20]: [Collaborate with Claude across Excel, PowerPoint, Word and Outlook](../../raw/notes/notes-clippings-collaborate-with-claude-across-excel-powerpoint-word-and-out.md) — Anthropic
+[^src21]: [Building AI agents for the enterprise](../../raw/notes/notes-clippings-building-ai-agents-for-the-enterprise.md) — Anthropic (enterprise guide; same guide also at [^src19b]: [Deploying Claude across the enterprise with Claude Cowork (duplicate)](../../raw/notes/notes-clippings-deploying-claude-across-the-enterprise-with-claude-cowork-1.md))
+[^src22]: [Claude for the legal industry](../../raw/notes/notes-clippings-claude-for-the-legal-industry.md) — Anthropic

@@ -18,6 +18,9 @@ sources:
   - path: raw/email/email-2026-05-14-what-agents-need-memory-context-and-more.md
     channel: email
     ingested_at: 2026-06-15
+  - path: raw/notes/notes-clippings-built-in-memory-for-claude-managed-agents.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - agent memory
   - memory
@@ -34,7 +37,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-21
-updated: 2026-06-15
+updated: 2026-06-17
 ---
 
 # Agent Memory
@@ -101,6 +104,17 @@ A recurring 2026 theme is making memory **portable** rather than locked to one t
 
 This is the memory-layer counterpart to the harness-level persistence hooks in [[ai-engineering/agent-harness|Agent Harness]] (ECC's memory-persistence hooks) and the knowledge-folder pattern in the [[ai-engineering/sources/internal-operating-system-claude-projects|internal-operating-system]] approach — and it mirrors the `CLAUDE.md`/`MEMORY.md` files of [[ai-engineering/claude-cowork|Claude Cowork]].
 
+## Production-scale filesystem memory (Claude Managed Agents)
+
+Anthropic's [[ai-engineering/claude-managed-agents|Claude Managed Agents]] extends the filesystem-as-memory pattern to production at enterprise scale [^src7]. Key properties that go beyond the basic CLAUDE.md/MEMORY.md pattern:
+
+- Memory mounts directly onto a filesystem so Claude uses the same bash and code tools it already knows — no new abstraction layer.
+- **Scoped stores** — org-wide stores can be read-only; per-user stores allow writes; multiple agents can work against the same store concurrently without overwriting each other.
+- **Full audit trail** — every write is attributed to an agent + session; rollback to any earlier version is supported.
+- **OAuth credential vaults** — a specialized memory type for storing user OAuth tokens once and injecting them into MCP connections at session creation [^src7].
+
+Real-world results: Rakuten's long-running agents using Managed Agents memory cut first-pass errors by 97%; Wisedocs' document-verification pipeline saw 30% speed improvement from cross-session pattern memory [^src7].
+
 ## See also
 
 - [[ai-engineering/context-window-management|Context Window Management]] — strategies for what to keep, compress, or drop from short-term memory
@@ -109,6 +123,7 @@ This is the memory-layer counterpart to the harness-level persistence hooks in [
 - [[ai-engineering/agentic-search|Agentic Search]] — AI-native search uses the same hybrid-retrieval-over-subgraph pattern
 - [[ai-engineering/vector-database|Vector Database]] — the flat-vector storage layer that temporal graphs improve upon
 - [[ai-engineering/ai-agent|AI Agent]] — memory is one of the four core agent components
+- [[ai-engineering/claude-managed-agents|Claude Managed Agents]] — production implementation of filesystem memory with audit, scoping, and vault patterns
 
 ---
 
@@ -118,3 +133,4 @@ This is the memory-layer counterpart to the harness-level persistence hooks in [
 [^src4]: [RushDB 2.0: Memory Infrastructure for the Agentic Era](../../raw/web/rushdb-2-0-memory-infrastructure-for-the-agentic-era-rushdb.md)
 [^src5]: [But Context First: A Field Guide to AI-Native Search](../../raw/email/email-2026-05-28-but-context-first-a-field-guide-to-ai-native-search.md)
 [^src6]: [What Agents Need: Memory, Context, and More](../../raw/email/email-2026-05-14-what-agents-need-memory-context-and-more.md) — Towards Data Science newsletter
+[^src7]: [Built-in memory for Claude Managed Agents](../../raw/notes/notes-clippings-built-in-memory-for-claude-managed-agents.md) — Anthropic

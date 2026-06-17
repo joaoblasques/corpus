@@ -33,6 +33,12 @@ sources:
   - path: raw/notes/notes-clippings-a-harness-for-every-task-dynamic-workflows-in-claude-code.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/notes/notes-clippings-every-claude-code-command-118-the-complete-guide.md
+    channel: notes
+    ingested_at: 2026-06-17
+  - path: raw/notes/notes-clippings-best-practices-for-using-claude-opus-4-7-with-claude-code.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - Claude Code
   - claude-code
@@ -185,11 +191,64 @@ Boris Cherny, who leads Claude Code, runs the tool at its full-agentic limit and
 
 > **Internal stat:** at Anthropic, Claude reviews 100% of pull requests (with a human review layer after), and per-engineer PR productivity rose ~200% since Claude Code launched [^src7].
 
+## Command taxonomy (118 commands)
+
+Claude Code has 118 commands across four categories [^src11]: **slash commands** (`/init`, `/plan`, `/compact`, etc.) typed inside a running session; **CLI commands** (`claude update`, `claude mcp add`) run in the terminal outside a session; **flags** (`--worktree`, `--permission-mode auto`) added at launch; and **shortcuts** (`Shift+Tab`, `Ctrl+B`) pressed mid-session.
+
+**High-leverage commands most practitioners under-use** [^src11]:
+
+| Command / Flag | What it does | When to use |
+|---|---|---|
+| `/goal` | Sets a finish condition; Claude works until it's met | Any non-trivial session instead of polling |
+| `/workflows` | Watch, pause, and steer a multi-agent workflow | Fan-out / adversarial / parallelizable tasks |
+| `/effort` | Single dial for thinking depth (low → ultracode) | Tune tokens vs quality per task |
+| `/advisor` | A second model advises on in-progress work | Architecture decisions, ambiguous specs |
+| `--max-budget-usd` | Hard session spend cap | Prevent runaway costs on long agentic runs |
+| `--worktree` | Isolated worktree per session | Running two or three Claudes in parallel on the same repo |
+| `--permission-mode auto` | Auto Mode at launch | Long runs where you've pre-authorized the safe commands |
+| `/code-review` | Review diff for bugs; three agents in parallel | Before every push |
+| `/btw` | Ask a side question without interrupting the task | Quick lookups mid-session |
+| `/schedule` | Recurring run on Anthropic's cloud | Cron-style automations that shouldn't run on your laptop |
+| `claude -c` | Resume the most recent session | Daily restart — drops you back with full context |
+| `!command` | Execute a shell command; output lands in Claude's context | Running tests, builds, scripts inline |
+
+**The three context rules** that matter most [^src11]: (1) plan first — `/plan` before anything non-trivial saves "twenty minutes of wasted output for thirty seconds of alignment"; (2) guard your context — check with `/context`, compact at 50% usage, reset with `/clear` between unrelated tasks; (3) match the model to the task — Sonnet for 90% of work, Opus when it is genuinely hard, Haiku for bulk.
+
+**Three workflow recipes** [^src11]:
+- **Daily setup**: `claude -c` → `/context` → `/plan` → work → `/compact` at 50% → `/clear` between tasks.
+- **Safety net**: `git commit` before Claude starts → `/permissions` to pre-allow safe commands once → `/diff` before accepting large batches → `/rewind` when off-track → `/code-review` before push.
+- **Autopilot**: `/agents` one specialist per job → `claude --worktree` for parallel Claudes → `/schedule` for recurring cloud runs → `/goal` to define done → `ultracode` for big multi-agent jobs.
+
+New in 2026 (marked ● in the source): `/branch`, `/fork`, `/cd`, `/goal`, `/advisor`, `/tui`, `/reload-skills`, `/reload-plugins`, `--tmux`, `--permission-mode auto`, `--fallback-model`, `--max-budget-usd`, `--bare`, `--safe-mode`, `/usage-credits`, `/insights`, `/release-notes`, `/recap`, `/powerup`, `/workflows`, `/run`, `/verify`, `/run-skill-generator`, `/ultraplan`, `/ultrareview`, `/autofix-pr`, `/deep-research`, `/schedule`, `/stop`, `Ctrl+B`, `/install-slack-app`, `/desktop`, `/mobile`, `/teleport`, `/remote-env` [^src11].
+
+## Using Opus 4.7 effectively in Claude Code
+
+Opus 4.7 reasons more after each user turn — improving coherence and coding quality over long sessions but increasing token usage [^src12]. Two behavior modes:
+
+- **Interactive (multi-turn)**: reasons more between turns. Treat it "like a capable engineer you're delegating to, not a pair programmer you're guiding line by line" [^src12].
+- **Asynchronous (single-turn)**: more predictable token usage. Well-specified first-turn descriptions (intent, constraints, acceptance criteria, file locations) produce the strongest outputs [^src12].
+
+**Effort levels for Opus 4.7** [^src12]:
+- Default is now **`xhigh`** — a new level between `high` and `max` that adds reasoning depth without the runaway token usage `max` can produce on long agentic runs.
+- `high` — balances intelligence and cost; use for concurrent sessions.
+- `max` — for the hardest evals and non-cost-sensitive work; prone to overthinking.
+- `medium`/`low` — cost/latency sensitive work; still outperforms Opus 4.6 at the same level.
+
+**Adaptive thinking.** Fixed thinking budgets are not supported in Opus 4.7. Instead, it uses adaptive thinking — decides per-step whether to use more thinking. To steer: prompt "Think carefully and step-by-step" for more thinking; "Prioritize responding quickly" for less [^src12].
+
+**Behavior changes from Opus 4.6 to 4.7** [^src12]:
+- Response length calibrated to task complexity (shorter for lookups, longer for analysis).
+- Calls tools less often, reasons more — improve tool-use by explicitly describing when and why each tool should be used.
+- Spawns fewer subagents by default — spell out fan-out expectations: "Spawn multiple subagents in the same turn when fanning out across items."
+
+**Auto mode** recommendation: for long-running tasks with full context provided up front, auto mode cuts cycle time; toggle with `Shift+Tab` [^src12].
+
 ## See also
 
 - [[ai-engineering/sources/boris-cherny-100-percent-claude-code|Boris Cherny — 100% Claude Code]] — the full interview source page
 - [[ai-engineering/claude-cowork|Claude Cowork]] — the non-developer counterpart to Claude Code
 - [[ai-engineering/anthropic|Anthropic]] — model lineup and provider
+- [[ai-engineering/claude-managed-agents|Claude Managed Agents]] — cloud-hosted agent runtime; integrates via built-in `claude-api` skill
 - [[ai-engineering/agent-skills|Agent Skills]], [[ai-engineering/mcp|MCP]], [[ai-engineering/optimizing-claude|Optimizing a Claude Setup]]
 
 [^src1]: [How Claude Code works in large codebases](../../raw/web/how-claude-code-works-in-large-codebases-best-practices-and.md)
@@ -202,3 +261,5 @@ Boris Cherny, who leads Claude Code, runs the tool at its full-agentic limit and
 [^src8]: [Auto mode for Claude Code](../../raw/notes/notes-clippings-auto-mode-for-claude-code.md) — Anthropic announcement
 [^src9]: [Agent view in Claude Code](../../raw/notes/notes-clippings-agent-view-in-claude-code.md) — Anthropic announcement
 [^src10]: [A harness for every task: dynamic workflows in Claude Code](../../raw/notes/notes-clippings-a-harness-for-every-task-dynamic-workflows-in-claude-code.md) — Thariq Shihipar & Sid Bidasaria, Anthropic
+[^src11]: [Every Claude Code Command (118) — The Complete Guide](../../raw/notes/notes-clippings-every-claude-code-command-118-the-complete-guide.md) — Charlie Hills / charliehills.substack.com
+[^src12]: [Best practices for using Claude Opus 4.7 with Claude Code](../../raw/notes/notes-clippings-best-practices-for-using-claude-opus-4-7-with-claude-code.md) — Anthropic

@@ -21,6 +21,15 @@ sources:
   - path: raw/email/email-2026-06-11-devs-love-and-hate-fable-5.md
     channel: email
     ingested_at: 2026-06-12
+  - path: raw/notes/notes-clippings-best-practices-for-using-claude-opus-4-7-with-claude-code.md
+    channel: notes
+    ingested_at: 2026-06-17
+  - path: raw/notes/notes-clippings-claude-security-is-now-in-public-beta.md
+    channel: notes
+    ingested_at: 2026-06-17
+  - path: raw/notes/notes-clippings-claude-for-the-legal-industry.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - Claude model lineup
   - Claude models
@@ -34,7 +43,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-06-12
-updated: 2026-06-16
+updated: 2026-06-17
 ---
 
 # Claude Model Lineup
@@ -69,6 +78,22 @@ Specs: **1M-token context window, 128K max output tokens, knowledge cutoff Janua
 
 **Launch controversy.** Anthropic reportedly apologized for "secretly rerouting some requests to an older model", admitting it made the "wrong trade-off" — devs both loved and disliked the launch [^src8]. Around the same launch, Anthropic shipped a Swift package integrating Claude into Apple's Foundation Models framework as a server-side model (same API as the on-device model; requests go to the Claude API, never Apple's servers) [^src8].
 
+## Opus 4.7
+
+The model Anthropic positioned as the enterprise and legal-reasoning flagship before Opus 4.8 landed. Scored **90.9% on Harvey's BigLaw Bench** (highest of any Claude model at the time) — cited by Harvey as the model powering their legal intelligence platform [^src10]. Described as offering "stronger consistency across long documents, better handling of nuanced instructions, and improved reliability in high-stakes workflows" [^src10].
+
+Claude Security (the vulnerability-scanning product) uses Opus 4.7 by default for all model-backed security reviews [^src10b].
+
+**Key behavior differences from Opus 4.6** — documented for teams migrating harnesses [^src10c]:
+- Updated tokenizer and a proclivity to think more at higher effort levels (especially on later turns in longer sessions) mean token usage can increase.
+- Default effort level in Claude Code is **`xhigh`** (a new level between `high` and `max`).
+- Adaptive thinking replaces fixed thinking budgets: the model decides per-step when to think more.
+- Response length calibrated to task complexity; less verbose than 4.6 by default.
+- Calls tools less often, reasons more between calls.
+- Spawns fewer subagents by default — must be explicitly prompted for fan-out patterns.
+
+See [[ai-engineering/claude-code|Claude Code]] (Opus 4.7 section) for the full usage guide.
+
 ## See also
 
 - [[ai-engineering/anthropic|Anthropic]] — the lab behind these models (company, funding, learning resources)
@@ -80,3 +105,6 @@ Specs: **1M-token context window, 128K max output tokens, knowledge cutoff Janua
 [^src7]: [Claude Fable, SpaceX AI1, Apple container (TLDR)](../../raw/email/email-2026-06-10-claude-fable-spacex-ai1-apple-container.md)
 [^src8]: [Devs love and hate Fable 5 (The Code)](../../raw/email/email-2026-06-11-devs-love-and-hate-fable-5.md)
 [^src9]: [Model configuration — Claude Code docs](../../raw/web/model-configuration-claude-code-docs.md)
+[^src10]: [Claude for the legal industry](../../raw/notes/notes-clippings-claude-for-the-legal-industry.md) — Anthropic (Harvey quote on Opus 4.7 BigLaw Bench score)
+[^src10b]: [Claude Security is now in public beta](../../raw/notes/notes-clippings-claude-security-is-now-in-public-beta.md) — Anthropic
+[^src10c]: [Best practices for using Claude Opus 4.7 with Claude Code](../../raw/notes/notes-clippings-best-practices-for-using-claude-opus-4-7-with-claude-code.md) — Anthropic

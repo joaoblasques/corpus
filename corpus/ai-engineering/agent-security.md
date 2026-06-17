@@ -21,6 +21,9 @@ sources:
   - path: raw/email/email-2026-06-08-how-openai-engineers-prompt.md
     channel: email
     ingested_at: 2026-06-15
+  - path: raw/notes/notes-clippings-claude-security-is-now-in-public-beta.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - prompt injection
   - LLM security
@@ -33,7 +36,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-12
-updated: 2026-06-15
+updated: 2026-06-17
 ---
 
 # Agent Security
@@ -94,6 +97,26 @@ The planted bug: the API itself was hardened, but the app shipped a `google-serv
 
 **Defensive takeaway for builders**: a hardened API is not enough if the data layer (Firebase/Supabase) is directly reachable — the least-privilege and scoped-access principles above apply to the *backend-as-a-service* layer, not just your own endpoints. Assume an attacker can run a capable agent against your shipped client and any config it bundles.
 
+## Claude Security (enterprise vulnerability scanning product)
+
+Claude Security (previously Claude Code Security) is Anthropic's enterprise-grade vulnerability-scanning product, available in public beta to Claude Enterprise customers as of mid-2026 [^src7]. It uses **Opus 4.7** to scan codebases the way a security researcher would — tracing data flows across files and modules, understanding component interactions — rather than searching for known patterns [^src7].
+
+**Workflow** [^src7]:
+1. Select a repository (or scope to a directory or branch) from the Claude.ai sidebar, then start a scan.
+2. Claude produces findings with: confidence rating, severity, likely impact, reproduction steps, and instructions for a targeted patch.
+3. Open the finding in Claude Code on the web to apply the fix in context.
+
+**What enterprise users learned in preview** [^src7]:
+- "Detection quality is paramount" — high-confidence findings are what accelerates security work; Claude Security's multi-stage validation pipeline reduces false positives before a finding reaches an analyst.
+- "Time from scan to fix is the metric that matters" — several teams went from scan to applied patch in a single sitting instead of days of back-and-forth.
+- Teams want ongoing coverage, not one-off audits → the product added **scheduled scans**.
+
+**Additional features added at GA** [^src7]: target a scan at a specific directory; dismiss findings with documented reasons (so future reviewers trust prior triage); export findings as CSV or Markdown; send results to Slack, Jira, or other tools via webhooks.
+
+**The broader supply-chain.** Technology partners embedding Opus 4.7 into their existing platforms: CrowdStrike, Microsoft Security, Palo Alto Networks, SentinelOne, TrendAI, and Wiz [^src7]. Services partners deploying Claude-integrated security solutions: Accenture, BCG, Deloitte, Infosys, PwC.
+
+> "AI is compressing the timeline between vulnerability discovery and exploitation. We believe the right response is to make sure defenders have access to frontier capabilities." [^src7]
+
 ## Agent identity and registration (auth.md)
 
 As agents act on behalf of users, identity becomes a security surface. **auth.md** is an open protocol (authored by WorkOS, not tied to its infrastructure) for agent registration without a sign-up form [^src3]. An app hosts a Markdown file at `https://yourapp.com/auth.md` declaring supported flows, scopes, and how to register [^src3]. Two flows [^src3]:
@@ -109,6 +132,7 @@ It issues a scoped, short-lived, revocable access token over standard OAuth, com
 - [[ai-engineering/agent-harness|Agent Harness]] — where HITL and confirmation gates live
 - [[ai-engineering/claude-code|Claude Code]] — real-time security plugin reviewing agent edits
 - [[ai-engineering/mcp|MCP]] — tool-exposure surface; scoped permissions and OAuth apply
+- [[ai-engineering/claude-models|Claude Model Lineup]] — Opus 4.7 powers Claude Security's model-backed scans
 
 ---
 
@@ -118,3 +142,4 @@ It issues a scoped, short-lived, revocable access token over standard OAuth, com
 [^src4]: [I built a vulnerable app and spent $1,500 seeing if LLMs could hack it](../../raw/web/i-built-a-vulnerable-app-and-spent-1-500-seeing-if-llms-coul.md) — Kasra
 [^src5]: [Catch security issues as Claude writes code (Claude Code docs)](../../raw/web/catch-security-issues-as-claude-writes-code-claude-code-docs.md) — Anthropic, via [How OpenAI engineers prompt](../../raw/email/email-2026-06-08-how-openai-engineers-prompt.md)
 [^src6]: [How OpenAI engineers prompt](../../raw/email/email-2026-06-08-how-openai-engineers-prompt.md) — The Code (on ChatGPT Lockdown Mode)
+[^src7]: [Claude Security is now in public beta](../../raw/notes/notes-clippings-claude-security-is-now-in-public-beta.md) — Anthropic
