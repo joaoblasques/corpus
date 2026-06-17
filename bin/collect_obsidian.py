@@ -18,8 +18,12 @@ DEDUP_DIRS = [ROOT / "raw" / "_inbox", ROOT / "raw" / "notes", ROOT / "raw" / "w
 
 VAULT_ROOT = Path("/Users/jonasblasques/Dev/second-brain")
 INCLUDE_DIRS = [
-    "03_Resources/Articles", "03_Resources/Books", "03_Resources/Study Notes",
-    "03_Resources/Snippets", "03_Resources/Prompt Templates", "00_Inbox/Clippings",
+    "Clippings",                       # top-level web clippings
+    "00_Inbox/Clippings",
+    "03_Resources/Books",
+    "03_Resources/Snippets",
+    "03_Resources/Prompt Templates",
+    "06_Metadata/Reference",           # reference prompt notes only
 ]
 EXCLUDE_DIRS = ["03_Resources/llm-wiki-system"]
 EXCLUDE_FILE_RE = re.compile(r"(?i)(_processed\.md$|(^|/)README\.md$)")

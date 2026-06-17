@@ -6,17 +6,26 @@ import collect_obsidian as co  # noqa: E402
 
 
 def test_is_included_resources():
-    assert co.is_included("03_Resources/Articles/Clean Code.md") is True
-    assert co.is_included("03_Resources/Study Notes/CAP.md") is True
+    # PARA-native folders are now EXCLUDED from collect->delete (kept in place)
+    assert co.is_included("03_Resources/Articles/Clean Code.md") is False
+    assert co.is_included("03_Resources/Study Notes/CAP.md") is False
+    # Newly collected folders
+    assert co.is_included("Clippings/Introducing routines in Claude Code.md") is True
+    assert co.is_included("06_Metadata/Reference/note_taking_protocol.md") is True
+    # Still-collected folders
     assert co.is_included("00_Inbox/Clippings/scrape/merkle-trees-scrape.md") is True
+    assert co.is_included("03_Resources/Books/cheatsheet.md") is True
+    assert co.is_included("03_Resources/Snippets/Enrich Notes Script.md") is True
 
 
 def test_is_included_excludes():
-    assert co.is_included("03_Resources/llm-wiki-system/CLAUDE.md") is False  # corpus mirror
-    assert co.is_included("01_Projects/foo.md") is False                      # not a knowledge dir
-    assert co.is_included("00_Inbox/Clippings/articles_processed.md") is False # ledger
-    assert co.is_included("03_Resources/Articles/README.md") is False         # readme
-    assert co.is_included("03_Resources/Books/cheatsheet.pdf") is False        # binary
+    assert co.is_included("03_Resources/llm-wiki-system/CLAUDE.md") is False
+    assert co.is_included("01_Projects/foo.md") is False
+    assert co.is_included("00_Inbox/Clippings/articles_processed.md") is False
+    assert co.is_included("06_Metadata/Templates/Daily-Note-Template.md") is False
+    assert co.is_included("06_Metadata/SETUP_COMPLETE.md") is False
+    assert co.is_included("06_Metadata/Reference/README.md") is False
+    assert co.is_included("03_Resources/Books/cheatsheet.pdf") is False
 
 
 def test_classify():
