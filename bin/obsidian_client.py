@@ -96,10 +96,26 @@ def cmd_collect(args) -> int:
     return 0
 
 
-def git_rm(vault_root: Path, rel_path: str) -> None:
-    """Stage a deletion in the vault (recoverable; NOT committed)."""
-    subprocess.run(["git", "-C", str(vault_root), "rm", "--quiet", rel_path],
-                   capture_output=True, check=False)
+def remove_vault_note(vault_root: Path, rel_path: str) -> bool:
+    """Delete a vault note, returning True iff the file was actually removed.
+
+    Git-tracked notes are removed via `git rm` (staged, NOT committed — recoverable
+    from vault history). Notes not tracked in the vault's git are deleted from the
+    filesystem (recoverable instead via the raw/notes/ copy, the corpus page, and the
+    clipping's source URL). Callers must gate on `_under_vault` before calling.
+    """
+    target = vault_root / rel_path
+    if not target.exists():
+        return False
+    tracked = subprocess.run(
+        ["git", "-C", str(vault_root), "ls-files", "--error-unmatch", rel_path],
+        capture_output=True, check=False).returncode == 0
+    if tracked:
+        subprocess.run(["git", "-C", str(vault_root), "rm", "--quiet", rel_path],
+                       capture_output=True, check=False)
+    else:
+        target.unlink()
+    return not target.exists()
 
 
 def _strike_url(vault_root: Path, list_rel: str, url: str) -> None:
@@ -134,17 +150,19 @@ def cmd_reap(args) -> int:
     for rel in r["vault_notes"]:
         if not _under_vault(vault, rel):
             continue
-        if (vault / rel).exists() and not args.dry_run:
-            git_rm(vault, rel)
+        if not (vault / rel).exists():
+            continue
+        if args.dry_run:
             t["notes_removed"] += 1
-        elif args.dry_run and (vault / rel).exists():
+        elif remove_vault_note(vault, rel):   # count only actual deletions
             t["notes_removed"] += 1
     for list_rel, url in r["url_strikes"]:
         if not args.dry_run:
             _strike_url(vault, list_rel, url)
         t["urls_struck"] += 1
     print(json.dumps({**t, "dry_run": bool(args.dry_run),
-                      "note": "vault deletions are staged, not committed — review and commit in the vault"},
+                      "note": "tracked notes staged via git rm (review & commit in vault); "
+                              "untracked notes deleted from disk (recoverable via raw/notes/ + corpus)"},
                      indent=2))
     return 0
 

@@ -1,8 +1,43 @@
+import subprocess
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "bin"))
 import obsidian_client as oc  # noqa: E402
+
+
+def _git_init(path):
+    subprocess.run(["git", "-C", str(path), "init", "-q"], check=True)
+    subprocess.run(["git", "-C", str(path), "config", "user.email", "t@t"], check=True)
+    subprocess.run(["git", "-C", str(path), "config", "user.name", "t"], check=True)
+
+
+def test_remove_vault_note_filesystem_deletes_untracked(tmp_path):
+    vault = tmp_path / "vault"; vault.mkdir(); _git_init(vault)
+    (vault / "Clippings").mkdir()
+    note = vault / "Clippings" / "N.md"; note.write_text("x", encoding="utf-8")
+    # never `git add`ed -> untracked; git rm cannot stage it
+    removed = oc.remove_vault_note(vault, "Clippings/N.md")
+    assert removed is True
+    assert not note.exists()                       # filesystem fallback deleted it
+
+
+def test_remove_vault_note_git_rm_tracked(tmp_path):
+    vault = tmp_path / "vault"; vault.mkdir(); _git_init(vault)
+    note = vault / "A.md"; note.write_text("x", encoding="utf-8")
+    subprocess.run(["git", "-C", str(vault), "add", "A.md"], check=True)
+    subprocess.run(["git", "-C", str(vault), "commit", "-qm", "x"], check=True)
+    removed = oc.remove_vault_note(vault, "A.md")
+    assert removed is True
+    assert not note.exists()                       # removed from worktree
+    out = subprocess.run(["git", "-C", str(vault), "status", "--porcelain"],
+                         capture_output=True, text=True).stdout
+    assert "D  A.md" in out                         # staged as a deletion (recoverable)
+
+
+def test_remove_vault_note_missing_returns_false(tmp_path):
+    vault = tmp_path / "vault"; vault.mkdir(); _git_init(vault)
+    assert oc.remove_vault_note(vault, "nope.md") is False
 
 
 def test_collect_copies_note_and_fetches_url(tmp_path, monkeypatch):
@@ -67,7 +102,7 @@ def test_reap_removes_only_ingested(tmp_path, monkeypatch):
     (raw / "web-x.md").write_text("---\ncorpus_ingested: true\nvia_vault_list: 00_Inbox/Clippings/articles to process.md\nsource_url: https://a.com/x\n---\n", encoding="utf-8")
     monkeypatch.setattr(oc.co, "DEDUP_DIRS", [raw])
     calls = []
-    monkeypatch.setattr(oc, "git_rm", lambda vault_root, rel: calls.append(rel))
+    monkeypatch.setattr(oc, "remove_vault_note", lambda vault_root, rel: (calls.append(rel), True)[1])
     rc = oc.cmd_reap(oc._args(["reap", "--vault", str(vault)]))
     assert rc == 0
     assert calls == ["03_Resources/Articles/A.md"]                       # note staged for deletion
@@ -105,7 +140,7 @@ def test_reap_rejects_path_traversal(tmp_path, monkeypatch):
         "---\ncorpus_ingested: true\nvault_origin: ../etc/x.md\n---\n", encoding="utf-8")
     monkeypatch.setattr(oc.co, "DEDUP_DIRS", [raw])
     calls = []
-    monkeypatch.setattr(oc, "git_rm", lambda vault_root, rel: calls.append(rel))
+    monkeypatch.setattr(oc, "remove_vault_note", lambda vault_root, rel: (calls.append(rel), True)[1])
     oc.cmd_reap(oc._args(["reap", "--vault", str(vault)]))
     assert calls == []   # traversal outside vault must never reach git_rm
 
@@ -132,7 +167,7 @@ def test_reap_dry_run_changes_nothing(tmp_path, monkeypatch):
     (raw / "notes-a.md").write_text("---\ncorpus_ingested: true\nvault_origin: 03_Resources/Articles/A.md\n---\n", encoding="utf-8")
     monkeypatch.setattr(oc.co, "DEDUP_DIRS", [raw])
     calls = []
-    monkeypatch.setattr(oc, "git_rm", lambda vault_root, rel: calls.append(rel))
+    monkeypatch.setattr(oc, "remove_vault_note", lambda vault_root, rel: (calls.append(rel), True)[1])
     oc.cmd_reap(oc._args(["reap", "--vault", str(vault), "--dry-run"]))
     assert calls == []
 
