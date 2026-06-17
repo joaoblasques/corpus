@@ -686,3 +686,10 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - ch9 (ethics/IP/policy) + ch11 (future) captured in source page only; flagged cross-domain (ai-business/ethics)
 - coordinator fix: source page (sources/ subfolder) citations corrected ../../ → ../../../raw/notes
 - lint: clean — 0 broken wikilinks · 0 broken citations · 0 orphans
+
+## [2026-06-17 19:50] ingest | Obsidian Clippings drain wave 3 — 33 Prompt Templates (triage)
+- source: raw/notes/notes-*.md (03_Resources/Prompt Templates), channel notes
+- enriched (1): prompt-engineering.md — "Reusable prompt patterns" section (metaprompting, prompt optimizer, two-pass editing, verify-before-ship, task-specific summarization framings), 7 templates cited
+- skipped (26): personal canned prompts (article creator, tutors, quiz, summary-family duplicates, vault-maintenance, n8n, etc.) — stamped corpus_pages:[] and reaped
+- lint: clean — 0 broken wikilinks · 0 broken citations · 0 orphans
+- NOTE: Obsidian vault note backlog fully drained (0 unstamped notes remain in raw/_inbox). 242 inline-link web sources remain queued for the daily ingest.

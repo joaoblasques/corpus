@@ -27,6 +27,27 @@ sources:
   - path: raw/notes/notes-02-the-art-of-the-prompt-communicating-effectively-with-ai.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/notes/notes-metaprompt.md
+    channel: notes
+    ingested_at: 2026-06-17
+  - path: raw/notes/notes-cowork-prompt-optimizer.md
+    channel: notes
+    ingested_at: 2026-06-17
+  - path: raw/notes/notes-2-pass-editor-structure-tone.md
+    channel: notes
+    ingested_at: 2026-06-17
+  - path: raw/notes/notes-fact-spotter-verify-before-you-ship.md
+    channel: notes
+    ingested_at: 2026-06-17
+  - path: raw/notes/notes-the-decision-maker-summary.md
+    channel: notes
+    ingested_at: 2026-06-17
+  - path: raw/notes/notes-the-expert-extraction-summary.md
+    channel: notes
+    ingested_at: 2026-06-17
+  - path: raw/notes/notes-the-red-flag-summary.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - prompting
   - prompt design
@@ -135,6 +156,25 @@ The prompt-antipattern discipline connects directly to the [[ai-engineering/vibe
 - **Future-proof prompts**: document how prompts are used and which models they succeed on, so they can be re-tested as new models ship; smaller models may need different techniques than larger ones [^src6].
 - A 10x scale-up of an LLM can deliver ~100x the capabilities [^src6].
 
+## Reusable prompt patterns (first-party templates)
+
+These patterns emerged from a set of personal prompt templates [^src9][^src10][^src11][^src12]. They are generalizable techniques, not domain-specific canned prompts.
+
+**Metaprompting (prompt-that-writes-prompts).** Instead of writing a prompt from scratch, describe the goal to a meta-prompt whose role is to produce a well-structured output prompt. The pattern decomposes: gather task goal + clarifications → assign specialized "expert" personas for complex sub-tasks → minimize hallucination by instructing explicit disclaimers when uncertain → consolidate into a canonical prompt structure (Role, Context, Instructions, Constraints, Output Format) [^src9]. Useful when you don't yet know what the right prompt looks like.
+
+**Prompt optimizer (rewrite-before-execute).** Rather than fixing a vague prompt at the output end, pass it through a rewriting step first. The optimizer applies a priority-ordered set of principles — goal over process, concrete success criteria (verifiable, not "high quality"), explicit boundaries and failure-handling — and restructures the raw request accordingly before any execution [^src10]. The technique is particularly valuable for agentic systems where a bad prompt can cause irreversible side-effects.
+
+**Two-pass editing (structure first, tone second).** When editing any long-form text, separate the two concerns into sequential passes: Pass 1 reorganizes logic and cuts redundancy (no tone changes); Pass 2 applies tone and polish. "Rules: Preserve meaning. No new facts. Keep length within ±10%." [^src11] The pattern generalizes to any rewriting task where structural concerns and stylistic concerns contaminate each other if done simultaneously.
+
+**Verify-before-ship (fact-spotter).** A dedicated verification pass that flags "all factual/quantitative claims needing verification" as bullets, suggests how to verify each, then rewrites the text with citation placeholders like `[VERIFY-1]`, `[VERIFY-2]`. Rule: "Don't invent sources. If a claim is weak, propose safer wording." [^src12] The pattern operationalizes §7's provenance discipline as a reusable prompt rather than a checklist.
+
+**Task-specific summarization framings.** The same source document yields very different value depending on the *framing* of the summary request. Three distinct framings [^src13][^src14][^src15]:
+- **Decision-maker framing** — "summarize to help me decide [X]": extracts only decision-relevant information, surfaces pros/cons, flags critical considerations.
+- **Expert-extraction framing** — "summarize like an expert in [field]": skips basics, focuses on "nuanced, high-level takeaways that separate beginners from experts."
+- **Red-flag / adversarial framing** — "summarize with a skeptical eye": surfaces assumptions the author makes, missing evidence, counterarguments not addressed, and reasoning flaws.
+
+Each framing produces a categorically different output from identical input. Choosing the right framing is itself a prompt-engineering decision.
+
 ## See also
 
 - [[ai-engineering/context-engineering|Context Engineering]] — sibling discipline; managing window contents over a session
@@ -154,3 +194,10 @@ The prompt-antipattern discipline connects directly to the [[ai-engineering/vibe
 [^src6]: [Write better prompts for Cursor, Claude, Copilot (Frontend Masters)](../../raw/web/write-better-prompts-for-cursor-claude-copilot.md)
 [^src7]: [Being good at AI is (stupidly) simple](../../raw/email/email-2026-06-07-being-good-at-ai-is-stupidly-simple.md) — Ruben Hassid
 [^src8]: [Ch2 — The Art of the Prompt](../../raw/notes/notes-02-the-art-of-the-prompt-communicating-effectively-with-ai.md)
+[^src9]: [Metaprompt template](../../raw/notes/notes-metaprompt.md)
+[^src10]: [Cowork Prompt Optimizer template](../../raw/notes/notes-cowork-prompt-optimizer.md)
+[^src11]: [2-Pass Editor template](../../raw/notes/notes-2-pass-editor-structure-tone.md)
+[^src12]: [Fact-spotter template](../../raw/notes/notes-fact-spotter-verify-before-you-ship.md)
+[^src13]: [The Decision-Maker Summary template](../../raw/notes/notes-the-decision-maker-summary.md)
+[^src14]: [The Expert Extraction Summary template](../../raw/notes/notes-the-expert-extraction-summary.md)
+[^src15]: [The Red Flag Summary template](../../raw/notes/notes-the-red-flag-summary.md)
