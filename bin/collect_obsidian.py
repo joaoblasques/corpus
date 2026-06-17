@@ -28,6 +28,9 @@ INCLUDE_DIRS = [
 EXCLUDE_DIRS = ["03_Resources/llm-wiki-system"]
 EXCLUDE_FILE_RE = re.compile(r"(?i)(_processed\.md$|(^|/)README\.md$)")
 URL_LIST_NAMES = {"articles to process.md", "TO SCRAPE.md"}
+MAX_LINKS_PER_NOTE = 10
+AUTH_WALLED_RE = re.compile(r"(?i)://(?:[^/]*\.)?(?:linkedin\.com|x\.com|twitter\.com)(?:/|$)")
+ASSET_EXT_RE = re.compile(r"(?i)\.(?:png|jpe?g|gif|svg|webp|pdf|mp4|mov|zip)$")
 
 sys.path.insert(0, str(BIN))
 from collect_email import slugify, yaml_scalar, URL_RE  # noqa: E402
@@ -56,6 +59,27 @@ def parse_url_list(text: str) -> list:
             seen.add(u)
             out.append(u)
     return out
+
+
+def extract_inline_links(body: str, source_url: str = "") -> dict:
+    """External http(s) links in a note body: deduped, minus the source URL, asset
+    links, and auth-walled domains; capped at MAX_LINKS_PER_NOTE."""
+    seen, links, auth = set(), [], 0
+    for m in URL_RE.finditer(body or ""):
+        u = m.group(0).rstrip(".,)")
+        if u in seen:
+            continue
+        seen.add(u)
+        if source_url and u == source_url.rstrip(".,)"):
+            continue
+        if ASSET_EXT_RE.search(u.split("?", 1)[0]):
+            continue
+        if AUTH_WALLED_RE.search(u):
+            auth += 1
+            continue
+        links.append(u)
+    dropped = max(0, len(links) - MAX_LINKS_PER_NOTE)
+    return {"links": links[:MAX_LINKS_PER_NOTE], "auth_skipped": auth, "dropped": dropped}
 
 
 def read_note(abs_path: str):

@@ -188,3 +188,29 @@ def test_reapable_selects_only_ingested(tmp_path):
     r = co.reapable([raw])
     assert r["vault_notes"] == ["03_Resources/Articles/A.md"]                 # B excluded (not ingested)
     assert r["url_strikes"] == [("00_Inbox/Clippings/articles to process.md", "https://a.com/x")]
+
+
+def test_extract_inline_links_basic_dedup():
+    body = "See https://a.com/x and again https://a.com/x and https://b.com/y."
+    r = co.extract_inline_links(body)
+    assert r["links"] == ["https://a.com/x", "https://b.com/y"]
+    assert r["auth_skipped"] == 0
+    assert r["dropped"] == 0
+
+
+def test_extract_inline_links_skips_source_assets_auth():
+    body = ("source repeated https://src.com/post "
+            "image ![alt](https://c.com/pic.png) "
+            "doc https://c.com/file.pdf "
+            "social https://www.linkedin.com/in/x "
+            "good https://good.com/article")
+    r = co.extract_inline_links(body, source_url="https://src.com/post")
+    assert r["links"] == ["https://good.com/article"]
+    assert r["auth_skipped"] == 1  # linkedin
+
+
+def test_extract_inline_links_respects_cap():
+    body = " ".join(f"https://s{i}.com/a" for i in range(15))
+    r = co.extract_inline_links(body)
+    assert len(r["links"]) == co.MAX_LINKS_PER_NOTE
+    assert r["dropped"] == 5
