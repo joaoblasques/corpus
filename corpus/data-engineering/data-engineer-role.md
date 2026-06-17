@@ -12,17 +12,23 @@ sources:
   - path: raw/_inbox/email-2026-05-19-how-to-become-a-senior-data-engineer.md
     channel: email
     ingested_at: 2026-06-11
+  - path: raw/notes/notes-clippings-how-to-transition-from-data-analyst-to-data-engineer.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - valuable data engineer
   - senior data engineer
   - business impact
   - data engineer career
   - data engineer role
+  - data analyst to data engineer
+  - DA to DE
+  - career transition data engineering
 tags:
   - corpus/data-engineering
   - synthesis
 created: 2026-06-11
-updated: 2026-06-11
+updated: 2026-06-17
 ---
 
 # The Data Engineer Role: Value, Impact, and Seniority
@@ -91,11 +97,62 @@ Titles vary wildly between companies because data engineering is young and heavi
 
 > "A signal that tells you you're going the right path: you focus more on the 'boring' things: data modeling, data security, or data governance." [^src3]
 
+## DA→DE transition: a practical playbook
+
+For data analysts or scientists moving into data engineering, the core strategy is **deliver real value now, not after you've mastered every tool** [^src4].
+
+### 1. Find a viable project in your current role
+
+The best first DE project materializes a query you already run regularly [^src4]. Evaluate viability with two questions [^src4]:
+
+1. How many people use this data?
+2. Would they be blocked without it?
+
+> "If more than 2 people use this data and it is absolutely essential to their work, then you have a viable project." [^src4]
+
+Before building, define the STAR framing (Situation, Task, Action, Result) to ensure the project has maximum impact and to avoid unnecessary work [^src4]. Evaluate 4–5 candidate projects and pick the one you can start today [^src4].
+
+For each candidate, answer [^src4]:
+- Who asks this question? (Stakeholder)
+- What do they do with the answer? (Outcome)
+- How often is it needed? (Refresh frequency)
+
+### 2. Build with SQL + cron first
+
+No need for a full orchestration stack to start. The minimum viable pipeline is [^src4]:
+- A SQL script that recreates the output table from scratch (DROP + CREATE AS)
+- Scheduled via crontab (Linux) or Task Scheduler (Windows) — or your company's existing scheduler (Airflow, dbt Cloud, Dagster) if available
+- Run via a CLI tool (e.g. `psql -f summary_table.sql`)
+
+The pattern is deliberately minimal: if the company already has a scheduler, use it — otherwise start with cron. See [[data-engineering/de-portfolio-projects|DE Portfolio Projects]] for more complex stack patterns once the basics are proven.
+
+### 3. Showcase with a stakeholder-first demo
+
+Before requesting a transfer, prepare a short presentation that answers [^src4]:
+1. Who the stakeholder is
+2. What outcome the table enables
+3. How frequently it refreshes
+
+Use this to demonstrate you can *communicate* impact, not just write SQL.
+
+### 4. Internal transfer mechanics
+
+Internal transfers outperform cold applications because DE teams can de-risk by hiring someone who has already demonstrated delivery [^src4]. The recommended approach [^src4]:
+
+1. **Draft a message** to a senior DE in the target team stating interest in their work.
+2. **Show what you built** — reference the stakeholder outcome, not the technical implementation.
+3. **Ask for pointers** on eligibility for an interview if a position opens.
+
+> "Interviewing is expensive, and hiring is risky. Teams only get a few hours to determine if someone is a good fit." [^src4]
+
+This is structurally the same as the impact-scoring framing in §Impact-scoring formula above: the goal is always to surface *business value*, not technical credentials.
+
 ## See also
 
 - [[data-engineering/dimensional-modeling|Dimensional Modeling]] — the data-modeling fundamental both sources flag as core
 - [[data-engineering/pipeline-layers|Pipeline Layers]] — orchestration / architecture fundamentals
 - [[data-engineering/dbt|dbt]] — a common tool, but a tool — apply the fundamentals
+- [[data-engineering/de-portfolio-projects|DE Portfolio Projects]] — a portfolio of runnable projects for the next step after cron+SQL
 - [[data-engineering/README|Data Engineering hub]]
 
 ---
@@ -103,3 +160,4 @@ Titles vary wildly between companies because data engineering is young and heavi
 [^src1]: [How to become a valuable Data Engineer](../../raw/web/how-to-become-a-valuable-data-engineer-start-data-engineerin.md)
 [^src2]: [How to become a valuable Data Engineer (newsletter)](../../raw/email/email-2025-08-27-how-to-become-a-valuable-data-engineer.md)
 [^src3]: [How to become a senior data engineer?](../../raw/email/email-2026-05-19-how-to-become-a-senior-data-engineer.md)
+[^src4]: [How to Transition from Data Analyst to Data Engineer](../../raw/notes/notes-clippings-how-to-transition-from-data-analyst-to-data-engineer.md)

@@ -24,6 +24,12 @@ sources:
   - path: raw/youtube/youtube-2wljl9a2cna.md
     channel: youtube
     ingested_at: 2026-06-17
+  - path: raw/notes/notes-clippings-everyinccompound-knowledge-plugin-ai-powered-workflows-for-k.md
+    channel: notes
+    ingested_at: 2026-06-17
+  - path: raw/notes/notes-clippings-everyinccompound-engineering-plugin-official-compound-engine.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - agentic coding
   - agentic engineering
@@ -127,6 +133,25 @@ A product-leader walkthrough of Codex's `/goal` (Claire Vo, *How I AI*, hosted o
 
 **When *not* to use a goal** [^src7]: one-line edits ("too big a tool for the job — you want an outcome, not an output"), vague finish lines ("make my customers happy" — no definitive completion condition), and, notably, "refactor this code" (no evidence-based finish line). Goals are strongest with "a durable objective, an evidence-based finish line, and a path that may require several turns of investigation" [^src7]. Demonstrated run lengths: a Sentry-error-burn-down ran "several hours" and produced "a systematic fix... not band-aid fixes," and a non-coding inbox cleanup ran ~4 hours / ~6M tokens — concrete evidence for the multi-hour autonomy [[ai-engineering/long-running-agents|Long-Running Agents]] describes [^src7]. The source equates `/goal` with the **Ralph Loop** as "functionally the same framework" [^src7] (see [[ai-engineering/ralph-loop|Ralph Loop]]).
 
+## Compound Engineering: the "make each unit easier than the last" philosophy
+
+**Compound Engineering** (EveryInc) is an agentic coding methodology built around one principle: "Each unit of engineering work should make subsequent units easier — not harder" [^src8]. Traditional development accumulates technical debt; compound engineering inverts this by spending 80% on planning and review and 20% on execution [^src8].
+
+The core loop [^src8]:
+```
+/ce-brainstorm  →  Interactive Q&A; produces right-sized requirements doc
+/ce-plan        →  Turns requirements into detailed implementation plan
+/ce-work        →  Executes plan with worktrees and task tracking
+/ce-code-review →  Multi-agent code review before merging
+/ce-compound    →  Documents learnings so next agent doesn't re-learn the same lesson
+```
+
+Upstream of the loop: `/ce-strategy` creates and maintains `STRATEGY.md` — the product's target problem, approach, persona, key metrics — as a "short durable anchor" that ideate, brainstorm, and plan read as grounding [^src8]. The read-side companion, `/ce-product-pulse`, generates a time-windowed report on what users actually experienced and how the product performed (24h, 7d, etc.), saved to `docs/pulse-reports/` so past pulses form a browseable timeline [^src8].
+
+The `/ce-compound` step is what converts individual sessions into organizational knowledge: it extracts 1–3 learnings, checks for stale knowledge the new learning contradicts, and saves to `docs/` with searchable YAML frontmatter [^src8]. The next brainstorm or plan automatically searches those files [^src8]. This is the [[ai-engineering/agent-skills|Agent Skills]] compounding pattern applied specifically to software engineering work.
+
+**Cross-platform distribution.** The compound-engineering plugin ships 37 skills and 51 agents, installable via the plugin marketplace across Claude Code, Cursor, Codex, GitHub Copilot, Factory Droid, Qwen Code, and more [^src8]. It is cited as the engineering counterpart to the Compound Knowledge plugin for non-coding work [^src9]. See [[ai-engineering/claude-md-conventions|CLAUDE.md Conventions]] for the cross-platform plugin model this exemplifies.
+
 ## How developers still learn
 
 An open tension McKinney raises: if seniors no longer write much code (he reviews, guides, adds taste), how do we *develop* seniors? His answer — "the hard labour goes away, which is where we usually learn" (learning by osmosis) — so the focus must shift to design patterns and architecture, to have "the technical vocabulary to guide or understand the agents" [^src2].
@@ -151,3 +176,5 @@ An open tension McKinney raises: if seniors no longer write much code (he review
 [^src5]: [May Must-Reads: Vibe Coding, Token Economics, and More](../../raw/email/email-2026-05-28-may-must-reads-vibe-coding-token-economics-and-more.md) — Towards Data Science newsletter
 [^src6]: [/goal landed. Here's how to use it](../../raw/email/email-2026-05-21-goal-landed-here-s-how-to-use-it.md) — Abhishek, Claude Code Camp (on Code with Claude, Boris Cherny, `/goal`)
 [^src7]: [How I AI — Goals in Coda (Claire Vo)](../../raw/youtube/youtube-2wljl9a2cna.md)
+[^src8]: [EveryInc/compound-engineering-plugin — Official Compound Engineering plugin](../../raw/notes/notes-clippings-everyinccompound-engineering-plugin-official-compound-engine.md) — EveryInc, GitHub
+[^src9]: [EveryInc/compound-knowledge-plugin — AI-powered workflows for knowledge work](../../raw/notes/notes-clippings-everyinccompound-knowledge-plugin-ai-powered-workflows-for-k.md) — EveryInc, GitHub

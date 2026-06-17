@@ -65,7 +65,7 @@ Run on Codespaces (fork → "Create codespace" → `make up` → open the expose
 - [[data-engineering/data-engineering-best-practices|Data Engineering Best Practices]] — the practices these projects embody
 - [[data-engineering/python-for-data-engineering|Python for Data Engineering]] — the language glue
 - [[data-engineering/change-data-capture|Change Data Capture]] · [[data-engineering/dbt|dbt]] · [[data-engineering/duckdb|DuckDB]]
-- [[data-engineering/data-engineer-role|The Data Engineer Role]] — portfolio as a career signal
+- [[data-engineering/data-engineer-role|The Data Engineer Role]] — portfolio as a career signal; see the DA→DE transition section for the simpler SQL+cron starting point before tackling these templates
 - [[data-engineering/README|Data Engineering hub]]
 
 ---

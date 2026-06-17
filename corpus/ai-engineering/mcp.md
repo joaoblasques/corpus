@@ -24,6 +24,9 @@ sources:
   - path: raw/notes/notes-clippings-building-agents-that-reach-production-systems-with-mcp.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/notes/notes-clippings-how-to-set-up-your-claude-connectors-mcp.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - MCP
   - Model Context Protocol
@@ -110,6 +113,19 @@ The MCP SDKs surpassed 300 million downloads/month as of mid-2026 (up from 100M 
 
 Plugins for Claude Code bundle skills, MCP servers, hooks, LSP servers, and specialized subagents in one distributable package [^src7].
 
+## Claude Connectors: practical setup patterns
+
+Claude's **connector directory** is the UI layer for MCP — pre-configured one-click integrations that expose live tool data without copy-pasting [^src8]. Two connector types:
+
+- **Pre-configured (one-click)**: browse the directory in Claude Settings → Connectors, click Connect, and authorize via OAuth. Includes Notion, HubSpot, Canva, Gmail, Google Drive, Stripe, and more; new ones land most weeks [^src8].
+- **Custom MCP servers**: (a) remote URL — paste the server's Streamable HTTP URL into Settings → Connectors → Add custom connector; (b) Claude Code — run `claude mcp add <name> <url>` or add to `.mcp.json`; (c) local repo — clone, start the server (`npx`/`node`), point Claude at the local address [^src8].
+
+**The over-connection anti-pattern.** "Only connect tools you use weekly. Every connector adds to Claude's context, so a bloated list slows it down and muddies its choices. Three to five live connectors beats thirty idle ones" [^src8].
+
+**Chaining connectors (the real value).** Individual connectors save a tab; chaining them in one prompt replaces a whole process. Example: Calendly books a meeting → Gong captures and summarizes the call → PandaDoc drafts the proposal → Gamma turns it into a deck [^src8]. The pattern: read before write (ask a connector to report first; only let it write/post once the read is trusted), name the tool explicitly in the prompt to remove ambiguity when multiple connectors are live, and give read-only OAuth scopes where available [^src8].
+
+**Marketing/sales connector landscape (as of mid-2026)**: HubSpot, Salesforce, Pipedrive, Apollo, Clay, Gong, Outreach, PandaDoc, Calendly, Lusha, Vibe Prospecting, Gamma, GA4, Meta Ads, Google Ads, Shopify, Klaviyo, Mailchimp, Semrush, Canva, Hotjar, Stripe (33 total in one documented stack) [^src8].
+
 ## See also
 
 - [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] — MCP is the coordination layer for multi-agent architectures
@@ -128,3 +144,4 @@ Plugins for Claude Code bundle skills, MCP servers, hooks, LSP servers, and spec
 [^src5]: [Metabase MCP server documentation](../../raw/web/mcp-server-metabase-documentation.md)
 [^src6]: [nao MCP servers](../../raw/web/github-getnao-nao-mcp-servers.md)
 [^src7]: [Building agents that reach production systems with MCP](../../raw/notes/notes-clippings-building-agents-that-reach-production-systems-with-mcp.md) — Anthropic engineering
+[^src8]: [How to Set Up Your Claude Connectors (MCP)](../../raw/notes/notes-clippings-how-to-set-up-your-claude-connectors-mcp.md) — practitioner guide (33-connector marketing/sales stack)

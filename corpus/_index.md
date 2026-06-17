@@ -1,6 +1,6 @@
 # Corpus Index
 
-> Last updated: 2026-06-17 | Total pages: 163 | Total sources: 337
+> Last updated: 2026-06-17 | Total pages: 163 | Total sources: 349
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
@@ -181,7 +181,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[ai-business/ai-consulting-playbook|AI Consulting Playbook]] — concept · draft · free "AI mini assessment" two-call client-acquisition framework; frequency×friction bottleneck selection, the "money question" close
 
 ## Recent additions
-- 2026-06-17: **Obsidian Clippings drain (collect→ingest→reap, batches 1–2, 17 notes)** — new [[ai-engineering/computer-use]], [[ai-engineering/claude-managed-agents]]; enriched claude-cowork, claude-code, claude-models (Opus 4.7), agent-security (Claude Security beta), mcp (production patterns), agent-memory, agent-harness, agentic-workflow, agent-ui. All notes reaped from vault after ingest.
+- 2026-06-17: **Obsidian Clippings drain (collect→ingest→reap, batches 1–3, 29 notes)** — new [[ai-engineering/computer-use]], [[ai-engineering/claude-managed-agents]]; enriched claude-cowork, claude-code, claude-models (Opus 4.7), agent-security (Claude Security beta), mcp (production patterns), agent-memory, agent-harness, agentic-workflow, agent-ui. All notes reaped from vault after ingest.
 - 2026-06-17: **YouTube batch (v0.6 cluster pipeline, 4 parallel workers)** — 12 transcripts ingested → 7 new pages, 9 enriched. New: [[data-engineering/dataform]], [[data-engineering/snowflake]], [[data-engineering/sql-intermediate-results]], [[software-engineering/cognitive-debt]], [[ai-business/ai-synthetic-focus-group]], [[ai-business/ai-consulting-playbook]], [[ai-engineering/sources/boris-cherny-100-percent-claude-code]]. Updated: apache-iceberg, open-table-formats, dimensional-modeling, data-modeling-meaning, databricks, claude-code, vibe-coding, ai-product-management, agentic-coding, algorithms, engineering-craft.
 - 2026-06-17: **ingest-auto safe pass (6 candidates, 2 ingested, 4 deferred)** — [[ai-engineering/anthropic]] (updated, +1 source — Anthropic Academy free certifications: Claude 101 / AI Fluency 4Ds / Intro to Cowork; fills prior unsourced Skilljar note); [[ai-engineering/claude-cowork]] (updated, +1 source — Cowork Toolkit 7-day arc + routing-conflict edge case). Deferred: 2 TLDR digests, Decathlon promo, Google tips promo.
 - 2026-06-15: **ingest-auto safe pass (3 candidates, 2 ingested, 1 deferred)** — software-engineering/[[software-engineering/software-design-principles]] (updated, +1 source — DIP worked example); ai-engineering/[[ai-engineering/claude-cowork]] (updated, +1 source — post-call-wrapup skill example)

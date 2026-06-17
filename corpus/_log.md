@@ -652,3 +652,11 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - updated (6): claude-code (118-command taxonomy + Opus 4.7 usage), claude-models (Opus 4.7), agent-security (Claude Security beta), mcp (production patterns), claude-cowork (enterprise/M365/legal), agent-memory (filesystem memory)
 - skipped: claude-carousel-generator-prompt (pure prompt template, no §7-citable claims; stamped corpus_pages:[] and reaped)
 - lint: clean — 0 broken wikilinks · 0 broken citations · 0 orphans
+
+## [2026-06-17 17:55] ingest | Obsidian Clippings drain batch 3 — 12 notes (2 parallel workers: ai-engineering ×11, data-engineering ×1)
+- channel: notes (collect-obsidian, --max 12); inline-link web sources queued in raw/_inbox
+- new pages: 0 (all enrichment)
+- ai-engineering updated: claude-code (subagents + large-codebase governance + dynamic-workflows Bun example), mcp (connector setup patterns), multi-agent-systems (subagents vs agent teams), agent-skills (pairwise knowledge/unbook, compound loop, command library, charlie-cfo), agentic-coding (Compound Engineering), claude-md-conventions (cross-platform plugins), agent-harness (3 patterns), claude-cowork (official architecture/Projects/safety)
+- data-engineering updated: data-engineer-role (DA→DE transition playbook), de-portfolio-projects (cross-link)
+- cross-domain flagged (future DE ingest): self-service-analytics-with-Claude data-foundations layer (semantic layer, offline evals, adversarial SQL reviewer)
+- lint: clean — 0 broken wikilinks · 0 broken citations · 0 orphans

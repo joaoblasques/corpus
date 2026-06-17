@@ -39,6 +39,15 @@ sources:
   - path: raw/notes/notes-clippings-best-practices-for-using-claude-opus-4-7-with-claude-code.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/notes/notes-clippings-introducing-dynamic-workflows.md
+    channel: notes
+    ingested_at: 2026-06-17
+  - path: raw/notes/notes-clippings-how-and-when-to-use-subagents-in-claude-code.md
+    channel: notes
+    ingested_at: 2026-06-17
+  - path: raw/notes/notes-clippings-how-claude-code-works-in-large-codebases-best-practices-and.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - Claude Code
   - claude-code
@@ -87,7 +96,7 @@ Configuration depends on codebase structure, but consistent patterns appeared ac
 
 Maintain CLAUDE.md as models evolve: instructions written to compensate for a current model's limitations can constrain a future one (e.g. a rule forcing single-file refactors blocks a newer model's coordinated cross-file edits). Expect a configuration review every three to six months [^src1].
 
-**Organizational layer.** Technical config alone doesn't drive adoption [^src1]. The fastest rollouts had dedicated infrastructure investment before broad access and a DRI or **agent manager** (a hybrid PM/engineer role) owning conventions, permissions, and the plugin marketplace [^src1].
+**Organizational layer.** Technical config alone doesn't drive adoption [^src1][^src15]. The fastest rollouts had dedicated infrastructure investment before broad access and a DRI or **agent manager** (a hybrid PM/engineer role) owning conventions, permissions, and the plugin marketplace [^src1]. In large organizations, especially regulated industries, governance questions come up early: who controls which skills and plugins are available, how to prevent thousands of engineers from independently rebuilding the same thing, how to ensure AI-generated code goes through the same review process as human-generated code [^src15]. The smoothest deployments establish cross-functional working groups (engineering, infosec, governance) early and start with a defined set of approved skills, required code review processes, and limited initial access, expanding as confidence builds [^src15].
 
 ## Model configuration
 
@@ -177,7 +186,47 @@ Dynamic workflows counter these by orchestrating **separate subagents with their
 
 **When to use** [^src10]: complex, high-value, parallelizable, long-running, adversarial, or structurally repetitive tasks — migrations, deep research, deep verification, at-scale triage, sorting/ranking, evals, root-cause investigation. Dynamic workflows often use significantly more tokens; they are not needed for regular coding tasks. Combine with `/loop` for recurring execution and `/goal` for hard completion conditions.
 
+**At-scale real-world example.** Jarred Sumner used dynamic workflows to port Bun from Zig to Rust: 750,000 lines of Rust, 99.8% of the existing test suite passing, eleven days from first commit to merge [^src13]. One workflow mapped the correct Rust lifetime for every struct field in the Zig codebase. A second wrote every `.rs` file as a behavior-identical port of its `.zig` counterpart, hundreds of agents working in parallel with two reviewers on each file. A fix loop then drove the build and test suite until both ran clean. An overnight workflow addressed unnecessary data copies and opened a PR for each finding. This is the orchestration pattern (fan-out-and-synthesize + adversarial verification + loop until done) applied end-to-end [^src13].
+
+**Availability** (as of 2026-06-17): research preview in Claude Code CLI, Desktop, and VS Code extension for Max, Team, and Enterprise plans; also available via the Claude API, Amazon Bedrock, Vertex AI, and Microsoft Foundry [^src13]. Dynamic workflows are on by default for Max/Team/API; Enterprise admins must enable them. The first time a workflow triggers, Claude Code shows a confirmation prompt [^src13].
+
 See [[ai-engineering/agent-harness|Agent Harness]] for the underlying harness concepts, and [[ai-engineering/agentic-workflow|Agentic Workflows]] for the broader workflow patterns.
+
+## Subagents
+
+A subagent is an isolated Claude instance with its own context window: it takes a task, does the work, and returns only the relevant result to the parent conversation [^src14]. Think of them as "the browser tabs of a Claude Code session" — a place to chase a tangent without losing the main thread [^src14]. Multiple subagents can run in parallel, each with different permissions (a research subagent may be read-only; an implementation subagent has full editing access) [^src14].
+
+**Built-in subagent types** in Claude Code [^src14]:
+- **General-purpose agents** — complex multi-step tasks
+- **Plan agents** — research codebases before presenting implementation strategies
+- **Explore agents** — optimized for fast, read-only code search
+
+**When to use subagents** [^src14]:
+- *Research-heavy tasks* — gathering context requires reading dozens of files; a subagent synthesizes findings without dumping raw content into the main session
+- *Multiple independent tasks* — parallel subagents on tasks with no dependency between them finish faster than sequential execution
+- *Fresh perspective* — a subagent starts without conversation history, giving cleaner unbiased review (same effect as `/clear` but without losing the main thread)
+- *Verification before committing* — an independent subagent checks for overfitting or missed edge cases
+- *Pipeline workflows* — sequential stages (design → implement → test) each benefit from focused attention
+
+Rule of thumb: ten or more files to explore, or three or more independent work items, is a strong signal to delegate to subagents [^src14].
+
+**When NOT to use subagents** [^src14]:
+- Sequential work where step two needs the full output of step one
+- Same-file edits — two subagents editing the same file in parallel causes conflicts
+- Small tasks — overhead of delegation outweighs the benefit
+- Too many custom agents — a large roster makes automatic delegation less reliable
+- Tasks requiring agents to coordinate with each other — use Agent Teams (agents coordinate across sessions, heavier and more expensive than subagents that only report back to the main conversation)
+
+**Invocation methods** (from simplest to most automated) [^src14]:
+1. **Conversational** — ask Claude to "use a subagent to explore how authentication works" or "research these three things in parallel." Specify scope, request parallelization explicitly, and name the output format.
+2. **Custom subagents** — markdown files in `.claude/agents/` (project, shared with team) or `~/.claude/agents/` (user, across all projects), each with its own system prompt, tool permissions, and optionally a dedicated model. Create via `/agents` command. The `description` field is what Claude uses to decide when to auto-delegate — "Reviews code for security issues before commits" routes better than "security expert."
+3. **CLAUDE.md instructions** — policy for when Claude should reach for specific subagents ("Code reviews ALWAYS use a read-only subagent").
+4. **Skills** — `/deep-review` triggers a three-part parallel subagent analysis on staged changes; load on demand, not always-on.
+5. **Hooks** — a Stop hook can fire a subagent test suite check and block Claude from finishing until tests pass (the most automated, rightmost approach).
+
+> **Background execution.** Ctrl+B sends a running subagent to the background; the conversation continues and results surface automatically. `/tasks` shows anything running in the background [^src14].
+
+See [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] for the broader orchestration patterns and [[ai-engineering/agent-skills|Agent Skills]] for the skill-based invocation pattern.
 
 ## Practitioner workflow (head-of-Claude-Code usage)
 
@@ -263,3 +312,6 @@ Opus 4.7 reasons more after each user turn — improving coherence and coding qu
 [^src10]: [A harness for every task: dynamic workflows in Claude Code](../../raw/notes/notes-clippings-a-harness-for-every-task-dynamic-workflows-in-claude-code.md) — Thariq Shihipar & Sid Bidasaria, Anthropic
 [^src11]: [Every Claude Code Command (118) — The Complete Guide](../../raw/notes/notes-clippings-every-claude-code-command-118-the-complete-guide.md) — Charlie Hills / charliehills.substack.com
 [^src12]: [Best practices for using Claude Opus 4.7 with Claude Code](../../raw/notes/notes-clippings-best-practices-for-using-claude-opus-4-7-with-claude-code.md) — Anthropic
+[^src13]: [Introducing dynamic workflows](../../raw/notes/notes-clippings-introducing-dynamic-workflows.md) — Anthropic
+[^src14]: [How and when to use subagents in Claude Code](../../raw/notes/notes-clippings-how-and-when-to-use-subagents-in-claude-code.md) — Anthropic
+[^src15]: [How Claude Code works in large codebases: Best practices and where to start](../../raw/notes/notes-clippings-how-claude-code-works-in-large-codebases-best-practices-and.md) — Anthropic Applied AI team

@@ -15,6 +15,9 @@ sources:
   - path: raw/web/github-nirdiamant-genai-agents-50-tutorials-and-implementati.md
     channel: web
     ingested_at: 2026-06-12
+  - path: raw/notes/notes-clippings-how-and-when-to-use-subagents-in-claude-code.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - multi-agent
   - multi-agent system
@@ -26,7 +29,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-07
-updated: 2026-06-12
+updated: 2026-06-17
 ---
 
 # Multi-Agent Systems
@@ -95,12 +98,42 @@ Stack: FastAPI, [[ai-engineering/langgraph|LangGraph]] (chosen because the agent
 
 NirDiamant's `GenAI_Agents` (52+ tutorials) is a large reference catalog of agent and multi-agent implementations, the majority built on [[ai-engineering/langgraph|LangGraph]] for stateful workflow orchestration [^src4]. Recurring multi-agent shapes across the collection: supervisor/coordinator + specialist workers (ATLAS academic system: Coordinator/Planner/Notewriter/Advisor), role-based crews (AutoGen research team: admin/developer/planner/executor/QA; OpenAI Swarm blog team: researcher/planner/writer/editor), and CrewAI inventory agents [^src4]. The catalog also pairs with companion resources on RAG (40+ notebooks) and agent memory (30 notebooks on vector stores, graphs, Mem0, Zep) — see [[ai-engineering/agent-memory|Agent Memory]] [^src4].
 
+## Subagents vs Agent Teams (Claude Code)
+
+The Claude Code documentation draws a sharp distinction between two coordination modes [^src5]:
+
+| Mode | Scope | Communication | Cost |
+|---|---|---|---|
+| **Subagents** | Within a single session; report back to the main conversation | Subagents cannot talk to each other — only back to parent | Lighter |
+| **Agent Teams** | Coordinate across separate sessions | Agents message each other directly | Heavier, more expensive |
+
+Use subagents when tasks are independent and results return to a single orchestrator. Escalate to Agent Teams only when agents need to actively coordinate with each other during execution [^src5].
+
+**Custom subagent definition format** (`.claude/agents/agent-name.md` or `~/.claude/agents/`) [^src5]:
+
+```markdown
+---
+name: security-reviewer
+description: Reviews code changes for security vulnerabilities,
+  injection risks, auth issues, and sensitive data exposure.
+  Use proactively before commits touching auth, payments, or user data.
+tools: Read, Grep, Glob
+model: sonnet
+---
+
+You are a security-focused code reviewer. Return prioritized findings
+with file:line references and a recommended fix for each.
+```
+
+The `description` field is what the orchestrator uses to decide when to delegate automatically — "Reviews code for security issues before commits" routes better than "security expert" [^src5]. A too-large custom agent roster reduces automatic delegation reliability; most teams settle on a handful of well-scoped agents [^src5].
+
 ## See also
 
 - [[ai-engineering/ai-agent|AI Agent]] — single-agent building block
 - [[ai-engineering/agent-skills|Agent Skills]] — the skills a sub-agent should carry before it's worth creating
 - [[ai-engineering/langgraph|LangGraph]] — recommended framework for stateful multi-agent workflows
 - [[ai-engineering/mcp|MCP]] — coordination protocol for tool calls, memory, and context sharing across agents
+- [[ai-engineering/claude-code|Claude Code]] — subagent invocation patterns, custom agent definitions, Agent Teams
 
 ---
 
@@ -108,3 +141,4 @@ NirDiamant's `GenAI_Agents` (52+ tutorials) is a large reference catalog of agen
 [^src2]: [How AI agents & Claude skills work (Clearly Explained)](<../../raw/youtube/How AI agents & Claude skills work (Clearly Explained).md>) — Greg Isenberg × Ras Mic, YouTube
 [^src3]: [How Grab Reclaimed Hundreds of Data Engineering Hours With Multi-Agent AI](../../raw/email/email-2026-05-28-how-grab-reclaimed-hundreds-of-data-engineering-hours-with-m.md) — Chief Data Tinkerer
 [^src4]: [NirDiamant/GenAI_Agents — 52+ tutorials and implementations](../../raw/web/github-nirdiamant-genai-agents-50-tutorials-and-implementati.md) — GitHub
+[^src5]: [How and when to use subagents in Claude Code](../../raw/notes/notes-clippings-how-and-when-to-use-subagents-in-claude-code.md) — Anthropic

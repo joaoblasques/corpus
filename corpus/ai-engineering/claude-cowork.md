@@ -69,6 +69,9 @@ sources:
   - path: raw/notes/notes-clippings-building-ai-agents-for-the-enterprise.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/notes/notes-clippings-get-started-with-claude-cowork.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - Claude Cowork
   - Cowork
@@ -206,6 +209,26 @@ Legal professionals became the most engaged Claude Cowork users of any knowledge
 
 A subset of practice-area plugins (Commercial Legal, Corporate Legal, Litigation Legal, Product Legal) are also available as cookbooks for deployment as [[ai-engineering/claude-managed-agents|Managed Agents]] via the Claude Platform [^src22].
 
+## Official Cowork: architecture, Projects, and safety (Anthropic guide)
+
+**Architecture.** Cowork uses the same agentic engine as Claude Code, running code and shell commands inside an isolated virtual machine (VM) on your computer; only files you explicitly connect are accessible; code execution is sandboxed [^src23]. When a task starts, Claude: (1) analyzes the request and creates a plan, (2) breaks complex work into subtasks, (3) runs code/shell commands in the isolated VM, (4) coordinates parallel workstreams when appropriate, (5) delivers outputs to your file system [^src23]. **Deletion protection**: Claude requires explicit permission before permanently deleting any files [^src23].
+
+**Permission modes** [^src23]:
+- **Ask before acting** — Claude pauses for approval of each action. Recommended when working with new tools, unfamiliar files, or anything you want to watch closely.
+- **Act without asking** — Claude works without pausing. Faster but riskier; use only when actively supervising with trusted files and sites.
+
+Both modes still prompt before permanent file deletion.
+
+**Projects.** Group related tasks into persistent, self-contained workspaces with their own files, links, instructions, and memory [^src23]. Memory within Cowork is supported inside Projects but not retained across standalone sessions [^src23]. Projects make Cowork significantly more powerful for recurring or long-running work by preserving context between sessions.
+
+**Scheduled tasks.** Type `/schedule` in any task to create recurring or on-demand automation. Scheduled tasks only run while the desktop app is open and the computer is awake [^src23]. (The Claude Code `claude --schedule` cron runs on Anthropic's cloud and does not require the local machine to be active — a key distinction.)
+
+**Mobile access.** Pro and Max plan users can message Claude from their phone while the desktop app runs on their computer; Claude works using local files and connectors on the desktop, and the phone receives results in the same conversation [^src23]. Team/Enterprise require the desktop app on desktop.
+
+**Network / compliance notes** [^src23]:
+- Web search and web fetch run server-side and are not affected by network egress settings; admins can disable web search in Organization settings.
+- Cowork activity is not captured in the Compliance API (as of 2026-06-17); Team/Enterprise admins can use OpenTelemetry (OTel) to monitor activity.
+
 ## Other guides
 
 `claude101.com` collects free Cowork-adjacent guides (Cowork setup, Cowork + Projects, slides, skills, sounding like you, avoiding usage limits) [^src8].
@@ -264,3 +287,4 @@ Austin Lau (Anthropic growth team) offers a first-party framework for when to re
 [^src20]: [Collaborate with Claude across Excel, PowerPoint, Word and Outlook](../../raw/notes/notes-clippings-collaborate-with-claude-across-excel-powerpoint-word-and-out.md) — Anthropic
 [^src21]: [Building AI agents for the enterprise](../../raw/notes/notes-clippings-building-ai-agents-for-the-enterprise.md) — Anthropic (enterprise guide; same guide also at [^src19b]: [Deploying Claude across the enterprise with Claude Cowork (duplicate)](../../raw/notes/notes-clippings-deploying-claude-across-the-enterprise-with-claude-cowork-1.md))
 [^src22]: [Claude for the legal industry](../../raw/notes/notes-clippings-claude-for-the-legal-industry.md) — Anthropic
+[^src23]: [Get started with Claude Cowork](../../raw/notes/notes-clippings-get-started-with-claude-cowork.md) — Anthropic official guide

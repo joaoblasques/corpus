@@ -21,6 +21,18 @@ sources:
   - path: raw/web/agent-skills.md
     channel: web
     ingested_at: 2026-06-12
+  - path: raw/notes/notes-clippings-how-anthropic-enables-self-service-data-analytics-with-claud.md
+    channel: notes
+    ingested_at: 2026-06-17
+  - path: raw/notes/notes-clippings-everyinccompound-knowledge-plugin-ai-powered-workflows-for-k.md
+    channel: notes
+    ingested_at: 2026-06-17
+  - path: raw/notes/notes-clippings-everyincclaude-commands-our-favorite-claude-code-commands.md
+    channel: notes
+    ingested_at: 2026-06-17
+  - path: raw/notes/notes-clippings-everyinccharlie-cfo-skill-claude-code-skill-for-bootstrapped.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - agent skills
   - Claude skills
@@ -37,7 +49,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-09
-updated: 2026-06-12
+updated: 2026-06-17
 ---
 
 # Agent Skills
@@ -132,6 +144,54 @@ Osmani's library organizes ~20 skills around six lifecycle phases with slash-com
 
 The "Google DNA": individual skills encode published practices — Hyrum's Law (api-and-interface-design), the test pyramid + Beyoncé Rule + DAMP-over-DRY (TDD), ~100-line PR sizing with Critical/Nit/Optional/FYI labels (code review), Chesterton's Fence (simplification), trunk-based development, Shift Left + feature flags [^src5]. The point: "a frontier model has read the phrase 'Hyrum's Law'... but it does not apply Hyrum's Law when it's designing your API at 3am" [^src5]. Skills matter **more for long-running agents** — a skipped test in a 30-hour run becomes "a debugging archaeology project at the end" [^src5]. The portable `SKILL.md` format is the payoff: write the workflow once, any harness (Claude Code, Cursor rules, Gemini CLI, Codex) enforces it [^src5].
 
+## Pairwise skills: knowledge + unbook (analytics pattern)
+
+Anthropic's internal analytics stack demonstrates a pattern applicable to any domain-intensive skill design: two complementary skills per domain rather than one monolithic skill [^src6]:
+
+- **Knowledge skill** — a thin router that loads domain-specific reference files (tables, columns, joins, gotchas) on demand. It "narrows the space to a few dozen curated files before a query is ever written" rather than exposing the full search space [^src6]. Without this router, Claude Code analytics accuracy was below 21%; with pairwise skills it consistently exceeded 95% in aggregate [^src6].
+- **Unbook skill** — encodes the *procedure* a senior analyst would follow: clarify the question → find sources via the knowledge skill → execute → loop results through adversarial review sub-agents. It bundles reusable analysis patterns (retention curves, rate decomposition, funnel analysis) so common requests don't get reinvented [^src6].
+
+The distinction is *declarative knowledge* (what a metric means) vs *procedural knowledge* (which sources to consult in what order, how to navigate ambiguity, what a finished analysis looks like) [^src6]. Reference docs within the knowledge skill should describe tables (grain, scope, exclusions), mechanics of gotchas, and explicit routing triggers ("IF the question is about experiment lift… DO NOT use for raw event counts") — without prescriptive recipes that go stale [^src6].
+
+**Skill maintenance is an engineering problem.** Anthropic watched offline analytics accuracy drift from ~95% at launch to ~65% over a month before colocating skill markdown files in the same repo as transformation models — so the PR that changes a model also updates the skill describing it. A code-review hook flags any reporting-model change that doesn't touch a skill file; ~90% of data-model PRs now include a skill change in the same diff [^src6].
+
+## Skills as compounding knowledge (the compound loop)
+
+The **Compound Knowledge** pattern (EveryInc) treats skills as a vehicle for knowledge that accumulates across sessions rather than being rediscovered each time [^src7]:
+
+```
+/kw:brainstorm   →  Brain dump, pull references, find the shape
+/kw:plan         →  Structure into actionable plan (searches past learnings)
+/kw:confidence   →  Gut-check what you know vs. don't
+/kw:review       →  Two parallel reviewers: strategic alignment + data accuracy
+/kw:work         →  Execute plan, log what was done
+/kw:compound     →  Save 1–3 learnings; check for stale knowledge it contradicts
+```
+
+`/kw:compound` saves learnings to `docs/knowledge/` as plain markdown with YAML frontmatter (type, tags, confidence, created, source). `/kw:plan` searches that directory automatically — past insights surface next time [^src7]. The feedback loop: each cycle makes the next faster because the plan starts with accumulated context. Knowledge files are git-tracked and greppable [^src7].
+
+The `/kw:review` skill runs two reviewers **in parallel**: one checks strategic alignment (Is the goal clear? Is the hypothesis falsifiable?), one checks data accuracy (Are numbers sourced? Are baselines explicit? Is data fresh?). Findings are merged and grouped by priority (P1 blocks shipping / P2 should fix / P3 nice to have) [^src7].
+
+## Skills as structured prompt templates (command libraries)
+
+A simpler pattern than the full skill SDLC: a library of prompt templates stored in `.claude/commands/` that Claude uses as slash commands or copied directly [^src8]. EveryInc's `claude_commands` demonstrates five templates covering the most common software engineering workflows [^src8]:
+
+| Command | Purpose |
+|---|---|
+| Experiment-driven development | Learn-from-failure loop; tracks attempts with success/failure logs |
+| Generate codebase context | Creates `llms.txt`-style docs with file purposes, function signatures, architecture diagrams |
+| Analyze GitHub issue | Reviews issue → examines codebase → creates implementation plan before coding |
+| Create GitHub issue | Generates structured issues with MINIMAL / MORE / A LOT detail levels based on complexity |
+| Address PR feedback | Parallel processing of independent changes; priority classification; resolution tracking |
+
+Templates include clear objectives, step-by-step processes, decision criteria, and output formats [^src8]. The project-specific versions live in `.claude/commands/`; generic versions can be shared across teams [^src8].
+
+## Domain skill example: Charlie CFO
+
+`charlie-cfo-skill` (EveryInc) is a concrete example of a domain-specific skill that activates on financial questions for bootstrapped startups [^src9]. It provides financial frameworks — cash management, unit economics, capital allocation, working capital, forecasting — and names after Charlie Munger's capital discipline principle [^src9]. The skill activates automatically on natural-language financial questions ("Should we make this hire?", "How much runway do we need?") and ships with `references/` docs for metrics benchmarks and case studies (Mailchimp, Zapier, Basecamp) [^src9]. Install: `npx skills add EveryInc/charlie-cfo-skill` [^src9].
+
+This pattern — a domain skill bundling both a system prompt and reference docs, triggered by question type — is the production form of the pairwise knowledge/procedure skill design described above.
+
 ## See also
 
 - [[ai-engineering/context-window-management|Context Window Management]] — why a lean window matters; sub-agents
@@ -153,3 +213,7 @@ The "Google DNA": individual skills encode published practices — Hyrum's Law (
 [^src3]: [agent-skills: a central, version-controlled home for coding agent skills](../../raw/web/github-zazencodes-agent-skills-a-central-version-controlled.md) — zazencodes/agent-skills, GitHub
 [^src4]: [agent-skill-manager (asm): the universal skill manager for AI coding agents](../../raw/web/github-luongnv89-asm-the-universal-skill-manager-for-ai-codi.md) — luongnv89/asm, GitHub
 [^src5]: [Agent Skills](../../raw/web/agent-skills.md) — Addy Osmani, addyosmani.com (github.com/addyosmani/agent-skills)
+[^src6]: [How Anthropic enables self-service data analytics with Claude](../../raw/notes/notes-clippings-how-anthropic-enables-self-service-data-analytics-with-claud.md) — Anthropic Data Science & Data Engineering team
+[^src7]: [EveryInc/compound-knowledge-plugin — AI-powered workflows for knowledge work](../../raw/notes/notes-clippings-everyinccompound-knowledge-plugin-ai-powered-workflows-for-k.md) — EveryInc, GitHub
+[^src8]: [EveryInc/claude_commands — Our favorite Claude Code commands](../../raw/notes/notes-clippings-everyincclaude-commands-our-favorite-claude-code-commands.md) — EveryInc, GitHub
+[^src9]: [EveryInc/charlie-cfo-skill — Claude Code skill for bootstrapped CFO financial management](../../raw/notes/notes-clippings-everyinccharlie-cfo-skill-claude-code-skill-for-bootstrapped.md) — EveryInc, GitHub

@@ -21,6 +21,9 @@ sources:
   - path: raw/web/github-cursor-plugins-cursor-plugin-specification-and-offici.md
     channel: web
     ingested_at: 2026-06-12
+  - path: raw/notes/notes-clippings-everyinccompound-engineering-plugin-official-compound-engine.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - CLAUDE.md
   - AGENTS.md
@@ -33,7 +36,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-12
-updated: 2026-06-12
+updated: 2026-06-17
 ---
 
 # CLAUDE.md & Agent Instruction Conventions
@@ -121,6 +124,18 @@ The newer frontier is keeping one set of conventions working across **Claude Cod
 
 **Cursor plugins** formalize this on Cursor's side: each plugin is a directory with a `.cursor-plugin/plugin.json` manifest and may contain `skills/` (`SKILL.md` with frontmatter), `rules/` (`.mdc` files), and `mcp.json` — bundling skills, rules, and MCP servers into one installable, marketplace-distributable unit [^src5]. Notable official plugins include `continual-learning` (incremental transcript-driven `AGENTS.md` memory updates), `cli-for-agent` (patterns for CLIs agents can run reliably), and `orchestrate` (fan tasks across parallel cloud agents) [^src5].
 
+## Cross-platform plugins at scale: the Compound Engineering model
+
+The Compound Engineering plugin (EveryInc) demonstrates the mature form of cross-platform convention sharing: a single plugin that installs across Claude Code, Cursor, Codex, GitHub Copilot, Factory Droid, Qwen Code, OpenCode, Pi, Gemini CLI, and Kiro via one marketplace command [^src6]. The mechanics reveal the portability model [^src6]:
+
+- **Claude Code / Cursor / Copilot CLI** — native plugin install: `claude /plugin marketplace add EveryInc/compound-engineering-plugin`, then `/plugin install compound-engineering`. Claude Code-compatible plugin manifests are reused directly by Copilot and Droid with format translation.
+- **Codex** — requires an additional `bunx @every-env/compound-plugin install compound-engineering --to codex` step because Codex's native plugin spec does not yet install custom agents (only skills); the Bun step fills the gap.
+- **Converter-backed targets** (OpenCode, Pi, Gemini, Kiro) — a TypeScript installer (`bunx @every-env/compound-plugin install ... --to <target>`) converts the Claude Code-compatible plugin format during install.
+
+The plugin ships 37 skills and 51 agents. The core convention it distributes is the compound engineering loop (brainstorm → plan → work → review → compound), implemented as slash commands with accompanying review and research agents. Each `/ce-compound` run saves a learning to `docs/` with YAML frontmatter; `/ce-plan` searches that directory on every run — conventions compound across sessions [^src6].
+
+This illustrates the current state of cross-platform portability: the base layer (Claude Code's plugin manifest + `SKILL.md` format) is the lingua franca, but different harnesses require adapter steps as their native plugin specs evolve [^src6]. See [[ai-engineering/agentic-coding|Agentic Coding]] for the full Compound Engineering methodology.
+
 ## Related
 
 - [[ai-engineering/agent-skills|Agent Skills]] — progressive disclosure; skills vs always-on instruction files
@@ -135,3 +150,4 @@ The newer frontier is keeping one set of conventions working across **Claude Cod
 [^src3]: [Cross-Platform Agent Skills Guide: Claude Code, Codex, Cursor & Copilot](../../raw/email/email-2026-04-17-cross-platform-agent-skills-guide-claude-code-codex-cursor-c.md)
 [^src4]: [multica-ai/andrej-karpathy-skills — A single CLAUDE.md file](../../raw/web/github-multica-ai-andrej-karpathy-skills-a-single-claude-md.md)
 [^src5]: [cursor/plugins — Cursor Plugin Specification and Official Plugins](../../raw/web/github-cursor-plugins-cursor-plugin-specification-and-offici.md)
+[^src6]: [EveryInc/compound-engineering-plugin — Official Compound Engineering plugin](../../raw/notes/notes-clippings-everyinccompound-engineering-plugin-official-compound-engine.md) — EveryInc, GitHub

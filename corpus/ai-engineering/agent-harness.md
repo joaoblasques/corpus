@@ -30,6 +30,9 @@ sources:
   - path: raw/notes/notes-clippings-a-harness-for-every-task-dynamic-workflows-in-claude-code.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/notes/notes-clippings-harnessing-claude-s-intelligence-3-key-patterns-for-building.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - harness
   - agent harness
@@ -162,6 +165,30 @@ The default Claude Code harness is built for coding but breaks down on long-runn
 
 Harness failure modes become harness design criteria: agentic laziness → use separate agents for each work unit; self-preferential bias → use adversarial verifier agents; goal drift → preserve original intent through fresh context windows rather than compaction. See [[ai-engineering/claude-code|Claude Code]] for the full dynamic-workflow pattern catalog.
 
+## Three patterns for building with Claude's evolving intelligence
+
+Anthropic's platform team identifies three meta-patterns for harness design that remain durable as models improve [^src9]:
+
+### 1. Use what Claude already knows
+
+Build around tools Claude is deeply trained on rather than inventing novel tool interfaces. Claude Code's benchmark-leading performance on SWE-bench Verified in late 2024 came from just bash + text editor tools — "tools that Claude *knows* how to use and gets better at using over time" [^src9]. Agent Skills, programmatic tool calling, and the memory tool are all compositions of these two primitives rather than distinct tool implementations [^src9].
+
+### 2. Ask "what can I stop doing?"
+
+Every harness component encodes an assumption about what Claude can't do on its own. As the model improves, those assumptions should be tested and retired [^src9]:
+
+- **Let Claude orchestrate its own actions.** Rather than the harness deciding every tool result flows back as tokens (slow, costly), give Claude a code-execution tool (bash/REPL) so it can write code expressing tool calls *and the logic between them* — only the output reaches context. On BrowseComp, giving Opus 4.6 the ability to filter its own tool outputs lifted accuracy from 45.3% to 61.6% [^src9].
+- **Let Claude manage its own context.** The skills pattern (progressive disclosure via YAML frontmatter) lets Claude assemble its own context rather than the harness pre-loading everything [^src9]. Context editing is the inverse: selectively remove stale tool results or thinking blocks.
+- **Let Claude persist its own context.** Rather than building retrieval infrastructure around the model, give Claude simple ways to write to a memory folder and read later. Opus 4.6 scored 84% on BrowseComp-Plus using a memory folder (vs Sonnet 4.5 at 60.4%); the quality of what gets written has improved dramatically across model generations [^src9].
+
+> Concrete model evolution example: Sonnet 4.5 stopped prematurely near its perceived context limit ("context anxiety"). Anthropic added context-reset scaffolding. With Opus 4.5, the behavior was gone — "the context resets we built to compensate had become dead weight in the agent harness" [^src9].
+
+### 3. Set boundaries carefully
+
+- **Design for cache hits.** Static content (system prompt, tools) first, dynamic content (new messages, `<system-reminder>`) last. Don't switch models mid-session (caches are model-specific). Adding/removing a tool from the cached prefix invalidates it — use tool search for dynamic discovery [^src9].
+- **Promote actions to dedicated tools for security, UX, or observability.** A bash tool gives the harness only a command string — the same shape for every action. A dedicated `edit` tool gives the harness typed arguments it can intercept, gate, render, audit, or present as a user confirmation modal [^src9]. Reversibility is the key criterion: hard-to-reverse actions (external API calls, file deletion) are natural candidates for dedicated tools with explicit user gates [^src9].
+- **Re-evaluate continuously.** Auto mode is an example of where a pattern (dedicated tools for security boundaries around bash) may be partially replaced by a smarter classifier, not by adding more tools [^src9].
+
 ## See also
 
 - [[ai-engineering/agentic-coding|Agentic Coding]] — orchestration patterns built on top of the harness
@@ -184,3 +211,4 @@ Harness failure modes become harness design criteria: agentic laziness → use s
 [^src6]: [Coding with LLMs: the QA agent pattern](../../raw/web/antirez.md) — Salvatore Sanfilippo (antirez), via [How OpenAI engineers prompt](../../raw/email/email-2026-06-08-how-openai-engineers-prompt.md)
 [^src7]: [Launching Boring UI](../../raw/email/email-2026-05-28-launching-boring-ui.md) — Julien Hurault, on Pi as the harness behind Boring UI
 [^src8]: [A harness for every task: dynamic workflows in Claude Code](../../raw/notes/notes-clippings-a-harness-for-every-task-dynamic-workflows-in-claude-code.md) — Thariq Shihipar & Sid Bidasaria, Anthropic
+[^src9]: [Harnessing Claude's Intelligence: 3 Key Patterns for Building Apps](../../raw/notes/notes-clippings-harnessing-claude-s-intelligence-3-key-patterns-for-building.md) — Lance Martin, Anthropic Platform team
