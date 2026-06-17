@@ -38,6 +38,14 @@
 - **Expected sources**: remaining lessons of "AI Engineering from Scratch" (Phase 00 setup-and-tooling continues; Phase 8 fine-tuning, data-management/DVC, and deployment phases explicitly referenced as upcoming), plus DevOps/infra articles. User confirmed growth (Batch 4 survey).
 - **Provisional review**: at 30 days (2026-07-09) — if still under 3 *distinct* sources, propose merge or removal. Currently 4 sources across 2 origins, so the standard ≥3 threshold is already met on count; provisional flag retained one cycle because 3 of 4 sources share a single origin (one course).
 
+### blockchain
+- **Status**: active
+- **provisional**: true
+- **Created**: 2026-06-17
+- **Rationale**: A coherent cryptocurrency/blockchain-fundamentals cluster (12 substantive sources from a nakamoto.ghost.io primer: money history, the cypherpunks, Satoshi, Bitcoin, proof-of-work, public-key crypto, hash functions, Merkle trees, P2P networking, zero-knowledge proofs) that fits none of the engineering/AI/business domains. Well above the 3-source bar on creation. Distinct subject matter (distributed consensus, cryptographic primitives, monetary theory).
+- **Seeded by**: 12 sources (Obsidian Clippings drain, batch 5), collected from `00_Inbox/Clippings/scrape/`.
+- **Provisional review**: at 30 days (2026-07-17) — single-origin seed (one primer site); retain provisional one cycle until a second independent source arrives.
+
 ---
 
 ## Decision log
@@ -54,6 +62,7 @@ Each entry: `[YYYY-MM-DD] action | domain | rationale`.
 - [2026-06-09] create | mlops | Provisional rule: 4 sources (AIEFS Phase 00 lessons 01/02/03 + IaC/Terraform article) that fit no existing domain; coherent "engineering substrate / infra & tooling" cluster. User confirmed via Batch 4 survey + new-domain question. Provisional flag retained one cycle (3 of 4 sources share one origin); 30-day review 2026-07-09.
 - [2026-06-12] create | productivity | Standard rule: 13 sources in the wave-3 email-backlog cluster (mental models, time/focus, note-taking, working effectively, stakeholder management) fitting no engineering domain; conceptually distinct. Provisional; 30-day review 2026-07-12. User confirmed wave-3 scope (remote-control session).
 - [2026-06-12] create | ai-business | Standard rule: 11 sources (career growth, interviews, monetizing technical skills, AI's impact on jobs/consulting). Supersedes the 2026-05-07 "career" rejection (revisit threshold was a 2nd career source; now 11). Provisional; 30-day review 2026-07-12. User confirmed wave-3 scope.
+- [2026-06-17] create | blockchain | Standard rule: 12 substantive crypto/blockchain-fundamentals sources (nakamoto.ghost.io primer) fitting no existing domain; coherent and distinct. User confirmed during the Obsidian Clippings drain. Provisional one cycle (single-origin seed); 30-day review 2026-07-17.
 
 ---
 

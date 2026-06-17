@@ -15,6 +15,9 @@ sources:
   - path: raw/notes/notes-clippings-introducing-the-claude-platform-on-aws.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/notes/notes-clippings-the-advisor-strategy-give-sonnet-an-intelligence-boost-with.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - Claude API
   - claude-api
@@ -99,6 +102,35 @@ Every call is billed by token (input + output counted together); set `max_tokens
 
 Beyond the three basics, the SDK supports **streaming** (`stream=True`) for chat UIs, **structured output via `tool_use`** (a different mental model, more powerful for agentic workflows), and **multi-turn conversations** by accumulating `user`/`assistant` turns in `messages` [^src1]. Real Python organizes these into an **LLM application development learning path** [^src1][^src2]. Anthropic hosts its own course materials on a Skilljar LMS [^src3].
 
+## Advisor tool (beta)
+
+The **advisor tool** formalizes the advisor strategy as a server-side primitive: declare it in the tools list and Sonnet/Haiku know to invoke it when they need guidance [^src5]. The handoff happens inside a single `/v1/messages` request — no extra round-trips or context management needed.
+
+```python
+response = client.messages.create(
+    model="claude-sonnet-4-6",  # executor
+    tools=[
+        {
+            "type": "advisor_20260301",
+            "name": "advisor",
+            "model": "claude-opus-4-6",
+            "max_uses": 3,
+        },
+        # ... your other tools
+    ],
+    messages=[...]
+)
+# Advisor tokens reported separately in the usage block
+```
+
+**Pricing**: advisor tokens billed at the advisor model's rate; executor tokens at the executor's (lower) rate. Since the advisor generates only a short plan (typically 400–700 tokens) and never calls tools or produces user-facing output, the combined cost stays well below running Opus end-to-end [^src5]. Set `max_uses` to cap advisor calls per request; advisor tokens appear separately in the usage block [^src5].
+
+**Benchmark results** (Anthropic evals) [^src5]:
+- Sonnet + Opus advisor: +2.7 pp on SWE-bench Multilingual vs Sonnet alone; 11.9% cost reduction per task
+- Haiku + Opus advisor on BrowseComp: 41.2% vs Haiku solo 19.7% (more than double); 85% cheaper than Sonnet solo
+
+See [[ai-engineering/optimizing-claude|Optimizing a Claude Setup]] §7 for the full advisor-strategy discussion.
+
 ## Claude Platform on AWS
 
 As of mid-2026, the full Claude Platform is available on AWS under AWS IAM authentication, CloudTrail audit logging, and billing through a single AWS invoice (retires existing AWS commitments). New features ship same-day as the native Claude API [^src4].
@@ -122,3 +154,4 @@ As of mid-2026, the full Claude Platform is available on AWS under AWS IAM authe
 [^src2]: [How to Use the Claude API in Python (email)](../../raw/email/email-2026-05-20-how-to-use-the-claude-api-in-python.md)
 [^src3]: [Anthropic courses (Skilljar)](../../raw/web/anthropic-courses.md)
 [^src4]: [Introducing the Claude Platform on AWS](../../raw/notes/notes-clippings-introducing-the-claude-platform-on-aws.md) — Anthropic announcement
+[^src5]: [The advisor strategy: Give Sonnet an intelligence boost with Opus](../../raw/notes/notes-clippings-the-advisor-strategy-give-sonnet-an-intelligence-boost-with.md) — Anthropic

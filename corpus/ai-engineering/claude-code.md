@@ -51,6 +51,12 @@ sources:
   - path: raw/notes/notes-clippings-onboarding-claude-code-like-a-new-developer-lessons-from-17.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/notes/notes-clippings-seeing-like-an-agent-how-we-design-tools-in-claude-code.md
+    channel: notes
+    ingested_at: 2026-06-17
+  - path: raw/notes/notes-clippings-running-an-ai-native-engineering-org.md
+    channel: notes
+    ingested_at: 2026-06-17
   - path: raw/notes/notes-clippings-introducing-routines-in-claude-code.md
     channel: notes
     ingested_at: 2026-06-17
@@ -58,6 +64,11 @@ aliases:
   - Claude Code
   - claude-code
   - Claude Code CLI
+  - AskUserQuestion tool
+  - TodoWrite
+  - Task tool
+  - Claude Code Guide agent
+  - JIT planning
 tags:
   - corpus/ai-engineering
   - entity
@@ -72,6 +83,22 @@ updated: 2026-06-17
 ## Agentic search vs. RAG indexing
 
 Claude Code uses **agentic search**: each instance works from the live codebase on the developer's machine, with no embedding pipeline or centralized index [^src1]. RAG-powered tools embed the whole codebase and retrieve chunks at query time; at scale those pipelines fall behind active teams, so retrieval can return a function renamed two weeks ago or a deleted module with no indication it is stale [^src1]. The tradeoff: agentic search "works best when Claude has enough starting context to know where to look" [^src1]. A vague query across a billion-line codebase hits context-window limits before work begins, so codebase setup quality bounds navigation quality [^src1].
+
+## Tool design philosophy ("seeing like an agent")
+
+Claude Code's internal tooling decisions are guided by a principle: **design tools that are shaped to the model's abilities, not to what a human would expect** [^src18]. Anthropic's framing: imagine being given a hard math problem — the right tool depends on your skill set. Giving the model tools calibrated to what it can actually do (vs. what seems intuitive to engineers) is the core discipline [^src18].
+
+Three documented tool design episodes from building Claude Code:
+
+**AskUserQuestion tool**: the goal was to improve Claude's ability to ask clarifying questions (elicitation). Two failed attempts — (1) adding a question array to the ExitPlanTool (confused Claude with conflicting semantics) and (2) a modified markdown format (inconsistently produced) — led to a dedicated tool that Claude calls at any point but is especially prompted to use during plan mode [^src18]. Result: structured output with multiple-choice options, blockable loop until user answers. The key criterion: "even the best designed tool doesn't work if Claude doesn't understand how to call it" [^src18].
+
+**TodoWrite → Task tool**: early Claude Code gave Claude a `TodoWrite` tool and injected system reminders every 5 turns to prevent it from forgetting objectives. As models improved (especially Opus 4.5), the todo list became *constraining* — system reminders made Claude think it had to stick to a fixed list rather than adapt when conditions changed. Subagent use also grew, creating coordination problems on a shared list. Solution: replace with a **Task tool** — tasks include dependencies, share updates across subagents, and the model can alter and delete them [^src18]. **Lesson: as model capabilities increase, tools that once helped start getting in the way. Constantly revisit previous assumptions about what tools are needed** [^src18].
+
+**Agentic search replacing RAG**: Claude Code initially used RAG (pre-indexed vector DB, retrieved snippets handed to Claude before each response). RAG was powerful and fast but required indexing, was fragile across environments, and — crucially — Claude was *given* context instead of *finding* it [^src18]. Giving Claude a Grep tool let it build its own context. Combined with progressive disclosure via skills (a skill can reference other files that Claude reads recursively, adding search capabilities layer by layer), "over the course of a year, Claude went from not really being able to build its own context to being able to do nested search across several layers of files to find the exact context it needed" [^src18].
+
+**Progressive disclosure without adding a tool**: Claude Code has ~20 tools and the bar to add a new one is high — each additional tool is one more option the model must reason about [^src18]. When Claude didn't know enough about its own commands (it couldn't answer "how do I add an MCP?"), the options were: (a) add to system prompt (causes context rot, interferes with the main coding job) or (b) progressive disclosure — a link to docs Claude loads when needed. That worked, but Claude pulled large chunks into context to find one-sentence answers. Final solution: the **Claude Code Guide subagent** — a subagent that does the doc-searching in its own context and hands back only the answer. Main agent context stays clean [^src18].
+
+The unifying line: "designing the tools for your models is as much an art as it is a science" — it depends on the model, the agent's goal, and its operating environment. The method: experiment often, read outputs, try new things [^src18].
 
 ## The harness matters as much as the model
 
@@ -103,6 +130,8 @@ Configuration depends on codebase structure, but consistent patterns appeared ac
 Maintain CLAUDE.md as models evolve: instructions written to compensate for a current model's limitations can constrain a future one (e.g. a rule forcing single-file refactors blocks a newer model's coordinated cross-file edits). Expect a configuration review every three to six months [^src1].
 
 **Organizational layer.** Technical config alone doesn't drive adoption [^src1][^src15]. The fastest rollouts had dedicated infrastructure investment before broad access and a DRI or **agent manager** (a hybrid PM/engineer role) owning conventions, permissions, and the plugin marketplace [^src1]. In large organizations, especially regulated industries, governance questions come up early: who controls which skills and plugins are available, how to prevent thousands of engineers from independently rebuilding the same thing, how to ensure AI-generated code goes through the same review process as human-generated code [^src15]. The smoothest deployments establish cross-functional working groups (engineering, infosec, governance) early and start with a defined set of approved skills, required code review processes, and limited initial access, expanding as confidence builds [^src15].
+
+**Process norms that change when agentic coding becomes the default** (Claude Code team experience) [^src19]: planning shifts from multi-month roadmaps to **just-in-time (JIT)** prototyping — engineering speed changes so fast that a six-month roadmap is stale by month three; context-gathering shifts from "find the person who wrote the code" to "ask Claude that question directly — and ask whether it can be automated"; code review shifts from "humans review everything" to "Claude handles style, bugs, and tests; humans review where domain expertise is irreplaceable" (legal, trust boundaries, product taste). Three metrics for monitoring whether new norms are working: onboarding ramp time (new engineers now ship code in week one), PR cycle time (can expose CI/CD as the new bottleneck), and Claude-assisted commits as a directional signal [^src19].
 
 ## Model configuration
 
@@ -366,3 +395,5 @@ Opus 4.7 reasons more after each user turn — improving coherence and coding qu
 [^src15]: [How Claude Code works in large codebases: Best practices and where to start](../../raw/notes/notes-clippings-how-claude-code-works-in-large-codebases-best-practices-and.md) — Anthropic Applied AI team
 [^src16]: [Introducing routines in Claude Code](../../raw/notes/notes-clippings-introducing-routines-in-claude-code.md) — Anthropic
 [^src17]: [Onboarding Claude Code like a new developer: Lessons from 17 years of development](../../raw/notes/notes-clippings-onboarding-claude-code-like-a-new-developer-lessons-from-17.md) — Brendan MacLean / MacCoss Lab / Anthropic case study
+[^src18]: [Seeing like an agent: how we design tools in Claude Code](../../raw/notes/notes-clippings-seeing-like-an-agent-how-we-design-tools-in-claude-code.md) — Thariq Shihipar, Anthropic
+[^src19]: [Running an AI-native engineering org](../../raw/notes/notes-clippings-running-an-ai-native-engineering-org.md) — Anthropic (Claude Code team lead)

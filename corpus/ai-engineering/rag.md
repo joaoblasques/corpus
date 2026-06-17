@@ -15,6 +15,9 @@ sources:
   - path: raw/web/7-temporal-blind-spots-breaking-enterprise-rag-news-from-gen.md
     channel: web
     ingested_at: 2026-06-12
+  - path: raw/notes/notes-clippings-seeing-like-an-agent-how-we-design-tools-in-claude-code.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - RAG
   - retrieval-augmented generation
@@ -26,7 +29,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-21
-updated: 2026-06-12
+updated: 2026-06-17
 ---
 
 # RAG (Retrieval-Augmented Generation)
@@ -140,6 +143,10 @@ Countermeasures [^src4]: event-driven index invalidation, sparse metadata filter
 
 > A vector index without temporal awareness is "a museum, not a live knowledge base" [^src4].
 
+## RAG vs. agentic search
+
+A design-level distinction: in RAG the agent is *given* pre-retrieved context; in agentic search the agent *finds* its own context using tools like Grep [^src5]. Claude Code started with RAG internally (a vector DB pre-indexed the codebase, snippets handed to Claude before each response) but moved to agentic search because (a) RAG requires indexing and setup, (b) is fragile across environments, and (c) fundamentally positions the agent as a passive recipient of context rather than an active searcher [^src5]. As models improve at building their own context when given the right tools, the balance tilts further toward agentic search for coding tasks. See [[ai-engineering/agentic-search|Agentic Search]] for the full treatment.
+
 ## Role in context engineering
 
 Retrieved chunks are one of the four context components injected into an agent's context window. See [[ai-engineering/context-engineering|Context Engineering]] — "Retrieved context" slot.
@@ -168,3 +175,4 @@ Retrieved chunks are one of the four context components injected into an agent's
 [^src2]: [Diving Deep into RAG, Document Extraction, and More](../../raw/email/email-2026-05-21-diving-deep-into-rag-document-extraction-and-more.md)
 [^src3]: [From Local to Global: A Graph RAG Approach to Query-Focused Summarization](../../raw/web/from-local-to-global-a-graph-rag-approach-to-query-focused-s.md)
 [^src4]: [7 Temporal Blind Spots Breaking Enterprise RAG](../../raw/web/7-temporal-blind-spots-breaking-enterprise-rag-news-from-gen.md)
+[^src5]: [Seeing like an agent: how we design tools in Claude Code](../../raw/notes/notes-clippings-seeing-like-an-agent-how-we-design-tools-in-claude-code.md) — Thariq Shihipar, Anthropic

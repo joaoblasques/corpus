@@ -30,6 +30,12 @@ sources:
   - path: raw/notes/notes-clippings-everyinccompound-engineering-plugin-official-compound-engine.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/notes/notes-clippings-using-claude-code-the-unreasonable-effectiveness-of-html.md
+    channel: notes
+    ingested_at: 2026-06-17
+  - path: raw/notes/notes-clippings-running-an-ai-native-engineering-org.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - agentic coding
   - agentic engineering
@@ -42,6 +48,9 @@ aliases:
   - /goal
   - goal mode
   - let Claude prompt Claude
+  - HTML output
+  - JIT planning
+  - AI-native engineering
 tags:
   - corpus/ai-engineering
   - synthesis
@@ -156,6 +165,53 @@ The `/ce-compound` step is what converts individual sessions into organizational
 
 An open tension McKinney raises: if seniors no longer write much code (he reviews, guides, adds taste), how do we *develop* seniors? His answer — "the hard labour goes away, which is where we usually learn" (learning by osmosis) — so the focus must shift to design patterns and architecture, to have "the technical vocabulary to guide or understand the agents" [^src2].
 
+## HTML as the agentic output format
+
+As agents produce increasingly complex outputs (multi-step plans, code reviews, research reports, design explorations), Markdown becomes restrictive: hard to read past ~100 lines, no rich visualization, difficult to share [^src10]. An emerging practice from the Claude Code team is to direct agents to produce **HTML artifacts** instead [^src10].
+
+HTML's advantages over Markdown for agent output [^src10]:
+- **Information density**: tables, CSS, SVG, code with syntax highlighting, interactive elements, spatial layouts, images — "almost no set of information that Claude can read that you cannot efficiently represent with HTML"
+- **Visual clarity**: tabs, diagrams, responsive layout — "I tend to not actually read more than a 100-line Markdown file"
+- **Shareability**: browsers render HTML natively; colleagues can open the link immediately
+- **Two-way interactions**: sliders, knobs, draggable elements for tuning designs or configs; export button turns UI changes back into a prompt or JSON
+
+**Canonical use cases** [^src10]:
+
+| Use case | What Claude produces |
+|---|---|
+| Specs and exploration | Web of HTML files — explorations, mockups, implementation plan — passed as context to the next session |
+| Code review | Rendered diff with inline annotations, severity color-coding, flowcharts |
+| Design and prototypes | Interactive animation sliders, component variants side-by-side |
+| Reports | SVG diagrams, interactive explainers, slideshows from Slack/codebase/git history |
+| Custom editing interfaces | Throwaway editors with "copy as prompt" / "copy as JSON" export |
+
+**Prompting**: "make an HTML file" or "make an HTML artifact" is sufficient — the main skill is knowing what you want the artifact to do [^src10]. Over time, recurrent patterns warrant a skill.
+
+**Token concern**: "With the 1MM context window in Opus 4.7, the increased token usage is not really noticeable" [^src10]. The practitioner using this daily has "stopped using Markdown altogether for almost everything" [^src10].
+
+The deeper reason: HTML keeps the human more engaged with agent outputs. As agents do more, there is a risk of reading plans less closely; richer output formats counteract that drift [^src10]. This is the output-format counterpart to the verification discipline in [[ai-engineering/agent-testing|Agent Testing]].
+
+## AI-native engineering org norms
+
+When an engineering team goes fully agentic, the existing processes (built around "coding is expensive") stop working and must be rewritten [^src11]. Documented norms that changed on the Claude Code team:
+
+**Planning → just-in-time (JIT)**. "The old norm was to spend a lot more time pre-planning because coding time was expensive." When engineering speed changes radically, six-month roadmaps go stale by month three [^src11]. The new norm: prototype first, put internal users on it, act on feedback — design docs replaced by discussions in PRs [^src11].
+
+**Context-gathering → ask Claude, not the author**. "Now, since all our PRs are assisted by Claude, 'Who made this change?' is no longer sufficient." Instead: identify what you actually need (regression cause? expert answer? decision context?) and ask Claude that specific question — then also ask whether the task can be automated [^src11].
+
+**Code review → trust but verify**. Claude handles style, linting, PR feedback, catching bugs before commit, adding tests. Human review narrows to: legal/risk tolerance, trust boundaries and security-sensitive code, product sense and taste [^src11]. "It's important to continually evaluate, though, because the right balance of trust vs. verify will keep changing as the models improve" [^src11].
+
+**Team makeup → blurred roles**. "Our PMs code a lot now." Non-traditional coders doing more engineering; engineers taking on content and design. Hiring priorities shift toward: (1) **creative builders with product sense** — dreamers passionate about shipping; (2) **engineers with deep systems expertise** — especially for infrastructure work. Raw throughput is de-emphasized: "the models handle that" [^src11].
+
+**Rollout pattern**: some norms are team-wide mandates ("relentlessly dogfood your product", "keep the team flat", "don't hesitate to kill obsolete processes"); others are delegated to pods to adapt (triage, planning rituals, which workflows get "Claudified" first) [^src11].
+
+**Three leading metrics** for whether new processes are sticking [^src11]:
+1. **Onboarding ramp time** — how soon does a new engineer, designer, or PM start shipping? (Now within the first week on the Claude Code team)
+2. **PR cycle time** — a lagging bottleneck here may reveal CI/CD struggling to keep up with the volume of AI-generated PRs
+3. **Claude-assisted commits** — directional signal, not a success metric by itself; "don't confuse throughput with success"
+
+See [[ai-engineering/claude-code|Claude Code]] for organizational governance patterns and [[ai-engineering/agentic-workflow|Agentic Workflows]] for the broader dynamic-workflow layer.
+
 ## See also
 
 - [[ai-engineering/agent-harness|Agent Harness]] — the scaffolding (hooks, loops, context policies) every coding agent runs inside
@@ -178,3 +234,5 @@ An open tension McKinney raises: if seniors no longer write much code (he review
 [^src7]: [How I AI — Goals in Coda (Claire Vo)](../../raw/youtube/youtube-2wljl9a2cna.md)
 [^src8]: [EveryInc/compound-engineering-plugin — Official Compound Engineering plugin](../../raw/notes/notes-clippings-everyinccompound-engineering-plugin-official-compound-engine.md) — EveryInc, GitHub
 [^src9]: [EveryInc/compound-knowledge-plugin — AI-powered workflows for knowledge work](../../raw/notes/notes-clippings-everyinccompound-knowledge-plugin-ai-powered-workflows-for-k.md) — EveryInc, GitHub
+[^src10]: [Using Claude Code: The unreasonable effectiveness of HTML](../../raw/notes/notes-clippings-using-claude-code-the-unreasonable-effectiveness-of-html.md) — Thariq Shihipar, Anthropic
+[^src11]: [Running an AI-native engineering org](../../raw/notes/notes-clippings-running-an-ai-native-engineering-org.md) — Anthropic (Claude Code team lead)

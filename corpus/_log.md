@@ -666,3 +666,15 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - new pages (1): prompt-caching
 - updated (8): ai-product-management (AI-exponential PM), claude-managed-agents (self-hosted sandboxes, MCP tunnels, dreaming/outcomes, AWS), multi-agent-systems (Anthropic 5-pattern taxonomy), agent-skills (internal catalog + best practices), ralph-loop (loop engineering generalization), claude-code (routines + Skyline onboarding case), mcp (consumer connectors), claude-api (Claude Platform on AWS)
 - lint: clean — 0 broken wikilinks · 0 broken citations · 0 orphans
+
+## [2026-06-17 19:05] domain | create blockchain (provisional)
+- 12 substantive crypto/blockchain-fundamentals sources (nakamoto.ghost.io primer) surfaced in the Clippings drain; fit no existing domain. 11 pages (hub + 10). Provisional; 30-day review 2026-07-17.
+
+## [2026-06-17 19:05] ingest | Obsidian Clippings drain batch 5 / wave 1 — 31 notes (blockchain ×16, ai-engineering ×13, software-engineering ×2)
+- channel: notes (collect-obsidian; 00_Inbox/Clippings/scrape crypto cluster, final 7 top-level Clippings, 06_Metadata/Reference, 03_Resources/Snippets)
+- blockchain (NEW): 11 pages (history-of-money, the-cypherpunks, satoshi-nakamoto, bitcoin, proof-of-work, public-key-cryptography, hash-functions, merkle-trees, p2p-networking, zero-knowledge-proofs + README). 4 site-meta skipped (about/contribute/haseeb/index).
+- ai-engineering: enriched claude-code (tool design), agentic-coding (HTML output + AI-native org), context-window-management (1M/rewind/compact), optimizing-claude (advisor strategy), claude-api (advisor tool), rag (RAG vs agentic search). 8 low-signal/empty/dup notes skipped-with-pages:[] (founder's playbook teaser, vault-personal Reference notes, empty link stubs, dup commands ref).
+- software-engineering: both Snippets skipped (trivial/vault-specific).
+- prior step: 422 stale PARA-native (Articles/Study Notes) inbox copies purged from raw/_inbox to prevent erroneous reaping of in-place notes.
+- worker path-error fixed by coordinator: blockchain worker wrote to repo-root blockchain/ → moved to corpus/blockchain/.
+- lint: clean — 0 broken wikilinks · 0 broken citations · 0 orphans

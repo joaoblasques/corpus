@@ -2,17 +2,22 @@
 type: synthesis
 domain: ai-engineering
 status: draft
-sources: []
+sources:
+  - path: raw/notes/notes-clippings-the-advisor-strategy-give-sonnet-an-intelligence-boost-with.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - optimizing Claude
   - Claude productivity
   - Claude setup optimization
   - getting more out of Claude
+  - advisor strategy
+  - advisor tool
 tags:
   - corpus/ai-engineering
   - synthesis
 created: 2026-06-09
-updated: 2026-06-09
+updated: 2026-06-17
 ---
 
 # Optimizing a Claude Setup for Efficiency and Productivity
@@ -47,18 +52,34 @@ Start with one agent; add sub-agents only after a workflow is proven and the sub
 ### 6. Be concise; manage the window actively
 Verbose instructions hurt — extra tokens add confusion. Give clear specs and let the agent ask. Compact proactively with preservation notes (`/compact keep …`) before the window fills, and reset (`/clear`) between unrelated tasks ([[ai-engineering/context-window-management|Context Window Management]]). Treat the agent like a senior developer / new employee: specify intent, supply a worked example, correct iteratively ([[ai-engineering/ai-agent|AI Agent]]).
 
-### 7. Don't install other people's skills
+### 7. The advisor strategy: Sonnet executor + Opus advisor
+
+The **advisor strategy** pairs a smaller, cheaper executor model (Sonnet or Haiku) with a larger advisor model (Opus) in the same agentic run [^src_adv]. The executor drives end-to-end — calling tools, reading results, iterating — and escalates to Opus only when it hits a decision it cannot reasonably resolve. Opus accesses the shared context, returns a short guidance response (typically 400–700 tokens), and the executor resumes.
+
+This inverts the common orchestrator-subagent pattern where the large model decomposes work and the small model executes; here the small model drives and the large model advises on demand [^src_adv].
+
+**Measured results** (Anthropic evals) [^src_adv]:
+- Sonnet + Opus advisor: **+2.7 pp on SWE-bench Multilingual** vs Sonnet alone, while **reducing cost per task 11.9%**
+- Haiku + Opus advisor on BrowseComp: **41.2%** vs Haiku solo at **19.7%** (more than double); costs 85% less than Sonnet solo
+- The advisor only generates a short plan; the executor handles all full output at its lower rate — so the combined cost stays well below running Opus end-to-end
+
+**API usage** (beta): declare `{"type": "advisor_20260301", "name": "advisor", "model": "claude-opus-4-6", "max_uses": 3}` in the tools list alongside your other tools. The handoff happens inside a single `/v1/messages` request — no extra round-trips or context management. Advisor tokens are reported separately in the usage block for cost tracking [^src_adv].
+
+The key insight: "frontier-level reasoning applies only when the executor needs it, and the rest of the run stays at executor-level cost" [^src_adv]. This is the cost-intelligence lever that sits between "run Sonnet alone" and "run Opus end-to-end."
+
+See [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] for the broader generator-verifier and orchestrator-subagent patterns this fits into, and [[ai-engineering/claude-api|Claude API]] for the full platform context.
+
+### 8. Don't install other people's skills
 Two reasons: security (a downloaded skill is an attack vector) and missing context (it lacks *your* successful-run experience). Review others' skills to learn from them; don't adopt them wholesale ([[ai-engineering/agent-skills|Agent Skills]]).
+
+[^src_adv]: [The advisor strategy: Give Sonnet an intelligence boost with Opus](../../raw/notes/notes-clippings-the-advisor-strategy-give-sonnet-an-intelligence-boost-with.md) — Anthropic
 
 ## What this synthesis does not yet cover
 
-The corpus answers the *principles* of Claude productivity well but is thin on:
+The corpus now covers Claude Code mechanics well (slash commands, hooks, skills, subagents, dynamic workflows via [[ai-engineering/claude-code|Claude Code]]), official Anthropic docs, and the advisor strategy (§7 above). Remaining gaps:
 
-- **Claude Code mechanics** — slash commands, hooks, `settings.json`, output styles, MCP configuration (only lightly touched via one source).
-- **Primary documentation** — no official Anthropic / Claude Code docs are ingested; the cluster rests on one podcast plus course notes.
-- **A specific personal setup** — the corpus has no record of an individual's actual configuration.
-
-These are the highest-leverage sources to ingest next to deepen the `Claude` cluster.
+- **A specific personal setup** — the corpus has no record of an individual's actual configuration end-to-end.
+- **Eval-driven optimization** — how to systematically measure before/after on a personal workflow.
 
 ## See also
 

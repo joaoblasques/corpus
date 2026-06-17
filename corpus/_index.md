@@ -1,6 +1,6 @@
 # Corpus Index
 
-> Last updated: 2026-06-17 | Total pages: 164 | Total sources: 361
+> Last updated: 2026-06-17 | Total pages: 175 | Total sources: 378
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
@@ -181,7 +181,22 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[ai-business/ai-synthetic-focus-group|AI Synthetic Focus Group]] — concept · draft · LLM buyer-persona panel critiques ads/copy before spend; predictive-vs-reactive marketing shift (claims flagged unsourced)
 - [[ai-business/ai-consulting-playbook|AI Consulting Playbook]] — concept · draft · free "AI mini assessment" two-call client-acquisition framework; frequency×friction bottleneck selection, the "money question" close
 
+### blockchain
+- [[blockchain/README|Blockchain]] — hub · draft · cryptocurrency & blockchain fundamentals (provisional)
+- [[blockchain/history-of-money|History of Money]] — concept · draft · barter→fiat→Bitcoin; money properties; social-consensus theory
+- [[blockchain/the-cypherpunks|The Cypherpunks]] — entity · draft · the crypto movement; digital-cash predecessors (eCash, b-money, BitGold) and why they failed
+- [[blockchain/satoshi-nakamoto|Satoshi Nakamoto]] — entity · draft · unknown identity; 2007–2011 timeline; Nakamoto Consensus as synthesis of prior work
+- [[blockchain/bitcoin|Bitcoin]] — entity · draft · the technical stack overview; Genesis Block; links the five underlying layers
+- [[blockchain/proof-of-work|Proof of Work]] — concept · draft · Hashcash origin; PoW mechanics, difficulty, Nakamoto Consensus
+- [[blockchain/public-key-cryptography|Public-Key Cryptography]] — concept · draft · encryption vs hashing vs signing; ECC secp256k1; wallet types; quantum threats
+- [[blockchain/hash-functions|Hash Functions]] — concept · draft · SHA-256 properties; one-way/avalanche/collision-resistance; broken vs secure families
+- [[blockchain/merkle-trees|Merkle Trees]] — concept · draft · construction; O(log n) inclusion proofs; Bitcoin SPV light clients
+- [[blockchain/p2p-networking|P2P Networking]] — concept · draft · P2P architecture; Napster/Gnutella/BitTorrent; gossip; Bitcoin peer discovery
+- [[blockchain/zero-knowledge-proofs|Zero-Knowledge Proofs]] — concept · draft · SNARKs vs STARKs; arithmetization + LDC; tradeoffs
+
 ## Recent additions
+- 2026-06-17: **NEW DOMAIN `blockchain`** (provisional) — 11 pages from the crypto/blockchain primer cluster (Bitcoin, Satoshi, PoW, public-key crypto, hash functions, Merkle trees, P2P, ZK proofs) surfaced during the Clippings drain.
+- 2026-06-17: **Obsidian Clippings drain (collect→ingest→reap, batches 1–5)** — incl. 7 final Clippings + Reference + crypto cluster; ai-engineering enrichment (claude-code tool design, context-window rewind/1M, optimizing-claude advisor strategy, agentic-coding HTML output). 422 stale PARA-native inbox copies purged; many low-signal tail notes skipped-and-reaped.
 - 2026-06-17: **Obsidian Clippings drain (collect→ingest→reap, batches 1–4, 41 notes)** — new pages computer-use, claude-managed-agents, prompt-caching; broad enrichment of claude-code, claude-cowork, claude-models, mcp, multi-agent-systems, agent-skills, agentic-coding, ai-product-management, ralph-loop, agent-harness, agent-security + more. All notes reaped from vault after ingest.
 - 2026-06-17: **YouTube batch (v0.6 cluster pipeline, 4 parallel workers)** — 12 transcripts ingested → 7 new pages, 9 enriched. New: [[data-engineering/dataform]], [[data-engineering/snowflake]], [[data-engineering/sql-intermediate-results]], [[software-engineering/cognitive-debt]], [[ai-business/ai-synthetic-focus-group]], [[ai-business/ai-consulting-playbook]], [[ai-engineering/sources/boris-cherny-100-percent-claude-code]]. Updated: apache-iceberg, open-table-formats, dimensional-modeling, data-modeling-meaning, databricks, claude-code, vibe-coding, ai-product-management, agentic-coding, algorithms, engineering-craft.
 - 2026-06-17: **ingest-auto safe pass (6 candidates, 2 ingested, 4 deferred)** — [[ai-engineering/anthropic]] (updated, +1 source — Anthropic Academy free certifications: Claude 101 / AI Fluency 4Ds / Intro to Cowork; fills prior unsourced Skilljar note); [[ai-engineering/claude-cowork]] (updated, +1 source — Cowork Toolkit 7-day arc + routing-conflict edge case). Deferred: 2 TLDR digests, Decathlon promo, Google tips promo.
