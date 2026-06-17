@@ -139,7 +139,12 @@ def build_url_source(meta: dict, body: str) -> str:
     lines = [
         "---", "channel: web", "source: obsidian-list",
         f"source_url: {meta['source_url']}",
-        f"via_vault_list: {meta['via_vault_list']}",
+    ]
+    if meta.get("via_vault_note"):
+        lines.append(f"via_vault_note: {meta['via_vault_note']}")
+    else:
+        lines.append(f"via_vault_list: {meta['via_vault_list']}")
+    lines += [
         f"title: {yaml_scalar(meta.get('title', ''))}",
         f"collected_at: {meta['collected_at']}", "---", "", body.strip(), "",
     ]

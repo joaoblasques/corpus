@@ -92,6 +92,15 @@ def test_build_url_source():
     assert doc.rstrip().endswith("Article body")
 
 
+def test_build_url_source_via_vault_note():
+    doc = co.build_url_source(
+        {"source_url": "https://a.com/x", "via_vault_note": "Clippings/Routines.md",
+         "title": "X", "collected_at": "2026-06-17"}, "body text")
+    assert "channel: web" in doc
+    assert "via_vault_note: Clippings/Routines.md" in doc
+    assert "via_vault_list:" not in doc
+
+
 def test_fm_field():
     assert co.fm_field("---\nvault_origin: a/b.md\n---\n", "vault_origin") == "a/b.md"
     assert co.fm_field("no fm", "vault_origin") is None
