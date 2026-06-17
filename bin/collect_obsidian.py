@@ -106,10 +106,14 @@ def read_note(abs_path: str):
 
 def note_filename(rel_path: str, base=None) -> Path:
     base = base if base is not None else INBOX
-    stem = rel_path.rsplit("/", 1)[-1]
+    parts = rel_path.replace("\\", "/").split("/")
+    stem = parts[-1]
     if stem.endswith(".md"):
         stem = stem[:-3]
-    return base / f"notes-{slugify(stem)}.md"
+    # full parent path slug so same-titled notes in different trees never collide
+    parent_slug = slugify("-".join(parts[:-1])) if len(parts) >= 2 else ""
+    name = f"notes-{parent_slug}-{slugify(stem)}.md" if parent_slug else f"notes-{slugify(stem)}.md"
+    return base / name
 
 
 def url_filename(url: str, title: str, base=None) -> Path:

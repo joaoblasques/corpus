@@ -60,8 +60,14 @@ def test_read_note_no_frontmatter_uses_stem(tmp_path):
 
 
 def test_note_filename(tmp_path):
-    p = co.note_filename("03_Resources/Articles/Clean Code!.md", tmp_path)
-    assert p.name == "notes-clean-code.md"
+    p = co.note_filename("03_Resources/Books/Clean Code!.md", tmp_path)
+    assert p.name == "notes-03-resources-books-clean-code.md"
+    # same title, different folder -> different raw filename (collision fixed)
+    a = co.note_filename("Clippings/Routines.md", tmp_path)
+    b = co.note_filename("00_Inbox/Clippings/Routines.md", tmp_path)
+    assert a.name == "notes-clippings-routines.md"
+    assert b.name == "notes-00-inbox-clippings-routines.md"
+    assert a.name != b.name
 
 
 def test_build_note_source():
