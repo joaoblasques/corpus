@@ -92,7 +92,7 @@ Same principle as general SWE: "Your resume should make it obvious what kind of 
 
 **Inbound:** LinkedIn profile must make niche clear, include right keywords, and convey "what kind of engineer you are within seconds" [^src3].
 
-**Outbound:** don't just search "remote software engineer" and apply everywhere. Target companies that already hire remote — remote-first companies, small startups, YC companies, teams without a fixed office. Then reach out directly: short, specific messages to engineers, founders, or hiring managers. Track applications, contacts, responses [^src3]. This combines with the [[ai-business/ai-job-search#Path Two — autonomous apply (ApplyPilot)|ApplyPilot]] pipeline above for sourcing breadth.
+**Outbound:** don't just search "remote software engineer" and apply everywhere. Target companies that already hire remote — remote-first companies, small startups, YC companies, teams without a fixed office. Then reach out directly: short, specific messages to engineers, founders, or hiring managers. Track applications, contacts, responses [^src3]. This combines with the ApplyPilot pipeline (Path Two above) for sourcing breadth.
 
 ### Phase 5 — Prepare for remote interviews differently
 
