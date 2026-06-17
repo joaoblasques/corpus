@@ -7,9 +7,9 @@ import obsidian_client as oc  # noqa: E402
 
 def test_collect_copies_note_and_fetches_url(tmp_path, monkeypatch):
     vault = tmp_path / "vault"
-    (vault / "03_Resources/Articles").mkdir(parents=True)
+    (vault / "03_Resources/Books").mkdir(parents=True)
     (vault / "00_Inbox/Clippings").mkdir(parents=True)
-    (vault / "03_Resources/Articles/New.md").write_text("---\ntitle: New\n---\nbody", encoding="utf-8")
+    (vault / "03_Resources/Books/New.md").write_text("---\ntitle: New\n---\nbody", encoding="utf-8")
     (vault / "00_Inbox/Clippings/articles to process.md").write_text("https://a.com/x\n", encoding="utf-8")
     inbox = tmp_path / "inbox"; inbox.mkdir()
     monkeypatch.setattr(oc.co, "INBOX", inbox)
@@ -18,7 +18,7 @@ def test_collect_copies_note_and_fetches_url(tmp_path, monkeypatch):
     rc = oc.cmd_collect(oc._args(["collect", "--vault", str(vault)]))
     assert rc == 0
     files = {p.name for p in inbox.glob("*.md")}
-    assert any(n.startswith("notes-new") for n in files)
+    assert any(n.startswith("notes-") and "new" in n for n in files)
     assert any(n.startswith("web-art") for n in files)
 
 
@@ -47,8 +47,8 @@ def test_collect_skips_urls_in_processed_ledger(tmp_path, monkeypatch):
 
 def test_collect_dry_run_writes_nothing(tmp_path, monkeypatch):
     vault = tmp_path / "vault"
-    (vault / "03_Resources/Articles").mkdir(parents=True)
-    (vault / "03_Resources/Articles/New.md").write_text("body", encoding="utf-8")
+    (vault / "03_Resources/Books").mkdir(parents=True)
+    (vault / "03_Resources/Books/New.md").write_text("body", encoding="utf-8")
     inbox = tmp_path / "inbox"; inbox.mkdir()
     monkeypatch.setattr(oc.co, "INBOX", inbox)
     monkeypatch.setattr(oc.co, "DEDUP_DIRS", [inbox])
