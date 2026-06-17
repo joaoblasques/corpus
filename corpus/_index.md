@@ -1,6 +1,6 @@
 # Corpus Index
 
-> Last updated: 2026-06-16 | Total pages: 154 | Total sources: 307
+> Last updated: 2026-06-17 | Total pages: 154 | Total sources: 309
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
@@ -172,6 +172,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[ai-business/ai-job-search|Finding a Job Using AI]] — concept · draft · AI career-strategist projects + autonomous apply (ApplyPilot); quality over volume
 
 ## Recent additions
+- 2026-06-17: **ingest-auto safe pass (6 candidates, 2 ingested, 4 deferred)** — [[ai-engineering/anthropic]] (updated, +1 source — Anthropic Academy free certifications: Claude 101 / AI Fluency 4Ds / Intro to Cowork; fills prior unsourced Skilljar note); [[ai-engineering/claude-cowork]] (updated, +1 source — Cowork Toolkit 7-day arc + routing-conflict edge case). Deferred: 2 TLDR digests, Decathlon promo, Google tips promo.
 - 2026-06-15: **ingest-auto safe pass (3 candidates, 2 ingested, 1 deferred)** — software-engineering/[[software-engineering/software-design-principles]] (updated, +1 source — DIP worked example); ai-engineering/[[ai-engineering/claude-cowork]] (updated, +1 source — post-call-wrapup skill example)
 - 2026-06-15: **YouTube + email batch (v0.6 cluster pipeline, 4 parallel workers)** — 35 new pages, ~19 updated, 62 sources ingested (27 YouTube transcripts + 35 email/web), 9 skipped at the citation gate.
 - 2026-06-15: ai-engineering — [[ai-engineering/ai-fundamentals]], [[ai-engineering/machine-learning]], [[ai-engineering/neural-network]], [[ai-engineering/statistics-for-ml]], [[ai-engineering/ai-product-management]], [[ai-engineering/agentic-workflow]], [[ai-engineering/vibe-coding]], [[ai-engineering/agi]] (new); +2 source pages; learning-ai-engineering, prompt-engineering, agent-harness, agent-security, agent-memory, agentic-coding, agent-skills (updated)

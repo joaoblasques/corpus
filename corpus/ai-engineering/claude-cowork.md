@@ -48,6 +48,9 @@ sources:
   - path: raw/email/email-2026-06-09-post-call-admin-done-in-one-click.md
     channel: email
     ingested_at: 2026-06-15
+  - path: raw/email/email-2026-05-06-day-7-you-built-the-foundation-here-s-the-shortcut-to-the-re.md
+    channel: email
+    ingested_at: 2026-06-17
 aliases:
   - Claude Cowork
   - Cowork
@@ -57,7 +60,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-06-12
-updated: 2026-06-12
+updated: 2026-06-17
 ---
 
 # Claude Cowork
@@ -115,6 +118,8 @@ Workers at 90%+ of companies use personal chatbots for work, often without telli
 
 A free email-course starter kit (Jeff Su / Cowork Academy) that builds a self-improving workspace [^src7]. It ships two pre-filled starter files (`CLAUDE.md`, `MEMORY.md`), a voice profile + extraction prompt, populate prompts for two workstations (Email HQ, Personal Finances), a first-project prompt, and a session-audit skill — tied together by routing logic and three-level inheritance [^src7]. (The shared Google-Drive template folders confirm the artifacts: `CLAUDE.md`/`MEMORY.md` [^src13], `voice-principles.md`/`voice-extraction-prompt.md` [^src14], `starter-session-audit.skill` [^src15].)
 
+The course runs as a 7-day arc — Day 1 foundation files (`CLAUDE.md`/`MEMORY.md`), Day 2 voice principles, Day 3 Email HQ, Day 4 Personal Finances + routing, Day 5 first scoped project, Day 6 session audits — closing on Day 7 with a recap and the scaling vision: 15+ workstations (health, housing, product marketing, content) each accruing months of memory [^src17]. The framing is that after the toolkit "the gap isn't knowledge, it's time" — every structural concept is in place, what remains is accumulation [^src17].
+
 ## Workstations
 
 **Workstations** are domain folders inside the workspace, one per area of work; each has its own CLAUDE.md (domain rules) and MEMORY.md (domain context) [^src10]. Root rules cascade down automatically, so voice principles and preferences flow into every workstation without repetition [^src10]. Two types: **universal** (cut across everything — email, brand identity) and **dedicated** (own one area — personal finances, health) [^src10].
@@ -125,7 +130,7 @@ A **populate prompt** creates the workstation and fills it from your real data. 
 
 A 3-month-old workspace beats a 3-day-old one through three mechanisms [^src11]:
 1. **Accumulating memory** — each correction (a sign-off, a banned phrase) gets written to the right MEMORY.md and never needs repeating.
-2. **Routing** — a routing table in the root CLAUDE.md (one sentence per row) loads only the workstation needed for the task, so adding workstations doesn't slow every session.
+2. **Routing** — a routing table in the root CLAUDE.md (one sentence per row) loads only the workstation needed for the task, so adding workstations doesn't slow every session. Resolving conflicts is part of building the table: the canonical edge case is whether a landlord email routes to Email HQ or to a Housing workstation [^src17].
 3. **Session audits** — saying "audit this session" has Cowork scan for uncaptured learnings and propose where to save each (which file, which section, exact wording), with your approval. "Two actions… are what make the workspace self-improving instead of static" [^src11].
 
 Memory discipline: 1–2 sentences per entry; a 150-line ceiling on root MEMORY.md (fix by compression/archiving, never raising the ceiling); and an `ARCHIVE.md` that is *not* read every session, so it has no size cost — the "filing cabinet" to MEMORY.md's "whiteboard" [^src11].
@@ -166,3 +171,4 @@ Two patterns reinforce the rest of this page: the guardrail **"Never send. Alway
 [^src14]: [Cowork Toolkit templates — Day 2](../../raw/web/shared-cowork-toolkit-templates-d2.md)
 [^src15]: [Cowork Toolkit templates — Day 6](../../raw/web/shared-cowork-toolkit-templates-d6.md)
 [^src16]: [Post-call admin, done in one click (Return My Time)](../../raw/email/email-2026-06-09-post-call-admin-done-in-one-click.md)
+[^src17]: [Day 7: You built the foundation. Here's the shortcut to the rest.](../../raw/email/email-2026-05-06-day-7-you-built-the-foundation-here-s-the-shortcut-to-the-re.md)

@@ -583,3 +583,37 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - data-engineering/parquet.md: ADDITIVE enrichment (preserved existing [^src1] study-note content; added web source [^src2]) — physical layout (row groups/column chunks/pages), encoding (dictionary), compression codecs, predicate pushdown via min/max stats, footer metadata, Dremel nested model, data types, limitations. Cross-linked query-engine-routing.
 - Coordinator enforced §7 one-quote rule (removed a redundant 2nd quote). source stamped. sources 306→307; pages unchanged.
 - deterministic lint after: 0 broken wikilinks · 0 broken citations · 0 orphans · 5 stubs (clean).
+
+## [2026-06-17 09:00] ingest | Certified. (Ruben Hassid) → enrich anthropic.md
+- source: raw/email/email-2026-05-06-certified.md
+- channel: email
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/anthropic.md]
+- new pages: []
+- notes: ingest-auto run; 2 processed, 4 deferred. Filled the prior `[unsourced]` Skilljar note in the Learning-resources section with sourced content — Anthropic Academy (anthropic.skilljar.com) three free certs (Claude 101 / AI Fluency: Framework & Foundations [4Ds] / Intro to Claude Cowork); paid "Claude Certifications" flagged as non-endorsed scams; added career-signal angle (Stanford AI Index 78%; PwC ~56% AI-skill wage premium) cross-linked to ai-business/technical-career. Source stamped + moved to raw/email/.
+
+## [2026-06-17 09:00] ingest | Day 7: You built the foundation (Jeff Su Cowork Toolkit) → enrich claude-cowork.md
+- source: raw/email/email-2026-05-06-day-7-you-built-the-foundation-here-s-the-shortcut-to-the-re.md
+- channel: email
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/claude-cowork.md]
+- new pages: []
+- notes: ingest-auto run; 2 processed, 4 deferred. Capstone of the Cowork Toolkit 7-day arc (Day 7 recap); added the full Day 1→7 sequence and the canonical routing-conflict edge case (landlord email → Email HQ vs Housing). Largely promotional (Cowork Academy upsell) — extracted only the structural recap. Source stamped + moved to raw/email/.
+
+## [2026-06-17 09:00] ingest | ingest-auto deferrals (4)
+- DEFER UNCERTAIN: email-2026-06-02-instagram-exploit... (TLDR Dev digest — multi-topic, content in separate raw/web/ companions)
+- DEFER UNCERTAIN: email-2026-05-21-ais-uneasy-promise... (TLDR Data digest — multi-topic, content in separate raw/web/ companions)
+- DEFER G1: email-2026-05-15-parabens... (Decathlon PT discount-voucher promo — no domain fit)
+- DEFER UNCERTAIN: email-2026-05-14-jonas-busy-declutter... (Google promo tips — no substantive claims; productivity fit too thin)
+- notes: all 4 left in raw/_inbox/, unstamped, logged to raw/_inbox/_REVIEW.md.
+
+## [2026-06-17T08:21] config | scheduled run
+- collectors:
+  - gmail: 6 collected · status=ok
+  - obsidian: 3 collected · status=ok
+  - youtube: 17 collected · status=ok
+  - links_refetch: 0 refetched · status=ok
+- ingest:
+  - ingest: 2 ingested · 4 deferred · status=ok
+- lint:
+  - 0 broken wikilinks · 0 broken citations · 0 orphans · 5 stubs

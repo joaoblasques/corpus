@@ -15,6 +15,9 @@ sources:
   - path: raw/email/email-2026-05-29-claude-opus-4-8-arrives.md
     channel: email
     ingested_at: 2026-06-12
+  - path: raw/email/email-2026-05-06-certified.md
+    channel: email
+    ingested_at: 2026-06-17
 aliases:
   - Anthropic
   - Anthropic PBC
@@ -22,7 +25,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-06-12
-updated: 2026-06-16
+updated: 2026-06-17
 ---
 
 # Anthropic
@@ -31,7 +34,14 @@ updated: 2026-06-16
 
 ## Learning resources
 
-`claude101.com` is a free collection of guides covering Claude basics, Cowork, Skills, "Claude to sound like you", certifications, and avoiding AI-speak — a recap of which guides to read and in what order [^src2][^src3]. Anthropic also hosts official course materials via a Skilljar LMS [unsourced — referenced only as a login page in raw/web/anthropic-courses.md, no course content captured].
+`claude101.com` is a free collection of guides covering Claude basics, Cowork, Skills, "Claude to sound like you", certifications, and avoiding AI-speak — a recap of which guides to read and in what order [^src2][^src3].
+
+**Anthropic Academy** hosts official, free certifications via a Skilljar LMS (`anthropic.skilljar.com`); these are the only Anthropic-issued Claude certificates — viral paid "Claude Certifications" sold elsewhere are scams Anthropic does not endorse [^src5]. Three certificates [^src5]:
+- **Claude 101** (~1 hr) — what Claude is, when to use Chat vs Cowork vs Code, how Projects and Skills work, connecting Gmail/Drive/Slack.
+- **AI Fluency: Framework & Foundations** (~3 hr, 13 lessons) — the **4Ds** of working with AI: *Delegation, Description, Discernment, Diligence*; effective prompting, critical thinking about outputs, and ethics. Ships a vocabulary cheat sheet.
+- **Introduction to Claude Cowork** (~2 hr) — what Cowork is, Projects, Plugins, Skills, scheduling tasks, file/document handling, permissions, and picking the right model.
+
+The framing is a low-cost career signal: a certificate shows a hiring viewer you have "actually touched the tool." The source cites the Stanford 2025 AI Index (78% of organizations used AI in 2024, up from 55% the year before) and a PwC finding that AI-skilled workers command a ~56% average wage premium (up from 25%) [^src5] — see [[ai-business/technical-career|Navigating a Technical Career]].
 
 ## See also
 
@@ -44,3 +54,4 @@ updated: 2026-06-16
 [^src2]: [Claude 101](../../raw/web/claude-101.md)
 [^src3]: [Claude 101 (email)](../../raw/email/email-2026-06-03-claude-101.md)
 [^src4]: [Claude Opus 4.8 arrives (The Code)](../../raw/email/email-2026-05-29-claude-opus-4-8-arrives.md)
+[^src5]: [Certified. (Ruben Hassid)](../../raw/email/email-2026-05-06-certified.md)
