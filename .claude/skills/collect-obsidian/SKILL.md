@@ -27,7 +27,15 @@ never ingest into `corpus/` here.
 4. Tell the user to review and commit the vault deletions (`git -C <vault> status`).
 
 ## Notes
+- **Scope — include (collect → reap):** `Clippings/` (top-level), `00_Inbox/Clippings/`,
+  `03_Resources/{Books, Snippets, Prompt Templates}`, `06_Metadata/Reference/`.
+- **Scope — PARA-native (never reaped):** `03_Resources/Articles/`, `03_Resources/Study Notes/`
+  — ingested in place under Branch B; reaper skips them.
+- **Scope — excluded:** `03_Resources/llm-wiki-system` (corpus mirror), `01_Projects`,
+  `02_Areas`, `04_Archive`, `06_Metadata/{Templates, SETUP_COMPLETE.md, README.md}`,
+  rest of `00_Inbox`, `*_processed.md`, `README.md`, binaries.
+- Inline external links inside note bodies are fetched as channel `web` (provenance
+  `via_vault_note`), deduped, asset/auth-walled links skipped, capped at 10 per note.
 - Auth-walled URLs (LinkedIn/x.com) in `articles to process.md` fail extraction → recorded,
   URL left in the list.
-- llm-wiki-system, 01_Projects, 04_Archive are out of scope (excluded).
-- Large first run: collect discovers all ~489 resource notes; ingest + reap drain over waves.
+- Large first run: collect discovers all resource notes in scope; ingest + reap drain over waves.

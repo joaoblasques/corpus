@@ -628,3 +628,9 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - lint: clean — 0 broken wikilinks · 0 broken citations · 0 orphans (cognitive-debt new stub, <14d)
 - contradictions surfaced (not overwritten): Cherny's minimal-scaffolding "don't box the model in" stance vs the corpus's harness-emphasis pages (agent-harness/agentic-coding) — documented on the Boris Cherny source page as a tension-to-track, framed as a weighting difference not a factual conflict; no synthesis page created
 - notes: 1 rate-limited transcript (youtube-ow3es1af5-y) left unstamped to self-recover via the daily job; 2 low-utility ai-business sources kept tight + confidence:0.5 with promo claims flagged; recurring unverified "92% accuracy vs human focus groups" figure cross-referenced against the existing monetizing-code gotcha rather than treated as corroboration
+
+## [2026-06-17 16:57] config | collect-obsidian include set + inline-link following
+- include: +Clippings (top-level), +06_Metadata/Reference; -03_Resources/Articles, -03_Resources/Study Notes (kept PARA-native, never reaped)
+- links: note-body inline links now fetched (channel web, via_vault_note; asset/auth filters; cap 10/note)
+- raw note filenames disambiguated by parent folder (collision fix)
+- spec: docs/superpowers/specs/2026-06-17-obsidian-collector-extension-design.md

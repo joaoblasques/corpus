@@ -30,7 +30,8 @@ def cmd_collect(args) -> int:
     found = co.discover(vault)
     if args.path:
         found = [d for d in found if d["rel_path"].startswith(args.path)]
-    t = {"notes": 0, "urls": 0, "url_failed": 0, "skipped": 0}
+    t = {"notes": 0, "urls": 0, "url_failed": 0, "skipped": 0,
+         "inline_urls": 0, "inline_failed": 0, "inline_skipped_auth": 0, "inline_dropped": 0}
     processed = 0
     for d in found:
         if args.max and processed >= args.max:
@@ -38,7 +39,7 @@ def cmd_collect(args) -> int:
         processed += 1
         try:
             if d["kind"] == "note":
-                title, tags, body = co.read_note(d["abs_path"])
+                title, tags, source_url, body = co.read_note(d["abs_path"])
                 if not args.dry_run:
                     path = co.note_filename(d["rel_path"])
                     path.parent.mkdir(parents=True, exist_ok=True)
@@ -46,6 +47,27 @@ def cmd_collect(args) -> int:
                         {"vault_origin": d["rel_path"], "title": title, "tags": tags,
                          "collected_at": collected_at}, body), encoding="utf-8")
                 t["notes"] += 1
+                il = co.extract_inline_links(body, source_url)
+                t["inline_skipped_auth"] += il["auth_skipped"]
+                t["inline_dropped"] += il["dropped"]
+                for url in il["links"]:
+                    if co.url_already_collected(url):
+                        t["skipped"] += 1
+                        continue
+                    if args.dry_run:
+                        t["inline_urls"] += 1
+                        continue
+                    content = fetch_url(url)
+                    if not content or not content.get("text"):
+                        t["inline_failed"] += 1
+                        continue
+                    p2 = co.url_filename(url, content.get("title", ""))
+                    p2.parent.mkdir(parents=True, exist_ok=True)
+                    p2.write_text(co.build_url_source(
+                        {"source_url": url, "via_vault_note": d["rel_path"],
+                         "title": content.get("title", ""), "collected_at": collected_at},
+                        content["text"]), encoding="utf-8")
+                    t["inline_urls"] += 1
             else:  # url-list
                 urls = co.parse_url_list(Path(d["abs_path"]).read_text(encoding="utf-8", errors="replace"))
                 ledger = Path(d["abs_path"]).parent / "articles_processed.md"

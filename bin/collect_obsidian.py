@@ -18,12 +18,19 @@ DEDUP_DIRS = [ROOT / "raw" / "_inbox", ROOT / "raw" / "notes", ROOT / "raw" / "w
 
 VAULT_ROOT = Path("/Users/jonasblasques/Dev/second-brain")
 INCLUDE_DIRS = [
-    "03_Resources/Articles", "03_Resources/Books", "03_Resources/Study Notes",
-    "03_Resources/Snippets", "03_Resources/Prompt Templates", "00_Inbox/Clippings",
+    "Clippings",                       # top-level web clippings
+    "00_Inbox/Clippings",
+    "03_Resources/Books",
+    "03_Resources/Snippets",
+    "03_Resources/Prompt Templates",
+    "06_Metadata/Reference",           # reference prompt notes only
 ]
 EXCLUDE_DIRS = ["03_Resources/llm-wiki-system"]
 EXCLUDE_FILE_RE = re.compile(r"(?i)(_processed\.md$|(^|/)README\.md$)")
 URL_LIST_NAMES = {"articles to process.md", "TO SCRAPE.md"}
+MAX_LINKS_PER_NOTE = 10
+AUTH_WALLED_RE = re.compile(r"(?i)://(?:[^/]*\.)?(?:linkedin\.com|x\.com|twitter\.com)(?:/|$)")
+ASSET_EXT_RE = re.compile(r"(?i)\.(?:png|jpe?g|gif|svg|webp|pdf|mp4|mov|zip)$")
 
 sys.path.insert(0, str(BIN))
 from collect_email import slugify, yaml_scalar, URL_RE  # noqa: E402
@@ -54,10 +61,31 @@ def parse_url_list(text: str) -> list:
     return out
 
 
+def extract_inline_links(body: str, source_url: str = "") -> dict:
+    """External http(s) links in a note body: deduped, minus the source URL, asset
+    links, and auth-walled domains; capped at MAX_LINKS_PER_NOTE."""
+    seen, links, auth = set(), [], 0
+    for m in URL_RE.finditer(body or ""):
+        u = m.group(0).rstrip(".,)")
+        if u in seen:
+            continue
+        seen.add(u)
+        if source_url and u == source_url.rstrip(".,)"):
+            continue
+        if ASSET_EXT_RE.search(u.split("?", 1)[0]):
+            continue
+        if AUTH_WALLED_RE.search(u):
+            auth += 1
+            continue
+        links.append(u)
+    dropped = max(0, len(links) - MAX_LINKS_PER_NOTE)
+    return {"links": links[:MAX_LINKS_PER_NOTE], "auth_skipped": auth, "dropped": dropped}
+
+
 def read_note(abs_path: str):
-    """Return (title, tags, body) — splits the note's own frontmatter off the body."""
+    """Return (title, tags, source_url, body) — splits the note's frontmatter off the body."""
     t = Path(abs_path).read_text(encoding="utf-8", errors="replace")
-    title, tags, body = "", [], t
+    title, tags, source_url, body = "", [], "", t
     if t.startswith("---"):
         end = t.find("\n---", 3)
         if end != -1:
@@ -65,20 +93,27 @@ def read_note(abs_path: str):
             tm = re.search(r"^title:\s*(.+)$", fm, re.M)
             if tm:
                 title = tm.group(1).strip().strip('"')
+            sm = re.search(r"^source:\s*(.+)$", fm, re.M)
+            if sm:
+                source_url = sm.group(1).strip().strip('"')
             tg = re.search(r"^tags:\s*\n((?:\s*-\s*.+\n?)+)", fm, re.M)
             if tg:
                 tags = [re.sub(r"^\s*-\s*", "", ln).strip() for ln in tg.group(1).splitlines() if ln.strip()]
     if not title:
         title = Path(abs_path).stem
-    return title, tags, body
+    return title, tags, source_url, body
 
 
 def note_filename(rel_path: str, base=None) -> Path:
     base = base if base is not None else INBOX
-    stem = rel_path.rsplit("/", 1)[-1]
+    parts = rel_path.replace("\\", "/").split("/")
+    stem = parts[-1]
     if stem.endswith(".md"):
         stem = stem[:-3]
-    return base / f"notes-{slugify(stem)}.md"
+    # full parent path slug so same-titled notes in different trees never collide
+    parent_slug = slugify("-".join(parts[:-1])) if len(parts) >= 2 else ""
+    name = f"notes-{parent_slug}-{slugify(stem)}.md" if parent_slug else f"notes-{slugify(stem)}.md"
+    return base / name
 
 
 def url_filename(url: str, title: str, base=None) -> Path:
@@ -104,7 +139,12 @@ def build_url_source(meta: dict, body: str) -> str:
     lines = [
         "---", "channel: web", "source: obsidian-list",
         f"source_url: {meta['source_url']}",
-        f"via_vault_list: {meta['via_vault_list']}",
+    ]
+    if meta.get("via_vault_note"):
+        lines.append(f"via_vault_note: {meta['via_vault_note']}")
+    else:
+        lines.append(f"via_vault_list: {meta['via_vault_list']}")
+    lines += [
         f"title: {yaml_scalar(meta.get('title', ''))}",
         f"collected_at: {meta['collected_at']}", "---", "", body.strip(), "",
     ]
