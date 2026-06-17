@@ -24,16 +24,22 @@ sources:
   - path: raw/web/a-small-hands-on-project-to-2-your-apache-spark-learning-pro.md
     channel: web
     ingested_at: 2026-06-11
+  - path: raw/web/web-10-minutes-to-learn-apache-spark-joins-with-a-hands-on-proje.md
+    channel: web
+    ingested_at: 2026-06-17
 aliases:
   - Spark
   - Apache Spark
   - PySpark
   - RDD
+  - Sort Merge Join
+  - SMJ
+  - Spark JOIN
 tags:
   - corpus/data-engineering
   - entity
 created: 2026-06-11
-updated: 2026-06-11
+updated: 2026-06-17
 ---
 
 # Apache Spark
@@ -124,15 +130,22 @@ Distilled production guidance [^src4]:
 - **Read the Spark UI** — DAG, stage timeline, task distribution. Uneven task bars = skew; many stages = unnecessary shuffles; red bars = spills [^src4].
 - **Break lineage** with `.localCheckpoint()` on long transformation chains to prevent deeply nested DAGs / stack overflows [^src4].
 
-## Hands-on note
+## JOIN strategies: Sort Merge Join (SMJ)
 
-A reproducible learning project processes 20GB of Parquet (tpc-h `lineitem` data) on a Dockerized Standalone Spark 4.0.0 cluster, tuning parallelism and observing behavior via the Spark UI / History Server — validating the partition/core/memory tradeoffs above against real submissions [^src7].
+For large datasets, Spark defaults to **Sort Merge Join** (SMJ), observable in the Spark UI's SQL/DataFrame tab under the physical execution plan [^src8]. SMJ is not a Spark-exclusive technique — it has long existed in the database field.
+
+The execution proceeds as: both datasets are (1) partitioned and sorted on the join key, then (2) merged by walking both sorted sequences in parallel. This requires a shuffle (the stage boundary in the DAG) when the two datasets are not already co-partitioned on the join key.
+
+**Hands-on validation approach**: with 2 executor instances (2 cores, 4GB RAM each), submitting a join of the TPC-H `lineitem` (~2.6GB) and `orders` (~600MB) datasets on `o_orderkey` on a Dockerized Spark 4.0.0 Standalone cluster. `spark.sql.files.maxPartitionBytes=256MB` controls partition size at read time — larger value = larger partitions, fewer tasks, higher per-task memory pressure [^src8].
+
+**Broadcast vs. SMJ**: Spark automatically broadcasts small tables (<10MB default threshold) — the optimization checklist item above. SMJ is the fallback when neither side qualifies for broadcast. For large-to-large joins, SMJ is correct; for large-to-small, ensure broadcast thresholds are tuned or explicitly use broadcast hints [^src4][^src8].
 
 ## Related pages
 
 - [[data-engineering/parquet|Parquet]] — recommended columnar format for Spark analytics
 - [[data-engineering/apache-iceberg|Apache Iceberg]] — table format enabling SPJ and planner stats
 - [[data-engineering/dbt|dbt]], [[data-engineering/dimensional-modeling|Dimensional Modeling]] — adjacent transformation/modeling tooling
+- [[data-engineering/databricks|Databricks]] — managed Spark platform; Lakeflow SDP for declarative pipelines
 
 ---
 
@@ -143,3 +156,4 @@ A reproducible learning project processes 20GB of Parquet (tpc-h `lineitem` data
 [^src5]: [Spark Tips: Use DataFrame API](../../raw/web/spark-tips-use-dataframe-api.md)
 [^src6]: [Spark Caching Explained: What Really Happens Under the Hood](../../raw/web/spark-caching-explained-what-really-happens-under-the-hood.md)
 [^src7]: [A small hands-on project to 2× your Apache Spark learning process](../../raw/web/a-small-hands-on-project-to-2-your-apache-spark-learning-pro.md)
+[^src8]: [10 Minutes to Learn Apache Spark JOINs with a Hands-On Project](../../raw/web/web-10-minutes-to-learn-apache-spark-joins-with-a-hands-on-proje.md)

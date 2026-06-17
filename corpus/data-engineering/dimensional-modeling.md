@@ -33,7 +33,7 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-05-21
-updated: 2026-06-11
+updated: 2026-06-17
 ---
 
 # Dimensional Modeling
@@ -49,7 +49,19 @@ The dimensional model is implemented as a **star schema**: a central fact table 
 
 ## Grain
 
-The **grain** is the level of detail represented by a single fact-table row [^src2]. > "all rows must be at the same grain level" [^src2]. Declaring the grain (transaction vs. daily summary vs. monthly aggregate) early ensures consistency and scalability.
+The **grain** is the level of detail represented by a single fact-table row [^src2]. > "all rows must be at the same grain level" [^src2]. Declaring the grain (transaction vs. daily summary vs. monthly aggregate) early ensures consistency and scalability. See also Joe Reis's extended treatment below.
+
+### Grain: wrong grains in practice (Joe Reis, *Mixed Model Arts*)
+
+Grain is one of the most critical decisions in any dataset. "Get it right, and your data makes sense and is useful. Get it wrong, and things break in often mysterious and painful ways." [^src5]
+
+**Incompatible grains**: combining datasets without a common granularity directly creates no meaningful join. Dataset A at daily-product grain + Dataset B at transaction grain cannot be combined without rolling up. The "mixed-grain trap" — storing both in one table (some rows individual transactions, others daily totals) — is worse: a `SUM()` will double-count revenue silently [^src5].
+
+**Fan-out**: the most common source of incorrect analytics. When joining tables with mismatched grains, rows multiply unintentionally [^src5]. Example: a `Customers` table (1 row per customer) joined to an `Orders` table (1 row per order) on `CustomerID` results in Alice (2 orders) appearing twice. The result grain is now "1 row per order" — `COUNT(customers)` returns 3 instead of 2; `SUM(signup_bonus)` double-counts Alice's value.
+
+> "The danger isn't the join itself, but forgetting that the result's grain has changed." [^src5]
+
+The fan-out join is *correct* for order-level analysis — the error is applying customer-level aggregations to the post-join result without accounting for the new grain. This is why declaring grain explicitly at every layer of the pipeline is not pedantry: it prevents silent double-counting.
 
 ## The Kimball four-step design process
 
@@ -209,9 +221,14 @@ SCDs must be **tables**, never views or stored procedures [^src1].
 - [[data-engineering/data-modeling-meaning|Meaning in Data Modeling]] — semantics/master-data layer
 - [[data-engineering/README|Data Engineering hub]]
 
+## See also (updated)
+
+- [[data-engineering/sql-intermediate-results|Storing Intermediate Results in SQL]] — grain-aware staging table decisions
+
 ---
 
 [^src1]: [[03_Resources/Study Notes/Dimensional Data Modeling - Idempotent Pipelines and SCD Patterns|Dimensional Data Modeling - Idempotent Pipelines and SCD Patterns]]
 [^src2]: [Learn the Kimball dimensional modeling with a dbt project](../../raw/email/email-2025-09-09-learn-the-kimball-dimensional-modeling-with-a-dbt-project.md)
 [^src3]: [Data Identity Politics and The Kimball vs. Inmon War](../../raw/web/data-identity-politics-and-the-kimball-vs-inmon-war.md)
 [^src4]: [Dimensional Data Modeling Day 1 (Zach Wilson / DataExpert)](../../raw/youtube/youtube-7jbcvxmj1bs.md)
+[^src5]: [Ch. 8 — Grain: Getting the Level Right (Joe Reis, Mixed Model Arts)](../../raw/web/web-ch-8-grain-getting-the-level-right.md)

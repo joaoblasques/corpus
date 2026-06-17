@@ -60,6 +60,21 @@ sources:
   - path: raw/notes/notes-clippings-introducing-routines-in-claude-code.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/web/web-claude-code-for-devops-using-the-loop-skill.md
+    channel: web
+    ingested_at: 2026-06-17
+  - path: raw/web/web-claude-code-routines-8-production-prompts-real-costs-and-whe.md
+    channel: web
+    ingested_at: 2026-06-17
+  - path: raw/web/web-automate-work-with-routines-claude-code-docs.md
+    channel: web
+    ingested_at: 2026-06-17
+  - path: raw/web/web-how-to-set-up-your-coding-agent-a-step-by-step-guide.md
+    channel: web
+    ingested_at: 2026-06-17
+  - path: raw/web/web-claude-code-beginner-advanced.md
+    channel: web
+    ingested_at: 2026-06-17
 aliases:
   - Claude Code
   - claude-code

@@ -21,6 +21,12 @@ sources:
   - path: raw/notes/notes-clippings-built-in-memory-for-claude-managed-agents.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/web/web-from-rag-to-ai-memory-systems-building-stateful-architecture.md
+    channel: web
+    ingested_at: 2026-06-17
+  - path: raw/web/web-github-thedotmack-claude-mem-persistent-context-across-sessi.md
+    channel: web
+    ingested_at: 2026-06-17
 aliases:
   - agent memory
   - memory
@@ -33,11 +39,21 @@ aliases:
   - portable memory
   - vault architecture
   - unified agentic memory
+  - typed memory
+  - memory manager
+  - promotion gate
+  - policy memory
+  - preference memory
+  - fact memory
+  - episodic memory
+  - trace memory
+  - claude-mem
 tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-21
 updated: 2026-06-17
+confidence: 0.85
 ---
 
 # Agent Memory
@@ -115,6 +131,53 @@ Anthropic's [[ai-engineering/claude-managed-agents|Claude Managed Agents]] exten
 
 Real-world results: Rakuten's long-running agents using Managed Agents memory cut first-pass errors by 97%; Wisedocs' document-verification pipeline saw 30% speed improvement from cross-session pattern memory [^src7].
 
+## Typed memory architecture (RAG → stateful memory)
+
+The gap between basic RAG and a real memory system is the presence of a **durable write path** [^src8]. RAG is retrieval only: embeddings in, top-k chunks out, nothing the model says flows back into the store. A memory system adds a managed write path and maintains continuity across sessions. "RAG helps a model look things up. A memory system helps an application remember and continue across turns" [^src8].
+
+Five types, each with its own schema, lifecycle, and retrieval strategy [^src8]:
+
+| Type | Retrieval | Risk if wrong |
+|---|---|---|
+| **Policy** | Exact match by key/version | Silent guardrail drift |
+| **Preference** | Exact match by user ID — every turn | System feels generic |
+| **Fact** | Hybrid: lexical + vector, fused, scope-filtered first | Memory poisoning, drift |
+| **Episodic** | Hybrid over summaries, with task_type filter | Precedent becomes policy |
+| **Trace** | Replay by run_id; vector only for forensics | No replay, no debugging |
+
+Anti-pattern: one catch-all vector store for all types. Policies and preferences use exact-match SQL, not similarity — "policy retrieval that uses similarity is a bug, because you'll silently drift away from the rule that's actually in force" [^src8].
+
+### The memory manager's five responsibilities
+
+1. **Write (promotion gate)**: decides what enters durable memory. Gate steps: classify and scope, dedup by content hash + scope tuple, type-specific verification. Status computed from scope and type — never accepted from the caller. High rejection rate is expected and desired [^src8].
+2. **Update with invalidation**: supersede the old fact, mark it revoked, invalidate any cached projections — in one transaction [^src8].
+3. **Summarize (compression after stabilization)**: compress trace memory into episodic/fact — but only after stabilizing meaning (resolve references, normalize entities, drop retractions). Summarizing noise compresses faster than signal [^src8].
+4. **Retrieve by type**: two parallel retrieval paths — (A) known-scope lookup: exhaustive SQL for all active policies and preferences on every turn; (B) semantic discovery: hybrid vector + lexical over facts/episodes, scope-filtered *before* ranking [^src8].
+5. **Decide context window**: reserve fixed slots for policy and preferences; fill ranked slots for facts, episodes, recent context until token budget exhausted; compact rather than truncate mid-record [^src8].
+
+The rule that kills most teams: **filter by scope before ranking**. Ranking across all tenants then filtering is a data-leak waiting to happen [^src8]. The correct pattern: `WHERE tenant_id = :current_tenant ORDER BY vector_distance(...)`.
+
+### Prompt reassembly vs accumulation
+
+Long-context transcripts are "the most common anti-pattern in this space" [^src8]. The pattern that works: rebuild the prompt on every turn from durable memory (policies + preferences + top-k facts + top-k episodes + summary of recent turns). The transcript stays in trace memory; the prompt is a reconstruction, not an accumulation. "Accumulating grows forever, reassembling stays bounded" [^src8].
+
+### Filesystem vs database memory
+
+The filesystem-as-memory pattern (CLAUDE.md, markdown agent notes) works for single-tenant local agents — models trained on developer workflows are "unusually competent with developer-native interfaces" [^src8]. It breaks for multi-tenant SaaS: no tenant isolation, no transactional guarantees, no hybrid retrieval in one query plan, no deletion cascade. Local files are "a useful interface for single-developer agents and a poor substrate for everything else" [^src8].
+
+## claude-mem — persistent cross-session memory plugin
+
+**claude-mem** (github.com/thedotmack/claude-mem) is an open-source plugin that adds persistent memory to Claude Code via Claude Code lifecycle hooks [^src9]. Install with `npx claude-mem install` (or `/plugin marketplace add thedotmack/claude-mem`); works with Claude Code, Gemini CLI, OpenCode, OpenClaw, and others.
+
+How it works [^src9]:
+- Five lifecycle hooks (SessionStart, UserPromptSubmit, PostToolUse, Stop, SessionEnd) capture tool-usage observations during a session.
+- A worker service compresses observations with AI and stores them in a local SQLite + Chroma vector database.
+- Future sessions receive relevant context injected automatically — "context survives across sessions."
+
+The `mem-search` skill and four MCP tools (`search`, `timeline`, `get_observations`, `get_observations`) expose the memory via a **3-layer progressive disclosure workflow**: `search` returns a compact index (~50-100 tokens/result); `timeline` gives chronological context; `get_observations` fetches full details for filtered IDs only (~500-1,000 tokens/result). This 10× token reduction over naive full-fetch is the key design principle [^src9].
+
+Key feature: `<private>` tags let users exclude sensitive content from storage. A web viewer UI at `http://localhost:37777` shows the real-time memory stream [^src9].
+
 ## See also
 
 - [[ai-engineering/context-window-management|Context Window Management]] — strategies for what to keep, compress, or drop from short-term memory
@@ -134,3 +197,5 @@ Real-world results: Rakuten's long-running agents using Managed Agents memory cu
 [^src5]: [But Context First: A Field Guide to AI-Native Search](../../raw/email/email-2026-05-28-but-context-first-a-field-guide-to-ai-native-search.md)
 [^src6]: [What Agents Need: Memory, Context, and More](../../raw/email/email-2026-05-14-what-agents-need-memory-context-and-more.md) — Towards Data Science newsletter
 [^src7]: [Built-in memory for Claude Managed Agents](../../raw/notes/notes-clippings-built-in-memory-for-claude-managed-agents.md) — Anthropic
+[^src8]: [From RAG to AI Memory Systems: Building Stateful Architectures](../../raw/web/web-from-rag-to-ai-memory-systems-building-stateful-architecture.md) — Oracle Developer Blog
+[^src9]: [claude-mem: Persistent Context Across Sessions](../../raw/web/web-github-thedotmack-claude-mem-persistent-context-across-sessi.md) — Alex Newman (@thedotmack), GitHub

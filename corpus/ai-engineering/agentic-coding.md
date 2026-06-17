@@ -39,6 +39,21 @@ sources:
   - path: raw/notes/notes-10-autonomous-background-coding-agents.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/web/web-how-to-do-ai-assisted-engineering.md
+    channel: web
+    ingested_at: 2026-06-17
+  - path: raw/web/web-how-im-productive-with-claude-code.md
+    channel: web
+    ingested_at: 2026-06-17
+  - path: raw/web/web-solve-by-default.md
+    channel: web
+    ingested_at: 2026-06-17
+  - path: raw/web/web-ezyang-s-blog.md
+    channel: web
+    ingested_at: 2026-06-17
+  - path: raw/web/web-10-github-repositories-to-master-claude-code-kdnuggets.md
+    channel: web
+    ingested_at: 2026-06-17
 aliases:
   - agentic coding
   - agentic engineering
@@ -54,6 +69,9 @@ aliases:
   - HTML output
   - JIT planning
   - AI-native engineering
+  - solve by default
+  - theory of constraints engineering
+  - read less steer more
 tags:
   - corpus/ai-engineering
   - synthesis
@@ -226,6 +244,67 @@ When an engineering team goes fully agentic, the existing processes (built aroun
 
 See [[ai-engineering/claude-code|Claude Code]] for organizational governance patterns and [[ai-engineering/agentic-workflow|Agentic Workflows]] for the broader dynamic-workflow layer.
 
+## Solve by default
+
+The **solve-by-default** mindset reframes agentic coding as a default response to *any* emerging problem, not just assigned tickets [^src13]. Traditional engineering had a high execution cost per problem; generative AI collapses that cost — "the barrier has never been lower." The discipline becomes choosing *which* problems to solve, not whether you can solve them.
+
+Problem-seeking patterns [^src13]:
+- **Hunt for meta-patterns**: read QBRs and incident trends; look for repeated on-call pain, flaky tests, or runbooks nobody has automated.
+- **Look between charters**: work falling in gaps between team scopes is often the highest-leverage because nobody owns it.
+- **Ideas from meetings and Slack threads**: a conversation that would previously fizzle into a memo now becomes a GitHub backlog. Take meeting notes → have Claude extract specs and open issues → kick off agents to start work. "20 minutes after the meeting, my agents are already working on a solution."
+
+Prioritization gut-check before starting [^src13]: (1) What is the value? (2) What is the scope/reach? (3) How complex is it? (4) What is the leverage (foundational, compounding, accelerating other work)? If most answers feel impactful, proceed. If value is weak and the work is standalone, defer.
+
+## Read less, steer more
+
+The practitioner adjustment when agents write most code: **treat AI output as work to steer, not work to read** [^src14]. "If you treat AI generated output as code to read, you have already lost the game." The correct posture is directing the model as "a really fast typist that is carrying out your will" — if something doesn't make sense, force it to justify; if you know the shape you want, make it produce exactly that.
+
+A concrete training exercise: disable "accept edits" temporarily and read every edit as it comes — builds intuition for what the models do and reduces the cognitive burden of reviewing agentic output long-term [^src14]. "The degree to which you are involved in the AI coding process reduces the cognitive burden of reading the AI code."
+
+Caveat: discovery tasks still run at human speed. "If you are discovering genuinely new things about your problem space, this is going to take time, don't feel forced to rush it" [^src14].
+
+## Theory-of-constraints workflow (removing friction layers)
+
+Neil Kakkar's experience at Tano applying theory of constraints to agentic coding [^src15]: removing one friction point reveals the next, compounding each unlock:
+
+1. **PR grunt work → custom skill** (`/git-pr`): eliminated mental context-switches between "thinking about code" and "describing code." The real gain is removed overhead, not just saved time.
+2. **Slow builds → SWC**: sub-second restarts remove the gap where attention drifts between save and preview. "There's no gap where your attention drifts."
+3. **Manual UI verification → agent-run preview**: agents verify their own UI changes before marking work done. Enables longer unsupervised runs; agents catch their own mistakes.
+4. **One-at-a-time → port-aware worktrees**: unique port ranges per worktree (not shared environment variables) lets five parallel sessions run without collision. "I went from getting overwhelmed by two parallel branches to running five worktrees at once."
+
+The organizing insight: "Each of these stages removed a different kind of friction." Infrastructure investment — not better prompting — is what turns "a trickle of commits into a flood" [^src15].
+
+## Community ecosystem and reference implementations
+
+A curated set of GitHub repositories that practitioners use as reference implementations, templates, and learning resources [^src16]:
+
+| Repository | Focus | Best for |
+|---|---|---|
+| affaan-m/everything-claude-code | Full agent harness (skills, hooks, MCP configs, memory) | Advanced users wanting a reference setup |
+| x1xhlol/system-prompts-and-models-of-ai-tools | Collected system prompts from Claude Code, Cursor, Devin, Replit, etc. | Prompt researchers, comparing AI tool internals |
+| garrytan/gstack | Role-based AI team (CEO, Designer, Eng Manager roles as skills/slash commands) | Team-style orchestration patterns |
+| gsd-build/get-shit-done | Stages: discuss → plan → execute → verify → ship | Spec-driven dev on larger projects |
+| shareAI-lab/learn-claude-code | Build a Claude Code-like harness from scratch (agent loop, tools, compression, worktrees) | Learning how coding agent systems are designed |
+| hesreallyhim/awesome-claude-code | Curated directory of skills, hooks, slash commands, frameworks | Ecosystem discovery |
+| VoltAgent/awesome-claude-code-subagents | Library of specialized subagent definitions by task type | Subagent role specialization examples |
+| Piebald-AI/claude-code-system-prompts | Tracks Claude Code system prompts, tool descriptions, and changes across versions | Prompt researchers studying harness evolution |
+
+See [[ai-engineering/agent-harness|Agent Harness]] for the core scaffolding concepts these repos build on.
+
+## AI-assisted engineering round-up (15 practitioners)
+
+A cross-company survey of 15 senior engineers and engineering leaders surfaced consistent structural patterns in production AI-assisted workflows [^src17]:
+
+**Design investment before code**: Owain Lewis (Gradientwork): "The biggest productivity gain isn't faster coding; it's spending more time on design, because implementation is no longer the bottleneck." He runs up to 10+ design iterations on simple projects before writing code — "AI can build code fast, but it can't fix bad architecture" [^src17].
+
+**Separate generation from verification**: Lucian Lature (Wiley): keep review agents separate from the generation agents. "I do not use the same expert that wrote the code to test it." Context reuse between review passes — expensive structural understanding of the codebase — is cached so second and third reviewer agents don't re-parse everything [^src17].
+
+**Structured workflows over ad hoc prompting**: Vlad Khambir (Capital One): real productivity comes from *reusable workflows applied to repeatable patterns*, not asking one-off questions. He explicitly applies the Agent Skills pattern (Instructions, Resources, Scripts) to keep the AI "focused on reasoning instead of drowning in integration details" [^src17].
+
+**The first output is a draft, not a deliverable**: Owain Lewis: "The formula: rigorous design + AI implementation + aggressive review + multiple iterations = high-quality output at speed. The trap: no review + first-output acceptance = fast production of technical debt." [^src17]
+
+**AI increases, not decreases, cognitive load**: Vlad Khambir: "AI tools intensify rather than reduce cognitive load. It's like watching YouTube at double speed." The solution: better structure and clearer constraints, not more AI [^src17].
+
 ## See also
 
 - [[ai-engineering/agent-harness|Agent Harness]] — the scaffolding (hooks, loops, context policies) every coding agent runs inside
@@ -251,3 +330,8 @@ See [[ai-engineering/claude-code|Claude Code]] for organizational governance pat
 [^src10]: [Using Claude Code: The unreasonable effectiveness of HTML](../../raw/notes/notes-clippings-using-claude-code-the-unreasonable-effectiveness-of-html.md) — Thariq Shihipar, Anthropic
 [^src11]: [Running an AI-native engineering org](../../raw/notes/notes-clippings-running-an-ai-native-engineering-org.md) — Anthropic (Claude Code team lead)
 [^src12]: [Ch10 — Autonomous Background Coding Agents](../../raw/notes/notes-10-autonomous-background-coding-agents.md)
+[^src13]: [Solve By Default](../../raw/web/web-solve-by-default.md) — Scott Banerjee, The Engineer's Setlist
+[^src14]: [Read Less, Steer More](../../raw/web/web-ezyang-s-blog.md) — Edward Yang (ezyang), March 2026
+[^src15]: [How I'm Productive with Claude Code](../../raw/web/web-how-im-productive-with-claude-code.md) — Neil Kakkar, neilkakkar.com
+[^src16]: [10 GitHub Repositories To Master Claude Code](../../raw/web/web-10-github-repositories-to-master-claude-code-kdnuggets.md) — Abid Ali Awan, KDnuggets
+[^src17]: [How to Do AI-Assisted Engineering](../../raw/web/web-how-to-do-ai-assisted-engineering.md) — 15 engineers, Engineering Leadership Newsletter

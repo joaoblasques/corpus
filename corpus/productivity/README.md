@@ -6,7 +6,7 @@ tags:
   - corpus/productivity
   - hub
 created: 2026-06-12
-updated: 2026-06-12
+updated: 2026-06-17
 provisional: true
 ---
 
@@ -17,9 +17,9 @@ Personal and professional effectiveness for knowledge workers: mental models, ti
 ## Pages
 
 ### Concepts
-- [[productivity/mental-models|Mental Models]] — concept · draft · Circle of Competence + thought experiments as judgment tools
+- [[productivity/mental-models|Mental Models]] — concept · draft · Circle of Competence, Thought Experiments, Map Is Not Territory, Ladder of Inference, Ishikawa Diagram
 - [[productivity/learning-to-learn|Learning to Learn]] — concept · draft · senior growth without a mentor; writing-to-process; cross-training
 - [[productivity/shipping-and-scope|Shipping and Scope]] — concept · draft · good-enough, "done is an agreement," perfectionism, post-launch contract
-- [[productivity/working-with-stakeholders|Working with Stakeholders]] — concept · draft · stakeholder trust and relationship management
+- [[productivity/working-with-stakeholders|Working with Stakeholders]] — concept · draft · stakeholder trust, relationship management, proactive alignment
 - [[productivity/ai-augmented-knowledge-work|AI-Augmented Knowledge Work]] — concept · draft · standing context, voice files, loop engineering
 - [[productivity/obsidian-pkm|Obsidian & Personal Knowledge Management]] — concept · draft · local-first Markdown vault; linking over filing; emergent structure, MOCs, graph, canvas

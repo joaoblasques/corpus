@@ -6,14 +6,19 @@ sources:
   - path: raw/email/email-2026-05-16-change-data-capture-cdc-fundamentals-for-data-engineers.md
     channel: inbox
     ingested_at: 2026-06-11
+  - path: raw/web/web-stop-hand-coding-change-data-capture-pipelines.md
+    channel: web
+    ingested_at: 2026-06-17
 aliases:
   - CDC
   - change data capture
+  - AutoCDC
+  - snapshot CDC
 tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-11
-updated: 2026-06-11
+updated: 2026-06-17
 ---
 
 # Change Data Capture (CDC)
@@ -72,10 +77,52 @@ The source also notes (without full elaboration in the captured excerpt) that th
 
 > [unsourced — captured excerpt ends before the detailed CDC methods] The source promised coverage of three main CDC methods (with PostgreSQL examples), CDC vs database replication, and beginner caveats, but the body was truncated at "What Is Change Data Capture?" — those specifics are not available in the ingested text.
 
+## AutoCDC: declarative CDC on Databricks (Lakeflow SDP)
+
+Hand-rolling CDC pipelines is painful — teams build complex MERGE logic for sequencing, deduplication, and late-arriving data, in 40–200+ lines that become fragile as data volumes grow [^src2]. **AutoCDC** in Lakeflow Spark Declarative Pipelines (Databricks) replaces this with ~6–10 lines of declarative pipeline definition [^src2].
+
+### SCD Type 1 via AutoCDC
+
+Maintains a current-state table. AutoCDC automatically handles sequencing, deduplication, late-arriving data, and applies deletes [^src2]:
+
+```python
+dp.create_auto_cdc_flow(
+    target="target",
+    source="users",
+    keys=["userId"],
+    sequence_by=col("sequenceNum"),
+    apply_as_deletes=expr("operation = 'DELETE'"),
+    stored_as_scd_type=1
+)
+```
+
+The same logic hand-written requires: deduplication with `max_by` / `groupBy`, a MERGE statement with conditional delete, update, and insert branches — including out-of-sequence safeguards.
+
+### SCD Type 2 via AutoCDC
+
+Maintains full history with validity windows (`__START_AT`, `__END_AT` — NULL for currently active records) [^src2]. The platform manages version management and history columns automatically. Records with `__END_AT = NULL` are currently active. Hand-written SCD2 requires a two-step MERGE: (1) close out active rows for records being updated/deleted, (2) insert new rows for inserts and updates.
+
+### Snapshot-based CDC
+
+Not all systems emit change logs. AutoCDC treats snapshot-based CDC as a first-class pattern — automatically detecting row-level changes between snapshots and applying SCD Type 2 semantics without custom diff logic or state management [^src2]. *"I tried AutoCDC from Snapshots in Python and was amazed at how 4 lines of code could replace what I was doing in 1,500 lines of code before."* — Senior DE, Fortune 500 Aerospace & Defense [^src2].
+
+### Platform guarantees
+
+Lakeflow SDP tracks incremental progress and handles out-of-sequence data automatically. Pipelines recover from failures, reprocess historical data, and evolve without double-applying or losing changes — removing the need to manage sequencing logic, watermark bookkeeping, or reprocessing safety manually [^src2].
+
+> Note: AutoCDC is a Databricks-proprietary feature requiring Lakeflow Spark Declarative Pipelines. See [[data-engineering/databricks|Databricks]] for platform context.
+
+## The dbt vs. native pipeline debate for CDC on Databricks
+
+One practitioner argument: dbt managed inside Databricks Asset Bundles (DABs) breaks Unity Catalog's native lineage, making features like the Feature Store or native DQ monitoring harder to implement [^src2]. Native Lakeflow SDP preserves end-to-end lineage from ingestion to consumption. Counter-argument: dbt's platform-agnosticism provides portability and stronger vendor-negotiating power in hybrid architectures (Databricks for heavy transformation + separate SQL serving environment). See [[data-engineering/dbt|dbt]].
+
 ## Related
 
 - [[data-engineering/scd2|SCD Type 2]] — history-tracking dimension pattern; complements but does not replace CDC.
 - [[data-engineering/medallion-architecture|Medallion architecture]] — CDC streams are a canonical bronze-layer source.
 - [[data-engineering/idempotent-pipelines|Idempotent pipelines]] — relevant when replaying or backfilling change streams.
+- [[data-engineering/databricks|Databricks]] — AutoCDC and Lakeflow SDP platform.
+- [[data-engineering/data-observability|Data Observability]] — flow interruption detection is critical for CDC pipeline monitoring.
 
 [^src1]: [Change Data Capture (CDC) Fundamentals for Data Engineers](../../raw/email/email-2026-05-16-change-data-capture-cdc-fundamentals-for-data-engineers.md)
+[^src2]: [Stop hand-coding change data capture pipelines (Databricks AutoCDC)](../../raw/web/web-stop-hand-coding-change-data-capture-pipelines.md)

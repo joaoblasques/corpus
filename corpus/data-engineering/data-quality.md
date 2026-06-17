@@ -12,16 +12,21 @@ sources:
   - path: raw/web/dlthub-ai-workbench-data-quality-toolkit-schema-aware-checks.md
     channel: web
     ingested_at: 2026-06-11
+  - path: raw/web/web-the-data-engineering-mindset-every-ai-builder-needs.md
+    channel: web
+    ingested_at: 2026-06-17
 aliases:
   - data quality
   - messy data
   - data contracts
   - data validation
+  - DAMA-DMBOK
+  - five pillars of trusted data
 tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-11
-updated: 2026-06-11
+updated: 2026-06-17
 ---
 
 # Data Quality
@@ -88,6 +93,48 @@ Two real catches [^src3]:
 
 The author contrasts this with Great Expectations, where the same `customer_id` null would surface as an alert that then requires a human to chase down whether it's a source, ingestion, or modeling problem and file a ticket — *"agentic context replaces the human tribal knowledge and bottlenecks"* [^src3].
 
+## DAMA-DMBOK quality dimensions for AI systems
+
+For AI builders specifically, five DAMA-DMBOK dimensions matter most [^src4]:
+
+| Dimension | AI impact |
+|---|---|
+| **Validity** | Free-text where structured value expected silently corrupts model inputs (e.g., product category accepting "elec." or "consumer tech" instead of "Electronics") |
+| **Completeness** | Missing values create silent bias — segments with systematically missing data cause the model to perform worse for those users |
+| **Timeliness** | A recommendation model trained on 30-day-old data in fast-moving contexts is already outdated before first user |
+| **Uniqueness** | Duplicate records inflate patterns in training data — a transaction appearing twice teaches the model it happened twice |
+| **Consistency (Semantic Validity)** | A column `distance_traveled` that silently switches from km to miles doesn't fail loudly — it slowly corrupts the model's understanding of the world |
+
+> *"Consistency violations are extremely hard to catch without proper monitoring and documentation."* [^src4]
+
+## The five pillars of trusted data (dlthub)
+
+A memorable framework mapping across the DAMA dimensions [^src4]:
+
+1. **Structural Integrity** — data matches expected schema, data types, and required fields so pipelines don't break.
+2. **Semantic Validity** — values follow real-world rules and logic (valid ranges, correct formats, meaningful statuses).
+3. **Uniqueness and Relationships** — no duplicates, maintained key relationships, accurate historical records.
+4. **Privacy and Governance** — sensitive information protected, masked, or removed; usage aligns with legal requirements.
+5. **Operational Health** — data arriving reliably and on time. Even accurate data is low quality if it is late, incomplete, or if pipelines fail silently.
+
+## Common AI-system DQ failures
+
+Three canonical failure patterns from production [^src4]:
+
+- **Breaking schema changes**: column renamed or type changed → model depending on it fails silently. Example: `user_id` renamed to `customer_id`; the pipeline keeps running but is joining on nothing.
+- **Missed data SLAs**: hourly data stops arriving → recommendation model serves stale data for hours without anyone noticing.
+- **Data duplication**: same transaction loaded via batch AND streamed via CDC into the same table → training set has every transaction twice; model thinks popular items are twice as popular.
+
+## Three monitoring layers for AI/data systems
+
+A practical framing for what to instrument [^src4]:
+
+- **Input distribution monitoring** — statistical distribution of key features, input volume, null rates, format violations, schema changes; catches data drift (when incoming data diverges from training distribution).
+- **Output monitoring** — distribution of prediction classes/values, rate of low-confidence predictions, user feedback signals.
+- **Pipeline health monitoring** — job completion status, pipeline latency, data freshness, volume anomalies.
+
+For an early-stage system, three signals alone provide huge value: **data freshness** (when was last successful load?), **volume checks** (records per hour), and **schema validation** (does incoming data match expected structure?) [^src4]. See [[data-engineering/data-observability|Data Observability]] for the full observability pattern catalog.
+
 ## Synthesis: contracts vs schema-aware checks
 
 The two technical sources are complementary, not competing. StartDataEngineering defines data contracts as **expectations agreed with upstream teams across five verticals**, validated before use [^src2]; the dlt toolkit is a **mechanism** that derives a baseline of those checks automatically from the loader's schema (the "floor"), then layers business rules (the "ceiling") and routes failures to a fix [^src3]. Both insist quality is enforced **at ingestion, before downstream consumption** — the contract is the policy, the schema-aware toolkit is one implementation.
@@ -98,7 +145,9 @@ The two technical sources are complementary, not competing. StartDataEngineering
 - [[data-engineering/medallion-architecture|Medallion architecture]] — quality rules are enforced at the silver layer.
 - [[data-engineering/change-data-capture|Change data capture]] — write disposition (`append` vs `merge`) is a recurring quality pitfall in change-driven loads.
 - [[data-engineering/dbt|dbt]] — lineage and SOT tracking referenced as the Source-of-Truth tooling.
+- [[data-engineering/data-observability|Data Observability]] — the instrumentation layer that detects when quality goals are not met; observability patterns (flow interruption, skew, lag, SLA misses).
 
 [^src1]: [How to Avoid Messy Data in Your Warehouse!](../../raw/email/email-2025-09-17-how-to-avoid-messy-data-in-your-warehouse.md)
 [^src2]: [6 Steps to Avoid Messy Data in Your Warehouse](../../raw/web/6-steps-to-avoid-messy-data-in-your-warehouse-start-data-eng.md)
 [^src3]: [AI Workbench: Data quality toolkit preview (dltHub)](../../raw/web/dlthub-ai-workbench-data-quality-toolkit-schema-aware-checks.md)
+[^src4]: [The Data Engineering Mindset Every AI Builder Needs](../../raw/web/web-the-data-engineering-mindset-every-ai-builder-needs.md)

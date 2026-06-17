@@ -6,6 +6,9 @@ sources:
   - path: raw/web/managing-agentic-ai-costs-at-scale.md
     channel: web
     ingested_at: 2026-06-16
+  - path: raw/web/web-how-to-stop-hitting-claude-usage-limits.md
+    channel: web
+    ingested_at: 2026-06-17
 aliases:
   - agentic AI costs
   - agent cost management
@@ -14,11 +17,13 @@ aliases:
   - re-sent context
   - token multiplier
   - prompt caching
+  - token conservation
+  - usage limits
 tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-16
-updated: 2026-06-16
+updated: 2026-06-17
 ---
 
 # Agent Cost Management
@@ -70,5 +75,31 @@ The Uber lesson "stems from a measurement failure" — nobody evaluated effectiv
 
 The right metric is **value per 1,000 tokens** against a business denominator (tasks completed, tickets resolved, revenue touched); if that is flat while consumption grows, "the economics are running in reverse." [^src1] Do not treat token consumption as an adoption proxy — Meta saw leaderboard-ranked staff leave agents running for hours with no task to climb the standings [^src1]. Disciplined organizations model cost before deploying, build usage dashboards alongside the product, and measure output rather than consumption — spending "60 to 70% less for equivalent output." [^src1] "The token is not the unit of value. The task outcome is." [^src1]
 
+## Practitioner token-conservation habits (Claude Cowork / Code)
+
+The root mechanic: Claude re-reads the entire conversation from the top on every message. Message 30 means 29 previous exchanges re-read before any new reasoning — so the conversation length determines the per-message cost [^src2].
+
+**Highest-value habits** [^src2]:
+
+| Habit | Why it works |
+|---|---|
+| Convert PDFs/images before uploading | 1 PDF page = 1,500–3,000 tokens; clean text = 2,000 for 15 pages |
+| Plan in Chat, build in Cowork | Chat is lighter; Cowork reads files every task |
+| Ask "ask me questions" instead of writing long prompts | Short prompts + AskUserQuestion clicks cost almost nothing |
+| Batch multiple tasks into one message | Three prompts = three full context reloads; one prompt = one |
+| Edit messages instead of follow-ups | Edit replaces history; follow-ups stack on it |
+| Compact/restart at 15–20 messages | A 30-message session burns ~232K tokens; a 20-message session ~105K |
+| Match model to task complexity | Haiku/Sonnet for drafts and summaries; Opus only for hard reasoning |
+| Keep CLAUDE.md/ABOUT-ME under 2,000 words | These load every session — bloat multiplies across all tasks |
+| Use Projects for recurring documents | Project files are cached; re-uploading the same PDF re-tokenizes it |
+| Spread sessions across the day | Usage limits use a rolling 5-hour window |
+
+**Prompt caching (structural)**: similar prompts used frequently get partially cached on Anthropic's platform — structure prompts static-content-first, dynamic content last [^src2]. This is the same discipline documented in [[ai-engineering/prompt-caching|Prompt Caching]].
+
+**Skills vs CLAUDE.md**: skills load on demand; CLAUDE.md loads every session. Move recurring workflows into skills so they're only loaded when needed [^src2].
+
+**One-shot clarity beats multi-message refinement**: "When you speak, you naturally give more context in one shot" — vague messages lead to correction messages, which stack on history and multiply context reloads [^src2].
+
 [^src1]: [Managing Agentic AI Costs at Scale](../../raw/web/managing-agentic-ai-costs-at-scale.md)
+[^src2]: [How to stop hitting Claude usage limits — 23 habits](../../raw/web/web-how-to-stop-hitting-claude-usage-limits.md) — Ruben Hassid
 </content>

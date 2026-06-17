@@ -21,6 +21,12 @@ sources:
   - path: raw/youtube/youtube-qndigzfaufs.md
     channel: youtube
     ingested_at: 2026-06-17
+  - path: raw/web/web-stop-hand-coding-change-data-capture-pipelines.md
+    channel: web
+    ingested_at: 2026-06-17
+  - path: raw/web/web-why-dbt-is-terrible-for-databricks-switch-to-native-pipeline.md
+    channel: web
+    ingested_at: 2026-06-17
 aliases:
   - Databricks
   - Unity Catalog
@@ -32,7 +38,7 @@ tags:
   - corpus/data-engineering
   - entity
 created: 2026-06-11
-updated: 2026-06-11
+updated: 2026-06-17
 ---
 
 # Databricks
@@ -130,6 +136,23 @@ See [[data-engineering/merge-into|MERGE INTO]] and [[data-engineering/parquet|Pa
 
 A framework for batch and streaming pipelines in SQL and Python, formerly known as DLT — you describe tables and the platform handles orchestration and incremental processing [^src1][^src5]. Lakeflow SDP extends and is interoperable with Apache Spark Declarative Pipelines while running on the performance-optimized Databricks Runtime [^src5]. Core concepts: pipelines, flows, streaming tables, and materialized views; common use cases are ingestion from cloud storage (S3, ADLS Gen2, GCS) and message buses (Kafka, Kinesis, Pub/Sub, EventHub, Pulsar) plus incremental transformations [^src5]. See [[data-engineering/kafka|Kafka]].
 
+## dbt vs. Lakeflow SDP on Databricks
+
+A practitioner perspective: managing dbt inside Databricks Asset Bundles (DABs) carries a "complexity tax" that becomes harder to justify as the platform matures [^src7]:
+
+- **Lineage black hole**: pushing transformations through an external dbt Core manifest means Unity Catalog loses seamless visibility — breaking native data quality monitoring and Feature Store traceability.
+- **Folder inception in DABs**: a dbt directory inside DABs requires managing tool versions, adapter updates, and orchestrating external CLI runs within Databricks Workflows.
+- **Native declarative SQL**: Databricks handles DAG construction, dependency tracking, incremental processing, and Spark scaling automatically in Lakeflow SDP without a third-party framework.
+
+Counter-arguments from the comments [^src7]:
+- dbt's **platform agnosticism** provides portability, stronger vendor negotiating power, and easier future migrations — especially valuable in hybrid architectures (Databricks for heavy transformation + a separate SQL serving layer).
+- dbt still has features SDP lacks or requires workarounds for (pre/post hooks, macros, complex incremental materialization logic).
+- Teams with deep dbt expertise may retain it while the platform matures.
+
+**The verdict is context-dependent**: pure Databricks end-to-end shops have strong reasons to prefer native SDP; mixed-platform or portability-sensitive teams have strong reasons to retain dbt.
+
+See [[data-engineering/dbt|dbt]] for the dbt perspective and [[data-engineering/change-data-capture|Change Data Capture]] for AutoCDC specifics.
+
 ## Related
 
 - [[data-engineering/open-table-formats|Open table formats]] — Delta/Iceberg underpin the lakehouse
@@ -145,3 +168,4 @@ A framework for batch and streaming pipelines in SQL and Python, formerly known 
 [^src4]: [Databricks pricing](../../raw/web/databricks-pricing-flexible-plans-for-data-and-ai-solutions.md)
 [^src5]: [Lakeflow Spark Declarative Pipelines (Databricks on AWS)](../../raw/web/lakeflow-spark-declarative-pipelines-databricks-on-aws.md)
 [^src6]: [What is Databricks and why people use it (SeattleDataGuy)](../../raw/youtube/youtube-qndigzfaufs.md)
+[^src7]: [Why dbt is terrible for Databricks, switch to native pipelines](../../raw/web/web-why-dbt-is-terrible-for-databricks-switch-to-native-pipeline.md)
