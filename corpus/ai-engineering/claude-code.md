@@ -24,6 +24,15 @@ sources:
   - path: raw/youtube/youtube-we7bzvkbcvw.md
     channel: youtube
     ingested_at: 2026-06-17
+  - path: raw/notes/notes-clippings-auto-mode-for-claude-code.md
+    channel: notes
+    ingested_at: 2026-06-17
+  - path: raw/notes/notes-clippings-agent-view-in-claude-code.md
+    channel: notes
+    ingested_at: 2026-06-17
+  - path: raw/notes/notes-clippings-a-harness-for-every-task-dynamic-workflows-in-claude-code.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - Claude Code
   - claude-code
@@ -105,6 +114,65 @@ Other notable harness mechanics from the same release [^src6]:
 - **API-key gating**: setting `ANTHROPIC_API_KEY`/`apiKeyHelper`/`ANTHROPIC_AUTH_TOKEN` disables Remote Control, `/schedule`, claude.ai MCP connectors, and notifications even with a Claude.ai login present — unset the key to re-enable.
 - Subagent API requests now carry `x-claude-code-agent-id`/`parent-agent-id` headers (and matching OTEL span attributes) for tracing multi-agent sessions.
 
+## Auto mode (permission classifier)
+
+Auto mode is a middle path between conservative default permissions (every write/bash command asks approval) and `--dangerously-skip-permissions` (no checks at all) [^src8]. Before each tool call runs, a classifier reviews it for potentially destructive actions — mass file deletion, sensitive data exfiltration, malicious code execution — and blocks those while letting safe actions proceed automatically [^src8]. If Claude keeps attempting blocked actions, it eventually surfaces a permission prompt to the user [^src8].
+
+Key points [^src8]:
+- Available as a research preview for Team plan; rolling out to Enterprise and API in the near term.
+- Enable via `claude --enable-auto-mode`, then cycle to it with Shift+Tab in the terminal. In the desktop app or VS Code extension, toggle in Settings → Claude Code, then select from the permission-mode dropdown.
+- Works with both Claude Sonnet 4.6 and Opus 4.6.
+- Admins on Enterprise/Team can disable it org-wide: `"disableAutoMode": "disable"` in managed settings.
+- Auto mode is disabled by default in the desktop app.
+- Reduces risk vs skip-permissions but doesn't eliminate it; still recommended to use in isolated environments. Small impact on token consumption and latency for tool calls.
+
+## Agent view (multi-session management)
+
+Agent view (`claude agents` or press left-arrow from any session) is a single dashboard for all Claude Code sessions [^src9]:
+
+- Each row shows session name, whether it needs input, the last response, and when it was last touched.
+- **Peek and reply**: select a session to see the last turn; answer inline if it's waiting for input; press Enter to attach for the full transcript.
+- **Background anything**: send existing sessions to the background with `/bg`; launch a new background session directly via `claude --bg [task]`.
+- Available as a Research Preview on Pro, Max, Team, Enterprise, and API plans.
+
+Patterns observed from early users [^src9]:
+- **Scaling parallel sessions**: dispatch several independent tasks at once, return to a list of PRs ready for review.
+- **Long-running agent management**: looping jobs (PR babysitter, dashboard updater) show their next run time in the list.
+- **Fast context switching**: left-arrow mid-session → start a related task → arrow right back; the peek shows the answer without losing your place.
+- **Shipping status scan**: status indicators + peek title make it easy to see which sessions produced a PR.
+
+Agent view is the harness-level expression of parallel agentic work — see also `[[ai-engineering/long-running-agents|Long-Running Agents]]` and the `/goal` discussion above.
+
+## Dynamic workflows
+
+Dynamic workflows let Claude write its own harness on the fly — a JavaScript orchestration file custom-built for the task at hand [^src10]. The default Claude Code harness is built for coding but breaks down on long-running, massively parallel, adversarial, or highly structured tasks because of three failure modes [^src10]:
+
+- **Agentic laziness**: Claude stops before finishing a complex multi-part task (e.g. addresses 35 of 50 items) and declares done.
+- **Self-preferential bias**: Claude prefers its own results when asked to verify or judge against a rubric.
+- **Goal drift**: fidelity to the original objective erodes across many turns and compaction events; edge-case requirements or "don't do X" constraints get lost in summarization.
+
+Dynamic workflows counter these by orchestrating **separate subagents with their own context windows and isolated goals** [^src10]. Key mechanics [^src10]:
+- Execute a JavaScript file with special functions to spawn/coordinate subagents; also includes standard JS (JSON, Math, Array) for data processing.
+- Workflows can choose which model each agent uses and whether subagents run in their own worktree.
+- Interrupted workflows are resumable — the session picks up where it left off.
+- Trigger by asking Claude to "make a workflow" or by using the keyword `ultracode`.
+- Save a workflow by pressing "s" in the workflow menu; stored in `~/.claude/workflows`, distributable via a skill.
+
+**Common orchestration patterns** [^src10]:
+
+| Pattern | Use case |
+|---|---|
+| **Classify-and-act** | Route to different agents/behavior based on task type; or use a classifier to select final output |
+| **Fan-out-and-synthesize** | Parallelize subtasks across N agents; synthesize step acts as a barrier waiting for all results |
+| **Adversarial verification** | For each spawned agent, run a separate verifier to adversarially check its output against a rubric |
+| **Generate-and-filter** | Produce many ideas, filter by rubric, dedupe, return only highest quality |
+| **Tournament** | Spawn N agents attempting the same task; a judging agent does pairwise comparison until a winner emerges |
+| **Loop until done** | Spawn agents until a stop condition is met (no new findings, no more errors) rather than a fixed number of passes |
+
+**When to use** [^src10]: complex, high-value, parallelizable, long-running, adversarial, or structurally repetitive tasks — migrations, deep research, deep verification, at-scale triage, sorting/ranking, evals, root-cause investigation. Dynamic workflows often use significantly more tokens; they are not needed for regular coding tasks. Combine with `/loop` for recurring execution and `/goal` for hard completion conditions.
+
+See [[ai-engineering/agent-harness|Agent Harness]] for the underlying harness concepts, and [[ai-engineering/agentic-workflow|Agentic Workflows]] for the broader workflow patterns.
+
 ## Practitioner workflow (head-of-Claude-Code usage)
 
 Boris Cherny, who leads Claude Code, runs the tool at its full-agentic limit and offers concrete usage tips [^src7]:
@@ -131,3 +199,6 @@ Boris Cherny, who leads Claude Code, runs the tool at its full-agentic limit and
 [^src5]: [Your Claude Code Guide + Tutorials](../../raw/email/email-2026-02-20-your-claude-code-guide-tutorials.md)
 [^src6]: [Claude Code 2.1.139 changelog (notes: agent view, /goal)](../../raw/web/tuesday-12-may-claude-code-2-1-139.md) — matins.news
 [^src7]: [100% of my code is written by Claude — Boris Cherny (Lenny's Podcast)](../../raw/youtube/youtube-we7bzvkbcvw.md)
+[^src8]: [Auto mode for Claude Code](../../raw/notes/notes-clippings-auto-mode-for-claude-code.md) — Anthropic announcement
+[^src9]: [Agent view in Claude Code](../../raw/notes/notes-clippings-agent-view-in-claude-code.md) — Anthropic announcement
+[^src10]: [A harness for every task: dynamic workflows in Claude Code](../../raw/notes/notes-clippings-a-harness-for-every-task-dynamic-workflows-in-claude-code.md) — Thariq Shihipar & Sid Bidasaria, Anthropic

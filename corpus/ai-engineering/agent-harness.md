@@ -27,6 +27,9 @@ sources:
   - path: raw/email/email-2026-05-28-launching-boring-ui.md
     channel: email
     ingested_at: 2026-06-16
+  - path: raw/notes/notes-clippings-a-harness-for-every-task-dynamic-workflows-in-claude-code.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - harness
   - agent harness
@@ -39,7 +42,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-12
-updated: 2026-06-16
+updated: 2026-06-17
 ---
 
 # Agent Harness
@@ -147,6 +150,18 @@ A concrete, shipping harness system is **ECC (everything-claude-code)** by Affaa
 - **Context discipline as a documented failure mode** — "Too many MCP servers eat your context. Each MCP tool description consumes tokens... potentially reducing it to ~70k"; ECC's guidance is to keep under 10 MCPs and under 80 tools active [^src3]. Mirrors the tool-choice lesson above and [[ai-engineering/context-window-management|Context Window Management]].
 - **AgentShield** — a security scanner for the harness config itself (CLAUDE.md, settings.json, MCP configs, hooks, agents, skills); the `--opus` mode runs red-team/blue-team/auditor Opus agents adversarially rather than pattern-matching [^src3].
 
+## Self-generating harnesses (dynamic workflows)
+
+The default Claude Code harness is built for coding but breaks down on long-running, massively parallel, adversarial, or highly structured tasks because of three specific failure modes that emerge when planning and execution share a single context window [^src8]:
+
+- **Agentic laziness**: the model stops before finishing a complex multi-part task and declares done prematurely (e.g., stops at 35 of 50 security findings).
+- **Self-preferential bias**: when asked to verify or judge its own output, the model skews toward self-approval — structurally similar to a GAN's generator grading itself rather than having a separate discriminator.
+- **Goal drift**: across many turns and compaction events, fidelity to the original objective erodes; edge-case requirements and "don't do X" constraints get lost in summarization.
+
+**Dynamic workflows** are Anthropic's harness-level response: Claude writes a JavaScript orchestration file on the fly that spawns separate subagents with their own context windows and focused, isolated goals [^src8]. The harness is therefore *task-specific* rather than general-purpose. Claude can choose which model each subagent uses and whether subagents run in isolated worktrees [^src8]. This represents a shift from "configure a static harness" to "the model generates the harness as part of the task." The distinction vs static workflows: "static workflows need to work for all edge cases, so they are usually more generic. With dynamic workflows, Claude is now intelligent enough to write a custom harness tailor-made for your use case" [^src8].
+
+Harness failure modes become harness design criteria: agentic laziness → use separate agents for each work unit; self-preferential bias → use adversarial verifier agents; goal drift → preserve original intent through fresh context windows rather than compaction. See [[ai-engineering/claude-code|Claude Code]] for the full dynamic-workflow pattern catalog.
+
 ## See also
 
 - [[ai-engineering/agentic-coding|Agentic Coding]] — orchestration patterns built on top of the harness
@@ -168,3 +183,4 @@ A concrete, shipping harness system is **ECC (everything-claude-code)** by Affaa
 [^src5]: [How Claude Code works in large codebases: best practices](../../raw/web/how-claude-code-works-in-large-codebases-best-practices-and.md) — Anthropic, via [The harness matters more than the model](../../raw/email/email-2026-05-28-the-harness-matters-more-than-the-model.md) (Claude Code Camp)
 [^src6]: [Coding with LLMs: the QA agent pattern](../../raw/web/antirez.md) — Salvatore Sanfilippo (antirez), via [How OpenAI engineers prompt](../../raw/email/email-2026-06-08-how-openai-engineers-prompt.md)
 [^src7]: [Launching Boring UI](../../raw/email/email-2026-05-28-launching-boring-ui.md) — Julien Hurault, on Pi as the harness behind Boring UI
+[^src8]: [A harness for every task: dynamic workflows in Claude Code](../../raw/notes/notes-clippings-a-harness-for-every-task-dynamic-workflows-in-claude-code.md) — Thariq Shihipar & Sid Bidasaria, Anthropic

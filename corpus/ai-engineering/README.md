@@ -6,7 +6,7 @@ tags:
   - corpus/ai-engineering
   - hub
 created: 2026-05-07
-updated: 2026-06-15
+updated: 2026-06-17
 ---
 
 # AI Engineering
@@ -20,7 +20,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [[ai-engineering/machine-learning|Machine Learning]] — concept · draft · supervised/unsupervised/RL; overfitting; RAG-vs-fine-tuning
 - [[ai-engineering/neural-network|Neural Networks]] — concept · draft · perceptron→backprop→CNN/RNN; reasoning & multimodal models
 - [[ai-engineering/statistics-for-ml|Statistics & Probability for ML]] — concept · draft · distributions, inference, regression — the math under ML
-- [[ai-engineering/agentic-workflow|Agentic Workflows]] — concept · draft · describe-what-not-how; WAT framework; deterministic vs non-deterministic
+- [[ai-engineering/agentic-workflow|Agentic Workflows]] — concept · draft · describe-what-not-how; WAT framework; dynamic workflow orchestration patterns (fan-out, tournament, adversarial)
 - [[ai-engineering/vibe-coding|Vibe Coding]] — concept · draft · vibe coding vs spec-driven development; "ask me questions first"
 - [[ai-engineering/agi|AGI]] — concept · stub · ANI/AGI/ASI; the AGI-by-2030 forecast; future-of-work framing
 - [[ai-engineering/context-engineering|Context Engineering]] — concept · draft · dynamically building and optimizing LLM inputs at inference time
@@ -47,8 +47,9 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [[ai-engineering/agentic-search|Agentic Search]] — concept · draft · AI-native/agent-orchestrated retrieval; grep-vs-vector + harness nuance
 - [[ai-engineering/agent-testing|Agent Testing]] — concept · draft · verification loops, Playwright, agent honesty / bug-regression evidence
 - [[ai-engineering/claude-md-conventions|CLAUDE.md Conventions]] — concept · draft · CLAUDE.md/AGENTS.md/cursor rules; attention budget; cross-platform skills/plugins
-- [[ai-engineering/agent-ui|Agent UI]] — concept · draft · chat + workbench shells for agent-centric apps
+- [[ai-engineering/agent-ui|Agent UI]] — concept · draft · chat + workbench shells for agent-centric apps; CLI agent view
 - [[ai-engineering/claude-api|Claude API]] — concept · draft · Claude Messages API in Python; system prompts, structured output
+- [[ai-engineering/computer-use|Computer Use]] — concept · draft · Claude perceiving screens and clicking; resolution scaling, thinking effort, prompt-injection defense, context management
 
 ### Entities
 - [[ai-engineering/langgraph|LangGraph]] — entity · stub · production framework for stateful multi-agent workflows

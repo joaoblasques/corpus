@@ -12,6 +12,9 @@ sources:
   - path: raw/web/github-nirdiamant-genai-agents-50-tutorials-and-implementati.md
     channel: web
     ingested_at: 2026-06-15
+  - path: raw/notes/notes-clippings-a-harness-for-every-task-dynamic-workflows-in-claude-code.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - agentic workflow
   - agentic workflows
@@ -23,7 +26,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-15
-updated: 2026-06-15
+updated: 2026-06-17
 ---
 
 # Agentic Workflows
@@ -54,6 +57,23 @@ The recommended flow: **plan mode** (let the agent ask clarifying questions and 
 
 Real agentic systems go far beyond a single workflow. The "Mother of AI" roadmap stages production builds: RAG systems → agents with memory/planning/tool use → recommenders → MLOps/LLMOps → full app + cloud deployment → monitoring, using tools teams actually run (Docker, FastAPI, Airflow, Ollama, LangGraph, OpenSearch, Langfuse) [^src2]. The NirDiamant GenAI-Agents collection catalogs 50+ patterns — most orchestrated with **LangGraph** as stateful graphs with TypedDict/Pydantic state, human-in-the-loop validation, and self-improvement loops [^src3]. See [[ai-engineering/langgraph|LangGraph]], [[ai-engineering/multi-agent-systems|Multi-Agent Systems]], [[ai-engineering/rag|RAG]].
 
+## Dynamic workflow orchestration patterns (Claude Code)
+
+When the default single-context-window execution breaks down on complex tasks, Claude Code's **dynamic workflows** offer a catalog of composable orchestration patterns [^src4]. Each addresses a class of task structure:
+
+| Pattern | When to use |
+|---|---|
+| **Classify-and-act** | Use a classifier agent to route to different sub-workflows based on task type; or classify at the end to select output |
+| **Fan-out-and-synthesize** | Split into many parallel subtasks (each with a clean context window), then a barrier synthesizer merges structured outputs |
+| **Adversarial verification** | For each spawned agent's output, run a separate verifier agent that challenges the output against a rubric |
+| **Generate-and-filter** | Produce many candidates, filter by a rubric, dedupe, and return only the highest-quality results |
+| **Tournament** | Spawn N agents each attempting the same task with different approaches; a judging agent pairwise-compares until a winner emerges |
+| **Loop until done** | Spawn agents iteratively until a stop condition is met (no new findings, no more errors) rather than a fixed N passes |
+
+The unifying insight: **a workflow separates planning + orchestration (the JavaScript harness layer) from execution (the subagent context windows)** [^src4]. This prevents the single-context failure modes — agentic laziness, self-preferential bias, and goal drift — by ensuring each agent has a focused, bounded task. The synthesizer step in fan-out-and-synthesize is the harness-level equivalent of the planner/executor split in [[ai-engineering/agent-harness|Agent Harness]].
+
+**Use sparingly**: dynamic workflows often use significantly more tokens. Best suited for complex, high-value tasks where quality improvements justify the cost [^src4]. Combine with `/loop` for recurring execution and `/goal` for hard completion conditions. See [[ai-engineering/claude-code|Claude Code]] for the full dynamic workflow mechanics.
+
 ## See also
 
 - [[ai-engineering/ai-agent|AI Agent]] — the loop an agentic workflow wraps
@@ -68,3 +88,4 @@ Real agentic systems go far beyond a single workflow. The "Mother of AI" roadmap
 [^src1]: [From Zero to Your First Agentic AI Workflow in 26 Minutes (Claude Code)](../../raw/youtube/youtube-tDGiWn0flK8-from-zero-to-your-first-agentic-ai-workflow-in-26-minutes-cl.md) — Nate Herk
 [^src2]: [The Mother of AI Project](../../raw/web/the-mother-of-ai-project.md) — Jam with AI
 [^src3]: [NirDiamant/GenAI_Agents (50+ tutorials)](../../raw/web/github-nirdiamant-genai-agents-50-tutorials-and-implementati.md) — Nir Diamant
+[^src4]: [A harness for every task: dynamic workflows in Claude Code](../../raw/notes/notes-clippings-a-harness-for-every-task-dynamic-workflows-in-claude-code.md) — Thariq Shihipar & Sid Bidasaria, Anthropic

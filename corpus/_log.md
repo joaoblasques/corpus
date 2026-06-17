@@ -634,3 +634,12 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - links: note-body inline links now fetched (channel web, via_vault_note; asset/auth filters; cap 10/note)
 - raw note filenames disambiguated by parent folder (collision fix)
 - spec: docs/superpowers/specs/2026-06-17-obsidian-collector-extension-design.md
+
+## [2026-06-17 17:10] ingest | Obsidian Clippings test batch — 5 notes (collect→ingest→reap cycle)
+- source: raw/notes/notes-clippings-{best-practices-for-getting-started-with-claude-cowork, best-practices-for-computer-and-browser-use-with-claude, auto-mode-for-claude-code, agent-view-in-claude-code, a-harness-for-every-task-dynamic-workflows-in-claude-code}.md
+- channel: notes (collected via /collect-obsidian from vault top-level Clippings/, --max 5; 25 inline-link web sources also collected, queued in raw/_inbox for the daily drain)
+- domain: ai-engineering
+- new pages (1): computer-use
+- pages updated (5): claude-cowork (getting-started guidance), claude-code (auto mode + agent view + dynamic workflows), agent-harness (self-generating harnesses), agentic-workflow (orchestration patterns), agent-ui (multi-session/agent view)
+- lint: clean — 0 broken wikilinks · 0 broken citations · 0 orphans
+- cycle: first real run of the new collect→ingest→reap flow on the extended collector (top-level Clippings now in scope). After this commit the 5 vault notes are reaped (git rm, staged not committed in the vault).

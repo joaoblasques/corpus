@@ -12,6 +12,9 @@ sources:
   - path: raw/email/email-2026-05-28-launching-boring-ui.md
     channel: email
     ingested_at: 2026-06-16
+  - path: raw/notes/notes-clippings-agent-view-in-claude-code.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - agent UI
   - agent-centric apps
@@ -24,7 +27,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-12
-updated: 2026-06-16
+updated: 2026-06-17
 ---
 
 # Agent UI
@@ -82,6 +85,16 @@ The full app ships two targets sharing the same `createCoreApp` factory: **Fly.i
 
 The broader direction is collaborative surfaces where teams and agents share one workspace — Notion positions itself as a place "where teams and agents work together" [^src2]. (Source content was JavaScript-gated and not extractable beyond this framing.) The convergent signal across Boring UI and such products is the same: agents become first-class participants in the same workspace humans use, not a separate chat bolted on.
 
+## CLI multi-session management (Agent view as agent UI)
+
+Claude Code's Agent view is a concrete CLI implementation of the "see all sessions" UI layer [^src4]. Rather than a graphical workbench, the surface is a terminal dashboard:
+
+- `claude agents` (or press left-arrow from any session) opens the list; each row shows session name, status (waiting / running / done), last response content, and last interaction time.
+- **Peek mode**: select a session to see the last turn inline; reply without attaching to the full session; press Enter to attach.
+- **Background launch**: `claude --bg [task]` starts a session directly in the background; `/bg` sends any running session to the list.
+
+This addresses the core agent-UI problem of multi-session awareness in the command-line context: "one place to manage all your Claude Code sessions" replacing "multiple terminal tabs, a tmux grid, and an overloaded mental ledger" [^src4]. The pattern — a unified session-status view with selective in-place interaction — is the CLI analog of the chat+workbench shell's session panel. See [[ai-engineering/claude-code|Claude Code]] for the full agent-view mechanics and the fire-and-forget `/goal` combination.
+
 ## Related
 
 - [[ai-engineering/ai-agent|AI Agent]] — Pi is the harness Boring UI builds on; agent-mode and serverless deployment
@@ -93,3 +106,4 @@ The broader direction is collaborative surfaces where teams and agents share one
 [^src1]: [hachej/boring-ui — build agent-powered apps without reinventing the shell](../../raw/web/github-hachej-boring-ui-build-agent-powered-apps-without-rei.md)
 [^src2]: [Notion — where teams and agents work together](../../raw/web/notion-where-teams-and-agents-work-together.md)
 [^src3]: [Launching Boring UI](../../raw/email/email-2026-05-28-launching-boring-ui.md) — Julien Hurault (Ju Data Engineering Newsletter)
+[^src4]: [Agent view in Claude Code](../../raw/notes/notes-clippings-agent-view-in-claude-code.md) — Anthropic announcement

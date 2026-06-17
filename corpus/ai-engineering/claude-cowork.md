@@ -51,6 +51,9 @@ sources:
   - path: raw/email/email-2026-05-06-day-7-you-built-the-foundation-here-s-the-shortcut-to-the-re.md
     channel: email
     ingested_at: 2026-06-17
+  - path: raw/notes/notes-clippings-best-practices-for-getting-started-with-claude-cowork.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - Claude Cowork
   - Cowork
@@ -149,6 +152,30 @@ Two patterns reinforce the rest of this page: the guardrail **"Never send. Alway
 
 `claude101.com` collects free Cowork-adjacent guides (Cowork setup, Cowork + Projects, slides, skills, sounding like you, avoiding usage limits) [^src8].
 
+## Anthropic's getting-started guidance
+
+Austin Lau (Anthropic growth team) offers a first-party framework for when to reach for Cowork vs chat [^src18]:
+
+**The core distinction**: "Claude Cowork is for when the output is something you'll hand to someone else" — a file someone opens, presents, or sends. Chat is for when the output is "a thought in your head" [^src18].
+
+**Five ingredients of a Claude Cowork-shaped task** (you don't need all five, but good candidates hit a few) [^src18]:
+1. More than one thing goes in — multiple files, a folder, a file plus connectors.
+2. A file comes out — a doc, deck, spreadsheet, or CSV.
+3. You'll do it again — recurring tasks are the sweet spot; one-offs are fine but repeatable work is where scheduling pays off.
+4. You already know what good looks like — you can tell in 15 seconds whether the output is right, wrong, or 70% there.
+5. The middle is the boring part — the thinking lives at the start and end; extract/compile/reconcile/reformat is what you hand off.
+
+**First-session best practices** [^src18]:
+1. Open the desktop app, switch to the Cowork tab.
+2. Give Claude rich context — drop files, point at a folder, or connect an app. "The difference between a mediocre output and a great one is almost never your prompt, but whether you're providing enough rich context."
+3. Describe the deliverable (outcome, not process).
+4. Start with a real task you know well so you can immediately judge quality.
+5. **Make Claude ask clarifying questions before starting**: include "Before we begin, repeat my ask back to me so we're aligned, then ask me as many clarifying questions as you have." This surfaces gaps upfront rather than mid-task; "answering five questions up front costs you 30 seconds. Finding those same gaps afterwards costs you time and tokens."
+
+**Worked examples from practice** [^src18]: daily briefing on Slack + Gmail → short triage report (6 am cron); budget pacing dashboard pulling Google Ads + Meta Ads spend into a live HTML artifact; weekly Search Console reporting reconciled into a single sheet with templated callouts. All reduce the work to the judgment-only slices.
+
+> "Many people don't know that Claude Cowork and Claude Code run on the same engine under the hood." [^src18] Cowork is Claude Code's harness adapted for non-technical knowledge work.
+
 ## See also
 
 - [[ai-engineering/claude-code|Claude Code]] — the developer counterpart; capabilities land here first
@@ -172,3 +199,4 @@ Two patterns reinforce the rest of this page: the guardrail **"Never send. Alway
 [^src15]: [Cowork Toolkit templates — Day 6](../../raw/web/shared-cowork-toolkit-templates-d6.md)
 [^src16]: [Post-call admin, done in one click (Return My Time)](../../raw/email/email-2026-06-09-post-call-admin-done-in-one-click.md)
 [^src17]: [Day 7: You built the foundation. Here's the shortcut to the rest.](../../raw/email/email-2026-05-06-day-7-you-built-the-foundation-here-s-the-shortcut-to-the-re.md)
+[^src18]: [Best practices for getting started with Claude Cowork](../../raw/notes/notes-clippings-best-practices-for-getting-started-with-claude-cowork.md) — Austin Lau, Anthropic growth team
