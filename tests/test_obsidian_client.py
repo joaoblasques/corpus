@@ -135,3 +135,22 @@ def test_reap_dry_run_changes_nothing(tmp_path, monkeypatch):
     monkeypatch.setattr(oc, "git_rm", lambda vault_root, rel: calls.append(rel))
     oc.cmd_reap(oc._args(["reap", "--vault", str(vault), "--dry-run"]))
     assert calls == []
+
+
+def test_collect_fetches_inline_note_links(tmp_path, monkeypatch):
+    import obsidian_client as oc
+    inbox = tmp_path / "inbox"; inbox.mkdir()
+    vault = tmp_path / "vault"; (vault / "Clippings").mkdir(parents=True)
+    (vault / "Clippings" / "N.md").write_text(
+        '---\ntitle: "N"\nsource: "https://src.com/p"\n---\n'
+        'read https://good.com/a and https://src.com/p again\n')
+    monkeypatch.setattr(oc.co, "INBOX", inbox)
+    monkeypatch.setattr(oc.co, "DEDUP_DIRS", [inbox])
+    monkeypatch.setattr(oc, "fetch_url", lambda url: {"title": "A", "text": "fetched body"})
+    rc = oc.cmd_collect(oc._args(["collect", "--vault", str(vault)]))
+    assert rc == 0
+    webs = list(inbox.glob("web-*.md"))
+    assert len(webs) == 1                       # good.com fetched; src.com skipped as source URL
+    text = webs[0].read_text()
+    assert "via_vault_note: Clippings/N.md" in text
+    assert "source_url: https://good.com/a" in text
