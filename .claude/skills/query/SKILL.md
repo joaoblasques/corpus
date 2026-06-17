@@ -62,8 +62,30 @@ gap is the session **WebSearch** tool; `bin/query.py fetch-and-queue` (which wra
    citations and wikilinks, then update `corpus/_index.md` and append a `query`/file-back
    note to `corpus/_log.md`. On a **no**, persist nothing beyond the gap log.
 
+## External / headless origin (e.g. claudesidian / Obsidian vault)
+This op can be delegated from outside the corpus — claudesidian (the user's Obsidian
+vault at `/Users/jonasblasques/Dev/second-brain`) calls it headless via
+`cd /Users/jonasblasques/Dev/corpus && CORPUS_QUERY_ORIGIN=claudesidian claude -p "/query <q>"`.
+
+When `$CORPUS_QUERY_ORIGIN` is set (a non-interactive, vault-delegated run):
+- **Compounding still happens the safe way:** answer the question, and on a gap run
+  `fetch-and-queue` + `log-gap` exactly as usual. `query.py` reads `$CORPUS_QUERY_ORIGIN`
+  and stamps `query_origin:` on each queued source plus `(origin: <origin>)` on the gap
+  log entry — so you can later see what the vault has been asking. (You may pass
+  `--origin` explicitly; it overrides the env var.)
+- **Do NOT author synthesis pages.** Skip step 7's file-back offer entirely — there is no
+  interactive user to approve it, and authoring corpus pages is the most consequential
+  write. Queued gap sources drain into the corpus on the next normal ingest; that is the
+  compounding. Synthesis authoring stays an interactive, human-attended corpus session.
+- Return the answer (with the same citation / `[fresh — not yet in corpus]` labeling) as
+  your final output so claudesidian can surface it to the user.
+
+Native (in-repo) interactive queries leave `$CORPUS_QUERY_ORIGIN` unset: no origin stamp,
+and step 7's file-back offer applies as written.
+
 ## Notes
 - Queued web sources drain into the corpus on the next normal ingest of `raw/_inbox/`
   (the v0.6 Branch-A pipeline) — `/query` is effectively a third intake channel; the
-  `via_query` frontmatter marks sources that entered through a gap.
+  `via_query` frontmatter marks sources that entered through a gap, and `query_origin`
+  (when present) marks ones that entered through an external delegated query.
 - Web-fetch soft cap is 3 per query; raise it on request.

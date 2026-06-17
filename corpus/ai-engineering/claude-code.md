@@ -342,6 +342,31 @@ Routines are a Claude Code automation you configure once — including a prompt,
 
 See [[ai-engineering/ralph-loop|Ralph Loop]] for the underlying "loop engineering" concept; routines are the native Claude Code implementation of that pattern, without the DIY cron and MCP server management.
 
+### Routines in production: patterns, costs, failure modes
+
+Production experience with routines surfaces failure modes rarely discussed in launch posts [^src20]:
+
+**Cost benchmarks**: a nightly bug-triage routine typically costs $0.20–$0.80; a weekly codebase audit $1.50–$4.00; a CI/CD verify-and-fix routine per PR $0.45–$1.20 [^src20]. Per-daily-run costs add up quickly; set `--max-budget-usd` on long workflows.
+
+**Failure modes to plan for** [^src20]:
+- *Loop-break failures*: the routine completes the task but doesn't stop cleanly — session left hanging, accrues idle charges. Always test stop conditions explicitly.
+- *Permission failures*: routines need permissions pre-granted. "routine-triggered Claude sessions don't inherit your interactive session's approved permissions" [^src20]. Use `--permission-mode auto` only after auditing what it actually allows.
+- *Context contamination*: long-running routines accumulate context rot across many consecutive sessions. Schedule a forced `/compact` or session reset every N runs.
+- *Prompt-injection via issue content*: routines that read GitHub issues and act on them are vulnerable to crafted issue text. Sanitize inputs or scope permissions to read-only + specific repo paths [^src20].
+
+### /loop skill for DevOps monitoring
+
+The `/loop` skill (a Claude Code community skill, separate from `/schedule`) enables a local polling loop — running every N minutes inside a running session — for DevOps monitoring workflows that need to stay alive for hours without a cloud routine [^src21].
+
+**Primary use cases** [^src21]:
+- Alert queue monitoring: wake on new pages, pull Datadog/PagerDuty context, post triage notes to Slack
+- PR watch loop: every 15 min, fetch merged PRs from GitHub API, summarize diff, estimate effort/risk
+- Deployment health: poll a health endpoint, report anomalies, escalate on repeated failures
+
+**Key discipline**: set both `interval` and `stop_after` — a loop without an exit condition runs until the session times out. Combine with `/goal` to set a done-condition that breaks the loop early [^src21].
+
+The `/loop` + `/goal` + `/schedule` trilogy is the full local-to-cloud automation ladder: loop for local polling, goal for autonomous agentic runs, schedule for infrastructure-hosted recurring jobs.
+
 ## Onboarding Claude Code to a legacy codebase (Skyline case study)
 
 Brendan MacLean (Skyline protein analysis software, 700,000+ lines of C#, maintained 17 years) applied the same methodology he uses for new human developers — onboard through a contained project, expand scope as understanding grows — to Claude Code [^src17].
@@ -412,3 +437,5 @@ Opus 4.7 reasons more after each user turn — improving coherence and coding qu
 [^src17]: [Onboarding Claude Code like a new developer: Lessons from 17 years of development](../../raw/notes/notes-clippings-onboarding-claude-code-like-a-new-developer-lessons-from-17.md) — Brendan MacLean / MacCoss Lab / Anthropic case study
 [^src18]: [Seeing like an agent: how we design tools in Claude Code](../../raw/notes/notes-clippings-seeing-like-an-agent-how-we-design-tools-in-claude-code.md) — Thariq Shihipar, Anthropic
 [^src19]: [Running an AI-native engineering org](../../raw/notes/notes-clippings-running-an-ai-native-engineering-org.md) — Anthropic (Claude Code team lead)
+[^src20]: [Claude Code Routines: 8 Production Prompts, Real Costs and When Things Break](../../raw/web/web-claude-code-routines-8-production-prompts-real-costs-and-whe.md) — Alex Newman
+[^src21]: [Claude Code for DevOps: Using the /loop skill](../../raw/web/web-claude-code-for-devops-using-the-loop-skill.md) — DevOps practitioner guide

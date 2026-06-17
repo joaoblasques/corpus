@@ -693,3 +693,19 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - skipped (26): personal canned prompts (article creator, tutors, quiz, summary-family duplicates, vault-maintenance, n8n, etc.) — stamped corpus_pages:[] and reaped
 - lint: clean — 0 broken wikilinks · 0 broken citations · 0 orphans
 - NOTE: Obsidian vault note backlog fully drained (0 unstamped notes remain in raw/_inbox). 242 inline-link web sources remain queued for the daily ingest.
+
+## [2026-06-17 20:10] config | Bridge: external query origin provenance + headless rule (claudesidian → /query)
+- why: claudesidian (Obsidian vault) now delegates knowledge questions to /query so they compound back into the corpus; we want to see which queries came from outside.
+- bin/query.py: added origin provenance. `resolve_origin()` reads `$CORPUS_QUERY_ORIGIN` (explicit `--origin` overrides). queue_source stamps `query_origin:` on queued sources; log_gap tags the entry `(origin: <origin>)`. Native in-repo queries leave it unset → unchanged frontmatter/log shape.
+- .claude/skills/query/SKILL.md: added "External / headless origin" section — when `$CORPUS_QUERY_ORIGIN` is set, compound the safe way (answer + fetch-and-queue + log-gap) but SKIP step-7 file-back (no synthesis-page authoring in unattended runs); synthesis stays interactive/human-attended.
+- tests: +11 in tests/test_query.py (resolve_origin precedence, emit/omit, queue_source arg+env, log_gap tag, CLI threading). Full suite 330 passed.
+- vault side (separate repo): CLAUDE.md "Connected Knowledge Corpus" block carries the handoff `cd … && CORPUS_QUERY_ORIGIN=claudesidian claude -p "/query <q>"`. Stale in-vault mirror 03_Resources/llm-wiki-system removed.
+
+## [2026-06-17 20:40] ingest | "articles to process" web-list — 68 URLs (4 parallel domain workers)
+- source: raw/web/web-*.md (channel web), collected from 00_Inbox/Clippings/articles to process.md (url-list)
+- result: 38 ingested, 27 dups/thin marked processed (corpus_pages:[]), 3 valuable cross-domain held (left in the list for a future targeted pass: the-10x-data-team-markdown → DE, designing-synthetic-datasets → DE/mlops, stop-writing-markdown-obsidian → productivity)
+- new pages (6): data-engineering/{data-observability, bi-as-code, clickhouse, data-engineering-team-os}, ai-engineering/openviking, ai-business/agent-infrastructure
+- enriched (~30): dbt, apache-spark, change-data-capture, databricks, dimensional-modeling, incremental-pipeline-design, scd2, data-quality, python-for-data-engineering, ai-impact-on-data-engineering, claude-code-for-data-engineering, data-engineering-best-practices; claude-code, agent-memory, agentic-coding, rag, agent-skills, agent-cost-management; technical-career, ai-and-the-job-market; mental-models, working-with-stakeholders
+- contradictions surfaced (not resolved): dbt-vs-Lakeflow-SDP (data-eng); AI-will-replace-knowledge-work (Miessler) vs agents-narrative-is-muddled (Euclid VC) (ai-business)
+- per user request: processed URLs struck from "articles to process.md" by the reaper; 3 held URLs + auth-walled failures (LinkedIn/x.com) remain
+- lint: clean — 0 broken wikilinks · 0 broken citations · 0 orphans

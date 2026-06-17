@@ -257,6 +257,93 @@ def test_log_gap_empty_queued_writes_none(tmp_path):
     assert "- queued: none" in log.read_text(encoding="utf-8")
 
 
+# ===== UNIT 4 — origin provenance (vault-delegated queries) =====
+
+def test_resolve_origin_explicit_wins(monkeypatch):
+    monkeypatch.setenv("CORPUS_QUERY_ORIGIN", "fromenv")
+    assert query.resolve_origin("claudesidian") == "claudesidian"
+
+
+def test_resolve_origin_falls_back_to_env(monkeypatch):
+    monkeypatch.setenv("CORPUS_QUERY_ORIGIN", "claudesidian")
+    assert query.resolve_origin() == "claudesidian"
+
+
+def test_resolve_origin_native_when_unset(monkeypatch):
+    monkeypatch.delenv("CORPUS_QUERY_ORIGIN", raising=False)
+    assert query.resolve_origin() == ""
+
+
+def test_build_web_document_emits_origin_when_present():
+    meta = {
+        "source_url": "https://a.com/x",
+        "via_query": "q",
+        "query_origin": "claudesidian",
+        "fetched_at": "2026-06-17",
+    }
+    out = query.build_web_document(meta, "body")
+    assert "query_origin: claudesidian" in out
+    # ordering: origin sits between via_query and fetched_at
+    assert out.index("via_query:") < out.index("query_origin:") < out.index("fetched_at:")
+
+
+def test_build_web_document_omits_origin_when_absent():
+    # Native queries keep the original frontmatter shape — no origin line.
+    meta = {"source_url": "https://a.com/x", "via_query": "q", "fetched_at": "2026-06-17"}
+    out = query.build_web_document(meta, "body")
+    assert "query_origin" not in out
+
+
+def test_queue_source_writes_origin_from_arg(tmp_path, monkeypatch):
+    monkeypatch.delenv("CORPUS_QUERY_ORIGIN", raising=False)
+    inbox = tmp_path / "_inbox"
+    res = query.queue_source(
+        "what is X", _article(), "https://a.com/x",
+        inbox=inbox, dedup_dirs=[inbox], at="2026-06-17", origin="claudesidian",
+    )
+    content = Path(res["path"]).read_text(encoding="utf-8")
+    assert "query_origin: claudesidian" in content
+
+
+def test_queue_source_writes_origin_from_env(tmp_path, monkeypatch):
+    monkeypatch.setenv("CORPUS_QUERY_ORIGIN", "claudesidian")
+    inbox = tmp_path / "_inbox"
+    res = query.queue_source(
+        "what is X", _article(), "https://a.com/x",
+        inbox=inbox, dedup_dirs=[inbox], at="2026-06-17",
+    )
+    content = Path(res["path"]).read_text(encoding="utf-8")
+    assert "query_origin: claudesidian" in content
+
+
+def test_queue_source_native_omits_origin(tmp_path, monkeypatch):
+    monkeypatch.delenv("CORPUS_QUERY_ORIGIN", raising=False)
+    inbox = tmp_path / "_inbox"
+    res = query.queue_source(
+        "what is X", _article(), "https://a.com/x",
+        inbox=inbox, dedup_dirs=[inbox], at="2026-06-17",
+    )
+    content = Path(res["path"]).read_text(encoding="utf-8")
+    assert "query_origin" not in content
+
+
+def test_log_gap_tags_origin(tmp_path, monkeypatch):
+    monkeypatch.delenv("CORPUS_QUERY_ORIGIN", raising=False)
+    log = tmp_path / "_log.md"
+    query.log_gap("q", "a gap", [], "2026-06-17 10:00", log_path=log, origin="claudesidian")
+    text = log.read_text(encoding="utf-8")
+    assert "## [2026-06-17 10:00] query (origin: claudesidian) | q" in text
+
+
+def test_log_gap_native_has_no_origin_tag(tmp_path, monkeypatch):
+    monkeypatch.delenv("CORPUS_QUERY_ORIGIN", raising=False)
+    log = tmp_path / "_log.md"
+    query.log_gap("q", "a gap", [], "2026-06-17 10:00", log_path=log)
+    text = log.read_text(encoding="utf-8")
+    assert "## [2026-06-17 10:00] query | q" in text
+    assert "origin:" not in text
+
+
 # ===== UNIT 3 — CLI =====
 
 def _capture(capsys):
@@ -334,3 +421,32 @@ def test_cli_log_gap(tmp_path, monkeypatch, capsys):
     text = log.read_text(encoding="utf-8")
     assert "## [2026-06-12 10:00] query | q" in text
     assert "- queued: raw/_inbox/a.md, raw/_inbox/b.md" in text
+
+
+def test_cli_fetch_and_queue_threads_origin(tmp_path, monkeypatch, capsys):
+    monkeypatch.delenv("CORPUS_QUERY_ORIGIN", raising=False)
+    inbox = tmp_path / "_inbox"
+    monkeypatch.setattr(
+        query, "_fetch", lambda url: {"title": "Fetched", "text": "body", "channel": "web"}
+    )
+    monkeypatch.setattr(query, "DEDUP_DIRS", [inbox])
+    rc = query.main(
+        ["fetch-and-queue", "--question", "q", "--url", "https://a.com/x",
+         "--inbox", str(inbox), "--origin", "claudesidian"]
+    )
+    out = _capture(capsys)
+    assert rc == 0
+    assert "query_origin: claudesidian" in Path(out["path"]).read_text(encoding="utf-8")
+
+
+def test_cli_log_gap_threads_origin(tmp_path, monkeypatch, capsys):
+    monkeypatch.delenv("CORPUS_QUERY_ORIGIN", raising=False)
+    log = tmp_path / "_log.md"
+    monkeypatch.setattr(query, "LOG_PATH", log)
+    rc = query.main(
+        ["log-gap", "--question", "q", "--note", "a gap",
+         "--at", "2026-06-17 10:00", "--origin", "claudesidian"]
+    )
+    out = _capture(capsys)
+    assert rc == 0
+    assert "## [2026-06-17 10:00] query (origin: claudesidian) | q" in log.read_text(encoding="utf-8")

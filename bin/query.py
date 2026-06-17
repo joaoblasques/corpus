@@ -12,6 +12,7 @@ from __future__ import annotations
 import argparse
 import datetime
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -22,6 +23,18 @@ ROOT = Path(__file__).resolve().parent.parent
 INBOX = ROOT / "raw" / "_inbox"
 LOG_PATH = ROOT / "corpus" / "_log.md"
 DEDUP_DIRS = [ROOT / "raw" / "_inbox", ROOT / "raw" / "web", ROOT / "raw" / "youtube"]
+
+# Origin provenance: queries delegated from outside the corpus (e.g. claudesidian /
+# the Obsidian vault) set the CORPUS_QUERY_ORIGIN env var so queued sources and the
+# gap log record where the question came from. Native (in-repo) queries leave it
+# unset, which emits no origin field — preserving the original frontmatter/log shape.
+
+
+def resolve_origin(explicit: str | None = None) -> str:
+    """Explicit arg wins; otherwise read CORPUS_QUERY_ORIGIN; '' means native (no tag)."""
+    if explicit is not None:
+        return explicit.strip()
+    return os.environ.get("CORPUS_QUERY_ORIGIN", "").strip()
 
 
 def already_queued(source_url: str, search_dirs: list[Path] | None = None) -> bool:
@@ -48,6 +61,11 @@ def build_web_document(meta: dict, text: str) -> str:
         f"channel: {meta.get('channel', 'web')}",
         f"source_url: {ce.yaml_scalar(meta['source_url'])}",
         f"via_query: {ce.yaml_scalar(meta['via_query'])}",
+    ]
+    origin = meta.get("query_origin")
+    if origin:
+        lines.append(f"query_origin: {ce.yaml_scalar(origin)}")
+    lines += [
         f"fetched_at: {meta['fetched_at']}",
         "---",
         "",
@@ -59,13 +77,17 @@ def build_web_document(meta: dict, text: str) -> str:
 
 def queue_source(question: str, fetch_result: dict, source_url: str,
                  inbox: Path | None = None,
-                 dedup_dirs: list[Path] | None = None, at: str | None = None) -> dict:
+                 dedup_dirs: list[Path] | None = None, at: str | None = None,
+                 origin: str | None = None) -> dict:
     if already_queued(source_url, dedup_dirs):
         return {"status": "duplicate", "source_url": source_url}
     fetched_at = at or datetime.date.today().isoformat()
     channel = fetch_result.get("channel", "web")
     meta = {"channel": channel, "source_url": source_url,
             "via_query": question, "fetched_at": fetched_at}
+    resolved = resolve_origin(origin)
+    if resolved:
+        meta["query_origin"] = resolved
     base = inbox if inbox is not None else INBOX
     base.mkdir(parents=True, exist_ok=True)
     path = ce.link_target(fetch_result["title"], base, message_hint=source_url)
@@ -74,11 +96,13 @@ def queue_source(question: str, fetch_result: dict, source_url: str,
 
 
 def log_gap(question: str, uncovered_note: str, queued_paths: list[str], at: str,
-            log_path: Path | None = None) -> None:
+            log_path: Path | None = None, origin: str | None = None) -> None:
     path = log_path if log_path is not None else LOG_PATH
     queued = ", ".join(queued_paths) if queued_paths else "none"
+    resolved = resolve_origin(origin)
+    tag = f" (origin: {resolved})" if resolved else ""
     block = (
-        f"\n## [{at}] query | {question}\n"
+        f"\n## [{at}] query{tag} | {question}\n"
         f"- gap: {uncovered_note}\n"
         f"- queued: {queued}\n"
     )
@@ -102,12 +126,18 @@ def main(argv=None) -> int:
     fq.add_argument("--question", required=True)
     fq.add_argument("--url", required=True)
     fq.add_argument("--inbox")
+    fq.add_argument("--origin", default=None,
+                    help="provenance of the query (e.g. claudesidian); "
+                         "defaults to $CORPUS_QUERY_ORIGIN")
 
     lg = sub.add_parser("log-gap")
     lg.add_argument("--question", required=True)
     lg.add_argument("--note", required=True)
     lg.add_argument("--at", required=True)
     lg.add_argument("--queued", default="")
+    lg.add_argument("--origin", default=None,
+                    help="provenance of the query (e.g. claudesidian); "
+                         "defaults to $CORPUS_QUERY_ORIGIN")
 
     args = p.parse_args(argv)
 
@@ -118,13 +148,14 @@ def main(argv=None) -> int:
             print(json.dumps({"status": "error", "error": str(e), "url": args.url}))
             return 1
         inbox = Path(args.inbox) if args.inbox else None
-        result = queue_source(args.question, fetched, args.url, inbox=inbox)
+        result = queue_source(args.question, fetched, args.url, inbox=inbox,
+                              origin=args.origin)
         print(json.dumps(result))
         return 0
 
     if args.cmd == "log-gap":
         queued = [s for s in args.queued.split(",") if s] if args.queued else []
-        log_gap(args.question, args.note, queued, args.at)
+        log_gap(args.question, args.note, queued, args.at, origin=args.origin)
         print(json.dumps({"status": "logged"}))
         return 0
 

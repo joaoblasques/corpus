@@ -12,6 +12,9 @@ sources:
   - path: raw/web/github-josephmachado-data-engineering-best-practices-sample.md
     channel: web
     ingested_at: 2026-06-15
+  - path: raw/web/web-data-engineering-system-design-9-data-serving-problems.md
+    channel: web
+    ingested_at: 2026-06-17
 aliases:
   - data engineering best practices
   - pipeline best practices
@@ -21,7 +24,7 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-15
-updated: 2026-06-15
+updated: 2026-06-17
 ---
 
 # Data Engineering Best Practices
@@ -74,6 +77,21 @@ The reference uses **pytest**, sharing one Spark session across test cases (crea
 
 Most companies (big and small) implement only *some* of these, by prioritization or lack of need [^src1]. The discipline is to **identify high-priority gaps and address them before** spending effort "implementing best practices to have best practices" [^src1]. The reference implementation is a runnable Spark/Postgres project (`josephmachado/data_engineering_best_practices`) using AdventureWorks data, Great Expectations, a `DeltaDataSet` metadata dataclass, and a `StandardETL` base class [^src3].
 
+## The one-wide-table anti-pattern in the serving layer
+
+A classic serving-layer failure: building one beautifully pre-joined wide table and letting every consumer — dashboards, data science, internal apps, downstream pipelines — query it [^src4]. "It felt clean at first. Then it wasn't." [^src4]
+
+The fundamental lesson: **you will never have a single-serving approach that satisfies every use case** [^src4]. Different consumers need different serving designs:
+
+- Dashboard → pre-aggregated data (full-table scan for every filter is slow)
+- Data scientists → lower grain than the pre-aggregated layer
+- Internal apps → sub-second lookups by primary key (columnar layout with large data scans without indexing is wrong)
+- Refresh frequencies diverge: data scientists accept daily; dashboards may need hourly
+
+The nine serving questions (full detail paywalled) are: (1) how data will be stored and served, (2) acceptable staleness, (3) what is the "raw" grain level, (4) usage pattern, (5) concurrent reader count, (6) handling of stale/incorrect data, (7) safe-write guarantees, (8) access/authorization levels, (9) AI model consumption [^src4].
+
+> Note: the majority of this article is behind a paywall; only the intro mental-model section is captured above.
+
 ## Related
 
 - [[data-engineering/idempotent-pipelines|Idempotent Pipelines]] · [[data-engineering/data-quality|Data Quality]]
@@ -87,3 +105,4 @@ Most companies (big and small) implement only *some* of these, by prioritization
 [^src1]: [Data Engineering Best Practices (1: Data flow & code)](../../raw/web/data-engineering-best-practices-1-data-flow-code-start-data.md)
 [^src2]: [Data Engineering Best Practices! (newsletter)](../../raw/email/email-2025-09-10-data-engineering-best-practices.md)
 [^src3]: [josephmachado/data_engineering_best_practices (sample)](../../raw/web/github-josephmachado-data-engineering-best-practices-sample.md)
+[^src4]: [Data Engineering System Design: 9 Data Serving Problems (Vu Trinh)](../../raw/web/web-data-engineering-system-design-9-data-serving-problems.md)

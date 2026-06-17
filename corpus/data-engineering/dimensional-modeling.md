@@ -15,6 +15,9 @@ sources:
   - path: raw/youtube/youtube-7jbcvxmj1bs.md
     channel: youtube
     ingested_at: 2026-06-17
+  - path: raw/web/web-ch-8-grain-getting-the-level-right.md
+    channel: web
+    ingested_at: 2026-06-17
 aliases:
   - dimensional modeling
   - dimensional data modeling

@@ -1,6 +1,6 @@
 # Corpus Index
 
-> Last updated: 2026-06-17 | Total pages: 176 | Total sources: 396
+> Last updated: 2026-06-17 | Total pages: 182 | Total sources: 434
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
@@ -51,6 +51,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[ai-engineering/claude-md-conventions|CLAUDE.md Conventions]] — concept · draft · CLAUDE.md/AGENTS.md/cursor rules; attention budget; cross-platform skills
 - [[ai-engineering/agent-ui|Agent UI]] — concept · draft · chat + workbench shells for agent-centric apps
 - [[ai-engineering/learning-ai-engineering|Learning AI Engineering]] — synthesis · draft · two learning paths; context > prompts
+- [[ai-engineering/openviking|OpenViking]] — entity · draft · open-source filesystem-paradigm context database for agents; L0/L1/L2 tiered loading
 - [[ai-engineering/web-scraping|Scrapling (Web Scraping)]] — entity · stub · adaptive Python scraper; MCP extract-before-LLM
 - [[ai-engineering/ai-fundamentals|AI Fundamentals]] — concept · draft · classical + modern AI: search, logic, uncertainty, optimization, learning
 - [[ai-engineering/machine-learning|Machine Learning]] — concept · draft · supervised/unsupervised/RL; overfitting; RAG-vs-fine-tuning
@@ -86,6 +87,10 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[data-engineering/dbt|dbt]] — entity · draft · SQL-first transformation framework; sources vs models; layer materializations
 - [[data-engineering/pipeline-layers|Pipeline Layers]] — concept · draft · staging → warehouse → marts ELT separation; Raw DB vs Analytics DB
 - [[data-engineering/pipeline-coding-patterns|Pipeline Coding Patterns]] — concept · draft · Python code patterns for pipelines: functional design, Factory/Strategy/Singleton, context managers
+- [[data-engineering/data-observability|Data Observability]] — concept · draft · flow/skew/lag/SLA monitoring patterns; MTTD/MTTR; lifecycle stages
+- [[data-engineering/bi-as-code|BI as Code]] — concept · draft · version-controlled analytics (Evidence.dev/SQL+Markdown); when to use vs not
+- [[data-engineering/clickhouse|ClickHouse]] — entity · draft · column-oriented MergeTree OLAP; vectorized execution; Tinybird managed platform
+- [[data-engineering/data-engineering-team-os|Data Team Operating System]] — concept · draft · rhythm (standups/1:1s/retros) + memory (tracking/postmortems) layers
 - [[data-engineering/sql-window-functions|SQL Window Functions]] — concept · draft · ROW_NUMBER/RANK/DENSE_RANK, LAG/LEAD, running aggregates, frame clauses; DE interview reference
 - [[data-engineering/apache-spark|Apache Spark]] — entity · draft · distributed engine on immutable RDDs + lazy DAG; DataFrames/Catalyst/Tungsten; caching, OOM tuning
 - [[data-engineering/databricks|Databricks]] — entity · draft · lakehouse platform; Unity Catalog, Liquid Clustering, Lakeflow, cost
@@ -179,6 +184,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[ai-business/ai-economics-bubble|AI Economics & the Bubble Question]] — concept · draft · Zitron's bear case on GenAI unit economics; token-billing spend caps as a demand signal
 - [[ai-business/ai-spreadsheets|AI Spreadsheets & the Data-Skill Shift]] — concept · draft · "stop learning Excel"; assumptions-first build spec + standing context
 - [[ai-business/ai-job-search|Finding a Job Using AI]] — concept · draft · AI career-strategist projects + autonomous apply (ApplyPilot); quality over volume
+- [[ai-business/agent-infrastructure|Agent Infrastructure]] — concept · draft · four production-agent bets (identity, context, persistence, platforms); capabilities-not-agents critique
 - [[ai-business/ai-synthetic-focus-group|AI Synthetic Focus Group]] — concept · draft · LLM buyer-persona panel critiques ads/copy before spend; predictive-vs-reactive marketing shift (claims flagged unsourced)
 - [[ai-business/ai-consulting-playbook|AI Consulting Playbook]] — concept · draft · free "AI mini assessment" two-call client-acquisition framework; frequency×friction bottleneck selection, the "money question" close
 
@@ -196,6 +202,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[blockchain/zero-knowledge-proofs|Zero-Knowledge Proofs]] — concept · draft · SNARKs vs STARKs; arithmetization + LDC; tradeoffs
 
 ## Recent additions
+- 2026-06-17: **'articles to process' web-list ingest (4 parallel domain workers, 68 URLs)** — 38 ingested, 27 dups/thin marked processed, 3 held. New pages: data-observability, bi-as-code, clickhouse, data-engineering-team-os, openviking, agent-infrastructure. Broad enrichment (dbt, spark, CDC, databricks, agent-memory, agentic-coding, rag, agent-cost-management, technical-career, ai-and-the-job-market, mental-models). Processed URLs struck from the vault list.
 - 2026-06-17: **NEW DOMAIN `blockchain`** (provisional) — 11 pages from the crypto/blockchain primer cluster (Bitcoin, Satoshi, PoW, public-key crypto, hash functions, Merkle trees, P2P, ZK proofs) surfaced during the Clippings drain.
 - 2026-06-17: **Obsidian Clippings drain (collect→ingest→reap, batches 1–5)** — incl. 7 final Clippings + Reference + crypto cluster; ai-engineering enrichment (claude-code tool design, context-window rewind/1M, optimizing-claude advisor strategy, agentic-coding HTML output). 422 stale PARA-native inbox copies purged; many low-signal tail notes skipped-and-reaped.
 - 2026-06-17: **Obsidian Clippings drain (collect→ingest→reap, batches 1–4, 41 notes)** — new pages computer-use, claude-managed-agents, prompt-caching; broad enrichment of claude-code, claude-cowork, claude-models, mcp, multi-agent-systems, agent-skills, agentic-coding, ai-product-management, ralph-loop, agent-harness, agent-security + more. All notes reaped from vault after ingest.

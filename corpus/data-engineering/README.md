@@ -6,16 +6,19 @@ tags:
   - corpus/data-engineering
   - hub
 created: 2026-05-07
-updated: 2026-06-15
+updated: 2026-06-17
 ---
 
 # Data Engineering
 
-Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestration, the lakehouse stack, and data quality. Graduated domain (2026-05-21). Substantially expanded in the 2026-06-11 email-backlog ingest (wave 1) and the 2026-06-15 inbox ingest (wave 2: storage fundamentals, DE best practices, Python, CI/CD, data migration, semantic layer, progressive disclosure, AI's impact on DE).
+Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestration, the lakehouse stack, and data quality. Graduated domain (2026-05-21). Substantially expanded in the 2026-06-11 email-backlog ingest (wave 1), the 2026-06-15 inbox ingest (wave 2: storage fundamentals, DE best practices, Python, CI/CD, data migration, semantic layer, progressive disclosure, AI's impact on DE), and the 2026-06-17 web-backlog ingest (wave 3: data observability, BI-as-code, ClickHouse, team OS, AutoCDC, Spark joins, grain/fan-out, WAP pattern, dbt snapshots, dbt complete guide, Claude Code/dbt assessment, API extraction patterns).
 
 ## Pages
 
 ### Concepts
+- [[data-engineering/data-observability|Data Observability]] — concept · draft · 6 patterns (flow interruption, skew, lag, SLA misses, dataset tracker, fine-grained tracker); MTTD/MTTR; 3 implementation paths
+- [[data-engineering/bi-as-code|BI as Code]] — concept · draft · SQL embedded in Markdown; Evidence.dev; git-native dashboards; co-location with dbt models
+- [[data-engineering/data-engineering-team-os|Data Engineering Team OS]] — concept · draft · two-layer leader OS: Rhythm (standup/1:1/sprint check-in/retro) + Memory (team/work/project/meetings)
 - [[data-engineering/scd2|SCD2 (Slowly Changing Dimension Type 2)]] — concept · draft · history-preserving dimension pattern; valid_from/valid_to + is_current flags
 - [[data-engineering/merge-into|MERGE INTO]] — concept · draft · atomic Spark SQL operation combining matched/unmatched/source-only actions in one statement
 - [[data-engineering/pipeline-layers|Pipeline Layers]] — concept · draft · staging → warehouse → marts ELT separation pattern; Raw DB vs Analytics DB
@@ -60,6 +63,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [[data-engineering/mondaydb|mondayDB]] — entity · draft · monday.com's DuckDB-powered columnar HTAP serving layer; CQRS, external WAL, sync-then-query, rendezvous-hash routing
 - [[data-engineering/dataform|Dataform]] — entity · draft · BigQuery-native SQL/JS transformation orchestration (SQLX, ref-DAG, assertions, Git); dbt analogue in GCP
 - [[data-engineering/snowflake|Snowflake]] — entity · draft · managed cloud OLAP; disaggregated storage/compute, virtual warehouses, micro-partitions, work stealing, flexible compute, Unistore
+- [[data-engineering/clickhouse|ClickHouse]] — entity · draft · OLAP column store; MergeTree (LSM-inspired); vectorized execution; Tinybird managed platform
 
 ### Syntheses
 - [[data-engineering/query-engine-routing|Query-Engine Routing]] — synthesis · draft · multi-engine routing over Iceberg; SQL-dialect translation; cost-based routing

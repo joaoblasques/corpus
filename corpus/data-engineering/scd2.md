@@ -15,6 +15,9 @@ sources:
   - path: raw/email/email-2025-11-04-scd-2-considered-harmful-part-2.md
     channel: email
     ingested_at: 2026-06-12
+  - path: raw/web/web-sql-to-dbt-guide-slowly-changing-dimensions-with-dbt-snapsho.md
+    channel: web
+    ingested_at: 2026-06-17
 aliases:
   - SCD2
   - Slowly Changing Dimension Type 2
@@ -26,7 +29,7 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-05-07
-updated: 2026-06-12
+updated: 2026-06-17
 ---
 
 # SCD2 (Slowly Changing Dimension Type 2)
@@ -107,6 +110,26 @@ The append/datestamp alternative reduces every historical query to a flat `WHERE
 
 The decisive pain is **backfilling**. SCD2's `valid_to`/`is_current` close-out logic chains each day to the previous day's state (`depends_on_past=True` in Airflow), forcing **sequential** reruns — backfilling November means 30 days run one-at-a-time, and the daily SQL doesn't even work for backfills (you maintain a *second* codebase that reconstructs `valid_from`/`valid_to` for historical dates) [^src4]. With datestamps each day reads/writes only its own `ds` partition with **no inter-day dependency**, so an Airflow `dags backfill` runs all 30 days **in parallel** with the *same* SQL — "a button you push" [^src4]. The one pattern to avoid is a table whose day depends on its own previous day's partition (cumulative metrics); for most dimensions, recompute from raw and keep `depends_on_past=False` [^src4]. See [[data-engineering/idempotent-pipelines|Idempotent Pipelines]] for the functional-pipeline framing this rests on.
 
+## dbt Snapshot strategies for SCD2
+
+dbt snapshots implement SCD2 declaratively. Two strategies based on what triggers historical tracking [^src5]:
+
+**Timestamp strategy** (`snap_campaign_performance`): captures a new historical record every time the source data updates, using a reliable `updated_at` column. Right fit when: metrics change frequently and every change matters (e.g., daily ROAS/conversion rate/budget utilization changes) [^src5].
+
+**Check strategy** (`snap_visitor_segments`): creates a new record only when specific columns actually change, ignoring other updates. Right fit when: tracking categorical transitions (prospect → VIP buyer), not every data refresh [^src5].
+
+> *"The strategy-to-use-case mapping is the core lesson: timestamp for metrics that change frequently, check for categorical shifts."* [^src5]
+
+**Three query patterns** against snapshots (using the special dbt columns `dbt_valid_from`, `dbt_valid_to`, `dbt_updated_at`):
+
+- **Current state**: `WHERE dbt_valid_to IS NULL`
+- **Point-in-time**: `WHERE '2024-01-15' >= dbt_valid_from AND ('2024-01-15' < dbt_valid_to OR dbt_valid_to IS NULL)`
+- **Trend analysis**: window function with `LAG(roas) OVER (PARTITION BY campaign_id ORDER BY dbt_valid_from)`
+
+**dbt SCD2 costs** [^src5]: storage (a daily-changing campaign creates 365 records/year × thousands of campaigns); query complexity (date filters + window functions not every analyst is comfortable with); processing time (every `dbt snapshot` run compares current data against all historical records); and schema maintenance (snapshot schemas need monitoring; treat snapshot documentation like any other model).
+
+Use `invalidate_hard_deletes=true` to handle deleted source records. Create mart models that pre-calculate common historical analyses to hide complexity from consumers.
+
 ## Not-yet-ingested related sources
 
 - `scd2-joining-fact-dimension-tables` — querying SCD2 tables (companion article)
@@ -125,3 +148,4 @@ The decisive pain is **backfilling**. SCD2's `valid_to`/`is_current` close-out l
 [^src2]: [[03_Resources/Study Notes/Dimensional Data Modeling - Idempotent Pipelines and SCD Patterns|Dimensional Data Modeling - Idempotent Pipelines and SCD Patterns]]
 [^src3]: [Stop Using Slowly Changing Dimensions (Part 1)](../../raw/web/stop-using-slowly-changing-dimensions-part-1.md)
 [^src4]: [SCD-2 considered harmful! Part 2](../../raw/email/email-2025-11-04-scd-2-considered-harmful-part-2.md)
+[^src5]: [SQL to dbt guide: Slowly Changing Dimensions with dbt Snapshots](../../raw/web/web-sql-to-dbt-guide-slowly-changing-dimensions-with-dbt-snapsho.md)

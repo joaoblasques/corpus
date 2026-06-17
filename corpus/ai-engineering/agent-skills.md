@@ -36,6 +36,9 @@ sources:
   - path: raw/notes/notes-clippings-lessons-from-building-claude-code-how-we-use-skills.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/web/web-how-to-set-up-your-coding-agent-a-step-by-step-guide.md
+    channel: web
+    ingested_at: 2026-06-17
 aliases:
   - agent skills
   - Claude skills
@@ -242,6 +245,25 @@ Skills compose without native dependency management: reference another skill by 
 
 This pattern — a domain skill bundling both a system prompt and reference docs, triggered by question type — is the production form of the pairwise knowledge/procedure skill design described above.
 
+## Document-to-skill progression
+
+A practitioner step-by-step from setting up a coding agent setup documents a concrete skill-creation workflow [^src11]:
+
+1. **Automate a task** you do repeatedly (a git workflow, a deploy check, a PR template)
+2. **Document the steps** you use, including constraints and gotchas
+3. **Turn the documentation into a skill file** at `.claude/skills/<name>/SKILL.md` — the same content, structured as "here's what to do when you need to X"
+4. Next time, instead of doing the task or explaining it again, type `/name` — the skill loads and Claude follows the documented procedure
+
+The insight: "the skill is the documented procedure. If you had to document it for a new team member, you can turn it into a skill for Claude" [^src11]. Skills eliminate re-explanation overhead. A skill for "create a PR" might include: branch from main, write a conventional commit message, follow the PR template, check CI passes, add relevant label.
+
+**What to put in a skill** [^src11]:
+- The trigger condition (when to use this skill)
+- Step-by-step procedure
+- Constraints ("always include tests", "never force-push to main")
+- Output format (what to return when done)
+
+**When to use subagents in skill design** [^src11]: skills that involve research (gathering context from many files) should delegate to a `Plan` subagent; skills that involve implementation can delegate to a `General` subagent; skills that verify correctness benefit from a separate `Verify` subagent that never shares context with the implementation agent (clean-room review).
+
 ## See also
 
 - [[ai-engineering/context-window-management|Context Window Management]] — why a lean window matters; sub-agents
@@ -268,3 +290,4 @@ This pattern — a domain skill bundling both a system prompt and reference docs
 [^src8]: [EveryInc/claude_commands — Our favorite Claude Code commands](../../raw/notes/notes-clippings-everyincclaude-commands-our-favorite-claude-code-commands.md) — EveryInc, GitHub
 [^src9]: [EveryInc/charlie-cfo-skill — Claude Code skill for bootstrapped CFO financial management](../../raw/notes/notes-clippings-everyinccharlie-cfo-skill-claude-code-skill-for-bootstrapped.md) — EveryInc, GitHub
 [^src10]: [Lessons from building Claude Code: How we use skills](../../raw/notes/notes-clippings-lessons-from-building-claude-code-how-we-use-skills.md) — Thariq Shihipar, Anthropic
+[^src11]: [How to Set Up Your Coding Agent: A Step-by-Step Guide](../../raw/web/web-how-to-set-up-your-coding-agent-a-step-by-step-guide.md) — Prathmesh Yelne

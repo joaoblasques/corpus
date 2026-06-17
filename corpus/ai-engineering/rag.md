@@ -18,6 +18,9 @@ sources:
   - path: raw/notes/notes-clippings-seeing-like-an-agent-how-we-design-tools-in-claude-code.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/web/web-beyond-the-vector-store-building-the-full-data-layer-for-ai.md
+    channel: web
+    ingested_at: 2026-06-17
 aliases:
   - RAG
   - retrieval-augmented generation
@@ -25,6 +28,9 @@ aliases:
   - GraphRAG
   - graph RAG
   - temporal RAG
+  - hybrid RAG
+  - pre-filter pattern
+  - pgvector unified store
 tags:
   - corpus/ai-engineering
   - concept
@@ -143,6 +149,52 @@ Countermeasures [^src4]: event-driven index invalidation, sparse metadata filter
 
 > A vector index without temporal awareness is "a museum, not a live knowledge base" [^src4].
 
+## Beyond the vector store: the full data layer
+
+Production RAG systems require more than a vector database — the full data layer combines multiple storage types, each with a distinct role [^src6]:
+
+| Layer | Type | Role | Best tool |
+|---|---|---|---|
+| **Semantic retrieval** | Vector DB | Similarity-based chunk lookup | pgvector, Pinecone |
+| **Structured queries** | Relational DB | Exact filters (user, date, category) | PostgreSQL |
+| **Fast lookups** | Cache | Recent queries, user prefs | Redis |
+| **Document storage** | Object store / blob | Source files, attachments | S3, GCS |
+| **Activity history** | Time-series / append-only | Audit log, conversation history | TimescaleDB, Postgres |
+
+**The pre-filter pattern** (most impactful single optimization) [^src6]: filter by structured metadata *before* doing vector similarity search, not after.
+
+Without pre-filter:
+```sql
+-- Poor: similarity over all 10M rows, then filter
+SELECT * FROM chunks ORDER BY embedding <-> $query_vec LIMIT 20
+HAVING user_id = $user AND category = 'legal'
+```
+
+With pre-filter:
+```sql
+-- Better: filter first, similarity only over the small matching set
+SELECT * FROM chunks
+WHERE user_id = $user AND category = 'legal'
+ORDER BY embedding <-> $query_vec LIMIT 5
+```
+
+The gain: "similarity search over 5,000 relevant rows is far faster and more accurate than searching 10M rows and filtering after" [^src6]. This is also the scope-before-ranking rule from [[ai-engineering/agent-memory|Agent Memory]] applied to retrieval.
+
+**Post-retrieval enrichment** — after vector retrieval, join with structured data before sending to the LLM [^src6]:
+```python
+# Get semantic matches
+chunks = vector_db.search(query_embedding, k=20, filter=pre_filters)
+# Enrich with user/document metadata from relational DB
+enriched = db.query("SELECT u.name, u.tier, d.created_at, c.content
+  FROM chunks c JOIN documents d ON ... JOIN users u ON ...
+  WHERE c.id = ANY($chunk_ids)", [c.id for c in chunks])
+# Send enriched context to LLM
+```
+
+**pgvector as a unified store**: for many applications, a single PostgreSQL + pgvector deployment handles both vector and relational needs, eliminating the operational overhead of running separate databases [^src6]. pgvector supports IVFFlat and HNSW indexing; HNSW gives better recall at the cost of more memory. "For many startups and medium-scale applications, pgvector in PostgreSQL is the pragmatic choice before scaling to a dedicated vector database" [^src6].
+
+**Conversation history as a first-class data layer**: storing conversation history in a queryable database (not just in-memory) enables: (a) context retrieval beyond the current context window; (b) analytics on user intent trends; (c) personalization from past sessions [^src6]. Schema: `conversation_id`, `session_id`, `role`, `content`, `timestamp`, `token_count`.
+
 ## RAG vs. agentic search
 
 A design-level distinction: in RAG the agent is *given* pre-retrieved context; in agentic search the agent *finds* its own context using tools like Grep [^src5]. Claude Code started with RAG internally (a vector DB pre-indexed the codebase, snippets handed to Claude before each response) but moved to agentic search because (a) RAG requires indexing and setup, (b) is fragile across environments, and (c) fundamentally positions the agent as a passive recipient of context rather than an active searcher [^src5]. As models improve at building their own context when given the right tools, the balance tilts further toward agentic search for coding tasks. See [[ai-engineering/agentic-search|Agentic Search]] for the full treatment.
@@ -176,3 +228,4 @@ Retrieved chunks are one of the four context components injected into an agent's
 [^src3]: [From Local to Global: A Graph RAG Approach to Query-Focused Summarization](../../raw/web/from-local-to-global-a-graph-rag-approach-to-query-focused-s.md)
 [^src4]: [7 Temporal Blind Spots Breaking Enterprise RAG](../../raw/web/7-temporal-blind-spots-breaking-enterprise-rag-news-from-gen.md)
 [^src5]: [Seeing like an agent: how we design tools in Claude Code](../../raw/notes/notes-clippings-seeing-like-an-agent-how-we-design-tools-in-claude-code.md) — Thariq Shihipar, Anthropic
+[^src6]: [Beyond the Vector Store: Building the Full Data Layer for AI](../../raw/web/web-beyond-the-vector-store-building-the-full-data-layer-for-ai.md) — Kevin Smith, Saturn Cloud blog

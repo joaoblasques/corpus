@@ -39,6 +39,18 @@ sources:
   - path: raw/email/email-2026-06-04-dbt-core-v2-alpha-cart-prediction-with-llms-ray-vs-daft.md
     channel: email
     ingested_at: 2026-06-15
+  - path: raw/web/web-the-complete-dbt-guide-from-sql-to-production-ready-transfor.md
+    channel: web
+    ingested_at: 2026-06-17
+  - path: raw/web/web-claude-code-isnt-going-to-replace-data-engineers-yet.md
+    channel: web
+    ingested_at: 2026-06-17
+  - path: raw/web/web-sql-to-dbt-guide-slowly-changing-dimensions-with-dbt-snapsho.md
+    channel: web
+    ingested_at: 2026-06-17
+  - path: raw/web/web-why-dbt-is-terrible-for-databricks-switch-to-native-pipeline.md
+    channel: web
+    ingested_at: 2026-06-17
 aliases:
   - dbt
   - data build tool
@@ -46,7 +58,7 @@ tags:
   - corpus/data-engineering
   - entity
 created: 2026-05-21
-updated: 2026-06-15
+updated: 2026-06-17
 ---
 
 # dbt (data build tool)
@@ -211,6 +223,43 @@ A widely-read 2022 essay framed concerns as **community, core, and cloud** probl
 
 Several of these — Rust parser/language spec, the language server experience, an open metadata story — are directly addressed by the v2/Fusion direction (above) [^src8]. Treat this critique as a **point-in-time** snapshot.
 
+## The sql-to-dbt learning path (Alejandro Aboy series)
+
+An 8-article series covering dbt end-to-end, with a companion `sql-to-dbt-series` GitHub repo (DuckDB + synthetic marketing data + Docker) [^src12]:
+
+1. **Getting started** — mindset shift from ad-hoc SQL to version-controlled, testable transformation pipelines.
+2. **Building first project** — project structure, materializations, Jinja macros, essential commands.
+3. **Medallion architecture** — Bronze/Silver/Gold pattern; staging vs. intermediate vs. mart layers and why folder structure matters.
+4. **Data quality workflows** — data integrity (keeps pipelines running) vs. data quality (prevents bad decisions); data contracts, generic tests, singular tests, `dbt-expectations`.
+5. **Macros and reusability** — DRY principles; five project macros (performance classification, safe division, target comparison, percentage calculation, touchpoint attribution); before/after with `LAG` window functions reduced to single invocations.
+6. **SCD2 with snapshots** — see [[data-engineering/scd2|SCD2]] for the timestamp vs. check strategy details.
+7. **dbt internals** — reverse-engineering dbt's core: dependency parsing with regex, DAG construction, topological sort (Kahn's algorithm), ordered execution in ~500 lines of Python.
+8. **Portable data stack** — dbt-core + DuckDB + GitHub Actions (cron) + Google Sheets + Looker Studio. All portable, low-cost, containerized.
+
+Key insight from the series: *"Contracts block bad schemas during compilation, while tests catch quality issues after builds."* [^src12] The series also includes an agentic data modeling demo (OpenMetadata MCP + AI for downstream impact analysis) — see [[data-engineering/agentic-data-modeling|Agentic Data Modeling]].
+
+## Building a dbt project with Claude Code
+
+A hands-on evaluation of Claude Code's capability to build a dbt project from real data (UK Environment Agency flood monitoring API, DuckDB), run in March 2026 using Opus 4.6 [^src13]. Key findings:
+
+**What Claude did well** [^src13]:
+- Built a working `staging → dim/fact` model structure with correct key relationships and data contracts.
+- Implemented incremental fact table load (`materialized='incremental'`, `unique_key=['date_time', 'measure_id']`).
+- Handled messy source data (pipe-delimited multi-values: `split_part(value, '|', 1)`).
+- Implemented SCD2 snapshots for station metadata.
+- Added documentation, tests, and source freshness checks.
+- Autonomously debugged `dbt build` failures: identified Jinja2 escape issues, fixed test syntax deprecations, queried DuckDB directly to verify data quality issues (631 stations with missing coordinates), and downgraded tests to warn severity.
+
+**Where Claude fell short** [^src13]:
+- Python ingestion script silently capped at API's 2000-item limit (5,458 actual stations); only 1,493 rows loaded. *"Wrong is worse than absent because you can't trust it."*
+- Silently dropped relevant columns (`gridReference`, `datumOffset`, `unit`).
+- Only implemented SCD2 for stations, not measures — because the prompt said "station metadata" and it followed literally.
+- Did not challenge questionable assumptions (should measures get SCDs too?).
+
+**The verdict** [^src13]: *"Claude Code is an amazing productivity companion. Do not, if you value your job, use it to one-shot a dbt project."* DE + AI > DE alone — agentic coding tools make DEs vastly more productive for specific tasks and iteration, but the net gain still requires the engineer's mental model, verification, and domain knowledge. The prompt and skills (dbt-agent-skills from dbt Labs) matter more than the model — Sonnet 4.5 with good context produces respectable results.
+
+See [[data-engineering/claude-code-for-data-engineering|Claude Code for Data Engineering]] for the broader AI-assisted DE workflow and [[data-engineering/ai-impact-on-data-engineering|AI's Impact on Data Engineering]] for the role-level framing.
+
 ## See also
 
 - [[data-engineering/pipeline-layers|Pipeline Layers]] — the staging → warehouse → marts architecture pattern
@@ -235,3 +284,5 @@ Several of these — Rust parser/language spec, the language server experience, 
 [^src9]: [TLDR Data — dbt Core v2 Alpha / Fivetran + dbt Labs merger (newsletter)](../../raw/email/email-2026-06-04-dbt-core-v2-alpha-cart-prediction-with-llms-ray-vs-daft.md)
 [^src10]: [How to learn dbt cheap and fast (Vu Trinh)](../../raw/email/email-2026-05-15-how-to-learn-dbt-cheap-and-fast.md)
 [^src11]: [Get Hands-On with dbt: Virtual Events and Interactive Workshops (dbt Labs)](../../raw/email/email-2026-05-14-get-hands-on-with-dbt-virtual-events-and-interactive-worksho.md)
+[^src12]: [The Complete dbt Guide: From SQL to Production-Ready Transformations](../../raw/web/web-the-complete-dbt-guide-from-sql-to-production-ready-transfor.md)
+[^src13]: [Claude Code isn't going to replace data engineers (yet)](../../raw/web/web-claude-code-isnt-going-to-replace-data-engineers-yet.md)

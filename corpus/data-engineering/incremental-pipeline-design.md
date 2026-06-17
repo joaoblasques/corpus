@@ -9,6 +9,9 @@ sources:
   - path: raw/email/email-2026-06-10-3-design-decisions-for-maintainable-incremental-pipelines.md
     channel: email
     ingested_at: 2026-06-12
+  - path: raw/web/web-full-refresh-vs-incremental-pipelines.md
+    channel: web
+    ingested_at: 2026-06-17
 aliases:
   - incremental pipeline design
   - incremental load strategy
@@ -16,11 +19,14 @@ aliases:
   - backfilling
   - bootstrap
   - extraction logic
+  - full refresh
+  - WAP pattern
+  - write-audit-publish
 tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-12
-updated: 2026-06-12
+updated: 2026-06-17
 ---
 
 # Incremental Pipeline Design
@@ -71,6 +77,36 @@ These combine (1+2 or 1+3) depending on resources, data size, and deadline [^src
 
 > Incremental loading strategy depends on the **nature of the source** (which timestamp columns exist) and the **model of your destination tables** (fact/dimension/SCD) [^src1].
 
+## Full refresh vs incremental: the five tradeoff dimensions
+
+The choice between full refresh and incremental loading has implications across five dimensions [^src3]:
+
+| Dimension | Full Refresh | Incremental |
+|---|---|---|
+| **Compute cost** | Expensive for large tables — rebuilds everything each run | Processes only changed data |
+| **Implementation ease** | Very simple (`CREATE OR REPLACE`) | Requires understanding the data's update behavior |
+| **Backfilling** | Click rerun — done; painful for large/slow tables | Depends on load strategy: overwrite-partition is easy; row-based needs cleanup |
+| **Updates/deletes** | Naturally handles them (row simply disappears or changes in next snapshot) | Must handle explicitly (MERGE, soft deletes) |
+| **Tooling constraints** | Always available | Some platforms historically lacked MERGE (early Redshift); always check platform support |
+
+**Full refresh works well when** [^src3]:
+- Dataset is relatively small.
+- Rebuilding is inexpensive.
+- Underlying data has no reliable change tracking.
+- Simplicity matters more than efficiency.
+
+Full refresh breaks down when: table is large (copying hourly is slow/expensive), business needs fresher data than the batch window allows, or deletes must be tracked accurately [^src3].
+
+## WAP Pattern (Write-Audit-Publish) for full refreshes
+
+A safety wrapper pairing naturally with full refresh [^src3]:
+
+1. **Write** — create a staged version of the dataset (full transformation from source).
+2. **Audit** — run data quality checks on staged data: row count comparisons vs. previous version, null checks on required columns, duplicate key detection, metric range validation. If any check fails, stop before touching the production table.
+3. **Publish** — if all checks pass, promote staged data to production.
+
+Pairing WAP with full refresh provides a quality gate without modifying production data directly. The same write-audit-publish approach applies to incremental patterns. See [[data-engineering/data-quality|Data Quality]] for the full DQ framework.
+
 ## See also
 
 - [[data-engineering/idempotent-pipelines|Idempotent Pipelines]] — why overwrite-partition + fixed windows make backfills safe and parallel
@@ -85,3 +121,4 @@ These combine (1+2 or 1+3) depending on resources, data size, and deadline [^src
 
 [^src1]: [3 Design Decisions for Maintainable Incremental Data Pipelines](../../raw/web/3-design-decisions-for-maintainable-incremental-data-pipelin.md)
 [^src2]: [3 Design Decisions for Maintainable Incremental Pipelines (email)](../../raw/email/email-2026-06-10-3-design-decisions-for-maintainable-incremental-pipelines.md)
+[^src3]: [Full Refresh vs Incremental Pipelines](../../raw/web/web-full-refresh-vs-incremental-pipelines.md)

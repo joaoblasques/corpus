@@ -27,6 +27,9 @@ sources:
   - path: raw/web/feat-add-metadata-exposure-enrichment-skill-and-metabase-mcp.md
     channel: web
     ingested_at: 2026-06-12
+  - path: raw/web/web-claude-code-isnt-going-to-replace-data-engineers-yet.md
+    channel: web
+    ingested_at: 2026-06-17
   # Cross-domain: also relevant to ai-engineering (agentic coding, Skills, MCP)
 aliases:
   - Claude Code dbt
@@ -38,7 +41,7 @@ tags:
   - corpus/data-engineering
   - synthesis
 created: 2026-06-11
-updated: 2026-06-12
+updated: 2026-06-17
 ---
 
 # Claude Code for Data Engineering
@@ -131,6 +134,29 @@ Stated limits and preconditions:
 - AI will "confidently write wrong things" if not supervised — you must understand the business, stakeholders, and use cases [^src1].
 - Human review of generated code remains mandatory [^src2].
 
+## Robin Moffatt's hands-on dbt assessment
+
+A practitioner evaluation of Claude Code building a dbt project from scratch, using real data (UK Environment Agency flood monitoring API, DuckDB), run in March 2026 (Opus 4.6) — notable as an independent, less favorable data point compared to the vendor-friendly evaluations above [^src9].
+
+**What Claude handled well** [^src9]:
+- Autonomous ingestion loop via the Environment Agency API (6,190 stations, `curl` + `jq` shell script) without explicit instruction.
+- Correct staging → dim/fact model structure with relational integrity and data contracts.
+- Incremental fact table (`materialized='incremental'`, `unique_key=['date_time', 'measure_id']`).
+- Handling messy pipe-delimited multi-value source columns (`split_part(value, '|', 1)`).
+- SCD2 snapshots for station metadata.
+- Autonomous debugging of `dbt build` failures: Jinja2 escape issues, deprecated test syntax, DuckDB direct queries to validate data quality.
+
+**The failure modes** [^src9]:
+- **Silent data scope error**: Python script capped at the API's default 2000-item limit; 5,458 actual stations, only 1,493 loaded. *"Wrong is worse than absent because you can't trust it."*
+- **Silent column omissions**: dropped `gridReference`, `datumOffset`, `unit` without comment.
+- **Scope taken too literally**: only implemented SCD2 for stations (as specified), not for measures — an engineer would have challenged that assumption.
+
+**The headline conclusion** [^src9]: *"Claude Code is an amazing productivity companion. Do not, if you value your job, use it to one-shot a dbt project."* Claude produced 16 files including tests, documentation, and a README in minutes; a human junior engineer would take 3+ days. But the silent errors — wrong row counts, missing columns, a brittle ingestion script — required expert validation to catch.
+
+> Moffatt's advice on context: the quality of output depended heavily on the dbt-agent-skills (from dbt Labs) provided in the prompt — Sonnet 4.5 with good skills produced respectable results; Opus 4.6 without skills was inconsistent. This directly supports the Anthropic analytics team's finding that *"without skills, accuracy didn't exceed 21%"* [^src6].
+
+See [[data-engineering/dbt|dbt]] for the building-a-dbt-project-with-Claude-Code overview and [[data-engineering/ai-impact-on-data-engineering|AI's Impact on Data Engineering]] for the role-level framing.
+
 ## Cross-domain note
 
 This page lives in **data-engineering** because the deliverable is dbt models and data architecture. The underlying techniques — agentic coding, custom **Skills**, and **MCP** servers — belong to the **ai-engineering** domain. When an ai-engineering hub exists, cross-link from there.
@@ -153,3 +179,4 @@ This page lives in **data-engineering** because the deliverable is dbt models an
 [^src6]: [How Anthropic Enables Self-Service Data Analytics with Claude](../../raw/web/how-anthropic-enables-self-service-data-analytics-with-claud.md)
 [^src7]: [TLDR Data: Anthropic's Automated Analytics, PostgreSQL 19 Beta, McKinney on Agentic Engineering](../../raw/email/email-2026-06-08-anthropics-automated-analytics-postgresql-19-beta-mckinney-o.md)
 [^src8]: [Plan Mode All the Time, Substrait over SQL, and the End of the Data Engineer (Chris Riccomini interview)](../../raw/web/plan-mode-all-the-time-substrait-over-sql-and-the-end-of-the.md)
+[^src9]: [Claude Code isn't going to replace data engineers (yet)](../../raw/web/web-claude-code-isnt-going-to-replace-data-engineers-yet.md)
