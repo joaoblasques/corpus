@@ -41,19 +41,22 @@ def test_parse_url_list():
 
 def test_read_note_extracts_title_tags_body(tmp_path):
     f = tmp_path / "n.md"
-    f.write_text("---\ntitle: \"Clean Code\"\ntags:\n  - python\n  - clean-code\n---\n\nBody line.\n",
-                 encoding="utf-8")
-    title, tags, body = co.read_note(str(f))
-    assert title == "Clean Code"
-    assert tags == ["python", "clean-code"]
-    assert body.strip() == "Body line."
+    f.write_text('---\ntitle: "Hello"\nsource: "https://ex.com/a"\ntags:\n  - x\n  - y\n---\nBody here\n')
+    title, tags, source_url, body = co.read_note(str(f))
+    assert title == "Hello"
+    assert tags == ["x", "y"]
+    assert source_url == "https://ex.com/a"
+    assert body.strip() == "Body here"
 
 
 def test_read_note_no_frontmatter_uses_stem(tmp_path):
-    f = tmp_path / "Just A Note.md"
-    f.write_text("plain body", encoding="utf-8")
-    title, tags, body = co.read_note(str(f))
-    assert title == "Just A Note" and tags == [] and body.strip() == "plain body"
+    f = tmp_path / "My Note.md"
+    f.write_text("Just text, no frontmatter")
+    title, tags, source_url, body = co.read_note(str(f))
+    assert title == "My Note"
+    assert tags == []
+    assert source_url == ""
+    assert body.strip() == "Just text, no frontmatter"
 
 
 def test_note_filename(tmp_path):

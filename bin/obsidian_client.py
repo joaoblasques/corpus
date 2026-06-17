@@ -38,7 +38,7 @@ def cmd_collect(args) -> int:
         processed += 1
         try:
             if d["kind"] == "note":
-                title, tags, body = co.read_note(d["abs_path"])
+                title, tags, source_url, body = co.read_note(d["abs_path"])
                 if not args.dry_run:
                     path = co.note_filename(d["rel_path"])
                     path.parent.mkdir(parents=True, exist_ok=True)

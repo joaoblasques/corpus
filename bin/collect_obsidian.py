@@ -59,9 +59,9 @@ def parse_url_list(text: str) -> list:
 
 
 def read_note(abs_path: str):
-    """Return (title, tags, body) — splits the note's own frontmatter off the body."""
+    """Return (title, tags, source_url, body) — splits the note's frontmatter off the body."""
     t = Path(abs_path).read_text(encoding="utf-8", errors="replace")
-    title, tags, body = "", [], t
+    title, tags, source_url, body = "", [], "", t
     if t.startswith("---"):
         end = t.find("\n---", 3)
         if end != -1:
@@ -69,12 +69,15 @@ def read_note(abs_path: str):
             tm = re.search(r"^title:\s*(.+)$", fm, re.M)
             if tm:
                 title = tm.group(1).strip().strip('"')
+            sm = re.search(r"^source:\s*(.+)$", fm, re.M)
+            if sm:
+                source_url = sm.group(1).strip().strip('"')
             tg = re.search(r"^tags:\s*\n((?:\s*-\s*.+\n?)+)", fm, re.M)
             if tg:
                 tags = [re.sub(r"^\s*-\s*", "", ln).strip() for ln in tg.group(1).splitlines() if ln.strip()]
     if not title:
         title = Path(abs_path).stem
-    return title, tags, body
+    return title, tags, source_url, body
 
 
 def note_filename(rel_path: str, base=None) -> Path:
