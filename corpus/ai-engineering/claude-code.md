@@ -75,6 +75,9 @@ sources:
   - path: raw/web/web-claude-code-beginner-advanced.md
     channel: web
     ingested_at: 2026-06-17
+  - path: raw/notes/notes-boris-cherny-14-hidden-claude-code-features.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - Claude Code
   - claude-code
@@ -410,6 +413,27 @@ Opus 4.7 reasons more after each user turn — improving coherence and coding qu
 
 **Auto mode** recommendation: for long-running tasks with full context provided up front, auto mode cuts cycle time; toggle with `Shift+Tab` [^src12].
 
+## Lesser-known flags and features (Cherny's 14)
+
+Boris Cherny's viral X thread (2026) catalogued features "most people use maybe 3 of" [^src22]. Several are already documented above (mobile app, `/loop`, `/schedule`, hooks, worktrees, subagents, `/btw`). The genuinely under-documented entries:
+
+**Verification tip (the most important).** "Give Claude a way to verify its output. Once you do that, Claude will iterate until the result is great" [^src22]. Two concrete mechanisms:
+
+- **Chrome extension** — gives Claude eyes on the browser: it sees what it builds, observes the rendered result, and iterates until the visual output is correct. Cherny calls it his most important tip [^src22].
+- **Desktop app built-in browser** — the desktop app bundles a browser that auto-starts your web server and tests it visually, giving a full feedback loop with zero setup [^src22].
+
+**Session branching (`/branch`, `--fork-session`).** `/branch` forks a running session into two, preserving the current context while exploring an alternative approach. Equivalent CLI invocation: `claude --resume --fork-session` [^src22]. This is distinct from `--worktree` (file isolation) — `/branch` is context isolation without a new working tree.
+
+**`/batch`.** Interviews the user, then fans out the work to as many worktree agents as needed — "dozens, hundreds, even thousands." Designed for large code migrations and any parallelizable work [^src22]. Complements `/workflows` (programmer-defined fan-out) with a conversational dispatch interface.
+
+**`--bare`.** Skips auto-loading of `CLAUDE.md`, settings, and MCP servers. Approximately 10x faster startup. Intended for non-interactive usage and SDK automations where you explicitly specify what to load instead of relying on auto-discovery [^src22].
+
+**`--add-dir`.** Grants Claude access (full read/write) to additional folders or repositories beyond the working directory. Also usable mid-session as `/add-dir` [^src22].
+
+**`--agent` (custom agent loader).** Loads a custom system prompt and tool set from `.claude/agents/<name>` at launch — defining specialized agents (reviewer, deployer, researcher) each with scoped rules and tools. Cherny calls it "the most overlooked feature in Claude Code" [^src22]. (Note: custom agent *files* are documented above in the Subagents section; `--agent` is the CLI flag to load one at startup without entering a general session first.)
+
+**Cowork dispatch.** Secure remote control of your entire laptop via Claude Code — not just code, but Slack, file management, any desktop action. Cherny uses it daily when away from his computer [^src22]. See [[ai-engineering/claude-cowork|Claude Cowork]] for the full product page.
+
 ## See also
 
 - [[ai-engineering/sources/boris-cherny-100-percent-claude-code|Boris Cherny — 100% Claude Code]] — the full interview source page
@@ -439,3 +463,4 @@ Opus 4.7 reasons more after each user turn — improving coherence and coding qu
 [^src19]: [Running an AI-native engineering org](../../raw/notes/notes-clippings-running-an-ai-native-engineering-org.md) — Anthropic (Claude Code team lead)
 [^src20]: [Claude Code Routines: 8 Production Prompts, Real Costs and When Things Break](../../raw/web/web-claude-code-routines-8-production-prompts-real-costs-and-whe.md) — Alex Newman
 [^src21]: [Claude Code for DevOps: Using the /loop skill](../../raw/web/web-claude-code-for-devops-using-the-loop-skill.md) — DevOps practitioner guide
+[^src22]: [Boris Cherny: 14 hidden Claude Code features](../../raw/notes/notes-boris-cherny-14-hidden-claude-code-features.md) — Boris Cherny / X thread, 2026

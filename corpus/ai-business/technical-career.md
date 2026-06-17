@@ -24,6 +24,9 @@ sources:
   - path: raw/web/web-exactly-why-and-how-ai-will-replace-knowledge-work.md
     channel: web
     ingested_at: 2026-06-17
+  - path: raw/notes/notes-how-to-compete-with-ai.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - getting noticed
   - coding interview tips
@@ -32,11 +35,16 @@ aliases:
   - getting promoted
   - AI engineering skills
   - skills for AI engineers
+  - competing with AI
+  - expertise as files
+  - Jevons paradox intelligence
+  - stop selling hours
 tags:
   - corpus/ai-business
   - concept
 created: 2026-06-12
 updated: 2026-06-17
+
 ---
 
 # Navigating a Technical Career
@@ -120,12 +128,43 @@ This is a one-way ratchet: "Once expertise gets captured — into a skill, an op
 
 This connects directly to [[ai-business/ai-and-the-job-market|AI and the Job Market]]: the "utility" framing and the articulation gap are the same observation from different angles — AI capability exists, but human-structured context is what makes it deploy reliably.
 
+## Competing with AI: 10 principles for hard-to-commoditize value
+
+A condensed, practitioner-level distillation of the positioning problem — structured as 10 ordered moves [^src8]. Captures the distinct angles not already covered above.
+
+**The macro context: Jevons Paradox for intelligence.** Token costs have fallen ~7,000x from 2022 to 2026 ($20 → $0.0028 per 1M tokens). "When first attempts become nearly free, the number of attempts explodes. Jevons Paradox: cheaper intelligence means more drafts, more tests, more analysis, and more competition" [^src8]. The threat is not AI becoming perfect — it is AI becoming cheap enough to replace *good enough*.
+
+### The 10 moves
+
+1. **Stop competing on what AI does better.** Research, summarization, first drafts, data analysis, coding — if your value is "I can do this faster with more information," AI will beat you. "Move above the output layer" [^src8].
+
+2. **Move up the value chain.** Add value earlier in the process — strategy, framing, problem definition, decision-making. The higher you operate, the harder you are to commoditize.
+
+3. **Judgment is the new work.** "Everyone can generate options. Few people can pick" [^src8]. Taste (covered above under AI engineering skills) is trained by reps, failures, and real consequences — not by reading about taste.
+
+4. **Your expertise must become files.** "AI is only as good as the context it has. Your unique context is your moat" [^src8]. Concretely: `about-me.md`, `examples-i-love.md`, `examples-i-hate.md`, `mistakes-i-won't-repeat.md`, `audience.md`, `templates/`. Turn prompts into reusable memory; feed AI your taste, scars, standards, and constraints. This is the tactical implementation of what Miessler calls the "articulation gap" — make your expertise externalizable so you, not only AI, can reuse it.
+
+5. **Stop selling hours.** Time spent is irrelevant when AI can replicate output faster. Better pitches: "I understood the real problem / I knew what to ignore / I found the missing risk / I made the decision easier" [^src8]. Sell taste, judgment, and outcomes. Relates to the [[ai-business/monetizing-code|Monetizing Code]] framing (sell a result, not code).
+
+6. **Use AI where you already have taste.** Use AI to multiply strengths, not hide weaknesses. "Your skill is the steering wheel. AI is the engine" [^src8]. Keep one manual skill alive to avoid capability atrophy.
+
+7. **Build systems, not one-off answers.** "The answer person gets replaced first. The system person compounds" [^src8]. Templates, checklists, workflows, reusable prompts — a task disappears after you do it; a system keeps working. Mirrors the leverage argument in §On-the-job leverage above.
+
+8. **Stay close to reality.** "AI is trained on text. Reality is uglier — and more valuable" [^src8]. Talk to customers, read support tickets, inspect raw data, test prototypes. As the internet gets more synthetic, direct contact with real-world signal becomes scarcer and more premium.
+
+9. **Kill additive work.** "For every new AI workflow you add, kill 3 tasks" [^src8]. Cheap intelligence creates infinite appetite. Taste is saying no before the machine starts cooking — a counter to the tendency to pile automation on automation without clearing the backlog of tasks.
+
+10. **Play the long game.** Not about learning "AI tools." About upgrading yourself: continuous adaptation, better judgment, stronger relationships, sharper POV, more accountability. The formula: `human judgment + unique context + taste + trust + adaptability + continuous compounding = hard-to-commoditize value` [^src8].
+
+**Overlap note.** Principles 3 (judgment/taste) and 4 (articulation gap via files) reinforce the sections above — they are included here for the framing clarity the 10-principle structure provides. Principles 1–2, 5, 8–9 add angles not covered elsewhere in this page.
+
 ## Gotchas
 
 - Portfolio "wow factor" advice is from a creator who sells courses (Tech With Tim); the guidance is generic-sound but vendor-adjacent [^src1][^src2].
 - The 40% raise story promotes a paid "Workload Prioritization Playbook"; the full rubric is paywalled, so the framework here is the free-tier summary [^src3].
 - The "top 5 skills" series (taste, clarity/vision) is from a Substack newsletter (The Engineer's Etlist); claims about outcomes are anecdotal, not empirical [^src4][^src5].
 - The "Exactly why and how AI will replace knowledge work" piece is a long-form opinion from a security consultant (Daniel Miessler); the capability-stack model and "articulation gap" framing are his own synthesis, not peer-reviewed [^src7].
+- The "How to Compete with AI" source (10 principles) is a visual/slide-format note (possibly a social-media infographic or presentation deck) clipped from the user's Obsidian inbox; author unidentified in the raw file. The token-price table is empirically grounded (cites DeepSeek V4 Flash cache pricing for 2026); the 10 principles are framework advice, not research [^src8].
 
 [^src1]: [still not getting interviews?](../../raw/email/email-2026-05-22-still-not-getting-interviews.md)
 [^src2]: [3 things you have to do in your interview](../../raw/email/email-2026-05-14-3-things-you-have-to-do-in-your-interview.md)
@@ -134,3 +173,4 @@ This connects directly to [[ai-business/ai-and-the-job-market|AI and the Job Mar
 [^src5]: [The Top 5 Skills for AI Engineering: Clarity of Communication and Vision](../../raw/web/web-the-top-5-skills-for-ai-engineering-clarity-of-communication.md)
 [^src6]: [Stop Feeding Me AI Slop](../../raw/web/web-stop-feeding-me-ai-slop.md)
 [^src7]: [Exactly Why and How AI Will Replace Knowledge Work](../../raw/web/web-exactly-why-and-how-ai-will-replace-knowledge-work.md)
+[^src8]: [How to Compete with AI (10 principles)](../../raw/notes/notes-how-to-compete-with-ai.md)

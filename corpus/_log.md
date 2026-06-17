@@ -717,3 +717,12 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - new pages (1): ai-engineering/synthetic-data
 - their URLs struck from "articles to process.md"; remaining paywalled/auth-walled URLs deleted from the list per user request (not tracked)
 - lint: clean
+
+## [2026-06-17 21:30] ingest | "articles to process" — 3 pasted notes (then file emptied)
+- 3 substantive pasted snippets extracted to raw/notes and ingested before clearing the vault file:
+  - notes-how-to-compete-with-ai → ai-business/technical-career (10-principle compete-with-cheap-AI framing, Jevons paradox, expertise-as-files)
+  - notes-remote-software-engineering-job-guide → ai-business/ai-job-search (5-phase remote SWE hiring guide)
+  - notes-boris-cherny-14-hidden-claude-code-features → ai-engineering/claude-code (7 net-new flags/features + the verify-your-output tip)
+- low-value pasted bits (DE cheatsheet already covered, ChatGPT LinkedIn prompts, command list) NOT ingested
+- 00_Inbox/Clippings/articles to process.md then emptied per user request (recoverable from vault git history)
+- lint: clean
