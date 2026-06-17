@@ -9,6 +9,9 @@ sources:
   - path: raw/youtube/youtube-gafuqdKwD_U-the-ultimate-obsidian-for-beginner-s-guide-2025.md
     channel: youtube
     ingested_at: 2026-06-15
+  - path: raw/web/web-stop-writing-markdown-in-obsidian-do-this-instead.md
+    channel: web
+    ingested_at: 2026-06-17
 aliases:
   - Obsidian
   - personal knowledge management
@@ -23,7 +26,7 @@ tags:
   - corpus/productivity
   - concept
 created: 2026-06-15
-updated: 2026-06-15
+updated: 2026-06-17
 ---
 
 # Obsidian & Personal Knowledge Management
@@ -88,10 +91,39 @@ From the 15-minute guide [^src1]:
 
 Obsidian ships **no built-in AI**; you decide how much to integrate based on your privacy needs [^src1]. One source pairs Obsidian with **Claude** to "ask questions… talk to my notes, do deep research, and instantly populate properties," while keeping a deliberate separation between original thinking ("idea verse") and AI-generated notes so the vault "stays a sacred space" — and backing up before any AI experiment [^src1]. The Claude/LLM side of this lives in the ai-engineering domain; see [[ai-engineering/claude-cowork|Claude Cowork]] for AI-over-local-files workflows. This complements [[productivity/ai-augmented-knowledge-work|AI-Augmented Knowledge Work]], which covers standing-context files and voice/about-me files.
 
+## Markdown 2.0: notes as software (HTML-in-Obsidian)
+
+One emerging pattern pushes beyond plain Markdown: embedding **HTML + JavaScript** inside vault notes to make them interactive software [^src3]. The motivating argument is **information density** — "rather than just walls of text, you can have tables, illustrations, code snippets, plots, diagrams, all within a single contained file" [^src3].
+
+### What this unlocks
+
+- **Slides from any outline.** An HTML artifact rendered inside Obsidian can advance bullet points interactively, replacing external slide tools [^src3].
+- **Kanban/triage boards.** Drag-and-drop task views built as micro-software living directly in the vault [^src3].
+- **Live dashboards from daily notes.** Via the **Dataview** community plugin (enable *inline queries* + *JavaScript queries* in settings), arbitrary code executes against vault data at render time. A sleep/energy dashboard that pulls from frontmatter properties and redraws in real time exemplifies this [^src3].
+
+### Dynamic memory for Claude
+
+The most striking claim: these dashboards function as **"dynamic memory"** for an AI agent — a shared "Command Center" that both the user and Claude read each morning [^src3]. Goals, metrics, and current context live in vault notes; Claude reads the same view the user sees. "You don't need to explain your goals every session" [^src3]. This connects the Obsidian substrate directly to the standing-context pattern in [[productivity/ai-augmented-knowledge-work|AI-Augmented Knowledge Work]] (about-me/voice files), but makes the context *dynamic and self-updating* rather than manually curated.
+
+### Tradeoffs vs plain Markdown
+
+| Dimension | Plain Markdown | HTML-in-Obsidian |
+|---|---|---|
+| **Readability** | Human-readable anywhere | HTML tags opaque in raw view |
+| **AI generation time** | Fast | ~2–4× slower; more tokens [^src3] |
+| **Git diffs** | Clean line diffs | Hard to review HTML tag noise [^src3] |
+| **Interactivity** | None | Full (JS, Dataview queries) |
+| **Portability** | Any editor | Requires Obsidian + Dataview for live features |
+
+### Relationship to prior Obsidian principles
+
+This is an *extension*, not a contradiction, of the linking-over-filing thesis: the Markdown vault is still the substrate; HTML layers interactivity on top without abandoning plain-text ownership. The same files still live in folders, open in any text editor, and use YAML frontmatter — Dataview queries read those properties. The plain-Markdown gotchas (don't overfolder, don't chase plugins on day one) still apply; HTML/Dataview is an advanced layer, not a starting point.
+
 ## Related
 
 - [[productivity/learning-to-learn|Learning to Learn]] — writing-to-process; PKM is the tooling layer for that habit.
-- [[productivity/ai-augmented-knowledge-work|AI-Augmented Knowledge Work]] — about-me/voice files are themselves curated Markdown, the same substrate.
+- [[productivity/ai-augmented-knowledge-work|AI-Augmented Knowledge Work]] — about-me/voice files are themselves curated Markdown, the same substrate; HTML dashboards extend this to dynamic/auto-updating context.
 
 [^src1]: [Give Me 15 Minutes. I'll Teach You 80% of Obsidian](../../raw/youtube/youtube-z4AbijUCoKU-give-me-15-minutes-i-ll-teach-you-80-of-obsidian.md) (Linking Your Thinking / Nick Milo)
 [^src2]: [The Ultimate Obsidian for Beginner's Guide 2025](../../raw/youtube/youtube-gafuqdKwD_U-the-ultimate-obsidian-for-beginner-s-guide-2025.md) (CreaDev Labs)
+[^src3]: [Stop Writing Markdown in Obsidian. Do This Instead](../../raw/web/web-stop-writing-markdown-in-obsidian-do-this-instead.md) (Artem / ArtemXTech Substack, "Markdown 2.0: Notes Are Software Now")

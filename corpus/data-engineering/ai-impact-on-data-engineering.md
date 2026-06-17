@@ -18,12 +18,18 @@ sources:
   - path: raw/web/web-claude-code-isnt-going-to-replace-data-engineers-yet.md
     channel: web
     ingested_at: 2026-06-17
+  - path: raw/web/web-the-10x-data-team-the-markdown-team.md
+    channel: web
+    ingested_at: 2026-06-17
 aliases:
   - AI impact on data engineers
   - AI and data engineering
   - will AI replace data engineers
   - plan mode
   - end of the DE role
+  - markdown team
+  - 10x data team
+  - agent flywheel
 tags:
   - corpus/data-engineering
   - synthesis
@@ -78,12 +84,40 @@ Robin Moffatt's March 2026 hands-on evaluation provides the most granular indepe
 
 The verdict echoes the broader thesis: *"Claude Code is an amazing productivity companion. Do not, if you value your job, use it to one-shot a dbt project."* The leverage is real; the verification burden is equally real. See [[data-engineering/claude-code-for-data-engineering|Claude Code for Data Engineering]] for the full assessment.
 
+## The Markdown Team: three new jobs for data teams
+
+Julien Hurault's "Ju Data Engineering Weekly" (Ep 100, 2026) names the emerging data team "**The Markdown Team**" — not because teams will write less code, but because their output shifts from pipelines-and-dashboards to the *rules, definitions, and context* that agents need to generate those things reliably [^src6].
+
+The framing: LLMs are good at pattern-matching and code generation but bad at *predictable business behavior*. The solution is the same as the Claude Code source code itself — "LLM for pattern matching + symbolic rules" — "hundreds of branch points, deeply nested, all inside a deterministic symbolic loop" [^src6].
+
+Agent-native tools supply the symbolic guardrails: dlt (deterministic ingestion), dbt (deterministic transformation), semantic layers (deterministic metric querying). The data team's job becomes *selecting and configuring* these guardrails, not hand-writing each pipeline [^src6].
+
+### Three new jobs to be done
+
+**Job 1 — Determinism engineering.** Decide where determinism is required and put the right building blocks in place so LLMs can generate code *within those boundaries*. This is platform engineering: choose tools, define architecture, enforce governance, document standards [^src6].
+
+**Job 2 — Context encoding.** LLMs fail when they don't understand the *meaning* of data (see [[data-engineering/semantic-layer|Semantic Layer]]). The data team's job is to encode that context — gathering, cleaning, and exposing it so agents can consume it reliably. Crucially, context is not static: agent failures reveal missing or ambiguous definitions, which must be fed back as new rules [^src6]. "Context encoding is not just documentation work. It is an additional layer in the stack, one that needs its own feedback loops, maintenance, and tooling" [^src6].
+
+**Job 3 — Kaizen (the agent flywheel).** Start with a first-version rule set. Let the agent build. When it fails, diagnose *why* — most failures are context failures, not syntax failures: "A metric definition was unclear. A table was less reliable than expected. A join was much more expensive than it looked. A business assumption was never written down." Each failure becomes a new rule/skill-file/constraint. Each correction increases autonomy [^src6].
+
+### Role evolution under the Markdown Team model
+
+| Old role | New role |
+|---|---|
+| Data engineer | **Platform architect** — tools, architecture, governance, cost governance; designs the *environment* in which pipelines are generated |
+| Data analyst | **Research analyst** — metric definitions, business-facing docs, deep-dive scenario modeling ("what if pricing changes?"), simulation, decision support |
+
+This mirrors but extends the existing sources: Vu Trinh's "two states" outcome [^src1] becomes a direction — toward platform engineering and research analytics — rather than a binary. The Moffatt case study [^src5] confirms the flywheel mechanism empirically (silent failures → explicit rules next iteration).
+
+> Note: Hurault acknowledges "we are not fully there yet" and that the shift may feel uncomfortable for engineers who love the craft. Treat the role-evolution framing as directional, not imminent [^src6].
+
 ## Related
 
 - [[data-engineering/data-engineer-role|The Data Engineer Role]] — fundamentals/seniority this builds on
-- [[data-engineering/semantic-layer|Semantic Layer]] — the rising DE responsibility for AI
+- [[data-engineering/semantic-layer|Semantic Layer]] — the rising DE responsibility for AI; context encoding elaborated
 - [[data-engineering/progressive-disclosure-analytics-agents|Progressive Disclosure for Analytics Agents]]
 - [[data-engineering/query-engine-routing|Query-Engine Routing]] — agents as bursty query drivers
+- [[data-engineering/bi-as-code|BI as Code]] — Markdown as the medium for analytics artifacts
 - [[ai-business/ai-and-the-job-market|AI and the Job Market]] — broader career framing (ai-business)
 - [[ai-engineering/agentic-coding|Agentic Coding]] — write→review shift (ai-engineering)
 - [[data-engineering/README|Data Engineering hub]]
@@ -95,3 +129,4 @@ The verdict echoes the broader thesis: *"Claude Code is an amazing productivity 
 [^src3]: [What the Data Crowd Was Reading in May 2026 (Data Tinkerer)](../../raw/email/email-2026-06-11-what-the-data-crowd-was-reading-in-may-2026.md)
 [^src4]: [The Data Engineering Mindset Every AI Builder Needs (dlthub)](../../raw/web/web-the-data-engineering-mindset-every-ai-builder-needs.md)
 [^src5]: [Claude Code isn't going to replace data engineers (yet) (Robin Moffatt)](../../raw/web/web-claude-code-isnt-going-to-replace-data-engineers-yet.md)
+[^src6]: [The 10x Data Team = The Markdown Team (Julien Hurault, Ju Data Engineering Weekly Ep 100)](../../raw/web/web-the-10x-data-team-the-markdown-team.md)

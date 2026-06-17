@@ -709,3 +709,11 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - contradictions surfaced (not resolved): dbt-vs-Lakeflow-SDP (data-eng); AI-will-replace-knowledge-work (Miessler) vs agents-narrative-is-muddled (Euclid VC) (ai-business)
 - per user request: processed URLs struck from "articles to process.md" by the reaper; 3 held URLs + auth-walled failures (LinkedIn/x.com) remain
 - lint: clean — 0 broken wikilinks · 0 broken citations · 0 orphans
+
+## [2026-06-17 21:05] ingest | "articles to process" — 3 held cross-domain articles
+- web-the-10x-data-team-the-markdown-team → data-engineering/ai-impact-on-data-engineering (Markdown Team: 3 new data-team jobs)
+- web-stop-writing-markdown-in-obsidian-do-this-instead → productivity/obsidian-pkm (Markdown 2.0 / notes-as-software, HTML-in-Obsidian)
+- web-designing-synthetic-datasets → ai-engineering/synthetic-data (NEW page; Google Simula framework)
+- new pages (1): ai-engineering/synthetic-data
+- their URLs struck from "articles to process.md"; remaining paywalled/auth-walled URLs deleted from the list per user request (not tracked)
+- lint: clean

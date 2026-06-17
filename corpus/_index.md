@@ -1,6 +1,6 @@
 # Corpus Index
 
-> Last updated: 2026-06-17 | Total pages: 182 | Total sources: 434
+> Last updated: 2026-06-17 | Total pages: 183 | Total sources: 437
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
@@ -54,6 +54,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[ai-engineering/openviking|OpenViking]] — entity · draft · open-source filesystem-paradigm context database for agents; L0/L1/L2 tiered loading
 - [[ai-engineering/web-scraping|Scrapling (Web Scraping)]] — entity · stub · adaptive Python scraper; MCP extract-before-LLM
 - [[ai-engineering/ai-fundamentals|AI Fundamentals]] — concept · draft · classical + modern AI: search, logic, uncertainty, optimization, learning
+- [[ai-engineering/synthetic-data|Synthetic Data]] — concept · draft · synthetic training/eval data generation; Google's Simula (mechanism design, dual-critic quality)
 - [[ai-engineering/machine-learning|Machine Learning]] — concept · draft · supervised/unsupervised/RL; overfitting; RAG-vs-fine-tuning
 - [[ai-engineering/neural-network|Neural Networks]] — concept · draft · perceptron→backprop→CNN/RNN; reasoning & multimodal models
 - [[ai-engineering/statistics-for-ml|Statistics & Probability for ML]] — concept · draft · distributions, inference, regression — the math under ML

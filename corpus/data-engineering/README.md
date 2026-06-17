@@ -11,7 +11,7 @@ updated: 2026-06-17
 
 # Data Engineering
 
-Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestration, the lakehouse stack, and data quality. Graduated domain (2026-05-21). Substantially expanded in the 2026-06-11 email-backlog ingest (wave 1), the 2026-06-15 inbox ingest (wave 2: storage fundamentals, DE best practices, Python, CI/CD, data migration, semantic layer, progressive disclosure, AI's impact on DE), and the 2026-06-17 web-backlog ingest (wave 3: data observability, BI-as-code, ClickHouse, team OS, AutoCDC, Spark joins, grain/fan-out, WAP pattern, dbt snapshots, dbt complete guide, Claude Code/dbt assessment, API extraction patterns).
+Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestration, the lakehouse stack, and data quality. Graduated domain (2026-05-21). Substantially expanded in the 2026-06-11 email-backlog ingest (wave 1), the 2026-06-15 inbox ingest (wave 2: storage fundamentals, DE best practices, Python, CI/CD, data migration, semantic layer, progressive disclosure, AI's impact on DE), the 2026-06-17 web-backlog ingest (wave 3: data observability, BI-as-code, ClickHouse, team OS, AutoCDC, Spark joins, grain/fan-out, WAP pattern, dbt snapshots, dbt complete guide, Claude Code/dbt assessment, API extraction patterns), and the 2026-06-17 inbox ingest (wave 4: Markdown Team / 10x data team).
 
 ## Pages
 
@@ -72,7 +72,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [[data-engineering/ai-observability-data-pipeline|AI Observability as a Data Pipeline]] — synthesis · draft · AI observability mapped to the DE pipeline model; LLM-judge vs code metrics (cross-domain → ai-engineering)
 - [[data-engineering/agentic-data-modeling|Agentic Data Modeling]] — synthesis · draft · AI agents for schema design & change-impact analysis (OpenMetadata MCP, SchemaFlow, pg_infer) (cross-domain → ai-engineering)
 - [[data-engineering/progressive-disclosure-analytics-agents|Progressive Disclosure for Analytics Agents]] — synthesis · draft · Discover→Understand→Execute; avoid flat-context trap loading whole schema/semantic layer (cross-domain → ai-engineering)
-- [[data-engineering/ai-impact-on-data-engineering|AI's Impact on Data Engineering]] — synthesis · draft · won't replace DEs soon but raises judgement/semantics; agents as new query consumer
+- [[data-engineering/ai-impact-on-data-engineering|AI's Impact on Data Engineering]] — synthesis · draft · won't replace DEs soon; Markdown Team model: 3 new jobs (determinism, context encoding, kaizen flywheel); DE→platform architect, analyst→research analyst
 
 ### Source summaries
 - [[data-engineering/sources/dbt-kimball-project|dbt Kimball reference project]] — source · draft · reference dbt Kimball SCD2 project (BigQuery/DuckDB)
