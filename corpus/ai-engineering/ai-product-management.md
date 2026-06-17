@@ -12,6 +12,12 @@ sources:
   - path: raw/email/email-2026-05-26-the-top-5-skills-for-ai-engineering-product-program-and-engi.md
     channel: email
     ingested_at: 2026-06-15
+  - path: raw/youtube/youtube-we7bzvkbcvw.md
+    channel: youtube
+    ingested_at: 2026-06-17
+  - path: raw/youtube/youtube-2wljl9a2cna.md
+    channel: youtube
+    ingested_at: 2026-06-17
 aliases:
   - AI product management
   - AIPM
@@ -19,11 +25,13 @@ aliases:
   - GenAI value stack
   - applied AI PM
   - core AI PM
+  - outcomes not outputs
+  - latent demand
 tags:
   - corpus/ai-engineering
   - synthesis
 created: 2026-06-15
-updated: 2026-06-15
+updated: 2026-06-17
 ---
 
 # AI Product Management
@@ -71,6 +79,35 @@ The practitioner framing: shipping a 20k-line solution "with no code I wrote mys
 
 The strategic claim: if you already manage (as TPM/PM/EM), that is a competitive advantage as an AI engineer — the same best practices that make human teams ship make agent fleets ship [^src2]. This connects directly to [[ai-engineering/agentic-coding|Agentic Coding]] (orchestration) and [[ai-engineering/multi-agent-systems|Multi-Agent Systems]].
 
+## Outcomes, not outputs: writing goals (the PM's new core skill)
+
+A product-leader walkthrough (Claire Vo, *How I AI*) reframes the PM craft around **goal-based loops** rather than turn-based prompting [^src4]. A *prompt* is "an instruction of what to do"; a *goal* is "a description of what a good outcome is and how to get to that outcome" — the model then loops work→verify→decide-next-step until it gathers evidence the goal is met [^src4]. This is exactly the discipline PMs already train: "we've had it drilled into us, outcomes not outputs. You shouldn't be defining the work, you should be defining what success looks like" [^src4].
+
+The blog-post anatomy of a strong goal (six properties) the source highlights for PMs [^src4]:
+
+| Property | Question it answers |
+|---|---|
+| **Outcome** | What should be true when the work is done? |
+| **Verification** | How can it be tested — a suite, a browser check, a number? |
+| **Constraints** | What can't regress while the agent works? |
+| **Boundaries** | Which tools/files is it allowed to use? |
+| **Iteration policy** | How should it decide what to try next? |
+| **Stop condition** | When should it stop and report it's blocked? |
+
+The canonical example — "reduce P95 checkout latency below a threshold, verified by the checkout benchmark, keeping the correctness suite green" — is measurable, testable, guarded, and has executable surface area [^src4]. Goals are *strongest* with three properties: "a durable objective, an evidence-based finish line, and a path that may require several turns of investigation"; they are the *wrong* tool for one-line edits or vague finish lines ("make my customers happy"), and even for "refactor this code" [^src4]. The strategic read: as `/goal`-style loops spread, "product managers are going to have to get a lot better at prompting these AIs with good goals" — the same OKR-writing skill, now up-leveled with technical validation rigor [^src4]. The goal mechanics live in [[ai-engineering/agentic-coding|Agentic Coding]]; this is the *product-discipline* lens on them.
+
+### Manager mode (and its discomfort)
+
+Long-running goals make working with AI "feel more and more like working with a human colleague" — assign a goal, let it work the time required, review the result — pushing the operator into "manager mode" over "builder mode" [^src4]. The source is candid that this is not unambiguously pleasant: "when /goal came out, I found myself... twiddling my thumbs and looking for the job that I could do in the coding work because so much of the job had now been handled itself" [^src4]. The non-coding goal demos (categorizing ~3,900 emails down to 68 over a ~4-hour, ~6M-token run; cleaning a Linear backlog; burning Sentry errors to zero) show the same outcomes-not-outputs pattern applied outside code [^src4]. Hosted on Coda's "Goals" feature, though the framework is tool-agnostic across Codex / Claude Code.
+
+## "We are all going to be AI managers" → "everyone's a PM"
+
+Cherny's frontier observation reinforces the practitioner framing above: "I think by the end of the year everyone's going to be a product manager and everyone codes," with "the title software engineer... replaced by builder" [^src5]. On the Claude Code team "everyone codes" — PM, EM, designer, finance, data scientist — and the roles carry "maybe a 50% overlap" [^src5]. The PM-adjacent functions (product, design, data science) are the next ones AI expands into, via agentic (not just conversational) tools [^src5].
+
+### Latent demand: the most important product principle
+
+Cherny calls **latent demand** "the single most important principle in product": build a product that can be "misused" for something users want, then build the dedicated product for that behavior [^src5]. Examples: Facebook Marketplace (40% of group posts were buying/selling), Facebook Dating (60% of profile views were non-friends of opposite gender), and Claude Cowork (people used Claude Code non-technically — recovering wedding photos from a corrupted drive, analyzing an MRI or a genome) [^src5]. The **modern, AI-era twist**: instead of "look at what people are doing and make it easier," look at "what the *model* is trying to do and make that a little bit easier" — the product analog of keeping the model "on distribution" [^src5]. Two further AIPM-relevant build principles from the same source: **don't box the model in** ("give the model tools... a goal, and let it figure it out") and **build for the model 6 months out** (expect weak PMF early, then it clicks) — see [[ai-engineering/sources/boris-cherny-100-percent-claude-code|the source page]] and [[ai-engineering/context-engineering|Context Engineering]].
+
 ## Cross-domain
 
 The *career* dimension of AIPM (job market, "what should I become") lives in [[ai-business/ai-and-the-job-market|AI and the Job Market]] and [[ai-business/technical-career|Navigating a Technical Career]]; this page owns the product/engineering discipline.
@@ -88,3 +125,5 @@ The *career* dimension of AIPM (job market, "what should I become") lives in [[a
 [^src1]: [AI Product Management Complete Course (3.5-hour masterclass)](../../raw/youtube/youtube-KjYCEiBTHFo-ai-product-management-complete-course-3-5-hours-masterclass.md)
 [^src2]: [The Top 5 Skills for AI Engineering: Product, Program, and Engineering Management](../../raw/email/email-2026-05-26-the-top-5-skills-for-ai-engineering-product-program-and-engi.md) — Scott Behrens, The Engineer Setlist
 [^src3]: [The Top 5 Skills for AI Engineering: Systems Thinking](../../raw/web/the-top-5-skills-for-ai-engineering-systems-thinking.md) — Scott Behrens, The Engineer Setlist
+[^src4]: [How I AI — Goals in Coda (Claire Vo)](../../raw/youtube/youtube-2wljl9a2cna.md)
+[^src5]: [100% of my code is written by Claude — Boris Cherny (Lenny's Podcast)](../../raw/youtube/youtube-we7bzvkbcvw.md)

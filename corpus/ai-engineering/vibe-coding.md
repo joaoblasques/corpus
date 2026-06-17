@@ -15,6 +15,9 @@ sources:
   - path: raw/youtube/youtube-IiZ5HRaeX4s-stop-watching-tutorials-build-these-4-claude-projects-to-10x.md
     channel: youtube
     ingested_at: 2026-06-15
+  - path: raw/youtube/youtube-we7bzvkbcvw.md
+    channel: youtube
+    ingested_at: 2026-06-17
 aliases:
   - vibe coding
   - vibe-coding
@@ -25,7 +28,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-15
-updated: 2026-06-15
+updated: 2026-06-17
 ---
 
 # Vibe Coding (and why Spec-Driven Development supersedes it)
@@ -50,6 +53,10 @@ SDD introduces a **plan → implement → verify** workflow [^src1]:
 
 The deeper case: SDD "aligns both humans and agents around the project's main non-negotiables" and addresses the core issues of vibe coding [^src2]. This is the same discipline as the [[ai-engineering/ai-product-management|PRD-before-agents]] practice (clear Definition of Done + Non-Goals) and Karpathy's **Goal-Driven Execution** ("don't tell it what to do; give it success criteria and watch it go") in [[ai-engineering/claude-md-conventions|CLAUDE.md Conventions]].
 
+## "Coding is describing, not writing"
+
+At the frontier of full-agentic work the *definition of coding itself* shifts: Boris Cherny (head of Claude Code), who hasn't hand-edited a line since November, describes his day as still "coding" even though it is "just talking to Claude code to code for you" — **"coding now is describing what you want, not writing actual code"** [^src5]. This is the endpoint of the vibe-coding on-ramp, but distinct from naive vibe coding because the discipline (plan mode, reading the output, human review, verifiable specs) is retained — the SDD discipline below scales *up* to this level rather than being discarded. See [[ai-engineering/sources/boris-cherny-100-percent-claude-code|Boris Cherny — 100% Claude Code]].
+
 ## Relationship to other operating modes
 
 | Mode | Specification effort | Best for |
@@ -73,3 +80,4 @@ The deeper case: SDD "aligns both humans and agents around the project's main no
 [^src2]: [From Vibe Coding to Spec-Driven Development](../../raw/web/https-newsletter-towardsdatascience-com-e3t-ctc-l2-113-d5qls-3124b6d4.md) — Mariya Mansurova, Towards Data Science
 [^src3]: [Being good at AI is (stupidly) simple](../../raw/email/email-2026-06-07-being-good-at-ai-is-stupidly-simple.md) — Ruben Hassid
 [^src4]: [Stop Watching Tutorials — Build These 4 Claude Projects](../../raw/youtube/youtube-IiZ5HRaeX4s-stop-watching-tutorials-build-these-4-claude-projects-to-10x.md) — Austin Marchese
+[^src5]: [100% of my code is written by Claude — Boris Cherny (Lenny's Podcast)](../../raw/youtube/youtube-we7bzvkbcvw.md)

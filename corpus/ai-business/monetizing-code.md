@@ -101,6 +101,8 @@ Two reusable prompts [^src3]:
 
 - [[ai-business/technical-career|Navigating a Technical Career]] — a paid case study doubles as portfolio/interview material.
 - [[ai-business/ai-and-the-job-market|AI and the Job Market]] — the "build appliances on top of AI" framing maps to finding new monetizable workflows.
+- [[ai-business/ai-consulting-playbook|AI Consulting Playbook]] — the operational two-call discovery-and-close motion that finds the result to sell (this page is the positioning/offer layer above it).
+- [[ai-business/ai-synthetic-focus-group|AI Synthetic Focus Group]] — same "wash AI output before shipping" human-in-the-loop discipline; shares the unverified "92%" synthetic-audience claim.
 
 [^src1]: [How to make money with code ASAP?](../../raw/email/email-2026-04-28-how-to-make-money-with-code-asap.md)
 [^src2]: [another opportunity to make money with code](../../raw/email/email-2026-05-16-another-opportunity-to-make-money-with-code.md)

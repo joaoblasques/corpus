@@ -6,6 +6,9 @@ sources:
   - path: raw/email/email-2025-11-05-semantics-ontology-and-taxonomy-and-metadata-foundations-for.md
     channel: email
     ingested_at: 2026-06-15
+  - path: raw/youtube/youtube-7jbcvxmj1bs.md
+    channel: youtube
+    ingested_at: 2026-06-17
 aliases:
   - semantics
   - ontology
@@ -56,9 +59,14 @@ Semantics also clarifies *individual attributes* through rich **metadata** that 
 
 With AI as both consumer and generator of data, semantics is "no longer a second-class citizen" — the difference between an agent that **reasons** and one that **guesses** [^src1]. This is the modeling foundation beneath the [[data-engineering/semantic-layer|semantic layer]] and [[data-engineering/progressive-disclosure-analytics-agents|analytics-agent]] reliability.
 
+## The master-data layer as the locus of agreed meaning
+
+The book's "shared meaning" abstraction has a concrete operational home in practice. Zach Wilson describes a **master-data layer** built by joining, deduping, and **conforming** production snapshots into one consistent definition — "this is the layer where truth is... where trust is" [^src2]. This is the semantic-agreement problem in physical form: without it, five analysts compute the same metric five subtly-different ways on raw snapshots [^src2]. Capturing shared meaning (this page) and materializing it as conformed master data (operational) are two faces of the same discipline. See [[data-engineering/dimensional-modeling|Dimensional Modeling]] for the OLTP→master-data→OLAP continuum, and [[data-engineering/data-quality|Data Quality]] for conformance enforcement.
+
 ## Related
 
 - [[data-engineering/semantic-layer|Semantic Layer]] — the operational layer applying these foundations to AI
+- [[data-engineering/dimensional-modeling|Dimensional Modeling]] — master-data layer; consumer-driven modeling
 - [[data-engineering/dimensional-modeling|Dimensional Modeling]] — structural modeling (Kimball)
 - [[data-engineering/data-quality|Data Quality]] — taxonomies as governance/constraint enforcement
 - [[ai-engineering/rag|RAG]] — knowledge graphs / ontologies as retrieval substrate (ai-engineering)
@@ -67,3 +75,4 @@ With AI as both consumer and generator of data, semantics is "no longer a second
 ---
 
 [^src1]: [Semantics, Ontology, and Taxonomy, and Metadata — Foundations for Meaning in Data Modeling](../../raw/email/email-2025-11-05-semantics-ontology-and-taxonomy-and-metadata-foundations-for.md)
+[^src2]: [Dimensional Data Modeling Day 1 (Zach Wilson / DataExpert)](../../raw/youtube/youtube-7jbcvxmj1bs.md)

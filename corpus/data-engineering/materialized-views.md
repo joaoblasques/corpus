@@ -133,6 +133,7 @@ Three influential papers underpin most recent IVM products, forming a flexibilit
 - [[data-engineering/change-data-capture|Change data capture]] — MVs over CDC-active base tables carry extra limitations.
 - [[data-engineering/apache-iceberg|Apache Iceberg]] — Databricks incremental refresh supports Unity Catalog managed Iceberg (v3 recommended) [^src3].
 - [[data-engineering/dbt|dbt]] — incremental models solve a similar problem in the transformation layer.
+- [[data-engineering/sql-intermediate-results|Storing Intermediate Results in SQL]] — MV vs CTE vs temp table decision framework; refresh-blocking & `CONCURRENTLY`.
 
 [^src1]: [Incremental materialized view (ClickHouse docs)](../../raw/web/incremental-materialized-view-clickhouse-docs.md)
 [^src2]: [Introduction to materialized views (BigQuery / Google Cloud)](../../raw/web/introduction-to-materialized-views-bigquery-google-cloud-doc.md)

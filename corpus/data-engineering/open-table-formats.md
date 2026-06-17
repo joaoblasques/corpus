@@ -9,6 +9,9 @@ sources:
   - path: raw/web/what-is-open-data-infrastructure-blog-fivetran.md
     channel: web
     ingested_at: 2026-06-11
+  - path: raw/youtube/youtube-4bg64wnkfge.md
+    channel: youtube
+    ingested_at: 2026-06-17
 aliases:
   - OTF
   - open table format
@@ -46,6 +49,18 @@ Four claimed benefits: no vendor lock-in; lower cost at scale (store once, apply
 
 > Note: ODI framing comes from Fivetran, an ingestion vendor; treat the benefit claims as vendor advocacy, not neutral benchmark.
 
+## What "open" actually requires (governance, not just code)
+
+The Iceberg PMC frames an open table format as "the reliability of SQL on top of a big-data table that's still portable to many engines" — replacing the two pre-OTF paradigms (files-in-directories, which lacked atomicity/schema/contracts; and proprietary warehouses, which had lock-in) [^src4]. Critically, "open" means three things, the last being the most important [^src4]:
+
+1. **Open standard** — anyone interacting with the table knows exactly how to do so.
+2. **Open code** — contributors can see, debug, and extend the implementation.
+3. **Open governance** — everyone with a stake has a voice in how it evolves; invoking **Conway's Law**, a format can only stay interoperable if the community producing it is interoperable [^src4].
+
+## OTF capability is a ladder of atomic operations
+
+A useful mental model from Iceberg's version history: a table format's power is defined by **which things it can change atomically** [^src4]. Iceberg climbed: **add/remove/replace files** (V1) → also **add/remove/change rows** via delete files + merge-on-read (V2) → and in V4, **add/remove/change columns** by letting a column live in a separate file [^src4]. The same row/column-delete primitives are being pushed down to the *metadata* layer too [^src4]. This ladder is the deep reason OTFs need a real metadata layer: directory structure can't express row- or column-level atomic change — only a transaction log + per-file statistics can. See [[data-engineering/apache-iceberg|Apache Iceberg]] for the V1→V4 detail.
+
 ## Gotchas / things to watch
 
 - **Format is not the whole story.** A separate metadata layer (transaction log + per-file statistics) replaces directory structure as the planning mechanism — e.g. on Delta and Iceberg, directory-pruning does not exist; the engine prunes against statistics in the log, not the directory tree (see [[data-engineering/databricks|Databricks]] Liquid Clustering) [^src3].
@@ -63,3 +78,4 @@ Four claimed benefits: no vendor lock-in; lower cost at scale (store once, apply
 [^src1]: [5 insights to help you learn any open table format faster](../../raw/email/email-2026-05-26-5-insights-to-help-you-learn-any-open-table-format-faster.md)
 [^src2]: [What is Open Data Infrastructure? (Fivetran)](../../raw/web/what-is-open-data-infrastructure-blog-fivetran.md)
 [^src3]: [Debunking 8 data layout myths (Databricks)](../../raw/web/debunking-8-data-layout-myths-why-liquid-clustering-outperfo.md)
+[^src4]: [Apache Iceberg Summit Keynote (Russell Spitzer)](../../raw/youtube/youtube-4bg64wnkfge.md)

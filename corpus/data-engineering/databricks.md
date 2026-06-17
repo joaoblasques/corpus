@@ -18,6 +18,9 @@ sources:
   - path: raw/web/lakeflow-spark-declarative-pipelines-databricks-on-aws.md
     channel: web
     ingested_at: 2026-06-11
+  - path: raw/youtube/youtube-qndigzfaufs.md
+    channel: youtube
+    ingested_at: 2026-06-17
 aliases:
   - Databricks
   - Unity Catalog
@@ -35,6 +38,21 @@ updated: 2026-06-11
 # Databricks
 
 **TL;DR.** Databricks is a **lakehouse platform** that puts warehouse-style SQL, BI, ML, and streaming on top of low-cost object storage (S3, ADLS, GCS) using open table formats such as Delta or Iceberg [^src1]. It earns its keep when the alternative is stitching a warehouse, Spark cluster, streaming engine, notebook environment, feature store, governance layer, and permission model from multiple vendors [^src1]. It is "a powerful platform... also a heavy one" — the adoption question is fit, not quality [^src1]. Key primitives: **Unity Catalog** (governance), **Liquid Clustering** (data layout), **Lakeflow Spark Declarative Pipelines** (orchestration), and **Photon** (vectorised query engine) [^src1].
+
+## Origin and what it actually bundles
+
+Databricks was founded ~2013 by the UC Berkeley AMPLab team behind Apache Spark; Spark itself started in 2009 to balance Hadoop's fault tolerance and scalability while allowing data reuse across processes, formalized in the **RDD (Resilient Distributed Dataset)** paper [^src6]. The progression: people wanted managed Spark (like AWS EMR or GCP Dataproc), and Databricks went "a few steps further" [^src6]. It is **not one open-source tool but several** — at its core **Spark + Delta Lake + MLflow** [^src6]:
+- **Spark** — the unavoidable processing engine; most users interact here. See [[data-engineering/apache-spark|Apache Spark]].
+- **Delta Lake** — sets up Delta tables (ACID transactions on files). See [[data-engineering/open-table-formats|Open Table Formats]].
+- **MLflow** — model registry, deployment, and monitoring (the "I built a model, now what?" answer); alternative to Kubeflow [^src6].
+
+## Lakehouse positioning vs Snowflake
+
+Databricks bet on the **data lakehouse** — combining a data lake's cost-effectiveness with a warehouse's management benefits (security, clear table structures) [^src6]. Its ads poke fun at the data warehouse; it pitches itself as "everything: SQL, BI, real-time analytics," whereas **Snowflake leans more toward the data-science use case** for lakehouses [^src6]. A practitioner read: Databricks is **geared heavily toward data scientists** — everything centers on notebooks — though it serves data engineers too via jobs, table streaming from Kafka, and micro-batch/batch ETL [^src6]. Both vendors now sell themselves as **data platforms, not just a lake or a cloud warehouse** [^src6]. See [[data-engineering/snowflake|Snowflake]] for the competing architecture and the 2021 benchmark dispute.
+
+## Core UI components (user-facing)
+
+The primitives a Databricks user works with [^src6]: **workspaces** (personal or shared), **clusters** (Spark compute — pick node count/size, Spark version, and auto-terminate-on-inactivity to control cost), **tables** (an abstraction over files — external/internal, Delta-backed tables give ACID where plain tables don't), **notebooks** (Python/Scala/SQL/R — multi-language support comes from Spark underneath), **jobs** (productionize a notebook: chain tasks into dependencies, schedule via UI or cron, resize the cluster), and **libraries** [^src6]. The integrated developer experience — Git version control, swappable cluster config, notebook→job promotion — is cited as a Databricks advantage over Snowflake's "purely SQL-based" tasks that aren't visible/creatable in a UI [^src6]. The "table ≈ file" abstraction reflects the broader trend of schema-on-read blurring the table/file distinction even in the Snowflake world [^src6].
 
 ## When Databricks makes sense
 
@@ -118,9 +136,12 @@ A framework for batch and streaming pipelines in SQL and Python, formerly known 
 - [[data-engineering/data-lake|Data lake]] · [[data-engineering/apache-iceberg|Apache Iceberg]] · [[data-engineering/parquet|Parquet]]
 - [[data-engineering/dbt|dbt]] · [[data-engineering/postgres|Postgres]] — the "simpler stack" alternatives
 - [[data-engineering/duckdb|DuckDB]] — reads Liquid-Clustered output
+- [[data-engineering/snowflake|Snowflake]] — competing cloud OLAP platform; lakehouse rivalry
+- [[data-engineering/apache-spark|Apache Spark]] — the processing engine at Databricks' core
 
 [^src1]: [When (and when not) to use Databricks](../../raw/email/email-2026-05-25-when-and-when-not-to-use-databricks.md)
 [^src2]: [Debunking 8 data layout myths: why Liquid Clustering outperforms partitioning](../../raw/web/debunking-8-data-layout-myths-why-liquid-clustering-outperfo.md)
 [^src3]: [Unity Catalog (Databricks)](../../raw/web/unity-catalog.md)
 [^src4]: [Databricks pricing](../../raw/web/databricks-pricing-flexible-plans-for-data-and-ai-solutions.md)
 [^src5]: [Lakeflow Spark Declarative Pipelines (Databricks on AWS)](../../raw/web/lakeflow-spark-declarative-pipelines-databricks-on-aws.md)
+[^src6]: [What is Databricks and why people use it (SeattleDataGuy)](../../raw/youtube/youtube-qndigzfaufs.md)

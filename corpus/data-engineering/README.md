@@ -44,6 +44,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [[data-engineering/data-mart|Data Mart]] — concept · draft · community-specific DSS store; Demarest's hybrid warehouse+marting multitiered model; schema explosion
 - [[data-engineering/postgresql-views|PostgreSQL Views]] — concept · draft · views as rewrite rules (pg_rewrite macros); inlining, SELECT * trap, security_invoker, schema-evolution pain
 - [[data-engineering/graph-databases|Graph Databases (RDF vs LPG)]] — concept · draft · RDF/OWL vs labeled property graph decision framework; index-free adjacency, RDF 1.2, GQL, workload-dependent benchmarks
+- [[data-engineering/sql-intermediate-results|Storing Intermediate Results in SQL]] — concept · draft · CTE vs subquery vs view vs temp table vs materialized view; materialized-or-not decision framework; staging tables
 
 ### Entities
 - [[data-engineering/postgres|PostgreSQL]] — entity · draft · relational database as full-stack data platform via extensions (pgvector, pgcron, tsvector, etc.)
@@ -57,6 +58,8 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [[data-engineering/ingestr|ingestr]] — entity · stub · Bruin CLI ELT tool; copy any source → any destination, incremental loading
 - [[data-engineering/redis|Redis]] — entity · draft · in-memory store; new 8.8 array type for position-as-data-model (groups of 4096, free gaps, ARRING/ARGREP/AROP)
 - [[data-engineering/mondaydb|mondayDB]] — entity · draft · monday.com's DuckDB-powered columnar HTAP serving layer; CQRS, external WAL, sync-then-query, rendezvous-hash routing
+- [[data-engineering/dataform|Dataform]] — entity · draft · BigQuery-native SQL/JS transformation orchestration (SQLX, ref-DAG, assertions, Git); dbt analogue in GCP
+- [[data-engineering/snowflake|Snowflake]] — entity · draft · managed cloud OLAP; disaggregated storage/compute, virtual warehouses, micro-partitions, work stealing, flexible compute, Unistore
 
 ### Syntheses
 - [[data-engineering/query-engine-routing|Query-Engine Routing]] — synthesis · draft · multi-engine routing over Iceberg; SQL-dialect translation; cost-based routing

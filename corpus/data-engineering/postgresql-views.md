@@ -105,4 +105,11 @@ The pain traces to one gap: there is no structural `ALTER VIEW`[^src1]. `ALTER V
 
 > "Even without it, views are still worth using. Just don't pretend they're tables."[^src1]
 
+## See also
+
+- [[data-engineering/sql-intermediate-results|Storing Intermediate Results in SQL]] — when to use a view vs CTE vs temp table vs materialized view
+- [[data-engineering/materialized-views|Materialized Views]] — the materialized counterpart
+- [[data-engineering/postgres|PostgreSQL]] — Postgres as a general data platform
+- [[data-engineering/README|Data Engineering hub]]
+
 [^src1]: [Strong Views on PostgreSQL Views](../../raw/web/strong-views-on-postgresql-views.md)

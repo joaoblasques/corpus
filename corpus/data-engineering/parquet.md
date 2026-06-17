@@ -144,6 +144,7 @@ WITH (
 
 - [[data-engineering/apache-iceberg|Apache Iceberg]] — table format layer on top of Parquet
 - [[data-engineering/data-lake|Data Lake / Lakehouse]] — storage architecture that uses Parquet as the file format
+- [[data-engineering/dimensional-modeling|Dimensional Modeling]] — how joins/shuffles destroy RLE compression (temporal cardinality explosion)
 - [[data-engineering/README|Data Engineering hub]]
 
 ---

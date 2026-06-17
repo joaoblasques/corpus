@@ -21,6 +21,9 @@ sources:
   - path: raw/email/email-2026-05-21-goal-landed-here-s-how-to-use-it.md
     channel: email
     ingested_at: 2026-06-15
+  - path: raw/youtube/youtube-2wljl9a2cna.md
+    channel: youtube
+    ingested_at: 2026-06-17
 aliases:
   - agentic coding
   - agentic engineering
@@ -37,7 +40,7 @@ tags:
   - corpus/ai-engineering
   - synthesis
 created: 2026-06-12
-updated: 2026-06-15
+updated: 2026-06-17
 ---
 
 # Agentic Coding
@@ -118,6 +121,12 @@ The discipline that makes goals work is **writing the goal so it can't be gamed*
 
 Three things to watch: **token spend** (a multi-hour Opus loop isn't free; set a soft budget like `--tokens 250K` — sharper after programmatic Claude Code moved to API rates on 2026-06-15), the **review queue** (overnight `/goal` runs produce PRs nobody scoped — write a machine-authored-PR policy first), and **blast radius** [^src6]. Robobun (an agent with more Bun commits than Bun's creator) and the two-reviewers-on-one-PR setup (CodeRabbit for style + Claude for cross-file reasoning) are the production exemplars [^src6]. This is the structural sibling of the **reconcile** self-improvement move in [[ai-engineering/learning-ai-engineering|Learning AI Engineering]] and the verification loop in [[ai-engineering/agent-testing|Agent Testing]].
 
+### Goal anatomy and when *not* to use it (Codex `/goal`)
+
+A product-leader walkthrough of Codex's `/goal` (Claire Vo, *How I AI*, hosted on Coda's "Goals" feature) gives the cross-tool view: a goal is "a description of what a good outcome is and how to get to that outcome," and the model loops work→verify→decide-next-step until it gathers *evidence* the goal is met [^src7]. The six-part anatomy of a strong goal — **outcome, verification, constraints, boundaries, iteration policy, stop condition** — is the OpenAI-documented spec; the canonical example is "reduce P95 checkout latency below a threshold, verified by the benchmark, keeping the correctness suite green" [^src7]. The same loophole discipline as the Claude-Code framing applies: a guardrail like "keep the correctness suite green" is what stops the agent from deleting the slow page to make latency "go away" [^src7]. (See the full product-discipline treatment in [[ai-engineering/ai-product-management|AI Product Management]].)
+
+**When *not* to use a goal** [^src7]: one-line edits ("too big a tool for the job — you want an outcome, not an output"), vague finish lines ("make my customers happy" — no definitive completion condition), and, notably, "refactor this code" (no evidence-based finish line). Goals are strongest with "a durable objective, an evidence-based finish line, and a path that may require several turns of investigation" [^src7]. Demonstrated run lengths: a Sentry-error-burn-down ran "several hours" and produced "a systematic fix... not band-aid fixes," and a non-coding inbox cleanup ran ~4 hours / ~6M tokens — concrete evidence for the multi-hour autonomy [[ai-engineering/long-running-agents|Long-Running Agents]] describes [^src7]. The source equates `/goal` with the **Ralph Loop** as "functionally the same framework" [^src7] (see [[ai-engineering/ralph-loop|Ralph Loop]]).
+
 ## How developers still learn
 
 An open tension McKinney raises: if seniors no longer write much code (he reviews, guides, adds taste), how do we *develop* seniors? His answer — "the hard labour goes away, which is where we usually learn" (learning by osmosis) — so the focus must shift to design patterns and architecture, to have "the technical vocabulary to guide or understand the agents" [^src2].
@@ -141,3 +150,4 @@ An open tension McKinney raises: if seniors no longer write much code (he review
 [^src4]: [Beyond the Prompt: Claude Code Mastery](../../raw/web/beyond-the-prompt-claude-code.md) — arps18 (synthesizing Boris Cherny, Cat Wu, Anthropic team)
 [^src5]: [May Must-Reads: Vibe Coding, Token Economics, and More](../../raw/email/email-2026-05-28-may-must-reads-vibe-coding-token-economics-and-more.md) — Towards Data Science newsletter
 [^src6]: [/goal landed. Here's how to use it](../../raw/email/email-2026-05-21-goal-landed-here-s-how-to-use-it.md) — Abhishek, Claude Code Camp (on Code with Claude, Boris Cherny, `/goal`)
+[^src7]: [How I AI — Goals in Coda (Claire Vo)](../../raw/youtube/youtube-2wljl9a2cna.md)

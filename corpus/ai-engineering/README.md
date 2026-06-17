@@ -74,6 +74,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [[ai-engineering/sources/cs50-ai-with-python|Harvard CS50's AI with Python]] — source · draft · classical+modern AI curriculum (search, logic, ML, neural nets, NLP)
 - [[ai-engineering/sources/internal-operating-system-claude-projects|4 Claude Projects / Internal OS]] — source · draft · knowledge+skills+ingest+improve loop = the LLM-Wiki pattern
 - [[ai-engineering/sources/grab-multi-agent-data-warehouse-support|Grab — From Firefighting to Building]] — source · draft · production 5-agent system for data-warehouse support; six production-hardening lessons
+- [[ai-engineering/sources/boris-cherny-100-percent-claude-code|Boris Cherny — 100% Claude Code]] — source · draft · head of Claude Code: full-agentic workflow, ~5 parallel agents, latent demand, build-for-the-model, "coding is describing"
 
 ### Cross-domain (primary home in data-engineering)
 - [[data-engineering/claude-code-for-data-engineering|Claude Code for Data Engineering]] — synthesis · AI-assisted dbt / data workflows

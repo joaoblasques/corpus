@@ -21,6 +21,9 @@ sources:
   - path: raw/web/tuesday-12-may-claude-code-2-1-139.md
     channel: web
     ingested_at: 2026-06-12
+  - path: raw/youtube/youtube-we7bzvkbcvw.md
+    channel: youtube
+    ingested_at: 2026-06-17
 aliases:
   - Claude Code
   - claude-code
@@ -29,7 +32,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-06-12
-updated: 2026-06-12
+updated: 2026-06-17
 ---
 
 # Claude Code
@@ -102,8 +105,21 @@ Other notable harness mechanics from the same release [^src6]:
 - **API-key gating**: setting `ANTHROPIC_API_KEY`/`apiKeyHelper`/`ANTHROPIC_AUTH_TOKEN` disables Remote Control, `/schedule`, claude.ai MCP connectors, and notifications even with a Claude.ai login present — unset the key to re-enable.
 - Subagent API requests now carry `x-claude-code-agent-id`/`parent-agent-id` headers (and matching OTEL span attributes) for tracing multi-agent sessions.
 
+## Practitioner workflow (head-of-Claude-Code usage)
+
+Boris Cherny, who leads Claude Code, runs the tool at its full-agentic limit and offers concrete usage tips [^src7]:
+
+- **Parallel sessions ("multi-clouding").** "At the moment I have like five agents running"; "I always have a bunch of agents running" [^src7]. He spreads work across surfaces — "maybe a third of my code now is in the terminal but also a third is using the desktop app and then a third is the iOS app" — all "the same quad agent running everywhere" [^src7]. Designers and non-engineers favor the desktop app's code tab specifically because you can "run as many cloud sessions in parallel as you want" without opening many terminals [^src7].
+- **Tip 1 — use the most capable model.** "Just use the most capable model... I have maximum effort enabled always." A weaker model can be *more* expensive: "because it's less intelligent, it actually takes more tokens in the end to do the same task" [^src7]. (See effort levels above and [[ai-engineering/agent-cost-management|Agent Cost Management]].)
+- **Tip 2 — plan mode for ~80% of tasks.** "I start almost all of my tasks in plan mode, maybe like 80%." Plan mode is mechanically trivial — "we inject one sentence into the model's prompt to say, 'Please don't write any code yet'" (terminal: shift-tab twice). After a solid plan he auto-accepts edits because "it's just going to one-shot it... almost every time with Opus 4.6" [^src7].
+- **Tip 3 — try different interfaces.** Terminal, iOS/Android, desktop, Slack — "there's no one right way to use Claude Code"; and Claude Code "kind of knows about itself, so it can help" edit settings and recommend a setup [^src7].
+- **Build for the model 6 months out.** Claude Code's enduring design bet: build for where the model will be, not where it is — accept poor PMF for ~6 months, then "the product is going to click" when the model lands. The inflection arrived with Opus 4 / Sonnet 4 [^src7]. The original Claude CLI demo shocked Cherny by using a bare bash tool to answer "what music am I listening to" with no tool-specific instruction — the seed of the minimal-harness philosophy [^src7].
+
+> **Internal stat:** at Anthropic, Claude reviews 100% of pull requests (with a human review layer after), and per-engineer PR productivity rose ~200% since Claude Code launched [^src7].
+
 ## See also
 
+- [[ai-engineering/sources/boris-cherny-100-percent-claude-code|Boris Cherny — 100% Claude Code]] — the full interview source page
 - [[ai-engineering/claude-cowork|Claude Cowork]] — the non-developer counterpart to Claude Code
 - [[ai-engineering/anthropic|Anthropic]] — model lineup and provider
 - [[ai-engineering/agent-skills|Agent Skills]], [[ai-engineering/mcp|MCP]], [[ai-engineering/optimizing-claude|Optimizing a Claude Setup]]
@@ -114,3 +130,4 @@ Other notable harness mechanics from the same release [^src6]:
 [^src4]: [Build your own Developer Tools with Claude Code](../../raw/email/email-2026-05-20-build-your-own-developer-tools-with-claude-code.md)
 [^src5]: [Your Claude Code Guide + Tutorials](../../raw/email/email-2026-02-20-your-claude-code-guide-tutorials.md)
 [^src6]: [Claude Code 2.1.139 changelog (notes: agent view, /goal)](../../raw/web/tuesday-12-may-claude-code-2-1-139.md) — matins.news
+[^src7]: [100% of my code is written by Claude — Boris Cherny (Lenny's Podcast)](../../raw/youtube/youtube-we7bzvkbcvw.md)

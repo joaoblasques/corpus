@@ -12,6 +12,9 @@ sources:
   - path: raw/_inbox/email-2025-09-24-understanding-open-table-formats-with-apache-iceberg.md
     channel: email
     ingested_at: 2026-06-11
+  - path: raw/youtube/youtube-4bg64wnkfge.md
+    channel: youtube
+    ingested_at: 2026-06-17
 aliases:
   - Apache Iceberg
   - Iceberg
@@ -52,6 +55,33 @@ The "open" in OTF means the format is a published standard, not tied to one vend
 Without Iceberg (or Delta Lake / Hudi), Spark SQL cannot perform atomic multi-action DML (`MERGE INTO`) against a table. Iceberg is a prerequisite for SCD2 pipelines in Spark [^src1].
 
 In a lakehouse architecture, Iceberg is the metadata wrapper that promotes a data lake (files in S3/GCS/ADLS) to a data warehouse experience — adding reliability and queryability without moving data [^src2].
+
+## Format evolution: V1 → V2 → V3 → V4
+
+Russell Spitzer (Iceberg PMC) frames the format's history as a sequence of capability additions, each driven by use cases brought to the community [^src4]:
+
+- **V1** — only three atomic operations: **add, remove, or replace data files** [^src4]. Enough to build a fully transactional system (appends, deletes, insert-override) on files in storage, but row-level changes were "really, really expensive": changing a few rows in a large file meant rewriting the whole file. GDPR / right-to-be-forgotten made this untenable at scale [^src4].
+- **V2** — added **delete files** enabling **row-level deletes/updates without rewriting unchanged data** ("merge on read": read the delete file + its data file together to reconstruct the current table) [^src4]. Crucially, the table changes *only by adding files*, so the metadata layer grows monotonically [^src4].
+- **V3** — position delete replacement, new **`variant` and `geo` types**, and **encryption support** [^src4].
+- **V4** — work began less than a week after V3 was ratified (May 29, 2025), targeting **streaming and AI** use cases [^src4].
+
+Iceberg has also grown **beyond the table-format spec** into an interoperability stack: catalog protocol, interoperable **views**, **Puffin** blob/index files, and a recently-added UDF-portability spec — with Java, Python, Rust, Go, and C++ implementations [^src4].
+
+## V4 roadmap: streaming + AI
+
+**Streaming** problems V4 targets [^src4]:
+- Adding one small commit currently forces writing a data file **and** a single-row manifest **and** rewriting the manifest list — metadata grows by a file per commit, and reading recent data needs a multi-hop read (manifest list → manifest → data). Teams work around it with aggressive metadata compaction [^src4].
+- **Root manifest** — a top-level manifest file that can hold *either* manifests or data files directly, collapsing the hierarchy. Writers append straight to the root with no intercessor manifest; **column statistics** (not just partition stats) propagate up for pruning [^src4].
+- **Adaptive metadata tree** — the root acts as a buffer, spinning off a leaf manifest only once enough files accumulate, **at write time** — no separate rewrite-manifest compaction action. Small/streaming tables can live entirely at the root level: one IO between query and data [^src4].
+
+**AI** problems V4 targets — three issues with feature-store / LLM-training workloads [^src4]:
+- **Wide tables** — feature stores reach thousands–tens of thousands of columns; Iceberg's model requires one file holding *every* column, so wider tables force shorter (fewer-row) files [^src4].
+- **Column updates** — AI tables grow "to the right" (adding/replacing whole feature columns) rather than down (adding rows); V1–V3 only had add/remove *files* or *rows* as first-class ops [^src4].
+- **Multimodal data** — a single column may hold a large JPEG/video blob, dominating file size [^src4].
+
+The V4 answer mirrors the V2 move: allow a column to live in a **separate column file** from the base file, giving **add/remove/change at the column level** [^src4]. A V4 table will support add/remove/change for **files, rows, *and* columns** [^src4]. These same row/column-delete capabilities are also being applied to the **metadata layer** — e.g. removing a data file via a row-delete on a manifest instead of rewriting the manifest, making the metadata layer far more cacheable [^src4].
+
+> Governance note: Spitzer stresses Iceberg's "open" rests on three legs — open standard, open code, and most importantly **open governance** — invoking Conway's Law: an interoperating format needs an interoperating community [^src4]. Project scale: 13,000+ commits and 1,500+ unique contributors across all implementations [^src4].
 
 ## SQL examples (Trino)
 
@@ -109,3 +139,4 @@ SHOW STATS FOR (
 [^src1]: [[03_Resources/Articles/scd2-table-creation-merge-into-spark-iceberg|SCD2 Table Creation with MERGE INTO in Spark and Iceberg]]
 [^src2]: [[03_Resources/Study Notes/Data Lake Fundamentals - Apache Iceberg and Parquet|Data Lake Fundamentals - Apache Iceberg and Parquet]]
 [^src3]: [Understanding Open Table Formats with Apache Iceberg](../../raw/email/email-2025-09-24-understanding-open-table-formats-with-apache-iceberg.md)
+[^src4]: [Apache Iceberg Summit Keynote — the future of Iceberg (Russell Spitzer)](../../raw/youtube/youtube-4bg64wnkfge.md)

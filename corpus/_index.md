@@ -1,6 +1,6 @@
 # Corpus Index
 
-> Last updated: 2026-06-17 | Total pages: 154 | Total sources: 309
+> Last updated: 2026-06-17 | Total pages: 161 | Total sources: 321
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
@@ -60,6 +60,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[ai-engineering/sources/cs50-ai-with-python|Harvard CS50's AI with Python]] — source · draft · classical+modern AI curriculum
 - [[ai-engineering/sources/grab-multi-agent-data-warehouse-support|Grab Multi-Agent DW Support]] — source · draft · production 5-agent data-warehouse support system (FastAPI+LangGraph); six hardening lessons
 - [[ai-engineering/sources/internal-operating-system-claude-projects|4 Claude Projects / Internal OS]] — source · draft · knowledge+skills+ingest+improve = LLM-Wiki pattern
+- [[ai-engineering/sources/boris-cherny-100-percent-claude-code|Boris Cherny: 100% Claude Code]] — source · draft · head-of-Claude-Code workflow: multi-clouding ~5 agents, 10-30 PRs/day, build-for-the-model, "everyone's a PM"
 
 ### data-engineering
 - [[data-engineering/README|Data Engineering]] — hub · draft · ETL/ELT, data modeling, Spark, Iceberg
@@ -112,6 +113,9 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[data-engineering/progressive-disclosure-analytics-agents|Progressive Disclosure for Analytics Agents]] — synthesis · draft · Discover→Understand→Execute; avoid flat-context trap (cross-domain → ai-engineering)
 - [[data-engineering/ai-impact-on-data-engineering|AI's Impact on Data Engineering]] — synthesis · draft · won't replace DEs soon but raises judgement/semantics; agents as new query consumer
 - [[data-engineering/sources/sql-funnel-analysis-project|SQL Sales-Funnel Analysis project]] — source · draft · end-to-end BigQuery funnel/conversion/AOV-vs-CAC SQL walkthrough
+- [[data-engineering/dataform|Dataform]] — entity · draft · BigQuery-native SQL/JS transformation orchestration (SQLX, ref-DAG, repo=Git, assertions); the dbt analogue in GCP
+- [[data-engineering/snowflake|Snowflake]] — entity · draft · managed cloud OLAP; 3-layer disaggregated architecture, virtual warehouses, micro-partitions, push-based vectorized execution (CMU/Pavlo)
+- [[data-engineering/sql-intermediate-results|SQL Intermediate Results]] — concept · draft · the five ways to store a transformation (subquery/CTE/view vs temp table/MV); materialized-or-not decision rules
 
 ### software-engineering
 - [[software-engineering/README|Software Engineering]] — hub · draft · foundational CS through deployment infrastructure; design principles, distributed systems, container orchestration
@@ -130,7 +134,8 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[software-engineering/local-first-sync-architecture|Local-First Sync Architecture]] — concept · draft · browser-as-database + optimistic mutations + granular reactivity; server as sync target (reverse-engineered from Linear)
 - [[software-engineering/test-case-reduction|Test-Case Reduction]] — concept · draft · auto-shrink a failing input to a minimal reproducer via an interestingness test; ddmin/creduce/Shrink Ray
 - [[software-engineering/ai-assisted-development|AI-Assisted Development]] — synthesis · draft · fundamentals under AI; write→review shift; deterministic guardrails
-- [[software-engineering/algorithms|Algorithms (Strategies, Not Tricks)]] — concept · draft · recursion, binary search (divide & conquer), dynamic programming / memoization
+- [[software-engineering/algorithms|Algorithms (Strategies, Not Tricks)]] — concept · draft · recursion, binary search (divide & conquer), sorting, pathfinding/Dijkstra, MST/Prim's, dynamic programming / memoization
+- [[software-engineering/cognitive-debt|Cognitive Debt]] — concept · stub · cognitive debt → cognitive surrender; Storey's three debt models; the AI orchestration tax
 
 ### mlops
 - [[mlops/README|MLOps]] — hub · draft · engineering substrate: environment, version control, compute, infrastructure-as-code (provisional)
@@ -170,8 +175,11 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[ai-business/ai-economics-bubble|AI Economics & the Bubble Question]] — concept · draft · Zitron's bear case on GenAI unit economics; token-billing spend caps as a demand signal
 - [[ai-business/ai-spreadsheets|AI Spreadsheets & the Data-Skill Shift]] — concept · draft · "stop learning Excel"; assumptions-first build spec + standing context
 - [[ai-business/ai-job-search|Finding a Job Using AI]] — concept · draft · AI career-strategist projects + autonomous apply (ApplyPilot); quality over volume
+- [[ai-business/ai-synthetic-focus-group|AI Synthetic Focus Group]] — concept · draft · LLM buyer-persona panel critiques ads/copy before spend; predictive-vs-reactive marketing shift (claims flagged unsourced)
+- [[ai-business/ai-consulting-playbook|AI Consulting Playbook]] — concept · draft · free "AI mini assessment" two-call client-acquisition framework; frequency×friction bottleneck selection, the "money question" close
 
 ## Recent additions
+- 2026-06-17: **YouTube batch (v0.6 cluster pipeline, 4 parallel workers)** — 12 transcripts ingested → 7 new pages, 9 enriched. New: [[data-engineering/dataform]], [[data-engineering/snowflake]], [[data-engineering/sql-intermediate-results]], [[software-engineering/cognitive-debt]], [[ai-business/ai-synthetic-focus-group]], [[ai-business/ai-consulting-playbook]], [[ai-engineering/sources/boris-cherny-100-percent-claude-code]]. Updated: apache-iceberg, open-table-formats, dimensional-modeling, data-modeling-meaning, databricks, claude-code, vibe-coding, ai-product-management, agentic-coding, algorithms, engineering-craft.
 - 2026-06-17: **ingest-auto safe pass (6 candidates, 2 ingested, 4 deferred)** — [[ai-engineering/anthropic]] (updated, +1 source — Anthropic Academy free certifications: Claude 101 / AI Fluency 4Ds / Intro to Cowork; fills prior unsourced Skilljar note); [[ai-engineering/claude-cowork]] (updated, +1 source — Cowork Toolkit 7-day arc + routing-conflict edge case). Deferred: 2 TLDR digests, Decathlon promo, Google tips promo.
 - 2026-06-15: **ingest-auto safe pass (3 candidates, 2 ingested, 1 deferred)** — software-engineering/[[software-engineering/software-design-principles]] (updated, +1 source — DIP worked example); ai-engineering/[[ai-engineering/claude-cowork]] (updated, +1 source — post-call-wrapup skill example)
 - 2026-06-15: **YouTube + email batch (v0.6 cluster pipeline, 4 parallel workers)** — 35 new pages, ~19 updated, 62 sources ingested (27 YouTube transcripts + 35 email/web), 9 skipped at the citation gate.

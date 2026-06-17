@@ -617,3 +617,14 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   - ingest: 2 ingested · 4 deferred · status=ok
 - lint:
   - 0 broken wikilinks · 0 broken citations · 0 orphans · 5 stubs
+
+## [2026-06-17 09:15] ingest | YouTube batch — 12 transcripts (v0.6 cluster pipeline, 4 parallel workers)
+- sources: raw/youtube/{youtube-285hnxl9-rk, youtube-4bg64wnkfge, youtube-7jbcvxmj1bs, youtube-nhwp1btg0cw, youtube-qndigzfaufs, youtube-vstjydo88ka, youtube-we7bzvkbcvw, youtube-2wljl9a2cna, youtube-fkcfaapypuq, youtube-vtyx7ex-0ba, youtube-m8hcuiud9xo, youtube-n6t1kgxblqa}.md
+- channel: youtube (all collected 2026-06-16 via the 08:00 scheduled run; reboot-interrupted session resumed)
+- domains: data-engineering (6), ai-engineering (2), software-engineering (2), ai-business (2)
+- new pages (7): data-engineering/dataform, data-engineering/snowflake, data-engineering/sql-intermediate-results, software-engineering/cognitive-debt, ai-business/ai-synthetic-focus-group, ai-business/ai-consulting-playbook, ai-engineering/sources/boris-cherny-100-percent-claude-code
+- pages updated (9): apache-iceberg, open-table-formats, dimensional-modeling, data-modeling-meaning, databricks, claude-code, vibe-coding, ai-product-management, agentic-coding, algorithms, engineering-craft (+ cross-link-only on parquet, dbt, materialized-views, postgresql-views, data-structures, monetizing-code)
+- routing: CMU Advanced DB lecture (youtube-nhwp1btg0cw) identified as Snowflake → new snowflake.md; SQL views/CTE/temp (youtube-vstjydo88ka) → new sql-intermediate-results.md (cross-mechanism decision framework, avoids dup of postgresql-views/materialized-views); Coda "Goals" demo → enriched ai-product-management + agentic-coding (no Coda entity page; subject is Codex /goal)
+- lint: clean — 0 broken wikilinks · 0 broken citations · 0 orphans (cognitive-debt new stub, <14d)
+- contradictions surfaced (not overwritten): Cherny's minimal-scaffolding "don't box the model in" stance vs the corpus's harness-emphasis pages (agent-harness/agentic-coding) — documented on the Boris Cherny source page as a tension-to-track, framed as a weighting difference not a factual conflict; no synthesis page created
+- notes: 1 rate-limited transcript (youtube-ow3es1af5-y) left unstamped to self-recover via the daily job; 2 low-utility ai-business sources kept tight + confidence:0.5 with promo claims flagged; recurring unverified "92% accuracy vs human focus groups" figure cross-referenced against the existing monetizing-code gotcha rather than treated as corroboration

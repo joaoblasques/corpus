@@ -6,7 +6,7 @@ tags:
   - corpus/software-engineering
   - hub
 created: 2026-05-07
-updated: 2026-06-16
+updated: 2026-06-17
 ---
 
 # Software Engineering
@@ -26,10 +26,11 @@ Domain covering software engineering practice from foundational CS through deplo
 - [[software-engineering/distributed-systems-fallacies|Distributed Systems Fallacies]] — concept · draft · eight fallacies; sourced failure modes for network reliability, latency, topology change, and security; fallacies 3/6/7/8 awaiting dedicated source
 - [[software-engineering/software-design-principles|Software Design Principles]] — concept · draft · 8 code-level principles (SRP, cohesion, loose coupling, DI, open/closed, simplicity) separating maintainable from fragile code
 - [[software-engineering/data-structures|Data Structures and Big O Notation]] — concept · draft · time complexity classes and trade-off table for 8 core data structures
-- [[software-engineering/algorithms|Algorithms (Strategies, Not Tricks)]] — concept · draft · recursion, binary search (divide & conquer), dynamic programming / memoization; strategies-not-tricks framing
+- [[software-engineering/algorithms|Algorithms (Strategies, Not Tricks)]] — concept · draft · six interview categories: recursion, linear/binary search, sorting, pathfinding (Dijkstra), MST (Prim's), dynamic programming / memoization; strategies-not-tricks framing
 - [[software-engineering/cap-theorem|CAP Theorem]] — concept · draft · pick CP or AP under network partitions; CAP vs ACID consistency
 - [[software-engineering/ai-risk-architecture|AI Risk Architecture]] — concept · draft · data/output/action risk; risk is a system property, not a component
-- [[software-engineering/engineering-craft|Engineering Craft]] — concept · draft · resourcefulness, curiosity, persistence through difficulty
+- [[software-engineering/engineering-craft|Engineering Craft]] — concept · draft · resourcefulness, curiosity, persistence; seniority redefined under AI, staying-current habits (innovation budget), learning loops (mutual amplification, adversarial mentor)
+- [[software-engineering/cognitive-debt|Cognitive Debt and Cognitive Surrender]] — concept · stub · erosion of understanding from over-deferring to AI; cognitive surrender, three models of debt (Storey), the orchestration tax
 - [[software-engineering/compiler-warning-management|Compiler-Warning Management]] — concept · draft · Git's `false_but_the_compiler_does_not_know_it_` trick; suppress a specific false-positive warning without disabling it globally; eliminated under LTO
 - [[software-engineering/local-first-sync-architecture|Local-First Sync Architecture]] — concept · draft · browser-as-database + optimistic mutations + granular reactivity; server as sync target not source of truth (reverse-engineered from Linear)
 - [[software-engineering/test-case-reduction|Test-Case Reduction]] — concept · draft · automatically shrink a failing input to a minimal reproducer via an interestingness test; ddmin/creduce/Shrink Ray; steering beyond input length
