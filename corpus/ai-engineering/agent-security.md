@@ -24,6 +24,9 @@ sources:
   - path: raw/notes/notes-clippings-claude-security-is-now-in-public-beta.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/notes/notes-08-security-maintainability-and-reliability.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - prompt injection
   - LLM security
@@ -32,6 +35,11 @@ aliases:
   - auth.md
   - lockdown mode
   - security-guidance plugin
+  - AI-generated code vulnerabilities
+  - hard-coded secrets
+  - dependency hallucination
+  - package hallucination
+  - overconfidence effect
 tags:
   - corpus/ai-engineering
   - concept
@@ -97,6 +105,29 @@ The planted bug: the API itself was hardened, but the app shipped a `google-serv
 
 **Defensive takeaway for builders**: a hardened API is not enough if the data layer (Firebase/Supabase) is directly reachable — the least-privilege and scoped-access principles above apply to the *backend-as-a-service* layer, not just your own endpoints. Assume an attacker can run a capable agent against your shipped client and any config it bundles.
 
+## Vulnerability categories in AI-generated code
+
+Ch8 catalogs the specific vulnerability classes AI coding assistants introduce most frequently [^src8]:
+
+| Vulnerability | Mechanism in AI code |
+|---|---|
+| **Hard-coded secrets** | API keys, passwords, tokens embedded in source code; AI replicates patterns from training data where secrets were inline |
+| **SQL injection** | String concatenation for queries rather than parameterized queries, especially when the AI is building CRUD scaffolding quickly |
+| **Cross-site scripting (XSS)** | Inadequate output encoding in frontend code; AI produces working HTML but not necessarily safe HTML |
+| **Improper authentication** | Missing auth checks on routes, especially in scaffolded backends; AI may not know which endpoints are sensitive |
+| **Insecure defaults** | Debug mode left on, permissive CORS, missing rate limiting — "working" defaults that are not "secure" defaults |
+| **Error-handling leakage** | Stack traces, file paths, internal state in error responses; AI error handling often exposes too much |
+| **Dependency hallucination** | References to packages that don't exist or are typosquatted; malicious actors register hallucinated package names |
+| **Package hallucination** | A distinct variant: AI invents plausible-sounding imports; if a malicious package of that name exists in the registry, it gets installed |
+
+**Empirical scale**: 25–33% of GitHub Copilot-generated code has security weaknesses (2023 analysis); 40% of AI-generated code had potential vulnerabilities in a 2021 study [^src8]. These rates are higher than typical human-written code because AI optimizes for functional correctness, not security correctness.
+
+The Snyk taint analysis hybrid approach addresses this: static taint tracking traces untrusted input through the codebase to sensitive sinks, then an AI layer interprets the taint paths to filter false positives [^src8].
+
+## The overconfidence effect
+
+A 2022 study found developers using AI coding assistants were *more* confident in their code's security even when it was objectively less secure than code written without AI [^src8]. The effect is compounding: AI-generated code may contain more vulnerabilities *and* the developer is less likely to subject it to security review. "Trust but verify" (Russian proverb invoked in ch8) is the corrective stance: trust the output enough to use it as a starting point, but verify before it ships [^src8]. See [[ai-engineering/agent-testing|Agent Testing]] for the testing-side complement.
+
 ## Claude Security (enterprise vulnerability scanning product)
 
 Claude Security (previously Claude Code Security) is Anthropic's enterprise-grade vulnerability-scanning product, available in public beta to Claude Enterprise customers as of mid-2026 [^src7]. It uses **Opus 4.7** to scan codebases the way a security researcher would — tracing data flows across files and modules, understanding component interactions — rather than searching for known patterns [^src7].
@@ -133,6 +164,9 @@ It issues a scoped, short-lived, revocable access token over standard OAuth, com
 - [[ai-engineering/claude-code|Claude Code]] — real-time security plugin reviewing agent edits
 - [[ai-engineering/mcp|MCP]] — tool-exposure surface; scoped permissions and OAuth apply
 - [[ai-engineering/claude-models|Claude Model Lineup]] — Opus 4.7 powers Claude Security's model-backed scans
+- [[ai-engineering/agent-testing|Agent Testing]] — the testing-side complement to security; overconfidence effect
+- [[ai-engineering/vibe-coding|Vibe Coding]] — the 70% problem; why AI code needs more security review, not less
+- [[ai-engineering/sources/beyond-vibe-coding-book|Beyond Vibe Coding (Book)]] — ch8 as primary source for vulnerability taxonomy
 
 ---
 
@@ -143,3 +177,4 @@ It issues a scoped, short-lived, revocable access token over standard OAuth, com
 [^src5]: [Catch security issues as Claude writes code (Claude Code docs)](../../raw/web/catch-security-issues-as-claude-writes-code-claude-code-docs.md) — Anthropic, via [How OpenAI engineers prompt](../../raw/email/email-2026-06-08-how-openai-engineers-prompt.md)
 [^src6]: [How OpenAI engineers prompt](../../raw/email/email-2026-06-08-how-openai-engineers-prompt.md) — The Code (on ChatGPT Lockdown Mode)
 [^src7]: [Claude Security is now in public beta](../../raw/notes/notes-clippings-claude-security-is-now-in-public-beta.md) — Anthropic
+[^src8]: [Ch8 — Security, Maintainability, and Reliability](../../raw/notes/notes-08-security-maintainability-and-reliability.md)

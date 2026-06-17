@@ -678,3 +678,11 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - prior step: 422 stale PARA-native (Articles/Study Notes) inbox copies purged from raw/_inbox to prevent erroneous reaping of in-place notes.
 - worker path-error fixed by coordinator: blockchain worker wrote to repo-root blockchain/ → moved to corpus/blockchain/.
 - lint: clean — 0 broken wikilinks · 0 broken citations · 0 orphans
+
+## [2026-06-17 19:30] ingest | Obsidian Clippings drain wave 2 — "Beyond Vibe Coding" book (11 chapters + TOC)
+- source: raw/notes/notes-{toc,01..11}-*.md (03_Resources/Books/Beyond_Vibe_Coding_Book), channel notes
+- new pages (1): sources/beyond-vibe-coding-book (source summary)
+- updated (7): vibe-coding (70% problem, twelve rules, human-30%), prompt-engineering (antipatterns, ReAct/self-consistency), agent-testing (review-debug-refactor, frameworks table, overconfidence effect), agent-security (vuln categories, empirical rates), long-running-agents (copilot→autopilot, background agents), agentic-coding (multimodel orchestration), agentic-workflow (autonomous task cycle)
+- ch9 (ethics/IP/policy) + ch11 (future) captured in source page only; flagged cross-domain (ai-business/ethics)
+- coordinator fix: source page (sources/ subfolder) citations corrected ../../ → ../../../raw/notes
+- lint: clean — 0 broken wikilinks · 0 broken citations · 0 orphans

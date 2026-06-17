@@ -15,6 +15,9 @@ sources:
   - path: raw/notes/notes-clippings-a-harness-for-every-task-dynamic-workflows-in-claude-code.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/notes/notes-10-autonomous-background-coding-agents.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - agentic workflow
   - agentic workflows
@@ -57,6 +60,17 @@ The recommended flow: **plan mode** (let the agent ask clarifying questions and 
 
 Real agentic systems go far beyond a single workflow. The "Mother of AI" roadmap stages production builds: RAG systems → agents with memory/planning/tool use → recommenders → MLOps/LLMOps → full app + cloud deployment → monitoring, using tools teams actually run (Docker, FastAPI, Airflow, Ollama, LangGraph, OpenSearch, Langfuse) [^src2]. The NirDiamant GenAI-Agents collection catalogs 50+ patterns — most orchestrated with **LangGraph** as stateful graphs with TypedDict/Pydantic state, human-in-the-loop validation, and self-improvement loops [^src3]. See [[ai-engineering/langgraph|LangGraph]], [[ai-engineering/multi-agent-systems|Multi-Agent Systems]], [[ai-engineering/rag|RAG]].
 
+## Autonomous agent task cycle (background agents)
+
+Background agents follow the same workflow discipline as interactive agents but execute it *asynchronously* across the full lifecycle of a coding task [^src5]. The pattern — **plan → execute → verify → report** — is the autonomous version of the WAT workflow:
+
+- **Plan**: the agent reads the task, formulates substeps (some tools, like Jules, surface this for human review before proceeding). This is the WAT "Workflows" step done autonomously.
+- **Execute**: reads/modifies code across the full repo using full-text search (grep is the dominant approach, surprisingly effective). This is the WAT "Tools" step.
+- **Verify**: runs the test suite iteratively until tests pass; self-corrects before delivering. This closes the loop that interactive agents leave to the human.
+- **Report**: delivers a PR with diffs and explanation; human reviews and may feed back for another iteration.
+
+The key organizational insight from ch10: the human role shifts from **writing code** to **writing a good task description** and **reviewing the output**. The generator vs. reviewer asymmetry — generation is hard, review is faster — is the productivity lever background agents exploit [^src5].
+
 ## Dynamic workflow orchestration patterns (Claude Code)
 
 When the default single-context-window execution breaks down on complex tasks, Claude Code's **dynamic workflows** offer a catalog of composable orchestration patterns [^src4]. Each addresses a class of task structure:
@@ -89,3 +103,4 @@ The unifying insight: **a workflow separates planning + orchestration (the JavaS
 [^src2]: [The Mother of AI Project](../../raw/web/the-mother-of-ai-project.md) — Jam with AI
 [^src3]: [NirDiamant/GenAI_Agents (50+ tutorials)](../../raw/web/github-nirdiamant-genai-agents-50-tutorials-and-implementati.md) — Nir Diamant
 [^src4]: [A harness for every task: dynamic workflows in Claude Code](../../raw/notes/notes-clippings-a-harness-for-every-task-dynamic-workflows-in-claude-code.md) — Thariq Shihipar & Sid Bidasaria, Anthropic
+[^src5]: [Ch10 — Autonomous Background Coding Agents](../../raw/notes/notes-10-autonomous-background-coding-agents.md)

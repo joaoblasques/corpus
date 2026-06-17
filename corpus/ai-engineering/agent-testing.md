@@ -15,6 +15,18 @@ sources:
   - path: raw/web/did-claude-increase-bugs-in-rsync.md
     channel: web
     ingested_at: 2026-06-12
+  - path: raw/notes/notes-03-the-70-percent-problem-ai-assisted-workflows-that-actuall.md
+    channel: notes
+    ingested_at: 2026-06-17
+  - path: raw/notes/notes-05-understanding-generated-code-review-refine-own.md
+    channel: notes
+    ingested_at: 2026-06-17
+  - path: raw/notes/notes-07-building-web-applications-with-ai.md
+    channel: notes
+    ingested_at: 2026-06-17
+  - path: raw/notes/notes-08-security-maintainability-and-reliability.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - agent testing
   - testing coding agents
@@ -25,7 +37,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-12
-updated: 2026-06-12
+updated: 2026-06-17
 ---
 
 # Agent Testing
@@ -63,6 +75,38 @@ Pre-commit and pre-push hooks (Husky, lint-staged, Lefthook) run formatting, tes
 
 Playwright's `init agents` command scaffolds three sub-agents — **Generator, Healer, and Planner** — that drop into an agentic workflow; the Playwright MCP and Playwright CLI are distinct integration surfaces with different tradeoffs [^src2].
 
+## Review-debug-refactor: the ownership cycle for AI-generated code
+
+AI output requires a structured ownership cycle before it can be trusted [^src4]:
+
+**Review:** The "majority solution" effect means AI tends to produce the most common/generic solution, which may not be appropriate for the specific context. Treat AI code as if an intern wrote it — assume good intent and basic competence but verify everything before merging. Copyright/licensing risk also enters at the review stage: training data provenance is opaque, and code that looks original may reproduce licensed patterns [^src4].
+
+**Debug:** A 6-step debugging process for AI-generated code: (1) isolate the failure to the smallest reproducible case, (2) read the code literally, not charitably — the model's intent doesn't matter, only what the code actually does, (3) check the AI's own explanation against the code, (4) look for the "majority solution" substituting a generic approach for the specific one needed, (5) add instrumentation, (6) ask the AI to explain its own code in detail — mismatches between explanation and code often reveal the bug [^src4].
+
+**Refactor:** After verifying correctness, pass AI-generated code through the same refactoring discipline as human code: extract duplication, simplify conditionals, add types/contracts, and ensure error paths are explicit. AI-generated code frequently passes happy-path tests while leaving error handling shallow or absent [^src8].
+
+## Testing frameworks for AI-generated code
+
+Ch8 catalogs testing types that complement the Playwright/E2E focus above [^src8]:
+
+| Test type | Purpose for AI code |
+|---|---|
+| **Unit** | Verify individual functions; catch the "majority solution" effect at the smallest scope |
+| **Integration** | Catch cross-component assumptions the AI made that human review missed |
+| **End-to-end** | Simulate real user flows; the strongest signal that the AI's output actually works |
+| **Property-based** | Generate random inputs to find edge cases the AI's training distribution didn't cover |
+| **Load/performance** | AI-generated code often passes functional tests but fails under realistic traffic |
+| **Error-handling** | AI reliably generates happy-path code; error paths must be explicitly tested |
+| **Monitoring** | Production observability for nondeterministic failures (AI inference differs from code generation — runtime AI is nondeterministic even when the committed code is deterministic) |
+
+Key nondeterminism distinction: AI *code generation* is deterministic once committed to version control. Runtime AI *inference* (if the code calls an LLM) is nondeterministic. Tests must treat these differently [^src8].
+
+## The overconfidence effect
+
+A 2022 study found that developers using AI coding assistants were *more* confident in their code's security even when the code was objectively less secure than code written without AI [^src7]. This is the testing-specific instance of the [[ai-engineering/vibe-coding|70% problem]]: the developer's trust in the AI's output substitutes for the verification loop the AI cannot perform on itself. The implication for testing discipline: AI-assisted code needs *more* scrutiny for security, not less, precisely because the confidence signal is inverted.
+
+Supporting data: 25–33% of GitHub Copilot-generated code has security weaknesses (2023 analysis); 40% of AI-generated code had potential vulnerabilities in a 2021 study [^src7]. See [[ai-engineering/agent-security|Agent Security]] for the full vulnerability taxonomy.
+
 ## Bug-regression evidence: did agents make things worse?
 
 A natural fear is that agent-assisted commits ship more bugs. The rsync case study is a rare empirical test of that claim [^src3].
@@ -91,9 +135,15 @@ The single worst release in rsync history (v3.4.1, 97th percentile) was **entire
 - [[ai-engineering/ai-agent|AI Agent]] — agents claim completion; tests verify it
 - [[ai-engineering/agent-evaluation|Agent Evaluation]] — offline/online eval is the systematic version of this loop
 - [[ai-engineering/context-engineering|Context Engineering]] — traces and failing tests as just-in-time context
+- [[ai-engineering/agent-security|Agent Security]] — vulnerability taxonomy; the overconfidence effect connects security + testing
+- [[ai-engineering/vibe-coding|Vibe Coding]] — the 70% problem; why testing discipline is mandatory, not optional
+- [[ai-engineering/sources/beyond-vibe-coding-book|Beyond Vibe Coding (Book)]] — ch5, ch7, ch8 as primary sources
 
 ---
 
 [^src1]: [Keep your AI coding agents honest by testing them](../../raw/email/email-2026-06-09-keep-your-ai-coding-agents-honest-by-testing-them.md)
 [^src2]: [Playwright: Automated Testing & AI Workflows](../../raw/web/automated-agent-testing-with-playwright.md)
 [^src3]: [Did Claude increase bugs in rsync?](../../raw/web/did-claude-increase-bugs-in-rsync.md)
+[^src4]: [Ch5 — Understanding Generated Code: Review, Refine, Own](../../raw/notes/notes-05-understanding-generated-code-review-refine-own.md)
+[^src7]: [Ch7 — Building Web Applications with AI](../../raw/notes/notes-07-building-web-applications-with-ai.md)
+[^src8]: [Ch8 — Security, Maintainability, and Reliability](../../raw/notes/notes-08-security-maintainability-and-reliability.md)

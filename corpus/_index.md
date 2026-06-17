@@ -1,6 +1,6 @@
 # Corpus Index
 
-> Last updated: 2026-06-17 | Total pages: 175 | Total sources: 378
+> Last updated: 2026-06-17 | Total pages: 176 | Total sources: 389
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
@@ -64,6 +64,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[ai-engineering/sources/grab-multi-agent-data-warehouse-support|Grab Multi-Agent DW Support]] — source · draft · production 5-agent data-warehouse support system (FastAPI+LangGraph); six hardening lessons
 - [[ai-engineering/sources/internal-operating-system-claude-projects|4 Claude Projects / Internal OS]] — source · draft · knowledge+skills+ingest+improve = LLM-Wiki pattern
 - [[ai-engineering/sources/boris-cherny-100-percent-claude-code|Boris Cherny: 100% Claude Code]] — source · draft · head-of-Claude-Code workflow: multi-clouding ~5 agents, 10-30 PRs/day, build-for-the-model, "everyone's a PM"
+- [[ai-engineering/sources/beyond-vibe-coding-book|Beyond Vibe Coding (book)]] — source · draft · 11-chapter book: the 70% problem, prompt craft, review/refine ownership, security, autonomous background agents
 
 ### data-engineering
 - [[data-engineering/README|Data Engineering]] — hub · draft · ETL/ELT, data modeling, Spark, Iceberg

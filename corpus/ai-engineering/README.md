@@ -78,11 +78,26 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [[ai-engineering/sources/internal-operating-system-claude-projects|4 Claude Projects / Internal OS]] — source · draft · knowledge+skills+ingest+improve loop = the LLM-Wiki pattern
 - [[ai-engineering/sources/grab-multi-agent-data-warehouse-support|Grab — From Firefighting to Building]] — source · draft · production 5-agent system for data-warehouse support; six production-hardening lessons
 - [[ai-engineering/sources/boris-cherny-100-percent-claude-code|Boris Cherny — 100% Claude Code]] — source · draft · head of Claude Code: full-agentic workflow, ~5 parallel agents, latent demand, build-for-the-model, "coding is describing"
+- [[ai-engineering/sources/beyond-vibe-coding-book|Beyond Vibe Coding (Book)]] — source · draft · 11-chapter practitioner guide; 70% problem thesis, golden rules, autonomous agents, multimodel orchestration
 
 ### Cross-domain (primary home in data-engineering)
 - [[data-engineering/claude-code-for-data-engineering|Claude Code for Data Engineering]] — synthesis · AI-assisted dbt / data workflows
 - [[data-engineering/ai-observability-data-pipeline|AI Observability as a Data Pipeline]] — synthesis · LLM-eval as a data pipeline
 - [[data-engineering/agentic-data-modeling|Agentic Data Modeling]] — synthesis · AI agents for schema design & change-impact analysis
+
+## Sources ingested (Beyond Vibe Coding book — 2026-06-17)
+- [Beyond Vibe Coding — TOC](../../raw/notes/notes-toc.md) — 11-chapter structure
+- [Ch1 — Introduction: What Is Vibe Coding?](../../raw/notes/notes-01-introduction-what-is-vibe-coding.md)
+- [Ch2 — The Art of the Prompt](../../raw/notes/notes-02-the-art-of-the-prompt-communicating-effectively-with-ai.md)
+- [Ch3 — The 70% Problem](../../raw/notes/notes-03-the-70-percent-problem-ai-assisted-workflows-that-actuall.md)
+- [Ch4 — Beyond the 70%: Maximizing Human Contribution](../../raw/notes/notes-04-beyond-the-70-percent-maximizing-human-contribution.md)
+- [Ch5 — Understanding Generated Code: Review, Refine, Own](../../raw/notes/notes-05-understanding-generated-code-review-refine-own.md)
+- [Ch6 — AI-Driven Prototyping: Tools and Techniques](../../raw/notes/notes-06-ai-driven-prototyping-tools-and-techniques.md)
+- [Ch7 — Building Web Applications with AI](../../raw/notes/notes-07-building-web-applications-with-ai.md)
+- [Ch8 — Security, Maintainability, and Reliability](../../raw/notes/notes-08-security-maintainability-and-reliability.md)
+- [Ch9 — The Ethical Implications of Vibe Coding](../../raw/notes/notes-09-the-ethical-implications-of-vibe-coding.md) — [cross-domain: ethics/policy; no ai-engineering pages created]
+- [Ch10 — Autonomous Background Coding Agents](../../raw/notes/notes-10-autonomous-background-coding-agents.md)
+- [Ch11 — Beyond Code Generation: The Future of AI-Augmented Development](../../raw/notes/notes-11-beyond-code-generation-the-future-of-ai-augmented-develop.md)
 
 ## Sources ingested (batch-5 additions)
 - [Seeing like an agent: how we design tools in Claude Code](../../raw/notes/notes-clippings-seeing-like-an-agent-how-we-design-tools-in-claude-code.md) — Thariq Shihipar, Anthropic, 2026-06-17

@@ -24,6 +24,9 @@ sources:
   - path: raw/email/email-2026-06-07-being-good-at-ai-is-stupidly-simple.md
     channel: email
     ingested_at: 2026-06-15
+  - path: raw/notes/notes-02-the-art-of-the-prompt-communicating-effectively-with-ai.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - prompting
   - prompt design
@@ -32,11 +35,15 @@ aliases:
   - chain-of-thought
   - AskUserQuestion
   - ask me questions first
+  - metaprompting
+  - ReAct prompting
+  - self-consistency prompting
+  - contextual prompting
 tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-12
-updated: 2026-06-15
+updated: 2026-06-17
 ---
 
 # Prompt Engineering
@@ -99,6 +106,27 @@ OpenAI's Codex guidance converges on similar themes for agentic coding: a starte
 
 The single most useful trick for non-technical users inverts the prompt entirely: instead of writing a good prompt, append **"ask me questions first"** so the model interviews *you* — Claude's `AskUserQuestion` tool surfaces 3–5 clickable questions and builds context from your answers, "and you're already using AI better than 99.9% of the population" [^src7]. Going pro: "give me 3 different strategies" lets the model lay out options for you to pick [^src7]. This is the elicitation counterpart to the [[ai-engineering/agent-harness|harness]] principle that models should *manage their confusion and ask for clarification* rather than guessing silently — and it overlaps with the [[ai-engineering/vibe-coding|spec-driven]] habit of pinning down intent before building. (The "interview me" framing also drives the project-setup loop in [[ai-engineering/ai-product-management|AI Product Management]].)
 
+## Vibe-coding-specific prompt antipatterns
+
+Beyond general prompt quality, vibe coding introduces antipatterns tied to how people actually work with AI on code [^src8]:
+
+- **Vague prompt** — no concrete output described; the model guesses scope.
+- **Overloaded prompt** — too many requirements in one message; the model addresses some and silently drops others.
+- **Missing success criteria** — no definition of done; the agent calls it finished when it runs at all.
+- **Ignoring AI clarification requests** — when the model asks a question and you answer with "just do it," you lose the disambiguation that would have prevented a wrong result.
+- **Inconsistency across turns** — using different terminology for the same concept in different messages; the model can't reliably unify them.
+- **Vague references** — "fix that bug" without identifying which one; in code especially, reference must be precise.
+
+The prompt-antipattern discipline connects directly to the [[ai-engineering/vibe-coding|70% problem]]: vague prompts are how human judgment fails to guard the 30% the AI cannot fill independently.
+
+## Advanced techniques (ch2 additions)
+
+**Self-consistency.** Run the same prompt multiple times and take the majority answer, particularly useful for reasoning tasks where single-pass answers are unreliable [^src8].
+
+**ReAct (Reason + Act).** Interleave reasoning steps with action calls (tool use) so the model can observe results of each action before deciding the next step — grounding multi-step agentic tasks in real feedback rather than up-front planning only [^src8].
+
+**Contextual prompting.** Provide all context the model needs within the same prompt — role, relevant background, constraints, output format — rather than relying on what the model may have "learned." This is the prompt-level version of the [[ai-engineering/context-engineering|context engineering]] principle of supplying unique context rather than general knowledge [^src8].
+
 ## Practical gotchas
 
 - The same prompt can give different results each time — that is the non-deterministic nature of LLMs [^src5].
@@ -114,6 +142,8 @@ The single most useful trick for non-technical users inverts the prompt entirely
 - [[ai-engineering/agent-harness|Agent Harness]] — where prompt scaffolding lives in coding agents
 - [[ai-engineering/claude-code|Claude Code]] — agent harness whose behavior is shaped by these techniques
 - [[ai-engineering/agent-security|Agent Security]] — prompt injection is the adversarial side of prompting
+- [[ai-engineering/vibe-coding|Vibe Coding]] — where prompt antipatterns cause the 70% problem
+- [[ai-engineering/sources/beyond-vibe-coding-book|Beyond Vibe Coding (Book)]] — ch2 as the fullest treatment of the vibe-coding prompt toolkit
 
 ---
 
@@ -123,3 +153,4 @@ The single most useful trick for non-technical users inverts the prompt entirely
 [^src5]: [Practical Prompt Engineering tips from Sabrina (email)](../../raw/email/email-2025-11-04-practical-prompt-engineering-tips-from-sabrina-on-the-github.md)
 [^src6]: [Write better prompts for Cursor, Claude, Copilot (Frontend Masters)](../../raw/web/write-better-prompts-for-cursor-claude-copilot.md)
 [^src7]: [Being good at AI is (stupidly) simple](../../raw/email/email-2026-06-07-being-good-at-ai-is-stupidly-simple.md) — Ruben Hassid
+[^src8]: [Ch2 — The Art of the Prompt](../../raw/notes/notes-02-the-art-of-the-prompt-communicating-effectively-with-ai.md)

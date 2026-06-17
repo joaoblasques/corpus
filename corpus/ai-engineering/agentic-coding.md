@@ -36,6 +36,9 @@ sources:
   - path: raw/notes/notes-clippings-running-an-ai-native-engineering-org.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/notes/notes-10-autonomous-background-coding-agents.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - agentic coding
   - agentic engineering
@@ -165,6 +168,17 @@ The `/ce-compound` step is what converts individual sessions into organizational
 
 An open tension McKinney raises: if seniors no longer write much code (he reviews, guides, adds taste), how do we *develop* seniors? His answer — "the hard labour goes away, which is where we usually learn" (learning by osmosis) — so the focus must shift to design patterns and architecture, to have "the technical vocabulary to guide or understand the agents" [^src2].
 
+## Combining multiple AI models (multimodel orchestration)
+
+Ch10 extends the single-agent model to **orchestrating multiple specialized AI models** — treating each model as a team member with distinct strengths rather than relying on one generalist [^src12]. The practitioner's framing: CodeGen AI for implementation, TestGen AI for edge-case discovery, Doc AI for documentation, Design AI for UI layout, Security AI for scanning. Each handles its domain; the developer is the **orchestrator**, not the prompter.
+
+Practical moves [^src12]:
+- **Run the same task on two models** and compare outputs; if one passes all tests and the other doesn't, pick the passing one. If both pass but differ, choose the more readable. Errors are less likely to be identical across different architectures.
+- **Use a local script as the integration layer** — e.g. `ai_dev_assist` classifies a prompt into `code`/`design`/`test`/`optimize` categories and routes to the appropriate specialist model, with optional piping to a second model for review.
+- **Match the model to the task type** — smaller specialized models or deterministic tools for arithmetic/algorithms; LLMs for synthesis and generation; summarization-tuned models for commit messages.
+
+The shift in human role: from **AI prompter** to **AI conductor**, analogous to the microservices principle (each service does one thing well, each AI model does one thing well) [^src12]. This is the multi-agent pattern from [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] applied at the model-selection layer rather than the orchestration layer.
+
 ## HTML as the agentic output format
 
 As agents produce increasingly complex outputs (multi-step plans, code reviews, research reports, design explorations), Markdown becomes restrictive: hard to read past ~100 lines, no rich visualization, difficult to share [^src10]. An emerging practice from the Claude Code team is to direct agents to produce **HTML artifacts** instead [^src10].
@@ -236,3 +250,4 @@ See [[ai-engineering/claude-code|Claude Code]] for organizational governance pat
 [^src9]: [EveryInc/compound-knowledge-plugin — AI-powered workflows for knowledge work](../../raw/notes/notes-clippings-everyinccompound-knowledge-plugin-ai-powered-workflows-for-k.md) — EveryInc, GitHub
 [^src10]: [Using Claude Code: The unreasonable effectiveness of HTML](../../raw/notes/notes-clippings-using-claude-code-the-unreasonable-effectiveness-of-html.md) — Thariq Shihipar, Anthropic
 [^src11]: [Running an AI-native engineering org](../../raw/notes/notes-clippings-running-an-ai-native-engineering-org.md) — Anthropic (Claude Code team lead)
+[^src12]: [Ch10 — Autonomous Background Coding Agents](../../raw/notes/notes-10-autonomous-background-coding-agents.md)

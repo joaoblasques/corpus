@@ -6,6 +6,9 @@ sources:
   - path: raw/web/long-running-agents.md
     channel: web
     ingested_at: 2026-06-16
+  - path: raw/notes/notes-10-autonomous-background-coding-agents.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - long-running agent
   - long-running agents
@@ -16,7 +19,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-16
-updated: 2026-06-16
+updated: 2026-06-17
 ---
 
 # Long-Running Agents
@@ -75,9 +78,48 @@ By use case [^src1]:
 
 Cross-cutting moves: write the done-condition before the agent starts ("the single highest-leverage move"); separate the evaluator from the generator; invest in the session log, not just the prompt; and treat compaction and full context resets as first-class — Anthropic found summarization-as-compaction insufficient for very long jobs and used full context resets rebuilt from a structured handoff file [^src1].
 
+## Autonomous background agents (copilot→autopilot shift)
+
+Ch10 of *Beyond Vibe Coding* offers the practitioner framing of the same architecture from the user's perspective. The key distinction: traditional AI coding assistants are *supervised coding agents* — interactive, synchronous, bounded by the current file or function. Autonomous background coding agents are *asynchronous* — you give them a high-level task, they work independently in an isolated sandbox (cloud VM or container), and deliver a PR [^src2].
+
+The **plan → execute → verify → report** cycle [^src2]:
+1. **Plan** — agent parses the task, breaks it into substeps, sometimes shows you the plan for approval (Jules, notably). The planning phase is "the AI's way of reasoning about how to accomplish your goal before diving in."
+2. **Execute** — reads and modifies code across multiple files. Agents often use brute-force text search (grep) to find relevant parts of the codebase — surprisingly effective despite more sophisticated options existing.
+3. **Verify** — runs the test suite iteratively until tests pass, or reports environment failures. This closes the generate→debug→validate loop without a human in the loop.
+4. **Report** — delivers a PR; human reviews and may request another iteration.
+
+**Tool landscape in 2025** [^src2]:
+- *OpenAI Codex* — cloud CLI, RL-trained on real coding tasks; runs CI-like sandboxes; optional internet access for package/doc fetches.
+- *Google Jules* — GitHub-integrated; presents plan before executing; runs on Google Cloud VMs; "plan, then execute" philosophy.
+- *Cursor background agents* — IDE-integrated hybrid; remote Ubuntu with internet access; developer can "enter the machine" midtask.
+- *Devin (Cognition Labs)* — Slack+GitHub+Jira "AI teammate"; parallel execution of maintenance tasks; automatic preview deployments.
+
+**The generator vs. reviewer asymmetry** [^src2]: using background agents shifts human effort from *writing code* to *writing a good task description* and then *reviewing the output*. Generating a solution from scratch is hard; reviewing and refining it is easier. This is a productivity lever, but it means **code review skills appreciate in value**.
+
+**New challenge: compounding errors** [^src2]: unlike interactive AI assistance where humans intervene at each step, autonomous agents make chains of decisions that can compound. An agent that misinterprets the initial requirements doesn't just generate one flawed function — it builds an "entire implementation architecture" on that misunderstanding, creating "coherent incorrectness": internally consistent code that is fundamentally misaligned with actual needs.
+
+**Best practice: strategic task selection** [^src2]. Agents excel at well-bounded, measurable work: comprehensive test coverage improvements, systematic dependency updates, bulk refactoring, standardized feature implementations across multiple components. Tasks requiring significant architectural decisions, complex stakeholder interpretation, or novel algorithm design remain better suited to human-led development.
+
+## Organizational challenges specific to autonomous agents
+
+Ch10 surfaces challenges that don't arise with interactive AI tools [^src2]:
+
+- **Review bottleneck amplification** — agent PRs arrive as complete implementations (not incremental suggestions), often multiple PRs simultaneously after overnight runs. Reviewing requires reconstructing the agent's "reasoning" from the code, not from a colleague's thought process.
+- **Async coordination paradox** — running more agents in parallel to increase productivity makes integrating them more complex. Agents lack the implicit communication channels humans use ("Are you touching the auth module?"). Agent A refactors a utility; Agent B adds calls to the old version; neither knows.
+- **Environmental brittleness** — five concurrent agents may have slightly different Node versions, missing system libraries, or different timezone settings in their sandboxes. These variations surface as subtle bugs only during integration ("environmental drift").
+- **Trust model shift** — delegating to an agent with write access and execution capabilities is different from accepting a suggestion. A compromised or misdirected agent doesn't just *suggest* bad code — it *commits* it, and potentially *deploys* it.
+
 ## Limitations
 
 Still genuinely unsolved [^src1]: **cost** (a 24-hour frontier run can "quietly burn through a week's API budget in an afternoon" without budgets/circuit breakers — see [[ai-engineering/agent-cost-management|Agent Cost Management]]); **security** (a larger attack surface; the brain/hands split keeps credentials unreachable from the sandbox); **alignment drift** (goals lose fidelity across re-summarization); **verification** (auditing 24 hours of activity is a human-time problem); and **the human role** — "the skill that's appreciating in value isn't writing code. It's writing specs that survive contact with an autonomous executor." [^src1]
 
+## See also
+
+- [[ai-engineering/agentic-coding|Agentic Coding]] — the conductor→orchestrator shift that autonomous agents represent
+- [[ai-engineering/agent-testing|Agent Testing]] — verification loops become more important, not less, with autonomous agents
+- [[ai-engineering/agent-security|Agent Security]] — trust model implications; autonomous agents as a larger attack surface
+- [[ai-engineering/sources/beyond-vibe-coding-book|Beyond Vibe Coding (Book)]] — ch10 as primary source for the copilot→autopilot framing
+
 [^src1]: [Long-running Agents](../../raw/web/long-running-agents.md)
+[^src2]: [Ch10 — Autonomous Background Coding Agents](../../raw/notes/notes-10-autonomous-background-coding-agents.md)
 </content>
