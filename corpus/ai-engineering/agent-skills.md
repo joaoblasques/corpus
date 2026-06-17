@@ -33,6 +33,9 @@ sources:
   - path: raw/notes/notes-clippings-everyinccharlie-cfo-skill-claude-code-skill-for-bootstrapped.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/notes/notes-clippings-lessons-from-building-claude-code-how-we-use-skills.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - agent skills
   - Claude skills
@@ -186,6 +189,53 @@ A simpler pattern than the full skill SDLC: a library of prompt templates stored
 
 Templates include clear objectives, step-by-step processes, decision criteria, and output formats [^src8]. The project-specific versions live in `.claude/commands/`; generic versions can be shared across teams [^src8].
 
+## Nine skill categories (Anthropic internal catalog)
+
+After cataloguing hundreds of internal skills at Anthropic, the Claude Code team found they cluster into nine categories. "The best skills fit cleanly into one; the ones that try to do too much straddle several and confuse the agent" [^src10].
+
+| Category | What it does | Examples |
+|---|---|---|
+| **1. Library & API reference** | How to correctly use internal/external libraries; edge cases, footguns | `billing-lib`, `internal-platform-cli`, `sandbox-proxy` |
+| **2. Product verification** | Test/verify code is working; often uses Playwright, tmux, programmatic assertions | `signup-flow-driver`, `checkout-verifier`, `tmux-cli-driver` |
+| **3. Data fetching & analysis** | Connect to data/monitoring stacks; credentials, dashboard IDs, common query patterns | `funnel-query`, `cohort-compare`, `grafana`, `datadog` |
+| **4. Business process & team automation** | Automate repetitive workflows into one command; log previous results for consistency | `standup-post`, `create-<ticket>-ticket`, `weekly-recap` |
+| **5. Code scaffolding & templates** | Generate framework boilerplates; especially useful when scaffolding has NL requirements | `new-<framework>-workflow`, `new-migration`, `create-app` |
+| **6. Code quality & review** | Enforce quality/review standards; run deterministically via hooks or GitHub Actions | `adversarial-review`, `code-style`, `testing-practices` |
+| **7. CI/CD & deployment** | Fetch, push, deploy code; often references other skills | `babysit-pr`, `deploy-<service>`, `cherry-pick-prod` |
+| **8. Runbooks** | Symptom-driven investigation → structured report; maps symptoms to tools to query patterns | `<service>-debugging`, `oncall-runner`, `log-correlator` |
+| **9. Infrastructure operations** | Routine maintenance/operational procedures with guardrails for destructive actions | `<resource>-orphans`, `dependency-management`, `cost-investigation` |
+
+> **Verification skills have had the most measurable impact on Claude's output quality internally.** "It can be worth having an engineer spend a week just making your verification skills excellent" [^src10]. Techniques: have Claude record a video of its output, enforce programmatic assertions on state at each step.
+
+## Best practices for writing skills (Anthropic lessons)
+
+**Don't state the obvious.** Claude already knows how to code and can read your codebase. A skill that restates what Claude would do by default "adds context without adding value." Focus on information that pushes Claude out of its normal way of thinking [^src10].
+
+**Build a gotchas section.** "The highest-signal content in any skill is the Gotchas section." Build it from common failure points over time [^src10]:
+> "The `subscriptions` table is append-only. The row you want is the one with the highest version, not the most recent `created_at`." "This field is called `@request_id` in the API gateway and `trace_id` in the billing service. They're the same value."
+
+**Use the file system and progressive disclosure.** A skill is a folder, not just a markdown file: split detailed content into `references/api.md`, store template files in `assets/`, add scripts in `scripts/`. Tell Claude what files exist and it will read them at appropriate times [^src10].
+
+**Avoid railroading.** Give Claude the information it needs with flexibility to adapt to the situation — skills are highly reusable, so overly specific instructions create brittleness [^src10].
+
+**Think through setup.** If a skill needs user-configured parameters (e.g. a Slack channel), store configuration in `config.json` in the skill directory. If the config isn't set up, the agent asks the user. Use the `AskUserQuestion` tool for structured multiple-choice questions [^src10].
+
+**Write descriptions for the model, not for humans.** When Claude Code starts a session, it scans a listing of skills with their descriptions to decide when to invoke one. The `description` field is "not a summary, it's a description of *when* to trigger this skill." Include triggers [^src10].
+
+**Help Claude remember.** Some skills can include memory by storing data within them — an append-only text log, JSON files, or SQLite. Example: a `standup-post` skill that keeps `standups.log` with every past post it's written [^src10].
+
+**Store scripts and generate code.** Giving Claude scripts and libraries lets it spend turns on composition (what to do next) rather than reconstructing boilerplate. A `data-science` skill with a library of fetch-data helper functions lets Claude compose advanced analysis on the fly [^src10].
+
+**Use on-demand hooks.** Skills can include hooks that only activate when the skill is called and last for the duration of the session. Examples: `/careful` blocks destructive commands when touching prod; `/freeze` blocks edits outside a specific directory during debugging [^src10].
+
+## Skill distribution: repos vs plugin marketplace
+
+Two distribution paths [^src10]:
+- **Check into repo** (`./.claude/skills`): works well for smaller teams with few repos; every checked-in skill adds to the model's context.
+- **Plugin marketplace**: as the team scales, a marketplace lets engineers choose which skills to install and includes a setup flow. Anthropic's internal approach: anyone with a skill that gains traction can PR it into the marketplace — no centralized gatekeeping, organic curation [^src10].
+
+Skills compose without native dependency management: reference another skill by name and the model invokes it if installed [^src10]. Measure skill usage with a `PreToolUse` hook that logs invocations, to find popular skills or ones that are under-triggering [^src10].
+
 ## Domain skill example: Charlie CFO
 
 `charlie-cfo-skill` (EveryInc) is a concrete example of a domain-specific skill that activates on financial questions for bootstrapped startups [^src9]. It provides financial frameworks — cash management, unit economics, capital allocation, working capital, forecasting — and names after Charlie Munger's capital discipline principle [^src9]. The skill activates automatically on natural-language financial questions ("Should we make this hire?", "How much runway do we need?") and ships with `references/` docs for metrics benchmarks and case studies (Mailchimp, Zapier, Basecamp) [^src9]. Install: `npx skills add EveryInc/charlie-cfo-skill` [^src9].
@@ -217,3 +267,4 @@ This pattern — a domain skill bundling both a system prompt and reference docs
 [^src7]: [EveryInc/compound-knowledge-plugin — AI-powered workflows for knowledge work](../../raw/notes/notes-clippings-everyinccompound-knowledge-plugin-ai-powered-workflows-for-k.md) — EveryInc, GitHub
 [^src8]: [EveryInc/claude_commands — Our favorite Claude Code commands](../../raw/notes/notes-clippings-everyincclaude-commands-our-favorite-claude-code-commands.md) — EveryInc, GitHub
 [^src9]: [EveryInc/charlie-cfo-skill — Claude Code skill for bootstrapped CFO financial management](../../raw/notes/notes-clippings-everyinccharlie-cfo-skill-claude-code-skill-for-bootstrapped.md) — EveryInc, GitHub
+[^src10]: [Lessons from building Claude Code: How we use skills](../../raw/notes/notes-clippings-lessons-from-building-claude-code-how-we-use-skills.md) — Thariq Shihipar, Anthropic

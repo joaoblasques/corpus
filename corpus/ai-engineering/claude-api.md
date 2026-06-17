@@ -12,6 +12,9 @@ sources:
   - path: raw/web/anthropic-courses.md
     channel: web
     ingested_at: 2026-06-12
+  - path: raw/notes/notes-clippings-introducing-the-claude-platform-on-aws.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - Claude API
   - claude-api
@@ -22,7 +25,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-12
-updated: 2026-06-12
+updated: 2026-06-17
 ---
 
 # Claude API
@@ -96,12 +99,26 @@ Every call is billed by token (input + output counted together); set `max_tokens
 
 Beyond the three basics, the SDK supports **streaming** (`stream=True`) for chat UIs, **structured output via `tool_use`** (a different mental model, more powerful for agentic workflows), and **multi-turn conversations** by accumulating `user`/`assistant` turns in `messages` [^src1]. Real Python organizes these into an **LLM application development learning path** [^src1][^src2]. Anthropic hosts its own course materials on a Skilljar LMS [^src3].
 
+## Claude Platform on AWS
+
+As of mid-2026, the full Claude Platform is available on AWS under AWS IAM authentication, CloudTrail audit logging, and billing through a single AWS invoice (retires existing AWS commitments). New features ship same-day as the native Claude API [^src4].
+
+**Platform features included**: Claude Managed Agents, Advisor strategy, web search/fetch, code execution, Files API, Skills, MCP connector, prompt caching, citations, and batch processing — plus access to the Claude Console (agents, skills, environments, vaults, observability) [^src4].
+
+**Models available**: Claude Opus 4.7, Sonnet 4.6, and Haiku 4.5 (new models ship same-day) [^src4].
+
+**Choosing between paths** [^src4]:
+- **Claude Platform on AWS** — Anthropic operates the service; data processed outside the AWS boundary. Best for companies that want the full platform experience.
+- **Claude on Amazon Bedrock** — AWS is the data processor, within the AWS boundary. Best for strict regional data residency requirements.
+
 ## See also
 
 - [[ai-engineering/anthropic|Anthropic]] — model lineup and ids
 - [[ai-engineering/claude-code|Claude Code]] — the agent CLI built on the same models
+- [[ai-engineering/claude-managed-agents|Claude Managed Agents]] — available via the Claude Platform on AWS
 - [[ai-engineering/tool-calling|Tool Calling]], [[ai-engineering/llm|LLM]]
 
 [^src1]: [How to Use the Claude API in Python (Real Python)](../../raw/web/how-to-use-the-claude-api-in-python-real-python.md)
 [^src2]: [How to Use the Claude API in Python (email)](../../raw/email/email-2026-05-20-how-to-use-the-claude-api-in-python.md)
 [^src3]: [Anthropic courses (Skilljar)](../../raw/web/anthropic-courses.md)
+[^src4]: [Introducing the Claude Platform on AWS](../../raw/notes/notes-clippings-introducing-the-claude-platform-on-aws.md) — Anthropic announcement

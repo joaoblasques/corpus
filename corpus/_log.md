@@ -660,3 +660,9 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - data-engineering updated: data-engineer-role (DA→DE transition playbook), de-portfolio-projects (cross-link)
 - cross-domain flagged (future DE ingest): self-service-analytics-with-Claude data-foundations layer (semantic layer, offline evals, adversarial SQL reviewer)
 - lint: clean — 0 broken wikilinks · 0 broken citations · 0 orphans
+
+## [2026-06-17 18:20] ingest | Obsidian Clippings drain batch 4 — 12 notes (ai-engineering)
+- channel: notes (collect-obsidian, --max 12); inline-link web sources queued in raw/_inbox
+- new pages (1): prompt-caching
+- updated (8): ai-product-management (AI-exponential PM), claude-managed-agents (self-hosted sandboxes, MCP tunnels, dreaming/outcomes, AWS), multi-agent-systems (Anthropic 5-pattern taxonomy), agent-skills (internal catalog + best practices), ralph-loop (loop engineering generalization), claude-code (routines + Skyline onboarding case), mcp (consumer connectors), claude-api (Claude Platform on AWS)
+- lint: clean — 0 broken wikilinks · 0 broken citations · 0 orphans

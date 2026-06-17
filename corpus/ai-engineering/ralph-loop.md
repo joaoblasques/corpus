@@ -9,6 +9,9 @@ sources:
   - path: raw/web/long-running-agents.md
     channel: web
     ingested_at: 2026-06-16
+  - path: raw/notes/notes-clippings-loop-engineering.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - Ralph
   - Ralph technique
@@ -16,11 +19,13 @@ aliases:
   - Ralph Wiggum
   - Ralph loop
   - while loop agent
+  - loop engineering
+  - loop design
 tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-16
-updated: 2026-06-16
+updated: 2026-06-17
 ---
 
 # Ralph Loop
@@ -75,7 +80,42 @@ Building with Ralph "requires a great deal of faith and a belief in eventual con
 
 Osmani classes the Ralph loop as a "simpler" practitioner version of [[ai-engineering/long-running-agents|long-running agents]], popularized by Geoffrey Huntley and Ryan Carson [^src2]. Carson's Compound Product extends it by chaining multiple loops — an analysis loop reading daily reports, a planning loop emitting a PRD, an execution loop writing code — described as roughly the open-source version of the planner/generator/evaluator triad Anthropic landed on independently [^src2]. Anthropic's scientific-computing stack reduces the same idea to a `for` loop "that kicks the agent back into context whenever it claims completion and asks if it's really done" [^src2]. Osmani's summary: "you can build a working long-running agent in an evening with a bash script and a JSON file" [^src2].
 
+## Loop engineering: the generalized concept
+
+Addy Osmani (2026) generalizes the Ralph loop into **loop engineering** — "replacing yourself as the person who prompts the agent; you design the system that does it instead" [^src3]. The shift is from interactive prompting (type, read, type again) to designing a system that finds, distributes, checks, and records work automatically.
+
+The practical driver: "Both products [Claude Code and Codex] have all five [building blocks] now." The same loop design works regardless of tool [^src3].
+
+**Five building blocks of a loop** [^src3]:
+
+| Block | What it is |
+|---|---|
+| **Automations** | Scheduled heartbeat that does discovery and triage by itself; findings come to you |
+| **Worktrees** | Git worktrees so parallel agents don't collide on the same files |
+| **Skills** | Encoded project knowledge so the agent doesn't re-derive context every run |
+| **Plugins / connectors** | MCP-based integrations so the loop can act in your real tools (open PR, link ticket, ping Slack) |
+| **Sub-agents** | Keep the maker away from the checker — one writes, one verifies |
+
+**Plus one memory substrate**: a markdown file, Linear board, or any out-of-context store that holds what's done and what's next. "The agent forgets, the repo doesn't" [^src3].
+
+**Claude Code loop primitives** [^src3]:
+- `/loop` — re-runs on a cadence
+- `/goal` — keeps going until a verifiable condition holds; a *separate small model* checks whether done after each turn (the checker is never the same as the maker)
+- `/schedule` — cron task on Anthropic's cloud
+- Hooks — shell commands at lifecycle points
+- GitHub Actions — keeps running after you close the laptop
+
+**The canonical one-day loop example** [^src3]: An automation runs every morning on the repo. A triage skill reads CI failures, open issues, and recent commits → writes findings to a markdown/Linear board. For each actionable finding: opens an isolated worktree, sends a subagent to draft the fix, a second subagent reviews against project skills and existing tests. Connectors open the PR and update the ticket. Anything unhandled lands in the triage inbox. The state file is the spine — tomorrow's run picks up where today stopped.
+
+**Three problems that get harder, not easier, with better loops** [^src3]:
+1. **Verification** — a loop running unattended is also a loop making mistakes unattended.
+2. **Comprehension debt** — the faster the loop ships code you didn't write, the bigger the gap between what exists and what you understand.
+3. **Cognitive surrender** — the temptation to stop having an opinion and just take whatever the loop returns. "Designing the loop is the cure when you do it with judgement and the accelerant when you do it to avoid thinking" [^src3].
+
+Cross-reference: Boris Cherny (head of Claude Code): "I don't prompt Claude anymore. I have loops running that prompt Claude... My job is to write loops" [^src3]. See [[ai-engineering/claude-code|Claude Code]] for routines (the native scheduled-automation primitive) and [[ai-engineering/agent-skills|Agent Skills]] for the skill-building prerequisite.
+
 [^src1]: [Ralph Wiggum as a "software engineer"](../../raw/web/ralph-wiggum-as-a-software-engineer.md)
 [^src2]: [Long-running Agents](../../raw/web/long-running-agents.md)
+[^src3]: [Loop Engineering](../../raw/notes/notes-clippings-loop-engineering.md) — Addy Osmani
 </content>
 </invoke>

@@ -48,6 +48,12 @@ sources:
   - path: raw/notes/notes-clippings-how-claude-code-works-in-large-codebases-best-practices-and.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/notes/notes-clippings-onboarding-claude-code-like-a-new-developer-lessons-from-17.md
+    channel: notes
+    ingested_at: 2026-06-17
+  - path: raw/notes/notes-clippings-introducing-routines-in-claude-code.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - Claude Code
   - claude-code
@@ -270,6 +276,49 @@ Claude Code has 118 commands across four categories [^src11]: **slash commands**
 
 New in 2026 (marked ● in the source): `/branch`, `/fork`, `/cd`, `/goal`, `/advisor`, `/tui`, `/reload-skills`, `/reload-plugins`, `--tmux`, `--permission-mode auto`, `--fallback-model`, `--max-budget-usd`, `--bare`, `--safe-mode`, `/usage-credits`, `/insights`, `/release-notes`, `/recap`, `/powerup`, `/workflows`, `/run`, `/verify`, `/run-skill-generator`, `/ultraplan`, `/ultrareview`, `/autofix-pr`, `/deep-research`, `/schedule`, `/stop`, `Ctrl+B`, `/install-slack-app`, `/desktop`, `/mobile`, `/teleport`, `/remote-env` [^src11].
 
+## Routines (scheduled automations)
+
+Routines are a Claude Code automation you configure once — including a prompt, repo, and connectors — and run on a schedule, from an API call, or in response to an event [^src16]. They run on Claude Code's web infrastructure, so nothing depends on your laptop being open. If you've used `/schedule` in the CLI, those tasks are now scheduled routines [^src16].
+
+**Three routine trigger types** [^src16]:
+
+| Type | Description | Example use |
+|---|---|---|
+| **Scheduled** | Run on a cron cadence (hourly / nightly / weekly) | Nightly: pull top bug from Linear, attempt fix, open draft PR |
+| **API-triggered** | Every routine gets its own endpoint + auth token; POST a message, get back a session URL | Alert triage: point Datadog at the endpoint; Claude pulls the trace and has a draft fix ready before on-call opens the page |
+| **Webhook (GitHub)** | Subscribe to GitHub repo events; Claude creates one session per matching PR | Flag PRs touching the `/auth-provider` module, summarize and post to `#auth-changes` |
+
+**Daily limits** (research preview, as of mid-2026): Pro — 5 routines/day; Max — 15; Team/Enterprise — 25. Extra routines beyond limits run on extra usage. Routines draw down subscription usage limits in the same way as interactive sessions [^src16].
+
+**Common routine patterns observed** [^src16]:
+- *Backlog management*: triage new issues nightly, label, assign, and post a summary to Slack
+- *Docs drift detection*: scan merged PRs weekly, flag docs referencing changed APIs, open update PRs
+- *Deploy verification*: CD pipeline triggers after each deploy; Claude runs smoke checks and posts go/no-go to release channel
+- *Library port*: every PR merged to a Python SDK triggers a routine that ports the change to the parallel Go SDK
+
+See [[ai-engineering/ralph-loop|Ralph Loop]] for the underlying "loop engineering" concept; routines are the native Claude Code implementation of that pattern, without the DIY cron and MCP server management.
+
+## Onboarding Claude Code to a legacy codebase (Skyline case study)
+
+Brendan MacLean (Skyline protein analysis software, 700,000+ lines of C#, maintained 17 years) applied the same methodology he uses for new human developers — onboard through a contained project, expand scope as understanding grows — to Claude Code [^src17].
+
+**Key architecture**: all AI context lives in a separate repository (`pwiz-ai`), kept outside the main codebase so it applies across all branches and time points [^src17]. The `CLAUDE.md` at the root handles environment setup and points to relevant documentation: "the 'lay of the land', not the expertise itself" [^src17]. Expertise lives in skills; skills follow a **"reference don't embed"** principle — each skill points into a central documentation knowledgebase rather than duplicating content, keeping them lightweight [^src17].
+
+**Three headline results** [^src17]:
+- A year-long unfinished Files View panel (developer had left) completed by Brendan + Claude Code in two weeks.
+- Three years of frozen Java module (LabKey test management) unfrozen; Brendan added features in less than a day.
+- Screenshot reproduction for 2,000+ tutorial images now fully automated with diff-only views and pixel change amplification; daily summary email generated automatically each morning from nightly test infrastructure.
+
+**Advice for legacy codebase practitioners** [^src17]:
+
+> "Understand that Claude can't learn without you recording 'context.' Don't expect magic. Invest in building and maintaining your context layer. And treat it like any other project artifact: version it, grow it, maintain it." [^src17]
+
+1. **Context is your best friend.** Context is what persists across sessions; the to-do lists and plans Claude generates do not. "Keeping context in the same repo is a valid alternative; what matters is that it's versioned, maintained, and available when needed" [^src17].
+2. **Invest in a skill library.** Use skills to encode domain knowledge any Claude instance can load — debugging skill, version-control conventions skill, project-orientation skill.
+3. **Use MCP integrations when data access is key.** Build MCP integrations wherever Claude needs access to real data (test results, exception reports, support threads).
+
+**For open-source projects**: "There's no onboarding budget, no institutional memory beyond what gets written down, no guarantee that any contributor will still be around next year. Context, once built, is available to every contributor and persists across the project's lifetime in a way that human institutional knowledge never does" [^src17]. The `pwiz-ai` repository is itself an open-source artifact — context that belongs to the project, not any one contributor.
+
 ## Using Opus 4.7 effectively in Claude Code
 
 Opus 4.7 reasons more after each user turn — improving coherence and coding quality over long sessions but increasing token usage [^src12]. Two behavior modes:
@@ -315,3 +364,5 @@ Opus 4.7 reasons more after each user turn — improving coherence and coding qu
 [^src13]: [Introducing dynamic workflows](../../raw/notes/notes-clippings-introducing-dynamic-workflows.md) — Anthropic
 [^src14]: [How and when to use subagents in Claude Code](../../raw/notes/notes-clippings-how-and-when-to-use-subagents-in-claude-code.md) — Anthropic
 [^src15]: [How Claude Code works in large codebases: Best practices and where to start](../../raw/notes/notes-clippings-how-claude-code-works-in-large-codebases-best-practices-and.md) — Anthropic Applied AI team
+[^src16]: [Introducing routines in Claude Code](../../raw/notes/notes-clippings-introducing-routines-in-claude-code.md) — Anthropic
+[^src17]: [Onboarding Claude Code like a new developer: Lessons from 17 years of development](../../raw/notes/notes-clippings-onboarding-claude-code-like-a-new-developer-lessons-from-17.md) — Brendan MacLean / MacCoss Lab / Anthropic case study

@@ -18,6 +18,12 @@ sources:
   - path: raw/youtube/youtube-2wljl9a2cna.md
     channel: youtube
     ingested_at: 2026-06-17
+  - path: raw/notes/notes-clippings-product-management-on-the-ai-exponential.md
+    channel: notes
+    ingested_at: 2026-06-17
+  - path: raw/notes/notes-clippings-product-development-in-the-agentic-era.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - AI product management
   - AIPM
@@ -108,6 +114,43 @@ Cherny's frontier observation reinforces the practitioner framing above: "I thin
 
 Cherny calls **latent demand** "the single most important principle in product": build a product that can be "misused" for something users want, then build the dedicated product for that behavior [^src5]. Examples: Facebook Marketplace (40% of group posts were buying/selling), Facebook Dating (60% of profile views were non-friends of opposite gender), and Claude Cowork (people used Claude Code non-technically — recovering wedding photos from a corrupted drive, analyzing an MRI or a genome) [^src5]. The **modern, AI-era twist**: instead of "look at what people are doing and make it easier," look at "what the *model* is trying to do and make that a little bit easier" — the product analog of keeping the model "on distribution" [^src5]. Two further AIPM-relevant build principles from the same source: **don't box the model in** ("give the model tools... a goal, and let it figure it out") and **build for the model 6 months out** (expect weak PMF early, then it clicks) — see [[ai-engineering/sources/boris-cherny-100-percent-claude-code|the source page]] and [[ai-engineering/context-engineering|Context Engineering]].
 
+## PM workflow on the AI exponential (Anthropic practitioner view)
+
+Cat Wu (Head of Product, Claude Code) documents a three-product division of PM labor that has become a repeating pattern across AI-native teams [^src6]:
+
+| Tool | Role |
+|---|---|
+| **Claude.ai** | Thought partner — bouncing ideas, strategy docs, quick answers; no action needed |
+| **Claude Code** | Building — prototypes, evals, scripts, anything whose output is code |
+| **Cowork** | Everything else — inbox zero, to-do tracking, slide decks, Slack search, travel booking |
+
+The central rhythm change: "Instead of a long-term roadmap, we encourage everyone on the team (engineers, product managers, designers) to take on **side quests** — a short self-directed experiment you run outside your official roadmap" [^src6]. Claude Code features that emerged from side quests include Desktop, AskUserQuestion, and todo lists [^src6].
+
+**Four PM operating shifts on exponentially improving models** [^src6]:
+
+1. **Plan in short sprints.** Exploration is a continuous activity, not a pre-roadmap phase. New model releases are implicit prompts to revisit any feature.
+2. **Demos and evals over docs.** Replace traditional stand-ups with demo sharing; use evals to make abstract product ideas concrete. "After you write a spec, send it to Claude Code and see if it can build it" — a rough prototype changes the conversation [^src6].
+3. **Revisit features with new models.** Ship, then re-evaluate when a better model drops. Example: Claude Code with Chrome emerged from noticing users manually switching between Claude Code and Claude in Chrome to test web apps [^src6].
+4. **Do the simple thing.** A clever model-limitation workaround becomes unnecessary complexity when the next model drops. Claude Code's todo-list reminder hack was removed when the next model checked off items natively; system-prompt engineering has been cut 20% with each major model [^src6].
+
+> "The PM role now is to track both things at once: how AI is changing the way you work, and how it's changing what's possible in your product." [^src6]
+
+**METR time-horizon benchmark as a PM signal:** METR finds that ~50% of the time Opus 4.6 can complete software tasks humans take nearly 12 hours; the comparable figure with Sonnet 3.5 (new) in late 2024 was ~21 minutes — a ~41x jump in 16 months [^src6]. A PM calibrated to this rate of change treats current model constraints as 6-month constraints, not permanent constraints.
+
+## Managed Agents as a PM tool
+
+A second Anthropic PM (anonymous, product lead on Managed Agents) documents the next layer: using [[ai-engineering/claude-managed-agents|Claude Managed Agents]] to build bespoke internal agents for operational PM work [^src7]. The workflow split: Claude / Cowork for open-ended discovery (murky early-stage exploration); Claude Code to write and ship custom agents once the "job to be done" is clear [^src7].
+
+Three example PM agents built on Managed Agents [^src7]:
+
+| Agent | Design |
+|---|---|
+| **Adoption analytics** | Persistent access to internal databases; memory of prior runs lets it compound insights across sessions |
+| **Developer sentiment monitoring** | Pre-built web search tool; fans out research to parallel subagents and synthesizes findings |
+| **Demo building** | Access to demo repos, branding assets, event decks; turns templates into audience-tailored demos |
+
+The PM leverage argument: "A year ago, all of this kind of work would've crawled along in cross-functional staffing requests, chaotic spreadsheets, or half-baked concepts I just never got to try out" [^src7]. The **two-pronged payoff** — building against the product raises the ceiling on what the PM can imagine shipping next; the same development muscle automates the long tail of operational work [^src7].
+
 ## Cross-domain
 
 The *career* dimension of AIPM (job market, "what should I become") lives in [[ai-business/ai-and-the-job-market|AI and the Job Market]] and [[ai-business/technical-career|Navigating a Technical Career]]; this page owns the product/engineering discipline.
@@ -127,3 +170,5 @@ The *career* dimension of AIPM (job market, "what should I become") lives in [[a
 [^src3]: [The Top 5 Skills for AI Engineering: Systems Thinking](../../raw/web/the-top-5-skills-for-ai-engineering-systems-thinking.md) — Scott Behrens, The Engineer Setlist
 [^src4]: [How I AI — Goals in Coda (Claire Vo)](../../raw/youtube/youtube-2wljl9a2cna.md)
 [^src5]: [100% of my code is written by Claude — Boris Cherny (Lenny's Podcast)](../../raw/youtube/youtube-we7bzvkbcvw.md)
+[^src6]: [Product management on the AI exponential](../../raw/notes/notes-clippings-product-management-on-the-ai-exponential.md) — Cat Wu, Head of Product for Claude Code, Anthropic
+[^src7]: [Product development in the agentic era](../../raw/notes/notes-clippings-product-development-in-the-agentic-era.md) — Anthropic PM, building with Managed Agents

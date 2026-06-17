@@ -18,6 +18,9 @@ sources:
   - path: raw/notes/notes-clippings-how-and-when-to-use-subagents-in-claude-code.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/notes/notes-clippings-multi-agent-coordination-patterns-five-approaches-and-when-t.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - multi-agent
   - multi-agent system
@@ -25,6 +28,11 @@ aliases:
   - sub-agents
   - brain-hands separation
   - specialist agents
+  - generator-verifier
+  - orchestrator-subagent
+  - agent teams
+  - message bus
+  - shared state
 tags:
   - corpus/ai-engineering
   - concept
@@ -98,6 +106,65 @@ Stack: FastAPI, [[ai-engineering/langgraph|LangGraph]] (chosen because the agent
 
 NirDiamant's `GenAI_Agents` (52+ tutorials) is a large reference catalog of agent and multi-agent implementations, the majority built on [[ai-engineering/langgraph|LangGraph]] for stateful workflow orchestration [^src4]. Recurring multi-agent shapes across the collection: supervisor/coordinator + specialist workers (ATLAS academic system: Coordinator/Planner/Notewriter/Advisor), role-based crews (AutoGen research team: admin/developer/planner/executor/QA; OpenAI Swarm blog team: researcher/planner/writer/editor), and CrewAI inventory agents [^src4]. The catalog also pairs with companion resources on RAG (40+ notebooks) and agent memory (30 notebooks on vector stores, graphs, Mem0, Zep) — see [[ai-engineering/agent-memory|Agent Memory]] [^src4].
 
+## Five coordination patterns (Anthropic taxonomy)
+
+Anthropic's engineering team (Cara Phillips et al.) defines five coordination patterns with explicit selection criteria [^src6]. The recommendation: "Start with the simplest pattern that could work, watching where it struggles, and evolving from there." Default starting point: **orchestrator-subagent** — handles the widest range of problems with the least coordination overhead [^src6].
+
+### 1. Generator-Verifier
+
+A generator produces output; a verifier evaluates it against criteria and either accepts or routes back with feedback. Loop continues until accepted or max iterations reached [^src6].
+
+**Use when**: output quality is critical and evaluation criteria can be made explicit — code generation (one writes, one writes-and-runs tests), fact-checking, rubric grading, compliance verification [^src6].
+
+**Failure modes**: verifier told only to check "whether output is good" (no criteria) rubber-stamps the generator ("the illusion of quality control without the substance"); generator-verifier loop stalls if feedback is not actionable (oscillates without converging, needs a max-iteration fallback) [^src6].
+
+### 2. Orchestrator-Subagent
+
+A lead agent plans work, delegates to subagents, and synthesizes results. Subagents complete one bounded task and return results [^src6]. Claude Code uses this pattern internally: the main agent writes code while dispatching read-only subagents in the background to search large codebases [^src6].
+
+**Use when**: task decomposition is clear and subtasks have minimal interdependence [^src6].
+
+**Failure modes**: orchestrator becomes an information bottleneck when subagent findings are relevant to each other (critical details are lost across handoffs); sequential execution unless explicitly parallelized [^src6].
+
+### 3. Agent Teams
+
+Workers stay alive across many assignments, accumulating context and domain specialization. A coordinator assigns work and collects outcomes; workers don't reset between tasks [^src6].
+
+The key distinction from orchestrator-subagent: "The orchestrator spawns a subagent for one bounded subtask, and the subagent terminates after returning a result. Teammates stay alive across many assignments" [^src6].
+
+**Use when**: subtasks are independent and benefit from sustained, multi-step work — e.g. migrating a large codebase service-by-service where each teammate builds familiarity with its assigned service [^src6].
+
+**Failure modes**: teammates operating independently can produce conflicting outputs or duplicate work; shared resources (same file, database) require careful task partitioning and conflict resolution [^src6].
+
+### 4. Message Bus
+
+Agents interact through publish/subscribe primitives via a shared communication layer. New agents can start receiving relevant work without rewiring existing connections [^src6].
+
+**Use when**: workflow emerges from events rather than a predetermined sequence, and the agent ecosystem is likely to grow — e.g. a security operations system where new alert types may emerge requiring new agent types [^src6].
+
+**Failure modes**: tracing a causal chain across five agents is hard without careful logging; LLM-based routers introduce their own failure modes; routing misclassification fails silently [^src6].
+
+### 5. Shared State
+
+Agents read from and write to a persistent store (database, filesystem, document) with no central coordinator. Work begins when the store is seeded; ends when a termination condition is met [^src6].
+
+**Use when**: agents' work is collaborative and findings should flow between them in real time (e.g. a research synthesis system where one agent's discovery of a key researcher immediately informs another agent's investigation) [^src6]. Also the right choice when no single point of failure is acceptable — if any one agent stops, others continue.
+
+**Failure modes**: without explicit coordination, agents may duplicate work or pursue contradictory approaches; reactive loops (Agent A writes → B reads and responds → A sees and responds again) burn tokens without converging. "Systems that treat termination as an afterthought tend to cycle indefinitely or stop arbitrarily" [^src6]. Requires first-class termination conditions: time budget, convergence threshold (no new findings for N cycles), or a designated "am I done?" agent.
+
+### Pattern selection matrix
+
+| Situation | Pattern |
+|---|---|
+| Quality-critical output, explicit evaluation criteria | Generator-Verifier |
+| Clear task decomposition, bounded subtasks | Orchestrator-Subagent |
+| Parallel workload, independent long-running subtasks | Agent Teams |
+| Event-driven pipeline, growing agent ecosystem | Message Bus |
+| Collaborative research, agents share discoveries | Shared State |
+| No single point of failure required | Shared State |
+
+**Hybrid pattern**: common in production — orchestrator-subagent for the overall workflow with shared state for a collaboration-heavy subtask; or message bus for event routing with agent team-style workers handling each event type [^src6].
+
 ## Subagents vs Agent Teams (Claude Code)
 
 The Claude Code documentation draws a sharp distinction between two coordination modes [^src5]:
@@ -142,3 +209,4 @@ The `description` field is what the orchestrator uses to decide when to delegate
 [^src3]: [How Grab Reclaimed Hundreds of Data Engineering Hours With Multi-Agent AI](../../raw/email/email-2026-05-28-how-grab-reclaimed-hundreds-of-data-engineering-hours-with-m.md) — Chief Data Tinkerer
 [^src4]: [NirDiamant/GenAI_Agents — 52+ tutorials and implementations](../../raw/web/github-nirdiamant-genai-agents-50-tutorials-and-implementati.md) — GitHub
 [^src5]: [How and when to use subagents in Claude Code](../../raw/notes/notes-clippings-how-and-when-to-use-subagents-in-claude-code.md) — Anthropic
+[^src6]: [Multi-agent coordination patterns: Five approaches and when to use them](../../raw/notes/notes-clippings-multi-agent-coordination-patterns-five-approaches-and-when-t.md) — Cara Phillips et al., Anthropic

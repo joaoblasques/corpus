@@ -1,0 +1,86 @@
+---
+type: concept
+domain: ai-engineering
+status: draft
+sources:
+  - path: raw/notes/notes-clippings-lessons-from-building-claude-code-prompt-caching-is-everythi.md
+    channel: notes
+    ingested_at: 2026-06-17
+aliases:
+  - prompt caching
+  - prefix caching
+  - cache hit rate
+  - cache-safe forking
+  - compaction buffer
+  - defer_loading
+tags:
+  - corpus/ai-engineering
+  - concept
+created: 2026-06-17
+updated: 2026-06-17
+---
+
+# Prompt Caching
+
+**TL;DR.** Prompt caching reuses computation from previous API roundtrips by prefix-matching cached tokens against new requests, cutting cost and latency. The key constraint: caching is a prefix match — any change anywhere in the prefix invalidates everything after it. Claude Code's entire harness is built around maximising cache hit rates; low rates are treated as a production SEV [^src1].
+
+## How prefix caching works
+
+The API caches everything from the start of a request up to each `cache_control` breakpoint. For two requests to share a hit, their prefixes must match byte-for-byte from the first token [^src1]. Order therefore matters enormously: put static content first, dynamic content last.
+
+Claude Code's canonical layering [^src1]:
+
+| Layer | Caching scope |
+|---|---|
+| Static system prompt + Tool definitions | Global (all sessions) |
+| CLAUDE.md | Per project |
+| Session context | Per session |
+| Conversation messages | Grows turn-by-turn |
+
+Common ways teams accidentally break this ordering: inserting a timestamp in the static system prompt, shuffling tool definitions non-deterministically, changing which agents the Agent tool can call between requests [^src1].
+
+## Use messages, not system-prompt edits, for updates
+
+When data in the prompt becomes stale (e.g. the current time, a changed file), the instinct is to update the system prompt — but that invalidates the entire cache. The better approach: inject the update as a `<system-reminder>` tag in the next user message or tool result. "This helps preserve the cache" [^src1]. The system prompt stays frozen; only the conversational tail grows.
+
+## Don't switch models or tools mid-session
+
+**Model switching** — prompt caches are per-model. Switching from Opus to Haiku mid-conversation means rebuilding the cache from scratch for Haiku, which can cost more than having Opus answer a simpler question directly [^src1]. When a model switch is necessary, use a **handoff subagent**: ask Opus to prepare a concise handoff message for the next model on the task, then spawn the subagent fresh [^src1].
+
+**Tool changes** — adding or removing tools invalidates the cached prefix for the entire conversation. The intuitive approach — narrow the tool set when not needed — is exactly wrong [^src1].
+
+**Plan Mode design insight.** Claude Code keeps *all* tools in the request at all times. Plan Mode is implemented via `EnterPlanMode` and `ExitPlanMode` as tools the model calls itself, not by swapping tool sets. Bonus: because `EnterPlanMode` is a tool, the model can enter plan mode autonomously on a hard problem without any cache break [^src1].
+
+**Tool search with `defer_loading`.** When dozens of MCP tools are loaded, Claude Code sends lightweight stubs (name only, `defer_loading: true`) for infrequently needed tools. Full schemas load only when the model selects them. The stubs are always present in the same order, keeping the cached prefix stable [^src1].
+
+## Cache-safe compaction (forking)
+
+When the context window fills, Claude Code must summarize (compact) the conversation. The naive approach — a separate API call with a different system prompt ("summarize this") and no tools — creates a fully uncached request: the prefix diverges at token one, and you pay full uncached input rates on the entire conversation at exactly the moment it's longest [^src1].
+
+**The cache-safe fork**: use the *exact same* system prompt, user context, system context, and tool definitions as the parent conversation. Prepend the parent's messages, then append the compaction prompt as a new user message. From the API's perspective the request looks nearly identical to the parent's last request, so the cached prefix is reused. Only the compaction prompt itself is billed at uncached rates [^src1].
+
+This requires a **compaction buffer** — enough reserved context window space to include the compaction instruction and its output tokens. Anthropic built this pattern directly into the API's `compaction` feature [^src1].
+
+## Operational discipline: monitor like uptime
+
+Claude Code's team runs alerts on cache hit rate and declares SEVs when it drops below threshold. "A few percentage points of cache miss rate can dramatically affect cost and latency" [^src1]. At scale, prompt caching is what makes long-running agentic subscriptions economically viable — it "allows us to reuse computation from previous roundtrips and significantly decrease latency and cost" [^src1].
+
+## Summary: five design rules
+
+1. **Prefix match is the core constraint.** Any change anywhere in the prefix invalidates everything after it. Design the full system around this.
+2. **Use messages instead of system-prompt changes** for dynamic state (plan mode, date, file updates).
+3. **Never change tools or models mid-conversation.** Model state as tool transitions. Defer tool loading instead of removing tools.
+4. **Monitor cache hit rate like uptime.** Alert on cache breaks; treat SEVs seriously.
+5. **Side-computation forks must share the parent's prefix.** Compaction, summarisation, skill execution — all need cache-safe parameters.
+
+## See also
+
+- [[ai-engineering/agent-cost-management|Agent Cost Management]] — cost economics of long-running agents; prompt caching as the primary lever
+- [[ai-engineering/claude-code|Claude Code]] — plan mode, compaction, and the full harness built around prompt caching
+- [[ai-engineering/context-window-management|Context Window Management]] — compaction strategy and what to keep/compress/drop
+- [[ai-engineering/mcp|MCP]] — `defer_loading` via the tool search tool; keeping MCP tool stubs stable
+- [[ai-engineering/claude-managed-agents|Claude Managed Agents]] — cloud agent pricing; prompt caching reduces per-session-hour costs
+
+---
+
+[^src1]: [Lessons from building Claude Code: Prompt caching is everything](../../raw/notes/notes-clippings-lessons-from-building-claude-code-prompt-caching-is-everythi.md) — Thariq Shihipar, Anthropic

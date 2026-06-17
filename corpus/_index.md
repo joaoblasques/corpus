@@ -1,6 +1,6 @@
 # Corpus Index
 
-> Last updated: 2026-06-17 | Total pages: 163 | Total sources: 349
+> Last updated: 2026-06-17 | Total pages: 164 | Total sources: 361
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
@@ -43,6 +43,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[ai-engineering/claude-managed-agents|Claude Managed Agents]] — entity · draft · cloud-hosted composable agent APIs; filesystem memory, Vaults/OAuth, multi-agent coordination; production examples + pricing
 - [[ai-engineering/hermes|Hermes]] — entity · stub · self-hosted coding agent on a VPS, driven over Telegram; phone-first "lead developer"
 - [[ai-engineering/prompt-engineering|Prompt Engineering]] — concept · draft · crafting instructions/examples/XML; distinct from context-engineering
+- [[ai-engineering/prompt-caching|Prompt Caching]] — concept · draft · prefix caching mechanics, cache-safe forking, defer_loading; the highest-return cost lever
 - [[ai-engineering/agent-security|Agent Security]] — concept · draft · prompt injection, guardrails, defense-in-depth, agent auth
 - [[ai-engineering/structured-outputs|Structured Outputs]] — concept · draft · schema-enforced LLM output (Instructor); tokenization
 - [[ai-engineering/agentic-search|Agentic Search]] — concept · draft · AI-native/agent-orchestrated retrieval; grep-vs-vector nuance
@@ -181,7 +182,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[ai-business/ai-consulting-playbook|AI Consulting Playbook]] — concept · draft · free "AI mini assessment" two-call client-acquisition framework; frequency×friction bottleneck selection, the "money question" close
 
 ## Recent additions
-- 2026-06-17: **Obsidian Clippings drain (collect→ingest→reap, batches 1–3, 29 notes)** — new [[ai-engineering/computer-use]], [[ai-engineering/claude-managed-agents]]; enriched claude-cowork, claude-code, claude-models (Opus 4.7), agent-security (Claude Security beta), mcp (production patterns), agent-memory, agent-harness, agentic-workflow, agent-ui. All notes reaped from vault after ingest.
+- 2026-06-17: **Obsidian Clippings drain (collect→ingest→reap, batches 1–4, 41 notes)** — new pages computer-use, claude-managed-agents, prompt-caching; broad enrichment of claude-code, claude-cowork, claude-models, mcp, multi-agent-systems, agent-skills, agentic-coding, ai-product-management, ralph-loop, agent-harness, agent-security + more. All notes reaped from vault after ingest.
 - 2026-06-17: **YouTube batch (v0.6 cluster pipeline, 4 parallel workers)** — 12 transcripts ingested → 7 new pages, 9 enriched. New: [[data-engineering/dataform]], [[data-engineering/snowflake]], [[data-engineering/sql-intermediate-results]], [[software-engineering/cognitive-debt]], [[ai-business/ai-synthetic-focus-group]], [[ai-business/ai-consulting-playbook]], [[ai-engineering/sources/boris-cherny-100-percent-claude-code]]. Updated: apache-iceberg, open-table-formats, dimensional-modeling, data-modeling-meaning, databricks, claude-code, vibe-coding, ai-product-management, agentic-coding, algorithms, engineering-craft.
 - 2026-06-17: **ingest-auto safe pass (6 candidates, 2 ingested, 4 deferred)** — [[ai-engineering/anthropic]] (updated, +1 source — Anthropic Academy free certifications: Claude 101 / AI Fluency 4Ds / Intro to Cowork; fills prior unsourced Skilljar note); [[ai-engineering/claude-cowork]] (updated, +1 source — Cowork Toolkit 7-day arc + routing-conflict edge case). Deferred: 2 TLDR digests, Decathlon promo, Google tips promo.
 - 2026-06-15: **ingest-auto safe pass (3 candidates, 2 ingested, 1 deferred)** — software-engineering/[[software-engineering/software-design-principles]] (updated, +1 source — DIP worked example); ai-engineering/[[ai-engineering/claude-cowork]] (updated, +1 source — post-call-wrapup skill example)

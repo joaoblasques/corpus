@@ -27,6 +27,9 @@ sources:
   - path: raw/notes/notes-clippings-how-to-set-up-your-claude-connectors-mcp.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/notes/notes-clippings-new-connectors-in-claude-for-everyday-life.md
+    channel: notes
+    ingested_at: 2026-06-17
 aliases:
   - MCP
   - Model Context Protocol
@@ -126,6 +129,16 @@ Claude's **connector directory** is the UI layer for MCP — pre-configured one-
 
 **Marketing/sales connector landscape (as of mid-2026)**: HubSpot, Salesforce, Pipedrive, Apollo, Clay, Gong, Outreach, PandaDoc, Calendly, Lusha, Vibe Prospecting, Gamma, GA4, Meta Ads, Google Ads, Shopify, Klaviyo, Mailchimp, Semrush, Canva, Hotjar, Stripe (33 total in one documented stack) [^src8].
 
+## Consumer connectors (everyday-life expansion)
+
+As of mid-2026 the Claude connector directory has grown to 200+ connectors spanning design, finance, productivity, and health [^src9]. The connector model has expanded beyond work tools to everyday-life apps: AllTrails, Audible, Booking.com, Instacart, Intuit Credit Karma, Intuit TurboTax, Resy, Spotify, StubHub, Taskrabbit, Thumbtack, Tripadvisor, Uber, Uber Eats, and Viator [^src9].
+
+**Dynamic connector suggestions.** Claude now surfaces the right connector for what you're doing — without you typing the name — and presents both when multiple connectors could answer the same question. "Ask Claude to recommend a weekend hike, and AllTrails will surface trails nearby that match your preferences" [^src9]. Refinements (shorter trail, dog-friendly) continue in the same thread.
+
+**Privacy model.** Claude is ad-free (no paid placements). Your data from a connected app is not used to train models, and the app doesn't see your other conversations. Disconnect any connector at any time. Before booking or purchasing on your behalf, Claude is designed to check with you first [^src9].
+
+**Multi-connector workflows** observed in practice [^src9]: a product manager pulls a query from Amplitude, turns it into a Canva deck, and drops the link into Asana for the team — all in a single conversation. Connectors are available on all plans; mobile is in beta.
+
 ## See also
 
 - [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] — MCP is the coordination layer for multi-agent architectures
@@ -134,6 +147,7 @@ Claude's **connector directory** is the UI layer for MCP — pre-configured one-
 - [[ai-engineering/agent-security|Agent Security]] — scoped permissions and OAuth (e.g. Metabase) limit tool blast radius
 - [[ai-engineering/claude-code|Claude Code]] — MCP client; configures servers via `claude mcp add`
 - [[ai-engineering/claude-managed-agents|Claude Managed Agents]] — uses MCP for external system access; Vaults handle OAuth tokens per session
+- [[ai-engineering/claude-cowork|Claude Cowork]] — the end-user product surface where consumer connectors are most active
 
 ---
 
@@ -145,3 +159,4 @@ Claude's **connector directory** is the UI layer for MCP — pre-configured one-
 [^src6]: [nao MCP servers](../../raw/web/github-getnao-nao-mcp-servers.md)
 [^src7]: [Building agents that reach production systems with MCP](../../raw/notes/notes-clippings-building-agents-that-reach-production-systems-with-mcp.md) — Anthropic engineering
 [^src8]: [How to Set Up Your Claude Connectors (MCP)](../../raw/notes/notes-clippings-how-to-set-up-your-claude-connectors-mcp.md) — practitioner guide (33-connector marketing/sales stack)
+[^src9]: [New connectors in Claude for everyday life](../../raw/notes/notes-clippings-new-connectors-in-claude-for-everyday-life.md) — Anthropic announcement
