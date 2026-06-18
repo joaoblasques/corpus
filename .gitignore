@@ -11,6 +11,7 @@ raw/web/*
 raw/youtube/*
 raw/sources/*
 raw/email/*
+raw/pdf/*
 
 # Keep .gitkeep markers so channel dirs survive clone
 !**/.gitkeep
