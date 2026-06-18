@@ -1756,3 +1756,17 @@ class TestRunCollectorsCorrectKeys:
         assert result["gmail"]["collected"] == 4, (
             f"expected written=4, got {result['gmail']['collected']}"
         )
+
+
+class TestEmailRelabel:
+    def test_run_email_relabel_invokes_reap_labels(self):
+        called = []
+
+        def fake_run(cmd, **kwargs):
+            called.append(" ".join(cmd))
+            import types
+            return types.SimpleNamespace(returncode=0, stdout='{"relabeled": 0}', stderr="")
+
+        result = scheduled_run.run_email_relabel(_subprocess_run=fake_run)
+        assert any("gmail_client.py" in s and "reap-labels" in s for s in called), called
+        assert result.get("relabeled") == 0
