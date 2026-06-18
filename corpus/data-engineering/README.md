@@ -6,7 +6,7 @@ tags:
   - corpus/data-engineering
   - hub
 created: 2026-05-07
-updated: 2026-06-17
+updated: 2026-06-18
 ---
 
 # Data Engineering
@@ -74,6 +74,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [[data-engineering/progressive-disclosure-analytics-agents|Progressive Disclosure for Analytics Agents]] — synthesis · draft · Discover→Understand→Execute; avoid flat-context trap loading whole schema/semantic layer (cross-domain → ai-engineering)
 - [[data-engineering/ai-impact-on-data-engineering|AI's Impact on Data Engineering]] — synthesis · draft · won't replace DEs soon; Markdown Team model: 3 new jobs (determinism, context encoding, kaizen flywheel); DE→platform architect, analyst→research analyst
 - [[data-engineering/data-engineering-agents-landscape|Data Engineering Agents Landscape]] — synthesis · draft · OSS/vendor DE agents by build-time vs consume-time (text-to-SQL): Vanna, WrenAI, Dataherald, Datus-agent, dbt MCP/Agent Skills, Databricks Genie/Lakeflow; solo-DE recommendation (cross-domain → ai-engineering)
+- [[data-engineering/portfolio-project-that-lands-a-de-role|The Portfolio Project That Lands a DE Role]] — synthesis · draft · what makes ONE end-to-end Databricks+AWS showcase impressive to hiring managers: business framing, rigor checklist (medallion/DQ/idempotency/tests/metadata/IaC/cost), realism/ops, defensible stack choices, junior-tell anti-signals
 
 ### Source summaries
 - [[data-engineering/sources/dbt-kimball-project|dbt Kimball reference project]] — source · draft · reference dbt Kimball SCD2 project (BigQuery/DuckDB)
