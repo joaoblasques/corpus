@@ -779,3 +779,9 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - pages drawn on: data-engineer-role, data-engineering-best-practices, de-portfolio-projects, medallion-architecture, data-quality, idempotent-pipelines, cicd-for-data-infrastructure, databricks, sources/aws-duckdb-etl-fargate, ai-business/technical-career
 - index/hub: _index.md (+1 page → 185; recent-additions entry) ; data-engineering/README.md (synthesis added, updated→2026-06-18)
 - notes: surfaces the honest tension that Databricks is the corpus's own "overkill" case for a solo sub-500GB project, framing the Databricks+AWS choice as a deliberate learning/signal decision with day-one cost guardrails
+
+## [2026-06-18 15:30] ingest | review-queue clearance — 10 deferred emails (no citable content)
+- cleared the /ingest-auto deferral queue (raw/_inbox/_REVIEW.md): 10 emails, none with §7-citable content
+- 6 G1 (promos/personal/transactional): Decathlon voucher, Shakers promo, Nick-Spisak AI-skill promo, Gmail storage notice, tour-leader admin, family cabin email
+- 4 UNCERTAIN (container/pointer): TLDR Dev + TLDR Data digests (articles ingest separately as raw/web companions), Google declutter promo, AWS-masterclass bare youtu.be pointer
+- resolution: stamped corpus_ingested: true + corpus_pages: [] and filed to raw/email/ (no corpus pages created — fabricating from these would breach §7 provenance)
