@@ -59,3 +59,32 @@ def test_collect_dry_run_writes_nothing(tmp_path, monkeypatch):
         "markdown": "x " * 60, "title": "A", "author": "", "pages": 1, "words": 60})
     pc.cmd_collect(pc._args(["collect", "--dir", str(watch), "--dry-run"]))
     assert list(inbox.glob("pdf-*.md")) == []
+
+
+def test_file_moves_only_ingested_pdf(tmp_path, monkeypatch):
+    watch = tmp_path / "PDFs"; watch.mkdir()
+    (watch / "a.pdf").write_bytes(b"%PDF a")
+    (watch / "b.pdf").write_bytes(b"%PDF b")
+    raw = tmp_path / "raw"; raw.mkdir()
+    (raw / "pdf-a.md").write_text(
+        "---\nchannel: pdf\npdf_origin: a.pdf\ncorpus_ingested: true\n---\nx", encoding="utf-8")
+    (raw / "pdf-b.md").write_text(
+        "---\nchannel: pdf\npdf_origin: b.pdf\n---\nx", encoding="utf-8")
+    monkeypatch.setattr(pc.cp, "DEDUP_DIRS", [raw])
+    rc = pc.cmd_file(pc._args(["file", "--dir", str(watch)]))
+    assert rc == 0
+    assert not (watch / "a.pdf").exists()                       # moved
+    assert (watch / "_processed" / "a.pdf").exists()
+    assert (watch / "b.pdf").exists()                            # not ingested -> stays
+
+
+def test_file_rejects_path_traversal(tmp_path, monkeypatch):
+    watch = tmp_path / "PDFs"; watch.mkdir()
+    outside = tmp_path / "etc"; outside.mkdir()
+    (outside / "x.pdf").write_bytes(b"secret")
+    raw = tmp_path / "raw"; raw.mkdir()
+    (raw / "pdf-evil.md").write_text(
+        "---\nchannel: pdf\npdf_origin: ../etc/x.pdf\ncorpus_ingested: true\n---\nx", encoding="utf-8")
+    monkeypatch.setattr(pc.cp, "DEDUP_DIRS", [raw])
+    pc.cmd_file(pc._args(["file", "--dir", str(watch)]))
+    assert (outside / "x.pdf").exists()                          # never touched

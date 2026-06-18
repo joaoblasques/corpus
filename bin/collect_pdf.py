@@ -122,6 +122,18 @@ def _suppress_fd_stdout():
         os.close(saved)
 
 
+def processable(dirs=None) -> list:
+    """pdf_origin filenames whose raw copy is corpus_ingested (ready to move)."""
+    out = []
+    for _, text in _raw_sources(dirs):
+        if "corpus_ingested: true" not in text:
+            continue
+        origin = fm_field(text, "pdf_origin")
+        if origin:
+            out.append(origin)
+    return out
+
+
 def extract(abs_path: str) -> dict:
     """Extract a PDF to markdown + metadata. Seam over pymupdf4llm/fitz (stubbable)."""
     import pymupdf4llm

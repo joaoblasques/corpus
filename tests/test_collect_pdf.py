@@ -82,3 +82,12 @@ def test_already_collected_detects_prior_sha(tmp_path):
     (raw / "pdf-x.md").write_text("---\nchannel: pdf\ncontent_sha: deadbeef\n---\nbody", encoding="utf-8")
     assert cp.already_collected("deadbeef", dirs=[raw]) is True
     assert cp.already_collected("0000", dirs=[raw]) is False
+
+
+def test_processable_selects_only_ingested(tmp_path):
+    raw = tmp_path / "raw"; raw.mkdir()
+    (raw / "pdf-a.md").write_text(
+        "---\nchannel: pdf\npdf_origin: a.pdf\ncorpus_ingested: true\n---\nx", encoding="utf-8")
+    (raw / "pdf-b.md").write_text(
+        "---\nchannel: pdf\npdf_origin: b.pdf\n---\nx", encoding="utf-8")  # not ingested
+    assert cp.processable(dirs=[raw]) == ["a.pdf"]

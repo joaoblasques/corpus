@@ -25,6 +25,16 @@ def extract(abs_path: str) -> dict:
     return cp.extract(abs_path)
 
 
+def _under_watch(watch: Path, rel: str) -> bool:
+    """Reject traversal / absolute paths escaping the watch dir."""
+    if os.path.isabs(rel) or ".." in os.path.normpath(rel).split(os.sep):
+        return False
+    try:
+        return (watch / rel).resolve().is_relative_to(watch.resolve())
+    except (OSError, ValueError):
+        return False
+
+
 def cmd_collect(args) -> int:
     watch = Path(args.dir) if args.dir else cp.PDF_WATCH_DIR
     collected_at = datetime.date.today().isoformat()
@@ -62,6 +72,26 @@ def cmd_collect(args) -> int:
     return 0
 
 
+def cmd_file(args) -> int:
+    watch = Path(args.dir) if args.dir else cp.PDF_WATCH_DIR
+    proc_dir = watch / cp.PROCESSED_SUBDIR
+    t = {"moved": 0}
+    for origin in cp.processable():
+        if not _under_watch(watch, origin):
+            continue
+        src = watch / origin
+        if not src.exists():
+            continue
+        if args.dry_run:
+            t["moved"] += 1
+            continue
+        proc_dir.mkdir(parents=True, exist_ok=True)
+        shutil.move(str(src), str(proc_dir / Path(origin).name))
+        t["moved"] += 1
+    print(json.dumps({**t, "dry_run": bool(args.dry_run)}, indent=2))
+    return 0
+
+
 def _args(argv):
     p = argparse.ArgumentParser(description="PDF folder → corpus collector.")
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -70,6 +100,10 @@ def _args(argv):
     pcol.add_argument("--max", type=int, default=None)
     pcol.add_argument("--dry-run", action="store_true")
     pcol.set_defaults(func=cmd_collect)
+    pfile = sub.add_parser("file")
+    pfile.add_argument("--dir", default=None)
+    pfile.add_argument("--dry-run", action="store_true")
+    pfile.set_defaults(func=cmd_file)
     return p.parse_args(argv)
 
 
