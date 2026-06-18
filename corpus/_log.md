@@ -737,3 +737,10 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   - ingest: 0 ingested · 6 deferred · status=ok
 - lint:
   - 0 broken wikilinks · 0 broken citations · 0 orphans · 6 stubs
+
+## [2026-06-18 12:51] config | add PDF collector (collect-pdf)
+- new channel `pdf` → raw/pdf/; watch dir = Google Drive My Drive/CorpusInbox/PDFs (synced locally)
+- bin/collect_pdf.py + bin/pdf_client.py (collect + file); pymupdf4llm extraction; text-only
+  (low-text guard at 50 words), content_sha dedup, move-to-_processed gated on corpus_ingested
+- wired into scheduled_run collection phase; .gitignore raw/pdf/*
+- spec: docs/superpowers/specs/2026-06-18-pdf-collector-design.md

@@ -331,6 +331,20 @@ class TestRunCollectors:
         assert result["links_refetch"]["status"] == "failed"
         assert result["gmail"]["status"] == "ok"
 
+    def test_pdf_collector_invoked(self, tmp_path):
+        """run_collectors calls pdf_client collect via subprocess."""
+        called_scripts = []
+
+        def fake_run(cmd, **kwargs):
+            called_scripts.append(" ".join(cmd))
+            import types
+            return types.SimpleNamespace(returncode=0, stdout='{"collected": 0}', stderr="")
+
+        scheduled_run.run_collectors(
+            youtube_token_path=tmp_path / "nope.json", _subprocess_run=fake_run)
+        assert any("pdf_client.py" in s and "collect" in s for s in called_scripts), (
+            f"pdf_client.py collect not found in calls: {called_scripts}")
+
 
 # ---------------------------------------------------------------------------
 # run_ingest tests
@@ -1489,6 +1503,22 @@ class TestMoveProcessedInbox:
         assert dest.exists(), f"dest not found at {dest}"
         assert result["moved"] == 1
         assert result["by_channel"].get("youtube") == 1
+        assert result["skipped"] == 0
+
+    def test_stamped_pdf_moved_to_raw_pdf(self, tmp_path):
+        """A stamped channel=pdf file is moved to raw/pdf/."""
+        inbox = tmp_path / "_inbox"
+        inbox.mkdir()
+        raw = tmp_path / "raw"
+        src = inbox / "pdf-doc.md"
+        self._write_stamped(src, "pdf")
+
+        result = scheduled_run.move_processed_inbox(inbox_dir=inbox, raw_dir=raw)
+
+        assert not src.exists()
+        assert (raw / "pdf" / "pdf-doc.md").exists()
+        assert result["moved"] == 1
+        assert result["by_channel"].get("pdf") == 1
         assert result["skipped"] == 0
 
     def test_stamped_email_moved_to_raw_email(self, tmp_path):

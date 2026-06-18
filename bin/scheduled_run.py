@@ -184,6 +184,29 @@ def run_collectors(
     except Exception as exc:  # noqa: BLE001
         results["obsidian"] = {"status": "failed", "collected": 0, "error": str(exc)}
 
+    # --- PDF ---
+    try:
+        proc = _run(
+            [sys.executable, str(BIN / "pdf_client.py"), "collect"],
+            capture_output=True,
+            text=True,
+        )
+        if proc.returncode != 0:
+            results["pdf"] = {
+                "status": "failed",
+                "collected": 0,
+                "error": proc.stderr.strip() or f"exit {proc.returncode}",
+            }
+        else:
+            try:
+                data = json.loads(proc.stdout)
+                collected = data.get("collected", 0)
+            except (json.JSONDecodeError, AttributeError):
+                collected = 0
+            results["pdf"] = {"status": "ok", "collected": collected}
+    except Exception as exc:  # noqa: BLE001
+        results["pdf"] = {"status": "failed", "collected": 0, "error": str(exc)}
+
     # --- YouTube ---
     if not token_path.exists():
         results["youtube"] = {"status": "not configured", "collected": 0}
@@ -255,6 +278,7 @@ _CHANNEL_DIR: dict[str, str] = {
     "web": "web",
     "matter": "matter",
     "notes": "notes",
+    "pdf": "pdf",
 }
 
 
