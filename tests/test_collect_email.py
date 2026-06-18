@@ -324,6 +324,20 @@ def test_labeled_reapable_selects_ingested_labeled(tmp_path):
     assert out == [{"gmail_message_id": "m1", "gmail_corpus_labels": ["MLOps", "Ml"]}]
 
 
+def test_build_document_to_labeled_reapable_roundtrip(tmp_path):
+    """End-to-end seam: a source produced by build_document (then ingest-stamped) is
+    selected by labeled_reapable with the SAME labels — the write<->parse contract."""
+    d = tmp_path / "raw"; d.mkdir()
+    doc = ce.build_document(
+        {"gmail_message_id": "rt1", "from": "a@b.c", "subject": "S",
+         "date_received": "2026-06-18", "collected_at": "2026-06-18",
+         "gmail_corpus_labels": ["Data Engineering", "MLOps"]}, "body")
+    doc = doc.replace("\n---\n", "\ncorpus_ingested: true\n---\n", 1)  # simulate ingest stamp
+    (d / "email-rt.md").write_text(doc, encoding="utf-8")
+    assert ce.labeled_reapable(dirs=[d]) == [
+        {"gmail_message_id": "rt1", "gmail_corpus_labels": ["Data Engineering", "MLOps"]}]
+
+
 def test_labeled_reapable_gates_on_frontmatter_not_body(tmp_path):
     d = tmp_path / "raw"; d.mkdir()
     # labeled, NOT ingested, but the BODY quotes the stamp string -> must be EXCLUDED
