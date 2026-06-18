@@ -328,6 +328,36 @@ def _url_seen(resolved: str) -> bool:
     return False
 
 
+def cmd_reap_labels(args) -> int:
+    """Post-ingest: for each corpus-labeled email already in the corpus, remove the
+    matched corpus label(s) + INBOX (archive). Gated on corpus_ingested; idempotent."""
+    items = ce.labeled_reapable()
+    if not items:
+        print(json.dumps({"relabeled": 0, "archived": 0,
+                          "dry_run": bool(args.dry_run), "note": "nothing-to-reap"}))
+        return 0
+    service = get_service()
+    name_to_id, _ = resolve_label_ids(service)
+    relabeled = errors = 0
+    for it in items:
+        ids = [name_to_id[n] for n in it["gmail_corpus_labels"] if n in name_to_id]
+        if not ids:
+            continue
+        if args.dry_run:
+            relabeled += 1
+            continue
+        try:
+            service.users().messages().modify(
+                userId="me", id=it["gmail_message_id"],
+                body={"removeLabelIds": ids + ["INBOX"]}).execute()
+            relabeled += 1
+        except Exception:  # noqa: BLE001 — one bad message must not abort the batch
+            errors += 1
+    print(json.dumps({"relabeled": relabeled, "archived": relabeled,
+                      "dry_run": bool(args.dry_run), "errors": errors}))
+    return 0
+
+
 def cmd_run(args) -> int:
     service = get_service()
     collected_at = args.collected_at or datetime.date.today().isoformat()
@@ -438,6 +468,11 @@ def _build_parser():
     pr.add_argument("--no-links", action="store_true", help="Skip link-following enrichment.")
     pr.add_argument("--max-links", type=int, default=10, help="Max links fetched per email.")
     pr.set_defaults(func=cmd_run)
+
+    prl = sub.add_parser("reap-labels",
+                         help="Post-ingest: un-label + archive corpus-labeled emails.")
+    prl.add_argument("--dry-run", action="store_true", help="Report only; no Gmail mutation.")
+    prl.set_defaults(func=cmd_reap_labels)
 
     return p
 

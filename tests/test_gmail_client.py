@@ -169,3 +169,39 @@ def test_cmd_run_labeled_pass_records_labels_and_does_not_archive(tmp_path, monk
     assert rc == 0
     assert written and written[0]["gmail_corpus_labels"] == ["MLOps"]   # labels recorded
     assert archived == []                                              # NOT archived
+
+
+class _ModMessages:
+    def __init__(self, calls): self._calls = calls
+    def modify(self, userId=None, id=None, body=None):
+        self._calls.append({"id": id, "removeLabelIds": body["removeLabelIds"]}); return self
+    def execute(self): return {}
+
+
+class _ModSvc:
+    def __init__(self, labels, calls):
+        self._labels = labels; self._calls = calls
+    def users(self): return self
+    def labels(self): return _Labels(self._labels)
+    def messages(self): return _ModMessages(self._calls)
+
+
+def test_reap_labels_removes_matched_labels_and_inbox(monkeypatch):
+    monkeypatch.setattr(gc.ce, "labeled_reapable",
+                        lambda: [{"gmail_message_id": "m1", "gmail_corpus_labels": ["MLOps", "Ml"]}])
+    calls = []
+    monkeypatch.setattr(gc, "get_service",
+                        lambda: _ModSvc([{"name": "MLOps", "id": "L1"}, {"name": "Ml", "id": "L2"}], calls))
+    rc = gc.cmd_reap_labels(gc._args(["reap-labels"]))
+    assert rc == 0
+    assert calls == [{"id": "m1", "removeLabelIds": ["L1", "L2", "INBOX"]}]
+
+
+def test_reap_labels_dry_run_calls_no_modify(monkeypatch):
+    monkeypatch.setattr(gc.ce, "labeled_reapable",
+                        lambda: [{"gmail_message_id": "m1", "gmail_corpus_labels": ["MLOps"]}])
+    calls = []
+    monkeypatch.setattr(gc, "get_service", lambda: _ModSvc([{"name": "MLOps", "id": "L1"}], calls))
+    rc = gc.cmd_reap_labels(gc._args(["reap-labels", "--dry-run"]))
+    assert rc == 0
+    assert calls == []   # dry-run never mutates Gmail
