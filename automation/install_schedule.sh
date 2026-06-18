@@ -138,7 +138,7 @@ UNINSTALL entirely (removes the plist from ~/Library/LaunchAgents/):
   ${SCRIPT_DIR}/install_schedule.sh uninstall
 
 CATCH-UP NOTE:
-  The job fires daily at 08:00.  If the Mac is asleep at that time, launchd
+  The job fires daily at 02:00.  If the Mac is asleep at that time, launchd
   replays the job exactly ONCE on the next wake.  Missed intervals do NOT
   accumulate, so you always get at most one catch-up run after sleep/shutdown.
 
