@@ -7,7 +7,9 @@ Reuses helpers from collect_email (DRY).
 """
 from __future__ import annotations
 
+import contextlib
 import hashlib
+import os
 import re
 import sys
 from pathlib import Path
@@ -105,11 +107,27 @@ def already_collected(sha: str, dirs=None) -> bool:
     return False
 
 
+@contextlib.contextmanager
+def _suppress_fd_stdout():
+    """Silence fd-level (C library) writes to stdout during PDF parsing so the
+    library's parser/OCR chatter never pollutes a JSON-on-stdout caller."""
+    saved = os.dup(1)
+    devnull = os.open(os.devnull, os.O_WRONLY)
+    try:
+        os.dup2(devnull, 1)
+        yield
+    finally:
+        os.dup2(saved, 1)
+        os.close(devnull)
+        os.close(saved)
+
+
 def extract(abs_path: str) -> dict:
     """Extract a PDF to markdown + metadata. Seam over pymupdf4llm/fitz (stubbable)."""
     import pymupdf4llm
     import fitz
-    markdown = pymupdf4llm.to_markdown(abs_path) or ""
+    with _suppress_fd_stdout():
+        markdown = pymupdf4llm.to_markdown(abs_path) or ""
     doc = fitz.open(abs_path)
     meta = doc.metadata or {}
     pages = doc.page_count

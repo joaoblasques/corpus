@@ -9,7 +9,7 @@ def _make_pdf(path, text, title="", author=""):
     import fitz
     doc = fitz.open()
     page = doc.new_page()
-    page.insert_text((72, 72), text)
+    page.insert_textbox(fitz.Rect(50, 50, 550, 750), text, fontsize=12)
     if title or author:
         doc.set_metadata({"title": title, "author": author})
     doc.save(str(path)); doc.close()
@@ -17,16 +17,22 @@ def _make_pdf(path, text, title="", author=""):
 
 def test_extract_reads_text_and_metadata(tmp_path):
     pdf = tmp_path / "doc.pdf"
-    _make_pdf(pdf, "Hello world this is a real test pdf body. " * 10,
+    _make_pdf(pdf, "Hello world this is a real test pdf body. " * 20,
               title="My Test PDF", author="Tester")
     r = cp.extract(str(pdf))
-    # pymupdf4llm may or may not extract synthetic text depending on layout analysis,
-    # so we check the metadata and structure instead
+    assert "Hello world" in r["markdown"]
     assert r["title"] == "My Test PDF"
     assert r["author"] == "Tester"
     assert r["pages"] == 1
-    assert isinstance(r["markdown"], str)
-    assert isinstance(r["words"], int)
+    assert r["words"] >= 50
+
+
+def test_extract_does_not_pollute_stdout(tmp_path, capfd):
+    pdf = tmp_path / "doc.pdf"
+    _make_pdf(pdf, "Hello world body text here. " * 30)
+    cp.extract(str(pdf))
+    out = capfd.readouterr().out
+    assert "Tesseract" not in out and "Document parser" not in out
 
 
 def test_extract_title_falls_back_to_stem(tmp_path):
