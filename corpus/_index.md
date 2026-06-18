@@ -1,6 +1,6 @@
 # Corpus Index
 
-> Last updated: 2026-06-17 | Total pages: 183 | Total sources: 440
+> Last updated: 2026-06-18 14:35 | Total pages: 184 | Total sources: 447
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
@@ -122,6 +122,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[data-engineering/ingestr|ingestr]] — entity · stub · Bruin CLI ELT tool; copy any source → any destination, incremental loading
 - [[data-engineering/progressive-disclosure-analytics-agents|Progressive Disclosure for Analytics Agents]] — synthesis · draft · Discover→Understand→Execute; avoid flat-context trap (cross-domain → ai-engineering)
 - [[data-engineering/ai-impact-on-data-engineering|AI's Impact on Data Engineering]] — synthesis · draft · won't replace DEs soon but raises judgement/semantics; agents as new query consumer
+- [[data-engineering/data-engineering-agents-landscape|Data Engineering Agents Landscape]] — synthesis · draft · OSS/vendor DE agents mapped by build-time vs consume-time (text-to-SQL); Vanna/WrenAI/Dataherald/Datus/dbt-MCP/Genie; solo-DE recommendation
 - [[data-engineering/sources/sql-funnel-analysis-project|SQL Sales-Funnel Analysis project]] — source · draft · end-to-end BigQuery funnel/conversion/AOV-vs-CAC SQL walkthrough
 - [[data-engineering/dataform|Dataform]] — entity · draft · BigQuery-native SQL/JS transformation orchestration (SQLX, ref-DAG, repo=Git, assertions); the dbt analogue in GCP
 - [[data-engineering/snowflake|Snowflake]] — entity · draft · managed cloud OLAP; 3-layer disaggregated architecture, virtual warehouses, micro-partitions, push-based vectorized execution (CMU/Pavlo)
@@ -203,6 +204,8 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[blockchain/zero-knowledge-proofs|Zero-Knowledge Proofs]] — concept · draft · SNARKs vs STARKs; arithmetization + LDC; tradeoffs
 
 ## Recent additions
+- 2026-06-18: [[ai-engineering/prompt-engineering]] (updated, +1 source — "7 deadly sins of prompting" + R-E-X; first live Gmail-LABEL collect→ingest→reap demo: collected under label Prompting, ingested, then un-labeled+archived in Gmail)
+- 2026-06-18: [[data-engineering/data-engineering-agents-landscape|Data Engineering Agents Landscape]] (new synthesis — filed back from /query: OSS DE agents by build-time vs consume-time; 6 web sources queued via_query)
 - 2026-06-17: **'articles to process' web-list ingest (4 parallel domain workers, 68 URLs)** — 38 ingested, 27 dups/thin marked processed, 3 held. New pages: data-observability, bi-as-code, clickhouse, data-engineering-team-os, openviking, agent-infrastructure. Broad enrichment (dbt, spark, CDC, databricks, agent-memory, agentic-coding, rag, agent-cost-management, technical-career, ai-and-the-job-market, mental-models). Processed URLs struck from the vault list.
 - 2026-06-17: **NEW DOMAIN `blockchain`** (provisional) — 11 pages from the crypto/blockchain primer cluster (Bitcoin, Satoshi, PoW, public-key crypto, hash functions, Merkle trees, P2P, ZK proofs) surfaced during the Clippings drain.
 - 2026-06-17: **Obsidian Clippings drain (collect→ingest→reap, batches 1–5)** — incl. 7 final Clippings + Reference + crypto cluster; ai-engineering enrichment (claude-code tool design, context-window rewind/1M, optimizing-claude advisor strategy, agentic-coding HTML output). 422 stale PARA-native inbox copies purged; many low-signal tail notes skipped-and-reaped.

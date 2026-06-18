@@ -64,7 +64,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-12
-updated: 2026-06-17
+updated: 2026-06-18
 ---
 
 # Prompt Engineering
@@ -175,6 +175,20 @@ These patterns emerged from a set of personal prompt templates [^src9][^src10][^
 
 Each framing produces a categorically different output from identical input. Choosing the right framing is itself a prompt-engineering decision.
 
+## The 7 deadly sins of prompting (R-E-X framework)
+
+A prompt is a brief, not a wish — "Most prompts fail because they're wishes, not briefs" [^src16]. Seven recurring failure modes and their fixes [^src16]:
+
+1. **No context** → add role + task scope + constraints.
+2. **Vague instructions** → define success and explicit acceptance tests.
+3. **Treating it like Google** → turn questions into jobs with concrete deliverables.
+4. **Asking for everything at once** → split into steps and chain the outputs.
+5. **Not iterating** → run a critique-then-revise loop rather than one-shotting.
+6. **No format or tone** → force the shape (length, structure) and the voice.
+7. **No examples** → add 1–2 gold standards (optionally an anti-example); examples are how a model learns your taste.
+
+**R-E-X** condenses these into three moves [^src16]: **Role** (who the model is; domain, audience, risk tolerance), **Examples** (1–2 gold outputs to imitate), **Expectations** (format, length, tone, banned words, a scoring rubric, and the iteration loop). The throughline: iterate faster rather than write ever-longer prompts.
+
 ## See also
 
 - [[ai-engineering/context-engineering|Context Engineering]] — sibling discipline; managing window contents over a session
@@ -201,3 +215,4 @@ Each framing produces a categorically different output from identical input. Cho
 [^src13]: [The Decision-Maker Summary template](../../raw/notes/notes-the-decision-maker-summary.md)
 [^src14]: [The Expert Extraction Summary template](../../raw/notes/notes-the-expert-extraction-summary.md)
 [^src15]: [The Red Flag Summary template](../../raw/notes/notes-the-red-flag-summary.md)
+[^src16]: [The 7 deadly sins of prompting](../../raw/email/email-2025-08-24-sins.md) — Ruben Hassid

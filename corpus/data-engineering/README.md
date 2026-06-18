@@ -73,6 +73,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [[data-engineering/agentic-data-modeling|Agentic Data Modeling]] — synthesis · draft · AI agents for schema design & change-impact analysis (OpenMetadata MCP, SchemaFlow, pg_infer) (cross-domain → ai-engineering)
 - [[data-engineering/progressive-disclosure-analytics-agents|Progressive Disclosure for Analytics Agents]] — synthesis · draft · Discover→Understand→Execute; avoid flat-context trap loading whole schema/semantic layer (cross-domain → ai-engineering)
 - [[data-engineering/ai-impact-on-data-engineering|AI's Impact on Data Engineering]] — synthesis · draft · won't replace DEs soon; Markdown Team model: 3 new jobs (determinism, context encoding, kaizen flywheel); DE→platform architect, analyst→research analyst
+- [[data-engineering/data-engineering-agents-landscape|Data Engineering Agents Landscape]] — synthesis · draft · OSS/vendor DE agents by build-time vs consume-time (text-to-SQL): Vanna, WrenAI, Dataherald, Datus-agent, dbt MCP/Agent Skills, Databricks Genie/Lakeflow; solo-DE recommendation (cross-domain → ai-engineering)
 
 ### Source summaries
 - [[data-engineering/sources/dbt-kimball-project|dbt Kimball reference project]] — source · draft · reference dbt Kimball SCD2 project (BigQuery/DuckDB)

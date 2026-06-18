@@ -755,3 +755,17 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - new `gmail_client.py reap-labels` removes matched label(s) + INBOX after corpus_ingested;
   wired into scheduled_run after the ingest phase. Starred flow unchanged.
 - spec: docs/superpowers/specs/2026-06-18-gmail-label-collection-design.md
+
+## [2026-06-18 14:35] query | data-engineering agents landscape (build-time vs consume-time)
+- operation: file-back (synthesis authored from a /query gap; user interactively reviewed + approved)
+- question: Survey OSS AI agents/frameworks for data engineering (Datus-agent, Vanna, WrenAI, Dataherald, dbt Agent Skills/MCP, Databricks Genie/Lakeflow); make build-time vs consume-time (text-to-SQL) central; recommend for a solo DE building a portfolio lakehouse
+- new page: corpus/data-engineering/data-engineering-agents-landscape.md (synthesis)
+- gap web sources queued (channel web, via_query; drain on next Branch-A ingest): WrenAI (Canner/WrenAI), Vanna (vanna-ai/vanna), Dataherald (Dataherald/dataherald), Datus-agent (Datus-ai/Datus-agent), dbt MCP (dbt-labs/dbt-mcp), Databricks Genie (docs.databricks.com). First four were already queued (claudesidian); dbt-mcp + genie fetched this session.
+- corpus pages cited: ai-impact-on-data-engineering, claude-code-for-data-engineering, databricks (+ wikilinks to pipeline-layers, semantic-layer, data-quality, dbt, medallion-architecture, mcp, agent-skills, claude-md-conventions, claude-code)
+- index + DE hub README updated; counts 183->184 pages, 440->446 sources
+- origin: claudesidian vault query (provenance). Recommendation: build with Claude Code + CLAUDE.md + Skills + DQ-as-hooks; optionally one OSS text-to-SQL (WrenAI/Vanna) as a demo layer on finished marts.
+
+## [2026-06-18 14:55] ingest | Gmail-label lifecycle demo — "The 7 deadly sins of prompting" (Ruben Hassid)
+- source: raw/email/email-2025-08-24-sins.md (channel email, label Prompting), ingested into ai-engineering/prompt-engineering.md (7 sins + R-E-X framework)
+- FIRST live end-to-end of the gmail-label feature on a real email: marked gmail_corpus_labels:[Prompting] → reap-labels gated (nothing-to-reap before ingest) → ingested+stamped → reap-labels removed the Prompting label + archived the email in Gmail (verified: labelIds Prompting-gone). 0 errors.
+- lint: clean
