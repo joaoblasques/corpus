@@ -91,3 +91,56 @@ def test_parse_message_full():
     assert info["subject"] == "Weekly digest"
     assert info["date_received"] == "2026-06-09"
     assert info["body"] == "The newsletter body."
+
+
+class _Labels:
+    def __init__(self, labels): self._labels = labels
+    def list(self, **k): return self
+    def execute(self): return {"labels": self._labels}
+
+
+class _Messages:
+    def __init__(self, by_label, full):
+        self._by_label, self._full = by_label, full
+    def list(self, userId=None, labelIds=None, maxResults=None):
+        self._cur = self._by_label.get(labelIds[0], [])
+        return self
+    def list_next(self, req, resp): return None
+    def get(self, userId=None, id=None, format=None):
+        self._gid = id
+        return self
+    def execute(self):
+        if hasattr(self, "_gid"):
+            g = self._full[self._gid]; del self._gid; return g
+        return {"messages": self._cur}
+
+
+class _Svc:
+    def __init__(self, labels=None, by_label=None, full=None):
+        self._labels = labels or []
+        self._by_label = by_label or {}
+        self._full = full or {}
+    def users(self): return self
+    def labels(self): return _Labels(self._labels)
+    def messages(self): return _Messages(self._by_label, self._full)
+
+
+def test_resolve_label_ids_maps_and_reports_missing():
+    svc = _Svc(labels=[{"name": "MLOps", "id": "L1"}, {"name": "Ml", "id": "L2"}])
+    name_to_id, missing = gc.resolve_label_ids(svc, ["MLOps", "Ml", "Ghost"])
+    assert name_to_id == {"MLOps": "L1", "Ml": "L2"}
+    assert missing == ["Ghost"]
+
+
+def test_matched_corpus_labels_intersects():
+    name_to_id = {"MLOps": "L1", "Ml": "L2", "Prompting": "L3"}
+    assert gc.matched_corpus_labels(["L2", "L9", "L1"], name_to_id) == ["Ml", "MLOps"] \
+        or gc.matched_corpus_labels(["L2", "L9", "L1"], name_to_id) == ["MLOps", "Ml"]
+
+
+def test_list_labeled_messages_dedups_across_labels():
+    by_label = {"L1": [{"id": "m1"}, {"id": "m2"}], "L2": [{"id": "m2"}, {"id": "m3"}]}
+    full = {k: {"id": k, "labelIds": []} for k in ("m1", "m2", "m3")}
+    svc = _Svc(by_label=by_label, full=full)
+    out = gc.list_labeled_messages(svc, ["L1", "L2"])
+    assert sorted(m["id"] for m in out) == ["m1", "m2", "m3"]   # m2 deduped

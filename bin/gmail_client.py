@@ -186,6 +186,51 @@ def list_starred_messages(service, max_results: int | None = None) -> list[dict]
     return out
 
 
+# Topic labels collected into the corpus (exact Gmail names). Edit to add/remove
+# labels; documented in corpus/_config.md.
+CORPUS_LABELS = [
+    "Data Engineering", "Data Engineering/databricks", "Data Engineering/dbt",
+    "Data Engineering/spark", "Ml", "ML Engineering", "MLOps",
+    "Productivity", "Prompting",
+]
+
+
+def resolve_label_ids(service, names=None):
+    """Map configured label names → Gmail label ids. Returns (name_to_id, missing)."""
+    names = names if names is not None else CORPUS_LABELS
+    resp = service.users().labels().list(userId="me").execute()
+    by_name = {l["name"]: l["id"] for l in resp.get("labels", [])}
+    name_to_id = {n: by_name[n] for n in names if n in by_name}
+    missing = [n for n in names if n not in by_name]
+    return name_to_id, missing
+
+
+def matched_corpus_labels(message_label_ids, name_to_id) -> list:
+    """Corpus label NAMES whose id is present on the message (pure)."""
+    id_to_name = {v: k for k, v in name_to_id.items()}
+    return [id_to_name[i] for i in message_label_ids if i in id_to_name]
+
+
+def list_labeled_messages(service, label_ids, max_results=None) -> list:
+    """Full messages across the given label ids, deduped by message id."""
+    seen, out = set(), []
+    for lid in label_ids:
+        req = service.users().messages().list(userId="me", labelIds=[lid], maxResults=100)
+        while req is not None:
+            resp = req.execute()
+            for m in resp.get("messages", []):
+                mid = m["id"]
+                if mid in seen:
+                    continue
+                seen.add(mid)
+                full = service.users().messages().get(userId="me", id=mid, format="full").execute()
+                out.append(full)
+                if max_results and len(out) >= max_results:
+                    return out
+            req = service.users().messages().list_next(req, resp)
+    return out
+
+
 def archive_message(service, message_id: str) -> dict:
     """De-star and archive: remove the STARRED and INBOX labels."""
     return service.users().messages().modify(
