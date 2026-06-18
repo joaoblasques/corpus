@@ -103,3 +103,18 @@ def already_collected(sha: str, dirs=None) -> bool:
         if fm_field(text, "content_sha") == sha:
             return True
     return False
+
+
+def extract(abs_path: str) -> dict:
+    """Extract a PDF to markdown + metadata. Seam over pymupdf4llm/fitz (stubbable)."""
+    import pymupdf4llm
+    import fitz
+    markdown = pymupdf4llm.to_markdown(abs_path) or ""
+    doc = fitz.open(abs_path)
+    meta = doc.metadata or {}
+    pages = doc.page_count
+    doc.close()
+    title = (meta.get("title") or "").strip() or Path(abs_path).stem
+    author = (meta.get("author") or "").strip()
+    return {"markdown": markdown, "title": title, "author": author,
+            "pages": pages, "words": len(markdown.split())}
