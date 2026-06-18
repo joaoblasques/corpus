@@ -345,3 +345,45 @@ def test_labeled_reapable_gates_on_frontmatter_not_body(tmp_path):
         "---\ngmail_message_id: m9\ngmail_corpus_labels:\n  - MLOps\n---\n"
         "body that quotes corpus_ingested: true somewhere\n", encoding="utf-8")
     assert ce.labeled_reapable(dirs=[d]) == []
+
+
+def test_mark_corpus_labels_adds_and_is_idempotent(tmp_path):
+    d = tmp_path / "raw"; d.mkdir()
+    (d / "email-x.md").write_text(
+        "---\nchannel: email\ngmail_message_id: m1\nfrom: a\n---\nbody\n", encoding="utf-8")
+    assert ce.mark_corpus_labels("m1", ["MLOps", "Ml"], dirs=[d]) is True
+    t = (d / "email-x.md").read_text()
+    assert "gmail_corpus_labels:\n  - MLOps\n  - Ml" in t
+    assert "from: a" in t                                   # other fields intact
+    assert ce.mark_corpus_labels("m1", ["MLOps", "Ml"], dirs=[d]) is False  # idempotent
+
+
+def test_mark_corpus_labels_merges_with_existing(tmp_path):
+    d = tmp_path / "raw"; d.mkdir()
+    (d / "email-x.md").write_text(
+        "---\ngmail_message_id: m1\ngmail_corpus_labels:\n  - MLOps\nfrom: a\n---\nbody\n", encoding="utf-8")
+    assert ce.mark_corpus_labels("m1", ["MLOps", "Ml"], dirs=[d]) is True
+    assert "gmail_corpus_labels:\n  - MLOps\n  - Ml" in (d / "email-x.md").read_text()
+
+
+def test_clear_corpus_labels_removes_block(tmp_path):
+    d = tmp_path / "raw"; d.mkdir()
+    (d / "email-x.md").write_text(
+        "---\ngmail_message_id: m1\ngmail_corpus_labels:\n  - MLOps\n  - Ml\nfrom: a\n---\nbody\n", encoding="utf-8")
+    assert ce.clear_corpus_labels("m1", dirs=[d]) is True
+    t = (d / "email-x.md").read_text()
+    assert "gmail_corpus_labels" not in t and "from: a" in t and "gmail_message_id: m1" in t
+    assert ce.clear_corpus_labels("m1", dirs=[d]) is False   # already gone
+
+
+def test_mark_reapable_clear_lifecycle(tmp_path):
+    """The two fixes together: an already-collected+ingested email gets marked (so it's
+    reapable), then cleared after reap (so it's never re-selected)."""
+    d = tmp_path / "raw"; d.mkdir()
+    (d / "email-x.md").write_text(
+        "---\ngmail_message_id: m1\nfrom: a\ncorpus_ingested: true\n---\nbody\n", encoding="utf-8")
+    assert ce.labeled_reapable(dirs=[d]) == []               # no marker yet
+    ce.mark_corpus_labels("m1", ["MLOps"], dirs=[d])
+    assert ce.labeled_reapable(dirs=[d]) == [{"gmail_message_id": "m1", "gmail_corpus_labels": ["MLOps"]}]
+    ce.clear_corpus_labels("m1", dirs=[d])
+    assert ce.labeled_reapable(dirs=[d]) == []               # reaped → no longer selected

@@ -350,6 +350,7 @@ def cmd_reap_labels(args) -> int:
             service.users().messages().modify(
                 userId="me", id=it["gmail_message_id"],
                 body={"removeLabelIds": ids + ["INBOX"]}).execute()
+            ce.clear_corpus_labels(it["gmail_message_id"])   # un-mark: reap exactly once
             relabeled += 1
         except Exception:  # noqa: BLE001 — one bad message must not abort the batch
             errors += 1
@@ -408,7 +409,7 @@ def cmd_run(args) -> int:
     # --- Labeled pass: collect configured corpus labels. NO archive here — the
     # un-label/archive is deferred to `reap-labels`, gated on corpus_ingested. ---
     name_to_id, missing_labels = resolve_label_ids(service)
-    labeled_written = labeled_dup = labeled_failed = 0
+    labeled_written = labeled_dup = labeled_failed = labeled_marked = 0
     for full in list_labeled_messages(service, list(name_to_id.values()), args.max):
         info = parse_message(full)
         labels = matched_corpus_labels(full.get("labelIds", []), name_to_id)
@@ -427,6 +428,10 @@ def cmd_run(args) -> int:
             paths.append(res["path"])
         elif status == "duplicate":
             labeled_dup += 1
+            # Backlog: an email collected earlier (e.g. as starred) lacks the marker;
+            # add it to the existing source so it still flows through the label lifecycle.
+            if labels and ce.mark_corpus_labels(info["message_id"], labels):
+                labeled_marked += 1
         else:
             labeled_failed += 1
             continue
@@ -440,7 +445,7 @@ def cmd_run(args) -> int:
         "found": found, "written": written, "duplicate": dup,
         "failed": failed, "archived": archived,
         "labeled_written": labeled_written, "labeled_duplicate": labeled_dup,
-        "labeled_failed": labeled_failed, "missing_labels": missing_labels,
+        "labeled_failed": labeled_failed, "labeled_marked": labeled_marked, "missing_labels": missing_labels,
         "links_captured": links_captured, "links_skipped": links_skipped,
         "dry_run": bool(args.dry_run), "paths": paths,
     }, indent=2))

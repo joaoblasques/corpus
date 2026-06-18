@@ -769,3 +769,13 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - source: raw/email/email-2025-08-24-sins.md (channel email, label Prompting), ingested into ai-engineering/prompt-engineering.md (7 sins + R-E-X framework)
 - FIRST live end-to-end of the gmail-label feature on a real email: marked gmail_corpus_labels:[Prompting] → reap-labels gated (nothing-to-reap before ingest) → ingested+stamped → reap-labels removed the Prompting label + archived the email in Gmail (verified: labelIds Prompting-gone). 0 errors.
 - lint: clean
+
+## [2026-06-18 15:05] query | file-back: The Portfolio Project That Lands a DE Role
+- operation: /query file-back (synthesis authored on explicit user approval)
+- origin: claudesidian (delegated from the Obsidian vault; user interactively reviewed + approved the file-back per step 7)
+- question: what makes a data-engineering portfolio project genuinely impressive to hiring managers in 2026, for a self-taught DE switcher building ONE end-to-end Databricks+AWS showcase (DE roles only)
+- coverage: COVERED by existing corpus — answered from 10 pages, no web gap, nothing queued, no gap log
+- new pages: [corpus/data-engineering/portfolio-project-that-lands-a-de-role.md (synthesis)]
+- pages drawn on: data-engineer-role, data-engineering-best-practices, de-portfolio-projects, medallion-architecture, data-quality, idempotent-pipelines, cicd-for-data-infrastructure, databricks, sources/aws-duckdb-etl-fargate, ai-business/technical-career
+- index/hub: _index.md (+1 page → 185; recent-additions entry) ; data-engineering/README.md (synthesis added, updated→2026-06-18)
+- notes: surfaces the honest tension that Databricks is the corpus's own "overkill" case for a solo sub-500GB project, framing the Databricks+AWS choice as a deliberate learning/signal decision with day-one cost guardrails

@@ -205,3 +205,45 @@ def test_reap_labels_dry_run_calls_no_modify(monkeypatch):
     rc = gc.cmd_reap_labels(gc._args(["reap-labels", "--dry-run"]))
     assert rc == 0
     assert calls == []   # dry-run never mutates Gmail
+
+
+def test_cmd_run_labeled_dup_marks_existing_source(monkeypatch):
+    """Backlog fix: a labeled email that's a duplicate gets its existing source marked."""
+    marked = []
+    monkeypatch.setattr(gc, "get_service", lambda: object())
+    monkeypatch.setattr(gc, "list_starred_messages", lambda svc, mx=None: [])
+    monkeypatch.setattr(gc, "resolve_label_ids", lambda svc, names=None: ({"MLOps": "L1"}, []))
+    monkeypatch.setattr(gc, "list_labeled_messages",
+                        lambda svc, ids, mx=None: [{"id": "m1", "labelIds": ["L1"]}])
+    monkeypatch.setattr(gc, "parse_message", lambda full: {
+        "message_id": "m1", "from": "a", "subject": "S", "date_received": "2026-06-18", "body": "b"})
+    monkeypatch.setattr(gc.ce, "write_collected", lambda meta, body: {"status": "duplicate"})
+    monkeypatch.setattr(gc.ce, "mark_corpus_labels",
+                        lambda mid, labels, dirs=None: marked.append((mid, labels)) or True)
+    monkeypatch.setattr(gc, "enrich_email", lambda *a, **k: {"captured": 0, "skipped": 0})
+    rc = gc.cmd_run(gc._args(["run"]))
+    assert rc == 0
+    assert marked == [("m1", ["MLOps"])]
+
+
+def test_cmd_reap_labels_clears_marker_after_modify(monkeypatch):
+    """Un-mark fix: after a successful un-label, the source's marker is cleared."""
+    monkeypatch.setattr(gc.ce, "labeled_reapable",
+                        lambda: [{"gmail_message_id": "m1", "gmail_corpus_labels": ["MLOps"]}])
+    cleared = []
+    monkeypatch.setattr(gc.ce, "clear_corpus_labels", lambda mid, dirs=None: cleared.append(mid))
+    calls = []
+    monkeypatch.setattr(gc, "get_service", lambda: _ModSvc([{"name": "MLOps", "id": "L1"}], calls))
+    rc = gc.cmd_reap_labels(gc._args(["reap-labels"]))
+    assert rc == 0
+    assert calls and cleared == ["m1"]   # modified AND un-marked
+
+
+def test_cmd_reap_labels_dry_run_does_not_clear(monkeypatch):
+    monkeypatch.setattr(gc.ce, "labeled_reapable",
+                        lambda: [{"gmail_message_id": "m1", "gmail_corpus_labels": ["MLOps"]}])
+    cleared = []
+    monkeypatch.setattr(gc.ce, "clear_corpus_labels", lambda mid, dirs=None: cleared.append(mid))
+    monkeypatch.setattr(gc, "get_service", lambda: _ModSvc([{"name": "MLOps", "id": "L1"}], []))
+    gc.cmd_reap_labels(gc._args(["reap-labels", "--dry-run"]))
+    assert cleared == []   # dry-run mutates nothing

@@ -209,6 +209,71 @@ def labeled_reapable(dirs: list[Path] | None = None) -> list[dict]:
     return out
 
 
+def _find_source(message_id: str, dirs: list[Path] | None = None):
+    """Locate the raw source whose frontmatter has this gmail_message_id. Returns
+    (path, text) or (None, None)."""
+    needle = f"gmail_message_id: {message_id}"
+    for d in (dirs if dirs is not None else DEDUP_DIRS):
+        p = Path(d)
+        if not p.exists():
+            continue
+        for md in p.glob("*.md"):
+            try:
+                text = md.read_text(encoding="utf-8", errors="replace")
+            except (OSError, UnicodeDecodeError):
+                continue
+            if needle in text:
+                return md, text
+    return None, None
+
+
+def mark_corpus_labels(message_id: str, labels: list[str], dirs: list[Path] | None = None) -> bool:
+    """Add/merge `gmail_corpus_labels` into an already-collected source's frontmatter
+    (so an email collected earlier — e.g. as starred — still flows through the label
+    lifecycle). Returns True iff the file changed."""
+    md, t = _find_source(message_id, dirs)
+    if md is None or not t.startswith("---"):
+        return False
+    end = t.find("\n---\n", 3)
+    if end == -1:
+        return False
+    fm, rest = t[3:end], t[end:]
+    m = re.search(r"^gmail_corpus_labels:\s*\n((?:\s*-\s*.+\n?)+)", fm, re.M)
+    existing = ([re.sub(r"^\s*-\s*", "", ln).strip() for ln in m.group(1).splitlines() if ln.strip()]
+                if m else [])
+    merged = existing + [l for l in labels if l not in existing]
+    if merged == existing:
+        return False
+    body = "\n".join(f"  - {l}" for l in merged)
+    if m:
+        block = "gmail_corpus_labels:\n" + body + ("\n" if m.group(0).endswith("\n") else "")
+        fm_new = fm[:m.start()] + block + fm[m.end():]
+    else:
+        fm_new = re.sub(r"(^gmail_message_id:.*$)",
+                        lambda mm: mm.group(1) + "\ngmail_corpus_labels:\n" + body,
+                        fm, count=1, flags=re.M)
+    md.write_text("---" + fm_new + rest, encoding="utf-8")
+    return True
+
+
+def clear_corpus_labels(message_id: str, dirs: list[Path] | None = None) -> bool:
+    """Remove the `gmail_corpus_labels` block from a source after its email has been
+    reaped (un-labeled/archived), so it is never re-selected. Returns True iff removed."""
+    md, t = _find_source(message_id, dirs)
+    if md is None or not t.startswith("---"):
+        return False
+    end = t.find("\n---\n", 3)
+    if end == -1:
+        return False
+    fm, rest = t[3:end], t[end:]
+    m = re.search(r"^gmail_corpus_labels:\s*\n(?:\s*-\s*.+\n?)+", fm, re.M)
+    if not m:
+        return False
+    fm_new = fm[:m.start()] + fm[m.end():]
+    md.write_text("---" + fm_new + rest, encoding="utf-8")
+    return True
+
+
 def yaml_scalar(value: str) -> str:
     value = (value or "").replace("\n", " ").replace("\t", " ").strip()
     needs_quote = (
