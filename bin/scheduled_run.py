@@ -361,6 +361,24 @@ def move_processed_inbox(
     return {"moved": moved, "by_channel": by_channel, "skipped": skipped}
 
 
+def run_email_relabel(*, _subprocess_run=None) -> dict:
+    """Post-ingest: invoke `gmail_client.py reap-labels` to un-label + archive
+    corpus-labeled emails now in the corpus. Gated on corpus_ingested inside the
+    subcommand. Failure is recorded, never raised."""
+    _run = _subprocess_run if _subprocess_run is not None else subprocess.run
+    try:
+        proc = _run([sys.executable, str(BIN / "gmail_client.py"), "reap-labels"],
+                    capture_output=True, text=True)
+        if proc.returncode != 0:
+            return {"status": "failed", "error": proc.stderr.strip() or f"exit {proc.returncode}"}
+        try:
+            return json.loads(proc.stdout)
+        except (json.JSONDecodeError, AttributeError):
+            return {"status": "ok"}
+    except Exception as exc:  # noqa: BLE001
+        return {"status": "failed", "error": str(exc)}
+
+
 # ---------------------------------------------------------------------------
 # Ingest
 # ---------------------------------------------------------------------------
@@ -810,6 +828,13 @@ def main(argv=None) -> int:
                 except Exception as exc:  # noqa: BLE001
                     tallies["inbox_move"] = {"moved": 0, "by_channel": {}, "skipped": 0,
                                              "error": str(exc)}
+
+                # Post-ingest: un-label + archive corpus-labeled emails now in the
+                # corpus (gated on corpus_ingested). Failure must NOT abort the run.
+                try:
+                    tallies["email_relabel"] = run_email_relabel()
+                except Exception as exc:  # noqa: BLE001
+                    tallies["email_relabel"] = {"status": "failed", "error": str(exc)}
 
                 # Post-ingest integrity backstop: deterministically lint the corpus
                 # the unattended agent just wrote to, and record any broken

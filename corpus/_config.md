@@ -57,6 +57,16 @@ Rules:
 
 **Email collection**: starred Gmail messages are captured by the `/collect-email` skill into `raw/_inbox/` (channel `email`), then routed to `raw/email/` by the normal Branch A ingest flow. The skill writes a `gmail_message_id` frontmatter field used for dedup; it is not part of the §2 source-stamp spec.
 
+**Label collection (corpus labels):** alongside starred mail, the `/collect-email`
+run also collects messages under these Gmail labels (exact names; edit the
+`CORPUS_LABELS` list in `bin/gmail_client.py`):
+`Data Engineering`, `Data Engineering/databricks`, `Data Engineering/dbt`,
+`Data Engineering/spark`, `Ml`, `ML Engineering`, `MLOps`, `Productivity`, `Prompting`.
+Labeled emails record a `gmail_corpus_labels` frontmatter field and are NOT archived on
+collection. After they are ingested (`corpus_ingested: true`), `bin/gmail_client.py
+reap-labels` removes the matched corpus label(s) + `INBOX` (archive) — run post-ingest by
+the scheduled job. The starred flow is unchanged (de-star + archive on collection).
+
 **Query intake (`via_query`)**: the `/query` operation (§8.2) tops up thin coverage by fetching web sources to answer a gap. Each fetched source is auto-queued into `raw/_inbox/` (channel `web`, or `youtube` for video URLs) carrying a `via_query` frontmatter field (the originating question) for provenance, deduped by `source_url`. These drain into the corpus on the next normal Branch-A ingest. `via_query` is collector provenance, not part of the §2 source-stamp spec.
 
 ---

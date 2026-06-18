@@ -186,6 +186,51 @@ def list_starred_messages(service, max_results: int | None = None) -> list[dict]
     return out
 
 
+# Topic labels collected into the corpus (exact Gmail names). Edit to add/remove
+# labels; documented in corpus/_config.md.
+CORPUS_LABELS = [
+    "Data Engineering", "Data Engineering/databricks", "Data Engineering/dbt",
+    "Data Engineering/spark", "Ml", "ML Engineering", "MLOps",
+    "Productivity", "Prompting",
+]
+
+
+def resolve_label_ids(service, names=None):
+    """Map configured label names → Gmail label ids. Returns (name_to_id, missing)."""
+    names = names if names is not None else CORPUS_LABELS
+    resp = service.users().labels().list(userId="me").execute()
+    by_name = {l["name"]: l["id"] for l in resp.get("labels", [])}
+    name_to_id = {n: by_name[n] for n in names if n in by_name}
+    missing = [n for n in names if n not in by_name]
+    return name_to_id, missing
+
+
+def matched_corpus_labels(message_label_ids, name_to_id) -> list:
+    """Corpus label NAMES whose id is present on the message (pure)."""
+    id_to_name = {v: k for k, v in name_to_id.items()}
+    return [id_to_name[i] for i in message_label_ids if i in id_to_name]
+
+
+def list_labeled_messages(service, label_ids, max_results=None) -> list:
+    """Full messages across the given label ids, deduped by message id."""
+    seen, out = set(), []
+    for lid in label_ids:
+        req = service.users().messages().list(userId="me", labelIds=[lid], maxResults=100)
+        while req is not None:
+            resp = req.execute()
+            for m in resp.get("messages", []):
+                mid = m["id"]
+                if mid in seen:
+                    continue
+                seen.add(mid)
+                full = service.users().messages().get(userId="me", id=mid, format="full").execute()
+                out.append(full)
+                if max_results and len(out) >= max_results:
+                    return out
+            req = service.users().messages().list_next(req, resp)
+    return out
+
+
 def archive_message(service, message_id: str) -> dict:
     """De-star and archive: remove the STARRED and INBOX labels."""
     return service.users().messages().modify(
@@ -283,6 +328,36 @@ def _url_seen(resolved: str) -> bool:
     return False
 
 
+def cmd_reap_labels(args) -> int:
+    """Post-ingest: for each corpus-labeled email already in the corpus, remove the
+    matched corpus label(s) + INBOX (archive). Gated on corpus_ingested; idempotent."""
+    items = ce.labeled_reapable()
+    if not items:
+        print(json.dumps({"relabeled": 0, "archived": 0,
+                          "dry_run": bool(args.dry_run), "note": "nothing-to-reap"}))
+        return 0
+    service = get_service()
+    name_to_id, _ = resolve_label_ids(service)
+    relabeled = errors = 0
+    for it in items:
+        ids = [name_to_id[n] for n in it["gmail_corpus_labels"] if n in name_to_id]
+        if not ids:
+            continue
+        if args.dry_run:
+            relabeled += 1
+            continue
+        try:
+            service.users().messages().modify(
+                userId="me", id=it["gmail_message_id"],
+                body={"removeLabelIds": ids + ["INBOX"]}).execute()
+            relabeled += 1
+        except Exception:  # noqa: BLE001 — one bad message must not abort the batch
+            errors += 1
+    print(json.dumps({"relabeled": relabeled, "archived": relabeled,
+                      "dry_run": bool(args.dry_run), "errors": errors}))
+    return 0
+
+
 def cmd_run(args) -> int:
     service = get_service()
     collected_at = args.collected_at or datetime.date.today().isoformat()
@@ -330,16 +405,49 @@ def cmd_run(args) -> int:
                              collected_at, args.max_links)
             links_captured += e["captured"]
             links_skipped += e["skipped"]
+    # --- Labeled pass: collect configured corpus labels. NO archive here — the
+    # un-label/archive is deferred to `reap-labels`, gated on corpus_ingested. ---
+    name_to_id, missing_labels = resolve_label_ids(service)
+    labeled_written = labeled_dup = labeled_failed = 0
+    for full in list_labeled_messages(service, list(name_to_id.values()), args.max):
+        info = parse_message(full)
+        labels = matched_corpus_labels(full.get("labelIds", []), name_to_id)
+        try:
+            res = ce.write_collected(
+                {"gmail_message_id": info["message_id"], "from": info["from"],
+                 "subject": info["subject"], "date_received": info["date_received"],
+                 "collected_at": collected_at, "gmail_corpus_labels": labels},
+                info["body"])
+        except Exception:
+            labeled_failed += 1
+            continue
+        status = res.get("status")
+        if status == "written":
+            labeled_written += 1
+            paths.append(res["path"])
+        elif status == "duplicate":
+            labeled_dup += 1
+        else:
+            labeled_failed += 1
+            continue
+        if not args.no_links and status == "written":
+            e = enrich_email(res["path"], info["message_id"], info["body"],
+                             collected_at, args.max_links)
+            links_captured += e["captured"]
+            links_skipped += e["skipped"]
+
     print(json.dumps({
         "found": found, "written": written, "duplicate": dup,
         "failed": failed, "archived": archived,
+        "labeled_written": labeled_written, "labeled_duplicate": labeled_dup,
+        "labeled_failed": labeled_failed, "missing_labels": missing_labels,
         "links_captured": links_captured, "links_skipped": links_skipped,
         "dry_run": bool(args.dry_run), "paths": paths,
     }, indent=2))
     return 0
 
 
-def main(argv=None) -> int:
+def _build_parser():
     p = argparse.ArgumentParser(description="Owned-credential Gmail transport for collect-email.")
     sub = p.add_subparsers(dest="cmd", required=True)
 
@@ -361,7 +469,21 @@ def main(argv=None) -> int:
     pr.add_argument("--max-links", type=int, default=10, help="Max links fetched per email.")
     pr.set_defaults(func=cmd_run)
 
-    args = p.parse_args(argv)
+    prl = sub.add_parser("reap-labels",
+                         help="Post-ingest: un-label + archive corpus-labeled emails.")
+    prl.add_argument("--dry-run", action="store_true", help="Report only; no Gmail mutation.")
+    prl.set_defaults(func=cmd_reap_labels)
+
+    return p
+
+
+def _args(argv=None):
+    """Parse argv via the shared parser; used in tests to build an args namespace."""
+    return _build_parser().parse_args(argv)
+
+
+def main(argv=None) -> int:
+    args = _args(argv)
     return args.func(args)
 
 

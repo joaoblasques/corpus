@@ -744,3 +744,14 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   (low-text guard at 50 words), content_sha dedup, move-to-_processed gated on corpus_ingested
 - wired into scheduled_run collection phase; .gitignore raw/pdf/*
 - spec: docs/superpowers/specs/2026-06-18-pdf-collector-design.md
+
+## [2026-06-18 00:00] query (origin: claudesidian) | Open-source AI agents/frameworks for data engineering (like Datus-agent) for a Databricks+AWS MBTA OTP lakehouse: text-to-SQL, agentic modeling, dbt/Spark copilots, DQ/orchestration agents — maturity, license, solo-DE fit, and agents-vs-Claude-Code
+- gap: Corpus covers the agentic-DE *patterns* well (claude-code-for-data-engineering, agentic-data-modeling, progressive-disclosure-analytics-agents, Grab multi-agent DW) but names none of the specific OSS text-to-SQL agent products with maturity/license: Datus-agent, Vanna, WrenAI, Dataherald. Fetched 4 repos; GitHub star counts not captured in rendered README.
+- queued: raw/_inbox/github-datus-ai-datus-agent-the-future-of-data-engineering-a.md, raw/_inbox/github-vanna-ai-vanna-chat-with-your-sql-database-accurate-t.md, raw/_inbox/github-canner-wrenai-give-ai-agents-the-context-to-query-bus.md, raw/_inbox/github-dataherald-dataherald-interact-with-your-sql-database.md
+
+## [2026-06-18 14:19] config | Gmail label collection + post-ingest un-label/archive
+- /collect-email now also collects 9 corpus labels (CORPUS_LABELS in bin/gmail_client.py);
+  labeled emails carry gmail_corpus_labels and are NOT archived on collect
+- new `gmail_client.py reap-labels` removes matched label(s) + INBOX after corpus_ingested;
+  wired into scheduled_run after the ingest phase. Starred flow unchanged.
+- spec: docs/superpowers/specs/2026-06-18-gmail-label-collection-design.md
