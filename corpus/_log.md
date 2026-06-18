@@ -726,3 +726,14 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - low-value pasted bits (DE cheatsheet already covered, ChatGPT LinkedIn prompts, command list) NOT ingested
 - 00_Inbox/Clippings/articles to process.md then emptied per user request (recoverable from vault git history)
 - lint: clean
+
+## [2026-06-18T08:09] config | scheduled run
+- collectors:
+  - gmail: 1 collected · status=ok
+  - obsidian: 0 collected · status=ok
+  - youtube: 20 collected · status=ok
+  - links_refetch: 0 refetched · status=ok
+- ingest:
+  - ingest: 0 ingested · 6 deferred · status=ok
+- lint:
+  - 0 broken wikilinks · 0 broken citations · 0 orphans · 6 stubs
