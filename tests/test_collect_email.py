@@ -292,3 +292,33 @@ def test_add_links_frontmatter_quotes_special_url(tmp_path):
     data = yaml.safe_load(frontmatter)
     assert data["links"][0]["url"] == url
     assert data["links"][0]["file"] == url
+
+
+def test_build_document_emits_corpus_labels():
+    doc = ce.build_document(
+        {"gmail_message_id": "abc", "from": "a@b.c", "subject": "S",
+         "date_received": "2026-06-18", "collected_at": "2026-06-18",
+         "gmail_corpus_labels": ["Data Engineering", "MLOps"]},
+        "body")
+    assert "gmail_corpus_labels:\n  - Data Engineering\n  - MLOps" in doc
+
+
+def test_build_document_omits_corpus_labels_when_absent():
+    doc = ce.build_document(
+        {"gmail_message_id": "abc", "from": "a@b.c", "subject": "S",
+         "date_received": "2026-06-18", "collected_at": "2026-06-18"}, "body")
+    assert "gmail_corpus_labels" not in doc
+
+
+def test_labeled_reapable_selects_ingested_labeled(tmp_path):
+    d = tmp_path / "raw"; d.mkdir()
+    (d / "email-ingested.md").write_text(
+        "---\nchannel: email\ngmail_message_id: m1\n"
+        "gmail_corpus_labels:\n  - MLOps\n  - Ml\ncorpus_ingested: true\n---\nbody",
+        encoding="utf-8")
+    (d / "email-not-ingested.md").write_text(  # has labels but not ingested
+        "---\ngmail_message_id: m2\ngmail_corpus_labels:\n  - MLOps\n---\nx", encoding="utf-8")
+    (d / "email-starred.md").write_text(  # ingested but no corpus labels (starred)
+        "---\ngmail_message_id: m3\ncorpus_ingested: true\n---\nx", encoding="utf-8")
+    out = ce.labeled_reapable(dirs=[d])
+    assert out == [{"gmail_message_id": "m1", "gmail_corpus_labels": ["MLOps", "Ml"]}]
