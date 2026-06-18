@@ -1505,6 +1505,22 @@ class TestMoveProcessedInbox:
         assert result["by_channel"].get("youtube") == 1
         assert result["skipped"] == 0
 
+    def test_stamped_pdf_moved_to_raw_pdf(self, tmp_path):
+        """A stamped channel=pdf file is moved to raw/pdf/."""
+        inbox = tmp_path / "_inbox"
+        inbox.mkdir()
+        raw = tmp_path / "raw"
+        src = inbox / "pdf-doc.md"
+        self._write_stamped(src, "pdf")
+
+        result = scheduled_run.move_processed_inbox(inbox_dir=inbox, raw_dir=raw)
+
+        assert not src.exists()
+        assert (raw / "pdf" / "pdf-doc.md").exists()
+        assert result["moved"] == 1
+        assert result["by_channel"].get("pdf") == 1
+        assert result["skipped"] == 0
+
     def test_stamped_email_moved_to_raw_email(self, tmp_path):
         """A stamped channel=email file is moved to raw/email/."""
         inbox = tmp_path / "_inbox"

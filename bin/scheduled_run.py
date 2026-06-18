@@ -278,6 +278,7 @@ _CHANNEL_DIR: dict[str, str] = {
     "web": "web",
     "matter": "matter",
     "notes": "notes",
+    "pdf": "pdf",
 }
 
 
