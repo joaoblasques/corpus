@@ -146,7 +146,7 @@ def _under_vault(vault: Path, rel: str) -> bool:
 def cmd_reap(args) -> int:
     vault = Path(args.vault) if args.vault else co.VAULT_ROOT
     r = co.reapable()
-    t = {"notes_removed": 0, "urls_struck": 0}
+    t = {"notes_removed": 0, "urls_struck": 0, "not_removed": []}
     for rel in r["vault_notes"]:
         if not _under_vault(vault, rel):
             continue
@@ -156,14 +156,21 @@ def cmd_reap(args) -> int:
             t["notes_removed"] += 1
         elif remove_vault_note(vault, rel):   # count only actual deletions
             t["notes_removed"] += 1
+        else:
+            # Exists + under vault but `git rm` refused: a tracked note with
+            # uncommitted local edits. Surface it instead of silently leaving it —
+            # forcing the delete would destroy the user's unsaved edit.
+            t["not_removed"].append(rel)
     for list_rel, url in r["url_strikes"]:
         if not args.dry_run:
             _strike_url(vault, list_rel, url)
         t["urls_struck"] += 1
-    print(json.dumps({**t, "dry_run": bool(args.dry_run),
-                      "note": "tracked notes staged via git rm (review & commit in vault); "
-                              "untracked notes deleted from disk (recoverable via raw/notes/ + corpus)"},
-                     indent=2))
+    note = ("tracked notes staged via git rm (review & commit in vault); "
+            "untracked notes deleted from disk (recoverable via raw/notes/ + corpus)")
+    if t["not_removed"]:
+        note += (f"; {len(t['not_removed'])} note(s) NOT removed — git-tracked with "
+                 "uncommitted vault edits (commit or discard the edit, then re-reap)")
+    print(json.dumps({**t, "dry_run": bool(args.dry_run), "note": note}, indent=2))
     return 0
 
 

@@ -40,6 +40,30 @@ def test_remove_vault_note_missing_returns_false(tmp_path):
     assert oc.remove_vault_note(vault, "nope.md") is False
 
 
+def test_reap_reports_tracked_note_with_uncommitted_edits(tmp_path, monkeypatch, capsys):
+    """A git-tracked vault note with an uncommitted local edit can't be `git rm`'d
+    (git refuses without -f). The reaper must SURFACE it in `not_removed` rather than
+    silently leaving it, and must never destroy the uncommitted edit."""
+    import json
+    vault = tmp_path / "vault"; vault.mkdir(); _git_init(vault)
+    note = vault / "n.md"; note.write_text("orig\n", encoding="utf-8")
+    subprocess.run(["git", "-C", str(vault), "add", "n.md"], check=True)
+    subprocess.run(["git", "-C", str(vault), "commit", "-qm", "x"], check=True)
+    note.write_text("EDITED uncommitted\n", encoding="utf-8")  # local edit → git rm refuses
+    raw = tmp_path / "raw"; raw.mkdir()
+    (raw / "notes-n.md").write_text(
+        "---\ncorpus_ingested: true\nvault_origin: n.md\n---\nx", encoding="utf-8")
+    monkeypatch.setattr(oc.co, "DEDUP_DIRS", [raw])
+
+    rc = oc.cmd_reap(oc._args(["reap", "--vault", str(vault)]))
+
+    assert rc == 0
+    data = json.loads(capsys.readouterr().out)
+    assert data["notes_removed"] == 0
+    assert "n.md" in data["not_removed"]                  # surfaced, not silently dropped
+    assert note.read_text() == "EDITED uncommitted\n"     # uncommitted edit preserved
+
+
 def test_collect_copies_note_and_fetches_url(tmp_path, monkeypatch):
     vault = tmp_path / "vault"
     (vault / "03_Resources/Books").mkdir(parents=True)
