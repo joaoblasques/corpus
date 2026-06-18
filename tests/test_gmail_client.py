@@ -144,3 +144,28 @@ def test_list_labeled_messages_dedups_across_labels():
     svc = _Svc(by_label=by_label, full=full)
     out = gc.list_labeled_messages(svc, ["L1", "L2"])
     assert sorted(m["id"] for m in out) == ["m1", "m2", "m3"]   # m2 deduped
+
+
+def test_cmd_run_labeled_pass_records_labels_and_does_not_archive(tmp_path, monkeypatch):
+    import types
+    written = []
+    monkeypatch.setattr(gc, "get_service", lambda: object())
+    monkeypatch.setattr(gc, "list_starred_messages", lambda svc, mx=None: [])  # no starred
+    monkeypatch.setattr(gc, "resolve_label_ids", lambda svc, names=None: ({"MLOps": "L1"}, []))
+    monkeypatch.setattr(gc, "list_labeled_messages",
+                        lambda svc, ids, mx=None: [{"id": "m1", "labelIds": ["L1"]}])
+    monkeypatch.setattr(gc, "parse_message", lambda full: {
+        "message_id": "m1", "from": "a@b.c", "subject": "S", "date_received": "2026-06-18", "body": "b"})
+    archived = []
+    monkeypatch.setattr(gc, "archive_message", lambda svc, mid: archived.append(mid))
+    monkeypatch.setattr(gc, "enrich_email", lambda *a, **k: {"captured": 0, "skipped": 0})
+
+    def fake_write(meta, body):
+        written.append(meta)
+        return {"status": "written", "path": str(tmp_path / "x.md")}
+    monkeypatch.setattr(gc.ce, "write_collected", fake_write)
+
+    rc = gc.cmd_run(gc._args(["run"]))
+    assert rc == 0
+    assert written and written[0]["gmail_corpus_labels"] == ["MLOps"]   # labels recorded
+    assert archived == []                                              # NOT archived

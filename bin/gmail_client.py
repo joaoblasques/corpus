@@ -375,9 +375,42 @@ def cmd_run(args) -> int:
                              collected_at, args.max_links)
             links_captured += e["captured"]
             links_skipped += e["skipped"]
+    # --- Labeled pass: collect configured corpus labels. NO archive here — the
+    # un-label/archive is deferred to `reap-labels`, gated on corpus_ingested. ---
+    name_to_id, missing_labels = resolve_label_ids(service)
+    labeled_written = labeled_dup = labeled_failed = 0
+    for full in list_labeled_messages(service, list(name_to_id.values()), args.max):
+        info = parse_message(full)
+        labels = matched_corpus_labels(full.get("labelIds", []), name_to_id)
+        try:
+            res = ce.write_collected(
+                {"gmail_message_id": info["message_id"], "from": info["from"],
+                 "subject": info["subject"], "date_received": info["date_received"],
+                 "collected_at": collected_at, "gmail_corpus_labels": labels},
+                info["body"])
+        except Exception:
+            labeled_failed += 1
+            continue
+        status = res.get("status")
+        if status == "written":
+            labeled_written += 1
+            paths.append(res["path"])
+        elif status == "duplicate":
+            labeled_dup += 1
+        else:
+            labeled_failed += 1
+            continue
+        if not args.no_links and status == "written":
+            e = enrich_email(res["path"], info["message_id"], info["body"],
+                             collected_at, args.max_links)
+            links_captured += e["captured"]
+            links_skipped += e["skipped"]
+
     print(json.dumps({
         "found": found, "written": written, "duplicate": dup,
         "failed": failed, "archived": archived,
+        "labeled_written": labeled_written, "labeled_duplicate": labeled_dup,
+        "labeled_failed": labeled_failed, "missing_labels": missing_labels,
         "links_captured": links_captured, "links_skipped": links_skipped,
         "dry_run": bool(args.dry_run), "paths": paths,
     }, indent=2))
@@ -408,6 +441,28 @@ def main(argv=None) -> int:
 
     args = p.parse_args(argv)
     return args.func(args)
+
+
+def _args(argv):
+    """Parse argv via main's parser; used in tests to build an args namespace."""
+    import argparse as _ap
+    p = _ap.ArgumentParser()
+    sub = p.add_subparsers(dest="cmd", required=True)
+    sub.add_parser("auth").set_defaults(func=cmd_auth)
+    pl = sub.add_parser("list-starred")
+    pl.add_argument("--max", type=int, default=None)
+    pl.set_defaults(func=cmd_list_starred)
+    pa = sub.add_parser("archive")
+    pa.add_argument("--message-id", required=True)
+    pa.set_defaults(func=cmd_archive)
+    pr = sub.add_parser("run")
+    pr.add_argument("--max", type=int, default=None)
+    pr.add_argument("--collected-at", default=None)
+    pr.add_argument("--dry-run", action="store_true")
+    pr.add_argument("--no-links", action="store_true")
+    pr.add_argument("--max-links", type=int, default=10)
+    pr.set_defaults(func=cmd_run)
+    return p.parse_args(argv)
 
 
 if __name__ == "__main__":
