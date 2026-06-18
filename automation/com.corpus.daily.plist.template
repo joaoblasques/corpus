@@ -8,15 +8,19 @@
 
     <!--
         StartCalendarInterval fires the job at the specified wall-clock time each day.
-        ASLEEP / CATCH-UP SEMANTICS: if the Mac is asleep at 08:00, launchd fires the
+        ASLEEP / CATCH-UP SEMANTICS: if the Mac is asleep at 02:00, launchd fires the
         job exactly once on the next wake — satisfying R3 (one catch-up run, not a
         flood).  Missed intervals do NOT accumulate; only the most recent missed fire
         is replayed.
+
+        Runs at 02:00 (chosen so the collect+ingest pipeline doesn't interfere with
+        daytime work). The pipeline is one job: collect (gmail starred, obsidian,
+        pdf) → ingest → commit, so the end of collect feeds straight into ingest.
     -->
     <key>StartCalendarInterval</key>
     <dict>
         <key>Hour</key>
-        <integer>8</integer>
+        <integer>2</integer>
         <key>Minute</key>
         <integer>0</integer>
     </dict>
