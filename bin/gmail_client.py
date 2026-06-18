@@ -417,7 +417,7 @@ def cmd_run(args) -> int:
     return 0
 
 
-def main(argv=None) -> int:
+def _build_parser():
     p = argparse.ArgumentParser(description="Owned-credential Gmail transport for collect-email.")
     sub = p.add_subparsers(dest="cmd", required=True)
 
@@ -439,30 +439,17 @@ def main(argv=None) -> int:
     pr.add_argument("--max-links", type=int, default=10, help="Max links fetched per email.")
     pr.set_defaults(func=cmd_run)
 
-    args = p.parse_args(argv)
+    return p
+
+
+def _args(argv=None):
+    """Parse argv via the shared parser; used in tests to build an args namespace."""
+    return _build_parser().parse_args(argv)
+
+
+def main(argv=None) -> int:
+    args = _args(argv)
     return args.func(args)
-
-
-def _args(argv):
-    """Parse argv via main's parser; used in tests to build an args namespace."""
-    import argparse as _ap
-    p = _ap.ArgumentParser()
-    sub = p.add_subparsers(dest="cmd", required=True)
-    sub.add_parser("auth").set_defaults(func=cmd_auth)
-    pl = sub.add_parser("list-starred")
-    pl.add_argument("--max", type=int, default=None)
-    pl.set_defaults(func=cmd_list_starred)
-    pa = sub.add_parser("archive")
-    pa.add_argument("--message-id", required=True)
-    pa.set_defaults(func=cmd_archive)
-    pr = sub.add_parser("run")
-    pr.add_argument("--max", type=int, default=None)
-    pr.add_argument("--collected-at", default=None)
-    pr.add_argument("--dry-run", action="store_true")
-    pr.add_argument("--no-links", action="store_true")
-    pr.add_argument("--max-links", type=int, default=10)
-    pr.set_defaults(func=cmd_run)
-    return p.parse_args(argv)
 
 
 if __name__ == "__main__":
