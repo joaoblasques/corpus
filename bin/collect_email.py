@@ -178,9 +178,9 @@ def already_collected(message_id: str, search_dirs: list[Path] | None = None) ->
 
 
 def labeled_reapable(dirs: list[Path] | None = None) -> list[dict]:
-    """Raw email sources ready for post-ingest un-label/archive: those with BOTH
-    `corpus_ingested: true` and a non-empty `gmail_corpus_labels` block. Pure I/O —
-    no network. Each item: {gmail_message_id, gmail_corpus_labels}."""
+    """Raw email sources ready for post-ingest un-label/archive: those whose
+    FRONTMATTER has BOTH `corpus_ingested: true` and a non-empty `gmail_corpus_labels`
+    block. Pure I/O — no network. Each item: {gmail_message_id, gmail_corpus_labels}."""
     out: list[dict] = []
     for d in (dirs if dirs is not None else DEDUP_DIRS):
         p = Path(d)
@@ -191,10 +191,12 @@ def labeled_reapable(dirs: list[Path] | None = None) -> list[dict]:
                 text = md.read_text(encoding="utf-8", errors="replace")
             except (OSError, UnicodeDecodeError):
                 continue
-            if "corpus_ingested: true" not in text or not text.startswith("---"):
+            if not text.startswith("---"):
                 continue
-            end = text.find("\n---", 3)
-            fm = text[3:end] if end != -1 else text
+            end = text.find("\n---\n", 3)
+            fm = text[3:end] if end != -1 else ""
+            if "corpus_ingested: true" not in fm:   # gate on FRONTMATTER, not the body
+                continue
             mid = re.search(r"^gmail_message_id:\s*(.+)$", fm, re.M)
             lm = re.search(r"^gmail_corpus_labels:\s*\n((?:\s*-\s*.+\n?)+)", fm, re.M)
             if not mid or not lm:

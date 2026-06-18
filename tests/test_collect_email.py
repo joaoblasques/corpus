@@ -322,3 +322,12 @@ def test_labeled_reapable_selects_ingested_labeled(tmp_path):
         "---\ngmail_message_id: m3\ncorpus_ingested: true\n---\nx", encoding="utf-8")
     out = ce.labeled_reapable(dirs=[d])
     assert out == [{"gmail_message_id": "m1", "gmail_corpus_labels": ["MLOps", "Ml"]}]
+
+
+def test_labeled_reapable_gates_on_frontmatter_not_body(tmp_path):
+    d = tmp_path / "raw"; d.mkdir()
+    # labeled, NOT ingested, but the BODY quotes the stamp string -> must be EXCLUDED
+    (d / "email-x.md").write_text(
+        "---\ngmail_message_id: m9\ngmail_corpus_labels:\n  - MLOps\n---\n"
+        "body that quotes corpus_ingested: true somewhere\n", encoding="utf-8")
+    assert ce.labeled_reapable(dirs=[d]) == []
