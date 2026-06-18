@@ -834,10 +834,22 @@ def main(argv=None) -> int:
 
                 # U5 SEAM: commit/push — scoped to corpus/ only (R10), now also
                 # carrying the report block. Push failures are recorded, not raised.
-                try:
-                    tallies["commit"] = commit_and_push(at=at, tallies=tallies)
-                except Exception as exc:  # noqa: BLE001
-                    tallies["commit"] = {"status": "push-failed", "push_error": str(exc)}
+                #
+                # TOCTOU guard: the start-of-run branch check (main-only) can pass,
+                # then a human checks out a feature branch during the multi-minute
+                # collect+ingest. Re-verify we're still on main right before the
+                # commit so the auto-commit never lands on a feature branch.
+                branch_now = current_branch()
+                if (os.environ.get("SCHEDULED_RUN_ALLOW_ANY_BRANCH")
+                        or branch_now == MAIN_BRANCH):
+                    try:
+                        tallies["commit"] = commit_and_push(at=at, tallies=tallies)
+                    except Exception as exc:  # noqa: BLE001
+                        tallies["commit"] = {"status": "push-failed", "push_error": str(exc)}
+                else:
+                    tallies["commit"] = {"status": "skipped",
+                                         "reason": "branch_changed_during_run",
+                                         "branch": branch_now}
         finally:
             release_lock(lock_path)
 

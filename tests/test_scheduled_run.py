@@ -896,6 +896,34 @@ class TestBranchGuard:
         assert rc == 0
         collectors.assert_called_once()   # override bypasses the guard
 
+    def test_commit_skipped_when_branch_changes_mid_run(self, tmp_path, monkeypatch):
+        """TOCTOU: the start guard passes on main, but a feature branch is checked
+        out during the (multi-minute) collect+ingest. The auto-commit must NOT land
+        on that feature branch — re-check the branch right before committing."""
+        monkeypatch.delenv("SCHEDULED_RUN_ALLOW_ANY_BRANCH", raising=False)
+        seen = {"n": 0}
+
+        def branch(*a, **k):
+            seen["n"] += 1
+            return "main" if seen["n"] == 1 else "feature/x"  # main at start, feature at commit
+
+        commit = MagicMock(return_value={"status": "committed", "sha": "x"})
+        empty_lint = {"broken_wikilinks": [], "broken_citations": [], "orphans": [], "stubs": []}
+        with (
+            patch.object(scheduled_run, "current_branch", branch),
+            patch.object(scheduled_run, "run_collectors",
+                         MagicMock(return_value={"gmail": {"status": "ok", "collected": 0}})),
+            patch.object(scheduled_run, "run_ingest",
+                         MagicMock(return_value={"status": "ok", "ingested": 0, "deferred": 0})),
+            patch.object(scheduled_run, "move_processed_inbox", MagicMock(return_value={})),
+            patch.object(scheduled_run, "commit_and_push", commit),
+            patch.object(scheduled_run.corpus_lint, "lint", lambda *a, **k: empty_lint),
+            patch.object(scheduled_run, "LOG_PATH", tmp_path / "_log.md"),
+        ):
+            rc = scheduled_run.main(["--lock-path", str(tmp_path / ".l"), "run"])
+        assert rc == 0
+        commit.assert_not_called()   # never committed on the feature branch
+
 
 class TestRunIntegration:
     """Test the full run() happy path and failure scenarios with all externals mocked."""
