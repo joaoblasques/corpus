@@ -53,6 +53,7 @@ Rules:
 | `notes` | `raw/notes/` (no PARA home) | `03_Resources/Articles/`, `03_Resources/Study Notes/` |
 | `inbox` | `raw/_inbox/` (transient) | — |
 | `email` | `raw/email/` (collected via `/collect-email`) | — |
+| `pdf` | `raw/pdf/` (collected via `/collect-pdf` from a Drive folder) | — |
 
 **Email collection**: starred Gmail messages are captured by the `/collect-email` skill into `raw/_inbox/` (channel `email`), then routed to `raw/email/` by the normal Branch A ingest flow. The skill writes a `gmail_message_id` frontmatter field used for dedup; it is not part of the §2 source-stamp spec.
 
@@ -74,6 +75,21 @@ Rules:
   `via_vault_note`, deduped, asset/auth-walled links skipped, capped at 10/note), in addition
   to dedicated URL-list files (`articles to process.md`, `TO SCRAPE.md`).
 - The `/collect-obsidian` skill copies these into `raw/_inbox/` (channel `notes`; URL-list links → `web`), and — after `corpus_ingested` — removes the vault original (git-recoverable, not auto-committed). The authoritative include/exclude policy lives in `bin/collect_obsidian.py`.
+
+---
+
+## PDF collection (collect-pdf)
+
+- `pdf_watch_dir`: `~/Library/CloudStorage/GoogleDrive-tilakapash@gmail.com/My Drive/CorpusInbox/PDFs`
+  (Google Drive for Desktop sync path; drop PDFs here from any device).
+- `pdf_processed_subdir`: `_processed` (ingested originals are moved here; created on first move).
+- Channel `pdf` → `raw/pdf/`. The `/collect-pdf` driver (`bin/pdf_client.py collect`) extracts
+  each PDF's text to markdown via `pymupdf4llm` and writes it to `raw/_inbox/` (channel `pdf`);
+  the normal Branch-A ingest then routes + moves it to `raw/pdf/`.
+- Text-only: a PDF yielding < 50 words is treated as a scan and left in place (reported, not
+  ingested). After ingest, `bin/pdf_client.py file` moves the original PDF to `_processed/`,
+  gated on `corpus_ingested`. Dedup is by `content_sha`.
+- The authoritative watch-dir/policy defaults live in `bin/collect_pdf.py`.
 
 ---
 
