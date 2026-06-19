@@ -1001,3 +1001,7 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 
 ## [2026-06-19 15:30] config | _config.md scheduled-automation section rewritten (was stale)
 - the "Scheduled automation" section was outdated (said --max 20, 08:00, single job). Rewrote to document BOTH LaunchAgents accurately: com.corpus.daily (02:00, collect+ingest+reap, --max 50 --timeout 5400, Sonnet ingest) and com.corpus.weekly-synthesis (Tue 13:00, probe-guarded leftover-Opus synthesis). Added subscription-not-API note, CORPUS_JOB install, and tuning levers.
+
+## [2026-06-19 15:00] query (origin: claudesidian) | Three advanced agentic patterns and how they interrelate: continuous-iteration agent loops (Ralph), dynamic/adaptive workflows vs static DAGs, and dreaming/sleep-time compute
+- gap: Pillars 1-2 fully covered (ralph-loop, long-running-agents, agentic-workflow). Pillar 3 partial: 'dreaming' covered only as the Claude Managed Agents product feature; the general sleep-time compute paradigm (anticipatory pre-computation during idle, raw->learned context, cost amortization across related queries, Letta MemGPT 2.0 dual primary+sleep-time agent design) was the gap.
+- queued: raw/_inbox/sleep-time-compute-beyond-inference-scaling-at-test-time.md, raw/_inbox/sleep-time-compute.md
