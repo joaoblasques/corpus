@@ -9,12 +9,17 @@ sources:
   - path: raw/web/data-pipeline-design-patterns-1-data-flow-patterns-start-dat.md
     channel: web
     ingested_at: 2026-06-19
+  - path: raw/email/email-2025-08-05-fix-your-data-pipeline-from-the-start.md
+    channel: email
+    ingested_at: 2026-06-19
 aliases:
   - data ingestion patterns
   - data loading patterns
   - stream ingestion
   - batch ingestion
   - data ingestion
+  - landing zone
+  - raw zone
 tags:
   - corpus/data-engineering
   - concept
@@ -34,6 +39,10 @@ updated: 2026-06-19
 | **Batch extract from source systems** | Periodically pull rows from operational databases / APIs / files on a schedule | Periodic loads from OLTP systems, SaaS APIs, third-party dumps [^src1] |
 
 These two patterns are the entry point of the pipeline — the **bronze/raw** stage of the [[data-engineering/medallion-architecture|medallion architecture]] — and feed everything downstream (cleansing, modeling, serving).
+
+## The landing zone (where raw data first lands)
+
+Whichever entry pattern is used, the data first arrives in a **landing zone** — "where all raw source data first lands in your database (or wherever you store your raw data)" [^src3]. It's easy to brush past it in favor of the more interesting modeling/automation work, but neglecting it sets you up for bigger long-term issues; deliberately designing the landing zone benefits the *entire* architecture [^src3]. This is the same stage as the **Raw DB / Bronze / Landing** row of the [[data-engineering/pipeline-layers|pipeline layers]] mapping — append-only, schema-drift-tolerated, never modified after ingestion — which is exactly what makes downstream transformations safely re-runnable from raw. (Treat as a routing-and-design pointer; the source is a short video teaser, so the specific example designs are not captured here.)
 
 ## Relation to other pages
 
@@ -56,3 +65,4 @@ Which entry pattern is even *viable* is governed by **source/sink properties** �
 
 [^src1]: [How Companies Ingest Data: 2 Key Patterns](../../raw/email/email-2026-05-06-how-companies-ingest-data-2-key-patterns.md)
 [^src2]: [Data Pipeline Design Patterns - #1 Data Flow Patterns](../../raw/web/data-pipeline-design-patterns-1-data-flow-patterns-start-dat.md)
+[^src3]: [Fix Your Data Pipeline...From The Start — the "Landing Zone" (Kahan Data Solutions)](../../raw/email/email-2025-08-05-fix-your-data-pipeline-from-the-start.md)

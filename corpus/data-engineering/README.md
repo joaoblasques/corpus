@@ -51,6 +51,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [[data-engineering/postgresql-views|PostgreSQL Views]] — concept · draft · views as rewrite rules (pg_rewrite macros); inlining, SELECT * trap, security_invoker, schema-evolution pain
 - [[data-engineering/graph-databases|Graph Databases (RDF vs LPG)]] — concept · draft · RDF/OWL vs labeled property graph decision framework; index-free adjacency, RDF 1.2, GQL, workload-dependent benchmarks
 - [[data-engineering/sql-intermediate-results|Storing Intermediate Results in SQL]] — concept · draft · CTE vs subquery vs view vs temp table vs materialized view; materialized-or-not decision framework; staging tables
+- [[data-engineering/requirements-gathering|Requirements Gathering]] — concept · draft · the 5-step process (identify end-users, define via a question set, validate, deliver iteratively, gate changes) + output-led engineering
 
 ### Entities
 - [[data-engineering/postgres|PostgreSQL]] — entity · draft · relational database as full-stack data platform via extensions (pgvector, pgcron, tsvector, etc.)

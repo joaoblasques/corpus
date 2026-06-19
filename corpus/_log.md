@@ -863,3 +863,27 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - 4 PT personal/transactional (IRS e-Fatura, Lovevery skip, 2× Saude ministry), 2 youtube (1 title-only, 1 music-theory with no matching domain), 6 course-promo/video-teaser emails (Jupyter-AI, vibe-code Replit, Skool check-in, self-serve-data-platform, SCD-101, 3-strategy-killers) whose substance is behind unfetched low-utility links
 - resolution: stamped corpus_ingested: true + corpus_pages: [] and filed to raw/email|raw/youtube
 - NOTE: self-serve-data-platform + 3-strategy-killers are genuine DE topics whose articles/videos were not fetched (low-utility score) — re-fetchable on request
+
+## [2026-06-19 11:30] ingest | ingest-auto safe pass — 20 DE/ML newsletter emails (19 ingested, 1 deferred)
+- batch: explicit 20-file list (StartDataEngineering DE-101 #1–#8 + SDE one-offs, Kahan Data Solutions video teasers, Joe Reis "Practical Data Modeling", Vivek Bharti "Practical ML Series")
+- channel: email → raw/email/ (moved 19 stamped files from raw/_inbox/; deferred file left in inbox)
+- domains: data-engineering (17 sources), mlops (2 sources)
+- new pages (2): corpus/data-engineering/requirements-gathering.md (SDE requirements article + Kahan output-led engineering), corpus/mlops/model-serving.md (Flask real-time API + Airflow batch inference)
+- substantive enrichments (6): data-modeling-meaning (theory-vs-reality org dimension — Joe Reis), data-quality (code-tests-vs-DQ-checks timing distinction), pipeline-layers (application-DB vs analytics-DB / OLTP-vs-OLAP), data-ingestion-patterns (landing/raw zone), sql-intermediate-results (CTEs as a dbt tell), de-portfolio-projects (free Airflow+Postgres+Metabase template + Docker dev ergonomics)
+- corroborating source-bumps (8; content already in corpus via web companions, last_confirmed refreshed): data-orchestration (#8), pipeline-coding-patterns (#7), sql-window-functions (#2), data-engineer-role (#1), dbt (#5), python-for-data-engineering (#3), data-engineering-best-practices (#4), data-engineering-interview (5-steps)
+- hubs updated: data-engineering/README (+requirements-gathering), mlops/README (+model-serving)
+- deferred (1): email-2025-07-30-free-data-engineering-101-e-book.md → UNCERTAIN (promotional book download/TOC spanning whole DE-101 curriculum; not a single-topic article)
+- pages: 2 created, 16 updated (14 content pages + 2 hubs)
+- notes: ingest-auto run; 19 processed, 1 deferred. Most DE-101 emails are earlier (Jul/Aug 2025) deliveries of articles already ingested via fetched raw/web companions — ingested as corroborating provenance + last_confirmed, not fabricated content.
+
+## [2026-06-19T10:49] config | scheduled run
+- collectors:
+  - gmail: 0 collected · status=ok
+  - obsidian: 0 collected · status=ok
+  - pdf: 0 collected · status=ok
+  - youtube: 17 collected · status=ok
+  - links_refetch: 0 refetched · status=ok
+- ingest:
+  - ingest: 19 ingested · 1 deferred · status=ok
+- lint:
+  - 0 broken wikilinks · 0 broken citations · 0 orphans · 6 stubs

@@ -51,6 +51,9 @@ sources:
   - path: raw/web/web-why-dbt-is-terrible-for-databricks-switch-to-native-pipeline.md
     channel: web
     ingested_at: 2026-06-17
+  - path: raw/email/email-2025-07-29-de-101-5-dbt-project.md
+    channel: email
+    ingested_at: 2026-06-19
 aliases:
   - dbt
   - data build tool
@@ -58,7 +61,8 @@ tags:
   - corpus/data-engineering
   - entity
 created: 2026-05-21
-updated: 2026-06-17
+updated: 2026-06-19
+last_confirmed: 2026-06-19
 ---
 
 # dbt (data build tool)

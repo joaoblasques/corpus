@@ -1,6 +1,6 @@
 # Corpus Index
 
-> Last updated: 2026-06-19 09:45 | Total pages: 188 | Total sources: 459
+> Last updated: 2026-06-19 11:30 | Total pages: 190 | Total sources: 478
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
@@ -131,6 +131,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[data-engineering/data-flow-patterns|Data Flow Patterns]] — concept · draft · source/sink replayability+overwritability; extraction/behavioral/structural pipeline-design patterns
 - [[data-engineering/scaling-data-pipelines|Scaling Data Pipelines]] — concept · draft · vertical vs horizontal (independent processes / distributed); strategy-selection questions
 - [[data-engineering/data-engineering-interview|Data Engineering Interview & Job Search]] — concept · draft · the 10 interview skills (SQL-first) + the 5-step job search
+- [[data-engineering/requirements-gathering|Requirements Gathering]] — concept · draft · 5-step requirements process (identify users, question set, validate, deliver iteratively, gate changes) + output-led engineering
 
 ### software-engineering
 - [[software-engineering/README|Software Engineering]] — hub · draft · foundational CS through deployment infrastructure; design principles, distributed systems, container orchestration
@@ -169,6 +170,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[mlops/linux-commands|Linux Commands]] — concept · draft · the 20% of Linux commands for 80% of work; pipes, grep, permissions, vim
 - [[mlops/python|Python]] — concept · draft · general-purpose Python language reference: data types, annotations, functions, classes, dunders
 - [[mlops/cloud-computing-fundamentals|Cloud Computing Fundamentals]] — concept · draft · scaling, load balancing, serverless, IaaS/PaaS/SaaS, availability/durability, EDA
+- [[mlops/model-serving|Model Serving]] — concept · draft · real-time inference (Flask /predict API) vs batch inference (Airflow DAG); shared preprocessing/pipeline; production hardening
 - [[mlops/aws|AWS]] — entity · draft · largest cloud provider; service map + Cloud Practitioner/Solutions Architect path
 - [[mlops/azure|Azure]] — entity · draft · 2nd cloud provider; service map, resource hierarchy, AZ-900 fundamentals
 - [[mlops/gcp|GCP]] — entity · draft · Compute Engine/GKE/BigQuery; org→folder→project hierarchy
@@ -208,6 +210,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[blockchain/zero-knowledge-proofs|Zero-Knowledge Proofs]] — concept · draft · SNARKs vs STARKs; arithmetization + LDC; tradeoffs
 
 ## Recent additions
+- 2026-06-19: **ingest-auto safe pass (20 candidates, 19 ingested, 1 deferred)** — StartDataEngineering DE-101 newsletter series (#1–#8) + Kahan Data Solutions video teasers + Joe Reis modeling + Vivek Bharti Practical ML series. New: [[data-engineering/requirements-gathering|Requirements Gathering]] (SDE 5-step process + output-led engineering), [[mlops/model-serving|Model Serving]] (Flask real-time API + Airflow batch inference). Substantive enrich: data-modeling-meaning (theory-vs-reality org dimension), data-quality (code-tests-vs-DQ-checks), pipeline-layers (app-DB vs analytics-DB), data-ingestion-patterns (landing zone), sql-intermediate-results (CTEs in dbt), de-portfolio-projects (free template + Docker dev ergonomics). Corroborating source-bumps (already-covered DE-101 articles): data-orchestration, pipeline-coding-patterns, sql-window-functions, data-engineer-role, dbt, python-for-data-engineering, data-engineering-best-practices, data-engineering-interview. Deferred: 1 (free DE-101 e-book promo/TOC).
 - 2026-06-19: **ingest-auto safe pass (12 candidates, 6 ingested, 6 deferred)** — new: [[data-engineering/data-flow-patterns|Data Flow Patterns]], [[data-engineering/scaling-data-pipelines|Scaling Data Pipelines]], [[data-engineering/data-engineering-interview|Data Engineering Interview & Job Search]]. Updated: data-ingestion-patterns, idempotent-pipelines (replayability/overwritability + self-healing), de-portfolio-projects (show-not-tell + dev-workflow toolchain), cicd-for-data-infrastructure (concrete toolchain), mlops/infrastructure-as-code (5 IaC tool types, why-DEs-use-IaC), mlops/terraform (BSL/OpenTofu, modules/providers). Mostly StartDataEngineering DE-101 newsletter + Pipeline-to-Insights IaC. Deferred: 2 course promos, 1 community check-in, 1 unfetched-teaser, 2 video teasers (no transcript).
 - 2026-06-18: [[data-engineering/portfolio-project-that-lands-a-de-role|The Portfolio Project That Lands a DE Role]] (new synthesis — filed back from /query, claudesidian-originated: what makes a Databricks+AWS DE portfolio project impressive; distilled from 10 corpus pages, no web gap)
 - 2026-06-18: [[ai-engineering/prompt-engineering]] (updated, +1 source — "7 deadly sins of prompting" + R-E-X; first live Gmail-LABEL collect→ingest→reap demo: collected under label Prompting, ingested, then un-labeled+archived in Gmail)

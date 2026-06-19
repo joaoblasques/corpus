@@ -6,6 +6,9 @@ sources:
   - path: 03_Resources/Study Notes/SQL - Window Functions Reference.md
     channel: notes
     ingested_at: 2026-05-21
+  - path: raw/email/email-2025-07-20-de101-2-sql-is-crucial-for-data-engineers.md
+    channel: email
+    ingested_at: 2026-06-19
 aliases:
   - window functions
   - SQL window functions
@@ -19,7 +22,8 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-05-21
-updated: 2026-05-21
+updated: 2026-06-19
+last_confirmed: 2026-06-19
 ---
 
 # SQL Window Functions

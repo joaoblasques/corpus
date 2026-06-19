@@ -9,6 +9,9 @@ sources:
   - path: raw/youtube/youtube-7jbcvxmj1bs.md
     channel: youtube
     ingested_at: 2026-06-17
+  - path: raw/email/email-2025-08-06-data-modeling-theory-vs-reality.md
+    channel: email
+    ingested_at: 2026-06-19
 aliases:
   - semantics
   - ontology
@@ -20,7 +23,7 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-15
-updated: 2026-06-15
+updated: 2026-06-19
 ---
 
 # Meaning in Data Modeling: Semantics, Taxonomy, Ontology
@@ -63,8 +66,21 @@ With AI as both consumer and generator of data, semantics is "no longer a second
 
 The book's "shared meaning" abstraction has a concrete operational home in practice. Zach Wilson describes a **master-data layer** built by joining, deduping, and **conforming** production snapshots into one consistent definition — "this is the layer where truth is... where trust is" [^src2]. This is the semantic-agreement problem in physical form: without it, five analysts compute the same metric five subtly-different ways on raw snapshots [^src2]. Capturing shared meaning (this page) and materializing it as conformed master data (operational) are two faces of the same discipline. See [[data-engineering/dimensional-modeling|Dimensional Modeling]] for the OLTP→master-data→OLAP continuum, and [[data-engineering/data-quality|Data Quality]] for conformance enforcement.
 
+## Theory vs reality: the organizational dimension
+
+Capturing meaning is the *theory*; a separate draft chapter from the same book stresses that **most data-modeling initiatives fail on people, not technique** [^src3]. Theory imagines a sterile top-down exercise in an orderly org; reality is "a tough and unpredictable place" where the modeler's job is a mix of *practitioner, sales, and servant* [^src3]. Five recurring reality-checks [^src3]:
+
+- **Ivory-tower modeling.** Instead of gathering clean requirements from eager stakeholders, you reverse-engineer arcane undocumented systems under deadline pressure; business rules are fuzzy, stakeholders contradict each other, requirements shift mid-project, and the data may not match the domain language (a model says "customer" but includes prospects, partners, employees). Approach each situation with an eye on *what can go wrong and when*, not on perfection.
+- **Data is political.** "Every data model is a political artifact" — it reflects who had influence, what got prioritized, and what got ignored. A department may resist a more-accurate customer definition precisely because it makes their legacy metrics look worse. Expect some to support and some to sabotage.
+- **Needs and expectations vary.** No single model fits everyone; the relational model is *not* universally applicable. One model typically feeds many: decision-makers need digestible data, analysts need explorable data, engineers need cost-efficiency and performance, and ML/AI needs clean features. *"You wouldn't hand a CEO a raw ML model output, and you wouldn't give a software engineer a star schema."*
+- **Compromises happen.** A perfect textbook model that takes years loses to delivering value quickly under real time/budget constraints. What matters is value for the situation at hand, not textbook fidelity.
+- **Don't fixate on tools and technology.** The goal is a *shared understanding* of the data; overly technical diagrams distract non-technical people. "Engaging and thoughtful conversations are more critical than diagrams — diagrams are the *result* of those conversations, not the reason to have them."
+
+The takeaway: data modeling demands **situational and social awareness**, not only technical approaches — the same "shared meaning across a group" problem this page frames semantically, viewed through organizational dynamics [^src3]. See [[productivity/working-with-stakeholders|Working with Stakeholders]] and [[data-engineering/requirements-gathering|Requirements Gathering]] for the practitioner-and-sales side.
+
 ## Related
 
+- [[data-engineering/requirements-gathering|Requirements Gathering]] — the practitioner/sales/servant work of pulling requirements out of stakeholders
 - [[data-engineering/semantic-layer|Semantic Layer]] — the operational layer applying these foundations to AI
 - [[data-engineering/dimensional-modeling|Dimensional Modeling]] — master-data layer; consumer-driven modeling
 - [[data-engineering/dimensional-modeling|Dimensional Modeling]] — structural modeling (Kimball)
@@ -76,3 +92,4 @@ The book's "shared meaning" abstraction has a concrete operational home in pract
 
 [^src1]: [Semantics, Ontology, and Taxonomy, and Metadata — Foundations for Meaning in Data Modeling](../../raw/email/email-2025-11-05-semantics-ontology-and-taxonomy-and-metadata-foundations-for.md)
 [^src2]: [Dimensional Data Modeling Day 1 (Zach Wilson / DataExpert)](../../raw/youtube/youtube-7jbcvxmj1bs.md)
+[^src3]: [Data Modeling - Theory vs Reality (Joe Reis, Practical Data Modeling)](../../raw/email/email-2025-08-06-data-modeling-theory-vs-reality.md)

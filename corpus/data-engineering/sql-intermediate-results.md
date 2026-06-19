@@ -6,6 +6,9 @@ sources:
   - path: raw/youtube/youtube-vstjydo88ka.md
     channel: youtube
     ingested_at: 2026-06-17
+  - path: raw/email/email-2025-08-01-sql-vs-dbt-models-the-value-of-ctes.md
+    channel: email
+    ingested_at: 2026-06-19
 aliases:
   - CTE
   - common table expression
@@ -22,7 +25,7 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-17
-updated: 2026-06-17
+updated: 2026-06-19
 ---
 
 # Storing Intermediate Results in SQL (CTEs, Subqueries, Views, Temp Tables, Materialized Views)
@@ -50,6 +53,8 @@ All three "do not store the results — every time they're called the query is e
 - **View** — a *named query* that persists and can be referenced from other queries, sharing transformation logic across pipelines [^src1]. Use a view **only when the logic is genuinely shared** across multiple pipelines or handed to analysts as a curated interface that abstracts complex logic [^src1].
 
 > Verbatim opinion: "subqueries are pretty terrible... generally speaking you want to mostly use CTE" [^src1].
+
+**CTEs in dbt — a tell.** In a [[data-engineering/dbt|dbt]] context, whether (and how) a team uses CTEs is treated as "a key indicator of how a team thinks about and uses dbt" — and of how well they understand the way cloud databases operate [^src2]. The framing matches this page: CTEs are valued *not* for performance (they don't drastically change it) but for letting you structure a model into named steps that improve cleanliness, simplify debugging, and provide functionality analogous to breaking a Python program into functions [^src2].
 
 **View gotcha — dependency locking.** Because views depend on their base tables, dropping or altering a table that a view references is blocked ("it yells at you"), making views harder to move and manage your data around [^src1]. This is the same rigidity covered structurally in [[data-engineering/postgresql-views|PostgreSQL Views]] (columns pinned by attribute number; `DROP`/restructure refused or cascaded).
 
@@ -87,3 +92,4 @@ The big drawback of MVs: they **recompute the entire dataset on every refresh �
 ---
 
 [^src1]: [SQL Views vs Temporary Tables vs CTEs vs Subqueries](../../raw/youtube/youtube-vstjydo88ka.md)
+[^src2]: [SQL vs dbt Models (& the value of CTEs) (Kahan Data Solutions)](../../raw/email/email-2025-08-01-sql-vs-dbt-models-the-value-of-ctes.md)

@@ -6,6 +6,9 @@ sources:
   - path: raw/web/data-pipeline-design-patterns-2-coding-patterns-in-python-st.md
     channel: web
     ingested_at: 2026-06-16
+  - path: raw/email/email-2025-08-04-de-101-7-data-pipeline-coding-patterns.md
+    channel: email
+    ingested_at: 2026-06-19
 aliases:
   - code design patterns for data pipelines
   - data pipeline code patterns
@@ -20,7 +23,8 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-16
-updated: 2026-06-16
+updated: 2026-06-19
+last_confirmed: 2026-06-19
 ---
 
 # Pipeline Coding Patterns (Python)

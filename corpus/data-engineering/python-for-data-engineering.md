@@ -15,6 +15,9 @@ sources:
   - path: raw/web/web-how-to-extract-data-from-apis-for-data-pipelines-using-pytho.md
     channel: web
     ingested_at: 2026-06-17
+  - path: raw/email/email-2025-07-23-de-101-3-python-essentials-for-data-engineers.md
+    channel: email
+    ingested_at: 2026-06-19
 aliases:
   - python for data engineers
   - python essentials
@@ -23,7 +26,8 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-15
-updated: 2026-06-17
+updated: 2026-06-19
+last_confirmed: 2026-06-19
 ---
 
 # Python for Data Engineering

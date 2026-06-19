@@ -15,6 +15,9 @@ sources:
   - path: raw/notes/notes-clippings-how-to-transition-from-data-analyst-to-data-engineer.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/email/email-2025-07-17-de-101-1-what-do-data-engineers-do.md
+    channel: email
+    ingested_at: 2026-06-19
 aliases:
   - valuable data engineer
   - senior data engineer
@@ -28,7 +31,8 @@ tags:
   - corpus/data-engineering
   - synthesis
 created: 2026-06-11
-updated: 2026-06-17
+updated: 2026-06-19
+last_confirmed: 2026-06-19
 ---
 
 # The Data Engineer Role: Value, Impact, and Seniority

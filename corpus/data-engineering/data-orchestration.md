@@ -9,6 +9,9 @@ sources:
   - path: raw/email/email-2025-11-19-do-you-really-need-apache-airflow.md
     channel: email
     ingested_at: 2026-06-11
+  - path: raw/email/email-2025-08-07-de-101-8-orchestrators-and-schedulers.md
+    channel: email
+    ingested_at: 2026-06-19
 aliases:
   - Airflow
   - Apache Airflow
@@ -19,12 +22,13 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-11
-updated: 2026-06-11
+updated: 2026-06-19
+last_confirmed: 2026-06-19
 ---
 
 # Data Orchestration
 
-**TL;DR**: A data pipeline needs three capabilities — **scheduling** (run at a frequency), **orchestration** (run tasks in a defined dependency order, in the right place), and **observability** (logs, metadata, history, re-runs) [^src1]. `cron` covers only the first. An orchestrator like Apache Airflow (or Dagster) bundles all three, which is why teams reach for one as pipeline complexity and team size grow — even though it is overkill for a single simple script [^src1][^src2].
+**TL;DR**: A data pipeline needs three capabilities — **scheduling** (run at a frequency), **orchestration** (run tasks in a defined dependency order, in the right place), and **observability** (logs, metadata, history, re-runs) [^src1][^src3]. `cron` covers only the first. An orchestrator like Apache Airflow (or Dagster) bundles all three, which is why teams reach for one as pipeline complexity and team size grow — even though it is overkill for a single simple script [^src1][^src2].
 
 ## The three concerns
 
@@ -78,3 +82,4 @@ Orchestration is a *different layer* from transformation: an orchestrator schedu
 
 [^src1]: [Why use Apache Airflow (or any orchestrator)?](../../raw/web/why-use-apache-airflow-or-any-orchestrator-start-data-engine.md)
 [^src2]: [Do you really need Apache Airflow?](../../raw/email/email-2025-11-19-do-you-really-need-apache-airflow.md)
+[^src3]: [[DE 101] #8 - Orchestrators and Schedulers (Start Data Engineering)](../../raw/email/email-2025-08-07-de-101-8-orchestrators-and-schedulers.md)

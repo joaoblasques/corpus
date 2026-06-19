@@ -15,6 +15,12 @@ sources:
   - path: raw/web/designing-a-data-project-to-impress-hiring-managers-start-da.md
     channel: web
     ingested_at: 2026-06-19
+  - path: raw/email/email-2025-08-06-set-up-your-next-data-engineering-project-with-this-free-tem.md
+    channel: email
+    ingested_at: 2026-06-19
+  - path: raw/email/email-2025-07-16-setting-up-a-local-dev-environment-using-docker.md
+    channel: email
+    ingested_at: 2026-06-19
 aliases:
   - data engineering projects
   - portfolio projects
@@ -74,7 +80,9 @@ This is the same instinct the [[data-engineering/portfolio-project-that-lands-a-
 
 ### The dev-workflow toolchain these templates standardize on
 
-Every template ships the same "set up data infra with code" workflow so new features deploy quickly [^src3]: **Docker + Docker Compose** for local dev, **[[mlops/terraform|Terraform]]** for IaC, **GitHub Actions** for CI/CD, **pytest** for testing, **isort + black** for formatting, **flake8** for lint, **mypy** for type checks, and a **Makefile** of command aliases [^src3]. CI runs the format/lint/type/test gate on each PR; CD copies merged code to an EC2 Docker host — see [[data-engineering/cicd-for-data-infrastructure|CI/CD for Data Infrastructure]] [^src3].
+Every template ships the same "set up data infra with code" workflow so new features deploy quickly [^src3][^src5]: **Docker + Docker Compose** for local dev, **[[mlops/terraform|Terraform]]** for IaC, **GitHub Actions** for CI/CD, **pytest** for testing, **isort + black** for formatting, **flake8** for lint, **mypy** for type checks, and a **Makefile** of command aliases [^src3]. The free starter template runs an **Airflow + Postgres + Metabase** stack on AWS with **yoyo-migrations** (a lightweight Alembic alternative) for DB changes [^src5]. CI runs the format/lint/type/test gate on each PR; CD copies merged code to an EC2 Docker host — see [[data-engineering/cicd-for-data-infrastructure|CI/CD for Data Infrastructure]] [^src3].
+
+*Why* standardize the local environment with Docker: most data pipelines touch multiple systems, which makes a local dev setup hard; good **developer ergonomics** (reproducible Docker environment + automated formatting/lint/tests) reduce bugs, keep morale high, and increase development velocity [^src6].
 
 ## How to use
 
@@ -94,3 +102,5 @@ Run on Codespaces (fork → "Create codespace" → `make up` → open the expose
 [^src2]: [10 Data Engineering Projects For Your Portfolio! (newsletter)](../../raw/email/email-2025-11-12-10-data-engineering-projects-for-your-portfolio.md)
 [^src3]: [Build Data Engineering Projects with a Free Template](../../raw/web/build-data-engineering-projects-with-free-template-start-dat.md)
 [^src4]: [Designing a Data Project to Impress Hiring Managers](../../raw/web/designing-a-data-project-to-impress-hiring-managers-start-da.md)
+[^src5]: [Set up your next data engineering project with this free template! (Start Data Engineering)](../../raw/email/email-2025-08-06-set-up-your-next-data-engineering-project-with-this-free-tem.md)
+[^src6]: [Setting up a local dev environment using Docker (Start Data Engineering)](../../raw/email/email-2025-07-16-setting-up-a-local-dev-environment-using-docker.md)

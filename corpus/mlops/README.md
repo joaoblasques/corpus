@@ -6,7 +6,7 @@ tags:
   - corpus/mlops
   - hub
 created: 2026-06-09
-updated: 2026-06-09
+updated: 2026-06-19
 provisional: true
 ---
 
@@ -39,6 +39,7 @@ The engineering substrate for building ML and software systems: how the developm
 - [[mlops/python|Python]] — concept · draft · general-purpose Python language reference: data types, type annotations, functions, classes, dunder methods
 - [[mlops/python-built-in-functions|Python Built-in Functions]] — concept · draft · the `builtins` scope catalog: math, type construction, collections, iterables (map/filter/zip/enumerate), I/O, OOP/introspection
 - [[mlops/drift-detection|Drift Detection]] — concept · draft · model-monitoring: reference vs. analysis samples; univariate drift metrics (JS, Wasserstein, Hellinger, L-Infinity, KS, Chi-2) and their tradeoffs
+- [[mlops/model-serving|Model Serving]] — concept · draft · real-time inference (Flask `/predict` API) vs batch inference (Airflow DAG); shared preprocessing + saved pipeline; production hardening
 
 ## Sources ingested
 - [AI Engineering from Scratch — Phase 00 / 01 Dev Environment](../../raw/notes/00-01-dev-environment-kb.md) — first-party course note, 2026-05-25

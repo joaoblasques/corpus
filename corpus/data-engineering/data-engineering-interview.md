@@ -9,6 +9,9 @@ sources:
   - path: raw/web/5-steps-to-land-a-high-paying-data-engineering-job-start-dat.md
     channel: web
     ingested_at: 2026-06-19
+  - path: raw/email/email-2025-07-23-5-steps-to-a-high-paying-de-job.md
+    channel: email
+    ingested_at: 2026-06-19
 aliases:
   - data engineering interview
   - DE interview prep
@@ -21,6 +24,7 @@ tags:
   - concept
 created: 2026-06-19
 updated: 2026-06-19
+last_confirmed: 2026-06-19
 ---
 
 # Data Engineering Interview & Job Search
