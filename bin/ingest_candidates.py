@@ -93,8 +93,25 @@ def is_ingestable(path: Path) -> bool:
     return True
 
 
+_LABELS_RE = re.compile(r"^gmail_corpus_labels:\s*$", re.M)
+
+
+def has_corpus_labels(path: Path) -> bool:
+    """True if the source carries a `gmail_corpus_labels` marker — a label-collected
+    email awaiting the ingest→reap lifecycle. These are prioritized in selection so the
+    bounded nightly ingest drains the labeled backlog instead of starving it (marking a
+    source rewrites its mtime, which would otherwise sink it to the bottom of the
+    oldest-first queue)."""
+    try:
+        return bool(_LABELS_RE.search(path.read_text(encoding="utf-8", errors="ignore")[:4000]))
+    except OSError:
+        return False
+
+
 def select_candidates(inbox_dir=None, limit: int = 20) -> list[Path]:
-    """Return up to `limit` ingestable inbox files, oldest first (by mtime)."""
+    """Return up to `limit` ingestable inbox files. Label-collected sources
+    (`gmail_corpus_labels`) come first so the labeled backlog drains; within each
+    group, oldest first (by mtime)."""
     inbox = Path(inbox_dir) if inbox_dir is not None else INBOX
     if not inbox.exists():
         return []
@@ -103,7 +120,7 @@ def select_candidates(inbox_dir=None, limit: int = 20) -> list[Path]:
         p for p in inbox.glob("*.md")
         if p.name != REVIEW_FILE and p.name not in deferred and is_ingestable(p)
     ]
-    files.sort(key=lambda p: p.stat().st_mtime)
+    files.sort(key=lambda p: (not has_corpus_labels(p), p.stat().st_mtime))
     return files[:limit]
 
 

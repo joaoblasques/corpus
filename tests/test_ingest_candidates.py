@@ -117,3 +117,23 @@ def test_fetched_companions_empty_for_non_pointer(tmp_path):
           '  - {url: "http://x", fetched: true, file: raw/web/article.md}')
     plain = _write(tmp_path, "q.md", frontmatter=fm)
     assert ic.fetched_companions(plain, root=tmp_path) == []
+
+
+def test_select_candidates_prioritizes_labeled(tmp_path):
+    """Label-collected sources sort first even when their mtime is newer (marking
+    rewrites mtime); within groups, oldest first."""
+    import os
+    old_plain = tmp_path / "a-old-plain.md"
+    old_plain.write_text("---\nchannel: email\n---\nbody\n", encoding="utf-8")
+    new_labeled = tmp_path / "b-new-labeled.md"
+    new_labeled.write_text("---\nchannel: email\ngmail_corpus_labels:\n  - MLOps\n---\nbody\n",
+                           encoding="utf-8")
+    older_labeled = tmp_path / "c-older-labeled.md"
+    older_labeled.write_text("---\nchannel: email\ngmail_corpus_labels:\n  - Ml\n---\nbody\n",
+                             encoding="utf-8")
+    os.utime(old_plain, (100, 100))       # oldest mtime, but unlabeled
+    os.utime(older_labeled, (200, 200))   # labeled, older of the two labeled
+    os.utime(new_labeled, (300, 300))     # labeled, newest
+    out = [p.name for p in ic.select_candidates(inbox_dir=tmp_path, limit=10)]
+    assert out[:2] == ["c-older-labeled.md", "b-new-labeled.md"]  # both labeled, oldest-first
+    assert out[2] == "a-old-plain.md"                              # unlabeled last
