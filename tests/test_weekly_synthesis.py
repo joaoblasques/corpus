@@ -65,7 +65,7 @@ def test_run_guarded_dry_run_does_not_invoke_pass(monkeypatch, capsys):
     called = {"synth": False}
     monkeypatch.setattr(ws, "run_synthesis",
                         lambda *a, **k: called.__setitem__("synth", True) or {})
-    args = types.SimpleNamespace(force=False, dry_run=True, since_days=7, timeout=10)
+    args = types.SimpleNamespace(force=False, dry_run=True, since_days=7, timeout=10, max_pages=30)
     rc = ws._run_guarded(args)
     out = json.loads(capsys.readouterr().out)
     assert rc == 0 and out["dry_run"] is True and out["recent_pages"] == 2
@@ -76,3 +76,13 @@ def test_commit_synthesis_nothing_to_commit():
     def run(cmd, **k):
         return _proc(0, "")   # clean tree on `status --porcelain`
     assert ws.commit_synthesis("2026-06-19T13:00", _subprocess_run=run)["status"] == "nothing-to-commit"
+
+
+def test_recent_pages_caps_to_limit_newest_first(tmp_path):
+    c = tmp_path / "corpus"
+    c.mkdir()
+    for i, day in enumerate(["2026-06-15", "2026-06-17", "2026-06-19"]):
+        (c / f"p{i}.md").write_text(f"---\nupdated: {day}\n---\nx", encoding="utf-8")
+    out = ws.recent_pages(since_days=10, limit=2,
+                          _today=datetime.date(2026, 6, 19), corpus_dir=c)
+    assert [p.name for p in out] == ["p2.md", "p1.md"]   # newest two, newest first

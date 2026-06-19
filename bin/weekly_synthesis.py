@@ -64,15 +64,17 @@ def opus_available(*, _subprocess_run=None) -> bool:
     return not data.get("is_error", False)
 
 
-def recent_pages(since_days: int = 7, *, _today=None, corpus_dir=None) -> list[Path]:
-    """Corpus pages whose `updated:` frontmatter is within the last `since_days`
-    (the week's ingests). Skips the catalog files (_index/_log/_config/_domains)."""
+def recent_pages(since_days: int = 7, *, limit=None, _today=None, corpus_dir=None) -> list[Path]:
+    """Corpus pages whose `updated:` frontmatter is within the last `since_days`,
+    MOST-RECENTLY-UPDATED FIRST, capped to `limit` (None = all). Skips the catalog
+    files (_index/_log/_config/_domains). The cap keeps a single Medium pass bounded
+    even on an unusually heavy week (else a 180-page window would overflow context)."""
     cdir = Path(corpus_dir) if corpus_dir is not None else CORPUS
     if not cdir.exists():
         return []
     today = _today if _today is not None else datetime.date.today()
     cutoff = today - datetime.timedelta(days=since_days)
-    out = []
+    dated: list[tuple] = []
     for md in cdir.rglob("*.md"):
         if md.name.startswith("_"):
             continue
@@ -84,11 +86,14 @@ def recent_pages(since_days: int = 7, *, _today=None, corpus_dir=None) -> list[P
         if not m:
             continue
         try:
-            if datetime.date.fromisoformat(m.group(1)) >= cutoff:
-                out.append(md)
+            d = datetime.date.fromisoformat(m.group(1))
         except ValueError:
             continue
-    return sorted(out)
+        if d >= cutoff:
+            dated.append((d.isoformat(), md.name, md))
+    dated.sort(reverse=True)   # newest updated first; name as deterministic tiebreak
+    pages = [t[2] for t in dated]
+    return pages[:limit] if limit else pages
 
 
 def _synthesis_prompt(pages: list[Path]) -> str:
@@ -167,6 +172,9 @@ def main(argv=None) -> int:
     ap.add_argument("--lock-path", default=SYNTH_LOCK, type=Path)
     ap.add_argument("--timeout", type=int, default=2400)
     ap.add_argument("--since-days", type=int, default=7)
+    ap.add_argument("--max-pages", type=int, default=30,
+                    help="Cap pages reviewed per pass (newest-updated first) to keep a "
+                         "Medium pass bounded on heavy weeks.")
     ap.add_argument("--dry-run", action="store_true",
                     help="Probe + select recent pages only; no Opus pass, no commit.")
     ap.add_argument("--force", action="store_true",
@@ -192,7 +200,7 @@ def _run_guarded(args) -> int:
         print(json.dumps({"status": "skipped",
                           "reason": "opus_unavailable_or_rate_limited"}))
         return 0
-    pages = recent_pages(args.since_days)
+    pages = recent_pages(args.since_days, limit=args.max_pages)
     if args.dry_run:
         print(json.dumps({"status": "ok", "dry_run": True, "recent_pages": len(pages)}))
         return 0
