@@ -1,5 +1,6 @@
 import sys
 from pathlib import Path
+import types
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "bin"))
 import custodian as c  # noqa: E402
@@ -74,3 +75,45 @@ def test_verify_gate_ignores_breakage_in_unchanged_pages():
     lint = _fake_lint(broken_cites=[("corpus/other/y.md", "../../raw/web/missing.md")])
     v = c.verify_gate(["corpus/data-engineering/x.md"], _lint=lint)
     assert v.ok is True   # the broken page is not in changed_paths
+
+
+def test_enqueue_review_appends_entry(tmp_path):
+    q = tmp_path / "_review_queue.md"
+    c.enqueue_review("proposal", {"summary": "add dbt routing rule"}, path=q)
+    c.enqueue_review("verify-failed", {"page": "corpus/x.md"}, path=q)
+    text = q.read_text()
+    assert "proposal" in text and "add dbt routing rule" in text and "verify-failed" in text
+
+
+def test_govern_commits_when_ok_and_reversible(monkeypatch):
+    monkeypatch.setattr(c.sr, "_on_main", lambda *a, **k: True)
+    calls = []
+    def run(cmd, **k):
+        calls.append(" ".join(cmd))
+        return types.SimpleNamespace(returncode=0, stdout="", stderr="")
+    out = c.govern(c.Verdict(ok=True), ["corpus/x.md"], reversible=True, _run=run)
+    assert out["action"] == "committed"
+    assert any("commit" in s for s in calls) and any("add" in s for s in calls)
+
+
+def test_govern_reverts_and_queues_on_failure(monkeypatch, tmp_path):
+    monkeypatch.setattr(c.sr, "_on_main", lambda *a, **k: True)
+    calls = []
+    def run(cmd, **k):
+        calls.append(cmd)
+        return types.SimpleNamespace(returncode=0, stdout="", stderr="")
+    queued = []
+    out = c.govern(c.Verdict(ok=False, broken_citations=1, notes=["broken citation: corpus/x.md"]),
+                   ["corpus/x.md"], reversible=True, _run=run,
+                   _queue=lambda kind, detail: queued.append((kind, detail)))
+    assert out["action"] == "reverted+queued"
+    assert ["git", "checkout", "--", "corpus/x.md"] in calls   # reverted exactly the changed path
+    assert not any("commit" in " ".join(cmd) for cmd in calls)  # never committed
+    assert queued and queued[0][0] == "verify-failed"
+
+
+def test_govern_skips_off_main(monkeypatch):
+    monkeypatch.setattr(c.sr, "_on_main", lambda *a, **k: False)
+    out = c.govern(c.Verdict(ok=True), ["corpus/x.md"], reversible=True,
+                   _run=lambda *a, **k: types.SimpleNamespace(returncode=0, stdout="", stderr=""))
+    assert out["action"] == "skipped-not-main"

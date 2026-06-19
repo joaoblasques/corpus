@@ -110,6 +110,12 @@ def current_branch(repo=None, *, _subprocess_run=None) -> str | None:
     return proc.stdout.strip() or None
 
 
+def _on_main(repo=None, *, _subprocess_run=None) -> bool:
+    """Return True if the current branch is main, False otherwise."""
+    branch = current_branch(repo=repo, _subprocess_run=_subprocess_run)
+    return branch == MAIN_BRANCH
+
+
 # ---------------------------------------------------------------------------
 # Collectors
 # ---------------------------------------------------------------------------

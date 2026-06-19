@@ -105,3 +105,35 @@ def verify_gate(changed_paths: list, *, _lint=None) -> Verdict:
             [f"broken wikilink: {_source_of(it)}" for it in links]
     return Verdict(ok=not (cites or links), broken_citations=len(cites),
                    broken_wikilinks=len(links), notes=notes)
+
+
+def enqueue_review(kind: str, detail: dict, *, path=None) -> None:
+    """Append a structured entry to corpus/_review_queue.md (the review tier surface)."""
+    p = Path(path) if path is not None else REVIEW_QUEUE
+    p.parent.mkdir(parents=True, exist_ok=True)
+    if not p.exists():
+        p.write_text("# Custodian Review Queue\n\n> Items needing your decision. Clear as you go.\n",
+                     encoding="utf-8")
+    with p.open("a", encoding="utf-8") as fh:
+        fh.write(f"- [{kind}] {json.dumps(detail, ensure_ascii=False)}\n")
+
+
+def govern(verdict: Verdict, changed_paths: list, *, reversible: bool,
+           _run=None, _queue=None) -> dict:
+    """Tiered governance: pass+reversible ⇒ commit (main-only); fail ⇒ revert the changed
+    paths + queue a note. Never commits a verifier-failing change. Caller routes proposals."""
+    run = _run if _run is not None else subprocess.run
+    queue = _queue if _queue is not None else enqueue_review
+    if not sr._on_main():
+        return {"action": "skipped-not-main"}
+    paths = [str(p) for p in (changed_paths or [])]
+    if verdict.ok and reversible:
+        if paths:
+            run([GIT_BIN, "add"] + paths, cwd=str(ROOT), capture_output=True, text=True)
+        msg = f"chore(custodian): apply verified change ({len(paths)} page(s))"
+        c_ = run([GIT_BIN, "commit", "-m", msg], cwd=str(ROOT), capture_output=True, text=True)
+        return {"action": "committed", "returncode": c_.returncode, "pages": len(paths)}
+    if paths:
+        run([GIT_BIN, "checkout", "--"] + paths, cwd=str(ROOT), capture_output=True, text=True)
+    queue("verify-failed", {"paths": paths, "notes": verdict.notes})
+    return {"action": "reverted+queued", "pages": len(paths)}
