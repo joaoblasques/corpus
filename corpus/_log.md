@@ -989,3 +989,7 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   - ingest: 2 ingested · 0 deferred · status=ok
 - lint:
   - 0 broken wikilinks · 0 broken citations · 0 orphans · 8 stubs
+
+## [2026-06-19 14:40] config | raise nightly ingest throughput to --max 50
+- 2am job (com.corpus.daily) was running `scheduled_run run` at the default --max 6, so collection (gmail/obsidian/youtube/pdf) outpaced ingestion ~3:1 → ~250-source collected-but-not-ingested backlog
+- raised to `--max 50 --timeout 5400` in automation/com.corpus.daily.plist.template; reinstalled via install_schedule.sh (2am schedule unchanged). Drains the backlog in ~1 week, then keeps pace. Opus cost runs at 2am (off-peak).

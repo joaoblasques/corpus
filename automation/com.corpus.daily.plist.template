@@ -46,6 +46,10 @@
         <string>__PYTHON__</string>
         <string>__REPO_ROOT__/bin/scheduled_run.py</string>
         <string>run</string>
+        <string>--max</string>
+        <string>50</string>
+        <string>--timeout</string>
+        <string>5400</string>
     </array>
 
     <!--
