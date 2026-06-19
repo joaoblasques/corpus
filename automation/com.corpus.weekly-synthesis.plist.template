@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+    "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.corpus.weekly-synthesis</string>
+
+    <!--
+        Weekly "leftover-Opus harvester". Fires Tuesday 13:00 local — ~3h before the
+        user's Opus weekly window resets (Tuesday 15:59) — to spend whatever Opus
+        credits are left on a synthesis+lint pass before they expire at reset.
+        A probe inside weekly_synthesis.py skips the run if Opus is already maxed.
+        Weekday: 0/7=Sun, 1=Mon, 2=Tue. Catch-up: one replay on next wake if asleep.
+    -->
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Weekday</key>
+        <integer>2</integer>
+        <key>Hour</key>
+        <integer>13</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+
+    <!-- Do NOT run immediately on bootstrap — wait for the next scheduled time. -->
+    <key>RunAtLoad</key>
+    <false/>
+
+    <key>WorkingDirectory</key>
+    <string>__REPO_ROOT__</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>__PYTHON__</string>
+        <string>__REPO_ROOT__/bin/weekly_synthesis.py</string>
+    </array>
+
+    <!-- stdout + stderr to a gitignored run-log. -->
+    <key>StandardOutPath</key>
+    <string>__REPO_ROOT__/raw/.weekly_synthesis.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>__REPO_ROOT__/raw/.weekly_synthesis.log</string>
+</dict>
+</plist>
