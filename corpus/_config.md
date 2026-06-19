@@ -103,30 +103,55 @@ the scheduled job. The starred flow is unchanged (de-star + archive on collectio
 
 ---
 
-## Scheduled automation (daily collection + ingest)
+## Scheduled automation (two macOS LaunchAgents)
 
-The corpus runs a daily unattended pipeline via a macOS LaunchAgent:
+The corpus runs two unattended jobs. Both use the Claude Code **subscription** (the
+headless calls strip `ANTHROPIC_API_KEY`, so they bill the Max plan, NOT metered API).
+Installed plists live on the local Mac only (`~/Library/LaunchAgents/`, NOT committed);
+the repo ships only the templates + `automation/install_schedule.sh`. Run logs
+(`raw/.scheduled_run.log`, `raw/.weekly_synthesis.log`) are gitignored.
 
-1. **Collection** — gmail, obsidian, and (when configured) youtube collectors run.
-2. **Ingest** — bounded headless Claude `/ingest-auto` processes up to 20 inbox items.
-3. **Commit/push** — `corpus/` changes are staged, committed, and pushed (R10: never `raw/`).
-4. **Log** — each run appends a `config | scheduled run` entry to `corpus/_log.md`.
+### 1. `com.corpus.daily` — collect + ingest (nightly 02:00)
 
-**Entrypoint:** `python3 bin/scheduled_run.py run` (default: `--max 20 --timeout 600`).
+1. **Collection** — gmail (starred + 9 corpus labels), obsidian, pdf, youtube collectors run.
+2. **Ingest** — headless Claude `/ingest-auto` processes up to `--max` inbox candidates
+   (deterministically pre-filtered + **labeled-prioritized**, see `bin/ingest_candidates.py`).
+3. **Reap** — `gmail_client.py reap-labels` un-labels + archives ingested labeled mail.
+4. **Commit/push** — `corpus/` changes staged, committed, pushed (R10: never `raw/`).
 
-**Schedule:** daily at 08:00 via `StartCalendarInterval`. If the Mac is asleep at that time, launchd fires the job exactly once on the next wake — no flood of back-to-back runs.
+- **Entrypoint:** `python3 bin/scheduled_run.py run` — installed args **`--max 50 --timeout 5400`**.
+- **Schedule:** daily at **02:00** (chosen so it doesn't compete with daytime work).
+  Asleep at 02:00 → launchd replays once on next wake (no flood).
+- **Ingest model:** **Sonnet** (`SCHEDULED_RUN_INGEST_MODEL=claude-sonnet-4-6` in the plist
+  `EnvironmentVariables`) — draws from a separate/larger weekly pool, preserving the scarce
+  Opus weekly budget for interactive daytime work. Unset the env to revert to Opus.
 
-**Installed plist:** `~/Library/LaunchAgents/com.corpus.daily.plist` — lives on the local Mac only; NOT committed to the repo.
+### 2. `com.corpus.weekly-synthesis` — leftover-Opus synthesis (weekly Tue 13:00)
 
-**Repo ships:** `automation/com.corpus.daily.plist.template` + `automation/install_schedule.sh`.
+`bin/weekly_synthesis.py` — once a week, ~3h before the Opus weekly quota resets (user's reset:
+Tue 15:59), spend leftover Opus on a bounded **Medium** synthesis+lint pass over the week's
+newest ≤`--max-pages` (default 30) pages. **Probe-guarded**: fires a tiny Opus call first and
+**skips** if Opus is rate-limited (remaining-credits isn't queryable, so it fails closed).
+Runs on **Opus** (`claude-opus-4-8`); main-only TOCTOU-guarded commit.
+
+- **Schedule:** Tuesday 13:00 (`StartCalendarInterval` Weekday=2). Manual preview:
+  `python3 bin/weekly_synthesis.py --dry-run` (probe + page count, no pass/commit).
+
+### Managing either job
+
+`<job>` = `com.corpus.daily` or `com.corpus.weekly-synthesis`.
 
 | Action | Command |
 |---|---|
-| Install / re-install | `bash automation/install_schedule.sh` |
-| Uninstall | `bash automation/install_schedule.sh uninstall` |
-| Verify registered | `launchctl print gui/$(id -u)/com.corpus.daily` |
-| Force a manual run | `launchctl kickstart -k gui/$(id -u)/com.corpus.daily` |
-| Disable (keep plist) | `launchctl disable gui/$(id -u)/com.corpus.daily` |
-| Tail run log | `tail -f raw/.scheduled_run.log` |
+| Install / re-install daily | `bash automation/install_schedule.sh` |
+| Install / re-install weekly | `CORPUS_JOB=weekly-synthesis bash automation/install_schedule.sh` |
+| Uninstall | `[CORPUS_JOB=weekly-synthesis] bash automation/install_schedule.sh uninstall` |
+| Verify registered | `launchctl print gui/$(id -u)/<job>` |
+| Force a manual run | `launchctl kickstart -k gui/$(id -u)/<job>` |
+| Disable (keep plist) | `launchctl disable gui/$(id -u)/<job>` |
+| Tail run logs | `tail -f raw/.scheduled_run.log raw/.weekly_synthesis.log` |
 
-Log path `raw/.scheduled_run.log` is gitignored.
+**Tuning levers:** nightly throughput = `--max` in `com.corpus.daily.plist.template`'s
+`ProgramArguments` (single-call ceiling — past ~50/call, prefer a batch loop); ingest model =
+the `SCHEDULED_RUN_INGEST_MODEL` env block; synthesis timing/scope = the weekly template's
+`Hour`/`Minute` and `weekly_synthesis.py --max-pages`. Re-run the installer after any edit.

@@ -998,3 +998,6 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - nightly 2am job now sets SCHEDULED_RUN_INGEST_MODEL=claude-sonnet-4-6 (EnvironmentVariables in com.corpus.daily.plist.template) so the unattended bulk ingest runs on Sonnet — draws from a separate/larger weekly pool, preserving the scarce Opus weekly budget for interactive daytime work
 - interactive/manual ingests still default to Opus (no change); periodic Opus synthesis+lint pass remains on-demand to upgrade connections / catch contradictions
 - validated: `claude --model claude-sonnet-4-6 --print` resolves on the subscription (no API key). Revert: delete the EnvironmentVariables block + reinstall
+
+## [2026-06-19 15:30] config | _config.md scheduled-automation section rewritten (was stale)
+- the "Scheduled automation" section was outdated (said --max 20, 08:00, single job). Rewrote to document BOTH LaunchAgents accurately: com.corpus.daily (02:00, collect+ingest+reap, --max 50 --timeout 5400, Sonnet ingest) and com.corpus.weekly-synthesis (Tue 13:00, probe-guarded leftover-Opus synthesis). Added subscription-not-API note, CORPUS_JOB install, and tuning levers.
