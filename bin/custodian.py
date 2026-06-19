@@ -79,3 +79,29 @@ def fingerprint(changed_paths: list, errors: list) -> str:
         sort_keys=True,
     )
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()[:16]
+
+
+def _source_of(item) -> str:
+    """Extract the SOURCE corpus page from a lint broken-item, tolerant of shape:
+    dict {'source'/'page': ...}, tuple/list (first element), or 'corpus/..md -> target'."""
+    if isinstance(item, dict):
+        return str(item.get("source") or item.get("page") or "")
+    if isinstance(item, (list, tuple)) and item:
+        return str(item[0])
+    s = str(item)
+    return s.split(" -> ")[0].split(" ->")[0].strip()
+
+
+def verify_gate(changed_paths: list, *, _lint=None) -> Verdict:
+    """Run the corpus linter and attribute failures: ok=False only if a CHANGED path
+    is the source of a broken citation/wikilink. Pre-existing breakage in unchanged
+    pages does not fail an unrelated iteration."""
+    lint = _lint if _lint is not None else corpus_lint.lint
+    report = lint()
+    changed = {str(p) for p in (changed_paths or [])}
+    cites = [it for it in report.get("broken_citations", []) if _source_of(it) in changed]
+    links = [it for it in report.get("broken_wikilinks", []) if _source_of(it) in changed]
+    notes = [f"broken citation: {_source_of(it)}" for it in cites] + \
+            [f"broken wikilink: {_source_of(it)}" for it in links]
+    return Verdict(ok=not (cites or links), broken_citations=len(cites),
+                   broken_wikilinks=len(links), notes=notes)

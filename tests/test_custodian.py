@@ -51,3 +51,26 @@ def test_fingerprint_differs_on_different_effect():
 
 def test_fingerprint_empty_changes_is_stable():
     assert c.fingerprint([], []) == c.fingerprint([], [])
+
+
+def _fake_lint(broken_cites=(), broken_links=()):
+    return lambda: {"broken_citations": list(broken_cites),
+                    "broken_wikilinks": list(broken_links),
+                    "orphans": [], "stubs": []}
+
+
+def test_verify_gate_ok_when_changed_pages_clean():
+    v = c.verify_gate(["corpus/data-engineering/x.md"], _lint=_fake_lint())
+    assert v.ok is True and v.broken_citations == 0
+
+
+def test_verify_gate_fails_when_changed_page_sources_broken_citation():
+    lint = _fake_lint(broken_cites=[("corpus/data-engineering/x.md", "../../raw/web/missing.md")])
+    v = c.verify_gate(["corpus/data-engineering/x.md"], _lint=lint)
+    assert v.ok is False and v.broken_citations == 1
+
+
+def test_verify_gate_ignores_breakage_in_unchanged_pages():
+    lint = _fake_lint(broken_cites=[("corpus/other/y.md", "../../raw/web/missing.md")])
+    v = c.verify_gate(["corpus/data-engineering/x.md"], _lint=lint)
+    assert v.ok is True   # the broken page is not in changed_paths
