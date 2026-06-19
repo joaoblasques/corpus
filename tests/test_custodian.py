@@ -36,3 +36,18 @@ def test_budget_add_tolerates_missing_usage_key():
 def test_caps_defaults():
     caps = c.Caps()
     assert (caps.max_iterations, caps.max_pages_touched, caps.wall_clock_s) == (25, 40, 3600)
+
+
+def test_fingerprint_stable_and_order_insensitive():
+    a = c.fingerprint(["corpus/x.md", "corpus/y.md"], [])
+    b = c.fingerprint(["corpus/y.md", "corpus/x.md"], [])
+    assert a == b and isinstance(a, str)
+
+
+def test_fingerprint_differs_on_different_effect():
+    assert c.fingerprint(["corpus/x.md"], []) != c.fingerprint(["corpus/y.md"], [])
+    assert c.fingerprint(["corpus/x.md"], []) != c.fingerprint(["corpus/x.md"], ["err"])
+
+
+def test_fingerprint_empty_changes_is_stable():
+    assert c.fingerprint([], []) == c.fingerprint([], [])

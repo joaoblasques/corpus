@@ -69,3 +69,13 @@ class Result:
     usage: dict                        # headless "usage" block (for Budget)
     proposals: list = dataclasses.field(default_factory=list)
     errors: list = dataclasses.field(default_factory=list)
+
+
+def fingerprint(changed_paths: list, errors: list) -> str:
+    """Stable hash of an iteration's EFFECT — sorted changed paths + sorted error
+    classes. Two consecutive identical fingerprints (or empty changes) ⇒ no progress."""
+    payload = json.dumps(
+        {"paths": sorted(changed_paths or []), "errors": sorted(errors or [])},
+        sort_keys=True,
+    )
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()[:16]
