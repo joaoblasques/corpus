@@ -857,3 +857,9 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   - ingest: 6 ingested · 6 deferred · status=ok
 - lint:
   - 0 broken wikilinks · 0 broken citations · 0 orphans · 6 stubs
+
+## [2026-06-19 10:20] ingest | review-queue clearance — 12 deferred items (no citable content)
+- cleared the /ingest-auto deferral queue: 12 items (10 email + 2 youtube), none §7-citable
+- 4 PT personal/transactional (IRS e-Fatura, Lovevery skip, 2× Saude ministry), 2 youtube (1 title-only, 1 music-theory with no matching domain), 6 course-promo/video-teaser emails (Jupyter-AI, vibe-code Replit, Skool check-in, self-serve-data-platform, SCD-101, 3-strategy-killers) whose substance is behind unfetched low-utility links
+- resolution: stamped corpus_ingested: true + corpus_pages: [] and filed to raw/email|raw/youtube
+- NOTE: self-serve-data-platform + 3-strategy-killers are genuine DE topics whose articles/videos were not fetched (low-utility score) — re-fetchable on request
