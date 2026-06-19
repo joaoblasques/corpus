@@ -30,6 +30,9 @@ sources:
   - path: raw/notes/notes-clippings-new-connectors-in-claude-for-everyday-life.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/email/email-2025-09-04-mcp-helps-but-how.md
+    channel: email
+    ingested_at: 2026-06-19
 aliases:
   - MCP
   - Model Context Protocol
@@ -37,7 +40,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-21
-updated: 2026-06-17
+updated: 2026-06-19
 ---
 
 # MCP (Model Context Protocol)
@@ -54,6 +57,22 @@ MCP replaces chaotic back-and-forth prompt engineering in multi-agent systems wi
 Described as "essential for scalable multi-agent systems" [^src1].
 
 > [unsourced — please verify]: MCP was introduced by Anthropic as an open standard; this source describes its purpose but not its origin.
+
+## Architecture: Host / Client / Server
+
+MCP is structured as three components [^src10]:
+
+- **MCP Host** — where the agent "lives": a chat interface (e.g. a customer-support assistant), an IDE extension (a code co-pilot), or a backend orchestrator coordinating multiple agents. The host handles the conversation and coordinates the flow [^src10].
+- **MCP Client** — the middle layer that parses user prompts, discovers available tools/resources, sends structured instructions to the LLM, and handles tool calls + returns results. One client can connect to one or many servers, all using the same protocol [^src10].
+- **MCP Server** — where the functionality lives: wraps a SQL/NoSQL database, a public API, GitHub, local filesystems, or internal company tools, and exposes a machine-readable catalog of what's available (see the [three server primitives](#the-three-server-primitives) below) [^src10].
+
+**Runtime loop.** A typical request flows: user prompt → host → client queries the server for the tool list → client sends the prompt + tool catalog to the LLM → LLM selects a tool and supplies arguments → client invokes it via the server → server executes (DB query, API call) and returns the result → agent responds to the user [^src10]. The loop is modular and dynamic: "No need to redeploy when new tools are added. No hardcoded schemas" [^src10].
+
+**Enterprise value.** This addresses real production pain points [^src10]:
+- **Tool discovery at runtime** — agents query the server for available tools and adapt on the next call; no hardcoded schemas, no redeploy when a function is added [^src10].
+- **Standardized interfaces across systems** — every server uses the same protocol, so one client talks to many servers without juggling per-service integration styles [^src10].
+- **Modularity + team ownership** — each department (DevOps, Support, Finance) owns and manages its own server: secure, versionable, sandboxed [^src10].
+- **LLM-native orchestration** — designed for AI rather than retrofitted; agents discover tools, chain calls, retry, and reason across multi-step workflows. Plays with frameworks like LangChain and LangGraph [^src10].
 
 ## The three server primitives
 
@@ -161,3 +180,4 @@ As of mid-2026 the Claude connector directory has grown to 200+ connectors spann
 [^src7]: [Building agents that reach production systems with MCP](../../raw/notes/notes-clippings-building-agents-that-reach-production-systems-with-mcp.md) — Anthropic engineering
 [^src8]: [How to Set Up Your Claude Connectors (MCP)](../../raw/notes/notes-clippings-how-to-set-up-your-claude-connectors-mcp.md) — practitioner guide (33-connector marketing/sales stack)
 [^src9]: [New connectors in Claude for everyday life](../../raw/notes/notes-clippings-new-connectors-in-claude-for-everyday-life.md) — Anthropic announcement
+[^src10]: [MCP Helps, But How?](../../raw/email/email-2025-09-04-mcp-helps-but-how.md) — Alex Wang, "Learn AI Together" (LinkedIn)

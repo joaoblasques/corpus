@@ -54,6 +54,9 @@ sources:
   - path: raw/email/email-2025-07-29-de-101-5-dbt-project.md
     channel: email
     ingested_at: 2026-06-19
+  - path: raw/email/email-2025-04-16-understanding-the-t-in-etl-a-back-to-basics-guide-to-data-tr.md
+    channel: email
+    ingested_at: 2026-06-19
 aliases:
   - dbt
   - data build tool
@@ -217,6 +220,8 @@ dbt Core v2.0 shipped alongside the completed **Fivetran + dbt Labs merger** ("t
 
 dbt was created because storage got cheaper and SQL OLAP systems more powerful, shifting **ETL → ELT** and moving transformation *inside* the warehouse, written in SQL — democratised so analysts/analytics engineers (not only strong coders) can transform data [^src10]. But that logic still needs to be **tested, modularised, and documented**, which is dbt's purpose [^src10]. A dbt model is "purely Jinja + SQL," so it can be version-controlled, rolled back, and CI/CD-deployed like application code [^src10]. With just **dbt + Airflow + a cloud warehouse**, a company can build a complete analytics pipeline — making dbt one of the most in-demand DE tools [^src10]. Learning resources noted: the `learn_dbt` CLI tool (49 hands-on exercises run locally) [^src10], and dbt Labs' free **"Zero to dbt"** live workshops and on-demand demos [^src11].
 
+dbt rose to prominence as the **transform-focused tool of the MDS (Modern Data Stack) boom** of the early 2020s, especially at startups [^src14]. It wasn't the first transform tool — earlier platforms were typically drag-and-drop UIs with some SQL — but it stood out by embracing **version control, modular SQL, testing, and documentation**, and by making SQL-based workflows accessible to a broader set of users [^src14]. It is not the only option: **SQLMesh** and [[data-engineering/dataform|Dataform]] are alternative SQL-based transform tools [^src14]. See [[data-engineering/data-transformation|Data Transformation]] for the broader "T"-in-ETL context.
+
 ## Community criticism (2022 love-letter)
 
 A widely-read 2022 essay framed concerns as **community, core, and cloud** problems, in the context of dbt Labs' rapid VC funding ($30M Series B Nov 2020 → $222M round Feb 2022) and the pressure to generate revenue [^src6]:
@@ -291,3 +296,4 @@ See [[data-engineering/claude-code-for-data-engineering|Claude Code for Data Eng
 [^src11]: [Get Hands-On with dbt: Virtual Events and Interactive Workshops (dbt Labs)](../../raw/email/email-2026-05-14-get-hands-on-with-dbt-virtual-events-and-interactive-worksho.md)
 [^src12]: [The Complete dbt Guide: From SQL to Production-Ready Transformations](../../raw/web/web-the-complete-dbt-guide-from-sql-to-production-ready-transfor.md)
 [^src13]: [Claude Code isn't going to replace data engineers (yet)](../../raw/web/web-claude-code-isnt-going-to-replace-data-engineers-yet.md)
+[^src14]: [Understanding the "T" in ETL: A Back-to-Basics Guide to Data Transformations](../../raw/email/email-2025-04-16-understanding-the-t-in-etl-a-back-to-basics-guide-to-data-tr.md)

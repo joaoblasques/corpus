@@ -919,3 +919,40 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   - ingest: 12 ingested · 8 deferred · status=ok
 - lint:
   - 0 broken wikilinks · 1 broken citations · 0 orphans · 7 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+
+## [2026-06-19 13:10] ingest | ingest-auto safe pass (20 candidates → 15 ingested, 5 deferred)
+- channel: email (Gmail label backlog: Data Engineering / databricks / dbt / spark, ML/MLOps/ML Engineering)
+- domains: mlops, data-engineering, ai-engineering
+- mode: headless (sources stamped, left in raw/_inbox/ for orchestrator relocation; no file moves)
+- mlops cluster (Marvelous MLOps "End-to-end MLOps with Databricks", lectures 2–10 + Practical-ML Pt 2):
+  - new: mlflow, databricks-development, databricks-asset-bundles, ci-cd-for-ml, model-monitoring, production-ml-workflow
+  - updated: model-serving (Databricks Model Serving: serverless REST/scale-to-zero/autoscale units, 3 architectures, A/B sticky assignment), drift-detection (cross-link + Lakehouse drift-metrics note), uv (course usage), README
+  - sources: email-2025-07-29-developing-on-databricks, -07-30-getting-started-with-mlflow, -07-31-logging-and-registering-models-with-mlflow, -08-01-model-serving-architectures, -08-02-lecture-6-deploying-model-serving-endpoint-a-b-testing-on-da, -08-03-lecture-7-databricks-asset-bundles, -08-04-ci-cd-deployment-strategies, -08-05-introduction-to-ml-monitoring, -08-06-lecture-10-implementing-model-monitoring-in-databricks, -06-29-build-a-spam-classifier-like-a-production-ml-engineer
+- data-engineering cluster:
+  - new: data-transformation (the "T" in ETL), small-scale-pipeline-design
+  - updated: apache-spark (MapReduce origin, RDD 5 properties/immutability/lineage, Driver/Executor architecture, modes, Job→Stage→Task/DAG, narrow vs wide deps/shuffle), dbt, medallion-architecture, data-quality, README
+  - sources: email-2025-04-16-understanding-the-t-in-etl-a-back-to-basics-guide-to-data-tr, -04-16-pipeline-design-and-implementation-for-small-scale-projects, -06-26-if-you-re-learning-apache-spark-this-article-is-for-you
+- ai-engineering cluster:
+  - new: openai (Apr-2025 dev lineup: o3/o4-mini, GPT-4.1 family 1M ctx, Codex CLI, Evals API, audio)
+  - updated: mcp (host/client/server triad + runtime loop; stub→draft in index), README
+  - sources: email-2025-09-04-mcp-helps-but-how, -04-17-our-most-powerful-reasoning-models-gpt-4-1-codex-cli-and-new
+- deferred (5) → raw/_inbox/_REVIEW.md:
+  - UNCERTAIN: email-2025-07-17-a-simple-4-step-process-for-dbt-models (Kahan Data Solutions video teaser; no transcript/fetched companion)
+  - UNCERTAIN: email-2025-07-16-data-modeling-w-dbt-tests-part-3-3 (Kahan video teaser; no transcript/fetched companion)
+  - UNCERTAIN: email-2025-07-11-dbt-vs-stored-procedures-3-key-differences (Kahan video teaser; no transcript/fetched companion)
+  - UNCERTAIN: email-2025-07-01-databricks-github-actions-a-blueprint-for-your-automated-ci (pointer; no fetched companion — nothing to extract)
+  - UNCERTAIN: email-2025-07-17-build-a-spam-classifier-like-a-production-ml-engineer (pointer; companion fetch-failed — same article captured via the 06-29 Medium copy)
+- pages: 9 created, 11 updated (8 content pages + 3 hubs)
+- notes: ingest-auto run; 15 processed, 5 deferred via 3 parallel per-domain workers (coordinator-owned _index/_log/stamps). No new domains; no contradictions.
+
+## [2026-06-19T11:42] config | scheduled run
+- collectors:
+  - gmail: 0 collected · status=ok
+  - obsidian: 0 collected · status=ok
+  - pdf: 0 collected · status=ok
+  - youtube: 15 collected · status=ok
+  - links_refetch: 0 refetched · status=ok
+- ingest:
+  - ingest: 15 ingested · 5 deferred · status=ok
+- lint:
+  - 0 broken wikilinks · 1 broken citations · 0 orphans · 8 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py

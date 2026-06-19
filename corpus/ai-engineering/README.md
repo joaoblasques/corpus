@@ -60,6 +60,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [[ai-engineering/github-copilot|GitHub Copilot (Agent Mode)]] — entity · stub · whole-project agentic coding in VS Code; multi-file edits, runs commands, self-corrects; multi-model + MCP
 - [[ai-engineering/claude-cowork|Claude Cowork]] — entity · draft · **sub-hub** · Cowork desktop product; workspace folder, CLAUDE.md/MEMORY.md, Toolkit/workstations
 - [[ai-engineering/anthropic|Anthropic]] — entity · draft · the lab: company, funding/valuation, learning resources
+- [[ai-engineering/openai|OpenAI]] — entity · stub · developer model lineup (Apr 2025): o3/o4-mini reasoning, GPT-4.1 family (1M context), Codex CLI, Evals API, audio/voice models
 - [[ai-engineering/claude-models|Claude Model Lineup]] — entity · draft · Claude family (Haiku → Sonnet → Opus → Fable/Mythos); aliases, 1M context, Opus 4.8, Fable 5/Mythos 5
 - [[ai-engineering/claude-managed-agents|Claude Managed Agents]] — entity · draft · cloud-hosted composable agent APIs; sandboxed execution, long-running sessions, built-in filesystem memory, multi-agent coordination
 - [[ai-engineering/web-scraping|Scrapling (Web Scraping)]] — entity · stub · adaptive Python scraper; MCP extract-before-LLM token minimization

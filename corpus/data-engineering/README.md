@@ -53,6 +53,8 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [[data-engineering/sql-intermediate-results|Storing Intermediate Results in SQL]] — concept · draft · CTE vs subquery vs view vs temp table vs materialized view; materialized-or-not decision framework; staging tables
 - [[data-engineering/requirements-gathering|Requirements Gathering]] — concept · draft · the 5-step process (identify end-users, define via a question set, validate, deliver iteratively, gate changes) + output-led engineering
 - [[data-engineering/stream-processing|Stream Processing]] — concept · draft · batch vs stream/micro-batch; latency/throughput/backpressure/state/event-time; engines (Flink/Kafka Streams/Spark SS/Storm); delivery guarantees; Lambda architecture
+- [[data-engineering/data-transformation|Data Transformation (the "T" in ETL/ELT)]] — concept · draft · what the T solves (business logic, standardization, integration, pre-aggregation); transform-focused tools (dbt/SQLMesh/Dataform); common SQL transforms; transform-layer challenges + raw/stage/prod ↔ medallion
+- [[data-engineering/small-scale-pipeline-design|Small-Scale Pipeline Design]] — concept · draft · small ≠ low-stakes; problem-scope questions; design principles; tool choice; the DE's 7-step implementation mindset; signals to refactor/scale up
 
 ### Entities
 - [[data-engineering/postgres|PostgreSQL]] — entity · draft · relational database as full-stack data platform via extensions (pgvector, pgcron, tsvector, etc.)

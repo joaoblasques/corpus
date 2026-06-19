@@ -23,6 +23,7 @@ The engineering substrate for building ML and software systems: how the developm
 - [[mlops/git|Git]] — entity · draft · content-addressed snapshot store; branch-per-task workflow, ML-aware `.gitignore`
 - [[mlops/terraform|Terraform]] — entity · draft · HCL-based IaC tool; providers/resources, `.tfstate`, `.tfvars`, remote backends
 - [[mlops/vs-code|VS Code]] — entity · draft · Microsoft code editor; folder-as-project, panels, integrated terminal, command palette, extensions
+- [[mlops/mlflow|MLflow]] — entity · draft · experiment tracking + model registry; runs/experiments, MLflow 3 LoggedModel, flavors/signature, UC registration, pyfunc wrapper
 - [[mlops/aws|AWS]] — entity · draft · largest cloud provider; core service map + Cloud Practitioner/Solutions Architect learning path
 - [[mlops/azure|Azure]] — entity · draft · 2nd cloud provider; service map, resource hierarchy, AZ-900 fundamentals
 - [[mlops/gcp|GCP]] — entity · draft · Google cloud; Compute Engine/GKE/BigQuery, org→folder→project hierarchy
@@ -39,7 +40,12 @@ The engineering substrate for building ML and software systems: how the developm
 - [[mlops/python|Python]] — concept · draft · general-purpose Python language reference: data types, type annotations, functions, classes, dunder methods
 - [[mlops/python-built-in-functions|Python Built-in Functions]] — concept · draft · the `builtins` scope catalog: math, type construction, collections, iterables (map/filter/zip/enumerate), I/O, OOP/introspection
 - [[mlops/drift-detection|Drift Detection]] — concept · draft · model-monitoring: reference vs. analysis samples; univariate drift metrics (JS, Wasserstein, Hellinger, L-Infinity, KS, Chi-2) and their tradeoffs
-- [[mlops/model-serving|Model Serving]] — concept · draft · real-time inference (Flask `/predict` API) vs batch inference (Airflow DAG); shared preprocessing + saved pipeline; production hardening
+- [[mlops/model-serving|Model Serving]] — concept · draft · real-time inference (Flask `/predict` API) vs batch inference (Airflow DAG) vs Databricks Model Serving (serverless REST, 3 architectures, A/B sticky assignment); shared preprocessing + saved pipeline
+- [[mlops/databricks-development|Databricks Development]] — concept · draft · local-first Databricks dev: CLI auth, VS Code extension, Databricks Connect, serverless env versions, uv, pydantic ProjectConfig
+- [[mlops/databricks-asset-bundles|Databricks Asset Bundles]] — concept · draft · declarative YAML packaging of code/jobs/deps (wraps Terraform); databricks.yml, Lakeflow Jobs, task dependencies, bundle CLI
+- [[mlops/ci-cd-for-ml|CI/CD for ML]] — concept · draft · Unity Catalog 3-tier hierarchy + access modes, Service Principals, Git Flow + branch protection, GitHub Actions CI/CD matrix
+- [[mlops/model-monitoring|Model Monitoring]] — concept · draft · why ML monitoring differs; data vs concept drift; Databricks Lakehouse Monitoring (profile/drift tables, inference tables); implementation pipeline
+- [[mlops/production-ml-workflow|Production ML Workflow]] — concept · draft · production-minded training (Practical ML Series Pt 2): holdout set, robust preprocessing, model comparison, business-metric optimization, sklearn pipeline serialization
 
 ## Sources ingested
 - [AI Engineering from Scratch — Phase 00 / 01 Dev Environment](../../raw/notes/00-01-dev-environment-kb.md) — first-party course note, 2026-05-25

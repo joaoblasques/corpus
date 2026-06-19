@@ -12,6 +12,9 @@ sources:
   - path: raw/email/email-2025-11-20-the-medallion-data-architecture-pros-cons.md
     channel: email
     ingested_at: 2026-06-15
+  - path: raw/email/email-2025-04-16-understanding-the-t-in-etl-a-back-to-basics-guide-to-data-tr.md
+    channel: email
+    ingested_at: 2026-06-19
 aliases:
   - medallion
   - bronze silver gold
@@ -21,7 +24,7 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-11
-updated: 2026-06-15
+updated: 2026-06-19
 ---
 
 # Medallion Architecture
@@ -39,6 +42,8 @@ Each stage removes complexity for an increasingly broader, less technical audien
 - **Gold — business-ready.** Data modeled specifically for consumption: dashboards, reports, self-serve analytics [^src1].
 
 Variations of the same pattern predate the medallion naming: Landing → Curated → Serving; Staging → Data Mart [^src1]. The intent is identical: progressively refine data so it is more useful for specific use cases [^src1].
+
+From the transform-layer perspective, medallion (Databricks-popularized) is explicitly a **rename of the long-standing raw/stage/prod three-layer transform pattern** — one of two later approaches that "co-opted and renamed those layers," the other being how dbt projects are structured [^src4]. Its biggest advantage is often that the naming makes it easier for the business to understand what the data team is talking about [^src4]. Per that source, mapping onto the three layers [^src4]: **bronze** = raw or minimally cleaned data left "as-is" (equivalent to raw tables); **silver** = standardized and enriched data combining multiple bronze sources — *"The Silver layer brings the data from different sources into an Enterprise view and enables self-service analytics for ad-hoc reporting, advanced analytics and ML"* (Databricks); **gold** = business-level aggregates and reporting tables powering dashboards, KPIs, and executive reports — Databricks' *"consumption-ready 'project-specific' databases."* See [[data-engineering/data-transformation|Data Transformation]] for the transform-layer framing.
 
 ## Medallion is NOT a data model
 
@@ -88,3 +93,4 @@ Why no equivalent wars today? Fewer big ideas held practitioner mindshare back t
 [^src1]: [Medallion Architecture is NOT a Data Model](../../raw/email/email-2025-09-08-medallion-architecture-is-not-a-data-model.md)
 [^src2]: [Data Identity Politics and The Kimball vs. Inmon War](../../raw/web/data-identity-politics-and-the-kimball-vs-inmon-war.md)
 [^src3]: [The Medallion Data Architecture (Pros & Cons) (KahanDataSolutions)](../../raw/email/email-2025-11-20-the-medallion-data-architecture-pros-cons.md)
+[^src4]: [Understanding the "T" in ETL: A Back-to-Basics Guide to Data Transformations](../../raw/email/email-2025-04-16-understanding-the-t-in-etl-a-back-to-basics-guide-to-data-tr.md)

@@ -6,6 +6,9 @@ sources:
   - path: raw/web/choosing-univariate-drift-detection-methods.md
     channel: web
     ingested_at: 2026-06-16
+  - path: raw/email/email-2025-08-05-introduction-to-ml-monitoring.md
+    channel: email
+    ingested_at: 2026-06-19
 aliases:
   - drift detection
   - data drift
@@ -69,6 +72,7 @@ The disjoint-distribution edge case is the same one that motivates **Wasserstein
 
 ## See also
 
+- [[mlops/model-monitoring|Model Monitoring]] — drift detection is the univariate distance-metric/test selection detail *within* the broader monitoring picture; on Databricks, Lakehouse Monitoring's **Drift Metrics Table** computes drift via "a combination of statistical tests, distance metrics, and simple delta metrics," chosen by data type [^src2] — i.e. exactly the JS/Wasserstein/Hellinger/L-Infinity/KS/Chi-2 menu above.
 - [[mlops/python|Python]] — these metrics are typically computed in Python monitoring libraries (the source is NannyML's docs)
 - [[mlops/README|MLOps hub]] — model monitoring sits in the deploy/operate layer of the ML lifecycle
 - [[data-engineering/README|Data Engineering]] — data-quality checks on pipelines are the upstream cousin of drift monitoring on model inputs
@@ -76,3 +80,4 @@ The disjoint-distribution edge case is the same one that motivates **Wasserstein
 ---
 
 [^src1]: [Choosing Univariate Drift Detection Methods (NannyML)](../../raw/web/choosing-univariate-drift-detection-methods.md)
+[^src2]: [Introduction to ML monitoring (Marvelous MLOps, Lecture 9)](../../raw/email/email-2025-08-05-introduction-to-ml-monitoring.md)

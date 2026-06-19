@@ -18,6 +18,9 @@ sources:
   - path: raw/email/email-2025-08-01-de-101-6-testing-and-data-quality.md
     channel: email
     ingested_at: 2026-06-19
+  - path: raw/email/email-2025-04-16-understanding-the-t-in-etl-a-back-to-basics-guide-to-data-tr.md
+    channel: email
+    ingested_at: 2026-06-19
 aliases:
   - data quality
   - messy data
@@ -142,6 +145,10 @@ For an early-stage system, three signals alone provide huge value: **data freshn
 
 A distinction worth keeping explicit: **code tests** and **data-quality checks** are not the same and run at different moments [^src5]. Code tests verify the *transformation logic is correct* and run **before code is deployed to production** (i.e. in CI, once per change — see [[data-engineering/cicd-for-data-infrastructure|CI/CD for Data Infrastructure]]); data-quality checks verify the *data is correct* and run **every time the pipeline runs** (per-load, on live data) [^src5]. Both matter because *"ensuring your data is correct before stakeholders can access it is critical — imagine your pipeline accidentally adding (or removing) a 0 to a revenue metric"* [^src5]. The five-vertical data contracts above are the per-run checks; pytest-style unit tests on the pipeline code are the pre-deploy checks. (Practically, the pre-deploy gate is implemented with **pytest** — see [[data-engineering/pipeline-coding-patterns|Pipeline Coding Patterns]] for the testing techniques.)
 
+## Why the transform layer is a DQ surface
+
+The transform step is itself a quality risk: "Each transform and SQL script is another opportunity to introduce errors," so **unit tests and data-quality checks "aren't just nice to have, they're essential for catching issues before they hit production"** [^src6]. This compounds with an **ownership** problem — transform tooling like [[data-engineering/dbt|dbt]] has broadened who can build platform layers (engineers, analytics engineers, analysts), which is great for speed but blurs the line of responsibility: where does ownership of the core warehouse end and use-case-specific layers begin? Without clear boundaries, things get messy fast [^src6]. See [[data-engineering/data-transformation|Data Transformation]] for the transform-layer challenges this DQ discipline guards against.
+
 ## Synthesis: contracts vs schema-aware checks
 
 The two technical sources are complementary, not competing. StartDataEngineering defines data contracts as **expectations agreed with upstream teams across five verticals**, validated before use [^src2]; the dlt toolkit is a **mechanism** that derives a baseline of those checks automatically from the loader's schema (the "floor"), then layers business rules (the "ceiling") and routes failures to a fix [^src3]. Both insist quality is enforced **at ingestion, before downstream consumption** — the contract is the policy, the schema-aware toolkit is one implementation.
@@ -159,3 +166,4 @@ The two technical sources are complementary, not competing. StartDataEngineering
 [^src3]: [AI Workbench: Data quality toolkit preview (dltHub)](../../raw/web/dlthub-ai-workbench-data-quality-toolkit-schema-aware-checks.md)
 [^src4]: [The Data Engineering Mindset Every AI Builder Needs](../../raw/web/web-the-data-engineering-mindset-every-ai-builder-needs.md)
 [^src5]: [[DE 101] #6 - Testing and Data Quality (Start Data Engineering)](../../raw/email/email-2025-08-01-de-101-6-testing-and-data-quality.md)
+[^src6]: [Understanding the "T" in ETL: A Back-to-Basics Guide to Data Transformations](../../raw/email/email-2025-04-16-understanding-the-t-in-etl-a-back-to-basics-guide-to-data-tr.md)

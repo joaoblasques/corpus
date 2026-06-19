@@ -27,11 +27,19 @@ sources:
   - path: raw/web/web-10-minutes-to-learn-apache-spark-joins-with-a-hands-on-proje.md
     channel: web
     ingested_at: 2026-06-17
+  - path: raw/email/email-2025-06-26-if-you-re-learning-apache-spark-this-article-is-for-you.md
+    channel: email
+    ingested_at: 2026-06-19
 aliases:
   - Spark
   - Apache Spark
   - PySpark
   - RDD
+  - Resilient Distributed Dataset
+  - MapReduce
+  - narrow dependencies
+  - wide dependencies
+  - shuffle
   - Sort Merge Join
   - SMJ
   - Spark JOIN
@@ -39,12 +47,23 @@ tags:
   - corpus/data-engineering
   - entity
 created: 2026-06-11
-updated: 2026-06-17
+updated: 2026-06-19
 ---
 
 # Apache Spark
 
 **TL;DR.** Apache Spark is a distributed data-processing engine built on **immutable RDDs** (Resilient Distributed Datasets) and a **lazy execution model**: transformations build a plan (DAG), and only an **action** triggers actual computation [^src3]. Higher-level **DataFrames** compile down to RDDs but add the **Catalyst** query optimizer and **Tungsten** memory/execution engine, making them the recommended API over raw RDDs [^src1][^src5]. Immutability is the foundation enabling fault tolerance (lineage replay), lock-free concurrency, and safe caching [^src1]. The dominant operational failure is the **OOM error**, rooted in how Spark partitions data and divides executor memory among parallel tasks [^src2].
+
+## Origins: from MapReduce to Spark
+
+In **2004 Google published the MapReduce paper**, introducing a programming paradigm to distribute data processing across hundreds or thousands of machines [^src9]. Users explicitly define two functions [^src9]:
+
+- **Map** — takes key/value inputs, processes them, and outputs intermediate key/value pairs; all values of the same key are then grouped and passed to Reduce.
+- **Reduce** — receives the intermediate values for a key and merges them with defined logic (Count, Sum, …).
+
+To guarantee fault tolerance (e.g. a worker dies mid-process), MapReduce relies on **disk to exchange intermediate data** between tasks [^src9]. Yahoo released the open-source implementation (Hadoop MapReduce), which became the go-to for distributed processing — but it "wouldn't last long" [^src9]. The strict Map/Reduce paradigm limits flexibility, and disk-based exchange is poorly suited to **machine learning or interactive queries** [^src9].
+
+UC Berkeley's **AMPLab** saw the inefficiency and built **Apache Spark**: a **functional-programming-based API** simplifying multistep applications, plus a new engine for efficient **in-memory data sharing** across computation steps [^src9]. At time of the source's writing Spark was on its **fourth major version**, but its core and fundamentals are stable [^src9].
 
 ## Execution model: transformations, actions, lazy evaluation
 
@@ -77,6 +96,65 @@ Lineage replay only works *because* RDDs are immutable: if inputs could change b
 > "Immutability isn't a design quirk — it's the foundation that everything else in Spark stands on" [^src1].
 
 **The tradeoff:** every transformation is a new object in memory. The real cost appears at materialization — memory pressure (caching), recomputation cost (no cache), and GC overhead. So the choice is **memory vs recomputation**, managed with selective `.persist()`/`.cache()` and checkpoints [^src1].
+
+An RDD is the central abstraction even when you never touch it directly: "No matter the abstraction you use, from dataset to dataframe, they are compiled into RDDs behind the scenes." [^src9] It represents an immutable, partitioned collection of records operable in parallel, with data kept in memory for as long as possible [^src9]. The Spark creators give three reasons immutability is required — **concurrent processing** (consistency across nodes/threads without complex synchronization or race conditions), **lineage and fault tolerance** (each transformation creates a new RDD, preserving lineage and allowing reliable recomputation — mutable RDDs would make this much harder), and **functional programming** principles (easier failure handling, maintained data integrity) [^src9] — corroborating the four reasons above.
+
+### The five RDD properties
+
+Each RDD has five key properties [^src9]:
+
+1. **List of partitions** — an RDD is divided into partitions, Spark's units of parallelism; each is a logical subset processed independently on different executors.
+2. **Computation function** — a function determining how to compute the data for each partition.
+3. **Dependencies** — the RDD tracks its dependencies on other RDDs, describing how it was created (this is the lineage).
+4. **Partitioner (optional)** — for key-value RDDs, specifies how data is partitioned (e.g. a hash partitioner).
+5. **Preferred locations (optional)** — lists preferred locations for computing each partition (e.g. data-block locations in HDFS) for data-locality scheduling.
+
+### Lazy transformations vs actions
+
+When you define an RDD, its data is not transformed immediately — nothing happens until an **action** triggers execution, which lets Spark determine the most efficient way to run the transformations [^src9]:
+
+- **Transformations** (`map`, `filter`) define *how* data should be transformed but don't execute until an action forces computation; because RDDs are immutable, each transformation produces a *new* RDD [^src9].
+- **Actions** are the commands that produce output or store data, driving the actual execution [^src9].
+
+### Fault tolerance via lineage
+
+Spark RDDs achieve fault tolerance through **lineage** — the recorded series of transformations that created each RDD [^src9]. If any partition is lost to a node failure, Spark **reconstructs** it by reapplying the transformations to the original dataset described by the lineage, **eliminating the need to replicate data across nodes or write to disk** (unlike MapReduce) [^src9].
+
+## Architecture: Driver, Cluster Manager, Executors
+
+A Spark application consists of three roles [^src9]:
+
+- **Driver** — the JVM process managing the entire application, from handling user input to distributing tasks to executors.
+- **Cluster Manager** — manages the cluster of machines running the application; Spark works with **YARN, Apache Mesos, or its own standalone manager** [^src9].
+- **Executors** — processes that run the tasks the driver assigns and report status/results; each application has its own set of executors.
+
+The Spark driver-executor cluster is distinct from the cluster hosting the application: there must be a cluster of machines (or processes, if running locally) providing resources, and the cluster manager manages those machines — called **workers** — that can host driver and executor processes [^src9].
+
+### Execution modes
+
+Distinguished mainly by **where the driver process runs** [^src9]:
+
+- **Cluster mode** — the driver launches on a worker node alongside executors; the cluster manager handles all application processes.
+- **Client mode** — the driver stays on the client machine that submitted the application, which must maintain the driver throughout execution.
+- **Local mode** — the entire application runs on a single machine, achieving parallelism via multiple threads; commonly used for learning or testing.
+
+## Anatomy: Job → Stage → Task and the DAG
+
+Spark organizes a workload as a hierarchy [^src9] (matching the execution hierarchy above [^src2]):
+
+- **Job** — a series of transformations on data; the whole workflow from start to finish.
+- **Stage** — a job segment executed *without* data shuffling; a job is split into stages wherever a transformation requires shuffling data across partitions.
+- **DAG** — RDD dependencies are used to build a **Directed Acyclic Graph** of stages, ensuring stages are scheduled in topological order [^src9].
+- **Task** — the smallest unit of execution; each stage is divided into multiple tasks executing in parallel across partitions.
+
+### Narrow vs wide dependencies (and why shuffle = stage boundaries)
+
+The "data shuffling" that splits jobs into stages comes from the dependency type [^src9]:
+
+- **Narrow dependencies** — each child-RDD partition depends on a limited, known set of parent partitions: a single parent (e.g. `map`) or a specific known subset (e.g. `coalesce`). No shuffle needed.
+- **Wide dependencies** — data must be repartitioned in a specific way, so a single parent partition contributes to *multiple* child partitions. This occurs with operations like **`groupByKey`, `reduceByKey`, or `join`**, which involve **shuffling** data. Consequently, wide dependencies result in **stage boundaries** in Spark's execution plan [^src9].
+
+This is the mechanism behind the stage-split rule noted in the execution hierarchy: shuffles (wide deps) are exactly where one stage ends and the next begins [^src2][^src9].
 
 ## DataFrame API, Catalyst, and Tungsten
 
@@ -157,3 +235,4 @@ The execution proceeds as: both datasets are (1) partitioned and sorted on the j
 [^src6]: [Spark Caching Explained: What Really Happens Under the Hood](../../raw/web/spark-caching-explained-what-really-happens-under-the-hood.md)
 [^src7]: [A small hands-on project to 2× your Apache Spark learning process](../../raw/web/a-small-hands-on-project-to-2-your-apache-spark-learning-pro.md)
 [^src8]: [10 Minutes to Learn Apache Spark JOINs with a Hands-On Project](../../raw/web/web-10-minutes-to-learn-apache-spark-joins-with-a-hands-on-proje.md)
+[^src9]: [If you're learning Apache Spark, this article is for you (Vu Trinh)](../../raw/email/email-2025-06-26-if-you-re-learning-apache-spark-this-article-is-for-you.md)
