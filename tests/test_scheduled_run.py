@@ -1770,3 +1770,22 @@ class TestEmailRelabel:
         result = scheduled_run.run_email_relabel(_subprocess_run=fake_run)
         assert any("gmail_client.py" in s and "reap-labels" in s for s in called), called
         assert result.get("relabeled") == 0
+
+
+class TestBuildSummary:
+    def test_includes_email_relabel(self):
+        tallies = {
+            "collectors": {"gmail": {"collected": 2}},
+            "ingest": {"ingested": 3, "deferred": 1},
+            "email_relabel": {"relabeled": 2, "archived": 2, "errors": 0},
+            "commit": {"status": "committed", "sha": "abc"},
+        }
+        s = scheduled_run.build_summary(tallies, dry_run=False)
+        assert s["email_relabel"] == {"relabeled": 2, "archived": 2, "errors": 0}
+        assert s["status"] == "ok" and s["dry_run"] is False
+        assert s["collectors"] and s["ingest"] and s["commit"]
+
+    def test_email_relabel_defaults_empty_when_absent(self):
+        s = scheduled_run.build_summary({}, dry_run=True)
+        assert s["email_relabel"] == {}   # absent tally -> empty dict, not KeyError
+        assert s["dry_run"] is True
