@@ -961,3 +961,31 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - after the labeled-backlog drain (46 ingested across 3 batches), 14 remaining labeled emails were agent-deferred for legit §7 reasons: duplicates of existing coverage (dbt, dimensional-modeling, de-portfolio-projects, data-engineering-interview, spam-classifier already in mlops/production-ml-workflow) or teasers/pointers with no fetchable companion
 - resolution: stamped corpus_ingested + corpus_pages:[], filed to raw/email, reaped (14 un-labeled + archived)
 - remaining labeled backlog: 2 substantive (15-productivity-hacks, introduction-to-mlops) → small --max 2 ingest
+
+## [2026-06-19 14:30] ingest | Introduction to MLOps
+- source: raw/email/email-2025-07-28-introduction-to-mlops.md
+- channel: email
+- domain: mlops
+- pages touched: [corpus/mlops/mlops-principles.md, corpus/mlops/README.md]
+- new pages: [corpus/mlops/mlops-principles.md]
+- notes: ingest-auto run (interactive, 2 named files); 2 processed, 0 deferred. Marvelous MLOps course lecture 1 — foundational "what is MLOps" page (definition, production meaning, traceability/reproducibility, supporting pillars, tooling-by-category, MLOps vs DevOps, Databricks mapping). Lectures 2–10 ingested previously.
+
+## [2026-06-19 14:30] ingest | 15 Productivity Hacks Every Engineer & Manager Should Know
+- source: raw/email/email-2025-06-01-15-productivity-hacks-every-engineer-manager-should-know.md
+- channel: email
+- domain: productivity
+- pages touched: [corpus/productivity/time-and-focus-management.md, corpus/productivity/README.md]
+- new pages: [corpus/productivity/time-and-focus-management.md]
+- notes: ingest-auto run (interactive, 2 named files); 2 processed, 0 deferred. pointer:false; sole fetched companion is a CodeRabbit sponsor page — extracted from email body, companion not ingested. New time/focus concept page (systems planning, time blocking, context-switching, notifications, maker vs manager time, deep work, prioritization, procrastination, breaks).
+
+## [2026-06-19T14:23] config | scheduled run
+- collectors:
+  - gmail: 4 collected · status=ok
+  - obsidian: 0 collected · status=ok
+  - pdf: 0 collected · status=ok
+  - youtube: 15 collected · status=ok
+  - links_refetch: 0 refetched · status=ok
+- ingest:
+  - ingest: 2 ingested · 0 deferred · status=ok
+- lint:
+  - 0 broken wikilinks · 0 broken citations · 0 orphans · 8 stubs

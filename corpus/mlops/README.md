@@ -29,6 +29,7 @@ The engineering substrate for building ML and software systems: how the developm
 - [[mlops/gcp|GCP]] — entity · draft · Google cloud; Compute Engine/GKE/BigQuery, org→folder→project hierarchy
 
 ### Concepts
+- [[mlops/mlops-principles|MLOps Principles]] — concept · draft · what MLOps is (reliable+efficient production); traceability/reproducibility core principle, tooling-by-category, MLOps vs DevOps (the data difference), Databricks mapping
 - [[mlops/dev-environment-stack|Dev Environment Stack]] — concept · draft · four-layer dependency stack (OS → package managers → runtimes → AI libs); venv isolation; bottom-up install
 - [[mlops/gpu-and-vram|GPU & VRAM]] — concept · draft · why GPUs win for ML, VRAM as the hard ceiling, fp16 rule of thumb, training ≈ 6× inference, LoRA
 - [[mlops/cloud-gpu-providers|Cloud GPU Providers]] — concept · draft · Colab / RunPod / Lambda / Vast.ai comparison; when to use each
@@ -54,6 +55,7 @@ The engineering substrate for building ML and software systems: how the developm
 - [IaC fundamentals for data engineers](<../../raw/web/IaC (Infrastructure-as-Code) fundamentals for data engineers.md>) — startdataengineering.com (Joseph Machado), 2026-05-27
 - YouTube cloud-cert cluster (2026-06-15): AWS services + AWS learning roadmap; Azure AZ-900 (×2) + Intellipaat Azure; GCP full course; cloud-computing fundamentals
 - YouTube dev-setup cluster (2026-06-15): 3× CLI-tools videos; Alacritty + Mac terminal setup (×2); zsh hacks; VS Code tutorial; Linux commands; Python concepts
+- [Introduction to MLOps (Marvelous MLOps)](../../raw/email/email-2025-07-28-introduction-to-mlops.md) — course lecture 1; MLOps principles & tooling categories, 2026-06-19
 
 ## See also
 
