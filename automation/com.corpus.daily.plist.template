@@ -61,5 +61,18 @@
 
     <key>StandardErrorPath</key>
     <string>__REPO_ROOT__/raw/.scheduled_run.log</string>
+
+    <!--
+        Run the unattended nightly ingest on Sonnet (not the session-default Opus) so
+        it draws from a separate, larger weekly pool — preserving the scarce Opus
+        weekly budget for interactive daytime work. Read by scheduled_run.run_ingest
+        via os.environ["SCHEDULED_RUN_INGEST_MODEL"]. Interactive/manual ingests still
+        use Opus. Delete this block to revert the nightly job to Opus.
+    -->
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>SCHEDULED_RUN_INGEST_MODEL</key>
+        <string>claude-sonnet-4-6</string>
+    </dict>
 </dict>
 </plist>

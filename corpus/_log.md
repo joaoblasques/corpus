@@ -993,3 +993,8 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 ## [2026-06-19 14:40] config | raise nightly ingest throughput to --max 50
 - 2am job (com.corpus.daily) was running `scheduled_run run` at the default --max 6, so collection (gmail/obsidian/youtube/pdf) outpaced ingestion ~3:1 → ~250-source collected-but-not-ingested backlog
 - raised to `--max 50 --timeout 5400` in automation/com.corpus.daily.plist.template; reinstalled via install_schedule.sh (2am schedule unchanged). Drains the backlog in ~1 week, then keeps pace. Opus cost runs at 2am (off-peak).
+
+## [2026-06-19 15:00] config | hybrid ingest models — nightly Sonnet, interactive Opus
+- nightly 2am job now sets SCHEDULED_RUN_INGEST_MODEL=claude-sonnet-4-6 (EnvironmentVariables in com.corpus.daily.plist.template) so the unattended bulk ingest runs on Sonnet — draws from a separate/larger weekly pool, preserving the scarce Opus weekly budget for interactive daytime work
+- interactive/manual ingests still default to Opus (no change); periodic Opus synthesis+lint pass remains on-demand to upgrade connections / catch contradictions
+- validated: `claude --model claude-sonnet-4-6 --print` resolves on the subscription (no API key). Revert: delete the EnvironmentVariables block + reinstall
