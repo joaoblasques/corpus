@@ -9,6 +9,12 @@ sources:
   - path: raw/web/data-engineering-projects-start-data-engineering.md
     channel: web
     ingested_at: 2026-06-15
+  - path: raw/web/build-data-engineering-projects-with-free-template-start-dat.md
+    channel: web
+    ingested_at: 2026-06-19
+  - path: raw/web/designing-a-data-project-to-impress-hiring-managers-start-da.md
+    channel: web
+    ingested_at: 2026-06-19
 aliases:
   - data engineering projects
   - portfolio projects
@@ -17,7 +23,7 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-15
-updated: 2026-06-15
+updated: 2026-06-19
 ---
 
 # DE Portfolio Projects
@@ -56,6 +62,20 @@ Common production tooling across the richer projects: Minio (open-source S3), Qu
 
 A retrieval-augmented-generation pipeline (`data_helper`) is also provided, bridging DE and AI workloads [^src1]. (RAG itself is owned by [[ai-engineering/rag|ai-engineering/RAG]].)
 
+## "Show, don't tell" — make a hiring manager *look*
+
+Building the project is only half the job; getting a hiring manager to read your GitHub is harder, and you get seconds, not minutes [^src4]. Work backward from the goal *"impress the hiring manager"* and optimize for **show not tell** [^src4]:
+
+- **Host a live dashboard fed by near-real-time data** (the `bitcoin_monitor` reference pulls CoinCap every 5 min into Postgres/warehouse, served via Metabase) and **link its public URL from your resume and LinkedIn** — the end product is visible without reading code [^src4].
+- Make the repo legible: a **concise README** (problem description, architecture diagram, setup), clear project organization, and coding best practices on display — **tests, lint, types, formatting** [^src4].
+- Don't expect anyone to read the codebase; lead with the dashboard and the architecture diagram [^src4].
+
+This is the same instinct the [[data-engineering/portfolio-project-that-lands-a-de-role|portfolio synthesis]] generalizes into a full rigor checklist.
+
+### The dev-workflow toolchain these templates standardize on
+
+Every template ships the same "set up data infra with code" workflow so new features deploy quickly [^src3]: **Docker + Docker Compose** for local dev, **[[mlops/terraform|Terraform]]** for IaC, **GitHub Actions** for CI/CD, **pytest** for testing, **isort + black** for formatting, **flake8** for lint, **mypy** for type checks, and a **Makefile** of command aliases [^src3]. CI runs the format/lint/type/test gate on each PR; CD copies merged code to an EC2 Docker host — see [[data-engineering/cicd-for-data-infrastructure|CI/CD for Data Infrastructure]] [^src3].
+
 ## How to use
 
 Run on Codespaces (fork → "Create codespace" → `make up` → open the exposed UI port) or locally with Docker (≥4 GB RAM); the recommended order goes least → most complex [^src1]. The Docker images are not production-optimised — for learning only [^src1].
@@ -72,3 +92,5 @@ Run on Codespaces (fork → "Create codespace" → `make up` → open the expose
 
 [^src1]: [10 Data Engineering Projects (Start Data Engineering)](../../raw/web/data-engineering-projects-start-data-engineering.md)
 [^src2]: [10 Data Engineering Projects For Your Portfolio! (newsletter)](../../raw/email/email-2025-11-12-10-data-engineering-projects-for-your-portfolio.md)
+[^src3]: [Build Data Engineering Projects with a Free Template](../../raw/web/build-data-engineering-projects-with-free-template-start-dat.md)
+[^src4]: [Designing a Data Project to Impress Hiring Managers](../../raw/web/designing-a-data-project-to-impress-hiring-managers-start-da.md)

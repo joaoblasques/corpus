@@ -9,6 +9,9 @@ sources:
   - path: raw/web/how-to-set-up-ci-cd-for-data-infrastructure-start-data-engin.md
     channel: web
     ingested_at: 2026-06-15
+  - path: raw/web/build-data-engineering-projects-with-free-template-start-dat.md
+    channel: web
+    ingested_at: 2026-06-19
 aliases:
   - CI/CD for data infrastructure
   - data infrastructure CI/CD
@@ -18,7 +21,7 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-15
-updated: 2026-06-15
+updated: 2026-06-19
 ---
 
 # CI/CD for Data Infrastructure
@@ -61,6 +64,10 @@ PR opened ─► CI: fmt + validate + plan(dev) → comment on PR ─► human r
 - **Follow-up PRs for dependent code** — code that depends on new infrastructure is deployed in a *follow-up* PR after the infra exists [^src1].
 - **Failure tradeoff** — if an infra change fails, you must quickly fix-forward or revert; in the interval other team members are blocked. Since most teams rarely change infra, this is an acceptable tradeoff [^src1].
 
+## The concrete toolchain (portfolio template)
+
+A reference data-project template wires this skeleton with a standard stack [^src3]: **GitHub-flow** branching, **GitHub Actions** for both CI and CD, and a **Makefile** of command aliases. CI runs **isort + black** (formatting), **flake8** (lint/style), **mypy** (type check), and **pytest** (tests) automatically on each pull request before merge to `main` [^src3]. CD then copies the merged code to an **EC2** Docker host, using repository secrets (`SERVER_SSH_KEY`, `REMOTE_HOST`, `REMOTE_USER`) whose values come from **Terraform outputs** — concretely tying the CD step to the IaC layer [^src3]. See [[data-engineering/de-portfolio-projects|DE Portfolio Projects]] for the full template.
+
 ## Takeaway
 
 Map any intimidating 1000-line Terraform file or complex YAML workflow onto this **CI (check + plan) → CD (apply dev → gate → apply prod)** skeleton and it falls into place [^src1]. Understanding the *design* is what lets you leverage AI effectively rather than blindly running its generated YAML [^src1].
@@ -71,9 +78,11 @@ Map any intimidating 1000-line Terraform file or complex YAML workflow onto this
 - [[data-engineering/data-engineering-best-practices|Data Engineering Best Practices]] — testing & version control
 - [[data-engineering/dbt|dbt]] — slim CI for dbt models (PR-specific schemas)
 - [[data-engineering/data-migration-at-scale|Data Migration at Scale]] — safe rollout/rollback patterns
+- [[data-engineering/de-portfolio-projects|DE Portfolio Projects]] — the template that ships this CI/CD toolchain
 - [[data-engineering/README|Data Engineering hub]]
 
 ---
 
 [^src1]: [How to set up CI/CD for data infrastructure](../../raw/web/how-to-set-up-ci-cd-for-data-infrastructure-start-data-engin.md)
 [^src2]: [CI/CD patterns to deploy infra changes (newsletter)](../../raw/email/email-2026-06-03-ci-cd-patterns-to-deploy-infra-changes.md)
+[^src3]: [Build Data Engineering Projects with a Free Template](../../raw/web/build-data-engineering-projects-with-free-template-start-dat.md)

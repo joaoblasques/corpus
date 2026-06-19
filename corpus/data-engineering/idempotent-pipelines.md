@@ -9,6 +9,9 @@ sources:
   - path: raw/email/email-2025-11-04-scd-2-considered-harmful-part-2.md
     channel: email
     ingested_at: 2026-06-12
+  - path: raw/web/data-pipeline-design-patterns-1-data-flow-patterns-start-dat.md
+    channel: web
+    ingested_at: 2026-06-19
 aliases:
   - idempotent pipeline
   - idempotency
@@ -20,7 +23,7 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-05-21
-updated: 2026-06-12
+updated: 2026-06-19
 ---
 
 # Idempotent Pipelines
@@ -32,6 +35,10 @@ updated: 2026-06-12
 Non-idempotent pipelines create a class of bugs that are exceptionally hard to detect: "tests that pass but prod fails." These bugs typically surface during backfills — when a pipeline runs over historical data — and produce results inconsistent with the original production run [^src1].
 
 **Backfill reliability is the real test of idempotency.**
+
+### Prerequisite: a replayable source and an overwritable sink
+
+Idempotency is not free — it is only *achievable* when two data-flow properties hold: the **source is replayable** (it can answer "what did the data look like *n* periods ago?" — e.g. an event stream, logs, or a CDC/WAL dump, but not a constantly-mutated OLTP table) and the **sink is overwritable** (rows are addressable by a unique key, or storage is namespaced by a unique run id) [^src3]. Lacking either, you cannot rerun cleanly; the pragmatic fallback is a **self-healing pipeline**, where the *next* run catches up failed/unprocessed data instead of guaranteeing identical reruns — simpler to build, but bugs can hide for several runs [^src3]. See [[data-engineering/data-flow-patterns|Data Flow Patterns]] for the full extraction/behavioral/structural taxonomy this sits in.
 
 ## Common pitfalls and fixes
 
@@ -83,9 +90,11 @@ The clearest proof of idempotency is the backfill. When each day reads and write
 - [[data-engineering/scd2|SCD2]] — idempotent history-preserving dimension pattern; datestamps vs valid_from/valid_to
 - [[data-engineering/dimensional-modeling|Dimensional Modeling]] — the data modeling context in which idempotency matters most
 - [[data-engineering/incremental-pipeline-design|Incremental Pipeline Design]] — extraction, load, and backfill design decisions
+- [[data-engineering/data-flow-patterns|Data Flow Patterns]] — idempotent vs self-healing as behavioral choices; the replayability/overwritability prerequisites
 - [[data-engineering/README|Data Engineering hub]]
 
 ---
 
 [^src1]: [[03_Resources/Study Notes/Dimensional Data Modeling - Idempotent Pipelines and SCD Patterns|Dimensional Data Modeling - Idempotent Pipelines and SCD Patterns]]
 [^src2]: [SCD-2 considered harmful! Part 2](../../raw/email/email-2025-11-04-scd-2-considered-harmful-part-2.md)
+[^src3]: [Data Pipeline Design Patterns - #1 Data Flow Patterns](../../raw/web/data-pipeline-design-patterns-1-data-flow-patterns-start-dat.md)

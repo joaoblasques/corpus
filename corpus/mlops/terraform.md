@@ -6,17 +6,22 @@ sources:
   - path: raw/web/IaC (Infrastructure-as-Code) fundamentals for data engineers.md
     channel: web
     ingested_at: 2026-06-09
+  - path: raw/email/email-2025-08-10-infrastructure-as-code-for-data-engineers.md
+    channel: email
+    ingested_at: 2026-06-19
 aliases:
   - Terraform
   - terraform
   - HCL
   - tfstate
   - tfvars
+  - OpenTofu
+  - HashiCorp Configuration Language
 tags:
   - corpus/mlops
   - entity
 created: 2026-06-09
-updated: 2026-06-09
+updated: 2026-06-19
 ---
 
 # Terraform
@@ -88,11 +93,28 @@ Re-run `init` after adding a backend to migrate state [^src1].
     └── variables.tf      # allowed variables + defaults
 ```
 
+## Declarative vs. imperative
+
+Terraform takes the **declarative** approach: you describe the *desired end state* and the tool computes the route to get there — like telling a navigator the destination rather than giving **imperative** turn-by-turn directions where every manual step must be correct [^src2]. Its 3-step workflow embodies this: **Code** (write `.tf` blueprint) → **Plan** (`terraform plan` diffs current vs desired, shows what it will create/change/destroy without touching anything) → **Apply** (`terraform apply` calls provider APIs and builds it) [^src2]. Because state is reconciled, re-running after adding one resource (e.g. Azure Databricks alongside existing ADLS/ADF/DB/Key Vault) creates *only* the new resource — preventing configuration drift [^src2].
+
+## Modules & providers
+
+Terraform is **modular and pluggable** [^src2]:
+
+- **Modules** group related resources, accept input variables, and return outputs — reusable building blocks that plug into larger systems.
+- **Providers** connect Terraform to a target: IaaS (AWS/Azure/GCP), PaaS (Cloud Foundry), even SaaS (Cloudflare). So Terraform's reach now spans infrastructure, platforms, and SaaS [^src2].
+
+## Licensing: BSL and OpenTofu
+
+Terraform was originally **MPL** (true open source). In **August 2023** HashiCorp relicensed it to the **Business Source License (BSL)** — "source available," not OSI-approved: free to see/use in most cases, but you can't use it to offer a competing paid service [^src2]. The last truly open-source version is **v1.5.x**; **OpenTofu** is the community fork that stays under an open-source license [^src2]. Terraform ships in three editions: Community, HCP Terraform (hosted SaaS), and Terraform Enterprise (self-hosted) [^src2]. The tool is written in **Go** and distributed as a single binary; configs are written in **HCL** [^src2]. The classic reference is *Terraform: Up and Running* by Yevgeniy Brikman [^src2].
+
 ## See also
 
-- [[mlops/infrastructure-as-code|Infrastructure as Code]] — the general pattern
+- [[mlops/infrastructure-as-code|Infrastructure as Code]] — the general pattern; the five types of IaC tools
+- [[data-engineering/cicd-for-data-infrastructure|CI/CD for Data Infrastructure]] — Terraform plan→gate→apply in a pipeline
 - [[mlops/README|MLOps hub]]
 
 ---
 
 [^src1]: [IaC fundamentals for data engineers](<../../raw/web/IaC (Infrastructure-as-Code) fundamentals for data engineers.md>)
+[^src2]: [Infrastructure as Code for Data Engineers (Pipeline to Insights)](../../raw/email/email-2025-08-10-infrastructure-as-code-for-data-engineers.md)

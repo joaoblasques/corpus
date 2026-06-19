@@ -6,6 +6,9 @@ sources:
   - path: raw/email/email-2026-05-06-how-companies-ingest-data-2-key-patterns.md
     channel: email
     ingested_at: 2026-06-12
+  - path: raw/web/data-pipeline-design-patterns-1-data-flow-patterns-start-dat.md
+    channel: web
+    ingested_at: 2026-06-19
 aliases:
   - data ingestion patterns
   - data loading patterns
@@ -16,7 +19,7 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-12
-updated: 2026-06-12
+updated: 2026-06-19
 ---
 
 # Data Ingestion Patterns
@@ -38,14 +41,18 @@ These two patterns are the entry point of the pipeline — the **bronze/raw** st
 - **Batch** ingestion is the extract path; *how* to extract incrementally (timestamp columns, primary-key / hash diffing) and *how* to load (overwrite-partition, row-based update, append) is the subject of [[data-engineering/incremental-pipeline-design|Incremental Pipeline Design]].
 - The distinction also tracks the [[data-engineering/change-data-capture|CDC]] vs full-load vs incremental axis: CDC is one way a streaming source exposes change.
 
+Which entry pattern is even *viable* is governed by **source/sink properties** — a source's **replayability** ("what did the data look like *n* periods ago?") and a sink's **overwritability** — which is also the prerequisite framing for the downstream [[data-engineering/data-flow-patterns|data-flow patterns]] (extraction / behavioral / structural) that build on top of ingestion [^src2].
+
 ## See also
 
 - [[data-engineering/incremental-pipeline-design|Incremental Pipeline Design]] — extract/load/backfill design for batch pipelines
 - [[data-engineering/kafka|Apache Kafka]] — the streaming-ingestion event log
 - [[data-engineering/change-data-capture|Change Data Capture]] — capturing change from operational sources
 - [[data-engineering/medallion-architecture|Medallion Architecture]] — where ingestion sits in the pipeline
+- [[data-engineering/data-flow-patterns|Data Flow Patterns]] — extraction/behavioral/structural patterns layered on the entry choice
 - [[data-engineering/README|Data Engineering hub]]
 
 ---
 
 [^src1]: [How Companies Ingest Data: 2 Key Patterns](../../raw/email/email-2026-05-06-how-companies-ingest-data-2-key-patterns.md)
+[^src2]: [Data Pipeline Design Patterns - #1 Data Flow Patterns](../../raw/web/data-pipeline-design-patterns-1-data-flow-patterns-start-dat.md)

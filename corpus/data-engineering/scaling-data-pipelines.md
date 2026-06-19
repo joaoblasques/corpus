@@ -1,0 +1,63 @@
+---
+type: concept
+domain: data-engineering
+status: draft
+sources:
+  - path: raw/web/how-to-scale-your-data-pipelines-start-data-engineering.md
+    channel: web
+    ingested_at: 2026-06-19
+aliases:
+  - scaling data pipelines
+  - vertical scaling
+  - horizontal scaling
+  - scale up
+  - scale down
+  - distributed processing
+tags:
+  - corpus/data-engineering
+  - concept
+created: 2026-06-19
+updated: 2026-06-19
+---
+
+# Scaling Data Pipelines
+
+**TL;DR.** Scaling means changing the **number** or **size** of processing machines to match data volume — *scaling up* to go faster or handle bigger inputs, *scaling down* to cut cost [^src1]. There are two kinds: **vertical** (bigger machine) and **horizontal** (more machines), and horizontal splits into **independent processes** (one process per dataset) and **distributed systems** (a cluster acting as one) [^src1]. The first rule is to check whether you need to scale at all — streaming row-by-row through a larger-than-memory dataset is often enough — and to **beware premature optimization** [^src1].
+
+## The three strategies
+
+| | **Vertical** | **Horizontal — independent processes** | **Horizontal — distributed** |
+|---|---|---|---|
+| Mechanism | increase a machine's memory/disk | one process per dataset, run in parallel | cluster of machines operating as one unit |
+| Setup | simple | simple (process); needs K8s/Lambda for containers | hard to manage (managed services help) |
+| Autoscaling | no — stop, scale, restart | yes — trigger processes async (e.g. AWS Lambda) | yes — Spark/Flink/Snowflake autoscale |
+| Data size | GBs (e.g. `c5a.24xlarge` ≈ 192 GB RAM) | bound by single-processor size; GBs | terabytes and above |
+| Example services | AWS EC2 | AWS Lambda, AWS EKS | AWS EMR (Spark/Flink), Snowflake, Redshift |
+
+Cost depends on machine type and count; estimate with a cloud cost calculator [^src1].
+
+## Choosing a strategy
+
+First confirm you actually need to scale (row-streaming may suffice) [^src1]. Then generate candidate solutions by asking [^src1]:
+
+- Is a **bigger machine** (vertical) enough? Can you even get one large enough? Note some operations don't scale linearly with machine size (e.g. cross join).
+- Can the **data warehouse** do it in SQL? Warehouses autoscale — this is a major reason **ELT is popular**.
+- Are there **independent datasets**? Services like AWS Lambda autoscale cheaply per-dataset.
+- Do volume/speed/transform complexity genuinely require a **Spark/Flink cluster**? Without a managed service, running a distributed system is a lot of work.
+
+Then narrow the candidates by weighing [^src1]: total cost (service + developer time + code complexity), whether it's over-optimization, reusability across other pipelines, whether code complexity rises or falls, whether you can pair a short-term fix (bigger machine) with a long-term one (independent processes), and whether multiple strategies can combine.
+
+The conclusion is a discipline, not a tool: come up with several scaling strategies and **eliminate most of them** with the questions above, because premature optimization just adds code complexity [^src1].
+
+## See also
+
+- [[data-engineering/apache-spark|Apache Spark]] — the canonical distributed (horizontal) engine
+- [[data-engineering/duckdb|DuckDB]] — single-node engine that often makes vertical scaling enough
+- [[data-engineering/etl-pipeline|ETL Pipeline]] — ELT-in-the-warehouse as a scaling strategy
+- [[data-engineering/data-flow-patterns|Data Flow Patterns]] — pattern choices that interact with scaling (streaming, multi-hop)
+- [[data-engineering/incremental-pipeline-design|Incremental Pipeline Design]] — parallel backfills as horizontal scaling
+- [[data-engineering/README|Data Engineering hub]]
+
+---
+
+[^src1]: [How to Scale Your Data Pipelines](../../raw/web/how-to-scale-your-data-pipelines-start-data-engineering.md)

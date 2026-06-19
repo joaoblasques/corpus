@@ -1,6 +1,6 @@
 # Corpus Index
 
-> Last updated: 2026-06-18 14:35 | Total pages: 185 | Total sources: 447
+> Last updated: 2026-06-19 09:45 | Total pages: 188 | Total sources: 459
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
@@ -128,6 +128,9 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[data-engineering/dataform|Dataform]] — entity · draft · BigQuery-native SQL/JS transformation orchestration (SQLX, ref-DAG, repo=Git, assertions); the dbt analogue in GCP
 - [[data-engineering/snowflake|Snowflake]] — entity · draft · managed cloud OLAP; 3-layer disaggregated architecture, virtual warehouses, micro-partitions, push-based vectorized execution (CMU/Pavlo)
 - [[data-engineering/sql-intermediate-results|SQL Intermediate Results]] — concept · draft · the five ways to store a transformation (subquery/CTE/view vs temp table/MV); materialized-or-not decision rules
+- [[data-engineering/data-flow-patterns|Data Flow Patterns]] — concept · draft · source/sink replayability+overwritability; extraction/behavioral/structural pipeline-design patterns
+- [[data-engineering/scaling-data-pipelines|Scaling Data Pipelines]] — concept · draft · vertical vs horizontal (independent processes / distributed); strategy-selection questions
+- [[data-engineering/data-engineering-interview|Data Engineering Interview & Job Search]] — concept · draft · the 10 interview skills (SQL-first) + the 5-step job search
 
 ### software-engineering
 - [[software-engineering/README|Software Engineering]] — hub · draft · foundational CS through deployment infrastructure; design principles, distributed systems, container orchestration
@@ -205,6 +208,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[blockchain/zero-knowledge-proofs|Zero-Knowledge Proofs]] — concept · draft · SNARKs vs STARKs; arithmetization + LDC; tradeoffs
 
 ## Recent additions
+- 2026-06-19: **ingest-auto safe pass (12 candidates, 6 ingested, 6 deferred)** — new: [[data-engineering/data-flow-patterns|Data Flow Patterns]], [[data-engineering/scaling-data-pipelines|Scaling Data Pipelines]], [[data-engineering/data-engineering-interview|Data Engineering Interview & Job Search]]. Updated: data-ingestion-patterns, idempotent-pipelines (replayability/overwritability + self-healing), de-portfolio-projects (show-not-tell + dev-workflow toolchain), cicd-for-data-infrastructure (concrete toolchain), mlops/infrastructure-as-code (5 IaC tool types, why-DEs-use-IaC), mlops/terraform (BSL/OpenTofu, modules/providers). Mostly StartDataEngineering DE-101 newsletter + Pipeline-to-Insights IaC. Deferred: 2 course promos, 1 community check-in, 1 unfetched-teaser, 2 video teasers (no transcript).
 - 2026-06-18: [[data-engineering/portfolio-project-that-lands-a-de-role|The Portfolio Project That Lands a DE Role]] (new synthesis — filed back from /query, claudesidian-originated: what makes a Databricks+AWS DE portfolio project impressive; distilled from 10 corpus pages, no web gap)
 - 2026-06-18: [[ai-engineering/prompt-engineering]] (updated, +1 source — "7 deadly sins of prompting" + R-E-X; first live Gmail-LABEL collect→ingest→reap demo: collected under label Prompting, ingested, then un-labeled+archived in Gmail)
 - 2026-06-18: [[data-engineering/data-engineering-agents-landscape|Data Engineering Agents Landscape]] (new synthesis — filed back from /query: OSS DE agents by build-time vs consume-time; 6 web sources queued via_query)

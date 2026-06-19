@@ -797,3 +797,63 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   - ingest: 0 ingested · 6 deferred · status=ok
 - lint:
   - 0 broken wikilinks · 0 broken citations · 0 orphans · 6 stubs
+
+## [2026-06-19 09:45] ingest | Data Pipeline Design Patterns #1 — Data Flow
+- source: raw/email/email-2025-08-13-data-pipeline-design-patterns-1-data-flow.md (+ companion raw/web/data-pipeline-design-patterns-1-data-flow-patterns-start-dat.md)
+- channel: email → web companion
+- domain: data-engineering
+- pages touched: [data-flow-patterns (new), data-ingestion-patterns, idempotent-pipelines]
+- new pages: [data-engineering/data-flow-patterns.md]
+- notes: ingest-auto run; source/sink replayability+overwritability, extraction/behavioral/structural taxonomy
+
+## [2026-06-19 09:45] ingest | [DE 101] #11 — Scale your data pipelines
+- source: raw/email/email-2025-08-16-de-101-11-scale-your-data-pipelines.md (+ companion raw/web/how-to-scale-your-data-pipelines-start-data-engineering.md)
+- channel: email → web companion
+- domain: data-engineering
+- pages touched: [scaling-data-pipelines (new)]
+- new pages: [data-engineering/scaling-data-pipelines.md]
+- notes: ingest-auto run; vertical vs horizontal (independent processes / distributed); strategy-selection questions
+
+## [2026-06-19 09:45] ingest | [DE 101] #12 — How to land a high-paying data job
+- source: raw/email/email-2025-08-19-de-101-12-how-to-land-a-high-paying-data-job.md (+ companions raw/web/10-skills-to-ace-…, raw/web/5-steps-to-land-…)
+- channel: email → web companions (2)
+- domain: data-engineering
+- pages touched: [data-engineering-interview (new)]
+- new pages: [data-engineering/data-engineering-interview.md]
+- notes: ingest-auto run; 10 interview skills (SQL-first) + 5-step job search
+
+## [2026-06-19 09:45] ingest | [DE 101] #9 — Data project to impress hiring managers
+- source: raw/email/email-2025-08-10-de-101-9-data-project-to-impress-hiring-managers.md (+ companion raw/web/designing-a-data-project-to-impress-hiring-managers-start-da.md)
+- channel: email → web companion
+- domain: data-engineering
+- pages touched: [de-portfolio-projects]
+- new pages: []
+- notes: ingest-auto run; show-not-tell, live-dashboard-in-resume tactic (corroborating source)
+
+## [2026-06-19 09:45] ingest | [DE 101] #10 — Set up your data project
+- source: raw/email/email-2025-08-13-de-101-10-set-up-your-data-project.md (+ companion raw/web/build-data-engineering-projects-with-free-template-start-dat.md)
+- channel: email → web companion
+- domain: data-engineering
+- pages touched: [de-portfolio-projects, cicd-for-data-infrastructure]
+- new pages: []
+- notes: ingest-auto run; dev-workflow toolchain (Docker/Terraform/GHA/pytest/black/isort/flake8/mypy)
+
+## [2026-06-19 09:45] ingest | Infrastructure as Code for Data Engineers
+- source: raw/email/email-2025-08-10-infrastructure-as-code-for-data-engineers.md
+- channel: email (full-body article)
+- domain: mlops
+- pages touched: [infrastructure-as-code, terraform]
+- new pages: []
+- notes: ingest-auto run; 5 IaC tool types, why-DEs-use-IaC, Terraform BSL→OpenTofu + modules/providers. 6 ingested, 6 deferred this run.
+
+## [2026-06-19T10:03] config | scheduled run
+- collectors:
+  - gmail: 0 collected · status=ok
+  - obsidian: 0 collected · status=ok
+  - pdf: 0 collected · status=ok
+  - youtube: 17 collected · status=ok
+  - links_refetch: 0 refetched · status=ok
+- ingest:
+  - ingest: 6 ingested · 6 deferred · status=ok
+- lint:
+  - 0 broken wikilinks · 0 broken citations · 0 orphans · 6 stubs

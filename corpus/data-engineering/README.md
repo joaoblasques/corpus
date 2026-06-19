@@ -6,7 +6,7 @@ tags:
   - corpus/data-engineering
   - hub
 created: 2026-05-07
-updated: 2026-06-18
+updated: 2026-06-19
 ---
 
 # Data Engineering
@@ -33,12 +33,15 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [[data-engineering/materialized-views|Materialized Views]] — concept · draft · cross-platform MV synthesis; incremental vs full refresh; limitations
 - [[data-engineering/data-quality|Data Quality]] — concept · draft · 6-step clean-warehouse framework; data contracts; schema-aware validation
 - [[data-engineering/data-ingestion-patterns|Data Ingestion Patterns]] — concept · draft · two ingestion patterns: stream via event log vs batch extract
+- [[data-engineering/data-flow-patterns|Data Flow Patterns]] — concept · draft · source/sink replayability+overwritability; extraction (time-ranged/snapshot/lookback/streaming), behavioral (idempotent/self-healing), structural (multi-hop/conditional/disconnected)
+- [[data-engineering/scaling-data-pipelines|Scaling Data Pipelines]] — concept · draft · vertical vs horizontal (independent processes / distributed); strategy-selection questions; beware premature optimization
 - [[data-engineering/incremental-pipeline-design|Incremental Pipeline Design]] — concept · draft · timestamp-driven extraction, model-driven load, parallel backfilling
 - [[data-engineering/storage-fundamentals|Storage Fundamentals]] — concept · draft · storage hierarchy; file/block/object; row vs columnar serialisation
 - [[data-engineering/data-engineering-best-practices|Data Engineering Best Practices]] — concept · draft · six pipeline best practices: 3-hop, DQ, idempotency, DRY, metadata, tests
 - [[data-engineering/python-for-data-engineering|Python for Data Engineering]] — concept · draft · disk vs memory; Python as glue across ETL/DQ/test/orchestrate
 - [[data-engineering/pipeline-coding-patterns|Pipeline Coding Patterns (Python)]] — concept · draft · code design patterns for DE: Factory, Strategy, Singleton/Object pool, functional design, context managers, typing/dataclasses, pytest, decorators
 - [[data-engineering/de-portfolio-projects|DE Portfolio Projects]] — concept · draft · runnable batch/stream/event-driven projects; stack-comparison matrix
+- [[data-engineering/data-engineering-interview|Data Engineering Interview & Job Search]] — concept · draft · the 10 interview skills (SQL-first) + the 5-step job search (companies, LinkedIn, referrals, prep, negotiation)
 - [[data-engineering/cicd-for-data-infrastructure|CI/CD for Data Infrastructure]] — concept · draft · CI plan→PR, CD apply-dev→human-gate→prod; GitHub Actions + Terraform
 - [[data-engineering/data-migration-at-scale|Data Migration at Scale]] — concept · draft · Shadow → Reverse Shadow → Cleanup; row-count/checksum verification; CDC rollback
 - [[data-engineering/data-modeling-meaning|Meaning in Data Modeling]] — concept · draft · semantics, taxonomy, ontology, metadata (Joe Reis)
