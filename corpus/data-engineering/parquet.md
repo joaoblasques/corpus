@@ -9,16 +9,23 @@ sources:
   - path: raw/web/apache-parquet-for-data-engineers-optimized-data-storage.md
     channel: web
     ingested_at: 2026-06-16
+  - path: raw/email/email-2025-05-08-back-to-the-basics-what-is-columnar-storage.md
+    channel: email
+    ingested_at: 2026-06-19
 aliases:
   - Parquet
   - Apache Parquet
   - parquet
   - columnar file format
+  - ORC
+  - Apache ORC
+  - columnar storage
+  - vectorized execution
 tags:
   - corpus/data-engineering
   - entity
 created: 2026-05-21
-updated: 2026-06-16
+updated: 2026-06-19
 ---
 
 # Apache Parquet
@@ -117,6 +124,34 @@ Parquet keeps a minimal set of **primitive types** — `BOOLEAN`, `INT32`, `INT6
 
 Parquet is optimized for read-heavy analytics, not transactional workloads. The source notes it is **not ideal for small, transactional datasets** (row-group/page overhead), writes can be slower than other formats, and being binary it is **not human-readable** [^src2].
 
+## Why columnar wins for analytics
+
+Parquet is the canonical columnar format; the deeper question is *why* columnar storage suits analytics at all [^src3]. Four reasons [^src3]:
+
+- **Performance (less I/O)** — analytical queries touch a few of many columns; a columnar engine reads **only the relevant columns**, scanning less data, whereas row-based systems must read whole rows even for one field [^src3].
+- **Compression** — storing values of the same type together compresses far better [^src3]. Beyond [[#Run Length Encoding (RLE)|RLE]] and dictionary encoding (above), the article names **bit-packing** (use only the minimum bits needed for small numeric values) and **delta encoding** (store the difference between consecutive values) [^src3].
+- **Vectorized processing** — columnar layout unlocks **vectorized execution**: operations applied to batches of column values at once, letting engines (DuckDB, Presto, Spark) use **SIMD** (Single Instruction, Multiple Data) CPU instructions to evaluate e.g. `price > 100` across a whole column segment in one shot [^src3].
+- **Parallelism** — each column stored separately can be read in parallel across CPU cores/nodes [^src3].
+
+Caveat: **not every OLAP warehouse is a column store** — DDIA notes traditional row-oriented and other architectures are also used; columnar is a strong default for analytics, not a law [^src3].
+
+## ORC: the other columnar format
+
+**Apache ORC** (Optimized Row Columnar) is a Hadoop-native columnar format focused on deep compression, efficient storage, and built-in indexing; it grew popular with Hive and often outperforms older formats like RCFile [^src3]. Its internal units parallel Parquet's [^src3]:
+
+- **Stripes** — the largest unit; each holds rows and is independently compressed and indexed (analogous to Parquet row groups).
+- **Row Index** — lets the reader skip data blocks that don't match query criteria.
+- **Stripe Footer** — column-level metadata and statistics (min/max, count, nulls).
+- **File Footer** — global metadata: schema, column encodings, file-level stats.
+- **Postscript** — compression-algorithm and versioning info.
+
+## Real-world columnar at scale
+
+Two petabyte-scale cases (note: lessons apply at PB scale, not to a 100 GB warehouse — "don't let FOMO push you into rearchitecting") [^src3]:
+
+- **Uber** — manages hundreds of PB with Parquet as the primary format; switching compression from SNAPPY/Gzip to **Zstandard (ZSTD)** yielded up to **39% smaller files** and improved query performance (lower vCore usage). They also built high-throughput **column deletion / reordering** tools — pruning unused columns saved PB-level space on a single table; many improvements (ZSTD, column pruning) were contributed back to open-source Parquet [^src3].
+- **Criteo** — ~30 billion events/day; migrated nearly a petabyte from **RCFile to Parquet** for better engine support (Cascading/Pig/Spark/Impala) and compression; Gzip-compressed Parquet matched or beat RCFile with added storage efficiency [^src3].
+
 ## Iceberg adds the table format layer
 
 Parquet alone is just files. [[data-engineering/apache-iceberg|Apache Iceberg]] wraps Parquet with:
@@ -151,3 +186,4 @@ WITH (
 
 [^src1]: [[03_Resources/Study Notes/Data Lake Fundamentals - Apache Iceberg and Parquet|Data Lake Fundamentals - Apache Iceberg and Parquet]]
 [^src2]: [Apache Parquet for Data Engineers](../../raw/web/apache-parquet-for-data-engineers-optimized-data-storage.md)
+[^src3]: [Back To The Basics: What Is Columnar Storage (SeattleDataGuy)](../../raw/email/email-2025-05-08-back-to-the-basics-what-is-columnar-storage.md)

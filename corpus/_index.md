@@ -1,6 +1,6 @@
 # Corpus Index
 
-> Last updated: 2026-06-19 11:30 | Total pages: 190 | Total sources: 478
+> Last updated: 2026-06-19 12:30 | Total pages: 197 | Total sources: 490
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
@@ -35,6 +35,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[ai-engineering/codegraph|CodeGraph]] — entity · draft · 100%-local pre-indexed code knowledge graph over MCP (tree-sitter→SQLite); graph queries replace agent grep/read
 - [[ai-engineering/agentic-coding|Agentic Coding]] — synthesis · draft · sub-hub: coding-agent orchestration; conductor→orchestrator, AX, verification bottleneck
 - [[ai-engineering/claude-code|Claude Code]] — entity · draft · Anthropic CLI coding agent; harness, large-codebase practices, security review
+- [[ai-engineering/github-copilot|GitHub Copilot (Agent Mode)]] — entity · stub · whole-project agentic coding in VS Code; multi-file edits, runs commands, self-corrects; multi-model + MCP
 - [[ai-engineering/claude-cowork|Claude Cowork]] — entity · draft · sub-hub: Cowork desktop product; workspace folder, CLAUDE.md/MEMORY.md, Toolkit
 - [[ai-engineering/anthropic|Anthropic]] — entity · draft · the lab: company, funding/valuation, learning resources
 - [[ai-engineering/claude-models|Claude Model Lineup]] — entity · draft · Claude family (Haiku → Sonnet → Opus → Fable/Mythos); aliases, 1M context, Opus 4.8, Fable 5/Mythos 5
@@ -132,6 +133,12 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[data-engineering/scaling-data-pipelines|Scaling Data Pipelines]] — concept · draft · vertical vs horizontal (independent processes / distributed); strategy-selection questions
 - [[data-engineering/data-engineering-interview|Data Engineering Interview & Job Search]] — concept · draft · the 10 interview skills (SQL-first) + the 5-step job search
 - [[data-engineering/requirements-gathering|Requirements Gathering]] — concept · draft · 5-step requirements process (identify users, question set, validate, deliver iteratively, gate changes) + output-led engineering
+- [[data-engineering/stream-processing|Stream Processing]] — concept · draft · batch vs stream/micro-batch; event-time/watermarks/backpressure; engines (Flink/Kafka Streams/Spark SS/Storm); delivery guarantees; Lambda architecture
+- [[data-engineering/bigquery|BigQuery]] — entity · draft · Google serverless warehouse; Dremel + Colossus + Borg; Capacitor (inspired Parquet); shuffle separation
+- [[data-engineering/redshift|Amazon Redshift]] — entity · draft · MPP column store (ParAccel/PostgreSQL); share-nothing→RMS; code specialization vs vectorization
+- [[data-engineering/orchestra|Orchestra]] — entity · draft · managed declarative Data&AI workflow platform; UI-first; managed integrations, pipelines/tasks/triggers, lineage, env-as-config, Git
+- [[data-engineering/cloud-data-warehouse-internals|Cloud Data Warehouse Internals]] — synthesis · draft · BigQuery/Snowflake/Databricks/Redshift compared: shared-disk, object storage, hybrid vs column format, vectorization vs code specialization
+- [[data-engineering/sources/data-engineering-zoomcamp|Data Engineering Zoomcamp]] — source · draft · free 9-week DataTalksClub end-to-end course (Docker/Terraform/Kestra/dbt/BigQuery/Spark/Kafka)
 
 ### software-engineering
 - [[software-engineering/README|Software Engineering]] — hub · draft · foundational CS through deployment infrastructure; design principles, distributed systems, container orchestration
@@ -210,6 +217,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[blockchain/zero-knowledge-proofs|Zero-Knowledge Proofs]] — concept · draft · SNARKs vs STARKs; arithmetization + LDC; tradeoffs
 
 ## Recent additions
+- 2026-06-19: **ingest-auto safe pass (20 candidates, 12 ingested, 8 deferred)** — Data Engineering label backlog (Vu Trinh / Pipeline to Insights / SeattleDataGuy / Zach Wilson / Julien Hurault + pointer companions). New: [[data-engineering/cloud-data-warehouse-internals|Cloud Data Warehouse Internals]] synthesis + [[data-engineering/bigquery|BigQuery]] & [[data-engineering/redshift|Redshift]] entities (Vu Trinh warehouse-internals), [[data-engineering/stream-processing|Stream Processing]] (real-time + batch-vs-stream), [[data-engineering/orchestra|Orchestra]] (managed orchestrator), [[ai-engineering/github-copilot|GitHub Copilot (Agent Mode)]], [[data-engineering/sources/data-engineering-zoomcamp|DE Zoomcamp]] source. Major enrich: kafka (internals: page-cache/zero-copy/producer-consumer/object-storage trend), parquet (columnar why + ORC + Uber/Criteo), snowflake + databricks (cross-warehouse view, Photon internals), storage-fundamentals (column vs hybrid), semantic-layer (Boring Semantic Layer + MCP), ai-impact-on-data-engineering (risk-by-skill map), data-engineering-best-practices (AI-era checklist), de-portfolio-projects + mlops/terraform (local Terraform+Docker platform), data-orchestration (Dagster/Prefect). Deferred: 5 newsletter/video teasers (no fetched companion / target already covered), 1 thin video-teaser companion, 1 pointer with fetch-failed companion, 1 Substack social-notes digest.
 - 2026-06-19: **ingest-auto safe pass (20 candidates, 19 ingested, 1 deferred)** — StartDataEngineering DE-101 newsletter series (#1–#8) + Kahan Data Solutions video teasers + Joe Reis modeling + Vivek Bharti Practical ML series. New: [[data-engineering/requirements-gathering|Requirements Gathering]] (SDE 5-step process + output-led engineering), [[mlops/model-serving|Model Serving]] (Flask real-time API + Airflow batch inference). Substantive enrich: data-modeling-meaning (theory-vs-reality org dimension), data-quality (code-tests-vs-DQ-checks), pipeline-layers (app-DB vs analytics-DB), data-ingestion-patterns (landing zone), sql-intermediate-results (CTEs in dbt), de-portfolio-projects (free template + Docker dev ergonomics). Corroborating source-bumps (already-covered DE-101 articles): data-orchestration, pipeline-coding-patterns, sql-window-functions, data-engineer-role, dbt, python-for-data-engineering, data-engineering-best-practices, data-engineering-interview. Deferred: 1 (free DE-101 e-book promo/TOC).
 - 2026-06-19: **ingest-auto safe pass (12 candidates, 6 ingested, 6 deferred)** — new: [[data-engineering/data-flow-patterns|Data Flow Patterns]], [[data-engineering/scaling-data-pipelines|Scaling Data Pipelines]], [[data-engineering/data-engineering-interview|Data Engineering Interview & Job Search]]. Updated: data-ingestion-patterns, idempotent-pipelines (replayability/overwritability + self-healing), de-portfolio-projects (show-not-tell + dev-workflow toolchain), cicd-for-data-infrastructure (concrete toolchain), mlops/infrastructure-as-code (5 IaC tool types, why-DEs-use-IaC), mlops/terraform (BSL/OpenTofu, modules/providers). Mostly StartDataEngineering DE-101 newsletter + Pipeline-to-Insights IaC. Deferred: 2 course promos, 1 community check-in, 1 unfetched-teaser, 2 video teasers (no transcript).
 - 2026-06-18: [[data-engineering/portfolio-project-that-lands-a-de-role|The Portfolio Project That Lands a DE Role]] (new synthesis — filed back from /query, claudesidian-originated: what makes a Databricks+AWS DE portfolio project impressive; distilled from 10 corpus pages, no web gap)

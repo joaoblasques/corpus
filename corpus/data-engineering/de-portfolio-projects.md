@@ -21,6 +21,12 @@ sources:
   - path: raw/email/email-2025-07-16-setting-up-a-local-dev-environment-using-docker.md
     channel: email
     ingested_at: 2026-06-19
+  - path: raw/web/github-vutrinh274-dbt-example.md
+    channel: web
+    ingested_at: 2026-06-19
+  - path: raw/web/building-a-local-data-platform-with-terraform-and-docker.md
+    channel: web
+    ingested_at: 2026-06-19
 aliases:
   - data engineering projects
   - portfolio projects
@@ -84,6 +90,13 @@ Every template ships the same "set up data infra with code" workflow so new feat
 
 *Why* standardize the local environment with Docker: most data pipelines touch multiple systems, which makes a local dev setup hard; good **developer ergonomics** (reproducible Docker environment + automated formatting/lint/tests) reduce bugs, keep morale high, and increase development velocity [^src6].
 
+## Other community end-to-end project references
+
+Two further runnable projects (outside the Start Data Engineering set) make good portfolio pieces:
+
+- **Cloud ELT: S3 → Snowflake → dbt, orchestrated by [[data-engineering/orchestra|Orchestra]]** — uploads AdventureWorks CSVs to S3 (boto3), `COPY INTO` Snowflake staging tables, then dbt staging + curated (fact/dimension) models; the whole pipeline is then scheduled/observed in Orchestra [^src7]. Demonstrates the modern cloud-warehouse + dbt stack with a managed declarative orchestrator [^src7].
+- **Local data platform with [[mlops/terraform|Terraform]] + Docker** — replicates a cloud data stack *locally and for free* using **Minio** (S3-compatible object store), **LocalStack** (emulates AWS SQS), **Dockerized Airflow** (orchestration), and **[[data-engineering/duckdb|DuckDB]]** (analytical warehouse), wired together by Terraform modules; includes an **event-driven** path (SQS message → Docker ETL container, the AWS-Lambda analogue) [^src8]. Each component maps to a cloud service, so the same boto3/Airflow code stays cloud-portable [^src8]. A strong showcase of **IaC + event-driven architecture** without cloud cost [^src8]. See [[mlops/infrastructure-as-code|Infrastructure as Code]].
+
 ## How to use
 
 Run on Codespaces (fork → "Create codespace" → `make up` → open the exposed UI port) or locally with Docker (≥4 GB RAM); the recommended order goes least → most complex [^src1]. The Docker images are not production-optimised — for learning only [^src1].
@@ -104,3 +117,5 @@ Run on Codespaces (fork → "Create codespace" → `make up` → open the expose
 [^src4]: [Designing a Data Project to Impress Hiring Managers](../../raw/web/designing-a-data-project-to-impress-hiring-managers-start-da.md)
 [^src5]: [Set up your next data engineering project with this free template! (Start Data Engineering)](../../raw/email/email-2025-08-06-set-up-your-next-data-engineering-project-with-this-free-tem.md)
 [^src6]: [Setting up a local dev environment using Docker (Start Data Engineering)](../../raw/email/email-2025-07-16-setting-up-a-local-dev-environment-using-docker.md)
+[^src7]: [vutrinh274/dbt_example — ETL Pipelines with Orchestra (S3→Snowflake→dbt)](../../raw/web/github-vutrinh274-dbt-example.md)
+[^src8]: [Building a Local Data Platform with Terraform and Docker (p-munhoz)](../../raw/web/building-a-local-data-platform-with-terraform-and-docker.md)

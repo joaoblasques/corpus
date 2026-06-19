@@ -12,6 +12,9 @@ sources:
   - path: raw/web/file-storage-vs-object-storage-vs-block-storage.md
     channel: web
     ingested_at: 2026-06-15
+  - path: raw/email/email-2025-04-17-the-internal-of-bigquery-snowflake-databricks-and-redshift.md
+    channel: email
+    ingested_at: 2026-06-19
 aliases:
   - storage hierarchy
   - storage fundamentals
@@ -25,7 +28,7 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-15
-updated: 2026-06-15
+updated: 2026-06-19
 ---
 
 # Storage Fundamentals
@@ -74,6 +77,15 @@ Serialisation converts in-memory data into a byte sequence for disk/network; the
 
 The row/columnar split is the same physical distinction underlying OLTP databases vs analytical [[data-engineering/parquet|Parquet]]/[[data-engineering/apache-iceberg|Iceberg]] tables.
 
+### Column vs hybrid format (cloud warehouses)
+
+Cloud warehouses refine "columnar" into two layouts [^src4]:
+
+- **Column format** — columns stored *completely separately* (e.g. [[data-engineering/redshift|Redshift]]).
+- **Hybrid format** — like Parquet: data grouped into **row groups** (a horizontal partition of rows), and within each, a column's data is a **column chunk** (vertical partition). Used by [[data-engineering/bigquery|BigQuery]] (Capacitor), [[data-engineering/snowflake|Snowflake]], and [[data-engineering/databricks|Databricks]] (Parquet/Delta) [^src4].
+
+Two execution strategies exploit columnar data [^src4]: **vectorization** (process a batch/vector of values at once — BigQuery, Snowflake, Databricks' Photon) and **code specialization** (compile per-query code to cut CPU instructions — Redshift); they are not mutually exclusive. See [[data-engineering/cloud-data-warehouse-internals|Cloud Data Warehouse Internals]] for the full comparison.
+
 ## Choosing a storage solution
 
 No one-size-fits-all; weigh: performance (read/write speed), scalability, accessibility (SLAs), metadata management, query support, schema flexibility, data quality & governance/lineage, and compliance (data residency) [^src1].
@@ -87,7 +99,8 @@ This mirrors the broader [[data-engineering/data-engineer-role|data-engineer-rol
 ## Related
 
 - [[data-engineering/data-lake|Data Lake / Lakehouse]] — the lake/lakehouse abstraction
-- [[data-engineering/parquet|Apache Parquet]] — the canonical columnar format
+- [[data-engineering/parquet|Apache Parquet]] — the canonical columnar format (columnar deep-dive, ORC, compression schemes)
+- [[data-engineering/cloud-data-warehouse-internals|Cloud Data Warehouse Internals]] — column vs hybrid format; vectorization vs code specialization
 - [[data-engineering/data-engineering-best-practices|Data Engineering Best Practices]] — storage layering in pipeline design
 - [[data-engineering/README|Data Engineering hub]]
 
@@ -96,3 +109,4 @@ This mirrors the broader [[data-engineering/data-engineer-role|data-engineer-rol
 [^src1]: [Storage Fundamentals for Data Engineers](../../raw/email/email-2025-09-28-storage-fundamentals-for-data-engineers.md)
 [^src2]: [Data Serialisation: Choosing the Best Format for Performance](../../raw/web/data-serialisation-choosing-the-best-format-for-performance.md)
 [^src3]: [File Storage vs Object Storage vs Block Storage](../../raw/web/file-storage-vs-object-storage-vs-block-storage.md)
+[^src4]: [The internal of BigQuery, Snowflake, Databricks and Redshift (Vu Trinh)](../../raw/email/email-2025-04-17-the-internal-of-bigquery-snowflake-databricks-and-redshift.md)

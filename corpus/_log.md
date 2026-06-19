@@ -887,3 +887,35 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   - ingest: 19 ingested · 1 deferred · status=ok
 - lint:
   - 0 broken wikilinks · 0 broken citations · 0 orphans · 6 stubs
+
+## [2026-06-19 12:30] ingest | ingest-auto safe pass — 20 DE label emails (12 ingested, 8 deferred)
+- batch: explicit 20-file list (Vu Trinh internals, Pipeline to Insights real-time/batch-vs-stream, SeattleDataGuy columnar, Zach Wilson AI roadmap, Julien Hurault BSL+MCP, Orchestra, + 4 pointer→web companions: local-data-platform, vutrinh dbt_example, copilot-agent-mode, datatalksclub zoomcamp)
+- channel: email → raw/email/ (moved 12 stamped emails from raw/_inbox/; 4 pointer companions stamped in place in raw/web/); deferred files left in inbox
+- domains: data-engineering (11 sources), ai-engineering (1 source — Copilot)
+- new pages (7): data-engineering/bigquery.md, data-engineering/redshift.md, data-engineering/cloud-data-warehouse-internals.md (synthesis), data-engineering/stream-processing.md, data-engineering/orchestra.md, ai-engineering/github-copilot.md, data-engineering/sources/data-engineering-zoomcamp.md
+- major enrichments: kafka (Vu Trinh internals: offsets/segments/page-cache/sequential-access/zero-copy-sendfile/batching, producer acks+partitioner, consumer pull/offset-commit/groups/rebalancing, object-storage trend WarpStream/AutoMQ/Redpanda/KIP-1150), parquet (columnar-why, ORC, bit-packing/delta encoding, Uber ZSTD + Criteo), snowflake (cross-warehouse view), databricks (Photon internals + Delta WAL), storage-fundamentals (column vs hybrid format; vectorization vs code specialization), semantic-layer (Boring Semantic Layer + MCP / MCPSemanticModel), ai-impact-on-data-engineering (Zach Wilson risk-by-skill map + AI codegen prompt pattern), data-engineering-best-practices (AI-era checklist corroboration), de-portfolio-projects (Orchestra ELT project + local Terraform+Docker platform), mlops/terraform (Docker-provider local platform), data-orchestration (Dagster/Prefect alternatives)
+- light cross-links: etl-pipeline→stream-processing, data-engineering-interview→stream-processing, dbt→orchestra, mcp↔semantic-layer, data-engineer-role→zoomcamp
+- hubs updated: data-engineering/README (+stream-processing, +bigquery, +redshift, +orchestra, +cloud-data-warehouse-internals, +zoomcamp source), ai-engineering/README (+github-copilot)
+- deferred (8) → raw/_inbox/_REVIEW.md:
+  - UNCERTAIN: email-2025-07-05-11-prepare-for-your-data-engineering-interview (teaser, no fetched companion; target "10 skills" already in data-engineering-interview)
+  - UNCERTAIN: email-2025-07-03-the-subtle-art-of-data-modeling-example (Kahan video teaser, no transcript/companion)
+  - UNCERTAIN: email-2025-07-03-data-modeling-w-dbt-dimensions-part-1-3 (Kahan video teaser, no transcript/companion)
+  - UNCERTAIN: email-2025-06-28-10-data-project-to-impress-hiring-managers (teaser, no fetched companion; covered by de-portfolio-projects)
+  - UNCERTAIN: email-2025-05-31-6-project-elt-data-pipeline-with-dbt (teaser, no fetched companion; dbt ELT already covered)
+  - UNCERTAIN: email-2025-05-30-build-ai-agents-in-databricks-using-claude (fetched companion is itself only a video teaser — no substantive article body)
+  - UNCERTAIN: email-2025-05-17-data-engineer-handbook-bootcamp-introduction (pointer; companion fetch-failed — nothing to extract)
+  - UNCERTAIN: email-2025-04-17-pipeline-to-insights-ananth-packkildurai-and-seattledataguy (Substack social-notes digest; multiple authors, no fetched companion)
+- pages: 7 created, ~16 updated (14 content pages + 2 hubs)
+- notes: ingest-auto run; 12 processed, 8 deferred. Interactive manual pass. Pointer sources resolved to fetched raw/web companions and cited from the companion. No new domains.
+
+## [2026-06-19T11:20] config | scheduled run
+- collectors:
+  - gmail: 0 collected · status=ok
+  - obsidian: 0 collected · status=ok
+  - pdf: 0 collected · status=ok
+  - youtube: 15 collected · status=ok
+  - links_refetch: 0 refetched · status=ok
+- ingest:
+  - ingest: 12 ingested · 8 deferred · status=ok
+- lint:
+  - 0 broken wikilinks · 1 broken citations · 0 orphans · 7 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py

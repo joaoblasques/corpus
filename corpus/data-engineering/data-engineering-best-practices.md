@@ -18,6 +18,9 @@ sources:
   - path: raw/email/email-2025-07-26-de-101-4-de-best-practices.md
     channel: email
     ingested_at: 2026-06-19
+  - path: raw/email/email-2025-04-25-the-2025-ai-enabled-data-engineering-roadmap.md
+    channel: email
+    ingested_at: 2026-06-19
 aliases:
   - data engineering best practices
   - pipeline best practices
@@ -96,6 +99,18 @@ The nine serving questions (full detail paywalled) are: (1) how data will be sto
 
 > Note: the majority of this article is behind a paywall; only the intro mental-model section is captured above.
 
+## The AI-era best-practices checklist (corroboration)
+
+Zach Wilson's 2025 roadmap frames the *same* practices as the durable, "low-disruption-risk" core to know now that AI writes much of the SQL — grouped for prompting an AI coding tool [^src5]:
+
+- **Data modeling** — proper table/column naming; clear separation of dimension, fact, and aggregation tables [^src5]. (See [[data-engineering/dimensional-modeling|Dimensional Modeling]].)
+- **Partitioning** — "almost every dataset in your data lake should be partitioned"; minimize/anonymize PII [^src5].
+- **Data-lake storage** — maximize **run-length-encoding** compression, store as **Parquet**, set sensible retention, avoid duplicating datasets that already exist [^src5]. (See [[data-engineering/parquet|Parquet]].)
+- **DAG idempotency** — a task runs the same whether backfilled or in production and regardless of how many times it's run; solved with partition sensors / cumulative-DAG awareness and using `MERGE`/`INSERT OVERWRITE` rather than `INSERT INTO` [^src5]. (See [[data-engineering/idempotent-pipelines|Idempotent Pipelines]] and [[data-engineering/merge-into|MERGE INTO]].)
+- **Serving / dashboarding** — serve from a low-latency store (Druid/Snowflake), pre-aggregate before loading, and don't put non-aggregated data into low-latency stores [^src5].
+
+This independently confirms the idempotency, partitioning, and storage-layering practices above; the role-level framing is in [[data-engineering/ai-impact-on-data-engineering|AI's Impact on Data Engineering]] [^src5].
+
 ## Related
 
 - [[data-engineering/idempotent-pipelines|Idempotent Pipelines]] · [[data-engineering/data-quality|Data Quality]]
@@ -110,3 +125,4 @@ The nine serving questions (full detail paywalled) are: (1) how data will be sto
 [^src2]: [Data Engineering Best Practices! (newsletter)](../../raw/email/email-2025-09-10-data-engineering-best-practices.md)
 [^src3]: [josephmachado/data_engineering_best_practices (sample)](../../raw/web/github-josephmachado-data-engineering-best-practices-sample.md)
 [^src4]: [Data Engineering System Design: 9 Data Serving Problems (Vu Trinh)](../../raw/web/web-data-engineering-system-design-9-data-serving-problems.md)
+[^src5]: [The 2025 AI-enabled Data Engineering roadmap (Zach Wilson, DataEngineer.io)](../../raw/email/email-2025-04-25-the-2025-ai-enabled-data-engineering-roadmap.md)

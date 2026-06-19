@@ -41,7 +41,7 @@ The skills are ranked by how often they come up [^skills]:
 4. **Data modeling** — star schema, facts & dimensions, warehousing, OLTP; know *what* and *why* [^skills]. See [[data-engineering/dimensional-modeling|Dimensional Modeling]].
 5. **Data pipelines** — a design question is near-certain; then probed on testing, backfilling, scaling, bad data, dependencies. Know orchestration basics (Airflow/dbt), backfilling, [[data-engineering/etl-pipeline|ETL vs ELT]], EL tools (Stitch/Fivetran), data testing, and the [[data-engineering/idempotent-pipelines|idempotent pipeline]] concept [^skills].
 6. **Distributed systems fundamentals** — how they work, job-dependent [^skills]. See [[software-engineering/distributed-systems-fallacies|Distributed Systems Fallacies]].
-7. **Event streaming** — what event streams are, why and how to use them [^skills]. See [[data-engineering/kafka|Kafka]].
+7. **Event streaming** — what event streams are, why and how to use them [^skills]. See [[data-engineering/kafka|Kafka]] and [[data-engineering/stream-processing|Stream Processing]] (batch-vs-stream, watermarks, delivery guarantees — a recurring real-time interview topic).
 8. **System design** — for DE, usually pipeline design (understand source, schedule, usage pattern); classics like *"design a clickstream store"* or *"use CDC to replicate OLTP into a warehouse"*; sometimes standard SWE design (Twitter/Netflix) [^skills].
 9. **Business questions** — design/justify business metrics; explain *your impact* via KPI/SLA using the **STAR method** [^skills].
 10. **Cloud computing** — general fluency: object storage (S3), compute (EC2), DB (RDS), managed Spark/Flink (EMR), serverless (Lambda), managed Kafka (Kinesis); equivalents on GCP/Azure [^skills].

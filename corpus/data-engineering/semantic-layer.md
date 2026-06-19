@@ -12,6 +12,9 @@ sources:
   - path: raw/email/email-2026-05-20-i-started-my-career-in-tableau.md
     channel: email
     ingested_at: 2026-06-15
+  - path: raw/email/email-2025-07-04-boring-semantic-layer-mcp.md
+    channel: email
+    ingested_at: 2026-06-19
 aliases:
   - semantic layer
   - metric layer
@@ -20,11 +23,15 @@ aliases:
   - context team
   - agentic architect
   - knowledge architect
+  - Boring Semantic Layer
+  - BSL
+  - MCPSemanticModel
+  - Ibis
 tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-15
-updated: 2026-06-15
+updated: 2026-06-19
 ---
 
 # Semantic Layer
@@ -69,6 +76,14 @@ A provocative reframing: **AI agents today are the equivalent of a BI tool plugg
 
 Trade-off to optimise: too little context → wrong/no answers; too much → expensive (token cost) and confused by noise [^src2]. File-system AI agents (Claude Code, Cowork, Cursor, Codex) are a good starting point because context lives in editable, measurable files [^src2].
 
+## A concrete implementation: Boring Semantic Layer + MCP
+
+The **Boring Semantic Layer (BSL)** is a lightweight open-source semantic layer built on **Ibis**, so it works with almost any query engine out of the box (`pip install boring-semantic-layer`) [^src4]. It demonstrates *why* a semantic layer is the right interface for LLMs: a brute-force "let the LLM query raw tables" approach quickly produces **wrong joins and bad aggregations**, whereas the semantic layer exposes only **pre-built aggregations and validated relationships** — e.g. expose "number of flights per origin/destination" rather than the raw `flights`/`carriers` tables [^src4]. "That constraint is a feature, not a bug" — you trade SQL flexibility for reliability, letting the LLM focus on *intent* rather than SQL correctness [^src4].
+
+The bridge to the agent is **[[ai-engineering/mcp|MCP]]**: BSL ships `MCPSemanticModel`, a class extending Anthropic's **FastMCP**, that exposes the semantic model as built-in MCP tools — `list_models`, `get_model`, `get_time_range`, and `query_model` [^src4]. Each tool's **docstring acts as the prompt** that teaches the LLM how to call it (e.g. how to format JSON filters, the available time grains) [^src4]. End to end: the user asks a question → the LLM picks an MCP tool → the MCP forwards the query to BSL → BSL translates it to SQL → results return for the LLM to phrase in natural language [^src4]. Observed behaviour: the LLM usually understands the model, occasionally errors (e.g. a malformed `in` filter), and **learns from the error message to self-correct on the next attempt** [^src4].
+
+The punchline reinforces the page's thesis: **"the LLM is only as good as your semantic model"** — if a measure isn't exposed, the LLM can't retrieve it, so **building the semantic model is becoming the new bottleneck in the analytics process** [^src4]. (The open question the source raises: could the LLM help *build* the semantic model incrementally as users ask questions? — i.e. the model itself becomes an [[data-engineering/agentic-data-modeling|agentic]] artifact.)
+
 ## The "agentic architect" role shift
 
 From the Tableau Conference report: data analysts are no longer just building dashboards — they're becoming **agentic / knowledge architects** [^src3]. Key shifts [^src3]:
@@ -84,7 +99,8 @@ From the Tableau Conference report: data analysts are no longer just building da
 - [[data-engineering/data-modeling-meaning|Meaning in Data Modeling]] — semantics/ontology/taxonomy foundations
 - [[data-engineering/progressive-disclosure-analytics-agents|Progressive Disclosure for Analytics Agents]] — *when* to load semantic context
 - [[data-engineering/data-quality|Data Quality]] · [[data-engineering/dbt|dbt]] (dbt metrics)
-- [[ai-engineering/context-engineering|Context Engineering]] · [[ai-engineering/rag|RAG]] (ai-engineering)
+- [[ai-engineering/context-engineering|Context Engineering]] · [[ai-engineering/rag|RAG]] · [[ai-engineering/mcp|MCP]] (ai-engineering)
+- [[data-engineering/agentic-data-modeling|Agentic Data Modeling]] — LLM-assisted schema/semantic-model building
 - [[data-engineering/ai-impact-on-data-engineering|AI's Impact on Data Engineering]]
 - [[data-engineering/README|Data Engineering hub]]
 
@@ -93,3 +109,4 @@ From the Tableau Conference report: data analysts are no longer just building da
 [^src1]: [Onboarding AI: Why the Semantic Layer Matters](../../raw/web/onboarding-ai-why-the-semantic-layer-matters.md)
 [^src2]: [Data teams should become context teams](../../raw/web/data-teams-should-become-context-teams.md)
 [^src3]: [I Started My Career in Tableau (Jess Ramos, Big Data Energy)](../../raw/email/email-2026-05-20-i-started-my-career-in-tableau.md)
+[^src4]: [Boring Semantic Layer + MCP (Julien Hurault, Ju Data Engineering Newsletter)](../../raw/email/email-2025-07-04-boring-semantic-layer-mcp.md)

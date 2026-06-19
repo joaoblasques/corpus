@@ -12,12 +12,17 @@ sources:
   - path: raw/email/email-2025-08-07-de-101-8-orchestrators-and-schedulers.md
     channel: email
     ingested_at: 2026-06-19
+  - path: raw/email/email-2025-05-22-how-to-choose-between-batch-and-stream-processing.md
+    channel: email
+    ingested_at: 2026-06-19
 aliases:
   - Airflow
   - Apache Airflow
   - orchestrator
   - orchestration
   - scheduling
+  - Dagster
+  - Prefect
 tags:
   - corpus/data-engineering
   - concept
@@ -43,6 +48,10 @@ last_confirmed: 2026-06-19
 The framing question: *why use Airflow vs. just cron / a plain Python request?* [^src2] The answer is **not** the schedule — it is everything around it. As pipeline complexity and team size grow, an orchestrator provides a cleaner way to get scheduling + ordering + observability than re-implementing each feature by hand [^src1]. For a single simple pipeline, Airflow is acknowledged to be **overkill** [^src1].
 
 Heuristic: if you only need "run this one script every day" with no inter-task dependencies and no shared operational visibility, cron is enough. Reach for an orchestrator when you have multiple dependent tasks, need parallelism, need retry/backfill semantics, or need a team to observe and re-run pipelines.
+
+### Airflow alternatives
+
+Airflow is the most common orchestrator, but two alternatives recur for batch scheduling [^src4]: **Dagster** brings type safety and **asset-driven** design (easier dependency management and testing), and **Prefect** focuses on simplicity and observability with a Python-native interface for small-to-mid-scale jobs [^src4]. Managed/declarative orchestrators also exist — see [[data-engineering/orchestra|Orchestra]] (UI-first, fully managed integrations).
 
 ## How Airflow implements each concern
 
@@ -74,6 +83,7 @@ Orchestration is a *different layer* from transformation: an orchestrator schedu
 ## See also
 
 - [[data-engineering/dbt|dbt]] — transformation layer typically invoked by an orchestrated task
+- [[data-engineering/orchestra|Orchestra]] — managed, declarative, UI-first orchestrator alternative
 - [[data-engineering/idempotent-pipelines|Idempotent Pipelines]] — a precondition for safe retries/backfills
 - [[data-engineering/pipeline-layers|Pipeline Layers]]
 - [[data-engineering/README|Data Engineering hub]]
@@ -83,3 +93,4 @@ Orchestration is a *different layer* from transformation: an orchestrator schedu
 [^src1]: [Why use Apache Airflow (or any orchestrator)?](../../raw/web/why-use-apache-airflow-or-any-orchestrator-start-data-engine.md)
 [^src2]: [Do you really need Apache Airflow?](../../raw/email/email-2025-11-19-do-you-really-need-apache-airflow.md)
 [^src3]: [[DE 101] #8 - Orchestrators and Schedulers (Start Data Engineering)](../../raw/email/email-2025-08-07-de-101-8-orchestrators-and-schedulers.md)
+[^src4]: [How to Choose Between Batch and Stream Processing? (Pipeline to Insights)](../../raw/email/email-2025-05-22-how-to-choose-between-batch-and-stream-processing.md)

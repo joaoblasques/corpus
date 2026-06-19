@@ -6,6 +6,9 @@ sources:
   - path: raw/youtube/youtube-nhwp1btg0cw.md
     channel: youtube
     ingested_at: 2026-06-17
+  - path: raw/email/email-2025-04-17-the-internal-of-bigquery-snowflake-databricks-and-redshift.md
+    channel: email
+    ingested_at: 2026-06-19
 aliases:
   - Snowflake
   - snowflake
@@ -19,7 +22,7 @@ tags:
   - corpus/data-engineering
   - entity
 created: 2026-06-17
-updated: 2026-06-17
+updated: 2026-06-19
 ---
 
 # Snowflake
@@ -76,8 +79,14 @@ Snowflake's storage story expanded over time [^src1]:
 
 Databricks published audited TPC-DS results (Nov 2021) claiming the fastest implementation ever, with a graph beating Snowflake; the two French founders rebutted that Databricks ran Snowflake wrong [^src1]. The crux: Snowflake's published numbers run on data **already ingested into the proprietary format with micro-partition re-clustering done** — preparation that official TPC rules require counting in the measured time — whereas the Databricks/Barcelona run threw raw TPC-DS files at it without preparation [^src1]. Net: a win for Databricks' positioning as a high-performance warehouse (see [[data-engineering/databricks|Databricks]]). Caveat: vendor benchmarks carry well-known TPC-specific optimization tricks ("Volkswagen-style" test detection) [^src1].
 
+## Cross-warehouse view
+
+A second source (Vu Trinh's cloud-warehouse internals survey) corroborates and frames Snowflake against its peers [^src2]: founded **July 2012** by two ex-Oracle engineers plus VectorWise co-founder Marcin Żukowski, built in **C++**, separating compute (proprietary shared-nothing engine on cloud VMs) from storage (S3/GCS) with local-disk caching [^src2]. Distinctively, Snowflake **avoids shuffle-based execution** — workers exchange data directly with one another — unlike BigQuery's Dremel or Databricks' Photon [^src2]. Its **Virtual Warehouses** are abstract "T-shirt sizes" (X-Small→XX-Large); each query runs on exactly one VW with non-shared nodes for performance isolation [^src2]. The worker cache stores **file headers + specific columns** (not whole files), under LRU, and uses **consistent hashing** so queries hitting the same data land on the same node; **file stealing** (reading stolen files from S3, not the busy peer) handles skew [^src2]. Storage uses large immutable files with **min-max-based pruning** [^src2]. See [[data-engineering/cloud-data-warehouse-internals|Cloud Data Warehouse Internals]] for the four-way comparison and [[data-engineering/bigquery|BigQuery]]/[[data-engineering/redshift|Redshift]] for the peers.
+
 ## Related
 
+- [[data-engineering/cloud-data-warehouse-internals|Cloud Data Warehouse Internals]] — BigQuery/Snowflake/Databricks/Redshift compared
+- [[data-engineering/bigquery|BigQuery]] · [[data-engineering/redshift|Redshift]] — the other shared-disk pioneers
 - [[data-engineering/databricks|Databricks]] — the competing lakehouse platform; benchmark rivalry
 - [[data-engineering/apache-iceberg|Apache Iceberg]] · [[data-engineering/open-table-formats|Open Table Formats]] — external/Iceberg table support
 - [[data-engineering/parquet|Parquet]] — the open analogue of Snowflake's proprietary PAX format
@@ -90,3 +99,4 @@ Databricks published audited TPC-DS results (Nov 2021) claiming the fastest impl
 ---
 
 [^src1]: [CMU Advanced Database Systems — Snowflake (Andy Pavlo)](../../raw/youtube/youtube-nhwp1btg0cw.md)
+[^src2]: [The internal of BigQuery, Snowflake, Databricks and Redshift (Vu Trinh)](../../raw/email/email-2025-04-17-the-internal-of-bigquery-snowflake-databricks-and-redshift.md)

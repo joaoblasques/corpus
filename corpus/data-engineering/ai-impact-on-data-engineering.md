@@ -21,6 +21,9 @@ sources:
   - path: raw/web/web-the-10x-data-team-the-markdown-team.md
     channel: web
     ingested_at: 2026-06-17
+  - path: raw/email/email-2025-04-25-the-2025-ai-enabled-data-engineering-roadmap.md
+    channel: email
+    ingested_at: 2026-06-19
 aliases:
   - AI impact on data engineers
   - AI and data engineering
@@ -30,11 +33,15 @@ aliases:
   - markdown team
   - 10x data team
   - agent flywheel
+  - AI-enabled data engineering roadmap
+  - Cursor
+  - Windsurf
+  - conceptual knowledge is king
 tags:
   - corpus/data-engineering
   - synthesis
 created: 2026-06-15
-updated: 2026-06-17
+updated: 2026-06-19
 ---
 
 # AI's Impact on Data Engineering
@@ -111,6 +118,25 @@ This mirrors but extends the existing sources: Vu Trinh's "two states" outcome [
 
 > Note: Hurault acknowledges "we are not fully there yet" and that the shift may feel uncomfortable for engineers who love the craft. Treat the role-evolution framing as directional, not imminent [^src6].
 
+## The risk-by-skill map (Zach Wilson's 2025 roadmap)
+
+DataEngineer.io's "2025 AI-enabled data engineering roadmap" makes the same direction concrete by scoring DE responsibilities on two axes — **technical↔soft** and **tactical↔strategic** — by *disruption risk* [^src7]. The thesis: **"Conceptual knowledge is becoming king"** — if AI writes the pipelines, what's left is the judgement [^src7]:
+
+| Quadrant | Task | AI disruption risk |
+|---|---|---|
+| Technical / tactical | Writing Spark & SQL | **Medium** — Cursor/Windsurf speed codegen, but you still test & review |
+| Technical / tactical | Fixing broken on-call pipelines | **High** — most failures are false positives (bad DQ checks, memory errors) |
+| Technical / strategic | Building data-processing frameworks | **Low** — AI is weak at improving large existing codebases (hallucinates on tech debt) |
+| Technical / strategic | Automated data quality / writing tests | **Medium** — generating GE/SQL checks & fake test data is easy; *business-relevant* checks aren't |
+| Soft / tactical | Sprint planning | **Medium** — negotiation stays human; sizing/organization streamlined |
+| Soft / tactical | Writing documentation | **Medium** — boilerplate augmented; business context still manual |
+| Soft / tactical | Answering business questions | **High** *if* data is well-modeled + documented + AI-accessible (then AI handles 90–95%) |
+| Soft / strategic | Pipeline-generation processes, conceptual data modeling, data best practices | **Low** — consensus-driven, conversation-heavy work AI can't own |
+
+The survival advice matches Vu Trinh's: **learn the concepts** [^src7]. Codegen tools like Cursor and Windsurf mean "you mostly need to know the higher-level concepts and schemas" — so the leverage moves to recognizing which **design pattern** applies (Kimball dim/fact, OLAP cubes, OLTP 3NF, [[data-engineering/scd2|SCD2]], One Big Table, ML feature store, Kappa-with-Flink, microbatch) [^src7].
+
+A reusable **prompt pattern** for generating a pipeline with an AI coding tool: **inputs (schema first) → technologies (orchestration + processing engine) → design pattern → quality concerns & best practices** [^src7]. The worked example: "given `CREATE TABLE users(...)`, create an Airflow DAG using Trino that implements SCD2 on `country`, with partition sensors, write-audit-publish quality checks, and idempotent design" [^src7]. This is the [[data-engineering/data-engineering-best-practices|best-practices]] checklist expressed as a prompt.
+
 ## Related
 
 - [[data-engineering/data-engineer-role|The Data Engineer Role]] — fundamentals/seniority this builds on
@@ -130,3 +156,4 @@ This mirrors but extends the existing sources: Vu Trinh's "two states" outcome [
 [^src4]: [The Data Engineering Mindset Every AI Builder Needs (dlthub)](../../raw/web/web-the-data-engineering-mindset-every-ai-builder-needs.md)
 [^src5]: [Claude Code isn't going to replace data engineers (yet) (Robin Moffatt)](../../raw/web/web-claude-code-isnt-going-to-replace-data-engineers-yet.md)
 [^src6]: [The 10x Data Team = The Markdown Team (Julien Hurault, Ju Data Engineering Weekly Ep 100)](../../raw/web/web-the-10x-data-team-the-markdown-team.md)
+[^src7]: [The 2025 AI-enabled Data Engineering roadmap (Zach Wilson, DataEngineer.io)](../../raw/email/email-2025-04-25-the-2025-ai-enabled-data-engineering-roadmap.md)

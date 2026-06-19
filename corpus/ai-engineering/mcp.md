@@ -148,6 +148,7 @@ As of mid-2026 the Claude connector directory has grown to 200+ connectors spann
 - [[ai-engineering/claude-code|Claude Code]] — MCP client; configures servers via `claude mcp add`
 - [[ai-engineering/claude-managed-agents|Claude Managed Agents]] — uses MCP for external system access; Vaults handle OAuth tokens per session
 - [[ai-engineering/claude-cowork|Claude Cowork]] — the end-user product surface where consumer connectors are most active
+- [[data-engineering/semantic-layer|Semantic Layer]] (data-engineering) — an MCP server (`MCPSemanticModel`/FastMCP) can expose a governed semantic layer as LLM-queryable tools, constraining the model to validated aggregations
 
 ---
 

@@ -270,6 +270,7 @@ See [[data-engineering/claude-code-for-data-engineering|Claude Code for Data Eng
 - [[data-engineering/dimensional-modeling|Dimensional Modeling]] — Kimball star schemas dbt commonly builds
 - [[data-engineering/scd2|SCD Type 2]] — slowly-changing dimensions via dbt snapshots
 - [[data-engineering/data-orchestration|Data Orchestration]] — scheduling dbt runs vs. transforming in dbt
+- [[data-engineering/orchestra|Orchestra]] — a managed orchestrator that runs dbt staging/curated tasks via tag selection
 - [[data-engineering/dataform|Dataform]] — the BigQuery-native, SQLX-based dbt analogue
 - [[data-engineering/claude-code-for-data-engineering|Claude Code for Data Engineering]] — AI-assisted dbt modeling and exposure enrichment
 - [[data-engineering/sources/dbt-kimball-project|dbt Kimball reference project]] — SCD2 example project

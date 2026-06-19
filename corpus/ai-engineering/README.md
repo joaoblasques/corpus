@@ -6,7 +6,7 @@ tags:
   - corpus/ai-engineering
   - hub
 created: 2026-05-07
-updated: 2026-06-17
+updated: 2026-06-19
 ---
 
 # AI Engineering
@@ -57,6 +57,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [[ai-engineering/langgraph|LangGraph]] — entity · stub · production framework for stateful multi-agent workflows
 - [[ai-engineering/langsmith|LangSmith]] — entity · draft · agent engineering platform for debugging, evaluation, and observability
 - [[ai-engineering/claude-code|Claude Code]] — entity · draft · Anthropic CLI coding agent; harness, large-codebase practices, model config, security review
+- [[ai-engineering/github-copilot|GitHub Copilot (Agent Mode)]] — entity · stub · whole-project agentic coding in VS Code; multi-file edits, runs commands, self-corrects; multi-model + MCP
 - [[ai-engineering/claude-cowork|Claude Cowork]] — entity · draft · **sub-hub** · Cowork desktop product; workspace folder, CLAUDE.md/MEMORY.md, Toolkit/workstations
 - [[ai-engineering/anthropic|Anthropic]] — entity · draft · the lab: company, funding/valuation, learning resources
 - [[ai-engineering/claude-models|Claude Model Lineup]] — entity · draft · Claude family (Haiku → Sonnet → Opus → Fable/Mythos); aliases, 1M context, Opus 4.8, Fable 5/Mythos 5

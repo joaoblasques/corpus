@@ -27,6 +27,9 @@ sources:
   - path: raw/web/web-why-dbt-is-terrible-for-databricks-switch-to-native-pipeline.md
     channel: web
     ingested_at: 2026-06-17
+  - path: raw/email/email-2025-04-17-the-internal-of-bigquery-snowflake-databricks-and-redshift.md
+    channel: email
+    ingested_at: 2026-06-19
 aliases:
   - Databricks
   - Unity Catalog
@@ -38,7 +41,7 @@ tags:
   - corpus/data-engineering
   - entity
 created: 2026-06-11
-updated: 2026-06-17
+updated: 2026-06-19
 ---
 
 # Databricks
@@ -153,8 +156,21 @@ Counter-arguments from the comments [^src7]:
 
 See [[data-engineering/dbt|dbt]] for the dbt perspective and [[data-engineering/change-data-capture|Change Data Capture]] for AutoCDC specifics.
 
+## Photon internals (the query engine)
+
+Databricks faced a structural problem: Spark was **not built as a native query engine**, yet the lakehouse must deliver warehouse-grade performance on everything from clean datasets to raw messy files with no useful statistics [^src8]. Rather than replace Spark (and disrupt existing customers), Databricks **enhanced it** [^src8]:
+
+- **Photon** is a C++ library of physical operators integrated into the **Databricks Runtime (DBR)** — itself a fork of Apache Spark for reliability/performance [^src8]. Photon operators slot into the Spark query plan; customers benefit with **no code changes**, and the system falls back to Spark SQL for unsupported operations [^src8].
+- Photon uses a **vectorized model** (process batches of values) rather than Spark's **code-generation** approach, which enables **runtime adaptivity** — it discovers and leverages micro-batch data characteristics with specialized code paths [^src8]. (Contrast Redshift, which chose code specialization — see [[data-engineering/cloud-data-warehouse-internals|Cloud Data Warehouse Internals]].)
+- Photon is written in **C++** (not the JVM) for explicit control over memory management and SIMD [^src8].
+- It adopts a **columnar in-memory representation**, eliminating the expensive column-to-row pivot that row-oriented Spark SQL needed when scanning columnar files like Parquet [^src8].
+
+**Delta Lake** is the storage layer: an ACID table layer over cloud object storage whose core idea is keeping track of **which objects belong to a table via a write-ahead log in the object store** [^src8]. Data files are **Apache Parquet** objects (optionally Hive-partitioned); a file unreferenced by the transaction log is unreadable [^src8]. Delta was served to customers in 2017 and open-sourced in 2019 [^src8]. See [[data-engineering/open-table-formats|Open Table Formats]] and [[data-engineering/parquet|Parquet]].
+
 ## Related
 
+- [[data-engineering/cloud-data-warehouse-internals|Cloud Data Warehouse Internals]] — Photon vs Dremel/Snowflake/Redshift compared
+- [[data-engineering/bigquery|BigQuery]] · [[data-engineering/redshift|Redshift]] — the other cloud warehouses
 - [[data-engineering/open-table-formats|Open table formats]] — Delta/Iceberg underpin the lakehouse
 - [[data-engineering/data-lake|Data lake]] · [[data-engineering/apache-iceberg|Apache Iceberg]] · [[data-engineering/parquet|Parquet]]
 - [[data-engineering/dbt|dbt]] · [[data-engineering/postgres|Postgres]] — the "simpler stack" alternatives
@@ -169,3 +185,4 @@ See [[data-engineering/dbt|dbt]] for the dbt perspective and [[data-engineering/
 [^src5]: [Lakeflow Spark Declarative Pipelines (Databricks on AWS)](../../raw/web/lakeflow-spark-declarative-pipelines-databricks-on-aws.md)
 [^src6]: [What is Databricks and why people use it (SeattleDataGuy)](../../raw/youtube/youtube-qndigzfaufs.md)
 [^src7]: [Why dbt is terrible for Databricks, switch to native pipelines](../../raw/web/web-why-dbt-is-terrible-for-databricks-switch-to-native-pipeline.md)
+[^src8]: [The internal of BigQuery, Snowflake, Databricks and Redshift (Vu Trinh)](../../raw/email/email-2025-04-17-the-internal-of-bigquery-snowflake-databricks-and-redshift.md)

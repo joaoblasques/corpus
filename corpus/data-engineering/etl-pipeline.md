@@ -61,7 +61,7 @@ ETL transforms data **before** loading; **ELT** loads raw data first and transfo
 
 **Benefits**: centralizing data from various sources; reduced time to analysis (data arrives ready to use); deeper analytics by automating tedious transforms; easy operationalization (piping data straight to operational apps); ample tooling and support; and data-quality assurance (transforming before loading keeps corrupt data out, optionally with automated testing)[^src1].
 
-**Main limitation**: traditional ETL relies on **batch processing**, introducing delay — unacceptable for fraud detection, fast-paced inventory, or capturing an online sale before the customer leaves[^src1]. Real-time pipelines with in-flight transformation exist but rely on streaming infrastructure and "you won't hear these kinds of pipelines called 'ETL,'" because technically they are very different processes despite the same goal[^src1].
+**Main limitation**: traditional ETL relies on **batch processing**, introducing delay — unacceptable for fraud detection, fast-paced inventory, or capturing an online sale before the customer leaves[^src1]. Real-time pipelines with in-flight transformation exist but rely on streaming infrastructure and "you won't hear these kinds of pipelines called 'ETL,'" because technically they are very different processes despite the same goal[^src1]. See [[data-engineering/stream-processing|Stream Processing]] for the batch-vs-stream decision, streaming engines, and delivery guarantees.
 
 ## Tooling and use cases
 

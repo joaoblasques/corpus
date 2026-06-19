@@ -52,6 +52,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [[data-engineering/graph-databases|Graph Databases (RDF vs LPG)]] — concept · draft · RDF/OWL vs labeled property graph decision framework; index-free adjacency, RDF 1.2, GQL, workload-dependent benchmarks
 - [[data-engineering/sql-intermediate-results|Storing Intermediate Results in SQL]] — concept · draft · CTE vs subquery vs view vs temp table vs materialized view; materialized-or-not decision framework; staging tables
 - [[data-engineering/requirements-gathering|Requirements Gathering]] — concept · draft · the 5-step process (identify end-users, define via a question set, validate, deliver iteratively, gate changes) + output-led engineering
+- [[data-engineering/stream-processing|Stream Processing]] — concept · draft · batch vs stream/micro-batch; latency/throughput/backpressure/state/event-time; engines (Flink/Kafka Streams/Spark SS/Storm); delivery guarantees; Lambda architecture
 
 ### Entities
 - [[data-engineering/postgres|PostgreSQL]] — entity · draft · relational database as full-stack data platform via extensions (pgvector, pgcron, tsvector, etc.)
@@ -68,6 +69,9 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [[data-engineering/dataform|Dataform]] — entity · draft · BigQuery-native SQL/JS transformation orchestration (SQLX, ref-DAG, assertions, Git); dbt analogue in GCP
 - [[data-engineering/snowflake|Snowflake]] — entity · draft · managed cloud OLAP; disaggregated storage/compute, virtual warehouses, micro-partitions, work stealing, flexible compute, Unistore
 - [[data-engineering/clickhouse|ClickHouse]] — entity · draft · OLAP column store; MergeTree (LSM-inspired); vectorized execution; Tinybird managed platform
+- [[data-engineering/bigquery|BigQuery]] — entity · draft · Google serverless warehouse; Dremel + Colossus + Borg; Capacitor format (inspired Parquet); shuffle separation
+- [[data-engineering/redshift|Amazon Redshift]] — entity · draft · MPP column store from ParAccel/PostgreSQL; share-nothing→RMS; code specialization (compiled C++) vs vectorization
+- [[data-engineering/orchestra|Orchestra]] — entity · draft · managed declarative Data&AI workflow platform; UI-first; managed integrations, pipelines/tasks/triggers, lineage, env-as-config, Git version control
 
 ### Syntheses
 - [[data-engineering/query-engine-routing|Query-Engine Routing]] — synthesis · draft · multi-engine routing over Iceberg; SQL-dialect translation; cost-based routing
@@ -79,11 +83,13 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [[data-engineering/ai-impact-on-data-engineering|AI's Impact on Data Engineering]] — synthesis · draft · won't replace DEs soon; Markdown Team model: 3 new jobs (determinism, context encoding, kaizen flywheel); DE→platform architect, analyst→research analyst
 - [[data-engineering/data-engineering-agents-landscape|Data Engineering Agents Landscape]] — synthesis · draft · OSS/vendor DE agents by build-time vs consume-time (text-to-SQL): Vanna, WrenAI, Dataherald, Datus-agent, dbt MCP/Agent Skills, Databricks Genie/Lakeflow; solo-DE recommendation (cross-domain → ai-engineering)
 - [[data-engineering/portfolio-project-that-lands-a-de-role|The Portfolio Project That Lands a DE Role]] — synthesis · draft · what makes ONE end-to-end Databricks+AWS showcase impressive to hiring managers: business framing, rigor checklist (medallion/DQ/idempotency/tests/metadata/IaC/cost), realism/ops, defensible stack choices, junior-tell anti-signals
+- [[data-engineering/cloud-data-warehouse-internals|Cloud Data Warehouse Internals]] — synthesis · draft · BigQuery/Snowflake/Databricks/Redshift compared: shared-disk, object storage, hybrid vs column format, vectorization vs code specialization
 
 ### Source summaries
 - [[data-engineering/sources/dbt-kimball-project|dbt Kimball reference project]] — source · draft · reference dbt Kimball SCD2 project (BigQuery/DuckDB)
 - [[data-engineering/sources/aws-duckdb-etl-fargate|DuckDB ETL on ECS Fargate]] — source · draft · end-to-end AWS ETL (Terraform, EventBridge, Slack observability)
 - [[data-engineering/sources/sql-funnel-analysis-project|SQL Sales-Funnel Analysis project]] — source · draft · end-to-end BigQuery funnel/conversion/AOV-vs-CAC SQL walkthrough
+- [[data-engineering/sources/data-engineering-zoomcamp|Data Engineering Zoomcamp]] — source · draft · free 9-week DataTalksClub course; end-to-end pipeline; Docker/Terraform/Kestra/dbt/BigQuery/Spark/Kafka
 
 ## Sources ingested
 - [[03_Resources/Articles/scd2-table-creation-merge-into-spark-iceberg|SCD2 Table Creation with MERGE INTO in Spark and Iceberg]] — article note, Joseph Machado / Start Data Engineering, 2026-03-13

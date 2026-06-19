@@ -21,6 +21,9 @@ sources:
   - path: raw/email/email-2026-05-28-slashing-snowflake-costs-open-source-agent-tradeoffs-kafkas.md
     channel: email
     ingested_at: 2026-06-15
+  - path: raw/email/email-2025-05-15-if-you-re-learning-kafka-this-article-is-for-you.md
+    channel: email
+    ingested_at: 2026-06-19
 aliases:
   - Apache Kafka
   - Kafka
@@ -28,11 +31,17 @@ aliases:
   - share groups
   - Kafka Queues
   - head-of-line blocking
+  - zero-copy
+  - sendfile
+  - consumer offset
+  - rebalancing
+  - acks
+  - diskless Kafka
 tags:
   - corpus/data-engineering
   - entity
 created: 2026-05-21
-updated: 2026-06-15
+updated: 2026-06-19
 ---
 
 # Apache Kafka
@@ -90,6 +99,45 @@ Library for real-time transformations, aggregations, joins, and filtering on dat
 
 Kafka historically used Apache ZooKeeper for cluster coordination. Kafka 3.0+ uses **KRaFt** — a native Raft-based consensus protocol that removes the ZooKeeper dependency, simplifying deployment [^src1].
 
+## Internals: why Kafka is fast
+
+LinkedIn built Kafka ~2011 to handle log processing — combining traditional log aggregators with publish/subscribe messaging for high throughput and scalability [^src7]. Several design choices explain the performance [^src7]:
+
+- **Offsets, not message IDs.** A message (with an optional **key**) is just bytes; it has no explicit ID, only a **logical offset**. A consumer computes the next offset by adding the current message's length — avoiding the overhead of an ID→location index [^src7].
+- **Segment files.** Each partition is a logical log implemented as a set of **segment files** (~1 GB); the broker **appends** each new message to the active segment [^src7].
+- **Rely on the OS page cache.** Kafka lets the OS filesystem + **kernel page cache** handle storage rather than a proprietary cache — sidestepping the JVM's high object-memory overhead and GC slowdowns; the kernel reclaims page-cache memory when applications need it [^src7].
+- **Sequential access.** Disk beats RAM slightly for *sequential* access; Kafka makes both writes (append to last segment) and reads (consume a partition in order, via offset→file and timestamp→offset index files) sequential [^src7].
+- **Zero-copy (`sendfile()`).** Normally serving a file over the network copies data four times with four user/kernel context switches; the `sendfile()` syscall copies directly **page cache → socket buffer**, cutting it to **two context switches** and skipping the copy into the Kafka application [^src7].
+- **Batching + compression.** The protocol's **message set** abstraction groups messages, cutting network round-trips and enabling larger sequential disk writes; batches can be compressed when bandwidth is the bottleneck [^src7].
+
+## The producer protocol
+
+When you call the producer API [^src7]: a **ProducerRecord** (value + topic, optionally key/partition/timestamp/headers) is **serialized** to byte arrays; if no partition is given, a **partitioner** chooses one from the key; the record is added to a **batch** for its topic+partition; a separate thread sends batches to the right broker, which returns metadata (topic, partition, offset) on success or an error (the producer may retry) [^src7].
+
+- **Send modes:** *fire-and-forget* (no confirmation, may lose data), *synchronous* (wait for response — rare in production, hurts performance), *asynchronous* (send without waiting, with a callback for errors) [^src7].
+- **Delivery acknowledgement — the `acks` parameter** controls how many replicas must receive a record before the write is considered successful [^src7]:
+  - `acks=0` — don't wait; highest throughput, high risk of data loss.
+  - `acks=1` — leader acknowledges receipt.
+  - `acks=all` — all replicas acknowledge; safest (survives a broker crash) but adds latency.
+- **Partitioning by key:** null key → **Round-Robin** (≤ v2.3) or **Sticky Partitioner** (≥ v2.4, fills one partition per batch then switches); non-null key → hashed and mapped to a partition, so same-key messages land on the same partition [^src7].
+
+## The consumer protocol
+
+Kafka chose a **pull** model (vs push systems like Scribe/Flume) so consumers read at their own pace — catching up if behind, batching when ready, never flooded [^src7]. The Consumer API is an infinite **poll loop** issuing async pull requests carrying the start offset; the broker seeks and returns data; the consumer computes the next offset [^src7].
+
+- **Offset commit.** Uniquely, the consumer does *not* track its own position — it tells the broker it has processed up to an offset (**offset commit**), and the broker records this in an internal topic; everything before that offset is assumed processed [^src7].
+- **Consumer groups** are coordinated by a **Group Coordinator** (one broker, chosen by group ID): the first consumer to join becomes **leader**, gets the active-consumer list, and assigns partition subsets; members maintain ownership via **heartbeats** [^src7].
+- **Partition assignment strategies:** **Range** (default; consecutive partitions per topic, uneven splits burden the first consumers), **Round Robin** (across all subscribed topics, maximizes consumer use but needs much movement on rebalance), **Sticky** (round-robin-like first assignment, but preserves as many existing assignments as possible on reassignment) [^src7].
+- **Rebalancing** (membership changes): **eager** (all consumers stop, drop ownership, rejoin — brief full unavailability) vs **cooperative** (move only a subset of partitions, others keep processing) [^src7].
+
+## The object-storage trend (decoupling compute and storage)
+
+Kafka's page-cache design tightly couples compute and storage — you can't scale them independently, and replication across availability zones incurs high transfer costs in the cloud [^src7]. Efforts to fix this [^src7]:
+
+- **Tiered storage** (originally Uber's proposal): recent data on local broker disk, historical data in remote object storage (HDFS/S3/GCS) — but brokers aren't fully stateless (replication still happens, data moves on membership changes) [^src7].
+- **Object-storage-native Kafka** — **WarpStream, AutoMQ, Bufstream, Redpanda** operate Kafka **directly on object storage**: cheaper, compute/storage separated, and **replication eliminated** because object storage already ensures durability [^src7].
+- **KIP-1150 "Diskless Topics"** (Aiven, 2025): a new topic class that **delegates replication to object storage**, aiming to cut Kafka infrastructure costs by up to 80% [^src7].
+
 ## Share Groups (Kafka Queues) and parallelism beyond partitions
 
 With classic **consumer groups**, partition count is the parallelism ceiling: a topic with 4 partitions can be processed by at most 4 instances in the same group, because only one instance processes a partition at a time [^src2]. Kafka 4.x adds **share groups** (a.k.a. "Kafka Queues"), a new primitive where a share group can have **more active instances than partitions** [^src2].
@@ -116,6 +164,7 @@ These findings were produced with **Dimster** (DIMensional teSTER), an open-sour
 ## See also
 
 - [[data-engineering/idempotent-pipelines|Idempotent Pipelines]] — append-only stream ingestion with at-most-once settings
+- [[data-engineering/stream-processing|Stream Processing]] — Kafka as the transport layer in real-time pipelines
 - [[data-engineering/README|Data Engineering hub]]
 
 ---
@@ -126,3 +175,4 @@ These findings were produced with **Dimster** (DIMensional teSTER), an open-sour
 [^src4]: [Introducing Dimster, a performance benchmarking tool for Apache Kafka](../../raw/web/introducing-dimster-a-performance-benchmarking-tool-for-apac.md)
 [^src5]: [TLDR Data — Kafka Queues / Head-of-Line Blocking (newsletter origin)](../../raw/email/email-2026-05-14-duckdb-goes-remote-when-lakehouses-guess-netflix-tames-data.md)
 [^src6]: [TLDR Data — Kafka's New Bottleneck / Share Groups (newsletter origin)](../../raw/email/email-2026-05-28-slashing-snowflake-costs-open-source-agent-tradeoffs-kafkas.md)
+[^src7]: [If you're learning Kafka, this article is for you (Vu Trinh)](../../raw/email/email-2025-05-15-if-you-re-learning-kafka-this-article-is-for-you.md)

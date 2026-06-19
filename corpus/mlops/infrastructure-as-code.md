@@ -87,7 +87,7 @@ The cloud overviews motivate IaC by the pain of clicking through a console: erro
 
 ## See also
 
-- [[mlops/terraform|Terraform]] — the cross-provider IaC tool this concept is taught through
+- [[mlops/terraform|Terraform]] — the cross-provider IaC tool this concept is taught through (incl. the local-Docker-platform example)
 - [[mlops/aws|AWS]] — CloudFormation/CDK · [[mlops/azure|Azure]] — ARM templates · [[mlops/gcp|GCP]]
 - [[mlops/cloud-computing-fundamentals|Cloud Computing Fundamentals]] — IaC sits over the resources defined there
 - [[data-engineering/README|Data Engineering]] — IaC provisions the cloud data infrastructure (S3, EC2/EMR) pipelines run on
