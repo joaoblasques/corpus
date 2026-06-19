@@ -57,4 +57,4 @@ A widely-recommended free entry point into data engineering, emphasizing **funda
 
 ---
 
-[^src1]: [DataTalksClub/data-engineering-zoomcamp (course README)](../../raw/web/github-datatalksclub-data-engineering-zoomcamp-data-engineer.md)
+[^src1]: [DataTalksClub/data-engineering-zoomcamp (course README)](../../../raw/web/github-datatalksclub-data-engineering-zoomcamp-data-engineer.md)
