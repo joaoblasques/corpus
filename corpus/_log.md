@@ -956,3 +956,8 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   - ingest: 15 ingested · 5 deferred · status=ok
 - lint:
   - 0 broken wikilinks · 1 broken citations · 0 orphans · 8 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+
+## [2026-06-19 12:10] ingest | labeled-backlog finish — triage-clear 14 deferred + reap
+- after the labeled-backlog drain (46 ingested across 3 batches), 14 remaining labeled emails were agent-deferred for legit §7 reasons: duplicates of existing coverage (dbt, dimensional-modeling, de-portfolio-projects, data-engineering-interview, spam-classifier already in mlops/production-ml-workflow) or teasers/pointers with no fetchable companion
+- resolution: stamped corpus_ingested + corpus_pages:[], filed to raw/email, reaped (14 un-labeled + archived)
+- remaining labeled backlog: 2 substantive (15-productivity-hacks, introduction-to-mlops) → small --max 2 ingest
