@@ -128,3 +128,56 @@ def test_write_digest_appends_block(tmp_path):
     assert "run-1" in text and "gardener" in text and "ingested 3" in text
     assert "2026-06-19T13:00" in text and "2026-06-20T13:00" in text
     assert text.count("## ") >= 2   # two appended blocks, newest last
+
+
+def _loop_kwargs(**over):
+    base = dict(constraints="OBEY §2/§7", budget=c.Budget(None), caps=c.Caps(),
+                label="test", _now=lambda: "2026-06-19T13:00",
+                _verify=lambda paths: c.Verdict(ok=True),
+                _govern=lambda v, paths, **k: {"action": "committed", "pages": len(paths)},
+                _queue=lambda *a, **k: None,
+                _digest=lambda *a, **k: None,
+                _finalize=lambda *a, **k: None)
+    base.update(over)
+    return base
+
+
+def test_run_loop_stops_converged_when_worklist_dry():
+    actions = iter([{"id": 1}])   # one action then StopIteration→None
+    out = c.run_loop(next_action=lambda: next(actions, None),
+                     execute=lambda a, ctx: c.Result(["corpus/x.md"], {"output_tokens": 5}),
+                     **_loop_kwargs())
+    assert out["stop_reason"] == "converged_dry" and out["iterations"] == 1
+
+
+def test_run_loop_stops_on_budget():
+    out = c.run_loop(next_action=lambda: {"id": 1},
+                     execute=lambda a, ctx: c.Result(["corpus/x.md"], {"output_tokens": 60}),
+                     **_loop_kwargs(budget=c.Budget(50)))
+    assert out["stop_reason"] == "budget"
+
+
+def test_run_loop_stops_on_no_progress_repeat_fingerprint():
+    out = c.run_loop(next_action=lambda: {"id": 1},
+                     execute=lambda a, ctx: c.Result(["corpus/same.md"], {"output_tokens": 1}),
+                     **_loop_kwargs())
+    assert out["stop_reason"] == "no_progress"   # 2nd iteration repeats the fingerprint
+
+
+def test_run_loop_stops_on_max_iterations():
+    n = iter(range(1000))
+    out = c.run_loop(next_action=lambda: {"id": next(n)},
+                     execute=lambda a, ctx: c.Result([f"corpus/{next(n)}.md"], {"output_tokens": 1}),
+                     **_loop_kwargs(caps=c.Caps(max_iterations=3)))
+    assert out["stop_reason"] == "max_iterations" and out["iterations"] == 3
+
+
+def test_run_loop_routes_proposals_to_queue():
+    queued = []
+    out = c.run_loop(
+        next_action=lambda: {"id": 1},
+        execute=lambda a, ctx: c.Result([], {"output_tokens": 1},
+                                        proposals=[{"summary": "new rule"}]),
+        **_loop_kwargs(_queue=lambda kind, detail: queued.append((kind, detail))))
+    # empty changed_paths ⇒ no_progress stop, but proposals still routed first
+    assert queued and queued[0][0] == "proposal"

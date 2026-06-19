@@ -154,3 +154,72 @@ def govern(verdict: Verdict, changed_paths: list, *, reversible: bool,
         run([GIT_BIN, "checkout", "--"] + paths, cwd=str(ROOT), capture_output=True, text=True)
     queue("verify-failed", {"paths": paths, "notes": verdict.notes})
     return {"action": "reverted+queued", "pages": len(paths)}
+
+
+def finalize_commit(*, _run=None) -> dict:
+    """Commit ONLY the control-surface catalog files so the digest + queued notes always
+    persist (even if every content iteration reverted). Main-only."""
+    run = _run if _run is not None else subprocess.run
+    if not sr._on_main():
+        return {"status": "skipped-not-main"}
+    paths = [str(REVIEW_QUEUE), str(DIGEST)]
+    run([GIT_BIN, "add"] + paths, cwd=str(ROOT), capture_output=True, text=True)
+    st = run([GIT_BIN, "status", "--porcelain"], cwd=str(ROOT), capture_output=True, text=True)
+    if not (st.stdout or "").strip():
+        return {"status": "nothing-to-commit"}
+    run([GIT_BIN, "commit", "-m", "chore(custodian): digest + review-queue"],
+        cwd=str(ROOT), capture_output=True, text=True)
+    return {"status": "committed"}
+
+
+def run_loop(*, next_action, execute, constraints, budget, caps, label,
+             _now=None, _run=None, _verify=None, _govern=None, _queue=None, _digest=None,
+             _finalize=None) -> dict:
+    """Guarded iteration loop. A mode supplies next_action()/execute()/constraints; the
+    harness enforces caps, budget, fingerprint no-progress stop, verifier gate, tiered
+    governance, proposal routing, the digest, and a final commit of the control-surface
+    files. Returns a run summary."""
+    verify = _verify if _verify is not None else verify_gate
+    govern_fn = _govern if _govern is not None else govern
+    queue = _queue if _queue is not None else enqueue_review
+    digest = _digest if _digest is not None else write_digest
+    finalize = _finalize if _finalize is not None else finalize_commit
+    clock = (lambda: 0.0) if _now is not None else time.monotonic   # _now present ⇒ deterministic test
+    started = clock()
+    run_id = (_now() if callable(_now) else None) or "run"
+
+    entries, last_fp, touched, committed, queued_n, stop = [], None, 0, 0, 0, "completed"
+    for i in range(caps.max_iterations):
+        if budget.exhausted():
+            stop = "budget"; break
+        if caps.wall_clock_s and (clock() - started) > caps.wall_clock_s:
+            stop = "wall_clock"; break
+        action = next_action()
+        if action is None:
+            stop = "converged_dry"; break
+        result = execute(action, constraints)
+        budget.add(result.usage)
+        for p in result.proposals:
+            queue("proposal", p); queued_n += 1
+        touched += len(result.changed_paths)
+        fp = fingerprint(result.changed_paths, result.errors)
+        if not result.changed_paths or fp == last_fp:
+            entries.append({"action": action, "stop": "no_progress"})
+            stop = "no_progress"; break
+        last_fp = fp
+        verdict = verify(result.changed_paths)
+        gov = govern_fn(verdict, result.changed_paths, reversible=True)
+        if gov.get("action") == "committed":
+            committed += 1
+        elif gov.get("action") == "reverted+queued":
+            queued_n += 1
+        entries.append({"action": action, "verdict_ok": verdict.ok, "gov": gov.get("action")})
+        if touched >= caps.max_pages_touched:
+            stop = "max_pages"; break
+    else:
+        stop = "max_iterations"
+
+    digest(run_id, label, entries, _now=(_now() if callable(_now) else None))
+    finalize()   # commit _digest.md + _review_queue.md so the control surface always persists
+    return {"label": label, "iterations": len(entries), "stop_reason": stop,
+            "committed": committed, "queued": queued_n, "spent": budget.spent()}
