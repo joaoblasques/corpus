@@ -148,6 +148,7 @@ def govern(verdict: Verdict, changed_paths: list, *, reversible: bool,
         if paths:
             run([GIT_BIN, "add"] + paths, cwd=str(ROOT), capture_output=True, text=True)
         msg = f"chore(custodian): apply verified change ({len(paths)} page(s))"
+        # single-writer harness: only the paths staged just above are in the index
         c_ = run([GIT_BIN, "commit", "-m", msg], cwd=str(ROOT), capture_output=True, text=True)
         return {"action": "committed", "returncode": c_.returncode, "pages": len(paths)}
     if paths:
@@ -235,7 +236,9 @@ def _smoke_run() -> dict:
         return Result(changed_paths=[], usage={"output_tokens": 0})
     return run_loop(next_action=next_action, execute=execute,
                     constraints="SMOKE — no writes", budget=Budget(1000),
-                    caps=Caps(max_iterations=3), label="smoke")
+                    caps=Caps(max_iterations=3), label="smoke",
+                    _digest=lambda *a, **k: None,
+                    _finalize=lambda *a, **k: {"status": "noop"})
 
 
 def main(argv=None) -> int:

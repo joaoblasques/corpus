@@ -187,12 +187,12 @@ def test_smoke_runs_loop_to_convergence_without_commit(monkeypatch, capsys):
     monkeypatch.setattr(c.sr, "acquire_lock", lambda p: True)
     monkeypatch.setattr(c.sr, "release_lock", lambda p: None)
     monkeypatch.setattr(c.sr, "_on_main", lambda *a, **k: True)
-    committed = []
-    monkeypatch.setattr(c, "write_digest", lambda *a, **k: None)
-    monkeypatch.setattr(c, "finalize_commit", lambda *a, **k: {"status": "noop"})
+    digest_calls, finalize_calls, committed = [], [], []
+    monkeypatch.setattr(c, "write_digest", lambda *a, **k: digest_calls.append(1))
+    monkeypatch.setattr(c, "finalize_commit", lambda *a, **k: finalize_calls.append(1) or {"status": "noop"})
     monkeypatch.setattr(c, "govern", lambda *a, **k: committed.append(1) or {"action": "committed"})
     rc = c.main(["--smoke"])
     out = capsys.readouterr().out
     assert rc == 0
     assert '"stop_reason": "converged_dry"' in out
-    assert committed == []   # smoke makes no content changes ⇒ govern never called
+    assert committed == [] and digest_calls == [] and finalize_calls == []   # smoke commits/writes nothing
