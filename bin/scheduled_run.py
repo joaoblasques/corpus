@@ -379,6 +379,20 @@ def run_email_relabel(*, _subprocess_run=None) -> dict:
         return {"status": "failed", "error": str(exc)}
 
 
+def build_summary(tallies: dict, dry_run: bool) -> dict:
+    """Assemble the run's stdout summary from the collected tallies. Surfaces the
+    post-ingest `email_relabel` (reap-labels) result so un-label/archive counts are
+    visible in the run log, not silently dropped."""
+    return {
+        "status": "ok",
+        "dry_run": bool(dry_run),
+        "collectors": tallies.get("collectors", {}),
+        "ingest": tallies.get("ingest", {}),
+        "email_relabel": tallies.get("email_relabel", {}),
+        "commit": tallies.get("commit", {}),
+    }
+
+
 # ---------------------------------------------------------------------------
 # Ingest
 # ---------------------------------------------------------------------------
@@ -878,13 +892,7 @@ def main(argv=None) -> int:
         finally:
             release_lock(lock_path)
 
-        summary = {
-            "status": "ok",
-            "dry_run": bool(args.dry_run),
-            "collectors": tallies.get("collectors", {}),
-            "ingest": tallies.get("ingest", {}),
-            "commit": tallies.get("commit", {}),
-        }
+        summary = build_summary(tallies, args.dry_run)
         print(json.dumps(summary))
         return 0
 
