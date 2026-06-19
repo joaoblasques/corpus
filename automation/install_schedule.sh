@@ -25,10 +25,13 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
-TEMPLATE="${SCRIPT_DIR}/com.corpus.daily.plist.template"
+# Which job to install. Default "daily" (the collect+ingest pipeline); set
+# CORPUS_JOB=weekly-synthesis to install the weekly leftover-Opus synthesis pass.
+JOB="${CORPUS_JOB:-daily}"
+TEMPLATE="${SCRIPT_DIR}/com.corpus.${JOB}.plist.template"
 LAUNCH_AGENTS_DIR="${HOME}/Library/LaunchAgents"
-PLIST_DEST="${LAUNCH_AGENTS_DIR}/com.corpus.daily.plist"
-LABEL="com.corpus.daily"
+PLIST_DEST="${LAUNCH_AGENTS_DIR}/com.corpus.${JOB}.plist"
+LABEL="com.corpus.${JOB}"
 
 # Resolve the absolute path to python3 — launchd has NO shell PATH so we
 # must embed the full path in the rendered plist.
