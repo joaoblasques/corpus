@@ -181,3 +181,18 @@ def test_run_loop_routes_proposals_to_queue():
         **_loop_kwargs(_queue=lambda kind, detail: queued.append((kind, detail))))
     # empty changed_paths ⇒ no_progress stop, but proposals still routed first
     assert queued and queued[0][0] == "proposal"
+
+
+def test_smoke_runs_loop_to_convergence_without_commit(monkeypatch, capsys):
+    monkeypatch.setattr(c.sr, "acquire_lock", lambda p: True)
+    monkeypatch.setattr(c.sr, "release_lock", lambda p: None)
+    monkeypatch.setattr(c.sr, "_on_main", lambda *a, **k: True)
+    committed = []
+    monkeypatch.setattr(c, "write_digest", lambda *a, **k: None)
+    monkeypatch.setattr(c, "finalize_commit", lambda *a, **k: {"status": "noop"})
+    monkeypatch.setattr(c, "govern", lambda *a, **k: committed.append(1) or {"action": "committed"})
+    rc = c.main(["--smoke"])
+    out = capsys.readouterr().out
+    assert rc == 0
+    assert '"stop_reason": "converged_dry"' in out
+    assert committed == []   # smoke makes no content changes ⇒ govern never called

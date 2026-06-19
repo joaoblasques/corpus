@@ -223,3 +223,43 @@ def run_loop(*, next_action, execute, constraints, budget, caps, label,
     finalize()   # commit _digest.md + _review_queue.md so the control surface always persists
     return {"label": label, "iterations": len(entries), "stop_reason": stop,
             "committed": committed, "queued": queued_n, "spent": budget.spent()}
+
+
+def _smoke_run() -> dict:
+    """Drive run_loop with a trivial mode whose worklist is empty from the start: the
+    first next_action() returns None ⇒ the loop stops `converged_dry` with ZERO executes
+    (so govern is never reached). Proves the loop + lock + digest wiring end-to-end."""
+    def next_action():
+        return None
+    def execute(action, constraints):   # never called in smoke; present for shape
+        return Result(changed_paths=[], usage={"output_tokens": 0})
+    return run_loop(next_action=next_action, execute=execute,
+                    constraints="SMOKE — no writes", budget=Budget(1000),
+                    caps=Caps(max_iterations=3), label="smoke")
+
+
+def main(argv=None) -> int:
+    import argparse
+    ap = argparse.ArgumentParser(description="Custodian harness.")
+    ap.add_argument("--smoke", action="store_true",
+                    help="Run the smoke mode (proves the loop end-to-end; no content changes).")
+    ap.add_argument("--lock-path", default=ROOT / "raw" / ".custodian.lock", type=Path)
+    args = ap.parse_args(argv)
+    if not args.smoke:
+        ap.print_help()
+        return 0
+    if not sr._on_main():
+        print(json.dumps({"status": "skipped", "reason": "not_on_main"}))
+        return 0
+    if not sr.acquire_lock(args.lock_path):
+        print(json.dumps({"status": "skipped", "reason": "lock_held"}))
+        return 0
+    try:
+        print(json.dumps(_smoke_run()))
+        return 0
+    finally:
+        sr.release_lock(args.lock_path)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
