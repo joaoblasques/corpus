@@ -785,3 +785,15 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - 6 G1 (promos/personal/transactional): Decathlon voucher, Shakers promo, Nick-Spisak AI-skill promo, Gmail storage notice, tour-leader admin, family cabin email
 - 4 UNCERTAIN (container/pointer): TLDR Dev + TLDR Data digests (articles ingest separately as raw/web companions), Google declutter promo, AWS-masterclass bare youtu.be pointer
 - resolution: stamped corpus_ingested: true + corpus_pages: [] and filed to raw/email/ (no corpus pages created — fabricating from these would breach §7 provenance)
+
+## [2026-06-19T02:17] config | scheduled run
+- collectors:
+  - gmail: 6 collected · status=ok
+  - obsidian: 0 collected · status=ok
+  - pdf: 0 collected · status=ok
+  - youtube: 15 collected · status=ok
+  - links_refetch: 0 refetched · status=ok
+- ingest:
+  - ingest: 0 ingested · 6 deferred · status=ok
+- lint:
+  - 0 broken wikilinks · 0 broken citations · 0 orphans · 6 stubs
