@@ -117,3 +117,14 @@ def test_govern_skips_off_main(monkeypatch):
     out = c.govern(c.Verdict(ok=True), ["corpus/x.md"], reversible=True,
                    _run=lambda *a, **k: types.SimpleNamespace(returncode=0, stdout="", stderr=""))
     assert out["action"] == "skipped-not-main"
+
+
+def test_write_digest_appends_block(tmp_path):
+    d = tmp_path / "_digest.md"
+    c.write_digest("run-1", "gardener", [{"action": "drain", "result": "ingested 3"}],
+                   path=d, _now="2026-06-19T13:00")
+    c.write_digest("run-2", "gardener", [], path=d, _now="2026-06-20T13:00")
+    text = d.read_text()
+    assert "run-1" in text and "gardener" in text and "ingested 3" in text
+    assert "2026-06-19T13:00" in text and "2026-06-20T13:00" in text
+    assert text.count("## ") >= 2   # two appended blocks, newest last

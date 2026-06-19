@@ -118,6 +118,23 @@ def enqueue_review(kind: str, detail: dict, *, path=None) -> None:
         fh.write(f"- [{kind}] {json.dumps(detail, ensure_ascii=False)}\n")
 
 
+def write_digest(run_id: str, label: str, entries: list, *, path=None, _now=None) -> None:
+    """Append a 'while you were away' block to corpus/_digest.md (newest last)."""
+    p = Path(path) if path is not None else DIGEST
+    p.parent.mkdir(parents=True, exist_ok=True)
+    if not p.exists():
+        p.write_text("# Custodian Digest\n\n> What the autonomous agents did, newest last.\n",
+                     encoding="utf-8")
+    at = _now if _now is not None else __import__("datetime").datetime.now().isoformat(timespec="minutes")
+    lines = [f"\n## [{at}] {label} · {run_id}"]
+    for e in entries:
+        lines.append(f"- {json.dumps(e, ensure_ascii=False)}")
+    if not entries:
+        lines.append("- (no actions)")
+    with p.open("a", encoding="utf-8") as fh:
+        fh.write("\n".join(lines) + "\n")
+
+
 def govern(verdict: Verdict, changed_paths: list, *, reversible: bool,
            _run=None, _queue=None) -> dict:
     """Tiered governance: pass+reversible ⇒ commit (main-only); fail ⇒ revert the changed
