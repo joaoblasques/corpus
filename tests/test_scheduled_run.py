@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import subprocess
 import sys
+import types
 from pathlib import Path
 from unittest import mock
 from unittest.mock import MagicMock, patch
@@ -923,6 +924,23 @@ class TestBranchGuard:
             rc = scheduled_run.main(["--lock-path", str(tmp_path / ".l"), "run"])
         assert rc == 0
         commit.assert_not_called()   # never committed on the feature branch
+
+
+class TestOnMain:
+    def _fake(self, branch):
+        return lambda *a, **k: types.SimpleNamespace(returncode=0, stdout=branch + "\n", stderr="")
+
+    def test_true_on_main(self, monkeypatch):
+        monkeypatch.delenv("SCHEDULED_RUN_ALLOW_ANY_BRANCH", raising=False)
+        assert scheduled_run._on_main(_subprocess_run=self._fake("main")) is True
+
+    def test_false_off_main(self, monkeypatch):
+        monkeypatch.delenv("SCHEDULED_RUN_ALLOW_ANY_BRANCH", raising=False)
+        assert scheduled_run._on_main(_subprocess_run=self._fake("feature/x")) is False
+
+    def test_override_forces_true_off_main(self, monkeypatch):
+        monkeypatch.setenv("SCHEDULED_RUN_ALLOW_ANY_BRANCH", "1")
+        assert scheduled_run._on_main(_subprocess_run=self._fake("feature/x")) is True
 
 
 class TestRunIntegration:

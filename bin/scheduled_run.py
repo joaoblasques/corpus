@@ -111,7 +111,10 @@ def current_branch(repo=None, *, _subprocess_run=None) -> str | None:
 
 
 def _on_main(repo=None, *, _subprocess_run=None) -> bool:
-    """Return True if the current branch is main, False otherwise."""
+    """Return True if on the main branch, OR if SCHEDULED_RUN_ALLOW_ANY_BRANCH is set
+    (the codebase's documented test/escape-hatch override, matching main()'s commit guard)."""
+    if os.environ.get("SCHEDULED_RUN_ALLOW_ANY_BRANCH"):
+        return True
     branch = current_branch(repo=repo, _subprocess_run=_subprocess_run)
     return branch == MAIN_BRANCH
 
