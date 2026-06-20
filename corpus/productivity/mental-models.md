@@ -15,7 +15,7 @@ sources:
   - path: raw/web/web-two-tools-for-clearer-thinking.md
     channel: web
     ingested_at: 2026-06-17
-  - path: raw/email/email-2026-06-15-why-other-people-can-see-things-about-you-that-you-cant.md
+  - path: raw/email/email-2026-06-15-why-other-people-can-see-things-about-you-that-you-can-t.md
     channel: email
     ingested_at: 2026-06-20
 aliases:
@@ -142,4 +142,4 @@ All five models frame judgment — knowing limits, simulating outcomes, seeing w
 [^src2]: [Thought Experiment - Mental Model: What If?](../../raw/web/thought-experiment-mental-model-what-if.md)
 [^src3]: [Map Is Not Territory — Mental Model: What Is Hidden From Me?](../../raw/web/web-map-is-not-territory-mental-model-what-is-hidden-from-me.md)
 [^src4]: [Two Tools for Clearer Thinking](../../raw/web/web-two-tools-for-clearer-thinking.md)
-[^src5]: [Why Other People Can See Things About You That You Can't](../../raw/email/email-2026-06-15-why-other-people-can-see-things-about-you-that-you-cant.md)
+[^src5]: [Why Other People Can See Things About You That You Can't](../../raw/email/email-2026-06-15-why-other-people-can-see-things-about-you-that-you-can-t.md)
