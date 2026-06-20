@@ -24,6 +24,9 @@ sources:
   - path: raw/web/web-exactly-why-and-how-ai-will-replace-knowledge-work.md
     channel: web
     ingested_at: 2026-06-17
+  - path: raw/email/email-2026-06-16-9-software-engineering-skills-a-de-should-have-and-how-to-le.md
+    channel: email
+    ingested_at: 2026-06-20
   - path: raw/notes/notes-how-to-compete-with-ai.md
     channel: notes
     ingested_at: 2026-06-17
@@ -158,6 +161,20 @@ A condensed, practitioner-level distillation of the positioning problem — stru
 
 **Overlap note.** Principles 3 (judgment/taste) and 4 (articulation gap via files) reinforce the sections above — they are included here for the framing clarity the 10-principle structure provides. Principles 1–2, 5, 8–9 add angles not covered elsewhere in this page.
 
+## Software engineering skills: the DE lane
+
+Data engineers sometimes under-invest in software engineering fundamentals, focusing on tools (Spark, Airflow, dbt) without the craft skills that make those tools productive at scale. Alejandro Aboy's 9 SE skills for DEs (2026) identifies the transferable skills with the most leverage [^src9]:
+
+- **Pick one lane and go deep** — employer signal: depth is more credible than breadth across 20 tools.
+- **Write understandable code** — code is read at 3am during incidents; clarity is a production concern, not just aesthetics.
+- **Know one design pattern** — Repository, Factory, Observer — enough to make pipelines extensible without rewriting from scratch.
+- **Participate in code review** — both as author and reviewer; the review habit compresses years of learning into months.
+- **Contribute to open-source** — the strongest DE portfolio signal: initiative, collaboration, real-world craft.
+
+> "The difference between a senior DE and a junior DE that knows a lot of tools is often just these software engineering fundamentals." [^src9]
+
+This complements the on-the-job leverage section: being legible (clear code, review participation, OSS record) makes your work undeniable without extra status-maintenance overhead.
+
 ## Gotchas
 
 - Portfolio "wow factor" advice is from a creator who sells courses (Tech With Tim); the guidance is generic-sound but vendor-adjacent [^src1][^src2].
@@ -174,3 +191,4 @@ A condensed, practitioner-level distillation of the positioning problem — stru
 [^src6]: [Stop Feeding Me AI Slop](../../raw/web/web-stop-feeding-me-ai-slop.md)
 [^src7]: [Exactly Why and How AI Will Replace Knowledge Work](../../raw/web/web-exactly-why-and-how-ai-will-replace-knowledge-work.md)
 [^src8]: [How to Compete with AI (10 principles)](../../raw/notes/notes-how-to-compete-with-ai.md)
+[^src9]: [9 Software Engineering Skills a DE Should Have (Alejandro Aboy)](../../raw/email/email-2026-06-16-9-software-engineering-skills-a-de-should-have-and-how-to-le.md)

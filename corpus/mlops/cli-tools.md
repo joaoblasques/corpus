@@ -12,6 +12,14 @@ sources:
   - path: raw/youtube/youtube-mmqDYw9C30I-7-amazing-cli-tools-you-need-to-try.md
     channel: youtube
     ingested_at: 2026-06-15
+  - path: raw/youtube/youtube-pjnSE99-cz0-naming-files-and-directories-the-right-way.md
+    channel: youtube
+    ingested_at: 2026-06-20
+  - path: raw/youtube/youtube--4fJbIF8WAs-i-was-definitely-using-the-wrong-terminal-code-reviewer.md
+    channel: youtube
+    ingested_at: 2026-06-20
+    channel: youtube
+    ingested_at: 2026-06-20
 aliases:
   - CLI tools
   - command-line tools
@@ -85,6 +93,33 @@ SSH is under-used as "just login"; its highest-leverage feature is **port forwar
 - **thefuck** — autocorrects the previous mistyped command [^src3].
 - **Fabric** — a CLI wrapper for calling LLMs with reusable "patterns" (extract ideas, create summary); chainable via Unix pipes [^src2]. Configured here against the [[ai-engineering/claude-api|Claude/Anthropic API]] (see [[ai-engineering/README|AI Engineering]] for LLM specifics).
 
+## File naming conventions
+
+Five rules for naming files and directories correctly, from a systems perspective [^src4]:
+
+1. **No spaces** — spaces in filenames break shell scripts and CLI tools unless quoted. Alternatives: `underscore_case`, `kebab-case`, `camelCase`, or `PascalCase`. Consistency within a project matters more than which convention you pick [^src4].
+2. **No special characters** — stick to alphanumeric characters, underscores (`_`), and hyphens (`-`). Special chars (`, &, #, $, !, [, ]) break many tools and URLs [^src4].
+3. **Be descriptively concise** — the name should tell you what the file contains without reading it. Avoid meaningless names (`file1.txt`, `temp.md`). Aim for 2–5 words; beyond that, use directories to add context [^src4].
+4. **Use lowercase** — filesystems on Linux/macOS servers are case-sensitive. `README.md` and `readme.md` are different files. Lowercase-always is the safest convention across platforms [^src4].
+5. **Dates in ISO 8601: `YYYY-MM-DD`** — for files where chronological ordering matters (reports, logs, exports), prefix with the date: `2026-06-20-analysis.csv`. ISO 8601 sorts correctly with plain alphabetical sorting; `06-20-2026` does not [^src4].
+
+**Bonus — be consistent per project.** Mixing conventions within a project is worse than consistently using a less popular convention. Document the convention in a `README.md` or project config [^src4].
+
+## See also
+
+## Hunk — TUI code review with AI annotations
+
+**Hunk** (GitHub: `nicholasgasior/hunk`) is a terminal UI for code diffs that adds structured, line-level review notes on top of git diff output — the missing piece between `git diff` and a full GitHub PR review [^src5]:
+
+- **Core UX**: interactive diff viewer (stacked or side-by-side), vim-style navigation (HJKL, square-bracket hunk jumping), syntax highlighting, and line-numbered context.
+- **Notes as first-class citizens**: press `+` next to a line to add a review note. Notes appear inline as purple comment bubbles during the session. Notes are *not* git-tracked (session-local only, by design) — "not perfect, but useful for local review management before pushing" [^src5].
+- **Agent-review workflow** [^src5]: Hunk exposes a `--session` flag that runs a background server. Agents (Pi, Claude Code) can call `hunk review`, read notes, add comments, and load the built-in `hunk` skill. The workflow: start hunk diff session → invoke agent with skill → agent annotates → inspect notes + iterate. This makes Hunk a structured output format for agent code review, complementing the inline approach.
+- **Stash support**: `hunk stash show` lets you inspect stashed changes in the diff TUI without popping/restashing — useful for reviewing provisional changes.
+- **Git pager**: configure `git diff` to use hunk as its default pager via `core.pager` in `.gitconfig`.
+- **Limitations** [^src5]: notes are session-local; not synced to GitHub PR comments; no multi-user collaboration (yet). For GitHub-native reviews, `gh-dash` + Octo + Vim is the alternative; for local reviews, Hunk is the best available.
+
+Compare: delta (rust diff pager, no notes), LazyGit (full git TUI, review mode less powerful), diffnav (TUI around delta), lumen (TUI but no AI annotations), GitHub web UI (collaborative but requires browser).
+
 ## See also
 
 - [[mlops/terminal-and-shell|Terminal & Shell]] — where these tools are installed and configured (Alacritty, zsh, Powerlevel10k, fzf/zoxide/eza setup)
@@ -98,5 +133,7 @@ SSH is under-used as "just login"; its highest-leverage feature is **port forwar
 [^src1]: [10 CLI apps that have actually improved the way I work in the terminal (Dreams of Code)](../../raw/youtube/youtube-EJ6uvqhKR4M-10-cli-apps-that-have-actually-improved-the-way-i-work-in-th.md) — zoxide [[01:20](../../raw/youtube/youtube-EJ6uvqhKR4M-10-cli-apps-that-have-actually-improved-the-way-i-work-in-th.md#t=01:20)], rg [[03:32](../../raw/youtube/youtube-EJ6uvqhKR4M-10-cli-apps-that-have-actually-improved-the-way-i-work-in-th.md#t=03:32)], fd [[06:09](../../raw/youtube/youtube-EJ6uvqhKR4M-10-cli-apps-that-have-actually-improved-the-way-i-work-in-th.md#t=06:09)], tmux [[08:18](../../raw/youtube/youtube-EJ6uvqhKR4M-10-cli-apps-that-have-actually-improved-the-way-i-work-in-th.md#t=08:18)], gh [[13:28](../../raw/youtube/youtube-EJ6uvqhKR4M-10-cli-apps-that-have-actually-improved-the-way-i-work-in-th.md#t=13:28)], Doppler [[14:46](../../raw/youtube/youtube-EJ6uvqhKR4M-10-cli-apps-that-have-actually-improved-the-way-i-work-in-th.md#t=14:46)], pass [[16:29](../../raw/youtube/youtube-EJ6uvqhKR4M-10-cli-apps-that-have-actually-improved-the-way-i-work-in-th.md#t=16:29)], jq [[18:39](../../raw/youtube/youtube-EJ6uvqhKR4M-10-cli-apps-that-have-actually-improved-the-way-i-work-in-th.md#t=18:39)], stow [[20:00](../../raw/youtube/youtube-EJ6uvqhKR4M-10-cli-apps-that-have-actually-improved-the-way-i-work-in-th.md#t=20:00)]
 [^src2]: [5 CLI Tools That Actually Changed How I Work in 2026 (Mischa van den Burg)](../../raw/youtube/youtube-tmnd3M1k5Jw-5-cli-tools-that-actually-changed-how-i-work-in-2026.md) — fzf [[00:00](../../raw/youtube/youtube-tmnd3M1k5Jw-5-cli-tools-that-actually-changed-how-i-work-in-2026.md#t=00:00)], tmux/keybindings [[02:35](../../raw/youtube/youtube-tmnd3M1k5Jw-5-cli-tools-that-actually-changed-how-i-work-in-2026.md#t=06:32)], SSH port-forward [[10:02](../../raw/youtube/youtube-tmnd3M1k5Jw-5-cli-tools-that-actually-changed-how-i-work-in-2026.md#t=10:02)], pass [[14:22](../../raw/youtube/youtube-tmnd3M1k5Jw-5-cli-tools-that-actually-changed-how-i-work-in-2026.md#t=14:22)], Fabric [[17:07](../../raw/youtube/youtube-tmnd3M1k5Jw-5-cli-tools-that-actually-changed-how-i-work-in-2026.md#t=17:07)]
 [^src3]: [7 Amazing CLI Tools You Need To Try (Josean Martinez)](../../raw/youtube/youtube-mmqDYw9C30I-7-amazing-cli-tools-you-need-to-try.md) — fzf [[00:25](../../raw/youtube/youtube-mmqDYw9C30I-7-amazing-cli-tools-you-need-to-try.md#t=00:25)], fd [[03:59](../../raw/youtube/youtube-mmqDYw9C30I-7-amazing-cli-tools-you-need-to-try.md#t=03:59)], bat [[06:25](../../raw/youtube/youtube-mmqDYw9C30I-7-amazing-cli-tools-you-need-to-try.md#t=06:25)], delta [[09:00](../../raw/youtube/youtube-mmqDYw9C30I-7-amazing-cli-tools-you-need-to-try.md#t=09:00)], eza [[10:16](../../raw/youtube/youtube-mmqDYw9C30I-7-amazing-cli-tools-you-need-to-try.md#t=10:16)], tldr [[12:52](../../raw/youtube/youtube-mmqDYw9C30I-7-amazing-cli-tools-you-need-to-try.md#t=12:52)], thefuck [[13:45](../../raw/youtube/youtube-mmqDYw9C30I-7-amazing-cli-tools-you-need-to-try.md#t=13:45)], zoxide [[14:40](../../raw/youtube/youtube-mmqDYw9C30I-7-amazing-cli-tools-you-need-to-try.md#t=14:40)]
+[^src4]: [Naming Files and Directories: The Right Way (YouTube)](../../raw/youtube/youtube-pjnSE99-cz0-naming-files-and-directories-the-right-way.md)
+[^src5]: [I Was Definitely Using The Wrong Terminal Code Reviewer (DevOps Toolbox)](../../raw/youtube/youtube--4fJbIF8WAs-i-was-definitely-using-the-wrong-terminal-code-reviewer.md) — Hunk TUI
 </content>
 </invoke>

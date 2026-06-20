@@ -6,6 +6,9 @@ sources:
   - path: raw/email/email-2025-06-29-build-a-spam-classifier-like-a-production-ml-engineer.md
     channel: email
     ingested_at: 2026-06-19
+  - path: raw/youtube/youtube-mvleESOUTRw-production-grade-ai-project-tutorial-build-deploy.md
+    channel: youtube
+    ingested_at: 2026-06-20
 aliases:
   - production ml workflow
   - production-minded training
@@ -71,6 +74,31 @@ The saved model is validated on the untouched holdout set as the last step, conf
 
 Prepare for deployment from day 1 (holdout sets + robust pipelines); don't just chase accuracy — choose metrics reflecting the real-world cost of errors; and save the model + vectorizer in one pipeline for easy deployment [^src1].
 
+## Enterprise-grade training data curation (freeCodeCamp)
+
+A second reference implementation (Aush Singh, freeCodeCamp) takes the opposite framing: **real ML is pipelines, not accuracy scores** [^src2]. The project is an enterprise-grade LLM training-data curation bot — a system that discovers, processes, classifies, and summarizes source data to produce a clean training corpus.
+
+### Architecture patterns
+
+**Python project structure** [^src2]:
+- `__init__.py` as the main entrance pattern — keeps the entry point clean and importable.
+- Central `logging` module configured once at startup; all modules import from it.
+- Unified error handling pattern: every module's errors bubble up to a top-level handler that logs with context (module name, input, error type) rather than silently swallowing.
+- Unified loader class: one `DataLoader` that accepts any source type (PDFs, web pages, emails, databases); callers don't need to know which parser runs underneath.
+
+**Async data pipelines** [^src2]: use `asyncio` for I/O-bound stages (fetching, embedding API calls); keep CPU-bound stages (classification, summarization) synchronous or thread-pool-isolated.
+
+**Prompt engineering at scale** [^src2]: when a pipeline calls an LLM thousands of times, prompts must be:
+- Versioned (stored in code, not hardcoded strings).
+- Input-length-aware (truncate inputs before the context window fills).
+- Output-format-strict (JSON schema in the prompt; validate before storing).
+
+### The 12–14 step build
+
+The full project spans: data discovery → source loading → pre-processing (cleaning/chunking) → embedding → semantic deduplication → quality scoring → classification → summarization → storage → lineage tracking → QA → export for LLM training [^src2]. Each step is a standalone pipeline stage that can be re-run independently — the same idempotency principle as [[data-engineering/idempotent-pipelines|Idempotent Pipelines]].
+
+> "Real ML engineering is building systems that *reliably produce* good data for the model — not tweaking model hyperparameters." [^src2]
+
 ## See also
 
 - [[mlops/model-serving|Model Serving]] — Parts 3 & 4 of this series: the Flask API and Airflow batch job that serve this saved pipeline
@@ -81,4 +109,5 @@ Prepare for deployment from day 1 (holdout sets + robust pipelines); don't just 
 ---
 
 [^src1]: [Build a Spam Classifier Like a Production ML Engineer (Vivek Bharti, Practical ML Series Part 2)](../../raw/email/email-2025-06-29-build-a-spam-classifier-like-a-production-ml-engineer.md)
+[^src2]: [Production-Grade AI Project Tutorial — Build & Deploy (freeCodeCamp / Aush Singh)](../../raw/youtube/youtube-mvleESOUTRw-production-grade-ai-project-tutorial-build-deploy.md)
 </content>

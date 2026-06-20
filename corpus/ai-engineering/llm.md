@@ -12,6 +12,9 @@ sources:
   - path: raw/web/coherelabs-command-a-plus-05-2026-w4a4-hugging-face.md
     channel: web
     ingested_at: 2026-06-12
+  - path: raw/youtube/youtube-9vM4p9NN0Ts-stanford-cs229-i-machine-learning-i-building-large-language.md
+    channel: youtube
+    ingested_at: 2026-06-20
 aliases:
   - LLM
   - large language model
@@ -70,6 +73,48 @@ The next-token, dense-Transformer baseline above is not the only shape modern op
 
 Both ship **open weights** (Apache 2.0), with multimodal input, long context (DiffusionGemma 256K; Command A+ 128K), and "thinking"/reasoning modes — the now-standard feature surface for frontier-adjacent open models [^src2][^src3].
 
+## Autoregressive pre-training: tokenization and perplexity (Stanford CS229)
+
+The Stanford CS229 LLM lecture grounds the mechanics formally [^src4]:
+
+### Autoregressive generation
+
+An LLM is **autoregressive**: it generates text one token at a time, each token conditioned on all previous tokens. At training time, the model sees a long sequence of text and learns to predict the next token at every position simultaneously (via teacher-forcing); at inference time, it samples one token, appends it to the context, and predicts the next one, repeating until done [^src4].
+
+The training objective is **cross-entropy loss** averaged over all tokens:
+
+```
+L = - (1/T) ∑ₜ log P(token_t | token_1, ..., token_{t-1})
+```
+
+Minimizing this is equivalent to maximizing the likelihood of the training corpus under the model [^src4].
+
+### BPE tokenization (Byte Pair Encoding)
+
+LLMs do not process raw characters or words — they operate on **tokens**, sub-word units produced by BPE [^src4]:
+
+1. Start with individual characters as the vocabulary.
+2. Repeatedly find the most frequent pair of adjacent tokens and merge them into a single token.
+3. Stop when the vocabulary reaches the target size (e.g., 50,000 tokens for GPT-2).
+
+Result: common words become a single token; rare words are split into sub-word pieces. "unhappiness" might tokenize as ["un", "happiness"] or ["un", "happy", "ness"]. BPE balances vocabulary size against sequence length — fewer tokens per sequence means faster attention, but the vocabulary table grows [^src4].
+
+Token count differs from word count: roughly 1 word ≈ 1.3–1.5 tokens for English; code and non-Latin scripts may tokenize much less efficiently [^src4].
+
+### Perplexity
+
+**Perplexity** is the standard intrinsic evaluation metric for language models [^src4]:
+
+```
+Perplexity = 2^H    where H = - (1/T) ∑ₜ log₂ P(token_t | context)
+```
+
+H is the average per-token cross-entropy loss in bits. Perplexity measures "how surprised the model is on average" — a model assigning uniform probability over a V-word vocabulary has perplexity V; a perfect model has perplexity 1 [^src4].
+
+Lower perplexity = better model (more confident and correct). The key interpretation: *perplexity is the effective branching factor at each step* — a perplexity of 50 means the model is roughly choosing among 50 equally likely next tokens on average [^src4].
+
+Perplexity does not directly measure downstream task quality (a model with low perplexity can still fail at reasoning tasks), but it tracks training progress reliably and enables fair comparison across model sizes trained on the same data [^src4].
+
 ## Relationship to agents and context engineering
 
 An LLM is the reasoning engine at the center of an [[ai-engineering/ai-agent|AI Agent]]. The agent's context window — the input to the LLM — is what [[ai-engineering/context-engineering|Context Engineering]] optimizes. Everything the agent knows at any moment is what fits in the context window.
@@ -86,3 +131,4 @@ An LLM is the reasoning engine at the center of an [[ai-engineering/ai-agent|AI 
 [^src1]: [[03_Resources/Study Notes/AI - How Large Language Models Work|AI - How Large Language Models Work]]
 [^src2]: [DiffusionGemma 26B-A4B-it (model card)](../../raw/web/google-diffusiongemma-26b-a4b-it-hugging-face.md) — Google DeepMind, Hugging Face
 [^src3]: [Command A+ (command-a-plus-05-2026-w4a4, model card)](../../raw/web/coherelabs-command-a-plus-05-2026-w4a4-hugging-face.md) — Cohere Labs, Hugging Face
+[^src4]: [Stanford CS229 — Building Large Language Models](../../raw/youtube/youtube-9vM4p9NN0Ts-stanford-cs229-i-machine-learning-i-building-large-language.md) — Stanford, YouTube

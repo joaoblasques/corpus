@@ -24,6 +24,9 @@ sources:
   - path: raw/notes/notes-clippings-best-practices-for-using-claude-opus-4-7-with-claude-code.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/email/email-2026-06-12-two-weeks-with-claude-fable-5.md
+    channel: email
+    ingested_at: 2026-06-20
   - path: raw/notes/notes-clippings-claude-security-is-now-in-public-beta.md
     channel: notes
     ingested_at: 2026-06-17
@@ -94,6 +97,16 @@ Claude Security (the vulnerability-scanning product) uses Opus 4.7 by default fo
 
 See [[ai-engineering/claude-code|Claude Code]] (Opus 4.7 section) for the full usage guide.
 
+## Loop engineering and Fable 5 (stepping back)
+
+Two weeks with Fable 5 surfaced a pattern shift in how to work with the model [^src11]:
+
+**"Fable makes it worth stepping back."** Fable 5's capability for extended, well-defined tasks means the leverage has shifted from "write a better prompt" to "design a better loop" — a more powerful operating mode where the engineer defines the structure (what to do, what done means, what to check) and the model executes [^src11].
+
+**Well-defined tasks + agent self-check**: the model performs better when tasks have explicit, verifiable success criteria baked in — not just "write tests" but "write tests and verify all pass before returning." This supports a self-checking loop without manual verification of every step [^src11].
+
+**"Verify the right work, not that the work is right."** The critical reframe: the human's job when using Fable is not to check whether each step was executed correctly (the model does that), but to verify that the *task itself* was worth doing — that the loop is producing the right outputs for the right problems. This connects to [[productivity/ai-augmented-knowledge-work|loop engineering]] and the verification-as-design discipline [^src11].
+
 ## See also
 
 - [[ai-engineering/anthropic|Anthropic]] — the lab behind these models (company, funding, learning resources)
@@ -108,3 +121,4 @@ See [[ai-engineering/claude-code|Claude Code]] (Opus 4.7 section) for the full u
 [^src10]: [Claude for the legal industry](../../raw/notes/notes-clippings-claude-for-the-legal-industry.md) — Anthropic (Harvey quote on Opus 4.7 BigLaw Bench score)
 [^src10b]: [Claude Security is now in public beta](../../raw/notes/notes-clippings-claude-security-is-now-in-public-beta.md) — Anthropic
 [^src10c]: [Best practices for using Claude Opus 4.7 with Claude Code](../../raw/notes/notes-clippings-best-practices-for-using-claude-opus-4-7-with-claude-code.md) — Anthropic
+[^src11]: [Two Weeks with Claude Fable 5 — Loop Engineering (email)](../../raw/email/email-2026-06-12-two-weeks-with-claude-fable-5.md)

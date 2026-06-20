@@ -24,6 +24,12 @@ sources:
   - path: raw/notes/notes-clippings-product-development-in-the-agentic-era.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/youtube/youtube-GIwi7K-7Ob8-ai-ml-fundamentals-for-product-managers.md
+    channel: youtube
+    ingested_at: 2026-06-20
+  - path: raw/youtube/youtube-bWjQqE0hIGo-fundamentals-of-ai-product-management-ai-pm-community-sessio.md
+    channel: youtube
+    ingested_at: 2026-06-20
 aliases:
   - AI product management
   - AIPM
@@ -151,6 +157,65 @@ Three example PM agents built on Managed Agents [^src7]:
 
 The PM leverage argument: "A year ago, all of this kind of work would've crawled along in cross-functional staffing requests, chaotic spreadsheets, or half-baked concepts I just never got to try out" [^src7]. The **two-pronged payoff** — building against the product raises the ceiling on what the PM can imagine shipping next; the same development muscle automates the long tail of operational work [^src7].
 
+## AI ≠ ML: the three product types
+
+A foundational PM distinction from the AI/ML Fundamentals for PMs course: **AI, ML, and GenAI are not the same layer** [^src8]:
+
+| Type | Description | Typical interface |
+|---|---|---|
+| **Rule-based systems** | Hard-coded logic (if-then); no learning | Decision trees, expert systems |
+| **ML-based systems** | Learn from data; output improves with more training data | Recommendation engines, fraud detection |
+| **GenAI systems** | Foundation models that generate; use RAG or fine-tuning to specialize | LLM chatbots, image generators |
+
+PMs must understand which layer they're building on because **tradeoffs differ by layer**: rule-based systems are predictable but rigid; ML systems require labeled data and degrade under distribution shift; GenAI systems are flexible but expensive, non-deterministic, and hard to evaluate [^src8].
+
+### The three underlying layers (training / inference / model)
+
+Every ML/GenAI product sits on top of three layers [^src8]:
+- **Model layer**: the weights and architecture (what the model "knows").
+- **Training layer**: the pipeline that produced those weights (data collection, labeling, training runs).
+- **Inference layer**: the serving infrastructure (how predictions are generated at request time).
+
+PMs who don't understand these layers struggle to set timelines, diagnose failures, and make build-vs-buy decisions for AI components [^src8].
+
+### Uber Michelangelo: the ML platform pattern
+
+Uber's **Michelangelo** is the canonical reference for an internal ML platform — the infrastructure layer that sits between ML engineers and deployed models [^src8]:
+
+Components:
+1. **Feature store** — centralized, versioned feature computation (avoids teams recomputing the same features independently).
+2. **Training platform** — distributed training jobs, experiment tracking, hyperparameter search.
+3. **Serving platform** — low-latency model serving at scale; A/B testing; shadow mode.
+4. **Monitoring** — model performance, data drift, feature drift.
+
+The lesson for PMs: when building ML-heavy products, the model is not the product — **the platform is the product**. A well-designed ML platform makes every model faster to build, test, and maintain [^src8].
+
+### Meta open-source as strategy
+
+Meta's pattern of open-sourcing foundational AI (LLaMA, PyTorch) is a deliberate platform strategy: commoditize the underlying layer to shift competitive advantage to applications and distribution [^src8]. PMs at companies competing against Meta-adjacent AI should track what Meta open-sources — when a capability becomes commoditized, the moat shifts upstream [^src8].
+
+## Cloud-first, hub-spoke org, POC-first (enterprise AI PM)
+
+A complementary framing from the "Fundamentals of AI Product Management" course [^src9]:
+
+**Cloud vendor first** [^src9]: for most enterprise AI products, start with the cloud vendor's managed AI services (AWS SageMaker, Azure ML, Google Vertex AI) before building custom infrastructure. Managed services reduce operational overhead and accelerate time-to-value; invest in custom infrastructure only when vendor limitations become real blockers.
+
+**Hub-spoke org model** [^src9]: successful enterprise AI deployments often use a hub-spoke model — a central AI team (the hub) that sets standards, provides infrastructure, and maintains platforms; business-unit teams (spokes) that build domain-specific applications on top. This separates "AI as infrastructure" from "AI as product."
+
+**POC-first (Proof of Concept → Pilot → Production)** [^src9]: the recommended AI deployment sequence:
+1. **POC** — validate technical feasibility with minimal investment.
+2. **Pilot** — deploy to a small, representative user group and measure real-world performance.
+3. **Production** — scale with full MLOps, monitoring, and governance.
+
+Skipping the pilot phase is the most common cause of expensive AI project failures — technical success in a POC does not predict user adoption or business impact [^src9].
+
+**Human-machine teaming framework** [^src9]: as AI takes over repetitive/analytical tasks, the PM's job is to design the *human-machine interface* — specifically:
+- Which decisions should AI make autonomously?
+- Which decisions should AI recommend but humans confirm?
+- Which decisions should remain human-only?
+
+The framework maps these three categories onto risk (reversibility × impact) and confidence (how well-calibrated the model is). High-risk, low-confidence decisions stay human-in-the-loop; low-risk, high-confidence decisions can be fully autonomous [^src9].
+
 ## Cross-domain
 
 The *career* dimension of AIPM (job market, "what should I become") lives in [[ai-business/ai-and-the-job-market|AI and the Job Market]] and [[ai-business/technical-career|Navigating a Technical Career]]; this page owns the product/engineering discipline.
@@ -172,3 +237,5 @@ The *career* dimension of AIPM (job market, "what should I become") lives in [[a
 [^src5]: [100% of my code is written by Claude — Boris Cherny (Lenny's Podcast)](../../raw/youtube/youtube-we7bzvkbcvw.md)
 [^src6]: [Product management on the AI exponential](../../raw/notes/notes-clippings-product-management-on-the-ai-exponential.md) — Cat Wu, Head of Product for Claude Code, Anthropic
 [^src7]: [Product development in the agentic era](../../raw/notes/notes-clippings-product-development-in-the-agentic-era.md) — Anthropic PM, building with Managed Agents
+[^src8]: [AI/ML Fundamentals for Product Managers](../../raw/youtube/youtube-GIwi7K-7Ob8-ai-ml-fundamentals-for-product-managers.md) — YouTube
+[^src9]: [Fundamentals of AI Product Management (AI PM Community Session)](../../raw/youtube/youtube-bWjQqE0hIGo-fundamentals-of-ai-product-management-ai-pm-community-sessio.md) — YouTube

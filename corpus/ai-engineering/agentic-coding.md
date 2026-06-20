@@ -51,6 +51,12 @@ sources:
   - path: raw/web/web-ezyang-s-blog.md
     channel: web
     ingested_at: 2026-06-17
+  - path: raw/email/email-2026-06-16-agentic-code-review.md
+    channel: email
+    ingested_at: 2026-06-20
+  - path: raw/web/web-code-review-claude-code-docs.md
+    channel: web
+    ingested_at: 2026-06-20
   - path: raw/web/web-10-github-repositories-to-master-claude-code-kdnuggets.md
     channel: web
     ingested_at: 2026-06-17
@@ -305,12 +311,63 @@ A cross-company survey of 15 senior engineers and engineering leaders surfaced c
 
 **AI increases, not decreases, cognitive load**: Vlad Khambir: "AI tools intensify rather than reduce cognitive load. It's like watching YouTube at double speed." The solution: better structure and clearer constraints, not more AI [^src17].
 
+## Agentic code review
+
+Agentic tooling has multiplied code output but not value. Faros AI data: AI-assisted engineers produce **4× more code** but only a **10% real gain** in useful value — most generated code is noise [^src18].
+
+The proposed fix is **adversarial review**: running AI tools *against* the AI-generated output before merging. An adversarial review pass with four tools (not named in the source, but including AST-based analysis, security scanners, and separate LLM critique) achieved **93.4% unique catch rates** — findings that a single-tool pass missed [^src18].
+
+### Two debt types (Addy Osmani)
+
+| Debt type | Definition | Example |
+|---|---|---|
+| **Intent debt** | Code doesn't do what was intended | A function that looks right but fails an edge case never tested |
+| **Comprehension debt** | Can't tell what the code does | AI-generated code so opaque no human can audit it |
+
+Intent debt is the harder one — the system *compiles*, *ships*, and *fails silently* [^src18]. Comprehension debt compounds over time: on-call engineers can't debug code they didn't author and can't understand.
+
+### Blast radius triage
+
+Not all agentic output needs the same review depth. A **blast radius** triage scores generated code by:
+1. **Scope of impact** — does this touch authentication, billing, data writes, or just UI text?
+2. **Reversibility** — can the change be rolled back without data loss?
+3. **Test coverage** — does the existing test suite catch regressions here?
+
+High-blast-radius changes (auth, payments, migrations) get adversarial review; low-blast-radius changes (UI copy, config constants) get lighter review [^src18].
+
+### Human on the loop, not in the loop
+
+The shift implied: the human's job moves from *writing* to *directing and verifying*. "Human on the loop" means you design the loop (tooling, test scaffolding, review gates), review the output, and approve before merge — rather than writing code yourself or approving each agent step interactively [^src18]. See also the [[ai-engineering/multi-agent-systems|Ralph Loop]] for the compound version of this in multi-agent engineering.
+
 ## See also
 
 - [[ai-engineering/agent-harness|Agent Harness]] — the scaffolding (hooks, loops, context policies) every coding agent runs inside
 - [[ai-engineering/agent-skills|Agent Skills]] — reusable expertise units; progressive disclosure
 - [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] — subagents, Agent Teams, orchestration tiers, Ralph Loop
 - [[ai-engineering/context-engineering|Context Engineering]] — supply unique workflow, not general knowledge
+## Claude Code Review (managed code review service)
+
+Claude Code ships a managed code review service (Team and Enterprise subscriptions, not Zero Data Retention orgs) that integrates with GitHub as a GitHub App [^src19]:
+
+**How it works**: when a PR opens (or on every push, or manually), multiple agents analyze the diff and surrounding code in parallel on Anthropic's infrastructure. Each agent looks for a different class of issue; a verification step checks findings against actual code behavior to filter false positives. Results are deduplicated, ranked by severity, and posted as inline PR comments [^src19].
+
+**Severity tiers** [^src19]:
+- 🔴 **Important** — a bug that should be fixed before merging
+- 🟡 **Nit** — minor issue, worth fixing but not blocking
+- 🟣 **Pre-existing** — bug exists but was not introduced by this PR
+
+**Customization** [^src19]:
+- `CLAUDE.md` — shared project context; CLAUDE.md violations in the PR are flagged as nits
+- `REVIEW.md` — review-only override, injected as the highest-priority instruction into every agent in the review pipeline. Use it to: redefine severity for your domain, cap nit volume, skip generated/vendored paths, add repo-specific rules, tune the verification bar, control re-review behavior.
+
+**Review triggers** [^src19]: once per PR creation, after every push (more thorough + higher cost), or manual-only (`@claude review` to start, `@claude review once` for a one-shot without subscribing future pushes).
+
+**Local review** (`/code-review`) [^src19]: runs in any Claude Code session without the GitHub App. Reviews commits ahead of upstream + uncommitted changes. `--fix` applies findings to the working tree. `/code-review ultra --fix` runs ultrareview in the cloud and applies fixes on return.
+
+**Cost** [^src19]: ~$15–25 per review on average, billed separately from plan usage. Scales with PR size and complexity. Monitor via the Code Review analytics dashboard.
+
+## See also
+
 - [[ai-engineering/mcp|MCP]] — connecting agents to external systems
 - [[ai-engineering/ai-agent|AI Agent]] — the ReAct loop and agent fundamentals
 - [[software-engineering/ai-assisted-development|AI-Assisted Development]] (software-engineering) — the software-craft counterpart: fundamentals, the write→review shift, deterministic guardrails
@@ -335,3 +392,5 @@ A cross-company survey of 15 senior engineers and engineering leaders surfaced c
 [^src15]: [How I'm Productive with Claude Code](../../raw/web/web-how-im-productive-with-claude-code.md) — Neil Kakkar, neilkakkar.com
 [^src16]: [10 GitHub Repositories To Master Claude Code](../../raw/web/web-10-github-repositories-to-master-claude-code-kdnuggets.md) — Abid Ali Awan, KDnuggets
 [^src17]: [How to Do AI-Assisted Engineering](../../raw/web/web-how-to-do-ai-assisted-engineering.md) — 15 engineers, Engineering Leadership Newsletter
+[^src18]: [Agentic Code Review](../../raw/email/email-2026-06-16-agentic-code-review.md) — Addy Osmani
+[^src19]: [Code Review — Claude Code Docs](../../raw/web/web-code-review-claude-code-docs.md) — Anthropic official docs

@@ -18,6 +18,9 @@ sources:
   - path: raw/web/agent-mode-autonomous-ai-agents-for-real-world-tasks.md
     channel: web
     ingested_at: 2026-06-12
+  - path: raw/email/email-2026-06-13-agents-in-action-1-what-is-an-ai-agent.md
+    channel: email
+    ingested_at: 2026-06-20
   - path: raw/web/github-pickle-pixel-applypilot-ai-agent-that-applies-to-jobs.md
     channel: web
     ingested_at: 2026-06-12
@@ -162,6 +165,31 @@ A distinct architectural layer treats agent work as an **operating system**: a r
 
 Ouroboros and Pi both target **runtime portability** — one workflow spec, many execution engines (Claude Code, Codex, Gemini, Copilot, Pi, and more) [^src7][^src9]. This is the agent-side analog of the cross-platform convention work in [[ai-engineering/claude-md-conventions|CLAUDE.md & Agent Instruction Conventions]].
 
+## Agents for data engineers
+
+An introductory framing of agents specifically for the DE context [^src12]:
+
+**The agent loop** (observe → decide → act → incorporate → repeat):
+1. **Observe** — the agent reads its current state: query results, error messages, file contents, tool outputs.
+2. **Decide** — based on observation, it chooses the next action (call a tool, write a file, run a query).
+3. **Act** — executes the decision (writes SQL, calls an API, moves a file).
+4. **Incorporate** — adds the result back to the context window.
+5. **Repeat** — until the goal state is reached or a stop condition fires.
+
+**DAG vs agent**: a data pipeline DAG (Airflow, Prefect) is *static* — tasks are pre-defined; the graph doesn't change at runtime. An agent pipeline is *dynamic* — it decides the next step based on what it has observed so far. DAGs are better for high-reliability, predictable workflows; agents are better for exploratory, adaptive tasks (e.g. data quality investigation, schema discovery) [^src12].
+
+**Autonomy levels** (not binary):
+- Level 0: human executes each step with AI suggestions.
+- Level 1: AI suggests; human approves before each action.
+- Level 2: AI acts autonomously within a bounded scope (e.g. query optimization within one schema).
+- Level 3: fully autonomous end-to-end (rare in production data environments today).
+
+**Four building blocks** [^src12]:
+1. **Tools** — functions the agent can call (run SQL, call API, read file, write file).
+2. **MCP** — the protocol for connecting agents to tools and data stores without custom integration per tool. See [[ai-engineering/mcp|MCP]].
+3. **Memory** — what the agent retains across steps: short-term (context window), long-term (vector DB, files, database rows). See [[ai-engineering/agent-memory|Agent Memory]].
+4. **Sub-agents** — orchestration of specialized agents: one for schema discovery, one for SQL generation, one for QA, coordinated by a parent agent.
+
 ## Files vs database: the agent-memory architecture debate
 
 A live debate concerns whether a folder of files is sufficient agent state, or whether agents need a database [^src10]. The "files are all you need" position (Karpathy's evolving-markdown LLM knowledge base, LlamaIndex) is contrasted with the limits of file-based workflows and **massive context windows that "tend to collapse"** as they fill [^src10]. The same source reinforces the **model-vs-harness** framing and "context rot and tool loadouts" as first-order concerns [^src10]. See [[ai-engineering/agent-memory|Agent Memory]] and [[ai-engineering/context-window-management|Context Window Management]] for the underlying mechanics.
@@ -181,6 +209,7 @@ A live debate concerns whether a folder of files is sufficient agent state, or w
 - [[ai-engineering/agent-ui|Agent UI]] — chat + workbench shells for agent-centric apps (Boring UI on Pi)
 - [[ai-engineering/claude-md-conventions|CLAUDE.md & Agent Instruction Conventions]] — configuring the harness; cross-platform portability
 - [[ai-engineering/agent-testing|Agent Testing]] — verification loops that keep autonomous agents honest
+- [[data-engineering/README|Data Engineering]] — how agents are applied in data pipelines
 
 ---
 
@@ -195,3 +224,4 @@ A live debate concerns whether a folder of files is sufficient agent state, or w
 [^src9]: [Q00/ouroboros — the Agent OS for spec-first AI coding workflows](../../raw/web/github-q00-ouroboros-agent-os-stop-prompting-start-specifyin.md)
 [^src10]: [Episode 295: Agentic Architecture — Why Files Aren't Always Enough](../../raw/web/episode-295-agentic-architecture-why-files-aren-t-always-eno.md)
 [^src11]: [mvanhorn/last30days-skill — AI agent skill that researches any topic across platforms](../../raw/web/github-mvanhorn-last30days-skill-ai-agent-skill-that-researc.md) — GitHub
+[^src12]: [Agents in Action #1 — What is an AI Agent? (Pipeline to Insights)](../../raw/email/email-2026-06-13-agents-in-action-1-what-is-an-ai-agent.md)

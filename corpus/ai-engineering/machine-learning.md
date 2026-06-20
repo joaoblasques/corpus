@@ -15,6 +15,12 @@ sources:
   - path: raw/youtube/youtube-5DtjQrROUzY-ai-was-hard-until-i-learned-these-10-concepts.md
     channel: youtube
     ingested_at: 2026-06-15
+  - path: raw/youtube/youtube-URtF_UHYBSo-the-elegant-math-behind-machine-learning.md
+    channel: youtube
+    ingested_at: 2026-06-20
+  - path: raw/youtube/youtube-_hdUddANh_o-how-to-learn-machine-learning-like-a-genius-and-not-waste-ti.md
+    channel: youtube
+    ingested_at: 2026-06-20
 aliases:
   - machine learning
   - ML
@@ -60,6 +66,22 @@ A practical rule that recurs across sources: **use RAG when a model needs specif
 
 The `ai-engineering-from-scratch` curriculum sequences ML as a foundation layer — Phase 2 (classical ML: regression → trees → SVM → KNN → k-means → feature engineering → evaluation → ensembles), built *before* Phase 3 deep learning, on the principle "every algorithm gets built from raw math first... by the time PyTorch shows up, you already know what it's doing under the hood" [^src3]. Classical ML is explicitly "still the backbone of most production AI" [^src3].
 
+## The mathematics of ML: elegant theorems (Why Machines Learn)
+
+An interview with Anil Ananthaswamy (author, *Why Machines Learn*) on Machine Learning Street Talk surfaces the mathematical elegance underlying ML — the proofs that make the field beautiful, not just useful [^src6]:
+
+**Perceptron Convergence Theorem (1959)** — the first elegant ML proof. Given linearly separable data, the perceptron learning rule *provably* converges to a separating boundary in finite steps. The proof uses only linear algebra; the guarantee is mathematically exact [^src6].
+
+**Kernel methods (the kernel trick)** — a technique for taking data in low-dimensional space and projecting it implicitly into very high (or infinite-dimensional) space to find structure that's invisible at the original dimensionality [^src6]. The elegant part: all computations happen in the *original* low-dimensional space (via the kernel function), even though the algorithm is conceptually operating in high-dimensional space. "You get the benefits of high dimensionality without paying the computational cost."
+
+**The unsupervised insight** — Ananthaswamy argues that the most principled future of ML is unsupervised: humans learned from experience, not labeled data, and neural systems that have learned "about patterns that exist in the natural world" without labeling are the direction with the most potential [^src6]. The current supervised learning dominance is partly engineering convenience, not the most fundamental learning principle.
+
+**The mathematical prerequisites** (per the book's pedagogical choice) [^src6]: calculus, linear algebra, and probability/statistics — not because you need every theorem, but because the *intuition from these fields* (gradients, eigenvalues, distributions) is what makes ML results interpretable rather than magical.
+
+## The learn-ML-like-a-genius path (Tech With Tim, video)
+
+The video companion to the "how I'd learn ML in 2026" email: same 70/30 build/theory framework, same 6–9 months timeline, same Python-first → scikit-learn → PyTorch progression [^src7]. The video adds one concrete practice: "spend more time *building* than watching" — a ratio check the email states but doesn't make visual. See [[ai-engineering/learning-ai-engineering|Learning AI Engineering]] for the full curriculum structure.
+
 ## See also
 
 - [[ai-engineering/ai-fundamentals|AI Fundamentals]] — ML is the learning branch of the broader field
@@ -76,3 +98,5 @@ The `ai-engineering-from-scratch` curriculum sequences ML as a foundation layer 
 [^src3]: [ai-engineering-from-scratch](../../raw/web/github-rohitg00-ai-engineering-from-scratch-learn-it-build-i.md) — Rohit Ghumare
 [^src4]: [AI Product Management Complete Course](../../raw/youtube/youtube-KjYCEiBTHFo-ai-product-management-complete-course-3-5-hours-masterclass.md) — [15:32](../../raw/youtube/youtube-KjYCEiBTHFo-ai-product-management-complete-course-3-5-hours-masterclass.md#t=15:32)
 [^src5]: [AI was HARD until I Learned these 10 Concepts](../../raw/youtube/youtube-5DtjQrROUzY-ai-was-hard-until-i-learned-these-10-concepts.md) — Maddy Zhang, [06:31](../../raw/youtube/youtube-5DtjQrROUzY-ai-was-hard-until-i-learned-these-10-concepts.md#t=6:31)
+[^src6]: [The Elegant Math Behind Machine Learning (MLST interview — Anil Ananthaswamy, Why Machines Learn)](../../raw/youtube/youtube-URtF_UHYBSo-the-elegant-math-behind-machine-learning.md)
+[^src7]: [How to Learn Machine Learning Like a Genius (Tech With Tim)](../../raw/youtube/youtube-_hdUddANh_o-how-to-learn-machine-learning-like-a-genius-and-not-waste-ti.md)

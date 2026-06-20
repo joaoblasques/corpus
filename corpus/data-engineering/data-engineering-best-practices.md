@@ -21,6 +21,12 @@ sources:
   - path: raw/email/email-2025-04-25-the-2025-ai-enabled-data-engineering-roadmap.md
     channel: email
     ingested_at: 2026-06-19
+  - path: raw/email/email-2026-06-16-9-software-engineering-skills-a-de-should-have-and-how-to-le.md
+    channel: email
+    ingested_at: 2026-06-20
+  - path: raw/email/email-2026-06-13-in-2026-the-data-fundamentals-matter-more-than-ever.md
+    channel: email
+    ingested_at: 2026-06-20
 aliases:
   - data engineering best practices
   - pipeline best practices
@@ -30,8 +36,8 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-15
-updated: 2026-06-19
-last_confirmed: 2026-06-19
+updated: 2026-06-20
+last_confirmed: 2026-06-20
 ---
 
 # Data Engineering Best Practices
@@ -111,6 +117,28 @@ Zach Wilson's 2025 roadmap frames the *same* practices as the durable, "low-disr
 
 This independently confirms the idempotency, partitioning, and storage-layering practices above; the role-level framing is in [[data-engineering/ai-impact-on-data-engineering|AI's Impact on Data Engineering]] [^src5].
 
+## Software engineering skills every data engineer should have
+
+Alejandro Aboy's survey of 9 SE skills for DEs (2026) identifies the ones that differentiate "a senior DE from a junior DE that knows a lot of tools" [^src6]:
+
+1. **Pick one lane and go deep.** Specialization (Spark, streaming, dbt, cloud) is more valuable than breadth across all tools. Depth signals expertise to employers and clients [^src6].
+2. **Write understandable code.** "Code is read more than it's written." Clear variable names, short functions, self-documenting logic — code that a colleague can debug at 3am during an incident [^src6].
+3. **Know at least one design pattern.** Repository pattern, Factory, Observer — patterns make code reusable and testable. A data pipeline with a clear design pattern is far easier to extend [^src6].
+4. **Participate in code review.** Both sides: submit PRs and review others' code. The review habit builds taste and surfaces implicit best practices that never appear in tutorials [^src6].
+5. **Contribute to open-source.** "The best portfolio a DE can have." OSS contributions signal initiative, collaboration, and real-world software craftsmanship that side projects alone don't demonstrate [^src6].
+
+> "The difference between a senior DE and a junior DE that knows a lot of tools is often just these software engineering fundamentals" [^src6].
+
+## Data fundamentals still matter in 2026
+
+Counter-intuitive given the AI hype: *schema-on-read was tried and failed*. Around 2010, "data lakes" promised you could dump raw files and impose structure later — in practice, "people ended up with data swamps" because governance and quality were deferred, not solved [^src7].
+
+What survived [^src7]:
+- **Data centralization is still valuable** — organizations that keep data scattered across silos pay the cost in every analytics project. A centralized, governed data platform is not legacy; it's still the right foundation.
+- **Glue skills matter** — the DE who connects data sources, handles schema drift, and makes downstream consumers succeed is still indispensable. "Glue skills" (building reliable pipelines between systems) are not automated away.
+- **Data gets messier, not cleaner** — as more systems generate more data in more formats, the DE's job of cleaning, conforming, and governing has grown, not shrunk.
+- **Build end-to-end** — understanding the full pipeline from source to serving, not just one layer (ingestion, or modeling, or visualization), is the differentiator. "AI tools will optimize each layer, but the engineer who understands how they connect still wins" [^src7].
+
 ## Related
 
 - [[data-engineering/idempotent-pipelines|Idempotent Pipelines]] · [[data-engineering/data-quality|Data Quality]]
@@ -126,3 +154,5 @@ This independently confirms the idempotency, partitioning, and storage-layering 
 [^src3]: [josephmachado/data_engineering_best_practices (sample)](../../raw/web/github-josephmachado-data-engineering-best-practices-sample.md)
 [^src4]: [Data Engineering System Design: 9 Data Serving Problems (Vu Trinh)](../../raw/web/web-data-engineering-system-design-9-data-serving-problems.md)
 [^src5]: [The 2025 AI-enabled Data Engineering roadmap (Zach Wilson, DataEngineer.io)](../../raw/email/email-2025-04-25-the-2025-ai-enabled-data-engineering-roadmap.md)
+[^src6]: [9 Software Engineering Skills a DE Should Have (Alejandro Aboy)](../../raw/email/email-2026-06-16-9-software-engineering-skills-a-de-should-have-and-how-to-le.md)
+[^src7]: [In 2026, The Data Fundamentals Matter More Than Ever (Pipeline to Insights)](../../raw/email/email-2026-06-13-in-2026-the-data-fundamentals-matter-more-than-ever.md)

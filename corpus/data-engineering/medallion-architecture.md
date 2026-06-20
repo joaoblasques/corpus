@@ -15,6 +15,9 @@ sources:
   - path: raw/email/email-2025-04-16-understanding-the-t-in-etl-a-back-to-basics-guide-to-data-tr.md
     channel: email
     ingested_at: 2026-06-19
+  - path: raw/web/web-sql-to-dbt-guide-how-data-layers-flow-with-medallion-archite.md
+    channel: web
+    ingested_at: 2026-06-20
 aliases:
   - medallion
   - bronze silver gold
@@ -84,6 +87,24 @@ Why no equivalent wars today? Fewer big ideas held practitioner mindshare back t
 
 **The resolution — synthesis, not victory.** The industry chose **both**: *"modern Lakehouse architectures can use Inmon-style governance for the raw/bronze layers and Kimball-style dimensional models for the gold/serving layers."* [^src2] The winner was not Bill or Ralph but the **synthesis and adoption of their ideas** [^src2]. This maps cleanly onto medallion: Inmon-style integrated/governed raw at bronze, Kimball-style [[data-engineering/dimensional-modeling|dimensional models]] at gold.
 
+## Implementing Medallion with dbt
+
+The **SQL to dbt Guide** series (Alejandro Aboy, Pipeline to Insights) maps medallion layers directly onto dbt project structure [^src5]:
+
+| Layer | dbt folder | Materialization | Naming prefix |
+|---|---|---|---|
+| **Bronze (Raw)** | `models/staging/` | Views (cheap, always fresh) | `stg_` |
+| **Silver (Intermediate)** | `models/intermediate/` | Tables | `int_` |
+| **Gold (Serving)** | `models/marts/` | Tables | `fct_` / `dim_` |
+
+**Staging (Bronze):** thin views that rename columns, cast types, and do nothing else — "the contract between the source system and your transforms." Named `stg_<source>__<table>.sql`. Because they are views, they run fast and any source change is immediately visible downstream [^src5].
+
+**Intermediate (Silver):** joins, deduplication, complex business logic — "this is where the heavy lifting happens." Named `int_<verb>_<entity>.sql`. Materialized as tables to avoid recomputing expensive joins in downstream models [^src5].
+
+**Marts (Gold):** business-ready dimensional or one-big-table models consumed by BI tools, data science, and downstream APIs. Named `fct_<entity>` (fact) or `dim_<entity>` (dimension) [^src5].
+
+dbt automatically builds a **lineage DAG** that lets you visualize `source → staging → intermediate → mart` flows in the dbt docs UI — making the medallion layer structure auditable without separate documentation [^src5].
+
 ## Gotchas
 
 - Treating bronze/silver/gold as data models leads teams to debate colors when they should agree on grain, keys, and definitions — or to debate column-level semantics when the topic is orchestration [^src1].
@@ -94,3 +115,4 @@ Why no equivalent wars today? Fewer big ideas held practitioner mindshare back t
 [^src2]: [Data Identity Politics and The Kimball vs. Inmon War](../../raw/web/data-identity-politics-and-the-kimball-vs-inmon-war.md)
 [^src3]: [The Medallion Data Architecture (Pros & Cons) (KahanDataSolutions)](../../raw/email/email-2025-11-20-the-medallion-data-architecture-pros-cons.md)
 [^src4]: [Understanding the "T" in ETL: A Back-to-Basics Guide to Data Transformations](../../raw/email/email-2025-04-16-understanding-the-t-in-etl-a-back-to-basics-guide-to-data-tr.md)
+[^src5]: [SQL to dbt Guide — How Data Layers Flow with Medallion Architecture](../../raw/web/web-sql-to-dbt-guide-how-data-layers-flow-with-medallion-archite.md) — Alejandro Aboy, Pipeline to Insights

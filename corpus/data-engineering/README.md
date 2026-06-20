@@ -33,6 +33,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [[data-engineering/materialized-views|Materialized Views]] — concept · draft · cross-platform MV synthesis; incremental vs full refresh; limitations
 - [[data-engineering/data-quality|Data Quality]] — concept · draft · 6-step clean-warehouse framework; data contracts; schema-aware validation
 - [[data-engineering/data-ingestion-patterns|Data Ingestion Patterns]] — concept · draft · two ingestion patterns: stream via event log vs batch extract
+- [[data-engineering/dlt|dlt (data load tool)]] — entity · draft · declarative REST API pipelines (RESTAPIConfig); 4 pagination patterns; dlt AI Workbench
 - [[data-engineering/data-flow-patterns|Data Flow Patterns]] — concept · draft · source/sink replayability+overwritability; extraction (time-ranged/snapshot/lookback/streaming), behavioral (idempotent/self-healing), structural (multi-hop/conditional/disconnected)
 - [[data-engineering/scaling-data-pipelines|Scaling Data Pipelines]] — concept · draft · vertical vs horizontal (independent processes / distributed); strategy-selection questions; beware premature optimization
 - [[data-engineering/incremental-pipeline-design|Incremental Pipeline Design]] — concept · draft · timestamp-driven extraction, model-driven load, parallel backfilling

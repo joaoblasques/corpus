@@ -12,6 +12,12 @@ sources:
   - path: raw/email/email-2026-05-27-you-cannot-sell-an-offer-you-cannot-explain-clearly.md
     channel: email
     ingested_at: 2026-06-12
+  - path: raw/youtube/youtube-8ktcSaSTvxk-the-playbook-for-a-100m-ai-agency.md
+    channel: youtube
+    ingested_at: 2026-06-20
+  - path: raw/youtube/youtube-ObiAWFqgpMg-build-and-deploy-a-polished-ai-project-and-get-sales.md
+    channel: youtube
+    ingested_at: 2026-06-20
   - path: raw/email/email-2026-05-30-ai-that-knows-things-vs-ai-that-does-things.md
     channel: email
     ingested_at: 2026-06-16
@@ -91,6 +97,36 @@ Two reusable prompts [^src3]:
 
 > [unsourced — note] The positioning workflow uses Claude Cowork and Perplexity for ICP-language research; tooling is incidental to the underlying direct-response principle (sell outcomes, not features).
 
+## The $100M AI agency playbook (dev work → zero, expertise → premium)
+
+The macro shift: AI is driving the cost of writing software toward zero. A practitioner ("The 100M dev work value" playbook) frames this as both a threat and an opportunity [^src5]:
+
+- **Dev work value approaches zero.** Code that cost $1M to build 5 years ago can now be replicated with AI in days. The commodity layer of software development (CRUD apps, internal tools, boilerplate) is effectively free [^src5].
+- **Enterprise clients are just coming online.** Large companies are now deploying AI at scale; they're looking for vendors who understand their domain, not just their stack. The window for positioning as an AI consultant to enterprises is open [^src5].
+- **Consulting and expertise retain value.** What AI can't replace: domain knowledge, judgment, client relationships, trust, and the ability to scope the right problem. "The playbook is: give away the code, sell the expertise" [^src5].
+
+Structural implication: engineers who **give away implementations** and **charge for customization, integration, and strategy** will outcompete those who treat code as the deliverable [^src5].
+
+## Build a polished AI project: sell to clients at $1,000+
+
+Aush Singh (freeCodeCamp) documents the **Ad Snap Studio** build — a polished AI project that demonstrates how to move from "API wrapper" to a sellable product [^src6]:
+
+**The Bria AI API stack** [^src6]:
+- Prompt enhancement (auto-improves your text-to-image prompt)
+- Text-to-image generation
+- Generative fill (modify specific regions of an image)
+- Lifestyle backgrounds (replace a product photo background with a scene)
+
+**What makes it real engineering (not a demo)** [^src6]:
+- Error handling on every API call — timeouts, invalid responses, quota exhaustion.
+- Defensive code — validate inputs before sending to the API; fail gracefully with user-facing messages.
+- Scalable folder structure: `components/`, `services/`, `utils/`, `workflows/` — each with a single responsibility.
+- State management for in-progress generations (don't block the UI).
+
+**The monetization framing** [^src6]: present the project to small business clients (e-commerce, real estate, marketing agencies) as a product that solves a real problem (ad creative generation). Price at $1,000–$2,000 for the initial build; recurring for maintenance and new features. "The same code you wrote once is worth $1,000+ every time you deploy it for a new client."
+
+Connects to [[ai-business/ai-consulting-playbook|AI Consulting Playbook]] — the discovery call identifies the client's workflow; the polished project is the prescription from call two.
+
 ## Gotchas / promo framing
 
 - All sources are list-building newsletters. The "make money with code" emails (Tech With Tim) funnel toward courses; the offer-positioning and "AI that does things" emails (Return My Time / Corey) promote a podcast, the Cowork ecosystem, and **AI Operator Academy** (a paid course — "Inside AI Operator Academy, the most common agents are already built") [^src1][^src2][^src3][^src4].
@@ -108,3 +144,5 @@ Two reusable prompts [^src3]:
 [^src2]: [another opportunity to make money with code](../../raw/email/email-2026-05-16-another-opportunity-to-make-money-with-code.md)
 [^src3]: [You cannot sell an offer you cannot explain clearly](../../raw/email/email-2026-05-27-you-cannot-sell-an-offer-you-cannot-explain-clearly.md)
 [^src4]: [AI that knows things vs. AI that does things](../../raw/email/email-2026-05-30-ai-that-knows-things-vs-ai-that-does-things.md) — Return My Time (Corey), promoting AI Operator Academy
+[^src5]: [The Playbook for a $100M AI Agency (YouTube)](../../raw/youtube/youtube-8ktcSaSTvxk-the-playbook-for-a-100m-ai-agency.md)
+[^src6]: [Build and Deploy a Polished AI Project — and Get Sales (freeCodeCamp / Aush Singh)](../../raw/youtube/youtube-ObiAWFqgpMg-build-and-deploy-a-polished-ai-project-and-get-sales.md)

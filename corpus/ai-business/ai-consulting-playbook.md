@@ -6,6 +6,9 @@ sources:
   - path: raw/youtube/youtube-n6t1kgxblqa.md
     channel: youtube
     ingested_at: 2026-06-17
+  - path: raw/email/email-2026-06-16-turn-a-15-minute-call-into-a-1-500-offer.md
+    channel: email
+    ingested_at: 2026-06-20
 aliases:
   - AI mini assessment
   - free AI assessment
@@ -68,6 +71,27 @@ Deliver the free fix first (builds trust; raises the perceived value of the paid
 
 The claim: 30–50% of the time (sometimes more), the owner asks you to build it with/for them — converting to a paid client. Upsell paths named: the full (paid) assessment, an "AI concierge," or other services [^src1]. The rationale for giving away the "how": busy owners usually prefer to pay rather than DIY [^src1].
 
+## The $1,500 AI assessment offer (15-minute call)
+
+A concrete AI-consulting offer structure: convert a **15-minute discovery call** into a **$999–$1,999 AI assessment** [^src2]:
+
+**The trigger**: during a brief introductory conversation, identify whether the prospect has manual, repetitive workflows. If yes, offer a formal assessment instead of a free consult.
+
+**The ai-assessment Cowork skill**: a Claude Cowork skill that runs the assessment session automatically. It scores the prospect's workflow across three dimensions:
+- **Effectiveness** — is the workflow achieving its goal?
+- **Efficiency** — is it taking the right amount of time/effort?
+- **Quality** — is the output meeting standards?
+
+**Output deliverables** [^src2]:
+1. Identified time sinks (the specific repetitive steps eating hours).
+2. **Impact-Effort matrix** — maps each identified pain point by implementation effort vs. ROI.
+3. Specific AI tool or automation recommendations per pain point.
+4. ROI calculation: "here's what you get back per week if we fix this."
+
+**Pricing** [^src2]: $999 for a standard assessment; $1,999 for enterprises or high-complexity workflows. Positioned as a professional service, not a free consult — the paid frame makes the output more actionable and the client more committed.
+
+**The close**: present the assessment findings, identify the highest-ROI item, and ask "do you want me to build it?" — same two-call motion as the discovery-and-close playbook above, but with a paid gate between discovery and prescription.
+
 ## Relationship to other pages
 
 - **vs. [[ai-business/monetizing-code|Monetizing Code]].** Monetizing Code covers *selling a result* and the *positioning one-pager* (articulating the offer); this page is the *operational discovery-and-close motion* that finds the result to sell. They reference the same "paid assessment as sales mechanism" idea — Monetizing Code's "the assessment is the pitch" and the asset-library "pull the matching skill, tune it, deliver" model — applied here as a structured two-call script with a custom-Claude-skill prescription path.
@@ -80,3 +104,4 @@ The claim: 30–50% of the time (sometimes more), the owner asks you to build it
 - **Tooling is incidental.** The named tools (There's An AI For That, Futurepedia, Claude Cowork, Claude skills) are illustrative; the durable part is the frequency × friction selection and the deliver-free-then-ask close.
 
 [^src1]: [The free AI mini assessment — turn a cold business owner into a paying client](../../raw/youtube/youtube-n6t1kgxblqa.md) — AI consultant client-acquisition playbook; promotional (funnels to free Notion template + paid consulting)
+[^src2]: [Turn a 15-Minute Call Into a $1,500 Offer](../../raw/email/email-2026-06-16-turn-a-15-minute-call-into-a-1-500-offer.md)

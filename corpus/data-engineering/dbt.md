@@ -57,6 +57,15 @@ sources:
   - path: raw/email/email-2025-04-16-understanding-the-t-in-etl-a-back-to-basics-guide-to-data-tr.md
     channel: email
     ingested_at: 2026-06-19
+  - path: raw/web/web-sql-to-dbt-guide-your-dbt-starter-pack-project.md
+    channel: web
+    ingested_at: 2026-06-20
+  - path: raw/web/web-sql-to-dbt-guide-how-data-layers-flow-with-medallion-archite.md
+    channel: web
+    ingested_at: 2026-06-20
+  - path: raw/web/web-github-aboyalejandro-sql-to-dbt-series-full-dbt-project-with.md
+    channel: web
+    ingested_at: 2026-06-20
 aliases:
   - dbt
   - data build tool
@@ -269,6 +278,23 @@ A hands-on evaluation of Claude Code's capability to build a dbt project from re
 
 See [[data-engineering/claude-code-for-data-engineering|Claude Code for Data Engineering]] for the broader AI-assisted DE workflow and [[data-engineering/ai-impact-on-data-engineering|AI's Impact on Data Engineering]] for the role-level framing.
 
+## The sql-to-dbt-series reference project
+
+Alejandro Aboy's open-source reference project (`aboyalejandro/sql-to-dbt-series`) demonstrates a complete, portable dbt stack backed by DuckDB and synthetic marketing data — designed to follow alongside the article series [^src17]:
+
+**Stack**: DuckDB (OLAP), dbt (staging → intermediate → marts), Docker Compose, synthetic JSON marketing data from `syntheticdatagen.xyz`.
+
+**Models shipped** [^src17]:
+- Attribution models (multi-touch), campaign performance, visitor journey.
+- **Snapshots**: `dbt snapshot` tracks campaign performance and visitor segment evolution over time (SCD Type 2 in dbt).
+- **dbt-colibri** for column-level lineage visualization at `localhost:8080`.
+
+**Advanced data contracts** [^src17]: built with business-logic constraints; the project is designed to fail on purpose so data contract enforcement and testing can be demonstrated against real failures.
+
+**Reusable macros**: touchpoint attribution and performance classification.
+
+Key dev commands: `dbt run --select staging` (clean raw) → `dbt run --select intermediate` (business logic) → `dbt run --select marts` (final aggregates) → `dbt test` → `dbt snapshot`. The `make run` command chains extract → database → dbt end to end [^src17].
+
 ## See also
 
 - [[data-engineering/pipeline-layers|Pipeline Layers]] — the staging → warehouse → marts architecture pattern
@@ -297,3 +323,6 @@ See [[data-engineering/claude-code-for-data-engineering|Claude Code for Data Eng
 [^src12]: [The Complete dbt Guide: From SQL to Production-Ready Transformations](../../raw/web/web-the-complete-dbt-guide-from-sql-to-production-ready-transfor.md)
 [^src13]: [Claude Code isn't going to replace data engineers (yet)](../../raw/web/web-claude-code-isnt-going-to-replace-data-engineers-yet.md)
 [^src14]: [Understanding the "T" in ETL: A Back-to-Basics Guide to Data Transformations](../../raw/email/email-2025-04-16-understanding-the-t-in-etl-a-back-to-basics-guide-to-data-tr.md)
+[^src15]: [SQL to dbt Guide — Your dbt Starter Pack Project](../../raw/web/web-sql-to-dbt-guide-your-dbt-starter-pack-project.md) — Alejandro Aboy, Pipeline to Insights
+[^src16]: [SQL to dbt Guide — How Data Layers Flow with Medallion Architecture](../../raw/web/web-sql-to-dbt-guide-how-data-layers-flow-with-medallion-archite.md) — Alejandro Aboy, Pipeline to Insights
+[^src17]: [GitHub — aboyalejandro/sql-to-dbt-series: Full dbt project with DuckDB, Docker and synthetic Ads campaign data](../../raw/web/web-github-aboyalejandro-sql-to-dbt-series-full-dbt-project-with.md) — Alejandro Aboy

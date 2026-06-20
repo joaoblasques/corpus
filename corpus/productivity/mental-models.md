@@ -15,11 +15,16 @@ sources:
   - path: raw/web/web-two-tools-for-clearer-thinking.md
     channel: web
     ingested_at: 2026-06-17
+  - path: raw/email/email-2026-06-15-why-other-people-can-see-things-about-you-that-you-cant.md
+    channel: email
+    ingested_at: 2026-06-20
 aliases:
   - circle of competence
   - thought experiment
   - what if
   - mental model
+  - Johari Window
+  - blind spot
   - map is not territory
   - ladder of inference
   - ishikawa diagram
@@ -107,6 +112,26 @@ Created by Japanese professor Kaoru Ishikawa; maps all possible causes of a prob
 
 **Works with Ladder of Inference**: use the Ishikawa Diagram to map what's causing a problem before committing to one; use the Ladder to check that your reasoning about *which* cause holds up [^src4].
 
+## Johari Window
+
+A model for understanding self-awareness and blind spots, originally developed by psychologists Joseph Luft and Harry Ingham (1955) — popularized via the email "[Why Other People Can See Things About You That You Can't]" [^src5].
+
+**Four quadrants** (axes: Known/Unknown × To Self/To Others):
+
+| | Known to self | Unknown to self |
+|---|---|---|
+| **Known to others** | **Open** (shared understanding) | **Blind** (others see it; you don't) |
+| **Unknown to others** | **Hidden** (you know; others don't) | **Unknown** (neither knows) |
+
+The **Blind quadrant** is the highest-leverage area for growth: it contains patterns and behaviors that affect others but that you can't see yourself. Common examples: how you come across under stress, default communication habits, or recurring failure modes that colleagues notice but never say aloud [^src5].
+
+**Three ways to shrink your blind spots** [^src5]:
+1. **Ask trusted people directly** — "What's one thing I do that you think I'm unaware of?" Frame it as a learning question, not a performance review. The goal is to expand the Open quadrant.
+2. **Look for patterns** — feedback you've heard more than once from different sources is a signal, not a coincidence. "If three different people, in three different contexts, notice the same thing, believe them."
+3. **Notice your reactions** — strong emotional reactions (defensiveness, dismissiveness) to a comment often signal you've hit the edge of your blind spot. Curiosity instead of defensiveness is the habit.
+
+Connects to [[productivity/mental-models|Circle of Competence]]: both models ask you to be accurate about the boundary between what you know (or see) and what you don't.
+
 ## Why this matters now
 
 All five models frame judgment — knowing limits, simulating outcomes, seeing what abstractions hide, checking reasoning chains — as the durable human contribution as AI absorbs execution. See [[productivity/ai-augmented-knowledge-work|AI-Augmented Knowledge Work]] and [[productivity/shipping-and-scope|Shipping and Scope]] for where this judgment gets applied.
@@ -117,3 +142,4 @@ All five models frame judgment — knowing limits, simulating outcomes, seeing w
 [^src2]: [Thought Experiment - Mental Model: What If?](../../raw/web/thought-experiment-mental-model-what-if.md)
 [^src3]: [Map Is Not Territory — Mental Model: What Is Hidden From Me?](../../raw/web/web-map-is-not-territory-mental-model-what-is-hidden-from-me.md)
 [^src4]: [Two Tools for Clearer Thinking](../../raw/web/web-two-tools-for-clearer-thinking.md)
+[^src5]: [Why Other People Can See Things About You That You Can't](../../raw/email/email-2026-06-15-why-other-people-can-see-things-about-you-that-you-cant.md)

@@ -27,6 +27,9 @@ sources:
   - path: raw/notes/notes-clippings-everyinccompound-knowledge-plugin-ai-powered-workflows-for-k.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/email/email-2026-06-14-claude-replaced-me.md
+    channel: email
+    ingested_at: 2026-06-20
   - path: raw/notes/notes-clippings-everyincclaude-commands-our-favorite-claude-code-commands.md
     channel: notes
     ingested_at: 2026-06-17
@@ -264,6 +267,18 @@ The insight: "the skill is the documented procedure. If you had to document it f
 
 **When to use subagents in skill design** [^src11]: skills that involve research (gathering context from many files) should delegate to a `Plan` subagent; skills that involve implementation can delegate to a `General` subagent; skills that verify correctness benefit from a separate `Verify` subagent that never shares context with the implementation agent (clean-room review).
 
+## The /how-to skill pattern (Ruben Hassid)
+
+A minimal but effective skill pattern for getting repeatable, high-quality outputs from Claude Cowork: upload a skill file named `/how-to` to your Claude Cowork folder that describes a specific workflow — "here is how to do X" [^src12].
+
+The pattern [^src12]:
+1. Write a `SKILL.md` (or any markdown file) describing the task procedure, desired output format, and any gotchas.
+2. Upload it to your Claude Cowork folder (Knowledge section).
+3. Trigger with `/how-to` (or reference the skill by name in your prompt).
+4. Use **Claude Cowork + Opus 4.8 High effort** for best results — the combination of the Cowork interface's persistent skills and Opus 4.8's judgment produces more reliable output than a bare Claude.ai conversation [^src12].
+
+The key insight: the `/how-to` pattern lowers the activation energy for skill creation — instead of designing an elaborate SKILL.md with sections for context/procedure/output/gotchas, you start with a simple "here's how to do it" document and refine over time [^src12]. The skill file itself is the documentation; updating it is the practice of capturing expertise.
+
 ## See also
 
 - [[ai-engineering/context-window-management|Context Window Management]] — why a lean window matters; sub-agents
@@ -291,3 +306,4 @@ The insight: "the skill is the documented procedure. If you had to document it f
 [^src9]: [EveryInc/charlie-cfo-skill — Claude Code skill for bootstrapped CFO financial management](../../raw/notes/notes-clippings-everyinccharlie-cfo-skill-claude-code-skill-for-bootstrapped.md) — EveryInc, GitHub
 [^src10]: [Lessons from building Claude Code: How we use skills](../../raw/notes/notes-clippings-lessons-from-building-claude-code-how-we-use-skills.md) — Thariq Shihipar, Anthropic
 [^src11]: [How to Set Up Your Coding Agent: A Step-by-Step Guide](../../raw/web/web-how-to-set-up-your-coding-agent-a-step-by-step-guide.md) — Prathmesh Yelne
+[^src12]: [Claude Replaced Me (Ruben Hassid)](../../raw/email/email-2026-06-14-claude-replaced-me.md) — /how-to skill pattern + Cowork + Opus 4.8

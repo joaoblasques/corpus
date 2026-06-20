@@ -6,6 +6,9 @@ sources:
   - path: raw/youtube/youtube-CLh2ACdXNbc-20-of-linux-commands-you-ll-use-80-of-the-time-real-world-ex.md
     channel: youtube
     ingested_at: 2026-06-15
+  - path: raw/youtube/youtube-ZtqBQ68cfJc-the-50-most-popular-linux-terminal-commands-full-course-for.md
+    channel: youtube
+    ingested_at: 2026-06-20
 aliases:
   - Linux commands
   - Linux fundamentals
@@ -72,6 +75,32 @@ In production a config may be locked **read-only** to prevent accidental overwri
 
 > A `chmod`-then-`vim` gotcha: trying to enter insert mode on a read-only file shows "changing a readonly file" — fix the permission first [^src1].
 
+## The 50 Linux commands landscape (freeCodeCamp course)
+
+A full freeCodeCamp course (Colt Steele, 4.5+ hours) sequences all 50 most-popular Linux commands grouped by function, taught through a hands-on narrative [^src2]:
+
+**Why the terminal matters** [^src2]:
+- **Control** — GUI applications show you only what they want you to see; the terminal exposes everything.
+- **Automation** — shell scripts chain any combination of 50 commands into repeatable pipelines.
+- **Career** — sysadmin, cloud, DevOps, ML deployment, and data engineering all assume terminal fluency.
+
+**Unix family tree** [^src2]: Bell Labs (1969) → Unix → BSD → Linux (1991, Linus Torvalds). GNU/Linux is the full pairing: the Linux kernel plus GNU user-space utilities (bash, coreutils, etc.).
+
+**Shells** [^src2]: bash (Bourne Again Shell) is the default on most Linux; zsh (Z Shell) is the default on macOS and popular for plugins (oh-my-zsh). All commands in this corpus work in both.
+
+**Command categories covered in the full 50** (structural overview) [^src2]:
+- **Navigation**: `pwd`, `ls`, `cd`, `mkdir`, `rmdir`, `touch`
+- **Reading / searching**: `cat`, `less`, `more`, `head`, `tail`, `grep`, `wc`, `sort`, `uniq`
+- **File management**: `cp`, `mv`, `rm`, `find`, `locate`
+- **Compression / archives**: `tar`, `gzip`, `gunzip`, `zip`, `unzip`
+- **Process management**: `ps`, `kill`, `top`, `htop`, `bg`, `fg`, `jobs`
+- **Networking**: `ping`, `curl`, `wget`, `ssh`, `scp`, `ifconfig`, `netstat`
+- **Permissions**: `chmod`, `chown`, `sudo`, `su`
+- **Disk / system**: `df`, `du`, `uname`, `whoami`, `history`, `echo`, `man`
+- **Text processing**: `awk`, `sed`, `cut`, `paste`, `tr`
+
+The 20% / 80% rule holds: the ~20 commands covered in the existing page above cover ~80% of real work; the remaining 30 commands (networking, compression, process management, awk/sed) cover long-tail production scenarios [^src2].
+
 ## See also
 
 - [[mlops/cli-tools|CLI Tools]] — modern replacements: `rg` for `grep`, `fd` for `find`, `bat` for `cat`, `eza` for `ls`
@@ -81,5 +110,6 @@ In production a config may be locked **read-only** to prevent accidental overwri
 
 ---
 
-[^src1]: [20% of Linux Commands You'll Use 80% of the Time (TechWorld with Nana)](../../raw/youtube/youtube-CLh2ACdXNbc-20-of-linux-commands-you-ll-use-80-of-the-time-real-world-ex.md) — uname [[02:35](../../raw/youtube/youtube-CLh2ACdXNbc-20-of-linux-commands-you-ll-use-80-of-the-time-real-world-ex.md#t=02:35)], pwd/cd/ls [[03:57](../../raw/youtube/youtube-CLh2ACdXNbc-20-of-linux-commands-you-ll-use-80-of-the-time-real-world-ex.md#t=03:57)], cat/grep/pipe [[05:45](../../raw/youtube/youtube-CLh2ACdXNbc-20-of-linux-commands-you-ll-use-80-of-the-time-real-world-ex.md#t=05:45)], redirect/cp [[07:28](../../raw/youtube/youtube-CLh2ACdXNbc-20-of-linux-commands-you-ll-use-80-of-the-time-real-world-ex.md#t=07:28)], find/diff/curl [[12:22](../../raw/youtube/youtube-CLh2ACdXNbc-20-of-linux-commands-you-ll-use-80-of-the-time-real-world-ex.md#t=12:22)], vim [[18:37](../../raw/youtube/youtube-CLh2ACdXNbc-20-of-linux-commands-you-ll-use-80-of-the-time-real-world-ex.md#t=18:37)], permissions/chmod [[19:57](../../raw/youtube/youtube-CLh2ACdXNbc-20-of-linux-commands-you-ll-use-80-of-the-time-real-world-ex.md#t=19:57)]
+[^src1]: [20% of Linux Commands You'll Use 80% of the Time (TechWorld with Nana)](../../raw/youtube/youtube-CLh2ACdXNbc-20-of-linux-commands-you-ll-use-80-of-the-time-real-world-ex.md)
+[^src2]: [The 50 Most Popular Linux Terminal Commands — Full Course (freeCodeCamp / Colt Steele)](../../raw/youtube/youtube-ZtqBQ68cfJc-the-50-most-popular-linux-terminal-commands-full-course-for.md) — uname [[02:35](../../raw/youtube/youtube-CLh2ACdXNbc-20-of-linux-commands-you-ll-use-80-of-the-time-real-world-ex.md#t=02:35)], pwd/cd/ls [[03:57](../../raw/youtube/youtube-CLh2ACdXNbc-20-of-linux-commands-you-ll-use-80-of-the-time-real-world-ex.md#t=03:57)], cat/grep/pipe [[05:45](../../raw/youtube/youtube-CLh2ACdXNbc-20-of-linux-commands-you-ll-use-80-of-the-time-real-world-ex.md#t=05:45)], redirect/cp [[07:28](../../raw/youtube/youtube-CLh2ACdXNbc-20-of-linux-commands-you-ll-use-80-of-the-time-real-world-ex.md#t=07:28)], find/diff/curl [[12:22](../../raw/youtube/youtube-CLh2ACdXNbc-20-of-linux-commands-you-ll-use-80-of-the-time-real-world-ex.md#t=12:22)], vim [[18:37](../../raw/youtube/youtube-CLh2ACdXNbc-20-of-linux-commands-you-ll-use-80-of-the-time-real-world-ex.md#t=18:37)], permissions/chmod [[19:57](../../raw/youtube/youtube-CLh2ACdXNbc-20-of-linux-commands-you-ll-use-80-of-the-time-real-world-ex.md#t=19:57)]
 </content>

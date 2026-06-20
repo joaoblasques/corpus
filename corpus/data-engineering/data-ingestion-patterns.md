@@ -52,6 +52,10 @@ Whichever entry pattern is used, the data first arrives in a **landing zone** �
 
 Which entry pattern is even *viable* is governed by **source/sink properties** — a source's **replayability** ("what did the data look like *n* periods ago?") and a sink's **overwritability** — which is also the prerequisite framing for the downstream [[data-engineering/data-flow-patterns|data-flow patterns]] (extraction / behavioral / structural) that build on top of ingestion [^src2].
 
+## REST API ingestion with dlt
+
+For REST API sources, **dlt** (data load tool) provides a declarative alternative to writing pagination loops by hand: describe the API shape in a `RESTAPIConfig` object and dlt handles authentication, pagination (cursor/offset/link patterns), and nested JSON normalization automatically. See [[data-engineering/dlt|dlt]] for details.
+
 ## See also
 
 - [[data-engineering/incremental-pipeline-design|Incremental Pipeline Design]] — extract/load/backfill design for batch pipelines

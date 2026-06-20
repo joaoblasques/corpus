@@ -18,6 +18,9 @@ sources:
   - path: raw/email/email-2025-08-10-infrastructure-as-code-for-data-engineers.md
     channel: email
     ingested_at: 2026-06-19
+  - path: raw/youtube/youtube-iTrxsotFNHA-i-ll-explain-10-years-of-infrastructure-evolution-in-25-minu.md
+    channel: youtube
+    ingested_at: 2026-06-20
 aliases:
   - IaC
   - infrastructure as code
@@ -85,6 +88,35 @@ The cloud overviews motivate IaC by the pain of clicking through a console: erro
 
 [[mlops/terraform|Terraform]] is the cross-provider third-party option (one tool targeting AWS/Azure/GCP); the AWS-centric source recommends CDK *if you're all-in on AWS*, Terraform for multi-cloud [^src2]. Putting IaC in source control enables code review of infra changes — the discipline IaC exists to provide [^src2][^src3].
 
+## 10 years of infrastructure evolution (TechWorld with Nana)
+
+The five-stage journey from console-clicking to AI-driven infrastructure [^src5]:
+
+### Stage 1 — AWS Console (click-ops)
+Create resources visually through the web UI. Good for learning (you see VPCs, security groups, subnets in context), but **not repeatable** (can't remember exact settings for a second environment), **not documented**, **error-prone** at scale, and doesn't scale past ~5 servers [^src5].
+
+### Stage 2 — CLI / Python scripts (boto3)
+Script AWS API calls. Now repeatable and documentable. But scripts are **stateless** — re-running creates duplicate resources; deleting requires separate delete scripts; updates are manual diffs [^src5]. "You're clicking faster through code, basically."
+
+### Stage 3 — Infrastructure as Code (Terraform, declarative)
+Declare desired end-state in `.tf` files; Terraform diffs against `.tfstate` and applies only the delta. Gives you **state management**, **repeatability**, **code review**, and **version history**. Problems: still manually executed (`terraform apply`); **configuration drift** when someone makes a console change; **shared state file** requires locking; team coordination overhead [^src5].
+
+### Stage 4 — GitOps (Argo CD, Flux)
+Git is the **single source of truth** for infrastructure; changes to the repo are automatically applied. Eliminates manual `terraform apply`; drift is auto-reverted; full audit trail in git. The mental model shift: infrastructure *pulls* desired state from git rather than a human *pushing* changes [^src5].
+
+### Stage 5 — AI-assisted infrastructure
+The emerging layer: AI tools generate IaC from natural language ("create an EC2 instance with port 443 open"), detect drift proactively, suggest cost optimizations, and auto-remediate common misconfigurations. Treats the IaC code generation step as AI-assisted rather than hand-written — but the review and state management disciplines of Stages 3–4 still apply [^src5].
+
+**Progression summary** [^src5]:
+
+| Stage | Tool | Key property added |
+|---|---|---|
+| Console | AWS web UI | Visual; learnable |
+| CLI/scripts | boto3, AWS CLI | Repeatable; documentable |
+| IaC | Terraform | State management; code review |
+| GitOps | Argo CD, Flux | Auto-reconciliation; drift prevention |
+| AI-assisted | LLM + IaC | Config generation; proactive detection |
+
 ## See also
 
 - [[mlops/terraform|Terraform]] — the cross-provider IaC tool this concept is taught through (incl. the local-Docker-platform example)
@@ -99,3 +131,4 @@ The cloud overviews motivate IaC by the pain of clicking through a console: erro
 [^src2]: [AWS Explained (Be A Better Dev)](../../raw/youtube/youtube-OGYEXGy8ca4-aws-explained-the-most-important-aws-services-to-know.md#t=54:43) — CloudFormation vs. CDK [[55:35](../../raw/youtube/youtube-OGYEXGy8ca4-aws-explained-the-most-important-aws-services-to-know.md#t=55:35)]
 [^src3]: [Cloud Computing Explained (Be A Better Dev)](../../raw/youtube/youtube-ZaA0kNm18pE-cloud-computing-explained-the-most-important-concepts-to-kno.md#t=36:15) — declarative vs. imperative IaC [[39:18](../../raw/youtube/youtube-ZaA0kNm18pE-cloud-computing-explained-the-most-important-concepts-to-kno.md#t=39:18)]; Azure ARM mention from [AZ-900 File2](../../raw/youtube/youtube--pX5PjIYTJs-az-900-azure-fundamentals-full-course-2025-azure-complete-tu.md#t=23:11)
 [^src4]: [Infrastructure as Code for Data Engineers (Pipeline to Insights)](../../raw/email/email-2025-08-10-infrastructure-as-code-for-data-engineers.md)
+[^src5]: [I'll Explain 10 Years of Infrastructure Evolution in 25 Minutes (TechWorld with Nana)](../../raw/youtube/youtube-iTrxsotFNHA-i-ll-explain-10-years-of-infrastructure-evolution-in-25-minu.md)

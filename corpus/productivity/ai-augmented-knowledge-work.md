@@ -12,6 +12,12 @@ sources:
   - path: raw/_inbox/email-2026-06-08-loop-engineering.md
     channel: inbox
     ingested_at: 2026-06-12
+  - path: raw/youtube/youtube-yjO9UHIunSE-jfdi-system-my-ai-executive-assistant-full-life-command-cent.md
+    channel: youtube
+    ingested_at: 2026-06-20
+  - path: raw/youtube/youtube-CvLkhGWZlvE-how-i-turned-claude-into-my-personal-assistant-full-guide.md
+    channel: youtube
+    ingested_at: 2026-06-20
 aliases:
   - AI workflow
   - voice file
@@ -65,8 +71,47 @@ The anti-pattern: opening a blank chat every morning and re-explaining yourself 
 
 This is the productivity face of agent orchestration; see [[ai-engineering/agentic-coding|Agentic Coding]] / loop and harness pages in the ai-engineering domain for the engineering depth, and [[productivity/shipping-and-scope|Shipping and Scope]] for why verification of outcomes is the durable skill.
 
+## 4. The JFDI system (AI executive assistant)
+
+A practitioner-built "JFDI system" (Just Freaking Do It) demonstrates a fully automated personal operating system powered by AI agents [^src4]. Core automation flows:
+
+**8:30 AM auto-dashboard** [^src4]: at startup, the system automatically:
+1. Checks calendar for today's meetings (loads agenda, attendee info, relevant notes).
+2. Reviews open tasks and projects; surfaces what's at risk.
+3. Pulls email threads that need decisions.
+4. Generates a single "today's focus" brief — no manual morning review.
+
+**Goal alignment** [^src4]: every task is scored against a proportional-allocation model — what % of this week should go to each goal area? The system flags when actual time allocation drifts more than 20% from the target, surfacing "you're spending 60% of this week on reactive email but your Q3 goal is product strategy."
+
+**CRM automation** [^src4]: after every meeting or call, the system:
+- Extracts action items and commitments from meeting notes.
+- Logs contact updates (new role, project, mention).
+- Reminds you to follow up with anyone you haven't spoken to in N days.
+
+**Knowledge auto-routing** [^src4]: documents, links, and notes dropped into a designated inbox are automatically classified (project vs. reference vs. archive), tagged, and routed — no manual filing. 
+
+**Spark file** [^src4]: a dedicated inbox for half-formed ideas, quotes, and observations. The system surfaces spark-file items weekly, clusters related ones, and asks "is this worth developing?"
+
+## 5. The personal AI OS (Claude + Supabase + Telegram)
+
+A second practitioner documents a "personal AI OS" built from three layers [^src5]:
+
+**Design layer (Claude Designs → Claude Code)** [^src5]: wireframes and specs go through Claude Designs first; the result feeds Claude Code for implementation. This creates an iterative design-code loop where visual prototypes are cheap and code is generated against a spec, not guessed from a vague prompt.
+
+**Backend layer (Supabase)** [^src5]: all persistent data (contacts, habits, finances, journal entries) lives in Supabase — an open-source Firebase alternative with a Postgres backend and REST/GraphQL API. Supabase handles auth, real-time subscriptions, and row-level security, so the AI agents have a consistent, structured store to read/write.
+
+**Input layer (Telegram bot + Whisper)** [^src5]: a Telegram bot acts as the single input channel — text or voice messages. Voice goes through Whisper (OpenAI speech-to-text) for transcription. The bot routes the transcribed message to the right agent module:
+- Finance tracking (categorizes and logs expenses).
+- Habit tracking (logs completions, computes streaks).
+- Journal (records entries with tags and mood).
+- CRM (logs contact interactions, follow-up reminders).
+
+The result: everything happens through one messaging interface. No app-switching; no manual category selection; the AI infers intent from context [^src5].
+
 ---
 
 [^src1]: [Reclaim 6 Hours of your Week in 10 mins](../../raw/email/email-2026-05-25-reclaim-6-hours-of-your-week-in-10-mins.md)
 [^src2]: [You're just a text file.](../../raw/email/email-2026-05-03-you-re-just-a-text-file.md)
 [^src3]: [Loop Engineering](../../raw/email/email-2026-06-08-loop-engineering.md)
+[^src4]: [JFDI System — My AI Executive Assistant (Full Life Command Center)](../../raw/youtube/youtube-yjO9UHIunSE-jfdi-system-my-ai-executive-assistant-full-life-command-cent.md)
+[^src5]: [How I Turned Claude into My Personal Assistant — Full Guide](../../raw/youtube/youtube-CvLkhGWZlvE-how-i-turned-claude-into-my-personal-assistant-full-guide.md)

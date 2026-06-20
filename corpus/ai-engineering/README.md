@@ -22,6 +22,8 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [[ai-engineering/statistics-for-ml|Statistics & Probability for ML]] — concept · draft · distributions, inference, regression — the math under ML
 - [[ai-engineering/agentic-workflow|Agentic Workflows]] — concept · draft · describe-what-not-how; WAT framework; dynamic workflow orchestration patterns (fan-out, tournament, adversarial)
 - [[ai-engineering/vibe-coding|Vibe Coding]] — concept · draft · vibe coding vs spec-driven development; "ask me questions first"
+- [[ai-engineering/spec-driven-development|Spec-Driven Development]] — concept · draft · GitHub Spec Kit 6-step loop; constitution-first; when NOT to spec
+- [[ai-engineering/ai-presentation-tools|AI Presentation Tools]] — concept · draft · 6 approaches: Claude Designs, PowerPoint add-in, Gamma API, HTML via Claude Code, Cowork skill, basic prompt
 - [[ai-engineering/agi|AGI]] — concept · stub · ANI/AGI/ASI; the AGI-by-2030 forecast; future-of-work framing
 - [[ai-engineering/context-engineering|Context Engineering]] — concept · draft · dynamically building and optimizing LLM inputs at inference time
 - [[ai-engineering/ai-agent|AI Agent]] — concept · draft · LLM + tools + memory + orchestration in an iterative loop

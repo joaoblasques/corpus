@@ -18,6 +18,9 @@ sources:
   - path: raw/email/email-2026-05-02-this-is-how-i-d-use-ai-to-learn-python-in-2026.md
     channel: email
     ingested_at: 2026-06-15
+  - path: raw/email/email-2026-06-15-the-top-5-skills-for-ai-engineering-curiosity.md
+    channel: email
+    ingested_at: 2026-06-20
   - path: raw/web/github-rohitg00-ai-engineering-from-scratch-learn-it-build-i.md
     channel: web
     ingested_at: 2026-06-15
@@ -86,6 +89,48 @@ Two narrower "how I'd learn X in 2026" guides feed the front of these paths [^sr
 - **Python first** — fundamentals (variables, loops, functions, lists/dicts, error handling) until you can write a 40–50 line program *without a tutorial open*; then use AI as a **tutor that gives you reps, not answers** ("make it give you reps instead of answers"); build small projects; learn OOP *after* you feel the mess; pick one direction (AI apps, backend, automation, data) [^src4].
 - **ML in the right order** — Python → NumPy/pandas/Matplotlib → the *practical* math you actually need (vectors, distributions, Bayes, gradients — not every proof) → core ML algorithms with scikit-learn → deep learning with PyTorch → production skills (Docker, FastAPI, model serving, monitoring, CI/CD, experiment tracking) [^src6]. Recurring rule: "spend more time building than watching." The math and production layers map to [[ai-engineering/statistics-for-ml|Statistics for ML]] and the [[mlops/README|MLOps]] domain respectively.
 
+## Curiosity as the meta-skill (and the Micro-Retro Loop)
+
+The Top 5 AI Engineering Skills series names **curiosity** as the foundational capability — the one that makes all other skills compound [^src7]:
+
+> "Curiosity is the engine. Every other skill is downstream of it. You can teach someone to prompt or to code; you can't teach them to stay genuinely curious about why something works."
+
+### The Micro-Retro Loop (SKILL.md pattern)
+
+A specific curiosity practice implemented as a reusable skill [^src7]:
+
+After completing any significant AI-assisted task, run a **Micro-Retro** (5–10 minutes):
+1. **What did I try?** List the approaches, prompts, and tools used.
+2. **What worked?** Which produced high-quality output with low friction?
+3. **What didn't?** Where did the AI confuse, hallucinate, or miss intent?
+4. **What would I do differently?** The key heuristic update.
+5. **Append to `.ai_learnings.md`** — a persistent heuristics file that rides into future sessions.
+
+### The `.ai_learnings.md` file
+
+A single markdown file (ideally in your project root or `~/.config/`) that accumulates hard-won lessons across projects [^src7]. Structure:
+
+```markdown
+## What works well
+- Giving the model a "here's what done looks like" example before asking it to generate
+
+## Frequent failure modes
+- Asking for "clean" code without specifying what clean means
+- Not including the error message in the prompt
+
+## Current experiments
+- Testing whether adding a JSON schema to the system prompt reduces hallucinations on structured output
+```
+
+The payoff: the file becomes a prompt component — include it in future sessions and the model calibrates to your history. This is the personal version of the [[ai-engineering/claude-md-conventions|CLAUDE.md conventions]] pattern for teams [^src7].
+
+### A/B testing approaches
+
+Curiosity operationalized: "don't just try one approach and accept it — run 2–3 variants and compare" [^src7]. Concretely:
+- Write the same section with two different prompt styles (role-based vs. outcome-based).
+- Compare outputs on the same rubric you'd use to judge any deliverable.
+- The faster you cycle through variants, the faster your personal heuristics update.
+
 ## Where the paths agree
 
 | Claim | Generalist framing [^src1] | Engineer framing [^src2] |
@@ -115,3 +160,4 @@ Two narrower "how I'd learn X in 2026" guides feed the front of these paths [^sr
 [^src4]: [This is how I'd use AI to learn Python in 2026](../../raw/email/email-2026-05-02-this-is-how-i-d-use-ai-to-learn-python-in-2026.md) — Tech With Tim
 [^src5]: [ai-engineering-from-scratch](../../raw/web/github-rohitg00-ai-engineering-from-scratch-learn-it-build-i.md) — Rohit Ghumare
 [^src6]: [Here's how I'd learn machine learning in 2026](../../raw/email/email-2026-06-04-here-s-how-i-d-learn-machine-learning-in-2026.md) — Tech With Tim
+[^src7]: [The Top 5 Skills for AI Engineering: Curiosity](../../raw/email/email-2026-06-15-the-top-5-skills-for-ai-engineering-curiosity.md)

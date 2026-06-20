@@ -21,6 +21,9 @@ sources:
   - path: raw/email/email-2025-04-16-understanding-the-t-in-etl-a-back-to-basics-guide-to-data-tr.md
     channel: email
     ingested_at: 2026-06-19
+  - path: raw/web/web-sql-to-dbt-guide-hands-on-data-quality-integrity-worfklows.md
+    channel: web
+    ingested_at: 2026-06-20
 aliases:
   - data quality
   - messy data
@@ -149,6 +152,32 @@ A distinction worth keeping explicit: **code tests** and **data-quality checks**
 
 The transform step is itself a quality risk: "Each transform and SQL script is another opportunity to introduce errors," so **unit tests and data-quality checks "aren't just nice to have, they're essential for catching issues before they hit production"** [^src6]. This compounds with an **ownership** problem — transform tooling like [[data-engineering/dbt|dbt]] has broadened who can build platform layers (engineers, analytics engineers, analysts), which is great for speed but blurs the line of responsibility: where does ownership of the core warehouse end and use-case-specific layers begin? Without clear boundaries, things get messy fast [^src6]. See [[data-engineering/data-transformation|Data Transformation]] for the transform-layer challenges this DQ discipline guards against.
 
+## dbt's three-layer testing strategy
+
+The Alejandro Aboy "SQL to dbt" series provides a hands-on view of dbt's built-in quality gates, based on their synthetic marketing dataset [^src7]:
+
+**Data integrity vs data quality (two distinct problems)** [^src7]:
+- **Data integrity** — can you run your analysis without this data? Guards against system failures (missing joins, broken pipelines).
+- **Data quality** — does wrong data lead to bad decisions? Guards against silent errors in business logic.
+Start with integrity constraints to prevent failures, then add quality tests for business-critical calculations.
+
+**Three testing layers** [^src7]:
+
+| Layer | Tool | When it runs | What it catches |
+|---|---|---|---|
+| **Data contracts** | `dbt_project.yml` + model constraints | Compilation (before models build) | Schema violations: wrong types, missing columns, `budget < 0` |
+| **Generic tests** | `schema.yml` `tests:` blocks | After each `dbt run` | Reusable checks: `unique`, `not_null`, `accepted_values`, custom SQL |
+| **Singular tests** | `tests/<model>_test.sql` | After each `dbt run` | Business logic: "revenue minus discount must be non-negative" |
+
+Data contracts are **proactive** — they fail fast at compilation so bad data never enters the pipeline. Generic and singular tests are **reactive** — models build, but failures are reported for investigation.
+
+**dbt-expectations** [^src7]: an extension package adding statistical anomaly detection (`expect_column_mean_to_be_between`, `expect_table_row_count_to_equal_other_table`, etc.). Catches drift that static rules miss — e.g. "the average budget dropped 80% vs last week" is not a null-check failure.
+
+**Multi-layer defense principle** [^src7]: contracts catch schema problems before they propagate downstream; generic tests catch business-rule violations per-run; singular tests encode domain knowledge that no tool can auto-detect. The three layers are complementary and each has a different fix path:
+- Contract failure → fix the schema or update the contract definition.
+- Generic test failure → investigate upstream source (the source system likely introduced the issue).
+- Singular test failure → review with a domain expert (this often means business rules or requirements have changed).
+
 ## Synthesis: contracts vs schema-aware checks
 
 The two technical sources are complementary, not competing. StartDataEngineering defines data contracts as **expectations agreed with upstream teams across five verticals**, validated before use [^src2]; the dlt toolkit is a **mechanism** that derives a baseline of those checks automatically from the loader's schema (the "floor"), then layers business rules (the "ceiling") and routes failures to a fix [^src3]. Both insist quality is enforced **at ingestion, before downstream consumption** — the contract is the policy, the schema-aware toolkit is one implementation.
@@ -167,3 +196,4 @@ The two technical sources are complementary, not competing. StartDataEngineering
 [^src4]: [The Data Engineering Mindset Every AI Builder Needs](../../raw/web/web-the-data-engineering-mindset-every-ai-builder-needs.md)
 [^src5]: [[DE 101] #6 - Testing and Data Quality (Start Data Engineering)](../../raw/email/email-2025-08-01-de-101-6-testing-and-data-quality.md)
 [^src6]: [Understanding the "T" in ETL: A Back-to-Basics Guide to Data Transformations](../../raw/email/email-2025-04-16-understanding-the-t-in-etl-a-back-to-basics-guide-to-data-tr.md)
+[^src7]: [SQL to dbt Guide — Hands-on Data Quality & Integrity Workflows](../../raw/web/web-sql-to-dbt-guide-hands-on-data-quality-integrity-worfklows.md) — Alejandro Aboy, Pipeline to Insights
