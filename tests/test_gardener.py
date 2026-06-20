@@ -126,3 +126,33 @@ def test_verify_fails_when_lint_broken(tmp_path):
                       _lint=lambda: {"broken_citations": [("corpus/ai/openai.md", "x")], "broken_wikilinks": []},
                       _critic=lambda page, src: (True, []))
     assert v([str(d / "openai.md")]).ok is False   # lint failure alone fails the verdict
+
+
+def test_dry_run_lists_worklist_no_calls(tmp_path, monkeypatch, capsys):
+    monkeypatch.setattr(g.sr, "_on_main", lambda *a, **k: True)
+    monkeypatch.setattr(g.sr, "acquire_lock", lambda p: True)
+    monkeypatch.setattr(g.sr, "release_lock", lambda p: None)
+    called = {"loop": False}
+    monkeypatch.setattr(g.cust, "run_loop", lambda **k: called.__setitem__("loop", True) or {})
+    monkeypatch.setattr(g, "CORPUS", tmp_path / "corpus")
+    monkeypatch.setattr(g, "ROOT", tmp_path)
+    (tmp_path / "raw").mkdir(); (tmp_path / "raw" / "s.md").write_text("c", encoding="utf-8")
+    d = tmp_path / "corpus" / "ai"; d.mkdir(parents=True); _stub(d, "openai.md", ["raw/s.md"])
+    rc = g.main(["run", "--dry-run"])
+    out = capsys.readouterr().out
+    assert rc == 0 and "openai.md" in out and called["loop"] is False   # dry-run does NOT loop
+
+
+def test_run_invokes_run_loop(tmp_path, monkeypatch, capsys):
+    monkeypatch.setattr(g.sr, "_on_main", lambda *a, **k: True)
+    monkeypatch.setattr(g.sr, "acquire_lock", lambda p: True)
+    monkeypatch.setattr(g.sr, "release_lock", lambda p: None)
+    monkeypatch.setattr(g, "CORPUS", tmp_path / "corpus")
+    monkeypatch.setattr(g, "ROOT", tmp_path)
+    (tmp_path / "raw").mkdir(); (tmp_path / "raw" / "s.md").write_text("c", encoding="utf-8")
+    d = tmp_path / "corpus" / "ai"; d.mkdir(parents=True); _stub(d, "openai.md", ["raw/s.md"])
+    monkeypatch.setattr(g.cust, "run_loop",
+                        lambda **k: {"label": "gardener", "stop_reason": "converged_dry", "committed": 1})
+    rc = g.main(["run", "--max", "3"])
+    out = capsys.readouterr().out
+    assert rc == 0 and '"stop_reason": "converged_dry"' in out

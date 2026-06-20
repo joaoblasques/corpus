@@ -208,3 +208,51 @@ def make_verify(*, root=None, _lint=None, _critic=None):
                             broken_citations=v.broken_citations,
                             broken_wikilinks=v.broken_wikilinks, notes=notes)
     return gardener_verify
+
+
+CONSTRAINTS = ("Edit only corpus/. Every non-trivial claim cites a source (§7). "
+               "≤25-word quotes. NEVER invent a claim not in the cited sources. Follow CLAUDE.md.")
+LOCK = ROOT / "raw" / ".gardener.lock"
+
+
+def main(argv=None) -> int:
+    import argparse
+    ap = argparse.ArgumentParser(description="Gardener — expand stub pages.")
+    sub = ap.add_subparsers(dest="cmd", required=True)
+    pr = sub.add_parser("run", help="Expand stub pages (loop).")
+    pr.add_argument("--max", type=int, default=10, help="Max stubs to touch this run.")
+    pr.add_argument("--dry-run", action="store_true", help="List the worklist; no model calls/writes.")
+    pr.add_argument("--lock-path", default=LOCK, type=Path)
+    args = ap.parse_args(argv)
+
+    if not sr._on_main():
+        print(json.dumps({"status": "skipped", "reason": "not_on_main"})); return 0
+
+    if args.dry_run:
+        stubs = find_stubs()
+        exp = [p for p in stubs if is_expandable(p)]
+        ranked = rank_stubs(exp)
+        print(json.dumps({"status": "ok", "dry_run": True, "stubs": len(stubs),
+                          "expandable": [str(p.relative_to(ROOT)) for p in ranked],
+                          "unexpandable": len(stubs) - len(exp)}, indent=2))
+        return 0
+
+    if not sr.acquire_lock(args.lock_path):
+        print(json.dumps({"status": "skipped", "reason": "lock_held"})); return 0
+    try:
+        summary = cust.run_loop(
+            next_action=make_worklist(),
+            execute=make_execute(),
+            constraints=CONSTRAINTS,
+            budget=cust.Budget(None),
+            caps=cust.Caps(max_iterations=args.max, max_pages_touched=args.max),
+            label="gardener",
+            _verify=make_verify())
+        print(json.dumps(summary))
+        return 0
+    finally:
+        sr.release_lock(args.lock_path)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
