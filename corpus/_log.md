@@ -1013,3 +1013,15 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - pages touched: [corpus/ai-engineering/ai-presentation-tools.md (NEW), corpus/ai-engineering/spec-driven-development.md (NEW), corpus/data-engineering/dlt.md (NEW), corpus/mlops/networking-fundamentals.md (NEW), corpus/ai-engineering/llm.md, corpus/ai-engineering/agentic-coding.md, corpus/ai-engineering/claude-models.md, corpus/ai-engineering/agent-skills.md, corpus/ai-engineering/learning-ai-engineering.md, corpus/ai-engineering/ai-product-management.md, corpus/ai-engineering/machine-learning.md, corpus/ai-engineering/ai-agent.md, corpus/mlops/linux-commands.md, corpus/mlops/cli-tools.md, corpus/mlops/infrastructure-as-code.md, corpus/mlops/production-ml-workflow.md, corpus/data-engineering/dbt.md, corpus/data-engineering/data-engineering-best-practices.md, corpus/data-engineering/data-quality.md, corpus/data-engineering/medallion-architecture.md, corpus/ai-business/monetizing-code.md, corpus/ai-business/ai-consulting-playbook.md, corpus/ai-business/technical-career.md, corpus/productivity/ai-augmented-knowledge-work.md, corpus/productivity/mental-models.md, corpus/ai-engineering/README.md, corpus/data-engineering/README.md, corpus/mlops/README.md]
 - new pages: [corpus/ai-engineering/ai-presentation-tools.md, corpus/ai-engineering/spec-driven-development.md, corpus/data-engineering/dlt.md, corpus/mlops/networking-fundamentals.md]
 - notes: ingest-auto run (headless); 50 processed (39 ingested + 11 deferred — see raw/_inbox/_REVIEW.md); split across 2 context windows due to compaction. Sources stamped; files left in raw/_inbox/ per headless mode (orchestrator relocates via channel: field).
+
+## [2026-06-20T11:31] config | scheduled run
+- collectors:
+  - gmail: 3 collected · status=ok
+  - obsidian: 0 collected · status=ok
+  - pdf: 0 collected · status=ok
+  - youtube: 18 collected · status=ok
+  - links_refetch: 0 refetched · status=ok
+- ingest:
+  - ingest: 39 ingested · 11 deferred · status=ok
+- lint:
+  - 0 broken wikilinks · 1 broken citations · 0 orphans · 8 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
