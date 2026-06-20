@@ -172,15 +172,26 @@ def test_run_loop_stops_on_max_iterations():
     assert out["stop_reason"] == "max_iterations" and out["iterations"] == 3
 
 
-def test_run_loop_routes_proposals_to_queue():
+def test_run_loop_routes_proposals_then_stops_on_repeat():
     queued = []
     out = c.run_loop(
         next_action=lambda: {"id": 1},
-        execute=lambda a, ctx: c.Result([], {"output_tokens": 1},
-                                        proposals=[{"summary": "new rule"}]),
+        execute=lambda a, ctx: c.Result([], {"output_tokens": 1}, proposals=[{"summary": "new rule"}]),
         **_loop_kwargs(_queue=lambda kind, detail: queued.append((kind, detail))))
-    # empty changed_paths ⇒ no_progress stop, but proposals still routed first
-    assert queued and queued[0][0] == "proposal"
+    # empty changes no longer stop on iteration 1; the REPEAT (2nd identical empty) stops it.
+    assert out["stop_reason"] == "no_progress"
+    assert queued and queued[0][0] == "proposal"   # proposals still routed
+
+
+def test_run_loop_single_empty_iteration_does_not_stop():
+    seq = [c.Result([], {"output_tokens": 1}),            # iter1: empty (a failed action)
+           c.Result(["corpus/x.md"], {"output_tokens": 1}),  # iter2: real change
+           None]                                          # iter3: next_action → None
+    actions = iter([{"i": 1}, {"i": 2}])
+    it = iter(seq)
+    out = c.run_loop(next_action=lambda: next(actions, None),
+                     execute=lambda a, ctx: next(it), **_loop_kwargs())
+    assert out["stop_reason"] == "converged_dry"   # the lone empty did not halt it
 
 
 def test_smoke_runs_loop_to_convergence_without_commit(monkeypatch, capsys):
