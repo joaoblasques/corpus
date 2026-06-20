@@ -204,9 +204,9 @@ def run_loop(*, next_action, execute, constraints, budget, caps, label,
             queue("proposal", p); queued_n += 1
         touched += len(result.changed_paths)
         fp = fingerprint(result.changed_paths, result.errors)
-        if not result.changed_paths or fp == last_fp:
-            entries.append({"action": action, "stop": "no_progress"})
-            stop = "no_progress"; break
+        if fp == last_fp:   # repeat fingerprint = no progress (worklist-safe: a single
+            entries.append({"action": action, "stop": "no_progress"})  # empty iteration
+            stop = "no_progress"; break                                # does NOT halt the run
         last_fp = fp
         verdict = verify(result.changed_paths)
         gov = govern_fn(verdict, result.changed_paths, reversible=True)
