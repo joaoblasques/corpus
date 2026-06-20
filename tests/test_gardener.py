@@ -100,3 +100,29 @@ def test_execute_never_raises_on_missing_stub(tmp_path):
     execute = g.make_execute(root=root, _run=lambda *a, **k: None)  # _run won't be reached
     res = execute(root / "corpus" / "ai" / "gone.md", "OBEY")  # file does not exist
     assert res.changed_paths == [] and res.errors  # returns an error Result, does NOT raise
+
+
+def test_verify_ok_when_lint_and_critic_clean(tmp_path):
+    root = tmp_path; d = root / "corpus" / "ai"; d.mkdir(parents=True)
+    _stub(d, "openai.md", ["raw/s.md"])
+    v = g.make_verify(root=root, _lint=lambda: {"broken_citations": [], "broken_wikilinks": []},
+                      _critic=lambda page, src: (True, []))
+    assert v([str(d / "openai.md")]).ok is True
+
+
+def test_verify_fails_when_critic_flags_unsupported_claim(tmp_path):
+    root = tmp_path; d = root / "corpus" / "ai"; d.mkdir(parents=True)
+    _stub(d, "openai.md", ["raw/s.md"])
+    v = g.make_verify(root=root, _lint=lambda: {"broken_citations": [], "broken_wikilinks": []},
+                      _critic=lambda page, src: (False, ["claim 'X' not in any cited source"]))
+    verdict = v([str(d / "openai.md")])
+    assert verdict.ok is False and any("not in any cited source" in n for n in verdict.notes)
+
+
+def test_verify_fails_when_lint_broken(tmp_path):
+    root = tmp_path; d = root / "corpus" / "ai"; d.mkdir(parents=True)
+    _stub(d, "openai.md", ["raw/s.md"])
+    v = g.make_verify(root=root,
+                      _lint=lambda: {"broken_citations": [("corpus/ai/openai.md", "x")], "broken_wikilinks": []},
+                      _critic=lambda page, src: (True, []))
+    assert v([str(d / "openai.md")]).ok is False   # lint failure alone fails the verdict

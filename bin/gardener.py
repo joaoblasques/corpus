@@ -156,3 +156,55 @@ def make_execute(*, root=None, _run=None):
             pass
         return cust.Result(changed_paths=[str(sp)], usage=usage)
     return execute
+
+
+def _critic_call(page_path: Path, sources_text: str, *, _run=None):
+    """Headless Sonnet: does every new claim trace to a cited source? Returns (ok, notes)."""
+    run = _run if _run is not None else subprocess.run
+    prompt = (
+        "You are a strict fact-checker. Below is a corpus page and the FULL text of the "
+        "sources it cites. List EVERY claim on the page that is NOT supported by, is "
+        "misattributed to, or is absent from these sources. If all claims are supported, "
+        'reply EXACTLY {"ok": true, "issues": []}. Otherwise {"ok": false, "issues": ["..."]}.'
+        f"\n\n=== PAGE ===\n{page_path.read_text(encoding='utf-8', errors='ignore')}"
+        f"\n\n=== CITED SOURCES ===\n{sources_text}"
+    )
+    cmd = [str(sr.CLAUDE_BIN), "--print", prompt, "--output-format", "json",
+           "--allowedTools", "Read", "--model", GARDENER_MODEL]
+    env = {k: v for k, v in os.environ.items() if k != "ANTHROPIC_API_KEY"}
+    try:
+        proc = run(cmd, capture_output=True, text=True, timeout=300, env=env,
+                   stdin=subprocess.DEVNULL)
+        inner = json.loads(proc.stdout).get("result", "")
+        m = re.search(r"\{.*\}", inner, re.S)
+        data = json.loads(m.group(0)) if m else {"ok": False, "issues": ["critic: unparseable"]}
+        return bool(data.get("ok")), list(data.get("issues", []))
+    except Exception as exc:  # noqa: BLE001 — fail CLOSED: an unverifiable expansion is not trusted
+        return False, [f"critic error: {exc}"]
+
+
+def make_verify(*, root=None, _lint=None, _critic=None):
+    base = Path(root) if root is not None else ROOT
+    critic = _critic if _critic is not None else \
+        (lambda page, src: _critic_call(Path(page), src))
+    def gardener_verify(changed_paths):
+        # normalize paths to be relative to base for lint matching
+        rel_paths = []
+        for p in (changed_paths or []):
+            try:
+                rel_paths.append(str(Path(p).relative_to(base)))
+            except ValueError:
+                rel_paths.append(str(p))
+        v = cust.verify_gate(rel_paths, _lint=_lint)   # lint + attribution
+        notes = list(v.notes)
+        critic_ok = True
+        for p in changed_paths:
+            sp = Path(p)
+            ok, issues = critic(str(sp), _read_sources(sp, base))
+            if not ok:
+                critic_ok = False
+                notes += [f"critic[{sp.name}]: {i}" for i in issues]
+        return cust.Verdict(ok=(v.ok and critic_ok),
+                            broken_citations=v.broken_citations,
+                            broken_wikilinks=v.broken_wikilinks, notes=notes)
+    return gardener_verify
