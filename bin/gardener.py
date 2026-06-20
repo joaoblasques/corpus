@@ -138,11 +138,11 @@ def make_execute(*, root=None, _run=None):
     run = _run if _run is not None else subprocess.run
     def execute(stub_path, constraints):
         sp = Path(stub_path)
-        cmd = [str(sr.CLAUDE_BIN), "--print", constraints + "\n\n" + expand_prompt(sp, base),
-               "--output-format", "json", "--permission-mode", "bypassPermissions",
-               "--allowedTools", "Read", "Write", "Edit", "--model", GARDENER_MODEL]
         env = {k: v for k, v in os.environ.items() if k != "ANTHROPIC_API_KEY"}
         try:
+            cmd = [str(sr.CLAUDE_BIN), "--print", constraints + "\n\n" + expand_prompt(sp, base),
+                   "--output-format", "json", "--permission-mode", "bypassPermissions",
+                   "--allowedTools", "Read", "Write", "Edit", "--model", GARDENER_MODEL]
             proc = run(cmd, capture_output=True, text=True, timeout=600,
                        cwd=str(base), env=env, stdin=subprocess.DEVNULL)
         except Exception as exc:  # noqa: BLE001

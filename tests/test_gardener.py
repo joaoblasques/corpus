@@ -93,3 +93,10 @@ def test_execute_failure_returns_empty_changed_paths(tmp_path):
     execute = g.make_execute(root=root, _run=fake_run)
     res = execute(d / "openai.md", "OBEY")
     assert res.changed_paths == [] and res.errors
+
+
+def test_execute_never_raises_on_missing_stub(tmp_path):
+    root = tmp_path
+    execute = g.make_execute(root=root, _run=lambda *a, **k: None)  # _run won't be reached
+    res = execute(root / "corpus" / "ai" / "gone.md", "OBEY")  # file does not exist
+    assert res.changed_paths == [] and res.errors  # returns an error Result, does NOT raise
