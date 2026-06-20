@@ -54,3 +54,42 @@ def test_worklist_skips_unexpandable_and_queues_them(tmp_path):
     assert first is not None and first.name == "good.md"
     assert second is None                       # bad.md filtered out → worklist exhausted
     assert queued and queued[0][0] == "stub-no-source"   # unexpandable queued once
+
+
+import json, types
+
+
+def test_expand_prompt_includes_page_and_sources(tmp_path):
+    root = tmp_path; (root / "raw").mkdir()
+    (root / "raw" / "s.md").write_text("SOURCE BODY about X", encoding="utf-8")
+    d = root / "corpus" / "ai"; d.mkdir(parents=True)
+    _stub(d, "openai.md", ["raw/s.md"], body="stub tldr")
+    p = g.expand_prompt(d / "openai.md", root=root)
+    assert "openai.md" in p or "stub tldr" in p
+    assert "SOURCE BODY about X" in p          # the cited source text is embedded
+    assert "stub" in p.lower() and "draft" in p.lower()   # the stub→draft instruction
+
+
+def test_execute_success_returns_changed_path(tmp_path):
+    root = tmp_path; (root / "raw").mkdir()
+    (root / "raw" / "s.md").write_text("body", encoding="utf-8")
+    d = root / "corpus" / "ai"; d.mkdir(parents=True)
+    _stub(d, "openai.md", ["raw/s.md"])
+    def fake_run(cmd, **k):
+        return types.SimpleNamespace(returncode=0,
+            stdout=json.dumps({"result": "done", "usage": {"output_tokens": 120}}), stderr="")
+    execute = g.make_execute(root=root, _run=fake_run)
+    res = execute(d / "openai.md", "OBEY")
+    assert res.changed_paths == [str(d / "openai.md")] and res.usage["output_tokens"] == 120
+
+
+def test_execute_failure_returns_empty_changed_paths(tmp_path):
+    root = tmp_path; (root / "raw").mkdir()
+    (root / "raw" / "s.md").write_text("body", encoding="utf-8")
+    d = root / "corpus" / "ai"; d.mkdir(parents=True)
+    _stub(d, "openai.md", ["raw/s.md"])
+    def fake_run(cmd, **k):
+        return types.SimpleNamespace(returncode=1, stdout="", stderr="boom")
+    execute = g.make_execute(root=root, _run=fake_run)
+    res = execute(d / "openai.md", "OBEY")
+    assert res.changed_paths == [] and res.errors

@@ -103,3 +103,56 @@ def make_worklist(*, corpus_dir=None, root=None, _queue=None):
         p = ranked[state["i"]]; state["i"] += 1
         return p
     return next_action
+
+
+def _read_sources(stub_path: Path, base: Path) -> str:
+    chunks = []
+    for rel in _sources_of(stub_path):
+        f = base / rel
+        try:
+            if f.is_file():
+                chunks.append(f"### SOURCE {rel}\n{f.read_text(encoding='utf-8', errors='ignore')[:6000]}")
+        except OSError:
+            continue
+    return "\n\n".join(chunks)
+
+
+def expand_prompt(stub_path, root=None) -> str:
+    base = Path(root) if root is not None else ROOT
+    sp = Path(stub_path)
+    page = sp.read_text(encoding="utf-8", errors="ignore")
+    sources = _read_sources(sp, base)
+    return (
+        "You are the corpus maintainer. Read CLAUDE.md. Expand this STUB page into a "
+        "full `draft` using ONLY the cited sources below. §7-strict: every non-trivial "
+        "claim cites its source; ≤25-word quotes (max one per source); NEVER state a claim "
+        "not present in the sources. Keep CLAUDE.md §3/§4/§14 form. Flip `status: stub` → "
+        f"`status: draft` and bump `updated`. Write the file in place.\n\n"
+        f"=== STUB PAGE ({sp.name}) ===\n{page}\n\n=== CITED SOURCES ===\n{sources}\n\n"
+        'When done, your FINAL message must be EXACTLY: {"expanded": true}'
+    )
+
+
+def make_execute(*, root=None, _run=None):
+    base = Path(root) if root is not None else ROOT
+    run = _run if _run is not None else subprocess.run
+    def execute(stub_path, constraints):
+        sp = Path(stub_path)
+        cmd = [str(sr.CLAUDE_BIN), "--print", constraints + "\n\n" + expand_prompt(sp, base),
+               "--output-format", "json", "--permission-mode", "bypassPermissions",
+               "--allowedTools", "Read", "Write", "Edit", "--model", GARDENER_MODEL]
+        env = {k: v for k, v in os.environ.items() if k != "ANTHROPIC_API_KEY"}
+        try:
+            proc = run(cmd, capture_output=True, text=True, timeout=600,
+                       cwd=str(base), env=env, stdin=subprocess.DEVNULL)
+        except Exception as exc:  # noqa: BLE001
+            return cust.Result(changed_paths=[], usage={}, errors=[f"run: {exc}"])
+        if proc.returncode != 0:
+            return cust.Result(changed_paths=[], usage={}, errors=[(proc.stderr or "").strip()[:200]])
+        usage = {}
+        try:
+            usage = json.loads(proc.stdout).get("usage", {})
+        except Exception:  # noqa: BLE001
+            pass
+        return cust.Result(changed_paths=[str(sp)], usage=usage)
+    return execute
