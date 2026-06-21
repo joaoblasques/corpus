@@ -23,3 +23,6 @@
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/openai.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/github-copilot.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/web-scraping.md", "verdict_ok": false, "gov": "reverted+queued"}
+
+## [2026-06-21T16:47] gardener · run
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/web-scraping.md", "verdict_ok": false, "gov": "reverted+queued"}
