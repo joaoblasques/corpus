@@ -158,19 +158,24 @@ def govern(verdict: Verdict, changed_paths: list, *, reversible: bool,
 
 
 def finalize_commit(*, _run=None) -> dict:
-    """Commit ONLY the control-surface catalog files so the digest + queued notes always
-    persist (even if every content iteration reverted). Main-only."""
+    """Commit the control-surface catalog files (if changed) and PUSH the run's commits.
+    Main-only. The push covers the per-iteration content commits too, so a mode's work
+    reaches the remote without a manual push. Push failure is recorded, never raised
+    (the work is committed locally and the next run / manual push will sync it)."""
     run = _run if _run is not None else subprocess.run
     if not sr._on_main():
         return {"status": "skipped-not-main"}
     paths = [str(REVIEW_QUEUE), str(DIGEST)]
     run([GIT_BIN, "add"] + paths, cwd=str(ROOT), capture_output=True, text=True)
     st = run([GIT_BIN, "status", "--porcelain"], cwd=str(ROOT), capture_output=True, text=True)
-    if not (st.stdout or "").strip():
-        return {"status": "nothing-to-commit"}
-    run([GIT_BIN, "commit", "-m", "chore(custodian): digest + review-queue"],
-        cwd=str(ROOT), capture_output=True, text=True)
-    return {"status": "committed"}
+    committed = bool((st.stdout or "").strip())
+    if committed:
+        run([GIT_BIN, "commit", "-m", "chore(custodian): digest + review-queue"],
+            cwd=str(ROOT), capture_output=True, text=True)
+    # Push the whole run's local commits (per-iteration content + catalog), non-fatal.
+    p = run([GIT_BIN, "push", "origin", sr.MAIN_BRANCH], cwd=str(ROOT), capture_output=True, text=True)
+    pushed = getattr(p, "returncode", 1) == 0
+    return {"status": "committed" if committed else "nothing-to-commit", "pushed": pushed}
 
 
 def run_loop(*, next_action, execute, constraints, budget, caps, label,

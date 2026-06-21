@@ -216,3 +216,38 @@ def test_write_digest_handles_non_serializable_entry(tmp_path):
     c.write_digest("run-x", "gardener", [{"action": _P("/abs/corpus/x.md"), "ok": True}],
                    path=d, _now="2026-06-21T10:00")
     assert "/abs/corpus/x.md" in d.read_text()   # stringified, not crashed
+
+
+def test_finalize_commit_pushes_after_commit(monkeypatch):
+    monkeypatch.setattr(c.sr, "_on_main", lambda *a, **k: True)
+    calls = []
+    def run(cmd, **k):
+        calls.append(" ".join(cmd))
+        out = " M corpus/_digest.md\n" if "status" in cmd else ""
+        return types.SimpleNamespace(returncode=0, stdout=out, stderr="")
+    res = c.finalize_commit(_run=run)
+    assert res["pushed"] is True and res["status"] == "committed"
+    assert any("commit" in s for s in calls) and any("push origin main" in s for s in calls)
+
+
+def test_finalize_commit_pushes_even_when_catalog_unchanged(monkeypatch):
+    # per-iteration content commits exist but catalog is unchanged → still push them
+    monkeypatch.setattr(c.sr, "_on_main", lambda *a, **k: True)
+    calls = []
+    def run(cmd, **k):
+        calls.append(" ".join(cmd))
+        return types.SimpleNamespace(returncode=0, stdout="", stderr="")   # clean status
+    res = c.finalize_commit(_run=run)
+    assert res["status"] == "nothing-to-commit"
+    assert any("push" in s for s in calls)        # pushes prior commits anyway
+    assert not any("commit -m" in s for s in calls)  # no new catalog commit
+
+
+def test_finalize_commit_push_failure_is_recorded_not_raised(monkeypatch):
+    monkeypatch.setattr(c.sr, "_on_main", lambda *a, **k: True)
+    def run(cmd, **k):
+        rc = 1 if "push" in cmd else 0
+        out = " M corpus/_digest.md\n" if "status" in cmd else ""
+        return types.SimpleNamespace(returncode=rc, stdout=out, stderr="rejected")
+    res = c.finalize_commit(_run=run)
+    assert res["pushed"] is False   # recorded, no exception
