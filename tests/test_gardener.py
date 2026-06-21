@@ -156,3 +156,19 @@ def test_run_invokes_run_loop(tmp_path, monkeypatch, capsys):
     rc = g.main(["run", "--max", "3"])
     out = capsys.readouterr().out
     assert rc == 0 and '"stop_reason": "converged_dry"' in out
+
+
+def test_writer_uses_opus_critic_uses_sonnet(tmp_path, monkeypatch):
+    import json as _j, types as _t
+    monkeypatch.setattr(g, "GARDENER_MODEL", "claude-opus-4-8")
+    monkeypatch.setattr(g, "GARDENER_CRITIC_MODEL", "claude-sonnet-4-6")
+    root = tmp_path; (root / "raw").mkdir(); (root / "raw" / "s.md").write_text("body", encoding="utf-8")
+    d = root / "corpus" / "ai"; d.mkdir(parents=True); _stub(d, "openai.md", ["raw/s.md"])
+    seen = {}
+    def fake_run(cmd, **k):
+        seen["cmd"] = cmd
+        return _t.SimpleNamespace(returncode=0, stdout=_j.dumps({"result": '{"ok": true, "issues": []}', "usage": {}}), stderr="")
+    g.make_execute(root=root, _run=fake_run)(d / "openai.md", "OBEY")
+    assert "claude-opus-4-8" in seen["cmd"]          # the WRITER runs on Opus
+    g._critic_call(d / "openai.md", "src text", _run=fake_run)
+    assert "claude-sonnet-4-6" in seen["cmd"]        # the fact-checker runs on Sonnet

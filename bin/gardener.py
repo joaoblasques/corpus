@@ -20,7 +20,8 @@ import scheduled_run as sr  # noqa: E402
 
 ROOT = sr.ROOT
 CORPUS = ROOT / "corpus"
-GARDENER_MODEL = os.environ.get("GARDENER_MODEL", "claude-sonnet-4-6")
+GARDENER_MODEL = os.environ.get("GARDENER_MODEL", "claude-opus-4-8")          # writer (expansion)
+GARDENER_CRITIC_MODEL = os.environ.get("GARDENER_CRITIC_MODEL", "claude-sonnet-4-6")  # independent fact-checker
 _STUB_RE = re.compile(r"^status:\s*stub\s*$", re.M)
 _CREATED_RE = re.compile(r"^created:\s*(\d{4}-\d{2}-\d{2})", re.M)
 _SRC_PATH_RE = re.compile(r"^\s*-\s*path:\s*(\S+)", re.M)
@@ -170,7 +171,7 @@ def _critic_call(page_path: Path, sources_text: str, *, _run=None):
         f"\n\n=== CITED SOURCES ===\n{sources_text}"
     )
     cmd = [str(sr.CLAUDE_BIN), "--print", prompt, "--output-format", "json",
-           "--allowedTools", "Read", "--model", GARDENER_MODEL]
+           "--allowedTools", "Read", "--model", GARDENER_CRITIC_MODEL]
     env = {k: v for k, v in os.environ.items() if k != "ANTHROPIC_API_KEY"}
     try:
         proc = run(cmd, capture_output=True, text=True, timeout=300, env=env,
