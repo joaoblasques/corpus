@@ -1,7 +1,7 @@
 ---
 type: concept
 domain: ai-engineering
-status: stub
+status: draft
 sources:
   - path: raw/email/email-2026-05-27-agi-by-2030.md
     channel: email
@@ -12,46 +12,56 @@ sources:
 aliases:
   - AGI
   - artificial general intelligence
-  - superintelligence
-  - ASI
   - singularity
 tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-15
-updated: 2026-06-15
+updated: 2026-06-21
 ---
 
 # AGI (Artificial General Intelligence)
 
-**TL;DR**: AGI is machine intelligence at or beyond human level *across domains*, contrasted with today's task-specific **narrow** AI [^src2]. Timelines are contested but increasingly near-term among lab leaders: Demis Hassabis (Google DeepMind) reportedly told the source author **AGI is ~4 years away — "AGI by 2030. Maximum"** [^src1].
+**TL;DR**: In the email source, **AGI** is the point at which a machine becomes smarter than humans — a milestone the author also calls the *Singularity* [^src1]. Its deeper root is the founding question of AI itself: whether machines can think, formalized in Alan Turing's 1950 paper and his Turing test [^src2]. On timing, Demis Hassabis (Google DeepMind founder; 2024 Nobel laureate in Chemistry for AlphaFold) reportedly told the author AGI is about four years away — **"AGI by 2030. Maximum"** [^src1].
 
-## The capability ladder
+## What AGI means
 
-The standard taxonomy [^src2]:
-- **ANI** (Artificial Narrow Intelligence) — task-specific; all systems today.
-- **AGI** (Artificial General Intelligence) — human-level across arbitrary domains.
-- **ASI** (Artificial Super Intelligence) — beyond human; the "singularity."
+- The email defines AGI as the moment a machine becomes smarter than humans, and treats the labels *AGI* and *Singularity* as the same thing [^src1].
+- The older framing is the question of machine thinking. In 1950 Alan Turing published a paper speculating on creating machines that think, and devised the Turing test [^src2].
+- The Turing test asks whether a computer can think intelligently like a human: a machine able to hold a conversation indistinguishable from a human's is deemed to be thinking [^src2]. By the course's account, "we haven't found a machine that has fully cleared the Turing test" [^src2].
 
-DeepMind's stated mission frames the trajectory: "solve intelligence, then use that to solve everything else" [^src1].
+## The long arc toward machine intelligence (Edureka course)
 
-## What near-term AGI implies for work (the source's argument)
+A compact history from the cited course [^src2]:
+- The idea predates computing — e.g., Talos, a bronze warrior in Greek mythology, imagined as a programmed guardian [^src2].
+- **1950** — Turing's paper and the Turing test, the first serious proposal in the philosophy of AI [^src2].
+- **1951** — early game-playing programs (a checkers program on the Ferranti Mark 1; chess) [^src2].
+- **1956** — the term *artificial intelligence* coined by John McCarthy at the Dartmouth Conference [^src2].
+- **1959** — the first AI laboratory established (MIT) [^src2].
 
-The email is primarily a *future-of-work* argument, not a technical one [^src1]:
-- Screen-based knowledge work (first drafts, summaries, market scans, deck outlines) is what AI absorbs first; "the deliverable is the floor, you are the ceiling" [^src1].
-- The durable human premium is **taste, judgment, and responsibility** — "AI gives you 30 options in 30 seconds; taste picks the one; judgment knows when picking is wrong" [^src1].
-- **Agent orchestration** ("an army of Claudes and ChatGPTs making decisions 24/7") is named as the other path, but the author argues it's mostly for developers and "takes weeks to set up" — most knowledge workers will *use* what developers build [^src1]. See [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] and [[ai-engineering/agentic-coding|Agentic Coding]].
+## Hassabis's timeline (the email)
 
-> The career/economic dimension of this argument is filed under [[ai-business/ai-and-the-job-market|AI and the Job Market]]; this page records AGI as a concept and the cited timeline.
+- The author reports that Hassabis "has been saying it for years": AGI by 2030 at the latest, where *maximum* implies it could arrive earlier — four years, not forty [^src1].
+- DeepMind's stated mission, per the email, is to solve intelligence and then use that to solve everything else [^src1].
+- Hassabis's track record as relayed: led DeepMind when AlphaGo beat Go champion Lee Sedol, released AlphaFold for protein-structure prediction, and won the 2024 Nobel Prize in Chemistry [^src1].
+
+## The future-of-work argument
+
+The email is primarily a *future-of-work* essay, not a technical account of AGI [^src1]:
+- AI first absorbs screen-based knowledge work — first drafts, summaries, market scans, campaign briefs, deck outlines, routine morning emails [^src1].
+- The author argues the durable value is the human, relationship-and-judgment dimension: he keeps paying a lawyer who drafts contracts and flags risks because the job is more than drafting, which AI could do [^src1].
+- Hassabis is quoted reflecting that perhaps humans were not meant to watch screens so much, and that AI might push people to be more human [^src1].
+
+> The career/economic dimension is filed under [[ai-business/ai-and-the-job-market|AI and the Job Market]]; this page records AGI as a concept and the cited timeline.
 
 ## Note on sourcing
 
-The "AGI by 2030" timeline is a single second-hand claim attributed to one lab leader in an opinion newsletter — treat as a *forecast*, not established fact. It is one data point in an actively disputed debate (see also the safety/control framing in TDS's "Who's Actually in Charge of AI?" — agency over AI's deployment is human, not inevitable).
+- The "AGI by 2030" timeline is a single second-hand claim — the author relaying a brief conversation with one lab leader in an opinion newsletter. Treat it as a *forecast*, not established fact [^src1].
+- The definitional/historical material comes from a beginners' course; by that course's own account, no machine has yet fully cleared the Turing test [^src2].
 
 ## See also
 
-- [[ai-engineering/ai-fundamentals|AI Fundamentals]] — the ANI/AGI/ASI taxonomy in context
-- [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] — agent orchestration, the "other path"
+- [[ai-engineering/ai-fundamentals|AI Fundamentals]] — types and history of AI
 - [[ai-business/ai-and-the-job-market|AI and the Job Market]] — the future-of-work argument
 - [[ai-engineering/README|AI Engineering hub]]
 
