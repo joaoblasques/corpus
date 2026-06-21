@@ -6,6 +6,12 @@ sources:
   - path: raw/notes/notes-clippings-best-practices-for-computer-and-browser-use-with-claude.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/web/web-introducing-sonnet-4-6.md
+    channel: web
+    ingested_at: 2026-06-21
+  - path: raw/web/web-mitigating-the-risk-of-prompt-injections-in-browser-use.md
+    channel: web
+    ingested_at: 2026-06-21
 aliases:
   - computer use
   - browser use
@@ -16,7 +22,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-17
-updated: 2026-06-17
+updated: 2026-06-21
 ---
 
 # Computer Use (Claude)
@@ -67,7 +73,7 @@ screen_y = int(api_y * (screen_h / display_h))
 
 ## Model selection for clicking
 
-- **Sonnet 4.6**: most mechanically precise at clicking (best spatial accuracy, fewest near-misses); more robust when source images require heavy downscaling. Best balance of accuracy, reasoning, and cost for most tasks [^src1].
+- **Sonnet 4.6**: most mechanically precise at clicking (best spatial accuracy, fewest near-misses); more robust when source images require heavy downscaling. Best balance of accuracy, reasoning, and cost for most tasks [^src1]. The Sonnet 4.6 launch cited "significant OSWorld improvements" and is described as having "major improvement compared to Sonnet 4.5" on prompt-injection robustness [^src2][^src3].
 - **Opus 4.6**: stronger reasoning but slightly less clicking precision; use when reasoning matters more than click accuracy.
 - **Opus 4.7**: closes the precision gap with Sonnet 4.6, plus has the higher resolution budget (3.75 MP), making it the strong choice for hard tasks where both reasoning and accuracy matter.
 - **Haiku 4.5**: best when latency is the priority.
@@ -179,3 +185,5 @@ Instead of iterating on text prompts, record a demonstration — screenshots + a
 ---
 
 [^src1]: [Best practices for computer and browser use with Claude](../../raw/notes/notes-clippings-best-practices-for-computer-and-browser-use-with-claude.md) — Lucas Gonzalez & Luca Weihs, Anthropic
+[^src2]: [Introducing Claude Sonnet 4.6](../../raw/web/web-introducing-sonnet-4-6.md) — Anthropic official blog (OSWorld + prompt injection robustness)
+[^src3]: [Mitigating the Risk of Prompt Injections in Browser Use](../../raw/web/web-mitigating-the-risk-of-prompt-injections-in-browser-use.md) — Anthropic (1% attack rate; Claude for Chrome beta)

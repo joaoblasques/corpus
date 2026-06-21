@@ -27,6 +27,9 @@ sources:
   - path: raw/notes/notes-08-security-maintainability-and-reliability.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/web/web-mitigating-the-risk-of-prompt-injections-in-browser-use.md
+    channel: web
+    ingested_at: 2026-06-21
 aliases:
   - prompt injection
   - LLM security
@@ -44,7 +47,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-12
-updated: 2026-06-17
+updated: 2026-06-21
 ---
 
 # Agent Security
@@ -128,6 +131,27 @@ The Snyk taint analysis hybrid approach addresses this: static taint tracking tr
 
 A 2022 study found developers using AI coding assistants were *more* confident in their code's security even when it was objectively less secure than code written without AI [^src8]. The effect is compounding: AI-generated code may contain more vulnerabilities *and* the developer is less likely to subject it to security review. "Trust but verify" (Russian proverb invoked in ch8) is the corrective stance: trust the output enough to use it as a starting point, but verify before it ships [^src8]. See [[ai-engineering/agent-testing|Agent Testing]] for the testing-side complement.
 
+## Prompt injection in browser use
+
+Every webpage a browser-use agent visits is "a potential vector for attack" [^src9]. Attack vectors include hidden text, manipulated images, and deceptive UI elements — all of which can carry payloads invisible to a human user but visible to a multimodal model examining a screenshot.
+
+Anthropic's documented defense layers for browser agents [^src9]:
+
+1. **RL training** — fine-tuning specifically on prompt-injection resistance; teaches the model to recognize and ignore injection attempts embedded in page content.
+2. **Classifiers scanning untrusted content** — a separate classifier layer that labels external web content as untrusted before it enters the main model's context; injections in classified untrusted blocks are weighted accordingly.
+3. **Red teaming** — continuous adversarial evaluation to find new injection patterns and update defenses.
+
+The result: **Claude Opus 4.5 achieved ~1% attack success rate** in Anthropic's browser-use evaluations, "setting a new standard in robustness to prompt injections" [^src9]. This is a major reduction vs. undefended models.
+
+**Claude for Chrome** expanded from research preview to general beta (Max plan) alongside these improvements [^src9] — the security work was a prerequisite for broader browser-agent deployment. The browser extension lets Claude operate real Chrome tabs as a computer-use agent with the above defenses active.
+
+**Practical guidance for builders**: defensive architecture cannot rely solely on model training. Layer model-level defenses with:
+- **Scope constraints in system prompts**: explicitly forbid the agent from following instructions sourced from external content.
+- **HITL gates for sensitive actions**: require human confirmation before any action triggered by information from external web pages.
+- **Least-privilege tool design**: the agent should not be able to exfiltrate data even if successfully injected.
+
+See [[ai-engineering/computer-use|Computer Use]] for implementation detail on browser-use configuration with Sonnet 4.6 (most robust for clicking tasks).
+
 ## Claude Security (enterprise vulnerability scanning product)
 
 Claude Security (previously Claude Code Security) is Anthropic's enterprise-grade vulnerability-scanning product, available in public beta to Claude Enterprise customers as of mid-2026 [^src7]. It uses **Opus 4.7** to scan codebases the way a security researcher would — tracing data flows across files and modules, understanding component interactions — rather than searching for known patterns [^src7].
@@ -178,3 +202,4 @@ It issues a scoped, short-lived, revocable access token over standard OAuth, com
 [^src6]: [How OpenAI engineers prompt](../../raw/email/email-2026-06-08-how-openai-engineers-prompt.md) — The Code (on ChatGPT Lockdown Mode)
 [^src7]: [Claude Security is now in public beta](../../raw/notes/notes-clippings-claude-security-is-now-in-public-beta.md) — Anthropic
 [^src8]: [Ch8 — Security, Maintainability, and Reliability](../../raw/notes/notes-08-security-maintainability-and-reliability.md)
+[^src9]: [Mitigating the Risk of Prompt Injections in Browser Use](../../raw/web/web-mitigating-the-risk-of-prompt-injections-in-browser-use.md) — Anthropic

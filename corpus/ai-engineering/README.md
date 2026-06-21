@@ -25,6 +25,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [[ai-engineering/spec-driven-development|Spec-Driven Development]] — concept · draft · GitHub Spec Kit 6-step loop; constitution-first; when NOT to spec
 - [[ai-engineering/ai-presentation-tools|AI Presentation Tools]] — concept · draft · 6 approaches: Claude Designs, PowerPoint add-in, Gamma API, HTML via Claude Code, Cowork skill, basic prompt
 - [[ai-engineering/agi|AGI]] — concept · stub · ANI/AGI/ASI; the AGI-by-2030 forecast; future-of-work framing
+- [[ai-engineering/ai-operating-system|AI Operating System]] — concept · draft · structured folder/file system providing persistent context, memory, skills, and connections; applied context engineering for compounding AI intelligence
 - [[ai-engineering/context-engineering|Context Engineering]] — concept · draft · dynamically building and optimizing LLM inputs at inference time
 - [[ai-engineering/ai-agent|AI Agent]] — concept · draft · LLM + tools + memory + orchestration in an iterative loop
 - [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] — concept · draft · patterns for multiple cooperating agents (sequential, parallel, supervisor, data-driven)

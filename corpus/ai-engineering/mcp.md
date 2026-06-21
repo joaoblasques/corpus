@@ -33,6 +33,9 @@ sources:
   - path: raw/email/email-2025-09-04-mcp-helps-but-how.md
     channel: email
     ingested_at: 2026-06-19
+  - path: raw/web/web-sdks-model-context-protocol.md
+    channel: web
+    ingested_at: 2026-06-21
 aliases:
   - MCP
   - Model Context Protocol
@@ -40,12 +43,25 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-21
-updated: 2026-06-19
+updated: 2026-06-21
 ---
 
 # MCP (Model Context Protocol)
 
 **TL;DR**: A structured coordination protocol that defines how agents, tools, and memory communicate — replacing ad-hoc prompting with a standardized interface for tool calls, memory access, and context sharing [^src1].
+
+## SDK support tiers
+
+Official MCP SDKs as of mid-2026 [^src11]:
+
+| Tier | Languages | Status |
+|---|---|---|
+| **Tier 1** | TypeScript, Python, C#, Go | Fully maintained, production-ready |
+| **Tier 2** | Java, Rust | Supported, may lag behind Tier 1 |
+| **Tier 3** | Swift, Ruby, PHP | Community-maintained |
+| **TBD** | Kotlin | Planned |
+
+MCP SDKs surpassed **300 million downloads/month** as of mid-2026 (up from 100M at start of year) [^src7].
 
 ## What it does
 
@@ -181,3 +197,4 @@ As of mid-2026 the Claude connector directory has grown to 200+ connectors spann
 [^src8]: [How to Set Up Your Claude Connectors (MCP)](../../raw/notes/notes-clippings-how-to-set-up-your-claude-connectors-mcp.md) — practitioner guide (33-connector marketing/sales stack)
 [^src9]: [New connectors in Claude for everyday life](../../raw/notes/notes-clippings-new-connectors-in-claude-for-everyday-life.md) — Anthropic announcement
 [^src10]: [MCP Helps, But How?](../../raw/email/email-2025-09-04-mcp-helps-but-how.md) — Alex Wang, "Learn AI Together" (LinkedIn)
+[^src11]: [MCP SDKs — Model Context Protocol official docs](../../raw/web/web-sdks-model-context-protocol.md)

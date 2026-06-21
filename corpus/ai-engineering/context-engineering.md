@@ -27,6 +27,9 @@ sources:
   - path: raw/web/github-kaelio-ktx-ktx-is-an-executable-context-layer-for-dat.md
     channel: web
     ingested_at: 2026-06-12
+  - path: raw/web/web-effective-context-engineering-for-ai-agents.md
+    channel: web
+    ingested_at: 2026-06-21
 aliases:
   - context engineering
   - context window engineering
@@ -38,7 +41,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-07
-updated: 2026-06-12
+updated: 2026-06-21
 ---
 
 # Context Engineering
@@ -50,6 +53,45 @@ updated: 2026-06-12
 Context engineering treats the LLM's context window as a first-class engineering artifact — not just a prompt, but a structured, dynamic input that must be deliberately designed, assembled, and optimized for each inference call.
 
 Distinct from static prompt engineering: context engineering implies runtime construction (retrieval, filtering, compression, injection) rather than a fixed template.
+
+**Anthropic's authoritative definition**: "the discipline of filling the context window with just the right information, in the right format, at the right time, for the LLM to optimally complete a task" [^src9]. Context itself is "the set of tokens included when sampling from an LLM."
+
+### Context rot
+
+Performance degrades as context grows: "as the number of tokens in the context window increases, the model's ability to accurately recall information from that context decreases" [^src9]. The mechanism: transformers compute n² pairwise attention relationships across all tokens. As context grows, the same finite attention bandwidth is shared across more and more relationships — so any individual relationship gets less "attention budget." This is true even with extended-context models; capacity scales, but so does the cost of filling it.
+
+**Practical consequence**: a full context window is not the same as a well-filled one. Irrelevant information actively degrades performance by consuming attention budget that would otherwise focus on what matters [^src9].
+
+### System prompt altitude
+
+System prompts sit in a "Goldilocks zone" between too rigid and too vague [^src9]:
+
+- **Too rigid**: brittle to edge cases; the agent can't handle variation the system prompt didn't anticipate
+- **Too vague**: agent behavior becomes variable and unpredictable; no stable baseline
+- **The zone**: clear constraints + enough flex for the model to handle variation within bounds
+
+"Bloated tool sets that cover too much functionality" are the most common production failure mode — they consume context budget, increase selection uncertainty, and degrade performance. Prefer fewer, well-described tools [^src9]. See [[ai-engineering/mcp|MCP]] for the "One Thing" principle.
+
+### Four storage types
+
+Context engineering spans four tiers of information storage [^src9]:
+
+| Type | Scope | Examples |
+|---|---|---|
+| **In-context** | Current inference | Retrieved docs, tool results, conversation history |
+| **External** | Persistent store | Vector DB, key-value store, files, databases |
+| **In-weights** | Baked into model | Pre-training knowledge, fine-tuning |
+| **In-cache** | Reused computation | Prompt cache (KV cache for prefix reuse) |
+
+Context engineering primarily operates on the in-context tier, but retrieval (from external) and caching (reducing in-context cost) are adjacent disciplines.
+
+### Just-in-time context strategies
+
+**Structured note-taking (NOTES.md)**: agents that run long tasks write key decisions and intermediate results to a scratchpad file, then load only the relevant section at the next step — keeping the context lean while preserving state across the session [^src9].
+
+**Compaction**: when context nears the window limit, summarize the conversation and open a fresh context window with the summary plus only the still-relevant state. The summary becomes the new "start" — preserving what matters, discarding token-dense verbatim history. See [[ai-engineering/context-window-management|Context Window Management]] for operational mechanics [^src9].
+
+**Sub-agent architectures**: for tasks that inherently exceed a single context window (long research, multi-day migrations), route sub-tasks to fresh agent instances rather than trying to fit everything in one window. Each sub-agent has a clean, focused context; the orchestrator holds only summaries. See [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] [^src9].
 
 ## The four context components (in agentic systems)
 
@@ -116,6 +158,8 @@ The caveat is the core context-engineering truth: "a context layer is only as st
 - [[ai-engineering/tool-calling-and-context-engineering|Tool Calling & Context Engineering]] — synthesis: structural relationship between tool results and context window management
 
 ---
+
+[^src9]: [Effective Context Engineering for AI Agents](../../raw/web/web-effective-context-engineering-for-ai-agents.md) — Anthropic engineering blog
 
 [^src1]: [[03_Resources/Articles/Context Engineering|Context Engineering]]
 [^src2]: [[03_Resources/Study Notes/AI Agents - Complete Course Beginner to Pro|AI Agents - Complete Course Beginner to Pro]]

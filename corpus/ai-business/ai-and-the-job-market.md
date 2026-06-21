@@ -21,6 +21,9 @@ sources:
   - path: raw/web/web-we-need-to-talk-about-agents.md
     channel: web
     ingested_at: 2026-06-17
+  - path: raw/web/web-anthropic-economic-index-report-uneven-geographic-and-enterp.md
+    channel: web
+    ingested_at: 2026-06-21
 aliases:
   - AI replacing workers
   - future-proofing engineering career
@@ -33,7 +36,7 @@ tags:
   - corpus/ai-business
   - synthesis
 created: 2026-06-12
-updated: 2026-06-17
+updated: 2026-06-21
 ---
 
 # AI and the Job Market
@@ -138,6 +141,27 @@ Examples of companies that get this right: Abridge (documentation workflow → p
 
 **Contradiction to flag:** Miessler argues AI *will* replace the majority of knowledge work; Euclid argues the "AI replacing workers" narrative is both wrong and harmful (evidence "muddled at best" and "AI-washing" of layoffs is pervasive) [^src6]. The resolution: Miessler focuses on long-run capability convergence; Euclid focuses on near-term adoption framing and how wrong metaphors slow adoption in vertical markets. Both can be correct on their respective claims.
 
+## Anthropic Economic Index: adoption data (August 2025 baseline)
+
+Anthropic's Economic Index provides quantitative grounding for the qualitative narratives above [^src7]:
+
+**Overall adoption** (US, August 2025):
+- **40% of US employees** used AI at work — up from ~20% in 2023 [^src7]
+- Coding dominates at **36% of total usage**; writing/editing at ~23%; analysis/research at ~18% [^src7]
+- Education tasks grew from 9.3% → 12.4%; scientific tasks from 6.3% → 7.2% [^src7]
+- Directive task framing (users issuing commands to AI rather than requesting collaboration) rose from 27% → 39% of conversations [^src7] — consistent with the "AI is becoming infrastructure" narrative
+
+**Geographic unevenness** (AI Usage Index, normalized to US = 1.0):
+- Singapore: **4.57×** — the highest among tracked regions [^src7]
+- DC: 3.82×; Utah: 3.78×; Canada: 2.91×
+- India: 0.27×; Nigeria: 0.2×
+
+**API vs. consumer product patterns**:
+- API users (builders) show **77% automation-pattern conversations** vs. ~50% for Claude.ai users [^src7]
+- Builders direct AI to automate workflows; consumers more often ask for one-off assistance
+
+**Reading these numbers against the narrative sources**: the 40% adoption figure confirms that AI-utility diffusion is real and fast. The 60% of workers NOT using AI at work in 2023 (and 40% still not in 2025) represents the gap that "appliance-builders" (§ above) are filling — consistent with SeattleDataGuy's thesis that integration work drives demand. The geographic 4–5× variance suggests the diffusion is still highly uneven, which means "first-mover" advantages in AI-OS/AI-workflow building are real and time-limited [^src7].
+
 ## Related
 
 - [[ai-business/monetizing-code|Monetizing Code]] — "build the appliances" = finding monetizable AI workflows.
@@ -153,3 +177,4 @@ Examples of companies that get this right: Abridge (documentation workflow → p
 [^src4]: [Exactly Why and How AI Will Replace Knowledge Work](../../raw/web/web-exactly-why-and-how-ai-will-replace-knowledge-work.md)
 [^src5]: [The Future of Work is World Models](../../raw/web/web-the-future-of-work-is-world-models.md)
 [^src6]: [We Need to Talk About Agents](../../raw/web/web-we-need-to-talk-about-agents.md)
+[^src7]: [Anthropic Economic Index: Uneven Geographic and Enterprise Adoption](../../raw/web/web-anthropic-economic-index-report-uneven-geographic-and-enterp.md) — Anthropic

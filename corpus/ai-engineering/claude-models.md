@@ -33,6 +33,15 @@ sources:
   - path: raw/notes/notes-clippings-claude-for-the-legal-industry.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/web/web-introducing-sonnet-4-6.md
+    channel: web
+    ingested_at: 2026-06-21
+  - path: raw/web/web-introducing-claude-opus-4-8.md
+    channel: web
+    ingested_at: 2026-06-21
+  - path: raw/web/web-adaptive-thinking.md
+    channel: web
+    ingested_at: 2026-06-21
 aliases:
   - Claude model lineup
   - Claude models
@@ -46,7 +55,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-06-12
-updated: 2026-06-17
+updated: 2026-06-21
 ---
 
 # Claude Model Lineup
@@ -69,7 +78,32 @@ All of Fable 5, Opus 4.6+, and Sonnet 4.6 support a **1M-token context window**;
 
 ## Opus 4.8
 
-Anthropic's flagship agentic-coding model as of late May 2026, "designed to run longer engineering tasks with less supervision" [^src4]. Claimed **69.2% on SWE-Bench Pro** (a record for a public model at the time) and ~4x less likely than Opus 4.7 to let flaws in its own code pass unflagged [^src4]. The launch added **dynamic workflows** to Claude Code, able to spin up hundreds of parallel subagents to drive large migrations end to end [^src4]. In Claude Code, `opus` resolves to Opus 4.8 (requires v2.1.154+) and it is the default model on Max / Team Premium / Enterprise pay-as-you-go / Anthropic API account types [^src9]. One independent reviewer called it "a modest but tangible improvement" over its predecessor [^src6].
+Anthropic's flagship agentic-coding model as of late May 2026, "designed to run longer engineering tasks with less supervision" [^src4]. Claimed **69.2% on SWE-Bench Pro** (a record for a public model at the time) and ~4x less likely than Opus 4.7 to let flaws in its own code pass unflagged [^src4][^src14]. The launch added **dynamic workflows** to Claude Code (Enterprise/Team/Max plans), able to spin up hundreds of parallel subagents to drive large migrations end to end [^src4][^src14]. In Claude Code, `opus` resolves to Opus 4.8 (requires v2.1.154+) and it is the default model on Max / Team Premium / Enterprise pay-as-you-go / Anthropic API account types [^src9]. One independent reviewer called it "a modest but tangible improvement" over its predecessor [^src6].
+
+**Official benchmarks** [^src14]:
+- **Super-Agent benchmark**: the only model completing every case end-to-end across multi-step autonomous tasks
+- **CursorBench**: exceeds all prior Opus models at every effort level on real engineering tasks
+- **84% Online-Mind2Web**: leading score on web agent navigation benchmark
+- **4x less likely** to let code flaws pass unremarked during code review
+
+**Additional changes at Opus 4.8 launch** [^src14]:
+- **Fast mode 3x cheaper**: `/fast` mode in Claude Code (Opus Fast) is now 3x cheaper than at Opus 4.7 launch; price otherwise unchanged ($5/$25/M input/output)
+- **Messages API**: now accepts `system` role entries inside the `messages` array (not only as the top-level system parameter), enabling more flexible multi-turn system-instruction patterns
+
+## Sonnet 4.6
+
+Anthropic's **"most capable Sonnet model yet"** as of June 2026 [^src12]. The default model on Claude Free and Pro plans, and on API accounts in Claude Code.
+
+**Pricing and context**: $3 / $15 per million input/output tokens — unchanged from Sonnet 4.5 [^src12]. **1M-token context window** in beta (June 2026) [^src12].
+
+**Performance**: In Claude Code internal testing, Sonnet 4.6 was preferred over Sonnet 4.5 ~70% of the time, and — notably — preferred over Opus 4.5 ~59% of the time, meaning users chose it over a more powerful but more expensive model [^src12].
+
+**Key improvements** [^src12]:
+- **Computer use / OSWorld**: Significant improvements in visual grounding accuracy and UI interaction; see [[ai-engineering/computer-use|Computer Use]] for the model-selection table.
+- **Prompt injection robustness**: "A major improvement compared to Sonnet 4.5, performs similarly to Opus 4.6" in agentic robustness evaluations [^src12]. See [[ai-engineering/agent-security|Agent Security]].
+- **Agentic steering**: Enhanced ability to follow nuanced, multi-step instructions in long-horizon tasks [^src12].
+
+In the Claude Code alias table, `sonnet` resolves to Sonnet 4.6.
 
 ## Fable 5 (and Mythos 5)
 
@@ -97,6 +131,22 @@ Claude Security (the vulnerability-scanning product) uses Opus 4.7 by default fo
 
 See [[ai-engineering/claude-code|Claude Code]] (Opus 4.7 section) for the full usage guide.
 
+## Adaptive thinking
+
+Adaptive thinking is Anthropic's preferred mode for controlling model reasoning [^src13]. Rather than specifying a fixed token budget, the model decides per-step when and how much to reason.
+
+**Per-model support** [^src13]:
+
+| Model | Adaptive thinking | Manual budget_tokens |
+|---|---|---|
+| Fable 5, Mythos 5 | Always on (cannot disable) | Not accepted |
+| Opus 4.8, Opus 4.7 | **Only mode supported** | Rejected with 400 error |
+| Opus 4.6, Sonnet 4.6 | Recommended | Deprecated |
+
+API usage: `thinking: {"type": "adaptive"}`. Effort levels: `low`, `medium`, `high` (default), `xhigh`, `max` [^src13]. Higher effort = more thinking tokens, better performance on hard tasks, higher cost.
+
+**Key implication for harness builders**: any code passing `budget_tokens` to Opus 4.7 or later will receive a 400 error and must be updated to use adaptive mode. See [[ai-engineering/claude-api|Claude API]] for the API detail.
+
 ## Loop engineering and Fable 5 (stepping back)
 
 Two weeks with Fable 5 surfaced a pattern shift in how to work with the model [^src11]:
@@ -122,3 +172,6 @@ Two weeks with Fable 5 surfaced a pattern shift in how to work with the model [^
 [^src10b]: [Claude Security is now in public beta](../../raw/notes/notes-clippings-claude-security-is-now-in-public-beta.md) — Anthropic
 [^src10c]: [Best practices for using Claude Opus 4.7 with Claude Code](../../raw/notes/notes-clippings-best-practices-for-using-claude-opus-4-7-with-claude-code.md) — Anthropic
 [^src11]: [Two Weeks with Claude Fable 5 — Loop Engineering (email)](../../raw/email/email-2026-06-12-two-weeks-with-claude-fable-5.md)
+[^src12]: [Introducing Claude Sonnet 4.6](../../raw/web/web-introducing-sonnet-4-6.md) — Anthropic official blog
+[^src13]: [Adaptive Thinking — Claude API docs](../../raw/web/web-adaptive-thinking.md) — Anthropic
+[^src14]: [Introducing Claude Opus 4.8](../../raw/web/web-introducing-claude-opus-4-8.md) — Anthropic official blog

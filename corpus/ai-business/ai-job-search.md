@@ -12,6 +12,12 @@ sources:
   - path: raw/notes/notes-remote-software-engineering-job-guide.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/email/email-2026-06-15-how-to-land-a-devops-job.md
+    channel: email
+    ingested_at: 2026-06-21
+  - path: raw/email/email-2026-06-14-only-for-devs-trying-to-get-interviews.md
+    channel: email
+    ingested_at: 2026-06-21
 aliases:
   - finding a job using AI
   - AI job search
@@ -26,7 +32,7 @@ tags:
   - corpus/ai-business
   - concept
 created: 2026-06-15
-updated: 2026-06-17
+updated: 2026-06-21
 ---
 
 # Finding a Job Using AI
@@ -100,6 +106,34 @@ Remote interviews test "whether the company can trust you," not just technical s
 
 **The unifying thesis:** "Remote hiring is built on trust. If you can prove you work independently, communicate clearly, and deliver without hand-holding, you are no longer just another remote applicant" [^src3].
 
+## The interview pipeline: a 6-step model (DevOps framing)
+
+Most "how to land a job" guides focus exclusively on technical skills. KubeCraft's Mischa van den Burg (nurse → senior DevOps engineer) argues that technical skills are only **~30% of the equation** — and landing the role requires succeeding at all six steps [^src4]:
+
+1. **Tech skills** — what most roadmaps cover. Necessary but not sufficient.
+2. **Employer awareness** — companies must know you exist. Without this, skills don't matter.
+3. **Convinced to interview** — a recruiter or hiring manager must believe it's worth their time to talk to you.
+4. **Prove capability** — demonstrate fit during the actual interview process.
+5. **Negotiate compensation** — most candidates leave money on the table by not negotiating.
+6. **Contract signed** — closing the loop; many offers stall between verbal and written.
+
+**Practical implication**: if you're stuck in a job search, diagnose *which step* is failing. Not getting callbacks? Step 2–3. Getting interviews but not offers? Step 4. The fix for step 2 (awareness) is not more Leetcode — it's LinkedIn optimization, posting, reaching out, or referrals.
+
+## The saturated market: quantitative context
+
+Greenhouse data across 6,000+ companies and 640M applications (2022–2025) shows how much harder the market has become [^src5]:
+
+| Metric | 2022 | 2025 | Change |
+|---|---|---|---|
+| Applications per open role | 116 | 244 | **+111%** |
+| Applications per recruiter | 146 | 746 | **+412%** |
+
+The recruiter-load increase is especially significant: a recruiter seeing 5× more applications in the same time budget has ~5× less attention per candidate. AI screening tools compound this — volume is filtered automatically, and only strong signals surface.
+
+**The practical advice**: "Pick one lane (backend / frontend / data engineer) and make it obvious across your resume, LinkedIn, projects, and applications" [^src5]. A scattered profile reads as uncertainty, which is penalized when a recruiter has 700+ other candidates to process.
+
+This data directly supports the "quality over volume" principle — but also raises the stakes for **visibility** (Step 2 above): in a 5× noisier market, a passive application alone is not enough; inbound signals (referrals, LinkedIn, direct outreach) are proportionally more valuable.
+
 ## The discipline: quality over volume
 
 The source is emphatic that mass application backfires: "'1,000 applications' is a great headline, but plenty of mass-apply tools produce dismal interview rates because spraying generic applications doesn't work anymore — recruiters and their AI screeners can smell it" [^src1]. The mitigations are **per-job scoring with a high threshold** and **per-job tailoring**, plus operational safety — use `--dry-run` first, run in your own present browser, and read the open-source code before handing it your resume and browser session [^src1][^src2]. This mirrors the portfolio/interview guidance in [[ai-business/technical-career|Navigating a Technical Career]] (target roles; signal fit fast) — tailoring *is* the human judgment the tool automates, not replaces.
@@ -119,3 +153,5 @@ The source is emphatic that mass application backfires: "'1,000 applications' is
 [^src1]: [The Subtle Art of Finding a Job Using AI](../../raw/email/email-2026-06-01-the-subtle-art-of-finding-a-job-using-ai.md) (AI+ Community newsletter)
 [^src2]: [Pickle-Pixel / ApplyPilot — autonomous job-application agent](../../raw/web/github-pickle-pixel-applypilot-ai-agent-that-applies-to-jobs.md) (fetched via the source email)
 [^src3]: [Remote Software Engineering Job Guide (5 phases)](../../raw/notes/notes-remote-software-engineering-job-guide.md) (first-party note, clipped from Obsidian inbox 2026-06-17)
+[^src4]: [How to Land a DevOps Job (KubeCraft)](../../raw/email/email-2026-06-15-how-to-land-a-devops-job.md) — Mischa van den Burg, KubeCraft
+[^src5]: [Only for Devs Trying to Get Interviews (Tech With Tim)](../../raw/email/email-2026-06-14-only-for-devs-trying-to-get-interviews.md) — Tech With Tim; cites Greenhouse 2025 data

@@ -1025,3 +1025,175 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   - ingest: 39 ingested · 11 deferred · status=ok
 - lint:
   - 0 broken wikilinks · 1 broken citations · 0 orphans · 8 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+
+## [2026-06-21 02:00] ingest | Creating Your Own Agentic OS Is Easy (Insanely Powerful)
+- source: raw/youtube/youtube-w0S-khYCaB4-creating-your-own-agentic-os-is-easy-insanely-powerful.md
+- channel: youtube
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/ai-operating-system.md]
+- new pages: [corpus/ai-engineering/ai-operating-system.md]
+- notes: ingest-auto run; 20 processed, 0 deferred
+
+## [2026-06-21 02:00] ingest | Why AI Agents Need an Operating System
+- source: raw/youtube/youtube-IVGjBxqygmI-why-ai-agents-need-an-operating-system.md
+- channel: youtube
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/ai-operating-system.md]
+- new pages: []
+- notes: ingest-auto run; AI OS concept cluster (9 sources → 1 new page)
+
+## [2026-06-21 02:00] ingest | 5 Skills to Build an AI Operating System
+- source: raw/youtube/youtube-zElKhlFkqU4-5-skills-to-build-an-ai-operating-system-like-the-1-full-gui.md
+- channel: youtube
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/ai-operating-system.md]
+- new pages: []
+- notes: ingest-auto run
+
+## [2026-06-21 02:00] ingest | What Is an AI OS and Why Every Business Will Need It
+- source: raw/youtube/youtube-DXcVT07bQ6g-what-is-an-ai-operating-system-and-why-every-business-will-n.md
+- channel: youtube
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/ai-operating-system.md]
+- new pages: []
+- notes: ingest-auto run
+
+## [2026-06-21 02:00] ingest | How to Build a Personal Agentic Operating System
+- source: raw/youtube/youtube-ntvkDnk_5jA-how-to-build-a-personal-agentic-operating-system.md
+- channel: youtube
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/ai-operating-system.md]
+- new pages: []
+- notes: ingest-auto run; 7-layer model source
+
+## [2026-06-21 02:00] ingest | I Turned Claude Opus 4.8 Into My Entire AI Operating System
+- source: raw/youtube/youtube-0WDkwMxj13s-i-turned-claude-opus-4-8-into-my-entire-ai-operating-system.md
+- channel: youtube
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/ai-operating-system.md]
+- new pages: []
+- notes: ingest-auto run; 4C's framework source
+
+## [2026-06-21 02:00] ingest | Build & Sell Claude Code Operating Systems (2-Hour Course)
+- source: raw/youtube/youtube-bCljOfCH8Ms-build-sell-claude-code-operating-systems-2-hour-course.md
+- channel: youtube
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/ai-operating-system.md]
+- new pages: []
+- notes: ingest-auto run
+
+## [2026-06-21 02:00] ingest | How to Build Your AI Operating System with Claude Code (Full)
+- source: raw/youtube/youtube-vvDdTPFhCp8-how-to-build-your-ai-operating-system-with-claude-code-full.md
+- channel: youtube
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/ai-operating-system.md]
+- new pages: []
+- notes: ingest-auto run; 3-component model source
+
+## [2026-06-21 02:00] ingest | I Gave Pi Access to Obsidian and I'm Not Looking Back
+- source: raw/youtube/youtube-JnQcPzjC6Vo-i-gave-pi-access-to-obsidian-and-i-m-not-looking-back.md
+- channel: youtube
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/ai-operating-system.md]
+- new pages: []
+- notes: ingest-auto run; Obsidian as memory layer source
+
+## [2026-06-21 02:00] ingest | Stop Selling AI Agents, Sell AI Operating Systems Instead
+- source: raw/youtube/youtube-i79Xyi1RjUo-stop-selling-ai-agents-sell-ai-operating-systems-instead-hug.md
+- channel: youtube
+- domain: ai-business
+- pages touched: [corpus/ai-business/monetizing-code.md]
+- new pages: []
+- notes: ingest-auto run; AI OS as productized service, 6 revenue streams
+
+## [2026-06-21 02:00] ingest | Introducing Claude Sonnet 4.6
+- source: raw/web/web-introducing-sonnet-4-6.md
+- channel: web
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/claude-models.md, corpus/ai-engineering/computer-use.md, corpus/ai-engineering/agent-security.md]
+- new pages: []
+- notes: ingest-auto run; Sonnet 4.6 official launch post
+
+## [2026-06-21 02:00] ingest | Introducing Claude Opus 4.8
+- source: raw/web/web-introducing-claude-opus-4-8.md
+- channel: web
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/claude-models.md]
+- new pages: []
+- notes: ingest-auto run; Super-Agent benchmark, CursorBench, Messages API change
+
+## [2026-06-21 02:00] ingest | Effective Context Engineering for AI Agents
+- source: raw/web/web-effective-context-engineering-for-ai-agents.md
+- channel: web
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/context-engineering.md]
+- new pages: []
+- notes: ingest-auto run; Anthropic authoritative definition; context rot; system-prompt altitude
+
+## [2026-06-21 02:00] ingest | Mitigating the Risk of Prompt Injections in Browser Use
+- source: raw/web/web-mitigating-the-risk-of-prompt-injections-in-browser-use.md
+- channel: web
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/agent-security.md, corpus/ai-engineering/computer-use.md]
+- new pages: []
+- notes: ingest-auto run; 1% attack success rate; Claude for Chrome beta
+
+## [2026-06-21 02:00] ingest | Adaptive Thinking
+- source: raw/web/web-adaptive-thinking.md
+- channel: web
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/claude-models.md]
+- new pages: []
+- notes: ingest-auto run; per-model support table; manual budget_tokens → 400 error on Opus 4.7+
+
+## [2026-06-21 02:00] ingest | Anthropic Economic Index Report
+- source: raw/web/web-anthropic-economic-index-report-uneven-geographic-and-enterp.md
+- channel: web
+- domain: ai-business
+- pages touched: [corpus/ai-business/ai-and-the-job-market.md]
+- new pages: []
+- notes: ingest-auto run; 40% US employees use AI; Singapore AUI 4.57x; API users 77% automation
+
+## [2026-06-21 02:00] ingest | SDKs — Model Context Protocol
+- source: raw/web/web-sdks-model-context-protocol.md
+- channel: web
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/mcp.md]
+- new pages: []
+- notes: ingest-auto run; SDK tier table (T1-T3); 300M downloads/month
+
+## [2026-06-21 02:00] ingest | How to Land a DevOps Job
+- source: raw/email/email-2026-06-15-how-to-land-a-devops-job.md
+- channel: email
+- domain: ai-business
+- pages touched: [corpus/ai-business/ai-job-search.md]
+- new pages: []
+- notes: ingest-auto run; 6-step model; step 1 = only 30% of equation
+
+## [2026-06-21 02:00] ingest | Only for Devs Trying to Get Interviews
+- source: raw/email/email-2026-06-14-only-for-devs-trying-to-get-interviews.md
+- channel: email
+- domain: ai-business
+- pages touched: [corpus/ai-business/ai-job-search.md, corpus/ai-business/ai-and-the-job-market.md]
+- new pages: []
+- notes: ingest-auto run; Greenhouse: +111% apps/role, +412% apps/recruiter (2022–2025)
+
+## [2026-06-21 02:00] ingest | 2026 Free Data Analyst Bootcamp (Alex The Analyst)
+- source: raw/youtube/youtube-cnjhHZNJEDk-2026-free-data-analyst-bootcamp-24-hours-for-free-sql-excel.md
+- channel: youtube
+- domain: data-engineering
+- pages touched: [corpus/data-engineering/data-engineering-interview.md]
+- new pages: []
+- notes: ingest-auto run; DA vs DE emphasis comparison; SQL #1 on both tracks
+
+## [2026-06-21T12:14] config | scheduled run
+- collectors:
+  - gmail: 1 collected · status=ok
+  - obsidian: 0 collected · status=ok
+  - pdf: 0 collected · status=ok
+  - youtube: 20 collected · status=ok
+  - links_refetch: 0 refetched · status=ok
+- ingest:
+  - ingest: 20 ingested · 0 deferred · status=ok
+- lint:
+  - 0 broken wikilinks · 0 broken citations · 0 orphans · 8 stubs

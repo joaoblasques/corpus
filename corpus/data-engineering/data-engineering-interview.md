@@ -12,6 +12,9 @@ sources:
   - path: raw/email/email-2025-07-23-5-steps-to-a-high-paying-de-job.md
     channel: email
     ingested_at: 2026-06-19
+  - path: raw/youtube/youtube-cnjhHZNJEDk-2026-free-data-analyst-bootcamp-24-hours-for-free-sql-excel.md
+    channel: youtube
+    ingested_at: 2026-06-21
 aliases:
   - data engineering interview
   - DE interview prep
@@ -23,8 +26,8 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-19
-updated: 2026-06-19
-last_confirmed: 2026-06-19
+updated: 2026-06-21
+last_confirmed: 2026-06-21
 ---
 
 # Data Engineering Interview & Job Search
@@ -58,6 +61,18 @@ The skills are ranked by how often they come up [^skills]:
 4. **Prepare per company** — research company-specific questions *before* grinding. Typical rounds: recruiter call (talk experience, ask tech-screen format) → tech screen (45–60 min DSA + SQL) → pre-onsite recruiter call (ask # and type of interviews, prep docs) → onsite (DSA — failing usually = no-hire; SQL — Leetcode-hard practice; system design — standard or data-oriented; behavioral — prep STAR answers, read the company blog). Have **>3 questions ready per interviewer** [^job].
 5. **Offers & negotiation** — get **multiple offers from publicly-traded companies** for leverage even if you won't join them; research pay on Levels.fyi/TeamBlind; don't accept a lowball [^job].
 
+## Data analyst vs. data engineer: adjacent skills, different emphasis
+
+A 24+ hour free data analyst bootcamp (Alex The Analyst, 2026) covers: SQL, Excel, Python, Power BI, Tableau, GitHub, AWS, R, and Databricks [^da]. **SQL is ranked #1** — consistent with the DE interview ranking above [^da].
+
+The key difference in emphasis between DA and DE interviews [^da]:
+- **Data analyst**: SQL → Excel/Google Sheets → Power BI/Tableau (visualization) → Python (pandas/analysis); interviews focus on reporting, dashboards, and business insight generation
+- **Data engineer**: SQL → Python (pipeline-grade) → Spark/distributed systems → ETL/ELT, orchestration, infrastructure; interviews focus on pipeline design, scale, and reliability
+
+Shared core: SQL fluency, Python proficiency, and the ability to communicate data as business insight. The analyst track emphasizes visualization and BI tools; the engineer track emphasizes pipeline tooling and distributed compute.
+
+Databricks appears on both tracks — analysts use it for querying and notebook-based analysis; engineers use it for ETL pipelines and large-scale data processing [^da].
+
 ## See also
 
 - [[data-engineering/data-engineer-role|The Data Engineer Role]] — value = business impact + fundamentals; seniority; the DA→DE transition
@@ -72,3 +87,4 @@ The skills are ranked by how often they come up [^skills]:
 
 [^skills]: [10 Skills to Ace Your Data Engineering Interviews](../../raw/web/10-skills-to-ace-your-data-engineering-interviews-start-data.md)
 [^job]: [5 Steps to Land a High-Paying Data Engineering Job](../../raw/web/5-steps-to-land-a-high-paying-data-engineering-job-start-dat.md)
+[^da]: [2026 Free Data Analyst Bootcamp (Alex The Analyst)](../../raw/youtube/youtube-cnjhHZNJEDk-2026-free-data-analyst-bootcamp-24-hours-for-free-sql-excel.md) — YouTube

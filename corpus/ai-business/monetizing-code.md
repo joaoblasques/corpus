@@ -21,6 +21,9 @@ sources:
   - path: raw/email/email-2026-05-30-ai-that-knows-things-vs-ai-that-does-things.md
     channel: email
     ingested_at: 2026-06-16
+  - path: raw/youtube/youtube-i79Xyi1RjUo-stop-selling-ai-agents-sell-ai-operating-systems-instead-hug.md
+    channel: youtube
+    ingested_at: 2026-06-21
 aliases:
   - make money with code
   - freelance developer
@@ -33,7 +36,7 @@ tags:
   - corpus/ai-business
   - concept
 created: 2026-06-12
-updated: 2026-06-16
+updated: 2026-06-21
 ---
 
 # Monetizing Code
@@ -127,6 +130,23 @@ Aush Singh (freeCodeCamp) documents the **Ad Snap Studio** build — a polished 
 
 Connects to [[ai-business/ai-consulting-playbook|AI Consulting Playbook]] — the discovery call identifies the client's workflow; the polished project is the prescription from call two.
 
+## AI OS as a productized service: six income streams
+
+One emerging model reframes AI OS not as a personal productivity layer but as a deliverable service [^src7]. The "stop selling AI agents, sell AI operating systems instead" positioning argues:
+
+- **AI agents** are task-specific point solutions; a client sees one thing work and still has 50 other manual processes
+- **AI OS** is a full "wrapper around the business" — context, memory, skills, and connections working together — that scales to all a client's workflows
+
+Six revenue streams attached to building and selling these systems [^src7]:
+1. **Enterprise sales** — one-time or project fee to install/configure an AIOS for a company
+2. **AI services** — recurring revenue for ongoing operation, maintenance, and expansion of the OS
+3. **AI consulting** — strategic engagements: auditing a client's workflows, designing the right layer structure
+4. **Personal brand** — content documenting your builds; the AIOS itself is portfolio + proof of competence
+5. **AI education** — courses, workshops, cohorts teaching clients or other practitioners how to build AIOS
+6. **Internal businesses** — using your own AIOS to run a fully automated business unit (writing, research, content ops, outreach)
+
+**Relevance to the rest of this domain**: this builds directly on the "sell a result, not code" framing above. The result being sold is not a single automation but a system — and recurring AI services (item 2) recaptures the subscription economics that pure project work lacks. See [[ai-engineering/ai-operating-system|AI Operating System]] for the technical architecture.
+
 ## Gotchas / promo framing
 
 - All sources are list-building newsletters. The "make money with code" emails (Tech With Tim) funnel toward courses; the offer-positioning and "AI that does things" emails (Return My Time / Corey) promote a podcast, the Cowork ecosystem, and **AI Operator Academy** (a paid course — "Inside AI Operator Academy, the most common agents are already built") [^src1][^src2][^src3][^src4].
@@ -146,3 +166,4 @@ Connects to [[ai-business/ai-consulting-playbook|AI Consulting Playbook]] — th
 [^src4]: [AI that knows things vs. AI that does things](../../raw/email/email-2026-05-30-ai-that-knows-things-vs-ai-that-does-things.md) — Return My Time (Corey), promoting AI Operator Academy
 [^src5]: [The Playbook for a $100M AI Agency (YouTube)](../../raw/youtube/youtube-8ktcSaSTvxk-the-playbook-for-a-100m-ai-agency.md)
 [^src6]: [Build and Deploy a Polished AI Project — and Get Sales (freeCodeCamp / Aush Singh)](../../raw/youtube/youtube-ObiAWFqgpMg-build-and-deploy-a-polished-ai-project-and-get-sales.md)
+[^src7]: [Stop Selling AI Agents, Sell AI Operating Systems Instead](../../raw/youtube/youtube-i79Xyi1RjUo-stop-selling-ai-agents-sell-ai-operating-systems-instead-hug.md) — Kevin Badi, YouTube
