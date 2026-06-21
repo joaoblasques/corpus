@@ -163,10 +163,15 @@ def _critic_call(page_path: Path, sources_text: str, *, _run=None):
     """Headless Sonnet: does every new claim trace to a cited source? Returns (ok, notes)."""
     run = _run if _run is not None else subprocess.run
     prompt = (
-        "You are a strict fact-checker. Below is a corpus page and the FULL text of the "
-        "sources it cites. List EVERY claim on the page that is NOT supported by, is "
-        "misattributed to, or is absent from these sources. If all claims are supported, "
-        'reply EXACTLY {"ok": true, "issues": []}. Otherwise {"ok": false, "issues": ["..."]}.'
+        "You are a provenance fact-checker. The page below PARAPHRASES and COMPRESSES the "
+        "sources it cites — rewording, summarizing, and synthesis are EXPECTED and correct; "
+        "do NOT flag them. Flag a claim ONLY if it is genuinely UNSUPPORTED: a fact, number, "
+        "name, date, or quote-attribution that appears in NO cited source (fabrication), is "
+        "attributed to the wrong source/person (misattribution), or directly CONTRADICTS a "
+        "source. Faithful paraphrase that preserves a source's meaning is fine even if the "
+        "wording differs. If every claim is faithfully grounded, reply EXACTLY "
+        '{"ok": true, "issues": []}. Otherwise list ONLY the genuinely unsupported/'
+        'misattributed/contradicting claims: {"ok": false, "issues": ["..."]}.'
         f"\n\n=== PAGE ===\n{page_path.read_text(encoding='utf-8', errors='ignore')}"
         f"\n\n=== CITED SOURCES ===\n{sources_text}"
     )
