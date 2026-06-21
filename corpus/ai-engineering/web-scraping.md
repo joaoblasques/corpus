@@ -3,7 +3,7 @@ type: entity
 domain: ai-engineering
 status: stub
 sources:
-  - path: raw/_inbox/email-2026-05-02-d4vinci-scrapling-an-adaptive-web-scraping-framework-that-ha.md
+  - path: raw/email/email-2026-05-02-d4vinci-scrapling-an-adaptive-web-scraping-framework-that-ha.md
     channel: inbox
     ingested_at: 2026-06-12
   - path: raw/web/github-d4vinci-scrapling-an-adaptive-web-scraping-framework.md
