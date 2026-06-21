@@ -115,7 +115,7 @@ def enqueue_review(kind: str, detail: dict, *, path=None) -> None:
         p.write_text("# Custodian Review Queue\n\n> Items needing your decision. Clear as you go.\n",
                      encoding="utf-8")
     with p.open("a", encoding="utf-8") as fh:
-        fh.write(f"- [{kind}] {json.dumps(detail, ensure_ascii=False)}\n")
+        fh.write(f"- [{kind}] {json.dumps(detail, ensure_ascii=False, default=str)}\n")
 
 
 def write_digest(run_id: str, label: str, entries: list, *, path=None, _now=None) -> None:
@@ -128,7 +128,7 @@ def write_digest(run_id: str, label: str, entries: list, *, path=None, _now=None
     at = _now if _now is not None else __import__("datetime").datetime.now().isoformat(timespec="minutes")
     lines = [f"\n## [{at}] {label} · {run_id}"]
     for e in entries:
-        lines.append(f"- {json.dumps(e, ensure_ascii=False)}")
+        lines.append(f"- {json.dumps(e, ensure_ascii=False, default=str)}")
     if not entries:
         lines.append("- (no actions)")
     with p.open("a", encoding="utf-8") as fh:

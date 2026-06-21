@@ -207,3 +207,12 @@ def test_smoke_runs_loop_to_convergence_without_commit(monkeypatch, capsys):
     assert rc == 0
     assert '"stop_reason": "converged_dry"' in out
     assert committed == [] and digest_calls == [] and finalize_calls == []   # smoke commits/writes nothing
+
+
+def test_write_digest_handles_non_serializable_entry(tmp_path):
+    """An entry containing a Path (e.g. a worklist 'action') must not crash json.dumps."""
+    from pathlib import Path as _P
+    d = tmp_path / "_digest.md"
+    c.write_digest("run-x", "gardener", [{"action": _P("/abs/corpus/x.md"), "ok": True}],
+                   path=d, _now="2026-06-21T10:00")
+    assert "/abs/corpus/x.md" in d.read_text()   # stringified, not crashed
