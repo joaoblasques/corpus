@@ -1,7 +1,7 @@
 ---
 type: entity
 domain: ai-engineering
-status: stub
+status: draft
 sources:
   - path: raw/web/agent-evolution-master-github-copilot-agent-mode-community-d.md
     channel: web
@@ -15,42 +15,52 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-06-19
-updated: 2026-06-19
+updated: 2026-06-21
 ---
 
 # GitHub Copilot (Agent Mode)
 
-**TL;DR.** GitHub Copilot's **Agent Mode** is an agentic coding capability inside VS Code that "comprehends your entire project context, implementing complex features across multiple files with simple natural language prompts" [^src1]. It identifies which files need changing, makes coordinated multi-file edits, runs necessary commands, and **self-corrects errors** it encounters — powered by models from **OpenAI, Anthropic, and Google** [^src1]. It is GitHub's entry in the conductor→orchestrator shift covered in [[ai-engineering/agentic-coding|Agentic Coding]], where it appears alongside Claude Code and Cursor as an orchestration-tier tool.
+**TL;DR.** GitHub Copilot's **Agent Mode** is an agentic coding capability inside VS Code that, per GitHub, "comprehends your entire project context, implementing complex features across multiple files with simple natural language prompts" [^src1]. It identifies which files need changing, makes coordinated multi-file edits, runs the necessary commands to test, and self-corrects errors it encounters — backed by models from OpenAI, Anthropic, and Google [^src1]. GitHub frames it as a fundamental evolution in AI-assisted development that turns ideas into functional code [^src1]. It is GitHub's entry in the conductor→orchestrator shift covered in [[ai-engineering/agentic-coding|Agentic Coding]], where it sits alongside Claude Code and Cursor as an orchestration-tier tool.
 
 ## What Agent Mode does
 
 Per GitHub's description, Agent Mode turns natural-language intent into working changes [^src1]:
 
-- **Whole-project context** — understands the project rather than a single file, so it can implement features that span many files [^src1].
-- **Coordinated edits + commands** — identifies the files to change, edits them together, and runs commands to test/verify [^src1].
-- **Self-correction** — detects and fixes errors it hits during a task [^src1].
-- **Multi-model** — backed by frontier models from OpenAI, Anthropic, and Google [^src1].
-- **For everyone** — pitched not just at developers (e.g. "add authentication to my app") but also non-developers (e.g. a technical writer's "create a documentation structure for my API") [^src1].
+- **Whole-project context** — it comprehends the entire project rather than a single file, so it can implement features that span multiple files [^src1].
+- **Coordinated edits + commands** — it identifies which files need changing, makes the edits together, and runs the commands needed to test things [^src1].
+- **Self-correction** — it self-corrects errors it encounters during a task [^src1].
+- **Multi-model** — it is powered by models from OpenAI, Anthropic, and Google [^src1].
+- **For everyone** — GitHub pitches it at both developers (the example of asking it to add authentication to an app) and non-developers (a technical writer asking it to create a documentation structure for an API) [^src1].
+
+## The "Agent Evolution" learning campaign
+
+The source is GitHub's "Agent Evolution: Master GitHub Copilot Agent Mode" announcement — a two-week learning journey running May 12–26, framed as a path to "vibe-code with GitHub Copilot" [^src1]. The published Week 1 schedule signals the intended workflow [^src1]:
+
+- **Getting started / setup** — guides for getting Copilot Agent Mode up and running in VS Code [^src1].
+- **Use cases for everyone** — a deep dive into real-world Agent Mode examples across disciplines and skill levels [^src1].
+- **Challenge day** — automating a repetitive task as a hands-on exercise for developers and non-developers alike [^src1].
+- **MCP servers** — integrating Model Context Protocol servers to extend Agent Mode's capabilities [^src1].
 
 ## MCP integration
 
-Agent Mode integrates with **[[ai-engineering/mcp|Model Context Protocol]] servers** to extend its capabilities beyond the editor — framed in GitHub's learning campaign as "supercharging Agent Mode with MCP servers" [^src1]. A second tier, **Copilot Coding Agents**, is positioned as the more advanced/autonomous evolution [^src1].
+Agent Mode integrates with **[[ai-engineering/mcp|Model Context Protocol]] servers** to extend its capabilities beyond the editor — the campaign frames this as a partnership that supercharges Agent Mode with MCP servers [^src1]. The campaign also references a more advanced **Copilot Coding Agents** tier as the next step beyond Agent Mode [^src1].
 
 ## Limitations (community observations)
 
 The source is a GitHub community discussion; a practitioner comment tempers the marketing with hands-on caveats [^src1]:
 
-- **Non-English experience lags** — e.g. weaker for Thai-language prompts; works well fixing code in English [^src1].
-- **Can get stuck in loops** and produce verbose, inaccurate output — the community uses the term **"AI slop"** [^src1]. In a real-world experiment against the high-quality CURL open-source project, the AI's conclusions were "inaccurate and overly verbose" [^src1].
+- **Non-English experience lags** — VS Code's Copilot lacks Thai-language instructions, so answers often don't fit user needs, though it works well fixing code in English [^src1].
+- **Can get stuck in loops** and produce output the community labels "AI slop" [^src1]. In an experiment against the CURL open-source project, the commenter found the AI's conclusions inaccurate and overly verbose [^src1].
+- **Weak at security reports** — the commenter used GPT-4.0 to generate a vulnerability report and found the results highlighted the AI's current limitations [^src1]. CURL was chosen because it is one of the highest-quality open-source projects, alongside OpenSSL — a deliberately demanding bar for AI-generated output [^src1].
 
-> Source caveat: this is a vendor learning-campaign announcement plus user comments, not an independent technical evaluation — treat capability claims as GitHub's framing and the limitations as anecdotal field reports.
+> Source caveat: this is a vendor learning-campaign announcement plus user comments, not an independent technical evaluation — treat the capability claims as GitHub's framing and the limitations as anecdotal field reports.
 
 ## Related
 
 - [[ai-engineering/agentic-coding|Agentic Coding]] — the conductor→orchestrator framing where Copilot is an orchestration-tier tool; the verification bottleneck
 - [[ai-engineering/claude-code|Claude Code]] — the comparable Anthropic coding agent
 - [[ai-engineering/mcp|MCP]] — the protocol Agent Mode integrates for external capabilities
-- [[ai-engineering/vibe-coding|Vibe Coding]] — the "everyone can build" framing Agent Mode leans on
+- [[ai-engineering/vibe-coding|Vibe Coding]] — the "everyone can build" framing the campaign leans on
 - [[ai-engineering/README|AI Engineering hub]]
 
 ---
