@@ -1,7 +1,9 @@
 ---
 type: entity
 domain: ai-engineering
-status: stub
+status: draft
+confidence: 0.8
+last_confirmed: 2025-04-17
 sources:
   - path: raw/email/email-2025-04-17-our-most-powerful-reasoning-models-gpt-4-1-codex-cli-and-new.md
     channel: email
@@ -18,12 +20,14 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-06-19
-updated: 2026-06-19
+updated: 2026-06-21
 ---
 
 # OpenAI
 
 **TL;DR**: OpenAI's developer model lineup as announced in its April 2025 Dev Digest — the **o3 / o4-mini** reasoning models, the developer-focused **GPT-4.1** family (up to 1M-token context), the open-source **Codex CLI** coding agent, a programmatic **Evals API**, and a new suite of audio models for voice agents [^src1]. Peer lab/models to Anthropic's Claude (contrast: [[ai-engineering/claude-models|Claude Model Lineup]]).
+
+This page captures a single point-in-time announcement: OpenAI framed the release as "a slew of new models and features for developers" spanning coding, voice experiences, and "faster, more capable agentic apps" [^src1]. The lineup below therefore reads as four parallel tracks — reasoning, developer-first, coding agent, and audio — rather than one model.
 
 ## Reasoning models: o3 / o4-mini
 
