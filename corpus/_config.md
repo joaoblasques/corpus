@@ -104,6 +104,12 @@ the scheduled job. The starred flow is unchanged (de-star + archive on collectio
 
 ---
 
+## GitHub repos (channel `github`)
+
+The daily run collects the user's **starred** repos via the `gh` CLI (`bin/github_client.py run`) — one "repo digest" per repo (README + markdown docs + a metadata overview: description, topics, language, stars, latest release). Deduped by the frontmatter `repo: <owner/name>`; **stars are left in place** (a bookmark, not a queue). Sources land in `raw/_inbox` (channel `github`), drain via the normal ingest, then move to `raw/github`. No source code is collected. Auth: `gh` (skipped with `not configured` if unauthed).
+
+---
+
 ## Scheduled automation (two macOS LaunchAgents)
 
 The corpus runs two unattended jobs. Both use the Claude Code **subscription** (the

@@ -1209,3 +1209,8 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   - ingest: 0 ingested · 0 deferred · status=failed · error=API Error: 529 Overloaded. This is a server-side issue, usually temporary — try again in a moment. If it persists, check https://status.claude.com.
 - lint:
   - 0 broken wikilinks · 0 broken citations · 0 orphans · 2 stubs
+
+## [2026-06-22 13:39] config | GitHub repo collection (starred repos)
+- new collector: bin/collect_github.py + bin/github_client.py (gh CLI); wired into the 2am run
+- collects starred repos as one repo-digest each (README + docs + overview), deduped by repo:,
+  leaves stars in place; channel github -> raw/github. Spec: docs/superpowers/specs/2026-06-22-github-repo-collection-design.md
