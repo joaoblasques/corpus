@@ -75,7 +75,8 @@ the scheduled job. The starred flow is unchanged (de-star + archive on collectio
 
 - `vault_root`: `/Users/jonasblasques/Dev/second-brain`
 - **Include (collect → reap):** `Clippings/` (top-level), `00_Inbox/Clippings/`,
-  `03_Resources/{Books, Snippets, Prompt Templates}`, `06_Metadata/Reference/`.
+  `03_Resources/Books`, `06_Metadata/Reference/`. (Snippets / Prompt Templates removed
+  2026-06-22 — not present in the vault.)
 - **PARA-native (ingested in place, never reaped):** `03_Resources/Articles/`,
   `03_Resources/Study Notes/` — these keep their in-vault citations.
 - **Exclude:** `03_Resources/llm-wiki-system` (corpus mirror), `01_Projects`, `02_Areas`,
