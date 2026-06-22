@@ -35,9 +35,11 @@ modified.
 ## Roadmap (vault-side; tracked in vault `06_Metadata/Plans/2026-06-22-claude-watch-integration-spec.md`)
 
 - **Phase 1 (done):** standalone `/watch` → vault `youtube_raw/`.
-- **Phase 2:** after `collect-youtube` pulls a playlist, run claude-watch over each collected
-  video for richer analysis notes. Accepts the LLM-in-loop cost (analysis needs a Claude
-  session per video).
+- **Phase 2 (done):** corpus-collected videos are auto-queued for claude-watch deep analysis into
+  the vault sink. Vault-side deliverables: `.claude/scripts/yt_watch_queue.py` (read-only queue =
+  collected − sink), `/yt-deepen [N]` (manual in-session drain), `.claude/scripts/yt_deepen_auto.sh`
+  (throttled unattended drain, off by default). Never skips long videos; throttles rate instead.
+  Read-only against this repo — no corpus writes.
 - **Phase 3:** add a `--deep` mode to the vault's `/yt-batch` routing videos through the engine.
 - **Phase 4 (deferred — needs explicit decision):** swap `collect-youtube`'s transcript step to
   claude-watch's `transcribe.py`. Supersedes Phase 2 redundancy and inverts the corpus→vault
