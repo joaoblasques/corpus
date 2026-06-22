@@ -1807,3 +1807,16 @@ class TestBuildSummary:
         s = scheduled_run.build_summary({}, dry_run=True)
         assert s["email_relabel"] == {}   # absent tally -> empty dict, not KeyError
         assert s["dry_run"] is True
+
+
+class TestGithubCollector:
+    def test_github_leg_invoked_and_channel_dir(self):
+        assert scheduled_run._CHANNEL_DIR.get("github") == "github"
+        called = []
+        def fake_run(cmd, **kwargs):
+            called.append(" ".join(cmd))
+            import types
+            return types.SimpleNamespace(returncode=0, stdout='{"written": 2}', stderr="")
+        res = scheduled_run.run_collectors(_subprocess_run=fake_run)
+        assert any("github_client.py" in s and "run" in s for s in called), called
+        assert res["github"]["status"] == "ok" and res["github"]["collected"] == 2

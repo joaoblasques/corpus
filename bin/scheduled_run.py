@@ -247,6 +247,28 @@ def run_collectors(
         except Exception as exc:  # noqa: BLE001
             results["youtube"] = {"status": "failed", "collected": 0, "error": str(exc)}
 
+    # --- GitHub: collect new starred repos (README + docs + overview) ---
+    try:
+        proc = _run(
+            [sys.executable, str(BIN / "github_client.py"), "run"],
+            capture_output=True,
+            text=True,
+        )
+        if proc.returncode != 0:
+            results["github"] = {
+                "status": "failed", "collected": 0,
+                "error": proc.stderr.strip() or f"exit {proc.returncode}",
+            }
+        else:
+            try:
+                data = json.loads(proc.stdout)
+                collected = data.get("written", 0)
+            except (json.JSONDecodeError, AttributeError):
+                collected = 0
+            results["github"] = {"status": "ok", "collected": collected}
+    except Exception as exc:  # noqa: BLE001
+        results["github"] = {"status": "failed", "collected": 0, "error": str(exc)}
+
     # --- Email link re-fetch (self-heal transient fetch-failures) ---
     # Retry high-score links that failed to fetch at collection time so their
     # pointer email gains a companion and becomes ingestable instead of deferring
@@ -288,6 +310,7 @@ _CHANNEL_DIR: dict[str, str] = {
     "matter": "matter",
     "notes": "notes",
     "pdf": "pdf",
+    "github": "github",
 }
 
 
