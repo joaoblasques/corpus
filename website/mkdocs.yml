@@ -1,0 +1,64 @@
+site_name: Corpus
+site_description: A personal knowledge base that tends itself — sources in, cited pages out.
+site_url: https://joaoblasques.github.io/corpus-docs/
+repo_url: https://github.com/joaoblasques/corpus
+repo_name: corpus
+
+theme:
+  name: material
+  custom_dir: docs/overrides
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Dark mode
+    - scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Light mode
+  font:
+    text: Inter
+    code: JetBrains Mono
+  features:
+    - navigation.instant
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+    - search.suggest
+    - toc.follow
+  icon:
+    logo: material/sprout
+
+nav:
+  - Home: index.md
+  - The Idea: the-idea.md
+  - How It Works: how-it-works.md
+  - Collectors: collectors.md
+  - The Custodian: the-custodian.md
+  - Under the Hood: under-the-hood.md
+  - Getting Started: getting-started.md
+  - Roadmap: roadmap.md
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - pymdownx.highlight
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - toc:
+      permalink: true
+
+plugins:
+  - search
+  - macros:
+      module_name: hooks/site_stats
+
+extra_css:
+  - stylesheets/extra.css
