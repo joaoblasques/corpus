@@ -1214,3 +1214,16 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - new collector: bin/collect_github.py + bin/github_client.py (gh CLI); wired into the 2am run
 - collects starred repos as one repo-digest each (README + docs + overview), deduped by repo:,
   leaves stars in place; channel github -> raw/github. Spec: docs/superpowers/specs/2026-06-22-github-repo-collection-design.md
+
+## [2026-06-22T14:41] config | scheduled run
+- collectors:
+  - gmail: 2 collected · status=ok
+  - obsidian: 0 collected · status=ok
+  - pdf: 20 collected · status=ok
+  - youtube: 22 collected · status=ok
+  - github: 93 collected · status=ok
+  - links_refetch: 0 refetched · status=ok
+- ingest:
+  - ingest: 0 ingested · 0 deferred · status=failed · error=You've hit your session limit · resets 5pm (Europe/Lisbon)
+- lint:
+  - 0 broken wikilinks · 0 broken citations · 0 orphans · 2 stubs
