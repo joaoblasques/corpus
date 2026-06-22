@@ -37,10 +37,15 @@ def discover(watch_dir=None) -> list:
     if not root.exists():
         return []
     out = []
-    for p in sorted(root.iterdir()):
+    for p in sorted(root.rglob("*")):   # recurse into subfolders
         if not p.is_file():
             continue
         if p.suffix.lower() != ".pdf":
+            continue
+        # Skip the _processed reaper folder (already-filed PDFs) and any hidden/dot
+        # subfolder — recursing into them would re-collect already-processed files.
+        if any(part == "_processed" or part.startswith(".")
+               for part in p.relative_to(root).parts[:-1]):
             continue
         if _SKIP_RE.match(p.name):
             continue

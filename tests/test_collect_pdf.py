@@ -42,16 +42,18 @@ def test_extract_title_falls_back_to_stem(tmp_path):
     assert r["title"] == "Untitled Paper"
 
 
-def test_discover_finds_top_level_pdfs_only(tmp_path):
+def test_discover_recurses_but_skips_processed(tmp_path):
     (tmp_path / "a.pdf").write_bytes(b"%PDF-1.4 a")
     (tmp_path / "b.PDF").write_bytes(b"%PDF-1.4 b")
     (tmp_path / "notes.md").write_text("x")
     (tmp_path / ".hidden.pdf").write_bytes(b"%PDF x")
     (tmp_path / "~$tmp.pdf").write_bytes(b"%PDF x")
+    sub = tmp_path / "Invoices"; sub.mkdir()
+    (sub / "inv.pdf").write_bytes(b"%PDF inv")          # real subfolder → COLLECTED
     proc = tmp_path / "_processed"; proc.mkdir()
-    (proc / "old.pdf").write_bytes(b"%PDF x")
+    (proc / "old.pdf").write_bytes(b"%PDF x")           # already filed → skipped
     names = sorted(d["filename"] for d in cp.discover(tmp_path))
-    assert names == ["a.pdf", "b.PDF"]
+    assert names == ["a.pdf", "b.PDF", "inv.pdf"]       # subfolder in; _processed/hidden/temp out
 
 
 def test_content_sha_stable(tmp_path):
@@ -91,3 +93,14 @@ def test_processable_selects_only_ingested(tmp_path):
     (raw / "pdf-b.md").write_text(
         "---\nchannel: pdf\npdf_origin: b.pdf\n---\nx", encoding="utf-8")  # not ingested
     assert cp.processable(dirs=[raw]) == ["a.pdf"]
+
+
+def test_discover_recurses_into_subfolders(tmp_path):
+    (tmp_path / "top.pdf").write_bytes(b"%PDF-1.4 top")
+    sub = tmp_path / "Invoices"; sub.mkdir()
+    (sub / "nested.pdf").write_bytes(b"%PDF-1.4 nested")
+    deep = sub / "2026"; deep.mkdir()
+    (deep / "deep.PDF").write_bytes(b"%PDF-1.4 deep")          # uppercase ext too
+    (sub / "notes.txt").write_text("not a pdf", encoding="utf-8")
+    names = sorted(d["filename"] for d in cp.discover(watch_dir=tmp_path))
+    assert names == ["deep.PDF", "nested.pdf", "top.pdf"]      # subfolders + nested, .txt ignored
