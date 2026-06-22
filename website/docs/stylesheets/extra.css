@@ -58,3 +58,27 @@
   font-weight: 700;
   color: var(--md-accent-fg-color);
 }
+
+/* Knowledge-graph canvas */
+#corpus-graph {
+  height: 540px;
+  width: 100%;
+  border: 1px solid rgba(90, 122, 90, 0.25);
+  border-radius: 14px;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(90,122,90,0.06), transparent 60%),
+    radial-gradient(circle at 75% 80%, rgba(200,134,42,0.06), transparent 55%);
+  margin: 1rem 0 0.4rem;
+}
+[data-md-color-scheme="slate"] #corpus-graph {
+  border-color: rgba(143, 174, 138, 0.25);
+  background:
+    radial-gradient(circle at 30% 20%, rgba(143,174,138,0.08), transparent 60%),
+    radial-gradient(circle at 75% 80%, rgba(224,167,71,0.07), transparent 55%);
+}
+.graph-caption {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--md-default-fg-color--light);
+  margin-bottom: 1.4rem;
+}

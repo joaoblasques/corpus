@@ -60,5 +60,12 @@ plugins:
   - macros:
       module_name: hooks/site_stats
 
+hooks:
+  - hooks/corpus_graph.py
+
 extra_css:
   - stylesheets/extra.css
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/vis-network@9.1.9/standalone/umd/vis-network.min.js
+  - assets/graph.js
