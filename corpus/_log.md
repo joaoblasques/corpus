@@ -1197,3 +1197,15 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   - ingest: 20 ingested · 0 deferred · status=ok
 - lint:
   - 0 broken wikilinks · 0 broken citations · 0 orphans · 8 stubs
+
+## [2026-06-22T02:13] config | scheduled run
+- collectors:
+  - gmail: 3 collected · status=ok
+  - obsidian: 0 collected · status=ok
+  - pdf: 1 collected · status=ok
+  - youtube: 22 collected · status=ok
+  - links_refetch: 0 refetched · status=ok
+- ingest:
+  - ingest: 0 ingested · 0 deferred · status=failed · error=API Error: 529 Overloaded. This is a server-side issue, usually temporary — try again in a moment. If it persists, check https://status.claude.com.
+- lint:
+  - 0 broken wikilinks · 0 broken citations · 0 orphans · 2 stubs
