@@ -55,3 +55,35 @@ def test_fetch_repo_assembles_readme_docs_release():
 def test_fetch_repo_tolerates_missing_pieces():
     repo = gh.fetch_repo({"full_name": "a/b"}, _run=lambda *a, **k: _proc(1, ""))
     assert repo["readme"] == "" and repo["latest_release"] == "" and repo["docs"] == []
+
+
+def test_cmd_run_skips_when_gh_unavailable(monkeypatch, capsys):
+    monkeypatch.setattr(gh, "gh_available", lambda **k: False)
+    rc = gh.cmd_run(gh._args(["run"]))
+    assert rc == 0 and "not configured" in capsys.readouterr().out
+
+
+def test_cmd_run_collects_new_repos_only_no_unstar(monkeypatch, capsys):
+    monkeypatch.setattr(gh, "gh_available", lambda **k: True)
+    monkeypatch.setattr(gh, "list_starred", lambda mx=None, **k: [{"full_name": "a/b"}, {"full_name": "c/d"}])
+    monkeypatch.setattr(gh.cg, "already_collected", lambda fn, dirs=None: fn == "a/b")  # a/b already in corpus
+    monkeypatch.setattr(gh, "fetch_repo", lambda item, **k: {**item, "readme": "r"})
+    written = []
+    monkeypatch.setattr(gh.cg, "write_collected",
+                        lambda repo, **k: written.append(repo["full_name"]) or {"status": "written", "path": "/x.md"})
+    gh_calls = []
+    monkeypatch.setattr(gh, "_gh", lambda args, **k: gh_calls.append(args) or _proc(0))
+    rc = gh.cmd_run(gh._args(["run"]))
+    out = capsys.readouterr().out
+    assert rc == 0 and '"written": 1' in out and written == ["c/d"]   # a/b skipped (dup)
+    assert not any("DELETE" in str(a) or "PUT" in str(a) for a in gh_calls)   # never un-stars
+
+
+def test_cmd_run_dry_run_writes_nothing(monkeypatch, capsys):
+    monkeypatch.setattr(gh, "gh_available", lambda **k: True)
+    monkeypatch.setattr(gh, "list_starred", lambda mx=None, **k: [{"full_name": "c/d"}])
+    monkeypatch.setattr(gh.cg, "already_collected", lambda fn, dirs=None: False)
+    wrote = []
+    monkeypatch.setattr(gh.cg, "write_collected", lambda *a, **k: wrote.append(1))
+    rc = gh.cmd_run(gh._args(["run", "--dry-run"]))
+    assert rc == 0 and wrote == [] and '"dry_run": true' in capsys.readouterr().out

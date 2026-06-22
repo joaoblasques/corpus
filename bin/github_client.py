@@ -119,3 +119,80 @@ def fetch_repo(repo_item: dict, *, max_docs=8, _run=None) -> dict:
             "latest_release": _latest_release(fn, _run),
             "readme": _readme(fn, _run),
             "docs": _docs(fn, max_docs, _run)}
+
+
+import argparse  # noqa: E402
+import datetime  # noqa: E402
+
+
+def cmd_auth(args) -> int:
+    print(json.dumps({"gh_available": gh_available()}))
+    return 0
+
+
+def cmd_list(args) -> int:
+    print(json.dumps([r["full_name"] for r in list_starred(args.max)], indent=2))
+    return 0
+
+
+def cmd_run(args) -> int:
+    if not gh_available():
+        print(json.dumps({"status": "not configured", "reason": "gh not authed"}))
+        return 0
+    at = args.collected_at or datetime.date.today().isoformat()
+    repos = list_starred(args.max)
+    found = written = dup = failed = candidates = 0
+    paths = []
+    for item in repos:
+        found += 1
+        fn = item.get("full_name")
+        if not fn or cg.already_collected(fn):
+            dup += 1
+            continue
+        candidates += 1
+        if args.dry_run:
+            continue
+        try:
+            res = cg.write_collected(fetch_repo(item, max_docs=args.max_docs), collected_at=at)
+        except Exception:  # noqa: BLE001
+            failed += 1
+            continue
+        if res.get("status") == "written":
+            written += 1
+            paths.append(res.get("path"))
+        elif res.get("status") == "duplicate":
+            dup += 1
+        else:
+            failed += 1
+    print(json.dumps({"found": found, "written": written, "duplicate": dup, "failed": failed,
+                      "candidates": candidates, "dry_run": bool(args.dry_run), "paths": paths}))
+    return 0
+
+
+def _build_parser():
+    p = argparse.ArgumentParser(description="GitHub repo collector (starred repos via gh).")
+    sub = p.add_subparsers(dest="cmd", required=True)
+    sub.add_parser("auth", help="Report gh auth status.").set_defaults(func=cmd_auth)
+    pl = sub.add_parser("list-starred", help="Print starred repo full-names.")
+    pl.add_argument("--max", type=int, default=None)
+    pl.set_defaults(func=cmd_list)
+    pr = sub.add_parser("run", help="Collect new starred repos (README + docs + overview).")
+    pr.add_argument("--max", type=int, default=None, help="Cap repos this run.")
+    pr.add_argument("--max-docs", type=int, default=8, help="Max doc files per repo.")
+    pr.add_argument("--dry-run", action="store_true", help="List new candidates; write nothing.")
+    pr.add_argument("--collected-at", default=None, help="Override YYYY-MM-DD stamp.")
+    pr.set_defaults(func=cmd_run)
+    return p
+
+
+def _args(argv=None):
+    return _build_parser().parse_args(argv)
+
+
+def main(argv=None) -> int:
+    args = _args(argv)
+    return args.func(args)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
