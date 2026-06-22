@@ -21,8 +21,6 @@ INCLUDE_DIRS = [
     "Clippings",                       # top-level web clippings
     "00_Inbox/Clippings",
     "03_Resources/Books",
-    "03_Resources/Snippets",
-    "03_Resources/Prompt Templates",
     "06_Metadata/Reference",           # reference prompt notes only
 ]
 EXCLUDE_DIRS = ["03_Resources/llm-wiki-system"]
