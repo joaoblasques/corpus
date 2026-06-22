@@ -15,7 +15,9 @@ def test_is_included_resources():
     # Still-collected folders
     assert co.is_included("00_Inbox/Clippings/scrape/merkle-trees-scrape.md") is True
     assert co.is_included("03_Resources/Books/cheatsheet.md") is True
-    assert co.is_included("03_Resources/Snippets/Enrich Notes Script.md") is True
+    # Snippets / Prompt Templates removed from the watch-list (folders don't exist in the vault)
+    assert co.is_included("03_Resources/Snippets/Enrich Notes Script.md") is False
+    assert co.is_included("03_Resources/Prompt Templates/foo.md") is False
 
 
 def test_is_included_excludes():
