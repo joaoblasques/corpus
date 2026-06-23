@@ -60,6 +60,15 @@ sources:
   - path: raw/web/web-10-github-repositories-to-master-claude-code-kdnuggets.md
     channel: web
     ingested_at: 2026-06-17
+  - path: raw/web/web-the-factory-model-how-coding-agents-changed-software-enginee.md
+    channel: web
+    ingested_at: 2026-06-23
+  - path: raw/web/web-compound-engineering-how-every-codes-with-agents.md
+    channel: web
+    ingested_at: 2026-06-23
+  - path: raw/web/web-the-code-agent-orchestra-what-makes-multi-agent-coding-work.md
+    channel: web
+    ingested_at: 2026-06-23
 aliases:
   - agentic coding
   - agentic engineering
@@ -82,7 +91,7 @@ tags:
   - corpus/ai-engineering
   - synthesis
 created: 2026-06-12
-updated: 2026-06-17
+updated: 2026-06-23
 ---
 
 # Agentic Coding
@@ -121,6 +130,32 @@ Three gates make agent output trustworthy [^src1]:
 - **`AGENTS.md` for compound learning** — captures patterns and gotchas; every session reads it and adds to it.
 
 A notable empirical caveat on `AGENTS.md`: research (Gloaguen et al., ETH Zurich) found **LLM-generated `AGENTS.md` files offer no benefit and can marginally reduce success (~3%) while raising inference cost by 20%+, whereas developer-written context files give ~4% improvement** [^src1]. The lead must approve every line; never let an agent write to `AGENTS.md` directly [^src1].
+
+## The factory model: spec is the leverage
+
+Addy Osmani's "factory model" frames the current shift in software engineering [^src20]: the AI age creates a mode where a single engineer orchestrates a fleet of agents, each responsible for a piece of the system. Three generations of AI coding tools:
+
+1. **Copilot era** — AI autocomplete; assists individuals; speed gains 10–30%.
+2. **Agent era** — multi-step autonomous coding; some supervision; 100–300% productivity for individuals.
+3. **Factory era** — orchestrated fleets; human as architect + verifier; measurable business outcomes: iOS apps shipped +50%, GitHub code pushes +35%.
+
+**"Generation is not the bottleneck anymore."** The bottleneck is *verification* — knowing which output is correct, catching regressions, and ensuring the factory's output meets intent. "Engineers don't stop writing code; they stop writing boilerplate. The cognitive load shifts from syntax and structure to intent and judgment" [^src20].
+
+**The spec is leverage.** A one-sentence prompt and a full spec can both produce code; the spec produces code that actually works for the intended purpose. Osmani's quantification: time spent writing a thorough spec vs. debugging misaligned output is typically 1:5 — "the spec is the cheapest work in the pipeline" [^src20]. This mirrors [[ai-engineering/agentic-coding|spec-driven development]] as the entry discipline.
+
+**Red/green TDD is mandatory** in the factory model [^src20]:
+- Write failing tests first; verify the agent fixes them.
+- Tests are the machine-checkable spec for behavioral correctness.
+- "If you can't test it, you can't factory it" — no test coverage = no agent autonomy for that feature.
+
+**Hockey-stick metrics** observed at factory scale [^src20]:
+- iOS apps shipped: +50% increase in volume.
+- GitHub code pushes: +35% increase.
+- Engineering time on novel work (vs. maintenance/boilerplate): +60%.
+
+**Engineering skills shift up the stack** [^src20]: architecture, debugging, requirements elicitation, and taste become more valuable as syntax/implementation become automated. The senior engineer's leverage multiplies; the junior engineer's learning curve changes (fewer "learn by writing" opportunities, more "learn by reviewing").
+
+See [[ai-engineering/compound-engineering|Compound Engineering]] for the learning-loop complement — the method for making this factory progressively smarter session over session.
 
 ## Agent Experience (AX) is the new Developer Experience
 
@@ -394,3 +429,4 @@ Claude Code ships a managed code review service (Team and Enterprise subscriptio
 [^src17]: [How to Do AI-Assisted Engineering](../../raw/web/web-how-to-do-ai-assisted-engineering.md) — 15 engineers, Engineering Leadership Newsletter
 [^src18]: [Agentic Code Review](../../raw/email/email-2026-06-16-agentic-code-review.md) — Addy Osmani
 [^src19]: [Code Review — Claude Code Docs](../../raw/web/web-code-review-claude-code-docs.md) — Anthropic official docs
+[^src20]: [The Factory Model: How Coding Agents Changed Software Engineering](../../raw/web/web-the-factory-model-how-coding-agents-changed-software-enginee.md) — Addy Osmani

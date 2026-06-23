@@ -72,6 +72,12 @@ sources:
   - path: raw/notes/notes-clippings-get-started-with-claude-cowork.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/web/web-claude-cowork-anthropics-agentic-ai-for-knowledge-work.md
+    channel: web
+    ingested_at: 2026-06-23
+  - path: raw/youtube/youtube-IevmGCVo9Pw-create-your-own-personal-claude-ai-system-that-makes-your-wo.md
+    channel: youtube
+    ingested_at: 2026-06-23
 aliases:
   - Claude Cowork
   - Cowork

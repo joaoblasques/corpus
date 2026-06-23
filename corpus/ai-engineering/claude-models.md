@@ -42,6 +42,15 @@ sources:
   - path: raw/web/web-adaptive-thinking.md
     channel: web
     ingested_at: 2026-06-21
+  - path: raw/web/web-introducing-claude-4.md
+    channel: web
+    ingested_at: 2026-06-23
+  - path: raw/web/web-introducing-claude-opus-4-7.md
+    channel: web
+    ingested_at: 2026-06-23
+  - path: raw/web/web-pricing.md
+    channel: web
+    ingested_at: 2026-06-23
 aliases:
   - Claude model lineup
   - Claude models
@@ -55,7 +64,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-06-12
-updated: 2026-06-21
+updated: 2026-06-23
 ---
 
 # Claude Model Lineup
@@ -131,6 +140,25 @@ Claude Security (the vulnerability-scanning product) uses Opus 4.7 by default fo
 
 See [[ai-engineering/claude-code|Claude Code]] (Opus 4.7 section) for the full usage guide.
 
+## Claude 4 (original family: Opus 4 and Sonnet 4)
+
+The original Claude 4 launch introduced hybrid reasoning models with extended thinking + tool use in parallel, and a raised capability bar for coding agents [^src15].
+
+**Claude Opus 4** — world's best coding model at launch, SWE-bench 72.5%, Terminal-bench 43.2%. Designed for "sustained performance on long-running tasks that require focused effort and thousands of steps" [^src15]. Cursor cited it as "state-of-the-art for coding and a leap forward in complex codebase understanding"; Rakuten validated it on an open-source refactor running independently for 7 hours [^src15].
+
+**Claude Sonnet 4** — SWE-bench 72.7% (higher than Opus 4 on this benchmark), balancing performance and efficiency; "enhanced steerability for greater control over implementations" [^src15]. GitHub used it to power the new coding agent in GitHub Copilot [^src15].
+
+**Key model improvements** at the Claude 4 launch [^src15]:
+- **Extended thinking with tool use (beta)** — models alternate between reasoning and tool calls during the same thinking block.
+- **Parallel tool execution** — call multiple tools simultaneously.
+- **Memory capabilities** — significantly improved; when given local file access, Opus 4 creates and maintains "memory files" that persist key facts.
+- **65% less shortcut behavior** — less likely to use loopholes to complete tasks vs. Sonnet 3.7.
+- **Thinking summaries** — a smaller model condenses lengthy thought processes.
+
+**Claude Code GA** — reached general availability at this launch with VS Code and JetBrains extensions and the Claude Code SDK [^src15].
+
+**Pricing at launch**: Opus 4 at $15/$75 per million tokens (input/output); Sonnet 4 at $3/$15 [^src15]. (Subsequent 4.x releases reduced Opus pricing significantly — see Opus 4.8 section above.)
+
 ## Adaptive thinking
 
 Adaptive thinking is Anthropic's preferred mode for controlling model reasoning [^src13]. Rather than specifying a fixed token budget, the model decides per-step when and how much to reason.
@@ -175,3 +203,4 @@ Two weeks with Fable 5 surfaced a pattern shift in how to work with the model [^
 [^src12]: [Introducing Claude Sonnet 4.6](../../raw/web/web-introducing-sonnet-4-6.md) — Anthropic official blog
 [^src13]: [Adaptive Thinking — Claude API docs](../../raw/web/web-adaptive-thinking.md) — Anthropic
 [^src14]: [Introducing Claude Opus 4.8](../../raw/web/web-introducing-claude-opus-4-8.md) — Anthropic official blog
+[^src15]: [Introducing Claude 4](../../raw/web/web-introducing-claude-4.md) — Anthropic

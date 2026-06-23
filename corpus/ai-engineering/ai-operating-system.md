@@ -27,6 +27,9 @@ sources:
   - path: raw/youtube/youtube-vvDdTPFhCp8-how-to-build-your-ai-operating-system-with-claude-code-full.md
     channel: youtube
     ingested_at: 2026-06-21
+  - path: raw/youtube/youtube-IevmGCVo9Pw-create-your-own-personal-claude-ai-system-that-makes-your-wo.md
+    channel: youtube
+    ingested_at: 2026-06-23
   - path: raw/youtube/youtube-JnQcPzjC6Vo-i-gave-pi-access-to-obsidian-and-i-m-not-looking-back.md
     channel: youtube
     ingested_at: 2026-06-21

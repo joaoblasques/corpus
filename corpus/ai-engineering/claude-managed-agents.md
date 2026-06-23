@@ -18,6 +18,21 @@ sources:
   - path: raw/notes/notes-clippings-introducing-the-claude-platform-on-aws.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/web/web-scaling-managed-agents-decoupling-the-brain-from-the-hands.md
+    channel: web
+    ingested_at: 2026-06-23
+  - path: raw/web/web-asana-claude-managed-agents-case-study-claude-by-anthropic.md
+    channel: web
+    ingested_at: 2026-06-23
+  - path: raw/web/web-claude-managed-agents-overview.md
+    channel: web
+    ingested_at: 2026-06-23
+  - path: raw/web/web-claude-managed-agents-get-to-production-10x-faster-claude.md
+    channel: web
+    ingested_at: 2026-06-23
+  - path: raw/web/web-using-agent-memory.md
+    channel: web
+    ingested_at: 2026-06-23
 aliases:
   - Claude Managed Agents
   - Managed Agents
@@ -26,7 +41,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-06-17
-updated: 2026-06-17
+updated: 2026-06-23
 ---
 
 # Claude Managed Agents
@@ -70,7 +85,7 @@ Teams self-reporting 10x faster deployment across diverse use cases [^src1]:
 
 - **Notion** — delegates tasks (code, presentations, spreadsheets) directly inside Notion Custom Agents; dozens of tasks run in parallel while teams collaborate on output.
 - **Rakuten** — shipped specialist agents (product, sales, marketing, finance) in Slack/Teams within one week per agent; long-running agents learn from every session via memory and cut first-pass errors by 97% [^src2].
-- **Asana** — built AI Teammates that work alongside humans inside Asana projects, shipping advanced features "dramatically faster."
+- **Asana** — AI Teammates built with Claude Opus 4.6 + Managed Agents; marketing campaign review cycle dropped from days to 15 minutes; first deployed: Campaign Brief Writer + Launch Planner agents. Governance model: admin-level visibility into agent task history, no training data use, purpose-scoped tool access [^src6].
 - **Sentry** — paired Seer's root-cause analysis with a Claude-powered agent writing the patch and opening the PR; shipped in weeks instead of months.
 - **Netflix** — agents carry context across sessions, including insights that took multiple turns to uncover and corrections from a human mid-conversation [^src2].
 - **Wisedocs** — document-verification pipeline uses cross-session memory to spot recurring document issues; verification speed up 30% [^src2].
@@ -124,6 +139,35 @@ Netflix's platform team used this pattern: an analysis agent processes logs from
 
 As of mid-2026, Claude Managed Agents (and the full Claude Platform) is available on AWS with AWS IAM authentication, CloudTrail audit logging, and billing through a single AWS invoice. New features ship same-day as the native Claude API [^src5]. This is distinct from Claude on Amazon Bedrock: the Platform on AWS is operated by Anthropic (data processed outside the AWS boundary); Bedrock keeps AWS as the data processor within the AWS boundary [^src5].
 
+## Architecture: Brain, Hands, and Session
+
+Scaling Managed Agents to production requires separating three concerns that the naive single-process model conflates [^src6]:
+
+- **Brain** — the LLM reasoning and decision-making. Stateless; swappable; can be scaled independently.
+- **Hands** — the code that executes tool calls (bash, filesystem, APIs). Lives in a container or sandbox; should not hold session state.
+- **Session** — the log, memory, and checkpoints. Lives *outside* both brain and hands, persisted in the platform.
+
+The harness leaves the container: `execute(name, input) → string` is the only interface between brain and hands [^src6]. This gives three operational benefits:
+1. **Security boundary** — API tokens and credentials never enter the sandbox; the harness injects them from outside.
+2. **TTFT improvement** — p50 time-to-first-token dropped ~60%, p95 >90% when session logs are stored externally (the model no longer re-reads the full session on every turn) [^src6].
+3. **Pets → cattle** — sessions become disposable and restartable; a crashed agent resumes from the last checkpoint rather than starting over.
+
+**Session control API** for long-running agents [^src6]:
+- `wake(sessionId)` — re-attach to a paused session (e.g. after a webhook or async wait).
+- `getSession(id)` — retrieve the current state log.
+- `emitEvent(type, payload)` — push structured events into the session stream (used for human-in-the-loop gates and audit logging).
+
+This architecture supports a "many brains, many hands" model where thousands of short-lived execution containers share a single long-lived session log, and the brain layer scales independently from tool execution.
+
+## Memory API (using-agent-memory)
+
+The Memory API for Managed Agents exposes filesystem-based memory through standard read/write operations. The full API surface [^src7]:
+- **create/read/update/delete** — CRUD on memory entries at `/mnt/memory/`.
+- **version** — access previous versions of a memory entry; full history retained.
+- **redact** — permanently remove a specific version from history (compliance / PII removal).
+- **Up to 2000 memories per store** before requiring garbage collection or tiering.
+- **Prompt injection risk on read_write stores** — any content written by an external system can become an injection vector if the agent reads it without sanitization. Prefer `read_only` stores for shared contexts.
+
 ## Pricing
 
 Standard Claude Platform token rates + **$0.08 per session-hour** of active runtime [^src1].
@@ -144,3 +188,5 @@ Standard Claude Platform token rates + **$0.08 per session-hour** of active runt
 [^src3]: [New in Claude Managed Agents: self-hosted sandboxes and MCP tunnels](../../raw/notes/notes-clippings-new-in-claude-managed-agents-self-hosted-sandboxes-and-mcp-t.md) — Anthropic announcement
 [^src4]: [New in Claude Managed Agents: dreaming, outcomes, and multiagent orchestration](../../raw/notes/notes-clippings-new-in-claude-managed-agents-dreaming-outcomes-and-multiagen.md) — Anthropic announcement
 [^src5]: [Introducing the Claude Platform on AWS](../../raw/notes/notes-clippings-introducing-the-claude-platform-on-aws.md) — Anthropic announcement
+[^src6]: [Scaling Managed Agents: Decoupling the Brain from the Hands](../../raw/web/web-scaling-managed-agents-decoupling-the-brain-from-the-hands.md) — Anthropic engineering
+[^src7]: [Built-in Memory for Claude Managed Agents (Anthropic docs)](../../raw/web/web-using-agent-memory.md) — Anthropic

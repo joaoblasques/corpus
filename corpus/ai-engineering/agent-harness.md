@@ -33,6 +33,12 @@ sources:
   - path: raw/notes/notes-clippings-harnessing-claude-s-intelligence-3-key-patterns-for-building.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/web/web-harness-design-for-long-running-application-development.md
+    channel: web
+    ingested_at: 2026-06-23
+  - path: raw/web/web-agent-harness-engineering.md
+    channel: web
+    ingested_at: 2026-06-23
 aliases:
   - harness
   - agent harness
@@ -45,7 +51,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-12
-updated: 2026-06-17
+updated: 2026-06-23
 ---
 
 # Agent Harness
@@ -113,7 +119,24 @@ Anthropic adds **full context resets** for long jobs: tear the session down and 
 Today's models suffer early stopping, poor decomposition, and incoherence across windows [^src1]. Harness patterns:
 
 - **Ralph Loop** — a hook intercepts the model's attempt to exit and re-injects the original prompt into a fresh context window, forcing continuation against a completion goal; each iteration starts clean but reads prior state from the filesystem [^src1].
-- **Planner / generator / evaluator splits** — separating generation from evaluation into distinct agents outperforms self-evaluation because agents skew positive grading their own work ("GANs for prose"); the related *sprint contract* negotiates the done-condition before code is written [^src1].
+- **Planner / generator / evaluator splits** — separating generation from evaluation into distinct agents outperforms self-evaluation because agents skew positive grading their own work ("GANs for prose"); the related *sprint contract* negotiates the done-condition before code is written [^src1][^src10].
+
+### The 3-agent GAN harness (Anthropic engineering)
+
+Anthropic's engineering blog documents a concrete planner/generator/evaluator harness built for production application development [^src10]:
+
+- **Planner** — writes a detailed implementation plan including scope, dependencies, and the done-condition. The sprint contract (planner output) must be negotiated *before* the generator starts; retroactively changing scope once generation is underway is the primary source of rework [^src10].
+- **Generator** — executes the plan. Constrained to write only to a specified scope; feeds completed work to the evaluator [^src10].
+- **Evaluator** — runs in a separate context window with no access to the generator's chain-of-thought. This isolation is the key: "a generator can't reliably grade itself" — the same cognitive bias that makes self-consistent wrong reasoning in humans appears in LLM generators [^src10].
+
+GAN-inspired framing: the evaluator is the discriminator; the generator is trained (via prompting) to produce output the evaluator can't distinguish from the desired spec. Each evaluator rejection is a learning signal that updates the generator's approach [^src10].
+
+**Cost vs. quality tradeoff** observed empirically [^src10]:
+- Solo session: 20 minutes, $9. Single agent, no evaluator. Works for well-scoped tasks, but quality is inconsistent on ambiguous scope.
+- 3-agent harness: 6 hours, $200. Planner + generator + evaluator loop. Works for tasks with complex done-conditions; quality dramatically higher, consistent across runs.
+- DAW (digital audio workstation) example: 4 hours, $124. The harness produced a working feature the solo session couldn't complete reliably.
+
+**Context anxiety** (Sonnet 4.5): in early versions, generators would stop prematurely near their perceived context limit. The harness added explicit context-reset logic. With Opus 4.5 this behavior was gone — "the context resets we built to compensate had become dead weight in the agent harness" [^src9][^src10]. Context reset scaffolding is a canonical example of harness components becoming obsolete as models improve.
 
 ### Hooks: the enforcement layer
 
@@ -212,3 +235,4 @@ Every harness component encodes an assumption about what Claude can't do on its 
 [^src7]: [Launching Boring UI](../../raw/email/email-2026-05-28-launching-boring-ui.md) — Julien Hurault, on Pi as the harness behind Boring UI
 [^src8]: [A harness for every task: dynamic workflows in Claude Code](../../raw/notes/notes-clippings-a-harness-for-every-task-dynamic-workflows-in-claude-code.md) — Thariq Shihipar & Sid Bidasaria, Anthropic
 [^src9]: [Harnessing Claude's Intelligence: 3 Key Patterns for Building Apps](../../raw/notes/notes-clippings-harnessing-claude-s-intelligence-3-key-patterns-for-building.md) — Lance Martin, Anthropic Platform team
+[^src10]: [Harness Design for Long-Running Application Development](../../raw/web/web-harness-design-for-long-running-application-development.md) — Anthropic engineering blog

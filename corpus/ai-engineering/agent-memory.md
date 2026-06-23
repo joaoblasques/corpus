@@ -27,6 +27,9 @@ sources:
   - path: raw/web/web-github-thedotmack-claude-mem-persistent-context-across-sessi.md
     channel: web
     ingested_at: 2026-06-17
+  - path: raw/web/web-using-agent-memory.md
+    channel: web
+    ingested_at: 2026-06-23
 aliases:
   - agent memory
   - memory

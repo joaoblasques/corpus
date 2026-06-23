@@ -12,6 +12,9 @@ sources:
   - path: raw/notes/notes-clippings-using-claude-code-session-management-and-1m-context.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/web/web-using-claude-code-session-management-and-1m-context-claude.md
+    channel: web
+    ingested_at: 2026-06-23
 aliases:
   - context window management
   - context management

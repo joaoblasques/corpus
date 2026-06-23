@@ -30,6 +30,18 @@ sources:
   - path: raw/web/web-mitigating-the-risk-of-prompt-injections-in-browser-use.md
     channel: web
     ingested_at: 2026-06-21
+  - path: raw/web/web-project-glasswing-securing-critical-software-for-the-ai-era.md
+    channel: web
+    ingested_at: 2026-06-23
+  - path: raw/web/web-trendaitm-and-anthropic-advance-ai-powered-vulnerability-det.md
+    channel: web
+    ingested_at: 2026-06-23
+  - path: raw/web/web-sentinelone-unveils-wayfinder-frontier-ai-services-to-proact.md
+    channel: web
+    ingested_at: 2026-06-23
+  - path: raw/web/web-crowdstrike-puts-claude-opus-4-7-to-work-across-falcon-and-q.md
+    channel: web
+    ingested_at: 2026-06-23
 aliases:
   - prompt injection
   - LLM security
@@ -47,7 +59,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-12
-updated: 2026-06-21
+updated: 2026-06-23
 ---
 
 # Agent Security
@@ -172,6 +184,21 @@ Claude Security (previously Claude Code Security) is Anthropic's enterprise-grad
 
 > "AI is compressing the timeline between vulnerability discovery and exploitation. We believe the right response is to make sure defenders have access to frontier capabilities." [^src7]
 
+## Project Glasswing and security research partners (2026)
+
+**Project Glasswing** (announced April 7 2026) is Anthropic's initiative to turn frontier AI into a tool for defenders. Using Mythos Preview in autonomous mode against real codebases, Anthropic found "thousands of 0-days" in widely-deployed critical software [^src10]. Key components [^src10]:
+- **$100M in credits** — disbursed to the security research community for defensive use of frontier Claude models.
+- **Cyber Verification Program** — vetting process that grants security researchers and companies expanded access to Claude for legitimate offensive security and vulnerability research.
+- **Major tech coalition** — participating organizations across software, hardware, and cloud.
+
+**TrendAI AESIR** — TrendAI's platform pairs Claude Opus 4.7 with their Vision One security platform to provide "Autonomous Enemy Simulation and Intelligence Response." AESIR uses Claude to research exploits at the depth of a human threat actor, providing prioritization and investigation alongside TrendAI's broader threat intelligence ecosystem [^src11].
+
+**SentinelOne Wayfinder** — Frontier AI Services product integrating Claude Opus 4.7. "No single model will ever be the answer" — Wayfinder is designed as a multi-model foundation (best model for each specific task), combining Claude's reasoning with SentinelOne's threat data [^src12].
+
+**CrowdStrike Falcon + Project QuiltWorks** — CrowdStrike embedded Opus 4.7 in two systems: Charlotte (Agentic SOAR with AgentWorks for multi-agent security workflows) and Project QuiltWorks (long-form code analysis and supply chain security) [^src13]. AgentWorks allows security teams to compose custom workflows using pre-built and custom security agents without writing code [^src13].
+
+All three organizations joined the Cyber Verification Program for expanded model access tied to documented security research use cases [^src11][^src12][^src13].
+
 ## Agent identity and registration (auth.md)
 
 As agents act on behalf of users, identity becomes a security surface. **auth.md** is an open protocol (authored by WorkOS, not tied to its infrastructure) for agent registration without a sign-up form [^src3]. An app hosts a Markdown file at `https://yourapp.com/auth.md` declaring supported flows, scopes, and how to register [^src3]. Two flows [^src3]:
@@ -203,3 +230,7 @@ It issues a scoped, short-lived, revocable access token over standard OAuth, com
 [^src7]: [Claude Security is now in public beta](../../raw/notes/notes-clippings-claude-security-is-now-in-public-beta.md) — Anthropic
 [^src8]: [Ch8 — Security, Maintainability, and Reliability](../../raw/notes/notes-08-security-maintainability-and-reliability.md)
 [^src9]: [Mitigating the Risk of Prompt Injections in Browser Use](../../raw/web/web-mitigating-the-risk-of-prompt-injections-in-browser-use.md) — Anthropic
+[^src10]: [Project Glasswing: Securing Critical Software for the AI Era](../../raw/web/web-project-glasswing-securing-critical-software-for-the-ai-era.md) — Anthropic
+[^src11]: [TrendAI and Anthropic Advance AI-Powered Vulnerability Detection](../../raw/web/web-trendaitm-and-anthropic-advance-ai-powered-vulnerability-det.md) — TrendAI
+[^src12]: [SentinelOne Unveils Wayfinder Frontier AI Services](../../raw/web/web-sentinelone-unveils-wayfinder-frontier-ai-services-to-proact.md) — SentinelOne
+[^src13]: [CrowdStrike Puts Claude Opus 4.7 to Work Across Falcon and QuiltWorks](../../raw/web/web-crowdstrike-puts-claude-opus-4-7-to-work-across-falcon-and-q.md) — CrowdStrike

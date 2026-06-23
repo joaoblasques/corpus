@@ -1227,3 +1227,25 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   - ingest: 0 ingested · 0 deferred · status=failed · error=You've hit your session limit · resets 5pm (Europe/Lisbon)
 - lint:
   - 0 broken wikilinks · 0 broken citations · 0 orphans · 2 stubs
+
+## [2026-06-23 12:00] ingest | ingest-auto batch (30 sources, ai-engineering cluster)
+- sources: raw/_inbox/web-mcp-apps-model-context-protocol.md, raw/_inbox/web-elicitation-model-context-protocol.md, raw/_inbox/web-github-cloudflare-mcp-mcp-server-for-the-cloudflare-api.md, raw/_inbox/web-auto-mode-for-claude-code-claude.md, raw/_inbox/web-manage-multiple-agents-with-agent-view-claude-code-docs.md, raw/_inbox/web-orchestrate-subagents-at-scale-with-dynamic-workflows-claude.md, raw/_inbox/web-using-claude-code-session-management-and-1m-context-claude.md, raw/_inbox/youtube-IevmGCVo9Pw-create-your-own-personal-claude-ai-system-that-makes-your-wo.md, raw/_inbox/web-trendaitm-and-anthropic-advance-ai-powered-vulnerability-det.md, raw/_inbox/web-sentinelone-unveils-wayfinder-frontier-ai-services-to-proact.md, raw/_inbox/web-crowdstrike-puts-claude-opus-4-7-to-work-across-falcon-and-q.md, raw/_inbox/web-project-glasswing-securing-critical-software-for-the-ai-era.md, raw/_inbox/web-claude-cowork-anthropics-agentic-ai-for-knowledge-work.md, raw/_inbox/web-built-in-memory-for-claude-managed-agents-claude.md, raw/_inbox/web-harness-design-for-long-running-application-development.md, raw/_inbox/web-scaling-managed-agents-decoupling-the-brain-from-the-hands.md, raw/_inbox/web-asana-claude-managed-agents-case-study-claude-by-anthropic.md, raw/_inbox/web-claude-managed-agents-overview.md, raw/_inbox/web-claude-managed-agents-get-to-production-10x-faster-claude.md, raw/_inbox/web-using-agent-memory.md, raw/_inbox/web-compound-engineering-how-every-codes-with-agents.md, raw/_inbox/web-the-factory-model-how-coding-agents-changed-software-enginee.md, raw/_inbox/web-the-code-agent-orchestra-what-makes-multi-agent-coding-work.md, raw/_inbox/web-agent-harness-engineering.md, raw/_inbox/web-introducing-claude-4.md, raw/_inbox/web-introducing-claude-opus-4-7.md, raw/_inbox/web-pricing.md, raw/_inbox/web-dario-amodei-the-urgency-of-interpretability.md, raw/_inbox/web-writing-effective-tools-for-ai-agentsusing-ai-agents.md, raw/_inbox/web-prompting-best-practices.md
+- channel: web (29), youtube (1)
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/mcp.md, corpus/ai-engineering/claude-code.md, corpus/ai-engineering/context-window-management.md, corpus/ai-engineering/agent-security.md, corpus/ai-engineering/anthropic.md, corpus/ai-engineering/claude-cowork.md, corpus/ai-engineering/agent-memory.md, corpus/ai-engineering/claude-managed-agents.md, corpus/ai-engineering/agent-harness.md, corpus/ai-engineering/compound-engineering.md, corpus/ai-engineering/agentic-coding.md, corpus/ai-engineering/claude-models.md, corpus/ai-engineering/interpretability.md, corpus/ai-engineering/tool-calling.md, corpus/ai-engineering/prompt-engineering.md, corpus/ai-engineering/ai-operating-system.md, corpus/ai-engineering/README.md]
+- new pages: [corpus/ai-engineering/compound-engineering.md, corpus/ai-engineering/interpretability.md]
+- deferred: youtube-72zAHA5j3-4-ableton-with-claude-supercharged-with-osc-and-mpc.md (G1), youtube-8QQZNbWuR0M-claude-ableton-live-changes-everything-for-producers.md (G1), youtube-zYrFIX4z9lY-ableton-and-claude-synchronisation.md (G1), web-bun-is-a-fast-javascriptall-in-one-toolkit.md (UNCERTAIN)
+- notes: ingest-auto headless run; 30 processed, 4 deferred; files stamped in raw/_inbox/ (headless mode — orchestrator relocates)
+
+## [2026-06-23T02:51] config | scheduled run
+- collectors:
+  - gmail: 0 collected · status=ok
+  - obsidian: 3 collected · status=ok
+  - pdf: 0 collected · status=ok
+  - youtube: 17 collected · status=ok
+  - github: 0 collected · status=ok
+  - links_refetch: 0 refetched · status=ok
+- ingest:
+  - ingest: 30 ingested · 4 deferred · status=ok
+- lint:
+  - 0 broken wikilinks · 0 broken citations · 0 orphans · 2 stubs

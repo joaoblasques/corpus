@@ -36,6 +36,15 @@ sources:
   - path: raw/web/web-sdks-model-context-protocol.md
     channel: web
     ingested_at: 2026-06-21
+  - path: raw/web/web-mcp-apps-model-context-protocol.md
+    channel: web
+    ingested_at: 2026-06-23
+  - path: raw/web/web-elicitation-model-context-protocol.md
+    channel: web
+    ingested_at: 2026-06-23
+  - path: raw/web/web-github-cloudflare-mcp-mcp-server-for-the-cloudflare-api.md
+    channel: web
+    ingested_at: 2026-06-23
 aliases:
   - MCP
   - Model Context Protocol
@@ -43,7 +52,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-21
-updated: 2026-06-21
+updated: 2026-06-23
 ---
 
 # MCP (Model Context Protocol)
@@ -131,11 +140,38 @@ The MCP SDKs surpassed 300 million downloads/month as of mid-2026 (up from 100M 
 
 **Group tools around intent, not endpoints.** Fewer well-described tools outperform exhaustive API mirrors: "a single `create_issue_from_thread` tool beats `get_thread` + `parse_messages` + `create_issue` + `link_attachment`" [^src7]. See the One Thing principle above.
 
-**Code orchestration for large surfaces.** When a service requires hundreds of distinct operations (Cloudflare, AWS, Kubernetes), expose a thin tool surface that accepts code: the agent writes a script, the server runs it in a sandbox, only the result returns. Cloudflare's MCP server covers ~2,500 endpoints with two tools (search + execute) in ~1K tokens [^src7].
+**Code orchestration for large surfaces.** When a service requires hundreds of distinct operations, expose a thin tool surface that accepts code: the agent writes a script, the server runs it in a sandbox, only the result returns [^src7]. Cloudflare's MCP server (Code Mode) demonstrates this pattern at scale [^src14]:
 
-**MCP Apps (interactive responses).** An official protocol extension that lets a tool return an interactive interface (chart, form, dashboard) rendered inline in the chat. Servers shipping MCP apps see "meaningfully higher adoption and retention" than text-only servers [^src7].
+- **~1,100 tokens total** for the full tool surface (vs. ~1.17M tokens if all 2,500 API endpoints were exposed as individual MCP tools).
+- **Three tools**: `cloudflare_docs` (fetch documentation for a specific API or concept), `cloudflare_ai_search` (semantic search across the docs corpus), `cloudflare_execute` (run code against the Workers runtime via the Workers Preview API for safe execution).
+- **Spec lives server-side** via the Dynamic Worker Loader API — the agent fetches the spec for the specific service it needs (Workers, KV, R2, D1, DNS) at runtime rather than loading all specs upfront.
+- The model writes Workers JavaScript (or Python for Workers Python support), the server executes it in an isolated preview environment, and only the result returns to context — "bring the code to the API, not the API to the code" [^src14].
 
-**Elicitation.** Lets a server pause mid-tool call to ask the user for input: form mode sends a schema and the client renders a native form; URL mode hands off to a browser for OAuth or payment flows [^src7].
+This pattern generalizes: any service with >50 distinct operations benefits from a code-execution surface over an exhaustive tool list. The token reduction is typically 100–1000× [^src7][^src14].
+
+**MCP Apps (interactive responses).** An official protocol extension that lets a tool return an interactive interface rendered inline in the chat [^src7][^src12]. Servers shipping MCP apps see "meaningfully higher adoption and retention" than text-only servers [^src7].
+
+Technical model for MCP Apps [^src12]:
+- A **sandboxed iframe** is rendered within the MCP client's UI (Claude.ai, Claude Code). The sandbox prevents the app from accessing the parent DOM, user conversations, or credentials.
+- Bidirectional communication via **JSON-RPC `postMessage`** — the app sends data to the tool and receives structured responses, enabling real-time interactive UIs.
+- Launched from a tool's description via `_meta.ui.resourceUri` — the client detects this field and renders the URI in the iframe instead of showing a text result.
+- The app context preserves state during a user interaction, enabling multi-step workflows without losing progress.
+
+Five documented use cases [^src12]: **complex data visualization** (interactive charts, graphs, dashboards); **configuration forms** (structured input for complex parameters); **rich media presentation** (images, formatted docs); **real-time monitoring** (live-updating views of ongoing processes); **multi-step workflows** (wizard-style UIs for complex operations).
+
+Security boundary: the iframe sandbox attribute prevents the app from accessing the parent DOM or other conversations. The MCP server runs with the user's permissions, but the app cannot read conversation context directly — it only receives data explicitly passed through the `postMessage` channel [^src12].
+
+**Elicitation.** Lets a server pause mid-tool call to ask the user for input [^src7][^src13]. Two modes:
+
+- **Form mode** — the server sends a JSON Schema; the client renders a native input form. Schema constraints: flat objects only (no nested schemas, no arrays), primitive types only (string, number, integer, boolean, enum). Required fields are marked in the schema and the form enforces them [^src13].
+- **URL mode** — out-of-band flow; the server provides a URL for the client to open in a browser. Used for OAuth authorization, payment flows, and anything requiring a browser context [^src13].
+
+**Three-action response model** [^src13]:
+- `accept` — user submitted the form; `content` contains the response matching the schema.
+- `decline` — user explicitly skipped this input request (the tool continues without the input).
+- `cancel` — user aborted the task entirely; the server should stop processing.
+
+Servers must handle all three actions. Unhandled `cancel` leads to hung sessions. The MCP spec recommends clients visually distinguish which server is requesting data to mitigate phishing (a malicious server prompting for credentials under a trusted server's appearance) [^src13].
 
 **Standardized auth via CIMD.** Client ID Metadata Documents give users "a fast first-time auth flow and far fewer surprise re-auth prompts." Supported in MCP SDKs, Claude.ai, and Claude Code [^src7].
 
@@ -198,3 +234,6 @@ As of mid-2026 the Claude connector directory has grown to 200+ connectors spann
 [^src9]: [New connectors in Claude for everyday life](../../raw/notes/notes-clippings-new-connectors-in-claude-for-everyday-life.md) — Anthropic announcement
 [^src10]: [MCP Helps, But How?](../../raw/email/email-2025-09-04-mcp-helps-but-how.md) — Alex Wang, "Learn AI Together" (LinkedIn)
 [^src11]: [MCP SDKs — Model Context Protocol official docs](../../raw/web/web-sdks-model-context-protocol.md)
+[^src12]: [MCP Apps — Model Context Protocol](../../raw/web/web-mcp-apps-model-context-protocol.md) — Anthropic
+[^src13]: [Elicitation — Model Context Protocol](../../raw/web/web-elicitation-model-context-protocol.md) — Anthropic
+[^src14]: [Cloudflare MCP Server (Code Mode)](../../raw/web/web-github-cloudflare-mcp-mcp-server-for-the-cloudflare-api.md) — Cloudflare

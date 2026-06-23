@@ -55,6 +55,8 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [[ai-engineering/claude-api|Claude API]] — concept · draft · Claude Messages API in Python; system prompts, structured output
 - [[ai-engineering/computer-use|Computer Use]] — concept · draft · Claude perceiving screens and clicking; resolution scaling, thinking effort, prompt-injection defense, context management
 - [[ai-engineering/synthetic-data|Synthetic Data Generation]] — concept · draft · seedless agentic data generation via mechanism design (Simula: taxonomy → local diversity → complexification → dual-critic); used for Gemma, Gemini safety, on-device models
+- [[ai-engineering/compound-engineering|Compound Engineering]] — concept · draft · plan-work-review-compound loop; AGENTS.md as compound learning store; 5-product-1-person scale (Every.to)
+- [[ai-engineering/interpretability|Interpretability]] — concept · draft · mechanistic interpretability; superposition; sparse autoencoders; 30M features in Claude 3 Sonnet; "MRI for AI" by 2027
 
 ### Entities
 - [[ai-engineering/langgraph|LangGraph]] — entity · stub · production framework for stateful multi-agent workflows

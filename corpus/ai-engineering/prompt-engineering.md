@@ -48,6 +48,9 @@ sources:
   - path: raw/notes/notes-the-red-flag-summary.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/web/web-prompting-best-practices.md
+    channel: web
+    ingested_at: 2026-06-23
 aliases:
   - prompting
   - prompt design

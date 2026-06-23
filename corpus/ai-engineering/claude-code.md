@@ -78,6 +78,15 @@ sources:
   - path: raw/notes/notes-boris-cherny-14-hidden-claude-code-features.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/web/web-auto-mode-for-claude-code-claude.md
+    channel: web
+    ingested_at: 2026-06-23
+  - path: raw/web/web-manage-multiple-agents-with-agent-view-claude-code-docs.md
+    channel: web
+    ingested_at: 2026-06-23
+  - path: raw/web/web-orchestrate-subagents-at-scale-with-dynamic-workflows-claude.md
+    channel: web
+    ingested_at: 2026-06-23
 aliases:
   - Claude Code
   - claude-code
