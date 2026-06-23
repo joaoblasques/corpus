@@ -6,6 +6,7 @@ import argparse
 import datetime
 import json
 import os
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -143,19 +144,41 @@ def _under_vault(vault: Path, rel: str) -> bool:
         return False
 
 
+DEEP_REPORT_RE = re.compile(r"^00_Inbox/Clippings/youtube_raw/raw/watched/[^/]+/report\.md$")
+
+
+def sibling_frames(vault_root: Path, rel_path: str) -> list:
+    """For a claude-watch deep-analysis report.md, the sibling frame_*.jpg rel paths in
+    its <slug>/ dir — so reaping the report reaps the whole folder (no orphan hero images).
+    Returns [] for any other note."""
+    rel = rel_path.replace("\\", "/")
+    if not DEEP_REPORT_RE.match(rel):
+        return []
+    slug_dir = (vault_root / rel).parent
+    try:
+        return [str(f.relative_to(vault_root)) for f in sorted(slug_dir.glob("frame_*.jpg"))]
+    except OSError:
+        return []
+
+
 def cmd_reap(args) -> int:
     vault = Path(args.vault) if args.vault else co.VAULT_ROOT
     r = co.reapable()
-    t = {"notes_removed": 0, "urls_struck": 0, "not_removed": []}
+    t = {"notes_removed": 0, "frames_removed": 0, "urls_struck": 0, "not_removed": []}
     for rel in r["vault_notes"]:
         if not _under_vault(vault, rel):
             continue
         if not (vault / rel).exists():
             continue
+        frames = sibling_frames(vault, rel)   # [] unless a deep-analysis report.md
         if args.dry_run:
             t["notes_removed"] += 1
+            t["frames_removed"] += len(frames)
         elif remove_vault_note(vault, rel):   # count only actual deletions
             t["notes_removed"] += 1
+            for fr in frames:                 # whole-folder reap: hero frames too
+                if _under_vault(vault, fr) and remove_vault_note(vault, fr):
+                    t["frames_removed"] += 1
         else:
             # Exists + under vault but `git rm` refused: a tracked note with
             # uncommitted local edits. Surface it instead of silently leaving it —
@@ -166,7 +189,8 @@ def cmd_reap(args) -> int:
             _strike_url(vault, list_rel, url)
         t["urls_struck"] += 1
     note = ("tracked notes staged via git rm (review & commit in vault); "
-            "untracked notes deleted from disk (recoverable via raw/notes/ + corpus)")
+            "untracked notes deleted from disk (recoverable via raw/notes/ + corpus); "
+            "deep-analysis report.md also stages its sibling frame_*.jpg (whole-folder reap)")
     if t["not_removed"]:
         note += (f"; {len(t['not_removed'])} note(s) NOT removed — git-tracked with "
                  "uncommitted vault edits (commit or discard the edit, then re-reap)")

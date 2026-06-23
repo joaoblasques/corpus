@@ -25,10 +25,6 @@ INCLUDE_DIRS = [
 ]
 EXCLUDE_DIRS = [
     "03_Resources/llm-wiki-system",
-    # Phase 4 interim guard: claude-watch deep-analysis sink. Excluded until yt-deepen's
-    # ledger-based dedup ships, so ingest+reap can't trigger a re-analysis loop. Remove
-    # this line in Phase 4 step F to enable ingest of the deep reports.
-    "00_Inbox/Clippings/youtube_raw",
 ]
 EXCLUDE_FILE_RE = re.compile(r"(?i)(_processed\.md$|(^|/)README\.md$)")
 URL_LIST_NAMES = {"articles to process.md", "TO SCRAPE.md"}

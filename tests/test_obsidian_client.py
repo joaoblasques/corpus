@@ -1,3 +1,4 @@
+import json
 import subprocess
 import sys
 from pathlib import Path
@@ -213,3 +214,61 @@ def test_collect_fetches_inline_note_links(tmp_path, monkeypatch):
     text = webs[0].read_text()
     assert "via_vault_note: Clippings/N.md" in text
     assert "source_url: https://good.com/a" in text
+
+
+# --- Phase 4: folder-aware reap of claude-watch deep-analysis notes ---
+
+def _deep_report_rel(slug="vid-2026-06-23"):
+    return f"00_Inbox/Clippings/youtube_raw/raw/watched/{slug}/report.md"
+
+
+def test_sibling_frames_for_deep_report(tmp_path):
+    slug = tmp_path / "00_Inbox/Clippings/youtube_raw/raw/watched/vid-2026-06-23"
+    slug.mkdir(parents=True)
+    (slug / "report.md").write_text("x", encoding="utf-8")
+    (slug / "frame_0001.jpg").write_bytes(b"a")
+    (slug / "frame_0040.jpg").write_bytes(b"b")
+    assert sorted(oc.sibling_frames(tmp_path, _deep_report_rel())) == [
+        "00_Inbox/Clippings/youtube_raw/raw/watched/vid-2026-06-23/frame_0001.jpg",
+        "00_Inbox/Clippings/youtube_raw/raw/watched/vid-2026-06-23/frame_0040.jpg",
+    ]
+
+
+def test_sibling_frames_empty_for_non_deep_paths(tmp_path):
+    assert oc.sibling_frames(tmp_path, "Clippings/N.md") == []
+    # right tree but not the report.md leaf
+    assert oc.sibling_frames(tmp_path, "00_Inbox/Clippings/youtube_raw/raw/watched/vid/other.md") == []
+
+
+def _setup_deep_reapable(tmp_path, monkeypatch):
+    vault = tmp_path / "vault"
+    slug = vault / "00_Inbox/Clippings/youtube_raw/raw/watched/vid-2026-06-23"
+    slug.mkdir(parents=True)
+    (slug / "report.md").write_text("x", encoding="utf-8")
+    (slug / "frame_0001.jpg").write_bytes(b"a")
+    (slug / "frame_0040.jpg").write_bytes(b"b")
+    raw = tmp_path / "raw"; raw.mkdir()
+    (raw / "notes-vid.md").write_text(
+        "---\ncorpus_ingested: true\nvault_origin: " + _deep_report_rel() + "\n---\n", encoding="utf-8")
+    monkeypatch.setattr(oc.co, "DEDUP_DIRS", [raw])
+    return vault, slug
+
+
+def test_reap_folder_aware_stages_report_and_frames(tmp_path, monkeypatch):
+    vault, slug = _setup_deep_reapable(tmp_path, monkeypatch)
+    calls = []
+    monkeypatch.setattr(oc, "remove_vault_note", lambda vault_root, rel: (calls.append(rel), True)[1])
+    assert oc.cmd_reap(oc._args(["reap", "--vault", str(vault)])) == 0
+    assert _deep_report_rel() in calls                       # the report.md
+    assert sum("frame_" in c for c in calls) == 2            # both hero frames (whole folder)
+
+
+def test_reap_dry_run_counts_frames_but_removes_nothing(tmp_path, monkeypatch, capsys):
+    vault, slug = _setup_deep_reapable(tmp_path, monkeypatch)
+    called = []
+    monkeypatch.setattr(oc, "remove_vault_note", lambda vault_root, rel: (called.append(rel), True)[1])
+    oc.cmd_reap(oc._args(["reap", "--vault", str(vault), "--dry-run"]))
+    out = json.loads(capsys.readouterr().out)
+    assert called == []                                      # dry-run touches nothing
+    assert out["notes_removed"] == 1 and out["frames_removed"] == 2
+    assert (slug / "report.md").exists() and (slug / "frame_0001.jpg").exists()

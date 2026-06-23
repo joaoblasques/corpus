@@ -47,3 +47,29 @@ modified.
 
 > Note for corpus self-authorship: this doc is a **pointer/reference** only. The vault owns the
 > claude-watch integration; the corpus continues to own its own collection pipeline.
+
+---
+
+## Phase 4 (corpus side) — ingest + reap of deep-analysis notes: DONE 2026-06-23
+
+Enabled the corpus to ingest **and** reap the vault's claude-watch deep-analysis `report.md` notes
+(sink: `00_Inbox/Clippings/youtube_raw/raw/watched/<slug>/`).
+
+- **Dropped the interim guard** — removed `00_Inbox/Clippings/youtube_raw` from `EXCLUDE_DIRS` in
+  `bin/collect_obsidian.py` (was commit `45d6527`). `discover()` (rglob) + `is_included()` now
+  surface `youtube_raw/**/report.md`.
+- **Folder-aware reap** — `bin/obsidian_client.py` adds `sibling_frames()` + a folder-aware
+  `cmd_reap`: reaping a `.../watched/<slug>/report.md` also `git rm`s the sibling `frame_*.jpg`
+  (whole-folder reap — no orphan images). Unchanged safety: gated on `corpus_ingested: true`;
+  stages `git rm` but **never commits the vault** (Jonas reviews + commits vault deletions). New
+  `frames_removed` count in the reap summary. 4 new tests; obsidian/collect suites green (41).
+- **Validated one video** (`-h2C65Qd9Mg`, "5 Claude Connectors"): collect `--dry-run` discovers
+  the report → ingested (enriched `ai-engineering/claude-cowork` with a cited Connectors section;
+  raw source stamped `corpus_ingested: true`, moved to `raw/notes/`) → reap `--dry-run` stages the
+  whole `<slug>/` folder (report.md + 5 frames), disk unchanged.
+- **No-re-queue gate confirmed:** the durable ledger `~/.config/watch/yt_deepen_done.jsonl` holds
+  the video id (`staged_at: backfill`); `yt_watch_queue.py` does not list it. Reaping the sink
+  report will not re-trigger analysis.
+
+Left for the vault session (Jonas): run a real `reap` and commit the staged vault deletions when
+ready — the ledger gate guarantees no reprocessing.
