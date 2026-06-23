@@ -183,7 +183,7 @@ Two weeks with Fable 5 surfaced a pattern shift in how to work with the model [^
 
 **Well-defined tasks + agent self-check**: the model performs better when tasks have explicit, verifiable success criteria baked in — not just "write tests" but "write tests and verify all pass before returning." This supports a self-checking loop without manual verification of every step [^src11].
 
-**"Verify the right work, not that the work is right."** The critical reframe: the human's job when using Fable is not to check whether each step was executed correctly (the model does that), but to verify that the *task itself* was worth doing — that the loop is producing the right outputs for the right problems. This connects to [[productivity/ai-augmented-knowledge-work|loop engineering]] and the verification-as-design discipline [^src11].
+**"Verify the right work, not that the work is right."** The critical reframe: the human's job when using Fable is not to check whether each step was executed correctly (the model does that), but to verify that the *task itself* was worth doing — that the loop is producing the right outputs for the right problems. This connects to [[productivity/ai-augmented-knowledge-work|loop engineering]] and the verification-as-design discipline [^src11], and is the human-altitude case of [[ai-engineering/generator-evaluator-separation|generator–evaluator separation]] — once the model self-checks each step, the human evaluator relocates to the task level [^src11].
 
 ## See also
 

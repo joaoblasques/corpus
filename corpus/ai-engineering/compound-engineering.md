@@ -53,7 +53,7 @@ Every.to applies compound engineering across their software business: 5 products
 
 Every.to's reported split: **80% planning and review, 20% execution** [^src1]. More time spent NOT coding (spec work, review, `AGENTS.md` updates) produces more output because the model executes the implementation.
 
-This mirrors [[ai-engineering/agentic-coding|spec-driven development]] — the engineer moves up the abstraction ladder.
+This mirrors [[ai-engineering/spec-driven-development|Spec-Driven Development]] — the engineer moves up the abstraction ladder. Compound engineering *extends* spec-driven development with a fourth, learning-capture step (the spec front-loads intent; the compound step writes back what the run taught).
 
 ## The compound engineering plugin
 
@@ -62,6 +62,8 @@ The workflow is packaged as a Claude Code plugin (`every.inc/compound-engineerin
 ## See also
 
 - [[ai-engineering/agentic-coding|Agentic Coding]] — the broader orchestration discipline; compound engineering is its learning-loop layer
+- [[ai-engineering/spec-driven-development|Spec-Driven Development]] — the plan stage formalized; compound engineering adds the learning-capture step that spec-driven omits
+- [[ai-engineering/generator-evaluator-separation|Generator–Evaluator Separation]] — the review stage as a structural pattern (separate grader)
 - [[ai-engineering/agent-harness|Agent Harness]] — the ratchet principle (same mechanism)
 - [[ai-engineering/claude-md-conventions|CLAUDE.md Conventions]] — where `AGENTS.md`/`CLAUDE.md` fit in the context stack
 - [[ai-engineering/agent-skills|Agent Skills]] — skill files as an alternative to always-loaded AGENTS.md

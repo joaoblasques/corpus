@@ -54,6 +54,7 @@ The closing caution ties back to cognitive surrender: feeling busy running many 
 
 - [[software-engineering/engineering-craft|Engineering Craft]] — learning loops (mutual amplification, adversarial mentor) and habits that keep you in the loop
 - [[software-engineering/ai-assisted-development|AI-Assisted Development]] — the write→review shift and why fundamentals matter more under AI
+- [[ai-engineering/generator-evaluator-separation|Generator–Evaluator Separation]] — cognitive surrender is the collapse of the human evaluator role this pattern depends on
 - [[software-engineering/README|Software Engineering hub]]
 
 ---

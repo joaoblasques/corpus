@@ -67,6 +67,7 @@ For a quick fix with a clear test, just prompt and move on.
 ## See also
 
 - [[ai-engineering/agentic-coding|Agentic Coding]] — the coding-agent context this sits in
+- [[ai-engineering/compound-engineering|Compound Engineering]] — extends the spec-first plan stage with a learning-capture (compound) step that writes run learnings back to `AGENTS.md`
 - [[ai-engineering/claude-md-conventions|CLAUDE.md Conventions]] — the constitution as a CLAUDE.md file
 - [[ai-engineering/agent-evaluation|Agent Evaluation]] — validation step in the spec loop
 - [[ai-engineering/vibe-coding|Vibe Coding]] — the counter-pattern

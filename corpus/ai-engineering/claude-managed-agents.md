@@ -127,6 +127,8 @@ Real-world result: Harvey (legal AI) used dreaming for long-form drafting agents
 
 In internal benchmarks, outcomes improved task success by up to 10 points over a standard prompting loop, with the largest gains on the hardest problems; file generation improved +8.4% (docx) and +10.1% (pptx) [^src4]. Works for both objective criteria and subjective quality (brand voice, visual guidelines).
 
+Outcomes is a production instance of [[ai-engineering/generator-evaluator-separation|generator–evaluator separation]] — the grader runs in its own context so it isn't influenced by the agent's reasoning, the same principle behind the 3-agent GAN harness in [[ai-engineering/agent-harness|Agent Harness]].
+
 Wisedocs (document verification) used outcomes to grade reviews against internal guidelines; reviews now run 50% faster while staying aligned with team standards [^src4].
 
 ### Multiagent orchestration

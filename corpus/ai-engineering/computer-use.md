@@ -178,6 +178,7 @@ Instead of iterating on text prompts, record a demonstration — screenshots + a
 
 - [[ai-engineering/claude-code|Claude Code]] — Claude Code's auto mode uses a similar classifier approach for permission decisions
 - [[ai-engineering/agent-harness|Agent Harness]] — harness design principles underlying computer use integrations
+- [[ai-engineering/generator-evaluator-separation|Generator–Evaluator Separation]] — the advisor tool is the executor/advisor instance of separating judgment from generation
 - [[ai-engineering/context-window-management|Context Window Management]] — compaction and rolling-buffer patterns apply directly
 - [[ai-engineering/agent-security|Agent Security]] — prompt injection as an attack surface
 - [[ai-engineering/claude-models|Claude Model Lineup]] — Sonnet 4.6, Opus 4.6, Opus 4.7, Haiku 4.5 model selection

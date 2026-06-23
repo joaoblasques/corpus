@@ -1249,3 +1249,15 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   - ingest: 30 ingested · 4 deferred · status=ok
 - lint:
   - 0 broken wikilinks · 0 broken citations · 0 orphans · 2 stubs
+
+## [2026-06-23 12:15] query (origin: claudesidian) | Healthcare data engineering showcase: feature store vs vector DB vs Delta decision; PHI de-id, FHIR, ICD-10/SNOMED/LOINC, health DQ; medallion for health->ML features; Spark/dbt/Airflow tooling
+- gap: Corpus covers medallion, vector DB, DAMA data-quality, feature-store concept (online/offline store), and dbt/Spark/Airflow tooling. ZERO healthcare-specific coverage (FHIR resources, HIPAA de-identification, ICD-10/SNOMED/LOINC, OMOP CDM). Queued FHIR + OMOP (good extracts); HHS de-id page returned nav chrome only.
+- queued: raw/_inbox/overview-clinical.md, raw/_inbox/standardized-data-the-omop-common-data-model.md, raw/_inbox/methods-for-de-identification-of-phi.md
+
+## [2026-06-23 14:00] lint | weekly Opus synthesis+lint pass (Medium, scoped to 30 week-changed pages + neighbours)
+- scope: 30 pages changed in the last week (ai-engineering cluster + data-engineering + ai-business + mlops + software-engineering)
+- citations/links: fixed 1 mislabeled wikilink (compound-engineering: `[[agentic-coding|spec-driven development]]` → `[[spec-driven-development|Spec-Driven Development]]`); no broken citations or broken targets found across the 30 pages
+- cross-links added (typed): compound-engineering ↔ spec-driven-development (extends with learning-capture step); github-copilot → openai (multi-model provider); + new-synthesis links from agent-harness, claude-managed-agents, claude-models, computer-use, compound-engineering, cognitive-debt
+- contradictions: none new; the Miessler-vs-Euclid disagreement already named+resolved in ai-and-the-job-market
+- new synthesis: [[ai-engineering/generator-evaluator-separation|Generator–Evaluator Separation]] — names the week's cross-source convergence that a model can't reliably grade itself (self-preferential bias); ties 3-agent GAN harness, Managed-Agents Outcomes, computer-use advisor, Fable loop engineering, compound-engineering review, cognitive-surrender anti-pattern. All claims cite raw sources; linked from 6 neighbours (no orphan)
+- index: +1 page (215→216); sources unchanged (598; synthesis cites already-ingested sources)

@@ -220,6 +220,7 @@ Every harness component encodes an assumption about what Claude can't do on its 
 - [[ai-engineering/context-window-management|Context Window Management]] — compaction, offloading, context rot
 - [[ai-engineering/mcp|MCP]] — tools and the prompt-injection surface they add
 - [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] — subagent orchestration, planner/evaluator splits
+- [[ai-engineering/generator-evaluator-separation|Generator–Evaluator Separation]] — the GAN-harness insight generalized across the week's sources (a generator can't grade itself)
 - [[ai-engineering/rag|RAG]] — grep-vs-vector and how delivery mode reshapes retrieval
 - [[ai-engineering/ai-agent|AI Agent]] — the ReAct loop the harness wraps
 - [[ai-engineering/README|AI Engineering hub]]

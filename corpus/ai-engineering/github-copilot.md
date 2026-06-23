@@ -59,6 +59,7 @@ The source is a GitHub community discussion; a practitioner comment tempers the 
 
 - [[ai-engineering/agentic-coding|Agentic Coding]] — the conductor→orchestrator framing where Copilot is an orchestration-tier tool; the verification bottleneck
 - [[ai-engineering/claude-code|Claude Code]] — the comparable Anthropic coding agent
+- [[ai-engineering/openai|OpenAI]] — one of the model providers (alongside Anthropic, Google) powering Agent Mode
 - [[ai-engineering/mcp|MCP]] — the protocol Agent Mode integrates for external capabilities
 - [[ai-engineering/vibe-coding|Vibe Coding]] — the "everyone can build" framing the campaign leans on
 - [[ai-engineering/README|AI Engineering hub]]
