@@ -49,6 +49,9 @@ The engineering substrate for building ML and software systems: how the developm
 - [[mlops/model-monitoring|Model Monitoring]] — concept · draft · why ML monitoring differs; data vs concept drift; Databricks Lakehouse Monitoring (profile/drift tables, inference tables); implementation pipeline
 - [[mlops/production-ml-workflow|Production ML Workflow]] — concept · draft · production-minded training (Practical ML Series Pt 2): holdout set, robust preprocessing, model comparison, business-metric optimization, sklearn pipeline serialization
 
+### Syntheses
+- [[mlops/environment-promotion|Environment Promotion (dev → acc → prd)]] — synthesis · draft · the cross-source deployment discipline (ML CI/CD + data-infra CI/CD + DAB): humans only in dev, env-scoped state, CI-check → human-gated prod apply, machine identity
+
 ## Sources ingested
 - [AI Engineering from Scratch — Phase 00 / 01 Dev Environment](../../raw/notes/00-01-dev-environment-kb.md) — first-party course note, 2026-05-25
 - [AI Engineering from Scratch — Phase 00 / 02 Git & Collaboration](../../raw/notes/00-02-git-and-collaboration-kb.md) — first-party course note, 2026-05-27

@@ -23,7 +23,7 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-16
-updated: 2026-06-19
+updated: 2026-06-23
 last_confirmed: 2026-06-19
 ---
 
@@ -71,7 +71,7 @@ For **batch** data pipelines, a Factory method for DB connections is usually pre
 
 ## Misc engineering hygiene
 
-Consistent project structure and naming (Google style guide); automated formatting/lint/type checks (`black`, `isort`, `flake8`, `mypy`) run via a `Makefile` and enforced with a **pre-commit git hook**; `dotenv` for per-environment config from `.env`; `venv` (or Docker) for reproducible environments [^src1].
+Consistent project structure and naming (Google style guide); automated formatting/lint/type checks (`black`, `isort`, `flake8`, `mypy`) run via a `Makefile` and enforced with a **pre-commit git hook**; `dotenv` for per-environment config from `.env`; `venv` (or Docker) for reproducible environments [^src1]. This same format/lint/type/test gate is what the [[data-engineering/cicd-for-data-infrastructure|CI/CD]] pipeline runs on every PR — the pre-commit hook is the local mirror of the CI check.
 
 ## Guiding principle
 
@@ -82,6 +82,8 @@ The design patterns are presented as suggestions, not requirements [^src1]. Ask 
 - [[data-engineering/idempotent-pipelines|Idempotent Pipelines]] — the idempotency property of functional design, in depth
 - [[data-engineering/python-for-data-engineering|Python for Data Engineering]] — Python as glue across ETL/DQ/test/orchestrate; disk vs memory
 - [[data-engineering/data-engineering-best-practices|Data Engineering Best Practices]] — pipeline-level best practices (3-hop, DQ, idempotency, DRY, metadata, tests)
+- [[data-engineering/cicd-for-data-infrastructure|CI/CD for Data Infrastructure]] — where the same lint/type/test gate runs automatically on each PR
+- [[data-engineering/small-scale-pipeline-design|Small-Scale Pipeline Design]] — the implementation mindset (CLI, logging, retries) these code patterns formalize
 - [[data-engineering/etl-pipeline|ETL Pipeline]] — Extract/Transform/Load; the structure these patterns refactor
 
 [^src1]: [Data Pipeline Design Patterns - #2. Coding patterns in Python](../../raw/web/data-pipeline-design-patterns-2-coding-patterns-in-python-st.md)

@@ -22,7 +22,7 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-05-21
-updated: 2026-06-19
+updated: 2026-06-23
 last_confirmed: 2026-06-19
 ---
 
@@ -113,6 +113,9 @@ Window functions appear throughout the DE stack [^src1]:
 
 - [[data-engineering/dimensional-modeling|Dimensional Modeling]] — streak_identifier pattern uses LAG + cumulative SUM as core building blocks
 - [[data-engineering/dbt|dbt]] — window functions used in mart-layer enrichment
+- [[data-engineering/data-transformation|Data Transformation]] — the transform layer where these functions are applied (categorization, enrichment, pre-aggregation)
+- [[data-engineering/sql-intermediate-results|Storing Intermediate Results in SQL]] — CTEs/temp tables that hold the window-function logic
+- [[data-engineering/data-engineering-interview|Data Engineering Interview]] — window functions are a recurring SQL-round topic
 - [[data-engineering/README|Data Engineering hub]]
 
 ---

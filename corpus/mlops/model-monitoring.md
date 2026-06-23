@@ -24,7 +24,7 @@ tags:
   - corpus/mlops
   - concept
 created: 2026-06-19
-updated: 2026-06-19
+updated: 2026-06-23
 ---
 
 # Model Monitoring
@@ -68,6 +68,7 @@ The net effect: inference tables + monitoring pipelines enable end-to-end visibi
 ## See also
 
 - [[mlops/drift-detection|Drift Detection]] — the univariate distance-metric/test selection detail under this broader monitoring picture
+- [[data-engineering/data-quality|Data Quality]] — complements this: its input-distribution monitoring layer watches for the same data drift from the *upstream data* side (schema/contract checks, `null_rate`/`mean` over time), where this page watches it from the *served-model* side
 - [[mlops/model-serving|Model Serving]] — inference tables log the endpoints this monitors
 - [[mlops/databricks-asset-bundles|Databricks Asset Bundles]] — the DAB job that schedules monitor refreshes
 - [[mlops/mlflow|MLflow]] — the registered models being served and monitored

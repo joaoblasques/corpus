@@ -26,7 +26,7 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-19
-updated: 2026-06-21
+updated: 2026-06-23
 last_confirmed: 2026-06-21
 ---
 
@@ -42,7 +42,7 @@ The skills are ranked by how often they come up [^skills]:
 2. **Python** — the most common pipeline language; core data structures and idioms [^skills].
 3. **Leetcode DSA** — standard SWE bar; Blind/Leetcode 75, NeetCode practice [^skills].
 4. **Data modeling** — star schema, facts & dimensions, warehousing, OLTP; know *what* and *why* [^skills]. See [[data-engineering/dimensional-modeling|Dimensional Modeling]].
-5. **Data pipelines** — a design question is near-certain; then probed on testing, backfilling, scaling, bad data, dependencies. Know orchestration basics (Airflow/dbt), backfilling, [[data-engineering/etl-pipeline|ETL vs ELT]], EL tools (Stitch/Fivetran), data testing, and the [[data-engineering/idempotent-pipelines|idempotent pipeline]] concept [^skills].
+5. **Data pipelines** — a design question is near-certain; then probed on testing, backfilling, scaling, bad data, dependencies. Know orchestration basics (Airflow/dbt), backfilling, [[data-engineering/etl-pipeline|ETL vs ELT]], EL tools (Stitch/Fivetran), data testing, and the [[data-engineering/idempotent-pipelines|idempotent pipeline]] concept [^skills]. The corpus pages backing this design round: [[data-engineering/data-flow-patterns|Data Flow Patterns]] (extraction/behavioral/structural axes), [[data-engineering/scaling-data-pipelines|Scaling Data Pipelines]] (the scaling probe), [[data-engineering/data-quality|Data Quality]] (the bad-data probe), and [[data-engineering/requirements-gathering|Requirements Gathering]] (the "understand source, schedule, usage pattern" framing).
 6. **Distributed systems fundamentals** — how they work, job-dependent [^skills]. See [[software-engineering/distributed-systems-fallacies|Distributed Systems Fallacies]].
 7. **Event streaming** — what event streams are, why and how to use them [^skills]. See [[data-engineering/kafka|Kafka]] and [[data-engineering/stream-processing|Stream Processing]] (batch-vs-stream, watermarks, delivery guarantees — a recurring real-time interview topic).
 8. **System design** — for DE, usually pipeline design (understand source, schedule, usage pattern); classics like *"design a clickstream store"* or *"use CDC to replicate OLTP into a warehouse"*; sometimes standard SWE design (Twitter/Netflix) [^skills].

@@ -25,7 +25,7 @@ tags:
   - corpus/data-engineering
   - entity
 created: 2026-05-21
-updated: 2026-06-19
+updated: 2026-06-23
 ---
 
 # Apache Parquet
@@ -178,6 +178,8 @@ WITH (
 ## See also
 
 - [[data-engineering/apache-iceberg|Apache Iceberg]] — table format layer on top of Parquet
+- [[data-engineering/apache-spark|Apache Spark]] — pairs Parquet with Catalyst column pruning + predicate pushdown (min/max stats)
+- [[data-engineering/cloud-data-warehouse-internals|Cloud Data Warehouse Internals]] — the hybrid row-group/column-chunk layout Parquet shares with BigQuery/Snowflake/Databricks
 - [[data-engineering/data-lake|Data Lake / Lakehouse]] — storage architecture that uses Parquet as the file format
 - [[data-engineering/dimensional-modeling|Dimensional Modeling]] — how joins/shuffles destroy RLE compression (temporal cardinality explosion)
 - [[data-engineering/README|Data Engineering hub]]

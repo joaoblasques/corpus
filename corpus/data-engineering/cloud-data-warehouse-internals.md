@@ -65,6 +65,7 @@ The practical payoff (Vu Trinh's framing): in a world where "you might work with
 ## Related
 
 - [[data-engineering/bigquery|BigQuery]] · [[data-engineering/snowflake|Snowflake]] · [[data-engineering/databricks|Databricks]] · [[data-engineering/redshift|Redshift]]
+- [[data-engineering/compute-storage-decoupling|Compute–Storage Decoupling]] — this comparison generalized: the same separate-compute-from-object-storage move across warehouses, lakehouse, and streaming
 - [[data-engineering/storage-fundamentals|Storage Fundamentals]] — row vs columnar vs hybrid; vectorization vs code specialization
 - [[data-engineering/parquet|Apache Parquet]] — the canonical hybrid format
 - [[data-engineering/apache-spark|Apache Spark]] — the engine Photon accelerates

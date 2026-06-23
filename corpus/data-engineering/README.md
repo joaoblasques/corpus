@@ -87,6 +87,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [[data-engineering/data-engineering-agents-landscape|Data Engineering Agents Landscape]] — synthesis · draft · OSS/vendor DE agents by build-time vs consume-time (text-to-SQL): Vanna, WrenAI, Dataherald, Datus-agent, dbt MCP/Agent Skills, Databricks Genie/Lakeflow; solo-DE recommendation (cross-domain → ai-engineering)
 - [[data-engineering/portfolio-project-that-lands-a-de-role|The Portfolio Project That Lands a DE Role]] — synthesis · draft · what makes ONE end-to-end Databricks+AWS showcase impressive to hiring managers: business framing, rigor checklist (medallion/DQ/idempotency/tests/metadata/IaC/cost), realism/ops, defensible stack choices, junior-tell anti-signals
 - [[data-engineering/cloud-data-warehouse-internals|Cloud Data Warehouse Internals]] — synthesis · draft · BigQuery/Snowflake/Databricks/Redshift compared: shared-disk, object storage, hybrid vs column format, vectorization vs code specialization
+- [[data-engineering/compute-storage-decoupling|Compute–Storage Decoupling]] — synthesis · draft · the separate-compute-from-object-storage move as one convergent pattern across cloud warehouses, the lakehouse, and event streaming (tiered/diskless Kafka)
 
 ### Source summaries
 - [[data-engineering/sources/dbt-kimball-project|dbt Kimball reference project]] — source · draft · reference dbt Kimball SCD2 project (BigQuery/DuckDB)

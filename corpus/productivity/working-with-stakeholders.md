@@ -3,11 +3,11 @@ type: concept
 domain: productivity
 status: draft
 sources:
-  - path: raw/_inbox/email-2026-05-20-data-team-stakeholders-friend-or-foe.md
-    channel: inbox
+  - path: raw/email/email-2026-05-20-data-team-stakeholders-friend-or-foe.md
+    channel: email
     ingested_at: 2026-06-12
-  - path: raw/_inbox/email-2026-06-11-how-to-finish-early-and-satisfy-your-stakeholders.md
-    channel: inbox
+  - path: raw/email/email-2026-06-11-how-to-finish-early-and-satisfy-your-stakeholders.md
+    channel: email
     ingested_at: 2026-06-12
   - path: raw/web/web-if-a-project-surprises-your-team-that-s-on-you.md
     channel: web
@@ -22,7 +22,7 @@ tags:
   - corpus/productivity
   - concept
 created: 2026-06-12
-updated: 2026-06-17
+updated: 2026-06-23
 ---
 
 # Working with Stakeholders

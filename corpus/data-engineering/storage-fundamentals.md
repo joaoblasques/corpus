@@ -101,6 +101,7 @@ This mirrors the broader [[data-engineering/data-engineer-role|data-engineer-rol
 - [[data-engineering/data-lake|Data Lake / Lakehouse]] — the lake/lakehouse abstraction
 - [[data-engineering/parquet|Apache Parquet]] — the canonical columnar format (columnar deep-dive, ORC, compression schemes)
 - [[data-engineering/cloud-data-warehouse-internals|Cloud Data Warehouse Internals]] — column vs hybrid format; vectorization vs code specialization
+- [[data-engineering/compute-storage-decoupling|Compute–Storage Decoupling]] — object storage as the substrate compute is scaled independently from
 - [[data-engineering/data-engineering-best-practices|Data Engineering Best Practices]] — storage layering in pipeline design
 - [[data-engineering/README|Data Engineering hub]]
 

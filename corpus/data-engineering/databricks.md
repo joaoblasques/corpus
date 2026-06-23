@@ -41,7 +41,7 @@ tags:
   - corpus/data-engineering
   - entity
 created: 2026-06-11
-updated: 2026-06-19
+updated: 2026-06-23
 ---
 
 # Databricks
@@ -137,7 +137,7 @@ See [[data-engineering/merge-into|MERGE INTO]] and [[data-engineering/parquet|Pa
 
 ## Lakeflow Spark Declarative Pipelines
 
-A framework for batch and streaming pipelines in SQL and Python, formerly known as DLT — you describe tables and the platform handles orchestration and incremental processing [^src1][^src5]. Lakeflow SDP extends and is interoperable with Apache Spark Declarative Pipelines while running on the performance-optimized Databricks Runtime [^src5]. Core concepts: pipelines, flows, streaming tables, and materialized views; common use cases are ingestion from cloud storage (S3, ADLS Gen2, GCS) and message buses (Kafka, Kinesis, Pub/Sub, EventHub, Pulsar) plus incremental transformations [^src5]. See [[data-engineering/kafka|Kafka]].
+A framework for batch and streaming pipelines in SQL and Python, formerly known as DLT — you describe tables and the platform handles orchestration and incremental processing [^src1][^src5]. Lakeflow SDP extends and is interoperable with Apache Spark Declarative Pipelines while running on the performance-optimized Databricks Runtime [^src5]. Core concepts: pipelines, flows, streaming tables, and materialized views; common use cases are ingestion from cloud storage (S3, ADLS Gen2, GCS) and message buses (Kafka, Kinesis, Pub/Sub, EventHub, Pulsar) plus incremental transformations [^src5]. See [[data-engineering/kafka|Kafka]]; this complements [[data-engineering/stream-processing|Stream Processing]] as the Databricks/Spark Structured Streaming path for the streaming-and-micro-batch use cases.
 
 ## dbt vs. Lakeflow SDP on Databricks
 

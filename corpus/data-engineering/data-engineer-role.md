@@ -31,7 +31,7 @@ tags:
   - corpus/data-engineering
   - synthesis
 created: 2026-06-11
-updated: 2026-06-19
+updated: 2026-06-23
 last_confirmed: 2026-06-19
 ---
 
@@ -157,6 +157,7 @@ This is structurally the same as the impact-scoring framing in §Impact-scoring 
 - [[data-engineering/pipeline-layers|Pipeline Layers]] — orchestration / architecture fundamentals
 - [[data-engineering/dbt|dbt]] — a common tool, but a tool — apply the fundamentals
 - [[data-engineering/de-portfolio-projects|DE Portfolio Projects]] — a portfolio of runnable projects for the next step after cron+SQL
+- [[data-engineering/data-engineering-interview|Data Engineering Interview]] — the skills-and-job-search complement to this role/seniority framing
 - [[data-engineering/sources/data-engineering-zoomcamp|Data Engineering Zoomcamp]] — a free, fundamentals-first end-to-end course
 - [[data-engineering/README|Data Engineering hub]]
 

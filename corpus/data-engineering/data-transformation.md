@@ -17,7 +17,7 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-19
-updated: 2026-06-19
+updated: 2026-06-23
 ---
 
 # Data Transformation (the "T" in ETL/ELT)
@@ -106,7 +106,7 @@ FROM recent_spending;
 
 Even with tooling like dbt, the "T" layer can become as messy as the raw data it was meant to clean [^src1]:
 
-- **3000-line queries.** Transform models grow organically — someone needs a metric, tacks on another CTE or join, repeat, and you get a *"3000-line SQL file, 17 CTEs deep, with a bunch of CASE WHEN logic buried in subqueries"* that technically works but nobody wants to touch [^src1].
+- **3000-line queries.** Transform models grow organically — someone needs a metric, tacks on another CTE or join, repeat, and you get a *"3000-line SQL file, 17 CTEs deep, with a bunch of CASE WHEN logic buried in subqueries"* that technically works but nobody wants to touch [^src1]. The choice of *how* to structure those intermediate steps (CTE vs view vs temp table vs materialized view) is the subject of [[data-engineering/sql-intermediate-results|Storing Intermediate Results in SQL]].
 - **Dependency sprawl.** The more models depend on each other, the more fragile things get; small upstream changes ripple downstream and break dashboards in non-obvious ways. Without clear lineage/dependency mapping you get a fragile system [^src1].
 - **Lack of ownership.** In a "move fast" data world, engineers, analytics engineers, and even analysts all build transforms — so who owns the definitions, cleans up deprecated models, gets final say on business logic? Without clear ownership, speed eventually bites [^src1].
 
@@ -129,6 +129,8 @@ To avoid chaos the transform logic needs structure. The author's original layeri
 - [[data-engineering/medallion-architecture|Medallion Architecture]] — bronze/silver/gold layering of the transform layer
 - [[data-engineering/pipeline-layers|Pipeline Layers]] — staging → warehouse → marts separation pattern
 - [[data-engineering/data-quality|Data Quality]] — tests and DQ checks at the transform layer
+- [[data-engineering/sql-intermediate-results|Storing Intermediate Results in SQL]] — how to structure transform steps (CTE/view/temp table/materialized view) to avoid the 3000-line-query trap
+- [[data-engineering/sql-window-functions|SQL Window Functions]] — a core SQL technique used inside transform models (ranking, running aggregates, period-over-period)
 - [[data-engineering/etl-pipeline|ETL Pipeline]] — where transform sits in ETL vs ELT
 
 ---

@@ -17,7 +17,7 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-19
-updated: 2026-06-19
+updated: 2026-06-23
 ---
 
 # Scaling Data Pipelines
@@ -56,6 +56,8 @@ The conclusion is a discipline, not a tool: come up with several scaling strateg
 - [[data-engineering/etl-pipeline|ETL Pipeline]] — ELT-in-the-warehouse as a scaling strategy
 - [[data-engineering/data-flow-patterns|Data Flow Patterns]] — pattern choices that interact with scaling (streaming, multi-hop)
 - [[data-engineering/incremental-pipeline-design|Incremental Pipeline Design]] — parallel backfills as horizontal scaling
+- [[data-engineering/small-scale-pipeline-design|Small-Scale Pipeline Design]] — complements this: scaling is what a "small but growing" pipeline grows into when data volumes outgrow its shape
+- [[data-engineering/python-for-data-engineering|Python for Data Engineering]] — row-streaming a larger-than-memory dataset in Python is the "check whether you need to scale at all" default before reaching for distributed compute
 - [[data-engineering/README|Data Engineering hub]]
 
 ---

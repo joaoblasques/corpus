@@ -46,7 +46,7 @@ tags:
   - corpus/ai-business
   - concept
 created: 2026-06-12
-updated: 2026-06-17
+updated: 2026-06-23
 
 ---
 
@@ -63,7 +63,7 @@ Recruiters skim and look for quick signals; a portfolio must make obvious what k
 - **No role targeting.** A grab-bag (ML model + WordPress blog + Python game + React app) looks unfocused, not versatile. Pick 2–3 projects aligned to the target role [^src1].
 - **Amateur presentation.** With AI design help there is "no real excuse for having a poor-looking portfolio" — use complementary colors, modern fonts, consistent spacing, mobile-friendly layout [^src1].
 
-A solved real business problem makes a stronger portfolio piece than a side project nobody asked for — see [[ai-business/monetizing-code|Monetizing Code]].
+A solved real business problem makes a stronger portfolio piece than a side project nobody asked for — see [[ai-business/monetizing-code|Monetizing Code]]. The mechanics of turning these signals into applications — persistent career-strategist context, per-job tailoring, remote-trust proxies — are **applied in** [[ai-business/ai-job-search|Finding a Job Using AI]].
 
 ## Interview behavior: communication is the majority of the score
 

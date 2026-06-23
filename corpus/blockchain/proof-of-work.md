@@ -19,7 +19,7 @@ tags:
   - corpus/blockchain
   - concept
 created: 2026-06-17
-updated: 2026-06-17
+updated: 2026-06-23
 ---
 
 # Proof-of-Work
@@ -74,10 +74,11 @@ Proof-of-work solves the central problem of digital money without a trusted thir
 
 ## Related pages
 
-- [[blockchain/hash-functions|Hash Functions]] — SHA-256 and SHA-1 underpin PoW computation
+- [[blockchain/hash-functions|Hash Functions]] — **uses** SHA-256 (and Hashcash's SHA-1) as the one-way primitive PoW brute-forces
 - [[blockchain/bitcoin|Bitcoin]] — Nakamoto Consensus applied at scale
 - [[blockchain/satoshi-nakamoto|Satoshi Nakamoto]] — synthesizer of the PoW insight
-- [[blockchain/the-cypherpunks|The Cypherpunks]] — Adam Back and the b-money/BitGold predecessors
+- [[blockchain/the-cypherpunks|The Cypherpunks]] — **predecessor-of** Bitcoin's PoW: Hashcash (Adam Back) and the b-money/BitGold proposals, all of which failed to solve sybil resistance
+- [[blockchain/public-key-cryptography|Public-Key Cryptography]] — **complements** PoW: digital signatures authorize who can spend, PoW decides whose history is canonical
 
 [^src1]: [Hashcash](../../raw/notes/notes-hashcash-scrape.md)
 [^src2]: [Satoshi Nakamoto](../../raw/notes/notes-satoshi-nakamoto-scrape.md)

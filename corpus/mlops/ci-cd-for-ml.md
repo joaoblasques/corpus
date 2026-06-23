@@ -88,6 +88,7 @@ Catalogs, schemas, and workspaces provide clean separation and access control; s
 ## See also
 
 - [[mlops/databricks-asset-bundles|Databricks Asset Bundles]] — `databricks bundle deploy` is this pipeline's deployment payload
+- [[mlops/environment-promotion|Environment Promotion (dev → acc → prd)]] — the cross-source synthesis this page is one instance of
 - [[data-engineering/cicd-for-data-infrastructure|CI/CD for Data Infrastructure]] — the data-infra sibling of this ML CI/CD discipline
 - [[mlops/databricks-development|Databricks Development]] — the dev/acc/prd catalog split originates in the local-dev setup
 - [[mlops/model-serving|Model Serving]] — the SPN OAuth flow authenticates serverless endpoint calls

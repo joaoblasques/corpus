@@ -32,7 +32,7 @@ tags:
   - corpus/ai-business
   - concept
 created: 2026-06-15
-updated: 2026-06-21
+updated: 2026-06-23
 ---
 
 # Finding a Job Using AI
@@ -149,6 +149,7 @@ The source is emphatic that mass application backfires: "'1,000 applications' is
 
 - [[ai-business/technical-career|Navigating a Technical Career]] — portfolio signals, interview behavior; the human-judgment layer over the tooling.
 - [[ai-business/ai-and-the-job-market|AI and the Job Market]] — why "apply AI to messy real work" is the durable skill; the layoff backdrop.
+- [[ai-business/monetizing-code|Monetizing Code]] — **complements** the job search: a paid, solved business problem doubles as the strongest portfolio/case-study signal a tailored application can point to.
 
 [^src1]: [The Subtle Art of Finding a Job Using AI](../../raw/email/email-2026-06-01-the-subtle-art-of-finding-a-job-using-ai.md) (AI+ Community newsletter)
 [^src2]: [Pickle-Pixel / ApplyPilot — autonomous job-application agent](../../raw/web/github-pickle-pixel-applypilot-ai-agent-that-applies-to-jobs.md) (fetched via the source email)

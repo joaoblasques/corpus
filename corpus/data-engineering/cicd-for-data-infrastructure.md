@@ -74,6 +74,7 @@ Map any intimidating 1000-line Terraform file or complex YAML workflow onto this
 
 ## Related
 
+- [[mlops/environment-promotion|Environment Promotion (dev → acc → prd)]] — the cross-source synthesis (ML + data-infra + DAB) this dev→gate→prod flow is one instance of
 - [[mlops/terraform|Terraform]] · [[mlops/infrastructure-as-code|Infrastructure as Code]] — the IaC layer (mlops)
 - [[data-engineering/data-engineering-best-practices|Data Engineering Best Practices]] — testing & version control
 - [[data-engineering/dbt|dbt]] — slim CI for dbt models (PR-specific schemas)

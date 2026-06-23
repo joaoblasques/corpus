@@ -41,7 +41,7 @@ tags:
   - corpus/data-engineering
   - entity
 created: 2026-05-21
-updated: 2026-06-19
+updated: 2026-06-23
 ---
 
 # Apache Kafka
@@ -165,6 +165,7 @@ These findings were produced with **Dimster** (DIMensional teSTER), an open-sour
 
 - [[data-engineering/idempotent-pipelines|Idempotent Pipelines]] — append-only stream ingestion with at-most-once settings
 - [[data-engineering/stream-processing|Stream Processing]] — Kafka as the transport layer in real-time pipelines
+- [[data-engineering/storage-fundamentals|Storage Fundamentals]] — the object-storage trend (tiered/diskless Kafka) builds on the object-storage layer covered there
 - [[data-engineering/README|Data Engineering hub]]
 
 ---

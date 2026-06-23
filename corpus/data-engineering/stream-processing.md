@@ -26,7 +26,7 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-19
-updated: 2026-06-19
+updated: 2026-06-23
 ---
 
 # Stream Processing (and Batch vs Stream)
@@ -114,6 +114,8 @@ A minimal IoT pipeline from the source [^src1]: a Python script simulates temper
 - [[data-engineering/data-ingestion-patterns|Data Ingestion Patterns]] — stream-via-event-log vs batch-extract
 - [[data-engineering/data-orchestration|Data Orchestration]] — scheduling batch/micro-batch jobs
 - [[data-engineering/idempotent-pipelines|Idempotent Pipelines]] — the batch analogue of exactly-once
+- [[data-engineering/apache-spark|Apache Spark]] — Spark Structured Streaming is one of the named processing engines
+- [[data-engineering/databricks|Databricks]] — runs Spark Structured Streaming / Lakeflow for streaming + micro-batch
 - [[data-engineering/data-engineering-interview|Data Engineering Interview]] — event streaming is a tested skill
 - [[data-engineering/README|Data Engineering hub]]
 

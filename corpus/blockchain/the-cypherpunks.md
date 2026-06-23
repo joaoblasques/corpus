@@ -14,7 +14,7 @@ tags:
   - corpus/blockchain
   - concept
 created: 2026-06-17
-updated: 2026-06-17
+updated: 2026-06-23
 ---
 
 # The Cypherpunks
@@ -52,9 +52,9 @@ The cypherpunk motto "Cypherpunks write code" directly influenced Satoshi Nakamo
 
 ## Related pages
 
-- [[blockchain/satoshi-nakamoto|Satoshi Nakamoto]] — synthesized cypherpunk lineage into Bitcoin
-- [[blockchain/proof-of-work|Proof-of-Work]] — the consensus mechanism that solved sybil attacks
+- [[blockchain/satoshi-nakamoto|Satoshi Nakamoto]] — **predecessor-of**: the cypherpunk movement (b-money, BitGold, Hashcash) that Satoshi synthesized into Bitcoin
+- [[blockchain/proof-of-work|Proof-of-Work]] — the consensus mechanism that finally solved the sybil attacks that defeated b-money and BitGold
 - [[blockchain/history-of-money|History of Money]] — broader context of money's evolution
-- [[blockchain/public-key-cryptography|Public-Key Cryptography]] — the cryptographic tools cypherpunks championed
+- [[blockchain/public-key-cryptography|Public-Key Cryptography]] — **uses**: the cryptographic tools (Diffie-Hellman, RSA, PGP) cypherpunks championed against export controls
 
 [^src1]: [The Cypherpunks](../../raw/notes/notes-the-cypherpunks-scrape.md)
