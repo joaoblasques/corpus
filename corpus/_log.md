@@ -1277,3 +1277,9 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - matured: corpus/ai-engineering/transformer.md (draft → mature; confidence 0.9; last_confirmed 2026-06-23)
 - cross-links added across 5 ai-engineering pages; embeddings linked from the domain hub
 - verify gate: an independent Sonnet content-critic ran before commit and caught a fabricated quote (invented 5,000/10M figures) + a misattributed "temporal knowledge graph" framing on embeddings.md — both corrected to what the cited sources support
+
+## [2026-06-23 16:10] ingest | claude-watch deep-analysis note (5 Claude Connectors)
+- source: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-5-claude-connecto-report.md (channel notes; vault_origin youtube_raw/.../5-claude-connectors-.../report.md)
+- domain: ai-engineering
+- pages touched: corpus/ai-engineering/claude-cowork.md (new Connectors section + [^src24])
+- notes: first ingest after Phase-4 enablement (collect-obsidian guard dropped; reaper folder-aware). Reaping this note git-rms report.md + 5 sibling frames (whole-folder reap). Ledger gate (~/.config/watch/yt_deepen_done.jsonl) confirmed: video -h2C65Qd9Mg in ledger, absent from yt_watch_queue → no re-queue.

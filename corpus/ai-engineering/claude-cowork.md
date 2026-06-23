@@ -78,6 +78,9 @@ sources:
   - path: raw/youtube/youtube-IevmGCVo9Pw-create-your-own-personal-claude-ai-system-that-makes-your-wo.md
     channel: youtube
     ingested_at: 2026-06-23
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-5-claude-connecto-report.md
+    channel: notes
+    ingested_at: 2026-06-23
 aliases:
   - Claude Cowork
   - Cowork
@@ -87,7 +90,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-06-12
-updated: 2026-06-17
+updated: 2026-06-23
 ---
 
 # Claude Cowork
@@ -192,6 +195,22 @@ Anthropic released a guide for deploying Cowork across a business function, with
 
 **Claude Cowork as the non-developer deployment vehicle:** the guide explicitly frames Cowork as the path for taking capabilities that previously required a custom build (long-running agents, multi-agent pipelines, MCP connectors) and making them available to "every team in your organization, without requiring a custom build for each one" [^src21].
 
+## Connectors and the Cowork + skill + connector pattern
+
+**Connectors** are MCP-based integrations added via *Customize → Connectors → browse → connect*; they let Claude act *inside* third-party apps directly, with no manual API wiring [^src24]. The recurring production pattern is **Cowork + a custom skill + a connector**: the connector grants the capability, while a reusable [[ai-engineering/agent-skills|skill]] (a saved long-prompt invoked with `/skill-name`) makes the connector's output consistent every run — so a workflow can be saved once and rerun at scale [^src24]. **"Always allow"** tool permissions trade per-action confirmation for speed by pre-approving a connector's actions [^src24].
+
+Five connectors from one practitioner's five-month workflow illustrate the range [^src24]:
+
+| Connector | What it adds | Note |
+|---|---|---|
+| **Higgsfield** | Image/video generation inside Claude | Claude has no native image generation, so the MCP is the bridge to external models |
+| **Clay** | Lead scraping + enrichment into a queryable contacts table (title, funding, tech stack) | Stores an ideal-customer profile so you needn't re-explain the business each time |
+| **Gmail** | Drafting in your own voice | An "email-voice skill" derives a tone / greeting / sign-off profile from sent emails |
+| **Supabase** | A backing database for dashboards | Powers **live artifacts** and "database as a second brain" |
+| **Zapier MCP** | Access to 9,000+ apps when no native connector exists | The no-code **escape hatch** for non-technical users — avoids standing up your own MCP server |
+
+Two capabilities recur across these workflows: **live artifacts** — custom dashboards that live inside Claude and render real-time data pulled across apps — and **scheduled tasks** — Claude jobs that run at a set time (e.g. a daily 7 am scrape) to keep that data fresh [^src24]. See [[ai-engineering/mcp|MCP]] for the underlying protocol and [[ai-engineering/agent-skills|Agent Skills]] for the skill layer.
+
 ## Claude for Microsoft 365
 
 Claude integrates natively with Excel, PowerPoint, Word, and Outlook as add-ins deployed from Microsoft AppSource [^src20]:
@@ -294,3 +313,4 @@ Austin Lau (Anthropic growth team) offers a first-party framework for when to re
 [^src21]: [Building AI agents for the enterprise](../../raw/notes/notes-clippings-building-ai-agents-for-the-enterprise.md) — Anthropic (enterprise guide; same guide also at [^src19b]: [Deploying Claude across the enterprise with Claude Cowork (duplicate)](../../raw/notes/notes-clippings-deploying-claude-across-the-enterprise-with-claude-cowork-1.md))
 [^src22]: [Claude for the legal industry](../../raw/notes/notes-clippings-claude-for-the-legal-industry.md) — Anthropic
 [^src23]: [Get started with Claude Cowork](../../raw/notes/notes-clippings-get-started-with-claude-cowork.md) — Anthropic official guide
+[^src24]: [5 Claude Connectors with INSANE Use Cases (YouTube deep-analysis)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-5-claude-connecto-report.md)
