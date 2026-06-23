@@ -214,6 +214,7 @@ Retrieved chunks are one of the four context components injected into an agent's
 
 ## See also
 
+- [[ai-engineering/embeddings|Embeddings]] — the dense vectors RAG retrieves over; their limits (exact-token loss, no time, disconnected facts) drive hybrid search, temporal filters, and GraphRAG
 - [[ai-engineering/context-engineering|Context Engineering]] — RAG provides the "Retrieved context" component
 - [[ai-engineering/ai-agent|AI Agent]] — retrieval quality is a key agent evaluation metric
 - [[ai-engineering/agent-evaluation|Agent Evaluation]] — retrieval quality as a measured metric; temporal accuracy is a missing eval dimension

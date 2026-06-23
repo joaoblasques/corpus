@@ -104,6 +104,7 @@ C-SPANN does not win on pure latency vs specialized in-memory systems and (as of
 
 ## See also
 
+- [[ai-engineering/embeddings|Embeddings]] — what the vectors stored here *are*; similarity metrics, quantization, and dimensionality cost
 - [[ai-engineering/rag|RAG]] — primary use case; hybrid search and temporal blind spots are partly vector-index limitations
 - [[ai-engineering/agent-memory|Agent Memory]] — long-term memory pattern; temporal knowledge graphs improve on flat vector memory
 - [[ai-engineering/agentic-search|Agentic Search]] — vector search is one half of the grep-vs-vector comparison

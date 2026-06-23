@@ -85,6 +85,7 @@ This nuance — both sides of grep-vs-vector, plus harness as the deciding varia
 - [[ai-engineering/agent-harness|Agent Harness]] — result delivery, prompting, and tool framing rival the retrieval method
 - [[ai-engineering/agent-memory|Agent Memory]] — AI-native search and graph memory share the hybrid-retrieval-over-subgraph pattern
 - [[ai-engineering/vector-database|Vector Database]] — the embedding-index half of the grep-vs-vector comparison
+- [[ai-engineering/embeddings|Embeddings]] — why exact tokens (names, IDs, "SOC 2") get smoothed away, the root cause behind grep beating vector on verbatim QA
 
 ---
 

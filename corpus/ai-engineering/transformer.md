@@ -1,7 +1,7 @@
 ---
 type: concept
 domain: ai-engineering
-status: draft
+status: mature
 sources:
   - path: 03_Resources/Study Notes/AI - How Large Language Models Work.md
     channel: notes
@@ -18,7 +18,9 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-21
-updated: 2026-06-16
+updated: 2026-06-23
+confidence: 0.9
+last_confirmed: 2026-06-23
 ---
 
 # Transformer
@@ -100,6 +102,7 @@ Behavior is emergent — the architecture defines the framework; the billions of
 ## See also
 
 - [[ai-engineering/llm|LLM]] — the Transformer is the architecture underlying all modern LLMs
+- [[ai-engineering/embeddings|Embeddings]] — the token-embedding lookup (this page's §Embeddings) is the same dense-vector idea reused at retrieval time
 - [[ai-engineering/neural-network|Neural Networks]] — the broader network family the Transformer belongs to
 - [[ai-engineering/mixture-of-experts|Mixture of Experts]] — sparse FFN variant used in the largest frontier models
 - [[ai-engineering/context-window-management|Context Window Management]] — "lost in the middle" and the n² attention cost shape what to keep in context

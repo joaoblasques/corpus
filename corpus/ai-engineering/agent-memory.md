@@ -188,6 +188,7 @@ Key feature: `<private>` tags let users exclude sensitive content from storage. 
 - [[ai-engineering/rag|RAG]] — long-term memory retrieval is structurally identical to RAG; GraphRAG mirrors temporal-graph memory
 - [[ai-engineering/agentic-search|Agentic Search]] — AI-native search uses the same hybrid-retrieval-over-subgraph pattern
 - [[ai-engineering/vector-database|Vector Database]] — the flat-vector storage layer that temporal graphs improve upon
+- [[ai-engineering/embeddings|Embeddings]] — long-term memory stores facts as embeddings; their blob-like flatness is exactly what typed/graph memory fixes
 - [[ai-engineering/ai-agent|AI Agent]] — memory is one of the four core agent components
 - [[ai-engineering/claude-managed-agents|Claude Managed Agents]] — production implementation of filesystem memory with audit, scoping, and vault patterns
 

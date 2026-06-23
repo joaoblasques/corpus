@@ -1271,3 +1271,9 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   - [[data-engineering/compute-storage-decoupling|Compute–Storage Decoupling]] — warehouses (Vu Trinh internals), lakehouse (Delta WAL over object storage), and streaming (tiered/diskless Kafka) converge on separating compute from object storage. Cites 3 raw sources.
   - [[mlops/environment-promotion|Environment Promotion (dev → acc → prd)]] — ML CI/CD + data-infra CI/CD + Databricks Asset Bundles share four invariants (humans-only-in-dev, env-scoped state, CI-check→human-gated prod apply, machine identity). Cites 3 raw sources.
 - index: +2 pages (216→218); sources unchanged (598; both syntheses cite already-ingested sources).
+
+## [2026-06-23 15:40] lint | consolidation pass (Opus, leftover weekly capacity)
+- new page: corpus/ai-engineering/embeddings.md — implicit concept (defined inline across rag/transformer/vector-database/agentic-search/agent-memory, no own page); consolidates token vs sentence/doc embeddings, similarity metrics, quantization cost, 3 failure modes
+- matured: corpus/ai-engineering/transformer.md (draft → mature; confidence 0.9; last_confirmed 2026-06-23)
+- cross-links added across 5 ai-engineering pages; embeddings linked from the domain hub
+- verify gate: an independent Sonnet content-critic ran before commit and caught a fabricated quote (invented 5,000/10M figures) + a misattributed "temporal knowledge graph" framing on embeddings.md — both corrected to what the cited sources support

@@ -33,12 +33,13 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [[ai-engineering/agent-evaluation|Agent Evaluation]] — concept · draft · online/offline evaluation, LLM-as-judge, golden datasets, production feedback loop
 - [[ai-engineering/rag|RAG]] — concept · draft · retrieval-augmented generation; solving LLM knowledge cutoff and hallucination via context injection
 - [[ai-engineering/llm|LLM]] — concept · draft · next-token prediction, parameters, training phases (pre-training + RLHF)
-- [[ai-engineering/transformer|Transformer]] — concept · draft · attention-based architecture underlying all modern LLMs; tokenize→embed→position→attention→FFN→next-token
+- [[ai-engineering/transformer|Transformer]] — concept · mature · attention-based architecture underlying all modern LLMs; tokenize→embed→position→attention→FFN→next-token
 - [[ai-engineering/mixture-of-experts|Mixture of Experts]] — concept · draft · sparse FFN variant: many expert networks + router, few activated per token; scale params without scaling compute
 - [[ai-engineering/agent-memory|Agent Memory]] — concept · draft · short-term (context window) + long-term (vector DB / CLAUDE.md) memory tiers
 - [[ai-engineering/mcp|MCP]] — concept · stub · Model Context Protocol; coordination layer for agents, tools, and memory
 - [[ai-engineering/context-window-management|Context Window Management]] — concept · draft · compaction, sub-agents, resets; what to keep/compress/drop when context fills
 - [[ai-engineering/agent-skills|Agent Skills]] — concept · draft · skill.md files, progressive disclosure, recursive skill-building; skills vs always-on AGENTS.md
+- [[ai-engineering/embeddings|Embeddings]] — concept · draft · dense vectors encoding meaning; token embeddings (inside the transformer) vs sentence/doc embeddings (for retrieval); similarity metrics, quantization, where embeddings fall short (exact tokens, time, disconnected facts)
 - [[ai-engineering/vector-database|Vector Database]] — concept · draft · storage layer for embedding vectors; HNSW, indexing at scale; used in RAG and agent memory
 - [[ai-engineering/agent-harness|Agent Harness]] — concept · draft · the scaffolding around the model; "harness > model"; the ratchet, harness-as-a-service
 - [[ai-engineering/long-running-agents|Long-Running Agents]] — concept · draft · agents progressing over hours/days across sessions; three walls, brain/hands/session split, five production patterns
