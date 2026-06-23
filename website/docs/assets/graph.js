@@ -24,12 +24,12 @@
           n.color = { background: c, border: c, highlight: { background: c, border: "#c8862a" } };
           n.shape = "dot";
           if (n.hub) {
-            n.value = n.value || 40;
-            n.font = { size: 18, face: "Lora, Georgia, serif", color: "#3a3a32", strokeWidth: 4, strokeColor: "#faf8f2" };
+            n.value = n.value || 52;
+            n.font = { size: 22, face: "Lora, Georgia, serif", color: "#3a3a32", strokeWidth: 5, strokeColor: "#faf8f2" };
             n.borderWidth = 3;
           } else {
-            n.value = 6;
-            n.font = { size: 11, face: "Inter, sans-serif", color: "#4a4a42" };
+            n.value = 9;
+            n.font = { size: 13, face: "Inter, sans-serif", color: "#4a4a42" };
           }
         });
         var nodes = new vis.DataSet(data.nodes);
@@ -37,10 +37,10 @@
           return { from: e.from, to: e.to, color: { color: "rgba(120,120,105,0.22)", highlight: "#c8862a" } };
         }));
         new vis.Network(el, { nodes: nodes, edges: edges }, {
-          nodes: { scaling: { min: 6, max: 42 } },
-          edges: { smooth: { type: "continuous" }, width: 0.5 },
+          nodes: { scaling: { min: 9, max: 52 } },
+          edges: { smooth: { type: "continuous" }, width: 0.6 },
           physics: {
-            barnesHut: { gravitationalConstant: -3200, springLength: 130, springConstant: 0.02, damping: 0.45, avoidOverlap: 0.2 },
+            barnesHut: { gravitationalConstant: -3600, springLength: 155, springConstant: 0.02, damping: 0.45, avoidOverlap: 0.25 },
             stabilization: { iterations: 220 }
           },
           interaction: { hover: true, tooltipDelay: 120, hideEdgesOnDrag: true },

@@ -61,7 +61,7 @@
 
 /* Knowledge-graph canvas */
 #corpus-graph {
-  height: 540px;
+  height: 600px;
   width: 100%;
   border: 1px solid rgba(90, 122, 90, 0.25);
   border-radius: 14px;
