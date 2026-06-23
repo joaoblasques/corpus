@@ -80,6 +80,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [[ai-engineering/tool-calling-and-context-engineering|Tool Calling & Context Engineering]] — synthesis · draft · how tool results feed the context loop; the compounding-window problem
 - [[ai-engineering/optimizing-claude|Optimizing a Claude Setup]] — synthesis · draft · context economy as the organizing principle; skills, sub-agents, concise specs; filed back from a query
 - [[ai-engineering/ai-product-management|AI Product Management]] — synthesis · draft · GenAI value stack; AIPM taxonomy; "we are all going to be AI managers"
+- [[ai-engineering/generator-evaluator-separation|Generator–Evaluator Separation]] — synthesis · draft · a model can't reliably grade its own output; move evaluation into a separate agent/model/rubric/human
 
 ### Sources
 - [[ai-engineering/sources/how-ai-agents-and-skills-work|How AI agents & Claude skills work]] — source · draft · Isenberg × Ras Mic; skills, progressive disclosure, less-is-more context
