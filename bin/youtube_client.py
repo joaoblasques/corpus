@@ -70,6 +70,14 @@ def _groq_transcribe(path, key):
             for s in r.json().get("segments", [])]
 
 
+def _ytdlp_cookie_args() -> list[str]:
+    """yt-dlp browser-cookie args to clear YouTube's bot-gate ("Sign in to confirm
+    you're not a bot"). Browser is set by CORPUS_YT_COOKIES_BROWSER (default 'chrome');
+    set it empty to disable cookies."""
+    browser = os.environ.get("CORPUS_YT_COOKIES_BROWSER", "chrome").strip()
+    return ["--cookies-from-browser", browser] if browser else []
+
+
 def _whisper_transcript(video_id: str) -> str:
     """Caption-less fallback: download audio → mono/16k mp3 → (chunk if >24MB) → Groq Whisper.
     Returns markdown with a provenance marker, or "" on any failure (no partial transcripts)."""
@@ -82,7 +90,7 @@ def _whisper_transcript(video_id: str) -> str:
     with tempfile.TemporaryDirectory() as td:
         try:
             subprocess.run(
-                ["yt-dlp", "-x", "--audio-format", "mp3",
+                ["yt-dlp", "-x", "--audio-format", "mp3", *_ytdlp_cookie_args(),
                  "-o", f"{td}/%(id)s.%(ext)s", f"https://youtu.be/{video_id}"],
                 capture_output=True, timeout=600, check=True)
             src = next(iter(glob.glob(f"{td}/*.mp3")), None)
@@ -240,7 +248,7 @@ def _ytdlp_transcript(video_id: str) -> str:
         try:
             subprocess.run(
                 ["yt-dlp", "--skip-download", "--write-subs", "--write-auto-subs",
-                 "--sub-langs", "en.*", "--sub-format", "vtt",
+                 "--sub-langs", "en.*", "--sub-format", "vtt", *_ytdlp_cookie_args(),
                  "-o", f"{td}/%(id)s.%(ext)s", f"https://youtu.be/{video_id}"],
                 capture_output=True, timeout=90, check=False)
             vtts = glob.glob(f"{td}/*.vtt")

@@ -76,3 +76,13 @@ def test_blocked_with_whisper_on_blocked_flag_uses_whisper(monkeypatch):
     assert yc.extract_transcript("vid", whisper_on_blocked=True) == ("WHISPER_MD", "ok")
     # default (normal run) still leaves blocked alone
     assert yc.extract_transcript("vid") == ("", "blocked")
+
+
+def test_ytdlp_cookie_args_env(monkeypatch):
+    import youtube_client as yc
+    monkeypatch.setenv("CORPUS_YT_COOKIES_BROWSER", "chrome")
+    assert yc._ytdlp_cookie_args() == ["--cookies-from-browser", "chrome"]
+    monkeypatch.setenv("CORPUS_YT_COOKIES_BROWSER", "")
+    assert yc._ytdlp_cookie_args() == []
+    monkeypatch.delenv("CORPUS_YT_COOKIES_BROWSER", raising=False)
+    assert yc._ytdlp_cookie_args() == ["--cookies-from-browser", "chrome"]  # default
