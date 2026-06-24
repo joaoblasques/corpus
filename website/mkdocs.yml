@@ -37,6 +37,7 @@ nav:
   - The Custodian: the-custodian.md
   - Under the Hood: under-the-hood.md
   - Getting Started: getting-started.md
+  - Using It Well: using-it-well.md
   - Roadmap: roadmap.md
 
 markdown_extensions:
