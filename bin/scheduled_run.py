@@ -94,6 +94,7 @@ def release_lock(lock_path: Path) -> None:
 # ---------------------------------------------------------------------------
 
 MAIN_BRANCH = "main"
+COLLECTOR_TIMEOUT = 1200  # s; cap each collector subprocess so a hung fetch/API call cannot freeze the whole run
 
 
 def current_branch(repo=None, *, _subprocess_run=None) -> str | None:
@@ -152,6 +153,7 @@ def run_collectors(
             [sys.executable, str(BIN / "gmail_client.py"), "run"],
             capture_output=True,
             text=True,
+            timeout=COLLECTOR_TIMEOUT,
         )
         if proc.returncode != 0:
             results["gmail"] = {
@@ -175,6 +177,7 @@ def run_collectors(
             [sys.executable, str(BIN / "obsidian_client.py"), "collect"],
             capture_output=True,
             text=True,
+            timeout=COLLECTOR_TIMEOUT,
         )
         if proc.returncode != 0:
             results["obsidian"] = {
@@ -199,6 +202,7 @@ def run_collectors(
             [sys.executable, str(BIN / "pdf_client.py"), "collect"],
             capture_output=True,
             text=True,
+            timeout=COLLECTOR_TIMEOUT,
         )
         if proc.returncode != 0:
             results["pdf"] = {
@@ -229,6 +233,7 @@ def run_collectors(
                  "--refetch-blocked", "--refetch-max", "15"],
                 capture_output=True,
                 text=True,
+                timeout=COLLECTOR_TIMEOUT,
             )
             if proc.returncode != 0:
                 results["youtube"] = {
@@ -253,6 +258,7 @@ def run_collectors(
             [sys.executable, str(BIN / "github_client.py"), "run"],
             capture_output=True,
             text=True,
+            timeout=COLLECTOR_TIMEOUT,
         )
         if proc.returncode != 0:
             results["github"] = {
@@ -279,6 +285,7 @@ def run_collectors(
             [sys.executable, str(BIN / "refetch_links.py"), "--min-score", "8", "--max", "10"],
             capture_output=True,
             text=True,
+            timeout=COLLECTOR_TIMEOUT,
         )
         if proc.returncode != 0:
             results["links_refetch"] = {

@@ -1820,3 +1820,26 @@ class TestGithubCollector:
         res = scheduled_run.run_collectors(_subprocess_run=fake_run)
         assert any("github_client.py" in s and "run" in s for s in called), called
         assert res["github"]["status"] == "ok" and res["github"]["collected"] == 2
+
+
+class TestCollectorTimeout:
+    def test_collector_legs_pass_a_timeout(self):
+        import types
+        from pathlib import Path as _P
+        seen = []
+        def fake_run(cmd, **kw):
+            seen.append(kw.get("timeout"))
+            return types.SimpleNamespace(returncode=0, stdout='{"written": 0}', stderr="")
+        scheduled_run.run_collectors(_subprocess_run=fake_run, youtube_token_path=_P("/no/token"))
+        assert seen and all(t is not None for t in seen), seen   # every collector subprocess bounded
+
+    def test_collector_timeout_recorded_not_fatal(self):
+        import subprocess, types
+        from pathlib import Path as _P
+        def fake_run(cmd, **kw):
+            if "gmail_client" in " ".join(cmd):
+                raise subprocess.TimeoutExpired(cmd, kw.get("timeout", 1))
+            return types.SimpleNamespace(returncode=0, stdout='{"written": 0}', stderr="")
+        res = scheduled_run.run_collectors(_subprocess_run=fake_run, youtube_token_path=_P("/no/token"))
+        assert res["gmail"]["status"] == "failed"          # timeout caught, recorded
+        assert "pdf" in res and "obsidian" in res           # run continued past the hung leg
