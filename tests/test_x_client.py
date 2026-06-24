@@ -47,3 +47,41 @@ def test_delete_bookmark(monkeypatch):
     sess = types.SimpleNamespace(delete=_del)
     assert xc.delete_bookmark("1", _session=sess) is True
     assert seen["url"].endswith("/2/users/42/bookmarks/1")
+
+
+def test_cmd_run_skips_when_unavailable(monkeypatch, capsys):
+    monkeypatch.setattr(xc, "x_available", lambda: False)
+    assert xc.cmd_run(xc._build_parser().parse_args(["run"])) == 0
+    assert "not configured" in capsys.readouterr().out
+
+
+def test_cmd_run_collects_new_only_never_deletes(monkeypatch, capsys):
+    monkeypatch.setattr(xc, "x_available", lambda: True)
+    monkeypatch.setattr(xc, "list_bookmarks", lambda mx=None, **k: [{"id": "1", "links": []}, {"id": "2", "links": []}])
+    monkeypatch.setattr(xc.cx, "already_collected", lambda t, dirs=None: t == "1")
+    written = []
+    monkeypatch.setattr(xc.cx, "write_collected",
+                        lambda post, **k: written.append(post["id"]) or {"status": "written", "path": "/x.md"})
+    dels = []
+    monkeypatch.setattr(xc, "delete_bookmark", lambda t, **k: dels.append(t) or True)
+    assert xc.cmd_run(xc._build_parser().parse_args(["run"])) == 0
+    assert written == ["2"] and dels == []                      # new only; collect never deletes
+    assert '"written": 1' in capsys.readouterr().out
+
+
+def test_cmd_reap_unbookmarks_only_reapable(monkeypatch, capsys):
+    monkeypatch.setattr(xc, "x_available", lambda: True)
+    monkeypatch.setattr(xc.cx, "reapable", lambda dirs=None: ["7", "8"])
+    dels = []
+    monkeypatch.setattr(xc, "delete_bookmark", lambda t, **k: dels.append(t) or True)
+    assert xc.cmd_reap(xc._build_parser().parse_args(["reap"])) == 0
+    assert dels == ["7", "8"] and '"unbookmarked": 2' in capsys.readouterr().out
+
+
+def test_cmd_reap_dry_run_deletes_nothing(monkeypatch, capsys):
+    monkeypatch.setattr(xc, "x_available", lambda: True)
+    monkeypatch.setattr(xc.cx, "reapable", lambda dirs=None: ["7"])
+    dels = []
+    monkeypatch.setattr(xc, "delete_bookmark", lambda t, **k: dels.append(t) or True)
+    xc.cmd_reap(xc._build_parser().parse_args(["reap", "--dry-run"]))
+    assert dels == [] and '"dry_run": true' in capsys.readouterr().out
