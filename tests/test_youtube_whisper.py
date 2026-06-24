@@ -37,3 +37,32 @@ def test_groq_key_reads_envfile(monkeypatch, tmp_path):
 def test_groq_key_none_when_absent(monkeypatch, tmp_path):
     monkeypatch.delenv("GROQ_API_KEY", raising=False)
     assert yc._groq_key(str(tmp_path / "missing.env")) is None
+
+
+def test_caption_ok_does_not_invoke_whisper(monkeypatch):
+    monkeypatch.setattr(yc, "_caption_transcript", lambda v: ("CAPTIONS", "ok"))
+    called = {"n": 0}
+    monkeypatch.setattr(yc, "_whisper_transcript", lambda v: called.__setitem__("n", called["n"] + 1) or "W")
+    assert yc.extract_transcript("vid") == ("CAPTIONS", "ok")
+    assert called["n"] == 0
+
+
+def test_none_found_uses_whisper(monkeypatch):
+    monkeypatch.setattr(yc, "_caption_transcript", lambda v: ("", "none_found"))
+    monkeypatch.setattr(yc, "_whisper_enabled", lambda: True)
+    monkeypatch.setattr(yc, "_whisper_transcript", lambda v: "WHISPER_MD")
+    assert yc.extract_transcript("vid") == ("WHISPER_MD", "ok")
+
+
+def test_blocked_does_not_use_whisper(monkeypatch):
+    monkeypatch.setattr(yc, "_caption_transcript", lambda v: ("", "blocked"))
+    monkeypatch.setattr(yc, "_whisper_enabled", lambda: True)
+    monkeypatch.setattr(yc, "_whisper_transcript", lambda v: "WHISPER_MD")
+    assert yc.extract_transcript("vid") == ("", "blocked")   # blocked left to retry
+
+
+def test_whisper_failure_keeps_status(monkeypatch):
+    monkeypatch.setattr(yc, "_caption_transcript", lambda v: ("", "disabled"))
+    monkeypatch.setattr(yc, "_whisper_enabled", lambda: True)
+    monkeypatch.setattr(yc, "_whisper_transcript", lambda v: "")
+    assert yc.extract_transcript("vid") == ("", "disabled")

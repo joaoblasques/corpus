@@ -179,8 +179,8 @@ def _transcript_api():
     return YouTubeTranscriptApi()
 
 
-def extract_transcript(video_id: str):
-    """Waterfall → (markdown_body, status). status: ok|disabled|unavailable|none_found|blocked."""
+def _caption_transcript(video_id: str):
+    """Caption waterfall → (markdown_body, status). status: ok|disabled|unavailable|none_found|blocked."""
     import youtube_transcript_api as yta
     errs = yta._errors
     api = _transcript_api()
@@ -213,6 +213,16 @@ def extract_transcript(video_id: str):
     except Exception:
         body = _ytdlp_transcript(video_id)
         return (body, "ok") if body else ("", "blocked")
+
+
+def extract_transcript(video_id: str):
+    """Waterfall → (markdown_body, status). Whisper fallback for caption-less videos."""
+    body, status = _caption_transcript(video_id)
+    if status in ("none_found", "disabled") and _whisper_enabled():
+        wbody = _whisper_transcript(video_id)
+        if wbody:
+            return wbody, "ok"
+    return body, status
 
 
 def _ytdlp_transcript(video_id: str) -> str:
