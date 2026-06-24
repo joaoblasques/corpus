@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import datetime
 import json
+import os
 import sys
 import time
 from pathlib import Path
@@ -18,6 +19,35 @@ SCOPES = ["https://www.googleapis.com/auth/youtube.force-ssl"]
 
 sys.path.insert(0, str(BIN))
 import collect_youtube as cy  # noqa: E402
+
+
+# --- Whisper transcript fallback (Groq) -----------------------------------
+def _groq_key(env_file="~/.config/watch/.env"):
+    """Groq API key: GROQ_API_KEY env, else a GROQ_API_KEY= line in env_file, else None."""
+    k = os.environ.get("GROQ_API_KEY")
+    if k:
+        return k
+    p = Path(os.path.expanduser(env_file))
+    if p.exists():
+        for line in p.read_text(encoding="utf-8").splitlines():
+            line = line.strip()
+            if line.startswith("GROQ_API_KEY="):
+                return line.split("=", 1)[1].strip().strip('"').strip("'") or None
+    return None
+
+
+def _whisper_enabled():
+    return os.environ.get("CORPUS_YT_WHISPER", "1") != "0" and _groq_key() is not None
+
+
+def _merge_chunk_segments(chunk_segment_lists, segment_seconds):
+    """Flatten per-chunk [{start,text}] lists, offsetting chunk k by k*segment_seconds."""
+    out = []
+    for k, segs in enumerate(chunk_segment_lists):
+        off = k * segment_seconds
+        for s in segs:
+            out.append({"start": float(s["start"]) + off, "text": s["text"]})
+    return out
 
 
 def get_service():
