@@ -34,6 +34,10 @@ bin/token.json
 bin/youtube_token.json
 bin/youtube_playlists.yaml
 
+# X (Twitter) bookmarks collector — OAuth2 app + token
+bin/x_app.json
+bin/x_token.json
+
 # Scheduled-run lock + log — single-flight artifacts, always local
 # Note: raw/_inbox/_REVIEW.md is already covered by the raw/_inbox/* rule above.
 raw/.scheduled_run.lock
