@@ -215,10 +215,17 @@ def _caption_transcript(video_id: str):
         return (body, "ok") if body else ("", "blocked")
 
 
-def extract_transcript(video_id: str):
-    """Waterfall → (markdown_body, status). Whisper fallback for caption-less videos."""
+def extract_transcript(video_id: str, whisper_on_blocked: bool = False):
+    """Waterfall → (markdown_body, status). Whisper fallback for caption-less videos.
+
+    Whisper triggers on none_found/disabled. It ALSO triggers on `blocked` when
+    `whisper_on_blocked` is set — used by a --refetch-blocked re-attempt whose captions
+    still can't be reached (e.g. the transcript API is IP-blocked), so Whisper becomes the
+    last-resort transcript. Normal runs leave `blocked` to the existing retry.
+    """
     body, status = _caption_transcript(video_id)
-    if status in ("none_found", "disabled") and _whisper_enabled():
+    trigger = ("none_found", "disabled", "blocked") if whisper_on_blocked else ("none_found", "disabled")
+    if status in trigger and _whisper_enabled():
         wbody = _whisper_transcript(video_id)
         if wbody:
             return wbody, "ok"
@@ -314,7 +321,11 @@ def cmd_run(args) -> int:
                     status = cy.collected_status(vid) or "unknown"
                 else:
                     fetched = True
-                    body, status = extract_transcript(vid)
+                    # --refetch-blocked last resort: a previously-blocked video that the
+                    # caption paths still can't reach falls through to Whisper.
+                    whisper_on_blocked = bool(
+                        args.refetch_blocked and cy.collected_status(vid) == "blocked")
+                    body, status = extract_transcript(vid, whisper_on_blocked=whisper_on_blocked)
                     meta = {"video_id": vid, "title": item["title"],
                             "channel_name": item["channel_name"], "published": item["published"],
                             "playlist": pl["name"], "transcript_status": status,

@@ -66,3 +66,13 @@ def test_whisper_failure_keeps_status(monkeypatch):
     monkeypatch.setattr(yc, "_whisper_enabled", lambda: True)
     monkeypatch.setattr(yc, "_whisper_transcript", lambda v: "")
     assert yc.extract_transcript("vid") == ("", "disabled")
+
+
+def test_blocked_with_whisper_on_blocked_flag_uses_whisper(monkeypatch):
+    monkeypatch.setattr(yc, "_caption_transcript", lambda v: ("", "blocked"))
+    monkeypatch.setattr(yc, "_whisper_enabled", lambda: True)
+    monkeypatch.setattr(yc, "_whisper_transcript", lambda v: "WHISPER_MD")
+    # last-resort: a refetch-blocked re-attempt still blocked → Whisper
+    assert yc.extract_transcript("vid", whisper_on_blocked=True) == ("WHISPER_MD", "ok")
+    # default (normal run) still leaves blocked alone
+    assert yc.extract_transcript("vid") == ("", "blocked")

@@ -117,7 +117,7 @@ def test_run_collects_and_removes_only_with_transcript(tmp_path, monkeypatch):
         {"playlist_item_id": "I2", "video_id": "V2", "title": "B", "channel_name": "C",
          "published": "2026-06-01", "privacy": "public"}]))
     monkeypatch.setattr(yc, "extract_transcript",
-                        lambda vid: ("[00:00](x) hi", "ok") if vid == "V1" else ("", "disabled"))
+                        lambda vid, **kw: ("[00:00](x) hi", "ok") if vid == "V1" else ("", "disabled"))
     deleted = []
     monkeypatch.setattr(yc, "delete_playlist_item", lambda svc, iid: deleted.append(iid) or True)
 
@@ -144,7 +144,7 @@ def test_run_stops_on_quota_error(tmp_path, monkeypatch):
          "published": "2026-06-01", "privacy": "public"},
         {"playlist_item_id": "I2", "video_id": "V2", "title": "B", "channel_name": "C",
          "published": "2026-06-01", "privacy": "public"}]))
-    monkeypatch.setattr(yc, "extract_transcript", lambda vid: ("[00:00](x) hi", "ok"))
+    monkeypatch.setattr(yc, "extract_transcript", lambda vid, **kw: ("[00:00](x) hi", "ok"))
     attempted = []
 
     def fake_delete(svc, iid):
@@ -194,7 +194,7 @@ def test_run_refetch_blocked_reextracts_and_removes(tmp_path, monkeypatch):
     monkeypatch.setattr(yc, "list_playlist_items", lambda svc, pid: iter([
         {"playlist_item_id": "I1", "video_id": "V1", "title": "A", "channel_name": "C",
          "published": "2026-06-01", "privacy": "public"}]))
-    monkeypatch.setattr(yc, "extract_transcript", lambda vid: ("[00:00](x) recovered", "ok"))
+    monkeypatch.setattr(yc, "extract_transcript", lambda vid, **kw: ("[00:00](x) recovered", "ok"))
     deleted = []
     monkeypatch.setattr(yc, "delete_playlist_item", lambda svc, iid: deleted.append(iid) or True)
     rc = yc.cmd_run(yc._args(["run", "--refetch-blocked", "--sleep", "0"]))
@@ -218,7 +218,7 @@ def test_run_blocked_stub_not_refetched_by_default(tmp_path, monkeypatch):
         {"playlist_item_id": "I1", "video_id": "V1", "title": "A", "channel_name": "C",
          "published": "2026-06-01", "privacy": "public"}]))
     called = []
-    monkeypatch.setattr(yc, "extract_transcript", lambda vid: called.append(vid) or ("x", "ok"))
+    monkeypatch.setattr(yc, "extract_transcript", lambda vid, **kw: called.append(vid) or ("x", "ok"))
     deleted = []
     monkeypatch.setattr(yc, "delete_playlist_item", lambda svc, iid: deleted.append(iid) or True)
     rc = yc.cmd_run(yc._args(["run", "--sleep", "0"]))
@@ -235,7 +235,7 @@ def test_run_dry_run_never_deletes(tmp_path, monkeypatch):
     monkeypatch.setattr(yc, "list_playlist_items", lambda svc, pid: iter([
         {"playlist_item_id": "I1", "video_id": "V1", "title": "A", "channel_name": "C",
          "published": "2026-06-01", "privacy": "public"}]))
-    monkeypatch.setattr(yc, "extract_transcript", lambda vid: ("[00:00](x) hi", "ok"))
+    monkeypatch.setattr(yc, "extract_transcript", lambda vid, **kw: ("[00:00](x) hi", "ok"))
     deleted = []
     monkeypatch.setattr(yc, "delete_playlist_item", lambda svc, iid: deleted.append(iid) or True)
     rc = yc.cmd_run(yc._args(["run", "--dry-run", "--sleep", "0"]))
@@ -253,7 +253,7 @@ def test_run_sleeps_after_fetch(tmp_path, monkeypatch):
     monkeypatch.setattr(yc, "list_playlist_items", lambda svc, pid: iter([
         {"playlist_item_id": "I1", "video_id": "VNEW", "title": "A", "channel_name": "C",
          "published": "2026-06-01", "privacy": "public"}]))
-    monkeypatch.setattr(yc, "extract_transcript", lambda vid: ("[00:00](x) hi", "ok"))
+    monkeypatch.setattr(yc, "extract_transcript", lambda vid, **kw: ("[00:00](x) hi", "ok"))
     slept = []
     monkeypatch.setattr(yc.time, "sleep", lambda s: slept.append(s))
     rc = yc.cmd_run(yc._args(["run", "--sleep", "2"]))
@@ -306,7 +306,7 @@ def _blocked_run_setup(tmp_path, monkeypatch, vids):
     monkeypatch.setattr(yc.time, "sleep", lambda s: None)
     calls = []
     monkeypatch.setattr(yc, "extract_transcript",
-                        lambda vid: calls.append(vid) or ("[00:00](x) hi", "ok"))
+                        lambda vid, **kw: calls.append(vid) or ("[00:00](x) hi", "ok"))
     return calls
 
 
