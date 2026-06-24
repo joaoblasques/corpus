@@ -112,13 +112,13 @@ The daily run collects the user's **starred** repos via the `gh` CLI (`bin/githu
 
 ## X (Twitter) bookmarks (channel `x`)
 
-The daily run collects the user's **bookmarks** from X via the X API v2 (OAuth2 user-context) using `bin/x_client.py collect`. One source document per bookmarked post, plus any linked article extracted from the post's URLs. Deduped by frontmatter `tweet_id`; **bookmarks are un-bookmarked only after the source is ingested** (`corpus_ingested: true`), via a separate reap step (`bin/x_client.py reap`). Sources land in `raw/_inbox` (channel `x`), drain via the normal ingest, then move to `raw/x`.
+The daily run collects the user's **bookmarks** from X via the X API v2 (OAuth2 user-context) using `bin/x_client.py run`. One source document per bookmarked post, plus any linked article extracted from the post's URLs. Deduped by frontmatter `tweet_id`; **bookmarks are un-bookmarked only after the source is ingested** (`corpus_ingested: true`), via a separate reap step (`bin/x_client.py reap`). Sources land in `raw/_inbox` (channel `x`), drain via the normal ingest, then move to `raw/x`.
 
 **Setup (one-time):** Create `bin/x_app.json` with the X app's OAuth2 credentials:
 ```json
 {
   "client_id": "<your X app client ID>",
-  "redirect_uri": "http://localhost:8080/callback"
+  "redirect_uri": "http://127.0.0.1:8723/callback"
 }
 ```
 Then run `python3 bin/x_client.py auth` to open a browser, authorize, and cache the token in `bin/x_token.json` (gitignored).
