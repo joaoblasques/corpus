@@ -42,6 +42,12 @@ sources:
   - path: raw/web/web-crowdstrike-puts-claude-opus-4-7-to-work-across-falcon-and-q.md
     channel: web
     ingested_at: 2026-06-23
+  - path: raw/_inbox/web-enhancing-ai-driven-defense-with-anthropics-claude-opus-4-7.md
+    channel: web
+    ingested_at: 2026-06-24
+  - path: raw/_inbox/web-red-agent-and-claude-opus-securing-production-targets-at-sca.md
+    channel: web
+    ingested_at: 2026-06-24
 aliases:
   - prompt injection
   - LLM security
@@ -59,7 +65,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-12
-updated: 2026-06-23
+updated: 2026-06-24
 ---
 
 # Agent Security
@@ -199,6 +205,26 @@ Claude Security (previously Claude Code Security) is Anthropic's enterprise-grad
 
 All three organizations joined the Cyber Verification Program for expanded model access tied to documented security research use cases [^src11][^src12][^src13].
 
+### Palo Alto Networks Unit 42 / Frontier AI Defense
+
+Palo Alto Networks' Unit 42 threat research group runs an AI-assisted defense platform under the **Frontier AI Defense** umbrella, powered by Claude Opus 4.7 [^src14]. Three core capabilities [^src14]:
+
+- **AI-Driven Exposure Analysis**: traces complex exploit chains across multi-component environments that traditional scanning misses; maps attack paths from exposure to impact.
+- **Scalable Application Analysis**: deep-stack code review — "reviews code at the level of understanding that a security engineer would", connecting architectural decisions to vulnerabilities.
+- **Agentic Defense**: autonomous detection and remediation with human oversight; agents run threat response workflows with humans approving high-consequence actions.
+
+Palo Alto Networks joined the Cyber Verification Program for expanded access to frontier Claude models tied to documented security research use cases [^src14].
+
+### Wiz Red Agent
+
+Wiz's **Red Agent** is an autonomous security agent scanning production environments at scale [^src15]. Operational metrics [^src15]:
+- **150,000+ production web applications and APIs** scanned weekly
+- **115 billion tokens** processed per week
+- **3,000+ high and critical exploitable risks** found per week
+- **0 false positives** — findings are confirmed as exploitable before surfacing
+
+Red Agent uses **Claude Opus 4.6 and 4.7** as its reasoning engine, combined with the Wiz Security Graph for comprehensive context. "Logic flaws that traditional scanning structurally cannot see" — authentication bypasses, privilege escalation chains, multi-step business logic vulnerabilities — require frontier AI reasoning, not pattern-matching [^src15]. Available to Wiz ASM Advanced customers.
+
 ## Agent identity and registration (auth.md)
 
 As agents act on behalf of users, identity becomes a security surface. **auth.md** is an open protocol (authored by WorkOS, not tied to its infrastructure) for agent registration without a sign-up form [^src3]. An app hosts a Markdown file at `https://yourapp.com/auth.md` declaring supported flows, scopes, and how to register [^src3]. Two flows [^src3]:
@@ -234,3 +260,5 @@ It issues a scoped, short-lived, revocable access token over standard OAuth, com
 [^src11]: [TrendAI and Anthropic Advance AI-Powered Vulnerability Detection](../../raw/web/web-trendaitm-and-anthropic-advance-ai-powered-vulnerability-det.md) — TrendAI
 [^src12]: [SentinelOne Unveils Wayfinder Frontier AI Services](../../raw/web/web-sentinelone-unveils-wayfinder-frontier-ai-services-to-proact.md) — SentinelOne
 [^src13]: [CrowdStrike Puts Claude Opus 4.7 to Work Across Falcon and QuiltWorks](../../raw/web/web-crowdstrike-puts-claude-opus-4-7-to-work-across-falcon-and-q.md) — CrowdStrike
+[^src14]: [Enhancing AI-Driven Defense with Anthropic's Claude Opus 4.7](../../raw/_inbox/web-enhancing-ai-driven-defense-with-anthropics-claude-opus-4-7.md) — Palo Alto Networks
+[^src15]: [Wiz Red Agent and Claude Opus: Securing Production Targets at Scale](../../raw/_inbox/web-red-agent-and-claude-opus-securing-production-targets-at-sca.md) — Wiz

@@ -6,6 +6,12 @@ sources:
   - path: raw/web/web-compound-engineering-how-every-codes-with-agents.md
     channel: web
     ingested_at: 2026-06-23
+  - path: raw/web/github-everyinc-compound-engineering-plugin-official-compoun.md
+    channel: web
+    ingested_at: 2026-06-24
+  - path: raw/_inbox/web-the-agent-that-saved-my-brain.md
+    channel: web
+    ingested_at: 2026-06-24
 aliases:
   - compound engineering
   - compound knowledge
@@ -15,7 +21,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-23
-updated: 2026-06-23
+updated: 2026-06-24
 ---
 
 # Compound Engineering
@@ -57,7 +63,35 @@ This mirrors [[ai-engineering/spec-driven-development|Spec-Driven Development]] 
 
 ## The compound engineering plugin
 
-The workflow is packaged as a Claude Code plugin (`every.inc/compound-engineering`) that installs a shared knowledge base and ships a `compound-knowledge` agent that automatically proposes `AGENTS.md` updates after each session [^src1].
+The full compound engineering workflow is packaged as an open-source Claude Code plugin installable via the marketplace [^src2]:
+
+```
+/plugin marketplace add EveryInc/compound-engineering-plugin
+```
+
+The plugin ships **37 skills and 51 agents**, and works across Claude Code, Cursor, Codex, GitHub Copilot, Factory Droid, Qwen Code, and more [^src2].
+
+**Full skill inventory** [^src2]:
+
+| Skill | Purpose |
+|---|---|
+| `/ce-strategy` | Creates and maintains `STRATEGY.md` — product target problem, approach, persona, key metrics |
+| `/ce-ideate` | Divergent ideation against strategy |
+| `/ce-brainstorm` | Interactive Q&A; produces right-sized requirements doc |
+| `/ce-plan` | Turns requirements into detailed implementation plan (searches past learnings) |
+| `/ce-work` | Executes plan with worktrees and task tracking |
+| `/ce-debug` | Multi-agent debugging pass |
+| `/ce-code-review` | Multi-agent code review before merging |
+| `/ce-compound` | Extracts 1–3 learnings; checks for stale knowledge; saves to `docs/` with YAML frontmatter |
+| `/ce-product-pulse` | Time-windowed report on what users actually experienced (saved to `docs/pulse-reports/`) |
+
+The **`/ce-compound` step** is what converts individual sessions into organizational knowledge: each brainstorm or plan step automatically searches `docs/` files from past compound steps, so past insights surface next time [^src2]. "80% is in planning and review, 20% is in execution" [^src2].
+
+## Compound engineering in non-technical roles (Montaigne)
+
+Austin Tedesco, Every's head of growth ("the first to tell you he doesn't have a technical background"), built **Montaigne** — a personal agent powered by the compound knowledge system [^src3]. Tools connected: Stripe, PostHog, Slack, Notion, Figma, email, calendar, and the full Every product suite. The agent lives in Claude Code terminal and as an OpenClaw bot on Slack.
+
+Pattern: knowledge layers (MEMORY.md, domain context) + skills for repeat workflows → an agent that handles execution of recurring growth tasks so Tedesco can "have energy for the hard and fulfilling parts of my job" [^src3]. Setup took 3 weeks of exploration before building. The compound knowledge plugin is open-sourced for others to adapt.
 
 ## See also
 
@@ -71,3 +105,5 @@ The workflow is packaged as a Claude Code plugin (`every.inc/compound-engineerin
 ---
 
 [^src1]: [Compound Engineering: How Every.to Codes with Agents](../../raw/web/web-compound-engineering-how-every-codes-with-agents.md) — Every.to
+[^src2]: [EveryInc/compound-engineering-plugin (GitHub)](../../raw/web/github-everyinc-compound-engineering-plugin-official-compoun.md) — EveryInc
+[^src3]: [The Agent That Saved My Brain](../../raw/_inbox/web-the-agent-that-saved-my-brain.md) — Austin Tedesco, Every

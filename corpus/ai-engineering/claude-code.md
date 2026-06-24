@@ -87,6 +87,18 @@ sources:
   - path: raw/web/web-orchestrate-subagents-at-scale-with-dynamic-workflows-claude.md
     channel: web
     ingested_at: 2026-06-23
+  - path: raw/_inbox/web-choose-a-permission-mode-claude-code-docs.md
+    channel: web
+    ingested_at: 2026-06-24
+  - path: raw/_inbox/web-automated-security-reviews-in-claude-code-claude-help-center.md
+    channel: web
+    ingested_at: 2026-06-24
+  - path: raw/_inbox/web-push-events-into-a-running-session-with-channels-claude-code.md
+    channel: web
+    ingested_at: 2026-06-24
+  - path: raw/_inbox/email-2026-06-19-anthropic-drops-claude-code-artifacts.md
+    channel: email
+    ingested_at: 2026-06-24
 aliases:
   - Claude Code
   - claude-code
@@ -100,7 +112,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-06-12
-updated: 2026-06-17
+updated: 2026-06-24
 ---
 
 # Claude Code
@@ -443,6 +455,67 @@ Boris Cherny's viral X thread (2026) catalogued features "most people use maybe 
 
 **Cowork dispatch.** Secure remote control of your entire laptop via Claude Code — not just code, but Slack, file management, any desktop action. Cherny uses it daily when away from his computer [^src22]. See [[ai-engineering/claude-cowork|Claude Cowork]] for the full product page.
 
+## Permission modes
+
+Claude Code supports six permission modes that control how autonomously Claude acts [^src23]:
+
+| Mode | Behavior |
+|---|---|
+| **default** | Prompts before most tool calls; safest for interactive use |
+| **acceptEdits** | Auto-accepts file edits; still prompts for commands |
+| **plan** | Read-only; proposes a plan without executing it |
+| **auto** | Fully autonomous — no prompts; uses judgment on risky operations |
+| **dontAsk** | Never pauses; less permission-aware than auto |
+| **bypassPermissions** | No safety checks; for scripted/CI contexts only (API only) |
+
+**Auto mode requirements** [^src23]: minimum Claude Code v2.1.83; Opus 4.6+ or Sonnet 4.6 (Bedrock/Vertex: Opus 4.7+/4.8); Team/Enterprise plan with admin-enabled access. Modes are set through controls, not by asking Claude in the chat.
+
+**Auto mode classifier defaults** — auto-mode blocks these actions by default [^src23]:
+- Shell commands piped directly into bash (`curl | bash` pattern)
+- Sending sensitive data to external services
+- Production deploys in critical-path workflows
+- Mass file deletion
+- Force-pushing to `main`
+
+## /security-review command and GitHub Action
+
+The `/security-review` command scans the current session's code changes for vulnerabilities including SQL injection, XSS, authentication flaws, insecure data handling, and dependency vulnerabilities [^src24]. Available to all Claude Code users (Pro/Max/Team/Enterprise/API).
+
+Two delivery modes [^src24]:
+- **In-session**: type `/security-review` during a coding session to scan current changes.
+- **GitHub Action**: install the Claude Code GitHub Action in a repository for automatic PR security review; results post as inline comments on each PR.
+
+## Channels (push events into a running session)
+
+Channels lets external services push events into a live Claude Code session, enabling reactive automation without polling [^src25]. Research preview as of mid-2026; requires Anthropic auth (not Bedrock/Vertex/Foundry).
+
+**Supported integrations** (all run as Bun plugins) [^src25]:
+- **Telegram** — a Claude bot in a Telegram channel
+- **Discord** — a Claude bot in a Discord server
+- **iMessage** — receive and act on iMessages in a Claude session
+
+Enable with the `--channels` flag at session start. Team/Enterprise admins must enable `channelsEnabled` in org settings; optionally configure a sender allowlist.
+
+**Comparison with other event mechanisms** [^src25]:
+
+| Mechanism | State | Best for |
+|---|---|---|
+| Web sessions / Slack | No session state | Notifications |
+| Standard MCP | Per-call | Tool integrations |
+| Remote Control | Persistent session | Remote laptop access |
+| **Channels** | Persistent session | External event-driven workflows |
+
+## Artifacts (coding session as a live shareable page)
+
+Claude Code Artifacts turn a coding session into a **live, shareable web page** using the full session context — codebase, connectors, and conversation [^src26].
+
+**Use cases** [^src26]:
+- PR walkthroughs that update as the PR evolves
+- Team dashboards pulling from connected data sources
+- Incident timelines that update in real time
+
+Artifacts are private to the org by default. Beta available to Team and Enterprise plan users.
+
 ## See also
 
 - [[ai-engineering/sources/boris-cherny-100-percent-claude-code|Boris Cherny — 100% Claude Code]] — the full interview source page
@@ -473,3 +546,7 @@ Boris Cherny's viral X thread (2026) catalogued features "most people use maybe 
 [^src20]: [Claude Code Routines: 8 Production Prompts, Real Costs and When Things Break](../../raw/web/web-claude-code-routines-8-production-prompts-real-costs-and-whe.md) — Alex Newman
 [^src21]: [Claude Code for DevOps: Using the /loop skill](../../raw/web/web-claude-code-for-devops-using-the-loop-skill.md) — DevOps practitioner guide
 [^src22]: [Boris Cherny: 14 hidden Claude Code features](../../raw/notes/notes-boris-cherny-14-hidden-claude-code-features.md) — Boris Cherny / X thread, 2026
+[^src23]: [Permission modes (Claude Code docs)](../../raw/_inbox/web-choose-a-permission-mode-claude-code-docs.md) — Anthropic
+[^src24]: [Automated security reviews in Claude Code](../../raw/_inbox/web-automated-security-reviews-in-claude-code-claude-help-center.md) — Anthropic Help Center
+[^src25]: [Push events into a running session with Channels](../../raw/_inbox/web-push-events-into-a-running-session-with-channels-claude-code.md) — Anthropic, Claude Code docs
+[^src26]: [Claude Code Artifacts (email announcement)](../../raw/_inbox/email-2026-06-19-anthropic-drops-claude-code-artifacts.md) — Anthropic

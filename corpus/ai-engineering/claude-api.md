@@ -18,6 +18,9 @@ sources:
   - path: raw/notes/notes-clippings-the-advisor-strategy-give-sonnet-an-intelligence-boost-with.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/_inbox/web-claude-enterprise-analytics-api-reference-guide-claude-help.md
+    channel: web
+    ingested_at: 2026-06-24
 aliases:
   - Claude API
   - claude-api
@@ -28,7 +31,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-12
-updated: 2026-06-17
+updated: 2026-06-24
 ---
 
 # Claude API
@@ -131,6 +134,26 @@ response = client.messages.create(
 
 See [[ai-engineering/optimizing-claude|Optimizing a Claude Setup]] §7 for the full advisor-strategy discussion.
 
+## Enterprise Analytics API
+
+The Enterprise Analytics API provides per-user and per-project engagement metrics for Enterprise organizations [^src6].
+
+**Base URL**: `https://api.anthropic.com/v1/organizations/analytics/`
+
+**Authentication** [^src6]:
+- Requires `read:analytics` scope on the API key
+- Only a **Primary Owner** can create API keys with this scope
+
+**Endpoints** [^src6]:
+- `/users` — per-user engagement (default limit 20 per page)
+- `/projects` — project-level adoption data (default limit 100 per page)
+
+**Data characteristics** [^src6]:
+- Aggregated **per organization per day**
+- **D+3 freshness**: data for day N is available starting day N+3
+- **Cursor-based pagination**: max 1000 results per page; use the cursor from each response to paginate
+- Error codes: 400 (bad request), 401 (auth), 404 (not found), 410 (gone), 429 (rate limit), 500/504 (server errors)
+
 ## Claude Platform on AWS
 
 As of mid-2026, the full Claude Platform is available on AWS under AWS IAM authentication, CloudTrail audit logging, and billing through a single AWS invoice (retires existing AWS commitments). New features ship same-day as the native Claude API [^src4].
@@ -155,3 +178,4 @@ As of mid-2026, the full Claude Platform is available on AWS under AWS IAM authe
 [^src3]: [Anthropic courses (Skilljar)](../../raw/web/anthropic-courses.md)
 [^src4]: [Introducing the Claude Platform on AWS](../../raw/notes/notes-clippings-introducing-the-claude-platform-on-aws.md) — Anthropic announcement
 [^src5]: [The advisor strategy: Give Sonnet an intelligence boost with Opus](../../raw/notes/notes-clippings-the-advisor-strategy-give-sonnet-an-intelligence-boost-with.md) — Anthropic
+[^src6]: [Claude Enterprise Analytics API Reference Guide](../../raw/_inbox/web-claude-enterprise-analytics-api-reference-guide-claude-help.md) — Anthropic Help Center

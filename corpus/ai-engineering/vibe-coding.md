@@ -30,6 +30,15 @@ sources:
   - path: raw/notes/notes-06-ai-driven-prototyping-tools-and-techniques.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/_inbox/email-2026-06-14-claude-code-built-my-website-9-steps.md
+    channel: email
+    ingested_at: 2026-06-24
+  - path: raw/_inbox/web-how-anthropic-uses-claude-in-marketing-claude.md
+    channel: web
+    ingested_at: 2026-06-24
+  - path: raw/_inbox/web-vibecode-claude-platform-api-case-study-claude-by-anthropic.md
+    channel: web
+    ingested_at: 2026-06-24
 aliases:
   - vibe coding
   - vibe-coding
@@ -40,7 +49,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-15
-updated: 2026-06-17
+updated: 2026-06-24
 confidence: 0.8
 last_confirmed: 2026-06-17
 ---
@@ -118,6 +127,30 @@ At the frontier of full-agentic work the *definition of coding itself* shifts: B
 | **Spec-Driven Development** | Up-front spec + verify loop | Production, multi-session, existing codebases |
 | **[[ai-engineering/agentic-workflow|Agentic workflow]]** | Structured workflow files (WAT) | Repeatable multi-step automations |
 
+## Non-technical practitioners building real workflows
+
+The gap between "I wish this existed" and "I can build it myself" is now smaller than people realize — documented by practitioners without coding backgrounds:
+
+**Austin Lau (Anthropic growth marketer)** — never opened a terminal before Claude Code launched; built two production workflows within a week [^src10]:
+- A **Figma plugin** generating ad creative variations with a single click (45 min to build; saves ~30 min every time he updates a large batch of creatives across multiple aspect ratios). Process before: open Figma, copy frames, switch to Google Docs, paste copy, repeat across 10+ aspect ratios. Process after: specify frame, paste all variations, click a button.
+- A **Google Ads copy workflow** (`/rsa` slash command) that cross-references brand voice skills, product accuracy rules, and RSA best practices, then exports upload-ready CSV files. What used to take 30 minutes per ad now takes 30 seconds.
+
+Key practice patterns [^src10]: start with a tiny experiment (first project: a simple calculator app); let Claude read the existing API docs and prototype; describe the problem as you would to a colleague, not as a spec; treat Claude as a brainstorming partner who gets better with refinement. "All I would have to do is specify the frame of the creative… and with the click of a button, the Figma plugin will create all the different permutations."
+
+**Vibecode** — a mobile-first app builder where users speak or type in natural language from their phone; Claude Code programmatically does the React Native/Expo generation, backend creation, and multi-file orchestration [^src11]. Real examples users built: a marketplace app for land sales in Australia; a virtual sensory board for children with autism. Company grew 3x to $10M ARR using this natural-conversation interface. "Coding is describing what you want, not writing actual code" — matches [[ai-engineering/vibe-coding#coding-is-describing-not-writing|"Coding is describing"]] above.
+
+## Website building as a structured 9-step workflow
+
+Charlie Hills documented a structured pre-build process that uses Claude's questioning ability before generating any code [^src12]:
+
+1. **CONTEXT.md**: a Claude Chat interview where you answer questions about yourself, your audience, and your goals — produces a structured facts file
+2. **Claude Code interview**: Claude Code asks one clarifying question at a time using that facts file as input
+3. **COPY.md**: approve the full site copy (headlines, SEO keyword map, meta descriptions) *before any code is written*
+4. **DESIGN.md**: 5 visual references + brand kit (fonts, colors, logo) merged by Claude into design direction
+5–9. Build, iterate, and refine
+
+Key constraint: "Claude Code is brilliant at building things that work and terrible at making them look good" — so the design references are mandatory input before code starts. Getting human sign-off on copy and design direction before implementation prevents the most common "vibe coding" failure mode [^src12].
+
 ## See also
 
 - [[ai-engineering/agentic-coding|Agentic Coding]] — the broader coding-agent practice
@@ -141,3 +174,6 @@ At the frontier of full-agentic work the *definition of coding itself* shifts: B
 [^src7]: [Ch3 — The 70% Problem](../../raw/notes/notes-03-the-70-percent-problem-ai-assisted-workflows-that-actuall.md)
 [^src8]: [Ch4 — Beyond the 70%: Maximizing Human Contribution](../../raw/notes/notes-04-beyond-the-70-percent-maximizing-human-contribution.md)
 [^src9]: [Ch6 — AI-Driven Prototyping: Tools and Techniques](../../raw/notes/notes-06-ai-driven-prototyping-tools-and-techniques.md)
+[^src10]: [How Anthropic uses Claude in Marketing](../../raw/_inbox/web-how-anthropic-uses-claude-in-marketing-claude.md) — Austin Lau, Anthropic
+[^src11]: [Vibecode — Claude Platform API case study](../../raw/_inbox/web-vibecode-claude-platform-api-case-study-claude-by-anthropic.md) — Vibecode
+[^src12]: [Claude Code built my website (9 steps)](../../raw/_inbox/email-2026-06-14-claude-code-built-my-website-9-steps.md) — Charlie Hills

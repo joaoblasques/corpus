@@ -21,6 +21,12 @@ sources:
   - path: raw/notes/notes-clippings-multi-agent-coordination-patterns-five-approaches-and-when-t.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/_inbox/web-github-nicobailon-pi-subagents-pi-extension-for-async-subage.md
+    channel: web
+    ingested_at: 2026-06-24
+  - path: raw/_inbox/web-notion-q-a-claude-managed-agents-claude-by-anthropic.md
+    channel: web
+    ingested_at: 2026-06-24
 aliases:
   - multi-agent
   - multi-agent system
@@ -37,7 +43,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-07
-updated: 2026-06-17
+updated: 2026-06-24
 ---
 
 # Multi-Agent Systems
@@ -194,6 +200,31 @@ with file:line references and a recommended fix for each.
 
 The `description` field is what the orchestrator uses to decide when to delegate automatically — "Reviews code for security issues before commits" routes better than "security expert" [^src5]. A too-large custom agent roster reduces automatic delegation reliability; most teams settle on a handful of well-scoped agents [^src5].
 
+## pi-subagents: open-source async subagent system
+
+**pi-subagents** (`pi install npm:pi-subagents`) is an open-source Pi extension that adds eight specialized built-in agents, each scoped to a distinct role [^src7]:
+
+| Agent | Role | Notes |
+|---|---|---|
+| **scout** | Fast local reconnaissance | File reads, grep, structure — doesn't write code |
+| **researcher** | Web and docs research | Searches external sources; returns findings |
+| **planner** | Implementation planning | Produces a plan only; never edits code |
+| **worker** | Implements + validates | Writes code, runs checks, escalates if blocked |
+| **reviewer** | Code review + small fixes | Returns findings with severity; can apply nits |
+| **context-builder** | Builds `context.md` + `meta-prompt.md` | Prepares session context for subsequent agents |
+| **oracle** | Second opinion / devil's advocate | Challenges assumptions; never edits code |
+| **delegate** | Lightweight general-purpose | Quick tasks that don't fit a specialist role |
+
+**Key patterns** [^src7]:
+- **Parallel reviewers**: run multiple reviewer agents on the same code simultaneously (e.g. security-lens reviewer + correctness reviewer), then merge findings — the same adversarial verification pattern as [[ai-engineering/generator-evaluator-separation|Generator–Evaluator Separation]].
+- **Review loops**: worker → reviewer → worker cycle until reviewer is satisfied.
+- **Foreground vs background**: agents can run in the background while you continue working.
+- **Model overrides**: each agent can be assigned a different model (e.g. planner on Opus, worker on Sonnet).
+
+## 30-40 parallel task pattern (Notion)
+
+The Notion case study (Eric Liu, PM) documents a production implementation where **30-40 agent tasks run simultaneously** inside Notion's task board [^src8]. The orchestrator pattern: a Notion "ready to start" column triggers individual Claude sessions per task; team members collaborate on shared output in real time. Claude picks up context from connected design system, API docs, and PRDs automatically. "12 hours of prototyping work collapse into about 20 minutes." — This is the orchestrator-subagent pattern (§ above) at production scale, with the orchestrator being the task board state machine rather than a Claude agent itself.
+
 ## See also
 
 - [[ai-engineering/ai-agent|AI Agent]] — single-agent building block
@@ -210,3 +241,5 @@ The `description` field is what the orchestrator uses to decide when to delegate
 [^src4]: [NirDiamant/GenAI_Agents — 52+ tutorials and implementations](../../raw/web/github-nirdiamant-genai-agents-50-tutorials-and-implementati.md) — GitHub
 [^src5]: [How and when to use subagents in Claude Code](../../raw/notes/notes-clippings-how-and-when-to-use-subagents-in-claude-code.md) — Anthropic
 [^src6]: [Multi-agent coordination patterns: Five approaches and when to use them](../../raw/notes/notes-clippings-multi-agent-coordination-patterns-five-approaches-and-when-t.md) — Cara Phillips et al., Anthropic
+[^src7]: [pi-subagents — Pi extension for async subagents (GitHub)](../../raw/_inbox/web-github-nicobailon-pi-subagents-pi-extension-for-async-subage.md) — nicobailon
+[^src8]: [Notion Q&A — Claude Managed Agents](../../raw/_inbox/web-notion-q-a-claude-managed-agents-claude-by-anthropic.md) — Eric Liu, Notion PM

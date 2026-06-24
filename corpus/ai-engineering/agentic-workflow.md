@@ -18,6 +18,9 @@ sources:
   - path: raw/notes/notes-10-autonomous-background-coding-agents.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/_inbox/web-github-edlsh-pi-ask-user-interactive-decision-gating-extensi.md
+    channel: web
+    ingested_at: 2026-06-24
 aliases:
   - agentic workflow
   - agentic workflows
@@ -29,7 +32,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-15
-updated: 2026-06-17
+updated: 2026-06-24
 ---
 
 # Agentic Workflows
@@ -88,6 +91,34 @@ The unifying insight: **a workflow separates planning + orchestration (the JavaS
 
 **Use sparingly**: dynamic workflows often use significantly more tokens. Best suited for complex, high-value tasks where quality improvements justify the cost [^src4]. Combine with `/loop` for recurring execution and `/goal` for hard completion conditions. See [[ai-engineering/claude-code|Claude Code]] for the full dynamic workflow mechanics.
 
+## pi-ask-user: interactive decision-gating in agentic workflows
+
+**pi-ask-user** (`pi install npm:pi-ask-user`) adds an `ask_user` tool that pauses an agentic workflow at critical decision points and presents a structured question to the user [^src6].
+
+**Tool parameters** [^src6]:
+
+| Parameter | Purpose |
+|---|---|
+| `question` | The question text |
+| `context` | Background context for the user |
+| `options` | String array or `{title, description}` objects |
+| `allowMultiple` | Allow selecting multiple options |
+| `allowFreeform` | Allow typing a custom answer |
+| `allowComment` | Allow adding a comment alongside a choice |
+| `displayMode` | `overlay` (floating panel) or `inline` (in chat) |
+| `overlayToggleKey` | Keyboard shortcut to show/hide overlay (default: alt+o) |
+| `timeout` | Auto-proceed after N seconds if no response |
+
+**Bundled `ask-user` skill** — a companion skill (`skills/ask-user/SKILL.md`) trains Claude when to use the tool: architectural trade-offs with no clearly right answer, ambiguous requirements that could go in multiple directions, and high-stakes assumptions before expensive operations [^src6].
+
+**The "decision handshake" pattern** [^src6]:
+1. Gather evidence before asking (so the question is well-informed, not speculative)
+2. Ask exactly one structured question
+3. Wait for the user's answer
+4. Confirm understanding before proceeding
+
+This is the human-in-the-loop gate pattern from [[ai-engineering/agent-harness|Agent Harness]] made ergonomic — the overlay mode keeps Claude working in the terminal while presenting a clickable UI for the user's decision.
+
 ## See also
 
 - [[ai-engineering/ai-agent|AI Agent]] — the loop an agentic workflow wraps
@@ -104,3 +135,4 @@ The unifying insight: **a workflow separates planning + orchestration (the JavaS
 [^src3]: [NirDiamant/GenAI_Agents (50+ tutorials)](../../raw/web/github-nirdiamant-genai-agents-50-tutorials-and-implementati.md) — Nir Diamant
 [^src4]: [A harness for every task: dynamic workflows in Claude Code](../../raw/notes/notes-clippings-a-harness-for-every-task-dynamic-workflows-in-claude-code.md) — Thariq Shihipar & Sid Bidasaria, Anthropic
 [^src5]: [Ch10 — Autonomous Background Coding Agents](../../raw/notes/notes-10-autonomous-background-coding-agents.md)
+[^src6]: [pi-ask-user — Interactive decision-gating extension (GitHub)](../../raw/_inbox/web-github-edlsh-pi-ask-user-interactive-decision-gating-extensi.md) — edlsh

@@ -42,6 +42,9 @@ sources:
   - path: raw/web/web-how-to-set-up-your-coding-agent-a-step-by-step-guide.md
     channel: web
     ingested_at: 2026-06-17
+  - path: raw/_inbox/web-github-edlsh-pi-ask-user-interactive-decision-gating-extensi.md
+    channel: web
+    ingested_at: 2026-06-24
 aliases:
   - agent skills
   - Claude skills
@@ -58,7 +61,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-09
-updated: 2026-06-17
+updated: 2026-06-24
 ---
 
 # Agent Skills
@@ -279,6 +282,12 @@ The pattern [^src12]:
 
 The key insight: the `/how-to` pattern lowers the activation energy for skill creation — instead of designing an elaborate SKILL.md with sections for context/procedure/output/gotchas, you start with a simple "here's how to do it" document and refine over time [^src12]. The skill file itself is the documentation; updating it is the practice of capturing expertise.
 
+## pi-ask-user as a bundled skill example
+
+The `pi-ask-user` package ships a companion skill (`skills/ask-user/SKILL.md`) that is the skill for the `ask_user` tool [^src13]. This is a production example of the "bundle a skill alongside each capability" pattern: the tool provides the mechanical capability (presenting a structured question with options), and the skill provides the procedural knowledge of *when* to use it (architectural trade-offs, ambiguous requirements, high-stakes assumptions).
+
+The skill trains Claude to follow a "decision handshake" before asking: gather evidence → formulate one well-informed question → wait → confirm understanding → proceed. Without the skill, Claude might either ask too early (before sufficient context) or never ask at all (silently picking an interpretation). See [[ai-engineering/agentic-workflow|Agentic Workflows]] for the full pi-ask-user documentation.
+
 ## See also
 
 - [[ai-engineering/context-window-management|Context Window Management]] — why a lean window matters; sub-agents
@@ -307,3 +316,4 @@ The key insight: the `/how-to` pattern lowers the activation energy for skill cr
 [^src10]: [Lessons from building Claude Code: How we use skills](../../raw/notes/notes-clippings-lessons-from-building-claude-code-how-we-use-skills.md) — Thariq Shihipar, Anthropic
 [^src11]: [How to Set Up Your Coding Agent: A Step-by-Step Guide](../../raw/web/web-how-to-set-up-your-coding-agent-a-step-by-step-guide.md) — Prathmesh Yelne
 [^src12]: [Claude Replaced Me (Ruben Hassid)](../../raw/email/email-2026-06-14-claude-replaced-me.md) — /how-to skill pattern + Cowork + Opus 4.8
+[^src13]: [pi-ask-user — Interactive decision-gating extension (GitHub)](../../raw/_inbox/web-github-edlsh-pi-ask-user-interactive-decision-gating-extensi.md) — edlsh

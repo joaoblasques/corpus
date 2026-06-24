@@ -69,6 +69,12 @@ sources:
   - path: raw/web/web-the-code-agent-orchestra-what-makes-multi-agent-coding-work.md
     channel: web
     ingested_at: 2026-06-23
+  - path: raw/_inbox/web-the-agent-that-saved-my-brain.md
+    channel: web
+    ingested_at: 2026-06-24
+  - path: raw/_inbox/web-how-anthropic-uses-claude-in-marketing-claude.md
+    channel: web
+    ingested_at: 2026-06-24
 aliases:
   - agentic coding
   - agentic engineering
@@ -91,7 +97,7 @@ tags:
   - corpus/ai-engineering
   - synthesis
 created: 2026-06-12
-updated: 2026-06-23
+updated: 2026-06-24
 ---
 
 # Agentic Coding
@@ -181,6 +187,16 @@ A practitioner deep-dive on running Claude Code "as a programmable agent, not dr
 - **`/goal` = the Ralph Loop built in** — sets a verifiable completion condition and grinds until it holds; "Pick something verifiable and deterministic... Write 'the code is good' and you've already lost" [^src4]. See the Ralph Loop in [[ai-engineering/agent-harness|Agent Harness]].
 
 This source also grounds [[ai-engineering/agent-skills|Agent Skills]] (skills as "the unit of reusable expertise"), subagents, plugins, and [[ai-engineering/mcp|MCP]] as the layers above the prompt.
+
+## Non-technical practitioners as agentic coders
+
+The barrier to agentic coding has dropped far enough that people with no programming background are building production workflows. Two documented cases:
+
+**Austin Tedesco** (Every's head of growth, "the first to tell you he doesn't have a technical background") built **Montaigne** — a personal agent using the compound knowledge system, with tools connected to Stripe, PostHog, Slack, Notion, Figma, email, and calendar [^src21]. After 3 weeks of exploration, he built a system that handles execution of recurring growth tasks so he can focus on the hard, creative parts of the job. Montaigne lives in the Claude Code terminal and as an OpenClaw Slack bot. See [[ai-engineering/compound-engineering|Compound Engineering]] for the methodology.
+
+**Austin Lau** (Anthropic growth marketer, never opened a terminal before Claude Code) built two production ad-tech workflows within one week [^src22]: a Figma plugin generating ad creative variations across all aspect ratios with a single click (30 min to build; saves ~30 min per update cycle), and a Google Ads copy workflow (`/rsa`) that takes campaign data → applies brand voice skills → exports upload-ready CSV files. What used to take 30 minutes per ad now takes 30 seconds. Key insight: "you don't need to know how to code. All you need to know is how to explain your challenge... in a very clear, concise manner." Non-technical employees are already subject-matter experts in their domains — Claude gives them the tools to fix their own friction points.
+
+The common pattern: start with a tiny experiment, describe the problem to Claude as you would to a colleague, let Claude research the relevant APIs and prototype, refine iteratively. The gap between "I wish this existed" and "I can build it" is now "much smaller than people realize" [^src22].
 
 ## Delegate the tasks, not the judgment
 
@@ -430,3 +446,5 @@ Claude Code ships a managed code review service (Team and Enterprise subscriptio
 [^src18]: [Agentic Code Review](../../raw/email/email-2026-06-16-agentic-code-review.md) — Addy Osmani
 [^src19]: [Code Review — Claude Code Docs](../../raw/web/web-code-review-claude-code-docs.md) — Anthropic official docs
 [^src20]: [The Factory Model: How Coding Agents Changed Software Engineering](../../raw/web/web-the-factory-model-how-coding-agents-changed-software-enginee.md) — Addy Osmani
+[^src21]: [The Agent That Saved My Brain](../../raw/_inbox/web-the-agent-that-saved-my-brain.md) — Austin Tedesco, Every
+[^src22]: [How Anthropic uses Claude in Marketing](../../raw/_inbox/web-how-anthropic-uses-claude-in-marketing-claude.md) — Austin Lau, Anthropic

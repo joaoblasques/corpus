@@ -9,6 +9,12 @@ sources:
   - path: raw/notes/notes-10-autonomous-background-coding-agents.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/_inbox/web-rakuten-claude-managed-agents-case-study-claude-by-anthropic.md
+    channel: web
+    ingested_at: 2026-06-24
+  - path: raw/_inbox/web-assign-tasks-from-anywhere-in-claude-cowork-claude-help-cent.md
+    channel: web
+    ingested_at: 2026-06-24
 aliases:
   - long-running agent
   - long-running agents
@@ -19,7 +25,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-16
-updated: 2026-06-17
+updated: 2026-06-24
 ---
 
 # Long-Running Agents
@@ -113,6 +119,18 @@ Ch10 surfaces challenges that don't arise with interactive AI tools [^src2]:
 
 Still genuinely unsolved [^src1]: **cost** (a 24-hour frontier run can "quietly burn through a week's API budget in an afternoon" without budgets/circuit breakers — see [[ai-engineering/agent-cost-management|Agent Cost Management]]); **security** (a larger attack surface; the brain/hands split keeps credentials unreachable from the sandbox); **alignment drift** (goals lose fidelity across re-summarization); **verification** (auditing 24 hours of activity is a human-time problem); and **the human role** — "the skill that's appreciating in value isn't writing code. It's writing specs that survive contact with an autonomous executor." [^src1]
 
+## Goal-based delegation for long-running agents (Rakuten)
+
+Rakuten's deployment highlights the most important mindset shift for getting value from long-running agents: **delegate goals, not tasks** [^src3]. Yusuke Kaji (GM AI for Business): previous AI deployments were task-based ("do this specific action") — that led to brittle, micro-managed agent loops. Goal-based delegation ("here's what success looks like for this business function") lets agents decide the intermediate steps, adapt when blocked, and learn across sessions.
+
+The result: agents that accumulate organizational knowledge via memory. "Individual learning becomes organizational learning instantly" — when one agent learns that a specific format fails with a specific vendor's system, that learning persists in the memory store and every subsequent agent for that customer benefits [^src3].
+
+Specialist agents (engineering/product/sales/marketing/finance) were deployed within one week each; each learns from every session via built-in memory; 97% drop in first-pass critical errors across the fleet [^src3].
+
+## Phone-to-desktop persistent sessions (Cowork Dispatch)
+
+**Dispatch** (Pro/Max beta) extends the long-running agent pattern to cross-device persistence: a single conversation thread lives across mobile and desktop, so delegating a task from your phone to a Claude Code or Cowork session on your desktop isn't a separate handoff — it's the same persistent context [^src4]. This operationalizes the `wake(sessionId)` pattern from [[ai-engineering/claude-managed-agents|Claude Managed Agents]] Brain-Hands-Session architecture: the phone is the human-in-the-loop checkpoint, and the desktop is the execution environment. Push notifications handle the async completion loop.
+
 ## See also
 
 - [[ai-engineering/agentic-coding|Agentic Coding]] — the conductor→orchestrator shift that autonomous agents represent
@@ -122,4 +140,6 @@ Still genuinely unsolved [^src1]: **cost** (a 24-hour frontier run can "quietly 
 
 [^src1]: [Long-running Agents](../../raw/web/long-running-agents.md)
 [^src2]: [Ch10 — Autonomous Background Coding Agents](../../raw/notes/notes-10-autonomous-background-coding-agents.md)
+[^src3]: [Rakuten — Claude Managed Agents case study](../../raw/_inbox/web-rakuten-claude-managed-agents-case-study-claude-by-anthropic.md) — Yusuke Kaji, Rakuten
+[^src4]: [Assign tasks from anywhere in Claude Cowork (Dispatch)](../../raw/_inbox/web-assign-tasks-from-anywhere-in-claude-cowork-claude-help-cent.md) — Anthropic Help Center
 </content>

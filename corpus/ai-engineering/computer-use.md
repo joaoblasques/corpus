@@ -12,6 +12,9 @@ sources:
   - path: raw/web/web-mitigating-the-risk-of-prompt-injections-in-browser-use.md
     channel: web
     ingested_at: 2026-06-21
+  - path: raw/_inbox/web-claude-quickstarts-computer-use-best-practices-at-main-anthr.md
+    channel: web
+    ingested_at: 2026-06-24
 aliases:
   - computer use
   - browser use
@@ -22,7 +25,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-17
-updated: 2026-06-21
+updated: 2026-06-24
 ---
 
 # Computer Use (Claude)
@@ -174,6 +177,17 @@ Instead of iterating on text prompts, record a demonstration — screenshots + a
 - **Tool debug panel** (`uvicorn debug.server:app`): exercise each tool individually (screenshot, click, type, scroll, zoom) to confirm the capture pipeline.
 - **Localization playground** (`uvicorn localize.server:app --port 8001`): upload an image, ask Claude to point at a target, see predicted coordinates overlaid at both display and native resolution. Fastest way to diagnose click misses in isolation [^src1].
 
+## macOS reference implementation (quickstarts)
+
+The Claude computer use quickstarts reference implementation (`claude-quickstarts/computer-use`) is macOS-only — the original Docker-based reference has been superseded [^src4]:
+
+- **Sandboxing**: uses macOS `sandbox-exec` for bash commands and Python execution; no Docker required
+- **Trajectory recording**: every run produces a `runs/<timestamp>/` directory containing JSONL steps and JPEG screenshots for replay and debugging
+- **Python 3.11+** required
+- Intended to run "inside a disposable macOS VM" — treat the host as ephemeral when doing automated desktop workflows
+
+The debugging tooling described above (trajectory viewer, tool debug panel, localization playground) applies to this implementation. See §Debugging tools above.
+
 ## See also
 
 - [[ai-engineering/claude-code|Claude Code]] — Claude Code's auto mode uses a similar classifier approach for permission decisions
@@ -188,3 +202,4 @@ Instead of iterating on text prompts, record a demonstration — screenshots + a
 [^src1]: [Best practices for computer and browser use with Claude](../../raw/notes/notes-clippings-best-practices-for-computer-and-browser-use-with-claude.md) — Lucas Gonzalez & Luca Weihs, Anthropic
 [^src2]: [Introducing Claude Sonnet 4.6](../../raw/web/web-introducing-sonnet-4-6.md) — Anthropic official blog (OSWorld + prompt injection robustness)
 [^src3]: [Mitigating the Risk of Prompt Injections in Browser Use](../../raw/web/web-mitigating-the-risk-of-prompt-injections-in-browser-use.md) — Anthropic (1% attack rate; Claude for Chrome beta)
+[^src4]: [Claude Quickstarts — computer-use best practices](../../raw/_inbox/web-claude-quickstarts-computer-use-best-practices-at-main-anthr.md) — Anthropic GitHub

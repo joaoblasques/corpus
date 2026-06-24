@@ -81,6 +81,18 @@ sources:
   - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-5-claude-connecto-report.md
     channel: notes
     ingested_at: 2026-06-23
+  - path: raw/_inbox/web-assign-tasks-from-anywhere-in-claude-cowork-claude-help-cent.md
+    channel: web
+    ingested_at: 2026-06-24
+  - path: raw/_inbox/web-monitor-claude-cowork-activity-with-opentelemetry-claude-hel.md
+    channel: web
+    ingested_at: 2026-06-24
+  - path: raw/_inbox/web-configure-a-custom-opentelemetry-collector-for-office-agents.md
+    channel: web
+    ingested_at: 2026-06-24
+  - path: raw/_inbox/web-use-research-on-claude-claude-help-center.md
+    channel: web
+    ingested_at: 2026-06-24
 aliases:
   - Claude Cowork
   - Cowork
@@ -90,7 +102,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-06-12
-updated: 2026-06-23
+updated: 2026-06-24
 ---
 
 # Claude Cowork
@@ -282,6 +294,64 @@ Austin Lau (Anthropic growth team) offers a first-party framework for when to re
 
 > "Many people don't know that Claude Cowork and Claude Code run on the same engine under the hood." [^src18] Cowork is Claude Code's harness adapted for non-technical knowledge work.
 
+## Dispatch: assign tasks from anywhere
+
+**Dispatch** (Pro/Max beta) creates a persistent single thread across phone and desktop — enabling asynchronous task delegation regardless of where you are [^src25].
+
+How it works [^src25]:
+- One continuous conversation thread that lives across mobile and desktop (not separate conversations)
+- When you send a task from your phone, Claude determines whether to delegate to Claude Code (dev tasks) or Cowork (knowledge work)
+- **Push notifications** when Claude completes a task or when approval is needed
+- Claude remembers preferences and projects across the persistent thread
+- Supports scheduled recurring tasks
+- Computer use is available from mobile — Claude can operate your desktop when triggered from the phone
+
+> Safety note: "Because Claude can perform powerful actions on your behalf through computer use, be thoughtful about what you grant permission to — Claude acts in a chain of control rather than directly at your direction." [^src25]
+
+## OpenTelemetry monitoring
+
+Two overlapping OTel capabilities exist for enterprise observability: Cowork OTel monitoring and Office agents custom OTel.
+
+### Cowork OTel monitoring
+
+Available on Team/Enterprise plans with Claude Cowork Desktop 1.1.4173+. Streams six event categories to any compatible collector [^src26]:
+
+1. **User prompts** — full prompt text (user input, not model output)
+2. **Tool and MCP invocations** — tool name, inputs, outputs
+3. **File access** — file paths opened or read by Claude
+4. **Skills and plugins** — which skills activated per session
+5. **Human approval decisions** — when Claude paused and what action was approved/rejected
+6. **API requests and errors** — model calls, errors, latency
+
+The **`prompt.id` attribute** is shared across all events triggered by a single user prompt, enabling operators to correlate tool invocations, file accesses, and errors within the same request [^src26]. Compatible with Splunk, Cribl, Elasticsearch, Loki, ClickHouse, Honeycomb, and Datadog.
+
+### Office agents custom OTel collector
+
+Enterprise-only (direct-provider Bedrock/Vertex/gateway supported; claude.ai Enterprise also supported). Routes all Office agent spans to a custom OTLP/HTTP collector [^src27].
+
+**Key constraints** [^src27]:
+- **OTLP/HTTP only** — gRPC is NOT supported (WebView2 limitation in the Office plugin)
+- All span attributes included: user-generated content, tool inputs/outputs, document URLs, filenames — **no redaction**
+- No assistant response text is captured
+- Routes EXCLUSIVELY to your collector (not dual-sent to Anthropic)
+
+**Span types** [^src27]: `agent.query` (root), `model.call`, `tool.execution`, `file.upload`, `context.compaction`. Surface labels: `sheet`, `doc`, `slide`, `mail`; vendor label `m` (Microsoft).
+
+On claude.ai Enterprise, additional attributes: `user.email`, `account_uuid`, `org.id`, MCP server metadata, `file.upload` spans. Direct provider setups (Bedrock/Vertex) lack these.
+
+## Research mode
+
+Research mode is an agentic multi-search capability that iterates on its own findings across multiple searches [^src28].
+
+**Key behaviors** [^src28]:
+- Searches build on each other — each search informs the next
+- Can search both **internal sources** (Gmail, Google Calendar, Google Docs via connectors) and the web simultaneously
+- Must have web search enabled (Team/Enterprise admins in Organization settings; individual toggle for other plans)
+- Steer with "use the research tool to…" in your prompt
+- Uses limits faster than normal responses — budget accordingly
+
+Available on Pro, Max, Team, and Enterprise plans; available on web, mobile, and desktop.
+
 ## See also
 
 - [[ai-engineering/claude-code|Claude Code]] — the developer counterpart; capabilities land here first
@@ -314,3 +384,7 @@ Austin Lau (Anthropic growth team) offers a first-party framework for when to re
 [^src22]: [Claude for the legal industry](../../raw/notes/notes-clippings-claude-for-the-legal-industry.md) — Anthropic
 [^src23]: [Get started with Claude Cowork](../../raw/notes/notes-clippings-get-started-with-claude-cowork.md) — Anthropic official guide
 [^src24]: [5 Claude Connectors with INSANE Use Cases (YouTube deep-analysis)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-5-claude-connecto-report.md)
+[^src25]: [Assign tasks from anywhere in Claude Cowork](../../raw/_inbox/web-assign-tasks-from-anywhere-in-claude-cowork-claude-help-cent.md) — Anthropic Help Center
+[^src26]: [Monitor Claude Cowork activity with OpenTelemetry](../../raw/_inbox/web-monitor-claude-cowork-activity-with-opentelemetry-claude-hel.md) — Anthropic Help Center
+[^src27]: [Configure a custom OpenTelemetry collector for Office agents](../../raw/_inbox/web-configure-a-custom-opentelemetry-collector-for-office-agents.md) — Anthropic Help Center
+[^src28]: [Use Research on Claude](../../raw/_inbox/web-use-research-on-claude-claude-help-center.md) — Anthropic Help Center

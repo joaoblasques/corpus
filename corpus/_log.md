@@ -1283,3 +1283,11 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - domain: ai-engineering
 - pages touched: corpus/ai-engineering/claude-cowork.md (new Connectors section + [^src24])
 - notes: first ingest after Phase-4 enablement (collect-obsidian guard dropped; reaper folder-aware). Reaping this note git-rms report.md + 5 sibling frames (whole-folder reap). Ledger gate (~/.config/watch/yt_deepen_done.jsonl) confirmed: video -h2C65Qd9Mg in ledger, absent from yt_watch_queue → no re-queue.
+
+## [2026-06-24 00:00] ingest | ingest-auto batch (50 candidates: 30 ingested, 20 deferred)
+- source: raw/_inbox/ (30 sources stamped; 20 deferred to _REVIEW.md)
+- channel: web / email / inbox
+- domain: ai-engineering (all 30 sources)
+- pages touched: corpus/ai-engineering/claude-code.md, corpus/ai-engineering/claude-cowork.md, corpus/ai-engineering/claude-managed-agents.md, corpus/ai-engineering/agent-security.md, corpus/ai-engineering/compound-engineering.md, corpus/ai-engineering/vibe-coding.md, corpus/ai-engineering/mcp.md, corpus/ai-engineering/agentic-workflow.md, corpus/ai-engineering/claude-models.md, corpus/ai-engineering/multi-agent-systems.md, corpus/ai-engineering/agent-skills.md, corpus/ai-engineering/long-running-agents.md, corpus/ai-engineering/agentic-coding.md, corpus/ai-engineering/claude-api.md, corpus/ai-engineering/anthropic.md, corpus/ai-engineering/spec-driven-development.md, corpus/ai-engineering/computer-use.md, corpus/ai-engineering/README.md
+- new pages: none
+- notes: ingest-auto run; 30 processed, 20 deferred. 18 existing pages enriched. Topics: Claude Code permission modes/Channels/security-review/Artifacts, Cowork Dispatch/OTel/Research, Managed Agents case studies (Notion/Rakuten/Sentry/Vibecode)/Claude for Legal, agent-security (Palo Alto Unit 42/Wiz Red Agent), compound-engineering plugin inventory + Montaigne, vibe-coding non-technical practitioners, MCP Channels protocol, pi-ask-user decision-gating, web search models, pi-subagents, Enterprise Analytics API, CONTEXT→COPY→DESIGN website spec, computer-use macOS reference implementation.

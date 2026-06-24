@@ -45,6 +45,9 @@ sources:
   - path: raw/web/web-github-cloudflare-mcp-mcp-server-for-the-cloudflare-api.md
     channel: web
     ingested_at: 2026-06-23
+  - path: raw/_inbox/web-push-events-into-a-running-session-with-channels-claude-code.md
+    channel: web
+    ingested_at: 2026-06-24
 aliases:
   - MCP
   - Model Context Protocol
@@ -52,7 +55,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-21
-updated: 2026-06-23
+updated: 2026-06-24
 ---
 
 # MCP (Model Context Protocol)
@@ -200,6 +203,25 @@ Claude's **connector directory** is the UI layer for MCP — pre-configured one-
 
 **Marketing/sales connector landscape (as of mid-2026)**: HubSpot, Salesforce, Pipedrive, Apollo, Clay, Gong, Outreach, PandaDoc, Calendly, Lusha, Vibe Prospecting, Gamma, GA4, Meta Ads, Google Ads, Shopify, Klaviyo, Mailchimp, Semrush, Canva, Hotjar, Stripe (33 total in one documented stack) [^src8].
 
+## Channels: push-event protocol (vs MCP pull)
+
+Standard MCP is a **pull** protocol — agents call tools and wait for results. **Channels** (Claude Code research preview) is a complementary **push** mechanism: external systems deliver events into a live Claude Code session [^src15].
+
+Channels implementations ship as **Bun plugins**:
+- **Telegram bot**: Telegram messages → Claude Code events
+- **Discord bot**: Discord server messages → Claude Code events
+- **iMessage**: iMessage → Claude Code events
+
+**When to choose Channels over standard MCP** [^src15]:
+
+| Mechanism | State | Model | Best for |
+|---|---|---|---|
+| Standard MCP tool call | Per-call | Pull | Tool integrations, data fetches |
+| Remote Control | Persistent session | Push | Remote laptop control |
+| **Channels** | Persistent session | Push | Reactive automation, event-driven workflows |
+
+Claude Code sessions keep state between channel events — meaning a Telegram bot can maintain running context across a conversation, not just answer one-off questions. Requires Anthropic auth (not Bedrock/Vertex/Foundry). Team/Enterprise admins enable via `channelsEnabled` and can configure a sender allowlist.
+
 ## Consumer connectors (everyday-life expansion)
 
 As of mid-2026 the Claude connector directory has grown to 200+ connectors spanning design, finance, productivity, and health [^src9]. The connector model has expanded beyond work tools to everyday-life apps: AllTrails, Audible, Booking.com, Instacart, Intuit Credit Karma, Intuit TurboTax, Resy, Spotify, StubHub, Taskrabbit, Thumbtack, Tripadvisor, Uber, Uber Eats, and Viator [^src9].
@@ -237,3 +259,4 @@ As of mid-2026 the Claude connector directory has grown to 200+ connectors spann
 [^src12]: [MCP Apps — Model Context Protocol](../../raw/web/web-mcp-apps-model-context-protocol.md) — Anthropic
 [^src13]: [Elicitation — Model Context Protocol](../../raw/web/web-elicitation-model-context-protocol.md) — Anthropic
 [^src14]: [Cloudflare MCP Server (Code Mode)](../../raw/web/web-github-cloudflare-mcp-mcp-server-for-the-cloudflare-api.md) — Cloudflare
+[^src15]: [Push events into a running session with Channels](../../raw/_inbox/web-push-events-into-a-running-session-with-channels-claude-code.md) — Anthropic, Claude Code docs

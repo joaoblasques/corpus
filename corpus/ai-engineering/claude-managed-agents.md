@@ -33,6 +33,21 @@ sources:
   - path: raw/web/web-using-agent-memory.md
     channel: web
     ingested_at: 2026-06-23
+  - path: raw/_inbox/web-notion-q-a-claude-managed-agents-claude-by-anthropic.md
+    channel: web
+    ingested_at: 2026-06-24
+  - path: raw/_inbox/web-rakuten-claude-managed-agents-case-study-claude-by-anthropic.md
+    channel: web
+    ingested_at: 2026-06-24
+  - path: raw/_inbox/web-sentry-claude-managed-agents-case-study-claude-by-anthropic.md
+    channel: web
+    ingested_at: 2026-06-24
+  - path: raw/_inbox/web-vibecode-claude-platform-api-case-study-claude-by-anthropic.md
+    channel: web
+    ingested_at: 2026-06-24
+  - path: raw/_inbox/web-claude-legal-solutions-claude-by-anthropic.md
+    channel: web
+    ingested_at: 2026-06-24
 aliases:
   - Claude Managed Agents
   - Managed Agents
@@ -41,7 +56,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-06-17
-updated: 2026-06-23
+updated: 2026-06-24
 ---
 
 # Claude Managed Agents
@@ -83,12 +98,35 @@ Memory on Managed Agents mounts directly onto a filesystem so Claude uses the sa
 
 Teams self-reporting 10x faster deployment across diverse use cases [^src1]:
 
-- **Notion** — delegates tasks (code, presentations, spreadsheets) directly inside Notion Custom Agents; dozens of tasks run in parallel while teams collaborate on output.
-- **Rakuten** — shipped specialist agents (product, sales, marketing, finance) in Slack/Teams within one week per agent; long-running agents learn from every session via memory and cut first-pass errors by 97% [^src2].
+- **Notion** — task board orchestrator: moving a task to "ready to start" in Notion automatically invokes a Claude session. Eric Liu (PM): "12 hours of prototyping work collapse into about 20 minutes." 30-40 tasks run in parallel; Claude picks up context from connected pages, design system, API docs, and PRDs automatically. Skills are auto-maintained from thumbs-up/thumbs-down feedback. "Humans as editors and reviewers, not doers" [^src8].
+- **Rakuten** — Yusuke Kaji (GM AI for Business): deploys specialist agents (engineering, product, sales, marketing, finance) within one week each. Slack/Teams/Kanban integration; mobile voice control. 97% drop in first-pass critical errors; cost and latency down 30%+. Key shift from task-based to goal-based delegation: "delegate goals not tasks." Organizational learning: "individual learning becomes organizational learning instantly." Power users called "Galileo" manage teams of agents; Shoko Sakamoto's FinOps pipeline is one example [^src9].
 - **Asana** — AI Teammates built with Claude Opus 4.6 + Managed Agents; marketing campaign review cycle dropped from days to 15 minutes; first deployed: Campaign Brief Writer + Launch Planner agents. Governance model: admin-level visibility into agent task history, no training data use, purpose-scoped tool access [^src6].
-- **Sentry** — paired Seer's root-cause analysis with a Claude-powered agent writing the patch and opening the PR; shipped in weeks instead of months.
+- **Sentry** — Indragie Karunaratne (Senior Director Engineering AI/ML): 1 engineer shipped the initial integration; weeks instead of months. Data residency via Vertex AI (minimize data outside Google Cloud). Seer performs root-cause analysis → Claude agent writes the fix → PR opened. "Developer's job shifts from writing the fix to reviewing it." Quote: "from Seer's root cause analysis straight to a Claude agent that writes the fix and opens a PR" [^src10].
+- **Vibecode** — Riley Brown + Ansh Nanda co-founders: mobile-first (phone), uses Claude Code programmatically as the complete engine for React Native/Expo code generation, backend creation, multi-file orchestration. Grew 3x to $10M ARR since adopting Opus 4.5. Example use cases: marketplace app for land sales in Australia; virtual sensory board for children with autism. Managed Agents described as "10x quicker" [^src11].
 - **Netflix** — agents carry context across sessions, including insights that took multiple turns to uncover and corrections from a human mid-conversation [^src2].
 - **Wisedocs** — document-verification pipeline uses cross-session memory to spot recurring document issues; verification speed up 30% [^src2].
+
+## Claude for Legal
+
+Claude for Legal is a suite of plugins, connectors, and integrations for legal teams available on Team and Enterprise plans (no training data use) [^src12].
+
+**Practice area plugins**: Commercial Legal, Corporate Legal, Intellectual Property, Litigation, Employment Legal, Privacy Legal, Regulatory Legal, AI Governance Legal, Law Student, Legal Clinic, and more [^src12].
+
+**Connectors** [^src12]:
+- Contract lifecycle: Docusign, Ironclad
+- Document management: iManage, NetDocuments
+- Legal research: Thomson Reuters
+- Deal rooms: Box/Intralinks (data room access for due diligence)
+
+**Microsoft integration**: Claude for Word (draft, redline, summarize) and Outlook (draft correspondence, review contracts) [^src12].
+
+**Key use cases** [^src12]:
+- Research briefs and due diligence document review (data room)
+- SOW drafting and outside counsel billing review
+- Compliance gap analysis
+- Contract comparison and redline
+
+Custom skills and connectors are extensible for firm-specific workflows [^src12]. A subset of practice-area plugins (Commercial Legal, Corporate Legal, Litigation, Product Legal) are also deployable as Managed Agents via the Claude Platform — see [[ai-engineering/claude-cowork|Claude Cowork]] for the Cowork legal vertical integration.
 
 ## Self-hosted sandboxes and MCP tunnels
 
@@ -192,3 +230,8 @@ Standard Claude Platform token rates + **$0.08 per session-hour** of active runt
 [^src5]: [Introducing the Claude Platform on AWS](../../raw/notes/notes-clippings-introducing-the-claude-platform-on-aws.md) — Anthropic announcement
 [^src6]: [Scaling Managed Agents: Decoupling the Brain from the Hands](../../raw/web/web-scaling-managed-agents-decoupling-the-brain-from-the-hands.md) — Anthropic engineering
 [^src7]: [Built-in Memory for Claude Managed Agents (Anthropic docs)](../../raw/web/web-using-agent-memory.md) — Anthropic
+[^src8]: [Notion Q&A — Claude Managed Agents](../../raw/_inbox/web-notion-q-a-claude-managed-agents-claude-by-anthropic.md) — Eric Liu, Notion PM
+[^src9]: [Rakuten — Claude Managed Agents case study](../../raw/_inbox/web-rakuten-claude-managed-agents-case-study-claude-by-anthropic.md) — Yusuke Kaji, Rakuten
+[^src10]: [Sentry — Claude Managed Agents case study](../../raw/_inbox/web-sentry-claude-managed-agents-case-study-claude-by-anthropic.md) — Indragie Karunaratne, Sentry
+[^src11]: [Vibecode — Claude Platform API case study](../../raw/_inbox/web-vibecode-claude-platform-api-case-study-claude-by-anthropic.md) — Vibecode
+[^src12]: [Claude Legal Solutions](../../raw/_inbox/web-claude-legal-solutions-claude-by-anthropic.md) — Anthropic

@@ -51,6 +51,9 @@ sources:
   - path: raw/web/web-pricing.md
     channel: web
     ingested_at: 2026-06-23
+  - path: raw/_inbox/web-enable-and-use-web-search-claude-help-center.md
+    channel: web
+    ingested_at: 2026-06-24
 aliases:
   - Claude model lineup
   - Claude models
@@ -64,7 +67,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-06-12
-updated: 2026-06-23
+updated: 2026-06-24
 ---
 
 # Claude Model Lineup
@@ -185,6 +188,19 @@ Two weeks with Fable 5 surfaced a pattern shift in how to work with the model [^
 
 **"Verify the right work, not that the work is right."** The critical reframe: the human's job when using Fable is not to check whether each step was executed correctly (the model does that), but to verify that the *task itself* was worth doing — that the loop is producing the right outputs for the right problems. This connects to [[productivity/ai-augmented-knowledge-work|loop engineering]] and the verification-as-design discipline [^src11], and is the human-altitude case of [[ai-engineering/generator-evaluator-separation|generator–evaluator separation]] — once the model self-checks each step, the human evaluator relocates to the task level [^src11].
 
+## Web search model support
+
+Web search (and web fetch) is available on the following models as of mid-2026 [^src16]:
+
+- Fable 5
+- Opus 4.8
+- Opus 4.7
+- Sonnet 4.6
+- Opus 4.6
+- Haiku 4.5
+
+Web search requires the feature to be enabled (user toggle in chat, or admin-enabled at the workspace level for Team/Enterprise). Image results from Bing are included when web search is active. See [[ai-engineering/claude-cowork|Claude Cowork]] for workspace-level controls.
+
 ## See also
 
 - [[ai-engineering/anthropic|Anthropic]] — the lab behind these models (company, funding, learning resources)
@@ -204,3 +220,4 @@ Two weeks with Fable 5 surfaced a pattern shift in how to work with the model [^
 [^src13]: [Adaptive Thinking — Claude API docs](../../raw/web/web-adaptive-thinking.md) — Anthropic
 [^src14]: [Introducing Claude Opus 4.8](../../raw/web/web-introducing-claude-opus-4-8.md) — Anthropic official blog
 [^src15]: [Introducing Claude 4](../../raw/web/web-introducing-claude-4.md) — Anthropic
+[^src16]: [Enable and use web search (Claude Help Center)](../../raw/_inbox/web-enable-and-use-web-search-claude-help-center.md) — Anthropic

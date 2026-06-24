@@ -18,6 +18,12 @@ sources:
   - path: raw/email/email-2026-05-06-certified.md
     channel: email
     ingested_at: 2026-06-17
+  - path: raw/_inbox/web-claude-legal-solutions-claude-by-anthropic.md
+    channel: web
+    ingested_at: 2026-06-24
+  - path: raw/_inbox/web-enhancing-ai-driven-defense-with-anthropics-claude-opus-4-7.md
+    channel: web
+    ingested_at: 2026-06-24
 aliases:
   - Anthropic
   - Anthropic PBC
@@ -25,7 +31,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-06-12
-updated: 2026-06-17
+updated: 2026-06-24
 ---
 
 # Anthropic
@@ -53,11 +59,21 @@ Key elements:
 - **Claude Security product** — an enterprise-grade vulnerability scanning tool using Opus 4.7 to analyze codebases the way a security researcher would; see [[ai-engineering/agent-security|Agent Security]].
 - **Cyber Verification Program** — a vetting process for security researchers and companies to access frontier Claude models for legitimate offensive security work.
 
-Security partners embedding Claude for their platforms: CrowdStrike (Falcon + Project QuiltWorks), SentinelOne (Wayfinder), TrendAI (AESIR), Microsoft Security, Palo Alto Networks, Wiz [^src6].
+Security partners embedding Claude for their platforms: CrowdStrike (Falcon + Project QuiltWorks), SentinelOne (Wayfinder), TrendAI (AESIR), Microsoft Security, Palo Alto Networks (Unit 42 / Frontier AI Defense [^src8]), Wiz (Red Agent — 150K+ assets scanned/week, 0 false positives [^src6]) [^src6].
+
+## Claude for Legal
+
+A dedicated product suite for legal professionals, available on Team and Enterprise plans [^src7]:
+- **Practice area plugins**: Commercial Legal, Corporate Legal, IP, Litigation, Employment, Privacy, Regulatory, AI Governance, and more
+- **Connectors**: iManage, NetDocuments (document management); Docusign, Ironclad (contract lifecycle); Thomson Reuters (legal research); Box/Intralinks (deal rooms)
+- **Microsoft integration**: Claude for Word (draft, redline, summarize) and Outlook (correspondence, contract review)
+- **Extensible**: custom skills and connectors for firm-specific workflows
+
+Legal professionals became the most engaged Claude Cowork user segment after the first plugin release [^src7]. See [[ai-engineering/claude-cowork|Claude Cowork]] §Legal vertical for the connector and plugin inventory.
 
 ## Interpretability initiative
 
-Anthropic's mechanistic interpretability research aims to produce an "MRI for AI" — tools capable of auditing a model's reasoning for honesty, correctness, and alignment before deployment [^src7]. Key milestone: ~30 million distinct features discovered in Claude 3 Sonnet using sparse autoencoders. Target: working interpretability audit tools by 2027. See [[ai-engineering/interpretability|Interpretability]] for the full scientific background.
+Anthropic's mechanistic interpretability research aims to produce an "MRI for AI" — tools capable of auditing a model's reasoning for honesty, correctness, and alignment before deployment [^src9]. Key milestone: ~30 million distinct features discovered in Claude 3 Sonnet using sparse autoencoders. Target: working interpretability audit tools by 2027. See [[ai-engineering/interpretability|Interpretability]] for the full scientific background.
 
 ## See also
 
@@ -74,4 +90,6 @@ Anthropic's mechanistic interpretability research aims to produce an "MRI for AI
 [^src4]: [Claude Opus 4.8 arrives (The Code)](../../raw/email/email-2026-05-29-claude-opus-4-8-arrives.md)
 [^src5]: [Certified. (Ruben Hassid)](../../raw/email/email-2026-05-06-certified.md)
 [^src6]: [Project Glasswing: Securing Critical Software for the AI Era](../../raw/web/web-project-glasswing-securing-critical-software-for-the-ai-era.md) — Anthropic
-[^src7]: [Dario Amodei: The Urgency of Interpretability](../../raw/web/web-dario-amodei-the-urgency-of-interpretability.md) — Dario Amodei, Anthropic
+[^src7]: [Claude Legal Solutions](../../raw/_inbox/web-claude-legal-solutions-claude-by-anthropic.md) — Anthropic
+[^src8]: [Enhancing AI-Driven Defense with Anthropic's Claude Opus 4.7](../../raw/_inbox/web-enhancing-ai-driven-defense-with-anthropics-claude-opus-4-7.md) — Palo Alto Networks
+[^src9]: [Dario Amodei: The Urgency of Interpretability](../../raw/web/web-dario-amodei-the-urgency-of-interpretability.md) — Dario Amodei, Anthropic

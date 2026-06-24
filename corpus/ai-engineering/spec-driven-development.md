@@ -6,6 +6,9 @@ sources:
   - path: raw/email/email-2026-06-16-claude-max-plan-is-not-what-you-think.md
     channel: email
     ingested_at: 2026-06-20
+  - path: raw/_inbox/email-2026-06-14-claude-code-built-my-website-9-steps.md
+    channel: email
+    ingested_at: 2026-06-24
 aliases:
   - spec-driven development
   - spec-first
@@ -16,7 +19,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-20
-updated: 2026-06-20
+updated: 2026-06-24
 ---
 
 # Spec-Driven Development
@@ -64,6 +67,20 @@ For a quick fix with a clear test, just prompt and move on.
 - **Factory 2.0** (Factory AI, used by NVIDIA/Adobe/EY): extends the spec-driven idea into a "software factory" where Droids handle everything from bug-triage to shipping in a single loop; a Router picks the most efficient model per job. Engineers shift from writing code to building the systems that write it [^src1].
 - **Spec-driven development vs vibe-coding**: see [[ai-engineering/vibe-coding|Vibe Coding]] for the contrast; spec-driven development is the discipline vibe-coding opts out of.
 
+## Website building as a spec-driven workflow (Charlie Hills 9-step)
+
+Charlie Hills documented a spec-first website build process that applies the "spec before code" discipline to non-technical contexts [^src2]:
+
+1. **CONTEXT.md** — Claude Chat interviews you (questions about audience, goals, tone) and produces a structured facts file
+2. **Claude Code interview** — Claude Code asks clarifying questions one at a time using the facts file
+3. **COPY.md** — approve headlines, SEO keyword map, and meta descriptions *before any code is written*
+4. **DESIGN.md** — provide 5 visual references + brand kit (fonts, colors, logo); Claude merges them into design direction
+5-9. Build and iterate
+
+The key discipline: all spec artifacts (copy, design direction) must be approved before implementation begins. This prevents the most common vibe-coding failure mode: generating a visually mediocre site because design input came after code [^src2]. Quote: "Claude Code is brilliant at building things that work and terrible at making them look good" — the design spec step is the fix.
+
+This extends the GitHub Spec Kit Constitution→Specify→Plan→Tasks→Implement→Validate loop (§ above) to the content and design layer, making spec-driven development accessible to non-engineers building their own sites.
+
 ## See also
 
 - [[ai-engineering/agentic-coding|Agentic Coding]] — the coding-agent context this sits in
@@ -76,3 +93,4 @@ For a quick fix with a clear test, just prompt and move on.
 ---
 
 [^src1]: [Claude Max Plan Is Not What You Think (The Code newsletter)](../../raw/email/email-2026-06-16-claude-max-plan-is-not-what-you-think.md) — referencing Apoorv Gupta/Microsoft spec-driven development post, GitHub spec-kit, Böckeler/martinfowler.com
+[^src2]: [Claude Code built my website (9 steps)](../../raw/_inbox/email-2026-06-14-claude-code-built-my-website-9-steps.md) — Charlie Hills
