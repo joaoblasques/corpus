@@ -1843,3 +1843,16 @@ class TestCollectorTimeout:
         res = scheduled_run.run_collectors(_subprocess_run=fake_run, youtube_token_path=_P("/no/token"))
         assert res["gmail"]["status"] == "failed"          # timeout caught, recorded
         assert "pdf" in res and "obsidian" in res           # run continued past the hung leg
+
+
+class TestXCollector:
+    def test_x_leg_and_channel_dir(self):
+        assert scheduled_run._CHANNEL_DIR.get("x") == "x"
+        called = []
+        def fake_run(cmd, **kw):
+            called.append(" ".join(cmd))
+            import types
+            return types.SimpleNamespace(returncode=0, stdout='{"written": 1}', stderr="")
+        res = scheduled_run.run_collectors(_subprocess_run=fake_run)
+        assert any("x_client.py" in s and "run" in s for s in called), called
+        assert res["x"]["status"] == "ok" and res["x"]["collected"] == 1

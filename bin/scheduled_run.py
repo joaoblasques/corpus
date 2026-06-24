@@ -275,6 +275,29 @@ def run_collectors(
     except Exception as exc:  # noqa: BLE001
         results["github"] = {"status": "failed", "collected": 0, "error": str(exc)}
 
+    # --- X: collect new bookmarks ---
+    try:
+        proc = _run(
+            [sys.executable, str(BIN / "x_client.py"), "run"],
+            capture_output=True,
+            text=True,
+            timeout=COLLECTOR_TIMEOUT,
+        )
+        if proc.returncode != 0:
+            results["x"] = {
+                "status": "failed", "collected": 0,
+                "error": proc.stderr.strip() or f"exit {proc.returncode}",
+            }
+        else:
+            try:
+                data = json.loads(proc.stdout)
+                collected = data.get("written", 0)
+            except (json.JSONDecodeError, AttributeError):
+                collected = 0
+            results["x"] = {"status": "ok", "collected": collected}
+    except Exception as exc:  # noqa: BLE001
+        results["x"] = {"status": "failed", "collected": 0, "error": str(exc)}
+
     # --- Email link re-fetch (self-heal transient fetch-failures) ---
     # Retry high-score links that failed to fetch at collection time so their
     # pointer email gains a companion and becomes ingestable instead of deferring
@@ -318,6 +341,7 @@ _CHANNEL_DIR: dict[str, str] = {
     "notes": "notes",
     "pdf": "pdf",
     "github": "github",
+    "x": "x",
 }
 
 
@@ -418,9 +442,26 @@ def run_email_relabel(*, _subprocess_run=None) -> dict:
         return {"status": "failed", "error": str(exc)}
 
 
+def run_x_reap(*, _subprocess_run=None) -> dict:
+    """Post-ingest: invoke `x_client.py reap` to un-bookmark posts now corpus_ingested.
+    Gated on corpus_ingested inside the subcommand. Failure recorded, never raised."""
+    _run = _subprocess_run if _subprocess_run is not None else subprocess.run
+    try:
+        proc = _run([sys.executable, str(BIN / "x_client.py"), "reap"],
+                    capture_output=True, text=True)
+        if proc.returncode != 0:
+            return {"status": "failed", "error": proc.stderr.strip() or f"exit {proc.returncode}"}
+        try:
+            return json.loads(proc.stdout)
+        except (json.JSONDecodeError, AttributeError):
+            return {"status": "ok"}
+    except Exception as exc:  # noqa: BLE001
+        return {"status": "failed", "error": str(exc)}
+
+
 def build_summary(tallies: dict, dry_run: bool) -> dict:
     """Assemble the run's stdout summary from the collected tallies. Surfaces the
-    post-ingest `email_relabel` (reap-labels) result so un-label/archive counts are
+    post-ingest `email_relabel` (reap-labels) and `x_reap` results so counts are
     visible in the run log, not silently dropped."""
     return {
         "status": "ok",
@@ -428,6 +469,7 @@ def build_summary(tallies: dict, dry_run: bool) -> dict:
         "collectors": tallies.get("collectors", {}),
         "ingest": tallies.get("ingest", {}),
         "email_relabel": tallies.get("email_relabel", {}),
+        "x_reap": tallies.get("x_reap", {}),
         "commit": tallies.get("commit", {}),
     }
 
@@ -888,6 +930,13 @@ def main(argv=None) -> int:
                     tallies["email_relabel"] = run_email_relabel()
                 except Exception as exc:  # noqa: BLE001
                     tallies["email_relabel"] = {"status": "failed", "error": str(exc)}
+
+                # Post-ingest: un-bookmark X posts now corpus_ingested (gated
+                # on corpus_ingested inside the subcommand). Failure must NOT abort the run.
+                try:
+                    tallies["x_reap"] = run_x_reap()
+                except Exception as exc:  # noqa: BLE001
+                    tallies["x_reap"] = {"status": "failed", "error": str(exc)}
 
                 # Post-ingest integrity backstop: deterministically lint the corpus
                 # the unattended agent just wrote to, and record any broken
