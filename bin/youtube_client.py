@@ -50,6 +50,64 @@ def _merge_chunk_segments(chunk_segment_lists, segment_seconds):
     return out
 
 
+SEGMENT_SECONDS = 2400          # 40 min/chunk (~19 MB at mono/16k/64k)
+CHUNK_THRESHOLD_BYTES = 24 * 1024 * 1024
+
+
+def _groq_transcribe(path, key):
+    """One audio file → list[{start,text}] via Groq Whisper verbose_json. Raises on failure."""
+    import requests
+    with open(path, "rb") as f:
+        r = requests.post(
+            "https://api.groq.com/openai/v1/audio/transcriptions",
+            headers={"Authorization": f"Bearer {key}"},
+            files={"file": (Path(path).name, f, "audio/mpeg")},
+            data={"model": "whisper-large-v3", "response_format": "verbose_json"},
+            timeout=300,
+        )
+    r.raise_for_status()
+    return [{"start": s.get("start", 0.0), "text": s.get("text", "")}
+            for s in r.json().get("segments", [])]
+
+
+def _whisper_transcript(video_id: str) -> str:
+    """Caption-less fallback: download audio → mono/16k mp3 → (chunk if >24MB) → Groq Whisper.
+    Returns markdown with a provenance marker, or "" on any failure (no partial transcripts)."""
+    import glob
+    import subprocess
+    import tempfile
+    key = _groq_key()
+    if not key:
+        return ""
+    with tempfile.TemporaryDirectory() as td:
+        try:
+            subprocess.run(
+                ["yt-dlp", "-x", "--audio-format", "mp3",
+                 "-o", f"{td}/%(id)s.%(ext)s", f"https://youtu.be/{video_id}"],
+                capture_output=True, timeout=600, check=True)
+            src = next(iter(glob.glob(f"{td}/*.mp3")), None)
+            if not src:
+                return ""
+            comp = f"{td}/a.mp3"
+            subprocess.run(["ffmpeg", "-y", "-i", src, "-vn", "-ac", "1", "-ar", "16000",
+                            "-b:a", "64k", comp], capture_output=True, timeout=600, check=True)
+            if os.path.getsize(comp) > CHUNK_THRESHOLD_BYTES:
+                subprocess.run(["ffmpeg", "-y", "-i", comp, "-f", "segment",
+                                "-segment_time", str(SEGMENT_SECONDS), "-c", "copy",
+                                f"{td}/chunk_%03d.mp3"], capture_output=True, timeout=600, check=True)
+                chunks = sorted(glob.glob(f"{td}/chunk_*.mp3"))
+            else:
+                chunks = [comp]
+            per_chunk = [_groq_transcribe(c, key) for c in chunks]   # raises → abort below
+        except Exception:
+            return ""
+    snips = _merge_chunk_segments(per_chunk, SEGMENT_SECONDS)
+    if not snips:
+        return ""
+    md = cy.transcript_to_markdown(snips, video_id)
+    return "> _Transcript source: Whisper (Groq, auto-generated)_\n\n" + md
+
+
 def get_service():
     from google.auth.transport.requests import Request
     from google.oauth2.credentials import Credentials
