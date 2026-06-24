@@ -1304,3 +1304,11 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   - ingest: 30 ingested · 20 deferred · status=ok
 - lint:
   - 1 broken wikilinks · 33 broken citations · 0 orphans · 2 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+
+## [2026-06-24 14:30] config | X bookmarks channel added
+- channel: `x` (X/Twitter bookmarks via X API v2, OAuth2 user-context)
+- dedup: `tweet_id` in source frontmatter
+- reap: un-bookmarks only after `corpus_ingested: true` (separate step via `bin/x_client.py reap`)
+- setup: create `bin/x_app.json` (client_id + redirect_uri), run `python3 bin/x_client.py auth` once
+- token secrets: `bin/x_token.json` and `bin/x_app.json` gitignored (added to `.gitignore`)
+- status if unconfigured: `not configured`; run continues without blocking

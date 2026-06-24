@@ -110,6 +110,23 @@ The daily run collects the user's **starred** repos via the `gh` CLI (`bin/githu
 
 ---
 
+## X (Twitter) bookmarks (channel `x`)
+
+The daily run collects the user's **bookmarks** from X via the X API v2 (OAuth2 user-context) using `bin/x_client.py collect`. One source document per bookmarked post, plus any linked article extracted from the post's URLs. Deduped by frontmatter `tweet_id`; **bookmarks are un-bookmarked only after the source is ingested** (`corpus_ingested: true`), via a separate reap step (`bin/x_client.py reap`). Sources land in `raw/_inbox` (channel `x`), drain via the normal ingest, then move to `raw/x`.
+
+**Setup (one-time):** Create `bin/x_app.json` with the X app's OAuth2 credentials:
+```json
+{
+  "client_id": "<your X app client ID>",
+  "redirect_uri": "http://localhost:8080/callback"
+}
+```
+Then run `python3 bin/x_client.py auth` to open a browser, authorize, and cache the token in `bin/x_token.json` (gitignored).
+
+Auth: skipped with `not configured` if no `bin/x_app.json` or if auth fails (the run continues). `bin/x_token.json` and `bin/x_app.json` are never committed (listed in `.gitignore`).
+
+---
+
 ## Scheduled automation (two macOS LaunchAgents)
 
 The corpus runs two unattended jobs. Both use the Claude Code **subscription** (the
