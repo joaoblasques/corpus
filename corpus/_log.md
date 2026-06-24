@@ -1291,3 +1291,16 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - pages touched: corpus/ai-engineering/claude-code.md, corpus/ai-engineering/claude-cowork.md, corpus/ai-engineering/claude-managed-agents.md, corpus/ai-engineering/agent-security.md, corpus/ai-engineering/compound-engineering.md, corpus/ai-engineering/vibe-coding.md, corpus/ai-engineering/mcp.md, corpus/ai-engineering/agentic-workflow.md, corpus/ai-engineering/claude-models.md, corpus/ai-engineering/multi-agent-systems.md, corpus/ai-engineering/agent-skills.md, corpus/ai-engineering/long-running-agents.md, corpus/ai-engineering/agentic-coding.md, corpus/ai-engineering/claude-api.md, corpus/ai-engineering/anthropic.md, corpus/ai-engineering/spec-driven-development.md, corpus/ai-engineering/computer-use.md, corpus/ai-engineering/README.md
 - new pages: none
 - notes: ingest-auto run; 30 processed, 20 deferred. 18 existing pages enriched. Topics: Claude Code permission modes/Channels/security-review/Artifacts, Cowork Dispatch/OTel/Research, Managed Agents case studies (Notion/Rakuten/Sentry/Vibecode)/Claude for Legal, agent-security (Palo Alto Unit 42/Wiz Red Agent), compound-engineering plugin inventory + Montaigne, vibe-coding non-technical practitioners, MCP Channels protocol, pi-ask-user decision-gating, web search models, pi-subagents, Enterprise Analytics API, CONTEXT→COPY→DESIGN website spec, computer-use macOS reference implementation.
+
+## [2026-06-24T03:17] config | scheduled run
+- collectors:
+  - gmail: 4 collected · status=ok
+  - obsidian: 53 collected · status=ok
+  - pdf: 0 collected · status=ok
+  - youtube: 21 collected · status=ok
+  - github: 0 collected · status=ok
+  - links_refetch: 0 refetched · status=ok
+- ingest:
+  - ingest: 30 ingested · 20 deferred · status=ok
+- lint:
+  - 1 broken wikilinks · 33 broken citations · 0 orphans · 2 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
