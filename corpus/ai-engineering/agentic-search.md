@@ -6,7 +6,7 @@ sources:
   - path: raw/web/agentic-search-models.md
     channel: web
     ingested_at: 2026-06-12
-  - path: raw/_inbox/email-2026-05-28-but-context-first-a-field-guide-to-ai-native-search.md
+  - path: raw/email/email-2026-05-28-but-context-first-a-field-guide-to-ai-native-search.md
     channel: email
     ingested_at: 2026-06-12
   - path: raw/web/is-grep-all-you-need-the-harness-matters-more-than-the-searc.md

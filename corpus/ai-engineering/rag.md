@@ -9,7 +9,7 @@ sources:
   - path: raw/web/from-local-to-global-a-graph-rag-approach-to-query-focused-s.md
     channel: web
     ingested_at: 2026-06-12
-  - path: raw/_inbox/email-2026-05-21-diving-deep-into-rag-document-extraction-and-more.md
+  - path: raw/email/email-2026-05-21-diving-deep-into-rag-document-extraction-and-more.md
     channel: email
     ingested_at: 2026-06-12
   - path: raw/web/7-temporal-blind-spots-breaking-enterprise-rag-news-from-gen.md
@@ -21,10 +21,10 @@ sources:
   - path: raw/web/web-beyond-the-vector-store-building-the-full-data-layer-for-ai.md
     channel: web
     ingested_at: 2026-06-17
-  - path: raw/youtube/2KVkpUGRtnk-build-real-time-knowledge-graph-for-documents-with-llm.md
+  - path: raw/youtube/youtube-2KVkpUGRtnk-build-real-time-knowledge-graph-for-documents-with-llm.md
     channel: youtube
     ingested_at: 2026-06-25
-  - path: raw/github/the-pocket-pocketflow-tutorial-codebase-knowledge.md
+  - path: raw/github/github-the-pocket-pocketflow-tutorial-codebase-knowledge.md
     channel: github
     ingested_at: 2026-06-25
   - path: raw/github/github-google-langextract.md
@@ -352,8 +352,8 @@ Combined with text-extract-api, forms a fully local document-intelligence pipeli
 [^src4]: [7 Temporal Blind Spots Breaking Enterprise RAG](../../raw/web/7-temporal-blind-spots-breaking-enterprise-rag-news-from-gen.md)
 [^src5]: [Seeing like an agent: how we design tools in Claude Code](../../raw/notes/notes-clippings-seeing-like-an-agent-how-we-design-tools-in-claude-code.md) — Thariq Shihipar, Anthropic
 [^src6]: [Beyond the Vector Store: Building the Full Data Layer for AI](../../raw/web/web-beyond-the-vector-store-building-the-full-data-layer-for-ai.md) — Kevin Smith, Saturn Cloud blog
-[^src7]: [Build Real-Time Knowledge Graph for Documents with LLM](../../raw/youtube/2KVkpUGRtnk-build-real-time-knowledge-graph-for-documents-with-llm.md) — CocoIndex + Neo4j demo, YouTube
-[^src8]: [The-Pocket/PocketFlow-Tutorial-Codebase-Knowledge (12K★)](../../raw/github/the-pocket-pocketflow-tutorial-codebase-knowledge.md) — The-Pocket, GitHub
+[^src7]: [Build Real-Time Knowledge Graph for Documents with LLM](../../raw/youtube/youtube-2KVkpUGRtnk-build-real-time-knowledge-graph-for-documents-with-llm.md) — CocoIndex + Neo4j demo, YouTube
+[^src8]: [The-Pocket/PocketFlow-Tutorial-Codebase-Knowledge (12K★)](../../raw/github/github-the-pocket-pocketflow-tutorial-codebase-knowledge.md) — The-Pocket, GitHub
 [^src9]: [google/langextract — Structured extraction with source grounding (★36K)](../../raw/github/github-google-langextract.md) — Google, GitHub
 [^src10]: [Canner/WrenAI — Open context layer for AI agents querying business data](../../raw/github/github-canner-wrenai-give-ai-agents-the-context-to-query-bus.md) — Canner, GitHub
 [^src11]: [Karpathy's Obsidian RAG + Claude Code = CHEAT CODE (notes report)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-karpathy-s-obsidi-report.md) — Chase AI, YouTube (processed report)

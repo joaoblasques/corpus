@@ -3,13 +3,13 @@ type: concept
 domain: productivity
 status: draft
 sources:
-  - path: raw/_inbox/email-2026-05-25-reclaim-6-hours-of-your-week-in-10-mins.md
+  - path: raw/email/email-2026-05-25-reclaim-6-hours-of-your-week-in-10-mins.md
     channel: inbox
     ingested_at: 2026-06-12
-  - path: raw/_inbox/email-2026-05-03-you-re-just-a-text-file.md
+  - path: raw/email/email-2026-05-03-you-re-just-a-text-file.md
     channel: inbox
     ingested_at: 2026-06-12
-  - path: raw/_inbox/email-2026-06-08-loop-engineering.md
+  - path: raw/email/email-2026-06-08-loop-engineering.md
     channel: inbox
     ingested_at: 2026-06-12
   - path: raw/youtube/youtube-yjO9UHIunSE-jfdi-system-my-ai-executive-assistant-full-life-command-cent.md

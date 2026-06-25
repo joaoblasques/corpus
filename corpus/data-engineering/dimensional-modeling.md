@@ -6,7 +6,7 @@ sources:
   - path: 03_Resources/Study Notes/Dimensional Data Modeling - Idempotent Pipelines and SCD Patterns.md
     channel: notes
     ingested_at: 2026-05-21
-  - path: raw/_inbox/email-2025-09-09-learn-the-kimball-dimensional-modeling-with-a-dbt-project.md
+  - path: raw/email/email-2025-09-09-learn-the-kimball-dimensional-modeling-with-a-dbt-project.md
     channel: email
     ingested_at: 2026-06-11
   - path: raw/web/data-identity-politics-and-the-kimball-vs-inmon-war.md

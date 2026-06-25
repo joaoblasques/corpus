@@ -30,13 +30,13 @@ sources:
   - path: raw/notes/notes-06-ai-driven-prototyping-tools-and-techniques.md
     channel: notes
     ingested_at: 2026-06-17
-  - path: raw/_inbox/email-2026-06-14-claude-code-built-my-website-9-steps.md
+  - path: raw/email/email-2026-06-14-claude-code-built-my-website-9-steps.md
     channel: email
     ingested_at: 2026-06-24
-  - path: raw/_inbox/web-how-anthropic-uses-claude-in-marketing-claude.md
+  - path: raw/web/web-how-anthropic-uses-claude-in-marketing-claude.md
     channel: web
     ingested_at: 2026-06-24
-  - path: raw/_inbox/web-vibecode-claude-platform-api-case-study-claude-by-anthropic.md
+  - path: raw/web/web-vibecode-claude-platform-api-case-study-claude-by-anthropic.md
     channel: web
     ingested_at: 2026-06-24
   - path: raw/web/web-ai-writes-code-faster-your-job-is-still-to-prove-it-works.md
@@ -200,9 +200,9 @@ The practical implication for the vibe-coding workflow: the permissive "just bui
 [^src7]: [Ch3 — The 70% Problem](../../raw/notes/notes-03-the-70-percent-problem-ai-assisted-workflows-that-actuall.md)
 [^src8]: [Ch4 — Beyond the 70%: Maximizing Human Contribution](../../raw/notes/notes-04-beyond-the-70-percent-maximizing-human-contribution.md)
 [^src9]: [Ch6 — AI-Driven Prototyping: Tools and Techniques](../../raw/notes/notes-06-ai-driven-prototyping-tools-and-techniques.md)
-[^src10]: [How Anthropic uses Claude in Marketing](../../raw/_inbox/web-how-anthropic-uses-claude-in-marketing-claude.md) — Austin Lau, Anthropic
-[^src11]: [Vibecode — Claude Platform API case study](../../raw/_inbox/web-vibecode-claude-platform-api-case-study-claude-by-anthropic.md) — Vibecode
-[^src12]: [Claude Code built my website (9 steps)](../../raw/_inbox/email-2026-06-14-claude-code-built-my-website-9-steps.md) — Charlie Hills
+[^src10]: [How Anthropic uses Claude in Marketing](../../raw/web/web-how-anthropic-uses-claude-in-marketing-claude.md) — Austin Lau, Anthropic
+[^src11]: [Vibecode — Claude Platform API case study](../../raw/web/web-vibecode-claude-platform-api-case-study-claude-by-anthropic.md) — Vibecode
+[^src12]: [Claude Code built my website (9 steps)](../../raw/email/email-2026-06-14-claude-code-built-my-website-9-steps.md) — Charlie Hills
 [^src13]: [AI Writes Code Faster. Your Job Is Still to Prove It Works.](../../raw/web/web-ai-writes-code-faster-your-job-is-still-to-prove-it-works.md) — Addy Osmani, addyosmani.com
 [^src14]: [Local AI coding: compliance and performance report](../../raw/notes/notes-local-ai-coding-report.md) — notes report
 [^src15]: [Comprehension Debt — The Hidden Cost of AI-Generated Code](../../raw/web/web-comprehension-debt-the-hidden-cost-of-ai-generated-code.md) — Addy Osmani, addyosmani.com (March 2026)

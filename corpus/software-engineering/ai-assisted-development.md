@@ -3,16 +3,16 @@ type: synthesis
 domain: software-engineering
 status: draft
 sources:
-  - path: raw/_inbox/email-2026-05-24-software-fundamentals-matter-more-than-ever.md
+  - path: raw/email/email-2026-05-24-software-fundamentals-matter-more-than-ever.md
     channel: email
     ingested_at: 2026-06-12
-  - path: raw/_inbox/email-2026-06-08-automated-doubt-open-code-review-how-llms-really-work.md
+  - path: raw/email/email-2026-06-08-automated-doubt-open-code-review-how-llms-really-work.md
     channel: email
     ingested_at: 2026-06-12
-  - path: raw/_inbox/email-2026-06-10-fake-rockstar-devs-apples-cheaper-ai-gits-weird-variable.md
+  - path: raw/email/email-2026-06-10-fake-rockstar-devs-apples-cheaper-ai-gits-weird-variable.md
     channel: email
     ingested_at: 2026-06-12
-  - path: raw/_inbox/email-2026-05-21-how-do-junior-devs-break-in-now.md
+  - path: raw/email/email-2026-05-21-how-do-junior-devs-break-in-now.md
     channel: email
     ingested_at: 2026-06-12
   - path: raw/web/github-alibaba-open-code-review-open-source-free-battle-test.md

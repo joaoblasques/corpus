@@ -9,7 +9,7 @@ sources:
   - path: raw/web/web-writing-effective-tools-for-ai-agentsusing-ai-agents.md
     channel: web
     ingested_at: 2026-06-23
-  - path: raw/_inbox/web-programmatic-tool-calling.md
+  - path: raw/web/web-programmatic-tool-calling.md
     channel: web
     ingested_at: 2026-06-25
   - path: raw/email/email-2026-06-21-agents-in-action-2-how-agents-interact-with-the-real-world.md
@@ -120,7 +120,7 @@ Programmatic tool calling lets Claude write Python code inside a **code executio
 
 **When NOT to use**: single tool calls or tasks where the intermediate results are themselves the valuable output (research, browsing summaries).
 
-[^src3]: [Programmatic tool calling — Anthropic API docs](../../raw/_inbox/web-programmatic-tool-calling.md) — Anthropic
+[^src3]: [Programmatic tool calling — Anthropic API docs](../../raw/web/web-programmatic-tool-calling.md) — Anthropic
 
 ## Writing tool descriptions that actually fire
 

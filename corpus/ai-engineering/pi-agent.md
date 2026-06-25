@@ -3,10 +3,10 @@ type: entity
 domain: ai-engineering
 status: draft
 sources:
-  - path: raw/_inbox/youtube-BZ0w0JhPQ9o-pi-coding-agent-free-course.md
+  - path: raw/youtube/youtube-BZ0w0JhPQ9o-pi-coding-agent-free-course.md
     channel: youtube
     ingested_at: 2026-06-25
-  - path: raw/_inbox/youtube-2HtqFVLgjLI-how-software-engineers-actually-use-coding-agents-in-2026.md
+  - path: raw/youtube/youtube-2HtqFVLgjLI-how-software-engineers-actually-use-coding-agents-in-2026.md
     channel: youtube
     ingested_at: 2026-06-25
   - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-pi-coding-agent-f-report.md
@@ -125,8 +125,8 @@ From the 2026 coding agent survey [^src2]:
 
 ---
 
-[^src1]: [Pi Coding Agent — Free Course](../../raw/_inbox/youtube-BZ0w0JhPQ9o-pi-coding-agent-free-course.md) — YouTube
-[^src2]: [How Software Engineers Actually Use Coding Agents in 2026](../../raw/_inbox/youtube-2HtqFVLgjLI-how-software-engineers-actually-use-coding-agents-in-2026.md) — YouTube
+[^src1]: [Pi Coding Agent — Free Course](../../raw/youtube/youtube-BZ0w0JhPQ9o-pi-coding-agent-free-course.md) — YouTube
+[^src2]: [How Software Engineers Actually Use Coding Agents in 2026](../../raw/youtube/youtube-2HtqFVLgjLI-how-software-engineers-actually-use-coding-agents-in-2026.md) — YouTube
 [^src3]: [Pi Coding Agent (Free Course) — processed notes report](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-pi-coding-agent-f-report.md) — YouTube (processed report); primary source for extensions deep-dive and workflow extension
 
 ## Extensions — the Pi killer feature

@@ -3,7 +3,7 @@ type: entity
 domain: software-engineering
 status: draft
 sources:
-  - path: raw/_inbox/email-2026-05-20-youve-never-seen-a-shell-like-xonsh.md
+  - path: raw/email/email-2026-05-20-youve-never-seen-a-shell-like-xonsh.md
     channel: email
     ingested_at: 2026-06-12
 aliases:

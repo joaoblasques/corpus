@@ -6,10 +6,10 @@ sources:
   - path: raw/web/how-to-become-a-valuable-data-engineer-start-data-engineerin.md
     channel: web
     ingested_at: 2026-06-11
-  - path: raw/_inbox/email-2025-08-27-how-to-become-a-valuable-data-engineer.md
+  - path: raw/email/email-2025-08-27-how-to-become-a-valuable-data-engineer.md
     channel: email
     ingested_at: 2026-06-11
-  - path: raw/_inbox/email-2026-05-19-how-to-become-a-senior-data-engineer.md
+  - path: raw/email/email-2026-05-19-how-to-become-a-senior-data-engineer.md
     channel: email
     ingested_at: 2026-06-11
   - path: raw/notes/notes-clippings-how-to-transition-from-data-analyst-to-data-engineer.md

@@ -51,7 +51,7 @@ sources:
   - path: raw/web/web-pricing.md
     channel: web
     ingested_at: 2026-06-23
-  - path: raw/_inbox/web-enable-and-use-web-search-claude-help-center.md
+  - path: raw/web/web-enable-and-use-web-search-claude-help-center.md
     channel: web
     ingested_at: 2026-06-24
   - path: raw/web/web-claude-haiku.md
@@ -346,7 +346,7 @@ The progression reflects both capability improvements and cost-per-task optimiza
 [^src13]: [Adaptive Thinking — Claude API docs](../../raw/web/web-adaptive-thinking.md) — Anthropic
 [^src14]: [Introducing Claude Opus 4.8](../../raw/web/web-introducing-claude-opus-4-8.md) — Anthropic official blog
 [^src15]: [Introducing Claude 4](../../raw/web/web-introducing-claude-4.md) — Anthropic
-[^src16]: [Enable and use web search (Claude Help Center)](../../raw/_inbox/web-enable-and-use-web-search-claude-help-center.md) — Anthropic
+[^src16]: [Enable and use web search (Claude Help Center)](../../raw/web/web-enable-and-use-web-search-claude-help-center.md) — Anthropic
 [^src17]: [Claude Haiku — claude.ai product page](../../raw/web/web-claude-haiku.md) — Anthropic
 [^src18]: [Migration guide — Claude API](../../raw/web/web-migration-guide.md) — Anthropic
 [^src19]: [Testing Mythos and Fable — The Batch (DeepLearning.AI)](../../raw/email/email-2026-06-19-testing-mythos-and-fable-moving-beyond-swe-bench-nvidia-s-op.md) — DeepLearning.AI

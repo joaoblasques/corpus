@@ -3,7 +3,7 @@ type: concept
 domain: software-engineering
 status: draft
 sources:
-  - path: raw/_inbox/email-2026-06-02-i-spent-8-hours-learning-the-cap-theorem-heres-what-i-found.md
+  - path: raw/email/email-2026-06-02-i-spent-8-hours-learning-the-cap-theorem-heres-what-i-found.md
     channel: email
     ingested_at: 2026-06-12
 aliases:

@@ -45,13 +45,13 @@ sources:
   - path: raw/web/web-github-cloudflare-mcp-mcp-server-for-the-cloudflare-api.md
     channel: web
     ingested_at: 2026-06-23
-  - path: raw/_inbox/web-push-events-into-a-running-session-with-channels-claude-code.md
+  - path: raw/web/web-push-events-into-a-running-session-with-channels-claude-code.md
     channel: web
     ingested_at: 2026-06-24
-  - path: raw/_inbox/web-mcp-connector.md
+  - path: raw/web/web-mcp-connector.md
     channel: web
     ingested_at: 2026-06-25
-  - path: raw/web/granola-mcp-granola-docs-help-center.md
+  - path: raw/web/web-granola-mcp-granola-docs-help-center.md
     channel: web
     ingested_at: 2026-06-25
   - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-how-to-build-your-report.md
@@ -441,10 +441,10 @@ Use this when evaluating whether a service has an existing MCP server before bui
 [^src12]: [MCP Apps — Model Context Protocol](../../raw/web/web-mcp-apps-model-context-protocol.md) — Anthropic
 [^src13]: [Elicitation — Model Context Protocol](../../raw/web/web-elicitation-model-context-protocol.md) — Anthropic
 [^src14]: [Cloudflare MCP Server (Code Mode)](../../raw/web/web-github-cloudflare-mcp-mcp-server-for-the-cloudflare-api.md) — Cloudflare
-[^src15]: [Push events into a running session with Channels](../../raw/_inbox/web-push-events-into-a-running-session-with-channels-claude-code.md) — Anthropic, Claude Code docs
-[^src16]: [MCP Connector — Anthropic API docs](../../raw/_inbox/web-mcp-connector.md) — Anthropic
-[^src17]: [5 Claude Connectors with Insane Use Cases](../../raw/_inbox/youtube--h2C65Qd9Mg-5-claude-connectors-with-insane-use-cases-out-of-100.md) — YouTube
-[^src18]: [Granola MCP — Granola Docs & Help Center](../../raw/web/granola-mcp-granola-docs-help-center.md) — docs.granola.ai
+[^src15]: [Push events into a running session with Channels](../../raw/web/web-push-events-into-a-running-session-with-channels-claude-code.md) — Anthropic, Claude Code docs
+[^src16]: [MCP Connector — Anthropic API docs](../../raw/web/web-mcp-connector.md) — Anthropic
+[^src17]: [5 Claude Connectors with Insane Use Cases](../../raw/youtube/youtube--h2C65Qd9Mg-5-claude-connectors-with-insane-use-cases-out-of-100.md) — YouTube
+[^src18]: [Granola MCP — Granola Docs & Help Center](../../raw/web/web-granola-mcp-granola-docs-help-center.md) — docs.granola.ai
 [^src19]: [How to Build Your Agentic OS with Claude Code (4-Layer Setup)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-how-to-build-your-report.md) — nyndra AI, YouTube (notes report)
 [^src20]: [Connectors — claude.ai](../../raw/web/web-connectors-claude.md) — Anthropic
 [^src21]: [Connectors overview — Claude.ai Documentation](../../raw/web/web-connectors-overview-claude-ai-documentation.md) — Anthropic

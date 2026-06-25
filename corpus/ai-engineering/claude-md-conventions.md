@@ -24,7 +24,7 @@ sources:
   - path: raw/notes/notes-clippings-everyinccompound-engineering-plugin-official-compound-engine.md
     channel: notes
     ingested_at: 2026-06-17
-  - path: raw/youtube/d8BGxfW3Vj4-the-karpathy-claude-md-file-that-43-000-developers-installed.md
+  - path: raw/youtube/youtube-d8BGxfW3Vj4-the-karpathy-claude-md-file-that-43-000-developers-installed.md
     channel: youtube
     ingested_at: 2026-06-25
   - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-claude-code-karpa-report.md
@@ -222,7 +222,7 @@ The preferred pattern: root `CLAUDE.md` contains only critical constraints, buil
 [^src4]: [multica-ai/andrej-karpathy-skills — A single CLAUDE.md file](../../raw/web/github-multica-ai-andrej-karpathy-skills-a-single-claude-md.md)
 [^src5]: [cursor/plugins — Cursor Plugin Specification and Official Plugins](../../raw/web/github-cursor-plugins-cursor-plugin-specification-and-offici.md)
 [^src6]: [EveryInc/compound-engineering-plugin — Official Compound Engineering plugin](../../raw/notes/notes-clippings-everyinccompound-engineering-plugin-official-compound-engine.md) — EveryInc, GitHub
-[^src7]: [The Karpathy CLAUDE.md File That 43,000 Developers Installed](../../raw/youtube/d8BGxfW3Vj4-the-karpathy-claude-md-file-that-43-000-developers-installed.md) — Jay E, YouTube
+[^src7]: [The Karpathy CLAUDE.md File That 43,000 Developers Installed](../../raw/youtube/youtube-d8BGxfW3Vj4-the-karpathy-claude-md-file-that-43-000-developers-installed.md) — Jay E, YouTube
 [^src8]: [The Karpathy Claude.md Breakdown](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-the-karpathy-clau-report.md) — Jay, YouTube (processed report)
 [^src9]: [I Stopped Hitting Claude Code Usage Limits — Here's How](../../raw/youtube/youtube-9ToOfgZ4qqQ-i-stopped-hitting-claude-code-usage-limits-here-s-how.md) — Brad, YouTube
 [^src10]: [How Claude remembers your project — Claude Code docs](../../raw/web/web-how-claude-remembers-your-project-claude-code-docs.md) — Anthropic

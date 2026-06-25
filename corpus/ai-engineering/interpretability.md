@@ -6,7 +6,7 @@ sources:
   - path: raw/web/web-dario-amodei-the-urgency-of-interpretability.md
     channel: web
     ingested_at: 2026-06-23
-  - path: raw/_inbox/github-labmlai-inspectus.md
+  - path: raw/github/github-labmlai-inspectus.md
     channel: github
     ingested_at: 2026-06-25
 aliases:
@@ -107,4 +107,4 @@ Inspectus is in the "practitioner tool for attention debugging" category rather 
 ---
 
 [^src1]: [Dario Amodei: The Urgency of Interpretability](../../raw/web/web-dario-amodei-the-urgency-of-interpretability.md) — Dario Amodei, Anthropic
-[^src2]: [labmlai/inspectus — LLM Analytics](../../raw/_inbox/github-labmlai-inspectus.md) — labmlai, GitHub ★714
+[^src2]: [labmlai/inspectus — LLM Analytics](../../raw/github/github-labmlai-inspectus.md) — labmlai, GitHub ★714

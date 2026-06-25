@@ -6,13 +6,13 @@ sources:
   - path: raw/notes/notes-build-a-claude-kn-report.md
     channel: notes
     ingested_at: 2026-06-25
-  - path: raw/youtube/youtube-1FiER-40zng-ai-second-brain.md
+  - path: raw/youtube/youtube-1FiER-40zng-full-guide-build-your-own-ai-second-brain-with-claude-code.md
     channel: youtube
     ingested_at: 2026-06-25
-  - path: raw/youtube/youtube-VaGpWWiHXm8-obsidian-agentic-loops.md
+  - path: raw/youtube/youtube-VaGpWWiHXm8-obsidian-vault-deep-dive-custom-plugins-agentic-loops-my-ful.md
     channel: youtube
     ingested_at: 2026-06-25
-  - path: raw/youtube/youtube-AQHlyGA2cZM-hermes-use-cases.md
+  - path: raw/youtube/youtube-AQHlyGA2cZM-6-hermes-agent-use-cases-i-promise-will-change-your-life.md
     channel: youtube
     ingested_at: 2026-06-25
   - path: 03_Resources/Study Notes/AI Dev - Agentic AI Architecture Explained.md
@@ -42,19 +42,19 @@ sources:
   - path: raw/web/web-using-agent-memory.md
     channel: web
     ingested_at: 2026-06-23
-  - path: raw/_inbox/youtube-bgXEDymiZCc-i-built-karpathys-llm-wiki-in-obsidian.md
+  - path: raw/youtube/youtube-bgXEDymiZCc-i-built-karpathys-llm-wiki-in-obsidian.md
     channel: youtube
     ingested_at: 2026-06-25
-  - path: raw/_inbox/youtube-ib74sLgjIBM-build-a-claude-knowledge-base-that-self-improves.md
+  - path: raw/youtube/youtube-ib74sLgjIBM-build-a-claude-knowledge-base-that-self-improves.md
     channel: youtube
     ingested_at: 2026-06-25
-  - path: raw/_inbox/youtube-HxEQ7bLKrqI-give-claude-your-files-and-watch-what-happens.md
+  - path: raw/youtube/youtube-HxEQ7bLKrqI-give-claude-your-files-and-watch-what-happens.md
     channel: youtube
     ingested_at: 2026-06-25
-  - path: raw/_inbox/notes-00-inbox-clippings-youtube-raw-raw-watched-build-this-once-a-report.md
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-build-this-once-a-report.md
     channel: notes
     ingested_at: 2026-06-25
-  - path: raw/_inbox/notes-00-inbox-clippings-youtube-raw-raw-watched-how-to-build-the-report.md
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-how-to-build-the-report.md
     channel: notes
     ingested_at: 2026-06-25
   - path: raw/github/github-thedotmack-claude-mem.md
@@ -592,10 +592,10 @@ Hermes requires meta-prompting with the `/goal` command to produce useful result
 [^src7]: [Built-in memory for Claude Managed Agents](../../raw/notes/notes-clippings-built-in-memory-for-claude-managed-agents.md) — Anthropic
 [^src8]: [From RAG to AI Memory Systems: Building Stateful Architectures](../../raw/web/web-from-rag-to-ai-memory-systems-building-stateful-architecture.md) — Oracle Developer Blog
 [^src9]: [claude-mem: Persistent Context Across Sessions](../../raw/web/web-github-thedotmack-claude-mem-persistent-context-across-sessi.md) — Alex Newman (@thedotmack), GitHub
-[^src10]: [I Built Karpathy's LLM Wiki in Obsidian](../../raw/_inbox/youtube-bgXEDymiZCc-i-built-karpathys-llm-wiki-in-obsidian.md) — YouTube
-[^src11]: [Build a Claude Knowledge Base That Self-Improves](../../raw/_inbox/youtube-ib74sLgjIBM-build-a-claude-knowledge-base-that-self-improves.md) — YouTube
-[^src12]: [Build This ONCE. Any AI You Use Will Get Smarter Forever.](../../raw/_inbox/notes-00-inbox-clippings-youtube-raw-raw-watched-build-this-once-a-report.md) — YouTube (processed report)
-[^src13]: [How To Build The ULTIMATE AI Second Brain (Obsidian + Claude Code)](../../raw/_inbox/notes-00-inbox-clippings-youtube-raw-raw-watched-how-to-build-the-report.md) — YouTube (processed report)
+[^src10]: [I Built Karpathy's LLM Wiki in Obsidian](../../raw/youtube/youtube-bgXEDymiZCc-i-built-karpathys-llm-wiki-in-obsidian.md) — YouTube
+[^src11]: [Build a Claude Knowledge Base That Self-Improves](../../raw/youtube/youtube-ib74sLgjIBM-build-a-claude-knowledge-base-that-self-improves.md) — YouTube
+[^src12]: [Build This ONCE. Any AI You Use Will Get Smarter Forever.](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-build-this-once-a-report.md) — YouTube (processed report)
+[^src13]: [How To Build The ULTIMATE AI Second Brain (Obsidian + Claude Code)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-how-to-build-the-report.md) — YouTube (processed report)
 [^src14]: [Anthropic memory tool — Anthropic API docs](../../raw/web/web-memory-tool.md) — Anthropic
 [^src15]: [Karpathy's Obsidian RAG: Claude Code Cheat Code](../../raw/youtube/youtube-OSZdFnQmgRw-karpathy-s-obsidian-rag-claude-code-cheat-code.md) — Chase AI, YouTube
 [^src16]: [I Built Karpathy's LLM Wiki in Obsidian (notes report)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-i-built-karpathy-report.md) — Cody Bontecou, YouTube (processed report)
@@ -613,9 +613,9 @@ Hermes requires meta-prompting with the `/goal` command to produce useful result
 [^src28]: [Every Level of a Claude Second Brain Explained (full video)](../../raw/youtube/youtube-DTCyvo6cC54-every-level-of-a-claude-second-brain-explained.md) — Nate Herk, YouTube; primary source for §"Five levels of AI second brain"
 [^src29]: [Stop Using Obsidian: Simple Second Brain (full video)](../../raw/youtube/youtube-h0HYpONXgjk-stop-using-obsidian-this-simple-second-brain-setup-actually.md) — Chris Ashby, YouTube; primary source for §Simple Brain pattern
 [^src30]: [Build a Claude Knowledge Base That Self-Improves](../../raw/notes/notes-build-a-claude-kn-report.md) — processed report; Karpathy 3-folder pattern
-[^src31]: [AI Second Brain: soul.md + memory.md + daily log (Cole Medin)](../../raw/youtube/youtube-1FiER-40zng-ai-second-brain.md) — Cole Medin, YouTube
-[^src32]: [Obsidian as PKM and agentic backend](../../raw/youtube/youtube-VaGpWWiHXm8-obsidian-agentic-loops.md) — YouTube
-[^src33]: [Hermes Agent: memory wiki + Tailscale](../../raw/youtube/youtube-AQHlyGA2cZM-hermes-use-cases.md) — YouTube
+[^src31]: [AI Second Brain: soul.md + memory.md + daily log (Cole Medin)](../../raw/youtube/youtube-1FiER-40zng-full-guide-build-your-own-ai-second-brain-with-claude-code.md) — Cole Medin, YouTube
+[^src32]: [Obsidian as PKM and agentic backend](../../raw/youtube/youtube-VaGpWWiHXm8-obsidian-vault-deep-dive-custom-plugins-agentic-loops-my-ful.md) — YouTube
+[^src33]: [Hermes Agent: memory wiki + Tailscale](../../raw/youtube/youtube-AQHlyGA2cZM-6-hermes-agent-use-cases-i-promise-will-change-your-life.md) — YouTube
 [^src34]: [Build An AI Second Brain Knowledge Base (Step-By-Step)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-build-an-ai-secon-report.md) — processed notes report; wiki/CRM/journal triad with Karpathy foundation
 [^src35]: [I Built The Best Claude Memory System (Beats Hermes)](../../raw/youtube/youtube-H9BUkgDf5Y4-i-built-the-best-claude-memory-system-beats-hermes.md) — Simon Scrapes, YouTube; full video primary source for MemSearch+Hermes+GBrain composite stack
 [^src36]: [Karpathy's LLM Wiki - Full Beginner Setup Guide](../../raw/youtube/youtube-iXd0t60YmMw-karpathy-s-llm-wiki-full-beginner-setup-guide.md) — Teacher's Tech, YouTube; beginner walkthrough with Obsidian + Claude Code; primary source for Karpathy's "Obsidian=IDE, LLM=programmer, wiki=codebase" framing

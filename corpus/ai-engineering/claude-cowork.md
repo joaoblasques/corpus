@@ -81,34 +81,34 @@ sources:
   - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-5-claude-connecto-report.md
     channel: notes
     ingested_at: 2026-06-23
-  - path: raw/_inbox/web-assign-tasks-from-anywhere-in-claude-cowork-claude-help-cent.md
+  - path: raw/web/web-assign-tasks-from-anywhere-in-claude-cowork-claude-help-cent.md
     channel: web
     ingested_at: 2026-06-24
-  - path: raw/_inbox/web-monitor-claude-cowork-activity-with-opentelemetry-claude-hel.md
+  - path: raw/web/web-monitor-claude-cowork-activity-with-opentelemetry-claude-hel.md
     channel: web
     ingested_at: 2026-06-24
-  - path: raw/_inbox/web-configure-a-custom-opentelemetry-collector-for-office-agents.md
+  - path: raw/web/web-configure-a-custom-opentelemetry-collector-for-office-agents.md
     channel: web
     ingested_at: 2026-06-24
-  - path: raw/_inbox/web-use-research-on-claude-claude-help-center.md
+  - path: raw/web/web-use-research-on-claude-claude-help-center.md
     channel: web
     ingested_at: 2026-06-24
-  - path: raw/_inbox/youtube--h2C65Qd9Mg-5-claude-connectors-with-insane-use-cases-out-of-100.md
+  - path: raw/youtube/youtube--h2C65Qd9Mg-5-claude-connectors-with-insane-use-cases-out-of-100.md
     channel: youtube
     ingested_at: 2026-06-25
-  - path: raw/_inbox/youtube-HxEQ7bLKrqI-give-claude-your-files-and-watch-what-happens.md
+  - path: raw/youtube/youtube-HxEQ7bLKrqI-give-claude-your-files-and-watch-what-happens.md
     channel: youtube
     ingested_at: 2026-06-25
   - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-portfolio-trade-a-report.md
     channel: notes
     ingested_at: 2026-06-25
-  - path: raw/youtube/KpG2yBi5I10-claude-routines-just-launched-here-are-13-you-need.md
+  - path: raw/youtube/youtube-KpG2yBi5I10-claude-routines-just-launched-here-are-13-you-need.md
     channel: youtube
     ingested_at: 2026-06-25
-  - path: raw/web/use-claude-cowork-on-team-and-enterprise-plans-claude-help-c.md
+  - path: raw/web/web-use-claude-cowork-on-team-and-enterprise-plans-claude-help-c.md
     channel: web
     ingested_at: 2026-06-25
-  - path: raw/web/claude-for-microsoft-365-claude-by-anthropic.md
+  - path: raw/web/web-claude-for-microsoft-365-claude-by-anthropic.md
     channel: web
     ingested_at: 2026-06-25
   - path: raw/web/web-use-claude-cowork-safely-claude-help-center.md
@@ -715,16 +715,16 @@ A practical orientation framework for new Claude users: not about prompts, but a
 [^src22]: [Claude for the legal industry](../../raw/notes/notes-clippings-claude-for-the-legal-industry.md) — Anthropic
 [^src23]: [Get started with Claude Cowork](../../raw/notes/notes-clippings-get-started-with-claude-cowork.md) — Anthropic official guide
 [^src24]: [5 Claude Connectors with INSANE Use Cases (YouTube deep-analysis)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-5-claude-connecto-report.md)
-[^src25]: [Assign tasks from anywhere in Claude Cowork](../../raw/_inbox/web-assign-tasks-from-anywhere-in-claude-cowork-claude-help-cent.md) — Anthropic Help Center
-[^src26]: [Monitor Claude Cowork activity with OpenTelemetry](../../raw/_inbox/web-monitor-claude-cowork-activity-with-opentelemetry-claude-hel.md) — Anthropic Help Center
-[^src27]: [Configure a custom OpenTelemetry collector for Office agents](../../raw/_inbox/web-configure-a-custom-opentelemetry-collector-for-office-agents.md) — Anthropic Help Center
-[^src28]: [Use Research on Claude](../../raw/_inbox/web-use-research-on-claude-claude-help-center.md) — Anthropic Help Center
-[^src29]: [5 Claude Connectors with Insane Use Cases](../../raw/_inbox/youtube--h2C65Qd9Mg-5-claude-connectors-with-insane-use-cases-out-of-100.md) — YouTube (Higsfield, Clay, Supabase, Zapier MCP, Gmail)
-[^src30]: [Give Claude Your Files and Watch What Happens](../../raw/_inbox/youtube-HxEQ7bLKrqI-give-claude-your-files-and-watch-what-happens.md) — YouTube (file system access demo)
+[^src25]: [Assign tasks from anywhere in Claude Cowork](../../raw/web/web-assign-tasks-from-anywhere-in-claude-cowork-claude-help-cent.md) — Anthropic Help Center
+[^src26]: [Monitor Claude Cowork activity with OpenTelemetry](../../raw/web/web-monitor-claude-cowork-activity-with-opentelemetry-claude-hel.md) — Anthropic Help Center
+[^src27]: [Configure a custom OpenTelemetry collector for Office agents](../../raw/web/web-configure-a-custom-opentelemetry-collector-for-office-agents.md) — Anthropic Help Center
+[^src28]: [Use Research on Claude](../../raw/web/web-use-research-on-claude-claude-help-center.md) — Anthropic Help Center
+[^src29]: [5 Claude Connectors with Insane Use Cases](../../raw/youtube/youtube--h2C65Qd9Mg-5-claude-connectors-with-insane-use-cases-out-of-100.md) — YouTube (Higsfield, Clay, Supabase, Zapier MCP, Gmail)
+[^src30]: [Give Claude Your Files and Watch What Happens](../../raw/youtube/youtube-HxEQ7bLKrqI-give-claude-your-files-and-watch-what-happens.md) — YouTube (file system access demo)
 [^src31]: [Portfolio Trade Automation with Claude MCP Routines](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-portfolio-trade-a-report.md) — YouTube (processed report; demonstrates Claude Code routine + remote MCP connector + email-summary loop pattern)
-[^src32]: [Claude Routines Just Launched. Here Are 13 You Need.](../../raw/youtube/KpG2yBi5I10-claude-routines-just-launched-here-are-13-you-need.md) — AI Founders, YouTube
-[^src33]: [Use Claude Cowork on Team and Enterprise plans](../../raw/web/use-claude-cowork-on-team-and-enterprise-plans-claude-help-c.md) — Anthropic Help Center
-[^src34]: [Claude for Microsoft 365](../../raw/web/claude-for-microsoft-365-claude-by-anthropic.md) — Anthropic, claude.com/claude-for-microsoft-365
+[^src32]: [Claude Routines Just Launched. Here Are 13 You Need.](../../raw/youtube/youtube-KpG2yBi5I10-claude-routines-just-launched-here-are-13-you-need.md) — AI Founders, YouTube
+[^src33]: [Use Claude Cowork on Team and Enterprise plans](../../raw/web/web-use-claude-cowork-on-team-and-enterprise-plans-claude-help-c.md) — Anthropic Help Center
+[^src34]: [Claude for Microsoft 365](../../raw/web/web-claude-for-microsoft-365-claude-by-anthropic.md) — Anthropic, claude.com/claude-for-microsoft-365
 [^src35]: [Use Claude Cowork safely — Claude Help Center](../../raw/web/web-use-claude-cowork-safely-claude-help-center.md) — Anthropic
 [^src36]: [Download Claude — claude.ai](../../raw/web/web-download-claude-claude-by-anthropic.md) — Anthropic
 [^src37]: [The Briefing: Enterprise Agents — Anthropic](../../raw/web/web-the-briefing-enterprise-agents-anthropic.md) — Feb 24 2026 virtual event

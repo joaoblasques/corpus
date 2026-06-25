@@ -12,7 +12,7 @@ sources:
   - path: raw/github/github-mnfst-manifest.md
     channel: github
     ingested_at: 2026-06-25
-  - path: raw/youtube/youtube-n8rP6Ceskm4.md
+  - path: raw/youtube/youtube-n8rP6Ceskm4-cut-llm-cost-by-95-replace-elevenlabs-and-10-top-github-repo.md
     channel: youtube
     ingested_at: 2026-06-25
   - path: raw/youtube/youtube-9ToOfgZ4qqQ-i-stopped-hitting-claude-code-usage-limits-here-s-how.md
@@ -21,7 +21,7 @@ sources:
   - path: raw/email/email-2026-06-21-how-to-run-claude-code-for-free.md
     channel: email
     ingested_at: 2026-06-25
-  - path: raw/youtube/youtube-qgAo-5uuO1E-claude-usage-limits.md
+  - path: raw/youtube/youtube-qgAo-5uuO1E-claude-usage-limits-how-to-never-hit-them-again-2026.md
     channel: youtube
     ingested_at: 2026-06-25
 aliases:
@@ -179,7 +179,7 @@ Claude usage is governed by two quotas: a **5-hour rolling window** and a **week
 [^src1]: [Managing Agentic AI Costs at Scale](../../raw/web/managing-agentic-ai-costs-at-scale.md)
 [^src2]: [How to stop hitting Claude usage limits — 23 habits](../../raw/web/web-how-to-stop-hitting-claude-usage-limits.md) — Ruben Hassid
 [^src3]: [mnfst/manifest — GitHub ★7094](../../raw/github/github-mnfst-manifest.md)
-[^src4]: [Top 10 GitHub repos for AI devs (YouTube)](../../raw/youtube/youtube-n8rP6Ceskm4.md) — Headroom entry at ~3:00
+[^src4]: [Top 10 GitHub repos for AI devs (YouTube)](../../raw/youtube/youtube-n8rP6Ceskm4-cut-llm-cost-by-95-replace-elevenlabs-and-10-top-github-repo.md) — Headroom entry at ~3:00
 [^src5]: [I Stopped Hitting Claude Code Usage Limits — Here's How](../../raw/youtube/youtube-9ToOfgZ4qqQ-i-stopped-hitting-claude-code-usage-limits-here-s-how.md) — Brad, YouTube
 [^src6]: [How to Run Claude Code for Free (Local LLMs)](../../raw/email/email-2026-06-21-how-to-run-claude-code-for-free.md) — email newsletter
-[^src7]: [Claude usage limits explained](../../raw/youtube/youtube-qgAo-5uuO1E-claude-usage-limits.md) — YouTube
+[^src7]: [Claude usage limits explained](../../raw/youtube/youtube-qgAo-5uuO1E-claude-usage-limits-how-to-never-hit-them-again-2026.md) — YouTube

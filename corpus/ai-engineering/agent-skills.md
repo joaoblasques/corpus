@@ -42,25 +42,25 @@ sources:
   - path: raw/web/web-how-to-set-up-your-coding-agent-a-step-by-step-guide.md
     channel: web
     ingested_at: 2026-06-17
-  - path: raw/_inbox/web-github-edlsh-pi-ask-user-interactive-decision-gating-extensi.md
+  - path: raw/web/web-github-edlsh-pi-ask-user-interactive-decision-gating-extensi.md
     channel: web
     ingested_at: 2026-06-24
-  - path: raw/_inbox/web-agent-skills-overview-agent-skills.md
+  - path: raw/web/web-agent-skills-overview-agent-skills.md
     channel: web
     ingested_at: 2026-06-25
-  - path: raw/_inbox/github-contains-studio-agents.md
+  - path: raw/github/github-contains-studio-agents.md
     channel: github
     ingested_at: 2026-06-25
-  - path: raw/_inbox/github-taoufik123-collab-claude-watch.md
+  - path: raw/github/github-taoufik123-collab-claude-watch.md
     channel: github
     ingested_at: 2026-06-25
-  - path: raw/_inbox/youtube-6kGXn-j16QM-7-hermes-desktop-hacks-that-will-change-your-life.md
+  - path: raw/youtube/youtube-6kGXn-j16QM-7-hermes-desktop-hacks-that-will-change-your-life.md
     channel: youtube
     ingested_at: 2026-06-25
-  - path: raw/web/measure-skills-bash.md
+  - path: raw/web/web-measure-skills-bash.md
     channel: web
     ingested_at: 2026-06-25
-  - path: raw/web/discover-and-install-prebuilt-plugins-through-marketplaces-c.md
+  - path: raw/web/web-discover-and-install-prebuilt-plugins-through-marketplaces-c.md
     channel: web
     ingested_at: 2026-06-25
   - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-stop-learning-obs-report.md
@@ -849,13 +849,13 @@ This skill is a concrete example of encoding aesthetic *judgment* and *constrain
 [^src10]: [Lessons from building Claude Code: How we use skills](../../raw/notes/notes-clippings-lessons-from-building-claude-code-how-we-use-skills.md) — Thariq Shihipar, Anthropic
 [^src11]: [How to Set Up Your Coding Agent: A Step-by-Step Guide](../../raw/web/web-how-to-set-up-your-coding-agent-a-step-by-step-guide.md) — Prathmesh Yelne
 [^src12]: [Claude Replaced Me (Ruben Hassid)](../../raw/email/email-2026-06-14-claude-replaced-me.md) — /how-to skill pattern + Cowork + Opus 4.8
-[^src13]: [pi-ask-user — Interactive decision-gating extension (GitHub)](../../raw/_inbox/web-github-edlsh-pi-ask-user-interactive-decision-gating-extensi.md) — edlsh
-[^src14]: [Agent Skills overview — agentskills.io](../../raw/_inbox/web-agent-skills-overview-agent-skills.md) — Anthropic open standard
-[^src15]: [contains-studio/agents — 60+ specialized Claude Code sub-agents](../../raw/_inbox/github-contains-studio-agents.md) — Contains Studio, GitHub ★12,388
-[^src16]: [taoufik123-collab/claude-watch — Video watching skill for Claude Code](../../raw/_inbox/github-taoufik123-collab-claude-watch.md) — GitHub ★188
-[^src17]: [7 Hermes Desktop Hacks That Will Change Your Life](../../raw/_inbox/youtube-6kGXn-j16QM-7-hermes-desktop-hacks-that-will-change-your-life.md) — YouTube
-[^src18]: [measure-skills.bash — PreToolUse hook for skill usage logging](../../raw/web/measure-skills-bash.md) — Thariq Shihipar (GitHub Gist)
-[^src19]: [Discover and install prebuilt plugins through marketplaces](../../raw/web/discover-and-install-prebuilt-plugins-through-marketplaces-c.md) — Claude Code Docs, Anthropic
+[^src13]: [pi-ask-user — Interactive decision-gating extension (GitHub)](../../raw/web/web-github-edlsh-pi-ask-user-interactive-decision-gating-extensi.md) — edlsh
+[^src14]: [Agent Skills overview — agentskills.io](../../raw/web/web-agent-skills-overview-agent-skills.md) — Anthropic open standard
+[^src15]: [contains-studio/agents — 60+ specialized Claude Code sub-agents](../../raw/github/github-contains-studio-agents.md) — Contains Studio, GitHub ★12,388
+[^src16]: [taoufik123-collab/claude-watch — Video watching skill for Claude Code](../../raw/github/github-taoufik123-collab-claude-watch.md) — GitHub ★188
+[^src17]: [7 Hermes Desktop Hacks That Will Change Your Life](../../raw/youtube/youtube-6kGXn-j16QM-7-hermes-desktop-hacks-that-will-change-your-life.md) — YouTube
+[^src18]: [measure-skills.bash — PreToolUse hook for skill usage logging](../../raw/web/web-measure-skills-bash.md) — Thariq Shihipar (GitHub Gist)
+[^src19]: [Discover and install prebuilt plugins through marketplaces](../../raw/web/web-discover-and-install-prebuilt-plugins-through-marketplaces-c.md) — Claude Code Docs, Anthropic
 [^src20]: [Stop Learning Obsidian](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-stop-learning-obs-report.md) — YouTube (notes report)
 [^src21]: [Claude Code Runs My Business (13 Workflows)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-claude-code-runs-report.md) — YouTube (processed report)
 [^src22]: [I Tried 100 Claude Code Skills — These 6 Are the Best](../../raw/youtube/youtube-eRS3CmvrOvA-i-tried-100-claude-code-skills-these-6-are-the-best.md) — Nate Herk, YouTube

@@ -6,7 +6,7 @@ sources:
   - path: raw/email/email-2026-05-27-how-i-use-hermes-as-a-lead-developer.md
     channel: email
     ingested_at: 2026-06-16
-  - path: raw/_inbox/youtube-6kGXn-j16QM-7-hermes-desktop-hacks-that-will-change-your-life.md
+  - path: raw/youtube/youtube-6kGXn-j16QM-7-hermes-desktop-hacks-that-will-change-your-life.md
     channel: youtube
     ingested_at: 2026-06-25
   - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-i-built-the-best-report.md
@@ -15,7 +15,7 @@ sources:
   - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-7-hermes-desktop-report.md
     channel: notes
     ingested_at: 2026-06-25
-  - path: raw/youtube/youtube-AQHlyGA2cZM-hermes-use-cases.md
+  - path: raw/youtube/youtube-AQHlyGA2cZM-6-hermes-agent-use-cases-i-promise-will-change-your-life.md
     channel: youtube
     ingested_at: 2026-06-25
 aliases:
@@ -144,6 +144,6 @@ The composite: **MemSearch captures → Hermes snapshot injects → GBrain re-ra
 This limitation (keyword-only injection) is why the composite stack pairs Hermes with GBrain — GBrain's semantic re-ranking compensates for Hermes's structural weakness at recall [^src3].
 
 [^src1]: [How I use Hermes as a Lead Developer (ZazenCodes)](../../raw/email/email-2026-05-27-how-i-use-hermes-as-a-lead-developer.md)
-[^src2]: [7 Hermes Desktop Hacks That Will Change Your Life](../../raw/_inbox/youtube-6kGXn-j16QM-7-hermes-desktop-hacks-that-will-change-your-life.md) — YouTube
+[^src2]: [7 Hermes Desktop Hacks That Will Change Your Life](../../raw/youtube/youtube-6kGXn-j16QM-7-hermes-desktop-hacks-that-will-change-your-life.md) — YouTube
 [^src3]: [I Built The Best Claude Memory System (YouTube)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-i-built-the-best-report.md) — composite memory stack analysis
-[^src4]: [Hermes use cases: /goal, kanban, memory wiki, Tailscale](../../raw/youtube/youtube-AQHlyGA2cZM-hermes-use-cases.md) — YouTube
+[^src4]: [Hermes use cases: /goal, kanban, memory wiki, Tailscale](../../raw/youtube/youtube-AQHlyGA2cZM-6-hermes-agent-use-cases-i-promise-will-change-your-life.md) — YouTube

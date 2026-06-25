@@ -3,13 +3,13 @@ type: concept
 domain: productivity
 status: draft
 sources:
-  - path: raw/_inbox/email-2026-05-21-learning-without-a-manager-who-teaches-you.md
+  - path: raw/email/email-2026-05-21-learning-without-a-manager-who-teaches-you.md
     channel: inbox
     ingested_at: 2026-06-12
   - path: raw/web/the-10-minute-weekly-habit-that-will-make-you-a-better-engin.md
     channel: web
     ingested_at: 2026-06-12
-  - path: raw/_inbox/email-2026-06-02-the-turf-wars-are-over-time-to-cross-train.md
+  - path: raw/email/email-2026-06-02-the-turf-wars-are-over-time-to-cross-train.md
     channel: inbox
     ingested_at: 2026-06-12
   - path: raw/email/email-2026-06-19-4-hours-alone-vs-5-minutes-with-help.md

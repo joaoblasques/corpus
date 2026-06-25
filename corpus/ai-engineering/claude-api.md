@@ -18,7 +18,7 @@ sources:
   - path: raw/notes/notes-clippings-the-advisor-strategy-give-sonnet-an-intelligence-boost-with.md
     channel: notes
     ingested_at: 2026-06-17
-  - path: raw/_inbox/web-claude-enterprise-analytics-api-reference-guide-claude-help.md
+  - path: raw/web/web-claude-enterprise-analytics-api-reference-guide-claude-help.md
     channel: web
     ingested_at: 2026-06-24
   - path: raw/web/web-advisor-tool.md
@@ -205,5 +205,5 @@ As of mid-2026, the full Claude Platform is available on AWS under AWS IAM authe
 [^src3]: [Anthropic courses (Skilljar)](../../raw/web/anthropic-courses.md)
 [^src4]: [Introducing the Claude Platform on AWS](../../raw/notes/notes-clippings-introducing-the-claude-platform-on-aws.md) — Anthropic announcement
 [^src5]: [The advisor strategy: Give Sonnet an intelligence boost with Opus](../../raw/notes/notes-clippings-the-advisor-strategy-give-sonnet-an-intelligence-boost-with.md) — Anthropic
-[^src6]: [Claude Enterprise Analytics API Reference Guide](../../raw/_inbox/web-claude-enterprise-analytics-api-reference-guide-claude-help.md) — Anthropic Help Center
+[^src6]: [Claude Enterprise Analytics API Reference Guide](../../raw/web/web-claude-enterprise-analytics-api-reference-guide-claude-help.md) — Anthropic Help Center
 [^src7]: [Advisor tool — official API docs](../../raw/web/web-advisor-tool.md) — Anthropic platform docs

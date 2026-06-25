@@ -9,7 +9,7 @@ sources:
   - path: raw/youtube/How AI agents & Claude skills work (Clearly Explained).md
     channel: youtube
     ingested_at: 2026-06-09
-  - path: raw/_inbox/email-2026-05-28-how-grab-reclaimed-hundreds-of-data-engineering-hours-with-m.md
+  - path: raw/email/email-2026-05-28-how-grab-reclaimed-hundreds-of-data-engineering-hours-with-m.md
     channel: inbox
     ingested_at: 2026-06-12
   - path: raw/web/github-nirdiamant-genai-agents-50-tutorials-and-implementati.md
@@ -21,13 +21,13 @@ sources:
   - path: raw/notes/notes-clippings-multi-agent-coordination-patterns-five-approaches-and-when-t.md
     channel: notes
     ingested_at: 2026-06-17
-  - path: raw/_inbox/web-github-nicobailon-pi-subagents-pi-extension-for-async-subage.md
+  - path: raw/web/web-github-nicobailon-pi-subagents-pi-extension-for-async-subage.md
     channel: web
     ingested_at: 2026-06-24
-  - path: raw/_inbox/web-notion-q-a-claude-managed-agents-claude-by-anthropic.md
+  - path: raw/web/web-notion-q-a-claude-managed-agents-claude-by-anthropic.md
     channel: web
     ingested_at: 2026-06-24
-  - path: raw/github/crewaiinc-crewai-examples.md
+  - path: raw/github/github-crewaiinc-crewai-examples.md
     channel: github
     ingested_at: 2026-06-25
   - path: raw/web/web-when-to-use-multi-agent-systems-and-when-not-to-claude.md
@@ -266,7 +266,7 @@ The Notion case study (Eric Liu, PM) documents a production implementation where
 [^src4]: [NirDiamant/GenAI_Agents — 52+ tutorials and implementations](../../raw/web/github-nirdiamant-genai-agents-50-tutorials-and-implementati.md) — GitHub
 [^src5]: [How and when to use subagents in Claude Code](../../raw/notes/notes-clippings-how-and-when-to-use-subagents-in-claude-code.md) — Anthropic
 [^src6]: [Multi-agent coordination patterns: Five approaches and when to use them](../../raw/notes/notes-clippings-multi-agent-coordination-patterns-five-approaches-and-when-t.md) — Cara Phillips et al., Anthropic
-[^src7]: [pi-subagents — Pi extension for async subagents (GitHub)](../../raw/_inbox/web-github-nicobailon-pi-subagents-pi-extension-for-async-subage.md) — nicobailon
-[^src8]: [Notion Q&A — Claude Managed Agents](../../raw/_inbox/web-notion-q-a-claude-managed-agents-claude-by-anthropic.md) — Eric Liu, Notion PM
-[^src9]: [crewAIInc/crewAI-examples — Official CrewAI workflow examples (6K★)](../../raw/github/crewaiinc-crewai-examples.md) — crewAIInc, GitHub
+[^src7]: [pi-subagents — Pi extension for async subagents (GitHub)](../../raw/web/web-github-nicobailon-pi-subagents-pi-extension-for-async-subage.md) — nicobailon
+[^src8]: [Notion Q&A — Claude Managed Agents](../../raw/web/web-notion-q-a-claude-managed-agents-claude-by-anthropic.md) — Eric Liu, Notion PM
+[^src9]: [crewAIInc/crewAI-examples — Official CrewAI workflow examples (6K★)](../../raw/github/github-crewaiinc-crewai-examples.md) — crewAIInc, GitHub
 [^src10]: [When to use multi-agent systems — and when not to](../../raw/web/web-when-to-use-multi-agent-systems-and-when-not-to-claude.md) — Anthropic

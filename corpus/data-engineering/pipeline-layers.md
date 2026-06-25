@@ -6,7 +6,7 @@ sources:
   - path: 03_Resources/Study Notes/dbt Data Architecture - Simple Stack Design.md
     channel: notes
     ingested_at: 2026-05-21
-  - path: raw/_inbox/email-2025-09-08-medallion-architecture-is-not-a-data-model.md
+  - path: raw/email/email-2025-09-08-medallion-architecture-is-not-a-data-model.md
     channel: email
     ingested_at: 2026-06-11
   - path: raw/email/email-2025-07-08-what-is-an-analytics-database.md

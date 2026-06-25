@@ -6,7 +6,7 @@ sources:
   - path: 03_Resources/Study Notes/Python - Production Code Principles Senior Developer.md
     channel: notes
     ingested_at: 2026-05-21
-  - path: raw/_inbox/email-2026-06-09-design-patterns-suck.md
+  - path: raw/email/email-2026-06-09-design-patterns-suck.md
     channel: email
     ingested_at: 2026-06-12
   - path: raw/email/email-2026-06-10-joao-here-s-another-challenge-for-you.md

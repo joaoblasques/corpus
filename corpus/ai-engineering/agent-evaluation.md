@@ -15,13 +15,13 @@ sources:
   - path: raw/web/monitoring-cortex-agent-performance-with-trace-data.md
     channel: web
     ingested_at: 2026-06-12
-  - path: raw/_inbox/email-2026-06-11-fable-evals-performance-airbnbs-evolved-data-architecture-po.md
+  - path: raw/email/email-2026-06-11-fable-evals-performance-airbnbs-evolved-data-architecture-po.md
     channel: email
     ingested_at: 2026-06-12
-  - path: raw/_inbox/web-swe-bench-multilingual.md
+  - path: raw/web/web-swe-bench-multilingual.md
     channel: web
     ingested_at: 2026-06-25
-  - path: raw/web/task-completion-time-horizons-of-frontier-ai-models.md
+  - path: raw/web/web-task-completion-time-horizons-of-frontier-ai-models.md
     channel: web
     ingested_at: 2026-06-25
   - path: raw/web/web-claude-swe-bench-performance.md
@@ -243,7 +243,7 @@ See also: [[ai-engineering/compound-engineering|Compound Engineering]] §Autores
 [^src3]: [What Data Agent Benchmarks Do and Don't Tell Us](../../raw/web/what-data-agent-benchmarks-do-and-don-t-tell-us.md)
 [^src4]: [Monitoring Cortex Agent Performance With Trace Data](../../raw/web/monitoring-cortex-agent-performance-with-trace-data.md)
 [^src5]: [Fable Evals Performance / We Had to Build New Evals for Fable](../../raw/email/email-2026-06-11-fable-evals-performance-airbnbs-evolved-data-architecture-po.md)
-[^src6]: [SWE-bench Multilingual — Anthropic](../../raw/_inbox/web-swe-bench-multilingual.md)
-[^src7]: [Task-Completion Time Horizons of Frontier AI Models](../../raw/web/task-completion-time-horizons-of-frontier-ai-models.md) — METR, metr.org
+[^src6]: [SWE-bench Multilingual — Anthropic](../../raw/web/web-swe-bench-multilingual.md)
+[^src7]: [Task-Completion Time Horizons of Frontier AI Models](../../raw/web/web-task-completion-time-horizons-of-frontier-ai-models.md) — METR, metr.org
 [^src8]: [Claude on SWE-bench Verified — Anthropic blog](../../raw/web/web-claude-swe-bench-performance.md) — Anthropic
 [^src9]: [This "Karpathy System" could 701x your AI Workflows — autoresearch fit checklist](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-this-karpathy-sys-report.md) — YouTube (processed report)

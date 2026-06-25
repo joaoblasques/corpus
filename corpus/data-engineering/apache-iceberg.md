@@ -9,7 +9,7 @@ sources:
   - path: 03_Resources/Study Notes/Data Lake Fundamentals - Apache Iceberg and Parquet.md
     channel: notes
     ingested_at: 2026-05-21
-  - path: raw/_inbox/email-2025-09-24-understanding-open-table-formats-with-apache-iceberg.md
+  - path: raw/email/email-2025-09-24-understanding-open-table-formats-with-apache-iceberg.md
     channel: email
     ingested_at: 2026-06-11
   - path: raw/youtube/youtube-4bg64wnkfge.md

@@ -42,16 +42,16 @@ sources:
   - path: raw/web/web-crowdstrike-puts-claude-opus-4-7-to-work-across-falcon-and-q.md
     channel: web
     ingested_at: 2026-06-23
-  - path: raw/_inbox/web-enhancing-ai-driven-defense-with-anthropics-claude-opus-4-7.md
+  - path: raw/web/web-enhancing-ai-driven-defense-with-anthropics-claude-opus-4-7.md
     channel: web
     ingested_at: 2026-06-24
-  - path: raw/_inbox/web-red-agent-and-claude-opus-securing-production-targets-at-sca.md
+  - path: raw/web/web-red-agent-and-claude-opus-securing-production-targets-at-sca.md
     channel: web
     ingested_at: 2026-06-24
   - path: raw/web/web-use-claude-cowork-safely-claude-help-center.md
     channel: web
     ingested_at: 2026-06-25
-  - path: raw/youtube/youtube-P4rv9RSM1IE.md
+  - path: raw/youtube/youtube-P4rv9RSM1IE-claude-skills-everything-you-need-to-know-about-claude-skill.md
     channel: youtube
     ingested_at: 2026-06-25
   - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-full-guide-build-report.md
@@ -360,8 +360,8 @@ When agents handle per-customer credentials (API keys, OAuth tokens), passing th
 [^src11]: [TrendAI and Anthropic Advance AI-Powered Vulnerability Detection](../../raw/web/web-trendaitm-and-anthropic-advance-ai-powered-vulnerability-det.md) — TrendAI
 [^src12]: [SentinelOne Unveils Wayfinder Frontier AI Services](../../raw/web/web-sentinelone-unveils-wayfinder-frontier-ai-services-to-proact.md) — SentinelOne
 [^src13]: [CrowdStrike Puts Claude Opus 4.7 to Work Across Falcon and QuiltWorks](../../raw/web/web-crowdstrike-puts-claude-opus-4-7-to-work-across-falcon-and-q.md) — CrowdStrike
-[^src14]: [Enhancing AI-Driven Defense with Anthropic's Claude Opus 4.7](../../raw/_inbox/web-enhancing-ai-driven-defense-with-anthropics-claude-opus-4-7.md) — Palo Alto Networks
-[^src15]: [Wiz Red Agent and Claude Opus: Securing Production Targets at Scale](../../raw/_inbox/web-red-agent-and-claude-opus-securing-production-targets-at-sca.md) — Wiz
+[^src14]: [Enhancing AI-Driven Defense with Anthropic's Claude Opus 4.7](../../raw/web/web-enhancing-ai-driven-defense-with-anthropics-claude-opus-4-7.md) — Palo Alto Networks
+[^src15]: [Wiz Red Agent and Claude Opus: Securing Production Targets at Scale](../../raw/web/web-red-agent-and-claude-opus-securing-production-targets-at-sca.md) — Wiz
 [^src16]: [Use Claude Cowork safely — Claude Help Center](../../raw/web/web-use-claude-cowork-safely-claude-help-center.md) — Anthropic
 [^src17]: [Full Guide: Build an AI Second Brain (Cole Medin)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-full-guide-build-report.md) — Cole Medin, YouTube (processed report)
 [^src18]: [Self-hosted sandboxes for Managed Agents](../../raw/web/web-self-hosted-sandboxes.md) — Anthropic

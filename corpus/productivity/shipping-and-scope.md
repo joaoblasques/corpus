@@ -3,7 +3,7 @@ type: concept
 domain: productivity
 status: draft
 sources:
-  - path: raw/_inbox/email-2026-06-11-how-to-finish-early-and-satisfy-your-stakeholders.md
+  - path: raw/email/email-2026-06-11-how-to-finish-early-and-satisfy-your-stakeholders.md
     channel: inbox
     ingested_at: 2026-06-12
 aliases:

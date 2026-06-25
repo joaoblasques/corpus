@@ -15,7 +15,7 @@ sources:
   - path: raw/youtube/How AI agents & Claude skills work (Clearly Explained).md
     channel: youtube
     ingested_at: 2026-06-09
-  - path: raw/_inbox/email-2026-06-03-fwd-introduction-to-ktx-the-open-source-context-layer-for-da.md
+  - path: raw/email/email-2026-06-03-fwd-introduction-to-ktx-the-open-source-context-layer-for-da.md
     channel: inbox
     ingested_at: 2026-06-12
   - path: raw/web/how-ingestion-works.md
@@ -30,7 +30,7 @@ sources:
   - path: raw/web/web-effective-context-engineering-for-ai-agents.md
     channel: web
     ingested_at: 2026-06-21
-  - path: raw/youtube/-h9VVJIqtvA-context-engineering-in-29-minutes-complete-course.md
+  - path: raw/youtube/youtube--h9VVJIqtvA-context-engineering-in-29-minutes-complete-course.md
     channel: youtube
     ingested_at: 2026-06-25
   - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-stop-learning-obs-report.md
@@ -262,7 +262,7 @@ Context Buddy (★52, addyosmani/context-buddy) implements this as a visual inte
 [^src4]: [How AI agents & Claude skills work (Clearly Explained)](<../../raw/youtube/How AI agents & Claude skills work (Clearly Explained).md>) — Greg Isenberg × Ras Mic, YouTube
 [^src5]: [Introduction to ktx: The Open-Source Context Layer for Data Agents](../../raw/email/email-2026-06-03-fwd-introduction-to-ktx-the-open-source-context-layer-for-da.md) — Pipeline to Insights (Substack)
 [^src6]: [ktx — Make analytics context usable by agents (docs)](../../raw/web/how-ingestion-works.md) — docs.kaelio.com
-[^src10]: [Context Engineering in 29 Minutes: Complete Course](../../raw/youtube/-h9VVJIqtvA-context-engineering-in-29-minutes-complete-course.md) — Marina Wyss (Twitch), YouTube
+[^src10]: [Context Engineering in 29 Minutes: Complete Course](../../raw/youtube/youtube--h9VVJIqtvA-context-engineering-in-29-minutes-complete-course.md) — Marina Wyss (Twitch), YouTube
 [^src11]: [Stop Learning Obsidian](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-stop-learning-obs-report.md) — YouTube (notes report)
 [^src12]: [IncomeStreamSurfer/context-engineering-intro (★267) — PRP workflow template](../../raw/github/github-incomestreamsurfer-context-engineering-intro.md) — IncomeStreamSurfer, GitHub
 [^src13]: [addyosmani/context-buddy (★52) — 10-section prompt structure builder](../../raw/github/github-addyosmani-context-buddy.md) — Addy Osmani, GitHub

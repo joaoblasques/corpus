@@ -3,10 +3,10 @@ type: synthesis
 domain: ai-engineering
 status: draft
 sources:
-  - path: raw/_inbox/email-2026-06-09-how-i-d-learn-ai-from-scratch-in-2026.md
+  - path: raw/email/email-2026-06-09-how-i-d-learn-ai-from-scratch-in-2026.md
     channel: inbox
     ingested_at: 2026-06-12
-  - path: raw/_inbox/email-2026-04-16-becoming-a-data-ai-engineer-the-complete-guide.md
+  - path: raw/email/email-2026-04-16-becoming-a-data-ai-engineer-the-complete-guide.md
     channel: inbox
     ingested_at: 2026-06-12
   - path: raw/youtube/youtube-msFxQ7OYPj8-how-i-d-learn-ai-from-scratch-in-2026-skip-the-useless-80.md
@@ -24,13 +24,13 @@ sources:
   - path: raw/web/github-rohitg00-ai-engineering-from-scratch-learn-it-build-i.md
     channel: web
     ingested_at: 2026-06-15
-  - path: raw/github/github-anthropics-prompt-eng-tutorial.md
+  - path: raw/github/github-anthropics-prompt-eng-interactive-tutorial.md
     channel: github
     ingested_at: 2026-06-25
   - path: raw/github/github-datatalksclub-ai-dev-tools-zoomcamp.md
     channel: github
     ingested_at: 2026-06-25
-  - path: raw/youtube/youtube-05aY2LRIC3s.md
+  - path: raw/youtube/youtube-05aY2LRIC3s-claude-code-full-course-12-hours-build-real-ai-projects-2026.md
     channel: youtube
     ingested_at: 2026-06-25
   - path: raw/github/github-zazencodes-ai-engineer-roadmap-notebooks.md
@@ -228,9 +228,9 @@ This is the authoritative Anthropic tutorial — interactive, runnable, and regu
 **cladius/agentic-ai** (★73) — hands-on jumpstart repo for Agentic AI frameworks [^src14]: frameworks covered: ADK, Agno, Bedrock, LangFlow, LangGraph. Approach: single "5-level sample problem" solved across all frameworks. Good for comparing agentic framework APIs against a common problem set.
 
 [^src7]: [The Top 5 Skills for AI Engineering: Curiosity](../../raw/email/email-2026-06-15-the-top-5-skills-for-ai-engineering-curiosity.md)
-[^src8]: [anthropics/prompt-eng-tutorial — GitHub ★36,609](../../raw/github/github-anthropics-prompt-eng-tutorial.md) — Anthropic
+[^src8]: [anthropics/prompt-eng-tutorial — GitHub ★36,609](../../raw/github/github-anthropics-prompt-eng-interactive-tutorial.md) — Anthropic
 [^src9]: [DataTalksClub/ai-dev-tools-zoomcamp — GitHub ★1,129](../../raw/github/github-datatalksclub-ai-dev-tools-zoomcamp.md) — DataTalksClub
-[^src10]: [12-hour Claude Code course (YouTube)](../../raw/youtube/youtube-05aY2LRIC3s.md)
+[^src10]: [12-hour Claude Code course (YouTube)](../../raw/youtube/youtube-05aY2LRIC3s-claude-code-full-course-12-hours-build-real-ai-projects-2026.md)
 [^src11]: [zazencodes/ai-engineer-roadmap — Jupyter notebooks for AI engineering (★10)](../../raw/github/github-zazencodes-ai-engineer-roadmap-notebooks.md) — zazencodes, GitHub
 [^src12]: [Karpathy's LLM Wiki Setup Guide](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-karpathy-s-llm-wi-report.md) — Teacher's Tech, YouTube (processed report)
 [^src13]: [FULL Claude Tutorial For Beginners in 2026! (FULL COURSE)](../../raw/youtube/youtube-Xg55nTrbYYY-full-claude-tutorial-for-beginners-in-2026-full-course.md) — Productive Dude, YouTube

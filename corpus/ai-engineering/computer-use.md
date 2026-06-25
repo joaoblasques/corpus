@@ -12,19 +12,19 @@ sources:
   - path: raw/web/web-mitigating-the-risk-of-prompt-injections-in-browser-use.md
     channel: web
     ingested_at: 2026-06-21
-  - path: raw/_inbox/web-claude-quickstarts-computer-use-best-practices-at-main-anthr.md
+  - path: raw/web/web-claude-quickstarts-computer-use-best-practices-at-main-anthr.md
     channel: web
     ingested_at: 2026-06-24
-  - path: raw/_inbox/web-computer-use-safety-classifier-interest-form.md
+  - path: raw/web/web-computer-use-safety-classifier-interest-form.md
     channel: web
     ingested_at: 2026-06-25
-  - path: raw/_inbox/web-desktop-application-claude-code-docs.md
+  - path: raw/web/web-desktop-application-claude-code-docs.md
     channel: web
     ingested_at: 2026-06-25
-  - path: raw/web/computer-use-tool.md
+  - path: raw/web/web-computer-use-tool.md
     channel: web
     ingested_at: 2026-06-25
-  - path: raw/github/magnitudedev-browser-agent.md
+  - path: raw/github/github-magnitudedev-browser-agent.md
     channel: github
     ingested_at: 2026-06-25
   - path: raw/web/web-introducing-computer-use-a-new-claude-3-5-sonnet-and-claude.md
@@ -276,9 +276,9 @@ Early partners: Asana, Canva, Cognition, DoorDash, Replit (using computer use to
 [^src1]: [Best practices for computer and browser use with Claude](../../raw/notes/notes-clippings-best-practices-for-computer-and-browser-use-with-claude.md) — Lucas Gonzalez & Luca Weihs, Anthropic
 [^src2]: [Introducing Claude Sonnet 4.6](../../raw/web/web-introducing-sonnet-4-6.md) — Anthropic official blog (OSWorld + prompt injection robustness)
 [^src3]: [Mitigating the Risk of Prompt Injections in Browser Use](../../raw/web/web-mitigating-the-risk-of-prompt-injections-in-browser-use.md) — Anthropic (1% attack rate; Claude for Chrome beta)
-[^src4]: [Claude Quickstarts — computer-use best practices](../../raw/_inbox/web-claude-quickstarts-computer-use-best-practices-at-main-anthr.md) — Anthropic GitHub
-[^src5]: [Computer Use Safety Classifier Interest Form](../../raw/_inbox/web-computer-use-safety-classifier-interest-form.md) — Anthropic
-[^src6]: [Desktop application — Claude Code docs](../../raw/_inbox/web-desktop-application-claude-code-docs.md) — Anthropic
-[^src7]: [Computer use tool — Anthropic API docs](../../raw/web/computer-use-tool.md) — docs.anthropic.com
-[^src8]: [magnitudedev/browser-agent — Open-source, vision-first browser agent](../../raw/github/magnitudedev-browser-agent.md) — magnitudedev, GitHub ★4083
+[^src4]: [Claude Quickstarts — computer-use best practices](../../raw/web/web-claude-quickstarts-computer-use-best-practices-at-main-anthr.md) — Anthropic GitHub
+[^src5]: [Computer Use Safety Classifier Interest Form](../../raw/web/web-computer-use-safety-classifier-interest-form.md) — Anthropic
+[^src6]: [Desktop application — Claude Code docs](../../raw/web/web-desktop-application-claude-code-docs.md) — Anthropic
+[^src7]: [Computer use tool — Anthropic API docs](../../raw/web/web-computer-use-tool.md) — docs.anthropic.com
+[^src8]: [magnitudedev/browser-agent — Open-source, vision-first browser agent](../../raw/github/github-magnitudedev-browser-agent.md) — magnitudedev, GitHub ★4083
 [^src9]: [Introducing computer use, a new Claude 3.5 Sonnet, and Claude 3.5 Haiku](../../raw/web/web-introducing-computer-use-a-new-claude-3-5-sonnet-and-claude.md) — Anthropic (original Oct 2024 launch announcement)

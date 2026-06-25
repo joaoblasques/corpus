@@ -21,7 +21,7 @@ sources:
   - path: raw/youtube/youtube-4KC7Vn4txkA-how-to-create-slide-presentations-with-claude-2025-update.md
     channel: youtube
     ingested_at: 2026-06-20
-  - path: raw/_inbox/youtube-t2ELuj2prA0-claude-html-slides-the-new-powerpoint-killer-full-tutorial.md
+  - path: raw/youtube/youtube-t2ELuj2prA0-claude-html-slides-the-new-powerpoint-killer-full-tutorial.md
     channel: youtube
     ingested_at: 2026-06-25
 aliases:
@@ -112,4 +112,4 @@ When generating HTML slides, twenty design principles improve output quality [^s
 [^src4]: [I Replaced PowerPoint with Claude Code](../../raw/youtube/youtube-nAfbaZysFuk-i-replaced-powerpoint-with-claude-code.md) — YouTube playlist: Claude Slides
 [^src5]: [How to Build Pro Presentations in Claude Cowork](../../raw/youtube/youtube-0V2yEaph7ac-how-to-build-pro-presentations-in-claude-cowork.md) — YouTube playlist: Claude Slides
 [^src6]: [How to Create Slide Presentations with Claude — 2025 Update](../../raw/youtube/youtube-4KC7Vn4txkA-how-to-create-slide-presentations-with-claude-2025-update.md) — YouTube playlist: Claude Slides
-[^src7]: [Claude HTML Slides: The New PowerPoint Killer (Full Tutorial)](../../raw/_inbox/youtube-t2ELuj2prA0-claude-html-slides-the-new-powerpoint-killer-full-tutorial.md) — YouTube
+[^src7]: [Claude HTML Slides: The New PowerPoint Killer (Full Tutorial)](../../raw/youtube/youtube-t2ELuj2prA0-claude-html-slides-the-new-powerpoint-killer-full-tutorial.md) — YouTube

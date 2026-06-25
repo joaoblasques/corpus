@@ -3,7 +3,7 @@ type: synthesis
 domain: data-engineering
 status: draft
 sources:
-  - path: raw/_inbox/email-2026-06-11-ai-observability-for-data-engineers-a-k-a-the-ai-analytics-d.md
+  - path: raw/email/email-2026-06-11-ai-observability-for-data-engineers-a-k-a-the-ai-analytics-d.md
     channel: email
     ingested_at: 2026-06-11
 aliases:

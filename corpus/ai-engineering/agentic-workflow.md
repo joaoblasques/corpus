@@ -18,7 +18,7 @@ sources:
   - path: raw/notes/notes-10-autonomous-background-coding-agents.md
     channel: notes
     ingested_at: 2026-06-17
-  - path: raw/_inbox/web-github-edlsh-pi-ask-user-interactive-decision-gating-extensi.md
+  - path: raw/web/web-github-edlsh-pi-ask-user-interactive-decision-gating-extensi.md
     channel: web
     ingested_at: 2026-06-24
 aliases:
@@ -135,4 +135,4 @@ This is the human-in-the-loop gate pattern from [[ai-engineering/agent-harness|A
 [^src3]: [NirDiamant/GenAI_Agents (50+ tutorials)](../../raw/web/github-nirdiamant-genai-agents-50-tutorials-and-implementati.md) — Nir Diamant
 [^src4]: [A harness for every task: dynamic workflows in Claude Code](../../raw/notes/notes-clippings-a-harness-for-every-task-dynamic-workflows-in-claude-code.md) — Thariq Shihipar & Sid Bidasaria, Anthropic
 [^src5]: [Ch10 — Autonomous Background Coding Agents](../../raw/notes/notes-10-autonomous-background-coding-agents.md)
-[^src6]: [pi-ask-user — Interactive decision-gating extension (GitHub)](../../raw/_inbox/web-github-edlsh-pi-ask-user-interactive-decision-gating-extensi.md) — edlsh
+[^src6]: [pi-ask-user — Interactive decision-gating extension (GitHub)](../../raw/web/web-github-edlsh-pi-ask-user-interactive-decision-gating-extensi.md) — edlsh

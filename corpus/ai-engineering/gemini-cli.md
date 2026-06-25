@@ -3,7 +3,7 @@ type: entity
 domain: ai-engineering
 status: draft
 sources:
-  - path: raw/_inbox/github-addyosmani-gemini-cli-tips.md
+  - path: raw/github/github-addyosmani-gemini-cli-tips.md
     channel: github
     ingested_at: 2026-06-25
   - path: raw/github/github-eliasecchig-gemini-cli-git.md
@@ -141,7 +141,7 @@ Functionally equivalent to the "merge as teaching event" pattern discussed in [[
 
 ---
 
-[^src1]: [addyosmani/gemini-cli-tips — ~30 power-user tips for Gemini CLI](../../raw/_inbox/github-addyosmani-gemini-cli-tips.md) — Addy Osmani, GitHub ★2,382
+[^src1]: [addyosmani/gemini-cli-tips — ~30 power-user tips for Gemini CLI](../../raw/github/github-addyosmani-gemini-cli-tips.md) — Addy Osmani, GitHub ★2,382
 [^src2]: [eliasecchig/gemini-cli-git — Turn your Git repo into a self-improving autonomous agent](../../raw/github/github-eliasecchig-gemini-cli-git.md) — GitHub
 [^src3]: [jamubc/gemini-mcp-tool — MCP server enabling Claude to interact with Gemini CLI (★2,245)](../../raw/github/github-jamubc-gemini-mcp-tool.md) — GitHub; primary source for Antigravity CLI retirement announcement
 

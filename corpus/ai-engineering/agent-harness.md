@@ -39,7 +39,7 @@ sources:
   - path: raw/web/web-agent-harness-engineering.md
     channel: web
     ingested_at: 2026-06-23
-  - path: raw/github/affaan-m-ecc.md
+  - path: raw/github/github-affaan-m-ecc.md
     channel: github
     ingested_at: 2026-06-25
   - path: raw/web/web-handle-approvals-and-user-input-claude-code-docs.md
@@ -406,7 +406,7 @@ The starter pack provided: Vertex AI + Cloud Run scaffolding, session management
 [^src8]: [A harness for every task: dynamic workflows in Claude Code](../../raw/notes/notes-clippings-a-harness-for-every-task-dynamic-workflows-in-claude-code.md) — Thariq Shihipar & Sid Bidasaria, Anthropic
 [^src9]: [Harnessing Claude's Intelligence: 3 Key Patterns for Building Apps](../../raw/notes/notes-clippings-harnessing-claude-s-intelligence-3-key-patterns-for-building.md) — Lance Martin, Anthropic Platform team
 [^src10]: [Harness Design for Long-Running Application Development](../../raw/web/web-harness-design-for-long-running-application-development.md) — Anthropic engineering blog
-[^src11]: [affaan-m/ECC — GitHub (219K★, v2.0.0)](../../raw/github/affaan-m-ecc.md) — affaan-m, GitHub
+[^src11]: [affaan-m/ECC — GitHub (219K★, v2.0.0)](../../raw/github/github-affaan-m-ecc.md) — affaan-m, GitHub
 [^src12]: [Completely Understand Hooks in Less Than 20 Minutes](../../raw/youtube/youtube-03CfGf9iw_U-completely-understand-hooks-in-less-than-20-minutes.md) — Burke Holland, YouTube
 [^src13]: [Handle approvals and user input — Claude Code Agent SDK docs](../../raw/web/web-handle-approvals-and-user-input-claude-code-docs.md) — Anthropic
 [^src14]: [Text editor tool — Anthropic API docs](../../raw/web/web-text-editor-tool.md) — Anthropic

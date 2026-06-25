@@ -18,10 +18,10 @@ sources:
   - path: raw/email/email-2026-05-06-certified.md
     channel: email
     ingested_at: 2026-06-17
-  - path: raw/_inbox/web-claude-legal-solutions-claude-by-anthropic.md
+  - path: raw/web/web-claude-legal-solutions-claude-by-anthropic.md
     channel: web
     ingested_at: 2026-06-24
-  - path: raw/_inbox/web-enhancing-ai-driven-defense-with-anthropics-claude-opus-4-7.md
+  - path: raw/web/web-enhancing-ai-driven-defense-with-anthropics-claude-opus-4-7.md
     channel: web
     ingested_at: 2026-06-24
   - path: raw/github/github-anthropics-claude-cookbooks.md
@@ -108,8 +108,8 @@ The Fable 5 launch in June 2026 triggered a two-part crisis that reshaped develo
 [^src4]: [Claude Opus 4.8 arrives (The Code)](../../raw/email/email-2026-05-29-claude-opus-4-8-arrives.md)
 [^src5]: [Certified. (Ruben Hassid)](../../raw/email/email-2026-05-06-certified.md)
 [^src6]: [Project Glasswing: Securing Critical Software for the AI Era](../../raw/web/web-project-glasswing-securing-critical-software-for-the-ai-era.md) — Anthropic
-[^src7]: [Claude Legal Solutions](../../raw/_inbox/web-claude-legal-solutions-claude-by-anthropic.md) — Anthropic
-[^src8]: [Enhancing AI-Driven Defense with Anthropic's Claude Opus 4.7](../../raw/_inbox/web-enhancing-ai-driven-defense-with-anthropics-claude-opus-4-7.md) — Palo Alto Networks
+[^src7]: [Claude Legal Solutions](../../raw/web/web-claude-legal-solutions-claude-by-anthropic.md) — Anthropic
+[^src8]: [Enhancing AI-Driven Defense with Anthropic's Claude Opus 4.7](../../raw/web/web-enhancing-ai-driven-defense-with-anthropics-claude-opus-4-7.md) — Palo Alto Networks
 [^src9]: [Dario Amodei: The Urgency of Interpretability](../../raw/web/web-dario-amodei-the-urgency-of-interpretability.md) — Dario Amodei, Anthropic
 [^src10]: [anthropic/claude-cookbooks — official Claude API recipe collection (★45,788)](../../raw/github/github-anthropics-claude-cookbooks.md) — Anthropic, GitHub
 [^src11]: [Testing Mythos and Fable, Moving Beyond SWE-bench (The Batch)](../../raw/email/email-2026-06-19-testing-mythos-and-fable-moving-beyond-swe-bench-nvidia-s-op.md) — Andrew Ng, DeepLearning.AI

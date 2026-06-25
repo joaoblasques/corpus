@@ -9,10 +9,10 @@ sources:
   - path: raw/notes/notes-10-autonomous-background-coding-agents.md
     channel: notes
     ingested_at: 2026-06-17
-  - path: raw/_inbox/web-rakuten-claude-managed-agents-case-study-claude-by-anthropic.md
+  - path: raw/web/web-rakuten-claude-managed-agents-case-study-claude-by-anthropic.md
     channel: web
     ingested_at: 2026-06-24
-  - path: raw/_inbox/web-assign-tasks-from-anywhere-in-claude-cowork-claude-help-cent.md
+  - path: raw/web/web-assign-tasks-from-anywhere-in-claude-cowork-claude-help-cent.md
     channel: web
     ingested_at: 2026-06-24
 aliases:
@@ -140,6 +140,6 @@ Specialist agents (engineering/product/sales/marketing/finance) were deployed wi
 
 [^src1]: [Long-running Agents](../../raw/web/long-running-agents.md)
 [^src2]: [Ch10 — Autonomous Background Coding Agents](../../raw/notes/notes-10-autonomous-background-coding-agents.md)
-[^src3]: [Rakuten — Claude Managed Agents case study](../../raw/_inbox/web-rakuten-claude-managed-agents-case-study-claude-by-anthropic.md) — Yusuke Kaji, Rakuten
-[^src4]: [Assign tasks from anywhere in Claude Cowork (Dispatch)](../../raw/_inbox/web-assign-tasks-from-anywhere-in-claude-cowork-claude-help-cent.md) — Anthropic Help Center
+[^src3]: [Rakuten — Claude Managed Agents case study](../../raw/web/web-rakuten-claude-managed-agents-case-study-claude-by-anthropic.md) — Yusuke Kaji, Rakuten
+[^src4]: [Assign tasks from anywhere in Claude Cowork (Dispatch)](../../raw/web/web-assign-tasks-from-anywhere-in-claude-cowork-claude-help-cent.md) — Anthropic Help Center
 </content>

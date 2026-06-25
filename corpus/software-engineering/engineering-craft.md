@@ -3,10 +3,10 @@ type: concept
 domain: software-engineering
 status: draft
 sources:
-  - path: raw/_inbox/email-2025-11-06-how-to-become-a-resourceful-engineer.md
+  - path: raw/email/email-2025-11-06-how-to-become-a-resourceful-engineer.md
     channel: email
     ingested_at: 2026-06-12
-  - path: raw/_inbox/email-2026-05-12-junior-developers-listen-up.md
+  - path: raw/email/email-2026-05-12-junior-developers-listen-up.md
     channel: email
     ingested_at: 2026-06-12
   - path: raw/youtube/youtube-vtyx7ex-0ba.md

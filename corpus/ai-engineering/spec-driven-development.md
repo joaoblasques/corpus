@@ -6,7 +6,7 @@ sources:
   - path: raw/email/email-2026-06-16-claude-max-plan-is-not-what-you-think.md
     channel: email
     ingested_at: 2026-06-20
-  - path: raw/_inbox/email-2026-06-14-claude-code-built-my-website-9-steps.md
+  - path: raw/email/email-2026-06-14-claude-code-built-my-website-9-steps.md
     channel: email
     ingested_at: 2026-06-24
   - path: raw/youtube/youtube-14RP8liACqo-how-senior-engineers-actually-build-with-ai-in-2026-build-a.md
@@ -167,7 +167,7 @@ A full end-to-end spec-to-agent pipeline [^src5]:
 ---
 
 [^src1]: [Claude Max Plan Is Not What You Think (The Code newsletter)](../../raw/email/email-2026-06-16-claude-max-plan-is-not-what-you-think.md) — referencing Apoorv Gupta/Microsoft spec-driven development post, GitHub spec-kit, Böckeler/martinfowler.com
-[^src2]: [Claude Code built my website (9 steps)](../../raw/_inbox/email-2026-06-14-claude-code-built-my-website-9-steps.md) — Charlie Hills
+[^src2]: [Claude Code built my website (9 steps)](../../raw/email/email-2026-06-14-claude-code-built-my-website-9-steps.md) — Charlie Hills
 [^src3]: [How Senior Engineers Actually Build With AI (Ghost AI build — six-file system)](../../raw/youtube/youtube-14RP8liACqo-how-senior-engineers-actually-build-with-ai-in-2026-build-a.md) — JavaScript Mastery, YouTube
 [^src4]: [How Senior Engineers Actually Build With AI (Job Pilot build — nine files + five skills)](../../raw/youtube/youtube-9dKA2hq4vf0-how-senior-engineers-actually-build-with-ai-in-2026-build-a.md) — JavaScript Mastery, YouTube
 [^src5]: [Full Walkthrough: Workflow for AI Coding — Matt Pocock](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-full-walkthrough-report.md) — Matt Pocock, AI Hero (conference talk notes report)

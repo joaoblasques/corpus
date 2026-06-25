@@ -33,19 +33,19 @@ sources:
   - path: raw/web/web-using-agent-memory.md
     channel: web
     ingested_at: 2026-06-23
-  - path: raw/_inbox/web-notion-q-a-claude-managed-agents-claude-by-anthropic.md
+  - path: raw/web/web-notion-q-a-claude-managed-agents-claude-by-anthropic.md
     channel: web
     ingested_at: 2026-06-24
-  - path: raw/_inbox/web-rakuten-claude-managed-agents-case-study-claude-by-anthropic.md
+  - path: raw/web/web-rakuten-claude-managed-agents-case-study-claude-by-anthropic.md
     channel: web
     ingested_at: 2026-06-24
-  - path: raw/_inbox/web-sentry-claude-managed-agents-case-study-claude-by-anthropic.md
+  - path: raw/web/web-sentry-claude-managed-agents-case-study-claude-by-anthropic.md
     channel: web
     ingested_at: 2026-06-24
-  - path: raw/_inbox/web-vibecode-claude-platform-api-case-study-claude-by-anthropic.md
+  - path: raw/web/web-vibecode-claude-platform-api-case-study-claude-by-anthropic.md
     channel: web
     ingested_at: 2026-06-24
-  - path: raw/_inbox/web-claude-legal-solutions-claude-by-anthropic.md
+  - path: raw/web/web-claude-legal-solutions-claude-by-anthropic.md
     channel: web
     ingested_at: 2026-06-24
   - path: raw/web/web-claude-managed-agents-claude-by-anthropic.md
@@ -501,11 +501,11 @@ The Managed Agents toolset (`agent_toolset_20260401`) provides 8 built-in tools,
 [^src5]: [Introducing the Claude Platform on AWS](../../raw/notes/notes-clippings-introducing-the-claude-platform-on-aws.md) — Anthropic announcement
 [^src6]: [Scaling Managed Agents: Decoupling the Brain from the Hands](../../raw/web/web-scaling-managed-agents-decoupling-the-brain-from-the-hands.md) — Anthropic engineering
 [^src7]: [Built-in Memory for Claude Managed Agents (Anthropic docs)](../../raw/web/web-using-agent-memory.md) — Anthropic
-[^src8]: [Notion Q&A — Claude Managed Agents](../../raw/_inbox/web-notion-q-a-claude-managed-agents-claude-by-anthropic.md) — Eric Liu, Notion PM
-[^src9]: [Rakuten — Claude Managed Agents case study](../../raw/_inbox/web-rakuten-claude-managed-agents-case-study-claude-by-anthropic.md) — Yusuke Kaji, Rakuten
-[^src10]: [Sentry — Claude Managed Agents case study](../../raw/_inbox/web-sentry-claude-managed-agents-case-study-claude-by-anthropic.md) — Indragie Karunaratne, Sentry
-[^src11]: [Vibecode — Claude Platform API case study](../../raw/_inbox/web-vibecode-claude-platform-api-case-study-claude-by-anthropic.md) — Vibecode
-[^src12]: [Claude Legal Solutions](../../raw/_inbox/web-claude-legal-solutions-claude-by-anthropic.md) — Anthropic
+[^src8]: [Notion Q&A — Claude Managed Agents](../../raw/web/web-notion-q-a-claude-managed-agents-claude-by-anthropic.md) — Eric Liu, Notion PM
+[^src9]: [Rakuten — Claude Managed Agents case study](../../raw/web/web-rakuten-claude-managed-agents-case-study-claude-by-anthropic.md) — Yusuke Kaji, Rakuten
+[^src10]: [Sentry — Claude Managed Agents case study](../../raw/web/web-sentry-claude-managed-agents-case-study-claude-by-anthropic.md) — Indragie Karunaratne, Sentry
+[^src11]: [Vibecode — Claude Platform API case study](../../raw/web/web-vibecode-claude-platform-api-case-study-claude-by-anthropic.md) — Vibecode
+[^src12]: [Claude Legal Solutions](../../raw/web/web-claude-legal-solutions-claude-by-anthropic.md) — Anthropic
 [^src13]: [Dreams — Claude Managed Agents docs](../../raw/web/web-dreams.md) — Anthropic
 [^src14]: [Run Claude Managed Agents on Daytona](../../raw/web/web-run-claude-managed-agents-on-daytona.md) — Anthropic
 [^src15]: [Claude Code's NEW Open Source Repo Builds Effective AI Agents in MINUTES!](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-claude-code-s-new-report.md) — YouTube (processed report)

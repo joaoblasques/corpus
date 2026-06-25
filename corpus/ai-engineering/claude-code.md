@@ -87,28 +87,28 @@ sources:
   - path: raw/web/web-orchestrate-subagents-at-scale-with-dynamic-workflows-claude.md
     channel: web
     ingested_at: 2026-06-23
-  - path: raw/_inbox/web-choose-a-permission-mode-claude-code-docs.md
+  - path: raw/web/web-choose-a-permission-mode-claude-code-docs.md
     channel: web
     ingested_at: 2026-06-24
-  - path: raw/_inbox/web-automated-security-reviews-in-claude-code-claude-help-center.md
+  - path: raw/web/web-automated-security-reviews-in-claude-code-claude-help-center.md
     channel: web
     ingested_at: 2026-06-24
-  - path: raw/_inbox/web-push-events-into-a-running-session-with-channels-claude-code.md
+  - path: raw/web/web-push-events-into-a-running-session-with-channels-claude-code.md
     channel: web
     ingested_at: 2026-06-24
-  - path: raw/_inbox/email-2026-06-19-anthropic-drops-claude-code-artifacts.md
+  - path: raw/email/email-2026-06-19-anthropic-drops-claude-code-artifacts.md
     channel: email
     ingested_at: 2026-06-24
-  - path: raw/_inbox/web-claude-code-settings-claude-code-docs.md
+  - path: raw/web/web-claude-code-settings-claude-code-docs.md
     channel: web
     ingested_at: 2026-06-25
-  - path: raw/_inbox/web-desktop-application-claude-code-docs.md
+  - path: raw/web/web-desktop-application-claude-code-docs.md
     channel: web
     ingested_at: 2026-06-25
-  - path: raw/_inbox/web-use-claude-code-on-the-web-claude-code-docs.md
+  - path: raw/web/web-use-claude-code-on-the-web-claude-code-docs.md
     channel: web
     ingested_at: 2026-06-25
-  - path: raw/_inbox/web-glossary-claude-code-docs.md
+  - path: raw/web/web-glossary-claude-code-docs.md
     channel: web
     ingested_at: 2026-06-25
   - path: raw/email/email-2026-06-18-someone-put-ads-in-the-claude-code-spinner.md
@@ -1180,14 +1180,14 @@ From Mastering Claude Code in 30 Minutes [^src56], the creator's recommended lea
 [^src20]: [Claude Code Routines: 8 Production Prompts, Real Costs and When Things Break](../../raw/web/web-claude-code-routines-8-production-prompts-real-costs-and-whe.md) — Alex Newman
 [^src21]: [Claude Code for DevOps: Using the /loop skill](../../raw/web/web-claude-code-for-devops-using-the-loop-skill.md) — DevOps practitioner guide
 [^src22]: [Boris Cherny: 14 hidden Claude Code features](../../raw/notes/notes-boris-cherny-14-hidden-claude-code-features.md) — Boris Cherny / X thread, 2026
-[^src23]: [Permission modes (Claude Code docs)](../../raw/_inbox/web-choose-a-permission-mode-claude-code-docs.md) — Anthropic
-[^src24]: [Automated security reviews in Claude Code](../../raw/_inbox/web-automated-security-reviews-in-claude-code-claude-help-center.md) — Anthropic Help Center
-[^src25]: [Push events into a running session with Channels](../../raw/_inbox/web-push-events-into-a-running-session-with-channels-claude-code.md) — Anthropic, Claude Code docs
-[^src26]: [Claude Code Artifacts (email announcement)](../../raw/_inbox/email-2026-06-19-anthropic-drops-claude-code-artifacts.md) — Anthropic
-[^src27]: [Settings — Claude Code docs](../../raw/_inbox/web-claude-code-settings-claude-code-docs.md) — Anthropic
-[^src28]: [Desktop application — Claude Code docs](../../raw/_inbox/web-desktop-application-claude-code-docs.md) — Anthropic
-[^src29]: [Use Claude Code on the Web — Claude Code docs](../../raw/_inbox/web-use-claude-code-on-the-web-claude-code-docs.md) — Anthropic
-[^src30]: [Glossary — Claude Code docs](../../raw/_inbox/web-glossary-claude-code-docs.md) — Anthropic
+[^src23]: [Permission modes (Claude Code docs)](../../raw/web/web-choose-a-permission-mode-claude-code-docs.md) — Anthropic
+[^src24]: [Automated security reviews in Claude Code](../../raw/web/web-automated-security-reviews-in-claude-code-claude-help-center.md) — Anthropic Help Center
+[^src25]: [Push events into a running session with Channels](../../raw/web/web-push-events-into-a-running-session-with-channels-claude-code.md) — Anthropic, Claude Code docs
+[^src26]: [Claude Code Artifacts (email announcement)](../../raw/email/email-2026-06-19-anthropic-drops-claude-code-artifacts.md) — Anthropic
+[^src27]: [Settings — Claude Code docs](../../raw/web/web-claude-code-settings-claude-code-docs.md) — Anthropic
+[^src28]: [Desktop application — Claude Code docs](../../raw/web/web-desktop-application-claude-code-docs.md) — Anthropic
+[^src29]: [Use Claude Code on the Web — Claude Code docs](../../raw/web/web-use-claude-code-on-the-web-claude-code-docs.md) — Anthropic
+[^src30]: [Glossary — Claude Code docs](../../raw/web/web-glossary-claude-code-docs.md) — Anthropic
 [^src31]: [Someone Put Ads in the Claude Code Spinner — Claude Code Camp](../../raw/email/email-2026-06-18-someone-put-ads-in-the-claude-code-spinner.md) — Abhishek, Claude Code Camp newsletter
 [^src32]: [Quickstart — Claude Code docs](../../raw/web/web-quickstart-claude-code-docs.md) — Anthropic
 [^src33]: [Claude Code Runs My Business (13 Workflows)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-claude-code-runs-report.md) — YouTube (processed report)

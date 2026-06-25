@@ -69,19 +69,19 @@ sources:
   - path: raw/web/web-the-code-agent-orchestra-what-makes-multi-agent-coding-work.md
     channel: web
     ingested_at: 2026-06-23
-  - path: raw/_inbox/web-the-agent-that-saved-my-brain.md
+  - path: raw/web/web-the-agent-that-saved-my-brain.md
     channel: web
     ingested_at: 2026-06-24
-  - path: raw/_inbox/web-how-anthropic-uses-claude-in-marketing-claude.md
+  - path: raw/web/web-how-anthropic-uses-claude-in-marketing-claude.md
     channel: web
     ingested_at: 2026-06-24
-  - path: raw/_inbox/youtube-2HtqFVLgjLI-how-software-engineers-actually-use-coding-agents-in-2026.md
+  - path: raw/youtube/youtube-2HtqFVLgjLI-how-software-engineers-actually-use-coding-agents-in-2026.md
     channel: youtube
     ingested_at: 2026-06-25
-  - path: raw/youtube/k_D_C3ExypU-don-t-pay-for-claude-code-build-this-instead.md
+  - path: raw/youtube/youtube-k_D_C3ExypU-don-t-pay-for-claude-code-build-this-instead.md
     channel: youtube
     ingested_at: 2026-06-25
-  - path: raw/youtube/vQebObsd_Cw-i-gave-codex-a-24-7-server-now-it-codes-while-i-sleep.md
+  - path: raw/youtube/youtube-vQebObsd_Cw-i-gave-codex-a-24-7-server-now-it-codes-while-i-sleep.md
     channel: youtube
     ingested_at: 2026-06-25
   - path: raw/web/web-ai-writes-code-faster-your-job-is-still-to-prove-it-works.md
@@ -90,10 +90,10 @@ sources:
   - path: raw/youtube/youtube-kwSVtQ7dziU-skill-issue-andrej-karpathy-on-code-agents-autoresearch-and.md
     channel: youtube
     ingested_at: 2026-06-25
-  - path: raw/youtube/youtube-8f5qWdx9L-Q.md
+  - path: raw/youtube/youtube-8f5qWdx9L-Q-can-you-replace-claude-code-codex-with-opencode-and-a-local.md
     channel: youtube
     ingested_at: 2026-06-25
-  - path: raw/youtube/youtube-zPqcS5AvQvQ.md
+  - path: raw/youtube/youtube-zPqcS5AvQvQ-local-ai-coding-is-finally-good-enough.md
     channel: youtube
     ingested_at: 2026-06-25
   - path: raw/youtube/youtube-4JpwNnw0-jI-this-karpathy-system-could-701x-your-ai-workflows-86-000-git.md
@@ -117,7 +117,7 @@ sources:
   - path: raw/notes/notes-local-ai-coding-report.md
     channel: notes
     ingested_at: 2026-06-25
-  - path: raw/youtube/youtube-hfba9dAT6xE-local-agentic-coding.md
+  - path: raw/youtube/youtube-hfba9dAT6xE-the-best-local-agentic-coding-workflow-complete-guide.md
     channel: youtube
     ingested_at: 2026-06-25
   - path: raw/web/web-github-anthropics-html-effectiveness-html-effectiveness-exam.md
@@ -725,21 +725,21 @@ Key constraint: HTML output works best when the agent writes the whole file at o
 [^src18]: [Agentic Code Review](../../raw/email/email-2026-06-16-agentic-code-review.md) — Addy Osmani
 [^src19]: [Code Review — Claude Code Docs](../../raw/web/web-code-review-claude-code-docs.md) — Anthropic official docs
 [^src20]: [The Factory Model: How Coding Agents Changed Software Engineering](../../raw/web/web-the-factory-model-how-coding-agents-changed-software-enginee.md) — Addy Osmani
-[^src21]: [The Agent That Saved My Brain](../../raw/_inbox/web-the-agent-that-saved-my-brain.md) — Austin Tedesco, Every
-[^src22]: [How Anthropic uses Claude in Marketing](../../raw/_inbox/web-how-anthropic-uses-claude-in-marketing-claude.md) — Austin Lau, Anthropic
-[^src23]: [Don't Pay for Claude Code — Build This Instead](../../raw/youtube/k_D_C3ExypU-don-t-pay-for-claude-code-build-this-instead.md) — Night Code, YouTube
-[^src24]: [I Gave Codex a 24/7 Server: Now It Codes While I Sleep](../../raw/youtube/vQebObsd_Cw-i-gave-codex-a-24-7-server-now-it-codes-while-i-sleep.md) — YouTube
-[^src23]: [How Software Engineers Actually Use Coding Agents in 2026](../../raw/_inbox/youtube-2HtqFVLgjLI-how-software-engineers-actually-use-coding-agents-in-2026.md) — YouTube survey/walkthrough
+[^src21]: [The Agent That Saved My Brain](../../raw/web/web-the-agent-that-saved-my-brain.md) — Austin Tedesco, Every
+[^src22]: [How Anthropic uses Claude in Marketing](../../raw/web/web-how-anthropic-uses-claude-in-marketing-claude.md) — Austin Lau, Anthropic
+[^src23]: [Don't Pay for Claude Code — Build This Instead](../../raw/youtube/youtube-k_D_C3ExypU-don-t-pay-for-claude-code-build-this-instead.md) — Night Code, YouTube
+[^src24]: [I Gave Codex a 24/7 Server: Now It Codes While I Sleep](../../raw/youtube/youtube-vQebObsd_Cw-i-gave-codex-a-24-7-server-now-it-codes-while-i-sleep.md) — YouTube
+[^src23]: [How Software Engineers Actually Use Coding Agents in 2026](../../raw/youtube/youtube-2HtqFVLgjLI-how-software-engineers-actually-use-coding-agents-in-2026.md) — YouTube survey/walkthrough
 [^src25]: [AI Writes Code Faster. Your Job Is Still to Prove It Works.](../../raw/web/web-ai-writes-code-faster-your-job-is-still-to-prove-it-works.md) — Addy Osmani, addyosmani.com
 [^src26]: [Skill Issue: Andrej Karpathy on Code Agents, Auto-Research, and...](../../raw/youtube/youtube-kwSVtQ7dziU-skill-issue-andrej-karpathy-on-code-agents-autoresearch-and.md) — No Priors podcast, YouTube
-[^src27]: [OpenCode with Local LLMs — is it actually viable?](../../raw/youtube/youtube-8f5qWdx9L-Q.md) — YouTube
-[^src28]: [Local AI Coding is Finally Good Enough (YouTube)](../../raw/youtube/youtube-zPqcS5AvQvQ.md) — ForrestKnight (hardware: AMD R9 700 + Threadripper 9980X; models: Qwen-3-72B MoE + Qwen-3.6-27B; codebases: Excalidraw, Warp)
+[^src27]: [OpenCode with Local LLMs — is it actually viable?](../../raw/youtube/youtube-8f5qWdx9L-Q-can-you-replace-claude-code-codex-with-opencode-and-a-local.md) — YouTube
+[^src28]: [Local AI Coding is Finally Good Enough (YouTube)](../../raw/youtube/youtube-zPqcS5AvQvQ-local-ai-coding-is-finally-good-enough.md) — ForrestKnight (hardware: AMD R9 700 + Threadripper 9980X; models: Qwen-3-72B MoE + Qwen-3.6-27B; codebases: Excalidraw, Warp)
 [^src29]: [Karpathy's Auto-Research System: 3 Files That Change Everything](../../raw/youtube/youtube-4JpwNnw0-jI-this-karpathy-system-could-701x-your-ai-workflows-86-000-git.md) — YouTube
 [^src30]: [Claude on SWE-bench Verified](../../raw/web/web-claude-swe-bench-performance.md) — Anthropic
 [^src31]: [The Unreasonable Effectiveness of HTML for Agentic Output](../../raw/web/web-the-unreasonable-effectiveness-of-html.md) — blog post
 [^src32]: [Conductor CEO Charlie Holtz — AI Coding Setup](../../raw/youtube/youtube-fQmlML9Lay4-conductor-ceo-charlie-holtz-walks-us-through-his-ai-coding-s.md) — Charlie Holtz, YouTube
 [^src33]: [Local AI Coding: Report](../../raw/notes/notes-local-ai-coding-report.md) — notes report
-[^src34]: [Local Agentic Coding Guide](../../raw/youtube/youtube-hfba9dAT6xE-local-agentic-coding.md) — YouTube
+[^src34]: [Local Agentic Coding Guide](../../raw/youtube/youtube-hfba9dAT6xE-the-best-local-agentic-coding-workflow-complete-guide.md) — YouTube
 [^src35]: [The Unreasonable Effectiveness of HTML (gallery)](../../raw/web/web-github-anthropics-html-effectiveness-html-effectiveness-exam.md) — Anthropic gallery
 [^src36]: [How Software Engineers Actually Use Coding Agents in 2026](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-how-software-engi-report.md) — YouTube (processed notes report); Pragmatic Engineer 2026 adoption survey
 [^src37]: [ProteoWizard/pwiz-ai — AI tooling and documentation for ProteoWizard/Skyline](../../raw/web/web-github-proteowizard-pwiz-ai-ai-tooling-and-documentation-for.md) — Brendan MacLean / MacCoss Lab, GitHub; primary source (alongside the Skyline case study note) for the pwiz-ai "reference don't embed" context architecture

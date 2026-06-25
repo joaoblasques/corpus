@@ -3,7 +3,7 @@ type: concept
 domain: productivity
 status: draft
 sources:
-  - path: raw/_inbox/email-2026-05-28-circle-of-competence-mental-model.md
+  - path: raw/email/email-2026-05-28-circle-of-competence-mental-model.md
     channel: inbox
     ingested_at: 2026-06-12
   - path: raw/web/thought-experiment-mental-model-what-if.md

@@ -9,7 +9,7 @@ sources:
   - path: raw/web/github-everyinc-compound-engineering-plugin-official-compoun.md
     channel: web
     ingested_at: 2026-06-24
-  - path: raw/_inbox/web-the-agent-that-saved-my-brain.md
+  - path: raw/web/web-the-agent-that-saved-my-brain.md
     channel: web
     ingested_at: 2026-06-24
   - path: raw/web/web-my-ai-had-already-fixed-the-code-before-i-saw-it.md
@@ -166,7 +166,7 @@ Three significant plugin changes from recent changelog entries [^src6]:
 
 [^src1]: [Compound Engineering: How Every.to Codes with Agents](../../raw/web/web-compound-engineering-how-every-codes-with-agents.md) — Every.to
 [^src2]: [EveryInc/compound-engineering-plugin (GitHub)](../../raw/web/github-everyinc-compound-engineering-plugin-official-compoun.md) — EveryInc
-[^src3]: [The Agent That Saved My Brain](../../raw/_inbox/web-the-agent-that-saved-my-brain.md) — Austin Tedesco, Every
+[^src3]: [The Agent That Saved My Brain](../../raw/web/web-the-agent-that-saved-my-brain.md) — Austin Tedesco, Every
 [^src4]: [My AI Had Already Fixed the Code Before I Saw It](../../raw/web/web-my-ai-had-already-fixed-the-code-before-i-saw-it.md) — Every.to
 [^src5]: [This "Karpathy System" could 701x your AI Workflows — autoresearch](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-this-karpathy-sys-report.md) — YouTube (processed report); covers autoresearch 3-file system, fit checklist, Toby Lütke result
 [^src6]: [Compound Engineering Plugin changelog (v3.13.0)](../../raw/web/web-changelog-md.md) — EveryInc

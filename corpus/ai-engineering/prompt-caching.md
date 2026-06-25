@@ -6,7 +6,7 @@ sources:
   - path: raw/notes/notes-clippings-lessons-from-building-claude-code-prompt-caching-is-everythi.md
     channel: notes
     ingested_at: 2026-06-17
-  - path: raw/web/prompt-caching.md
+  - path: raw/web/web-prompt-caching.md
     channel: web
     ingested_at: 2026-06-25
   - path: raw/youtube/youtube-6cEQEba0i2A-give-me-10-mins-and-i-ll-save-you-millions-of-claude-tokens.md
@@ -135,5 +135,5 @@ The Anthropic API supports two caching modes [^src2]:
 ---
 
 [^src1]: [Lessons from building Claude Code: Prompt caching is everything](../../raw/notes/notes-clippings-lessons-from-building-claude-code-prompt-caching-is-everythi.md) — Thariq Shihipar, Anthropic
-[^src2]: [Prompt caching — Anthropic API docs](../../raw/web/prompt-caching.md) — platform.claude.com
+[^src2]: [Prompt caching — Anthropic API docs](../../raw/web/web-prompt-caching.md) — platform.claude.com
 [^src3]: [Give Me 10 Mins and I'll Save You Millions of Claude Tokens](../../raw/youtube/youtube-6cEQEba0i2A-give-me-10-mins-and-i-ll-save-you-millions-of-claude-tokens.md) — Nate Herk, YouTube
