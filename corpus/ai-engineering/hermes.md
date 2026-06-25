@@ -12,6 +12,9 @@ sources:
   - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-i-built-the-best-report.md
     channel: notes
     ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-7-hermes-desktop-report.md
+    channel: notes
+    ingested_at: 2026-06-25
 aliases:
   - Hermes
   - Hermes agent

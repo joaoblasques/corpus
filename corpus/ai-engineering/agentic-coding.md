@@ -108,6 +108,12 @@ sources:
   - path: raw/youtube/youtube-fQmlML9Lay4-conductor-ceo-charlie-holtz-walks-us-through-his-ai-coding-s.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-14RP8liACqo-how-senior-engineers-actually-build-with-ai-in-2026-build-a.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-9dKA2hq4vf0-how-senior-engineers-actually-build-with-ai-in-2026-build-a.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - agentic coding
   - agentic engineering

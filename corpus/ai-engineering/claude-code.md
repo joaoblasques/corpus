@@ -153,6 +153,21 @@ sources:
   - path: raw/youtube/youtube-fQmlML9Lay4-conductor-ceo-charlie-holtz-walks-us-through-his-ai-coding-s.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/web/web-create-and-distribute-a-plugin-marketplace-claude-code-docs.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/web/web-todo-lists-claude-code-docs.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/web/web-orchestrate-teams-of-claude-code-sessions-claude-code-docs.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-4iMZA1omCkM-claude-code-has-quietly-evolved-people-haven-t-noticed.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/web/web-github-anthropics-claude-for-legal-a-suite-of-plugins-for-le.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - Claude Code
   - claude-code
@@ -160,8 +175,17 @@ aliases:
   - AskUserQuestion tool
   - TodoWrite
   - Task tool
+  - TaskCreate
+  - TaskUpdate
+  - TaskList
+  - TaskGet
   - Claude Code Guide agent
   - JIT planning
+  - plugin marketplace
+  - Agent Teams
+  - Ultra Code
+  - ultracode
+  - CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS
 tags:
   - corpus/ai-engineering
   - entity
@@ -929,6 +953,113 @@ Charlie Holtz (Conductor, YC S24) on running Claude Code as the core of a softwa
 - **Malleable software** vision: code that can be freely regenerated because it's not the scarce asset; prompts, data schemas, and business logic are the scarce assets. "We think about our product as prompts and data, not code" [^src44].
 - **Claude vs Codex for different tasks**: Codex (autonomous background tasks, PRs) for well-defined coding tasks; Claude for exploratory/reasoning-heavy work. The model you use should match the task's reasoning demands [^src44].
 
+## Plugin marketplace
+
+Claude Code supports a plugin system that lets teams bundle and distribute CLAUDE.md conventions, skills, hooks, and MCP server configs as a single installable package [^src45].
+
+**marketplace.json format** [^src45]: a manifest file listing available plugins. Each entry specifies a name, version, source (one of: GitHub repo URL, npm package, git URL, or relative path), and optional settings schema. Example:
+
+```json
+{
+  "plugins": [
+    {
+      "name": "security-guidance",
+      "source": "anthropic/claude-code-security-guidance",
+      "version": "2.1.0"
+    }
+  ]
+}
+```
+
+**Plugin sources** [^src45]: GitHub (default, resolved against github.com), npm (resolved from registry.npmjs.org), git (arbitrary git remote), relative (local path, e.g. `./plugins/my-plugin`).
+
+**Version resolution** [^src45]: semantic versioning; `latest`, `~1.0.0` (patch-compatible), `^2.0.0` (minor-compatible), and exact version pinning are all supported. The agent manager role (see Large-codebase practices above) is responsible for version control across the org.
+
+**Security controls** [^src45]:
+- `strictKnownMarketplaces: true` in settings limits plugin sources to a pre-approved allowlist.
+- `CLAUDE_CODE_PLUGIN_SEED_DIR` environment variable points Claude Code to an org-hosted plugin directory, preventing individual engineers from installing arbitrary plugins.
+- Plugin settings are scoped: user plugins go in `~/.claude/plugins/`; project plugins go in `.claude/plugins/`.
+
+**Anthropic official marketplace** [^src45]: Anthropic publishes an official plugin marketplace at marketplace.anthropic.com (as of mid-2026). The `security-guidance` plugin is the first official security review plugin; `claude-for-legal` is a bundled legal practice-area plugin suite. See Claude for Legal below.
+
+## Task tools (TodoWrite → TaskCreate migration)
+
+Claude Code v2.1.142 migrated the to-do tracking system from a single `TodoWrite` tool to a suite of four task-management tools: `TaskCreate`, `TaskUpdate`, `TaskGet`, and `TaskList` [^src46].
+
+**Why the migration** [^src46]: `TodoWrite` was designed before heavy subagent use. In complex multi-agent sessions, multiple subagents all updating a single flat list caused conflicts and lost updates. The new task tools add:
+- **Dependencies** — each task can declare which other tasks must complete first.
+- **Cross-subagent visibility** — `TaskList` lets any subagent see the full task state; `TaskUpdate` broadcasts changes to all running subagents.
+- **Mutable tasks** — tasks can be altered or deleted mid-execution, not just checked off. The lesson from the tool design philosophy (§ Tool design philosophy above): "as model capabilities increase, tools that once helped start getting in the way."
+
+**Migration note for CLAUDE.md authors** [^src46]: if your CLAUDE.md references `TodoWrite` or instructs Claude to use "the to-do list," update to reference `TaskCreate`/`TaskList` instead. The old `TodoWrite` tool still works but is considered legacy.
+
+## Agent Teams (experimental)
+
+Claude Code v2.1.178 introduced an experimental multi-session coordination mode: **Agent Teams** [^src47].
+
+Enable with: `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`
+
+**Agent Teams vs subagents** [^src47]:
+
+| Feature | Subagents | Agent Teams |
+|---|---|---|
+| Session scope | Within a single session | Separate sessions |
+| Communication | Subagents report back to parent only | Teammates message each other directly |
+| State | Shared parent context | Each teammate has its own context |
+| Cost | Lighter | Heavier |
+
+**Team structure** [^src47]:
+- **Lead** — the orchestrating agent that defines the goal and assigns work.
+- **Teammates** — persistent agents that receive assignments and can message other teammates directly (not just the lead).
+- **Shared task list** — all agents read and write to a common task list (the TaskCreate/TaskGet system above).
+- **Mailbox** — each teammate has an inbox; messages are delivered asynchronously, enabling non-blocking parallel work.
+
+**Display modes** [^src47]: Agent Teams introduces a split-pane view where each teammate's session is visible simultaneously. Configured via `/team-view` or the `CLAUDE_CODE_TEAM_DISPLAY_MODE` setting.
+
+**Lifecycle hooks** [^src47]: `SubagentStart` and `SubagentStop` hooks (see Hooks section) fire for each teammate session; useful for injecting per-teammate context, logging, or notification.
+
+Use Agent Teams when subagents are insufficient because agents genuinely need to coordinate mid-execution — not just report results back to a parent. The primary example: parallel migration tasks where an agent blocked on a dependency can directly ask the teammate working on that dependency for a status update, rather than waiting for the orchestrator to relay.
+
+## /effort levels and Ultra Code
+
+Claude Code exposes a single dial, `/effort`, for controlling thinking depth [^src48]:
+
+| Level | Behavior |
+|---|---|
+| `low` | Fast responses, minimal reasoning |
+| `medium` | Balanced quality and cost |
+| `high` | Default for Opus 4.6/Sonnet; good for most tasks |
+| `xhigh` | Default for Fable 5/Opus 4.8; deeper reasoning |
+| `max` | Maximum reasoning budget; prone to overthinking on simple tasks |
+| `ultracode` | Claude Code-specific; equivalent to `xhigh` + dynamic workflow orchestration |
+
+**Ultra Code** (`ultracode` setting or `/effort ultracode`) [^src48]: Claude builds its own dynamic workflow for the task — selecting which subagents to spawn, what model each uses, and how to fan out work — rather than following a pre-built pattern. Most valuable for complex, parallelizable, or adversarial tasks. Triggers the same orchestration capabilities as dynamic workflows (see § Dynamic workflows) but without manually specifying the harness.
+
+**Evolved session commands** [^src48]:
+- `/routines` — list all configured routines and their last run status.
+- `/loop` — start a session-scoped polling loop (see § Routines above for full detail).
+- `/goal <condition>` — set a completion condition; the session runs autonomously until the condition is met.
+
+These three commands form the automation ladder: `/loop` for local polling, `/goal` for autonomous multi-step runs, routines for cloud-hosted scheduled work.
+
+## Claude for Legal (plugin suite)
+
+Claude for Legal is Anthropic's reference plugin suite for legal teams [^src49]. Available on Team/Enterprise plans; also deployable as Claude Managed Agents via the Claude Platform.
+
+**Practice area plugins** [^src49]: Commercial Legal, Corporate Legal, Intellectual Property, Litigation, Employment Legal, Privacy Legal, Regulatory Legal, AI Governance Legal, Law Student, Legal Clinic, and more.
+
+**MCP connectors bundled** [^src49]:
+- Contract lifecycle: Docusign, Ironclad
+- Document management: iManage, NetDocuments
+- Legal research: Thomson Reuters, CourtListener (PACER-accessible case law), Everlaw (eDiscovery)
+- Deal rooms: Box/Intralinks (data room access for M&A due diligence)
+
+**Microsoft integration** [^src49]: Claude for Word (draft, redline, summarize) and Outlook (draft correspondence, review contracts) — enabling legal workflow without leaving the Microsoft 365 environment.
+
+**Key use cases** [^src49]: research briefs, due diligence document review, SOW drafting, outside counsel billing review, compliance gap analysis, contract comparison and redline.
+
+This is the most detailed Anthropic-published example of the **plugin-marketplace pattern** at domain scale: 12+ practice-area plugins, each bundling skills (legal reasoning procedures) + MCP connectors (legal data sources) + agent skills (managed-agent cookbooks for complex multi-document workflows). See [[ai-engineering/claude-managed-agents|Claude Managed Agents]] for the managed-agent deployment model.
+
 ## See also
 
 - [[ai-engineering/sources/boris-cherny-100-percent-claude-code|Boris Cherny — 100% Claude Code]] — the full interview source page
@@ -981,3 +1112,8 @@ Charlie Holtz (Conductor, YC S24) on running Claude Code as the core of a softwa
 [^src42]: [How to Build Effective Claude Code Agents in 2026](../../raw/youtube/youtube-RzLV8sfFdMM-how-to-build-effective-claude-code-agents-in-2026.md) — Cole Medin, YouTube
 [^src43]: [How to Run Claude Code for Free (Local LLMs)](../../raw/email/email-2026-06-21-how-to-run-claude-code-for-free.md) — email newsletter
 [^src44]: [Conductor CEO Charlie Holtz — AI Coding Setup](../../raw/youtube/youtube-fQmlML9Lay4-conductor-ceo-charlie-holtz-walks-us-through-his-ai-coding-s.md) — Charlie Holtz, YouTube
+[^src45]: [Create and distribute a plugin marketplace — Claude Code docs](../../raw/web/web-create-and-distribute-a-plugin-marketplace-claude-code-docs.md) — Anthropic
+[^src46]: [Todo lists — Claude Code docs](../../raw/web/web-todo-lists-claude-code-docs.md) — Anthropic
+[^src47]: [Orchestrate teams of Claude Code sessions — Claude Code docs](../../raw/web/web-orchestrate-teams-of-claude-code-sessions-claude-code-docs.md) — Anthropic
+[^src48]: [Claude Code has quietly evolved (people haven't noticed)](../../raw/youtube/youtube-4iMZA1omCkM-claude-code-has-quietly-evolved-people-haven-t-noticed.md) — YouTube
+[^src49]: [Anthropic's Claude for Legal — a suite of plugins for legal teams](../../raw/web/web-github-anthropics-claude-for-legal-a-suite-of-plugins-for-le.md) — Anthropic

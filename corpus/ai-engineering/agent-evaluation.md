@@ -27,6 +27,9 @@ sources:
   - path: raw/web/web-claude-swe-bench-performance.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-this-karpathy-sys-report.md
+    channel: notes
+    ingested_at: 2026-06-25
 aliases:
   - agent evaluation
   - LLM evaluation
@@ -209,6 +212,21 @@ Claude 3.5 Sonnet scored **49% on SWE-bench Verified** (GitHub issues from real 
 
 **Implications for eval design** [^src8]: SWE-bench measures concrete repair tasks on real GitHub issues — pass/fail via test suite. This is a high-signal, low-ambiguity eval. Most practitioners should mirror this structure: binary outcomes tied to executable criteria, not rubric-based scoring.
 
+## Fit checklist for autonomous agent loops (autoresearch)
+
+When evaluating whether a task is suitable for a fully autonomous overnight agent loop — with the agent scoring its own output — three conditions must hold [^src9]:
+
+**Must-haves**:
+1. **Objective score** — the quality metric can be computed programmatically without human judgment in the loop. "Come up with the funniest joke — how do you measure funny? You need that objective measure."
+2. **Fast feedback loop** — each experiment completes in minutes, not hours, so the agent can run many iterations overnight.
+3. **AI write access** — the agent can modify the asset being optimized.
+
+**Nice-to-haves**: high feedback volume, cheap to fail (experiments are reversible), consistent measuring stick (scorer doesn't drift across runs).
+
+This checklist comes from Karpathy's `autoresearch` repo practice and is directly applicable to deciding whether a custom eval can run headlessly. If all three must-haves hold, the agent loop is self-sustaining; if the score is subjective, a human must be in the loop (which breaks the overnight compounding pattern).
+
+See also: [[ai-engineering/compound-engineering|Compound Engineering]] §Autoresearch for the 3-file system (instructions / asset / scoring file) that implements this pattern.
+
 ## See also
 
 - [[ai-engineering/langsmith|LangSmith]] — platform that implements these patterns
@@ -228,3 +246,4 @@ Claude 3.5 Sonnet scored **49% on SWE-bench Verified** (GitHub issues from real 
 [^src6]: [SWE-bench Multilingual — Anthropic](../../raw/_inbox/web-swe-bench-multilingual.md)
 [^src7]: [Task-Completion Time Horizons of Frontier AI Models](../../raw/web/task-completion-time-horizons-of-frontier-ai-models.md) — METR, metr.org
 [^src8]: [Claude on SWE-bench Verified — Anthropic blog](../../raw/web/web-claude-swe-bench-performance.md) — Anthropic
+[^src9]: [This "Karpathy System" could 701x your AI Workflows — autoresearch fit checklist](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-this-karpathy-sys-report.md) — YouTube (processed report)

@@ -27,6 +27,12 @@ sources:
   - path: raw/web/web-web-search-tool.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-V2qjnBDZZ7A-playwright-cli-vs-mcp-server-which-is-actually-better-for-cl.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/web/web-code-execution-tool.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - tool use
   - function calling
@@ -170,6 +176,24 @@ The Files API allows pre-uploading files (PDFs, images, text, datasets) once and
 - Only files created by skills or code execution can be downloaded; uploaded files cannot [^src6]
 - Available on Claude API, Claude Platform on AWS, Microsoft Foundry — not on Bedrock or Vertex AI [^src6]
 
+## CLI vs MCP server: browser tool token trade-offs
+
+A direct comparison using Playwright CLI vs Playwright MCP server illuminates a general pattern [^src9]:
+
+| Dimension | CLI (bash skill) | MCP server |
+|---|---|---|
+| Token overhead | **~68 tokens** (skill loads tool descriptions on demand) | **~3.6K tokens** (all tool definitions pre-loaded at session start) |
+| Tool completeness | All tools available by default (PDF, tracing, etc.) | Must opt-in to extra tools to avoid context bloat |
+| Execution mode | **Headless** (designed for background agents) | **Headed** by default (good for visual debugging) |
+| Portability | Terminal-only | Any runtime that supports the JS runtime; works in browser, desktop, mobile |
+| Human scripting | Can be wrapped in bash scripts for human and agent use | More programmatic API |
+
+**Key insight** [^src9]: the MCP protocol loads all tool descriptions into context at session start, even if most tools are never used. A CLI skill loads descriptions only when the skill is invoked. For frequently used browser tools (web scraping, E2E tests), the CLI pattern can save significant context per session.
+
+**Why MCP is still preferred for agentic loops** [^src9]: when the agent needs to run in environments beyond the terminal (browser, desktop app, mobile automation), MCP's standard protocol is more portable. The CLI wins on context economy in terminal-only coding agent use cases.
+
+**If token minimization is the goal** [^src9]: neither Playwright CLI nor Playwright MCP is optimal — Steel's browser uses Playwright under the hood but wraps it in a Rust CLI, reducing token overhead further.
+
 ## Relationship to context engineering
 
 Tool results are one of the four context components injected into an agent's context window after each call. See [[ai-engineering/context-engineering|Context Engineering]].
@@ -189,3 +213,4 @@ Tool results are one of the four context components injected into an agent's con
 [^src6]: [Files API — Claude Platform docs](../../raw/web/web-files-api.md) — Anthropic
 [^src7]: [Bash tool — Anthropic docs](../../raw/web/web-bash-tool.md) — Anthropic
 [^src8]: [Web search tool — Anthropic docs](../../raw/web/web-web-search-tool.md) — Anthropic
+[^src9]: [Playwright CLI vs MCP Server: Which is Actually BETTER for Claude Code?](../../raw/youtube/youtube-V2qjnBDZZ7A-playwright-cli-vs-mcp-server-which-is-actually-better-for-cl.md) — Better Stack, YouTube

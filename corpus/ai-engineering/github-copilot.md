@@ -6,6 +6,9 @@ sources:
   - path: raw/web/agent-evolution-master-github-copilot-agent-mode-community-d.md
     channel: web
     ingested_at: 2026-06-19
+  - path: raw/github/github-cassidoo-brainstorm-buddy-extension.md
+    channel: github
+    ingested_at: 2026-06-25
 aliases:
   - GitHub Copilot
   - Copilot Agent Mode
@@ -55,6 +58,17 @@ The source is a GitHub community discussion; a practitioner comment tempers the 
 
 > Source caveat: this is a vendor learning-campaign announcement plus user comments, not an independent technical evaluation — treat the capability claims as GitHub's framing and the limitations as anecdotal field reports.
 
+## Extensions as vertical Copilot plugins (brainstorm-buddy)
+
+`brainstorm-buddy-extension` (cassidoo, ★30) is a Copilot Chat extension that illustrates the Copilot extension ecosystem [^src2]:
+
+- **Invoked via `@brainstorm-buddy-extension`** in Copilot Chat (VS Code)
+- **Purpose**: Socratic brainstorming — the extension asks questions to help the user think through ideas, deliberately not giving answers. Functions as "rubber duck debugging" for design and ideation
+- **Voice-first UX**: pairs with the VS Code Speech extension to enable microphone input — ideas flow better verbally than by typing
+- **Based on Brainstory** (a prior standalone product by cassidoo) but built into the Copilot extension framework
+
+The key pattern: a Copilot extension is a chat participant with a `@handle` in Copilot Chat that can be invoked for domain-specific workflows. This is the same pattern that Claude for Legal uses for skill bundles — but in the Copilot ecosystem instead of Claude Code's [^src2].
+
 ## Related
 
 - [[ai-engineering/agentic-coding|Agentic Coding]] — the conductor→orchestrator framing where Copilot is an orchestration-tier tool; the verification bottleneck
@@ -67,3 +81,4 @@ The source is a GitHub community discussion; a practitioner comment tempers the 
 ---
 
 [^src1]: [Agent Evolution: Master GitHub Copilot Agent Mode (GitHub community discussion #158675)](../../raw/web/agent-evolution-master-github-copilot-agent-mode-community-d.md)
+[^src2]: [cassidoo/brainstorm-buddy-extension — Brainstorming extension for GitHub Copilot](../../raw/github/github-cassidoo-brainstorm-buddy-extension.md) — cassidoo, GitHub

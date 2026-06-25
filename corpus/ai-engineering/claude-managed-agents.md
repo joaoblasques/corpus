@@ -69,6 +69,12 @@ sources:
   - path: raw/web/web-self-hosted-sandboxes.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/web/web-build-a-claude-managed-agent-with-vercel-sandbox-vercel-know.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/web/web-set-up-claude-managed-agents-cloudflare-sandbox-sdk-docs.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - Claude Managed Agents
   - Managed Agents
@@ -340,6 +346,50 @@ Managed Agents supports running tool execution on the customer's own infrastruct
 - **MCP tunnel alternative** — instead of polling, expose tools as an MCP server and connect via tunnel; same model-side experience, different implementation
 - **Security benefit**: private data never leaves the customer trust boundary. This directly addresses the [[ai-engineering/agent-security|lethal trifecta]] risk model (private data + untrusted content + exfiltration) — the exfiltration surface shrinks when execution stays inside the customer perimeter [^src19].
 
+## Vercel Sandbox integration (control + compute plane pattern)
+
+Vercel Sandbox is the execution layer for CMA when tool execution must reach private infrastructure or handle per-customer credentials [^src20].
+
+**Brain/Hands architecture** [^src20]:
+- Anthropic hosts the **brain**: Claude, the tool-calling loop, skills, and memory.
+- Vercel provides the **hands**: a Next.js control plane (webhook handler) + ephemeral Vercel Sandbox microVMs (tool execution).
+
+**Two-plane pattern** [^src20]:
+1. **Control plane** (Vercel Function): receives `session.status_run_started` webhooks from Anthropic; spawns one Vercel Sandbox per session.
+2. **Compute plane** (Vercel Sandbox): the spawned VM attaches to the session's event stream, executes tool calls (`run_shell`, `read_file`, etc.), posts results back, and exits when the session ends.
+
+**Credential brokering at the firewall** [^src20]: the environment key never enters the VM. Vercel Sandbox injects credentials on outbound requests scoped to the current session via a network policy: `outbound calls to /v1/sessions/<sessionId>/...` get the `Authorization: Bearer <key>` header injected at the firewall; any other destination gets no auth and is rejected. `console.log(process.env)` inside the sandbox reveals nothing — the key isn't in the process environment.
+
+**Snapshot prebuilding** [^src20]: installing the Anthropic SDK on every sandbox spawn would add latency. The pattern is to build one snapshot with the runner + SDK pre-installed; every subsequent sandbox boots from that snapshot with no install step. Rebuild whenever `sandbox/runner.ts` or the SDK version changes.
+
+**When to use Vercel Sandbox** [^src20]:
+- Tools need to reach internal databases, private APIs, or services not publicly accessible.
+- SaaS context: per-customer credentials must be injected at the firewall, not passed as env vars (preventing sandbox code from reading them).
+- Egress control: a domain allowlist prevents exfiltration of private data processed by the agent.
+
+## Cloudflare Sandbox integration (MicroVM + Dynamic Workers)
+
+Cloudflare provides a self-managed environment for CMA where the agent loop runs on Anthropic while execution infrastructure runs in the customer's Cloudflare account [^src21].
+
+**Two sandbox backends** [^src21]:
+- **MicroVM (Containers)**: a full Linux environment with bash and arbitrary processes. Use for complex multi-step tool execution requiring a real OS.
+- **Dynamic Workers (isolates)**: cold-start in milliseconds, a fraction of a container session's cost. Use for lightweight, fast tool execution.
+
+**Capabilities exposed** [^src21]:
+
+| Capability | Description |
+|---|---|
+| Private service connectivity | Connect to internal services over Workers VPC and Mesh without public internet exposure |
+| Egress control | Per-session egress policy: inject credentials into outbound requests, restrict to specific domains, write proxy middleware |
+| Agent Email | Each session gets its own email address via Cloudflare Email Service |
+| Browser Run tools | Headless browsers with session recordings for audit trail |
+| Custom tools | Add tools by editing `src/tools/custom-tools.ts` — no additional infrastructure required |
+| Dashboard | Built-in UI for managing agents, viewing sessions, logs, and SSH into MicroVM sandboxes |
+
+**Deployment model** [^src21]: open-source template — fork the repo, deploy to Cloudflare, customize. The control plane is a Workers-based webhook handler. When Anthropic sends `session.status_run_started`, the control plane assigns the session a sandbox (MicroVM or isolate per agent configuration), routes outbound traffic through a per-session egress policy, and persists state across session sleeps.
+
+**When to choose Cloudflare** [^src21]: when you need Cloudflare binding access (R2, D1, KV, Vectorize, Queues), per-agent sandbox type selection (isolate vs MicroVM), or the agent must interact with the browser (Browser Run tools). Daytona is better for long-running stateful sandboxes; Vercel is better for TypeScript-native teams needing low-latency egress to AWS workloads.
+
 ## See also
 
 - [[ai-engineering/mcp|MCP]] — agents connect to external systems via MCP; Vaults handle OAuth credentials per session
@@ -370,3 +420,5 @@ Managed Agents supports running tool execution on the customer's own infrastruct
 [^src17]: [Multiagent sessions — Managed Agents API docs](../../raw/web/web-multiagent-sessions.md) — Anthropic
 [^src18]: [24/7 Claude Agents and Routines — Scheduling Deep Dive](../../raw/youtube/youtube-ehg4fhydTgs-how-to-build-24-7-claude-agents-easy.md) — YouTube
 [^src19]: [Self-hosted sandboxes for Managed Agents](../../raw/web/web-self-hosted-sandboxes.md) — Anthropic
+[^src20]: [Build a Claude Managed Agent with Vercel Sandbox](../../raw/web/web-build-a-claude-managed-agent-with-vercel-sandbox-vercel-know.md) — Vercel Knowledge Base
+[^src21]: [Set up Claude Managed Agents · Cloudflare Sandbox SDK docs](../../raw/web/web-set-up-claude-managed-agents-cloudflare-sandbox-sdk-docs.md) — Cloudflare

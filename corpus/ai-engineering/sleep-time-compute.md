@@ -6,11 +6,17 @@ sources:
   - path: raw/web/sleep-time-compute-beyond-inference-scaling-at-test-time.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/web/sleep-time-compute.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - sleep-time compute
   - offline compute
   - pre-compute inference
   - dreaming compute
+  - MemGPT 2.0
+  - Letta sleep-time agents
+  - primary agent sleep-time agent
 tags:
   - corpus/ai-engineering
   - concept
@@ -57,6 +63,22 @@ The paper includes a case study applying sleep-time compute to a realistic softw
 
 This connects to the [[ai-engineering/claude-managed-agents|Claude Managed Agents]] "dreaming" concept — agents consolidating memory and pre-computing context during idle periods rather than only on user demand.
 
+## MemGPT 2.0 / Letta implementation
+
+Letta (the team behind MemGPT) shipped sleep-time agents as part of Letta 0.7.0 [^src2]. Key design:
+
+**Two-agent architecture** [^src2]: when you create a sleep-time-enabled agent, Letta creates two agents under the hood:
+- **Primary agent** — handles user interactions; has tools for search and recall memory, but **no tools to edit its core in-context memory block**.
+- **Sleep-time agent** — runs asynchronously during idle periods; has write access to the primary agent's core memory and its own in-context memory. It reorganizes, consolidates, and improves the learned context without blocking the primary agent.
+
+The separation solves MemGPT 1.0's bundling problem: in MemGPT, memory management and conversation happened in a single agent, causing latency during interactions and messy incremental memories. Offloading memory management to the sleep-time agent makes memory formation clean and continuous [^src2].
+
+**Configurable frequencies** [^src2]: sleep-time agents can be configured to run at different frequencies (higher = more tokens, better learned context). Because Letta is model-agnostic, primary and sleep-time agents can use different models — the recommendation is a fast model (e.g. gpt-4o-mini) for the primary agent and a stronger, slower model (e.g. gpt-4.1 or Sonnet 3.7) for the sleep-time agent, since the sleep-time agent is latency-unconstrained.
+
+**Anytime memory writes** [^src2]: the sleep-time agent modifies primary agent memory in an "anytime" fashion — the primary agent can read from memory at any point without waiting for the sleep-time agent to finish its reasoning. This decouples the two timelines cleanly.
+
+**Document analysis application** [^src2]: upload a large document; the sleep-time agent parses it in the background, writing key findings into the primary agent's memory. By the time the user asks a question, the document is already digested and retrievable at test time.
+
 ## Relationship to test-time scaling
 
 Sleep-time compute is positioned as **complementary** to test-time scaling, not a replacement [^src1]. The paper is titled "Beyond Inference Scaling at Test-Time" — the argument is that the community has focused almost exclusively on what happens *during* a user query, and sleep-time compute opens a second axis of scaling: what the model does *between* queries.
@@ -80,3 +102,4 @@ Comparison:
 ---
 
 [^src1]: [Sleep-time Compute: Beyond Inference Scaling at Test-time (arXiv:2504.13171)](../../raw/web/sleep-time-compute-beyond-inference-scaling-at-test-time.md)
+[^src2]: [MemGPT 2.0: Sleep-time Agents in Letta](../../raw/web/sleep-time-compute.md) — Letta blog

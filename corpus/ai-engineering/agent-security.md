@@ -60,6 +60,12 @@ sources:
   - path: raw/web/web-self-hosted-sandboxes.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/web/web-build-a-claude-managed-agent-with-vercel-sandbox-vercel-know.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/web/web-set-up-claude-managed-agents-cloudflare-sandbox-sdk-docs.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - prompt injection
   - LLM security
@@ -310,6 +316,23 @@ Architecture [^src18]:
 
 The self-hosted model means: the model (at Anthropic) decides what to do; the execution (tools, file writes, API calls) happens on the customer's infrastructure. Private data is accessed only from within the customer's trust boundary [^src18].
 
+## Credential brokering at the firewall level
+
+When agents handle per-customer credentials (API keys, OAuth tokens), passing them as environment variables inside the sandbox is insecure: any code in the sandbox can read them via `process.env`. Two documented patterns eliminate this attack surface [^src19][^src20]:
+
+**Vercel Sandbox network policy** [^src19]:
+- The credential is never set in the sandbox environment.
+- A network policy on the sandbox intercepts outbound HTTP requests matching specific URL patterns (`/v1/sessions/<sessionId>/...`) and injects the `Authorization: Bearer <key>` header at the network layer.
+- `console.log(process.env)` inside the sandbox shows no credential.
+- Requests to non-matching URLs are rejected by default (deny-all firewall).
+
+**Cloudflare egress policy** [^src20]:
+- Per-session egress proxy injects credentials into outbound requests without the agent code ever receiving them.
+- Custom proxy middleware can apply domain allowlists, log outbound calls, and block exfiltration paths.
+- The control plane (Workers) configures the policy per session at the webhook stage.
+
+**Why this matters for security**: the credential brokering pattern eliminates one limb of the lethal trifecta (§ above) — even if the agent is successfully prompt-injected and executes malicious code, the injected code cannot extract credentials by reading environment variables or process state. The credentials only exist on the network wire, scoped to specific endpoints.
+
 ## See also
 
 - [[ai-engineering/structured-outputs|Structured Outputs]] — output-control layer; reliability prerequisite for security
@@ -342,4 +365,5 @@ The self-hosted model means: the model (at Anthropic) decides what to do; the ex
 [^src16]: [Use Claude Cowork safely — Claude Help Center](../../raw/web/web-use-claude-cowork-safely-claude-help-center.md) — Anthropic
 [^src17]: [Full Guide: Build an AI Second Brain (Cole Medin)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-full-guide-build-report.md) — Cole Medin, YouTube (processed report)
 [^src18]: [Self-hosted sandboxes for Managed Agents](../../raw/web/web-self-hosted-sandboxes.md) — Anthropic
-[^src17]: [Claude Cowork Skills overview (YouTube)](../../raw/youtube/youtube-P4rv9RSM1IE.md) — skills security risk section
+[^src19]: [Build a Claude Managed Agent with Vercel Sandbox](../../raw/web/web-build-a-claude-managed-agent-with-vercel-sandbox-vercel-know.md) — Vercel Knowledge Base
+[^src20]: [Set up Claude Managed Agents · Cloudflare Sandbox SDK docs](../../raw/web/web-set-up-claude-managed-agents-cloudflare-sandbox-sdk-docs.md) — Cloudflare

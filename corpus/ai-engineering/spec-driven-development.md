@@ -9,12 +9,32 @@ sources:
   - path: raw/_inbox/email-2026-06-14-claude-code-built-my-website-9-steps.md
     channel: email
     ingested_at: 2026-06-24
+  - path: raw/youtube/youtube-14RP8liACqo-how-senior-engineers-actually-build-with-ai-in-2026-build-a.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-9dKA2hq4vf0-how-senior-engineers-actually-build-with-ai-in-2026-build-a.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-full-walkthrough-report.md
+    channel: notes
+    ingested_at: 2026-06-25
 aliases:
   - spec-driven development
   - spec-first
   - spec-kit
   - SDD
   - specification-driven development
+  - six-file context system
+  - nine context files
+  - PRD-driven workflow
+  - Smart Zone Dumb Zone
+  - grill-me
+  - /grill-me
+  - write-a-prd
+  - prd-to-issues
+  - Ralph loop
+  - AFK multi-phase
+  - HITL multi-phase
 tags:
   - corpus/ai-engineering
   - concept
@@ -81,6 +101,60 @@ The key discipline: all spec artifacts (copy, design direction) must be approved
 
 This extends the GitHub Spec Kit Constitution→Specify→Plan→Tasks→Implement→Validate loop (§ above) to the content and design layer, making spec-driven development accessible to non-engineers building their own sites.
 
+## Six-file context system (JavaScript Mastery)
+
+A pre-build documentation set that the agent reads before writing any code, giving it "complete knowledge of what you're building" [^src3]. The six files live in a `context/` folder at project root:
+
+| File | Purpose |
+|---|---|
+| **Project overview** | What the product is, who it's for, core flows, what's out of scope |
+| **Architecture** | Tech stack, layer boundaries, invariants the codebase must never break |
+| **Code standards** | TypeScript/framework conventions; keeps output consistent across the build |
+| **AI workflow rules** | How to scope work, what to do when a decision is needed |
+| **UI context** | Design tokens, component conventions; keeps UI coherent across sessions |
+| **Progress tracker** | Current phase, what's in progress, what's complete, architectural decisions — the only file that updates constantly |
+
+The progress tracker is what most developers skip and most need: at the start of any new session, the agent reads it and knows exactly where the build left off, "no re-explaining needed" [^src3].
+
+Key distinction [^src3]: "vibe coding focuses on the outcome — you describe what you want, let the agent run, and react to whatever comes out. Spec-driven keeps the thinking with you and gives the agent a system to execute against. You stay the architect; the agent becomes the implementation engine."
+
+The six-file system generates output from a planning conversation with a general-purpose AI (ChatGPT/Claude/Gemini), not from a blank page.
+
+## Nine-file extended system (JavaScript Mastery v2)
+
+An expanded context system for larger builds [^src4]:
+
+1. Product overview (what/who/flows/out-of-scope)
+2. Architecture
+3. Folder structure
+4. Code standards
+5. UI rules
+6. Design tokens
+7. Library-specific patterns (with MCP-fetched examples)
+8. Build plan
+9. Living progress tracker
+
+The `AGENTS.md` file ties these together: it loads context routing rules at session start, pointing the agent to each file and explaining when to consult it [^src4].
+
+## PRD-driven workflow and context hygiene (Matt Pocock)
+
+A full end-to-end spec-to-agent pipeline [^src5]:
+
+1. **`/grill-me`** — relentless one-question-at-a-time interview that resolves every branch of a plan's decision tree before any code is written. "Interview the user until reaching shared understanding." The skill provides a recommended answer per question and explores the codebase itself when it can.
+2. **`/write-a-prd`** — produce a PRD from the interview output
+3. **`/prd-to-issues`** — convert the PRD into a Kanban board (one card per scoped unit)
+4. **AFK agent** — run the issue board unattended
+
+**Context hygiene**: the key ongoing discipline is keeping every task in the model's **Smart Zone** — the context window portion before the model begins to degrade. The tipping point is approximately 40% used / ~100K tokens [^src5]. Two tools:
+- **Clearing context**: reset to empty (lossy, but every phase runs fresh and smart)
+- **Compacting context**: summarize and continue (retains gist, costs fidelity)
+
+**Four escalating autonomy patterns** [^src5]:
+1. Single task in Smart Zone
+2. **HITL multi-phase**: human kicks off each phase manually, clearing context between
+3. **AFK multi-phase**: phases run in a loop without human kicks
+4. **Ralph**: agent improvises the plan and runs continuously — "if you let the agent improvise, you end up with Ralph"
+
 ## See also
 
 - [[ai-engineering/agentic-coding|Agentic Coding]] — the coding-agent context this sits in
@@ -94,3 +168,6 @@ This extends the GitHub Spec Kit Constitution→Specify→Plan→Tasks→Impleme
 
 [^src1]: [Claude Max Plan Is Not What You Think (The Code newsletter)](../../raw/email/email-2026-06-16-claude-max-plan-is-not-what-you-think.md) — referencing Apoorv Gupta/Microsoft spec-driven development post, GitHub spec-kit, Böckeler/martinfowler.com
 [^src2]: [Claude Code built my website (9 steps)](../../raw/_inbox/email-2026-06-14-claude-code-built-my-website-9-steps.md) — Charlie Hills
+[^src3]: [How Senior Engineers Actually Build With AI (Ghost AI build — six-file system)](../../raw/youtube/youtube-14RP8liACqo-how-senior-engineers-actually-build-with-ai-in-2026-build-a.md) — JavaScript Mastery, YouTube
+[^src4]: [How Senior Engineers Actually Build With AI (Job Pilot build — nine files + five skills)](../../raw/youtube/youtube-9dKA2hq4vf0-how-senior-engineers-actually-build-with-ai-in-2026-build-a.md) — JavaScript Mastery, YouTube
+[^src5]: [Full Walkthrough: Workflow for AI Coding — Matt Pocock](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-full-walkthrough-report.md) — Matt Pocock, AI Hero (conference talk notes report)

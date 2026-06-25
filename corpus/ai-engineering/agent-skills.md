@@ -93,6 +93,12 @@ sources:
   - path: raw/github/github-zazencodes-agent-skills.md
     channel: github
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-9dKA2hq4vf0-how-senior-engineers-actually-build-with-ai-in-2026-build-a.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-full-walkthrough-report.md
+    channel: notes
+    ingested_at: 2026-06-25
   - path: raw/youtube/youtube-zzo33HUOfxI-anthropic-just-dropped-claude-for-small-businesses-31-skills.md
     channel: youtube
     ingested_at: 2026-06-25
@@ -642,6 +648,36 @@ The Superpowers plugin (community marketplace, ~89K★ at time of research) wrap
 
 The savings come from: structured task decomposition reducing rework; review skills catching errors before expensive downstream consequences; and explicit planning reducing wandering [^src33].
 
+## Five-skill project workflow (JavaScript Mastery)
+
+A set of five open-source skills used together to prevent agent drift across a multi-session build [^src35]:
+
+| Skill | When to invoke | What it does |
+|---|---|---|
+| **`/architect`** | Before any complex feature | Reads context files, asks focused questions one at a time, surfaces unmade decisions, produces a plan |
+| **`/remember`** | End of every session | Summarizes what was done; updates `PROGRESS.md` and `MEMORY.md` so the next session resumes without re-explaining |
+| **`/review`** | After implementing complex features | Returns issues by severity (Critical / Important / Minor); never auto-fixes, keeps human in control |
+| **`/recover`** | When something breaks | Diagnoses whether a bug is targeted (fixable), context-polluted (needs `/compact`), or assumption-rooted (needs re-spec) |
+| **`/imprint`** | After UI implementation | Captures design decisions and component patterns; ensures UI stays consistent across sessions |
+
+**Full build loop** [^src35]: write nine context files → run `/architect` before each complex feature → implement → `/imprint` for UI, `/review` for complex logic → `/remember` at end of each session → `/recover` when broken. "Context makes sure the agent knows your system; the skills make sure every session is focused, every feature is reviewed, and nothing gets lost between conversations."
+
+## `/grill-me` interview skill (Matt Pocock)
+
+A relentless one-question-at-a-time interview that resolves every branch of a plan's decision tree **before any code is written** [^src36]. From the SKILL.md description: "Interview the user relentlessly about a plan or design until reaching shared understanding, resolving each branch of the decision tree."
+
+Key behaviors [^src36]:
+- Asks numbered questions one at a time (Q1, Q2…), never batches
+- Provides a recommended answer per question ("My recommendation: (a)…")
+- When it can find the answer itself by reading the codebase, it does so instead of asking
+- Terminates when the entire decision tree is resolved — however many questions that takes
+
+The skill is used with the PRD workflow: `/grill-me` → resolve the design → `/write-a-prd` → `/prd-to-issues` → AFK agent. The key insight: "Any risk of entering the 'dumb zone' during this Q&A?" (audience question) — the interview is short enough (typically 5–15 focused questions) to stay in Smart Zone, while the resulting PRD keeps every downstream agent phase in Smart Zone too.
+
+## Claude for Legal — skills as plugin (Anthropic)
+
+Anthropic's reference plugin suite for legal workflows ships 12+ practice-area skills ("due diligence", "contract review", "deposition prep", etc.), each connecting via MCP to Ironclad, DocuSign, iManage, Everlaw, CourtListener, and other legal platforms [^src37]. This demonstrates the skills-as-plugin-bundle pattern: install once, gain a domain-complete skill library tied to specific tool integrations — same pattern as the Compound Engineering plugin (§ Claude for Legal above).
+
 ## See also
 
 - [[ai-engineering/context-window-management|Context Window Management]] — why a lean window matters; sub-agents
@@ -691,3 +727,6 @@ The savings come from: structured task decomposition reducing rework; review ski
 [^src31]: [Don't Build Agents, Build Skills Instead — Barry Zhang & Mahesh Murag](../../raw/youtube/youtube-CEvIs9y1uog-don-t-build-agents-build-skills-instead-barry-zhang-mahesh-m.md) — Anthropic Developer Conference, YouTube
 [^src32]: [Full Walkthrough: Writing & Using Skills — Nick Nisi & Zach Prosser](../../raw/youtube/youtube-pFsfax19yOM-full-walkthrough-writing-using-skills-nick-nisi-and-zack-pro.md) — WorkOS (Nick Nisi & Zach Prosser), YouTube
 [^src33]: [This One Plugin Just 10x'd Claude Code (Superpowers)](../../raw/youtube/youtube-4XqVR6xI6Kw-this-one-plugin-just-10xd-claude-code.md) — YouTube
+[^src35]: [How Senior Engineers Actually Build With AI — Job Pilot (nine files + five skills)](../../raw/youtube/youtube-9dKA2hq4vf0-how-senior-engineers-actually-build-with-ai-in-2026-build-a.md) — JavaScript Mastery, YouTube
+[^src36]: [Full Walkthrough: Workflow for AI Coding — Matt Pocock (grill-me skill)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-full-walkthrough-report.md) — Matt Pocock, AI Hero (conference talk notes report)
+[^src37]: [Claude for Legal — Anthropic plugin suite for legal workflows](../../raw/web/web-github-anthropics-claude-for-legal-a-suite-of-plugins-for-le.md) — Anthropic, GitHub

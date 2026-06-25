@@ -12,6 +12,9 @@ sources:
   - path: raw/notes/notes-clippings-loop-engineering.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-full-walkthrough-report.md
+    channel: notes
+    ingested_at: 2026-06-25
 aliases:
   - Ralph
   - Ralph technique
@@ -117,5 +120,6 @@ Cross-reference: Boris Cherny (head of Claude Code): "I don't prompt Claude anym
 [^src1]: [Ralph Wiggum as a "software engineer"](../../raw/web/ralph-wiggum-as-a-software-engineer.md)
 [^src2]: [Long-running Agents](../../raw/web/long-running-agents.md)
 [^src3]: [Loop Engineering](../../raw/notes/notes-clippings-loop-engineering.md) — Addy Osmani
+[^src4]: [Full Walkthrough: Workflow for AI Coding — Matt Pocock](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-full-walkthrough-report.md) — Matt Pocock, AI Hero (conference talk); introduces the four-pattern escalating-autonomy spectrum (single task → HITL → AFK → Ralph) and the `/grill-me` skill for pre-build interview
 </content>
 </invoke>

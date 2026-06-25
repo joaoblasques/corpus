@@ -36,6 +36,9 @@ sources:
   - path: raw/youtube/youtube-9ToOfgZ4qqQ-i-stopped-hitting-claude-code-usage-limits-here-s-how.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/web/web-how-claude-remembers-your-project-claude-code-docs.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - CLAUDE.md
   - AGENTS.md
@@ -168,6 +171,33 @@ Jay's breakdown of the karpathy-skills CLAUDE.md (the most starred public `CLAUD
 
 The 43K stars (making it the most-copied instruction file in the ecosystem) reflect that these four principles are legible, transferable, and don't require any specific codebase — they work across any project.
 
+## Official memory system (auto memory + CLAUDE.md dual modes)
+
+Claude Code has two complementary memory systems, both loaded at session start [^src10]:
+
+| System | Who writes it | What it contains | Load behavior |
+|---|---|---|---|
+| **CLAUDE.md files** | You (human) | Instructions and rules | Full file loaded every session |
+| **Auto memory** (MEMORY.md) | Claude | Learnings and patterns Claude discovers | First 200 lines or 25KB at session start; topic files on demand |
+
+**Auto memory storage** [^src10]: `~/.claude/projects/<project-path>/memory/`. Derived from the git repository root, so all worktrees share one auto memory directory. Machine-local only — not synced across machines or cloud environments.
+
+**MEMORY.md structure** [^src10]: acts as an index — the first 200 lines (or 25KB) load at session start. Claude keeps MEMORY.md concise by moving detailed notes into separate topic files (e.g. `debugging.md`, `patterns.md`). Topic files are not loaded at startup; Claude reads them on demand with its standard file tools. The `/memory` command in a session shows all loaded CLAUDE.md files and allows toggling auto memory.
+
+**Path-scoped rules** (`.claude/rules/`) [^src10]: a directory of markdown files that load conditionally:
+- Files without `paths:` frontmatter load every session (same priority as `.claude/CLAUDE.md`).
+- Files with `paths: ["**/*.ts"]` frontmatter load only when Claude works with matching files — reducing context noise and saving tokens.
+- `~/.claude/rules/` applies personal rules to every project on the machine.
+- Supports symlinks for sharing rule sets across projects.
+
+**AGENTS.md compatibility** [^src10]: Claude Code reads `CLAUDE.md`, not `AGENTS.md`. To support both Claude and other agents from one file, create a `CLAUDE.md` that `@AGENTS.md`-imports the shared file, then adds Claude-specific instructions below.
+
+**`claudeMdExcludes`** setting [^src10]: in large monorepos where ancestor CLAUDE.md files from other teams are unwanted, add their paths or glob patterns to `claudeMdExcludes` in `.claude/settings.local.json`. Managed policy CLAUDE.md files cannot be excluded.
+
+**HTML comments** as maintainer notes [^src10]: block-level HTML comments (`<!-- maintainer notes -->`) in CLAUDE.md are stripped before injection into Claude's context — useful for notes to human maintainers that don't consume tokens. Comments inside code blocks are preserved.
+
+**What CLAUDE.md is vs. what it isn't** [^src10]: "CLAUDE.md content is delivered as a user message after the system prompt, not as part of the system prompt itself." This means it's advisory, not enforced. For guaranteed behavior (blocking specific tool calls), use `PreToolUse` hooks instead of CLAUDE.md rules.
+
 ## Root CLAUDE.md size discipline
 
 The practitioner consensus on root CLAUDE.md size: **keep it under 300 lines** [^src9]. Above that threshold:
@@ -195,4 +225,4 @@ The preferred pattern: root `CLAUDE.md` contains only critical constraints, buil
 [^src7]: [The Karpathy CLAUDE.md File That 43,000 Developers Installed](../../raw/youtube/d8BGxfW3Vj4-the-karpathy-claude-md-file-that-43-000-developers-installed.md) — Jay E, YouTube
 [^src8]: [The Karpathy Claude.md Breakdown](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-the-karpathy-clau-report.md) — Jay, YouTube (processed report)
 [^src9]: [I Stopped Hitting Claude Code Usage Limits — Here's How](../../raw/youtube/youtube-9ToOfgZ4qqQ-i-stopped-hitting-claude-code-usage-limits-here-s-how.md) — Brad, YouTube
-[^src8]: [Claude Code + Karpathy's Obsidian = New Meta](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-claude-code-karpa-report.md) — YouTube (notes report)
+[^src10]: [How Claude remembers your project — Claude Code docs](../../raw/web/web-how-claude-remembers-your-project-claude-code-docs.md) — Anthropic

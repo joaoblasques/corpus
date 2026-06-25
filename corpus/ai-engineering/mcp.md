@@ -69,6 +69,15 @@ sources:
   - path: raw/github/github-wonderwhy-er-desktopcommandermcp.md
     channel: github
     ingested_at: 2026-06-25
+  - path: raw/github/github-googleapis-mcp-toolbox.md
+    channel: github
+    ingested_at: 2026-06-25
+  - path: raw/github/github-punkpeye-awesome-mcp-servers.md
+    channel: github
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-V2qjnBDZZ7A-playwright-cli-vs-mcp-server-which-is-actually-better-for-cl.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - MCP
   - Model Context Protocol
@@ -385,6 +394,26 @@ DesktopCommanderMCP (★6,196) expands beyond the earlier terminal-control descr
 - **Token efficiency**: `fileWriteLineLimit` (default 50) forces incremental edits — smaller diffs, fewer lost tokens at context boundaries.
 - **Distribution**: one install works across Claude Desktop, Cursor, Windsurf, VS Code Claude Code, Codex, OpenClaw.
 
+## MCP Toolbox for Databases (googleapis/mcp-toolbox)
+
+**MCP Toolbox for Databases** (Google, `googleapis/mcp-toolbox-for-databases`, ★15,684, Go) is an open-source MCP server purpose-built for database access from LLM agents [^src24]. It handles connection pooling, authentication, and query sandboxing so agents can query production databases without bespoke infrastructure.
+
+**Supported databases** [^src24]: BigQuery, PostgreSQL, MySQL, MongoDB, AlloyDB, Spanner, Cloud SQL, Neo4j, and more (extensible via plugin).
+
+**Key design decisions** [^src24]:
+- **Managed connection pool** — the server holds persistent connections; agents make tool calls rather than managing DB sessions.
+- **Auth separation** — credentials are scoped to the MCP server, never passed through the agent prompt. The agent authenticates to the MCP server; the server authenticates to the database.
+- **Toolset definition via YAML** — queries and operations are declared as named tools in a YAML config; the LLM sees only what the config exposes. Enforces the "group tools around intent" principle at the data layer.
+- **Production-tested**: used by Google teams to power data-access agents on internal codebases [^src24].
+
+MCP Toolbox is the database-layer complement to WrenAI (semantic layer, text-to-SQL) — see [[ai-engineering/rag|RAG § WrenAI]] for the semantic layer discussion.
+
+## Awesome MCP Servers (punkpeye/awesome-mcp-servers)
+
+`punkpeye/awesome-mcp-servers` (★89,588) is the most-starred curated directory of MCP servers as of mid-2026 [^src25]. It functions as the community's de facto index for discovering production-ready MCP integrations. The star count signals that MCP server discovery — not just MCP itself — is a high-demand developer need.
+
+Use this when evaluating whether a service has an existing MCP server before building from scratch. The directory is updated by community PRs and covers: databases, dev tools, cloud providers, communication platforms, file systems, browser automation, data analytics, and more [^src25].
+
 ## See also
 
 - [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] — MCP is the coordination layer for multi-agent architectures
@@ -421,3 +450,6 @@ DesktopCommanderMCP (★6,196) expands beyond the earlier terminal-control descr
 [^src21]: [Connectors overview — Claude.ai Documentation](../../raw/web/web-connectors-overview-claude-ai-documentation.md) — Anthropic
 [^src22]: [Use connectors to extend Claude's capabilities](../../raw/web/web-use-connectors-to-extend-claude-s-capabilities-claude-help-c.md) — Anthropic help center
 [^src23]: [DesktopCommanderMCP — GitHub ★6196](../../raw/github/github-wonderwhy-er-desktopcommandermcp.md) — wonderwhy-er
+[^src24]: [googleapis/mcp-toolbox-for-databases — MCP server for databases (★15,684)](../../raw/github/github-googleapis-mcp-toolbox.md) — Google, GitHub
+[^src25]: [punkpeye/awesome-mcp-servers — curated MCP server directory (★89,588)](../../raw/github/github-punkpeye-awesome-mcp-servers.md) — punkpeye, GitHub
+[^src26]: [Playwright CLI vs MCP Server — token comparison](../../raw/youtube/youtube-V2qjnBDZZ7A-playwright-cli-vs-mcp-server-which-is-actually-better-for-cl.md) — Better Stack, YouTube; 68-token CLI vs 3.6K-token MCP server comparison; see [[ai-engineering/tool-calling|Tool Calling]] for full analysis

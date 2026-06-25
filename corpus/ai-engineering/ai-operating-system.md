@@ -54,6 +54,15 @@ sources:
   - path: raw/youtube/youtube-kwSVtQ7dziU-skill-issue-andrej-karpathy-on-code-agents-autoresearch-and.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-pfPi04pIfaw-claude-code-agentic-os-unstoppable.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-h0HYpONXgjk-stop-using-obsidian-this-simple-second-brain-setup-actually.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-DTCyvo6cC54-every-level-of-a-claude-second-brain-explained.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - AI OS
   - AIOS

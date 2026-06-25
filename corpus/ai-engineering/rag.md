@@ -33,6 +33,12 @@ sources:
   - path: raw/github/github-canner-wrenai-give-ai-agents-the-context-to-query-bus.md
     channel: github
     ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-karpathy-s-obsidi-report.md
+    channel: notes
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-pfPi04pIfaw-claude-code-agentic-os-unstoppable.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - RAG
   - retrieval-augmented generation
@@ -273,6 +279,25 @@ LangExtract addresses a core RAG failure mode: when extraction is used to popula
 
 The core insight: text-to-SQL LLMs fail not because they can't write SQL, but because they don't know what the business's columns mean. WrenAI gives the agent a structured vocabulary [^src10].
 
+## Karpathy's Obsidian file-system-as-RAG (no vectors)
+
+A practitioner-discovered pattern: use a structured Markdown file hierarchy that Claude Code can navigate directly, eliminating the need for a vector database or retrieval pipeline [^src11]:
+
+**Why it works**: Claude Code's file-browsing tools (list, read, grep) are sufficient for a corpus under thousands of documents. The `_master-index.md` narrows the search space in 2–3 tool calls instead of grepping everything.
+
+**Structure** [^src11]:
+- `raw/` — staging area for ingested articles, papers, GitHub repos (source files, unmodified)
+- `wiki/` — LLM-generated knowledge pages indexed by a `_master-index.md` and per-subdomain index files
+- Each wiki subdomain (`ai-agents/`, `rag-systems/`) has its own `index.md` listing all pages
+
+**Traversal path** [^src11]: vault → `wiki/_master-index.md` → appropriate subdomain `index.md` → specific page. The master index is the entry point; without it, the agent would have to search the entire vault.
+
+**CLAUDE.md as the schema** [^src11]: a single `claude.md` (or `CLAUDE.md`) encodes the traversal rules and note format (Wikilinks, front-matter schema) so the agent never re-derives conventions and navigation is token-efficient.
+
+**Scale verdict** [^src11]: for solo operators and small teams under a few thousand documents, this approach is lightweight, essentially free, and good enough. True RAG (vector databases, embedding pipelines) only wins at the scale of millions of documents. "Just start with Obsidian and graduate to LightRAG/true RAG only if you clearly outgrow it."
+
+This is the Karpathy RAG pattern implemented as a personal knowledge corpus — the same principle as [[ai-engineering/agent-memory|Agent Memory]] §LLM wiki pattern but focused on answering document-level factual queries.
+
 ## See also
 
 - [[ai-engineering/embeddings|Embeddings]] — the dense vectors RAG retrieves over; their limits (exact-token loss, no time, disconnected facts) drive hybrid search, temporal filters, and GraphRAG
@@ -295,3 +320,4 @@ The core insight: text-to-SQL LLMs fail not because they can't write SQL, but be
 [^src8]: [The-Pocket/PocketFlow-Tutorial-Codebase-Knowledge (12K★)](../../raw/github/the-pocket-pocketflow-tutorial-codebase-knowledge.md) — The-Pocket, GitHub
 [^src9]: [google/langextract — Structured extraction with source grounding (★36K)](../../raw/github/github-google-langextract.md) — Google, GitHub
 [^src10]: [Canner/WrenAI — Open context layer for AI agents querying business data](../../raw/github/github-canner-wrenai-give-ai-agents-the-context-to-query-bus.md) — Canner, GitHub
+[^src11]: [Karpathy's Obsidian RAG + Claude Code = CHEAT CODE (notes report)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-karpathy-s-obsidi-report.md) — Chase AI, YouTube (processed report)

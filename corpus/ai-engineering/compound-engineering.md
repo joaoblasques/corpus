@@ -15,6 +15,9 @@ sources:
   - path: raw/web/web-my-ai-had-already-fixed-the-code-before-i-saw-it.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-this-karpathy-sys-report.md
+    channel: notes
+    ingested_at: 2026-06-25
 aliases:
   - compound engineering
   - compound knowledge
@@ -22,6 +25,11 @@ aliases:
   - plan-work-review-compound
   - compounding engineering
   - self-improving development systems
+  - autoresearch
+  - evolutionary loop
+  - fit checklist
+  - overnight compounding
+  - 3-file system
 tags:
   - corpus/ai-engineering
   - concept
@@ -108,6 +116,32 @@ Every.to's Cora (AI-enabled email assistant) team practices this as a first prin
 
 "Typical AI engineering is about short-term gains. You prompt, it codes, you ship. Then you start over. Compounding engineering is about building systems with memory, where every pull request teaches the system, every bug becomes a permanent lesson, and every code review updates the defaults." [^src4]
 
+## Autoresearch: overnight evolutionary compounding (Karpathy)
+
+Karpathy's `autoresearch` repo (~630 lines on GitHub, 85K+ stars) implements the minimal form of overnight compounding: an AI agent mutates an asset, scores it, keeps winners, discards losers, and repeats on ~5-minute loops while the human sleeps [^src5].
+
+**Three-file system** [^src5]:
+| File | Owner | Purpose |
+|---|---|---|
+| `program.md` (instructions) | Human-locked | Specifies the goal and constraints; never modified by the agent |
+| Asset file | AI-editable | The thing being improved: code, email copy, ad text, etc. |
+| Scoring file | AI-locked | Defines how variants are measured; must be objective and computable |
+
+**Key principle**: "The bottleneck no longer is compute. It is your program.md — the instructions you're giving your agent." (Gary Tan) [^src5]
+
+**Fit checklist — 3 must-haves** [^src5]:
+1. **Objective score** — there must be a measurable signal the AI can compute without human judgment in the loop
+2. **Fast feedback loop** — each experiment must complete fast enough for many iterations overnight (minutes, not hours)
+3. **AI write access** — the agent must be able to modify the asset being optimized
+
+**3 nice-to-haves** [^src5]: high feedback volume, cheap to fail (experiments are reversible), consistent measuring stick (the scorer doesn't drift across runs).
+
+**Real examples** [^src5]: Toby Lütke (Shopify CEO) woke to +19% after 8 hours / 37 experiments; four days later, the Liquid templating codebase was 53% faster with 61% fewer object allocations. The same 3-file structure applies to: website speed, cold-email subject-line optimization, Facebook ad copy, and any domain with an objective scoring function.
+
+**Why "fit checklist" matters**: the hard constraint is the objective score. "Come up with the funniest joke — how do you measure funny? You need that objective measure for AI to score it without a human in the loop." Without it, autoresearch doesn't work [^src5].
+
+This is the raw evolutionary-loop core of the compound-engineering idea — the Every.to loop (§ above) adds human curation and AGENTS.md capture; autoresearch adds full overnight autonomy and an explicit scoring function instead.
+
 ## See also
 
 - [[ai-engineering/agentic-coding|Agentic Coding]] — the broader orchestration discipline; compound engineering is its learning-loop layer
@@ -123,3 +157,4 @@ Every.to's Cora (AI-enabled email assistant) team practices this as a first prin
 [^src2]: [EveryInc/compound-engineering-plugin (GitHub)](../../raw/web/github-everyinc-compound-engineering-plugin-official-compoun.md) — EveryInc
 [^src3]: [The Agent That Saved My Brain](../../raw/_inbox/web-the-agent-that-saved-my-brain.md) — Austin Tedesco, Every
 [^src4]: [My AI Had Already Fixed the Code Before I Saw It](../../raw/web/web-my-ai-had-already-fixed-the-code-before-i-saw-it.md) — Every.to
+[^src5]: [This "Karpathy System" could 701x your AI Workflows — autoresearch](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-this-karpathy-sys-report.md) — YouTube (processed report); covers autoresearch 3-file system, fit checklist, Toby Lütke result

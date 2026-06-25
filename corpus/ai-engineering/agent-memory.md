@@ -87,6 +87,15 @@ sources:
   - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-full-guide-build-report.md
     channel: notes
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-4iMZA1omCkM-claude-code-has-quietly-evolved-people-haven-t-noticed.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-DTCyvo6cC54-every-level-of-a-claude-second-brain-explained.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-h0HYpONXgjk-stop-using-obsidian-this-simple-second-brain-setup-actually.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - agent memory
   - memory
@@ -528,3 +537,6 @@ The three-file split separates concerns: `SOUL.md` is authored once and rarely c
 [^src24]: [The Definitive Guide to Setting Up Your AI Second Brain](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-the-definitive-gu-report.md) — YouTube (processed report)
 [^src25]: [It's Cognitive Uploading, Not Offloading — NotebookLM / Steven Johnson](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-it-s-cognitive-up-report.md) — YouTube (processed report)
 [^src26]: [Full Guide: Build an AI Second Brain (Cole Medin)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-full-guide-build-report.md) — Cole Medin, YouTube (processed report)
+[^src27]: [Claude Code Has Quietly Evolved (People Haven't Noticed)](../../raw/youtube/youtube-4iMZA1omCkM-claude-code-has-quietly-evolved-people-haven-t-noticed.md) — Simon Scrapes, YouTube; covers the 3-function memory framing (storage/injection/recall) and the memsarch + GBrain stack
+[^src28]: [Every Level of a Claude Second Brain Explained (full video)](../../raw/youtube/youtube-DTCyvo6cC54-every-level-of-a-claude-second-brain-explained.md) — Nate Herk, YouTube; primary source for §"Five levels of AI second brain"
+[^src29]: [Stop Using Obsidian: Simple Second Brain (full video)](../../raw/youtube/youtube-h0HYpONXgjk-stop-using-obsidian-this-simple-second-brain-setup-actually.md) — Chris Ashby, YouTube; primary source for §Simple Brain pattern

@@ -30,6 +30,12 @@ sources:
   - path: raw/github/crewaiinc-crewai-examples.md
     channel: github
     ingested_at: 2026-06-25
+  - path: raw/web/web-when-to-use-multi-agent-systems-and-when-not-to-claude.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/web/web-orchestrate-teams-of-claude-code-sessions-claude-code-docs.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - multi-agent
   - multi-agent system
@@ -46,7 +52,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-07
-updated: 2026-06-24
+updated: 2026-06-25
 ---
 
 # Multi-Agent Systems
@@ -224,6 +230,22 @@ The `description` field is what the orchestrator uses to decide when to delegate
 - **Foreground vs background**: agents can run in the background while you continue working.
 - **Model overrides**: each agent can be assigned a different model (e.g. planner on Opus, worker on Sonnet).
 
+## When to use multi-agent systems (Anthropic guidance)
+
+Anthropic identifies three core justifications for adding agents to a system [^src10]:
+
+1. **Context pollution** — a single-agent task accumulates too much irrelevant context over many turns, degrading quality. Subagents with bounded context windows solve this: each agent gets only the context it needs for its subtask. Example: a code search agent reads dozens of files; its synthesized finding returns to the main agent, not the raw file contents.
+2. **Parallelization** — independent subtasks can run concurrently, reducing wall-clock time. Example: N unit tests written in parallel, or N files analyzed simultaneously.
+3. **Specialization** — tasks require different expertise, models, or permission scopes. Example: a planning agent uses Opus 4.8 (deeper reasoning); an execution agent uses Sonnet 4.6 (faster, cheaper); a verification agent gets read-only permissions.
+
+**Token cost trade-off** [^src10]: multi-agent systems use 3–10× more tokens than a single-agent approach for the same task. The additional cost is justified only when the quality or speed gains justify it — context pollution, true parallelism, or specialization requirements must be present.
+
+**Context-centric vs problem-centric decomposition** [^src10]: the standard instinct is to decompose by problem domain ("have a research agent and a writing agent"). A more principled approach is to decompose by context: "what information does each phase need, and would co-mingling that information hurt quality?" This produces tighter agent boundaries with less irrelevant context leakage.
+
+**Verification subagent pattern** [^src10]: add an explicit verification agent whose only job is to check the primary agent's output against criteria. The key property: "the verifier runs in its own context window, so it is not influenced by the reasoning the primary agent used to produce the output." This is the Generator-Verifier pattern (§ Five coordination patterns) applied as a default component. Without it, the primary agent tends to verify its own work using the same reasoning that produced it — the self-preferential bias that [[ai-engineering/claude-code|Dynamic Workflows]] was designed to counter.
+
+**Tool Search Tool (85% token reduction)** [^src10]: loading all tool definitions upfront costs disproportionate tokens when only a fraction of tools are used per turn. The Tool Search Tool loads tool definitions on demand: the model describes what capability it needs; the Tool Search Tool returns matching tool definitions; the model calls the tool. In Anthropic's testing this reduces tool-definition tokens by 85%+ while maintaining high selection accuracy. See [[ai-engineering/mcp|MCP]] (§ Client-side context efficiency) for the same optimization applied to MCP tool sets.
+
 ## 30-40 parallel task pattern (Notion)
 
 The Notion case study (Eric Liu, PM) documents a production implementation where **30-40 agent tasks run simultaneously** inside Notion's task board [^src8]. The orchestrator pattern: a Notion "ready to start" column triggers individual Claude sessions per task; team members collaborate on shared output in real time. Claude picks up context from connected design system, API docs, and PRDs automatically. "12 hours of prototyping work collapse into about 20 minutes." — This is the orchestrator-subagent pattern (§ above) at production scale, with the orchestrator being the task board state machine rather than a Claude agent itself.
@@ -247,3 +269,4 @@ The Notion case study (Eric Liu, PM) documents a production implementation where
 [^src7]: [pi-subagents — Pi extension for async subagents (GitHub)](../../raw/_inbox/web-github-nicobailon-pi-subagents-pi-extension-for-async-subage.md) — nicobailon
 [^src8]: [Notion Q&A — Claude Managed Agents](../../raw/_inbox/web-notion-q-a-claude-managed-agents-claude-by-anthropic.md) — Eric Liu, Notion PM
 [^src9]: [crewAIInc/crewAI-examples — Official CrewAI workflow examples (6K★)](../../raw/github/crewaiinc-crewai-examples.md) — crewAIInc, GitHub
+[^src10]: [When to use multi-agent systems — and when not to](../../raw/web/web-when-to-use-multi-agent-systems-and-when-not-to-claude.md) — Anthropic

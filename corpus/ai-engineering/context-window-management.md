@@ -24,6 +24,9 @@ sources:
   - path: raw/youtube/youtube-RzLV8sfFdMM-how-to-build-effective-claude-code-agents-in-2026.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-full-walkthrough-report.md
+    channel: notes
+    ingested_at: 2026-06-25
 aliases:
   - context window management
   - context management
@@ -164,6 +167,25 @@ At approximately **250K tokens** context length, Opus 4 series models exhibit a 
 
 Implication: for tasks expected to consume 200K+ tokens, consider earlier context resets, tighter compaction, or subagent offloading to keep each individual context well below 250K [^src6].
 
+## Smart Zone / Dumb Zone as a workflow model
+
+A second framing of context quality degradation, applied to multi-phase workflows rather than single sessions [^src7]:
+
+- **Smart Zone**: the early portion of a context window where output quality is high (~0–40% used, roughly 0–100K tokens for a 256K window)
+- **Dumb Zone**: the later portion where model reasoning deteriorates — output becomes inconsistent, instructions get dropped, accumulated context contradicts earlier decisions
+
+The key discipline: **keep every task small enough to complete before crossing into the Dumb Zone.** This drives the multi-phase plan pattern:
+- **Single task**: fits entirely in Smart Zone — just run it
+- **HITL multi-phase**: split the work into N phases, each in its own Smart Zone window; the human clears context and kicks off each phase
+- **AFK multi-phase**: same as HITL but wrapped in an agent loop — phases run unattended
+- **Ralph**: most autonomous — agent improvises its own plan phases in a continuous loop
+
+**Clearing vs compacting** [^src7]:
+- *Clearing*: reset context to empty between phases. Lossy (session history is gone) but every subsequent phase starts fresh and fully smart.
+- *Compacting*: summarize existing context and continue. Retains semantic gist, but fidelity is lower — some details are compressed away. Better for tasks where prior decisions must carry forward.
+
+The "Smart Zone tipping point" (~40% / ~100K tokens) is a practitioner heuristic, not a hard model boundary — it varies by model, task complexity, and prompt density [^src7].
+
 ## See also
 
 - [[ai-engineering/context-engineering|Context Engineering]] — governs how context is assembled at inference time
@@ -180,3 +202,4 @@ Implication: for tasks expected to consume 200K+ tokens, consider earlier contex
 [^src4]: [Context windows — Claude Platform docs](../../raw/web/web-context-windows.md) — Anthropic
 [^src5]: [I Stopped Hitting Claude Code Usage Limits — Here's How](../../raw/youtube/youtube-9ToOfgZ4qqQ-i-stopped-hitting-claude-code-usage-limits-here-s-how.md) — Brad, YouTube
 [^src6]: [How to Build Effective Claude Code Agents in 2026](../../raw/youtube/youtube-RzLV8sfFdMM-how-to-build-effective-claude-code-agents-in-2026.md) — Cole Medin, YouTube
+[^src7]: [Full Walkthrough: Workflow for AI Coding — Matt Pocock](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-full-walkthrough-report.md) — Matt Pocock, AI Hero (conference talk notes report)
