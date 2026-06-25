@@ -79,6 +79,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [[ai-engineering/pi-agent|Pi Agent]] — entity · draft · open-source minimal coding agent; 4 tools, <1000-token system prompt, TypeScript extensions, session forking, multi-model via OpenRouter/Ollama
 - [[ai-engineering/gemini-cli|Gemini CLI]] — entity · draft · Google's open-source agentic coding CLI; GEMINI.md context file, custom slash commands, MCP extension, memory, checkpointing, headless mode
 - [[ai-engineering/supacode|Supacode]] — entity · draft · macOS agent harness/session manager on LibGhosty; sidebar project management, Git/PR/CI awareness, hooks into Claude Code + Pi, Supacode CLI for agent self-management
+- [[ai-engineering/manus|Manus]] — entity · draft · AI "action engine" (manus.im); sandboxed cloud VM execution, wide research (parallel instances), Browser Operator (Chrome extension for authenticated sites), deliverable output types (spreadsheets/presentations/websites)
 
 ### Syntheses
 - [[ai-engineering/agentic-coding|Agentic Coding]] — synthesis · draft · **sub-hub** · coding-agent orchestration; conductor→orchestrator, AX, the verification bottleneck

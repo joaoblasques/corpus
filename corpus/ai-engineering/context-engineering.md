@@ -36,6 +36,9 @@ sources:
   - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-stop-learning-obs-report.md
     channel: notes
     ingested_at: 2026-06-25
+  - path: raw/github/github-incomestreamsurfer-context-engineering-intro.md
+    channel: github
+    ingested_at: 2026-06-25
 aliases:
   - context engineering
   - context window engineering
@@ -43,6 +46,11 @@ aliases:
   - semantic layer
   - executable context
   - ktx
+  - PRP
+  - product requirements prompt
+  - INITIAL.md
+  - generate-prp
+  - execute-prp
 tags:
   - corpus/ai-engineering
   - concept
@@ -193,6 +201,18 @@ Applied to Obsidian: telling Claude "build me a table that tracks X" is context 
 - `writing-good-claude-md-context-engineering` — CLAUDE.md as a context engineering artifact
 - `The C.R.A.F.T.E.D. Prompt Framework for Software Engineers` — prompt framework built on context engineering principles
 
+## PRP workflow: INITIAL.md → /generate-prp → /execute-prp
+
+A concrete, lightweight context engineering workflow centered on the **Product Requirements Prompt (PRP)** [^src12]:
+
+1. **`INITIAL.md`** — write the feature request in plain English: what you want, key constraints, and what "done" looks like
+2. **`/generate-prp INITIAL.md`** — Claude reads the initial request, researches the codebase, and produces a comprehensive PRP (detailed implementation plan, edge cases, test criteria) saved to `PRPs/<feature-name>.md`
+3. **`/execute-prp PRPs/<feature-name>.md`** — Claude reads the PRP as its context spec and implements the feature end-to-end
+
+The PRP separates **problem definition** (your job) from **implementation** (Claude's job). "Context engineering is 10× better than prompt engineering and 100× better than vibe coding" — the PRP is the artifact that compresses your intent into a context Claude can act on without ambiguity [^src12].
+
+Standard project-level context files in this template: `CLAUDE.md` (project-specific guidelines), `examples/` folder (reference code examples — "highly recommended"), `PRPs/` folder (one PRP per feature). The `examples/` folder is especially important because it gives Claude concrete patterns to follow rather than relying on general training [^src12].
+
 ## See also
 
 - [[ai-engineering/README|AI Engineering hub]]
@@ -216,3 +236,4 @@ Applied to Obsidian: telling Claude "build me a table that tracks X" is context 
 [^src6]: [ktx — Make analytics context usable by agents (docs)](../../raw/web/how-ingestion-works.md) — docs.kaelio.com
 [^src10]: [Context Engineering in 29 Minutes: Complete Course](../../raw/youtube/-h9VVJIqtvA-context-engineering-in-29-minutes-complete-course.md) — Marina Wyss (Twitch), YouTube
 [^src11]: [Stop Learning Obsidian](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-stop-learning-obs-report.md) — YouTube (notes report)
+[^src12]: [IncomeStreamSurfer/context-engineering-intro (★267) — PRP workflow template](../../raw/github/github-incomestreamsurfer-context-engineering-intro.md) — IncomeStreamSurfer, GitHub

@@ -39,6 +39,12 @@ sources:
   - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-karpathy-s-llm-wi-report.md
     channel: notes
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-Xg55nTrbYYY-full-claude-tutorial-for-beginners-in-2026-full-course.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/github/github-cladius-agentic-ai.md
+    channel: github
+    ingested_at: 2026-06-25
 aliases:
   - learning AI
   - learning AI engineering
@@ -51,7 +57,7 @@ tags:
   - corpus/ai-engineering
   - synthesis
 created: 2026-06-12
-updated: 2026-06-15
+updated: 2026-06-25
 ---
 
 # Learning AI Engineering
@@ -214,9 +220,15 @@ This is the authoritative Anthropic tutorial — interactive, runnable, and regu
 
 **12-hour Claude Code course** (YouTube) — comprehensive free tutorial covering the full Claude Code lifecycle: setup, project workflow, subagents, hooks, and production patterns [^src10]. Good companion to the interactive Anthropic tutorial above.
 
+**Full Claude beginner course (Productive Dude, 2026)** — walkthrough of every Claude surface area for new users [^src13]: account setup, privacy settings (data-training toggle), web vs. desktop app distinction, projects vs. folders, knowledge base attachment, voice mode, capabilities (memory, tool access, artifacts/visuals), Projects with system instructions, Claude Code, Claude Cowork. Practical orientation for someone starting from zero, useful companion to the 7-continent mental map at [[ai-engineering/claude-cowork|Claude Cowork]].
+
+**cladius/agentic-ai** (★73) — hands-on jumpstart repo for Agentic AI frameworks [^src14]: frameworks covered: ADK, Agno, Bedrock, LangFlow, LangGraph. Approach: single "5-level sample problem" solved across all frameworks. Good for comparing agentic framework APIs against a common problem set.
+
 [^src7]: [The Top 5 Skills for AI Engineering: Curiosity](../../raw/email/email-2026-06-15-the-top-5-skills-for-ai-engineering-curiosity.md)
 [^src8]: [anthropics/prompt-eng-tutorial — GitHub ★36,609](../../raw/github/github-anthropics-prompt-eng-tutorial.md) — Anthropic
 [^src9]: [DataTalksClub/ai-dev-tools-zoomcamp — GitHub ★1,129](../../raw/github/github-datatalksclub-ai-dev-tools-zoomcamp.md) — DataTalksClub
 [^src10]: [12-hour Claude Code course (YouTube)](../../raw/youtube/youtube-05aY2LRIC3s.md)
 [^src11]: [zazencodes/ai-engineer-roadmap — Jupyter notebooks for AI engineering (★10)](../../raw/github/github-zazencodes-ai-engineer-roadmap-notebooks.md) — zazencodes, GitHub
 [^src12]: [Karpathy's LLM Wiki Setup Guide](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-karpathy-s-llm-wi-report.md) — Teacher's Tech, YouTube (processed report)
+[^src13]: [FULL Claude Tutorial For Beginners in 2026! (FULL COURSE)](../../raw/youtube/youtube-Xg55nTrbYYY-full-claude-tutorial-for-beginners-in-2026-full-course.md) — Productive Dude, YouTube
+[^src14]: [cladius/agentic-ai — agentic AI jumpstart (★73)](../../raw/github/github-cladius-agentic-ai.md) — cladius, GitHub; ADK, Agno, Bedrock, LangFlow, LangGraph

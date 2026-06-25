@@ -21,17 +21,24 @@ sources:
   - path: raw/_inbox/web-claude-enterprise-analytics-api-reference-guide-claude-help.md
     channel: web
     ingested_at: 2026-06-24
+  - path: raw/web/web-advisor-tool.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - Claude API
   - claude-api
   - Anthropic API
   - Messages API
   - anthropic SDK
+  - advisor tool
+  - advisor_20260301
+  - executor model
+  - usage.iterations
 tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-12
-updated: 2026-06-24
+updated: 2026-06-25
 ---
 
 # Claude API
@@ -107,28 +114,48 @@ Beyond the three basics, the SDK supports **streaming** (`stream=True`) for chat
 
 ## Advisor tool (beta)
 
-The **advisor tool** formalizes the advisor strategy as a server-side primitive: declare it in the tools list and Sonnet/Haiku know to invoke it when they need guidance [^src5]. The handoff happens inside a single `/v1/messages` request — no extra round-trips or context management needed.
+The **advisor tool** is a server-side primitive: declare it in `tools` and the executor model consults a higher-intelligence advisor model mid-generation for strategic guidance [^src5][^src7]. The advisor reads the full conversation, produces a plan or course correction (typically 400–700 text tokens, 1,400–1,800 tokens total including thinking), and the executor continues. All this happens inside a single `/v1/messages` request — no extra round-trips needed [^src7].
+
+**Beta activation**: requires header `betas=["advisor-tool-2026-03-01"]` and is available only on the Claude API and Claude Platform on AWS (not Bedrock, Vertex AI, or Foundry) [^src7].
 
 ```python
-response = client.messages.create(
-    model="claude-sonnet-4-6",  # executor
-    tools=[
-        {
-            "type": "advisor_20260301",
-            "name": "advisor",
-            "model": "claude-opus-4-6",
-            "max_uses": 3,
-        },
-        # ... your other tools
-    ],
+response = client.beta.messages.create(
+    model="claude-sonnet-4-6",   # executor
+    betas=["advisor-tool-2026-03-01"],
+    tools=[{
+        "type": "advisor_20260301",
+        "name": "advisor",
+        "model": "claude-opus-4-8",  # advisor
+        "max_uses": 3,               # per-request cap
+        "max_tokens": 2048,          # cap advisor output (min 1024)
+        "caching": {"type": "ephemeral", "ttl": "5m"},  # enable for 3+ advisor calls
+    }],
     messages=[...]
 )
-# Advisor tokens reported separately in the usage block
 ```
 
-**Pricing**: advisor tokens billed at the advisor model's rate; executor tokens at the executor's (lower) rate. Since the advisor generates only a short plan (typically 400–700 tokens) and never calls tools or produces user-facing output, the combined cost stays well below running Opus end-to-end [^src5]. Set `max_uses` to cap advisor calls per request; advisor tokens appear separately in the usage block [^src5].
+**Valid executor/advisor pairs** [^src7]:
+| Executor | Allowed advisors |
+|---|---|
+| Haiku 4.5 | Opus 4.8, Opus 4.7 |
+| Sonnet 4.6 | Opus 4.8, Opus 4.7 |
+| Opus 4.6–4.8 | Opus 4.8, Opus 4.7 |
+| Fable 5 | Fable 5 |
+| Mythos 5 | Mythos 5 |
 
-**Benchmark results** (Anthropic evals) [^src5]:
+The advisor must be at least as capable as the executor; invalid pairs return 400 [^src7].
+
+**Billing via `usage.iterations[]`** [^src7]: top-level `usage` fields reflect executor tokens only. The `iterations` array contains one `{"type":"message"}` entry per executor turn and one `{"type":"advisor_message", "model":"..."}` entry per advisor call — billed at the advisor model's rates. Use `iterations` for cost tracking; don't rely on top-level totals.
+
+**Streaming**: the advisor sub-inference does not stream. The executor's stream pauses while the advisor runs; when done, the full `advisor_tool_result` arrives in a single `content_block_start` event, then executor output resumes [^src7].
+
+**Timing nudge for Haiku** [^src7]: if the Haiku executor hasn't called the advisor in its first turn, append a short reminder user message before turn 2. This raised pass rates +7.5 pp on Haiku coding benchmarks. On Sonnet it had no measurable effect. On Opus it slightly lowered pass rates — don't apply. The nudge fires 74–98% of the time on Haiku/Sonnet; if the executor is already calling reliably, raising `NUDGE_TURN` past the baseline call turn avoids over-nudging.
+
+**Advisor prompt caching**: set `"caching": {"type": "ephemeral", "ttl": "5m"}` on the tool definition to cache the advisor's transcript across calls within a conversation. Breaks even at ~3 advisor calls; enable for long agent loops, keep off for short tasks. Toggling mid-conversation causes cache misses. Note: `clear_thinking` with `keep` ≠ `"all"` shifts the advisor's quoted transcript, causing advisor-side cache misses — set `keep: "all"` to preserve caching [^src7].
+
+**Capping advisor output**: set `max_tokens` on the tool definition (minimum 1024). Starting point: 2048 — reduces mean advisor output ~7× vs unset, with ~0% truncation. At 1024, ~10% of calls truncate. Top-level `max_tokens` applies to executor output only; it never bounds advisor tokens [^src7].
+
+**Benchmark results** (Anthropic evals) [^src5][^src7]:
 - Sonnet + Opus advisor: +2.7 pp on SWE-bench Multilingual vs Sonnet alone; 11.9% cost reduction per task
 - Haiku + Opus advisor on BrowseComp: 41.2% vs Haiku solo 19.7% (more than double); 85% cheaper than Sonnet solo
 
@@ -179,3 +206,4 @@ As of mid-2026, the full Claude Platform is available on AWS under AWS IAM authe
 [^src4]: [Introducing the Claude Platform on AWS](../../raw/notes/notes-clippings-introducing-the-claude-platform-on-aws.md) — Anthropic announcement
 [^src5]: [The advisor strategy: Give Sonnet an intelligence boost with Opus](../../raw/notes/notes-clippings-the-advisor-strategy-give-sonnet-an-intelligence-boost-with.md) — Anthropic
 [^src6]: [Claude Enterprise Analytics API Reference Guide](../../raw/_inbox/web-claude-enterprise-analytics-api-reference-guide-claude-help.md) — Anthropic Help Center
+[^src7]: [Advisor tool — official API docs](../../raw/web/web-advisor-tool.md) — Anthropic platform docs

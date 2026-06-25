@@ -66,12 +66,24 @@ sources:
   - path: raw/youtube/youtube--MbKLZGndfY-agentic-os.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-rRa9td4oe7k-how-i-use-obsidian-claude-cowork-to-run-my-life.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-obsidian-vault-de-report.md
+    channel: notes
+    ingested_at: 2026-06-25
 aliases:
   - AI OS
   - AIOS
   - agentic OS
   - agentic operating system
   - AI operating system
+  - me.md
+  - vault map
+  - skill map
+  - ideaverse
+  - ACE (Atlas Calendar Efforts)
+  - Nick Milo AI OS
 tags:
   - corpus/ai-engineering
   - concept
@@ -174,7 +186,17 @@ Obsidian's CLI lets agents search notes with semantic awareness — tags, frontm
 
 "One thing I keep noticing with AI tooling is that people reach for bigger models before fixing the surrounding system. If your agent has weak memory, poor retrieval, or no useful grounding, a larger model usually just gives you more expensive confusion." [^src9]
 
+**The symbiosis framing** [^src18]: agents and Obsidian complement each other at their respective weak points — "agents don't remember anything, but Obsidian does; Obsidian has no hands to take action, but Claude/Codex can act on the folder structure." The pair addresses each other's deficiencies exactly.
+
 See [[ai-engineering/agent-memory|Agent Memory]] for the full taxonomy of memory tiers.
+
+## Agentic logging: the time audit
+
+Beyond capture, agents can log activities throughout the day — timestamping what you work on as it happens [^src18]. Using Claude hooks, each agent task automatically appends a log entry. The result is an honest accounting of where time goes, built from activity data rather than self-reported estimates. This is described as "a huge productivity unlock" — you can't improve what you don't measure.
+
+The agentic OS as workspace extends further: enabling Obsidian's built-in (disabled-by-default) web viewer turns it into a full workspace, showing dev server output (localhost:3000) alongside notes and the terminal agent. Sidebar web apps (Slack, Telegram, Spotify) can be pinned like browser tabs — creating a unified work environment within Obsidian [^src18].
+
+**Custom plugin pattern** [^src18]: the Obsidian vault can serve as the backend for a custom Obsidian plugin (a mini dashboard app). Built with Codex, using Obsidian notes + a database as the backend. Config-driven, note-backed views — schedule, calendar, metrics snapshots all stored as notes. Core thesis: "don't just collect notes — build systems. Capture → memory → activity logging → dashboards/optics that actually drive decisions."
 
 ## Key gotchas
 
@@ -281,9 +303,30 @@ A 30-minute setup pattern for a production agentic OS using four layers [^src17]
 [^src9]: [I Gave Pi Access to Obsidian And I'm Not Looking Back](../../raw/youtube/youtube-JnQcPzjC6Vo-i-gave-pi-access-to-obsidian-and-i-m-not-looking-back.md) — DevOps Toolbox, YouTube
 [^src10]: [Stop Using Claude Code Without an Agentic OS](../../raw/youtube/Bgxsx8slDEA-stop-using-claude-code-without-an-agentic-os.md) — Chase AI, YouTube
 [^src11]: [How to Build Your Agentic OS with Claude Code (4-Layer Setup)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-how-to-build-your-report.md) — nyndra AI, YouTube (notes report)
+## Nick Milo's 3-layer AI OS (ideaverse + maps + tool)
+
+Nick Milo (Linking Your Thinking) describes a three-layer AIOS designed to be **tool-agnostic** — portable across Claude, Codex, Gemini, or any future AI [^src13]:
+
+**Layer 1 — Ideaverse** (Obsidian): the user's own thinking. ACE folder structure: Atlas (knowledge/ideas/reference), Calendar (time-anchored notes, journals), Efforts (projects, tasks). Plain Markdown files — readable by any tool, owned by the user.
+
+**Layer 2 — Maps and manuals** (the translation layer): three AI-facing documents that let the agent navigate the vault without scanning all notes:
+- **`me.md`**: portable identity file. Tells any AI who the user is, how they think, how to work with them. Lives at the root of the pointed folder. `CLAUDE.md` is a one-liner: "go immediately to me.md." The CLAUDE.md is Claude-specific; me.md is not.
+- **Vault map**: answers "how should AI move through your notes?" — a master table of contents + navigation manual. Lets the agent isolate relevant files and skip the rest (critical when vault = 17K+ notes).
+- **Skill map**: lists what skills exist, what they do, and when to use them. Skills live in the user's own folder (not inside Claude), so they travel with the user to any AI tool.
+
+**Layer 3 — AI tool** (Claude Cowork): the outermost layer — swappable. Point Cowork at the knowledge folder. At session start, fire a prompt: "Read me.md in Ideaverse. Then review the vault map and skill map for relevant context. Confirm you've read, then await instruction." — use a keyboard shortcut (TextExpander) to inject this without retyping [^src13].
+
+**Why tool-agnostic matters** [^src13]: "If Claude goes away tomorrow, I could instantly swap it out with Codex, with an open-source model, with whatever I need. I have all my files, skills, and AI core documents built to go with me." The AI tool is rented; the files are owned.
+
+**AIOS folder**: a separate `AIOS/` folder within the vault for AI-generated content, isolated from first-person notes. "If I'm generating AI content, I want to always be able to quickly isolate it, clear it out when necessary, and that way always keep my thoughts and ideas very clean." [^src13]
+
+**Sample capabilities** [^src13]: morning daily brief (weather, what happened yesterday, open tasks, book momentum, top 2–3 priorities today — generated by a "daily brief" skill pulling from Gmail, calendar, task manager); open note sections with curly brackets for async notes to the AI.
+
 [^src12]: [I Turned Claude Fable Into The Ultimate Second Brain](../../raw/youtube/8QQ_INxAhRs-i-turned-claude-fable-into-the-ultimate-second-brain.md) — Nate Herk, YouTube
+[^src13]: [How I Use Obsidian + Claude Cowork to Run My Life — Nick Milo](../../raw/youtube/youtube-rRa9td4oe7k-how-i-use-obsidian-claude-cowork-to-run-my-life.md) — Nick Milo (Linking Your Thinking), YouTube
 [^src13]: [Claude Code + Karpathy's Obsidian = New Meta](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-claude-code-karpa-report.md) — YouTube (notes report)
 [^src14]: [Stop Using Claude Code Without an Agentic OS (notes report)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-stop-using-claude-report.md) — Chase AI, YouTube (processed report)
 [^src15]: [I Built Karpathy's LLM Wiki in Obsidian (notes report)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-i-built-karpathy-report.md) — Cody Bontecou, YouTube (processed report)
 [^src16]: [Skill Issue: Andrej Karpathy on Code Agents, Auto-Research, and...](../../raw/youtube/youtube-kwSVtQ7dziU-skill-issue-andrej-karpathy-on-code-agents-autoresearch-and.md) — No Priors podcast, YouTube
 [^src17]: [How to Build Your Agentic OS with Claude Code (4-Layer Setup)](../../raw/youtube/youtube--MbKLZGndfY-agentic-os.md) — nyndra AI, YouTube
+[^src18]: [Obsidian Vault Deep Dive! Custom Plugins + Agentic Loops | My Full System](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-obsidian-vault-de-report.md) — YouTube (notes report); Obsidian+agent symbiosis, agentic logging, custom plugin pattern

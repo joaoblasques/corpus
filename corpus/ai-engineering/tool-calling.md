@@ -36,6 +36,9 @@ sources:
   - path: raw/web/web-tool-search-tool.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/web/web-tool-use-with-claude.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - tool use
   - function calling
@@ -215,6 +218,31 @@ The Tool Search Tool enables deferred loading of tools — preventing all tool s
 
 Tool results are one of the four context components injected into an agent's context window after each call. See [[ai-engineering/context-engineering|Context Engineering]].
 
+## Client tools vs server tools (official API overview)
+
+The distinction between where tool code runs is fundamental [^src11]:
+
+**Client tools** (user-defined + Anthropic-schema tools like `bash`, `text_editor`): Claude responds with `stop_reason: "tool_use"` and tool_use blocks; the client application executes the code and sends back a `tool_result`. All execution happens in the user's infrastructure.
+
+**Server tools** (`web_search`, `code_execution`, `web_fetch`, `tool_search`): run on Anthropic's infrastructure; results come back directly in the response without client execution. No round-trip needed.
+
+**Strict tool use** [^src11]: add `strict: true` to tool definitions to ensure Claude's tool calls always match the schema exactly — guaranteed schema conformance at the cost of some flexibility.
+
+**Tool trigger control** [^src11]:
+- Default `tool_choice: {"type": "auto"}` — Claude decides per turn
+- System prompt nudges: "Use the tools to investigate before responding" (increases call rate); "Use your judgment about whether to call a tool" (keeps behavior conservative)
+- Hard guarantee: use the `tool_choice` parameter
+
+**Token cost of tool use** (system prompt overhead per model) [^src11]:
+| Model | `auto`/`none` | `any`/`tool` |
+|---|---|---|
+| Opus 4.8 | 290 tokens | 410 tokens |
+| Opus 4.7 | 675 tokens | 804 tokens |
+| Sonnet 4.6 | 497 tokens | 589 tokens |
+| Haiku 4.5 | 496 tokens | 588 tokens |
+
+These are added on top of normal input/output tokens and apply whenever ≥1 tool is in the `tools` array.
+
 ## See also
 
 - [[ai-engineering/ai-agent|AI Agent]] — tool calling is a core part of the agent loop
@@ -232,3 +260,4 @@ Tool results are one of the four context components injected into an agent's con
 [^src8]: [Web search tool — Anthropic docs](../../raw/web/web-web-search-tool.md) — Anthropic
 [^src9]: [Playwright CLI vs MCP Server: Which is Actually BETTER for Claude Code?](../../raw/youtube/youtube-V2qjnBDZZ7A-playwright-cli-vs-mcp-server-which-is-actually-better-for-cl.md) — Better Stack, YouTube
 [^src10]: [Tool Search Tool — Claude Code docs](../../raw/web/web-tool-search-tool.md) — Anthropic
+[^src11]: [Tool use with Claude — official API docs](../../raw/web/web-tool-use-with-claude.md) — Anthropic

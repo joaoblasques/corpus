@@ -123,6 +123,9 @@ sources:
   - path: raw/web/web-github-anthropics-html-effectiveness-html-effectiveness-exam.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-how-software-engi-report.md
+    channel: notes
+    ingested_at: 2026-06-25
 aliases:
   - agentic coding
   - agentic engineering
@@ -417,6 +420,22 @@ A cross-company survey of 15 senior engineers and engineering leaders surfaced c
 **The first output is a draft, not a deliverable**: Owain Lewis: "The formula: rigorous design + AI implementation + aggressive review + multiple iterations = high-quality output at speed. The trap: no review + first-output acceptance = fast production of technical debt." [^src17]
 
 **AI increases, not decreases, cognitive load**: Vlad Khambir: "AI tools intensify rather than reduce cognitive load. It's like watching YouTube at double speed." The solution: better structure and clearer constraints, not more AI [^src17].
+
+## 2026 adoption survey: who uses coding agents and how
+
+Pragmatic Engineer survey data (mid-2026) shows wide adoption and a sentiment split [^src36]:
+
+**Tool distribution**: Claude Code is the top coding agent; Cursor is catching up; GitHub Copilot remains strong in enterprise. Most developers use 2–4+ tools simultaneously.
+
+**Depth of adoption**: a large cohort reports 70%+ of their work done with AI assistance. This fraction is growing.
+
+**The sentiment split** [^src36]: developers who regularly use coding agents describe themselves as hopeful and optimistic. Non-users skew worried, overwhelmed, and skeptical. "Using the tools is what dissolves the fear" — exposure to agents shifts the emotional valence. The 20–30-year veterans surveyed call 2026 "the biggest change they've ever seen in software engineering."
+
+**The "just doing stuff" value prop** [^src36]: the headline capability that changed practitioner perception is agents operating *autonomously* — not writing code snippets but running FFmpeg compression, deploying Cloud Functions, indexing files, messaging Slack, self-debugging CORS errors in retry loops. "The real value is agents just doing stuff."
+
+**Workflow craft as the differentiator** [^src36]: practitioners cite workflow structure (steering mid-task, cross-agent code review, skills/plugins, pre-commit hooks) as more impactful than choosing a stronger model. Raw model quality is a commodity; workflow design is the leverage.
+
+**Token economy as a discipline** [^src36]: top practitioners maintain minimal `AGENTS.md`/`CLAUDE.md` files, trigger compaction proactively before the "dumb zone" (~50% context), use `gitingest` for codebase context dumps, and downsize images before sending to Opus (reducing input token cost). These are everyday habits, not occasional optimizations.
 
 ## Agentic code review
 
@@ -719,3 +738,4 @@ Key constraint: HTML output works best when the agent writes the whole file at o
 [^src33]: [Local AI Coding: Report](../../raw/notes/notes-local-ai-coding-report.md) — notes report
 [^src34]: [Local Agentic Coding Guide](../../raw/youtube/youtube-hfba9dAT6xE-local-agentic-coding.md) — YouTube
 [^src35]: [The Unreasonable Effectiveness of HTML (gallery)](../../raw/web/web-github-anthropics-html-effectiveness-html-effectiveness-exam.md) — Anthropic gallery
+[^src36]: [How Software Engineers Actually Use Coding Agents in 2026](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-how-software-engi-report.md) — YouTube (processed notes report); Pragmatic Engineer 2026 adoption survey

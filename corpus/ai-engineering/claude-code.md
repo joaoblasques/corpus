@@ -180,6 +180,12 @@ sources:
   - path: raw/youtube/youtube-6amLO7I9xdg-code-with-claude-london-2026-opening-keynote.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/web/web-claude-code-for-enterprise-claude-by-anthropic.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/github/github-shanraisshan-claude-code-best-practice.md
+    channel: github
+    ingested_at: 2026-06-25
 aliases:
   - Claude Code
   - claude-code
@@ -1190,7 +1196,32 @@ At the "Code with Claude London 2026" event (May 2026), Anthropic's leadership s
 - Spotify: background agent reading migration plain-English descriptions, running across a fleet of agents, merging 1,000+ PRs/month, cutting migration time 90%.
 - Binty (foster care software): Claude API gave case workers back hours previously spent on paperwork; cut foster family licensing time by 20 days.
 
+## Enterprise features summary
+
+Claude Code for Enterprise provides [^src53]:
+- **Server managed settings**: configure tool permissions, file access restrictions, and MCP configs centrally — no MDM required
+- **OpenTelemetry monitoring**: export real-time metrics (session activity, token usage, cost) to any observability stack
+- **SCIM + SSO**: Okta, Azure AD, or any SAML 2.0 provider; automated provisioning; seat allocation visibility
+- **BYOK** (Bring Your Own Key): run Claude Code via keys from Amazon Bedrock, Google Vertex AI, or Microsoft Foundry within existing VPC
+- **SOC 2 Type II**, TLS 1.3 in transit, AES-256 at rest
+- **Contribution metrics dashboard**: PRs and committed code written with Claude Code's help, per user
+- **No model training on Enterprise data**: code, conversations, and proprietary information not used to improve models
+
+Team plan includes Claude Code; Enterprise adds SCIM, role-based permissions, custom data retention, and IP allowlisting [^src53].
+
+## Community reference repo: shanraisshan/claude-code-best-practice (★58,744)
+
+The `shanraisshan/claude-code-best-practice` repo ("from vibe coding to agentic engineering") was GitHub Trending #1 as of June 2026 [^src54]. It serves as a comprehensive index of Claude Code features with:
+- Best practices + implementation examples for each feature (subagents, commands, skills, hooks, MCP, plugins, settings, memory, checkpointing, workflows)
+- Boris Cherny's tips and tricks (curated from official Anthropic posts)
+- Orchestration workflow examples
+- Reports on skills for mono-repos and auto-memory
+
+Topics: `agentic-ai`, `agentic-coding`, `agentic-engineering`, `context-engineering`, `vibe-coding`. The repo itself is updated using Claude Code (badge shows last update time).
+
 [^src49]: [Anthropic's Claude for Legal — a suite of plugins for legal teams](../../raw/web/web-github-anthropics-claude-for-legal-a-suite-of-plugins-for-le.md) — Anthropic
 [^src50]: [Common workflows — Claude Code docs](../../raw/web/web-common-workflows-claude-code-docs.md) — Anthropic
 [^src51]: [Create custom subagents — Claude Code docs](../../raw/web/web-create-custom-subagents-claude-code-docs.md) — Anthropic
 [^src52]: [Code with Claude London 2026: Opening Keynote](../../raw/youtube/youtube-6amLO7I9xdg-code-with-claude-london-2026-opening-keynote.md) — Anthropic, YouTube
+[^src53]: [Claude Code for Enterprise — Anthropic](../../raw/web/web-claude-code-for-enterprise-claude-by-anthropic.md) — Anthropic
+[^src54]: [shanraisshan/claude-code-best-practice (★58,744)](../../raw/github/github-shanraisshan-claude-code-best-practice.md) — Shan Raisshan, GitHub

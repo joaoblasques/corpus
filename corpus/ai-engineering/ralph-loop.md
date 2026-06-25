@@ -15,6 +15,9 @@ sources:
   - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-full-walkthrough-report.md
     channel: notes
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-iJVJwmCKW9o-i-guess-we-re-writing-loops-now.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - Ralph
   - Ralph technique
@@ -24,11 +27,15 @@ aliases:
   - while loop agent
   - loop engineering
   - loop design
+  - loop of loops
+  - loops creating loops
+  - PR heartbeat monitor
+  - dynamic sub-loops
 tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-16
-updated: 2026-06-17
+updated: 2026-06-25
 ---
 
 # Ralph Loop
@@ -117,9 +124,39 @@ The practical driver: "Both products [Claude Code and Codex] have all five [buil
 
 Cross-reference: Boris Cherny (head of Claude Code): "I don't prompt Claude anymore. I have loops running that prompt Claude... My job is to write loops" [^src3]. See [[ai-engineering/claude-code|Claude Code]] for routines (the native scheduled-automation primitive) and [[ai-engineering/agent-skills|Agent Skills]] for the skill-building prerequisite.
 
+## Loops creating loops: Theo's dynamic sub-loop architecture
+
+Theo (t3.gg) documents a concrete application where a single master loop dynamically created multi-step sub-loops per-PR rather than following a fixed workflow structure [^src5].
+
+**The problem**: a large refactor required at least three stacked PRs with sequential dependencies. Manually shepherding each through review, addressing code-review bot comments, and stacking the next PR was friction Theo was still doing himself.
+
+**The solution prompt** — the key message that changed his workflow [^src5]:
+> "Would it be possible to make a workflow that: (1) spins up a separate thread to make the PR, (2) spins up another thread to review that PR when it's filed, (3) puts the thread from (1) in a loop reviewing comments until it gets all approvals, and (4) the thread would merge the PR and trigger another one for the next piece."
+
+**The heartbeat monitor pattern** [^src5]: the agent created a "heartbeat" attached to the main orchestration thread that polls every 5–10 minutes. On each wake-up:
+1. Read implementation thread status
+2. Detect filed PRs and new commits (`sha` check)
+3. Spin up a fresh review thread when a new commit is pushed
+4. Send actionable review findings back to the implementation thread
+5. Re-review after fixes are pushed
+6. Pull latest main before creating the next worktree for the next PR
+
+**What happened overnight**: Theo set this off at 2:29 AM and woke up at 6:50 AM with four stacked PRs, reviewed through multiple cycles by code-review bots and an Opus reviewer thread, all merged. "My loops created loops and they did a great job at it" [^src5].
+
+**The key property**: the workflow was *dynamically generated* for the specific problem, not a hardcoded pipeline. "This isn't a hard-coded every time I make a change I spin up one reviewer... This is a dynamic workflow that was created based on the specific needs of this specific problem I was solving" [^src5]. The agent determined what sub-loops the problem required, not the developer.
+
+**Trade-off — cost**: "You will burn many more tokens when you run things in loops like this. And if it's going down the wrong path, it might go down that wrong path for longer... If you're paying API prices, you probably shouldn't be doing loops yet" [^src5]. The pattern is viable on a subscription but expensive on per-token billing.
+
+**Pre-loop advice**: before designing the loop, audit what you currently do between agent turns — run tests, check output, commit, push, file PR, copy review comments back in. "Tell the agent to do that." The discipline: "find where you have to be involved and see what it takes to prompt yourself out of it" [^src5].
+
+**Contrast with the Ralph loop**: Ralph is a static loop — same prompt, same context reload, repeat. Theo's architecture is a *meta-loop* — an orchestrating thread that dynamically instantiates specialized sub-loops shaped by the problem. Neither requires elaborate pre-built agent personas; the agent constructs the work structure dynamically. "The idea of pre-defining personas to go do things in your codebase fundamentally misses the cool part... It's dynamic" [^src5].
+
+See [[ai-engineering/claude-code|Claude Code]] for native loop primitives (`/loop`, `/goal`, `/schedule`) and worktrees that prevent file collisions across parallel threads.
+
 [^src1]: [Ralph Wiggum as a "software engineer"](../../raw/web/ralph-wiggum-as-a-software-engineer.md)
 [^src2]: [Long-running Agents](../../raw/web/long-running-agents.md)
 [^src3]: [Loop Engineering](../../raw/notes/notes-clippings-loop-engineering.md) — Addy Osmani
 [^src4]: [Full Walkthrough: Workflow for AI Coding — Matt Pocock](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-full-walkthrough-report.md) — Matt Pocock, AI Hero (conference talk); introduces the four-pattern escalating-autonomy spectrum (single task → HITL → AFK → Ralph) and the `/grill-me` skill for pre-build interview
+[^src5]: [I guess we're writing loops now? — Theo (t3.gg)](../../raw/youtube/youtube-iJVJwmCKW9o-i-guess-we-re-writing-loops-now.md) — Theo, YouTube
 </content>
 </invoke>

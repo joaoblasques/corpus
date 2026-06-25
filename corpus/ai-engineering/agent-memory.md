@@ -102,6 +102,9 @@ sources:
   - path: raw/youtube/youtube-4iMZA1omCkM-claude-code-has-quietly-evolved-people-haven-t-noticed.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-build-an-ai-secon-report.md
+    channel: notes
+    ingested_at: 2026-06-25
   - path: raw/youtube/youtube-DTCyvo6cC54-every-level-of-a-claude-second-brain-explained.md
     channel: youtube
     ingested_at: 2026-06-25
@@ -297,6 +300,13 @@ A recurring practitioner pattern applies the corpus's own design back to persona
 5. **Schedule** — the health check runs on a cron; no manual trigger needed
 
 The health check is the key mechanism for *self-improvement*: the agent audits its own output, flags staleness and gaps, and proposes updates. "The corpus should compress what sources say, not invent what they don't" [^src11]. The compounding effect: each ingest cycle makes future ingests cheaper (fewer duplicate lookups, richer cross-references) and the health check catches drift before it accumulates [^src11].
+
+**The wiki/CRM/journal triad** [^src34]: one concrete implementation of Karpathy's plan with three wired components:
+- **Wiki/knowledge base** — the hub; AI-generated concept pages extracted from sources; sits at the center
+- **CRM** — people and relationship notes feeding into and from the wiki (query: "where did I meet Matthew Berman again?")
+- **Journal** — the interaction layer; brain-dump a real question and the system answers grounded in vault sources + CRM context + past patterns — "turns a passive dumping ground where info goes to die into an active, compounding thinking partner"
+
+Minimal file skeleton [^src34]: `raw/` (sources, immutable), `wiki/` (AI-generated pages), `agents.md` (plain-English prompts defining ingest/query rules), `index.md`, `log.md`. Obsidian is just the markdown visibility layer — "it's all just prompts at the end of the day." An hourly automation (Codex or Claude Code) processes new `raw/` files, extracts entities/concepts, cross-links Zettelkasten-style, and optionally commits to a private GitHub repo. When a query is answered, the system writes the answer back as a new wiki page + log entry — a self-building loop.
 
 ## Information hierarchy (portable context architecture)
 
@@ -596,3 +606,4 @@ Hermes requires meta-prompting with the `/goal` command to produce useful result
 [^src31]: [AI Second Brain: soul.md + memory.md + daily log (Cole Medin)](../../raw/youtube/youtube-1FiER-40zng-ai-second-brain.md) — Cole Medin, YouTube
 [^src32]: [Obsidian as PKM and agentic backend](../../raw/youtube/youtube-VaGpWWiHXm8-obsidian-agentic-loops.md) — YouTube
 [^src33]: [Hermes Agent: memory wiki + Tailscale](../../raw/youtube/youtube-AQHlyGA2cZM-hermes-use-cases.md) — YouTube
+[^src34]: [Build An AI Second Brain Knowledge Base (Step-By-Step)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-build-an-ai-secon-report.md) — processed notes report; wiki/CRM/journal triad with Karpathy foundation

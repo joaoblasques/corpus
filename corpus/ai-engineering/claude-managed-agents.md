@@ -75,6 +75,9 @@ sources:
   - path: raw/web/web-set-up-claude-managed-agents-cloudflare-sandbox-sdk-docs.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/web/web-github-modal-labs-claude-managed-agents-modal-sandbox-claude.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - Claude Managed Agents
   - Managed Agents
@@ -443,3 +446,4 @@ Amplitude built a Design Agent on Claude Managed Agents + Cloudflare in two days
 [^src21]: [Set up Claude Managed Agents · Cloudflare Sandbox SDK docs](../../raw/web/web-set-up-claude-managed-agents-cloudflare-sandbox-sdk-docs.md) — Cloudflare
 [^src22]: [How We Built a Design Agent at Amplitude with Claude Managed Agents and Cloudflare](../../raw/web/web-how-we-built-a-design-agent-at-amplitude-with-claude-managed.md) — Will Newton, Amplitude
 [^src23]: [Code with Claude London 2026: Opening Keynote](../../raw/youtube/youtube-6amLO7I9xdg-code-with-claude-london-2026-opening-keynote.md) — Anthropic, YouTube
+[^src24]: [modal-labs/claude-managed-agents-modal-sandbox — CLI + Slackbot integration examples](../../raw/web/web-github-modal-labs-claude-managed-agents-modal-sandbox-claude.md) — Modal Labs, GitHub

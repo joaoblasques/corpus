@@ -9,6 +9,9 @@ sources:
   - path: raw/web/prompt-caching.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-6cEQEba0i2A-give-me-10-mins-and-i-ll-save-you-millions-of-claude-tokens.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - prompt caching
   - prefix caching
@@ -16,6 +19,9 @@ aliases:
   - cache-safe forking
   - compaction buffer
   - defer_loading
+  - cache TTL
+  - session handoff skill
+  - model switch cache break
 tags:
   - corpus/ai-engineering
   - concept
@@ -90,6 +96,18 @@ The Anthropic API supports two caching modes [^src2]:
 - 5-minute (default, `"ephemeral"`) — refreshed at no charge each time it's read
 - 1-hour (`"ephemeral"` + `"ttl": "1h"`) — 2× base input token price; longer TTL must come before shorter ones in the same request
 
+**Effective TTL by client context** [^src3]:
+- **Claude subscription (Claude Code CLI/extension)**: 1-hour TTL automatically applied — sessions that go idle for ≥1 hour become fully un-cached on the next message
+- **API direct requests**: 5-minute default; can be explicitly set to 1-hour at 2× cost
+- **Sub-agents / nested model calls**: always 5-minute TTL regardless of subscription plan — every sub-agent call runs as an API call, so cache expires quickly between invocations
+- **Overuse territory (subscription → API billing)**: when the weekly subscription limit is exceeded and usage shifts to per-token API billing, cache TTL drops from 1h to 5m — "very dangerous if you're managing multiple sessions" [^src3]
+
+**Model switch = full cache invalidation** [^src3]: each model has its own cache. Switching with `/model` — or using the `plan_model` setting that swaps Opus (plan mode) for Sonnet (execution) — starts a fresh cache even when the conversation content is identical. "The Opus plan model setting resolves to Opus during plan mode and Sonnet during execution. So each plan toggle is a model switch and starts a fresh cache" [^src3]. The trade-off: plan-mode model switching reduces session-limit cost over time, but it does break caching on each toggle.
+
+**CLAUDE.md edits are safe mid-session** [^src3]: edits to CLAUDE.md during a session don't invalidate the cache until the session is restarted — the edit applies only on next session load.
+
+**Session handoff as `/compact` alternative** [^src3]: rather than compacting (which is lossy and can be slow), practitioners use a session-handoff skill: the skill summarizes the session state, open decisions, and key files; the user copies the summary, runs `/clear`, and pastes it into a fresh session. "It feels like I haven't actually lost anything" while guaranteeing a fresh 1h cache window [^src3].
+
 **Pricing multipliers** (vs base input token price) [^src2]:
 
 | Event | Multiplier |
@@ -118,3 +136,4 @@ The Anthropic API supports two caching modes [^src2]:
 
 [^src1]: [Lessons from building Claude Code: Prompt caching is everything](../../raw/notes/notes-clippings-lessons-from-building-claude-code-prompt-caching-is-everythi.md) — Thariq Shihipar, Anthropic
 [^src2]: [Prompt caching — Anthropic API docs](../../raw/web/prompt-caching.md) — platform.claude.com
+[^src3]: [Give Me 10 Mins and I'll Save You Millions of Claude Tokens](../../raw/youtube/youtube-6cEQEba0i2A-give-me-10-mins-and-i-ll-save-you-millions-of-claude-tokens.md) — Nate Herk, YouTube

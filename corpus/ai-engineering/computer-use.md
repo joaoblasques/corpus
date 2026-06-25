@@ -27,6 +27,9 @@ sources:
   - path: raw/github/magnitudedev-browser-agent.md
     channel: github
     ingested_at: 2026-06-25
+  - path: raw/web/web-introducing-computer-use-a-new-claude-3-5-sonnet-and-claude.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - computer use
   - browser use
@@ -248,6 +251,17 @@ const tasks = await agent.extract('List in progress tasks',
 
 See [[ai-engineering/agentic-coding|Agentic Coding]] for how this fits into the broader ecosystem of browser automation tools.
 
+## Original launch benchmarks (October 2024)
+
+Computer use launched in public beta with Claude 3.5 Sonnet (October 2024) [^src9]:
+
+- **OSWorld** (screenshot-only): Claude 3.5 Sonnet scored **14.9%** — "notably better than the next-best AI system's score of 7.8%." With more steps allowed: **22.0%**
+- **SWE-bench Verified** (concurrent Claude 3.5 Sonnet update): improved from 33.4% to **49.0%**, "scoring higher than all publicly available models — including reasoning models like OpenAI o1-preview"
+- **TAU-bench** (agentic tool use): retail domain 62.6% → **69.2%**; airline domain 36.0% → **46.0%**
+- Claude 3.5 Haiku: **40.6%** on SWE-bench Verified — "outperforming many agents using publicly available state-of-the-art models — including the original Claude 3.5 Sonnet and GPT-4o"
+
+Early partners: Asana, Canva, Cognition, DoorDash, Replit (using computer use to evaluate apps as they're being built for Replit Agent), The Browser Company. GitLab testing found "up to 10% stronger reasoning with no added latency" [^src9].
+
 ## See also
 
 - [[ai-engineering/claude-code|Claude Code]] — Claude Code's auto mode uses a similar classifier approach for permission decisions
@@ -267,3 +281,4 @@ See [[ai-engineering/agentic-coding|Agentic Coding]] for how this fits into the 
 [^src6]: [Desktop application — Claude Code docs](../../raw/_inbox/web-desktop-application-claude-code-docs.md) — Anthropic
 [^src7]: [Computer use tool — Anthropic API docs](../../raw/web/computer-use-tool.md) — docs.anthropic.com
 [^src8]: [magnitudedev/browser-agent — Open-source, vision-first browser agent](../../raw/github/magnitudedev-browser-agent.md) — magnitudedev, GitHub ★4083
+[^src9]: [Introducing computer use, a new Claude 3.5 Sonnet, and Claude 3.5 Haiku](../../raw/web/web-introducing-computer-use-a-new-claude-3-5-sonnet-and-claude.md) — Anthropic (original Oct 2024 launch announcement)

@@ -87,6 +87,21 @@ sources:
   - path: raw/web/web-anthropic-courses.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/github/github-addyosmani-agent-skills.md
+    channel: github
+    ingested_at: 2026-06-25
+  - path: raw/web/web-create-plugins-claude-code-docs.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/web/web-plugins-reference-claude-code-docs.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/web/web-skill-md.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-AfKoqFwC7Ew-the-only-6-skills-you-need-to-10x-your-claude-projects.md
+    channel: youtube
+    ingested_at: 2026-06-25
   - path: raw/github/github-buildermethods-agent-os.md
     channel: github
     ingested_at: 2026-06-25
@@ -137,6 +152,18 @@ aliases:
   - decision ladder
   - Skill Creator
   - Superpowers skill
+  - agent-skills repo
+  - addyosmani agent-skills
+  - plugin
+  - claude plugins
+  - plugin system
+  - SKILL.md frontmatter
+  - ingest source skill
+  - improve system skill
+  - ask the board skill
+  - internal focus group skill
+  - modern engineering skill
+  - web scraper skill
   - GSD skill
   - ClaudeMem skill
   - Context Mode skill
@@ -692,6 +719,99 @@ Six rules for authoring effective skills from Anthropic docs [^src38]:
 5. **Description triggers discovery** — when a skill library grows past ~100 skills, Claude reads descriptions, not contents, to decide which to load. The description must accurately capture when the skill applies or it will be ignored. "This is critical for large libraries where Claude needs to efficiently find the right skill."
 6. **Skills compose via prompts** — one skill can call another by naming it in its instructions. No explicit orchestration required; Claude routes.
 
+## Claude Code plugin system: packaging skills for distribution
+
+The Claude Code **plugin system** is the production packaging layer for skills — a self-contained directory of components (skills, agents, hooks, MCP servers, LSP servers, monitors) with a `.claude-plugin/plugin.json` manifest [^src39].
+
+**Plugin vs standalone configuration** [^src39]:
+
+| Approach | Skill names | Best for |
+|---|---|---|
+| Standalone (`.claude/` dir) | `/hello` | Personal workflows, quick experiments |
+| Plugin (packaged directory) | `/my-plugin:hello` | Sharing with teams, versioned releases, reuse across projects |
+
+Skills inside a plugin are namespaced with the plugin name to prevent conflicts. The `plugin.json` manifest declares `name`, `description`, `version`, `author`, and component paths. The `name` field is both the namespace and the unique identifier [^src39].
+
+**Plugin structure** [^src39]:
+```
+my-plugin/
+├── .claude-plugin/plugin.json    # manifest (optional)
+├── skills/<name>/SKILL.md        # skills
+├── agents/<name>.md              # subagent definitions
+├── hooks/hooks.json              # event handlers
+├── .mcp.json                     # MCP server configs
+├── .lsp.json                     # Language Server Protocol
+├── monitors/monitors.json        # background monitors
+├── output-styles/                # output style definitions
+├── bin/                          # executables added to PATH
+└── settings.json                 # default plugin settings
+```
+
+**Installation scopes**: User (across all projects, `~/.claude/settings.json`), Project (`.claude/settings.json`, shared via git), Local (`.claude/settings.local.json`, gitignored) [^src39].
+
+**Plugin event hooks** — a complete list of lifecycle events plugins can respond to [^src39]:
+`SessionStart`, `UserPromptSubmit`, `PreToolUse`, `PostToolUse`, `PostToolBatch`, `SubagentStart`, `SubagentStop`, `TaskCreated`, `TaskCompleted`, `Stop`, `PreCompact`, `PostCompact`, `FileChanged`, `WorktreeCreate`, `WorktreeRemove`, and more. Hook actions: `command` (shell), `http` (POST), `mcp_tool`, `prompt` (LLM eval), `agent` (agentic verifier).
+
+**Background monitors** — plugins can declare persistent `monitors/monitors.json` entries that run shell commands for the session lifetime, delivering each stdout line to Claude as a notification [^src39]. This enables reactive behavior without requiring Claude to poll.
+
+**Skill-only plugins**: if a plugin has `SKILL.md` at its root and no `skills/` subdirectory, it auto-loads as a single-skill plugin. The `name` frontmatter field sets the invocation name — critical for stable naming in marketplace installs [^src39].
+
+**Anthropic's two public marketplaces** [^src39]:
+- `claude-plugins-official` — Anthropic-curated, auto-registered on first interactive launch
+- `claude-community` — third-party, add with `/plugin marketplace add anthropics/claude-plugins-community`
+
+**Plugin token cost**: `claude plugin details <name>` shows always-on token cost (paid every session) and per-invocation cost per component [^src39].
+
+## Addy Osmani's agent-skills: the SDLC phase mapping (65K★)
+
+Addy Osmani's `agent-skills` repo (65,169★) maps skills to the six SDLC phases with corresponding slash commands [^src40]:
+
+| Phase | Command | Key principle |
+|---|---|---|
+| Define what to build | `/spec` | Spec before code |
+| Plan how to build it | `/plan` | Small, atomic tasks |
+| Build incrementally | `/build` | One slice at a time |
+| Prove it works | `/test` | Tests are proof |
+| Review before merge | `/review` | Improve code health |
+| Audit web performance | `/webperf` | Measure before optimizing |
+| Simplify the code | `/code-simplify` | Clarity over cleverness |
+| Ship to production | `/ship` | Faster is safer |
+
+The key automation: `/build auto` generates the plan and implements every task in a single approved pass — approve the plan once, then the agent runs autonomously through implementation. "Every task is still test-driven and committed individually, and it pauses on failures or risky steps" [^src40].
+
+Skills also activate **automatically based on task type**: designing an API triggers `api-and-interface-design`, building UI triggers `frontend-ui-engineering` [^src40]. This is the description-as-routing-rule principle applied at the framework level.
+
+## Six-skill system for Claude Projects (Austin Marchese)
+
+A practitioner framework of six skills that compound: three to train the system, two to evaluate the work, one to ship it [^src41].
+
+**Training (skills 1–3)**:
+1. **Web scraper** — combines FireCrawl (modern JS pages) + Exa (semantic search) for better data access than Claude's default web search. A *utility skill* that enhances every other skill [^src41].
+2. **Ingest source** — pulls PDFs/links, pre-analyzes concepts, creates a searchable table of contents in the project. Eliminates the blank-slate problem: "Claude knows exactly where to look" [^src41].
+3. **Improve system** — five audit modes: `audit` (scan knowledge base for stale info), `skill review` (review skills + recent chat history), `experience` (incorporate lived experience), `historical review` (extract learnings from past sessions), `foundation` (interview user about setup gaps) [^src41].
+
+**Evaluation (skills 4–5)**:
+4. **Ask the board** — clones expert advisors (e.g. Alex Hormozi for business, Andrew Huberman for health) from their public writing. Each gets a separate agent with its own context and biases. Invoke with `/ask-the-board [question]` [^src41].
+5. **Internal focus group** — clones specific real people (real customers, users, or colleagues) to test final output. "Unlike the board skill (experts for advice), this is asking the actual people who will get the final product." Forces the discipline of knowing who you're building for [^src41].
+
+**Execution (skill 6)**:
+6. **Modern engineering** — five phases: brainstorm → plan → work (execute, verify done) → code review → debug. The Compound Engineering plugin or Superpowers plugin implement similar loops [^src41].
+
+The framework's meta-principle: "AI defaults to solving the immediate thing in front of it as efficiently as possible. It doesn't care about the big picture, which is something you do" — structured skills impose the big-picture discipline [^src41].
+
+## Frontend-design skill (Anthropic official)
+
+Anthropic's `frontend-design` skill (from `github.com/anthropics/skills`) demonstrates how to encode expert design judgment as a skill [^src42]. The skill gives Claude the role of "design lead at a small studio known for giving every client a visual identity that could not be mistaken for anyone else's."
+
+Key design choices encoded in the skill [^src42]:
+- **Two-pass process**: brainstorm a token system (color: 4–6 hex values, type: 2+ roles, layout concept, signature element) → review against brief before building
+- **AI-aesthetic warning**: "AI-generated design clusters around three looks... they are defaults rather than choices" — the skill tells Claude to avoid the warm-cream/terracotta, near-black/acid-green, and broadsheet-dense defaults unless specifically called for
+- **Restraint principle**: "spend boldness in one place; let the signature element be the one memorable thing"
+- **Copy as design material**: explicit instructions for writing voice-appropriate copy, not lorem ipsum
+- **CSS specificity warning**: "be careful of structuring your CSS selector specificities — it's easy to generate CSS classes that cancel each other out"
+
+This skill is a concrete example of encoding aesthetic *judgment* and *constraint* — things Claude could apply generically but doesn't apply consistently without explicit procedural guidance.
+
 ## See also
 
 - [[ai-engineering/context-window-management|Context Window Management]] — why a lean window matters; sub-agents
@@ -745,3 +865,7 @@ Six rules for authoring effective skills from Anthropic docs [^src38]:
 [^src36]: [Full Walkthrough: Workflow for AI Coding — Matt Pocock (grill-me skill)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-full-walkthrough-report.md) — Matt Pocock, AI Hero (conference talk notes report)
 [^src37]: [Claude for Legal — Anthropic plugin suite for legal workflows](../../raw/web/web-github-anthropics-claude-for-legal-a-suite-of-plugins-for-le.md) — Anthropic, GitHub
 [^src38]: [Skill authoring best practices — Claude Code docs](../../raw/web/web-skill-authoring-best-practices.md) — Anthropic
+[^src39]: [Create Plugins — Claude Code docs](../../raw/web/web-create-plugins-claude-code-docs.md) + [Plugins Reference — Claude Code docs](../../raw/web/web-plugins-reference-claude-code-docs.md) — Anthropic
+[^src40]: [addyosmani/agent-skills — SDLC skill framework (65K★)](../../raw/github/github-addyosmani-agent-skills.md) — Addy Osmani, GitHub
+[^src41]: [The Only 6 Skills You Need to 10x Your Claude Projects](../../raw/youtube/youtube-AfKoqFwC7Ew-the-only-6-skills-you-need-to-10x-your-claude-projects.md) — Austin Marchese, YouTube
+[^src42]: [frontend-design SKILL.md — official Anthropic example](../../raw/web/web-skill-md.md) — Anthropic (anthropics/skills GitHub)

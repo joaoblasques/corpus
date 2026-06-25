@@ -27,6 +27,9 @@ sources:
   - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-full-walkthrough-report.md
     channel: notes
     ingested_at: 2026-06-25
+  - path: raw/web/web-compaction.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - context window management
   - context management
@@ -35,6 +38,12 @@ aliases:
   - context rot
   - 1M context
   - rewind
+  - compact_20260112
+  - pause_after_compaction
+  - server-side compaction
+  - compaction API
+  - smart zone
+  - dumb zone
 tags:
   - corpus/ai-engineering
   - concept
@@ -140,6 +149,30 @@ Models with 1M-token context: Claude Opus 4.8, Mythos Preview, Opus 4.7, Opus 4.
 
 **Server-side compaction (beta)**: automatic summarization and replacement of older context when a conversation approaches a configurable threshold. Available on Fable 5, Mythos 5, Opus 4.8, Mythos Preview, Opus 4.7, 4.6, and Sonnet 4.6 [^src4]. The recommended primary strategy for long-running agentic workloads.
 
+**Compaction API parameters** (beta header `compact-2026-01-12`) [^src8]:
+
+```python
+context_management={"edits": [{"type": "compact_20260112",
+    "trigger": {"type": "input_tokens", "value": 150000},  # min 50,000
+    "pause_after_compaction": False,    # pause and return before continuing
+    "instructions": None,               # custom summarization prompt (replaces default)
+}]}
+```
+
+| Parameter | Default | Notes |
+|---|---|---|
+| `trigger` | 150K tokens | Minimum 50K. Check fires at each sampling iteration for server-tool workloads. |
+| `pause_after_compaction` | `false` | When `true`, returns `stop_reason: "compaction"` with only the compaction block, letting you insert content before resumption. Use with compaction counter to enforce total-token budgets. |
+| `instructions` | null | Completely replaces the default prompt (not additive). Include explicit "do not call any tools" instruction to prevent a known failure mode where the model calls a tool during summarization instead of writing a summary. |
+
+**Billing via `usage.iterations[]`** [^src8]: the compaction step is a separate sampling iteration billed normally. `usage.iterations` contains `{"type":"compaction", "input_tokens": N, "output_tokens": M}` entries for each compaction. Top-level `input_tokens`/`output_tokens` are the sum of non-compaction iterations only. For accurate cost tracking, sum across all `iterations` entries.
+
+**Prompt caching with compaction** [^src8]: add `cache_control` on the compaction block to cache the summary. Also add a cache breakpoint at end of system prompt — this keeps the system prompt cached separately so it doesn't need re-caching each time a new compaction summary is written.
+
+**Token counting with existing compaction blocks** [^src8]: the `/v1/messages/count_tokens` endpoint applies existing compaction blocks (reports the compressed size) but does not trigger new compactions. Returns `count_response.context_management.original_input_tokens` for the pre-compaction size.
+
+**Known failure mode** [^src8]: when tools are defined, the model occasionally calls a tool during the summarization step instead of writing a summary — result is `compaction.content: null`. Fix: set `instructions` to an explicit "respond with text only, do not call any tools" prompt.
+
 ## MCP server token cost (practitioner data)
 
 Each MCP server connected to Claude Code adds a fixed overhead to every context window — because tool descriptions for all connected MCP tools load at session start. Measured practitioner data: **~18,000 tokens per MCP server** [^src5]. With 3+ MCP servers active, the baseline cost eats a significant fraction of available context before any work is done.
@@ -203,3 +236,4 @@ The "Smart Zone tipping point" (~40% / ~100K tokens) is a practitioner heuristic
 [^src5]: [I Stopped Hitting Claude Code Usage Limits — Here's How](../../raw/youtube/youtube-9ToOfgZ4qqQ-i-stopped-hitting-claude-code-usage-limits-here-s-how.md) — Brad, YouTube
 [^src6]: [How to Build Effective Claude Code Agents in 2026](../../raw/youtube/youtube-RzLV8sfFdMM-how-to-build-effective-claude-code-agents-in-2026.md) — Cole Medin, YouTube
 [^src7]: [Full Walkthrough: Workflow for AI Coding — Matt Pocock](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-full-walkthrough-report.md) — Matt Pocock, AI Hero (conference talk notes report)
+[^src8]: [Compaction — Claude Platform docs](../../raw/web/web-compaction.md) — Anthropic

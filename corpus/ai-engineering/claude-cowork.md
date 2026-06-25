@@ -156,6 +156,9 @@ sources:
   - path: raw/notes/notes-give-claude-your-report.md
     channel: notes
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-GaA7hohgCCw-you-re-learning-claude-the-wrong-way-here-s-my-cheat-code.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - Claude Cowork
   - Cowork
@@ -657,6 +660,26 @@ From the official Anthropic product page and help center [^src43] [^src44]:
 
 **Mobile access** [^src44]: full Cowork functionality is available on the Claude mobile app (iOS, Android). You can assign tasks from mobile, monitor progress, and receive completion notifications — no laptop required for simple task dispatch.
 
+## 7-continent mental map for beginners (AI Founders)
+
+A practical orientation framework for new Claude users: not about prompts, but about "what you set up before you type" [^src49]. Organized as 7 continents in the order you should learn them:
+
+1. **Surfaces** — where Claude lives: web (tab), desktop app (core), Chrome extension (browser access), mobile (capture), Claude Code (developers). "Day one move-in is the desktop app" — without it, capabilities like persistent folders, scheduled tasks, and browser control are inaccessible [^src49].
+
+2. **Memory** — what Claude remembers: folders (real filesystem, permanent read/write), projects (workspace with instructions + task history), knowledge base (attached documents), conversations (searchable history). Setup: one folder on cloud drive → one Cowork subfolder per life/business area → one project per subfolder [^src49].
+
+3. **Identity** — who Claude is to you: system instructions (5-line project briefing: who you are, project scope, tone/format, what's in the folder, what to ask before guessing), profile (dedicated Claude email/Chrome profile for separation), global instructions (written once, inherited by every project — "most beginners skip this and wonder why Claude still feels generic") [^src49].
+
+4. **Skills** — what Claude knows: skills (saved instruction sets, rerunnable on demand), `/` slash commands (summon any skill with a few keystrokes), plugins (bundles: a full profession in one install), sub-agents (specialist Claudes with their own folder + tools), MCP (the protocol under all connectors) [^src49].
+
+5. **Automation** — Claude works without you: scheduled tasks (clock-triggered), routines (event-triggered: "doorbell vs alarm clock"), dispatch (Claude on mobile → actions on your local machine), background agents [^src49].
+
+6. **Access** — how Claude reaches your world: Chrome extension (browser automation for authenticated sites), connectors (Slack, Gmail, Notion, CRM), file system folders, APIs via MCP [^src49].
+
+7. **Creations** — what Claude builds: artifacts (mini-apps rendered in Cowork), documents, code, persistent deliverables [^src49].
+
+**Core insight** [^src49]: "Most beginners visit two places and quit" — the web tab and one project. They never discover the other 26 cities across 7 continents. The productive differentiator is not better prompts; it is persistent setup (folder structure, global instructions, skills, connectors) that means Claude already knows the user and context on every session start. "You don't use Claude. You move into Claude."
+
 ## See also
 
 - [[ai-engineering/claude-code|Claude Code]] — the developer counterpart; capabilities land here first
@@ -713,3 +736,4 @@ From the official Anthropic product page and help center [^src43] [^src44]:
 [^src46]: [Full Guide: Build an AI Second Brain (Cole Medin)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-full-guide-build-report.md) — Cole Medin, YouTube (processed report)
 [^src47]: [Build a Claude Knowledge Base That Self-Improves](../../raw/notes/notes-build-a-claude-kn-report.md) — notes report; Karpathy 3-folder pattern + Claude as librarian
 [^src48]: [Give Claude Your Files and Watch What Happens (report)](../../raw/notes/notes-give-claude-your-report.md) — notes report; 7 Cowork tasks + PARA method + sycophancy warning
+[^src49]: [You're Learning Claude The Wrong Way | Here's My Cheat Code](../../raw/youtube/youtube-GaA7hohgCCw-you-re-learning-claude-the-wrong-way-here-s-my-cheat-code.md) — AI Founders, YouTube; 7-continent mental map for Claude beginners
