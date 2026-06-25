@@ -21,6 +21,9 @@ sources:
   - path: raw/youtube/youtube-4KC7Vn4txkA-how-to-create-slide-presentations-with-claude-2025-update.md
     channel: youtube
     ingested_at: 2026-06-20
+  - path: raw/_inbox/youtube-t2ELuj2prA0-claude-html-slides-the-new-powerpoint-killer-full-tutorial.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - AI presentation tools
   - Claude slides
@@ -28,11 +31,14 @@ aliases:
   - Claude Designs
   - Claude PowerPoint
   - Gamma API
+  - HTML slides
+  - brand design system
+  - component libraries
 tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-20
-updated: 2026-06-20
+updated: 2026-06-25
 ---
 
 # AI Presentation Tools
@@ -50,8 +56,20 @@ A native add-in for PowerPoint available at `marketplace.microsoft.com`. Integra
 ### 3. Gamma API + Claude Code
 Claude Code can call the Gamma API to auto-generate polished presentations as part of an agent workflow. Faster than starting from scratch and produces professional layouts without manual design work [^src1]. Suitable for teams wanting to automate the "slide deck from spec" step in a delivery pipeline.
 
-### 4. Claude Code → HTML slides
-Replace PowerPoint entirely with Claude Code generating HTML-based presentations. One practitioner documented building slides using design tokens and 20 design principles extracted from the design-coding discipline — the result is version-controllable, diff-able, and deployable as a static page [^src4]. Key design principles applied: consistent typography scale, color tokens, spacing system, and component hierarchy.
+### 4. Claude Code → HTML slides (full brand design system approach)
+Replace PowerPoint entirely with Claude Code generating HTML-based presentations. The full-tutorial approach (2026) documents a systematic workflow using a complete brand design system [^src4][^src7]:
+
+**Phase 1 — Brand design system**: define a `brand-system.md` with color palette (primary, secondary, neutrals), typography (font family, size scale, weights), spacing tokens, and shadow/border-radius conventions. Claude reads this first and applies it consistently across all slides [^src7].
+
+**Phase 2 — Component libraries**: build reusable HTML/CSS components (title card, content card, data visualization card, quote card) before generating full decks. Each component is tested standalone before combining [^src7].
+
+**Phase 3 — Animated charts**: charts built in pure HTML/CSS/JS rather than static images — bars animate on scroll-into-view using `IntersectionObserver`; numbers count up; line charts draw progressively [^src7].
+
+**Photo integration**: Unsplash URLs (direct CDN links, no API key) for free, high-quality photography. Pattern: `https://source.unsplash.com/1600x900/?<keyword>` [^src7].
+
+The result is version-controllable, diff-able, and deployable as a static page. "Free vs PowerPoint and Gamma" is the positioning: no subscription, no export limits, full programmatic control [^src7].
+
+One practitioner also documented building slides using design tokens and 20 design principles — consistent typography scale, color tokens, spacing system, and component hierarchy [^src4].
 
 ### 5. Claude Cowork presentation skill
 A custom skill in [[ai-engineering/claude-cowork|Claude Cowork]] that wraps a presentation-builder workflow — triggered by `/presentations` or similar, guiding the operator through structure, content, and output format [^src5]. Integrates with the Cowork folder system for persisting slide templates and brand assets.
@@ -94,3 +112,4 @@ When generating HTML slides, twenty design principles improve output quality [^s
 [^src4]: [I Replaced PowerPoint with Claude Code](../../raw/youtube/youtube-nAfbaZysFuk-i-replaced-powerpoint-with-claude-code.md) — YouTube playlist: Claude Slides
 [^src5]: [How to Build Pro Presentations in Claude Cowork](../../raw/youtube/youtube-0V2yEaph7ac-how-to-build-pro-presentations-in-claude-cowork.md) — YouTube playlist: Claude Slides
 [^src6]: [How to Create Slide Presentations with Claude — 2025 Update](../../raw/youtube/youtube-4KC7Vn4txkA-how-to-create-slide-presentations-with-claude-2025-update.md) — YouTube playlist: Claude Slides
+[^src7]: [Claude HTML Slides: The New PowerPoint Killer (Full Tutorial)](../../raw/_inbox/youtube-t2ELuj2prA0-claude-html-slides-the-new-powerpoint-killer-full-tutorial.md) — YouTube

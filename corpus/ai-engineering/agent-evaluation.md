@@ -18,6 +18,12 @@ sources:
   - path: raw/_inbox/email-2026-06-11-fable-evals-performance-airbnbs-evolved-data-architecture-po.md
     channel: email
     ingested_at: 2026-06-12
+  - path: raw/_inbox/web-swe-bench-multilingual.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/web/task-completion-time-horizons-of-frontier-ai-models.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - agent evaluation
   - LLM evaluation
@@ -27,11 +33,19 @@ aliases:
   - offline evaluation
   - evaluation funnel
   - trace monitoring
+  - SWE-bench Multilingual
+  - multilingual coding benchmark
+  - METR time horizons
+  - time horizons
+  - task-completion time horizon
+  - 50%-time horizon
+  - 80%-time horizon
 tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-21
-updated: 2026-06-12
+updated: 2026-06-25
+last_confirmed: 2026-06-25
 ---
 
 # Agent Evaluation
@@ -137,6 +151,49 @@ A monitoring **maturation curve**: moment-in-time snapshots → dashboards → a
 
 Token and duration tell you *something changed* even when an agentic system fails gracefully rather than crashing — powerful because graceful failures are hard to detect [^src4]. Combining signals across span types localizes the problem: high planning-span tokens + low tool-call completion is a different root cause than stable metrics with declining evaluation scores [^src4].
 
+## SWE-bench Multilingual
+
+SWE-bench Multilingual is a benchmark for evaluating AI coding agents on real-world software engineering tasks across multiple programming languages [^src6].
+
+**Scope** [^src6]:
+- 300 tasks from 42 repositories in 9 programming languages
+- Tasks are real GitHub issues requiring code changes to resolve (the same structure as SWE-bench Verified, generalized beyond Python)
+- Languages: Python, JavaScript/TypeScript, Java, Go, Ruby, Rust, C/C++, C#, PHP
+
+**Headline results (Claude 3.7 Sonnet + SWE-agent)** [^src6]:
+- **43% overall** (vs 63% on SWE-bench Verified, the Python-only benchmark)
+- Highest-performing language: **Rust** (58%)
+- Lowest-performing language: **C/C++** (28%)
+- The gap between Verified (Python) and Multilingual scores quantifies the Python bias baked into current agents and training data
+
+**Key finding** [^src6]: the gap is not just about syntax — it's about the density of public training examples, the maturity of language-specific tooling (linters, test runners, type systems), and how well agentic scaffolding is tuned for each language's idioms. "The benchmark highlights how much of current agent capability is Python-specific rather than general software engineering ability."
+
+**Comparison with prior art** [^src6]:
+- SWE-bench Lite (Python only, 300 tasks): 43.7% Claude Sonnet 3.5 + Agentless
+- SWE-bench Verified (Python only, 500 tasks): 63% Claude Sonnet 3.7 + SWE-agent
+- SWE-bench Multilingual (9 languages, 300 tasks): 43% — roughly matching Lite despite including languages where models are weaker
+
+**Implication for practitioners** [^src6]: when evaluating coding agents for non-Python work (Java backends, Go services, Rust systems code), expect performance closer to 30–50% of Verified results. Use language-specific golden datasets (per §Golden datasets above) rather than extrapolating from Python benchmark scores.
+
+## METR time horizons — industry-wide capability measurement
+
+METR (Model Evaluation & Threat Research) publishes the **task-completion time horizon**: the human-expert task duration at which a frontier AI agent is predicted to succeed with a given reliability level [^src7].
+
+- **50%-time horizon**: task length where the agent succeeds half the time
+- **80%-time horizon**: task length where the agent succeeds 80% of the time
+
+Both metrics are measured using logistic regression over METR's benchmark of 100+ diverse software tasks (RE-Bench, HCAST, and novel short tasks) with automated success criteria [^src7].
+
+**What "time horizon" measures (and doesn't)**:
+- It measures *task difficulty* (calibrated by how long a human expert takes) — NOT how long the AI takes to run.
+- AI agents typically finish tasks several times faster than human contractors, often writing code in one shot without iterative lookup [^src7].
+- The benchmark is software/ML/cybersecurity-heavy; time horizons vary significantly across domains (same exponential trend, different absolute levels) [^src7].
+- An 8-hour time horizon does NOT mean AI can automate all jobs — it means it can complete *well-specified, self-contained* 8-hour software tasks without prior context.
+
+**Exponential growth trend**: across public frontier models, time horizons are growing roughly exponentially — a useful macro-benchmark for tracking the pace of agent capability improvement at the industry level [^src7].
+
+**Implication for eval design**: METR's tasks are self-contained and well-specified. Real-world agentic performance draws on prior context (conversations, domain knowledge, existing codebases) — the benchmark assumes low/zero context, similar to a new hire or freelance contractor. Practitioners should design their own golden datasets (see §Golden datasets above) for tasks that require sustained context [^src7].
+
 ## See also
 
 - [[ai-engineering/langsmith|LangSmith]] — platform that implements these patterns
@@ -153,3 +210,5 @@ Token and duration tell you *something changed* even when an agentic system fail
 [^src3]: [What Data Agent Benchmarks Do and Don't Tell Us](../../raw/web/what-data-agent-benchmarks-do-and-don-t-tell-us.md)
 [^src4]: [Monitoring Cortex Agent Performance With Trace Data](../../raw/web/monitoring-cortex-agent-performance-with-trace-data.md)
 [^src5]: [Fable Evals Performance / We Had to Build New Evals for Fable](../../raw/email/email-2026-06-11-fable-evals-performance-airbnbs-evolved-data-architecture-po.md)
+[^src6]: [SWE-bench Multilingual — Anthropic](../../raw/_inbox/web-swe-bench-multilingual.md)
+[^src7]: [Task-Completion Time Horizons of Frontier AI Models](../../raw/web/task-completion-time-horizons-of-frontier-ai-models.md) — METR, metr.org

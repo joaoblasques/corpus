@@ -30,6 +30,21 @@ sources:
   - path: raw/web/web-using-agent-memory.md
     channel: web
     ingested_at: 2026-06-23
+  - path: raw/_inbox/youtube-bgXEDymiZCc-i-built-karpathys-llm-wiki-in-obsidian.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/_inbox/youtube-ib74sLgjIBM-build-a-claude-knowledge-base-that-self-improves.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/_inbox/youtube-HxEQ7bLKrqI-give-claude-your-files-and-watch-what-happens.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/_inbox/notes-00-inbox-clippings-youtube-raw-raw-watched-build-this-once-a-report.md
+    channel: notes
+    ingested_at: 2026-06-25
+  - path: raw/_inbox/notes-00-inbox-clippings-youtube-raw-raw-watched-how-to-build-the-report.md
+    channel: notes
+    ingested_at: 2026-06-25
 aliases:
   - agent memory
   - memory
@@ -51,11 +66,16 @@ aliases:
   - episodic memory
   - trace memory
   - claude-mem
+  - LLM wiki
+  - self-improving knowledge base
+  - information hierarchy
+  - friction tax
+  - append-only log
 tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-21
-updated: 2026-06-17
+updated: 2026-06-25
 confidence: 0.85
 ---
 
@@ -181,6 +201,66 @@ The `mem-search` skill and four MCP tools (`search`, `timeline`, `get_observatio
 
 Key feature: `<private>` tags let users exclude sensitive content from storage. A web viewer UI at `http://localhost:37777` shows the real-time memory stream [^src9].
 
+## LLM wiki pattern (Karpathy / self-improving knowledge base)
+
+A recurring practitioner pattern applies the corpus's own design back to personal knowledge management: an **LLM wiki** where Claude is the librarian, ingesting sources into a structured knowledge base that improves over time [^src10][^src11].
+
+**Karpathy's LLM wiki (Obsidian implementation)** [^src10]:
+- Three folders: `raw/` (source files), `wiki/` (derived corpus pages), `outputs/` (final artifacts from Claude)
+- An append-only `log.md` captures every session's decisions, edits, and learnings — the memory that survives compaction
+- A `CLAUDE.md` schema instructs Claude on what belongs where, how to cite, and when to create new pages vs. update existing ones
+- Pi agent integration for mobile and always-available access; the agent writes to the local Obsidian vault
+- "Memory bank" pattern: after each session, Claude updates a structured log so the next session inherits what was learned
+
+**Self-improving knowledge base (5-step framework)** [^src11]:
+1. **Ingest** — source files land in `raw/`; Claude reads and routes to the right domain
+2. **Extract** — entities, concepts, and claims extracted and cited
+3. **Write** — dense reference pages created or updated in `wiki/`
+4. **Health check skill** — a 7-stage monthly audit: contradictions, orphaned references, source provenance, stale articles, new article candidates, domain balance, coverage gaps
+5. **Schedule** — the health check runs on a cron; no manual trigger needed
+
+The health check is the key mechanism for *self-improvement*: the agent audits its own output, flags staleness and gaps, and proposes updates. "The corpus should compress what sources say, not invent what they don't" [^src11]. The compounding effect: each ingest cycle makes future ingests cheaper (fewer duplicate lookups, richer cross-references) and the health check catches drift before it accumulates [^src11].
+
+## Information hierarchy (portable context architecture)
+
+An alternative framing of the same problem as the LLM wiki, from a non-technical creator's perspective: the **information hierarchy** as a portable context layer that survives tool changes [^src12].
+
+**The core insight**: "You don't build agents. You build the information that they read. The AI is the disposable part. The hierarchy is the part that lasts." [^src12]
+
+**Structure** [^src12]:
+- **Top tier — "My Business" folder**: four files — About Me, About My Business, About My Voice, About My Offers. Changes infrequently. Tool-agnostic (plain markdown).
+- **Per-project folders**: each with five subfolders — Instructions, Voice, References, Examples, Notes.
+  - `Notes` is the **compounding file**: logging results ("this newsletter issue had a 42% open rate") teaches the AI what works over time.
+
+**Portability test** [^src12]: the same folder, pointed at Claude → Claude drafts newsletter topics; pointed at Gemini → Gemini drafts equivalent topics. The AI changes; the hierarchy is unchanged. "Whatever's best this month, next month, next year, two years — you point it at your hierarchy and it already knows your business."
+
+**Relationship to the friction tax** [^src12]: the problem this architecture solves is the "friction tax" — re-explaining yourself every new chat, every new tool. The information hierarchy is written once; every AI session starts informed. The cost structure inverts: setup time is a one-time investment; session startup time approaches zero.
+
+**Building it with Claude Co-work** [^src12]: Claude can scaffold the entire folder structure (leaving files empty) from a natural-language description, then interview you to fill in the `My Business` files. The `Notes` file is updated manually with real-world feedback signals after each project run.
+
+This is the creator-friendly version of the typed memory architecture (policy, preference, fact stores) described above — same principle, simpler implementation for solo practitioners.
+
+## Claude Co-work: file system as memory
+
+Claude Co-work's file access enables a distinct memory pattern: using a local folder as a persistent, queryable knowledge layer across sessions [^src13]:
+
+**File operations supported** [^src13]:
+- **Parallel file reading** — read multiple PDFs or documents simultaneously, returning a synthesized summary
+- **Editing existing files** — append to a log, update a running document, modify a config
+- **Creating new files** — generate reports, exports, or new knowledge pages
+- **Folder organization** — sort and move files based on content or naming patterns
+- **Historical data iteration** — process 18 years of health log files, synthesizing trends; 1500+ Obsidian notes scanned for cross-folder synthesis
+
+**Mental model** [^src13]: "Obsidian = Finder 2.0." The vault is a plain folder of markdown files; any file-aware agent (Claude Co-work, Claude Code, VS Code + Claude) can read and write it. Tool-agnostic access means the same vault works with any AI surface.
+
+**Practical workflow (AI second brain)** [^src13]:
+1. Create a top-level `CLAUDE.md` context file ("KJ OS") — who you are, your projects, your voice
+2. Organize notes in a PARA-style vault (00 Notes / 01 Journal / 02 Projects / 03 Reviews / 04 Skills)
+3. Run Claude Co-work against the vault to: draft project outputs, synthesize across notes, generate feedback-loop artifacts
+4. Close the loop by saving Claude's outputs back into the vault
+
+This is the file-as-memory pattern from [[ai-engineering/claude-managed-agents|Claude Managed Agents]] simplified for solo practitioners — no database, no API, just a folder of markdown.
+
 ## See also
 
 - [[ai-engineering/context-window-management|Context Window Management]] — strategies for what to keep, compress, or drop from short-term memory
@@ -203,3 +283,7 @@ Key feature: `<private>` tags let users exclude sensitive content from storage. 
 [^src7]: [Built-in memory for Claude Managed Agents](../../raw/notes/notes-clippings-built-in-memory-for-claude-managed-agents.md) — Anthropic
 [^src8]: [From RAG to AI Memory Systems: Building Stateful Architectures](../../raw/web/web-from-rag-to-ai-memory-systems-building-stateful-architecture.md) — Oracle Developer Blog
 [^src9]: [claude-mem: Persistent Context Across Sessions](../../raw/web/web-github-thedotmack-claude-mem-persistent-context-across-sessi.md) — Alex Newman (@thedotmack), GitHub
+[^src10]: [I Built Karpathy's LLM Wiki in Obsidian](../../raw/_inbox/youtube-bgXEDymiZCc-i-built-karpathys-llm-wiki-in-obsidian.md) — YouTube
+[^src11]: [Build a Claude Knowledge Base That Self-Improves](../../raw/_inbox/youtube-ib74sLgjIBM-build-a-claude-knowledge-base-that-self-improves.md) — YouTube
+[^src12]: [Build This ONCE. Any AI You Use Will Get Smarter Forever.](../../raw/_inbox/notes-00-inbox-clippings-youtube-raw-raw-watched-build-this-once-a-report.md) — YouTube (processed report)
+[^src13]: [How To Build The ULTIMATE AI Second Brain (Obsidian + Claude Code)](../../raw/_inbox/notes-00-inbox-clippings-youtube-raw-raw-watched-how-to-build-the-report.md) — YouTube (processed report)

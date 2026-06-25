@@ -30,6 +30,12 @@ sources:
   - path: raw/web/web-effective-context-engineering-for-ai-agents.md
     channel: web
     ingested_at: 2026-06-21
+  - path: raw/youtube/-h9VVJIqtvA-context-engineering-in-29-minutes-complete-course.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-stop-learning-obs-report.md
+    channel: notes
+    ingested_at: 2026-06-25
 aliases:
   - context engineering
   - context window engineering
@@ -41,7 +47,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-07
-updated: 2026-06-21
+updated: 2026-06-25
 ---
 
 # Context Engineering
@@ -140,6 +146,47 @@ Three principles generalize the context-engineering thesis [^src5][^src6]:
 
 The caveat is the core context-engineering truth: "a context layer is only as strong as the context that exists" — ktx surfaces and organizes what a team already knows but cannot invent missing definitions [^src5]. This is the data-warehouse instance of the same principle that drives [[ai-engineering/rag|RAG]] and [[ai-engineering/agent-memory|Agent Memory]]: agents need the metadata and business context that give data meaning, not just access.
 
+## LangChain's four strategies (Write / Select / Compress / Isolate)
+
+LangChain published a widely cited framework that organizes every context-engineering technique into four categories [^src10]:
+
+| Strategy | Problem solved | Techniques |
+|---|---|---|
+| **Write** | Agents forget across compaction | Scratch pads (agent takes notes mid-task), rules files (CLAUDE.md loaded each session), memory extraction (facts saved for cross-session retrieval) |
+| **Select** | Context overload — don't give everything at once | Agentic RAG (agent decides what to search for, not a static pipeline), episodic/semantic/procedural memory selection |
+| **Compress** | History grows unboundedly | Conversation summarization (trim oldest turns while keeping key decisions), context prioritization |
+| **Isolate** | Accumulating tool-call noise | Parallel sub-agents each with clean context; multi-agent swarms (e.g. 300 sub-agents, each with fresh context, reporting back to orchestrator) |
+
+The "Write" strategy includes the Anthropic **think tool** — a dedicated scratchpad workspace for Claude; on one benchmark, adding it improved performance by 54% on certain tasks [^src10].
+
+## Seven categories competing for context (agent systems)
+
+In a running agent, seven categories of information compete for the context budget [^src10]:
+
+1. **System prompt** — identity, behavioral rules, control flow, architecture directives (can be several hundred tokens in complex agents)
+2. **Tool definitions** — schema for every callable tool (even unused tools cost tokens)
+3. **Tool results** — web retrieval: 5–10K tokens per call; file reads: similar
+4. **Retrieved knowledge** — RAG documents, search results, API responses
+5. **Conversation history** — grows linearly every turn; includes agent reasoning and prior decisions
+6. **Memory** — short-term (session) and long-term (previous sessions); user preferences, learned patterns
+7. **Agent state** — current plan, to-do list, progress markers, scratchpad notes
+
+**Lost-in-the-middle**: a U-shaped attention curve means information at the start and end of context is best retained, while middle content degrades — measured as a 30+ percentage-point drop in accuracy when relevant info moves from beginning to middle. Original instructions buried under 50K tokens of tool outputs "effectively disappear" [^src10].
+
+## Context engineering as the natural progression of prompt engineering
+
+Anthropic describes context engineering as "the natural progression of prompt engineering" — it includes everything prompt engineering does (clear instructions, examples, structured formatting) plus a whole layer on top: managing tools, external data, message history, memory systems, and dynamic state [^src10]. "Prompt engineering is a subset of context engineering."
+
+The LLM-as-OS analogy (LangChain): the model is the CPU (does the thinking), and the context window is RAM (working memory). "Just like your computer slows down when RAM fills up, your agent's reasoning degrades when your context window gets crowded" [^src10].
+
+**Chroma's study** (18 frontier models including GPT-4.1, Claude 4, Gemini 2.5): every model's performance degrades as input length increases, even well below the stated context window limit. A 200K-token window may show significant degradation at 50K tokens. The decline is continuous, not a sudden cliff [^src10].
+
+## Learn the framework, not the syntax
+
+A practitioner corollary: "We are past the era where you need to learn how to do things. We are in an era where you need to learn what the framework is." Context engineering — knowing *what* capabilities exist and *when* to use them — is the meta-skill. An architect specifies intent; the AI (builder) executes the syntax [^src11].
+
+Applied to Obsidian: telling Claude "build me a table that tracks X" is context engineering. Memorizing markdown table syntax is not. The same principle applies to any structured domain (Canvas JSON, Bases schema, SQL dialects) — delegate format correctness to domain-specific skills (see [[ai-engineering/agent-skills|Agent Skills]]) [^src11].
+
 ## Related concepts (referenced in source 1, not yet ingested)
 
 - `context-engineering-ace-self-improving-llm-workflows` — agentic/self-improving applications of context engineering
@@ -167,3 +214,5 @@ The caveat is the core context-engineering truth: "a context layer is only as st
 [^src4]: [How AI agents & Claude skills work (Clearly Explained)](<../../raw/youtube/How AI agents & Claude skills work (Clearly Explained).md>) — Greg Isenberg × Ras Mic, YouTube
 [^src5]: [Introduction to ktx: The Open-Source Context Layer for Data Agents](../../raw/email/email-2026-06-03-fwd-introduction-to-ktx-the-open-source-context-layer-for-da.md) — Pipeline to Insights (Substack)
 [^src6]: [ktx — Make analytics context usable by agents (docs)](../../raw/web/how-ingestion-works.md) — docs.kaelio.com
+[^src10]: [Context Engineering in 29 Minutes: Complete Course](../../raw/youtube/-h9VVJIqtvA-context-engineering-in-29-minutes-complete-course.md) — Marina Wyss (Twitch), YouTube
+[^src11]: [Stop Learning Obsidian](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-stop-learning-obs-report.md) — YouTube (notes report)

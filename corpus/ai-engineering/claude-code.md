@@ -99,6 +99,21 @@ sources:
   - path: raw/_inbox/email-2026-06-19-anthropic-drops-claude-code-artifacts.md
     channel: email
     ingested_at: 2026-06-24
+  - path: raw/_inbox/web-claude-code-settings-claude-code-docs.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/_inbox/web-desktop-application-claude-code-docs.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/_inbox/web-use-claude-code-on-the-web-claude-code-docs.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/_inbox/web-glossary-claude-code-docs.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/email/email-2026-06-18-someone-put-ads-in-the-claude-code-spinner.md
+    channel: email
+    ingested_at: 2026-06-25
 aliases:
   - Claude Code
   - claude-code
@@ -112,7 +127,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-06-12
-updated: 2026-06-24
+updated: 2026-06-25
 ---
 
 # Claude Code
@@ -516,6 +531,145 @@ Claude Code Artifacts turn a coding session into a **live, shareable web page** 
 
 Artifacts are private to the org by default. Beta available to Team and Enterprise plan users.
 
+## Settings system (four-scope hierarchy)
+
+Claude Code settings cascade through four scopes, each more specific than the last [^src27]:
+
+| Scope | File | Who controls |
+|---|---|---|
+| **Managed** | OS-specific path (enterprise MDM or `/etc/...`) | Admins; cannot be overridden by users |
+| **User** | `~/.claude/settings.json` | The user; applies across all projects |
+| **Project** | `.claude/settings.json` | Checked into the repo; shared with the team |
+| **Local** | `.claude/settings.local.json` | Untracked per-machine overrides |
+
+Settings in more specific scopes override less specific ones, except managed settings which are inviolable [^src27].
+
+**Key settings.json keys (100+ documented)** [^src27]:
+
+| Key | Purpose |
+|---|---|
+| `model` | Model alias (opus/sonnet/haiku/fable/best) |
+| `maxThinkingTokens` | Cap on extended thinking per turn |
+| `permissions.allow` / `.deny` | Regex or glob patterns for tool permission rules |
+| `enableAllProjectMcpServers` / `enabledMcpjsonServers` | MCP server activation |
+| `autoUpdaterStatus` | `enabled` or `disabled` for auto-update |
+| `disableNonEssentialTraffic` | Suppresses telemetry, model training, and update checks (useful for air-gapped environments) |
+| `footerBadge` | Custom badge text in the chat footer |
+| `attributionEnabled` | Adds Claude attribution to generated artifacts |
+| `hooksConfig` | Per-lifecycle hook definitions (inline alternative to `hooks.json`) |
+| `plugins` | Installed plugin configurations with their settings |
+
+**Permission rule syntax** [^src27]: each rule is a glob or regex pattern in `allow` or `deny` arrays inside `permissions`. Example:
+```json
+"permissions": {
+  "allow": ["Bash(git commit:*)", "Bash(npm test:*)"],
+  "deny": ["Bash(rm -rf:*)"]
+}
+```
+
+**Sandbox settings** [^src27]: configure which paths Claude can read and write in sandboxed mode (`sandboxReadPaths`, `sandboxWritePaths`), used when strict isolation is required (CI environments, air-gapped deployments).
+
+## Desktop application
+
+The Claude Code Desktop app offers permission modes, a built-in preview server, computer use, and a diff view with inline comments [^src28].
+
+**Permission mode dropdown** (also configurable in Settings → Claude Code) [^src28]:
+
+| Mode | Behavior |
+|---|---|
+| `default` | Prompts before most tool calls |
+| `acceptEdits` | Auto-accepts file edits; prompts for commands |
+| `plan` | Read-only planning; no execution |
+| `auto` | Fully autonomous; no prompts |
+| `bypassPermissions` | No safety checks (API / CI only) |
+
+**Preview server (launch.json)** [^src28]: configure a dev server via `.claude/launch.json`; the desktop app auto-starts it and opens a built-in browser, giving Claude full visual feedback without manual port management. Boris Cherny calls the in-browser visual iteration loop "the most important tip" for web dev (see Lesser-known flags above).
+
+**Diff view** [^src28]: file changes appear in a side-by-side diff with inline comments — the same review experience as GitHub PR reviews, but inside the desktop app.
+
+**Computer use** (research preview, Pro/Max) [^src28]: available on macOS and Windows. Claude can see and control the desktop — clicking, typing, scrolling — for any app, not just the terminal. Requires opt-in in settings; uses a separate, isolated session context. See [[ai-engineering/computer-use|Computer Use]] for the full API and safety details.
+
+**Dispatch** [^src28]: remote control of multiple Claude Code instances from one central interface. Useful for managing parallel long-running agents across multiple machines.
+
+**SSH sessions** [^src28]: connect to a remote machine via SSH from the desktop app; Claude Code runs on the remote server with full local UI — the same Channels/notification infrastructure as local sessions.
+
+**Enterprise managed settings** [^src28]: the desktop app reads from the managed-settings path first; this is the MDM path for locking settings org-wide (e.g., forcing `disableAutoMode`, mandating `model: sonnet`).
+
+## Cloud sessions (Claude Code on the Web)
+
+Cloud sessions run Claude Code in Anthropic's cloud environment — an Ubuntu 24.04 VM with pre-installed runtimes (Python, Node, npm, pip, git, gh, curl) — accessed via claude.ai/code or the Mobile app [^src29].
+
+**Two auth modes** [^src29]:
+
+| Mode | Setup | Use case |
+|---|---|---|
+| **GitHub App** (recommended) | Install `github.com/apps/claude` on any repo | Full repo access, PR creation, commenting |
+| **`/web-setup`** | Run inside a running session | One-time repo config without GitHub App |
+
+**Network access levels** [^src29]: None (default, most secure) / Trusted (allowlisted domains) / Full (unrestricted internet) / Custom (fine-grained per-domain rules). Network access is configured per cloud session in the session creation UI.
+
+**Setup scripts vs SessionStart hooks** [^src29]: a setup script runs once when the VM boots (install tools, clone repos, set env vars); a `SessionStart` hook runs at the start of every new session within the running environment. Use setup scripts for environment provisioning; use `SessionStart` hooks for project-specific warmup (load `CLAUDE.md`, start background services).
+
+**`--remote` and `--teleport` flags** [^src29]:
+- `claude --remote` — launches a new cloud session from the CLI, returns a URL to attach via browser.
+- `claude --teleport` — migrates the current local session to the cloud, preserving conversation context. Useful when a long-running task needs more compute or persistent uptime than a laptop provides.
+
+**Auto-fix PRs** [^src29]: subscribe a repo to a GitHub webhook; on CI failure, Claude opens a draft PR with the fix. Configurable thresholds: only fire auto-fix when the failing test is on the critical path, or only for PRs authored by Claude.
+
+**Session isolation** [^src29]: each cloud session gets its own VM; sessions don't share file systems. Cross-session coordination uses the Channels mechanism or shared storage (e.g., a repo branch).
+
+## Claude Code glossary (selected terms)
+
+Precise definitions from Anthropic's official glossary [^src30]:
+
+| Term | Definition |
+|---|---|
+| **Agentic harness** | The full environment around a model — prompts, tools, hooks, skills, context policies — that determines how an agent behaves in practice |
+| **Agentic loop** | The core execution cycle: receive a task → decide the next action → execute → observe result → repeat until done |
+| **Auto memory** | The system that automatically saves important context to CLAUDE.md during a session so it persists to future sessions |
+| **Auto mode** | Permission mode where Claude makes all tool calls autonomously, using a classifier to block risky operations |
+| **Bare mode** | `--bare` flag; skips CLAUDE.md, settings, and MCP auto-loading for ~10× faster startup in non-interactive contexts |
+| **Bundled skills** | Skills included with an official Anthropic plugin or the base Claude Code install |
+| **Channel** | A persistent push-event connection to a running Claude Code session (Telegram, Discord, iMessage) |
+| **Checkpoint** | A session snapshot Claude creates before a potentially destructive operation; enables `/rewind` |
+| **Compaction** | When context approaches limits, Claude summarizes the conversation into a compact representation and continues in a fresh context |
+| **Effort level** | The `low/medium/high/xhigh/max` knob controlling thinking depth per turn (higher = more tokens, deeper reasoning) |
+| **Extended thinking** | A per-turn mode where Claude reasons through a scratchpad before responding; enabled by effort level or `ultrathink` |
+| **Hook** | A script or function that runs at a Claude Code lifecycle event (SessionStart, UserPromptSubmit, PostToolUse, Stop) |
+| **MCP Tool Search** | The subagent that searches for and recommends MCP servers matching a described capability |
+| **Non-interactive mode** | Running Claude with `-p` (print), `--output-format`, or `--bare` for scripting without a human in the loop |
+| **Permission rule** | An allow/deny glob pattern controlling whether Claude can call a specific tool or command |
+| **Plan mode** | Read-only mode where Claude proposes a plan without executing; toggle with Shift+Tab twice |
+| **Plugin** | A bundled package of skills, hooks, and MCP server configs that installs as a unit |
+| **Project trust** | Per-project setting granting broader permissions to checked-in `.claude/settings.json` rules |
+| **Prompt injection** | An attack where malicious content in Claude's environment (a file, a webpage, an issue) tries to hijack Claude's actions |
+| **Remote control** | Controlling a Claude Code session from a remote client (Mobile app, another terminal, Dispatch) |
+| **Rules** | `.claude/rules/` markdown files that are always included in every session in that project (lighter than CLAUDE.md; no code-path instructions) |
+| **Sandboxing** | Restricting which files and commands Claude can access, configurable via `sandboxReadPaths`/`sandboxWritePaths` in settings |
+| **Session** | A continuous Claude Code conversation from `claude` invocation to exit; has one context window |
+| **Skill** | A loadable capability file (`SKILL.md`) with name, description, and instructions; only the description loads into context until triggered |
+| **Subagent** | An isolated Claude instance spawned to handle a subtask with its own context window; returns only the result to the parent |
+| **Surface** | The interface through which a user interacts with Claude Code (terminal, desktop app, mobile, Slack, Web) |
+| **Teleport** | Migrating a local session to the cloud (`--teleport`) while preserving conversation state |
+| **Tool** | A function Claude can request execution of (Bash, Edit, Read, WebSearch, MCP tools, etc.) |
+| **Turn** | One complete request-response cycle: a human message in → Claude's response out (may include tool calls) |
+| **Verification loop** | A subagent or hook that checks Claude's output against a rubric before the session continues |
+| **Worktree isolation** | `--worktree` flag; each parallel Claude session gets its own git worktree to prevent file conflicts |
+
+## /fast mode (speed vs cost toggle)
+
+`/fast` is a research-preview toggle that runs the same model up to 2.5× faster for 2–6× the price per token [^src31]:
+
+**Mechanism**: normally requests share a GPU batch with concurrent users (cheap, slower). `/fast` gives you a near-empty batch — faster output generation but you pay for the empty GPU capacity.
+
+**When it pays off**: long output tasks like large refactors, not short turns [^src31]. The speed-up only materializes when generation time is the bottleneck, not thinking or retrieval.
+
+**Cache gotcha**: flipping `/fast` mid-session re-bills the whole cached conversation at the fast rate — e.g. $3.15 on a 260K-token session for one keystroke [^src31]. Rule: enable at the start of a session, not at turn 80.
+
+## Lazy Senior Dev mode (community skill)
+
+A Reddit community skill that forces Claude Code to write as little code as possible by adopting a "lazy senior dev" persona [^src31]. The pattern: the persona values understanding over volume, pushes back on over-engineering, and asks clarifying questions instead of assuming requirements and building speculatively. Consistently with the Karpathy Simplicity First principle — see [[ai-engineering/claude-md-conventions|CLAUDE.md Conventions]].
+
 ## See also
 
 - [[ai-engineering/sources/boris-cherny-100-percent-claude-code|Boris Cherny — 100% Claude Code]] — the full interview source page
@@ -550,3 +704,8 @@ Artifacts are private to the org by default. Beta available to Team and Enterpri
 [^src24]: [Automated security reviews in Claude Code](../../raw/_inbox/web-automated-security-reviews-in-claude-code-claude-help-center.md) — Anthropic Help Center
 [^src25]: [Push events into a running session with Channels](../../raw/_inbox/web-push-events-into-a-running-session-with-channels-claude-code.md) — Anthropic, Claude Code docs
 [^src26]: [Claude Code Artifacts (email announcement)](../../raw/_inbox/email-2026-06-19-anthropic-drops-claude-code-artifacts.md) — Anthropic
+[^src27]: [Settings — Claude Code docs](../../raw/_inbox/web-claude-code-settings-claude-code-docs.md) — Anthropic
+[^src28]: [Desktop application — Claude Code docs](../../raw/_inbox/web-desktop-application-claude-code-docs.md) — Anthropic
+[^src29]: [Use Claude Code on the Web — Claude Code docs](../../raw/_inbox/web-use-claude-code-on-the-web-claude-code-docs.md) — Anthropic
+[^src30]: [Glossary — Claude Code docs](../../raw/_inbox/web-glossary-claude-code-docs.md) — Anthropic
+[^src31]: [Someone Put Ads in the Claude Code Spinner — Claude Code Camp](../../raw/email/email-2026-06-18-someone-put-ads-in-the-claude-code-spinner.md) — Abhishek, Claude Code Camp newsletter

@@ -45,6 +45,27 @@ sources:
   - path: raw/_inbox/web-github-edlsh-pi-ask-user-interactive-decision-gating-extensi.md
     channel: web
     ingested_at: 2026-06-24
+  - path: raw/_inbox/web-agent-skills-overview-agent-skills.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/_inbox/github-contains-studio-agents.md
+    channel: github
+    ingested_at: 2026-06-25
+  - path: raw/_inbox/github-taoufik123-collab-claude-watch.md
+    channel: github
+    ingested_at: 2026-06-25
+  - path: raw/_inbox/youtube-6kGXn-j16QM-7-hermes-desktop-hacks-that-will-change-your-life.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/web/measure-skills-bash.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/web/discover-and-install-prebuilt-plugins-through-marketplaces-c.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-stop-learning-obs-report.md
+    channel: notes
+    ingested_at: 2026-06-25
 aliases:
   - agent skills
   - Claude skills
@@ -57,11 +78,16 @@ aliases:
   - skills-as-SDLC
   - anti-rationalization tables
   - process over prose
+  - agentskills.io
+  - three-stage progressive disclosure
+  - bundled sub-agents
+  - specialist agent profiles
 tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-09
-updated: 2026-06-24
+updated: 2026-06-25
+
 ---
 
 # Agent Skills
@@ -282,11 +308,94 @@ The pattern [^src12]:
 
 The key insight: the `/how-to` pattern lowers the activation energy for skill creation — instead of designing an elaborate SKILL.md with sections for context/procedure/output/gotchas, you start with a simple "here's how to do it" document and refine over time [^src12]. The skill file itself is the documentation; updating it is the practice of capturing expertise.
 
+## The agentskills.io open standard
+
+The official agentskills.io spec (from Anthropic) defines skills as an **open standard for agent capability packaging** with three-stage progressive disclosure [^src14]:
+
+1. **Discovery** — only `name` and `description` enter the context window. The agent scans all installed skills to decide what's relevant. Total token cost: a few dozen tokens across the entire skill library.
+2. **Activation** — when the agent determines a skill applies, it reads the `SKILL.md` body into context. This is the "activation" gate — wrong descriptions mean skills never activate.
+3. **Execution** — the agent follows the skill's procedural instructions, referencing any `references/` and `scripts/` files the skill body points to.
+
+The spec also defines `allowed-tools` and `effort` frontmatter fields, enabling a skill to constrain or boost the agent's tool access and reasoning depth for that specific workflow [^src14].
+
+> "A skill is the unit where intent (the description) and procedure (the body) are packaged together as one versioned, portable artifact." [^src14]
+
+This three-stage model is the formalization of the progressive disclosure principle documented throughout this page — agentskills.io makes it interoperable across Claude Code, Cursor, Gemini CLI, Codex, and other harnesses [^src14].
+
+## Sub-agent libraries (contains-studio/agents)
+
+Contains Studio's `agents` repo (12,388★) ships ~60 specialized Claude Code sub-agents organized by department (design, dev, product, marketing, etc.) [^src15]. Each agent is a markdown file in `.claude/agents/` with a `description` that Claude uses to decide when to auto-delegate. The library is installed to `~/.claude/agents/` so agents are available across all projects.
+
+Key design principle: agents are triggered by task description, not by explicit invocation — "describe a UI design task and the design sub-agent picks it up" [^src15]. This is the same progressive-disclosure trigger that drives skills, applied to full agent personas rather than single procedures.
+
+Selected agent categories [^src15]:
+- `dev/` — code review, security audit, test generation, API design, refactoring
+- `design/` — component design, accessibility review, design-system consistency
+- `product/` — PRD writer, feature spec, user story generation
+- `marketing/` — copy generation, SEO analysis
+
+See [[ai-engineering/claude-managed-agents|Claude Managed Agents]] for the cloud-hosted version; this is the local, open-source equivalent.
+
+## claude-watch: video-watching skill
+
+`claude-watch` (taoufik123-collab, 188★) is a Claude Code skill that enables watching and analyzing video files [^src16]. The skill extracts scene-change frames (one per shot cut, using ffmpeg) plus a dense 0–10s hook microscope (2fps + word-level Whisper transcription), then generates a structured `report.md` with Claude-fill markers.
+
+Key capabilities [^src16]:
+- **Scene-change extraction** — one representative frame per visual cut, giving Claude the key visual beats without the full frame rate
+- **Hook microscope** — 2fps dense sampling for the first 10 seconds (where audience retention is determined) + word-level timestamp alignment
+- **`$WATCH_VAULT_DIR`** — if set, the report auto-saves to an Obsidian vault folder, making it part of a PKM workflow
+
+The `report.md` template uses Claude-fill markers that the agent fills from video content, producing a consistent structure (TL;DR, key moments, hook microscope, editorial profile, quotable moments, entities mentioned, concepts surfaced, transcript) [^src16]. See also [[ai-engineering/computer-use|Computer Use]] for related screen-perception patterns.
+
+## Specialist agent profiles (Hermes pattern)
+
+The Hermes desktop workflow demonstrates using named **specialist agent profiles** as a skill-like pattern for Claude Code Desktop [^src17]. Each profile is a separate Claude Code session with a tailored system prompt, tool permissions, and CLAUDE.md — a "Nova" YouTube research agent, a "DevOps" deployment agent, etc. Switching profiles is switching sessions [^src17].
+
+This extends the sub-agent concept: instead of a task-triggered sub-agent, a specialist profile is a *persistent workspace* — a pinned Claude Code session that always has the right tools, context, and permissions loaded for one domain of work [^src17]. See [[ai-engineering/hermes|Hermes]] for the full desktop workflow.
+
 ## pi-ask-user as a bundled skill example
 
 The `pi-ask-user` package ships a companion skill (`skills/ask-user/SKILL.md`) that is the skill for the `ask_user` tool [^src13]. This is a production example of the "bundle a skill alongside each capability" pattern: the tool provides the mechanical capability (presenting a structured question with options), and the skill provides the procedural knowledge of *when* to use it (architectural trade-offs, ambiguous requirements, high-stakes assumptions).
 
 The skill trains Claude to follow a "decision handshake" before asking: gather evidence → formulate one well-informed question → wait → confirm understanding → proceed. Without the skill, Claude might either ask too early (before sufficient context) or never ask at all (silently picking an interpretation). See [[ai-engineering/agentic-workflow|Agentic Workflows]] for the full pi-ask-user documentation.
+
+## Measuring skill usage (PreToolUse hook)
+
+A single `PreToolUse` hook configuration lets you log every skill invocation to a file, enabling data-driven insight into which skills fire most often (and which never fire) [^src18]:
+
+```json
+// ~/.claude/settings.json
+{
+  "hooks": {
+    "PreToolUse": [{
+      "matcher": "Skill",
+      "hooks": [{ "type": "command", "command": "~/.claude/hooks/log-skill.sh" }]
+    }]
+  }
+}
+```
+
+The hook receives the full payload via stdin (including `tool_input.skill` and `tool_input.args`); `jq` extracts the skill name, appending `$(date -u +%s) $USER $skill $args` to `~/.claude/skill-usage.log` [^src18]. A week of this log reveals which skills are invoked frequently (warrant more investment) vs. those that underfire (description probably needs improvement per §"Write descriptions for the model"). This is the measurement arm of the skill-quality loop [^src18].
+
+## Claude Code plugin marketplace (built-in)
+
+The native Claude Code `/plugin` command provides a full lifecycle for skills distributed as plugins [^src19]:
+
+- **Discover tab**: browse Anthropic's official marketplace (auto-registered as `claude-plugins-official`) and any community/custom marketplaces you've added. Plugins display context-cost estimate (tokens/turn), last-updated date, and a "Will install" summary of commands/agents/skills/hooks/MCP servers.
+- **Install scopes**: User (across all projects), Project (`.claude/settings.json`, shared with collaborators), Local (project-only, not shared).
+- **Marketplace sources**: GitHub owner/repo format (`anthropics/claude-plugins-official`), git URLs, local paths, or remote JSON URLs.
+- **Official categories**: code intelligence (LSP plugins for 11 languages giving Claude jump-to-definition + auto-diagnostics), external integrations (GitHub, GitLab, Jira, Figma, Slack, etc. as pre-configured MCP bundles), development workflows (commit-commands, pr-review-toolkit, agent-sdk-dev), output styles [^src19].
+- **Security warning**: "Plugins and marketplaces are highly trusted components that can execute arbitrary code on your machine with your user privileges." Only install from trusted sources [^src19].
+
+The key insight: the plugin system is the productized form of skill distribution — it adds versioning, context-cost transparency, install-scope control, and auto-update management on top of the raw `SKILL.md` format [^src19].
+
+## Obsidian as an AI-native skills substrate
+
+An underappreciated framing: Obsidian vaults are already AI-native because every note is a plain `.md` file — Claude reads and writes Markdown natively with no API integration layer [^src20]. Steph Ango (Obsidian CEO, @kepano) formalized this by releasing an open-source repo of five agent skills teaching Claude Code the correct file grammars for every Obsidian file type (Markdown, Bases, Canvas JSON schema, CLI, Defuddle web clipper) [^src20].
+
+The problem the skills solve: "without these skills, Claude silently breaks things — it'll generate wiki links with the wrong syntax, write canvas JSON that Obsidian can't parse, create base files that are structurally invalid. You won't get any error. It'll just be wrong" [^src20]. This is a precise illustration of the SDLC skills principle: skills encode the *grammar* (file-format correctness) that a LLM knows about abstractly but doesn't apply reliably without explicit procedural guidance.
+
+The broader lesson: any domain with precise file-format or API contracts benefits from a dedicated skill that encodes the grammar, not just best-practice prose [^src20].
 
 ## See also
 
@@ -317,3 +426,10 @@ The skill trains Claude to follow a "decision handshake" before asking: gather e
 [^src11]: [How to Set Up Your Coding Agent: A Step-by-Step Guide](../../raw/web/web-how-to-set-up-your-coding-agent-a-step-by-step-guide.md) — Prathmesh Yelne
 [^src12]: [Claude Replaced Me (Ruben Hassid)](../../raw/email/email-2026-06-14-claude-replaced-me.md) — /how-to skill pattern + Cowork + Opus 4.8
 [^src13]: [pi-ask-user — Interactive decision-gating extension (GitHub)](../../raw/_inbox/web-github-edlsh-pi-ask-user-interactive-decision-gating-extensi.md) — edlsh
+[^src14]: [Agent Skills overview — agentskills.io](../../raw/_inbox/web-agent-skills-overview-agent-skills.md) — Anthropic open standard
+[^src15]: [contains-studio/agents — 60+ specialized Claude Code sub-agents](../../raw/_inbox/github-contains-studio-agents.md) — Contains Studio, GitHub ★12,388
+[^src16]: [taoufik123-collab/claude-watch — Video watching skill for Claude Code](../../raw/_inbox/github-taoufik123-collab-claude-watch.md) — GitHub ★188
+[^src17]: [7 Hermes Desktop Hacks That Will Change Your Life](../../raw/_inbox/youtube-6kGXn-j16QM-7-hermes-desktop-hacks-that-will-change-your-life.md) — YouTube
+[^src18]: [measure-skills.bash — PreToolUse hook for skill usage logging](../../raw/web/measure-skills-bash.md) — Thariq Shihipar (GitHub Gist)
+[^src19]: [Discover and install prebuilt plugins through marketplaces](../../raw/web/discover-and-install-prebuilt-plugins-through-marketplaces-c.md) — Claude Code Docs, Anthropic
+[^src20]: [Stop Learning Obsidian](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-stop-learning-obs-report.md) — YouTube (notes report)

@@ -93,6 +93,24 @@ sources:
   - path: raw/_inbox/web-use-research-on-claude-claude-help-center.md
     channel: web
     ingested_at: 2026-06-24
+  - path: raw/_inbox/youtube--h2C65Qd9Mg-5-claude-connectors-with-insane-use-cases-out-of-100.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/_inbox/youtube-HxEQ7bLKrqI-give-claude-your-files-and-watch-what-happens.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-portfolio-trade-a-report.md
+    channel: notes
+    ingested_at: 2026-06-25
+  - path: raw/youtube/KpG2yBi5I10-claude-routines-just-launched-here-are-13-you-need.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/web/use-claude-cowork-on-team-and-enterprise-plans-claude-help-c.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/web/claude-for-microsoft-365-claude-by-anthropic.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - Claude Cowork
   - Cowork
@@ -102,7 +120,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-06-12
-updated: 2026-06-24
+updated: 2026-06-25
 ---
 
 # Claude Cowork
@@ -339,6 +357,38 @@ Enterprise-only (direct-provider Bedrock/Vertex/gateway supported; claude.ai Ent
 
 On claude.ai Enterprise, additional attributes: `user.email`, `account_uuid`, `org.id`, MCP server metadata, `file.upload` spans. Direct provider setups (Bedrock/Vertex) lack these.
 
+## Connector use cases (live demos)
+
+Five documented connector combinations with real-world use cases from a practitioner walkthrough [^src29]:
+
+| Connector | Use case demonstrated |
+|---|---|
+| **Higsfield** (image/video gen) | Generate on-brand social media visuals from a text prompt; bulk-generate variant images in one Cowork session |
+| **Clay** (lead scraping + enrichment) | Scrape leads from LinkedIn search → enrich with company/contact data → export enriched CSV; "like a full-time SDR in the chat window" |
+| **Supabase** (database + live artifacts) | Write SQL against a live Supabase DB; render results as an interactive HTML artifact in the chat; no-code database operations |
+| **Zapier MCP** (9,000+ app actions) | One connector URL unlocks 9,000+ Zapier action triggers; demonstrated: auto-send Slack message when a deal moves in HubSpot |
+| **Gmail** (read + schedule) | Pull emails meeting a filter, summarize and triage, schedule follow-up tasks; combined with a daily routine to run headlessly |
+
+**Scheduling pattern** [^src29]: configure a Claude Cowork routine (scheduled trigger, daily at a set time) using any of these connectors. The daily run reads Gmail → identifies high-priority leads → scrapes Clay → outputs an enriched CSV to a shared folder. "Set it and forget it" lead pipeline that requires no human involvement after initial setup.
+
+## File system tasks (parallel reads and synthesis)
+
+Claude Co-work (and Claude Code) can operate on a local folder as a workspace, enabling file-at-scale tasks not possible in a chat window [^src30]:
+
+| Task type | Documented capability |
+|---|---|
+| **Parallel PDF reading** | Read 10+ PDFs simultaneously; return a synthesis with cross-document themes and a per-document summary |
+| **Edit existing files** | Append to a log, update a running doc, fix formatting across files in a folder |
+| **Create new files** | Generate reports, exports, or new structured markdown files based on read content |
+| **Organize folders** | Sort and move files based on content analysis or naming patterns (e.g. sort 200 documents into topic folders) |
+| **Historical data iteration** | Process 18 years of health log files; synthesize long-term trends, identify anomalies |
+| **Obsidian vault scanning** | Scan 1500+ notes; find connections across notes in different folders; generate a synthesis document |
+| **Cross-folder synthesis** | Pull themes from one project folder, connect to a second folder, write a joined synthesis |
+
+**Key behavior**: Claude reads files in parallel within a single session — it doesn't process one at a time and wait. For a 10-PDF task, all 10 are processed in the same context window, enabling cross-document reasoning that sequential processing cannot achieve [^src30].
+
+**Mental model**: "Obsidian = Finder 2.0" — the vault is a plain folder of markdown files; Claude Co-work reads it the same way it reads any folder. Tool-agnostic: the same vault works with Claude Co-work, Claude Code, VS Code + Claude extension [^src30].
+
 ## Research mode
 
 Research mode is an agentic multi-search capability that iterates on its own findings across multiple searches [^src28].
@@ -351,6 +401,74 @@ Research mode is an agentic multi-search capability that iterates on its own fin
 - Uses limits faster than normal responses — budget accordingly
 
 Available on Pro, Max, Team, and Enterprise plans; available on web, mobile, and desktop.
+
+## Claude Routines: event-driven vs scheduled (the doorbell vs alarm clock distinction)
+
+Claude Routines (launched by Anthropic 2026-04) are packaged automations that run in Anthropic's cloud — three components: **instructions** (the prompt/job description), **workspace** (a cloud folder with reference material), and **app access** (which connectors the routine may use) [^src32].
+
+**The core distinction from scheduled tasks** [^src32]:
+
+| | Scheduled tasks | Routines |
+|---|---|---|
+| Trigger type | Time only ("alarm clock") | Events OR time ("doorbell") |
+| Runs on | Your local computer (laptop must be open) | Anthropic's cloud (laptop can be closed) |
+| Mid-task pauses | May pause for approval | Fully autonomous start to finish; review output at end |
+
+Routines are also distinct from n8n/Make/Zapier: workflow builders require you to draw a flowchart with every condition mapped in advance; routines take a *goal* ("when a lead comes in, research them and draft a personalized follow-up") and let Claude figure out how to execute for each unique instance [^src32].
+
+**13 documented routine use cases** [^src32]:
+
+Event-triggered ("doorbells"):
+1. New lead follow-up drafter — fires when a form is submitted; drafts tailored reply in minutes
+2. Negative review response drafter — fires on 1–2 star review; writes calm public response
+3. Missed call recovery assistant — fires on missed call log; drafts callback text/email
+4. Overdue invoice nudger — fires when accounting tool flags overdue; writes personalized reminder
+5. Cancelled booking win-back — fires on cancellation; drafts re-engage offer
+6. Contact form router — classifies inquiry (lead/support/partnership/spam) and routes with drafted reply
+7. New customer onboarding message — fires on sale close; drafts personalized welcome with next steps
+8. Support escalation summarizer — fires on urgent ticket; summarizes, suggests resolution, drafts reply
+9. Abandoned cart recovery writer — fires on cart abandon; writes personalized recovery message addressing likely objections
+10. Churn risk responder — fires on downgrade/pause/cancel start; drafts save attempt personalized to usage history
+
+Scheduled ("alarm clocks"):
+11. Morning founder command center — daily 7 am brief pulling Slack, email, calendar, analytics
+12. Weekly founder product brief — Friday summary of complaints, feature requests, churn signals, shipped/not-shipped
+13. (Implied: weekly digest, content summary, etc.)
+
+**Routine instructions template** (5-part structure) [^src32]:
+1. **Role** — "You are my lead follow-up specialist"
+2. **Outcome** — "Draft a personalized follow-up email within 2 minutes of a new lead arriving"
+3. **Steps** — what to read → what to think/decide → what to produce
+4. **Output** — where to post, format constraints ("post to Slack, under 100 words")
+5. **Rules** — guardrails ("never send directly, always wait for my approval")
+
+**Decision rule for routines vs n8n** [^src32]: use routines when Claude is doing the thinking/writing/research (judgment per instance). Use n8n when the workflow *itself* is the product — strict sequence, precise conditions, 10+ apps in exact order.
+
+## Team and Enterprise admin controls
+
+**Admin controls for Cowork on Team/Enterprise plans** [^src33]:
+
+- Cowork is ON by default; org owners can toggle it off for the entire org (Organization settings → Capabilities)
+- No per-user or per-role granularity on the Cowork toggle on Team plans; Enterprise plans can use groups/custom roles for per-team control
+- Plugins follow the same toggle; no separate plugin access setting
+
+**Plugin marketplace management** (org owners) [^src33]:
+
+| Status | Effect |
+|---|---|
+| Installed by default | Auto-added to all members; members can uninstall |
+| Available | Appears in catalog; members opt in |
+| Required | Auto-installed; members cannot uninstall |
+| Not available | Hidden from catalog (staging/deprecating) |
+Enterprise plans can override per group.
+
+**Projects**: stored locally on each user's computer; no org-level admin controls for project creation or data access [^src33].
+
+**OTel monitoring**: Team/Enterprise owners can stream Cowork events to SIEM/observability via OpenTelemetry (see §OpenTelemetry monitoring above). Cowork activity is NOT captured in the Compliance API [^src33].
+
+**Local conversation storage**: Cowork history is stored locally; not subject to Anthropic's standard retention policies and cannot be centrally exported by admins [^src33].
+
+**Prompt injection risk** [^src33]: Cowork accesses third-party content (websites, emails, documents) during task execution. Malicious content in those sources could attempt to hijack Claude's actions. Mitigation: review tasks carefully before approving; use "Ask before acting" mode when working with untrusted content; restrict connector access.
 
 ## See also
 
@@ -388,3 +506,9 @@ Available on Pro, Max, Team, and Enterprise plans; available on web, mobile, and
 [^src26]: [Monitor Claude Cowork activity with OpenTelemetry](../../raw/_inbox/web-monitor-claude-cowork-activity-with-opentelemetry-claude-hel.md) — Anthropic Help Center
 [^src27]: [Configure a custom OpenTelemetry collector for Office agents](../../raw/_inbox/web-configure-a-custom-opentelemetry-collector-for-office-agents.md) — Anthropic Help Center
 [^src28]: [Use Research on Claude](../../raw/_inbox/web-use-research-on-claude-claude-help-center.md) — Anthropic Help Center
+[^src29]: [5 Claude Connectors with Insane Use Cases](../../raw/_inbox/youtube--h2C65Qd9Mg-5-claude-connectors-with-insane-use-cases-out-of-100.md) — YouTube (Higsfield, Clay, Supabase, Zapier MCP, Gmail)
+[^src30]: [Give Claude Your Files and Watch What Happens](../../raw/_inbox/youtube-HxEQ7bLKrqI-give-claude-your-files-and-watch-what-happens.md) — YouTube (file system access demo)
+[^src31]: [Portfolio Trade Automation with Claude MCP Routines](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-portfolio-trade-a-report.md) — YouTube (processed report; demonstrates Claude Code routine + remote MCP connector + email-summary loop pattern)
+[^src32]: [Claude Routines Just Launched. Here Are 13 You Need.](../../raw/youtube/KpG2yBi5I10-claude-routines-just-launched-here-are-13-you-need.md) — AI Founders, YouTube
+[^src33]: [Use Claude Cowork on Team and Enterprise plans](../../raw/web/use-claude-cowork-on-team-and-enterprise-plans-claude-help-c.md) — Anthropic Help Center
+[^src34]: [Claude for Microsoft 365](../../raw/web/claude-for-microsoft-365-claude-by-anthropic.md) — Anthropic, claude.com/claude-for-microsoft-365

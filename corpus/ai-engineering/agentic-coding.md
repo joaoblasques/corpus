@@ -75,6 +75,15 @@ sources:
   - path: raw/_inbox/web-how-anthropic-uses-claude-in-marketing-claude.md
     channel: web
     ingested_at: 2026-06-24
+  - path: raw/_inbox/youtube-2HtqFVLgjLI-how-software-engineers-actually-use-coding-agents-in-2026.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/youtube/k_D_C3ExypU-don-t-pay-for-claude-code-build-this-instead.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/youtube/vQebObsd_Cw-i-gave-codex-a-24-7-server-now-it-codes-while-i-sleep.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - agentic coding
   - agentic engineering
@@ -97,7 +106,7 @@ tags:
   - corpus/ai-engineering
   - synthesis
 created: 2026-06-12
-updated: 2026-06-24
+updated: 2026-06-25
 ---
 
 # Agentic Coding
@@ -386,7 +395,33 @@ Not all agentic output needs the same review depth. A **blast radius** triage sc
 
 High-blast-radius changes (auth, payments, migrations) get adversarial review; low-blast-radius changes (UI copy, config constants) get lighter review [^src18].
 
-### Human on the loop, not in the loop
+### How software engineers actually use coding agents (2026 survey)
+
+A practitioner-led walkthrough of real agentic coding workflows in 2026 surfaces survey data, live demos, and token-saving strategies [^src23]:
+
+**Tool landscape (practitioners' self-reported primary tools)** [^src23]:
+- **Claude Code** (#1 overall) — used by the majority of senior practitioners
+- **CodeX** — popular for cost efficiency (running on cheaper models)
+- **Pi agent** — gaining traction with senior developers (see [[ai-engineering/pi-agent|Pi Agent]] for full coverage)
+- **GitHub Copilot Agent** — dominant in enterprise environments due to existing licensing
+- **Skills and MCP servers** — "standard practice" across all tools, not an advanced technique
+
+**Pain points** [^src23]:
+- **Multiple sessions management** — managing 3–5 parallel agent sessions is the top workflow friction point; agent view (Claude Code) and session naming are the main mitigation strategies
+- **Context bleeding** — agents from one session influencing another via shared `CLAUDE.md` or shared branches; worktrees (`--worktree`) are the fix
+- **Token spend surprises** — practitioners now treat token budget like a compute budget; running out mid-task is a common failure mode
+
+**Token-saving strategies observed in practice** [^src23]:
+- **`/compact`** — the most-used context management command; practitioners compact at 40–50% context fill, not when forced
+- **`git-ingest`** — feed only the relevant module's file tree as a single string rather than letting Claude crawl; reduces file-reading turns for large monorepos
+- **Image downsizing** — for computer-use tasks, rescale screenshots to 1280×720 before sending; the most impactful single change for computer-use cost
+- **Coding beyond coding** — use Claude Code for non-code tasks (FFmpeg video conversion, GCloud deployment, data transforms); "treating it like a programmable terminal" rather than a coding assistant
+
+**Steering agents mid-task** [^src23]: practitioners interrupt long runs to course-correct rather than letting them run to completion and rolling back. Pattern: check in at natural boundaries (after the plan stage, after a major file is written), not turn-by-turn. "Interrupting once at 20% is worth more than reviewing 100% at the end."
+
+**MCP integrations** [^src23]: Slack MCP (post updates to channels mid-task) and commit hooks (run tests, linting, security scan on every agent commit) are the two highest-adoption extensions beyond the base install. Commit hooks catch agent mistakes before they accumulate.
+
+## Human on the loop, not in the loop
 
 The shift implied: the human's job moves from *writing* to *directing and verifying*. "Human on the loop" means you design the loop (tooling, test scaffolding, review gates), review the output, and approve before merge — rather than writing code yourself or approving each agent step interactively [^src18]. See also the [[ai-engineering/multi-agent-systems|Ralph Loop]] for the compound version of this in multi-agent engineering.
 
@@ -416,6 +451,31 @@ Claude Code ships a managed code review service (Team and Enterprise subscriptio
 **Local review** (`/code-review`) [^src19]: runs in any Claude Code session without the GitHub App. Reviews commits ahead of upstream + uncommitted changes. `--fix` applies findings to the working tree. `/code-review ultra --fix` runs ultrareview in the cloud and applies fixes on return.
 
 **Cost** [^src19]: ~$15–25 per review on average, billed separately from plan usage. Scales with PR size and complexity. Monitor via the Code Review analytics dashboard.
+
+## DIY Claude Code alternative: Night Code monorepo approach
+
+For practitioners who want full control over the coding agent harness without paying for a managed product, the Night Code monorepo pattern is a common alternative [^src23]:
+
+- Runs a local Claude API call with a prompt configured as a CLAUDE.md-style system prompt
+- Uses `tmux` for terminal session management + `zsh` for command execution (the same primitives Claude Code uses under the hood)
+- Cost advantage: direct API access with prompt caching vs. Claude Code's subscription overhead
+- Trade-off: you own the error handling, context management, and update cycle
+
+"If you like programming, you should be able to build something like this yourself" — the insight being that Claude Code's magic is less about proprietary technology and more about orchestrated tool use and prompt design, which is replicable [^src23].
+
+## Codex 24/7 on a VPS — async coding while you sleep
+
+OpenAI Codex can run on a VPS (e.g. Hetzner CX22, ~€3.92/month) for continuous background coding without a local machine [^src24]:
+
+**Setup pattern** [^src24]:
+- Provision VPS → SSH access → install Node.js + `npm i -g @openai/codex`
+- Store a personal OpenAI API key on the server
+- Launch Codex in `--approval-mode full-auto` with no confirmations required
+- Connect via SSH from any device; async results accumulate on the server
+
+**Workflow**: Codex implements features, commits changes on the VPS, pushes to GitHub; you review the PRs from your phone [^src24]. The VPS-as-always-on-coder pattern removes the constraint that the agent needs your laptop open and active.
+
+**Codex vs Claude Code**: Codex favors background VPS operation with full-auto approval; Claude Code's Dispatch feature enables phone-triggered operation with the desktop app as the execution environment [^src24].
 
 ## See also
 
@@ -448,3 +508,6 @@ Claude Code ships a managed code review service (Team and Enterprise subscriptio
 [^src20]: [The Factory Model: How Coding Agents Changed Software Engineering](../../raw/web/web-the-factory-model-how-coding-agents-changed-software-enginee.md) — Addy Osmani
 [^src21]: [The Agent That Saved My Brain](../../raw/_inbox/web-the-agent-that-saved-my-brain.md) — Austin Tedesco, Every
 [^src22]: [How Anthropic uses Claude in Marketing](../../raw/_inbox/web-how-anthropic-uses-claude-in-marketing-claude.md) — Austin Lau, Anthropic
+[^src23]: [Don't Pay for Claude Code — Build This Instead](../../raw/youtube/k_D_C3ExypU-don-t-pay-for-claude-code-build-this-instead.md) — Night Code, YouTube
+[^src24]: [I Gave Codex a 24/7 Server: Now It Codes While I Sleep](../../raw/youtube/vQebObsd_Cw-i-gave-codex-a-24-7-server-now-it-codes-while-i-sleep.md) — YouTube
+[^src23]: [How Software Engineers Actually Use Coding Agents in 2026](../../raw/_inbox/youtube-2HtqFVLgjLI-how-software-engineers-actually-use-coding-agents-in-2026.md) — YouTube survey/walkthrough

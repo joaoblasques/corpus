@@ -27,6 +27,9 @@ sources:
   - path: raw/_inbox/web-notion-q-a-claude-managed-agents-claude-by-anthropic.md
     channel: web
     ingested_at: 2026-06-24
+  - path: raw/github/crewaiinc-crewai-examples.md
+    channel: github
+    ingested_at: 2026-06-25
 aliases:
   - multi-agent
   - multi-agent system
@@ -243,3 +246,4 @@ The Notion case study (Eric Liu, PM) documents a production implementation where
 [^src6]: [Multi-agent coordination patterns: Five approaches and when to use them](../../raw/notes/notes-clippings-multi-agent-coordination-patterns-five-approaches-and-when-t.md) — Cara Phillips et al., Anthropic
 [^src7]: [pi-subagents — Pi extension for async subagents (GitHub)](../../raw/_inbox/web-github-nicobailon-pi-subagents-pi-extension-for-async-subage.md) — nicobailon
 [^src8]: [Notion Q&A — Claude Managed Agents](../../raw/_inbox/web-notion-q-a-claude-managed-agents-claude-by-anthropic.md) — Eric Liu, Notion PM
+[^src9]: [crewAIInc/crewAI-examples — Official CrewAI workflow examples (6K★)](../../raw/github/crewaiinc-crewai-examples.md) — crewAIInc, GitHub

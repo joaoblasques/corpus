@@ -6,15 +6,22 @@ sources:
   - path: raw/email/email-2026-05-27-how-i-use-hermes-as-a-lead-developer.md
     channel: email
     ingested_at: 2026-06-16
+  - path: raw/_inbox/youtube-6kGXn-j16QM-7-hermes-desktop-hacks-that-will-change-your-life.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - Hermes
   - Hermes agent
   - Hermes coding agent
+  - Hermes Desktop
+  - interview-before-acting
+  - pinned sessions
+  - remote gateway
 tags:
   - corpus/ai-engineering
   - entity
 created: 2026-06-16
-updated: 2026-06-21
+updated: 2026-06-25
 ---
 
 # Hermes (coding agent)
@@ -66,15 +73,37 @@ For inspecting the running system, the source walks through the deployment layer
 - **Inspect the Docker Compose and environment files.**
 - **Enter the container and locate Hermes data.**
 
-> [Thin source — a sponsored newsletter outlining a video walkthrough; deeper Hermes capabilities are not yet captured. Expand when a primary source is ingested.]
+> [Thin first source — a sponsored newsletter outlining a video walkthrough of the VPS/Telegram setup. The seven-hack walkthrough below provides deeper Hermes Desktop usage patterns.]
+
+## 7 Hermes Desktop hacks
+
+A walkthrough of advanced workflows using Claude Code Desktop branded as "Hermes Desktop" — seven patterns for power users [^src2]:
+
+**Hack 1 — Interview before acting.** Never let Hermes (Claude Code) start a task immediately. Begin every session with: "Before you start, ask me three clarifying questions about this task." This front-loads ambiguity resolution and prevents the common failure mode of "agent goes off in the wrong direction for 30 minutes" [^src2].
+
+**Hack 2 — Pinned sessions as persistent workspaces.** Instead of opening a new session per task, create named pinned sessions per domain of work (e.g., "Newsletter," "Client Projects," "Dev"). Each pinned session accumulates context and tooling relevant to that domain and stays open indefinitely. Switching between projects means switching sessions, not re-explaining context [^src2].
+
+**Hack 3 — Skills as SOPs.** Encode every recurring workflow as a `SKILL.md` file. The pattern: identify a workflow you explain more than once → record yourself doing it (Loom auto-generates the SOP) → convert to a skill → the next time, type the skill name instead of explaining. "The goal is to have the agent already know how to do it" [^src2]. See [[ai-engineering/agent-skills|Agent Skills]] for the full skill design discipline.
+
+**Hack 4 — Cron jobs for scheduled intelligence.** Use Claude Code routines (or a simple launchd/cron on the server) to run scheduled tasks: daily competitor monitoring, weekly content calendar generation, nightly data pulls. The session runs headlessly; results arrive in email or Slack the next morning [^src2]. See [[ai-engineering/claude-code|Claude Code]] (Routines section) for the routing infrastructure.
+
+**Hack 5 — Webhooks for event-triggered intelligence.** Connect external services (Zapier, n8n, Make.com) to fire a Hermes session on events: a new form submission starts a CRM entry + follow-up email draft; a calendar event ending triggers a meeting summary post [^src2]. The underlying mechanism is the API-triggered routine (see Claude Code § Routines).
+
+**Hack 6 — Specialist agent profiles.** Create named Claude Code sessions with custom system prompts for each recurring specialist need. The documented example is "Nova" — a YouTube content research agent with tools and context scoped only for video research and scripting [^src2]. Switching to Nova means switching to a session where Claude is already a YouTube specialist, not a generalist who needs domain context re-injected. See [[ai-engineering/agent-skills|Agent Skills]] (Specialist agent profiles section).
+
+**Hack 7 — Remote gateway connection.** Run Claude Code on an always-on server (VPS, home server, cloud instance) and connect to it from anywhere via SSH or the Desktop remote-control feature. Benefits: tasks run while the laptop is closed, no context lost when switching devices, and team members can share access to the same running session [^src2]. This is the Desktop-app complement to the VPS/Telegram pattern described above.
+
+> **Key theme across all 7 hacks**: the goal is **removing friction at the point of action** — every hack reduces the gap between "I want this done" and "the agent is doing it." [^src2]
 
 ## See also
 
 - [[ai-engineering/agent-ui|Agent UI]] — operating agents through chat/messaging interfaces
 - [[ai-engineering/agent-harness|Agent Harness]] — the harness around a coding agent
+- [[ai-engineering/agent-skills|Agent Skills]] — skills as SOPs (Hack 3); specialist profiles (Hack 6)
 - [[ai-engineering/agentic-coding|Agentic Coding]] — delegating coding work to agents
 - [[ai-engineering/README|AI Engineering hub]]
 
 ---
 
 [^src1]: [How I use Hermes as a Lead Developer (ZazenCodes)](../../raw/email/email-2026-05-27-how-i-use-hermes-as-a-lead-developer.md)
+[^src2]: [7 Hermes Desktop Hacks That Will Change Your Life](../../raw/_inbox/youtube-6kGXn-j16QM-7-hermes-desktop-hacks-that-will-change-your-life.md) — YouTube

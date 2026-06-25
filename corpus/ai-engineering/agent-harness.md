@@ -39,6 +39,9 @@ sources:
   - path: raw/web/web-agent-harness-engineering.md
     channel: web
     ingested_at: 2026-06-23
+  - path: raw/github/affaan-m-ecc.md
+    channel: github
+    ingested_at: 2026-06-25
 aliases:
   - harness
   - agent harness
@@ -237,3 +240,4 @@ Every harness component encodes an assumption about what Claude can't do on its 
 [^src8]: [A harness for every task: dynamic workflows in Claude Code](../../raw/notes/notes-clippings-a-harness-for-every-task-dynamic-workflows-in-claude-code.md) — Thariq Shihipar & Sid Bidasaria, Anthropic
 [^src9]: [Harnessing Claude's Intelligence: 3 Key Patterns for Building Apps](../../raw/notes/notes-clippings-harnessing-claude-s-intelligence-3-key-patterns-for-building.md) — Lance Martin, Anthropic Platform team
 [^src10]: [Harness Design for Long-Running Application Development](../../raw/web/web-harness-design-for-long-running-application-development.md) — Anthropic engineering blog
+[^src11]: [affaan-m/ECC — GitHub (219K★, v2.0.0)](../../raw/github/affaan-m-ecc.md) — affaan-m, GitHub

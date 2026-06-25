@@ -15,6 +15,18 @@ sources:
   - path: raw/_inbox/web-claude-quickstarts-computer-use-best-practices-at-main-anthr.md
     channel: web
     ingested_at: 2026-06-24
+  - path: raw/_inbox/web-computer-use-safety-classifier-interest-form.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/_inbox/web-desktop-application-claude-code-docs.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/web/computer-use-tool.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/github/magnitudedev-browser-agent.md
+    channel: github
+    ingested_at: 2026-06-25
 aliases:
   - computer use
   - browser use
@@ -25,7 +37,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-17
-updated: 2026-06-24
+updated: 2026-06-25
 ---
 
 # Computer Use (Claude)
@@ -188,6 +200,54 @@ The Claude computer use quickstarts reference implementation (`claude-quickstart
 
 The debugging tooling described above (trajectory viewer, tool debug panel, localization playground) applies to this implementation. See §Debugging tools above.
 
+## Safety classifier interest form
+
+An official Anthropic interest form is available for **prompt injection classifiers** applied to computer use [^src5]. The classifier model:
+
+- Runs by default for the official `computer_20251124` tool type (zero additional latency, zero extra cost per the existing `best-practices` source above)
+- **Does not** run for custom tool implementations (`screenshot` + `click` as generic custom tools)
+- The interest form targets teams building production agentic applications who want early access to classifier updates, extended coverage, or API-level control over classifier sensitivity [^src5]
+
+**Computer use in Claude Code Desktop** [^src6]: the Desktop app ships computer use as a research preview for Pro and Max subscribers on macOS and Windows. This is a higher-level interface than the raw API:
+- The Desktop app manages its own VM / permissions scope
+- Computer use in the Desktop app targets the full macOS/Windows desktop (any app, not just a browser)
+- Requires opt-in in Desktop Settings (not enabled by default)
+- Uses isolated session context separate from the coding session
+
+## Official API: tool versions and actions
+
+Two active computer use tool versions [^src7]:
+
+- **`computer_20251124`** — for Claude Opus 4.8, Opus 4.7, Opus 4.6, Sonnet 4.6, Opus 4.5. Adds enhanced actions: `left_mouse_down`, `left_mouse_up`, scroll, `hold_key`, and the `zoom` action (when `enable_zoom: true`). On WebArena (autonomous web navigation), Claude achieves state-of-the-art among single-agent systems.
+- **`computer_20250124`** — for earlier models (Sonnet 4.5, Haiku 4.5, Opus 4.1, Sonnet 4, Opus 4).
+
+Basic actions available in both versions: `screenshot`, `left_click`, `right_click`, `double_click`, `middle_click`, `type`, `key`, `mouse_move`, `drag` [^src7].
+
+**Token overhead**: the computer use beta adds 466–499 tokens to the system prompt; each tool definition costs 735 input tokens [^src7]. Bash and text editor tools add their own token overhead if co-used.
+
+**Sandboxed environment** — the reference implementation uses a Docker container with: Xvfb virtual display, a lightweight desktop (Mutter + Tint2), pre-installed apps (Firefox, LibreOffice, text editors), and an agent loop managing Claude-to-environment communication [^src7].
+
+## Magnitude browser agent (open-source vision-first)
+
+Magnitude (`magnitudedev/browser-agent`, 4,083★, TypeScript) is an open-source vision-first browser agent that uses vision AI for browser control, scoring 94% on WebVoyager [^src8]:
+
+- **Navigate**: sees and understands any interface to plan actions
+- **Interact**: mouse and keyboard execution
+- **Extract**: structured data extraction matching a Zod schema
+- **Verify**: built-in test runner with visual assertions
+
+Primary use cases: web automation without APIs, data extraction, web app testing, building block for custom browser agents. Unlike most DOM-based browser agents, Magnitude operates on screenshots + vision rather than parsing the DOM [^src8].
+
+```ts
+await agent.act('Create a task', {
+    data: { title: 'Use Magnitude', description: 'Run "npx create-magnitude-app"' }
+});
+const tasks = await agent.extract('List in progress tasks',
+    z.array(z.object({ title: z.string() })));
+```
+
+See [[ai-engineering/agentic-coding|Agentic Coding]] for how this fits into the broader ecosystem of browser automation tools.
+
 ## See also
 
 - [[ai-engineering/claude-code|Claude Code]] — Claude Code's auto mode uses a similar classifier approach for permission decisions
@@ -203,3 +263,7 @@ The debugging tooling described above (trajectory viewer, tool debug panel, loca
 [^src2]: [Introducing Claude Sonnet 4.6](../../raw/web/web-introducing-sonnet-4-6.md) — Anthropic official blog (OSWorld + prompt injection robustness)
 [^src3]: [Mitigating the Risk of Prompt Injections in Browser Use](../../raw/web/web-mitigating-the-risk-of-prompt-injections-in-browser-use.md) — Anthropic (1% attack rate; Claude for Chrome beta)
 [^src4]: [Claude Quickstarts — computer-use best practices](../../raw/_inbox/web-claude-quickstarts-computer-use-best-practices-at-main-anthr.md) — Anthropic GitHub
+[^src5]: [Computer Use Safety Classifier Interest Form](../../raw/_inbox/web-computer-use-safety-classifier-interest-form.md) — Anthropic
+[^src6]: [Desktop application — Claude Code docs](../../raw/_inbox/web-desktop-application-claude-code-docs.md) — Anthropic
+[^src7]: [Computer use tool — Anthropic API docs](../../raw/web/computer-use-tool.md) — docs.anthropic.com
+[^src8]: [magnitudedev/browser-agent — Open-source, vision-first browser agent](../../raw/github/magnitudedev-browser-agent.md) — magnitudedev, GitHub ★4083

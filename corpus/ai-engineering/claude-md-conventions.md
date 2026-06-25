@@ -24,6 +24,12 @@ sources:
   - path: raw/notes/notes-clippings-everyinccompound-engineering-plugin-official-compound-engine.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/youtube/d8BGxfW3Vj4-the-karpathy-claude-md-file-that-43-000-developers-installed.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-claude-code-karpa-report.md
+    channel: notes
+    ingested_at: 2026-06-25
 aliases:
   - CLAUDE.md
   - AGENTS.md
@@ -36,7 +42,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-12
-updated: 2026-06-17
+updated: 2026-06-25
 ---
 
 # CLAUDE.md & Agent Instruction Conventions
@@ -107,7 +113,7 @@ Note the convergent benchmark: both Claude Code and Cursor land on **~80 lines /
 
 ## The Karpathy-derived CLAUDE.md
 
-A widely-shared single `CLAUDE.md` distills Andrej Karpathy's observations on LLM coding pitfalls — that models "make wrong assumptions… and just run along with them without checking" and "like to overcomplicate code… implement a bloated construction over 1000 lines when 100 would do" [^src4]. Four principles address these [^src4]:
+A widely-shared single `CLAUDE.md` (43,000+ installs in its first week, per one video breakdwon) distills Andrej Karpathy's observations on LLM coding pitfalls — that models "make wrong assumptions… and just run along with them without checking" and "like to overcomplicate code… implement a bloated construction over 1000 lines when 100 would do" [^src4][^src7]. Four principles address these [^src4]:
 
 | Principle | Addresses |
 |---|---|
@@ -117,6 +123,15 @@ A widely-shared single `CLAUDE.md` distills Andrej Karpathy's observations on LL
 | **Goal-Driven Execution** | Transform "fix the bug" into "write a failing test, then make it pass" |
 
 The fourth captures Karpathy's "give it success criteria and watch it go" — strong, verifiable criteria let the model loop independently (see [[ai-engineering/agent-testing|Agent Testing]]) [^src4]. It ships both as a Claude Code plugin and as a `CLAUDE.md`, plus a committed `.cursor/rules/karpathy-guidelines.mdc` so the same rules apply in Cursor — an early example of cross-platform convention sharing [^src4].
+
+**Observed behavioral differences with vs without the Karpathy CLAUDE.md** [^src7]:
+
+- *Think Before Coding*: without the skill, Claude assumes and builds; with it, Claude asks clarifying questions before starting, producing more accurate first-pass implementations.
+- *Simplicity First*: vanilla Claude adds 50+ lines for a filter feature; Karpathy-Claude adds 20 lines with deliberate decisions against unnecessary complexity.
+- *Surgical Changes*: vanilla Claude often fails to persist changes (code "doesn't have the right update mechanism"); Karpathy-Claude touches only what was asked, leaving unrelated code untouched.
+- *Goal-Driven Execution*: rather than imperative step-by-step commands, declare the goal (e.g. "user should be able to select an icon for each agent") and Claude self-directs — the declarative vs imperative shift Karpathy describes.
+
+The core insight: changing from **imperative** (commanding agents how to do things) to **declarative** (declaring the desired outcome) consistently extracts better results from agentic workflows [^src7].
 
 ## Cross-platform conventions
 
@@ -151,3 +166,5 @@ This illustrates the current state of cross-platform portability: the base layer
 [^src4]: [multica-ai/andrej-karpathy-skills — A single CLAUDE.md file](../../raw/web/github-multica-ai-andrej-karpathy-skills-a-single-claude-md.md)
 [^src5]: [cursor/plugins — Cursor Plugin Specification and Official Plugins](../../raw/web/github-cursor-plugins-cursor-plugin-specification-and-offici.md)
 [^src6]: [EveryInc/compound-engineering-plugin — Official Compound Engineering plugin](../../raw/notes/notes-clippings-everyinccompound-engineering-plugin-official-compound-engine.md) — EveryInc, GitHub
+[^src7]: [The Karpathy CLAUDE.md File That 43,000 Developers Installed](../../raw/youtube/d8BGxfW3Vj4-the-karpathy-claude-md-file-that-43-000-developers-installed.md) — Jay E, YouTube
+[^src8]: [Claude Code + Karpathy's Obsidian = New Meta](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-claude-code-karpa-report.md) — YouTube (notes report)

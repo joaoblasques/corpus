@@ -6,6 +6,9 @@ sources:
   - path: raw/web/web-dario-amodei-the-urgency-of-interpretability.md
     channel: web
     ingested_at: 2026-06-23
+  - path: raw/_inbox/github-labmlai-inspectus.md
+    channel: github
+    ingested_at: 2026-06-25
 aliases:
   - interpretability
   - mechanistic interpretability
@@ -15,11 +18,13 @@ aliases:
   - circuits
   - features
   - MRI for AI
+  - attention visualization
+  - Inspectus
 tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-23
-updated: 2026-06-23
+updated: 2026-06-25
 ---
 
 # Interpretability
@@ -65,6 +70,34 @@ Beyond research, Amodei advocates [^src1]:
 2. **Light-touch transparency legislation** — require model developers to publish interpretability audits before frontier deployments; optional disclosure for current generation, mandatory for next.
 3. **Export controls on chips to China** — prevent training frontier models without the interpretability infrastructure to audit them.
 
+## Inspectus: LLM analytics visualization tool
+
+**Inspectus** (labmlai/inspectus, 714★) is a Python library for visualizing LLM internals — attention mechanisms, token distributions, and weight statistics — in Jupyter notebooks [^src2]:
+
+```python
+pip install inspectus
+import inspectus
+inspectus.attention(attn, tokens)  # 2-4D tensor or HuggingFace attentions
+```
+
+**Three visualization types** [^src2]:
+
+| Type | What it shows | Use case |
+|---|---|---|
+| **Attention visualization** | Attention matrix, query/key token heatmaps, dimension heatmap across layers/heads | Understanding which tokens a model attends to; debugging attention patterns |
+| **Token visualization** | Per-token metrics (loss, entropy) with multiple metric support and dropdown selector | Identifying high-loss tokens, entropy profiles, training signal distribution |
+| **Distribution plot** | Statistical distribution of arbitrary series data with configurable percentile bands | Identifying outliers in training losses (e.g. MNIST training) |
+
+**Attention visualization components** [^src2]:
+- **Attention Matrix** — pairwise attention scores between all token pairs; interactive (click to filter by query or key token)
+- **Query Token Heatmap** — sum of attention from each query to selected key tokens
+- **Key Token Heatmap** — sum of attention to each key from selected query tokens
+- **Dimension Heatmap** — attention scores normalized across layers and heads
+
+Works with HuggingFace transformers (pass `output_attentions=True`) and custom attention maps (NumPy arrays). The interactive interface is rendered natively in Jupyter; no external server required.
+
+Inspectus is in the "practitioner tool for attention debugging" category rather than the "mechanistic interpretability research" category. Where sparse autoencoders and circuits are research tools for understanding *what features models compute*, Inspectus is a diagnostic tool for understanding *which tokens models attend to* during inference — useful for debugging attention patterns in fine-tuned or deployed models.
+
 ## See also
 
 - [[ai-engineering/anthropic|Anthropic]] — the lab conducting this research; Dario Amodei is co-founder and CEO
@@ -74,3 +107,4 @@ Beyond research, Amodei advocates [^src1]:
 ---
 
 [^src1]: [Dario Amodei: The Urgency of Interpretability](../../raw/web/web-dario-amodei-the-urgency-of-interpretability.md) — Dario Amodei, Anthropic
+[^src2]: [labmlai/inspectus — LLM Analytics](../../raw/_inbox/github-labmlai-inspectus.md) — labmlai, GitHub ★714

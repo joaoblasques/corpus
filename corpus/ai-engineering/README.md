@@ -6,7 +6,7 @@ tags:
   - corpus/ai-engineering
   - hub
 created: 2026-05-07
-updated: 2026-06-19
+updated: 2026-06-25
 ---
 
 # AI Engineering
@@ -74,6 +74,8 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [[ai-engineering/sandcastle|Sandcastle]] — entity · draft · TypeScript library orchestrating sandboxed AFK coding agents; Docker/Podman/Vercel providers, branch strategies, session resume/fork
 - [[ai-engineering/codegraph|CodeGraph]] — entity · draft · local pre-indexed code knowledge graph served over MCP; cuts agent tokens/tool-calls vs. grep/read exploration
 - [[ai-engineering/openviking|OpenViking]] — entity · draft · open-source context database by volcengine; filesystem-paradigm RAG with L0/L1/L2 tiered loading, directory recursive retrieval; outperforms Claude Code native memory on LoCoMo benchmark (+23pp accuracy, -63% tokens)
+- [[ai-engineering/pi-agent|Pi Agent]] — entity · draft · open-source minimal coding agent; 4 tools, <1000-token system prompt, TypeScript extensions, session forking, multi-model via OpenRouter/Ollama
+- [[ai-engineering/gemini-cli|Gemini CLI]] — entity · draft · Google's open-source agentic coding CLI; GEMINI.md context file, custom slash commands, MCP extension, memory, checkpointing, headless mode
 
 ### Syntheses
 - [[ai-engineering/agentic-coding|Agentic Coding]] — synthesis · draft · **sub-hub** · coding-agent orchestration; conductor→orchestrator, AX, the verification bottleneck

@@ -6,6 +6,9 @@ sources:
   - path: raw/notes/notes-clippings-lessons-from-building-claude-code-prompt-caching-is-everythi.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/web/prompt-caching.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - prompt caching
   - prefix caching
@@ -17,7 +20,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-17
-updated: 2026-06-17
+updated: 2026-06-25
 ---
 
 # Prompt Caching
@@ -73,6 +76,36 @@ Claude Code's team runs alerts on cache hit rate and declares SEVs when it drops
 4. **Monitor cache hit rate like uptime.** Alert on cache breaks; treat SEVs seriously.
 5. **Side-computation forks must share the parent's prefix.** Compaction, summarisation, skill execution — all need cache-safe parameters.
 
+## Official API: automatic caching, TTL, and pricing
+
+The Anthropic API supports two caching modes [^src2]:
+
+**Automatic caching** — add a single top-level `cache_control: {"type": "ephemeral"}` field to the request; the system automatically applies a breakpoint to the last cacheable block and advances it as conversations grow. Best for multi-turn conversations; no per-block annotations needed [^src2].
+
+**Explicit caching** — place `cache_control` on individual content blocks for fine-grained control over independently changing sections. Up to 4 breakpoints per request [^src2].
+
+**Lookback window** — on a cache read, the system checks at most 20 block positions backward from the breakpoint. A common mistake: placing the breakpoint on a block that changes every request (e.g. a timestamp). Move it to the last stable block before the dynamic suffix [^src2].
+
+**TTL options** [^src2]:
+- 5-minute (default, `"ephemeral"`) — refreshed at no charge each time it's read
+- 1-hour (`"ephemeral"` + `"ttl": "1h"`) — 2× base input token price; longer TTL must come before shorter ones in the same request
+
+**Pricing multipliers** (vs base input token price) [^src2]:
+
+| Event | Multiplier |
+|---|---|
+| Cache write (5m) | 1.25× |
+| Cache write (1h) | 2× |
+| Cache read | 0.1× |
+
+**Minimum cacheable prefix**: 1,024 tokens for most models (higher for some on Bedrock). Shorter prompts silently skip caching — check `cache_creation_input_tokens` + `cache_read_input_tokens` in response usage to verify [^src2].
+
+**Pre-warming** — send `max_tokens: 0` to load system-prompt content into cache before user traffic arrives (no output billed, cache write billed). Prevents first-request latency penalty in latency-sensitive apps [^src2].
+
+**What invalidates the cache** — changing tool definitions invalidates the full cache (tools→system→messages hierarchy); toggling citations/web-search or changing speed setting invalidates system + message caches; adding/removing images or changing thinking parameters invalidates message cache only [^src2].
+
+**Workspace isolation** (as of Feb 5 2026): caches are isolated per workspace within an org on the Claude API, AWS Platform, and Microsoft Foundry. Two different workspaces do not share cache even with identical prompts [^src2].
+
 ## See also
 
 - [[ai-engineering/agent-cost-management|Agent Cost Management]] — cost economics of long-running agents; prompt caching as the primary lever
@@ -84,3 +117,4 @@ Claude Code's team runs alerts on cache hit rate and declares SEVs when it drops
 ---
 
 [^src1]: [Lessons from building Claude Code: Prompt caching is everything](../../raw/notes/notes-clippings-lessons-from-building-claude-code-prompt-caching-is-everythi.md) — Thariq Shihipar, Anthropic
+[^src2]: [Prompt caching — Anthropic API docs](../../raw/web/prompt-caching.md) — platform.claude.com

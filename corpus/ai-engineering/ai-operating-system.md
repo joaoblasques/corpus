@@ -33,6 +33,18 @@ sources:
   - path: raw/youtube/youtube-JnQcPzjC6Vo-i-gave-pi-access-to-obsidian-and-i-m-not-looking-back.md
     channel: youtube
     ingested_at: 2026-06-21
+  - path: raw/youtube/Bgxsx8slDEA-stop-using-claude-code-without-an-agentic-os.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/youtube/8QQ_INxAhRs-i-turned-claude-fable-into-the-ultimate-second-brain.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-how-to-build-your-report.md
+    channel: notes
+    ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-claude-code-karpa-report.md
+    channel: notes
+    ingested_at: 2026-06-25
 aliases:
   - AI OS
   - AIOS
@@ -43,7 +55,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-21
-updated: 2026-06-21
+updated: 2026-06-25
 ---
 
 # AI Operating System
@@ -150,6 +162,57 @@ See [[ai-engineering/agent-memory|Agent Memory]] for the full taxonomy of memory
 - **Build iteratively ("layers and not leaps").** [^src4] Start with identity + one skill; add connections, routines, and team access over weeks. An AIOS built in one weekend is a project; one built over months is infrastructure.
 - **Tool-agnostic by design.** "Models will be replaced. API endpoints might be deprecated." [^src7] The text-file foundation survives tool churn; migrating to a new agent is pointing it at the same folder.
 
+## Three-step agentic OS build (domain/skill/automation model)
+
+One practitioner framework breaks AIOS construction into domain → task → skill → automation [^src10]:
+
+1. **Domains**: break life/work into domains (research, content, productivity, community, etc.)
+2. **Tasks → Skills**: for each domain, enumerate recurring discrete tasks. Each task becomes a skill. The skill ensures the same execution path every time — "you're not guessing every single time and hoping that Claude code does the same thing it did yesterday" [^src10].
+3. **Automations**: tasks that happen regularly become either *local automations* (cron jobs on the local machine) or *remote automations* (cloud-hosted routines). Claude Code decides which type is appropriate when given the goal [^src10].
+
+**Observability layer**: a visual dashboard outside the terminal for non-terminal users on the team; skills and automations become clickable buttons [^src10].
+
+**Memory layer**: Obsidian vault as the structured store. Three subfolders per the Karpathy pattern: `raw/` (staging/research), `wiki/` (codified articles from raw), `output/` (deliverables — slide decks, reports) [^src10].
+
+## Four-layer agentic OS (technical model)
+
+A parallel technical breakdown used in toolchain presentations [^src11]:
+
+| Layer | Component | Description |
+|---|---|---|
+| 1 | **CLAUDE.md** | Persistent memory loaded every session; identity, rules, project context, optional memory section with write access. "Not a prompt. It's a job description your agent never forgets." Keep under 200 lines. |
+| 2 | **MCP servers** | Connects Claude to every tool in the stack; 12,000+ servers indexed by Pulse MCP (May 2026), ~97M SDK downloads/month. Anthropic donated the protocol to the Linux Foundation (Dec 2025). |
+| 3 | **Hooks** | Shell scripts bound to agent lifecycle events (PreToolUse / PostToolUse / UserPromptSubmit); "like Git hooks, but for your AI agent." Make the OS reactive without polluting the reasoning loop. |
+| 4 | **Subagents** | Specialized workers scoped to a domain, reading the foundation and using the tools. |
+
+Build order: CLAUDE.md → GitHub + filesystem MCP (covers 80% of use cases) → one PostToolUse notification hook → first subagent for the most repetitive task. "Everything reads down. Everything acts up." [^src11]
+
+## Second-brain vs. AIOS distinction
+
+Some practitioners distinguish second brain (knowledge layer) from AIOS (execution layer) [^src12]:
+
+- **Second brain** (knowledge): Does the system know what's going on in your business, your clients, your projects? Can you ask it questions? Requires static context + live connections.
+- **AIOS** (capabilities + cadence): On top of the knowledge layer, do you have encoded skills? Do those skills run as automations when you're not watching?
+
+The four-C's sequence maps to this: Context (who) → Connections (live data) → Capabilities (skills) → Cadence (automations) [^src12].
+
+**CLAUDE.md as a router, not a monologue.** Rather than prose descriptions, the `CLAUDE.md` acts as a navigation map: `path/to/skills`, `path/to/wiki`, `path/to/hotcache`, `path/to/master_index`. The agent reads the map and drills to the relevant file rather than loading all context upfront [^src12].
+
+**Context compounding check**: pulse-check question — "If you opened your Claude Code right now and asked it something about you and your business, would you get an answer that sounds like a stranger or like a teammate or co-founder?" [^src12]
+
+## The Karpathy LLM-Wiki pattern (layered memory architecture)
+
+A synthesis of the AIOS memory debate [^src13]:
+
+- **CLAUDE.md** = identity (who the agent is per session)
+- **Obsidian wiki** = reasoning over a connected knowledge graph (how the agent thinks)
+- **Pinecone / vector store** = flat exact recall for large archives (transcripts, emails)
+- **NotebookLM** = deep research
+
+Obsidian RAG "breaks in 5 places" at scale: index grows linearly/expensively, no semantic search, summaries drift, fills context window, doesn't scale past small/medium datasets. Fix: layered architecture where each tool handles what it's suited for [^src13].
+
+The compounding mechanic: one new source updates 10–15 linked wiki pages, ironing out contradictions — so every future query reads richer knowledge. Traditional RAG re-fetches chunks and forgets; here the wiki layer accumulates [^src13].
+
 ## See also
 
 - [[ai-engineering/context-engineering|Context Engineering]] — the theoretical foundation; an AIOS is applied context engineering
@@ -172,3 +235,7 @@ See [[ai-engineering/agent-memory|Agent Memory]] for the full taxonomy of memory
 [^src7]: [Build & Sell Claude Code Operating Systems (2+ Hour Course)](../../raw/youtube/youtube-bCljOfCH8Ms-build-sell-claude-code-operating-systems-2-hour-course.md) — Nate Herk, YouTube
 [^src8]: [How to Build Your AI Operating System with Claude Code (Full Guide)](../../raw/youtube/youtube-vvDdTPFhCp8-how-to-build-your-ai-operating-system-with-claude-code-full.md) — Riccardo Vandra, YouTube
 [^src9]: [I Gave Pi Access to Obsidian And I'm Not Looking Back](../../raw/youtube/youtube-JnQcPzjC6Vo-i-gave-pi-access-to-obsidian-and-i-m-not-looking-back.md) — DevOps Toolbox, YouTube
+[^src10]: [Stop Using Claude Code Without an Agentic OS](../../raw/youtube/Bgxsx8slDEA-stop-using-claude-code-without-an-agentic-os.md) — Chase AI, YouTube
+[^src11]: [How to Build Your Agentic OS with Claude Code (4-Layer Setup)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-how-to-build-your-report.md) — nyndra AI, YouTube (notes report)
+[^src12]: [I Turned Claude Fable Into The Ultimate Second Brain](../../raw/youtube/8QQ_INxAhRs-i-turned-claude-fable-into-the-ultimate-second-brain.md) — Nate Herk, YouTube
+[^src13]: [Claude Code + Karpathy's Obsidian = New Meta](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-claude-code-karpa-report.md) — YouTube (notes report)

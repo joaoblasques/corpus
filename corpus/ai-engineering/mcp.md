@@ -48,14 +48,27 @@ sources:
   - path: raw/_inbox/web-push-events-into-a-running-session-with-channels-claude-code.md
     channel: web
     ingested_at: 2026-06-24
+  - path: raw/_inbox/web-mcp-connector.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/web/granola-mcp-granola-docs-help-center.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-how-to-build-your-report.md
+    channel: notes
+    ingested_at: 2026-06-25
 aliases:
   - MCP
   - Model Context Protocol
+  - MCP connector API
+  - mcp_servers
+  - MCPToolset
+  - defer_loading
 tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-21
-updated: 2026-06-24
+updated: 2026-06-25
 ---
 
 # MCP (Model Context Protocol)
@@ -232,6 +245,84 @@ As of mid-2026 the Claude connector directory has grown to 200+ connectors spann
 
 **Multi-connector workflows** observed in practice [^src9]: a product manager pulls a query from Amplitude, turns it into a Canva deck, and drops the link into Asana for the team — all in a single conversation. Connectors are available on all plans; mobile is in beta.
 
+## MCP Connector API (Anthropic Messages API)
+
+The MCP Connector API enables server-side MCP connections directly in the Anthropic Messages API — no SDK server, no client-side connection management [^src16].
+
+**Core structure** [^src16]:
+
+```json
+{
+  "model": "claude-opus-4-8-20260801",
+  "mcp_servers": [
+    {
+      "type": "url",
+      "url": "https://mcp.example.com/server",
+      "name": "myserver",
+      "authorization_token": "Bearer <token>"
+    }
+  ],
+  "tools": [
+    {
+      "type": "mcp",
+      "server_name": "myserver",
+      "tool_name": "get_data"
+    },
+    {
+      "type": "mcp",
+      "server_name": "myserver",
+      "name": "MCPToolset",
+      "all_tools": true
+    }
+  ]
+}
+```
+
+**Key parameters** [^src16]:
+
+| Parameter | Purpose |
+|---|---|
+| `mcp_servers` | Array of MCP server definitions (type, url, name, optional auth) |
+| `tools[].type: "mcp"` | Marks a tool as sourced from an MCP server |
+| `MCPToolset` | Magic name that includes all tools from the server |
+| `defer_loading` | Defer loading tool definitions until first use — reduces tokens when most tools are unused per turn |
+| `default_config` | Default parameter values injected into tool calls (e.g. tenant ID, region) |
+| `configs` | Per-call override of `default_config` values |
+| `authorization_token` | OAuth bearer token for server auth; supports dynamic tokens via helper functions |
+
+**`mcp_tool_use` and `mcp_tool_result` content blocks** [^src16]: instead of standard `tool_use`/`tool_result` pairs, MCP tool calls produce specialized content block types that carry the server name alongside the tool call ID. This enables tracing which server produced each result in multi-server setups.
+
+**Migration from deprecated client** [^src16]: the old `mcp-client-2025-04-04` beta header is deprecated. Migration to `mcp-client-2025-11-20` changes the `tools` array format: explicit per-tool entries replace the old all-or-nothing server include. `MCPToolset` with `all_tools: true` is the migration-compatible shorthand.
+
+**Multi-server support** [^src16]: multiple `mcp_servers` entries are supported in one request. Each server is namespaced by its `name` field; tool collisions across servers are resolved by qualifying the tool name as `<server_name>.<tool_name>`.
+
+**OAuth flow** [^src16]: the `authorization_token` field accepts a function (in SDK usage) that fetches a fresh token per request — enabling standard OAuth token-refresh flows without baking tokens into the API call.
+
+**Zapier MCP** demonstrates this at scale: one MCP server URL gives access to 9,000+ Zapier app actions (Gmail, Slack, Airtable, HubSpot, etc.) by composing them through a single authorized connector [^src17].
+
+## Granola MCP — meeting notes as MCP context
+
+Granola (meeting notes app) publishes an MCP server (`https://mcp.granola.ai/mcp`) with 6 tools that expose your meeting history to any MCP-compatible AI [^src18]:
+
+| Tool | Access level | Description |
+|---|---|---|
+| `query_granola_meetings` | All plans | Natural language chat over all Granola notes |
+| `list_meeting_folders` | Paid only | List folders (ID, title, description, note count) |
+| `list_meetings` | All/Paid | Scan meetings by title, date, attendees; paid includes shared notes + folder filter |
+| `get_meetings` | All/Paid | Search meeting content including private notes, enhanced notes, attendees; paid can fetch notes shared with you |
+| `get_meeting_transcript` | Paid only | Fetch raw transcript text (useful for verbatim quotes) |
+| `get_account_info` | All plans | Returns email + workspace for the connected Granola account |
+
+**Use cases enabled** [^src18]: "What did Sam and I discuss last week?", "What are the remaining action items for each person on this project?", "Give specific quotes of how the team described the issue."
+
+**Transport**: Streamable HTTP + OAuth 2.0. Connect in Claude via Settings → Connectors → Granola, or in Claude Code via `/mcp` → authenticate [^src18].
+
+This is a representative example of **personal context servers** — MCP servers that expose a user's private data (meetings, emails, notes) to LLMs without copying data to a third party, using OAuth for per-user auth scoping.
+
+## MCP ecosystem scale (2026)
+
+As of May 2026: 12,000+ MCP servers indexed by Pulse MCP; ~97M SDK downloads/month; Anthropic donated the protocol to the Linux Foundation (Dec 2025) [^src19]. The Zapier MCP demonstrates the horizontal scale: one URL gives one Claude session access to 9,000+ apps via the Zapier action library.
+
 ## See also
 
 - [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] — MCP is the coordination layer for multi-agent architectures
@@ -260,3 +351,7 @@ As of mid-2026 the Claude connector directory has grown to 200+ connectors spann
 [^src13]: [Elicitation — Model Context Protocol](../../raw/web/web-elicitation-model-context-protocol.md) — Anthropic
 [^src14]: [Cloudflare MCP Server (Code Mode)](../../raw/web/web-github-cloudflare-mcp-mcp-server-for-the-cloudflare-api.md) — Cloudflare
 [^src15]: [Push events into a running session with Channels](../../raw/_inbox/web-push-events-into-a-running-session-with-channels-claude-code.md) — Anthropic, Claude Code docs
+[^src16]: [MCP Connector — Anthropic API docs](../../raw/_inbox/web-mcp-connector.md) — Anthropic
+[^src17]: [5 Claude Connectors with Insane Use Cases](../../raw/_inbox/youtube--h2C65Qd9Mg-5-claude-connectors-with-insane-use-cases-out-of-100.md) — YouTube
+[^src18]: [Granola MCP — Granola Docs & Help Center](../../raw/web/granola-mcp-granola-docs-help-center.md) — docs.granola.ai
+[^src19]: [How to Build Your Agentic OS with Claude Code (4-Layer Setup)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-how-to-build-your-report.md) — nyndra AI, YouTube (notes report)

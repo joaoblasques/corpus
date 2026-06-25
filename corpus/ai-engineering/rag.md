@@ -21,6 +21,12 @@ sources:
   - path: raw/web/web-beyond-the-vector-store-building-the-full-data-layer-for-ai.md
     channel: web
     ingested_at: 2026-06-17
+  - path: raw/youtube/2KVkpUGRtnk-build-real-time-knowledge-graph-for-documents-with-llm.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/github/the-pocket-pocketflow-tutorial-codebase-knowledge.md
+    channel: github
+    ingested_at: 2026-06-25
 aliases:
   - RAG
   - retrieval-augmented generation
@@ -35,7 +41,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-21
-updated: 2026-06-17
+updated: 2026-06-25
 ---
 
 # RAG (Retrieval-Augmented Generation)
@@ -212,6 +218,34 @@ Retrieved chunks are one of the four context components injected into an agent's
 | **Similarity search** | Find chunks whose embeddings are closest to the query embedding |
 | **K** | Number of top chunks to retrieve |
 
+## Real-time knowledge graph for documents (CocoIndex + Neo4j)
+
+CocoIndex is an open-source incremental ETL framework for building knowledge graphs from documents with LLMs [^src7]. The pattern:
+
+1. **Extract** — parse documents (PDF, markdown, etc.) into structured entities and relationships using LLM extraction
+2. **Index** — build a knowledge graph in Neo4j (or similar); the "incremental" design means only changed documents re-trigger extraction, not the full corpus
+3. **Query** — run Cypher queries over the graph from Claude or any LLM agent
+
+Key insight vs flat vector RAG: a knowledge graph explicitly encodes entity relationships (A `uses` B, C `depends-on` D), enabling *traversal* queries ("what does X connect to?") rather than only similarity queries ("what's closest to this embedding?"). This is the graph RAG advantage from [^src3] operationalized as a real-time pipeline [^src7].
+
+**Use case fit**: suited for document collections with rich cross-references (legal documents, technical specs, scientific papers, codebases). Less suited for large unstructured prose where entity extraction quality is unreliable [^src7].
+
+See also: [[ai-engineering/embeddings|Embeddings]] for the underlying vector layer, and the GraphRAG section above for the theoretical framing.
+
+## PocketFlow: codebase-to-knowledge pipeline
+
+PocketFlow (`The-Pocket/PocketFlow-Tutorial-Codebase-Knowledge`, 12K★, Python) applies the knowledge-extraction pattern specifically to code: it crawls a GitHub repository, identifies core abstractions and their interactions, and generates beginner-friendly tutorials with visualizations [^src8].
+
+**Core capability**: given a repository URL, it:
+1. Traverses the code
+2. Uses an LLM to identify the key abstractions (classes, modules, protocols)
+3. Maps their relationships
+4. Generates a structured tutorial explaining how the codebase works
+
+This is a specific application of the "knowledge graph from documents" pattern to codebases — converting graph structure implicit in code (imports, class hierarchies, function calls) into explicit LLM-queryable knowledge [^src8].
+
+**Built on PocketFlow**, a 100-line LLM framework. Reached Hacker News front page (April 2025, 900+ upvotes) [^src8].
+
 ## See also
 
 - [[ai-engineering/embeddings|Embeddings]] — the dense vectors RAG retrieves over; their limits (exact-token loss, no time, disconnected facts) drive hybrid search, temporal filters, and GraphRAG
@@ -230,3 +264,5 @@ Retrieved chunks are one of the four context components injected into an agent's
 [^src4]: [7 Temporal Blind Spots Breaking Enterprise RAG](../../raw/web/7-temporal-blind-spots-breaking-enterprise-rag-news-from-gen.md)
 [^src5]: [Seeing like an agent: how we design tools in Claude Code](../../raw/notes/notes-clippings-seeing-like-an-agent-how-we-design-tools-in-claude-code.md) — Thariq Shihipar, Anthropic
 [^src6]: [Beyond the Vector Store: Building the Full Data Layer for AI](../../raw/web/web-beyond-the-vector-store-building-the-full-data-layer-for-ai.md) — Kevin Smith, Saturn Cloud blog
+[^src7]: [Build Real-Time Knowledge Graph for Documents with LLM](../../raw/youtube/2KVkpUGRtnk-build-real-time-knowledge-graph-for-documents-with-llm.md) — CocoIndex + Neo4j demo, YouTube
+[^src8]: [The-Pocket/PocketFlow-Tutorial-Codebase-Knowledge (12K★)](../../raw/github/the-pocket-pocketflow-tutorial-codebase-knowledge.md) — The-Pocket, GitHub
