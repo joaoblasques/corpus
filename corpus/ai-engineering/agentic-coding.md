@@ -84,6 +84,12 @@ sources:
   - path: raw/youtube/vQebObsd_Cw-i-gave-codex-a-24-7-server-now-it-codes-while-i-sleep.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/web/web-ai-writes-code-faster-your-job-is-still-to-prove-it-works.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-kwSVtQ7dziU-skill-issue-andrej-karpathy-on-code-agents-autoresearch-and.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - agentic coding
   - agentic engineering
@@ -102,6 +108,14 @@ aliases:
   - solve by default
   - theory of constraints engineering
   - read less steer more
+  - PR Contract
+  - proof not promises
+  - AI code review
+  - 100% delegation
+  - parallel agents (Karpathy)
+  - macro actions
+  - token throughput
+  - auto-research
 tags:
   - corpus/ai-engineering
   - synthesis
@@ -477,6 +491,45 @@ OpenAI Codex can run on a VPS (e.g. Hetzner CX22, ~€3.92/month) for continuous
 
 **Codex vs Claude Code**: Codex favors background VPS operation with full-auto approval; Claude Code's Dispatch feature enables phone-triggered operation with the desktop app as the execution environment [^src24].
 
+## AI code review: the proof-not-promises standard
+
+As AI-generated code reaches >30% of production code for senior developers (2026), the review discipline required is higher, not lower [^src25]. Key metrics from large-scale analysis [^src25]:
+
+- AI code has **75% more logic errors** than human-written code
+- **45% of AI-generated code** has security flaws at time of generation
+- XSS vulnerabilities at **2.74× the human rate**
+- PRs from AI-heavy teams are **18% larger**
+- Incidents increased **24%**; change failure rates up **30%**
+
+These numbers argue for a **PR Contract** framework — treating a PR as a contract with four required components [^src25]:
+
+1. **What and why** — clear description of the change and its purpose
+2. **Proof it works** — not "I think this works" but "I watched it work": test output, screenshots, performance data
+3. **Risk** — explicit statement of what could go wrong; what was tested and what wasn't
+4. **Review focus** — guide reviewers to the parts that need human judgment
+
+The core principle: "**if you haven't seen the code do the right thing yourself, it doesn't work.**" AI-generated proofs ("the tests pass in my mental model") are not evidence. Running the tests and showing the output is [^src25].
+
+The stat that reframes the entire discussion: **PRs are 18% larger**, meaning developers are accepting larger AI output batches without proportionally more review. The fix is not less AI — it's disciplined proof before merge, not just plausible code [^src25].
+
+## 100% delegation and the parallel agents paradigm (Karpathy)
+
+Andrej Karpathy's December 2025 inflection: he went from writing 20% of his code to writing **approximately 0%** — full delegation to agents [^src26]. The shift enabled a new operating pattern inspired by Peter Steinberger:
+
+**Parallel agents at scale** [^src26]:
+- Multiple Codex agents tiling monitors, each on a ~20-minute autonomous run
+- 10 separate repository checkouts available for parallel work
+- **Macro actions** — tasks framed as high-level outcomes rather than step-by-step instructions, letting the agent decide how to accomplish them
+- **Token throughput as the new GPU utilization metric**: "I feel nervous when there's subscription left over at the end of the month" — a direct parallel to feeling wasteful if GPU utilization drops
+
+**Auto-research** [^src26]: agents ran overnight hyperparameter searches and found improvements Karpathy had missed — weight decay on value embeddings and Adam beta tuning. The agent-as-researcher pattern: delegate the exploration, review the results, implement the wins.
+
+**"Dobby" home automation** [^src26]: a Codex agent, given home automation as a goal, discovered Sonos via IP scan, reverse-engineered its API without documentation, created a control dashboard, and connected it to lights/HVAC/shades/pool/spa/security with WhatsApp as the interface. Karpathy's framing: "I didn't tell it to scan for Sonos. It just found it." Macro actions let agents decide their own path.
+
+**Agent-first apps** [^src26]: the prediction — "the customer is not the human anymore, it's agents" — argues that new software should expose APIs and skip bespoke UIs. Agents navigate APIs directly; human-facing UIs become optional wrappers. "The app's job used to be to present information to humans. Now the job is to accept agent requests."
+
+**OpenClaw praised for**: crafted personality (agent feels like a teammate, not a tool), well-calibrated sycophancy (pushes back appropriately), sophisticated persistent memory [^src26].
+
 ## See also
 
 - [[ai-engineering/mcp|MCP]] — connecting agents to external systems
@@ -511,3 +564,5 @@ OpenAI Codex can run on a VPS (e.g. Hetzner CX22, ~€3.92/month) for continuous
 [^src23]: [Don't Pay for Claude Code — Build This Instead](../../raw/youtube/k_D_C3ExypU-don-t-pay-for-claude-code-build-this-instead.md) — Night Code, YouTube
 [^src24]: [I Gave Codex a 24/7 Server: Now It Codes While I Sleep](../../raw/youtube/vQebObsd_Cw-i-gave-codex-a-24-7-server-now-it-codes-while-i-sleep.md) — YouTube
 [^src23]: [How Software Engineers Actually Use Coding Agents in 2026](../../raw/_inbox/youtube-2HtqFVLgjLI-how-software-engineers-actually-use-coding-agents-in-2026.md) — YouTube survey/walkthrough
+[^src25]: [AI Writes Code Faster. Your Job Is Still to Prove It Works.](../../raw/web/web-ai-writes-code-faster-your-job-is-still-to-prove-it-works.md) — Addy Osmani, addyosmani.com
+[^src26]: [Skill Issue: Andrej Karpathy on Code Agents, Auto-Research, and...](../../raw/youtube/youtube-kwSVtQ7dziU-skill-issue-andrej-karpathy-on-code-agents-autoresearch-and.md) — No Priors podcast, YouTube

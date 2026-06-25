@@ -114,6 +114,21 @@ sources:
   - path: raw/email/email-2026-06-18-someone-put-ads-in-the-claude-code-spinner.md
     channel: email
     ingested_at: 2026-06-25
+  - path: raw/web/web-quickstart-claude-code-docs.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/github/github-anthropics-claude-cookbooks.md
+    channel: github
+    ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-claude-code-runs-report.md
+    channel: notes
+    ingested_at: 2026-06-25
+  - path: raw/web/web-download-claude-claude-by-anthropic.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-Bn7YX_RfAt0-best-ai-agent-tools-in-2026-beginner-friendly.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - Claude Code
   - claude-code
@@ -128,6 +143,7 @@ tags:
   - entity
 created: 2026-06-12
 updated: 2026-06-25
+last_confirmed: 2026-06-25
 ---
 
 # Claude Code
@@ -670,6 +686,62 @@ Precise definitions from Anthropic's official glossary [^src30]:
 
 A Reddit community skill that forces Claude Code to write as little code as possible by adopting a "lazy senior dev" persona [^src31]. The pattern: the persona values understanding over volume, pushes back on over-engineering, and asks clarifying questions instead of assuming requirements and building speculatively. Consistently with the Karpathy Simplicity First principle — see [[ai-engineering/claude-md-conventions|CLAUDE.md Conventions]].
 
+## Quickstart (installation and shell commands)
+
+Claude Code installs via three paths: `npm install -g @anthropic-ai/claude-code` (native), `brew install claude-code` (Homebrew), or `winget install Anthropic.ClaudeCode` (WinGet) [^src32].
+
+**Shell invocations** [^src32]:
+
+| Command | Behavior |
+|---|---|
+| `claude` | Start interactive REPL |
+| `claude "task"` | Run one task non-interactively |
+| `claude -p "query"` | Print output then exit (non-interactive) |
+| `claude -c` | Continue most recent session |
+| `claude -r` | Resume a named session |
+
+**In-session commands** [^src32]: `/clear` (reset context), `/help` (show commands), `/exit` (quit). Type `/` to see all available commands/skills. `Shift+Tab` cycles through permission modes.
+
+**Available surfaces** [^src32]: web (claude.ai), desktop app, VS Code extension, JetBrains plugin, Slack integration, GitHub Actions, GitLab CI/CD.
+
+## Claude Code as business OS (13-workflow pattern)
+
+A practitioner survey of 13 production Claude Code workflows demonstrates the scope of non-engineering use cases [^src33]:
+
+| Workflow | Key component |
+|---|---|
+| Lead scraping | Apify MCP |
+| Pre-call research | Firecrawl MCP |
+| Proposals / decks | PDF/PowerPoint skills |
+| Content ideas | Competitor analysis + feedback loop |
+| Content atomizer | 18 platform-native posts from one source |
+| Images / thumbnails | Nano Banana + GPT image skill |
+| AI-search SEO | DataForSEO MCP |
+| SOPs → skills | Skill Creator (capture and encode workflows) |
+| Scheduled automations | Local + cloud (Claude routines) |
+| Deep research | Last-30-days skill |
+| Visual video analysis | watch skill (ffmpeg + Whisper) |
+| Second brain | Git-versioned markdown wiki |
+| Context farming | Sub-agents pulling context via MCPs on schedule |
+
+**Context farming**: dedicated sub-agents poll external tools (CRM, email, calendar) via MCPs on a regular schedule, pulling live data into the wiki/context layer so the main agent always has fresh information without real-time MCP calls during task execution [^src33].
+
+**Skills as living SOPs** (see also [[ai-engineering/agent-skills|Agent Skills]]): "A skill is a living thing — every time you run it or tweak something, it gets a little better." The iteration loop is: run → identify failure → update skill → rerun [^src33].
+
+## Anthropic claude-cookbooks (official recipe collection)
+
+The `anthropic/claude-cookbooks` GitHub repository (★45,788) is Anthropic's official collection of notebooks and code recipes for the Claude API [^src34]. Covers: RAG patterns, tool use, multi-modal input, classification, summarization, prompt caching, and agent workflows. Used as the canonical reference when building integrations against the Claude API (as opposed to the Claude Code harness). See [[ai-engineering/anthropic|Anthropic]].
+
+## Tool comparison: Claude Code vs no-code builders
+
+A direct head-to-head comparison of Claude Code vs n8n vs Base44 for a business-app build reveals practical positioning [^src36]:
+
+- **n8n**: workflow-only automation, no UI output capability, requires technical setup. Missed the core UI requirement in the benchmark.
+- **Claude Code**: built a real working app; terminal-based; requires API keys and tech-stack knowledge. Pro $20/mo, Max 5× $100/mo, Max 20× $200/mo.
+- **Base44**: no-code app builder. 5 minutes, 2 prompts, no API keys, built-in auth, UI output out of the box — winner for non-technical users.
+
+Lesson: Claude Code is a developer tool. Non-technical users building apps without coding context are better served by dedicated no-code builders [^src36]. Claude Code's advantage is in tasks that combine coding, file manipulation, external API integration, and arbitrary automation in one session.
+
 ## See also
 
 - [[ai-engineering/sources/boris-cherny-100-percent-claude-code|Boris Cherny — 100% Claude Code]] — the full interview source page
@@ -709,3 +781,8 @@ A Reddit community skill that forces Claude Code to write as little code as poss
 [^src29]: [Use Claude Code on the Web — Claude Code docs](../../raw/_inbox/web-use-claude-code-on-the-web-claude-code-docs.md) — Anthropic
 [^src30]: [Glossary — Claude Code docs](../../raw/_inbox/web-glossary-claude-code-docs.md) — Anthropic
 [^src31]: [Someone Put Ads in the Claude Code Spinner — Claude Code Camp](../../raw/email/email-2026-06-18-someone-put-ads-in-the-claude-code-spinner.md) — Abhishek, Claude Code Camp newsletter
+[^src32]: [Quickstart — Claude Code docs](../../raw/web/web-quickstart-claude-code-docs.md) — Anthropic
+[^src33]: [Claude Code Runs My Business (13 Workflows)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-claude-code-runs-report.md) — YouTube (processed report)
+[^src34]: [anthropic/claude-cookbooks — Claude API recipes (★45,788)](../../raw/github/github-anthropics-claude-cookbooks.md) — Anthropic, GitHub
+[^src35]: [Download Claude — claude.ai](../../raw/web/web-download-claude-claude-by-anthropic.md) — Anthropic
+[^src36]: [Best AI Agent Tools in 2026 (Beginner-Friendly)](../../raw/youtube/youtube-Bn7YX_RfAt0-best-ai-agent-tools-in-2026-beginner-friendly.md) — Mikey No Code, YouTube

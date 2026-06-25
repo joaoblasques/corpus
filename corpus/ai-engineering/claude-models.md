@@ -54,6 +54,9 @@ sources:
   - path: raw/_inbox/web-enable-and-use-web-search-claude-help-center.md
     channel: web
     ingested_at: 2026-06-24
+  - path: raw/web/web-claude-haiku.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - Claude model lineup
   - Claude models
@@ -201,6 +204,25 @@ Web search (and web fetch) is available on the following models as of mid-2026 [
 
 Web search requires the feature to be enabled (user toggle in chat, or admin-enabled at the workspace level for Team/Enterprise). Image results from Bing are included when web search is active. See [[ai-engineering/claude-cowork|Claude Cowork]] for workspace-level controls.
 
+## Claude Haiku 4.5
+
+Haiku 4.5 is Anthropic's fast, cost-efficient model in the Claude 4 generation [^src17]:
+
+| Property | Value |
+|---|---|
+| **SWE-bench Verified** | 73.3% |
+| **Coding / computer-use / agentic tasks** | Matches Claude Sonnet 4 |
+| **Speed** | 4–5× faster than Claude Sonnet 4.5 |
+| **Input cost** | $1 / M tokens |
+| **Output cost** | $5 / M tokens |
+| **Prompt caching** | Up to 90% cost savings |
+| **Batch API** | Up to 50% cost savings |
+| **API model ID** | `claude-haiku-4-5` |
+
+Available on: Claude API, Amazon Bedrock, Google Vertex AI, Microsoft Foundry, and GitHub Copilot [^src17].
+
+The key positioning: "built for fast, efficient performance on tasks that require computer use, agentic behaviors, and complex reasoning" without the cost of Sonnet-class models [^src17]. At 73.3% SWE-bench, it outperforms earlier Sonnet versions on coding while costing $1/$5 vs Sonnet 4.5's $3/$15 per million tokens.
+
 ## See also
 
 - [[ai-engineering/anthropic|Anthropic]] — the lab behind these models (company, funding, learning resources)
@@ -221,3 +243,4 @@ Web search requires the feature to be enabled (user toggle in chat, or admin-ena
 [^src14]: [Introducing Claude Opus 4.8](../../raw/web/web-introducing-claude-opus-4-8.md) — Anthropic official blog
 [^src15]: [Introducing Claude 4](../../raw/web/web-introducing-claude-4.md) — Anthropic
 [^src16]: [Enable and use web search (Claude Help Center)](../../raw/_inbox/web-enable-and-use-web-search-claude-help-center.md) — Anthropic
+[^src17]: [Claude Haiku — claude.ai product page](../../raw/web/web-claude-haiku.md) — Anthropic

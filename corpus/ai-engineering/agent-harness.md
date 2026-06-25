@@ -42,6 +42,15 @@ sources:
   - path: raw/github/affaan-m-ecc.md
     channel: github
     ingested_at: 2026-06-25
+  - path: raw/web/web-handle-approvals-and-user-input-claude-code-docs.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/web/web-text-editor-tool.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-03CfGf9iw_U-completely-understand-hooks-in-less-than-20-minutes.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - harness
   - agent harness
@@ -54,7 +63,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-12
-updated: 2026-06-23
+updated: 2026-06-25
 ---
 
 # Agent Harness
@@ -215,6 +224,66 @@ Every harness component encodes an assumption about what Claude can't do on its 
 - **Promote actions to dedicated tools for security, UX, or observability.** A bash tool gives the harness only a command string — the same shape for every action. A dedicated `edit` tool gives the harness typed arguments it can intercept, gate, render, audit, or present as a user confirmation modal [^src9]. Reversibility is the key criterion: hard-to-reverse actions (external API calls, file deletion) are natural candidates for dedicated tools with explicit user gates [^src9].
 - **Re-evaluate continuously.** Auto mode is an example of where a pattern (dedicated tools for security boundaries around bash) may be partially replaced by a smarter classifier, not by adding more tools [^src9].
 
+## Claude Code hooks lifecycle (event-driven harness control)
+
+Claude Code's hook system provides eight lifecycle events that let the harness intercept, gate, enrich, or observe every phase of a session [^src12]:
+
+| Hook | When it fires | Can block? |
+|---|---|---|
+| `session_start` | Session opens | No |
+| `user_prompt_submitted` | User sends a message | No |
+| `pre_tool_use` | Before Claude runs a tool | **Yes** |
+| `post_tool_use` | After tool result | No |
+| `sub_agent_start` | Subagent spawned | No |
+| `sub_agent_stop` | Subagent finishes | No |
+| `session_end` | Session closes | No |
+| `error` | Error occurs | No |
+
+**JSON payload** on each hook [^src12]: `event_name`, `timestamp`, `id`, `transcript_path`, `cwd`. `user_prompt_submitted` additionally receives `prompt`. **Output format**: `{ event_name, additional_context, updated_input }` — hooks can inject context or modify the input.
+
+**Configuration** [^src12]: `.claude/hooks/` JSON files in the project, global `~/.claude/settings.json` `hooksConfig` key, or the Claude Code settings page (VS Code: Output panel for hook output; CLI: reload with `/new`).
+
+**Pre-tool-use ESLint gate (deterministic quality gate)** [^src12]: the canonical use case for a blocking hook. On a Write tool call for a TypeScript file, the hook runs ESLint on the file-to-be-written. If lint fails, the hook returns a deny response listing the violations; Claude is forced to fix the code and retry. "The hook makes lint non-negotiable — Claude cannot ship linting violations." This is an example of using the harness to enforce deterministic constraints the model can't rationalize away.
+
+**Session_start context injection** [^src12]: use session_start to load module-specific or time-specific context into every session automatically — e.g., inject the current sprint goal, load the domain CLAUDE.md, or pre-populate a memory summary.
+
+## canUseTool callback (Agent SDK tool approval)
+
+The Claude Agent SDK provides a `canUseTool` callback for programmatic tool approval before each tool call executes [^src13]. The callback receives the full tool input and returns one of:
+
+| Response type | Meaning |
+|---|---|
+| `allow` | Proceed as-is |
+| `allow-with-changes` | Proceed, but with modified tool input |
+| `allow-and-remember` | Allow and don't ask again for this tool/input pattern |
+| `deny` | Block this tool call |
+| `suggest-alternative` | Block and suggest a different approach |
+| `redirect` | Route to a different tool entirely |
+
+**Tool input fields** available for inspection in the callback [^src13]:
+- **Bash**: `command`, `description`, `timeout`
+- **Write**: `file_path`, `content`
+- **Edit**: `file_path`, `old_str`, `new_str`
+- **Read**: `file_path`, `offset`, `limit`
+
+**AskUserQuestion tool** [^src13]: allows Claude to present a structured question with 2–4 options to the user mid-task. Questions specify 1–4 question texts and their option lists. **Restriction**: subagents cannot use AskUserQuestion (they cannot reach back to the user directly; only the parent session can).
+
+## str_replace_based_edit_tool (text editor tool)
+
+The `str_replace_based_edit_tool` (type `"text_editor_20250728"`) is an official Anthropic tool for precise file editing without reading entire files [^src14]. The schema is built into the model — no manual schema declaration needed.
+
+**Commands** [^src14]:
+| Command | Purpose |
+|---|---|
+| `view` | Read file or range (`view_range` parameter) |
+| `str_replace` | Replace exact string with new string |
+| `create` | Create a new file |
+| `insert` | Insert text at a specific line |
+
+**Version history** [^src14]: initial version `text_editor_20241022`; Claude 4 version `text_editor_20250429`; current `text_editor_20250728` (adds `max_characters` parameter). Use type `"text_editor_20250728"` for Claude 4 and later. The tool adds ~700 additional input tokens per call.
+
+The `max_characters` parameter (available in `20250728`+) caps how many characters are returned in a `view` response — useful for controlling context size when previewing large files [^src14].
+
 ## See also
 
 - [[ai-engineering/agentic-coding|Agentic Coding]] — orchestration patterns built on top of the harness
@@ -241,3 +310,6 @@ Every harness component encodes an assumption about what Claude can't do on its 
 [^src9]: [Harnessing Claude's Intelligence: 3 Key Patterns for Building Apps](../../raw/notes/notes-clippings-harnessing-claude-s-intelligence-3-key-patterns-for-building.md) — Lance Martin, Anthropic Platform team
 [^src10]: [Harness Design for Long-Running Application Development](../../raw/web/web-harness-design-for-long-running-application-development.md) — Anthropic engineering blog
 [^src11]: [affaan-m/ECC — GitHub (219K★, v2.0.0)](../../raw/github/affaan-m-ecc.md) — affaan-m, GitHub
+[^src12]: [Completely Understand Hooks in Less Than 20 Minutes](../../raw/youtube/youtube-03CfGf9iw_U-completely-understand-hooks-in-less-than-20-minutes.md) — Burke Holland, YouTube
+[^src13]: [Handle approvals and user input — Claude Code Agent SDK docs](../../raw/web/web-handle-approvals-and-user-input-claude-code-docs.md) — Anthropic
+[^src14]: [Text editor tool — Anthropic API docs](../../raw/web/web-text-editor-tool.md) — Anthropic

@@ -57,6 +57,9 @@ sources:
   - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-how-to-build-your-report.md
     channel: notes
     ingested_at: 2026-06-25
+  - path: raw/web/web-connectors-claude.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - MCP
   - Model Context Protocol
@@ -323,6 +326,16 @@ This is a representative example of **personal context servers** — MCP servers
 
 As of May 2026: 12,000+ MCP servers indexed by Pulse MCP; ~97M SDK downloads/month; Anthropic donated the protocol to the Linux Foundation (Dec 2025) [^src19]. The Zapier MCP demonstrates the horizontal scale: one URL gives one Claude session access to 9,000+ apps via the Zapier action library.
 
+## Claude Connectors directory
+
+Anthropic maintains a public connector directory at claude.ai/connectors [^src20]. Key properties:
+
+- **Third-party built and maintained**: connectors are built by external developers, not Anthropic. Anthropic provides the MCP standard; connector quality varies.
+- **Enterprise plan**: required for large-scale knowledge uploads (file/document ingestion connectors that go beyond per-session context).
+- **Relationship to MCP**: connectors are the consumer-facing product surface; each connector is backed by an MCP server [^src20].
+
+This is the discovery layer for the MCP ecosystem — similar to a plugin marketplace for MCP servers. For individual server setup, see the Claude Code `claude mcp add` workflow; for the full connector experience with persistent state, see [[ai-engineering/claude-cowork|Claude Cowork]].
+
 ## See also
 
 - [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] — MCP is the coordination layer for multi-agent architectures
@@ -355,3 +368,4 @@ As of May 2026: 12,000+ MCP servers indexed by Pulse MCP; ~97M SDK downloads/mon
 [^src17]: [5 Claude Connectors with Insane Use Cases](../../raw/_inbox/youtube--h2C65Qd9Mg-5-claude-connectors-with-insane-use-cases-out-of-100.md) — YouTube
 [^src18]: [Granola MCP — Granola Docs & Help Center](../../raw/web/granola-mcp-granola-docs-help-center.md) — docs.granola.ai
 [^src19]: [How to Build Your Agentic OS with Claude Code (4-Layer Setup)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-how-to-build-your-report.md) — nyndra AI, YouTube (notes report)
+[^src20]: [Connectors — claude.ai](../../raw/web/web-connectors-claude.md) — Anthropic

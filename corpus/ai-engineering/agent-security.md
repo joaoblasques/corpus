@@ -48,6 +48,9 @@ sources:
   - path: raw/_inbox/web-red-agent-and-claude-opus-securing-production-targets-at-sca.md
     channel: web
     ingested_at: 2026-06-24
+  - path: raw/web/web-use-claude-cowork-safely-claude-help-center.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - prompt injection
   - LLM security
@@ -233,6 +236,27 @@ As agents act on behalf of users, identity becomes a security surface. **auth.md
 
 It issues a scoped, short-lived, revocable access token over standard OAuth, composing existing standards (Protected Resource Metadata, ID-JAG identity assertions) so existing API auth is reused [^src3].
 
+## Prompt injection risk model for agentic desktop apps
+
+From Anthropic's official Cowork safety guide, the clearest practitioner framing of injection risk [^src16]:
+
+**Two-condition requirement**: prompt injection requires *both* (1) Claude reads content from outside the user's trust boundary AND (2) Claude has write-capable tools available. Neither condition alone enables injection:
+
+- Read-only sessions can't be exploited (no action capability)
+- Sessions that never touch external content can't be injected (no attack surface)
+
+**Tool risk classification** [^src16]:
+- **Read tools** (Browse, Read File, Search): low risk — information exposure only; the injection must also gain write access to matter
+- **Write tools** (Edit File, Bash, Send Email, Call API, Move to Trash): high risk — actions are often irreversible
+
+**Safety hierarchy for agentic desktop use** [^src16]:
+1. Use a dedicated working folder, not root or home directory
+2. "Act without asking" mode is the highest-risk configuration — never enable for untrusted content sessions
+3. Computer use sessions have no sandbox — treat them like granting full desktop control to a remote user
+4. Scheduled/automated tasks have no human oversight — permission scope must be deliberately narrow
+
+This framing generalizes beyond Cowork: any agentic system reading external content while holding broad write permissions follows the same two-condition injection model. The mitigation is to minimize the overlap: either scope reads to trusted sources or restrict write permissions — eliminating one condition eliminates the threat [^src16].
+
 ## See also
 
 - [[ai-engineering/structured-outputs|Structured Outputs]] — output-control layer; reliability prerequisite for security
@@ -262,3 +286,4 @@ It issues a scoped, short-lived, revocable access token over standard OAuth, com
 [^src13]: [CrowdStrike Puts Claude Opus 4.7 to Work Across Falcon and QuiltWorks](../../raw/web/web-crowdstrike-puts-claude-opus-4-7-to-work-across-falcon-and-q.md) — CrowdStrike
 [^src14]: [Enhancing AI-Driven Defense with Anthropic's Claude Opus 4.7](../../raw/_inbox/web-enhancing-ai-driven-defense-with-anthropics-claude-opus-4-7.md) — Palo Alto Networks
 [^src15]: [Wiz Red Agent and Claude Opus: Securing Production Targets at Scale](../../raw/_inbox/web-red-agent-and-claude-opus-securing-production-targets-at-sca.md) — Wiz
+[^src16]: [Use Claude Cowork safely — Claude Help Center](../../raw/web/web-use-claude-cowork-safely-claude-help-center.md) — Anthropic

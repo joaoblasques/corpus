@@ -45,6 +45,15 @@ sources:
   - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-claude-code-karpa-report.md
     channel: notes
     ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-stop-using-claude-report.md
+    channel: notes
+    ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-i-built-karpathy-report.md
+    channel: notes
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-kwSVtQ7dziU-skill-issue-andrej-karpathy-on-code-agents-autoresearch-and.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - AI OS
   - AIOS
@@ -213,6 +222,12 @@ Obsidian RAG "breaks in 5 places" at scale: index grows linearly/expensively, no
 
 The compounding mechanic: one new source updates 10–15 linked wiki pages, ironing out contradictions — so every future query reads richer knowledge. Traditional RAG re-fetches chunks and forgets; here the wiki layer accumulates [^src13].
 
+## Anti-pattern: the slot machine
+
+"Most people use Claude Code like a slot machine — random prompts on random tasks and ultimately getting random results" [^src14]. The AIOS is the structural fix: by providing consistent context (CLAUDE.md identity), live data connections, and reusable skills, the same prompt reliably produces the same quality result rather than depending on a lucky draw from the model's distribution.
+
+The corollary from [[ai-engineering/agentic-coding|Agentic Coding]]: Karpathy's shift from 20% to ~0% code-writing was not about prompting better — it was about framing tasks as **macro actions** (high-level outcomes) and providing agents with the right environment (repositories checked out, permissions pre-granted, parallel sessions running). Token throughput becomes the new GPU utilization metric: an idle subscription is evidence the AIOS isn't running enough concurrent work [^src16].
+
 ## See also
 
 - [[ai-engineering/context-engineering|Context Engineering]] — the theoretical foundation; an AIOS is applied context engineering
@@ -239,3 +254,6 @@ The compounding mechanic: one new source updates 10–15 linked wiki pages, iron
 [^src11]: [How to Build Your Agentic OS with Claude Code (4-Layer Setup)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-how-to-build-your-report.md) — nyndra AI, YouTube (notes report)
 [^src12]: [I Turned Claude Fable Into The Ultimate Second Brain](../../raw/youtube/8QQ_INxAhRs-i-turned-claude-fable-into-the-ultimate-second-brain.md) — Nate Herk, YouTube
 [^src13]: [Claude Code + Karpathy's Obsidian = New Meta](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-claude-code-karpa-report.md) — YouTube (notes report)
+[^src14]: [Stop Using Claude Code Without an Agentic OS (notes report)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-stop-using-claude-report.md) — Chase AI, YouTube (processed report)
+[^src15]: [I Built Karpathy's LLM Wiki in Obsidian (notes report)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-i-built-karpathy-report.md) — Cody Bontecou, YouTube (processed report)
+[^src16]: [Skill Issue: Andrej Karpathy on Code Agents, Auto-Research, and...](../../raw/youtube/youtube-kwSVtQ7dziU-skill-issue-andrej-karpathy-on-code-agents-autoresearch-and.md) — No Priors podcast, YouTube

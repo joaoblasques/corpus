@@ -9,6 +9,9 @@ sources:
   - path: raw/web/how-llms-actually-work.md
     channel: web
     ingested_at: 2026-06-16
+  - path: raw/github/github-dabochen-spreadsheet-is-all-you-need.md
+    channel: github
+    ingested_at: 2026-06-25
 aliases:
   - Transformer
   - transformer architecture
@@ -99,6 +102,14 @@ Pre-Transformer architectures (RNNs, LSTMs) processed sequences token-by-token, 
 
 Behavior is emergent — the architecture defines the framework; the billions of weights determine what the model actually does [^src1].
 
+## Visual learning resource: nanoGPT spreadsheet
+
+`dabochen/spreadsheet-is-all-you-need` (★2,159) implements the full GPT inference pipeline as a spreadsheet [^src3]. Based on Karpathy's nanoGPT (~85K parameters, character-based with A/B/C tokens only), each column shows one step:
+
+**Pipeline stages** [^src3]: Input embeddings → Position encodings → Layer normalization → Self-attention (Q/K/V computation) → Output projection → MLP (linear + GeLU + linear) → Softmax → Logits
+
+Each cell contains the actual numeric computation so every value can be traced from input to output. The purpose is pedagogical — making each architectural component legible at the cell level, not producing a usable model [^src3]. See also the parent concept in [[ai-engineering/llm|LLM]].
+
 ## See also
 
 - [[ai-engineering/llm|LLM]] — the Transformer is the architecture underlying all modern LLMs
@@ -112,3 +123,4 @@ Behavior is emergent — the architecture defines the framework; the billions of
 
 [^src1]: [[03_Resources/Study Notes/AI - How Large Language Models Work|AI - How Large Language Models Work]]
 [^src2]: [How LLMs Actually Work](../../raw/web/how-llms-actually-work.md)
+[^src3]: [dabochen/spreadsheet-is-all-you-need — GPT inference in a spreadsheet (★2,159)](../../raw/github/github-dabochen-spreadsheet-is-all-you-need.md) — GitHub

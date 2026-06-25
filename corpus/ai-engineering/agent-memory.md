@@ -45,6 +45,21 @@ sources:
   - path: raw/_inbox/notes-00-inbox-clippings-youtube-raw-raw-watched-how-to-build-the-report.md
     channel: notes
     ingested_at: 2026-06-25
+  - path: raw/github/github-thedotmack-claude-mem.md
+    channel: github
+    ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-i-built-karpathy-report.md
+    channel: notes
+    ingested_at: 2026-06-25
+  - path: raw/web/web-memory-tool.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-OSZdFnQmgRw-karpathy-s-obsidian-rag-claude-code-cheat-code.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-yke4fLQUsh4-build-an-ai-second-brain-knowledge-base-step-by-step.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - agent memory
   - memory
@@ -71,12 +86,20 @@ aliases:
   - information hierarchy
   - friction tax
   - append-only log
+  - Anthropic memory tool
+  - memory_20250818
+  - MEMORY PROTOCOL
+  - Obsidian RAG
+  - three-pillar second brain
+  - vault-as-memory-bank
+  - master index
 tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-21
 updated: 2026-06-25
-confidence: 0.85
+last_confirmed: 2026-06-25
+confidence: 0.87
 ---
 
 # Agent Memory
@@ -201,6 +224,8 @@ The `mem-search` skill and four MCP tools (`search`, `timeline`, `get_observatio
 
 Key feature: `<private>` tags let users exclude sensitive content from storage. A web viewer UI at `http://localhost:37777` shows the real-time memory stream [^src9].
 
+As of mid-2026 the plugin has 83,689 GitHub stars and spans topics: memory, agents, context, claude-code, persistence, cross-session, SQLite, Chroma [^src18].
+
 ## LLM wiki pattern (Karpathy / self-improving knowledge base)
 
 A recurring practitioner pattern applies the corpus's own design back to personal knowledge management: an **LLM wiki** where Claude is the librarian, ingesting sources into a structured knowledge base that improves over time [^src10][^src11].
@@ -261,6 +286,55 @@ Claude Co-work's file access enables a distinct memory pattern: using a local fo
 
 This is the file-as-memory pattern from [[ai-engineering/claude-managed-agents|Claude Managed Agents]] simplified for solo practitioners — no database, no API, just a folder of markdown.
 
+## Anthropic memory tool (official client-side memory)
+
+The official Anthropic memory tool (type `"memory_20250818"`) is a client-side, file-based persistent memory mechanism available in the Anthropic API [^src14]. Unlike the server-side memory of some cloud providers, it stores memory entirely as files on the client machine — making it audit-friendly and ZDR (Zero Data Retention) eligible [^src14].
+
+**How it works** [^src14]:
+- The tool auto-injects a `MEMORY PROTOCOL` instruction into the agent's system prompt on initialization: "ALWAYS VIEW YOUR MEMORY DIRECTORY BEFORE DOING ANYTHING ELSE."
+- Commands: `view`, `create`, `str_replace`, `insert`, `delete`, `rename` — all operating on local memory files.
+- Designed for a **multi-session pattern**: an initializer session scans the memory directory and establishes state; subsequent sessions inherit it; an end-of-session update writes new learnings back.
+- Works with context compaction (server-side summarization) for long-running workflows — the memory directory survives compaction where in-context conversation history does not [^src14].
+
+SDK helpers wrap the tool to simplify setup [^src14]: `BetaAbstractMemoryTool` (Python/C#), `betaMemoryTool` (TypeScript), `BetaMemoryToolHandler` (Java). This is the official counterpart to community solutions like claude-mem — the difference being that the Anthropic tool uses simple file commands (no vector DB) while claude-mem uses SQLite + Chroma for semantic search across observations [^src9][^src14].
+
+## Karpathy Obsidian RAG (no-vector-DB navigation)
+
+A recurring practitioner insight is that Obsidian vaults of personal knowledge — even into the thousands of documents — can be navigated by Claude Code without vector embeddings, using only hierarchical text indexes [^src15][^src16].
+
+**File structure** [^src15]:
+```
+vault/raw/        ← source files (Obsidian web clipper auto-pulls here)
+vault/wiki/       ← derived corpus pages per domain
+vault/wiki/<domain>/index.md  ← per-domain index listing all pages
+vault/master_index.md          ← top-level catalog pointing to all domain indexes
+```
+
+Claude Code navigation: start with `master_index.md` → pick a domain index → find the specific page. "Claude Code can navigate through indexes without needing to read every page every turn — it's an agentic search pattern, not a vector pattern" [^src15].
+
+The `local-images-plus` Obsidian plugin handles image syncing so referenced images are available locally [^src15]. **Scale threshold**: Obsidian-RAG is practical up to roughly thousands of documents; for larger collections switch to LightRAG or RAG Anything with vector indexing [^src15].
+
+This is the same three-folder architecture (raw/wiki/master-index) as the corpus described in CLAUDE.md, applied to Obsidian as the hosting vault.
+
+## Vault as memory bank — "never delete, only append"
+
+Cody Bontecou's Obsidian LLM wiki implementation establishes two operating principles that diverge from typical note-taking practice [^src16]:
+
+1. **Append-only log**: "Never delete entries from the log.md. Every session's decisions, edits, and learnings stay" — the log is the auditable memory that survives compaction.
+2. **Vault as pure memory bank, not a writing space**: "This for me is purely a memory bank. It's purely for logging and querying against current status updates" [^src16]. The vault is not where you write — it's what the agent reads.
+
+**Stop hook automation** [^src16]: a `SessionStop` hook triggers automatically at the end of every session, prompting Claude to write what it learned back to the relevant wiki pages and the log before the session closes. The hook catches the memory update that users otherwise forget. This is the mechanical enforcer of the "after each session, Claude updates a structured log" principle in the self-improving knowledge base pattern.
+
+## Three-pillar second brain (wiki + CRM + journal)
+
+Matt Wolfe's Codex-built second brain extends the Karpathy architecture into three interconnected layers [^src17]:
+
+1. **Wiki/knowledge base** — Karpathy pattern (credit explicit): raw/ processed into structured wiki pages, Obsidian web clipper auto-pulls YouTube transcripts into raw/ [^src17].
+2. **CRM** — people notes, meeting notes, relationship context stored in a searchable section of the same vault.
+3. **Journal** — a daily writing layer that Claude grounds in the saved wiki knowledge. When themes recur across journal entries, Claude detects the patterns and proposes wiki additions [^src17].
+
+The insight from combining all three: **the journal responses reference wiki knowledge** — so when you write "I keep running into this API pattern," Claude can reference the wiki's page on that pattern and add context, rather than responding from scratch. "The corpus is not just a retrieval layer — it's what anchors the daily loop" [^src17].
+
 ## See also
 
 - [[ai-engineering/context-window-management|Context Window Management]] — strategies for what to keep, compress, or drop from short-term memory
@@ -287,3 +361,8 @@ This is the file-as-memory pattern from [[ai-engineering/claude-managed-agents|C
 [^src11]: [Build a Claude Knowledge Base That Self-Improves](../../raw/_inbox/youtube-ib74sLgjIBM-build-a-claude-knowledge-base-that-self-improves.md) — YouTube
 [^src12]: [Build This ONCE. Any AI You Use Will Get Smarter Forever.](../../raw/_inbox/notes-00-inbox-clippings-youtube-raw-raw-watched-build-this-once-a-report.md) — YouTube (processed report)
 [^src13]: [How To Build The ULTIMATE AI Second Brain (Obsidian + Claude Code)](../../raw/_inbox/notes-00-inbox-clippings-youtube-raw-raw-watched-how-to-build-the-report.md) — YouTube (processed report)
+[^src14]: [Anthropic memory tool — Anthropic API docs](../../raw/web/web-memory-tool.md) — Anthropic
+[^src15]: [Karpathy's Obsidian RAG: Claude Code Cheat Code](../../raw/youtube/youtube-OSZdFnQmgRw-karpathy-s-obsidian-rag-claude-code-cheat-code.md) — Chase AI, YouTube
+[^src16]: [I Built Karpathy's LLM Wiki in Obsidian (notes report)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-i-built-karpathy-report.md) — Cody Bontecou, YouTube (processed report)
+[^src17]: [Build an AI Second Brain / Knowledge Base Step by Step](../../raw/youtube/youtube-yke4fLQUsh4-build-an-ai-second-brain-knowledge-base-step-by-step.md) — Matt Wolfe, YouTube
+[^src18]: [claude-mem — GitHub (★83,689)](../../raw/github/github-thedotmack-claude-mem.md) — thedotmack/claude-mem, GitHub

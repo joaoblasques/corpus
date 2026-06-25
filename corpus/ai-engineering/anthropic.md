@@ -24,6 +24,9 @@ sources:
   - path: raw/_inbox/web-enhancing-ai-driven-defense-with-anthropics-claude-opus-4-7.md
     channel: web
     ingested_at: 2026-06-24
+  - path: raw/github/github-anthropics-claude-cookbooks.md
+    channel: github
+    ingested_at: 2026-06-25
 aliases:
   - Anthropic
   - Anthropic PBC
@@ -93,3 +96,4 @@ Anthropic's mechanistic interpretability research aims to produce an "MRI for AI
 [^src7]: [Claude Legal Solutions](../../raw/_inbox/web-claude-legal-solutions-claude-by-anthropic.md) — Anthropic
 [^src8]: [Enhancing AI-Driven Defense with Anthropic's Claude Opus 4.7](../../raw/_inbox/web-enhancing-ai-driven-defense-with-anthropics-claude-opus-4-7.md) — Palo Alto Networks
 [^src9]: [Dario Amodei: The Urgency of Interpretability](../../raw/web/web-dario-amodei-the-urgency-of-interpretability.md) — Dario Amodei, Anthropic
+[^src10]: [anthropic/claude-cookbooks — official Claude API recipe collection (★45,788)](../../raw/github/github-anthropics-claude-cookbooks.md) — Anthropic, GitHub

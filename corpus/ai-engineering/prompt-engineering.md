@@ -51,6 +51,9 @@ sources:
   - path: raw/web/web-prompting-best-practices.md
     channel: web
     ingested_at: 2026-06-23
+  - path: raw/github/github-mgalpert-msgprompt.md
+    channel: github
+    ingested_at: 2026-06-25
 aliases:
   - prompting
   - prompt design
@@ -192,6 +195,12 @@ A prompt is a brief, not a wish — "Most prompts fail because they're wishes, n
 
 **R-E-X** condenses these into three moves [^src16]: **Role** (who the model is; domain, audience, risk tolerance), **Examples** (1–2 gold outputs to imitate), **Expectations** (format, length, tone, banned words, a scoring rubric, and the iteration loop). The throughline: iterate faster rather than write ever-longer prompts.
 
+## Prompt enhancement tools
+
+**MSGPrompt** (`mgalpert/MSGPrompt`, ★20) is a TypeScript browser extension that auto-enhances raw user prompts before sending them to Claude or ChatGPT [^src17]. The pattern: user types a short natural-language intent; MSGPrompt reformulates it following prompt-engineering best practices before the API call. The extension addresses the gap between "what you mean" and "what the model needs to hear" without requiring the user to learn prompting techniques [^src17].
+
+This is the same "pre-prompting" insight as the Cowork Prompt Optimizer template [^src10] applied as a browser-layer intermediary — the user never sees the enhanced prompt, the model always receives it.
+
 ## See also
 
 - [[ai-engineering/context-engineering|Context Engineering]] — sibling discipline; managing window contents over a session
@@ -219,3 +228,4 @@ A prompt is a brief, not a wish — "Most prompts fail because they're wishes, n
 [^src14]: [The Expert Extraction Summary template](../../raw/notes/notes-the-expert-extraction-summary.md)
 [^src15]: [The Red Flag Summary template](../../raw/notes/notes-the-red-flag-summary.md)
 [^src16]: [The 7 deadly sins of prompting](../../raw/email/email-2025-08-24-sins.md) — Ruben Hassid
+[^src17]: [mgalpert/MSGPrompt — pre-prompting tool for Claude/ChatGPT (★20)](../../raw/github/github-mgalpert-msgprompt.md) — GitHub

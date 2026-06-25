@@ -45,6 +45,9 @@ sources:
   - path: raw/web/github-mvanhorn-last30days-skill-ai-agent-skill-that-researc.md
     channel: web
     ingested_at: 2026-06-12
+  - path: raw/youtube/youtube-kwSVtQ7dziU-skill-issue-andrej-karpathy-on-code-agents-autoresearch-and.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - ai agent
   - agentic AI
@@ -225,3 +228,4 @@ A live debate concerns whether a folder of files is sufficient agent state, or w
 [^src10]: [Episode 295: Agentic Architecture — Why Files Aren't Always Enough](../../raw/web/episode-295-agentic-architecture-why-files-aren-t-always-eno.md)
 [^src11]: [mvanhorn/last30days-skill — AI agent skill that researches any topic across platforms](../../raw/web/github-mvanhorn-last30days-skill-ai-agent-skill-that-researc.md) — GitHub
 [^src12]: [Agents in Action #1 — What is an AI Agent? (Pipeline to Insights)](../../raw/email/email-2026-06-13-agents-in-action-1-what-is-an-ai-agent.md)
+[^src13]: [Skill Issue: Andrej Karpathy on Code Agents, Auto-Research, and...](../../raw/youtube/youtube-kwSVtQ7dziU-skill-issue-andrej-karpathy-on-code-agents-autoresearch-and.md) — No Priors podcast, YouTube

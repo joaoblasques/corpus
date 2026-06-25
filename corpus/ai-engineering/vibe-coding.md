@@ -39,6 +39,9 @@ sources:
   - path: raw/_inbox/web-vibecode-claude-platform-api-case-study-claude-by-anthropic.md
     channel: web
     ingested_at: 2026-06-24
+  - path: raw/web/web-ai-writes-code-faster-your-job-is-still-to-prove-it-works.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - vibe coding
   - vibe-coding
@@ -151,6 +154,17 @@ Charlie Hills documented a structured pre-build process that uses Claude's quest
 
 Key constraint: "Claude Code is brilliant at building things that work and terrible at making them look good" — so the design references are mandatory input before code starts. Getting human sign-off on copy and design direction before implementation prevents the most common "vibe coding" failure mode [^src12].
 
+## The cost of shipping without proof
+
+Addy Osmani's 2026 survey quantifies what vibe-coding-without-review costs in production [^src13]:
+
+- **45% of AI-generated code** has security flaws at merge time
+- **XSS vulnerabilities at 2.74× the human rate** in AI-assisted codebases
+- PRs are **18% larger** — developers accept bigger AI output batches with proportionally less scrutiny
+- **Incidents up 24%**, change failure rates up 30%
+
+The key rule: **"if you haven't seen the code do the right thing yourself, it doesn't work."** AI-generated proof ("the tests pass in my head") is not evidence. This is the spec-driven development principle applied to code review: the PR Contract (what, why, proof, risk, review focus) is the exit criteria, not a nice-to-have [^src13].
+
 ## See also
 
 - [[ai-engineering/agentic-coding|Agentic Coding]] — the broader coding-agent practice
@@ -177,3 +191,4 @@ Key constraint: "Claude Code is brilliant at building things that work and terri
 [^src10]: [How Anthropic uses Claude in Marketing](../../raw/_inbox/web-how-anthropic-uses-claude-in-marketing-claude.md) — Austin Lau, Anthropic
 [^src11]: [Vibecode — Claude Platform API case study](../../raw/_inbox/web-vibecode-claude-platform-api-case-study-claude-by-anthropic.md) — Vibecode
 [^src12]: [Claude Code built my website (9 steps)](../../raw/_inbox/email-2026-06-14-claude-code-built-my-website-9-steps.md) — Charlie Hills
+[^src13]: [AI Writes Code Faster. Your Job Is Still to Prove It Works.](../../raw/web/web-ai-writes-code-faster-your-job-is-still-to-prove-it-works.md) — Addy Osmani, addyosmani.com

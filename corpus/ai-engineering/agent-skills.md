@@ -66,6 +66,15 @@ sources:
   - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-stop-learning-obs-report.md
     channel: notes
     ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-claude-code-runs-report.md
+    channel: notes
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-eRS3CmvrOvA-i-tried-100-claude-code-skills-these-6-are-the-best.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-2xuFcmUAQUc-this-claude-code-plugin-writes-94-less-code-ponytail.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - agent skills
   - Claude skills
@@ -82,6 +91,17 @@ aliases:
   - three-stage progressive disclosure
   - bundled sub-agents
   - specialist agent profiles
+  - skills as living SOPs
+  - context pointing vs baking
+  - Ponytail
+  - YAGNI
+  - decision ladder
+  - Skill Creator
+  - Superpowers skill
+  - GSD skill
+  - ClaudeMem skill
+  - Context Mode skill
+  - cost reduction (YAGNI)
 tags:
   - corpus/ai-engineering
   - concept
@@ -397,6 +417,50 @@ The problem the skills solve: "without these skills, Claude silently breaks thin
 
 The broader lesson: any domain with precise file-format or API contracts benefits from a dedicated skill that encodes the grammar, not just best-practice prose [^src20].
 
+## Skills as living SOPs and the context-pointing principle
+
+A practitioner synthesis of 13 business workflows identifies two complementary truths about skill design [^src21]:
+
+1. **"A skill is a living thing — every time you run it or tweak something, it gets a little better."** The iteration loop: use the skill → observe failure → feed failure back → update the skill → rerun. This matches the recursive skill-building method above [^src21].
+2. **Context pointing vs baking.** Two ways to add knowledge to a skill: *bake it in* (embed instructions inline in the SKILL.md) vs *point to it* (the skill references an external source of truth that Claude reads when needed). Context pointing is strongly preferred for knowledge that changes — skill files are small, the agent reads the external source fresh each run, and updates to the knowledge don't require updating the skill itself [^src21].
+
+Example: an AI-search SEO skill points Claude at a live DataForSEO MCP server rather than baking keyword-research steps inline. The skill says "when asked for SEO research, use the DataForSEO skill, which loads the relevant MCP context" — the external source knows the current API, the skill just knows when to invoke it [^src21].
+
+## Top 6 community skills (ranked by practitioner impact)
+
+From a systematic survey of 100+ Claude Code skills [^src22]:
+
+| Rank | Skill | Key value | Install |
+|---|---|---|---|
+| 1 | **Skill Creator** | Creates correctly-structured SKILL.md files following Anthropic's packaging best practices | `/plugin install skill creator` (global) |
+| 2 | **Superpowers** (150k★) | Full development loop: plan → isolate → test → write → two-stage review; built-in `/review`, `/ultra-review` available from v2.1.86+ | Community marketplace |
+| 3 | **GSD** | Fixes context rot via per-task sub-agents with clean context; scope detection + security enforcement; autonomous mode | Community marketplace |
+| 4 | **/review + /ultra-review** | `/review` is free; `/ultra-review` runs in cloud sandbox, attacks from parallel angles, returns only confirmed bugs (not hunches), $5–20/run | Built into Superpowers |
+| 5 | **Context Mode** | Compresses session snapshots (56KB → 299 bytes), SQL event database, session rebuild after compaction; `/contextmode:ctx-stats` | Community marketplace |
+| 6 | **ClaudeMem** | Session lifecycle hooks + 3-layer retrieval (compact index → timeline → full observations), 10× token savings, web viewer at `localhost:37777`; auto-generates CLAUDE.md files | Plugin marketplace |
+
+**Bonus**: `frontend-design` (Anthropic official, install globally — same install path as Skill Creator) [^src22].
+
+The ordering reflects a meta-principle: invest first in skill-creation infrastructure (Skill Creator → better skills), then in code quality (Superpowers), then in context hygiene (GSD, Context Mode, ClaudeMem) [^src22].
+
+## Ponytail — YAGNI baked into the agent (cost reduction)
+
+Ponytail is a Claude Code plugin that enforces the YAGNI ("You Ain't Gonna Need It") principle by building a **decision ladder** into the agent before it writes any code [^src23]:
+
+**Decision ladder** (in order) [^src23]:
+1. Does this even need to exist? (requirements gate)
+2. Is there a standard library solution?
+3. Is there a native platform solution?
+4. Does an existing dependency already handle this?
+5. Is there a one-liner?
+6. Only then: write new code.
+
+The "Ponytail comment" documents what was considered and why each rung was skipped — creating a traceable audit trail of YAGNI decisions [^src23]. **Claimed cost reduction**: 47–77% (benchmarked: 3 methods × 3 models × 5 tasks × 10 runs each, correctness checked) [^src23]. Single-session benchmarks underestimate real savings because instructions get cached across a multi-task session.
+
+**Critical finding** [^src23]: prompting "follow YAGNI principles" alone achieves most of the result; "follow YAGNI principles and prefer one-liner solutions" *beats Ponytail* on the benchmarks. The plugin's value over raw prompting is **packaging** — auto-injection into every session (no re-prompting), an audit feature (the Ponytail comment), a debt-ledger for accumulated skipped code, and a built-in review step. "Packaging is the product."
+
+This is the same "process over prose" insight as the SDLC skills section above: the constraint (YAGNI) is already in the model's training, but the skill forces the agent to apply it at the right moment via a structured decision ladder rather than letting it rationalize around it [^src23][^src5].
+
 ## See also
 
 - [[ai-engineering/context-window-management|Context Window Management]] — why a lean window matters; sub-agents
@@ -433,3 +497,6 @@ The broader lesson: any domain with precise file-format or API contracts benefit
 [^src18]: [measure-skills.bash — PreToolUse hook for skill usage logging](../../raw/web/measure-skills-bash.md) — Thariq Shihipar (GitHub Gist)
 [^src19]: [Discover and install prebuilt plugins through marketplaces](../../raw/web/discover-and-install-prebuilt-plugins-through-marketplaces-c.md) — Claude Code Docs, Anthropic
 [^src20]: [Stop Learning Obsidian](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-stop-learning-obs-report.md) — YouTube (notes report)
+[^src21]: [Claude Code Runs My Business (13 Workflows)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-claude-code-runs-report.md) — YouTube (processed report)
+[^src22]: [I Tried 100 Claude Code Skills — These 6 Are the Best](../../raw/youtube/youtube-eRS3CmvrOvA-i-tried-100-claude-code-skills-these-6-are-the-best.md) — Nate Herk, YouTube
+[^src23]: [This Claude Code Plugin Writes 94% Less Code (Ponytail)](../../raw/youtube/youtube-2xuFcmUAQUc-this-claude-code-plugin-writes-94-less-code-ponytail.md) — YouTube

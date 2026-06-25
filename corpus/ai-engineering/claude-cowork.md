@@ -111,6 +111,15 @@ sources:
   - path: raw/web/claude-for-microsoft-365-claude-by-anthropic.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/web/web-use-claude-cowork-safely-claude-help-center.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/web/web-download-claude-claude-by-anthropic.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/web/web-connectors-claude.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - Claude Cowork
   - Cowork
@@ -470,6 +479,44 @@ Enterprise plans can override per group.
 
 **Prompt injection risk** [^src33]: Cowork accesses third-party content (websites, emails, documents) during task execution. Malicious content in those sources could attempt to hijack Claude's actions. Mitigation: review tasks carefully before approving; use "Ask before acting" mode when working with untrusted content; restrict connector access.
 
+## Using Cowork safely (risk model)
+
+**Availability**: paid plans only — Pro, Max, Team, Enterprise. Desktop app on macOS and Windows [^src35].
+
+**Read tools vs write tools** are the core risk distinction [^src35]:
+- **Read tools** (Search, Read File, Browse): low risk. They can expose information to Claude — and to any prompt injection in that information — but cannot take actions in the world.
+- **Write tools** (Edit File, Write File, Execute Bash, Call API, Send Email, Move to Trash, etc.): higher risk. Actions cannot be undone. Mistakes here have real-world consequences.
+
+**Prompt injection requires two conditions simultaneously** [^src35]: (1) Claude reads content from outside the user's trust boundary (a webpage, an email, a document from an untrusted source), AND (2) Claude has write tools available. Read-only sessions cannot be exploited by injection. Sessions with broad write permissions that read untrusted content are the highest risk category.
+
+**Safety measures Anthropic applies** [^src35]:
+- RL training to make Claude resistant to injection attempts
+- Content classifiers filtering malicious instructions
+- Deletion protection (Claude warns before permanent deletes)
+- Computer use safeguards: Claude cannot take hidden screenshots; OS shows Claude's actions in real time
+
+**10 user safety recommendations** [^src35]:
+1. Use a dedicated working folder — not your root file system
+2. Monitor what Claude is doing at the task level, not the command level
+3. Extra caution with scheduled/automated tasks (no human in the loop)
+4. Avoid "Act without asking" mode unless you can supervise closely
+5. Computer use has no sandbox — treat it like granting control of your full desktop
+6. Prefer explicit scoping: give Claude specific files, not entire directories
+7. Review output before accepting file writes
+8. Use "Ask before acting" when dealing with emails or web content from external sources
+9. Team/Enterprise: use OpenTelemetry to audit Cowork activity
+10. Do NOT use the Compliance API to capture Cowork activity — it is not supported
+
+## Remote Control (mobile → local Claude Code)
+
+The download page for the Claude desktop app consolidates: Cowork, Claude Code (with preview server), and chat all in one application [^src36]. **Remote Control** uses the Claude mobile app to trigger and monitor Claude Code sessions on your local desktop machine [^src36]:
+
+- Dispatch a coding task from your phone; check status on the go
+- Approve pending permission requests from mobile
+- Review results of a long-running session without sitting at your desk
+
+**Enterprise distribution**: MSIX installer (Windows) and PKG installer (macOS) for centralized MDM deployment; SSO integration; pre-approved extension lists [^src36]. Admins can force-install specific extensions and block unapproved plugins.
+
 ## See also
 
 - [[ai-engineering/claude-code|Claude Code]] — the developer counterpart; capabilities land here first
@@ -512,3 +559,5 @@ Enterprise plans can override per group.
 [^src32]: [Claude Routines Just Launched. Here Are 13 You Need.](../../raw/youtube/KpG2yBi5I10-claude-routines-just-launched-here-are-13-you-need.md) — AI Founders, YouTube
 [^src33]: [Use Claude Cowork on Team and Enterprise plans](../../raw/web/use-claude-cowork-on-team-and-enterprise-plans-claude-help-c.md) — Anthropic Help Center
 [^src34]: [Claude for Microsoft 365](../../raw/web/claude-for-microsoft-365-claude-by-anthropic.md) — Anthropic, claude.com/claude-for-microsoft-365
+[^src35]: [Use Claude Cowork safely — Claude Help Center](../../raw/web/web-use-claude-cowork-safely-claude-help-center.md) — Anthropic
+[^src36]: [Download Claude — claude.ai](../../raw/web/web-download-claude-claude-by-anthropic.md) — Anthropic
