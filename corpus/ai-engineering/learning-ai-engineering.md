@@ -45,6 +45,9 @@ sources:
   - path: raw/github/github-cladius-agentic-ai.md
     channel: github
     ingested_at: 2026-06-25
+  - path: raw/github/github-sumanth077-ai-engineering-toolkit.md
+    channel: github
+    ingested_at: 2026-06-25
 aliases:
   - learning AI
   - learning AI engineering
@@ -232,3 +235,22 @@ This is the authoritative Anthropic tutorial — interactive, runnable, and regu
 [^src12]: [Karpathy's LLM Wiki Setup Guide](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-karpathy-s-llm-wi-report.md) — Teacher's Tech, YouTube (processed report)
 [^src13]: [FULL Claude Tutorial For Beginners in 2026! (FULL COURSE)](../../raw/youtube/youtube-Xg55nTrbYYY-full-claude-tutorial-for-beginners-in-2026-full-course.md) — Productive Dude, YouTube
 [^src14]: [cladius/agentic-ai — agentic AI jumpstart (★73)](../../raw/github/github-cladius-agentic-ai.md) — cladius, GitHub; ADK, Agno, Bedrock, LangFlow, LangGraph
+[^src15]: [Sumanth077/ai-engineering-toolkit — 100+ libraries and frameworks for LLM engineers (★3,216)](../../raw/github/github-sumanth077-ai-engineering-toolkit.md) — GitHub
+
+## AI Engineering Toolkit (Sumanth077, ★3,216)
+
+A curated reference list of 100+ libraries, frameworks, and tools for production LLM development. Organized by engineering concern [^src15]:
+
+**Tooling categories** [^src15]:
+- **Vector databases**: Pinecone (managed), Weaviate (open-source, GraphQL), Qdrant (Rust, filtering), Chroma (embedding DB), PGVector (Postgres extension), Milvus, Redis (vector store)
+- **Orchestration & workflows**: LangChain, LlamaIndex, Haystack, Semantic Kernel
+- **RAG**: LlamaIndex RAG, LangChain RAG, Haystack RAG
+- **Evaluation & testing**: RAGAS (RAG evaluation), TruLens, DeepEval, Langfuse, Promptfoo
+- **Model management**: Weights & Biases, MLflow, Comet
+- **Data / web scraping**: Crawl4AI, Firecrawl, Playwright, Beautiful Soup
+- **Agent frameworks**: AutoGen, CrewAI, LangGraph, Semantic Kernel
+- **LLM inference platforms**: Together AI, Fireworks AI, Groq, Replicate
+- **Structured generation**: Outlines, Instructor, Guidance
+- **Local development**: Ollama, LM Studio, Jan
+
+**Use case**: a quick reference for choosing the right library when building RAG pipelines, agent systems, evaluation harnesses, or local inference setups. Complements [[ai-engineering/rag|RAG]], [[ai-engineering/agent-evaluation|Agent Evaluation]], and [[ai-engineering/llm|LLM]] pages as a practical tooling index.

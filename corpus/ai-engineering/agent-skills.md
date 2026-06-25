@@ -129,6 +129,15 @@ sources:
   - path: raw/web/web-skill-authoring-best-practices.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-2BFN2DtcQMw-the-only-claude-skills-you-need-in-2026.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-bXnRA3pJavE-8-claude-skills-i-cant-live-without.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/web/web-manage-plugins-for-your-organization-claude-help-center.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - agent skills
   - Claude skills
@@ -869,3 +878,67 @@ This skill is a concrete example of encoding aesthetic *judgment* and *constrain
 [^src40]: [addyosmani/agent-skills — SDLC skill framework (65K★)](../../raw/github/github-addyosmani-agent-skills.md) — Addy Osmani, GitHub
 [^src41]: [The Only 6 Skills You Need to 10x Your Claude Projects](../../raw/youtube/youtube-AfKoqFwC7Ew-the-only-6-skills-you-need-to-10x-your-claude-projects.md) — Austin Marchese, YouTube
 [^src42]: [frontend-design SKILL.md — official Anthropic example](../../raw/web/web-skill-md.md) — Anthropic (anthropics/skills GitHub)
+[^src43]: [The Only Claude Skills You Need in 2026](../../raw/youtube/youtube-2BFN2DtcQMw-the-only-claude-skills-you-need-in-2026.md) — Dubibubi, YouTube; top 33 ranked skills with install counts
+[^src44]: [8 Claude Skills I Can't Live Without](../../raw/youtube/youtube-bXnRA3pJavE-8-claude-skills-i-cant-live-without.md) — Ben AI, YouTube; 8 meta skills that improve Claude across all tasks
+[^src45]: [Manage plugins for your organization — Claude Help Center](../../raw/web/web-manage-plugins-for-your-organization-claude-help-center.md) — Anthropic Help Center
+
+## Top 33 skills ecosystem snapshot (2026-04)
+
+Practitioner survey of over 500,000 skills in the market (self-described), filtered to the ~5% that are "actually worth your time" [^src43]:
+
+**Top skills by install count** (approximate) [^src43]:
+
+| Rank | Skill | Installs / Stars | What it does |
+|---|---|---|---|
+| 1 | `front-end-design` | 277,000 installs | Bans generic fonts, forces a design direction before any code |
+| 2 | `superpowers` | 100,000+ stars | 20+ skills enforcing TDD + plan-to-execute pipeline; deletes code written before tests |
+| 3 | Auto Researcher (Karpathy) | 50,000 stars in one week | 24/7 experiment loop: give a goal → wakes you with tested improvements |
+| 4 | Context7 | 240,000 weekly NPM | Injects current library docs into context; resolves hallucinated deprecated APIs |
+| 5 | GBrain (Garry Tan / YC) | ~40,000 stars | 15 opinionated role prompts: CEO, designer, engineering manager, release manager |
+| 6 | Taskmaster | — | Breaks PRD into tasks with dependencies + complexity scores; 36 MCP tools |
+| 7 | Playwright (Microsoft) | — | Agents control a browser: click, fill, navigate, screenshot |
+| 8 | Firecrawl | 97,000 stars | Website → LLM-ready markdown; search/extract/crawl/map tools |
+| 9 | Codebase memory MCP | — | Persistent knowledge graph of codebase; remembers what was changed and why |
+| 10 | PDF skill | — | Read/extract/fill/merge/split PDFs; 15 apps share 10M MRR on this |
+| 16 | Marketing skills (Corey Haines) | 16,000 stars | 20+ sub-skills: CRO, copywriting, SEO, email sequences, growth |
+| 22 | Remotion | 117,000 weekly installs | Vibe-code promotional motion graphic videos |
+| 23 | Token efficiency skill | ~14,000 stars | Reduces token usage via KV cache tricks + context efficiency |
+| 24 | Promptfoo | 18,000 stars | Automated security testing for prompts: red-teaming, edge case, injection |
+| 25 | Skill creator (official) | — | Meta skill: describe a workflow → generates a skill file in 5 minutes |
+| 26 | n8n | 180,000 stars | Open-source workflow automation, 400+ integrations, AI agent nodes |
+| 29 | Claude Squad | 65,000 stars | Run multiple Claude Code agents in parallel terminal sessions |
+| 30 | Container Use (Dagger) | — | Containerized sandbox per agent; can't break your real system |
+| 32 | Awesome Claude Skills | 95,000 stars | Best-curated community list of Claude skills |
+
+**Finding skills** [^src43]: SkillsMP (500K+ skills), Skill Hub (30K+ AI-rated), Maggie archive (daily feed). To install: send Claude the GitHub link and it handles the rest.
+
+## Eight meta skills (skills that improve Claude across all tasks)
+
+A "meta skill" upgrades Claude's general performance rather than encoding a specific workflow [^src44]:
+
+| Meta skill | Problem solved | How it works |
+|---|---|---|
+| **Process interviewer** | Claude jumps to action before understanding fuzzy processes | 10–15 deep questions; produces a PRD / skill brief before any code is written |
+| **Prompt master** | Brain-dump prompts are unstructured and error-prone | Rewrites messy input into structured prompt with best practices; can auto-run on all complex inputs |
+| **Humanizer** | AI-generated text has detectable tells (e.g., "unlock," "hope you're well") | Detects and fixes AI writing patterns per Wikipedia's AI-writing-detection guide |
+| **Fact checker** | AI output is confidently incorrect; verification is manual | Systematic fact verification + web cross-reference; returns a credibility report per claim |
+| **Find skills** | 500K+ skills; discovery is a needle-in-haystack problem | Searches skills.sh ecosystem by task; returns ranked options by install count |
+| **Front-end slides** | HTML presentations from Claude lack brand quality | Animated HTML slide decks with pre-baked layout best practices; brand-customizable |
+| **Decision toolkit** | Big decisions are hard to structure analytically | First-principles framework + interactive HTML wizard; guides (doesn't decide); checks for bias |
+| **MCP builder** | Software without an MCP can't be reached by agents | Reads the target API docs, generates an MCP server + installation steps in one chat |
+
+**Usage pattern** [^src44]: add the Humanizer and Fact Checker as the final step inside your copywriting skills (not just as on-demand tools) so every AI output gets both passes before delivery. Add Prompt Master to `CLAUDE.md` general instructions: "every time I use a long unstructured prompt for a complex task, auto-run the prompt master skill."
+
+## Org plugin marketplace management (Claude Team/Enterprise)
+
+For Team/Enterprise customers, skills can be deployed as managed plugins at org scale [^src45]:
+
+**Plugin sources** [^src45]: GitHub repository (admin assigns a repo; plugins sync automatically on push — recommended for versioning) or manual upload (admin pastes JSON directly in the console).
+
+**Visibility control** [^src45]:
+- **Team plugins** — visible only to members of the team that installed them
+- **Everyone plugins** — visible across the whole org (Team/Enterprise workspace-wide)
+
+**Access pattern** [^src45]: users don't install org plugins manually; admin assigns them, and they appear automatically in the user's Claude interface. An admin can revoke a plugin, which removes it from all users immediately.
+
+**GitHub sync vs manual** [^src45]: GitHub sync is the recommended approach for managed plugin distribution — version-controlled, auto-deploys on push, auditable. Manual upload is for one-off or emergency deployments.

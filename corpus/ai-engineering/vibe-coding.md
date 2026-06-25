@@ -45,6 +45,9 @@ sources:
   - path: raw/notes/notes-local-ai-coding-report.md
     channel: notes
     ingested_at: 2026-06-25
+  - path: raw/web/web-comprehension-debt-the-hidden-cost-of-ai-generated-code.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - vibe coding
   - vibe-coding
@@ -202,3 +205,24 @@ The practical implication for the vibe-coding workflow: the permissive "just bui
 [^src12]: [Claude Code built my website (9 steps)](../../raw/_inbox/email-2026-06-14-claude-code-built-my-website-9-steps.md) — Charlie Hills
 [^src13]: [AI Writes Code Faster. Your Job Is Still to Prove It Works.](../../raw/web/web-ai-writes-code-faster-your-job-is-still-to-prove-it-works.md) — Addy Osmani, addyosmani.com
 [^src14]: [Local AI coding: compliance and performance report](../../raw/notes/notes-local-ai-coding-report.md) — notes report
+[^src15]: [Comprehension Debt — The Hidden Cost of AI-Generated Code](../../raw/web/web-comprehension-debt-the-hidden-cost-of-ai-generated-code.md) — Addy Osmani, addyosmani.com (March 2026)
+
+## Comprehension debt — the hidden cost of AI-generated code
+
+Comprehension debt is "the growing gap between how much code exists in your system and how much of it any human being genuinely understands" [^src15].
+
+Unlike technical debt (which announces itself through mounting friction), **comprehension debt breeds false confidence** — the codebase looks clean, tests are green, the reckoning arrives quietly [^src15].
+
+**The speed asymmetry problem** [^src15]: AI generates code far faster than humans can evaluate it. When a developer writes code, the review process is a productive bottleneck — it forces comprehension, surfaces assumptions, and distributes knowledge. AI-generated code breaks that feedback loop. Volume is too high; "surface correctness is not systemic correctness."
+
+**The inversion** [^src15]: "When code was expensive to produce, senior engineers could review faster than junior engineers could write. AI flips this: a junior engineer can now generate code faster than a senior engineer can critically audit it."
+
+**Empirical data** [^src15]: Anthropic study (arXiv:2601.20245, RCT with 52 engineers) found AI-assisted participants completed tasks in similar time as controls but scored **17% lower on comprehension quizzes** (50% vs 67%). Largest decline in debugging. Key finding: passive delegation ("just make it work") impairs skill development far more than active, question-driven use of AI. Developers using AI for conceptual inquiry scored above 65%; for code generation delegation, below 40%.
+
+**Why tests alone don't solve it** [^src15]: "You can't write a test for behavior you haven't thought to specify." When AI changes implementation behavior and updates hundreds of tests to match, the question shifts from "is this correct?" to "were all those test changes necessary?" Only comprehension can answer that.
+
+**Measurement gap** [^src15]: standard velocity metrics (DORA, PR counts, coverage) do not capture comprehension deficits. The organizational assumption that "reviewed code is understood code no longer holds."
+
+**What it demands** [^src15]: "Making code cheap to generate doesn't make understanding cheap to skip. The comprehension work is the job."
+
+See also: [[ai-engineering/intent-debt|Intent Debt]] — related concept about loss of authorial intent in AI-generated code.

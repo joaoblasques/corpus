@@ -51,6 +51,9 @@ sources:
   - path: raw/github/github-aaif-goose-goose.md
     channel: github
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube--QznXY_pJvw-ai-agents-love-clis.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - ai agent
   - agentic AI
@@ -247,3 +250,20 @@ Key properties [^src14]:
 [^src12]: [Agents in Action #1 — What is an AI Agent? (Pipeline to Insights)](../../raw/email/email-2026-06-13-agents-in-action-1-what-is-an-ai-agent.md)
 [^src13]: [Skill Issue: Andrej Karpathy on Code Agents, Auto-Research, and...](../../raw/youtube/youtube-kwSVtQ7dziU-skill-issue-andrej-karpathy-on-code-agents-autoresearch-and.md) — No Priors podcast, YouTube
 [^src14]: [aaif-goose/goose — Goose AI agent (★50K)](../../raw/github/github-aaif-goose-goose.md) — AAIF / Linux Foundation, GitHub
+[^src15]: [AI Agents LOVE CLIs](../../raw/youtube/youtube--QznXY_pJvw-ai-agents-love-clis.md) — Maximilian Schwarzmüller, YouTube
+
+## Why AI agents love CLIs (the GUI → CLI reversal)
+
+A historical inversion: computing went from terminal UIs (1970s) to rich GUIs (1990s–2000s), but AI agents are driving a trend *back* to text-only, terminal-first interaction [^src15].
+
+**Why CLIs fit agents better than GUIs** [^src15]:
+- GUI interaction requires screenshot → locate element → click → screenshot again — token-intensive and slow
+- Agents have been RL-trained on vast CLI usage: standard Linux commands, piping, chaining, `--help` discovery
+- CLIs are just thin wrappers around APIs — the same principle that drove API-first design in traditional software applies here
+- Agents can use `--help` to learn a completely new CLI tool even if it wasn't in training data
+
+**The trend** [^src15]: more companies are releasing CLIs to make their services agent-accessible. Example: Google released the Google Workspace CLI in early 2026 specifically because existing tools (Gawk CLI by Peter Steinberger) had demonstrated demand before an official one existed. MCP servers fill the same role where no CLI exists — but CLIs are predicted to be the dominant integration pattern long-term.
+
+**Practical implication** [^src15]: "They also saw that they can use `--help` to learn more about a tool, and that puts them in a great position with new tools as well." Just pointing an agent at a CLI tool and telling it about `--help` is sufficient — no explicit instruction manual needed.
+
+**Data format preference** [^src15]: agents prefer plain text → Markdown → JSON over rich HTML or binary formats. Documentation pages that offer a "copy as plain text" button are already optimized for agent consumption.

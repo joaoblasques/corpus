@@ -30,6 +30,9 @@ sources:
   - path: raw/youtube/youtube-bWjQqE0hIGo-fundamentals-of-ai-product-management-ai-pm-community-sessio.md
     channel: youtube
     ingested_at: 2026-06-20
+  - path: raw/web/web-product-management-on-the-ai-exponential-claude.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - AI product management
   - AIPM
@@ -239,3 +242,27 @@ The *career* dimension of AIPM (job market, "what should I become") lives in [[a
 [^src7]: [Product development in the agentic era](../../raw/notes/notes-clippings-product-development-in-the-agentic-era.md) — Anthropic PM, building with Managed Agents
 [^src8]: [AI/ML Fundamentals for Product Managers](../../raw/youtube/youtube-GIwi7K-7Ob8-ai-ml-fundamentals-for-product-managers.md) — YouTube
 [^src9]: [Fundamentals of AI Product Management (AI PM Community Session)](../../raw/youtube/youtube-bWjQqE0hIGo-fundamentals-of-ai-product-management-ai-pm-community-sessio.md) — YouTube
+[^src10]: [Product management on the AI exponential — Claude blog](../../raw/web/web-product-management-on-the-ai-exponential-claude.md) — Cat Wu, Head of Product for Claude Code, Anthropic (primary source; the clipping in [^src6] is a processed version)
+
+## PM on the AI exponential — Claude Code team's workflow (Cat Wu)
+
+Cat Wu (Head of Product, Claude Code) describes 4 shifts the Anthropic Claude Code PM team has embraced as models improve exponentially [^src10]:
+
+**Context**: METR measures Claude on software tasks that take humans 12 hours to complete — Opus 4.6 succeeds ~50% of the time. In 16 months (Sonnet 3.5 → Opus 4.6), the human-equivalent task duration grew from 21 minutes to ~12 hours — a **~41x jump** [^src10].
+
+**Cat Wu's personal workflow split** [^src10]:
+- **Claude.ai**: thought partner — strategy docs, tricky situations, quick answers (no action needed)
+- **Claude Code**: building prototypes, evals, scripts that call Claude API (when output is code)
+- **Claude Cowork**: inbox zero, todos, slide decks, searching Slack history, travel booking (everything else)
+
+**4 PM shifts for the AI exponential** [^src10]:
+
+1. **Plan in short sprints with side quests** — instead of long-term roadmaps, everyone (engineers, PMs, designers) takes self-directed experiments. "Some of Anthropic's most popular features — Claude Code on Desktop, the AskUserQuestion tool, and todo lists — emerged this way."
+
+2. **Demos and evals over docs** — replaced documentation-first thinking with prototype-first thinking. "Because you can prototype in an afternoon, wrong bets are cheap." Pro tip: after writing a spec, send it to Claude Code and see if it can build it.
+
+3. **Revisit features with new models** — every model release is an implicit prompt to revisit existing features. The test: "deliberately ask it to do things you think might be too hard." Claude Code with Chrome was discovered by noticing users manually switching between tools and realizing it should be built in.
+
+4. **Do the simple thing** — "If your product cleverly works around a model limitation, that workaround becomes unnecessary complexity when the next model drops." Example: todo list system reminders were removed entirely with the next model as the behavior came for free.
+
+**On letting go** [^src10]: "Many product managers are used to having tight control over the full product experience, but AI pushes you to let go in order to move quickly... the product manager's role is now to identify the handful of true non-negotiables and let the rest go."

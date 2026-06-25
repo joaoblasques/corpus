@@ -126,6 +126,9 @@ sources:
   - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-how-software-engi-report.md
     channel: notes
     ingested_at: 2026-06-25
+  - path: raw/web/web-github-proteowizard-pwiz-ai-ai-tooling-and-documentation-for.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - agentic coding
   - agentic engineering
@@ -739,3 +742,26 @@ Key constraint: HTML output works best when the agent writes the whole file at o
 [^src34]: [Local Agentic Coding Guide](../../raw/youtube/youtube-hfba9dAT6xE-local-agentic-coding.md) — YouTube
 [^src35]: [The Unreasonable Effectiveness of HTML (gallery)](../../raw/web/web-github-anthropics-html-effectiveness-html-effectiveness-exam.md) — Anthropic gallery
 [^src36]: [How Software Engineers Actually Use Coding Agents in 2026](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-how-software-engi-report.md) — YouTube (processed notes report); Pragmatic Engineer 2026 adoption survey
+[^src37]: [ProteoWizard/pwiz-ai — AI tooling and documentation for ProteoWizard/Skyline](../../raw/web/web-github-proteowizard-pwiz-ai-ai-tooling-and-documentation-for.md) — Brendan MacLean / MacCoss Lab, GitHub; primary source (alongside the Skyline case study note) for the pwiz-ai "reference don't embed" context architecture
+
+## ProteoWizard pwiz-ai — LLM context docs pattern
+
+The `pwiz-ai` repository ([GitHub](https://github.com/ProteoWizard/pwiz-ai)) stores all AI context for the ProteoWizard/Skyline codebase (700,000+ lines of C#, 17 years of history) in a separate repo [^src37]. This is a production case study of the [[ai-engineering/context-engineering|context engineering]] principle "reference don't embed."
+
+**Three-file pattern** [^src37]: the pwiz-ai docs follow an under-500-line total constraint across three files:
+
+| File | Role | Length limit |
+|---|---|---|
+| `CRITICAL-RULES.md` | Hard rules the AI must never break (architecture constraints, style, testing conventions) | <200 lines |
+| `MEMORY.md` | Persistent context — decisions made, why, what's deprecated | <200 lines |
+| `WORKFLOW.md` | Step-by-step workflows for common tasks (feature add, bug fix, PR prep) | <200 lines |
+
+**Key principles** [^src37]:
+- **Separate repo, not subdirectory** — lives outside the main codebase so it applies across all branches and time points
+- **Reference don't embed** — each skill points into a central documentation knowledgebase rather than duplicating content, keeping context files lightweight
+- **"The lay of the land, not the expertise itself"** — `CLAUDE.md` handles environment setup and navigation; expertise lives in skills
+- **Under 500 lines total** — small enough that a developer can read the entire AI context in one sitting and understand what the AI knows about their codebase
+
+**Why it scales** [^src37]: in a 700K-line codebase maintained for 17 years, the AI context that persists across sessions is not "all the code" but the curated rules, decisions, and workflows that a skilled newcomer needs to orient themselves. The same context works for new contributors and for AI agents.
+
+See also: [[ai-engineering/claude-code|Claude Code]] — the Skyline/onboarding case study is documented there under "Onboarding Claude Code to a legacy codebase."

@@ -45,6 +45,12 @@ sources:
   - path: raw/github/github-runanywhereai-rcli.md
     channel: github
     ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-build-real-time-k-report.md
+    channel: notes
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-2KVkpUGRtnk-build-real-time-knowledge-graph-for-documents-with-llm.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - RAG
   - retrieval-augmented generation
@@ -353,3 +359,33 @@ Combined with text-extract-api, forms a fully local document-intelligence pipeli
 [^src11]: [Karpathy's Obsidian RAG + Claude Code = CHEAT CODE (notes report)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-karpathy-s-obsidi-report.md) — Chase AI, YouTube (processed report)
 [^src12]: [catchthetornado/text-extract-api — document extraction pipeline](../../raw/github/github-catchthetornado-text-extract-api.md) — GitHub
 [^src13]: [runanywhereai/rcli — on-device voice AI with local RAG](../../raw/github/github-runanywhereai-rcli.md) — GitHub
+[^src14]: [Build Real-Time Knowledge Graph For Documents with LLM (processed notes report)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-build-real-time-k-report.md) — CocoaIndex + Neo4j tutorial, YouTube (processed report)
+[^src14a]: [Build Real-Time Knowledge Graph For Documents with LLM (video)](../../raw/youtube/youtube-2KVkpUGRtnk-build-real-time-knowledge-graph-for-documents-with-llm.md) — CocoaIndex + Neo4j tutorial, YouTube
+
+## Knowledge graph from documents (CocoaIndex + Neo4j)
+
+An alternative to vector-only RAG: build a property-graph knowledge base from documents using LLM extraction and export to Neo4j [^src14].
+
+**Architecture** [^src14]:
+
+| Step | What happens |
+|---|---|
+| Document ingest | `CocoaIndex.LoadFromFile` → KTable of (filename, content) |
+| Summary extraction | `ExtractByLLM` → `DocumentSummary(title, summary)` per doc |
+| Relationship extraction | `ExtractByLLM` → list of `Relationship(subject, predicate, object)` triples |
+| Entity mention | No extra LLM call — collect (entity, doc) pairs from subject/object of each triple |
+| Neo4j export | Map docs → nodes, entities → nodes (deduped by primary key), relationships → edges |
+
+**Property graph model** [^src14]: nodes have labels + primary keys; relationships have exactly one type; CocoaIndex deduplicates nodes by primary key so the same entity from many documents collapses into one node.
+
+**CocoaIndex incremental processing** [^src14]: you declare mapping + transformation only; CocoaIndex handles create/update/delete to the target automatically. Cocoa Insight provides step-by-step data observability during the pipeline.
+
+**When to use knowledge graphs over vector RAG** [^src14]:
+- Questions requiring multi-hop reasoning: "What connects entity A to entity B?"
+- Relationship-typed queries: "What does X cause?", "What does Y depend on?"
+- Dense cross-document entity networks (many docs referring to shared named entities)
+- Cases where chunk-level retrieval loses relational structure
+
+**LLM extraction guidance** [^src14]: detailed docstrings in the `Relationship` data class ("the subject field must contain a named entity, predicate must be a verb phrase...") significantly improve triple quality. The structured extraction step is the most model-sensitive part of the pipeline.
+
+See also: [[ai-engineering/rag|RAG]] (vector RAG patterns), [[ai-engineering/embeddings|Embeddings]] (the vector alternative to graph edges).

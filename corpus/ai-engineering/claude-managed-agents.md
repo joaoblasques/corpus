@@ -78,6 +78,15 @@ sources:
   - path: raw/web/web-github-modal-labs-claude-managed-agents-modal-sandbox-claude.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/web/web-define-outcomes.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/web/web-subscribe-to-webhooks.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/web/web-tools.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - Claude Managed Agents
   - Managed Agents
@@ -412,6 +421,68 @@ Amplitude built a Design Agent on Claude Managed Agents + Cloudflare in two days
 
 **Advisor strategy** (announced London 2026): split execution from advising at the API level — a small model executes, a large model (Opus) advises when needed. Updates the `tools` array on the Messages API. Eve Legal reported frontier quality at 5× lower cost [^src23].
 
+## Outcomes API — rubric-graded task completion
+
+The Outcomes API elevates a session "from conversation to work" [^src25]. When you define an outcome, a separate grader agent is provisioned automatically to evaluate the artifact against a rubric.
+
+**Rubric** [^src25]: a markdown document with per-criterion scoring requirements. Required. Can be provided inline (as a string) or uploaded to the Files API for reuse across sessions. Example structure: Revenue Projections / Cost Structure / Discount Rate / Terminal Value / Output Quality.
+
+**Workflow** [^src25]:
+1. Create session (standard)
+2. Send `user.define_outcome` event: `description`, `rubric` (inline or file ID), `max_iterations`
+3. Agent begins work immediately — no additional message required
+4. Events stream: `span.outcome_evaluation_start` → `span.outcome_evaluation_ongoing` (heartbeat) → `span.outcome_evaluation_end`
+
+**Grader result states** [^src25]:
+
+| Result | What happens next |
+|---|---|
+| `satisfied` | Session transitions to idle |
+| `needs_revision` | Agent starts a new iteration cycle |
+| `max_iterations_reached` | No more evaluation cycles; agent may do one final revision |
+| `failed` | Idle; rubric fundamentally does not match the task |
+| `interrupted` | Emitted if evaluation started before a `user.interrupt` event |
+
+The grader uses a **separate context window** to avoid being influenced by the main agent's implementation choices. Its internal reasoning is opaque; you see only heartbeat pings while it evaluates.
+
+**Chaining outcomes** [^src25]: send a new `user.define_outcome` event after the terminal event of the previous outcome. Only one outcome runs at a time.
+
+## Webhooks — session state notifications
+
+Webhooks notify you of major state changes; the SSE event stream handles real-time work in progress [^src26].
+
+**Setup** [^src26]: visit Manage > Webhooks in Console; create an endpoint with the event types it should receive; save the `whsec_`-prefixed secret (shown once — store securely).
+
+**Signature verification** [^src26]: every delivery carries an `X-Webhook-Signature` header. Use the SDK's `unwrap()` helper to verify and parse in one step; it throws if invalid or payload is >5 minutes old.
+
+**Delivery behavior** [^src26]:
+- Return `2xx` to acknowledge; 3xx or errors trigger retries
+- `event.id` is unique per event, not per delivery — use it for idempotency (deduplicate retries)
+- Endpoint is auto-disabled after ~20 consecutive failures, or immediately if hostname resolves to a private IP or returns a redirect
+
+**Key event type** [^src26]: `session.status_idled` — the primary signal that a session has finished. Payload contains only `event.id` + `data.id`; fetch the session directly to get full state. Note: `session.status_idled` may arrive before `session.outcome_evaluation_ended` even when an outcome was produced first; use `created_at` to sort if ordering matters.
+
+## Tools API — built-in and custom tools
+
+The Managed Agents toolset (`agent_toolset_20260401`) provides 8 built-in tools, all enabled by default [^src27]:
+
+| Tool name | What it does |
+|---|---|
+| `bash` | Execute bash commands in a shell session |
+| `read` | Read a file from the local filesystem |
+| `write` | Write a file to the local filesystem |
+| `edit` | Perform string replacement in a file |
+| `glob` | Fast file pattern matching |
+| `grep` | Text search via regex |
+| `web_fetch` | Fetch content from a URL |
+| `web_search` | Search the web |
+
+**Selective enabling** [^src27]: set `default_config.enabled: false` + explicitly enable only required tools — useful for sandboxed agents that should not browse the web.
+
+**Custom tools** [^src27]: define additional tools in the agent configuration; your application executes them (Claude never runs custom tools itself) and sends results back via the events stream. Group related operations under one tool with an `action` parameter to reduce selection ambiguity. Name tools by resource (noun) + action pattern (`db_query`, `storage_read`) for clarity at scale.
+
+**100K token overflow** [^src27]: tool outputs exceeding 100,000 tokens are auto-written to a file in the sandbox; the model receives a truncated preview with the file path and reads the full content from there.
+
 ## See also
 
 - [[ai-engineering/mcp|MCP]] — agents connect to external systems via MCP; Vaults handle OAuth credentials per session
@@ -447,3 +518,6 @@ Amplitude built a Design Agent on Claude Managed Agents + Cloudflare in two days
 [^src22]: [How We Built a Design Agent at Amplitude with Claude Managed Agents and Cloudflare](../../raw/web/web-how-we-built-a-design-agent-at-amplitude-with-claude-managed.md) — Will Newton, Amplitude
 [^src23]: [Code with Claude London 2026: Opening Keynote](../../raw/youtube/youtube-6amLO7I9xdg-code-with-claude-london-2026-opening-keynote.md) — Anthropic, YouTube
 [^src24]: [modal-labs/claude-managed-agents-modal-sandbox — CLI + Slackbot integration examples](../../raw/web/web-github-modal-labs-claude-managed-agents-modal-sandbox-claude.md) — Modal Labs, GitHub
+[^src25]: [Define outcomes — Claude Managed Agents docs](../../raw/web/web-define-outcomes.md) — Anthropic; primary source for Outcomes API, rubric format, grader states, chaining
+[^src26]: [Subscribe to webhooks — Claude Managed Agents docs](../../raw/web/web-subscribe-to-webhooks.md) — Anthropic; primary source for webhook setup, signature verification, delivery behavior
+[^src27]: [Tools — Claude Managed Agents docs](../../raw/web/web-tools.md) — Anthropic; primary source for built-in tool table, selective enabling, custom tools, 100K overflow

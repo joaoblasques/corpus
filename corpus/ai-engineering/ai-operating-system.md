@@ -72,6 +72,15 @@ sources:
   - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-obsidian-vault-de-report.md
     channel: notes
     ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-how-to-build-a-pe-report.md
+    channel: notes
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-rZX1OYetbSM-how-to-build-your-own-ai-operating-system-full-stack-explain.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-AkdFKnufNQo-claude-code-runs-my-business-13-workflows.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - AI OS
   - AIOS
@@ -330,3 +339,63 @@ Nick Milo (Linking Your Thinking) describes a three-layer AIOS designed to be **
 [^src16]: [Skill Issue: Andrej Karpathy on Code Agents, Auto-Research, and...](../../raw/youtube/youtube-kwSVtQ7dziU-skill-issue-andrej-karpathy-on-code-agents-autoresearch-and.md) — No Priors podcast, YouTube
 [^src17]: [How to Build Your Agentic OS with Claude Code (4-Layer Setup)](../../raw/youtube/youtube--MbKLZGndfY-agentic-os.md) — nyndra AI, YouTube
 [^src18]: [Obsidian Vault Deep Dive! Custom Plugins + Agentic Loops | My Full System](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-obsidian-vault-de-report.md) — YouTube (notes report); Obsidian+agent symbiosis, agentic logging, custom plugin pattern
+
+## Seven-layer Agent OS (Nufar Gaspar / AI Daily Brief)
+
+A practitioner-built agent OS framing for non-technical knowledge workers, platform-neutral (works with Claude Code, Codex, or any harness) [^src19]:
+
+1. **Identity** — SOUL.md / agents.md / copilot instructions: who you are, communication style, rules enforced every time
+2. **Context** — 3–5 single-page dated files (stakeholders, strategy, operating principles): context no model can supply on its own
+3. **Skills** — reusable "when X, do Y, output Z" instruction sets — one file per procedure
+4. **Memory** — deliberate direction of what the tool remembers across sessions; add specialized memory for decisions and relationships
+5. **Connections** — MCPs, CLIs, APIs to reach real systems; start read-only, add write access only after weeks of trust
+6. **Verification** — 3–5 quick checks per job; periodic retrospects of the whole OS (agents fail by being "confidently and wrongly right" [^src19])
+7. **Automations** — top of the stack; only automate trusted manual workflows, produce drafts not direct outputs, always log
+
+**Compounding payoff** [^src19]: "The first agent is hard — a weekend's work. Every later agent takes an afternoon because it inherits the foundation." The tool-neutral design means the same text-file OS ports to any future harness without migration or rebuild.
+
+**The core thesis** [^src19]: "Every agentic tool is becoming every other agentic tool." As Cursor adds agents and Claude Code adds memory, tool choice matters less than the portable text-file foundation underneath.
+
+## Full-stack AI OS architecture (Dave Ebbelaar)
+
+Technical blueprint for a production AI platform. Three architectural layers sit above the AIOS core building blocks [^src20]:
+
+| Layer | Pattern | Use case |
+|---|---|---|
+| 1 — Trigger-based | Webhooks + API endpoints + event-driven (FastAPI) | Email arrives → action; form submitted → workflow |
+| 2 — Scheduled | Cron jobs (Celery Beat or equivalent) | Every Tuesday 9 am: competitor analysis → report |
+| 3 — Agent layer | User-invoked via chat (WhatsApp/Slack/Claude Code) | Dynamic, conversational task execution |
+
+**Infrastructure stack** [^src20]: FastAPI (endpoints), Caddy (HTTPS proxy), Redis (in-memory queue), Celery (task workers), Docker Compose (deployment). Claude Agent SDK spins up Claude Code instances as cloud workers.
+
+**Key design principle** [^src20]: "Layer one and two run around the clock while you're on the beach. Layer three is where you spend the most time automating personal tasks." Layers one and two are more reliable for business-critical processes because they run without human intervention; layer three is conversational and dynamic.
+
+**Security pattern** [^src20]: every webhook requires signature verification before processing; store raw event in DB, then async dispatch to worker — never lose data, never process unverified input.
+
+**The "install not rebuild" principle** [^src20]: an AI OS should work like a traditional OS — install new capability as a new module without rebuilding the whole system. Reverse-engineer open-source AIOS repos to extract ideas; build only what you can maintain.
+
+## Claude Code as full business OS: 13 workflow patterns
+
+Practitioner example of running an entire business through Claude Code [^src21]:
+
+| # | Workflow | Mechanism |
+|---|---|---|
+| 1 | Lead generation | Apify scrapers → AnymailFinder → spreadsheet |
+| 2 | Pre-call research brief | Firecrawl + Apify → one-page brief |
+| 3 | Proposals & decks | PDF/PPT skills → branded output |
+| 4 | Content ideas | Competitor scraping + upvote/downvote feedback loop |
+| 5 | Content atomizer | One idea → 18 posts across platforms |
+| 6 | Image/thumbnail gen | OpenAI image API / Nano Banana via Claude Code |
+| 7 | AI SEO ranking | Data for SEO MCP → gap analysis → publish |
+| 8 | Skills from SOPs | Walk Claude through a process once → reusable skill file |
+| 9 | Scheduled automation | Skill + cron = background execution |
+| 10 | Research & learning | Firecrawl → synthesized report |
+| 11 | CRM management | Meeting transcripts → action items → CRM updates |
+| 12 | Knowledge base | Second brain + RAG for client insights |
+| 13 | Reporting | Auto-generated reports from live data |
+
+**The "skills as SOPs" model** [^src21]: any process repeated in delivery gets codified into a skill (markdown file). Skills are an open standard — portable across Claude Code, Codex, or any harness. Skills point to a brand folder rather than embedding static text, so changes propagate automatically.
+
+[^src19]: [How To Build a Personal Agentic Operating System](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-how-to-build-a-pe-report.md) — Nufar Gaspar / AI Daily Brief, processed notes report; primary source for 7-layer model (Identity→Context→Skills→Memory→Connections→Verification→Automations)
+[^src20]: [How to Build Your Own AI Operating System (Full Stack Explained)](../../raw/youtube/youtube-rZX1OYetbSM-how-to-build-your-own-ai-operating-system-full-stack-explain.md) — Dave Ebbelaar, YouTube; primary source for 3-layer technical architecture + FastAPI/Redis/Celery stack
+[^src21]: [Claude Code RUNS My Business (13 WORKFLOWS)](../../raw/youtube/youtube-AkdFKnufNQo-claude-code-runs-my-business-13-workflows.md) — Brad / AI & Automation, YouTube; primary source for 13-workflow business OS pattern

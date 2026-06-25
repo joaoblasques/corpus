@@ -111,6 +111,12 @@ sources:
   - path: raw/youtube/youtube-h0HYpONXgjk-stop-using-obsidian-this-simple-second-brain-setup-actually.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-H9BUkgDf5Y4-i-built-the-best-claude-memory-system-beats-hermes.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-iXd0t60YmMw-karpathy-s-llm-wiki-full-beginner-setup-guide.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - agent memory
   - memory
@@ -285,6 +291,10 @@ As of mid-2026 the plugin has 83,689 GitHub stars and spans topics: memory, agen
 
 A recurring practitioner pattern applies the corpus's own design back to personal knowledge management: an **LLM wiki** where Claude is the librarian, ingesting sources into a structured knowledge base that improves over time [^src10][^src11].
 
+Karpathy's framing: "Think of Obsidian as the IDE, the LLM as the programmer, and the wiki as the codebase. You rarely write the wiki yourself. The AI does the writing and organizing. You focus on what goes in and what questions to ask." [^src36]
+
+**LLM wiki vs RAG**: classic RAG searches raw documents from scratch on every query — no accumulation. The LLM wiki reads each source once and integrates it into structured wiki pages; subsequent queries work from the pre-built knowledge base rather than re-processing raw files [^src36].
+
 **Karpathy's LLM wiki (Obsidian implementation)** [^src10]:
 - Three folders: `raw/` (source files), `wiki/` (derived corpus pages), `outputs/` (final artifacts from Claude)
 - An append-only `log.md` captures every session's decisions, edits, and learnings — the memory that survives compaction
@@ -406,9 +416,9 @@ A practitioner synthesis evaluated ~20 open-source memory frameworks and identif
 | Injection | Hermes frozen snapshot | Session-start snapshot of MEMORY.md / USER.md / SOUL.md, capped ~1,300 tokens, prefix-cached — pay once per session. |
 | Recall | MemSearch hybrid search + GBrain re-ranker | Multi-tier: check frozen snapshot (tier 0) first; hybrid semantic+keyword search deeper tiers; GBrain does a re-ranking pass then returns a written cited answer (not raw chunks). |
 
-The GBrain layer (built by Garry Tan, YC president) uses Postgres + embeddings + BM25 ranking and returns answers with explicit source citations: "A confident answer with no source is actually worse than useless when you're running real work for a client" [^src19].
+The GBrain layer (built by Garry Tan, YC president) uses Postgres + embeddings + BM25 ranking and returns answers with explicit source citations: "A confident answer with no source is actually worse than useless when you're running real work for a client" [^src19][^src35].
 
-**Team scaling**: simple approach = one DB per person; scalable approach = one shared Postgres/Supabase store with row-level security scoped by login token [^src19].
+**Team scaling**: simple approach = one DB per person; scalable approach = one shared Postgres/Supabase store with row-level security scoped by login token [^src19][^src35].
 
 ## SimpleBrain: minimal Karpathy-based second brain
 
@@ -607,3 +617,5 @@ Hermes requires meta-prompting with the `/goal` command to produce useful result
 [^src32]: [Obsidian as PKM and agentic backend](../../raw/youtube/youtube-VaGpWWiHXm8-obsidian-agentic-loops.md) — YouTube
 [^src33]: [Hermes Agent: memory wiki + Tailscale](../../raw/youtube/youtube-AQHlyGA2cZM-hermes-use-cases.md) — YouTube
 [^src34]: [Build An AI Second Brain Knowledge Base (Step-By-Step)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-build-an-ai-secon-report.md) — processed notes report; wiki/CRM/journal triad with Karpathy foundation
+[^src35]: [I Built The Best Claude Memory System (Beats Hermes)](../../raw/youtube/youtube-H9BUkgDf5Y4-i-built-the-best-claude-memory-system-beats-hermes.md) — Simon Scrapes, YouTube; full video primary source for MemSearch+Hermes+GBrain composite stack
+[^src36]: [Karpathy's LLM Wiki - Full Beginner Setup Guide](../../raw/youtube/youtube-iXd0t60YmMw-karpathy-s-llm-wiki-full-beginner-setup-guide.md) — Teacher's Tech, YouTube; beginner walkthrough with Obsidian + Claude Code; primary source for Karpathy's "Obsidian=IDE, LLM=programmer, wiki=codebase" framing

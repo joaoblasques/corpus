@@ -186,6 +186,18 @@ sources:
   - path: raw/github/github-shanraisshan-claude-code-best-practice.md
     channel: github
     ingested_at: 2026-06-25
+  - path: raw/web/web-claude-code-power-user-customization-how-to-configure-hooks.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-6eBSHbLKuN0-mastering-claude-code-in-30-minutes.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/web/web-agent-sdk-overview-claude-code-docs.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/web/web-github-proteowizard-pwiz-ai-ai-tooling-and-documentation-for.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - Claude Code
   - claude-code
@@ -1079,6 +1091,65 @@ Claude for Legal is Anthropic's reference plugin suite for legal teams [^src49].
 
 This is the most detailed Anthropic-published example of the **plugin-marketplace pattern** at domain scale: 12+ practice-area plugins, each bundling skills (legal reasoning procedures) + MCP connectors (legal data sources) + agent skills (managed-agent cookbooks for complex multi-document workflows). See [[ai-engineering/claude-managed-agents|Claude Managed Agents]] for the managed-agent deployment model.
 
+## Claude Agent SDK
+
+The Agent SDK gives you a programmatic, embeddable Claude Code instance. Key distinction: the Client SDK (Messages API) lets you call Claude but requires you to implement tool loops yourself; the Agent SDK gives you Claude with built-in tool execution [^src57].
+
+**Available built-in tools** [^src57]:
+
+| Tool | What it does |
+|---|---|
+| Read | Read any file in the working directory |
+| Write | Create new files |
+| Edit | Make precise edits to existing files |
+| Bash | Run terminal commands, scripts, git operations |
+| Monitor | Watch a background script and react to each output line |
+| Glob | Find files by pattern (`**/*.ts`) |
+| Grep | Search file contents with regex |
+| WebSearch | Search the web for current information |
+| WebFetch | Fetch and parse web page content |
+| AskUserQuestion | Ask user clarifying questions with multiple choice options |
+
+**Authentication methods** [^src57]: API key (primary), Amazon Bedrock (`CLAUDE_CODE_USE_BEDROCK=1`), Claude Platform on AWS, Google Vertex AI (`CLAUDE_CODE_USE_VERTEX=1`), Microsoft Azure (`CLAUDE_CODE_USE_FOUNDRY=1`). Note: third-party developers cannot offer claude.ai login or rate limits for products built on the Agent SDK; use API key auth only.
+
+**Configuration** [^src57]: the SDK loads `.claude/` settings and skills from the working directory (and `~/.claude/`) by default. Skills at `.claude/skills/*/SKILL.md` are auto-loaded; Claude Code's filesystem-based configuration is fully available.
+
+**Branding** [^src57]: when integrating the Agent SDK, use "Claude Agent" (preferred for dropdown menus), "Powered by Claude," "Claude Code," or "Claude Code Agent."
+
+## Hooks — practical patterns (power user guide)
+
+Hooks solve three problem categories [^src55]:
+1. **Repetitive manual steps** — run Prettier after every write instead of doing it by hand
+2. **Project-specific rule enforcement** — block dangerous commands, validate file paths before writes
+3. **Dynamic context injection** — feed Claude your git status and sprint priorities every session without repeating yourself
+
+**The eight hook events** [^src55]:
+
+| Event | Fires when | Best use |
+|---|---|---|
+| `PreToolUse` | Before tool executes (can block/modify) | Validate planned action before it runs |
+| `PermissionRequest` | Permission dialog would appear | Auto-approve safe commands |
+| `PostToolUse` | After tool completes | Auto-format, run linters |
+| `PreCompact` | Before context compaction | Back up transcript |
+| `SessionStart` | Session begins or resumes | Inject git status + TODO |
+| `Stop` | Claude finishes responding | Check if task is complete |
+| `SubagentStop` | Subagent finishes | Evaluate subagent output quality |
+| `UserPromptSubmit` | Before Claude processes prompt | Inject sprint context |
+
+**Exit codes control outcomes** [^src55]: exit 0 = proceed (stdout added to context), exit 2 = blocking error (stderr shown to Claude, action prevented). Beyond exit codes, hooks return structured JSON with `decision` (approve/block/allow/deny), `reason`, `continue` (for Stop hooks), and `updatedInput` to modify tool parameters.
+
+**Debugging tip** [^src55]: every session has a `transcript_path` JSONL file — all hook events and tool calls are logged there. Use `tail -f /path/to/transcript.jsonl | jq .` to watch Claude work in real time.
+
+## Boris Cherny's onboarding advice (creator of Claude Code)
+
+From Mastering Claude Code in 30 Minutes [^src56], the creator's recommended learning order:
+
+1. **Start with codebase Q&A** (not editing). "Don't start by editing code. Just start by asking questions about the codebase. That'll teach people how to prompt and start teaching them what can Claude Code do vs. what do you need to hold its hand with more." At Anthropic, onboarding time dropped from 2–3 weeks to 2–3 days [^src56].
+2. **Add brainstorm/plan step before coding**. Ask for a plan first, especially for large changes: "just say before you write code, make a plan. That's it" [^src56].
+3. **Give Claude a way to check its work** (tests, screenshots, simulator output). With a feedback tool, Claude iterates 2–3× and typically achieves near-perfect results [^src56].
+4. **Add your team's tools via CLI or MCP**. Just tell Claude about the tool and point it at `--help`; it figures out usage without explicit instruction [^src56].
+5. **Use CLAUDE.md for persistent context**. Common bash commands, MCP tools, architectural decisions, important files. Keep it short. Sub-directory CLAUDE.mds are loaded on demand when Claude works in those directories [^src56].
+
 ## See also
 
 - [[ai-engineering/sources/boris-cherny-100-percent-claude-code|Boris Cherny — 100% Claude Code]] — the full interview source page
@@ -1225,3 +1296,7 @@ Topics: `agentic-ai`, `agentic-coding`, `agentic-engineering`, `context-engineer
 [^src52]: [Code with Claude London 2026: Opening Keynote](../../raw/youtube/youtube-6amLO7I9xdg-code-with-claude-london-2026-opening-keynote.md) — Anthropic, YouTube
 [^src53]: [Claude Code for Enterprise — Anthropic](../../raw/web/web-claude-code-for-enterprise-claude-by-anthropic.md) — Anthropic
 [^src54]: [shanraisshan/claude-code-best-practice (★58,744)](../../raw/github/github-shanraisshan-claude-code-best-practice.md) — Shan Raisshan, GitHub
+[^src55]: [Claude Code power user customization: How to configure hooks](../../raw/web/web-claude-code-power-user-customization-how-to-configure-hooks.md) — Anthropic blog
+[^src56]: [Mastering Claude Code in 30 minutes](../../raw/youtube/youtube-6eBSHbLKuN0-mastering-claude-code-in-30-minutes.md) — Boris Cherny, Anthropic, YouTube
+[^src57]: [Agent SDK overview — Claude Code Docs](../../raw/web/web-agent-sdk-overview-claude-code-docs.md) — Anthropic
+[^src58]: [ProteoWizard/pwiz-ai — AI tooling and documentation for ProteoWizard/Skyline development](../../raw/web/web-github-proteowizard-pwiz-ai-ai-tooling-and-documentation-for.md) — ProteoWizard/Skyline, GitHub

@@ -9,10 +9,15 @@ sources:
   - path: raw/github/github-eliasecchig-gemini-cli-git.md
     channel: github
     ingested_at: 2026-06-25
+  - path: raw/github/github-jamubc-gemini-mcp-tool.md
+    channel: github
+    ingested_at: 2026-06-25
 aliases:
   - Gemini CLI
   - gemini-cli
   - Google Gemini CLI
+  - Antigravity CLI
+  - agy
 tags:
   - corpus/ai-engineering
   - entity
@@ -138,3 +143,24 @@ Functionally equivalent to the "merge as teaching event" pattern discussed in [[
 
 [^src1]: [addyosmani/gemini-cli-tips — ~30 power-user tips for Gemini CLI](../../raw/_inbox/github-addyosmani-gemini-cli-tips.md) — Addy Osmani, GitHub ★2,382
 [^src2]: [eliasecchig/gemini-cli-git — Turn your Git repo into a self-improving autonomous agent](../../raw/github/github-eliasecchig-gemini-cli-git.md) — GitHub
+[^src3]: [jamubc/gemini-mcp-tool — MCP server enabling Claude to interact with Gemini CLI (★2,245)](../../raw/github/github-jamubc-gemini-mcp-tool.md) — GitHub; primary source for Antigravity CLI retirement announcement
+
+## Gemini CLI retirement and Antigravity CLI successor
+
+On **2026-06-18**, Google retired the Gemini CLI for free, Google AI Pro, Google AI Ultra, and individual Gemini Code Assist users [^src3]. Its successor is the **Antigravity CLI** (`agy`).
+
+**Migration** [^src3]:
+```bash
+curl -fsSL https://antigravity.google/cli/install.sh | bash   # macOS / Linux
+```
+Run `agy` once to sign in. The gemini-mcp-tool (MCP bridge for Claude Code integration) auto-selects `agy` backend from 2026-06-18.
+
+**Who is unaffected** [^src3]: enterprise / standard-license users or paid-API-key users retain Gemini CLI access unchanged.
+
+## Gemini MCP Tool — Claude Code + Gemini/Antigravity CLI bridge
+
+The `gemini-mcp-tool` (★2,245) is an MCP server that lets Claude Code delegate tasks to Gemini's massive context window (1M+ tokens) via the `@` syntax [^src3].
+
+**Primary use case** [^src3]: large file analysis and full-codebase understanding — tasks where Gemini's 1M token window is a decisive advantage over Claude's smaller context in cost-sensitive situations. "A party of 3" — Claude + Gemini reasoning together on the same task.
+
+**Install** [^src3]: `npm install -g gemini-mcp-tool`, then add to Claude Code's MCP config. The tool auto-detects whether to use `gemini` or `agy` based on the installation date.

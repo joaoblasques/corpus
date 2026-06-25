@@ -39,6 +39,12 @@ sources:
   - path: raw/github/github-incomestreamsurfer-context-engineering-intro.md
     channel: github
     ingested_at: 2026-06-25
+  - path: raw/github/github-addyosmani-context-buddy.md
+    channel: github
+    ingested_at: 2026-06-25
+  - path: raw/github/github-coleam00-context-engineering-intro.md
+    channel: github
+    ingested_at: 2026-06-25
 aliases:
   - context engineering
   - context window engineering
@@ -56,6 +62,7 @@ tags:
   - concept
 created: 2026-05-07
 updated: 2026-06-25
+
 ---
 
 # Context Engineering
@@ -213,6 +220,27 @@ The PRP separates **problem definition** (your job) from **implementation** (Cla
 
 Standard project-level context files in this template: `CLAUDE.md` (project-specific guidelines), `examples/` folder (reference code examples — "highly recommended"), `PRPs/` folder (one PRP per feature). The `examples/` folder is especially important because it gives Claude concrete patterns to follow rather than relying on general training [^src12].
 
+A highly starred variant (★13,479) from coleam00 follows the same pattern with nearly identical file structure and the declaration: "Context Engineering is 10× better than prompt engineering and 100× better than vibe coding" [^src14]. The wide adoption of these templates confirms PRP + examples folder as the community-consensus starting structure for context-engineered Claude Code projects.
+
+## 10-section prompt structure (Context Buddy)
+
+A visual framework for building well-structured prompts, implementing the 10-section methodology from Anthropic [^src13]:
+
+| # | Section | Purpose |
+|---|---|---|
+| 1 | Task Context | Define AI's role and primary objective |
+| 2 | Tone Context | Communication style and personality |
+| 3 | Background Data | Reference materials, documents, data |
+| 4 | Task Description & Rules | Requirements and constraints |
+| 5 | Examples | Desired input/output patterns |
+| 6 | Conversation History | Relevant prior context |
+| 7 | Immediate Task | The current specific request |
+| 8 | Thinking Steps | Encourage step-by-step reasoning |
+| 9 | Output Formatting | Response structure |
+| 10 | Prefilled Response | Starting text or format |
+
+Context Buddy (★52, addyosmani/context-buddy) implements this as a visual interactive web app with template library and one-click copy [^src13]. The 10 sections map directly to the prompt engineering principle of separating *who you are*, *what you know*, *what you need* — the same taxonomy as the [[ai-engineering/ai-operating-system|AI OS]] layers.
+
 ## See also
 
 - [[ai-engineering/README|AI Engineering hub]]
@@ -237,3 +265,5 @@ Standard project-level context files in this template: `CLAUDE.md` (project-spec
 [^src10]: [Context Engineering in 29 Minutes: Complete Course](../../raw/youtube/-h9VVJIqtvA-context-engineering-in-29-minutes-complete-course.md) — Marina Wyss (Twitch), YouTube
 [^src11]: [Stop Learning Obsidian](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-stop-learning-obs-report.md) — YouTube (notes report)
 [^src12]: [IncomeStreamSurfer/context-engineering-intro (★267) — PRP workflow template](../../raw/github/github-incomestreamsurfer-context-engineering-intro.md) — IncomeStreamSurfer, GitHub
+[^src13]: [addyosmani/context-buddy (★52) — 10-section prompt structure builder](../../raw/github/github-addyosmani-context-buddy.md) — Addy Osmani, GitHub
+[^src14]: [coleam00/context-engineering-intro (★13479) — PRP template](../../raw/github/github-coleam00-context-engineering-intro.md) — coleam00, GitHub
