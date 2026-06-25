@@ -9,6 +9,12 @@ sources:
   - path: raw/web/web-how-to-stop-hitting-claude-usage-limits.md
     channel: web
     ingested_at: 2026-06-17
+  - path: raw/github/github-mnfst-manifest.md
+    channel: github
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-n8rP6Ceskm4.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - agentic AI costs
   - agent cost management
@@ -23,7 +29,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-16
-updated: 2026-06-17
+updated: 2026-06-25
 ---
 
 # Agent Cost Management
@@ -100,6 +106,26 @@ The root mechanic: Claude re-reads the entire conversation from the top on every
 
 **One-shot clarity beats multi-message refinement**: "When you speak, you naturally give more context in one shot" — vague messages lead to correction messages, which stack on history and multiply context reloads [^src2].
 
+## LLM routers and token proxies
+
+**Manifest (mnfst)** is a TypeScript LLM router/gateway (★7,094) [^src3]. Core value: routes requests to the cheapest model that can handle the task, reducing costs up to 70%.
+
+| Feature | Detail |
+|---|---|
+| **Routing logic** | Routes by complexity (query difficulty), specificity (domain match), HTTP headers (caller-specified override) |
+| **BYOK** | Bring Your Own Key for all supported providers; no vendor lock-in |
+| **Cost tracking** | Per-request and aggregate spend metrics; fallback on provider failure |
+| **Supported providers** | OpenAI, Anthropic, Google, Mistral, Groq + any compatible API |
+| **Model spec** | Declarative `model_spec.json` with capability requirements; Manifest selects the cheapest model meeting the spec |
+
+Integration: drop-in replacement for OpenAI-compatible endpoint; add `X-Mnfst-Route: auto` header and Manifest handles the rest [^src3].
+
+**Headroom** is an LLM token proxy positioned as "savings without the complexity of routing" [^src4]. Claims **median 4.8% savings** across real workloads (not synthetic benchmarks) by compressing prompt prefixes before send and decompressing before the model sees them. Works transparently — no model changes, no routing logic, no provider switching.
+
+Contrast with Manifest: Manifest saves 30–70% by using cheaper models; Headroom saves ~5% on the same model, with zero behavioral change. They're complementary: route to cheaper models first, then compress the prompt [^src4].
+
 [^src1]: [Managing Agentic AI Costs at Scale](../../raw/web/managing-agentic-ai-costs-at-scale.md)
 [^src2]: [How to stop hitting Claude usage limits — 23 habits](../../raw/web/web-how-to-stop-hitting-claude-usage-limits.md) — Ruben Hassid
+[^src3]: [mnfst/manifest — GitHub ★7094](../../raw/github/github-mnfst-manifest.md)
+[^src4]: [Top 10 GitHub repos for AI devs (YouTube)](../../raw/youtube/youtube-n8rP6Ceskm4.md) — Headroom entry at ~3:00
 </content>

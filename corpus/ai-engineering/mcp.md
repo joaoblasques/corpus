@@ -60,6 +60,15 @@ sources:
   - path: raw/web/web-connectors-claude.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/web/web-connectors-overview-claude-ai-documentation.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/web/web-use-connectors-to-extend-claude-s-capabilities-claude-help-c.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/github/github-wonderwhy-er-desktopcommandermcp.md
+    channel: github
+    ingested_at: 2026-06-25
 aliases:
   - MCP
   - Model Context Protocol
@@ -336,6 +345,46 @@ Anthropic maintains a public connector directory at claude.ai/connectors [^src20
 
 This is the discovery layer for the MCP ecosystem — similar to a plugin marketplace for MCP servers. For individual server setup, see the Claude Code `claude mcp add` workflow; for the full connector experience with persistent state, see [[ai-engineering/claude-cowork|Claude Cowork]].
 
+## Connector types and distribution (official taxonomy)
+
+Anthropic documents four connector types in the official overview [^src21]:
+
+| Type | Description | Platform |
+|---|---|---|
+| **Prebuilt integrations** | First-party: Google Drive, Gmail, Calendar, GitHub, Slack, Microsoft 365 — ready with auth only | All Claude products |
+| **Remote MCP servers** | Third-party or custom servers over HTTP; cloud-hosted, accessible from mobile | Claude.ai, Desktop, Mobile, Code, Cowork |
+| **MCP Apps** | MCP servers that render interactive UI (charts, maps, forms) directly in chat | Claude.ai + Cowork |
+| **MCP Bundles (MCPB)** | Packages local MCP servers with dependencies for desktop distribution; handles code signing, versioning, cross-platform compat | Claude Desktop |
+
+**Platform-level connector availability** [^src21]:
+
+| Platform | Prebuilt | Remote MCP | MCP Apps | MCPB | Plugins |
+|---|---|---|---|---|---|
+| Claude.ai | ✓ | ✓ | ✓ | — | — |
+| Claude Desktop | ✓ | ✓ | — | ✓ | — |
+| Claude Mobile | ✓ | ✓ | — | — | — |
+| Claude Code | ✓ | ✓ | — | — | ✓ |
+| Claude Cowork | ✓ | ✓ | ✓ | — | ✓ |
+
+**Action-level access controls** (Team/Enterprise) [^src22]: each connector tool can be set to:
+- **Always allow** — agent uses without prompting
+- **Needs approval** — presents permission dialog before each use
+- **Blocked** — agent cannot use the tool at all
+
+Team/Enterprise orgs: workspace owners can enable org-wide connectors; individuals authenticate their own accounts. Connectors are only active in private projects (not shared ones) for security [^src22].
+
+Custom connectors (remote MCP) available on all plans; free plan limited to 1 custom connector at a time [^src22].
+
+## DesktopCommanderMCP (multi-model terminal control)
+
+DesktopCommanderMCP (★6,196) expands beyond the earlier terminal-control description to a multi-model MCP server [^src23]. Key properties:
+
+- **Multi-model support** — works with Claude Desktop, GPT-4.5, Gemini 2.5, and any MCP-compatible client.
+- **Capabilities**: terminal command execution, full filesystem operations (read/write/search with diff editing), process management, code execution (in-memory Python/Node/R), native Office/PDF/DOCX support.
+- **Security model**: ships blocklist-based command blocking, directory restrictions, Docker isolation mode. Documents that restrictions "can be bypassed" and recommends Docker for production use.
+- **Token efficiency**: `fileWriteLineLimit` (default 50) forces incremental edits — smaller diffs, fewer lost tokens at context boundaries.
+- **Distribution**: one install works across Claude Desktop, Cursor, Windsurf, VS Code Claude Code, Codex, OpenClaw.
+
 ## See also
 
 - [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] — MCP is the coordination layer for multi-agent architectures
@@ -369,3 +418,6 @@ This is the discovery layer for the MCP ecosystem — similar to a plugin market
 [^src18]: [Granola MCP — Granola Docs & Help Center](../../raw/web/granola-mcp-granola-docs-help-center.md) — docs.granola.ai
 [^src19]: [How to Build Your Agentic OS with Claude Code (4-Layer Setup)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-how-to-build-your-report.md) — nyndra AI, YouTube (notes report)
 [^src20]: [Connectors — claude.ai](../../raw/web/web-connectors-claude.md) — Anthropic
+[^src21]: [Connectors overview — Claude.ai Documentation](../../raw/web/web-connectors-overview-claude-ai-documentation.md) — Anthropic
+[^src22]: [Use connectors to extend Claude's capabilities](../../raw/web/web-use-connectors-to-extend-claude-s-capabilities-claude-help-c.md) — Anthropic help center
+[^src23]: [DesktopCommanderMCP — GitHub ★6196](../../raw/github/github-wonderwhy-er-desktopcommandermcp.md) — wonderwhy-er

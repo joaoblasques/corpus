@@ -24,6 +24,15 @@ sources:
   - path: raw/web/github-rohitg00-ai-engineering-from-scratch-learn-it-build-i.md
     channel: web
     ingested_at: 2026-06-15
+  - path: raw/github/github-anthropics-prompt-eng-tutorial.md
+    channel: github
+    ingested_at: 2026-06-25
+  - path: raw/github/github-datatalksclub-ai-dev-tools-zoomcamp.md
+    channel: github
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-05aY2LRIC3s.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - learning AI
   - learning AI engineering
@@ -160,4 +169,21 @@ Curiosity operationalized: "don't just try one approach and accept it — run 2�
 [^src4]: [This is how I'd use AI to learn Python in 2026](../../raw/email/email-2026-05-02-this-is-how-i-d-use-ai-to-learn-python-in-2026.md) — Tech With Tim
 [^src5]: [ai-engineering-from-scratch](../../raw/web/github-rohitg00-ai-engineering-from-scratch-learn-it-build-i.md) — Rohit Ghumare
 [^src6]: [Here's how I'd learn machine learning in 2026](../../raw/email/email-2026-06-04-here-s-how-i-d-learn-machine-learning-in-2026.md) — Tech With Tim
+## High-signal learning resources
+
+**Anthropic's Prompt Engineering Tutorial** (★36,609) — 9-chapter Jupyter notebook series from Anthropic's training team [^src8]:
+1. Basic Prompt Structure → 2. Being Clear and Direct → 3. Assigning Roles → 4. Separating Data from Instructions → 5. Formatting Output and Speaking for Claude → 6. Precognition (Thinking Step by Step) → 7. Using Examples (Few-Shot Prompting) → 8. Avoiding Hallucinations → 9. Complex Prompts for Power Users
+
+This is the authoritative Anthropic tutorial — interactive, runnable, and regularly updated. Covers both basic and advanced prompting, including prefill and multi-turn prompt construction. Also see [[ai-engineering/prompt-engineering|Prompt Engineering]] for corpus distillation of these techniques [^src8].
+
+**DataTalksClub AI Developer Tools Zoomcamp** (★1,129) — community-run 10-week course [^src9]:
+- Covers: Claude Code, GitHub Copilot, Cursor, Windsurf, Gemini CLI, LLM APIs, context engineering, multi-agent patterns.
+- Format: weekly homework + peer-graded projects; leaderboard for tracking progress.
+- Positioning: focused on *using* tools in real dev workflows, not theoretical AI/ML foundations.
+
+**12-hour Claude Code course** (YouTube) — comprehensive free tutorial covering the full Claude Code lifecycle: setup, project workflow, subagents, hooks, and production patterns [^src10]. Good companion to the interactive Anthropic tutorial above.
+
 [^src7]: [The Top 5 Skills for AI Engineering: Curiosity](../../raw/email/email-2026-06-15-the-top-5-skills-for-ai-engineering-curiosity.md)
+[^src8]: [anthropics/prompt-eng-tutorial — GitHub ★36,609](../../raw/github/github-anthropics-prompt-eng-tutorial.md) — Anthropic
+[^src9]: [DataTalksClub/ai-dev-tools-zoomcamp — GitHub ★1,129](../../raw/github/github-datatalksclub-ai-dev-tools-zoomcamp.md) — DataTalksClub
+[^src10]: [12-hour Claude Code course (YouTube)](../../raw/youtube/youtube-05aY2LRIC3s.md)

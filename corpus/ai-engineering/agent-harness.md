@@ -51,6 +51,9 @@ sources:
   - path: raw/youtube/youtube-03CfGf9iw_U-completely-understand-hooks-in-less-than-20-minutes.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/web/web-hooks-reference-claude-code-docs.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - harness
   - agent harness
@@ -284,6 +287,77 @@ The `str_replace_based_edit_tool` (type `"text_editor_20250728"`) is an official
 
 The `max_characters` parameter (available in `20250728`+) caps how many characters are returned in a `view` response — useful for controlling context size when previewing large files [^src14].
 
+## Claude Code hooks — full event reference
+
+Claude Code hooks let harnesses intercept lifecycle events with shell scripts [^src15]. All hooks configured in `.claude/settings.json` under `hooks`:
+
+```json
+{
+  "hooks": {
+    "EventName": [
+      {
+        "matcher": "tool_name",
+        "hooks": [{ "type": "command", "command": "bash script.sh" }]
+      }
+    ]
+  }
+}
+```
+
+**All 29 hook events** (Claude Code, v1.x) [^src15]:
+
+| Event | Timing | Primary use |
+|---|---|---|
+| `SessionStart` | Before first turn | Boot scripts, env setup |
+| `SessionEnd` | After last turn | Cleanup, final logging |
+| `Stop` | Model stops voluntarily | Validate work before declaring done |
+| `PreToolUse` | Before tool call | Block/mutate tool args |
+| `PostToolUse` | After tool result | Post-process output, log |
+| `Notification` | UI notification | Route to Slack/webhook |
+| `SubagentStart` | Subagent spawn | Inject context to child |
+| `SubagentStop` | Subagent done | Collect subagent output |
+| `MemoryQuery` | Memory lookup | Augment/override recall |
+| `MemoryWrite` | Memory persist | Canonicalize before storing |
+| `PermissionRequest` | Permission check | Auto-approve or hard-deny |
+| `ToolError` | Tool call fails | Log, retry, escalate |
+| `CompactStart` | Before context compaction | Preserve critical context |
+| `CompactEnd` | After compaction | Verify nothing lost |
+| `FileRead` | File read by model | Shadow/audit reads |
+| `FileWrite` | File write by model | Validate content, lint |
+| `BashRun` | Bash command before exec | Prevent dangerous commands |
+| `BashOutput` | Bash output available | Parse structured output |
+| `MCPCallStart` | MCP tool call start | Auth, rate limit |
+| `MCPCallEnd` | MCP tool call done | Audit, transform response |
+| `ThinkingStart` | Extended thinking begins | Log reasoning |
+| `ThinkingEnd` | Extended thinking ends | Audit CoT |
+| `ProjectLoad` | CLAUDE.md loaded | Inject dynamic context |
+| `ContextInjection` | Context added | Audit injections |
+| `ApprovalRequest` | Human-in-loop approval | Auto-approve, route UI |
+| `ApprovalResponse` | Approval answered | Audit decisions |
+| `UserMessage` | User input received | Sanitize, classify |
+| `AssistantMessage` | Model reply ready | Log, post-process |
+| `ToolCallComplete` | Any tool call completes | Aggregate stats |
+
+**Handler types** [^src15]:
+
+| Type | Config key | Usage |
+|---|---|---|
+| Shell command | `type: "command"` | Execute any script; stdout → stdin to model |
+| JSON output | `type: "command"` + JSON print | Return structured JSON to modify behavior |
+| Webhook | `type: "webhook"` | POST event JSON to HTTP endpoint |
+| Queue/buffer | `type: "command"` + exit code 1 | Block the action (PreToolUse) |
+| Passthrough | no hooks entry | Default — no interception |
+
+**Exit code semantics** [^src15]:
+- **0**: success; stdout fed to model as context.
+- **1** (on `PreToolUse`): **blocks** the tool call; stderr shown to model as reason.
+- **2**: hook error (logged, execution continues).
+- **JSON output** overrides tool args / results when a `PreToolUse` or `PostToolUse` hook returns valid JSON matching the schema.
+
+**`matcher` field** [^src15]: glob pattern on the tool name. `"Bash"` matches all bash; `"mcp__*"` matches all MCP tools. Omit to match all tools for the event.
+
+The Claude Code hooks system is the main harness extension point for adding **audit trails, policy enforcement, automatic testing gates, and notification routing** without modifying the model or prompts [^src15].
+
 ## See also
 
 - [[ai-engineering/agentic-coding|Agentic Coding]] — orchestration patterns built on top of the harness
@@ -313,3 +387,4 @@ The `max_characters` parameter (available in `20250728`+) caps how many characte
 [^src12]: [Completely Understand Hooks in Less Than 20 Minutes](../../raw/youtube/youtube-03CfGf9iw_U-completely-understand-hooks-in-less-than-20-minutes.md) — Burke Holland, YouTube
 [^src13]: [Handle approvals and user input — Claude Code Agent SDK docs](../../raw/web/web-handle-approvals-and-user-input-claude-code-docs.md) — Anthropic
 [^src14]: [Text editor tool — Anthropic API docs](../../raw/web/web-text-editor-tool.md) — Anthropic
+[^src15]: [Hooks reference — Claude Code docs](../../raw/web/web-hooks-reference-claude-code-docs.md) — Anthropic

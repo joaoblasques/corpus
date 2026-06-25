@@ -57,6 +57,12 @@ sources:
   - path: raw/web/web-claude-haiku.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/web/web-migration-guide.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/email/email-2026-06-19-testing-mythos-and-fable-moving-beyond-swe-bench-nvidia-s-op.md
+    channel: email
+    ingested_at: 2026-06-25
 aliases:
   - Claude model lineup
   - Claude models
@@ -70,7 +76,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-06-12
-updated: 2026-06-24
+updated: 2026-06-25
 ---
 
 # Claude Model Lineup
@@ -223,6 +229,57 @@ Available on: Claude API, Amazon Bedrock, Google Vertex AI, Microsoft Foundry, a
 
 The key positioning: "built for fast, efficient performance on tasks that require computer use, agentic behaviors, and complex reasoning" without the cost of Sonnet-class models [^src17]. At 73.3% SWE-bench, it outperforms earlier Sonnet versions on coding while costing $1/$5 vs Sonnet 4.5's $3/$15 per million tokens.
 
+## Migration guide — breaking API changes by model
+
+The official migration guide documents per-model breaking changes and behavioral diffs for code running on the Anthropic Messages API [^src18]:
+
+**Fable 5** [^src18]:
+- Adaptive thinking always-on; `thinking: {type: "disabled"}` returns 400.
+- Safety classifiers fire during generation: `stop_reason: "refusal"` (HTTP 200, not error) + `stop_details.category` (`cyber`, `bio`, `reasoning_extraction`, or `null`). Input tokens not billed on pre-generation refusal; already-streamed output billed on mid-stream refusal.
+- 30-day mandatory data retention; not available under ZDR (zero data retention). Contact account team or configure per-workspace.
+- Prompt caching minimum: **512 tokens** (vs 1,024 on Opus 4.8; 1,024 on Bedrock).
+- Prefill removed (same as Opus 4.8+). No manual `budget_tokens`. Opt-in `fallbacks` beta parameter for auto-retry on refusal.
+- Tool versions: `text_editor_20250728`, `code_execution_20250825`.
+- Pricing: $10 / $50 per million input/output tokens.
+
+**Mythos 5** [^src18]:
+- Adaptive thinking always-on (same as Fable 5).
+- No prefill. Raw CoT never returned — `thinking.display: "summarized"` to get readable summaries.
+- Same tokenizer as Mythos Preview (Claude Opus 4.7 tokenizer — ~1–1.35x more tokens than pre-4.7 models).
+
+**Opus 4.8** [^src18]:
+- 1M context window default (no beta header needed).
+- Effort default: `high`. Set `xhigh` explicitly for coding/agentic work.
+- Prompt caching minimum: **1,024 tokens**.
+- Accepts `role: "system"` entries inside the `messages` array mid-conversation (Opus 4.7 and earlier reject this).
+- Effort levels recalibrated vs 4.7: `medium` allows more thinking, `high` allows less, `xhigh` substantially more.
+
+**Opus 4.7** [^src18]:
+- Sampling parameters (`temperature`, `top_p`, `top_k`) removed — any non-default value returns 400.
+- Manual `budget_tokens` removed — replaced by adaptive thinking + `effort`.
+- New tokenizer: ~1–1.35x more tokens than pre-4.7 models.
+- `thinking.display` defaults to `"omitted"` (must set `"summarized"` to restore visible reasoning).
+- Fewer subagent spawns by default; more literal instruction following.
+
+**Sonnet 4.6** [^src18]: $3 / $15 per million input/output tokens. Effort default: `high`. No prefill. Fine-grained tool streaming GA.
+
+**Haiku 4.5** [^src18]: $1 / $5 per million tokens.
+
+`output_config.format` replaces `output_format`. Use `/claude-api migrate` skill in Claude Code to auto-apply migration changes across a codebase.
+
+## Fable 5 safety classifiers (detail)
+
+Fable 5 runs safety classifiers that refuse certain high-capability requests [^src19]:
+
+- **Cyber category**: requests touching offensive cyber capabilities.
+- **Bio category**: requests touching biological weapon synthesis or enhancement.
+- **Reasoning extraction**: attempts to extract or reproduce the model's raw chain-of-thought.
+- **Null**: refusal maps to no named category (other policy reasons).
+
+In Claude Code specifically, flagged prompts are **routed to Opus 4.8** automatically (recorded in a separate log, not the main session log) rather than returning a bare refusal [^src19]. API usage (direct Messages API) returns an outright refusal with the stop reason. Fable 5 enforces a 30-day data retention for misuse-detection purposes; no training use [^src19].
+
+See also [[ai-engineering/anthropic|Anthropic]] for the export control and AI sovereignty context from the same source.
+
 ## See also
 
 - [[ai-engineering/anthropic|Anthropic]] — the lab behind these models (company, funding, learning resources)
@@ -244,3 +301,5 @@ The key positioning: "built for fast, efficient performance on tasks that requir
 [^src15]: [Introducing Claude 4](../../raw/web/web-introducing-claude-4.md) — Anthropic
 [^src16]: [Enable and use web search (Claude Help Center)](../../raw/_inbox/web-enable-and-use-web-search-claude-help-center.md) — Anthropic
 [^src17]: [Claude Haiku — claude.ai product page](../../raw/web/web-claude-haiku.md) — Anthropic
+[^src18]: [Migration guide — Claude API](../../raw/web/web-migration-guide.md) — Anthropic
+[^src19]: [Testing Mythos and Fable — The Batch (DeepLearning.AI)](../../raw/email/email-2026-06-19-testing-mythos-and-fable-moving-beyond-swe-bench-nvidia-s-op.md) — DeepLearning.AI

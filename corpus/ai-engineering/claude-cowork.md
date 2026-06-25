@@ -120,6 +120,12 @@ sources:
   - path: raw/web/web-connectors-claude.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/web/web-the-briefing-enterprise-agents-anthropic.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-stop-using-obsidi-report.md
+    channel: notes
+    ingested_at: 2026-06-25
 aliases:
   - Claude Cowork
   - Cowork
@@ -213,6 +219,14 @@ If the process requires your judgment along the way, it's a **workstation**; if 
 A concrete end-to-end skill build (≈30–45 min) shows the skill + connector pattern in practice [^src16]. The skill, `post-call-wrapup`, takes a meeting transcript and outputs four things: top-3 takeaways, action items with owner + due date, a client-facing follow-up email draft, and a standardized file name (`ClientName-YYYY-MM-DD`) [^src16]. It uses three built-in connectors — Google Drive (file the transcript), Notion (append takeaways/action items to the client's page under a dated heading), and Gmail (save the follow-up as a draft) [^src16].
 
 Two patterns reinforce the rest of this page: the guardrail **"Never send. Always draft."** mirrors the Gmail-connector discipline (the connector reads and drafts but you hit send) [^src16][^src10], and **calibration-by-correction** — "whatever it got wrong, tell it once; by the second call it is calibrated to how you actually write" — is the same accumulating-memory mechanism that makes a workspace improve over time [^src16][^src11]. (An operator note in the same source records that **Claude Opus 4.8 became the default across Max, Team, and the API**, enabling scheduled multi-step agent workflows that run sub-agents hands-off [^src16].)
+
+## "Out of the box a generalist; with plugins a specialist" (Anthropic's framing)
+
+Anthropic's own positioning for Cowork in enterprise contexts [^src37]: "Out of the box, Claude is a capable generalist. But when you plugin your tools, context, and knowledge, it becomes something more: a specialist who knows your work the way you do."
+
+The Enterprise Agents event (February 24 2026) demonstrated this with four Anthropic functional leaders from Finance, Legal, Sales, and Product showing live demos of their Cowork + plugin workflows [^src37]. Key external adopter case: Seth Hain, SVP of R&D at Epic, discussed scaling AI adoption across both technical and non-technical teams — the key challenge being that non-technical employees need a Cowork workflow that feels natural to their role, not a prompt-engineering exercise [^src37].
+
+**SimpleBrain / Claude Cowork demo.** The `translate.md` skill (a SKILL.md that converts raw notes/transcripts to polished output in the user's voice) was demoed as a daily driver on Claude Cowork — the user drops a voice memo or transcript, triggers the skill, and receives a structured output formatted to their established tone and style [^src38]. This is the Cowork expression of the SimpleBrain second brain (see [[ai-engineering/agent-memory|Agent Memory]]).
 
 ## Enterprise deployment (Anthropic's deployment guide)
 
@@ -561,3 +575,5 @@ The download page for the Claude desktop app consolidates: Cowork, Claude Code (
 [^src34]: [Claude for Microsoft 365](../../raw/web/claude-for-microsoft-365-claude-by-anthropic.md) — Anthropic, claude.com/claude-for-microsoft-365
 [^src35]: [Use Claude Cowork safely — Claude Help Center](../../raw/web/web-use-claude-cowork-safely-claude-help-center.md) — Anthropic
 [^src36]: [Download Claude — claude.ai](../../raw/web/web-download-claude-claude-by-anthropic.md) — Anthropic
+[^src37]: [The Briefing: Enterprise Agents — Anthropic](../../raw/web/web-the-briefing-enterprise-agents-anthropic.md) — Feb 24 2026 virtual event
+[^src38]: [Stop Using Obsidian — SimpleBrain demo (YouTube processed report)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-stop-using-obsidi-report.md)

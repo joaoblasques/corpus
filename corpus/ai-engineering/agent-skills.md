@@ -75,6 +75,18 @@ sources:
   - path: raw/youtube/youtube-2xuFcmUAQUc-this-claude-code-plugin-writes-94-less-code-ponytail.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-3UWxMPUko1k-how-anthropic-employees-actually-use-claude-skills.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-P4rv9RSM1IE-claude-skills-everything-you-need-to-know-about-claude-skill.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-C1snRnGbNRM-how-to-make-ai-write-in-your-voice-claude-skill-tutorial.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/web/web-anthropic-courses.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - agent skills
   - Claude skills
@@ -102,6 +114,15 @@ aliases:
   - ClaudeMem skill
   - Context Mode skill
   - cost reduction (YAGNI)
+  - voice skill
+  - voice fingerprint
+  - extraction step
+  - four skill types
+  - utility skill
+  - verification skill
+  - data enrichment skill
+  - orchestration skill
+  - manager simulation verifier
 tags:
   - corpus/ai-engineering
   - concept
@@ -243,6 +264,58 @@ A simpler pattern than the full skill SDLC: a library of prompt templates stored
 | Address PR feedback | Parallel processing of independent changes; priority classification; resolution tracking |
 
 Templates include clear objectives, step-by-step processes, decision criteria, and output formats [^src8]. The project-specific versions live in `.claude/commands/`; generic versions can be shared across teams [^src8].
+
+## Four skill types (non-technical framing)
+
+Anthropic's nine internal categories map to four skill types applicable to both technical and non-technical users [^src24]:
+
+| Type | Purpose | Technical example | Non-technical example |
+|---|---|---|---|
+| **Utility** | Small reusable tasks, often layered with larger skills | API/library interaction | "Draft response in my voice" |
+| **Verification** | Check final output quality/correctness | Code quality review, product verification | Brand voice check, style guide review |
+| **Data enrichment** | Pull external data to enhance outputs | Traffic analytics, conversion data | Competitor analysis, consumer reports |
+| **Orchestration** | Chain other skills together into a workflow | `generate-report` → pull data → draft → verify | Weekly digest → gather sources → summarize → review |
+
+The key discipline: "The best skills fit cleanly into one category. The ones that try to do too much straddle several and confuse the agent" [^src24]. Orchestration skills are the most powerful but require the most care — they chain the three other types rather than doing work directly [^src24].
+
+**Verification skills — the highest ROI**: "If you give Claude a way to verify, it will 2–3x the quality of the output" [^src24]. Two types of verification [^src24]:
+- **Correctness verification** — did Claude get the facts right? (quantifiable: code runs, numbers match)
+- **Quality verification** — does the output meet the bar you want? (subjective: brand voice, editorial standards)
+
+Real Anthropic example: Amol Agrawal (head of growth) built a skill that simulates feedback from his manager — feeding Claude data from her public writing and internal Slack. "Every week, the skill fires and tells him what feedback she would have given him. It's essentially her judgment encoded as a reviewer." By the time he shows her anything, it's already passed her AI clone's bar once [^src24].
+
+## Building a voice skill
+
+The hardest skill to build but among the most valuable — teaching Claude to write in the user's distinctive style [^src26].
+
+**The voice extraction step** [^src26]:
+1. Gather 2,000+ words of real prose (published fiction is best; the more edited, the closer to true voice).
+2. Run an "extraction step" prompt: instruct Claude to act as a forensic editor, analyzing sentence rhythm and length, vocabulary level, dialogue patterns, POV handling, naming conventions, and how scenes open/close. Ask for specific architectural observations, not vague descriptors ("lyrical").
+3. The output is a **voice fingerprint** — a detailed description of the writer's unconscious patterns.
+4. Feed the fingerprint into a SKILL.md as the basis for a voice skill. Use the "skill creator" skill to properly format and package it.
+
+Key constraint: "You can't just describe your voice. You have to show it. You need samples — real prose scenes you actually wrote" [^src26]. The extraction prompt should be built with AI assistance (ask Claude to help write a prompt that extracts narrative voice for fine-tuning another LLM on the style).
+
+## Security risk: third-party skills
+
+"Over a third of publicly available skills have security flaws — and they're not just buggy, but actually designed" to exfiltrate data [^src25]. A skill is a set of instructions Claude follows, and some skills can run code on the user's machine. A malicious skill can quietly tell Claude to grab files or personal data in the background.
+
+Safe skill practices [^src25]:
+- Stick to skills from Anthropic's official directory (tested and maintained by Anthropic).
+- Skills you build yourself are safe (you know what's inside).
+- Before installing any third-party skill, open the file and read what it tells Claude to do.
+
+See [[ai-engineering/agent-security|Agent Security]] for the broader prompt injection and trust-hierarchy attack surface.
+
+## Anthropic's Introduction to Agent Skills course
+
+The official Anthropic course (Skilljar) covers [^src27]:
+- SKILL.md frontmatter: `name`, `description`, `allowed-tools`, `effort` fields.
+- Writing descriptions that reliably trigger matching (the description is the activation contract).
+- Progressive disclosure: organizing the skill directory to keep context windows efficient.
+- Sharing via plugin marketplace and enterprise managed settings.
+- Sub-agents for isolated expert delegation within skills.
+- Full troubleshooting guide: skills that won't trigger, priority conflicts, runtime errors.
 
 ## Nine skill categories (Anthropic internal catalog)
 
@@ -500,3 +573,7 @@ This is the same "process over prose" insight as the SDLC skills section above: 
 [^src21]: [Claude Code Runs My Business (13 Workflows)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-claude-code-runs-report.md) — YouTube (processed report)
 [^src22]: [I Tried 100 Claude Code Skills — These 6 Are the Best](../../raw/youtube/youtube-eRS3CmvrOvA-i-tried-100-claude-code-skills-these-6-are-the-best.md) — Nate Herk, YouTube
 [^src23]: [This Claude Code Plugin Writes 94% Less Code (Ponytail)](../../raw/youtube/youtube-2xuFcmUAQUc-this-claude-code-plugin-writes-94-less-code-ponytail.md) — YouTube
+[^src24]: [How Anthropic Employees ACTUALLY Use Claude Skills](../../raw/youtube/youtube-3UWxMPUko1k-how-anthropic-employees-actually-use-claude-skills.md) — Austin Marchese, YouTube
+[^src25]: [Claude Skills: Everything You Need to Know About Claude Skills](../../raw/youtube/youtube-P4rv9RSM1IE-claude-skills-everything-you-need-to-know-about-claude-skill.md) — Nicole AI, YouTube
+[^src26]: [How to Make AI Write in YOUR Voice (Claude Skill Tutorial)](../../raw/youtube/youtube-C1snRnGbNRM-how-to-make-ai-write-in-your-voice-claude-skill-tutorial.md) — The Nerdy Novelist, YouTube
+[^src27]: [Anthropic Courses — Introduction to Agent Skills](../../raw/web/web-anthropic-courses.md) — Anthropic (Skilljar)

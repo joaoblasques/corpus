@@ -48,6 +48,18 @@ sources:
   - path: raw/_inbox/web-claude-legal-solutions-claude-by-anthropic.md
     channel: web
     ingested_at: 2026-06-24
+  - path: raw/web/web-claude-managed-agents-claude-by-anthropic.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/web/web-dreams.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/web/web-run-claude-managed-agents-on-daytona.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-claude-code-s-new-report.md
+    channel: notes
+    ingested_at: 2026-06-25
 aliases:
   - Claude Managed Agents
   - Managed Agents
@@ -56,7 +68,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-06-17
-updated: 2026-06-24
+updated: 2026-06-25
 ---
 
 # Claude Managed Agents
@@ -208,6 +220,61 @@ The Memory API for Managed Agents exposes filesystem-based memory through standa
 - **Up to 2000 memories per store** before requiring garbage collection or tiering.
 - **Prompt injection risk on read_write stores** — any content written by an external system can become an injection vector if the agent reads it without sanitization. Prefer `read_only` stores for shared contexts.
 
+## Dreams API (async memory consolidation)
+
+The Dreams API is a **research-preview async job** that reads an existing memory store plus past session transcripts and produces a *new* memory store with duplicates merged, stale entries replaced, and new insights surfaced — without modifying the inputs [^src13].
+
+**API shape** [^src13]:
+```python
+dream = client.beta.dreams.create(
+    inputs=[
+        {"type": "memory_store", "memory_store_id": store_id},
+        {"type": "sessions", "session_ids": [session_a, session_b]},
+    ],
+    model="claude-opus-4-8",
+    instructions="Focus on coding-style preferences; ignore one-off debugging notes.",
+)
+```
+Status lifecycle: `pending` → `running` → `completed` / `failed` / `canceled`. Sessions-per-dream limit: **100**. Instructions max: **4,096 characters**. Supported models: claude-opus-4-8, claude-opus-4-7, claude-sonnet-4-6. Billed at standard token rates [^src13].
+
+The `instructions` field steers *what* to synthesize (focus areas, content to preserve, output conventions) — high-level guidance only. Targeted line-level edits should be applied to the output store via the Memory Stores API after the dream completes [^src13].
+
+Required beta headers: `managed-agents-2026-04-01` (all Managed Agents requests) + `dreaming-2026-04-21` (Dreams specifically) [^src13].
+
+## Daytona self-hosted sandbox integration
+
+Self-hosted sandbox with Daytona allows running the CMA loop with a Daytona sandbox as the execution environment [^src14]. Architecture:
+
+- **Anthropic** (API + agentic loop) ← orchestrator → **Daytona** (sandbox with filesystem/shell)
+- Filesystem and shell tool calls route to Daytona; web tools and MCP servers remain Anthropic server-side [^src14].
+
+**Sandbox lifecycle** [^src14]:
+- Idle-stop: sandbox pauses after idle period; filesystem persists through pauses.
+- 30-day delete timer after creation; resettable via API.
+- `session.metadata` keys for Daytona integration: `daytona.snapshot_name`, `daytona.sandbox_id`.
+
+Orchestrator patterns: long-poll (synchronous wait) or webhook (async callback when session completes) [^src14].
+
+## The CMA mental model ("The Loop")
+
+The core mental model for building with Claude Managed Agents — as introduced in Anthropic's open-source "launch your agent" skill [^src15]:
+
+- **Goal, not a task** — give Claude a *goal*; it often finds a better path than explicit step-by-step instructions.
+- **The loop cycle** — Goal → think → pick tools → attempt → grade against success criteria → retry until passing → present output.
+- **Three inputs every loop needs** — Context (what you already know), Goal (what you're achieving), Success (what the ideal outcome looks like).
+- **No platform fees** — CMA charges API costs only; the agent loop runs on Anthropic's infrastructure at no additional hosting cost.
+- **Interview-first building** — the skill interviews you to nail down the success rubric before making any API calls.
+
+Boris Cherny (Claude Code creator): "I don't prompt Claude anymore. My job is to write loops." [^src15]
+
+Real-world cost calibration: a live demo of a daily news digest agent ran 28 minutes, consumed ~27M tokens, and cost ~$12 — and failed its rubric because the managed environment couldn't access Reddit directly. The loop surfaced the fix: switch to web-search-only tools [^src15].
+
+## Claude.ai waitlist status
+
+As of mid-2026, the CMA waitlist page [^src16] lists two limited research-preview features:
+- **MCP tunnels** — requires opt-in via the research preview.
+- **Dreaming** — async memory consolidation (see Dreams API above); research preview.
+
 ## Pricing
 
 Standard Claude Platform token rates + **$0.08 per session-hour** of active runtime [^src1].
@@ -235,3 +302,7 @@ Standard Claude Platform token rates + **$0.08 per session-hour** of active runt
 [^src10]: [Sentry — Claude Managed Agents case study](../../raw/_inbox/web-sentry-claude-managed-agents-case-study-claude-by-anthropic.md) — Indragie Karunaratne, Sentry
 [^src11]: [Vibecode — Claude Platform API case study](../../raw/_inbox/web-vibecode-claude-platform-api-case-study-claude-by-anthropic.md) — Vibecode
 [^src12]: [Claude Legal Solutions](../../raw/_inbox/web-claude-legal-solutions-claude-by-anthropic.md) — Anthropic
+[^src13]: [Dreams — Claude Managed Agents docs](../../raw/web/web-dreams.md) — Anthropic
+[^src14]: [Run Claude Managed Agents on Daytona](../../raw/web/web-run-claude-managed-agents-on-daytona.md) — Anthropic
+[^src15]: [Claude Code's NEW Open Source Repo Builds Effective AI Agents in MINUTES!](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-claude-code-s-new-report.md) — YouTube (processed report)
+[^src16]: [Claude Managed Agents — Claude by Anthropic (waitlist page)](../../raw/web/web-claude-managed-agents-claude-by-anthropic.md) — Anthropic

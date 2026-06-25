@@ -54,6 +54,9 @@ sources:
   - path: raw/github/github-mgalpert-msgprompt.md
     channel: github
     ingested_at: 2026-06-25
+  - path: raw/github/github-anthropics-prompt-eng-tutorial.md
+    channel: github
+    ingested_at: 2026-06-25
 aliases:
   - prompting
   - prompt design
@@ -229,3 +232,4 @@ This is the same "pre-prompting" insight as the Cowork Prompt Optimizer template
 [^src15]: [The Red Flag Summary template](../../raw/notes/notes-the-red-flag-summary.md)
 [^src16]: [The 7 deadly sins of prompting](../../raw/email/email-2025-08-24-sins.md) — Ruben Hassid
 [^src17]: [mgalpert/MSGPrompt — pre-prompting tool for Claude/ChatGPT (★20)](../../raw/github/github-mgalpert-msgprompt.md) — GitHub
+[^src18]: [anthropics/prompt-eng-tutorial — GitHub ★36,609](../../raw/github/github-anthropics-prompt-eng-tutorial.md) — Anthropic (9-chapter Jupyter series: Basic Structure → Clear/Direct → Roles → Data/Instructions → Formatting → Precognition → Few-Shot → Hallucinations → Complex/Power Users)

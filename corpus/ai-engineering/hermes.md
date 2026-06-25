@@ -9,6 +9,9 @@ sources:
   - path: raw/_inbox/youtube-6kGXn-j16QM-7-hermes-desktop-hacks-that-will-change-your-life.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-i-built-the-best-report.md
+    channel: notes
+    ingested_at: 2026-06-25
 aliases:
   - Hermes
   - Hermes agent
@@ -105,5 +108,19 @@ A walkthrough of advanced workflows using Claude Code Desktop branded as "Hermes
 
 ---
 
+## Hermes as memory injection (the frozen snapshot role)
+
+In the composite memory stack analyzed by one practitioner, Hermes fills the **injection** role [^src3]:
+
+- **Role**: inject a frozen snapshot of relevant knowledge at session start — static, pre-built, cached.
+- **Mechanism**: ~1,300 cached tokens loaded at the start of every session. Token cost is negligible once cached; the snapshot doesn't change per-session.
+- **Weakness**: keyword-only recall for determining which snapshot chunks to include. If the memory is tagged with keywords and the user doesn't use those keywords, relevant context is missed. Hermes has no semantic/embedding-based recall.
+- **Position in the stack**: it sits *after* MemSearch (storage) and *before* GBrain (recall). The snapshot is what gets *injected*; MemSearch captures new things; GBrain re-ranks and cites when answering.
+
+The composite: **MemSearch captures → Hermes snapshot injects → GBrain re-ranks at recall time**. Hermes handles the "what to always have in context" problem; GBrain handles the "what to surface for this specific query" problem [^src3].
+
+This limitation (keyword-only injection) is why the composite stack pairs Hermes with GBrain — GBrain's semantic re-ranking compensates for Hermes's structural weakness at recall [^src3].
+
 [^src1]: [How I use Hermes as a Lead Developer (ZazenCodes)](../../raw/email/email-2026-05-27-how-i-use-hermes-as-a-lead-developer.md)
 [^src2]: [7 Hermes Desktop Hacks That Will Change Your Life](../../raw/_inbox/youtube-6kGXn-j16QM-7-hermes-desktop-hacks-that-will-change-your-life.md) — YouTube
+[^src3]: [I Built The Best Claude Memory System (YouTube)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-i-built-the-best-report.md) — composite memory stack analysis

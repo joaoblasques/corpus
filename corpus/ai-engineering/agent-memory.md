@@ -60,6 +60,18 @@ sources:
   - path: raw/youtube/youtube-yke4fLQUsh4-build-an-ai-second-brain-knowledge-base-step-by-step.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-i-built-the-best-report.md
+    channel: notes
+    ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-stop-using-obsidi-report.md
+    channel: notes
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-eglVxLaWRUU-claude-code-karpathy-s-obsidian-new-meta.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-n8rP6Ceskm4-cut-llm-cost-by-95-replace-elevenlabs-and-10-top-github-repo.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - agent memory
   - memory
@@ -93,6 +105,10 @@ aliases:
   - three-pillar second brain
   - vault-as-memory-bank
   - master index
+  - MemSearch
+  - SimpleBrain
+  - GBrain
+  - composite memory stack
 tags:
   - corpus/ai-engineering
   - concept
@@ -325,6 +341,49 @@ Cody Bontecou's Obsidian LLM wiki implementation establishes two operating princ
 
 **Stop hook automation** [^src16]: a `SessionStop` hook triggers automatically at the end of every session, prompting Claude to write what it learned back to the relevant wiki pages and the log before the session closes. The hook catches the memory update that users otherwise forget. This is the mechanical enforcer of the "after each session, Claude updates a structured log" principle in the self-improving knowledge base pattern.
 
+## Composite memory stack: MemSearch + Hermes + GBrain
+
+A practitioner synthesis evaluated ~20 open-source memory frameworks and identified that no single system does all three memory jobs (storage, injection, recall) well. The winning stack cherry-picks the best component from each [^src19]:
+
+**The three jobs framework** [^src19]:
+- **Storage**: who triggers the save (hook vs agent-decided) and what form (verbatim vs summarized).
+- **Injection**: hook-loaded (always guaranteed) vs agent-pulled (judgment call), and capped vs uncapped.
+- **Recall**: keyword (exact words) vs semantic (by meaning) vs hybrid (both).
+
+**Claude Code out-of-the-box weaknesses** [^src19]: storage is agent-decided + summarized ("decent but leaky"); injection is hook-loaded but uncapped; recall is weakest — "basically no search at all."
+
+**The composite stack** [^src19]:
+
+| Job | Component | Reason |
+|---|---|---|
+| Storage | MemSearch auto-capture hook | Per-turn Haiku summarization → daily `memory/YYYY-MM-DD.md` + ONNX bge-m3 local embeddings. Automatic, no agent judgment needed. |
+| Injection | Hermes frozen snapshot | Session-start snapshot of MEMORY.md / USER.md / SOUL.md, capped ~1,300 tokens, prefix-cached — pay once per session. |
+| Recall | MemSearch hybrid search + GBrain re-ranker | Multi-tier: check frozen snapshot (tier 0) first; hybrid semantic+keyword search deeper tiers; GBrain does a re-ranking pass then returns a written cited answer (not raw chunks). |
+
+The GBrain layer (built by Garry Tan, YC president) uses Postgres + embeddings + BM25 ranking and returns answers with explicit source citations: "A confident answer with no source is actually worse than useless when you're running real work for a client" [^src19].
+
+**Team scaling**: simple approach = one DB per person; scalable approach = one shared Postgres/Supabase store with row-level security scoped by login token [^src19].
+
+## SimpleBrain: minimal Karpathy-based second brain
+
+A deliberately minimal second-brain setup built on Karpathy's self-improving knowledge-base pattern: **5 folders + 3 files** [^src20]:
+
+**Structure** [^src20]:
+- `raw/` — drop zone for any agent-readable file (PDF, MD, CSV, JSON, URL)
+- `wiki/` — AI-curated knowledge base (one topic per file, merge + link, never delete)
+- `archive/` — processed raw files moved here
+- `prompts/` — reusable prompt files (e.g., `translate.md`)
+- `projects/` — per-project folders
+- `CLAUDE.md` / `AGENTS.md` / `README.md` — instruction files
+
+**The translate loop** [^src20]: `translate.md` instructs the agent to read everything in `raw/`, create/merge matching markdown files in `wiki/`, move processed files to `archive/`, and never delete. Running this prompt manually or on a schedule (daily 9am Sonnet 4.6 via Claude Cowork) is the complete maintenance task. "You don't have to maintain any of this system, really. The AI is doing it for you." [^src20]
+
+Git/GitHub provides version history ("nothing ever lost"); team access works naturally as each member pushes to a shared repo [^src20]. See also [[ai-engineering/claude-cowork|Claude Cowork]] for the Cowork-as-host pattern and [[ai-engineering/agent-memory|the LLM wiki pattern]] above.
+
+## Karpathy LLM-wiki — the compounding insight
+
+The key claim from Karpathy's pattern (as analyzed in a dedicated deep-dive [^src21]): LLM wiki is *incremental and compounding*, unlike traditional RAG that re-derives knowledge from scratch every time. **1 source → 10–15 wiki pages updated**. Each ingest makes future ingests cheaper (fewer duplicate lookups, richer cross-references). Three-layer architecture: raw/ (sources) → wiki/ (derived corpus) → schema (CLAUDE.md + index.md + log.md). Two-file invariant: `index.md` for catalog and `log.md` for chronological ops history [^src21].
+
 ## Three-pillar second brain (wiki + CRM + journal)
 
 Matt Wolfe's Codex-built second brain extends the Karpathy architecture into three interconnected layers [^src17]:
@@ -366,3 +425,6 @@ The insight from combining all three: **the journal responses reference wiki kno
 [^src16]: [I Built Karpathy's LLM Wiki in Obsidian (notes report)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-i-built-karpathy-report.md) — Cody Bontecou, YouTube (processed report)
 [^src17]: [Build an AI Second Brain / Knowledge Base Step by Step](../../raw/youtube/youtube-yke4fLQUsh4-build-an-ai-second-brain-knowledge-base-step-by-step.md) — Matt Wolfe, YouTube
 [^src18]: [claude-mem — GitHub (★83,689)](../../raw/github/github-thedotmack-claude-mem.md) — thedotmack/claude-mem, GitHub
+[^src19]: [I Built The Best Claude Memory System (Beats Hermes)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-i-built-the-best-report.md) — YouTube (processed report)
+[^src20]: [Stop Using Obsidian. This Simple Second Brain Setup Actually Works](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-stop-using-obsidi-report.md) — YouTube (processed report), Chris Ashby
+[^src21]: [Claude Code + Karpathy's Obsidian: The New Meta](../../raw/youtube/youtube-eglVxLaWRUU-claude-code-karpathy-s-obsidian-new-meta.md) — YouTube

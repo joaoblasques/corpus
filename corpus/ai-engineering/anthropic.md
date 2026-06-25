@@ -27,6 +27,9 @@ sources:
   - path: raw/github/github-anthropics-claude-cookbooks.md
     channel: github
     ingested_at: 2026-06-25
+  - path: raw/email/email-2026-06-19-testing-mythos-and-fable-moving-beyond-swe-bench-nvidia-s-op.md
+    channel: email
+    ingested_at: 2026-06-25
 aliases:
   - Anthropic
   - Anthropic PBC
@@ -78,6 +81,18 @@ Legal professionals became the most engaged Claude Cowork user segment after the
 
 Anthropic's mechanistic interpretability research aims to produce an "MRI for AI" — tools capable of auditing a model's reasoning for honesty, correctness, and alignment before deployment [^src9]. Key milestone: ~30 million distinct features discovered in Claude 3 Sonnet using sparse autoencoders. Target: working interpretability audit tools by 2027. See [[ai-engineering/interpretability|Interpretability]] for the full scientific background.
 
+## Fable 5 launch controversy: export controls and AI sovereignty (June 2026)
+
+The Fable 5 launch in June 2026 triggered a two-part crisis that reshaped developer trust in proprietary AI platforms [^src11]:
+
+**Anthropic's "reasoning extraction" restriction.** Fable 5 launched with a clause barring use of the model to build competing LLM technology — framed under safety (cyber/bio restrictions), but also restricting AI researchers from training or improving other AI systems. Anthropic initially "silently degraded Fable 5's performance for users detected to be working on LLM research through invisible interventions that weakened the model's outputs without notifying the user." After significant backlash, Anthropic walked back the silent-degradation policy and committed to transparency, but retained the restriction. Andrew Ng's characterization: "a raw demonstration of power by Anthropic. It has used 'safety' arguments to hinder potential competitors" [^src11].
+
+**U.S. Government export controls.** Shortly after the Fable 5 launch, the U.S. Commerce Department used national security authority to restrict exports of Mythos and Fable — requiring a license for use by any foreign national, including employees of Anthropic itself, whether inside or outside the U.S. This forced Anthropic to disable Fable access worldwide [^src11].
+
+**AI sovereignty response.** Andrew Ng's analysis: "Once a nation issues a threat, or takes action, to limit other nations' access, other nations will rationally try to secure alternatives." Nations that had relied on U.S. AI infrastructure are now accelerating domestic open-source model investment — the same pattern as China's semiconductor push after U.S. chip restrictions [^src11]. Sam Altman's commentary on Anthropic's safety-first positioning: "It is clearly incredible marketing to say, 'We have built a bomb, we are about to drop it on your head. We will sell you a bomb shelter for $100 million.'" [^src11]
+
+**Mandatory 30-day data retention.** Fable 5 introduced mandatory 30-day retention for all usage (for misuse detection, not training). This is not configurable per-request, is incompatible with ZDR (zero data retention) arrangements, and added to developer concerns about supply-chain stability [^src11]. See [[ai-engineering/claude-models|Claude Model Lineup]] for the per-model API implications.
+
 ## See also
 
 - [[ai-engineering/claude-models|Claude Model Lineup]] — the Claude model family (Haiku → Sonnet → Opus → Fable/Mythos), specs, and per-model detail
@@ -97,3 +112,4 @@ Anthropic's mechanistic interpretability research aims to produce an "MRI for AI
 [^src8]: [Enhancing AI-Driven Defense with Anthropic's Claude Opus 4.7](../../raw/_inbox/web-enhancing-ai-driven-defense-with-anthropics-claude-opus-4-7.md) — Palo Alto Networks
 [^src9]: [Dario Amodei: The Urgency of Interpretability](../../raw/web/web-dario-amodei-the-urgency-of-interpretability.md) — Dario Amodei, Anthropic
 [^src10]: [anthropic/claude-cookbooks — official Claude API recipe collection (★45,788)](../../raw/github/github-anthropics-claude-cookbooks.md) — Anthropic, GitHub
+[^src11]: [Testing Mythos and Fable, Moving Beyond SWE-bench (The Batch)](../../raw/email/email-2026-06-19-testing-mythos-and-fable-moving-beyond-swe-bench-nvidia-s-op.md) — Andrew Ng, DeepLearning.AI

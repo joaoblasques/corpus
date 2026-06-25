@@ -90,6 +90,12 @@ sources:
   - path: raw/youtube/youtube-kwSVtQ7dziU-skill-issue-andrej-karpathy-on-code-agents-autoresearch-and.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-8f5qWdx9L-Q.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-zPqcS5AvQvQ.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - agentic coding
   - agentic engineering
@@ -530,6 +536,25 @@ Andrej Karpathy's December 2025 inflection: he went from writing 20% of his code
 
 **OpenClaw praised for**: crafted personality (agent feels like a teammate, not a tool), well-calibrated sycophancy (pushes back appropriately), sophisticated persistent memory [^src26].
 
+## OpenCode with local LLMs — viable or not?
+
+**OpenCode** (open-source coding agent) works with local LLMs, but viability depends on task size and model quality [^src27]:
+
+- **Technically works**: OpenCode + Qwen-3-72B MoE or Qwen-3.6-27B on local hardware can complete small tasks.
+- **Practically not (yet) for serious work**: a task Claude Code completes in 6 minutes took 3 hours with the local model — same result, ~30× slower wall-clock. The human is waiting; the machine cost savings don't offset the time loss for iterative work.
+- **Quantization matters enormously**: Q8 (8-bit quantized) significantly outperforms Q4 (4-bit) for coding. Q4 is acceptable for reasoning; Q4 for code generation produces noticeably worse results. "Q8 is the sweet spot on modern hardware."
+- **Primary valid use case**: ITAR/HIPAA compliance — environments where data cannot leave the premises regardless of latency or cost. Local LLMs unlock regulated industries for agentic coding; the comparison is "legal vs. illegal" not "fast vs. slow."
+
+The economics: local model = no per-token cost, unlimited tokens, full privacy. Cloud model = ~6 min vs 3 hours on same task. For an async overnight batch (auto-research style à la Karpathy), the 3-hour runtime becomes acceptable — the human isn't waiting [^src27].
+
+**Code quality: local models work but introduce subtle architectural bugs** [^src28]. Real-world testing (Qwen-3-72B MoE + Qwen-3.6-27B on Excalidraw/TypeScript and Warp/Rust production codebases) shows both local models and Opus 4.7 can complete the same task with working output — but local models showed patterns like:
+- Routing collision handling for two different shapes through the same geometry helper (semantic confusion that TypeScript won't catch).
+- Implementing "highlighter mode" by modifying opacity/stroke properties directly rather than adding a semantic `isHighlighter` flag to the data model (correct at render time, broken on reload/export).
+
+These are bugs that pass the type-checker and appear correct visually but compound over time. "If you're a vibe coder, job well done. However, now you have a slightly broken behavior for another shape." The implication: local models are viable in regulated environments where cloud is blocked, but they require more code review than frontier models for architectural correctness [^src28].
+
+**Reference hardware for local coding** [^src28]: AMD Radeon AI Pro R9 700 (32 GB VRAM), Threadripper 9980X, 128 GB DDR5 RAM, Ubuntu 26.04, llama.cpp with ROCm acceleration. Qwen-3.6-27B fits fully on GPU; Qwen-3-72B uses MoE CPU offload. LM Studio / oobabooga are alternatives to llama.cpp.
+
 ## See also
 
 - [[ai-engineering/mcp|MCP]] — connecting agents to external systems
@@ -566,3 +591,5 @@ Andrej Karpathy's December 2025 inflection: he went from writing 20% of his code
 [^src23]: [How Software Engineers Actually Use Coding Agents in 2026](../../raw/_inbox/youtube-2HtqFVLgjLI-how-software-engineers-actually-use-coding-agents-in-2026.md) — YouTube survey/walkthrough
 [^src25]: [AI Writes Code Faster. Your Job Is Still to Prove It Works.](../../raw/web/web-ai-writes-code-faster-your-job-is-still-to-prove-it-works.md) — Addy Osmani, addyosmani.com
 [^src26]: [Skill Issue: Andrej Karpathy on Code Agents, Auto-Research, and...](../../raw/youtube/youtube-kwSVtQ7dziU-skill-issue-andrej-karpathy-on-code-agents-autoresearch-and.md) — No Priors podcast, YouTube
+[^src27]: [OpenCode with Local LLMs — is it actually viable?](../../raw/youtube/youtube-8f5qWdx9L-Q.md) — YouTube
+[^src28]: [Local AI Coding is Finally Good Enough (YouTube)](../../raw/youtube/youtube-zPqcS5AvQvQ.md) — ForrestKnight (hardware: AMD R9 700 + Threadripper 9980X; models: Qwen-3-72B MoE + Qwen-3.6-27B; codebases: Excalidraw, Warp)

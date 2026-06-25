@@ -51,6 +51,9 @@ sources:
   - path: raw/web/web-use-claude-cowork-safely-claude-help-center.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-P4rv9RSM1IE.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - prompt injection
   - LLM security
@@ -257,6 +260,24 @@ From Anthropic's official Cowork safety guide, the clearest practitioner framing
 
 This framing generalizes beyond Cowork: any agentic system reading external content while holding broad write permissions follows the same two-condition injection model. The mitigation is to minimize the overlap: either scope reads to trusted sources or restrict write permissions — eliminating one condition eliminates the threat [^src16].
 
+## Third-party skill security risk
+
+**More than one in three public skills contain security flaws** [^src17]. The skills ecosystem shares the same supply-chain risk as npm/PyPI: anyone can publish a skill, installation is one click, and the security review burden is on the user.
+
+Specific documented risk vectors [^src17]:
+- **Prompt injection via skill instructions** — a skill's `SKILL.md` can contain adversarial text that alters the agent's behavior when the skill activates.
+- **Excessive tool scope** — skills requesting broad filesystem or network access beyond their stated purpose.
+- **Data exfiltration via skill callbacks** — skills that POST captured context to external endpoints.
+- **Dependency confusion** — skills referencing external resources (images, scripts) from attacker-controlled domains.
+
+**Mitigations** [^src17]:
+1. Prefer Anthropic's official skill directory over community repositories.
+2. Build critical workflow skills yourself — the 4th skill build method ("from conversation") makes this fast.
+3. Read the full skill file before installing; look for unexplained network calls or broadly-scoped tool definitions.
+4. Use sandboxed environments (separate Claude account / project) for evaluating unknown skills.
+
+This connects to the MCP security surface (see [[ai-engineering/mcp|MCP]]): both skill files and MCP server instructions can carry injections, and the same defensive instinct applies — read what you're loading before you load it.
+
 ## See also
 
 - [[ai-engineering/structured-outputs|Structured Outputs]] — output-control layer; reliability prerequisite for security
@@ -287,3 +308,4 @@ This framing generalizes beyond Cowork: any agentic system reading external cont
 [^src14]: [Enhancing AI-Driven Defense with Anthropic's Claude Opus 4.7](../../raw/_inbox/web-enhancing-ai-driven-defense-with-anthropics-claude-opus-4-7.md) — Palo Alto Networks
 [^src15]: [Wiz Red Agent and Claude Opus: Securing Production Targets at Scale](../../raw/_inbox/web-red-agent-and-claude-opus-securing-production-targets-at-sca.md) — Wiz
 [^src16]: [Use Claude Cowork safely — Claude Help Center](../../raw/web/web-use-claude-cowork-safely-claude-help-center.md) — Anthropic
+[^src17]: [Claude Cowork Skills overview (YouTube)](../../raw/youtube/youtube-P4rv9RSM1IE.md) — skills security risk section
