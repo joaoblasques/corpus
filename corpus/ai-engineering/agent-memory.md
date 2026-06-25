@@ -3,6 +3,18 @@ type: concept
 domain: ai-engineering
 status: draft
 sources:
+  - path: raw/notes/notes-build-a-claude-kn-report.md
+    channel: notes
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-1FiER-40zng-ai-second-brain.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-VaGpWWiHXm8-obsidian-agentic-loops.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-AQHlyGA2cZM-hermes-use-cases.md
+    channel: youtube
+    ingested_at: 2026-06-25
   - path: 03_Resources/Study Notes/AI Dev - Agentic AI Architecture Explained.md
     channel: notes
     ingested_at: 2026-05-21
@@ -498,6 +510,46 @@ The three-file split separates concerns: `SOUL.md` is authored once and rarely c
 
 **Knowledge compounding via daily logs** [^src26]: the agent writes a daily log of everything it did, observed, and concluded. A separate "promoter" step (run weekly or manually) reviews recent daily logs and promotes high-value learnings into `USER.md` or the long-term knowledge base. This is the same compound-engineering loop applied to memory — "every run makes the memory better."
 
+## LLM Knowledge Base (Karpathy 3-folder pattern)
+
+The minimal Karpathy-style personal knowledge base uses three folders and a `CLAUDE.md` orchestration file [^src30]:
+
+| Folder | Role |
+|---|---|
+| `raw/` | Drop zone: PDFs, links, notes, voice memos — untouched originals |
+| `wiki/` | Claude-generated summaries, cross-references, entity pages — the corpus layer |
+| `outputs/` | Finished work: reports, drafts, presentations |
+
+**Five-step loop** [^src30]: Drop → ask Claude to process into wiki → verify (Claude self-checks completeness) → reuse (queries draw from wiki, not raw) → grow (new sources extend wiki, not replace it). Health check via 7 stages: raw intake, processing rate, wiki coverage, linkage, staleness, output quality, maintenance overhead.
+
+The key insight: "Claude becomes a librarian who remembers every book in your library" — queries return synthesized answers, not raw search results [^src30].
+
+## Cole Medin second brain: soul.md / user.md / memory.md
+
+A three-file memory scaffold inspired by OpenClaw (an open-source memory architecture) [^src31]:
+
+| File | Content |
+|---|---|
+| `soul.md` | Agent identity, values, how to interact with the user — persisted long-term |
+| `user.md` | User background, preferences, project context — updated when new facts emerge |
+| `memory.md` | Short-to-medium-term notes, current tasks, recent decisions |
+
+**Daily log + pre-compact hook**: a Claude Agent SDK hook fires before context compaction, writes a summary of the day's work to a daily log file. A nightly reflection cron job (Claude Agent SDK task) reviews the daily log and updates `user.md` / promotes insights to long-term storage [^src31]. "Lethal trifecta" security risk: any system combining private data access + untrusted content processing + exfiltration vector is at risk — use context isolation and output filtering [^src31].
+
+**RAG over daily logs**: daily log files stored in SQLite; at session start, the most relevant logs are retrieved by semantic similarity and injected into context [^src31].
+
+## Obsidian as agentic backend
+
+Obsidian doubles as both PKM and agent memory backend via its terminal plugin [^src32]. Claude hooks route new notes to the right folder with timestamps. The web viewer plugin makes the vault browsable in-session. DataView turns the vault into a queryable database (charts, tables from frontmatter). A custom Obsidian plugin was built with Codex to automate routing.
+
+Pattern: the vault IS the memory — agents read and write directly to markdown files; the PKM UI and the agent backend share the same source of truth [^src32].
+
+## Hermes memory wiki
+
+Hermes stores long-term memory as a self-hosted website (static site) and semantic search index [^src33]. Each memory page is markdown; the agent writes new entries when significant events occur. Tailscale connects all user devices, so the memory wiki is accessible from any device without public internet exposure. The morning priority prompt (scheduled daily) pulls from the wiki to give the agent fresh context on what matters today.
+
+Hermes requires meta-prompting with the `/goal` command to produce useful results — raw instructions without the meta-prompt wrapper produce generic outputs [^src33].
+
 ## See also
 
 - [[ai-engineering/context-window-management|Context Window Management]] — strategies for what to keep, compress, or drop from short-term memory
@@ -540,3 +592,7 @@ The three-file split separates concerns: `SOUL.md` is authored once and rarely c
 [^src27]: [Claude Code Has Quietly Evolved (People Haven't Noticed)](../../raw/youtube/youtube-4iMZA1omCkM-claude-code-has-quietly-evolved-people-haven-t-noticed.md) — Simon Scrapes, YouTube; covers the 3-function memory framing (storage/injection/recall) and the memsarch + GBrain stack
 [^src28]: [Every Level of a Claude Second Brain Explained (full video)](../../raw/youtube/youtube-DTCyvo6cC54-every-level-of-a-claude-second-brain-explained.md) — Nate Herk, YouTube; primary source for §"Five levels of AI second brain"
 [^src29]: [Stop Using Obsidian: Simple Second Brain (full video)](../../raw/youtube/youtube-h0HYpONXgjk-stop-using-obsidian-this-simple-second-brain-setup-actually.md) — Chris Ashby, YouTube; primary source for §Simple Brain pattern
+[^src30]: [Build a Claude Knowledge Base That Self-Improves](../../raw/notes/notes-build-a-claude-kn-report.md) — processed report; Karpathy 3-folder pattern
+[^src31]: [AI Second Brain: soul.md + memory.md + daily log (Cole Medin)](../../raw/youtube/youtube-1FiER-40zng-ai-second-brain.md) — Cole Medin, YouTube
+[^src32]: [Obsidian as PKM and agentic backend](../../raw/youtube/youtube-VaGpWWiHXm8-obsidian-agentic-loops.md) — YouTube
+[^src33]: [Hermes Agent: memory wiki + Tailscale](../../raw/youtube/youtube-AQHlyGA2cZM-hermes-use-cases.md) — YouTube

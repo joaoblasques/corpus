@@ -15,6 +15,9 @@ sources:
   - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-7-hermes-desktop-report.md
     channel: notes
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-AQHlyGA2cZM-hermes-use-cases.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - Hermes
   - Hermes agent
@@ -109,6 +112,22 @@ A walkthrough of advanced workflows using Claude Code Desktop branded as "Hermes
 - [[ai-engineering/agentic-coding|Agentic Coding]] — delegating coding work to agents
 - [[ai-engineering/README|AI Engineering hub]]
 
+## Hermes use cases: /goal, kanban, research, memory wiki, Tailscale
+
+Advanced Hermes use cases from a practitioner walkthrough [^src4]:
+
+**Meta-prompting via /goal**: the `/goal` command requires meta-prompting to produce useful results. A plain instruction like "create a web app" gives generic output; wrapping it with a meta-prompt that asks Hermes to clarify requirements, research constraints, and draft a specification first produces high-quality task plans [^src4].
+
+**Kanban board**: Hermes manages a kanban-style board (triage → in-progress → done) for tasks. Triage is automated — new tasks go to triage; Hermes auto-assigns priority and moves to in-progress based on urgency heuristics [^src4].
+
+**Technical research via browser control**: Hermes can drive browser research, visiting multiple sources and synthesizing findings. The practitioner used this for competitive analysis (1 hour research time → 10 minutes with Hermes) [^src4].
+
+**Memory wiki** (self-hosted): Hermes maintains a static site as its long-term knowledge store. Each memory is a markdown file; a semantic search index makes retrieval fast. The wiki lives on a VPS or local machine [^src4].
+
+**Tailscale for cross-device memory**: Tailscale connects all user devices so the memory wiki is accessible from phone, laptop, and desktop without public internet exposure. The Tailscale network acts as a private VPN joining the devices into one flat network [^src4].
+
+**Morning priority prompt**: a scheduled morning prompt pulls from the memory wiki, current kanban state, and calendar to produce a daily briefing and priority list. This is the "self-improvement" loop — each briefing session teaches Hermes what matters to the user [^src4].
+
 ---
 
 ## Hermes as memory injection (the frozen snapshot role)
@@ -127,3 +146,4 @@ This limitation (keyword-only injection) is why the composite stack pairs Hermes
 [^src1]: [How I use Hermes as a Lead Developer (ZazenCodes)](../../raw/email/email-2026-05-27-how-i-use-hermes-as-a-lead-developer.md)
 [^src2]: [7 Hermes Desktop Hacks That Will Change Your Life](../../raw/_inbox/youtube-6kGXn-j16QM-7-hermes-desktop-hacks-that-will-change-your-life.md) — YouTube
 [^src3]: [I Built The Best Claude Memory System (YouTube)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-i-built-the-best-report.md) — composite memory stack analysis
+[^src4]: [Hermes use cases: /goal, kanban, memory wiki, Tailscale](../../raw/youtube/youtube-AQHlyGA2cZM-hermes-use-cases.md) — YouTube

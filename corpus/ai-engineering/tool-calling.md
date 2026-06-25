@@ -33,6 +33,9 @@ sources:
   - path: raw/web/web-code-execution-tool.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/web/web-tool-search-tool.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - tool use
   - function calling
@@ -194,6 +197,20 @@ A direct comparison using Playwright CLI vs Playwright MCP server illuminates a 
 
 **If token minimization is the goal** [^src9]: neither Playwright CLI nor Playwright MCP is optimal — Steel's browser uses Playwright under the hood but wraps it in a Rust CLI, reducing token overhead further.
 
+## Tool Search Tool (deferred loading)
+
+The Tool Search Tool enables deferred loading of tools — preventing all tool schemas from occupying the prompt at session start [^src10].
+
+**Two variants** [^src10]:
+- `tool_search_tool_regex_20251119` — searches tool names via Python regex (exact or partial matches)
+- `tool_search_tool_bm25_20251119` — natural language / semantic search over tool descriptions
+
+**Mechanism** [^src10]: tools marked `defer_loading: true` in the tool registry do not appear in the initial prompt's tool list. Instead, the model calls `tool_search_tool` with a query; the result returns the matched tool schemas as `tool_reference` blocks. The model can then use those tools normally.
+
+**Benefits** [^src10]: preserves prefix cache (tool list changes bust the cache; deferred loading keeps stable tools in the cached prefix), reduces prompt length for sessions with large tool libraries, allows tool discovery via natural language when the exact tool name isn't known.
+
+**ZDR-eligible**: the Tool Search Tool is eligible for Zero Data Retention (ZDR) configurations [^src10].
+
 ## Relationship to context engineering
 
 Tool results are one of the four context components injected into an agent's context window after each call. See [[ai-engineering/context-engineering|Context Engineering]].
@@ -214,3 +231,4 @@ Tool results are one of the four context components injected into an agent's con
 [^src7]: [Bash tool — Anthropic docs](../../raw/web/web-bash-tool.md) — Anthropic
 [^src8]: [Web search tool — Anthropic docs](../../raw/web/web-web-search-tool.md) — Anthropic
 [^src9]: [Playwright CLI vs MCP Server: Which is Actually BETTER for Claude Code?](../../raw/youtube/youtube-V2qjnBDZZ7A-playwright-cli-vs-mcp-server-which-is-actually-better-for-cl.md) — Better Stack, YouTube
+[^src10]: [Tool Search Tool — Claude Code docs](../../raw/web/web-tool-search-tool.md) — Anthropic

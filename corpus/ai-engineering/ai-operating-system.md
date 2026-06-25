@@ -63,6 +63,9 @@ sources:
   - path: raw/youtube/youtube-DTCyvo6cC54-every-level-of-a-claude-second-brain-explained.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube--MbKLZGndfY-agentic-os.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - AI OS
   - AIOS
@@ -237,6 +240,23 @@ The compounding mechanic: one new source updates 10–15 linked wiki pages, iron
 
 The corollary from [[ai-engineering/agentic-coding|Agentic Coding]]: Karpathy's shift from 20% to ~0% code-writing was not about prompting better — it was about framing tasks as **macro actions** (high-level outcomes) and providing agents with the right environment (repositories checked out, permissions pre-granted, parallel sessions running). Token throughput becomes the new GPU utilization metric: an idle subscription is evidence the AIOS isn't running enough concurrent work [^src16].
 
+## 4-layer AIOS with Claude Code (nyndra pattern)
+
+A 30-minute setup pattern for a production agentic OS using four layers [^src17]:
+
+| Layer | Component | Role |
+|---|---|---|
+| 1 | `CLAUDE.md` | Foundation — identity, rules, live context, long-term memory; loaded every session; "what makes Claude know your world" |
+| 2 | MCP (12,000+ servers) | External connections — tools, APIs, data sources; MCP donated to Linux Foundation December 2025; 97M SDK downloads/month |
+| 3 | Hooks (3 event types) | Automation — `pre-tool-use`, `post-tool-use`, `user-prompt-submit`; intercept and augment any tool call or prompt |
+| 4 | Subagents | Delegation — parallel task execution, role-specialized agents, code-review agents |
+
+**MCP milestone** [^src17]: MCP was donated to the Linux Foundation in December 2025, signaling its status as an open standard (similar to the transition of Docker or Kubernetes). The 97M SDK downloads/month figure (as of mid-2026) makes it effectively the default protocol for agentic tool connectivity.
+
+**Hooks as automation layer** [^src17]: hooks transform Claude Code from a "reply to prompts" tool to an OS that acts on events. A hook can inject context before any tool call, validate outputs after a write, or augment user prompts with live context before they reach the model.
+
+**Key framing** [^src17]: "A chatbot is a conversation. An agentic OS is infrastructure." The distinction is persistence, composability, and event-driven execution — the same properties that distinguish an OS from a REPL.
+
 ## See also
 
 - [[ai-engineering/context-engineering|Context Engineering]] — the theoretical foundation; an AIOS is applied context engineering
@@ -266,3 +286,4 @@ The corollary from [[ai-engineering/agentic-coding|Agentic Coding]]: Karpathy's 
 [^src14]: [Stop Using Claude Code Without an Agentic OS (notes report)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-stop-using-claude-report.md) — Chase AI, YouTube (processed report)
 [^src15]: [I Built Karpathy's LLM Wiki in Obsidian (notes report)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-i-built-karpathy-report.md) — Cody Bontecou, YouTube (processed report)
 [^src16]: [Skill Issue: Andrej Karpathy on Code Agents, Auto-Research, and...](../../raw/youtube/youtube-kwSVtQ7dziU-skill-issue-andrej-karpathy-on-code-agents-autoresearch-and.md) — No Priors podcast, YouTube
+[^src17]: [How to Build Your Agentic OS with Claude Code (4-Layer Setup)](../../raw/youtube/youtube--MbKLZGndfY-agentic-os.md) — nyndra AI, YouTube

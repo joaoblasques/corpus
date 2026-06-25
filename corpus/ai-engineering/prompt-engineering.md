@@ -57,6 +57,12 @@ sources:
   - path: raw/github/github-anthropics-prompt-eng-tutorial.md
     channel: github
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-G2B0YWuJUgI-prompting-playbook.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/pdf/pdf-advanced-chatgpt-prompt-engineering-mindstream-x-hubspot.md
+    channel: pdf
+    ingested_at: 2026-06-25
 aliases:
   - prompting
   - prompt design
@@ -204,6 +210,29 @@ A prompt is a brief, not a wish — "Most prompts fail because they're wishes, n
 
 This is the same "pre-prompting" insight as the Cowork Prompt Optimizer template [^src10] applied as a browser-layer intermediary — the user never sees the enhanced prompt, the model always receives it.
 
+## Eval-first approach (Anthropic London)
+
+Margo van Laar (Anthropic) at Code with Claude London 2026 emphasized starting with evals, not prompts [^src19]:
+
+**Three eval case types** [^src19]:
+1. **Control cases** — mainstream, expected input; ensures the prompt handles the common case correctly
+2. **Edge cases** — inputs near the boundary of the intended behavior; catches brittleness
+3. **Out-of-scope cases** — inputs the system must refuse or redirect; tests guard rails
+
+**Prompt hygiene** (XML structure) [^src19]: separate role + guidelines + policy + tone into distinct XML tags within the system prompt. Mixing them creates ambiguity that degrades reliability at scale.
+
+**Output contracts** [^src19]: define both format AND stop sequences explicitly. "An output contract is the specification the model must satisfy — format specifies shape, stop sequences specify termination." Adding stop sequences prevented a customer support bot (Meridian Mobile case study) from continuing beyond the intended response boundary.
+
+**Targeted failure mode fixing** [^src19]: don't add general instructions hoping they fix specific failures. Identify whether the failure is a capability gap (model can't do the task) vs a prompting gap (model hasn't been told clearly). Capability gaps require model or tool changes; prompting gaps require prompt surgery.
+
+## 7-day prompt engineering principles (Mindstream × HubSpot)
+
+Three core principles from a practitioner guide [^src20]:
+
+1. **Clarity over brevity**: more context is almost always better; resist the impulse to shorten prompts. Include role, background, format, constraints, and examples.
+2. **Direction over correction**: tell the model what TO do, not what not to do. "Write a formal summary" outperforms "Don't write informally."
+3. **Systems over questions**: build reusable prompt templates (systems) rather than one-off questions. A system prompt answered 100 times in a day produces consistent results; a new question each time produces variance.
+
 ## See also
 
 - [[ai-engineering/context-engineering|Context Engineering]] — sibling discipline; managing window contents over a session
@@ -233,3 +262,5 @@ This is the same "pre-prompting" insight as the Cowork Prompt Optimizer template
 [^src16]: [The 7 deadly sins of prompting](../../raw/email/email-2025-08-24-sins.md) — Ruben Hassid
 [^src17]: [mgalpert/MSGPrompt — pre-prompting tool for Claude/ChatGPT (★20)](../../raw/github/github-mgalpert-msgprompt.md) — GitHub
 [^src18]: [anthropics/prompt-eng-tutorial — GitHub ★36,609](../../raw/github/github-anthropics-prompt-eng-tutorial.md) — Anthropic (9-chapter Jupyter series: Basic Structure → Clear/Direct → Roles → Data/Instructions → Formatting → Precognition → Few-Shot → Hallucinations → Complex/Power Users)
+[^src19]: [Anthropic London prompting playbook (Margo van Laar)](../../raw/youtube/youtube-G2B0YWuJUgI-prompting-playbook.md) — YouTube, Anthropic
+[^src20]: [Advanced Prompt Engineering (Mindstream × HubSpot PDF guide)](../../raw/pdf/pdf-advanced-chatgpt-prompt-engineering-mindstream-x-hubspot.md) — Mindstream / HubSpot

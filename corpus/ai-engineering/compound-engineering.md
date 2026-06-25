@@ -18,6 +18,9 @@ sources:
   - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-this-karpathy-sys-report.md
     channel: notes
     ingested_at: 2026-06-25
+  - path: raw/web/web-changelog-md.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - compound engineering
   - compound knowledge
@@ -142,6 +145,14 @@ Karpathy's `autoresearch` repo (~630 lines on GitHub, 85K+ stars) implements the
 
 This is the raw evolutionary-loop core of the compound-engineering idea — the Every.to loop (§ above) adds human curation and AGENTS.md capture; autoresearch adds full overnight autonomy and an explicit scoring function instead.
 
+## Plugin changelog: CONCEPTS.md substrate and thematic triage (v3.10–3.13)
+
+Three significant plugin changes from recent changelog entries [^src6]:
+
+- **v3.10.0 — CONCEPTS.md as shared vocabulary**: the `/ce-compound` step now writes extracted patterns to a `CONCEPTS.md` file in the repo — a shared vocabulary layer that any skill or agent in the project can read. This is the "substrate" layer: domain-specific terms, architectural decisions, and anti-patterns that make AGENTS.md entries composable across sessions.
+- **v3.11.0 — ce-polish promoted to stable**: the draft-polishing skill was marked stable after validation across multiple codebases.
+- **v3.13.0 — Thematic triage grouping**: the `/ce-code-review` skill now groups comments by theme rather than file, surfacing cross-cutting concerns (e.g. "error handling pattern inconsistency") before file-level issues. Reviewers see systemic issues before tactical ones.
+
 ## See also
 
 - [[ai-engineering/agentic-coding|Agentic Coding]] — the broader orchestration discipline; compound engineering is its learning-loop layer
@@ -158,3 +169,4 @@ This is the raw evolutionary-loop core of the compound-engineering idea — the 
 [^src3]: [The Agent That Saved My Brain](../../raw/_inbox/web-the-agent-that-saved-my-brain.md) — Austin Tedesco, Every
 [^src4]: [My AI Had Already Fixed the Code Before I Saw It](../../raw/web/web-my-ai-had-already-fixed-the-code-before-i-saw-it.md) — Every.to
 [^src5]: [This "Karpathy System" could 701x your AI Workflows — autoresearch](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-this-karpathy-sys-report.md) — YouTube (processed report); covers autoresearch 3-file system, fit checklist, Toby Lütke result
+[^src6]: [Compound Engineering Plugin changelog (v3.13.0)](../../raw/web/web-changelog-md.md) — EveryInc

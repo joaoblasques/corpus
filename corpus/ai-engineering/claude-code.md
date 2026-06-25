@@ -168,6 +168,18 @@ sources:
   - path: raw/web/web-github-anthropics-claude-for-legal-a-suite-of-plugins-for-le.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/web/web-common-workflows-claude-code-docs.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/web/web-create-custom-subagents-claude-code-docs.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/web/web-overview-claude-code-docs.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-6amLO7I9xdg-code-with-claude-london-2026-opening-keynote.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - Claude Code
   - claude-code
@@ -192,6 +204,7 @@ tags:
 created: 2026-06-12
 updated: 2026-06-25
 last_confirmed: 2026-06-25
+confidence: 0.95
 ---
 
 # Claude Code
@@ -1116,4 +1129,68 @@ This is the most detailed Anthropic-published example of the **plugin-marketplac
 [^src46]: [Todo lists — Claude Code docs](../../raw/web/web-todo-lists-claude-code-docs.md) — Anthropic
 [^src47]: [Orchestrate teams of Claude Code sessions — Claude Code docs](../../raw/web/web-orchestrate-teams-of-claude-code-sessions-claude-code-docs.md) — Anthropic
 [^src48]: [Claude Code has quietly evolved (people haven't noticed)](../../raw/youtube/youtube-4iMZA1omCkM-claude-code-has-quietly-evolved-people-haven-t-noticed.md) — YouTube
+## Common workflows
+
+Claude Code surfaces across all environments — terminal, VS Code, desktop app, web, JetBrains — with consistent capabilities [^src50]. Key workflow patterns from Anthropic docs:
+
+- **Parallel sessions with worktrees**: work on a feature in one terminal while Claude fixes a bug in another; each worktree is a separate checkout on its own branch with no collisions [^src50].
+- **Plan before editing**: switch to plan mode for changes to review before they touch disk; Claude proposes a plan with no edits until approved (Shift+Tab mid-session) [^src50].
+- **Delegate research to subagents**: exploring a large codebase fills context with file reads; delegate so only findings return to the main conversation [^src50].
+- **Run Claude on a schedule**: four options depending on where you need the task to run: Routines (Anthropic-managed cloud, runs even when computer off), Desktop scheduled tasks (local files access), GitHub Actions (CI pipeline, cron or PR events), `/loop` (quick polling within a session) [^src50].
+- **Work in non-code folders**: Claude Code works in any directory — notes vaults, documentation folders, markdown collections — using the same file system tools as code [^src50].
+- **Resume previous conversations**: `claude --resume` for a list, `/resume` inside a session; all conversations saved locally [^src50].
+
+## Custom subagents (detailed reference)
+
+Subagents are Markdown files with YAML frontmatter, stored in `.claude/agents/` (project) or `~/.claude/agents/` (user) [^src51]. When multiple subagents share a name, higher-priority location wins (managed > CLI flag > project > user > plugin) [^src51].
+
+**Required frontmatter fields**: `name` (unique, lowercase + hyphens), `description` (Claude uses this for auto-delegation — specificity matters) [^src51].
+
+**Optional fields** [^src51]:
+
+| Field | Description |
+|---|---|
+| `tools` | Tools the subagent can use (inherits all if omitted) |
+| `disallowedTools` | Tools to deny |
+| `model` | `sonnet`, `opus`, `haiku`, `fable`, full model ID, or `inherit` |
+| `permissionMode` | `default`, `acceptEdits`, `auto`, `dontAsk`, `bypassPermissions`, `plan` |
+| `maxTurns` | Max agentic turns before stop |
+| `skills` | Skills preloaded into the subagent context at startup |
+| `mcpServers` | MCP servers for this subagent |
+| `hooks` | Lifecycle hooks scoped to this subagent |
+| `memory` | `user`, `project`, or `local` — enables cross-session learning |
+| `background` | `true` to always run as background task |
+| `effort` | `low`, `medium`, `high`, `xhigh`, `max` — overrides session level |
+| `isolation` | `worktree` — isolated git worktree, auto-cleaned if no changes |
+| `color` | Display color in task list |
+| `initialPrompt` | Auto-submitted as first user turn when this agent runs as main |
+
+**Key gotchas** [^src51]: Subagents are loaded at session start — add/edit files on disk then restart to load. Subagents created through `/agents` interface take effect immediately. Plugin subagents do not support `hooks`, `mcpServers`, or `permissionMode`. `cd` commands do not persist between Bash calls in subagents. Directories added via `--add-dir` are also scanned for `.claude/agents/`.
+
+**Built-in subagents** that Claude auto-uses [^src51]:
+- **Explore** (Haiku, read-only) — file discovery and code search; skips CLAUDE.md for speed
+- **Plan** — research before implementation strategies; also skips CLAUDE.md
+- **General-purpose** — complex multi-step tasks
+
+## London keynote 2026: trajectory framing
+
+At the "Code with Claude London 2026" event (May 2026), Anthropic's leadership shared their trajectory framing [^src52]:
+
+**Task horizon** as the key metric: "how long can a model work before losing the thread?" Last year: minutes. Today: hours. Expected future: continuously running agents that are proactive, always-on, and know what to do without being told [^src52].
+
+**Scaffolding paradox**: "as models get smarter, the scaffolding that used to help can hold Claude back" — more intelligent models can get further with generalized primitives (file system, sandbox) than with heavy custom orchestration [^src52]. Implication: design for the model six months out, not the current one.
+
+**Advisor strategy** (new API feature): split execution from advising — a smaller model executes, a larger model advises when needed. Eve Legal reported frontier-quality results at 5× lower cost using Sonnet as executor and Opus as advisor [^src52].
+
+**Claude Managed Agents new features** (London announcement): self-hosted sandboxes (execute work on your own server) + MCP tunnels (internal MCP servers securely accessible from Managed Agents without public internet exposure) [^src52].
+
+**Adoption metrics** [^src52]: API volume up 17× on Claude platform YoY; average developer spending 20+ hours/week running Claude Code; Claude Code wall-to-wall adoption drove 200% increase in PRs per engineer at Anthropic.
+
+**Scale case studies** [^src52]:
+- Spotify: background agent reading migration plain-English descriptions, running across a fleet of agents, merging 1,000+ PRs/month, cutting migration time 90%.
+- Binty (foster care software): Claude API gave case workers back hours previously spent on paperwork; cut foster family licensing time by 20 days.
+
 [^src49]: [Anthropic's Claude for Legal — a suite of plugins for legal teams](../../raw/web/web-github-anthropics-claude-for-legal-a-suite-of-plugins-for-le.md) — Anthropic
+[^src50]: [Common workflows — Claude Code docs](../../raw/web/web-common-workflows-claude-code-docs.md) — Anthropic
+[^src51]: [Create custom subagents — Claude Code docs](../../raw/web/web-create-custom-subagents-claude-code-docs.md) — Anthropic
+[^src52]: [Code with Claude London 2026: Opening Keynote](../../raw/youtube/youtube-6amLO7I9xdg-code-with-claude-london-2026-opening-keynote.md) — Anthropic, YouTube

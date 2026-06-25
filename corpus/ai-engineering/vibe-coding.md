@@ -42,6 +42,9 @@ sources:
   - path: raw/web/web-ai-writes-code-faster-your-job-is-still-to-prove-it-works.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/notes/notes-local-ai-coding-report.md
+    channel: notes
+    ingested_at: 2026-06-25
 aliases:
   - vibe coding
   - vibe-coding
@@ -165,6 +168,12 @@ Addy Osmani's 2026 survey quantifies what vibe-coding-without-review costs in pr
 
 The key rule: **"if you haven't seen the code do the right thing yourself, it doesn't work."** AI-generated proof ("the tests pass in my head") is not evidence. This is the spec-driven development principle applied to code review: the PR Contract (what, why, proof, risk, review focus) is the exit criteria, not a nice-to-have [^src13].
 
+## Local vibe coding: compliance and performance trade-offs
+
+For regulated industries (ITAR, HIPAA, finance), vibe coding with cloud models is prohibited — all code must stay on-premises [^src14]. Local model performance is approximately 5× slower than frontier cloud models and quality is "a model from 1–2 years ago" — still useful for non-critical tasks, but requires more review cycles.
+
+The practical implication for the vibe-coding workflow: the permissive "just build it" loop requires more checkpoints with local models because the probability of subtle errors is higher. The spec-driven discipline (spec first, validate at each stage) becomes more critical, not less, when using local models [^src14].
+
 ## See also
 
 - [[ai-engineering/agentic-coding|Agentic Coding]] — the broader coding-agent practice
@@ -192,3 +201,4 @@ The key rule: **"if you haven't seen the code do the right thing yourself, it do
 [^src11]: [Vibecode — Claude Platform API case study](../../raw/_inbox/web-vibecode-claude-platform-api-case-study-claude-by-anthropic.md) — Vibecode
 [^src12]: [Claude Code built my website (9 steps)](../../raw/_inbox/email-2026-06-14-claude-code-built-my-website-9-steps.md) — Charlie Hills
 [^src13]: [AI Writes Code Faster. Your Job Is Still to Prove It Works.](../../raw/web/web-ai-writes-code-faster-your-job-is-still-to-prove-it-works.md) — Addy Osmani, addyosmani.com
+[^src14]: [Local AI coding: compliance and performance report](../../raw/notes/notes-local-ai-coding-report.md) — notes report

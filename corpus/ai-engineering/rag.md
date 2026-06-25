@@ -39,6 +39,12 @@ sources:
   - path: raw/youtube/youtube-pfPi04pIfaw-claude-code-agentic-os-unstoppable.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/github/github-catchthetornado-text-extract-api.md
+    channel: github
+    ingested_at: 2026-06-25
+  - path: raw/github/github-runanywhereai-rcli.md
+    channel: github
+    ingested_at: 2026-06-25
 aliases:
   - RAG
   - retrieval-augmented generation
@@ -298,6 +304,30 @@ A practitioner-discovered pattern: use a structured Markdown file hierarchy that
 
 This is the Karpathy RAG pattern implemented as a personal knowledge corpus — the same principle as [[ai-engineering/agent-memory|Agent Memory]] §LLM wiki pattern but focused on answering document-level factual queries.
 
+## text-extract-api: PDF/Office extraction pipeline
+
+`catchthetornado/text-extract-api` is a self-hosted extraction pipeline for feeding documents into RAG systems [^src12]:
+
+- Converts PDF, DOCX, PPTX, images to markdown or JSON (clean, structured for embedding)
+- EasyOCR for scanned documents; Ollama integration for local LLM-assisted extraction
+- PII removal before documents leave the local environment (compliance use case)
+- No cloud dependency — full local stack
+- API-first: send a file, receive clean markdown/JSON
+
+Target use case: private document collections (legal, medical, financial) where sending documents to cloud APIs is prohibited [^src12].
+
+## RCLI: on-device voice + local RAG
+
+`runanywhereai/rcli` is a macOS CLI tool that adds voice AI control with local RAG [^src13]:
+
+- Speech-to-text + LLM + text-to-speech, all running locally on Apple Silicon
+- Sub-200ms latency (vs 500ms+ for cloud voice APIs)
+- 40+ macOS system actions available by voice (window management, app control, file operations)
+- Local RAG: builds a semantic index over the user's documents; voice queries retrieve from this index rather than sending data to cloud
+- Useful for private document Q&A at low latency
+
+Combined with text-extract-api, forms a fully local document-intelligence pipeline: extract → embed → index → query via voice [^src13].
+
 ## See also
 
 - [[ai-engineering/embeddings|Embeddings]] — the dense vectors RAG retrieves over; their limits (exact-token loss, no time, disconnected facts) drive hybrid search, temporal filters, and GraphRAG
@@ -321,3 +351,5 @@ This is the Karpathy RAG pattern implemented as a personal knowledge corpus — 
 [^src9]: [google/langextract — Structured extraction with source grounding (★36K)](../../raw/github/github-google-langextract.md) — Google, GitHub
 [^src10]: [Canner/WrenAI — Open context layer for AI agents querying business data](../../raw/github/github-canner-wrenai-give-ai-agents-the-context-to-query-bus.md) — Canner, GitHub
 [^src11]: [Karpathy's Obsidian RAG + Claude Code = CHEAT CODE (notes report)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-karpathy-s-obsidi-report.md) — Chase AI, YouTube (processed report)
+[^src12]: [catchthetornado/text-extract-api — document extraction pipeline](../../raw/github/github-catchthetornado-text-extract-api.md) — GitHub
+[^src13]: [runanywhereai/rcli — on-device voice AI with local RAG](../../raw/github/github-runanywhereai-rcli.md) — GitHub

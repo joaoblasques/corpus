@@ -111,6 +111,9 @@ sources:
   - path: raw/youtube/youtube-4XqVR6xI6Kw-this-one-plugin-just-10xd-claude-code.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/web/web-skill-authoring-best-practices.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - agent skills
   - Claude skills
@@ -678,6 +681,17 @@ The skill is used with the PRD workflow: `/grill-me` → resolve the design → 
 
 Anthropic's reference plugin suite for legal workflows ships 12+ practice-area skills ("due diligence", "contract review", "deposition prep", etc.), each connecting via MCP to Ironclad, DocuSign, iManage, Everlaw, CourtListener, and other legal platforms [^src37]. This demonstrates the skills-as-plugin-bundle pattern: install once, gain a domain-complete skill library tied to specific tool integrations — same pattern as the Compound Engineering plugin (§ Claude for Legal above).
 
+## Skill authoring best practices (Anthropic official guide)
+
+Six rules for authoring effective skills from Anthropic docs [^src38]:
+
+1. **Keep SKILL.md concise** — only include information Claude doesn't already know. Don't explain general concepts; focus on what's specific to this skill or this codebase.
+2. **Match specificity to fragility**: high-freedom skills (creative work) — minimal guidance, broad parameters; medium-freedom (code review) — some structure, defined output format; low-freedom (data migration) — step-by-step instructions with strict constraints.
+3. **Test across multiple models** — a skill that works in Claude 3.5 Sonnet may degrade on Haiku or older versions. Test the full model matrix you plan to target.
+4. **Use gerund naming** (`Reviewing code`, `Generating tests`, `Deploying service`) — reads naturally when Claude announces "I'm [skill-name]".
+5. **Description triggers discovery** — when a skill library grows past ~100 skills, Claude reads descriptions, not contents, to decide which to load. The description must accurately capture when the skill applies or it will be ignored. "This is critical for large libraries where Claude needs to efficiently find the right skill."
+6. **Skills compose via prompts** — one skill can call another by naming it in its instructions. No explicit orchestration required; Claude routes.
+
 ## See also
 
 - [[ai-engineering/context-window-management|Context Window Management]] — why a lean window matters; sub-agents
@@ -730,3 +744,4 @@ Anthropic's reference plugin suite for legal workflows ships 12+ practice-area s
 [^src35]: [How Senior Engineers Actually Build With AI — Job Pilot (nine files + five skills)](../../raw/youtube/youtube-9dKA2hq4vf0-how-senior-engineers-actually-build-with-ai-in-2026-build-a.md) — JavaScript Mastery, YouTube
 [^src36]: [Full Walkthrough: Workflow for AI Coding — Matt Pocock (grill-me skill)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-full-walkthrough-report.md) — Matt Pocock, AI Hero (conference talk notes report)
 [^src37]: [Claude for Legal — Anthropic plugin suite for legal workflows](../../raw/web/web-github-anthropics-claude-for-legal-a-suite-of-plugins-for-le.md) — Anthropic, GitHub
+[^src38]: [Skill authoring best practices — Claude Code docs](../../raw/web/web-skill-authoring-best-practices.md) — Anthropic

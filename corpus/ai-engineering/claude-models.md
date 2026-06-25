@@ -69,6 +69,9 @@ sources:
   - path: raw/web/web-context-windows.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-6amLO7I9xdg-code-with-claude-london-2026-opening-keynote.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - Claude model lineup
   - Claude models
@@ -314,6 +317,16 @@ In Claude Code specifically, flagged prompts are **routed to Opus 4.8** automati
 
 See also [[ai-engineering/anthropic|Anthropic]] for the export control and AI sovereignty context from the same source.
 
+## Model progression at Code with Claude London 2026
+
+The opening keynote named the model progression used by Claude Code practitioners since launch [^src21]:
+
+Opus 3 → Sonnet 3.5 → Sonnet 3.7 → Opus 4 → Opus 4.7 → Mythos
+
+The progression reflects both capability improvements and cost-per-task optimization. Earlier models (Opus 3, Sonnet 3.5) dominated during the initial adoption period; later models (Opus 4.7, Mythos) serve as the current frontier for agentic tasks. "Scaffolding that used to help can hold Claude back as models get smarter" — an implicit signal that harnesses tuned for earlier models may degrade performance on newer ones [^src21].
+
+**API volume growth**: 17× API volume increase on the Claude platform year-over-year (cited at the London event). Metrics like this contextualize why Anthropic rate-limits aggressively — growth at this scale strains even large infrastructure [^src21].
+
 ## See also
 
 - [[ai-engineering/anthropic|Anthropic]] — the lab behind these models (company, funding, learning resources)
@@ -338,3 +351,4 @@ See also [[ai-engineering/anthropic|Anthropic]] for the export control and AI so
 [^src18]: [Migration guide — Claude API](../../raw/web/web-migration-guide.md) — Anthropic
 [^src19]: [Testing Mythos and Fable — The Batch (DeepLearning.AI)](../../raw/email/email-2026-06-19-testing-mythos-and-fable-moving-beyond-swe-bench-nvidia-s-op.md) — DeepLearning.AI
 [^src20]: [Introducing Claude Opus 4.6](../../raw/web/web-claude-opus-4-6.md) — Anthropic official blog
+[^src21]: [Code with Claude London 2026: Opening Keynote](../../raw/youtube/youtube-6amLO7I9xdg-code-with-claude-london-2026-opening-keynote.md) — Anthropic, YouTube

@@ -390,6 +390,25 @@ Cloudflare provides a self-managed environment for CMA where the agent loop runs
 
 **When to choose Cloudflare** [^src21]: when you need Cloudflare binding access (R2, D1, KV, Vectorize, Queues), per-agent sandbox type selection (isolate vs MicroVM), or the agent must interact with the browser (Browser Run tools). Daytona is better for long-running stateful sandboxes; Vercel is better for TypeScript-native teams needing low-latency egress to AWS workloads.
 
+## Real-world implementation: Amplitude Design Agent
+
+Amplitude built a Design Agent on Claude Managed Agents + Cloudflare in two days [^src22]:
+
+**Architecture** (three parts) [^src22]:
+1. Claude Managed Agents — handles reasoning, tool use, and multi-step generation; no custom orchestration, prompt chaining, or retry logic written by the team.
+2. Cloudflare Workers — hosts the UI and the thin agent interaction wrapper. Cold starts negligible, instant preview links.
+3. R2 — stores generated artifacts (HTML mockups) with stable URLs for sharing.
+
+**Key insight**: brand context + design system tokens baked into the system prompt transformed generic Claude HTML output into on-brand output — "the difference between generic Claude output and Claude-with-context output is drastic" [^src22]. Using the Google Design MD format for structured brand markdown in the system prompt.
+
+**Iteration loop** [^src22]: the agent's system prompt is the primary iteration surface — each behavior change is a prompt edit that takes minutes and immediately affects output quality. Instrumented with Amplitude Analytics from day one. Sessions hit 2,219 artifacts in the first weeks; 2-4× more viewers than makers (healthy sharing signal).
+
+**London keynote additions** [^src23]: two new features announced at Code with Claude London 2026:
+- **Self-hosted sandboxes**: execute work on your own server instead of Anthropic-managed infrastructure.
+- **MCP tunnels**: access internal MCP servers behind a firewall without public internet exposure. Agents access private data warehouse or feature-flag services via tunnel.anthropic.com URLs.
+
+**Advisor strategy** (announced London 2026): split execution from advising at the API level — a small model executes, a large model (Opus) advises when needed. Updates the `tools` array on the Messages API. Eve Legal reported frontier quality at 5× lower cost [^src23].
+
 ## See also
 
 - [[ai-engineering/mcp|MCP]] — agents connect to external systems via MCP; Vaults handle OAuth credentials per session
@@ -422,3 +441,5 @@ Cloudflare provides a self-managed environment for CMA where the agent loop runs
 [^src19]: [Self-hosted sandboxes for Managed Agents](../../raw/web/web-self-hosted-sandboxes.md) — Anthropic
 [^src20]: [Build a Claude Managed Agent with Vercel Sandbox](../../raw/web/web-build-a-claude-managed-agent-with-vercel-sandbox-vercel-know.md) — Vercel Knowledge Base
 [^src21]: [Set up Claude Managed Agents · Cloudflare Sandbox SDK docs](../../raw/web/web-set-up-claude-managed-agents-cloudflare-sandbox-sdk-docs.md) — Cloudflare
+[^src22]: [How We Built a Design Agent at Amplitude with Claude Managed Agents and Cloudflare](../../raw/web/web-how-we-built-a-design-agent-at-amplitude-with-claude-managed.md) — Will Newton, Amplitude
+[^src23]: [Code with Claude London 2026: Opening Keynote](../../raw/youtube/youtube-6amLO7I9xdg-code-with-claude-london-2026-opening-keynote.md) — Anthropic, YouTube

@@ -21,6 +21,9 @@ sources:
   - path: raw/email/email-2026-06-21-how-to-run-claude-code-for-free.md
     channel: email
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-qgAo-5uuO1E-claude-usage-limits.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - agentic AI costs
   - agent cost management
@@ -146,10 +149,37 @@ For high-volume low-stakes tasks (formatting, simple refactoring, lookup), runni
 
 This is not a replacement strategy — it's a **tiered cost model** where local handles tier-1 tasks (simple, high-volume) and the API handles tier-2+ tasks (complex, low-volume) [^src6].
 
+## Claude usage limits: plans and rolling windows
+
+Claude usage is governed by two quotas: a **5-hour rolling window** and a **weekly cap** [^src7]. When a window fills, messages stop until it resets (not a hard-cutoff like billing; just a queue pause).
+
+**Estimated message capacity per plan** [^src7]:
+| Plan | Approx. messages per 5-hour window |
+|---|---|
+| Free | ~15 |
+| Pro ($20/mo) | ~45 |
+| Max 5× ($100/mo) | ~225 |
+| Max 20× ($200/mo) | ~900 |
+
+**7 tips to extend limit headroom** [^src7]:
+1. Specific prompts (more context upfront = fewer back-and-forth turns)
+2. Concise prompts (don't include unnecessary context)
+3. Turn off unused features (extended thinking, web search)
+4. Match model to task (Haiku for simple, Sonnet for medium, Opus for hard)
+5. Use other tools first (do research, formatting, etc. outside Claude)
+6. Start fresh conversations (don't continue long stale threads)
+7. Use Projects (keeps context persistent without re-sending each time)
+
+**Token engineering as skill** [^src7]: "Token engineering" (deliberately reducing per-prompt token usage) is emerging as a skill category — similar to query optimization in databases. Practitioners track average tokens-per-output and adjust prompt verbosity to stay within quotas.
+
+**OpenRouter fallback** [^src7]: for pay-per-token overflow without a subscription cap, OpenRouter provides access to Anthropic models at API rates. Use when quota headroom is exhausted but task deadline is near.
+
+**Framing** [^src7]: "The era of flat-fee unlimited AI is ending" — as models become more capable, the compute per inference grows; flat-fee caps will tighten. Cost-efficiency becomes a first-class engineering concern rather than an afterthought.
+
 [^src1]: [Managing Agentic AI Costs at Scale](../../raw/web/managing-agentic-ai-costs-at-scale.md)
 [^src2]: [How to stop hitting Claude usage limits — 23 habits](../../raw/web/web-how-to-stop-hitting-claude-usage-limits.md) — Ruben Hassid
 [^src3]: [mnfst/manifest — GitHub ★7094](../../raw/github/github-mnfst-manifest.md)
 [^src4]: [Top 10 GitHub repos for AI devs (YouTube)](../../raw/youtube/youtube-n8rP6Ceskm4.md) — Headroom entry at ~3:00
 [^src5]: [I Stopped Hitting Claude Code Usage Limits — Here's How](../../raw/youtube/youtube-9ToOfgZ4qqQ-i-stopped-hitting-claude-code-usage-limits-here-s-how.md) — Brad, YouTube
 [^src6]: [How to Run Claude Code for Free (Local LLMs)](../../raw/email/email-2026-06-21-how-to-run-claude-code-for-free.md) — email newsletter
-</content>
+[^src7]: [Claude usage limits explained](../../raw/youtube/youtube-qgAo-5uuO1E-claude-usage-limits.md) — YouTube

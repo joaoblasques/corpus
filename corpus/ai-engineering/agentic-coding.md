@@ -114,6 +114,15 @@ sources:
   - path: raw/youtube/youtube-9dKA2hq4vf0-how-senior-engineers-actually-build-with-ai-in-2026-build-a.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/notes/notes-local-ai-coding-report.md
+    channel: notes
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-hfba9dAT6xE-local-agentic-coding.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/web/web-github-anthropics-html-effectiveness-html-effectiveness-exam.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - agentic coding
   - agentic engineering
@@ -633,6 +642,38 @@ Two concepts from Charlie Holtz (Conductor, YC S24) relevant to agentic coding a
 
 The tension: slot-free zones prevent drift in invariants; malleable software enables aggressive regeneration of everything else. Good agentic coding systems explicitly categorize code into these two categories and apply different governance to each.
 
+## Local agentic coding
+
+Running coding agents locally (no cloud API) is viable in 2026 for cost, compliance (ITAR/HIPAA/finance), and privacy reasons [^src33]:
+
+**VRAM-to-model-size rule** [^src34]:
+| VRAM | Recommended model |
+|---|---|
+| 8 GB | 7B params |
+| 12–16 GB | 14B params |
+| 24 GB | 32B params |
+| 64 GB | 70B params |
+
+**Qwen family for local coding** [^src34]: Qwen 2.5 Coder 1.5B works well for autocomplete (low VRAM, fast). Qwen 3.x series (8B–30B) for chat/edit tasks. Tool-use capability is a hard requirement for agentic mode — not all local models support it. Two-model setup: small model for autocomplete (LM Studio + VS Code) + larger model for agent tasks.
+
+**Performance expectation** [^src33]: local models run approximately 5× slower than frontier models. Treat local-model output quality as "a model from 1–2 years ago" — capable for many tasks, but requires more review and iteration. The gap narrows as hardware improves (AMD RX 9700 benchmarks show Qwen-3-72B MoE running competently on consumer hardware) [^src28].
+
+**Compliance use case**: organizations under ITAR, HIPAA, or financial data regulations that cannot send code to cloud APIs can run full agentic loops on-premises with local models + local inference servers (LM Studio, Ollama) [^src33].
+
+## HTML as agentic output format
+
+HTML is a more powerful output format for agents than markdown or plain text because it renders immediately in a browser, requires no build step, supports interactivity via vanilla JS, and embeds both data visualization and UI in a single file [^src35].
+
+Anthropic's gallery documents six categories where HTML excels over alternatives [^src35]:
+1. Data visualization (charts, tables with filtering)
+2. Interactive demos (calculators, simulators)
+3. Reports with embedded charts and navigation
+4. Dashboards with live data refresh via `<script>` tags
+5. Prototypes / mockups (clickable wireframes)
+6. Games and interactive experiments
+
+Key constraint: HTML output works best when the agent writes the whole file at once — iterative HTML patches are harder than iterative markdown edits. Design the task to produce a complete HTML document in one turn [^src35].
+
 ## See also
 
 - [[ai-engineering/mcp|MCP]] — connecting agents to external systems
@@ -675,3 +716,6 @@ The tension: slot-free zones prevent drift in invariants; malleable software ena
 [^src30]: [Claude on SWE-bench Verified](../../raw/web/web-claude-swe-bench-performance.md) — Anthropic
 [^src31]: [The Unreasonable Effectiveness of HTML for Agentic Output](../../raw/web/web-the-unreasonable-effectiveness-of-html.md) — blog post
 [^src32]: [Conductor CEO Charlie Holtz — AI Coding Setup](../../raw/youtube/youtube-fQmlML9Lay4-conductor-ceo-charlie-holtz-walks-us-through-his-ai-coding-s.md) — Charlie Holtz, YouTube
+[^src33]: [Local AI Coding: Report](../../raw/notes/notes-local-ai-coding-report.md) — notes report
+[^src34]: [Local Agentic Coding Guide](../../raw/youtube/youtube-hfba9dAT6xE-local-agentic-coding.md) — YouTube
+[^src35]: [The Unreasonable Effectiveness of HTML (gallery)](../../raw/web/web-github-anthropics-html-effectiveness-html-effectiveness-exam.md) — Anthropic gallery

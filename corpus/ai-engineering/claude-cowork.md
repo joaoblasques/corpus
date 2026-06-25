@@ -150,6 +150,12 @@ sources:
   - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-full-guide-build-report.md
     channel: notes
     ingested_at: 2026-06-25
+  - path: raw/notes/notes-build-a-claude-kn-report.md
+    channel: notes
+    ingested_at: 2026-06-25
+  - path: raw/notes/notes-give-claude-your-report.md
+    channel: notes
+    ingested_at: 2026-06-25
 aliases:
   - Claude Cowork
   - Cowork
@@ -705,3 +711,5 @@ From the official Anthropic product page and help center [^src43] [^src44]:
 [^src44]: [Get started with Claude Cowork — Help Center](../../raw/web/web-get-started-with-claude-cowork-claude-help-center.md) — Anthropic Help Center
 [^src45]: [My Simple Claude Cowork System for Normal People (Jeff Su)](../../raw/youtube/youtube-0_dSWLOHKng-my-simple-claude-cowork-system-for-normal-people.md) — Jeff Su, YouTube
 [^src46]: [Full Guide: Build an AI Second Brain (Cole Medin)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-full-guide-build-report.md) — Cole Medin, YouTube (processed report)
+[^src47]: [Build a Claude Knowledge Base That Self-Improves](../../raw/notes/notes-build-a-claude-kn-report.md) — notes report; Karpathy 3-folder pattern + Claude as librarian
+[^src48]: [Give Claude Your Files and Watch What Happens (report)](../../raw/notes/notes-give-claude-your-report.md) — notes report; 7 Cowork tasks + PARA method + sycophancy warning

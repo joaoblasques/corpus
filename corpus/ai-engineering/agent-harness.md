@@ -60,6 +60,9 @@ sources:
   - path: raw/youtube/youtube-RzLV8sfFdMM-how-to-build-effective-claude-code-agents-in-2026.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/github/github-googlecloudplatform-agent-starter-pack.md
+    channel: github
+    ingested_at: 2026-06-25
 aliases:
   - harness
   - agent harness
@@ -366,6 +369,18 @@ Claude Code hooks let harnesses intercept lifecycle events with shell scripts [^
 
 The Claude Code hooks system is the main harness extension point for adding **audit trails, policy enforcement, automatic testing gates, and notification routing** without modifying the model or prompts [^src15].
 
+## GCP Agent Starter Pack (maintenance mode)
+
+Google Cloud's `agent-starter-pack` (formerly a primary recommendation for GCP agent deployments) has been moved to **maintenance mode** [^src18]. New projects should use the `agents-cli` tool instead:
+
+```
+uvx google-agents-cli setup
+```
+
+The starter pack provided: Vertex AI + Cloud Run scaffolding, session management, evaluation pipelines, and CI/CD templates. The `agents-cli` successor (`google/agents-cli`) provides the same functionality in a CLI-first, actively maintained form [^src18].
+
+**Key lesson**: agent harnesses have a short half-life in a fast-moving ecosystem. Design harnesses to be replaceable — keep application logic decoupled from the scaffolding layer.
+
 ## See also
 
 - [[ai-engineering/agentic-coding|Agentic Coding]] — orchestration patterns built on top of the harness
@@ -398,3 +413,4 @@ The Claude Code hooks system is the main harness extension point for adding **au
 [^src15]: [Hooks reference — Claude Code docs](../../raw/web/web-hooks-reference-claude-code-docs.md) — Anthropic
 [^src16]: [How Claude Code Works — Claude Code docs](../../raw/web/web-how-claude-code-works-claude-code-docs.md) — Anthropic
 [^src17]: [How to Build Effective Claude Code Agents in 2026](../../raw/youtube/youtube-RzLV8sfFdMM-how-to-build-effective-claude-code-agents-in-2026.md) — Cole Medin, YouTube
+[^src18]: [google/agent-starter-pack — GCP agent harness (maintenance mode)](../../raw/github/github-googlecloudplatform-agent-starter-pack.md) — Google Cloud, GitHub

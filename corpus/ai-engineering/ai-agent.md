@@ -48,6 +48,9 @@ sources:
   - path: raw/youtube/youtube-kwSVtQ7dziU-skill-issue-andrej-karpathy-on-code-agents-autoresearch-and.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/github/github-aaif-goose-goose.md
+    channel: github
+    ingested_at: 2026-06-25
 aliases:
   - ai agent
   - agentic AI
@@ -197,6 +200,20 @@ An introductory framing of agents specifically for the DE context [^src12]:
 
 A live debate concerns whether a folder of files is sufficient agent state, or whether agents need a database [^src10]. The "files are all you need" position (Karpathy's evolving-markdown LLM knowledge base, LlamaIndex) is contrasted with the limits of file-based workflows and **massive context windows that "tend to collapse"** as they fill [^src10]. The same source reinforces the **model-vs-harness** framing and "context rot and tool loadouts" as first-order concerns [^src10]. See [[ai-engineering/agent-memory|Agent Memory]] and [[ai-engineering/context-window-management|Context Window Management]] for the underlying mechanics.
 
+## Goose: open-source agentic framework (AAIF)
+
+Goose (★50K GitHub) is an open-source general-purpose agentic AI framework, transferred to the Agentic AI Foundation (AAIF) at the Linux Foundation [^src14]. Originally built by Anthropic + Block, now community-governed.
+
+Key properties [^src14]:
+- Written in Rust (performance + memory safety for long-running agents)
+- 15+ model providers supported (Anthropic, OpenAI, Gemini, local Ollama, etc.)
+- Supports both MCP (Model Context Protocol) and ACP (Agent Communication Protocol) for inter-agent messaging
+- Designed for tool-using, long-horizon tasks
+- Extension marketplace for community tools
+- CLI-first; runs in terminal
+
+**ACP (Agent Communication Protocol)**: a layer on top of HTTP that lets agents communicate with each other in a structured way. Enables multi-agent coordination without a custom orchestration layer [^src14]. Distinct from MCP (which connects agents to tools/data); ACP connects agents to other agents.
+
 ## See also
 
 - [[ai-engineering/context-engineering|Context Engineering]] — the highest-leverage skill in agent development
@@ -229,3 +246,4 @@ A live debate concerns whether a folder of files is sufficient agent state, or w
 [^src11]: [mvanhorn/last30days-skill — AI agent skill that researches any topic across platforms](../../raw/web/github-mvanhorn-last30days-skill-ai-agent-skill-that-researc.md) — GitHub
 [^src12]: [Agents in Action #1 — What is an AI Agent? (Pipeline to Insights)](../../raw/email/email-2026-06-13-agents-in-action-1-what-is-an-ai-agent.md)
 [^src13]: [Skill Issue: Andrej Karpathy on Code Agents, Auto-Research, and...](../../raw/youtube/youtube-kwSVtQ7dziU-skill-issue-andrej-karpathy-on-code-agents-autoresearch-and.md) — No Priors podcast, YouTube
+[^src14]: [aaif-goose/goose — Goose AI agent (★50K)](../../raw/github/github-aaif-goose-goose.md) — AAIF / Linux Foundation, GitHub
