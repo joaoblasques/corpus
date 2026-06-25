@@ -58,6 +58,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [[ai-engineering/synthetic-data|Synthetic Data Generation]] — concept · draft · seedless agentic data generation via mechanism design (Simula: taxonomy → local diversity → complexification → dual-critic); used for Gemma, Gemini safety, on-device models
 - [[ai-engineering/compound-engineering|Compound Engineering]] — concept · draft · plan-work-review-compound loop; AGENTS.md as compound learning store; 5-product-1-person scale (Every.to)
 - [[ai-engineering/interpretability|Interpretability]] — concept · draft · mechanistic interpretability; superposition; sparse autoencoders; 30M features in Claude 3 Sonnet; "MRI for AI" by 2027
+- [[ai-engineering/intent-debt|Intent Debt]] — concept · draft · third debt type (beyond technical/cognitive); lives in artifacts; agents can't fix it; pay down via specs, AGENTS.md as intent ledger, ADRs, self-improving learning files
 
 ### Entities
 - [[ai-engineering/langgraph|LangGraph]] — entity · stub · production framework for stateful multi-agent workflows
@@ -76,6 +77,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [[ai-engineering/openviking|OpenViking]] — entity · draft · open-source context database by volcengine; filesystem-paradigm RAG with L0/L1/L2 tiered loading, directory recursive retrieval; outperforms Claude Code native memory on LoCoMo benchmark (+23pp accuracy, -63% tokens)
 - [[ai-engineering/pi-agent|Pi Agent]] — entity · draft · open-source minimal coding agent; 4 tools, <1000-token system prompt, TypeScript extensions, session forking, multi-model via OpenRouter/Ollama
 - [[ai-engineering/gemini-cli|Gemini CLI]] — entity · draft · Google's open-source agentic coding CLI; GEMINI.md context file, custom slash commands, MCP extension, memory, checkpointing, headless mode
+- [[ai-engineering/supacode|Supacode]] — entity · draft · macOS agent harness/session manager on LibGhosty; sidebar project management, Git/PR/CI awareness, hooks into Claude Code + Pi, Supacode CLI for agent self-management
 
 ### Syntheses
 - [[ai-engineering/agentic-coding|Agentic Coding]] — synthesis · draft · **sub-hub** · coding-agent orchestration; conductor→orchestrator, AX, the verification bottleneck

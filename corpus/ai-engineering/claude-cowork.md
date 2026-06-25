@@ -126,6 +126,18 @@ sources:
   - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-stop-using-obsidi-report.md
     channel: notes
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-0UFSZ_5OSIk-claude-cowork-full-course-3-hours-for-beginners-2026.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-C9gKWTzRukM-claude-cowork-full-course-zero-to-working-ai-employee-2026.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-nNjNzF8oL7U-claude-does-calendar-management-heres-how.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-zzo33HUOfxI-anthropic-just-dropped-claude-for-small-businesses-31-skills.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - Claude Cowork
   - Cowork
@@ -531,6 +543,59 @@ The download page for the Claude desktop app consolidates: Cowork, Claude Code (
 
 **Enterprise distribution**: MSIX installer (Windows) and PKG installer (macOS) for centralized MDM deployment; SSO integration; pre-approved extension lists [^src36]. Admins can force-install specific extensions and block unapproved plugins.
 
+## Cowork terminology and work modes
+
+The platform distinguishes three interaction modes [^src39]:
+- **Chat** = thinking partner (conversational, exploratory)
+- **Cowork** = work partner (structured production work; the main product)
+- **Code** = build partner (Claude Code for developers)
+
+**Agent loop** (as described in official course) [^src39]: Plan → Act → Check → Decide. Sub-agents handle parallel research tasks and improve output quality by eliminating familiarity bias — a fresh context window can't share the blind spots of the main session.
+
+**VM sandbox + working folder**: each Cowork session gets a VM with isolated file system; working folder mount lets Claude persist artifacts between tasks [^src39]. Think of it as a shared desk where the agent leaves work-in-progress for your next visit.
+
+**Interface terminology** [^src39]:
+- **Tasks** (vs Chats): tasks are persistent work items that stay in the sidebar and can be revisited; chats are ephemeral conversations
+- **Working folder**: the persistent artifact store attached to the task
+- **Skills**: biggest productivity multiplier in Cowork; unlock custom workflows beyond the defaults
+- **Connectors**: the integration layer (20+ apps); pair with skills to trigger cross-app workflows
+- **Scheduled tasks**: recurring automations that run in the VM without the user present
+
+## Beginner setup pattern (zero-to-AI-employee)
+
+The fastest path from "blank Cowork" to a useful personal assistant [^src40]:
+
+1. **Install the plugin** (Cowork marketplace → Claude Cowork starter plugin)
+2. **Run `/setup`** — plugin-guided interview that populates projects, voice style guide, and team/role context
+3. **Adopt daily log pattern**: each morning run `/good-morning` (brief on overnight items); each evening run `/wrap-up` (capture what was done, stage tomorrow)
+4. **Project interview workflow**: for each ongoing project, run `/project-interview` to generate a PARA-structured project page the agent uses as context
+
+Recommended model: Claude Sonnet for most Cowork tasks (better speed/cost tradeoff for repetitive workflows); reserve Opus for synthesis or ambiguous tasks [^src40].
+
+## Calendar management with Cowork + Google Calendar Connector
+
+Full calendar management pattern [^src41]:
+
+- **Connector**: Google Calendar via Connectors MCP (read/write events, create, suggest times)
+- **Recommended model**: Sonnet for calendar queries and event reads; Opus only for complex negotiation/synthesis
+- **BOSI framework** (used as planning structure): Blueprint → Organize → Systematize → Automate/delegate → Integrate + iterate
+- **Scheduled daily report**: task that runs each morning → pulls today's + tomorrow's events → formats as 1-page day plan → posts to Notion [^src41]
+- **Voice note to Claude workflow**: record a voice note describing scheduling intent → Claude parses and creates events [^src41]
+- **Approval gate recommended** before any calendar write/mutation — calendar events are hard to undo silently [^src41]
+
+## Small business operations: 31-skill plugin
+
+A complete plugin pattern demonstrating business operations at scale [^src42]:
+
+Includes 31 production skills across: **business pulse** (parallel pull of QuickBooks + Stripe + PayPal + HubSpot → metrics → risk flags → post to Slack/CRM → 1-page summary), **invoice chase** (overdue pull → customer score → tone-matched email → draft + approve + send), **job post builder**, and more.
+
+Connectors wired: QuickBooks, Stripe, PayPal, HubSpot, Google Calendar, Gmail, Slack.
+
+Key patterns [^src42]:
+- **Parallel pull**: fire all connector reads simultaneously before any analysis; cuts total wait time by N× where N is the number of systems
+- **Approval gates before mutations**: business-critical sends (invoices, job posts) require approval; read operations and internal posts (Slack) run without approval
+- **Tone-matched outreach**: customer risk score (from HubSpot purchase history) controls email tone — premium customers get gentle first-contact; long-overdue low-value accounts get firmer language automatically
+
 ## See also
 
 - [[ai-engineering/claude-code|Claude Code]] — the developer counterpart; capabilities land here first
@@ -577,3 +642,7 @@ The download page for the Claude desktop app consolidates: Cowork, Claude Code (
 [^src36]: [Download Claude — claude.ai](../../raw/web/web-download-claude-claude-by-anthropic.md) — Anthropic
 [^src37]: [The Briefing: Enterprise Agents — Anthropic](../../raw/web/web-the-briefing-enterprise-agents-anthropic.md) — Feb 24 2026 virtual event
 [^src38]: [Stop Using Obsidian — SimpleBrain demo (YouTube processed report)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-stop-using-obsidi-report.md)
+[^src39]: [Claude Cowork Tutorial for Beginners — Complete 3-Hour Course](../../raw/youtube/youtube-0UFSZ_5OSIk-claude-cowork-full-course-3-hours-for-beginners-2026.md) — YouTube
+[^src40]: [Zero to AI Employee in 30 Minutes with Claude Cowork](../../raw/youtube/youtube-C9gKWTzRukM-claude-cowork-full-course-zero-to-working-ai-employee-2026.md) — YouTube
+[^src41]: [How I Use Claude to Manage My Entire Google Calendar](../../raw/youtube/youtube-nNjNzF8oL7U-claude-does-calendar-management-heres-how.md) — YouTube
+[^src42]: [31 Claude Skills That Run My Small Business](../../raw/youtube/youtube-zzo33HUOfxI-anthropic-just-dropped-claude-for-small-businesses-31-skills.md) — YouTube

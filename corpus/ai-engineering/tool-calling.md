@@ -12,6 +12,15 @@ sources:
   - path: raw/_inbox/web-programmatic-tool-calling.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/email/email-2026-06-21-agents-in-action-2-how-agents-interact-with-the-real-world.md
+    channel: email
+    ingested_at: 2026-06-25
+  - path: raw/web/web-web-fetch-tool.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/web/web-files-api.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - tool use
   - function calling
@@ -95,6 +104,43 @@ Programmatic tool calling lets Claude write Python code inside a **code executio
 
 [^src3]: [Programmatic tool calling — Anthropic API docs](../../raw/_inbox/web-programmatic-tool-calling.md) — Anthropic
 
+## Writing tool descriptions that actually fire
+
+A practitioner pattern from the "Agents in Action" email series [^src4]:
+
+A tool description must answer three questions for the model:
+1. **What does this do?** — "Returns the row count of a table."
+2. **When should it be used?** — "Use when the user asks about table size or record counts."
+3. **What does it need?** — "Requires the exact table name as a string."
+
+Weak: "Counts rows." Strong: "Returns the number of rows in a database table. Use this whenever the user asks how many records exist, how large a table is, or whether a table has any data. Requires the exact table name." — "The second one tells the model when to reach for it. That single sentence is the difference between a tool that fires correctly and one that sits unused" [^src4].
+
+A clear description also reduces cost: "A clear description helps the model decide quickly, while an unclear description makes it think longer and use more tokens" [^src4].
+
+## Web fetch tool
+
+The web fetch tool (`web_fetch_20260209`) allows Claude to retrieve content from specified URLs and PDFs, with dynamic filtering on supported models [^src5]. Key properties:
+
+- **Dynamic filtering** (v20260209 only, requires code execution enabled): Claude writes and runs code to filter fetched content before it reaches context — reduces token consumption while keeping relevance [^src5]
+- **Security constraint**: can only fetch URLs that have previously appeared in the conversation context (user-provided or from prior search/fetch results); cannot fetch arbitrary Claude-generated URLs [^src5]
+- **Domain controls**: `allowed_domains`, `blocked_domains`, `max_uses`, `max_content_tokens` parameters [^src5]
+- **Supported models**: Fable 5, Opus 4.8, Mythos 5, Mythos Preview, Opus 4.7, Opus 4.6, Sonnet 4.6 [^src5]
+- **Citations**: optional (`"citations": {"enabled": true}`) — unlike web search where citations are always on [^src5]
+- **Pricing**: no additional charges beyond standard token costs for fetched content [^src5]
+
+Common use: pair with web search to first discover URLs then deeply fetch specific pages [^src5].
+
+## Files API
+
+The Files API allows pre-uploading files (PDFs, images, text, datasets) once and referencing them by `file_id` across multiple API requests — avoiding re-upload per call [^src6]. Key details:
+
+- Beta (requires `anthropic-beta: files-api-2025-04-14` header) [^src6]
+- Supported file types: PDFs and plain text → `document` blocks; images → `image` blocks; datasets → `container_upload` (code execution) [^src6]
+- Files persist until explicitly deleted; no ZDR eligibility [^src6]
+- File API operations are free; content counts as input tokens when used in messages [^src6]
+- Only files created by skills or code execution can be downloaded; uploaded files cannot [^src6]
+- Available on Claude API, Claude Platform on AWS, Microsoft Foundry — not on Bedrock or Vertex AI [^src6]
+
 ## Relationship to context engineering
 
 Tool results are one of the four context components injected into an agent's context window after each call. See [[ai-engineering/context-engineering|Context Engineering]].
@@ -109,3 +155,6 @@ Tool results are one of the four context components injected into an agent's con
 
 [^src1]: [[03_Resources/Study Notes/AI Agents - Complete Course Beginner to Pro|AI Agents - Complete Course Beginner to Pro]]
 [^src2]: [Writing Effective Tools for AI Agents](../../raw/web/web-writing-effective-tools-for-ai-agentsusing-ai-agents.md) — Anthropic
+[^src4]: [Agents in Action #2: How Agents Interact with the Real World](../../raw/email/email-2026-06-21-agents-in-action-2-how-agents-interact-with-the-real-world.md) — Pipeline to Insights newsletter
+[^src5]: [Web fetch tool — Claude Platform docs](../../raw/web/web-web-fetch-tool.md) — Anthropic
+[^src6]: [Files API — Claude Platform docs](../../raw/web/web-files-api.md) — Anthropic

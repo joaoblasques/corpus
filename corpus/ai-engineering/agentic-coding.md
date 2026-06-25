@@ -96,6 +96,9 @@ sources:
   - path: raw/youtube/youtube-zPqcS5AvQvQ.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-4JpwNnw0-jI-this-karpathy-system-could-701x-your-ai-workflows-86-000-git.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - agentic coding
   - agentic engineering
@@ -555,6 +558,37 @@ These are bugs that pass the type-checker and appear correct visually but compou
 
 **Reference hardware for local coding** [^src28]: AMD Radeon AI Pro R9 700 (32 GB VRAM), Threadripper 9980X, 128 GB DDR5 RAM, Ubuntu 26.04, llama.cpp with ROCm acceleration. Qwen-3.6-27B fits fully on GPU; Qwen-3-72B uses MoE CPU offload. LM Studio / oobabooga are alternatives to llama.cpp.
 
+## Karpathy auto-research: the 3-file evolutionary system
+
+A structured pattern for agents that run overnight improvement loops without human involvement [^src29].
+
+**The 3-file architecture** [^src29]:
+
+| File | Access | Role |
+|---|---|---|
+| **Instructions** | Locked (human-only edits) | Goals, constraints, success criteria — the "why" |
+| **Asset to optimize** | Agent reads + writes | The thing being improved (prompt, config, code snippet, email) |
+| **Scoring mechanism** | Locked (human-only edits) | Objective measurement of whether iteration N is better than N-1 |
+
+The agent reads the instructions and scoring definition, modifies the asset, runs the score, compares to previous, keeps or reverts. Evolutionary selection loop [^src29].
+
+**Must-haves** for a viable auto-research loop [^src29]:
+- **Objective scoring**: something a machine can compute without human judgment on each iteration. If you need to read the output to decide if it's better, the loop breaks.
+- **Fast feedback**: each iteration completes in minutes, not hours. Hours-per-iteration means overnight runs only return ~8 iterations — not enough signal.
+- **Agent can change the asset**: the agent must be able to modify the thing being optimized, not just observe it.
+
+**Nice-to-haves** [^src29]: high volume (more iterations per run → faster convergence), cheap-to-fail (bad iterations don't cost much if they fail), consistent measuring sticks (the score means the same thing across iterations regardless of external state).
+
+**Applications documented by Karpathy** [^src29]:
+- Coding efficiency: agent rewrites its own prompts to improve benchmark scores
+- Cold email CTR: agent iterates subject lines against an open-rate scorer
+- Website speed: agent modifies JS/CSS bundles targeting Lighthouse score improvement
+- Prompt engineering: the original use case — iterate system prompt text against task evals overnight
+
+**The 701× claim** (from the "Skill Issue" episode, [^src26]): agent found a hyperparameter combination Karpathy had not tried — weight decay on value embeddings + Adam beta tuning — that improved model loss. The agent can search a space humans don't have patience to explore manually.
+
+The auto-research pattern and the 3-file system are an operationalized version of the theoretical loop in [[ai-engineering/spec-driven-development|Spec-Driven Development]]: instructions file = spec, scoring mechanism = automated eval, asset = implementation.
+
 ## See also
 
 - [[ai-engineering/mcp|MCP]] — connecting agents to external systems
@@ -593,3 +627,4 @@ These are bugs that pass the type-checker and appear correct visually but compou
 [^src26]: [Skill Issue: Andrej Karpathy on Code Agents, Auto-Research, and...](../../raw/youtube/youtube-kwSVtQ7dziU-skill-issue-andrej-karpathy-on-code-agents-autoresearch-and.md) — No Priors podcast, YouTube
 [^src27]: [OpenCode with Local LLMs — is it actually viable?](../../raw/youtube/youtube-8f5qWdx9L-Q.md) — YouTube
 [^src28]: [Local AI Coding is Finally Good Enough (YouTube)](../../raw/youtube/youtube-zPqcS5AvQvQ.md) — ForrestKnight (hardware: AMD R9 700 + Threadripper 9980X; models: Qwen-3-72B MoE + Qwen-3.6-27B; codebases: Excalidraw, Warp)
+[^src29]: [Karpathy's Auto-Research System: 3 Files That Change Everything](../../raw/youtube/youtube-4JpwNnw0-jI-this-karpathy-system-could-701x-your-ai-workflows-86-000-git.md) — YouTube

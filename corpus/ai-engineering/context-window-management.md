@@ -15,6 +15,9 @@ sources:
   - path: raw/web/web-using-claude-code-session-management-and-1m-context-claude.md
     channel: web
     ingested_at: 2026-06-23
+  - path: raw/web/web-context-windows.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - context window management
   - context management
@@ -118,6 +121,16 @@ Putting reusable instructions in a skill rather than an always-on `AGENTS.md`/`C
 
 Token efficiency is not only about cost. The source's framing: **"the model will get dumb as the context window closes"** — quality degrades as the window fills [^src2]. Practical target: keep usage roughly between the baseline already consumed by the system prompt (~10%) and ~70%; the closer to 90–100%, the worse the agent performs [^src2]. This is the performance argument (beyond cost) for compaction, sub-agents, and progressive disclosure.
 
+## Context window sizes and capabilities (mid-2026)
+
+Models with 1M-token context: Claude Opus 4.8, Mythos Preview, Opus 4.7, Opus 4.6, Sonnet 4.6, Fable 5, Mythos 5 [^src4]. Fable 5 and Mythos 5 default to 1M max and support up to 128k output tokens per request. Models with 200k context: Sonnet 4.5 and older.
+
+**Context awareness** (Sonnet 4.6, 4.5, Haiku 4.5): these models explicitly receive information about their remaining token budget at conversation start and after each tool call — like a cooking-show clock that lets them allocate effort strategically rather than guessing when they'll run out [^src4].
+
+**Extended thinking tokens**: previous thinking blocks are auto-stripped from the context window calculation between turns — they do not accumulate and count toward the limit [^src4]. The formula is: `context_window = (input_tokens − previous_thinking_tokens) + current_turn_tokens`.
+
+**Server-side compaction (beta)**: automatic summarization and replacement of older context when a conversation approaches a configurable threshold. Available on Fable 5, Mythos 5, Opus 4.8, Mythos Preview, Opus 4.7, 4.6, and Sonnet 4.6 [^src4]. The recommended primary strategy for long-running agentic workloads.
+
 ## See also
 
 - [[ai-engineering/context-engineering|Context Engineering]] — governs how context is assembled at inference time
@@ -130,3 +143,4 @@ Token efficiency is not only about cost. The source's framing: **"the model will
 [^src1]: [[03_Resources/Study Notes/Claude Code - Solving the Memory Problem with Context Engineering|Claude Code - Solving the Memory Problem with Context Engineering]]
 [^src2]: [How AI agents & Claude skills work (Clearly Explained)](<../../raw/youtube/How AI agents & Claude skills work (Clearly Explained).md>) — Greg Isenberg × Ras Mic, YouTube
 [^src3]: [Using Claude Code: session management and 1M context](../../raw/notes/notes-clippings-using-claude-code-session-management-and-1m-context.md) — Thariq Shihipar, Anthropic
+[^src4]: [Context windows — Claude Platform docs](../../raw/web/web-context-windows.md) — Anthropic

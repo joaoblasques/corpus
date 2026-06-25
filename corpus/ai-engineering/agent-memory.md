@@ -72,6 +72,18 @@ sources:
   - path: raw/youtube/youtube-n8rP6Ceskm4-cut-llm-cost-by-95-replace-elevenlabs-and-10-top-github-repo.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-every-level-of-a-report.md
+    channel: notes
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-QbjAQFJJyt0-how-to-build-llm-wiki-in-obsidian-a-memory-layer-for-any-age.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-the-definitive-gu-report.md
+    channel: notes
+    ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-it-s-cognitive-up-report.md
+    channel: notes
+    ingested_at: 2026-06-25
 aliases:
   - agent memory
   - memory
@@ -394,6 +406,70 @@ Matt Wolfe's Codex-built second brain extends the Karpathy architecture into thr
 
 The insight from combining all three: **the journal responses reference wiki knowledge** — so when you write "I keep running into this API pattern," Claude can reference the wiki's page on that pattern and add context, rather than responding from scratch. "The corpus is not just a retrieval layer — it's what anchors the daily loop" [^src17].
 
+## Five levels of AI second brain
+
+A graduated framework for choosing how much memory infrastructure to build [^src22]:
+
+| Level | Retrieval mechanism | When to use |
+|---|---|---|
+| **L1 — CLAUDE.md as router** | Exact-word lookup; CLAUDE.md acts as system prompt + routing table pointing to context/projects/decisions folders | Setup is still confusing; <30 notes |
+| **L2 — LLM wiki** | Karpathy-style concept/source/technique pages with indexes; CLAUDE.md routes to wiki + memory.md | 30+ forgotten notes; routing occasionally works but needs index |
+| **L3 — Semantic / vector search** | Qdrant or similar; organizes by meaning, smart lookup vs keyword match | Routing whiffs; keyword misses conceptually related content |
+| **L4 — Knowledge graph** | LightRAG-style typed entities and relationships; "Jordan→Acme→PostPilot" | Relationship chains; need to traverse graph connections |
+| **L5 — Always-on BrainOS** | G-Brain (Gary Tan/YC): constantly-syncing autonomous memory across sessions | Offline multi-agent sync required; willing to manage complexity |
+
+Key principle: **higher levels aren't better — pick the lowest level that fixes an actual pain point** [^src22]. A single project can mix levels: one folder at L2, another at L3 or L4. The creator of this framework runs "almost his entire HERC-2 project at level 2 because he hasn't felt enough pain to move up" [^src22].
+
+**Reverse-engineer from the question**: how you'll recall data later determines how you should store it now. Vector DBs aren't magic — chunking can miss full context (e.g. "highest sales week" query or summarizing a whole meeting); sometimes a plain markdown file read end-to-end is more accurate [^src22].
+
+**The 4 Cs — what to ingest**: only ingest evergreen "context and connections", not noisy data that changes weekly (Slack/email/CRM). "Your second brain should know where to *go grab* that, not store it" [^src22].
+
+Keep the system tool-agnostic: CLAUDE.md ↔ AGENTS.md so it works across harnesses [^src22].
+
+## Building an LLM Wiki in Obsidian — three-layer architecture
+
+The Wanderloots implementation pattern [^src23]:
+
+1. **Raw layer** — captured source material (clips, transcripts, notes); never modified
+2. **Wiki layer** — extracted concepts, entities, topics, projects; auto-created by agent from raw; each wiki note cites its raw source
+3. **Schema/agentic layer** — `agents.md` (constitution for the vault), templates, skills, command docs; the contract between you and the agent
+
+Setup requires: Python (repeatable scripts, save tokens), Git (save points; essential when agents modify vault), Obsidian, a coding agent (Codex or equivalent), and optionally a local model for free/private operation [^src23].
+
+**Three core skills built into the vault** [^src23]:
+- `ingest` — process new raw files into wiki
+- `maintain` (lint) — validate front matter, links, check structure after changes
+- `query` — pull answers from index and catalog, opening only relevant pages (more efficient than RAG chunk retrieval)
+
+**Non-negotiable rules in `agents.md`** [^src23]: don't overwrite raw source material; use Obsidian wiki-linking format (`[[...]]`); consistent front matter per schema; use templates for every note type.
+
+The schema decouples naming conventions from content — update the schema, and all future notes conform automatically without touching existing ones [^src23].
+
+## Cognitive uploading vs offloading (NotebookLM / Steven Johnson)
+
+A distinction that reframes what "using AI as a second brain" means [^src25]:
+
+- **Cognitive offloading**: moving thinking out of your head into a system (classic Zettelkasten, writing things down to free mental RAM)
+- **Cognitive uploading**: moving *existing knowledge, notes, and context* into an AI that can then reason over it and surface connections you didn't see
+
+Steven Johnson's use of NotebookLM exemplifies uploading: 180 sources loaded into a single notebook; the AI can cross-reference them, generate interview questions, and surface structural patterns across the corpus. "Inverted search" — asking what's missing, not just what's there — requires the full corpus to be accessible [^src25].
+
+**Honest caveat** (from the source): cognitive uploading "makes faking understanding easier." A student loading a textbook into a notebook has access to answers but not to the struggle that builds genuine comprehension. Acknowledging this tradeoff is part of using the pattern responsibly [^src25].
+
+**The notebook as a portable knowledge unit** [^src25]: a well-curated notebook (180 sources, structured) is a knowledge artifact you can hand to another AI, another person, or a future version of yourself as a context drop. "NotebookLM notebooks are more like a colleague who has read your sources than a search engine over them."
+
+## Three-brain framework
+
+A conceptual model for understanding AI collaboration [^src24]:
+
+- **Human brain**: judgement, taste, thinking, experiences, curating
+- **AI brain**: scale, pattern-matching, generation  
+- **Shared second brain** (context layer): the mediator that lets the two work together (`thinking ← context → doing`)
+
+Built in Obsidian on plain markdown files, drawing on metacognition, GTD, and Zettelkasten atomic notes. The "split in Obsidian" organizing move: keep human-authored thinking and AI-generated context separable [^src24].
+
+**Anatomy of a note**: title (distills one atomic idea), body, source links, related-note links [^src24].
+
 ## See also
 
 - [[ai-engineering/context-window-management|Context Window Management]] — strategies for what to keep, compress, or drop from short-term memory
@@ -428,3 +504,7 @@ The insight from combining all three: **the journal responses reference wiki kno
 [^src19]: [I Built The Best Claude Memory System (Beats Hermes)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-i-built-the-best-report.md) — YouTube (processed report)
 [^src20]: [Stop Using Obsidian. This Simple Second Brain Setup Actually Works](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-stop-using-obsidi-report.md) — YouTube (processed report), Chris Ashby
 [^src21]: [Claude Code + Karpathy's Obsidian: The New Meta](../../raw/youtube/youtube-eglVxLaWRUU-claude-code-karpathy-s-obsidian-new-meta.md) — YouTube
+[^src22]: [Every Level of a Claude Second Brain Explained](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-every-level-of-a-report.md) — YouTube (processed report)
+[^src23]: [How To Build LLM Wiki In Obsidian](../../raw/youtube/youtube-QbjAQFJJyt0-how-to-build-llm-wiki-in-obsidian-a-memory-layer-for-any-age.md) — Wanderloots, YouTube
+[^src24]: [The Definitive Guide to Setting Up Your AI Second Brain](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-the-definitive-gu-report.md) — YouTube (processed report)
+[^src25]: [It's Cognitive Uploading, Not Offloading — NotebookLM / Steven Johnson](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-it-s-cognitive-up-report.md) — YouTube (processed report)

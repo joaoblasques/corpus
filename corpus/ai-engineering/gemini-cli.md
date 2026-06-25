@@ -6,6 +6,9 @@ sources:
   - path: raw/_inbox/github-addyosmani-gemini-cli-tips.md
     channel: github
     ingested_at: 2026-06-25
+  - path: raw/github/github-eliasecchig-gemini-cli-git.md
+    channel: github
+    ingested_at: 2026-06-25
 aliases:
   - Gemini CLI
   - gemini-cli
@@ -101,6 +104,27 @@ Tool approval: Gemini CLI prompts for tool approval on first use in a session; a
 
 The conceptual parallels are close enough that practitioners use both tools: Gemini CLI for tasks using Google Workspace connectors (Google Docs, Sheets, Drive) and Claude Code for everything else [^src1].
 
+## gemini-cli-git — Git as a self-improving agent backend
+
+A companion project that turns a Git repository into an autonomous, self-improving agent using Gemini CLI and GitHub Actions [^src2].
+
+**The core idea**: Git events (open issue, PR comment, merge to main) become the task queue. The agent reads the event, acts, pushes back [^src2]:
+
+| Git event | Agent action |
+|---|---|
+| Issue opened | Auto-assigned to Gemini; agent reads → implements → opens PR |
+| PR comment | Agent reads feedback → revises code → updates PR |
+| PR merged to main | Agent learns from the merge; updates its own `AGENTS.md` learnings file |
+
+**Three work modes** [^src2]:
+1. **Scheduled**: cron-triggered prompt (check issues, triage, draft solutions)
+2. **On-demand**: `@gemini` mention in issue body or PR comment triggers immediate action
+3. **Iterative**: back-and-forth PR review conversation until the reviewer approves
+
+**Why this matters**: the merge-to-learn pattern closes a feedback loop that most coding agents leave open — every accepted change teaches the agent something (the learnings file is its persistent memory of "this is what the team actually approves"). [^src2]
+
+Functionally equivalent to the "merge as teaching event" pattern discussed in [[ai-engineering/spec-driven-development|Spec-Driven Development]].
+
 ## See also
 
 - [[ai-engineering/claude-code|Claude Code]] — primary comparison; parallel architecture
@@ -113,3 +137,4 @@ The conceptual parallels are close enough that practitioners use both tools: Gem
 ---
 
 [^src1]: [addyosmani/gemini-cli-tips — ~30 power-user tips for Gemini CLI](../../raw/_inbox/github-addyosmani-gemini-cli-tips.md) — Addy Osmani, GitHub ★2,382
+[^src2]: [eliasecchig/gemini-cli-git — Turn your Git repo into a self-improving autonomous agent](../../raw/github/github-eliasecchig-gemini-cli-git.md) — GitHub

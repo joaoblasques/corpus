@@ -60,6 +60,12 @@ sources:
   - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-claude-code-s-new-report.md
     channel: notes
     ingested_at: 2026-06-25
+  - path: raw/web/web-multiagent-sessions.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-ehg4fhydTgs-how-to-build-24-7-claude-agents-easy.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - Claude Managed Agents
   - Managed Agents
@@ -279,6 +285,49 @@ As of mid-2026, the CMA waitlist page [^src16] lists two limited research-previe
 
 Standard Claude Platform token rates + **$0.08 per session-hour** of active runtime [^src1].
 
+## Multiagent sessions (Managed Agents API)
+
+The multiagent API layer for coordinating networks of agents in a session [^src17]:
+
+**Architecture** [^src17]:
+- **Coordinator**: one controlling agent that manages the session; max 1 level of depth (coordinators cannot spawn coordinators)
+- **Roster**: up to 20 uniquely named agents (pinned to specific model versions) per session; each agent maintains an isolated context window
+- **Threads**: communication channels between coordinator and roster agents; max 25 concurrent threads active at once
+- **Shared resources**: agents in a session share filesystem access and vault credentials; each gets its own context window
+
+**MCP and credentials scoping** [^src17]:
+- MCP servers are scoped per agent (each agent gets its own MCP configuration)
+- Vault credentials are scoped per session (all agents in a session share the same OAuth tokens)
+
+**Event stream** (for cross-thread visibility) [^src17]:
+- `session.thread_created` — a thread started
+- `session.thread_status_changed` — thread state transition (idle/active/completed/failed)
+- `agent.thread_message_received` / `agent.thread_message_sent` — for monitoring individual agent I/O
+
+**Cross-thread communication for blocking** [^src17]: when an agent needs human approval or coordinator input, it posts to the primary thread (visible to the user) rather than staying in its own thread. The event `session.thread_status_changed` with `blocking` status signals that a thread is waiting for input.
+
+**Thread persistence** [^src17]: unlike subagents, threads are persistent within a session — the coordinator can return to a thread started 30 minutes earlier to follow up, without re-creating context.
+
+## Cloud Routines — limits and constraints
+
+Platform limits for scheduled Routines (cloud-hosted prompts without a running machine) [^src18]:
+
+| Plan | Runs/day | Infrastructure |
+|---|---|---|
+| Pro | 5 | Anthropic cloud |
+| Max | 15 | Anthropic cloud |
+| Team / Enterprise | 25 | Anthropic cloud |
+
+**Resources per run** [^src18]: 4 vCPUs, 16GB RAM, 30GB disk. Repo is cloned fresh; filesystem is destroyed at run completion.
+
+**Statefulness** [^src18]: Routines are stateless between runs (no session memory carries forward). Git commits made during a run persist in the connected repository; everything else is ephemeral. Branches persist; the cloud environment is destroyed.
+
+**Network access** [^src18]:
+- **Trusted**: access to a vetted set of Anthropic-approved domains only (safe for most use cases)
+- **Full**: unrestricted network access (risk: a compromised or manipulated prompt could exfiltrate data); choose trusted for compliance-sensitive workloads
+
+**What Routines can't do** [^src18]: access browser cookies (stateless), read local files, use OS-specific tools, or run indefinitely (each run has a time limit).
+
 ## See also
 
 - [[ai-engineering/mcp|MCP]] — agents connect to external systems via MCP; Vaults handle OAuth credentials per session
@@ -306,3 +355,5 @@ Standard Claude Platform token rates + **$0.08 per session-hour** of active runt
 [^src14]: [Run Claude Managed Agents on Daytona](../../raw/web/web-run-claude-managed-agents-on-daytona.md) — Anthropic
 [^src15]: [Claude Code's NEW Open Source Repo Builds Effective AI Agents in MINUTES!](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-claude-code-s-new-report.md) — YouTube (processed report)
 [^src16]: [Claude Managed Agents — Claude by Anthropic (waitlist page)](../../raw/web/web-claude-managed-agents-claude-by-anthropic.md) — Anthropic
+[^src17]: [Multiagent sessions — Managed Agents API docs](../../raw/web/web-multiagent-sessions.md) — Anthropic
+[^src18]: [24/7 Claude Agents and Routines — Scheduling Deep Dive](../../raw/youtube/youtube-ehg4fhydTgs-how-to-build-24-7-claude-agents-easy.md) — YouTube

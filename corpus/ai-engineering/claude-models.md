@@ -63,6 +63,12 @@ sources:
   - path: raw/email/email-2026-06-19-testing-mythos-and-fable-moving-beyond-swe-bench-nvidia-s-op.md
     channel: email
     ingested_at: 2026-06-25
+  - path: raw/web/web-claude-opus-4-6.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/web/web-context-windows.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - Claude model lineup
   - Claude models
@@ -71,6 +77,7 @@ aliases:
   - Fable 5
   - Mythos 5
   - Sonnet 4.6
+  - Opus 4.6
   - Haiku
 tags:
   - corpus/ai-engineering
@@ -197,6 +204,33 @@ Two weeks with Fable 5 surfaced a pattern shift in how to work with the model [^
 
 **"Verify the right work, not that the work is right."** The critical reframe: the human's job when using Fable is not to check whether each step was executed correctly (the model does that), but to verify that the *task itself* was worth doing — that the loop is producing the right outputs for the right problems. This connects to [[productivity/ai-augmented-knowledge-work|loop engineering]] and the verification-as-design discipline [^src11], and is the human-altitude case of [[ai-engineering/generator-evaluator-separation|generator–evaluator separation]] — once the model self-checks each step, the human evaluator relocates to the task level [^src11].
 
+## Opus 4.6
+
+Claude Opus 4.6 is Anthropic's strongest model as of late June 2026, positioned for high-stakes agentic work, long-context retrieval, and expert-domain reasoning [^src19].
+
+**Highlights**:
+- **Highest Terminal-Bench 2.0** score among all frontier models (agentic coding evaluation) [^src20]
+- **Humanity's Last Exam**: leads all frontier models (53.0% with tools, domain-blocklist decontaminated) [^src20]
+- **GDPval-AA**: outperforms GPT-5.2 by ~144 Elo points, Opus 4.5 by 190 points (finance, legal, knowledge-work) [^src20]
+- **BrowseComp**: best score for locating hard-to-find information online [^src20]
+- **MRCR v2 (8-needle 1M)**: 76% vs Sonnet 4.5's 18.5% — "a qualitative shift in how much context a model can actually use while maintaining peak performance" [^src20]
+- **Context rot**: markedly better than predecessors on long-context degradation [^src20]
+- **1M token context (beta)**: first Opus-class model with 1M context; premium pricing for >200k tokens ($10/$37.50 per M input/output) [^src20]
+- **128k output tokens** — complete large-output tasks in a single pass [^src20]
+
+**Agentic capabilities** [^src20]:
+- "Breaks complex tasks into independent subtasks, runs tools and subagents in parallel, and identifies blockers with real precision"
+- In a 40-case blind cybersecurity ranking vs Claude 4.5 models (up to 9 subagents, 100+ tool calls each), Opus 4.6 won 38/40 [^src20]
+- Autonomously closed 13 issues and assigned 12 to team members in one day, managing a ~50-person org across 6 repositories [^src20]
+
+**API / Platform additions at Opus 4.6 launch** [^src20]:
+- **Adaptive thinking** — model dynamically allocates thinking when useful (default effort: `high`); four effort levels: `low`, `medium`, `high`, `max`
+- **Context compaction (beta)** — server-side auto-summarization at a configurable threshold; see [[ai-engineering/context-window-management|Context Window Management]]
+- **Agent teams in Claude Code (research preview)** — multiple subagents working in parallel on independent, read-heavy tasks; navigate with Shift+Up/Down or tmux
+- **Claude in PowerPoint (research preview)** — reads layouts, fonts, slide masters; available on Max/Team/Enterprise
+
+**Pricing**: $5/$25 per million input/output tokens (unchanged from Opus 4.5). Available on claude.ai, API, all major cloud platforms; model ID `claude-opus-4-6` [^src20].
+
 ## Web search model support
 
 Web search (and web fetch) is available on the following models as of mid-2026 [^src16]:
@@ -303,3 +337,4 @@ See also [[ai-engineering/anthropic|Anthropic]] for the export control and AI so
 [^src17]: [Claude Haiku — claude.ai product page](../../raw/web/web-claude-haiku.md) — Anthropic
 [^src18]: [Migration guide — Claude API](../../raw/web/web-migration-guide.md) — Anthropic
 [^src19]: [Testing Mythos and Fable — The Batch (DeepLearning.AI)](../../raw/email/email-2026-06-19-testing-mythos-and-fable-moving-beyond-swe-bench-nvidia-s-op.md) — DeepLearning.AI
+[^src20]: [Introducing Claude Opus 4.6](../../raw/web/web-claude-opus-4-6.md) — Anthropic official blog

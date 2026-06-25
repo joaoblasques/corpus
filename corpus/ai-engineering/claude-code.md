@@ -129,6 +129,18 @@ sources:
   - path: raw/youtube/youtube-Bn7YX_RfAt0-best-ai-agent-tools-in-2026-beginner-friendly.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/web/web-automate-actions-with-hooks-claude-code-docs.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/web/web-how-and-when-to-use-subagents-in-claude-code-claude.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/web/web-multiagent-sessions.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/web/web-run-prompts-on-a-schedule-claude-code-docs.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - Claude Code
   - claude-code
@@ -742,6 +754,104 @@ A direct head-to-head comparison of Claude Code vs n8n vs Base44 for a business-
 
 Lesson: Claude Code is a developer tool. Non-technical users building apps without coding context are better served by dedicated no-code builders [^src36]. Claude Code's advantage is in tasks that combine coding, file manipulation, external API integration, and arbitrary automation in one session.
 
+## Hooks (lifecycle automation)
+
+Hooks let you run code (shell commands, HTTP endpoints, LLM prompts, or subagents) at specific points in Claude Code's lifecycle [^src37].
+
+**Hook event table (selected)** [^src37]:
+
+| Event | Fires when |
+|---|---|
+| `SessionStart` | Session begins/resumes (incl. compact) |
+| `PreToolUse` | Before a tool call — can block |
+| `PostToolUse` | After a tool call succeeds |
+| `PermissionRequest` | Permission dialog would appear |
+| `Stop` | Claude finishes responding |
+| `Notification` | Claude sends a notification |
+| `SubagentStart` / `SubagentStop` | Subagent spawns / finishes |
+| `ConfigChange` | A settings or skills file changes |
+| `InstructionsLoaded` | CLAUDE.md or rules file loads |
+| `PreCompact` / `PostCompact` | Before/after context compaction |
+| `WorktreeCreate` / `WorktreeRemove` | Worktree lifecycle |
+
+**Hook types** [^src37]: `command` (default — shell), `http` (POST to URL), `mcp_tool` (call MCP tool), `prompt` (single-turn LLM via Haiku by default), `agent` (multi-turn with tool access, 60s timeout, 50 tool turns).
+
+**Decision protocol** [^src37]:
+- Exit 0: no objection, proceed normally
+- Exit 2: block the action (stderr goes to Claude as feedback)
+- Exit 0 + JSON: structured control — `{"decision": "allow" | "deny" | "ask"}` for `PreToolUse`, `{"decision": "block"}` for `Stop`/`PostToolUse`
+- Most-restrictive wins when multiple hooks match the same event
+
+**Key patterns** [^src37]:
+- Desktop notification when Claude is idle: `Notification` hook → `osascript` (macOS)
+- Auto-format after edits: `PostToolUse` with `Edit|Write` matcher → Prettier
+- Block edits to protected files (`.env`, `package-lock.json`): `PreToolUse` hook exits 2
+- Re-inject context after compaction: `SessionStart` with `compact` matcher → `echo` to stdout
+- Auto-approve a specific permission prompt: `PermissionRequest` hook returns `{"behavior": "allow"}`
+- Prevent stop until tests pass: `Stop` hook runs test suite, returns `{"decision": "block"}` if failing
+
+**Hook scope** [^src37]: hooks in `~/.claude/settings.json` apply to all projects; hooks in `.claude/settings.json` are project-level (committable); hooks in `.claude/settings.local.json` are project-local (gitignored); managed policy settings are org-wide.
+
+**Security note**: `PreToolUse` hooks run before permission-mode checks. A `deny` hook blocks even in `bypassPermissions` mode. An `allow` hook does not bypass deny rules from settings.
+
+## Subagents — practical guide
+
+Subagents are isolated Claude instances with their own context window that handle a task and return only the result [^src38].
+
+**When to use subagents** [^src38]:
+1. **Context isolation** — gathering context requires reading dozens of files; the synthesized finding returns instead of raw content
+2. **Parallelism** — sub-tasks have no dependencies; three parallel subagents generally finish faster than one sequential pass
+3. **Unbiased review** — the subagent starts fresh, without the assumptions or blind spots accumulated in the main conversation
+4. **Verification** — independent review catches issues that familiarity with the code might obscure
+5. **Sequential phases** — design → implement → test; each subagent gets focused attention without noise from other phases
+
+Rule of thumb: 10+ files to explore, or 3+ independent work items → strong signal for subagents [^src38].
+
+**Invocation methods** [^src38]:
+- Natural language in any Claude Code interface ("Use parallel subagents to…")
+- Custom subagent definitions in `.claude/agents/` (project) or `~/.claude/agents/` (user) — each is a markdown file with `name`, `description`, `tools`, and `model` in frontmatter; created with `/agents`
+- CLAUDE.md rules that trigger subagent patterns automatically
+- Skills that orchestrate subagents via `/deep-review`-style workflows
+- Hooks that spawn subagents at lifecycle events (most automated)
+
+**Custom subagent structure** (key field: `description`) [^src38]:
+```yaml
+---
+name: security-reviewer
+description: Reviews code changes for security vulnerabilities,
+  injection risks, auth issues. Use proactively before commits
+  touching auth, payments, or user data.
+tools: Read, Grep, Glob
+model: sonnet
+---
+```
+The `description` is what Claude reads to decide when to delegate — "Reviews code for security issues before commits" routes better than "security expert."
+
+**Background subagent**: press `Ctrl+B` to send a running subagent to the background; use `/tasks` to see background tasks [^src38].
+
+**Multiagent sessions (Managed Agents API)**: coordinator + roster pattern where threads are persistent (coordinator can follow up with a subagent from an earlier turn), max 25 concurrent threads, 20 unique agents per roster; session-level event stream provides a condensed view of all thread activity [^src39].
+
+## Scheduling — options comparison
+
+Three ways to schedule recurring or one-off prompts in Claude Code [^src40]:
+
+| | Cloud Routines | Desktop Scheduled Tasks | `/loop` |
+|---|---|---|---|
+| Runs on | Anthropic cloud | Your machine | Your machine |
+| Machine must be on | No | Yes | Yes |
+| Session required | No | No | Yes (session-scoped) |
+| Persistent across restarts | Yes | Yes | Only with `--resume` |
+| Local file access | No (fresh GitHub clone) | Yes | Yes |
+| MCP servers | Connectors per task | Config files | Inherits from session |
+| Min interval | 1 hour | 1 minute | 1 minute |
+| Limits (Max plan) | 15 runs/day | — | — |
+
+**Routines (cloud)** [^src40]: define a GitHub repo + prompt; Claude Code clones the repo, reads `CLAUDE.md`, executes, then destroys the clone. API keys go in environment variables (not `.env`). Good for stateless one-shot automations; bad for browser-cookie-dependent flows (stateless). Network access: `trusted` (vetted Anthropic domains) or `full` (risk: prompt injection could exfiltrate data).
+
+**`/loop`** [^src40]: sessions-scoped recurring prompt. Without a prompt, uses the built-in maintenance prompt (tend unfinished work, PR comments, CI failures, cleanup passes). Dynamic interval mode: Claude chooses delay based on what it observes (short when active, longer when idle). Tasks expire after 7 days. Customize with `~/.claude/loop.md` or `.claude/loop.md`.
+
+See also [[ai-engineering/agent-harness|Agent Harness]] for the broader scheduling context.
+
 ## See also
 
 - [[ai-engineering/sources/boris-cherny-100-percent-claude-code|Boris Cherny — 100% Claude Code]] — the full interview source page
@@ -786,3 +896,7 @@ Lesson: Claude Code is a developer tool. Non-technical users building apps witho
 [^src34]: [anthropic/claude-cookbooks — Claude API recipes (★45,788)](../../raw/github/github-anthropics-claude-cookbooks.md) — Anthropic, GitHub
 [^src35]: [Download Claude — claude.ai](../../raw/web/web-download-claude-claude-by-anthropic.md) — Anthropic
 [^src36]: [Best AI Agent Tools in 2026 (Beginner-Friendly)](../../raw/youtube/youtube-Bn7YX_RfAt0-best-ai-agent-tools-in-2026-beginner-friendly.md) — Mikey No Code, YouTube
+[^src37]: [Automate actions with hooks — Claude Code docs](../../raw/web/web-automate-actions-with-hooks-claude-code-docs.md) — Anthropic
+[^src38]: [How and when to use subagents in Claude Code](../../raw/web/web-how-and-when-to-use-subagents-in-claude-code-claude.md) — Anthropic
+[^src39]: [Multiagent sessions — Managed Agents API docs](../../raw/web/web-multiagent-sessions.md) — Anthropic
+[^src40]: [Run prompts on a schedule — Claude Code docs](../../raw/web/web-run-prompts-on-a-schedule-claude-code-docs.md) — Anthropic

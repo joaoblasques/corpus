@@ -87,6 +87,15 @@ sources:
   - path: raw/web/web-anthropic-courses.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/github/github-buildermethods-agent-os.md
+    channel: github
+    ingested_at: 2026-06-25
+  - path: raw/github/github-zazencodes-agent-skills.md
+    channel: github
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-zzo33HUOfxI-anthropic-just-dropped-claude-for-small-businesses-31-skills.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - agent skills
   - Claude skills
@@ -534,6 +543,46 @@ The "Ponytail comment" documents what was considered and why each rung was skipp
 
 This is the same "process over prose" insight as the SDLC skills section above: the constraint (YAGNI) is already in the model's training, but the skill forces the agent to apply it at the right moment via a structured decision ladder rather than letting it rationalize around it [^src23][^src5].
 
+## Agent OS (buildermethods) — injecting codebase standards as skills
+
+Agent OS is a framework for spec-driven development that injects codebase standards into agent context [^src28]. Stars: 4,934+.
+
+Core capabilities [^src28]:
+- **Discover** — auto-discovers your codebase's standards, conventions, and patterns
+- **Deploy** — surfaces the right standards to the agent at the right moment (progressive disclosure via skills)
+- **Shape** — guides agents to write better specs before implementation starts ("spec-driven development")
+- **Index Standards** — maintains a navigable index of all project conventions
+
+The central insight: most agent failure modes aren't model quality failures, they're "the model didn't know the rules" failures — hallucinating conventions, writing inconsistent tests, using a deprecated pattern that hasn't been removed yet. Agent OS addresses this by making the standards themselves an agent-queryable resource [^src28].
+
+See [[ai-engineering/spec-driven-development|Spec-Driven Development]] for the broader pattern.
+
+## ZazenCodes agent-skills monorepo — cross-tool skill sharing
+
+A community-maintained monorepo for sharing skills across multiple coding agents (Claude Code, Codex, Copilot, Cursor, Gemini) via symlinks [^src29].
+
+Architecture:
+- `~/.agents/skills/` is the canonical skill store
+- Agent-specific directories (`~/.claude/skills/`, `~/.codex/skills/`, etc.) are symlinks back to the canonical store
+- `setup_symlinks.py` creates the symlink mesh on first install
+- One edit to the canonical skill propagates to all agent environments automatically
+
+Skills in the monorepo include: `llm-wiki` (corpus/wiki management), `deep-code-review`, `refactor-module`, `summarize-pr`, and tool-specific skills for each supported agent [^src29].
+
+## Small business skills plugin — bundled workflow pattern
+
+A published plugin demonstrating that plugins = bundles of skills for a specific use case [^src30]. The "31 skills" plugin targets small business operations and includes: business pulse, invoice chase, job post builder, and similar workflows — all wired to Connectors (QuickBooks, Stripe, PayPal, HubSpot, Google Calendar, Gmail, Slack).
+
+Key patterns from this plugin [^src30]:
+- **Parallel pull**: multiple connector data sources pulled in parallel; merged before analysis
+- **Approval gates**: dangerous actions (invoice emails, calendar mutations) wait for human approval before execution
+- **Business pulse skill**: parallel pull → metrics computation → risk flagging → post to Slack/CRM → 1-page summary
+- **Invoice chase skill**: overdue pull → customer scoring → tone-matched email generation → draft+approve+send
+
+The plugin demonstrates the scalable pattern: skills handle business logic; connectors handle integrations; approval gates handle risk; the "plugin" is just a collection of cohesive skills presented as an installable unit.
+
+See [[ai-engineering/claude-cowork|Claude Cowork]] where plugins install directly and run as scheduled tasks.
+
 ## See also
 
 - [[ai-engineering/context-window-management|Context Window Management]] — why a lean window matters; sub-agents
@@ -577,3 +626,6 @@ This is the same "process over prose" insight as the SDLC skills section above: 
 [^src25]: [Claude Skills: Everything You Need to Know About Claude Skills](../../raw/youtube/youtube-P4rv9RSM1IE-claude-skills-everything-you-need-to-know-about-claude-skill.md) — Nicole AI, YouTube
 [^src26]: [How to Make AI Write in YOUR Voice (Claude Skill Tutorial)](../../raw/youtube/youtube-C1snRnGbNRM-how-to-make-ai-write-in-your-voice-claude-skill-tutorial.md) — The Nerdy Novelist, YouTube
 [^src27]: [Anthropic Courses — Introduction to Agent Skills](../../raw/web/web-anthropic-courses.md) — Anthropic (Skilljar)
+[^src28]: [buildermethods/agent-os — inject codebase standards for spec-driven development (★4934)](../../raw/github/github-buildermethods-agent-os.md) — buildermethods, GitHub
+[^src29]: [zazencodes/agent-skills — cross-tool skill sharing via symlinks](../../raw/github/github-zazencodes-agent-skills.md) — ZazenCodes, GitHub
+[^src30]: [31 skills small business plugin — parallel pull, approval gates, Connectors](../../raw/youtube/youtube-zzo33HUOfxI-anthropic-just-dropped-claude-for-small-businesses-31-skills.md) — YouTube
