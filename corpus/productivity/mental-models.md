@@ -136,6 +136,8 @@ Connects to [[productivity/mental-models|Circle of Competence]]: both models ask
 
 All five models frame judgment — knowing limits, simulating outcomes, seeing what abstractions hide, checking reasoning chains — as the durable human contribution as AI absorbs execution. See [[productivity/ai-augmented-knowledge-work|AI-Augmented Knowledge Work]] and [[productivity/shipping-and-scope|Shipping and Scope]] for where this judgment gets applied.
 
+For the *formal* foundation of rational choice under uncertainty — utility theory, Bayesian beliefs, and when strategic interdependence changes the logic — see [[productivity/decision-making|Decision Making]].
+
 ---
 
 [^src1]: [Circle of Competence - Mental Model](../../raw/email/email-2026-05-28-circle-of-competence-mental-model.md)

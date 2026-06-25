@@ -6,6 +6,12 @@ sources:
   - path: raw/notes/00-02-git-and-collaboration-kb.md
     channel: notes
     ingested_at: 2026-06-09
+  - path: raw/youtube/youtube-Uszj_k0DGsg-git-for-professionals-tutorial-tools-concepts-for-mastering.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-pJYOG6klqj8-the-only-github-guide-youll-ever-need.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - git
   - Git
@@ -15,7 +21,7 @@ tags:
   - corpus/mlops
   - entity
 created: 2026-06-09
-updated: 2026-06-09
+updated: 2026-06-25
 ---
 
 # Git
@@ -65,12 +71,77 @@ When large files genuinely *should* be versioned (datasets, golden eval sets), t
 - **Force-pushing a shared branch** → rewrites history; collaborators diverge silently. Use `--force-with-lease` for solo branches only; never for shared ones [^src1].
 - **`git add .` after a training run** → silently stages every checkpoint/output/cache. Stage explicitly or `git status` first [^src1].
 
+## Branching strategies (intermediate)
+
+Two spectrum extremes [^src2]:
+
+| Strategy | Branches | Cadence | Requires |
+|---|---|---|---|
+| **Always be integrating** (trunk-based) | Single main; tiny frequent commits | Constant | Top-notch CI + test coverage |
+| **Multi-branch** (GitFlow-style) | main + develop + feature + release + hotfix | Batched releases | More process overhead |
+
+### Long-running vs. short-lived branches [^src2]
+
+- **Long-running**: exist for the full project lifecycle (main, develop, staging, production). Commits added only via merge/rebase — never directly.
+- **Short-lived**: feature, bugfix, refactor, experiment. Created from a long-running branch; merged back and deleted.
+
+### GitHub Flow (lean) [^src2]
+
+Single long-running branch (`main`) + one short-lived branch per feature/fix:
+1. Branch off main
+2. Commit and push
+3. Open Pull Request → review → CI → merge
+4. Delete branch
+
+### Git Flow (structured) [^src2]
+
+- `main` = current production state
+- `develop` = integration branch; feature branches merge here
+- `release` branches cut from develop; merge to both main and develop
+- `hotfix` branches cut from main; merge to both main and develop
+
+## Crafting the perfect commit
+
+Three-part discipline [^src2]:
+
+1. **Right changes**: one topic per commit; use `git add -p` (patch mode) to stage individual hunks — not whole files
+2. **Right message**: subject line <80 chars, imperative mood; body answers *what changed*, *why*, *anything to watch out for*
+3. **Good history**: readable `git log` is the payoff — future-you and teammates can audit decisions
+
+```bash
+# Stage only the first hunk of a file (not the whole file)
+git add -p index.html    # y=include, n=skip for each hunk
+
+# Full commit with body
+git commit               # opens $EDITOR; subject + blank line + body
+```
+
+> "If you have trouble writing something short and concise, this might be an indication that you've put too many different topics into that commit." [^src2]
+
+## GitHub concepts (beginner reference)
+
+From a beginner-oriented guide [^src3]:
+
+- **Repository** = the project folder in the cloud (version-controlled)
+- **Star** = bookmark/like on a public repo
+- **Fork** = copy a repo into your GitHub profile; you can modify independently and send PRs back
+- **Clone** = download a repo locally; `git clone <url>`
+- **Push** = upload local commits to GitHub; requires SSH key authentication
+- **Pull Request (PR)** = propose changes from your fork/branch into the upstream repo
+- **Mono repo** = single repository for all of an app's code
+- **Poly repo** = multiple repositories, one per sub-system (front-end, back-end, payments, etc.); enables granular access control and faster partial deployments
+
+SSH key is the recommended authentication method — access tokens are possible but require more management [^src3].
+
 ## See also
 
 - [[mlops/dev-environment-stack|Dev Environment Stack]] — Git is a Layer-1 system-foundation tool
 - [[mlops/cli-tools|CLI Tools]] — the GitHub CLI (`gh`), `pass` (git-backed secrets), and `delta` (git diffs) build on Git
+- [[mlops/ci-cd-for-ml|CI/CD for ML]] — Git Flow + branch protection + GitHub Actions integration
 - [[mlops/README|MLOps hub]]
 
 ---
 
 [^src1]: [AI Engineering from Scratch — Phase 00 / 02 Git & Collaboration](../../raw/notes/00-02-git-and-collaboration-kb.md)
+[^src2]: [Git for Professionals Tutorial — Tools & Concepts for Mastering Version Control (Tobias Günther / freeCodeCamp.org)](../../raw/youtube/youtube-Uszj_k0DGsg-git-for-professionals-tutorial-tools-concepts-for-mastering.md) — [01:29](../../raw/youtube/youtube-Uszj_k0DGsg-git-for-professionals-tutorial-tools-concepts-for-mastering.md#t=89) perfect commit; [04:23](../../raw/youtube/youtube-Uszj_k0DGsg-git-for-professionals-tutorial-tools-concepts-for-mastering.md#t=263) git add -p; [08:09](../../raw/youtube/youtube-Uszj_k0DGsg-git-for-professionals-tutorial-tools-concepts-for-mastering.md#t=489) branching strategies; [11:51](../../raw/youtube/youtube-Uszj_k0DGsg-git-for-professionals-tutorial-tools-concepts-for-mastering.md#t=711) long-running vs short-lived; [15:07](../../raw/youtube/youtube-Uszj_k0DGsg-git-for-professionals-tutorial-tools-concepts-for-mastering.md#t=907) GitHub Flow
+[^src3]: [The Only GitHub Guide You'll Ever Need (corbin)](../../raw/youtube/youtube-pJYOG6klqj8-the-only-github-guide-youll-ever-need.md) — [01:44](../../raw/youtube/youtube-pJYOG6klqj8-the-only-github-guide-youll-ever-need.md#t=104) version control; [03:28](../../raw/youtube/youtube-pJYOG6klqj8-the-only-github-guide-youll-ever-need.md#t=208) collaboration; [06:09](../../raw/youtube/youtube-pJYOG6klqj8-the-only-github-guide-youll-ever-need.md#t=369) fork; [12:38](../../raw/youtube/youtube-pJYOG6klqj8-the-only-github-guide-youll-ever-need.md#t=758) SSH key; [07:27](../../raw/youtube/youtube-pJYOG6klqj8-the-only-github-guide-youll-ever-need.md#t=447) poly repo

@@ -6,16 +6,24 @@ sources:
   - path: raw/email/email-2025-07-28-introduction-to-mlops.md
     channel: email
     ingested_at: 2026-06-19
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-devops-from-zero-report.md
+    channel: notes
+    ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-i-wasted-2-years-report.md
+    channel: notes
+    ingested_at: 2026-06-25
 aliases:
   - MLOps
   - MLOps principles
   - machine learning operations
   - MLOps vs DevOps
+  - DevOps loop
+  - concepts over tools
 tags:
   - corpus/mlops
   - concept
 created: 2026-06-19
-updated: 2026-06-19
+updated: 2026-06-25
 ---
 
 # MLOps Principles
@@ -85,8 +93,30 @@ The source argues the build-your-own-platform advice is now dated given the "too
 
 These map onto existing corpus pages: [[data-engineering/databricks|Databricks]], [[mlops/mlflow|MLflow]], [[mlops/databricks-asset-bundles|Databricks Asset Bundles]], [[mlops/model-serving|Model Serving]], [[mlops/model-monitoring|Model Monitoring]], and [[mlops/ci-cd-for-ml|CI/CD for ML]].
 
+## The DevOps loop (foundational model)
+
+Before MLOps, the parent concept: the **DevOps infinity loop** — eight continuous stages [^src2]:
+
+**Plan → Code → Build → Test → Release → Deploy → Operate → Monitor**
+
+CI/CD automates Build + Test + Release + Deploy. Monitoring closes the loop (Operate + Monitor feeding back into Plan). MLOps extends this loop with a *data track* running alongside the code track — the same stages apply to data pipelines and model artifacts, not only application code.
+
+See [[mlops/devops-learning-roadmap|DevOps Learning Roadmap]] for the practitioner's path through these concepts.
+
+## Concepts-over-tools principle
+
+From DevOps practitioners with >10 years of experience: "Tools come and go. Concepts, however, stay forever." [^src3] The durability hierarchy:
+
+1. **Concepts** — pipeline, declarative IaC, state management, compute/storage/network — transfer across any tool or cloud.
+2. **Categories** — CI/CD, orchestration, monitoring, IaC — persist across tool generations.
+3. **Tools** — Jenkins → GitHub Actions → Argo CD → next thing — change most frequently.
+
+MLOps' emphasis on *categories of tools* (above) applies the same logic within ML engineering [^src1][^src3].
+
 ## Context
 
 This page is the foundational "what is MLOps" entry for the domain; the [[mlops/README|MLOps hub]] tool/practice pages are the specific capabilities this overview frames. It is lecture 1 of the Marvelous MLOps "End-to-end MLOps with Databricks" course (Databricks Free Edition); lectures 2–10 (developing on Databricks, MLflow, model serving, Asset Bundles, CI/CD, monitoring) were ingested previously and live in the pages linked above.
 
 [^src1]: [Introduction to MLOps (Marvelous MLOps)](../../raw/email/email-2025-07-28-introduction-to-mlops.md)
+[^src2]: [DevOps from Zero to Hero: Build and Deploy a Production API](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-devops-from-zero-report.md) — [01:00](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-devops-from-zero-report.md#t=01:00) DevOps loop diagram
+[^src3]: [I Wasted 2 Years Learning DevOps Wrong. Here's What I'd Do Instead. (Nana)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-i-wasted-2-years-report.md) — [01:26](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-i-wasted-2-years-report.md#t=01:26) tools vs. concepts

@@ -123,6 +123,7 @@ Compare: delta (rust diff pager, no notes), LazyGit (full git TUI, review mode l
 ## See also
 
 - [[mlops/terminal-and-shell|Terminal & Shell]] — where these tools are installed and configured (Alacritty, zsh, Powerlevel10k, fzf/zoxide/eza setup)
+- [[mlops/tmux|tmux]] — dedicated tmux page covering VPS-based agent persistence, multi-agent pane workflows, and full command reference
 - [[mlops/linux-commands|Linux Commands]] — the legacy commands (`grep`, `find`, `cat`, `ls`) these tools replace
 - [[mlops/git|Git]] — `gh` CLI and `pass`/`delta` build on git
 - [[mlops/dev-environment-stack|Dev Environment Stack]] — these are Layer-1 system-foundation tooling

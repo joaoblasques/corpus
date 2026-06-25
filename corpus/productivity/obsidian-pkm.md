@@ -12,6 +12,21 @@ sources:
   - path: raw/web/web-stop-writing-markdown-in-obsidian-do-this-instead.md
     channel: web
     ingested_at: 2026-06-17
+  - path: raw/youtube/youtube-1RIXGL5Vgag-don-t-use-obsidian-with-claude-use-vs-code.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-40GPEEj3ijg-stop-learning-obsidian.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-47oi3Q9apK0-the-definitive-guide-to-setting-up-your-ai-second-brain.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-4l8MXYUqGaA-how-to-build-the-ultimate-ai-second-brain-obsidian-claude-co.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/github/github-jackyzha0-quartz.md
+    channel: github
+    ingested_at: 2026-06-25
 aliases:
   - Obsidian
   - personal knowledge management
@@ -22,11 +37,15 @@ aliases:
   - maps of content
   - MOC
   - zettelkasten
+  - context engineering
+  - Claude Code Obsidian
+  - Kepano skills
+  - knowledge architect
 tags:
   - corpus/productivity
   - concept
 created: 2026-06-15
-updated: 2026-06-17
+updated: 2026-06-25
 ---
 
 # Obsidian & Personal Knowledge Management
@@ -119,11 +138,47 @@ The most striking claim: these dashboards function as **"dynamic memory"** for a
 
 This is an *extension*, not a contradiction, of the linking-over-filing thesis: the Markdown vault is still the substrate; HTML layers interactivity on top without abandoning plain-text ownership. The same files still live in folders, open in any text editor, and use YAML frontmatter — Dataview queries read those properties. The plain-Markdown gotchas (don't overfolder, don't chase plugins on day one) still apply; HTML/Dataview is an advanced layer, not a starting point.
 
+## Context engineering as the real Obsidian skill
+
+"Stop learning Obsidian features. Start engineering context" — the core thesis of the most useful practitioner take [^src4].
+
+- **Kepano (Obsidian CEO) open-sourced his `obsidian-skills` repo** — a collection of slash-command skills specifically designed for Claude Code operating inside an Obsidian vault. The repo ships modular skills for different vault tasks; Claude generates syntactically correct WikiLinks, canvas JSON, and frontmatter without being told the format each session [^src4].
+- **The architect/builder/material framing**: "You are the architect, Claude is the builder, Obsidian is the material." The architect *must* understand the material's constraints; but the architect doesn't swing hammers — that's the builder's job. "People keep learning more Obsidian features when what they should be learning is how to better describe what they want" [^src4].
+- **Context engineering vs. memorizing tool features**: "The real skill isn't mastering Obsidian features. It's engineering the right context so Claude understands your vault's logic." Once the context is right, Claude generates correct WikiLinks, canvas JSON, and frontmatter without being told how each session. The skills repo is a context-engineering starter kit [^src4].
+- **`/loop` command pattern**: Kepano's skills include a `/loop` command that runs a continuous improvement cycle inside the vault — read → propose → write → verify — without manual prompting per step. Matches the ai-engineering domain's agent-loop pattern [^src4].
+
+## Zettelkasten + AI: thinking vs doing
+
+Traditional Zettelkasten (atomic notes, connected notes, processing → not documenting) lives in the *thinking* brain, not the AI context layer [^src5].
+
+- The Zettelkasten core disciplines: **atomic notes** (one idea per note), **connected notes** (each new note links to existing knowledge), **processing over capturing** ("don't just document, process what it means to you"). Quantity of notes is irrelevant without connections [^src5].
+- The critical distinction: "Your Zettelkasten is your second brain. Your AI context folder is your AI brain's information diet." They should not be the same folder.
+- The AI context folder has its own structure (see [[productivity/ai-augmented-knowledge-work|AI-Augmented Knowledge Work]] §6) and is optimized for *feeding AI context*; the Zettelkasten is optimized for *human thinking*. Mixing the two degrades both [^src5].
+- **Karpathy reference**: the LLM-wiki pattern (separate from personal note-taking) is the "doing" layer of the three-brain model; the thinking layer is emergent Zettelkasten [^src5].
+
+## VS Code as a PKA alternative
+
+A contrarian take: VS Code + Claude may be functionally superior to Obsidian for AI-augmented knowledge work [^src6].
+
+- **Arguments against Obsidian for AI workflows**: (1) Obsidian's plugin-heavy workflow fragments and locks you into Obsidian-specific structures; (2) VS Code is free, local, file-based, portable, widely supported — same Markdown files, no vendor lock; (3) Claude Code was built for VS Code workflows, and the ICOR/loop workflow maps directly onto it [^src6].
+- **The ICOR/Tom setup**: a local folder of Markdown files opened in VS Code, with multiple parallel Claude terminals in separate panes. `CLAUDE.md` file in the folder root gives Claude persistent instructions. Skills per project, each in its own Claude context. "You can have your whole knowledge base open in one terminal and your current project in another" [^src6].
+- **Counter-position**: Obsidian's graph, backlinks, and visual canvas still differentiate it for *non-AI* note navigation; VS Code's advantage is primarily for users whose primary workflow is Claude Code interaction. The two can coexist — Obsidian for graph browsing, VS Code + Claude for active knowledge work — since both read the same Markdown files [^src6].
+
+## Publishing: Quartz SSG
+
+[[productivity/quartz-ssg|Quartz v5]] is the leading static-site generator for Obsidian vaults as digital gardens [^src7]. It converts the vault's Markdown files (including WikiLinks, backlinks, and graph) into a navigable website — the same rendering pipeline that powers community "digital garden" sites. See [[productivity/quartz-ssg|Quartz]] for full entity page.
+
 ## Related
 
 - [[productivity/learning-to-learn|Learning to Learn]] — writing-to-process; PKM is the tooling layer for that habit.
 - [[productivity/ai-augmented-knowledge-work|AI-Augmented Knowledge Work]] — about-me/voice files are themselves curated Markdown, the same substrate; HTML dashboards extend this to dynamic/auto-updating context.
+- [[productivity/quartz-ssg|Quartz SSG]] — publish an Obsidian vault as a digital garden.
+- [[productivity/decision-making|Decision Making]] — the Zettelkasten principle of atomic notes connects to how [[productivity/decision-making|decision frameworks]] are best stored: one concept per note, not bundled.
 
 [^src1]: [Give Me 15 Minutes. I'll Teach You 80% of Obsidian](../../raw/youtube/youtube-z4AbijUCoKU-give-me-15-minutes-i-ll-teach-you-80-of-obsidian.md) (Linking Your Thinking / Nick Milo)
 [^src2]: [The Ultimate Obsidian for Beginner's Guide 2025](../../raw/youtube/youtube-gafuqdKwD_U-the-ultimate-obsidian-for-beginner-s-guide-2025.md) (CreaDev Labs)
 [^src3]: [Stop Writing Markdown in Obsidian. Do This Instead](../../raw/web/web-stop-writing-markdown-in-obsidian-do-this-instead.md) (Artem / ArtemXTech Substack, "Markdown 2.0: Notes Are Software Now")
+[^src4]: [Stop Learning Obsidian. Start Engineering Context](../../raw/youtube/youtube-40GPEEj3ijg-stop-learning-obsidian.md) — JB Russell
+[^src5]: [The Definitive Guide to Setting Up Your AI Second Brain](../../raw/youtube/youtube-47oi3Q9apK0-the-definitive-guide-to-setting-up-your-ai-second-brain.md) — Vicky Zhao
+[^src6]: [Don't Use Obsidian With Claude — Use VS Code](../../raw/youtube/youtube-1RIXGL5Vgag-don-t-use-obsidian-with-claude-use-vs-code.md) — ICOR with Tom
+[^src7]: [jackyzha0/quartz (GitHub)](../../raw/github/github-jackyzha0-quartz.md)

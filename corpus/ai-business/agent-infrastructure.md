@@ -9,6 +9,9 @@ sources:
   - path: raw/web/web-we-need-to-talk-about-agents.md
     channel: web
     ingested_at: 2026-06-17
+  - path: raw/web/web-clay-go-to-market-with-unique-dataand-the-ability-to-act-on.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - agent stack
   - production agents
@@ -20,7 +23,7 @@ tags:
   - corpus/ai-business
   - concept
 created: 2026-06-17
-updated: 2026-06-17
+updated: 2026-06-25
 ---
 
 # Agent Infrastructure
@@ -95,11 +98,25 @@ None of these lead with "agent." They lead with the workflow and the results.
 - The agent-stack piece (Addy Osmani) appears to be associated with a platform or product in the agent orchestration space; the recommendations may be colored by commercial interest [^src1].
 - Euclid VC is a venture investor backing Vertical AI founders; the "capabilities not agents" framing is also their investment thesis [^src2].
 
+## Clay — GTM data + agent workflows
+
+Clay (clay.com) is a go-to-market platform that exemplifies how AI agents integrate into commercial workflows [^src3]:
+
+- Aggregates data from 150+ providers (lead enrichment, account scoring, intent signals, contact data).
+- **Claygent** — an AI agent that can search public databases, navigate gated forms, and find unique data points; agents are versionable and reusable across workflows.
+- **MCP integration**: Claygent connects to any MCP server (Salesforce, Gong, Google Docs) for deeper business context — a live example of the MCP-as-front-door architecture described in [[ai-business/selling-to-ai-agents|Selling to AI Agents]].
+- Sculptor: an AI chat interface for GTM idea generation, analysis, and table building.
+- Anthropic uses Clay internally: "Clay has helped Anthropic significantly improve our lead enrichment and sales data pipelines. We've been able to consolidate our tech stack to core essentials, like our CRM, Clay, and email tool." [^src3]
+
+Clay represents the "orchestrate and act on data at scale" layer — connecting enrichment, intent signals, and CRM data, then triggering outreach or CRM updates automatically. It is an example of the kind of "picks-and-shovels" infrastructure for AI-assisted GTM workflows that complements the solo-founder plays in this domain.
+
 ## Related
 
 - [[ai-business/ai-and-the-job-market|AI and the Job Market]] — the broader narrative on AI's economic impact; the Toyota/GM analogy is covered in depth there too.
 - [[ai-business/monetizing-code|Monetizing Code]] — building AI workflows as the monetization opportunity.
 - [[ai-business/technical-career|Navigating a Technical Career]] — human skills that compound alongside agents.
+- [[ai-business/selling-to-ai-agents|Selling to AI Agents]] — the commercial layer: how to build products that *sell to* AI agents, not just how to build them.
 
 [^src1]: [The Agent Stack Bet](../../raw/web/web-the-agent-stack-bet.md)
 [^src2]: [We Need to Talk About Agents](../../raw/web/web-we-need-to-talk-about-agents.md)
+[^src3]: [Clay | Go to market with unique data](../../raw/web/web-clay-go-to-market-with-unique-dataand-the-ability-to-act-on.md)

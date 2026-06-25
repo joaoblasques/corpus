@@ -1312,3 +1312,13 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - setup: create `bin/x_app.json` (client_id + redirect_uri), run `python3 bin/x_client.py auth` once
 - token secrets: `bin/x_token.json` and `bin/x_app.json` gitignored (added to `.gitignore`)
 - status if unconfigured: `not configured`; run continues without blocking
+
+## [2026-06-25 14:00] ingest | big-backlog batch — Wave 1 (productivity, ai-business, mlops, trading, blockchain)
+- sources: 71 (36 youtube incl. 44 whisper-rescued, 9 notes, 8 email, 8 web, 7 github, 3 pdf)
+- channels: youtube, notes, email, web, github, pdf
+- domains: productivity, ai-business, mlops, trading (NEW), blockchain
+- method: §8.1 cluster pipeline; Coordinator (Opus) + 6 Sonnet workers (4 parallel Round A + 2 sequential Round B for sharded ai-business/mlops); one-writer-per-domain
+- new pages: 30 — trading/{README,ai-trading-agents,self-improving-agents,arbitrage-compression,prediction-markets,alpaca-api,tradingview-pine-script,hyperliquid,polymarket}; blockchain/bittensor; mlops/{tmux,vps-for-agents,cron-scheduling,linux-filesystem,devops-learning-roadmap,designing-ml-systems,made-with-ml,handson-ml3,100-days-of-ml-code,ampernetacle,tilt,terax}; ai-business/{ai-business-models,boring-expert-businesses,selling-to-ai-agents,ai-content-with-voice,harvey,claude-for-startups}; productivity/{decision-making,quartz-ssg}
+- updated pages: 24 (learning-to-learn, ai-augmented-knowledge-work, obsidian-pkm, working-with-stakeholders, time-and-focus-management, mental-models, technical-career, monetizing-code, ai-consulting-playbook, ai-job-search, agent-infrastructure, git, terminal-and-shell, mlops-principles, cli-tools, linux-commands, vps-for-agents, tmux, terax, devops-learning-roadmap + 4 hub READMEs)
+- new domain: trading (provisional; see _domains.md decision log 2026-06-25)
+- notes: part of clearing the 455-source inbox backlog discovered this session. Wave 2 (software-engineering 41 + data-engineering 39) and Wave 3 (ai-engineering 247) to follow. 56 no-citable-content sources to be stamped+filed (corpus_pages:[]) in the final drop pass. Whisper-rescue recovered 44/254 keepers before YouTube re-throttled; remainder auto-recover via the daily job.

@@ -18,6 +18,9 @@ sources:
   - path: raw/email/email-2026-06-14-only-for-devs-trying-to-get-interviews.md
     channel: email
     ingested_at: 2026-06-21
+  - path: raw/web/web-star-method-how-to-use-this-technique-to-ace-your-next-job-i.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - finding a job using AI
   - AI job search
@@ -28,6 +31,10 @@ aliases:
   - remote software engineering job
   - remote SWE hiring
   - remote job search guide
+  - STAR method
+  - behavioral interview method
+  - STAR interview
+  - situational task action result
 tags:
   - corpus/ai-business
   - concept
@@ -138,12 +145,39 @@ This data directly supports the "quality over volume" principle — but also rai
 
 The source is emphatic that mass application backfires: "'1,000 applications' is a great headline, but plenty of mass-apply tools produce dismal interview rates because spraying generic applications doesn't work anymore — recruiters and their AI screeners can smell it" [^src1]. The mitigations are **per-job scoring with a high threshold** and **per-job tailoring**, plus operational safety — use `--dry-run` first, run in your own present browser, and read the open-source code before handing it your resume and browser session [^src1][^src2]. This mirrors the portfolio/interview guidance in [[ai-business/technical-career|Navigating a Technical Career]] (target roles; signal fit fast) — tailoring *is* the human judgment the tool automates, not replaces.
 
+## The STAR method: answering behavioral interview questions
+
+Behavioral interview questions ("tell me about a time when…") require a structured story format to be compelling and concise under pressure. The STAR method provides a four-part framework [^src6]:
+
+- **Situation**: set the scene — what was the context? Keep to 1–2 sentences; don't ramble with irrelevant backstory.
+- **Task**: your specific responsibility or objective in that situation (distinct from what you *did*).
+- **Action**: what steps you took — specific, not vague. "I worked hard on it" is insufficient; name the teams you worked with, tools used, decisions made.
+- **Result**: quantified outcomes if possible. "Don't skip the result — that's the most important part of the answer" [^src6]. Include long-term effects: did the contract continue? Did you get great feedback? What did you or the team learn?
+
+**Common behavioral questions to prep with STAR** [^src6]: conflict with a coworker, a time you made a mistake, how you handle pressure, proudest accomplishment, a time you failed and how you dealt with it, a time you went above and beyond.
+
+**Preparation tips** [^src6]:
+1. Review the job description and identify 3–5 required qualities; choose stories that demonstrate those.
+2. Prepare 3–5 versatile stories (overcoming a challenge, working with a team) that can be adapted across multiple question types.
+3. Write down key details for each story, especially specific numbers and metrics.
+4. Practice out loud — "it's OK to go into an interview with notes or a cheat sheet" [^src6].
+5. If you can't think of an example on the spot: "It's OK to take a few seconds. I'm always impressed when a candidate asks for a moment to think" [^src6].
+
+**Worked example** (goal-setting question):
+- *Situation*: "In my previous digital marketing role, my company decided to focus primarily on email marketing and wanted to grow the list aggressively."
+- *Task*: "As the email marketing manager, my target was to increase subscribers by 50% in one quarter."
+- *Action*: "I added content upgrades to old blog posts, and worked with the marketing team to host a webinar requiring email registration."
+- *Result*: "Subscriber list grew from 25,000 to 40,000 in three months — exceeding the goal by 20%. Webinars became a regular acquisition channel" [^src6].
+
+**The STAR method + AI**: use Claude to help structure STAR stories before interviews. Feed it the job description, your experience, and ask it to identify which qualities it's likely testing for and help refine your stories against the four components.
+
 ## Gotchas / framing
 
 - Source email is a free newsletter (AI+ Community) with subscribe CTAs; it is, to its credit, candid about both the layoff climate and the limits of automation [^src1].
 - "1,000 jobs in 2 days" is a project tagline, not a measured outcome; volume ≠ results [^src2].
 - Beware copycat paid sites using the "ApplyPilot" name — the genuine project is free and open source [^src2].
 - The Remote SWE Job Guide (5 phases) is a first-party newsletter/email note (addressed "Hey Joao") clipped from the user's Obsidian inbox; author not identified in the raw file. Advice is experience-based and practitioner-grade, not data-backed [^src3].
+- STAR method source (The Muse) is career-advice content with affiliate/jobs-board marketing. The structural framework is widely validated; specific claims about making you "more impressive" are editorial [^src6].
 
 ## Related
 
@@ -156,3 +190,4 @@ The source is emphatic that mass application backfires: "'1,000 applications' is
 [^src3]: [Remote Software Engineering Job Guide (5 phases)](../../raw/notes/notes-remote-software-engineering-job-guide.md) (first-party note, clipped from Obsidian inbox 2026-06-17)
 [^src4]: [How to Land a DevOps Job (KubeCraft)](../../raw/email/email-2026-06-15-how-to-land-a-devops-job.md) — Mischa van den Burg, KubeCraft
 [^src5]: [Only for Devs Trying to Get Interviews (Tech With Tim)](../../raw/email/email-2026-06-14-only-for-devs-trying-to-get-interviews.md) — Tech With Tim; cites Greenhouse 2025 data
+[^src6]: [STAR Method: How to Use This Technique to Ace Your Next Job Interview](../../raw/web/web-star-method-how-to-use-this-technique-to-ace-your-next-job-i.md) — The Muse; career advice with Muse Career Coach Al Dea; jobs-board marketing context

@@ -46,6 +46,14 @@
 - **Seeded by**: 12 sources (Obsidian Clippings drain, batch 5), collected from `00_Inbox/Clippings/scrape/`.
 - **Provisional review**: at 30 days (2026-07-17) — single-origin seed (one primer site); retain provisional one cycle until a second independent source arrives.
 
+### trading
+- **Status**: active
+- **provisional**: true
+- **Created**: 2026-06-25
+- **Rationale**: A coherent AI-driven automated-trading cluster (5 substantive YouTube builds from one "Auto trading" playlist: cron-driven agentic trading bots, Alpaca equities API, TradingView/Pine Script strategy encoding, Polymarket prediction-market bots, self-improving trading agents). Fits none of the engineering/AI/business/blockchain domains — distinct subject matter (broker APIs, market microstructure, strategy encoding, arbitrage). Clears the standard ≥3-source rule on creation.
+- **Seeded by**: 5 sources (big-backlog batch Wave 1, 2026-06-25).
+- **Provisional review**: at 30 days (2026-07-25) — single-origin seed (one playlist); retain provisional one cycle until a second independent origin arrives.
+
 ---
 
 ## Decision log
@@ -63,6 +71,7 @@ Each entry: `[YYYY-MM-DD] action | domain | rationale`.
 - [2026-06-12] create | productivity | Standard rule: 13 sources in the wave-3 email-backlog cluster (mental models, time/focus, note-taking, working effectively, stakeholder management) fitting no engineering domain; conceptually distinct. Provisional; 30-day review 2026-07-12. User confirmed wave-3 scope (remote-control session).
 - [2026-06-12] create | ai-business | Standard rule: 11 sources (career growth, interviews, monetizing technical skills, AI's impact on jobs/consulting). Supersedes the 2026-05-07 "career" rejection (revisit threshold was a 2nd career source; now 11). Provisional; 30-day review 2026-07-12. User confirmed wave-3 scope.
 - [2026-06-17] create | blockchain | Standard rule: 12 substantive crypto/blockchain-fundamentals sources (nakamoto.ghost.io primer) fitting no existing domain; coherent and distinct. User confirmed during the Obsidian Clippings drain. Provisional one cycle (single-origin seed); 30-day review 2026-07-17.
+- [2026-06-25] create | trading | Standard rule: 5 substantive AI-trading-bot sources (one "Auto trading" YouTube playlist) fitting no existing domain; distinct (broker APIs, market microstructure, strategy encoding, arbitrage). Created autonomously under §0 delegation during the 455-source big-backlog batch ingest (Wave 1). Provisional one cycle (single-origin seed); 30-day review 2026-07-25.
 
 ---
 

@@ -1,6 +1,6 @@
 # Corpus Index
 
-> Last updated: 2026-06-24 | Total pages: 219 | Total sources: 625
+> Last updated: 2026-06-25 | Total pages: 249 | Total sources: 696
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
@@ -202,6 +202,18 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[mlops/production-ml-workflow|Production ML Workflow]] — concept · draft · production-minded training: holdout sets, model comparison, business-metric selection (recall>accuracy), single-pipeline serialization
 - [[mlops/networking-fundamentals|Networking Fundamentals]] — concept · draft · containers analogy, 4 DevOps networking layers (network/node/service/app), Headscale/WireGuard mesh VPN
 - [[mlops/environment-promotion|Environment Promotion (dev → acc → prd)]] — synthesis · draft · cross-source deployment discipline (ML CI/CD + data-infra CI/CD + DAB): humans only in dev, env-scoped state, CI-check → human-gated prod apply, machine identity
+- [[mlops/tmux|tmux]] — concept · draft · terminal multiplexer; persistent sessions, windows/panes, detach/attach for long-running agents
+- [[mlops/vps-for-agents|VPS for Agents]] — concept · draft · running coding agents on a VPS; UFW/Tailscale/Cloudflare-Tunnel security hardening
+- [[mlops/cron-scheduling|Cron Scheduling]] — concept · draft · Unix cron 5-field syntax; vs Airflow / K8s CronJob / Task Scheduler
+- [[mlops/linux-filesystem|Linux Filesystem Structure]] — concept · draft · FHS directory map; virtual vs real dirs; config files you actually touch
+- [[mlops/devops-learning-roadmap|DevOps Learning Roadmap]] — synthesis · draft · ordered path OS/Linux → Git → Docker → CI/CD → K8s → cloud → IaC
+- [[mlops/designing-ml-systems|Designing Machine Learning Systems]] — entity · draft · Chip Huyen's book; production requirements, distribution shift, continual learning
+- [[mlops/made-with-ml|Made With ML]] — entity · stub · open-source ML engineering course (GokuMohandas, 48k★)
+- [[mlops/handson-ml3|Hands-On Machine Learning (3rd ed.)]] — entity · stub · companion repo for Géron's O'Reilly book (ageron, 13.5k★)
+- [[mlops/100-days-of-ml-code|100 Days of ML Code]] — entity · stub · structured 100-day ML learning log (Avik-Jain, 51k★)
+- [[mlops/ampernetacle|Ampernetacle]] — entity · stub · Terraform config for a 4-node ARM K8s cluster on Oracle Cloud free tier
+- [[mlops/tilt|Tilt]] — entity · stub · dev-experience tool automating the inner dev loop for microservices on K8s
+- [[mlops/terax|Terax]] — entity · stub · open-source AI-native terminal (Tauri 2 + Rust)
 
 ### productivity
 - [[productivity/README|Productivity]] — hub · draft · personal & professional effectiveness for knowledge workers (provisional)
@@ -212,6 +224,8 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[productivity/working-with-stakeholders|Working with Stakeholders]] — concept · draft · stakeholder trust and relationship management
 - [[productivity/ai-augmented-knowledge-work|AI-Augmented Knowledge Work]] — concept · draft · standing context, voice files, loop engineering
 - [[productivity/obsidian-pkm|Obsidian & Personal Knowledge Management]] — concept · draft · local-first Markdown vault; linking over filing; emergent structure, MOCs, graph, canvas
+- [[productivity/decision-making|Decision Making]] — concept · draft · Rational decision-making is consistency toward objectives; utility, VNM, Bayesian beliefs, beauty contest
+- [[productivity/quartz-ssg|Quartz SSG]] — entity · stub · open-source TypeScript static-site generator that turns Obsidian vaults into linked websites
 
 ### ai-business
 - [[ai-business/README|AI Business]] — hub · draft · career, monetization, and business in the AI era (provisional)
@@ -224,6 +238,12 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[ai-business/agent-infrastructure|Agent Infrastructure]] — concept · draft · four production-agent bets (identity, context, persistence, platforms); capabilities-not-agents critique
 - [[ai-business/ai-synthetic-focus-group|AI Synthetic Focus Group]] — concept · draft · LLM buyer-persona panel critiques ads/copy before spend; predictive-vs-reactive marketing shift (claims flagged unsourced)
 - [[ai-business/ai-consulting-playbook|AI Consulting Playbook]] — concept · draft · free "AI mini assessment" two-call client-acquisition framework; frequency×friction bottleneck selection, the "money question" close
+- [[ai-business/ai-business-models|AI Business Models (Ranked by Profit Per Hour)]] — concept · draft · five AI business models from custom (time-for-money) to SaaS (compounding)
+- [[ai-business/boring-expert-businesses|Boring Expert Businesses]] — concept · draft · Filter Buy F-to-S tier-ranking of remote business models by operator leverage
+- [[ai-business/selling-to-ai-agents|Selling to AI Agents]] — concept · draft · the agent buying loop; x402/ACP/AP2 payments; MCP front door; AEO vs SEO
+- [[ai-business/ai-content-with-voice|AI Content With Your Voice]] — concept · draft · ghost-voice skill + Claude/LinkedIn training workflow; conversion engineering
+- [[ai-business/harvey|Harvey]] — entity · stub · vertical AI platform for legal & professional services
+- [[ai-business/claude-for-startups|Claude for Startups (and Nonprofits)]] — entity · stub · Anthropic startup-credit + nonprofit pricing programs
 
 ### blockchain
 - [[blockchain/README|Blockchain]] — hub · draft · cryptocurrency & blockchain fundamentals (provisional)
@@ -237,8 +257,21 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[blockchain/merkle-trees|Merkle Trees]] — concept · draft · construction; O(log n) inclusion proofs; Bitcoin SPV light clients
 - [[blockchain/p2p-networking|P2P Networking]] — concept · draft · P2P architecture; Napster/Gnutella/BitTorrent; gossip; Bitcoin peer discovery
 - [[blockchain/zero-knowledge-proofs|Zero-Knowledge Proofs]] — concept · draft · SNARKs vs STARKs; arithmetization + LDC; tradeoffs
+- [[blockchain/bittensor|Bittensor (TAO)]] — entity · draft · decentralized AI network where subnets compete for token rewards (Score Vision, Hippias, Quasar)
+
+### trading
+- [[trading/README|Trading]] — hub · draft · AI-driven automated trading for crypto & equities — architectures, brokers, strategy (provisional)
+- [[trading/ai-trading-agents|AI Trading Agents]] — concept · draft · cron-driven agentic LLM that researches, trades via broker API, and updates file-based memory
+- [[trading/self-improving-agents|Self-Improving Trading Agents]] — concept · draft · trading strategy wrapped in a hypothesis→test→learn feedback loop
+- [[trading/arbitrage-compression|Arbitrage Compression]] — concept · draft · AI collapsing market-inefficiency windows on the timescale of model releases
+- [[trading/prediction-markets|Prediction Markets]] — concept · draft · prices as collective probability estimates of real-world events
+- [[trading/alpaca-api|Alpaca API]] — entity · draft · commission-free brokerage with a REST API for algorithmic equity trading
+- [[trading/tradingview-pine-script|TradingView & Pine Script]] — entity · draft · charting platform + DSL for encoding trading strategies
+- [[trading/hyperliquid|Hyperliquid]] — entity · draft · decentralized perpetual-futures exchange on its own blockchain
+- [[trading/polymarket|Polymarket]] — entity · draft · on-chain prediction market for betting on real-world event probabilities
 
 ## Recent additions
+- 2026-06-25: **big-backlog batch ingest — Wave 1 (6 parallel/sequential Sonnet workers)** — 71 sources (36 YouTube incl. 44 whisper-rescued transcripts, 9 notes, 8 email, 8 web, 7 github, 3 pdf) across 6 domains → **30 new pages, 24 updated**. **NEW DOMAIN [[trading/README|trading]]** (provisional, 5 AI-trading-bot sources): ai-trading-agents, self-improving-agents, arbitrage-compression, prediction-markets, alpaca-api, tradingview-pine-script, hyperliquid, polymarket. New blockchain: [[blockchain/bittensor|Bittensor]]. New mlops: tmux, vps-for-agents, cron-scheduling, linux-filesystem, devops-learning-roadmap, designing-ml-systems + 5 learning-repo stubs. New ai-business: ai-business-models, boring-expert-businesses, selling-to-ai-agents, ai-content-with-voice, harvey, claude-for-startups. New productivity: decision-making, quartz-ssg. Broad enrichment of learning-to-learn, ai-augmented-knowledge-work, obsidian-pkm, technical-career, monetizing-code, ai-consulting-playbook, git, terminal-and-shell, mlops-principles + more. Part of clearing the 455-source inbox backlog (Waves 2–3: software/data-engineering + 247 ai-engineering to follow).
 - 2026-06-24: **ingest-auto batch (30 ingested, 20 deferred)** — 0 new pages; 18 enriched across ai-engineering. Enriched: claude-code (permission modes 6-mode table + auto mode, /security-review + GitHub Action, Channels Bun plugins comparison table, Artifacts beta), claude-cowork (Dispatch persistent phone↔desktop, Cowork OTel + custom OTLP/HTTP collector, Research mode), claude-managed-agents (Notion 30-40 parallel tasks 12h→20min, Rakuten 97% error drop, Sentry 1-engineer-weeks-not-months, Vibecode 3x→$10M ARR, Claude for Legal plugins+connectors), agent-security (Palo Alto Networks Unit 42 Frontier AI Defense, Wiz Red Agent 150K+ assets/week 0 false positives), compound-engineering (37 skills + 51 agents plugin inventory, Montaigne non-technical agent), vibe-coding (Austin Lau Figma plugin 30min→30sec, Vibecode mobile-first, Charlie Hills 9-step website build), mcp (Channels push-event protocol vs MCP pull comparison), agentic-workflow (pi-ask-user decision-gating: parameter table, bundled skill, decision-handshake pattern), claude-models (web search model list), multi-agent-systems (pi-subagents 8-agent table, Notion 30-40 parallel pattern), agent-skills (pi-ask-user bundled skill pattern), long-running-agents (Rakuten goal-based delegation, Dispatch cross-device persistence), agentic-coding (Austin Tedesco Montaigne agent, Austin Lau Figma plugin — non-technical practitioners), claude-api (Enterprise Analytics API: base URL, auth scopes, Primary Owner, D+3 freshness, cursor pagination), anthropic (Claude for Legal product suite, Palo Alto Unit 42 / Wiz Red Agent specifics), spec-driven-development (Charlie Hills CONTEXT.md→COPY.md→DESIGN.md 9-step), computer-use (macOS reference implementation: sandbox-exec, trajectory recording, Python 3.11+). Deferred: 20 (G1/UNCERTAIN; domain not determinable or content ambiguous).
 - 2026-06-23: **claude-watch deep-analysis ingest enabled (Phase 4, corpus side)** — dropped the collect-obsidian guard on `00_Inbox/Clippings/youtube_raw` and made the reaper **folder-aware** (reaps `report.md` + its sibling `frame_*.jpg`). First deep-analysis note ingested: enriched [[ai-engineering/claude-cowork|Claude Cowork]] with a **Connectors** section (the Cowork + skill + connector pattern; Higgsfield/Clay/Gmail/Supabase/Zapier-MCP; live artifacts; scheduled tasks). Validated end-to-end: collect discovers → ingest stamps `corpus_ingested` → reap `--dry-run` stages the whole `<slug>/` folder → ledger gate confirms no re-queue.
 - 2026-06-23: **consolidation pass (Opus, leftover weekly capacity)** — new concept [[ai-engineering/embeddings|Embeddings]], the implicit concept defined inline across rag/transformer/vector-database/agentic-search/agent-memory but never given its own page; consolidates the two senses (token vs sentence/doc embeddings), similarity metrics, quantization cost, and 3 failure modes, cross-linked from all five. Matured [[ai-engineering/transformer|Transformer]] (draft→mature, confidence 0.9). An independent fact-checker ran before commit and caught a fabricated quote + a misattributed "knowledge-graph" framing on the new page — both corrected to what the sources support.

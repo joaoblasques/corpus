@@ -7,7 +7,7 @@ tags:
   - corpus/blockchain
   - hub
 created: 2026-06-17
-updated: 2026-06-17
+updated: 2026-06-25
 ---
 
 # Blockchain
@@ -37,3 +37,6 @@ This domain covers the full technical and historical stack of blockchain and cry
 
 ### Cryptographic Proofs
 - [[blockchain/zero-knowledge-proofs|Zero-Knowledge Proofs & Proof Systems]] — concept · draft · SNARKs vs STARKs; arithmetization; symmetric vs asymmetric assumptions; Groth16, PLONK, Halo
+
+### Decentralized AI Networks
+- [[blockchain/bittensor|Bittensor (TAO)]] — entity · draft · Decentralized AI subnet marketplace; TAO token; Score Vision (subnet 44), Hippias storage (subnet 75), Quasar extended-context (subnet 24)

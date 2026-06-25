@@ -9,6 +9,9 @@ sources:
   - path: raw/youtube/youtube-ZtqBQ68cfJc-the-50-most-popular-linux-terminal-commands-full-course-for.md
     channel: youtube
     ingested_at: 2026-06-20
+  - path: raw/youtube/youtube-qOrlYzqXPa8-50-macos-tips-and-tricks-using-terminal-the-last-one-is-craz.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - Linux commands
   - Linux fundamentals

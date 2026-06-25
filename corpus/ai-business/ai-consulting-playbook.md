@@ -9,6 +9,15 @@ sources:
   - path: raw/email/email-2026-06-16-turn-a-15-minute-call-into-a-1-500-offer.md
     channel: email
     ingested_at: 2026-06-20
+  - path: raw/email/email-2026-06-23-what-fires-the-moment-a-client-says-yes.md
+    channel: email
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-03DjE7j0Suw-the-easiest-way-to-actually-make-money-with-ai.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-mKyaNr3jK-E-start-a-1-person-business-with-claude-4-hour-course-2026.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - AI mini assessment
   - free AI assessment
@@ -16,11 +25,19 @@ aliases:
   - two-call close
   - money question
   - AI concierge
+  - AI audit
+  - AI assessment business
+  - Return My Time
+  - voice agent assessment
+  - 1-person AI agency
+  - Claude Code agency
+  - Upwork freelancing AI
 tags:
   - corpus/ai-business
   - concept
 created: 2026-06-17
-updated: 2026-06-17
+updated: 2026-06-25
+last_confirmed: 2026-06-25
 confidence: 0.5
 last_confirmed: 2026-06-17
 ---
@@ -97,11 +114,92 @@ A concrete AI-consulting offer structure: convert a **15-minute discovery call**
 - **vs. [[ai-business/monetizing-code|Monetizing Code]].** Monetizing Code covers *selling a result* and the *positioning one-pager* (articulating the offer); this page is the *operational discovery-and-close motion* that finds the result to sell. They reference the same "paid assessment as sales mechanism" idea — Monetizing Code's "the assessment is the pitch" and the asset-library "pull the matching skill, tune it, deliver" model — applied here as a structured two-call script with a custom-Claude-skill prescription path.
 - **vs. [[ai-business/ai-synthetic-focus-group|AI Synthetic Focus Group]].** Sibling business-tactics source from the same newsletter ecosystem; both are concrete AI-monetization playbooks rather than capability/research content.
 
+## Client onboarding automation (the "invisible tax" on closing)
+
+Every new client close triggers 3–5 hours of manual setup: welcome email, project folder, kickoff doc, onboarding questionnaire. Five clients/month = a full workday lost to admin before any billable work starts [^src3].
+
+A Claude Cowork workflow reduces this to under four minutes once the contract is signed [^src3]:
+
+**Tools**: Claude Cowork (desktop app) + Gmail connector + Google Drive connector (both built-in, free).
+
+**Build time**: 20–25 minutes for initial setup.
+
+**Step 1 — The skill**: create a `client-welcome` skill. Input: client name, company name, industry, project type, start date. Generates three outputs: (1) a 120-word welcome email (warm, first-48-hours roadmap); (2) a kickoff doc outline (overview, success metrics, key contacts, timeline, open questions); (3) eight onboarding questionnaire questions tailored to industry/project type [^src3].
+
+**Step 2 — Connect tools**: authenticate Gmail and Google Drive in Cowork Connectors. Add HubSpot or CRM connector if available [^src3].
+
+**Step 3 — Manual trigger task**: "When I paste a client's intake data and email address, run the client-welcome skill on that input, then send the welcome email to the client via Gmail, and save the kickoff doc to a new Google Drive folder named after the client." Questionnaire sent as a scheduled follow-up 30 minutes after the welcome email [^src3].
+
+**Step 4 — Extract intake data from call transcripts**: a closing-call prompt — "Extract: client name, company name, industry, project type, and start date. Output as a five-line list" — produces the six fields needed to trigger the task with no reformatting [^src3].
+
+**Calibration loop**: after the first three onboardings, ask Cowork what the welcome package missed for the specific industry; update the skill prompt. "By client four, the output reads like it was written specifically for them" [^src3].
+
+**Reported result**: "Onboard 10 clients in under 15 minutes" [^src3].
+
+**Key stat**: operators who send the onboarding questionnaire within one hour of signing see 40% faster completion rates than those who send it the next business day; the Cowork scheduled send handles that timing automatically [^src3].
+
+**Industry routing**: add conditional logic in natural language — "If the client industry is legal, add a section to the kickoff doc about intake workflow and document review. If the industry is construction, add a section on job costing and scheduling tools." Two sentences of instruction produce permanently customized output [^src3].
+
+**Advanced trigger**: HubSpot deal-stage integration (added in early 2026) lets you fire the onboarding task automatically when a deal moves to "Closed Won" — no manual trigger, no third-party automation [^src3].
+
+## AI audit business: voice-agent + Claude pipeline
+
+A productized AI audit for small business owners — pricing at $1,000 per engagement — runs a fully automated discovery pipeline and upsells into ongoing services [^src4].
+
+**The evolution of the product** [^src4]:
+1. Physical walkthrough (not scalable).
+2. 45-minute Zoom call → transcript fed into Claude → report delivered.
+3. Current: a **voice agent** (Annie, built on Retell.ai) calls the owner, conducts a 20–30 minute discovery conversation, pipes the transcript to a separate AI agent that builds the report. No Zoom calls, runs 24/7.
+
+"99 out of 100 people need the service" — self-reported from 50–100 business owner conversations [^src4].
+
+**Report structure** (delivered via Gamma AI): executive summary → effort vs. impact matrix (quick wins: low effort, high impact) → recommended solutions per pain point with tool name, cost, and estimated time saved. Example: a wedding venue operations manager spending 2 hours every Saturday manually pulling Google Analytics + Meta Ads + Google Ads into a PowerPoint → one off-the-shelf tool (Dash This, $42/month) eliminates the manual work, saving ~8 hours/month [^src4].
+
+**Pricing ladder** (self-reported): started free for testimonials → $200 → $500 → $1,000 [^src4].
+
+**Upsell**: "3 to $5,000 upsell all day" — the audit identifies pain points; you prescribe the tool; the close is "do you want me to implement it?" Same two-call-to-close motion as the mini assessment above. "99 out of a hundred people need the service" [^src4].
+
+**Technical depth is not required**: "you just need to be one step ahead of your average client, which is literally you studying this stuff for 7 days" [^src4]. The durable parts: a Gamma template for consistent report formatting, Claude for tool research per pain point, a voice agent for scalable discovery.
+
+Free audit template available at audittemplate.ai [^src4]. (Cited as a free resource by the presenter; treat as promotional.)
+
+## 1-person AI agency: the beginner-to-client ladder
+
+A structured beginner path to building a 1-person AI services business using Claude Code, with explicit skill/trust levels and outreach channels [^src5].
+
+**The AI adoption gap as the opportunity** [^src5]:
+- 84% of people have never used AI.
+- 16% have used free chatbots.
+- 0.3% pay $20/month for AI.
+- 0.04% use max-tier models (Claude Code, Codex).
+
+"This allows us, the 0.04%, to provide services to the rest of the 8 billion people that don't know how to use AI effectively yet. To these people, your AI services is going to seem like magic" [^src5].
+
+**Three service tiers** [^src5]:
+1. **AI-generated websites** — largest addressable market (~27–30% of US small businesses have no website = ~10M businesses); lowest technical bar; ideal first service.
+2. **Automations and agents** — level up once websites are mastered; requires API/integration knowledge.
+3. **Full AI systems** — aggregates automations from level 2 into a comprehensive AI OS for the business; highest value, requires the most expertise.
+
+**Getting first clients** (before building anything) [^src5]:
+- **Upwork** — create a profile as a freelancer in IT/automation; start at $0 and accept any project to build testimonials and reviews; proposal quality and profile completeness determine which listings you win.
+- **Cold email** — build lead lists and run automated outreach campaigns.
+
+**The trust-first trap**: "A wise man once said you have to get good before you can get rich." First clients may require free or discounted work to build testimonials [^src5]. The presenter's own first paid client closed after 4 months, at $400 [^src5].
+
+**Claude Code as the delivery engine**: Claude Code handles 90–95% of the actual build work; the practitioner's role is requirements clarity, client communication, and taste/judgment. A private GitHub repo for the workspace is strongly recommended (recover from hardware failure) [^src5].
+
+**The compounding flywheel**: post finished work publicly (LinkedIn, YouTube) → attracts inbound inquiries → reduces reliance on cold outreach over time [^src5].
+
 ## Gotchas / promo framing
 
 - **Self-reported conversion.** The 30–50% close rate is the presenter's own claim with no independent evidence; utility-scored low (5) as business-tactics content [^src1].
+- **AI audit source** is a podcast interview (The Koerner Office) with the assessment operator; all revenue numbers ($1K/assessment, $3–5K upsell) are self-reported and unverified [^src4].
+- **1-person agency course** is a 4-hour promotional tutorial; presenter runs a paid community ("1% in AI") — treat client-acquisition and income claims as illustrative [^src5].
 - **Lead-magnet funnel.** The episode repeatedly drives to a free Notion template (first/second-call scripts and checklists) and the presenter's "make money with AI / find clients" content stream — treat as marketing for the consulting business [^src1].
 - **Tooling is incidental.** The named tools (There's An AI For That, Futurepedia, Claude Cowork, Claude skills) are illustrative; the durable part is the frequency × friction selection and the deliver-free-then-ask close.
 
 [^src1]: [The free AI mini assessment — turn a cold business owner into a paying client](../../raw/youtube/youtube-n6t1kgxblqa.md) — AI consultant client-acquisition playbook; promotional (funnels to free Notion template + paid consulting)
 [^src2]: [Turn a 15-Minute Call Into a $1,500 Offer](../../raw/email/email-2026-06-16-turn-a-15-minute-call-into-a-1-500-offer.md)
+[^src3]: [What fires the moment a client says yes (Return My Time newsletter)](../../raw/email/email-2026-06-23-what-fires-the-moment-a-client-says-yes.md)
+[^src4]: [The Easiest Way to Actually Make Money With AI](../../raw/youtube/youtube-03DjE7j0Suw-the-easiest-way-to-actually-make-money-with-ai.md) — The Koerner Office; AI audit/assessment business w/ voice agent; all revenue figures self-reported
+[^src5]: [Start a 1-Person Business with Claude (4 Hour Course 2026)](../../raw/youtube/youtube-mKyaNr3jK-E-start-a-1-person-business-with-claude-4-hour-course-2026.md) — Albert Olgaard; beginner-to-client ladder for Claude Code agency; promotional (paid community CTA)

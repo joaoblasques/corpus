@@ -30,6 +30,18 @@ sources:
   - path: raw/notes/notes-how-to-compete-with-ai.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/github/github-yangshun-tech-interview-handbook.md
+    channel: github
+    ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-5-claude-ai-skill-report.md
+    channel: notes
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-3XIGcM7VICc-learn-these-6-ai-skills-now-before-ai-replaces-you.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-Erxl8jomCcY-5-claude-ai-skills-that-pay-more-than-a-college-degree.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - getting noticed
   - coding interview tips
@@ -42,11 +54,20 @@ aliases:
   - expertise as files
   - Jevons paradox intelligence
   - stop selling hours
+  - become the AI person
+  - context engineering
+  - iteration speed
+  - building your Jarvis
+  - income stacking
+  - job stacking
+  - 6 AI skills
+  - vending machine vs slot machine
+  - income streams AI
 tags:
   - corpus/ai-business
   - concept
 created: 2026-06-12
-updated: 2026-06-23
+updated: 2026-06-25
 
 ---
 
@@ -175,6 +196,108 @@ Data engineers sometimes under-invest in software engineering fundamentals, focu
 
 This complements the on-the-job leverage section: being legible (clear code, review participation, OSS record) makes your work undeniable without extra status-maintenance overhead.
 
+## Tech Interview Handbook — structured preparation resource
+
+The Tech Interview Handbook (github.com/yangshun/tech-interview-handbook, ★140,000+, 1M+ beneficiaries) is a curated, free resource for busy engineers covering the full interview lifecycle [^src10]:
+
+- **Coding prep**: Grind 75 (the evolution of Blind 75 — bigger, customizable), best-practice question lists, algorithm cheatsheets by topic (with tips).
+- **Non-technical content**: step-by-step FAANG-ready resume guide, behavioral interview questions from top tech companies, offer negotiation guidance.
+- **Process guidance**: how to study efficiently (pattern-based, not grinding random LeetCode), coding interview cheatsheet (do's and don'ts), front-end interview preparation (separate site: frontendinterviewhandbook.com).
+
+The handbook's differentiator over other GitHub repos: contains **direct content**, not just links to external resources. Also covers **beyond the algorithm** — domain-specific, behavioral, and negotiation content that algorithm-focused resources miss [^src10].
+
+Built by yangshun (author of Blind 75, Meta engineer). The pattern-based approach — "Learn and understand patterns, not memorize answers" — aligns with Grokking the Coding Interview methodology [^src10].
+
+Practical use: complement interview behavior discipline (stream consciousness, code fluently, treat interviewer as teammate) with structured pattern study so DSA fundamentals are strong enough to code fluently without IDE crutches [^src10] [^src2].
+
+## Niche architecting: using AI to find your unique career positioning
+
+Rather than guessing a niche or side business direction, Claude can map the intersection of three things: (1) what audience you understand; (2) what result you can deliver; (3) what method only you can teach. "That intersection is your niche — not what's trending, not what's popular, the niche that only you can dominate" [^src11].
+
+Prompt to run in a Claude project [^src11]:
+1. "List every job or skill you've ever had."
+2. "List every problem you've ever solved that other people kept asking you about."
+3. "List every type of person you've worked with closely."
+4. "Where do these three things overlap, and what niche could only I dominate based on this combination?"
+
+Push back and refine in one session — "by the end, you'll have something most people never get: a niche that's actually yours" [^src11].
+
+Examples: a blue-collar trades person built a YouTube channel for "real working people" around decades of actual experience (800K views on first video, $214 AdSense day within 29 days); an engineering-to-Ivy-admissions pivot leveraged the exact personal experience of being a foreign exchange student admitted to an elite US university — making $80K in a single month as a teenager [^src11].
+
+This niche-architecture process applies to career repositioning and consulting practice design, not just content channels.
+
+## Six career-survival skills for the AI era
+
+A practitioner framework of six skills that "future-proof your career" without requiring a career switch [^src12]. IBM's 2026 CEO study found 85% of CEOs said all functional leaders must become technology experts in their own domain — not just IT [^src12].
+
+### 1. Become the AI person (in your circle)
+
+"Being the AI person is relative. It doesn't mean you're the best AI engineer in the world... it just means that inside your circle, you know more than the other people" [^src12]. The path: pick one main AI tool, get genuinely good at it, use it to deliver ROI on one workflow in your current job, document what changed (time before/after, what improved, what still needed human judgment), and show people [^src12].
+
+Companies are about to have "a ton of AI moments" — spinning up internal products, forming AI task forces. The people who get pulled into those opportunities are the ones already known for it, before a formal job title exists [^src12].
+
+### 2. Taste and judgment (don't outsource the thinking)
+
+As AI outputs improve, the trap is trusting first drafts. "AI is notorious for putting em dashes in everything" — if something goes out with five em dashes and you never use em dashes, "it changes the way they interpret that entire message" [^src12]. Taste is what prevents this: knowing what good looks like, studying great work in your field, building a library of examples you like and interrogating *why* they're good [^src12].
+
+"AI can generate the work. Taste is deciding what deserves your name" [^src12].
+
+Practical taste-building loop: every time you correct AI output, feed the correction back in — "here are five things I changed, here's why." Update your instructions so the next output starts closer [^src12].
+
+This reinforces the §Thinking-first principle (anti-AI-slop) above; the two sources agree: human thought must precede the AI output.
+
+### 3. Context engineering (not just prompting)
+
+Andrej Karpathy: "the delicate art and science of filling the context window with just the right information" [^src12]. "Prompts are how you ask. Context is what your AI actually knows." Context engineering is more durable than prompting because no matter how good models get, they still need to know what's in your brain — your business, calendar, priorities [^src12].
+
+Practically: stop opening Claude in a blank chat. Spin up a Claude project, feed it product details, marketing calendars, past copy that worked and copy that flopped. The analogy: "a new intern needs to be onboarded — only after they have all that context can they contribute in a meaningful way" [^src12].
+
+Your context is data that isn't publicly accessible. "If everyone's using the same model and asking for the same things, everyone's outputs will look the exact same. So your context is really, really important" [^src12].
+
+Overlaps with the §Clarity of communication and vision section above; both frame the quality of what you give the AI as the bottleneck, not the model.
+
+### 4. Iteration speed
+
+"In the era of AI, the people who iterate fastest are the ones who win. If you can move fast without sacrificing quality, you're just going to outperform everybody" [^src12]. Each iteration is more data, a chance to learn what's working, to improve agents and prompts and context.
+
+Practical accelerators: keyboard shortcuts, voice input over typing, rapid prototyping ("build the ugly version fast, see what breaks, fix it, iterate") [^src12].
+
+The other half: **knowing when to stop iterating.** Tie every automation to one specific business metric and define "done" before you start. If it's a customer support automation, metric = tickets resolved/day. Build until you hit it, then enter maintenance mode [^src12]. Without a clear definition of done, you scope creep on yourself indefinitely.
+
+### 5. Build your Jarvis (always-on systems)
+
+Tony Stark's Jarvis "runs in the background, notices things, pings Tony when something needs attention, and kicks off tasks before Tony even asks" [^src12]. The goal: systems that fire while you're in a meeting, on a walk, or sleeping.
+
+**The agent vs. workflow distinction** [^src12]:
+- **Vending machine** (deterministic workflow): same input, same output, every time. Cheap, predictable, doesn't break. Example: every morning at 9am, pull last week's revenue from Stripe and post to Slack. Use a simple no-code workflow.
+- **Slot machine** (AI agent): variable output requiring reasoning. Example: read incoming customer emails, understand what they actually want, draft a tailored response. Use an AI agent here.
+
+"The elite version of being the AI person is a person who can step back and say, 'Hey, we don't actually need AI here. We can solve this cheaper, faster, and with way less risk.' That person stands out way more than the one who's cramming AI into every single task" [^src12].
+
+Two questions for every automation candidate: (1) Does it need me to trigger it, or can the system fire on its own? (2) Does this step actually need AI, or could a simple Python script or no-code workflow do it at a fraction of the cost? Default to the simplest thing that gets the job done [^src12].
+
+### 6. Income stacking / unemployment insurance
+
+"The old career model was basically one job, one income... all your eggs in one basket. The new model: job stacking — your day job plus a couple of AI-powered side income streams" [^src12].
+
+AI lets one person do work that used to take a team of five. The trap to avoid: stacking five income streams in completely different domains leads to burnout. "The better version is one passion with multiple branches" — same North Star and expertise, different shapes (career → course, niche newsletter, micro-SaaS, consulting) [^src12].
+
+Practical start: build in public. Experiment with AI tools, build small things, share what you're learning. Document wins and losses. "The second you start posting, you become discoverable. That's how opportunities show up, clients show up, job offers show up" [^src12].
+
+Caveat: check employment contracts for non-competes, disclose side work if required, don't burn the day job chasing the side thing [^src12].
+
+## Conversion engineering: copy as a high-leverage skill
+
+One underappreciated path: using Claude to write sales copy, emails, landing pages, and hooks — "the right sentence on a sales page can be the difference between $0 and $10,000 a day" [^src13].
+
+Traditional copywriting cost $5,000–$50,000 per sales page. The conversion engineer replaces that with: (1) your offer description, (2) 10–20 quotes from your audience in their own words (comments, email replies, real conversations), and (3) Claude producing three outputs — a hook for the top of the sales page, three email subject lines, and one CTA using the customer's exact language [^src13].
+
+"You plus Claude plus the right inputs (your offer + your customer's exact language) = sales copy that out-performs most agency work" [^src13].
+
+Example: client Carla, 1,500 YouTube subscribers, 100–200 views/video — used this process to close a six-figure contract [^src13]. Justin Welsh: $10M+ in total solopreneur revenue, 90% margins, working from his apartment with Claude + words-on-pages that sell digital products [^src13].
+
+The conversion engineer skill is an extension of the §Clarity of communication and vision section above: it applies "context engineering + taste" to revenue-generating copy specifically.
+
 ## Gotchas
 
 - Portfolio "wow factor" advice is from a creator who sells courses (Tech With Tim); the guidance is generic-sound but vendor-adjacent [^src1][^src2].
@@ -182,6 +305,9 @@ This complements the on-the-job leverage section: being legible (clear code, rev
 - The "top 5 skills" series (taste, clarity/vision) is from a Substack newsletter (The Engineer's Etlist); claims about outcomes are anecdotal, not empirical [^src4][^src5].
 - The "Exactly why and how AI will replace knowledge work" piece is a long-form opinion from a security consultant (Daniel Miessler); the capability-stack model and "articulation gap" framing are his own synthesis, not peer-reviewed [^src7].
 - The "How to Compete with AI" source (10 principles) is a visual/slide-format note (possibly a social-media infographic or presentation deck) clipped from the user's Obsidian inbox; author unidentified in the raw file. The token-price table is empirically grounded (cites DeepSeek V4 Flash cache pricing for 2026); the 10 principles are framework advice, not research [^src8].
+- The "5 Claude AI Skills" video is a lead-gen piece funneling to a coaching program; income screenshots ($277K dashboards, $123K months) are promotional social proof; treat niche examples as illustrative, not benchmarks [^src11].
+- The "6 AI Skills" video (Nate Herk) is promotional (funnels to a free school community and a voice-to-text tool Glydo); treat income/time claims as illustrative [^src12].
+- The "5 Claude AI Skills That Pay More Than a College Degree" (Shane Hummus, YouTube 2026-06-21) is a coaching-program funnel; client income claims ($500K/month, $80K/month) are unverified promotional social proof [^src13].
 
 [^src1]: [still not getting interviews?](../../raw/email/email-2026-05-22-still-not-getting-interviews.md)
 [^src2]: [3 things you have to do in your interview](../../raw/email/email-2026-05-14-3-things-you-have-to-do-in-your-interview.md)
@@ -192,3 +318,7 @@ This complements the on-the-job leverage section: being legible (clear code, rev
 [^src7]: [Exactly Why and How AI Will Replace Knowledge Work](../../raw/web/web-exactly-why-and-how-ai-will-replace-knowledge-work.md)
 [^src8]: [How to Compete with AI (10 principles)](../../raw/notes/notes-how-to-compete-with-ai.md)
 [^src9]: [9 Software Engineering Skills a DE Should Have (Alejandro Aboy)](../../raw/email/email-2026-06-16-9-software-engineering-skills-a-de-should-have-and-how-to-le.md)
+[^src10]: [Tech Interview Handbook (yangshun/tech-interview-handbook)](../../raw/github/github-yangshun-tech-interview-handbook.md) — ★140K; curated coding interview prep; covers algorithms, resume, behavioral, negotiation; 1M+ users
+[^src11]: [5 Claude AI Skills That Pay More Than a College Degree](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-5-claude-ai-skill-report.md) — lead-gen video; niche architect skill is the substantive extract
+[^src12]: [Learn These 6 AI Skills Now (Before AI Replaces You)](../../raw/youtube/youtube-3XIGcM7VICc-learn-these-6-ai-skills-now-before-ai-replaces-you.md) — Nate Herk | AI Automation; six practical career-survival skills; promotional (free school community + Glydo CTA)
+[^src13]: [5 Claude AI Skills That Pay More Than a College Degree](../../raw/youtube/youtube-Erxl8jomCcY-5-claude-ai-skills-that-pay-more-than-a-college-degree.md) — Shane Hummus; 5 skills (vibe coder, ghost voice, niche architect, pattern hunter, conversion engineer); coaching program funnel; income claims promotional

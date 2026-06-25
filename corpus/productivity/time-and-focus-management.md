@@ -6,6 +6,9 @@ sources:
   - path: raw/email/email-2025-06-01-15-productivity-hacks-every-engineer-manager-should-know.md
     channel: email
     ingested_at: 2026-06-19
+  - path: raw/youtube/youtube-BYjIIRpos0I-your-mac-can-work-like-a-personal-assistant-most-people-neve.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - time management
   - focus management
@@ -13,11 +16,14 @@ aliases:
   - time blocking
   - productivity hacks
   - maker vs manager time
+  - Mac personal assistant
+  - Shortcuts app
+  - Focus modes
 tags:
   - corpus/productivity
   - concept
 created: 2026-06-19
-updated: 2026-06-19
+updated: 2026-06-25
 ---
 
 # Time & Focus Management
@@ -64,8 +70,38 @@ The single most-repeated idea: deep, uninterrupted focus is where real progress 
 - **Alternate sitting and standing** — physical stagnation leads to mental stagnation; try ~45–60 min sitting then 15–20 min standing, using standing time for lower-focus tasks like reading docs or replying to messages [^src1].
 - **Improve typing speed** — a core, underrated skill for tech professionals; learn touch typing and prioritize accuracy before speed, since typing friction compounds across everything you do [^src1].
 
+## Mac as a personal assistant
+
+macOS includes underutilized automation layers that address time and attention management natively — without additional software [^src2].
+
+**Shortcuts app (automation triggers)** [^src2]:
+- Build "morning routine" and "evening routine" Shortcuts that chain actions: open specific apps (or close them), play music, check weather, set reminder → triggered by a tap on the Home Screen or a scheduled time.
+- Shortcuts can run based on triggers: time of day, geofence arrival/departure, or automation from a widget. This means context-switch preparation (notifications off, apps open) can happen without manual intervention.
+- "Most people have no idea that the Shortcuts app on their Mac can automate their entire morning before they even sit down" [^src2].
+
+**Focus modes** [^src2]:
+- macOS Focus modes (`System Settings → Focus`) define which apps, people, and notification sources can interrupt you. Work Focus: only Slack from direct reports, no social media. Deep Work Focus: nothing. Personal Focus: apps for family but not work.
+- Schedules: Focus modes can auto-activate by time, location, or app launch (e.g., when you open Xcode, automatically enable Deep Work mode).
+- Home Screen customisation per Focus mode: reduce friction by surfacing only task-relevant apps and hiding everything else during deep work blocks [^src2].
+
+**Text replacement (typed abbreviations)** [^src2]:
+- System Settings → Keyboard → Text Replacements: define shorthand for frequently typed content (email signature, boilerplate text, address, repeated code snippets). Reduces repetitive typing compound across the day.
+- Works system-wide; more reliable than clipboard managers for static expansions.
+
+**Dictation + Apple Intelligence** [^src2]:
+- macOS native dictation (microphone icon in system tray or function key) transcribes continuously without a third-party app.
+- Apple Intelligence (macOS 15+) extends this with writing tools integrated into every text field — rewrite, proofread, summarize — via right-click or keyboard shortcut.
+- The Crazy Errors presenter's workflow: dictate rough text → Apple Intelligence rewrites/cleans → paste into destination. Replaces drafting time with directed editing [^src2].
+
+**Mail rules** [^src2]:
+- Mail.app rules (`Mail → Settings → Rules`) auto-file, auto-tag, or auto-forward email by sender, subject, or list header. Practical patterns: newsletters auto-moved to "Read Later" folder; GitHub notifications auto-archived; direct manager emails flagged.
+- Prevents inbox as interrupt queue. Combine with designated "email time" blocks (not continuous monitoring) from the engineering guide above [^src1].
+
+**Complementarity with AI dictation (SuperWhisper)**: the native dictation + Apple Intelligence setup handles light transcription and rewriting; SuperWhisper (see [[productivity/ai-augmented-knowledge-work|AI-Augmented Knowledge Work]] §10) handles heavier AI-processing modes with full context awareness. They coexist on the same machine with different use cases [^src2].
+
 ## Context
 
 This is the productivity domain's time-and-focus reference; it complements [[productivity/shipping-and-scope|Shipping and Scope]] (deciding when work is *done*), [[productivity/working-with-stakeholders|Working with Stakeholders]] (protecting time against external demands), and [[productivity/ai-augmented-knowledge-work|AI-Augmented Knowledge Work]] (offloading low-value work). The source is a guest-authored guide (Aleš Žehelj, via Gregor Ojstersek's Engineering Leadership newsletter) aimed at both engineers and managers.
 
 [^src1]: [15 Productivity Hacks Every Engineer & Manager Should Know (Engineering Leadership)](../../raw/email/email-2025-06-01-15-productivity-hacks-every-engineer-manager-should-know.md)
+[^src2]: [Your Mac Can Work Like a Personal Assistant](../../raw/youtube/youtube-BYjIIRpos0I-your-mac-can-work-like-a-personal-assistant-most-people-neve.md) — Crazy Errors
