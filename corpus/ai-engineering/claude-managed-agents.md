@@ -66,6 +66,9 @@ sources:
   - path: raw/youtube/youtube-ehg4fhydTgs-how-to-build-24-7-claude-agents-easy.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/web/web-self-hosted-sandboxes.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - Claude Managed Agents
   - Managed Agents
@@ -328,6 +331,15 @@ Platform limits for scheduled Routines (cloud-hosted prompts without a running m
 
 **What Routines can't do** [^src18]: access browser cookies (stateless), read local files, use OS-specific tools, or run indefinitely (each run has a time limit).
 
+## Self-hosted tool execution (customer infrastructure option)
+
+Managed Agents supports running tool execution on the customer's own infrastructure via the **self-hosted sandboxes** feature [^src19]. In this mode, the model (at Anthropic) decides what tools to call; execution happens in the customer's environment:
+
+- **EnvironmentWorker** — customer-side worker process that polls for tool call requests and executes them locally
+- **AgentToolContext** — context object carrying request metadata and session state, passed to each tool execution
+- **MCP tunnel alternative** — instead of polling, expose tools as an MCP server and connect via tunnel; same model-side experience, different implementation
+- **Security benefit**: private data never leaves the customer trust boundary. This directly addresses the [[ai-engineering/agent-security|lethal trifecta]] risk model (private data + untrusted content + exfiltration) — the exfiltration surface shrinks when execution stays inside the customer perimeter [^src19].
+
 ## See also
 
 - [[ai-engineering/mcp|MCP]] — agents connect to external systems via MCP; Vaults handle OAuth credentials per session
@@ -357,3 +369,4 @@ Platform limits for scheduled Routines (cloud-hosted prompts without a running m
 [^src16]: [Claude Managed Agents — Claude by Anthropic (waitlist page)](../../raw/web/web-claude-managed-agents-claude-by-anthropic.md) — Anthropic
 [^src17]: [Multiagent sessions — Managed Agents API docs](../../raw/web/web-multiagent-sessions.md) — Anthropic
 [^src18]: [24/7 Claude Agents and Routines — Scheduling Deep Dive](../../raw/youtube/youtube-ehg4fhydTgs-how-to-build-24-7-claude-agents-easy.md) — YouTube
+[^src19]: [Self-hosted sandboxes for Managed Agents](../../raw/web/web-self-hosted-sandboxes.md) — Anthropic

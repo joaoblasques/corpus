@@ -24,6 +24,9 @@ sources:
   - path: raw/web/task-completion-time-horizons-of-frontier-ai-models.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/web/web-claude-swe-bench-performance.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - agent evaluation
   - LLM evaluation
@@ -194,6 +197,18 @@ Both metrics are measured using logistic regression over METR's benchmark of 100
 
 **Implication for eval design**: METR's tasks are self-contained and well-specified. Real-world agentic performance draws on prior context (conversations, domain knowledge, existing codebases) — the benchmark assumes low/zero context, similar to a new hire or freelance contractor. Practitioners should design their own golden datasets (see §Golden datasets above) for tasks that require sustained context [^src7].
 
+## SWE-bench Verified: Claude's performance and philosophy
+
+Claude 3.5 Sonnet scored **49% on SWE-bench Verified** (GitHub issues from real repos), beating the previous SOTA of ~45% [^src8]. Key philosophical points from the Anthropic writeup:
+
+**Minimal scaffold philosophy** [^src8]: Anthropic tested multiple levels of scaffolding complexity and found that "simple scaffolds often beat complex ones." The winning submission used standard tools (bash, file editing, code execution) without elaborate orchestration — the model's judgment was the primary driver of performance, not the harness.
+
+**Tool description weight** [^src8]: "The single-highest-impact intervention was improving the descriptions of the tools available to the agent." Clear, precise tool descriptions (especially for file-editing tools) meaningfully improved task completion rates without changing the underlying model or scaffold.
+
+**Context window** [^src8]: the 200K context limit was sufficient for most SWE-bench tasks; Claude rarely hit the limit. For practitioners: 200K is enough headroom for well-structured agentic coding tasks if context is managed with intent.
+
+**Implications for eval design** [^src8]: SWE-bench measures concrete repair tasks on real GitHub issues — pass/fail via test suite. This is a high-signal, low-ambiguity eval. Most practitioners should mirror this structure: binary outcomes tied to executable criteria, not rubric-based scoring.
+
 ## See also
 
 - [[ai-engineering/langsmith|LangSmith]] — platform that implements these patterns
@@ -212,3 +227,4 @@ Both metrics are measured using logistic regression over METR's benchmark of 100
 [^src5]: [Fable Evals Performance / We Had to Build New Evals for Fable](../../raw/email/email-2026-06-11-fable-evals-performance-airbnbs-evolved-data-architecture-po.md)
 [^src6]: [SWE-bench Multilingual — Anthropic](../../raw/_inbox/web-swe-bench-multilingual.md)
 [^src7]: [Task-Completion Time Horizons of Frontier AI Models](../../raw/web/task-completion-time-horizons-of-frontier-ai-models.md) — METR, metr.org
+[^src8]: [Claude on SWE-bench Verified — Anthropic blog](../../raw/web/web-claude-swe-bench-performance.md) — Anthropic

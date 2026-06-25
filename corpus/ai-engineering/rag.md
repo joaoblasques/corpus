@@ -27,6 +27,12 @@ sources:
   - path: raw/github/the-pocket-pocketflow-tutorial-codebase-knowledge.md
     channel: github
     ingested_at: 2026-06-25
+  - path: raw/github/github-google-langextract.md
+    channel: github
+    ingested_at: 2026-06-25
+  - path: raw/github/github-canner-wrenai-give-ai-agents-the-context-to-query-bus.md
+    channel: github
+    ingested_at: 2026-06-25
 aliases:
   - RAG
   - retrieval-augmented generation
@@ -246,6 +252,27 @@ This is a specific application of the "knowledge graph from documents" pattern t
 
 **Built on PocketFlow**, a 100-line LLM framework. Reached Hacker News front page (April 2025, 900+ upvotes) [^src8].
 
+## LangExtract — structured extraction with source grounding
+
+**LangExtract** (Google, github.com/google/langextract, ★36K) is a Python library for LLM-powered structured extraction that emphasizes **precise source grounding** — every extracted field is linked to the exact span in the source document from which it was drawn [^src9].
+
+Key properties [^src9]:
+- **Span-grounded extraction**: the library returns not just extracted values but also `source_spans` — character offsets in the original document. This lets you verify that "Customer: Acme Corp" came from line 3 of the contract, not a hallucination.
+- **Structured output**: integrates with Pydantic schemas; returns type-safe structured objects
+- **Multi-hop extraction**: can chase references across sections (e.g. "all items in section 3 that refer to the term defined in section 1")
+- **Use case fit**: best for documents with a known schema (contracts, medical records, financial filings, invoice processing) where hallucination risk is high and auditability is required
+
+LangExtract addresses a core RAG failure mode: when extraction is used to populate a structured database from documents, ungrounded extraction creates confident-sounding wrong answers. Source grounding turns extraction into an auditable operation [^src9].
+
+## WrenAI — business semantic layer for text-to-SQL agents
+
+**WrenAI** (github.com/Canner/WrenAI, ★8K+) is an open-source **context layer** for text-to-SQL agents. It provides:
+- **MDL (Modeling Definition Language)**: a semantic layer that maps raw database tables/columns to business-friendly names, joins, metrics, and calculated fields. The LLM reasons about "Monthly Recurring Revenue" and "Churned Customers" rather than `SUM(amount) WHERE status='active'`
+- **LanceDB memory**: conversation memory stored as embeddings, enabling multi-turn SQL refinement ("make that by region" correctly modifies the previous query rather than starting over)
+- **Open context layer**: WrenAI positions itself as a standard for defining what "business context" an AI agent should have when querying a database
+
+The core insight: text-to-SQL LLMs fail not because they can't write SQL, but because they don't know what the business's columns mean. WrenAI gives the agent a structured vocabulary [^src10].
+
 ## See also
 
 - [[ai-engineering/embeddings|Embeddings]] — the dense vectors RAG retrieves over; their limits (exact-token loss, no time, disconnected facts) drive hybrid search, temporal filters, and GraphRAG
@@ -266,3 +293,5 @@ This is a specific application of the "knowledge graph from documents" pattern t
 [^src6]: [Beyond the Vector Store: Building the Full Data Layer for AI](../../raw/web/web-beyond-the-vector-store-building-the-full-data-layer-for-ai.md) — Kevin Smith, Saturn Cloud blog
 [^src7]: [Build Real-Time Knowledge Graph for Documents with LLM](../../raw/youtube/2KVkpUGRtnk-build-real-time-knowledge-graph-for-documents-with-llm.md) — CocoIndex + Neo4j demo, YouTube
 [^src8]: [The-Pocket/PocketFlow-Tutorial-Codebase-Knowledge (12K★)](../../raw/github/the-pocket-pocketflow-tutorial-codebase-knowledge.md) — The-Pocket, GitHub
+[^src9]: [google/langextract — Structured extraction with source grounding (★36K)](../../raw/github/github-google-langextract.md) — Google, GitHub
+[^src10]: [Canner/WrenAI — Open context layer for AI agents querying business data](../../raw/github/github-canner-wrenai-give-ai-agents-the-context-to-query-bus.md) — Canner, GitHub

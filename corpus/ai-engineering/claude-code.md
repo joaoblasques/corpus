@@ -141,6 +141,18 @@ sources:
   - path: raw/web/web-run-prompts-on-a-schedule-claude-code-docs.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/web/web-how-claude-code-works-claude-code-docs.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-RzLV8sfFdMM-how-to-build-effective-claude-code-agents-in-2026.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/email/email-2026-06-21-how-to-run-claude-code-for-free.md
+    channel: email
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-fQmlML9Lay4-conductor-ceo-charlie-holtz-walks-us-through-his-ai-coding-s.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - Claude Code
   - claude-code
@@ -852,6 +864,71 @@ Three ways to schedule recurring or one-off prompts in Claude Code [^src40]:
 
 See also [[ai-engineering/agent-harness|Agent Harness]] for the broader scheduling context.
 
+## Official documentation: how Claude Code works
+
+The official Anthropic docs describe the agentic loop in three phases [^src41]:
+
+1. **Receive**: user provides a task via CLI prompt, `--print` flag, or session continuation
+2. **Sample**: Claude processes the full context and decides the next action (tool call or response)
+3. **Act**: the tool executes; result is injected back into context; loop continues until task is complete or Claude requests human input
+
+**Five tool categories** in Claude Code [^src41]:
+- File system tools (Read, Write, Edit, Glob, Grep)
+- Bash execution
+- Web tools (web search, web fetch)
+- Agent tools (Task — spawns subagents; TodoWrite — tracks multi-step plans)
+- MCP tools (any connected MCP server's tools)
+
+**Session storage** [^src41]: all conversations are stored as JSONL files under `~/.claude/projects/<project-path>/`. Each turn is one JSON object. This makes sessions grep-able and resumable; `claude --resume <session-id>` picks up exactly where it left off.
+
+**Permission modes** (Shift+Tab to cycle in interactive mode) [^src41]:
+| Mode | Description |
+|---|---|
+| Default | Prompts before most tool calls |
+| Auto accept edits | Auto-accepts file edits only |
+| Plan | Read-only; no execution |
+| Auto | Fully autonomous |
+
+**Worktrees for parallel sessions** [^src41]: use `claude --worktree` to give each session its own isolated git worktree. This prevents file conflicts when running multiple parallel Claude Code sessions on the same repo. Particularly useful for running independent tasks (tests, documentation, refactoring) simultaneously without stepping on each other's uncommitted changes.
+
+## Agentic coding principles (Cole Medin)
+
+Cole Medin's framework for effective Claude Code agents [^src42]:
+
+- **Director mindset**: treat Claude Code as a highly capable employee — provide clear requirements and success criteria, not step-by-step instructions. "Your job is to specify *what*, Claude's job is to figure out *how*."
+- **Plan → Build → Verify → Evolve loop**: plan with Claude (requirements, approach), build in isolation (subagents with clean context), verify rigorously (run tests, check logs), evolve CLAUDE.md with lessons learned. This is the same [[ai-engineering/compound-engineering|compound engineering]] loop.
+- **"Dumb zone" at 250K tokens**: Opus degrades noticeably above ~250K tokens context length — keep individual sessions well below this with proactive compaction and subagent offloading.
+- **The AI layer distinction**: CLAUDE.md (standing rules), skills (reusable procedures), hooks (lifecycle enforcement), MCPs (external tools) — these four together define the agent's capabilities, not the model alone.
+
+## Running Claude Code with local LLMs (cost-reduction pattern)
+
+For users who hit subscription limits or want to reduce costs, Claude Code can be configured to use a local LLM via Ollama or LM Studio [^src43]:
+
+**8-step local setup** [^src43]:
+1. Install Ollama (`brew install ollama`)
+2. Pull a model (`ollama pull llama3.1:8b`, `ollama pull qwen2.5:7b`, etc.)
+3. Start the Ollama server (`ollama serve`)
+4. Set `ANTHROPIC_BASE_URL=http://localhost:11434/v1` in environment
+5. Set `ANTHROPIC_API_KEY=ollama` (dummy key, bypasses API check)
+6. Start Claude Code: `claude --model llama3.1:8b`
+7. Optionally configure in `~/.claude/settings.json` under `model`
+8. Verify: ask Claude to identify itself
+
+**Practical caveats** [^src43]:
+- Local 7B/8B models are not a replacement for frontier models on complex agentic tasks — they handle simple edits and lookups but struggle with multi-step planning and context management
+- Quantization level matters: Q4 (aggressive compression) is fast but lower quality; Q8 is slower but closer to full model quality
+- Best use case: high-frequency low-stakes tasks (formatting, simple refactoring, lookup operations) to preserve Claude API credits for complex work
+
+## Conductor CEO on using Claude Code at scale
+
+Charlie Holtz (Conductor, YC S24) on running Claude Code as the core of a software business [^src44]:
+
+- **"Code is sawdust"**: the old model was "prompts are the byproduct of code." The new model is "prompts are the product; code is the sawdust." The value is in building and refining the prompts that generate any implementation, not in any particular piece of code [^src44].
+- **$22K/month token budget** at peak, maxing out Claude's limits. Conductor's product is customer intelligence — the AI generates reports; the code running it is trivially replaceable [^src44].
+- **Slot-free zones**: sections of code that Claude must never touch — either because they contain invariants that break if changed, or because they encode business logic that took months to get right. Enforced via CLAUDE.md rules + PreToolUse hooks blocking writes to specific paths [^src44].
+- **Malleable software** vision: code that can be freely regenerated because it's not the scarce asset; prompts, data schemas, and business logic are the scarce assets. "We think about our product as prompts and data, not code" [^src44].
+- **Claude vs Codex for different tasks**: Codex (autonomous background tasks, PRs) for well-defined coding tasks; Claude for exploratory/reasoning-heavy work. The model you use should match the task's reasoning demands [^src44].
+
 ## See also
 
 - [[ai-engineering/sources/boris-cherny-100-percent-claude-code|Boris Cherny — 100% Claude Code]] — the full interview source page
@@ -900,3 +977,7 @@ See also [[ai-engineering/agent-harness|Agent Harness]] for the broader scheduli
 [^src38]: [How and when to use subagents in Claude Code](../../raw/web/web-how-and-when-to-use-subagents-in-claude-code-claude.md) — Anthropic
 [^src39]: [Multiagent sessions — Managed Agents API docs](../../raw/web/web-multiagent-sessions.md) — Anthropic
 [^src40]: [Run prompts on a schedule — Claude Code docs](../../raw/web/web-run-prompts-on-a-schedule-claude-code-docs.md) — Anthropic
+[^src41]: [How Claude Code Works — Claude Code docs](../../raw/web/web-how-claude-code-works-claude-code-docs.md) — Anthropic
+[^src42]: [How to Build Effective Claude Code Agents in 2026](../../raw/youtube/youtube-RzLV8sfFdMM-how-to-build-effective-claude-code-agents-in-2026.md) — Cole Medin, YouTube
+[^src43]: [How to Run Claude Code for Free (Local LLMs)](../../raw/email/email-2026-06-21-how-to-run-claude-code-for-free.md) — email newsletter
+[^src44]: [Conductor CEO Charlie Holtz — AI Coding Setup](../../raw/youtube/youtube-fQmlML9Lay4-conductor-ceo-charlie-holtz-walks-us-through-his-ai-coding-s.md) — Charlie Holtz, YouTube

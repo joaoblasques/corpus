@@ -138,6 +138,18 @@ sources:
   - path: raw/youtube/youtube-zzo33HUOfxI-anthropic-just-dropped-claude-for-small-businesses-31-skills.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/web/web-cowork-claude-code-power-for-knowledge-work-claude-by-anthro.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/web/web-get-started-with-claude-cowork-claude-help-center.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-0_dSWLOHKng-my-simple-claude-cowork-system-for-normal-people.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-full-guide-build-report.md
+    channel: notes
+    ingested_at: 2026-06-25
 aliases:
   - Claude Cowork
   - Cowork
@@ -596,6 +608,49 @@ Key patterns [^src42]:
 - **Approval gates before mutations**: business-critical sends (invoices, job posts) require approval; read operations and internal posts (Slack) run without approval
 - **Tone-matched outreach**: customer risk score (from HubSpot purchase history) controls email tone — premium customers get gentle first-contact; long-overdue low-value accounts get firmer language automatically
 
+## Jeff Su's Cowork OS: workstation hierarchy
+
+Jeff Su's "Cowork OS" system adds a layer of organization above the basic workspace/folder setup [^src45]:
+
+**Three-level hierarchy** [^src45]:
+1. **Root `claude.md`** — in the top-level workspace folder; always loaded; contains only: who you are, what you work on, and where to find more context
+2. **Workstation-level `CLAUDE.md`** files — one per workstation (e.g. `work-projects/CLAUDE.md`); loaded when that workstation is active; contains domain-specific rules, preferred tools, and output formats for that category of work
+3. **Project-level `CLAUDE.md`** files — one per active project; contains project-specific constraints, ongoing status, and open questions
+
+**Routing map** [^src45]: the root `claude.md` contains a simple table: "For X type of task, use workstation Y." This prevents Claude from having to guess which workstation's rules apply. Example:
+```
+Writing tasks       → writing-workstation/
+Code projects       → dev-workstation/
+Meeting prep        → assistant-workstation/
+```
+
+**Session audit pattern** [^src45]: at the end of each session, ask Claude to summarize: what was accomplished, what's still open, and what context will be needed next time. This summary goes into the project-level `CLAUDE.md` as a one-line status entry. The audit pattern is the Cowork equivalent of the compound-engineering `/compound` step — it prevents knowledge evaporation between sessions.
+
+**Three token-saving tips** [^src45]:
+1. Keep root `claude.md` under 200 words — only critical identity info
+2. Use voice-principles.md (separate file, pointed to from root) for writing style — load only when writing
+3. Put project status in the project `CLAUDE.md`, not the root — the root shouldn't accumulate session history
+
+**Voice-principles.md pattern** [^src45]: a dedicated file (not embedded in root `claude.md`) that describes the user's writing voice, tone preferences, and communication style. Loaded on demand when writing tasks are active; omitted for code/research tasks that don't need it. Keeps the always-loaded root lean while making voice guidance available when relevant.
+
+## Cowork capabilities overview (Anthropic product + help center)
+
+From the official Anthropic product page and help center [^src43] [^src44]:
+
+**Core Cowork capabilities** [^src43]:
+- **Plugins**: bundles of skills, sub-agents, and MCP connectors installable from the marketplace (`/plugin marketplace add`)
+- **Scheduled tasks** (Routines): run agents on a schedule (hourly to daily) for recurring workflows; no machine needs to be on for cloud-scheduled runs
+- **Sub-agents**: delegate specific tasks to specialist agents; sub-agents can coordinate with each other; parent agent gets only the result
+- **Permission modes** [^src44]:
+  - **Ask mode** (default): Claude asks before taking actions — good for learning Cowork behavior and high-stakes workflows
+  - **Act mode**: Claude takes actions autonomously within the permitted tool set — good for routine automations and trusted workflows
+- **VM isolation** [^src44]: each Cowork cloud session runs in an isolated VM (Ubuntu 24.04); sessions don't share file systems; sub-agents run in separate VMs by default
+- **Projects with memory** [^src44]: projects are persistent workspaces where Claude's memory (what it's learned about your preferences, decisions, and context) accumulates over time — distinct from single sessions
+
+**Long-running tasks** [^src44]: Cowork supports tasks that run for hours (batch document processing, multi-stage research, iterative review cycles). The agent can be observed and interrupted mid-run from the Cowork interface; partial results are saved progressively.
+
+**Mobile access** [^src44]: full Cowork functionality is available on the Claude mobile app (iOS, Android). You can assign tasks from mobile, monitor progress, and receive completion notifications — no laptop required for simple task dispatch.
+
 ## See also
 
 - [[ai-engineering/claude-code|Claude Code]] — the developer counterpart; capabilities land here first
@@ -646,3 +701,7 @@ Key patterns [^src42]:
 [^src40]: [Zero to AI Employee in 30 Minutes with Claude Cowork](../../raw/youtube/youtube-C9gKWTzRukM-claude-cowork-full-course-zero-to-working-ai-employee-2026.md) — YouTube
 [^src41]: [How I Use Claude to Manage My Entire Google Calendar](../../raw/youtube/youtube-nNjNzF8oL7U-claude-does-calendar-management-heres-how.md) — YouTube
 [^src42]: [31 Claude Skills That Run My Small Business](../../raw/youtube/youtube-zzo33HUOfxI-anthropic-just-dropped-claude-for-small-businesses-31-skills.md) — YouTube
+[^src43]: [Claude Cowork for Knowledge Work — Anthropic product page](../../raw/web/web-cowork-claude-code-power-for-knowledge-work-claude-by-anthro.md) — Anthropic
+[^src44]: [Get started with Claude Cowork — Help Center](../../raw/web/web-get-started-with-claude-cowork-claude-help-center.md) — Anthropic Help Center
+[^src45]: [My Simple Claude Cowork System for Normal People (Jeff Su)](../../raw/youtube/youtube-0_dSWLOHKng-my-simple-claude-cowork-system-for-normal-people.md) — Jeff Su, YouTube
+[^src46]: [Full Guide: Build an AI Second Brain (Cole Medin)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-full-guide-build-report.md) — Cole Medin, YouTube (processed report)

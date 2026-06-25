@@ -54,6 +54,12 @@ sources:
   - path: raw/youtube/youtube-P4rv9RSM1IE.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-full-guide-build-report.md
+    channel: notes
+    ingested_at: 2026-06-25
+  - path: raw/web/web-self-hosted-sandboxes.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - prompt injection
   - LLM security
@@ -278,6 +284,32 @@ Specific documented risk vectors [^src17]:
 
 This connects to the MCP security surface (see [[ai-engineering/mcp|MCP]]): both skill files and MCP server instructions can carry injections, and the same defensive instinct applies — read what you're loading before you load it.
 
+## The lethal trifecta (AI second brain risk model)
+
+Cole Medin's AI second brain guide introduces the **lethal trifecta** as the highest-risk configuration in agentic systems [^src17]:
+
+> **Lethal trifecta** = private data access + untrusted content + exfiltration vector
+
+When all three are present simultaneously — e.g. an agent with access to private emails/documents that also reads untrusted web content and has outbound HTTP tools — the risk of successful prompt injection leading to data exfiltration is at its maximum [^src17].
+
+Mitigation pattern: never grant all three simultaneously. Strategies:
+1. Separate agents by trust domain — a "reader" agent with private-data access has no web tools; a "searcher" agent has web access but no private-data access
+2. Use the **zero-trust API model**: all external data is treated as untrusted; no untrusted content can instruct the agent to use output tools
+3. Heartbeat monitoring: a separate supervisor agent periodically checks the primary agent's behavior for anomalies [^src17]
+
+The lethal trifecta is a useful heuristic during design: sketch the agent's tool graph and ask whether any configuration simultaneously achieves all three elements. If yes, restructure.
+
+## Self-hosted sandboxes (Managed Agents)
+
+Anthropic's Managed Agents platform supports **self-hosted sandboxes** — running tool execution on the customer's own infrastructure rather than Anthropic's [^src18]. This directly addresses the lethal-trifecta problem: when private data never leaves the customer environment, the exfiltration surface shrinks dramatically.
+
+Architecture [^src18]:
+- **EnvironmentWorker** — the customer-side worker process that receives tool call requests via a polling connection and executes them locally
+- **AgentToolContext** — the context object passed to each tool execution, carrying request metadata and session state
+- **MCP tunnels** — an alternative path: instead of the polling model, expose the tool surface as an MCP server and connect it to the Managed Agent via a secure tunnel; the agent calls tools via standard MCP protocol
+
+The self-hosted model means: the model (at Anthropic) decides what to do; the execution (tools, file writes, API calls) happens on the customer's infrastructure. Private data is accessed only from within the customer's trust boundary [^src18].
+
 ## See also
 
 - [[ai-engineering/structured-outputs|Structured Outputs]] — output-control layer; reliability prerequisite for security
@@ -308,4 +340,6 @@ This connects to the MCP security surface (see [[ai-engineering/mcp|MCP]]): both
 [^src14]: [Enhancing AI-Driven Defense with Anthropic's Claude Opus 4.7](../../raw/_inbox/web-enhancing-ai-driven-defense-with-anthropics-claude-opus-4-7.md) — Palo Alto Networks
 [^src15]: [Wiz Red Agent and Claude Opus: Securing Production Targets at Scale](../../raw/_inbox/web-red-agent-and-claude-opus-securing-production-targets-at-sca.md) — Wiz
 [^src16]: [Use Claude Cowork safely — Claude Help Center](../../raw/web/web-use-claude-cowork-safely-claude-help-center.md) — Anthropic
+[^src17]: [Full Guide: Build an AI Second Brain (Cole Medin)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-full-guide-build-report.md) — Cole Medin, YouTube (processed report)
+[^src18]: [Self-hosted sandboxes for Managed Agents](../../raw/web/web-self-hosted-sandboxes.md) — Anthropic
 [^src17]: [Claude Cowork Skills overview (YouTube)](../../raw/youtube/youtube-P4rv9RSM1IE.md) — skills security risk section

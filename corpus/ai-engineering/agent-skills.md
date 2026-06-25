@@ -96,6 +96,15 @@ sources:
   - path: raw/youtube/youtube-zzo33HUOfxI-anthropic-just-dropped-claude-for-small-businesses-31-skills.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-CEvIs9y1uog-don-t-build-agents-build-skills-instead-barry-zhang-mahesh-m.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-pFsfax19yOM-full-walkthrough-writing-using-skills-nick-nisi-and-zack-pro.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-4XqVR6xI6Kw-this-one-plugin-just-10xd-claude-code.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - agent skills
   - Claude skills
@@ -583,6 +592,56 @@ The plugin demonstrates the scalable pattern: skills handle business logic; conn
 
 See [[ai-engineering/claude-cowork|Claude Cowork]] where plugins install directly and run as scheduled tasks.
 
+## Skills at enterprise scale: Fortune 100 patterns (Anthropic)
+
+Barry Zhang (Claude Code product) and Mahesh Murag (Anthropic platform) document how skills work in Fortune 100 deployments [^src31]:
+
+The **model/runtime/applications** analogy: the model is the processor, the agent runtime (Claude Code / Claude Cowork) is the OS, and skills are applications [^src31]. Just as applications don't compete with the OS — they extend it — skills extend Claude's default capabilities for specific workflows. This framing makes clear why skills are the right abstraction for enterprise automation: they're installable, versioned, departmental, and composable.
+
+Enterprise patterns [^src31]:
+- **Department-specific skills** — compliance teams build regulatory-review skills; finance teams build unit-economics skills; legal teams build contract-analysis skills. Each department owns their skills, published to an internal marketplace.
+- **The Skill Creator skill** — Anthropic shipped a "skill that creates skills" following its own packaging best practices, solving the cold-start problem of getting teams to write well-structured skills from scratch.
+- **Evolving knowledge base vision** — the end state: "a living system that gets smarter every time someone runs it." Each skill run that surfaces a new pattern contributes a new entry to the org's shared skill library. The ambition is the same as the compound-engineering loop, at org scale.
+
+The claim from enterprise deployments: **skills outperform raw prompts for recurring workflows** because they encode the tribal knowledge (gotchas, edge cases, preferred data sources) that no general model contains, and they're auditable unlike a shared spreadsheet of prompts [^src31].
+
+## WorkOS skill workshop: description as routing rule (Nick Nisi & Zach Prosser)
+
+The WorkOS skill-building workshop (Nick Nisi & Zach Prosser) contains the most actionable single insight on skill authoring [^src32]:
+
+> **The skill description *is* the routing rule.** If the description is fuzzy, the agent won't know when to fire the skill. The discipline: write the description as a series of precise trigger conditions ("Use this skill when the user asks to create a PR, needs to add a new feature to the repo, or wants to run the test suite"). Not a marketing blurb — a routing table.
+
+**Constraints > prescriptive instructions** [^src32]: a common mistake is a skill that says "do step 1, then step 2, then step 3..." for every case. Better: tell Claude what it cannot do (constraints) and let it figure out the steps. Constraints are more robust to edge cases and don't require the author to anticipate every execution path.
+
+**Script interpolation** (`!command`) [^src32]: skills can include shell commands that execute at activation time and inject their output into the skill body. For example, `!git log --oneline -10` in a PR-summary skill auto-pulls the last 10 commits before the model reads the skill body. This lets skills be context-aware without requiring the agent to fetch context separately.
+
+**Skill portability** [^src32]: a skill written for Claude Code also works in Cursor (rules), Codex, Windsurf, and Gemini CLI with minimal adaptation. The `SKILL.md` format is the portable container; platform differences are in invocation syntax, not the skill content.
+
+**Repo roast demo** [^src32]: the workshop demos a "repo roast" skill — given a GitHub repo URL, the skill audits code quality, identifies anti-patterns, and produces a structured critique. The demo illustrates how a multi-step workflow (fetch → analyze → structure output) becomes a single `/roast` command for any project.
+
+## Superpowers plugin: 14-skill full development loop
+
+The Superpowers plugin (community marketplace, ~89K★ at time of research) wraps 14 skills around a complete development loop [^src33]:
+
+**Skill groupings** [^src33]:
+| Phase | Skills |
+|---|---|
+| Clarify | `/clarify`, `/requirements` |
+| Design | `/design`, `/architecture` |
+| Plan | `/plan`, `/breakdown` |
+| Code | `/code`, `/refactor`, `/debug` |
+| Verify | `/test`, `/review`, `/ultra-review` |
+| Meta | `/ultra-think`, `/visual` |
+
+**Visual companion** [^src33]: Superpowers ships a localhost web UI at `localhost:3000` (started with `npx superpowers`) that displays the agent's plan, task breakdown, and progress — making the usually invisible agentic loop visible during execution.
+
+**Measured cost savings** [^src33]: compared to vanilla Claude Code (no plugin):
+- Medium-complexity tasks: **9% token savings** (8% cost savings)
+- Complex tasks: **14% token savings** (9% cost savings)
+- Simple tasks: minimal difference (structured workflows add overhead for trivial tasks)
+
+The savings come from: structured task decomposition reducing rework; review skills catching errors before expensive downstream consequences; and explicit planning reducing wandering [^src33].
+
 ## See also
 
 - [[ai-engineering/context-window-management|Context Window Management]] — why a lean window matters; sub-agents
@@ -629,3 +688,6 @@ See [[ai-engineering/claude-cowork|Claude Cowork]] where plugins install directl
 [^src28]: [buildermethods/agent-os — inject codebase standards for spec-driven development (★4934)](../../raw/github/github-buildermethods-agent-os.md) — buildermethods, GitHub
 [^src29]: [zazencodes/agent-skills — cross-tool skill sharing via symlinks](../../raw/github/github-zazencodes-agent-skills.md) — ZazenCodes, GitHub
 [^src30]: [31 skills small business plugin — parallel pull, approval gates, Connectors](../../raw/youtube/youtube-zzo33HUOfxI-anthropic-just-dropped-claude-for-small-businesses-31-skills.md) — YouTube
+[^src31]: [Don't Build Agents, Build Skills Instead — Barry Zhang & Mahesh Murag](../../raw/youtube/youtube-CEvIs9y1uog-don-t-build-agents-build-skills-instead-barry-zhang-mahesh-m.md) — Anthropic Developer Conference, YouTube
+[^src32]: [Full Walkthrough: Writing & Using Skills — Nick Nisi & Zach Prosser](../../raw/youtube/youtube-pFsfax19yOM-full-walkthrough-writing-using-skills-nick-nisi-and-zack-pro.md) — WorkOS (Nick Nisi & Zach Prosser), YouTube
+[^src33]: [This One Plugin Just 10x'd Claude Code (Superpowers)](../../raw/youtube/youtube-4XqVR6xI6Kw-this-one-plugin-just-10xd-claude-code.md) — YouTube

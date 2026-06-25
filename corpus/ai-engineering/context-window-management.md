@@ -18,6 +18,12 @@ sources:
   - path: raw/web/web-context-windows.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-9ToOfgZ4qqQ-i-stopped-hitting-claude-code-usage-limits-here-s-how.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-RzLV8sfFdMM-how-to-build-effective-claude-code-agents-in-2026.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - context window management
   - context management
@@ -30,7 +36,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-21
-updated: 2026-06-17
+updated: 2026-06-25
 ---
 
 # Context Window Management
@@ -131,12 +137,40 @@ Models with 1M-token context: Claude Opus 4.8, Mythos Preview, Opus 4.7, Opus 4.
 
 **Server-side compaction (beta)**: automatic summarization and replacement of older context when a conversation approaches a configurable threshold. Available on Fable 5, Mythos 5, Opus 4.8, Mythos Preview, Opus 4.7, 4.6, and Sonnet 4.6 [^src4]. The recommended primary strategy for long-running agentic workloads.
 
+## MCP server token cost (practitioner data)
+
+Each MCP server connected to Claude Code adds a fixed overhead to every context window — because tool descriptions for all connected MCP tools load at session start. Measured practitioner data: **~18,000 tokens per MCP server** [^src5]. With 3+ MCP servers active, the baseline cost eats a significant fraction of available context before any work is done.
+
+**CLI-over-MCP substitution** [^src5]: many MCP tools that fetch data or run operations can be replaced by a bash tool call to the equivalent CLI (e.g. `gh` for GitHub operations, `jq` for JSON processing). One practitioner reported **~40% context savings** by replacing MCP servers with CLI calls in bash — same functionality, 18K tokens saved per swapped-out MCP.
+
+**Practical rules** derived from this [^src5]:
+- Audit active MCP servers regularly; disable any not needed for the current task
+- Prefer CLI (via bash) over MCP for operations where a good CLI exists and the schema overhead isn't justified
+- Keep MCP servers for tasks requiring structured input/output or where the tool integration adds real value beyond CLI
+
+## Progressive CLAUDE.md disclosure
+
+Corollary to the skills pattern (§7): the root `CLAUDE.md` itself can be structured to load progressively. Pattern: keep the root `CLAUDE.md` under 300 lines with pointers to domain-specific files; those files only load when referenced by Claude [^src5]. The root file should contain only: critical constraints, build/test commands, and pointers — not every convention, preference, or background detail. Anything that isn't needed on every single turn is a candidate for an on-demand skill or sub-file.
+
+**Auto-compact threshold override** [^src5]: Claude Code auto-compacts when the context reaches ~95% full by default. This threshold can be overridden (e.g. trigger at 75%) to compact earlier, while there's still headroom for the model to perform the compression well. Compacting at 95% means the model is already degraded when it tries to summarize. Compacting at 75% trades some context efficiency for much higher quality compaction.
+
+**Bash output size** [^src5]: bash tool output accumulates fast. Long-running commands (test suites, build logs) that dump to stdout can consume 100K+ tokens of context if not managed. Pattern: redirect verbose output to files, then read only the relevant excerpt; or use a post-process step to summarize before injecting into context.
+
+**Deny rules for scope control** [^src5]: `.claude/settings.json` supports `deny` patterns that prevent Claude from reading or acting on paths outside the intended scope. Using deny rules to exclude `node_modules/`, build output directories, and large binary asset directories reduces accidental context consumption when Claude explores the repo.
+
+## The "dumb zone" at very long contexts
+
+At approximately **250K tokens** context length, Opus 4 series models exhibit a quality degradation that practitioners call the "dumb zone" — reasoning quality noticeably drops even though the context limit is 1M tokens [^src6]. This is distinct from context rot (gradual degradation across turns) — it is a sharper threshold behavior observed with Opus specifically.
+
+Implication: for tasks expected to consume 200K+ tokens, consider earlier context resets, tighter compaction, or subagent offloading to keep each individual context well below 250K [^src6].
+
 ## See also
 
 - [[ai-engineering/context-engineering|Context Engineering]] — governs how context is assembled at inference time
 - [[ai-engineering/agent-skills|Agent Skills]] — progressive disclosure as a context-saving technique
 - [[ai-engineering/agent-memory|Agent Memory]] — the two-tier memory model (short-term / long-term)
 - [[ai-engineering/ai-agent|AI Agent]] — the agentic loop that generates context growth
+- [[ai-engineering/agent-cost-management|Agent Cost Management]] — MCP token overhead and cost strategies
 
 ---
 
@@ -144,3 +178,5 @@ Models with 1M-token context: Claude Opus 4.8, Mythos Preview, Opus 4.7, Opus 4.
 [^src2]: [How AI agents & Claude skills work (Clearly Explained)](<../../raw/youtube/How AI agents & Claude skills work (Clearly Explained).md>) — Greg Isenberg × Ras Mic, YouTube
 [^src3]: [Using Claude Code: session management and 1M context](../../raw/notes/notes-clippings-using-claude-code-session-management-and-1m-context.md) — Thariq Shihipar, Anthropic
 [^src4]: [Context windows — Claude Platform docs](../../raw/web/web-context-windows.md) — Anthropic
+[^src5]: [I Stopped Hitting Claude Code Usage Limits — Here's How](../../raw/youtube/youtube-9ToOfgZ4qqQ-i-stopped-hitting-claude-code-usage-limits-here-s-how.md) — Brad, YouTube
+[^src6]: [How to Build Effective Claude Code Agents in 2026](../../raw/youtube/youtube-RzLV8sfFdMM-how-to-build-effective-claude-code-agents-in-2026.md) — Cole Medin, YouTube

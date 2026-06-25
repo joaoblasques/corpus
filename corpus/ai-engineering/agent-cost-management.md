@@ -15,6 +15,12 @@ sources:
   - path: raw/youtube/youtube-n8rP6Ceskm4.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-9ToOfgZ4qqQ-i-stopped-hitting-claude-code-usage-limits-here-s-how.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/email/email-2026-06-21-how-to-run-claude-code-for-free.md
+    channel: email
+    ingested_at: 2026-06-25
 aliases:
   - agentic AI costs
   - agent cost management
@@ -124,8 +130,26 @@ Integration: drop-in replacement for OpenAI-compatible endpoint; add `X-Mnfst-Ro
 
 Contrast with Manifest: Manifest saves 30–70% by using cheaper models; Headroom saves ~5% on the same model, with zero behavioral change. They're complementary: route to cheaper models first, then compress the prompt [^src4].
 
+## MCP server token overhead
+
+Each connected MCP server adds tool descriptions to every session's context window. Measured practitioner data: **~18,000 tokens per MCP server** loaded at session start [^src5]. With 3 MCP servers active, that's ~54,000 tokens of fixed overhead before the first user message.
+
+Mitigation: replace MCP calls with bash tool calls to the equivalent CLI (e.g., `gh` CLI instead of GitHub MCP). One practitioner reported **~40% context savings** by swapping MCP servers for CLI equivalents [^src5]. See [[ai-engineering/context-window-management|Context Window Management]] for the full analysis.
+
+## Local LLMs as cost fallback
+
+For high-volume low-stakes tasks (formatting, simple refactoring, lookup), running a local LLM via Ollama/LM Studio can eliminate API costs entirely [^src6]:
+
+- **Setup**: `brew install ollama` → `ollama pull qwen2.5:7b` → set `ANTHROPIC_BASE_URL=http://localhost:11434/v1`
+- **Trade-off**: local 7B models handle simple tasks well but fail on complex multi-step planning; use for high-frequency routine tasks, reserve API credits for complex reasoning
+- **Quantization**: Q8 (larger file, better quality) vs Q4 (smaller, faster, lower quality) — Q4_K_M is a common middle ground
+
+This is not a replacement strategy — it's a **tiered cost model** where local handles tier-1 tasks (simple, high-volume) and the API handles tier-2+ tasks (complex, low-volume) [^src6].
+
 [^src1]: [Managing Agentic AI Costs at Scale](../../raw/web/managing-agentic-ai-costs-at-scale.md)
 [^src2]: [How to stop hitting Claude usage limits — 23 habits](../../raw/web/web-how-to-stop-hitting-claude-usage-limits.md) — Ruben Hassid
 [^src3]: [mnfst/manifest — GitHub ★7094](../../raw/github/github-mnfst-manifest.md)
 [^src4]: [Top 10 GitHub repos for AI devs (YouTube)](../../raw/youtube/youtube-n8rP6Ceskm4.md) — Headroom entry at ~3:00
+[^src5]: [I Stopped Hitting Claude Code Usage Limits — Here's How](../../raw/youtube/youtube-9ToOfgZ4qqQ-i-stopped-hitting-claude-code-usage-limits-here-s-how.md) — Brad, YouTube
+[^src6]: [How to Run Claude Code for Free (Local LLMs)](../../raw/email/email-2026-06-21-how-to-run-claude-code-for-free.md) — email newsletter
 </content>

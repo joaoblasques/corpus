@@ -54,6 +54,12 @@ sources:
   - path: raw/web/web-hooks-reference-claude-code-docs.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/web/web-how-claude-code-works-claude-code-docs.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-RzLV8sfFdMM-how-to-build-effective-claude-code-agents-in-2026.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - harness
   - agent harness
@@ -87,6 +93,8 @@ Concretely, a harness includes [^src1]:
 - Observability (logs, traces, cost and latency metering)
 
 Claude Code, Cursor, Codex, Aider, Cline are all harnesses; the model underneath is sometimes the same, but the behavior you experience is dominated by what the harness does [^src1]. Simon Willison's reduction of the core loop: an agent "runs tools in a loop to achieve a goal" — the skill is in the design of both the tools and the loop [^src1].
+
+**Official Anthropic definition**: a harness is "a wrapper around the LLM, the tools and context it has access to" [^src16]. Claude Code itself is a harness — one specifically designed around software engineering workflows. The **AI layer** (the harness layer you control) consists of: `CLAUDE.md` / `AGENTS.md` (standing instructions), skills (reusable procedures), hooks (lifecycle enforcement), and MCPs (external tools) [^src17].
 
 **Pi** (Mario Zechner) is a notable open-source harness in this class — described as "super lightweight and built to be highly extensible," provider-agnostic, and embeddable via a Node.js SDK [^src7]. It is the runtime Boring UI builds on (Boring UI *uses* Pi as its agent harness and extends Pi's plugin model), a concrete case of a product picking an existing harness rather than rolling its own loop [^src7]. See [[ai-engineering/agent-ui|Agent UI]].
 
@@ -388,3 +396,5 @@ The Claude Code hooks system is the main harness extension point for adding **au
 [^src13]: [Handle approvals and user input — Claude Code Agent SDK docs](../../raw/web/web-handle-approvals-and-user-input-claude-code-docs.md) — Anthropic
 [^src14]: [Text editor tool — Anthropic API docs](../../raw/web/web-text-editor-tool.md) — Anthropic
 [^src15]: [Hooks reference — Claude Code docs](../../raw/web/web-hooks-reference-claude-code-docs.md) — Anthropic
+[^src16]: [How Claude Code Works — Claude Code docs](../../raw/web/web-how-claude-code-works-claude-code-docs.md) — Anthropic
+[^src17]: [How to Build Effective Claude Code Agents in 2026](../../raw/youtube/youtube-RzLV8sfFdMM-how-to-build-effective-claude-code-agents-in-2026.md) — Cole Medin, YouTube

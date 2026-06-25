@@ -84,6 +84,9 @@ sources:
   - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-it-s-cognitive-up-report.md
     channel: notes
     ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-full-guide-build-report.md
+    channel: notes
+    ingested_at: 2026-06-25
 aliases:
   - agent memory
   - memory
@@ -470,6 +473,22 @@ Built in Obsidian on plain markdown files, drawing on metacognition, GTD, and Ze
 
 **Anatomy of a note**: title (distills one atomic idea), body, source links, related-note links [^src24].
 
+## SOUL.md / USER.md / MEMORY.md pattern (Cole Medin)
+
+Cole Medin's AI second brain guide introduces a three-file memory hierarchy for persistent agent context [^src26]:
+
+| File | Purpose |
+|---|---|
+| `SOUL.md` | The agent's core identity, values, and behavioral principles — "who the agent is" |
+| `USER.md` | Everything the agent knows about the user — preferences, communication style, recurring context |
+| `MEMORY.md` | Session-to-session operational memory — ongoing tasks, decisions made, facts discovered |
+
+The three-file split separates concerns: `SOUL.md` is authored once and rarely changes (agent identity); `USER.md` updates as the agent learns about the user; `MEMORY.md` is rewritten each session based on what was learned. All three load at session start [^src26].
+
+**Heartbeat pattern** [^src26]: a supervisor agent (the "heartbeat") pings the primary agent on a schedule to check its status, review recent actions, and flag anomalies. This provides lightweight observability without requiring a full tracing infrastructure — the heartbeat is itself a Claude Code session reading the primary agent's logs.
+
+**Knowledge compounding via daily logs** [^src26]: the agent writes a daily log of everything it did, observed, and concluded. A separate "promoter" step (run weekly or manually) reviews recent daily logs and promotes high-value learnings into `USER.md` or the long-term knowledge base. This is the same compound-engineering loop applied to memory — "every run makes the memory better."
+
 ## See also
 
 - [[ai-engineering/context-window-management|Context Window Management]] — strategies for what to keep, compress, or drop from short-term memory
@@ -508,3 +527,4 @@ Built in Obsidian on plain markdown files, drawing on metacognition, GTD, and Ze
 [^src23]: [How To Build LLM Wiki In Obsidian](../../raw/youtube/youtube-QbjAQFJJyt0-how-to-build-llm-wiki-in-obsidian-a-memory-layer-for-any-age.md) — Wanderloots, YouTube
 [^src24]: [The Definitive Guide to Setting Up Your AI Second Brain](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-the-definitive-gu-report.md) — YouTube (processed report)
 [^src25]: [It's Cognitive Uploading, Not Offloading — NotebookLM / Steven Johnson](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-it-s-cognitive-up-report.md) — YouTube (processed report)
+[^src26]: [Full Guide: Build an AI Second Brain (Cole Medin)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-full-guide-build-report.md) — Cole Medin, YouTube (processed report)

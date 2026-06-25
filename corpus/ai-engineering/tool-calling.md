@@ -21,6 +21,12 @@ sources:
   - path: raw/web/web-files-api.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/web/web-bash-tool.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/web/web-web-search-tool.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - tool use
   - function calling
@@ -117,6 +123,29 @@ Weak: "Counts rows." Strong: "Returns the number of rows in a database table. Us
 
 A clear description also reduces cost: "A clear description helps the model decide quickly, while an unclear description makes it think longer and use more tokens" [^src4].
 
+## Bash tool
+
+The bash tool (`bash_20250124`) provides a persistent bash session for code execution within the agent's context [^src7]. Key properties:
+
+- **Persistent session** — the bash environment persists across tool calls within a session; environment variables and working directory carry forward [^src7]
+- **Token overhead** — approximately **245 input tokens** per bash tool call (tool description overhead) [^src7]
+- **Security model** — Anthropic recommends an **allowlist approach** (explicitly permit needed commands) rather than a blocklist (deny dangerous commands); a blocklist is harder to keep exhaustive [^src7]
+- **Terminal-Bench 2.0** — the benchmark that measures bash tool quality; Claude 4 series shows significantly improved performance on long-horizon terminal tasks [^src7]
+- **Output limits** — bash output is truncated if it exceeds the limit; structure output to put important results first; use file writes for large intermediate outputs [^src7]
+
+Best pattern: use bash for multi-step shell workflows, but avoid accumulating huge output in the conversation — pipe large data to files, then read selectively [^src7].
+
+## Web search tool
+
+The web search tool (`web_search_20250305`) provides internet search capability with optional dynamic filtering [^src8]. Key properties:
+
+- **Dynamic filtering** (requires code execution enabled): Claude can post-process search results by writing and running code to filter/rank results before injecting into context — reduces token cost when many results are noisy [^src8]
+- **Pricing**: **$10 per 1,000 searches** (as of 2026-06-25) [^src8]
+- **Streaming support**: search results stream progressively [^src8]
+- **Model support**: all Claude 4 / Opus 4 series models [^src8]
+- **Citations**: always enabled on web search results (unlike web fetch, where citations are optional) [^src8]
+- **`search_depth`** parameter: `"basic"` (fast, lower cost) vs `"advanced"` (more sources, higher quality) [^src8]
+
 ## Web fetch tool
 
 The web fetch tool (`web_fetch_20260209`) allows Claude to retrieve content from specified URLs and PDFs, with dynamic filtering on supported models [^src5]. Key properties:
@@ -158,3 +187,5 @@ Tool results are one of the four context components injected into an agent's con
 [^src4]: [Agents in Action #2: How Agents Interact with the Real World](../../raw/email/email-2026-06-21-agents-in-action-2-how-agents-interact-with-the-real-world.md) — Pipeline to Insights newsletter
 [^src5]: [Web fetch tool — Claude Platform docs](../../raw/web/web-web-fetch-tool.md) — Anthropic
 [^src6]: [Files API — Claude Platform docs](../../raw/web/web-files-api.md) — Anthropic
+[^src7]: [Bash tool — Anthropic docs](../../raw/web/web-bash-tool.md) — Anthropic
+[^src8]: [Web search tool — Anthropic docs](../../raw/web/web-web-search-tool.md) — Anthropic

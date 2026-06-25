@@ -33,6 +33,12 @@ sources:
   - path: raw/youtube/youtube-05aY2LRIC3s.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/github/github-zazencodes-ai-engineer-roadmap-notebooks.md
+    channel: github
+    ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-karpathy-s-llm-wi-report.md
+    channel: notes
+    ingested_at: 2026-06-25
 aliases:
   - learning AI
   - learning AI engineering
@@ -149,6 +155,31 @@ Curiosity operationalized: "don't just try one approach and accept it — run 2�
 | Data/context is the work | Save context in Projects; feed real examples | "The data engineering part defines 80% of the project" |
 | Less is more | Clear outcome over a long describing paragraph | 1,000-line prompt → 250 lines, more consistent |
 
+## AI Engineer Roadmap (zazencodes, Jupyter notebooks)
+
+`zazencodes/ai-engineer-roadmap` (★10, early community project) provides structured Jupyter notebooks covering the hands-on engineering skills needed to move from "knows the concepts" to "can build the thing" [^src11]:
+
+- Notebook series covers: prompt engineering fundamentals, RAG implementation, tool use + function calling, multi-agent orchestration, evaluation patterns
+- Executable: each notebook is self-contained and runnable in Google Colab or local Jupyter
+- Early project (10 stars) — low signal on community adoption but good structure for self-directed learners who want code-first exposure
+
+Use alongside the Anthropic prompt-eng-tutorial for a code-centric complement to the theory-heavy courses [^src11].
+
+## Karpathy's LLM Wiki setup (Teacher's Tech breakdown)
+
+Teacher's Tech's guide to implementing Karpathy's LLM wiki pattern introduces the 3-layer corpus architecture [^src12]:
+
+1. **Raw layer** — unprocessed source documents (PDFs, articles, transcripts) kept immutable
+2. **Wiki layer** — LLM-generated summaries, synthesis pages, and entity pages derived from the raw layer; this is the searchable, queryable knowledge base
+3. **Schema layer** — structured data extracted from the wiki (knowledge graph edges, entity lists, claim databases)
+
+Key principles from the guide [^src12]:
+- **Compounding**: each ingest makes the corpus richer, not just bigger — summaries reference prior summaries, entities accumulate context across sources
+- **Linting**: periodic passes to find orphan pages, stale claims, and duplicate entities; the linter is the quality gate
+- **Read-first discipline**: always read the raw file fully before writing corpus pages; paraphrasing without reading produces lossy garbage
+
+See [[ai-engineering/agent-memory|Agent Memory]] for how the LLM wiki pattern relates to RAG and knowledge graph memory architectures.
+
 ## See also
 
 - [[ai-engineering/ai-fundamentals|AI Fundamentals]] — the classical-AI base (search, logic, uncertainty) under all of this
@@ -187,3 +218,5 @@ This is the authoritative Anthropic tutorial — interactive, runnable, and regu
 [^src8]: [anthropics/prompt-eng-tutorial — GitHub ★36,609](../../raw/github/github-anthropics-prompt-eng-tutorial.md) — Anthropic
 [^src9]: [DataTalksClub/ai-dev-tools-zoomcamp — GitHub ★1,129](../../raw/github/github-datatalksclub-ai-dev-tools-zoomcamp.md) — DataTalksClub
 [^src10]: [12-hour Claude Code course (YouTube)](../../raw/youtube/youtube-05aY2LRIC3s.md)
+[^src11]: [zazencodes/ai-engineer-roadmap — Jupyter notebooks for AI engineering (★10)](../../raw/github/github-zazencodes-ai-engineer-roadmap-notebooks.md) — zazencodes, GitHub
+[^src12]: [Karpathy's LLM Wiki Setup Guide](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-karpathy-s-llm-wi-report.md) — Teacher's Tech, YouTube (processed report)

@@ -12,16 +12,21 @@ sources:
   - path: raw/_inbox/web-the-agent-that-saved-my-brain.md
     channel: web
     ingested_at: 2026-06-24
+  - path: raw/web/web-my-ai-had-already-fixed-the-code-before-i-saw-it.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - compound engineering
   - compound knowledge
   - compound loop
   - plan-work-review-compound
+  - compounding engineering
+  - self-improving development systems
 tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-23
-updated: 2026-06-24
+updated: 2026-06-25
 ---
 
 # Compound Engineering
@@ -93,6 +98,16 @@ Austin Tedesco, Every's head of growth ("the first to tell you he doesn't have a
 
 Pattern: knowledge layers (MEMORY.md, domain context) + skills for repeat workflows → an agent that handles execution of recurring growth tasks so Tedesco can "have energy for the hard and fulfilling parts of my job" [^src3]. Setup took 3 weeks of exploration before building. The compound knowledge plugin is open-sourced for others to adapt.
 
+## Compounding engineering in practice (Every.to)
+
+Every.to's Cora (AI-enabled email assistant) team practices this as a first principle [^src4]. A concrete example: Claude Code reviewed prior PRs and pre-applied lessons — "Changed variable naming to match pattern from PR #234, removed excessive test coverage per feedback on PR #219, added error handling similar to approved approach in PR #241" — without being explicitly asked [^src4]. The key disciplines:
+
+- Every PR that fixes something *teaches* the system — a bug fix is half-done if it doesn't prevent its entire category
+- Every code review should yield extractable lessons written back to `CLAUDE.md`
+- The workflow for new features: write a failing test *first*, have Claude iterate the detection logic until the test passes 10/10 runs, then codify the whole pattern in `CLAUDE.md` as a reusable workflow [^src4]
+
+"Typical AI engineering is about short-term gains. You prompt, it codes, you ship. Then you start over. Compounding engineering is about building systems with memory, where every pull request teaches the system, every bug becomes a permanent lesson, and every code review updates the defaults." [^src4]
+
 ## See also
 
 - [[ai-engineering/agentic-coding|Agentic Coding]] — the broader orchestration discipline; compound engineering is its learning-loop layer
@@ -107,3 +122,4 @@ Pattern: knowledge layers (MEMORY.md, domain context) + skills for repeat workfl
 [^src1]: [Compound Engineering: How Every.to Codes with Agents](../../raw/web/web-compound-engineering-how-every-codes-with-agents.md) — Every.to
 [^src2]: [EveryInc/compound-engineering-plugin (GitHub)](../../raw/web/github-everyinc-compound-engineering-plugin-official-compoun.md) — EveryInc
 [^src3]: [The Agent That Saved My Brain](../../raw/_inbox/web-the-agent-that-saved-my-brain.md) — Austin Tedesco, Every
+[^src4]: [My AI Had Already Fixed the Code Before I Saw It](../../raw/web/web-my-ai-had-already-fixed-the-code-before-i-saw-it.md) — Every.to

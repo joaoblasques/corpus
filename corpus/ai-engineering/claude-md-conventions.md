@@ -30,6 +30,12 @@ sources:
   - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-claude-code-karpa-report.md
     channel: notes
     ingested_at: 2026-06-25
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-the-karpathy-clau-report.md
+    channel: notes
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-9ToOfgZ4qqQ-i-stopped-hitting-claude-code-usage-limits-here-s-how.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - CLAUDE.md
   - AGENTS.md
@@ -151,6 +157,26 @@ The plugin ships 37 skills and 51 agents. The core convention it distributes is 
 
 This illustrates the current state of cross-platform portability: the base layer (Claude Code's plugin manifest + `SKILL.md` format) is the lingua franca, but different harnesses require adapter steps as their native plugin specs evolve [^src6]. See [[ai-engineering/agentic-coding|Agentic Coding]] for the full Compound Engineering methodology.
 
+## Karpathy's four principles (karpathy-skills CLAUDE.md — 43K stars)
+
+Jay's breakdown of the karpathy-skills CLAUDE.md (the most starred public `CLAUDE.md` as of mid-2026) distills four operating principles that make the file unusually effective [^src8]:
+
+1. **Think and clarify before coding** — the file opens with "Before writing any code, think about the problem first." Ask clarifying questions before starting implementation. This is the planning-first discipline also in [[ai-engineering/compound-engineering|Compound Engineering]] and [[ai-engineering/spec-driven-development|Spec-Driven Development]].
+2. **Simplicity first** — "Write the simplest code that could possibly work." Prioritize clarity over cleverness; avoid over-engineering. When asked for a 5-step example, Karpathy-Claude produces 20 clean lines; vanilla Claude produces 50 with edge cases that weren't asked for.
+3. **Surgical changes only** — make minimal targeted changes. "Don't refactor code you're not working on." This prevents scope creep and reduces the blast radius of agent edits — the same discipline as the Ponytail YAGNI plugin.
+4. **Goal-driven (declarative) execution** — declare *what* you want, not *how* to do it. The CLAUDE.md shifts the agent from imperative ("do this, then this") to declarative ("the user should be able to do X") — consistently produces better results across coding tasks [^src8].
+
+The 43K stars (making it the most-copied instruction file in the ecosystem) reflect that these four principles are legible, transferable, and don't require any specific codebase — they work across any project.
+
+## Root CLAUDE.md size discipline
+
+The practitioner consensus on root CLAUDE.md size: **keep it under 300 lines** [^src9]. Above that threshold:
+- Load time becomes noticeable at session start
+- Context cost grows on every turn (the whole file is re-injected)
+- The agent starts ignoring later sections when the file is "one big wall of text"
+
+The preferred pattern: root `CLAUDE.md` contains only critical constraints, build/test commands, and pointers to domain files. Domain-specific context goes in subdirectory `CLAUDE.md` files (which load only when Claude is in that directory) or in skills (which load only when invoked). This is the same progressive disclosure principle as skills but applied to the instruction file hierarchy [^src9].
+
 ## Related
 
 - [[ai-engineering/agent-skills|Agent Skills]] — progressive disclosure; skills vs always-on instruction files
@@ -167,4 +193,6 @@ This illustrates the current state of cross-platform portability: the base layer
 [^src5]: [cursor/plugins — Cursor Plugin Specification and Official Plugins](../../raw/web/github-cursor-plugins-cursor-plugin-specification-and-offici.md)
 [^src6]: [EveryInc/compound-engineering-plugin — Official Compound Engineering plugin](../../raw/notes/notes-clippings-everyinccompound-engineering-plugin-official-compound-engine.md) — EveryInc, GitHub
 [^src7]: [The Karpathy CLAUDE.md File That 43,000 Developers Installed](../../raw/youtube/d8BGxfW3Vj4-the-karpathy-claude-md-file-that-43-000-developers-installed.md) — Jay E, YouTube
+[^src8]: [The Karpathy Claude.md Breakdown](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-the-karpathy-clau-report.md) — Jay, YouTube (processed report)
+[^src9]: [I Stopped Hitting Claude Code Usage Limits — Here's How](../../raw/youtube/youtube-9ToOfgZ4qqQ-i-stopped-hitting-claude-code-usage-limits-here-s-how.md) — Brad, YouTube
 [^src8]: [Claude Code + Karpathy's Obsidian = New Meta](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-claude-code-karpa-report.md) — YouTube (notes report)

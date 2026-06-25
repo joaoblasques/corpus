@@ -99,6 +99,15 @@ sources:
   - path: raw/youtube/youtube-4JpwNnw0-jI-this-karpathy-system-could-701x-your-ai-workflows-86-000-git.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/web/web-claude-swe-bench-performance.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/web/web-the-unreasonable-effectiveness-of-html.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-fQmlML9Lay4-conductor-ceo-charlie-holtz-walks-us-through-his-ai-coding-s.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - agentic coding
   - agentic engineering
@@ -589,6 +598,35 @@ The agent reads the instructions and scoring definition, modifies the asset, run
 
 The auto-research pattern and the 3-file system are an operationalized version of the theoretical loop in [[ai-engineering/spec-driven-development|Spec-Driven Development]]: instructions file = spec, scoring mechanism = automated eval, asset = implementation.
 
+## HTML as agentic output format
+
+HTML is an underrated output format for LLM agents — not just for web pages, but as a general-purpose spatial format [^src31]:
+
+- **Spatial information**: HTML can represent layouts, tables, hierarchies, and visual structures that Markdown cannot. An agent generating a comparison matrix, a Gantt chart, or a status dashboard produces dramatically more readable output in HTML than in prose or Markdown.
+- **Interactive prototypes**: agents can generate clickable, interactive HTML prototypes in a single turn — useful for rapid UI exploration without any build pipeline.
+- **Slide decks**: HTML with CSS animations and click-through navigation serves as a fully functional presentation format. An agent can go from "generate a 5-slide deck on X" to a working presentation in one step.
+- **Custom editors with export**: agents generating structured forms (survey builders, configuration editors) can ship the editor and the export logic in the same HTML file.
+
+The pattern is particularly effective for tasks where the *shape* of the output matters as much as the content — dashboards, reports, interactive specs, living documentation [^src31]. Claude Code's `--output html` flag (when paired with an appropriate skill) pipes output through a browser preview automatically.
+
+## Minimal scaffold philosophy (SWE-bench lessons)
+
+Anthropic's SWE-bench 49% result reinforces a counter-intuitive principle: **simple scaffolds often beat elaborate ones** [^src30].
+
+Practitioners building custom agentic coding systems tend to over-engineer the harness — custom retry logic, elaborate state machines, multi-layer fallbacks. The SWE-bench result suggests that the model's judgment (given good tool descriptions) is more reliable than the scaffold's control flow. The winning pattern: clear tool descriptions, standard tools (bash, edit, read), minimal guardrails, let the model navigate.
+
+This is not an argument against harnesses (see [[ai-engineering/agent-harness|Agent Harness]]) — it's an argument for **harnesses that amplify model judgment** rather than replacing it with procedural control flow [^src30].
+
+## Slot-free zones and malleable software (Conductor)
+
+Two concepts from Charlie Holtz (Conductor, YC S24) relevant to agentic coding at production scale [^src32]:
+
+**Slot-free zones** — sections of code the agent is never allowed to modify, enforced via CLAUDE.md rules and PreToolUse hooks blocking writes to specific paths. Named for the idea that there's no "slot" for the agent to modify them. Useful for: invariants that break if changed, business logic that took months to get right, generated code that is itself used as training data.
+
+**Malleable software** — the vision that code becomes a disposable artifact (like a build output) rather than a precious investment. "We think about our product as prompts and data, not code." In this model, the scary parts (schema migrations, API contracts, business logic) are hardened; everything else is freely regeneratable [^src32].
+
+The tension: slot-free zones prevent drift in invariants; malleable software enables aggressive regeneration of everything else. Good agentic coding systems explicitly categorize code into these two categories and apply different governance to each.
+
 ## See also
 
 - [[ai-engineering/mcp|MCP]] — connecting agents to external systems
@@ -628,3 +666,6 @@ The auto-research pattern and the 3-file system are an operationalized version o
 [^src27]: [OpenCode with Local LLMs — is it actually viable?](../../raw/youtube/youtube-8f5qWdx9L-Q.md) — YouTube
 [^src28]: [Local AI Coding is Finally Good Enough (YouTube)](../../raw/youtube/youtube-zPqcS5AvQvQ.md) — ForrestKnight (hardware: AMD R9 700 + Threadripper 9980X; models: Qwen-3-72B MoE + Qwen-3.6-27B; codebases: Excalidraw, Warp)
 [^src29]: [Karpathy's Auto-Research System: 3 Files That Change Everything](../../raw/youtube/youtube-4JpwNnw0-jI-this-karpathy-system-could-701x-your-ai-workflows-86-000-git.md) — YouTube
+[^src30]: [Claude on SWE-bench Verified](../../raw/web/web-claude-swe-bench-performance.md) — Anthropic
+[^src31]: [The Unreasonable Effectiveness of HTML for Agentic Output](../../raw/web/web-the-unreasonable-effectiveness-of-html.md) — blog post
+[^src32]: [Conductor CEO Charlie Holtz — AI Coding Setup](../../raw/youtube/youtube-fQmlML9Lay4-conductor-ceo-charlie-holtz-walks-us-through-his-ai-coding-s.md) — Charlie Holtz, YouTube
