@@ -12,6 +12,9 @@ sources:
   - path: raw/youtube/youtube-vtyx7ex-0ba.md
     channel: youtube
     ingested_at: 2026-06-17
+  - path: raw/pdf/pdf-the-software-engineers-guidebook-v1-08-pdf.md
+    channel: pdf
+    ingested_at: 2026-06-25
 aliases:
   - engineering craft
   - resourceful engineer
@@ -26,7 +29,7 @@ tags:
   - corpus/software-engineering
   - concept
 created: 2026-06-12
-updated: 2026-06-17
+updated: 2026-06-25
 ---
 
 # Engineering Craft
@@ -77,10 +80,15 @@ The panel's strongest craft contribution is treating the agent itself as a learn
 
 This is the craft-side complement to the deterministic guardrails and write→review shift in [[software-engineering/ai-assisted-development|AI-Assisted Development]]; the named failure mode that makes these habits necessary — letting the agent think for you — is [[software-engineering/cognitive-debt|Cognitive Debt and Cognitive Surrender]].
 
+## Career leveling and ownership (Orosz)
+
+The Software Engineer's Guidebook by Gergely Orosz (Pragmatic Engineer) frames career growth as the engineer's responsibility to own, not the manager's job to deliver [^src4]. Key observations: at Big Tech (Google L5, Meta E5), senior expectations are noticeably higher than at lower-tier companies — "it's not always those who work hardest or deliver the highest quality work who are awarded the biggest promotions" [^src4]. The book's structure mirrors the maturity ladder: competent developer → well-rounded senior → pragmatic tech lead → staff/principal. See [[software-engineering/sources/software-engineers-guidebook|The Software Engineer's Guidebook]] for the full source summary.
+
 ## See also
 
 - [[software-engineering/ai-assisted-development|AI-Assisted Development]] — why fundamentals and human judgment matter more, not less, under AI
 - [[software-engineering/cognitive-debt|Cognitive Debt and Cognitive Surrender]] — the erosion-of-understanding failure mode these learning loops guard against
+- [[software-engineering/sources/software-engineers-guidebook|The Software Engineer's Guidebook]] — Orosz's full career arc reference
 - [[software-engineering/README|Software Engineering hub]]
 
 ---
@@ -88,3 +96,4 @@ This is the craft-side complement to the deterministic guardrails and write→re
 [^src1]: [How to Become a Resourceful Engineer](../../raw/email/email-2025-11-06-how-to-become-a-resourceful-engineer.md)
 [^src2]: [Junior developers, listen up...](../../raw/email/email-2026-05-12-junior-developers-listen-up.md)
 [^src3]: [What Modern Software Engineering Means (Google Cloud podcast — Seroter, Hammerly, Jaspan, Osmani)](../../raw/youtube/youtube-vtyx7ex-0ba.md)
+[^src4]: [The Software Engineer's Guidebook v1.08 (Gergely Orosz)](../../raw/pdf/pdf-the-software-engineers-guidebook-v1-08-pdf.md)

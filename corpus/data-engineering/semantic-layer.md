@@ -15,6 +15,9 @@ sources:
   - path: raw/email/email-2025-07-04-boring-semantic-layer-mcp.md
     channel: email
     ingested_at: 2026-06-19
+  - path: raw/github/github-boringdata-boring-semantic-layer.md
+    channel: github
+    ingested_at: 2026-06-25
 aliases:
   - semantic layer
   - metric layer
@@ -31,7 +34,7 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-15
-updated: 2026-06-19
+updated: 2026-06-25
 ---
 
 # Semantic Layer
@@ -110,3 +113,4 @@ From the Tableau Conference report: data analysts are no longer just building da
 [^src2]: [Data teams should become context teams](../../raw/web/data-teams-should-become-context-teams.md)
 [^src3]: [I Started My Career in Tableau (Jess Ramos, Big Data Energy)](../../raw/email/email-2026-05-20-i-started-my-career-in-tableau.md)
 [^src4]: [Boring Semantic Layer + MCP (Julien Hurault, Ju Data Engineering Newsletter)](../../raw/email/email-2025-07-04-boring-semantic-layer-mcp.md)
+[^src5]: [boringdata/boring-semantic-layer GitHub repo — v0.3.14, ★456, Python, Ibis-powered](../../raw/github/github-boringdata-boring-semantic-layer.md)

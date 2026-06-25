@@ -18,6 +18,9 @@ sources:
   - path: raw/web/github-alibaba-open-code-review-open-source-free-battle-test.md
     channel: web
     ingested_at: 2026-06-12
+  - path: raw/web/web-youtube-30iqsttzbps.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - AI-assisted development
   - AI coding
@@ -66,6 +69,21 @@ The most reliable AI-tooling pattern across sources is **pairing a probabilistic
 
 This mirrors the architectural argument that AI risk is bounded by the system, not the model — see [[software-engineering/ai-risk-architecture|AI Risk Architecture]].
 
+## AI Studio + Firebase: vibe coding and loss of control
+
+A live walkthrough of Google AI Studio + Firebase integration reveals structural risks of delegating to AI-driven platforms [^src6]:
+
+**What worked**: fast data modeling (Firestore schema with `users`, `stories`, `connections` collections); automatic Firebase Auth + Google sign-in; parallel file editing by the AI ("it has the ability to edit these files in parallel, which is extremely cool"); budget cap UI for Gemini API key [^src6].
+
+**What broke / gotchas**:
+
+1. **Vendor lock-in on deployment**: AI Studio generates code that embeds the Gemini API key in the JS bundle — "visible to anyone who inspects your site source" — forcing Cloud Functions as a workaround to keep the key server-side [^src6].
+2. **Existing project collision**: enabling Firebase integration connected to an existing project and started writing to that database. "You have an existing application in Firestore, so you're working on other stuff. You've just given AI Studio the ability to potentially connect to those and start writing to those databases. That should be terrifying to you." [^src6]
+3. **Prompt injection**: AI-generated cloud function injected raw user story text directly into a system prompt — "if the user tries a prompt injection, they can just try to prompt inject my app right here" [^src6].
+4. **Loss of control framing**: "when we're starting to use these AI tools, it's more like it we lose a bit of control. It's kind of like hiring an employee to write code for you. You don't get control over the code." [^src6]
+
+Mitigation path applied: move AI matching logic to Firebase Cloud Functions (serverless, secrets safe), clone from GitHub, deploy independently of AI Studio [^src6]. Related: [[software-engineering/ai-risk-architecture|AI Risk Architecture]] — output risk vs. data risk vs. action risk.
+
 ## See also
 
 - [[ai-engineering/agentic-coding|Agentic Coding]] (ai-engineering) — the agent-orchestration counterpart: coding-agent harness, skills, and workflow mechanics
@@ -82,3 +100,4 @@ This mirrors the architectural argument that AI risk is bounded by the system, n
 [^src3]: [Fake rockstar devs, Apple's cheaper AI, Git's weird variable](../../raw/email/email-2026-06-10-fake-rockstar-devs-apples-cheaper-ai-gits-weird-variable.md)
 [^src4]: [How do junior devs break in now](../../raw/email/email-2026-05-21-how-do-junior-devs-break-in-now.md)
 [^src5]: [Open Code Review (Alibaba)](../../raw/web/github-alibaba-open-code-review-open-source-free-battle-test.md)
+[^src6]: [Building with Google AI Studio + Firebase (YouTube 30iQsttzBps)](../../raw/web/web-youtube-30iqsttzbps.md)

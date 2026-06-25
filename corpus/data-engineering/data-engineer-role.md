@@ -18,6 +18,12 @@ sources:
   - path: raw/email/email-2025-07-17-de-101-1-what-do-data-engineers-do.md
     channel: email
     ingested_at: 2026-06-19
+  - path: raw/web/web-how-to-transition-from-data-analyst-to-data-engineer-start-d.md
+    channel: web
+    ingested_at: 2026-06-25
+  - path: raw/github/github-dataexpert-io-data-engineer-handbook.md
+    channel: github
+    ingested_at: 2026-06-25
 aliases:
   - valuable data engineer
   - senior data engineer
@@ -31,7 +37,7 @@ tags:
   - corpus/data-engineering
   - synthesis
 created: 2026-06-11
-updated: 2026-06-23
+updated: 2026-06-25
 last_confirmed: 2026-06-19
 ---
 
@@ -151,6 +157,19 @@ Internal transfers outperform cold applications because DE teams can de-risk by 
 
 This is structurally the same as the impact-scoring framing in §Impact-scoring formula above: the goal is always to surface *business value*, not technical credentials.
 
+## Data Engineer Handbook (DataExpert.io)
+
+The **DataExpert-io/data-engineer-handbook** (★41,752, Jupyter Notebook) is a curated resource aggregator — "all the resources you need to become an amazing data engineer" — maintained as an open-source GitHub repo [^src5]. Key sections [^src5]:
+
+- **Books** — top 3: *Fundamentals of Data Engineering* (Joe Reis & Matt Housley), *Designing Data-Intensive Applications* (Martin Kleppmann), *Designing Machine Learning Systems* (Chip Huyen)
+- **Communities** — DataExpert.io Discord, Data Talks Club Slack, Data Engineer Things
+- **Projects** — hands-on examples for applied learning
+- **Interviews** — advice for passing DE interviews
+
+The handbook also includes a **2024 "Breaking into Data Engineering" roadmap** and free beginner/intermediate bootcamps. Notable as a community-maintained, ecosystem-wide reference rather than a single viewpoint.
+
+Topics: `apachespark`, `awesome`, `bigdata`, `data`, `dataengineering`, `sql`.
+
 ## See also
 
 - [[data-engineering/dimensional-modeling|Dimensional Modeling]] — the data-modeling fundamental both sources flag as core
@@ -167,3 +186,4 @@ This is structurally the same as the impact-scoring framing in §Impact-scoring 
 [^src2]: [How to become a valuable Data Engineer (newsletter)](../../raw/email/email-2025-08-27-how-to-become-a-valuable-data-engineer.md)
 [^src3]: [How to become a senior data engineer?](../../raw/email/email-2026-05-19-how-to-become-a-senior-data-engineer.md)
 [^src4]: [How to Transition from Data Analyst to Data Engineer](../../raw/notes/notes-clippings-how-to-transition-from-data-analyst-to-data-engineer.md)
+[^src5]: [DataExpert-io/data-engineer-handbook (GitHub)](../../raw/github/github-dataexpert-io-data-engineer-handbook.md)

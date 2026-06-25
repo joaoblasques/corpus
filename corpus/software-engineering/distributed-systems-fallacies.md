@@ -82,6 +82,7 @@ Every microservices deployment is subject to all eight fallacies; ignoring them 
 - [[software-engineering/microservices|Microservices]] — architectural context where fallacies 1+2 most commonly bite; resilience planning and eventual consistency
 - [[software-engineering/kubernetes|Kubernetes]] — infrastructure mitigations for fallacies 1 (auto-restart), 5 (Service stable endpoints), 4 (Secrets caveat)
 - [[software-engineering/software-design-principles|Software Design Principles]] — the defensibility principle (handle edge cases; fail loudly) is the code-level response to these fallacies
+- [[software-engineering/system-design-fundamentals|System Design Fundamentals]] — load balancing, database selection, horizontal scaling as practical mitigations for fallacies 1, 2, and 5
 - [[software-engineering/README|Software Engineering hub]]
 
 ---

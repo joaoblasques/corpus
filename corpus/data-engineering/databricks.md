@@ -30,6 +30,12 @@ sources:
   - path: raw/email/email-2025-04-17-the-internal-of-bigquery-snowflake-databricks-and-redshift.md
     channel: email
     ingested_at: 2026-06-19
+  - path: raw/youtube/youtube-761SQ9Hxbic-databricks-tutorial-databricks-free-edition-tutorial-with-en.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-0Hd5vYqin7w-databricks-data-engineer-associate-certification-course-pass.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - Databricks
   - Unity Catalog
@@ -37,11 +43,14 @@ aliases:
   - Liquid Clustering
   - Lakeflow
   - Lakeflow Spark Declarative Pipelines
+  - Databricks Data Engineer Associate
+  - DBD-DEA
+  - Databricks certification
 tags:
   - corpus/data-engineering
   - entity
 created: 2026-06-11
-updated: 2026-06-23
+updated: 2026-06-25
 ---
 
 # Databricks
@@ -167,6 +176,43 @@ Databricks faced a structural problem: Spark was **not built as a native query e
 
 **Delta Lake** is the storage layer: an ACID table layer over cloud object storage whose core idea is keeping track of **which objects belong to a table via a write-ahead log in the object store** [^src8]. Data files are **Apache Parquet** objects (optionally Hive-partitioned); a file unreferenced by the transaction log is unreadable [^src8]. Delta was served to customers in 2017 and open-sourced in 2019 [^src8]. See [[data-engineering/open-table-formats|Open Table Formats]] and [[data-engineering/parquet|Parquet]].
 
+## Databricks Free Edition (for learners)
+
+Databricks offers a **free edition** with **serverless compute only** — no cluster creation/management [^src9]. Entry points and features available in the free tier [^src9]:
+
+- **Catalog UI**: the `workspace` catalog → `default` schema → tables and volumes hierarchy; upload CSVs/files via the Data Ingestion page
+- **SQL Editor**: runs queries against catalog tables using serverless compute; connects automatically to the serverless pool
+- **Notebooks**: pre-initialized `spark` object; support Python, SQL, Scala, R
+- **Volumes**: raw file storage within a catalog schema; upload files *as-is* (vs. tables, which register a schema); path format `/Volumes/catalog/schema/volume/file`
+- **Genie**: natural-language chat interface over Unity-Catalog-registered datasets; converts English questions to SQL automatically [^src9]
+- **Jobs and Pipelines**: schedule ETL jobs without managing clusters
+- **AI playground, Model Serving**: for LLM/ML experiments
+
+> "Serverless compute is sort of like AWS Lambda — behind the scenes they have servers but all those details are hidden from you, so you can just focus on your business logic." [^src9]
+
+**Managed vs external tables**: managed tables are owned by Databricks (data and metadata both in Databricks); external tables point to data in external object storage [^src9].
+
+**Three cluster types relevant to cost optimization** (full accounts only; not available in free edition):
+- **All-purpose compute** — interactive notebook work; most expensive; don't run scheduled jobs here
+- **Jobs compute** — cheaper for scheduled jobs
+- **Serverless SQL warehouses** — best for bursty BI workloads
+
+See [[data-engineering/apache-spark|Apache Spark]] for the PySpark API reference, and the Catalyst / Photon / lazy evaluation details that apply to Databricks notebooks.
+
+## Databricks Data Engineer Associate Certification
+
+Exam code PR000054 (Databricks's internal code) [^src10]. Covers:
+
+- **Databricks Intelligence Platform** overview (10%) — general offerings, workspace navigation
+- **Development & Ingestion** — creating ETL workflows (Jobs), working with pipelines
+- **Data Processing & Transformations** — PySpark, RDDs, medallion architecture, the three data layers
+- **Productionizing Pipelines** — moving pipelines to production
+- **Data Governance & Quality** — security features, data masking, quality patterns
+
+Exam format [^src10]: 45 multiple-choice questions, 90-minute time limit, passing grade 70%, valid for 24 months. "Practical knowledge over conceptual" — expect code examples in the exam. Proctor provider: Criterion Online.
+
+Study guidance [^src10]: allocate 15–20 hours (~60% lecture/labs + 40% practice exams). Recommended path: Data Engineer Associate → Data Engineer Professional (skip other Databricks certifications). A certification alone does not validate programming, SQL, or production data engineering skills — it demonstrates platform familiarity [^src10].
+
 ## Related
 
 - [[data-engineering/cloud-data-warehouse-internals|Cloud Data Warehouse Internals]] — Photon vs Dremel/Snowflake/Redshift compared
@@ -186,3 +232,5 @@ Databricks faced a structural problem: Spark was **not built as a native query e
 [^src6]: [What is Databricks and why people use it (SeattleDataGuy)](../../raw/youtube/youtube-qndigzfaufs.md)
 [^src7]: [Why dbt is terrible for Databricks, switch to native pipelines](../../raw/web/web-why-dbt-is-terrible-for-databricks-switch-to-native-pipeline.md)
 [^src8]: [The internal of BigQuery, Snowflake, Databricks and Redshift (Vu Trinh)](../../raw/email/email-2025-04-17-the-internal-of-bigquery-snowflake-databricks-and-redshift.md)
+[^src9]: [Databricks Tutorial | Databricks Free Edition End-to-End (codebasics)](../../raw/youtube/youtube-761SQ9Hxbic-databricks-tutorial-databricks-free-edition-tutorial-with-en.md)
+[^src10]: [Databricks Data Engineer Associate Certification Course – Pass the Exam! (Andrew Brown / freeCodeCamp)](../../raw/youtube/youtube-0Hd5vYqin7w-databricks-data-engineer-associate-certification-course-pass.md)

@@ -6,6 +6,9 @@ sources:
   - path: raw/web/what-is-an-etl-pipeline-examples-tools-updated-2026.md
     channel: web
     ingested_at: 2026-06-16
+  - path: raw/youtube/youtube-9GVqKuTVANE-sql-data-warehouse-from-scratch-full-hands-on-data-engineeri.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - ETL pipeline
   - ETL
@@ -20,7 +23,7 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-16
-updated: 2026-06-16
+updated: 2026-06-25
 ---
 
 # ETL Pipeline
@@ -69,4 +72,60 @@ The article lists eight 2026 ETL/ELT tools: **Estuary** (streaming ETL + real-ti
 
 Real-world use cases span online-review sentiment analysis, ride-hailing/transit analytics, aviation data, oil-and-gas sensor analytics, social-media/video platform analytics, retail/eCommerce (Walmart, Amazon), and healthcare (warehousing patient/medication data plus streaming patient-monitor alerts)[^src1].
 
+## ETL techniques reference (practitioner view)
+
+From a hands-on data warehouse project at Mercedes-Benz [^src2]:
+
+### Extraction methods and types
+
+| Dimension | Options |
+|---|---|
+| **Direction** | Pull (pipeline fetches from source) vs Push (source pushes to pipeline) |
+| **Scope** | Full extraction (entire table every run) vs Incremental extraction (only new/changed data) |
+| **Technique** | Manual, DB query, file pass-through, API call, CDC, event streaming (Kafka), web scraping |
+
+### Transformation categories
+
+- **Data enrichment** — add values to existing datasets
+- **Data integration** — merge multiple sources into one model
+- **Derived columns** — compute new columns from existing ones
+- **Normalization** — map code values to business-friendly labels
+- **Business rules/logic** — apply domain-specific criteria to create new columns
+- **Aggregation** — summarize at a different granularity
+- **Data cleansing**: remove duplicates, filter rows, handle missing values, handle invalid values, remove unwanted spaces, cast data types, detect outliers [^src2]
+
+### Load methods (full load)
+
+| Method | Behavior |
+|---|---|
+| Truncate + Insert | Empty the table, then insert all records |
+| Update + Insert (Upsert) | Update existing records, insert new ones |
+| Drop + Create + Insert | Drop the table, recreate schema, insert all records |
+
+### Load methods (incremental)
+
+- **Upsert** — update or insert per record
+- **Insert-only** — for append-only sources (logs)
+- **Merge** — update, insert, and delete in one statement (superset of upsert) [^src2]
+
+### Slowly changing dimensions (SCD types)
+
+- **SCD0** — no history; no changes allowed
+- **SCD1** — override/upsert with new value; history lost
+- **SCD2** — insert new row per change; keep old row inactive; preserves full history
+
+See [[data-engineering/scd2|SCD2]] for the complete SCD2 implementation and join patterns.
+
+### Data warehouse architecture approaches
+
+| Approach | Layers | Characteristics |
+|---|---|---|
+| Inmon (3NF EDW) | Staging → EDW → Data Marts | Comprehensive, but slow to build |
+| Kimball | Staging → Data Marts | Faster, but risks logic duplication across marts |
+| Data Vault | Staging → Raw Vault → Business Vault → Data Marts | Adds standards to the EDW middle layer |
+| Medallion | Bronze → Silver → Gold | Modern, lakehouse-native; see [[data-engineering/medallion-architecture|Medallion Architecture]] |
+
+Why data management matters [^src2]: without a warehouse, analysts manually collect and transform data — slow (weeks/months), error-prone, and incompatible across teams. A warehouse with automated ETL produces consistent, fresh data accessible to all consumers and supports integrated multi-source reporting.
+
 [^src1]: [What Is An ETL Pipeline? Examples, Tools (Updated 2026)](../../raw/web/what-is-an-etl-pipeline-examples-tools-updated-2026.md)
+[^src2]: [SQL Data Warehouse from Scratch | Full Hands-On Data Engineering Project (Data with Baraa)](../../raw/youtube/youtube-9GVqKuTVANE-sql-data-warehouse-from-scratch-full-hands-on-data-engineeri.md)

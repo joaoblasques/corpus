@@ -21,6 +21,9 @@ sources:
   - path: raw/web/genie-spaces-databricks-on-aws.md
     channel: web
     ingested_at: 2026-06-18
+  - path: raw/github/github-dataherald-dataherald.md
+    channel: github
+    ingested_at: 2026-06-25
 aliases:
   - data engineering agents
   - text-to-SQL agents
@@ -41,7 +44,7 @@ tags:
   - corpus/data-engineering
   - synthesis
 created: 2026-06-18
-updated: 2026-06-18
+updated: 2026-06-25
 provisional: false
 ---
 
@@ -71,7 +74,7 @@ The asymmetry is the whole point: a build-time error is **"wrong is worse than a
 
 **WrenAI** — *what:* repositions itself as **"the open context layer"** rather than a chat app — business semantics, examples, memory, and governance that *any* agent (Claude Code, Cursor, LangChain, Pydantic AI) queries through one shared interface, instead of each agent rediscovering business logic [^wren]. Ships a CLI + agent-skills install stub, a Rust semantic engine on Apache DataFusion (22+ data sources), a **Modeling Definition Language (MDL)** with row/column-level access control, and LanceDB-backed memory; everything is version-controlled and Git-friendly [^wren]. *License:* **Apache-2.0** (core, SDK, skills) [^wren]. *Maturity:* active but mid-pivot — the Wren Engine merged into the main repo (2026-05), the previous GenBI app was moved to a `legacy/v1` branch, and agent-native SDKs are still rolling out [^wren]. *Fit:* the strongest choice if you want the demo layer to double as a reusable [[data-engineering/semantic-layer|semantic layer]] across multiple agents; heavier than Vanna.
 
-**Dataherald** — *what:* a natural-language-to-SQL **engine** for enterprise Q&A over relational data — set up an API from your DB that answers plain-English questions; four deployable services (Engine, Enterprise auth layer, Admin console, Slackbot), each Docker-composed [^dataherald]. Aimed at letting business users self-serve without a data analyst, or embedding Q&A in a SaaS product [^dataherald]. *License:* **open-source** (the fetched README states "open-source project" but does not name the license in the excerpt) [^dataherald]. *Maturity:* enterprise-shaped (multi-service, auth/orgs/users) but heavier to stand up; less momentum than Vanna/WrenAI in this survey. *Fit:* overkill for a solo portfolio — its value (orgs, auth, admin console) is multi-tenant enterprise plumbing, not portfolio signal.
+**Dataherald** — *what:* a natural-language-to-SQL **engine** for enterprise Q&A over relational data — set up an API from your DB that answers plain-English questions; four deployable services (Engine, Enterprise auth layer, Admin console, Slackbot), each Docker-composed [^dataherald][^dataherald-gh]. Aimed at letting business users self-serve without a data analyst, or embedding Q&A in a SaaS product [^dataherald-gh]. *License:* **Apache 2.0** [^dataherald-gh]. *Stars:* 3,635 on GitHub (Python, topics: ai, database, finetuning, llm, nl-to-sql, rag, sql, text-to-sql) [^dataherald-gh]. *Maturity:* enterprise-shaped (multi-service, auth/orgs/users, v1.0.3 released) but heavier to stand up; less momentum than Vanna/WrenAI in this survey. *Fit:* overkill for a solo portfolio — its value (orgs, auth, admin console) is multi-tenant enterprise plumbing, not portfolio signal.
 
 **Datus-agent** — *what:* an "open-source data engineering agent" that frames DE as *"delivering scoped, domain-aware agents for analysts and business users,"* building an evolving context layer (schema metadata, reference SQL, semantic models, metrics, docs) that improves through a continuous-learning loop [^datus]. A Claude-Code-like CLI with **Plan Mode**, a node-based workflow engine (`schema_linking -> gen_sql -> reasoning -> selection -> execute_sql`), LanceDB knowledge base, MCP server *and* client, agentskills.io-style Skills, MetricFlow semantic adapters, and a built-in eval framework (BIRD, Spider 2.0-Snow) [^datus]. 10+ LLM providers, 11 databases incl. [[data-engineering/apache-spark|Spark]]/Trino/Snowflake adapters [^datus]. *License:* **open-source** (license not named in the excerpt; PyPI `datus-agent`, pinned versions ~0.2.x) [^datus]. *Maturity:* early/evolving (sub-1.0), but the most *DE-conscious* of the OSS set — it explicitly targets the build->deliver->iterate loop, not just one-shot SQL. *Fit:* interesting as a study of the "contextual data engineering" thesis; for a solo portfolio it overlaps heavily with the Claude-Code-native approach below and adds a second framework to maintain.
 
@@ -115,6 +118,7 @@ The build side has the opposite economics. A consume-time wrong answer is bounde
 [^vanna]: [Vanna — Chat with your SQL database (GitHub: vanna-ai/vanna)](../../raw/web/github-vanna-ai-vanna-chat-with-your-sql-database-accurate-t.md)
 [^wren]: [WrenAI — the open context layer for agents (GitHub: Canner/WrenAI)](../../raw/web/github-canner-wrenai-give-ai-agents-the-context-to-query-bus.md)
 [^dataherald]: [Dataherald — interact with your SQL database in natural language (GitHub: Dataherald/dataherald)](../../raw/web/github-dataherald-dataherald-interact-with-your-sql-database.md)
+[^dataherald-gh]: [Dataherald GitHub digest](../../raw/github/github-dataherald-dataherald.md)
 [^datus]: [Datus — open-source data engineering agent (GitHub: Datus-ai/Datus-agent)](../../raw/web/github-datus-ai-datus-agent-the-future-of-data-engineering-a.md)
 [^dbtmcp]: [dbt MCP server (GitHub: dbt-labs/dbt-mcp)](../../raw/web/github-dbt-labs-dbt-mcp-a-mcp-model-context-protocol-server.md)
 [^genie]: [Genie Spaces (Databricks on AWS docs)](../../raw/web/genie-spaces-databricks-on-aws.md)

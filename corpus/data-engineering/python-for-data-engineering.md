@@ -18,16 +18,38 @@ sources:
   - path: raw/email/email-2025-07-23-de-101-3-python-essentials-for-data-engineers.md
     channel: email
     ingested_at: 2026-06-19
+  - path: raw/pdf/pdf-chapter1-downloading-data-using-curl.md
+    channel: pdf
+    ingested_at: 2026-06-25
+  - path: raw/pdf/pdf-chapter2-getting-started-with-csvkit.md
+    channel: pdf
+    ingested_at: 2026-06-25
+  - path: raw/pdf/pdf-chapter3-pulling-data-from-dbs.md
+    channel: pdf
+    ingested_at: 2026-06-25
+  - path: raw/pdf/pdf-chapter4-python-on-the-command-line.md
+    channel: pdf
+    ingested_at: 2026-06-25
 aliases:
   - python for data engineers
   - python essentials
   - python data engineering
+  - curl
+  - wget
+  - csvkit
+  - sql2csv
+  - csvsql
+  - cron
+  - crontab
+  - data processing in shell
+  - shell data download
 tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-15
-updated: 2026-06-19
-last_confirmed: 2026-06-19
+updated: 2026-06-25
+last_confirmed: 2026-06-25
+last_confirmed: 2026-06-25
 ---
 
 # Python for Data Engineering
@@ -189,6 +211,151 @@ with open(f"data_{datetime.now().strftime('%Y%m%d')}.json", "w") as f:
 
 See [[data-engineering/data-observability|Data Observability]] for monitoring pipelines that consume API data (lag detection, flow interruption patterns apply directly to API extraction failure modes).
 
+## Shell data download: curl and wget
+
+Before reaching for Python, two Unix CLI tools cover many data-download tasks with minimal setup [^src5]:
+
+**curl** — Client for URLs; transfers data to/from a server over HTTP(S), FTP, SFTP [^src5]:
+
+```bash
+# Download a single file, preserving original name
+curl -O https://example.com/data.csv
+
+# Download and rename
+curl -o renamed.csv https://example.com/data.csv
+
+# Download a numbered range of files
+curl -O https://example.com/data[001-100].csv
+
+# Every 10th file in a range
+curl -O https://example.com/data[001-100:10].csv
+
+# With redirect-follow (-L) and resume (-C) — useful for large files
+curl -L -O -C https://example.com/data[001-100].csv
+```
+
+Supports 20+ protocols; easy cross-platform install [^src5].
+
+**wget** — World Wide Web Get; native to Linux, handles multiple-file recursive downloads better than curl [^src5]:
+
+```bash
+# Download a single file (background, quiet, continue if interrupted)
+wget -bqc https://example.com/data.csv
+
+# Download from a list of URLs stored in a file
+wget -i url_list.txt
+
+# Rate-limit downloads
+wget --limit-rate=200k -i url_list.txt
+
+# Pause between downloads (courtesy throttle)
+wget --wait=2.5 -i url_list.txt
+```
+
+When to use each [^src5]: curl excels at single-file downloads across many protocols; wget excels at bulk/recursive file downloading and handling various file formats like directory listings.
+
+## Shell CSV toolkit: csvkit
+
+**csvkit** is a suite of Python-backed command-line tools for processing CSV files — comparable to Python/R/SQL for tabular data [^src6]:
+
+```bash
+pip install csvkit
+```
+
+Key tools [^src6]:
+
+| Tool | Purpose | Example |
+|---|---|---|
+| `in2csv` | Convert Excel/other formats to CSV | `in2csv data.xlsx > data.csv` |
+| `csvlook` | Pretty-print CSV to terminal (Markdown-compatible) | `csvlook data.csv` |
+| `csvstat` | Descriptive statistics on all columns | `csvstat data.csv` |
+| `csvcut` | Select/filter columns by name or position | `csvcut -c "id","name" data.csv` |
+| `csvgrep` | Filter rows by exact match or regex | `csvgrep -c "id" -m "123" data.csv` |
+| `csvstack` | Stack multiple CSVs with identical schemas | `csvstack file1.csv file2.csv > all.csv` |
+
+**Chaining**: pipe csvkit tools together for multi-step processing [^src6]:
+
+```bash
+# Convert, filter columns, preview
+in2csv report.xlsx | csvcut -c "name","revenue" | csvlook
+
+# Stack multiple files with a source indicator column
+csvstack -g "Jan","Feb" -n "month" jan.csv feb.csv > q1.csv
+```
+
+**csvgrep** row filtering patterns [^src6]:
+```bash
+csvgrep -c "status" -m "active" data.csv      # exact match
+csvgrep -c "email" -r "@example\.com" data.csv # regex
+```
+
+csvkit is particularly useful for **quick data profiling and one-off transformations** without writing a Python script — suitable for the Extract phase of a pipeline when the source is Excel or CSV files.
+
+## Shell database tools: sql2csv and csvsql
+
+**csvkit** extends to databases via two tools from the "Data Processing in Shell" course [^src7][^src8]:
+
+### sql2csv — extract any DB to CSV
+
+`sql2csv` executes a SQL query against any major RDBMS and outputs a CSV file [^src7]:
+
+```bash
+# SQLite
+sql2csv --db "sqlite:///mydb.db" --query "SELECT * FROM my_table" > output.csv
+
+# PostgreSQL / MySQL (no .db suffix)
+sql2csv --db "postgres:///mydb" --query "SELECT id, name FROM users" > users.csv
+```
+
+Connection string prefixes: `sqlite:///` (with three slashes), `postgres:///`, `mysql:///`. The `>` redirect saves output; without it, results print to console.
+
+### csvsql — apply SQL to CSVs (in-memory SQLite)
+
+`csvsql` creates an in-memory SQLite database from CSV files and runs SQL against them. Suitable for **small to medium files only** — the whole file loads into memory [^src7]:
+
+```bash
+# Query a local CSV as if it were a table
+csvsql --query "SELECT * FROM Spotify_MusicAttributes LIMIT 1" Spotify_MusicAttributes.csv
+
+# Join two CSVs (indicate files in order of appearance in the SQL)
+csvsql --query "SELECT * FROM file_a INNER JOIN file_b ON ..." file_a.csv file_b.csv | csvlook
+```
+
+**Push data back to a database** with `--insert`:
+```bash
+# Create table and insert from CSV
+csvsql --db "sqlite:///mydb.db" --insert my_data.csv
+
+# Skip type inference and constraints (safer for messy data)
+csvsql --no-inference --no-constraints --db "sqlite:///mydb.db" --insert my_data.csv
+```
+
+`--no-inference` disables column-type detection; `--no-constraints` drops length limits and null checks — useful for loading raw/messy CSVs without schema conflicts [^src7].
+
+## Scheduling Python jobs: cron
+
+**cron** is a Unix/macOS time-based job scheduler — simpler and free vs commercial tools like Airflow/Rundeck, but also less powerful [^src8]:
+
+```bash
+# View current cron jobs
+crontab -l
+
+# Add a job (echo method — append to crontab)
+echo "* * * * * python /path/to/create_model.py" | crontab
+
+# Cron schedule format:
+# .---------------- minute (0-59)
+# |  .------------- hour (0-23)
+# |  |  .---------- day of month (1-31)
+# |  |  |  .------- month (1-12)
+# |  |  |  |  .---- day of week (0-6, 0=Sunday)
+# *  *  *  *  * command
+```
+
+`* * * * *` = run every minute. Use **https://crontab.guru/** to validate cron expressions [^src8]. The most frequent schedule is one minute. cron is native to macOS/Linux; Windows uses Task Scheduler as the equivalent.
+
+**When to graduate to a full orchestrator**: cron gives no dependency management, no retry logic, no UI — use [[data-engineering/data-orchestration|Airflow / Dagster / Prefect]] once pipelines have multi-step dependencies or need retries.
+
 ## Takeaway
 
 The library landscape is overwhelming, but the point is that **most DE tasks can be done with Python** — when faced with tool/vendor overload, find the Python library that fulfils the requirement [^src1]. Each concept ships with a hands-on workbook (`python_essentials_for_data_engineers`) runnable in GitHub Codespaces [^src1][^src3]. This reinforces the [[data-engineering/data-engineer-role|fundamentals-over-tools]] principle.
@@ -207,3 +374,7 @@ The library landscape is overwhelming, but the point is that **most DE tasks can
 [^src2]: [Python essentials for data engineers (newsletter)](../../raw/email/email-2025-11-05-python-essentials-for-data-engineers.md)
 [^src3]: [python_essentials_for_data_engineers (code)](../../raw/web/github-josephmachado-python-essentials-for-data-engineers-co.md)
 [^src4]: [How to Extract Data from APIs for Data Pipelines Using Python](../../raw/web/web-how-to-extract-data-from-apis-for-data-pipelines-using-pytho.md)
+[^src5]: [Downloading Data Using curl and wget — Data Processing in Shell (DataCamp)](../../raw/pdf/pdf-chapter1-downloading-data-using-curl.md)
+[^src6]: [Getting Started with csvkit — Data Processing in Shell (DataCamp)](../../raw/pdf/pdf-chapter2-getting-started-with-csvkit.md)
+[^src7]: [Pulling Data from DBs (sql2csv, csvsql) — Data Processing in Shell ch.3 (DataCamp)](../../raw/pdf/pdf-chapter3-pulling-data-from-dbs.md)
+[^src8]: [Python on the Command Line (cron) — Data Processing in Shell ch.4 (DataCamp)](../../raw/pdf/pdf-chapter4-python-on-the-command-line.md)

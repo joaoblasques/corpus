@@ -18,6 +18,9 @@ sources:
   - path: raw/web/web-sql-to-dbt-guide-slowly-changing-dimensions-with-dbt-snapsho.md
     channel: web
     ingested_at: 2026-06-17
+  - path: raw/web/web-how-to-join-a-fact-and-a-type-2-dimension-scd2-table-start-d.md
+    channel: web
+    ingested_at: 2026-06-25
 aliases:
   - SCD2
   - Slowly Changing Dimension Type 2
@@ -29,7 +32,7 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-05-07
-updated: 2026-06-17
+updated: 2026-06-25
 ---
 
 # SCD2 (Slowly Changing Dimension Type 2)
@@ -130,9 +133,55 @@ dbt snapshots implement SCD2 declaratively. Two strategies based on what trigger
 
 Use `invalidate_hard_deletes=true` to handle deleted source records. Create mart models that pre-calculate common historical analyses to hide complexity from consumers.
 
-## Not-yet-ingested related sources
+## Joining a fact table to an SCD2 dimension
 
-- `scd2-joining-fact-dimension-tables` — querying SCD2 tables (companion article)
+The canonical pattern uses an `AND ... BETWEEN` range join rather than a simple equality on `user_id` [^src6]. The key insight: each SCD2 row has `row_effective_datetime` and `row_expiration_datetime` defining the window during which it represents the entity state. A fact table record's timestamp is the probe; a join that also checks `purchased_datetime BETWEEN row_effective_datetime AND row_expiration_datetime` returns the correct historical state [^src6].
+
+Example schema pair [^src6]:
+
+```sql
+-- fact table
+CREATE TABLE items_purchased (
+    item_purchased_id VARCHAR(40),
+    order_id         VARCHAR(40),
+    user_id          VARCHAR(40),
+    item_cost        DECIMAL(10, 2),
+    purchased_datetime TIMESTAMP
+);
+
+-- SCD2 dimension
+CREATE TABLE user_dim (
+    user_key                BIGINT,
+    user_id                 VARCHAR(40),
+    zipcode                 VARCHAR(10),
+    row_effective_datetime  TIMESTAMP,
+    row_expiration_datetime TIMESTAMP,
+    current_row_indicator   VARCHAR(10)
+);
+```
+
+Join pattern (example using a CTE) [^src6]:
+
+```sql
+WITH user_items AS (
+    SELECT ip.user_id, ip.item_cost, ud.zipcode, ip.purchased_datetime
+    FROM items_purchased ip
+    JOIN user_dim ud
+        ON  ip.user_id = ud.user_id
+        AND ip.purchased_datetime BETWEEN ud.row_effective_datetime
+                                      AND ud.row_expiration_datetime
+)
+SELECT EXTRACT(YEAR FROM purchased_datetime)  yr,
+       EXTRACT(MONTH FROM purchased_datetime) mnth,
+       zipcode,
+       COUNT(DISTINCT user_id)                num_high_spenders
+FROM user_items
+GROUP BY yr, mnth, zipcode;
+```
+
+The `BETWEEN` join ensures each purchase maps to the user's address *as of that purchase date*, preserving historical accuracy [^src6]. Prefer the `9999-12-31` sentinel for the open-ended current row (see "end_date sentinel" section) so `BETWEEN` works without null-handling [^src2].
+
+**Educating consumers**: end users must understand the join pattern before querying SCD2 tables directly. A common mitigation is wrapping the SCD2 table in a view or function that exposes a simpler interface [^src6].
 
 ## See also
 
@@ -149,3 +198,4 @@ Use `invalidate_hard_deletes=true` to handle deleted source records. Create mart
 [^src3]: [Stop Using Slowly Changing Dimensions (Part 1)](../../raw/web/stop-using-slowly-changing-dimensions-part-1.md)
 [^src4]: [SCD-2 considered harmful! Part 2](../../raw/email/email-2025-11-04-scd-2-considered-harmful-part-2.md)
 [^src5]: [SQL to dbt guide: Slowly Changing Dimensions with dbt Snapshots](../../raw/web/web-sql-to-dbt-guide-slowly-changing-dimensions-with-dbt-snapsho.md)
+[^src6]: [How to Join a Fact and a Type 2 Dimension (SCD2) Table – Start Data Engineering](../../raw/web/web-how-to-join-a-fact-and-a-type-2-dimension-scd2-table-start-d.md)

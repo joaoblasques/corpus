@@ -6,7 +6,7 @@ tags:
   - corpus/software-engineering
   - hub
 created: 2026-05-07
-updated: 2026-06-17
+updated: 2026-06-25
 ---
 
 # Software Engineering
@@ -20,8 +20,15 @@ Domain covering software engineering practice from foundational CS through deplo
 - [[software-engineering/kubernetes|Kubernetes]] — entity · draft · container orchestration; Pod/Deployment/Service/Namespace; runtime platform for microservices
 - [[software-engineering/xonsh|Xonsh]] — entity · draft · a Python-superset shell; objects/imports/stdlib alongside cd, pipes, and aliases
 - [[software-engineering/insforge|InsForge]] — entity · draft · all-in-one open-source backend operated by a coding agent via MCP or CLI + Skills
+- [[software-engineering/git-basics|Git Basics]] — entity · draft · distributed VCS; DAG commit model, branching (sticky notes), HEAD, reset/revert/rebase, reflog, PR workflow, Oh Shit Git
+- [[software-engineering/kan|Kan]] — entity · stub · open-source Trello alternative; Next.js + tRPC + Drizzle + Better Auth stack
+- [[software-engineering/vim|Vim]] — entity · stub · modal text editor; vim-galore reference; composable motions/operators/text-objects; Neovim extension
+- [[software-engineering/usertour|Usertour]] — entity · stub · open-source user onboarding platform; product tours, checklists, NPS surveys; TypeScript; alternative to Appcues/Userflow
+- [[software-engineering/react|React]] — entity · stub · JavaScript UI library; JSX; component model; React Enlightenment (FrontendMasters) reference
+- [[software-engineering/bun|Bun]] — entity · stub · all-in-one JS/TS toolkit; runtime + package manager + test runner + bundler; Node.js compatible
 
 ### Concepts
+- [[software-engineering/terminal-cli-tools|Terminal / CLI Tools]] — concept · draft · Mac terminal keyboard shortcuts; core bash commands; navigation, history, process control
 - [[software-engineering/microservices|Microservices]] — concept · draft · architectural style decomposing systems into small independent services; pitfalls, granularity, data management
 - [[software-engineering/distributed-systems-fallacies|Distributed Systems Fallacies]] — concept · draft · eight fallacies; sourced failure modes for network reliability, latency, topology change, and security; fallacies 3/6/7/8 awaiting dedicated source
 - [[software-engineering/software-design-principles|Software Design Principles]] — concept · draft · 8 code-level principles (SRP, cohesion, loose coupling, DI, open/closed, simplicity) separating maintainable from fragile code
@@ -35,8 +42,22 @@ Domain covering software engineering practice from foundational CS through deplo
 - [[software-engineering/local-first-sync-architecture|Local-First Sync Architecture]] — concept · draft · browser-as-database + optimistic mutations + granular reactivity; server as sync target not source of truth (reverse-engineered from Linear)
 - [[software-engineering/test-case-reduction|Test-Case Reduction]] — concept · draft · automatically shrink a failing input to a minimal reproducer via an interestingness test; ddmin/creduce/Shrink Ray; steering beyond input length
 
+### Concepts (continued)
+- See also: [[software-engineering/go-programming-language|Go]], [[software-engineering/javascript-fundamentals|JavaScript]] under Languages above; [[software-engineering/terminal-cli-tools|Terminal/CLI]] and [[software-engineering/vim|Vim]] under tools
+
 ### Syntheses
 - [[software-engineering/ai-assisted-development|AI-Assisted Development]] — synthesis · draft · fundamentals under AI; the write→review shift; deterministic guardrails for AI code
+
+### Languages and tools
+- [[software-engineering/go-programming-language|Go Programming Language]] — concept · draft · statically typed, compiled; goroutines; 120x faster than Python; zero-value defaults; error-as-return-type pattern; use-case matrix (backend/infra/CLI yes; data science/frontend no)
+- [[software-engineering/javascript-fundamentals|JavaScript Fundamentals]] — concept · draft · web language; var/let/const scoping; template literals; clean-code-JS; npm; 3 algorithm+quiz reference repos; 15-project learning-by-building curriculum
+
+### System design and infrastructure
+- [[software-engineering/system-design-fundamentals|System Design Fundamentals]] — concept · draft · scaling strategies; load balancing algorithms; SQL vs NoSQL selection; REST/GraphQL/gRPC; ACID; frontend patterns (microfrontends, BFF, CDN, design systems, API gateway); OSI protocols; auth vs authz
+- [[software-engineering/ci-cd|CI/CD, Progressive Delivery, and GitOps]] — concept · draft · CI/CD maturity ladder; canary/blue-green/feature flags; GitOps four pillars; platform teams; roll-forward over rollback; GitHub Actions (events/jobs/steps/runners/actions)
+
+### Sources
+- [[software-engineering/sources/software-engineers-guidebook|The Software Engineer's Guidebook]] — source · draft · Gergely Orosz; full career arc from new dev to staff; six-part reference book
 
 ## Sources ingested
 - [[03_Resources/Articles/Disasters in a Microservices World|Disasters I've Seen in a Microservices World]] — article note, João Alves / Hey World, 2025-10-30

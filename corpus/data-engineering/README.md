@@ -6,12 +6,12 @@ tags:
   - corpus/data-engineering
   - hub
 created: 2026-05-07
-updated: 2026-06-19
+updated: 2026-06-25
 ---
 
 # Data Engineering
 
-Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestration, the lakehouse stack, and data quality. Graduated domain (2026-05-21). Substantially expanded in the 2026-06-11 email-backlog ingest (wave 1), the 2026-06-15 inbox ingest (wave 2: storage fundamentals, DE best practices, Python, CI/CD, data migration, semantic layer, progressive disclosure, AI's impact on DE), the 2026-06-17 web-backlog ingest (wave 3: data observability, BI-as-code, ClickHouse, team OS, AutoCDC, Spark joins, grain/fan-out, WAP pattern, dbt snapshots, dbt complete guide, Claude Code/dbt assessment, API extraction patterns), and the 2026-06-17 inbox ingest (wave 4: Markdown Team / 10x data team).
+Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestration, the lakehouse stack, and data quality. Graduated domain (2026-05-21). Substantially expanded in the 2026-06-11 email-backlog ingest (wave 1), the 2026-06-15 inbox ingest (wave 2: storage fundamentals, DE best practices, Python, CI/CD, data migration, semantic layer, progressive disclosure, AI's impact on DE), the 2026-06-17 web-backlog ingest (wave 3: data observability, BI-as-code, ClickHouse, team OS, AutoCDC, Spark joins, grain/fan-out, WAP pattern, dbt snapshots, dbt complete guide, Claude Code/dbt assessment, API extraction patterns), the 2026-06-17 inbox ingest (wave 4: Markdown Team / 10x data team), the 2026-06-25 inbox ingest (wave 5: PySpark fundamentals PDF series, Databricks free edition tutorial, DuckDB origin story, pgledger, modern data stack 10 components, Azure DE project, Windsor.ai no-code ETL, Dataherald GitHub digest), the 2026-06-25 batch 2 ingest (wave 6: PySpark RDD + Pair RDDs, spark-pdf, Kestra orchestration, streaming scaling + popular systems, SCD2 fact-join, curl/wget/csvkit shell tools, Databricks cert, SQL DW build, FHIR overview, BSL GitHub, Metabase dataset generator), and the 2026-06-25 batch 3 ingest (wave 7: PySpark DataFrame API + SQL ch.3, sql2csv/csvsql/cron shell tools, batch processing fundamentals + event-based computing, database normalization 1NF–5NF, dbt crash course, LangChain+BigQuery NL-to-SQL, DataExpert.io handbook, DA→DE transition, Efficient Data Processing Spark course repo, OMOP CDM, Perspective data viz component).
 
 ## Pages
 
@@ -56,9 +56,13 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [[data-engineering/stream-processing|Stream Processing]] — concept · draft · batch vs stream/micro-batch; latency/throughput/backpressure/state/event-time; engines (Flink/Kafka Streams/Spark SS/Storm); delivery guarantees; Lambda architecture
 - [[data-engineering/data-transformation|Data Transformation (the "T" in ETL/ELT)]] — concept · draft · what the T solves (business logic, standardization, integration, pre-aggregation); transform-focused tools (dbt/SQLMesh/Dataform); common SQL transforms; transform-layer challenges + raw/stage/prod ↔ medallion
 - [[data-engineering/small-scale-pipeline-design|Small-Scale Pipeline Design]] — concept · draft · small ≠ low-stakes; problem-scope questions; design principles; tool choice; the DE's 7-step implementation mindset; signals to refactor/scale up
+- [[data-engineering/modern-data-stack|Modern Data Stack (MDS)]] — concept · draft · 10 components of a cloud-native data platform: storage, ingestion, transformation, visualization, version control, orchestration, containers, IaC, data quality, reverse ETL
+- [[data-engineering/fhir|FHIR (Fast Healthcare Interoperability Resources)]] — concept · draft · HL7 standard for healthcare data exchange; Resources as typed forms; REST/Document/Message/Service paradigms; FHIR analytics pipeline patterns
+- [[data-engineering/omop-cdm|OMOP Common Data Model (CDM)]] — concept · draft · OHDSI standard for observational health data analytics; standardized schema + vocabularies; post-ETL analytic tooling (ACHILLES, ATLAS, HADES)
 
 ### Entities
-- [[data-engineering/postgres|PostgreSQL]] — entity · draft · relational database as full-stack data platform via extensions (pgvector, pgcron, tsvector, etc.)
+- [[data-engineering/postgres|PostgreSQL]] — entity · draft · relational database as full-stack data platform via extensions (pgvector, pgcron, tsvector, etc.); pgledger double-entry ledger pattern
+- [[data-engineering/windsor-ai|Windsor.ai]] — entity · stub · no-code ETL/ELT platform; 345+ connectors for marketing/business data; LLM AI chat integration
 - [[data-engineering/kafka|Apache Kafka]] — entity · draft · event streaming platform decoupling services via topics, partitions, and consumer groups
 - [[data-engineering/dbt|dbt]] — entity · draft · SQL-first transformation framework; sources vs models; staging/warehouse/marts materializations
 - [[data-engineering/parquet|Apache Parquet]] — entity · draft · binary columnar file format; RLE compression; sort-order strategy
@@ -75,6 +79,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [[data-engineering/bigquery|BigQuery]] — entity · draft · Google serverless warehouse; Dremel + Colossus + Borg; Capacitor format (inspired Parquet); shuffle separation
 - [[data-engineering/redshift|Amazon Redshift]] — entity · draft · MPP column store from ParAccel/PostgreSQL; share-nothing→RMS; code specialization (compiled C++) vs vectorization
 - [[data-engineering/orchestra|Orchestra]] — entity · draft · managed declarative Data&AI workflow platform; UI-first; managed integrations, pipelines/tasks/triggers, lineage, env-as-config, Git version control
+- [[data-engineering/perspective|Perspective]] — entity · stub · WebAssembly/Python/Rust interactive analytics component for large+streaming datasets; DuckDB integration; data grid + 10+ chart types
 
 ### Syntheses
 - [[data-engineering/query-engine-routing|Query-Engine Routing]] — synthesis · draft · multi-engine routing over Iceberg; SQL-dialect translation; cost-based routing

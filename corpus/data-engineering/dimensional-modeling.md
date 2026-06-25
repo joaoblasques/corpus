@@ -18,6 +18,9 @@ sources:
   - path: raw/web/web-ch-8-grain-getting-the-level-right.md
     channel: web
     ingested_at: 2026-06-17
+  - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-learn-database-no-report.md
+    channel: notes
+    ingested_at: 2026-06-25
 aliases:
   - dimensional modeling
   - dimensional data modeling
@@ -32,11 +35,26 @@ aliases:
   - OLTP vs OLAP
   - master data
   - fixed dimension
+  - database normalization
+  - 1NF
+  - 2NF
+  - 3NF
+  - BCNF
+  - Boyce-Codd normal form
+  - 4NF
+  - 5NF
+  - normal forms
+  - insertion anomaly
+  - deletion anomaly
+  - update anomaly
+  - transitive dependency
+  - partial-key dependency
+  - multi-valued dependency
 tags:
   - corpus/data-engineering
   - concept
 created: 2026-05-21
-updated: 2026-06-17
+updated: 2026-06-25
 ---
 
 # Dimensional Modeling
@@ -224,6 +242,61 @@ SCDs must be **tables**, never views or stored procedures [^src1].
 - [[data-engineering/data-modeling-meaning|Meaning in Data Modeling]] — semantics/master-data layer
 - [[data-engineering/README|Data Engineering hub]]
 
+## Database normalization (1NF–5NF)
+
+Normalization is a **prerequisite discipline** for dimensional modeling: OLTP source tables must be normalized, and understanding normalization clarifies why dimensional (denormalized) models are appropriate for OLAP. The normal forms are stacked safety guarantees — each requires all lower forms [^src6].
+
+> "When you normalize a database table, you structure it in such a way that it **can't express redundant information**." [^src6, 01:41]
+
+### First normal form (1NF)
+
+Four rules, all required [^src6]:
+1. **No row-order meaning** — row order must not convey information; use a dedicated column instead (e.g. a `height_cm` column instead of sorting by height).
+2. **No mixed data types per column** — every value in a column must share the same type; relational DBs enforce this automatically.
+3. **Primary key required** — every table must have a primary key; the DB platform enforces uniqueness and prevents contradictory rows.
+4. **No repeating groups** — storing a variable-length list (player inventory) in one text field or in many `item_1`/`item_2` columns violates 1NF. Fix: one row per (player, item_type) with a composite primary key.
+
+### Second normal form (2NF)
+
+Every **non-key attribute** must depend on the **entire** primary key — no partial-key dependencies [^src6].
+
+Example violation: a `player_inventory` table with a composite PK of `(player_id, item_type)` that also includes `player_rating`. Rating depends only on `player_id` (part of the key), not on `item_type`. This causes [^src6]:
+- **Deletion anomaly** — deleting a player's last inventory row loses their rating.
+- **Update anomaly** — updating rating for a player with two rows may only partially succeed, leaving contradictory values.
+- **Insertion anomaly** — a new player with no inventory yet cannot have their rating recorded.
+
+Fix: extract `player_rating` to a separate `player` table with PK `player_id`.
+
+### Third normal form (3NF) — the key rule
+
+> "Every non-key attribute in a table should depend on **the key, the whole key, and nothing but the key**." [^src6, 18:53]
+
+3NF forbids **transitive dependencies**: a non-key attribute depending on another non-key attribute. Example: `player_rating` (string) depends on `player_skill_level` (int, 1–9), which depends on `player_id`. `player_rating` is therefore transitively dependent on the key. Fix: split into a `player_skill_levels` lookup table [^src6].
+
+Boyce-Codd normal form (BCNF) drops the "non-key" qualifier: **every** attribute must depend on the key. In practice, BCNF ≈ 3NF except for tables with overlapping candidate keys (rare in practice) [^src6].
+
+> "3NF/BCNF fully normalizes ~99% of real-world designs." [^src6]
+
+### Fourth normal form (4NF)
+
+Forbids independent **multi-valued dependencies** from sharing a table. Example: birdhouse models have independent sets of available colors and styles. A single table combining both creates anomalies when adding a new color (must add one row per style). Fix: two tables — `model_colors` and `model_styles` — each with a multi-valued dependency only on the key [^src6].
+
+### Fifth normal form (5NF)
+
+A table must not be reconstructable as the join of smaller tables. If it can, split it — those sub-tables capture independent facts that produce spurious tuples when combined [^src6].
+
+### Anomalies summary
+
+| Anomaly | Description |
+|---|---|
+| **Insertion** | Can't add a fact without an unrelated fact existing |
+| **Update** | Changing one value requires changing many rows; partial update leaves contradictions |
+| **Deletion** | Deleting a row inadvertently loses unrelated information |
+
+### Normalization vs dimensional modeling
+
+Dimensional (star schema) models are **intentionally denormalized** for OLAP — dimension tables replicate attributes across rows for query speed and simplicity. The tradeoff is deliberate: normalization protects OLTP integrity; denormalization accelerates OLAP aggregation. The medallion pattern uses normalized (3NF-ish) silver and denormalized gold layers.
+
 ## See also (updated)
 
 - [[data-engineering/sql-intermediate-results|Storing Intermediate Results in SQL]] — grain-aware staging table decisions
@@ -235,3 +308,4 @@ SCDs must be **tables**, never views or stored procedures [^src1].
 [^src3]: [Data Identity Politics and The Kimball vs. Inmon War](../../raw/web/data-identity-politics-and-the-kimball-vs-inmon-war.md)
 [^src4]: [Dimensional Data Modeling Day 1 (Zach Wilson / DataExpert)](../../raw/youtube/youtube-7jbcvxmj1bs.md)
 [^src5]: [Ch. 8 — Grain: Getting the Level Right (Joe Reis, Mixed Model Arts)](../../raw/web/web-ch-8-grain-getting-the-level-right.md)
+[^src6]: [Learn Database Normalization - 1NF, 2NF, 3NF, 4NF, 5NF (Decomplexify)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-learn-database-no-report.md)

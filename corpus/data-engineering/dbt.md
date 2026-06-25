@@ -66,15 +66,25 @@ sources:
   - path: raw/web/web-github-aboyalejandro-sql-to-dbt-series-full-dbt-project-with.md
     channel: web
     ingested_at: 2026-06-20
+  - path: raw/youtube/youtube-C6BNAfaeqXY-dbt-data-build-tool-crash-course-for-beginners-zero-to-hero.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - dbt
   - data build tool
+  - dbt core
+  - dbt cloud
+  - dbt macros
+  - dbt snapshots
+  - dbt tests
+  - generic tests
+  - singular tests
 tags:
   - corpus/data-engineering
   - entity
 created: 2026-05-21
-updated: 2026-06-19
-last_confirmed: 2026-06-19
+updated: 2026-06-25
+last_confirmed: 2026-06-25
 ---
 
 # dbt (data build tool)
@@ -295,6 +305,63 @@ Alejandro Aboy's open-source reference project (`aboyalejandro/sql-to-dbt-series
 
 Key dev commands: `dbt run --select staging` (clean raw) → `dbt run --select intermediate` (business logic) → `dbt run --select marts` (final aggregates) → `dbt test` → `dbt snapshot`. The `make run` command chains extract → database → dbt end to end [^src17].
 
+## dbt core concepts: a crash-course overview
+
+From a beginner crash-course (Data Tech, 2023) — useful framing for first-time learners [^src18]:
+
+### What dbt is (and is not)
+
+dbt is **the "T" in ELT** — it executes transformations via SQL; it does not handle ingestion, BI, or data storage. The data stays in the warehouse; dbt does not have its own storage. Crucially, **the computation for dbt transformations is provided by the warehouse**, not by dbt itself [^src18]. This contrasts with Spark, which brings its own compute cluster.
+
+What dbt **cannot** do [^src18]:
+- Not an ingestion/loading tool
+- Not a BI tool
+- Does not store data (data stays in the warehouse)
+- Does not provide its own compute (uses warehouse compute)
+
+### dbt Core vs dbt Cloud
+
+| | dbt Core | dbt Cloud |
+|---|---|---|
+| Form | Open-source Python packages; CLI | Web-based UI built on top of Core |
+| Install | `pip install dbt-core` | Browser, no setup |
+| Scheduling | External (Airflow, cron) | Built-in job scheduler |
+| IDE | Your own editor | Built-in web IDE |
+| Git | Manual integration | Native integration |
+| Multi-user | Manual | Managed |
+| Cost | Free | Free for single users; paid for teams |
+
+dbt Core for teams that want infrastructure control; dbt Cloud for teams that want managed infrastructure without maintenance overhead [^src18].
+
+### Core concepts
+
+- **Models** — the basic building block; each model is a `.sql` file containing a `SELECT` statement. Models can reference other models and tables [^src18].
+- **Macros** — reusable SQL code blocks; equivalent to functions in Python. Use when the same SQL pattern recurs across multiple models [^src18].
+- **Tests** — verify data quality of models. Two types [^src18]:
+  - *Generic tests* — four built-in: `not_null`, `unique`, `accepted_values`, `relationships`
+  - *Singular tests* — custom SQL tests for specific business logic
+- **Snapshots** — track **SCD Type 2** changes over time. dbt only handles SCD Type 2 (timestamp or check strategy). See [[data-engineering/scd2|SCD2]] [^src18].
+
+### dbt project structure (initial layout)
+
+```
+dbt_project.yml     # project config
+models/             # .sql model files
+snapshots/          # SCD2 snapshot definitions
+tests/              # singular test SQL files
+macros/             # reusable Jinja macros
+seeds/              # static CSV data files
+analysis/           # ad-hoc SQL (not materialized)
+```
+
+### Data lifecycle with dbt
+
+Sources → **Data Loaders** (raw) → **Warehouse** → **dbt** (transforms based on business rules) → **Transformed data in warehouse** → BI / downstream consumers [^src18]. dbt occupies only the transformation phase, and the warehouse handles all compute.
+
+### Warehouse compatibility
+
+At time of recording (Dec 2023): AlloyDB, BigQuery, Databricks, Dremio, Postgres, Redshift, Snowflake, Spark, Trino, Microsoft Fabric, Azure Synapse Analytics, Teradata — see dbt docs for the current list [^src18].
+
 ## See also
 
 - [[data-engineering/pipeline-layers|Pipeline Layers]] — the staging → warehouse → marts architecture pattern
@@ -326,3 +393,4 @@ Key dev commands: `dbt run --select staging` (clean raw) → `dbt run --select i
 [^src15]: [SQL to dbt Guide — Your dbt Starter Pack Project](../../raw/web/web-sql-to-dbt-guide-your-dbt-starter-pack-project.md) — Alejandro Aboy, Pipeline to Insights
 [^src16]: [SQL to dbt Guide — How Data Layers Flow with Medallion Architecture](../../raw/web/web-sql-to-dbt-guide-how-data-layers-flow-with-medallion-archite.md) — Alejandro Aboy, Pipeline to Insights
 [^src17]: [GitHub — aboyalejandro/sql-to-dbt-series: Full dbt project with DuckDB, Docker and synthetic Ads campaign data](../../raw/web/web-github-aboyalejandro-sql-to-dbt-series-full-dbt-project-with.md) — Alejandro Aboy
+[^src18]: [dbt (Data Build Tool) Crash Course for Beginners: Zero to Hero (Data Tech, YouTube)](../../raw/youtube/youtube-C6BNAfaeqXY-dbt-data-build-tool-crash-course-for-beginners-zero-to-hero.md)

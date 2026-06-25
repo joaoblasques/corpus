@@ -1322,3 +1322,12 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - updated pages: 24 (learning-to-learn, ai-augmented-knowledge-work, obsidian-pkm, working-with-stakeholders, time-and-focus-management, mental-models, technical-career, monetizing-code, ai-consulting-playbook, ai-job-search, agent-infrastructure, git, terminal-and-shell, mlops-principles, cli-tools, linux-commands, vps-for-agents, tmux, terax, devops-learning-roadmap + 4 hub READMEs)
 - new domain: trading (provisional; see _domains.md decision log 2026-06-25)
 - notes: part of clearing the 455-source inbox backlog discovered this session. Wave 2 (software-engineering 41 + data-engineering 39) and Wave 3 (ai-engineering 247) to follow. 56 no-citable-content sources to be stamped+filed (corpus_pages:[]) in the final drop pass. Whisper-rescue recovered 44/254 keepers before YouTube re-throttled; remainder auto-recover via the daily job.
+
+## [2026-06-25 14:45] ingest | big-backlog batch — Wave 2 (software-engineering, data-engineering)
+- sources: 80 (31 github, 17 pdf, 15 youtube, 10 web, 4 notes, 3 email); 13 no-citable-content stamped corpus_pages:[]
+- channels: github, pdf, youtube, web, notes, email
+- domains: software-engineering, data-engineering
+- method: §8.1 cluster pipeline; 5 Sonnet workers (se×2, de×3), shards sequential within domain, domains parallel; read-smart on github digests
+- new pages: 17 — software-engineering/{ci-cd,system-design-fundamentals,go-programming-language,javascript-fundamentals,terminal-cli-tools,git-basics,react,bun,vim,kan,usertour,sources/software-engineers-guidebook}; data-engineering/{modern-data-stack,omop-cdm,fhir,perspective,windsor-ai}
+- updated pages: ~35 incl. apache-spark (PySpark RDD/DataFrame/MLlib), stream-processing, dbt, dimensional-modeling (1NF-5NF), python-for-data-engineering, databricks, scd2, medallion-architecture, data-quality, data-orchestration, semantic-layer, software-design-principles, engineering-craft, ai-assisted-development, git-basics, go/js/system-design
+- notes: 13 skipped at citation gate (curated link-lists: free-programming-books, awesome-for-beginners, free-for-dev, sindresorhus/awesome, dwyl; thin tools/pointers; PHI landing page). Wave 3 (ai-engineering, 247 sources) is the final wave.

@@ -24,6 +24,9 @@ sources:
   - path: raw/web/web-sql-to-dbt-guide-hands-on-data-quality-integrity-worfklows.md
     channel: web
     ingested_at: 2026-06-20
+  - path: raw/github/github-metabase-dataset-generator.md
+    channel: github
+    ingested_at: 2026-06-25
 aliases:
   - data quality
   - messy data
@@ -35,7 +38,7 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-11
-updated: 2026-06-19
+updated: 2026-06-25
 ---
 
 # Data Quality
@@ -182,6 +185,12 @@ Data contracts are **proactive** — they fail fast at compilation so bad data n
 
 The two technical sources are complementary, not competing. StartDataEngineering defines data contracts as **expectations agreed with upstream teams across five verticals**, validated before use [^src2]; the dlt toolkit is a **mechanism** that derives a baseline of those checks automatically from the loader's schema (the "floor"), then layers business rules (the "ceiling") and routes failures to a fix [^src3]. Both insist quality is enforced **at ingestion, before downstream consumption** — the contract is the policy, the schema-aware toolkit is one implementation.
 
+## AI-generated test data
+
+A pattern for pipeline testing: use an LLM to generate **realistic synthetic datasets** that exercise schema expectations and data-quality rules without touching production data [^src8]. The **Metabase AI Dataset Generator** (TypeScript, ★764, hosted at metabase.com/ai-data-generator) generates multi-table datasets from a conversational prompt: choose business type, schema, row count → preview 10 rows → download as CSV or SQL inserts [^src8]. Supports local deployment with LiteLLM for multi-provider LLM support and Docker-based Metabase for exploration [^src8].
+
+Use in data engineering: drop generated CSV/SQL into the pipeline under test to validate transforms, DQ rules, and loading patterns before connecting to live source data. Limitations: synthetic data may not replicate real-world distributions, edge cases, or cardinality — use alongside production samples for comprehensive testing.
+
 ## Related
 
 - [[data-engineering/dimensional-modeling|Dimensional modeling]] — the modeling step in the 6-step framework.
@@ -197,3 +206,4 @@ The two technical sources are complementary, not competing. StartDataEngineering
 [^src5]: [[DE 101] #6 - Testing and Data Quality (Start Data Engineering)](../../raw/email/email-2025-08-01-de-101-6-testing-and-data-quality.md)
 [^src6]: [Understanding the "T" in ETL: A Back-to-Basics Guide to Data Transformations](../../raw/email/email-2025-04-16-understanding-the-t-in-etl-a-back-to-basics-guide-to-data-tr.md)
 [^src7]: [SQL to dbt Guide — Hands-on Data Quality & Integrity Workflows](../../raw/web/web-sql-to-dbt-guide-hands-on-data-quality-integrity-worfklows.md) — Alejandro Aboy, Pipeline to Insights
+[^src8]: [Metabase AI Dataset Generator (metabase/dataset-generator, ★764)](../../raw/github/github-metabase-dataset-generator.md)

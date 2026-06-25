@@ -30,12 +30,45 @@ sources:
   - path: raw/email/email-2025-06-26-if-you-re-learning-apache-spark-this-article-is-for-you.md
     channel: email
     ingested_at: 2026-06-19
+  - path: raw/pdf/pdf-1-fundamentals-of-big-data.md
+    channel: pdf
+    ingested_at: 2026-06-25
+  - path: raw/pdf/pdf-4-pyspark-mllib.md
+    channel: pdf
+    ingested_at: 2026-06-25
+  - path: raw/pdf/pdf-chapter1.md
+    channel: pdf
+    ingested_at: 2026-06-25
+  - path: raw/pdf/pdf-chapter2.md
+    channel: pdf
+    ingested_at: 2026-06-25
+  - path: raw/pdf/pdf-chapter3.md
+    channel: pdf
+    ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-761SQ9Hxbic-databricks-tutorial-databricks-free-edition-tutorial-with-en.md
+    channel: youtube
+    ingested_at: 2026-06-25
+  - path: raw/pdf/pdf-2-intro-to-pyspark-rdd.md
+    channel: pdf
+    ingested_at: 2026-06-25
+  - path: raw/github/github-stabrise-spark-pdf.md
+    channel: github
+    ingested_at: 2026-06-25
+  - path: raw/pdf/pdf-3-intro-to-pyspark-dataframes-and-sql.md
+    channel: pdf
+    ingested_at: 2026-06-25
+  - path: raw/github/github-josephmachado-efficient-data-processing-spark.md
+    channel: github
+    ingested_at: 2026-06-25
 aliases:
   - Spark
   - Apache Spark
   - PySpark
   - RDD
   - Resilient Distributed Dataset
+  - Pair RDD
+  - spark-pdf
+  - SparkPDF
   - MapReduce
   - narrow dependencies
   - wide dependencies
@@ -43,11 +76,25 @@ aliases:
   - Sort Merge Join
   - SMJ
   - Spark JOIN
+  - Big Data fundamentals
+  - PySpark MLlib
+  - Catalyst optimizer
+  - Photon query engine
+  - SparkSession
+  - lazy evaluation
+  - PySpark DataFrame
+  - PySpark SQL
+  - DataFrame API
+  - createOrReplaceTempView
+  - toPandas
+  - HandySpark
+  - efficient data processing spark
 tags:
   - corpus/data-engineering
   - entity
 created: 2026-06-11
-updated: 2026-06-19
+updated: 2026-06-25
+last_confirmed: 2026-06-25
 ---
 
 # Apache Spark
@@ -218,12 +265,346 @@ The execution proceeds as: both datasets are (1) partitioned and sorted on the j
 
 **Broadcast vs. SMJ**: Spark automatically broadcasts small tables (<10MB default threshold) — the optimization checklist item above. SMJ is the fallback when neither side qualifies for broadcast. For large-to-large joins, SMJ is correct; for large-to-small, ensure broadcast thresholds are tuned or explicitly use broadcast hints [^src4][^src8].
 
+## Big Data fundamentals: the 3 Vs and processing paradigms
+
+"Big data" refers to datasets "too complex for traditional data-processing software" [^src10]. The classic framing — **Volume** (size), **Variety** (formats and sources), **Velocity** (speed) — defines what makes data "big" [^src10]. Key processing paradigms [^src10]:
+
+| Paradigm | Meaning |
+|---|---|
+| **Clustered computing** | Collection of resources from multiple machines |
+| **Parallel computing** | Simultaneous computation on a single machine |
+| **Distributed computing** | Collection of networked nodes running in parallel |
+| **Batch processing** | Break job into small pieces, run on individual machines |
+| **Real-time processing** | Immediate processing of data as it arrives |
+
+Hadoop/MapReduce was the first dominant distributed framework — scalable and fault-tolerant, but slow (disk-heavy) and inflexible (strict Map+Reduce paradigm, poorly suited to ML or interactive queries) [^src10]. Spark replaced it as the preferred framework — "open source, general purpose and lightning fast" with both batch and real-time support [^src10]. Nowadays single-node engines (DuckDB, Polars) challenge whether distributed processing is needed at all for medium-scale data [^src13]. See [[data-engineering/duckdb|DuckDB]].
+
+## PySpark: the Python API for Spark
+
+Spark is written in Scala; **PySpark** is the Python interface, offering similar computation speed and APIs familiar to Pandas/scikit-learn users [^src10]. When to use PySpark [^src11]:
+
+- Big data analytics and distributed data processing across clusters
+- Real-time data streaming at scale
+- Machine learning on large datasets (via MLlib)
+- ETL/ELT pipelines across diverse data sources (CSV, JSON, Parquet, …)
+
+### SparkSession
+
+The entry point to all Spark functionality. In plain Python [^src11]:
+
+```python
+from pyspark.sql import SparkSession
+spark = SparkSession.builder.appName("MySparkApp").getOrCreate()
+```
+
+In **Databricks**, the `spark` object is pre-initialized — you do not need to create it [^src13]. See [[data-engineering/databricks|Databricks]].
+
+### Spark shells
+
+Three interactive shells for prototyping [^src10]:
+
+- `spark-shell` — Scala
+- `pyspark-shell` — Python
+- `SparkR` — R
+
+### DataFrame operations (quick reference)
+
+The DataFrame API is the recommended interface (over raw RDDs). Common operations [^src12]:
+
+| Operation | Method | Example |
+|---|---|---|
+| Drop nulls | `.na.drop()` | `df.na.drop()` |
+| Fill nulls | `.na.fill({col: val})` | `df.na.fill({"age": 0})` |
+| Add column | `.withColumn(name, expr)` | `df.withColumn("profit", col("revenue") - col("budget"))` |
+| Rename column | `.withColumnRenamed(old, new)` | `df.withColumnRenamed("age", "years")` |
+| Drop column | `.drop(name)` | `df.drop("department")` |
+| Filter rows | `.filter(condition)` | `df.filter(df["salary"] > 50000)` |
+| Group & aggregate | `.groupBy(...).agg(...)` | `df.groupBy("dept").avg("salary")` |
+| Select columns | `.select([cols])` | `df.select("title", "studio")` |
+| Row count | `.count()` | `df.count()` |
+| Distinct values | `.distinct()` | `df.select("industry").distinct()` |
+| Describe stats | `.describe()` | count, mean, min, max per column |
+| Schema | `.printSchema()` | prints column names and data types |
+
+**Two filter syntaxes** (both equivalent) [^src13]:
+
+```python
+# syntax 1 — bracket notation
+df.filter(df["release_year"].between(2000, 2010))
+# syntax 2 — col() function from pyspark.sql.functions
+from pyspark.sql.functions import col
+df.filter((col("release_year") >= 2000) & (col("release_year") <= 2010))
+```
+
+### RDD vs DataFrame
+
+| | **DataFrame** | **RDD** |
+|---|---|---|
+| Level | High-level, optimized | Low-level, flexible |
+| Operations | SQL-like (select, filter, groupBy) | map(), filter(), collect() |
+| Schema | Columns with data types (like SQL) | No schema — harder with structured data |
+| Optimization | Catalyst + Tungsten | Black box — Spark can't optimize |
+| Verbosity | Concise | Very verbose for complex ops |
+| Recommendation | Always prefer for analytics | Use only when DataFrame can't do it |
+
+> "No matter the abstraction you use, from dataset to dataframe, they are compiled into RDDs behind the scenes." [^src9]
+
+Creating an RDD from a DataFrame [^src11b]:
+
+```python
+census_rdd = census_df.rdd
+census_rdd.collect()   # pulls all data to driver — use carefully!
+```
+
+Key RDD methods [^src11b]:
+- `rdd.map(fn)` — apply a function (including lambdas) to every element
+- `rdd.filter(fn)` — keep only elements where fn returns True
+- `rdd.collect()` — retrieve all data from the cluster to the driver
+- `sc.parallelize(list)` — create an RDD from a Python list
+
+### Reading and writing files
+
+```python
+# Read CSV with header + inferred schema
+df = spark.read.option("header", True).option("inferSchema", True).csv("/path/file.csv")
+
+# Specify schema explicitly (preferred for production)
+from pyspark.sql import types as t
+schema = [t.StructField("order_date", t.DateType()), ...]
+df = spark.read.schema(schema).csv("/path/file.csv")
+
+# Write as Parquet
+df.write.mode("overwrite").parquet("/path/output.parquet")
+```
+
+**Volumes in Databricks**: upload raw files to a Volume (not a table); the path is then `/Volumes/catalog/schema/volume/file.csv` [^src13].
+
+### SQL in PySpark: two styles
+
+```python
+# Style 1: Python API
+result = spark.sql("SELECT studio, COUNT(*) FROM workspace.default.movies GROUP BY studio")
+
+# Style 2: magic SQL in notebooks (Databricks)
+# %sql
+# SELECT studio, COUNT(*) FROM workspace.default.movies GROUP BY studio
+
+# Create a temp view from a DataFrame to run SQL against it
+df.createOrReplaceTempView("weather")   # session-scoped
+df.createGlobalTempView("weather")      # cluster-scoped (accessible from other notebooks)
+```
+
+[^src13]
+
+### Spark plan internals (`.explain()`)
+
+When you call `.explain("extended")` on a DataFrame, Spark prints four plan stages [^src13]:
+
+1. **Parsed logical plan** (unresolved) — the raw query tree
+2. **Analyzed logical plan** (resolved) — catalog validates tables/columns exist; assigns column IDs
+3. **Optimized logical plan** — Catalyst applies optimizations (filter pushdown, null propagation, combined predicates); optimizations happen *before* execution
+4. **Physical plan** — how to execute on the cluster (scan, filter, project, column→row conversion for output)
+
+Key insight: **Catalyst pushes filters before selects** in the optimized plan, even if your code writes `select` first then `filter` — so writing "natural" code is fine [^src13]. The Photon executor (C++, vectorized) handles actual execution; it operates on the physical plan and scans only the columns needed (projection pushdown automatic) [^src13]. See [[data-engineering/databricks|Databricks]] for Photon details.
+
+## PySpark MLlib
+
+MLlib is the **machine learning component** of Apache Spark [^src10b]. It provides distributed ML algorithms designed for parallel processing on a cluster — unlike scikit-learn, which only works on a single machine [^src10b].
+
+### Three algorithm categories ("the three Cs")
+
+1. **Collaborative filtering** — recommender systems; finds users/items with common interests; implemented via **ALS (Alternating Least Squares)** [^src10b]
+2. **Classification** — identifying category membership (Binary and Multiclass: Linear SVMs, logistic regression, decision trees, random forests, gradient-boosted trees, naïve Bayes); also **Regression** (linear least squares, Lasso, ridge, isotonic) [^src10b]
+3. **Clustering** — grouping data by similar characteristics (K-means, Gaussian mixture, Bisecting K-means, Streaming K-means) [^src10b]
+
+Additional MLlib capabilities: featurization (feature extraction, transformation, dimensionality reduction), ML Pipelines (constructing, evaluating, tuning workflows) [^src10b].
+
+### ALS collaborative filtering example
+
+```python
+from pyspark.mllib.recommendation import ALS, Rating
+
+# Create Rating tuples (user, product, rating)
+r1 = Rating(user=1, product=1, rating=1.0)
+ratings = sc.parallelize([r1, r2, r3])
+
+# Train model
+model = ALS.train(ratings, rank=10, iterations=10)
+
+# Predict
+unrated = sc.parallelize([(1, 2), (1, 1)])
+predictions = model.predictAll(unrated)
+
+# Evaluate: MSE = mean of (actual - predicted)^2
+```
+
+**Train/test split**: use `data.randomSplit([0.6, 0.4])` to split an RDD into training (60%) and test (40%) sets [^src10b].
+
+> Note: the RDD-based MLlib API has been in maintenance mode since Spark 2.0; `spark.ml` (DataFrame-based) is the recommended ML API for new code.
+
+## Databricks Free Edition (entry point for Spark learners)
+
+Databricks offers a **free edition** for learning — the only compute available is **serverless compute** (analogous to AWS Lambda: servers exist but are fully managed/hidden) [^src13]. Useful for:
+
+- Learning Spark and the lakehouse pattern without managing clusters
+- Unity Catalog exploration (catalog → schema → tables/volumes hierarchy)
+- **Genie** — natural-language-to-SQL chatbot embedded in the Databricks UI [^src13]
+- SQL Editor with serverless compute attached for ad-hoc queries
+- Notebook-based development with the pre-initialized `spark` object
+
+The **catalog → schema → tables/volumes** hierarchy: a workspace has catalogs, each catalog has schemas (databases), each schema has tables (registered data) and volumes (raw file storage) [^src13]. See [[data-engineering/databricks|Databricks]] for the full platform overview.
+
+## Pair RDDs (key-value RDDs)
+
+Real-world datasets are usually key-value pairs. A **Pair RDD** is an RDD of `(key, value)` tuples — a special data structure enabling key-aware transformations [^src14].
+
+**Creating Pair RDDs** (two approaches) [^src14]:
+
+```python
+# From a list of tuples
+my_tuple = [('Sam', 23), ('Mary', 34), ('Peter', 25)]
+pairRDD = sc.parallelize(my_tuple)
+
+# From a regular RDD via map
+my_list = ['Sam 23', 'Mary 34', 'Peter 25']
+regularRDD = sc.parallelize(my_list)
+pairRDD = regularRDD.map(lambda s: (s.split(' ')[0], s.split(' ')[1]))
+```
+
+**Pair RDD transformations** [^src14]:
+
+| Transformation | Behavior |
+|---|---|
+| `reduceByKey(func)` | Combines values with the same key (parallel, commutative + associative required) |
+| `groupByKey()` | Groups all values with the same key |
+| `sortByKey()` | Returns an RDD sorted by key (ascending or descending) |
+| `join()` | Joins two Pair RDDs on their key (inner join) |
+
+Example: `reduceByKey` sums values per key [^src14]:
+```python
+rdd = sc.parallelize([("Messi", 23), ("Ronaldo", 34), ("Messi", 24)])
+rdd.reduceByKey(lambda x, y: x + y).collect()
+# [('Ronaldo', 34), ('Messi', 47)]
+```
+
+**Pair RDD actions** [^src14]:
+
+| Action | Returns |
+|---|---|
+| `countByKey()` | Dict of key → count |
+| `collectAsMap()` | Dict of key → value (last value wins if duplicate keys) |
+
+**`saveAsTextFile()`** saves an RDD as a text file; `coalesce(1)` before it consolidates to one file [^src14]:
+```python
+RDD.coalesce(1).saveAsTextFile("output/")
+```
+
+## PySpark DataFrame and SQL (Big Data Fundamentals, ch.3)
+
+**PySpark SQL** is the Spark library for structured data — it provides schema information and computation context (unlike low-level RDDs) [^src16]. A **PySpark DataFrame** is an **immutable distributed collection of data with named columns**, designed for both structured (relational DB) and semi-structured (JSON) data. The DataFrame API is available in Python, R, Scala, and Java [^src16].
+
+### SparkSession vs SparkContext
+
+- `SparkContext` — main entry point for creating **RDDs**
+- `SparkSession` — entry point for **DataFrames**; used to create DataFrames, register them as temp views, and execute SQL queries; available in PySpark shell as `spark` [^src16]
+
+### Creating DataFrames
+
+```python
+# From an existing RDD
+names = ['Model', 'Year', 'Height', 'Width', 'Weight']
+iphones_df = spark.createDataFrame(iphones_RDD, schema=names)
+
+# From CSV / JSON / TXT (SparkSession.read)
+df_csv  = spark.read.csv("people.csv", header=True, inferSchema=True)
+df_json = spark.read.json("people.json")
+df_txt  = spark.read.txt("people.txt")
+```
+`header=True` promotes the first row to column names; `inferSchema=True` auto-detects data types [^src16].
+
+### Key DataFrame transformations and actions
+
+| Method | Type | Description |
+|---|---|---|
+| `select('col')` | Transformation | Subset columns |
+| `filter(df.Age > 21)` | Transformation | Filter rows by condition |
+| `groupby('col')` | Transformation | Group for aggregation |
+| `orderBy('col')` | Transformation | Sort by columns |
+| `dropDuplicates()` | Transformation | Remove duplicate rows |
+| `withColumnRenamed('old','new')` | Transformation | Rename a column |
+| `printSchema()` | Method | Print column types (not a Spark action) |
+| `show(n)` | Action | Print first n rows (default 20) |
+| `count()` | Action | Row count |
+| `columns` | Attribute | List column names |
+| `describe()` | Action | Summary statistics for numeric columns |
+
+[^src16]
+
+### DataFrame API vs SQL queries
+
+Both styles produce identical results — choose by preference [^src16]:
+
+```python
+# API style
+result_df = df.groupby('Age').count().orderBy('Age')
+
+# SQL style
+df.createOrReplaceTempView("test_table")
+result_df = spark.sql("SELECT Age, max(Purchase) FROM test_table GROUP BY Age")
+```
+
+The `sql()` method takes a SQL statement as a string and returns a DataFrame [^src16].
+
+### Pandas vs PySpark DataFrame
+
+| | Pandas | PySpark |
+|---|---|---|
+| Location | In-memory, single-server | Distributed across cluster |
+| Evaluation | Eager (result on operation) | Lazy (builds DAG, executes on action) |
+| Mutability | Mutable | Immutable |
+| API coverage | More operations | Less, but sufficient for most DE tasks |
+
+`df.toPandas()` converts a PySpark DataFrame to Pandas — **avoid on large data** (pulls all data to the driver node) [^src16].
+
+### Visualization with PySpark DataFrames
+
+Three methods for visualizing in notebooks [^src16]:
+- **pyspark_dist_explore** — `hist()`, `distplot()`, `pandas_histogram()` directly on Spark columns
+- **toPandas() + Pandas plotting** — simple but dangerous on large datasets
+- **HandySpark** — `df.toHandy()` then `hdf.cols["Age"].hist()` — keeps distributed computation, easy fetching
+
+## Efficient Data Processing in Spark (course reference)
+
+The `josephmachado/efficient_data_processing_spark` GitHub repo (★385) is the code companion to an **"Efficient Data Processing in Spark" course** [^src17]. Key setup details:
+
+- Uses **Docker** + **Docker Compose v2** for local Spark environment; Mac M1/later requires replacing `FROM deltaio/delta-docker:latest` with `FROM deltaio/delta-docker:latest_arm64` in the Spark Dockerfile [^src17].
+- **Makefile** for command aliases: `make restart` (stop+start containers), `make setup` (create data for exercises).
+- Includes a capstone project under `capstone/rainforest/`, a real-world data-processing scenario.
+- Also covers **MinIO** (S3-compatible object storage) alongside PySpark — a popular local alternative to cloud storage when developing Spark pipelines locally.
+
+Topics: `apache-spark`, `data-engineering`, `data-pipeline`, `minio`, `pyspark`, `pyspark-notebook`.
+
+## Reading PDFs into Spark DataFrames (spark-pdf)
+
+**spark-pdf** (StabRise, ★82) is a PDF DataSource for Apache Spark that lets you read PDF files directly into DataFrames and perform OCR on them using **Tesseract** [^src15]:
+
+```python
+# Read a directory of PDFs as a Spark DataFrame
+df = spark.read.format("pdf").load("/path/to/pdfs/")
+df.show()  # rows contain extracted text per page
+```
+
+Key features: Tesseract-backed OCR, Spark-native DataSource API (Scala, published to Maven Central), supports large-scale batch PDF processing on a cluster. Topics: data-extraction, PDF document processing, big-data, OCR [^src15].
+
+Use case in data engineering: extracting structured data from document stores (contracts, reports, medical records) at scale, feeding downstream NLP pipelines or search indexes.
+
 ## Related pages
 
 - [[data-engineering/parquet|Parquet]] — recommended columnar format for Spark analytics
 - [[data-engineering/apache-iceberg|Apache Iceberg]] — table format enabling SPJ and planner stats
 - [[data-engineering/dbt|dbt]], [[data-engineering/dimensional-modeling|Dimensional Modeling]] — adjacent transformation/modeling tooling
 - [[data-engineering/databricks|Databricks]] — managed Spark platform; Lakeflow SDP for declarative pipelines
+- [[data-engineering/duckdb|DuckDB]] — single-node alternative for medium-scale analytics
 
 ---
 
@@ -236,3 +617,13 @@ The execution proceeds as: both datasets are (1) partitioned and sorted on the j
 [^src7]: [A small hands-on project to 2× your Apache Spark learning process](../../raw/web/a-small-hands-on-project-to-2-your-apache-spark-learning-pro.md)
 [^src8]: [10 Minutes to Learn Apache Spark JOINs with a Hands-On Project](../../raw/web/web-10-minutes-to-learn-apache-spark-joins-with-a-hands-on-proje.md)
 [^src9]: [If you're learning Apache Spark, this article is for you (Vu Trinh)](../../raw/email/email-2025-06-26-if-you-re-learning-apache-spark-this-article-is-for-you.md)
+[^src10]: [Fundamentals of Big Data (Big Data Fundamentals with PySpark, DataCamp)](../../raw/pdf/pdf-1-fundamentals-of-big-data.md)
+[^src10b]: [PySpark MLlib (Big Data Fundamentals with PySpark, DataCamp)](../../raw/pdf/pdf-4-pyspark-mllib.md)
+[^src11]: [Introduction to PySpark — Chapter 1 (DataCamp)](../../raw/pdf/pdf-chapter1.md)
+[^src11b]: [Resilient Distributed Datasets in PySpark — Chapter 3 (DataCamp)](../../raw/pdf/pdf-chapter3.md)
+[^src12]: [Data Manipulation with DataFrames — Chapter 2 (DataCamp)](../../raw/pdf/pdf-chapter2.md)
+[^src13]: [Databricks Tutorial | Databricks Free Edition End-to-End (codebasics)](../../raw/youtube/youtube-761SQ9Hxbic-databricks-tutorial-databricks-free-edition-tutorial-with-en.md)
+[^src14]: [Intro to PySpark RDD — Big Data Fundamentals with PySpark (DataCamp)](../../raw/pdf/pdf-2-intro-to-pyspark-rdd.md)
+[^src15]: [StabRise/spark-pdf — PDF DataSource for Apache Spark](../../raw/github/github-stabrise-spark-pdf.md)
+[^src16]: [Intro to PySpark DataFrames and SQL — Big Data Fundamentals with PySpark, ch.3 (DataCamp)](../../raw/pdf/pdf-3-intro-to-pyspark-dataframes-and-sql.md)
+[^src17]: [josephmachado/efficient_data_processing_spark — Efficient Data Processing in Spark course repo](../../raw/github/github-josephmachado-efficient-data-processing-spark.md)

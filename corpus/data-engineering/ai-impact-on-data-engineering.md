@@ -24,6 +24,9 @@ sources:
   - path: raw/email/email-2025-04-25-the-2025-ai-enabled-data-engineering-roadmap.md
     channel: email
     ingested_at: 2026-06-19
+  - path: raw/youtube/youtube-14kTQXsVB3g-ai-data-engineering-project-for-beginners.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - AI impact on data engineers
   - AI and data engineering
@@ -41,7 +44,7 @@ tags:
   - corpus/data-engineering
   - synthesis
 created: 2026-06-15
-updated: 2026-06-19
+updated: 2026-06-25
 ---
 
 # AI's Impact on Data Engineering
@@ -137,6 +140,36 @@ The survival advice matches Vu Trinh's: **learn the concepts** [^src7]. Codegen 
 
 A reusable **prompt pattern** for generating a pipeline with an AI coding tool: **inputs (schema first) → technologies (orchestration + processing engine) → design pattern → quality concerns & best practices** [^src7]. The worked example: "given `CREATE TABLE users(...)`, create an Airflow DAG using Trino that implements SCD2 on `country`, with partition sensors, write-audit-publish quality checks, and idempotent design" [^src7]. This is the [[data-engineering/data-engineering-best-practices|best-practices]] checklist expressed as a prompt.
 
+## Beginner AI data engineering project: LangChain + BigQuery NL-to-SQL
+
+A concrete entry-level project demonstrates adding generative AI features to a data warehouse using **LangChain** and **Vertex AI** on Google Cloud [^src8]. The result: a Python application that understands and responds to **natural-language queries** about relational data stored in BigQuery.
+
+**Architecture** [^src8]:
+1. **Vertex AI LLM** (Gemini / PaLM) — the language model; accessed via `google-cloud-aiplatform` SDK
+2. **LangChain** framework — provides the `SQLDatabaseChain` component that bridges NL to SQL
+3. **SQLAlchemy** — ORM and engine layer connecting LangChain to BigQuery
+4. **BigQuery** — the data warehouse (using the public "The Look" e-commerce dataset, `inventory_items` table, ~77 GB)
+
+**Component roles** [^src8]:
+- **Prompt template** — an object (like an f-string) that combines user input with a fixed SQL prompt template; passes variables to the model
+- **Language model** — text-in, text-out; wraps Vertex AI API with configurable `temperature` (lower = more deterministic)
+- **SQL Database Chain** — a built-in LangChain chain for querying tabular/SQL data; translates NL → SQL dialect; supports MySQL, PostgreSQL, Oracle, SQLite, BigQuery (via SQLAlchemy)
+
+**Example queries handled** [^src8]:
+- "Count total number of products which were sold" → `SELECT COUNT(*) FROM inventory_items WHERE ...`
+- "Total sales for 'Original Perry Suspenders' in 2023" → filtered `SUM(retail_price)` with date range
+- "Monthly sales for 'Microslit Boxer' in 2023 by month" → `GROUP BY EXTRACT(month FROM sold_at)`
+
+**Setup steps** [^src8]:
+1. Enable Vertex AI API in GCP project
+2. Create BigQuery dataset + copy from public data
+3. Create SQLAlchemy engine with BigQuery URL
+4. Create `SQLDatabaseChain` with LLM + BigQuery engine; set `verbose=True`, `return_intermediate_steps=True` for debugging
+
+**Key insight**: LangChain's `SQLDatabaseChain` allows data engineers and analysts to prototype natural-language-to-SQL interfaces quickly, but production use requires robust prompt engineering and guard-railing against hallucinated SQL.
+
+See [[data-engineering/data-engineering-agents-landscape|DE Agents Landscape]] for the broader text-to-SQL landscape (Vanna, WrenAI, Dataherald, Databricks Genie).
+
 ## Related
 
 - [[data-engineering/data-engineer-role|The Data Engineer Role]] — fundamentals/seniority this builds on
@@ -157,3 +190,4 @@ A reusable **prompt pattern** for generating a pipeline with an AI coding tool: 
 [^src5]: [Claude Code isn't going to replace data engineers (yet) (Robin Moffatt)](../../raw/web/web-claude-code-isnt-going-to-replace-data-engineers-yet.md)
 [^src6]: [The 10x Data Team = The Markdown Team (Julien Hurault, Ju Data Engineering Weekly Ep 100)](../../raw/web/web-the-10x-data-team-the-markdown-team.md)
 [^src7]: [The 2025 AI-enabled Data Engineering roadmap (Zach Wilson, DataEngineer.io)](../../raw/email/email-2025-04-25-the-2025-ai-enabled-data-engineering-roadmap.md)
+[^src8]: [AI Data Engineering Project for Beginners — LangChain + Vertex AI + BigQuery (Nataindata)](../../raw/youtube/youtube-14kTQXsVB3g-ai-data-engineering-project-for-beginners.md)

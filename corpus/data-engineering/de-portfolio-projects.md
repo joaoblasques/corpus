@@ -27,6 +27,9 @@ sources:
   - path: raw/web/building-a-local-data-platform-with-terraform-and-docker.md
     channel: web
     ingested_at: 2026-06-19
+  - path: raw/github/github-lukejbyrne-rg-data-engineering-project.md
+    channel: github
+    ingested_at: 2026-06-25
 aliases:
   - data engineering projects
   - portfolio projects
@@ -35,7 +38,7 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-15
-updated: 2026-06-19
+updated: 2026-06-25
 ---
 
 # DE Portfolio Projects
@@ -97,6 +100,20 @@ Two further runnable projects (outside the Start Data Engineering set) make good
 - **Cloud ELT: S3 → Snowflake → dbt, orchestrated by [[data-engineering/orchestra|Orchestra]]** — uploads AdventureWorks CSVs to S3 (boto3), `COPY INTO` Snowflake staging tables, then dbt staging + curated (fact/dimension) models; the whole pipeline is then scheduled/observed in Orchestra [^src7]. Demonstrates the modern cloud-warehouse + dbt stack with a managed declarative orchestrator [^src7].
 - **Local data platform with [[mlops/terraform|Terraform]] + Docker** — replicates a cloud data stack *locally and for free* using **Minio** (S3-compatible object store), **LocalStack** (emulates AWS SQS), **Dockerized Airflow** (orchestration), and **[[data-engineering/duckdb|DuckDB]]** (analytical warehouse), wired together by Terraform modules; includes an **event-driven** path (SQS message → Docker ETL container, the AWS-Lambda analogue) [^src8]. Each component maps to a cloud service, so the same boto3/Airflow code stays cloud-portable [^src8]. A strong showcase of **IaC + event-driven architecture** without cloud cost [^src8]. See [[mlops/infrastructure-as-code|Infrastructure as Code]].
 
+## Azure cloud end-to-end project
+
+An Azure-focused end-to-end pipeline project addressing the business need to understand gender demographics in customer sales data [^src9]:
+
+- **Source**: on-premises SQL Server (customer + sales data)
+- **Ingestion**: Azure Data Factory (ADF) → Azure Data Lake Storage (ADLS)
+- **Transformation**: Azure Databricks (Bronze → Silver → Gold medallion layers)
+- **Serving**: Azure Synapse Analytics (SQL warehouse layer)
+- **Visualization**: Power BI dashboard (gender split, total products sold, total revenue, filterable by product category/gender/date)
+- **Security**: Azure Key Vault (credentials management)
+- **Automation**: daily scheduled pipeline run
+
+The stack demonstrates the full **Microsoft Azure data stack** (ADF → ADLS → Databricks → Synapse → Power BI) in a business-framed scenario. Useful contrast to the AWS-native templates above — hiring managers in Azure shops will respond to this. See [[data-engineering/medallion-architecture|Medallion Architecture]] for the Bronze/Silver/Gold pattern and [[data-engineering/databricks|Databricks]] for the transformation layer [^src9].
+
 ## How to use
 
 Run on Codespaces (fork → "Create codespace" → `make up` → open the exposed UI port) or locally with Docker (≥4 GB RAM); the recommended order goes least → most complex [^src1]. The Docker images are not production-optimised — for learning only [^src1].
@@ -119,3 +136,4 @@ Run on Codespaces (fork → "Create codespace" → `make up` → open the expose
 [^src6]: [Setting up a local dev environment using Docker (Start Data Engineering)](../../raw/email/email-2025-07-16-setting-up-a-local-dev-environment-using-docker.md)
 [^src7]: [vutrinh274/dbt_example — ETL Pipelines with Orchestra (S3→Snowflake→dbt)](../../raw/web/github-vutrinh274-dbt-example.md)
 [^src8]: [Building a Local Data Platform with Terraform and Docker (p-munhoz)](../../raw/web/building-a-local-data-platform-with-terraform-and-docker.md)
+[^src9]: [Azure End-to-End Data Engineering Project (lukejbyrne/rg-data-engineering-project)](../../raw/github/github-lukejbyrne-rg-data-engineering-project.md)

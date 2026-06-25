@@ -18,6 +18,9 @@ sources:
   - path: raw/web/web-sql-to-dbt-guide-how-data-layers-flow-with-medallion-archite.md
     channel: web
     ingested_at: 2026-06-20
+  - path: raw/youtube/youtube-9GVqKuTVANE-sql-data-warehouse-from-scratch-full-hands-on-data-engineeri.md
+    channel: youtube
+    ingested_at: 2026-06-25
 aliases:
   - medallion
   - bronze silver gold
@@ -27,7 +30,7 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-11
-updated: 2026-06-19
+updated: 2026-06-25
 ---
 
 # Medallion Architecture
@@ -105,6 +108,19 @@ The **SQL to dbt Guide** series (Alejandro Aboy, Pipeline to Insights) maps meda
 
 dbt automatically builds a **lineage DAG** that lets you visualize `source → staging → intermediate → mart` flows in the dbt docs UI — making the medallion layer structure auditable without separate documentation [^src5].
 
+## Medallion vs other warehouse architectures
+
+In practice, the four main approaches to warehousing are positioned as [^src6]:
+
+| Approach | Middle Layer | Primary Strength | Common in |
+|---|---|---|---|
+| Inmon (3NF EDW) | Enterprise DW (3NF normalized) | Governance, single source of truth | Regulated industries |
+| Kimball | No EDW — go straight to data marts | Fast delivery, dimensional models | BI-heavy orgs |
+| Data Vault | Raw Vault + Business Vault | Auditability, standards | Complex multi-source |
+| **Medallion** | Bronze → Silver → Gold | Modern lakehouse, easy to understand | Cloud-native, Databricks |
+
+Medallion is described as "the favorite" by practitioners at companies like Mercedes-Benz for its intuitive naming and lakehouse compatibility [^src6]. See [[data-engineering/etl-pipeline|ETL Pipeline]] for detailed technique tables for each layer transition.
+
 ## Gotchas
 
 - Treating bronze/silver/gold as data models leads teams to debate colors when they should agree on grain, keys, and definitions — or to debate column-level semantics when the topic is orchestration [^src1].
@@ -116,3 +132,4 @@ dbt automatically builds a **lineage DAG** that lets you visualize `source → s
 [^src3]: [The Medallion Data Architecture (Pros & Cons) (KahanDataSolutions)](../../raw/email/email-2025-11-20-the-medallion-data-architecture-pros-cons.md)
 [^src4]: [Understanding the "T" in ETL: A Back-to-Basics Guide to Data Transformations](../../raw/email/email-2025-04-16-understanding-the-t-in-etl-a-back-to-basics-guide-to-data-tr.md)
 [^src5]: [SQL to dbt Guide — How Data Layers Flow with Medallion Architecture](../../raw/web/web-sql-to-dbt-guide-how-data-layers-flow-with-medallion-archite.md) — Alejandro Aboy, Pipeline to Insights
+[^src6]: [SQL Data Warehouse from Scratch | Full Hands-On Data Engineering Project (Data with Baraa)](../../raw/youtube/youtube-9GVqKuTVANE-sql-data-warehouse-from-scratch-full-hands-on-data-engineeri.md)

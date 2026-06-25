@@ -12,21 +12,39 @@ sources:
   - path: raw/web/your-obsidian-vault-can-now-run-sql-and-your-agent-can-read.md
     channel: web
     ingested_at: 2026-06-11
+  - path: raw/email/email-2026-06-23-duckdb-at-a-high-level.md
+    channel: email
+    ingested_at: 2026-06-25
 aliases:
   - DuckDB
   - MotherDuck
   - Quack
   - DuckLake
+  - single-node OLAP
 tags:
   - corpus/data-engineering
   - entity
 created: 2026-06-11
-updated: 2026-06-11
+updated: 2026-06-25
 ---
 
 # DuckDB
 
-**TL;DR.** DuckDB is an **embedded, in-process OLAP engine** (first released 2019) — like SQLite but column-oriented for analytics, with no client-server, no protocol, just low-level API calls [^src2]. It excels at single-node, in-process analytics with zero infrastructure [^src2]. As of 2026 it is "moving further out of its initial niche... into a core building block of modern data architecture" via the **Quack** client-server protocol, **DuckLake**, and managed cloud (**MotherDuck**) [^src2].
+**TL;DR.** DuckDB is an **embedded, in-process OLAP engine** (first released 2019) — like SQLite but column-oriented for analytics, with no client-server, no protocol, just low-level API calls [^src2]. It excels at single-node, in-process analytics with zero infrastructure [^src2]. As of 2026 it is "moving further out of its initial niche... into a core building block of modern data architecture" via the **Quack** client-server protocol, **DuckLake**, and managed cloud (**MotherDuck**) [^src2]. Single-node tools like DuckDB can now "handle hundreds of GB of data with unfair simplicity" making Spark "no longer the only option" for medium-sized data infrastructure [^src4].
+
+## Origin and motivation
+
+DuckDB was created by Mark Raasveldt during his PhD at a database architecture research group. The problem he observed: data professionals (data scientists, analysts) had "terabytes of CSVs sitting on disk" but avoided database systems entirely, preferring Python/R scripts instead. The friction points were [^src4]:
+
+1. **Client-server overhead** — setting up even Postgres is non-trivial for someone who "only wants to work with data."
+2. **Data movement cost** — ingesting data into a database and extracting it back out is an expensive round trip; "moving a decent amount of data effectively is always a challenge."
+3. **External state** — a client-server database breaks the "self-contained notebook" model by introducing a server dependency.
+
+SQLite solved some of this (embedded, no server) but is **OLTP-only**: single-threaded, built for point lookups and small writes, not analytics.
+
+> "Something with SQLite's embedded philosophy, but built for analytics from the ground up: columnar, vectorized, parallel, easy data integration." [^src4]
+
+That product-market fit description is DuckDB. The shift DuckDB represents: roughly 20 years ago ("everyone wants MapReduce"), then 10 years ago ("everyone wants Spark"), and now: "We can now process and analyze data with only a single machine and a simpler programming abstraction" [^src4].
 
 ## Why it matters
 
@@ -85,3 +103,4 @@ In multi-engine Iceberg deployments DuckDB is the **selective-lookup / sub-secon
 [^src1]: [DuckDB 1.5.3: Not an Ordinary Patch Release](../../raw/web/duckdb-1-5-3-not-an-ordinary-patch-release.md)
 [^src2]: [Quack: The DuckDB Client-Server Protocol](../../raw/web/quack-the-duckdb-client-server-protocol.md)
 [^src3]: [Your Obsidian vault can now run SQL (and your agent can read it)](../../raw/web/your-obsidian-vault-can-now-run-sql-and-your-agent-can-read.md)
+[^src4]: [DuckDB at a High Level (Vu Trinh / The Data Engineers)](../../raw/email/email-2026-06-23-duckdb-at-a-high-level.md)

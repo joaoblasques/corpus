@@ -15,6 +15,9 @@ sources:
   - path: raw/email/email-2025-05-22-how-to-choose-between-batch-and-stream-processing.md
     channel: email
     ingested_at: 2026-06-19
+  - path: raw/github/github-joaoblasques-data-pipeline-orchestration-kestra.md
+    channel: github
+    ingested_at: 2026-06-25
 aliases:
   - Airflow
   - Apache Airflow
@@ -23,12 +26,13 @@ aliases:
   - scheduling
   - Dagster
   - Prefect
+  - Kestra
 tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-11
-updated: 2026-06-19
-last_confirmed: 2026-06-19
+updated: 2026-06-25
+last_confirmed: 2026-06-25
 ---
 
 # Data Orchestration
@@ -80,6 +84,51 @@ All run information is stored in a metadata DB and as logs, giving current + his
 
 Orchestration is a *different layer* from transformation: an orchestrator schedules and sequences pipeline steps (including invoking [[data-engineering/dbt|dbt]] runs), while dbt handles the in-warehouse "T". Note dbt and Elementary also offer **data observability** at the dataset/quality level — distinct from the pipeline-execution observability an orchestrator provides. See [[data-engineering/dbt|dbt]].
 
+## Kestra: event-driven workflow orchestration
+
+**Kestra** is an open-source workflow orchestration platform with a YAML-first configuration model, launched via Docker Compose [^src5]. Its positioning: make orchestration accessible without the heavy Python DAG overhead of Airflow, by expressing workflows as declarative YAML flows with triggers and tasks.
+
+**Core Kestra concepts** [^src5]:
+- **Flows** — YAML workflow definitions (comparable to Airflow DAGs)
+- **Tasks** — individual pipeline steps within a flow (download, transform, load)
+- **Triggers** — schedule or event-based triggers for flow execution
+- **Backfill** — re-running a flow for historical time periods; Kestra supports parametrized backfill runs
+
+**Why separate pipeline steps** (the motivating rationale) [^src5]: a monolithic script that downloads data and inserts it into a DB has problems — if insertion fails, the download must be repeated; testing requires re-downloading every time; adding retry/fail-safe logic per stage is cumbersome. Splitting into discrete tasks (one for download, one for insert) lets each step be retried or skipped independently.
+
+**Typical Kestra pipeline structure** [^src5]:
+```yaml
+# Simplified Kestra flow example
+id: load-data-to-bigquery
+namespace: company.data
+tasks:
+  - id: download
+    type: io.kestra.plugin.core.http.Download
+    uri: "{{inputs.url}}"
+  - id: load_to_gcs
+    type: io.kestra.plugin.gcp.gcs.Upload
+    from: "{{outputs.download.uri}}"
+    to: "gs://bucket/data.csv"
+  - id: load_to_bigquery
+    type: io.kestra.plugin.gcp.bigquery.Load
+    from: "{{outputs.load_to_gcs.uri}}"
+    destinationTable: "project.dataset.table"
+triggers:
+  - id: daily
+    type: io.kestra.plugin.core.trigger.Schedule
+    cron: "0 6 * * *"
+```
+
+**Backfill pattern** [^src5]: adding a `backfill_start_date` parameter to the flow allows re-running from a historical date, with Kestra executing one flow per time window automatically.
+
+**Integration profile** [^src5]: topics include BigQuery, Docker, data-warehouse, orchestration, tutorial — typical starter stack (GCS + BigQuery + Kestra) for cloud ETL pipelines. Launch Kestra locally:
+```bash
+docker-compose up -d
+# UI accessible at localhost:8080
+```
+
+See [[data-engineering/sources/data-engineering-zoomcamp|Data Engineering Zoomcamp]] where Kestra is used as the orchestration layer.
+
 ## See also
 
 - [[data-engineering/dbt|dbt]] — transformation layer typically invoked by an orchestrated task
@@ -94,3 +143,4 @@ Orchestration is a *different layer* from transformation: an orchestrator schedu
 [^src2]: [Do you really need Apache Airflow?](../../raw/email/email-2025-11-19-do-you-really-need-apache-airflow.md)
 [^src3]: [[DE 101] #8 - Orchestrators and Schedulers (Start Data Engineering)](../../raw/email/email-2025-08-07-de-101-8-orchestrators-and-schedulers.md)
 [^src4]: [How to Choose Between Batch and Stream Processing? (Pipeline to Insights)](../../raw/email/email-2025-05-22-how-to-choose-between-batch-and-stream-processing.md)
+[^src5]: [Workflow Orchestration with Kestra (joaoblasques/data-pipeline-orchestration-kestra)](../../raw/github/github-joaoblasques-data-pipeline-orchestration-kestra.md)

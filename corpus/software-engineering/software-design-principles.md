@@ -12,6 +12,9 @@ sources:
   - path: raw/email/email-2026-06-10-joao-here-s-another-challenge-for-you.md
     channel: email
     ingested_at: 2026-06-15
+  - path: raw/email/email-2026-06-16-joao-quick-code-challenge-for-you.md
+    channel: email
+    ingested_at: 2026-06-25
 aliases:
   - software design principles
   - clean code principles
@@ -29,7 +32,7 @@ tags:
   - corpus/software-engineering
   - concept
 created: 2026-05-21
-updated: 2026-06-15
+updated: 2026-06-25
 ---
 
 # Software Design Principles
@@ -98,6 +101,29 @@ Many GoF patterns are workarounds for missing language features [^src2]. Java's 
 
 This connects to the maintainability cost of AI-generated code — see [[software-engineering/ai-assisted-development|AI-Assisted Development]], where the same simplicity discipline guards against AI-amplified over-abstraction.
 
+## Open/Closed Principle — concrete example
+
+A `DiscountCalculator` with an `if/elif` chain for every discount type violates Open/Closed: "every new discount forces you to change old code" [^src4]. The fix is to depend on an abstraction (`Discount` base class) and inject concrete implementations:
+
+```python
+class Discount:
+    def apply(self, total: float) -> float:
+        raise NotImplementedError
+
+class PercentageDiscount(Discount):
+    def apply(self, total: float) -> float:
+        return total * 0.9  # 10% off
+
+class DiscountCalculator:
+    def __init__(self, discount_strategy: Discount):
+        self.discount_strategy = discount_strategy
+
+    def calculate(self, total: float) -> float:
+        return self.discount_strategy.apply(total)
+```
+
+"Before, adding a new discount meant editing `DiscountCalculator`. Now, adding a new discount means creating a new class." [^src4] `DiscountCalculator` never needs to know every discount type — it only cares that its strategy has an `apply()` method. The same structural pattern as the DIP example above, applied at the feature level rather than infrastructure level. See [[software-engineering/software-design-principles|Dependency Inversion Principle]] above.
+
 ## Relationship to architecture-level patterns
 
 SRP and cohesion operate at the code level, but the same principle drives [[software-engineering/microservices|microservices]] decomposition at the service level — each service should have one reason to change, with clear boundaries and limited proliferation. Hype-driven microservices adoption often violates the simplicity principle: services are added before the complexity is warranted [^src1].
@@ -114,3 +140,4 @@ SRP and cohesion operate at the code level, but the same principle drives [[soft
 [^src1]: [[03_Resources/Study Notes/Python - Production Code Principles Senior Developer|Python - Production Code Principles Senior Developer]]
 [^src2]: [Design Patterns Suck](../../raw/email/email-2026-06-09-design-patterns-suck.md)
 [^src3]: [Tech With Tim — "Joao, here's another challenge for you" (Dependency Inversion)](../../raw/email/email-2026-06-10-joao-here-s-another-challenge-for-you.md)
+[^src4]: [Tech With Tim — "Joao, quick code challenge for you" (Open/Closed)](../../raw/email/email-2026-06-16-joao-quick-code-challenge-for-you.md)
