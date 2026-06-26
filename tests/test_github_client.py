@@ -21,6 +21,20 @@ def test_gh_available():
     assert gh.gh_available(_run=lambda *a, **k: _proc(1)) is False
 
 
+def test_gh_available_probes_api_not_auth_status():
+    # must reflect real API reachability (gh api user), not `gh auth status`,
+    # which returns non-zero in a headless env-token sandbox even when api works
+    seen = []
+
+    def fake_run(cmd, *a, **k):
+        seen.append(cmd)
+        return _proc(0)
+
+    gh.gh_available(_run=fake_run)
+    assert seen and seen[0][:3] == ["gh", "api", "user"]
+    assert "auth" not in seen[0]
+
+
 def test_list_starred_parses_and_caps():
     data = [{"full_name": "a/b", "html_url": "u", "description": "d", "language": "Py",
              "stargazers_count": 5, "topics": ["t"], "default_branch": "main"},
