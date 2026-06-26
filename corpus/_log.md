@@ -1464,3 +1464,19 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   - ingest: 0 ingested · 6 deferred · status=timeout · error=timeout
 - lint:
   - 0 broken wikilinks · 0 broken citations · 0 orphans · 0 stubs
+
+## [2026-06-26 17:40] ingest | Local-agent cluster (3 "AI Agents" YouTube transcripts)
+- sources:
+  - raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md
+  - raw/youtube/youtube-iRew6HOY0ho-paperclip-agent-collab-made-easy.md
+  - raw/youtube/youtube-S_oN3vlzpMw-how-ai-agents-claude-skills-work-clearly-explained.md
+- channel: youtube
+- domain: ai-engineering
+- pages touched: [local-ai-agents.md (new), openclaw.md (new), paperclip.md (new), multi-agent-systems.md, sources/how-ai-agents-and-skills-work.md, README.md, _index.md]
+- new pages: [ai-engineering/local-ai-agents, ai-engineering/openclaw, ai-engineering/paperclip]
+- notes: ingest-auto manual pass; 3 processed, 3 deferred. Completed a prior same-day session's partial ingest (pages existed untracked but sources were unstamped/unmoved and index/log unupdated). S_oN3vlzpMw is a re-collected Whisper transcript of the already-ingested Isenberg×Ras-Mic episode — treated as corroborating re-ingest (enriched openclaw.md with its OpenClaw-specific sponsor-vetting/recursive-skill material; added as 2nd source to the source page, last_confirmed refreshed). Stamped + moved all 3 to raw/youtube/.
+
+## [2026-06-26 17:40] ingest | deferrals (ingest-auto)
+- DEFER UNCERTAIN: email-2026-06-26-unit-tests-for-taste-ai-native-or-left-behind-drizzles-npm-p.md — TLDR Dev multi-topic digest newsletter; fetched companions span security/ML/dev-tooling/SEO and are separate raw/web/ sources; routing is a judgment call
+- DEFER UNCERTAIN: web-claude-code-category-blog-claude-by-anthropic.md — Anthropic blog category index; only post titles + category blurb, no article bodies; nothing citable (extraction would require fabrication per §7/§13)
+- DEFER UNCERTAIN: web-agents-category-blog-claude-by-anthropic.md — Anthropic blog category index; only post titles + category blurb, no article bodies; nothing citable (extraction would require fabrication per §7/§13)
