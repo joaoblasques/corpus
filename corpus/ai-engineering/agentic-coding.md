@@ -253,6 +253,18 @@ A practitioner deep-dive on running Claude Code "as a programmable agent, not dr
 
 This source also grounds [[ai-engineering/agent-skills|Agent Skills]] (skills as "the unit of reusable expertise"), subagents, plugins, and [[ai-engineering/mcp|MCP]] as the layers above the prompt.
 
+## A real end-to-end AI coding workflow (research-first, harness setup)
+
+Tech With Tim's documented build of an "AI shorts tool" is a pragmatic walk-through of the full agentic-coding loop an experienced developer runs in [[ai-engineering/cursor|Cursor]] [^src38]:
+
+1. **Research before prompting.** "The first step in my workflow… a lot of people skip this and it leads to really poor results." Spend time picking the tech stack and tools and writing a high-level outline before generating any code — he used Claude Code itself to research alternatives and produce an architecture slideshow [^src38].
+2. **Generate persistent context, not a one-off prompt.** The opening prompt states the idea and every decision already made, then asks the model to "create a high-level plan and architecture document… ask me any questions before we proceed" — producing markdown files every later chat (and parallel agents) can re-read [^src38]. The "ask me questions first" interview is the same gate as [[ai-engineering/vibe-coding|vibe coding]]'s spec discipline.
+3. **Install the harness: skills + MCP servers + rules.** Rather than pasting docs, install a vendor's agent skills and MCP server (ImageKit + GitHub MCP shown) so the agent learns the tool itself; add a project **rule** ("always commit after any major change") injected on every prompt [^src38]. See [[ai-engineering/mcp|MCP]], [[ai-engineering/agent-skills|Agent Skills]], [[ai-engineering/claude-md-conventions|CLAUDE.md Conventions]].
+4. **Iterate via the prompt→run→debug loop.** Get something working, then fix bugs by pasting the error plus context ("the first phase is working, the transcription isn't"); read the model's tool calls to catch a wrong direction early and interject; screenshot the UI to show the model the actual result [^src38]. "This is what happens when you build with AI — there are mistakes, there are issues."
+5. **The leverage came from setup, not the model.** "Had we not added the tools, the MCP server… spent the time to plan, it would have taken significantly longer." Model-by-task: a frontier Claude model for from-scratch building, a faster model for UI-only tweaks [^src38].
+
+The throughline matches the page's **spec-is-the-leverage** and **read-less-steer-more** themes: front-load research and context, wire the harness once, then delegate scoped iterations.
+
 ## Non-technical practitioners as agentic coders
 
 The barrier to agentic coding has dropped far enough that people with no programming background are building production workflows. Two documented cases:
