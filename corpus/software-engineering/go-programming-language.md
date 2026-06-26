@@ -15,6 +15,12 @@ sources:
   - path: raw/youtube/youtube-gXmznGEW9vo-five-of-my-favorite-project-ideas-to-learn-go.md
     channel: youtube
     ingested_at: 2026-06-26
+  - path: raw/youtube/youtube-V-lI7AmusGs-go-programming-full-course.md
+    channel: youtube
+    ingested_at: 2026-06-26
+  - path: raw/youtube/youtube-un6ZyFkqFKo-go-programming-golang-course-with-bonus-projects.md
+    channel: youtube
+    ingested_at: 2026-06-26
 aliases:
   - Go
   - Golang
@@ -28,6 +34,9 @@ aliases:
   - Go project ideas
   - Cobra (Go CLI)
   - Charm huh
+  - Go runtime
+  - compiled vs interpreted
+  - boot.dev Go course
 tags:
   - corpus/software-engineering
   - concept

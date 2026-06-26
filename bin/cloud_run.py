@@ -89,14 +89,27 @@ def _tokenized_remote(origin_url: str, token: str) -> str:
     return f"https://x-access-token:{token}@{host}/{path}"
 
 
+def _push_error(push, token) -> str:
+    """Redacted, truncated stderr/stdout of a failed push — never the token."""
+    msg = (getattr(push, "stderr", "") or "") + (getattr(push, "stdout", "") or "")
+    if token:
+        msg = msg.replace(token, "***")
+    return _redact(msg).strip()[:280]
+
+
 def commit_push(repo, *, message=None, token=None, _run=None) -> dict:
     """Stage corpus/ + ledgers, commit, and publish to origin/main.
 
     Cloud mode (a GH_TOKEN/GITHUB_TOKEN is present, or `token` passed): push the
-    new commit straight to the main ref via the PAT — `git push <token-url>
-    HEAD:main` — regardless of the local branch, since the routine sandbox runs
-    on a claude/* branch and cannot be on main. The token never enters the
-    returned report or stdout (git output is captured, not printed).
+    new commit straight to the main ref regardless of the local branch, since
+    the routine sandbox runs on a claude/* branch and cannot be on main. Two
+    strategies are tried in order — (1) the sandbox's default credentials
+    (`git push origin HEAD:main`, which the built-in GitHub App connection may
+    be allowed to make since main is unprotected), then (2) the PAT via a
+    tokenized URL (`git push <token-url> HEAD:main`). The first to succeed wins.
+    On total failure the report carries a redacted `push_error` so the operator
+    can tell auth (403/permission) from anything else. The token never enters
+    the returned report or stdout (git output is captured + redacted).
 
     Local mode (no token): keep the strict main-branch guard and `git push
     origin main`, so a stray local run can't publish a feature branch."""
@@ -116,12 +129,19 @@ def commit_push(repo, *, message=None, token=None, _run=None) -> dict:
     commit = _git(["commit", "-m", msg], repo, _run)
     if commit.returncode != 0:
         return {"status": "commit-failed", "files": n}
-    if cloud:
+    if not cloud:
+        push = _git(["push", "origin", "main"], repo, _run)
+        if push.returncode == 0:
+            return {"status": "pushed", "files": n}
+        return {"status": "push-failed", "files": n, "push_error": _push_error(push, token)}
+    # Cloud: try default creds against main first, then the PAT URL.
+    push = _git(["push", "origin", "HEAD:main"], repo, _run)
+    if push.returncode != 0:
         origin = _git(["remote", "get-url", "origin"], repo, _run).stdout.strip()
         push = _git(["push", _tokenized_remote(origin, token), "HEAD:main"], repo, _run)
-    else:
-        push = _git(["push", "origin", "main"], repo, _run)
-    return {"status": "pushed" if push.returncode == 0 else "push-failed", "files": n}
+    if push.returncode == 0:
+        return {"status": "pushed", "files": n}
+    return {"status": "push-failed", "files": n, "push_error": _push_error(push, token)}
 
 
 def _redact(s: str) -> str:
