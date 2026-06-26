@@ -8,7 +8,11 @@ github_client.py. Spec: docs/superpowers/specs/2026-06-22-github-repo-collection
 from __future__ import annotations
 
 import re
+import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import github_ledger  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 INBOX = ROOT / "raw" / "_inbox"
@@ -21,7 +25,9 @@ def slugify(full_name: str) -> str:
     return f"github-{s}"
 
 
-def already_collected(full_name: str, dirs=None) -> bool:
+def already_collected(full_name: str, dirs=None, ledger_path=None) -> bool:
+    if github_ledger.is_digested(full_name, ledger_path or github_ledger.LEDGER_PATH):
+        return True
     for d in (dirs if dirs is not None else DEDUP_DIRS):
         p = Path(d)
         if not p.exists():
@@ -78,12 +84,14 @@ def build_document(repo: dict, *, collected_at: str) -> str:
     return "\n".join(lines) + "\n"
 
 
-def write_collected(repo: dict, *, collected_at: str, inbox=None, dedup_dirs=None) -> dict:
+def write_collected(repo: dict, *, collected_at: str, inbox=None, dedup_dirs=None, ledger_path=None) -> dict:
     fn = repo["full_name"]
-    if already_collected(fn, dedup_dirs):
+    led = ledger_path or github_ledger.LEDGER_PATH
+    if already_collected(fn, dedup_dirs, ledger_path=led):
         return {"status": "duplicate", "path": None}
     ib = Path(inbox) if inbox is not None else INBOX
     ib.mkdir(parents=True, exist_ok=True)
     path = ib / f"{slugify(fn)}.md"
     path.write_text(build_document(repo, collected_at=collected_at), encoding="utf-8")
+    github_ledger.mark_digested(fn, led)
     return {"status": "written", "path": str(path)}

@@ -31,9 +31,10 @@ def test_build_document_tolerates_missing_pieces():
 
 def test_write_collected_writes_then_dedups(tmp_path):
     d = tmp_path / "_inbox"
-    r1 = cg.write_collected(REPO, collected_at="2026-06-22", inbox=d, dedup_dirs=[d])
+    led = tmp_path / "github_digested.txt"  # isolated ledger — don't touch the real one
+    r1 = cg.write_collected(REPO, collected_at="2026-06-22", inbox=d, dedup_dirs=[d], ledger_path=led)
     assert r1["status"] == "written" and Path(r1["path"]).name == "github-anthropics-claude-code.md"
-    r2 = cg.write_collected(REPO, collected_at="2026-06-22", inbox=d, dedup_dirs=[d])
+    r2 = cg.write_collected(REPO, collected_at="2026-06-22", inbox=d, dedup_dirs=[d], ledger_path=led)
     assert r2["status"] == "duplicate"   # dedup by repo: full-name
 
 
