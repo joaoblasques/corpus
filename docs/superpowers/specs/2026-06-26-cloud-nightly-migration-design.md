@@ -1,7 +1,7 @@
 # Design: Migrate the nightly corpus run to Anthropic cloud (Max-billed)
 
 - **Date:** 2026-06-26
-- **Status:** Design — awaiting user review
+- **Status:** Approved 2026-06-26 — proceeding to implementation plan
 - **Author:** Claude (Opus) + Jonas
 - **Related:** `bin/scheduled_run.py`, `corpus/_config.md` (Scheduled automation), commit `d076808` (lock self-heal)
 
@@ -99,11 +99,16 @@ collector it touches. Rejected alternative (stay local + bulletproof): does not 
 
 ### 4.3 Dedup without a local inbox
 - **Source-state dedup (already cloud-safe):** Gmail (un-star/un-label), X (un-bookmark),
-  Obsidian (reap vault note), PDF (move to `_processed` via Drive API). These mark "done" at
-  the source, so a stateless re-fetch never re-collects.
-- **GitHub needs a committed ledger** (stars stay in place). Add a tracked file
-  **`automation/state/github_digested.txt`** (one `owner/name` per line). The collector reads
-  it to skip already-digested repos and appends new ones. Tracked (not under `raw/`), tiny.
+  PDF (move to `_processed` via Drive API). These mark "done" at the source, so a stateless
+  re-fetch never re-collects.
+- **Committed ledgers for the two sources the cloud must NOT mutate:**
+  - **GitHub** (stars stay in place): tracked file **`automation/state/github_digested.txt`**
+    (one `owner/name` per line). The collector skips already-digested repos and appends new ones.
+  - **Obsidian** (cloud reads the vault but must not write it — see §7): tracked file
+    **`automation/state/obsidian_digested.txt`** (one vault note path / content-hash per line).
+    The cloud collector skips already-ingested notes; the **Mac** keeps doing the actual vault
+    note deletion when it's on. Vault stays single-writer.
+  Both ledgers live under `automation/state/` (tracked, not under `raw/`), and are tiny.
 
 ### 4.4 YouTube hand-off (the one tracked-`raw` exception)
 - New tracked folder **`raw/_pending/youtube/`** (un-ignored in `.gitignore`; everything else
@@ -127,9 +132,11 @@ falling back to today's local file when the env var is absent (so local runs are
 4. Move `raw/_pending/youtube/*` → `raw/_inbox/`.
 5. Ingest-auto: agent routes to existing domains, writes/updates `corpus/` pages, defers gated
    judgment to `raw/_inbox/_REVIEW.md` (unchanged behavior).
-6. Reap each source at its origin; append new repos to the github ledger.
-7. `git add corpus/ automation/state/github_digested.txt`; `git rm raw/_pending/youtube/*`;
-   commit; push corpus. Separately commit the vault deletions and push `second-brain`.
+6. Reap mutable sources at their origin (Gmail un-star/label, X un-bookmark, PDF move);
+   append new repos to the github ledger and new notes to the obsidian ledger. The vault repo
+   is cloned **read-only** — the cloud never writes it (note deletion stays a Mac job).
+7. `git add corpus/ automation/state/*.txt`; `git rm raw/_pending/youtube/*`; commit; push the
+   corpus repo. The `second-brain` repo is never pushed by the cloud.
 
 ---
 
@@ -147,15 +154,14 @@ falling back to today's local file when the env var is absent (so local runs are
 
 ---
 
-## 7. Vault two-writer hazard (explicit risk)
-Today the local reaper `git rm`s vault notes but **never commits** the vault (CLAUDE.md §2;
-memory `never-commit-vault-from-code-session`). The cloud run has no human to commit, so it
-**must commit + push** the vault deletions. Risk: the user's Obsidian Git-sync also writes the
-vault → conflicts. **Mitigation:** cloud reaps + commits the vault on a `claude/reap` branch or
-commits to default with `pull --rebase`; Obsidian sync pulls. This needs validation in Phase 2
-and may warrant a CLAUDE.md §2 amendment (cloud reaper may commit the vault). **Open question
-for the user:** is the vault safe for an automated committer, or should vault reaping stay
-Mac-local (cloud just skips obsidian reap and re-collection is guarded by a ledger instead)?
+## 7. Vault stays single-writer (resolved)
+**Decision (2026-06-26):** the cloud **never writes the `second-brain` vault** — it clones it
+read-only, reads notes, and uses the committed `obsidian_digested.txt` ledger (§4.3) to avoid
+re-ingesting. The actual vault-note **deletion stays a Mac job** (the existing local reaper,
+when the Mac is on). This keeps the vault single-writer (Mac/Obsidian only) and **dissolves the
+two-writer hazard** without any CLAUDE.md §2 amendment. Trade-off accepted: if the Mac is rarely
+on, the vault is decluttered less often — but the ledger guarantees no duplicate ingest, so
+there is no correctness cost, only delayed tidiness.
 
 ---
 
@@ -173,10 +179,14 @@ Mac-local (cloud just skips obsidian reap and re-collection is guarded by a ledg
 
 ## 9. User one-time setup (cannot be automated — needs the user's accounts)
 1. Create the nightly routine via `/schedule` (this is the billed, user-triggered step).
-2. Add secrets to the routine environment: Gmail, Google Drive, GitHub, X tokens.
-3. Grant the routine GitHub write to **both** `corpus` and `second-brain`.
-4. Ensure the vault stays pushed to its GitHub remote (the "web counterpart").
+2. Add secrets to the routine environment: one **Google** OAuth token covering Gmail + Drive
+   scopes (decision: single client), the **GitHub** auth (decision: the routine's built-in
+   GitHub connection), and the **X** OAuth token.
+3. Grant the routine GitHub **write to `corpus` only**; `second-brain` is cloned **read-only**.
+4. Ensure the vault stays pushed to its GitHub remote (the "web counterpart") so the cloud can
+   clone current notes.
 5. Keep the Mac's slim YouTube launchd job installed (feeder only).
+6. Confirm a **failure-alert email** address (decision: email on any nightly error).
 
 ---
 
@@ -185,8 +195,8 @@ Mac-local (cloud just skips obsidian reap and re-collection is guarded by a ledg
   skeleton with `--dry-run`. Local, fully testable.
 - **Phase 1 (prove billing + loop):** routine running gmail + github + x → ingest → commit/push.
   Confirm Max-billed, no API spend. Smallest end-to-end slice.
-- **Phase 2 (Drive + vault):** PDF via Drive API; Obsidian via vault clone + reap (resolve the
-  §7 two-writer question first).
+- **Phase 2 (Drive + vault):** PDF via Drive API; Obsidian via read-only vault clone +
+  `obsidian_digested.txt` ledger (no cloud vault writes, per §7).
 - **Phase 3 (YouTube hand-off):** `raw/_pending/youtube/` queue; slim the Mac launchd job to
   feeder-only; cloud drains + clears the queue.
 - **Phase 4 (decommission):** retire the local `com.corpus.daily` collect+ingest once the cloud
@@ -194,10 +204,9 @@ Mac-local (cloud just skips obsidian reap and re-collection is guarded by a ledg
 
 ---
 
-## 11. Open questions
-1. **Vault committer (§7):** OK for the cloud to commit+push vault note deletions, or keep
-   vault reaping Mac-local?
-2. **Google auth:** reuse one Google OAuth client for both Gmail + Drive, or separate?
-3. **GitHub identity for the cloud pushes:** the routine's built-in GitHub connection, or a
-   dedicated bot PAT?
-4. **Failure notification channel:** email is simplest — acceptable, or prefer another?
+## 11. Decisions (resolved 2026-06-26)
+1. **Vault writer:** cloud is read-only on the vault; deletion stays Mac-local; obsidian ledger
+   prevents re-ingest (§7). Two-writer hazard dissolved.
+2. **Google auth:** one OAuth client covering Gmail + Drive scopes.
+3. **GitHub identity:** the routine's built-in GitHub connection (write to `corpus` only).
+4. **Failure notification:** email the user on any nightly-run error.
