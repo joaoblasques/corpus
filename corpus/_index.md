@@ -1,6 +1,6 @@
 # Corpus Index
 
-> Last updated: 2026-06-26 | Total pages: 274 | Total sources: 1085
+> Last updated: 2026-06-26 | Total pages: 276 | Total sources: 1091
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
