@@ -42,6 +42,9 @@ sources:
   - path: raw/youtube/youtube-Erxl8jomCcY-5-claude-ai-skills-that-pay-more-than-a-college-degree.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/email/email-2026-06-24-how-id-make-a-simple-project-stand-out.md
+    channel: email
+    ingested_at: 2026-06-26
 aliases:
   - getting noticed
   - coding interview tips
@@ -67,7 +70,7 @@ tags:
   - corpus/ai-business
   - concept
 created: 2026-06-12
-updated: 2026-06-25
+updated: 2026-06-26
 
 ---
 
@@ -79,7 +82,7 @@ updated: 2026-06-25
 
 Recruiters skim and look for quick signals; a portfolio must make obvious what kind of developer you are and why someone should talk to you [^src1]. Four common failure modes [^src1]:
 
-- **No wow factor.** Generic projects (to-do, weather, algorithm visualizer) are ignored. Add a twist: an AI-powered meal planner instead of a CRUD to-do app, or a stock tracker using news sentiment analysis. Functionality can stay simple; the angle makes it stand out [^src1].
+- **No wow factor.** Generic projects (to-do, weather, algorithm visualizer) are ignored. Add a twist: an AI-powered meal planner instead of a CRUD to-do app, or a stock tracker using news sentiment analysis. Functionality can stay simple; the angle makes it stand out [^src1]. A later Tech With Tim note sharpens this into the test "the code might not be much harder, but now the project has a reason to exist" — give a project a *sharper angle* (a weather app that recommends what to wear; a stock tracker that uses news sentiment to explain why a stock is moving) and screen each piece against three questions: would it make someone curious, want to click, and feel different from a tutorial project? [^src14]
 - **Ambiguous names/descriptions.** "React Dashboard" is vague; "E-commerce sales dashboard for real-time order tracking" reads instantly. Keep descriptions to 1–2 sentences covering *what it does, the stack, and the outcome* [^src1].
 - **No role targeting.** A grab-bag (ML model + WordPress blog + Python game + React app) looks unfocused, not versatile. Pick 2–3 projects aligned to the target role [^src1].
 - **Amateur presentation.** With AI design help there is "no real excuse for having a poor-looking portfolio" — use complementary colors, modern fonts, consistent spacing, mobile-friendly layout [^src1].
@@ -322,3 +325,4 @@ The conversion engineer skill is an extension of the §Clarity of communication 
 [^src11]: [5 Claude AI Skills That Pay More Than a College Degree](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-5-claude-ai-skill-report.md) — lead-gen video; niche architect skill is the substantive extract
 [^src12]: [Learn These 6 AI Skills Now (Before AI Replaces You)](../../raw/youtube/youtube-3XIGcM7VICc-learn-these-6-ai-skills-now-before-ai-replaces-you.md) — Nate Herk | AI Automation; six practical career-survival skills; promotional (free school community + Glydo CTA)
 [^src13]: [5 Claude AI Skills That Pay More Than a College Degree](../../raw/youtube/youtube-Erxl8jomCcY-5-claude-ai-skills-that-pay-more-than-a-college-degree.md) — Shane Hummus; 5 skills (vibe coder, ghost voice, niche architect, pattern hunter, conversion engineer); coaching program funnel; income claims promotional
+[^src14]: [how I'd make a simple project stand out](../../raw/email/email-2026-06-24-how-id-make-a-simple-project-stand-out.md) — Tech With Tim; portfolio "sharper angle" advice (corroborates [^src1]); course-creator, vendor-adjacent

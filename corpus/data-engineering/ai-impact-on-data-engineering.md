@@ -27,6 +27,9 @@ sources:
   - path: raw/youtube/youtube-14kTQXsVB3g-ai-data-engineering-project-for-beginners.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/web/6-data-engineering-skills-to-progress-in-the-age-of-ai-start.md
+    channel: web
+    ingested_at: 2026-06-26
 aliases:
   - AI impact on data engineers
   - AI and data engineering
@@ -44,7 +47,7 @@ tags:
   - corpus/data-engineering
   - synthesis
 created: 2026-06-15
-updated: 2026-06-25
+updated: 2026-06-26
 ---
 
 # AI's Impact on Data Engineering
@@ -170,6 +173,19 @@ A concrete entry-level project demonstrates adding generative AI features to a d
 
 See [[data-engineering/data-engineering-agents-landscape|DE Agents Landscape]] for the broader text-to-SQL landscape (Vanna, WrenAI, Dataherald, Databricks Genie).
 
+## The six enduring DE skills (StartDataEngineering)
+
+Joseph Machado (StartDataEngineering) makes the same "fundamentals endure, implementation commoditises" thesis concrete with six data-engineering concepts that stay in demand as AI cheapens code generation. The throughline: "AI made code generation cheap. But we still need to understand what to build, why to build, and how to fix what we build" [^src9].
+
+1. **SQL for transformation + Python as glue.** SQL expresses the four core patterns — read (`select`/`where`), enrich (joins), find trends (window functions/`group by`), store ([[data-engineering/merge-into|`MERGE`]]/insert/overwrite); Python connects the many systems a pipeline touches (e.g. extract from an API → load to S3 → transform in SQL). AI writes both; the DE ensures the code does what it should and contains architectural sprawl [^src9].
+2. **Data modeling + storage format drive usability.** A good model lets a user answer any business question; data is typically transformed in three stages (source-as-is → type conversions → [[data-engineering/dimensional-modeling|Kimball]] model → summary tables) and physically stored read-optimised, because cloud cost and query speed scale with data scanned. AI speeds DDLs and historical-query-plan analysis; the DE decides how to model and which tradeoffs to make [^src9].
+3. **Data quality + orchestration get the right data out on time.** Decisions made on incorrect data are almost impossible to reverse, so know which DQ checks to run, how to run them, and how to fix issues — and run pipelines on a schedule with an orchestrator (Airflow). AI helps with implementation; the DE owns business context and failure handling [^src9]. See [[data-engineering/data-quality|Data Quality]].
+4. **Design patterns for maintainable systems.** Data-flow patterns, code patterns, and metadata/logging best practices keep pipelines easy to maintain; AI generates the code, the DE knows when to apply a pattern and when to break it [^src9]. See [[data-engineering/data-engineering-best-practices|Best Practices]].
+5. **Define requirements before building.** Understand the business with the Bus Matrix, then gather and agree requirements with end users so work isn't wasted — talking to stakeholders is the part AI cannot replace (use it only for notes/task-lists) [^src9]. See [[data-engineering/requirements-gathering|Requirements Gathering]].
+6. **Use LLMs, but understand the output.** LLMs speed development/debugging, enable users via RAG (which needs metadata + semantic information), and document systems — but you must understand what you build [^src9].
+
+The recap — "Human design + AI code generation will take you far" — restates this page's direction and the [[data-engineering/data-engineer-role|role]]'s "business value first, fundamentals over tools" thesis from a skills-checklist angle [^src9].
+
 ## Related
 
 - [[data-engineering/data-engineer-role|The Data Engineer Role]] — fundamentals/seniority this builds on
@@ -191,3 +207,4 @@ See [[data-engineering/data-engineering-agents-landscape|DE Agents Landscape]] f
 [^src6]: [The 10x Data Team = The Markdown Team (Julien Hurault, Ju Data Engineering Weekly Ep 100)](../../raw/web/web-the-10x-data-team-the-markdown-team.md)
 [^src7]: [The 2025 AI-enabled Data Engineering roadmap (Zach Wilson, DataEngineer.io)](../../raw/email/email-2025-04-25-the-2025-ai-enabled-data-engineering-roadmap.md)
 [^src8]: [AI Data Engineering Project for Beginners — LangChain + Vertex AI + BigQuery (Nataindata)](../../raw/youtube/youtube-14kTQXsVB3g-ai-data-engineering-project-for-beginners.md)
+[^src9]: [6 Data Engineering Skills To Progress in the Age of AI (Joseph Machado, StartDataEngineering)](../../raw/web/6-data-engineering-skills-to-progress-in-the-age-of-ai-start.md)

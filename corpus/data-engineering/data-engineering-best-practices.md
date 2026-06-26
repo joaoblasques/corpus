@@ -27,6 +27,9 @@ sources:
   - path: raw/email/email-2026-06-13-in-2026-the-data-fundamentals-matter-more-than-ever.md
     channel: email
     ingested_at: 2026-06-20
+  - path: raw/web/6-data-engineering-skills-to-progress-in-the-age-of-ai-start.md
+    channel: web
+    ingested_at: 2026-06-26
 aliases:
   - data engineering best practices
   - pipeline best practices
@@ -36,8 +39,8 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-15
-updated: 2026-06-20
-last_confirmed: 2026-06-20
+updated: 2026-06-26
+last_confirmed: 2026-06-26
 ---
 
 # Data Engineering Best Practices
@@ -139,6 +142,10 @@ What survived [^src7]:
 - **Data gets messier, not cleaner** — as more systems generate more data in more formats, the DE's job of cleaning, conforming, and governing has grown, not shrunk.
 - **Build end-to-end** — understanding the full pipeline from source to serving, not just one layer (ingestion, or modeling, or visualization), is the differentiator. "AI tools will optimize each layer, but the engineer who understands how they connect still wins" [^src7].
 
+## Corroboration: the same practices framed as AI-era durable skills
+
+StartDataEngineering's "6 skills in the age of AI" independently reaches the same core: design patterns exist to keep pipelines maintainable, so the durable skill is knowing *when to apply a best practice and when to break it* [^src8]. Its six concepts map onto this page — the **3-stage progressive transform** (source → type conversions → Kimball model → summary tables) restates practice #1's layered architecture; **validating data before exposing it** + an orchestrator (Airflow) restates practice #2; and it points to four companion best-practice resources (Data Flow patterns, Code patterns, Implementation best practices, Metadata & Logging best practices) covering practices #1, #4, and #5 [^src8]. The role-level "fundamentals endure as codegen commoditises" framing is in [[data-engineering/ai-impact-on-data-engineering|AI's Impact on Data Engineering]] [^src8].
+
 ## Related
 
 - [[data-engineering/idempotent-pipelines|Idempotent Pipelines]] · [[data-engineering/data-quality|Data Quality]]
@@ -156,3 +163,4 @@ What survived [^src7]:
 [^src5]: [The 2025 AI-enabled Data Engineering roadmap (Zach Wilson, DataEngineer.io)](../../raw/email/email-2025-04-25-the-2025-ai-enabled-data-engineering-roadmap.md)
 [^src6]: [9 Software Engineering Skills a DE Should Have (Alejandro Aboy)](../../raw/email/email-2026-06-16-9-software-engineering-skills-a-de-should-have-and-how-to-le.md)
 [^src7]: [In 2026, The Data Fundamentals Matter More Than Ever (Pipeline to Insights)](../../raw/email/email-2026-06-13-in-2026-the-data-fundamentals-matter-more-than-ever.md)
+[^src8]: [6 Data Engineering Skills To Progress in the Age of AI (Joseph Machado, StartDataEngineering)](../../raw/web/6-data-engineering-skills-to-progress-in-the-age-of-ai-start.md)

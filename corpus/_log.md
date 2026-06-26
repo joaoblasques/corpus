@@ -1368,3 +1368,19 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - updated pages: 4 — dbt (manifest-state incremental deploys), cicd-for-data-infrastructure (dbt slim-CI/defer-CD worked example + OIDC), dimensional-modeling (role-playing dimensions + dbt_utils surrogate keys), data-observability (detection→communication / status page); + README hub + _index
 - deferred (→ _REVIEW.md): 4 — how-to-get-reliable-results-from-your-llms (TDS The Variable), stealing-is-a-skill-gemini-3-5-flash-... (TLDR Dev), openai-s-custom-chip-tesla-... (TLDR), netflixs-new-batch-compute-... (TLDR Data). All UNCERTAIN: multi-topic digest newsletters spanning many domains; their fetched companions are separate raw/web/ sources that drain individually.
 - notes: ingest-auto run; 2 processed, 4 deferred. Stamped + moved both ingested emails to raw/email/. These 6 are the same set the 2026-06-26T08:37 scheduled run deferred on timeout.
+
+## [2026-06-26 12:40] ingest | ingest-auto manual pass (6-file filtered batch)
+- sources: 3 — raw/web/6-data-engineering-skills-to-progress-in-the-age-of-ai-start.md (+ its pointer email raw/email/email-2026-06-24-6-data-engineering-skills-to-progress-in-the-age-of-ai.md), raw/email/email-2026-06-24-how-id-make-a-simple-project-stand-out.md
+- channels: web, email
+- domains: data-engineering, ai-business
+- ingested: 2
+  - StartDataEngineering "6 Data Engineering Skills To Progress in the Age of AI" (Joseph Machado) — single-article email; content in fetched raw/web/ companion; cited the companion, stamped both email + companion
+  - Tech With Tim "how I'd make a simple project stand out" — self-contained email; corroborates existing [^src1] Tech With Tim portfolio advice
+- new pages: 0
+- updated pages: 3 — data-engineering/ai-impact-on-data-engineering (new "six enduring DE skills" section + src9), data-engineering/data-engineering-best-practices (AI-era corroboration paragraph + src8, last_confirmed→2026-06-26), ai-business/technical-career (portfolio "sharper angle" corroboration + src14)
+- deferred (→ _REVIEW.md): 4
+  - UNCERTAIN: email-2026-06-24-anthropic-drops-claude-tag.md (The Code digest — many topics/domains)
+  - UNCERTAIN: email-2026-06-24-elden-rings-ai-openai-daybreak-fired-by-google-for-workspace.md (TLDR Dev digest — many topics)
+  - UNCERTAIN: email-2026-06-23-google-takes-the-hit-in-ai-s-talent-war.md (The Code digest — many topics)
+  - UNCERTAIN: notes-...-how-to-build-your-report.md (Dave Ebbelaar full-stack AIOS — already ingested via youtube-rZX1OYetbSM; raw/notes filename collision with the different nyndra "4-Layer Setup" report → move would overwrite)
+- notes: ingest-auto run; 2 processed, 4 deferred. Stamped + moved both ingested emails to raw/email/; web companion stamped in place. No new domains; _domains.md untouched.
