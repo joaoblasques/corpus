@@ -6,6 +6,9 @@ sources:
   - path: raw/youtube/youtube-8nfh_Pl9YrI-every-ai-business-money-model-ranked-by-profit-per-hour.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-o9dNpyrV6Bc-the-5-000-month-ai-method-everyone-s-missing.md
+    channel: youtube
+    ingested_at: 2026-06-26
 aliases:
   - AI business models ranked
   - profit per hour
@@ -15,11 +18,14 @@ aliases:
   - outcome-based AI consulting
   - vertical micro-SaaS
   - AI business tier list
+  - paid community model
+  - membership business
+  - Skool community funnel
 tags:
   - corpus/ai-business
   - concept
 created: 2026-06-25
-updated: 2026-06-25
+updated: 2026-06-26
 ---
 
 # AI Business Models (Ranked by Profit Per Hour)
@@ -110,6 +116,21 @@ Solo operator potential: five, sometimes six or seven figure+ ARR, with the most
 
 "Start where you are" — use each tier to fund the next [^src1].
 
+## Adjacent model: the paid-community / membership funnel
+
+A separate "AI side-hustle" source proposes a sixth model the ranked list above omits: a **paid community / membership business**, where the product is access to a community rather than software or a service [^src2]. The mechanics are a two-stage funnel:
+
+1. **Free community as top-of-funnel.** Build a free Facebook *group* around any niche (hobby, money, health, tech). The argument for Facebook is contrarian: it has "almost no competition" for groups because creators chase TikTok/Instagram/YouTube, and Facebook's algorithm surfaces the group to people searching that niche once you post consistently [^src2].
+2. **Paid community as monetization.** Migrate trusting members from the free group to a paid [[ai-business/boring-expert-businesses|Skool]]/membership community (courses, live coaching calls, weekly value). The free tier's job is trust: "people actually see who you are... the purpose is to make people trust you" before they pay a monthly fee [^src2].
+
+**Cited examples** (independently unverified, single-source) [^src2]:
+- A chess coach: ~50 members × $99/mo ≈ $4,000/mo teaching only "improve your chess."
+- Meta-ads coaches: 51 members × $595/mo ≈ $30,000/mo, and 48 × $147/mo — each fed by a free Facebook group of 200k–300k.
+
+**AI's role is leverage, not the product** [^src2]: tools like Manus, ChatGPT, or Claude generate the posts, images, and community structure (and Anthropic's own prompting best-practices — "be clear and direct," add context/why — are cited as the way to get usable output), but "AI is the helper, you're the main face." The honest trade-off named: free distribution costs *time* (post daily, grow slowly); paid distribution (Meta ads) costs *money* but is faster.
+
+This maps onto the page's spectrum as a **distribution-first, low-margin-to-start** model: it leans entirely on the "distribution is the final limiting factor" point (the free group *is* the distribution engine), and the paid community resembles a productized service (#4) whose "platform" is the community itself. Quality caveat: the source is a promotional side-hustle video with no audited figures — treat the income claims as illustrative, not benchmarks (same discipline as the Gotchas below).
+
 ## Relationship to other pages
 
 - [[ai-business/monetizing-code|Monetizing Code]] — positioning, offer clarity, and "sell a result not code" apply across all five tiers; the $100M agency playbook maps to the #2/3 tier.
@@ -124,3 +145,4 @@ Solo operator potential: five, sometimes six or seven figure+ ARR, with the most
 - All content is labeled "what's possible, not what's promised" by the source itself [^src1].
 
 [^src1]: [Every AI Business Money Model Ranked By Profit Per Hour](../../raw/youtube/youtube-8nfh_Pl9YrI-every-ai-business-money-model-ranked-by-profit-per-hour.md) — AI Founders YouTube; editorial ranking with cited third-party benchmarks; promotional (free community CTA)
+[^src2]: [The $5,000/Month AI Method Everyone's Missing](../../raw/youtube/youtube-o9dNpyrV6Bc-the-5-000-month-ai-method-everyone-s-missing.md) — Ross Minchev, YouTube ("AI side hustles"); promotional, income figures single-source and unaudited

@@ -48,6 +48,9 @@ sources:
   - path: raw/github/github-sumanth077-ai-engineering-toolkit.md
     channel: github
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-tu4rU4YD1Jk-updated-essential-ai-skills-for-2026.md
+    channel: youtube
+    ingested_at: 2026-06-26
 aliases:
   - learning AI
   - learning AI engineering

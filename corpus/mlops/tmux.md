@@ -12,6 +12,9 @@ sources:
   - path: raw/youtube/youtube-z7xyZQVK4Dg-build-anything-with-tmux-here-s-how.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-27B50lXinWM-the-new-age-of-modern-terminal-multiplexer-herdr.md
+    channel: youtube
+    ingested_at: 2026-06-26
 aliases:
   - terminal multiplexer
   - tmux sessions
@@ -22,7 +25,7 @@ tags:
   - corpus/mlops
   - concept
 created: 2026-06-25
-updated: 2026-06-25
+updated: 2026-06-26
 ---
 
 # tmux
@@ -137,8 +140,18 @@ claude # → "Subscription" → paste code → done
 - Multiple simultaneous attachments to the same session are possible (e.g. laptop + phone) — both see and can type into the same terminal [^src2].
 - `tmux kill-server` stops *all* sessions — use `exit` inside a pane to close only that pane.
 
+## Herder — an agent-aware modern alternative
+
+[[mlops/herder|Herder]] is a newer multiplexer modeled on tmux (same prefix/keymap idioms, splits, detach/reattach) that targets two of tmux's weak points for agentic work [^src3]:
+
+- **Session state is decoupled from process state** — the layout (tabs/panes/workspaces) is saved as a snapshot, so it can be restored after a server restart. With tmux, "if your tmux server dies, everything dies" unless a restore plugin is installed [^src3].
+- **Built-in agent awareness** — Herder auto-detects running coding agents and shows each one's state (working / idle / blocked / done) in a sidebar, searchable and filterable — the monitoring layer that the multi-agent tmux pattern above lacks [^src3].
+
+It also ships mouse support and a thin-client `--remote` mode out of the box (tmux requires enabling mouse and gives only the remote machine's keybindings over SSH). See [[mlops/herder|Herder]] for the full breakdown.
+
 ## See also
 
+- [[mlops/herder|Herder]] — agent-aware modern multiplexer modeled on tmux; snapshots layout, monitors agent state
 - [[mlops/terminal-and-shell|Terminal & Shell]] — Alacritty/zsh/Powerlevel10k, the desktop-side complement
 - [[mlops/cli-tools|CLI Tools]] — fzf, zoxide, and other productivity tools in the same layer
 - [[mlops/vps-for-agents|VPS for Agents]] — full VPS provisioning + agent workflow context
@@ -148,3 +161,4 @@ claude # → "Subscription" → paste code → done
 
 [^src1]: [Build Anything with Tmux, Here's How (David Ondrej)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-build-anything-wi-report.md) — [00:06](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-build-anything-wi-report.md#t=00:06) what tmux is; [03:27](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-build-anything-wi-report.md#t=03:27) sessions/windows/panes; [03:46](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-build-anything-wi-report.md#t=03:46) multi-agent substrate; [11:03](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-build-anything-wi-report.md#t=11:03) multi-agent demo
 [^src2]: [I Gave Codex a 24/7 Server — Now It Codes While I Sleep (Tim Ruscica / Tech With Tim)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-i-gave-codex-a-24-report.md) — [02:42](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-i-gave-codex-a-24-report.md#t=02:42) VPS rationale; [13:32](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-i-gave-codex-a-24-report.md#t=13:32) tmux install + session persistence; [16:05](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-i-gave-codex-a-24-report.md#t=16:05) phone control; [20:34](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-i-gave-codex-a-24-report.md#t=20:34) cron automation
+[^src3]: [The New Age of Modern Terminal Multiplexer Herder (Seth Phaeno)](../../raw/youtube/youtube-27B50lXinWM-the-new-age-of-modern-terminal-multiplexer-herdr.md) — [00:53](../../raw/youtube/youtube-27B50lXinWM-the-new-age-of-modern-terminal-multiplexer-herdr.md#t=00:53) session vs process state; [08:12](../../raw/youtube/youtube-27B50lXinWM-the-new-age-of-modern-terminal-multiplexer-herdr.md#t=08:12) agent awareness

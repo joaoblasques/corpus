@@ -129,6 +129,9 @@ sources:
   - path: raw/web/web-github-proteowizard-pwiz-ai-ai-tooling-and-documentation-for.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-gpOfsGW1xRk-my-real-ai-coding-workflow-build-anything.md
+    channel: youtube
+    ingested_at: 2026-06-26
 aliases:
   - agentic coding
   - agentic engineering

@@ -12,6 +12,9 @@ sources:
   - path: raw/github/github-d3witt-viking.md
     channel: github
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-gXmznGEW9vo-five-of-my-favorite-project-ideas-to-learn-go.md
+    channel: youtube
+    ingested_at: 2026-06-26
 aliases:
   - Go
   - Golang
@@ -21,11 +24,15 @@ aliases:
   - Go CLI
   - Go backend
   - Go infrastructure
+  - learn Go
+  - Go project ideas
+  - Cobra (Go CLI)
+  - Charm huh
 tags:
   - corpus/software-engineering
   - concept
 created: 2026-06-25
-updated: 2026-06-25
+updated: 2026-06-26
 ---
 
 # Go Programming Language
@@ -153,6 +160,20 @@ Go trade-offs [^src2]:
 
 Go shines for teams building systems "that need to be maintained, deployed, and understood by more than one person" [^src2].
 
+## Learning Go through five projects (Dreams of Code)
+
+A project-based learning path — the recommended way to learn the language is to "build something with it" [^src4]. Five projects, ordered by the Go concepts each exercises:
+
+| Project | Form | Go skills exercised | Key packages |
+|---|---|---|---|
+| **To-do list** | terminal CLI | filesystem read/write, tabular output, multi-command CLI | `encoding/csv` (data store), `text/tabwriter`, Cobra (spf13) for subcommands |
+| **Calculator web API** | stateless HTTP API | idiomatic `net/http`, input validation, logging middleware | `net/http` stdlib (OpenAPI-spec'd endpoints) |
+| **Dead-link web scraper** | CLI | recursive crawl, status-code checks, concurrency | `net/http`, `golang.org/x/net/html` (tokenize), goroutines + channels, `singleflight` (request dedupe), Playwright-Go (JS-rendered sites) |
+| **URL shortener** | web app | server-rendered templates, HTTP redirects | `html/template`, `http.Redirect` (301 vs 302) |
+| **Currency converter** | terminal TUI | terminal UI forms, third-party API, secrets handling | Charm `huh` (input forms), env-var secrets |
+
+Recurring lessons [^src4]: start the data store simple (CSV before SQLite); Cobra is "probably the gold standard" for Go CLIs and scaffolds both the app and its subcommands; scraper concurrency requires understanding goroutines *and* channels (plus `singleflight` to avoid hitting the same URL twice); choose `301` (moved permanently) vs `302` (found) deliberately; and handle API tokens via environment variables, never hardcoded. The set reinforces Go's CLI/backend/networking sweet spots — every project is a CLI, API, or scraper, the domains where the stdlib + goroutines shine.
+
 ## Viking — example Go CLI tool
 
 **Viking** (★752) by d3witt is a Go CLI tool for managing remote machines and SSH keys — a bare-metal alternative to cloud management consoles [^src3]. Commands: `exec`, `copy/cp`, `key`, `machine`, `config`. Installs via `go install` into a single static binary (`CGO_ENABLED=0`); topics: bare-metal, CLI, deploy, SSH, VM [^src3].
@@ -168,3 +189,4 @@ Go shines for teams building systems "that need to be maintained, deployed, and 
 [^src1]: [Learn GO Fast: Full Tutorial (Alex Mux)](../../raw/youtube/youtube-8uiZC0l4Ajw-learn-go-fast-full-tutorial.md)
 [^src2]: [Is Go Still Worth Learning in 2026? (Tech With Tim)](../../raw/email/email-2026-06-18-is-go-still-worth-learning-in-2026.md)
 [^src3]: [viking (d3witt)](../../raw/github/github-d3witt-viking.md)
+[^src4]: [Five of my favorite project ideas to learn Go (Dreams of Code)](../../raw/youtube/youtube-gXmznGEW9vo-five-of-my-favorite-project-ideas-to-learn-go.md)

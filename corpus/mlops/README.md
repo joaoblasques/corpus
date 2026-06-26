@@ -29,6 +29,7 @@ The engineering substrate for building ML and software systems: how the developm
 - [[mlops/azure|Azure]] — entity · draft · 2nd cloud provider; service map, resource hierarchy, AZ-900 fundamentals
 - [[mlops/gcp|GCP]] — entity · draft · Google cloud; Compute Engine/GKE/BigQuery, org→folder→project hierarchy
 - [[mlops/terax|Terax]] — entity · stub · open-source AI-native terminal (Tauri 2 + Rust); 7 MB, <300 ms start, built-in agent with reviewable diffs
+- [[mlops/herder|Herder]] — entity · draft · modern tmux-style multiplexer; session-vs-process-state snapshots, built-in agent-awareness (working/idle/blocked/done), thin-client remote mode, Herda Plus plugin
 - [[mlops/made-with-ml|Made With ML]] — entity · stub · GokuMohandas/Made-With-ML; 48k-star production ML course (design → deploy → iterate); PyTorch + Ray
 - [[mlops/handson-ml3|Hands-On ML (3rd Edition)]] — entity · stub · Aurélien Géron / ageron/handson-ml3; 13k-star companion to O'Reilly book; Scikit-Learn + Keras + TF2
 - [[mlops/100-days-of-ml-code|100 Days of ML Code]] — entity · stub · Avik-Jain; 51k-star infographic ML algorithm challenge; data-preprocessing through SVM + deep learning
@@ -76,6 +77,7 @@ The engineering substrate for building ML and software systems: how the developm
 - GitHub repos cluster (2026-06-25): handson-ml3 (Aurélien Géron), 100-Days-Of-ML-Code (Avik Jain), Made-With-ML (GokuMohandas), Ampernetacle (jpetazzo), Tilt (tilt-dev)
 - Notes/PDFs cluster (2026-06-25): Build Anything with Tmux; I Gave Codex a 24/7 Server; Terax AI Terminal; DevOps from Zero to Hero; I Wasted 2 Years Learning DevOps Wrong; TWN DevOps Roadmap PDF; TWN Weekly Learning Schedule PDF; I Lost 2 Years and $300K to the Wrong Roadmap (email)
 - YouTube + web cluster (2026-06-25): This Zsh Config (Dreams of Autonomy); 50 macOS Tips (NetworkChuck); Terax YouTube (Better Stack); Git for Professionals (Tobias Günther / freeCodeCamp); Only GitHub Guide (corbin); Secure a VPS in 2026 (Dreams of Code); DevOps Zero to Hero (JavaScript Mastery); I Wasted 2 Years DevOps (Nana/TWN); Linux Filesystem (WhiteboardDoodles); Build Anything with Tmux YouTube (David Ondrej); crontab(5) Linux manual; Windows Task Scheduler docs; Designing Machine Learning Systems (Chip Huyen, O'Reilly PDF)
+- [The New Age of Modern Terminal Multiplexer Herder](../../raw/youtube/youtube-27B50lXinWM-the-new-age-of-modern-terminal-multiplexer-herdr.md) — Seth Phaeno, YouTube (Dev setup), 2026-06-26 → new entity [[mlops/herder|Herder]] + tmux comparison
 
 ## See also
 
