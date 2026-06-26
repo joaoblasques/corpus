@@ -6,7 +6,7 @@ tags:
   - corpus/data-engineering
   - hub
 created: 2026-05-07
-updated: 2026-06-25
+updated: 2026-06-26
 ---
 
 # Data Engineering
@@ -17,6 +17,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 
 ### Concepts
 - [[data-engineering/data-observability|Data Observability]] — concept · draft · 6 patterns (flow interruption, skew, lag, SLA misses, dataset tracker, fine-grained tracker); MTTD/MTTR; 3 implementation paths
+- [[data-engineering/data-status-page|Data Platform Status Page]] — concept · draft · stakeholder-facing incident communication; lineage→dashboard-tile mapping; transparency builds trust; zero questions per incident
 - [[data-engineering/bi-as-code|BI as Code]] — concept · draft · SQL embedded in Markdown; Evidence.dev; git-native dashboards; co-location with dbt models
 - [[data-engineering/data-engineering-team-os|Data Engineering Team OS]] — concept · draft · two-layer leader OS: Rhythm (standup/1:1/sprint check-in/retro) + Memory (team/work/project/meetings)
 - [[data-engineering/scd2|SCD2 (Slowly Changing Dimension Type 2)]] — concept · draft · history-preserving dimension pattern; valid_from/valid_to + is_current flags
@@ -99,6 +100,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [[data-engineering/sources/aws-duckdb-etl-fargate|DuckDB ETL on ECS Fargate]] — source · draft · end-to-end AWS ETL (Terraform, EventBridge, Slack observability)
 - [[data-engineering/sources/sql-funnel-analysis-project|SQL Sales-Funnel Analysis project]] — source · draft · end-to-end BigQuery funnel/conversion/AOV-vs-CAC SQL walkthrough
 - [[data-engineering/sources/data-engineering-zoomcamp|Data Engineering Zoomcamp]] — source · draft · free 9-week DataTalksClub course; end-to-end pipeline; Docker/Terraform/Kestra/dbt/BigQuery/Spark/Kafka
+- [[data-engineering/sources/skytrax-dbt-transformation-project|Skytrax dbt transformation project]] — source · draft · end-to-end dbt+Snowflake transformation: Kimball star schema, RBAC-as-Terraform, OIDC keyless auth, slim CI + manifest-state CD, CloudFront-hosted docs
 
 ## Sources ingested
 - [[03_Resources/Articles/scd2-table-creation-merge-into-spark-iceberg|SCD2 Table Creation with MERGE INTO in Spark and Iceberg]] — article note, Joseph Machado / Start Data Engineering, 2026-03-13

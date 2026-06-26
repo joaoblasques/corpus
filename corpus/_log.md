@@ -1342,3 +1342,17 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - post-merge cleanup: 151 citation paths normalized raw/_inbox/→raw/<channel>/; fuzzy-matched 34 worker filename-slips to real sources; 3 notes-channel citations remain unresolved (worker-invented slugs; claim text intact)
 - one delta inconsistency: ae_01 worker initially died at session limit (partial writes reverted cleanly via git, re-run fresh); several workers omitted/varied source_map (stamped coarsely from shard touched-pages, _log is authoritative)
 - notes: this completes the 455-source inbox backlog discovered 2026-06-25. Total across 3 waves: 398 substantive sources ingested (71+80+247) + 57 drops; 53 new pages + trading domain; ~110 pages enriched. Remaining blocked-keeper YouTube transcripts (210/254) auto-recover via the daily job over time.
+
+## [2026-06-26T08:37] config | scheduled run
+- collectors:
+  - gmail: 11 collected · status=ok
+  - obsidian: 1 collected · status=ok
+  - pdf: 0 collected · status=ok
+  - youtube: 0 collected · status=failed
+  - github: 0 collected · status=ok
+  - x: 0 collected · status=ok
+  - links_refetch: 0 refetched · status=ok
+- ingest:
+  - ingest: 0 ingested · 6 deferred · status=timeout · error=timeout
+- lint:
+  - 1 broken wikilinks · 9 broken citations · 0 orphans · 18 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py

@@ -12,6 +12,9 @@ sources:
   - path: raw/web/build-data-engineering-projects-with-free-template-start-dat.md
     channel: web
     ingested_at: 2026-06-19
+  - path: raw/email/email-2026-06-25-i-spent-12-hours-rebuilding-my-junior-year-project-part-2-th.md
+    channel: email
+    ingested_at: 2026-06-26
 aliases:
   - CI/CD for data infrastructure
   - data infrastructure CI/CD
@@ -21,7 +24,7 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-15
-updated: 2026-06-19
+updated: 2026-06-26
 ---
 
 # CI/CD for Data Infrastructure
@@ -68,6 +71,16 @@ PR opened ─► CI: fmt + validate + plan(dev) → comment on PR ─► human r
 
 A reference data-project template wires this skeleton with a standard stack [^src3]: **GitHub-flow** branching, **GitHub Actions** for both CI and CD, and a **Makefile** of command aliases. CI runs **isort + black** (formatting), **flake8** (lint/style), **mypy** (type check), and **pytest** (tests) automatically on each pull request before merge to `main` [^src3]. CD then copies the merged code to an **EC2** Docker host, using repository secrets (`SERVER_SSH_KEY`, `REMOTE_HOST`, `REMOTE_USER`) whose values come from **Terraform outputs** — concretely tying the CD step to the IaC layer [^src3]. See [[data-engineering/de-portfolio-projects|DE Portfolio Projects]] for the full template.
 
+## Worked example: a dbt project (slim CI + manifest-state CD + OIDC)
+
+The same skeleton, specialized for a dbt-on-Snowflake project, with state carried across runs by a production `manifest.json` in S3 [^src4]:
+
+- **CI (PR)** is *slim* — compute the **merge-base** vs `main`, and via `dbt ls --select state:modified state:new` lint/compile/run/test **only the changed models** in a throwaway `STAGING` schema (using `dbt clone` to reuse prod tables), then run downstream models to catch breakage. CI builds its own baseline manifest and never touches the prod state [^src4].
+- **CD (merge)** is *incremental* — `dbt build --select state:modified+ --defer --favor-state --state prod_state`, deferring unchanged refs to existing prod tables and uploading the new manifest for the next deploy. This is the dbt analogue of "plan only the delta," saving warehouse credits [^src4].
+- **Keyless auth** — instead of the human-gate model above, machine identity comes from **GitHub OIDC**: Actions assume an IAM role scoped (`StringLike` on the `sub` claim) to `repo:<owner>/<repo>:*`, getting 15-minute STS credentials with no static keys in GitHub Secrets [^src4]. This is the same principle as the [[mlops/environment-promotion|machine-identity]] discipline.
+
+See [[data-engineering/sources/skytrax-dbt-transformation-project|Skytrax dbt transformation project]] for the full build and [[data-engineering/dbt|dbt]] for the manifest-state deploy mechanics.
+
 ## Takeaway
 
 Map any intimidating 1000-line Terraform file or complex YAML workflow onto this **CI (check + plan) → CD (apply dev → gate → apply prod)** skeleton and it falls into place [^src1]. Understanding the *design* is what lets you leverage AI effectively rather than blindly running its generated YAML [^src1].
@@ -87,3 +100,4 @@ Map any intimidating 1000-line Terraform file or complex YAML workflow onto this
 [^src1]: [How to set up CI/CD for data infrastructure](../../raw/web/how-to-set-up-ci-cd-for-data-infrastructure-start-data-engin.md)
 [^src2]: [CI/CD patterns to deploy infra changes (newsletter)](../../raw/email/email-2026-06-03-ci-cd-patterns-to-deploy-infra-changes.md)
 [^src3]: [Build Data Engineering Projects with a Free Template](../../raw/web/build-data-engineering-projects-with-free-template-start-dat.md)
+[^src4]: [I spent 12 Hours rebuilding my Junior year project: Part 2 — The Transformation Layer (Minh Pham, guest on Vu Trinh's newsletter)](../../raw/email/email-2026-06-25-i-spent-12-hours-rebuilding-my-junior-year-project-part-2-th.md)

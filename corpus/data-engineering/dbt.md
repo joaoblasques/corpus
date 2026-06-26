@@ -69,6 +69,9 @@ sources:
   - path: raw/youtube/youtube-C6BNAfaeqXY-dbt-data-build-tool-crash-course-for-beginners-zero-to-hero.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/email/email-2026-06-25-i-spent-12-hours-rebuilding-my-junior-year-project-part-2-th.md
+    channel: email
+    ingested_at: 2026-06-26
 aliases:
   - dbt
   - data build tool
@@ -83,8 +86,8 @@ tags:
   - corpus/data-engineering
   - entity
 created: 2026-05-21
-updated: 2026-06-25
-last_confirmed: 2026-06-25
+updated: 2026-06-26
+last_confirmed: 2026-06-26
 ---
 
 # dbt (data build tool)
@@ -205,6 +208,15 @@ A set of techniques to speed up dbt feature delivery while protecting data quali
 | **`manifest.json`** | The lineage graph, compiled SQL, test/macro associations live in `target/manifest.json`; parse it to lint the graph (e.g., flag orphan tests or hardcoded table names) [^src4] |
 | **sqlfluff / yamllint** | SQL and YAML lint+format to avoid PR style nits; run as a pre-commit hook to save CI cost [^src4] |
 | **Auto-grants** | Native `grants` config (in `dbt_project.yml` or per-model) replaces manual `GRANT` post-hooks [^src4] |
+
+### Production CI/CD: manifest-state incremental deploys
+
+A concrete production pattern that pushes `defer`/slim-CI all the way through deploy, storing the production `manifest.json` in S3 as the shared state between runs [^src19]:
+
+- **Slim CI on PRs** — compute the **merge-base** SHA between the PR branch and `main`, `dbt parse` both, then `dbt ls --state base_state --select state:modified state:new` to find changed models. Merge-base (not latest `main`) avoids false positives from other PRs that merged meanwhile. A **macro change with no flagged model selects all models** (macros can affect any dependent). Use `dbt clone` to zero-copy-clone prod tables into a throwaway `STAGING` schema so unchanged upstream models are available without rebuilding. CI builds its own baseline manifest and never touches the prod state [^src19].
+- **Incremental CD on merge** — `dbt build --select state:modified+ --defer --favor-state --state prod_state` after downloading the prior `manifest.json` from S3; rebuilds only modified models + downstream, defers unchanged refs to existing prod tables, and uploads the new manifest for the next deploy to diff against. First deploy (no manifest) falls back to a full `dbt run` + `dbt test`. Concurrency control **queues** rather than cancels a second deploy to avoid races on the shared manifest [^src19].
+
+See [[data-engineering/sources/skytrax-dbt-transformation-project|Skytrax dbt transformation project]] for the full worked example (Snowflake RBAC-as-Terraform, OIDC keyless auth, CloudFront-hosted docs) and [[data-engineering/cicd-for-data-infrastructure|CI/CD for Data Infrastructure]] for the general skeleton.
 
 ### data-diff (deprecated)
 
@@ -394,3 +406,4 @@ At time of recording (Dec 2023): AlloyDB, BigQuery, Databricks, Dremio, Postgres
 [^src16]: [SQL to dbt Guide — How Data Layers Flow with Medallion Architecture](../../raw/web/web-sql-to-dbt-guide-how-data-layers-flow-with-medallion-archite.md) — Alejandro Aboy, Pipeline to Insights
 [^src17]: [GitHub — aboyalejandro/sql-to-dbt-series: Full dbt project with DuckDB, Docker and synthetic Ads campaign data](../../raw/web/web-github-aboyalejandro-sql-to-dbt-series-full-dbt-project-with.md) — Alejandro Aboy
 [^src18]: [dbt (Data Build Tool) Crash Course for Beginners: Zero to Hero (Data Tech, YouTube)](../../raw/youtube/youtube-C6BNAfaeqXY-dbt-data-build-tool-crash-course-for-beginners-zero-to-hero.md)
+[^src19]: [I spent 12 Hours rebuilding my Junior year project: Part 2 — The Transformation Layer (Minh Pham, guest on Vu Trinh's newsletter)](../../raw/email/email-2026-06-25-i-spent-12-hours-rebuilding-my-junior-year-project-part-2-th.md)

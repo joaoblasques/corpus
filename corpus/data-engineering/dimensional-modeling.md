@@ -21,6 +21,9 @@ sources:
   - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-learn-database-no-report.md
     channel: notes
     ingested_at: 2026-06-25
+  - path: raw/email/email-2026-06-25-i-spent-12-hours-rebuilding-my-junior-year-project-part-2-th.md
+    channel: email
+    ingested_at: 2026-06-26
 aliases:
   - dimensional modeling
   - dimensional data modeling
@@ -54,7 +57,7 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-05-21
-updated: 2026-06-25
+updated: 2026-06-26
 ---
 
 # Dimensional Modeling
@@ -142,6 +145,19 @@ When adding a **temporal aspect** to a dimension increases its cardinality by **
 
 - A join on the exploded listing-night table makes Spark (or any distributed engine) **shuffle the rows, destroying the run-length-encoding compression** — the downstream dataset balloons (e.g. from ~80% compression to ~15%) [^src4].
 - Keeping nights together in an array means a join keeps the array intact (no shuffle), and consumers can explode *after* the join with all values still grouped [^src4]. So if your downstream consumers also produce datasets, prefer the array form. This ties dimensional modeling directly to physical [[data-engineering/parquet|Parquet]] RLE behavior.
+
+## Role-playing dimensions & surrogate keys (dbt practice)
+
+When one dimension is referenced by a fact table in **multiple roles**, it is a **role-playing dimension** — the same physical dimension joined several times under different semantic meanings [^src7]. A Skytrax airline-reviews star schema illustrates both common cases [^src7]:
+
+- **Date** played as *submitted* vs. *flown*.
+- **Location** played as *origin*, *destination*, and *transit*.
+
+Implementation notes from that dbt build [^src7]:
+- Dimensions get **deterministic surrogate keys** via `dbt_utils.generate_surrogate_key` (a hash of the natural key) rather than warehouse-generated sequences — so keys are reproducible across full rebuilds and environments.
+- The fact (`fct_reviews`, grain = one review) joins all dimensions and computes derived measures at load (e.g. an `average_rating` across non-null rating columns, a `rating_band`).
+
+See [[data-engineering/sources/skytrax-dbt-transformation-project|Skytrax dbt transformation project]] for the full staging → intermediate → marts implementation.
 
 ## SCD type comparison
 
@@ -309,3 +325,4 @@ Dimensional (star schema) models are **intentionally denormalized** for OLAP —
 [^src4]: [Dimensional Data Modeling Day 1 (Zach Wilson / DataExpert)](../../raw/youtube/youtube-7jbcvxmj1bs.md)
 [^src5]: [Ch. 8 — Grain: Getting the Level Right (Joe Reis, Mixed Model Arts)](../../raw/web/web-ch-8-grain-getting-the-level-right.md)
 [^src6]: [Learn Database Normalization - 1NF, 2NF, 3NF, 4NF, 5NF (Decomplexify)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-learn-database-no-report.md)
+[^src7]: [I spent 12 Hours rebuilding my Junior year project: Part 2 — The Transformation Layer (Minh Pham, guest on Vu Trinh's newsletter)](../../raw/email/email-2026-06-25-i-spent-12-hours-rebuilding-my-junior-year-project-part-2-th.md)

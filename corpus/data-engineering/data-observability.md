@@ -6,6 +6,9 @@ sources:
   - path: raw/web/web-data-observability-fundamentals-for-data-engineers.md
     channel: web
     ingested_at: 2026-06-17
+  - path: raw/email/email-2026-06-24-how-i-made-my-data-platform-s-failures-public-and-earned-my.md
+    channel: email
+    ingested_at: 2026-06-26
 aliases:
   - data observability
   - observability patterns
@@ -21,7 +24,7 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-17
-updated: 2026-06-17
+updated: 2026-06-26
 ---
 
 # Data Observability
@@ -139,6 +142,10 @@ The hardest part of observability has never been the infrastructure — *"every 
 - **Measure MTTD and MTTR** before and after implementation — these numbers justify further expansion.
 - **Treat new and legacy pipelines differently**: bake observability into new pipelines from day one; for legacy, start with broad scans to find existing problems and prioritise by impact. Some old pipelines due for retirement may not be worth instrumenting [^src1].
 
+## From detection to communication (the status page)
+
+Detection and lineage answer *what broke* and *what it affects* — but stakeholders only benefit if that reaches them without asking. The **consumption-facing** end of observability is a **data platform status page** that turns a declared incident into a stakeholder-readable view of which data products and reports are affected [^src2]. It depends on the column-level lineage above plus one extra hop most lineage tools miss — **mapping dbt models to the specific BI dashboard tiles that query them** (reconstructed by pulling each tile's query from the BI tool's API) — so a failure at ingestion traces all the way to the affected report [^src2]. The **status history** is where MTTD/MTTR become a trust artifact: a year of visible incidents with resolution times converts a vague "the data is always broken" complaint into documented fact [^src2]. See [[data-engineering/data-status-page|Data Platform Status Page]].
+
 ## Relationship to contracts
 
 After building observability, the next step is data contracts. Observability shows you what is going wrong repeatedly — contracts prevent those specific known problems from recurring [^src1]. See [[data-engineering/data-quality|Data Quality]] for the contract patterns.
@@ -150,5 +157,7 @@ After building observability, the next step is data contracts. Observability sho
 - [[data-engineering/incremental-pipeline-design|Incremental Pipeline Design]] — lag and backfill scenarios are primary observability targets
 - [[data-engineering/change-data-capture|Change Data Capture]] — CDC streams require flow interruption and lag detection
 - [[data-engineering/dbt|dbt]] — dbt tests + Elementary package for model-level observability
+- [[data-engineering/data-status-page|Data Platform Status Page]] — the consumer-facing surface built on top of lineage + incident detection
 
 [^src1]: [Data Observability Fundamentals for Data Engineers](../../raw/web/web-data-observability-fundamentals-for-data-engineers.md)
+[^src2]: [How I Made My Data Platform's Failures Public and Earned My Stakeholders' Trust (Yordan Ivanov, Data Gibberish)](../../raw/email/email-2026-06-24-how-i-made-my-data-platform-s-failures-public-and-earned-my.md)
