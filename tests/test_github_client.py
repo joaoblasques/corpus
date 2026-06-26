@@ -2,6 +2,7 @@ import base64
 import json
 import sys
 import types
+import urllib.error
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "bin"))
@@ -10,6 +11,70 @@ import github_client as gh  # noqa: E402
 
 def _proc(rc=0, stdout=""):
     return types.SimpleNamespace(returncode=rc, stdout=stdout, stderr="")
+
+
+class _FakeResp:
+    """Minimal urlopen() context-manager stand-in."""
+
+    def __init__(self, body, link=None):
+        self._body = body.encode() if isinstance(body, str) else body
+        self.headers = {"Link": link} if link else {}
+
+    def read(self):
+        return self._body
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *a):
+        return False
+
+
+def test_http_api_single_get():
+    out = gh._http_api(["api", "user"], "tok",
+                       _opener=lambda req: _FakeResp(json.dumps({"login": "jonas"})))
+    assert out.returncode == 0
+    assert json.loads(out.stdout)["login"] == "jonas"
+
+
+def test_http_api_paginates_via_link_header():
+    pages = {
+        "https://api.github.com/user/starred": _FakeResp(
+            json.dumps([{"full_name": "a/b"}]),
+            link='<https://api.github.com/user/starred?page=2>; rel="next"'),
+        "https://api.github.com/user/starred?page=2": _FakeResp(
+            json.dumps([{"full_name": "c/d"}])),
+    }
+    out = gh._http_api(["api", "user/starred", "--paginate"], "tok",
+                       _opener=lambda req: pages[req.full_url])
+    assert [x["full_name"] for x in json.loads(out.stdout)] == ["a/b", "c/d"]
+
+
+def test_http_api_http_error_returns_rc1():
+    def opener(req):
+        raise urllib.error.HTTPError(req.full_url, 401, "Unauthorized", {}, None)
+    assert gh._http_api(["api", "user"], "tok", _opener=opener).returncode == 1
+
+
+def test_gh_routes_to_http_when_token_present_and_no_run(monkeypatch):
+    monkeypatch.setenv("GH_TOKEN", "tok")
+    monkeypatch.setattr(gh, "_http_api", lambda args, token, **k: gh._Resp(0, '{"ok":1}'))
+    r = gh._gh(["api", "user"])  # _run is None + token + api call -> HTTP transport
+    assert r.returncode == 0 and json.loads(r.stdout)["ok"] == 1
+
+
+def test_gh_uses_cli_path_when_run_injected_even_with_token(monkeypatch):
+    monkeypatch.setenv("GH_TOKEN", "tok")
+    calls = []
+    gh._gh(["api", "user/starred", "--paginate"],
+           _run=lambda cmd, *a, **k: calls.append(cmd) or _proc(0, "[]"))
+    assert calls and calls[0][0] == "gh"   # injected seam always exercises the CLI
+
+
+def test_next_link_parsing():
+    h = '<https://api.github.com/x?page=2>; rel="next", <https://api.github.com/x?page=9>; rel="last"'
+    assert gh._next_link(h) == "https://api.github.com/x?page=2"
+    assert gh._next_link(None) is None
 
 
 def _b64(s):

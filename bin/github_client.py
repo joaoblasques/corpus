@@ -1,15 +1,27 @@
 #!/usr/bin/env python3
-"""github_client.py — GitHub transport for the repo collector (via the `gh` CLI).
+"""github_client.py — GitHub transport for the repo collector.
 
 Lists the user's starred repos and fetches README + markdown docs + a metadata overview.
-Leaves stars in place. All `gh` calls go through an injectable subprocess seam.
+Leaves stars in place.
+
+Two transports, chosen automatically:
+- **Direct HTTPS** (stdlib urllib) when a GH_TOKEN/GITHUB_TOKEN is in the env —
+  used in the headless cloud, where the `gh` CLI is not installed. No external
+  binary needed.
+- **`gh` CLI** otherwise (local dev, where gh is installed and keyring-authed).
+
+All `gh`-CLI calls still go through an injectable subprocess seam; tests that
+pass `_run=` always exercise the CLI path, so this routing is transparent to them.
 """
 from __future__ import annotations
 
 import base64
 import json
+import os
 import subprocess
 import sys
+import urllib.error
+import urllib.request
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -17,9 +29,74 @@ import collect_github as cg  # noqa: E402
 
 README_CAP = 40_000
 DOC_CAP = 15_000
+API_BASE = "https://api.github.com/"
+
+
+class _Resp:
+    """subprocess.CompletedProcess-shaped result so callers that read
+    `.returncode`/`.stdout` work identically across both transports."""
+
+    def __init__(self, returncode: int, stdout: str):
+        self.returncode = returncode
+        self.stdout = stdout
+        self.stderr = ""
+
+
+def _env_token():
+    return os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN") or ""
+
+
+def _next_link(link_header):
+    """Extract the rel="next" URL from a GitHub Link header, else None."""
+    for part in (link_header or "").split(","):
+        seg = part.split(";")
+        if len(seg) >= 2 and 'rel="next"' in seg[1] and "<" in seg[0]:
+            return seg[0].strip().lstrip("<").rstrip(">")
+    return None
+
+
+def _http_api(api_args, token, *, _opener=None):
+    """Serve a `gh api <endpoint> [--paginate]` call over HTTPS. Returns a
+    _Resp whose stdout is the JSON body (concatenated across pages when
+    --paginate). Non-2xx or transport error -> returncode 1."""
+    opener = _opener or (lambda req: urllib.request.urlopen(req, timeout=30))
+    endpoint = api_args[1] if len(api_args) > 1 else ""
+    paginate = "--paginate" in api_args
+    url = API_BASE + endpoint.lstrip("/")
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Accept": "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+        "User-Agent": "corpus-collector",
+    }
+    collected, single = None, None
+    try:
+        while url:
+            with opener(urllib.request.Request(url, headers=headers)) as r:
+                body = r.read().decode("utf-8")
+                data = json.loads(body) if body else None
+                if paginate and isinstance(data, list):
+                    collected = (collected or []) + data
+                    url = _next_link(r.headers.get("Link"))
+                else:
+                    single = data
+                    url = None
+        out = collected if collected is not None else single
+        return _Resp(0, json.dumps(out) if out is not None else "")
+    except urllib.error.HTTPError:
+        return _Resp(1, "")
+    except Exception:  # noqa: BLE001
+        return _Resp(1, "")
 
 
 def _gh(api_args, *, _run=None):
+    # When a real call (no injected _run) has an env token AND it's an `api`
+    # call, go direct over HTTPS so no `gh` binary is required (cloud). Otherwise
+    # use the gh CLI via the subprocess seam (local + all tests).
+    if _run is None and api_args[:1] == ["api"]:
+        token = _env_token()
+        if token:
+            return _http_api(api_args, token)
     run = _run if _run is not None else subprocess.run
     return run(["gh"] + api_args, capture_output=True, text=True)
 
