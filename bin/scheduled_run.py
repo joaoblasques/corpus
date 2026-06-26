@@ -492,10 +492,30 @@ def run_x_reap(*, _subprocess_run=None) -> dict:
         return {"status": "failed", "error": str(exc)}
 
 
+def run_pdf_reap(*, _subprocess_run=None) -> dict:
+    """Post-ingest: invoke `pdf_client.py file` to move PDFs now corpus_ingested
+    out of the Drive watch dir into its `_processed/` subfolder (gated on
+    corpus_ingested inside the subcommand). Without this the watch dir never
+    drains — ingested PDFs are re-scanned (and deduped) every run but never
+    removed. Failure recorded, never raised."""
+    _run = _subprocess_run if _subprocess_run is not None else subprocess.run
+    try:
+        proc = _run([sys.executable, str(BIN / "pdf_client.py"), "file"],
+                    capture_output=True, text=True)
+        if proc.returncode != 0:
+            return {"status": "failed", "error": proc.stderr.strip() or f"exit {proc.returncode}"}
+        try:
+            return json.loads(proc.stdout)
+        except (json.JSONDecodeError, AttributeError):
+            return {"status": "ok"}
+    except Exception as exc:  # noqa: BLE001
+        return {"status": "failed", "error": str(exc)}
+
+
 def build_summary(tallies: dict, dry_run: bool) -> dict:
     """Assemble the run's stdout summary from the collected tallies. Surfaces the
-    post-ingest `email_relabel` (reap-labels) and `x_reap` results so counts are
-    visible in the run log, not silently dropped."""
+    post-ingest `email_relabel` (reap-labels), `x_reap`, and `pdf_reap` results
+    so counts are visible in the run log, not silently dropped."""
     return {
         "status": "ok",
         "dry_run": bool(dry_run),
@@ -503,6 +523,7 @@ def build_summary(tallies: dict, dry_run: bool) -> dict:
         "ingest": tallies.get("ingest", {}),
         "email_relabel": tallies.get("email_relabel", {}),
         "x_reap": tallies.get("x_reap", {}),
+        "pdf_reap": tallies.get("pdf_reap", {}),
         "commit": tallies.get("commit", {}),
     }
 
@@ -970,6 +991,14 @@ def main(argv=None) -> int:
                     tallies["x_reap"] = run_x_reap()
                 except Exception as exc:  # noqa: BLE001
                     tallies["x_reap"] = {"status": "failed", "error": str(exc)}
+
+                # Post-ingest: move now-ingested PDFs out of the Drive watch dir
+                # into _processed/ (gated on corpus_ingested). Without this the
+                # watch dir never drains. Failure must NOT abort the run.
+                try:
+                    tallies["pdf_reap"] = run_pdf_reap()
+                except Exception as exc:  # noqa: BLE001
+                    tallies["pdf_reap"] = {"status": "failed", "error": str(exc)}
 
                 # Post-ingest integrity backstop: deterministically lint the corpus
                 # the unattended agent just wrote to, and record any broken
