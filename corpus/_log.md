@@ -1384,3 +1384,11 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   - UNCERTAIN: email-2026-06-23-google-takes-the-hit-in-ai-s-talent-war.md (The Code digest — many topics)
   - UNCERTAIN: notes-...-how-to-build-your-report.md (Dave Ebbelaar full-stack AIOS — already ingested via youtube-rZX1OYetbSM; raw/notes filename collision with the different nyndra "4-Layer Setup" report → move would overwrite)
 - notes: ingest-auto run; 2 processed, 4 deferred. Stamped + moved both ingested emails to raw/email/; web companion stamped in place. No new domains; _domains.md untouched.
+
+## [2026-06-26T13:47] config | scheduled run
+- collectors:
+
+- ingest:
+  - ingest: 0 ingested · 0 deferred · status=ok
+- lint:
+  - 0 broken wikilinks · 0 broken citations · 0 orphans · 0 stubs
