@@ -158,6 +158,26 @@ Curiosity operationalized: "don't just try one approach and accept it — run 2�
 - Compare outputs on the same rubric you'd use to judge any deliverable.
 - The faster you cycle through variants, the faster your personal heuristics update.
 
+## The basic → intermediate → advanced skills ladder (Tina Huang, 2026 update)
+
+A complementary roadmap structures AI skills as a progression from "participate in society" basics to commercial/career advanced skills [^src16]:
+
+**Level 1 — basics (everyone):**
+1. **Investing with an AI thesis** — the contrarian inclusion on a tech channel: in 2026 even a plain S&P 500 position carries "massive exposure to AI," so decide *deliberately* how much AI exposure fits your career and life rather than backing in by default [^src16].
+2. **Prompting** — "the way that you interact with AI… lays the foundation for everything," the same context-over-prompts foundation the paths above converge on. See [[ai-engineering/prompt-engineering|Prompt Engineering]].
+3. **Master a core set of tools** (AI minimalism) — rather than chasing "10 releases per day," go deep on a small set: one general chatbot (Claude / ChatGPT / Gemini) covers most needs; add a research/news tool (Perplexity), a learning tool (NotebookLM), and one job-specific tool. Mirrors Path 1's "pick one tool, go deep" [^src16].
+
+**Level 2 — intermediate (personal workflows):**
+4. **AI agents** — software that "pursues goals and complete tasks on behalf of users": you give an overarching goal and it decomposes and executes the steps, vs a one-request/one-response tool. See [[ai-engineering/ai-agent|AI Agent]], [[ai-engineering/agentic-workflow|Agentic Workflows]].
+5. **Local AI agents** — agents that run *on your own machine* to build custom personal automations (cited examples: [[ai-engineering/claude-cowork|Cowork]], OpenClaude, [[ai-engineering/hermes|Hermes]]). Choose one on two axes: (a) how technical you are (no-code vs code), and (b) open- vs closed-source — a tradeoff over "capability, cost, and privacy" (closed tends more capable; open is lower-cost/free-to-run/private). This is the consumer-facing version of the [[ai-engineering/ai-operating-system|AI Operating System]] [^src16].
+
+**Level 3 — advanced (commercial / career):**
+6. **Building your own AI agents** — for client-facing pipelines that must be "stable, reliable, and lower in cost" (B2B examples: a private-equity reporting pipeline pulling CRM/analytics/DB on a schedule; new-hire onboarding agents). A high-demand freelancing/employment skill [^src16].
+7. **Building MCPs** — letting agents plug into third-party apps and data sources; called out as "really, really in demand." See [[ai-engineering/mcp|MCP]].
+8. **AI coding (agentic engineering)** — using an agent to write code and build software; framed as the "boss level unlock" (claimed >10× cost/time savings) but gated by a hard caveat: **"you low-key do already need to know how to code"** — unlike the other skills (days-to-weeks), properly learning to code then AI-code takes "two to three months." It's the *last* skill for a reason: you can get far on simpler workflows and prototypes without it [^src16]. See [[ai-engineering/agentic-coding|Agentic Coding]], [[ai-engineering/vibe-coding|Vibe Coding]].
+
+The through-line matches this page's thesis: depth over tool-chasing, context/agents over raw prompting, and "spend more time building than watching."
+
 ## Where the paths agree
 
 | Claim | Generalist framing [^src1] | Engineer framing [^src2] |
