@@ -103,7 +103,17 @@ def main(argv=None, *, _run=None) -> int:
 
     args = ap.parse_args(argv)
 
+    # --dry-run is a top-level "print the plan and exit" and wins over any
+    # subcommand, so adding a subcommand can never trigger a live collect/push.
+    if args.dry_run:
+        print(json.dumps({"dry_run": True, "steps": plan_steps()}))
+        return 0
+
     if args.cmd == "collect":
+        unknown = sorted(set(args.only or []) - set(COLLECTORS))
+        if unknown:  # a typo'd collector name must fail loudly, not silently no-op to exit 0
+            print(json.dumps({"error": f"unknown collector(s): {unknown}"}))
+            return 1
         report = run_collectors(only=args.only, _run=_run)
         print(json.dumps({"collected": report}, indent=2))
         return 0 if all(v["returncode"] == 0 for v in report.values()) else 1
@@ -112,10 +122,6 @@ def main(argv=None, *, _run=None) -> int:
         res = commit_push(Path(args.repo), message=args.message, _run=_run)
         print(json.dumps(res, indent=2))
         return 0 if res["status"] in ("pushed", "noop") else 1
-
-    if args.dry_run:
-        print(json.dumps({"dry_run": True, "steps": plan_steps()}))
-        return 0
 
     print(json.dumps({"error": "no command: pass --dry-run or a subcommand"}))
     return 1

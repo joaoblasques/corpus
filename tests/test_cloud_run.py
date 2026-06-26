@@ -14,7 +14,7 @@ def _fake_proc(returncode=0, stdout=""):
     return types.SimpleNamespace(returncode=returncode, stdout=stdout)
 
 
-def _git_runner(branch="main", staged_files="corpus/x.md", push_rc=0):
+def _git_runner(branch="main", staged_files="corpus/x.md", commit_rc=0, push_rc=0):
     """Fake subprocess.run scripting the git calls commit_push makes, in order:
     rev-parse (branch) -> add -> diff --cached --name-only (staged) -> commit -> push."""
     calls = []
@@ -25,6 +25,8 @@ def _git_runner(branch="main", staged_files="corpus/x.md", push_rc=0):
             return _fake_proc(0, branch + "\n")
         if "diff" in cmd and "--name-only" in cmd:
             return _fake_proc(0, staged_files)
+        if "commit" in cmd:
+            return _fake_proc(commit_rc, "")
         if "push" in cmd:
             return _fake_proc(push_rc, "")
         return _fake_proc(0, "")
@@ -96,6 +98,28 @@ def test_collect_cli_returns_nonzero_when_a_collector_fails():
     assert rc == 1
 
 
+def test_collect_cli_rejects_unknown_collector():
+    # a typo'd --only must fail loudly (exit 1), never silently no-op to exit 0
+    called = []
+    rc = cloud_run.main(
+        ["collect", "--only", "nope"],
+        _run=lambda *a, **k: called.append(1) or _fake_proc(0, "{}"),
+    )
+    assert rc == 1
+    assert called == []  # no collector subprocess was launched
+
+
+def test_dry_run_takes_precedence_over_subcommand():
+    # --dry-run must print the plan and never trigger a live collect
+    called = []
+    rc = cloud_run.main(
+        ["--dry-run", "collect"],
+        _run=lambda *a, **k: called.append(1) or _fake_proc(0, "{}"),
+    )
+    assert rc == 0
+    assert called == []
+
+
 # --- Task 2: commit-push subcommand ---
 
 def test_commit_push_aborts_off_main():
@@ -130,4 +154,9 @@ def test_commit_push_reports_push_failure():
 
 def test_commit_push_cli_nonzero_on_abort():
     rc = cloud_run.main(["commit-push"], _run=_git_runner(branch="dev"))
+    assert rc == 1
+
+
+def test_commit_push_cli_nonzero_on_commit_failure():
+    rc = cloud_run.main(["commit-push"], _run=_git_runner(commit_rc=1))
     assert rc == 1
