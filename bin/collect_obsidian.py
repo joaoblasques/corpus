@@ -270,7 +270,18 @@ def discover(vault_root=None, dedup_dirs=None) -> list:
 
 def reapable(dedup_dirs=None) -> dict:
     notes, url_strikes = [], []
+    seeds = {}   # seed -> {"list": via_vault_list|None, "count": int, "all_ingested": bool}
     for _, t in _raw_sources(dedup_dirs):
+        ss = fm_field(t, "scrape_seed")
+        if ss:   # a deep-scrape post: gates its SEED, never an ordinary url_strike
+            vl = fm_field(t, "via_vault_list")
+            rec = seeds.setdefault(ss, {"list": None, "count": 0, "all_ingested": True})
+            rec["count"] += 1
+            if vl and not rec["list"]:
+                rec["list"] = vl
+            if "corpus_ingested: true" not in t:
+                rec["all_ingested"] = False
+            continue
         if "corpus_ingested: true" not in t:
             continue
         vo = fm_field(t, "vault_origin")
@@ -279,4 +290,6 @@ def reapable(dedup_dirs=None) -> dict:
         vl, su = fm_field(t, "via_vault_list"), fm_field(t, "source_url")
         if vl and su:
             url_strikes.append((vl, su))
-    return {"vault_notes": notes, "url_strikes": url_strikes}
+    seed_strikes = [(rec["list"], seed) for seed, rec in seeds.items()
+                    if rec["count"] >= 1 and rec["all_ingested"] and rec["list"]]
+    return {"vault_notes": notes, "url_strikes": url_strikes, "seed_strikes": seed_strikes}

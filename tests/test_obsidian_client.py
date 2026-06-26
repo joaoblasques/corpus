@@ -186,6 +186,18 @@ def test_collect_dry_run_does_not_fetch(tmp_path, monkeypatch):
     assert fetched == []   # no network under --dry-run
 
 
+def test_cmd_reap_strikes_seeds(tmp_path, monkeypatch):
+    import obsidian_client as oc, collect_obsidian as co
+    monkeypatch.setattr(co, "reapable",
+                        lambda dirs=None: {"vault_notes": [], "url_strikes": [],
+                                           "seed_strikes": [("00_Inbox/Clippings/TO SCRAPE.md", "https://b.com")]})
+    struck = []
+    monkeypatch.setattr(oc, "_strike_url", lambda vault, lr, u: struck.append((lr, u)))
+    monkeypatch.setattr(oc, "_under_vault", lambda v, r: True)
+    rc = oc.main(["reap", "--vault", str(tmp_path)])
+    assert rc == 0 and struck == [("00_Inbox/Clippings/TO SCRAPE.md", "https://b.com")]
+
+
 def test_reap_dry_run_changes_nothing(tmp_path, monkeypatch):
     vault = tmp_path / "vault"; (vault / "03_Resources/Articles").mkdir(parents=True)
     raw = tmp_path / "raw"; raw.mkdir()

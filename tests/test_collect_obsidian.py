@@ -207,6 +207,35 @@ def test_reapable_selects_only_ingested(tmp_path):
     assert r["url_strikes"] == [("00_Inbox/Clippings/articles to process.md", "https://a.com/x")]
 
 
+def _src(scrape_seed=None, ingested=False, via="00_Inbox/Clippings/TO SCRAPE.md",
+         source_url="https://b.com/p"):
+    fm = ["---", "channel: web", f"source_url: {source_url}", f"via_vault_list: {via}"]
+    if scrape_seed:
+        fm.append(f"scrape_seed: {scrape_seed}")
+    if ingested:
+        fm.append("corpus_ingested: true")
+    fm += ["---", "", "body", ""]
+    return "\n".join(fm)
+
+
+def test_reapable_seed_strikeable_only_when_all_posts_ingested(tmp_path):
+    seed = "https://b.com"
+    (tmp_path / "p1.md").write_text(_src(seed, ingested=True, source_url="https://b.com/p1"), encoding="utf-8")
+    (tmp_path / "p2.md").write_text(_src(seed, ingested=False, source_url="https://b.com/p2"), encoding="utf-8")
+    r = co.reapable([tmp_path])
+    assert (("00_Inbox/Clippings/TO SCRAPE.md", seed) not in r["seed_strikes"])   # p2 not ingested
+
+    (tmp_path / "p2.md").write_text(_src(seed, ingested=True, source_url="https://b.com/p2"), encoding="utf-8")
+    r = co.reapable([tmp_path])
+    assert ("00_Inbox/Clippings/TO SCRAPE.md", seed) in r["seed_strikes"]         # all ingested
+
+
+def test_reapable_excludes_scrape_posts_from_url_strikes(tmp_path):
+    (tmp_path / "p1.md").write_text(_src("https://b.com", ingested=True, source_url="https://b.com/p1"), encoding="utf-8")
+    r = co.reapable([tmp_path])
+    assert ("00_Inbox/Clippings/TO SCRAPE.md", "https://b.com/p1") not in r["url_strikes"]
+
+
 def test_extract_inline_links_basic_dedup():
     body = "See https://a.com/x and again https://a.com/x and https://b.com/y."
     r = co.extract_inline_links(body)

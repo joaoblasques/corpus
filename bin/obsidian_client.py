@@ -174,7 +174,8 @@ def sibling_frames(vault_root: Path, rel_path: str) -> list:
 def cmd_reap(args) -> int:
     vault = Path(args.vault) if args.vault else co.VAULT_ROOT
     r = co.reapable()
-    t = {"notes_removed": 0, "frames_removed": 0, "urls_struck": 0, "not_removed": []}
+    t = {"notes_removed": 0, "frames_removed": 0, "urls_struck": 0,
+         "seeds_struck": 0, "not_removed": []}
     for rel in r["vault_notes"]:
         if not _under_vault(vault, rel):
             continue
@@ -198,6 +199,12 @@ def cmd_reap(args) -> int:
         if not args.dry_run:
             _strike_url(vault, list_rel, url)
         t["urls_struck"] += 1
+    for list_rel, seed in r.get("seed_strikes", []):
+        if not _under_vault(vault, list_rel):
+            continue
+        if not args.dry_run:
+            _strike_url(vault, list_rel, seed)
+        t["seeds_struck"] += 1
     note = ("tracked notes staged via git rm (review & commit in vault); "
             "untracked notes deleted from disk (recoverable via raw/notes/ + corpus); "
             "deep-analysis report.md also stages its sibling frame_*.jpg (whole-folder reap)")
