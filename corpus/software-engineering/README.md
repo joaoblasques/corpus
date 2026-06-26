@@ -58,6 +58,8 @@ Domain covering software engineering practice from foundational CS through deplo
 
 ### Sources
 - [[software-engineering/sources/software-engineers-guidebook|The Software Engineer's Guidebook]] — source · draft · Gergely Orosz; full career arc from new dev to staff; six-part reference book
+- [[software-engineering/sources/go-course-boot-dev|Go Course with Bonus Projects (boot.dev / freeCodeCamp)]] — source · draft · Lane Wagner; 100+ lessons + 7 projects; Textio running example; RSS-aggregator capstone (chi/sqlc/Goose, API-key auth)
+- [[software-engineering/sources/go-full-course-tech-with-tim|Go Programming Full Course (Tech With Tim)]] — source · draft · 21-lesson syntax-first course; slice internals, value/pointer receivers, goroutines + channels
 
 ## Sources ingested
 - [[03_Resources/Articles/Disasters in a Microservices World|Disasters I've Seen in a Microservices World]] — article note, João Alves / Hey World, 2025-10-30

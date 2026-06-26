@@ -63,6 +63,9 @@ sources:
   - path: raw/pdf/pdf-advanced-chatgpt-prompt-engineering-mindstream-x-hubspot.md
     channel: pdf
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-qLDwThdc3WQ-how-to-use-claude-for-finance-better-than-99-of-people.md
+    channel: youtube
+    ingested_at: 2026-06-26
 aliases:
   - prompting
   - prompt design
@@ -79,7 +82,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-12
-updated: 2026-06-18
+updated: 2026-06-26
 ---
 
 # Prompt Engineering
@@ -233,8 +236,19 @@ Three core principles from a practitioner guide [^src20]:
 2. **Direction over correction**: tell the model what TO do, not what not to do. "Write a formal summary" outperforms "Don't write informally."
 3. **Systems over questions**: build reusable prompt templates (systems) rather than one-off questions. A system prompt answered 100 times in a day produces consistent results; a new question each time produces variance.
 
+## Domain-specific structured prompting (the finance example)
+
+General prompt levers harden into **domain-specific structured workflows** when the cost of a wrong output is high. A worked FP&A / financial-modeling case turns "generic Claude outputs into high-level finance work" by gating a 9-stage pipeline — the finance specialization of plan-first prompting [^src21]:
+
+- **Inventory before insight.** Most people "upload a workbook and immediately request insights"; the disciplined move forces Claude to "do inventory before anything else," validating every sheet/field/dependency so hidden assumptions are eliminated "at the source" before any analysis [^src21]. This generalizes: establish and verify the *inputs* before asking for the *answer*.
+- **Plan-before-execute as governance.** Claude must "act like a senior FP&A lead, not like an operator," producing an approved numbered work plan (objective, inputs, outputs, acceptance checks, a "do not proceed if" gate per step) before any edit — "if Claude starts making fixes before you approve a plan, hidden assumptions quietly turn into formulas" [^src21]. Same plan-first reflex as agentic-coding guidance, with acceptance criteria baked into every step.
+- **Model-selection-by-task-type.** Rather than one model for everything, the workflow assigns the model to the *kind* of cognitive work: stronger reasoning models for ingestion/planning/valuation (structural reasoning), a faster model for drafting the executive memo [^src21]. Matching model to task is itself a prompt-engineering-adjacent decision (cf. §"not every failure is a prompting problem" — some are model-selection problems [^src1]).
+
+Full workflow: [[ai-engineering/claude-for-finance|Claude for Finance]].
+
 ## See also
 
+- [[ai-engineering/claude-for-finance|Claude for Finance]] — domain-specific structured prompting for FP&A (inventory-before-insight, plan-first, model-by-task)
 - [[ai-engineering/context-engineering|Context Engineering]] — sibling discipline; managing window contents over a session
 - [[ai-engineering/structured-outputs|Structured Outputs]] — enforcing schema on prompt results; tokenization
 - [[ai-engineering/agent-harness|Agent Harness]] — where prompt scaffolding lives in coding agents
@@ -264,3 +278,4 @@ Three core principles from a practitioner guide [^src20]:
 [^src18]: [anthropics/prompt-eng-tutorial — GitHub ★36,609](../../raw/github/github-anthropics-prompt-eng-interactive-tutorial.md) — Anthropic (9-chapter Jupyter series: Basic Structure → Clear/Direct → Roles → Data/Instructions → Formatting → Precognition → Few-Shot → Hallucinations → Complex/Power Users)
 [^src19]: [Anthropic London prompting playbook (Margo van Laar)](../../raw/youtube/youtube-G2B0YWuJUgI-the-prompting-playbook.md) — YouTube, Anthropic
 [^src20]: [Advanced Prompt Engineering (Mindstream × HubSpot PDF guide)](../../raw/pdf/pdf-advanced-chatgpt-prompt-engineering-mindstream-x-hubspot.md) — Mindstream / HubSpot
+[^src21]: [How to use Claude For Finance Better Than 99% of People](../../raw/youtube/youtube-qLDwThdc3WQ-how-to-use-claude-for-finance-better-than-99-of-people.md) — Luke Finance, YouTube playlist: Claude Finance

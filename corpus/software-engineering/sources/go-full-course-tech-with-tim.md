@@ -38,6 +38,8 @@ Compilers vs interpreters; static vs dynamic typing; variables and the type syst
 
 On channels, the course demonstrates that receiving from a channel "is a blocking operation," and that scheduling a goroutine without waiting on its channel causes `main` to exit before the goroutine's result is observed — "the reason we just get done is because we didn't wait for the value on the channel" [^src1].
 
+**Notable depth on data layout and methods** [^src1]: a slice is internally a pointer + length + capacity, so it is a reference-like view into a backing array — "any change I make to the underlying array affects the slice" and vice versa [1:46:27](../../../raw/youtube/youtube-V-lI7AmusGs-go-programming-full-course.md#t=1:46:27). Structs are introduced as the core aggregate type, with methods defined via receivers; the course works through **value vs pointer receivers**, showing a setter must take a pointer receiver to mutate the original struct rather than a copy [2:32:32](../../../raw/youtube/youtube-V-lI7AmusGs-go-programming-full-course.md#t=2:32:32).
+
 ## Relationship to the corpus
 
 This source corroborates and extends [[software-engineering/go-programming-language|Go Programming Language]] — particularly the static-typing, compiled-binary, error-as-return-type, and goroutine claims already on that page. It is the deepest single-source treatment of Go's **concurrency** model in the corpus to date (channels + blocking semantics).

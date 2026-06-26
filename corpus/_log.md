@@ -1424,3 +1424,27 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   - ingest: 0 ingested · 0 deferred · status=failed · error=You've hit your session limit · resets 5pm (Europe/Lisbon)
 - lint:
   - 0 broken wikilinks · 0 broken citations · 0 orphans · 0 stubs
+
+## [2026-06-26 14:30] ingest | Go full courses (Tech With Tim + freeCodeCamp/boot.dev)
+- source: raw/youtube/youtube-V-lI7AmusGs-go-programming-full-course.md, raw/youtube/youtube-un6ZyFkqFKo-go-programming-golang-course-with-bonus-projects.md
+- channel: youtube
+- domain: software-engineering
+- pages touched: [go-programming-language]
+- new pages: []
+- notes: ingest-auto manual pass (6-file batch); 6 processed, 0 deferred. Integration-completion of an interrupted prior run that wrote pages but did not stamp sources / update index+log. Go page (mature) enriched with both courses: structs/interfaces/channels/mutexes/generics, RSS-aggregator capstone (chi/sqlc/Goose/API-key auth), Textio example, compile-vs-runtime distinction.
+
+## [2026-06-26 14:30] ingest | Claude Design (3 Nate Herk videos)
+- source: raw/youtube/youtube-gAoZ95kqG7w-claude-design-just-became-unstoppable.md, raw/youtube/youtube-TcFeSjwTo7g-claude-design-builds-beautiful-3d-websites-instantly-full-tu.md, raw/youtube/youtube-ovabeVoWrA0-claude-design-2-hour-course-beginner-to-pro.md
+- channel: youtube
+- domain: ai-engineering
+- pages touched: [claude-design (new), ai-presentation-tools]
+- new pages: [claude-design]
+- notes: New entity page — Anthropic Labs design product (launched 2026-04-17, Opus 4.7 vision); design systems/skill.md, in-canvas tweaks/comment/draw/edit, export Canva/PDF/PPT/HTML, hand-off to Claude Code, separate weekly quota, 3D scroll-site workflow, Krieger ex-Figma → Anthropic CPO. ai-presentation-tools updated (Claude Design "now shipped" as approach #1; Gamma trade-off, context-gravity).
+
+## [2026-06-26 14:30] ingest | How to use Claude for Finance (Luke Finance)
+- source: raw/youtube/youtube-qLDwThdc3WQ-how-to-use-claude-for-finance-better-than-99-of-people.md
+- channel: youtube
+- domain: ai-engineering
+- pages touched: [claude-for-finance (new)]
+- new pages: [claude-for-finance]
+- notes: New concept page — 9-stage gated FP&A workflow via the Claude Excel add-in: inventory-before-insight, protected baseline, plan-first, formula-driven/auditable 3-statement+DCF, 13-week cash forecast, model-selection-by-task-type. Cross-linked to prompt-engineering / agentic-workflow / claude-models. ingest-auto run total: 6 processed, 0 deferred, 2 pages created, 2 updated.

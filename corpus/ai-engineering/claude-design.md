@@ -48,6 +48,18 @@ The launch sat directly on the Opus 4.7 release: the announcement called out a j
 - **Export** to Canva, PDF, PowerPoint, HTML, or Zip files [^src1][^src3].
 - **Hand off to Claude Code** — "when a design is ready, Claude can package everything and you can pass it off to Claude Code to do the actual building and syncing to GitHub" [^src1].
 
+## Planning phase and in-canvas iteration
+
+Claude Design front-loads a **question-asking planning phase**: on a vague prompt it interviews the user before building. For a workshop landing page it surfaced a run of clickable clarifications — "what is the workshop called?", confirm dates, time per day, seat cap, who's hosting, what students walk away with — and only then generated the page [^src1]. This mirrors the agentic-coding lesson that a strong upfront plan avoids burning tokens chasing the wrong path [^src1][^src3]; see [[ai-engineering/prompt-engineering|Prompt Engineering]] (the "ask me questions first" / model-led elicitation pattern).
+
+Inside a project, four in-canvas iteration controls reduce the need to re-prompt in natural language [^src1][^src2]:
+- **Tweaks** — a side panel of generated knobs (palette, accent hue, font, headline size, section rhythm, textures, layout) the user toggles in real time; "making tweaks and then saving those changes is going to save you more time and also more of your session limit" than prompting back and forth [^src2]. The user can ask Claude to "give me a bunch of tweaks" when lacking creative direction [^src2].
+- **Comment** — click a specific element and leave a scoped note so Claude changes exactly that element without getting confused [^src1][^src2].
+- **Draw** — circle/scribble on the canvas and type a note; the drawing is sent as an image plus the note. Best for regions that aren't a discrete element (e.g. "make this gradient lighter"); buggy in research preview [^src2].
+- **Edit** — directly change text, size, or color in place; more precise and token-cheaper than prompting [^src2].
+
+Plus **Present** — full-screen the deck/site right in the tab [^src1]. Each `tally` mark / element is its own component that can be recolored individually [^src3].
+
 ## Design systems
 
 The first recommended step is to **set up a design system** so "anyone can create good looking designs and assets" that stay on-brand by default [^src1]. The setup form takes a company name, a blurb, examples of existing design systems/products (a GitHub repo and brand-guidelines doc can be linked), the logo, and freeform notes on the desired feel [^src1].
@@ -63,6 +75,14 @@ Because Opus 4.7 "goes through tokens quicker" and is more expensive than Sonnet
 ## Building 3D / interactive websites
 
 A representative workflow transforms a static site into an interactive, scroll-driven **3D** experience — cards that pop up, scenes that progress as you scroll — while preserving the original brand, colors, and copy [^src2]. The end-to-end flow: brainstorm the brand/spec in Claude Chat, generate a hero **background image** (e.g. via an image model — "nano banana two" — at 16:9) and animate it into a looping **hero video** (via a video model — "Seedance/CDance 2.0" — using the still as first and last frame so the camera doesn't move), then assemble in Claude Design starting from a high-fidelity prototype and a canvas sketch, dragging in the MP4 as the hero background, and finally deploy [^src2].
+
+## Hand-off to Claude Code and deployment
+
+The hand-off generates a copyable command — "fetch this design file, read its readme, and implement the relevant aspects of the design" — that Claude Code runs to extract the exported zip and build the project, including auto-filling image placeholders [^src1]. From there the standard path is: push to a **GitHub** repo, connect that repo to **Vercel**, and the live site auto-deploys on each push — giving a clean "practice environment" (local host) vs "real environment" (deployed) separation [^src2]. Gotchas surfaced: the `hand off to Claude Code` command intermittently 404'd during the research preview (zip export is the fallback) [^src2]; Vercel serves from the repo root, so a nested folder must be renamed `index.html` [^src2]; and neither Claude Design nor Claude Code auto-optimizes for **mobile** — you must explicitly ask [^src2].
+
+## The Anthropic-ecosystem argument
+
+The strategic framing across the sources is **ecosystem lock-in by context gravity**: Claude Design "basically just loops everything into Anthropic's ecosystem," potentially displacing separate Gamma and Canva subscriptions [^src1]. The load-bearing argument is that **context already lives in the Claude environment** — "when I'm making presentations in Gamma, I have to go get from my Claude Code projects so much context… but if all of that already lives inside of my Claude Code environment… that's a huge help" [^src1]. Versus **Gamma** specifically, Claude Design is positioned as more flexible at structuring a raw brain-dump/transcript into an on-brand deck, where "Gamma… is a bit more inflexible" [^src1] — see [[ai-engineering/ai-presentation-tools|AI Presentation Tools]].
 
 ## Market context
 

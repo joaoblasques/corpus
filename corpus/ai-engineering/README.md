@@ -60,6 +60,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [[ai-engineering/interpretability|Interpretability]] — concept · draft · mechanistic interpretability; superposition; sparse autoencoders; 30M features in Claude 3 Sonnet; "MRI for AI" by 2027
 - [[ai-engineering/intent-debt|Intent Debt]] — concept · draft · third debt type (beyond technical/cognitive); lives in artifacts; agents can't fix it; pay down via specs, AGENTS.md as intent ledger, ADRs, self-improving learning files
 - [[ai-engineering/sleep-time-compute|Sleep-Time Compute]] — concept · draft · LLMs "thinking" offline about contexts before queries arrive; ~5× test-time compute reduction on Stateful GSM-Symbolic/AIME; 2.5× cost reduction via amortization
+- [[ai-engineering/claude-for-finance|Claude for Finance]] — concept · draft · structured-prompting FP&A workflow; 9-stage gated pipeline (inventory-before-insight, plan-first, formula-driven/auditable, model-by-task) via the Claude Excel add-in
 
 ### Entities
 - [[ai-engineering/langgraph|LangGraph]] — entity · stub · production framework for stateful multi-agent workflows
@@ -81,6 +82,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [[ai-engineering/gemini-cli|Gemini CLI]] — entity · draft · Google's open-source agentic coding CLI; GEMINI.md context file, custom slash commands, MCP extension, memory, checkpointing, headless mode
 - [[ai-engineering/supacode|Supacode]] — entity · draft · macOS agent harness/session manager on LibGhosty; sidebar project management, Git/PR/CI awareness, hooks into Claude Code + Pi, Supacode CLI for agent self-management
 - [[ai-engineering/manus|Manus]] — entity · draft · AI "action engine" (manus.im); sandboxed cloud VM execution, wide research (parallel instances), Browser Operator (Chrome extension for authenticated sites), deliverable output types (spreadsheets/presentations/websites)
+- [[ai-engineering/claude-design|Claude Design]] — entity · draft · Anthropic Labs design product (launched 2026-04-17); Opus 4.7 vision + self-validation, design systems (skill.md), decks/prototypes/websites/launch videos, in-canvas tweaks/comment/draw/edit, export + hand-off to Claude Code; separate weekly quota
 
 ### Syntheses
 - [[ai-engineering/agentic-coding|Agentic Coding]] — synthesis · draft · **sub-hub** · coding-agent orchestration; conductor→orchestrator, AX, the verification bottleneck

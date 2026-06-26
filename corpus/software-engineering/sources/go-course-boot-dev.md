@@ -39,6 +39,26 @@ Most lessons build small pieces of **Textio**, described as "a kind of back-end"
 - **closures** — a `concatter` returning a function that accumulates onto a shared `doc` variable across calls (the "Harry Potter aggregator" example) [^src1];
 - **middleware** for HTTP handlers, "injecting some additional logic into a function," previewed as part of the final backend-server project [^src1].
 
+## Concept curriculum (concurrency, generics)
+
+Beyond fundamentals, the course covers Go's concurrency and generics depth using Textio scenarios [^src1]:
+
+- **Goroutines** spawned with `go func(){...}()`; ordering across them is non-deterministic [^src1].
+- **Channels** as goroutine-safe FIFO queues; same-goroutine send/receive deadlocks (fixed by sending in a separate goroutine); signal-only channels passing empty-struct tokens; **buffered** channels for batch writes; closing a channel with the `v, ok := <-ch` drained check; `range` over a channel; **`select`** to multiplex channels; `time.Tick`/`time.After` timer channels [^src1].
+- **Mutexes** (`sync.Mutex`, "mutual exclusion") with `Lock`/`defer Unlock` to guard shared state; `sync.RWMutex` (`RLock`/`RUnlock`) for read-heavy paths [^src1].
+- **Generics / type parameters** — solve the pre-generics problem of rewriting `SplitIntSlice` per type or casting empty interfaces at runtime; the compiler keeps generic code type-safe; generics use interfaces as constraints under the hood [^src1].
+- **Comparable map keys** — strings/numbers/booleans/structs work; slices/maps/functions cannot be keys; a struct can serve as a composite key [^src1].
+
+## Capstone: RSS-aggregator backend server
+
+The final project builds a production-shaped HTTP backend from scratch [^src1]:
+
+- **`chi` router**, routes under `/v1/...`; `respondWithJSON`/`respondWithError` helpers; struct `json:"..."` tags mapping DB structs to clean API models; deliberate REST status codes (`201` created, `403` forbidden) [^src1].
+- **Database** via raw SQL: **sqlc** generates type-safe Go from queries, **Goose** runs migrations; both via `go install` [^src1].
+- **API-key auth**: a 64-char unique not-null key column (default generated in SQL so the migration backfills existing users); an `auth` package extracts the key from an `Authorization: ApiKey <key>` header [^src1].
+- **Auth middleware**: an `authedHandler` wrapper returns a closure that grabs the key, fetches the user, then calls the real handler — DRYing authentication across protected endpoints (users, feeds, feed-follows) [^src1].
+- The `context` package threads request cancellation through goroutines [^src1].
+
 ## Go positioning (per the course)
 
 - "Go has been exploding in popularity… all the most modern tech companies are using Go to build scalable backend infrastructure" [^src1].

@@ -24,11 +24,21 @@ sources:
   - path: raw/youtube/youtube-t2ELuj2prA0-claude-html-slides-the-new-powerpoint-killer-full-tutorial.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-gAoZ95kqG7w-claude-design-just-became-unstoppable.md
+    channel: youtube
+    ingested_at: 2026-06-26
+  - path: raw/youtube/youtube-TcFeSjwTo7g-claude-design-builds-beautiful-3d-websites-instantly-full-tu.md
+    channel: youtube
+    ingested_at: 2026-06-26
+  - path: raw/youtube/youtube-ovabeVoWrA0-claude-design-2-hour-course-beginner-to-pro.md
+    channel: youtube
+    ingested_at: 2026-06-26
 aliases:
   - AI presentation tools
   - Claude slides
   - presentation automation
   - Claude Designs
+  - Claude Design
   - Claude PowerPoint
   - Gamma API
   - HTML slides
@@ -38,7 +48,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-20
-updated: 2026-06-25
+updated: 2026-06-26
 ---
 
 # AI Presentation Tools
@@ -47,8 +57,10 @@ updated: 2026-06-25
 
 ## Approaches
 
-### 1. Claude Designs (Anthropic Labs)
-An Anthropic-built feature in Claude.ai for generating visual slide decks and UI designs directly from a prompt. The feature was released as part of an update characterized as Claude "destroying PowerPoint" [^src2]. Can generate multi-slide decks with visual layout, not just bullet text.
+### 1. Claude Design (Anthropic Labs) — now shipped
+What was previewed as "Claude Designs" shipped as **Claude Design**, a standalone Anthropic Labs product (launched 2026-04-17, the day after Opus 4.7) for generating polished visual work — slide decks, one-pagers, prototypes, websites, even launch videos — from natural language [^src8][^src10]. It is powered by the Opus 4.7 vision model and runs on a **separate, weekly usage quota** distinct from Claude/Claude Code [^src10]. For decks specifically: import or build a **design system** so every deck is on-brand by default, generate from a PDF/brain-dump/transcript, then iterate in-canvas via tweaks/comment/draw/edit and **present** or **export** (Canva/PDF/PowerPoint/HTML/zip) or **hand off to Claude Code** [^src8][^src9][^src10]. Full treatment: [[ai-engineering/claude-design|Claude Design]]. The feature was also previewed under an update characterized as Claude "destroying PowerPoint" [^src2].
+
+**Trade-off vs Gamma**: Claude Design is more flexible at structuring an unstructured brain-dump or 50-page transcript into a deck the way you want, and the output "feels like it comes from your brand," whereas "Gamma… is a bit more inflexible" [^src8]. The structural advantage is **context gravity** — if your source material already lives in the Claude/Claude Code environment, generating the deck there avoids ferrying context into a separate tool [^src8].
 
 ### 2. Claude PowerPoint Add-in (Microsoft Marketplace)
 A native add-in for PowerPoint available at `marketplace.microsoft.com`. Integrates Claude into the PowerPoint editing interface, enabling prompt-based slide generation and modification within the familiar Office environment [^src3].
@@ -90,7 +102,7 @@ When generating HTML slides, twenty design principles improve output quality [^s
 
 | Approach | Setup | Quality | Version control |
 |---|---|---|---|
-| Claude Designs | None | High (visual) | None |
+| Claude Design | None (paid; separate weekly quota) | High (visual, on-brand) | Via export/hand-off to Claude Code [^src8] |
 | PowerPoint add-in | Low | High (PPT-native) | Via OneDrive |
 | Gamma API | Medium | High (web design) | API contract |
 | HTML via Claude Code | Medium | Fully custom | Git-native |
@@ -99,6 +111,7 @@ When generating HTML slides, twenty design principles improve output quality [^s
 
 ## See also
 
+- [[ai-engineering/claude-design|Claude Design]] — the now-shipped Anthropic Labs product (approach #1); decks, prototypes, websites, launch videos
 - [[ai-engineering/claude-cowork|Claude Cowork]] — skill system; `/presentations` workflow
 - [[ai-engineering/claude-code|Claude Code]] — HTML generation, design.md conventions
 - [[ai-engineering/agent-skills|Agent Skills]] — wrapping presentation workflows as skills
@@ -113,3 +126,6 @@ When generating HTML slides, twenty design principles improve output quality [^s
 [^src5]: [How to Build Pro Presentations in Claude Cowork](../../raw/youtube/youtube-0V2yEaph7ac-how-to-build-pro-presentations-in-claude-cowork.md) — YouTube playlist: Claude Slides
 [^src6]: [How to Create Slide Presentations with Claude — 2025 Update](../../raw/youtube/youtube-4KC7Vn4txkA-how-to-create-slide-presentations-with-claude-2025-update.md) — YouTube playlist: Claude Slides
 [^src7]: [Claude HTML Slides: The New PowerPoint Killer (Full Tutorial)](../../raw/youtube/youtube-t2ELuj2prA0-claude-html-slides-the-new-powerpoint-killer-full-tutorial.md) — YouTube
+[^src8]: [Claude Design Just Became Unstoppable](../../raw/youtube/youtube-gAoZ95kqG7w-claude-design-just-became-unstoppable.md) — Nate Herk | AI Automation, YouTube playlist: Claude Design
+[^src9]: [Claude Design Builds Beautiful 3D Websites Instantly (Full Tutorial)](../../raw/youtube/youtube-TcFeSjwTo7g-claude-design-builds-beautiful-3d-websites-instantly-full-tu.md) — Nate Herk | AI Automation, YouTube playlist: Claude Design
+[^src10]: [Claude Design 2 HOUR COURSE (Beginner to Pro)](../../raw/youtube/youtube-ovabeVoWrA0-claude-design-2-hour-course-beginner-to-pro.md) — Nate Herk | AI Automation, YouTube playlist: Claude Design
