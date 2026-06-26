@@ -36,6 +36,12 @@ sources:
   - path: raw/web/web-orchestrate-teams-of-claude-code-sessions-claude-code-docs.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md
+    channel: youtube
+    ingested_at: 2026-06-26
+  - path: raw/youtube/youtube-iRew6HOY0ho-paperclip-agent-collab-made-easy.md
+    channel: youtube
+    ingested_at: 2026-06-26
 aliases:
   - multi-agent
   - multi-agent system
@@ -93,6 +99,13 @@ Three modes [^src1]:
 ## Adoption: scale for productivity, not for looks
 
 A practitioner caution on *when* to add agents [^src2]: don't stand up "15 sub-agents, 30 skills" before you have working single-agent workflows. The recommended path is to **start with one main agent**, build up skills through hands-on iteration, and add a sub-agent only once a workflow is proven and the sub-agent will carry real skills and context. The guiding phrase: scale for productivity, not for what looks cool. A purpose-built sub-agent (e.g. one for marketing, one for business) earns its coordination cost; a speculative fleet does not. See [[ai-engineering/agent-skills|Agent Skills]] for the skill-building prerequisite.
+
+## Local-agent teams (org chart, chief-of-staff, start lean)
+
+[[ai-engineering/local-ai-agents|Local AI agents]] form teams the same way: each agent gets a specialized function and the team produces "something greater than the sum of its parts" — e.g. a research team scouting stocks plus a software team building product [^src11] [09:26](../../raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md#t=9:26). Two practitioner patterns recur in production local-agent fleets:
+
+- **A chief-of-staff (manager) agent.** Rather than the human supervising every worker, a dedicated manager agent checks for blockers at the start and end of each day and only escalates what it can't resolve — "I don't want to manage the agents" [^src12] [06:30](../../raw/youtube/youtube-iRew6HOY0ho-paperclip-agent-collab-made-easy.md#t=6:30). Workers surface a **blocked** status (missing tool/API access) into an **autonomy log** the manager maintains. This is the supervisor/coordinator pattern (§ above) promoted to a standing role.
+- **Start lean — fire agents that aren't earning their keep.** A documented fleet was *cut in half* after the operator hit rate limits and realized "if you were just more efficient and structured agents better... you don't need like 10" [^src12] [07:23](../../raw/youtube/youtube-iRew6HOY0ho-paperclip-agent-collab-made-easy.md#t=7:23). This is the same scale-for-productivity-not-for-looks discipline as the §Adoption caution, validated under real rate-limit pressure. [[ai-engineering/paperclip|Paperclip]] is a control plane built specifically to run such an org-chart of agents; [[ai-engineering/openclaw|OpenClaw]] shows the complementary cost lever of routing each agent to a different model.
 
 ## Case study: Grab's specialist-agent support system
 
@@ -270,3 +283,5 @@ The Notion case study (Eric Liu, PM) documents a production implementation where
 [^src8]: [Notion Q&A — Claude Managed Agents](../../raw/web/web-notion-q-a-claude-managed-agents-claude-by-anthropic.md) — Eric Liu, Notion PM
 [^src9]: [crewAIInc/crewAI-examples — Official CrewAI workflow examples (6K★)](../../raw/github/github-crewaiinc-crewai-examples.md) — crewAIInc, GitHub
 [^src10]: [When to use multi-agent systems — and when not to](../../raw/web/web-when-to-use-multi-agent-systems-and-when-not-to-claude.md) — Anthropic
+[^src11]: [Local AI Agents In 26 Minutes](../../raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md) — Tina Huang, YouTube
+[^src12]: [Paperclip: Agent Collab Made Easy](../../raw/youtube/youtube-iRew6HOY0ho-paperclip-agent-collab-made-easy.md) — The Next New Thing, YouTube

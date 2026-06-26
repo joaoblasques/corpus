@@ -1448,3 +1448,11 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - pages touched: [claude-for-finance (new)]
 - new pages: [claude-for-finance]
 - notes: New concept page — 9-stage gated FP&A workflow via the Claude Excel add-in: inventory-before-insight, protected baseline, plan-first, formula-driven/auditable 3-statement+DCF, 13-week cash forecast, model-selection-by-task-type. Cross-linked to prompt-engineering / agentic-workflow / claude-models. ingest-auto run total: 6 processed, 0 deferred, 2 pages created, 2 updated.
+
+## [2026-06-26T17:36] config | scheduled run
+- collectors:
+
+- ingest:
+  - ingest: 0 ingested · 0 deferred · status=ok
+- lint:
+  - 0 broken wikilinks · 0 broken citations · 0 orphans · 0 stubs

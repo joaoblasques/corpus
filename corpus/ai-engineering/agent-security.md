@@ -66,6 +66,9 @@ sources:
   - path: raw/web/web-set-up-claude-managed-agents-cloudflare-sandbox-sdk-docs.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md
+    channel: youtube
+    ingested_at: 2026-06-26
 aliases:
   - prompt injection
   - LLM security
@@ -333,6 +336,17 @@ When agents handle per-customer credentials (API keys, OAuth tokens), passing th
 
 **Why this matters for security**: the credential brokering pattern eliminates one limb of the lethal trifecta (§ above) — even if the agent is successfully prompt-injected and executes malicious code, the injected code cannot extract credentials by reading environment variables or process state. The credentials only exist on the network wire, scoped to specific endpoints.
 
+## Local AI agent isolation model
+
+For [[ai-engineering/local-ai-agents|local AI agents]] — which run on your own machine and may touch your files, email, and the screen — safety is "the primary concern," because you are "giving this very intelligent agent access to your computer and hoping that it's not going to just go bananas" [^src21] [11:39](../../raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md#t=11:39). Documented incidents include agents deleting a user's emails or carrying viruses introduced via shared skills [^src21]. The practitioner isolation model [^src21] [12:05](../../raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md#t=12:05):
+
+1. **Isolate the machine** — run local agents on a dedicated/wiped machine, never on the primary machine holding sensitive data.
+2. **Scope access narrowly** — give it a *separate* email for screening, not the personal inbox with sensitive mail; grant only what each task needs.
+3. **Don't trust foreign skills** — others' workflow/skill files can hide malicious instructions; avoid skills except from trusted developers, and when you do want one, "give the skill to Claude and tell it to scan the skill and then rewrite it itself" before installing. This is the local-agent version of the [[ai-engineering/agent-skills|don't-download-skills]] rule.
+4. **Scheduled security audits** — use the agent's own heartbeat to run a security audit hourly (or at minimum daily); frameworks like [[ai-engineering/openclaw|OpenClaw]] expose dedicated security checks, and no-code [[ai-engineering/claude-cowork|Claude Cowork]] pre-bakes many of these protections.
+
+General rule of thumb from the source: "be as paranoid as possible" [^src21]. This is the personal-machine analogue of the [[ai-engineering/claude-managed-agents|Managed Agents]] self-hosted-sandbox and credential-brokering patterns above — shrink the blast radius before granting write/action tools.
+
 ## See also
 
 - [[ai-engineering/structured-outputs|Structured Outputs]] — output-control layer; reliability prerequisite for security
@@ -367,3 +381,4 @@ When agents handle per-customer credentials (API keys, OAuth tokens), passing th
 [^src18]: [Self-hosted sandboxes for Managed Agents](../../raw/web/web-self-hosted-sandboxes.md) — Anthropic
 [^src19]: [Build a Claude Managed Agent with Vercel Sandbox](../../raw/web/web-build-a-claude-managed-agent-with-vercel-sandbox-vercel-know.md) — Vercel Knowledge Base
 [^src20]: [Set up Claude Managed Agents · Cloudflare Sandbox SDK docs](../../raw/web/web-set-up-claude-managed-agents-cloudflare-sandbox-sdk-docs.md) — Cloudflare
+[^src21]: [Local AI Agents In 26 Minutes](../../raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md) — Tina Huang, YouTube

@@ -6,6 +6,9 @@ sources:
   - path: raw/youtube/How AI agents & Claude skills work (Clearly Explained).md
     channel: youtube
     ingested_at: 2026-06-09
+  - path: raw/youtube/youtube-S_oN3vlzpMw-how-ai-agents-claude-skills-work-clearly-explained.md
+    channel: youtube
+    ingested_at: 2026-06-26
 aliases:
   - How AI agents and Claude skills work
   - Ras Mic skills episode
@@ -13,7 +16,8 @@ tags:
   - corpus/ai-engineering
   - source
 created: 2026-06-09
-updated: 2026-06-09
+updated: 2026-06-26
+last_confirmed: 2026-06-26
 ---
 
 # Source: How AI agents & Claude skills work (Clearly Explained)
@@ -48,6 +52,7 @@ This is an opinionated practitioner talk, not a tutorial or paper. Claims below 
 - [[ai-engineering/context-engineering|Context Engineering]] — "less is more"; code-as-context; supply unique workflow not general knowledge
 - [[ai-engineering/ai-agent|AI Agent]] — token-predictor mental model; agents-as-new-employees
 - [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] — one-agent-first → sub-agents for productivity
+- [[ai-engineering/openclaw|OpenClaw]] — the guest's own-email-isolated sponsor-vetting agent + recursive skill-from-failure loop (re-confirmed via a fresh 2026-06-26 Whisper transcript of the same episode)
 
 ## See also
 

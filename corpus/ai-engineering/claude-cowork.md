@@ -162,6 +162,9 @@ sources:
   - path: raw/web/web-product-management-on-the-ai-exponential-claude.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md
+    channel: youtube
+    ingested_at: 2026-06-26
 aliases:
   - Claude Cowork
   - Cowork
