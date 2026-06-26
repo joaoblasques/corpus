@@ -66,6 +66,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [[ai-engineering/langsmith|LangSmith]] — entity · draft · agent engineering platform for debugging, evaluation, and observability
 - [[ai-engineering/claude-code|Claude Code]] — entity · draft · Anthropic CLI coding agent; harness, large-codebase practices, model config, security review
 - [[ai-engineering/github-copilot|GitHub Copilot (Agent Mode)]] — entity · stub · whole-project agentic coding in VS Code; multi-file edits, runs commands, self-corrects; multi-model + MCP
+- [[ai-engineering/cursor|Cursor]] — entity · stub · AI code editor (VS Code fork); "harness over model"; model selector + Composer, rules folder, skills/MCP install, multitask mode, Whisper Flow dictation
 - [[ai-engineering/claude-cowork|Claude Cowork]] — entity · draft · **sub-hub** · Cowork desktop product; workspace folder, CLAUDE.md/MEMORY.md, Toolkit/workstations
 - [[ai-engineering/anthropic|Anthropic]] — entity · draft · the lab: company, funding/valuation, learning resources
 - [[ai-engineering/openai|OpenAI]] — entity · stub · developer model lineup (Apr 2025): o3/o4-mini reasoning, GPT-4.1 family (1M context), Codex CLI, Evals API, audio/voice models
