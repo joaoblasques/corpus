@@ -9,6 +9,7 @@ RSS/Atom fallback for blogs; same-path `<a href>` links for series.
 """
 from __future__ import annotations
 
+import hashlib
 import re
 import sys
 import xml.etree.ElementTree as ET
@@ -156,9 +157,15 @@ def _post_collected(url: str, dirs=None) -> bool:
 
 def write_post(seed: str, url: str, content: dict, collected_at: str,
                *, via_vault_list: str, inbox=None) -> Path:
-    """Write one per-post raw source (channel web) tagged with scrape_seed."""
+    """Write one per-post raw source (channel web) tagged with scrape_seed.
+
+    Filename is web-<slug>-<8-char url hash>.md so posts with identical titles
+    (or both empty-title) never collide — each source_url maps to a unique path.
+    """
     base = inbox if inbox is not None else INBOX
-    path = co.url_filename(url, content.get("title", ""), base=base)
+    slug = co.slugify(content.get("title", "") or url)
+    digest = hashlib.sha1(url.encode("utf-8")).hexdigest()[:8]
+    path = base / f"web-{slug}-{digest}.md"
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(co.build_url_source(
         {"source_url": url, "via_vault_list": via_vault_list, "scrape_seed": seed,

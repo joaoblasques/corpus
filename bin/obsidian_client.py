@@ -32,7 +32,7 @@ def cmd_collect(args) -> int:
     found = co.discover(vault)
     if args.path:
         found = [d for d in found if d["rel_path"].startswith(args.path)]
-    t = {"notes": 0, "urls": 0, "url_failed": 0, "skipped": 0, "scraped": 0,
+    t = {"notes": 0, "urls": 0, "url_failed": 0, "skipped": 0, "scraped": 0, "capped": 0,
          "inline_urls": 0, "inline_failed": 0, "inline_skipped_auth": 0, "inline_dropped": 0}
     processed = 0
     for d in found:
@@ -82,6 +82,8 @@ def cmd_collect(args) -> int:
                         res = sb.scrape_seed(url, mode, cap, collected_at=collected_at,
                                              via_vault_list=d["rel_path"])
                         t["scraped"] += res["written"]
+                        if res.get("capped"):
+                            t["capped"] += 1
                         continue
                     # untagged -> existing single-page fetch
                     if co.url_already_collected(url) or co.url_in_ledger(url, ledger):

@@ -312,3 +312,31 @@ def test_cmd_collect_routes_blog_tag_to_scrape_seed(tmp_path, monkeypatch):
     assert rc == 0
     assert calls["scrape"] == [("https://blog.example.com", "blog")]   # seed routed
     assert calls["fetch"] == ["https://plain.example.com/post"]        # untagged single-page
+
+
+def test_cmd_collect_capped_seed_increments_capped_tally(tmp_path, monkeypatch, capsys):
+    """A [blog] seed whose scrape_seed returns capped=True must increment capped in
+    the JSON output; a non-capped seed must leave capped at 0."""
+    import obsidian_client as oc
+    import collect_obsidian as co
+
+    listdir = tmp_path / "00_Inbox" / "Clippings"
+    listdir.mkdir(parents=True)
+    # Two blog seeds: first capped, second not
+    (listdir / "TO SCRAPE.md").write_text(
+        "https://big.example.com [blog]\nhttps://small.example.com [blog]\n", encoding="utf-8")
+
+    def fake_scrape(seed, mode, cap, **k):
+        capped = "big" in seed          # big.example.com hits cap; small does not
+        return {"seed": seed, "mode": mode, "found": cap if capped else 2,
+                "written": 1, "duplicate": 0, "failed": 0, "capped": capped}
+
+    monkeypatch.setattr(oc.sb, "scrape_seed", fake_scrape)
+    monkeypatch.setattr(co, "INBOX", tmp_path / "inbox")
+    monkeypatch.setattr(co, "url_already_collected", lambda u, dirs=None: False)
+    monkeypatch.setattr(co, "url_in_ledger", lambda u, ledger: False)
+
+    rc = oc.main(["collect", "--vault", str(tmp_path)])
+    assert rc == 0
+    out = json.loads(capsys.readouterr().out)
+    assert out["capped"] == 1, f"expected capped=1, got {out}"

@@ -107,3 +107,33 @@ def test_scrape_seed_counts_fetch_failures(tmp_path):
         _session=lambda u: sitemap if u.endswith("/sitemap.xml") else "",
         _fetch=lambda u: {})   # empty -> failed
     assert res["failed"] == 1 and res["written"] == 0
+
+
+def test_write_post_same_title_different_url_no_collision(tmp_path):
+    """Two posts with identical titles but different source_url must produce
+    two separate files (never overwrite each other)."""
+    sitemap = ('<?xml version="1.0"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+               '<url><loc>https://b.com/post-a</loc></url>'
+               '<url><loc>https://b.com/post-b</loc></url></urlset>')
+
+    # Both posts return SAME title — collision scenario
+    def fake_fetch(url):
+        return {"title": "Same Title", "text": "body for " + url}
+
+    res = sb.scrape_seed(
+        "https://b.com", "blog", collected_at="2026-06-26",
+        via_vault_list="00_Inbox/Clippings/TO SCRAPE.md",
+        inbox=tmp_path, dedup_dirs=[tmp_path],
+        _session=lambda u: sitemap if u.endswith("/sitemap.xml") else "",
+        _fetch=fake_fetch)
+
+    assert res["written"] == 2, f"expected 2 written, got {res}"
+    written = sorted(tmp_path.glob("web-*.md"))
+    assert len(written) == 2, f"expected 2 files, found: {[p.name for p in written]}"
+    # Each file must contain its own source_url
+    urls_found = set()
+    for p in written:
+        for line in p.read_text(encoding="utf-8").splitlines():
+            if line.startswith("source_url:"):
+                urls_found.add(line.split("source_url:", 1)[1].strip())
+    assert urls_found == {"https://b.com/post-a", "https://b.com/post-b"}
