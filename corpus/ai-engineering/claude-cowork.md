@@ -686,8 +686,13 @@ A practical orientation framework for new Claude users: not about prompts, but a
 
 **Core insight** [^src49]: "Most beginners visit two places and quit" — the web tab and one project. They never discover the other 26 cities across 7 continents. The productive differentiator is not better prompts; it is persistent setup (folder structure, global instructions, skills, connectors) that means Claude already knows the user and context on every session start. "You don't use Claude. You move into Claude."
 
+## Cowork as the no-code local AI agent (vs OpenClaw)
+
+In the emerging [[ai-engineering/local-ai-agents|local AI agent]] category — agents that run on your own machine, hold file-based memory, use tools, and run on a schedule — Cowork is positioned as "Anthropic's take on local AI agents": the safer, no-code option, recommended for people not comfortable with code or just starting out [^src51] [20:09](../../raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md#t=20:09). The trade-off versus the open-source [[ai-engineering/openclaw|OpenClaw]] is the familiar one: Cowork is "a lot safer and a lot easier to use" with security pre-baked, but you "get locked into Anthropic's system and there's less ways for you to customize things" [^src51]. Many practitioners run both side by side for different use cases [^src51]. The "eyes"/computer-use demo from mobile (ask Cowork to find and screenshot a local file and send it to your phone) is the same [[ai-engineering/computer-use|computer use]] surface as Dispatch (§ above) [^src51] [23:16](../../raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md#t=23:16).
+
 ## See also
 
+- [[ai-engineering/local-ai-agents|Local AI Agents]] — the category Cowork is the no-code option within
 - [[ai-engineering/claude-code|Claude Code]] — the developer counterpart; capabilities land here first
 - [[ai-engineering/anthropic|Anthropic]] — provider and model lineup
 - [[ai-engineering/claude-managed-agents|Claude Managed Agents]] — some legal practice-area plugins deploy as Managed Agents
@@ -744,3 +749,4 @@ A practical orientation framework for new Claude users: not about prompts, but a
 [^src48]: [Give Claude Your Files and Watch What Happens (report)](../../raw/notes/notes-give-claude-your-report.md) — notes report; 7 Cowork tasks + PARA method + sycophancy warning
 [^src49]: [You're Learning Claude The Wrong Way | Here's My Cheat Code](../../raw/youtube/youtube-GaA7hohgCCw-you-re-learning-claude-the-wrong-way-here-s-my-cheat-code.md) — AI Founders, YouTube; 7-continent mental map for Claude beginners
 [^src50]: [Product management on the AI exponential — Claude blog](../../raw/web/web-product-management-on-the-ai-exponential-claude.md) — Cat Wu, Head of Product for Claude Code, Anthropic; describes Claude Cowork as the "knowledge work" tool in a three-product PM workflow (claude.ai = thought partner, Claude Code = builds code, Cowork = everything else)
+[^src51]: [Local AI Agents In 26 Minutes](../../raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md) — Tina Huang, YouTube

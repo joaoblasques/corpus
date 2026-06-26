@@ -1456,3 +1456,11 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   - ingest: 0 ingested · 0 deferred · status=ok
 - lint:
   - 0 broken wikilinks · 0 broken citations · 0 orphans · 0 stubs
+
+## [2026-06-26T17:37] config | scheduled run
+- collectors:
+
+- ingest:
+  - ingest: 0 ingested · 6 deferred · status=timeout · error=timeout
+- lint:
+  - 0 broken wikilinks · 0 broken citations · 0 orphans · 0 stubs

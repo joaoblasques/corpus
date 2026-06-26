@@ -29,6 +29,9 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [[ai-engineering/context-engineering|Context Engineering]] — concept · draft · dynamically building and optimizing LLM inputs at inference time
 - [[ai-engineering/ai-agent|AI Agent]] — concept · draft · LLM + tools + memory + orchestration in an iterative loop
 - [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] — concept · draft · patterns for multiple cooperating agents (sequential, parallel, supervisor, data-driven)
+- [[ai-engineering/local-ai-agents|Local AI Agents]] — concept · draft · always-on agents running on your own machine; anatomy (host/channel/brain/memory/skills/heartbeat/eyes); OpenClaw vs Cowork
+- [[ai-engineering/openclaw|OpenClaw]] — entity · draft · open-source local-agent framework; per-agent model routing, Cloud Hub skill marketplace, Mission Control
+- [[ai-engineering/paperclip|Paperclip]] — entity · draft · open-source project-management control plane for managing a fleet of agents; goal→issues, org chart, chief-of-staff
 - [[ai-engineering/tool-calling|Tool Calling]] — concept · draft · how LLMs request and receive tool execution results
 - [[ai-engineering/agent-evaluation|Agent Evaluation]] — concept · draft · online/offline evaluation, LLM-as-judge, golden datasets, production feedback loop
 - [[ai-engineering/rag|RAG]] — concept · draft · retrieval-augmented generation; solving LLM knowledge cutoff and hallucination via context injection
