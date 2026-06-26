@@ -255,3 +255,18 @@ def test_iter_scrape_targets_dedups_and_preserves_order():
     assert out[0] == {"url": "https://a.com", "mode": "blog", "cap": 200}
     assert out[1]["mode"] == "series"
     assert out[2]["mode"] is None
+
+
+def test_build_url_source_includes_scrape_seed_when_present():
+    out = co.build_url_source({
+        "source_url": "https://b.com/p1", "via_vault_list": "00_Inbox/Clippings/TO SCRAPE.md",
+        "scrape_seed": "https://b.com", "title": "P1", "collected_at": "2026-06-26"}, "body")
+    assert "scrape_seed: https://b.com\n" in out
+    assert "source_url: https://b.com/p1\n" in out
+    assert "via_vault_list: 00_Inbox/Clippings/TO SCRAPE.md\n" in out
+
+
+def test_build_url_source_omits_scrape_seed_when_absent():
+    out = co.build_url_source({
+        "source_url": "https://b.com/p1", "via_vault_list": "L", "collected_at": "2026-06-26"}, "body")
+    assert "scrape_seed" not in out

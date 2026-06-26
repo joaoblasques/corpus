@@ -181,6 +181,8 @@ def build_url_source(meta: dict, body: str) -> str:
         lines.append(f"via_vault_note: {meta['via_vault_note']}")
     else:
         lines.append(f"via_vault_list: {meta['via_vault_list']}")
+    if meta.get("scrape_seed"):
+        lines.append(f"scrape_seed: {meta['scrape_seed']}")
     lines += [
         f"title: {yaml_scalar(meta.get('title', ''))}",
         f"collected_at: {meta['collected_at']}", "---", "", body.strip(), "",

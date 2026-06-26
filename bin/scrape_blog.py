@@ -148,3 +148,51 @@ def discover_series_parts(index_url: str, *, _session=None) -> list:
         seen.add(absu)
         out.append(absu)
     return out
+
+
+def _post_collected(url: str, dirs=None) -> bool:
+    return co.url_already_collected(url, dirs)
+
+
+def write_post(seed: str, url: str, content: dict, collected_at: str,
+               *, via_vault_list: str, inbox=None) -> Path:
+    """Write one per-post raw source (channel web) tagged with scrape_seed."""
+    base = inbox if inbox is not None else INBOX
+    path = co.url_filename(url, content.get("title", ""), base=base)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(co.build_url_source(
+        {"source_url": url, "via_vault_list": via_vault_list, "scrape_seed": seed,
+         "title": content.get("title", ""), "collected_at": collected_at},
+        content["text"]), encoding="utf-8")
+    return path
+
+
+def scrape_seed(seed: str, mode: str, cap: int = DEFAULT_CAP, *, collected_at: str,
+                via_vault_list: str, inbox=None, dedup_dirs=None,
+                _session=None, _fetch=None) -> dict:
+    """Discover a seed's posts (blog or series), fetch+write each new one.
+
+    Dedup by source_url (skip already-collected). Returns counts. `capped` is
+    True when discovery hit `cap` (more posts page over on a later run)."""
+    fetch = _fetch if _fetch is not None else fl.fetch
+    if mode == "series":
+        urls = discover_series_parts(seed, _session=_session)
+    else:
+        urls = discover_blog_posts(seed, cap, _session=_session)
+    found = len(urls)
+    written = duplicate = failed = 0
+    for u in urls:
+        if _post_collected(u, dedup_dirs):
+            duplicate += 1
+            continue
+        try:
+            content = fetch(u)
+        except Exception:  # noqa: BLE001
+            content = {}
+        if not content or not content.get("text"):
+            failed += 1
+            continue
+        write_post(seed, u, content, collected_at, via_vault_list=via_vault_list, inbox=inbox)
+        written += 1
+    return {"seed": seed, "mode": mode, "found": found, "written": written,
+            "duplicate": duplicate, "failed": failed, "capped": found >= cap}

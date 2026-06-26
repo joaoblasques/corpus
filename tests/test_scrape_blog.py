@@ -68,3 +68,42 @@ def test_discover_series_parts_same_path_prefix_in_order():
             '<a href="https://site.com/guide/part-1#top">dup</a>')
     out = sb.discover_series_parts(index, _session=lambda u: html)
     assert out == ["https://site.com/guide/part-1", "https://site.com/guide/part-2"]
+
+
+def test_scrape_seed_writes_dedups_and_counts(tmp_path):
+    sitemap = ('<?xml version="1.0"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+               '<url><loc>https://b.com/p1</loc></url>'
+               '<url><loc>https://b.com/p2</loc></url></urlset>')
+    # p1 already collected: drop a raw source with its source_url into the dedup dir
+    (tmp_path / "web-existing.md").write_text(
+        "---\nchannel: web\nsource_url: https://b.com/p1\n---\nold\n", encoding="utf-8")
+
+    def session(url):
+        return sitemap if url.endswith("/sitemap.xml") else ""
+
+    def fake_fetch(url):
+        return {"title": "Title " + url[-2:], "text": "body of " + url}
+
+    res = sb.scrape_seed(
+        "https://b.com", "blog", collected_at="2026-06-26",
+        via_vault_list="00_Inbox/Clippings/TO SCRAPE.md",
+        inbox=tmp_path, dedup_dirs=[tmp_path],
+        _session=session, _fetch=fake_fetch)
+
+    assert res == {"seed": "https://b.com", "mode": "blog", "found": 2,
+                   "written": 1, "duplicate": 1, "failed": 0, "capped": False}
+    written = [p for p in tmp_path.glob("web-*.md") if "existing" not in p.name]
+    assert len(written) == 1
+    txt = written[0].read_text(encoding="utf-8")
+    assert "scrape_seed: https://b.com\n" in txt and "source_url: https://b.com/p2\n" in txt
+
+
+def test_scrape_seed_counts_fetch_failures(tmp_path):
+    sitemap = ('<?xml version="1.0"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+               '<url><loc>https://b.com/p1</loc></url></urlset>')
+    res = sb.scrape_seed(
+        "https://b.com", "blog", collected_at="2026-06-26",
+        via_vault_list="L", inbox=tmp_path, dedup_dirs=[tmp_path],
+        _session=lambda u: sitemap if u.endswith("/sitemap.xml") else "",
+        _fetch=lambda u: {})   # empty -> failed
+    assert res["failed"] == 1 and res["written"] == 0
