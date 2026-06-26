@@ -1356,3 +1356,15 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   - ingest: 0 ingested · 6 deferred · status=timeout · error=timeout
 - lint:
   - 1 broken wikilinks · 9 broken citations · 0 orphans · 18 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+
+## [2026-06-26 10:30] ingest | ingest-auto manual pass — 6 named inbox emails (2 ingested, 4 deferred)
+- sources: 6 email (2 single-author DE articles ingested; 4 multi-topic digest newsletters deferred)
+- channel: email
+- domain: data-engineering (both ingested sources)
+- ingested:
+  - email-2026-06-25-i-spent-12-hours-rebuilding-my-junior-year-project-part-2-th.md (Minh Pham / Vu Trinh — dbt transformation layer project)
+  - email-2026-06-24-how-i-made-my-data-platform-s-failures-public-and-earned-my.md (Yordan Ivanov / Data Gibberish — data platform status page)
+- new pages: 2 — data-engineering/sources/skytrax-dbt-transformation-project (source), data-engineering/data-status-page (concept)
+- updated pages: 4 — dbt (manifest-state incremental deploys), cicd-for-data-infrastructure (dbt slim-CI/defer-CD worked example + OIDC), dimensional-modeling (role-playing dimensions + dbt_utils surrogate keys), data-observability (detection→communication / status page); + README hub + _index
+- deferred (→ _REVIEW.md): 4 — how-to-get-reliable-results-from-your-llms (TDS The Variable), stealing-is-a-skill-gemini-3-5-flash-... (TLDR Dev), openai-s-custom-chip-tesla-... (TLDR), netflixs-new-batch-compute-... (TLDR Data). All UNCERTAIN: multi-topic digest newsletters spanning many domains; their fetched companions are separate raw/web/ sources that drain individually.
+- notes: ingest-auto run; 2 processed, 4 deferred. Stamped + moved both ingested emails to raw/email/. These 6 are the same set the 2026-06-26T08:37 scheduled run deferred on timeout.
