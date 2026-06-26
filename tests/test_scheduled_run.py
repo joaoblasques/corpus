@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 import types
@@ -67,6 +68,43 @@ class TestAcquireLock:
         scheduled_run.acquire_lock(lock)
         assert lock.read_text(encoding="utf-8") == original_content
         assert lock.stat().st_mtime == original_mtime
+
+    @staticmethod
+    def _dead_pid():
+        """A PID guaranteed not to be alive: spawn a trivial process and reap it."""
+        import subprocess
+        import sys as _sys
+        p = subprocess.Popen([_sys.executable, "-c", "pass"])
+        p.wait()
+        return p.pid
+
+    def test_stale_lock_with_dead_pid_is_reclaimed(self, tmp_path):
+        """A lock owned by a dead PID is treated as stale and reclaimed (self-heal).
+
+        Regression: a run that died without releasing its lock (Jun 2026) blocked
+        every subsequent scheduled run because acquire only checked file existence.
+        """
+        lock = tmp_path / ".test_run.lock"
+        lock.write_text(f"pid={self._dead_pid()}\n", encoding="utf-8")
+        result = scheduled_run.acquire_lock(lock)
+        assert result, "expected reclaim of a lock owned by a dead PID"
+        assert f"pid={os.getpid()}" in lock.read_text(encoding="utf-8"), (
+            "reclaimed lock should now record the current process PID"
+        )
+
+    def test_live_pid_lock_is_not_reclaimed(self, tmp_path):
+        """A lock owned by a still-alive PID is left held (returns False)."""
+        lock = tmp_path / ".test_run.lock"
+        lock.write_text(f"pid={os.getpid()}\n", encoding="utf-8")  # current proc is alive
+        result = scheduled_run.acquire_lock(lock)
+        assert result is False, "must not reclaim a lock owned by a live PID"
+
+    def test_unparseable_lock_is_not_reclaimed(self, tmp_path):
+        """A lock with no parseable PID (e.g. mid-write) is conservatively kept held."""
+        lock = tmp_path / ".test_run.lock"
+        lock.write_text("garbage-no-pid\n", encoding="utf-8")
+        result = scheduled_run.acquire_lock(lock)
+        assert result is False, "unparseable lock should be left untouched (no double-run)"
 
 
 class TestReleaseLock:

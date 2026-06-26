@@ -52,22 +52,55 @@ LOG_PATH = Path(os.environ["CORPUS_LOG_PATH"]) if "CORPUS_LOG_PATH" in os.enviro
 # Lock primitive
 # ---------------------------------------------------------------------------
 
+def _read_lock_pid(lock_path: Path) -> int | None:
+    """Parse the ``pid=<n>`` recorded in a lock file; None if absent/unparseable."""
+    try:
+        text = lock_path.read_text(encoding="utf-8")
+    except OSError:
+        return None
+    m = re.search(r"pid=(\d+)", text)
+    return int(m.group(1)) if m else None
+
+
+def _pid_alive(pid: int) -> bool:
+    """True if a process with this PID currently exists (signal-0 probe)."""
+    try:
+        os.kill(pid, 0)
+    except ProcessLookupError:
+        return False
+    except PermissionError:
+        return True  # exists, owned by another user
+    return True
+
+
 def acquire_lock(lock_path: Path) -> bool:
     """Atomically acquire a single-flight lock.
 
     Uses O_CREAT | O_EXCL so only one process wins the race; the loser gets
     EEXIST and we return False without blocking or raising.
 
+    Self-healing: if an existing lock records a PID that is no longer alive (a
+    previous run that died without releasing — killed, crashed, or the machine
+    slept/rebooted mid-run), the lock is treated as stale, reclaimed, and
+    acquisition proceeds. A lock whose PID is still alive — or whose content
+    can't be parsed (e.g. a lock observed in the microsecond between create and
+    pid-write) — is left untouched and we return False, so two runs never
+    proceed at once.
+
     Returns True on success (caller holds the lock), False if already held.
     """
     try:
-        fd = os.open(
-            lock_path,
-            os.O_CREAT | os.O_EXCL | os.O_WRONLY,
-            0o644,
-        )
+        fd = os.open(lock_path, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o644)
     except FileExistsError:
-        return False
+        pid = _read_lock_pid(lock_path)
+        if pid is None or _pid_alive(pid):
+            return False  # genuinely held, or unparseable (stay conservative)
+        # Stale lock owned by a dead PID — reclaim it and retry the exclusive create once.
+        lock_path.unlink(missing_ok=True)
+        try:
+            fd = os.open(lock_path, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o644)
+        except FileExistsError:
+            return False  # lost the reclaim race to another process
 
     try:
         content = f"pid={os.getpid()}\n"
