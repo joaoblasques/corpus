@@ -30,6 +30,9 @@ sources:
   - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-this-karpathy-sys-report.md
     channel: notes
     ingested_at: 2026-06-25
+  - path: raw/web/web-a-field-guide-to-rapidly-improving-ai-products-hamels-blog-h.md
+    channel: web
+    ingested_at: 2026-06-26
 aliases:
   - agent evaluation
   - LLM evaluation
@@ -50,8 +53,8 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-21
-updated: 2026-06-25
-last_confirmed: 2026-06-25
+updated: 2026-06-26
+last_confirmed: 2026-06-26
 ---
 
 # Agent Evaluation
@@ -137,6 +140,24 @@ Benchmark progress on data agents: ontologies outperform text-to-SQL (Sequeda et
 A flagged gap: organizational context and memory improve agent output, but there are "no great mechanisms for tracking them" [^src3]. **Token efficiency** is emerging as a first-class eval axis — delivering equivalent quality while minimizing token (and warehouse) spend [^src3].
 
 **Domain-specific eval example**: the Fable 5 model required *new* evals because existing ones did not capture its strengths; it scored roughly 10–15% better than recent frontier models on Hex's evals, excelling at messy, long-horizon data tasks requiring judgment, clear assumptions, and cross-checking semantic models against raw data [^src5]. This reinforces the funnel point — when a model's gains are on long-horizon judgment, static evals miss them [^src2][^src5].
+
+## Maintaining trust in evals (against criteria drift)
+
+A recurring failure pattern: teams build eval systems, then "gradually lose faith in them" — metrics stop matching production, or the evals get too complex to interpret — and revert to gut feeling, defeating the purpose [^src10]. Front-loading [[ai-engineering/error-analysis|error analysis]] tells you *what* to measure; the practices below keep the measurement trustworthy as it scales [^src10].
+
+**Criteria drift.** Per Shankar et al. (*Who Validates the Validators?*), "the process of grading outputs helps [people] define that very criteria" — so you cannot fully fix eval criteria before judging real outputs [^src10]. Treat criteria as living documents that evolve with understanding, and reconcile contradictory stakeholder criteria rather than imposing one [^src10]. (Honeycomb's Phillip Carter: "Seeing how the LLM breaks down its reasoning made me realize I wasn't being consistent about how I judged certain edge cases.")
+
+**Favor binary decisions over arbitrary scales** [^src10]. A 1–5 scale forces evaluators to agonize over 3-vs-4 boundary cases, injecting noise; a pass/fail forces a clear "did this output achieve its purpose?" and makes progress legible ("a 10% increase in passing outputs is immediately meaningful"). Even teams using 1–5 inevitably ask where "good enough" is — a binary decision in disguise.
+
+**Pair binary judgments with detailed critiques** [^src10]. The nuance isn't lost — it moves into a written critique of *why* something passed/failed. Used as few-shot examples in judge prompts, these critiques yield "15–20% higher agreement rates between human and LLM evaluations" and seed high-quality [[ai-engineering/synthetic-data|synthetic data]].
+
+**Measure human↔LLM alignment, don't assume it** [^src10]. People "over-rely and over-trust AI systems" (e.g. the debunked MIT-EECS-GPT-4 pre-print where the model graded itself), and LLM judges can be swayed by option order or formatting. With Honeycomb it took **three iterations to reach >90% agreement** between the LLM-judge and human labels — alignment is "an ongoing conversation," not a one-time setup (cf. Eugene Yan's AlignEval). This is the [[ai-engineering/generator-evaluator-separation|generator–evaluator separation]] principle applied to grading.
+
+**Scale without losing trust** [^src10]: start with high human involvement → study where automated evals align vs diverge → use strategic sampling on the weakest-alignment cases → keep calibrating. The goal is to *direct* human effort to the most informative cases, not eliminate it.
+
+## Evaluation infrastructure as the foundation
+
+The key enabler of an experiment-based [[ai-engineering/ai-product-management|roadmap]] is robust eval infrastructure — "without it, you're just guessing whether your experiments are working" [^src10]. In early GitHub Copilot development the team "invested heavily in building sophisticated offline evaluation infrastructure": systems that cloned repositories at scale, set up their environments, and ran each repo's **existing unit-test suites** as an automated way to verify completion correctness across many languages and frameworks [^src10]. That foundation let them run thousands of experiments and say "this change improved quality by X%" instead of debating — "this wasn't wasted time, it was the foundation that accelerated everything" [^src10]. This mirrors the SWE-bench philosophy above: binary outcomes tied to executable criteria beat rubric scoring.
 
 ## Trace-based production monitoring
 
@@ -229,6 +250,7 @@ See also: [[ai-engineering/compound-engineering|Compound Engineering]] §Autores
 
 ## See also
 
+- [[ai-engineering/error-analysis|Error Analysis]] — the discovery phase that defines what these evals measure
 - [[ai-engineering/langsmith|LangSmith]] — platform that implements these patterns
 - [[ai-engineering/ai-agent|AI Agent]] — the systems being evaluated
 - [[ai-engineering/context-engineering|Context Engineering]] — context window growth directly affects evaluation quality (thread evaluator catches degradation)
@@ -247,3 +269,4 @@ See also: [[ai-engineering/compound-engineering|Compound Engineering]] §Autores
 [^src7]: [Task-Completion Time Horizons of Frontier AI Models](../../raw/web/web-task-completion-time-horizons-of-frontier-ai-models.md) — METR, metr.org
 [^src8]: [Claude on SWE-bench Verified — Anthropic blog](../../raw/web/web-claude-swe-bench-performance.md) — Anthropic
 [^src9]: [This "Karpathy System" could 701x your AI Workflows — autoresearch fit checklist](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-this-karpathy-sys-report.md) — YouTube (processed report)
+[^src10]: [A Field Guide to Rapidly Improving AI Products](../../raw/web/web-a-field-guide-to-rapidly-improving-ai-products-hamels-blog-h.md) — Hamel Husain, hamel.dev

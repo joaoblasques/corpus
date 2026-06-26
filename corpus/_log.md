@@ -1488,3 +1488,24 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   - ingest: 0 ingested · 6 deferred · status=ok
 - lint:
   - 0 broken wikilinks · 0 broken citations · 0 orphans · 0 stubs
+
+## [2026-06-26 18:10] ingest | A Field Guide to Rapidly Improving AI Products (Hamel Husain)
+- source: raw/web/web-a-field-guide-to-rapidly-improving-ai-products-hamels-blog-h.md
+- channel: web
+- domain: ai-engineering
+- pages touched: [ai-engineering/error-analysis (new), ai-engineering/sources/field-guide-improving-ai-products (new), ai-engineering/agent-evaluation, ai-engineering/synthetic-data, ai-engineering/ai-product-management, ai-engineering/README]
+- new pages: [ai-engineering/error-analysis, ai-engineering/sources/field-guide-improving-ai-products]
+- notes: ingest-auto manual pass (6-file filtered batch); 1 processed, 5 deferred. Only substantive single article in the batch; routed to ai-engineering (error analysis + eval discipline). Other 5 deferred as blog/weblog/bio index pages (no citable single-article body) or multi-topic digest.
+
+## [2026-06-26 18:10] ingest | ingest-auto run summary (6-file filtered batch)
+- run: 1 ingested · 5 deferred · 2 pages created · 3 pages updated
+- deferred: web-the-new-software-lifecycle (UNCERTAIN — addyosmani blog index, already in _REVIEW), web-simon-willisons-weblog (UNCERTAIN — weblog firehose, already in _REVIEW), email-2026-06-25-chinese-grey-market-sells-claude-api-access (UNCERTAIN — The Code digest, already in _REVIEW), web-andrej-karpathy (UNCERTAIN — bio/CV page, new), web-all-databricks-blog (UNCERTAIN — blog index, new)
+- notes: 3 of the 5 defers were already recorded in raw/_inbox/_REVIEW.md by an earlier pass today; 2 new defer lines (karpathy, databricks) appended this run.
+
+## [2026-06-26T17:46] config | scheduled run
+- collectors:
+
+- ingest:
+  - ingest: 1 ingested · 5 deferred · status=ok
+- lint:
+  - 0 broken wikilinks · 0 broken citations · 0 orphans · 0 stubs

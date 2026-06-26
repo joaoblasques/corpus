@@ -6,17 +6,22 @@ sources:
   - path: raw/web/web-designing-synthetic-datasets-for-the-real-world-mechanism-de.md
     channel: web
     ingested_at: 2026-06-17
+  - path: raw/web/web-a-field-guide-to-rapidly-improving-ai-products-hamels-blog-h.md
+    channel: web
+    ingested_at: 2026-06-26
 aliases:
   - synthetic data
   - synthetic data generation
   - Simula
   - mechanism design (data)
   - seedless data generation
+  - synthetic data for evals
+  - bootstrapping evals
 tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-17
-updated: 2026-06-17
+updated: 2026-06-26
 ---
 
 # Synthetic Data Generation
@@ -68,6 +73,23 @@ Simula serves as the primary synthetic data engine for several production system
 
 Distillation setup used in research: Gemini 2.5 Flash as teacher, Gemma-3 4B as student; datasets up to 512K data points across cybersecurity (CTIBench), legal reasoning (LEXam), math (GSM8k), and multilingual knowledge (Global MMLU) [^src1].
 
+## Synthetic data for evaluation (bootstrapping with zero users)
+
+A second, complementary use: not training data but **eval data when you have no real users yet** — the chicken-and-egg problem ("you need data to improve your AI, but you need a decent AI to get users who generate that data") [^src2]. Hamel Husain's field guide reports this "works surprisingly well," quoting Bryan Bischof (ex-Head of AI, Hex): "LLMs are surprisingly good at generating excellent — and diverse — examples of user prompts… All I can say is: it works, ship it" [^src2].
+
+**A framework: pick the dimensions to vary** [^src2]. Vary along (and combine) three broad axes, plus task-specific ones (tone, technical level, locale):
+- **Features** — what capabilities must the AI support (e.g. property search, market analysis, scheduling)?
+- **Scenarios** — what situations (exact match, multiple matches, no matches, invalid criteria)?
+- **User personas** — who uses it and how (first-time buyer, investor, luxury client)?
+
+**Guidelines for effective synthetic eval data** [^src2]:
+- **Generate inputs, not outputs.** Use LLMs to produce realistic user *queries*, not the expected AI responses — otherwise the data inherits the generating model's biases/limitations.
+- **Ground in real system constraints.** Use real listing IDs, actual availability windows, business rules (showing restrictions, HOA requirements) so cases are realistic. For the Rechat real-estate assistant a curated test DB of listings was maintained that was *known* to trigger each edge case.
+- **Verify scenario coverage.** A query meant to test "no matches found" should actually return zero results when run — pseudo-code asserts this before accepting the case.
+- **Diversify**, and **start simple, then add complexity** to isolate issues and establish a baseline.
+
+What often "starts as a stopgap" becomes a permanent part of the evaluation infrastructure even after real user data arrives [^src2]. This use is orthogonal to Simula's training-data focus above and feeds directly into [[ai-engineering/agent-evaluation|Agent Evaluation]] golden datasets and [[ai-engineering/error-analysis|error analysis]].
+
 ## Relationship to training and fine-tuning
 
 Synthetic data is primarily a **training data** tool — it supplements (or replaces) real-world data for fine-tuning or distillation when real data is unavailable. It is orthogonal to [[ai-engineering/rag|RAG]] (which injects retrieved facts at inference time) and to [[ai-engineering/agent-evaluation|Agent Evaluation]] golden datasets (which test trained models, not train them). The Simula paper explicitly positions synthetic data as foundational for "reinforcement learning from AI feedback (RLAIF)" and edge-device distillation [^src1]. See [[ai-engineering/machine-learning|Machine Learning]] §RAG vs fine-tuning for where fine-tuning and distillation fit in the broader training stack.
@@ -77,9 +99,11 @@ Synthetic data is primarily a **training data** tool — it supplements (or repl
 - [[ai-engineering/machine-learning|Machine Learning]] — training paradigms; RAG vs fine-tuning trade-off
 - [[ai-engineering/llm|LLM]] — pre-training + RLHF; where synthetic data feeds in
 - [[ai-engineering/agent-evaluation|Agent Evaluation]] — evaluation methodology for trained models
+- [[ai-engineering/error-analysis|Error Analysis]] — synthetic data exercises failure modes you can't yet observe
 - [[ai-engineering/rag|RAG]] — inference-time knowledge injection (complementary, not competing)
 - [[ai-engineering/README|AI Engineering hub]]
 
 ---
 
 [^src1]: [Designing synthetic datasets for the real world: Mechanism design and reasoning from first principles](../../raw/web/web-designing-synthetic-datasets-for-the-real-world-mechanism-de.md) — Tim R. Davidson & Hamza Harkous, Google Research, April 2026
+[^src2]: [A Field Guide to Rapidly Improving AI Products](../../raw/web/web-a-field-guide-to-rapidly-improving-ai-products-hamels-blog-h.md) — Hamel Husain, hamel.dev

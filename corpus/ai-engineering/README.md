@@ -6,7 +6,7 @@ tags:
   - corpus/ai-engineering
   - hub
 created: 2026-05-07
-updated: 2026-06-25
+updated: 2026-06-26
 ---
 
 # AI Engineering
@@ -33,7 +33,8 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [[ai-engineering/openclaw|OpenClaw]] — entity · draft · open-source local-agent framework; per-agent model routing, Cloud Hub skill marketplace, Mission Control
 - [[ai-engineering/paperclip|Paperclip]] — entity · draft · open-source project-management control plane for managing a fleet of agents; goal→issues, org chart, chief-of-staff
 - [[ai-engineering/tool-calling|Tool Calling]] — concept · draft · how LLMs request and receive tool execution results
-- [[ai-engineering/agent-evaluation|Agent Evaluation]] — concept · draft · online/offline evaluation, LLM-as-judge, golden datasets, production feedback loop
+- [[ai-engineering/agent-evaluation|Agent Evaluation]] — concept · draft · online/offline evaluation, LLM-as-judge, golden datasets, production feedback loop, eval-trust / criteria drift
+- [[ai-engineering/error-analysis|Error Analysis]] — concept · draft · the highest-ROI AI improvement activity: read real outputs, let a failure-mode taxonomy emerge (bottom-up); the data-viewer investment; domain experts write prompts
 - [[ai-engineering/rag|RAG]] — concept · draft · retrieval-augmented generation; solving LLM knowledge cutoff and hallucination via context injection
 - [[ai-engineering/llm|LLM]] — concept · draft · next-token prediction, parameters, training phases (pre-training + RLHF)
 - [[ai-engineering/transformer|Transformer]] — concept · mature · attention-based architecture underlying all modern LLMs; tokenize→embed→position→attention→FFN→next-token
@@ -102,6 +103,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [[ai-engineering/sources/grab-multi-agent-data-warehouse-support|Grab — From Firefighting to Building]] — source · draft · production 5-agent system for data-warehouse support; six production-hardening lessons
 - [[ai-engineering/sources/boris-cherny-100-percent-claude-code|Boris Cherny — 100% Claude Code]] — source · draft · head of Claude Code: full-agentic workflow, ~5 parallel agents, latent demand, build-for-the-model, "coding is describing"
 - [[ai-engineering/sources/beyond-vibe-coding-book|Beyond Vibe Coding (Book)]] — source · draft · 11-chapter practitioner guide; 70% problem thesis, golden rules, autonomous agents, multimodel orchestration
+- [[ai-engineering/sources/field-guide-improving-ai-products|A Field Guide to Rapidly Improving AI Products]] — source · draft · Hamel Husain; the measurement-and-iteration discipline that beats tool selection (error analysis, data viewers, synthetic data, eval trust, experiment-based roadmaps)
 
 ### Cross-domain (primary home in data-engineering)
 - [[data-engineering/claude-code-for-data-engineering|Claude Code for Data Engineering]] — synthesis · AI-assisted dbt / data workflows

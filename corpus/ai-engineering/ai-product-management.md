@@ -33,6 +33,9 @@ sources:
   - path: raw/web/web-product-management-on-the-ai-exponential-claude.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/web/web-a-field-guide-to-rapidly-improving-ai-products-hamels-blog-h.md
+    channel: web
+    ingested_at: 2026-06-26
 aliases:
   - AI product management
   - AIPM
@@ -42,11 +45,14 @@ aliases:
   - core AI PM
   - outcomes not outputs
   - latent demand
+  - capability funnel
+  - experiments not features
+  - AI roadmap
 tags:
   - corpus/ai-engineering
   - synthesis
 created: 2026-06-15
-updated: 2026-06-17
+updated: 2026-06-26
 ---
 
 # AI Product Management
@@ -219,6 +225,16 @@ Skipping the pilot phase is the most common cause of expensive AI project failur
 
 The framework maps these three categories onto risk (reversibility × impact) and confidence (how well-calibrated the model is). High-risk, low-confidence decisions stay human-in-the-loop; low-risk, high-confidence decisions can be fully autonomous [^src9].
 
+## Count experiments, not features (the AI roadmap)
+
+Hamel Husain argues traditional feature-with-deadline roadmaps "fail spectacularly with AI" — teams commit to "Launch sentiment analysis by Q2," then discover the technology can't meet the quality bar, ship something subpar or miss the date, and erode trust either way [^src11]. Conventional roadmaps assume we know what's possible; "with AI, especially at the cutting edge, you're constantly testing the boundaries of what's feasible" [^src11].
+
+**The capability funnel** (Bryan Bischof, ex-Head of AI at Hex) reframes progress as progressive levels of utility rather than a binary ship/not-ship [^src11]. For a query assistant: (1) can generate syntactically valid queries → (2) queries that execute without errors → (3) queries that return relevant results → (4) queries that match user intent → (5) optimal queries that solve the problem. This lets teams show concrete progress through funnel stages even before the final solution, and helps executives see *where* problems occur and where to invest [^src11].
+
+**Commit to a cadence of experimentation, not specific outcomes** [^src11]. Eugene Yan's timeboxes (developed for ML, applies to LLMs): ~2 weeks data-feasibility ("do I have the right data?") → ~1 month technical-feasibility ("can AI solve this?") → ~6 weeks prototype/A-B; "at any step of the way, if it doesn't work out, we pivot." This gives leadership decision points while preserving room to learn — shift the conversation from outputs to outcomes ("commit to a process that maximizes the chances of the business outcome," not a feature by a date) [^src11].
+
+The pattern this protects: a content-moderation project where "for the first two to three months, nothing worked," then a new technique solved ~80% within a month — a feature-based roadmap would have killed it before the breakthrough [^src11]. The enabling substrate is robust [[ai-engineering/agent-evaluation|evaluation infrastructure]] (the early GitHub Copilot offline-eval investment), and a **failure-sharing culture** — Eugene's weekly "fifteen-five" (15 min to write, 5 to read) deliberately documents failures so the team learns faster [^src11]. "The key metric for AI roadmaps isn't features shipped — it's experiments run" [^src11]. The upstream discovery loop for these experiments is [[ai-engineering/error-analysis|error analysis]].
+
 ## Cross-domain
 
 The *career* dimension of AIPM (job market, "what should I become") lives in [[ai-business/ai-and-the-job-market|AI and the Job Market]] and [[ai-business/technical-career|Navigating a Technical Career]]; this page owns the product/engineering discipline.
@@ -228,6 +244,7 @@ The *career* dimension of AIPM (job market, "what should I become") lives in [[a
 - [[ai-engineering/llm|LLM]] · [[ai-engineering/transformer|Transformer]] — the technical literacy a core AIPM needs
 - [[ai-engineering/agentic-coding|Agentic Coding]] — managing agent fleets in practice
 - [[ai-engineering/agent-evaluation|Agent Evaluation]] — measuring non-deterministic products
+- [[ai-engineering/error-analysis|Error Analysis]] — the highest-ROI improvement loop that feeds the roadmap
 - [[ai-engineering/learning-ai-engineering|Learning AI Engineering]] — the broader learning path
 - [[ai-engineering/README|AI Engineering hub]]
 
@@ -243,6 +260,7 @@ The *career* dimension of AIPM (job market, "what should I become") lives in [[a
 [^src8]: [AI/ML Fundamentals for Product Managers](../../raw/youtube/youtube-GIwi7K-7Ob8-ai-ml-fundamentals-for-product-managers.md) — YouTube
 [^src9]: [Fundamentals of AI Product Management (AI PM Community Session)](../../raw/youtube/youtube-bWjQqE0hIGo-fundamentals-of-ai-product-management-ai-pm-community-sessio.md) — YouTube
 [^src10]: [Product management on the AI exponential — Claude blog](../../raw/web/web-product-management-on-the-ai-exponential-claude.md) — Cat Wu, Head of Product for Claude Code, Anthropic (primary source; the clipping in [^src6] is a processed version)
+[^src11]: [A Field Guide to Rapidly Improving AI Products](../../raw/web/web-a-field-guide-to-rapidly-improving-ai-products-hamels-blog-h.md) — Hamel Husain, hamel.dev
 
 ## PM on the AI exponential — Claude Code team's workflow (Cat Wu)
 
