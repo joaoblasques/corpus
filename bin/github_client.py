@@ -25,8 +25,15 @@ def _gh(api_args, *, _run=None):
 
 
 def gh_available(*, _run=None) -> bool:
+    """True if gh can actually reach the GitHub API with the ambient credentials.
+
+    Probes `gh api user` (which honors GH_TOKEN/GITHUB_TOKEN) rather than
+    `gh auth status`: in a headless sandbox the token is supplied only via env
+    with no hosts.yml, and `gh auth status` returns non-zero there even though
+    `gh api` calls succeed. The API probe reflects what the collector actually
+    needs (connectivity + a usable token)."""
     try:
-        return getattr(_gh(["auth", "status"], _run=_run), "returncode", 1) == 0
+        return getattr(_gh(["api", "user", "--silent"], _run=_run), "returncode", 1) == 0
     except Exception:  # noqa: BLE001
         return False
 
