@@ -1480,3 +1480,11 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - DEFER UNCERTAIN: email-2026-06-26-unit-tests-for-taste-ai-native-or-left-behind-drizzles-npm-p.md — TLDR Dev multi-topic digest newsletter; fetched companions span security/ML/dev-tooling/SEO and are separate raw/web/ sources; routing is a judgment call
 - DEFER UNCERTAIN: web-claude-code-category-blog-claude-by-anthropic.md — Anthropic blog category index; only post titles + category blurb, no article bodies; nothing citable (extraction would require fabrication per §7/§13)
 - DEFER UNCERTAIN: web-agents-category-blog-claude-by-anthropic.md — Anthropic blog category index; only post titles + category blurb, no article bodies; nothing citable (extraction would require fabrication per §7/§13)
+
+## [2026-06-26T17:40] config | scheduled run
+- collectors:
+
+- ingest:
+  - ingest: 0 ingested · 6 deferred · status=ok
+- lint:
+  - 0 broken wikilinks · 0 broken citations · 0 orphans · 0 stubs
