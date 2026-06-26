@@ -1,6 +1,6 @@
 # Corpus Index
 
-> Last updated: 2026-06-26 | Total pages: 278 | Total sources: 1097
+> Last updated: 2026-06-26 | Total pages: 281 | Total sources: 1100
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
@@ -12,6 +12,9 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[ai-engineering/ai-operating-system|AI Operating System]] — concept · draft · structured context/memory/skills/connections layer around a coding agent; 4C's framework; compounding AI intelligence
 - [[ai-engineering/ai-agent|AI Agent]] — concept · draft · LLM + tools + memory + orchestration in an iterative loop
 - [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] — concept · draft · patterns for multiple cooperating agents
+- [[ai-engineering/local-ai-agents|Local AI Agents]] — concept · draft · always-on agents on your own machine; anatomy (host/channel/brain/memory/skills/heartbeat/eyes); OpenClaw vs Cowork; agent teams
+- [[ai-engineering/openclaw|OpenClaw]] — entity · draft · open-source local-agent framework; per-agent model routing for cost, Cloud Hub skill marketplace + its security risk, Mission Control, scoped-email isolation
+- [[ai-engineering/paperclip|Paperclip]] — entity · draft · open-source PM control plane for an agent fleet; goal→issues decomposition, org chart, chief-of-staff agent, blocked-status/autonomy log
 - [[ai-engineering/tool-calling|Tool Calling]] — concept · draft · how LLMs request and receive tool execution results
 - [[ai-engineering/langgraph|LangGraph]] — entity · stub · production framework for stateful multi-agent workflows
 - [[ai-engineering/langsmith|LangSmith]] — entity · draft · agent engineering platform for debugging, evaluation, and observability
