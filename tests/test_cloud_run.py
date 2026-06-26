@@ -224,4 +224,25 @@ def test_doctor_reports_secrets_and_reachability(monkeypatch):
     assert d["GITHUB_TOKEN_set"] is False
     assert d["SCHEDULED_RUN_INGEST_MODEL"] == "claude-sonnet-4-6"
     assert d["gh_auth_status_rc"] == 0 and d["gh_api_user_rc"] == 0
+    assert "gh_auth_status_msg" in d and "gh_api_user_msg" in d
     assert d["branch"] == "claude/abc"
+
+
+def test_doctor_redacts_tokens_in_error_text():
+    # a gh error that echoes a token-shaped string must come back masked
+    def leaky_run(cmd, *a, **k):
+        if "rev-parse" in cmd:
+            return _fake_proc(0, "claude/x\n")
+        p = _fake_proc(1, "HTTP 401: Bad credentials (token github_pat_ABC123def456)")
+        p.stderr = "github_pat_ABC123def456 rejected"
+        return p
+
+    d = cloud_run.doctor(_run=leaky_run)
+    blob = json.dumps(d)
+    assert "github_pat_ABC123def456" not in blob
+    assert "***" in blob
+
+
+def test_redact_masks_common_token_shapes():
+    for tok in ["ghp_abcDEF123", "github_pat_11ABCdef_xyz", "gho_secret9", "a" * 40]:
+        assert tok not in cloud_run._redact(f"prefix {tok} suffix")

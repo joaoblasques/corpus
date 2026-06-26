@@ -124,24 +124,39 @@ def commit_push(repo, *, message=None, token=None, _run=None) -> dict:
     return {"status": "pushed" if push.returncode == 0 else "push-failed", "files": n}
 
 
+def _redact(s: str) -> str:
+    """Mask anything token-shaped so diagnostics can be shown safely."""
+    return re.sub(
+        r"(gh[pousr]_[A-Za-z0-9]+|github_pat_[A-Za-z0-9_]+|[A-Fa-f0-9]{32,})",
+        "***", s or "",
+    )
+
+
 def doctor(*, _run=None) -> dict:
-    """Headless-readiness probe: are the secrets present and is GitHub reachable?
-    Returns booleans/return-codes only — never the token value."""
+    """Headless-readiness probe: are the secrets present, which token is gh using,
+    and what exactly does a GitHub API call return? Captures the (redacted) error
+    text so a failing cloud run tells us network-vs-auth — never the token value."""
     _run = _run or subprocess.run
 
-    def _rc(cmd):
+    def _probe(cmd):
         try:
-            return getattr(_run(cmd, capture_output=True, text=True), "returncode", 1)
-        except Exception:  # noqa: BLE001
-            return 1
+            p = _run(cmd, capture_output=True, text=True)
+            msg = (getattr(p, "stderr", "") or "") + (getattr(p, "stdout", "") or "")
+            return getattr(p, "returncode", 1), _redact(msg).strip()[:280]
+        except Exception as e:  # noqa: BLE001
+            return 1, _redact(str(e))[:280]
 
     branch = _run([GIT_BIN, "rev-parse", "--abbrev-ref", "HEAD"], capture_output=True, text=True)
+    auth_rc, auth_msg = _probe(["gh", "auth", "status"])
+    api_rc, api_msg = _probe(["gh", "api", "user"])
     return {
         "GH_TOKEN_set": bool(os.environ.get("GH_TOKEN")),
         "GITHUB_TOKEN_set": bool(os.environ.get("GITHUB_TOKEN")),
         "SCHEDULED_RUN_INGEST_MODEL": os.environ.get("SCHEDULED_RUN_INGEST_MODEL", ""),
-        "gh_auth_status_rc": _rc(["gh", "auth", "status"]),
-        "gh_api_user_rc": _rc(["gh", "api", "user"]),
+        "gh_auth_status_rc": auth_rc,
+        "gh_auth_status_msg": auth_msg,   # which token/account gh is using
+        "gh_api_user_rc": api_rc,
+        "gh_api_user_msg": api_msg,       # the real error: 401/403 (auth) vs dial/timeout (network)
         "branch": getattr(branch, "stdout", "").strip(),
     }
 
