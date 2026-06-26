@@ -91,3 +91,4 @@ wonderwhy-er/DesktopCommanderMCP
 yangshun/tech-interview-handbook
 zazencodes/agent-skills
 zazencodes/ai-engineer-roadmap-notebooks
+dbt-labs/dbt-core

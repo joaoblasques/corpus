@@ -1448,3 +1448,11 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - pages touched: [claude-for-finance (new)]
 - new pages: [claude-for-finance]
 - notes: New concept page — 9-stage gated FP&A workflow via the Claude Excel add-in: inventory-before-insight, protected baseline, plan-first, formula-driven/auditable 3-statement+DCF, 13-week cash forecast, model-selection-by-task-type. Cross-linked to prompt-engineering / agentic-workflow / claude-models. ingest-auto run total: 6 processed, 0 deferred, 2 pages created, 2 updated.
+
+## [2026-06-26 22:00] ingest | dbt-labs/dbt-core (GitHub README)
+- source: raw/github/github-dbt-labs-dbt-core.md
+- channel: github
+- domain: data-engineering
+- pages touched: [data-engineering/dbt]
+- new pages: []
+- notes: Corroborating + enriching source for the v2.0 section. New: single-self-contained-binary install detail, OS/arch support matrix (macOS/Linux fully supported; Windows x86-64 yes, ARM not yet), branch structure (main=v2.0 alpha, 1.latest=v1). Latest v1 release v1.11.11. Moved to raw/github/ (new channel dir created).
