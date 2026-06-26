@@ -26,6 +26,7 @@ import base64
 import datetime
 import html as _html
 import json
+import os
 import re
 import sys
 from email.utils import parsedate_to_datetime
@@ -43,6 +44,20 @@ sys.path.insert(0, str(BIN))
 import collect_email as ce  # noqa: E402
 import rank_links as rl  # noqa: E402
 import fetch_link as fl  # noqa: E402
+import secret_env  # noqa: E402
+
+# Cloud/CI supply these as env vars holding the JSON; locally they fall back to
+# the on-disk files above (see bin/secret_env.materialize_secret).
+CREDENTIALS_ENV = "GMAIL_CREDENTIALS_JSON"
+TOKEN_ENV = "GMAIL_TOKEN_JSON"
+
+
+def _resolve_credentials() -> Path:
+    return secret_env.materialize_secret(CREDENTIALS_ENV, CREDENTIALS)
+
+
+def _resolve_token() -> Path:
+    return secret_env.materialize_secret(TOKEN_ENV, TOKEN)
 
 WEB_DIR = ROOT / "raw" / "web"
 YT_DIR = ROOT / "raw" / "youtube"
@@ -151,19 +166,21 @@ def get_service():
     from googleapiclient.discovery import build
 
     creds = None
-    if TOKEN.exists():
-        creds = Credentials.from_authorized_user_file(str(TOKEN), SCOPES)
+    if os.environ.get(TOKEN_ENV) or TOKEN.exists():
+        creds = Credentials.from_authorized_user_file(str(_resolve_token()), SCOPES)
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
-            if not CREDENTIALS.exists():
+            try:
+                creds_path = _resolve_credentials()
+            except FileNotFoundError:
                 raise SystemExit(
-                    f"Missing {CREDENTIALS}.\n"
+                    f"Missing {CREDENTIALS} (and {CREDENTIALS_ENV} unset).\n"
                     "Download an OAuth 'Desktop app' client from Google Cloud "
                     "Console (APIs & Services → Credentials) and save it there."
                 )
-            flow = InstalledAppFlow.from_client_secrets_file(str(CREDENTIALS), SCOPES)
+            flow = InstalledAppFlow.from_client_secrets_file(str(creds_path), SCOPES)
             creds = flow.run_local_server(port=0)
         TOKEN.write_text(creds.to_json(), encoding="utf-8")
     return build("gmail", "v1", credentials=creds, cache_discovery=False)

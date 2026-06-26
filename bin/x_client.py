@@ -22,6 +22,9 @@ _SESSION = requests.Session()
 
 sys.path.insert(0, str(BIN))
 import collect_x as cx  # noqa: E402,F401  (used by cmd_run/cmd_reap in Task 3)
+import secret_env  # noqa: E402
+
+TOKEN_ENV = "X_TOKEN_JSON"  # cloud/CI supply the token JSON here; else fall back to TOKEN file
 
 
 def _pkce_pair():
@@ -32,10 +35,12 @@ def _pkce_pair():
 
 
 def _load_token():
-    if not TOKEN.exists():
+    try:
+        path = secret_env.materialize_secret(TOKEN_ENV, TOKEN)
+    except FileNotFoundError:
         return None
     try:
-        return json.loads(TOKEN.read_text(encoding="utf-8"))
+        return json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError):
         return None
 

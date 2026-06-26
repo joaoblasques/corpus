@@ -31,14 +31,16 @@ def test_build_document_tolerates_missing_pieces():
 
 def test_write_collected_writes_then_dedups(tmp_path):
     d = tmp_path / "_inbox"
-    r1 = cg.write_collected(REPO, collected_at="2026-06-22", inbox=d, dedup_dirs=[d])
+    led = tmp_path / "github_digested.txt"  # isolated ledger — don't touch the real one
+    r1 = cg.write_collected(REPO, collected_at="2026-06-22", inbox=d, dedup_dirs=[d], ledger_path=led)
     assert r1["status"] == "written" and Path(r1["path"]).name == "github-anthropics-claude-code.md"
-    r2 = cg.write_collected(REPO, collected_at="2026-06-22", inbox=d, dedup_dirs=[d])
+    r2 = cg.write_collected(REPO, collected_at="2026-06-22", inbox=d, dedup_dirs=[d], ledger_path=led)
     assert r2["status"] == "duplicate"   # dedup by repo: full-name
 
 
 def test_already_collected_matches_frontmatter_repo_line(tmp_path):
     d = tmp_path / "_inbox"; d.mkdir()
+    led = tmp_path / "noop_ledger.txt"  # isolate from the real on-disk ledger
     (d / "x.md").write_text("---\nchannel: github\nrepo: owner/name\n---\nbody", encoding="utf-8")
-    assert cg.already_collected("owner/name", dirs=[d]) is True
-    assert cg.already_collected("owner/other", dirs=[d]) is False
+    assert cg.already_collected("owner/name", dirs=[d], ledger_path=led) is True
+    assert cg.already_collected("owner/other", dirs=[d], ledger_path=led) is False
