@@ -15,6 +15,7 @@ BIN = Path(__file__).resolve().parent
 sys.path.insert(0, str(BIN))
 import collect_obsidian as co  # noqa: E402
 import fetch_link as fl  # noqa: E402
+import scrape_blog as sb  # noqa: E402
 
 
 def fetch_url(url: str) -> dict:
@@ -31,7 +32,7 @@ def cmd_collect(args) -> int:
     found = co.discover(vault)
     if args.path:
         found = [d for d in found if d["rel_path"].startswith(args.path)]
-    t = {"notes": 0, "urls": 0, "url_failed": 0, "skipped": 0,
+    t = {"notes": 0, "urls": 0, "url_failed": 0, "skipped": 0, "scraped": 0,
          "inline_urls": 0, "inline_failed": 0, "inline_skipped_auth": 0, "inline_dropped": 0}
     processed = 0
     for d in found:
@@ -70,14 +71,23 @@ def cmd_collect(args) -> int:
                         content["text"]), encoding="utf-8")
                     t["inline_urls"] += 1
             else:  # url-list
-                urls = co.parse_url_list(Path(d["abs_path"]).read_text(encoding="utf-8", errors="replace"))
+                text = Path(d["abs_path"]).read_text(encoding="utf-8", errors="replace")
                 ledger = Path(d["abs_path"]).parent / "articles_processed.md"
-                for url in urls:
+                for tgt in co.iter_scrape_targets(text):
+                    url, mode, cap = tgt["url"], tgt["mode"], tgt["cap"]
+                    if mode in ("blog", "series"):
+                        if args.dry_run:
+                            t["scraped"] += 1      # count the seed; no network on dry run
+                            continue
+                        res = sb.scrape_seed(url, mode, cap, collected_at=collected_at,
+                                             via_vault_list=d["rel_path"])
+                        t["scraped"] += res["written"]
+                        continue
+                    # untagged -> existing single-page fetch
                     if co.url_already_collected(url) or co.url_in_ledger(url, ledger):
                         t["skipped"] += 1
                         continue
                     if args.dry_run:
-                        # Count as discovered; do not hit the network on a dry run.
                         t["urls"] += 1
                         continue
                     content = fetch_url(url)

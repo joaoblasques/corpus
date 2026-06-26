@@ -272,3 +272,31 @@ def test_reap_dry_run_counts_frames_but_removes_nothing(tmp_path, monkeypatch, c
     assert called == []                                      # dry-run touches nothing
     assert out["notes_removed"] == 1 and out["frames_removed"] == 2
     assert (slug / "report.md").exists() and (slug / "frame_0001.jpg").exists()
+
+
+def test_cmd_collect_routes_blog_tag_to_scrape_seed(tmp_path, monkeypatch):
+    import obsidian_client as oc
+    import collect_obsidian as co
+    # a vault with a TO SCRAPE.md holding one [blog] seed + one untagged URL
+    listdir = tmp_path / "00_Inbox" / "Clippings"
+    listdir.mkdir(parents=True)
+    (listdir / "TO SCRAPE.md").write_text(
+        "https://blog.example.com [blog]\nhttps://plain.example.com/post\n", encoding="utf-8")
+
+    calls = {"scrape": [], "fetch": []}
+    monkeypatch.setattr(oc.sb, "scrape_seed",
+                        lambda seed, mode, cap, **k: calls["scrape"].append((seed, mode)) or
+                        {"seed": seed, "mode": mode, "found": 3, "written": 3,
+                         "duplicate": 0, "failed": 0, "capped": False})
+    # untagged still goes through fetch_url -> stub it to avoid network + writes
+    monkeypatch.setattr(oc, "fetch_url", lambda u: calls["fetch"].append(u) or {"title": "x", "text": "y"})
+    # keep writes inside tmp: point INBOX at tmp
+    monkeypatch.setattr(co, "INBOX", tmp_path / "inbox")
+    # nothing previously collected
+    monkeypatch.setattr(co, "url_already_collected", lambda u, dirs=None: False)
+    monkeypatch.setattr(co, "url_in_ledger", lambda u, ledger: False)
+
+    rc = oc.main(["collect", "--vault", str(tmp_path)])
+    assert rc == 0
+    assert calls["scrape"] == [("https://blog.example.com", "blog")]   # seed routed
+    assert calls["fetch"] == ["https://plain.example.com/post"]        # untagged single-page
