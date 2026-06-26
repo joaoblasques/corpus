@@ -259,6 +259,7 @@ This is the authoritative Anthropic tutorial — interactive, runnable, and regu
 [^src13]: [FULL Claude Tutorial For Beginners in 2026! (FULL COURSE)](../../raw/youtube/youtube-Xg55nTrbYYY-full-claude-tutorial-for-beginners-in-2026-full-course.md) — Productive Dude, YouTube
 [^src14]: [cladius/agentic-ai — agentic AI jumpstart (★73)](../../raw/github/github-cladius-agentic-ai.md) — cladius, GitHub; ADK, Agno, Bedrock, LangFlow, LangGraph
 [^src15]: [Sumanth077/ai-engineering-toolkit — 100+ libraries and frameworks for LLM engineers (★3,216)](../../raw/github/github-sumanth077-ai-engineering-toolkit.md) — GitHub
+[^src16]: [Updated Essential AI Skills For 2026](../../raw/youtube/youtube-tu4rU4YD1Jk-updated-essential-ai-skills-for-2026.md) — Tina Huang, YouTube ("AI fundamentals"); basic→intermediate→advanced skills ladder
 
 ## AI Engineering Toolkit (Sumanth077, ★3,216)
 

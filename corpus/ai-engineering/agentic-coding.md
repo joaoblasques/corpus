@@ -162,7 +162,7 @@ tags:
   - corpus/ai-engineering
   - synthesis
 created: 2026-06-12
-updated: 2026-06-25
+updated: 2026-06-26
 ---
 
 # Agentic Coding
@@ -758,6 +758,7 @@ Key constraint: HTML output works best when the agent writes the whole file at o
 [^src35]: [The Unreasonable Effectiveness of HTML (gallery)](../../raw/web/web-github-anthropics-html-effectiveness-html-effectiveness-exam.md) — Anthropic gallery
 [^src36]: [How Software Engineers Actually Use Coding Agents in 2026](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-how-software-engi-report.md) — YouTube (processed notes report); Pragmatic Engineer 2026 adoption survey
 [^src37]: [ProteoWizard/pwiz-ai — AI tooling and documentation for ProteoWizard/Skyline](../../raw/web/web-github-proteowizard-pwiz-ai-ai-tooling-and-documentation-for.md) — Brendan MacLean / MacCoss Lab, GitHub; primary source (alongside the Skyline case study note) for the pwiz-ai "reference don't embed" context architecture
+[^src38]: [My Real AI Coding Workflow (build anything)](../../raw/youtube/youtube-gpOfsGW1xRk-my-real-ai-coding-workflow-build-anything.md) — Tech With Tim, YouTube; research-first workflow, Cursor + skills/MCP/rules harness setup, prompt→run→debug loop
 
 ## ProteoWizard pwiz-ai — LLM context docs pattern
 

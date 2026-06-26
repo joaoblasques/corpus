@@ -81,6 +81,9 @@ sources:
   - path: raw/youtube/youtube-AkdFKnufNQo-claude-code-runs-my-business-13-workflows.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/youtube/youtube-b4d32pBa3UY-this-ai-brain-will-make-you-so-smart-its-almost-unfair.md
+    channel: youtube
+    ingested_at: 2026-06-26
 aliases:
   - AI OS
   - AIOS
@@ -97,7 +100,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-21
-updated: 2026-06-25
+updated: 2026-06-26
 ---
 
 # AI Operating System
@@ -288,6 +291,28 @@ A 30-minute setup pattern for a production agentic OS using four layers [^src17]
 
 **Key framing** [^src17]: "A chatbot is a conversation. An agentic OS is infrastructure." The distinction is persistence, composability, and event-driven execution — the same properties that distinguish an OS from a REPL.
 
+## The "AI brain" build (Dan Martell): identity triplet, 7 folders, overnight cron
+
+A non-technical-facing walkthrough that lands on the same architecture as the practitioner models above, with three concrete additions worth recording [^src22].
+
+**The identity triplet** — three files that "turn your AI from a tool to a digital clone that sounds exactly like you" [^src22]:
+
+| File | Question it answers | Contents |
+|---|---|---|
+| `user.md` | *Who you are* | role, communication style, the frameworks you live by, how to present problems to you |
+| `soul.md` | *How the AI acts* | the voice, tone, and values the AI adopts ("talk like Dan… challenge me with love… no hedgy words"); "be resourceful — try to solve before you ask" |
+| `identity.md` | *Who the AI is* | the agent's role/persona (he named his "Kai" — had the AI name itself after two weeks) |
+
+"The user file is how you are; the soul is how it acts" [^src22]. Pro tip: don't write them by hand — have the AI interview you ("interview me about how I work, what I value, how I communicate") and draft all three. This is the consumer-named version of the `me.md`/`SOUL.md` identity layer in the Nick Milo and Nufar Gaspar models above.
+
+**Wire before you feed (the 7-folder vault).** Structure precedes ingestion — the claim is that setting up folders moved answer accuracy "from 60% to 85%," because "no structure means AI just drowns in noise and eventually hallucinates" [^src22]. The seven folders: `people`, `projects`, `decisions`, `companies`, `meetings`, `daily` (a 3–5-line daily dump), `knowledge` (reusable insights/frameworks/quotes). An eighth "pro-tip" folder — **MOC (maps of content)** — holds summary files that link a scattered body of work into one reference (e.g. a `youtube.md` MOC linking scripting frameworks + hook libraries + thumbnail tasks), built only "when a topic seems to get messy." This is the [[productivity/obsidian-pkm|Obsidian PKM]] MOC pattern applied as agent memory structure.
+
+**Feed via extraction, not dumping.** Connect source systems, then have the AI *extract* only decision-relevant signal into the folder structure — "the brain only needs the information it needs to make decisions." Concrete pattern: [[productivity/ai-augmented-knowledge-work|Granola]] auto-transcribes meetings, and a custom extraction template pulls four things into the `meetings` folder — **decisions** (what/by whom/why), **commitments** (who/what/by when), **preferences** (how people work), **key insights** (frameworks, strategic shifts) — "output as Markdown, skip small talk" [^src22].
+
+**Overnight compounding via cron.** The differentiator from mere storage: a nightly process that "rewires itself" the way sleep consolidates memory — find orphan notes, create missing files for mentioned people/projects/companies, consolidate duplicates, update the relevant MOCs with new links, and flag strategic items for review. Run it manually (an end-of-day prompt) or automate it with **Claude's scheduled tasks as an 11 p.m. cron job** running the same prompt every night [^src22]. This is the [[ai-engineering/sleep-time-compute|sleep-time-compute]] idea expressed as a personal-knowledge routine, and the same cadence/automation layer the four-C's and seven-layer models put at the top of the stack.
+
+The payoff framing — "you can't have an autonomous agent unless it has context" — restates this page's core thesis: the model is the engine, the structured file system is the fuel [^src22].
+
 ## See also
 
 - [[ai-engineering/context-engineering|Context Engineering]] — the theoretical foundation; an AIOS is applied context engineering
@@ -399,3 +424,4 @@ Practitioner example of running an entire business through Claude Code [^src21]:
 [^src19]: [How To Build a Personal Agentic Operating System](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-how-to-build-a-pe-report.md) — Nufar Gaspar / AI Daily Brief, processed notes report; primary source for 7-layer model (Identity→Context→Skills→Memory→Connections→Verification→Automations)
 [^src20]: [How to Build Your Own AI Operating System (Full Stack Explained)](../../raw/youtube/youtube-rZX1OYetbSM-how-to-build-your-own-ai-operating-system-full-stack-explain.md) — Dave Ebbelaar, YouTube; primary source for 3-layer technical architecture + FastAPI/Redis/Celery stack
 [^src21]: [Claude Code RUNS My Business (13 WORKFLOWS)](../../raw/youtube/youtube-AkdFKnufNQo-claude-code-runs-my-business-13-workflows.md) — Brad / AI & Automation, YouTube; primary source for 13-workflow business OS pattern
+[^src22]: [This AI Brain Will Make You So Smart It's Almost Unfair](../../raw/youtube/youtube-b4d32pBa3UY-this-ai-brain-will-make-you-so-smart-its-almost-unfair.md) — Dan Martell, YouTube; identity triplet (user/soul/identity.md), 7-folder vault + MOC, Granola meeting extraction, overnight cron compounding
