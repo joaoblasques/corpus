@@ -61,6 +61,43 @@ def parse_url_list(text: str) -> list:
     return out
 
 
+DEFAULT_BLOG_CAP = 200
+SCRAPE_TAG_RE = re.compile(r"\[(blog|series)(?::(\d+))?\]\s*$")
+
+
+def parse_scrape_tag(line: str) -> dict:
+    """Parse a url-list line's optional trailing scrape tag.
+
+    `<url> [blog]` / `<url> [blog:N]` / `<url> [series]`. Returns
+    {url, mode, cap}: mode in {None, 'blog', 'series'} (None = untagged, the
+    existing single-page path); cap is the [blog:N] number or DEFAULT_BLOG_CAP.
+    url is '' when the line has no http(s) URL.
+    """
+    s = (line or "").strip()
+    mode, cap = None, DEFAULT_BLOG_CAP
+    m = SCRAPE_TAG_RE.search(s)
+    if m:
+        mode = m.group(1)
+        if m.group(2):
+            cap = int(m.group(2))
+        s = s[:m.start()].strip()
+    um = URL_RE.search(s)
+    url = um.group(0).rstrip(".,)") if um else ""
+    return {"url": url, "mode": mode, "cap": cap}
+
+
+def iter_scrape_targets(text: str) -> list:
+    """Per-line {url, mode, cap} for every url-list line that holds a URL,
+    order-preserved and deduped by url (first occurrence's tag wins)."""
+    seen, out = set(), []
+    for line in (text or "").splitlines():
+        tgt = parse_scrape_tag(line)
+        if tgt["url"] and tgt["url"] not in seen:
+            seen.add(tgt["url"])
+            out.append(tgt)
+    return out
+
+
 def extract_inline_links(body: str, source_url: str = "") -> dict:
     """External http(s) links in a note body: deduped, minus the source URL, asset
     links, and auth-walled domains; capped at MAX_LINKS_PER_NOTE."""

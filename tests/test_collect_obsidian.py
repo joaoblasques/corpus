@@ -231,3 +231,27 @@ def test_extract_inline_links_respects_cap():
     r = co.extract_inline_links(body)
     assert len(r["links"]) == co.MAX_LINKS_PER_NOTE
     assert r["dropped"] == 5
+
+
+def test_parse_scrape_tag_blog_series_and_untagged():
+    assert co.parse_scrape_tag("https://blog.example.com [blog]") == {
+        "url": "https://blog.example.com", "mode": "blog", "cap": 200}
+    assert co.parse_scrape_tag("https://blog.example.com [blog:50]") == {
+        "url": "https://blog.example.com", "mode": "blog", "cap": 50}
+    assert co.parse_scrape_tag("- https://site.com/the-series  [series]") == {
+        "url": "https://site.com/the-series", "mode": "series", "cap": 200}
+    assert co.parse_scrape_tag("https://plain.example.com/post") == {
+        "url": "https://plain.example.com/post", "mode": None, "cap": 200}
+    assert co.parse_scrape_tag("no url here [blog]")["url"] == ""
+
+
+def test_iter_scrape_targets_dedups_and_preserves_order():
+    text = ("https://a.com [blog]\n"
+            "- https://b.com/series [series]\n"
+            "https://c.com/post\n"
+            "https://a.com [blog:5]\n")   # dup url, first tag wins
+    out = co.iter_scrape_targets(text)
+    assert [t["url"] for t in out] == ["https://a.com", "https://b.com/series", "https://c.com/post"]
+    assert out[0] == {"url": "https://a.com", "mode": "blog", "cap": 200}
+    assert out[1]["mode"] == "series"
+    assert out[2]["mode"] is None
