@@ -25,3 +25,13 @@ def test_token_falls_back_to_file_when_env_absent(tmp_path, monkeypatch):
     p = gmail_client._resolve_token()
     assert p == fake
     assert p.read_text(encoding="utf-8") == '{"from": "file"}'
+
+
+def test_credentials_fall_back_to_file_when_env_absent(tmp_path, monkeypatch):
+    monkeypatch.delenv("GMAIL_CREDENTIALS_JSON", raising=False)
+    fake = tmp_path / "credentials.json"
+    fake.write_text('{"installed": {"from": "file"}}', encoding="utf-8")
+    monkeypatch.setattr(gmail_client, "CREDENTIALS", fake)
+    p = gmail_client._resolve_credentials()
+    assert p == fake
+    assert p.read_text(encoding="utf-8") == '{"installed": {"from": "file"}}'

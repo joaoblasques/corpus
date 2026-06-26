@@ -40,6 +40,7 @@ def test_write_collected_writes_then_dedups(tmp_path):
 
 def test_already_collected_matches_frontmatter_repo_line(tmp_path):
     d = tmp_path / "_inbox"; d.mkdir()
+    led = tmp_path / "noop_ledger.txt"  # isolate from the real on-disk ledger
     (d / "x.md").write_text("---\nchannel: github\nrepo: owner/name\n---\nbody", encoding="utf-8")
-    assert cg.already_collected("owner/name", dirs=[d]) is True
-    assert cg.already_collected("owner/other", dirs=[d]) is False
+    assert cg.already_collected("owner/name", dirs=[d], ledger_path=led) is True
+    assert cg.already_collected("owner/other", dirs=[d], ledger_path=led) is False

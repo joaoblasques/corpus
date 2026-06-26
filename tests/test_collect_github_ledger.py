@@ -16,7 +16,7 @@ def test_write_collected_marks_ledger(monkeypatch, tmp_path):
     marked = []
     monkeypatch.setattr(collect_github.github_ledger, "is_digested", lambda fn, lp=None: False)
     monkeypatch.setattr(collect_github.github_ledger, "mark_digested", lambda fn, lp=None: marked.append(fn))
-    repo = {"full_name": "o/n", "description": "d", "topics": [], "language": "Py", "stargazers_count": 1}
+    repo = {"full_name": "o/n", "description": "d", "topics": [], "language": "Py", "stars": 1}
     res = collect_github.write_collected(repo, collected_at="2026-06-26", inbox=tmp_path, dedup_dirs=[tmp_path])
     assert res["status"] == "written"
     assert marked == ["o/n"]
