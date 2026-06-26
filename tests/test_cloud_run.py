@@ -173,26 +173,82 @@ def test_commit_push_cli_nonzero_on_commit_failure():
     assert rc == 1
 
 
-# cloud mode = token present: push HEAD:main via the tokenized URL, no main-guard.
+# cloud mode = token present: push HEAD:main, no main-guard. Strategy order:
+# (1) default credentials (the sandbox's GitHub App connection) against main,
+# (2) tokenized PAT URL fallback. main is unprotected, so either may succeed.
 
-def test_commit_push_cloud_pushes_head_to_main_via_token():
-    run = _git_runner(branch="claude/lucid-pascal", staged_files="corpus/a.md")
+def _cloud_git_runner(default_push_rc, pat_push_rc=0, *, branch="claude/x",
+                      staged="corpus/a.md", pat_stderr="",
+                      origin="https://github.com/joaoblasques/corpus.git"):
+    """Cloud-mode fake: scripts the two push attempts separately. A push whose
+    argv contains a tokenized URL is the PAT attempt; otherwise it's the
+    default-creds `origin HEAD:main` attempt."""
+    calls = []
+
+    def run(cmd, *a, **k):
+        calls.append(cmd)
+        if "rev-parse" in cmd:
+            return _fake_proc(0, branch + "\n")
+        if "remote" in cmd and "get-url" in cmd:
+            return _fake_proc(0, origin + "\n")
+        if "diff" in cmd and "--name-only" in cmd:
+            return _fake_proc(0, staged)
+        if "commit" in cmd:
+            return _fake_proc(0, "")
+        if "push" in cmd:
+            is_pat = any("x-access-token" in str(x) for x in cmd)
+            p = _fake_proc(pat_push_rc if is_pat else default_push_rc, "")
+            if is_pat:
+                p.stderr = pat_stderr
+            return p
+        return _fake_proc(0, "")
+
+    run.calls = calls
+    return run
+
+
+def test_commit_push_cloud_pushes_via_default_creds_first():
+    # default-creds push to main succeeds -> never builds the PAT URL
+    run = _cloud_git_runner(default_push_rc=0)
     res = cloud_run.commit_push(cloud_run.ROOT, token="ghpat_SECRET", _run=run)
-    assert res["status"] == "pushed"          # NOT aborted despite non-main branch
-    push = [c for c in run.calls if "push" in c][0]
-    assert "HEAD:main" in push
-    joined = " ".join(push)
-    assert "x-access-token:ghpat_SECRET@github.com/joaoblasques/corpus.git" in joined
+    assert res["status"] == "pushed"
+    pushes = [c for c in run.calls if "push" in c]
+    assert pushes[0][-2:] == ["origin", "HEAD:main"]   # plain default-creds push
+    assert not any("x-access-token" in str(c) for c in run.calls)   # PAT not used
+
+
+def test_commit_push_cloud_falls_back_to_pat_when_default_push_fails():
+    run = _cloud_git_runner(default_push_rc=1, pat_push_rc=0, branch="claude/lucid-pascal")
+    res = cloud_run.commit_push(cloud_run.ROOT, token="ghpat_SECRET", _run=run)
+    assert res["status"] == "pushed"
+    pat_push = [c for c in run.calls if "push" in c and any("x-access-token" in str(x) for x in c)][0]
+    assert "HEAD:main" in pat_push
+    assert "x-access-token:ghpat_SECRET@github.com/joaoblasques/corpus.git" in " ".join(pat_push)
+
+
+def test_commit_push_cloud_push_failed_captures_redacted_error():
+    # both strategies fail; the PAT stderr (which embeds the token) must come
+    # back as a redacted push_error so the operator can diagnose, sans token.
+    run = _cloud_git_runner(
+        default_push_rc=1, pat_push_rc=1,
+        pat_stderr="remote: Permission to joaoblasques/corpus.git denied to "
+                   "x-access-token:ghpat_SECRET. fatal: unable to access")
+    res = cloud_run.commit_push(cloud_run.ROOT, token="ghpat_SECRET", _run=run)
+    assert res["status"] == "push-failed"
+    blob = json.dumps(res)
+    assert "ghpat_SECRET" not in blob          # token never leaks
+    assert "***" in res["push_error"]          # redacted but present
+    assert "Permission" in res["push_error"]   # the actionable signal survives
 
 
 def test_commit_push_cloud_noop_when_clean():
-    run = _git_runner(branch="claude/x", staged_files="")
+    run = _cloud_git_runner(default_push_rc=0, staged="")
     res = cloud_run.commit_push(cloud_run.ROOT, token="ghpat_X", _run=run)
     assert res["status"] == "noop"
 
 
 def test_commit_push_report_never_contains_token():
-    run = _git_runner(branch="claude/x", staged_files="corpus/a.md")
+    run = _cloud_git_runner(default_push_rc=1, pat_push_rc=0)
     res = cloud_run.commit_push(cloud_run.ROOT, token="ghpat_SECRET", _run=run)
     assert "ghpat_SECRET" not in json.dumps(res)
 

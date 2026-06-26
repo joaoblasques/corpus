@@ -47,3 +47,14 @@ raw/.scheduled_run.log
 
 # local-first LLM router usage log
 raw/.llm_usage.jsonl
+
+# whisper youtube-rescue worklists + logs — local feeder state
+raw/.whisper_keepers.tsv
+raw/.whisper_worklist.tsv
+raw/.whisper_rescue.log
+raw/.whisper_rescue_run.log
+raw/.weekly_synthesis.log
+
+# session scratch — browser-MCP artifacts + superpowers SDD ledger
+.playwright-mcp/
+.superpowers/
