@@ -1392,3 +1392,19 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   - ingest: 0 ingested · 0 deferred · status=ok
 - lint:
   - 0 broken wikilinks · 0 broken citations · 0 orphans · 0 stubs
+
+## [2026-06-26T13:48] config | scheduled run
+- collectors:
+
+- ingest:
+  - ingest: 0 ingested · 0 deferred · status=failed · error=You've hit your session limit · resets 5pm (Europe/Lisbon)
+- lint:
+  - 0 broken wikilinks · 0 broken citations · 0 orphans · 0 stubs
+
+## [2026-06-26T13:48] config | scheduled run
+- collectors:
+
+- ingest:
+  - ingest: 0 ingested · 0 deferred · status=failed · error=You've hit your session limit · resets 5pm (Europe/Lisbon)
+- lint:
+  - 0 broken wikilinks · 0 broken citations · 0 orphans · 0 stubs

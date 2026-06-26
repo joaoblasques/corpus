@@ -1,0 +1,61 @@
+---
+type: source
+domain: software-engineering
+status: draft
+sources:
+  - path: raw/youtube/youtube-un6ZyFkqFKo-go-programming-golang-course-with-bonus-projects.md
+    channel: youtube
+    ingested_at: 2026-06-26
+aliases:
+  - Go Golang Course with Bonus Projects
+  - boot.dev Go course
+  - freeCodeCamp Go course
+  - Lane Wagner Go course
+tags:
+  - corpus/software-engineering
+  - source
+created: 2026-06-26
+updated: 2026-06-26
+---
+
+# Source: Go Programming — Golang Course with Bonus Projects (boot.dev / freeCodeCamp)
+
+**TL;DR**: A comprehensive beginners' Go course by Lane Wagner (founder of boot.dev) published via freeCodeCamp. Structured as 100+ hands-on coding lessons plus seven real-world projects, taught around a single running example product called **Textio** (a Twilio-like backend SMS service). The course is one part of boot.dev's full backend-developer career path [^src1].
+
+## Structure and pedagogy
+
+"We're going to start by doing over 100 hands-on coding lessons and exercises," after which learners "go build a production-ready backend server in Go from scratch" [^src1]. The instructor explicitly warns against passive watching — "Tutorial Hell is a very real place" — and insists learners code ahead of him [^src1]. Code samples are hosted on boot.dev (free account) with a GitHub repo mirror [^src1].
+
+The course advertises **seven real-world projects**, "ranging from building an RSS aggregator to implementing authentication with API keys" [^src1].
+
+## Running example: Textio
+
+Most lessons build small pieces of **Textio**, described as "a kind of back-end" product comparable to Twilio (an SMS-sending service) [^src1]. Concrete exercises threaded through the course include:
+
+- choosing `float64` over `int` to store a fractional per-text price [^src1];
+- a computed constant for "the number of seconds in an hour" to handle message-timing logic [^src1];
+- a general `employee` **interface** with full-time and contractor structs (adding a `getSalary` method so the contractor "fulfills the employee interface") [^src1];
+- 2D slices ("a slice of slices") to back message-analytics graphs and dashboards [^src1];
+- **closures** — a `concatter` returning a function that accumulates onto a shared `doc` variable across calls (the "Harry Potter aggregator" example) [^src1];
+- **middleware** for HTTP handlers, "injecting some additional logic into a function," previewed as part of the final backend-server project [^src1].
+
+## Go positioning (per the course)
+
+- "Go has been exploding in popularity… all the most modern tech companies are using Go to build scalable backend infrastructure" [^src1].
+- On execution speed: Go is "much faster than JavaScript, Python, Ruby, and PHP" — any interpreted language [^src1]. On **compilation** speed it beats other compiled languages, which "increases developer productivity quite a bit" [^src1].
+- Nuance: although Go compiles natively (like Rust/C/C++), its runtime execution speed is "more similar to Java and C Sharp" because of the **Go runtime** — "a chunk of code that's included in every Go program that manages memory" — though Go "tends to use much less memory than Java and C Sharp" since there's no full virtual machine [^src1].
+- On package import paths: "when a package isn't part of the standard library… the import path is typically the same as the remote URL that you'd use to go look at that library's source code" [^src1].
+
+## Relationship to the corpus
+
+Corroborates and extends [[software-engineering/go-programming-language|Go Programming Language]] (compiled-vs-interpreted speed, the Go runtime memory trade-off, interfaces, slices, import-path convention). Its project-driven structure complements the project list already on that page (Dreams of Code's five projects) and the syntax-first [[software-engineering/sources/go-full-course-tech-with-tim|Tech With Tim full course]].
+
+## See also
+
+- [[software-engineering/go-programming-language|Go Programming Language]] — the concept page this source feeds
+- [[software-engineering/sources/go-full-course-tech-with-tim|Go Full Course (Tech With Tim)]] — the syntax-first counterpart course
+- [[software-engineering/fastapi|FastAPI]] — comparable backend-API building, in Python
+
+---
+
+[^src1]: [Go Programming — Golang Course with Bonus Projects (boot.dev / freeCodeCamp)](../../../raw/youtube/youtube-un6ZyFkqFKo-go-programming-golang-course-with-bonus-projects.md)
