@@ -54,6 +54,12 @@ sources:
   - path: raw/youtube/youtube--QznXY_pJvw-ai-agents-love-clis.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/_inbox/youtube-kwRTUw8pb2c-agentic-ai-systems-clearly-explained.md
+    channel: youtube
+    ingested_at: 2026-06-27
+  - path: raw/_inbox/youtube-ZaPbP9DwBOE-don-t-learn-ai-agents-without-learning-these-fundamentals.md
+    channel: youtube
+    ingested_at: 2026-06-27
 aliases:
   - ai agent
   - agentic AI
@@ -99,6 +105,24 @@ The "Learn" step distinguishes agentic AI from reactive chatbots (one prompt →
 | Tools | Functions the agent can call |
 | Memory | Short-term (context window) + long-term (vector DB / external storage) |
 | Orchestration layer | Controls the loop, routing, and state |
+
+## 4-level agentic framework
+
+A taxonomy for categorizing the sophistication of an AI system, from passive chatbots to autonomous multi-agent harnesses [^src17]:
+
+| Level | Name | Characteristics |
+|---|---|---|
+| **1** | Chatbot | Passive, static, one-turn response. Waits for input; no memory, no tool use, no autonomy. Classic chat interface. |
+| **2** | AI Workflow | Deterministic automation pipeline (N8N, Zapier, Make). Steps are pre-defined by the human. The LLM processes at defined nodes, but the control flow is fixed — no branching or model-driven decisions. |
+| **3** | Agentic Workflow | Model decides the execution path. Uses the **ReAct loop** (Reason + Act): the LLM reasons about what to do, calls a tool, observes the result, reasons again, repeats. Claude Code, Codex, Cursor are Level 3. |
+| **4** | Agentic AI System | Full autonomous runtime: harness + persistent memory + skill library + MCP tool access + long-running session. The agent can run for hours/days without human input. Hermes, OpenClaw, Claude Managed Agents are Level 4. |
+
+**Key boundaries**:
+- Level 1→2: determinism added (structured workflow, not one-shot response)
+- Level 2→3: model makes control-flow decisions (non-deterministic execution path)
+- Level 3→4: persistence and compounding memory (the agent remembers across sessions and self-improves)
+
+Level 3 vs. Level 4 is where practitioners diverge in tooling choices: Level 3 uses embedded code agents (Claude Code inside your IDE); Level 4 uses standalone harnesses that run continuously on a VPS or cloud environment [^src17].
 
 ## When to use an agent vs a simple LLM call
 
@@ -251,6 +275,9 @@ Key properties [^src14]:
 [^src13]: [Skill Issue: Andrej Karpathy on Code Agents, Auto-Research, and...](../../raw/youtube/youtube-kwSVtQ7dziU-skill-issue-andrej-karpathy-on-code-agents-autoresearch-and.md) — No Priors podcast, YouTube
 [^src14]: [aaif-goose/goose — Goose AI agent (★50K)](../../raw/github/github-aaif-goose-goose.md) — AAIF / Linux Foundation, GitHub
 [^src15]: [AI Agents LOVE CLIs](../../raw/youtube/youtube--QznXY_pJvw-ai-agents-love-clis.md) — Maximilian Schwarzmüller, YouTube
+[^src16]: [Agents in Action #1 — What is an AI Agent?](../../raw/email/email-2026-06-13-agents-in-action-1-what-is-an-ai-agent.md) — Pipeline to Insights email
+[^src17]: [Agentic AI Systems Clearly Explained](../../raw/_inbox/youtube-kwRTUw8pb2c-agentic-ai-systems-clearly-explained.md) — Simon Scrapes, YouTube; 4-level framework (chatbot→workflow→agentic-workflow→agentic-AI-system)
+[^src18]: [Don't Learn AI Agents Without Learning These Fundamentals](../../raw/_inbox/youtube-ZaPbP9DwBOE-don-t-learn-ai-agents-without-learning-these-fundamentals.md) — KodeKloud, YouTube; corroborates core loop, component architecture, and agent vs simple LLM call decision criteria
 
 ## Why AI agents love CLIs (the GUI → CLI reversal)
 

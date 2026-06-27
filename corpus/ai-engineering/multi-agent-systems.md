@@ -42,6 +42,9 @@ sources:
   - path: raw/youtube/youtube-iRew6HOY0ho-paperclip-agent-collab-made-easy.md
     channel: youtube
     ingested_at: 2026-06-26
+  - path: raw/_inbox/youtube-ow1we5PzK-o-the-multi-agent-architecture-that-actually-ships-luke-alvoei.md
+    channel: youtube
+    ingested_at: 2026-06-27
 aliases:
   - multi-agent
   - multi-agent system
@@ -54,6 +57,15 @@ aliases:
   - agent teams
   - message bus
   - shared state
+  - Factory Missions
+  - factory missions architecture
+  - validation contract
+  - droid whispering
+  - creator-verifier pattern
+  - delegation pattern
+  - direct communication pattern
+  - negotiation pattern
+  - broadcast pattern
 tags:
   - corpus/ai-engineering
   - concept
@@ -263,6 +275,52 @@ Anthropic identifies three core justifications for adding agents to a system [^s
 
 The Notion case study (Eric Liu, PM) documents a production implementation where **30-40 agent tasks run simultaneously** inside Notion's task board [^src8]. The orchestrator pattern: a Notion "ready to start" column triggers individual Claude sessions per task; team members collaborate on shared output in real time. Claude picks up context from connected design system, API docs, and PRDs automatically. "12 hours of prototyping work collapse into about 20 minutes." — This is the orchestrator-subagent pattern (§ above) at production scale, with the orchestrator being the task board state machine rather than a Claude agent itself.
 
+## Factory Missions (production multi-agent coding system)
+
+Factory (company: Luke Alvoeiro) ships **Missions** — a production multi-agent system for enterprise software development. It provides a concrete architecture for how multi-agent systems actually ship code at enterprise scale [^src13].
+
+### 5 communication patterns
+
+Factory identifies five patterns for how agents communicate, with distinct selection criteria [^src13]:
+
+| Pattern | Description | When to use |
+|---|---|---|
+| **1. Delegation** | Orchestrator assigns work to a worker; worker completes and returns | Default pattern; clear task decomposition, bounded output |
+| **2. Creator-Verifier** | One agent creates; a separate agent verifies against criteria | Quality-critical output; evaluation criteria can be made explicit |
+| **3. Direct Communication** | Two agents message each other without orchestrator mediation | Tight collaboration where intermediate orchestration adds latency |
+| **4. Negotiation** | Agents iterate back-and-forth to resolve ambiguity or tradeoffs | Competing constraints (speed vs. quality, coverage vs. precision) |
+| **5. Broadcast** | One agent publishes to many receivers | Status updates, context that all workers need simultaneously |
+
+### 3-role architecture (Orchestrator / Workers / Validators)
+
+Factory Missions uses three role types, not two [^src13]:
+
+- **Orchestrator** — plans the mission, decomposes into tasks, assigns to workers, aggregates results
+- **Workers** — execute bounded tasks; each worker owns a specific piece of the codebase or workflow
+- **Validators** — two independent validator types:
+  - **Scrutiny validators**: tests, lint, code-review agents — automated correctness checks
+  - **User-testing validators**: computer-use agents that fill forms, click buttons, navigate flows — behavioral correctness checks
+
+### Validation contract written during planning
+
+The key discipline: the **validation contract is written during the planning phase, before any code is written** [^src13]. The contract defines what "correct" means independently of the implementation — so validators are not influenced by the implementation choices and cannot rationalize a wrong implementation as "good enough."
+
+This is the same generator-evaluator separation principle as the Anthropic taxonomy above (§ Five coordination patterns, Generator-Verifier), extended to two validator types (automated + behavioral).
+
+### Serial execution with internal parallelism
+
+Factory Missions runs worker tasks **serially by default** with internal parallelism only for read-only operations [^src13]. The reasoning: parallel writes to the same codebase cause merge conflicts; serial writes with structured handoffs between workers eliminate the conflict surface. Read-only phases (analysis, search, context-gathering) run in parallel within each serial task.
+
+The longest Factory Mission documented: **16 days** — a single coordinated run with workers handing off context through structured artifacts [^src13].
+
+### Droid whispering
+
+"**Droid whispering**" is the Factory team's term for the skill of selecting the right model for each role in a multi-agent system [^src13]. Different agents benefit from different model strengths: a planner might use Opus (deep reasoning); a search/indexing worker might use Sonnet (speed, cost); a validator might use a specialized code-eval model. Getting this assignment right is presented as a craft skill, not a configuration detail.
+
+### Mission Control UI
+
+Factory provides a **Mission Control** visual interface showing each agent, its current state, task assignments, and the full handoff log — the same monitoring problem that motivates [[ai-engineering/openclaw|OpenClaw]]'s Mission Control and [[ai-engineering/paperclip|Paperclip]]'s project-management UI [^src13].
+
 ## See also
 
 - [[ai-engineering/ai-agent|AI Agent]] — single-agent building block
@@ -285,3 +343,4 @@ The Notion case study (Eric Liu, PM) documents a production implementation where
 [^src10]: [When to use multi-agent systems — and when not to](../../raw/web/web-when-to-use-multi-agent-systems-and-when-not-to-claude.md) — Anthropic
 [^src11]: [Local AI Agents In 26 Minutes](../../raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md) — Tina Huang, YouTube
 [^src12]: [Paperclip: Agent Collab Made Easy](../../raw/youtube/youtube-iRew6HOY0ho-paperclip-agent-collab-made-easy.md) — The Next New Thing, YouTube
+[^src13]: [The Multi-Agent Architecture That Actually Ships — Luke Alvoeiro (Factory)](../../raw/_inbox/youtube-ow1we5PzK-o-the-multi-agent-architecture-that-actually-ships-luke-alvoei.md) — AI Engineer channel, YouTube

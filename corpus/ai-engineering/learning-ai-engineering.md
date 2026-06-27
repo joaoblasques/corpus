@@ -51,6 +51,9 @@ sources:
   - path: raw/youtube/youtube-tu4rU4YD1Jk-updated-essential-ai-skills-for-2026.md
     channel: youtube
     ingested_at: 2026-06-26
+  - path: raw/_inbox/web-top-ai-blogs-every-software-developer-must-follow-in-2026.md
+    channel: web
+    ingested_at: 2026-06-27
 aliases:
   - learning AI
   - learning AI engineering
@@ -278,3 +281,24 @@ A curated reference list of 100+ libraries, frameworks, and tools for production
 - **Local development**: Ollama, LM Studio, Jan
 
 **Use case**: a quick reference for choosing the right library when building RAG pipelines, agent systems, evaluation harnesses, or local inference setups. Complements [[ai-engineering/rag|RAG]], [[ai-engineering/agent-evaluation|Agent Evaluation]], and [[ai-engineering/llm|LLM]] pages as a practical tooling index.
+
+## High-signal AI/ML blogs and newsletters
+
+A curated list of practitioner-level blogs for staying current on AI/ML research and engineering [^src17]:
+
+| Publication | Author / Publisher | Focus |
+|---|---|---|
+| **Ahead of AI** (Substack) | Sebastian Raschka | ML research, paper breakdowns, LLM internals |
+| **Deep Learning Weekly** | Cameron Wolfe | Weekly deep learning research digest |
+| **Daniel Blalock** (Substack) | Daniel Blalock | Deep ML/compression research |
+| **The Gradient** | The Gradient Media | Long-form AI research journalism |
+| **Towards Data Science** | Medium publication | Applied ML, DS, and engineering tutorials |
+| **PyTorch Blog** | PyTorch / Meta | Framework releases, official tutorials, production tips |
+| **Zencoder Blog** | Zencoder | AI coding tools, agentic development |
+| **GitHub Blog (AI section)** | GitHub | Copilot, Codespaces, models, dev tooling |
+
+**Selection criteria**: publication frequency (weekly minimum), practitioner vs. hype orientation, mix of research-to-engineering translation [^src17].
+
+**Usage pattern for staying current**: read Ahead of AI for research depth; The Gradient for narrative context; Towards Data Science for applied how-tos; PyTorch Blog for framework changes that affect practice.
+
+[^src17]: [Top AI Blogs Every Software Developer Must Follow in 2026](../../raw/_inbox/web-top-ai-blogs-every-software-developer-must-follow-in-2026.md)

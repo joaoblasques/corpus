@@ -12,6 +12,9 @@ sources:
   - path: raw/youtube/youtube-S_oN3vlzpMw-how-ai-agents-claude-skills-work-clearly-explained.md
     channel: youtube
     ingested_at: 2026-06-26
+  - path: raw/_inbox/youtube-fgr6Sm-dmmM-i-replaced-openclaw-with-perplexity-computer.md
+    channel: youtube
+    ingested_at: 2026-06-27
 aliases:
   - OpenClaw
   - open claw
@@ -66,10 +69,30 @@ The first version — told only to "research the sponsor and tell me if they're 
 
 OpenClaw exposes a **memory layer** the agent uses to "do the right thing" given proper context [^src3] [13:09](../../raw/youtube/youtube-S_oN3vlzpMw-how-ai-agents-claude-skills-work-clearly-explained.md#t=13:09). The sub-agent advice mirrors Paperclip's *scale-for-productivity-not-for-looks*: start with **one main agent**, add sub-agents only once you have working skills/workflows — this practitioner ended with sub-agents for marketing, business, and personal, each with its own skills and context [^src3] [25:50](../../raw/youtube/youtube-S_oN3vlzpMw-how-ai-agents-claude-skills-work-clearly-explained.md#t=25:50).
 
+## OpenClaw vs Perplexity Computer
+
+A practitioner comparison identified a clear use-case boundary between OpenClaw and [[ai-engineering/perplexity-computer|Perplexity Computer]] (a cloud-native AI agent product) [^src4]:
+
+| Dimension | OpenClaw | Perplexity Computer |
+|---|---|---|
+| Setup | Self-hosted, requires VPS + Docker | Zero setup, cloud-native |
+| Customization | Maximally customizable (any model, any skill) | Constrained to Perplexity's connector set |
+| Best for | Repeatable business automations | One-off complex research tasks |
+| Cost model | API costs only, no platform fee | $200/month Max plan (10K credits) |
+
+The use-case split: OpenClaw for automation workflows you run repeatedly; Perplexity Computer for ad hoc, complex multi-angle research that benefits from parallel sub-agents and zero-setup convenience [^src4].
+
+## Reliability and community positioning
+
+Practitioners who switched from OpenClaw to [[ai-engineering/hermes|Hermes]] (a competing harness) cite OpenClaw's historically unstable releases as the main reason — "breaking updates" without warning [^src9 via hermes comparison]. The OpenClaw creator counter is that the project's open-source nature allows community forks and customization that closed-source alternatives can't match.
+
+> Note: Hermes-vs-OpenClaw comparisons are from Hermes practitioners, not OpenClaw maintainers.
+
 ## Relationship to other tools
 
 - **[[ai-engineering/paperclip|Paperclip]]** — a project-management layer that connects and orchestrates existing OpenClaw agents (and can create new ones) [^src2].
 - **[[ai-engineering/claude-cowork|Claude Cowork]]** — Anthropic's local-agent product; "a lot safer and a lot easier to use," no-code, but you "get locked into Anthropic's system" with less customization [^src1] [20:09](../../raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md#t=20:09). Many practitioners run OpenClaw and Cowork side by side for different use cases [^src1].
+- **[[ai-engineering/perplexity-computer|Perplexity Computer]]** — cloud-native alternative; better for one-off complex tasks; see comparison above [^src4].
 
 ## See also
 
@@ -84,3 +107,4 @@ OpenClaw exposes a **memory layer** the agent uses to "do the right thing" given
 [^src1]: [Local AI Agents In 26 Minutes](../../raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md) — Tina Huang, YouTube
 [^src2]: [Paperclip: Agent Collab Made Easy](../../raw/youtube/youtube-iRew6HOY0ho-paperclip-agent-collab-made-easy.md) — The Next New Thing, YouTube
 [^src3]: [How AI agents & Claude skills work (Clearly Explained)](../../raw/youtube/youtube-S_oN3vlzpMw-how-ai-agents-claude-skills-work-clearly-explained.md) — Greg Isenberg × Ras Mic, YouTube
+[^src4]: [I Replaced OpenClaw with Perplexity Computer](../../raw/_inbox/youtube-fgr6Sm-dmmM-i-replaced-openclaw-with-perplexity-computer.md) — Tech With Tim, YouTube

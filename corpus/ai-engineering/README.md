@@ -31,6 +31,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] — concept · draft · patterns for multiple cooperating agents (sequential, parallel, supervisor, data-driven)
 - [[ai-engineering/local-ai-agents|Local AI Agents]] — concept · draft · always-on agents running on your own machine; anatomy (host/channel/brain/memory/skills/heartbeat/eyes); OpenClaw vs Cowork
 - [[ai-engineering/openclaw|OpenClaw]] — entity · draft · open-source local-agent framework; per-agent model routing, Cloud Hub skill marketplace, Mission Control
+- [[ai-engineering/perplexity-computer|Perplexity Computer]] — entity · draft · cloud-native zero-setup AI agent; model-agnostic auto-routing, parallel sub-agents, $200/month Max plan; complement to OpenClaw for one-off complex tasks
 - [[ai-engineering/paperclip|Paperclip]] — entity · draft · open-source project-management control plane for managing a fleet of agents; goal→issues, org chart, chief-of-staff
 - [[ai-engineering/tool-calling|Tool Calling]] — concept · draft · how LLMs request and receive tool execution results
 - [[ai-engineering/agent-evaluation|Agent Evaluation]] — concept · draft · online/offline evaluation, LLM-as-judge, golden datasets, production feedback loop, eval-trust / criteria drift

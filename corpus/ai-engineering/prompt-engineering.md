@@ -66,6 +66,9 @@ sources:
   - path: raw/youtube/youtube-qLDwThdc3WQ-how-to-use-claude-for-finance-better-than-99-of-people.md
     channel: youtube
     ingested_at: 2026-06-26
+  - path: raw/_inbox/youtube-XOddQHz4gtA-somebody-leaked-the-system-prompts-of-32-ai-agents-cursor-cl.md
+    channel: youtube
+    ingested_at: 2026-06-27
 aliases:
   - prompting
   - prompt design
@@ -246,6 +249,30 @@ General prompt levers harden into **domain-specific structured workflows** when 
 
 Full workflow: [[ai-engineering/claude-for-finance|Claude for Finance]].
 
+## What leaked system prompts reveal
+
+In 2025, a practitioner compiled the system prompts of 32 AI coding agents into one GitHub repository (137K stars; 14 months old as of mid-2026). Analyzing them reveals consistent patterns that have since shaped the broader discourse on prompt design [^src22].
+
+**"The tool use schema is the moat, not the model"** — the central finding from analyzing the prompts side-by-side [^src22]. The structural choices in *how tools are declared* (names, parameter names, descriptions, type constraints) are what differentiate one agent from another; the underlying model (often the same Sonnet/GPT-4 tier) is less decisive than the tool schema quality.
+
+**Universal rule across all 32 prompts** [^src22]:
+
+> "Never assume a library is available before it has been confirmed."
+
+This rule appeared in every prompt reviewed, regardless of tool or vendor. It generalizes to: *do not assume any environment affordance (library, CLI, service) unless the agent has taken a concrete action to verify it exists.*
+
+**What specific agents reveal** [^src22]:
+
+| Agent | Distinctive prompt pattern |
+|---|---|
+| **Anthropic's Claude (Claude.ai/Sonnet)** | 99K bytes, ~80 pages; one of the largest prompts; extensive formatting rules and behavioral constraints |
+| **Devin** | Includes a "pep-talk" self-confidence injection: "you are a real code whiz" — primes the model to approach unfamiliar codebases with confidence rather than hedging |
+| **Lovable** | Stack-lock in prompt: React + Vite + Tailwind baked in; explicitly bans Angular, Vue, and Svelte — constrains the agent's technology choices to the platform's stack |
+| **Cursor** | Defines four search paths (semantic, grep, `read_file`, and fallback) with explicit guidance on when *not* to use each one |
+| **Claude Code** | "Always prefer editing an existing file over creating a new one"; "never proactively create documentation files unless asked" |
+
+**Implication for practitioners**: when an agentic system is underperforming, the first diagnostic is tool schema quality (names, descriptions, parameter typing), not model selection or temperature tuning. The model reads the schema to understand what actions are available; a poorly named tool is an invisible tool.
+
 ## See also
 
 - [[ai-engineering/claude-for-finance|Claude for Finance]] — domain-specific structured prompting for FP&A (inventory-before-insight, plan-first, model-by-task)
@@ -279,3 +306,4 @@ Full workflow: [[ai-engineering/claude-for-finance|Claude for Finance]].
 [^src19]: [Anthropic London prompting playbook (Margo van Laar)](../../raw/youtube/youtube-G2B0YWuJUgI-the-prompting-playbook.md) — YouTube, Anthropic
 [^src20]: [Advanced Prompt Engineering (Mindstream × HubSpot PDF guide)](../../raw/pdf/pdf-advanced-chatgpt-prompt-engineering-mindstream-x-hubspot.md) — Mindstream / HubSpot
 [^src21]: [How to use Claude For Finance Better Than 99% of People](../../raw/youtube/youtube-qLDwThdc3WQ-how-to-use-claude-for-finance-better-than-99-of-people.md) — Luke Finance, YouTube playlist: Claude Finance
+[^src22]: [Somebody Leaked the System Prompts of 32 AI Agents — Cursor, Claude Code, Devin](../../raw/_inbox/youtube-XOddQHz4gtA-somebody-leaked-the-system-prompts-of-32-ai-agents-cursor-cl.md) — Bitwise AI, YouTube; 137K-star GitHub repo compilation

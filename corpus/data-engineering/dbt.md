@@ -72,6 +72,9 @@ sources:
   - path: raw/email/email-2026-06-25-i-spent-12-hours-rebuilding-my-junior-year-project-part-2-th.md
     channel: email
     ingested_at: 2026-06-26
+  - path: raw/_inbox/github-dbt-labs-dbt-core.md
+    channel: github
+    ingested_at: 2026-06-27
 aliases:
   - dbt
   - data build tool
@@ -241,7 +244,7 @@ dbt Core **v2.0** (first alpha, 2026) rebuilds dbt Core on the same foundation a
 - New **Parquet artifacts** as a high-performance alternative to large JSON files, directly queryable via DuckDB or an agent.
 - Streamlined adapter authoring via **ADBC / Arrow**; simplified install that avoids Python virtualenv friction.
 
-The "two-engine era" is ending: Core and Fusion now share a runtime [^src8]. Two free v2 distributions exist — **Fusion** (precompiled binary, contains some proprietary code, includes a built-in SQL linter, premium features unlocked via free login or paid plan) and a **pure Apache-2.0 dbt Core** built from the open repo [^src8]. dbt Labs recommends Fusion for almost all users; pure dbt Core targets teams with license constraints or those building on the OSS code [^src8]. Business logic remains portable across both [^src8]. Migration aids: `dbt-autofix`, an agent skill for upgrades, and a Fusion-powered parser available in v1.12 (`dbt parse --use-v2-parser`) [^src8]. The old Python `dbt-core` (v1.12 beta and earlier) remains available on PyPI/GitHub [^src8].
+The "two-engine era" is ending: Core and Fusion now share a runtime [^src8]. Two free v2 distributions exist — **Fusion** (precompiled binary, contains some proprietary code, includes a built-in SQL linter, premium features unlocked via free login or paid plan) and a **pure Apache-2.0 dbt Core** built from the open repo [^src8]. dbt Labs recommends Fusion for almost all users; pure dbt Core targets teams with license constraints or those building on the OSS code [^src8]. Business logic remains portable across both [^src8]. Migration aids: `dbt-autofix`, an agent skill for upgrades, and a Fusion-powered parser available in v1.12 (`dbt parse --use-v2-parser`) [^src8]. The old Python `dbt-core` (v1.12 beta and earlier) remains available on PyPI/GitHub; on GitHub, the v1 line is maintained on the `1.latest` branch while `main` tracks v2 development [^src8][^src28].
 
 ### Fivetran + dbt Labs merger (2026)
 
@@ -407,3 +410,4 @@ At time of recording (Dec 2023): AlloyDB, BigQuery, Databricks, Dremio, Postgres
 [^src17]: [GitHub — aboyalejandro/sql-to-dbt-series: Full dbt project with DuckDB, Docker and synthetic Ads campaign data](../../raw/web/web-github-aboyalejandro-sql-to-dbt-series-full-dbt-project-with.md) — Alejandro Aboy
 [^src18]: [dbt (Data Build Tool) Crash Course for Beginners: Zero to Hero (Data Tech, YouTube)](../../raw/youtube/youtube-C6BNAfaeqXY-dbt-data-build-tool-crash-course-for-beginners-zero-to-hero.md)
 [^src19]: [I spent 12 Hours rebuilding my Junior year project: Part 2 — The Transformation Layer (Minh Pham, guest on Vu Trinh's newsletter)](../../raw/email/email-2026-06-25-i-spent-12-hours-rebuilding-my-junior-year-project-part-2-th.md)
+[^src28]: [dbt-labs/dbt-core — GitHub repo digest](../../raw/_inbox/github-dbt-labs-dbt-core.md) — dbt Labs; OSS health signal (13K stars); v2 on main, v1 on 1.latest branch

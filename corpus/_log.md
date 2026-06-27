@@ -1509,3 +1509,25 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   - ingest: 1 ingested · 5 deferred · status=ok
 - lint:
   - 0 broken wikilinks · 0 broken citations · 0 orphans · 0 stubs
+
+## [2026-06-27 00:00] ingest | batch ingest-auto — 17 sources (16 ai-engineering, 1 data-engineering)
+- source: raw/_inbox/ (17 pre-filtered files)
+- channel: youtube (15), web (1), github (1)
+- domain: ai-engineering (16 sources), data-engineering (1 source)
+- pages touched: [corpus/ai-engineering/perplexity-computer.md, corpus/ai-engineering/hermes.md, corpus/ai-engineering/multi-agent-systems.md, corpus/ai-engineering/openclaw.md, corpus/ai-engineering/claude-managed-agents.md, corpus/ai-engineering/agentic-coding.md, corpus/ai-engineering/prompt-engineering.md, corpus/ai-engineering/learning-ai-engineering.md, corpus/ai-engineering/embeddings.md, corpus/ai-engineering/ai-agent.md, corpus/ai-engineering/agent-skills.md, corpus/ai-engineering/README.md, corpus/data-engineering/dbt.md]
+- new pages: [corpus/ai-engineering/perplexity-computer.md]
+- notes: ingest-auto run resumed after context compaction; 17 processed, 0 deferred; headless mode (stamps in place, orchestrator handles relocation). Key additions: Hermes 5-pillar architecture + loop + Vapi integration (6 sources); Factory Missions 5-pattern taxonomy; Perplexity Computer entity (new); leaked-system-prompts "tool use schema is the moat" finding; Dreams of Code CI/CD Rust agent + Tailscale Aperture; DeepMind concept neurons; 4-level agentic framework; AI blogs list; $700/year CMA cost calc + harnessing framing.
+
+## [2026-06-27T02:35] config | scheduled run
+- collectors:
+  - gmail: 0 collected · status=ok
+  - obsidian: 0 collected · status=ok
+  - pdf: 0 collected · status=ok
+  - youtube: 122 collected · status=ok
+  - github: 0 collected · status=ok
+  - x: 0 collected · status=ok
+  - links_refetch: 0 refetched · status=ok
+- ingest:
+  - ingest: 17 ingested · 0 deferred · status=ok
+- lint:
+  - 1 broken wikilinks · 26 broken citations · 0 orphans · 19 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py

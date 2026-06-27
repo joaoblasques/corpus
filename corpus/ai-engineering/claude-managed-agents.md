@@ -87,6 +87,9 @@ sources:
   - path: raw/web/web-tools.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/_inbox/youtube-haMS2-JXL6s-what-is-claude-managed-agents.md
+    channel: youtube
+    ingested_at: 2026-06-27
 aliases:
   - Claude Managed Agents
   - Managed Agents
@@ -306,6 +309,19 @@ As of mid-2026, the CMA waitlist page [^src16] lists two limited research-previe
 
 Standard Claude Platform token rates + **$0.08 per session-hour** of active runtime [^src1].
 
+**Full-time cost calculation**: $0.08/hr × 8,760 hrs/year ≈ **$700/year** for a single agent running 24/7, before token costs [^src28]. For most use cases (agents that run for minutes to hours, not continuously), the per-session-hour cost is negligible relative to token costs.
+
+## What "agent harnessing" means (vs. just giving tools)
+
+A CMA session is not simply "Claude with tools" — it's **Claude bound into a structural harness**: each phase of the agent's work is governed by the session lifecycle, memory scoping, and Outcomes rubrics rather than left to the model's discretion [^src28]. The distinction:
+
+- **Tool-augmented LLM**: model receives tools in context; decides freely when and how to use them. No external structure; the model manages its own execution flow.
+- **Harnessed agent** (CMA): execution proceeds through defined phases (session init, goal clarification, memory loading, tool execution, outcome evaluation). The harness imposes structure the model cannot override.
+
+The harness provides: reproducible execution, auditable state, controlled access to credentials and memory, and integration with Outcomes rubrics for automated quality evaluation [^src28].
+
+**Vendor lock-in risk**: because the harness structure — session API, brain/hands architecture, Memory API, Dreams API, Outcomes — is Anthropic-specific, migrating a production CMA system to another provider requires rebuilding the harness layer, not just switching model calls [^src28]. This is the same trade-off as any managed platform (Firebase, Temporal) vs. self-hosted equivalents.
+
 ## Multiagent sessions (Managed Agents API)
 
 The multiagent API layer for coordinating networks of agents in a session [^src17]:
@@ -521,3 +537,4 @@ The Managed Agents toolset (`agent_toolset_20260401`) provides 8 built-in tools,
 [^src25]: [Define outcomes — Claude Managed Agents docs](../../raw/web/web-define-outcomes.md) — Anthropic; primary source for Outcomes API, rubric format, grader states, chaining
 [^src26]: [Subscribe to webhooks — Claude Managed Agents docs](../../raw/web/web-subscribe-to-webhooks.md) — Anthropic; primary source for webhook setup, signature verification, delivery behavior
 [^src27]: [Tools — Claude Managed Agents docs](../../raw/web/web-tools.md) — Anthropic; primary source for built-in tool table, selective enabling, custom tools, 100K overflow
+[^src28]: [What is Claude Managed Agents](../../raw/_inbox/youtube-haMS2-JXL6s-what-is-claude-managed-agents.md) — KodeKloud, YouTube; harnessing framing, $700/year cost calculation, vendor lock-in risk

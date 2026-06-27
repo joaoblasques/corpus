@@ -24,6 +24,9 @@ sources:
   - path: raw/web/is-grep-all-you-need-the-harness-matters-more-than-the-searc.md
     channel: web
     ingested_at: 2026-06-12
+  - path: raw/_inbox/youtube-zZsTVBXcbow-how-google-deepmind-is-researching-the-next-frontier-of-ai-f.md
+    channel: youtube
+    ingested_at: 2026-06-27
 aliases:
   - embedding
   - embeddings
@@ -104,6 +107,18 @@ Vectors encode semantics but do not age — an embedding of a quarterly report l
 
 Plain vector memory also fragments related facts into disconnected chunks: a query surfaces whatever sounds similar without connecting them, so over time a RAG narrative can fragment into "disconnected factoids that can mislead reasoning" [^src5-rag2]. A common structural response is to store entities and typed relationships as a walkable graph rather than inert vectors — the graph-over-flat-vectors idea developed (with its own sources) in [[ai-engineering/agent-memory|Agent Memory]] and [[ai-engineering/rag|RAG]] (GraphRAG section).
 
+## DeepMind embeddings research: concept neurons
+
+Google DeepMind's embeddings research (presented by Raia Hadsell, VP Research) explores how embeddings relate to neuroscientific principles of representation [^src8]:
+
+**Jennifer Aniston neurons** — a classic neuroscience finding: individual neurons in the human hippocampus fire specifically for abstract *concepts* (Jennifer Aniston as a person) regardless of how the concept is presented — a photograph, her name written in text, a voice recording. These "concept neurons" are modality-invariant; they encode the concept, not the sensory form [^src8].
+
+DeepMind's embedding research takes this as motivation: ideal learned embeddings should be **modality-invariant** — the same embedding (or a semantically close one) for "Jennifer Aniston" whether the input is an image, text, or audio. This is relevant to multi-modal model training for Gemini [^src8].
+
+**Why it matters for retrieval**: if embeddings are modality-invariant, a text query can retrieve an image result (or vice versa) without a modality bridge; the similarity is in the concept space, not the token space. This is the theoretical foundation for cross-modal RAG [^src8].
+
+Raia Hadsell's role at DeepMind: VP Research, previously known for robotics and continual learning ("CORe50" benchmark; learning without forgetting). The context of this research is embeddings for Gemini's multimodal foundation [^src8].
+
 ## The pre-filter rule
 
 The single most impactful optimization when querying embeddings is to **filter by structured metadata *before* doing vector similarity search, not after** — narrowing to the relevant rows first is both faster and more accurate, and the source frames this relational pre-filter not as an optional optimization but as a hard boundary [^src5-rag3]. This is the same scope-before-ranking discipline that governs typed agent memory — filter by scope/tenant, then rank by vector distance. See [[ai-engineering/rag|RAG]] §Beyond the vector store and [[ai-engineering/agent-memory|Agent Memory]] §filter by scope before ranking.
@@ -119,6 +134,7 @@ The single most impactful optimization when querying embeddings is to **filter b
 
 ---
 
+[^src8]: [How Google DeepMind Is Researching the Next Frontier of AI](../../raw/_inbox/youtube-zZsTVBXcbow-how-google-deepmind-is-researching-the-next-frontier-of-ai-f.md) — DeepMind, YouTube; Raia Hadsell on concept neurons and modality-invariant embeddings
 [^src1]: [How LLMs Actually Work](../../raw/web/how-llms-actually-work.md)
 [^src2]: [[03_Resources/Study Notes/AI - How Large Language Models Work|AI - How Large Language Models Work]]
 [^src3]: [How CockroachDB Built Vector Indexing at Scale](../../raw/web/how-cockroachdb-built-vector-indexing-at-scale.md)

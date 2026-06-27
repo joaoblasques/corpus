@@ -132,6 +132,9 @@ sources:
   - path: raw/youtube/youtube-gpOfsGW1xRk-my-real-ai-coding-workflow-build-anything.md
     channel: youtube
     ingested_at: 2026-06-26
+  - path: raw/_inbox/youtube-WkpEuogh3OY-i-finally-found-a-reason-to-build-my-own-ai-agent.md
+    channel: youtube
+    ingested_at: 2026-06-27
 aliases:
   - agentic coding
   - agentic engineering
@@ -711,6 +714,36 @@ Anthropic's gallery documents six categories where HTML excels over alternatives
 
 Key constraint: HTML output works best when the agent writes the whole file at once — iterative HTML patches are harder than iterative markdown edits. Design the task to produce a complete HTML document in one turn [^src35].
 
+## Homelab CI/CD failure-fixing agent (Dreams of Code)
+
+A practitioner built a custom CI/CD failure-fixing agent system using home network hardware [^src39]. The system automates the diagnosis-and-fix loop for GitHub Actions failures.
+
+**Hardware setup** [^src39]:
+- Two Beelink EQ07 mini PCs (24 GB RAM, 1 TB SSD each) on a home network
+- One running Linux/NixOS + one running Windows
+- Both accessible privately via Tailscale without exposing ports to the internet
+
+**Architecture (part-deterministic)** [^src39]:
+
+```
+GitHub Actions failure → HTTP notification (via Tailscale) → home node
+→ custom agent (Cersei Rust crate) → diagnose + fix → GitHub PR
+```
+
+Two distinct phases:
+1. **Deterministic phase** — scripted environment setup: clone repo, checkout branch, inject secrets via Doppler, configure GitHub CLI. No LLM involved; reproducible by construction.
+2. **Agentic phase** — the LLM diagnoses the failure from CI logs, proposes a fix, and opens a PR. This phase is non-deterministic; the agent decides the approach.
+
+**Why not Claude Code / OpenCode**: both were tried first, but permission prompts in headless mode blocked automated operation [^src39]. A custom agent built on the Cersei Rust crate gave full control over the execution environment without interactive approval gates.
+
+**Tailscale Aperture** — an LLM proxy/gateway running on the tailnet that centralizes access to frontier models [^src39]:
+- Logs all prompts, responses, and tool calls (full audit trail)
+- Centralizes API key management (one place vs. one per machine)
+- Enables model swapping without modifying agent code
+- Available on Tailscale's free plan
+
+This is the first documented case in the corpus of a **self-healing CI/CD pipeline** where the agentic phase targets code fixes specifically, not just notification/routing. See [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] for how the part-deterministic architecture relates to the orchestrator/worker split.
+
 ## See also
 
 - [[ai-engineering/mcp|MCP]] — connecting agents to external systems
@@ -759,6 +792,7 @@ Key constraint: HTML output works best when the agent writes the whole file at o
 [^src36]: [How Software Engineers Actually Use Coding Agents in 2026](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-how-software-engi-report.md) — YouTube (processed notes report); Pragmatic Engineer 2026 adoption survey
 [^src37]: [ProteoWizard/pwiz-ai — AI tooling and documentation for ProteoWizard/Skyline](../../raw/web/web-github-proteowizard-pwiz-ai-ai-tooling-and-documentation-for.md) — Brendan MacLean / MacCoss Lab, GitHub; primary source (alongside the Skyline case study note) for the pwiz-ai "reference don't embed" context architecture
 [^src38]: [My Real AI Coding Workflow (build anything)](../../raw/youtube/youtube-gpOfsGW1xRk-my-real-ai-coding-workflow-build-anything.md) — Tech With Tim, YouTube; research-first workflow, Cursor + skills/MCP/rules harness setup, prompt→run→debug loop
+[^src39]: [I Finally Found a Reason to Build My Own AI Agent](../../raw/_inbox/youtube-WkpEuogh3OY-i-finally-found-a-reason-to-build-my-own-ai-agent.md) — Dreams of Code, YouTube; homelab CI/CD failure-fixing agent, Cersei Rust crate, Tailscale Aperture LLM proxy
 
 ## ProteoWizard pwiz-ai — LLM context docs pattern
 
