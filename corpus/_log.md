@@ -1563,3 +1563,19 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - pages touched: [ai-engineering/anthropic]
 - new pages: []
 - notes: ingest-auto run; 6 processed, 0 deferred. 5 localized claude.com/solutions/agents variants (en/de/fr/it/ko) consolidated as additional sources on anthropic.md's existing "Claude Platform for AI agents" section (content already ingested earlier via the ja variant web-ai-claude-419e4408); [^src12] repointed to the English canonical URL. 6th source (claude.com/ja/solutions/education) added a new "Claude for Education" section to anthropic.md (learning mode = Socratic tutor, Claude Code as apprenticeship-at-scale, Claude API for research).
+
+## [2026-06-27 10:30] ingest | Claude.com localized /solutions/education + /solutions/coding variants
+- source: raw/web/web-education-claude-by-anthropic-16c564ed.md (+ web-bildungswesen-claude-e8df4dcf, web-education-claude-1c0dd8a9, web-claude-372516cb [education en/de/fr/ko]; web-programmierung-claude-bbf1e585, web-claude-469a16cf [coding de/ja])
+- channel: web
+- domain: ai-engineering
+- pages touched: [ai-engineering/claude-for-education, ai-engineering/claude-models, ai-engineering/README]
+- new pages: [ai-engineering/claude-for-education]
+- notes: ingest-auto run; 6 processed, 0 deferred. 4 localized claude.com/solutions/education variants (en/de/fr/ko) deduped 4→1 into new claude-for-education entity (university-wide program: Socratic learning mode, Claude Code apprenticeship, Claude API for research); page cross-links anthropic.md's existing Education section + the Education plan tier on claude-plans. 2 localized claude.com/solutions/coding variants (de/ja) deduped 2→1 update on claude-models (Fable 5 leads SWE-Bench Pro 80.3% [^src22]; vendor 60×/95% customer-outcome marketing claims flagged as not independent). No new domains; all routing to existing ai-engineering.
+
+## [2026-06-27T09:54] config | scheduled run
+- collectors:
+
+- ingest:
+  - ingest: 6 ingested · 0 deferred · status=ok
+- lint:
+  - 0 broken wikilinks · 0 broken citations · 0 orphans · 0 stubs
