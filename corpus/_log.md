@@ -1547,3 +1547,11 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - pages touched: [ai-engineering/claude-plans, ai-engineering/anthropic, ai-engineering/README]
 - new pages: [ai-engineering/claude-plans]
 - notes: ingest-auto run; 6 processed, 0 deferred. 5 localized claude.com pricing pages (de/fr/it/ja/ko) deduped 5→1 into new claude-plans entity (Free/Pro/Max/Team/Enterprise + Education subscription tiers); distinct from per-token API pricing on claude-models. 6th source (claude.com/ja/solutions/agents) added a Claude Platform/Workbench agents-positioning note to anthropic.md.
+
+## [2026-06-27T09:44] config | scheduled run
+- collectors:
+
+- ingest:
+  - ingest: 0 ingested · 6 deferred · status=ok
+- lint:
+  - 0 broken wikilinks · 0 broken citations · 0 orphans · 0 stubs
