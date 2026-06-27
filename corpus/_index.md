@@ -1,6 +1,6 @@
 # Corpus Index
 
-> Last updated: 2026-06-27 | Total pages: 284 | Total sources: 1118
+> Last updated: 2026-06-27 | Total pages: 285 | Total sources: 1124
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
@@ -46,6 +46,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[ai-engineering/github-copilot|GitHub Copilot (Agent Mode)]] — entity · stub · whole-project agentic coding in VS Code; multi-file edits, runs commands, self-corrects; multi-model + MCP
 - [[ai-engineering/claude-cowork|Claude Cowork]] — entity · draft · sub-hub: Cowork desktop product; workspace folder, CLAUDE.md/MEMORY.md, Toolkit
 - [[ai-engineering/anthropic|Anthropic]] — entity · draft · the lab: company, funding/valuation, learning resources
+- [[ai-engineering/claude-plans|Claude Plans & Pricing]] — entity · draft · consumer/team subscription tiers (Free/Pro/Max/Team/Enterprise + Education); distinct from per-token API pricing
 - [[ai-engineering/claude-models|Claude Model Lineup]] — entity · draft · Claude family (Haiku → Sonnet → Opus → Fable/Mythos); aliases, 1M context, Opus 4.8, Fable 5/Mythos 5
 - [[ai-engineering/claude-api|Claude API]] — concept · draft · Claude Messages API in Python; system prompts, structured output
 - [[ai-engineering/computer-use|Computer Use]] — concept · draft · Claude computer/browser use: coordinate scaling, model selection, thinking-effort tuning, prompt-injection defense, teach mode
@@ -421,3 +422,5 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - 2026-06-16: [[ai-engineering/transformer]] (expanded stub→draft, web-backlog)
 - 2026-06-16: [[ai-engineering/mixture-of-experts]] (new, web-backlog)
 - 2026-06-16: [[data-engineering/parquet]] (updated +1 source, web-backlog enrichment)
+- 2026-06-27: [[ai-engineering/claude-plans]] (new, ingest-auto; 5 localized claude.com plan pages)
+- 2026-06-27: [[ai-engineering/anthropic]] (updated +1 source, Claude Platform for agents)

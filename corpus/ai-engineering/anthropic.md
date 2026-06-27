@@ -30,6 +30,9 @@ sources:
   - path: raw/email/email-2026-06-19-testing-mythos-and-fable-moving-beyond-swe-bench-nvidia-s-op.md
     channel: email
     ingested_at: 2026-06-25
+  - path: raw/web/web-ai-claude-419e4408.md
+    channel: web
+    ingested_at: 2026-06-27
 aliases:
   - Anthropic
   - Anthropic PBC
@@ -37,7 +40,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-06-12
-updated: 2026-06-24
+updated: 2026-06-27
 ---
 
 # Anthropic
@@ -93,9 +96,14 @@ The Fable 5 launch in June 2026 triggered a two-part crisis that reshaped develo
 
 **Mandatory 30-day data retention.** Fable 5 introduced mandatory 30-day retention for all usage (for misuse detection, not training). This is not configurable per-request, is incompatible with ZDR (zero data retention) arrangements, and added to developer concerns about supply-chain stability [^src11]. See [[ai-engineering/claude-models|Claude Model Lineup]] for the per-model API implications.
 
+## Claude Platform for AI agents
+
+Anthropic markets Claude as the model to build production AI agents on, claiming Claude **outperforms other models in agent scenarios from customer support to coding** and earns top ratings for honesty, jailbreak resistance, and brand safety [^src12]. The **Claude Platform** is the developer surface: integrate Claude into existing applications to ship production-grade agents faster, build agents and workflows on the API, and **test and refine prompts in the Workbench** [^src12]. [[ai-engineering/claude-code|Claude Code]] is positioned as the agentic coding tool in this lineup — developers delegate tasks from migrations to bug fixes directly from the terminal [^src12]. See [[ai-engineering/claude-api|Claude API]], [[ai-engineering/ai-agent|AI Agent]], and [[ai-engineering/agent-security|Agent Security]] (brand-safety / jailbreak resistance).
+
 ## See also
 
 - [[ai-engineering/claude-models|Claude Model Lineup]] — the Claude model family (Haiku → Sonnet → Opus → Fable/Mythos), specs, and per-model detail
+- [[ai-engineering/claude-plans|Claude Plans & Pricing]] — consumer/team subscription tiers (Free/Pro/Max/Team/Enterprise)
 - [[ai-engineering/claude-code|Claude Code]] — Anthropic's CLI coding agent
 - [[ai-engineering/claude-cowork|Claude Cowork]] — desktop product for non-developers
 - [[ai-engineering/interpretability|Interpretability]] — mechanistic interpretability research program
@@ -113,3 +121,4 @@ The Fable 5 launch in June 2026 triggered a two-part crisis that reshaped develo
 [^src9]: [Dario Amodei: The Urgency of Interpretability](../../raw/web/web-dario-amodei-the-urgency-of-interpretability.md) — Dario Amodei, Anthropic
 [^src10]: [anthropic/claude-cookbooks — official Claude API recipe collection (★45,788)](../../raw/github/github-anthropics-claude-cookbooks.md) — Anthropic, GitHub
 [^src11]: [Testing Mythos and Fable, Moving Beyond SWE-bench (The Batch)](../../raw/email/email-2026-06-19-testing-mythos-and-fable-moving-beyond-swe-bench-nvidia-s-op.md) — Andrew Ng, DeepLearning.AI
+[^src12]: [AI agents | Claude (Claude Platform / agents solutions page)](../../raw/web/web-ai-claude-419e4408.md) — claude.com/ja/solutions/agents

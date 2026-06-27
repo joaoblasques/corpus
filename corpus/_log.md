@@ -1539,3 +1539,11 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - pages touched: [data-engineering/dbt]
 - new pages: []
 - notes: Corroborating + enriching source for the v2.0 section. New: single-self-contained-binary install detail, OS/arch support matrix (macOS/Linux fully supported; Windows x86-64 yes, ARM not yet), branch structure (main=v2.0 alpha, 1.latest=v1). Latest v1 release v1.11.11. Moved to raw/github/ (new channel dir created).
+
+## [2026-06-27 03:30] ingest | Claude.com localized plan pages + AI-agents solutions page
+- source: raw/web/web-claude-by-anthropic-90b51f29.md (+ web-untitled-42cbd4cb, web-claude-2c35b97a, web-claude-796a7cce, web-claude-4f6af6b8, web-ai-claude-419e4408)
+- channel: web
+- domain: ai-engineering
+- pages touched: [ai-engineering/claude-plans, ai-engineering/anthropic, ai-engineering/README]
+- new pages: [ai-engineering/claude-plans]
+- notes: ingest-auto run; 6 processed, 0 deferred. 5 localized claude.com pricing pages (de/fr/it/ja/ko) deduped 5→1 into new claude-plans entity (Free/Pro/Max/Team/Enterprise + Education subscription tiers); distinct from per-token API pricing on claude-models. 6th source (claude.com/ja/solutions/agents) added a Claude Platform/Workbench agents-positioning note to anthropic.md.
