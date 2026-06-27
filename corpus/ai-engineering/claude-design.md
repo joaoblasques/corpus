@@ -93,6 +93,7 @@ The strategic framing across the sources is **ecosystem lock-in by context gravi
 
 - [[ai-engineering/ai-presentation-tools|AI Presentation Tools]] — Claude Design is approach #1 in the slide/deck landscape
 - [[ai-engineering/claude-code|Claude Code]] — the build/sync target Claude Design hands off to; `skill.md`/`design.md` conventions
+- [[ai-engineering/sources/claude-code-website-build-workflow|Claude Code website build workflow (Charlie Hills)]] — the in-repo `CONTEXT.md`/`COPY.md`/`DESIGN.md` alternative to the hosted Design app; structural-donor component rule to avoid the generic "AI look"
 - [[ai-engineering/claude-cowork|Claude Cowork]] — the sibling Labs product; Claude Design is "another iteration of Cowork, but for design"
 - [[ai-engineering/claude-models|Claude Model Lineup]] — Opus 4.7 (vision) powers Claude Design; model-switching to conserve the limit
 - [[ai-engineering/agent-cost-management|Agent Cost Management]] — plan-first to avoid burning the (separate, weekly) Design limit

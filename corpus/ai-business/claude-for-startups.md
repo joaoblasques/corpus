@@ -63,5 +63,7 @@ For solopreneurs and consultants in this domain: both programs represent **marke
 
 For operators considering the Claude platform (see [[ai-business/ai-consulting-playbook|AI Consulting Playbook]] and [[ai-business/monetizing-code|Monetizing Code]]): the startup program credits lower the cost of building and validating AI solutions before committing to full API spend.
 
+These two programs subsidize **access** (credits, discounted plans). Anthropic's [[ai-business/claude-corps|Claude Corps]] is the **talent-supply** counterpart — it places trained fellows inside nonprofits to do the building — so the access subsidy and the labor subsidy target the same mission-driven cohort from two directions.
+
 [^src1]: [Claude for startups | Claude by Anthropic](../../raw/web/web-claude-for-startups-claude-by-anthropic.md)
 [^src2]: [Nonprofits | Claude by Anthropic](../../raw/web/web-nonprofits-claude-by-anthropic.md)

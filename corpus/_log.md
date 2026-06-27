@@ -1579,3 +1579,11 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   - ingest: 6 ingested · 0 deferred · status=ok
 - lint:
   - 0 broken wikilinks · 0 broken citations · 0 orphans · 0 stubs
+
+## [2026-06-27 10:05] ingest | articles to process.md drain (2 web articles)
+- sources: raw/web/web-claude-corps.md, raw/web/web-claude-code-is-terrible-at-design.md
+- channel: web (via vault list `00_Inbox/Clippings/articles to process.md`)
+- domains: ai-business, ai-engineering
+- new pages: [ai-business/claude-corps, ai-engineering/sources/claude-code-website-build-workflow]
+- pages touched: [ai-business/README, ai-business/claude-for-startups, ai-engineering/claude-design, ai-engineering/sources/claude-code-website-build-workflow, ai-business/claude-corps]
+- notes: interactive drain of the fetchable lines from the vault url-list. Claude Corps = Anthropic+CodePath+Social Finance nonprofit fellowship (talent-supply counterpart to claude-for-startups access programs). Charlie Hills = 9-step spec-driven CONTEXT/COPY/DESIGN website-build workflow + structural-donor component rule. 4 lines could NOT be fetched and remain in the file: kaggle (JS-rendered SPA, no HTML body), towardsdatascience (HTTP 403), 2× x.com (auth-walled). The 2 ingested lines struck from the vault file.

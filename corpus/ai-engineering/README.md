@@ -107,6 +107,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [[ai-engineering/sources/boris-cherny-100-percent-claude-code|Boris Cherny — 100% Claude Code]] — source · draft · head of Claude Code: full-agentic workflow, ~5 parallel agents, latent demand, build-for-the-model, "coding is describing"
 - [[ai-engineering/sources/beyond-vibe-coding-book|Beyond Vibe Coding (Book)]] — source · draft · 11-chapter practitioner guide; 70% problem thesis, golden rules, autonomous agents, multimodel orchestration
 - [[ai-engineering/sources/field-guide-improving-ai-products|A Field Guide to Rapidly Improving AI Products]] — source · draft · Hamel Husain; the measurement-and-iteration discipline that beats tool selection (error analysis, data viewers, synthetic data, eval trust, experiment-based roadmaps)
+- [[ai-engineering/sources/claude-code-website-build-workflow|Claude Code website build workflow (Charlie Hills)]] — source · draft · 9-step spec-driven site build (CONTEXT.md/COPY.md/DESIGN.md + approval gates); structural-donor component rule to avoid the generic "AI look"
 
 ### Cross-domain (primary home in data-engineering)
 - [[data-engineering/claude-code-for-data-engineering|Claude Code for Data Engineering]] — synthesis · AI-assisted dbt / data workflows

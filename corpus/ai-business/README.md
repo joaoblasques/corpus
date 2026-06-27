@@ -33,6 +33,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 ### Entities
 - [[ai-business/harvey|Harvey]] — entity · stub · AI for legal/professional services; 142K+ professionals; 1,500+ firms; 65+ AmLaw 100
 - [[ai-business/claude-for-startups|Claude for Startups (and Nonprofits)]] — entity · stub · Anthropic's access programs; startup credits + priority rate limits; nonprofit discounted plans
+- [[ai-business/claude-corps|Claude Corps]] — entity · stub · Anthropic + CodePath + Social Finance; trains early-career fellows, embeds them in US nonprofits for 12 months; talent-supply counterpart to the access programs
 
 ### Syntheses
 - [[ai-business/ai-and-the-job-market|AI and the Job Market]] — synthesis · draft · AI-as-utility; future-proofing via depth + human skills + business proximity; articulation gap; world models; Toyota/GM framing
