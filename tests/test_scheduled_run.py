@@ -1827,6 +1827,43 @@ class TestEmailRelabel:
         assert any("gmail_client.py" in s and "reap-labels" in s for s in called), called
         assert result.get("relabeled") == 0
 
+    def test_run_pdf_reap_invokes_pdf_file(self):
+        called = []
+
+        def fake_run(cmd, **kwargs):
+            called.append(" ".join(cmd))
+            import types
+            return types.SimpleNamespace(returncode=0, stdout='{"moved": 2}', stderr="")
+
+        result = scheduled_run.run_pdf_reap(_subprocess_run=fake_run)
+        assert any("pdf_client.py" in s and s.endswith("file") for s in called), called
+        assert result.get("moved") == 2
+
+    def test_run_pdf_reap_records_failure_without_raising(self):
+        def fake_run(cmd, **kwargs):
+            import types
+            return types.SimpleNamespace(returncode=1, stdout="", stderr="drive auth expired")
+
+        result = scheduled_run.run_pdf_reap(_subprocess_run=fake_run)
+        assert result["status"] == "failed" and "drive auth" in result["error"]
+
+    def test_run_obsidian_reap_invokes_reap(self):
+        called = []
+        def fake_run(cmd, **kwargs):
+            called.append(" ".join(cmd))
+            import types
+            return types.SimpleNamespace(returncode=0, stdout='{"urls_struck": 1, "seeds_struck": 2}', stderr="")
+        result = scheduled_run.run_obsidian_reap(_subprocess_run=fake_run)
+        assert any("obsidian_client.py" in s and s.endswith("reap") for s in called), called
+        assert result.get("seeds_struck") == 2
+
+    def test_run_obsidian_reap_records_failure_without_raising(self):
+        def fake_run(cmd, **kwargs):
+            import types
+            return types.SimpleNamespace(returncode=1, stdout="", stderr="vault missing")
+        result = scheduled_run.run_obsidian_reap(_subprocess_run=fake_run)
+        assert result["status"] == "failed" and "vault missing" in result["error"]
+
 
 class TestBuildSummary:
     def test_includes_email_relabel(self):
@@ -1845,6 +1882,22 @@ class TestBuildSummary:
         s = scheduled_run.build_summary({}, dry_run=True)
         assert s["email_relabel"] == {}   # absent tally -> empty dict, not KeyError
         assert s["dry_run"] is True
+
+    def test_includes_pdf_reap(self):
+        s = scheduled_run.build_summary({"pdf_reap": {"moved": 3}}, dry_run=False)
+        assert s["pdf_reap"] == {"moved": 3}
+
+    def test_pdf_reap_defaults_empty_when_absent(self):
+        s = scheduled_run.build_summary({}, dry_run=False)
+        assert s["pdf_reap"] == {}   # absent tally -> empty dict, not KeyError
+
+    def test_includes_obsidian_reap(self):
+        s = scheduled_run.build_summary({"obsidian_reap": {"seeds_struck": 2}}, dry_run=False)
+        assert s["obsidian_reap"] == {"seeds_struck": 2}
+
+    def test_obsidian_reap_defaults_empty_when_absent(self):
+        s = scheduled_run.build_summary({}, dry_run=False)
+        assert s["obsidian_reap"] == {}
 
 
 class TestGithubCollector:

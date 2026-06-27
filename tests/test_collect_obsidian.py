@@ -207,6 +207,35 @@ def test_reapable_selects_only_ingested(tmp_path):
     assert r["url_strikes"] == [("00_Inbox/Clippings/articles to process.md", "https://a.com/x")]
 
 
+def _src(scrape_seed=None, ingested=False, via="00_Inbox/Clippings/TO SCRAPE.md",
+         source_url="https://b.com/p"):
+    fm = ["---", "channel: web", f"source_url: {source_url}", f"via_vault_list: {via}"]
+    if scrape_seed:
+        fm.append(f"scrape_seed: {scrape_seed}")
+    if ingested:
+        fm.append("corpus_ingested: true")
+    fm += ["---", "", "body", ""]
+    return "\n".join(fm)
+
+
+def test_reapable_seed_strikeable_only_when_all_posts_ingested(tmp_path):
+    seed = "https://b.com"
+    (tmp_path / "p1.md").write_text(_src(seed, ingested=True, source_url="https://b.com/p1"), encoding="utf-8")
+    (tmp_path / "p2.md").write_text(_src(seed, ingested=False, source_url="https://b.com/p2"), encoding="utf-8")
+    r = co.reapable([tmp_path])
+    assert (("00_Inbox/Clippings/TO SCRAPE.md", seed) not in r["seed_strikes"])   # p2 not ingested
+
+    (tmp_path / "p2.md").write_text(_src(seed, ingested=True, source_url="https://b.com/p2"), encoding="utf-8")
+    r = co.reapable([tmp_path])
+    assert ("00_Inbox/Clippings/TO SCRAPE.md", seed) in r["seed_strikes"]         # all ingested
+
+
+def test_reapable_excludes_scrape_posts_from_url_strikes(tmp_path):
+    (tmp_path / "p1.md").write_text(_src("https://b.com", ingested=True, source_url="https://b.com/p1"), encoding="utf-8")
+    r = co.reapable([tmp_path])
+    assert ("00_Inbox/Clippings/TO SCRAPE.md", "https://b.com/p1") not in r["url_strikes"]
+
+
 def test_extract_inline_links_basic_dedup():
     body = "See https://a.com/x and again https://a.com/x and https://b.com/y."
     r = co.extract_inline_links(body)
@@ -231,3 +260,42 @@ def test_extract_inline_links_respects_cap():
     r = co.extract_inline_links(body)
     assert len(r["links"]) == co.MAX_LINKS_PER_NOTE
     assert r["dropped"] == 5
+
+
+def test_parse_scrape_tag_blog_series_and_untagged():
+    assert co.parse_scrape_tag("https://blog.example.com [blog]") == {
+        "url": "https://blog.example.com", "mode": "blog", "cap": 200}
+    assert co.parse_scrape_tag("https://blog.example.com [blog:50]") == {
+        "url": "https://blog.example.com", "mode": "blog", "cap": 50}
+    assert co.parse_scrape_tag("- https://site.com/the-series  [series]") == {
+        "url": "https://site.com/the-series", "mode": "series", "cap": 200}
+    assert co.parse_scrape_tag("https://plain.example.com/post") == {
+        "url": "https://plain.example.com/post", "mode": None, "cap": 200}
+    assert co.parse_scrape_tag("no url here [blog]")["url"] == ""
+
+
+def test_iter_scrape_targets_dedups_and_preserves_order():
+    text = ("https://a.com [blog]\n"
+            "- https://b.com/series [series]\n"
+            "https://c.com/post\n"
+            "https://a.com [blog:5]\n")   # dup url, first tag wins
+    out = co.iter_scrape_targets(text)
+    assert [t["url"] for t in out] == ["https://a.com", "https://b.com/series", "https://c.com/post"]
+    assert out[0] == {"url": "https://a.com", "mode": "blog", "cap": 200}
+    assert out[1]["mode"] == "series"
+    assert out[2]["mode"] is None
+
+
+def test_build_url_source_includes_scrape_seed_when_present():
+    out = co.build_url_source({
+        "source_url": "https://b.com/p1", "via_vault_list": "00_Inbox/Clippings/TO SCRAPE.md",
+        "scrape_seed": "https://b.com", "title": "P1", "collected_at": "2026-06-26"}, "body")
+    assert "scrape_seed: https://b.com\n" in out
+    assert "source_url: https://b.com/p1\n" in out
+    assert "via_vault_list: 00_Inbox/Clippings/TO SCRAPE.md\n" in out
+
+
+def test_build_url_source_omits_scrape_seed_when_absent():
+    out = co.build_url_source({
+        "source_url": "https://b.com/p1", "via_vault_list": "L", "collected_at": "2026-06-26"}, "body")
+    assert "scrape_seed" not in out

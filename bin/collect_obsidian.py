@@ -61,6 +61,43 @@ def parse_url_list(text: str) -> list:
     return out
 
 
+DEFAULT_BLOG_CAP = 200
+SCRAPE_TAG_RE = re.compile(r"\[(blog|series)(?::(\d+))?\]\s*$")
+
+
+def parse_scrape_tag(line: str) -> dict:
+    """Parse a url-list line's optional trailing scrape tag.
+
+    `<url> [blog]` / `<url> [blog:N]` / `<url> [series]`. Returns
+    {url, mode, cap}: mode in {None, 'blog', 'series'} (None = untagged, the
+    existing single-page path); cap is the [blog:N] number or DEFAULT_BLOG_CAP.
+    url is '' when the line has no http(s) URL.
+    """
+    s = (line or "").strip()
+    mode, cap = None, DEFAULT_BLOG_CAP
+    m = SCRAPE_TAG_RE.search(s)
+    if m:
+        mode = m.group(1)
+        if m.group(2):
+            cap = int(m.group(2))
+        s = s[:m.start()].strip()
+    um = URL_RE.search(s)
+    url = um.group(0).rstrip(".,)") if um else ""
+    return {"url": url, "mode": mode, "cap": cap}
+
+
+def iter_scrape_targets(text: str) -> list:
+    """Per-line {url, mode, cap} for every url-list line that holds a URL,
+    order-preserved and deduped by url (first occurrence's tag wins)."""
+    seen, out = set(), []
+    for line in (text or "").splitlines():
+        tgt = parse_scrape_tag(line)
+        if tgt["url"] and tgt["url"] not in seen:
+            seen.add(tgt["url"])
+            out.append(tgt)
+    return out
+
+
 def extract_inline_links(body: str, source_url: str = "") -> dict:
     """External http(s) links in a note body: deduped, minus the source URL, asset
     links, and auth-walled domains; capped at MAX_LINKS_PER_NOTE."""
@@ -144,6 +181,8 @@ def build_url_source(meta: dict, body: str) -> str:
         lines.append(f"via_vault_note: {meta['via_vault_note']}")
     else:
         lines.append(f"via_vault_list: {meta['via_vault_list']}")
+    if meta.get("scrape_seed"):
+        lines.append(f"scrape_seed: {meta['scrape_seed']}")
     lines += [
         f"title: {yaml_scalar(meta.get('title', ''))}",
         f"collected_at: {meta['collected_at']}", "---", "", body.strip(), "",
@@ -231,7 +270,18 @@ def discover(vault_root=None, dedup_dirs=None) -> list:
 
 def reapable(dedup_dirs=None) -> dict:
     notes, url_strikes = [], []
+    seeds = {}   # seed -> {"list": via_vault_list|None, "count": int, "all_ingested": bool}
     for _, t in _raw_sources(dedup_dirs):
+        ss = fm_field(t, "scrape_seed")
+        if ss:   # a deep-scrape post: gates its SEED, never an ordinary url_strike
+            vl = fm_field(t, "via_vault_list")
+            rec = seeds.setdefault(ss, {"list": None, "count": 0, "all_ingested": True})
+            rec["count"] += 1
+            if vl and not rec["list"]:
+                rec["list"] = vl
+            if "corpus_ingested: true" not in t:
+                rec["all_ingested"] = False
+            continue
         if "corpus_ingested: true" not in t:
             continue
         vo = fm_field(t, "vault_origin")
@@ -240,4 +290,6 @@ def reapable(dedup_dirs=None) -> dict:
         vl, su = fm_field(t, "via_vault_list"), fm_field(t, "source_url")
         if vl and su:
             url_strikes.append((vl, su))
-    return {"vault_notes": notes, "url_strikes": url_strikes}
+    seed_strikes = [(rec["list"], seed) for seed, rec in seeds.items()
+                    if rec["count"] >= 1 and rec["all_ingested"] and rec["list"]]
+    return {"vault_notes": notes, "url_strikes": url_strikes, "seed_strikes": seed_strikes}

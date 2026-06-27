@@ -186,6 +186,18 @@ def test_collect_dry_run_does_not_fetch(tmp_path, monkeypatch):
     assert fetched == []   # no network under --dry-run
 
 
+def test_cmd_reap_strikes_seeds(tmp_path, monkeypatch):
+    import obsidian_client as oc, collect_obsidian as co
+    monkeypatch.setattr(co, "reapable",
+                        lambda dirs=None: {"vault_notes": [], "url_strikes": [],
+                                           "seed_strikes": [("00_Inbox/Clippings/TO SCRAPE.md", "https://b.com")]})
+    struck = []
+    monkeypatch.setattr(oc, "_strike_url", lambda vault, lr, u: struck.append((lr, u)))
+    monkeypatch.setattr(oc, "_under_vault", lambda v, r: True)
+    rc = oc.main(["reap", "--vault", str(tmp_path)])
+    assert rc == 0 and struck == [("00_Inbox/Clippings/TO SCRAPE.md", "https://b.com")]
+
+
 def test_reap_dry_run_changes_nothing(tmp_path, monkeypatch):
     vault = tmp_path / "vault"; (vault / "03_Resources/Articles").mkdir(parents=True)
     raw = tmp_path / "raw"; raw.mkdir()
@@ -272,3 +284,59 @@ def test_reap_dry_run_counts_frames_but_removes_nothing(tmp_path, monkeypatch, c
     assert called == []                                      # dry-run touches nothing
     assert out["notes_removed"] == 1 and out["frames_removed"] == 2
     assert (slug / "report.md").exists() and (slug / "frame_0001.jpg").exists()
+
+
+def test_cmd_collect_routes_blog_tag_to_scrape_seed(tmp_path, monkeypatch):
+    import obsidian_client as oc
+    import collect_obsidian as co
+    # a vault with a TO SCRAPE.md holding one [blog] seed + one untagged URL
+    listdir = tmp_path / "00_Inbox" / "Clippings"
+    listdir.mkdir(parents=True)
+    (listdir / "TO SCRAPE.md").write_text(
+        "https://blog.example.com [blog]\nhttps://plain.example.com/post\n", encoding="utf-8")
+
+    calls = {"scrape": [], "fetch": []}
+    monkeypatch.setattr(oc.sb, "scrape_seed",
+                        lambda seed, mode, cap, **k: calls["scrape"].append((seed, mode)) or
+                        {"seed": seed, "mode": mode, "found": 3, "written": 3,
+                         "duplicate": 0, "failed": 0, "capped": False})
+    # untagged still goes through fetch_url -> stub it to avoid network + writes
+    monkeypatch.setattr(oc, "fetch_url", lambda u: calls["fetch"].append(u) or {"title": "x", "text": "y"})
+    # keep writes inside tmp: point INBOX at tmp
+    monkeypatch.setattr(co, "INBOX", tmp_path / "inbox")
+    # nothing previously collected
+    monkeypatch.setattr(co, "url_already_collected", lambda u, dirs=None: False)
+    monkeypatch.setattr(co, "url_in_ledger", lambda u, ledger: False)
+
+    rc = oc.main(["collect", "--vault", str(tmp_path)])
+    assert rc == 0
+    assert calls["scrape"] == [("https://blog.example.com", "blog")]   # seed routed
+    assert calls["fetch"] == ["https://plain.example.com/post"]        # untagged single-page
+
+
+def test_cmd_collect_capped_seed_increments_capped_tally(tmp_path, monkeypatch, capsys):
+    """A [blog] seed whose scrape_seed returns capped=True must increment capped in
+    the JSON output; a non-capped seed must leave capped at 0."""
+    import obsidian_client as oc
+    import collect_obsidian as co
+
+    listdir = tmp_path / "00_Inbox" / "Clippings"
+    listdir.mkdir(parents=True)
+    # Two blog seeds: first capped, second not
+    (listdir / "TO SCRAPE.md").write_text(
+        "https://big.example.com [blog]\nhttps://small.example.com [blog]\n", encoding="utf-8")
+
+    def fake_scrape(seed, mode, cap, **k):
+        capped = "big" in seed          # big.example.com hits cap; small does not
+        return {"seed": seed, "mode": mode, "found": cap if capped else 2,
+                "written": 1, "duplicate": 0, "failed": 0, "capped": capped}
+
+    monkeypatch.setattr(oc.sb, "scrape_seed", fake_scrape)
+    monkeypatch.setattr(co, "INBOX", tmp_path / "inbox")
+    monkeypatch.setattr(co, "url_already_collected", lambda u, dirs=None: False)
+    monkeypatch.setattr(co, "url_in_ledger", lambda u, ledger: False)
+
+    rc = oc.main(["collect", "--vault", str(tmp_path)])
+    assert rc == 0
+    out = json.loads(capsys.readouterr().out)
+    assert out["capped"] == 1, f"expected capped=1, got {out}"
