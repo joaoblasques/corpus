@@ -35,6 +35,11 @@ URL_LIST_DEFAULT_MODE = {
     "blogs to scrape.md": "blog",
     "articles to process.md": None,
 }
+# Watch-mode lists are NEVER auto-struck: their blog seeds stay in the list
+# permanently so each scheduled collect re-scrapes them and picks up new posts
+# (dedup by source_url means only genuinely new articles are added). Consume-mode
+# lists (e.g. "articles to process.md") still get their lines struck once ingested.
+WATCH_LISTS = {"blogs to scrape.md"}
 MAX_LINKS_PER_NOTE = 10
 AUTH_WALLED_RE = re.compile(r"(?i)://(?:[^/]*\.)?(?:linkedin\.com|x\.com|twitter\.com)(?:/|$)")
 ASSET_EXT_RE = re.compile(r"(?i)\.(?:png|jpe?g|gif|svg|webp|pdf|mp4|mov|zip)$")
@@ -97,6 +102,13 @@ def list_default_mode(rel_path: str):
     """Default scrape mode for untagged lines of a url-list file, keyed by its
     basename (e.g. 'blogs to scrape.md' -> 'blog'). None for unknown lists."""
     return URL_LIST_DEFAULT_MODE.get(rel_path.rsplit("/", 1)[-1])
+
+
+def is_watch_list(rel_path) -> bool:
+    """True if this url-list is watch-mode (re-scraped forever; seeds never struck).
+    Keyed by basename so it survives the file living under any folder. A None/empty
+    path (a seed with no recorded via_vault_list) is not a watch list."""
+    return bool(rel_path) and rel_path.rsplit("/", 1)[-1] in WATCH_LISTS
 
 
 def iter_scrape_targets(text: str, default_mode=None) -> list:
@@ -309,5 +321,6 @@ def reapable(dedup_dirs=None) -> dict:
         if vl and su:
             url_strikes.append((vl, su))
     seed_strikes = [(rec["list"], seed) for seed, rec in seeds.items()
-                    if rec["count"] >= 1 and rec["all_ingested"] and rec["list"]]
+                    if rec["count"] >= 1 and rec["all_ingested"] and rec["list"]
+                    and not is_watch_list(rec["list"])]   # watch lists are never struck
     return {"vault_notes": notes, "url_strikes": url_strikes, "seed_strikes": seed_strikes}

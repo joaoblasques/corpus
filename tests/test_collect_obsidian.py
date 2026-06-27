@@ -230,6 +230,28 @@ def test_reapable_seed_strikeable_only_when_all_posts_ingested(tmp_path):
     assert ("00_Inbox/Clippings/TO SCRAPE.md", seed) in r["seed_strikes"]         # all ingested
 
 
+def test_is_watch_list_keyed_by_basename():
+    assert co.is_watch_list("00_Inbox/Clippings/blogs to scrape.md") is True
+    assert co.is_watch_list("blogs to scrape.md") is True            # any folder
+    assert co.is_watch_list("00_Inbox/Clippings/articles to process.md") is False
+    assert co.is_watch_list("00_Inbox/Clippings/TO SCRAPE.md") is False
+    assert co.is_watch_list(None) is False and co.is_watch_list("") is False
+
+
+def test_reapable_never_strikes_watch_list_seed_even_when_all_ingested(tmp_path):
+    # 'blogs to scrape.md' is a watch list: its seed stays forever so the blog is
+    # re-scraped for new posts. Even with every post ingested, the seed is NOT struck.
+    seed = "https://watched-blog.com"
+    via = "00_Inbox/Clippings/blogs to scrape.md"
+    (tmp_path / "p1.md").write_text(
+        _src(seed, ingested=True, via=via, source_url="https://watched-blog.com/p1"), encoding="utf-8")
+    (tmp_path / "p2.md").write_text(
+        _src(seed, ingested=True, via=via, source_url="https://watched-blog.com/p2"), encoding="utf-8")
+    r = co.reapable([tmp_path])
+    assert (via, seed) not in r["seed_strikes"]    # watch list -> never struck
+    assert r["seed_strikes"] == []
+
+
 def test_reapable_excludes_scrape_posts_from_url_strikes(tmp_path):
     (tmp_path / "p1.md").write_text(_src("https://b.com", ingested=True, source_url="https://b.com/p1"), encoding="utf-8")
     r = co.reapable([tmp_path])
