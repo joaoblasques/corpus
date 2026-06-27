@@ -27,7 +27,14 @@ EXCLUDE_DIRS = [
     "03_Resources/llm-wiki-system",
 ]
 EXCLUDE_FILE_RE = re.compile(r"(?i)(_processed\.md$|(^|/)README\.md$)")
-URL_LIST_NAMES = {"articles to process.md", "TO SCRAPE.md"}
+URL_LIST_NAMES = {"articles to process.md", "blogs to scrape.md"}
+# Per-list default scrape mode for UNTAGGED lines (an explicit [blog]/[series]
+# tag on a line still overrides). "blogs to scrape" treats every line as a blog
+# to deep-scrape; "articles to process" stays single-page (mode None).
+URL_LIST_DEFAULT_MODE = {
+    "blogs to scrape.md": "blog",
+    "articles to process.md": None,
+}
 MAX_LINKS_PER_NOTE = 10
 AUTH_WALLED_RE = re.compile(r"(?i)://(?:[^/]*\.)?(?:linkedin\.com|x\.com|twitter\.com)(?:/|$)")
 ASSET_EXT_RE = re.compile(r"(?i)\.(?:png|jpe?g|gif|svg|webp|pdf|mp4|mov|zip)$")
@@ -86,14 +93,25 @@ def parse_scrape_tag(line: str) -> dict:
     return {"url": url, "mode": mode, "cap": cap}
 
 
-def iter_scrape_targets(text: str) -> list:
+def list_default_mode(rel_path: str):
+    """Default scrape mode for untagged lines of a url-list file, keyed by its
+    basename (e.g. 'blogs to scrape.md' -> 'blog'). None for unknown lists."""
+    return URL_LIST_DEFAULT_MODE.get(rel_path.rsplit("/", 1)[-1])
+
+
+def iter_scrape_targets(text: str, default_mode=None) -> list:
     """Per-line {url, mode, cap} for every url-list line that holds a URL,
-    order-preserved and deduped by url (first occurrence's tag wins)."""
+    order-preserved and deduped by url (first occurrence's tag wins). An
+    untagged line (mode None) inherits `default_mode` — so a whole list can
+    default to blog-scraping without per-line [blog] tags; an explicit
+    [blog]/[series] tag on a line always overrides the default."""
     seen, out = set(), []
     for line in (text or "").splitlines():
         tgt = parse_scrape_tag(line)
         if tgt["url"] and tgt["url"] not in seen:
             seen.add(tgt["url"])
+            if tgt["mode"] is None:
+                tgt["mode"] = default_mode
             out.append(tgt)
     return out
 

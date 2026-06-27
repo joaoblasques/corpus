@@ -73,7 +73,8 @@ def cmd_collect(args) -> int:
             else:  # url-list
                 text = Path(d["abs_path"]).read_text(encoding="utf-8", errors="replace")
                 ledger = Path(d["abs_path"]).parent / "articles_processed.md"
-                for tgt in co.iter_scrape_targets(text):
+                default_mode = co.list_default_mode(d["rel_path"])
+                for tgt in co.iter_scrape_targets(text, default_mode):
                     url, mode, cap = tgt["url"], tgt["mode"], tgt["cap"]
                     if mode in ("blog", "series"):
                         if args.dry_run:

@@ -32,7 +32,7 @@ def test_is_included_excludes():
 
 def test_classify():
     assert co.classify("00_Inbox/Clippings/articles to process.md") == "url-list"
-    assert co.classify("00_Inbox/Clippings/TO SCRAPE.md") == "url-list"
+    assert co.classify("00_Inbox/Clippings/blogs to scrape.md") == "url-list"
     assert co.classify("03_Resources/Articles/Clean Code.md") == "note"
 
 
@@ -299,3 +299,30 @@ def test_build_url_source_omits_scrape_seed_when_absent():
     out = co.build_url_source({
         "source_url": "https://b.com/p1", "via_vault_list": "L", "collected_at": "2026-06-26"}, "body")
     assert "scrape_seed" not in out
+
+
+# --- blogs-to-scrape default mode + filename rename (2026-06-27) ---
+
+def test_url_list_names_renamed_to_blogs_to_scrape():
+    assert "blogs to scrape.md" in co.URL_LIST_NAMES
+    assert "TO SCRAPE.md" not in co.URL_LIST_NAMES
+    assert "articles to process.md" in co.URL_LIST_NAMES
+
+
+def test_list_default_mode_blogs_vs_articles():
+    assert co.list_default_mode("00_Inbox/Clippings/blogs to scrape.md") == "blog"
+    assert co.list_default_mode("00_Inbox/Clippings/articles to process.md") is None
+    assert co.list_default_mode("00_Inbox/Clippings/other.md") is None
+
+
+def test_iter_scrape_targets_applies_default_mode():
+    text = "https://a.com\nhttps://b.com [series]\nhttps://c.com [blog:5]\n"
+    out = co.iter_scrape_targets(text, default_mode="blog")
+    assert out[0] == {"url": "https://a.com", "mode": "blog", "cap": 200}   # untagged -> default
+    assert out[1]["mode"] == "series"                                       # explicit tag wins
+    assert out[2] == {"url": "https://c.com", "mode": "blog", "cap": 5}     # explicit blog:N
+
+
+def test_iter_scrape_targets_default_none_keeps_single_page():
+    out = co.iter_scrape_targets("https://a.com\n")   # default None -> single-page
+    assert out[0]["mode"] is None
