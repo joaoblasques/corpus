@@ -532,6 +532,25 @@ def run_pdf_reap(*, _subprocess_run=None) -> dict:
         return {"status": "failed", "error": str(exc)}
 
 
+def run_github_reap(*, _subprocess_run=None) -> dict:
+    """Post-ingest: invoke `github_client.py reap` to un-star repos whose digest is
+    now corpus_ingested, keeping the user's GitHub stars a clean 'not yet processed
+    by Corpus' list. Gated on corpus_ingested ∩ still-starred inside the subcommand.
+    Failure recorded, never raised."""
+    _run = _subprocess_run if _subprocess_run is not None else subprocess.run
+    try:
+        proc = _run([sys.executable, str(BIN / "github_client.py"), "reap"],
+                    capture_output=True, text=True)
+        if proc.returncode != 0:
+            return {"status": "failed", "error": proc.stderr.strip() or f"exit {proc.returncode}"}
+        try:
+            return json.loads(proc.stdout)
+        except (json.JSONDecodeError, AttributeError):
+            return {"status": "ok"}
+    except Exception as exc:  # noqa: BLE001
+        return {"status": "failed", "error": str(exc)}
+
+
 def build_summary(tallies: dict, dry_run: bool) -> dict:
     """Assemble the run's stdout summary from the collected tallies. Surfaces the
     post-ingest `email_relabel` (reap-labels), `x_reap`, and `pdf_reap` results
@@ -545,6 +564,7 @@ def build_summary(tallies: dict, dry_run: bool) -> dict:
         "x_reap": tallies.get("x_reap", {}),
         "obsidian_reap": tallies.get("obsidian_reap", {}),
         "pdf_reap": tallies.get("pdf_reap", {}),
+        "github_reap": tallies.get("github_reap", {}),
         "commit": tallies.get("commit", {}),
     }
 
@@ -1028,6 +1048,14 @@ def main(argv=None) -> int:
                     tallies["pdf_reap"] = run_pdf_reap()
                 except Exception as exc:  # noqa: BLE001
                     tallies["pdf_reap"] = {"status": "failed", "error": str(exc)}
+
+                # Post-ingest: un-star GitHub repos now corpus_ingested, so the user's
+                # stars stay a clean 'not yet processed' list (gated on corpus_ingested
+                # ∩ still-starred). Failure must NOT abort the run.
+                try:
+                    tallies["github_reap"] = run_github_reap()
+                except Exception as exc:  # noqa: BLE001
+                    tallies["github_reap"] = {"status": "failed", "error": str(exc)}
 
                 # Post-ingest integrity backstop: deterministically lint the corpus
                 # the unattended agent just wrote to, and record any broken

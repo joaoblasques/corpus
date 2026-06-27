@@ -55,13 +55,34 @@ def _next_link(link_header):
     return None
 
 
+def _parse_api_args(api_args):
+    """Split `gh api` args into (method, endpoint, paginate). Supports `-X/--method
+    METHOD` and `--paginate`; the endpoint is the first non-flag positional."""
+    method, endpoint, paginate = "GET", "", False
+    toks = api_args[1:]
+    i = 0
+    while i < len(toks):
+        t = toks[i]
+        if t in ("-X", "--method"):
+            if i + 1 < len(toks):
+                method = toks[i + 1].upper()
+            i += 2
+            continue
+        if t == "--paginate":
+            paginate = True
+        elif not t.startswith("-") and not endpoint:
+            endpoint = t
+        i += 1
+    return method, endpoint, paginate
+
+
 def _http_api(api_args, token, *, _opener=None):
-    """Serve a `gh api <endpoint> [--paginate]` call over HTTPS. Returns a
-    _Resp whose stdout is the JSON body (concatenated across pages when
-    --paginate). Non-2xx or transport error -> returncode 1."""
+    """Serve a `gh api <endpoint> [-X METHOD] [--paginate]` call over HTTPS. Returns
+    a _Resp whose stdout is the JSON body (concatenated across pages when
+    --paginate); a no-content 2xx (e.g. DELETE 204) yields returncode 0 + empty
+    stdout. Non-2xx or transport error -> returncode 1."""
     opener = _opener or (lambda req: urllib.request.urlopen(req, timeout=30))
-    endpoint = api_args[1] if len(api_args) > 1 else ""
-    paginate = "--paginate" in api_args
+    method, endpoint, paginate = _parse_api_args(api_args)
     url = API_BASE + endpoint.lstrip("/")
     headers = {
         "Authorization": f"Bearer {token}",
@@ -72,7 +93,8 @@ def _http_api(api_args, token, *, _opener=None):
     collected, single = None, None
     try:
         while url:
-            with opener(urllib.request.Request(url, headers=headers)) as r:
+            req = urllib.request.Request(url, headers=headers, method=method)
+            with opener(req) as r:
                 body = r.read().decode("utf-8")
                 data = json.loads(body) if body else None
                 if paginate and isinstance(data, list):
@@ -134,6 +156,14 @@ def list_starred(max_n=None, *, _run=None) -> list:
         if max_n and len(out) >= max_n:
             break
     return out
+
+
+def unstar(full_name: str, *, _run=None) -> bool:
+    """Un-star a repo: DELETE /user/starred/{owner}/{repo}. GitHub returns 204 on
+    success and is idempotent (un-starring an already-unstarred repo also succeeds).
+    Returns True iff the call returned 0."""
+    p = _gh(["api", "-X", "DELETE", f"user/starred/{full_name}"], _run=_run)
+    return getattr(p, "returncode", 1) == 0
 
 
 def _decode(content) -> str:
@@ -253,6 +283,31 @@ def cmd_run(args) -> int:
     return 0
 
 
+def cmd_reap(args) -> int:
+    """Post-ingest: un-star repos whose digest is now corpus_ingested, so the user's
+    GitHub stars stay a clean 'not yet processed by Corpus' list. Only un-stars repos
+    that are BOTH corpus_ingested AND still starred (intersection) — idempotent and
+    quiet once drained. Fails closed: if the star list can't be read, un-stars nothing."""
+    if not gh_available():
+        print(json.dumps({"status": "not configured", "unstarred": 0}))
+        return 0
+    ingested = set(cg.reapable())
+    if not ingested:
+        print(json.dumps({"unstarred": 0, "candidates": 0, "dry_run": bool(args.dry_run)}))
+        return 0
+    starred = {r["full_name"] for r in list_starred() if r.get("full_name")}
+    targets = sorted(ingested & starred)
+    n = 0
+    for fn in targets:
+        if args.dry_run:
+            n += 1
+        elif unstar(fn):
+            n += 1
+    print(json.dumps({"unstarred": n, "candidates": len(targets),
+                      "dry_run": bool(args.dry_run)}))
+    return 0
+
+
 def _build_parser():
     p = argparse.ArgumentParser(description="GitHub repo collector (starred repos via gh).")
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -266,6 +321,9 @@ def _build_parser():
     pr.add_argument("--dry-run", action="store_true", help="List new candidates; write nothing.")
     pr.add_argument("--collected-at", default=None, help="Override YYYY-MM-DD stamp.")
     pr.set_defaults(func=cmd_run)
+    prp = sub.add_parser("reap", help="Un-star repos whose digest is now corpus_ingested.")
+    prp.add_argument("--dry-run", action="store_true", help="Count un-star candidates; un-star nothing.")
+    prp.set_defaults(func=cmd_reap)
     return p
 
 

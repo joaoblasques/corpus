@@ -56,6 +56,83 @@ def test_http_api_http_error_returns_rc1():
     assert gh._http_api(["api", "user"], "tok", _opener=opener).returncode == 1
 
 
+def test_parse_api_args_extracts_method_endpoint_paginate():
+    assert gh._parse_api_args(["api", "user"]) == ("GET", "user", False)
+    assert gh._parse_api_args(["api", "user/starred", "--paginate"]) == ("GET", "user/starred", True)
+    assert gh._parse_api_args(["api", "-X", "DELETE", "user/starred/a/b"]) == ("DELETE", "user/starred/a/b", False)
+
+
+def test_http_api_delete_sends_delete_method_and_handles_204():
+    seen = {}
+
+    def opener(req):
+        seen["method"] = req.get_method()
+        seen["url"] = req.full_url
+        return _FakeResp("")   # 204 No Content -> empty body
+
+    out = gh._http_api(["api", "-X", "DELETE", "user/starred/owner/name"], "tok", _opener=opener)
+    assert out.returncode == 0 and out.stdout == ""
+    assert seen["method"] == "DELETE"
+    assert seen["url"] == "https://api.github.com/user/starred/owner/name"
+
+
+def test_unstar_issues_delete_and_reports_success():
+    calls = []
+
+    def fake_run(cmd, *a, **k):
+        calls.append(cmd)
+        return _proc(0)
+
+    assert gh.unstar("owner/name", _run=fake_run) is True
+    assert calls[0] == ["gh", "api", "-X", "DELETE", "user/starred/owner/name"]
+
+
+def test_unstar_returns_false_on_failure():
+    assert gh.unstar("owner/name", _run=lambda *a, **k: _proc(1)) is False
+
+
+def test_cmd_reap_not_configured_when_gh_unavailable(monkeypatch, capsys):
+    monkeypatch.setattr(gh, "gh_available", lambda **k: False)
+    rc = gh.cmd_reap(gh._args(["reap"]))
+    assert rc == 0 and "not configured" in capsys.readouterr().out
+
+
+def test_cmd_reap_unstars_ingested_and_still_starred_only(monkeypatch, capsys):
+    monkeypatch.setattr(gh, "gh_available", lambda **k: True)
+    # corpus has digests for a/b and c/d ingested; e/f ingested but NO LONGER starred
+    monkeypatch.setattr(gh.cg, "reapable", lambda dirs=None: ["a/b", "c/d", "e/f"])
+    monkeypatch.setattr(gh, "list_starred",
+                        lambda mx=None, **k: [{"full_name": "a/b"}, {"full_name": "c/d"}, {"full_name": "g/h"}])
+    unstarred = []
+    monkeypatch.setattr(gh, "unstar", lambda fn, **k: unstarred.append(fn) or True)
+    rc = gh.cmd_reap(gh._args(["reap"]))
+    out = json.loads(capsys.readouterr().out)
+    assert rc == 0
+    assert sorted(unstarred) == ["a/b", "c/d"]   # e/f not starred anymore; g/h not ingested
+    assert out["unstarred"] == 2 and out["candidates"] == 2
+
+
+def test_cmd_reap_dry_run_unstars_nothing(monkeypatch, capsys):
+    monkeypatch.setattr(gh, "gh_available", lambda **k: True)
+    monkeypatch.setattr(gh.cg, "reapable", lambda dirs=None: ["a/b"])
+    monkeypatch.setattr(gh, "list_starred", lambda mx=None, **k: [{"full_name": "a/b"}])
+    called = []
+    monkeypatch.setattr(gh, "unstar", lambda fn, **k: called.append(fn) or True)
+    rc = gh.cmd_reap(gh._args(["reap", "--dry-run"]))
+    out = json.loads(capsys.readouterr().out)
+    assert rc == 0 and called == [] and out["unstarred"] == 1 and out["dry_run"] is True
+
+
+def test_cmd_reap_fails_closed_when_no_ingested(monkeypatch, capsys):
+    monkeypatch.setattr(gh, "gh_available", lambda **k: True)
+    monkeypatch.setattr(gh.cg, "reapable", lambda dirs=None: [])
+    listed = []
+    monkeypatch.setattr(gh, "list_starred", lambda mx=None, **k: listed.append(1) or [])
+    rc = gh.cmd_reap(gh._args(["reap"]))
+    out = json.loads(capsys.readouterr().out)
+    assert rc == 0 and out["unstarred"] == 0 and listed == []   # no star-list call when nothing ingested
+
+
 def test_gh_routes_to_http_when_token_present_and_no_run(monkeypatch):
     monkeypatch.setenv("GH_TOKEN", "tok")
     monkeypatch.setattr(gh, "_http_api", lambda args, token, **k: gh._Resp(0, '{"ok":1}'))

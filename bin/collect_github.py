@@ -18,6 +18,7 @@ ROOT = Path(__file__).resolve().parent.parent
 INBOX = ROOT / "raw" / "_inbox"
 DEDUP_DIRS = [ROOT / "raw" / "_inbox", ROOT / "raw" / "github"]
 _REPO_RE = re.compile(r"^repo:\s*(\S+)\s*$", re.M)
+_INGESTED_RE = re.compile(r"^corpus_ingested:\s*true\s*$", re.M)
 
 
 def slugify(full_name: str) -> str:
@@ -41,6 +42,33 @@ def already_collected(full_name: str, dirs=None, ledger_path=None) -> bool:
             if m and m.group(1) == full_name:
                 return True
     return False
+
+
+def reapable(dirs=None) -> list:
+    """Full-names of starred-repo digests now `corpus_ingested: true`.
+
+    Drives the un-star reaper: once a repo's digest is in the corpus, its star on
+    GitHub has served its purpose (it was just a 'to-process' marker) and can be
+    removed. Mirrors collect_x.reapable. Gated on corpus_ingested; the caller
+    additionally intersects with the still-starred set so DELETE is only sent for
+    repos actually still starred (idempotent + quiet once drained)."""
+    out, seen = [], set()
+    for d in (dirs if dirs is not None else DEDUP_DIRS):
+        p = Path(d)
+        if not p.exists():
+            continue
+        for md in p.glob("*.md"):
+            try:
+                head = md.read_text(encoding="utf-8", errors="ignore")[:1500]
+            except OSError:
+                continue
+            if not _INGESTED_RE.search(head):
+                continue
+            m = _REPO_RE.search(head)
+            if m and m.group(1) not in seen:
+                seen.add(m.group(1))
+                out.append(m.group(1))
+    return out
 
 
 def _scalar(s) -> str:

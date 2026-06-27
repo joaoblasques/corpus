@@ -44,3 +44,27 @@ def test_already_collected_matches_frontmatter_repo_line(tmp_path):
     (d / "x.md").write_text("---\nchannel: github\nrepo: owner/name\n---\nbody", encoding="utf-8")
     assert cg.already_collected("owner/name", dirs=[d], ledger_path=led) is True
     assert cg.already_collected("owner/other", dirs=[d], ledger_path=led) is False
+
+
+def test_reapable_returns_only_ingested_repo_fullnames(tmp_path):
+    d = tmp_path / "github"; d.mkdir()
+    (d / "ingested.md").write_text(
+        "---\nchannel: github\nrepo: owner/done\ncorpus_ingested: true\n---\nbody", encoding="utf-8")
+    (d / "pending.md").write_text(
+        "---\nchannel: github\nrepo: owner/todo\n---\nbody", encoding="utf-8")
+    assert cg.reapable(dirs=[d]) == ["owner/done"]   # only the corpus_ingested digest
+
+
+def test_reapable_dedups_across_dirs(tmp_path):
+    a = tmp_path / "_inbox"; a.mkdir()
+    b = tmp_path / "github"; b.mkdir()
+    fm = "---\nchannel: github\nrepo: owner/dup\ncorpus_ingested: true\n---\nbody"
+    (a / "one.md").write_text(fm, encoding="utf-8")
+    (b / "two.md").write_text(fm, encoding="utf-8")
+    assert cg.reapable(dirs=[a, b]) == ["owner/dup"]   # same repo once, not twice
+
+
+def test_reapable_empty_when_nothing_ingested(tmp_path):
+    d = tmp_path / "github"; d.mkdir()
+    (d / "p.md").write_text("---\nchannel: github\nrepo: owner/todo\n---\nbody", encoding="utf-8")
+    assert cg.reapable(dirs=[d]) == []
