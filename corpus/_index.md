@@ -1,6 +1,6 @@
 # Corpus Index
 
-> Last updated: 2026-06-27 | Total pages: 285 | Total sources: 1124
+> Last updated: 2026-06-27 | Total pages: 285 | Total sources: 1130
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
@@ -424,3 +424,4 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - 2026-06-16: [[data-engineering/parquet]] (updated +1 source, web-backlog enrichment)
 - 2026-06-27: [[ai-engineering/claude-plans]] (new, ingest-auto; 5 localized claude.com plan pages)
 - 2026-06-27: [[ai-engineering/anthropic]] (updated +1 source, Claude Platform for agents)
+- 2026-06-27: [[ai-engineering/anthropic]] (updated +6 sources, ingest-auto; 5 localized /solutions/agents variants + Claude for Education section)

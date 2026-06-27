@@ -33,6 +33,24 @@ sources:
   - path: raw/web/web-ai-claude-419e4408.md
     channel: web
     ingested_at: 2026-06-27
+  - path: raw/web/web-ai-agents-claude-by-anthropic-47a6f280.md
+    channel: web
+    ingested_at: 2026-06-27
+  - path: raw/web/web-ki-agenten-claude-fe3fc652.md
+    channel: web
+    ingested_at: 2026-06-27
+  - path: raw/web/web-agents-ia-claude-e3fe15ea.md
+    channel: web
+    ingested_at: 2026-06-27
+  - path: raw/web/web-ai-18438e8f.md
+    channel: web
+    ingested_at: 2026-06-27
+  - path: raw/web/web-ai-agents-claude-by-anthropic-18c36943.md
+    channel: web
+    ingested_at: 2026-06-27
+  - path: raw/web/web-claude-b824c3d1.md
+    channel: web
+    ingested_at: 2026-06-27
 aliases:
   - Anthropic
   - Anthropic PBC
@@ -98,7 +116,11 @@ The Fable 5 launch in June 2026 triggered a two-part crisis that reshaped develo
 
 ## Claude Platform for AI agents
 
-Anthropic markets Claude as the model to build production AI agents on, claiming Claude **outperforms other models in agent scenarios from customer support to coding** and earns top ratings for honesty, jailbreak resistance, and brand safety [^src12]. The **Claude Platform** is the developer surface: integrate Claude into existing applications to ship production-grade agents faster, build agents and workflows on the API, and **test and refine prompts in the Workbench** [^src12]. [[ai-engineering/claude-code|Claude Code]] is positioned as the agentic coding tool in this lineup — developers delegate tasks from migrations to bug fixes directly from the terminal [^src12]. See [[ai-engineering/claude-api|Claude API]], [[ai-engineering/ai-agent|AI Agent]], and [[ai-engineering/agent-security|Agent Security]] (brand-safety / jailbreak resistance).
+Anthropic markets Claude as the model to build production AI agents on, claiming Claude **outperforms other models in agent scenarios from customer support to coding** and earns top ratings for honesty, jailbreak resistance, and brand safety [^src12]. The **Claude Platform** is the developer surface: integrate Claude into existing applications to ship production-grade agents faster, build agents and workflows on the API, and **test and refine prompts in the Workbench** [^src12]. [[ai-engineering/claude-code|Claude Code]] is positioned as the agentic coding tool in this lineup — developers delegate tasks from migrations to bug fixes directly from the terminal [^src12]. See [[ai-engineering/claude-api|Claude API]], [[ai-engineering/ai-agent|AI Agent]], and [[ai-engineering/agent-security|Agent Security]] (brand-safety / jailbreak resistance). The solutions page is published in many localized variants (en/de/fr/it/ko/ja) with identical content [^src12].
+
+## Claude for Education
+
+Anthropic markets **Claude for Education** as a comprehensive, institution-wide offering for students, faculty, and staff, built on its safety commitments so universities can adopt AI while preserving academic integrity [^src13]. Its framing is "built to strengthen thinking, not replace it" — a thinking partner, not an answer machine [^src13]. The flagship feature is **learning mode**, which functions like a tutor: rather than handing over answers it asks Socratic questions to guide students to find answers themselves, emphasizing principles over solutions and conceptual depth over convenient shortcuts, and ships templates for research and study guides [^src13]. For coding, **[[ai-engineering/claude-code|Claude Code]] is positioned as an "apprenticeship at scale"** — pairing with students in the development environment to show how professional programmers reason about real problems, on the premise that students across all disciplines need coding fundamentals [^src13]. For research, faculty use the **[[ai-engineering/claude-api|Claude API]]** to accelerate work (analyzing datasets, investigating theoretical questions, processing large volumes of text) and to build adaptive learning tools on the same API [^src13]. Anthropic frames its responsible-AI-in-education stance around equitable access, privacy/security (training on customer data only with permission), and transparency about what Claude can and cannot do [^src13]. This is the product/pedagogy layer above the institutional **Education** subscription tier on [[ai-engineering/claude-plans|Claude Plans & Pricing]].
 
 ## See also
 
@@ -121,4 +143,5 @@ Anthropic markets Claude as the model to build production AI agents on, claiming
 [^src9]: [Dario Amodei: The Urgency of Interpretability](../../raw/web/web-dario-amodei-the-urgency-of-interpretability.md) — Dario Amodei, Anthropic
 [^src10]: [anthropic/claude-cookbooks — official Claude API recipe collection (★45,788)](../../raw/github/github-anthropics-claude-cookbooks.md) — Anthropic, GitHub
 [^src11]: [Testing Mythos and Fable, Moving Beyond SWE-bench (The Batch)](../../raw/email/email-2026-06-19-testing-mythos-and-fable-moving-beyond-swe-bench-nvidia-s-op.md) — Andrew Ng, DeepLearning.AI
-[^src12]: [AI agents | Claude (Claude Platform / agents solutions page)](../../raw/web/web-ai-claude-419e4408.md) — claude.com/ja/solutions/agents
+[^src12]: [AI agents | Claude (Claude Platform / agents solutions page)](../../raw/web/web-ai-agents-claude-by-anthropic-47a6f280.md) — claude.com/solutions/agents (English canonical; also collected localized: de/fr/it/ko/ja)
+[^src13]: [教育 | Claude (Claude for Education solutions page)](../../raw/web/web-claude-b824c3d1.md) — claude.com/ja/solutions/education

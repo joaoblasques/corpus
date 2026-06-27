@@ -1555,3 +1555,11 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   - ingest: 0 ingested · 6 deferred · status=ok
 - lint:
   - 0 broken wikilinks · 0 broken citations · 0 orphans · 0 stubs
+
+## [2026-06-27 10:05] ingest | Claude.com localized /solutions/agents variants + Claude for Education
+- source: raw/web/web-ai-agents-claude-by-anthropic-47a6f280.md (+ web-ki-agenten-claude-fe3fc652, web-agents-ia-claude-e3fe15ea, web-ai-18438e8f, web-ai-agents-claude-by-anthropic-18c36943, web-claude-b824c3d1)
+- channel: web
+- domain: ai-engineering
+- pages touched: [ai-engineering/anthropic]
+- new pages: []
+- notes: ingest-auto run; 6 processed, 0 deferred. 5 localized claude.com/solutions/agents variants (en/de/fr/it/ko) consolidated as additional sources on anthropic.md's existing "Claude Platform for AI agents" section (content already ingested earlier via the ja variant web-ai-claude-419e4408); [^src12] repointed to the English canonical URL. 6th source (claude.com/ja/solutions/education) added a new "Claude for Education" section to anthropic.md (learning mode = Socratic tutor, Claude Code as apprenticeship-at-scale, Claude API for research).
