@@ -28,10 +28,27 @@ Code: `URL_LIST_DEFAULT_MODE` + `list_default_mode()` in `bin/collect_obsidian.p
 default off the file's basename; `iter_scrape_targets(text, default_mode)` applies it to
 untagged lines; `obsidian_client.cmd_collect` passes the list's default through.
 
-Each post becomes a `raw/_inbox/web-*.md` source tagged `scrape_seed: <seed>`. The seed
-line is struck from its list file only once EVERY one of its posts is `corpus_ingested`
-(so multi-run / paged scrapes are safe). Dedup is by `source_url` — re-tagging a blog
-later only adds new posts.
+Each post becomes a `raw/_inbox/web-*.md` source tagged `scrape_seed: <seed>`. Dedup is
+by `source_url` — re-scraping a blog only adds genuinely new posts (`scrape_seed`'s
+dedup check runs BEFORE fetching, so re-runs are cheap: re-read the sitemap, fetch only
+new URLs).
+
+## Watch-mode vs consume-mode lists (2026-06-27)
+
+A url-list is either **watch-mode** or **consume-mode**, keyed by basename in
+`collect_obsidian.WATCH_LISTS`:
+
+- `blogs to scrape.md` — **watch-mode**: blog seeds STAY in the file permanently. Every
+  scheduled collect re-scrapes them and picks up new posts. `reapable()` never adds a
+  watch-list seed to `seed_strikes`, even when all its current posts are
+  `corpus_ingested` (`is_watch_list()` guard). This is how the corpus keeps collecting
+  new articles from a blog as they're published.
+- `articles to process.md` — **consume-mode**: a line IS struck once its source is
+  `corpus_ingested` (the seed line is struck only when EVERY one of a seed's posts is
+  ingested). One-and-done.
+
+So for a watch list, "remove the processed line" is intentionally NOT done — removing a
+blog would stop watching it. To stop watching a blog, delete its line by hand.
 
 Reaping (the strike, plus staging ingested vault-note deletions) runs nightly via
 `scheduled_run.py` → `obsidian_client.py reap`. JS-only blogs with no sitemap/RSS scrape 0
