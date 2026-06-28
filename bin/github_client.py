@@ -166,6 +166,14 @@ def unstar(full_name: str, *, _run=None) -> bool:
     return getattr(p, "returncode", 1) == 0
 
 
+def star(full_name: str, *, _run=None) -> bool:
+    """Star a repo: PUT /user/starred/{owner}/{repo}. GitHub returns 204 on success
+    and is idempotent (starring an already-starred repo also succeeds). Mirror of
+    unstar(). Returns True iff the call returned 0."""
+    p = _gh(["api", "-X", "PUT", f"user/starred/{full_name}"], _run=_run)
+    return getattr(p, "returncode", 1) == 0
+
+
 def _decode(content) -> str:
     try:
         return base64.b64decode(content or "").decode("utf-8", "replace")

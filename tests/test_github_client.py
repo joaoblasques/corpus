@@ -243,3 +243,43 @@ def test_cmd_run_dry_run_writes_nothing(monkeypatch, capsys):
     monkeypatch.setattr(gh.cg, "write_collected", lambda *a, **k: wrote.append(1))
     rc = gh.cmd_run(gh._args(["run", "--dry-run"]))
     assert rc == 0 and wrote == [] and '"dry_run": true' in capsys.readouterr().out
+
+
+def test_star_issues_put_and_returns_true():
+    calls = {}
+
+    def fake_run(argv, **kw):
+        calls["argv"] = argv
+        return gh._Resp(0, "")
+
+    assert gh.star("owner/repo", _run=fake_run) is True
+    assert calls["argv"] == ["gh", "api", "-X", "PUT", "user/starred/owner/repo"]
+
+
+def test_star_returns_false_on_failure():
+    assert gh.star("owner/repo", _run=lambda argv, **kw: gh._Resp(1, "")) is False
+
+
+def test_http_api_put_sends_put_method_and_handles_204():
+    seen = {}
+
+    class _Ctx:
+        def __enter__(self_):
+            class _R:
+                headers = {}
+                def read(self_inner):
+                    return b""        # 204: empty body
+            return _R()
+        def __exit__(self_, *a):
+            return False
+
+    def fake_opener(req):
+        seen["method"] = req.method
+        seen["url"] = req.full_url
+        return _Ctx()
+
+    resp = gh._http_api(["api", "-X", "PUT", "user/starred/owner/repo"],
+                        "tok", _opener=fake_opener)
+    assert seen["method"] == "PUT"
+    assert seen["url"].endswith("/user/starred/owner/repo")
+    assert resp.returncode == 0 and resp.stdout == ""
