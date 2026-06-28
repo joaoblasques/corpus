@@ -48,6 +48,9 @@ raw/.scheduled_run.log
 # local-first LLM router usage log
 raw/.llm_usage.jsonl
 
+# blog watch-list seen-URL ledger — dedup memory for shelved/pruned backfill
+raw/.blog_seen_urls.txt
+
 # whisper youtube-rescue worklists + logs — local feeder state
 raw/.whisper_keepers.tsv
 raw/.whisper_worklist.tsv

@@ -73,7 +73,7 @@ def parse_url_list(text: str) -> list:
     return out
 
 
-DEFAULT_BLOG_CAP = 200
+DEFAULT_BLOG_CAP = 25   # watch-list scrape depth per blog: incremental, not full-archive
 SCRAPE_TAG_RE = re.compile(r"\[(blog|series)(?::(\d+))?\]\s*$")
 
 

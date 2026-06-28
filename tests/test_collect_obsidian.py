@@ -286,13 +286,13 @@ def test_extract_inline_links_respects_cap():
 
 def test_parse_scrape_tag_blog_series_and_untagged():
     assert co.parse_scrape_tag("https://blog.example.com [blog]") == {
-        "url": "https://blog.example.com", "mode": "blog", "cap": 200}
+        "url": "https://blog.example.com", "mode": "blog", "cap": 25}
     assert co.parse_scrape_tag("https://blog.example.com [blog:50]") == {
         "url": "https://blog.example.com", "mode": "blog", "cap": 50}
     assert co.parse_scrape_tag("- https://site.com/the-series  [series]") == {
-        "url": "https://site.com/the-series", "mode": "series", "cap": 200}
+        "url": "https://site.com/the-series", "mode": "series", "cap": 25}
     assert co.parse_scrape_tag("https://plain.example.com/post") == {
-        "url": "https://plain.example.com/post", "mode": None, "cap": 200}
+        "url": "https://plain.example.com/post", "mode": None, "cap": 25}
     assert co.parse_scrape_tag("no url here [blog]")["url"] == ""
 
 
@@ -303,7 +303,7 @@ def test_iter_scrape_targets_dedups_and_preserves_order():
             "https://a.com [blog:5]\n")   # dup url, first tag wins
     out = co.iter_scrape_targets(text)
     assert [t["url"] for t in out] == ["https://a.com", "https://b.com/series", "https://c.com/post"]
-    assert out[0] == {"url": "https://a.com", "mode": "blog", "cap": 200}
+    assert out[0] == {"url": "https://a.com", "mode": "blog", "cap": 25}
     assert out[1]["mode"] == "series"
     assert out[2]["mode"] is None
 
@@ -340,7 +340,7 @@ def test_list_default_mode_blogs_vs_articles():
 def test_iter_scrape_targets_applies_default_mode():
     text = "https://a.com\nhttps://b.com [series]\nhttps://c.com [blog:5]\n"
     out = co.iter_scrape_targets(text, default_mode="blog")
-    assert out[0] == {"url": "https://a.com", "mode": "blog", "cap": 200}   # untagged -> default
+    assert out[0] == {"url": "https://a.com", "mode": "blog", "cap": 25}   # untagged -> default
     assert out[1]["mode"] == "series"                                       # explicit tag wins
     assert out[2] == {"url": "https://c.com", "mode": "blog", "cap": 5}     # explicit blog:N
 

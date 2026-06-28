@@ -1,7 +1,17 @@
 import sys
 from pathlib import Path
+
+import pytest
+
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "bin"))
 import scrape_blog as sb  # noqa: E402
+
+
+@pytest.fixture(autouse=True)
+def _isolate_seen_ledger(tmp_path_factory, monkeypatch):
+    """Point the seen-URL ledger at an empty tmp file so tests never read the
+    real raw/.blog_seen_urls.txt (which holds the shelved-backfill URLs)."""
+    monkeypatch.setattr(sb, "SEEN_LEDGER", tmp_path_factory.mktemp("seen") / "seen.txt")
 
 SITEMAP = """<?xml version="1.0"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -137,3 +147,45 @@ def test_write_post_same_title_different_url_no_collision(tmp_path):
             if line.startswith("source_url:"):
                 urls_found.add(line.split("source_url:", 1)[1].strip())
     assert urls_found == {"https://b.com/post-a", "https://b.com/post-b"}
+
+
+def test_load_seen_reads_ledger_lines(tmp_path):
+    led = tmp_path / "seen.txt"
+    led.write_text("https://b.com/p1\nhttps://b.com/p2\n\n", encoding="utf-8")
+    assert sb.load_seen(led) == {"https://b.com/p1", "https://b.com/p2"}
+    assert sb.load_seen(tmp_path / "missing.txt") == set()   # absent -> empty set
+
+
+def test_post_collected_consults_seen_ledger():
+    seen = {"https://b.com/shelved"}
+    # in the ledger -> collected, even though no file on disk
+    assert sb._post_collected("https://b.com/shelved", dirs=[], seen=seen) is True
+    # not in ledger, no file -> not collected
+    assert sb._post_collected("https://b.com/fresh", dirs=[], seen=seen) is False
+
+
+def test_scrape_seed_skips_urls_in_seen_ledger(tmp_path, monkeypatch):
+    # p1 is in the seen-ledger (shelved); p2 is genuinely new. Only p2 is scraped.
+    led = tmp_path / "seen.txt"
+    led.write_text("https://b.com/p1\n", encoding="utf-8")
+    monkeypatch.setattr(sb, "SEEN_LEDGER", led)
+    sitemap = ('<?xml version="1.0"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+               '<url><loc>https://b.com/p1</loc></url>'
+               '<url><loc>https://b.com/p2</loc></url></urlset>')
+    res = sb.scrape_seed(
+        "https://b.com", "blog", collected_at="2026-06-28",
+        via_vault_list="00_Inbox/Clippings/blogs to scrape.md",
+        inbox=tmp_path, dedup_dirs=[tmp_path],
+        _session=lambda u: sitemap if u.endswith("/sitemap.xml") else "",
+        _fetch=lambda u: {"title": "t", "text": "body " + u})
+    assert res["found"] == 2 and res["written"] == 1 and res["duplicate"] == 1
+    written = [p for p in tmp_path.glob("web-*.md")]
+    assert len(written) == 1
+    assert "source_url: https://b.com/p2\n" in written[0].read_text(encoding="utf-8")
+
+
+def test_default_cap_is_incremental():
+    # watch-list scrape depth lowered from full-archive (200) to incremental
+    assert sb.DEFAULT_CAP == 25
+    import collect_obsidian as co
+    assert co.DEFAULT_BLOG_CAP == 25
