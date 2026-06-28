@@ -50,6 +50,31 @@ A url-list is either **watch-mode** or **consume-mode**, keyed by basename in
 So for a watch list, "remove the processed line" is intentionally NOT done — removing a
 blog would stop watching it. To stop watching a blog, delete its line by hand.
 
+## Backfill control: seen-URL ledger + low cap (2026-06-28)
+
+A watch list catches *new* posts; it should not dump every blog's back-catalogue into
+the corpus. Two guards keep it incremental:
+
+- **Per-blog cap `DEFAULT_BLOG_CAP = 25`** (down from 200) — the scrape depth per blog on
+  any run. Explicit `[blog:N]` still overrides. Adding a new blog backfills ~25 posts, not
+  its whole archive.
+- **Seen-URL ledger `raw/.blog_seen_urls.txt`** (gitignored) — `scrape_blog.load_seen()` +
+  `_post_collected()` treat a URL as collected if it's in the ledger OR on disk. This lets
+  a one-time archive dump be **shelved**: write its URLs to the ledger, delete the content
+  files from `raw/_inbox`, and forward-watch still skips them (no re-scrape) while only
+  genuinely new posts get ingested.
+
+**Precedent (2026-06-28):** a watch-list grew ~22→~101 seeds; one collect run scraped
+**8,818** posts (→ ~10k un-ingested in `raw/_inbox`, ~175 nights at `--max 50`). Decision:
+shelve the whole backfill (10,040 URLs → ledger, files deleted; `raw/_inbox` 11,104→1,064),
+keep forward-watch, lower the cap. Reversible — to backfill a specific blog, remove its
+URLs from the ledger and re-scrape.
+
+> **Known limitation (follow-up):** discovery is sitemap-first in document order, which is
+> not guaranteed newest-first. With a low cap this can keep the *wrong* slice (oldest) for
+> a blog whose sitemap is oldest-first. An RSS/feed-first (newest-first) discovery order
+> would make the cap reliably keep the most recent posts — not yet implemented.
+
 Reaping (the strike, plus staging ingested vault-note deletions) runs nightly via
 `scheduled_run.py` → `obsidian_client.py reap`. JS-only blogs with no sitemap/RSS scrape 0
 posts and keep their seed (logged), pending browser-automation support.
