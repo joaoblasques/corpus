@@ -21,6 +21,7 @@ import os
 import subprocess
 import sys
 import urllib.error
+import urllib.parse
 import urllib.request
 from pathlib import Path
 
@@ -172,6 +173,30 @@ def star(full_name: str, *, _run=None) -> bool:
     unstar(). Returns True iff the call returned 0."""
     p = _gh(["api", "-X", "PUT", f"user/starred/{full_name}"], _run=_run)
     return getattr(p, "returncode", 1) == 0
+
+
+def search_repos(topic, *, min_stars, pushed_after, per_page=cg.DISCOVER_PER_TOPIC,
+                 _run=None) -> list:
+    """Top repos for one GitHub topic, sorted by stars desc:
+    GET /search/repositories?q=topic:<t> stars:>=<min> pushed:>=<date>.
+    Returns [{full_name, stars, pushed_at}]; [] on any error."""
+    q = f"topic:{topic} stars:>={min_stars} pushed:>={pushed_after}"
+    qs = ("q=" + urllib.parse.quote(q) +
+          f"&sort=stars&order=desc&per_page={per_page}")
+    p = _gh(["api", f"search/repositories?{qs}"], _run=_run)
+    if getattr(p, "returncode", 1) != 0:
+        return []
+    try:
+        data = json.loads(p.stdout)
+    except Exception:  # noqa: BLE001
+        return []
+    out = []
+    for it in (data.get("items") or []) if isinstance(data, dict) else []:
+        fn = it.get("full_name")
+        if fn:
+            out.append({"full_name": fn, "stars": it.get("stargazers_count") or 0,
+                        "pushed_at": it.get("pushed_at") or ""})
+    return out
 
 
 def _decode(content) -> str:

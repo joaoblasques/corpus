@@ -1,5 +1,6 @@
 import base64
 import json
+import json as _json
 import sys
 import types
 import urllib.error
@@ -283,3 +284,37 @@ def test_http_api_put_sends_put_method_and_handles_204():
     assert seen["method"] == "PUT"
     assert seen["url"].endswith("/user/starred/owner/repo")
     assert resp.returncode == 0 and resp.stdout == ""
+
+
+def test_search_repos_builds_query_and_parses_items():
+    calls = {}
+
+    def fake_run(argv, **kw):
+        calls["argv"] = argv
+        body = _json.dumps({"items": [
+            {"full_name": "o/big", "stargazers_count": 900, "pushed_at": "2026-06-01T00:00:00Z"},
+            {"full_name": "o/small", "stargazers_count": 600, "pushed_at": "2026-05-01T00:00:00Z"},
+        ]})
+        return gh._Resp(0, body)
+
+    out = gh.search_repos("llm", min_stars=500, pushed_after="2025-06-28",
+                          per_page=15, _run=fake_run)
+    assert out == [
+        {"full_name": "o/big", "stars": 900, "pushed_at": "2026-06-01T00:00:00Z"},
+        {"full_name": "o/small", "stars": 600, "pushed_at": "2026-05-01T00:00:00Z"},
+    ]
+    # endpoint carries the search path + qualifiers (URL-encoded) + sort
+    endpoint = calls["argv"][2]
+    assert endpoint.startswith("search/repositories?q=")
+    assert "topic" in endpoint and "stars" in endpoint and "pushed" in endpoint
+    assert "sort=stars" in endpoint and "order=desc" in endpoint and "per_page=15" in endpoint
+
+
+def test_search_repos_returns_empty_on_error():
+    assert gh.search_repos("llm", min_stars=500, pushed_after="2025-06-28",
+                           _run=lambda argv, **kw: gh._Resp(1, "")) == []
+
+
+def test_search_repos_returns_empty_on_garbage_json():
+    assert gh.search_repos("llm", min_stars=500, pushed_after="2025-06-28",
+                           _run=lambda argv, **kw: gh._Resp(0, "not json")) == []
