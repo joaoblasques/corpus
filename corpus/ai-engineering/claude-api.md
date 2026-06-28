@@ -24,6 +24,21 @@ sources:
   - path: raw/web/web-advisor-tool.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/web/web-claude-platform-claude-by-anthropic-0dd93a39.md
+    channel: web
+    ingested_at: 2026-06-28
+  - path: raw/web/web-claude-platform-claude-by-anthropic-2c3546bd.md
+    channel: web
+    ingested_at: 2026-06-28
+  - path: raw/web/web-claude-platform-claude-by-anthropic-4a8b1dbd.md
+    channel: web
+    ingested_at: 2026-06-28
+  - path: raw/web/web-claude-platform-claude-9b64ec80.md
+    channel: web
+    ingested_at: 2026-06-28
+  - path: raw/web/web-claude-platform-claude-by-anthropic-564f6e79.md
+    channel: web
+    ingested_at: 2026-06-28
 aliases:
   - Claude API
   - claude-api
@@ -38,7 +53,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-12
-updated: 2026-06-25
+updated: 2026-06-28
 ---
 
 # Claude API
@@ -193,6 +208,12 @@ As of mid-2026, the full Claude Platform is available on AWS under AWS IAM authe
 - **Claude Platform on AWS** — Anthropic operates the service; data processed outside the AWS boundary. Best for companies that want the full platform experience.
 - **Claude on Amazon Bedrock** — AWS is the data processor, within the AWS boundary. Best for strict regional data residency requirements.
 
+## Context Editing
+
+**Context Editing** is a Claude Platform feature that automatically prunes less-relevant tool calls and results from the context window as it approaches the token limit [^src8]. It operates transparently — no explicit configuration is required per request. This allows long-running agentic workflows to sustain themselves without hitting the context ceiling by shedding low-signal history while preserving the most relevant context.
+
+Context Editing sits alongside Citations, File API, Skills, Memory, MCP Connectors, and Structured Outputs in the Claude Platform feature set [^src8].
+
 ## See also
 
 - [[ai-engineering/anthropic|Anthropic]] — model lineup and ids
@@ -207,3 +228,4 @@ As of mid-2026, the full Claude Platform is available on AWS under AWS IAM authe
 [^src5]: [The advisor strategy: Give Sonnet an intelligence boost with Opus](../../raw/notes/notes-clippings-the-advisor-strategy-give-sonnet-an-intelligence-boost-with.md) — Anthropic
 [^src6]: [Claude Enterprise Analytics API Reference Guide](../../raw/web/web-claude-enterprise-analytics-api-reference-guide-claude-help.md) — Anthropic Help Center
 [^src7]: [Advisor tool — official API docs](../../raw/web/web-advisor-tool.md) — Anthropic platform docs
+[^src8]: [Claude Platform (ja)](../../raw/web/web-claude-platform-claude-by-anthropic-0dd93a39.md) — claude.com/ja/platform/api; full Claude Platform feature list; collected 2026-06-28

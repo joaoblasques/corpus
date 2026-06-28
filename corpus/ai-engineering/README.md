@@ -90,6 +90,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [[ai-engineering/manus|Manus]] — entity · draft · AI "action engine" (manus.im); sandboxed cloud VM execution, wide research (parallel instances), Browser Operator (Chrome extension for authenticated sites), deliverable output types (spreadsheets/presentations/websites)
 - [[ai-engineering/claude-design|Claude Design]] — entity · draft · Anthropic Labs design product (launched 2026-04-17); Opus 4.7 vision + self-validation, design systems (skill.md), decks/prototypes/websites/launch videos, in-canvas tweaks/comment/draw/edit, export + hand-off to Claude Code; separate weekly quota
 - [[ai-engineering/claude-for-education|Claude for Education]] — entity · stub · Anthropic's university-wide program (students/faculty/admins); Socratic "learning mode" tutor, Claude Code as scaled apprenticeship, Claude API for research; distinct from the Education plan tier
+- [[ai-engineering/claude-for-government|Claude for Government]] — entity · draft · FedRAMP High + IL5 deployment surfaces (API/Claude Gov/app); classified national-security mission support on AWS; compliance posture shared with finance vertical
 
 ### Syntheses
 - [[ai-engineering/agentic-coding|Agentic Coding]] — synthesis · draft · **sub-hub** · coding-agent orchestration; conductor→orchestrator, AX, the verification bottleneck

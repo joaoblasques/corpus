@@ -1587,3 +1587,65 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - new pages: [ai-business/claude-corps, ai-engineering/sources/claude-code-website-build-workflow]
 - pages touched: [ai-business/README, ai-business/claude-for-startups, ai-engineering/claude-design, ai-engineering/sources/claude-code-website-build-workflow, ai-business/claude-corps]
 - notes: interactive drain of the fetchable lines from the vault url-list. Claude Corps = Anthropic+CodePath+Social Finance nonprofit fellowship (talent-supply counterpart to claude-for-startups access programs). Charlie Hills = 9-step spec-driven CONTEXT/COPY/DESIGN website-build workflow + structural-donor component rule. 4 lines could NOT be fetched and remain in the file: kaggle (JS-rendered SPA, no HTML body), towardsdatascience (HTTP 403), 2× x.com (auth-walled). The 2 ingested lines struck from the vault file.
+
+## [2026-06-28 00:00] ingest | Anthropic website scrape — claude.com solutions/pricing/platform/customers (30 sources, 6 groups)
+- source: raw/web/web-financial-services-claude-by-anthropic-d0841a7c.md + 4 lang variants (ja/ko/fr/de)
+- channel: web
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/claude-for-finance.md]
+- new pages: []
+- notes: ingest-auto run; Anthropic financial services solutions page — LSEG/FactSet/S&P/Morningstar integrations, 4 agent templates, SOC2/FedRAMP compliance, 4 verticals. en primary + ja/ko/fr/de language stamps only.
+
+## [2026-06-28 00:01] ingest | Anthropic website scrape — government solutions (5 sources)
+- source: raw/web/web-government-claude-by-anthropic-523b938e.md + 4 lang variants (ja/ko/de/fr)
+- channel: web
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/claude-for-government.md, corpus/ai-engineering/README.md]
+- new pages: [corpus/ai-engineering/claude-for-government.md]
+- notes: ingest-auto run; new entity page: FedRAMP High + IL5 deployment surfaces (API/Claude Gov/app), 3 reasons agencies choose Claude, classified AWS missions. en primary + 4 lang stamps.
+
+## [2026-06-28 00:02] ingest | Anthropic website scrape — pricing (6 sources)
+- source: raw/web/web-plans-pricing-claude-by-anthropic-eb3bbaf1.md + 5 lang variants (it/ko/ja/de/fr)
+- channel: web
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/claude-plans.md]
+- new pages: []
+- notes: ingest-auto run; major update to claude-plans.md: platform feature pricing (Managed Agents/web search/code execution), service tiers, US-only 1.1×, fast mode Opus 4.8, prompt caching 5-min TTL, legacy models, @Claude/@Security/Memory/Skills feature flags. en primary + 5 lang stamps.
+
+## [2026-06-28 00:03] ingest | Anthropic website scrape — customer stories (6 sources)
+- source: raw/web/web-customer-stories-claude-by-anthropic-980b0e92.md + 5 lang variants (it/ja/ko/de/fr)
+- channel: web
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/anthropic.md]
+- new pages: []
+- notes: ingest-auto run; enterprise customer roster section added: June 2026 new customers (Cox/Kai/Vercel/Box/Quantium/Juno/Cursor/Garvan/delight.ai/Lovable/Replit/Warp/Jakala/Twilio) + established clients (Postman/Stripe/HubSpot/Figma/Spotify/etc). en primary + 5 lang stamps.
+
+## [2026-06-28 00:04] ingest | Anthropic website scrape — startups program (3 sources)
+- source: raw/web/web-heute-mit-claude-gestalten-morgen-zum-marktfuhrer-werden-cla-a2d57d64.md + 2 lang variants (ja/ko)
+- channel: web
+- domain: ai-business
+- pages touched: [corpus/ai-business/claude-for-startups.md]
+- new pages: []
+- notes: ingest-auto run; content already fully covered by existing stub; upgraded status stub→draft; added 3 new source entries. de primary (richest available, no en in the 50 files).
+
+## [2026-06-28 00:05] ingest | Anthropic website scrape — Claude Platform / API features (5 sources)
+- source: raw/web/web-claude-platform-claude-by-anthropic-4a8b1dbd.md + 4 lang variants (ja/de/ko/fr)
+- channel: web
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/claude-api.md]
+- new pages: []
+- notes: ingest-auto run; Context Editing feature added to claude-api.md (auto-prunes tool calls/results near context limit). Full Claude Platform feature list: Citations, File API, Skills, Memory, MCP Connectors, Structured Outputs — mostly already in claude-api. en primary + 4 lang stamps.
+
+## [2026-06-28T03:03] config | scheduled run
+- collectors:
+  - gmail: 0 collected · status=ok
+  - obsidian: 0 collected · status=failed
+  - pdf: 0 collected · status=ok
+  - youtube: 0 collected · status=failed
+  - github: 0 collected · status=ok
+  - x: 0 collected · status=ok
+  - links_refetch: 0 refetched · status=ok
+- ingest:
+  - ingest: 30 ingested · 20 deferred · status=ok
+- lint:
+  - 1 broken wikilinks · 25 broken citations · 0 orphans · 20 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py

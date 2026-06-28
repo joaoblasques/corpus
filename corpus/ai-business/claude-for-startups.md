@@ -1,7 +1,7 @@
 ---
 type: entity
 domain: ai-business
-status: stub
+status: draft
 sources:
   - path: raw/web/web-claude-for-startups-claude-by-anthropic.md
     channel: web
@@ -9,6 +9,15 @@ sources:
   - path: raw/web/web-nonprofits-claude-by-anthropic.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/web/web-heute-mit-claude-gestalten-morgen-zum-marktfuhrer-werden-cla-a2d57d64.md
+    channel: web
+    ingested_at: 2026-06-28
+  - path: raw/web/web-claude-claude-d7dbaa94.md
+    channel: web
+    ingested_at: 2026-06-28
+  - path: raw/web/web-claude-claude-b644b2e4.md
+    channel: web
+    ingested_at: 2026-06-28
 aliases:
   - Claude Startups Program
   - Anthropic startup program
@@ -18,7 +27,7 @@ tags:
   - corpus/ai-business
   - entity
 created: 2026-06-25
-updated: 2026-06-25
+updated: 2026-06-28
 ---
 
 # Claude for Startups (and Nonprofits)

@@ -51,6 +51,24 @@ sources:
   - path: raw/web/web-claude-b824c3d1.md
     channel: web
     ingested_at: 2026-06-27
+  - path: raw/web/web-customer-stories-claude-by-anthropic-980b0e92.md
+    channel: web
+    ingested_at: 2026-06-28
+  - path: raw/web/web-customer-stories-claude-by-anthropic-e5e45d3c.md
+    channel: web
+    ingested_at: 2026-06-28
+  - path: raw/web/web-claude-bbd6831c.md
+    channel: web
+    ingested_at: 2026-06-28
+  - path: raw/web/web-claude-65e08549.md
+    channel: web
+    ingested_at: 2026-06-28
+  - path: raw/web/web-kundenberichte-claude-3e733e3e.md
+    channel: web
+    ingested_at: 2026-06-28
+  - path: raw/web/web-temoignages-clients-claude-ca9496e3.md
+    channel: web
+    ingested_at: 2026-06-28
 aliases:
   - Anthropic
   - Anthropic PBC
@@ -58,7 +76,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-06-12
-updated: 2026-06-27
+updated: 2026-06-28
 ---
 
 # Anthropic
@@ -122,6 +140,14 @@ Anthropic markets Claude as the model to build production AI agents on, claiming
 
 Anthropic markets **Claude for Education** as a comprehensive, institution-wide offering for students, faculty, and staff, built on its safety commitments so universities can adopt AI while preserving academic integrity [^src13]. Its framing is "built to strengthen thinking, not replace it" — a thinking partner, not an answer machine [^src13]. The flagship feature is **learning mode**, which functions like a tutor: rather than handing over answers it asks Socratic questions to guide students to find answers themselves, emphasizing principles over solutions and conceptual depth over convenient shortcuts, and ships templates for research and study guides [^src13]. For coding, **[[ai-engineering/claude-code|Claude Code]] is positioned as an "apprenticeship at scale"** — pairing with students in the development environment to show how professional programmers reason about real problems, on the premise that students across all disciplines need coding fundamentals [^src13]. For research, faculty use the **[[ai-engineering/claude-api|Claude API]]** to accelerate work (analyzing datasets, investigating theoretical questions, processing large volumes of text) and to build adaptive learning tools on the same API [^src13]. Anthropic frames its responsible-AI-in-education stance around equitable access, privacy/security (training on customer data only with permission), and transparency about what Claude can and cannot do [^src13]. This is the product/pedagogy layer above the institutional **Education** subscription tier on [[ai-engineering/claude-plans|Claude Plans & Pricing]].
 
+## Enterprise customer roster (June 2026)
+
+Recent additions to Anthropic's published customer roster (june 2026) [^src14]:
+
+**June 2026 (newest first)**: Cox Communications (Jun 25), Kai (Jun 25), Vercel (Jun 24), Box (Jun 23), Quantium (Jun 22), Juno (Jun 16), Cursor (Jun 10), Garvan Institute (Jun 5), delight.ai (Jun 5), Lovable (Jun 4), Replit (Jun 3), Warp (May 29), Jakala (May 29), Twilio (May 26).
+
+Established enterprise clients also listed on the customers page [^src15]: Postman, Stripe, HubSpot, Figma, Spotify, Shopify, bunq, IFS, Doctolib, N26, L'Oréal, Novo Nordisk, JetBrains, NBIM (Norges Bank Investment Management), Ramp, Asana, Canva, IG Group, Snowflake, Palo Alto Networks.
+
 ## See also
 
 - [[ai-engineering/claude-models|Claude Model Lineup]] — the Claude model family (Haiku → Sonnet → Opus → Fable/Mythos), specs, and per-model detail
@@ -145,3 +171,5 @@ Anthropic markets **Claude for Education** as a comprehensive, institution-wide 
 [^src11]: [Testing Mythos and Fable, Moving Beyond SWE-bench (The Batch)](../../raw/email/email-2026-06-19-testing-mythos-and-fable-moving-beyond-swe-bench-nvidia-s-op.md) — Andrew Ng, DeepLearning.AI
 [^src12]: [AI agents | Claude (Claude Platform / agents solutions page)](../../raw/web/web-ai-agents-claude-by-anthropic-47a6f280.md) — claude.com/solutions/agents (English canonical; also collected localized: de/fr/it/ko/ja)
 [^src13]: [教育 | Claude (Claude for Education solutions page)](../../raw/web/web-claude-b824c3d1.md) — claude.com/ja/solutions/education
+[^src14]: [Customer Stories | Claude by Anthropic (en)](../../raw/web/web-customer-stories-claude-by-anthropic-980b0e92.md) — claude.com/customers; snapshot 2026-06-28
+[^src15]: [Customer Stories | Claude by Anthropic (it)](../../raw/web/web-customer-stories-claude-by-anthropic-e5e45d3c.md) — claude.com/it/customers; snapshot 2026-06-28

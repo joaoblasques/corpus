@@ -18,6 +18,21 @@ sources:
   - path: raw/web/web-claude-4f6af6b8.md
     channel: web
     ingested_at: 2026-06-27
+  - path: raw/web/web-plans-pricing-claude-by-anthropic-eb3bbaf1.md
+    channel: web
+    ingested_at: 2026-06-28
+  - path: raw/web/web-plans-pricing-claude-by-anthropic-9a6ae4fe.md
+    channel: web
+    ingested_at: 2026-06-28
+  - path: raw/web/web-claude-d73a2735.md
+    channel: web
+    ingested_at: 2026-06-28
+  - path: raw/web/web-preise-claude-890abd15.md
+    channel: web
+    ingested_at: 2026-06-28
+  - path: raw/web/web-tarifs-claude-9fb676e7.md
+    channel: web
+    ingested_at: 2026-06-28
 aliases:
   - Claude plans
   - Claude pricing
@@ -30,7 +45,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-06-27
-updated: 2026-06-27
+updated: 2026-06-28
 ---
 
 # Claude Plans & Pricing (consumer / team subscriptions)
@@ -64,6 +79,53 @@ The product framing across all plan pages: brainstorm in chat, then build in [[a
 
 **Education** [^src1] — full access for an institution's students, faculty, and staff at discounted rates; an academic research-and-learning mode; dedicated API credits and education features; training and enablement resources for institution-wide adoption.
 
+## Platform feature pricing (API / Claude Platform)
+
+Discrete paid capabilities layered on top of token rates [^src6]:
+
+| Feature | Cost | Notes |
+|---|---|---|
+| **Managed Agents** | $0.08 per active session-hour | Standard token rates also apply |
+| **Web search** | $10 / 1,000 searches | Does not include tokens for processing |
+| **Code execution** | $0.05 / hr per container | 50 free hours/day per org |
+
+## Service tiers
+
+Three request-priority levels for the Claude API [^src6]:
+
+- **Priority** — when time, availability, and predictable pricing are most important
+- **Standard** — default tier for piloting and everyday scaling
+- **Batch** — asynchronous workloads processed together for better efficiency (50% cost savings vs Standard implied by the product description)
+
+## US-only inference and fast mode
+
+- **US-only inference**: for workloads that must run within the United States, available at **1.1× pricing** for input and output tokens [^src6].
+- **Fast mode (Opus 4.8)**: up to **2.5× faster throughput** at **2× standard pricing** [^src6].
+- **Prompt caching**: 5-minute TTL; extended caching available separately [^src6].
+
+## Current and legacy models
+
+**Active** (as of 2026-06-28): Fable 5 [^note-fable], Opus 4.8, Sonnet 4.6, Haiku 4.5 [^src6].
+
+**Legacy** (still available): Opus 4.7, Opus 4.6, Sonnet 4.5, Opus 4.5, Opus 4.1 [^src6].
+
+[^note-fable]: Fable 5 is currently unavailable due to US export control restrictions. See [[ai-engineering/anthropic|Anthropic]] §Fable 5 launch controversy.
+
+## Additional Enterprise features
+
+The Enterprise tier adds **Claude Security** (beta) — a vulnerability-scanning product using Opus 4.7; see [[ai-engineering/anthropic|Anthropic]] §Project Glasswing [^src6]. Enterprise also offers AWS Marketplace availability, committed-spend tiered incentives, trials, custom MSAs, and customer success support at certain spend thresholds [^src6].
+
+## Feature flags visible in the comparison table
+
+New features present in the 2026-06-28 pricing page not in earlier snapshots [^src6]:
+- **@Claude** — available from Team tier and above
+- **Claude Security** — Enterprise only (beta)
+- **Claude for Chrome** — Pro and above
+- **Research** — Pro and above
+- **Memory** — Pro and above (user-level persistent memory)
+- **Skills** — Team and above (organization-wide skills deployment at Enterprise)
+- **Connectors** — Free tier gets remote MCP connectors; Enterprise gets admin controls for remote and local
+
 ## Notes
 
 - The plan tiers gate **usage volume, model selection, and admin/compliance controls** — Claude Code and Cowork themselves start at the Pro tier [^src2].
@@ -80,3 +142,4 @@ The product framing across all plan pages: brainstorm in chat, then build in [[a
 [^src3]: [Claude — plans (ja)](../../raw/web/web-untitled-42cbd4cb.md) — claude.com/ja
 [^src4]: [Claude — plans (ko)](../../raw/web/web-claude-2c35b97a.md) — claude.com/ko
 [^src5]: [Claude — plans (fr)](../../raw/web/web-claude-4f6af6b8.md) — claude.com/fr
+[^src6]: [Plans & Pricing | Claude by Anthropic (en)](../../raw/web/web-plans-pricing-claude-by-anthropic-eb3bbaf1.md) — claude.com/pricing; English pricing page; collected 2026-06-28; primary source for platform feature pricing, service tiers, fast mode, legacy models, and enterprise feature flags

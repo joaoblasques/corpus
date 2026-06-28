@@ -6,6 +6,21 @@ sources:
   - path: raw/youtube/youtube-qLDwThdc3WQ-how-to-use-claude-for-finance-better-than-99-of-people.md
     channel: youtube
     ingested_at: 2026-06-26
+  - path: raw/web/web-financial-services-claude-by-anthropic-d0841a7c.md
+    channel: web
+    ingested_at: 2026-06-28
+  - path: raw/web/web-claude-05bab18d.md
+    channel: web
+    ingested_at: 2026-06-28
+  - path: raw/web/web-claude-5570acb8.md
+    channel: web
+    ingested_at: 2026-06-28
+  - path: raw/web/web-services-financiers-claude-3d9ee83b.md
+    channel: web
+    ingested_at: 2026-06-28
+  - path: raw/web/web-finanzdienstleistungen-claude-d2956c54.md
+    channel: web
+    ingested_at: 2026-06-28
 aliases:
   - Claude for finance
   - Claude finance
@@ -17,9 +32,9 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-26
-updated: 2026-06-26
-confidence: 0.7
-last_confirmed: 2026-06-26
+updated: 2026-06-28
+confidence: 0.8
+last_confirmed: 2026-06-28
 ---
 
 # Claude for Finance
@@ -66,6 +81,45 @@ The workflow assigns models to task *kinds*, not uniformly — an applied case o
 8. **Presentation discipline.** A "one-page CFO memo under 400 words" with four labeled sections (key ask, options, drivers & sensitivity, recommendation), inline cell citations (e.g. `DCF!B28`), saved to a deliverables sheet; "Claude cannot invent or alter numbers" [^src1].
 9. **Contract language → structured risk.** Extract payment terms, termination notice periods, covenant thresholds, and cash-flow impacts into a `contract_mapped` table with low/medium/high risk flags and model notes; 12-month liquidity/covenant impacts highlighted; source sheets untouched [^src1].
 
+## Anthropic's financial services solutions (enterprise)
+
+Anthropic's official financial services page covers enterprise deployment of Claude across four verticals, with dedicated integrations, agent templates, and compliance certifications [^src2]:
+
+### Data integrations
+
+Claude connects to the primary financial data ecosystems [^src2]:
+
+- **LSEG** (London Stock Exchange Group) — market data and analytics
+- **FactSet** — financial data and portfolio analytics
+- **S&P Global** — ratings, benchmarks, market intelligence
+- **Morningstar** — investment research and data
+
+### Agent templates
+
+Pre-built agent workflows for the four verticals [^src2]:
+
+| Use case | Vertical |
+|---|---|
+| **Pitch books** | Investment banking |
+| **Credit memos** | Commercial banking |
+| **KYC screening** | Commercial banking / compliance |
+| **Fund accounting** | Asset management |
+
+### Compliance certifications
+
+The financial services deployment carries **SOC 2 Type 2** and **FedRAMP** certifications [^src2] — a compliance posture shared with the government vertical (see [[ai-engineering/claude-for-government|Claude for Government]]).
+
+### Use-case verticals
+
+Four high-level vertical focuses [^src2]:
+
+1. **Investment banking** — research acceleration, pitch book generation, deal workflow automation
+2. **Commercial banking** — credit analysis, KYC/AML screening, loan processing
+3. **Asset management** — fund accounting, portfolio research, regulatory reporting
+4. **Insurance** — underwriting support, claims processing, compliance review
+
+Claude for Microsoft 365 (**Claude in Excel/Word/PowerPoint/Outlook**) extends these use cases into existing financial workflows via the Microsoft 365 add-in surface [^src2].
+
 ## Why it generalizes
 
 The throughline — inventory the inputs before asking for insight, get a numbered plan approved before any execution, keep every output formula-traceable, and pick the model by the *type* of cognitive work — is domain-specific structured prompting: the same prompt-engineering levers ([[ai-engineering/prompt-engineering|clarity, plan-first, acceptance criteria, persona]]) hardened into a gated, auditable workflow for a high-stakes domain where "the wrong output" is the real cost [^src1].
@@ -81,3 +135,4 @@ The throughline — inventory the inputs before asking for insight, get a number
 ---
 
 [^src1]: [How to use Claude For Finance Better Than 99% of People (Luke Finance)](../../raw/youtube/youtube-qLDwThdc3WQ-how-to-use-claude-for-finance-better-than-99-of-people.md) — YouTube playlist: Claude Finance
+[^src2]: [Financial Services | Claude by Anthropic](../../raw/web/web-financial-services-claude-by-anthropic-d0841a7c.md) — Anthropic enterprise solutions page; collected 2026-06-28
