@@ -21,6 +21,7 @@ import os
 import subprocess
 import sys
 import urllib.error
+import urllib.parse
 import urllib.request
 from pathlib import Path
 
@@ -166,6 +167,38 @@ def unstar(full_name: str, *, _run=None) -> bool:
     return getattr(p, "returncode", 1) == 0
 
 
+def star(full_name: str, *, _run=None) -> bool:
+    """Star a repo: PUT /user/starred/{owner}/{repo}. GitHub returns 204 on success
+    and is idempotent (starring an already-starred repo also succeeds). Mirror of
+    unstar(). Returns True iff the call returned 0."""
+    p = _gh(["api", "-X", "PUT", f"user/starred/{full_name}"], _run=_run)
+    return getattr(p, "returncode", 1) == 0
+
+
+def search_repos(topic, *, min_stars, pushed_after, per_page=cg.DISCOVER_PER_TOPIC,
+                 _run=None) -> list:
+    """Top repos for one GitHub topic, sorted by stars desc:
+    GET /search/repositories?q=topic:<t> stars:>=<min> pushed:>=<date>.
+    Returns [{full_name, stars, pushed_at}]; [] on any error."""
+    q = f"topic:{topic} stars:>={min_stars} pushed:>={pushed_after}"
+    qs = ("q=" + urllib.parse.quote(q) +
+          f"&sort=stars&order=desc&per_page={per_page}")
+    p = _gh(["api", f"search/repositories?{qs}"], _run=_run)
+    if getattr(p, "returncode", 1) != 0:
+        return []
+    try:
+        data = json.loads(p.stdout)
+    except Exception:  # noqa: BLE001
+        return []
+    out = []
+    for it in (data.get("items") or []) if isinstance(data, dict) else []:
+        fn = it.get("full_name")
+        if fn:
+            out.append({"full_name": fn, "stars": it.get("stargazers_count") or 0,
+                        "pushed_at": it.get("pushed_at") or ""})
+    return out
+
+
 def _decode(content) -> str:
     try:
         return base64.b64decode(content or "").decode("utf-8", "replace")
@@ -308,6 +341,36 @@ def cmd_reap(args) -> int:
     return 0
 
 
+def cmd_discover(args) -> int:
+    """Pre-collect: search GitHub for the most-starred repos in the corpus's
+    technical domains and star up to DISCOVER_LIMIT new ones, so the existing
+    collect -> ingest -> un-star pipeline picks them up this same run. Skips repos
+    already in the corpus (github ledger) or already starred. Fails closed: if gh
+    is unavailable, stars nothing."""
+    if not gh_available():
+        print(json.dumps({"status": "not configured", "starred": [], "count": 0}))
+        return 0
+    pushed_after = (datetime.date.today()
+                    - datetime.timedelta(days=cg.DISCOVER_PUSHED_WITHIN_DAYS)).isoformat()
+    candidates: dict = {}
+    for topic in cg.discover_topics():
+        for repo in search_repos(topic, min_stars=cg.DISCOVER_MIN_STARS,
+                                 pushed_after=pushed_after):
+            fn = repo["full_name"]
+            candidates[fn] = max(candidates.get(fn, 0), repo["stars"])
+    starred = {r["full_name"] for r in list_starred() if r.get("full_name")}
+    fresh = cg.rank_candidates(candidates, starred, cg.already_collected)
+    picks = fresh[:cg.DISCOVER_LIMIT]
+    done = []
+    for fn, _ in picks:
+        if args.dry_run or star(fn):
+            done.append(fn)
+    print(json.dumps({"discovered": len(candidates), "fresh": len(fresh),
+                      "count": len(done), "starred": done,
+                      "dry_run": bool(args.dry_run)}))
+    return 0
+
+
 def _build_parser():
     p = argparse.ArgumentParser(description="GitHub repo collector (starred repos via gh).")
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -324,6 +387,11 @@ def _build_parser():
     prp = sub.add_parser("reap", help="Un-star repos whose digest is now corpus_ingested.")
     prp.add_argument("--dry-run", action="store_true", help="Count un-star candidates; un-star nothing.")
     prp.set_defaults(func=cmd_reap)
+    pd = sub.add_parser("discover",
+                        help="Search corpus-domain topics; star up to ~10 new top repos.")
+    pd.add_argument("--dry-run", action="store_true",
+                    help="List repos that would be starred; star nothing.")
+    pd.set_defaults(func=cmd_discover)
     return p
 
 

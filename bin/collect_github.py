@@ -71,6 +71,40 @@ def reapable(dirs=None) -> list:
     return out
 
 
+# --- Discovery: find the most-starred repos in the corpus's technical domains ---
+# Curated domain -> GitHub topics map. Editable; tracks active technical domains.
+# ai-business / trading / blockchain / productivity are intentionally excluded
+# (noisier on GitHub).
+DOMAIN_TOPICS = {
+    "ai-engineering": ["llm", "large-language-models", "ai-agents", "rag",
+                       "prompt-engineering", "mcp", "agentic-ai", "llmops"],
+    "data-engineering": ["data-engineering", "dbt", "apache-spark",
+                         "apache-airflow", "etl", "data-pipeline", "duckdb"],
+    "mlops": ["mlops", "model-serving", "feature-store", "machine-learning-operations"],
+    "software-engineering": ["distributed-systems", "developer-tools", "observability"],
+}
+DISCOVER_MIN_STARS = 500
+DISCOVER_PUSHED_WITHIN_DAYS = 365
+DISCOVER_LIMIT = 10          # new repos to star per run
+DISCOVER_PER_TOPIC = 15      # top results pulled per topic before global dedup/rank
+
+
+def discover_topics(topic_map=None) -> list:
+    """Flat, sorted, deduped topic list from the domain map."""
+    tm = topic_map if topic_map is not None else DOMAIN_TOPICS
+    return sorted({t for topics in tm.values() for t in topics})
+
+
+def rank_candidates(candidates: dict, starred: set, already) -> list:
+    """`{full_name: stars}` -> `[(full_name, stars)]` sorted by stars desc, dropping
+    repos already starred or already in the corpus. `already` is a callable
+    (full_name -> bool); in production it is `already_collected`."""
+    fresh = [(fn, stars) for fn, stars in candidates.items()
+             if fn not in starred and not already(fn)]
+    fresh.sort(key=lambda t: t[1], reverse=True)
+    return fresh
+
+
 def _scalar(s) -> str:
     s = (str(s) if s is not None else "").replace("\n", " ").strip()
     if s and (any(c in s for c in ":#") or s[0] in "\"'[{-@`"):

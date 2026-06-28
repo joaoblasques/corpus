@@ -1,5 +1,6 @@
 import base64
 import json
+import json as _json
 import sys
 import types
 import urllib.error
@@ -7,6 +8,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "bin"))
 import github_client as gh  # noqa: E402
+gc = gh  # alias used by cmd_discover tests
 
 
 def _proc(rc=0, stdout=""):
@@ -243,3 +245,127 @@ def test_cmd_run_dry_run_writes_nothing(monkeypatch, capsys):
     monkeypatch.setattr(gh.cg, "write_collected", lambda *a, **k: wrote.append(1))
     rc = gh.cmd_run(gh._args(["run", "--dry-run"]))
     assert rc == 0 and wrote == [] and '"dry_run": true' in capsys.readouterr().out
+
+
+def test_star_issues_put_and_returns_true():
+    calls = {}
+
+    def fake_run(argv, **kw):
+        calls["argv"] = argv
+        return gh._Resp(0, "")
+
+    assert gh.star("owner/repo", _run=fake_run) is True
+    assert calls["argv"] == ["gh", "api", "-X", "PUT", "user/starred/owner/repo"]
+
+
+def test_star_returns_false_on_failure():
+    assert gh.star("owner/repo", _run=lambda argv, **kw: gh._Resp(1, "")) is False
+
+
+def test_http_api_put_sends_put_method_and_handles_204():
+    seen = {}
+
+    class _Ctx:
+        def __enter__(self_):
+            class _R:
+                headers = {}
+                def read(self_inner):
+                    return b""        # 204: empty body
+            return _R()
+        def __exit__(self_, *a):
+            return False
+
+    def fake_opener(req):
+        seen["method"] = req.method
+        seen["url"] = req.full_url
+        return _Ctx()
+
+    resp = gh._http_api(["api", "-X", "PUT", "user/starred/owner/repo"],
+                        "tok", _opener=fake_opener)
+    assert seen["method"] == "PUT"
+    assert seen["url"].endswith("/user/starred/owner/repo")
+    assert resp.returncode == 0 and resp.stdout == ""
+
+
+def test_search_repos_builds_query_and_parses_items():
+    calls = {}
+
+    def fake_run(argv, **kw):
+        calls["argv"] = argv
+        body = _json.dumps({"items": [
+            {"full_name": "o/big", "stargazers_count": 900, "pushed_at": "2026-06-01T00:00:00Z"},
+            {"full_name": "o/small", "stargazers_count": 600, "pushed_at": "2026-05-01T00:00:00Z"},
+        ]})
+        return gh._Resp(0, body)
+
+    out = gh.search_repos("llm", min_stars=500, pushed_after="2025-06-28",
+                          per_page=15, _run=fake_run)
+    assert out == [
+        {"full_name": "o/big", "stars": 900, "pushed_at": "2026-06-01T00:00:00Z"},
+        {"full_name": "o/small", "stars": 600, "pushed_at": "2026-05-01T00:00:00Z"},
+    ]
+    # endpoint carries the search path + qualifiers (URL-encoded) + sort
+    endpoint = calls["argv"][2]
+    assert endpoint.startswith("search/repositories?q=")
+    assert "topic" in endpoint and "stars" in endpoint and "pushed" in endpoint
+    assert "sort=stars" in endpoint and "order=desc" in endpoint and "per_page=15" in endpoint
+
+
+def test_search_repos_returns_empty_on_error():
+    assert gh.search_repos("llm", min_stars=500, pushed_after="2025-06-28",
+                           _run=lambda argv, **kw: gh._Resp(1, "")) == []
+
+
+def test_search_repos_returns_empty_on_garbage_json():
+    assert gh.search_repos("llm", min_stars=500, pushed_after="2025-06-28",
+                           _run=lambda argv, **kw: gh._Resp(0, "not json")) == []
+
+
+def test_cmd_discover_stars_top_fresh_and_skips_seen(monkeypatch, capsys):
+    monkeypatch.setattr(gc, "gh_available", lambda *a, **k: True)
+    # one search result set, reused per topic — dedup must collapse duplicates
+    monkeypatch.setattr(gc, "search_repos", lambda topic, **kw: [
+        {"full_name": "o/top", "stars": 900, "pushed_at": ""},
+        {"full_name": "o/mid", "stars": 700, "pushed_at": ""},
+        {"full_name": "o/seen", "stars": 800, "pushed_at": ""},     # already in corpus
+        {"full_name": "o/starred", "stars": 950, "pushed_at": ""},  # already starred
+    ])
+    monkeypatch.setattr(gc, "list_starred", lambda *a, **k: [{"full_name": "o/starred"}])
+    monkeypatch.setattr(gc.cg, "already_collected", lambda fn, *a, **k: fn == "o/seen")
+    starred = []
+    monkeypatch.setattr(gc, "star", lambda fn, **kw: starred.append(fn) or True)
+    # limit to 2 picks so we assert ordering + cap
+    monkeypatch.setattr(gc.cg, "DISCOVER_LIMIT", 2)
+
+    rc = gc.cmd_discover(type("A", (), {"dry_run": False})())
+    out = _json.loads(capsys.readouterr().out)
+    assert rc == 0
+    assert starred == ["o/top", "o/mid"]        # by stars desc, seen+starred dropped, capped at 2
+    assert out["count"] == 2 and out["starred"] == ["o/top", "o/mid"]
+
+
+def test_cmd_discover_dry_run_stars_nothing(monkeypatch, capsys):
+    monkeypatch.setattr(gc, "gh_available", lambda *a, **k: True)
+    monkeypatch.setattr(gc, "search_repos", lambda topic, **kw: [
+        {"full_name": "o/a", "stars": 600, "pushed_at": ""}])
+    monkeypatch.setattr(gc, "list_starred", lambda *a, **k: [])
+    monkeypatch.setattr(gc.cg, "already_collected", lambda fn, *a, **k: False)
+    called = []
+    monkeypatch.setattr(gc, "star", lambda fn, **kw: called.append(fn) or True)
+
+    gc.cmd_discover(type("A", (), {"dry_run": True})())
+    out = _json.loads(capsys.readouterr().out)
+    assert called == []                          # dry-run stars nothing
+    assert out["count"] == 1 and out["dry_run"] is True and out["starred"] == ["o/a"]
+
+
+def test_cmd_discover_not_configured(monkeypatch, capsys):
+    monkeypatch.setattr(gc, "gh_available", lambda *a, **k: False)
+    gc.cmd_discover(type("A", (), {"dry_run": False})())
+    out = _json.loads(capsys.readouterr().out)
+    assert out["status"] == "not configured" and out["count"] == 0
+
+
+def test_discover_subcommand_parses():
+    args = gc._args(["discover", "--dry-run"])
+    assert args.func is gc.cmd_discover and args.dry_run is True

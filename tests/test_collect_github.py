@@ -68,3 +68,25 @@ def test_reapable_empty_when_nothing_ingested(tmp_path):
     d = tmp_path / "github"; d.mkdir()
     (d / "p.md").write_text("---\nchannel: github\nrepo: owner/todo\n---\nbody", encoding="utf-8")
     assert cg.reapable(dirs=[d]) == []
+
+
+def test_discover_topics_flat_sorted_deduped():
+    tm = {"a": ["llm", "rag"], "b": ["rag", "mlops"]}
+    assert cg.discover_topics(tm) == ["llm", "mlops", "rag"]   # deduped + sorted
+
+
+def test_discover_topics_defaults_to_domain_map():
+    out = cg.discover_topics()
+    assert "llm" in out and out == sorted(set(out))   # uses DOMAIN_TOPICS, sorted/deduped
+
+
+def test_rank_candidates_sorts_by_stars_desc():
+    cands = {"o/a": 100, "o/b": 900, "o/c": 500}
+    out = cg.rank_candidates(cands, starred=set(), already=lambda fn: False)
+    assert out == [("o/b", 900), ("o/c", 500), ("o/a", 100)]
+
+
+def test_rank_candidates_drops_starred_and_already_collected():
+    cands = {"o/a": 100, "o/b": 900, "o/c": 500}
+    out = cg.rank_candidates(cands, starred={"o/b"}, already=lambda fn: fn == "o/a")
+    assert out == [("o/c", 500)]   # o/b starred, o/a already in corpus
