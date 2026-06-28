@@ -56,6 +56,37 @@ def test_discover_blog_posts_caps():
     assert len(sb.discover_blog_posts("https://blog.example.com", cap=1, _session=session)) == 1
 
 
+def test_discover_blog_posts_sitemap_orders_by_lastmod_newest_first():
+    # three posts with lastmods out of order — discovery must return newest-first,
+    # so a cap keeps the most recent.
+    sm = ('<?xml version="1.0"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+          '<url><loc>https://b.com/old</loc><lastmod>2023-01-01</lastmod></url>'
+          '<url><loc>https://b.com/newest</loc><lastmod>2026-06-01</lastmod></url>'
+          '<url><loc>https://b.com/mid</loc><lastmod>2024-09-15</lastmod></url></urlset>')
+    out = sb.discover_blog_posts("https://b.com", cap=2,
+                                 _session=lambda u: sm if u.endswith("/sitemap.xml") else "")
+    assert out == ["https://b.com/newest", "https://b.com/mid"]   # newest 2, oldest dropped
+
+
+def test_discover_blog_posts_prefers_feed_over_sitemap():
+    # both a feed and a sitemap exist; the feed (newest) wins as the primary source.
+    feed = ('<?xml version="1.0"?><rss version="2.0"><channel>'
+            '<item><link>https://b.com/fresh-1</link></item>'
+            '<item><link>https://b.com/fresh-2</link></item></channel></rss>')
+    sm = ('<?xml version="1.0"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+          '<url><loc>https://b.com/archive-1</loc><lastmod>2020-01-01</lastmod></url></urlset>')
+
+    def session(u):
+        if u.endswith("/feed"):
+            return feed
+        if u.endswith("/sitemap.xml"):
+            return sm
+        return ""   # seed page: no <link> feed hint
+
+    out = sb.discover_blog_posts("https://b.com", cap=2, _session=session)
+    assert out == ["https://b.com/fresh-1", "https://b.com/fresh-2"]   # feed first, cap hit
+
+
 def test_discover_blog_posts_rss_fallback_when_no_sitemap():
     def session(url):
         if url.endswith("/sitemap.xml"):

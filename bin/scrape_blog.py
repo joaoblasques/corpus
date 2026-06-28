@@ -97,7 +97,76 @@ def _feed_links(xml_text: str) -> list:
     return out
 
 
+def _sitemap_entries(xml_text: str) -> list:
+    """[(loc, lastmod)] for each <url>/<sitemap> entry (lastmod '' when absent);
+    [] on parse failure. Lets discovery order posts newest-first."""
+    try:
+        root = ET.fromstring(xml_text)
+    except ET.ParseError:
+        return []
+    out = []
+    for el in root.iter():
+        if el.tag.split("}")[-1] not in ("url", "sitemap"):
+            continue
+        loc, lastmod = "", ""
+        for ch in el:
+            t = ch.tag.split("}")[-1]
+            if t == "loc" and ch.text:
+                loc = ch.text.strip()
+            elif t == "lastmod" and ch.text:
+                lastmod = ch.text.strip()
+        if loc:
+            out.append((loc, lastmod))
+    return out
+
+
+def _locs_newest_first(xml_text: str) -> list:
+    """<loc>s ordered newest-first by <lastmod> (ISO dates sort lexically). Entries
+    without a lastmod keep document order and sort after dated ones: sort is stable
+    and '' < any date string, so reverse=True puts undated entries last. Falls back
+    to bare <loc> order when no <url>/<sitemap> wrappers are present."""
+    entries = _sitemap_entries(xml_text)
+    if not entries:
+        return _sitemap_locs(xml_text)
+    entries.sort(key=lambda e: e[1], reverse=True)
+    return [loc for loc, _ in entries]
+
+
+def _sitemap_post_urls(origin: str, cap: int, _session) -> list:
+    """Post URLs from the blog's sitemap, newest-first by <lastmod>. Follows a
+    sitemap index (newest child sitemaps first)."""
+    sm = _http_get(urljoin(origin, "/sitemap.xml"), _session)
+    if not sm:
+        return []
+    if "<sitemapindex" in sm.lower():
+        out = []
+        for child in _locs_newest_first(sm)[:50]:
+            out.extend(_locs_newest_first(_http_get(child, _session)))
+            if len(out) >= cap * 3:        # enough to fill cap after post-filtering
+                break
+        return out
+    return _locs_newest_first(sm)
+
+
+def _feed_post_urls(seed_url: str, origin: str, _session) -> list:
+    """Post URLs from the blog's RSS/Atom feed, newest-first (feed order). Tries a
+    <link rel=feed> hint in the seed page, then well-known feed paths; [] if none."""
+    page = _http_get(seed_url, _session)
+    m = re.search(
+        r'<link[^>]+type=["\']application/(?:rss|atom)\+xml["\'][^>]*href=["\']([^"\']+)["\']',
+        page or "", re.I)
+    candidates = ([urljoin(seed_url, m.group(1))] if m else []) + [urljoin(origin, p) for p in FEED_PATHS]
+    for fu in candidates:
+        feed = _http_get(fu, _session)
+        if feed and ("<rss" in feed.lower() or "<feed" in feed.lower()):
+            return _feed_links(feed)
+    return []
+
+
 def discover_blog_posts(seed_url: str, cap: int = DEFAULT_CAP, *, _session=None) -> list:
+    """Post URLs for a blog seed, NEWEST-FIRST so a low cap keeps the most recent
+    posts. Preference: the RSS/Atom feed (reverse-chronological by construction),
+    then the sitemap sorted by <lastmod> descending to fill up to `cap`."""
     origin = _origin(seed_url)
     posts, seen = [], set()
 
@@ -110,29 +179,11 @@ def discover_blog_posts(seed_url: str, cap: int = DEFAULT_CAP, *, _session=None)
                     return True
         return False
 
-    sm = _http_get(urljoin(origin, "/sitemap.xml"), _session)
-    if sm:
-        if "<sitemapindex" in sm.lower():
-            for child in _sitemap_locs(sm)[:50]:
-                if _add(_sitemap_locs(_http_get(child, _session))):
-                    return posts
-        else:
-            if _add(_sitemap_locs(sm)):
-                return posts
-    if posts:
+    # 1) feed first — newest posts, reliably reverse-chronological
+    if _add(_feed_post_urls(seed_url, origin, _session)):
         return posts
-
-    # RSS/Atom fallback: feed hint in the seed page, then well-known paths.
-    page = _http_get(seed_url, _session)
-    m = re.search(
-        r'<link[^>]+type=["\']application/(?:rss|atom)\+xml["\'][^>]*href=["\']([^"\']+)["\']',
-        page or "", re.I)
-    candidates = ([urljoin(seed_url, m.group(1))] if m else []) + [urljoin(origin, p) for p in FEED_PATHS]
-    for fu in candidates:
-        feed = _http_get(fu, _session)
-        if feed and ("<rss" in feed.lower() or "<feed" in feed.lower()):
-            _add(_feed_links(feed))
-            break
+    # 2) sitemap (newest-first by lastmod) to fill the rest
+    _add(_sitemap_post_urls(origin, cap, _session))
     return posts
 
 
