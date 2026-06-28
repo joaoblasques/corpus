@@ -8,6 +8,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "bin"))
 import github_client as gh  # noqa: E402
+gc = gh  # alias used by cmd_discover tests
 
 
 def _proc(rc=0, stdout=""):
@@ -318,3 +319,53 @@ def test_search_repos_returns_empty_on_error():
 def test_search_repos_returns_empty_on_garbage_json():
     assert gh.search_repos("llm", min_stars=500, pushed_after="2025-06-28",
                            _run=lambda argv, **kw: gh._Resp(0, "not json")) == []
+
+
+def test_cmd_discover_stars_top_fresh_and_skips_seen(monkeypatch, capsys):
+    monkeypatch.setattr(gc, "gh_available", lambda *a, **k: True)
+    # one search result set, reused per topic — dedup must collapse duplicates
+    monkeypatch.setattr(gc, "search_repos", lambda topic, **kw: [
+        {"full_name": "o/top", "stars": 900, "pushed_at": ""},
+        {"full_name": "o/mid", "stars": 700, "pushed_at": ""},
+        {"full_name": "o/seen", "stars": 800, "pushed_at": ""},     # already in corpus
+        {"full_name": "o/starred", "stars": 950, "pushed_at": ""},  # already starred
+    ])
+    monkeypatch.setattr(gc, "list_starred", lambda *a, **k: [{"full_name": "o/starred"}])
+    monkeypatch.setattr(gc.cg, "already_collected", lambda fn, *a, **k: fn == "o/seen")
+    starred = []
+    monkeypatch.setattr(gc, "star", lambda fn, **kw: starred.append(fn) or True)
+    # limit to 2 picks so we assert ordering + cap
+    monkeypatch.setattr(gc.cg, "DISCOVER_LIMIT", 2)
+
+    rc = gc.cmd_discover(type("A", (), {"dry_run": False})())
+    out = _json.loads(capsys.readouterr().out)
+    assert rc == 0
+    assert starred == ["o/top", "o/mid"]        # by stars desc, seen+starred dropped, capped at 2
+    assert out["count"] == 2 and out["starred"] == ["o/top", "o/mid"]
+
+
+def test_cmd_discover_dry_run_stars_nothing(monkeypatch, capsys):
+    monkeypatch.setattr(gc, "gh_available", lambda *a, **k: True)
+    monkeypatch.setattr(gc, "search_repos", lambda topic, **kw: [
+        {"full_name": "o/a", "stars": 600, "pushed_at": ""}])
+    monkeypatch.setattr(gc, "list_starred", lambda *a, **k: [])
+    monkeypatch.setattr(gc.cg, "already_collected", lambda fn, *a, **k: False)
+    called = []
+    monkeypatch.setattr(gc, "star", lambda fn, **kw: called.append(fn) or True)
+
+    gc.cmd_discover(type("A", (), {"dry_run": True})())
+    out = _json.loads(capsys.readouterr().out)
+    assert called == []                          # dry-run stars nothing
+    assert out["count"] == 1 and out["dry_run"] is True and out["starred"] == ["o/a"]
+
+
+def test_cmd_discover_not_configured(monkeypatch, capsys):
+    monkeypatch.setattr(gc, "gh_available", lambda *a, **k: False)
+    gc.cmd_discover(type("A", (), {"dry_run": False})())
+    out = _json.loads(capsys.readouterr().out)
+    assert out["status"] == "not configured" and out["count"] == 0
+
+
+def test_discover_subcommand_parses():
+    args = gc._args(["discover", "--dry-run"])
+    assert args.func is gc.cmd_discover and args.dry_run is True
