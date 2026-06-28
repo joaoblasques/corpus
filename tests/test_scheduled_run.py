@@ -1937,6 +1937,31 @@ class TestGithubCollector:
         assert any("github_client.py" in s and "run" in s for s in called), called
         assert res["github"]["status"] == "ok" and res["github"]["collected"] == 2
 
+    def test_run_collectors_runs_github_discover_before_collect(self):
+        """The github_discover leg invokes `github_client.py discover` and runs before
+        the github collect leg (so freshly-starred repos are collected the same run)."""
+        order = []
+
+        def fake_run(argv, **kw):
+            # argv = [python, ".../<script>.py", subcommand, ...]
+            script = Path(argv[1]).name
+            sub = argv[2] if len(argv) > 2 else ""
+            key = f"{script}:{sub}"
+            order.append(key)
+            payloads = {
+                "github_client.py:discover": {"count": 3, "starred": ["o/a", "o/b", "o/c"]},
+                "github_client.py:run": {"written": 1},
+            }
+            return types.SimpleNamespace(returncode=0,
+                                         stdout=json.dumps(payloads.get(key, {})),
+                                         stderr="")
+
+        results = scheduled_run.run_collectors(_subprocess_run=fake_run)
+        assert results["github_discover"]["status"] == "ok"
+        assert results["github_discover"]["starred"] == 3
+        # discover precedes collect
+        assert order.index("github_client.py:discover") < order.index("github_client.py:run")
+
 
 class TestCollectorTimeout:
     def test_collector_legs_pass_a_timeout(self):

@@ -285,6 +285,28 @@ def run_collectors(
         except Exception as exc:  # noqa: BLE001
             results["youtube"] = {"status": "failed", "collected": 0, "error": str(exc)}
 
+    # --- GitHub: discover + star top repos in corpus domains (before collect) ---
+    try:
+        proc = _run(
+            [sys.executable, str(BIN / "github_client.py"), "discover"],
+            capture_output=True,
+            text=True,
+            timeout=COLLECTOR_TIMEOUT,
+        )
+        if proc.returncode != 0:
+            results["github_discover"] = {
+                "status": "failed",
+                "error": proc.stderr.strip() or f"exit {proc.returncode}",
+            }
+        else:
+            try:
+                starred = json.loads(proc.stdout).get("count", 0)
+            except (json.JSONDecodeError, AttributeError):
+                starred = 0
+            results["github_discover"] = {"status": "ok", "starred": starred}
+    except Exception as exc:  # noqa: BLE001
+        results["github_discover"] = {"status": "failed", "error": str(exc)}
+
     # --- GitHub: collect new starred repos (README + docs + overview) ---
     try:
         proc = _run(
