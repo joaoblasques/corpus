@@ -56,6 +56,8 @@ def test_delete_playlist_item_404_is_success():
 
 def test_extract_transcript_disabled(monkeypatch):
     # Force the youtube_transcript_api path to raise TranscriptsDisabled
+    monkeypatch.setenv("CORPUS_YT_BROWSER", "0")
+    monkeypatch.setattr(yc, "_whisper_enabled", lambda: False)  # isolate caption path
     import youtube_transcript_api as yta
     class FakeApi:
         def fetch(self, *a, **k): raise yta._errors.TranscriptsDisabled("V")
@@ -65,6 +67,7 @@ def test_extract_transcript_disabled(monkeypatch):
 
 
 def test_extract_transcript_ok(monkeypatch):
+    monkeypatch.setenv("CORPUS_YT_BROWSER", "0")
     class Snip:
         def __init__(self, s, t): self.start, self.text = s, t
     class FakeApi:
@@ -78,6 +81,7 @@ def test_extract_transcript_ok(monkeypatch):
 def test_extract_transcript_inner_block_falls_through_to_ytdlp(monkeypatch):
     # M2: fetch raises NoTranscriptFound, then api.list() raises a blocked-type error.
     # The inner branch must fall through to yt-dlp rather than returning none_found.
+    monkeypatch.setenv("CORPUS_YT_BROWSER", "0")
     import youtube_transcript_api as yta
 
     class FakeApi:
@@ -92,6 +96,7 @@ def test_extract_transcript_inner_block_falls_through_to_ytdlp(monkeypatch):
 
 def test_extract_transcript_inner_block_ytdlp_empty(monkeypatch):
     # M2: blocked in inner branch and yt-dlp yields nothing -> "blocked", not "none_found".
+    monkeypatch.setenv("CORPUS_YT_BROWSER", "0")
     import youtube_transcript_api as yta
 
     class FakeApi:
@@ -322,3 +327,44 @@ def test_run_refetch_unlimited_without_cap(tmp_path, monkeypatch):
     rc = yc.cmd_run(yc._args(["run", "--refetch-blocked", "--sleep", "0"]))
     assert rc == 0
     assert calls == ["VB1", "VB2", "VB3"], "no cap → all blocked stubs refetched"
+
+
+# --- Task 4: browser-primary waterfall tests ---
+
+def test_browser_primary_ok_skips_caption_and_whisper(monkeypatch):
+    import yt_browser_transcript as bt
+    monkeypatch.setenv("CORPUS_YT_BROWSER", "1")
+    monkeypatch.setattr(bt, "browser_transcript", lambda v: ("BROWSER BODY", "ok"))
+    monkeypatch.setattr(yc, "_caption_transcript",
+                        lambda v: (_ for _ in ()).throw(AssertionError("captions called")))
+    body, status = yc.extract_transcript("VID")
+    assert (body, status) == ("BROWSER BODY", "ok")
+
+
+def test_browser_no_panel_falls_to_whisper(monkeypatch):
+    import yt_browser_transcript as bt
+    monkeypatch.setenv("CORPUS_YT_BROWSER", "1")
+    monkeypatch.setattr(bt, "browser_transcript", lambda v: ("", "no_panel"))
+    monkeypatch.setattr(yc, "_whisper_enabled", lambda: True)
+    monkeypatch.setattr(yc, "_whisper_transcript", lambda v: "WHISPER BODY")
+    body, status = yc.extract_transcript("VID")
+    assert (body, status) == ("WHISPER BODY", "ok")
+
+
+def test_browser_blocked_falls_to_caption_fallback(monkeypatch):
+    import yt_browser_transcript as bt
+    monkeypatch.setenv("CORPUS_YT_BROWSER", "1")
+    monkeypatch.setattr(bt, "browser_transcript", lambda v: ("", "blocked"))
+    monkeypatch.setattr(yc, "_caption_transcript", lambda v: ("CAPTION BODY", "ok"))
+    body, status = yc.extract_transcript("VID")
+    assert (body, status) == ("CAPTION BODY", "ok")
+
+
+def test_browser_disabled_uses_old_path(monkeypatch):
+    import yt_browser_transcript as bt
+    monkeypatch.setenv("CORPUS_YT_BROWSER", "0")
+    monkeypatch.setattr(bt, "browser_transcript",
+                        lambda v: (_ for _ in ()).throw(AssertionError("browser called")))
+    monkeypatch.setattr(yc, "_caption_transcript", lambda v: ("CAPTION BODY", "ok"))
+    body, status = yc.extract_transcript("VID")
+    assert (body, status) == ("CAPTION BODY", "ok")

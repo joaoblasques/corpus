@@ -40,6 +40,7 @@ def test_groq_key_none_when_absent(monkeypatch, tmp_path):
 
 
 def test_caption_ok_does_not_invoke_whisper(monkeypatch):
+    monkeypatch.setenv("CORPUS_YT_BROWSER", "0")
     monkeypatch.setattr(yc, "_caption_transcript", lambda v: ("CAPTIONS", "ok"))
     called = {"n": 0}
     monkeypatch.setattr(yc, "_whisper_transcript", lambda v: called.__setitem__("n", called["n"] + 1) or "W")
@@ -55,6 +56,7 @@ def test_none_found_uses_whisper(monkeypatch):
 
 
 def test_blocked_does_not_use_whisper(monkeypatch):
+    monkeypatch.setenv("CORPUS_YT_BROWSER", "0")
     monkeypatch.setattr(yc, "_caption_transcript", lambda v: ("", "blocked"))
     monkeypatch.setattr(yc, "_whisper_enabled", lambda: True)
     monkeypatch.setattr(yc, "_whisper_transcript", lambda v: "WHISPER_MD")
@@ -69,6 +71,7 @@ def test_whisper_failure_keeps_status(monkeypatch):
 
 
 def test_blocked_with_whisper_on_blocked_flag_uses_whisper(monkeypatch):
+    monkeypatch.setenv("CORPUS_YT_BROWSER", "0")
     monkeypatch.setattr(yc, "_caption_transcript", lambda v: ("", "blocked"))
     monkeypatch.setattr(yc, "_whisper_enabled", lambda: True)
     monkeypatch.setattr(yc, "_whisper_transcript", lambda v: "WHISPER_MD")

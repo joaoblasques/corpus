@@ -223,14 +223,28 @@ def _caption_transcript(video_id: str):
         return (body, "ok") if body else ("", "blocked")
 
 
-def extract_transcript(video_id: str, whisper_on_blocked: bool = False):
-    """Waterfall → (markdown_body, status). Whisper fallback for caption-less videos.
+def _browser_enabled() -> bool:
+    return os.environ.get("CORPUS_YT_BROWSER", "1") != "0"
 
-    Whisper triggers on none_found/disabled. It ALSO triggers on `blocked` when
-    `whisper_on_blocked` is set — used by a --refetch-blocked re-attempt whose captions
-    still can't be reached (e.g. the transcript API is IP-blocked), so Whisper becomes the
-    last-resort transcript. Normal runs leave `blocked` to the existing retry.
+
+def extract_transcript(video_id: str, whisper_on_blocked: bool = False):
+    """Waterfall -> (markdown_body, status). Browser-primary.
+
+    Order: browser panel scrape -> (no_panel) Whisper -> (blocked/failed) the legacy
+    caption API + yt-dlp VTT deep fallback -> (still none) Whisper per old triggers.
+    CORPUS_YT_BROWSER=0 restores the legacy caption-first behaviour.
     """
+    if _browser_enabled():
+        import yt_browser_transcript as bt
+        body, status = bt.browser_transcript(video_id)
+        if status == "ok":
+            return body, "ok"
+        if status == "no_panel" and _whisper_enabled():
+            wbody = _whisper_transcript(video_id)
+            if wbody:
+                return wbody, "ok"
+        # blocked / failed / whisper-miss -> fall through to legacy paths below.
+
     body, status = _caption_transcript(video_id)
     trigger = ("none_found", "disabled", "blocked") if whisper_on_blocked else ("none_found", "disabled")
     if status in trigger and _whisper_enabled():
