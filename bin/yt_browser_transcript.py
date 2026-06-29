@@ -87,8 +87,10 @@ def _dismiss_consent(page) -> None:
 
 def _open_transcript(page) -> bool:
     """Open the transcript panel: expand the description ('...more') then click the
-    now-visible 'Show transcript' control (a view-model, not a role=button). Returns
-    True once transcript segments render. Retries the flow once for headless flakiness."""
+    'Show transcript' control (a view-model, not a role=button). Returns True once
+    transcript segments render. Uses condition-based waits (wait_for the control to
+    appear) rather than fixed sleeps, since the description renders at varying speeds.
+    Retries the flow once for headless flakiness."""
     for attempt in range(2):
         try:
             page.locator(_EXPAND_SEL).first.click(timeout=6000)
@@ -97,18 +99,23 @@ def _open_transcript(page) -> bool:
                 page.wait_for_timeout(700)
                 continue
             return False
-        page.wait_for_timeout(500)
-        show = page.locator(_SHOW_TRANSCRIPT_SEL)
-        if not show.count():
-            return False
+        # Wait for the 'Show transcript' control to render (slower videos miss a fixed
+        # sleep). It may be absent entirely (no captions) -> genuine no_panel.
         try:
-            show.first.click(timeout=6000)
+            page.wait_for_selector(_SHOW_TRANSCRIPT_SEL, timeout=4000)
         except Exception:
+            if attempt == 0:
+                page.wait_for_timeout(700)
+                continue
             return False
         try:
+            page.locator(_SHOW_TRANSCRIPT_SEL).first.click(timeout=6000)
             page.wait_for_selector(_SEGMENT_SEL, timeout=_PANEL_TIMEOUT_MS)
             return True
         except Exception:
+            if attempt == 0:
+                page.wait_for_timeout(700)
+                continue
             return False
     return False
 
