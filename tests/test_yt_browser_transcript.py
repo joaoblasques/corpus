@@ -51,3 +51,24 @@ def test_browser_transcript_ok_but_empty_becomes_no_panel(monkeypatch):
     # panel returned rows but all were noise/unparseable -> nothing to render
     monkeypatch.setattr(bt, "_fetch_panel", lambda vid: ([("bad", "")], "ok"))
     assert bt.browser_transcript("ABC") == ("", "no_panel")
+
+
+class _FakeLocator:
+    def __init__(self, rows): self._rows = rows
+    def all(self): return self._rows
+
+
+class _FakeRow:
+    def __init__(self, ts, text): self._ts, self._text = ts, text
+    def inner_text(self): return f"{self._ts}\n{self._text}"
+
+
+class _FakePage:
+    def __init__(self, rows): self._rows = rows
+    def locator(self, sel):
+        return _FakeLocator([_FakeRow(t, x) for t, x in self._rows])
+
+
+def test_extract_panel_rows_parses_segments():
+    page = _FakePage([("0:00", "intro line"), ("1:23", "next line")])
+    assert bt._extract_panel_rows(page) == [("0:00", "intro line"), ("1:23", "next line")]
