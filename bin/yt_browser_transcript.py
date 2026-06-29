@@ -43,49 +43,89 @@ PROVENANCE = "> _Transcript source: YouTube UI (browser)_"
 _PW = None       # playwright instance
 _BROWSER = None   # launched browser (reused per run)
 
-_SEGMENT_SEL = "ytd-transcript-segment-renderer"
+# YouTube migrated transcript lines to a web-component view-model (the old
+# ytd-transcript-segment-renderer no longer exists). All DOM knowledge lives here.
+_SEGMENT_SEL = "transcript-segment-view-model"
+_EXPAND_SEL = "#description-inline-expander tp-yt-paper-button#expand"
+_SHOW_TRANSCRIPT_SEL = '[aria-label="Show transcript"]:visible'
 _NAV_TIMEOUT_MS = 30000
-_PANEL_TIMEOUT_MS = 8000
+_PANEL_TIMEOUT_MS = 9000
 
 
 def _extract_panel_rows(page) -> list[tuple[str, str]]:
-    """Read open transcript panel -> [(ts_label, text)]. First text line is the
-    timestamp, remainder is the caption (segment renderer renders 'M:SS\\ntext')."""
+    """Read open transcript panel -> [(ts_label, text)]. Each segment renders as
+    'M:SS\\n<a11y label>\\n<caption>' (or 'M:SS\\n<caption>'), so the first line is the
+    timestamp and the LAST line is the caption (the middle a11y label is skipped)."""
     rows = []
     for seg in page.locator(_SEGMENT_SEL).all():
-        parts = seg.inner_text().split("\n", 1)
-        if len(parts) == 2:
-            rows.append((parts[0].strip(), parts[1].strip()))
+        lines = [ln for ln in seg.inner_text().split("\n") if ln.strip()]
+        if len(lines) >= 2:
+            rows.append((lines[0].strip(), lines[-1].strip()))
     return rows
 
 
-def _open_transcript(page) -> bool:
-    """Open the transcript panel. Try the description '...more' expander then a
-    'Show transcript' button; fall back to the direct button. Return True if rows appear."""
-    for opener in (
-        lambda: page.get_by_role("button", name="...more").click(timeout=3000),
-        lambda: page.get_by_role("button", name="Show transcript").click(timeout=3000),
-    ):
-        try:
-            opener()
-        except Exception:
-            continue
+def _dismiss_consent(page) -> None:
+    """Dismiss the EU "Before you continue to YouTube" consent modal. Its backdrop
+    (tp-yt-iron-overlay-backdrop) intercepts every click until gone. Match by visible
+    text ('Reject all'/'Accept all') — the aria-label is a long localized sentence."""
+    for name in ("Reject all", "Accept all"):
+        loc = page.locator(
+            f'tp-yt-paper-dialog button:has-text("{name}"), '
+            f'ytd-consent-bump-v2-lightbox button:has-text("{name}")')
+        if loc.count():
+            try:
+                loc.first.click(timeout=3000)
+                break
+            except Exception:
+                pass
     try:
-        page.wait_for_selector(_SEGMENT_SEL, timeout=_PANEL_TIMEOUT_MS)
-        return True
+        page.wait_for_selector("tp-yt-iron-overlay-backdrop.opened",
+                               state="detached", timeout=5000)
     except Exception:
-        return False
+        pass
+
+
+def _open_transcript(page) -> bool:
+    """Open the transcript panel: expand the description ('...more') then click the
+    now-visible 'Show transcript' control (a view-model, not a role=button). Returns
+    True once transcript segments render. Retries the flow once for headless flakiness."""
+    for attempt in range(2):
+        try:
+            page.locator(_EXPAND_SEL).first.click(timeout=6000)
+        except Exception:
+            if attempt == 0:
+                page.wait_for_timeout(700)
+                continue
+            return False
+        page.wait_for_timeout(500)
+        show = page.locator(_SHOW_TRANSCRIPT_SEL)
+        if not show.count():
+            return False
+        try:
+            show.first.click(timeout=6000)
+        except Exception:
+            return False
+        try:
+            page.wait_for_selector(_SEGMENT_SEL, timeout=_PANEL_TIMEOUT_MS)
+            return True
+        except Exception:
+            return False
+    return False
 
 
 def _get_page():
-    """Lazily launch one logged-out Chromium per run; return a fresh page on it."""
+    """Lazily launch one logged-out Chromium per run; return a fresh page on it.
+    Forces an English UI (locale + Accept-Language) so the English DOM selectors match
+    regardless of the host's geo-location."""
     global _PW, _BROWSER
     if _BROWSER is None:
         from playwright.sync_api import sync_playwright
         _PW = sync_playwright().start()
         _BROWSER = _PW.chromium.launch(headless=True)
     ctx = _BROWSER.new_context(
-        viewport={"width": 1280, "height": 900},
+        viewport={"width": 1280, "height": 1000},
+        locale="en-US",
+        extra_http_headers={"Accept-Language": "en-US,en;q=0.9"},
         user_agent=("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
                     "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"),
     )
@@ -107,16 +147,18 @@ def shutdown() -> None:
 def _fetch_panel(video_id: str) -> tuple[list[tuple[str, str]], str]:
     page = _get_page()
     try:
-        page.goto(f"https://www.youtube.com/watch?v={video_id}",
+        # &hl=en forces the English UI even when the host geo-locates elsewhere.
+        page.goto(f"https://www.youtube.com/watch?v={video_id}&hl=en",
                   timeout=_NAV_TIMEOUT_MS, wait_until="domcontentloaded")
-        # Consent interstitial (EU): accept if present.
-        try:
-            page.get_by_role("button", name="Accept all").click(timeout=3000)
-        except Exception:
-            pass
+        page.wait_for_timeout(1500)
         body_txt = page.locator("body").inner_text(timeout=5000)
         if "not a bot" in body_txt or "confirm you" in body_txt.lower():
             return [], "blocked"
+        # EU consent modal overlays the page and intercepts clicks until dismissed.
+        _dismiss_consent(page)
+        # Scroll to lazy-load the description area that holds the transcript control.
+        page.mouse.wheel(0, 900)
+        page.wait_for_timeout(700)
         if not _open_transcript(page):
             return [], "no_panel"
         return _extract_panel_rows(page), "ok"

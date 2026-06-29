@@ -224,10 +224,10 @@ def _caption_transcript(video_id: str):
 
 
 def _browser_enabled() -> bool:
-    # Default OFF: the watch-page scrape needs DOM hardening (force-English UI +
-    # consent-modal dismissal + a confirmed segment selector) before it is reliable
-    # enough for unattended runs. Opt in with CORPUS_YT_BROWSER=1 while hardening.
-    return os.environ.get("CORPUS_YT_BROWSER", "0") == "1"
+    # Default ON. The watch-page scrape forces an English UI, dismisses the EU consent
+    # modal, and reads the transcript-segment-view-model panel (validated live across
+    # EN/KR videos). Set CORPUS_YT_BROWSER=0 to fall back to the legacy caption path.
+    return os.environ.get("CORPUS_YT_BROWSER", "1") != "0"
 
 
 def extract_transcript(video_id: str, whisper_on_blocked: bool = False):

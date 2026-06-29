@@ -175,26 +175,26 @@ The video `jNQXAC9IVRw` (Me at the zoo) is stable, has captions, and is YouTube'
 
 ---
 
-## Status: EXPERIMENTAL — default OFF (2026-06-29)
+## Status: LIVE — default ON, hardened (2026-06-29)
 
-The tier is built, tested, and merged, but **`CORPUS_YT_BROWSER` defaults to `0` (off)** because live validation showed the watch-page scrape is not yet reliable enough for unattended nightly runs. Opt in with `CORPUS_YT_BROWSER=1` while hardening. With the flag off, `extract_transcript` uses the proven legacy caption/yt-dlp/Whisper waterfall unchanged.
+`CORPUS_YT_BROWSER` **defaults to `1` (on)**; set it to `0` to fall back to the legacy caption/yt-dlp/Whisper waterfall. The watch-page scrape was validated end-to-end against real YouTube (logged-out, headless Chromium) returning `ok` with full timestamped transcripts across English, speech, and Korean videos. The three live blockers below were each diagnosed and fixed; all DOM knowledge is isolated in `bin/yt_browser_transcript.py`.
 
-### Live findings (what breaks, and the working recipe)
+### The three blockers (and the fixes now in the code)
 
-Validated end-to-end against real YouTube (logged-out, headless Chromium). Two blockers that the v1 selectors did not handle, plus one open item:
+1. **IP-localized UI.** YouTube serves the watch page in the host's geo language (Portuguese, from a Lisbon IP), so English-only selectors never matched → `no_panel` on every video. **Fix:** force English — `&hl=en` on the watch URL AND the context built with `locale="en-US"` + `extra_http_headers={"Accept-Language": "en-US,en;q=0.9"}`.
 
-1. **IP-localized UI.** YouTube serves the watch page in the browser's geo language (Portuguese here), so English-only selectors (`"...more"`, `"Show transcript"`) never match → `no_panel` on every video. **Fix:** force English — append `&hl=en` to the watch URL AND create the context with `locale="en-US"` + `extra_http_headers={"Accept-Language": "en-US,en;q=0.9"}`.
+2. **EU consent wall (`ytd-consent-bump-v2-lightbox`).** A "Before you continue to YouTube" modal whose `tp-yt-iron-overlay-backdrop` **intercepts every click** until dismissed — the real reason the expander/transcript clicks timed out. Stale `CONSENT`/`SOCS` cookies did NOT suppress it. **Fix (`_dismiss_consent`):** click the consent button by visible text (`button:has-text("Reject all")` inside `tp-yt-paper-dialog`/`ytd-consent-bump-v2-lightbox`) — its `aria-label` is a long localized sentence, so match on text, not aria-label — then `wait_for_selector("tp-yt-iron-overlay-backdrop.opened", state="detached")`.
 
-2. **EU consent wall (`ytd-consent-bump-v2-lightbox`).** A "Before you continue to YouTube" modal with a `tp-yt-iron-overlay-backdrop` overlays the page and **intercepts every click** until dismissed — this is the real reason the expander/transcript clicks time out. Stale `CONSENT`/`SOCS` cookies did NOT suppress it. **Fix:** after navigation, click the consent button by visible text (`button:has-text("Reject all")` inside `tp-yt-paper-dialog`/`ytd-consent-bump-v2-lightbox`); its `aria-label` is the long form ("Reject the use of cookies…"), so match on text, not aria-label. Confirm `tp-yt-iron-overlay-backdrop.opened` is gone before proceeding.
+3. **Migrated segment element.** `ytd-transcript-segment-renderer` no longer exists; transcript lines are now **`transcript-segment-view-model`** web components whose `inner_text()` is `"M:SS\n<a11y label>\n<caption>"`. **Fix:** `_extract_panel_rows` reads `transcript-segment-view-model` and takes the first line as the timestamp and the LAST line as the caption (skipping the middle a11y label).
 
-3. **Transcript open flow that works (verified — panel renders with timestamped segments):**
-   - dismiss consent (above)
-   - `page.mouse.wheel(0, 900)` to lazy-load the description area
-   - click `#description-inline-expander tp-yt-paper-button#expand` (the "...more" expander; a plain click works *once consent is gone*)
-   - click `[aria-label="Show transcript"]:visible` (there are 2 in the DOM; the `:visible` one is the live control — the other is hidden in the collapsed description). NB it is NOT `role=button`, so `get_by_role("button", name="Show transcript")` finds nothing — use the aria-label CSS selector.
+### The open flow (`_open_transcript`, retried once for headless flakiness)
 
-### OPEN — must resolve before flipping default on
+1. `_dismiss_consent(page)` and wait for the backdrop to detach.
+2. `page.mouse.wheel(0, 900)` to lazy-load the description area.
+3. click `#description-inline-expander tp-yt-paper-button#expand` (the "...more" expander; a plain click works once consent is gone).
+4. click `[aria-label="Show transcript"]:visible` (there are 2 in the DOM — the `:visible` one is the live control; it is NOT `role=button`, so `get_by_role` finds nothing — use the aria-label CSS selector).
+5. `wait_for_selector("transcript-segment-view-model")`, then read rows.
 
-- **Segment selector unconfirmed.** With the panel visibly populated, `ytd-transcript-segment-renderer` returned 0 — the current DOM uses a different element for transcript lines. Capture the real selector (walk up from a known line) and update `_extract_panel_rows`.
-- **Flakiness.** Consent-timing and expander-interception vary run-to-run; the flow needs explicit waits (`wait_for` on the consent backdrop disappearing, on the panel) and a small retry, not fixed `wait_for_timeout` sleeps, before it is safe for unattended use.
-- All DOM knowledge stays isolated in `bin/yt_browser_transcript.py` (`_open_transcript`, `_extract_panel_rows`, `_fetch_panel`), so hardening touches that one file.
+### Maintenance note
+
+These selectors are the documented DOM-churn risk: when YouTube next changes the panel, expect `no_panel` (graceful — falls through to Whisper) and re-confirm the selectors with a headless probe (`&hl=en`, dismiss consent, open panel, dump the repeated transcript element tag). Verify with `CORPUS_YT_LIVE=1 pytest tests/test_yt_browser_transcript.py -k live`.
