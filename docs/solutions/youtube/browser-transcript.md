@@ -175,9 +175,15 @@ The video `jNQXAC9IVRw` (Me at the zoo) is stable, has captions, and is YouTube'
 
 ---
 
-## Status: LIVE — default ON, hardened (2026-06-29)
+## Status: LIVE — captions-primary, browser as anti-rate-limit fallback (2026-06-29)
 
-`CORPUS_YT_BROWSER` **defaults to `1` (on)**; set it to `0` to fall back to the legacy caption/yt-dlp/Whisper waterfall. The watch-page scrape was validated end-to-end against real YouTube (logged-out, headless Chromium) returning `ok` with full timestamped transcripts across English, speech, and Korean videos. The three live blockers below were each diagnosed and fixed; all DOM knowledge is isolated in `bin/yt_browser_transcript.py`.
+**Waterfall (in `youtube_client.extract_transcript`): caption API → browser scrape (on `blocked`) → Whisper.** The caption API (`youtube_transcript_api` / yt-dlp timedtext, logged-out) is primary because it is fast, free, high-quality, and works for *most* videos — including chapter-videos whose transcript does **not** render in the watch-page panel logged-out (the browser returns `no_panel` for those, but the caption API gets them fine). The caption API's only weakness is the **~44-pull rate-limit**; that `blocked` status is exactly when the browser scrape — a *different, non-rate-limited surface* — earns its keep. Whisper is the last resort (caption-less videos always; rate-limited `blocked` only under `whisper_on_blocked`, e.g. a `--refetch-blocked` rescue).
+
+`CORPUS_YT_BROWSER` **defaults to `1`**; set `0` to disable the browser fallback (captions + Whisper only). The scrape was validated end-to-end against real YouTube (logged-out, headless Chromium) returning `ok` with full timestamped transcripts across English/speech/Korean videos.
+
+> **Why this order (2026-06-29 data):** a `--browser`-primary drain of 179 blocked keeper stubs rescued ~0 (chapter-videos → `no_panel`); the captions-primary path rescued 12/15 of the same stubs in one batch. The browser is the safety net for the rate-limit, not the front door. Neither surface uses a logged-in account (zero account-block risk — a hard user constraint).
+
+### The three blockers (and the fixes now in the code)
 
 ### The three blockers (and the fixes now in the code)
 

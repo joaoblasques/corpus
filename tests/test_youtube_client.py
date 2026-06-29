@@ -357,42 +357,59 @@ def test_run_browser_pacing_calls_human_delay(tmp_path, monkeypatch):
     assert call_count["n"] >= 1, "human_delay must be called after a browser fetch"
 
 
-# --- Task 4: browser-primary waterfall tests ---
+# --- captions-primary waterfall tests (browser = anti-rate-limit fallback) ---
 
-def test_browser_primary_ok_skips_caption_and_whisper(monkeypatch):
+def test_caption_ok_skips_browser_and_whisper(monkeypatch):
     import yt_browser_transcript as bt
     monkeypatch.setenv("CORPUS_YT_BROWSER", "1")
+    monkeypatch.setattr(yc, "_caption_transcript", lambda v: ("CAPTION BODY", "ok"))
+    monkeypatch.setattr(bt, "browser_transcript",
+                        lambda v: (_ for _ in ()).throw(AssertionError("browser called")))
+    monkeypatch.setattr(yc, "_whisper_transcript",
+                        lambda v: (_ for _ in ()).throw(AssertionError("whisper called")))
+    body, status = yc.extract_transcript("VID")
+    assert (body, status) == ("CAPTION BODY", "ok")
+
+
+def test_caption_blocked_falls_to_browser(monkeypatch):
+    import yt_browser_transcript as bt
+    monkeypatch.setenv("CORPUS_YT_BROWSER", "1")
+    monkeypatch.setattr(yc, "_caption_transcript", lambda v: ("", "blocked"))
     monkeypatch.setattr(bt, "browser_transcript", lambda v: ("BROWSER BODY", "ok"))
-    monkeypatch.setattr(yc, "_caption_transcript",
-                        lambda v: (_ for _ in ()).throw(AssertionError("captions called")))
     body, status = yc.extract_transcript("VID")
     assert (body, status) == ("BROWSER BODY", "ok")
 
 
-def test_browser_no_panel_falls_to_whisper(monkeypatch):
+def test_caption_none_found_falls_to_whisper_not_browser(monkeypatch):
+    # caption-less video -> Whisper directly; the browser only fires on `blocked`.
     import yt_browser_transcript as bt
     monkeypatch.setenv("CORPUS_YT_BROWSER", "1")
-    monkeypatch.setattr(bt, "browser_transcript", lambda v: ("", "no_panel"))
+    monkeypatch.setattr(yc, "_caption_transcript", lambda v: ("", "none_found"))
+    monkeypatch.setattr(bt, "browser_transcript",
+                        lambda v: (_ for _ in ()).throw(AssertionError("browser called")))
     monkeypatch.setattr(yc, "_whisper_enabled", lambda: True)
     monkeypatch.setattr(yc, "_whisper_transcript", lambda v: "WHISPER BODY")
     body, status = yc.extract_transcript("VID")
     assert (body, status) == ("WHISPER BODY", "ok")
 
 
-def test_browser_blocked_falls_to_caption_fallback(monkeypatch):
+def test_caption_blocked_browser_also_fails_then_whisper_when_allowed(monkeypatch):
     import yt_browser_transcript as bt
     monkeypatch.setenv("CORPUS_YT_BROWSER", "1")
-    monkeypatch.setattr(bt, "browser_transcript", lambda v: ("", "blocked"))
-    monkeypatch.setattr(yc, "_caption_transcript", lambda v: ("CAPTION BODY", "ok"))
-    body, status = yc.extract_transcript("VID")
-    assert (body, status) == ("CAPTION BODY", "ok")
+    monkeypatch.setattr(yc, "_caption_transcript", lambda v: ("", "blocked"))
+    monkeypatch.setattr(bt, "browser_transcript", lambda v: ("", "no_panel"))
+    monkeypatch.setattr(yc, "_whisper_enabled", lambda: True)
+    monkeypatch.setattr(yc, "_whisper_transcript", lambda v: "WHISPER BODY")
+    body, status = yc.extract_transcript("VID", whisper_on_blocked=True)
+    assert (body, status) == ("WHISPER BODY", "ok")
 
 
-def test_browser_disabled_uses_old_path(monkeypatch):
+def test_browser_disabled_skips_browser_on_blocked(monkeypatch):
     import yt_browser_transcript as bt
     monkeypatch.setenv("CORPUS_YT_BROWSER", "0")
+    monkeypatch.setattr(yc, "_caption_transcript", lambda v: ("", "blocked"))
     monkeypatch.setattr(bt, "browser_transcript",
                         lambda v: (_ for _ in ()).throw(AssertionError("browser called")))
-    monkeypatch.setattr(yc, "_caption_transcript", lambda v: ("CAPTION BODY", "ok"))
+    monkeypatch.setattr(yc, "_whisper_enabled", lambda: False)
     body, status = yc.extract_transcript("VID")
-    assert (body, status) == ("CAPTION BODY", "ok")
+    assert status == "blocked"

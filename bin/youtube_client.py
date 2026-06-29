@@ -224,31 +224,36 @@ def _caption_transcript(video_id: str):
 
 
 def _browser_enabled() -> bool:
-    # Default ON. The watch-page scrape forces an English UI, dismisses the EU consent
-    # modal, and reads the transcript-segment-view-model panel (validated live across
-    # EN/KR videos). Set CORPUS_YT_BROWSER=0 to fall back to the legacy caption path.
+    # Default ON. The browser scrape is the anti-rate-limit FALLBACK (see waterfall
+    # below): it hits the watch-page UI — a different surface than the caption API —
+    # so it keeps working when captions get rate-limited. CORPUS_YT_BROWSER=0 disables
+    # it (captions + Whisper only).
     return os.environ.get("CORPUS_YT_BROWSER", "1") != "0"
 
 
 def extract_transcript(video_id: str, whisper_on_blocked: bool = False):
-    """Waterfall -> (markdown_body, status). Browser-primary.
+    """Waterfall -> (markdown_body, status). Captions-primary.
 
-    Order: browser panel scrape -> (no_panel) Whisper -> (blocked/failed) the legacy
-    caption API + yt-dlp VTT deep fallback -> (still none) Whisper per old triggers.
-    CORPUS_YT_BROWSER=0 restores the legacy caption-first behaviour.
+    Order: caption API (fast, free, high-quality, works for most videos incl.
+    chapter-videos) -> on a rate-limit `blocked`, the browser scrape (a different,
+    non-rate-limited surface) -> Whisper last resort (always for caption-less videos;
+    for `blocked` only when whisper_on_blocked is set). The caption API rate-limits
+    after ~44 rapid pulls, which is exactly when the browser fallback earns its keep.
     """
-    if _browser_enabled():
-        import yt_browser_transcript as bt
-        body, status = bt.browser_transcript(video_id)
-        if status == "ok":
-            return body, "ok"
-        if status == "no_panel" and _whisper_enabled():
-            wbody = _whisper_transcript(video_id)
-            if wbody:
-                return wbody, "ok"
-        # blocked / failed / whisper-miss -> fall through to legacy paths below.
-
     body, status = _caption_transcript(video_id)
+    if status == "ok":
+        return body, "ok"
+
+    # Rate-limited captions -> the browser hits the UI, a surface that isn't blocked.
+    if status == "blocked" and _browser_enabled():
+        import yt_browser_transcript as bt
+        bbody, bstatus = bt.browser_transcript(video_id)
+        if bstatus == "ok":
+            return bbody, "ok"
+
+    # Whisper last resort: caption-less videos always; rate-limited `blocked` only when
+    # explicitly allowed (e.g. a --refetch-blocked rescue), to avoid burning Whisper on
+    # every transient block in a normal run.
     trigger = ("none_found", "disabled", "blocked") if whisper_on_blocked else ("none_found", "disabled")
     if status in trigger and _whisper_enabled():
         wbody = _whisper_transcript(video_id)
