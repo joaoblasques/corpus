@@ -1,5 +1,6 @@
-import sys, importlib
+import sys, importlib, os
 from pathlib import Path
+import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "bin"))
 bt = importlib.import_module("yt_browser_transcript")
 
@@ -72,3 +73,14 @@ class _FakePage:
 def test_extract_panel_rows_parses_segments():
     page = _FakePage([("0:00", "intro line"), ("1:23", "next line")])
     assert bt._extract_panel_rows(page) == [("0:00", "intro line"), ("1:23", "next line")]
+
+
+@pytest.mark.skipif(os.environ.get("CORPUS_YT_LIVE") != "1",
+                    reason="set CORPUS_YT_LIVE=1 to run the real browser smoke test")
+def test_live_browser_transcript_known_video():
+    # 'jNQXAC9IVRw' = "Me at the zoo" (first YouTube video, stable, has captions)
+    body, status = bt.browser_transcript("jNQXAC9IVRw")
+    bt.shutdown()
+    assert status in ("ok", "no_panel")
+    if status == "ok":
+        assert body.startswith(bt.PROVENANCE)

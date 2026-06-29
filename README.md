@@ -98,6 +98,20 @@ Repeat until done. Run a lint pass periodically:
 
 > Run a full lint pass. Output the report; don't apply fixes yet.
 
+## Dependencies
+
+### YouTube browser transcript tier (logged-out Playwright)
+
+The corpus can scrape YouTube transcripts via a logged-out browser when the backend API rate-limits. This requires Playwright and Chromium:
+
+```bash
+# Browser transcript tier (logged-out Playwright)
+python3 -m pip install playwright
+python3 -m playwright install chromium
+```
+
+See `docs/solutions/youtube/browser-transcript.md` for details on when this tier activates and how to test it.
+
 ## Daily / weekly workflow
 
 ### Adding a new source
