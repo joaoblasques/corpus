@@ -4,6 +4,7 @@ from unittest.mock import MagicMock
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "bin"))
 import youtube_client as yc  # noqa: E402
+import yt_browser_transcript as bt  # noqa: E402
 
 
 class _FakeReq:
@@ -110,6 +111,7 @@ def test_extract_transcript_inner_block_ytdlp_empty(monkeypatch):
 
 def test_run_collects_and_removes_only_with_transcript(tmp_path, monkeypatch):
     # one tech playlist, two videos: one with transcript (removed), one without (kept)
+    monkeypatch.setattr(bt, "human_delay", lambda: None)
     monkeypatch.setattr(yc.cy, "INBOX", tmp_path)
     monkeypatch.setattr(yc.cy, "DEDUP_DIRS", [tmp_path])
     monkeypatch.setattr(yc, "load_config", lambda: {
@@ -138,6 +140,7 @@ def test_run_stops_on_quota_error(tmp_path, monkeypatch):
     # I2: a 403 quota/rate-limit HttpError from delete must stop the run gracefully,
     # not get swallowed as failed+continue. Second video's delete is never attempted.
     from googleapiclient.errors import HttpError
+    monkeypatch.setattr(bt, "human_delay", lambda: None)
     monkeypatch.setattr(yc.cy, "INBOX", tmp_path)
     monkeypatch.setattr(yc.cy, "DEDUP_DIRS", [tmp_path])
     monkeypatch.setattr(yc, "load_config", lambda: {
@@ -187,6 +190,7 @@ def test_run_refetch_blocked_reextracts_and_removes(tmp_path, monkeypatch):
     # A prior 'blocked' stub for V1 exists (rate-limit artifact). With --refetch-blocked
     # the run re-extracts; the transcript now succeeds, the stub is overwritten to status
     # 'ok', and (collect-remove) the video is finally removed.
+    monkeypatch.setattr(bt, "human_delay", lambda: None)
     monkeypatch.setattr(yc.cy, "INBOX", tmp_path)
     monkeypatch.setattr(yc.cy, "DEDUP_DIRS", [tmp_path])
     (tmp_path / "youtube-V1-a.md").write_text(
@@ -232,6 +236,7 @@ def test_run_blocked_stub_not_refetched_by_default(tmp_path, monkeypatch):
 
 
 def test_run_dry_run_never_deletes(tmp_path, monkeypatch):
+    monkeypatch.setattr(bt, "human_delay", lambda: None)
     monkeypatch.setattr(yc.cy, "INBOX", tmp_path)
     monkeypatch.setattr(yc.cy, "DEDUP_DIRS", [tmp_path])
     monkeypatch.setattr(yc, "load_config", lambda: {
@@ -248,7 +253,8 @@ def test_run_dry_run_never_deletes(tmp_path, monkeypatch):
 
 
 def test_run_sleeps_after_fetch(tmp_path, monkeypatch):
-    # A fresh video is fetched -> throttle (sleep) once.
+    # A fresh video is fetched -> throttle (sleep) once (non-browser path).
+    monkeypatch.setenv("CORPUS_YT_BROWSER", "0")  # test the fixed-sleep fallback path
     monkeypatch.setattr(yc.cy, "INBOX", tmp_path)
     monkeypatch.setattr(yc.cy, "DEDUP_DIRS", [tmp_path])
     monkeypatch.setattr(yc, "load_config", lambda: {
@@ -316,6 +322,7 @@ def _blocked_run_setup(tmp_path, monkeypatch, vids):
 
 
 def test_run_refetch_max_caps_refetches(tmp_path, monkeypatch):
+    monkeypatch.setattr(bt, "human_delay", lambda: None)
     calls = _blocked_run_setup(tmp_path, monkeypatch, ["VB1", "VB2", "VB3"])
     rc = yc.cmd_run(yc._args(["run", "--refetch-blocked", "--refetch-max", "1", "--sleep", "0"]))
     assert rc == 0
@@ -323,10 +330,31 @@ def test_run_refetch_max_caps_refetches(tmp_path, monkeypatch):
 
 
 def test_run_refetch_unlimited_without_cap(tmp_path, monkeypatch):
+    monkeypatch.setattr(bt, "human_delay", lambda: None)
     calls = _blocked_run_setup(tmp_path, monkeypatch, ["VB1", "VB2", "VB3"])
     rc = yc.cmd_run(yc._args(["run", "--refetch-blocked", "--sleep", "0"]))
     assert rc == 0
     assert calls == ["VB1", "VB2", "VB3"], "no cap → all blocked stubs refetched"
+
+
+def test_run_browser_pacing_calls_human_delay(tmp_path, monkeypatch):
+    # Prove that cmd_run calls bt.human_delay() when browser is enabled and a fetch occurs.
+    monkeypatch.delenv("CORPUS_YT_BROWSER", raising=False)  # ensure default (enabled)
+    call_count = {"n": 0}
+    monkeypatch.setattr(bt, "human_delay", lambda: call_count.__setitem__("n", call_count["n"] + 1))
+    monkeypatch.setattr(yc.cy, "INBOX", tmp_path)
+    monkeypatch.setattr(yc.cy, "DEDUP_DIRS", [tmp_path])
+    monkeypatch.setattr(yc, "load_config", lambda: {
+        "playlists": [{"id": "PL1", "name": "AI", "policy": "collect-keep"}],
+        "default_policy": "ignore"})
+    monkeypatch.setattr(yc, "get_service", lambda: "SVC")
+    monkeypatch.setattr(yc, "list_playlist_items", lambda svc, pid: iter([
+        {"playlist_item_id": "I1", "video_id": "V1", "title": "A", "channel_name": "C",
+         "published": "2026-06-01", "privacy": "public"}]))
+    monkeypatch.setattr(yc, "extract_transcript", lambda vid, **kw: ("BODY", "ok"))
+    rc = yc.cmd_run(yc._args(["run", "--sleep", "0"]))
+    assert rc == 0
+    assert call_count["n"] >= 1, "human_delay must be called after a browser fetch"
 
 
 # --- Task 4: browser-primary waterfall tests ---

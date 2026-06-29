@@ -370,8 +370,12 @@ def cmd_run(args) -> int:
                         t["kept"] += 1
                     # Throttle only the rate-limit-sensitive fetches, not duplicates:
                     # a steady-state daily run is mostly duplicates and should be fast.
-                    if args.sleep and fetched:
-                        time.sleep(args.sleep)
+                    if fetched:
+                        if _browser_enabled():
+                            import yt_browser_transcript as bt
+                            bt.human_delay()
+                        elif args.sleep:
+                            time.sleep(args.sleep)
                 except HttpError as e:
                     status_code = getattr(getattr(e, "resp", None), "status", None)
                     if status_code in (403, 429, 503):

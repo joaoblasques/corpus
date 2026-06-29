@@ -17,6 +17,7 @@ from pathlib import Path
 BIN = Path(__file__).resolve().parent
 sys.path.insert(0, str(BIN))
 import youtube_client as yc  # noqa: E402
+import yt_browser_transcript as bt  # noqa: E402
 
 INBOX = BIN.parent / "raw" / "_inbox"
 KEEPERS = BIN.parent / "raw" / ".whisper_keepers.tsv"
@@ -80,10 +81,10 @@ def main(argv=None) -> int:
             key = {"ok:captions": "ok_captions", "ok:whisper": "ok_whisper"}.get(res, res)
             tally[key] = tally.get(key, 0) + 1
             print(json.dumps({"file": r[0], "result": res}), flush=True)
+            if args.browser:
+                bt.human_delay()
     finally:
-        if args.browser:
-            import yt_browser_transcript as bt
-            bt.shutdown()
+        bt.shutdown()
     print(json.dumps({"tally": tally, "processed": len(rows)}))
     return 0
 

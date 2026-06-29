@@ -4,7 +4,6 @@ panel. Primary transcript source for collect-youtube; isolates all Playwright/DO
 knowledge. Public entry point: browser_transcript(video_id) -> (markdown_body, status)."""
 from __future__ import annotations
 
-import os
 import random
 import sys
 import time
