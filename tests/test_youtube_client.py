@@ -339,7 +339,7 @@ def test_run_refetch_unlimited_without_cap(tmp_path, monkeypatch):
 
 def test_run_browser_pacing_calls_human_delay(tmp_path, monkeypatch):
     # Prove that cmd_run calls bt.human_delay() when browser is enabled and a fetch occurs.
-    monkeypatch.delenv("CORPUS_YT_BROWSER", raising=False)  # ensure default (enabled)
+    monkeypatch.setenv("CORPUS_YT_BROWSER", "1")  # browser tier is opt-in (default off)
     call_count = {"n": 0}
     monkeypatch.setattr(bt, "human_delay", lambda: call_count.__setitem__("n", call_count["n"] + 1))
     monkeypatch.setattr(yc.cy, "INBOX", tmp_path)

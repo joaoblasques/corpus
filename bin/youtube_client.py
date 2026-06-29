@@ -224,7 +224,10 @@ def _caption_transcript(video_id: str):
 
 
 def _browser_enabled() -> bool:
-    return os.environ.get("CORPUS_YT_BROWSER", "1") != "0"
+    # Default OFF: the watch-page scrape needs DOM hardening (force-English UI +
+    # consent-modal dismissal + a confirmed segment selector) before it is reliable
+    # enough for unattended runs. Opt in with CORPUS_YT_BROWSER=1 while hardening.
+    return os.environ.get("CORPUS_YT_BROWSER", "0") == "1"
 
 
 def extract_transcript(video_id: str, whisper_on_blocked: bool = False):
