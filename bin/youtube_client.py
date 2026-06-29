@@ -316,72 +316,74 @@ def cmd_run(args) -> int:
     processed = 0
     refetched = 0  # count of blocked-stub refetches this run (capped by --refetch-max)
     stopped = None
-    for pl in targets:
-        if stopped:
-            break
-        policy = pl["policy"]
-        t["playlists"] += 1
-        for item in list_playlist_items(service, pl["id"]):
-            if args.max and processed >= args.max:
+    try:
+        for pl in targets:
+            if stopped:
                 break
-            processed += 1
-            vid = item["video_id"]
-            fetched = False  # only throttle after an actual transcript fetch
-            try:
-                do_collect = cy.should_collect(vid, args.refetch_blocked)
-                # Honor the blocked-refetch cap: once --refetch-max refetches are
-                # done, leave further blocked stubs as duplicates for the next run.
-                if (do_collect and args.refetch_blocked
-                        and args.refetch_max is not None
-                        and cy.collected_status(vid) == "blocked"):
-                    if refetched >= args.refetch_max:
-                        do_collect = False
-                    else:
-                        refetched += 1
-                if not do_collect:
-                    t["duplicate"] += 1
-                    status = cy.collected_status(vid) or "unknown"
-                else:
-                    fetched = True
-                    # --refetch-blocked last resort: a previously-blocked video that the
-                    # caption paths still can't reach falls through to Whisper.
-                    whisper_on_blocked = bool(
-                        args.refetch_blocked and cy.collected_status(vid) == "blocked")
-                    body, status = extract_transcript(vid, whisper_on_blocked=whisper_on_blocked)
-                    meta = {"video_id": vid, "title": item["title"],
-                            "channel_name": item["channel_name"], "published": item["published"],
-                            "playlist": pl["name"], "transcript_status": status,
-                            "collected_at": collected_at}
-                    path = cy.target_filename(vid, item["title"])
-                    path.parent.mkdir(parents=True, exist_ok=True)
-                    path.write_text(cy.build_document(meta, body), encoding="utf-8")
-                    if not path.exists():
-                        t["failed"] += 1
-                        continue
-                    t["collected"] += 1
-                    if status != "ok":
-                        t["no_transcript"] += 1
-                # Safety rule: remove ONLY for collect-remove, ONLY with a transcript, never on dry-run.
-                if policy == "collect-remove" and status == "ok" and not args.dry_run:
-                    if delete_playlist_item(service, item["playlist_item_id"]):
-                        t["removed"] += 1
-                else:
-                    t["kept"] += 1
-                # Throttle only the rate-limit-sensitive fetches, not duplicates:
-                # a steady-state daily run is mostly duplicates and should be fast.
-                if args.sleep and fetched:
-                    time.sleep(args.sleep)
-            except HttpError as e:
-                status_code = getattr(getattr(e, "resp", None), "status", None)
-                if status_code in (403, 429, 503):
-                    stopped = "quota_or_rate_limit"
+            policy = pl["policy"]
+            t["playlists"] += 1
+            for item in list_playlist_items(service, pl["id"]):
+                if args.max and processed >= args.max:
                     break
-                t["failed"] += 1
-            except Exception:
-                t["failed"] += 1
-    if _browser_enabled():
-        import yt_browser_transcript as bt
-        bt.shutdown()
+                processed += 1
+                vid = item["video_id"]
+                fetched = False  # only throttle after an actual transcript fetch
+                try:
+                    do_collect = cy.should_collect(vid, args.refetch_blocked)
+                    # Honor the blocked-refetch cap: once --refetch-max refetches are
+                    # done, leave further blocked stubs as duplicates for the next run.
+                    if (do_collect and args.refetch_blocked
+                            and args.refetch_max is not None
+                            and cy.collected_status(vid) == "blocked"):
+                        if refetched >= args.refetch_max:
+                            do_collect = False
+                        else:
+                            refetched += 1
+                    if not do_collect:
+                        t["duplicate"] += 1
+                        status = cy.collected_status(vid) or "unknown"
+                    else:
+                        fetched = True
+                        # --refetch-blocked last resort: a previously-blocked video that the
+                        # caption paths still can't reach falls through to Whisper.
+                        whisper_on_blocked = bool(
+                            args.refetch_blocked and cy.collected_status(vid) == "blocked")
+                        body, status = extract_transcript(vid, whisper_on_blocked=whisper_on_blocked)
+                        meta = {"video_id": vid, "title": item["title"],
+                                "channel_name": item["channel_name"], "published": item["published"],
+                                "playlist": pl["name"], "transcript_status": status,
+                                "collected_at": collected_at}
+                        path = cy.target_filename(vid, item["title"])
+                        path.parent.mkdir(parents=True, exist_ok=True)
+                        path.write_text(cy.build_document(meta, body), encoding="utf-8")
+                        if not path.exists():
+                            t["failed"] += 1
+                            continue
+                        t["collected"] += 1
+                        if status != "ok":
+                            t["no_transcript"] += 1
+                    # Safety rule: remove ONLY for collect-remove, ONLY with a transcript, never on dry-run.
+                    if policy == "collect-remove" and status == "ok" and not args.dry_run:
+                        if delete_playlist_item(service, item["playlist_item_id"]):
+                            t["removed"] += 1
+                    else:
+                        t["kept"] += 1
+                    # Throttle only the rate-limit-sensitive fetches, not duplicates:
+                    # a steady-state daily run is mostly duplicates and should be fast.
+                    if args.sleep and fetched:
+                        time.sleep(args.sleep)
+                except HttpError as e:
+                    status_code = getattr(getattr(e, "resp", None), "status", None)
+                    if status_code in (403, 429, 503):
+                        stopped = "quota_or_rate_limit"
+                        break
+                    t["failed"] += 1
+                except Exception:
+                    t["failed"] += 1
+    finally:
+        if _browser_enabled():
+            import yt_browser_transcript as bt
+            bt.shutdown()
     ignored = [p["name"] for p in cfg["playlists"] if p.get("policy") == "ignore"]
     out = {**t, "dry_run": bool(args.dry_run), "ignored_playlists": ignored}
     if stopped:

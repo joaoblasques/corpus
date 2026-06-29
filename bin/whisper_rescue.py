@@ -67,7 +67,7 @@ def main(argv=None) -> int:
     rows = [l.split("\t") for l in Path(args.keepers).read_text(encoding="utf-8").splitlines() if l]
     if args.max:
         rows = rows[:args.max]
-    tally = {"ok_captions": 0, "ok_whisper": 0, "blocked": 0, "already_ok": 0,
+    tally = {"ok_captions": 0, "ok_whisper": 0, "ok": 0, "blocked": 0, "already_ok": 0,
              "no_id": 0, "failed": 0}
     try:
         for r in rows:
