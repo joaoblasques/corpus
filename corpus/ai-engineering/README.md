@@ -101,6 +101,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [[ai-engineering/generator-evaluator-separation|Generator–Evaluator Separation]] — synthesis · draft · a model can't reliably grade its own output; move evaluation into a separate agent/model/rubric/human
 
 ### Sources
+- [[ai-engineering/sources/the-new-software-lifecycle|The New Software Lifecycle (Addy Osmani)]] — source · draft · Google/Osmani SDLC paper; 10%/90% model/harness split; 6 context types; static vs dynamic; METR productivity data
 - [[ai-engineering/sources/how-ai-agents-and-skills-work|How AI agents & Claude skills work]] — source · draft · Isenberg × Ras Mic; skills, progressive disclosure, less-is-more context
 - [[ai-engineering/sources/cs50-ai-with-python|Harvard CS50's AI with Python]] — source · draft · classical+modern AI curriculum (search, logic, ML, neural nets, NLP)
 - [[ai-engineering/sources/internal-operating-system-claude-projects|4 Claude Projects / Internal OS]] — source · draft · knowledge+skills+ingest+improve loop = the LLM-Wiki pattern

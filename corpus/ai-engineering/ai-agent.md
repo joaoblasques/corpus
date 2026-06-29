@@ -60,6 +60,9 @@ sources:
   - path: raw/_inbox/youtube-ZaPbP9DwBOE-don-t-learn-ai-agents-without-learning-these-fundamentals.md
     channel: youtube
     ingested_at: 2026-06-27
+  - path: raw/_inbox/youtube-LNkAW4SSgdY-the-complete-guide-to-ai-agents-in-2026-and-how-to-actually.md
+    channel: youtube
+    ingested_at: 2026-06-29
 aliases:
   - ai agent
   - agentic AI
@@ -278,6 +281,7 @@ Key properties [^src14]:
 [^src16]: [Agents in Action #1 — What is an AI Agent?](../../raw/email/email-2026-06-13-agents-in-action-1-what-is-an-ai-agent.md) — Pipeline to Insights email
 [^src17]: [Agentic AI Systems Clearly Explained](../../raw/_inbox/youtube-kwRTUw8pb2c-agentic-ai-systems-clearly-explained.md) — Simon Scrapes, YouTube; 4-level framework (chatbot→workflow→agentic-workflow→agentic-AI-system)
 [^src18]: [Don't Learn AI Agents Without Learning These Fundamentals](../../raw/_inbox/youtube-ZaPbP9DwBOE-don-t-learn-ai-agents-without-learning-these-fundamentals.md) — KodeKloud, YouTube; corroborates core loop, component architecture, and agent vs simple LLM call decision criteria
+[^src19]: [The Complete Guide to AI Agents in 2026 (and How to Actually Build One)](../../raw/_inbox/youtube-LNkAW4SSgdY-the-complete-guide-to-ai-agents-in-2026-and-how-to-actually.md) — Tech With Tim, YouTube; 4-level framework (chat→tools→workflows→agents), corroborates framework from [^src17]
 
 ## Why AI agents love CLIs (the GUI → CLI reversal)
 

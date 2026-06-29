@@ -6,6 +6,12 @@ sources:
   - path: raw/email/email-2025-11-05-semantics-ontology-and-taxonomy-and-metadata-foundations-for.md
     channel: email
     ingested_at: 2026-06-15
+  - path: raw/_inbox/web-where-data-engineering-is-heading-in-2026-5-trends-fe513e25.md
+    channel: web
+    ingested_at: 2026-06-29
+  - path: raw/_inbox/web-the-insanity-of-data-education-c2478cdc.md
+    channel: web
+    ingested_at: 2026-06-29
   - path: raw/youtube/youtube-7jbcvxmj1bs.md
     channel: youtube
     ingested_at: 2026-06-17
@@ -78,6 +84,31 @@ Capturing meaning is the *theory*; a separate draft chapter from the same book s
 
 The takeaway: data modeling demands **situational and social awareness**, not only technical approaches — the same "shared meaning across a group" problem this page frames semantically, viewed through organizational dynamics [^src3]. See [[productivity/working-with-stakeholders|Working with Stakeholders]] and [[data-engineering/requirements-gathering|Requirements Gathering]] for the practitioner-and-sales side.
 
+## The 2026 crisis: survey data
+
+A February 2026 survey of 1,101 data practitioners and leaders (Joe Reis, Practical Data Community) quantifies the scale of the organizational dysfunction this page frames theoretically [^src4][^src5]:
+
+- **89% report pain points** with their data modeling approach; only 11% say things are going well
+- **59% cite constant time pressure** as the primary obstruction
+- **51% cite lack of clear ownership**
+- Only **5% are using semantic models** — suggesting the solution space (§ Semantics above) is vastly underutilized
+
+The survey shows a concrete downstream effect: **38% of ad-hoc modelers are constantly firefighting** vs. teams with a disciplined modeling approach, who fight fewer fires [^src4]. This is the "organizational dimension" (§ Theory vs reality) expressed as measurable operational cost.
+
+Two AI-era paths from here [^src4]:
+- **Path A**: Semantic and context layers go mainstream — AI makes explicit semantics viable and necessary
+- **Path B**: AI generates models on the fly, bypassing the semantic layer entirely (Joe Reis's prediction: Path A happens first, Path B eats it in 2027–2028 as models get strong enough to interpret messy schemas)
+
+**Ownership vs. education**: Joe Reis's 2026 piece on data education argues directly that blame-the-practitioner is the wrong frame [^src5]. The 40-year echo chamber — data industry repeating the same educational mistakes and blaming practitioners for not following 40-year-old methodologies — is insanity by the literal definition: doing the same thing and expecting different results. The 51% ownership void is a leadership failure, not a skills failure [^src5].
+
+> "If the data industry has been teaching and preaching the same way for four decades and the vast majority of practitioners are still struggling, clearly the approach hasn't worked. At this point, we cannot keep blaming the practitioners." — Joe Reis [^src5]
+
+The prescribed reset [^src5]:
+1. **Teach building blocks, not religion** — pragmatic, modular primitives; drop the dogmatic 600-page textbooks
+2. **Invest in team growth** — giving people powerful tools without training is handing a teenager car keys without a driving lesson
+3. **Solve the ownership void** — assign actual ownership, give top-down air cover to slow down and build things right
+4. **Compete for attention** — if the material is boring, it loses to ChatGPT and Slack pings; digestible + directly applicable wins
+
 ## Related
 
 - [[data-engineering/requirements-gathering|Requirements Gathering]] — the practitioner/sales/servant work of pulling requirements out of stakeholders
@@ -93,3 +124,5 @@ The takeaway: data modeling demands **situational and social awareness**, not on
 [^src1]: [Semantics, Ontology, and Taxonomy, and Metadata — Foundations for Meaning in Data Modeling](../../raw/email/email-2025-11-05-semantics-ontology-and-taxonomy-and-metadata-foundations-for.md)
 [^src2]: [Dimensional Data Modeling Day 1 (Zach Wilson / DataExpert)](../../raw/youtube/youtube-7jbcvxmj1bs.md)
 [^src3]: [Data Modeling - Theory vs Reality (Joe Reis, Practical Data Modeling)](../../raw/email/email-2025-08-06-data-modeling-theory-vs-reality.md)
+[^src4]: [Where Data Engineering Is Heading in 2026 — 5+ Trends](../../raw/_inbox/web-where-data-engineering-is-heading-in-2026-5-trends-fe513e25.md) — Joe Reis, Practical Data Community survey (1,101 respondents, Feb 2026)
+[^src5]: [The Insanity of Data Education](../../raw/_inbox/web-the-insanity-of-data-education-c2478cdc.md) — Joe Reis, Practical Data Community

@@ -1649,3 +1649,82 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   - ingest: 30 ingested · 20 deferred · status=ok
 - lint:
   - 1 broken wikilinks · 25 broken citations · 0 orphans · 20 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+
+## [2026-06-29 00:00] ingest | The New Software Lifecycle (Addy Osmani / Google)
+- source: raw/_inbox/web-the-new-software-lifecycle-840140b4.md
+- channel: web
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/sources/the-new-software-lifecycle.md, corpus/ai-engineering/agent-harness.md, corpus/ai-engineering/context-engineering.md]
+- new pages: [corpus/ai-engineering/sources/the-new-software-lifecycle.md]
+- notes: ingest-auto run (50 pre-filtered files); 10%/90% model/harness split; 6 context types taxonomy; static vs dynamic context; METR study; verification spectrum
+
+## [2026-06-29 00:00] ingest | Agentic Code Review (Addy Osmani)
+- source: raw/_inbox/web-agentic-code-review-a6ceec31.md
+- channel: web
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/agentic-coding.md, corpus/software-engineering/cognitive-debt.md]
+- new pages: []
+- notes: ingest-auto run; Faros AI 22K-dev stats; CodeRabbit 470-PR study; 4-tool heterogeneity experiment (93.4% unique); borrowed confidence; human on the loop; circuit breaker pattern
+
+## [2026-06-29 00:00] ingest | PI Architecture EXPLAINED (Alejandro AO)
+- source: raw/_inbox/youtube-gTeujlv8qK0-pi-architecture-explained-agent-loop-tools-tui-and-more.md
+- channel: youtube
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/pi-agent.md]
+- new pages: []
+- notes: ingest-auto run; 6-step init sequence; JSONL tree sessions; RPC/SDK access mode
+
+## [2026-06-29 00:00] ingest | Joe Reis data engineering suite (4 sources)
+- source: raw/_inbox/web-where-data-engineering-is-heading-in-2026-5-trends-fe513e25.md, web-the-insanity-of-data-education-c2478cdc.md, web-2028-the-great-data-reckoning-73fdab45.md, web-the-reckoning-is-already-here-f010ee9f.md
+- channel: web
+- domain: data-engineering, ai-business
+- pages touched: [corpus/data-engineering/data-modeling-meaning.md, corpus/data-engineering/data-engineer-role.md, corpus/ai-business/ai-and-the-job-market.md]
+- new pages: []
+- notes: ingest-auto run; 89% pain/59% time pressure/51% ownership void (1,101 survey); bifurcation scenario ($400K+ vs AI reviewer); tribal knowledge survival; Joe Reis reckoning
+
+## [2026-06-29 00:00] ingest | Hermes Agent suite (4 YouTube sources)
+- source: raw/_inbox/youtube-y4hiT-j5J24-..., youtube-mTYxpIRK7xA-..., youtube-u6L9aedHqZc-..., youtube-yzlvDnxvi1I-...
+- channel: youtube
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/hermes.md]
+- new pages: []
+- notes: ingest-auto run; Minimax M3 MSA architecture (1M context at 1/20th compute); $0.60/$2.40 pricing; 24/7 always-on practicality
+
+## [2026-06-29 00:00] ingest | Build 3 Production AI Agents (AgentSpan, Tech With Tim)
+- source: raw/_inbox/youtube-zFw19qGAeGo-build-3-production-ai-agents-in-python-full-course-agentspan.md
+- channel: youtube
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/multi-agent-systems.md]
+- new pages: []
+- notes: ingest-auto run; 7 production requirements; worker+server architecture; crash recovery; observability dashboard
+
+## [2026-06-29 00:00] ingest | Long-running Agents (Addy Osmani — inbox duplicate)
+- source: raw/_inbox/web-long-running-agents-322a7b71.md
+- channel: web
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/long-running-agents.md]
+- new pages: []
+- notes: ingest-auto run; same article as raw/web/long-running-agents.md (already ingested 2026-06-16); source append only
+
+## [2026-06-29 00:00] ingest | The Complete Guide to AI Agents in 2026 (Tech With Tim)
+- source: raw/_inbox/youtube-LNkAW4SSgdY-the-complete-guide-to-ai-agents-in-2026-and-how-to-actually.md
+- channel: youtube
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/ai-agent.md]
+- new pages: []
+- notes: ingest-auto run; 4-level framework corroboration (chat→tools→workflows→agents); existing framework from kwRTUw8pb2c confirmed
+
+## [2026-06-29T03:01] config | scheduled run
+- collectors:
+  - gmail: 0 collected · status=ok
+  - obsidian: 0 collected · status=ok
+  - pdf: 0 collected · status=ok
+  - youtube: 29 collected · status=ok
+  - github_discover: 0 collected · status=ok
+  - github: 0 collected · status=ok
+  - x: 0 collected · status=ok
+  - links_refetch: 0 refetched · status=ok
+- ingest:
+  - ingest: 14 ingested · 9 deferred · status=ok
+- lint:
+  - 1 broken wikilinks · 44 broken citations · 0 orphans · 20 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py

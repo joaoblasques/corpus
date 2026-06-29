@@ -36,6 +36,18 @@ sources:
   - path: raw/_inbox/youtube-zHE434sBw2U-i-gave-my-hermes-agent-a-phone-number-its-crazy.md
     channel: youtube
     ingested_at: 2026-06-27
+  - path: raw/_inbox/youtube-y4hiT-j5J24-how-i-use-hermes-as-a-lead-developer.md
+    channel: youtube
+    ingested_at: 2026-06-29
+  - path: raw/_inbox/youtube-mTYxpIRK7xA-hermes-agent-full-course-setup-guide-for-complete-beginners.md
+    channel: youtube
+    ingested_at: 2026-06-29
+  - path: raw/_inbox/youtube-u6L9aedHqZc-hermes-agent-is-crazy-180-000-github-stars.md
+    channel: youtube
+    ingested_at: 2026-06-29
+  - path: raw/_inbox/youtube-yzlvDnxvi1I-the-hermes-agent-briefing-what-it-is-why-it-matters-and-how.md
+    channel: youtube
+    ingested_at: 2026-06-29
 aliases:
   - Hermes
   - Hermes agent
@@ -55,7 +67,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-06-16
-updated: 2026-06-27
+updated: 2026-06-29
 ---
 
 # Hermes (coding agent)
@@ -216,6 +228,20 @@ Hermes integrates OpenRouter for model routing, applying three heuristics per ta
 
 One-line VPS deploy via Open Router Spawn on Google Cloud, AWS, or DigitalOcean [^src5]. Apple Health, calendar, and Gmail integrations available post-setup [^src5].
 
+## Minimax M3: running Hermes at 1/20th the cost
+
+Minimax M3's architecture makes it the cost-optimal model for always-on Hermes deployments [^src13]:
+
+**MSA (Minimax Sparse Attention)**: Normal transformers read every token in context on every inference. MSA checks which parts of the context are relevant and reads only those — skipping the rest. Result: **1 million token context window at 1/20th of the compute** of a normal transformer [^src13].
+
+**Cost**: Minimax M3 at $0.60/$2.40 per 1M tokens (input/output) vs. Opus 4.8 at $5/$25 — approximately 10–20× cheaper. With the $20/month subscription plan: 1.7 billion tokens per month; the $50 plan yields 5.1 billion tokens [^src13]. (Note: video is Minimax-sponsored; treat pricing claims as approximate.)
+
+**Capability**: On SWE-bench Pro, Minimax M3 outperforms Gemini 3.1 Pro and GPT-5.5. On Browse-Comp (directly relevant to Hermes /goal deep research), it is comparable to Opus and GPT-5.5 [^src13].
+
+**Always-on practicality**: "Cheap enough to run 24/7, which makes always-on agents finally possible." Can run for 24+ hours doing up to 2,000 tool calls without human intervention — matching Hermes's /goal long-horizon task pattern [^src13].
+
+Selecting Minimax M3 in Hermes's model picker (or via OpenRouter) routes all Hermes calls there. The subscription key (not API key) unlocks the token-plan pricing. This is the same routing logic as OpenRouter auto-routing (§ above) but with a cost-specific rationale [^src13].
+
 ## Vapi phone integration
 
 Hermes can be connected to Vapi to gain phone-call capabilities [^src10]:
@@ -237,3 +263,7 @@ Install the Vapi MCP into the running Hermes instance. Hermes then acts as the "
 [^src8]: [Full Hermes Agent Set Up for Beginners in 2026 — 24/7 AI Agent](../../raw/_inbox/youtube-w4xOiuBQHKA-full-hermes-agent-set-up-for-beginners-in-2026-24-7-ai-agent.md) — AI Foundations, YouTube
 [^src9]: [You Need to Use Hermes RIGHT NOW — Goodbye OpenClaw](../../raw/_inbox/youtube-QQEgIo4Juxg-you-need-to-use-hermes-right-now-goodbye-openclaw.md) — NetworkChuck, YouTube
 [^src10]: [I Gave My Hermes Agent a Phone Number — It's Crazy](../../raw/_inbox/youtube-zHE434sBw2U-i-gave-my-hermes-agent-a-phone-number-its-crazy.md) — David Ondrej, YouTube
+[^src11]: [How I Use Hermes as a Lead Developer (YouTube)](../../raw/_inbox/youtube-y4hiT-j5J24-how-i-use-hermes-as-a-lead-developer.md) — ZazenCodes, YouTube
+[^src12]: [Hermes Agent Full Course — Setup Guide for Complete Beginners](../../raw/_inbox/youtube-mTYxpIRK7xA-hermes-agent-full-course-setup-guide-for-complete-beginners.md) — Tech With Tim, YouTube
+[^src13]: [Hermes Agent is Crazy — 180,000+ GitHub Stars](../../raw/_inbox/youtube-u6L9aedHqZc-hermes-agent-is-crazy-180-000-github-stars.md) — David Ondrej, YouTube (sponsored by Minimax)
+[^src14]: [The Hermes Agent Briefing — What It Is, Why It Matters, and How to Get Started](../../raw/_inbox/youtube-yzlvDnxvi1I-the-hermes-agent-briefing-what-it-is-why-it-matters-and-how.md) — Dmitri Shapiro (MindStudio CEO), YouTube

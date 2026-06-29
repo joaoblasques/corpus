@@ -45,6 +45,9 @@ sources:
   - path: raw/_inbox/youtube-ow1we5PzK-o-the-multi-agent-architecture-that-actually-ships-luke-alvoei.md
     channel: youtube
     ingested_at: 2026-06-27
+  - path: raw/_inbox/youtube-zFw19qGAeGo-build-3-production-ai-agents-in-python-full-course-agentspan.md
+    channel: youtube
+    ingested_at: 2026-06-29
 aliases:
   - multi-agent
   - multi-agent system
@@ -328,6 +331,7 @@ Factory provides a **Mission Control** visual interface showing each agent, its 
 - [[ai-engineering/langgraph|LangGraph]] — recommended framework for stateful multi-agent workflows
 - [[ai-engineering/mcp|MCP]] — coordination protocol for tool calls, memory, and context sharing across agents
 - [[ai-engineering/claude-code|Claude Code]] — subagent invocation patterns, custom agent definitions, Agent Teams
+- [[ai-engineering/agent-harness|Agent Harness]] — the harness layer that enables multi-agent orchestration
 
 ---
 
@@ -344,3 +348,28 @@ Factory provides a **Mission Control** visual interface showing each agent, its 
 [^src11]: [Local AI Agents In 26 Minutes](../../raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md) — Tina Huang, YouTube
 [^src12]: [Paperclip: Agent Collab Made Easy](../../raw/youtube/youtube-iRew6HOY0ho-paperclip-agent-collab-made-easy.md) — The Next New Thing, YouTube
 [^src13]: [The Multi-Agent Architecture That Actually Ships — Luke Alvoeiro (Factory)](../../raw/_inbox/youtube-ow1we5PzK-o-the-multi-agent-architecture-that-actually-ships-luke-alvoei.md) — AI Engineer channel, YouTube
+[^src14]: [Build 3 PRODUCTION AI Agents in Python — Full Course (AgentSpan)](../../raw/_inbox/youtube-zFw19qGAeGo-build-3-production-ai-agents-in-python-full-course-agentspan.md) — Tech With Tim, YouTube
+
+## AgentSpan: production Python multi-agent framework
+
+AgentSpan (from Orcs) is an open-source, free Python framework designed around the 7 requirements for production-ready AI agents [^src14]:
+
+**Seven production requirements** [^src14]:
+1. **Durability** — if the agent crashes, it recovers and continues (not restarts from scratch)
+2. **Retries** — failed steps retry automatically before exiting
+3. **Human-in-the-loop** — agents can delegate back to a human (approve task, press button) and wait
+4. **Observability** — real-time dashboard of agent state, tool calls, tokens, duration per step
+5. **Long-running tasks** — handles 20-minute to 2-hour tasks natively; no timeouts
+6. **Scale** — built-in queue system for running many agents concurrently
+7. **Testing** — repeatable test flows
+
+**Architecture** [^src14]: Worker (code you write) + AgentSpan server (handles state, orchestration, retries). The server stores all agent state — if the worker crashes, it reconnects and continues from the last checkpoint. Works with LangGraph, OpenAI SDK, Google ADK, or AgentSpan's own Python framework.
+
+**Three agent types built in the course** [^src14]:
+1. Conversational agent with memory
+2. RAG-based agent (queries a structured knowledge source)
+3. Multi-agent orchestrator running agents concurrently toward a shared goal
+
+**Observability dashboard** includes: full log per agent, clickable turn-by-turn inspection (input, output, JSON, summary), token counts, reason-for-stop, duration [^src14]. This is the visibility property that simple LangChain agents lack — you have no idea what's happening without it.
+
+**Deployment**: deploy the AgentSpan server + your workers. Infrastructure concern collapses to those two things; no need to rebuild queue, retry, or state-persistence infrastructure from scratch [^src14].

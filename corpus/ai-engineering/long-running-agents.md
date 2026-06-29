@@ -15,6 +15,9 @@ sources:
   - path: raw/web/web-assign-tasks-from-anywhere-in-claude-cowork-claude-help-cent.md
     channel: web
     ingested_at: 2026-06-24
+  - path: raw/_inbox/web-long-running-agents-322a7b71.md
+    channel: web
+    ingested_at: 2026-06-29
 aliases:
   - long-running agent
   - long-running agents

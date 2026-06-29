@@ -135,6 +135,9 @@ sources:
   - path: raw/_inbox/youtube-WkpEuogh3OY-i-finally-found-a-reason-to-build-my-own-ai-agent.md
     channel: youtube
     ingested_at: 2026-06-27
+  - path: raw/_inbox/web-agentic-code-review-a6ceec31.md
+    channel: web
+    ingested_at: 2026-06-29
 aliases:
   - agentic coding
   - agentic engineering
@@ -460,9 +463,42 @@ Pragmatic Engineer survey data (mid-2026) shows wide adoption and a sentiment sp
 
 ## Agentic code review
 
-Agentic tooling has multiplied code output but not value. Faros AI data: AI-assisted engineers produce **4× more code** but only a **10% real gain** in useful value — most generated code is noise [^src18].
+Agentic tooling has multiplied code output but not value. Two major datasets from 2025–2026 pin the numbers [^src18][^src40]:
 
-The proposed fix is **adversarial review**: running AI tools *against* the AI-generated output before merging. An adversarial review pass with four tools (not named in the source, but including AST-based analysis, security scanners, and separate LLM critique) achieved **93.4% unique catch rates** — findings that a single-tool pass missed [^src18].
+**Faros AI** (March 2026, 22,000 developers, 4,000 teams): AI-assisted engineers produce **4× more code** but the measurable value gain is only **10%** [^src40]. The downstream data is harder to ignore:
+- Code churn up **861%**
+- Incidents-to-PR ratio up **242.7%**
+- Per-developer defect rate: **9% → 54%**
+- Median review duration up **441.5%**
+- PRs merged with **zero review up 31.3%** — not a decision, just what happens when reviewers can't keep pace with volume
+
+**GitClear** (through 2025): daily AI users produce ~4× the raw output of non-users, but measured against their own output a year earlier, the real productivity gain is ~12% — and GitClear's Bill Harding flags even that is selection bias [^src40].
+
+**CodeRabbit** (470 OSS PRs, December 2025, 320 AI-coauthored vs. 150 human-only): AI-coauthored changes carried **1.7× more issues** — logic/correctness problems up ~75%, security issues 1.5–2×, readability problems more than tripling [^src40].
+
+**The adversarial review fix**: running multiple AI tools *against* AI-generated output before merging. An independent 3.5-week experiment across 146 real PRs and 679 findings (CodeRabbit + Sentry Seer + Greptile + Cursor BugBot):
+- **93.4% of 617 flagged locations were caught by exactly one tool**
+- ~6% by two tools; almost none by three; none at all by all four [^src40]
+- Each tool was strong at a different class: Greptile (correctness/architecture, near-zero false positives), CodeRabbit (widest net, one-click fixes), Seer (production-failure severity), BugBot (local context)
+- Heterogeneity is the point: four copies of one model is one reviewer with a larger invoice; four genuinely different reviewers find bugs no single member could [^src40]
+
+**Tool landscape** (Martian benchmark, January–February 2026) [^src40]:
+- CodeRabbit: ~49% F1, best recall in field
+- Greptile: ~82% catch rate vs. CodeRabbit's 44% (at cost of more false positives)
+- Anthropic Code Review: <1% of findings marked incorrect; raised PRs receiving substantive review 16% → 54%
+- Seer: best for production-failure severity triage
+
+**The spectrum of review rigor**: review need scales with blast radius, codebase longevity, and team size [^src40]:
+- *Solo, no users*: AI reviews most of it; tests + CI are the floor; lighter on everything else
+- *Dangerous middle* (project gets users mid-development): the moment review's bug-catching and knowledge-sharing roles both switch on — teams keep solo-era habits a few months too long and then hit the Faros numbers
+- *Large org, old codebase, many users*: the full adversarial stack; mandatory evidence gate before review (intent statement, diff under X lines, test output, proof it ran); mutation testing over coverage
+
+**Fast-fail circuit breaker**: a 2026 study of 33,707 agent-authored PRs found that agents are good at small/well-defined changes (~28% merge near-instantly) but "ghost" on subjective feedback. Predicting high-maintenance PRs from cheap signals (file types, patch size) before a human looks lets teams triage upfront rather than absorb an hour into a change the agent will abandon [^src40].
+
+**Human moves up the loop**: the shift is not "AI does reviews, human goes away" — it is *human in the loop* becoming *human on the loop* [^src40]:
+- Stop reviewing every diff and start owning what doesn't transfer to a model: accountability, judgment about whether this is the right change to build, high-blast-radius gates
+- Sampling + spot-checking + auditing the system rather than reading every PR
+- "Codex and Claude Code giving me a first-pass, risk-sorted read of a batch of PRs. The triage is the help. The merge decision stays mine." (Osmani) [^src40]
 
 ### Two debt types (Addy Osmani)
 
@@ -793,6 +829,7 @@ This is the first documented case in the corpus of a **self-healing CI/CD pipeli
 [^src37]: [ProteoWizard/pwiz-ai — AI tooling and documentation for ProteoWizard/Skyline](../../raw/web/web-github-proteowizard-pwiz-ai-ai-tooling-and-documentation-for.md) — Brendan MacLean / MacCoss Lab, GitHub; primary source (alongside the Skyline case study note) for the pwiz-ai "reference don't embed" context architecture
 [^src38]: [My Real AI Coding Workflow (build anything)](../../raw/youtube/youtube-gpOfsGW1xRk-my-real-ai-coding-workflow-build-anything.md) — Tech With Tim, YouTube; research-first workflow, Cursor + skills/MCP/rules harness setup, prompt→run→debug loop
 [^src39]: [I Finally Found a Reason to Build My Own AI Agent](../../raw/_inbox/youtube-WkpEuogh3OY-i-finally-found-a-reason-to-build-my-own-ai-agent.md) — Dreams of Code, YouTube; homelab CI/CD failure-fixing agent, Cersei Rust crate, Tailscale Aperture LLM proxy
+[^src40]: [Agentic Code Review](../../raw/_inbox/web-agentic-code-review-a6ceec31.md) — Addy Osmani, June 15, 2026
 
 ## ProteoWizard pwiz-ai — LLM context docs pattern
 

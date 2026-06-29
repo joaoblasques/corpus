@@ -45,6 +45,9 @@ sources:
   - path: raw/github/github-coleam00-context-engineering-intro.md
     channel: github
     ingested_at: 2026-06-25
+  - path: raw/_inbox/web-the-new-software-lifecycle-840140b4.md
+    channel: web
+    ingested_at: 2026-06-29
 aliases:
   - context engineering
   - context window engineering
@@ -132,6 +135,28 @@ Context engineering is identified as the single most impactful skill in agent de
 In practice, this means CLAUDE.md functions as long-term memory (always in scope, survives compaction), while the context window is short-term memory for the current task [^src3]. See [[ai-engineering/agent-memory|Agent Memory]] for the full memory model.
 
 See [[ai-engineering/ai-agent|AI Agent]] for how context slots into the broader agent architecture. See [[ai-engineering/context-window-management|Context Window Management]] for operational strategies (compaction, resets, sub-agents) when context fills.
+
+## Six context types (Addy Osmani taxonomy)
+
+A Google whitepaper (Osmani, Saboo, Kartakis, June 2026) sorts all agent context into six named types [^src15]:
+
+| Type | What it contains |
+|---|---|
+| **Instructions** | System prompts, rule files (`CLAUDE.md`, `AGENTS.md`) — behavioral constraints |
+| **Knowledge** | Domain facts, documentation, project-specific reference |
+| **Memory** | Persistent state across sessions; user preferences; accumulated decisions |
+| **Examples** | Few-shot demonstrations, reference implementations |
+| **Tools** | Callable functions, MCP servers, external APIs |
+| **Guardrails** | Hard boundaries, safety constraints, escalation triggers |
+
+The split that determines your bill is **static vs. dynamic** context [^src15]:
+
+- **Static**: loaded every turn (system instructions, rule files, global memory, core guardrails). *Reliable and expensive* — you pay on every call.
+- **Dynamic**: loaded on demand (skills that fire on match, tool results, RAG documents). *Only pay for what the task touches.*
+
+Getting the balance wrong in one direction burns tokens and buries the signal. Wrong in the other and the agent forgets safety rules. Osmani's advice: treat the boundary as a real architectural decision — reviewed in a PR, versioned like code [^src15].
+
+Progressive disclosure scales dynamic context: the agent sees skill metadata at startup, loads full instructions when a task matches, and pulls heavy reference material only when it actually needs it. One agent carries dozens of skills and only pays for the one it's using [^src15]. See [[ai-engineering/agent-skills|Agent Skills]] for the skill-activation mechanics.
 
 ## "Less is more" — what belongs in context
 
@@ -267,3 +292,4 @@ Context Buddy (★52, addyosmani/context-buddy) implements this as a visual inte
 [^src12]: [IncomeStreamSurfer/context-engineering-intro (★267) — PRP workflow template](../../raw/github/github-incomestreamsurfer-context-engineering-intro.md) — IncomeStreamSurfer, GitHub
 [^src13]: [addyosmani/context-buddy (★52) — 10-section prompt structure builder](../../raw/github/github-addyosmani-context-buddy.md) — Addy Osmani, GitHub
 [^src14]: [coleam00/context-engineering-intro (★13479) — PRP template](../../raw/github/github-coleam00-context-engineering-intro.md) — coleam00, GitHub
+[^src15]: [The New Software Lifecycle](../../raw/_inbox/web-the-new-software-lifecycle-840140b4.md) — Addy Osmani, Google SDLC whitepaper summary, June 2026

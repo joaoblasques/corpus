@@ -63,6 +63,9 @@ sources:
   - path: raw/github/github-googlecloudplatform-agent-starter-pack.md
     channel: github
     ingested_at: 2026-06-25
+  - path: raw/_inbox/web-the-new-software-lifecycle-840140b4.md
+    channel: web
+    ingested_at: 2026-06-29
 aliases:
   - harness
   - agent harness
@@ -100,6 +103,12 @@ Claude Code, Cursor, Codex, Aider, Cline are all harnesses; the model underneath
 **Official Anthropic definition**: a harness is "a wrapper around the LLM, the tools and context it has access to" [^src16]. Claude Code itself is a harness — one specifically designed around software engineering workflows. The **AI layer** (the harness layer you control) consists of: `CLAUDE.md` / `AGENTS.md` (standing instructions), skills (reusable procedures), hooks (lifecycle enforcement), and MCPs (external tools) [^src17].
 
 **Pi** (Mario Zechner) is a notable open-source harness in this class — described as "super lightweight and built to be highly extensible," provider-agnostic, and embeddable via a Node.js SDK [^src7]. It is the runtime Boring UI builds on (Boring UI *uses* Pi as its agent harness and extends Pi's plugin model), a concrete case of a product picking an existing harness rather than rolling its own loop [^src7]. See [[ai-engineering/agent-ui|Agent UI]].
+
+## 10% model, 90% harness
+
+A Google SDLC whitepaper (Osmani, Saboo, Kartakis, June 2026) formalizes the split: **"The paper's rough split is 10% model, 90% harness. That sounds high until you've spent a week debugging one."** [^src19] The analogy: "The model is the engine. The harness is the car, the road, and the traffic laws." [^src19]
+
+This complements the "skill issue" reframe (§ below): if the harness is 90% of the system, most failures are harness failures — configuration, prompt rules, tool design — not model ceiling. The implication is that swapping models is low-leverage compared to improving the harness [^src19].
 
 ## The harness beats the model (evidence)
 
@@ -414,3 +423,4 @@ The starter pack provided: Vertex AI + Cloud Run scaffolding, session management
 [^src16]: [How Claude Code Works — Claude Code docs](../../raw/web/web-how-claude-code-works-claude-code-docs.md) — Anthropic
 [^src17]: [How to Build Effective Claude Code Agents in 2026](../../raw/youtube/youtube-RzLV8sfFdMM-how-to-build-effective-claude-code-agents-in-2026.md) — Cole Medin, YouTube
 [^src18]: [google/agent-starter-pack — GCP agent harness (maintenance mode)](../../raw/github/github-googlecloudplatform-agent-starter-pack.md) — Google Cloud, GitHub
+[^src19]: [The New Software Lifecycle](../../raw/_inbox/web-the-new-software-lifecycle-840140b4.md) — Addy Osmani, Google SDLC whitepaper summary, June 2026

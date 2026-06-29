@@ -6,6 +6,12 @@ sources:
   - path: raw/email/email-2026-05-26-if-ai-can-replace-workers-why-is-it-hiring-consultants.md
     channel: email
     ingested_at: 2026-06-12
+  - path: raw/_inbox/web-2028-the-great-data-reckoning-73fdab45.md
+    channel: web
+    ingested_at: 2026-06-29
+  - path: raw/_inbox/web-the-reckoning-is-already-here-f010ee9f.md
+    channel: web
+    ingested_at: 2026-06-29
   - path: raw/web/future-proof-your-career-as-an-engineer-in-gen-ai-world.md
     channel: web
     ingested_at: 2026-06-12
@@ -162,6 +168,27 @@ Anthropic's Economic Index provides quantitative grounding for the qualitative n
 
 **Reading these numbers against the narrative sources**: the 40% adoption figure confirms that AI-utility diffusion is real and fast. The 60% of workers NOT using AI at work in 2023 (and 40% still not in 2025) represents the gap that "appliance-builders" (§ above) are filling — consistent with SeattleDataGuy's thesis that integration work drives demand. The geographic 4–5× variance suggests the diffusion is still highly uneven, which means "first-mover" advantages in AI-OS/AI-workflow building are real and time-limited [^src7].
 
+## The data industry: a sector-specific reckoning (Joe Reis)
+
+Joe Reis's 2026 pieces offer the most detailed sector-level analysis of this dynamic, applied to data engineering [^src8][^src9].
+
+**Something crossed a threshold.** Practitioners across the field independently noticed a step change in early 2026: "I don't know what happened, but something shifted." Models went from decent SQL assistants to producing production-quality pipelines, configurations, and strategy documents. What changed is models crossed the threshold where "neat demo" and "this replaces actual work" effectively converged for a large class of tasks [^src9].
+
+**The bar is rising, fast.** The specific warning: *"If your job can be described as 'following documented procedures,' the window is closing fast."* Configuration knowledge — knowing which YAML makes Fivetran talk to dbt talk to Snowflake — is exactly the class of work that can be automated. Business context knowledge (why the data looks the way it does, what decision the stakeholder is making) is not [^src9].
+
+**What remains moated**: taste and judgment that make something look great, not just passable; aesthetic judgment; deep domain expertise; institutional knowledge; the ability to sit with ambiguity and make a call. "The tools are being commoditized. The human judgment layer is what's left." [^src9]
+
+**The scenario: three data industries** (from the satirical 2028 scenario piece, labeled "a scenario, not a prediction" [^src8]):
+- *Data Tooling* (vendors): vendors who sold picks and shovels to the gold rush; AI dissolved the category boundaries between tools ("the seams between the tools died") — a $200B lesson in confusing infrastructure for value
+- *Data Practitioners* (engineers): bifurcated into top 20%/bottom 40%/middle 40% (see [[data-engineering/data-engineer-role|Data Engineer Role]])
+- *Data Theater* (content/conferences): the content economy running on vendor sponsorships collapsed with vendor budgets; 340 annual data conferences shrank to ~40
+
+**Tribal knowledge as the surprise survivor**: against all engineering best practice, the practitioners who survived were those who had been hoarding context in their heads rather than documenting it — because AI could not replicate the organizational-specific knowledge of why the data is the way it is [^src8].
+
+**What doesn't help (the mirror)**: "A huge portion of the data workforce built careers around knowing which YAML configuration makes Tool A talk to Tool B. That's not business context. That's configuration knowledge." Most engineers who claimed protection behind "AI doesn't understand my business" had never actually asked the business what decision they were trying to make [^src9].
+
+The actionable advice [^src9]: get good at the latest AI tools NOW (not two-year-old impressions); get closer to the business (if you're a cost center, get in the line of revenue); build institutional knowledge and judgment (not tool proficiency). "Learn what a business is."
+
 ## Related
 
 - [[ai-business/monetizing-code|Monetizing Code]] — "build the appliances" = finding monetizable AI workflows.
@@ -178,3 +205,5 @@ Anthropic's Economic Index provides quantitative grounding for the qualitative n
 [^src5]: [The Future of Work is World Models](../../raw/web/web-the-future-of-work-is-world-models.md)
 [^src6]: [We Need to Talk About Agents](../../raw/web/web-we-need-to-talk-about-agents.md)
 [^src7]: [Anthropic Economic Index: Uneven Geographic and Enterprise Adoption](../../raw/web/web-anthropic-economic-index-report-uneven-geographic-and-enterp.md) — Anthropic
+[^src8]: [2028 — THE GREAT DATA RECKONING](../../raw/_inbox/web-2028-the-great-data-reckoning-73fdab45.md) — Joe Reis, satirical/scenario piece, Feb 2026
+[^src9]: [The Reckoning Is Already Here](../../raw/_inbox/web-the-reckoning-is-already-here-f010ee9f.md) — Joe Reis, Practical Data Community, Feb 2026

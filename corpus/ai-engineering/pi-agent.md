@@ -6,6 +6,9 @@ sources:
   - path: raw/youtube/youtube-BZ0w0JhPQ9o-pi-coding-agent-free-course.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/_inbox/youtube-gTeujlv8qK0-pi-architecture-explained-agent-loop-tools-tui-and-more.md
+    channel: youtube
+    ingested_at: 2026-06-29
   - path: raw/youtube/youtube-2HtqFVLgjLI-how-software-engineers-actually-use-coding-agents-in-2026.md
     channel: youtube
     ingested_at: 2026-06-25
@@ -128,6 +131,32 @@ From the 2026 coding agent survey [^src2]:
 [^src1]: [Pi Coding Agent — Free Course](../../raw/youtube/youtube-BZ0w0JhPQ9o-pi-coding-agent-free-course.md) — YouTube
 [^src2]: [How Software Engineers Actually Use Coding Agents in 2026](../../raw/youtube/youtube-2HtqFVLgjLI-how-software-engineers-actually-use-coding-agents-in-2026.md) — YouTube
 [^src3]: [Pi Coding Agent (Free Course) — processed notes report](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-pi-coding-agent-f-report.md) — YouTube (processed report); primary source for extensions deep-dive and workflow extension
+[^src4]: [PI Architecture EXPLAINED — Agent Loop, Tools, TUI and More](../../raw/_inbox/youtube-gTeujlv8qK0-pi-architecture-explained-agent-loop-tools-tui-and-more.md) — Alejandro AO, YouTube, June 2026
+
+## Agent loop initialization sequence
+
+Alejandro AO's architecture walkthrough documents the exact sequence Pi executes on every message [^src4]:
+
+1. **System prompt** — loads the hardcoded default system prompt (very short; a few lines of instructions), or a custom `system.md` from the workspace if present
+2. **`agents.md` files** — appends all `agents.md` files found in both `~` (home) and the current working directory; additional files bloat the system prompt (caveat the video explicitly flags)
+3. **Skill descriptions** — all loaded skill descriptions are appended
+4. **Tool descriptions** — all tool descriptions are appended
+5. **Message history** — appended if this is an ongoing conversation; replaced by a compaction summary if the previous context was compacted
+6. **Current message** — the user's prompt
+
+After initialization, Pi applies a **context transformation step**: checks whether the assembled context needs compacting; if yes, summarizes the message history with the LLM and replaces it. Then the model call happens, entering the tool-call loop until the model produces a final reply [^src4].
+
+The key design insight: Pi is coded from scratch with no external agent-loop library. The entire loop is auditable. Agent loop libraries (OpenAI Agents SDK, Vercel AI SDK) would have built this for free, but using them adds opacity [^src4].
+
+## Session tree structure
+
+Pi stores sessions as **trees**, not lists [^src4]. Every message in the JSONL session file carries an `id` and a `parent` ID. This creates a tree structure where forking a conversation at any point creates a new branch with a new parent reference, while the original branch remains intact. The `/tree` command navigates this structure [^src4].
+
+JSONL format (one JSON object per line) makes appending cheap — no need to rewrite an array. Sessions are stored per working directory under `~/.pi/agent/sessions/`, indexed by directory path [^src4].
+
+## RPC and SDK access mode
+
+Beyond the interactive TUI, Pi's agent core is callable programmatically via RPC or an SDK [^src4]. This makes Pi embeddable in larger systems — e.g. a product (like Boring UI, see [[ai-engineering/agent-harness|Agent Harness]]) can use Pi as its internal agent runtime and drive it via the SDK rather than through the terminal [^src4].
 
 ## Extensions — the Pi killer feature
 

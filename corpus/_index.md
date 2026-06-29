@@ -1,6 +1,6 @@
 # Corpus Index
 
-> Last updated: 2026-06-28 | Total pages: 289 | Total sources: 1168
+> Last updated: 2026-06-29 | Total pages: 290 | Total sources: 1182
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
@@ -34,6 +34,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[ai-engineering/vector-database|Vector Database]] — concept · stub · storage layer for embedding vectors; used in RAG pipelines and agent long-term memory
 - [[ai-engineering/tool-calling-and-context-engineering|Tool Calling & Context Engineering]] — synthesis · draft · how tool results feed the context loop; compounding-window problem
 - [[ai-engineering/optimizing-claude|Optimizing a Claude Setup]] — synthesis · draft · context economy as organizing principle; skills, sub-agents, concise specs; filed back from a query
+- [[ai-engineering/sources/the-new-software-lifecycle|The New Software Lifecycle]] — source · draft · Osmani/Google SDLC paper; 10%/90% model/harness; 6 context types; static vs dynamic; verification spectrum
 - [[ai-engineering/sources/how-ai-agents-and-skills-work|How AI agents & Claude skills work]] — source · draft · Isenberg × Ras Mic; skills, progressive disclosure, less-is-more context
 - [[ai-engineering/agent-harness|Agent Harness]] — concept · draft · the scaffolding around the model; "harness > model"; the ratchet, HaaS
 - [[ai-engineering/ralph-loop|Ralph Loop]] — concept · draft · Huntley's Bash-loop coding technique; one task per loop, state on disk, generate-then-backpressure

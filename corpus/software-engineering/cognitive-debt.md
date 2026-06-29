@@ -6,6 +6,9 @@ sources:
   - path: raw/youtube/youtube-vtyx7ex-0ba.md
     channel: youtube
     ingested_at: 2026-06-17
+  - path: raw/_inbox/web-agentic-code-review-a6ceec31.md
+    channel: web
+    ingested_at: 2026-06-29
 aliases:
   - cognitive debt
   - cognitive surrender
@@ -50,6 +53,18 @@ His mitigation is to split the work by where attention is needed: defer well-iso
 
 The closing caution ties back to cognitive surrender: feeling busy running many agents is not the same as being productive, so be intentional about where you spend attention and how many agents you run in parallel [^src1]. Osmani also describes the period as one where he feels simultaneously more productive and more tired than ever — part of why patience and deliberate patterns matter [^src1].
 
+## Borrowed confidence
+
+A related failure mode named in the context of agentic code review: **borrowed confidence** [^src2]. The pattern:
+
+> "When an AI review says 'looks good' in a calm, confident voice, it is handing you confidence it has not necessarily earned. Treat every AI review as a sensor, not a verdict: data, not a decision." [^src2]
+
+The extended form: when an agent writes code, another reviews it, and a third judges it, the result is a closed loop of models with broadly correlated blind spots. A confident "looks good" with no human anywhere in it is borrowed confidence — **the system's certainty becomes yours, and nobody actually understood anything** [^src2].
+
+Borrowed confidence is the code-review instantiation of cognitive surrender: the engineer does not accumulate cognitive debt slowly by deferring to AI, but acquires it in one transaction by accepting the loop's verdict without personal understanding. The loop can be simultaneously very sure and very wrong, with no human left to tell the difference [^src2].
+
+The named counter-discipline: **human on the loop** rather than human out of the loop — sampling, spot-checking, and auditing the system rather than reading every PR, spending limited attention where being wrong would actually hurt [^src2]. This is structural, not just a mindset: the human stays on the path but moves up a level, from writing and reviewing to owning the high-blast-radius gates and exercising judgment about whether this is the right change to build at all [^src2].
+
 ## See also
 
 - [[software-engineering/engineering-craft|Engineering Craft]] — learning loops (mutual amplification, adversarial mentor) and habits that keep you in the loop
@@ -60,3 +75,4 @@ The closing caution ties back to cognitive surrender: feeling busy running many 
 ---
 
 [^src1]: [What Modern Software Engineering Means (Google Cloud podcast — Seroter, Hammerly, Jaspan, Osmani)](../../raw/youtube/youtube-vtyx7ex-0ba.md)
+[^src2]: [Agentic Code Review](../../raw/_inbox/web-agentic-code-review-a6ceec31.md) — Addy Osmani, June 15, 2026

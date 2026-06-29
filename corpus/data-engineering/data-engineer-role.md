@@ -6,6 +6,15 @@ sources:
   - path: raw/web/how-to-become-a-valuable-data-engineer-start-data-engineerin.md
     channel: web
     ingested_at: 2026-06-11
+  - path: raw/_inbox/web-where-data-engineering-is-heading-in-2026-5-trends-fe513e25.md
+    channel: web
+    ingested_at: 2026-06-29
+  - path: raw/_inbox/web-the-insanity-of-data-education-c2478cdc.md
+    channel: web
+    ingested_at: 2026-06-29
+  - path: raw/_inbox/web-2028-the-great-data-reckoning-73fdab45.md
+    channel: web
+    ingested_at: 2026-06-29
   - path: raw/email/email-2025-08-27-how-to-become-a-valuable-data-engineer.md
     channel: email
     ingested_at: 2026-06-11
@@ -170,6 +179,26 @@ The handbook also includes a **2024 "Breaking into Data Engineering" roadmap** a
 
 Topics: `apachespark`, `awesome`, `bigdata`, `data`, `dataengineering`, `sql`.
 
+## The 2026 landscape: AI, the rising bar, and diverging tracks
+
+A February 2026 survey of 1,101 data practitioners (Joe Reis, Practical Data Community) and a pair of scenario-planning pieces clarify where the role is heading [^src6][^src7][^src8]:
+
+**AI is now table stakes.** 82% of respondents use AI daily. The interesting question is no longer "are you using AI?" but "are you using it well?" The 10% with AI embedded in their core workflows are pulling ahead; the 64% using it only for tactical tasks will need to level up or fall behind [^src6].
+
+**The field is splitting into two tracks.** Teams that invested in foundational work (data modeling, governance, architecture) are diverging from those that did not. AI accelerates both paths: disciplined teams use AI to move faster with quality; undisciplined teams use AI to create technical debt faster [^src6].
+
+**The bar is rising fast.** The 2028 satire/scenario piece by Joe Reis describes a plausible bifurcation of the data job market [^src8]:
+- Top 20%: engineers who understand data modeling, architecture, and business context → become force multipliers at $400K+; companies need the same number but each is worth dramatically more
+- Bottom 40%: engineers whose primary skill was configuring tools (Fivetran → dbt → Snowflake YAML) → AI-automatable
+- Middle 40%: kept their jobs but became "AI pipeline reviewers" at lower salaries — approving or rejecting AI-generated configurations
+
+The key finding of the reckoning scenario: **tribal knowledge survived** — "the data professionals who had been hoarding context in their heads rather than documenting it in Confluence were, against all principles of good engineering practice, the most secure in their jobs" [^src8]. Understanding *why* the data looks the way it does is the moat that doesn't automate.
+
+**What to do as a junior candidate (2026 context):**
+> "The smartest thing anyone said during this entire period came from a data Substacker and educator in Salt Lake City who, when asked in early 2026 what data engineers should do to prepare for AI disruption, replied: 'Learn what a business is.'" — Joe Reis [^src8]
+
+The specific advice: understand data modeling, architecture, and business context (not just tool configuration); develop the ability to make genuine tradeoffs; sit with business users and ask "What decision are you trying to make?" — the question AI and junior tool-configurers both struggled with [^src8].
+
 ## See also
 
 - [[data-engineering/dimensional-modeling|Dimensional Modeling]] — the data-modeling fundamental both sources flag as core
@@ -187,3 +216,6 @@ Topics: `apachespark`, `awesome`, `bigdata`, `data`, `dataengineering`, `sql`.
 [^src3]: [How to become a senior data engineer?](../../raw/email/email-2026-05-19-how-to-become-a-senior-data-engineer.md)
 [^src4]: [How to Transition from Data Analyst to Data Engineer](../../raw/notes/notes-clippings-how-to-transition-from-data-analyst-to-data-engineer.md)
 [^src5]: [DataExpert-io/data-engineer-handbook (GitHub)](../../raw/github/github-dataexpert-io-data-engineer-handbook.md)
+[^src6]: [Where Data Engineering Is Heading in 2026 — 5+ Trends](../../raw/_inbox/web-where-data-engineering-is-heading-in-2026-5-trends-fe513e25.md) — Joe Reis, Practical Data Community survey (1,101 respondents, Feb 2026)
+[^src7]: [The Insanity of Data Education](../../raw/_inbox/web-the-insanity-of-data-education-c2478cdc.md) — Joe Reis, Practical Data Community
+[^src8]: [2028 — THE GREAT DATA RECKONING](../../raw/_inbox/web-2028-the-great-data-reckoning-73fdab45.md) — Joe Reis, satirical/scenario piece (labeled "a scenario, not a prediction")
