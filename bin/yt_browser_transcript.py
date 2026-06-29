@@ -33,3 +33,29 @@ def lines_to_snippets(lines: list[tuple[str, str]]) -> list[dict]:
             continue
         out.append({"start": secs, "text": text})
     return out
+
+
+PROVENANCE = "> _Transcript source: YouTube UI (browser)_"
+
+
+def _fetch_panel(video_id: str) -> tuple[list[tuple[str, str]], str]:
+    """Drive Playwright to scrape the transcript panel. Returns (lines, status).
+    Implemented in Task 3; tests always monkeypatch this. Default real impl raises
+    until Task 3 fills it in."""
+    raise NotImplementedError
+
+
+def browser_transcript(video_id: str) -> tuple[str, str]:
+    """Primary transcript source: scrape the watch-page transcript panel.
+    Returns (markdown_body, status). Never raises (maps errors to 'failed')."""
+    try:
+        lines, status = _fetch_panel(video_id)
+    except Exception:
+        return "", "failed"
+    if status != "ok":
+        return "", status
+    snippets = lines_to_snippets(lines)
+    if not snippets:
+        return "", "no_panel"
+    body = cy.transcript_to_markdown(snippets, video_id)
+    return PROVENANCE + "\n\n" + body, "ok"

@@ -25,3 +25,29 @@ def test_lines_to_snippets_maps_and_drops_bad_rows():
         {"start": 0, "text": "hello"},
         {"start": 83, "text": "world"},
     ]
+
+
+def test_browser_transcript_ok_renders_with_marker(monkeypatch):
+    monkeypatch.setattr(bt, "_fetch_panel",
+                        lambda vid: ([("0:00", "hello"), ("1:23", "world")], "ok"))
+    body, status = bt.browser_transcript("ABC")
+    assert status == "ok"
+    assert body.startswith("> _Transcript source: YouTube UI (browser)_")
+    assert "https://youtu.be/ABC?t=0" in body
+    assert "hello" in body and "world" in body
+
+
+def test_browser_transcript_no_panel_passthrough(monkeypatch):
+    monkeypatch.setattr(bt, "_fetch_panel", lambda vid: ([], "no_panel"))
+    assert bt.browser_transcript("ABC") == ("", "no_panel")
+
+
+def test_browser_transcript_blocked_passthrough(monkeypatch):
+    monkeypatch.setattr(bt, "_fetch_panel", lambda vid: ([], "blocked"))
+    assert bt.browser_transcript("ABC") == ("", "blocked")
+
+
+def test_browser_transcript_ok_but_empty_becomes_no_panel(monkeypatch):
+    # panel returned rows but all were noise/unparseable -> nothing to render
+    monkeypatch.setattr(bt, "_fetch_panel", lambda vid: ([("bad", "")], "ok"))
+    assert bt.browser_transcript("ABC") == ("", "no_panel")
