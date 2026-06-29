@@ -379,6 +379,9 @@ def cmd_run(args) -> int:
                 t["failed"] += 1
             except Exception:
                 t["failed"] += 1
+    if _browser_enabled():
+        import yt_browser_transcript as bt
+        bt.shutdown()
     ignored = [p["name"] for p in cfg["playlists"] if p.get("policy") == "ignore"]
     out = {**t, "dry_run": bool(args.dry_run), "ignored_playlists": ignored}
     if stopped:

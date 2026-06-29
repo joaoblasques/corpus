@@ -2,6 +2,7 @@ import sys, importlib
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "bin"))
 yc = importlib.import_module("youtube_client")
+wr = importlib.import_module("whisper_rescue")
 
 
 def test_merge_offsets_by_chunk_index():
@@ -81,6 +82,23 @@ def test_blocked_with_whisper_on_blocked_flag_uses_whisper(monkeypatch):
     assert yc.extract_transcript("vid", whisper_on_blocked=True) == ("WHISPER_MD", "ok")
     # default (normal run) still leaves blocked alone
     assert yc.extract_transcript("vid") == ("", "blocked")
+
+
+def test_rescue_one_browser_mode_upgrades_stub(monkeypatch, tmp_path):
+    import yt_browser_transcript as bt
+    stub = tmp_path / "vid.md"
+    stub.write_text("---\nyoutube_video_id: VID\ntranscript_status: blocked\n---\nstub\n")
+    monkeypatch.setattr(bt, "browser_transcript", lambda v: ("> marker\n\nBODY", "ok"))
+    result = wr.rescue_one(stub, whisper=False, browser=True)
+    assert result == "ok"
+    assert "BODY" in stub.read_text()
+    assert "transcript_status: ok" in stub.read_text()
+
+
+def test_rescue_one_browser_already_ok_skipped(monkeypatch, tmp_path):
+    stub = tmp_path / "vid.md"
+    stub.write_text("---\nyoutube_video_id: VID\ntranscript_status: ok\n---\nbody\n")
+    assert wr.rescue_one(stub, whisper=False, browser=True) == "already_ok"
 
 
 def test_ytdlp_cookie_args_env(monkeypatch):
