@@ -12,7 +12,7 @@ sources:
   - path: raw/youtube/youtube-S_oN3vlzpMw-how-ai-agents-claude-skills-work-clearly-explained.md
     channel: youtube
     ingested_at: 2026-06-26
-  - path: raw/_inbox/youtube-fgr6Sm-dmmM-i-replaced-openclaw-with-perplexity-computer.md
+  - path: raw/youtube/youtube-fgr6Sm-dmmM-i-replaced-openclaw-with-perplexity-computer.md
     channel: youtube
     ingested_at: 2026-06-27
 aliases:
@@ -107,4 +107,4 @@ Practitioners who switched from OpenClaw to [[ai-engineering/hermes|Hermes]] (a 
 [^src1]: [Local AI Agents In 26 Minutes](../../raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md) — Tina Huang, YouTube
 [^src2]: [Paperclip: Agent Collab Made Easy](../../raw/youtube/youtube-iRew6HOY0ho-paperclip-agent-collab-made-easy.md) — The Next New Thing, YouTube
 [^src3]: [How AI agents & Claude skills work (Clearly Explained)](../../raw/youtube/youtube-S_oN3vlzpMw-how-ai-agents-claude-skills-work-clearly-explained.md) — Greg Isenberg × Ras Mic, YouTube
-[^src4]: [I Replaced OpenClaw with Perplexity Computer](../../raw/_inbox/youtube-fgr6Sm-dmmM-i-replaced-openclaw-with-perplexity-computer.md) — Tech With Tim, YouTube
+[^src4]: [I Replaced OpenClaw with Perplexity Computer](../../raw/youtube/youtube-fgr6Sm-dmmM-i-replaced-openclaw-with-perplexity-computer.md) — Tech With Tim, YouTube

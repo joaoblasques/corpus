@@ -3,22 +3,22 @@ type: source
 domain: data-engineering
 status: draft
 sources:
-  - path: raw/_inbox/web-tristan-handy-dbt-summit-58ecab01.md
+  - path: raw/web/web-tristan-handy-dbt-summit-58ecab01.md
     channel: web
     ingested_at: 2026-06-30
-  - path: raw/_inbox/web-quigley-malcolm-dbt-summit-56f0d5c7.md
+  - path: raw/web/web-quigley-malcolm-dbt-summit-56f0d5c7.md
     channel: web
     ingested_at: 2026-06-30
-  - path: raw/_inbox/web-stefanos-nikolaou-dbt-summit-1b8b1886.md
+  - path: raw/web/web-stefanos-nikolaou-dbt-summit-1b8b1886.md
     channel: web
     ingested_at: 2026-06-30
-  - path: raw/_inbox/web-thomas-antonakis-dbt-summit-9e1a8fe2.md
+  - path: raw/web/web-thomas-antonakis-dbt-summit-9e1a8fe2.md
     channel: web
     ingested_at: 2026-06-30
-  - path: raw/_inbox/web-sarah-levy-dbt-summit-077eab41.md
+  - path: raw/web/web-sarah-levy-dbt-summit-077eab41.md
     channel: web
     ingested_at: 2026-06-30
-  - path: raw/_inbox/web-training-and-certification-dbt-summit-50f698b5.md
+  - path: raw/web/web-training-and-certification-dbt-summit-50f698b5.md
     channel: web
     ingested_at: 2026-06-30
 tags:
@@ -72,9 +72,9 @@ The AI-assisted analytics course and the architect track reflect 2026 priorities
 
 ---
 
-[^src1]: [Tristan Handy — dbt Summit Speaker Bio](../../raw/_inbox/web-tristan-handy-dbt-summit-58ecab01.md)
-[^src2]: [Quigley Malcolm — dbt Summit Speaker Bio](../../raw/_inbox/web-quigley-malcolm-dbt-summit-56f0d5c7.md)
-[^src3]: [Stefanos Nikolaou — dbt Summit Speaker Bio](../../raw/_inbox/web-stefanos-nikolaou-dbt-summit-1b8b1886.md)
-[^src4]: [Thomas Antonakis — dbt Summit Speaker Bio](../../raw/_inbox/web-thomas-antonakis-dbt-summit-9e1a8fe2.md)
-[^src5]: [Sarah Levy — dbt Summit Speaker Bio](../../raw/_inbox/web-sarah-levy-dbt-summit-077eab41.md)
-[^src6]: [Training and Certification — dbt Summit](../../raw/_inbox/web-training-and-certification-dbt-summit-50f698b5.md)
+[^src1]: [Tristan Handy — dbt Summit Speaker Bio](../../../raw/web/web-tristan-handy-dbt-summit-58ecab01.md)
+[^src2]: [Quigley Malcolm — dbt Summit Speaker Bio](../../../raw/web/web-quigley-malcolm-dbt-summit-56f0d5c7.md)
+[^src3]: [Stefanos Nikolaou — dbt Summit Speaker Bio](../../../raw/web/web-stefanos-nikolaou-dbt-summit-1b8b1886.md)
+[^src4]: [Thomas Antonakis — dbt Summit Speaker Bio](../../../raw/web/web-thomas-antonakis-dbt-summit-9e1a8fe2.md)
+[^src5]: [Sarah Levy — dbt Summit Speaker Bio](../../../raw/web/web-sarah-levy-dbt-summit-077eab41.md)
+[^src6]: [Training and Certification — dbt Summit](../../../raw/web/web-training-and-certification-dbt-summit-50f698b5.md)

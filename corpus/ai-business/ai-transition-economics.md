@@ -3,10 +3,10 @@ type: concept
 domain: ai-business
 status: draft
 sources:
-  - path: raw/_inbox/web-we-re-in-1905-why-electricity-not-dot-com-is-the-right-ai-an-0390799e.md
+  - path: raw/web/web-we-re-in-1905-why-electricity-not-dot-com-is-the-right-ai-an-0390799e.md
     channel: web
     ingested_at: 2026-06-30
-  - path: raw/_inbox/web-notes-from-the-field-ai-energy-shocks-the-end-of-the-old-pla-c8736206.md
+  - path: raw/web/web-notes-from-the-field-ai-energy-shocks-the-end-of-the-old-pla-c8736206.md
     channel: web
     ingested_at: 2026-06-30
 aliases:
@@ -71,6 +71,9 @@ See also [[ai-business/ai-and-the-job-market|AI and the Job Market]] for workfor
 
 ## See also
 
+- [[data-engineering/data-work-in-the-ai-transition|Data Work in the AI Transition]] — synthesis: the 1905 analogy is the *macro*-scale instance of Reis's one argument (with vibe-engineering and tokenmaxxing)
+- [[data-engineering/vibe-engineering|Vibe Engineering]] — Reis's micro of "swap the motor, not the factory": tool fluency without the theory to know what should change
+- [[productivity/tokenmaxxing|Tokenmaxxing]] — Reis's productivity-scale instance; the reverse-centaur is what swapping-the-motor feels like day to day
 - [[ai-business/ai-and-the-job-market|AI and the Job Market]] — workforce implications of the transition
 - [[data-engineering/ai-impact-on-data-engineering|AI's Impact on Data Engineering]] — the DE-specific architectural rethink
 - [[data-engineering/semantic-layer|Semantic Layer]] — "context teams" as the factory-of-the-future framing
@@ -78,5 +81,5 @@ See also [[ai-business/ai-and-the-job-market|AI and the Job Market]] for workfor
 
 ---
 
-[^src1]: [We're in 1905 — Why Electricity, Not Dot-Com, Is the Right AI Analogy](../../raw/_inbox/web-we-re-in-1905-why-electricity-not-dot-com-is-the-right-ai-an-0390799e.md) — Joe Reis, 2026
-[^src2]: [Notes from the Field: AI Energy Shocks, the End of the Old Playbook](../../raw/_inbox/web-notes-from-the-field-ai-energy-shocks-the-end-of-the-old-pla-c8736206.md) — Joe Reis, 2026
+[^src1]: [We're in 1905 — Why Electricity, Not Dot-Com, Is the Right AI Analogy](../../raw/web/web-we-re-in-1905-why-electricity-not-dot-com-is-the-right-ai-an-0390799e.md) — Joe Reis, 2026
+[^src2]: [Notes from the Field: AI Energy Shocks, the End of the Old Playbook](../../raw/web/web-notes-from-the-field-ai-energy-shocks-the-end-of-the-old-pla-c8736206.md) — Joe Reis, 2026

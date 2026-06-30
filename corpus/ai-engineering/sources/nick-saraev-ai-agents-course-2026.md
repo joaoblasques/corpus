@@ -3,7 +3,7 @@ type: source
 domain: ai-engineering
 status: draft
 sources:
-  - path: raw/_inbox/youtube-EsTrWCV0Ph4-ai-agents-full-course-2026-master-agentic-ai-2-hours.md
+  - path: raw/youtube/youtube-EsTrWCV0Ph4-ai-agents-full-course-2026-master-agentic-ai-2-hours.md
     channel: youtube
     ingested_at: 2026-06-30
 tags:
@@ -15,7 +15,7 @@ updated: 2026-06-30
 
 # AI Agents Full Course 2026 (Nick Saraev)
 
-**Source**: [AI Agents Full Course 2026 — Master Agentic AI (2 hours)](../../raw/_inbox/youtube-EsTrWCV0Ph4-ai-agents-full-course-2026-master-agentic-ai-2-hours.md) — Nick Saraev, YouTube, 2026. Playlist: AI Agents.
+**Source**: [AI Agents Full Course 2026 — Master Agentic AI (2 hours)](../../../raw/youtube/youtube-EsTrWCV0Ph4-ai-agents-full-course-2026-master-agentic-ai-2-hours.md) — Nick Saraev, YouTube, 2026. Playlist: AI Agents.
 
 **Summary**: A practitioner's 2-hour course on agentic AI covering the core agent loop, multi-agent MCP orchestration, self-modifying agent instructions, platform comparison, and advanced patterns including stochastic consensus and video-to-action pipelines.
 
@@ -66,6 +66,10 @@ Different platforms have different convention files: Claude reads `CLAUDE.md`, G
 - [[ai-engineering/ai-agent|AI Agent]] — core loop (observe→think→act)
 - [[ai-engineering/claude-md-conventions|CLAUDE.md Conventions]] — per-platform instruction files
 
+## Related sources
+
+- [[ai-engineering/sources/marina-wyss-ai-agents-course|Marina Wyss — AI Agents in 38 Minutes]] — companion 2026 agent course; Wyss's ReAct loop ≈ Saraev's observe→think→act, but Wyss goes deeper on autonomy spectrum, the complexity×precision use-case matrix, guardrails, and evaluation
+
 ---
 
-[^src1]: [AI Agents Full Course 2026 — Master Agentic AI (2 hours)](../../raw/_inbox/youtube-EsTrWCV0Ph4-ai-agents-full-course-2026-master-agentic-ai-2-hours.md) — Nick Saraev, YouTube, 2026
+[^src1]: [AI Agents Full Course 2026 — Master Agentic AI (2 hours)](../../../raw/youtube/youtube-EsTrWCV0Ph4-ai-agents-full-course-2026-master-agentic-ai-2-hours.md) — Nick Saraev, YouTube, 2026

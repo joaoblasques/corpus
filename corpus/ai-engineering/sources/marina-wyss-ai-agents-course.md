@@ -3,7 +3,7 @@ type: source
 domain: ai-engineering
 status: draft
 sources:
-  - path: raw/_inbox/youtube-sNvuH-iTi4c-ai-agents-in-38-minutes-complete-course-from-beginner-to-pro.md
+  - path: raw/youtube/youtube-sNvuH-iTi4c-ai-agents-in-38-minutes-complete-course-from-beginner-to-pro.md
     channel: youtube
     ingested_at: 2026-06-30
 tags:
@@ -15,7 +15,7 @@ updated: 2026-06-30
 
 # AI Agents in 38 Minutes (Marina Wyss)
 
-**Source**: [AI Agents in 38 Minutes — Complete Course from Beginner to Pro](../../raw/_inbox/youtube-sNvuH-iTi4c-ai-agents-in-38-minutes-complete-course-from-beginner-to-pro.md) — Marina Wyss (Senior Applied Scientist, Amazon), YouTube, December 2025.
+**Source**: [AI Agents in 38 Minutes — Complete Course from Beginner to Pro](../../../raw/youtube/youtube-sNvuH-iTi4c-ai-agents-in-38-minutes-complete-course-from-beginner-to-pro.md) — Marina Wyss (Senior Applied Scientist, Amazon), YouTube, December 2025.
 
 **Summary**: A practitioner's compressed course from a production ML perspective. Covers the ReAct loop, agent autonomy spectrum, context engineering, use-case selection matrix, the four quality-boosting design patterns (reflection, tool use, planning, multi-agent), and evaluation discipline. Notable for the complexity/precision matrix and tool-anatomy breakdown.
 
@@ -76,6 +76,10 @@ Good tools: error handling, caching (memoize identical inputs), async support, v
 - [[ai-engineering/agent-evaluation|Agent Evaluation]] — trace inspection, component + end-to-end eval
 - [[ai-engineering/tool-calling|Tool Calling]] — tool anatomy (interface vs implementation), tool design best practices
 
+## Related sources
+
+- [[ai-engineering/sources/nick-saraev-ai-agents-course-2026|Nick Saraev — AI Agents Full Course 2026]] — companion 2026 agent course; agrees on the core loop (Saraev's observe→think→act ≈ Wyss's ReAct) but emphasizes multi-model MCP orchestration and self-modifying instruction files over Wyss's evaluation/guardrails focus
+
 ---
 
-[^src1]: [AI Agents in 38 Minutes — Complete Course from Beginner to Pro](../../raw/_inbox/youtube-sNvuH-iTi4c-ai-agents-in-38-minutes-complete-course-from-beginner-to-pro.md) — Marina Wyss (Senior Applied Scientist, Amazon), YouTube, December 2025
+[^src1]: [AI Agents in 38 Minutes — Complete Course from Beginner to Pro](../../../raw/youtube/youtube-sNvuH-iTi4c-ai-agents-in-38-minutes-complete-course-from-beginner-to-pro.md) — Marina Wyss (Senior Applied Scientist, Amazon), YouTube, December 2025

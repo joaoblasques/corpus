@@ -3,7 +3,7 @@ type: concept
 domain: ai-engineering
 status: draft
 sources:
-  - path: raw/_inbox/youtube-e18sdZLwP7o-how-to-build-claude-subagents-better-than-99-of-people.md
+  - path: raw/youtube/youtube-e18sdZLwP7o-how-to-build-claude-subagents-better-than-99-of-people.md
     channel: youtube
     ingested_at: 2026-06-30
 aliases:
@@ -127,4 +127,4 @@ The YAML front matter supports a `max_turns` field capping how many tool-call it
 
 ---
 
-[^src1]: [How to Build Claude Subagents (Better Than 99% of People)](../../raw/_inbox/youtube-e18sdZLwP7o-how-to-build-claude-subagents-better-than-99-of-people.md) — Nate Herk, YouTube, 2026
+[^src1]: [How to Build Claude Subagents (Better Than 99% of People)](../../raw/youtube/youtube-e18sdZLwP7o-how-to-build-claude-subagents-better-than-99-of-people.md) — Nate Herk, YouTube, 2026

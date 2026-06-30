@@ -3,10 +3,10 @@ type: concept
 domain: productivity
 status: draft
 sources:
-  - path: raw/_inbox/web-why-tokenmaxxing-is-for-fools-a-rant-on-fake-productivity-3424f210.md
+  - path: raw/web/web-why-tokenmaxxing-is-for-fools-a-rant-on-fake-productivity-3424f210.md
     channel: web
     ingested_at: 2026-06-30
-  - path: raw/_inbox/web-surviving-the-ai-grind-token-junkies-hustle-culture-and-stre-d1cf7601.md
+  - path: raw/web/web-surviving-the-ai-grind-token-junkies-hustle-culture-and-stre-d1cf7601.md
     channel: web
     ingested_at: 2026-06-30
 aliases:
@@ -84,6 +84,9 @@ The strategic response named: lean into the judgment, accountability, and contex
 
 ## See also
 
+- [[data-engineering/data-work-in-the-ai-transition|Data Work in the AI Transition]] — synthesis: tokenmaxxing is the *productivity*-scale instance of Reis's one argument
+- [[data-engineering/vibe-engineering|Vibe Engineering]] — Reis's sibling diagnosis at the skills level; a vibe engineer with no mental model defaults to generating more (tokenmaxxing from the inside)
+- [[ai-business/ai-transition-economics|AI Transition Economics (1905)]] — Reis's macro frame; the hamster-wheel/reverse-centaur is the micro of "swap the motor, not the factory"
 - [[software-engineering/cognitive-debt|Cognitive Debt and Cognitive Surrender]] — the individual-level failure mode; borrowed confidence
 - [[productivity/ai-augmented-knowledge-work|AI-Augmented Knowledge Work]] — how to stay the "head" in the centaur model
 - [[productivity/learning-to-learn|Learning to Learn]] — keeping reasoning sharp under AI delegation pressure
@@ -91,5 +94,5 @@ The strategic response named: lean into the judgment, accountability, and contex
 
 ---
 
-[^src1]: [Why Tokenmaxxing Is for Fools — A Rant on Fake Productivity](../../raw/_inbox/web-why-tokenmaxxing-is-for-fools-a-rant-on-fake-productivity-3424f210.md) — Joe Reis, 2026
-[^src2]: [Surviving the AI Grind: Token Junkies, Hustle Culture, and Stress](../../raw/_inbox/web-surviving-the-ai-grind-token-junkies-hustle-culture-and-stre-d1cf7601.md) — Joe Reis + Eric Weber, 2026
+[^src1]: [Why Tokenmaxxing Is for Fools — A Rant on Fake Productivity](../../raw/web/web-why-tokenmaxxing-is-for-fools-a-rant-on-fake-productivity-3424f210.md) — Joe Reis, 2026
+[^src2]: [Surviving the AI Grind: Token Junkies, Hustle Culture, and Stress](../../raw/web/web-surviving-the-ai-grind-token-junkies-hustle-culture-and-stre-d1cf7601.md) — Joe Reis + Eric Weber, 2026

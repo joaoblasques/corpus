@@ -3,7 +3,7 @@ type: source
 domain: ai-engineering
 status: draft
 sources:
-  - path: raw/_inbox/youtube-e18sdZLwP7o-how-to-build-claude-subagents-better-than-99-of-people.md
+  - path: raw/youtube/youtube-e18sdZLwP7o-how-to-build-claude-subagents-better-than-99-of-people.md
     channel: youtube
     ingested_at: 2026-06-30
 tags:
@@ -15,7 +15,7 @@ updated: 2026-06-30
 
 # How to Build Claude Subagents (Nate Herk)
 
-**Source**: [How to Build Claude Subagents — Better Than 99% of People](../../raw/_inbox/youtube-e18sdZLwP7o-how-to-build-claude-subagents-better-than-99-of-people.md) — Nate Herk, YouTube, 2026.
+**Source**: [How to Build Claude Subagents — Better Than 99% of People](../../../raw/youtube/youtube-e18sdZLwP7o-how-to-build-claude-subagents-better-than-99-of-people.md) — Nate Herk, YouTube, 2026.
 
 **Summary**: Practitioner deep-dive on Claude Code custom sub-agents — file format, YAML front matter fields, progressive disclosure mechanics, sub-agents vs skills distinction, model routing, dynamic workflows, and security hardening. Primary source for [[ai-engineering/claude-subagents|Claude Sub-Agents]].
 
@@ -36,4 +36,4 @@ updated: 2026-06-30
 
 ---
 
-[^src1]: [How to Build Claude Subagents — Better Than 99% of People](../../raw/_inbox/youtube-e18sdZLwP7o-how-to-build-claude-subagents-better-than-99-of-people.md) — Nate Herk, YouTube, 2026
+[^src1]: [How to Build Claude Subagents — Better Than 99% of People](../../../raw/youtube/youtube-e18sdZLwP7o-how-to-build-claude-subagents-better-than-99-of-people.md) — Nate Herk, YouTube, 2026

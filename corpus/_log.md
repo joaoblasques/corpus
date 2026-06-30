@@ -1795,3 +1795,14 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   - ingest: 41 ingested · 9 deferred · status=ok
 - lint:
   - 1 broken wikilinks · 87 broken citations · 0 orphans · 20 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+
+## [2026-06-30 14:00] lint | weekly synthesis+lint pass (Medium, Opus) — scoped to the week's 31 changed pages + neighbours
+- scope: corpus pages changed in the last week (Joe Reis DE/transition cluster, 2026 AI-agent courses, Claude verticals, local-agents, tmux/Herder, Go, dbt-summit, NotebookLM, subagents)
+- citation fixes: repointed all `raw/_inbox/<file>` citations + `sources:` paths to the real channel folder on 13 pages (the auto-ingest moved files `_inbox`→`raw/web`/`raw/youtube` after writing the pages); for the 6 source pages (3-deep) also corrected link depth `../../raw/` → `../../../raw/`; fixed skytrax's `email` footnote depth. All 44 raw-citation links + all frontmatter paths on the touched files now resolve (verified).
+  - 2-deep pages: vibe-engineering, tokenmaxxing, notebooklm, claude-subagents, ai-transition-economics, perplexity-computer, openclaw
+  - 3-deep source pages: the-new-software-lifecycle, nick-saraev-ai-agents-course-2026, nate-herk-claude-subagents, marina-wyss-ai-agents-course, dbt-summit-2026-speakers, ai-founders-claude-notebooklm, skytrax-dbt-transformation-project
+- cross-links (typed): wired the three Joe Reis pages (vibe-engineering ↔ tokenmaxxing ↔ ai-transition-economics) to each other and to the new synthesis; vibe-engineering → dbt-summit (Euno/Sarah Levy "AI context platform"); companion-source links Marina Wyss ↔ Nick Saraev (both 2026 agent courses).
+- contradictions: none requiring resolution. Apparent tension (Nate Herk "sub-agents can't talk to each other" vs Nick Saraev "agent chat rooms") is not a contradiction — Herk describes Claude Code's built-in orchestrator↔subagent mechanism; Saraev describes MCP-connected separate agents. Left as-is; both route to multi-agent-systems.
+- new synthesis: corpus/data-engineering/data-work-in-the-ai-transition.md — names Joe Reis's 2026 one-argument-three-scales thesis (skills/productivity/architecture) with reverse-centaur as the connective failure mode; 5 sources, every non-trivial claim cited.
+- index: Total pages 300→301; added the synthesis to the data-engineering list; Recent-additions entry appended.
+- note: corpus-wide lint still reports ~43 other broken citations on pages OUTSIDE this week's scope (same inbox→channel drift from earlier ingests) — out of scope for this bounded pass; flag for a full `lint` run.

@@ -3,7 +3,7 @@ type: concept
 domain: data-engineering
 status: draft
 sources:
-  - path: raw/_inbox/web-do-fundamentals-still-matter-in-the-age-of-ai-66dd35db.md
+  - path: raw/web/web-do-fundamentals-still-matter-in-the-age-of-ai-66dd35db.md
     channel: web
     ingested_at: 2026-06-30
 aliases:
@@ -49,6 +49,10 @@ See also [[data-engineering/data-modeling-meaning|Meaning in Data Modeling]] for
 
 ## See also
 
+- [[data-engineering/data-work-in-the-ai-transition|Data Work in the AI Transition]] — synthesis: this is the *skills*-scale instance of Reis's one argument (with tokenmaxxing and the 1905 analogy)
+- [[productivity/tokenmaxxing|Tokenmaxxing]] — Reis's sibling diagnosis: vibe engineering skips the theory; tokenmaxxing mistakes output volume for value
+- [[ai-business/ai-transition-economics|AI Transition Economics (1905)]] — Reis's macro frame: the same "build without rethinking" at the org/architecture level ("swap the motor, not the factory")
+- [[data-engineering/sources/dbt-summit-2026-speakers|dbt Summit 2026]] — Euno (co-founder Sarah Levy) as the "AI context platform" remediation named here
 - [[data-engineering/data-modeling-meaning|Meaning in Data Modeling]] — semantics as the missing foundation
 - [[data-engineering/ai-impact-on-data-engineering|AI's Impact on Data Engineering]] — the 2026 landscape
 - [[software-engineering/engineering-craft|Engineering Craft]] — the fundamentals discipline vibe engineering erodes
@@ -56,4 +60,4 @@ See also [[data-engineering/data-modeling-meaning|Meaning in Data Modeling]] for
 
 ---
 
-[^src1]: [Do Fundamentals Still Matter in the Age of AI?](../../raw/_inbox/web-do-fundamentals-still-matter-in-the-age-of-ai-66dd35db.md) — Joe Reis, 2026
+[^src1]: [Do Fundamentals Still Matter in the Age of AI?](../../raw/web/web-do-fundamentals-still-matter-in-the-age-of-ai-66dd35db.md) — Joe Reis, 2026

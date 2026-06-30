@@ -3,10 +3,10 @@ type: entity
 domain: ai-engineering
 status: draft
 sources:
-  - path: raw/_inbox/youtube-PLP-KHrahqA-google-just-did-the-unthinkable-with-notebooklm-gemini.md
+  - path: raw/youtube/youtube-PLP-KHrahqA-google-just-did-the-unthinkable-with-notebooklm-gemini.md
     channel: youtube
     ingested_at: 2026-06-30
-  - path: raw/_inbox/youtube-yeFNKgRst9o-these-3-claude-notebooklm-systems-will-make-you-so-good-it-f.md
+  - path: raw/youtube/youtube-yeFNKgRst9o-these-3-claude-notebooklm-systems-will-make-you-so-good-it-f.md
     channel: youtube
     ingested_at: 2026-06-30
 aliases:
@@ -106,5 +106,5 @@ The automation chains produce assets efficiently, but "never send raw output" wi
 
 ---
 
-[^src1]: [Google just did the UNTHINKABLE with NotebookLM & Gemini](../../raw/_inbox/youtube-PLP-KHrahqA-google-just-did-the-unthinkable-with-notebooklm-gemini.md) — DLO Brands, YouTube, April 2026
-[^src2]: [These 3 Claude + NotebookLM Systems Will Make You So Good It Feels Unfair](../../raw/_inbox/youtube-yeFNKgRst9o-these-3-claude-notebooklm-systems-will-make-you-so-good-it-f.md) — AI Founders, YouTube, May 2026
+[^src1]: [Google just did the UNTHINKABLE with NotebookLM & Gemini](../../raw/youtube/youtube-PLP-KHrahqA-google-just-did-the-unthinkable-with-notebooklm-gemini.md) — DLO Brands, YouTube, April 2026
+[^src2]: [These 3 Claude + NotebookLM Systems Will Make You So Good It Feels Unfair](../../raw/youtube/youtube-yeFNKgRst9o-these-3-claude-notebooklm-systems-will-make-you-so-good-it-f.md) — AI Founders, YouTube, May 2026

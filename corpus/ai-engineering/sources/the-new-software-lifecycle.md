@@ -3,7 +3,7 @@ type: source
 domain: ai-engineering
 status: draft
 sources:
-  - path: raw/_inbox/web-the-new-software-lifecycle-840140b4.md
+  - path: raw/web/web-the-new-software-lifecycle-840140b4.md
     channel: web
     ingested_at: 2026-06-29
 aliases:
@@ -97,4 +97,4 @@ METR study: experienced developers can go **19% slower** on some tasks once you 
 
 ---
 
-[^src1]: [The New Software Lifecycle](../../raw/_inbox/web-the-new-software-lifecycle-840140b4.md) — Addy Osmani, June 16, 2026
+[^src1]: [The New Software Lifecycle](../../../raw/web/web-the-new-software-lifecycle-840140b4.md) — Addy Osmani, June 16, 2026

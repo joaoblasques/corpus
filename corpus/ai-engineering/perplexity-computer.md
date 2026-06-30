@@ -3,7 +3,7 @@ type: entity
 domain: ai-engineering
 status: draft
 sources:
-  - path: raw/_inbox/youtube-fgr6Sm-dmmM-i-replaced-openclaw-with-perplexity-computer.md
+  - path: raw/youtube/youtube-fgr6Sm-dmmM-i-replaced-openclaw-with-perplexity-computer.md
     channel: youtube
     ingested_at: 2026-06-27
 aliases:
@@ -72,4 +72,4 @@ This is the same philosophy as [[ai-engineering/claude-managed-agents|Claude Man
 
 ---
 
-[^src1]: [I Replaced OpenClaw with Perplexity Computer](../../raw/_inbox/youtube-fgr6Sm-dmmM-i-replaced-openclaw-with-perplexity-computer.md) — Tech With Tim, YouTube
+[^src1]: [I Replaced OpenClaw with Perplexity Computer](../../raw/youtube/youtube-fgr6Sm-dmmM-i-replaced-openclaw-with-perplexity-computer.md) — Tech With Tim, YouTube
