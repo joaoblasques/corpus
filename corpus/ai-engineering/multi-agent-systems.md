@@ -48,6 +48,9 @@ sources:
   - path: raw/_inbox/youtube-zFw19qGAeGo-build-3-production-ai-agents-in-python-full-course-agentspan.md
     channel: youtube
     ingested_at: 2026-06-29
+  - path: raw/_inbox/youtube-EsTrWCV0Ph4-ai-agents-full-course-2026-master-agentic-ai-2-hours.md
+    channel: youtube
+    ingested_at: 2026-06-30
 aliases:
   - multi-agent
   - multi-agent system
@@ -373,3 +376,31 @@ AgentSpan (from Orcs) is an open-source, free Python framework designed around t
 **Observability dashboard** includes: full log per agent, clickable turn-by-turn inspection (input, output, JSON, summary), token counts, reason-for-stop, duration [^src14]. This is the visibility property that simple LangChain agents lack — you have no idea what's happening without it.
 
 **Deployment**: deploy the AgentSpan server + your workers. Infrastructure concern collapses to those two things; no need to rebuild queue, retry, or state-persistence infrastructure from scratch [^src14].
+
+## Cross-LLM MCP orchestration (platform routing)
+
+A 2026 practitioner pattern uses Claude as the **orchestrator** while other LLMs serve as **specialized workers** connected via MCP, each routed by capability strength [^src15]:
+
+| Role | Model | Primary strength |
+|---|---|---|
+| Orchestrator | Claude (Sonnet/Opus) | Interpretability, context reading, orchestration judgment |
+| UI/frontend worker | Gemini | Frontend/multimodal generation |
+| Backend/TDD worker | GPT/Codex (OpenAI) | Backend code, test-driven development |
+
+Each worker connects via its own MCP server; Claude routes tasks by matching the task type to model strength. This is the orchestrator-subagent pattern (§ above) extended across different LLM providers rather than being confined to one [^src15].
+
+**When to use this pattern**: tasks that have genuinely distinct subtask types that benefit from different model capabilities (e.g., a full-stack feature requiring UI design, API code, and test generation). For homogeneous workloads, sticking to one model is simpler [^src15].
+
+## Self-modifying agent instruction files
+
+Multi-agent systems can compound their quality over time through self-modification of per-platform instruction files [^src15]:
+
+1. **Human corrects agent output** ("Don't structure it like that, do it like this")
+2. **Agent appends the preference rule** to its instruction file (`CLAUDE.md`, `GEMINI.md`, `AGENTS.md`)
+3. **Rule loads at next session start** — the agent doesn't repeat the mistake
+
+In a cross-model setup, each model maintains its own instruction file. Over time, each file becomes a behavioral profile for that model's role in the system — preferences discovered through correction accumulate without requiring prompts to repeat them [^src15].
+
+This is the organizational analog of the "compounds across sessions" property of [[ai-engineering/agent-memory|Agent Memory]] applied to behavioral conventions rather than factual context. See [[ai-engineering/claude-md-conventions|CLAUDE.md Conventions]] for the file format.
+
+[^src15]: [AI Agents Full Course 2026 — Master Agentic AI (2 hours)](../../raw/_inbox/youtube-EsTrWCV0Ph4-ai-agents-full-course-2026-master-agentic-ai-2-hours.md) — Nick Saraev, YouTube, 2026; cross-LLM MCP orchestration, self-modifying instruction files

@@ -60,6 +60,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [[data-engineering/modern-data-stack|Modern Data Stack (MDS)]] — concept · draft · 10 components of a cloud-native data platform: storage, ingestion, transformation, visualization, version control, orchestration, containers, IaC, data quality, reverse ETL
 - [[data-engineering/fhir|FHIR (Fast Healthcare Interoperability Resources)]] — concept · draft · HL7 standard for healthcare data exchange; Resources as typed forms; REST/Document/Message/Service paradigms; FHIR analytics pipeline patterns
 - [[data-engineering/omop-cdm|OMOP Common Data Model (CDM)]] — concept · draft · OHDSI standard for observational health data analytics; standardized schema + vocabularies; post-ETL analytic tooling (ACHILLES, ATLAS, HADES)
+- [[data-engineering/vibe-engineering|Vibe Engineering]] — concept · draft · building without theoretical framework (Joe Reis); Spolsky's Law of Leaky Abstractions; 2026 DE context; AI as vibe-engineering accelerant
 
 ### Entities
 - [[data-engineering/postgres|PostgreSQL]] — entity · draft · relational database as full-stack data platform via extensions (pgvector, pgcron, tsvector, etc.); pgledger double-entry ledger pattern
@@ -101,6 +102,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [[data-engineering/sources/sql-funnel-analysis-project|SQL Sales-Funnel Analysis project]] — source · draft · end-to-end BigQuery funnel/conversion/AOV-vs-CAC SQL walkthrough
 - [[data-engineering/sources/data-engineering-zoomcamp|Data Engineering Zoomcamp]] — source · draft · free 9-week DataTalksClub course; end-to-end pipeline; Docker/Terraform/Kestra/dbt/BigQuery/Spark/Kafka
 - [[data-engineering/sources/skytrax-dbt-transformation-project|Skytrax dbt transformation project]] — source · draft · end-to-end dbt+Snowflake transformation: Kimball star schema, RBAC-as-Terraform, OIDC keyless auth, slim CI + manifest-state CD, CloudFront-hosted docs
+- [[data-engineering/sources/dbt-summit-2026-speakers|dbt Summit 2026 — Speakers & Training]] — source · draft · notable speakers (Tristan Handy Co-founder+President Fivetran+dbt Labs, Quigley Malcolm/MetricFlow/OSI, Thomas Antonakis, Sarah Levy/Euno); 6 training courses; dbt v2 keynote context
 
 ## Sources ingested
 - [[03_Resources/Articles/scd2-table-creation-merge-into-spark-iceberg|SCD2 Table Creation with MERGE INTO in Spark and Iceberg]] — article note, Joseph Machado / Start Data Engineering, 2026-03-13

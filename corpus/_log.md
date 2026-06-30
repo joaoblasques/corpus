@@ -1728,3 +1728,70 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   - ingest: 14 ingested · 9 deferred · status=ok
 - lint:
   - 1 broken wikilinks · 44 broken citations · 0 orphans · 20 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+
+## [2026-06-29 03:30] query (origin: helix) | Systematic crypto trend-following / time-series momentum: realistic Sharpe/drawdowns, backtest-overfitting safeguards (walk-forward, Deflated Sharpe Ratio, purged/embargoed CV), fractional-Kelly sizing, volatility targeting
+- gap: Corpus 'trading' domain covers only AI-agent trading-bot architecture (cron loops, memory files, Claude Code builds). No quantitative-finance content: no time-series-momentum return/Sharpe evidence, no backtest-overfitting safeguards (walk-forward / Deflated Sharpe / purged-embargoed CV), no Kelly/fractional-Kelly sizing, no volatility targeting. Web top-up blocked: WebSearch permission not granted this session.
+- queued: none
+
+## [2026-06-30 00:00] ingest | ingest-auto batch — AI agents cluster (YouTube: Marina Wyss, Nick Saraev, Nate Herk, AI Founders, Marius Arvinte, freeCodeCamp ×2, DLO Brands NotebookLM)
+- source: raw/_inbox/ (8 YouTube files — see sources list in ai-agent.md, multi-agent-systems.md, agent-skills.md, notebooklm.md, claude-subagents.md)
+- channel: youtube
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/ai-agent.md, corpus/ai-engineering/multi-agent-systems.md, corpus/ai-engineering/agent-skills.md]
+- new pages: [corpus/ai-engineering/notebooklm.md, corpus/ai-engineering/claude-subagents.md, corpus/ai-engineering/sources/marina-wyss-ai-agents-course.md, corpus/ai-engineering/sources/nick-saraev-ai-agents-course-2026.md, corpus/ai-engineering/sources/nate-herk-claude-subagents.md, corpus/ai-engineering/sources/ai-founders-claude-notebooklm.md]
+- notes: ingest-auto run; 8 YouTube sources → 4 new source pages + 2 new concept/entity pages + 3 updated existing pages
+
+## [2026-06-30 00:01] ingest | ingest-auto batch — dbt Summit 2026 (18 web: speaker bios + training page)
+- source: raw/_inbox/web-*-dbt-summit-*.md (18 files: Tristan Handy, Quigley Malcolm, Stefanos Nikolaou, Thomas Antonakis, Sarah Levy, training page + 12 additional bios)
+- channel: web
+- domain: data-engineering
+- pages touched: [corpus/data-engineering/dbt.md]
+- new pages: [corpus/data-engineering/sources/dbt-summit-2026-speakers.md]
+- notes: ingest-auto run; 20 thin bio pages batched into 1 source page; 5 notable speakers featured; 6 training courses catalogued
+
+## [2026-06-30 00:02] ingest | ingest-auto batch — Joe Reis articles (15 web: 2026 DE survey, job market, lessons, moats, booms/busts, bay area)
+- source: raw/_inbox/web-*.md (15 Joe Reis Practical Data Community articles)
+- channel: web
+- domain: data-engineering, ai-business
+- pages touched: [corpus/data-engineering/ai-impact-on-data-engineering.md, corpus/data-engineering/data-modeling-meaning.md, corpus/data-engineering/dbt.md, corpus/ai-business/ai-and-the-job-market.md]
+- new pages: [corpus/data-engineering/vibe-engineering.md]
+- notes: ingest-auto run; 82% DE daily AI usage (n=1101), 59% modeling pressure, job market data (45%/58% AI posting requirements); vibe engineering concept extracted
+
+## [2026-06-30 00:03] ingest | ingest-auto batch — Addy Osmani cognitive articles (2 web: cognitive-surrender, don-t-outsource-the-learning)
+- source: raw/_inbox/web-cognitive-surrender-be38214f.md, raw/_inbox/web-don-t-outsource-the-learning-173a7539.md
+- channel: web
+- domain: software-engineering
+- pages touched: [corpus/software-engineering/cognitive-debt.md]
+- new pages: []
+- notes: ingest-auto run; Wharton Shaw & Nave study (73% accepted AI wrong answers), MIT EEG study (83%), CHI 2026 LLM framing effect; offloading vs surrender distinction
+
+## [2026-06-30 00:04] ingest | ingest-auto batch — AI transition economics + tokenmaxxing (4 web)
+- source: raw/_inbox/web-we-re-in-1905-*.md, raw/_inbox/web-notes-from-the-field-*.md, raw/_inbox/web-why-tokenmaxxing-*.md, raw/_inbox/web-surviving-the-ai-grind-*.md
+- channel: web
+- domain: ai-business, productivity
+- pages touched: []
+- new pages: [corpus/ai-business/ai-transition-economics.md, corpus/productivity/tokenmaxxing.md]
+- notes: ingest-auto run; Paul David 1905 electricity analogy + field notes; Joe Reis + Eric Weber centaur vs reverse centaur framing
+
+## [2026-06-30 00:05] ingest | ingest-auto batch — productivity + knowledge work (1 youtube: AI Founders Claude+NotebookLM)
+- source: raw/_inbox/youtube-yeFNKgRst9o-*.md (already counted in AI agents cluster; also updated ai-augmented-knowledge-work.md)
+- channel: youtube
+- domain: productivity
+- pages touched: [corpus/productivity/ai-augmented-knowledge-work.md]
+- new pages: []
+- notes: consumer vs founder/engine mode; 3 Claude+NotebookLM chains linked to notebooklm.md
+
+## [2026-06-30T03:11] config | scheduled run
+- collectors:
+  - gmail: 2 collected · status=ok
+  - obsidian: 4 collected · status=ok
+  - pdf: 0 collected · status=ok
+  - youtube: 24 collected · status=ok
+  - github_discover: 0 collected · status=ok
+  - github: 0 collected · status=ok
+  - x: 0 collected · status=ok
+  - links_refetch: 0 refetched · status=ok
+- ingest:
+  - ingest: 41 ingested · 9 deferred · status=ok
+- lint:
+  - 1 broken wikilinks · 87 broken citations · 0 orphans · 20 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py

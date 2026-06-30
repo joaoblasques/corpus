@@ -30,6 +30,21 @@ sources:
   - path: raw/web/6-data-engineering-skills-to-progress-in-the-age-of-ai-start.md
     channel: web
     ingested_at: 2026-06-26
+  - path: raw/_inbox/web-the-2026-state-of-data-engineering-survey-interactive-862c7648.md
+    channel: web
+    ingested_at: 2026-06-30
+  - path: raw/_inbox/web-data-engineering-in-2026-w-zach-wilson-1c383199.md
+    channel: web
+    ingested_at: 2026-06-30
+  - path: raw/_inbox/web-ai-is-here-but-the-hard-parts-haven-t-changed-06b5a092.md
+    channel: web
+    ingested_at: 2026-06-30
+  - path: raw/_inbox/web-the-buzzword-industrial-complex-08877f32.md
+    channel: web
+    ingested_at: 2026-06-30
+  - path: raw/_inbox/web-gartner-declares-2026-the-year-of-contexttm-everything-you-k-dcf082b0.md
+    channel: web
+    ingested_at: 2026-06-30
 aliases:
   - AI impact on data engineers
   - AI and data engineering
@@ -186,13 +201,50 @@ Joseph Machado (StartDataEngineering) makes the same "fundamentals endure, imple
 
 The recap — "Human design + AI code generation will take you far" — restates this page's direction and the [[data-engineering/data-engineer-role|role]]'s "business value first, fundamentals over tools" thesis from a skills-checklist angle [^src9].
 
+## 2026 State of DE Survey (n=1,101)
+
+Joe Reis's February 2026 survey of 1,101 data engineers provides the most comprehensive data point on AI's role in DE as of 2026 [^src10]:
+
+- **82%** use AI in their data engineering work daily
+- **59%** feel pressure to move fast at the expense of data modeling quality
+- Data modeling is the #1 pain point — and it's still mostly a people/process problem (§ see [[data-engineering/data-modeling-meaning|Meaning in Data Modeling]])
+- Bottlenecks are overwhelmingly non-technical: requirements clarity, ownership, architecture — not tooling
+
+The 82% daily AI usage figure confirms AI is now standard in DE practice; the 59% pressure-to-move-fast figure confirms the [[data-engineering/vibe-engineering|vibe engineering]] risk is widespread [^src10].
+
+## Dashboards "cooked" (Zach Wilson)
+
+In a 2026 conversation, Zach Wilson stated that traditional dashboards are "cooked" — structurally misaligned with how AI systems consume data [^src11]. The Three Vs (volume, velocity, variety) remain the real moat for data-rich companies; the competitive advantage in AI-first data consumption comes from being the organization that has high-volume, high-velocity, high-variety data — not from the BI tool sitting in front of it [^src11].
+
+Implication: DE value shifts toward building pipelines that serve AI systems reliably (data contracts, schema quality, freshness) rather than optimizing for human-analyst dashboards [^src11].
+
+## Hard parts unchanged (March 2026 pulse survey)
+
+Joe Reis's March 2026 pulse survey (n=194) found 57% of respondents report AI has made them faster at coding [^src12]. But the bottlenecks that slow projects are unchanged [^src12]:
+- Unclear requirements
+- Ownership ambiguity
+- Architectural decisions
+
+AI accelerates implementation; it does not resolve the human coordination problems that define most project delays [^src12].
+
+## "Year of Context" and the governance prerequisite
+
+Joe Reis's satire on Gartner's "Year of Context" (2026): the AI-industry push toward "Context Fabric" and "Context Mesh" is a rebranding of data fabric and data mesh — the same underlying problem (data governance, metadata, semantics) that data teams have been failing to solve for years [^src13][^src14].
+
+His point: you cannot build reliable AI context without first solving data governance. The organizations declaring "context" as their AI strategy without addressing the governance deficit are heading for the same failure that sank data lake, data mesh, and data fabric initiatives before them [^src13].
+
+This connects directly to [[data-engineering/data-modeling-meaning|Meaning in Data Modeling]]: the semantic foundation must exist before AI can reason rather than guess.
+
 ## Related
 
 - [[data-engineering/data-engineer-role|The Data Engineer Role]] — fundamentals/seniority this builds on
 - [[data-engineering/semantic-layer|Semantic Layer]] — the rising DE responsibility for AI; context encoding elaborated
+- [[data-engineering/vibe-engineering|Vibe Engineering]] — building without theoretical framework; the 82%/59% survey context
+- [[data-engineering/data-modeling-meaning|Meaning in Data Modeling]] — the organizational modeling failure (95.2% problem)
 - [[data-engineering/progressive-disclosure-analytics-agents|Progressive Disclosure for Analytics Agents]]
 - [[data-engineering/query-engine-routing|Query-Engine Routing]] — agents as bursty query drivers
 - [[data-engineering/bi-as-code|BI as Code]] — Markdown as the medium for analytics artifacts
+- [[ai-business/ai-transition-economics|AI Transition Economics]] — the 1905 analogy; swapping motors not factories
 - [[ai-business/ai-and-the-job-market|AI and the Job Market]] — broader career framing (ai-business)
 - [[ai-engineering/agentic-coding|Agentic Coding]] — write→review shift (ai-engineering)
 - [[data-engineering/README|Data Engineering hub]]
@@ -208,3 +260,8 @@ The recap — "Human design + AI code generation will take you far" — restates
 [^src7]: [The 2025 AI-enabled Data Engineering roadmap (Zach Wilson, DataEngineer.io)](../../raw/email/email-2025-04-25-the-2025-ai-enabled-data-engineering-roadmap.md)
 [^src8]: [AI Data Engineering Project for Beginners — LangChain + Vertex AI + BigQuery (Nataindata)](../../raw/youtube/youtube-14kTQXsVB3g-ai-data-engineering-project-for-beginners.md)
 [^src9]: [6 Data Engineering Skills To Progress in the Age of AI (Joseph Machado, StartDataEngineering)](../../raw/web/6-data-engineering-skills-to-progress-in-the-age-of-ai-start.md)
+[^src10]: [The 2026 State of Data Engineering Survey (Interactive)](../../raw/_inbox/web-the-2026-state-of-data-engineering-survey-interactive-862c7648.md) — Joe Reis, Practical Data Community, n=1,101
+[^src11]: [Data Engineering in 2026 with Zach Wilson](../../raw/_inbox/web-data-engineering-in-2026-w-zach-wilson-1c383199.md) — Joe Reis × Zach Wilson, Practical Data Community
+[^src12]: [AI Is Here, But the Hard Parts Haven't Changed](../../raw/_inbox/web-ai-is-here-but-the-hard-parts-haven-t-changed-06b5a092.md) — Joe Reis, March 2026 pulse survey (n=194)
+[^src13]: [The Buzzword Industrial Complex](../../raw/_inbox/web-the-buzzword-industrial-complex-08877f32.md) — Joe Reis, Practical Data Community; data governance as prerequisite to AI context
+[^src14]: [Gartner Declares 2026 the "Year of Context™"](../../raw/_inbox/web-gartner-declares-2026-the-year-of-contexttm-everything-you-k-dcf082b0.md) — Joe Reis; satire: Context Fabric / Context Mesh as rebranded data fabric / data mesh

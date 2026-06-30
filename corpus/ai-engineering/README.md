@@ -91,6 +91,10 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [[ai-engineering/claude-design|Claude Design]] — entity · draft · Anthropic Labs design product (launched 2026-04-17); Opus 4.7 vision + self-validation, design systems (skill.md), decks/prototypes/websites/launch videos, in-canvas tweaks/comment/draw/edit, export + hand-off to Claude Code; separate weekly quota
 - [[ai-engineering/claude-for-education|Claude for Education]] — entity · stub · Anthropic's university-wide program (students/faculty/admins); Socratic "learning mode" tutor, Claude Code as scaled apprenticeship, Claude API for research; distinct from the Education plan tier
 - [[ai-engineering/claude-for-government|Claude for Government]] — entity · draft · FedRAMP High + IL5 deployment surfaces (API/Claude Gov/app); classified national-security mission support on AWS; compliance posture shared with finance vertical
+- [[ai-engineering/notebooklm|NotebookLM]] — entity · draft · Google's source-specific AI (Gemini-backed); output types (audio overview, mind map, quiz, flashcard, infographic); Claude+NotebookLM automation chains (autopilot brief, auto-refresh loop, competitive radar)
+
+### Concepts (continued)
+- [[ai-engineering/claude-subagents|Claude Sub-Agents]] — concept · draft · .claude/agents/ files, isolated context, parallel execution, model routing, progressive disclosure, dynamic workflows (ultracode), security (disallowed_tools)
 
 ### Syntheses
 - [[ai-engineering/agentic-coding|Agentic Coding]] — synthesis · draft · **sub-hub** · coding-agent orchestration; conductor→orchestrator, AX, the verification bottleneck
@@ -108,6 +112,10 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [[ai-engineering/sources/grab-multi-agent-data-warehouse-support|Grab — From Firefighting to Building]] — source · draft · production 5-agent system for data-warehouse support; six production-hardening lessons
 - [[ai-engineering/sources/boris-cherny-100-percent-claude-code|Boris Cherny — 100% Claude Code]] — source · draft · head of Claude Code: full-agentic workflow, ~5 parallel agents, latent demand, build-for-the-model, "coding is describing"
 - [[ai-engineering/sources/beyond-vibe-coding-book|Beyond Vibe Coding (Book)]] — source · draft · 11-chapter practitioner guide; 70% problem thesis, golden rules, autonomous agents, multimodel orchestration
+- [[ai-engineering/sources/marina-wyss-ai-agents-course|Marina Wyss — AI Agents in 38 Minutes]] — source · draft · ReAct loop, autonomy spectrum, context engineering, use-case matrix (complexity×precision), 4 design patterns, guardrails (3 types), tool anatomy
+- [[ai-engineering/sources/nick-saraev-ai-agents-course-2026|Nick Saraev — AI Agents Full Course 2026]] — source · draft · core agent loop, MCP multi-LLM orchestration, self-modifying AGENTS.md, stochastic consensus, video-to-action
+- [[ai-engineering/sources/nate-herk-claude-subagents|Nate Herk — How to Build Claude Subagents]] — source · draft · sub-agents vs skills, progressive disclosure, model routing, ultracode, disallowed_tools security
+- [[ai-engineering/sources/ai-founders-claude-notebooklm|AI Founders — Claude + NotebookLM Automation]] — source · draft · McKinsey 20% stat, 3 chains, Claude browser-operates NotebookLM, consumer vs engine framing
 - [[ai-engineering/sources/field-guide-improving-ai-products|A Field Guide to Rapidly Improving AI Products]] — source · draft · Hamel Husain; the measurement-and-iteration discipline that beats tool selection (error analysis, data viewers, synthetic data, eval trust, experiment-based roadmaps)
 - [[ai-engineering/sources/claude-code-website-build-workflow|Claude Code website build workflow (Charlie Hills)]] — source · draft · 9-step spec-driven site build (CONTEXT.md/COPY.md/DESIGN.md + approval gates); structural-donor component rule to avoid the generic "AI look"
 

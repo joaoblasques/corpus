@@ -33,6 +33,9 @@ sources:
   - path: raw/youtube/youtube-py3szwKAZYU-pro-ai-dictation-tips-for-superwhisper-mastering-context-awa.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/_inbox/youtube-yeFNKgRst9o-ai-founders-claude-notebooklm-automation.md
+    channel: youtube
+    ingested_at: 2026-06-30
 aliases:
   - AI workflow
   - voice file
@@ -209,6 +212,21 @@ A second practitioner documents a "personal AI OS" built from three layers [^src
 
 The result: everything happens through one messaging interface. No app-switching; no manual category selection; the AI infers intent from context [^src5].
 
+## Consumer mode vs. founder/engine mode
+
+From the Claude+NotebookLM workflow analysis [^src11]:
+
+McKinsey 2024 research showed only ~20% of employees use AI regularly — most are in **consumer mode**: asking questions, getting answers, doing individually discrete tasks. The minority who cross into **founder/engine mode** build tools *for others* or build *systems* that compound [^src11].
+
+The three Claude+NotebookLM automation chains illustrate the distinction [^src11]:
+- **Autopilot brief**: Claude monitors a NotebookLM source (market research, competitor landscape) → summarizes → routes to the right audience. The knowledge worker stops reading; the system reads for them.
+- **Auto-refresh loop**: Claude watches for new source material → triggers NotebookLM refresh → publishes updated briefing. The knowledge worker's information diet is curated automatically.
+- **Competitive radar**: Claude browser-operates NotebookLM directly — adds competitor URLs, requests an updated analysis, exports the result — without human interaction at each step.
+
+The consumer does the first half of each chain manually (asks Claude, reads the answer). The founder builds the full chain so the output arrives without being requested [^src11].
+
+This connects to the [[ai-engineering/notebooklm|NotebookLM]] page for source-specific AI and [[ai-engineering/agent-skills|skills vs sub-agents]] for the technical building blocks.
+
 ---
 
 [^src1]: [Reclaim 6 Hours of your Week in 10 mins](../../raw/email/email-2026-05-25-reclaim-6-hours-of-your-week-in-10-mins.md)
@@ -221,3 +239,4 @@ The result: everything happens through one messaging interface. No app-switching
 [^src8]: [Build This Once. Any AI You Use Will Get Smarter Forever](../../raw/youtube/youtube-5H-s-TIO0QE-build-this-once-any-ai-you-use-will-get-smarter-forever.md) — Rick Mulready (information hierarchy)
 [^src9]: [How to Build the Ultimate AI Second Brain (Obsidian + Claude Code)](../../raw/youtube/youtube-4l8MXYUqGaA-how-to-build-the-ultimate-ai-second-brain-obsidian-claude-co.md) — KJ Rainey (two-layer brain)
 [^src10]: [Pro AI Dictation Tips for SuperWhisper — Mastering Context Awareness](../../raw/youtube/youtube-py3szwKAZYU-pro-ai-dictation-tips-for-superwhisper-mastering-context-awa.md) — A Fading Thought
+[^src11]: [Stop Using ChatGPT — Build This Claude + NotebookLM Automation Instead (AI Founders)](../../raw/_inbox/youtube-yeFNKgRst9o-ai-founders-claude-notebooklm-automation.md) — 3 automation chains; consumer vs. founder/engine framing; McKinsey 20% stat

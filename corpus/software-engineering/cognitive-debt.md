@@ -9,6 +9,12 @@ sources:
   - path: raw/_inbox/web-agentic-code-review-a6ceec31.md
     channel: web
     ingested_at: 2026-06-29
+  - path: raw/_inbox/web-don-t-outsource-the-learning-173a7539.md
+    channel: web
+    ingested_at: 2026-06-30
+  - path: raw/_inbox/web-cognitive-surrender-be38214f.md
+    channel: web
+    ingested_at: 2026-06-30
 aliases:
   - cognitive debt
   - cognitive surrender
@@ -65,14 +71,40 @@ Borrowed confidence is the code-review instantiation of cognitive surrender: the
 
 The named counter-discipline: **human on the loop** rather than human out of the loop — sampling, spot-checking, and auditing the system rather than reading every PR, spending limited attention where being wrong would actually hurt [^src2]. This is structural, not just a mindset: the human stays on the path but moves up a level, from writing and reviewing to owning the high-blast-radius gates and exercising judgment about whether this is the right change to build at all [^src2].
 
+## Empirical research on AI-induced cognitive offloading
+
+Addy Osmani's June 2026 articles cite several studies on the cognitive consequences of AI assistance [^src3][^src4]:
+
+**Anthropic internal study** (Osmani, 2026): participants in the AI-assisted condition scored 50% on comprehension quizzes vs 67% in the control group — a 17-point gap tied to AI assistance [^src3].
+
+**MIT "Your Brain on ChatGPT"** (2026): EEG monitoring showed degraded brain connectivity in AI-assisted writing tasks. More striking: 83% of participants who used LLMs could not accurately quote their own AI-assisted essays when tested immediately after. The EEG finding suggests reduced neural engagement, not just reduced recall [^src3].
+
+**CHI 2026 study**: when an LLM initially frames a problem, users make worse decisions downstream — even when the framing is incorrect. The LLM's first-impression bias persists through the user's subsequent reasoning [^src3].
+
+Together these studies support the cognitive surrender framing: the risk is not just that AI does the work, but that it changes *how* the human processes the problem, reducing even the cognitive engagement that happens alongside AI use [^src3].
+
+## Cognitive offloading vs cognitive surrender (Shaw & Nave)
+
+The Wharton researchers Shaw & Nave distinguish two modes [^src4]:
+
+- **Cognitive offloading** (legitimate): delegating execution to a tool while retaining understanding (e.g., using a calculator — you still know what you're computing and why)
+- **Cognitive surrender** (the failure mode): delegating understanding itself to the tool; you no longer know what you're doing or why it might be wrong
+
+The distinction matters because offloading is productivity; surrender is debt accumulation. The 73% acceptance rate Shaw & Nave found — 73% of participants accepted AI-generated wrong answers in their study — represents surrender, not offloading: the participants didn't catch the errors because they weren't engaging with the reasoning [^src4].
+
+Osmani's prescription: **don't outsource the learning**. When AI generates something, the cognitive work of *understanding it* is not optional overhead — it is the mechanism by which the human stays competent [^src4].
+
 ## See also
 
 - [[software-engineering/engineering-craft|Engineering Craft]] — learning loops (mutual amplification, adversarial mentor) and habits that keep you in the loop
 - [[software-engineering/ai-assisted-development|AI-Assisted Development]] — the write→review shift and why fundamentals matter more under AI
 - [[ai-engineering/generator-evaluator-separation|Generator–Evaluator Separation]] — cognitive surrender is the collapse of the human evaluator role this pattern depends on
+- [[productivity/tokenmaxxing|Tokenmaxxing and AI Fake Productivity]] — organizational analog: borrowed confidence and the reverse centaur pattern
 - [[software-engineering/README|Software Engineering hub]]
 
 ---
 
 [^src1]: [What Modern Software Engineering Means (Google Cloud podcast — Seroter, Hammerly, Jaspan, Osmani)](../../raw/youtube/youtube-vtyx7ex-0ba.md)
 [^src2]: [Agentic Code Review](../../raw/_inbox/web-agentic-code-review-a6ceec31.md) — Addy Osmani, June 15, 2026
+[^src3]: [Don't Outsource the Learning](../../raw/_inbox/web-don-t-outsource-the-learning-173a7539.md) — Addy Osmani, 2026; Anthropic study (50% vs 67%), MIT EEG study (83%), CHI 2026 LLM framing effect
+[^src4]: [Cognitive Surrender](../../raw/_inbox/web-cognitive-surrender-be38214f.md) — Addy Osmani, 2026; Shaw & Nave (Wharton) cognitive offloading vs surrender; 73% acceptance of AI wrong answers

@@ -29,6 +29,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [[ai-business/selling-to-ai-agents|Selling to AI Agents]] — concept · draft · agents as a new customer class; AEO vs SEO; MCP as front door; x402 per-call payments; two plays (make existing product agent-buyable vs. picks-and-shovels for agent economy)
 - [[ai-business/ai-content-with-voice|AI Content With Your Voice]] — concept · draft · ghost voice / stylometry; Claude trained on LinkedIn posts; Spiral tool; conversion engineering
 - [[ai-business/ai-business-models|AI Business Models (Profit Per Hour)]] — concept · draft · five-tier ranking: automation agency (#5) → productized services (#4) → custom app dev (#3) → outcome-based consulting (#2) → vertical micro-SaaS (#1); profit/hour as the true metric; "start where you are, fund the next tier"
+- [[ai-business/ai-transition-economics|AI Transition Economics]] — concept · draft · Paul David 1905/electricity analogy; "swapping motors not factories" critique; productivity paradox and adoption curve; field notes on energy shocks
 
 ### Entities
 - [[ai-business/harvey|Harvey]] — entity · stub · AI for legal/professional services; 142K+ professionals; 1,500+ firms; 65+ AmLaw 100

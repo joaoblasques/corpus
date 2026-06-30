@@ -63,6 +63,21 @@ sources:
   - path: raw/_inbox/youtube-LNkAW4SSgdY-the-complete-guide-to-ai-agents-in-2026-and-how-to-actually.md
     channel: youtube
     ingested_at: 2026-06-29
+  - path: raw/_inbox/youtube-sNvuH-iTi4c-ai-agents-in-38-minutes-complete-course-from-beginner-to-pro.md
+    channel: youtube
+    ingested_at: 2026-06-30
+  - path: raw/_inbox/youtube-EsTrWCV0Ph4-ai-agents-full-course-2026-master-agentic-ai-2-hours.md
+    channel: youtube
+    ingested_at: 2026-06-30
+  - path: raw/_inbox/youtube-d5tfH90-zNk-the-basics-of-ai-agents.md
+    channel: youtube
+    ingested_at: 2026-06-30
+  - path: raw/_inbox/youtube-UsfpzxZNsPo-python-essentials-for-ai-agents-tutorial.md
+    channel: youtube
+    ingested_at: 2026-06-30
+  - path: raw/_inbox/youtube-MnG0ugK2JAI-build-your-own-ai-agent-full-course-with-openai-langchain-re.md
+    channel: youtube
+    ingested_at: 2026-06-30
 aliases:
   - ai agent
   - agentic AI
@@ -282,6 +297,8 @@ Key properties [^src14]:
 [^src17]: [Agentic AI Systems Clearly Explained](../../raw/_inbox/youtube-kwRTUw8pb2c-agentic-ai-systems-clearly-explained.md) — Simon Scrapes, YouTube; 4-level framework (chatbot→workflow→agentic-workflow→agentic-AI-system)
 [^src18]: [Don't Learn AI Agents Without Learning These Fundamentals](../../raw/_inbox/youtube-ZaPbP9DwBOE-don-t-learn-ai-agents-without-learning-these-fundamentals.md) — KodeKloud, YouTube; corroborates core loop, component architecture, and agent vs simple LLM call decision criteria
 [^src19]: [The Complete Guide to AI Agents in 2026 (and How to Actually Build One)](../../raw/_inbox/youtube-LNkAW4SSgdY-the-complete-guide-to-ai-agents-in-2026-and-how-to-actually.md) — Tech With Tim, YouTube; 4-level framework (chat→tools→workflows→agents), corroborates framework from [^src17]
+[^src20]: [AI Agents in 38 Minutes — Complete Course from Beginner to Pro](../../raw/_inbox/youtube-sNvuH-iTi4c-ai-agents-in-38-minutes-complete-course-from-beginner-to-pro.md) — Marina Wyss (Senior Applied Scientist, Amazon), YouTube, Dec 2025; complexity/precision matrix, task decomposition, guardrails, ReAct loop, 4 design patterns
+[^src21]: [AI Agents Full Course 2026 — Master Agentic AI (2 hours)](../../raw/_inbox/youtube-EsTrWCV0Ph4-ai-agents-full-course-2026-master-agentic-ai-2-hours.md) — Nick Saraev, YouTube, 2026; MCP multi-model orchestration, self-modifying AGENTS.md, platform comparison
 
 ## Why AI agents love CLIs (the GUI → CLI reversal)
 
@@ -298,3 +315,64 @@ A historical inversion: computing went from terminal UIs (1970s) to rich GUIs (1
 **Practical implication** [^src15]: "They also saw that they can use `--help` to learn more about a tool, and that puts them in a great position with new tools as well." Just pointing an agent at a CLI tool and telling it about `--help` is sufficient — no explicit instruction manual needed.
 
 **Data format preference** [^src15]: agents prefer plain text → Markdown → JSON over rich HTML or binary formats. Documentation pages that offer a "copy as plain text" button are already optimized for agent consumption.
+
+## Use-case selection matrix
+
+A two-axis framework for deciding when an agent is worth building (Marina Wyss, Amazon Applied Science) [^src20]:
+
+| | Low Precision | High Precision |
+|---|---|---|
+| **High Complexity** | ⭐ Best early wins | ✓ High-value (legal, healthcare docs, financial compliance) |
+| **Low Complexity** | Overkill | Simple automation (no agent needed) |
+
+**Best starting point**: high complexity + lower precision. You get agent leverage on hard tasks without being blocked by needing perfect output every time [^src20].
+
+Concrete examples: invoice extraction → database (high complexity, moderate precision); customer email response with account lookup (high complexity, lower precision for first draft); legal research with case citations (high complexity, high precision) [^src20].
+
+## Task decomposition methodology
+
+Marina Wyss's practitioner method for designing an agent's task steps [^src20]:
+
+1. **Start with how you'd do the task yourself.** Write out the actual human workflow.
+2. **For each step, ask: "Can an LLM do this?"** If no, split it smaller until yes.
+3. **Each step should be small, checkable, and clear.** When output is poor, you know exactly which step to improve.
+
+Example for essay writing → agent steps: generate outline (LLM), generate search terms (LLM), call web search API (tool), fetch pages (tool), write draft (LLM), self-critique draft (second LLM call), revise (LLM) [^src20].
+
+The key property: each step's input and output are verifiable independently. Compare: "write an essay" (one opaque step, no diagnostic surface) vs. the decomposed version (6 steps, each inspectable) [^src20].
+
+## Guardrails
+
+Three types of quality gates between agent output and final delivery [^src20]:
+
+| Type | What it checks | How |
+|---|---|---|
+| **Code snippets** | Deterministic: format, length, schema, required fields | Fast, cheap; prefer whenever the check can be expressed in code |
+| **LLM judge** | Nuanced: factual consistency, tone, citation coverage | A second LLM rates output on a rubric; on failure, agent revises with the judge's explanation |
+| **Human in the loop** | High-stakes: consequential decisions, public-facing content | Agent stops and asks for approval before continuing |
+
+Most production systems use at least two types [^src20]. The LLM-judge pattern creates a self-correction loop: judge flags failure → agent gets explanation → agent revises and tries again [^src20].
+
+See [[ai-engineering/generator-evaluator-separation|Generator–Evaluator Separation]] for the principle behind the LLM-judge pattern, and [[ai-engineering/agent-evaluation|Agent Evaluation]] for the full evaluation discipline.
+
+## Multi-agent MCP orchestration (platform routing)
+
+A multi-model architecture from Nick Saraev's 2026 course: Claude Code acts as orchestrator while other models serve as specialized workers connected via MCP [^src21]:
+
+| Role | Model | Primary strength |
+|---|---|---|
+| Orchestrator | Claude (Sonnet/Opus) | Interpretability, context reading, orchestration |
+| UI/frontend worker | Gemini | Frontend/multimodal tasks |
+| Backend/TDD worker | GPT/Codex | Backend code, test-driven development |
+
+Each model connects via its own MCP server; Claude routes tasks by matching capability fit. This instantiates the [[ai-engineering/multi-agent-systems|orchestrator-subagent]] pattern across different LLM providers [^src21].
+
+## Self-modifying agent instructions
+
+Nick Saraev's pattern for compounding agent improvement over time [^src21]:
+
+1. Human corrects an agent output
+2. Agent appends the preference rule to its instruction file (`CLAUDE.md`, `GEMINI.md`, `AGENTS.md`)
+3. Next session, the rule loads automatically — the agent doesn't repeat the mistake
+
+Different platforms read different files: Claude reads `CLAUDE.md`, Gemini reads `GEMINI.md`, Codex reads `AGENTS.md`. In a multi-model setup, each model reads its own file and accumulates its own preference history [^src21]. See [[ai-engineering/claude-md-conventions|CLAUDE.md Conventions]].

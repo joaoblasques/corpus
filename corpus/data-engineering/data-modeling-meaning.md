@@ -109,6 +109,18 @@ The prescribed reset [^src5]:
 3. **Solve the ownership void** — assign actual ownership, give top-down air cover to slow down and build things right
 4. **Compete for attention** — if the material is boring, it loses to ChatGPT and Slack pings; digestible + directly applicable wins
 
+## 2026 survey: data modeling is a people/process problem
+
+Joe Reis's 2026 survey data reframes the modeling failure as organizational rather than technical [^src6]:
+
+- **4.8%** of teams cite tooling as the primary data modeling problem
+- **95.2%** cite training, unclear requirements, time pressure, and ownership gaps
+- **19.2%** of teams have a dedicated data modeler role (majority have no one whose explicit job is data modeling)
+
+The implication: better tooling (dbt v2, AI-assisted schema design) addresses the 4.8%, while the 95.2% is a management and organization design problem. Teams that jump to new tools without solving the ownership and requirements problem get faster data modeling failure, not better data modeling [^src6].
+
+See also [[data-engineering/vibe-engineering|Vibe Engineering]] for the related problem of building data systems without theoretical grounding.
+
 ## Related
 
 - [[data-engineering/requirements-gathering|Requirements Gathering]] — the practitioner/sales/servant work of pulling requirements out of stakeholders
@@ -126,3 +138,4 @@ The prescribed reset [^src5]:
 [^src3]: [Data Modeling - Theory vs Reality (Joe Reis, Practical Data Modeling)](../../raw/email/email-2025-08-06-data-modeling-theory-vs-reality.md)
 [^src4]: [Where Data Engineering Is Heading in 2026 — 5+ Trends](../../raw/_inbox/web-where-data-engineering-is-heading-in-2026-5-trends-fe513e25.md) — Joe Reis, Practical Data Community survey (1,101 respondents, Feb 2026)
 [^src5]: [The Insanity of Data Education](../../raw/_inbox/web-the-insanity-of-data-education-c2478cdc.md) — Joe Reis, Practical Data Community
+[^src6]: [Why 90% of Data Teams Are Failing at Data Modeling](../../raw/_inbox/web-why-90-of-data-teams-are-failing-at-data-modeling-33d8f9be.md) — Joe Reis, Practical Data Community

@@ -75,6 +75,9 @@ sources:
   - path: raw/github/github-dbt-labs-dbt-core.md
     channel: github
     ingested_at: 2026-06-27
+  - path: raw/_inbox/web-tristan-handy-dbt-summit-58ecab01.md
+    channel: web
+    ingested_at: 2026-06-30
 aliases:
   - dbt
   - data build tool
@@ -258,7 +261,21 @@ The "two-engine era" is ending: Core and Fusion now share a runtime [^src8]. Two
 
 ### Fivetran + dbt Labs merger (2026)
 
-dbt Core v2.0 shipped alongside the completed **Fivetran + dbt Labs merger** ("to create the data infrastructure for trusted AI agents") [^src9]. Combined first innovations announced: dbt Core v2.0 (open-sourcing the Fusion runtime), **dbt State** (a caching layer claimed to cut underlying infra costs >30%), **dbt Wizard** (beta — autonomous model authoring/refactoring/debugging), and an **Agents Schema** open standard for agentic context [^src9]. Note: vendor (sponsor) framing — claims are promotional.
+dbt Core v2.0 shipped alongside the completed **Fivetran + dbt Labs merger** ("to create the data infrastructure for trusted AI agents") [^src9].
+
+**Tristan Handy** is Co-founder and President of the merged Fivetran + dbt Labs entity, and heads the dbt Labs side. As of 2026, dbt is used by **100,000+ data teams** [^src29]. The merged entity's combined data integration + transformation stack positions them as a full-pipeline infrastructure provider (Fivetran for EL, dbt for T, dbt Cloud for orchestration).
+
+**dbt Summit 2026** featured training tracks across [^src29]:
+- dbt Architect certification track
+- Data quality and testing
+- Cost visibility and pipeline optimization
+- Getting started / "Zero to dbt"
+- AI-assisted analytics (integrating AI tools into dbt workflows)
+- dbt v2 hands-on labs
+
+**Quigley Malcolm** presented on **MetricFlow** and **OSI (Open Semantic Interface)** — dbt Labs' semantic layer and agentic context standard. MetricFlow defines semantic models (entities, measures, dimensions) declaratively; OSI exposes those to AI agents. This positions dbt as the "transformation + semantic layer + agentic context" stack [^src29].
+
+See [[data-engineering/sources/dbt-summit-2026-speakers|dbt Summit 2026 source page]] for speaker profiles. Combined first innovations announced: dbt Core v2.0 (open-sourcing the Fusion runtime), **dbt State** (a caching layer claimed to cut underlying infra costs >30%), **dbt Wizard** (beta — autonomous model authoring/refactoring/debugging), and an **Agents Schema** open standard for agentic context [^src9]. Note: vendor (sponsor) framing — claims are promotional.
 
 ## Why dbt exists / learning it
 
@@ -422,3 +439,4 @@ At time of recording (Dec 2023): AlloyDB, BigQuery, Databricks, Dremio, Postgres
 [^src19]: [I spent 12 Hours rebuilding my Junior year project: Part 2 — The Transformation Layer (Minh Pham, guest on Vu Trinh's newsletter)](../../raw/email/email-2026-06-25-i-spent-12-hours-rebuilding-my-junior-year-project-part-2-th.md)
 [^src20]: [dbt-labs/dbt-core (GitHub README, v2.0 alpha)](../../raw/github/github-dbt-labs-dbt-core.md)
 [^src28]: [dbt-labs/dbt-core — GitHub repo digest](../../raw/github/github-dbt-labs-dbt-core.md) — dbt Labs; OSS health signal (13K stars); v2 on main, v1 on 1.latest branch
+[^src29]: [dbt Summit 2026 — Speakers & Training](../../raw/_inbox/web-tristan-handy-dbt-summit-58ecab01.md) — Tristan Handy (Co-founder+President Fivetran+dbt Labs, 100K+ teams); Quigley Malcolm (MetricFlow, OSI); dbt Architect/data quality/cost visibility training courses. See [[data-engineering/sources/dbt-summit-2026-speakers|dbt-summit-2026-speakers.md]] for full catalog.

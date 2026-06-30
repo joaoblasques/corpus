@@ -141,6 +141,9 @@ sources:
   - path: raw/_inbox/youtube-Lg-meK5IU8Q-what-ai-agent-skills-are-and-how-they-work.md
     channel: youtube
     ingested_at: 2026-06-27
+  - path: raw/_inbox/youtube-e18sdZLwP7o-how-to-build-claude-subagents-better-than-99-of-people.md
+    channel: youtube
+    ingested_at: 2026-06-30
 aliases:
   - agent skills
   - Claude skills
@@ -824,12 +827,32 @@ Key design choices encoded in the skill [^src42]:
 
 This skill is a concrete example of encoding aesthetic *judgment* and *constraint* — things Claude could apply generically but doesn't apply consistently without explicit procedural guidance.
 
+## Skills vs Sub-Agents (Claude Code)
+
+Skills (SKILL.md) and sub-agents (.claude/agents/<name>.md) use the same markdown file format but have a fundamentally different execution model [^src_nate]:
+
+| Dimension | Skills | Sub-Agents |
+|---|---|---|
+| Context | Runs in the current session (inherits all context) | Clean context window — no session memory |
+| Concurrency | Sequential in the main session | Can run in parallel |
+| Model | Inherits the session model | Can be assigned a different model |
+| Primary use case | Repeatable in-session workflows; procedure codified in one place | Independent parallel tasks; unbiased review; specialized roles |
+
+**When to use a skill vs a sub-agent** [^src_nate]:
+- Use a **skill** when the procedure should run in the context of the current work (e.g., `/ingest`, `/lint`, `/deploy`)
+- Use a **sub-agent** when the task should be independent (code review, parallel file analysis, specialized role with a different model)
+
+The `description:` field in a sub-agent's YAML front matter serves the same **progressive disclosure** purpose as in a SKILL.md: Claude reads it to decide whether to invoke the agent, without loading the full system prompt until needed [^src_nate].
+
+See [[ai-engineering/claude-subagents|Claude Sub-Agents]] for the full sub-agent reference.
+
 ## See also
 
 - [[ai-engineering/context-window-management|Context Window Management]] — why a lean window matters; sub-agents
 - [[ai-engineering/context-engineering|Context Engineering]] — "less is more"; supply unique workflow, not general knowledge
 - [[ai-engineering/ai-agent|AI Agent]] — token-predictor mental model; agents as new employees
 - [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] — scaling from one agent to sub-agents *for productivity*
+- [[ai-engineering/claude-subagents|Claude Sub-Agents]] — the sub-agent format in detail
 - [[ai-engineering/agent-harness|Agent Harness]] — skills as a harness context technique; everything-claude-code
 - [[ai-engineering/agentic-coding|Agentic Coding]] — skills as "the unit of reusable expertise"
 - [[ai-engineering/mcp|MCP]] — skills tell the agent *how/when* to use MCP tools
@@ -944,5 +967,7 @@ For Team/Enterprise customers, skills can be deployed as managed plugins at org 
 - **Everyone plugins** — visible across the whole org (Team/Enterprise workspace-wide)
 
 **Access pattern** [^src45]: users don't install org plugins manually; admin assigns them, and they appear automatically in the user's Claude interface. An admin can revoke a plugin, which removes it from all users immediately.
+
+[^src_nate]: [How to Build Claude Subagents — Better Than 99% of People](../../raw/_inbox/youtube-e18sdZLwP7o-how-to-build-claude-subagents-better-than-99-of-people.md) — Nate Herk, YouTube, 2026; sub-agents vs skills distinction, progressive disclosure via description field, model routing
 
 **GitHub sync vs manual** [^src45]: GitHub sync is the recommended approach for managed plugin distribution — version-controlled, auto-deploys on push, auditable. Manual upload is for one-off or emergency deployments.

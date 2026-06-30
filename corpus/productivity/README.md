@@ -25,6 +25,7 @@ Personal and professional effectiveness for knowledge workers: mental models, ti
 - [[productivity/working-with-stakeholders|Working with Stakeholders]] — concept · draft · stakeholder trust, relationship management, proactive alignment; human layer of technical work (psychological safety, empathy as data); idea-quality filter (4 gates)
 - [[productivity/ai-augmented-knowledge-work|AI-Augmented Knowledge Work]] — concept · draft · standing context, voice files, loop engineering; three-brain model (human/AI/shared); information hierarchy (two-tier); two-layer second brain; cognitive uploading (NotebookLM/Steven Johnson); SuperWhisper context types
 - [[productivity/obsidian-pkm|Obsidian & Personal Knowledge Management]] — concept · draft · local-first Markdown vault; linking over filing; emergent structure, MOCs, graph, canvas; context engineering + Kepano skills repo; VS Code alternative; Zettelkasten thinking/doing separation; Quartz SSG
+- [[productivity/tokenmaxxing|Tokenmaxxing and AI Fake Productivity]] — concept · draft · tokenmaxxing defined (Joe Reis), tokenminimize+brainmaxx, AI hamster wheel, centaur vs reverse centaur (Reis+Weber), token junkies, identity crisis
 
 ### Entities
 - [[productivity/quartz-ssg|Quartz SSG]] — entity · stub · TypeScript static-site generator for Obsidian vaults / digital gardens (jackyzha0/quartz, 12k+ stars)
