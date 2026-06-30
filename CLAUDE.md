@@ -1,4 +1,4 @@
-# CLAUDE.md — LLM Corpus Schema (v0.9)
+# CLAUDE.md — LLM Corpus Schema (v1.0)
 
 You are the maintainer of a personal knowledge corpus inspired by Karpathy's LLM-Wiki pattern. **This file is your operating manual. Read it fully before any corpus operation.** When the user invokes you in this directory, your first action is to (re)read this file, then `corpus/_index.md`, `corpus/_domains.md`, and `corpus/_config.md`.
 
@@ -327,86 +327,19 @@ This rule applies even if the user says "ingest everything in `<a PARA-native pa
 
 ## 10. Source-channel specifics
 
-### 10.1 Matter exports
-
-Matter exports look like:
-```yaml
----
-title: ...
-url: ...
-author: ...
-tags: [...]
-date_published: ...
-date_saved: ...
----
-```
-Plus highlights in the body marked with quote blocks.
-
-**Rules**:
-- Treat the user's **highlights** as higher signal than full body text. They've already done the curation.
-- Existing Matter `tags` are **routing hints, not authoritative**. You may override with better domain placement, but log the override.
-- Always preserve `url` in the source-summary page.
-
-### 10.2 YouTube transcripts
-
-Transcripts have channel + video metadata (in filename or YAML) and timestamps `[MM:SS]`.
-
-**Rules**:
-- Cite specific claims with timestamps: `[12:34](../../raw/youtube/<file>.md#t=12:34)`.
-- The video's playlist (if present in metadata) is a strong domain hint.
-- Skip routine intros, outros, and sponsor reads.
-
-### 10.3 Web clips
-
-- Use the URL as canonical identity (in source-summary page).
-- If clipped via Obsidian Web Clipper, frontmatter is usually clean; trust it.
-
-### 10.4 Personal notes (first-party vault content)
-
-First-party notes the user authored or annotated — articles, study notes, book notes, course summaries. Higher trust signal than web clippings: the user already curated and processed these. Treat tags and structure as authoritative routing hints.
-
-**Two sub-cases — check source location first (§8.1 Step 0):**
-
-- **PARA-native** (files under a path listed in `corpus/_config.md` — currently `03_Resources/Articles/` and `03_Resources/Study Notes/`): ingest **in place** under Branch B. Do not copy to `raw/`. Stamp the file in place after ingest.
-- **`raw/notes/`** (no PARA home): first-party notes that arrived via inbox or have no canonical PARA location. Treat as immutable like any other raw-channel file. Ingest under Branch C.
-
-When in doubt whether a file has a PARA home, check `corpus/_config.md` before deciding which sub-case applies.
+See [docs/source-channels.md](docs/source-channels.md).
 
 ---
 
-## 11. Index file format (`corpus/_index.md`)
+## 11. Index file format
 
-Single source of catalog truth. Update on **every ingest**. Do not let it drift.
-
-```markdown
-# Corpus Index
-> Last updated: YYYY-MM-DD HH:MM | Total pages: N | Total sources: M
-
-## Domains
-
-### <domain-slug>
-- [[<domain>/<page>|Page Title]] — type · status · one-line summary
-- ...
-
-### <domain-slug-2>
-- ...
-
-## Recent additions
-- YYYY-MM-DD: [[<page>]] (new)
-- YYYY-MM-DD: [[<page>]] (updated, +<N> sources)
-```
+See [docs/file-formats.md](docs/file-formats.md).
 
 ---
 
-## 12. Log file format (`corpus/_log.md`)
+## 12. Log file format
 
-Append-only, chronological (oldest first), newest at bottom — for `tail` and `grep` friendliness.
-
-Every entry starts with `## [YYYY-MM-DD HH:MM] <op-type> | <subject>`.
-
-Op types: `ingest`, `query`, `lint`, `domain`, `schema`, `config`.
-
-- `config` — changes to `corpus/_config.md`: PARA-native path additions, stamp field spec adjustments.
+See [docs/file-formats.md](docs/file-formats.md).
 
 ---
 
@@ -440,21 +373,8 @@ Pages are **dense reference**, not blog posts.
 
 ---
 
-## 14.5 Engineering notes
-
-`docs/solutions/` holds engineering learnings for this repo's own tooling (collectors, `bin/` scripts, the scheduled automation) — documented past problems and decisions organized by category with YAML frontmatter (`module`, `tags`, `problem_type`). Relevant when debugging or extending the Python tooling, separate from the corpus data discipline above.
-
----
-
 ## 15. Version
 
-- v0.1 — initial schema
-- v0.2 — softened domain creation rule; added provisional domains + lint check
-- v0.3 — §7 unsourced claim guidance; added raw/notes/ channel for first-party vault notes
-- v0.4 — §4 formalized `provisional` as optional frontmatter field on hub pages
-- v0.5 — §2 narrow write exception for source stamping (3 fields only); §8.1 PARA-native ingest path (in-place, no raw/ copy); §4 structured `sources:` field; §6 citation format for PARA-native paths; §9 collision rule for re-ingest guard; new `corpus/_config.md`. Rationale: eliminate duplication between `raw/<channel>/` and PARA folders for files with a canonical PARA home.
-- v0.6 — §8.1 optimized cluster-based batch-ingest pipeline (Phase 0–5: pre-flight → survey/cluster → global entity registry → per-cluster ingest → integrate → verify) with the Coordinator-owns-shared-files rule for parallel per-domain workers; §4 + new §7.1 v2 claim-lifecycle (`confidence`, `last_confirmed`, `supersedes`/`superseded_by`, contradiction-on-write, typed relationships). Rationale: scale ingest past ~10 heterogeneous sources without structural drift, and manage claim staleness/disagreement over time. Grounded in deep research on Karpathy's LLM-wiki pattern (+ rohitg00 v2), MOC/Zettelkasten/PARA architecture, and large-batch entity-resolution & multi-agent-orchestration best practices (filed in `docs/research/2026-06-11-llm-wiki-ingest-best-practices.md`).
-- v0.7 — §2 vault-removal exception for the collect-obsidian reaper (gated on `corpus_ingested`; vault git-recoverable; never auto-commits); §13 failure-mode bullet. Rationale: let the Obsidian vault be decluttered as its knowledge lands in the corpus.
-- v0.8 — §8.2 operationalized into the `/query` operation: LLM index-selection retrieval, a read-only coverage gate, labelled `[fresh — not yet in corpus]` web top-up auto-queued to `raw/_inbox/` (channel `web`, `via_query`) deduped by `source_url`, gap logging, and approval-gated synthesis file-back — backed by the `query` skill + `bin/query.py` helper. Rationale: turn the thin Query stub into a trustworthy, self-feeding factual-recall loop (the Query & consumption track). (Also, undocumented at the time: §14.5 Engineering notes pointer to `docs/solutions/`.)
-- v0.9 — new §0 Operating autonomy: the user delegated end-to-end autonomous operation (choose the recommended option and proceed instead of asking; drive full arcs to completion; routine actions pre-authorized; only irreversible/destructive/contradictory/no-default decisions still surface). Mirrors the `autonomous-operation` feedback memory + `.claude/settings.json` permission allowlist. Rationale: the user consistently accepted recommendations, so approval round-trips were pure overhead.
-- Co-evolve with user. Bump version + log entry on every change.
+Current: v1.0. Full history → [docs/changelog.md](docs/changelog.md).
+
+Co-evolve with user. Bump version + log entry on every change.
