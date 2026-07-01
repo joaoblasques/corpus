@@ -15,6 +15,12 @@ sources:
   - path: raw/email/email-2026-06-23-duckdb-at-a-high-level.md
     channel: email
     ingested_at: 2026-06-25
+  - path: raw/web/web-data-ai-and-duckdb-f6875fcc.md
+    channel: web
+    ingested_at: 2026-07-01
+  - path: raw/web/web-processing-1-tb-with-duckdb-in-less-than-30-seconds-b3c369dc.md
+    channel: web
+    ingested_at: 2026-07-01
 aliases:
   - DuckDB
   - MotherDuck
@@ -25,7 +31,7 @@ tags:
   - corpus/data-engineering
   - entity
 created: 2026-06-11
-updated: 2026-06-25
+updated: 2026-07-01
 ---
 
 # DuckDB
@@ -90,6 +96,26 @@ The "DuckDB and MotherDuck" Obsidian community plugin lets a vault run SQL inlin
 
 This is the "your agent can read" angle: agents can read the frozen markdown results directly without re-running queries [^src3].
 
+## 1 TB benchmark (MotherDuck, 2024)
+
+A benchmark by Zach Wilson and Matt (EcZachly) tested aggregate queries across a synthetic 1TB dataset (400 Parquet files, ~2.76 GB each) [^src5]:
+
+| Environment | Query time |
+|---|---|
+| Local M2 Pro (16 GB RAM), 5 runs avg | ~1 min 29 sec |
+| MotherDuck Mega instance (cloud), 5 runs avg | ~17 sec |
+| MotherDuck + **Zonemap index** (sorted by grouping key) | ~12 sec (~30% improvement over unsorted) |
+
+**Key technique — Zonemap index**: DuckDB internally tracks min/max metadata per block ("zone"). When the table is **sorted by the field you are grouping on**, DuckDB can skip entire blocks based on min/max — without a traditional B-tree or bitmap index. To activate: load data sorted by the date/key used in aggregation. The test: reload the dataset `ORDER BY rand_date` → same query drops another ~30% [^src5].
+
+**Implication**: for batch analytics jobs that refresh reports in < 2 minutes without Spark, single-node DuckDB on the right instance is a credible alternative. The > MotherDuck intelligent caching means runs 2–5 of the same query read from cache (< 5 sec); use non-deterministic query variations (different bounds each run) to measure cold performance [^src5].
+
+## AI amplifies query volume, not just query speed
+
+A MotherDuck developer advocate (Jacob Matson) argues AI does *not* kill data engineering — it **massively expands** it [^src6]. Instead of fewer queries being written, AI agents may generate orders of magnitude more queries than humans ever could, making **data modeling more important, not less** (the agent needs well-structured schemas to generate correct SQL) [^src6]. This is a counterintuitive flip to the "AI replaces DE work" thesis: if every AI agent is a query generator, someone needs to maintain the underlying data quality and structure [^src6].
+
+A secondary argument: the industry may be swinging back toward simplicity after years of over-engineered "modern data stacks." DuckDB is winning by **removing complexity**, not adding it — the transition from SQL Server's "everything in one box" to unbundled chaos back toward a more unified, simpler approach [^src6]. The open question: most Spark workloads are overkill for the actual data volumes involved [^src6].
+
 ## Where DuckDB fits in multi-engine routing
 
 In multi-engine Iceberg deployments DuckDB is the **selective-lookup / sub-second tier** — "a point lookup that costs $0.01 on DuckDB costs $0.08 on Snowflake" — but cannot distribute across nodes, so heavy distributed joins go elsewhere. Table compaction expands the set of queries DuckDB can serve. See [[data-engineering/query-engine-routing|Query-engine routing]].
@@ -104,3 +130,5 @@ In multi-engine Iceberg deployments DuckDB is the **selective-lookup / sub-secon
 [^src2]: [Quack: The DuckDB Client-Server Protocol](../../raw/web/quack-the-duckdb-client-server-protocol.md)
 [^src3]: [Your Obsidian vault can now run SQL (and your agent can read it)](../../raw/web/your-obsidian-vault-can-now-run-sql-and-your-agent-can-read.md)
 [^src4]: [DuckDB at a High Level (Vu Trinh / The Data Engineers)](../../raw/email/email-2026-06-23-duckdb-at-a-high-level.md)
+[^src5]: [Processing 1 TB with DuckDB in less than 30 seconds (EcZachly + MotherDuck)](../../raw/web/web-processing-1-tb-with-duckdb-in-less-than-30-seconds-b3c369dc.md)
+[^src6]: [Data, AI, and DuckDB — Jacob Matson, Developer Advocate, MotherDuck (DEC Podcast)](../../raw/web/web-data-ai-and-duckdb-f6875fcc.md)

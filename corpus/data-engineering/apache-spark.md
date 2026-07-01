@@ -60,6 +60,9 @@ sources:
   - path: raw/github/github-josephmachado-efficient-data-processing-spark.md
     channel: github
     ingested_at: 2026-06-25
+  - path: raw/web/web-apache-datafusion-comet-spark-accelerator-092a8375.md
+    channel: web
+    ingested_at: 2026-07-01
 aliases:
   - Spark
   - Apache Spark
@@ -93,8 +96,8 @@ tags:
   - corpus/data-engineering
   - entity
 created: 2026-06-11
-updated: 2026-06-25
-last_confirmed: 2026-06-25
+updated: 2026-07-01
+last_confirmed: 2026-07-01
 ---
 
 # Apache Spark
@@ -598,6 +601,24 @@ Key features: Tesseract-backed OCR, Spark-native DataSource API (Scala, publishe
 
 Use case in data engineering: extracting structured data from document stores (contracts, reports, medical records) at scale, feeding downstream NLP pipelines or search indexes.
 
+## Apache DataFusion Comet (Spark native accelerator)
+
+Apache DataFusion Comet is a Rust/Arrow-based native execution plugin for Spark, replacing Spark's JVM-based executor for supported operations [^src18]. It slots in via JAR + config, requiring no SQL changes; when an operator is unsupported Comet falls back to Spark transparently (`spark.comet.explainFallback.enabled=true` logs the fallback reason) [^src18].
+
+**Installation path (Databricks)** [^src18]:
+1. Download pre-built JAR from Maven for the target Spark version (e.g. `comet-common-spark4.0_2.13-0.16.0.jar` for Spark 4.0/DBR 17.3)
+2. Upload JAR to a Databricks Volume; write an `init.sh` that copies it to `/databricks/jars/`
+3. Add Spark configs to the cluster: `spark.plugins=org.apache.spark.CometPlugin`, `spark.shuffle.manager=org.apache.spark.sql.comet.execution.shuffle.CometShuffleManager`
+4. Attach the init script to an All-Purpose cluster
+
+**Practical notes** [^src18]:
+- Pre-built JARs now available on Maven (previously required building from source — an earlier pain point)
+- A large `compatibility.json` details which operators fall back to Spark; reading it is required to assess how much an actual workload will benefit
+- Configuration surface is large (1000+ config keys); no "most important ones" guide exists yet — a UX gap
+- The author's recommendation for Spark in 2026: "if someone is using Spark, they better be using Databricks" — Comet is one more reason (runs directly on DBR clusters)
+
+**Maturity signal**: the primary criticism of Comet (and similar OSS accelerators) is developer-experience gaps — poor discoverability of JARs, complex config, missing conceptual overview — vs tools like DuckDB or Databricks that prioritize DX first [^src18].
+
 ## Related pages
 
 - [[data-engineering/parquet|Parquet]] — recommended columnar format for Spark analytics
@@ -627,3 +648,4 @@ Use case in data engineering: extracting structured data from document stores (c
 [^src15]: [StabRise/spark-pdf — PDF DataSource for Apache Spark](../../raw/github/github-stabrise-spark-pdf.md)
 [^src16]: [Intro to PySpark DataFrames and SQL — Big Data Fundamentals with PySpark, ch.3 (DataCamp)](../../raw/pdf/pdf-3-intro-to-pyspark-dataframes-and-sql.md)
 [^src17]: [josephmachado/efficient_data_processing_spark — Efficient Data Processing in Spark course repo](../../raw/github/github-josephmachado-efficient-data-processing-spark.md)
+[^src18]: [Apache Datafusion Comet (Spark Accelerator) — hands-on review on Databricks (Data Engineering Central)](../../raw/web/web-apache-datafusion-comet-spark-accelerator-092a8375.md)

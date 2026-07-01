@@ -67,11 +67,13 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [[data-engineering/windsor-ai|Windsor.ai]] — entity · stub · no-code ETL/ELT platform; 345+ connectors for marketing/business data; LLM AI chat integration
 - [[data-engineering/kafka|Apache Kafka]] — entity · draft · event streaming platform decoupling services via topics, partitions, and consumer groups
 - [[data-engineering/dbt|dbt]] — entity · draft · SQL-first transformation framework; sources vs models; staging/warehouse/marts materializations
+- [[data-engineering/dbt-fusion|dbt Fusion Engine]] — entity · draft · Rust-powered compiler; SDF acquisition Jan 2025; ~30× parse speedup; state-aware orchestration
 - [[data-engineering/parquet|Apache Parquet]] — entity · draft · binary columnar file format; RLE compression; sort-order strategy
 - [[data-engineering/apache-iceberg|Apache Iceberg]] — entity · draft · open table format: ACID, schema evolution, time travel, hidden partitioning
 - [[data-engineering/apache-spark|Apache Spark]] — entity · draft · distributed engine on immutable RDDs + lazy DAG; DataFrames/Catalyst/Tungsten; caching, OOM tuning
 - [[data-engineering/databricks|Databricks]] — entity · draft · lakehouse platform; Unity Catalog, Liquid Clustering, Lakeflow, cost
-- [[data-engineering/duckdb|DuckDB]] — entity · draft · embedded OLAP engine; Quack protocol, DuckLake, MotherDuck
+- [[data-engineering/duckdb|DuckDB]] — entity · draft · embedded OLAP engine; Quack protocol, DuckLake, MotherDuck; 1TB benchmark; Zonemap index
+- [[data-engineering/matthew-housley|Matthew Housley]] — entity · stub · Data Engineering Fundamentals co-author; CTO Ternary Data; foundations>tools
 - [[data-engineering/ingestr|ingestr]] — entity · stub · Bruin CLI ELT tool; copy any source → any destination, incremental loading
 - [[data-engineering/redis|Redis]] — entity · draft · in-memory store; new 8.8 array type for position-as-data-model (groups of 4096, free gaps, ARRING/ARGREP/AROP)
 - [[data-engineering/mondaydb|mondayDB]] — entity · draft · monday.com's DuckDB-powered columnar HTAP serving layer; CQRS, external WAL, sync-then-query, rendezvous-hash routing
@@ -85,6 +87,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 
 ### Syntheses
 - [[data-engineering/query-engine-routing|Query-Engine Routing]] — synthesis · draft · multi-engine routing over Iceberg; SQL-dialect translation; cost-based routing
+- [[data-engineering/pipeline-optimization-at-scale|Pipeline Optimization at Scale]] — synthesis · draft · 3 FAANG war stories (Airbnb 95% backfill, Meta 12× 50TB, Meta silent failure); anti-patterns + fixes
 - [[data-engineering/data-engineer-role|The Data Engineer Role]] — synthesis · draft · value = business impact + technical fundamentals; seniority
 - [[data-engineering/claude-code-for-data-engineering|Claude Code for Data Engineering]] — synthesis · draft · AI-assisted dbt scaffolding; PRD→ERD→dbt modeling (cross-domain → ai-engineering)
 - [[data-engineering/ai-observability-data-pipeline|AI Observability as a Data Pipeline]] — synthesis · draft · AI observability mapped to the DE pipeline model; LLM-judge vs code metrics (cross-domain → ai-engineering)

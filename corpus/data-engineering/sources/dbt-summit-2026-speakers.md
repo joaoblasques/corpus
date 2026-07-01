@@ -21,11 +21,38 @@ sources:
   - path: raw/web/web-training-and-certification-dbt-summit-50f698b5.md
     channel: web
     ingested_at: 2026-06-30
+  - path: raw/web/web-thiago-baldim-dbt-summit-f3ed1a76.md
+    channel: web
+    ingested_at: 2026-07-01
+  - path: raw/web/web-tobias-mao-dbt-summit-c440861b.md
+    channel: web
+    ingested_at: 2026-07-01
+  - path: raw/web/web-tyson-doberneck-dbt-summit-22ef1bf7.md
+    channel: web
+    ingested_at: 2026-07-01
+  - path: raw/web/web-vijay-singh-dbt-summit-6ce0c589.md
+    channel: web
+    ingested_at: 2026-07-01
+  - path: raw/web/web-william-guicheney-dbt-summit-1f6f240a.md
+    channel: web
+    ingested_at: 2026-07-01
+  - path: raw/web/web-william-tsu-dbt-summit-b8e50c79.md
+    channel: web
+    ingested_at: 2026-07-01
+  - path: raw/web/web-xiaohan-li-dbt-summit-a45c0d64.md
+    channel: web
+    ingested_at: 2026-07-01
+  - path: raw/web/web-yuna-yunnan-tang-dbt-summit-14ca8371.md
+    channel: web
+    ingested_at: 2026-07-01
+  - path: raw/web/web-zhen-xing-dbt-summit-0552c755.md
+    channel: web
+    ingested_at: 2026-07-01
 tags:
   - corpus/data-engineering
   - source
 created: 2026-06-30
-updated: 2026-06-30
+updated: 2026-07-01
 ---
 
 # dbt Summit 2026 — Speakers & Training
@@ -49,6 +76,24 @@ Note: Tristan Handy's role appears as both "Founder and CEO of dbt Labs" (bio te
 **Sarah Levy** — Co-Founder & CEO of Euno, described as "AI context platform for enterprise data." Positioned at the intersection of data governance and AI context [^src5].
 
 **Benn Stancil** — Listed without title (notable industry figure in BI/data analytics commentary).
+
+**Thiago Baldim** — Senior Manager, Data, SafetyCulture. Responsible for implementing SafetyCulture data infrastructure end-to-end; ensures right data access at the right time with quality and confidence [^src7].
+
+**Tobias (Toby) Mao** — Director of Engineering, Fivetran (via acquisition of Tobiko Data, where he was Co-Founder & CTO, Sep 2022–Aug 2025). Previously Senior Staff SE at Airbnb and Architect at Netflix Experimentation Infrastructure. Background: BA Mathematics, Northwestern [^src8].
+
+**Tyson Doberneck** — Senior Data Engineer, Obie Insurance. Designs scalable data architectures using Apache Iceberg, Snowflake, and dbt. Known for cutting warehouse costs and building AI analytics layers; previously at Toggle Insurance and USAA [^src9].
+
+**Vijay Singh** — Lead, Data Science and Business Intelligence, Verisk Analytics (10+ years). Analytics-first mindset; designs modular pipelines for P&C insurance using Snowflake and dbt. Background: SAS-based modeling → cloud analytics engineering [^src10].
+
+**William Guicheney** — Principal Analytics Engineer, Aimpoint Digital. 9+ years in analytics. Focuses on modern data platforms with dbt, Snowflake, Airbyte, and Sigma [^src11].
+
+**William Tsu** — Staff Analytics Engineer, WHOOP. Scales analytics through strong data foundations and developer-friendly dbt workflows. Emphasizes analyst self-service + data quality governance. Previously Analytics Engineer at Blend (Revenue Operations) [^src12].
+
+**XiaoHan Li** — Analytics Engineer & Consultant, Xebia. Expertise in ELT-driven Medallion Architecture, data modelling, and dbt architecture design [^src13].
+
+**Yuna (Yunnan) Tang** — Senior Analytics Engineer, SafetyCulture. Career path: Commercial Finance Manager → Portfolio Analyst → Analytics Engineer (AMP Capital → SafetyCulture). Believes business domain understanding makes better engineers; focuses on getting engineer + analyst structure right for successful dbt projects [^src14].
+
+**Zhen Xing** — Data Architect / Data Engineer, 74software (Axway). Full-stack expertise across cloud infrastructure, data engineering, and AI product management. Track record at TotalEnergies, Ubisoft; built enterprise Feature Stores and MLOps pipelines [^src15].
 
 ## Training catalog (dbt Summit 2026)
 
@@ -78,3 +123,12 @@ The AI-assisted analytics course and the architect track reflect 2026 priorities
 [^src4]: [Thomas Antonakis — dbt Summit Speaker Bio](../../../raw/web/web-thomas-antonakis-dbt-summit-9e1a8fe2.md)
 [^src5]: [Sarah Levy — dbt Summit Speaker Bio](../../../raw/web/web-sarah-levy-dbt-summit-077eab41.md)
 [^src6]: [Training and Certification — dbt Summit](../../../raw/web/web-training-and-certification-dbt-summit-50f698b5.md)
+[^src7]: [Thiago Baldim — dbt Summit Speaker Bio](../../../raw/web/web-thiago-baldim-dbt-summit-f3ed1a76.md)
+[^src8]: [Tobias Mao — dbt Summit Speaker Bio](../../../raw/web/web-tobias-mao-dbt-summit-c440861b.md)
+[^src9]: [Tyson Doberneck — dbt Summit Speaker Bio](../../../raw/web/web-tyson-doberneck-dbt-summit-22ef1bf7.md)
+[^src10]: [Vijay Singh — dbt Summit Speaker Bio](../../../raw/web/web-vijay-singh-dbt-summit-6ce0c589.md)
+[^src11]: [William Guicheney — dbt Summit Speaker Bio](../../../raw/web/web-william-guicheney-dbt-summit-1f6f240a.md)
+[^src12]: [William Tsu — dbt Summit Speaker Bio](../../../raw/web/web-william-tsu-dbt-summit-b8e50c79.md)
+[^src13]: [XiaoHan Li — dbt Summit Speaker Bio](../../../raw/web/web-xiaohan-li-dbt-summit-a45c0d64.md)
+[^src14]: [Yuna (Yunnan) Tang — dbt Summit Speaker Bio](../../../raw/web/web-yuna-yunnan-tang-dbt-summit-14ca8371.md)
+[^src15]: [Zhen Xing — dbt Summit Speaker Bio](../../../raw/web/web-zhen-xing-dbt-summit-0552c755.md)

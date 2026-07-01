@@ -78,6 +78,9 @@ sources:
   - path: raw/_inbox/web-tristan-handy-dbt-summit-58ecab01.md
     channel: web
     ingested_at: 2026-06-30
+  - path: raw/web/web-fusion-in-bloom-dbt-labs-98d5a43b.md
+    channel: web
+    ingested_at: 2026-07-01
 aliases:
   - dbt
   - data build tool
@@ -92,8 +95,8 @@ tags:
   - corpus/data-engineering
   - entity
 created: 2026-05-21
-updated: 2026-06-26
-last_confirmed: 2026-06-26
+updated: 2026-07-01
+last_confirmed: 2026-07-01
 ---
 
 # dbt (data build tool)
@@ -412,6 +415,7 @@ At time of recording (Dec 2023): AlloyDB, BigQuery, Databricks, Dremio, Postgres
 - [[data-engineering/data-orchestration|Data Orchestration]] — scheduling dbt runs vs. transforming in dbt
 - [[data-engineering/orchestra|Orchestra]] — a managed orchestrator that runs dbt staging/curated tasks via tag selection
 - [[data-engineering/dataform|Dataform]] — the BigQuery-native, SQLX-based dbt analogue
+- [[data-engineering/dbt-fusion|dbt Fusion Engine]] — Rust-powered compiler replacing Python core; ~30× faster parse, state-aware orchestration
 - [[data-engineering/claude-code-for-data-engineering|Claude Code for Data Engineering]] — AI-assisted dbt modeling and exposure enrichment
 - [[data-engineering/sources/dbt-kimball-project|dbt Kimball reference project]] — SCD2 example project
 - [[data-engineering/README|Data Engineering hub]]
@@ -440,3 +444,4 @@ At time of recording (Dec 2023): AlloyDB, BigQuery, Databricks, Dremio, Postgres
 [^src20]: [dbt-labs/dbt-core (GitHub README, v2.0 alpha)](../../raw/github/github-dbt-labs-dbt-core.md)
 [^src28]: [dbt-labs/dbt-core — GitHub repo digest](../../raw/github/github-dbt-labs-dbt-core.md) — dbt Labs; OSS health signal (13K stars); v2 on main, v1 on 1.latest branch
 [^src29]: [dbt Summit 2026 — Speakers & Training](../../raw/_inbox/web-tristan-handy-dbt-summit-58ecab01.md) — Tristan Handy (Co-founder+President Fivetran+dbt Labs, 100K+ teams); Quigley Malcolm (MetricFlow, OSI); dbt Architect/data quality/cost visibility training courses. See [[data-engineering/sources/dbt-summit-2026-speakers|dbt-summit-2026-speakers.md]] for full catalog.
+[^src30]: [Fusion in Bloom — dbt Labs](../../raw/web/web-fusion-in-bloom-dbt-labs-98d5a43b.md) — SDF acquisition Jan 2025; 8,611 commits first year; ~30× parse speedup; ~40% model reuse, 30% compute savings; 450+ weekly projects; VS Code Extension 104K downloads. See [[data-engineering/dbt-fusion|dbt Fusion Engine]] for full detail.

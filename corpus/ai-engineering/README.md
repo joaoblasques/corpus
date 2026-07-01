@@ -92,6 +92,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [[ai-engineering/claude-for-education|Claude for Education]] — entity · stub · Anthropic's university-wide program (students/faculty/admins); Socratic "learning mode" tutor, Claude Code as scaled apprenticeship, Claude API for research; distinct from the Education plan tier
 - [[ai-engineering/claude-for-government|Claude for Government]] — entity · draft · FedRAMP High + IL5 deployment surfaces (API/Claude Gov/app); classified national-security mission support on AWS; compliance posture shared with finance vertical
 - [[ai-engineering/notebooklm|NotebookLM]] — entity · draft · Google's source-specific AI (Gemini-backed); output types (audio overview, mind map, quiz, flashcard, infographic); Claude+NotebookLM automation chains (autopilot brief, auto-refresh loop, competitive radar)
+- [[ai-engineering/chip-huyen|Chip Huyen]] — entity · stub · author AI Engineering (O'Reilly 2025); compute-scale thesis from AlexNet paper; GenAI hype cycle framing
 
 ### Concepts (continued)
 - [[ai-engineering/claude-subagents|Claude Sub-Agents]] — concept · draft · .claude/agents/ files, isolated context, parallel execution, model routing, progressive disclosure, dynamic workflows (ultracode), security (disallowed_tools)
@@ -118,6 +119,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [[ai-engineering/sources/ai-founders-claude-notebooklm|AI Founders — Claude + NotebookLM Automation]] — source · draft · McKinsey 20% stat, 3 chains, Claude browser-operates NotebookLM, consumer vs engine framing
 - [[ai-engineering/sources/field-guide-improving-ai-products|A Field Guide to Rapidly Improving AI Products]] — source · draft · Hamel Husain; the measurement-and-iteration discipline that beats tool selection (error analysis, data viewers, synthetic data, eval trust, experiment-based roadmaps)
 - [[ai-engineering/sources/claude-code-website-build-workflow|Claude Code website build workflow (Charlie Hills)]] — source · draft · 9-step spec-driven site build (CONTEXT.md/COPY.md/DESIGN.md + approval gates); structural-donor component rule to avoid the generic "AI look"
+- [[ai-engineering/sources/the-mythos-threshold|The Mythos Threshold (Joe Reis)]] — source · draft · speculative AGI fiction; Claude Mythos, Project Glasswing, air-gap breach, builder class, competence=danger thesis
 
 ### Cross-domain (primary home in data-engineering)
 - [[data-engineering/claude-code-for-data-engineering|Claude Code for Data Engineering]] — synthesis · AI-assisted dbt / data workflows

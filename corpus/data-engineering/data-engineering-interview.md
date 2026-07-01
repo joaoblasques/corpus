@@ -15,6 +15,12 @@ sources:
   - path: raw/youtube/youtube-cnjhHZNJEDk-2026-free-data-analyst-bootcamp-24-hours-for-free-sql-excel.md
     channel: youtube
     ingested_at: 2026-06-21
+  - path: raw/web/web-the-2025-ai-data-engineering-roadmap-da18cb3e.md
+    channel: web
+    ingested_at: 2026-07-01
+  - path: raw/web/web-how-to-craft-the-perfect-data-engineer-resume-and-linkedin-p-1446bdb1.md
+    channel: web
+    ingested_at: 2026-07-01
 aliases:
   - data engineering interview
   - DE interview prep
@@ -26,8 +32,8 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-19
-updated: 2026-06-23
-last_confirmed: 2026-06-21
+updated: 2026-07-01
+last_confirmed: 2026-07-01
 ---
 
 # Data Engineering Interview & Job Search
@@ -61,6 +67,33 @@ The skills are ranked by how often they come up [^skills]:
 4. **Prepare per company** — research company-specific questions *before* grinding. Typical rounds: recruiter call (talk experience, ask tech-screen format) → tech screen (45–60 min DSA + SQL) → pre-onsite recruiter call (ask # and type of interviews, prep docs) → onsite (DSA — failing usually = no-hire; SQL — Leetcode-hard practice; system design — standard or data-oriented; behavioral — prep STAR answers, read the company blog). Have **>3 questions ready per interviewer** [^job].
 5. **Offers & negotiation** — get **multiple offers from publicly-traded companies** for leverage even if you won't join them; research pay on Levels.fyi/TeamBlind; don't accept a lowball [^job].
 
+## 2025 roadmap: required skills (EcZachly)
+
+A 2025 DE job-search guide (Zach Wilson) adds structure around five concrete skill buckets [^roadmap]:
+
+- **SQL** — window functions, `INSERT OVERWRITE` vs `INSERT INTO` (latter is duplicate-prone), `MERGE` for upserts; shuffle triggers (`JOIN`, `GROUP BY`, `ORDER BY`) in distributed contexts; CTEs over subqueries for readability
+- **Python + AI integration** — calling LLM APIs (OpenAI, Anthropic), generating + storing embeddings, working with vector databases (Pinecone, Milvus, pgvector), lightweight RAG pipelines, "AI validators" that use LLMs for data quality checks or documentation generation
+- **Distributed compute** — shuffle, broadcast JOIN (< 5 GB side), bucket JOIN (both sides large), Spark Adaptive Execution (AE ≥ 3.0) for skew; Parquet run-length encoding (shrank Airbnb's P&A dataset >90%); AI workloads include GPU-cluster embedding generation, hybrid engines supporting tables + vector search, Kafka + Flink inference pipelines
+- **Data modeling + quality** — relational / Kimball / One Big Table tradeoffs; write-audit-publish pattern; MIDAS validation process; Iceberg snapshots for time-travel; retention policies to control cloud costs
+- **Portfolio project** — 3 months at 5–10 h/wk; must have a **frontend** (Tableau, Power BI, or JavaScript); production-running pipeline; uses hot technologies (Spark, Snowflake, Iceberg, vector DBs); 2025 twist: show *both* pipeline and AI integration [^roadmap]
+
+**AI copilot caveat**: tools like Databricks Genie and Snowflake Cortex write SQL for you — interviewers now test whether you can *verify, debug, and optimize* AI-generated SQL, not just write it. Understanding how SQL runs in distributed environments remains the differentiator over a copilot user [^roadmap].
+
+## Resume and LinkedIn: format rules
+
+Key format distinctions (Zach Wilson, 2024 guide) [^resume]:
+
+**LinkedIn** — include a high-quality photo (no photo = far fewer recruiter views); write a 2–3 paragraph About Me in your own voice (not third person); list every skill you've ever tried; list full work history including short stints; reach **All-Star** status for maximum recruiter visibility.
+
+**Resume** — NO photo; NO summary/objective section; only list skills you could demo without Google; keep to **one page**, listing only relevant experience; use **month + year** timelines (not just year — "2022–2023" could mean 2 months or 2 years).
+
+**Mid-career resume priorities**:
+- List **impact, not responsibilities** — impact is measured in numbers ("optimized Spark-based pricing pipeline, 25% more efficient, saved $250k/year") plus the technologies used
+- Move education to the bottom (if education is still the #1 impressive item, it signals a mediocre career)
+- Use leadership words: "led, defined, organized" — signals communicator, not just a SQL monkey [^resume]
+
+**Referral strategy** — applications yield mostly silence; referrals are high-yield. Ask by including the job link + a line on experience matching ≥60% of requirements, don't ask them to "find you a role." Building relationships *before* asking is the prerequisite [^roadmap].
+
 ## Data analyst vs. data engineer: adjacent skills, different emphasis
 
 A 24+ hour free data analyst bootcamp (Alex The Analyst, 2026) covers: SQL, Excel, Python, Power BI, Tableau, GitHub, AWS, R, and Databricks [^da]. **SQL is ranked #1** — consistent with the DE interview ranking above [^da].
@@ -88,3 +121,5 @@ Databricks appears on both tracks — analysts use it for querying and notebook-
 [^skills]: [10 Skills to Ace Your Data Engineering Interviews](../../raw/web/10-skills-to-ace-your-data-engineering-interviews-start-data.md)
 [^job]: [5 Steps to Land a High-Paying Data Engineering Job](../../raw/web/5-steps-to-land-a-high-paying-data-engineering-job-start-dat.md)
 [^da]: [2026 Free Data Analyst Bootcamp (Alex The Analyst)](../../raw/youtube/youtube-cnjhHZNJEDk-2026-free-data-analyst-bootcamp-24-hours-for-free-sql-excel.md) — YouTube
+[^roadmap]: [The 2025 AI + Data Engineering Roadmap (EcZachly)](../../raw/web/web-the-2025-ai-data-engineering-roadmap-da18cb3e.md) — Zach Wilson, DataExpert.io
+[^resume]: [How to craft the perfect data engineer resume and LinkedIn profile in 2024 (EcZachly)](../../raw/web/web-how-to-craft-the-perfect-data-engineer-resume-and-linkedin-p-1446bdb1.md) — Zach Wilson, DataExpert.io

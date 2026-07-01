@@ -21,6 +21,12 @@ sources:
   - path: raw/web/web-how-to-join-a-fact-and-a-type-2-dimension-scd2-table-start-d.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/web/web-stop-using-slowly-changing-dimensions-part-1-c49c7e0e.md
+    channel: web
+    ingested_at: 2026-07-01
+  - path: raw/web/web-scd-2-considered-harmful-part-2-d71941a6.md
+    channel: web
+    ingested_at: 2026-07-01
 aliases:
   - SCD2
   - Slowly Changing Dimension Type 2

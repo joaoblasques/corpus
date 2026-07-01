@@ -1,0 +1,45 @@
+---
+type: entity
+domain: ai-engineering
+status: stub
+sources:
+  - path: raw/web/web-navigating-ai-s-new-frontier-with-chip-huyen-40e9c185.md
+    channel: web
+    ingested_at: 2026-07-01
+aliases:
+  - Chip Huyen
+  - AI Engineering book
+  - Designing Machine Learning Systems
+tags:
+  - corpus/ai-engineering
+  - entity
+created: 2026-07-01
+updated: 2026-07-01
+---
+
+# Chip Huyen
+
+**TL;DR.** AI researcher, former NVIDIA and Snorkel AI engineer, author of *AI Engineering* (2025) and *Designing Machine Learning Systems* (O'Reilly). One of the most widely-cited practitioners on building production AI systems.
+
+## Background
+
+Chip Huyen traced the "primacy of compute and data" insight back to the 2012 AlexNet paper: > "Our experiments show that we can achieve better results by just waiting for more compute and more data." [^src1] That line reframed AI as an engineering problem of compounding scale, not breakthroughs. She went to NVIDIA to understand compute infrastructure and Snorkel AI to understand data workflows [^src1].
+
+## *AI Engineering* (book, 2025)
+
+Her book has become "the most comprehensive, well-structured guide to the essential aspects of building generative AI systems" — covering the full GenAI product stack: evaluation, RAG, agents, fine-tuning, deployment [^src1]. Used as a curriculum in the DataExpert.io AI Engineering Boot Camp.
+
+## Key positions
+
+- **GenAI hype cycle**: most GenAI products fail not on model quality but on UX — product teams underestimate the experience layer relative to the backend [^src1].
+- **Scale thesis**: the GPT-2 best-paper award (2020) was the turning point when academia acknowledged scaling as "real research" rather than "brute force" [^src1]. The implication: AI progress is more predictable than it appears — it's an engineering discipline of compute + data at sufficient scale [^src1].
+
+## See also
+
+- [[ai-engineering/ai-fundamentals|AI Fundamentals]] — foundational ML concepts
+- [[ai-engineering/learning-ai-engineering|Learning AI Engineering]] — AI Engineering as a skill path
+- [[ai-engineering/README|AI Engineering hub]]
+
+---
+
+[^src1]: [Navigating AI's New Frontier with Chip Huyen (DataExpert.io Tech Talk)](../../raw/web/web-navigating-ai-s-new-frontier-with-chip-huyen-40e9c185.md)

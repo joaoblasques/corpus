@@ -1806,3 +1806,26 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - new synthesis: corpus/data-engineering/data-work-in-the-ai-transition.md — names Joe Reis's 2026 one-argument-three-scales thesis (skills/productivity/architecture) with reverse-centaur as the connective failure mode; 5 sources, every non-trivial claim cited.
 - index: Total pages 300→301; added the synthesis to the data-engineering list; Recent-additions entry appended.
 - note: corpus-wide lint still reports ~43 other broken citations on pages OUTSIDE this week's scope (same inbox→channel drift from earlier ingests) — out of scope for this bounded pass; flag for a full `lint` run.
+
+## [2026-07-01 00:00] ingest | ingest-auto batch — 27 ingested, 23 deferred
+- source: raw/_inbox/ (50 pre-specified files)
+- channel: web (all 50)
+- domain: data-engineering (primary), ai-engineering, software-engineering, ai-business
+- pages touched: [dbt, dbt-fusion, scd2, pipeline-optimization-at-scale, sources/dbt-summit-2026-speakers, data-engineering-interview, duckdb, semantic-layer, apache-spark, matthew-housley, engineering-craft, ai-and-the-job-market, sources/the-mythos-threshold, chip-huyen]
+- new pages: [data-engineering/dbt-fusion, data-engineering/pipeline-optimization-at-scale, data-engineering/matthew-housley, ai-engineering/sources/the-mythos-threshold, ai-engineering/chip-huyen]
+- notes: ingest-auto run; 50 processed, 27 ingested, 23 deferred. Key ingests: dbt Fusion (Rust engine, SDF acq, 30× speedup), pipeline war stories (Airbnb/Meta Zach Wilson), Joe Reis AGI speculative fiction, Chip Huyen entity, Matthew Housley entity, Comet Spark accelerator, DuckDB 1TB benchmark + zonemap index, DE interview 2025 roadmap+resume tips, engineering-craft AI-equalizer thesis. Deferred: thin newsletter digests, paywall stubs, multi-topic podcasts.
+
+## [2026-07-01T02:55] config | scheduled run
+- collectors:
+  - gmail: 6 collected · status=ok
+  - obsidian: 0 collected · status=ok
+  - pdf: 0 collected · status=ok
+  - youtube: 18 collected · status=ok
+  - github_discover: 0 collected · status=ok
+  - github: 0 collected · status=ok
+  - x: 0 collected · status=ok
+  - links_refetch: 0 refetched · status=ok
+- ingest:
+  - ingest: 27 ingested · 23 deferred · status=ok
+- lint:
+  - 1 broken wikilinks · 63 broken citations · 1 orphans · 22 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py

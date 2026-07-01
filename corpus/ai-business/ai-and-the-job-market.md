@@ -45,6 +45,9 @@ sources:
   - path: raw/_inbox/web-wtf-is-a-software-moat-in-2026-b9286e97.md
     channel: web
     ingested_at: 2026-06-30
+  - path: raw/web/web-ai-isnt-replacing-curious-developers-e1005935.md
+    channel: web
+    ingested_at: 2026-07-01
 aliases:
   - AI replacing workers
   - future-proofing engineering career
@@ -57,7 +60,7 @@ tags:
   - corpus/ai-business
   - synthesis
 created: 2026-06-12
-updated: 2026-06-21
+updated: 2026-07-01
 ---
 
 # AI and the Job Market
@@ -270,3 +273,4 @@ From "Life Outside the Bay Area Bubble" [^src12]:
 [^src12]: [Life Outside the Bay Area Bubble: Atoms, Bits, and the Resurgence of Place](../../raw/_inbox/web-life-outside-the-bay-area-bubble-atoms-bits-and-the-resurgen-9c876dce.md) — Joe Reis; atoms vs bits; Bay Area bubble; place-based work
 [^src13]: [Booms, Busts, and Builders: Lessons from the High Plains of Wyoming](../../raw/_inbox/web-booms-busts-and-builders-lessons-from-the-high-plains-of-wyo-4a2a5ecc.md) — Joe Reis; gold rush analogy; picks-and-shovels builders survive cycles
 [^src14]: [WTF Is a Software Moat in 2026?](../../raw/_inbox/web-wtf-is-a-software-moat-in-2026-b9286e97.md) — Joe Reis; thin wrappers not moats; proprietary data/expertise as real moats; differentiation
+[^src15]: [AI Isn't Replacing Curious Developers — Neil Roberts interview (Data Engineering Central Podcast)](../../raw/web/web-ai-isnt-replacing-curious-developers-e1005935.md) — where AI works, where it fails; agents in practice vs demos; frontend/UX matters more in AI world; junior devs' real concern is fragile systems they don't fully understand

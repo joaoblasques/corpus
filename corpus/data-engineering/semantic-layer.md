@@ -18,6 +18,9 @@ sources:
   - path: raw/github/github-boringdata-boring-semantic-layer.md
     channel: github
     ingested_at: 2026-06-25
+  - path: raw/web/web-semantic-layers-agents-and-the-future-of-analytics-9975a849.md
+    channel: web
+    ingested_at: 2026-07-01
 aliases:
   - semantic layer
   - metric layer
@@ -34,7 +37,7 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-15
-updated: 2026-06-25
+updated: 2026-07-01
 ---
 
 # Semantic Layer
@@ -114,3 +117,4 @@ From the Tableau Conference report: data analysts are no longer just building da
 [^src3]: [I Started My Career in Tableau (Jess Ramos, Big Data Energy)](../../raw/email/email-2026-05-20-i-started-my-career-in-tableau.md)
 [^src4]: [Boring Semantic Layer + MCP (Julien Hurault, Ju Data Engineering Newsletter)](../../raw/email/email-2025-07-04-boring-semantic-layer-mcp.md)
 [^src5]: [boringdata/boring-semantic-layer GitHub repo — v0.3.14, ★456, Python, Ibis-powered](../../raw/github/github-boringdata-boring-semantic-layer.md)
+[^src6]: [Semantic Layers, Agents, and the Future of Analytics — David Jaitillake (VP AI, Cube → co-founder, Quarry) on DEC Podcast](../../raw/web/web-semantic-layers-agents-and-the-future-of-analytics-9975a849.md)
