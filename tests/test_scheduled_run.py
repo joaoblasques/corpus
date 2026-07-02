@@ -1997,3 +1997,36 @@ class TestXCollector:
         res = scheduled_run.run_collectors(_subprocess_run=fake_run)
         assert any("x_client.py" in s and "run" in s for s in called), called
         assert res["x"]["status"] == "ok" and res["x"]["collected"] == 1
+
+
+# ---------------------------------------------------------------------------
+# run_youtube_quick_intake (native Groq quick-intake drain)
+# ---------------------------------------------------------------------------
+
+def test_run_youtube_quick_intake_parses_tally():
+    """Parses the tool's final tally line into ingested/rescued/skipped counts."""
+    tally_line = json.dumps({
+        "tally": {"ok_transcript": 7, "ok_metaonly": 1, "rescued": 5,
+                  "skipped_ratelimit": 3, "skipped_norescue": 2},
+        "processed": 13})
+
+    def fake_run(cmd, **kw):
+        # confirm it bounds the rescue budget (rate-limit safety)
+        assert "--rescue" in cmd and "--rescue-max" in cmd
+        return _make_proc(returncode=0, stdout='{"stub":"x","result":"ok:ai-engineering+transcript"}\n' + tally_line)
+
+    out = scheduled_run.run_youtube_quick_intake(_subprocess_run=fake_run)
+    assert out["status"] == "ok"
+    assert out["ingested"] == 8      # ok_transcript + ok_metaonly
+    assert out["rescued"] == 5
+    assert out["skipped"] == 5       # ratelimit + norescue
+
+
+def test_run_youtube_quick_intake_failure_is_recorded_not_raised():
+    def fake_run(cmd, **kw):
+        return _make_proc(returncode=1, stderr="groq boom")
+
+    out = scheduled_run.run_youtube_quick_intake(_subprocess_run=fake_run)
+    assert out["status"] == "failed"
+    assert out["ingested"] == 0
+    assert "groq boom" in out["error"]

@@ -573,6 +573,39 @@ def run_github_reap(*, _subprocess_run=None) -> dict:
         return {"status": "failed", "error": str(exc)}
 
 
+def run_youtube_quick_intake(*, max_n: int = 40, rescue_max: int = 20,
+                             _subprocess_run=None) -> dict:
+    """Quick-intake tech YouTube stubs into lightweight Groq-summarized source pages.
+
+    A native Python drain (bin/quick_ingest_youtube.py) — NOT the headless-claude ingest.
+    Captions rescue is bounded by rescue_max to stay under the ~44/window caption
+    rate-limit; Whisper is intentionally not used in the nightly (too slow for the run
+    window — a separate manual/background pass handles Whisper). Rate-limited or
+    unrescued stubs stay in the inbox for the next run, so the backlog drains steadily
+    over successive nights. Failure recorded, never raised — must not abort the run."""
+    _run = _subprocess_run if _subprocess_run is not None else subprocess.run
+    try:
+        proc = _run(
+            [sys.executable, str(BIN / "quick_ingest_youtube.py"),
+             "--rescue", "--rescue-max", str(rescue_max), "--max", str(max_n), "--sleep", "1"],
+            capture_output=True, text=True, timeout=1200)
+        if proc.returncode != 0:
+            return {"status": "failed", "ingested": 0, "error": (proc.stderr or "").strip()[:200]}
+        tally = {}
+        for line in (proc.stdout or "").splitlines():
+            line = line.strip()
+            if line.startswith("{") and '"tally"' in line:
+                try:
+                    tally = json.loads(line).get("tally", {})
+                except json.JSONDecodeError:
+                    pass
+        ingested = tally.get("ok_transcript", 0) + tally.get("ok_metaonly", 0)
+        return {"status": "ok", "ingested": ingested, "rescued": tally.get("rescued", 0),
+                "skipped": tally.get("skipped_ratelimit", 0) + tally.get("skipped_norescue", 0)}
+    except Exception as exc:  # noqa: BLE001
+        return {"status": "failed", "ingested": 0, "error": str(exc)}
+
+
 def build_summary(tallies: dict, dry_run: bool) -> dict:
     """Assemble the run's stdout summary from the collected tallies. Surfaces the
     post-ingest `email_relabel` (reap-labels), `x_reap`, and `pdf_reap` results
@@ -581,6 +614,7 @@ def build_summary(tallies: dict, dry_run: bool) -> dict:
         "status": "ok",
         "dry_run": bool(dry_run),
         "collectors": tallies.get("collectors", {}),
+        "youtube_quick": tallies.get("youtube_quick", {}),
         "ingest": tallies.get("ingest", {}),
         "email_relabel": tallies.get("email_relabel", {}),
         "x_reap": tallies.get("x_reap", {}),
@@ -926,6 +960,17 @@ def write_run_report(
         f"- ingest:\n{ingest_line}\n"
     )
 
+    # YouTube quick-intake line (native Groq drain of the tech-video backlog)
+    yq = tallies.get("youtube_quick")
+    if yq:
+        yq_status = yq.get("status", "unknown")
+        yq_line = (f"  - youtube_quick: {yq.get('ingested', 0)} intake · "
+                   f"{yq.get('rescued', 0)} rescued · {yq.get('skipped', 0)} skipped · "
+                   f"status={yq_status}")
+        if yq.get("error"):
+            yq_line += f" · error={yq['error']}"
+        block += f"- youtube_quick:\n{yq_line}\n"
+
     # Post-ingest corpus integrity check (deterministic backstop on the agent's work).
     lint = tallies.get("lint")
     if lint:
@@ -1026,6 +1071,15 @@ def main(argv=None) -> int:
                 tallies["commit"] = {"status": "skipped"}
             else:
                 tallies["collectors"] = run_collectors()
+
+                # YouTube quick-intake: drain a bounded batch of tech stubs into
+                # lightweight source pages (native Groq path, not the claude ingest).
+                # Bounded caption-rescue so it stays under the rate-limit; steady
+                # nightly drain of the backlog. Failure must NOT abort the run.
+                try:
+                    tallies["youtube_quick"] = run_youtube_quick_intake()
+                except Exception as exc:  # noqa: BLE001
+                    tallies["youtube_quick"] = {"status": "failed", "ingested": 0, "error": str(exc)}
 
                 tallies["ingest"] = run_ingest(
                     max_n=args.max,
