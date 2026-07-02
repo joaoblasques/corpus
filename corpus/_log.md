@@ -1860,3 +1860,26 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - pages touched: [corpus/ai-engineering/README.md, corpus/ai-engineering/ollama.md, corpus/ai-engineering/local-ai-agents.md, corpus/ai-engineering/mixture-of-experts.md]
 - new pages: [corpus/ai-engineering/openjarvis.md, corpus/ai-engineering/vllm.md, corpus/ai-engineering/vllm-semantic-router.md, corpus/ai-engineering/minimax-m3.md, corpus/ai-engineering/diffusiongemma.md, corpus/ai-engineering/vime.md]
 - notes: ingest-auto run; 6 processed, 6 ingested, 0 deferred. New vLLM ecosystem cluster: vLLM entity hub (serving engine internals, ModelState abstraction), vLLM Semantic Router (Fusion Mixture-of-Models, Session-Aware Agentic Routing, Themis v0.3 release), MiniMax M3 (MiniMax Sparse Attention, 1M-token context), DiffusionGemma (first diffusion LLM natively in vLLM), vime (RL post-training framework, slime+Megatron+vLLM). Plus OpenJarvis (Stanford Hazy Research local-first agent framework on Ollama) — cross-linked into Ollama and Local AI Agents. All 6 sources routed to existing ai-engineering domain; no contradictions; all new pages linked from domain hub.
+
+## [2026-07-02] ingest | ingest-auto follow-up batch — vLLM ecosystem cluster (6 processed, 6 ingested, 0 deferred)
+- source: raw/_inbox/web-announcing-day-0-support-for-nvidia-nemotron-3-ultra-on-vllm-bc7c306b.md
+- source: raw/_inbox/web-fast-efficient-llm-inference-with-vllm-a-new-course-with-dee-f75c7aa9.md
+- source: raw/_inbox/web-session-aware-agentic-routing-continuity-aware-model-selecti-1950138f.md
+- source: raw/_inbox/web-accelerating-vllm-omni-inference-with-autoround-quantization-f55f7ca2.md
+- source: raw/_inbox/web-vllm-on-the-dgx-spark-architecture-configuration-and-local-e-543e2b72.md
+- source: raw/_inbox/web-accelerating-laguna-xs-2-inference-with-vllm-speculators-and-afda11cd.md
+- channel: web (all 6)
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/vllm.md, corpus/ai-engineering/vllm-semantic-router.md, corpus/ai-engineering/README.md]
+- new pages: [corpus/ai-engineering/nemotron-3-ultra.md, corpus/ai-engineering/laguna-xs2.md, corpus/ai-engineering/quantization.md]
+- notes: ingest-auto run; 6 processed, 6 ingested, 0 deferred. Same-day continuation of the vLLM ecosystem cluster started earlier today. New pages: Nemotron 3 Ultra (NVIDIA's hybrid Transformer-Mamba MoE agentic reasoning model, also used as vLLM's own RL rollout/eval backend), Laguna XS.2 (Poolside's agentic-coding MoE model + DFlash speculative decoder), and Quantization (new concept: AutoRound PTQ for vLLM-Omni, NVFP4 on DGX Spark, LLM Compressor checkpoints for Laguna XS.2 — the memory-headroom-unlocks-parallelism pattern from the AutoRound CFG-Parallel case study). Updated vllm.md with a DGX Spark local single-GPU deployment section (unified-memory flag guidance, sm_121 validation, cold-start JIT warmup) and the DeepLearning.AI "Fast & Efficient LLM Inference with vLLM" course. Updated vllm-semantic-router.md with full SAAR (Session-Aware Agentic Routing) design detail — five-piece router memory, two hard locks as correctness boundaries, evaluated results across 21,600 deterministic turns and live AMD ROCm serving — expanding the passing SAAR mention already present from the Themis v0.3 source. All 6 sources routed to existing ai-engineering domain (G1 clear); no PARA-native collisions (G4); no contradictions with existing pages (G3); page cascade well under 20 (G2). All new pages linked from domain hub; no orphans.
+
+## [2026-07-02T06:26] config | scheduled run
+- collectors:
+
+- ingest:
+  - ingest: 6 ingested · 0 deferred · status=ok
+- youtube_quick:
+  - youtube_quick: 0 intake · 0 rescued · 3 skipped · status=ok
+- lint:
+  - 0 broken wikilinks · 0 broken citations · 0 orphans · 0 stubs

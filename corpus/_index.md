@@ -1,12 +1,15 @@
 # Corpus Index
 
-> Last updated: 2026-07-02 | Total pages: 315 | Total sources: 1281
+> Last updated: 2026-07-02 | Total pages: 318 | Total sources: 1287
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
 ## Domains
 
 ### ai-engineering
+- [[ai-engineering/sources/code-with-claude-2026-opening-keynote-GMIWm5y90xA|"Code with Claude 2026: Opening Keynote"]] — source · stub · Ami Vora discusses the rapid advancements in AI model capabilities and the need for developers to cl…
+- [[ai-engineering/sources/the-ai-workflow-for-data-engineering-GDmEgrX_ZQc|The AI Workflow for Data Engineering]] — source · stub · The video demonstrates an AI workflow for data engineering using Claude Code, showcasing its capabil…
+- [[ai-engineering/sources/7-insane-loops-you-need-to-try-right-now-F4a8aMLb678|7 INSANE loops you need to try right now]] — source · stub · The video explains what loops are in AI engineering, their value, and provides a concrete use case o…
 - [[ai-engineering/sources/finally-agent-loops-clearly-explained-EuzYhzB0vbI|Finally. Agent Loops Clearly Explained.]] — source · stub · The video explains agent loops, a concept in AI engineering where an AI system iteratively reasons, …
 - [[ai-engineering/sources/5-claude-code-skills-i-use-every-single-day-EJyuu6zlQCg|5 Claude Code skills I use every single day]] — source · stub · The speaker shares 5 essential skills for working with AI, including the 'grill me' skill for reachi…
 - [[ai-engineering/sources/the-only-openclaw-tutorial-you-ll-ever-need-march-2026-editi-CxErCGVo-oo|The only OpenClaw tutorial you’ll ever need (March 2026 edition)]] — source · stub · The video covers the OpenClaw AI tool, its features, and benefits. It explains how OpenClaw is diffe…
@@ -64,11 +67,14 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[ai-engineering/openclaw|OpenClaw]] — entity · draft · open-source local-agent framework; per-agent model routing for cost, Cloud Hub skill marketplace + its security risk, Mission Control, scoped-email isolation; `ollama launch openclaw` one-command setup
 - [[ai-engineering/ollama|Ollama]] — entity · draft · local LLM serving + cloud models + web search API + `ollama launch` agentic toolchains; Anthropic API compatibility for Claude Code; MLX Apple Silicon backend; snapshot system for agents; OpenJarvis integration
 - [[ai-engineering/openjarvis|OpenJarvis]] — entity · draft · Stanford Hazy Research/Scaling Intelligence local-first personal-AI framework; Ollama-backed, agent presets (morning digest, deep research, code assistant)
-- [[ai-engineering/vllm|vLLM]] — entity · draft · open-source LLM inference-serving engine; scheduler/paged KV cache/prefix caching/speculative decoding; day-0 support for MiniMax M3 and DiffusionGemma via ModelState
-- [[ai-engineering/vllm-semantic-router|vLLM Semantic Router]] — entity · draft · request-routing control plane (signals→projections→decisions→algorithms→models); Fusion Mixture-of-Models primitive; Session-Aware Agentic Routing; Themis v0.3
+- [[ai-engineering/vllm|vLLM]] — entity · draft · open-source LLM inference-serving engine; scheduler/paged KV cache/prefix caching/speculative decoding; day-0 support for MiniMax M3, DiffusionGemma, Nemotron 3 Ultra, Laguna XS.2; DGX Spark local deployment; DeepLearning.AI course
+- [[ai-engineering/vllm-semantic-router|vLLM Semantic Router]] — entity · draft · request-routing control plane (signals→projections→decisions→algorithms→models); Fusion Mixture-of-Models primitive; Session-Aware Agentic Routing (SAAR: router memory, hard locks, prefix-cache economics); Themis v0.3
 - [[ai-engineering/minimax-m3|MiniMax M3]] — entity · draft · 1M-token-context model family; MiniMax Sparse Attention (128-token block scoring/top-k selection); MXFP8 MoE, EAGLE3 speculative decoding
 - [[ai-engineering/diffusiongemma|DiffusionGemma]] — entity · draft · Google's 26B discrete diffusion LLM (dLLM) on Gemma4; parallel-canvas denoising, entropy-bound acceptance, self-conditioning; first dLLM natively in vLLM
 - [[ai-engineering/vime|vime]] — entity · draft · vLLM-ecosystem RL post-training framework; ports slime's training stack onto vLLM rollout; GRPO/PPO, R3 routing replay for MoE alignment
+- [[ai-engineering/nemotron-3-ultra|Nemotron 3 Ultra]] — entity · draft · NVIDIA's open-weight frontier agentic reasoning model; hybrid Transformer-Mamba MoE (550B/55B active), NVFP4, MTP; day-0 on vLLM
+- [[ai-engineering/laguna-xs2|Laguna XS.2]] — entity · draft · Poolside's agentic-coding MoE model (33B-A3B); DFlash speculative decoder (2-3x faster, no quality loss); FP8/NVFP4/INT4/INT8 LLM Compressor checkpoints
+- [[ai-engineering/quantization|Quantization]] — concept · draft · compressing weights/activations to low-bit formats for memory + latency wins; AutoRound PTQ, NVFP4, LLM Compressor; memory-headroom-unlocks-parallelism pattern
 - [[ai-engineering/perplexity-computer|Perplexity Computer]] — entity · draft · cloud-native zero-setup AI agent from Perplexity AI; model-agnostic auto-routing, parallel sub-agents, isolated VPS, $200/month; use-case split vs OpenClaw
 - [[ai-engineering/paperclip|Paperclip]] — entity · draft · open-source PM control plane for an agent fleet; goal→issues decomposition, org chart, chief-of-staff agent, blocked-status/autonomy log
 - [[ai-engineering/tool-calling|Tool Calling]] — concept · draft · how LLMs request and receive tool execution results
@@ -161,6 +167,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[ai-engineering/sources/ai-founders-claude-notebooklm|AI Founders — Claude + NotebookLM Automation]] — source · draft · 3 chains (autopilot brief, auto-refresh loop, competitive radar), consumer vs engine framing
 
 ### data-engineering
+- [[data-engineering/sources/databases-vs-data-warehouses-vs-data-lakes-what-is-the-diffe-FxpRL0m9BcA|Databases Vs Data Warehouses Vs Data Lakes - What Is The Difference And Why Should You Care?]] — source · stub · The video compares databases, data warehouses, and data lakes, focusing on their differences and use…
 - [[data-engineering/sources/if-i-started-over-as-a-data-engineer-CEGN-LbiX4Y|If I Started Over As A Data Engineer]] — source · stub · A data engineer shares their experience and provides a 6-step roadmap for becoming a high-paying dat…
 - [[data-engineering/sources/how-not-to-become-a-data-engineer-in-2026-avoid-these-mistak-8vSdjx-QLIs|How NOT to Become a Data Engineer in 2026 (Avoid These Mistakes)]] — source · stub · The video discusses common mistakes that prevent individuals from becoming data engineers, including…
 - [[data-engineering/sources/project-a-data-modelling-best-practices-part-i-how-to-model--8HlNG8bdlM0|"Project A Data Modelling Best Practices Part I: How to Model Data in a Data Warehouse?"]] — source · stub · The video discusses data modeling best practices for data warehouses, focusing on deriving business …
@@ -297,6 +304,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[software-engineering/sources/software-engineers-guidebook|Source: The Software Engineer's Guidebook]] — source · draft · Gergely Orosz 359-page career reference (full SWE arc)
 
 ### mlops
+- [[mlops/sources/how-i-built-my-own-ai-trading-assistant-using-claude-cowork-GlkJMO_ufYA|How I Built My Own AI Trading Assistant Using Claude Cowork]] — source · stub · The video showcases how to use Claude Cowork as a personal AI trading assistant, covering its featur…
 - [[mlops/sources/openclaw-2-0-is-here-6vPaitNQMGY|OpenClaw 2.0 is here.]] — source · stub · The video explains how to set up OpenClaw 2.0 on a virtual private server (VPS) using Hostinger, wit…
 - [[mlops/sources/this-underrated-tool-replaced-3-homelab-services-and-it-s-op-3wJ0IQ3rHjA|This Underrated Tool Replaced 3 Homelab Services (and it's open source!)]] — source · stub · The video discusses Netbird, an open-source tool that replaces multiple homelab services, providing …
 - [[mlops/sources/seedance-2-0-claude-code-creates-10k-websites-in-minutes-NvxiSG34mPU|Seedance 2.0 + Claude Code Creates $10k Websites in Minutes]] — source · stub · The video demonstrates how to use Claude Code to create a website with a seamless loop background vi…

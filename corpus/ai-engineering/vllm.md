@@ -12,6 +12,18 @@ sources:
   - path: raw/web/web-announcing-vime-a-simple-stable-and-efficient-rl-framework-f-9a392163.md
     channel: web
     ingested_at: 2026-07-02
+  - path: raw/web/web-announcing-day-0-support-for-nvidia-nemotron-3-ultra-on-vllm-bc7c306b.md
+    channel: web
+    ingested_at: 2026-07-02
+  - path: raw/web/web-fast-efficient-llm-inference-with-vllm-a-new-course-with-dee-f75c7aa9.md
+    channel: web
+    ingested_at: 2026-07-02
+  - path: raw/web/web-vllm-on-the-dgx-spark-architecture-configuration-and-local-e-543e2b72.md
+    channel: web
+    ingested_at: 2026-07-02
+  - path: raw/web/web-accelerating-laguna-xs-2-inference-with-vllm-speculators-and-afda11cd.md
+    channel: web
+    ingested_at: 2026-07-02
 aliases:
   - vLLM
   - vllm
@@ -24,7 +36,7 @@ updated: 2026-07-02
 
 # vLLM
 
-**TL;DR.** vLLM is an open-source LLM inference-serving engine and ecosystem. Beyond the core serving runtime (scheduler, paged KV cache, prefix caching, chunked prefill, speculative decoding), the vLLM project has grown a family of adjacent tools: [[ai-engineering/vllm-semantic-router|vLLM Semantic Router]] for request-level model routing, and [[ai-engineering/vime|vime]] for RL post-training. vLLM ships day-0 support for major new model architectures, including sparse-attention long-context models ([[ai-engineering/minimax-m3|MiniMax M3]]) and diffusion language models ([[ai-engineering/diffusiongemma|DiffusionGemma]]) [^src1][^src2][^src3].
+**TL;DR.** vLLM is an open-source LLM inference-serving engine and ecosystem. Beyond the core serving runtime (scheduler, paged KV cache, prefix caching, chunked prefill, speculative decoding), the vLLM project has grown a family of adjacent tools: [[ai-engineering/vllm-semantic-router|vLLM Semantic Router]] for request-level model routing, and [[ai-engineering/vime|vime]] for RL post-training. vLLM ships day-0 support for major new model architectures, including sparse-attention long-context models ([[ai-engineering/minimax-m3|MiniMax M3]]), diffusion language models ([[ai-engineering/diffusiongemma|DiffusionGemma]]), a hybrid Transformer-Mamba agentic reasoning model ([[ai-engineering/nemotron-3-ultra|Nemotron 3 Ultra]]), and an agentic-coding MoE model with a novel speculative decoder ([[ai-engineering/laguna-xs2|Laguna XS.2]]) [^src1][^src2][^src3][^src4][^src7].
 
 ## Serving engine internals (as exercised by day-0 model integrations)
 
@@ -57,9 +69,27 @@ vLLM's "day-0" releases pair a new open-weight model with same-day serving suppo
 - [[ai-engineering/vllm-semantic-router|vLLM Semantic Router]] — request routing control plane (signals → decisions → model selection) sitting in front of vLLM and other backends.
 - [[ai-engineering/vime|vime]] — RL post-training framework pairing Megatron training with vLLM as the rollout/inference backend.
 
+## Local single-GPU deployment: DGX Spark
+
+vLLM also targets **NVIDIA DGX Spark**, a desk-side GB10 Grace Blackwell system for local inference, bridging laptop-scale development and datacenter GPU serving [^src5]. Spark's architecture reshapes the usual serving-flag defaults:
+
+- **Unified CPU+GPU memory pool (128 GB)** — CPU, GPU, OS, container runtime, model weights, and KV cache all share one pool, so `--gpu-memory-utilization` must leave headroom for the rest of the system rather than assuming a dedicated GPU-memory budget [^src5].
+- **`--max-num-seqs` should stay low** (e.g. `4`) — Spark suits small-batch/single-user inference, not high-concurrency serving; above ~4 concurrent decode streams the per-token bandwidth tax outweighs continuous-batching gains and TTFT spikes [^src5].
+- **NVFP4 MoE models with ~10–15B active parameters are a strong fit** — active parameter count (not total parameters) bounds decode speed; unified memory makes it practical to load NVFP4 models up to ~200B total parameters on a single Spark [^src5]. See [[ai-engineering/quantization|Quantization]].
+- **sm_121-specific validation** — Spark's Blackwell-consumer silicon needs vLLM builds/images validated specifically for `sm_121`; configs tuned on datacenter GPUs are a compatibility checklist, not a performance expectation, when ported to Spark [^src5].
+- **Cold-start / JIT warmup** — first request after `vllm serve` boots triggers Inductor/FlashInfer JIT codegen (~25s in one Nemotron-3-Super setup); production setups should fire a warmup ping at startup rather than exposing this latency to the first real user request [^src5].
+- **Measured example** (Nemotron-3-Super-120B-A12B-NVFP4 on one Spark): decode throughput held in a narrow 22.7–23.7 tok/s band across scenarios regardless of prompt length; prefill scaled from ~140 tok/s (58-token prompt) to ~1,884 tok/s (7,234-token prompt) as prompt length amortized per-request overhead [^src5]. Recipe-specific numbers, not a universal DGX Spark ceiling.
+
+## Learning resource: DeepLearning.AI course
+
+Red Hat and Andrew Ng's DeepLearning.AI published **"Fast & Efficient LLM Inference with vLLM"** (Cedric Clyburn, Red Hat; ~1.5 hours, 9 lessons, 3 hands-on labs), covering the full compress → serve → benchmark lifecycle: quantizing a model with LLM Compressor, serving it with vLLM (observing continuous batching and prefix caching via live metrics), and benchmarking throughput/latency with GuideLLM plus quality validation with lm-eval [^src6].
+
 ## Related
 
 - [[ai-engineering/mixture-of-experts|Mixture of Experts]] — MoE execution is a first-class vLLM serving concern (expert parallelism, quantized MoE backends)
+- [[ai-engineering/quantization|Quantization]] — AutoRound/NVFP4/LLM Compressor checkpoint quantization, used across DGX Spark, Nemotron 3 Ultra, and Laguna XS.2 deployments
+- [[ai-engineering/nemotron-3-ultra|Nemotron 3 Ultra]] — hybrid Transformer-Mamba MoE agentic reasoning model with vLLM day-0 support
+- [[ai-engineering/laguna-xs2|Laguna XS.2]] — Poolside's agentic-coding MoE model with a DFlash speculative decoder
 - [[ai-engineering/ollama|Ollama]] — contrasting local-first single-user serving tool vs. vLLM's production/datacenter serving focus
 - [[ai-engineering/README|AI Engineering hub]]
 
@@ -68,3 +98,7 @@ vLLM's "day-0" releases pair a new open-weight model with same-day serving suppo
 [^src1]: [MiniMax M3 in vLLM: Day-0 Serving for 1M-Token Multimodal Reasoning](../../raw/web/web-minimax-m3-in-vllm-day-0-serving-for-1m-token-multimodal-rea-5d5564f8.md) — vLLM blog, 2026-06-12
 [^src2]: [DiffusionGemma: The First Diffusion LLM (dLLM) Natively Supported in vLLM](../../raw/web/web-diffusiongemma-the-first-diffusion-llm-dllm-natively-support-646d34df.md) — vLLM blog, 2026-06-10
 [^src3]: [Announcing vime: A Simple, Stable, and Efficient RL Framework for LLMs](../../raw/web/web-announcing-vime-a-simple-stable-and-efficient-rl-framework-f-9a392163.md) — vLLM blog, 2026-06-09
+[^src4]: [Announcing Day-0 Support for NVIDIA Nemotron 3 Ultra on vLLM](../../raw/web/web-announcing-day-0-support-for-nvidia-nemotron-3-ultra-on-vllm-bc7c306b.md) — vLLM blog, 2026-06-04
+[^src5]: [vLLM on the DGX Spark: Architecture, Configuration, and Local Evaluation](../../raw/web/web-vllm-on-the-dgx-spark-architecture-configuration-and-local-e-543e2b72.md) — vLLM blog / Inferact, 2026-06-01
+[^src6]: [Fast & Efficient LLM Inference with vLLM: A New Course with DeepLearning.AI](../../raw/web/web-fast-efficient-llm-inference-with-vllm-a-new-course-with-dee-f75c7aa9.md) — vLLM blog, 2026-06-03
+[^src7]: [Accelerating Laguna XS.2 Inference with vLLM, Speculators, and LLM Compressor](../../raw/web/web-accelerating-laguna-xs-2-inference-with-vllm-speculators-and-afda11cd.md) — vLLM blog, 2026-05-28
