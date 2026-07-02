@@ -128,14 +128,19 @@ def _suppress_fd_stdout():
 
 
 def processable(dirs=None) -> list:
-    """pdf_origin filenames whose raw copy is corpus_ingested (ready to move)."""
+    """(source_path, pdf_origin) for raw copies that are corpus_ingested (ready to move).
+
+    source_path is the full absolute path recorded at collection time — it carries the
+    watch-dir SUBFOLDER, which discover() recurses into. The reaper must use it (not the
+    bare pdf_origin basename) or subfolder PDFs can never be located and moved out."""
     out = []
     for _, text in _raw_sources(dirs):
         if "corpus_ingested: true" not in text:
             continue
         origin = fm_field(text, "pdf_origin")
-        if origin:
-            out.append(origin)
+        src = fm_field(text, "source_path")
+        if origin or src:
+            out.append((src, origin))
     return out
 
 

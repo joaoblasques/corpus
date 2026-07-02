@@ -76,17 +76,29 @@ def cmd_file(args) -> int:
     watch = Path(args.dir) if args.dir else cp.PDF_WATCH_DIR
     proc_dir = watch / cp.PROCESSED_SUBDIR
     t = {"moved": 0}
-    for origin in cp.processable():
-        if not _under_watch(watch, origin):
-            continue
-        src = watch / origin
-        if not src.exists():
+    for source_path, origin in cp.processable():
+        # Prefer the recorded absolute source_path (carries the watch-dir subfolder);
+        # fall back to watch/pdf_origin for legacy stubs / top-level PDFs without one.
+        src, rel = None, None
+        if source_path:
+            cand = Path(source_path)
+            try:
+                rel = cand.resolve().relative_to(watch.resolve())
+                src = cand
+            except (ValueError, OSError):
+                src = None
+        if src is None and origin and _under_watch(watch, origin):
+            src, rel = watch / origin, Path(origin)
+        if src is None or not src.exists():
             continue
         if args.dry_run:
             t["moved"] += 1
             continue
-        proc_dir.mkdir(parents=True, exist_ok=True)
-        shutil.move(str(src), str(proc_dir / Path(origin).name))
+        # Preserve subfolder structure under _processed/ so same-named files in
+        # different subfolders don't collide.
+        dest = proc_dir / rel
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        shutil.move(str(src), str(dest))
         t["moved"] += 1
     print(json.dumps({**t, "dry_run": bool(args.dry_run)}, indent=2))
     return 0

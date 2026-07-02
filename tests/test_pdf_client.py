@@ -88,3 +88,34 @@ def test_file_rejects_path_traversal(tmp_path, monkeypatch):
     monkeypatch.setattr(pc.cp, "DEDUP_DIRS", [raw])
     pc.cmd_file(pc._args(["file", "--dir", str(watch)]))
     assert (outside / "x.pdf").exists()                          # never touched
+
+
+def test_file_moves_subfolder_pdf_via_source_path(tmp_path, monkeypatch):
+    """A PDF nested in a watch-dir subfolder is located via source_path and moved to
+    _processed preserving its subfolder (the bug: basename-only lookup missed it)."""
+    watch = tmp_path / "PDFs"
+    sub = watch / "Data Engineering Notes" / "Intro to PySpark"; sub.mkdir(parents=True)
+    pdf = sub / "1 - RDDs.pdf"; pdf.write_bytes(b"%PDF rdd")
+    raw = tmp_path / "raw"; raw.mkdir()
+    (raw / "pdf-rdd.md").write_text(
+        "---\nchannel: pdf\npdf_origin: 1 - RDDs.pdf\n"
+        f"source_path: {pdf}\ncorpus_ingested: true\n---\nx", encoding="utf-8")
+    monkeypatch.setattr(pc.cp, "DEDUP_DIRS", [raw])
+    rc = pc.cmd_file(pc._args(["file", "--dir", str(watch)]))
+    assert rc == 0
+    assert not pdf.exists()                                              # moved out of the subfolder
+    assert (watch / "_processed" / "Data Engineering Notes" / "Intro to PySpark" / "1 - RDDs.pdf").exists()
+
+
+def test_file_source_path_outside_watch_is_skipped(tmp_path, monkeypatch):
+    """A source_path escaping the watch dir is never moved (defense in depth)."""
+    watch = tmp_path / "PDFs"; watch.mkdir()
+    outside = tmp_path / "elsewhere"; outside.mkdir()
+    pdf = outside / "x.pdf"; pdf.write_bytes(b"%PDF")
+    raw = tmp_path / "raw"; raw.mkdir()
+    (raw / "pdf-x.md").write_text(
+        "---\nchannel: pdf\npdf_origin: x.pdf\n"
+        f"source_path: {pdf}\ncorpus_ingested: true\n---\nx", encoding="utf-8")
+    monkeypatch.setattr(pc.cp, "DEDUP_DIRS", [raw])
+    pc.cmd_file(pc._args(["file", "--dir", str(watch)]))
+    assert pdf.exists()                                                  # untouched
