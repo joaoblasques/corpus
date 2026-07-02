@@ -2011,8 +2011,10 @@ def test_run_youtube_quick_intake_parses_tally():
         "processed": 13})
 
     def fake_run(cmd, **kw):
-        # confirm it bounds the rescue budget (rate-limit safety)
+        # bounds the caption-rescue budget (rate-limit safety) AND uses Whisper by
+        # default so the nightly drains both transcript surfaces autonomously.
         assert "--rescue" in cmd and "--rescue-max" in cmd
+        assert "--whisper" in cmd
         return _make_proc(returncode=0, stdout='{"stub":"x","result":"ok:ai-engineering+transcript"}\n' + tally_line)
 
     out = scheduled_run.run_youtube_quick_intake(_subprocess_run=fake_run)

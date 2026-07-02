@@ -573,22 +573,25 @@ def run_github_reap(*, _subprocess_run=None) -> dict:
         return {"status": "failed", "error": str(exc)}
 
 
-def run_youtube_quick_intake(*, max_n: int = 40, rescue_max: int = 20,
+def run_youtube_quick_intake(*, max_n: int = 60, rescue_max: int = 25,
+                             whisper: bool = True, timeout_s: int = 5400,
                              _subprocess_run=None) -> dict:
     """Quick-intake tech YouTube stubs into lightweight Groq-summarized source pages.
 
     A native Python drain (bin/quick_ingest_youtube.py) — NOT the headless-claude ingest.
-    Captions rescue is bounded by rescue_max to stay under the ~44/window caption
-    rate-limit; Whisper is intentionally not used in the nightly (too slow for the run
-    window — a separate manual/background pass handles Whisper). Rate-limited or
-    unrescued stubs stay in the inbox for the next run, so the backlog drains steadily
-    over successive nights. Failure recorded, never raised — must not abort the run."""
+    Drains BOTH transcript surfaces per night to use their separate ~daily budgets:
+    captions first (fast/free, rate-limits ~15-20/window), then Whisper (audio->Groq,
+    ~80s/video, uncapped but yt-dlp throttles ~60/day). The tool self-regulates — if a
+    limit hasn't reset it skips and those stubs retry next night — so the backlog drains
+    steadily and hands-off (~50-60/night). Whisper's ~80s/video is why timeout_s is 90min.
+    Groq Whisper cost is modest (~$0.5/night). Failure recorded, never raised."""
     _run = _subprocess_run if _subprocess_run is not None else subprocess.run
     try:
-        proc = _run(
-            [sys.executable, str(BIN / "quick_ingest_youtube.py"),
-             "--rescue", "--rescue-max", str(rescue_max), "--max", str(max_n), "--sleep", "1"],
-            capture_output=True, text=True, timeout=1200)
+        cmd = [sys.executable, str(BIN / "quick_ingest_youtube.py"),
+               "--rescue", "--rescue-max", str(rescue_max), "--max", str(max_n), "--sleep", "1"]
+        if whisper:
+            cmd.append("--whisper")
+        proc = _run(cmd, capture_output=True, text=True, timeout=timeout_s)
         if proc.returncode != 0:
             return {"status": "failed", "ingested": 0, "error": (proc.stderr or "").strip()[:200]}
         tally = {}
@@ -600,8 +603,10 @@ def run_youtube_quick_intake(*, max_n: int = 40, rescue_max: int = 20,
                 except json.JSONDecodeError:
                     pass
         ingested = tally.get("ok_transcript", 0) + tally.get("ok_metaonly", 0)
+        skipped = (tally.get("skipped_ratelimit", 0) + tally.get("skipped_norescue", 0)
+                   + tally.get("skipped_whisperfail", 0))
         return {"status": "ok", "ingested": ingested, "rescued": tally.get("rescued", 0),
-                "skipped": tally.get("skipped_ratelimit", 0) + tally.get("skipped_norescue", 0)}
+                "skipped": skipped}
     except Exception as exc:  # noqa: BLE001
         return {"status": "failed", "ingested": 0, "error": str(exc)}
 
