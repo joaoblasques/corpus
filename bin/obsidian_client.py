@@ -160,6 +160,27 @@ def _under_vault(vault: Path, rel: str) -> bool:
 DEEP_REPORT_RE = re.compile(r"^00_Inbox/Clippings/youtube_raw/raw/watched/[^/]+/report\.md$")
 
 
+# Vault-origin paths that are never deleted/git-rm'd by the reaper — they're
+# permanent staging files the user keeps re-adding links to. Reap clears their
+# body back to empty instead of removing the file.
+PERSISTENT_STAGING_NOTES = {
+    "00_Inbox/Clippings/Articles to Process.md",
+}
+
+
+def _clear_vault_note(vault_root: Path, rel_path: str) -> bool:
+    """Empty a persistent staging note's body in place instead of deleting it.
+
+    Leaves the file with no content so it's git-diffable and ready for new
+    links. Returns True iff the file exists and was cleared.
+    """
+    target = vault_root / rel_path
+    if not target.exists():
+        return False
+    target.write_text("", encoding="utf-8")
+    return True
+
+
 def sibling_frames(vault_root: Path, rel_path: str) -> list:
     """For a claude-watch deep-analysis report.md, the sibling frame_*.jpg rel paths in
     its <slug>/ dir — so reaping the report reaps the whole folder (no orphan hero images).
@@ -178,11 +199,19 @@ def cmd_reap(args) -> int:
     vault = Path(args.vault) if args.vault else co.VAULT_ROOT
     r = co.reapable()
     t = {"notes_removed": 0, "frames_removed": 0, "urls_struck": 0,
-         "seeds_struck": 0, "not_removed": []}
+         "seeds_struck": 0, "notes_cleared": 0, "not_removed": []}
     for rel in r["vault_notes"]:
         if not _under_vault(vault, rel):
             continue
         if not (vault / rel).exists():
+            continue
+        if rel in PERSISTENT_STAGING_NOTES:
+            # Never delete a persistent staging note — clear its body in place so
+            # it stays as an empty file ready for the user's next batch of links.
+            if args.dry_run:
+                t["notes_cleared"] += 1
+            elif _clear_vault_note(vault, rel):
+                t["notes_cleared"] += 1
             continue
         frames = sibling_frames(vault, rel)   # [] unless a deep-analysis report.md
         if args.dry_run:
@@ -210,6 +239,7 @@ def cmd_reap(args) -> int:
         t["seeds_struck"] += 1
     note = ("tracked notes staged via git rm (review & commit in vault); "
             "untracked notes deleted from disk (recoverable via raw/notes/ + corpus); "
+            "persistent staging notes cleared in place, never deleted; "
             "deep-analysis report.md also stages its sibling frame_*.jpg (whole-folder reap)")
     if t["not_removed"]:
         note += (f"; {len(t['not_removed'])} note(s) NOT removed — git-tracked with "

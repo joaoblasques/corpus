@@ -370,3 +370,41 @@ def test_cmd_collect_capped_seed_increments_capped_tally(tmp_path, monkeypatch, 
     assert rc == 0
     out = json.loads(capsys.readouterr().out)
     assert out["capped"] == 1, f"expected capped=1, got {out}"
+
+
+def test_reap_clears_persistent_staging_note_in_place(tmp_path, monkeypatch, capsys):
+    """An exempted persistent-staging note is emptied in place, never deleted."""
+    import json
+    vault = tmp_path / "vault"
+    rel = "00_Inbox/Clippings/Articles to Process.md"
+    note = vault / rel
+    note.parent.mkdir(parents=True)
+    note.write_text("- https://a.com/x\n- https://b.com/y\n", encoding="utf-8")
+    monkeypatch.setattr(oc.co, "reapable",
+                        lambda *a, **k: {"vault_notes": [rel], "url_strikes": [], "seed_strikes": []})
+    called = []
+    monkeypatch.setattr(oc, "remove_vault_note", lambda v, r: (called.append(r), True)[1])
+    rc = oc.cmd_reap(oc._args(["reap", "--vault", str(vault)]))
+    assert rc == 0
+    assert note.exists()                 # never deleted
+    assert note.read_text() == ""        # body cleared in place
+    assert called == []                  # remove_vault_note not invoked for it
+    out = json.loads(capsys.readouterr().out)
+    assert out["notes_cleared"] == 1
+    assert out["notes_removed"] == 0
+
+
+def test_reap_dry_run_does_not_clear_persistent_staging_note(tmp_path, monkeypatch, capsys):
+    """Dry-run counts the clear but leaves the exempted note untouched."""
+    import json
+    vault = tmp_path / "vault"
+    rel = "00_Inbox/Clippings/Articles to Process.md"
+    note = vault / rel
+    note.parent.mkdir(parents=True)
+    note.write_text("keep me", encoding="utf-8")
+    monkeypatch.setattr(oc.co, "reapable",
+                        lambda *a, **k: {"vault_notes": [rel], "url_strikes": [], "seed_strikes": []})
+    oc.cmd_reap(oc._args(["reap", "--vault", str(vault), "--dry-run"]))
+    assert note.read_text() == "keep me"     # unchanged on dry-run
+    out = json.loads(capsys.readouterr().out)
+    assert out["notes_cleared"] == 1
