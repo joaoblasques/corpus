@@ -93,6 +93,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [[ai-engineering/claude-for-government|Claude for Government]] — entity · draft · FedRAMP High + IL5 deployment surfaces (API/Claude Gov/app); classified national-security mission support on AWS; compliance posture shared with finance vertical
 - [[ai-engineering/notebooklm|NotebookLM]] — entity · draft · Google's source-specific AI (Gemini-backed); output types (audio overview, mind map, quiz, flashcard, infographic); Claude+NotebookLM automation chains (autopilot brief, auto-refresh loop, competitive radar)
 - [[ai-engineering/chip-huyen|Chip Huyen]] — entity · stub · author AI Engineering (O'Reilly 2025); compute-scale thesis from AlexNet paper; GenAI hype cycle framing
+- [[ai-engineering/ollama|Ollama]] — entity · draft · local LLM serving + cloud models + web search + `ollama launch` agentic toolchains; Anthropic API compatibility for Claude Code
 
 ### Concepts (continued)
 - [[ai-engineering/claude-subagents|Claude Sub-Agents]] — concept · draft · .claude/agents/ files, isolated context, parallel execution, model routing, progressive disclosure, dynamic workflows (ultracode), security (disallowed_tools)

@@ -9,6 +9,9 @@ sources:
   - path: raw/youtube/youtube-9GVqKuTVANE-sql-data-warehouse-from-scratch-full-hands-on-data-engineeri.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/_inbox/web-etl-is-dead-b598202a.md
+    channel: web
+    ingested_at: 2026-07-02
 aliases:
   - ETL pipeline
   - ETL
@@ -19,11 +22,15 @@ aliases:
   - data pipeline
   - streaming ETL
   - batch ETL
+  - ECL
+  - Extract Contextualize Link
+  - ETL is dead
+  - Context Store
 tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-16
-updated: 2026-06-25
+updated: 2026-07-02
 ---
 
 # ETL Pipeline
@@ -127,5 +134,22 @@ See [[data-engineering/scd2|SCD2]] for the complete SCD2 implementation and join
 
 Why data management matters [^src2]: without a warehouse, analysts manually collect and transform data — slow (weeks/months), error-prone, and incompatible across teams. A warehouse with automated ETL produces consistent, fresh data accessible to all consumers and supports integrated multi-source reporting.
 
+## ETL is Dead (as a professional identity) — the ECL thesis
+
+Data Engineering Weekly (Jun 2026) argues "ETL is Dead" — not as a pipeline pattern but as a **professional identity** for data engineers [^src3]. The claim: the 3-step extract-transform-load mental model no longer describes what the DE role actually does, particularly given the shift from human-operated warehouses to agent-operated ones.
+
+The proposed replacement is **ECL — Extract, Contextualize, Link**:
+
+- **Extract** — unchanged from ETL: pull data from sources.
+- **Contextualize** — add meaning: "the relationship between fields and business concepts, the lineage of transformations, the quality thresholds — the context that makes data understandable and trustworthy." This replaces the narrow "transform" step with a broader semantic enrichment step.
+- **Link** — connect data assets to consumers (downstream systems, AI agents, analysts) through shared definitions: a **Context Store** of semantic definitions, lineage, and business-meaning metadata.
+
+The **Context Store** is the key addition: a semantic store that captures what data means, not just what it contains. Kimball's grain/business-process thinking survives ("Kimball's grain concept becomes even more important when you're building for agents"), but the physical shape of the warehouse changes: "data warehouses designed to be read by forklift operators — human forklift operators — may not be optimal for agents." Star schemas existed to make human querying simpler; agent-consumed warehouses may not need them.
+
+> "The consumer changed from forgiving to unforgiving." [^src3] Human analysts can ask follow-up questions and interpret ambiguity; AI agents cannot.
+
+The argument is directional, not prescriptive — ETL pipelines continue to exist; the professional identity and skill set of data engineers is what needs updating. See [[data-engineering/semantic-layer|Semantic Layer]] for the Context Store concept elaborated, and [[data-engineering/ai-impact-on-data-engineering|AI's Impact on Data Engineering]] for the Markdown Team framing of the same shift (context encoding as the new DE job 2).
+
 [^src1]: [What Is An ETL Pipeline? Examples, Tools (Updated 2026)](../../raw/web/what-is-an-etl-pipeline-examples-tools-updated-2026.md)
 [^src2]: [SQL Data Warehouse from Scratch | Full Hands-On Data Engineering Project (Data with Baraa)](../../raw/youtube/youtube-9GVqKuTVANE-sql-data-warehouse-from-scratch-full-hands-on-data-engineeri.md)
+[^src3]: [ETL is Dead (Data Engineering Weekly)](../../raw/_inbox/web-etl-is-dead-b598202a.md)

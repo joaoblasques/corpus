@@ -1829,3 +1829,26 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   - ingest: 27 ingested · 23 deferred · status=ok
 - lint:
   - 1 broken wikilinks · 63 broken citations · 1 orphans · 22 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+
+## [2026-07-02 00:00] ingest | ingest-auto batch — 25 ingested, 25 deferred
+- source: raw/_inbox/ (50 pre-specified files)
+- channel: web (all 50)
+- domain: ai-engineering (23 Ollama + 1 OpenClaw), data-engineering (ETL-is-Dead), mlops (vLLM TTS)
+- pages touched: [corpus/ai-engineering/openclaw.md, corpus/data-engineering/etl-pipeline.md, corpus/mlops/model-serving.md, corpus/ai-engineering/README.md]
+- new pages: [corpus/ai-engineering/ollama.md]
+- notes: ingest-auto run; 50 processed, 25 ingested, 25 deferred. Key ingests: Ollama entity page (new — 23 blog posts Jul 2025–Jun 2026: new app, cloud models, gpt-oss, model scheduling, web search API, ollama launch, OpenClaw integration, GGUF v0.30, MLX Apple Silicon GA, Anthropic API compat, subagents+web-search in Claude Code, DGX Spark benchmarks, Nemotron 3 Ultra); ECL framework (ETL-is-Dead → etl-pipeline.md); vLLM-Omni TTS engineering patterns (→ model-serving.md: stage separation, torch.compile whole-model, CFM batching, GPU-resident state, model-specific Triton kernel). Deferred: 13 paywalled dataexpert.io Substack stubs, newsletter digests, sweepstakes legal text, dbt stub, vLLM+Ollama blog index pages.
+
+## [2026-07-02T02:43] config | scheduled run
+- collectors:
+  - gmail: 4 collected · status=ok
+  - obsidian: 2 collected · status=ok
+  - pdf: 0 collected · status=ok
+  - youtube: 17 collected · status=ok
+  - github_discover: 0 collected · status=ok
+  - github: 0 collected · status=ok
+  - x: 0 collected · status=ok
+  - links_refetch: 0 refetched · status=ok
+- ingest:
+  - ingest: 25 ingested · 25 deferred · status=ok
+- lint:
+  - 1 broken wikilinks · 80 broken citations · 1 orphans · 22 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py

@@ -15,9 +15,22 @@ sources:
   - path: raw/email/email-2025-08-02-lecture-6-deploying-model-serving-endpoint-a-b-testing-on-da.md
     channel: email
     ingested_at: 2026-06-19
+  - path: raw/_inbox/web-engineering-tts-inference-in-vllm-omni-3d405d3c.md
+    channel: web
+    ingested_at: 2026-07-02
 aliases:
   - model serving
   - ml serving
+  - TTS inference
+  - vLLM-Omni
+  - text-to-speech serving
+  - Qwen3-TTS
+  - VoxCPM2
+  - Fish Speech
+  - Higgs Audio V3
+  - stage separation
+  - CUDA Graph serving
+  - torch.compile inference
   - model deployment
   - batch inference
   - real-time inference
@@ -33,7 +46,7 @@ tags:
   - corpus/mlops
   - concept
 created: 2026-06-19
-updated: 2026-06-19
+updated: 2026-07-02
 ---
 
 # Model Serving (Real-Time API + Batch Inference)
@@ -125,6 +138,45 @@ else:
 
 Both models (A and B, differing in config/hyperparameters) are trained, logged, and registered with the `latest-model` alias, then the wrapper is registered and deployed so requests are split deterministically and you can see which model served each prediction [^src4]. For serving-endpoint authentication, the course uses a PAT in this lecture but moves to Service Principal OAuth for production — see [[mlops/ci-cd-for-ml|CI/CD for ML]] [^src4].
 
+## TTS Inference Engineering (vLLM-Omni)
+
+Text-to-speech serving has different bottlenecks from text-only LLM inference. vLLM-Omni (Jun 2026) documents the engineering problems and solutions for four TTS models [^src5]:
+
+### Why TTS differs from LLM serving
+
+TTS systems are **multi-stage pipelines**: a Talker predicts codec tokens autoregressively (latency-bound), and a Code2Wav module reconstructs waveform audio in parallel (throughput-bound) [^src5]. If a scheduler treats both stages identically, Talker latency blocks Code2Wav, and Code2Wav parallelism is underused. Additionally:
+
+- **Streaming has a strict latency budget** — users expect the first audio packet within a few hundred milliseconds (TTFP = Time To First Audio Packet).
+- **Chunk size is a competing constraint** — small chunks reduce TTFP but hurt audio continuity across chunk boundaries; large chunks do the reverse.
+
+### Optimization techniques by model
+
+| Technique | Model(s) | Result |
+|---|---|---|
+| Stage separation + connector chunking | Qwen3-TTS, Higgs Audio V3 | Talker latency and Code2Wav throughput tuned independently |
+| Batched decode preprocessing | Qwen3-TTS | Python-loop overhead removed from c=64 decode hot path |
+| Whole-forward `torch.compile` | VoxCPM2 | Dynamo sees full 28-layer loop; cudaLaunchKernel count −71% |
+| CFM/LocDiT decode-tail batching | VoxCPM2 | Per-request tiny diffusion calls batched across requests |
+| GPU-resident decode state | Higgs Audio V3 | Multi-codebook state moved from Python dict to GPU tensors |
+| Model-specific Triton kernel (q_len=1) | Fish Speech S2 Pro | Bypasses generic paged/varlen overhead for pure-decode shape |
+
+### Key findings
+
+**Qwen3-TTS** (H20×2, c=64, voice cloning): audio throughput +61.5% (26.55 → 42.88 audio-s/s); P99 E2EL −49.4% (17.7s → 9.0s) [^src5]. Achieved by: decoupling codec_chunk_frames (streaming) from decode_chunk_frames (Code2Wav window), batching speaker-embedding mel/STFT on GPU, trailing_text buffer offset trick (avoid tensor allocation per step), CUDA Graph on Code2Wav [^src5].
+
+**VoxCPM2** (H20×1, c=64): audio throughput +172% (12.16 → 33.07 audio-s/s); request throughput +158.8% [^src5]. Key: wrapping the full `Model.forward` in `torch.compile(fullgraph=False)` — not per-layer — so Dynamo sees the whole 28-layer loop and PagedAttention graph breaks are minimised. Plus CFM/LocDiT decode-tail batching (scatter-gather over requests), VAE sliding-window decode (O(N²) → O(N)) [^src5].
+
+**Fish Speech S2 Pro** (H20, c=64): bottleneck is GPU-side q_len=1 attention, not Python preprocessing. Fix: model-specific Triton kernel for SlowAR decode attention — hard-coded to q_len=1, fp16/bf16, head_dim=128, block_size=16; short sequences use standard online softmax; long sequences use split-partial-combine. Dispatches via CPU upper-bound (seq_lens_cpu_upper_bound) to avoid GPU-to-CPU sync on sequence length [^src5].
+
+**Higgs Audio V3** (H20, c=16): 2.70× speedup vs baseline. Bottleneck is multi-codebook Python dict state machine (delay pattern, EOC ramp-down). Fix: GPU-resident batched tensors for per-request decode state; CUDA Graph adapted for dynamic batch shapes by making decode_mask uniform (all True) [^src5].
+
+### General principles extracted
+
+- **Profile before optimizing** — GPU utilization at 14% with c=64 signals the bottleneck is serving-path overhead (Python scheduling, small tensor allocation, kernel launch), not GPU FLOPs.
+- **Whole-model compile > per-layer compile** — per-layer torch.compile adds many Python↔compiled transitions; wrapping the full forward pass is usually better despite graph breaks.
+- **Avoid `.item()` in tight loops** — `.item()` on a 0-dim GPU tensor forces GPU→CPU sync; one utterance with 60 decode steps × 4 `.item()` calls = ~2,400 synchronizations. Replace with GPU-side `.copy_()`.
+- **O(N²) accumulate-and-re-decode is a trap** — any "accumulate all generated tokens then decode from scratch" pattern grows quadratically. Sliding-window decode is always O(N).
+
 ## Related
 
 - [[mlops/drift-detection|Drift Detection]] — monitoring a served model once it's in production
@@ -142,3 +194,4 @@ Both models (A and B, differing in config/hyperparameters) are trained, logged, 
 [^src2]: [Batch Inference with Airflow: Scaling Your Spam Classifier (Vivek Bharti, Practical ML Series Part 4)](../../raw/email/email-2025-07-20-batch-inference-with-airflow-scaling-your-spam-classifier.md)
 [^src3]: [Model serving architectures (Marvelous MLOps, Lecture 5)](../../raw/email/email-2025-08-01-model-serving-architectures.md)
 [^src4]: [Deploying Model Serving Endpoint & A/B Testing on Databricks (Marvelous MLOps, Lecture 6)](../../raw/email/email-2025-08-02-lecture-6-deploying-model-serving-endpoint-a-b-testing-on-da.md)
+[^src5]: [Engineering TTS Inference in vLLM-Omni (vLLM blog, Jun 23 2026)](../../raw/_inbox/web-engineering-tts-inference-in-vllm-omni-3d405d3c.md)

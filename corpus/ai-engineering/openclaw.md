@@ -15,6 +15,9 @@ sources:
   - path: raw/youtube/youtube-fgr6Sm-dmmM-i-replaced-openclaw-with-perplexity-computer.md
     channel: youtube
     ingested_at: 2026-06-27
+  - path: raw/_inbox/web-openclaw-ollama-blog-ba2f528e.md
+    channel: web
+    ingested_at: 2026-07-02
 aliases:
   - OpenClaw
   - open claw
@@ -26,7 +29,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-06-26
-updated: 2026-06-26
+updated: 2026-07-02
 ---
 
 # OpenClaw
@@ -88,11 +91,30 @@ Practitioners who switched from OpenClaw to [[ai-engineering/hermes|Hermes]] (a 
 
 > Note: Hermes-vs-OpenClaw comparisons are from Hermes practitioners, not OpenClaw maintainers.
 
+## Quick setup via ollama launch (Feb 2026)
+
+Ollama published a one-command setup for OpenClaw on their blog [^src5]:
+
+```bash
+ollama launch openclaw
+```
+
+This provisions OpenClaw with Ollama as the model server. Recommended models by role [^src5]:
+
+| Role | Recommended model |
+|---|---|
+| General assistant | llama3.1:8b |
+| Code tasks | qwen2.5-coder:7b |
+| Vision tasks | llava:13b |
+
+The `ollama launch` family of commands (also available for Claude Code, Codex, OpenCode, Droid) each open a **5-hour cloud session window** — enough for extended agentic coding runs. See [[ai-engineering/ollama|Ollama]] for the full `ollama launch` feature set.
+
 ## Relationship to other tools
 
 - **[[ai-engineering/paperclip|Paperclip]]** — a project-management layer that connects and orchestrates existing OpenClaw agents (and can create new ones) [^src2].
 - **[[ai-engineering/claude-cowork|Claude Cowork]]** — Anthropic's local-agent product; "a lot safer and a lot easier to use," no-code, but you "get locked into Anthropic's system" with less customization [^src1] [20:09](../../raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md#t=20:09). Many practitioners run OpenClaw and Cowork side by side for different use cases [^src1].
 - **[[ai-engineering/perplexity-computer|Perplexity Computer]]** — cloud-native alternative; better for one-off complex tasks; see comparison above [^src4].
+- **[[ai-engineering/ollama|Ollama]]** — model-serving backend; `ollama launch openclaw` is the fastest setup path [^src5].
 
 ## See also
 
@@ -108,3 +130,4 @@ Practitioners who switched from OpenClaw to [[ai-engineering/hermes|Hermes]] (a 
 [^src2]: [Paperclip: Agent Collab Made Easy](../../raw/youtube/youtube-iRew6HOY0ho-paperclip-agent-collab-made-easy.md) — The Next New Thing, YouTube
 [^src3]: [How AI agents & Claude skills work (Clearly Explained)](../../raw/youtube/youtube-S_oN3vlzpMw-how-ai-agents-claude-skills-work-clearly-explained.md) — Greg Isenberg × Ras Mic, YouTube
 [^src4]: [I Replaced OpenClaw with Perplexity Computer](../../raw/youtube/youtube-fgr6Sm-dmmM-i-replaced-openclaw-with-perplexity-computer.md) — Tech With Tim, YouTube
+[^src5]: [OpenClaw on Ollama](../../raw/_inbox/web-openclaw-ollama-blog-ba2f528e.md) — Ollama blog, Feb 1 2026
