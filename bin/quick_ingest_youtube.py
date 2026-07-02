@@ -211,7 +211,7 @@ def iter_tech_stubs(tech: set[str], ready_only: bool = False):
 
 
 def process_stub(f: Path, text: str, playlist: str, *, model: str, rescue: bool,
-                 today: str, dry_run: bool) -> str:
+                 today: str, dry_run: bool, whisper: bool = False) -> str:
     vid = _front(text, "youtube_video_id") or ""
     if not vid:
         return "no_id"
@@ -219,20 +219,29 @@ def process_stub(f: Path, text: str, playlist: str, *, model: str, rescue: bool,
     body = text.split("---", 2)[-1]
     has_transcript = tstatus == "ok" and "_No transcript available._" not in body
 
-    # A blocked stub might be rate-limited (retryable) OR genuinely caption-less
-    # (permanent). Only a rescue attempt can tell them apart, so NEVER write a
-    # permanent metadata-only page for a blocked stub on a guess:
-    #   - no rescue budget          -> skip (leave in inbox for a rescue window)
-    #   - rescue -> captions ok      -> fold transcript in, summarize
-    #   - rescue -> still `blocked`  -> rate-limited: skip (retry a future window)
-    #   - rescue -> none_found/disabled -> caption-less: metadata-only page (permanent)
-    if not has_transcript and tstatus in ("blocked", "none"):
+    # Acquire a transcript for any stub that lacks one. Captions first (fast, free);
+    # if they miss for ANY reason, Whisper (audio->Groq) is a different, uncapped surface
+    # that transcribes the audio regardless of caption availability. Never write a
+    # permanent metadata-only page for a rate-limited stub on a guess:
+    #   - no rescue budget           -> skip (leave in inbox for a rescue window)
+    #   - captions ok                -> fold transcript in, summarize
+    #   - captions miss + whisper on -> Whisper the audio (or skipped_whisperfail)
+    #   - captions `blocked` no whisper -> rate-limited: skip (retry a future window)
+    #   - captions none_found/disabled, no whisper -> caption-less: metadata-only page
+    if not has_transcript:
         if not rescue:
             return "skipped_norescue"
         tbody, tst = yc._caption_transcript(vid)
         if tst == "ok" and tbody:
             body = "\n\n" + tbody
             has_transcript, tstatus = True, "ok"
+        elif whisper:
+            wbody = yc._whisper_transcript(vid)
+            if wbody:
+                body = "\n\n" + wbody
+                has_transcript, tstatus = True, "ok"
+            else:
+                return "skipped_whisperfail"
         elif tst == "blocked":
             return "skipped_ratelimit"
 
@@ -295,6 +304,9 @@ def main(argv=None) -> int:
     ap.add_argument("--model", default="llama-3.1-8b-instant", help="Groq model for summaries")
     ap.add_argument("--rescue", action="store_true",
                     help="rescue blocked-stub transcripts via captions (paced by --rescue-max)")
+    ap.add_argument("--whisper", action="store_true",
+                    help="when captions are rate-limited, fall back to Whisper (audio->Groq, "
+                         "uncapped but ~80s/video + Groq cost). Implies unlimited rescue.")
     ap.add_argument("--rescue-max", type=int, default=30,
                     help="cap caption rescues this run (rate-limit budget)")
     ap.add_argument("--sleep", type=float, default=1.0,
@@ -308,18 +320,20 @@ def main(argv=None) -> int:
     tech = tech_playlists()
     today = datetime.date.today().isoformat()
     tally = {"ok_transcript": 0, "ok_metaonly": 0, "no_id": 0, "rescued": 0,
-             "skipped_ratelimit": 0, "skipped_norescue": 0}
+             "skipped_ratelimit": 0, "skipped_norescue": 0, "skipped_whisperfail": 0}
+    # --whisper implies rescue is on and uncapped (Whisper bypasses the caption cap).
+    rescue_on = args.rescue or args.whisper
+    rescue_cap = 10**9 if args.whisper else args.rescue_max
     rescued = 0
     processed = 0
     consec_ratelimit = 0
     for f, text, pl in iter_tech_stubs(tech, ready_only=args.ready_only):
         if args.max and processed >= args.max:
             break
-        # honor rescue budget: only allow rescue while under the cap
-        allow_rescue = args.rescue and rescued < args.rescue_max
+        allow_rescue = rescue_on and rescued < rescue_cap
         was_blocked = (_front(text, "transcript_status") or "") == "blocked"
         res = process_stub(f, text, pl, model=args.model, rescue=allow_rescue,
-                           today=today, dry_run=args.dry_run)
+                           today=today, dry_run=args.dry_run, whisper=args.whisper)
         processed += 1
         if res.startswith("ok:"):
             consec_ratelimit = 0
@@ -329,17 +343,18 @@ def main(argv=None) -> int:
                     rescued += 1
             else:
                 tally["ok_metaonly"] += 1
+        elif res in tally:
+            tally[res] += 1
         elif res == "no_id":
             tally["no_id"] += 1
-        elif res == "skipped_ratelimit":
-            tally["skipped_ratelimit"] += 1
+        if res == "skipped_ratelimit":
             consec_ratelimit += 1
-        elif res == "skipped_norescue":
-            tally["skipped_norescue"] += 1
+        else:
+            consec_ratelimit = 0
         print(json.dumps({"stub": f.name, "result": res}), flush=True)
-        # the caption API is IP-wide rate-limited; once it starts blocking, every
-        # further rescue in this window will too — stop churning after 3 in a row.
-        if consec_ratelimit >= 3:
+        # captions are IP-rate-limited; without a Whisper fallback, once blocking starts
+        # every further caption rescue fails too — stop churning after 3 in a row.
+        if consec_ratelimit >= 3 and not args.whisper:
             print(json.dumps({"note": "caption rate-limit hit — stopping (retry next window)"}),
                   flush=True)
             break
