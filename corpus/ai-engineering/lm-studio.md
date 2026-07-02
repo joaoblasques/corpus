@@ -6,10 +6,31 @@ sources:
   - path: raw/web/web-improving-lm-studio-s-mlx-engine-for-agentic-workflows-bef5274a.md
     channel: web
     ingested_at: 2026-07-02
+  - path: raw/web/web-introducing-lm-studio-0-4-0-b88bc367.md
+    channel: web
+    ingested_at: 2026-07-02
+  - path: raw/web/web-use-your-lm-studio-models-in-claude-code-b135bf20.md
+    channel: web
+    ingested_at: 2026-07-02
+  - path: raw/web/web-open-responses-with-local-models-via-lm-studio-7f2e59f2.md
+    channel: web
+    ingested_at: 2026-07-02
+  - path: raw/web/web-locally-ai-joins-lm-studio-5feeb57f.md
+    channel: web
+    ingested_at: 2026-07-02
+  - path: raw/web/web-run-your-largest-local-models-from-your-iphone-eede015a.md
+    channel: web
+    ingested_at: 2026-07-02
+  - path: raw/web/web-run-open-models-on-nvidia-dgx-station-gb300-cf971dfe.md
+    channel: web
+    ingested_at: 2026-07-02
 aliases:
   - LM Studio
   - lmstudio
   - mlx-engine
+  - llmster
+  - Locally
+  - LM Link
 tags:
   - corpus/ai-engineering
   - entity
@@ -19,7 +40,7 @@ updated: 2026-07-02
 
 # LM Studio
 
-**TL;DR.** LM Studio is a local LLM app that ships **mlx-engine**, an MIT-licensed inference engine optimized for Apple Silicon (built on `mlx-lm`/`mlx-vlm`, Apple's MLX ML library). It exposes an Anthropic-compatible API (so [[ai-engineering/claude-code|Claude Code]] can run against any local model), and mlx-engine v1.8.5 added disk-backed KV-cache checkpointing plus continuous batching for vision-model requests, aimed at repeated long-context agentic workflows [^src1].
+**TL;DR.** LM Studio is a local LLM app that ships **mlx-engine**, an MIT-licensed inference engine optimized for Apple Silicon (built on `mlx-lm`/`mlx-vlm`, Apple's MLX ML library). It exposes an Anthropic-compatible API (so [[ai-engineering/claude-code|Claude Code]] can run against any local model), and mlx-engine v1.8.5 added disk-backed KV-cache checkpointing plus continuous batching for vision-model requests, aimed at repeated long-context agentic workflows [^src1]. Version 0.4.0 introduced **llmster**, a headless daemon that decouples the LM Studio core from its GUI for server/CI/cloud deployment, plus parallel request batching and a stateful REST API [^src2]. Version 0.4.1 added a native Anthropic-compatible `/v1/messages` endpoint for direct [[ai-engineering/claude-code|Claude Code]] use [^src3], and 0.3.39 added support for the provider-agnostic **Open Responses** spec (logprobs, cached-token stats, remote image URLs) [^src4]. LM Studio has also expanded beyond desktop: it acquired the **Locally** mobile app to bring a native mobile surface [^src5], and shipped **LM Link**, an end-to-end-encrypted remote-connection feature letting a phone or laptop drive models running on a larger machine — including an NVIDIA DGX Station GB300 [^src6][^src7].
 
 ## The problem: KV cache isn't arbitrarily rewindable
 
@@ -48,14 +69,59 @@ mlx-engine now streams KV cache to a disk-writer backend at every 256-token boun
 
 [^src1]
 
+## LM Studio 0.4.0: llmster daemon + parallel requests + stateful API
+
+0.4.0 rearchitected LM Studio to separate the GUI from the core, producing **llmster** — a standalone daemon deployable headless on Linux boxes, cloud servers, GPU rigs, or Google Colab (install via `curl -fsSL https://lmstudio.ai/install.sh | bash`) [^src2]:
+
+- **Parallel requests with continuous batching**: the llama.cpp engine graduated to v2.0.0, adding concurrent-inference support to the same model. New load options: **Max Concurrent Predictions** (queues requests beyond the limit) and **Unified KV Cache** (default on; preallocated resources aren't hard-partitioned per request, so request sizes can vary). Default parallel slots: 4. Not yet in the MLX engine [^src2].
+- **New stateful REST endpoint `/v1/chat`**: unlike stateless chat APIs, a request returns a `response_id`; a follow-up passes `previous_response_id` to continue the conversation, keeping requests small for multi-step workflows. Responses include token/speed/TTFT stats and can invoke locally configured MCPs, gated by **permission keys** managed under Settings > Server [^src2].
+- Also shipped: chat export (PDF/markdown/text), Split View (side-by-side chat panes), Developer Mode (merges the old Developer/Power User/User modes), and in-app docs [^src2].
+
+## LM Studio 0.4.1: native Anthropic `/v1/messages` endpoint for Claude Code
+
+0.4.1 added a first-party Anthropic-compatible `/v1/messages` endpoint, meaning any Anthropic-API tool — including Claude Code — can point at a local model by changing only the base URL [^src3]:
+
+```
+lms server start --port 1234
+export ANTHROPIC_BASE_URL=http://localhost:1234
+export ANTHROPIC_AUTH_TOKEN=lmstudio
+claude --model openai/gpt-oss-20b
+```
+
+- Full `/v1/messages` support: streaming (SSE `message_start`/`content_block_delta`/`message_stop`), and tool use/function calling out of the box [^src3].
+- Works with GGUF and MLX local models; LM Studio recommends starting Claude Code's context size at ≥25K tokens given how context-heavy the agent is [^src3].
+- The Anthropic Python SDK works unmodified against the endpoint by overriding `base_url` and `api_key` [^src3].
+
+## Open Responses support (0.3.39)
+
+LM Studio partnered with OpenAI to support **Open Responses**, an open-source, provider-agnostic specification built on the OpenAI Responses API — a shared schema/tooling layer for calling LLMs, streaming, and composing agentic workflows independent of where the model runs [^src4]. LM Studio's existing `/v1/responses` compatibility endpoint (added in October) became Open-Responses-compliant, adding:
+
+- **Logprobs**: per-token log-probabilities plus candidate tokens (`top_logprobs`), showing model confidence in the chosen token.
+- **Token-caching stats**: `usage.input_tokens_details.cached_tokens` reports how many input tokens were reused from a prior turn via `previous_response_id` — token caching is on by default and always reported.
+- **Remote image URLs**: vision-enabled models can take a hosted `image_url` directly in `input_image` content blocks, rather than requiring a local file [^src4].
+
+## Mobile + remote access: Locally acquisition and LM Link
+
+LM Studio acquired **Locally AI**, an app for running local models on iPhone/iPad/Mac, bringing its creator (Adrien Grondin) onto the LM Studio team to lead native mobile work [^src5]. The Locally app is now also the vehicle for **LM Link**: a feature that securely (end-to-end encrypted) connects a user's own LM-Studio-running devices so a phone can use models loaded on a more powerful machine at home or work, with all chats saved locally on-device. LM Link on iPhone/iPad is currently limited to a user's own devices; group links (sharing to team members) are in development [^src6].
+
+## Enterprise/on-prem: NVIDIA DGX Station GB300
+
+LM Studio collaborated with NVIDIA on DGX Station's general-availability launch — a deskside AI supercomputer built on the GB300 Blackwell Ultra Superchip, with 748GB of coherent memory and up to 20 petaFLOPS of AI compute [^src7]. The recommended on-prem pattern pairs **llmster** (headless daemon) with **LM Link** so teams can securely share frontier open models from the Station even across networks; models downloaded to the Station become available to all linked devices for inference (e.g., driving `gpt-oss-120b` from a laptop while the Station executes it). LM Studio's SDKs (`lmstudio-js`, `lmstudio-python`), native API, and Anthropic/OpenAI-compatible APIs all work against a Station-hosted server [^src7].
+
 ## Related
 
 - [[ai-engineering/ollama|Ollama]] — competing local-model serving tool; also ships Anthropic API compatibility for Claude Code and an MLX Apple Silicon backend
 - [[ai-engineering/claude-code|Claude Code]] — the agentic coding client LM Studio's Anthropic-compatible API and KV-cache rewind fix specifically target
-- [[ai-engineering/vllm|vLLM]] — contrasting production/datacenter serving engine also solving agentic-workload KV-cache reuse (via distributed Mooncake Store rather than local disk)
+- [[ai-engineering/vllm|vLLM]] — contrasting production/datacenter serving engine also solving agentic-workload KV-cache reuse (via distributed Mooncake Store rather than local disk); also targets NVIDIA DGX Spark, a smaller desk-side single-GPU sibling of the DGX Station GB300
 - [[ai-engineering/quantization|Quantization]] — MLX 4-bit quantized model used in the benchmarks
 - [[ai-engineering/README|AI Engineering hub]]
 
 ---
 
 [^src1]: [Improving LM Studio's MLX Engine for Agentic Workflows](../../raw/web/web-improving-lm-studio-s-mlx-engine-for-agentic-workflows-bef5274a.md) — LM Studio blog, 2026-06-28
+[^src2]: [Introducing LM Studio 0.4.0](../../raw/web/web-introducing-lm-studio-0-4-0-b88bc367.md) — LM Studio blog
+[^src3]: [Use your LM Studio Models in Claude Code](../../raw/web/web-use-your-lm-studio-models-in-claude-code-b135bf20.md) — LM Studio blog
+[^src4]: [Open Responses with local models via LM Studio](../../raw/web/web-open-responses-with-local-models-via-lm-studio-7f2e59f2.md) — LM Studio blog
+[^src5]: [Locally AI joins LM Studio](../../raw/web/web-locally-ai-joins-lm-studio-5feeb57f.md) — LM Studio blog
+[^src6]: [Run (your largest) local models from your iPhone](../../raw/web/web-run-your-largest-local-models-from-your-iphone-eede015a.md) — LM Studio blog
+[^src7]: [Run open models on NVIDIA DGX Station GB300](../../raw/web/web-run-open-models-on-nvidia-dgx-station-gb300-cf971dfe.md) — LM Studio blog
