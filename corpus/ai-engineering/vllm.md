@@ -24,6 +24,15 @@ sources:
   - path: raw/web/web-accelerating-laguna-xs-2-inference-with-vllm-speculators-and-afda11cd.md
     channel: web
     ingested_at: 2026-07-02
+  - path: raw/web/web-native-rl-apis-in-vllm-a83f1153.md
+    channel: web
+    ingested_at: 2026-07-02
+  - path: raw/web/web-vllm-x-novita-ai-pegaflow-for-production-grade-external-kv-c-4b8a8880.md
+    channel: web
+    ingested_at: 2026-07-02
+  - path: raw/web/web-elastic-expert-parallelism-in-vllm-e7f766b6.md
+    channel: web
+    ingested_at: 2026-07-02
 aliases:
   - vLLM
   - vllm
