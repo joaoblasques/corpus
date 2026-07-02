@@ -35,18 +35,24 @@ CORPUS = ROOT / "corpus"
 INDEX = CORPUS / "_index.md"
 PLAYLISTS_CFG = BIN / "youtube_playlists.yaml"
 
-DOMAINS = ["ai-engineering", "data-engineering", "software-engineering",
-           "mlops", "blockchain", "trading"]
+# The corpus's real domains (keep in sync with corpus/_domains.md + the corpus/ folders).
+DOMAINS = ["ai-engineering", "data-engineering", "software-engineering", "mlops",
+           "ai-business", "productivity", "blockchain", "trading"]
 
 # Keyword fallback routing (used when there is no transcript to send to the LLM).
 _KW_DOMAIN = [
+    ("ai-business", ["business", "marketing", "sales", "startup", "freelanc", "agency",
+                     "affiliate", "revenue", "passive income", "side hustle", "money",
+                     "saas", "appsumo", "customers", "growth"]),
+    ("productivity", ["productivity", "workflow", "habit", "note-taking", "second brain",
+                      "2nd brain", "obsidian", "getting things done", "focus", "tutorial phase"]),
     ("ai-engineering", ["ai ", "agent", "claude", "llm", "prompt", "machine learning",
-                        "notebooklm", "agentic", "wiki", "2nd brain"]),
+                        "notebooklm", "agentic", "wiki"]),
     ("data-engineering", ["data analy", "data engineering", "databricks", "data "]),
     ("mlops", ["aws", "azure", "gcp", "cloud", "devops", "linux", "mac ", "dev setup", "docker"]),
-    ("trading", ["trading", "btc", "invest", "finance", "passive income", "game theory"]),
+    ("trading", ["trading", "btc", "invest", "finance", "game theory"]),
     ("software-engineering", ["python", "javascript", "go", "git", "vim", "api",
-                              "system design", "software", "tui", "obsidian", "maths", "math"]),
+                              "system design", "software", "tui", "maths", "math"]),
 ]
 
 

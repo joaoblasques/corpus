@@ -194,10 +194,22 @@ def process(f: Path, text: str, ch: str, *, backend: str, model: str, today: str
     url = _front(text, "source_url") or _front(text, "url") or ""
     origin = _front(text, "source") or ch or "web"
     fb = qy._fallback_domain(title + " " + origin)
-    try:
-        info = _llm_summary(title, origin, _plain(body), backend=backend, model=model,
-                            fallback_domain=fb)
-    except Exception:
+    info = None
+    # Try the requested backend; if OpenRouter's free model is rate-limited (frequent),
+    # fall back to Groq's free tier so the drain stays reliable AND free.
+    # (backend, model, attempts): try OpenRouter free briefly (fail fast on 429),
+    # then fall back to Groq free with more retries for reliability.
+    plan = [(backend, model, 2)]
+    if backend == "openrouter":
+        plan.append(("groq", "llama-3.1-8b-instant", 4))
+    for bk, md, att in plan:
+        try:
+            info = _llm_summary(title, origin, _plain(body), backend=bk, model=md,
+                                fallback_domain=fb, attempts=att)
+            break
+        except Exception:
+            continue
+    if info is None:
         return "llm_fail"
     slug = qy._slug(title, re.sub(r"[^a-f0-9]", "", f.stem.split("-")[-1])[:8] or "doc")
     channel_dir = "web" if ch == "web" else ("notes" if ch == "notes" else (ch or "web"))
