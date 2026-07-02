@@ -89,16 +89,49 @@ vLLM also targets **NVIDIA DGX Spark**, a desk-side GB10 Grace Blackwell system 
 - **Cold-start / JIT warmup** — first request after `vllm serve` boots triggers Inductor/FlashInfer JIT codegen (~25s in one Nemotron-3-Super setup); production setups should fire a warmup ping at startup rather than exposing this latency to the first real user request [^src5].
 - **Measured example** (Nemotron-3-Super-120B-A12B-NVFP4 on one Spark): decode throughput held in a narrow 22.7–23.7 tok/s band across scenarios regardless of prompt length; prefill scaled from ~140 tok/s (58-token prompt) to ~1,884 tok/s (7,234-token prompt) as prompt length amortized per-request overhead [^src5]. Recipe-specific numbers, not a universal DGX Spark ceiling.
 
+## Native RL post-training APIs
+
+vLLM introduces standardized weight-syncing and pause/resume APIs so RL frameworks no longer need custom worker extensions, addressing duplicated effort and version-locked implementations across frameworks [^src8].
+
+- **Weight transfer**: four-phase pluggable-backend API — `init_weight_transfer_engine` (once, before training), `start_weight_update` (per step, prepares workers), `update_weights` (invokable multiple times for chunked transfers), `finish_weight_update` (post-processing, e.g. quantization). Backends: NCCL broadcast (cross-GPU) and CUDA IPC (same-device); both support packed-tensor transfer to cut serialization overhead [^src8].
+- **Pause/resume for async RL**: `pause_generation`/`resume_generation` (also `POST /pause`/`/resume`) gained a third **keep** mode alongside existing `abort` and `wait` modes — pauses in-flight requests without discarding them (scheduler stops, state preserved), the only mode that keeps client retries unnecessary *and* allows async weight updates [^src8].
+- **DPEP deadlock fix**: async RL in data-parallel + expert-parallel (DPEP) deployments previously deadlocked because pause state lived in the `AsyncLLM` entrypoint while DP-wave coordination happened between `EngineCore` and the `DPCoordinator`. Fixed by (1) moving pause logic into `EngineCore`/the scheduler, and (2) a two-phase pause: local pause (an engine stops scheduling but still answers `START_DP_WAVE`) then global pause (all ranks confirm local-pause via periodic all-reduce before fully stopping) [^src8].
+- **Validated at scale**: the Prime-RL team ran fully-async RL on zai-org/GLM-5.1-FP8 across a P/D-disaggregated, DPEP32, 16×8×H200-node deployment (32 GPUs total) with 1TB/node CPU KV-cache offload and cache-aware sticky routing via vllm-router; stable over 100+ training steps with a growing eval curve [^src8]. See also [[ai-engineering/vime|vime]], the vLLM-ecosystem RL post-training framework this API standardizes for.
+
+## External KV cache: PegaFlow (with Novita AI)
+
+**PegaFlow** moves KV cache out of the vLLM worker process into a standalone Rust daemon, integrated via vLLM's existing `kv_transfer_config` external-connector path (no vLLM source changes or fork required) [^src9].
+
+- **Architecture**: one PegaFlow server per host owns the KV pool, SSD cache, RDMA resources, and indexing state; vLLM workers connect via CUDA IPC (data path) and gRPC (local control path). A three-level hierarchy spans pinned local DRAM (L1) → RDMA-accessible remote DRAM (L2) → local SSD via `io_uring` (L3) [^src9].
+- **Faster restarts**: with a pre-warmed 500 GiB host KV pool already owned by PegaFlow, vLLM reached ready state in 33.2s vs. 71.4s when vLLM itself owned the pool — a 2.15x startup speedup (measured on 8×RTX 5090, Qwen3-8B TP8, dummy weights/eager mode) [^src9].
+- **Shared-pool throughput**: eight Qwen3-8B instances sharing one 500 GiB PegaFlow pool hit 11.97 req/s vs. 7.68 req/s for eight isolated 62.5 GiB pools — 56% higher throughput, 36% lower mean TTFT, 4.4x higher cache-hit rate [^src9].
+- **MLA dedup**: for DeepSeek-V3.2 MLA with TP8, storing the logical KV once (vs. once per TP rank) delivered 72% higher throughput and a hit rate of 97.23% vs. 65.18% [^src9].
+- **Cross-node RDMA**: sustained 194 GB/s average remote-read throughput (250 GB/s P99) for large (≥1GiB) prefix pulls over 8×400Gbps RDMA NICs/node — fast enough that a 24 GiB remote KV segment (~100ms to fetch) can substitute for seconds of prefill recomputation [^src9].
+- Ships as `novitalabs/pegaflow` on GitHub; requires `vllm>=0.20.0` [^src9].
+
+## Elastic Expert Parallelism (Elastic EP)
+
+vLLM's expert-parallel (EP) group size was previously fixed at deployment start; **Elastic EP** lets a running MoE deployment reconfigure its data-parallel (DP) worker count at runtime via `POST /scale_elastic_ep`, redistributing experts with minimal serving interruption [^src10]. See [[ai-engineering/mixture-of-experts|Mixture of Experts]] for the EP/DP-attention background this builds on.
+
+- **Scale-up flow**: new DP ranks initialize with placeholder weights; existing ranks build *standby* communication groups (via `StatelessGroupCoordinator`, independent of PyTorch's global `WORLD` state) spanning the target rank set while the old topology keeps serving; non-expert weights transfer over standby groups; then all ranks execute a coordinated **switch** (release CUDA graphs, promote standby → active groups, destroy old groups, re-warm); only after the switch does an EPLB reshuffle move expert weights onto the new ranks [^src10].
+- **Scale-down** runs EPLB reshuffle *first* (departing ranks' expert weights must migrate off before those ranks are removed), then follows the same teardown pattern [^src10].
+- **Cross-rank coordination**: because DP engine cores run asynchronously, a two-stage barrier (timeout-based local barrier → untimed global barrier) prevents a race where some ranks proceed to reconfiguration while others are mid-forward-pass, which would otherwise deadlock the group [^src10].
+- **Fault-tolerance building block**: the same scale-down/scale-up path is the mechanism for removing a failed rank, redistributing its experts, and later adding replacement capacity — part of vLLM's broader fault-tolerance RFC (#30112) [^src10]. **NIXL EP** (an alternate EP communication backend) makes rank add/remove incremental via `connect_ranks()`/`disconnect_ranks()` instead of full connection teardown, and adds EP-side failure detection/recovery [^src10].
+- **Current scope limits**: `tensor_parallel_size=1` only, `api_server_count=1` only, no DBO or MoE draft/drafter models yet, and scaling depends on the Ray DP backend [^src10].
+
 ## Learning resource: DeepLearning.AI course
 
 Red Hat and Andrew Ng's DeepLearning.AI published **"Fast & Efficient LLM Inference with vLLM"** (Cedric Clyburn, Red Hat; ~1.5 hours, 9 lessons, 3 hands-on labs), covering the full compress → serve → benchmark lifecycle: quantizing a model with LLM Compressor, serving it with vLLM (observing continuous batching and prefix caching via live metrics), and benchmarking throughput/latency with GuideLLM plus quality validation with lm-eval [^src6].
 
 ## Related
 
-- [[ai-engineering/mixture-of-experts|Mixture of Experts]] — MoE execution is a first-class vLLM serving concern (expert parallelism, quantized MoE backends)
+- [[ai-engineering/mixture-of-experts|Mixture of Experts]] — MoE execution is a first-class vLLM serving concern (expert parallelism, Elastic EP runtime scaling, quantized MoE backends)
 - [[ai-engineering/quantization|Quantization]] — AutoRound/NVFP4/LLM Compressor checkpoint quantization, used across DGX Spark, Nemotron 3 Ultra, and Laguna XS.2 deployments
 - [[ai-engineering/nemotron-3-ultra|Nemotron 3 Ultra]] — hybrid Transformer-Mamba MoE agentic reasoning model with vLLM day-0 support
 - [[ai-engineering/laguna-xs2|Laguna XS.2]] — Poolside's agentic-coding MoE model with a DFlash speculative decoder
+- [[ai-engineering/speculative-decoding|Speculative Decoding]] — draft/verify latency-reduction technique underlying vLLM's spec-decode data path (Eagle 3/3.1, DFlash)
+- [[ai-engineering/vime|vime]] — RL post-training framework consuming vLLM's native weight-sync/pause-resume RL APIs
+- [[ai-engineering/vllm-semantic-router|vLLM Semantic Router]] — request-routing control plane sitting in front of vLLM
 - [[ai-engineering/ollama|Ollama]] — contrasting local-first single-user serving tool vs. vLLM's production/datacenter serving focus
 - [[ai-engineering/README|AI Engineering hub]]
 
