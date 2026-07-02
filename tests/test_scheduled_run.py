@@ -34,6 +34,22 @@ def _make_proc(returncode=0, stdout="", stderr=""):
     return p
 
 
+@pytest.fixture(autouse=True)
+def _stub_quick_intake(request, monkeypatch):
+    """Full-run integration tests call main(["run"]) and mock collectors/ingest but not
+    the native quick-intake steps — stub those so tests never hit the network, spawn
+    subprocesses, or mutate the real corpus. The direct unit tests of these functions
+    (named *quick_intake*) opt out so they exercise the real implementation."""
+    if "quick_intake" in request.node.name:
+        return
+    monkeypatch.setattr(scheduled_run, "run_youtube_quick_intake",
+                        lambda **k: {"status": "ok", "ingested": 0, "rescued": 0, "skipped": 0},
+                        raising=False)
+    monkeypatch.setattr(scheduled_run, "run_docs_quick_intake",
+                        lambda **k: {"status": "ok", "ingested": 0, "skipped_thin": 0, "llm_fail": 0},
+                        raising=False)
+
+
 # ---------------------------------------------------------------------------
 # Lock primitive tests
 # ---------------------------------------------------------------------------
@@ -2032,3 +2048,33 @@ def test_run_youtube_quick_intake_failure_is_recorded_not_raised():
     assert out["status"] == "failed"
     assert out["ingested"] == 0
     assert "groq boom" in out["error"]
+
+
+# ---------------------------------------------------------------------------
+# run_docs_quick_intake (free-LLM web/notes drain)
+# ---------------------------------------------------------------------------
+
+def test_run_docs_quick_intake_parses_tally():
+    tally_line = json.dumps({"tally": {"ok": 12, "skipped_thin": 3, "llm_fail": 1},
+                             "processed": 16, "backend": "openrouter"})
+
+    def fake_run(cmd, **kw):
+        assert "quick_ingest_docs.py" in cmd[1]
+        assert "--backend" in cmd and "openrouter" in cmd   # free-LLM path
+        return _make_proc(returncode=0, stdout='{"stub":"x","result":"ok:ai-business"}\n' + tally_line)
+
+    out = scheduled_run.run_docs_quick_intake(_subprocess_run=fake_run)
+    assert out["status"] == "ok"
+    assert out["ingested"] == 12
+    assert out["skipped_thin"] == 3
+    assert out["llm_fail"] == 1
+
+
+def test_run_docs_quick_intake_failure_is_recorded_not_raised():
+    def fake_run(cmd, **kw):
+        return _make_proc(returncode=1, stderr="openrouter down")
+
+    out = scheduled_run.run_docs_quick_intake(_subprocess_run=fake_run)
+    assert out["status"] == "failed"
+    assert out["ingested"] == 0
+    assert "openrouter down" in out["error"]

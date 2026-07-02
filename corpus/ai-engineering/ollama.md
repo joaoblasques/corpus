@@ -188,6 +188,7 @@ Ollama published documentation for running [[ai-engineering/openclaw|OpenClaw]] 
 - [[ai-engineering/gemini-cli|Gemini CLI]] — competing open-source agentic CLI
 - [[ai-engineering/claude-code|Claude Code]] — Anthropic API compatibility bridge
 - [[ai-engineering/mcp|MCP]] — web search MCP server for Cline/Codex/Goose integration
+- [[ai-engineering/lm-studio|LM Studio]] — competing local-model app; also ships Anthropic API compatibility + an MLX Apple Silicon engine
 - [[ai-engineering/README|AI Engineering hub]]
 
 ---

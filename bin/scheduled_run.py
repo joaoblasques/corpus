@@ -611,6 +611,38 @@ def run_youtube_quick_intake(*, max_n: int = 60, rescue_max: int = 25,
         return {"status": "failed", "ingested": 0, "error": str(exc)}
 
 
+def run_docs_quick_intake(*, max_n: int = 80, backend: str = "openrouter",
+                          timeout_s: int = 2400, _subprocess_run=None) -> dict:
+    """Quick-intake content-bearing web/notes stubs into lightweight source pages.
+
+    A native drain (bin/quick_ingest_docs.py) for the raw/_inbox backlog the slow ~6/night
+    headless-claude ingest can't keep up with — vault clippings, blog/article scrapes, notes.
+    Uses OpenRouter FREE models (Groq free fallback when they 429), so it's free. Bounded by
+    max_n to respect free-tier daily limits; the rest drains over successive nights. Thin/
+    URL-only stubs are skipped (they need a fetch pass). Failure recorded, never raised."""
+    _run = _subprocess_run if _subprocess_run is not None else subprocess.run
+    try:
+        proc = _run(
+            [sys.executable, str(BIN / "quick_ingest_docs.py"),
+             "--channel", "web,notes", "--backend", backend, "--max", str(max_n), "--sleep", "0.5"],
+            capture_output=True, text=True, timeout=timeout_s)
+        if proc.returncode != 0:
+            return {"status": "failed", "ingested": 0, "error": (proc.stderr or "").strip()[:200]}
+        tally = {}
+        for line in (proc.stdout or "").splitlines():
+            line = line.strip()
+            if line.startswith("{") and '"tally"' in line:
+                try:
+                    tally = json.loads(line).get("tally", {})
+                except json.JSONDecodeError:
+                    pass
+        return {"status": "ok", "ingested": tally.get("ok", 0),
+                "skipped_thin": tally.get("skipped_thin", 0),
+                "llm_fail": tally.get("llm_fail", 0)}
+    except Exception as exc:  # noqa: BLE001
+        return {"status": "failed", "ingested": 0, "error": str(exc)}
+
+
 def build_summary(tallies: dict, dry_run: bool) -> dict:
     """Assemble the run's stdout summary from the collected tallies. Surfaces the
     post-ingest `email_relabel` (reap-labels), `x_reap`, and `pdf_reap` results
@@ -620,6 +652,7 @@ def build_summary(tallies: dict, dry_run: bool) -> dict:
         "dry_run": bool(dry_run),
         "collectors": tallies.get("collectors", {}),
         "youtube_quick": tallies.get("youtube_quick", {}),
+        "docs_quick": tallies.get("docs_quick", {}),
         "ingest": tallies.get("ingest", {}),
         "email_relabel": tallies.get("email_relabel", {}),
         "x_reap": tallies.get("x_reap", {}),
@@ -976,6 +1009,16 @@ def write_run_report(
             yq_line += f" · error={yq['error']}"
         block += f"- youtube_quick:\n{yq_line}\n"
 
+    # Web/notes quick-intake line (free-LLM drain of the clippings/blog/notes backlog)
+    dq = tallies.get("docs_quick")
+    if dq:
+        dq_line = (f"  - docs_quick: {dq.get('ingested', 0)} intake · "
+                   f"{dq.get('skipped_thin', 0)} thin · {dq.get('llm_fail', 0)} llm_fail · "
+                   f"status={dq.get('status', 'unknown')}")
+        if dq.get("error"):
+            dq_line += f" · error={dq['error']}"
+        block += f"- docs_quick:\n{dq_line}\n"
+
     # Post-ingest corpus integrity check (deterministic backstop on the agent's work).
     lint = tallies.get("lint")
     if lint:
@@ -1085,6 +1128,14 @@ def main(argv=None) -> int:
                     tallies["youtube_quick"] = run_youtube_quick_intake()
                 except Exception as exc:  # noqa: BLE001
                     tallies["youtube_quick"] = {"status": "failed", "ingested": 0, "error": str(exc)}
+
+                # Web/notes quick-intake: drain content-bearing inbox stubs (clippings,
+                # blog scrapes, notes) into source pages via free LLMs, so the backlog
+                # doesn't starve behind the slow ~6/night claude ingest. Never aborts.
+                try:
+                    tallies["docs_quick"] = run_docs_quick_intake()
+                except Exception as exc:  # noqa: BLE001
+                    tallies["docs_quick"] = {"status": "failed", "ingested": 0, "error": str(exc)}
 
                 tallies["ingest"] = run_ingest(
                     max_n=args.max,
