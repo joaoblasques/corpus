@@ -1921,3 +1921,28 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
 - pages touched: [corpus/ai-engineering/lm-studio.md, corpus/ai-engineering/README.md]
 - new pages: []
 - notes: ingest-auto run; 6 processed, 6 ingested, 0 deferred. These are the individual LM-Studio-blog articles the earlier same-day blog-index digest (web-lm-studio-blog-6cc25613.md) pointed to but which was itself deferred as a non-single-article digest; each of these 6 arrived as its own standalone source (obsidian-list scrape of lmstudio.ai/blog), so none triggered the pointer/digest defer rule. Substantially expanded lm-studio.md (all 6 pages fold into the existing entity, no new pages): 0.4.0 release (llmster headless daemon decoupling core from GUI for server/CI/cloud deployment, llama.cpp v2.0.0 parallel-request continuous batching with Max-Concurrent-Predictions/Unified-KV-Cache load options, new stateful `/v1/chat` REST endpoint with response-chaining + permission-key-gated local MCP access), the 0.4.1 native Anthropic-compatible `/v1/messages` endpoint enabling direct Claude Code use via a base-URL swap (full streaming/tool-use support, GGUF+MLX compatibility), 0.3.39 Open Responses spec support via OpenAI partnership (logprobs/candidate-token confidence, token-caching usage stats, remote image URLs for VLMs), the Locally-AI mobile-app acquisition (creator Adrien Grondin joining LM Studio) as the vehicle for LM Link (end-to-end-encrypted remote device linking, phone-drives-home-machine pattern, group links in development), and an NVIDIA DGX Station GB300 on-prem partnership (748GB coherent memory/20 petaFLOPS deskside supercomputer, llmster+LM Link recommended pairing for secure cross-network team model sharing). Added aliases (llmster, Locally, LM Link) and 6 new `sources:` frontmatter entries. Cross-linked vLLM's existing DGX Spark section as the smaller single-GPU sibling device to DGX Station GB300. All 6 sources routed to the existing ai-engineering domain / existing lm-studio.md entity (G1 clear); no PARA-native collisions (G4); no contradictions with existing pages — these are purely additive product-release announcements (G3); page cascade (1 entity page + hub touch) far under 20 (G2). Hub blurb and root _index.md one-liner both refreshed to reflect the expanded scope; no orphans created.
+
+## [2026-07-02] ingest | ingest-auto batch — LM Studio patch history 0.3.34-0.3.38 + FunctionGemma fine-tuning (6 processed, 6 ingested, 0 deferred)
+- source: raw/_inbox/web-lm-studio-0-3-34-c750f642.md
+- source: raw/_inbox/web-lm-studio-0-3-35-58e525e5.md
+- source: raw/_inbox/web-lm-studio-0-3-36-80332211.md
+- source: raw/_inbox/web-lm-studio-0-3-37-e14de702.md
+- source: raw/_inbox/web-lm-studio-0-3-38-e91acb98.md
+- source: raw/_inbox/web-how-to-fine-tune-functiongemma-and-run-it-locally-9eeb0a45.md
+- channel: web (all 6)
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/lm-studio.md, corpus/ai-engineering/README.md]
+- new pages: [corpus/ai-engineering/functiongemma.md, corpus/ai-engineering/unsloth.md]
+- notes: ingest-auto run; 6 processed, 6 ingested, 0 deferred. Five terse LM-Studio release-note stubs (0.3.34-0.3.38, obsidian-list scrape of lmstudio.ai/blog) plus one substantive tutorial. Added a compact changelog table to lm-studio.md covering the five patch releases (EssentialAI rnj-1 support, Devstral-2/GLM-4.6V MLX support + system-prompt/tool-call-result bugfixes, FunctionGemma support, LFM2 tool-call format + generator-crash fix, Mac-only MLX NAX auto-upgrade). Added a "Fine-tuning workflow" section to lm-studio.md summarizing the FunctionGemma+Unsloth walkthrough (LoRA fine-tune via Unsloth starter notebook, GGUF export via native conversion or LoRA-merge, `lms import`/`lms load`/`lms server start` to serve). Created two new stub entity pages: functiongemma.md (Google's 270M tool-calling-specialized Gemma variant, not a dialogue model) and unsloth.md (LoRA fine-tuning toolkit; optimized kernels; no Apple Silicon local fine-tuning yet), both cross-linked from each other and from lm-studio.md, and linked from the domain hub. All 6 sources routed to the existing ai-engineering domain (G1 clear); no PARA-native collisions (G4); no contradictions with existing pages (G3); page cascade (1 entity page updated + 2 new stub pages + hub) well under 20 (G2). No orphans.
+
+## [2026-07-02T15:21] config | scheduled run
+- collectors:
+
+- ingest:
+  - ingest: 6 ingested · 0 deferred · status=ok
+- youtube_quick:
+  - youtube_quick: 0 intake · 0 rescued · 0 skipped · status=ok
+- docs_quick:
+  - docs_quick: 0 intake · 0 thin · 0 llm_fail · status=ok
+- lint:
+  - 0 broken wikilinks · 0 broken citations · 0 orphans · 0 stubs

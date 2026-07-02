@@ -1,6 +1,6 @@
 # Corpus Index
 
-> Last updated: 2026-07-02 | Total pages: 320 | Total sources: 1298
+> Last updated: 2026-07-02 | Total pages: 322 | Total sources: 1304
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
@@ -156,7 +156,9 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[ai-engineering/ollama|Ollama]] — entity · draft · local LLM serving + cloud models + web search API + `ollama launch` agentic toolchains; Anthropic API compatibility for Claude Code; MLX Apple Silicon backend; snapshot system for agents; OpenJarvis integration
 - [[ai-engineering/openjarvis|OpenJarvis]] — entity · draft · Stanford Hazy Research/Scaling Intelligence local-first personal-AI framework; Ollama-backed, agent presets (morning digest, deep research, code assistant)
 - [[ai-engineering/vllm|vLLM]] — entity · draft · open-source LLM inference-serving engine; scheduler/paged KV cache/prefix caching/speculative decoding; day-0 support for MiniMax M3, DiffusionGemma, Nemotron 3 Ultra, Laguna XS.2, Nemotron 3 Nano Omni; DGX Spark local deployment; DeepLearning.AI course; native RL weight-sync/pause-resume APIs; PegaFlow external KV cache; Elastic Expert Parallelism; VeRL-Omni multimodal RL; Artificial Analysis leaderboard-topping DeepSeek V3.2/MiniMax-M2.5/Qwen 3.5 optimizations; Mooncake Store distributed KV cache for agentic workloads
-- [[ai-engineering/lm-studio|LM Studio]] — entity · draft · local LLM app; mlx-engine (Apple Silicon), disk-backed KV-cache checkpointing; llmster headless daemon (0.4.0); native `/v1/messages` Claude Code endpoint (0.4.1); Open Responses support; Locally mobile app + LM Link remote access; NVIDIA DGX Station GB300 partnership
+- [[ai-engineering/lm-studio|LM Studio]] — entity · draft · local LLM app; mlx-engine (Apple Silicon), disk-backed KV-cache checkpointing; llmster headless daemon (0.4.0); native `/v1/messages` Claude Code endpoint (0.4.1); Open Responses support; Locally mobile app + LM Link remote access; NVIDIA DGX Station GB300 partnership; 0.3.34–0.3.38 patch history; FunctionGemma fine-tuning walkthrough
+- [[ai-engineering/functiongemma|FunctionGemma]] — entity · stub · Google's 270M tool-calling-specialized Gemma variant; not a dialogue model; fine-tuned via Unsloth and served in LM Studio
+- [[ai-engineering/unsloth|Unsloth]] — entity · stub · fine-tuning toolkit; optimized training kernels + LoRA workflows; NVIDIA/AMD/Intel GPU support (no Apple Silicon yet); GGUF export
 - [[ai-engineering/vllm-semantic-router|vLLM Semantic Router]] — entity · draft · request-routing control plane (signals→projections→decisions→algorithms→models); Fusion Mixture-of-Models primitive; Session-Aware Agentic Routing (SAAR: router memory, hard locks, prefix-cache economics); Themis v0.3; multimodal routing vision-signal hardening (inverted-embedding bug, cross-language reference parity)
 - [[ai-engineering/minimax-m3|MiniMax M3]] — entity · draft · 1M-token-context model family; MiniMax Sparse Attention (128-token block scoring/top-k selection); MXFP8 MoE, EAGLE3 speculative decoding
 - [[ai-engineering/diffusiongemma|DiffusionGemma]] — entity · draft · Google's 26B discrete diffusion LLM (dLLM) on Gemma4; parallel-canvas denoising, entropy-bound acceptance, self-conditioning; first dLLM natively in vLLM
@@ -427,6 +429,8 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[software-engineering/sources/software-engineers-guidebook|Source: The Software Engineer's Guidebook]] — source · draft · Gergely Orosz 359-page career reference (full SWE arc)
 
 ### mlops
+- [[mlops/sources/beyond-enterprise-data-lineage-the-case-for-a-platform-indep-ebac959b|"Beyond Enterprise Data Lineage: The Case for a Platform-Independent Data Catalog"]] — source · stub · The article discusses the limitations of data lineage tools and the need for a platform-independent …
+- [[mlops/sources/beyond-dashboards-introducing-decision-execution-platforms-53e3b67a|"Beyond dashboards: Introducing Decision Execution Platforms"]] — source · stub · Databricks introduces Decision Execution Platforms (DEPs), a new category of enterprise analytics th…
 - [[mlops/sources/benchmarking-vortex-file-format-vs-parquet-csv-vs-duckdb-pol-d8c981f0|"Benchmarking Vortex File Format ... vs Parquet, CSV ... vs DuckDB, Polars, Datafusion."]] — source · stub · The document benchmarks Vortex file format against Parquet, CSV, DuckDB, Polars, and Datafusion for …
 - [[mlops/sources/automating-cisco-webex-sprint-meetings-with-zenflow-enterpri-3546511b|"Automating Cisco Webex Sprint Meetings with Zenflow: Enterprise Integration Guide"]] — source · stub · Zenflow automates Cisco Webex meeting setup with AI-powered engineering platform, eliminating manual…
 - [[mlops/sources/mbta-on-time-lakehouse-retrospective-eece|mbta-on-time-lakehouse-retrospective]] — source · stub · This document is a project retrospective on a lakehouse built to answer 'Is the train late, and why?…
@@ -507,6 +511,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[mlops/herder|Herder]] — entity · draft · modern tmux-style multiplexer; session-vs-process-state snapshots, built-in agent-awareness (working/idle/blocked/done), thin-client remote mode, Herda Plus plugin
 
 ### productivity
+- [[productivity/sources/beware-of-productivity-paradoxes-cal-newport-9c92dd3d|Beware of Productivity Paradoxes - Cal Newport]] — source · stub · ['The article discusses the productivity paradox of technological innovations, specifically the pers…
 - [[productivity/sources/about-forte-labs-forte-labs-d0bfb7e4|About Forte Labs - Forte Labs]] — source · stub · Forte Labs is a company that helps people manage their productivity and knowledge. They provide trai…
 - [[productivity/sources/what-happens-to-your-brain-when-you-hum-for-60-seconds-QVoGbaq8xos|What Happens to YOUR BRAIN When You Hum for 60 Seconds?]] — source · stub · The video discusses the effects of humming on the brain and body, specifically the resonance of the …
 - [[productivity/sources/what-happens-to-your-brain-when-you-hum-for-60-seconds-QVoGbaq8xos|What Happens to YOUR BRAIN When You Hum for 60 Seconds?]] — source · stub · The video discusses the effects of humming on the human body, specifically the resonance of the para…
@@ -527,6 +532,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[productivity/tokenmaxxing|Tokenmaxxing and AI Fake Productivity]] — concept · draft · tokenmaxxing defined (Joe Reis), centaur vs reverse centaur, AI hamster wheel, token junkies
 
 ### ai-business
+- [[ai-business/sources/beyond-acceptance-the-transformational-journey-of-applying-t-3329bd9d|"Beyond Acceptance: The Transformational Journey of Applying to Grad School (or Anything Else)"]] — source · stub · A personal account of the author's journey to entrepreneurship and his wife's success in helping peo…
 - [[ai-business/sources/benedict-s-newsletter-benedict-evans-d084c97a|Benedict’s Newsletter — Benedict Evans]] — source · stub · Benedict Evans' newsletter provides analysis of key stories and ideas in tech, offering context and …
 - [[ai-business/sources/be-a-loser-if-you-want-to-be-happy-dan-koe-ba36c113|Be A Loser – If You Want To Be Happy - Dan Koe]] — source · stub · The article discusses the concept of success and happiness, arguing that they are not the same and t…
 - [[ai-business/sources/battery-technology-changed-the-world-and-then-it-stalled-3d768c98|Battery Technology Changed the World…and Then It Stalled]] — source · stub · ['The article discusses the history and current state of battery technology, its impact on the world…

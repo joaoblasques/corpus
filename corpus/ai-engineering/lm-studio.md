@@ -24,6 +24,21 @@ sources:
   - path: raw/web/web-run-open-models-on-nvidia-dgx-station-gb300-cf971dfe.md
     channel: web
     ingested_at: 2026-07-02
+  - path: raw/web/web-lm-studio-0-3-34-c750f642.md
+    channel: web
+    ingested_at: 2026-07-02
+  - path: raw/web/web-lm-studio-0-3-35-58e525e5.md
+    channel: web
+    ingested_at: 2026-07-02
+  - path: raw/web/web-lm-studio-0-3-36-80332211.md
+    channel: web
+    ingested_at: 2026-07-02
+  - path: raw/web/web-lm-studio-0-3-37-e14de702.md
+    channel: web
+    ingested_at: 2026-07-02
+  - path: raw/web/web-lm-studio-0-3-38-e91acb98.md
+    channel: web
+    ingested_at: 2026-07-02
 aliases:
   - LM Studio
   - lmstudio
@@ -108,9 +123,34 @@ LM Studio acquired **Locally AI**, an app for running local models on iPhone/iPa
 
 LM Studio collaborated with NVIDIA on DGX Station's general-availability launch — a deskside AI supercomputer built on the GB300 Blackwell Ultra Superchip, with 748GB of coherent memory and up to 20 petaFLOPS of AI compute [^src7]. The recommended on-prem pattern pairs **llmster** (headless daemon) with **LM Link** so teams can securely share frontier open models from the Station even across networks; models downloaded to the Station become available to all linked devices for inference (e.g., driving `gpt-oss-120b` from a laptop while the Station executes it). LM Studio's SDKs (`lmstudio-js`, `lmstudio-python`), native API, and Anthropic/OpenAI-compatible APIs all work against a Station-hosted server [^src7].
 
+## Earlier releases: 0.3.34–0.3.38
+
+A run of patch releases preceding 0.4.0, chiefly model-support additions and MLX/tool-call bugfixes [^src8][^src9][^src10][^src11][^src12]:
+
+| Version | Notes |
+|---|---|
+| 0.3.34 | Support for EssentialAI's rnj-1 model; fixed a Jinja prompt-formatting bug where EOS tokens were not included properly for some models [^src8] |
+| 0.3.35 | [MLX] Support for Devstral-2 and GLM-4.6V; fixed a bug sending the default system prompt to the model even after the system-prompt field was cleared; fixed an associated incorrect token count; fixed tool-call results sometimes not being added to context correctly [^src9] |
+| 0.3.36 | Support for Google's [[ai-engineering/functiongemma|FunctionGemma]] (270M) [^src10] |
+| 0.3.37 | Support for the LFM2 tool-call format; fixed a "Cannot read properties of null (reading 'architecture')" crash when using a generator [^src11] |
+| 0.3.38 | [Mac][M5] Enabled auto-upgrade to the optimized MLX NAX engine, fixing MLX model crashes on macOS 26.2 and improving performance (0.3.38 shipped Mac-only; other platforms remained on 0.3.37) [^src12] |
+
+## Fine-tuning workflow: [[ai-engineering/functiongemma|FunctionGemma]] via [[ai-engineering/unsloth|Unsloth]]
+
+LM Studio published a walkthrough for fine-tuning Google's FunctionGemma (270M, tool-call-specialized) using Unsloth and running the result locally [^src13]:
+
+1. **Fine-tune** — use an Unsloth starter notebook (Colab or local Jupyter/VS Code) to load the base model, apply LoRA fine-tuning, and handle tokenization/chat templates. Unsloth supports NVIDIA/AMD/Intel GPUs; local fine-tuning is not yet supported on Apple Silicon (a separate notebook targets that case) [^src13].
+2. **Export to GGUF** — either Unsloth's native GGUF/llama.cpp conversion (direct to Q8_0/F16/BF16) or merge LoRA adapters into the base model (FP16) and convert separately to a chosen quantization (e.g., Q4_K_M) [^src13].
+3. **Import** — `lms import <path/to/model.gguf>` registers the model under "My Models" in LM Studio [^src13].
+4. **Serve** — `lms load <model identifier>` (optionally with `--ttl <seconds>` to auto-unload) then `lms server start` exposes the model over LM Studio's OpenAI-compatible local API [^src13].
+
+LM Studio's example shows FunctionGemma failing to produce a useful response pre-fine-tuning and successfully calling a Wikipedia search tool after just 10 minutes of fine-tuning (LM Studio recommends ≥1 hour for better results) [^src13].
+
 ## Related
 
 - [[ai-engineering/ollama|Ollama]] — competing local-model serving tool; also ships Anthropic API compatibility for Claude Code and an MLX Apple Silicon backend
+- [[ai-engineering/functiongemma|FunctionGemma]] — Google's 270M tool-calling-specialized model, importable into LM Studio after Unsloth fine-tuning
+- [[ai-engineering/unsloth|Unsloth]] — fine-tuning toolkit used in LM Studio's model-import workflow
 - [[ai-engineering/claude-code|Claude Code]] — the agentic coding client LM Studio's Anthropic-compatible API and KV-cache rewind fix specifically target
 - [[ai-engineering/vllm|vLLM]] — contrasting production/datacenter serving engine also solving agentic-workload KV-cache reuse (via distributed Mooncake Store rather than local disk); also targets NVIDIA DGX Spark, a smaller desk-side single-GPU sibling of the DGX Station GB300
 - [[ai-engineering/quantization|Quantization]] — MLX 4-bit quantized model used in the benchmarks
@@ -125,3 +165,9 @@ LM Studio collaborated with NVIDIA on DGX Station's general-availability launch 
 [^src5]: [Locally AI joins LM Studio](../../raw/web/web-locally-ai-joins-lm-studio-5feeb57f.md) — LM Studio blog
 [^src6]: [Run (your largest) local models from your iPhone](../../raw/web/web-run-your-largest-local-models-from-your-iphone-eede015a.md) — LM Studio blog
 [^src7]: [Run open models on NVIDIA DGX Station GB300](../../raw/web/web-run-open-models-on-nvidia-dgx-station-gb300-cf971dfe.md) — LM Studio blog
+[^src8]: [LM Studio 0.3.34](../../raw/web/web-lm-studio-0-3-34-c750f642.md) — LM Studio blog
+[^src9]: [LM Studio 0.3.35](../../raw/web/web-lm-studio-0-3-35-58e525e5.md) — LM Studio blog
+[^src10]: [LM Studio 0.3.36](../../raw/web/web-lm-studio-0-3-36-80332211.md) — LM Studio blog
+[^src11]: [LM Studio 0.3.37](../../raw/web/web-lm-studio-0-3-37-e14de702.md) — LM Studio blog
+[^src12]: [LM Studio 0.3.38](../../raw/web/web-lm-studio-0-3-38-e91acb98.md) — LM Studio blog
+[^src13]: [How to fine-tune FunctionGemma and run it locally](../../raw/web/web-how-to-fine-tune-functiongemma-and-run-it-locally-9eeb0a45.md) — LM Studio blog
