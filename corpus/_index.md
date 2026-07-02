@@ -1,6 +1,6 @@
 # Corpus Index
 
-> Last updated: 2026-07-02 | Total pages: 309 | Total sources: 1275
+> Last updated: 2026-07-02 | Total pages: 315 | Total sources: 1281
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
@@ -59,7 +59,13 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] — concept · draft · patterns for multiple cooperating agents
 - [[ai-engineering/local-ai-agents|Local AI Agents]] — concept · draft · always-on agents on your own machine; anatomy (host/channel/brain/memory/skills/heartbeat/eyes); OpenClaw vs Cowork; agent teams
 - [[ai-engineering/openclaw|OpenClaw]] — entity · draft · open-source local-agent framework; per-agent model routing for cost, Cloud Hub skill marketplace + its security risk, Mission Control, scoped-email isolation; `ollama launch openclaw` one-command setup
-- [[ai-engineering/ollama|Ollama]] — entity · draft · local LLM serving + cloud models + web search API + `ollama launch` agentic toolchains; Anthropic API compatibility for Claude Code; MLX Apple Silicon backend; snapshot system for agents
+- [[ai-engineering/ollama|Ollama]] — entity · draft · local LLM serving + cloud models + web search API + `ollama launch` agentic toolchains; Anthropic API compatibility for Claude Code; MLX Apple Silicon backend; snapshot system for agents; OpenJarvis integration
+- [[ai-engineering/openjarvis|OpenJarvis]] — entity · draft · Stanford Hazy Research/Scaling Intelligence local-first personal-AI framework; Ollama-backed, agent presets (morning digest, deep research, code assistant)
+- [[ai-engineering/vllm|vLLM]] — entity · draft · open-source LLM inference-serving engine; scheduler/paged KV cache/prefix caching/speculative decoding; day-0 support for MiniMax M3 and DiffusionGemma via ModelState
+- [[ai-engineering/vllm-semantic-router|vLLM Semantic Router]] — entity · draft · request-routing control plane (signals→projections→decisions→algorithms→models); Fusion Mixture-of-Models primitive; Session-Aware Agentic Routing; Themis v0.3
+- [[ai-engineering/minimax-m3|MiniMax M3]] — entity · draft · 1M-token-context model family; MiniMax Sparse Attention (128-token block scoring/top-k selection); MXFP8 MoE, EAGLE3 speculative decoding
+- [[ai-engineering/diffusiongemma|DiffusionGemma]] — entity · draft · Google's 26B discrete diffusion LLM (dLLM) on Gemma4; parallel-canvas denoising, entropy-bound acceptance, self-conditioning; first dLLM natively in vLLM
+- [[ai-engineering/vime|vime]] — entity · draft · vLLM-ecosystem RL post-training framework; ports slime's training stack onto vLLM rollout; GRPO/PPO, R3 routing replay for MoE alignment
 - [[ai-engineering/perplexity-computer|Perplexity Computer]] — entity · draft · cloud-native zero-setup AI agent from Perplexity AI; model-agnostic auto-routing, parallel sub-agents, isolated VPS, $200/month; use-case split vs OpenClaw
 - [[ai-engineering/paperclip|Paperclip]] — entity · draft · open-source PM control plane for an agent fleet; goal→issues decomposition, org chart, chief-of-staff agent, blocked-status/autonomy log
 - [[ai-engineering/tool-calling|Tool Calling]] — concept · draft · how LLMs request and receive tool execution results

@@ -1852,3 +1852,11 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   - ingest: 25 ingested · 25 deferred · status=ok
 - lint:
   - 1 broken wikilinks · 80 broken citations · 1 orphans · 22 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+
+## [2026-07-02 00:00] ingest | ingest-auto batch — vLLM ecosystem + OpenJarvis (6 sources)
+- source: raw/_inbox/ (6 pre-specified files)
+- channel: web (all 6)
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/README.md, corpus/ai-engineering/ollama.md, corpus/ai-engineering/local-ai-agents.md, corpus/ai-engineering/mixture-of-experts.md]
+- new pages: [corpus/ai-engineering/openjarvis.md, corpus/ai-engineering/vllm.md, corpus/ai-engineering/vllm-semantic-router.md, corpus/ai-engineering/minimax-m3.md, corpus/ai-engineering/diffusiongemma.md, corpus/ai-engineering/vime.md]
+- notes: ingest-auto run; 6 processed, 6 ingested, 0 deferred. New vLLM ecosystem cluster: vLLM entity hub (serving engine internals, ModelState abstraction), vLLM Semantic Router (Fusion Mixture-of-Models, Session-Aware Agentic Routing, Themis v0.3 release), MiniMax M3 (MiniMax Sparse Attention, 1M-token context), DiffusionGemma (first diffusion LLM natively in vLLM), vime (RL post-training framework, slime+Megatron+vLLM). Plus OpenJarvis (Stanford Hazy Research local-first agent framework on Ollama) — cross-linked into Ollama and Local AI Agents. All 6 sources routed to existing ai-engineering domain; no contradictions; all new pages linked from domain hub.
