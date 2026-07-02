@@ -144,3 +144,6 @@ Red Hat and Andrew Ng's DeepLearning.AI published **"Fast & Efficient LLM Infere
 [^src5]: [vLLM on the DGX Spark: Architecture, Configuration, and Local Evaluation](../../raw/web/web-vllm-on-the-dgx-spark-architecture-configuration-and-local-e-543e2b72.md) — vLLM blog / Inferact, 2026-06-01
 [^src6]: [Fast & Efficient LLM Inference with vLLM: A New Course with DeepLearning.AI](../../raw/web/web-fast-efficient-llm-inference-with-vllm-a-new-course-with-dee-f75c7aa9.md) — vLLM blog, 2026-06-03
 [^src7]: [Accelerating Laguna XS.2 Inference with vLLM, Speculators, and LLM Compressor](../../raw/web/web-accelerating-laguna-xs-2-inference-with-vllm-speculators-and-afda11cd.md) — vLLM blog, 2026-05-28
+[^src8]: [Native RL APIs in vLLM](../../raw/web/web-native-rl-apis-in-vllm-a83f1153.md) — vLLM blog, 2026-05-28
+[^src9]: [vLLM x Novita AI: PegaFlow for Production-Grade External KV Cache](../../raw/web/web-vllm-x-novita-ai-pegaflow-for-production-grade-external-kv-c-4b8a8880.md) — vLLM blog, 2026-05-18
+[^src10]: [Elastic Expert Parallelism in vLLM](../../raw/web/web-elastic-expert-parallelism-in-vllm-e7f766b6.md) — vLLM blog, 2026-05-14

@@ -38,6 +38,7 @@ Poolside also released quantized Laguna XS.2 checkpoints built with **LLM Compre
 ## Related
 
 - [[ai-engineering/vllm|vLLM]] — serving engine with first-class Laguna XS.2 integration
+- [[ai-engineering/speculative-decoding|Speculative Decoding]] — DFlash's block-diffusion drafting mechanism and its Eagle-family alternative, in depth
 - [[ai-engineering/quantization|Quantization]] — LLM Compressor quantized checkpoints (FP8/NVFP4/INT4/INT8)
 - [[ai-engineering/mixture-of-experts|Mixture of Experts]] — Laguna XS.2's 33B-A3B MoE architecture
 - [[ai-engineering/README|AI Engineering hub]]

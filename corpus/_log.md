@@ -1883,3 +1883,16 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   - youtube_quick: 0 intake · 0 rescued · 3 skipped · status=ok
 - lint:
   - 0 broken wikilinks · 0 broken citations · 0 orphans · 0 stubs
+
+## [2026-07-02] ingest | ingest-auto batch — vLLM speculative decoding / RL APIs / KV cache / Elastic EP / multimodal routing (6 processed, 6 ingested, 0 deferred)
+- source: raw/_inbox/web-native-rl-apis-in-vllm-a83f1153.md
+- source: raw/_inbox/web-speculators-v0-5-0-dflash-support-and-online-training-a2b78ff3.md
+- source: raw/_inbox/web-from-text-to-multimodal-routing-hardening-vision-signals-in-cf3e11d0.md
+- source: raw/_inbox/web-eagle-3-1-advancing-speculative-decoding-through-collaborati-35e12237.md
+- source: raw/_inbox/web-vllm-x-novita-ai-pegaflow-for-production-grade-external-kv-c-4b8a8880.md
+- source: raw/_inbox/web-elastic-expert-parallelism-in-vllm-e7f766b6.md
+- channel: web (all 6)
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/vllm.md, corpus/ai-engineering/vllm-semantic-router.md, corpus/ai-engineering/mixture-of-experts.md, corpus/ai-engineering/laguna-xs2.md, corpus/ai-engineering/README.md]
+- new pages: [corpus/ai-engineering/speculative-decoding.md]
+- notes: ingest-auto run; 6 processed, 6 ingested, 0 deferred. Same-day continuation of the vLLM ecosystem cluster. New concept page Speculative Decoding (Eagle 3.1's attention-drift fix via FC normalization + post-norm hidden-state feedback, up to 2x longer acceptance length; DFlash's single-pass block-diffusion drafting with anchor-position sampling to bound attention-mask size; Speculators v0.5.0's migration to vLLM-native online/offline hidden-states extraction), cross-linked from vllm.md and laguna-xs2.md. Updated vllm.md with three new sections: native RL post-training APIs (weight-transfer 4-phase pluggable backend, pause/resume keep-mode, DPEP deadlock fix validated at 32-GPU scale), PegaFlow external KV cache with Novita AI (Rust daemon, 2.15x faster startup, 56%/72% throughput gains from cache pooling/MLA dedup, 194 GB/s RDMA), and Elastic Expert Parallelism (runtime DP-size resizing via standby communication groups + coordinated switch, fault-tolerance building block). Updated vllm-semantic-router.md with the multimodal-routing hardening story (an 82%-inverted vision-embedding bug traced across Go/Rust-Candle/PyTorch layers to a wrong pooling head, incomplete normalization, and preprocessing drift — three separate PRs, reference-path comparison as the core diagnostic lesson). Updated mixture-of-experts.md with an Elastic EP summary (static-vs-elastic EP, scale-up/scale-down flow, NIXL EP). All 6 sources routed to existing ai-engineering domain (G1 clear); no PARA-native collisions (G4); no contradictions with existing pages (G3); page cascade (6 pages touched/created) well under 20 (G2). All new pages linked from domain hub; no orphans.

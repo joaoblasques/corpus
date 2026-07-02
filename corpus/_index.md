@@ -1,12 +1,16 @@
 # Corpus Index
 
-> Last updated: 2026-07-02 | Total pages: 318 | Total sources: 1287
+> Last updated: 2026-07-02 | Total pages: 319 | Total sources: 1293
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
 ## Domains
 
 ### ai-engineering
+- [[ai-engineering/sources/the-top-10-claude-code-plugins-to-10x-your-next-project-june-IShdbDP4Jgg|The Top 10 Claude Code Plugins to 10x Your Next Project (June '26)]] — source · stub · The video showcases 10 Claude Code plugins, specifically Graphify, Grill Me, Grill with Docs, Grill …
+- [[ai-engineering/sources/the-agentic-os-setup-that-will-10x-claude-code-HRw-vP0j8OM|The Agentic OS Setup That Will 10x Claude Code]] — source · stub · The video discusses the importance of understanding the underlying fundamentals of an Agentic OS, sp…
+- [[ai-engineering/sources/essential-ai-prompts-for-developers-H3M95i4iS5c|Essential AI prompts for developers]] — source · stub · The video discusses three AI prompt strategies for developers: Q&A, pros and cons, and stepwise chai…
+- [[ai-engineering/sources/you-can-learn-ai-agent-harness-loop-engineering-in-19-min-ll-GrNbuWWJYiI|"You Can Learn AI Agent Harness & Loop Engineering In 19 Min | LLM Ops, Eval, Tracing, RAG"]] — source · stub · The video explains the concept of Agent Harness and Loop Engineering in AI agent systems, highlighti…
 - [[ai-engineering/sources/code-with-claude-2026-opening-keynote-GMIWm5y90xA|"Code with Claude 2026: Opening Keynote"]] — source · stub · Ami Vora discusses the rapid advancements in AI model capabilities and the need for developers to cl…
 - [[ai-engineering/sources/the-ai-workflow-for-data-engineering-GDmEgrX_ZQc|The AI Workflow for Data Engineering]] — source · stub · The video demonstrates an AI workflow for data engineering using Claude Code, showcasing its capabil…
 - [[ai-engineering/sources/7-insane-loops-you-need-to-try-right-now-F4a8aMLb678|7 INSANE loops you need to try right now]] — source · stub · The video explains what loops are in AI engineering, their value, and provides a concrete use case o…
@@ -67,14 +71,15 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[ai-engineering/openclaw|OpenClaw]] — entity · draft · open-source local-agent framework; per-agent model routing for cost, Cloud Hub skill marketplace + its security risk, Mission Control, scoped-email isolation; `ollama launch openclaw` one-command setup
 - [[ai-engineering/ollama|Ollama]] — entity · draft · local LLM serving + cloud models + web search API + `ollama launch` agentic toolchains; Anthropic API compatibility for Claude Code; MLX Apple Silicon backend; snapshot system for agents; OpenJarvis integration
 - [[ai-engineering/openjarvis|OpenJarvis]] — entity · draft · Stanford Hazy Research/Scaling Intelligence local-first personal-AI framework; Ollama-backed, agent presets (morning digest, deep research, code assistant)
-- [[ai-engineering/vllm|vLLM]] — entity · draft · open-source LLM inference-serving engine; scheduler/paged KV cache/prefix caching/speculative decoding; day-0 support for MiniMax M3, DiffusionGemma, Nemotron 3 Ultra, Laguna XS.2; DGX Spark local deployment; DeepLearning.AI course
-- [[ai-engineering/vllm-semantic-router|vLLM Semantic Router]] — entity · draft · request-routing control plane (signals→projections→decisions→algorithms→models); Fusion Mixture-of-Models primitive; Session-Aware Agentic Routing (SAAR: router memory, hard locks, prefix-cache economics); Themis v0.3
+- [[ai-engineering/vllm|vLLM]] — entity · draft · open-source LLM inference-serving engine; scheduler/paged KV cache/prefix caching/speculative decoding; day-0 support for MiniMax M3, DiffusionGemma, Nemotron 3 Ultra, Laguna XS.2; DGX Spark local deployment; DeepLearning.AI course; native RL weight-sync/pause-resume APIs; PegaFlow external KV cache; Elastic Expert Parallelism
+- [[ai-engineering/vllm-semantic-router|vLLM Semantic Router]] — entity · draft · request-routing control plane (signals→projections→decisions→algorithms→models); Fusion Mixture-of-Models primitive; Session-Aware Agentic Routing (SAAR: router memory, hard locks, prefix-cache economics); Themis v0.3; multimodal routing vision-signal hardening (inverted-embedding bug, cross-language reference parity)
 - [[ai-engineering/minimax-m3|MiniMax M3]] — entity · draft · 1M-token-context model family; MiniMax Sparse Attention (128-token block scoring/top-k selection); MXFP8 MoE, EAGLE3 speculative decoding
 - [[ai-engineering/diffusiongemma|DiffusionGemma]] — entity · draft · Google's 26B discrete diffusion LLM (dLLM) on Gemma4; parallel-canvas denoising, entropy-bound acceptance, self-conditioning; first dLLM natively in vLLM
 - [[ai-engineering/vime|vime]] — entity · draft · vLLM-ecosystem RL post-training framework; ports slime's training stack onto vLLM rollout; GRPO/PPO, R3 routing replay for MoE alignment
 - [[ai-engineering/nemotron-3-ultra|Nemotron 3 Ultra]] — entity · draft · NVIDIA's open-weight frontier agentic reasoning model; hybrid Transformer-Mamba MoE (550B/55B active), NVFP4, MTP; day-0 on vLLM
 - [[ai-engineering/laguna-xs2|Laguna XS.2]] — entity · draft · Poolside's agentic-coding MoE model (33B-A3B); DFlash speculative decoder (2-3x faster, no quality loss); FP8/NVFP4/INT4/INT8 LLM Compressor checkpoints
 - [[ai-engineering/quantization|Quantization]] — concept · draft · compressing weights/activations to low-bit formats for memory + latency wins; AutoRound PTQ, NVFP4, LLM Compressor; memory-headroom-unlocks-parallelism pattern
+- [[ai-engineering/speculative-decoding|Speculative Decoding]] — concept · draft · draft-model-proposes/target-model-verifies inference acceleration; Eagle 3.1 attention-drift fix (FC normalization + post-norm feedback), DFlash single-pass block-diffusion drafting, Speculators v0.5.0 unified online/offline training
 - [[ai-engineering/perplexity-computer|Perplexity Computer]] — entity · draft · cloud-native zero-setup AI agent from Perplexity AI; model-agnostic auto-routing, parallel sub-agents, isolated VPS, $200/month; use-case split vs OpenClaw
 - [[ai-engineering/paperclip|Paperclip]] — entity · draft · open-source PM control plane for an agent fleet; goal→issues decomposition, org chart, chief-of-staff agent, blocked-status/autonomy log
 - [[ai-engineering/tool-calling|Tool Calling]] — concept · draft · how LLMs request and receive tool execution results
@@ -86,7 +91,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[ai-engineering/llm|LLM]] — concept · draft · next-token prediction, parameters, training phases (pre-training + RLHF)
 - [[ai-engineering/transformer|Transformer]] — concept · mature · transformer internals: tokenization, embeddings, RoPE, attention (Q/K/V, GQA, KV cache), FFN, residual stream, next-token loop
 - [[ai-engineering/embeddings|Embeddings]] — concept · draft · the vector under both the transformer (token embeddings) and retrieval (sentence/doc embeddings); similarity metrics, quantization cost, 3 failure modes (exact-token loss, time-blindness, disconnected chunks)
-- [[ai-engineering/mixture-of-experts|Mixture of Experts]] — concept · draft · parallel expert FFNs + router activating a few per token; scale params without scaling per-token compute (Mixtral 8x7B)
+- [[ai-engineering/mixture-of-experts|Mixture of Experts]] — concept · draft · parallel expert FFNs + router activating a few per token; scale params without scaling per-token compute (Mixtral 8x7B); vLLM Elastic Expert Parallelism (runtime DP-size resizing, fault-tolerance building block)
 - [[ai-engineering/agent-memory|Agent Memory]] — concept · draft · short-term (context window) + long-term (vector DB / CLAUDE.md) memory tiers
 - [[ai-engineering/mcp|MCP]] — concept · draft · Model Context Protocol; coordination layer for agents, tools, and memory; host/client/server triad + runtime loop
 - [[ai-engineering/openai|OpenAI]] — entity · stub · OpenAI developer model lineup (Apr 2025): o3/o4-mini reasoning, GPT-4.1 family (1M ctx), Codex CLI, Evals API, audio models
@@ -167,6 +172,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[ai-engineering/sources/ai-founders-claude-notebooklm|AI Founders — Claude + NotebookLM Automation]] — source · draft · 3 chains (autopilot brief, auto-refresh loop, competitive radar), consumer vs engine framing
 
 ### data-engineering
+- [[data-engineering/sources/start-your-data-portfolio-project-right-playbook-ep-2-HfPPuSGkRK0|Start Your Data Portfolio Project RIGHT | Playbook Ep. 2]] — source · stub · This video covers the first steps in setting up a portfolio project, focusing on finding realistic a…
 - [[data-engineering/sources/realtime-data-streaming-end-to-end-data-engineering-project-GqAcTrqKcrY|Realtime Data Streaming |  End To End Data Engineering Project]] — source · stub · This video covers an end-to-end data engineering project that utilizes Apache Airflow, Apache Zookee…
 - [[data-engineering/sources/databases-vs-data-warehouses-vs-data-lakes-what-is-the-diffe-FxpRL0m9BcA|Databases Vs Data Warehouses Vs Data Lakes - What Is The Difference And Why Should You Care?]] — source · stub · The video compares databases, data warehouses, and data lakes, focusing on their differences and use…
 - [[data-engineering/sources/if-i-started-over-as-a-data-engineer-CEGN-LbiX4Y|If I Started Over As A Data Engineer]] — source · stub · A data engineer shares their experience and provides a 6-step roadmap for becoming a high-paying dat…
@@ -305,6 +311,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [[software-engineering/sources/software-engineers-guidebook|Source: The Software Engineer's Guidebook]] — source · draft · Gergely Orosz 359-page career reference (full SWE arc)
 
 ### mlops
+- [[mlops/sources/sell-your-api-to-ai-agents-make-serious-money-in-2026-full-g-GyijriMIKPA|Sell Your API to AI Agents & Make SERIOUS Money in 2026 (full guide / beginner friendly)]] — source · stub · The video discusses selling APIs to AI agents, a new market opportunity, and how to make money by ex…
 - [[mlops/sources/how-i-built-my-own-ai-trading-assistant-using-claude-cowork-GlkJMO_ufYA|How I Built My Own AI Trading Assistant Using Claude Cowork]] — source · stub · The video showcases how to use Claude Cowork as a personal AI trading assistant, covering its featur…
 - [[mlops/sources/openclaw-2-0-is-here-6vPaitNQMGY|OpenClaw 2.0 is here.]] — source · stub · The video explains how to set up OpenClaw 2.0 on a virtual private server (VPS) using Hostinger, wit…
 - [[mlops/sources/this-underrated-tool-replaced-3-homelab-services-and-it-s-op-3wJ0IQ3rHjA|This Underrated Tool Replaced 3 Homelab Services (and it's open source!)]] — source · stub · The video discusses Netbird, an open-source tool that replaces multiple homelab services, providing …

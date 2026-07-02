@@ -12,6 +12,9 @@ sources:
   - path: raw/web/web-session-aware-agentic-routing-continuity-aware-model-selecti-1950138f.md
     channel: web
     ingested_at: 2026-07-02
+  - path: raw/web/web-from-text-to-multimodal-routing-hardening-vision-signals-in-cf3e11d0.md
+    channel: web
+    ingested_at: 2026-07-02
 aliases:
   - vLLM Semantic Router
   - vLLM-SR
@@ -94,6 +97,30 @@ Across a 21,600-turn deterministic policy matrix (balanced/tool-heavy/frontier-h
 
 SAAR is explicitly **not** just sticky-session routing: an ablation shows removing the drift-reset or idle-boundary mechanisms causes SAAR to "over-stick" after task drift or natural pauses, while removing the tool-lock or provider-state-lock mechanisms reintroduces unsafe switches (760 and 200 respectively) — each of SAAR's five pieces is independently load-bearing [^src3]. In live AMD ROCm serving (2,896 requests across balanced/stateful/idle workloads) and fault-injection tests (repeated HTTP 503s across provider-state/tool-loop/topic-drift phases), SAAR preserved **0 observed continuity violations**, with 100% session recovery after injected backend faults [^src3].
 
+## Multimodal routing: images as typed signals
+
+VSR is extending its Signal-Decision architecture from text-only routing to **multimodal routing**, where an image (screenshot, scan, document page) becomes a typed signal composed with text signals in the same decision fabric — not a side-channel image classifier bolted onto a text router [^src4]. Example: a passport image should route to identifier/PII-handling policy even when the accompanying text is generic ("summarize this") [^src4].
+
+### The hardening story: an inverted vision signal
+
+A deployed multimodal path around the compact `multi-modal-embed-small` (mmes) encoder looked "confidently wrong" rather than merely weak: on an 11-image probe across 3 verticals and 21 candidate labels, the deployed Candle (Rust) binding path ranked the wrong vertical highest on **9 of 11 images** (an 82% inversion rate) — e.g. medical X-rays scored closer to semiconductor candidates than medical ones [^src4]. For a routing policy layer, an *inverted* signal is worse than no signal: it produces confidence in the wrong direction rather than mere uncertainty [^src4].
+
+The natural hypothesis — the compact encoder itself was too weak — was tested and **ruled out**: SigLIP2-base, SigLIP-base (via Hugging Face Transformers), mmEL (SigLIP2-based), and even the mmes model loaded through its **PyTorch reference path** all scored 10/10 on the same probe [^src4]. The bug was not the model; it was the Candle-binding *implementation path*.
+
+**Diagnostic method that found it**: run the same model on the same fixture through both the production (Candle) and reference (PyTorch) paths and directly compare embedding behavior. On a passport fixture, the PyTorch path returned cosine 0.7204 against the relevant anchor; the Candle path returned 0.1576 — a 5–8x magnitude gap on the same model and image [^src4]. **Lesson for multimodal serving generally**: reference-path comparison should be the first diagnostic when a production embedding path misbehaves, not the last, and before assuming the model itself is too weak [^src4].
+
+### Root causes (three separate bugs in the Candle path)
+
+1. **Wrong pooling head** — the Rust implementation used BERT-style mean+Linear+tanh pooling instead of SigLIP's attentional-probe pooling head (fixed in PR #1927) [^src4].
+2. **Incomplete image normalization** — the Go image loader produced `[0,1]`-range CHW float32 pixels without SigLIP's required per-channel `(x - 0.5) / 0.5` normalization (fixed in PR #1928) [^src4].
+3. **Preprocessing drift** — the Go-side resize used a 4-tap bilinear filter vs. the PyTorch reference's PIL-based bicubic+antialias; moved into Rust using Catmull-Rom filtering to approximate PIL behavior more closely (fixed in PR #1943) [^src4].
+
+A three-vector isolation experiment separated model-forward drift from preprocessing drift on the canonical passport fixture: Python-vs-Candle-PIL (model-forward only) hit cosine 0.999989; Candle-PIL-vs-Candle-Go (preprocessing only) hit 0.999916; the full branch-stack Python-vs-Candle-Go comparison hit 0.999902 — vs. a pre-fix preprocessing cosine of 0.990145 [^src4]. Across a 20-image validation corpus (identifier, ambient, code, adversarial, out-of-distribution), all 20 images landed at cosine ≥0.999 vs. the PyTorch reference post-fix [^src4]. **This is branch-stack validation, not yet released production behavior** — the numbers hold once PRs #1927/#1928/#1943 merge [^src4].
+
+### Why this matters beyond one bug fix
+
+The failure spanned four layers of a cross-language serving stack (Go image loader → Rust FFI → Candle model implementation → PyTorch reference) that each looked individually reasonable while jointly producing a route-breaking mismatch [^src4]. For VSR specifically, **reference parity is a control-plane invariant, not model-quality hygiene**: if a vision signal is anti-correlated, every downstream decision composing that signal can be logically correct on paper and operationally wrong in production [^src4]. Once trustworthy, the vision signal lets text and image evidence share the same Signal-Decision fabric — e.g. clinical text + clinical image + PHI/PII signal → route to a protected medical VLM path with privacy plugins enabled [^src4]. Classifier signals run concurrently through `runSignalDispatchers`, so full text-routing classification decisions bound at roughly 1.3s wall-clock on CPU (bounded by the slowest enabled classifier, not the sum) — the same concurrency model multimodal signals are expected to inherit [^src4].
+
 ## Themis release surface (v0.2 → v0.3 delta)
 
 - **Canonical v0.3 config contract** — single `config.yaml` shape replaces overlapping Docker/dashboard/Helm/CRD layouts; `vllm-sr init` removed in favor of `vllm-sr serve` (dashboard-first) or `vllm-sr config migrate`/`config import` [^src2].
@@ -115,3 +142,4 @@ SAAR is explicitly **not** just sticky-session routing: an ablation shows removi
 [^src1]: [Beyond One Model: Fusion in vLLM Semantic Router](../../raw/web/web-beyond-one-model-fusion-in-vllm-semantic-router-9f81985e.md) — vLLM blog, 2026-06-16
 [^src2]: [vLLM Semantic Router v0.3 Themis: From Signals to Stateful Production Routing](../../raw/web/web-vllm-semantic-router-v0-3-themis-from-signals-to-stateful-pr-fd130560.md) — vLLM blog, 2026-06-05
 [^src3]: [Session-Aware Agentic Routing: Continuity-Aware Model Selection for Long-Horizon LLM Agents](../../raw/web/web-session-aware-agentic-routing-continuity-aware-model-selecti-1950138f.md) — vLLM blog, 2026-06-02
+[^src4]: [From Text to Multimodal Routing: Hardening Vision Signals in vLLM Semantic Router](../../raw/web/web-from-text-to-multimodal-routing-hardening-vision-signals-in-cf3e11d0.md) — vLLM blog, 2026-05-28
