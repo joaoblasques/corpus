@@ -176,9 +176,14 @@ Ollama published documentation for running [[ai-engineering/openclaw|OpenClaw]] 
 | Code tasks | qwen2.5-coder:7b |
 | Vision tasks | llava:13b |
 
+## OpenJarvis integration
+
+[[ai-engineering/openjarvis|OpenJarvis]], a local-first personal-AI framework from Stanford's Hazy Research and Scaling Intelligence labs, ships v1.0 with built-in Ollama support — auto-detecting an existing Ollama install and defaulting to local models with cloud as optional fallback [^src_oj].
+
 ## Related
 
 - [[ai-engineering/openclaw|OpenClaw]] — local agent framework; `ollama launch openclaw` integration
+- [[ai-engineering/openjarvis|OpenJarvis]] — Stanford local-first personal-AI framework built on Ollama
 - [[ai-engineering/pi-agent|Pi Agent]] — minimal coding agent with Ollama/OpenRouter multi-model backend
 - [[ai-engineering/gemini-cli|Gemini CLI]] — competing open-source agentic CLI
 - [[ai-engineering/claude-code|Claude Code]] — Anthropic API compatibility bridge
@@ -201,3 +206,4 @@ Ollama published documentation for running [[ai-engineering/openclaw|OpenClaw]] 
 [^src12]: [NVIDIA DGX Spark Performance](../../raw/_inbox/web-nvidia-dgx-spark-performance-ollama-blog-ed001519.md) — Ollama blog, Oct 23 2025
 [^src13]: [NVIDIA Nemotron 3 Ultra](../../raw/_inbox/web-nvidia-nemotron-3-ultra-ollama-blog-6c770119.md) — Ollama blog, Jun 4 2026
 [^src14]: [Claude Code with Anthropic API Compatibility](../../raw/_inbox/web-claude-code-with-anthropic-api-compatibility-ollama-blog-eb664f1b.md) — Ollama blog, v0.14+
+[^src_oj]: [OpenJarvis: a local-first personal AI is now available to run with Ollama](../../raw/web/web-openjarvis-a-local-first-personal-ai-is-now-available-to-run-559ec7e6.md) — Ollama Blog, 2026-05-28

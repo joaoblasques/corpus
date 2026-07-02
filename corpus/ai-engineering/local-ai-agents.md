@@ -75,6 +75,7 @@ Practitioners commonly run **both** at once for different use cases [^src1] [24:
 ## See also
 
 - [[ai-engineering/openclaw|OpenClaw]] — open-source local-agent framework; model routing; Cloud Hub
+- [[ai-engineering/openjarvis|OpenJarvis]] — Stanford Hazy Research local-first agent framework on Ollama
 - [[ai-engineering/claude-cowork|Claude Cowork]] — Anthropic's safer no-code local agent
 - [[ai-engineering/paperclip|Paperclip]] — fleet management / supervision control plane
 - [[ai-engineering/ai-agent|AI Agent]] — the underlying single-agent building block

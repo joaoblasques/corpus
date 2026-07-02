@@ -53,6 +53,9 @@ MoE is one of the choices that defines a model's **configuration** (alongside la
 - [[ai-engineering/transformer|Transformer]] — MoE replaces the dense feed-forward network inside transformer layers
 - [[ai-engineering/llm|LLM]] — MoE is a scaling strategy for the parameter count of modern LLMs
 - [[ai-engineering/claude-models|Claude Model Lineup]] — frontier model families where dense-vs-MoE is a live architectural choice
+- [[ai-engineering/vllm|vLLM]] — serving engine with expert-parallel and quantized MoE execution backends
+- [[ai-engineering/minimax-m3|MiniMax M3]] — MXFP8-quantized MoE model with day-0 vLLM support
+- [[ai-engineering/vime|vime]] — RL post-training framework with MoE-specific train-inference alignment (R3 routing replay)
 
 ---
 
