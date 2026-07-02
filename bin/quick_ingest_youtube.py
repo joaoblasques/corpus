@@ -219,12 +219,22 @@ def process_stub(f: Path, text: str, playlist: str, *, model: str, rescue: bool,
     body = text.split("---", 2)[-1]
     has_transcript = tstatus == "ok" and "_No transcript available._" not in body
 
-    # rescue a blocked stub's transcript via captions (paced by caller's rescue budget)
-    if not has_transcript and rescue and tstatus in ("blocked", "none"):
+    # A blocked stub might be rate-limited (retryable) OR genuinely caption-less
+    # (permanent). Only a rescue attempt can tell them apart, so NEVER write a
+    # permanent metadata-only page for a blocked stub on a guess:
+    #   - no rescue budget          -> skip (leave in inbox for a rescue window)
+    #   - rescue -> captions ok      -> fold transcript in, summarize
+    #   - rescue -> still `blocked`  -> rate-limited: skip (retry a future window)
+    #   - rescue -> none_found/disabled -> caption-less: metadata-only page (permanent)
+    if not has_transcript and tstatus in ("blocked", "none"):
+        if not rescue:
+            return "skipped_norescue"
         tbody, tst = yc._caption_transcript(vid)
         if tst == "ok" and tbody:
             body = "\n\n" + tbody
             has_transcript, tstatus = True, "ok"
+        elif tst == "blocked":
+            return "skipped_ratelimit"
 
     meta = {
         "video_id": vid, "url": _front(text, "url") or f"https://youtu.be/{vid}",
@@ -297,9 +307,11 @@ def main(argv=None) -> int:
 
     tech = tech_playlists()
     today = datetime.date.today().isoformat()
-    tally = {"ok_transcript": 0, "ok_metaonly": 0, "no_id": 0, "rescued": 0, "skipped": 0}
+    tally = {"ok_transcript": 0, "ok_metaonly": 0, "no_id": 0, "rescued": 0,
+             "skipped_ratelimit": 0, "skipped_norescue": 0}
     rescued = 0
     processed = 0
+    consec_ratelimit = 0
     for f, text, pl in iter_tech_stubs(tech, ready_only=args.ready_only):
         if args.max and processed >= args.max:
             break
@@ -310,6 +322,7 @@ def main(argv=None) -> int:
                            today=today, dry_run=args.dry_run)
         processed += 1
         if res.startswith("ok:"):
+            consec_ratelimit = 0
             if "+transcript" in res:
                 tally["ok_transcript"] += 1
                 if was_blocked and allow_rescue:
@@ -318,8 +331,19 @@ def main(argv=None) -> int:
                 tally["ok_metaonly"] += 1
         elif res == "no_id":
             tally["no_id"] += 1
+        elif res == "skipped_ratelimit":
+            tally["skipped_ratelimit"] += 1
+            consec_ratelimit += 1
+        elif res == "skipped_norescue":
+            tally["skipped_norescue"] += 1
         print(json.dumps({"stub": f.name, "result": res}), flush=True)
-        if not args.dry_run and args.sleep:
+        # the caption API is IP-wide rate-limited; once it starts blocking, every
+        # further rescue in this window will too — stop churning after 3 in a row.
+        if consec_ratelimit >= 3:
+            print(json.dumps({"note": "caption rate-limit hit — stopping (retry next window)"}),
+                  flush=True)
+            break
+        if not args.dry_run and args.sleep and res.startswith("ok:"):
             time.sleep(args.sleep)
     tally["rescued"] = rescued
     print(json.dumps({"tally": tally, "processed": processed}))
