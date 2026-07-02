@@ -33,6 +33,18 @@ sources:
   - path: raw/web/web-elastic-expert-parallelism-in-vllm-e7f766b6.md
     channel: web
     ingested_at: 2026-07-02
+  - path: raw/web/web-announcing-verl-omni-easy-fast-and-stable-rl-training-for-di-2040adf3.md
+    channel: web
+    ingested_at: 2026-07-02
+  - path: raw/web/web-vllm-tops-the-artificial-analysis-leaderboard-762bd790.md
+    channel: web
+    ingested_at: 2026-07-02
+  - path: raw/web/web-serving-agentic-workloads-at-scale-with-vllm-x-mooncake-78c3044b.md
+    channel: web
+    ingested_at: 2026-07-02
+  - path: raw/web/web-run-highly-efficient-multimodal-agentic-ai-with-nvidia-nemot-b0ef6e3c.md
+    channel: web
+    ingested_at: 2026-07-02
 aliases:
   - vLLM
   - vllm
@@ -123,6 +135,43 @@ vLLM's expert-parallel (EP) group size was previously fixed at deployment start;
 
 Red Hat and Andrew Ng's DeepLearning.AI published **"Fast & Efficient LLM Inference with vLLM"** (Cedric Clyburn, Red Hat; ~1.5 hours, 9 lessons, 3 hands-on labs), covering the full compress → serve → benchmark lifecycle: quantizing a model with LLM Compressor, serving it with vLLM (observing continuous batching and prefix caching via live metrics), and benchmarking throughput/latency with GuideLLM plus quality validation with lm-eval [^src6].
 
+## RL post-training for multimodal/diffusion models: VeRL-Omni
+
+**VeRL-Omni** is a general RL post-training framework for multimodal generative models (diffusion + omni-modality), built on `verl` and **vLLM-Omni**, addressing needs the text-only LLM RL stack doesn't cover: non-autoregressive denoising-trajectory rollouts, multi-stage pipelines (text encoder → DiT → VAE), and multimodal reward models (VLM/OCR judges) [^src11].
+
+- **vLLM-Omni integration**: high-throughput async serving for multimodal generation (accuracy on par with `diffusers`), continuously optimized via step-wise continuous batching and embedding caching; reward computation overlaps with ongoing rollout/training to cut end-to-end latency [^src11].
+- **Model/algorithm coverage**: Qwen-Image (FlowGRPO/MixGRPO/GRPO-Guard, released), Qwen3-Omni-Thinker (GSPO, PR-ready), BAGEL (FlowGRPO, PR-ready), Wan2.2 and SD3.5 (DanceGRPO/DPO, WIP) [^src11].
+- **Measured throughput** (Qwen-Image FlowGRPO OCR-reward training, NVIDIA H800): 0.305 images/GPU/s colocated; moving the reward model to its own GPU (async reward) cut wall-clock time per step by ~14% (420s → 360s) despite using an extra GPU [^src11].
+- Supports both NVIDIA GPUs and Ascend NPUs [^src11].
+
+## Leaderboard performance: DeepSeek V3.2, MiniMax-M2.5, Qwen 3.5 397B
+
+An Artificial Analysis benchmark (via DigitalOcean, May 2026) found vLLM's community-built engine topped inference-performance rankings for three frontier open-weight models on NVIDIA Blackwell Ultra silicon, contradicting the assumption that best-in-class inference requires a proprietary stack [^src12]:
+
+- **DeepSeek V3.2**: 230 TPS best per-user output throughput (>4x most other providers on the same model). Fix: op fusion across the attention path (Q/KV normalization, rotary embedding, indexer layernorm+rotary, FP8 quant, KV cache writes collapsed from ~33 kernels/layer toward ~10) — 1.28x speedup at batch 1. A new router GEMM kernel specialized for DeepSeek V3's MoE routing added +6% at batch 1; a new TopK kernel for the sparse-attention indexer (picks the right algorithm per row, fits one CUDA graph) cut 128K-context decode latency up to 17%. With MTP + prefill/decode disaggregation: 262 tok/s on one 8×B300 node at concurrency 1. This fusion work now underpins vLLM's DeepSeek V4 support [^src12].
+- **MiniMax-M2.5**: ranked first across all 12 providers measured, TTFT under 1s on 10K-token prompts. Fix: a custom EAGLE3 draft model trained via **TorchSpec** (torch-native online speculative decoding — FSDP draft training + vLLM target inference running concurrently), consuming live vLLM-generated hidden states rather than a generic supervised dataset, plus a custom QK-norm fusion (`fuse_minimax_qk_norm`) for the model's non-standard cross-TP-rank normalization. Ceiling experiment (perfect draft, synthetic 100% acceptance): 326 tok/s at concurrency 1, TP=4 [^src12]. See [[ai-engineering/speculative-decoding|Speculative Decoding]].
+- **Qwen 3.5 397B**: first across all 12 providers, TTFT under 1s on 10K-token prompts. Fix: Qwen's linear attention + non-standard normalization missed vLLM's `allreduce_rmsfusion` pattern, leaving ~half of decode time in un-fused cross-device reduces; four fixes (fusion-pattern recognition, qk-norm+rope kernel work, post-conv-path fusion for the linear-attention architecture, dual-stream execution) closed the gap. Production result at TP=8 + expert parallelism: 163 tok/s at concurrency 1; 7.33 req/s at concurrency 256 (+10% vs. 6.69 req/s baseline) [^src12].
+
+## Distributed KV cache for agentic serving: Mooncake Store integration
+
+Agentic workloads (Claude Code, OpenClaw-style long-horizon tool-use loops) generate massive shared prefixes recomputed across turns — traced from Codex/GPT-5.4 on SWE-bench Pro: ~131:1 input-to-output token ratio, context growing from 12K to 80K+ tokens over a median 33 turns, 94.2% cache-hit rate if prefixes are cached [^src13].
+
+- **Why local KV offload isn't enough**: CPU/DRAM/disk offloading hits capacity limits (a 100K-token context can be several GB) and, when a router migrates a session's next turn to a different instance for load balancing, that instance has never seen the prefix and must recompute from scratch [^src13].
+- **Mooncake Store architecture**: a cluster-wide master server tracks KV block hashes/metadata and client health; GPU-node clients manage local CPU/DRAM/SSD and connect via RDMA, forming a distributed KV cache pool. Integrates through vLLM's existing `KVConnector` interface (the same abstraction used for prefill/decode disaggregation) [^src13].
+- **SM-free, zero-copy transfer**: uses GPUDirect RDMA to move KV blocks directly between GPU HBM and CPU memory — no staging buffer, no SM consumption (unlike kernel-based copying), all RDMA prep/issue work runs on a dedicated background I/O thread so the transfer path is fully asynchronous from vLLM's perspective. Multi-NIC pooling + topology-aware path selection via the Mooncake Transfer Engine aggregates bandwidth across multiple RNICs per node [^src13].
+- **MultiConnector composition**: chains the Mooncake Store connector alongside the existing PD connector — prefill instances store KV in the distributed pool AND prepare PD-connector blocks; decode instances write into the pool (visible immediately to prefill instances) but don't read from it directly [^src13].
+- **Measured results** (Kimi-2.5 NVFP4 on GB200, 1P1D, 12 GPUs, realistic Codex traces): 3.8x throughput, 46x lower P50 TTFT, 8.6x lower end-to-end latency — driven by cache-hit rate rising from 1.7% (system-prompt-only caching) to 92.2%. Scaling test (round-robin routing across up to 60 GPUs, synthetic Codex-derived workload): >95% cache-hit rate sustained, near-linear scaling [^src13].
+
+## Multimodal perception sub-agent: NVIDIA Nemotron 3 Nano Omni
+
+**Nemotron 3 Nano Omni** is NVIDIA's open multimodal model (part of the Nemotron 3 family) built to power perception sub-agents — one model reasoning across vision, audio, and language in a single loop, replacing the fragmented separate-vision/speech/language-model stacks that multiply inference hops and fragment context [^src14].
+
+- **Architecture**: hybrid Transformer-Mamba MoE, 30B total / 3B active parameters, 256K context; unified vision + audio encoders (no separate perception models); Conv3D layers for efficient video temporal-spatial handling [^src14].
+- **Efficiency**: 9x higher throughput than other open omni models at matched interactivity (7.4x for multi-document, 9.2x for video use cases specifically); Efficient Video Sampling (EVS) lowers compute for video reasoning via temporal-aware perception; supports FP8 and NVFP4 quantization [^src14]. See [[ai-engineering/quantization|Quantization]].
+- **Accuracy**: 20% higher multimodal intelligence vs. the best open alternative; top placements across six multimodal leaderboards (document intelligence: MMlongbench-Doc, OCRBenchV2; video/audio: WorldSense, DailyOmni, VoiceBench); highest throughput + lowest inference cost for video-level tagging on MediaPerf [^src14].
+- **Post-training**: multi-environment RL via NVIDIA NeMo RL and NeMo Gym across text/image/audio/video environments [^src14].
+- **Role in an agent system**: functions as the perception/context sub-agent feeding structured understanding into downstream orchestration/execution agents — targeted at computer-use agents, document-intelligence workflows, and audio-video understanding pipelines [^src14]. Supported on B200, H100, H200, A100, L40S, DGX Spark, RTX 6000 [^src14]. See [[ai-engineering/nemotron-3-ultra|Nemotron 3 Ultra]] for NVIDIA's related agentic-reasoning model.
+
 ## Related
 
 - [[ai-engineering/mixture-of-experts|Mixture of Experts]] — MoE execution is a first-class vLLM serving concern (expert parallelism, Elastic EP runtime scaling, quantized MoE backends)
@@ -147,3 +196,7 @@ Red Hat and Andrew Ng's DeepLearning.AI published **"Fast & Efficient LLM Infere
 [^src8]: [Native RL APIs in vLLM](../../raw/web/web-native-rl-apis-in-vllm-a83f1153.md) — vLLM blog, 2026-05-28
 [^src9]: [vLLM x Novita AI: PegaFlow for Production-Grade External KV Cache](../../raw/web/web-vllm-x-novita-ai-pegaflow-for-production-grade-external-kv-c-4b8a8880.md) — vLLM blog, 2026-05-18
 [^src10]: [Elastic Expert Parallelism in vLLM](../../raw/web/web-elastic-expert-parallelism-in-vllm-e7f766b6.md) — vLLM blog, 2026-05-14
+[^src11]: [Announcing VeRL-Omni: Easy, Fast, and Stable RL Training for Diffusion and Omni-Modality Models](../../raw/web/web-announcing-verl-omni-easy-fast-and-stable-rl-training-for-di-2040adf3.md) — vLLM blog, 2026-05-14
+[^src12]: [vLLM Tops the Artificial Analysis Leaderboard](../../raw/web/web-vllm-tops-the-artificial-analysis-leaderboard-762bd790.md) — vLLM blog, 2026-05-11
+[^src13]: [Serving Agentic Workloads at Scale with vLLM x Mooncake](../../raw/web/web-serving-agentic-workloads-at-scale-with-vllm-x-mooncake-78c3044b.md) — vLLM blog, 2026-05-06
+[^src14]: [Run Highly Efficient Multimodal Agentic AI with NVIDIA Nemotron 3 Nano Omni Using vLLM](../../raw/web/web-run-highly-efficient-multimodal-agentic-ai-with-nvidia-nemot-b0ef6e3c.md) — vLLM blog, 2026-04-28
