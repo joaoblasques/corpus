@@ -282,7 +282,7 @@ def process_stub(f: Path, text: str, playlist: str, *, model: str, rescue: bool,
                      new_transcript=body if has_transcript and tstatus == "ok" else None)
     YT_CHANNEL.mkdir(parents=True, exist_ok=True)
     (YT_CHANNEL / f.name).write_text(stamped, encoding="utf-8")
-    f.unlink()
+    f.unlink(missing_ok=True)
     return f"ok:{info['domain']}" + ("+transcript" if has_transcript else "+metaonly")
 
 

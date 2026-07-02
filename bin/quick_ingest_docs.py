@@ -225,7 +225,7 @@ def process(f: Path, text: str, ch: str, *, backend: str, model: str, today: str
     dest_channel.mkdir(parents=True, exist_ok=True)
     (dest_channel / f.name).write_text(_stamp(text, today, f"corpus/{info['domain']}/sources/{slug}.md"),
                                        encoding="utf-8")
-    f.unlink()
+    f.unlink(missing_ok=True)
     return f"ok:{info['domain']}"
 
 
