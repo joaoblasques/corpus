@@ -12,6 +12,17 @@ import pending_review  # noqa: E402
 
 
 # ---------------------------------------------------------------------------
+# OKF conformance: path constants
+# ---------------------------------------------------------------------------
+
+def test_log_path_constant_is_log_md():
+    """LOG_PATH must point to corpus/log.md (OKF conformant name, not _log.md)."""
+    assert pending_review.LOG_PATH.name == "log.md", (
+        f"LOG_PATH filename should be 'log.md', got {pending_review.LOG_PATH.name!r}"
+    )
+
+
+# ---------------------------------------------------------------------------
 # count_deferred
 # ---------------------------------------------------------------------------
 

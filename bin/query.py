@@ -4,8 +4,8 @@
 The skill answers a knowledge question from the corpus. When coverage is thin it
 fetches web content and invokes this script to (a) idempotently queue each fetched
 source into raw/_inbox/ (deduped by source_url) and (b) append a `query` entry to
-corpus/_log.md recording the gap. Writes ONLY to raw/_inbox/ and (append-only) to
-corpus/_log.md.
+corpus/log.md recording the gap. Writes ONLY to raw/_inbox/ and (append-only) to
+corpus/log.md.
 """
 from __future__ import annotations
 
@@ -21,7 +21,7 @@ import collect_email as ce  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 INBOX = ROOT / "raw" / "_inbox"
-LOG_PATH = ROOT / "corpus" / "_log.md"
+LOG_PATH = ROOT / "corpus" / "log.md"
 DEDUP_DIRS = [ROOT / "raw" / "_inbox", ROOT / "raw" / "web", ROOT / "raw" / "youtube"]
 
 # Origin provenance: queries delegated from outside the corpus (e.g. claudesidian /

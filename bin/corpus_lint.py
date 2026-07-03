@@ -14,7 +14,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 CORPUS = ROOT / "corpus"
-_META = {"_index.md", "_log.md", "_domains.md", "_config.md", "_REVIEW.md"}
+_META = {"index.md", "log.md", "_domains.md", "_config.md", "_REVIEW.md"}
 
 # target stops at ] | or \ (a `\|` escaped pipe appears in markdown-table wikilinks)
 _WIKILINK_RE = re.compile(r"\[\[([^\]|\\]+)")

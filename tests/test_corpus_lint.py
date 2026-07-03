@@ -68,3 +68,25 @@ def test_lint_aggregates(tmp_path):
     (c / "ai-engineering" / "x.md").write_text("body\n", encoding="utf-8")
     report = cl.lint(c)
     assert set(report) == {"broken_wikilinks", "broken_citations", "orphans", "stubs"}
+
+
+def test_meta_set_uses_okf_reserved_names():
+    """_META must contain OKF reserved names (index.md / log.md) not the old underscore forms."""
+    assert "index.md" in cl._META, "_META should contain 'index.md' (OKF reserved)"
+    assert "log.md" in cl._META, "_META should contain 'log.md' (OKF reserved)"
+    assert "_index.md" not in cl._META, "_META should NOT contain old '_index.md'"
+    assert "_log.md" not in cl._META, "_META should NOT contain old '_log.md'"
+
+
+def test_index_and_log_not_checked_for_broken_wikilinks(tmp_path):
+    """index.md and log.md at the corpus root must be skipped (not checked for broken links)."""
+    c = _corpus(tmp_path)
+    (c / "ai-engineering" / "README.md").write_text("# AI\n", encoding="utf-8")
+    # Place files with wikilinks at the corpus root — they should be skipped
+    (c / "index.md").write_text("[[ai-engineering/does-not-exist|X]]\n", encoding="utf-8")
+    (c / "log.md").write_text("[[ai-engineering/also-missing|Y]]\n", encoding="utf-8")
+    broken = cl.find_broken_wikilinks(c)
+    # Neither index.md nor log.md should produce broken-wikilink reports
+    paths = [src for src, _ in broken]
+    assert not any("index.md" in p for p in paths), "index.md should be skipped"
+    assert not any("log.md" in p for p in paths), "log.md should be skipped"

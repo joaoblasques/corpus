@@ -15,7 +15,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 REVIEW_PATH = ROOT / "raw" / "_inbox" / "_REVIEW.md"
-LOG_PATH = ROOT / "corpus" / "_log.md"
+LOG_PATH = ROOT / "corpus" / "log.md"
 
 
 # ---------------------------------------------------------------------------

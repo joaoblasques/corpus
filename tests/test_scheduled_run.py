@@ -190,14 +190,14 @@ class TestCLI:
     def test_run_subcommand_exits_zero(self, tmp_path):
         """The `run --dry-run` subcommand exits with code 0."""
         lock = tmp_path / ".cli_test.lock"
-        log = tmp_path / "_log.md"
+        log = tmp_path / "log.md"
         rc, _ = self._run_cli("run", "--dry-run", lock_path=lock, log_path=log)
         assert rc == 0
 
     def test_run_subcommand_prints_json(self, tmp_path):
         """The `run --dry-run` subcommand prints a JSON line to stdout."""
         lock = tmp_path / ".cli_test.lock"
-        log = tmp_path / "_log.md"
+        log = tmp_path / "log.md"
         _, out = self._run_cli("run", "--dry-run", lock_path=lock, log_path=log)
         parsed = json.loads(out)
         assert "status" in parsed
@@ -205,14 +205,14 @@ class TestCLI:
     def test_run_subcommand_releases_lock(self, tmp_path):
         """The `run --dry-run` subcommand releases the lock on exit."""
         lock = tmp_path / ".cli_test.lock"
-        log = tmp_path / "_log.md"
+        log = tmp_path / "log.md"
         self._run_cli("run", "--dry-run", lock_path=lock, log_path=log)
         assert not lock.exists(), "lock file should be cleaned up after CLI run"
 
     def test_run_subcommand_skips_when_lock_already_held(self, tmp_path, monkeypatch):
         """The `run` subcommand exits 0 and reports skipped/lock_held when lock pre-exists."""
         lock = tmp_path / ".cli_test.lock"
-        log = tmp_path / "_log.md"
+        log = tmp_path / "log.md"
         # Bypass the on-main branch guard so this test is branch-independent
         # (it exercises the lock path, not the branch guard).
         monkeypatch.setenv("SCHEDULED_RUN_ALLOW_ANY_BRANCH", "1")
@@ -771,24 +771,33 @@ class TestWriteRunReport:
             "ingest": {"status": "ok", "ingested": ingested, "deferred": deferred},
         }
 
+    def test_log_path_constant_is_log_md(self):
+        """LOG_PATH must point to corpus/log.md (OKF conformant name, not _log.md)."""
+        assert scheduled_run.LOG_PATH.name == "log.md", (
+            f"LOG_PATH filename should be 'log.md', got {scheduled_run.LOG_PATH.name!r}"
+        )
+
     def test_appends_well_formed_block(self, tmp_path):
-        """write_run_report appends a config|scheduled run block with correct counts."""
-        log = tmp_path / "_log.md"
+        """write_run_report writes an OKF-conformant ## YYYY-MM-DD block with correct counts."""
+        log = tmp_path / "log.md"
         tallies = self._make_tallies(gmail_collected=2, obsidian_collected=1, ingested=3)
         scheduled_run.write_run_report(tallies, at="2026-06-15T10:00", log_path=log)
 
         text = log.read_text(encoding="utf-8")
-        assert "## [2026-06-15T10:00] config | scheduled run" in text
-        assert "gmail" in text
-        assert "2 collected" in text
-        assert "obsidian" in text
-        assert "1 collected" in text
-        assert "ingested" in text
+        # OKF log heading: ## YYYY-MM-DD (just the date, no timestamp bracket)
+        assert "## 2026-06-15" in text, f"Expected OKF date heading in log:\n{text}"
+        # No old-style bracket heading
+        assert "## [2026-06-15T10:00]" not in text
+        # Collector and ingest bullets
+        assert "* **Collectors**:" in text
+        assert "gmail=2" in text
+        assert "obsidian=1" in text
+        assert "* **Ingest**:" in text
         assert "3 ingested" in text
 
-    def test_second_call_appends_without_disturbing_first(self, tmp_path):
-        """A second write_run_report call appends; the first block is still present."""
-        log = tmp_path / "_log.md"
+    def test_second_call_same_day_merges_under_one_heading(self, tmp_path):
+        """Two same-day calls produce ONE ## YYYY-MM-DD heading; both calls' bullets present."""
+        log = tmp_path / "log.md"
         tallies1 = self._make_tallies(gmail_collected=1)
         tallies2 = self._make_tallies(gmail_collected=5)
 
@@ -796,27 +805,52 @@ class TestWriteRunReport:
         scheduled_run.write_run_report(tallies2, at="2026-06-15T10:00", log_path=log)
 
         text = log.read_text(encoding="utf-8")
-        assert "2026-06-15T09:00" in text, "first block timestamp missing"
-        assert "2026-06-15T10:00" in text, "second block timestamp missing"
-        # Both blocks present; file not rewritten
-        assert text.index("2026-06-15T09:00") < text.index("2026-06-15T10:00")
+        # Exactly one date heading — no duplicate
+        assert text.count("## 2026-06-15") == 1, (
+            f"Expected exactly one ## 2026-06-15 heading, got multiple:\n{text}"
+        )
+        # Content from BOTH calls is present
+        assert "gmail=1" in text, "first call's gmail count missing"
+        assert "gmail=5" in text, "second call's gmail count missing"
 
-    def test_appends_to_existing_file(self, tmp_path):
-        """write_run_report appends to a pre-existing log file without overwriting."""
-        log = tmp_path / "_log.md"
-        existing = "# Existing log content\n## [2026-01-01T00:00] ingest | something\n"
+    def test_newer_day_prepended_before_older_day(self, tmp_path):
+        """A later-date call is inserted BEFORE an earlier-date entry (newest-first)."""
+        log = tmp_path / "log.md"
+        tallies_old = self._make_tallies(gmail_collected=1)
+        tallies_new = self._make_tallies(gmail_collected=7)
+
+        scheduled_run.write_run_report(tallies_old, at="2026-06-14T08:00", log_path=log)
+        scheduled_run.write_run_report(tallies_new, at="2026-06-15T08:00", log_path=log)
+
+        text = log.read_text(encoding="utf-8")
+        # Newer date heading must appear BEFORE older date heading
+        assert text.index("## 2026-06-15") < text.index("## 2026-06-14"), (
+            "Newer date entry should appear before older date entry (newest-first)"
+        )
+
+    def test_inserts_after_header_section(self, tmp_path):
+        """write_run_report preserves a title/intro section and prepends the new block."""
+        log = tmp_path / "log.md"
+        existing = "# Corpus Log\n\n> OKF v0.1 change log. Newest first.\n\n## 2026-01-01\n* **Old**: entry\n"
         log.write_text(existing, encoding="utf-8")
 
         tallies = self._make_tallies()
         scheduled_run.write_run_report(tallies, at="2026-06-15T10:00", log_path=log)
 
         text = log.read_text(encoding="utf-8")
-        assert existing in text, "pre-existing content was overwritten"
-        assert "scheduled run" in text
+        # Pre-existing header and old entry still present
+        assert "# Corpus Log" in text
+        assert "## 2026-01-01" in text
+        # New block added
+        assert "## 2026-06-15" in text
+        # New block appears BEFORE old block (newest-first)
+        assert text.index("## 2026-06-15") < text.index("## 2026-01-01"), (
+            "New date block should be before old date block"
+        )
 
     def test_ingest_error_included_in_block(self, tmp_path):
         """When ingest fails, the error is present in the report block."""
-        log = tmp_path / "_log.md"
+        log = tmp_path / "log.md"
         tallies = {
             "collectors": {"gmail": {"status": "ok", "collected": 0}},
             "ingest": {"status": "timeout", "ingested": 0, "deferred": 5, "error": "timeout"},
@@ -827,15 +861,15 @@ class TestWriteRunReport:
         assert "timeout" in text
 
     def test_lint_line_clean(self, tmp_path):
-        """A clean lint result renders a lint line without an integrity flag."""
-        log = tmp_path / "_log.md"
+        """A clean lint result renders a * **Lint** bullet without an integrity flag."""
+        log = tmp_path / "log.md"
         tallies = self._make_tallies()
         tallies["lint"] = {"broken_wikilinks": 0, "broken_citations": 0,
                            "orphans": 2, "stubs": 5}
         scheduled_run.write_run_report(tallies, at="2026-06-15T10:00", log_path=log)
 
         text = log.read_text(encoding="utf-8")
-        assert "- lint:" in text
+        assert "* **Lint**:" in text
         assert "0 broken wikilinks" in text
         assert "2 orphans" in text
         assert "5 stubs" in text
@@ -843,38 +877,53 @@ class TestWriteRunReport:
 
     def test_lint_line_flags_integrity_issues(self, tmp_path):
         """Broken wikilinks/citations trigger the INTEGRITY ISSUES flag."""
-        log = tmp_path / "_log.md"
+        log = tmp_path / "log.md"
         tallies = self._make_tallies()
         tallies["lint"] = {"broken_wikilinks": 1, "broken_citations": 2,
                            "orphans": 0, "stubs": 0}
         scheduled_run.write_run_report(tallies, at="2026-06-15T10:00", log_path=log)
 
         text = log.read_text(encoding="utf-8")
-        assert "- lint:" in text
+        assert "* **Lint**:" in text
         assert "1 broken wikilinks" in text
         assert "2 broken citations" in text
         assert "INTEGRITY ISSUES" in text
         assert "bin/corpus_lint.py" in text
 
     def test_lint_error_contained_in_block(self, tmp_path):
-        """A lint failure is recorded as an error line, not raised."""
-        log = tmp_path / "_log.md"
+        """A lint failure is recorded as a * **Lint** error bullet, not raised."""
+        log = tmp_path / "log.md"
         tallies = self._make_tallies()
         tallies["lint"] = {"error": "boom"}
         scheduled_run.write_run_report(tallies, at="2026-06-15T10:00", log_path=log)
 
         text = log.read_text(encoding="utf-8")
-        assert "- lint:" in text
+        assert "* **Lint**:" in text
         assert "error=boom" in text
         assert "INTEGRITY ISSUES" not in text
 
     def test_no_lint_line_when_absent(self, tmp_path):
-        """No lint key (e.g. dry run) → no lint line at all."""
-        log = tmp_path / "_log.md"
+        """No lint key (e.g. dry run) → no * **Lint** bullet at all."""
+        log = tmp_path / "log.md"
         tallies = self._make_tallies()
         scheduled_run.write_run_report(tallies, at="2026-06-15T10:00", log_path=log)
 
-        assert "- lint:" not in log.read_text(encoding="utf-8")
+        assert "* **Lint**:" not in log.read_text(encoding="utf-8")
+
+    def test_okf_lint_heading_is_iso_date_only(self, tmp_path):
+        """The ## heading written by write_run_report must be exactly ## YYYY-MM-DD
+        (no brackets, no timestamp, no text after the date) — passing okf_lint.check_log."""
+        import re
+        log = tmp_path / "log.md"
+        tallies = self._make_tallies()
+        scheduled_run.write_run_report(tallies, at="2026-06-15T10:00", log_path=log)
+
+        text = log.read_text(encoding="utf-8")
+        for line in text.splitlines():
+            if line.startswith("## "):
+                assert re.match(r"^## \d{4}-\d{2}-\d{2}$", line), (
+                    f"## heading does not conform to OKF ISO date format: {line!r}"
+                )
 
 
 # ---------------------------------------------------------------------------
@@ -916,7 +965,7 @@ class TestBranchGuard:
             patch.object(scheduled_run, "move_processed_inbox", MagicMock(return_value={})),
             patch.object(scheduled_run, "commit_and_push",
                          MagicMock(return_value={"status": "nothing-to-commit"})),
-            patch.object(scheduled_run, "LOG_PATH", tmp_path / "_log.md"),
+            patch.object(scheduled_run, "LOG_PATH", tmp_path / "log.md"),
         ):
             rc = scheduled_run.main(["--lock-path", str(tmp_path / ".l"), "run"])
         assert rc == 0
@@ -928,7 +977,7 @@ class TestBranchGuard:
             patch.object(scheduled_run, "current_branch", lambda *a, **k: "feature/x"),
             patch.object(scheduled_run, "acquire_lock", acq),
             patch.object(scheduled_run, "release_lock", MagicMock()),
-            patch.object(scheduled_run, "LOG_PATH", tmp_path / "_log.md"),
+            patch.object(scheduled_run, "LOG_PATH", tmp_path / "log.md"),
         ):
             rc = scheduled_run.main(["--lock-path", str(tmp_path / ".l"), "run", "--dry-run"])
         assert rc == 0
@@ -945,7 +994,7 @@ class TestBranchGuard:
             patch.object(scheduled_run, "move_processed_inbox", MagicMock(return_value={})),
             patch.object(scheduled_run, "commit_and_push",
                          MagicMock(return_value={"status": "nothing-to-commit"})),
-            patch.object(scheduled_run, "LOG_PATH", tmp_path / "_log.md"),
+            patch.object(scheduled_run, "LOG_PATH", tmp_path / "log.md"),
         ):
             rc = scheduled_run.main(["--lock-path", str(tmp_path / ".l"), "run"])
         assert rc == 0
@@ -973,7 +1022,7 @@ class TestBranchGuard:
             patch.object(scheduled_run, "move_processed_inbox", MagicMock(return_value={})),
             patch.object(scheduled_run, "commit_and_push", commit),
             patch.object(scheduled_run.corpus_lint, "lint", lambda *a, **k: empty_lint),
-            patch.object(scheduled_run, "LOG_PATH", tmp_path / "_log.md"),
+            patch.object(scheduled_run, "LOG_PATH", tmp_path / "log.md"),
         ):
             rc = scheduled_run.main(["--lock-path", str(tmp_path / ".l"), "run"])
         assert rc == 0
@@ -1025,7 +1074,7 @@ class TestRunIntegration:
     def test_happy_path_full_sequence(self, tmp_path):
         """run acquires lock, calls collectors → ingest → report, releases lock."""
         lock = tmp_path / ".test.lock"
-        log = tmp_path / "_log.md"
+        log = tmp_path / "log.md"
 
         collector_mock = MagicMock(return_value=self._mock_collectors())
         ingest_mock = MagicMock(return_value=self._mock_ingest())
@@ -1047,7 +1096,7 @@ class TestRunIntegration:
     def test_lint_result_lands_in_report(self, tmp_path):
         """A full run lints the corpus and flags integrity issues in the report."""
         lock = tmp_path / ".test.lock"
-        log = tmp_path / "_log.md"
+        log = tmp_path / "log.md"
 
         broken = {"broken_wikilinks": [("corpus/x/p.md", "x/missing")],
                   "broken_citations": [], "orphans": [], "stubs": []}
@@ -1062,14 +1111,14 @@ class TestRunIntegration:
 
         assert rc == 0
         log_text = log.read_text(encoding="utf-8")
-        assert "- lint:" in log_text
+        assert "* **Lint**:" in log_text
         assert "1 broken wikilinks" in log_text
         assert "INTEGRITY ISSUES" in log_text
 
     def test_lint_failure_does_not_abort_run(self, tmp_path):
         """If the lint step raises, the run still completes and records the error."""
         lock = tmp_path / ".test.lock"
-        log = tmp_path / "_log.md"
+        log = tmp_path / "log.md"
 
         def boom_lint(*a, **k):
             raise RuntimeError("lint blew up")
@@ -1120,7 +1169,7 @@ class TestRunIntegration:
     def test_dry_run_skips_collectors_and_ingest(self, tmp_path):
         """--dry-run skips real collectors and ingest calls."""
         lock = tmp_path / ".dry.lock"
-        log = tmp_path / "_log.md"
+        log = tmp_path / "log.md"
 
         collector_mock = MagicMock(return_value=self._mock_collectors())
         ingest_mock = MagicMock(return_value=self._mock_ingest())
@@ -1140,7 +1189,7 @@ class TestRunIntegration:
     def test_dry_run_does_not_write_log(self, tmp_path):
         """--dry-run must be side-effect-free: no run-report block appended to the log."""
         lock = tmp_path / ".dry.lock"
-        log = tmp_path / "_log.md"
+        log = tmp_path / "log.md"
 
         with (
             patch.object(scheduled_run, "run_collectors", MagicMock()),
@@ -1155,7 +1204,7 @@ class TestRunIntegration:
     def test_run_max_and_timeout_forwarded_to_ingest(self, tmp_path):
         """--max and --timeout CLI args are forwarded to run_ingest."""
         lock = tmp_path / ".test.lock"
-        log = tmp_path / "_log.md"
+        log = tmp_path / "log.md"
 
         ingest_mock = MagicMock(return_value=self._mock_ingest())
 
@@ -1177,7 +1226,7 @@ class TestRunIntegration:
     def test_default_max_is_cost_bounded(self, tmp_path):
         """Unattended runs default to a cost-bounded --max (caps per-run ingest burn)."""
         lock = tmp_path / ".test.lock"
-        log = tmp_path / "_log.md"
+        log = tmp_path / "log.md"
 
         ingest_mock = MagicMock(return_value=self._mock_ingest())
 
@@ -1195,7 +1244,7 @@ class TestRunIntegration:
     def test_run_output_json_contains_summary(self, tmp_path, capsys):
         """The run subcommand prints a JSON summary to stdout."""
         lock = tmp_path / ".test.lock"
-        log = tmp_path / "_log.md"
+        log = tmp_path / "log.md"
 
         with (
             patch.object(scheduled_run, "run_collectors", return_value=self._mock_collectors()),
@@ -1249,7 +1298,7 @@ class TestCommitAndPush:
             calls.append(list(cmd))
             subcmd = cmd[1] if len(cmd) > 1 else ""
             if subcmd == "status":
-                return self._make_proc(stdout=" M corpus/_log.md\n")
+                return self._make_proc(stdout=" M corpus/log.md\n")
             if subcmd == "add":
                 return self._make_proc()
             if subcmd == "commit":
@@ -1283,7 +1332,7 @@ class TestCommitAndPush:
         def fake_run(cmd, **kwargs):
             subcmd = cmd[1] if len(cmd) > 1 else ""
             if subcmd == "status":
-                return self._make_proc(stdout=" M corpus/_log.md\n")
+                return self._make_proc(stdout=" M corpus/log.md\n")
             if subcmd == "add":
                 return self._make_proc()
             if subcmd == "commit":
@@ -1345,7 +1394,7 @@ class TestCommitAndPush:
         def fake_run(cmd, **kwargs):
             subcmd = cmd[1] if len(cmd) > 1 else ""
             if subcmd == "status":
-                return self._make_proc(stdout=" M corpus/_log.md\n")
+                return self._make_proc(stdout=" M corpus/log.md\n")
             if subcmd == "add":
                 add_args_captured.extend(cmd[2:])  # everything after 'git add'
                 return self._make_proc()
@@ -1382,7 +1431,7 @@ class TestCommitAndPush:
         def fake_run(cmd, **kwargs):
             subcmd = cmd[1] if len(cmd) > 1 else ""
             if subcmd == "status":
-                return self._make_proc(stdout=" M corpus/_log.md\n")
+                return self._make_proc(stdout=" M corpus/log.md\n")
             if subcmd == "add":
                 return self._make_proc()
             if subcmd == "commit":
@@ -1406,7 +1455,7 @@ class TestCommitAndPush:
         def fake_run(cmd, **kwargs):
             subcmd = cmd[1] if len(cmd) > 1 else ""
             if subcmd == "status":
-                return self._make_proc(stdout=" M corpus/_log.md\n")
+                return self._make_proc(stdout=" M corpus/log.md\n")
             if subcmd == "add":
                 return self._make_proc()
             if subcmd == "commit":
@@ -1433,7 +1482,7 @@ class TestCommitAndPush:
     def test_dry_run_skips_commit_and_push(self, tmp_path, capsys):
         """--dry-run does not call commit_and_push (consistent with U3 dry-run pattern)."""
         lock = tmp_path / ".dry.lock"
-        log = tmp_path / "_log.md"
+        log = tmp_path / "log.md"
 
         commit_mock = MagicMock(return_value={"status": "committed"})
 
@@ -1477,7 +1526,7 @@ class TestCommitAndPushRunIntegration:
     def test_run_happy_path_invokes_commit_and_push(self, tmp_path):
         """run() calls commit_and_push between ingest and write_run_report."""
         lock = tmp_path / ".test.lock"
-        log = tmp_path / "_log.md"
+        log = tmp_path / "log.md"
 
         commit_mock = MagicMock(return_value={"status": "committed", "sha": "abc1234"})
 
@@ -1518,7 +1567,7 @@ class TestCommitAndPushRunIntegration:
     def test_push_failure_does_not_propagate_out_of_run(self, tmp_path):
         """A push failure inside commit_and_push does not propagate — run still completes."""
         lock = tmp_path / ".test.lock"
-        log = tmp_path / "_log.md"
+        log = tmp_path / "log.md"
 
         def commit_raises(**kwargs):
             raise RuntimeError("unexpected internal error in commit_and_push")
@@ -1732,7 +1781,7 @@ class TestMoveProcessedInbox:
     def test_move_processed_inbox_failure_does_not_propagate_out_of_run(self, tmp_path):
         """If move_processed_inbox raises, run() still completes and releases lock."""
         lock = tmp_path / ".test.lock"
-        log = tmp_path / "_log.md"
+        log = tmp_path / "log.md"
 
         def boom(**kwargs):
             raise RuntimeError("disk full")
