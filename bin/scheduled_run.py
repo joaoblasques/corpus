@@ -1032,6 +1032,11 @@ def write_run_report(
             flag = "  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py" if (bw or bc) else ""
             bullets.append(f"* **Lint**: {bw} broken wikilinks · {bc} broken citations · "
                            f"{lint.get('orphans', 0)} orphans · {lint.get('stubs', 0)} stubs{flag}")
+            # OKF conformance guard
+            okf_n = lint.get("okf_violations")
+            if okf_n is not None:
+                okf_flag = " ⚠" if okf_n else ""
+                bullets.append(f"* **OKF**: {okf_n} violations{okf_flag}")
 
     # Commit/push
     if commit:
@@ -1227,6 +1232,7 @@ def main(argv=None) -> int:
                         "broken_citations": len(report["broken_citations"]),
                         "orphans": len(report["orphans"]),
                         "stubs": len(report["stubs"]),
+                        "okf_violations": report["okf_violations"],
                     }
                 except Exception as exc:  # noqa: BLE001
                     tallies["lint"] = {"error": str(exc)}

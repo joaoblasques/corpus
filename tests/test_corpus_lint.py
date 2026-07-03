@@ -67,7 +67,30 @@ def test_lint_aggregates(tmp_path):
     (c / "ai-engineering" / "README.md").write_text("# AI\n", encoding="utf-8")
     (c / "ai-engineering" / "x.md").write_text("body\n", encoding="utf-8")
     report = cl.lint(c)
-    assert set(report) == {"broken_wikilinks", "broken_citations", "orphans", "stubs"}
+    assert set(report) == {"broken_wikilinks", "broken_citations", "orphans", "stubs", "okf_violations"}
+
+
+def test_okf_violations_typeless_page_detected(tmp_path):
+    """A page with no `type` field in frontmatter yields okf_violations >= 1."""
+    c = _corpus(tmp_path)
+    (c / "ai-engineering" / "README.md").write_text("# AI\n", encoding="utf-8")
+    (c / "ai-engineering" / "typeless.md").write_text(
+        "---\nstatus: stub\n---\nbody\n", encoding="utf-8")
+    report = cl.lint(c)
+    assert "okf_violations" in report
+    assert report["okf_violations"] >= 1
+
+
+def test_okf_violations_conformant_page_clean(tmp_path):
+    """All pages with valid `type` fields yield okf_violations == 0."""
+    c = _corpus(tmp_path)
+    # README.md is also a concept page for OKF; give it type: hub so it's conformant.
+    (c / "ai-engineering" / "README.md").write_text(
+        "---\ntype: hub\n---\n# AI\n", encoding="utf-8")
+    (c / "ai-engineering" / "good.md").write_text(
+        "---\ntype: concept\nstatus: mature\n---\nbody\n", encoding="utf-8")
+    report = cl.lint(c)
+    assert report["okf_violations"] == 0
 
 
 def test_meta_set_uses_okf_reserved_names():

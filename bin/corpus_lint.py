@@ -12,6 +12,8 @@ import re
 import sys
 from pathlib import Path
 
+import okf_lint
+
 ROOT = Path(__file__).resolve().parent.parent
 CORPUS = ROOT / "corpus"
 _META = {"index.md", "log.md", "_domains.md", "_config.md", "_REVIEW.md"}
@@ -100,6 +102,7 @@ def lint(corpus: Path | None = None) -> dict:
         "broken_citations": find_broken_citations(corpus),
         "orphans": find_orphans(corpus),
         "stubs": find_stubs(corpus),
+        "okf_violations": len(okf_lint.lint_bundle(corpus)["violations"]),
     }
 
 

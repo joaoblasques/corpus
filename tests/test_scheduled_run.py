@@ -910,6 +910,28 @@ class TestWriteRunReport:
 
         assert "* **Lint**:" not in log.read_text(encoding="utf-8")
 
+    def test_okf_line_in_report(self, tmp_path):
+        """When lint includes okf_violations, a * **OKF**: line appears in the report."""
+        log = tmp_path / "log.md"
+        tallies = self._make_tallies()
+        tallies["lint"] = {"broken_wikilinks": 0, "broken_citations": 0,
+                           "orphans": 0, "stubs": 0, "okf_violations": 3}
+        scheduled_run.write_run_report(tallies, at="2026-06-15T10:00", log_path=log)
+        text = log.read_text(encoding="utf-8")
+        assert "* **OKF**" in text
+        assert "3 violations" in text
+
+    def test_okf_line_zero_violations(self, tmp_path):
+        """Zero okf_violations renders without a warning flag."""
+        log = tmp_path / "log.md"
+        tallies = self._make_tallies()
+        tallies["lint"] = {"broken_wikilinks": 0, "broken_citations": 0,
+                           "orphans": 0, "stubs": 0, "okf_violations": 0}
+        scheduled_run.write_run_report(tallies, at="2026-06-15T10:00", log_path=log)
+        text = log.read_text(encoding="utf-8")
+        assert "* **OKF**" in text
+        assert "0 violations" in text
+
     def test_okf_lint_heading_is_iso_date_only(self, tmp_path):
         """The ## heading written by write_run_report must be exactly ## YYYY-MM-DD
         (no brackets, no timestamp, no text after the date) — passing okf_lint.check_log."""
@@ -1099,7 +1121,7 @@ class TestRunIntegration:
         log = tmp_path / "log.md"
 
         broken = {"broken_wikilinks": [("corpus/x/p.md", "x/missing")],
-                  "broken_citations": [], "orphans": [], "stubs": []}
+                  "broken_citations": [], "orphans": [], "stubs": [], "okf_violations": 0}
 
         with (
             patch.object(scheduled_run, "run_collectors", MagicMock(return_value=self._mock_collectors())),
