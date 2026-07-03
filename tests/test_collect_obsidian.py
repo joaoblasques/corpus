@@ -6,9 +6,10 @@ import collect_obsidian as co  # noqa: E402
 
 
 def test_is_included_resources():
-    # PARA-native folders are now EXCLUDED from collect->delete (kept in place)
-    assert co.is_included("03_Resources/Articles/Clean Code.md") is False
-    assert co.is_included("03_Resources/Study Notes/CAP.md") is False
+    # 03_Resources drainage (2026-07-03): Articles + Study Notes are collected
+    # (additive) and reaped only after corpus_ingested — the vault north-star.
+    assert co.is_included("03_Resources/Articles/Clean Code.md") is True
+    assert co.is_included("03_Resources/Study Notes/CAP.md") is True
     # Newly collected folders
     assert co.is_included("Clippings/Introducing routines in Claude Code.md") is True
     assert co.is_included("06_Metadata/Reference/note_taking_protocol.md") is True
@@ -183,8 +184,8 @@ def test_discover_filters(tmp_path):
     rels = {(d["rel_path"], d["kind"]) for d in found}
     assert ("03_Resources/Books/New.md", "note") in rels
     assert ("00_Inbox/Clippings/articles to process.md", "url-list") in rels
+    assert ("03_Resources/Articles/Para.md", "note") in rels                     # 03_Resources drain (2026-07-03)
     assert "03_Resources/Books/Done.md" not in {r for r, _ in rels}              # already ingested
-    assert "03_Resources/Articles/Para.md" not in {r for r, _ in rels}           # PARA-native, now excluded
     assert "03_Resources/llm-wiki-system/CLAUDE.md" not in {r for r, _ in rels}  # excluded
     assert "01_Projects/task.md" not in {r for r, _ in rels}                     # not a knowledge dir
 

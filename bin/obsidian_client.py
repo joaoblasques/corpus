@@ -33,14 +33,20 @@ def cmd_collect(args) -> int:
     if args.path:
         found = [d for d in found if d["rel_path"].startswith(args.path)]
     t = {"notes": 0, "urls": 0, "url_failed": 0, "skipped": 0, "scraped": 0, "capped": 0,
+         "deferred": 0,
          "inline_urls": 0, "inline_failed": 0, "inline_skipped_auth": 0, "inline_dropped": 0}
     processed = 0
+    notes_taken = 0
     for d in found:
         if args.max and processed >= args.max:
             break
+        if d["kind"] == "note" and notes_taken >= co.MAX_NOTES_PER_RUN:
+            t["deferred"] += 1   # per-run note cap: backlog drains on later runs
+            continue
         processed += 1
         try:
             if d["kind"] == "note":
+                notes_taken += 1
                 title, tags, source_url, body = co.read_note(d["abs_path"])
                 if not args.dry_run:
                     path = co.note_filename(d["rel_path"])

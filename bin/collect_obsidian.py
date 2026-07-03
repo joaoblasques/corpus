@@ -22,6 +22,16 @@ INCLUDE_DIRS = [
     "00_Inbox/Clippings",
     "03_Resources/Books",
     "06_Metadata/Reference",           # reference prompt notes only
+    # 03_Resources drainage (2026-07-03): the vault's north-star is that reference
+    # knowledge migrates into the corpus and 03_Resources empties over time; these
+    # two folders hold ~441 of its 443 notes. Ingestion is ADDITIVE — the separate
+    # reap step deletes a vault note only AFTER its raw copy is corpus_ingested
+    # (recoverable from vault git history + corpus raw/). That deletion-over-time
+    # is the vault's stated intent for these folders. Legacy in-place-ingested
+    # (Branch-B/PARA-native) notes already stamped corpus_ingested are skipped by
+    # discover(); the backlog drains at MAX_NOTES_PER_RUN notes per run.
+    "03_Resources/Study Notes",
+    "03_Resources/Articles",
 ]
 EXCLUDE_DIRS = [
     "03_Resources/llm-wiki-system",
@@ -41,6 +51,10 @@ URL_LIST_DEFAULT_MODE = {
 # lists (e.g. "articles to process.md") still get their lines struck once ingested.
 WATCH_LISTS = {"blogs to scrape.md"}
 MAX_LINKS_PER_NOTE = 10
+# Per-run cap on NOTE-kind collections (url-lists exempt): the 400+ note
+# 03_Resources backlog must trickle across scheduled runs, not land as one giant
+# ingest. Deferred notes are re-discovered next run (dedup skips already-copied ones).
+MAX_NOTES_PER_RUN = 25
 AUTH_WALLED_RE = re.compile(r"(?i)://(?:[^/]*\.)?(?:linkedin\.com|x\.com|twitter\.com)(?:/|$)")
 ASSET_EXT_RE = re.compile(r"(?i)\.(?:png|jpe?g|gif|svg|webp|pdf|mp4|mov|zip)$")
 

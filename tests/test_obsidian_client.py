@@ -105,6 +105,52 @@ def test_collect_skips_urls_in_processed_ledger(tmp_path, monkeypatch):
     assert "https://b.com/y" in fetched
 
 
+def test_collect_caps_notes_per_run_and_defers_rest(tmp_path, monkeypatch, capsys):
+    """MAX_NOTES_PER_RUN bounds note-kind collections per run; the overflow is
+    reported as `deferred` and picked up on later runs (dedup skips copied ones)."""
+    vault = tmp_path / "vault"
+    (vault / "03_Resources/Articles").mkdir(parents=True)
+    for i in range(3):
+        (vault / f"03_Resources/Articles/N{i}.md").write_text(f"body {i}", encoding="utf-8")
+    inbox = tmp_path / "inbox"; inbox.mkdir()
+    monkeypatch.setattr(oc.co, "INBOX", inbox)
+    monkeypatch.setattr(oc.co, "DEDUP_DIRS", [inbox])
+    monkeypatch.setattr(oc.co, "MAX_NOTES_PER_RUN", 2)
+    rc = oc.cmd_collect(oc._args(["collect", "--vault", str(vault)]))
+    assert rc == 0
+    out = json.loads(capsys.readouterr().out)
+    assert out["notes"] == 2 and out["deferred"] == 1
+    assert len(list(inbox.glob("notes-*.md"))) == 2
+    # next run drains the remainder: collected notes are deduped, cap admits the third
+    rc = oc.cmd_collect(oc._args(["collect", "--vault", str(vault)]))
+    assert rc == 0
+    out = json.loads(capsys.readouterr().out)
+    assert out["notes"] == 1 and out["deferred"] == 0
+    assert len(list(inbox.glob("notes-*.md"))) == 3
+
+
+def test_collect_note_cap_does_not_block_url_lists(tmp_path, monkeypatch, capsys):
+    """url-list files are exempt from the note cap: even with the cap exhausted,
+    lists are still processed."""
+    vault = tmp_path / "vault"
+    (vault / "03_Resources/Articles").mkdir(parents=True)
+    (vault / "00_Inbox/Clippings").mkdir(parents=True)
+    (vault / "03_Resources/Articles/A.md").write_text("body", encoding="utf-8")
+    (vault / "00_Inbox/Clippings/articles to process.md").write_text(
+        "https://a.com/x\n", encoding="utf-8")
+    inbox = tmp_path / "inbox"; inbox.mkdir()
+    monkeypatch.setattr(oc.co, "INBOX", inbox)
+    monkeypatch.setattr(oc.co, "DEDUP_DIRS", [inbox])
+    monkeypatch.setattr(oc.co, "MAX_NOTES_PER_RUN", 0)   # cap exhausted from the start
+    monkeypatch.setattr(oc, "fetch_url", lambda url: {"title": "Art", "text": "body"})
+    rc = oc.cmd_collect(oc._args(["collect", "--vault", str(vault)]))
+    assert rc == 0
+    out = json.loads(capsys.readouterr().out)
+    assert out["notes"] == 0 and out["deferred"] == 1
+    assert out["urls"] == 1                              # list still processed
+    assert len(list(inbox.glob("web-*.md"))) == 1
+
+
 def test_collect_dry_run_writes_nothing(tmp_path, monkeypatch):
     vault = tmp_path / "vault"
     (vault / "03_Resources/Books").mkdir(parents=True)

@@ -40,7 +40,7 @@ First-party notes the user authored or annotated — articles, study notes, book
 
 **Two sub-cases — check source location first (§8.1 Step 0):**
 
-- **PARA-native** (files under a path listed in `corpus/_config.md` — currently `03_Resources/Articles/` and `03_Resources/Study Notes/`): ingest **in place** under Branch B. Do not copy to `raw/`. Stamp the file in place after ingest.
+- **PARA-native** (files under a path listed in `corpus/_config.md` — currently `03_Resources/Articles/` and `03_Resources/Study Notes/`): ingest **in place** under Branch B. Do not copy to `raw/`. Stamp the file in place after ingest. *Note (2026-07-03): un-stamped notes in these two folders are now also collected by `collect-obsidian` into `raw/notes/` (capped drain, reaped after ingest — the vault north-star that 03_Resources empties over time). Branch B in-place handling still applies to legacy notes already stamped `corpus_ingested` in the vault, which discover() skips.*
 - **`raw/notes/`** (no PARA home): first-party notes that arrived via inbox or have no canonical PARA location. Treat as immutable like any other raw-channel file. Ingest under Branch C.
 
 When in doubt whether a file has a PARA home, check `corpus/_config.md` before deciding which sub-case applies.

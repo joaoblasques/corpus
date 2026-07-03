@@ -28,9 +28,11 @@ never ingest into `corpus/` here.
 
 ## Notes
 - **Scope — include (collect → reap):** `Clippings/` (top-level), `00_Inbox/Clippings/`,
-  `03_Resources/{Books, Snippets, Prompt Templates}`, `06_Metadata/Reference/`.
-- **Scope — PARA-native (never reaped):** `03_Resources/Articles/`, `03_Resources/Study Notes/`
-  — ingested in place under Branch B; reaper skips them.
+  `03_Resources/{Books, Articles, Study Notes}`, `06_Metadata/Reference/`.
+  `Articles/` + `Study Notes/` added 2026-07-03 (vault north-star: 03_Resources empties
+  into the corpus); their ~440-note backlog drains at `MAX_NOTES_PER_RUN` (25) notes/run.
+- **Legacy PARA-native notes** already stamped `corpus_ingested` in place (old Branch B)
+  are skipped by discover and stay in the vault untouched.
 - **Scope — excluded:** `03_Resources/llm-wiki-system` (corpus mirror), `01_Projects`,
   `02_Areas`, `04_Archive`, `06_Metadata/{Templates, SETUP_COMPLETE.md, README.md}`,
   rest of `00_Inbox`, `*_processed.md`, `README.md`, binaries.
