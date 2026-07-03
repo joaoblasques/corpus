@@ -24,6 +24,9 @@ sources:
   - path: raw/email/email-2025-05-15-if-you-re-learning-kafka-this-article-is-for-you.md
     channel: email
     ingested_at: 2026-06-19
+  - path: raw/web/the-trinity-of-modern-data-architecture-process-intelligence-b19b93a7.md
+    channel: web
+    ingested_at: 2026-07-03
 aliases:
   - Apache Kafka
   - Kafka
