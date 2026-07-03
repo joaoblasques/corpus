@@ -71,6 +71,11 @@
 * **YoutubeQuick**: 0 intake · 0 rescued · 0 skipped · status=ok
 * **DocsQuick**: 0 intake · 0 thin · 0 llm_fail · status=ok
 * **Lint**: error='okf_violations'
+* **Collectors**: none
+* **Ingest**: 0 ingested · 0 deferred · status=failed · error=claude exit -9, no JSON envelope: 
+* **YoutubeQuick**: 0 intake · 0 rescued · 0 skipped · status=ok
+* **DocsQuick**: 0 intake · 0 thin · 0 llm_fail · status=ok
+* **Lint**: error='okf_violations'
 ## 2026-07-02
 * **Ingest**: ingest-auto batch — 25 ingested, 25 deferred
   - source: raw/_inbox/ (50 pre-specified files)
