@@ -38,7 +38,7 @@ updated: 2026-06-15
 
 # Machine Learning
 
-**TL;DR**: The subset of [[ai-engineering/ai-fundamentals|AI]] where, instead of programming a solution explicitly, you give a system data and let it learn to perform a task better with more data and experience [^src1]. Classical ML (regression, trees, SVMs, clustering) remains "the backbone of most production AI" and is the layer beneath deep learning and LLMs [^src3].
+**TL;DR**: The subset of [AI](/ai-engineering/ai-fundamentals.md) where, instead of programming a solution explicitly, you give a system data and let it learn to perform a task better with more data and experience [^src1]. Classical ML (regression, trees, SVMs, clustering) remains "the backbone of most production AI" and is the layer beneath deep learning and LLMs [^src3].
 
 ## The three learning paradigms
 
@@ -52,7 +52,7 @@ Supervised learning splits into **classification** (discrete labels — e.g. "is
 
 ## How training works (the line-fitting intuition)
 
-A model is a parameterized function; *training* is finding parameter values that fit known input→output pairs (training data) [^src4]. The simplest case — fitting `y = mx + c` from two known points — generalizes to billions of parameters: an LLM "is an equation like this but it contains greater than a billion parameters," and you need correspondingly large training data to pin them down [^src4]. The fit is driven by a **loss function** that measures predicted-vs-actual error and feeds the difference back to adjust parameters, repeated over billions of examples [^src4]. (The full neural-network version of this loop is in [[ai-engineering/neural-network|Neural Networks]].)
+A model is a parameterized function; *training* is finding parameter values that fit known input→output pairs (training data) [^src4]. The simplest case — fitting `y = mx + c` from two known points — generalizes to billions of parameters: an LLM "is an equation like this but it contains greater than a billion parameters," and you need correspondingly large training data to pin them down [^src4]. The fit is driven by a **loss function** that measures predicted-vs-actual error and feeds the difference back to adjust parameters, repeated over billions of examples [^src4]. (The full neural-network version of this loop is in [Neural Networks](/ai-engineering/neural-network.md).)
 
 ## Bias, variance, and overfitting
 
@@ -60,7 +60,7 @@ The central failure mode: a model that memorizes training data but fails to gene
 
 ## Where ML meets the LLM stack: RAG vs fine-tuning
 
-A practical rule that recurs across sources: **use RAG when a model needs specific facts it wasn't trained on; use fine-tuning when you need it to *behave* differently** (tone, format, domain vocabulary) — and you can combine both [^src5]. Fine-tuning takes a pre-trained model and trains it further on a smaller specialized dataset so it adopts a particular style or output structure [^src5]. See [[ai-engineering/rag|RAG]] and [[ai-engineering/llm|LLM]] (training phases).
+A practical rule that recurs across sources: **use RAG when a model needs specific facts it wasn't trained on; use fine-tuning when you need it to *behave* differently** (tone, format, domain vocabulary) — and you can combine both [^src5]. Fine-tuning takes a pre-trained model and trains it further on a smaller specialized dataset so it adopts a particular style or output structure [^src5]. See [RAG](/ai-engineering/rag.md) and [LLM](/ai-engineering/llm.md) (training phases).
 
 ## The from-scratch curriculum
 
@@ -80,16 +80,16 @@ An interview with Anil Ananthaswamy (author, *Why Machines Learn*) on Machine Le
 
 ## The learn-ML-like-a-genius path (Tech With Tim, video)
 
-The video companion to the "how I'd learn ML in 2026" email: same 70/30 build/theory framework, same 6–9 months timeline, same Python-first → scikit-learn → PyTorch progression [^src7]. The video adds one concrete practice: "spend more time *building* than watching" — a ratio check the email states but doesn't make visual. See [[ai-engineering/learning-ai-engineering|Learning AI Engineering]] for the full curriculum structure.
+The video companion to the "how I'd learn ML in 2026" email: same 70/30 build/theory framework, same 6–9 months timeline, same Python-first → scikit-learn → PyTorch progression [^src7]. The video adds one concrete practice: "spend more time *building* than watching" — a ratio check the email states but doesn't make visual. See [Learning AI Engineering](/ai-engineering/learning-ai-engineering.md) for the full curriculum structure.
 
 ## See also
 
-- [[ai-engineering/ai-fundamentals|AI Fundamentals]] — ML is the learning branch of the broader field
-- [[ai-engineering/neural-network|Neural Networks]] — deep learning, the multi-layer extension of ML
-- [[ai-engineering/statistics-for-ml|Statistics & Probability for ML]] — the math ML rests on (distributions, regression, inference)
-- [[ai-engineering/llm|LLM]] — large-scale supervised next-token learning + RLHF
-- [[ai-engineering/learning-ai-engineering|Learning AI Engineering]] — the "learn ML in 2026" path
-- [[ai-engineering/README|AI Engineering hub]]
+- [AI Fundamentals](/ai-engineering/ai-fundamentals.md) — ML is the learning branch of the broader field
+- [Neural Networks](/ai-engineering/neural-network.md) — deep learning, the multi-layer extension of ML
+- [Statistics & Probability for ML](/ai-engineering/statistics-for-ml.md) — the math ML rests on (distributions, regression, inference)
+- [LLM](/ai-engineering/llm.md) — large-scale supervised next-token learning + RLHF
+- [Learning AI Engineering](/ai-engineering/learning-ai-engineering.md) — the "learn ML in 2026" path
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

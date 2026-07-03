@@ -27,7 +27,7 @@ updated: 2026-06-12
 
 ## Why it matters for agents
 
-The core agent-facing feature is the MCP server: rather than handing a model raw HTML (token-expensive and noisy), Scrapling extracts the relevant content first, so the agent receives clean, minimal input [^src1]. This is a [[ai-engineering/context-engineering|context-engineering]] move applied to the retrieval edge — the same "less in the window" logic as [[ai-engineering/context-window-management|Context Window Management]]. It exposes this through [[ai-engineering/mcp|MCP]], so any MCP-compatible agent (Claude Code, Cursor) can scrape on demand. A CLI also extracts a URL straight to `.md`/`.txt`/`.html` "without writing a single line of code" — useful for feeding pages into a corpus or RAG pipeline [^src2].
+The core agent-facing feature is the MCP server: rather than handing a model raw HTML (token-expensive and noisy), Scrapling extracts the relevant content first, so the agent receives clean, minimal input [^src1]. This is a [context-engineering](/ai-engineering/context-engineering.md) move applied to the retrieval edge — the same "less in the window" logic as [Context Window Management](/ai-engineering/context-window-management.md). It exposes this through [MCP](/ai-engineering/mcp.md), so any MCP-compatible agent (Claude Code, Cursor) can scrape on demand. A CLI also extracts a URL straight to `.md`/`.txt`/`.html` "without writing a single line of code" — useful for feeding pages into a corpus or RAG pipeline [^src2].
 
 ## Framework capabilities (briefly)
 
@@ -40,9 +40,9 @@ The core agent-facing feature is the MCP server: rather than handing a model raw
 
 ## See also
 
-- [[ai-engineering/mcp|MCP]] — the protocol Scrapling exposes for agent-driven scraping
-- [[ai-engineering/context-engineering|Context Engineering]] — extract-before-LLM as a token-minimizing pattern
-- [[ai-engineering/rag|RAG]] — scraped/cleaned pages as a retrieval source
+- [MCP](/ai-engineering/mcp.md) — the protocol Scrapling exposes for agent-driven scraping
+- [Context Engineering](/ai-engineering/context-engineering.md) — extract-before-LLM as a token-minimizing pattern
+- [RAG](/ai-engineering/rag.md) — scraped/cleaned pages as a retrieval source
 
 ---
 

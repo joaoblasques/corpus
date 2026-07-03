@@ -32,7 +32,7 @@ updated: 2026-06-15
 
 # Cloud Computing Fundamentals
 
-**TL;DR**: The provider-agnostic concepts that recur across AWS, Azure, and GCP — **scaling, load balancing, autoscaling, serverless, storage classes, availability vs. durability, event-driven architecture, the IaaS/PaaS/SaaS spectrum, and the CapEx→OpEx shift**. Cloud computing is using someone else's servers over the internet, paying only for what you use for the time you use it [^src2][^src3]. These fundamentals make the per-provider entity pages ([[mlops/aws|AWS]], [[mlops/azure|Azure]], [[mlops/gcp|GCP]]) mostly a matter of mapping names onto the same ideas.
+**TL;DR**: The provider-agnostic concepts that recur across AWS, Azure, and GCP — **scaling, load balancing, autoscaling, serverless, storage classes, availability vs. durability, event-driven architecture, the IaaS/PaaS/SaaS spectrum, and the CapEx→OpEx shift**. Cloud computing is using someone else's servers over the internet, paying only for what you use for the time you use it [^src2][^src3]. These fundamentals make the per-provider entity pages ([AWS](/mlops/aws.md), [Azure](/mlops/azure.md), [GCP](/mlops/gcp.md)) mostly a matter of mapping names onto the same ideas.
 
 ## Service models: IaaS / PaaS / SaaS
 
@@ -77,11 +77,11 @@ Cloud shifts spend from **capital expenditure** (upfront servers/hardware) to **
 
 ## See also
 
-- [[mlops/aws|AWS]] · [[mlops/azure|Azure]] · [[mlops/gcp|GCP]] — the three providers these concepts map onto
-- [[mlops/infrastructure-as-code|Infrastructure as Code]] — provisioning the resources above declaratively
-- [[software-engineering/kubernetes|Kubernetes]] — container orchestration, the runtime layer above (software-engineering)
-- [[software-engineering/cap-theorem|CAP Theorem]] / [[software-engineering/distributed-systems-fallacies|Distributed Systems Fallacies]] — the theory behind availability/partition trade-offs (software-engineering)
-- [[mlops/README|MLOps hub]]
+- [AWS](/mlops/aws.md) · [Azure](/mlops/azure.md) · [GCP](/mlops/gcp.md) — the three providers these concepts map onto
+- [Infrastructure as Code](/mlops/infrastructure-as-code.md) — provisioning the resources above declaratively
+- [Kubernetes](/software-engineering/kubernetes.md) — container orchestration, the runtime layer above (software-engineering)
+- [CAP Theorem](/software-engineering/cap-theorem.md) / [Distributed Systems Fallacies](/software-engineering/distributed-systems-fallacies.md) — the theory behind availability/partition trade-offs (software-engineering)
+- [MLOps hub](/mlops/README.md)
 
 ---
 

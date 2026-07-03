@@ -51,14 +51,14 @@ The conclusion is a discipline, not a tool: come up with several scaling strateg
 
 ## See also
 
-- [[data-engineering/apache-spark|Apache Spark]] — the canonical distributed (horizontal) engine
-- [[data-engineering/duckdb|DuckDB]] — single-node engine that often makes vertical scaling enough
-- [[data-engineering/etl-pipeline|ETL Pipeline]] — ELT-in-the-warehouse as a scaling strategy
-- [[data-engineering/data-flow-patterns|Data Flow Patterns]] — pattern choices that interact with scaling (streaming, multi-hop)
-- [[data-engineering/incremental-pipeline-design|Incremental Pipeline Design]] — parallel backfills as horizontal scaling
-- [[data-engineering/small-scale-pipeline-design|Small-Scale Pipeline Design]] — complements this: scaling is what a "small but growing" pipeline grows into when data volumes outgrow its shape
-- [[data-engineering/python-for-data-engineering|Python for Data Engineering]] — row-streaming a larger-than-memory dataset in Python is the "check whether you need to scale at all" default before reaching for distributed compute
-- [[data-engineering/README|Data Engineering hub]]
+- [Apache Spark](/data-engineering/apache-spark.md) — the canonical distributed (horizontal) engine
+- [DuckDB](/data-engineering/duckdb.md) — single-node engine that often makes vertical scaling enough
+- [ETL Pipeline](/data-engineering/etl-pipeline.md) — ELT-in-the-warehouse as a scaling strategy
+- [Data Flow Patterns](/data-engineering/data-flow-patterns.md) — pattern choices that interact with scaling (streaming, multi-hop)
+- [Incremental Pipeline Design](/data-engineering/incremental-pipeline-design.md) — parallel backfills as horizontal scaling
+- [Small-Scale Pipeline Design](/data-engineering/small-scale-pipeline-design.md) — complements this: scaling is what a "small but growing" pipeline grows into when data volumes outgrow its shape
+- [Python for Data Engineering](/data-engineering/python-for-data-engineering.md) — row-streaming a larger-than-memory dataset in Python is the "check whether you need to scale at all" default before reaching for distributed compute
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

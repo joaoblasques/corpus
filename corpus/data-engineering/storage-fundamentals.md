@@ -56,7 +56,7 @@ Supporting processes: **networking** (distributing reads/writes across servers),
 - **Data lake** — central repository for structured/semi/unstructured data at any scale; **schema-on-read** (store raw, decide schema later); usually on low-cost object storage [^src1].
 - **Lakehouse** — lake's raw-data flexibility + warehouse's fast analytics in one system, eliminating constant data movement [^src1].
 
-See [[data-engineering/data-lake|Data Lake / Lakehouse]] for the lake/lakehouse architecture in depth.
+See [Data Lake / Lakehouse](/data-engineering/data-lake.md) for the lake/lakehouse architecture in depth.
 
 ## Three cloud storage types
 
@@ -73,18 +73,18 @@ Object storage's immutability removes synchronisation overhead and enables high 
 Serialisation converts in-memory data into a byte sequence for disk/network; the **layout** determines query performance [^src2]:
 
 - **Row-based** — stores each row as a unit, all columns together. Optimal for transactional (OLTP) operations that read/modify whole records. Used by MySQL, SQLite, SQL Server, PostgreSQL [^src2]. Weakness: analytical queries reading a few columns must scan whole rows; adding a column rewrites all rows [^src2]. Formats: **CSV** (human-readable, no types), **XML** (legacy, slow), **JSON / JSONL** (hierarchical / line-delimited; repeated column names cost space), **Avro** (compact binary, schema in JSON, schema-evolution, splittable) [^src2].
-- **Columnar** — stores each column's values together. Ideal for warehousing/analytics that aggregate specific columns; highly compressible, self-indexing, faster `AVG/MIN/MAX`. Used by Redshift, BigQuery, [[data-engineering/duckdb|DuckDB]] [^src2]. Canonical format: **[[data-engineering/parquet|Apache Parquet]]**.
+- **Columnar** — stores each column's values together. Ideal for warehousing/analytics that aggregate specific columns; highly compressible, self-indexing, faster `AVG/MIN/MAX`. Used by Redshift, BigQuery, [DuckDB](/data-engineering/duckdb.md) [^src2]. Canonical format: **[Apache Parquet](/data-engineering/parquet.md)**.
 
-The row/columnar split is the same physical distinction underlying OLTP databases vs analytical [[data-engineering/parquet|Parquet]]/[[data-engineering/apache-iceberg|Iceberg]] tables.
+The row/columnar split is the same physical distinction underlying OLTP databases vs analytical [Parquet](/data-engineering/parquet.md)/[Iceberg](/data-engineering/apache-iceberg.md) tables.
 
 ### Column vs hybrid format (cloud warehouses)
 
 Cloud warehouses refine "columnar" into two layouts [^src4]:
 
-- **Column format** — columns stored *completely separately* (e.g. [[data-engineering/redshift|Redshift]]).
-- **Hybrid format** — like Parquet: data grouped into **row groups** (a horizontal partition of rows), and within each, a column's data is a **column chunk** (vertical partition). Used by [[data-engineering/bigquery|BigQuery]] (Capacitor), [[data-engineering/snowflake|Snowflake]], and [[data-engineering/databricks|Databricks]] (Parquet/Delta) [^src4].
+- **Column format** — columns stored *completely separately* (e.g. [Redshift](/data-engineering/redshift.md)).
+- **Hybrid format** — like Parquet: data grouped into **row groups** (a horizontal partition of rows), and within each, a column's data is a **column chunk** (vertical partition). Used by [BigQuery](/data-engineering/bigquery.md) (Capacitor), [Snowflake](/data-engineering/snowflake.md), and [Databricks](/data-engineering/databricks.md) (Parquet/Delta) [^src4].
 
-Two execution strategies exploit columnar data [^src4]: **vectorization** (process a batch/vector of values at once — BigQuery, Snowflake, Databricks' Photon) and **code specialization** (compile per-query code to cut CPU instructions — Redshift); they are not mutually exclusive. See [[data-engineering/cloud-data-warehouse-internals|Cloud Data Warehouse Internals]] for the full comparison.
+Two execution strategies exploit columnar data [^src4]: **vectorization** (process a batch/vector of values at once — BigQuery, Snowflake, Databricks' Photon) and **code specialization** (compile per-query code to cut CPU instructions — Redshift); they are not mutually exclusive. See [Cloud Data Warehouse Internals](/data-engineering/cloud-data-warehouse-internals.md) for the full comparison.
 
 ## Choosing a storage solution
 
@@ -94,16 +94,16 @@ No one-size-fits-all; weigh: performance (read/write speed), scalability, access
 - *Early-stage org* — the DE often owns the whole storage setup end-to-end (request a prod-DB replica, spin up a DB, pick cloud storage). Key discipline: **start small** — "resist the temptation to jump straight to advanced platforms like Databricks or a full lakehouse"; ask *do we need this right now, and what problem would it solve that we actually face today?* [^src1].
 - *Mature org* — more specialised; work within an existing platform alongside dedicated ingestion/transformation/governance teams [^src1].
 
-This mirrors the broader [[data-engineering/data-engineer-role|data-engineer-role]] principle of working backward from requirements rather than from tools.
+This mirrors the broader [data-engineer-role](/data-engineering/data-engineer-role.md) principle of working backward from requirements rather than from tools.
 
 ## Related
 
-- [[data-engineering/data-lake|Data Lake / Lakehouse]] — the lake/lakehouse abstraction
-- [[data-engineering/parquet|Apache Parquet]] — the canonical columnar format (columnar deep-dive, ORC, compression schemes)
-- [[data-engineering/cloud-data-warehouse-internals|Cloud Data Warehouse Internals]] — column vs hybrid format; vectorization vs code specialization
-- [[data-engineering/compute-storage-decoupling|Compute–Storage Decoupling]] — object storage as the substrate compute is scaled independently from
-- [[data-engineering/data-engineering-best-practices|Data Engineering Best Practices]] — storage layering in pipeline design
-- [[data-engineering/README|Data Engineering hub]]
+- [Data Lake / Lakehouse](/data-engineering/data-lake.md) — the lake/lakehouse abstraction
+- [Apache Parquet](/data-engineering/parquet.md) — the canonical columnar format (columnar deep-dive, ORC, compression schemes)
+- [Cloud Data Warehouse Internals](/data-engineering/cloud-data-warehouse-internals.md) — column vs hybrid format; vectorization vs code specialization
+- [Compute–Storage Decoupling](/data-engineering/compute-storage-decoupling.md) — object storage as the substrate compute is scaled independently from
+- [Data Engineering Best Practices](/data-engineering/data-engineering-best-practices.md) — storage layering in pipeline design
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

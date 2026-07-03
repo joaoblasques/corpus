@@ -40,7 +40,7 @@ In distributed microservices systems, updates are not immediately visible everyw
 
 ## Distributed systems fallacies
 
-Microservices are subject to all [[software-engineering/distributed-systems-fallacies|distributed systems fallacies]] — assumptions about network reliability and latency that don't hold in production. Ignoring them causes failures in inter-service communication and data consistency [^src1].
+Microservices are subject to all [distributed systems fallacies](/software-engineering/distributed-systems-fallacies.md) — assumptions about network reliability and latency that don't hold in production. Ignoring them causes failures in inter-service communication and data consistency [^src1].
 
 ## Best practices
 
@@ -56,11 +56,11 @@ Microservices are subject to all [[software-engineering/distributed-systems-fall
 
 ## See also
 
-- [[software-engineering/distributed-systems-fallacies|Distributed Systems Fallacies]]
-- [[software-engineering/kubernetes|Kubernetes]] — the container orchestration platform that operationalizes microservices at runtime
-- [[software-engineering/software-design-principles|Software Design Principles]] — SRP and loose coupling at code level; microservices apply the same principles at service level
-- [[software-engineering/README|Software Architecture hub]]
+- [Distributed Systems Fallacies](/software-engineering/distributed-systems-fallacies.md)
+- [Kubernetes](/software-engineering/kubernetes.md) — the container orchestration platform that operationalizes microservices at runtime
+- [Software Design Principles](/software-engineering/software-design-principles.md) — SRP and loose coupling at code level; microservices apply the same principles at service level
+- [Software Architecture hub](/software-engineering/README.md)
 
 ---
 
-[^src1]: [[03_Resources/Articles/Disasters in a Microservices World|Disasters I've Seen in a Microservices World]]
+[^src1]: [Disasters I've Seen in a Microservices World](/03_Resources/Articles/Disasters in a Microservices World.md)

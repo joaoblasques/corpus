@@ -82,13 +82,13 @@ C-SPANN does not win on pure latency vs specialized in-memory systems and (as of
 
 - **RAM vs disk chunks** (Manticore): each disk chunk has its own HNSW graph; KNN across many chunks searches each separately, hurting accuracy and speed, so fewer larger chunks beat many small ones [^src2]. Vector ops are CPU-intensive; plan 2–3× vector-data size in RAM [^src2].
 - **Transactionality** — vector inserts/replaces/deletes can be atomic and binary-logged; Manticore supports multi-master Galera replication for vector tables [^src2].
-- **Hybrid filtering** — combine KNN with keyword/metadata filters in one query (e.g. find images similar to a vector *and* matching text "white") [^src2]. This is the storage-layer basis for hybrid search in [[ai-engineering/rag|RAG]].
+- **Hybrid filtering** — combine KNN with keyword/metadata filters in one query (e.g. find images similar to a vector *and* matching text "white") [^src2]. This is the storage-layer basis for hybrid search in [RAG](/ai-engineering/rag.md).
 
 ## Referenced by
 
-- [[ai-engineering/rag|RAG]] — vector database is the storage layer in the RAG pipeline; chunks are embedded and stored here, then retrieved at query time via similarity search
-- [[ai-engineering/agent-memory|Agent Memory]] — vector database is the primary mechanism for agent long-term memory; stores past results and decisions, retrieved across sessions
-- [[ai-engineering/context-window-management|Context Window Management]] — sub-agents use isolated context windows, reducing the need to load large vector memory into the main agent's context
+- [RAG](/ai-engineering/rag.md) — vector database is the storage layer in the RAG pipeline; chunks are embedded and stored here, then retrieved at query time via similarity search
+- [Agent Memory](/ai-engineering/agent-memory.md) — vector database is the primary mechanism for agent long-term memory; stores past results and decisions, retrieved across sessions
+- [Context Window Management](/ai-engineering/context-window-management.md) — sub-agents use isolated context windows, reducing the need to load large vector memory into the main agent's context
 
 ## Known options
 
@@ -104,10 +104,10 @@ C-SPANN does not win on pure latency vs specialized in-memory systems and (as of
 
 ## See also
 
-- [[ai-engineering/embeddings|Embeddings]] — what the vectors stored here *are*; similarity metrics, quantization, and dimensionality cost
-- [[ai-engineering/rag|RAG]] — primary use case; hybrid search and temporal blind spots are partly vector-index limitations
-- [[ai-engineering/agent-memory|Agent Memory]] — long-term memory pattern; temporal knowledge graphs improve on flat vector memory
-- [[ai-engineering/agentic-search|Agentic Search]] — vector search is one half of the grep-vs-vector comparison
+- [Embeddings](/ai-engineering/embeddings.md) — what the vectors stored here *are*; similarity metrics, quantization, and dimensionality cost
+- [RAG](/ai-engineering/rag.md) — primary use case; hybrid search and temporal blind spots are partly vector-index limitations
+- [Agent Memory](/ai-engineering/agent-memory.md) — long-term memory pattern; temporal knowledge graphs improve on flat vector memory
+- [Agentic Search](/ai-engineering/agentic-search.md) — vector search is one half of the grep-vs-vector comparison
 
 ---
 

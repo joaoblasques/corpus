@@ -37,7 +37,7 @@ Two root issues [^src1]:
 If you run a modern data stack you likely already have the pieces [^src1]:
 
 - An **ELT** process landing raw data in the warehouse (works with ETL too, slightly easier with ELT).
-- A **data observability / catalog tool with column-level lineage** — the author uses SYNQ; **Elementary** (open-source) or **OpenLineage** (build-from-scratch) work too. *"Without column-level lineage, the question 'what downstream assets does this failure affect?' has no reliable answer."* [^src1] See [[data-engineering/data-observability|Data Observability]].
+- A **data observability / catalog tool with column-level lineage** — the author uses SYNQ; **Elementary** (open-source) or **OpenLineage** (build-from-scratch) work too. *"Without column-level lineage, the question 'what downstream assets does this failure affect?' has no reliable answer."* [^src1] See [Data Observability](/data-engineering/data-observability.md).
 - A **BI tool that exposes an API** (the author uses Omni; the specific tool matters less than API access).
 
 ## The mapping problem (the part AI solved)
@@ -48,7 +48,7 @@ Lineage tools know a column flows from `accounts.plan_id` through a `bookings` m
 2. extracts every **tile** in those dashboards,
 3. retrieves the **query each tile executes**.
 
-That yields a map between BI tiles and underlying dbt models. Combined with the lineage graph, a failure at ingestion can be traced **all the way to the specific reports affected** — closing the same "last mile" of lineage that dbt [[data-engineering/dbt|exposures]] target.
+That yields a map between BI tiles and underlying dbt models. Combined with the lineage graph, a failure at ingestion can be traced **all the way to the specific reports affected** — closing the same "last mile" of lineage that dbt [exposures](/data-engineering/dbt.md) target.
 
 ## How an incident flows
 
@@ -78,20 +78,20 @@ The instinct is to fix quietly and say as little as possible, because every inci
 - With **twelve months of visible history**, a vague "the data is always broken" complaint becomes a documented conversation about incident count, average resolution time, and trend — *"the documented fact works in your favor."* [^src1]
 - When stakeholders know they'll be **told** when something breaks, they stop checking — *"they stop asking 'is this dashboard up to date?' as a routine question."* That baseline confidence is worth more than any SLA document [^src1].
 
-This connects directly to [[productivity/working-with-stakeholders|stakeholder trust]] and the postmortem/memory layer in [[data-engineering/data-engineering-team-os|Data Engineering Team OS]].
+This connects directly to [stakeholder trust](/productivity/working-with-stakeholders.md) and the postmortem/memory layer in [Data Engineering Team OS](/data-engineering/data-engineering-team-os.md).
 
 ## The meta-lesson: the skill was identifying the gap
 
-The author wrote none of the code: read the API docs for both tools, described what was needed, handed it to an AI coding tool, and had the status page + mapping script + integration done in days [^src1]. *"You don't need to be a strong engineer to build this. You need to recognize the problem, read some documentation, and spend a couple of days on it."* [^src1] The leverage came from noticing what software product teams do that data teams don't — an instance of [[data-engineering/data-engineer-role|business-impact-over-technical-execution]] thinking, and of [[data-engineering/claude-code-for-data-engineering|AI-assisted DE]] collapsing build time.
+The author wrote none of the code: read the API docs for both tools, described what was needed, handed it to an AI coding tool, and had the status page + mapping script + integration done in days [^src1]. *"You don't need to be a strong engineer to build this. You need to recognize the problem, read some documentation, and spend a couple of days on it."* [^src1] The leverage came from noticing what software product teams do that data teams don't — an instance of [business-impact-over-technical-execution](/data-engineering/data-engineer-role.md) thinking, and of [AI-assisted DE](/data-engineering/claude-code-for-data-engineering.md) collapsing build time.
 
 ## Related
 
-- [[data-engineering/data-observability|Data Observability]] — column-level lineage + incident detection this page surfaces; MTTD/MTTR are the metrics the status history exposes
-- [[data-engineering/dbt|dbt]] — exposures close the model→dashboard lineage hop the mapping script reconstructs
-- [[data-engineering/data-engineering-team-os|Data Engineering Team OS]] — postmortems and the memory layer
-- [[productivity/working-with-stakeholders|Working with Stakeholders]] — the trust mechanism this operationalizes
-- [[data-engineering/data-quality|Data Quality]] — the goal incidents are declared against
-- [[data-engineering/README|Data Engineering hub]]
+- [Data Observability](/data-engineering/data-observability.md) — column-level lineage + incident detection this page surfaces; MTTD/MTTR are the metrics the status history exposes
+- [dbt](/data-engineering/dbt.md) — exposures close the model→dashboard lineage hop the mapping script reconstructs
+- [Data Engineering Team OS](/data-engineering/data-engineering-team-os.md) — postmortems and the memory layer
+- [Working with Stakeholders](/productivity/working-with-stakeholders.md) — the trust mechanism this operationalizes
+- [Data Quality](/data-engineering/data-quality.md) — the goal incidents are declared against
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

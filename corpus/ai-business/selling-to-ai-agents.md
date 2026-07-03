@@ -105,8 +105,8 @@ The opportunity framing: "You resist the urge to spend three months on a beautif
 
 ## Relationship to other pages
 
-- **[[ai-business/agent-infrastructure|Agent Infrastructure]]** — technical architecture of production agents (identity, context, persistence, platforms); this page is the *commercial* layer — how to sell to agents, not how to build them.
-- **[[ai-business/monetizing-code|Monetizing Code]]** — the "picks-and-shovels" single-capability tool play is a direct extension of "sell a result, not code," applied to an agent customer instead of a human.
-- **[[ai-business/boring-expert-businesses|Boring Expert Businesses]]** — the "make yourself agent-buyable" defensive play applies to any expert service business wanting to capture agent traffic.
+- **[Agent Infrastructure](/ai-business/agent-infrastructure.md)** — technical architecture of production agents (identity, context, persistence, platforms); this page is the *commercial* layer — how to sell to agents, not how to build them.
+- **[Monetizing Code](/ai-business/monetizing-code.md)** — the "picks-and-shovels" single-capability tool play is a direct extension of "sell a result, not code," applied to an agent customer instead of a human.
+- **[Boring Expert Businesses](/ai-business/boring-expert-businesses.md)** — the "make yourself agent-buyable" defensive play applies to any expert service business wanting to capture agent traffic.
 
 [^src1]: [Sell Your API to AI Agents & Make SERIOUS Money in 2026](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-sell-your-api-to-report.md) — Oliver (Rosewell.dev / ex-Response AI); solo-founder framing, genuine operator context; video report from Obsidian vault

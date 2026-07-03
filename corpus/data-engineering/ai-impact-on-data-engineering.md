@@ -67,7 +67,7 @@ updated: 2026-06-26
 
 # AI's Impact on Data Engineering
 
-**TL;DR.** Across mid-2026 commentary, a consistent thesis emerges: **AI won't replace the data-engineer role soon, but it changes the job** — fundamentals, judgement, and trade-off decisions matter *more*, while raw implementation gets commoditised [^src1]. "Using AI is not optional anymore" [^src1]. A second thread: AI is reshaping the *consumer* of data engineering — agents, not analysts, become the primary query drivers — pushing DEs toward semantics, context, and the [[data-engineering/semantic-layer|semantic/serving layer]] [^src1][^src3]. This is the DE-specific view; the broader career framing lives in [[ai-business/ai-and-the-job-market|ai-business/AI and the Job Market]].
+**TL;DR.** Across mid-2026 commentary, a consistent thesis emerges: **AI won't replace the data-engineer role soon, but it changes the job** — fundamentals, judgement, and trade-off decisions matter *more*, while raw implementation gets commoditised [^src1]. "Using AI is not optional anymore" [^src1]. A second thread: AI is reshaping the *consumer* of data engineering — agents, not analysts, become the primary query drivers — pushing DEs toward semantics, context, and the [semantic/serving layer](/data-engineering/semantic-layer.md) [^src1][^src3]. This is the DE-specific view; the broader career framing lives in [ai-business/AI and the Job Market](/ai-business/ai-and-the-job-market.md).
 
 ## Two dominant outcomes for DEs
 
@@ -75,7 +75,7 @@ Vu Trinh's framing: there will be two states for those pursuing the DE career [^
 1. **No job** — their experience and skill set are replaceable by AI.
 2. **A job with *more* tasks than ever** — fewer DEs per company, board pressure assuming AI multiplies individual productivity, and *more review burden* because sloppy AI work causes bugs/disasters (e.g. a commit with 50+ file changes and 1000+ diffs to review) [^src1].
 
-The advice that survives: *"Focus on fundamentals and know the right way to do something, as AI will need our feedback to do well"* — refined to: if you stop understanding problems, making decisions, evaluating trade-offs in context, and communicating, **you will be replaced** → learn aggressively to become senior [^src1]. This aligns with the [[data-engineering/data-engineer-role|data-engineer role]]'s "business value first, fundamentals over tools" thesis.
+The advice that survives: *"Focus on fundamentals and know the right way to do something, as AI will need our feedback to do well"* — refined to: if you stop understanding problems, making decisions, evaluating trade-offs in context, and communicating, **you will be replaced** → learn aggressively to become senior [^src1]. This aligns with the [data-engineer role](/data-engineering/data-engineer-role.md)'s "business value first, fundamentals over tools" thesis.
 
 ## Where AI helps (and its limits)
 
@@ -86,8 +86,8 @@ The advice that survives: *"Focus on fundamentals and know the right way to do s
 ## The mindset/skill-set update
 
 The demand to leverage AI in organisations (fine-tuning, AI as an analytics serving layer) forces DEs to update skills [^src1]:
-- Implementing the **[[data-engineering/semantic-layer|semantic layer]]**.
-- Understanding **vector databases** (see [[ai-engineering/vector-database|ai-engineering/vector-db]]).
+- Implementing the **[semantic layer](/data-engineering/semantic-layer.md)**.
+- Understanding **vector databases** (see [ai-engineering/vector-db](/ai-engineering/vector-database.md)).
 - Techniques for making AI **consistent and reliable** (evals, observability — the agentic flywheel of production feedback + evals).
 
 The "data crowd" May-2026 reading reflects this convergence: data-engineering, analytics, and AI topics increasingly overlap — multi-agent DE workflows (Grab reclaiming hundreds of engineering hours), the AI dashboard problem, ELT-vs-ETL mattering less than reliable pipelines [^src3].
@@ -98,7 +98,7 @@ The primary article is partly paywalled and self-described as "purely my train o
 
 ## The AI-builder mindset for data engineers
 
-AI systems are data consumers with strict data-quality requirements — stricter than human consumers in some dimensions. A dlthub perspective: DE fundamentals (schema management, data contracts, lineage, freshness tracking) are now directly relevant to building reliable AI systems [^src4]. The five pillars of trusted data for AI systems: structural integrity, semantic validity, uniqueness/relationships, privacy/governance, and operational health (MTTD/MTTR, schema drift detection, volume anomalies) — see [[data-engineering/data-quality|Data Quality]] for the full breakdown.
+AI systems are data consumers with strict data-quality requirements — stricter than human consumers in some dimensions. A dlthub perspective: DE fundamentals (schema management, data contracts, lineage, freshness tracking) are now directly relevant to building reliable AI systems [^src4]. The five pillars of trusted data for AI systems: structural integrity, semantic validity, uniqueness/relationships, privacy/governance, and operational health (MTTD/MTTR, schema drift detection, volume anomalies) — see [Data Quality](/data-engineering/data-quality.md) for the full breakdown.
 
 Key framing: DEs who understand "what makes data trustworthy for ML/AI" move from data supplier to trusted partner for AI teams. The disciplines required are the same — SLAs, freshness, deduplication, schema contracts — but the *consumer* is an AI system running at scale, not a human analyst [^src4].
 
@@ -110,7 +110,7 @@ Robin Moffatt's March 2026 hands-on evaluation provides the most granular indepe
 - Dropped `gridReference`, `datumOffset`, `unit` columns without surfacing the omission
 - Implemented SCD2 only for stations (as specified), not measures — took the prompt literally without challenging the scope
 
-The verdict echoes the broader thesis: *"Claude Code is an amazing productivity companion. Do not, if you value your job, use it to one-shot a dbt project."* The leverage is real; the verification burden is equally real. See [[data-engineering/claude-code-for-data-engineering|Claude Code for Data Engineering]] for the full assessment.
+The verdict echoes the broader thesis: *"Claude Code is an amazing productivity companion. Do not, if you value your job, use it to one-shot a dbt project."* The leverage is real; the verification burden is equally real. See [Claude Code for Data Engineering](/data-engineering/claude-code-for-data-engineering.md) for the full assessment.
 
 ## The Markdown Team: three new jobs for data teams
 
@@ -124,7 +124,7 @@ Agent-native tools supply the symbolic guardrails: dlt (deterministic ingestion)
 
 **Job 1 — Determinism engineering.** Decide where determinism is required and put the right building blocks in place so LLMs can generate code *within those boundaries*. This is platform engineering: choose tools, define architecture, enforce governance, document standards [^src6].
 
-**Job 2 — Context encoding.** LLMs fail when they don't understand the *meaning* of data (see [[data-engineering/semantic-layer|Semantic Layer]]). The data team's job is to encode that context — gathering, cleaning, and exposing it so agents can consume it reliably. Crucially, context is not static: agent failures reveal missing or ambiguous definitions, which must be fed back as new rules [^src6]. "Context encoding is not just documentation work. It is an additional layer in the stack, one that needs its own feedback loops, maintenance, and tooling" [^src6].
+**Job 2 — Context encoding.** LLMs fail when they don't understand the *meaning* of data (see [Semantic Layer](/data-engineering/semantic-layer.md)). The data team's job is to encode that context — gathering, cleaning, and exposing it so agents can consume it reliably. Crucially, context is not static: agent failures reveal missing or ambiguous definitions, which must be fed back as new rules [^src6]. "Context encoding is not just documentation work. It is an additional layer in the stack, one that needs its own feedback loops, maintenance, and tooling" [^src6].
 
 **Job 3 — Kaizen (the agent flywheel).** Start with a first-version rule set. Let the agent build. When it fails, diagnose *why* — most failures are context failures, not syntax failures: "A metric definition was unclear. A table was less reliable than expected. A join was much more expensive than it looked. A business assumption was never written down." Each failure becomes a new rule/skill-file/constraint. Each correction increases autonomy [^src6].
 
@@ -154,9 +154,9 @@ DataEngineer.io's "2025 AI-enabled data engineering roadmap" makes the same dire
 | Soft / tactical | Answering business questions | **High** *if* data is well-modeled + documented + AI-accessible (then AI handles 90–95%) |
 | Soft / strategic | Pipeline-generation processes, conceptual data modeling, data best practices | **Low** — consensus-driven, conversation-heavy work AI can't own |
 
-The survival advice matches Vu Trinh's: **learn the concepts** [^src7]. Codegen tools like Cursor and Windsurf mean "you mostly need to know the higher-level concepts and schemas" — so the leverage moves to recognizing which **design pattern** applies (Kimball dim/fact, OLAP cubes, OLTP 3NF, [[data-engineering/scd2|SCD2]], One Big Table, ML feature store, Kappa-with-Flink, microbatch) [^src7].
+The survival advice matches Vu Trinh's: **learn the concepts** [^src7]. Codegen tools like Cursor and Windsurf mean "you mostly need to know the higher-level concepts and schemas" — so the leverage moves to recognizing which **design pattern** applies (Kimball dim/fact, OLAP cubes, OLTP 3NF, [SCD2](/data-engineering/scd2.md), One Big Table, ML feature store, Kappa-with-Flink, microbatch) [^src7].
 
-A reusable **prompt pattern** for generating a pipeline with an AI coding tool: **inputs (schema first) → technologies (orchestration + processing engine) → design pattern → quality concerns & best practices** [^src7]. The worked example: "given `CREATE TABLE users(...)`, create an Airflow DAG using Trino that implements SCD2 on `country`, with partition sensors, write-audit-publish quality checks, and idempotent design" [^src7]. This is the [[data-engineering/data-engineering-best-practices|best-practices]] checklist expressed as a prompt.
+A reusable **prompt pattern** for generating a pipeline with an AI coding tool: **inputs (schema first) → technologies (orchestration + processing engine) → design pattern → quality concerns & best practices** [^src7]. The worked example: "given `CREATE TABLE users(...)`, create an Airflow DAG using Trino that implements SCD2 on `country`, with partition sensors, write-audit-publish quality checks, and idempotent design" [^src7]. This is the [best-practices](/data-engineering/data-engineering-best-practices.md) checklist expressed as a prompt.
 
 ## Beginner AI data engineering project: LangChain + BigQuery NL-to-SQL
 
@@ -186,20 +186,20 @@ A concrete entry-level project demonstrates adding generative AI features to a d
 
 **Key insight**: LangChain's `SQLDatabaseChain` allows data engineers and analysts to prototype natural-language-to-SQL interfaces quickly, but production use requires robust prompt engineering and guard-railing against hallucinated SQL.
 
-See [[data-engineering/data-engineering-agents-landscape|DE Agents Landscape]] for the broader text-to-SQL landscape (Vanna, WrenAI, Dataherald, Databricks Genie).
+See [DE Agents Landscape](/data-engineering/data-engineering-agents-landscape.md) for the broader text-to-SQL landscape (Vanna, WrenAI, Dataherald, Databricks Genie).
 
 ## The six enduring DE skills (StartDataEngineering)
 
 Joseph Machado (StartDataEngineering) makes the same "fundamentals endure, implementation commoditises" thesis concrete with six data-engineering concepts that stay in demand as AI cheapens code generation. The throughline: "AI made code generation cheap. But we still need to understand what to build, why to build, and how to fix what we build" [^src9].
 
-1. **SQL for transformation + Python as glue.** SQL expresses the four core patterns — read (`select`/`where`), enrich (joins), find trends (window functions/`group by`), store ([[data-engineering/merge-into|`MERGE`]]/insert/overwrite); Python connects the many systems a pipeline touches (e.g. extract from an API → load to S3 → transform in SQL). AI writes both; the DE ensures the code does what it should and contains architectural sprawl [^src9].
-2. **Data modeling + storage format drive usability.** A good model lets a user answer any business question; data is typically transformed in three stages (source-as-is → type conversions → [[data-engineering/dimensional-modeling|Kimball]] model → summary tables) and physically stored read-optimised, because cloud cost and query speed scale with data scanned. AI speeds DDLs and historical-query-plan analysis; the DE decides how to model and which tradeoffs to make [^src9].
-3. **Data quality + orchestration get the right data out on time.** Decisions made on incorrect data are almost impossible to reverse, so know which DQ checks to run, how to run them, and how to fix issues — and run pipelines on a schedule with an orchestrator (Airflow). AI helps with implementation; the DE owns business context and failure handling [^src9]. See [[data-engineering/data-quality|Data Quality]].
-4. **Design patterns for maintainable systems.** Data-flow patterns, code patterns, and metadata/logging best practices keep pipelines easy to maintain; AI generates the code, the DE knows when to apply a pattern and when to break it [^src9]. See [[data-engineering/data-engineering-best-practices|Best Practices]].
-5. **Define requirements before building.** Understand the business with the Bus Matrix, then gather and agree requirements with end users so work isn't wasted — talking to stakeholders is the part AI cannot replace (use it only for notes/task-lists) [^src9]. See [[data-engineering/requirements-gathering|Requirements Gathering]].
+1. **SQL for transformation + Python as glue.** SQL expresses the four core patterns — read (`select`/`where`), enrich (joins), find trends (window functions/`group by`), store ([`MERGE`](/data-engineering/merge-into.md)/insert/overwrite); Python connects the many systems a pipeline touches (e.g. extract from an API → load to S3 → transform in SQL). AI writes both; the DE ensures the code does what it should and contains architectural sprawl [^src9].
+2. **Data modeling + storage format drive usability.** A good model lets a user answer any business question; data is typically transformed in three stages (source-as-is → type conversions → [Kimball](/data-engineering/dimensional-modeling.md) model → summary tables) and physically stored read-optimised, because cloud cost and query speed scale with data scanned. AI speeds DDLs and historical-query-plan analysis; the DE decides how to model and which tradeoffs to make [^src9].
+3. **Data quality + orchestration get the right data out on time.** Decisions made on incorrect data are almost impossible to reverse, so know which DQ checks to run, how to run them, and how to fix issues — and run pipelines on a schedule with an orchestrator (Airflow). AI helps with implementation; the DE owns business context and failure handling [^src9]. See [Data Quality](/data-engineering/data-quality.md).
+4. **Design patterns for maintainable systems.** Data-flow patterns, code patterns, and metadata/logging best practices keep pipelines easy to maintain; AI generates the code, the DE knows when to apply a pattern and when to break it [^src9]. See [Best Practices](/data-engineering/data-engineering-best-practices.md).
+5. **Define requirements before building.** Understand the business with the Bus Matrix, then gather and agree requirements with end users so work isn't wasted — talking to stakeholders is the part AI cannot replace (use it only for notes/task-lists) [^src9]. See [Requirements Gathering](/data-engineering/requirements-gathering.md).
 6. **Use LLMs, but understand the output.** LLMs speed development/debugging, enable users via RAG (which needs metadata + semantic information), and document systems — but you must understand what you build [^src9].
 
-The recap — "Human design + AI code generation will take you far" — restates this page's direction and the [[data-engineering/data-engineer-role|role]]'s "business value first, fundamentals over tools" thesis from a skills-checklist angle [^src9].
+The recap — "Human design + AI code generation will take you far" — restates this page's direction and the [role](/data-engineering/data-engineer-role.md)'s "business value first, fundamentals over tools" thesis from a skills-checklist angle [^src9].
 
 ## 2026 State of DE Survey (n=1,101)
 
@@ -207,10 +207,10 @@ Joe Reis's February 2026 survey of 1,101 data engineers provides the most compre
 
 - **82%** use AI in their data engineering work daily
 - **59%** feel pressure to move fast at the expense of data modeling quality
-- Data modeling is the #1 pain point — and it's still mostly a people/process problem (§ see [[data-engineering/data-modeling-meaning|Meaning in Data Modeling]])
+- Data modeling is the #1 pain point — and it's still mostly a people/process problem (§ see [Meaning in Data Modeling](/data-engineering/data-modeling-meaning.md))
 - Bottlenecks are overwhelmingly non-technical: requirements clarity, ownership, architecture — not tooling
 
-The 82% daily AI usage figure confirms AI is now standard in DE practice; the 59% pressure-to-move-fast figure confirms the [[data-engineering/vibe-engineering|vibe engineering]] risk is widespread [^src10].
+The 82% daily AI usage figure confirms AI is now standard in DE practice; the 59% pressure-to-move-fast figure confirms the [vibe engineering](/data-engineering/vibe-engineering.md) risk is widespread [^src10].
 
 ## Dashboards "cooked" (Zach Wilson)
 
@@ -233,21 +233,21 @@ Joe Reis's satire on Gartner's "Year of Context" (2026): the AI-industry push to
 
 His point: you cannot build reliable AI context without first solving data governance. The organizations declaring "context" as their AI strategy without addressing the governance deficit are heading for the same failure that sank data lake, data mesh, and data fabric initiatives before them [^src13].
 
-This connects directly to [[data-engineering/data-modeling-meaning|Meaning in Data Modeling]]: the semantic foundation must exist before AI can reason rather than guess.
+This connects directly to [Meaning in Data Modeling](/data-engineering/data-modeling-meaning.md): the semantic foundation must exist before AI can reason rather than guess.
 
 ## Related
 
-- [[data-engineering/data-engineer-role|The Data Engineer Role]] — fundamentals/seniority this builds on
-- [[data-engineering/semantic-layer|Semantic Layer]] — the rising DE responsibility for AI; context encoding elaborated
-- [[data-engineering/vibe-engineering|Vibe Engineering]] — building without theoretical framework; the 82%/59% survey context
-- [[data-engineering/data-modeling-meaning|Meaning in Data Modeling]] — the organizational modeling failure (95.2% problem)
-- [[data-engineering/progressive-disclosure-analytics-agents|Progressive Disclosure for Analytics Agents]]
-- [[data-engineering/query-engine-routing|Query-Engine Routing]] — agents as bursty query drivers
-- [[data-engineering/bi-as-code|BI as Code]] — Markdown as the medium for analytics artifacts
-- [[ai-business/ai-transition-economics|AI Transition Economics]] — the 1905 analogy; swapping motors not factories
-- [[ai-business/ai-and-the-job-market|AI and the Job Market]] — broader career framing (ai-business)
-- [[ai-engineering/agentic-coding|Agentic Coding]] — write→review shift (ai-engineering)
-- [[data-engineering/README|Data Engineering hub]]
+- [The Data Engineer Role](/data-engineering/data-engineer-role.md) — fundamentals/seniority this builds on
+- [Semantic Layer](/data-engineering/semantic-layer.md) — the rising DE responsibility for AI; context encoding elaborated
+- [Vibe Engineering](/data-engineering/vibe-engineering.md) — building without theoretical framework; the 82%/59% survey context
+- [Meaning in Data Modeling](/data-engineering/data-modeling-meaning.md) — the organizational modeling failure (95.2% problem)
+- [Progressive Disclosure for Analytics Agents](/data-engineering/progressive-disclosure-analytics-agents.md)
+- [Query-Engine Routing](/data-engineering/query-engine-routing.md) — agents as bursty query drivers
+- [BI as Code](/data-engineering/bi-as-code.md) — Markdown as the medium for analytics artifacts
+- [AI Transition Economics](/ai-business/ai-transition-economics.md) — the 1905 analogy; swapping motors not factories
+- [AI and the Job Market](/ai-business/ai-and-the-job-market.md) — broader career framing (ai-business)
+- [Agentic Coding](/ai-engineering/agentic-coding.md) — write→review shift (ai-engineering)
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

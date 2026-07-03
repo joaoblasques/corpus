@@ -101,7 +101,7 @@ Standard quotes do not interpolate — a common mistake when switching from lang
 
 ## Clean Code JavaScript patterns
 
-The `clean-code-javascript` repo (★94,451) adapts Robert Martin's *Clean Code* for JavaScript, covering variables, functions, objects, classes, SOLID, testing, error handling, and formatting [^src3]. Core framing: producing "readable, reusable, and refactorable" code. See also [[software-engineering/software-design-principles|Software Design Principles]] for the language-agnostic versions.
+The `clean-code-javascript` repo (★94,451) adapts Robert Martin's *Clean Code* for JavaScript, covering variables, functions, objects, classes, SOLID, testing, error handling, and formatting [^src3]. Core framing: producing "readable, reusable, and refactorable" code. See also [Software Design Principles](/software-engineering/software-design-principles.md) for the language-agnostic versions.
 
 ## Advanced JavaScript questions reference
 
@@ -113,7 +113,7 @@ The `clean-code-javascript` repo (★94,451) adapts Robert Martin's *Clean Code*
 - Data structures: linked lists, stacks, queues, hash tables, heaps, trees, graphs
 - Algorithms: sorting, searching, graph traversal, dynamic programming, bit manipulation
 
-See [[software-engineering/algorithms|Algorithms]] and [[software-engineering/data-structures|Data Structures and Big O Notation]] for concepts.
+See [Algorithms](/software-engineering/algorithms.md) and [Data Structures and Big O Notation](/software-engineering/data-structures.md) for concepts.
 
 ## npm and package management
 
@@ -134,10 +134,10 @@ Format note: long-form screencast (6+ hrs), low cut rate (~0.1 cuts/min), mean s
 
 ## See also
 
-- [[software-engineering/software-design-principles|Software Design Principles]] — SOLID applied to any language including JavaScript
-- [[software-engineering/algorithms|Algorithms]] — strategies applicable to JS implementations
-- [[software-engineering/data-structures|Data Structures and Big O Notation]] — runtime complexity of JS built-in types
-- [[software-engineering/bun|Bun]] — alternative all-in-one JS runtime / toolkit
+- [Software Design Principles](/software-engineering/software-design-principles.md) — SOLID applied to any language including JavaScript
+- [Algorithms](/software-engineering/algorithms.md) — strategies applicable to JS implementations
+- [Data Structures and Big O Notation](/software-engineering/data-structures.md) — runtime complexity of JS built-in types
+- [Bun](/software-engineering/bun.md) — alternative all-in-one JS runtime / toolkit
 
 ---
 

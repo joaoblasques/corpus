@@ -31,7 +31,7 @@ DSS architecture historically posed two "mutually exclusive" alternatives[^src1]
 - **Data warehousing** focuses on a single large server/mainframe consolidating enterprise data from diverse production systems into a unified model; it protects production data but treats end-user access as an afterthought[^src1].
 - **Data marting** deals almost exclusively with servicing a distinct community of knowledge workers, ignoring the practical difficulty of protecting production systems from extraction impact[^src1].
 
-The warehouse stores data at the lowest level of detail (individual customer names, UPC/SKU codes, sales orders, invoice line items); marts roll that detail up to each community's level of understanding[^src1]. See [[data-engineering/dimensional-modeling|Dimensional Modeling]] for the fact/dimension modeling these marts typically use, and [[data-engineering/pipeline-layers|Pipeline Layers]] for the modern staging→warehouse→marts ELT separation that mirrors this split.
+The warehouse stores data at the lowest level of detail (individual customer names, UPC/SKU codes, sales orders, invoice line items); marts roll that detail up to each community's level of understanding[^src1]. See [Dimensional Modeling](/data-engineering/dimensional-modeling.md) for the fact/dimension modeling these marts typically use, and [Pipeline Layers](/data-engineering/pipeline-layers.md) for the modern staging→warehouse→marts ELT separation that mirrors this split.
 
 ## Four goals of data warehousing (and their flaws)
 

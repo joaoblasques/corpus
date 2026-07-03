@@ -18,7 +18,7 @@ updated: 2026-06-11
 
 # dbt Kimball reference project (vutrinh274/dbt_kimball)
 
-**TL;DR**: A reference [[data-engineering/dbt|dbt]] project demonstrating [[data-engineering/dimensional-modeling|Kimball dimensional modeling]] — SCD Type 2 dimensions, fact tables with surrogate-key relationships, and incremental processing by snapshot date — implemented twice, for BigQuery and DuckDB [^src1].
+**TL;DR**: A reference [dbt](/data-engineering/dbt.md) project demonstrating [Kimball dimensional modeling](/data-engineering/dimensional-modeling.md) — SCD Type 2 dimensions, fact tables with surrogate-key relationships, and incremental processing by snapshot date — implemented twice, for BigQuery and DuckDB [^src1].
 
 **Repo**: https://github.com/vutrinh274/dbt_kimball
 
@@ -36,7 +36,7 @@ dbt_kimball/
 ## Models
 
 - **Staging**: `stg_products`, `stg_product_categories`, `stg_product_subcategories`, `stg_sales`, `stg_territories` [^src1].
-- **Dimensions ([[data-engineering/scd2|SCD Type 2]])**: `dim_product`, `dim_territories` [^src1].
+- **Dimensions ([SCD Type 2](/data-engineering/scd2.md))**: `dim_product`, `dim_territories` [^src1].
 - **Fact**: `fact_sale` (surrogate-key relationships to the SCD2 dimensions) [^src1].
 
 ## Running it
@@ -65,9 +65,9 @@ The project documents warehouse SQL-dialect differences worth knowing for cross-
 
 ## See also
 
-- [[data-engineering/dimensional-modeling|Dimensional Modeling]]
-- [[data-engineering/scd2|SCD Type 2]]
-- [[data-engineering/dbt|dbt]]
+- [Dimensional Modeling](/data-engineering/dimensional-modeling.md)
+- [SCD Type 2](/data-engineering/scd2.md)
+- [dbt](/data-engineering/dbt.md)
 
 ---
 

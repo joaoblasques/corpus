@@ -69,9 +69,9 @@ The data/output/action lens is a translation layer, not a replacement, for [^src
 
 ## See also
 
-- [[software-engineering/ai-assisted-development|AI-Assisted Development]] — the same probabilistic-plus-deterministic discipline applied to code review and feedback loops
-- [[software-engineering/distributed-systems-fallacies|Distributed Systems Fallacies]] — adjacent "the failure mode lives in the system, not one component" reasoning
-- [[software-engineering/README|Software Engineering hub]]
+- [AI-Assisted Development](/software-engineering/ai-assisted-development.md) — the same probabilistic-plus-deterministic discipline applied to code review and feedback loops
+- [Distributed Systems Fallacies](/software-engineering/distributed-systems-fallacies.md) — adjacent "the failure mode lives in the system, not one component" reasoning
+- [Software Engineering hub](/software-engineering/README.md)
 
 ---
 

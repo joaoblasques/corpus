@@ -179,7 +179,7 @@ updated: 2026-06-25
 
 # Claude Cowork
 
-**TL;DR.** Claude Cowork is the desktop-app product for non-developers — described as "the non-developer version of Claude Code" [^src8]. New Anthropic capabilities land in [[ai-engineering/claude-code|Claude Code]] first and the best ones trickle down to Cowork over time [^src8]. It works against a **workspace folder** on your computer: each session starts by reading instruction and memory files (`CLAUDE.md`, `MEMORY.md`) plus an ABOUT-ME profile, so you never re-explain who you are [^src1][^src8]. The discipline that makes it powerful is **context economy** — keeping the always-loaded files lean so the context window is spent on the task, not the profile [^src1].
+**TL;DR.** Claude Cowork is the desktop-app product for non-developers — described as "the non-developer version of Claude Code" [^src8]. New Anthropic capabilities land in [Claude Code](/ai-engineering/claude-code.md) first and the best ones trickle down to Cowork over time [^src8]. It works against a **workspace folder** on your computer: each session starts by reading instruction and memory files (`CLAUDE.md`, `MEMORY.md`) plus an ABOUT-ME profile, so you never re-explain who you are [^src1][^src8]. The discipline that makes it powerful is **context economy** — keeping the always-loaded files lean so the context window is spent on the task, not the profile [^src1].
 
 Access: download the desktop app at claude.com/download, open the **Cowork** tab (between Chat and Code), and select a folder as your workspace [^src1]. Three modes of Claude: **Chat** (ask/answer, won't read local files or take unrequested actions), **Code** (developers), **Cowork** (non-developers, file-aware, takes actions) [^src8].
 
@@ -220,7 +220,7 @@ Cowork bills tokens, not messages, and re-reads the full conversation history on
 4. **Use Sonnet/Haiku for quick tasks**, reserve Opus + extended thinking for deep work [^src1].
 5. **Keep ABOUT ME files small** [^src1].
 
-Trimming the root CLAUDE.md from 600+ lines to ~250 dropped one user's token usage by roughly 25% [^src11]. See [[ai-engineering/context-window-management|Context Window Management]].
+Trimming the root CLAUDE.md from 600+ lines to ~250 dropped one user's token usage by roughly 25% [^src11]. See [Context Window Management](/ai-engineering/context-window-management.md).
 
 ## Using personal Claude safely at work
 
@@ -251,7 +251,7 @@ Memory discipline: 1–2 sentences per entry; a 150-line ceiling on root MEMORY.
 
 ## Skills vs workstations
 
-If the process requires your judgment along the way, it's a **workstation**; if you already know exactly what the output should be and just need execution, it's a **skill** [^src11]. See [[ai-engineering/agent-skills|Agent Skills]].
+If the process requires your judgment along the way, it's a **workstation**; if you already know exactly what the output should be and just need execution, it's a **skill** [^src11]. See [Agent Skills](/ai-engineering/agent-skills.md).
 
 ### Worked example: a post-call wrap-up skill
 
@@ -265,7 +265,7 @@ Anthropic's own positioning for Cowork in enterprise contexts [^src37]: "Out of 
 
 The Enterprise Agents event (February 24 2026) demonstrated this with four Anthropic functional leaders from Finance, Legal, Sales, and Product showing live demos of their Cowork + plugin workflows [^src37]. Key external adopter case: Seth Hain, SVP of R&D at Epic, discussed scaling AI adoption across both technical and non-technical teams — the key challenge being that non-technical employees need a Cowork workflow that feels natural to their role, not a prompt-engineering exercise [^src37].
 
-**SimpleBrain / Claude Cowork demo.** The `translate.md` skill (a SKILL.md that converts raw notes/transcripts to polished output in the user's voice) was demoed as a daily driver on Claude Cowork — the user drops a voice memo or transcript, triggers the skill, and receives a structured output formatted to their established tone and style [^src38]. This is the Cowork expression of the SimpleBrain second brain (see [[ai-engineering/agent-memory|Agent Memory]]).
+**SimpleBrain / Claude Cowork demo.** The `translate.md` skill (a SKILL.md that converts raw notes/transcripts to polished output in the user's voice) was demoed as a daily driver on Claude Cowork — the user drops a voice memo or transcript, triggers the skill, and receives a structured output formatted to their established tone and style [^src38]. This is the Cowork expression of the SimpleBrain second brain (see [Agent Memory](/ai-engineering/agent-memory.md)).
 
 ## Enterprise deployment (Anthropic's deployment guide)
 
@@ -289,7 +289,7 @@ Anthropic released a guide for deploying Cowork across a business function, with
 
 ## Connectors and the Cowork + skill + connector pattern
 
-**Connectors** are MCP-based integrations added via *Customize → Connectors → browse → connect*; they let Claude act *inside* third-party apps directly, with no manual API wiring [^src24]. The recurring production pattern is **Cowork + a custom skill + a connector**: the connector grants the capability, while a reusable [[ai-engineering/agent-skills|skill]] (a saved long-prompt invoked with `/skill-name`) makes the connector's output consistent every run — so a workflow can be saved once and rerun at scale [^src24]. **"Always allow"** tool permissions trade per-action confirmation for speed by pre-approving a connector's actions [^src24].
+**Connectors** are MCP-based integrations added via *Customize → Connectors → browse → connect*; they let Claude act *inside* third-party apps directly, with no manual API wiring [^src24]. The recurring production pattern is **Cowork + a custom skill + a connector**: the connector grants the capability, while a reusable [skill](/ai-engineering/agent-skills.md) (a saved long-prompt invoked with `/skill-name`) makes the connector's output consistent every run — so a workflow can be saved once and rerun at scale [^src24]. **"Always allow"** tool permissions trade per-action confirmation for speed by pre-approving a connector's actions [^src24].
 
 Five connectors from one practitioner's five-month workflow illustrate the range [^src24]:
 
@@ -301,7 +301,7 @@ Five connectors from one practitioner's five-month workflow illustrate the range
 | **Supabase** | A backing database for dashboards | Powers **live artifacts** and "database as a second brain" |
 | **Zapier MCP** | Access to 9,000+ apps when no native connector exists | The no-code **escape hatch** for non-technical users — avoids standing up your own MCP server |
 
-Two capabilities recur across these workflows: **live artifacts** — custom dashboards that live inside Claude and render real-time data pulled across apps — and **scheduled tasks** — Claude jobs that run at a set time (e.g. a daily 7 am scrape) to keep that data fresh [^src24]. See [[ai-engineering/mcp|MCP]] for the underlying protocol and [[ai-engineering/agent-skills|Agent Skills]] for the skill layer.
+Two capabilities recur across these workflows: **live artifacts** — custom dashboards that live inside Claude and render real-time data pulled across apps — and **scheduled tasks** — Claude jobs that run at a set time (e.g. a daily 7 am scrape) to keep that data fresh [^src24]. See [MCP](/ai-engineering/mcp.md) for the underlying protocol and [Agent Skills](/ai-engineering/agent-skills.md) for the skill layer.
 
 ## Claude for Microsoft 365
 
@@ -324,7 +324,7 @@ Legal professionals became the most engaged Claude Cowork users of any knowledge
 - **12 practice-area plugins** — each runs a setup interview that learns the team's playbook, escalation chain, and house style. Plugins include: Commercial Legal, Corporate Legal, Employment Legal, Privacy Legal, Product Legal, Regulatory Legal, AI Governance Legal, IP Legal, Litigation Legal, Law Student, Legal Clinic, Legal Builder Hub [^src22].
 - **Claude Works in Microsoft apps**: context flows from Word redlines to Outlook cover notes to Excel checklists to PowerPoint board summaries without re-explanation [^src22].
 
-A subset of practice-area plugins (Commercial Legal, Corporate Legal, Litigation Legal, Product Legal) are also available as cookbooks for deployment as [[ai-engineering/claude-managed-agents|Managed Agents]] via the Claude Platform [^src22].
+A subset of practice-area plugins (Commercial Legal, Corporate Legal, Litigation Legal, Product Legal) are also available as cookbooks for deployment as [Managed Agents](/ai-engineering/claude-managed-agents.md) via the Claude Platform [^src22].
 
 ## Official Cowork: architecture, Projects, and safety (Anthropic guide)
 
@@ -688,16 +688,16 @@ A practical orientation framework for new Claude users: not about prompts, but a
 
 ## Cowork as the no-code local AI agent (vs OpenClaw)
 
-In the emerging [[ai-engineering/local-ai-agents|local AI agent]] category — agents that run on your own machine, hold file-based memory, use tools, and run on a schedule — Cowork is positioned as "Anthropic's take on local AI agents": the safer, no-code option, recommended for people not comfortable with code or just starting out [^src51] [20:09](../../raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md#t=20:09). The trade-off versus the open-source [[ai-engineering/openclaw|OpenClaw]] is the familiar one: Cowork is "a lot safer and a lot easier to use" with security pre-baked, but you "get locked into Anthropic's system and there's less ways for you to customize things" [^src51]. Many practitioners run both side by side for different use cases [^src51]. The "eyes"/computer-use demo from mobile (ask Cowork to find and screenshot a local file and send it to your phone) is the same [[ai-engineering/computer-use|computer use]] surface as Dispatch (§ above) [^src51] [23:16](../../raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md#t=23:16).
+In the emerging [local AI agent](/ai-engineering/local-ai-agents.md) category — agents that run on your own machine, hold file-based memory, use tools, and run on a schedule — Cowork is positioned as "Anthropic's take on local AI agents": the safer, no-code option, recommended for people not comfortable with code or just starting out [^src51] [20:09](../../raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md#t=20:09). The trade-off versus the open-source [OpenClaw](/ai-engineering/openclaw.md) is the familiar one: Cowork is "a lot safer and a lot easier to use" with security pre-baked, but you "get locked into Anthropic's system and there's less ways for you to customize things" [^src51]. Many practitioners run both side by side for different use cases [^src51]. The "eyes"/computer-use demo from mobile (ask Cowork to find and screenshot a local file and send it to your phone) is the same [computer use](/ai-engineering/computer-use.md) surface as Dispatch (§ above) [^src51] [23:16](../../raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md#t=23:16).
 
 ## See also
 
-- [[ai-engineering/local-ai-agents|Local AI Agents]] — the category Cowork is the no-code option within
-- [[ai-engineering/claude-code|Claude Code]] — the developer counterpart; capabilities land here first
-- [[ai-engineering/anthropic|Anthropic]] — provider and model lineup
-- [[ai-engineering/claude-managed-agents|Claude Managed Agents]] — some legal practice-area plugins deploy as Managed Agents
-- [[ai-engineering/mcp|MCP]] — the protocol underlying Cowork's 20+ legal connectors and all external app integrations
-- [[ai-engineering/context-window-management|Context Window Management]], [[ai-engineering/agent-skills|Agent Skills]]
+- [Local AI Agents](/ai-engineering/local-ai-agents.md) — the category Cowork is the no-code option within
+- [Claude Code](/ai-engineering/claude-code.md) — the developer counterpart; capabilities land here first
+- [Anthropic](/ai-engineering/anthropic.md) — provider and model lineup
+- [Claude Managed Agents](/ai-engineering/claude-managed-agents.md) — some legal practice-area plugins deploy as Managed Agents
+- [MCP](/ai-engineering/mcp.md) — the protocol underlying Cowork's 20+ legal connectors and all external app integrations
+- [Context Window Management](/ai-engineering/context-window-management.md), [Agent Skills](/ai-engineering/agent-skills.md)
 
 [^src1]: [Cowork (Ruben Hassid)](../../raw/web/cowork.md)
 [^src2]: [Cowork 2.0 (Ruben Hassid, dup)](../../raw/web/cowork-0dd4601a.md)

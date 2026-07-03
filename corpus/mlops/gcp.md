@@ -22,7 +22,7 @@ updated: 2026-06-15
 
 # GCP
 
-**TL;DR**: Google Cloud Platform is the third-largest major cloud provider, running on Google's global fiber-connected data centers [^src1]. This page maps GCP's core services onto the [[mlops/cloud-computing-fundamentals|cloud fundamentals]]; GCP's standout services are **BigQuery** (serverless data warehouse) and **GKE** (the managed Kubernetes that Google originated) [^src1].
+**TL;DR**: Google Cloud Platform is the third-largest major cloud provider, running on Google's global fiber-connected data centers [^src1]. This page maps GCP's core services onto the [cloud fundamentals](/mlops/cloud-computing-fundamentals.md); GCP's standout services are **BigQuery** (serverless data warehouse) and **GKE** (the managed Kubernetes that Google originated) [^src1].
 
 ## Resource hierarchy
 
@@ -39,7 +39,7 @@ updated: 2026-06-15
 | **Networking** | VPC (global virtual network + subnets), Cloud Load Balancing, Cloud CDN (edge caching) [^src1] |
 | **Identity** | IAM (role-based access; who can do what to which resource) [^src1] |
 
-These map onto [[mlops/cloud-computing-fundamentals|cloud fundamentals]]: Compute Engine ↔ IaaS VMs, App Engine ↔ PaaS, Cloud Functions ↔ serverless, Cloud Load Balancing ↔ load balancing, Cloud Storage ↔ object storage, GKE ↔ container orchestration.
+These map onto [cloud fundamentals](/mlops/cloud-computing-fundamentals.md): Compute Engine ↔ IaaS VMs, App Engine ↔ PaaS, Cloud Functions ↔ serverless, Cloud Load Balancing ↔ load balancing, Cloud Storage ↔ object storage, GKE ↔ container orchestration.
 
 ## Global infrastructure
 
@@ -47,11 +47,11 @@ Geographical **regions** contain independent **zones** (separate-infrastructure 
 
 ## See also
 
-- [[mlops/cloud-computing-fundamentals|Cloud Computing Fundamentals]] — the concepts these services implement
-- [[mlops/aws|AWS]] · [[mlops/azure|Azure]] — peer providers (BigQuery ≈ Redshift/Synapse; GKE ≈ EKS/AKS; Cloud Storage ≈ S3/Blob)
-- [[software-engineering/kubernetes|Kubernetes]] — GKE is managed Kubernetes (software-engineering)
-- [[data-engineering/dbt|dbt]] / [[data-engineering/README|Data Engineering]] — BigQuery is a common dbt warehouse target (data-engineering)
-- [[mlops/README|MLOps hub]]
+- [Cloud Computing Fundamentals](/mlops/cloud-computing-fundamentals.md) — the concepts these services implement
+- [AWS](/mlops/aws.md) · [Azure](/mlops/azure.md) — peer providers (BigQuery ≈ Redshift/Synapse; GKE ≈ EKS/AKS; Cloud Storage ≈ S3/Blob)
+- [Kubernetes](/software-engineering/kubernetes.md) — GKE is managed Kubernetes (software-engineering)
+- [dbt](/data-engineering/dbt.md) / [Data Engineering](/data-engineering/README.md) — BigQuery is a common dbt warehouse target (data-engineering)
+- [MLOps hub](/mlops/README.md)
 
 ---
 

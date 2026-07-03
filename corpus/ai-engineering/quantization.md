@@ -34,7 +34,7 @@ updated: 2026-07-03
 
 # Quantization
 
-**TL;DR.** Quantization compresses a model's weights (and sometimes activations) from a high-precision format like BF16 down to a low-bit format (FP8, INT4/INT8, NVFP4), trading a small accuracy cost for large memory and latency wins. Within the [[ai-engineering/vllm|vLLM]] ecosystem, quantization is treated as an **offline, checkpoint-driven step** — done once before serving, not during — so production inference stays focused purely on execution efficiency [^src1].
+**TL;DR.** Quantization compresses a model's weights (and sometimes activations) from a high-precision format like BF16 down to a low-bit format (FP8, INT4/INT8, NVFP4), trading a small accuracy cost for large memory and latency wins. Within the [vLLM](/ai-engineering/vllm.md) ecosystem, quantization is treated as an **offline, checkpoint-driven step** — done once before serving, not during — so production inference stays focused purely on execution efficiency [^src1].
 
 ## Why it matters for serving
 
@@ -67,7 +67,7 @@ Not every pipeline stage is quantized (VAE decode and auxiliary stages may stay 
 
 ## NVFP4 — the DGX Spark / Nemotron precision path
 
-**NVFP4** is NVIDIA's 4-bit floating-point format, central to serving large models locally on [[ai-engineering/vllm|vLLM]]-on-DGX-Spark deployments and to [[ai-engineering/nemotron-3-ultra|Nemotron 3 Ultra]]'s cross-architecture checkpoint strategy:
+**NVFP4** is NVIDIA's 4-bit floating-point format, central to serving large models locally on [vLLM](/ai-engineering/vllm.md)-on-DGX-Spark deployments and to [Nemotron 3 Ultra](/ai-engineering/nemotron-3-ultra.md)'s cross-architecture checkpoint strategy:
 
 - On DGX Spark's unified 128 GB CPU+GPU memory pool, NVFP4 is what makes it practical to load NVFP4 models with up to 200B parameters on a single Spark; Mixture-of-Experts models in NVFP4 with ~10–15B active parameters are called out as a strong fit, since active-parameter count (not total parameters) shapes decode speed [^src2].
 - NVFP4 gives its biggest practical advantage on **memory pressure and prefill/model-fit behavior**; decode speed is still bounded by active parameter count and the kernel path [^src2].
@@ -75,11 +75,11 @@ Not every pipeline stage is quantized (VAE decode and auxiliary stages may stay 
 
 ## LLM Compressor — quantized checkpoints for agentic coding models
 
-For [[ai-engineering/laguna-xs2|Laguna XS.2]] (Poolside's agentic-coding MoE model), Red Hat AI's **LLM Compressor** library produced FP8, NVFP4, and INT4/INT8 checkpoints in the compressed-tensors format, letting developers pick a variant to fit hardware/latency/memory constraints without touching vLLM's serving path [^src3].
+For [Laguna XS.2](/ai-engineering/laguna-xs2.md) (Poolside's agentic-coding MoE model), Red Hat AI's **LLM Compressor** library produced FP8, NVFP4, and INT4/INT8 checkpoints in the compressed-tensors format, letting developers pick a variant to fit hardware/latency/memory constraints without touching vLLM's serving path [^src3].
 
 ## LLM.int8() — Dettmers's mixed-precision decomposition (2022)
 
-**LLM.int8()** is [[ai-engineering/tim-dettmers|Tim Dettmers]]'s method for 8-bit inference of large language models, enabling models like OPT-175B or BLOOM-176B to run on hardware they wouldn't otherwise fit on [^src4].
+**LLM.int8()** is [Tim Dettmers](/ai-engineering/tim-dettmers.md)'s method for 8-bit inference of large language models, enabling models like OPT-175B or BLOOM-176B to run on hardware they wouldn't otherwise fit on [^src4].
 
 **Core problem**: naively quantizing all activations and weights to Int8 degrades quality unacceptably for large LLMs, because large models develop "emergent outlier features" that break Int8 range assumptions [^src4].
 
@@ -118,13 +118,13 @@ The progression shows quantization moving from "post-hoc trick" to "hardware-nat
 
 ## Related
 
-- [[ai-engineering/vllm|vLLM]] — the serving engine that auto-detects and dispatches quantized checkpoints at load time
-- [[ai-engineering/nemotron-3-ultra|Nemotron 3 Ultra]] — NVFP4 cross-Hopper/Blackwell checkpoint strategy
-- [[ai-engineering/laguna-xs2|Laguna XS.2]] — LLM Compressor FP8/NVFP4/INT4/INT8 checkpoints
-- [[ai-engineering/mixture-of-experts|Mixture of Experts]] — quantized MoE execution backends (DeepGEMM MXFP8, Marlin MXFP8)
-- [[ai-engineering/tim-dettmers|Tim Dettmers]] — originator of LLM.int8(), QLoRA, bitsandbytes
-- [[ai-engineering/unsloth|Unsloth]] — fine-tuning toolkit that builds on QLoRA/quantized LoRA
-- [[ai-engineering/README|AI Engineering hub]]
+- [vLLM](/ai-engineering/vllm.md) — the serving engine that auto-detects and dispatches quantized checkpoints at load time
+- [Nemotron 3 Ultra](/ai-engineering/nemotron-3-ultra.md) — NVFP4 cross-Hopper/Blackwell checkpoint strategy
+- [Laguna XS.2](/ai-engineering/laguna-xs2.md) — LLM Compressor FP8/NVFP4/INT4/INT8 checkpoints
+- [Mixture of Experts](/ai-engineering/mixture-of-experts.md) — quantized MoE execution backends (DeepGEMM MXFP8, Marlin MXFP8)
+- [Tim Dettmers](/ai-engineering/tim-dettmers.md) — originator of LLM.int8(), QLoRA, bitsandbytes
+- [Unsloth](/ai-engineering/unsloth.md) — fine-tuning toolkit that builds on QLoRA/quantized LoRA
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

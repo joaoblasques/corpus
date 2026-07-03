@@ -81,9 +81,9 @@ Manus competes with computer-use agents and autonomous research tools rather tha
 
 ## See also
 
-- [[ai-engineering/computer-use|Computer Use]] — the underlying pattern of agents operating a browser/desktop
-- [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] — wide research as a practical parallel-agent deployment
-- [[ai-engineering/ai-agent|AI Agent]] — the general agent architecture Manus instantiates
+- [Computer Use](/ai-engineering/computer-use.md) — the underlying pattern of agents operating a browser/desktop
+- [Multi-Agent Systems](/ai-engineering/multi-agent-systems.md) — wide research as a practical parallel-agent deployment
+- [AI Agent](/ai-engineering/ai-agent.md) — the general agent architecture Manus instantiates
 
 ---
 

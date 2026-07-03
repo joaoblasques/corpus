@@ -36,15 +36,15 @@ updated: 2026-06-27
 
 ## Why it works (the pattern)
 
-The workflow is a concrete instance of **separating specification from generation and gating each artifact**: facts, copy, and design are each fixed and approved *before* code exists, so the model is never improvising substance and style simultaneously. The **structural-donor** rule is the key anti-"AI-slop" mechanism — it keeps the engineering of a borrowed component while forcing it to inherit the project's design tokens, so the site stays on-brand instead of inheriting each library's default look [^src1]. This mirrors the broader agentic-coding lesson that a strong upfront plan/spec avoids burning tokens course-correcting later (see [[ai-engineering/claude-design|Claude Design]]'s plan-first phase and [[ai-engineering/claude-code|Claude Code]]).
+The workflow is a concrete instance of **separating specification from generation and gating each artifact**: facts, copy, and design are each fixed and approved *before* code exists, so the model is never improvising substance and style simultaneously. The **structural-donor** rule is the key anti-"AI-slop" mechanism — it keeps the engineering of a borrowed component while forcing it to inherit the project's design tokens, so the site stays on-brand instead of inheriting each library's default look [^src1]. This mirrors the broader agentic-coding lesson that a strong upfront plan/spec avoids burning tokens course-correcting later (see [Claude Design](/ai-engineering/claude-design.md)'s plan-first phase and [Claude Code](/ai-engineering/claude-code.md)).
 
 > Note: the source is a Substack newsletter (Charlie Hills) and includes a satirical aside about a model being "pulled" by a government order — treated here as the author's joke, not a factual claim. The load-bearing content is the workflow itself.
 
 ## See also
 
-- [[ai-engineering/claude-design|Claude Design]] — Anthropic's hosted design app; the design-system-first, plan-first counterpart to this files-in-the-repo approach
-- [[ai-engineering/claude-code|Claude Code]] — the agent executing this workflow; `CLAUDE.md` standing-rules convention
-- [[ai-engineering/README|AI Engineering hub]]
+- [Claude Design](/ai-engineering/claude-design.md) — Anthropic's hosted design app; the design-system-first, plan-first counterpart to this files-in-the-repo approach
+- [Claude Code](/ai-engineering/claude-code.md) — the agent executing this workflow; `CLAUDE.md` standing-rules convention
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

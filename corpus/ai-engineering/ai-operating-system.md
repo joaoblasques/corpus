@@ -144,7 +144,7 @@ From the AI Daily Brief's agent OS training program, focused on knowledge worker
 1. **Identity** — who you are, your roles, rules enforced on every interaction
 2. **Knowledge** — what you know: domain expertise, business data, reference docs
 3. **Memory** — what persists: decisions made, preferences, outcomes across sessions
-4. **Tools / MCP** — what the agent can reach: APIs, data sources, services via [[ai-engineering/mcp|MCP]]
+4. **Tools / MCP** — what the agent can reach: APIs, data sources, services via [MCP](/ai-engineering/mcp.md)
 5. **Skills / Workflows** — encoded procedures: how you write, analyze, communicate
 6. **Cadence / Routines** — when things happen: scheduled tasks, updates, digests
 7. **Team / Permissions** — who else can access the OS and at what scope
@@ -200,7 +200,7 @@ Obsidian's CLI lets agents search notes with semantic awareness — tags, frontm
 
 **The symbiosis framing** [^src18]: agents and Obsidian complement each other at their respective weak points — "agents don't remember anything, but Obsidian does; Obsidian has no hands to take action, but Claude/Codex can act on the folder structure." The pair addresses each other's deficiencies exactly.
 
-See [[ai-engineering/agent-memory|Agent Memory]] for the full taxonomy of memory tiers.
+See [Agent Memory](/ai-engineering/agent-memory.md) for the full taxonomy of memory tiers.
 
 ## Agentic logging: the time audit
 
@@ -213,7 +213,7 @@ The agentic OS as workspace extends further: enabling Obsidian's built-in (disab
 ## Key gotchas
 
 - **Statelessness is the default.** "If you open a new session in Claude Code, what does it have? It loads in its global rules, CLAUDE.md. Otherwise it would be a complete beginner every time." [^src6] The OS makes each new session intelligent from line one.
-- **Context has a cost.** "Think about your tokens like money." [^src6] Load only what the current task needs; skills should be invoked on demand rather than always-on. See [[ai-engineering/context-engineering|Context Engineering]] for the "less is more" discipline.
+- **Context has a cost.** "Think about your tokens like money." [^src6] Load only what the current task needs; skills should be invoked on demand rather than always-on. See [Context Engineering](/ai-engineering/context-engineering.md) for the "less is more" discipline.
 - **Build iteratively ("layers and not leaps").** [^src4] Start with identity + one skill; add connections, routines, and team access over weeks. An AIOS built in one weekend is a project; one built over months is infrastructure.
 - **Tool-agnostic by design.** "Models will be replaced. API endpoints might be deprecated." [^src7] The text-file foundation survives tool churn; migrating to a new agent is pointing it at the same folder.
 
@@ -272,7 +272,7 @@ The compounding mechanic: one new source updates 10–15 linked wiki pages, iron
 
 "Most people use Claude Code like a slot machine — random prompts on random tasks and ultimately getting random results" [^src14]. The AIOS is the structural fix: by providing consistent context (CLAUDE.md identity), live data connections, and reusable skills, the same prompt reliably produces the same quality result rather than depending on a lucky draw from the model's distribution.
 
-The corollary from [[ai-engineering/agentic-coding|Agentic Coding]]: Karpathy's shift from 20% to ~0% code-writing was not about prompting better — it was about framing tasks as **macro actions** (high-level outcomes) and providing agents with the right environment (repositories checked out, permissions pre-granted, parallel sessions running). Token throughput becomes the new GPU utilization metric: an idle subscription is evidence the AIOS isn't running enough concurrent work [^src16].
+The corollary from [Agentic Coding](/ai-engineering/agentic-coding.md): Karpathy's shift from 20% to ~0% code-writing was not about prompting better — it was about framing tasks as **macro actions** (high-level outcomes) and providing agents with the right environment (repositories checked out, permissions pre-granted, parallel sessions running). Token throughput becomes the new GPU utilization metric: an idle subscription is evidence the AIOS isn't running enough concurrent work [^src16].
 
 ## 4-layer AIOS with Claude Code (nyndra pattern)
 
@@ -305,24 +305,24 @@ A non-technical-facing walkthrough that lands on the same architecture as the pr
 
 "The user file is how you are; the soul is how it acts" [^src22]. Pro tip: don't write them by hand — have the AI interview you ("interview me about how I work, what I value, how I communicate") and draft all three. This is the consumer-named version of the `me.md`/`SOUL.md` identity layer in the Nick Milo and Nufar Gaspar models above.
 
-**Wire before you feed (the 7-folder vault).** Structure precedes ingestion — the claim is that setting up folders moved answer accuracy "from 60% to 85%," because "no structure means AI just drowns in noise and eventually hallucinates" [^src22]. The seven folders: `people`, `projects`, `decisions`, `companies`, `meetings`, `daily` (a 3–5-line daily dump), `knowledge` (reusable insights/frameworks/quotes). An eighth "pro-tip" folder — **MOC (maps of content)** — holds summary files that link a scattered body of work into one reference (e.g. a `youtube.md` MOC linking scripting frameworks + hook libraries + thumbnail tasks), built only "when a topic seems to get messy." This is the [[productivity/obsidian-pkm|Obsidian PKM]] MOC pattern applied as agent memory structure.
+**Wire before you feed (the 7-folder vault).** Structure precedes ingestion — the claim is that setting up folders moved answer accuracy "from 60% to 85%," because "no structure means AI just drowns in noise and eventually hallucinates" [^src22]. The seven folders: `people`, `projects`, `decisions`, `companies`, `meetings`, `daily` (a 3–5-line daily dump), `knowledge` (reusable insights/frameworks/quotes). An eighth "pro-tip" folder — **MOC (maps of content)** — holds summary files that link a scattered body of work into one reference (e.g. a `youtube.md` MOC linking scripting frameworks + hook libraries + thumbnail tasks), built only "when a topic seems to get messy." This is the [Obsidian PKM](/productivity/obsidian-pkm.md) MOC pattern applied as agent memory structure.
 
-**Feed via extraction, not dumping.** Connect source systems, then have the AI *extract* only decision-relevant signal into the folder structure — "the brain only needs the information it needs to make decisions." Concrete pattern: [[productivity/ai-augmented-knowledge-work|Granola]] auto-transcribes meetings, and a custom extraction template pulls four things into the `meetings` folder — **decisions** (what/by whom/why), **commitments** (who/what/by when), **preferences** (how people work), **key insights** (frameworks, strategic shifts) — "output as Markdown, skip small talk" [^src22].
+**Feed via extraction, not dumping.** Connect source systems, then have the AI *extract* only decision-relevant signal into the folder structure — "the brain only needs the information it needs to make decisions." Concrete pattern: [Granola](/productivity/ai-augmented-knowledge-work.md) auto-transcribes meetings, and a custom extraction template pulls four things into the `meetings` folder — **decisions** (what/by whom/why), **commitments** (who/what/by when), **preferences** (how people work), **key insights** (frameworks, strategic shifts) — "output as Markdown, skip small talk" [^src22].
 
-**Overnight compounding via cron.** The differentiator from mere storage: a nightly process that "rewires itself" the way sleep consolidates memory — find orphan notes, create missing files for mentioned people/projects/companies, consolidate duplicates, update the relevant MOCs with new links, and flag strategic items for review. Run it manually (an end-of-day prompt) or automate it with **Claude's scheduled tasks as an 11 p.m. cron job** running the same prompt every night [^src22]. This is the [[ai-engineering/sleep-time-compute|sleep-time-compute]] idea expressed as a personal-knowledge routine, and the same cadence/automation layer the four-C's and seven-layer models put at the top of the stack.
+**Overnight compounding via cron.** The differentiator from mere storage: a nightly process that "rewires itself" the way sleep consolidates memory — find orphan notes, create missing files for mentioned people/projects/companies, consolidate duplicates, update the relevant MOCs with new links, and flag strategic items for review. Run it manually (an end-of-day prompt) or automate it with **Claude's scheduled tasks as an 11 p.m. cron job** running the same prompt every night [^src22]. This is the [sleep-time-compute](/ai-engineering/sleep-time-compute.md) idea expressed as a personal-knowledge routine, and the same cadence/automation layer the four-C's and seven-layer models put at the top of the stack.
 
 The payoff framing — "you can't have an autonomous agent unless it has context" — restates this page's core thesis: the model is the engine, the structured file system is the fuel [^src22].
 
 ## See also
 
-- [[ai-engineering/context-engineering|Context Engineering]] — the theoretical foundation; an AIOS is applied context engineering
-- [[ai-engineering/agent-memory|Agent Memory]] — the memory layer within an OS; typed memory tiers
-- [[ai-engineering/agent-skills|Agent Skills]] — the skills layer; SKILL.md patterns, progressive disclosure
-- [[ai-engineering/claude-md-conventions|CLAUDE.md Conventions]] — the identity layer; CLAUDE.md as OS navigation map
-- [[ai-engineering/mcp|MCP]] — the connections layer; how the OS reaches external tools
-- [[ai-engineering/long-running-agents|Long-Running Agents]] — OS-level cadence and scheduling
-- [[ai-engineering/claude-code|Claude Code]] — the primary host for personal AIOS implementations
-- [[ai-business/monetizing-code|Monetizing Code]] — business angle: selling AI OS services
+- [Context Engineering](/ai-engineering/context-engineering.md) — the theoretical foundation; an AIOS is applied context engineering
+- [Agent Memory](/ai-engineering/agent-memory.md) — the memory layer within an OS; typed memory tiers
+- [Agent Skills](/ai-engineering/agent-skills.md) — the skills layer; SKILL.md patterns, progressive disclosure
+- [CLAUDE.md Conventions](/ai-engineering/claude-md-conventions.md) — the identity layer; CLAUDE.md as OS navigation map
+- [MCP](/ai-engineering/mcp.md) — the connections layer; how the OS reaches external tools
+- [Long-Running Agents](/ai-engineering/long-running-agents.md) — OS-level cadence and scheduling
+- [Claude Code](/ai-engineering/claude-code.md) — the primary host for personal AIOS implementations
+- [Monetizing Code](/ai-business/monetizing-code.md) — business angle: selling AI OS services
 
 ---
 

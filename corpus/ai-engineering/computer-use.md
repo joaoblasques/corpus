@@ -249,7 +249,7 @@ const tasks = await agent.extract('List in progress tasks',
     z.array(z.object({ title: z.string() })));
 ```
 
-See [[ai-engineering/agentic-coding|Agentic Coding]] for how this fits into the broader ecosystem of browser automation tools.
+See [Agentic Coding](/ai-engineering/agentic-coding.md) for how this fits into the broader ecosystem of browser automation tools.
 
 ## Original launch benchmarks (October 2024)
 
@@ -264,12 +264,12 @@ Early partners: Asana, Canva, Cognition, DoorDash, Replit (using computer use to
 
 ## See also
 
-- [[ai-engineering/claude-code|Claude Code]] — Claude Code's auto mode uses a similar classifier approach for permission decisions
-- [[ai-engineering/agent-harness|Agent Harness]] — harness design principles underlying computer use integrations
-- [[ai-engineering/generator-evaluator-separation|Generator–Evaluator Separation]] — the advisor tool is the executor/advisor instance of separating judgment from generation
-- [[ai-engineering/context-window-management|Context Window Management]] — compaction and rolling-buffer patterns apply directly
-- [[ai-engineering/agent-security|Agent Security]] — prompt injection as an attack surface
-- [[ai-engineering/claude-models|Claude Model Lineup]] — Sonnet 4.6, Opus 4.6, Opus 4.7, Haiku 4.5 model selection
+- [Claude Code](/ai-engineering/claude-code.md) — Claude Code's auto mode uses a similar classifier approach for permission decisions
+- [Agent Harness](/ai-engineering/agent-harness.md) — harness design principles underlying computer use integrations
+- [Generator–Evaluator Separation](/ai-engineering/generator-evaluator-separation.md) — the advisor tool is the executor/advisor instance of separating judgment from generation
+- [Context Window Management](/ai-engineering/context-window-management.md) — compaction and rolling-buffer patterns apply directly
+- [Agent Security](/ai-engineering/agent-security.md) — prompt injection as an attack surface
+- [Claude Model Lineup](/ai-engineering/claude-models.md) — Sonnet 4.6, Opus 4.6, Opus 4.7, Haiku 4.5 model selection
 
 ---
 

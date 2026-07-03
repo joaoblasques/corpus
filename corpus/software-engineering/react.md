@@ -55,9 +55,9 @@ Written by Cody Lindley, sponsored by Frontend Masters [^src1]. Terse cookbook f
 
 ## See also
 
-- [[software-engineering/javascript-fundamentals|JavaScript Fundamentals]] — React requires JS fluency (closures, `this`, async, modules)
-- [[software-engineering/system-design-fundamentals|System Design Fundamentals]] — micro-frontends and design systems extend React at scale
-- [[software-engineering/bun|Bun]] — alternative JS runtime and bundler compatible with React projects
+- [JavaScript Fundamentals](/software-engineering/javascript-fundamentals.md) — React requires JS fluency (closures, `this`, async, modules)
+- [System Design Fundamentals](/software-engineering/system-design-fundamentals.md) — micro-frontends and design systems extend React at scale
+- [Bun](/software-engineering/bun.md) — alternative JS runtime and bundler compatible with React projects
 
 ---
 

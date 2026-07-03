@@ -60,13 +60,13 @@ updated: 2026-06-25
 ## Origin and what it actually bundles
 
 Databricks was founded ~2013 by the UC Berkeley AMPLab team behind Apache Spark; Spark itself started in 2009 to balance Hadoop's fault tolerance and scalability while allowing data reuse across processes, formalized in the **RDD (Resilient Distributed Dataset)** paper [^src6]. The progression: people wanted managed Spark (like AWS EMR or GCP Dataproc), and Databricks went "a few steps further" [^src6]. It is **not one open-source tool but several** — at its core **Spark + Delta Lake + MLflow** [^src6]:
-- **Spark** — the unavoidable processing engine; most users interact here. See [[data-engineering/apache-spark|Apache Spark]].
-- **Delta Lake** — sets up Delta tables (ACID transactions on files). See [[data-engineering/open-table-formats|Open Table Formats]].
+- **Spark** — the unavoidable processing engine; most users interact here. See [Apache Spark](/data-engineering/apache-spark.md).
+- **Delta Lake** — sets up Delta tables (ACID transactions on files). See [Open Table Formats](/data-engineering/open-table-formats.md).
 - **MLflow** — model registry, deployment, and monitoring (the "I built a model, now what?" answer); alternative to Kubeflow [^src6].
 
 ## Lakehouse positioning vs Snowflake
 
-Databricks bet on the **data lakehouse** — combining a data lake's cost-effectiveness with a warehouse's management benefits (security, clear table structures) [^src6]. Its ads poke fun at the data warehouse; it pitches itself as "everything: SQL, BI, real-time analytics," whereas **Snowflake leans more toward the data-science use case** for lakehouses [^src6]. A practitioner read: Databricks is **geared heavily toward data scientists** — everything centers on notebooks — though it serves data engineers too via jobs, table streaming from Kafka, and micro-batch/batch ETL [^src6]. Both vendors now sell themselves as **data platforms, not just a lake or a cloud warehouse** [^src6]. See [[data-engineering/snowflake|Snowflake]] for the competing architecture and the 2021 benchmark dispute.
+Databricks bet on the **data lakehouse** — combining a data lake's cost-effectiveness with a warehouse's management benefits (security, clear table structures) [^src6]. Its ads poke fun at the data warehouse; it pitches itself as "everything: SQL, BI, real-time analytics," whereas **Snowflake leans more toward the data-science use case** for lakehouses [^src6]. A practitioner read: Databricks is **geared heavily toward data scientists** — everything centers on notebooks — though it serves data engineers too via jobs, table streaming from Kafka, and micro-batch/batch ETL [^src6]. Both vendors now sell themselves as **data platforms, not just a lake or a cloud warehouse** [^src6]. See [Snowflake](/data-engineering/snowflake.md) for the competing architecture and the 2021 benchmark dispute.
 
 ## Core UI components (user-facing)
 
@@ -86,7 +86,7 @@ Five strong-fit situations [^src1]:
 
 The section "that does not get written often enough" [^src1]:
 
-- **Sub-500GB BI-only workloads** — Postgres + dbt + a managed BI tool quietly out-delivers on cost, simplicity, hiring, time-to-dashboard. See [[data-engineering/postgres|Postgres]], [[data-engineering/dbt|dbt]].
+- **Sub-500GB BI-only workloads** — Postgres + dbt + a managed BI tool quietly out-delivers on cost, simplicity, hiring, time-to-dashboard. See [Postgres](/data-engineering/postgres.md), [dbt](/data-engineering/dbt.md).
 - **Small teams (1–3 engineers) who have never run Spark** — months lost to cluster configs, shuffle partitions, broadcast joins.
 - **Single-cloud, single-source SQL workloads** — one cloud warehouse (BigQuery, Snowflake, Redshift, Synapse) is enough.
 - **Pure batch, daily refresh** — managed Airflow + warehouse + dbt is "boring... boring is hireable" [^src1].
@@ -137,16 +137,16 @@ Key points [^src2]:
 - **Directory-pruning is a myth on modern OTFs.** Delta uses a transaction log with per-column stats; pruning happens against statistics at file granularity, not directory structure. Liquid uses the same mechanism.
 - **Row-level concurrency** vs partitioning's file-level concurrency — two writers on different rows in the same file no longer conflict, removing a main reason teams partitioned (write boundaries).
 - **Metadata-only operations** (DELETE, COUNT, DISTINCT, GROUP BY) are supported; metadata-only DELETEs ran ~90% faster than full-rewrite DELETEs in benchmarks.
-- **It is a write-side optimization** producing standard Parquet with min/max stats; any compatible reader (open-source Spark, [[data-engineering/duckdb|DuckDB]], etc.) benefits — not Databricks-only.
+- **It is a write-side optimization** producing standard Parquet with min/max stats; any compatible reader (open-source Spark, [DuckDB](/data-engineering/duckdb.md), etc.) benefits — not Databricks-only.
 - Production: Arctic Wolf runs a 3.8+ PB telemetry table ingesting 1+ trillion events/day on Liquid Clustering [^src2].
 
 > Source caveat: the Liquid Clustering myth-busting is a Databricks blog promoting its own feature over partitioning; benchmark figures are vendor-reported.
 
-See [[data-engineering/merge-into|MERGE INTO]] and [[data-engineering/parquet|Parquet]] for related layout mechanics.
+See [MERGE INTO](/data-engineering/merge-into.md) and [Parquet](/data-engineering/parquet.md) for related layout mechanics.
 
 ## Lakeflow Spark Declarative Pipelines
 
-A framework for batch and streaming pipelines in SQL and Python, formerly known as DLT — you describe tables and the platform handles orchestration and incremental processing [^src1][^src5]. Lakeflow SDP extends and is interoperable with Apache Spark Declarative Pipelines while running on the performance-optimized Databricks Runtime [^src5]. Core concepts: pipelines, flows, streaming tables, and materialized views; common use cases are ingestion from cloud storage (S3, ADLS Gen2, GCS) and message buses (Kafka, Kinesis, Pub/Sub, EventHub, Pulsar) plus incremental transformations [^src5]. See [[data-engineering/kafka|Kafka]]; this complements [[data-engineering/stream-processing|Stream Processing]] as the Databricks/Spark Structured Streaming path for the streaming-and-micro-batch use cases.
+A framework for batch and streaming pipelines in SQL and Python, formerly known as DLT — you describe tables and the platform handles orchestration and incremental processing [^src1][^src5]. Lakeflow SDP extends and is interoperable with Apache Spark Declarative Pipelines while running on the performance-optimized Databricks Runtime [^src5]. Core concepts: pipelines, flows, streaming tables, and materialized views; common use cases are ingestion from cloud storage (S3, ADLS Gen2, GCS) and message buses (Kafka, Kinesis, Pub/Sub, EventHub, Pulsar) plus incremental transformations [^src5]. See [Kafka](/data-engineering/kafka.md); this complements [Stream Processing](/data-engineering/stream-processing.md) as the Databricks/Spark Structured Streaming path for the streaming-and-micro-batch use cases.
 
 ## dbt vs. Lakeflow SDP on Databricks
 
@@ -163,18 +163,18 @@ Counter-arguments from the comments [^src7]:
 
 **The verdict is context-dependent**: pure Databricks end-to-end shops have strong reasons to prefer native SDP; mixed-platform or portability-sensitive teams have strong reasons to retain dbt.
 
-See [[data-engineering/dbt|dbt]] for the dbt perspective and [[data-engineering/change-data-capture|Change Data Capture]] for AutoCDC specifics.
+See [dbt](/data-engineering/dbt.md) for the dbt perspective and [Change Data Capture](/data-engineering/change-data-capture.md) for AutoCDC specifics.
 
 ## Photon internals (the query engine)
 
 Databricks faced a structural problem: Spark was **not built as a native query engine**, yet the lakehouse must deliver warehouse-grade performance on everything from clean datasets to raw messy files with no useful statistics [^src8]. Rather than replace Spark (and disrupt existing customers), Databricks **enhanced it** [^src8]:
 
 - **Photon** is a C++ library of physical operators integrated into the **Databricks Runtime (DBR)** — itself a fork of Apache Spark for reliability/performance [^src8]. Photon operators slot into the Spark query plan; customers benefit with **no code changes**, and the system falls back to Spark SQL for unsupported operations [^src8].
-- Photon uses a **vectorized model** (process batches of values) rather than Spark's **code-generation** approach, which enables **runtime adaptivity** — it discovers and leverages micro-batch data characteristics with specialized code paths [^src8]. (Contrast Redshift, which chose code specialization — see [[data-engineering/cloud-data-warehouse-internals|Cloud Data Warehouse Internals]].)
+- Photon uses a **vectorized model** (process batches of values) rather than Spark's **code-generation** approach, which enables **runtime adaptivity** — it discovers and leverages micro-batch data characteristics with specialized code paths [^src8]. (Contrast Redshift, which chose code specialization — see [Cloud Data Warehouse Internals](/data-engineering/cloud-data-warehouse-internals.md).)
 - Photon is written in **C++** (not the JVM) for explicit control over memory management and SIMD [^src8].
 - It adopts a **columnar in-memory representation**, eliminating the expensive column-to-row pivot that row-oriented Spark SQL needed when scanning columnar files like Parquet [^src8].
 
-**Delta Lake** is the storage layer: an ACID table layer over cloud object storage whose core idea is keeping track of **which objects belong to a table via a write-ahead log in the object store** [^src8]. Data files are **Apache Parquet** objects (optionally Hive-partitioned); a file unreferenced by the transaction log is unreadable [^src8]. Delta was served to customers in 2017 and open-sourced in 2019 [^src8]. See [[data-engineering/open-table-formats|Open Table Formats]] and [[data-engineering/parquet|Parquet]].
+**Delta Lake** is the storage layer: an ACID table layer over cloud object storage whose core idea is keeping track of **which objects belong to a table via a write-ahead log in the object store** [^src8]. Data files are **Apache Parquet** objects (optionally Hive-partitioned); a file unreferenced by the transaction log is unreadable [^src8]. Delta was served to customers in 2017 and open-sourced in 2019 [^src8]. See [Open Table Formats](/data-engineering/open-table-formats.md) and [Parquet](/data-engineering/parquet.md).
 
 ## Databricks Free Edition (for learners)
 
@@ -197,7 +197,7 @@ Databricks offers a **free edition** with **serverless compute only** — no clu
 - **Jobs compute** — cheaper for scheduled jobs
 - **Serverless SQL warehouses** — best for bursty BI workloads
 
-See [[data-engineering/apache-spark|Apache Spark]] for the PySpark API reference, and the Catalyst / Photon / lazy evaluation details that apply to Databricks notebooks.
+See [Apache Spark](/data-engineering/apache-spark.md) for the PySpark API reference, and the Catalyst / Photon / lazy evaluation details that apply to Databricks notebooks.
 
 ## Databricks Data Engineer Associate Certification
 
@@ -215,14 +215,14 @@ Study guidance [^src10]: allocate 15–20 hours (~60% lecture/labs + 40% practic
 
 ## Related
 
-- [[data-engineering/cloud-data-warehouse-internals|Cloud Data Warehouse Internals]] — Photon vs Dremel/Snowflake/Redshift compared
-- [[data-engineering/bigquery|BigQuery]] · [[data-engineering/redshift|Redshift]] — the other cloud warehouses
-- [[data-engineering/open-table-formats|Open table formats]] — Delta/Iceberg underpin the lakehouse
-- [[data-engineering/data-lake|Data lake]] · [[data-engineering/apache-iceberg|Apache Iceberg]] · [[data-engineering/parquet|Parquet]]
-- [[data-engineering/dbt|dbt]] · [[data-engineering/postgres|Postgres]] — the "simpler stack" alternatives
-- [[data-engineering/duckdb|DuckDB]] — reads Liquid-Clustered output
-- [[data-engineering/snowflake|Snowflake]] — competing cloud OLAP platform; lakehouse rivalry
-- [[data-engineering/apache-spark|Apache Spark]] — the processing engine at Databricks' core
+- [Cloud Data Warehouse Internals](/data-engineering/cloud-data-warehouse-internals.md) — Photon vs Dremel/Snowflake/Redshift compared
+- [BigQuery](/data-engineering/bigquery.md) · [Redshift](/data-engineering/redshift.md) — the other cloud warehouses
+- [Open table formats](/data-engineering/open-table-formats.md) — Delta/Iceberg underpin the lakehouse
+- [Data lake](/data-engineering/data-lake.md) · [Apache Iceberg](/data-engineering/apache-iceberg.md) · [Parquet](/data-engineering/parquet.md)
+- [dbt](/data-engineering/dbt.md) · [Postgres](/data-engineering/postgres.md) — the "simpler stack" alternatives
+- [DuckDB](/data-engineering/duckdb.md) — reads Liquid-Clustered output
+- [Snowflake](/data-engineering/snowflake.md) — competing cloud OLAP platform; lakehouse rivalry
+- [Apache Spark](/data-engineering/apache-spark.md) — the processing engine at Databricks' core
 
 [^src1]: [When (and when not) to use Databricks](../../raw/email/email-2026-05-25-when-and-when-not-to-use-databricks.md)
 [^src2]: [Debunking 8 data layout myths: why Liquid Clustering outperforms partitioning](../../raw/web/debunking-8-data-layout-myths-why-liquid-clustering-outperfo.md)

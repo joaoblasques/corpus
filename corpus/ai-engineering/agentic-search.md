@@ -38,7 +38,7 @@ Agentic search **unbundles** this. An agent built on a frontier model (GPT-5, So
 
 ## AI-native search vs a search box with an LLM bolted on
 
-AI-native search is "the structural fix … a system that interprets what you actually mean and retains what actually matters" — not a search box with a language model attached [^src2]. Today's models remember keywords but not relationships: they find the three emails mentioning "Priya" but cannot tell you her blocker got fixed, so the deal is alive again [^src2]. Closing that gap is treated as an architecture problem (structured memory + hybrid retrieval), not a bigger-model problem — see the 3.6-bit memorization ceiling in [[ai-engineering/agent-memory|Agent Memory]] [^src2].
+AI-native search is "the structural fix … a system that interprets what you actually mean and retains what actually matters" — not a search box with a language model attached [^src2]. Today's models remember keywords but not relationships: they find the three emails mentioning "Priya" but cannot tell you her blocker got fixed, so the deal is alive again [^src2]. Closing that gap is treated as an architecture problem (structured memory + hybrid retrieval), not a bigger-model problem — see the 3.6-bit memorization ceiling in [Agent Memory](/ai-engineering/agent-memory.md) [^src2].
 
 The retrieval stage of AI-native search uses **hybrid search** blending three signals [^src2]:
 
@@ -77,15 +77,15 @@ A PwC study, *"Is Grep All You Need?"*, ran 116 LongMemEval questions across 4 h
 
 > "Before reaching for an embedding index, try grep, and pay as much attention to how results reach the model as to how they are retrieved." [^src3]
 
-This nuance — both sides of grep-vs-vector, plus harness as the deciding variable — lives here rather than as a separate synthesis page. See [[ai-engineering/agent-harness|Agent Harness]] for the broader claim that the harness around an agent often does more for or against you than the model inside it.
+This nuance — both sides of grep-vs-vector, plus harness as the deciding variable — lives here rather than as a separate synthesis page. See [Agent Harness](/ai-engineering/agent-harness.md) for the broader claim that the harness around an agent often does more for or against you than the model inside it.
 
 ## See also
 
-- [[ai-engineering/rag|RAG]] — agentic search orchestrates retrieval primitives; hybrid search and re-ranking originate there
-- [[ai-engineering/agent-harness|Agent Harness]] — result delivery, prompting, and tool framing rival the retrieval method
-- [[ai-engineering/agent-memory|Agent Memory]] — AI-native search and graph memory share the hybrid-retrieval-over-subgraph pattern
-- [[ai-engineering/vector-database|Vector Database]] — the embedding-index half of the grep-vs-vector comparison
-- [[ai-engineering/embeddings|Embeddings]] — why exact tokens (names, IDs, "SOC 2") get smoothed away, the root cause behind grep beating vector on verbatim QA
+- [RAG](/ai-engineering/rag.md) — agentic search orchestrates retrieval primitives; hybrid search and re-ranking originate there
+- [Agent Harness](/ai-engineering/agent-harness.md) — result delivery, prompting, and tool framing rival the retrieval method
+- [Agent Memory](/ai-engineering/agent-memory.md) — AI-native search and graph memory share the hybrid-retrieval-over-subgraph pattern
+- [Vector Database](/ai-engineering/vector-database.md) — the embedding-index half of the grep-vs-vector comparison
+- [Embeddings](/ai-engineering/embeddings.md) — why exact tokens (names, IDs, "SOC 2") get smoothed away, the root cause behind grep beating vector on verbatim QA
 
 ---
 

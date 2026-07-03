@@ -60,7 +60,7 @@ updated: 2026-06-25
 
 ## Markdown & capture mechanics
 
-Both videos teach the same Markdown surface: `#` headings (more hashes = smaller), `**bold**` / `*italic*`, `-` bullets and numbered lists, `==highlight==`, `~~strikethrough~~`, `- [ ]` checkboxes, `>` quote/callout blocks, `` ` `` inline and ``` ``` ``` code, `---` divider [^src1][^src2]. Links are the heart of it: `[[double brackets]]` for internal links, `[text](url)` for external [^src1][^src2].
+Both videos teach the same Markdown surface: `#` headings (more hashes = smaller), `**bold**` / `*italic*`, `-` bullets and numbered lists, `==highlight==`, `~~strikethrough~~`, `- [ ]` checkboxes, `>` quote/callout blocks, `` ` `` inline and ``` ``` ``` code, `---` divider [^src1][^src2]. Links are the heart of it: `Double Brackets` for internal links, `[text](url)` for external [^src1][^src2].
 
 A defining feature: **you can link to a note that does not exist yet**, then create it later by clicking the link — "create that backlink and come back to it later" [^src2]. This lets capture and connection happen in the same motion [^src1].
 
@@ -70,12 +70,12 @@ A defining feature: **you can link to a note that does not exist yet**, then cre
 
 The corpus-relevant thesis is that **connection beats categorization**:
 
-- **Backlinks** relate notes to each other; *linked mentions* (an explicit `[[link]]`) and *unlinked mentions* (the note's title appears as plain text, convertible to a real link with one click) both surface in a note's footer/side panel [^src2].
+- **Backlinks** relate notes to each other; *linked mentions* (an explicit `Link`) and *unlinked mentions* (the note's title appears as plain text, convertible to a real link with one click) both surface in a note's footer/side panel [^src2].
 - **Structure must be earned.** "Don't overfolder your ideas… categories get so fuzzy and ambiguous that standard hierarchies become brittle. Keep things in big buckets until patterns naturally show up" [^src1]. Folders create "cognitive friction" — deciding which folder a cross-cutting note belongs to wastes time and suppresses note-making [^src2].
 - A pragmatic minimal folder scheme: three big buckets — **Atlas** (timeless ideas/knowledge), **Calendar** (time-based notes, e.g. daily notes), **Efforts** (time-bound projects/tasks) — then subfolder only as deserved [^src1]. The alternative simple scheme from the other source: one folder per year plus an `_utilities` folder (underscore sorts it to the top) [^src2].
 - Prefer **Maps of Content (MOCs)** — index notes that link related notes by topic/theme — over tags for building "strong connective hubs" in the graph [^src1].
 
-This *emergent structure* discipline is the same anti-drift principle the corpus itself follows: route into existing buckets, let new structure appear only when it earns its place. See [[productivity/README|Productivity]].
+This *emergent structure* discipline is the same anti-drift principle the corpus itself follows: route into existing buckets, let new structure appear only when it earns its place. See [Productivity](/productivity/README.md).
 
 ## Organization methods (pick by temperament)
 
@@ -108,7 +108,7 @@ From the 15-minute guide [^src1]:
 
 ## AI and Obsidian
 
-Obsidian ships **no built-in AI**; you decide how much to integrate based on your privacy needs [^src1]. One source pairs Obsidian with **Claude** to "ask questions… talk to my notes, do deep research, and instantly populate properties," while keeping a deliberate separation between original thinking ("idea verse") and AI-generated notes so the vault "stays a sacred space" — and backing up before any AI experiment [^src1]. The Claude/LLM side of this lives in the ai-engineering domain; see [[ai-engineering/claude-cowork|Claude Cowork]] for AI-over-local-files workflows. This complements [[productivity/ai-augmented-knowledge-work|AI-Augmented Knowledge Work]], which covers standing-context files and voice/about-me files.
+Obsidian ships **no built-in AI**; you decide how much to integrate based on your privacy needs [^src1]. One source pairs Obsidian with **Claude** to "ask questions… talk to my notes, do deep research, and instantly populate properties," while keeping a deliberate separation between original thinking ("idea verse") and AI-generated notes so the vault "stays a sacred space" — and backing up before any AI experiment [^src1]. The Claude/LLM side of this lives in the ai-engineering domain; see [Claude Cowork](/ai-engineering/claude-cowork.md) for AI-over-local-files workflows. This complements [AI-Augmented Knowledge Work](/productivity/ai-augmented-knowledge-work.md), which covers standing-context files and voice/about-me files.
 
 ## Markdown 2.0: notes as software (HTML-in-Obsidian)
 
@@ -122,7 +122,7 @@ One emerging pattern pushes beyond plain Markdown: embedding **HTML + JavaScript
 
 ### Dynamic memory for Claude
 
-The most striking claim: these dashboards function as **"dynamic memory"** for an AI agent — a shared "Command Center" that both the user and Claude read each morning [^src3]. Goals, metrics, and current context live in vault notes; Claude reads the same view the user sees. "You don't need to explain your goals every session" [^src3]. This connects the Obsidian substrate directly to the standing-context pattern in [[productivity/ai-augmented-knowledge-work|AI-Augmented Knowledge Work]] (about-me/voice files), but makes the context *dynamic and self-updating* rather than manually curated.
+The most striking claim: these dashboards function as **"dynamic memory"** for an AI agent — a shared "Command Center" that both the user and Claude read each morning [^src3]. Goals, metrics, and current context live in vault notes; Claude reads the same view the user sees. "You don't need to explain your goals every session" [^src3]. This connects the Obsidian substrate directly to the standing-context pattern in [AI-Augmented Knowledge Work](/productivity/ai-augmented-knowledge-work.md) (about-me/voice files), but makes the context *dynamic and self-updating* rather than manually curated.
 
 ### Tradeoffs vs plain Markdown
 
@@ -153,7 +153,7 @@ Traditional Zettelkasten (atomic notes, connected notes, processing → not docu
 
 - The Zettelkasten core disciplines: **atomic notes** (one idea per note), **connected notes** (each new note links to existing knowledge), **processing over capturing** ("don't just document, process what it means to you"). Quantity of notes is irrelevant without connections [^src5].
 - The critical distinction: "Your Zettelkasten is your second brain. Your AI context folder is your AI brain's information diet." They should not be the same folder.
-- The AI context folder has its own structure (see [[productivity/ai-augmented-knowledge-work|AI-Augmented Knowledge Work]] §6) and is optimized for *feeding AI context*; the Zettelkasten is optimized for *human thinking*. Mixing the two degrades both [^src5].
+- The AI context folder has its own structure (see [AI-Augmented Knowledge Work](/productivity/ai-augmented-knowledge-work.md) §6) and is optimized for *feeding AI context*; the Zettelkasten is optimized for *human thinking*. Mixing the two degrades both [^src5].
 - **Karpathy reference**: the LLM-wiki pattern (separate from personal note-taking) is the "doing" layer of the three-brain model; the thinking layer is emergent Zettelkasten [^src5].
 
 ## VS Code as a PKA alternative
@@ -166,14 +166,14 @@ A contrarian take: VS Code + Claude may be functionally superior to Obsidian for
 
 ## Publishing: Quartz SSG
 
-[[productivity/quartz-ssg|Quartz v5]] is the leading static-site generator for Obsidian vaults as digital gardens [^src7]. It converts the vault's Markdown files (including WikiLinks, backlinks, and graph) into a navigable website — the same rendering pipeline that powers community "digital garden" sites. See [[productivity/quartz-ssg|Quartz]] for full entity page.
+[Quartz v5](/productivity/quartz-ssg.md) is the leading static-site generator for Obsidian vaults as digital gardens [^src7]. It converts the vault's Markdown files (including WikiLinks, backlinks, and graph) into a navigable website — the same rendering pipeline that powers community "digital garden" sites. See [Quartz](/productivity/quartz-ssg.md) for full entity page.
 
 ## Related
 
-- [[productivity/learning-to-learn|Learning to Learn]] — writing-to-process; PKM is the tooling layer for that habit.
-- [[productivity/ai-augmented-knowledge-work|AI-Augmented Knowledge Work]] — about-me/voice files are themselves curated Markdown, the same substrate; HTML dashboards extend this to dynamic/auto-updating context.
-- [[productivity/quartz-ssg|Quartz SSG]] — publish an Obsidian vault as a digital garden.
-- [[productivity/decision-making|Decision Making]] — the Zettelkasten principle of atomic notes connects to how [[productivity/decision-making|decision frameworks]] are best stored: one concept per note, not bundled.
+- [Learning to Learn](/productivity/learning-to-learn.md) — writing-to-process; PKM is the tooling layer for that habit.
+- [AI-Augmented Knowledge Work](/productivity/ai-augmented-knowledge-work.md) — about-me/voice files are themselves curated Markdown, the same substrate; HTML dashboards extend this to dynamic/auto-updating context.
+- [Quartz SSG](/productivity/quartz-ssg.md) — publish an Obsidian vault as a digital garden.
+- [Decision Making](/productivity/decision-making.md) — the Zettelkasten principle of atomic notes connects to how [decision frameworks](/productivity/decision-making.md) are best stored: one concept per note, not bundled.
 
 [^src1]: [Give Me 15 Minutes. I'll Teach You 80% of Obsidian](../../raw/youtube/youtube-z4AbijUCoKU-give-me-15-minutes-i-ll-teach-you-80-of-obsidian.md) (Linking Your Thinking / Nick Milo)
 [^src2]: [The Ultimate Obsidian for Beginner's Guide 2025](../../raw/youtube/youtube-gafuqdKwD_U-the-ultimate-obsidian-for-beginner-s-guide-2025.md) (CreaDev Labs)

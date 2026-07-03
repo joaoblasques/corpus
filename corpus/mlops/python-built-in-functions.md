@@ -29,7 +29,7 @@ updated: 2026-06-16
 
 # Python Built-in Functions
 
-**TL;DR**: Python's built-in functions are "predefined functions you can use anywhere in your code without any imports" [^src1]. They all live in the `builtins` module, which Python loads at startup and exposes through the **built-in scope** — so no import is needed [^src1]. Several entries with function-style names (`str`, `list`, `dict`, `int`) are actually **classes**, but the docs list them as built-in functions [^src1]. This page is the **built-in-scope catalog**; it complements [[mlops/python|Python]] (language fundamentals: data types, type annotations, classes, dunder methods) without repeating it.
+**TL;DR**: Python's built-in functions are "predefined functions you can use anywhere in your code without any imports" [^src1]. They all live in the `builtins` module, which Python loads at startup and exposes through the **built-in scope** — so no import is needed [^src1]. Several entries with function-style names (`str`, `list`, `dict`, `int`) are actually **classes**, but the docs list them as built-in functions [^src1]. This page is the **built-in-scope catalog**; it complements [Python](/mlops/python.md) (language fundamentals: data types, type annotations, classes, dunder methods) without repeating it.
 
 You can `import builtins` explicitly when you intend to **shadow** a built-in name with your own variable yet still reach the original as `builtins.name` [^src1].
 
@@ -69,9 +69,9 @@ Attribute access — `getattr()`, `setattr()`, `delattr()`, `hasattr()` [^src1].
 
 ## See also
 
-- [[mlops/python|Python]] — the language-fundamentals page (data types, annotations, classes, dunder methods); this page is the built-in-scope companion. Note `str()`/`repr()` here are backed by the `__str__`/`__repr__` dunders documented there.
-- [[mlops/README|MLOps hub]]
-- [[ai-engineering/claude-api|Claude API]] — Python code using the Claude SDK leans on these built-ins (ai-engineering)
+- [Python](/mlops/python.md) — the language-fundamentals page (data types, annotations, classes, dunder methods); this page is the built-in-scope companion. Note `str()`/`repr()` here are backed by the `__str__`/`__repr__` dunders documented there.
+- [MLOps hub](/mlops/README.md)
+- [Claude API](/ai-engineering/claude-api.md) — Python code using the Claude SDK leans on these built-ins (ai-engineering)
 
 ---
 

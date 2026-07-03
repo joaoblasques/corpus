@@ -20,7 +20,7 @@ updated: 2026-07-02
 
 # DiffusionGemma
 
-**TL;DR.** DiffusionGemma is Google's 26B-parameter **discrete diffusion language model (dLLM)** built on the Gemma4 backbone — the first dLLM natively supported in [[ai-engineering/vllm|vLLM]]. Unlike autoregressive transformers that generate one token at a time left-to-right, it generates tokens by iteratively denoising a fixed-length 256-token canvas, refining many tokens in parallel per forward pass [^src1].
+**TL;DR.** DiffusionGemma is Google's 26B-parameter **discrete diffusion language model (dLLM)** built on the Gemma4 backbone — the first dLLM natively supported in [vLLM](/ai-engineering/vllm.md). Unlike autoregressive transformers that generate one token at a time left-to-right, it generates tokens by iteratively denoising a fixed-length 256-token canvas, refining many tokens in parallel per forward pass [^src1].
 
 ## Why it's architecturally different
 
@@ -45,7 +45,7 @@ Between steps the model is conditioned on its **own previous prediction**: the f
 
 ## vLLM implementation
 
-- Built on [[ai-engineering/vllm|vLLM]]'s **`ModelState` abstraction** (model runner v2) — see [[ai-engineering/vllm|vLLM]] for the general hook mechanism.
+- Built on [vLLM](/ai-engineering/vllm.md)'s **`ModelState` abstraction** (model runner v2) — see [vLLM](/ai-engineering/vllm.md) for the general hook mechanism.
 - **Reuses vLLM's speculative decoding data path**: each denoising step's canvas is treated as a large set of draft tokens that are fully accepted or fully rejected together, requiring minimal changes to the scheduler/model runner. Support for sampling 0 tokens (vs. speculative decoding's usual "always sample one bonus token") was added, controlled by `ModelState` [^src1].
 - **Automatic prefix caching works unmodified** — because the encoder mode uses ordinary causal attention and writes KV exactly as an autoregressive model would, shared prompt prefixes are reused across requests with no diffusion-specific changes [^src1].
 - **Dynamic per-sequence causal attention**: previously, causality was a batch-wide property in vLLM (every request in a forward pass shared the same mask type). DiffusionGemma requires per-request causal (encoder) vs. bidirectional (denoise) masks within the *same* batched forward pass — implemented in both Triton Attention and FlashAttention 4 backends by replacing the single boolean `causal` argument with a per-request tensor [^src1].
@@ -61,9 +61,9 @@ Benchmarked at batch size 1 (`vllm bench serve`): the FP8 model reaches **1,288 
 
 ## Related
 
-- [[ai-engineering/vllm|vLLM]] — serving engine; `ModelState` abstraction introduced for this integration
-- [[ai-engineering/transformer|Transformer]] — the Gemma4 backbone DiffusionGemma reuses, run in two attention modes
-- [[ai-engineering/README|AI Engineering hub]]
+- [vLLM](/ai-engineering/vllm.md) — serving engine; `ModelState` abstraction introduced for this integration
+- [Transformer](/ai-engineering/transformer.md) — the Gemma4 backbone DiffusionGemma reuses, run in two attention modes
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

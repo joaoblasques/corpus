@@ -53,15 +53,15 @@ A structure for keeping a coding-agent harness organized [^src1]:
 - **Agent** — the coordinator/brain (e.g. Claude Code itself). Reads workflows, sees available tools, decides which to call and when, handles errors, adapts. "Think of it as a project manager that delegates tasks to tools" [^src1].
 - **Tools** — Python scripts, each doing one specific job (scrape a site, generate a PDF). Modular and reusable; auto-built and auto-fixed by the agent when they fail [^src1].
 
-A `CLAUDE.md` onboarding file explains the framework and a self-improvement loop: "first look in your existing tools, then learn and adapt when things fail... update the workflow so that error never happens again" [^src1] — the same ratchet pattern as [[ai-engineering/agent-harness|Agent Harness]] and [[ai-engineering/claude-md-conventions|CLAUDE.md Conventions]].
+A `CLAUDE.md` onboarding file explains the framework and a self-improvement loop: "first look in your existing tools, then learn and adapt when things fail... update the workflow so that error never happens again" [^src1] — the same ratchet pattern as [Agent Harness](/ai-engineering/agent-harness.md) and [CLAUDE.md Conventions](/ai-engineering/claude-md-conventions.md).
 
 ## Build loop in practice
 
-The recommended flow: **plan mode** (let the agent ask clarifying questions and produce a comprehensive plan) → review → enable **bypass-permissions** to execute → run, hit errors, let it self-fix, iterate [^src1]. A worked competitor-analysis workflow produced a `business-profile.json`, per-competitor files, caching for cheap subsequent runs, and a branded PDF — the agent self-fixed a Unicode encoding bug and a white-logo rendering issue across runs [^src1]. The lesson: "you have to run the workflow a few times to discover the holes... then you get a battle-tested workflow" [^src1]. Note the **context-rot** caution: clear the conversation when context drops (the demo cleared at ~60% remaining) [^src1] — see [[ai-engineering/context-window-management|Context Window Management]].
+The recommended flow: **plan mode** (let the agent ask clarifying questions and produce a comprehensive plan) → review → enable **bypass-permissions** to execute → run, hit errors, let it self-fix, iterate [^src1]. A worked competitor-analysis workflow produced a `business-profile.json`, per-competitor files, caching for cheap subsequent runs, and a branded PDF — the agent self-fixed a Unicode encoding bug and a white-logo rendering issue across runs [^src1]. The lesson: "you have to run the workflow a few times to discover the holes... then you get a battle-tested workflow" [^src1]. Note the **context-rot** caution: clear the conversation when context drops (the demo cleared at ~60% remaining) [^src1] — see [Context Window Management](/ai-engineering/context-window-management.md).
 
 ## Production-grade vs demo agents
 
-Real agentic systems go far beyond a single workflow. The "Mother of AI" roadmap stages production builds: RAG systems → agents with memory/planning/tool use → recommenders → MLOps/LLMOps → full app + cloud deployment → monitoring, using tools teams actually run (Docker, FastAPI, Airflow, Ollama, LangGraph, OpenSearch, Langfuse) [^src2]. The NirDiamant GenAI-Agents collection catalogs 50+ patterns — most orchestrated with **LangGraph** as stateful graphs with TypedDict/Pydantic state, human-in-the-loop validation, and self-improvement loops [^src3]. See [[ai-engineering/langgraph|LangGraph]], [[ai-engineering/multi-agent-systems|Multi-Agent Systems]], [[ai-engineering/rag|RAG]].
+Real agentic systems go far beyond a single workflow. The "Mother of AI" roadmap stages production builds: RAG systems → agents with memory/planning/tool use → recommenders → MLOps/LLMOps → full app + cloud deployment → monitoring, using tools teams actually run (Docker, FastAPI, Airflow, Ollama, LangGraph, OpenSearch, Langfuse) [^src2]. The NirDiamant GenAI-Agents collection catalogs 50+ patterns — most orchestrated with **LangGraph** as stateful graphs with TypedDict/Pydantic state, human-in-the-loop validation, and self-improvement loops [^src3]. See [LangGraph](/ai-engineering/langgraph.md), [Multi-Agent Systems](/ai-engineering/multi-agent-systems.md), [RAG](/ai-engineering/rag.md).
 
 ## Autonomous agent task cycle (background agents)
 
@@ -87,9 +87,9 @@ When the default single-context-window execution breaks down on complex tasks, C
 | **Tournament** | Spawn N agents each attempting the same task with different approaches; a judging agent pairwise-compares until a winner emerges |
 | **Loop until done** | Spawn agents iteratively until a stop condition is met (no new findings, no more errors) rather than a fixed N passes |
 
-The unifying insight: **a workflow separates planning + orchestration (the JavaScript harness layer) from execution (the subagent context windows)** [^src4]. This prevents the single-context failure modes — agentic laziness, self-preferential bias, and goal drift — by ensuring each agent has a focused, bounded task. The synthesizer step in fan-out-and-synthesize is the harness-level equivalent of the planner/executor split in [[ai-engineering/agent-harness|Agent Harness]].
+The unifying insight: **a workflow separates planning + orchestration (the JavaScript harness layer) from execution (the subagent context windows)** [^src4]. This prevents the single-context failure modes — agentic laziness, self-preferential bias, and goal drift — by ensuring each agent has a focused, bounded task. The synthesizer step in fan-out-and-synthesize is the harness-level equivalent of the planner/executor split in [Agent Harness](/ai-engineering/agent-harness.md).
 
-**Use sparingly**: dynamic workflows often use significantly more tokens. Best suited for complex, high-value tasks where quality improvements justify the cost [^src4]. Combine with `/loop` for recurring execution and `/goal` for hard completion conditions. See [[ai-engineering/claude-code|Claude Code]] for the full dynamic workflow mechanics.
+**Use sparingly**: dynamic workflows often use significantly more tokens. Best suited for complex, high-value tasks where quality improvements justify the cost [^src4]. Combine with `/loop` for recurring execution and `/goal` for hard completion conditions. See [Claude Code](/ai-engineering/claude-code.md) for the full dynamic workflow mechanics.
 
 ## pi-ask-user: interactive decision-gating in agentic workflows
 
@@ -117,16 +117,16 @@ The unifying insight: **a workflow separates planning + orchestration (the JavaS
 3. Wait for the user's answer
 4. Confirm understanding before proceeding
 
-This is the human-in-the-loop gate pattern from [[ai-engineering/agent-harness|Agent Harness]] made ergonomic — the overlay mode keeps Claude working in the terminal while presenting a clickable UI for the user's decision.
+This is the human-in-the-loop gate pattern from [Agent Harness](/ai-engineering/agent-harness.md) made ergonomic — the overlay mode keeps Claude working in the terminal while presenting a clickable UI for the user's decision.
 
 ## See also
 
-- [[ai-engineering/ai-agent|AI Agent]] — the loop an agentic workflow wraps
-- [[ai-engineering/agent-harness|Agent Harness]] — WAT is a harness pattern; the self-improvement ratchet
-- [[ai-engineering/agentic-coding|Agentic Coding]] — coding-agent orchestration
-- [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] · [[ai-engineering/langgraph|LangGraph]] — multi-agent orchestration
-- [[ai-engineering/vibe-coding|Vibe Coding]] — the lighter-weight "describe it and go" sibling
-- [[ai-engineering/README|AI Engineering hub]]
+- [AI Agent](/ai-engineering/ai-agent.md) — the loop an agentic workflow wraps
+- [Agent Harness](/ai-engineering/agent-harness.md) — WAT is a harness pattern; the self-improvement ratchet
+- [Agentic Coding](/ai-engineering/agentic-coding.md) — coding-agent orchestration
+- [Multi-Agent Systems](/ai-engineering/multi-agent-systems.md) · [LangGraph](/ai-engineering/langgraph.md) — multi-agent orchestration
+- [Vibe Coding](/ai-engineering/vibe-coding.md) — the lighter-weight "describe it and go" sibling
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

@@ -55,6 +55,6 @@ A pragmatic caveat relevant to this corpus's other pages: "if your traversal bot
 
 ## Related corpus pages
 
-See [[data-engineering/duckdb|DuckDB]] and [[data-engineering/materialized-views|Materialized Views]] (the columnar-SQL alternative to a dedicated graph tier) and [[data-engineering/postgres|PostgreSQL]] (competitive on bounded multi-hop workloads per the benchmarks).
+See [DuckDB](/data-engineering/duckdb.md) and [Materialized Views](/data-engineering/materialized-views.md) (the columnar-SQL alternative to a dedicated graph tier) and [PostgreSQL](/data-engineering/postgres.md) (competitive on bounded multi-hop workloads per the benchmarks).
 
 [^src1]: [Choosing the Right Graph](../../raw/web/choosing-the-right-graph.md)

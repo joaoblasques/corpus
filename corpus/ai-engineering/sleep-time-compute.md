@@ -59,9 +59,9 @@ Inverse implication: for truly ad-hoc or adversarial queries, pre-computing usef
 
 ## Agentic SWE application
 
-The paper includes a case study applying sleep-time compute to a realistic software engineering (SWE) task — the class of problem that tools like [[ai-engineering/claude-code|Claude Code]] tackle. The finding suggests that agents operating on codebases could pre-analyze repositories offline (anticipating likely tasks: type errors, refactoring patterns, API mismatches) and surface that pre-computed state at request time [^src1].
+The paper includes a case study applying sleep-time compute to a realistic software engineering (SWE) task — the class of problem that tools like [Claude Code](/ai-engineering/claude-code.md) tackle. The finding suggests that agents operating on codebases could pre-analyze repositories offline (anticipating likely tasks: type errors, refactoring patterns, API mismatches) and surface that pre-computed state at request time [^src1].
 
-This connects to the [[ai-engineering/claude-managed-agents|Claude Managed Agents]] "dreaming" concept — agents consolidating memory and pre-computing context during idle periods rather than only on user demand.
+This connects to the [Claude Managed Agents](/ai-engineering/claude-managed-agents.md) "dreaming" concept — agents consolidating memory and pre-computing context during idle periods rather than only on user demand.
 
 ## MemGPT 2.0 / Letta implementation
 
@@ -94,10 +94,10 @@ Comparison:
 
 ## See also
 
-- [[ai-engineering/llm|LLM]] — the model family this compute pattern applies to
-- [[ai-engineering/agent-memory|Agent Memory]] — related: persistent memory as a form of pre-computation across sessions
-- [[ai-engineering/claude-managed-agents|Claude Managed Agents]] — dreaming / gardener pattern: agents that operate offline to improve their own state
-- [[ai-engineering/context-window-management|Context Window Management]] — adjacent concern: managing what state is in context at test time
+- [LLM](/ai-engineering/llm.md) — the model family this compute pattern applies to
+- [Agent Memory](/ai-engineering/agent-memory.md) — related: persistent memory as a form of pre-computation across sessions
+- [Claude Managed Agents](/ai-engineering/claude-managed-agents.md) — dreaming / gardener pattern: agents that operate offline to improve their own state
+- [Context Window Management](/ai-engineering/context-window-management.md) — adjacent concern: managing what state is in context at test time
 
 ---
 

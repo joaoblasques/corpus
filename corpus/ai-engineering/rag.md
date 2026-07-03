@@ -104,7 +104,7 @@ Convert each chunk to a dense vector using an embedding model. Options:
 - Sentence-Transformers (open source, runs locally on CPU)
 
 ### 3. Vector database
-Store embeddings alongside original text in a [[ai-engineering/vector-database|vector database]]. At query time, similarity search returns the K most relevant chunks.
+Store embeddings alongside original text in a [vector database](/ai-engineering/vector-database.md). At query time, similarity search returns the K most relevant chunks.
 
 | Option | Type | Notes |
 |---|---|---|
@@ -146,7 +146,7 @@ A side-by-side build of the same B2B document extractor found neither approach d
 
 ## Hybrid search and re-ranking
 
-Pure semantic (dense vector) retrieval is often insufficient in production [^src2]. **Hybrid search** blends dense embeddings with sparse keyword (BM25) matching, then applies a **re-ranker** to reorder candidates. This recovers exact-token matches (names, IDs, codes like "SOC 2") that pure embeddings smooth away [^src2]. See [[ai-engineering/agentic-search|Agentic Search]] for the grep-vs-vector evidence on when lexical matching beats semantic search.
+Pure semantic (dense vector) retrieval is often insufficient in production [^src2]. **Hybrid search** blends dense embeddings with sparse keyword (BM25) matching, then applies a **re-ranker** to reorder candidates. This recovers exact-token matches (names, IDs, codes like "SOC 2") that pure embeddings smooth away [^src2]. See [Agentic Search](/ai-engineering/agentic-search.md) for the grep-vs-vector evidence on when lexical matching beats semantic search.
 
 ## GraphRAG: local-to-global retrieval
 
@@ -159,7 +159,7 @@ At query time, each community summary produces a partial response; partials are 
 
 > "RAG fails on global questions directed at an entire text corpus … since this is inherently a query-focused summarization task" [^src3].
 
-This connects to agent memory: temporal knowledge graphs apply the same graph-over-vectors insight to long-term memory. See [[ai-engineering/agent-memory|Agent Memory]].
+This connects to agent memory: temporal knowledge graphs apply the same graph-over-vectors insight to long-term memory. See [Agent Memory](/ai-engineering/agent-memory.md).
 
 ## Temporal blind spots (enterprise failure modes)
 
@@ -208,7 +208,7 @@ WHERE user_id = $user AND category = 'legal'
 ORDER BY embedding <-> $query_vec LIMIT 5
 ```
 
-The gain: "similarity search over 5,000 relevant rows is far faster and more accurate than searching 10M rows and filtering after" [^src6]. This is also the scope-before-ranking rule from [[ai-engineering/agent-memory|Agent Memory]] applied to retrieval.
+The gain: "similarity search over 5,000 relevant rows is far faster and more accurate than searching 10M rows and filtering after" [^src6]. This is also the scope-before-ranking rule from [Agent Memory](/ai-engineering/agent-memory.md) applied to retrieval.
 
 **Post-retrieval enrichment** — after vector retrieval, join with structured data before sending to the LLM [^src6]:
 ```python
@@ -227,11 +227,11 @@ enriched = db.query("SELECT u.name, u.tier, d.created_at, c.content
 
 ## RAG vs. agentic search
 
-A design-level distinction: in RAG the agent is *given* pre-retrieved context; in agentic search the agent *finds* its own context using tools like Grep [^src5]. Claude Code started with RAG internally (a vector DB pre-indexed the codebase, snippets handed to Claude before each response) but moved to agentic search because (a) RAG requires indexing and setup, (b) is fragile across environments, and (c) fundamentally positions the agent as a passive recipient of context rather than an active searcher [^src5]. As models improve at building their own context when given the right tools, the balance tilts further toward agentic search for coding tasks. See [[ai-engineering/agentic-search|Agentic Search]] for the full treatment.
+A design-level distinction: in RAG the agent is *given* pre-retrieved context; in agentic search the agent *finds* its own context using tools like Grep [^src5]. Claude Code started with RAG internally (a vector DB pre-indexed the codebase, snippets handed to Claude before each response) but moved to agentic search because (a) RAG requires indexing and setup, (b) is fragile across environments, and (c) fundamentally positions the agent as a passive recipient of context rather than an active searcher [^src5]. As models improve at building their own context when given the right tools, the balance tilts further toward agentic search for coding tasks. See [Agentic Search](/ai-engineering/agentic-search.md) for the full treatment.
 
 ## Role in context engineering
 
-Retrieved chunks are one of the four context components injected into an agent's context window. See [[ai-engineering/context-engineering|Context Engineering]] — "Retrieved context" slot.
+Retrieved chunks are one of the four context components injected into an agent's context window. See [Context Engineering](/ai-engineering/context-engineering.md) — "Retrieved context" slot.
 
 ## Key terms
 
@@ -254,7 +254,7 @@ Key insight vs flat vector RAG: a knowledge graph explicitly encodes entity rela
 
 **Use case fit**: suited for document collections with rich cross-references (legal documents, technical specs, scientific papers, codebases). Less suited for large unstructured prose where entity extraction quality is unreliable [^src7].
 
-See also: [[ai-engineering/embeddings|Embeddings]] for the underlying vector layer, and the GraphRAG section above for the theoretical framing.
+See also: [Embeddings](/ai-engineering/embeddings.md) for the underlying vector layer, and the GraphRAG section above for the theoretical framing.
 
 ## PocketFlow: codebase-to-knowledge pipeline
 
@@ -308,7 +308,7 @@ A practitioner-discovered pattern: use a structured Markdown file hierarchy that
 
 **Scale verdict** [^src11]: for solo operators and small teams under a few thousand documents, this approach is lightweight, essentially free, and good enough. True RAG (vector databases, embedding pipelines) only wins at the scale of millions of documents. "Just start with Obsidian and graduate to LightRAG/true RAG only if you clearly outgrow it."
 
-This is the Karpathy RAG pattern implemented as a personal knowledge corpus — the same principle as [[ai-engineering/agent-memory|Agent Memory]] §LLM wiki pattern but focused on answering document-level factual queries.
+This is the Karpathy RAG pattern implemented as a personal knowledge corpus — the same principle as [Agent Memory](/ai-engineering/agent-memory.md) §LLM wiki pattern but focused on answering document-level factual queries.
 
 ## text-extract-api: PDF/Office extraction pipeline
 
@@ -336,17 +336,17 @@ Combined with text-extract-api, forms a fully local document-intelligence pipeli
 
 ## See also
 
-- [[ai-engineering/embeddings|Embeddings]] — the dense vectors RAG retrieves over; their limits (exact-token loss, no time, disconnected facts) drive hybrid search, temporal filters, and GraphRAG
-- [[ai-engineering/context-engineering|Context Engineering]] — RAG provides the "Retrieved context" component
-- [[ai-engineering/ai-agent|AI Agent]] — retrieval quality is a key agent evaluation metric
-- [[ai-engineering/agent-evaluation|Agent Evaluation]] — retrieval quality as a measured metric; temporal accuracy is a missing eval dimension
-- [[ai-engineering/agentic-search|Agentic Search]] — agent-orchestrated retrieval; grep-vs-vector trade-offs
-- [[ai-engineering/agent-memory|Agent Memory]] — temporal knowledge graphs extend GraphRAG's graph-over-vectors insight to memory
-- [[ai-engineering/vector-database|Vector Database]] — the storage layer; temporal blind spots are partly a vector-indexing limitation
+- [Embeddings](/ai-engineering/embeddings.md) — the dense vectors RAG retrieves over; their limits (exact-token loss, no time, disconnected facts) drive hybrid search, temporal filters, and GraphRAG
+- [Context Engineering](/ai-engineering/context-engineering.md) — RAG provides the "Retrieved context" component
+- [AI Agent](/ai-engineering/ai-agent.md) — retrieval quality is a key agent evaluation metric
+- [Agent Evaluation](/ai-engineering/agent-evaluation.md) — retrieval quality as a measured metric; temporal accuracy is a missing eval dimension
+- [Agentic Search](/ai-engineering/agentic-search.md) — agent-orchestrated retrieval; grep-vs-vector trade-offs
+- [Agent Memory](/ai-engineering/agent-memory.md) — temporal knowledge graphs extend GraphRAG's graph-over-vectors insight to memory
+- [Vector Database](/ai-engineering/vector-database.md) — the storage layer; temporal blind spots are partly a vector-indexing limitation
 
 ---
 
-[^src1]: [[03_Resources/Study Notes/AI Tools - Local RAG Complete Tutorial|AI Tools - Local RAG Complete Tutorial]]
+[^src1]: [AI Tools - Local RAG Complete Tutorial](/03_Resources/Study Notes/AI Tools - Local RAG Complete Tutorial.md)
 [^src2]: [Diving Deep into RAG, Document Extraction, and More](../../raw/email/email-2026-05-21-diving-deep-into-rag-document-extraction-and-more.md)
 [^src3]: [From Local to Global: A Graph RAG Approach to Query-Focused Summarization](../../raw/web/from-local-to-global-a-graph-rag-approach-to-query-focused-s.md)
 [^src4]: [7 Temporal Blind Spots Breaking Enterprise RAG](../../raw/web/7-temporal-blind-spots-breaking-enterprise-rag-news-from-gen.md)
@@ -388,4 +388,4 @@ An alternative to vector-only RAG: build a property-graph knowledge base from do
 
 **LLM extraction guidance** [^src14]: detailed docstrings in the `Relationship` data class ("the subject field must contain a named entity, predicate must be a verb phrase...") significantly improve triple quality. The structured extraction step is the most model-sensitive part of the pipeline.
 
-See also: [[ai-engineering/rag|RAG]] (vector RAG patterns), [[ai-engineering/embeddings|Embeddings]] (the vector alternative to graph edges).
+See also: [RAG](/ai-engineering/rag.md) (vector RAG patterns), [Embeddings](/ai-engineering/embeddings.md) (the vector alternative to graph edges).

@@ -39,8 +39,8 @@ updated: 2026-07-03
 
 Dettmers is the primary author of several widely-used quantization methods:
 
-- **LLM.int8()** (2022): mixed-precision Int8 decomposition for large LLMs. Key insight: at 6.7B+ parameters, transformers exhibit "emergent outlier features" — a small fraction (0.1%) of hidden dimensions that carry disproportionately large magnitude values and shift almost all of the model's discriminative information [^src5]. The method isolates these outlier dimensions in FP16 and quantizes the rest to Int8, enabling inference of models that would not fit in GPU RAM at FP16. See also: [[ai-engineering/quantization|Quantization]].
-- **QLoRA**: extends LoRA fine-tuning with 4-bit NormalFloat quantization, enabling fine-tuning of 65B models on a single 48GB GPU (referenced in [[ai-engineering/unsloth|Unsloth]] documentation as the basis for QLoRA-based training).
+- **LLM.int8()** (2022): mixed-precision Int8 decomposition for large LLMs. Key insight: at 6.7B+ parameters, transformers exhibit "emergent outlier features" — a small fraction (0.1%) of hidden dimensions that carry disproportionately large magnitude values and shift almost all of the model's discriminative information [^src5]. The method isolates these outlier dimensions in FP16 and quantizes the rest to Int8, enabling inference of models that would not fit in GPU RAM at FP16. See also: [Quantization](/ai-engineering/quantization.md).
+- **QLoRA**: extends LoRA fine-tuning with 4-bit NormalFloat quantization, enabling fine-tuning of 65B models on a single 48GB GPU (referenced in [Unsloth](/ai-engineering/unsloth.md) documentation as the basis for QLoRA-based training).
 - **bitsandbytes**: the open-source library implementing LLM.int8() and QLoRA, distributed as a Python package.
 
 ## SERA: coding-agent data generation at Ai2
@@ -89,10 +89,10 @@ Dettmers's GPU hardware guide (2023) is a reference for practitioners choosing t
 
 ## Related
 
-- [[ai-engineering/quantization|Quantization]] — LLM.int8(), QLoRA, bitsandbytes: Dettmers's primary technical contributions
-- [[ai-engineering/unsloth|Unsloth]] — fine-tuning toolkit that builds on QLoRA methodology
-- [[ai-engineering/agentic-coding|Agentic Coding]] — SERA is a coding-agent data-generation method
-- [[ai-engineering/README|AI Engineering hub]]
+- [Quantization](/ai-engineering/quantization.md) — LLM.int8(), QLoRA, bitsandbytes: Dettmers's primary technical contributions
+- [Unsloth](/ai-engineering/unsloth.md) — fine-tuning toolkit that builds on QLoRA methodology
+- [Agentic Coding](/ai-engineering/agentic-coding.md) — SERA is a coding-agent data-generation method
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

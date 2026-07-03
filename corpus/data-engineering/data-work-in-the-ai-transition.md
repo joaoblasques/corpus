@@ -32,15 +32,15 @@ updated: 2026-06-30
 
 # Data Work in the AI Transition (Joe Reis, 2026)
 
-**TL;DR** — Across a cluster of mid-2026 field essays, Joe Reis argues one consistent thesis from three angles: the AI transition **rewards judgment, fundamentals, and architectural rethinking** and **punishes output-volume, tool-fluency, and motor-swapping**. The three angles are a *skills* claim (fundamentals still matter — [[data-engineering/vibe-engineering|vibe engineering]]), a *productivity* claim (token volume ≠ value — [[productivity/tokenmaxxing|tokenmaxxing]]), and a *macro/architecture* claim (we're in 1905, not 2000 — [[ai-business/ai-transition-economics|AI transition economics]]). This page names the through-line so the three pages read as one argument, not three coincidences.
+**TL;DR** — Across a cluster of mid-2026 field essays, Joe Reis argues one consistent thesis from three angles: the AI transition **rewards judgment, fundamentals, and architectural rethinking** and **punishes output-volume, tool-fluency, and motor-swapping**. The three angles are a *skills* claim (fundamentals still matter — [vibe engineering](/data-engineering/vibe-engineering.md)), a *productivity* claim (token volume ≠ value — [tokenmaxxing](/productivity/tokenmaxxing.md)), and a *macro/architecture* claim (we're in 1905, not 2000 — [AI transition economics](/ai-business/ai-transition-economics.md)). This page names the through-line so the three pages read as one argument, not three coincidences.
 
 ## The single argument, three scales
 
 | Scale | Failure mode Reis names | Source page |
 |---|---|---|
-| **Individual skill** | Building data systems by feel, with no theoretical model to fall back on when an abstraction leaks | [[data-engineering/vibe-engineering|Vibe Engineering]] [^src1] |
-| **Daily practice** | Measuring worth in AI output volume; the "AI hamster wheel"; sliding from centaur into reverse-centaur | [[productivity/tokenmaxxing|Tokenmaxxing]] [^src2][^src3] |
-| **Org / architecture** | "Swapping the motor, not the factory" — bolting AI onto a stack still built for a human analyst | [[ai-business/ai-transition-economics|AI Transition Economics]] [^src4][^src5] |
+| **Individual skill** | Building data systems by feel, with no theoretical model to fall back on when an abstraction leaks | [Vibe Engineering](/data-engineering/vibe-engineering.md) [^src1] |
+| **Daily practice** | Measuring worth in AI output volume; the "AI hamster wheel"; sliding from centaur into reverse-centaur | [Tokenmaxxing](/productivity/tokenmaxxing.md) [^src2][^src3] |
+| **Org / architecture** | "Swapping the motor, not the factory" — bolting AI onto a stack still built for a human analyst | [AI Transition Economics](/ai-business/ai-transition-economics.md) [^src4][^src5] |
 
 The unifying claim: in each case the AI tool lowers the cost of *doing the surface activity* (assembling a pipeline, generating content, adding "AI features") while leaving the *real bottleneck* untouched — and the real bottleneck is always judgement: knowing why the query plan behaves that way [^src1], which work is worth shipping [^src2], or which architectural assumptions still hold when the consumer is an agent, not an analyst [^src4].
 
@@ -48,7 +48,7 @@ The unifying claim: in each case the AI tool lowers the cost of *doing the surfa
 
 - **Vibe engineering is the micro of "swap the motor, not the factory."** The 1905 essay's macro failure — using AI to accelerate existing ETL rather than rethinking what data infrastructure is for [^src4] — is the same failure vibe engineering describes at the practitioner level: tool fluency without the theory to know *what should change* [^src1]. The fix at both scales is conceptual grounding before tooling.
 - **Tokenmaxxing is what vibe engineering feels like from the inside.** A vibe engineer with no mental model defaults to generating more — more prompts, more output, more motion — because volume is the only lever they can pull [^src1][^src2]. Reis's antidote, "tokenminimize + brainmaxx" (think more, output less), is precisely the reinvestment of effort into the fundamentals vibe engineering skips [^src2].
-- **The "context team" is the factory rebuilt.** All three essays converge on the same remediation: the value moves to whoever supplies *meaning and context* — the [[data-engineering/semantic-layer|semantic layer]] / "context teams" framing [^src4], the AI-context-platform remediation (Euno, surfaced at [[data-engineering/sources/dbt-summit-2026-speakers|dbt Summit 2026]] via co-founder Sarah Levy) [^src1], and the judgement-and-accountability work that survives the [[productivity/tokenmaxxing|reverse-centaur]] trap [^src3].
+- **The "context team" is the factory rebuilt.** All three essays converge on the same remediation: the value moves to whoever supplies *meaning and context* — the [semantic layer](/data-engineering/semantic-layer.md) / "context teams" framing [^src4], the AI-context-platform remediation (Euno, surfaced at [dbt Summit 2026](/data-engineering/sources/dbt-summit-2026-speakers.md) via co-founder Sarah Levy) [^src1], and the judgement-and-accountability work that survives the [reverse-centaur](/productivity/tokenmaxxing.md) trap [^src3].
 
 ## Points of agreement from other voices
 
@@ -60,7 +60,7 @@ Reis's framing is corroborated by practitioners he quotes, not only asserted:
 
 ## The reverse-centaur as the connective failure mode
 
-The sharpest single idea linking the cluster is **reverse-centaur drift** [^src3]: in the centaur model the human reasons and AI executes; in reverse-centaur the AI reasons and the human becomes a high-speed cursor for its plan. Vibe engineering *produces* reverse-centaurs (no theory → defer the thinking to the model), tokenmaxxing *rewards* them (motion looks like productivity), and the 1905 macro view *explains why it persists* (orgs optimize the swapped-in motor instead of rebuilding the factory). It is the organizational-and-individual analog of [[software-engineering/cognitive-debt|cognitive surrender]] — human judgement exits the loop and borrowed confidence fills the vacuum [^src3].
+The sharpest single idea linking the cluster is **reverse-centaur drift** [^src3]: in the centaur model the human reasons and AI executes; in reverse-centaur the AI reasons and the human becomes a high-speed cursor for its plan. Vibe engineering *produces* reverse-centaurs (no theory → defer the thinking to the model), tokenmaxxing *rewards* them (motion looks like productivity), and the 1905 macro view *explains why it persists* (orgs optimize the swapped-in motor instead of rebuilding the factory). It is the organizational-and-individual analog of [cognitive surrender](/software-engineering/cognitive-debt.md) — human judgement exits the loop and borrowed confidence fills the vacuum [^src3].
 
 ## So what (for a solo data practitioner)
 
@@ -72,12 +72,12 @@ The actionable convergence across all five sources [^src1][^src2][^src3][^src4][
 
 ## See also
 
-- [[data-engineering/vibe-engineering|Vibe Engineering]] — the skills-level failure mode (Spolsky's leaky abstractions)
-- [[productivity/tokenmaxxing|Tokenmaxxing and AI Fake Productivity]] — the productivity-level failure mode (centaur vs reverse-centaur)
-- [[ai-business/ai-transition-economics|AI Transition Economics: The 1905 Analogy]] — the macro/architecture frame
-- [[data-engineering/ai-impact-on-data-engineering|AI's Impact on Data Engineering]] — the broader DE reckoning this specializes
-- [[data-engineering/semantic-layer|Semantic Layer]] — "context teams" as the rebuilt factory
-- [[software-engineering/cognitive-debt|Cognitive Debt & Cognitive Surrender]] — the individual-judgement analog of reverse-centaur
+- [Vibe Engineering](/data-engineering/vibe-engineering.md) — the skills-level failure mode (Spolsky's leaky abstractions)
+- [Tokenmaxxing and AI Fake Productivity](/productivity/tokenmaxxing.md) — the productivity-level failure mode (centaur vs reverse-centaur)
+- [AI Transition Economics: The 1905 Analogy](/ai-business/ai-transition-economics.md) — the macro/architecture frame
+- [AI's Impact on Data Engineering](/data-engineering/ai-impact-on-data-engineering.md) — the broader DE reckoning this specializes
+- [Semantic Layer](/data-engineering/semantic-layer.md) — "context teams" as the rebuilt factory
+- [Cognitive Debt & Cognitive Surrender](/software-engineering/cognitive-debt.md) — the individual-judgement analog of reverse-centaur
 
 ---
 

@@ -39,13 +39,13 @@ updated: 2026-06-25
 
 ## Positioning
 
-A challenge/accountability format rather than a structured course. Strong visual learning component (infographics for each algorithm). Better for algorithm breadth than production engineering depth. Compare to [[mlops/made-with-ml|Made With ML]] (production-focused) or [[mlops/handson-ml3|Hands-On ML 3rd Edition]] (textbook depth).
+A challenge/accountability format rather than a structured course. Strong visual learning component (infographics for each algorithm). Better for algorithm breadth than production engineering depth. Compare to [Made With ML](/mlops/made-with-ml.md) (production-focused) or [Hands-On ML 3rd Edition](/mlops/handson-ml3.md) (textbook depth).
 
 ## See also
 
-- [[mlops/handson-ml3|Hands-On ML (3rd Edition)]] — more comprehensive textbook-based ML fundamentals
-- [[mlops/made-with-ml|Made With ML]] — production ML engineering focus
-- [[mlops/README|MLOps hub]]
+- [Hands-On ML (3rd Edition)](/mlops/handson-ml3.md) — more comprehensive textbook-based ML fundamentals
+- [Made With ML](/mlops/made-with-ml.md) — production ML engineering focus
+- [MLOps hub](/mlops/README.md)
 
 ---
 

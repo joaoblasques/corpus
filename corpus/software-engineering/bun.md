@@ -47,8 +47,8 @@ Bun positions itself as a drop-in speed upgrade. Running `bun install` instead o
 
 ## See also
 
-- [[software-engineering/javascript-fundamentals|JavaScript Fundamentals]] — Bun replaces several Node.js-ecosystem tools
-- [[software-engineering/fastapi|FastAPI]] — Python counterpart for fast API development
+- [JavaScript Fundamentals](/software-engineering/javascript-fundamentals.md) — Bun replaces several Node.js-ecosystem tools
+- [FastAPI](/software-engineering/fastapi.md) — Python counterpart for fast API development
 
 ---
 

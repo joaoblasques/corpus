@@ -32,9 +32,9 @@ Key distinctions he draws [^src1]:
 
 ## See also
 
-- [[data-engineering/data-engineer-role|The Data Engineer Role]] — foundations vs. tooling tradeoffs
-- [[data-engineering/data-modeling-meaning|Meaning in Data Modeling]] — the semantic foundation layer
-- [[data-engineering/README|Data Engineering hub]]
+- [The Data Engineer Role](/data-engineering/data-engineer-role.md) — foundations vs. tooling tradeoffs
+- [Meaning in Data Modeling](/data-engineering/data-modeling-meaning.md) — the semantic foundation layer
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

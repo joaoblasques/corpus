@@ -59,8 +59,8 @@ Bitcoin's first recorded price: $0.003/coin (2010). First commercial transaction
 
 ## Related pages
 
-- [[blockchain/bitcoin|Bitcoin]] — the system itself
-- [[blockchain/satoshi-nakamoto|Satoshi Nakamoto]] — creator and ideological context
-- [[blockchain/the-cypherpunks|The Cypherpunks]] — movement that preceded Bitcoin
+- [Bitcoin](/blockchain/bitcoin.md) — the system itself
+- [Satoshi Nakamoto](/blockchain/satoshi-nakamoto.md) — creator and ideological context
+- [The Cypherpunks](/blockchain/the-cypherpunks.md) — movement that preceded Bitcoin
 
 [^src1]: [A Brief History of Money](../../raw/notes/notes-a-brief-history-of-money-scrape.md)

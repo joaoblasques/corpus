@@ -22,7 +22,7 @@ updated: 2026-06-21
 
 # uv
 
-**TL;DR**: A fast Python package manager and virtual-environment tool — the canonical Layer-2 choice in the [[mlops/dev-environment-stack|four-layer dev environment stack]] for installing AI/ML libraries into an isolated per-project environment [^src1]. It also drives Python project management in the Marvelous MLOps Databricks course, where dependencies live in `pyproject.toml` and the `.venv` is built with `uv sync` [^src2].
+**TL;DR**: A fast Python package manager and virtual-environment tool — the canonical Layer-2 choice in the [four-layer dev environment stack](/mlops/dev-environment-stack.md) for installing AI/ML libraries into an isolated per-project environment [^src1]. It also drives Python project management in the Marvelous MLOps Databricks course, where dependencies live in `pyproject.toml` and the `.venv` is built with `uv sync` [^src2].
 
 ## Role in the stack
 
@@ -51,15 +51,15 @@ The Marvelous MLOps Databricks course (Lecture 2) standardizes on uv: *"we use u
 
 **Version must match the runtime.** The project's Python version must match the target Databricks serverless environment: the course uses Python 3.12 (`requires-python = ">=3.12, <3.13"`), which matches serverless environment version 3 (Python 3.12.3) [^src2]. Notably the project overrides the environment's pre-installed package versions — e.g. MLflow 3.1.1 instead of the environment's 2.21.3 — which is exactly what the exact pins above enable [^src2].
 
-See [[mlops/databricks-development|Databricks Development]] for the surrounding local-development workflow (CLI, VS Code extension, serverless compute).
+See [Databricks Development](/mlops/databricks-development.md) for the surrounding local-development workflow (CLI, VS Code extension, serverless compute).
 
 > [unsourced — scope note] Broader uv features not exercised by these two sources (lockfile management via `uv.lock`, standalone Python-version management, `uv tool` installs) are out of scope for this page. Expand when a uv-primary source is ingested.
 
 ## See also
 
-- [[mlops/dev-environment-stack|Dev Environment Stack]]
-- [[mlops/databricks-development|Databricks Development]]
-- [[mlops/README|MLOps hub]]
+- [Dev Environment Stack](/mlops/dev-environment-stack.md)
+- [Databricks Development](/mlops/databricks-development.md)
+- [MLOps hub](/mlops/README.md)
 
 ---
 

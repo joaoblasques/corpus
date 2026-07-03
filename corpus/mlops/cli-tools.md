@@ -83,7 +83,7 @@ SSH is under-used as "just login"; its highest-leverage feature is **port forwar
 
 ## Secrets & data tools
 
-- **pass** (password-store) — "the standard Unix password manager"; GPG-encrypted files versioned in git, pushable to a remote repo; load secrets as env vars without writing them to shell history [^src1][^src2]. See [[mlops/git|Git]] (pass uses git under the hood).
+- **pass** (password-store) — "the standard Unix password manager"; GPG-encrypted files versioned in git, pushable to a remote repo; load secrets as env vars without writing them to shell history [^src1][^src2]. See [Git](/mlops/git.md) (pass uses git under the hood).
 - **Doppler** — a secrets-management platform; `doppler run -- <cmd>` injects per-environment secrets without storing them in a local `.env` (safer around AI agents that may read `.env` files) [^src1].
 - **jq** — filter/transform JSON via stdin; staple for debugging and shell-script automation [^src1].
 - **GitHub CLI (`gh`)** — perform GitHub actions (repos, issues, PRs) without leaving the terminal; pairs with agentic AI to auto-generate PR descriptions [^src1].
@@ -91,7 +91,7 @@ SSH is under-used as "just login"; its highest-leverage feature is **port forwar
 - **delta** — better git diffs; reuses the `bat` theme; supports side-by-side [^src3].
 - **stow** (GNU Stow) — symlink-manages dotfiles so they can be git-versioned and reused across machines [^src1].
 - **thefuck** — autocorrects the previous mistyped command [^src3].
-- **Fabric** — a CLI wrapper for calling LLMs with reusable "patterns" (extract ideas, create summary); chainable via Unix pipes [^src2]. Configured here against the [[ai-engineering/claude-api|Claude/Anthropic API]] (see [[ai-engineering/README|AI Engineering]] for LLM specifics).
+- **Fabric** — a CLI wrapper for calling LLMs with reusable "patterns" (extract ideas, create summary); chainable via Unix pipes [^src2]. Configured here against the [Claude/Anthropic API](/ai-engineering/claude-api.md) (see [AI Engineering](/ai-engineering/README.md) for LLM specifics).
 
 ## File naming conventions
 
@@ -122,12 +122,12 @@ Compare: delta (rust diff pager, no notes), LazyGit (full git TUI, review mode l
 
 ## See also
 
-- [[mlops/terminal-and-shell|Terminal & Shell]] — where these tools are installed and configured (Alacritty, zsh, Powerlevel10k, fzf/zoxide/eza setup)
-- [[mlops/tmux|tmux]] — dedicated tmux page covering VPS-based agent persistence, multi-agent pane workflows, and full command reference
-- [[mlops/linux-commands|Linux Commands]] — the legacy commands (`grep`, `find`, `cat`, `ls`) these tools replace
-- [[mlops/git|Git]] — `gh` CLI and `pass`/`delta` build on git
-- [[mlops/dev-environment-stack|Dev Environment Stack]] — these are Layer-1 system-foundation tooling
-- [[mlops/README|MLOps hub]]
+- [Terminal & Shell](/mlops/terminal-and-shell.md) — where these tools are installed and configured (Alacritty, zsh, Powerlevel10k, fzf/zoxide/eza setup)
+- [tmux](/mlops/tmux.md) — dedicated tmux page covering VPS-based agent persistence, multi-agent pane workflows, and full command reference
+- [Linux Commands](/mlops/linux-commands.md) — the legacy commands (`grep`, `find`, `cat`, `ls`) these tools replace
+- [Git](/mlops/git.md) — `gh` CLI and `pass`/`delta` build on git
+- [Dev Environment Stack](/mlops/dev-environment-stack.md) — these are Layer-1 system-foundation tooling
+- [MLOps hub](/mlops/README.md)
 
 ---
 

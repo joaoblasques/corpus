@@ -47,7 +47,7 @@ The paper sorts agent context into six types [^src1]:
 | **Tools** | Callable functions, MCP servers, external APIs |
 | **Guardrails** | Hard boundaries, safety constraints, escalation rules |
 
-See [[ai-engineering/context-engineering|Context Engineering]] for the discipline of filling and managing these.
+See [Context Engineering](/ai-engineering/context-engineering.md) for the discipline of filling and managing these.
 
 ## Static vs dynamic context (the bill)
 
@@ -91,9 +91,9 @@ METR study: experienced developers can go **19% slower** on some tasks once you 
 
 ## Related
 
-- [[ai-engineering/agent-harness|Agent Harness]] — the 10/90 framing; what the harness includes
-- [[ai-engineering/context-engineering|Context Engineering]] — managing the six context types; static/dynamic tradeoffs
-- [[ai-engineering/agentic-coding|Agentic Coding]] — verification and eval practices; the review shift
+- [Agent Harness](/ai-engineering/agent-harness.md) — the 10/90 framing; what the harness includes
+- [Context Engineering](/ai-engineering/context-engineering.md) — managing the six context types; static/dynamic tradeoffs
+- [Agentic Coding](/ai-engineering/agentic-coding.md) — verification and eval practices; the review shift
 
 ---
 

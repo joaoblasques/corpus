@@ -98,8 +98,8 @@ The hidden compliance economy is an entire category of businesses sharing the sa
 
 ## Relationship to other pages
 
-- **[[ai-business/monetizing-code|Monetizing Code]]** — the "sell a result, not code" framing maps directly to selling risk-elimination rather than labor; the S-tier offer is an extreme form of this principle.
-- **[[ai-business/ai-consulting-playbook|AI Consulting Playbook]]** — fractional executive and bookkeeping plays benefit from the same two-call discovery motion; the AI consulting playbook's "frequency × friction" selection applies here.
-- **[[ai-business/ai-and-the-job-market|AI and the Job Market]]** — the meta-thesis ("rebuild boring expert businesses with AI") resonates with the domain's theme that the best AI opportunity is applying AI as a leverage multiplier for human expertise.
+- **[Monetizing Code](/ai-business/monetizing-code.md)** — the "sell a result, not code" framing maps directly to selling risk-elimination rather than labor; the S-tier offer is an extreme form of this principle.
+- **[AI Consulting Playbook](/ai-business/ai-consulting-playbook.md)** — fractional executive and bookkeeping plays benefit from the same two-call discovery motion; the AI consulting playbook's "frequency × friction" selection applies here.
+- **[AI and the Job Market](/ai-business/ai-and-the-job-market.md)** — the meta-thesis ("rebuild boring expert businesses with AI") resonates with the domain's theme that the best AI opportunity is applying AI as a leverage multiplier for human expertise.
 
 [^src1]: [100% REMOTE Boring Businesses (That Almost Never Fail)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-100-remote-boring-report.md) — Filter Buy founder tier-ranking remote business models; operator framing (not guru); video report from Obsidian vault

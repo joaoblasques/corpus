@@ -52,9 +52,9 @@ The cypherpunk motto "Cypherpunks write code" directly influenced Satoshi Nakamo
 
 ## Related pages
 
-- [[blockchain/satoshi-nakamoto|Satoshi Nakamoto]] — **predecessor-of**: the cypherpunk movement (b-money, BitGold, Hashcash) that Satoshi synthesized into Bitcoin
-- [[blockchain/proof-of-work|Proof-of-Work]] — the consensus mechanism that finally solved the sybil attacks that defeated b-money and BitGold
-- [[blockchain/history-of-money|History of Money]] — broader context of money's evolution
-- [[blockchain/public-key-cryptography|Public-Key Cryptography]] — **uses**: the cryptographic tools (Diffie-Hellman, RSA, PGP) cypherpunks championed against export controls
+- [Satoshi Nakamoto](/blockchain/satoshi-nakamoto.md) — **predecessor-of**: the cypherpunk movement (b-money, BitGold, Hashcash) that Satoshi synthesized into Bitcoin
+- [Proof-of-Work](/blockchain/proof-of-work.md) — the consensus mechanism that finally solved the sybil attacks that defeated b-money and BitGold
+- [History of Money](/blockchain/history-of-money.md) — broader context of money's evolution
+- [Public-Key Cryptography](/blockchain/public-key-cryptography.md) — **uses**: the cryptographic tools (Diffie-Hellman, RSA, PGP) cypherpunks championed against export controls
 
 [^src1]: [The Cypherpunks](../../raw/notes/notes-the-cypherpunks-scrape.md)

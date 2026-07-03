@@ -55,7 +55,7 @@ updated: 2026-06-25
 
 **TL;DR**: The operational discipline of controlling what occupies the LLM's context window — deciding what to keep, compress, or drop — so the agent can operate effectively across long tasks without losing critical state [^src1].
 
-Distinct from [[ai-engineering/context-engineering|Context Engineering]] (which governs *how* context is assembled at inference time). Context window management governs *what happens* when context fills up during a long-running task.
+Distinct from [Context Engineering](/ai-engineering/context-engineering.md) (which governs *how* context is assembled at inference time). Context window management governs *what happens* when context fills up during a long-running task.
 
 ## The core problem
 
@@ -83,7 +83,7 @@ Context windows fill faster than expected in long-running agentic tasks. Every f
 | **Short-term** | Context window | What's happening right now; volatile; bounded |
 | **Long-term** | CLAUDE.md / external documents | Always available; referred to at any time; survives compaction |
 
-CLAUDE.md functions as the agent's long-term memory — instructions, constraints, and decisions written once and referenced across the entire session [^src1]. See [[ai-engineering/agent-memory|Agent Memory]] for the full memory model.
+CLAUDE.md functions as the agent's long-term memory — instructions, constraints, and decisions written once and referenced across the entire session [^src1]. See [Agent Memory](/ai-engineering/agent-memory.md) for the full memory model.
 
 ## Strategies
 
@@ -109,7 +109,7 @@ This ensures the compression preserves the most critical context rather than app
 
 Delegating work to a sub-agent spins up a **fresh context window** isolated from the main agent's window. Work done by the sub-agent does not consume the main agent's tokens [^src1].
 
-Observed token savings (from source): 3,500 / 7,000 / 9,000 tokens per sub-agent task. This is especially valuable when sub-agents perform tasks involving large [[ai-engineering/vector-database|vector database]] retrievals — those results never enter the main agent's context window.
+Observed token savings (from source): 3,500 / 7,000 / 9,000 tokens per sub-agent task. This is especially valuable when sub-agents perform tasks involving large [vector database](/ai-engineering/vector-database.md) retrievals — those results never enter the main agent's context window.
 
 Common sub-agent specializations [^src1]:
 | Sub-agent | Role |
@@ -133,7 +133,7 @@ Not every iteration needs the same tool. Rapid back-and-forth revisions consume 
 
 ### 7. Progressive disclosure via skills
 
-Putting reusable instructions in a skill rather than an always-on `AGENTS.md`/`CLAUDE.md` file keeps the window lean: only the skill's name + description occupy context until it's invoked, at which point the body loads on demand [^src2]. One measured example: 944 tokens as an always-on file vs 53 tokens as a skill's name + description [^src2]. See [[ai-engineering/agent-skills|Agent Skills]].
+Putting reusable instructions in a skill rather than an always-on `AGENTS.md`/`CLAUDE.md` file keeps the window lean: only the skill's name + description occupy context until it's invoked, at which point the body loads on demand [^src2]. One measured example: 944 tokens as an always-on file vs 53 tokens as a skill's name + description [^src2]. See [Agent Skills](/ai-engineering/agent-skills.md).
 
 ## Why a lean window matters
 
@@ -221,15 +221,15 @@ The "Smart Zone tipping point" (~40% / ~100K tokens) is a practitioner heuristic
 
 ## See also
 
-- [[ai-engineering/context-engineering|Context Engineering]] — governs how context is assembled at inference time
-- [[ai-engineering/agent-skills|Agent Skills]] — progressive disclosure as a context-saving technique
-- [[ai-engineering/agent-memory|Agent Memory]] — the two-tier memory model (short-term / long-term)
-- [[ai-engineering/ai-agent|AI Agent]] — the agentic loop that generates context growth
-- [[ai-engineering/agent-cost-management|Agent Cost Management]] — MCP token overhead and cost strategies
+- [Context Engineering](/ai-engineering/context-engineering.md) — governs how context is assembled at inference time
+- [Agent Skills](/ai-engineering/agent-skills.md) — progressive disclosure as a context-saving technique
+- [Agent Memory](/ai-engineering/agent-memory.md) — the two-tier memory model (short-term / long-term)
+- [AI Agent](/ai-engineering/ai-agent.md) — the agentic loop that generates context growth
+- [Agent Cost Management](/ai-engineering/agent-cost-management.md) — MCP token overhead and cost strategies
 
 ---
 
-[^src1]: [[03_Resources/Study Notes/Claude Code - Solving the Memory Problem with Context Engineering|Claude Code - Solving the Memory Problem with Context Engineering]]
+[^src1]: [Claude Code - Solving the Memory Problem with Context Engineering](/03_Resources/Study Notes/Claude Code - Solving the Memory Problem with Context Engineering.md)
 [^src2]: [How AI agents & Claude skills work (Clearly Explained)](<../../raw/youtube/How AI agents & Claude skills work (Clearly Explained).md>) — Greg Isenberg × Ras Mic, YouTube
 [^src3]: [Using Claude Code: session management and 1M context](../../raw/notes/notes-clippings-using-claude-code-session-management-and-1m-context.md) — Thariq Shihipar, Anthropic
 [^src4]: [Context windows — Claude Platform docs](../../raw/web/web-context-windows.md) — Anthropic

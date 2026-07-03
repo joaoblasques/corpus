@@ -26,7 +26,7 @@ updated: 2026-06-12
 
 # Structured Outputs
 
-**TL;DR**: Forcing an LLM to return data conforming to a declared schema (e.g. a Pydantic model) instead of free text, with validation and automatic retries on failure. The reference Python library is **Instructor** — Pydantic-based, type-safe, provider-agnostic across 15+ LLM providers [^src1]. Beyond formatting convenience, structured outputs are a reliability and security layer: they prevent downstream pipeline failures and stop agents fabricating data to fit a schema (see [[ai-engineering/agent-security|agent security]]).
+**TL;DR**: Forcing an LLM to return data conforming to a declared schema (e.g. a Pydantic model) instead of free text, with validation and automatic retries on failure. The reference Python library is **Instructor** — Pydantic-based, type-safe, provider-agnostic across 15+ LLM providers [^src1]. Beyond formatting convenience, structured outputs are a reliability and security layer: they prevent downstream pipeline failures and stop agents fabricating data to fit a schema (see [agent security](/ai-engineering/agent-security.md)).
 
 ## Why structured outputs
 
@@ -60,13 +60,13 @@ Language models "don't see text like you and I, instead they see a sequence of n
 - **Compresses** — the token sequence is shorter than the raw bytes; on average each token is ~4 bytes.
 - **Surfaces common subwords** — e.g. splitting "encoding" into "encod" + "ing" so the model sees "ing" repeatedly across contexts, helping it generalize grammar.
 
-Usage: `tiktoken.encoding_for_model("gpt-4o")` returns the model's tokenizer; encodings (e.g. `o200k_base`, `cl100k_base`) can be extended with custom special tokens [^src2]. Token counts drive context-window budgeting (see [[ai-engineering/context-engineering|context engineering]] and the tokenization note in [[ai-engineering/prompt-engineering|prompt engineering]]).
+Usage: `tiktoken.encoding_for_model("gpt-4o")` returns the model's tokenizer; encodings (e.g. `o200k_base`, `cl100k_base`) can be extended with custom special tokens [^src2]. Token counts drive context-window budgeting (see [context engineering](/ai-engineering/context-engineering.md) and the tokenization note in [prompt engineering](/ai-engineering/prompt-engineering.md)).
 
 ## See also
 
-- [[ai-engineering/agent-security|Agent Security]] — structured outputs as Layer 3 (output control) in defense in depth
-- [[ai-engineering/prompt-engineering|Prompt Engineering]] — schema/example specification steers output format; tokens and context window
-- [[ai-engineering/context-engineering|Context Engineering]] — token budgeting depends on tokenization
+- [Agent Security](/ai-engineering/agent-security.md) — structured outputs as Layer 3 (output control) in defense in depth
+- [Prompt Engineering](/ai-engineering/prompt-engineering.md) — schema/example specification steers output format; tokens and context window
+- [Context Engineering](/ai-engineering/context-engineering.md) — token budgeting depends on tokenization
 
 ---
 

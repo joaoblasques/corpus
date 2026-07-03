@@ -95,12 +95,12 @@ The underlying protocol for both Tailscale and Headscale [^src3]:
 
 ## See also
 
-- [[mlops/dev-environment-stack|Dev Environment Stack]] — the local layer under container networking
-- [[mlops/cloud-computing-fundamentals|Cloud Computing Fundamentals]] — VPC, subnets, load balancing
-- [[mlops/infrastructure-as-code|Infrastructure as Code]] — provisioning the network layer
-- [[mlops/terraform|Terraform]] — its Docker-provider example declaratively provisions the container bridge network described here (a dedicated Docker network so containers resolve each other by hostname)
-- [[software-engineering/microservices|Microservices]] — container orchestration (Kubernetes)
-- [[mlops/README|MLOps hub]]
+- [Dev Environment Stack](/mlops/dev-environment-stack.md) — the local layer under container networking
+- [Cloud Computing Fundamentals](/mlops/cloud-computing-fundamentals.md) — VPC, subnets, load balancing
+- [Infrastructure as Code](/mlops/infrastructure-as-code.md) — provisioning the network layer
+- [Terraform](/mlops/terraform.md) — its Docker-provider example declaratively provisions the container bridge network described here (a dedicated Docker network so containers resolve each other by hostname)
+- [Microservices](/software-engineering/microservices.md) — container orchestration (Kubernetes)
+- [MLOps hub](/mlops/README.md)
 
 ---
 

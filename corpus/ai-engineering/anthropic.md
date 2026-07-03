@@ -81,7 +81,7 @@ updated: 2026-06-28
 
 # Anthropic
 
-**TL;DR.** Anthropic PBC is the AI lab behind the Claude model family and the [[ai-engineering/claude-code|Claude Code]] / [[ai-engineering/claude-cowork|Claude Cowork]] products [^src1]. As of mid-2026 it reportedly closed a ~$65B round at a ~$965B valuation, passing OpenAI for the first time [^src4]. The Claude lineup (Haiku → Sonnet → Opus → Fable/Mythos) and per-model specifics live on [[ai-engineering/claude-models|Claude Model Lineup]]; product specifics live on the Claude Code and Cowork pages.
+**TL;DR.** Anthropic PBC is the AI lab behind the Claude model family and the [Claude Code](/ai-engineering/claude-code.md) / [Claude Cowork](/ai-engineering/claude-cowork.md) products [^src1]. As of mid-2026 it reportedly closed a ~$65B round at a ~$965B valuation, passing OpenAI for the first time [^src4]. The Claude lineup (Haiku → Sonnet → Opus → Fable/Mythos) and per-model specifics live on [Claude Model Lineup](/ai-engineering/claude-models.md); product specifics live on the Claude Code and Cowork pages.
 
 ## Learning resources
 
@@ -92,7 +92,7 @@ updated: 2026-06-28
 - **AI Fluency: Framework & Foundations** (~3 hr, 13 lessons) — the **4Ds** of working with AI: *Delegation, Description, Discernment, Diligence*; effective prompting, critical thinking about outputs, and ethics. Ships a vocabulary cheat sheet.
 - **Introduction to Claude Cowork** (~2 hr) — what Cowork is, Projects, Plugins, Skills, scheduling tasks, file/document handling, permissions, and picking the right model.
 
-The framing is a low-cost career signal: a certificate shows a hiring viewer you have "actually touched the tool." The source cites the Stanford 2025 AI Index (78% of organizations used AI in 2024, up from 55% the year before) and a PwC finding that AI-skilled workers command a ~56% average wage premium (up from 25%) [^src5] — see [[ai-business/technical-career|Navigating a Technical Career]].
+The framing is a low-cost career signal: a certificate shows a hiring viewer you have "actually touched the tool." The source cites the Stanford 2025 AI Index (78% of organizations used AI in 2024, up from 55% the year before) and a PwC finding that AI-skilled workers command a ~56% average wage premium (up from 25%) [^src5] — see [Navigating a Technical Career](/ai-business/technical-career.md).
 
 ## Project Glasswing (April 2026)
 
@@ -101,7 +101,7 @@ Project Glasswing is Anthropic's AI-powered security initiative, announced April
 Key elements:
 - **$100M in credits** — issued to the security research community so defenders (not just attackers) can access frontier AI for security work.
 - **Major tech coalition** — participating organizations include companies across software, hardware, and cloud infrastructure.
-- **Claude Security product** — an enterprise-grade vulnerability scanning tool using Opus 4.7 to analyze codebases the way a security researcher would; see [[ai-engineering/agent-security|Agent Security]].
+- **Claude Security product** — an enterprise-grade vulnerability scanning tool using Opus 4.7 to analyze codebases the way a security researcher would; see [Agent Security](/ai-engineering/agent-security.md).
 - **Cyber Verification Program** — a vetting process for security researchers and companies to access frontier Claude models for legitimate offensive security work.
 
 Security partners embedding Claude for their platforms: CrowdStrike (Falcon + Project QuiltWorks), SentinelOne (Wayfinder), TrendAI (AESIR), Microsoft Security, Palo Alto Networks (Unit 42 / Frontier AI Defense [^src8]), Wiz (Red Agent — 150K+ assets scanned/week, 0 false positives [^src6]) [^src6].
@@ -114,11 +114,11 @@ A dedicated product suite for legal professionals, available on Team and Enterpr
 - **Microsoft integration**: Claude for Word (draft, redline, summarize) and Outlook (correspondence, contract review)
 - **Extensible**: custom skills and connectors for firm-specific workflows
 
-Legal professionals became the most engaged Claude Cowork user segment after the first plugin release [^src7]. See [[ai-engineering/claude-cowork|Claude Cowork]] §Legal vertical for the connector and plugin inventory.
+Legal professionals became the most engaged Claude Cowork user segment after the first plugin release [^src7]. See [Claude Cowork](/ai-engineering/claude-cowork.md) §Legal vertical for the connector and plugin inventory.
 
 ## Interpretability initiative
 
-Anthropic's mechanistic interpretability research aims to produce an "MRI for AI" — tools capable of auditing a model's reasoning for honesty, correctness, and alignment before deployment [^src9]. Key milestone: ~30 million distinct features discovered in Claude 3 Sonnet using sparse autoencoders. Target: working interpretability audit tools by 2027. See [[ai-engineering/interpretability|Interpretability]] for the full scientific background.
+Anthropic's mechanistic interpretability research aims to produce an "MRI for AI" — tools capable of auditing a model's reasoning for honesty, correctness, and alignment before deployment [^src9]. Key milestone: ~30 million distinct features discovered in Claude 3 Sonnet using sparse autoencoders. Target: working interpretability audit tools by 2027. See [Interpretability](/ai-engineering/interpretability.md) for the full scientific background.
 
 ## Fable 5 launch controversy: export controls and AI sovereignty (June 2026)
 
@@ -130,15 +130,15 @@ The Fable 5 launch in June 2026 triggered a two-part crisis that reshaped develo
 
 **AI sovereignty response.** Andrew Ng's analysis: "Once a nation issues a threat, or takes action, to limit other nations' access, other nations will rationally try to secure alternatives." Nations that had relied on U.S. AI infrastructure are now accelerating domestic open-source model investment — the same pattern as China's semiconductor push after U.S. chip restrictions [^src11]. Sam Altman's commentary on Anthropic's safety-first positioning: "It is clearly incredible marketing to say, 'We have built a bomb, we are about to drop it on your head. We will sell you a bomb shelter for $100 million.'" [^src11]
 
-**Mandatory 30-day data retention.** Fable 5 introduced mandatory 30-day retention for all usage (for misuse detection, not training). This is not configurable per-request, is incompatible with ZDR (zero data retention) arrangements, and added to developer concerns about supply-chain stability [^src11]. See [[ai-engineering/claude-models|Claude Model Lineup]] for the per-model API implications.
+**Mandatory 30-day data retention.** Fable 5 introduced mandatory 30-day retention for all usage (for misuse detection, not training). This is not configurable per-request, is incompatible with ZDR (zero data retention) arrangements, and added to developer concerns about supply-chain stability [^src11]. See [Claude Model Lineup](/ai-engineering/claude-models.md) for the per-model API implications.
 
 ## Claude Platform for AI agents
 
-Anthropic markets Claude as the model to build production AI agents on, claiming Claude **outperforms other models in agent scenarios from customer support to coding** and earns top ratings for honesty, jailbreak resistance, and brand safety [^src12]. The **Claude Platform** is the developer surface: integrate Claude into existing applications to ship production-grade agents faster, build agents and workflows on the API, and **test and refine prompts in the Workbench** [^src12]. [[ai-engineering/claude-code|Claude Code]] is positioned as the agentic coding tool in this lineup — developers delegate tasks from migrations to bug fixes directly from the terminal [^src12]. See [[ai-engineering/claude-api|Claude API]], [[ai-engineering/ai-agent|AI Agent]], and [[ai-engineering/agent-security|Agent Security]] (brand-safety / jailbreak resistance). The solutions page is published in many localized variants (en/de/fr/it/ko/ja) with identical content [^src12].
+Anthropic markets Claude as the model to build production AI agents on, claiming Claude **outperforms other models in agent scenarios from customer support to coding** and earns top ratings for honesty, jailbreak resistance, and brand safety [^src12]. The **Claude Platform** is the developer surface: integrate Claude into existing applications to ship production-grade agents faster, build agents and workflows on the API, and **test and refine prompts in the Workbench** [^src12]. [Claude Code](/ai-engineering/claude-code.md) is positioned as the agentic coding tool in this lineup — developers delegate tasks from migrations to bug fixes directly from the terminal [^src12]. See [Claude API](/ai-engineering/claude-api.md), [AI Agent](/ai-engineering/ai-agent.md), and [Agent Security](/ai-engineering/agent-security.md) (brand-safety / jailbreak resistance). The solutions page is published in many localized variants (en/de/fr/it/ko/ja) with identical content [^src12].
 
 ## Claude for Education
 
-Anthropic markets **Claude for Education** as a comprehensive, institution-wide offering for students, faculty, and staff, built on its safety commitments so universities can adopt AI while preserving academic integrity [^src13]. Its framing is "built to strengthen thinking, not replace it" — a thinking partner, not an answer machine [^src13]. The flagship feature is **learning mode**, which functions like a tutor: rather than handing over answers it asks Socratic questions to guide students to find answers themselves, emphasizing principles over solutions and conceptual depth over convenient shortcuts, and ships templates for research and study guides [^src13]. For coding, **[[ai-engineering/claude-code|Claude Code]] is positioned as an "apprenticeship at scale"** — pairing with students in the development environment to show how professional programmers reason about real problems, on the premise that students across all disciplines need coding fundamentals [^src13]. For research, faculty use the **[[ai-engineering/claude-api|Claude API]]** to accelerate work (analyzing datasets, investigating theoretical questions, processing large volumes of text) and to build adaptive learning tools on the same API [^src13]. Anthropic frames its responsible-AI-in-education stance around equitable access, privacy/security (training on customer data only with permission), and transparency about what Claude can and cannot do [^src13]. This is the product/pedagogy layer above the institutional **Education** subscription tier on [[ai-engineering/claude-plans|Claude Plans & Pricing]].
+Anthropic markets **Claude for Education** as a comprehensive, institution-wide offering for students, faculty, and staff, built on its safety commitments so universities can adopt AI while preserving academic integrity [^src13]. Its framing is "built to strengthen thinking, not replace it" — a thinking partner, not an answer machine [^src13]. The flagship feature is **learning mode**, which functions like a tutor: rather than handing over answers it asks Socratic questions to guide students to find answers themselves, emphasizing principles over solutions and conceptual depth over convenient shortcuts, and ships templates for research and study guides [^src13]. For coding, **[Claude Code](/ai-engineering/claude-code.md) is positioned as an "apprenticeship at scale"** — pairing with students in the development environment to show how professional programmers reason about real problems, on the premise that students across all disciplines need coding fundamentals [^src13]. For research, faculty use the **[Claude API](/ai-engineering/claude-api.md)** to accelerate work (analyzing datasets, investigating theoretical questions, processing large volumes of text) and to build adaptive learning tools on the same API [^src13]. Anthropic frames its responsible-AI-in-education stance around equitable access, privacy/security (training on customer data only with permission), and transparency about what Claude can and cannot do [^src13]. This is the product/pedagogy layer above the institutional **Education** subscription tier on [Claude Plans & Pricing](/ai-engineering/claude-plans.md).
 
 ## Enterprise customer roster (June 2026)
 
@@ -150,13 +150,13 @@ Established enterprise clients also listed on the customers page [^src15]: Postm
 
 ## See also
 
-- [[ai-engineering/claude-models|Claude Model Lineup]] — the Claude model family (Haiku → Sonnet → Opus → Fable/Mythos), specs, and per-model detail
-- [[ai-engineering/claude-plans|Claude Plans & Pricing]] — consumer/team subscription tiers (Free/Pro/Max/Team/Enterprise)
-- [[ai-engineering/claude-code|Claude Code]] — Anthropic's CLI coding agent
-- [[ai-engineering/claude-cowork|Claude Cowork]] — desktop product for non-developers
-- [[ai-engineering/interpretability|Interpretability]] — mechanistic interpretability research program
-- [[ai-engineering/agent-security|Agent Security]] — Project Glasswing, Claude Security product
-- [[ai-engineering/llm|LLM]], [[ai-engineering/claude-api|Claude API]]
+- [Claude Model Lineup](/ai-engineering/claude-models.md) — the Claude model family (Haiku → Sonnet → Opus → Fable/Mythos), specs, and per-model detail
+- [Claude Plans & Pricing](/ai-engineering/claude-plans.md) — consumer/team subscription tiers (Free/Pro/Max/Team/Enterprise)
+- [Claude Code](/ai-engineering/claude-code.md) — Anthropic's CLI coding agent
+- [Claude Cowork](/ai-engineering/claude-cowork.md) — desktop product for non-developers
+- [Interpretability](/ai-engineering/interpretability.md) — mechanistic interpretability research program
+- [Agent Security](/ai-engineering/agent-security.md) — Project Glasswing, Claude Security product
+- [LLM](/ai-engineering/llm.md), [Claude API](/ai-engineering/claude-api.md)
 
 [^src1]: [Anthropic (YouTube footer stub)](../../raw/web/anthropic.md)
 [^src2]: [Claude 101](../../raw/web/claude-101.md)

@@ -30,7 +30,7 @@ Redshift initially used a **share-nothing** architecture (data lived on the comp
 
 A Redshift cluster has a single **coordinator (leader) node** plus multiple **worker nodes**; with RMS the data is offloaded to S3, making compute nodes stateless [^src1]. To know which worker owns which subset, Redshift **partitions the table's data into buckets** distributed across workers, by an engine-chosen scheme or a user-declared one (round-robin or hash) [^src1].
 
-Like [[data-engineering/snowflake|Snowflake]], Redshift **caches data on each worker's local SSD** to speed queries, via a **two-level tiered cache**: a low level for cold blocks (reference count incremented on each access) and a high level for hot blocks promoted after repeated access; eviction decrements counts until a block drops to the low level or is evicted [^src1].
+Like [Snowflake](/data-engineering/snowflake.md), Redshift **caches data on each worker's local SSD** to speed queries, via a **two-level tiered cache**: a low level for cold blocks (reference count incremented on each access) and a high level for hot blocks promoted after repeated access; eviction decrements counts until a block drops to the low level or is evicted [^src1].
 
 ## Compute: code specialization, not vectorization
 
@@ -47,11 +47,11 @@ Unlike BigQuery, Snowflake, and Databricks (which use a **hybrid** format), Reds
 
 ## Related
 
-- [[data-engineering/cloud-data-warehouse-internals|Cloud Data Warehouse Internals]] — the cross-warehouse comparison this page feeds
-- [[data-engineering/snowflake|Snowflake]] · [[data-engineering/bigquery|BigQuery]] · [[data-engineering/databricks|Databricks]] — the other three cloud warehouses
-- [[data-engineering/postgres|PostgreSQL]] — Redshift forked from PostgreSQL 8.0.2
-- [[data-engineering/storage-fundamentals|Storage Fundamentals]] — column vs hybrid format; vectorization vs code specialization
-- [[data-engineering/README|Data Engineering hub]]
+- [Cloud Data Warehouse Internals](/data-engineering/cloud-data-warehouse-internals.md) — the cross-warehouse comparison this page feeds
+- [Snowflake](/data-engineering/snowflake.md) · [BigQuery](/data-engineering/bigquery.md) · [Databricks](/data-engineering/databricks.md) — the other three cloud warehouses
+- [PostgreSQL](/data-engineering/postgres.md) — Redshift forked from PostgreSQL 8.0.2
+- [Storage Fundamentals](/data-engineering/storage-fundamentals.md) — column vs hybrid format; vectorization vs code specialization
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

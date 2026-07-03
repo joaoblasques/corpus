@@ -55,6 +55,6 @@ The paper and live accounts use identical API credentials format and identical e
 
 "Start with paper trading first if you're not comfortable. This is not financial advice." [^src1]
 
-Related: [[trading/ai-trading-agents|AI Trading Agents]], [[trading/tradingview-pine-script|TradingView & Pine Script]]
+Related: [AI Trading Agents](/trading/ai-trading-agents.md), [TradingView & Pine Script](/trading/tradingview-pine-script.md)
 
 [^src1]: [I Turned Claude Into a 24/7 Trader](../../raw/youtube/youtube-6MC1XqZSltw-i-turned-claude-into-a-24-7-trader.md)

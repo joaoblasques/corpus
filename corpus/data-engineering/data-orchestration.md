@@ -55,7 +55,7 @@ Heuristic: if you only need "run this one script every day" with no inter-task d
 
 ### Airflow alternatives
 
-Airflow is the most common orchestrator, but two alternatives recur for batch scheduling [^src4]: **Dagster** brings type safety and **asset-driven** design (easier dependency management and testing), and **Prefect** focuses on simplicity and observability with a Python-native interface for small-to-mid-scale jobs [^src4]. Managed/declarative orchestrators also exist — see [[data-engineering/orchestra|Orchestra]] (UI-first, fully managed integrations).
+Airflow is the most common orchestrator, but two alternatives recur for batch scheduling [^src4]: **Dagster** brings type safety and **asset-driven** design (easier dependency management and testing), and **Prefect** focuses on simplicity and observability with a Python-native interface for small-to-mid-scale jobs [^src4]. Managed/declarative orchestrators also exist — see [Orchestra](/data-engineering/orchestra.md) (UI-first, fully managed integrations).
 
 ## How Airflow implements each concern
 
@@ -82,7 +82,7 @@ All run information is stored in a metadata DB and as logs, giving current + his
 
 ## Relation to dbt
 
-Orchestration is a *different layer* from transformation: an orchestrator schedules and sequences pipeline steps (including invoking [[data-engineering/dbt|dbt]] runs), while dbt handles the in-warehouse "T". Note dbt and Elementary also offer **data observability** at the dataset/quality level — distinct from the pipeline-execution observability an orchestrator provides. See [[data-engineering/dbt|dbt]].
+Orchestration is a *different layer* from transformation: an orchestrator schedules and sequences pipeline steps (including invoking [dbt](/data-engineering/dbt.md) runs), while dbt handles the in-warehouse "T". Note dbt and Elementary also offer **data observability** at the dataset/quality level — distinct from the pipeline-execution observability an orchestrator provides. See [dbt](/data-engineering/dbt.md).
 
 ## Kestra: event-driven workflow orchestration
 
@@ -127,15 +127,15 @@ docker-compose up -d
 # UI accessible at localhost:8080
 ```
 
-See [[data-engineering/sources/data-engineering-zoomcamp|Data Engineering Zoomcamp]] where Kestra is used as the orchestration layer.
+See [Data Engineering Zoomcamp](/data-engineering/sources/data-engineering-zoomcamp.md) where Kestra is used as the orchestration layer.
 
 ## See also
 
-- [[data-engineering/dbt|dbt]] — transformation layer typically invoked by an orchestrated task
-- [[data-engineering/orchestra|Orchestra]] — managed, declarative, UI-first orchestrator alternative
-- [[data-engineering/idempotent-pipelines|Idempotent Pipelines]] — a precondition for safe retries/backfills
-- [[data-engineering/pipeline-layers|Pipeline Layers]]
-- [[data-engineering/README|Data Engineering hub]]
+- [dbt](/data-engineering/dbt.md) — transformation layer typically invoked by an orchestrated task
+- [Orchestra](/data-engineering/orchestra.md) — managed, declarative, UI-first orchestrator alternative
+- [Idempotent Pipelines](/data-engineering/idempotent-pipelines.md) — a precondition for safe retries/backfills
+- [Pipeline Layers](/data-engineering/pipeline-layers.md)
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

@@ -52,7 +52,7 @@ The email is primarily a *future-of-work* essay, not a technical account of AGI 
 - The author argues the durable value is the human, relationship-and-judgment dimension: he keeps paying a lawyer who drafts contracts and flags risks because the job is more than drafting, which AI could do [^src1].
 - Hassabis is quoted reflecting that perhaps humans were not meant to watch screens so much, and that AI might push people to be more human [^src1].
 
-> The career/economic dimension is filed under [[ai-business/ai-and-the-job-market|AI and the Job Market]]; this page records AGI as a concept and the cited timeline.
+> The career/economic dimension is filed under [AI and the Job Market](/ai-business/ai-and-the-job-market.md); this page records AGI as a concept and the cited timeline.
 
 ## Note on sourcing
 
@@ -61,9 +61,9 @@ The email is primarily a *future-of-work* essay, not a technical account of AGI 
 
 ## See also
 
-- [[ai-engineering/ai-fundamentals|AI Fundamentals]] — types and history of AI
-- [[ai-business/ai-and-the-job-market|AI and the Job Market]] — the future-of-work argument
-- [[ai-engineering/README|AI Engineering hub]]
+- [AI Fundamentals](/ai-engineering/ai-fundamentals.md) — types and history of AI
+- [AI and the Job Market](/ai-business/ai-and-the-job-market.md) — the future-of-work argument
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

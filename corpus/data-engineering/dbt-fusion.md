@@ -66,9 +66,9 @@ The dbt v2 migration path runs *through* Fusion — Fusion provides the deeper S
 
 ## See also
 
-- [[data-engineering/dbt|dbt]] — the transformation framework Fusion powers
-- [[data-engineering/apache-spark|Apache Spark]] — Fusion's state-aware orchestration reduces the "recompute everything" default that plagues Spark-based pipelines
-- [[data-engineering/data-quality|Data Quality]] — Fusion enables tighter CI/CD quality gates by surfacing column-level lineage
+- [dbt](/data-engineering/dbt.md) — the transformation framework Fusion powers
+- [Apache Spark](/data-engineering/apache-spark.md) — Fusion's state-aware orchestration reduces the "recompute everything" default that plagues Spark-based pipelines
+- [Data Quality](/data-engineering/data-quality.md) — Fusion enables tighter CI/CD quality gates by surfacing column-level lineage
 
 ---
 

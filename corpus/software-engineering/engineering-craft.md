@@ -84,7 +84,7 @@ The panel's strongest craft contribution is treating the agent itself as a learn
 
 > "I treat all of those as an adversarial mentor." [^src3]
 
-This is the craft-side complement to the deterministic guardrails and write→review shift in [[software-engineering/ai-assisted-development|AI-Assisted Development]]; the named failure mode that makes these habits necessary — letting the agent think for you — is [[software-engineering/cognitive-debt|Cognitive Debt and Cognitive Surrender]].
+This is the craft-side complement to the deterministic guardrails and write→review shift in [AI-Assisted Development](/software-engineering/ai-assisted-development.md); the named failure mode that makes these habits necessary — letting the agent think for you — is [Cognitive Debt and Cognitive Surrender](/software-engineering/cognitive-debt.md).
 
 ## AI as equalizer, not differentiator
 
@@ -111,14 +111,14 @@ Key lessons from the interview:
 
 ## Career leveling and ownership (Orosz)
 
-The Software Engineer's Guidebook by Gergely Orosz (Pragmatic Engineer) frames career growth as the engineer's responsibility to own, not the manager's job to deliver [^src4]. Key observations: at Big Tech (Google L5, Meta E5), senior expectations are noticeably higher than at lower-tier companies — "it's not always those who work hardest or deliver the highest quality work who are awarded the biggest promotions" [^src4]. The book's structure mirrors the maturity ladder: competent developer → well-rounded senior → pragmatic tech lead → staff/principal. See [[software-engineering/sources/software-engineers-guidebook|The Software Engineer's Guidebook]] for the full source summary.
+The Software Engineer's Guidebook by Gergely Orosz (Pragmatic Engineer) frames career growth as the engineer's responsibility to own, not the manager's job to deliver [^src4]. Key observations: at Big Tech (Google L5, Meta E5), senior expectations are noticeably higher than at lower-tier companies — "it's not always those who work hardest or deliver the highest quality work who are awarded the biggest promotions" [^src4]. The book's structure mirrors the maturity ladder: competent developer → well-rounded senior → pragmatic tech lead → staff/principal. See [The Software Engineer's Guidebook](/software-engineering/sources/software-engineers-guidebook.md) for the full source summary.
 
 ## See also
 
-- [[software-engineering/ai-assisted-development|AI-Assisted Development]] — why fundamentals and human judgment matter more, not less, under AI
-- [[software-engineering/cognitive-debt|Cognitive Debt and Cognitive Surrender]] — the erosion-of-understanding failure mode these learning loops guard against
-- [[software-engineering/sources/software-engineers-guidebook|The Software Engineer's Guidebook]] — Orosz's full career arc reference
-- [[software-engineering/README|Software Engineering hub]]
+- [AI-Assisted Development](/software-engineering/ai-assisted-development.md) — why fundamentals and human judgment matter more, not less, under AI
+- [Cognitive Debt and Cognitive Surrender](/software-engineering/cognitive-debt.md) — the erosion-of-understanding failure mode these learning loops guard against
+- [The Software Engineer's Guidebook](/software-engineering/sources/software-engineers-guidebook.md) — Orosz's full career arc reference
+- [Software Engineering hub](/software-engineering/README.md)
 
 ---
 

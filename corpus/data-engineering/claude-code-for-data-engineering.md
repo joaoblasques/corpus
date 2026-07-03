@@ -46,7 +46,7 @@ updated: 2026-06-17
 
 # Claude Code for Data Engineering
 
-**TL;DR**: AI coding agents (Claude Code) can automate the most mechanical parts of analytics engineering — scaffolding a new [[data-engineering/dbt|dbt]] project, and translating business requirements through a **PRD → database exploration → ERD → dbt models** workflow [^src1][^src2]. The leverage comes from making conventions explicit (via `CLAUDE.md`, custom Skills) and giving the agent **exploration tools** (warehouse/BI MCP servers) rather than asking it to guess from YAML alone [^src1]. This is a data-engineering-primary topic that overlaps the **ai-engineering** domain (agentic coding, Skills, MCP).
+**TL;DR**: AI coding agents (Claude Code) can automate the most mechanical parts of analytics engineering — scaffolding a new [dbt](/data-engineering/dbt.md) project, and translating business requirements through a **PRD → database exploration → ERD → dbt models** workflow [^src1][^src2]. The leverage comes from making conventions explicit (via `CLAUDE.md`, custom Skills) and giving the agent **exploration tools** (warehouse/BI MCP servers) rather than asking it to guess from YAML alone [^src1]. This is a data-engineering-primary topic that overlaps the **ai-engineering** domain (agentic coding, Skills, MCP).
 
 ## Two complementary patterns
 
@@ -101,9 +101,9 @@ Building new models is the easy part; the harder problem is an existing dbt proj
 
 ## Exposure enrichment / BI lineage
 
-A third, closely related application: using Claude Code to enrich [[data-engineering/dbt|dbt]] **exposures** so they form a lean data catalog with end-to-end model → dashboard → card/column lineage — without a dedicated metadata platform. See [[data-engineering/dbt|dbt]] § Exposures and lineage for the detailed workflow (Metabase MCP discovery loop, impact analysis).
+A third, closely related application: using Claude Code to enrich [dbt](/data-engineering/dbt.md) **exposures** so they form a lean data catalog with end-to-end model → dashboard → card/column lineage — without a dedicated metadata platform. See [dbt](/data-engineering/dbt.md) § Exposures and lineage for the detailed workflow (Metabase MCP discovery loop, impact analysis).
 
-The concrete mechanism: a `/metadata-exposure-enrichment` skill queries Metabase dashboards via the **Metabase MCP** (`nao-metabase-mcp-server`), discovers cards and column references, cross-references them to dbt models, audits `_exposures.yml` for gaps, and writes enriched metadata back [^src5]. In the showcase run against a dashboard (ID=2), the skill auto-discovered 6 cards, parsed each card's MBQL query to identify source tables and columns, resolved Metabase internal table IDs to real names, cross-referenced tables to dbt `ref()`/`source()`, found 5 gaps (missing description, owner, maturity, card documentation, and a missing source dependency), and wrote the enriched YAML — using **Metabase MCP + Postgres MCP only, no OpenMetadata dependency** [^src5]. This is the catalog-free counterpart to the OpenMetadata-based [[data-engineering/agentic-data-modeling|agentic data modeling]] stack.
+The concrete mechanism: a `/metadata-exposure-enrichment` skill queries Metabase dashboards via the **Metabase MCP** (`nao-metabase-mcp-server`), discovers cards and column references, cross-references them to dbt models, audits `_exposures.yml` for gaps, and writes enriched metadata back [^src5]. In the showcase run against a dashboard (ID=2), the skill auto-discovered 6 cards, parsed each card's MBQL query to identify source tables and columns, resolved Metabase internal table IDs to real names, cross-referenced tables to dbt `ref()`/`source()`, found 5 gaps (missing description, owner, maturity, card documentation, and a missing source dependency), and wrote the enriched YAML — using **Metabase MCP + Postgres MCP only, no OpenMetadata dependency** [^src5]. This is the catalog-free counterpart to the OpenMetadata-based [agentic data modeling](/data-engineering/agentic-data-modeling.md) stack.
 
 ## Anthropic's own self-service analytics
 
@@ -155,7 +155,7 @@ A practitioner evaluation of Claude Code building a dbt project from scratch, us
 
 > Moffatt's advice on context: the quality of output depended heavily on the dbt-agent-skills (from dbt Labs) provided in the prompt — Sonnet 4.5 with good skills produced respectable results; Opus 4.6 without skills was inconsistent. This directly supports the Anthropic analytics team's finding that *"without skills, accuracy didn't exceed 21%"* [^src6].
 
-See [[data-engineering/dbt|dbt]] for the building-a-dbt-project-with-Claude-Code overview and [[data-engineering/ai-impact-on-data-engineering|AI's Impact on Data Engineering]] for the role-level framing.
+See [dbt](/data-engineering/dbt.md) for the building-a-dbt-project-with-Claude-Code overview and [AI's Impact on Data Engineering](/data-engineering/ai-impact-on-data-engineering.md) for the role-level framing.
 
 ## Cross-domain note
 
@@ -163,11 +163,11 @@ This page lives in **data-engineering** because the deliverable is dbt models an
 
 ## See also
 
-- [[data-engineering/agentic-data-modeling|Agentic Data Modeling]] — AI agents for schema design and impact analysis (OpenMetadata MCP, SchemaFlow, pg_infer)
-- [[data-engineering/dbt|dbt]] — the transformation framework these workflows target; exposure enrichment detail
-- [[data-engineering/dimensional-modeling|Dimensional Modeling]] — the modeling output (grain, dimensions, facts)
-- [[ai-engineering/agent-skills|Agent Skills]] · [[ai-engineering/mcp|MCP]] — the underlying ai-engineering primitives
-- [[data-engineering/README|Data Engineering hub]]
+- [Agentic Data Modeling](/data-engineering/agentic-data-modeling.md) — AI agents for schema design and impact analysis (OpenMetadata MCP, SchemaFlow, pg_infer)
+- [dbt](/data-engineering/dbt.md) — the transformation framework these workflows target; exposure enrichment detail
+- [Dimensional Modeling](/data-engineering/dimensional-modeling.md) — the modeling output (grain, dimensions, facts)
+- [Agent Skills](/ai-engineering/agent-skills.md) · [MCP](/ai-engineering/mcp.md) — the underlying ai-engineering primitives
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

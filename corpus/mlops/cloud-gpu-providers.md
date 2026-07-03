@@ -22,7 +22,7 @@ updated: 2026-06-09
 
 # Cloud GPU Providers
 
-**TL;DR**: When local hardware lacks a usable GPU (see [[mlops/gpu-and-vram|GPU & VRAM]]), compute moves to the cloud. Google Colab (free T4) is the zero-setup default for early work; cost and reliability needs escalate you to RunPod, Lambda, or Vast.ai as workloads grow [^src1].
+**TL;DR**: When local hardware lacks a usable GPU (see [GPU & VRAM](/mlops/gpu-and-vram.md)), compute moves to the cloud. Google Colab (free T4) is the zero-setup default for early work; cost and reliability needs escalate you to RunPod, Lambda, or Vast.ai as workloads grow [^src1].
 
 ## Provider comparison (May 2026 snapshot)
 
@@ -49,8 +49,8 @@ The trade-off axis: **reliability (Lambda) vs cost (Vast.ai)**, with Colab/RunPo
 
 ## See also
 
-- [[mlops/gpu-and-vram|GPU & VRAM]] — the VRAM math that sizes which tier you need
-- [[mlops/README|MLOps hub]]
+- [GPU & VRAM](/mlops/gpu-and-vram.md) — the VRAM math that sizes which tier you need
+- [MLOps hub](/mlops/README.md)
 
 ---
 

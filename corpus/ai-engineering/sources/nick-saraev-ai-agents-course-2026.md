@@ -39,7 +39,7 @@ A multi-model architecture where Claude Code acts as orchestrator and other mode
 | **UI/frontend worker** | Gemini | Best for frontend/multimodal tasks |
 | **Backend/TDD worker** | GPT/Codex (OpenAI) | Best for backend code + TDD workflows |
 
-Each worker has its own MCP connection; Claude routes tasks by observing capability fit. This is a concrete instantiation of the [[ai-engineering/multi-agent-systems|orchestrator-subagent]] pattern [^src1].
+Each worker has its own MCP connection; Claude routes tasks by observing capability fit. This is a concrete instantiation of the [orchestrator-subagent](/ai-engineering/multi-agent-systems.md) pattern [^src1].
 
 ## Self-modifying agent instructions (AGENTS.md / CLAUDE.md / GEMINI.md)
 
@@ -51,7 +51,7 @@ Agents can extend their own instruction files as they learn from corrections [^s
 
 This creates a **compounding preference loop**: each correction makes the agent better at this person's specific workflows. Over time the instruction file becomes a rich behavioral profile [^src1].
 
-Different platforms have different convention files: Claude reads `CLAUDE.md`, Gemini reads `GEMINI.md`, Codex reads `AGENTS.md`. In a multi-model setup, each model reads its own file [^src1]. See [[ai-engineering/claude-md-conventions|CLAUDE.md Conventions]].
+Different platforms have different convention files: Claude reads `CLAUDE.md`, Gemini reads `GEMINI.md`, Codex reads `AGENTS.md`. In a multi-model setup, each model reads its own file [^src1]. See [CLAUDE.md Conventions](/ai-engineering/claude-md-conventions.md).
 
 ## Advanced patterns (mentioned in outline)
 
@@ -62,13 +62,13 @@ Different platforms have different convention files: Claude reads `CLAUDE.md`, G
 
 ## Pages populated
 
-- [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] — MCP orchestration, platform comparison, self-modifying AGENTS.md
-- [[ai-engineering/ai-agent|AI Agent]] — core loop (observe→think→act)
-- [[ai-engineering/claude-md-conventions|CLAUDE.md Conventions]] — per-platform instruction files
+- [Multi-Agent Systems](/ai-engineering/multi-agent-systems.md) — MCP orchestration, platform comparison, self-modifying AGENTS.md
+- [AI Agent](/ai-engineering/ai-agent.md) — core loop (observe→think→act)
+- [CLAUDE.md Conventions](/ai-engineering/claude-md-conventions.md) — per-platform instruction files
 
 ## Related sources
 
-- [[ai-engineering/sources/marina-wyss-ai-agents-course|Marina Wyss — AI Agents in 38 Minutes]] — companion 2026 agent course; Wyss's ReAct loop ≈ Saraev's observe→think→act, but Wyss goes deeper on autonomy spectrum, the complexity×precision use-case matrix, guardrails, and evaluation
+- [Marina Wyss — AI Agents in 38 Minutes](/ai-engineering/sources/marina-wyss-ai-agents-course.md) — companion 2026 agent course; Wyss's ReAct loop ≈ Saraev's observe→think→act, but Wyss goes deeper on autonomy spectrum, the complexity×precision use-case matrix, guardrails, and evaluation
 
 ---
 

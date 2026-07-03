@@ -44,9 +44,9 @@ Established standard reference for hands-on ML fundamentals. The 3rd edition upd
 
 ## See also
 
-- [[mlops/made-with-ml|Made With ML]] — alternative production-focused ML course (GokuMohandas); focus on deploy + iterate vs. this repo's fundamentals
-- [[mlops/mlops-principles|MLOps Principles]] — the engineering discipline on top of the ML fundamentals covered here
-- [[mlops/README|MLOps hub]]
+- [Made With ML](/mlops/made-with-ml.md) — alternative production-focused ML course (GokuMohandas); focus on deploy + iterate vs. this repo's fundamentals
+- [MLOps Principles](/mlops/mlops-principles.md) — the engineering discipline on top of the ML fundamentals covered here
+- [MLOps hub](/mlops/README.md)
 
 ---
 

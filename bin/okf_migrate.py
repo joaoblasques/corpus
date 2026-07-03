@@ -11,9 +11,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 BUNDLE = ROOT / "corpus"
 
-_WIKILINK = re.compile(r"\[\[([^\]|]+?)(?:\|([^\]]+?))?\]\]")
+_WIKILINK = re.compile(r"\[\[([^\]|]+?)(?:\|([^\]]+(?:\][^\]]+)*))?\]\]")
 _FENCE = re.compile(r"```.*?```", re.S)
-_LOG_ENTRY = re.compile(r"^## \[(\d{4}-\d{2}-\d{2})[^\]]*\]\s*(\w+)\s*\|\s*(.+)$")
+_LOG_ENTRY = re.compile(r"^## \[(\d{4}-\d{2}-\d{2})[^\]]*\]\s*([^|]+?)\s*\|\s*(.+)$")
 
 
 def _titlecase(seg: str) -> str:
@@ -90,3 +90,87 @@ def ensure_type(text: str, type_value: str) -> str:
     if re.search(r"^type:", fm, re.M):
         return text
     return f"---\ntype: {type_value}\n{fm}\n---\n{body}"
+
+
+def _resolver(bundle: Path):
+    """Map a bare page slug -> 'domain/slug' by scanning the tree once."""
+    index: dict[str, str] = {}
+    for p in bundle.rglob("*.md"):
+        if p.name in ("_index.md", "_log.md", "_config.md", "_domains.md", "index.md", "log.md"):
+            continue
+        rel = p.relative_to(bundle).with_suffix("").as_posix()
+        index.setdefault(p.stem, rel)  # first wins; ambiguous slugs stay first-seen
+    return lambda slug: index.get(slug)
+
+
+def migrate_bundle(bundle: Path, dry_run: bool = False) -> dict:
+    resolve = _resolver(bundle)
+    files = links = 0
+    unresolved: list[str] = []
+    renamed: list[str] = []
+
+    def _write(path: Path, text: str):
+        if not dry_run:
+            path.write_text(text, encoding="utf-8")
+
+    # concept docs: rewrite wikilinks
+    for p in sorted(bundle.rglob("*.md")):
+        if p.name in ("_index.md", "_log.md", "index.md", "log.md"):
+            continue
+        original = p.read_text(encoding="utf-8", errors="replace")
+        text = original
+        if p.name == "_domains.md":
+            text = ensure_type(text, "domain-registry")
+        elif p.name.startswith("_") and p.parent == bundle:
+            # Other root internal files (e.g. _about.md, _digest.md, _review_queue.md)
+            text = ensure_type(text, "internal")
+        new, un = rewrite_wikilinks(text, resolve)
+        links += original.count("[[")
+        unresolved += un
+        if new != original:
+            files += 1
+            _write(p, new)
+
+    # reserved catalog
+    idx = bundle / "_index.md"
+    if idx.exists():
+        raw_idx = idx.read_text(encoding="utf-8")
+        links += raw_idx.count("[[")
+        text = stamp_index(raw_idx)
+        text, un = rewrite_wikilinks(text, resolve)
+        unresolved += un
+        if not dry_run:
+            (bundle / "index.md").write_text(text, encoding="utf-8")
+            idx.unlink()
+        renamed.append("_index.md->index.md")
+
+    # reserved log
+    lg = bundle / "_log.md"
+    if lg.exists():
+        text = reformat_log(lg.read_text(encoding="utf-8"))
+        text, un = rewrite_wikilinks(text, resolve)
+        unresolved += un
+        if not dry_run:
+            (bundle / "log.md").write_text(text, encoding="utf-8")
+            lg.unlink()
+        renamed.append("_log.md->log.md")
+
+    return {"files": files, "links": links, "unresolved": sorted(set(unresolved)),
+            "renamed": renamed}
+
+
+def main(argv=None) -> int:
+    import argparse
+    import json
+    ap = argparse.ArgumentParser(description="Migrate corpus/ to OKF v0.1.")
+    ap.add_argument("--dry-run", action="store_true")
+    args = ap.parse_args(argv)
+    r = migrate_bundle(BUNDLE, dry_run=args.dry_run)
+    r["unresolved_count"] = len(r["unresolved"])
+    r["unresolved"] = r["unresolved"][:40]
+    print(json.dumps({**r, "dry_run": args.dry_run}, indent=2))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

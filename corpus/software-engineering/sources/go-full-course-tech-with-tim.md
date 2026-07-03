@@ -42,13 +42,13 @@ On channels, the course demonstrates that receiving from a channel "is a blockin
 
 ## Relationship to the corpus
 
-This source corroborates and extends [[software-engineering/go-programming-language|Go Programming Language]] — particularly the static-typing, compiled-binary, error-as-return-type, and goroutine claims already on that page. It is the deepest single-source treatment of Go's **concurrency** model in the corpus to date (channels + blocking semantics).
+This source corroborates and extends [Go Programming Language](/software-engineering/go-programming-language.md) — particularly the static-typing, compiled-binary, error-as-return-type, and goroutine claims already on that page. It is the deepest single-source treatment of Go's **concurrency** model in the corpus to date (channels + blocking semantics).
 
 ## See also
 
-- [[software-engineering/go-programming-language|Go Programming Language]] — the concept page this source feeds
-- [[software-engineering/sources/go-course-boot-dev|Go Course with Bonus Projects (boot.dev)]] — the project-driven counterpart course
-- [[software-engineering/javascript-fundamentals|JavaScript Fundamentals]] — the first language in the same curriculum
+- [Go Programming Language](/software-engineering/go-programming-language.md) — the concept page this source feeds
+- [Go Course with Bonus Projects (boot.dev)](/software-engineering/sources/go-course-boot-dev.md) — the project-driven counterpart course
+- [JavaScript Fundamentals](/software-engineering/javascript-fundamentals.md) — the first language in the same curriculum
 
 ---
 

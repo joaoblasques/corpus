@@ -21,7 +21,7 @@ updated: 2026-06-16
 
 # ingestr
 
-**TL;DR.** `ingestr` (by Bruin) is a **CLI ELT tool that copies data from any source into any destination using simple command-line flags — no code, no backend** [^src1]. Single-command install; broad connector coverage (databases + SaaS platforms) and incremental loading [^src1]. Positioned as the lightweight "EL" of the modern stack — move data with one command, then transform with [[data-engineering/dbt|dbt]] [^src2].
+**TL;DR.** `ingestr` (by Bruin) is a **CLI ELT tool that copies data from any source into any destination using simple command-line flags — no code, no backend** [^src1]. Single-command install; broad connector coverage (databases + SaaS platforms) and incremental loading [^src1]. Positioned as the lightweight "EL" of the modern stack — move data with one command, then transform with [dbt](/data-engineering/dbt.md) [^src2].
 
 ## What it does
 
@@ -40,7 +40,7 @@ ingestr ingest \
 
 ## Connectors
 
-Databases (source ↔ dest): Athena, Redshift, ClickHouse, Databricks, [[data-engineering/duckdb|DuckDB]], BigQuery, [[data-engineering/postgres|Postgres]], MySQL, SQL Server, MongoDB, Snowflake, SQLite, Trino, MotherDuck, plus [[data-engineering/kafka|Kafka]] (source) [^src1]. Platforms (source-only): Stripe, HubSpot, Salesforce, GitHub, Notion, Google Ads/Analytics/Sheets, Shopify, Slack, Zendesk, and dozens more [^src1].
+Databases (source ↔ dest): Athena, Redshift, ClickHouse, Databricks, [DuckDB](/data-engineering/duckdb.md), BigQuery, [Postgres](/data-engineering/postgres.md), MySQL, SQL Server, MongoDB, Snowflake, SQLite, Trino, MotherDuck, plus [Kafka](/data-engineering/kafka.md) (source) [^src1]. Platforms (source-only): Stripe, HubSpot, Salesforce, GitHub, Notion, Google Ads/Analytics/Sheets, Shopify, Slack, Zendesk, and dozens more [^src1].
 
 ## Licensing
 
@@ -48,14 +48,14 @@ Source-available under the **Functional Source License 1.1** (free for internal 
 
 ## Where it fits
 
-ingestr is the **extract-and-load** stage feeding a warehouse/lake that [[data-engineering/dbt|dbt]] then transforms — the same EL→T separation in [[data-engineering/pipeline-layers|pipeline layers]]. Compare with full-load/incremental/CDC trade-offs in [[data-engineering/data-ingestion-patterns|data ingestion patterns]] and [[data-engineering/change-data-capture|CDC]].
+ingestr is the **extract-and-load** stage feeding a warehouse/lake that [dbt](/data-engineering/dbt.md) then transforms — the same EL→T separation in [pipeline layers](/data-engineering/pipeline-layers.md). Compare with full-load/incremental/CDC trade-offs in [data ingestion patterns](/data-engineering/data-ingestion-patterns.md) and [CDC](/data-engineering/change-data-capture.md).
 
 ## Related
 
-- [[data-engineering/data-ingestion-patterns|Data Ingestion Patterns]] · [[data-engineering/change-data-capture|Change Data Capture]]
-- [[data-engineering/dbt|dbt]] — the transform stage after EL
-- [[data-engineering/incremental-pipeline-design|Incremental Pipeline Design]]
-- [[data-engineering/README|Data Engineering hub]]
+- [Data Ingestion Patterns](/data-engineering/data-ingestion-patterns.md) · [Change Data Capture](/data-engineering/change-data-capture.md)
+- [dbt](/data-engineering/dbt.md) — the transform stage after EL
+- [Incremental Pipeline Design](/data-engineering/incremental-pipeline-design.md)
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

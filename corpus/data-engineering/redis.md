@@ -53,6 +53,6 @@ For purely search-driven workloads on dense data, a dedicated index via Redis Se
 
 ## Related corpus pages
 
-In the mondayDB architecture, Redis is used as a high-frequency write-cache WAL backend and for distributed locking / rate limiting — see [[data-engineering/mondaydb|mondayDB]].
+In the mondayDB architecture, Redis is used as a high-frequency write-cache WAL backend and for distributed locking / rate limiting — see [mondayDB](/data-engineering/mondaydb.md).
 
 [^src1]: [Diving deep into Redis's new array data type](../../raw/web/redis-array-data-type-how-it-works-and-when-to-use-it.md)

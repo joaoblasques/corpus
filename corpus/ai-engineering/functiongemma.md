@@ -20,7 +20,7 @@ updated: 2026-07-02
 
 # FunctionGemma
 
-**TL;DR.** FunctionGemma is a Google-released 270M-parameter variant of Gemma, purpose-built to be fine-tuned for task-specific tool calling rather than used as a direct dialogue model [^src2]. [[ai-engineering/lm-studio|LM Studio]] added native support for it in v0.3.36 [^src1], and LM Studio published a walkthrough for fine-tuning it with [[ai-engineering/unsloth|Unsloth]] and serving the result locally [^src2].
+**TL;DR.** FunctionGemma is a Google-released 270M-parameter variant of Gemma, purpose-built to be fine-tuned for task-specific tool calling rather than used as a direct dialogue model [^src2]. [LM Studio](/ai-engineering/lm-studio.md) added native support for it in v0.3.36 [^src1], and LM Studio published a walkthrough for fine-tuning it with [Unsloth](/ai-engineering/unsloth.md) and serving the result locally [^src2].
 
 ## Details
 
@@ -30,10 +30,10 @@ updated: 2026-07-02
 
 ## Related
 
-- [[ai-engineering/lm-studio|LM Studio]] — local app that added native support and published the fine-tuning walkthrough
-- [[ai-engineering/unsloth|Unsloth]] — fine-tuning toolkit used to specialize FunctionGemma
-- [[ai-engineering/diffusiongemma|DiffusionGemma]] — another Gemma-family variant (diffusion-based, unrelated architecture)
-- [[ai-engineering/README|AI Engineering hub]]
+- [LM Studio](/ai-engineering/lm-studio.md) — local app that added native support and published the fine-tuning walkthrough
+- [Unsloth](/ai-engineering/unsloth.md) — fine-tuning toolkit used to specialize FunctionGemma
+- [DiffusionGemma](/ai-engineering/diffusiongemma.md) — another Gemma-family variant (diffusion-based, unrelated architecture)
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

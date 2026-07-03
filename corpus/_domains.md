@@ -1,3 +1,6 @@
+---
+type: domain-registry
+---
 # Domains
 
 > The canonical list of active wiki domains. Maintained by Claude on every domain change (create / merge / split). Past decisions inform future routing.

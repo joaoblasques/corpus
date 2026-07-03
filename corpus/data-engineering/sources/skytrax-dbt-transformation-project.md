@@ -40,7 +40,7 @@ Repo: `MarkPhamm/skytrax_reviews_transformation` [^src1].
 
 ## Data model — Kimball star schema
 
-Built with the Kimball four-step process: business process (analyzing customer reviews) → grain (one review submitted) → dimensions (aircraft, customer, airline, date, location) → facts (`fct_reviews`) [^src1]. See [[data-engineering/dimensional-modeling|Dimensional Modeling]].
+Built with the Kimball four-step process: business process (analyzing customer reviews) → grain (one review submitted) → dimensions (aircraft, customer, airline, date, location) → facts (`fct_reviews`) [^src1]. See [Dimensional Modeling](/data-engineering/dimensional-modeling.md).
 
 The transformation follows the classic **staging → intermediate → marts** flow [^src1]:
 
@@ -71,7 +71,7 @@ Instead of long-lived AWS keys in GitHub Secrets, the project registers GitHub's
 
 ## CI/CD — slim CI, incremental CD
 
-This is a concrete instance of the [[data-engineering/cicd-for-data-infrastructure|CI/CD for Data Infrastructure]] pattern, specialized for dbt.
+This is a concrete instance of the [CI/CD for Data Infrastructure](/data-engineering/cicd-for-data-infrastructure.md) pattern, specialized for dbt.
 
 **Slim CI (`pr_checks.yml`, on PRs)** — only lints/compiles/runs/tests the models you actually changed [^src1]:
 - Computes the **merge-base SHA** between the PR branch and `main`, runs `dbt parse` on both, and uses `dbt ls --state base_state --select state:modified state:new` to find changed models. Merge-base (not latest `main`) avoids false positives from other PRs merged meanwhile.
@@ -97,17 +97,17 @@ A reusable composite action (`dbt-ci-init/action.yml`) factors out Python/venv/`
 
 ## Why it matters
 
-A compact, reproducible reference for the **transformation + ops** half of a portfolio-grade pipeline: everything is IaC, every deploy is incremental, no static cloud credentials exist anywhere, and dev/CI/prod are isolated by schema. Maps directly onto the rigor checklist in [[data-engineering/portfolio-project-that-lands-a-de-role|The Portfolio Project That Lands a DE Role]] (medallion/DQ/idempotency/tests/metadata/IaC/cost).
+A compact, reproducible reference for the **transformation + ops** half of a portfolio-grade pipeline: everything is IaC, every deploy is incremental, no static cloud credentials exist anywhere, and dev/CI/prod are isolated by schema. Maps directly onto the rigor checklist in [The Portfolio Project That Lands a DE Role](/data-engineering/portfolio-project-that-lands-a-de-role.md) (medallion/DQ/idempotency/tests/metadata/IaC/cost).
 
 ## Related
 
-- [[data-engineering/dbt|dbt]] — slim CI, `defer`/`--favor-state`, `dbt clone`, manifest-state deploys
-- [[data-engineering/cicd-for-data-infrastructure|CI/CD for Data Infrastructure]] — the general CI-plan → CD-gate skeleton this specializes
-- [[data-engineering/dimensional-modeling|Dimensional Modeling]] — the Kimball star schema + role-playing dimensions
-- [[data-engineering/snowflake|Snowflake]] — the warehouse and its RBAC model
-- [[mlops/terraform|Terraform]] — the IaC tool managing both Snowflake and AWS
-- [[data-engineering/portfolio-project-that-lands-a-de-role|The Portfolio Project That Lands a DE Role]] — the hiring-signal rubric this project satisfies
-- [[data-engineering/README|Data Engineering hub]]
+- [dbt](/data-engineering/dbt.md) — slim CI, `defer`/`--favor-state`, `dbt clone`, manifest-state deploys
+- [CI/CD for Data Infrastructure](/data-engineering/cicd-for-data-infrastructure.md) — the general CI-plan → CD-gate skeleton this specializes
+- [Dimensional Modeling](/data-engineering/dimensional-modeling.md) — the Kimball star schema + role-playing dimensions
+- [Snowflake](/data-engineering/snowflake.md) — the warehouse and its RBAC model
+- [Terraform](/mlops/terraform.md) — the IaC tool managing both Snowflake and AWS
+- [The Portfolio Project That Lands a DE Role](/data-engineering/portfolio-project-that-lands-a-de-role.md) — the hiring-signal rubric this project satisfies
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

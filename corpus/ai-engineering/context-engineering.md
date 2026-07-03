@@ -94,7 +94,7 @@ System prompts sit in a "Goldilocks zone" between too rigid and too vague [^src9
 - **Too vague**: agent behavior becomes variable and unpredictable; no stable baseline
 - **The zone**: clear constraints + enough flex for the model to handle variation within bounds
 
-"Bloated tool sets that cover too much functionality" are the most common production failure mode — they consume context budget, increase selection uncertainty, and degrade performance. Prefer fewer, well-described tools [^src9]. See [[ai-engineering/mcp|MCP]] for the "One Thing" principle.
+"Bloated tool sets that cover too much functionality" are the most common production failure mode — they consume context budget, increase selection uncertainty, and degrade performance. Prefer fewer, well-described tools [^src9]. See [MCP](/ai-engineering/mcp.md) for the "One Thing" principle.
 
 ### Four storage types
 
@@ -113,16 +113,16 @@ Context engineering primarily operates on the in-context tier, but retrieval (fr
 
 **Structured note-taking (NOTES.md)**: agents that run long tasks write key decisions and intermediate results to a scratchpad file, then load only the relevant section at the next step — keeping the context lean while preserving state across the session [^src9].
 
-**Compaction**: when context nears the window limit, summarize the conversation and open a fresh context window with the summary plus only the still-relevant state. The summary becomes the new "start" — preserving what matters, discarding token-dense verbatim history. See [[ai-engineering/context-window-management|Context Window Management]] for operational mechanics [^src9].
+**Compaction**: when context nears the window limit, summarize the conversation and open a fresh context window with the summary plus only the still-relevant state. The summary becomes the new "start" — preserving what matters, discarding token-dense verbatim history. See [Context Window Management](/ai-engineering/context-window-management.md) for operational mechanics [^src9].
 
-**Sub-agent architectures**: for tasks that inherently exceed a single context window (long research, multi-day migrations), route sub-tasks to fresh agent instances rather than trying to fit everything in one window. Each sub-agent has a clean, focused context; the orchestrator holds only summaries. See [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] [^src9].
+**Sub-agent architectures**: for tasks that inherently exceed a single context window (long research, multi-day migrations), route sub-tasks to fresh agent instances rather than trying to fit everything in one window. Each sub-agent has a clean, focused context; the orchestrator holds only summaries. See [Multi-Agent Systems](/ai-engineering/multi-agent-systems.md) [^src9].
 
 ## The four context components (in agentic systems)
 
 | Component | Role |
 |---|---|
 | System prompt | Core instructions and constraints |
-| Retrieved context | Relevant docs/data from [[ai-engineering/rag\|RAG]] |
+| Retrieved context | Relevant docs/data from [RAG](/ai-engineering/rag\.md) |
 | Conversation history | Prior turns |
 | Tool results | Function call outputs |
 
@@ -132,9 +132,9 @@ The context window is the agent's entire view of the world at inference time —
 
 Context engineering is identified as the single most impactful skill in agent development [^src2] — above model choice or framework selection. Each component of the context window must be deliberately managed: what to include, what to compress, what to drop.
 
-In practice, this means CLAUDE.md functions as long-term memory (always in scope, survives compaction), while the context window is short-term memory for the current task [^src3]. See [[ai-engineering/agent-memory|Agent Memory]] for the full memory model.
+In practice, this means CLAUDE.md functions as long-term memory (always in scope, survives compaction), while the context window is short-term memory for the current task [^src3]. See [Agent Memory](/ai-engineering/agent-memory.md) for the full memory model.
 
-See [[ai-engineering/ai-agent|AI Agent]] for how context slots into the broader agent architecture. See [[ai-engineering/context-window-management|Context Window Management]] for operational strategies (compaction, resets, sub-agents) when context fills.
+See [AI Agent](/ai-engineering/ai-agent.md) for how context slots into the broader agent architecture. See [Context Window Management](/ai-engineering/context-window-management.md) for operational strategies (compaction, resets, sub-agents) when context fills.
 
 ## Six context types (Addy Osmani taxonomy)
 
@@ -156,7 +156,7 @@ The split that determines your bill is **static vs. dynamic** context [^src15]:
 
 Getting the balance wrong in one direction burns tokens and buries the signal. Wrong in the other and the agent forgets safety rules. Osmani's advice: treat the boundary as a real architectural decision — reviewed in a PR, versioned like code [^src15].
 
-Progressive disclosure scales dynamic context: the agent sees skill metadata at startup, loads full instructions when a task matches, and pulls heavy reference material only when it actually needs it. One agent carries dozens of skills and only pays for the one it's using [^src15]. See [[ai-engineering/agent-skills|Agent Skills]] for the skill-activation mechanics.
+Progressive disclosure scales dynamic context: the agent sees skill metadata at startup, loads full instructions when a task matches, and pulls heavy reference material only when it actually needs it. One agent carries dozens of skills and only pays for the one it's using [^src15]. See [Agent Skills](/ai-engineering/agent-skills.md) for the skill-activation mechanics.
 
 ## "Less is more" — what belongs in context
 
@@ -164,9 +164,9 @@ One practitioner framing pushes minimalism: rely on the model's strengths and sp
 
 - **Code is context.** "Code itself has become context" — telling an agent which framework a codebase uses is redundant when it can read the code. A solid template or foundation acts as context the agent builds on [^src4].
 - **Don't encode general knowledge.** "Don't tell the model use React. It knows to use React." Reserve instructions for what the model *can't* infer — your specific workflow, taste, currency, methodology [^src4].
-- **Performance, not just cost.** A fuller window degrades output quality, so minimal context is also a quality lever — see [[ai-engineering/context-window-management|Context Window Management]] [^src4].
+- **Performance, not just cost.** A fuller window degrades output quality, so minimal context is also a quality lever — see [Context Window Management](/ai-engineering/context-window-management.md) [^src4].
 
-This complements the [[ai-engineering/agent-skills|Agent Skills]] argument: codify your unique workflow into skills (loaded on demand) rather than always-on instruction files.
+This complements the [Agent Skills](/ai-engineering/agent-skills.md) argument: codify your unique workflow into skills (loaded on demand) rather than always-on instruction files.
 
 ## A dedicated context layer for data agents (ktx)
 
@@ -182,9 +182,9 @@ The architecture pairs two committed, git-tracked layers [^src5][^src6]:
 Three principles generalize the context-engineering thesis [^src5][^src6]:
 - **Context as code.** Definitions live as plain files committed to Git — "diffable, mergeable, and reviewable exactly like code" — not in a separate platform. Self-improving ingest reconciles new warehouse/BI evidence with already-approved definitions.
 - **Approved definitions over inference.** Instead of generating SQL immediately, the agent searches the wiki for context, finds the approved metric in the semantic layer, compiles it, then executes — turning "a plausible answer" into "a correct one" for governed metrics like revenue or ARR [^src5].
-- **Agent-native access.** Exposed via CLI *and* an [[ai-engineering/mcp|MCP]] server, so Claude Code, Cursor, Codex, and any MCP client (and frameworks like LangChain) consume the same context; all DB connections are read-only [^src5][^src6].
+- **Agent-native access.** Exposed via CLI *and* an [MCP](/ai-engineering/mcp.md) server, so Claude Code, Cursor, Codex, and any MCP client (and frameworks like LangChain) consume the same context; all DB connections are read-only [^src5][^src6].
 
-The caveat is the core context-engineering truth: "a context layer is only as strong as the context that exists" — ktx surfaces and organizes what a team already knows but cannot invent missing definitions [^src5]. This is the data-warehouse instance of the same principle that drives [[ai-engineering/rag|RAG]] and [[ai-engineering/agent-memory|Agent Memory]]: agents need the metadata and business context that give data meaning, not just access.
+The caveat is the core context-engineering truth: "a context layer is only as strong as the context that exists" — ktx surfaces and organizes what a team already knows but cannot invent missing definitions [^src5]. This is the data-warehouse instance of the same principle that drives [RAG](/ai-engineering/rag.md) and [Agent Memory](/ai-engineering/agent-memory.md): agents need the metadata and business context that give data meaning, not just access.
 
 ## LangChain's four strategies (Write / Select / Compress / Isolate)
 
@@ -225,7 +225,7 @@ The LLM-as-OS analogy (LangChain): the model is the CPU (does the thinking), and
 
 A practitioner corollary: "We are past the era where you need to learn how to do things. We are in an era where you need to learn what the framework is." Context engineering — knowing *what* capabilities exist and *when* to use them — is the meta-skill. An architect specifies intent; the AI (builder) executes the syntax [^src11].
 
-Applied to Obsidian: telling Claude "build me a table that tracks X" is context engineering. Memorizing markdown table syntax is not. The same principle applies to any structured domain (Canvas JSON, Bases schema, SQL dialects) — delegate format correctness to domain-specific skills (see [[ai-engineering/agent-skills|Agent Skills]]) [^src11].
+Applied to Obsidian: telling Claude "build me a table that tracks X" is context engineering. Memorizing markdown table syntax is not. The same principle applies to any structured domain (Canvas JSON, Bases schema, SQL dialects) — delegate format correctness to domain-specific skills (see [Agent Skills](/ai-engineering/agent-skills.md)) [^src11].
 
 ## Related concepts (referenced in source 1, not yet ingested)
 
@@ -264,26 +264,26 @@ A visual framework for building well-structured prompts, implementing the 10-sec
 | 9 | Output Formatting | Response structure |
 | 10 | Prefilled Response | Starting text or format |
 
-Context Buddy (★52, addyosmani/context-buddy) implements this as a visual interactive web app with template library and one-click copy [^src13]. The 10 sections map directly to the prompt engineering principle of separating *who you are*, *what you know*, *what you need* — the same taxonomy as the [[ai-engineering/ai-operating-system|AI OS]] layers.
+Context Buddy (★52, addyosmani/context-buddy) implements this as a visual interactive web app with template library and one-click copy [^src13]. The 10 sections map directly to the prompt engineering principle of separating *who you are*, *what you know*, *what you need* — the same taxonomy as the [AI OS](/ai-engineering/ai-operating-system.md) layers.
 
 ## See also
 
-- [[ai-engineering/README|AI Engineering hub]]
-- [[ai-engineering/ai-agent|AI Agent]]
-- [[ai-engineering/tool-calling|Tool Calling]]
-- [[ai-engineering/rag|RAG]] — implements the "Retrieved context" component
-- [[ai-engineering/context-window-management|Context Window Management]] — operational strategies when context fills (compaction, sub-agents, resets)
-- [[ai-engineering/agent-skills|Agent Skills]] — codifying unique workflow into on-demand skills rather than always-on context
-- [[ai-engineering/agent-memory|Agent Memory]] — the two-tier memory model that context engineering operates on
-- [[ai-engineering/tool-calling-and-context-engineering|Tool Calling & Context Engineering]] — synthesis: structural relationship between tool results and context window management
+- [AI Engineering hub](/ai-engineering/README.md)
+- [AI Agent](/ai-engineering/ai-agent.md)
+- [Tool Calling](/ai-engineering/tool-calling.md)
+- [RAG](/ai-engineering/rag.md) — implements the "Retrieved context" component
+- [Context Window Management](/ai-engineering/context-window-management.md) — operational strategies when context fills (compaction, sub-agents, resets)
+- [Agent Skills](/ai-engineering/agent-skills.md) — codifying unique workflow into on-demand skills rather than always-on context
+- [Agent Memory](/ai-engineering/agent-memory.md) — the two-tier memory model that context engineering operates on
+- [Tool Calling & Context Engineering](/ai-engineering/tool-calling-and-context-engineering.md) — synthesis: structural relationship between tool results and context window management
 
 ---
 
 [^src9]: [Effective Context Engineering for AI Agents](../../raw/web/web-effective-context-engineering-for-ai-agents.md) — Anthropic engineering blog
 
-[^src1]: [[03_Resources/Articles/Context Engineering|Context Engineering]]
-[^src2]: [[03_Resources/Study Notes/AI Agents - Complete Course Beginner to Pro|AI Agents - Complete Course Beginner to Pro]]
-[^src3]: [[03_Resources/Study Notes/Claude Code - Solving the Memory Problem with Context Engineering|Claude Code - Solving the Memory Problem with Context Engineering]]
+[^src1]: [Context Engineering](/03_Resources/Articles/Context Engineering.md)
+[^src2]: [AI Agents - Complete Course Beginner to Pro](/03_Resources/Study Notes/AI Agents - Complete Course Beginner to Pro.md)
+[^src3]: [Claude Code - Solving the Memory Problem with Context Engineering](/03_Resources/Study Notes/Claude Code - Solving the Memory Problem with Context Engineering.md)
 [^src4]: [How AI agents & Claude skills work (Clearly Explained)](<../../raw/youtube/How AI agents & Claude skills work (Clearly Explained).md>) — Greg Isenberg × Ras Mic, YouTube
 [^src5]: [Introduction to ktx: The Open-Source Context Layer for Data Agents](../../raw/email/email-2026-06-03-fwd-introduction-to-ktx-the-open-source-context-layer-for-da.md) — Pipeline to Insights (Substack)
 [^src6]: [ktx — Make analytics context usable by agents (docs)](../../raw/web/how-ingestion-works.md) — docs.kaelio.com

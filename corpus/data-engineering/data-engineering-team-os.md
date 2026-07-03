@@ -148,11 +148,11 @@ Most DE leaders have a broken version of the rhythm layer and almost no memory l
 
 ## Related
 
-- [[data-engineering/data-observability|Data Observability]] — technical monitoring layer (complements the operational OS; observability = visibility into pipeline health, team OS = visibility into delivery health)
-- [[data-engineering/data-quality|Data Quality]] — postmortems feed quality improvement loops
-- [[data-engineering/data-engineer-role|The Data Engineer Role]] — the fundamentals the OS is designed to enable
-- [[data-engineering/ai-impact-on-data-engineering|AI's Impact on Data Engineering]] — leadership context changes as AI tools change team productivity dynamics
-- [[data-engineering/README|Data Engineering hub]]
+- [Data Observability](/data-engineering/data-observability.md) — technical monitoring layer (complements the operational OS; observability = visibility into pipeline health, team OS = visibility into delivery health)
+- [Data Quality](/data-engineering/data-quality.md) — postmortems feed quality improvement loops
+- [The Data Engineer Role](/data-engineering/data-engineer-role.md) — the fundamentals the OS is designed to enable
+- [AI's Impact on Data Engineering](/data-engineering/ai-impact-on-data-engineering.md) — leadership context changes as AI tools change team productivity dynamics
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

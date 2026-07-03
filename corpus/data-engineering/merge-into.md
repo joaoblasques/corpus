@@ -51,10 +51,10 @@ Internally executes as a full outer join. Suitable only for dimension tables of 
 
 ## See also
 
-- [[data-engineering/scd2|SCD2]] — primary use case for this pattern in data modeling
-- [[data-engineering/apache-iceberg|Apache Iceberg]] — table format that supports MERGE INTO in Spark SQL
-- [[data-engineering/README|Data Engineering hub]]
+- [SCD2](/data-engineering/scd2.md) — primary use case for this pattern in data modeling
+- [Apache Iceberg](/data-engineering/apache-iceberg.md) — table format that supports MERGE INTO in Spark SQL
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 
-[^src1]: [[03_Resources/Articles/scd2-table-creation-merge-into-spark-iceberg|SCD2 Table Creation with MERGE INTO in Spark and Iceberg]]
+[^src1]: [SCD2 Table Creation with MERGE INTO in Spark and Iceberg](/03_Resources/Articles/scd2-table-creation-merge-into-spark-iceberg.md)

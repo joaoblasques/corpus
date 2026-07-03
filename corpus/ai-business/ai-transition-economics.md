@@ -67,17 +67,17 @@ For practitioners navigating the transition [^src1]:
 2. **Bet on picks and shovels, not wrappers**: infrastructure that supports AI-first data consumption (semantic layers, context platforms) vs. thin AI wrappers on existing tools
 3. **Expect a long transition**: the productivity gains are real but delayed; survival requires staying solvent through the architectural change period
 
-See also [[ai-business/ai-and-the-job-market|AI and the Job Market]] for workforce implications, and [[data-engineering/ai-impact-on-data-engineering|AI's Impact on Data Engineering]] for the specific DE architectural rethink.
+See also [AI and the Job Market](/ai-business/ai-and-the-job-market.md) for workforce implications, and [AI's Impact on Data Engineering](/data-engineering/ai-impact-on-data-engineering.md) for the specific DE architectural rethink.
 
 ## See also
 
-- [[data-engineering/data-work-in-the-ai-transition|Data Work in the AI Transition]] — synthesis: the 1905 analogy is the *macro*-scale instance of Reis's one argument (with vibe-engineering and tokenmaxxing)
-- [[data-engineering/vibe-engineering|Vibe Engineering]] — Reis's micro of "swap the motor, not the factory": tool fluency without the theory to know what should change
-- [[productivity/tokenmaxxing|Tokenmaxxing]] — Reis's productivity-scale instance; the reverse-centaur is what swapping-the-motor feels like day to day
-- [[ai-business/ai-and-the-job-market|AI and the Job Market]] — workforce implications of the transition
-- [[data-engineering/ai-impact-on-data-engineering|AI's Impact on Data Engineering]] — the DE-specific architectural rethink
-- [[data-engineering/semantic-layer|Semantic Layer]] — "context teams" as the factory-of-the-future framing
-- [[ai-business/ai-economics-bubble|AI Economics & the Bubble Thesis]] — contrasting bear-case view
+- [Data Work in the AI Transition](/data-engineering/data-work-in-the-ai-transition.md) — synthesis: the 1905 analogy is the *macro*-scale instance of Reis's one argument (with vibe-engineering and tokenmaxxing)
+- [Vibe Engineering](/data-engineering/vibe-engineering.md) — Reis's micro of "swap the motor, not the factory": tool fluency without the theory to know what should change
+- [Tokenmaxxing](/productivity/tokenmaxxing.md) — Reis's productivity-scale instance; the reverse-centaur is what swapping-the-motor feels like day to day
+- [AI and the Job Market](/ai-business/ai-and-the-job-market.md) — workforce implications of the transition
+- [AI's Impact on Data Engineering](/data-engineering/ai-impact-on-data-engineering.md) — the DE-specific architectural rethink
+- [Semantic Layer](/data-engineering/semantic-layer.md) — "context teams" as the factory-of-the-future framing
+- [AI Economics & the Bubble Thesis](/ai-business/ai-economics-bubble.md) — contrasting bear-case view
 
 ---
 

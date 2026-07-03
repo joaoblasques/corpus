@@ -91,7 +91,7 @@ updated: 2026-06-25
 
 # Claude Model Lineup
 
-**TL;DR.** The Claude model family from [[ai-engineering/anthropic|Anthropic]] spans Haiku (fast/cheap) → Sonnet → Opus → Fable/Mythos (frontier) [^src9]. In Claude Code, aliases point to recommended versions and update over time; Fable 5, Opus 4.6+, and Sonnet 4.6 support a 1M-token context window. This page tracks the lineup and per-model specifics; product specifics live on the [[ai-engineering/claude-code|Claude Code]] and [[ai-engineering/claude-cowork|Claude Cowork]] pages.
+**TL;DR.** The Claude model family from [Anthropic](/ai-engineering/anthropic.md) spans Haiku (fast/cheap) → Sonnet → Opus → Fable/Mythos (frontier) [^src9]. In Claude Code, aliases point to recommended versions and update over time; Fable 5, Opus 4.6+, and Sonnet 4.6 support a 1M-token context window. This page tracks the lineup and per-model specifics; product specifics live on the [Claude Code](/ai-engineering/claude-code.md) and [Claude Cowork](/ai-engineering/claude-cowork.md) pages.
 
 ## Model lineup
 
@@ -105,7 +105,7 @@ In Claude Code, model **aliases** point to recommended versions and update over 
 | `fable` | Claude Fable 5 | hardest, longest-running tasks [^src9] |
 | `best` | Fable 5 where available, else latest Opus | — [^src9] |
 
-All of Fable 5, Opus 4.6+, and Sonnet 4.6 support a **1M-token context window**; append `[1m]` to an alias or pin it via env var [^src9]. Effort levels (`low`…`max`) control adaptive reasoning [^src9]. See [[ai-engineering/llm|LLM]] and [[ai-engineering/claude-code|Claude Code]] for configuration detail.
+All of Fable 5, Opus 4.6+, and Sonnet 4.6 support a **1M-token context window**; append `[1m]` to an alias or pin it via env var [^src9]. Effort levels (`low`…`max`) control adaptive reasoning [^src9]. See [LLM](/ai-engineering/llm.md) and [Claude Code](/ai-engineering/claude-code.md) for configuration detail.
 
 ## Opus 4.8
 
@@ -130,8 +130,8 @@ Anthropic's **"most capable Sonnet model yet"** as of June 2026 [^src12]. The de
 **Performance**: In Claude Code internal testing, Sonnet 4.6 was preferred over Sonnet 4.5 ~70% of the time, and — notably — preferred over Opus 4.5 ~59% of the time, meaning users chose it over a more powerful but more expensive model [^src12].
 
 **Key improvements** [^src12]:
-- **Computer use / OSWorld**: Significant improvements in visual grounding accuracy and UI interaction; see [[ai-engineering/computer-use|Computer Use]] for the model-selection table.
-- **Prompt injection robustness**: "A major improvement compared to Sonnet 4.5, performs similarly to Opus 4.6" in agentic robustness evaluations [^src12]. See [[ai-engineering/agent-security|Agent Security]].
+- **Computer use / OSWorld**: Significant improvements in visual grounding accuracy and UI interaction; see [Computer Use](/ai-engineering/computer-use.md) for the model-selection table.
+- **Prompt injection robustness**: "A major improvement compared to Sonnet 4.5, performs similarly to Opus 4.6" in agentic robustness evaluations [^src12]. See [Agent Security](/ai-engineering/agent-security.md).
 - **Agentic steering**: Enhanced ability to follow nuanced, multi-step instructions in long-horizon tasks [^src12].
 
 In the Claude Code alias table, `sonnet` resolves to Sonnet 4.6.
@@ -160,7 +160,7 @@ Claude Security (the vulnerability-scanning product) uses Opus 4.7 by default fo
 - Calls tools less often, reasons more between calls.
 - Spawns fewer subagents by default — must be explicitly prompted for fan-out patterns.
 
-See [[ai-engineering/claude-code|Claude Code]] (Opus 4.7 section) for the full usage guide.
+See [Claude Code](/ai-engineering/claude-code.md) (Opus 4.7 section) for the full usage guide.
 
 ## Claude 4 (original family: Opus 4 and Sonnet 4)
 
@@ -195,7 +195,7 @@ Adaptive thinking is Anthropic's preferred mode for controlling model reasoning 
 
 API usage: `thinking: {"type": "adaptive"}`. Effort levels: `low`, `medium`, `high` (default), `xhigh`, `max` [^src13]. Higher effort = more thinking tokens, better performance on hard tasks, higher cost.
 
-**Key implication for harness builders**: any code passing `budget_tokens` to Opus 4.7 or later will receive a 400 error and must be updated to use adaptive mode. See [[ai-engineering/claude-api|Claude API]] for the API detail.
+**Key implication for harness builders**: any code passing `budget_tokens` to Opus 4.7 or later will receive a 400 error and must be updated to use adaptive mode. See [Claude API](/ai-engineering/claude-api.md) for the API detail.
 
 ## Loop engineering and Fable 5 (stepping back)
 
@@ -205,7 +205,7 @@ Two weeks with Fable 5 surfaced a pattern shift in how to work with the model [^
 
 **Well-defined tasks + agent self-check**: the model performs better when tasks have explicit, verifiable success criteria baked in — not just "write tests" but "write tests and verify all pass before returning." This supports a self-checking loop without manual verification of every step [^src11].
 
-**"Verify the right work, not that the work is right."** The critical reframe: the human's job when using Fable is not to check whether each step was executed correctly (the model does that), but to verify that the *task itself* was worth doing — that the loop is producing the right outputs for the right problems. This connects to [[productivity/ai-augmented-knowledge-work|loop engineering]] and the verification-as-design discipline [^src11], and is the human-altitude case of [[ai-engineering/generator-evaluator-separation|generator–evaluator separation]] — once the model self-checks each step, the human evaluator relocates to the task level [^src11].
+**"Verify the right work, not that the work is right."** The critical reframe: the human's job when using Fable is not to check whether each step was executed correctly (the model does that), but to verify that the *task itself* was worth doing — that the loop is producing the right outputs for the right problems. This connects to [loop engineering](/productivity/ai-augmented-knowledge-work.md) and the verification-as-design discipline [^src11], and is the human-altitude case of [generator–evaluator separation](/ai-engineering/generator-evaluator-separation.md) — once the model self-checks each step, the human evaluator relocates to the task level [^src11].
 
 ## Opus 4.6
 
@@ -228,7 +228,7 @@ Claude Opus 4.6 is Anthropic's strongest model as of late June 2026, positioned 
 
 **API / Platform additions at Opus 4.6 launch** [^src20]:
 - **Adaptive thinking** — model dynamically allocates thinking when useful (default effort: `high`); four effort levels: `low`, `medium`, `high`, `max`
-- **Context compaction (beta)** — server-side auto-summarization at a configurable threshold; see [[ai-engineering/context-window-management|Context Window Management]]
+- **Context compaction (beta)** — server-side auto-summarization at a configurable threshold; see [Context Window Management](/ai-engineering/context-window-management.md)
 - **Agent teams in Claude Code (research preview)** — multiple subagents working in parallel on independent, read-heavy tasks; navigate with Shift+Up/Down or tmux
 - **Claude in PowerPoint (research preview)** — reads layouts, fonts, slide masters; available on Max/Team/Enterprise
 
@@ -245,7 +245,7 @@ Web search (and web fetch) is available on the following models as of mid-2026 [
 - Opus 4.6
 - Haiku 4.5
 
-Web search requires the feature to be enabled (user toggle in chat, or admin-enabled at the workspace level for Team/Enterprise). Image results from Bing are included when web search is active. See [[ai-engineering/claude-cowork|Claude Cowork]] for workspace-level controls.
+Web search requires the feature to be enabled (user toggle in chat, or admin-enabled at the workspace level for Team/Enterprise). Image results from Bing are included when web search is active. See [Claude Cowork](/ai-engineering/claude-cowork.md) for workspace-level controls.
 
 ## Claude Haiku 4.5
 
@@ -315,7 +315,7 @@ Fable 5 runs safety classifiers that refuse certain high-capability requests [^s
 
 In Claude Code specifically, flagged prompts are **routed to Opus 4.8** automatically (recorded in a separate log, not the main session log) rather than returning a bare refusal [^src19]. API usage (direct Messages API) returns an outright refusal with the stop reason. Fable 5 enforces a 30-day data retention for misuse-detection purposes; no training use [^src19].
 
-See also [[ai-engineering/anthropic|Anthropic]] for the export control and AI sovereignty context from the same source.
+See also [Anthropic](/ai-engineering/anthropic.md) for the export control and AI sovereignty context from the same source.
 
 ## Model progression at Code with Claude London 2026
 
@@ -329,8 +329,8 @@ The progression reflects both capability improvements and cost-per-task optimiza
 
 ## See also
 
-- [[ai-engineering/anthropic|Anthropic]] — the lab behind these models (company, funding, learning resources)
-- [[ai-engineering/llm|LLM]], [[ai-engineering/claude-api|Claude API]], [[ai-engineering/claude-code|Claude Code]]
+- [Anthropic](/ai-engineering/anthropic.md) — the lab behind these models (company, funding, learning resources)
+- [LLM](/ai-engineering/llm.md), [Claude API](/ai-engineering/claude-api.md), [Claude Code](/ai-engineering/claude-code.md)
 
 [^src4]: [Claude Opus 4.8 arrives (The Code)](../../raw/email/email-2026-05-29-claude-opus-4-8-arrives.md)
 [^src5]: [Claude Fable 5 is here (Claude Team)](../../raw/email/email-2026-06-10-claude-fable-5-is-here.md)

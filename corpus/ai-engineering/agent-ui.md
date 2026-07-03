@@ -48,7 +48,7 @@ The stated long-term direction is a **skill-sharing platform** — "a place wher
 
 ## Architecture
 
-Boring UI is built on the **Pi** agent harness — an open-source, "super lightweight and built to be highly extensible" runtime by Mario Zechner — integrated via its Node.js SDK so the host can deeply customize Pi's tools and interfaces (e.g. overriding filesystem tools to target the Boring UI sandbox) [^src3]. Pi is **provider-agnostic**: it runs commercial APIs, open-source models, or self-hosted LLM infrastructure, so the shell is not locked to one model vendor [^src3]. See [[ai-engineering/agent-harness|Agent Harness]]. The system organizes around four components [^src1]:
+Boring UI is built on the **Pi** agent harness — an open-source, "super lightweight and built to be highly extensible" runtime by Mario Zechner — integrated via its Node.js SDK so the host can deeply customize Pi's tools and interfaces (e.g. overriding filesystem tools to target the Boring UI sandbox) [^src3]. Pi is **provider-agnostic**: it runs commercial APIs, open-source models, or self-hosted LLM infrastructure, so the shell is not locked to one model vendor [^src3]. See [Agent Harness](/ai-engineering/agent-harness.md). The system organizes around four components [^src1]:
 
 | Component | Role |
 |---|---|
@@ -71,7 +71,7 @@ The reuse mechanism is a plugin system that *extends Pi's* rather than inventing
 - `pi.*` — agent side: `extensions`, `skills`, `prompts`, `systemPrompt` (hot-reloadable via `/reload`).
 - `boring.*` — UI side: `front` (panels, command-palette actions, catalogs, surface resolvers) and `server` (boot-time agent tools + HTTP routes).
 
-What a plugin can add: **panels** (arbitrary React panes — editors, charts, tables), **left tabs** (persistent sidebars), **commands** (palette entries triggered by user *or* agent), **catalogs** (faceted data explorers the agent can surface), **agent tools** (schema-defined model capabilities), and **skills + prompts** [^src1]. See [[ai-engineering/agent-skills|Agent Skills]].
+What a plugin can add: **panels** (arbitrary React panes — editors, charts, tables), **left tabs** (persistent sidebars), **commands** (palette entries triggered by user *or* agent), **catalogs** (faceted data explorers the agent can surface), **agent tools** (schema-defined model capabilities), and **skills + prompts** [^src1]. See [Agent Skills](/ai-engineering/agent-skills.md).
 
 ## Example: a whole app as one plugin
 
@@ -93,13 +93,13 @@ Claude Code's Agent view is a concrete CLI implementation of the "see all sessio
 - **Peek mode**: select a session to see the last turn inline; reply without attaching to the full session; press Enter to attach.
 - **Background launch**: `claude --bg [task]` starts a session directly in the background; `/bg` sends any running session to the list.
 
-This addresses the core agent-UI problem of multi-session awareness in the command-line context: "one place to manage all your Claude Code sessions" replacing "multiple terminal tabs, a tmux grid, and an overloaded mental ledger" [^src4]. The pattern — a unified session-status view with selective in-place interaction — is the CLI analog of the chat+workbench shell's session panel. See [[ai-engineering/claude-code|Claude Code]] for the full agent-view mechanics and the fire-and-forget `/goal` combination.
+This addresses the core agent-UI problem of multi-session awareness in the command-line context: "one place to manage all your Claude Code sessions" replacing "multiple terminal tabs, a tmux grid, and an overloaded mental ledger" [^src4]. The pattern — a unified session-status view with selective in-place interaction — is the CLI analog of the chat+workbench shell's session panel. See [Claude Code](/ai-engineering/claude-code.md) for the full agent-view mechanics and the fire-and-forget `/goal` combination.
 
 ## Related
 
-- [[ai-engineering/ai-agent|AI Agent]] — Pi is the harness Boring UI builds on; agent-mode and serverless deployment
-- [[ai-engineering/agent-skills|Agent Skills]] — the skill/plugin layer that customizes the shell
-- [[ai-engineering/mcp|MCP]] — tool/coordination layer the harness can integrate
+- [AI Agent](/ai-engineering/ai-agent.md) — Pi is the harness Boring UI builds on; agent-mode and serverless deployment
+- [Agent Skills](/ai-engineering/agent-skills.md) — the skill/plugin layer that customizes the shell
+- [MCP](/ai-engineering/mcp.md) — tool/coordination layer the harness can integrate
 
 ---
 

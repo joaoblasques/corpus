@@ -79,23 +79,23 @@ For non-technical users, the recommended progression is three levels [^src1]:
 
 1. **Pick one tool and go deep.** Models have converged ("the difference for the average user is negligible") and skills transfer across them, so depth on one (ChatGPT, Claude, or Gemini) beats jumping around. Default to the most powerful model you have access to — the weak default models are cheapest for the vendor, not best for real work [^src1].
 2. **Context beats prompts.** The one framework worth keeping is **Outcome + Context (OC)**: "the right context always beats the perfect prompt" because modern models infer role, format, and tone on their own given a clear outcome [^src1]. Three ways to supply context, easiest first: name a framework ("use the Pyramid Principle"), share real examples, connect your tools (email, Drive, Slack). Then **save** it in a Project/Gem so you stop re-explaining recurring work [^src1].
-3. **Build an AI system.** Connect projects so the AI spots cross-project patterns and updates itself from feedback. Tools laddered by commitment: Gemini Spark (zero setup) → [[ai-engineering/claude-cowork|Claude Cowork]] (non-technical) → [[ai-engineering/claude-code|Claude Code]]/Codex ("Cowork on steroids," needs comfort with code) [^src1].
+3. **Build an AI system.** Connect projects so the AI spots cross-project patterns and updates itself from feedback. Tools laddered by commitment: Gemini Spark (zero setup) → [Claude Cowork](/ai-engineering/claude-cowork.md) (non-technical) → [Claude Code](/ai-engineering/claude-code.md)/Codex ("Cowork on steroids," needs comfort with code) [^src1].
 
 > A pro tip that doubles as a context-engineering rule: "Use .md (Markdown) files instead of PDFs whenever you can. They're easier for the AI to read and cheaper to process." [^src1]
 
-The "context beats prompts" claim is the beginner-facing version of [[ai-engineering/context-engineering|Context Engineering]] — and the explicit note that "I haven't said a word about prompting... your prompt is no longer the biggest factor" complements (and slightly overstates against) [[ai-engineering/prompt-engineering|Prompt Engineering]].
+The "context beats prompts" claim is the beginner-facing version of [Context Engineering](/ai-engineering/context-engineering.md) — and the explicit note that "I haven't said a word about prompting... your prompt is no longer the biggest factor" complements (and slightly overstates against) [Prompt Engineering](/ai-engineering/prompt-engineering.md).
 
 ## Path 2: The data-engineer's curriculum (RAG is the ETL of AI)
 
 Alejandro Aboy organizes a year of building production agents into one path, anchored on the claim that **"RAG is the most direct on-ramp because the mental model is identical to ETL"** [^src2]:
 
-- **RAG fundamentals** (vector DBs, embeddings, similarity search with metadata filters) — "the data engineering part defines 80% of the project. Don't rush it." Fine-tune only if prompting and RAG fall short, and "100 precise examples outperform 1,000 mediocre ones" [^src2]. See [[ai-engineering/rag|RAG]], [[ai-engineering/vector-database|Vector Database]].
-- **Security as an architecture decision** — structured outputs for reliability, prompt-injection prevention, least privilege / scoped tools: "scope your agent's permissions at the architecture stage. An agent can't drop a production table it doesn't have access to" [^src2]. See [[ai-engineering/agent-security|Agent Security]], [[ai-engineering/structured-outputs|Structured Outputs]].
-- **MCP & Skills** — Skills framed as "progressive disclosure for agents"; "[[ai-engineering/mcp|MCP]] changed how I work across the full stack." See [[ai-engineering/agent-skills|Agent Skills]].
+- **RAG fundamentals** (vector DBs, embeddings, similarity search with metadata filters) — "the data engineering part defines 80% of the project. Don't rush it." Fine-tune only if prompting and RAG fall short, and "100 precise examples outperform 1,000 mediocre ones" [^src2]. See [RAG](/ai-engineering/rag.md), [Vector Database](/ai-engineering/vector-database.md).
+- **Security as an architecture decision** — structured outputs for reliability, prompt-injection prevention, least privilege / scoped tools: "scope your agent's permissions at the architecture stage. An agent can't drop a production table it doesn't have access to" [^src2]. See [Agent Security](/ai-engineering/agent-security.md), [Structured Outputs](/ai-engineering/structured-outputs.md).
+- **MCP & Skills** — Skills framed as "progressive disclosure for agents"; "[MCP](/ai-engineering/mcp.md) changed how I work across the full stack." See [Agent Skills](/ai-engineering/agent-skills.md).
 
 **Production lessons** (hard-won) [^src2]:
-- "Less system prompt equals more consistency." A 1,000-line prompt cut to 250 made users say "now it gets what you want" — the same minimalism as [[ai-engineering/context-window-management|Context Window Management]] and [[ai-engineering/claude-md-conventions|CLAUDE.md conventions]].
-- "Tool design is critical because each description is a prompt itself" — see [[ai-engineering/tool-calling|Tool Calling]].
+- "Less system prompt equals more consistency." A 1,000-line prompt cut to 250 made users say "now it gets what you want" — the same minimalism as [Context Window Management](/ai-engineering/context-window-management.md) and [CLAUDE.md conventions](/ai-engineering/claude-md-conventions.md).
+- "Tool design is critical because each description is a prompt itself" — see [Tool Calling](/ai-engineering/tool-calling.md).
 - "pgvector is probably all you need for RAG." Model updates will break your agent — "pin versions, always have a rollback plan."
 - **MetadataOps**: "Documentation is now a prompt. Vague metadata equals hallucinations." Add "Can an AI understand this?" to your definition of done [^src2].
 
@@ -104,20 +104,20 @@ Alejandro Aboy organizes a year of building production agents into one path, anc
 The video version of Path 1 sharpens the third rung into a concrete three-level model [^src3]:
 1. **One model, go deep** — same convergence argument (models cluster in capability; pick by paid-tier access, work-fit, and vibes; always default to the most capable model).
 2. **Context in Projects** — a *project* has three parts: instructions (rules that always apply), knowledge files (reference docs), and memory (auto-updated milestones). Prefer `.md` over PDF — "easier for the AI to read and cheaper to process."
-3. **An AI system** — connects projects so the AI spots cross-project patterns *and* updates itself from feedback. The tool ladder by setup cost: Gemini Spark (zero setup, pre-connected) → [[ai-engineering/claude-cowork|Claude Cowork]] (non-technical, some setup) → [[ai-engineering/claude-code|Claude Code]]/Codex ("Cowork on steroids," needs code comfort). A model's *model-selector complexity* is "a pretty good signal for who it's for" [^src3].
+3. **An AI system** — connects projects so the AI spots cross-project patterns *and* updates itself from feedback. The tool ladder by setup cost: Gemini Spark (zero setup, pre-connected) → [Claude Cowork](/ai-engineering/claude-cowork.md) (non-technical, some setup) → [Claude Code](/ai-engineering/claude-code.md)/Codex ("Cowork on steroids," needs code comfort). A model's *model-selector complexity* is "a pretty good signal for who it's for" [^src3].
 
-The **reconcile** move recurs as the self-improvement mechanism: share your edited final draft back, tell the AI to reconcile it with its initial output, and it proposes rules to remember — learnings compound over time [^src3]. This is the consumer-facing version of the [[ai-engineering/agent-harness|harness]] ratchet.
+The **reconcile** move recurs as the self-improvement mechanism: share your edited final draft back, tell the AI to reconcile it with its initial output, and it proposes rules to remember — learnings compound over time [^src3]. This is the consumer-facing version of the [harness](/ai-engineering/agent-harness.md) ratchet.
 
 ## Path 4: The deep-build curriculum (build it from scratch)
 
-For learners who want to understand AI *internals*, not just call APIs, the `ai-engineering-from-scratch` curriculum (503 lessons, 20 phases) sequences the whole stack bottom-up: math foundations → classical ML → deep-learning core → transformers → LLMs → engineering → tools/protocols → agents [^src5]. Its pedagogy is the **Build It / Use It split** — implement each algorithm from raw math first, then run the same thing through the production library — so "by the time PyTorch shows up, you already know what it's doing under the hood" [^src5]. Every lesson ships a reusable artifact (prompt, skill, agent, MCP server) [^src5]. See [[ai-engineering/ai-fundamentals|AI Fundamentals]], [[ai-engineering/machine-learning|Machine Learning]], [[ai-engineering/neural-network|Neural Networks]].
+For learners who want to understand AI *internals*, not just call APIs, the `ai-engineering-from-scratch` curriculum (503 lessons, 20 phases) sequences the whole stack bottom-up: math foundations → classical ML → deep-learning core → transformers → LLMs → engineering → tools/protocols → agents [^src5]. Its pedagogy is the **Build It / Use It split** — implement each algorithm from raw math first, then run the same thing through the production library — so "by the time PyTorch shows up, you already know what it's doing under the hood" [^src5]. Every lesson ships a reusable artifact (prompt, skill, agent, MCP server) [^src5]. See [AI Fundamentals](/ai-engineering/ai-fundamentals.md), [Machine Learning](/ai-engineering/machine-learning.md), [Neural Networks](/ai-engineering/neural-network.md).
 
 ## The prerequisite ladders (Python, then ML)
 
 Two narrower "how I'd learn X in 2026" guides feed the front of these paths [^src4][^src6]:
 
 - **Python first** — fundamentals (variables, loops, functions, lists/dicts, error handling) until you can write a 40–50 line program *without a tutorial open*; then use AI as a **tutor that gives you reps, not answers** ("make it give you reps instead of answers"); build small projects; learn OOP *after* you feel the mess; pick one direction (AI apps, backend, automation, data) [^src4].
-- **ML in the right order** — Python → NumPy/pandas/Matplotlib → the *practical* math you actually need (vectors, distributions, Bayes, gradients — not every proof) → core ML algorithms with scikit-learn → deep learning with PyTorch → production skills (Docker, FastAPI, model serving, monitoring, CI/CD, experiment tracking) [^src6]. Recurring rule: "spend more time building than watching." The math and production layers map to [[ai-engineering/statistics-for-ml|Statistics for ML]] and the [[mlops/README|MLOps]] domain respectively.
+- **ML in the right order** — Python → NumPy/pandas/Matplotlib → the *practical* math you actually need (vectors, distributions, Bayes, gradients — not every proof) → core ML algorithms with scikit-learn → deep learning with PyTorch → production skills (Docker, FastAPI, model serving, monitoring, CI/CD, experiment tracking) [^src6]. Recurring rule: "spend more time building than watching." The math and production layers map to [Statistics for ML](/ai-engineering/statistics-for-ml.md) and the [MLOps](/mlops/README.md) domain respectively.
 
 ## Curiosity as the meta-skill (and the Micro-Retro Loop)
 
@@ -152,7 +152,7 @@ A single markdown file (ideally in your project root or `~/.config/`) that accum
 - Testing whether adding a JSON schema to the system prompt reduces hallucinations on structured output
 ```
 
-The payoff: the file becomes a prompt component — include it in future sessions and the model calibrates to your history. This is the personal version of the [[ai-engineering/claude-md-conventions|CLAUDE.md conventions]] pattern for teams [^src7].
+The payoff: the file becomes a prompt component — include it in future sessions and the model calibrates to your history. This is the personal version of the [CLAUDE.md conventions](/ai-engineering/claude-md-conventions.md) pattern for teams [^src7].
 
 ### A/B testing approaches
 
@@ -167,17 +167,17 @@ A complementary roadmap structures AI skills as a progression from "participate 
 
 **Level 1 — basics (everyone):**
 1. **Investing with an AI thesis** — the contrarian inclusion on a tech channel: in 2026 even a plain S&P 500 position carries "massive exposure to AI," so decide *deliberately* how much AI exposure fits your career and life rather than backing in by default [^src16].
-2. **Prompting** — "the way that you interact with AI… lays the foundation for everything," the same context-over-prompts foundation the paths above converge on. See [[ai-engineering/prompt-engineering|Prompt Engineering]].
+2. **Prompting** — "the way that you interact with AI… lays the foundation for everything," the same context-over-prompts foundation the paths above converge on. See [Prompt Engineering](/ai-engineering/prompt-engineering.md).
 3. **Master a core set of tools** (AI minimalism) — rather than chasing "10 releases per day," go deep on a small set: one general chatbot (Claude / ChatGPT / Gemini) covers most needs; add a research/news tool (Perplexity), a learning tool (NotebookLM), and one job-specific tool. Mirrors Path 1's "pick one tool, go deep" [^src16].
 
 **Level 2 — intermediate (personal workflows):**
-4. **AI agents** — software that "pursues goals and complete tasks on behalf of users": you give an overarching goal and it decomposes and executes the steps, vs a one-request/one-response tool. See [[ai-engineering/ai-agent|AI Agent]], [[ai-engineering/agentic-workflow|Agentic Workflows]].
-5. **Local AI agents** — agents that run *on your own machine* to build custom personal automations (cited examples: [[ai-engineering/claude-cowork|Cowork]], OpenClaude, [[ai-engineering/hermes|Hermes]]). Choose one on two axes: (a) how technical you are (no-code vs code), and (b) open- vs closed-source — a tradeoff over "capability, cost, and privacy" (closed tends more capable; open is lower-cost/free-to-run/private). This is the consumer-facing version of the [[ai-engineering/ai-operating-system|AI Operating System]] [^src16].
+4. **AI agents** — software that "pursues goals and complete tasks on behalf of users": you give an overarching goal and it decomposes and executes the steps, vs a one-request/one-response tool. See [AI Agent](/ai-engineering/ai-agent.md), [Agentic Workflows](/ai-engineering/agentic-workflow.md).
+5. **Local AI agents** — agents that run *on your own machine* to build custom personal automations (cited examples: [Cowork](/ai-engineering/claude-cowork.md), OpenClaude, [Hermes](/ai-engineering/hermes.md)). Choose one on two axes: (a) how technical you are (no-code vs code), and (b) open- vs closed-source — a tradeoff over "capability, cost, and privacy" (closed tends more capable; open is lower-cost/free-to-run/private). This is the consumer-facing version of the [AI Operating System](/ai-engineering/ai-operating-system.md) [^src16].
 
 **Level 3 — advanced (commercial / career):**
 6. **Building your own AI agents** — for client-facing pipelines that must be "stable, reliable, and lower in cost" (B2B examples: a private-equity reporting pipeline pulling CRM/analytics/DB on a schedule; new-hire onboarding agents). A high-demand freelancing/employment skill [^src16].
-7. **Building MCPs** — letting agents plug into third-party apps and data sources; called out as "really, really in demand." See [[ai-engineering/mcp|MCP]].
-8. **AI coding (agentic engineering)** — using an agent to write code and build software; framed as the "boss level unlock" (claimed >10× cost/time savings) but gated by a hard caveat: **"you low-key do already need to know how to code"** — unlike the other skills (days-to-weeks), properly learning to code then AI-code takes "two to three months." It's the *last* skill for a reason: you can get far on simpler workflows and prototypes without it [^src16]. See [[ai-engineering/agentic-coding|Agentic Coding]], [[ai-engineering/vibe-coding|Vibe Coding]].
+7. **Building MCPs** — letting agents plug into third-party apps and data sources; called out as "really, really in demand." See [MCP](/ai-engineering/mcp.md).
+8. **AI coding (agentic engineering)** — using an agent to write code and build software; framed as the "boss level unlock" (claimed >10× cost/time savings) but gated by a hard caveat: **"you low-key do already need to know how to code"** — unlike the other skills (days-to-weeks), properly learning to code then AI-code takes "two to three months." It's the *last* skill for a reason: you can get far on simpler workflows and prototypes without it [^src16]. See [Agentic Coding](/ai-engineering/agentic-coding.md), [Vibe Coding](/ai-engineering/vibe-coding.md).
 
 The through-line matches this page's thesis: depth over tool-chasing, context/agents over raw prompting, and "spend more time building than watching."
 
@@ -213,19 +213,19 @@ Key principles from the guide [^src12]:
 - **Linting**: periodic passes to find orphan pages, stale claims, and duplicate entities; the linter is the quality gate
 - **Read-first discipline**: always read the raw file fully before writing corpus pages; paraphrasing without reading produces lossy garbage
 
-See [[ai-engineering/agent-memory|Agent Memory]] for how the LLM wiki pattern relates to RAG and knowledge graph memory architectures.
+See [Agent Memory](/ai-engineering/agent-memory.md) for how the LLM wiki pattern relates to RAG and knowledge graph memory architectures.
 
 ## See also
 
-- [[ai-engineering/ai-fundamentals|AI Fundamentals]] — the classical-AI base (search, logic, uncertainty) under all of this
-- [[ai-engineering/machine-learning|Machine Learning]] · [[ai-engineering/neural-network|Neural Networks]] · [[ai-engineering/statistics-for-ml|Statistics for ML]] — the deep-build prerequisites
-- [[ai-engineering/context-engineering|Context Engineering]] — the discipline the paths converge on
-- [[ai-engineering/rag|RAG]] — the data-engineer's on-ramp; "the ETL of AI"
-- [[ai-engineering/prompt-engineering|Prompt Engineering]] — the lever the paths de-emphasize relative to context
-- [[ai-engineering/agent-skills|Agent Skills]] — "progressive disclosure for agents"
-- [[ai-engineering/vibe-coding|Vibe Coding]] — the beginner build-and-iterate entry point
-- [[ai-engineering/claude-cowork|Claude Cowork]] / [[ai-engineering/claude-code|Claude Code]] — the recommended "build a system" tools
-- [[ai-engineering/README|AI Engineering hub]]
+- [AI Fundamentals](/ai-engineering/ai-fundamentals.md) — the classical-AI base (search, logic, uncertainty) under all of this
+- [Machine Learning](/ai-engineering/machine-learning.md) · [Neural Networks](/ai-engineering/neural-network.md) · [Statistics for ML](/ai-engineering/statistics-for-ml.md) — the deep-build prerequisites
+- [Context Engineering](/ai-engineering/context-engineering.md) — the discipline the paths converge on
+- [RAG](/ai-engineering/rag.md) — the data-engineer's on-ramp; "the ETL of AI"
+- [Prompt Engineering](/ai-engineering/prompt-engineering.md) — the lever the paths de-emphasize relative to context
+- [Agent Skills](/ai-engineering/agent-skills.md) — "progressive disclosure for agents"
+- [Vibe Coding](/ai-engineering/vibe-coding.md) — the beginner build-and-iterate entry point
+- [Claude Cowork](/ai-engineering/claude-cowork.md) / [Claude Code](/ai-engineering/claude-code.md) — the recommended "build a system" tools
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 
@@ -240,7 +240,7 @@ See [[ai-engineering/agent-memory|Agent Memory]] for how the LLM wiki pattern re
 **Anthropic's Prompt Engineering Tutorial** (★36,609) — 9-chapter Jupyter notebook series from Anthropic's training team [^src8]:
 1. Basic Prompt Structure → 2. Being Clear and Direct → 3. Assigning Roles → 4. Separating Data from Instructions → 5. Formatting Output and Speaking for Claude → 6. Precognition (Thinking Step by Step) → 7. Using Examples (Few-Shot Prompting) → 8. Avoiding Hallucinations → 9. Complex Prompts for Power Users
 
-This is the authoritative Anthropic tutorial — interactive, runnable, and regularly updated. Covers both basic and advanced prompting, including prefill and multi-turn prompt construction. Also see [[ai-engineering/prompt-engineering|Prompt Engineering]] for corpus distillation of these techniques [^src8].
+This is the authoritative Anthropic tutorial — interactive, runnable, and regularly updated. Covers both basic and advanced prompting, including prefill and multi-turn prompt construction. Also see [Prompt Engineering](/ai-engineering/prompt-engineering.md) for corpus distillation of these techniques [^src8].
 
 **DataTalksClub AI Developer Tools Zoomcamp** (★1,129) — community-run 10-week course [^src9]:
 - Covers: Claude Code, GitHub Copilot, Cursor, Windsurf, Gemini CLI, LLM APIs, context engineering, multi-agent patterns.
@@ -249,7 +249,7 @@ This is the authoritative Anthropic tutorial — interactive, runnable, and regu
 
 **12-hour Claude Code course** (YouTube) — comprehensive free tutorial covering the full Claude Code lifecycle: setup, project workflow, subagents, hooks, and production patterns [^src10]. Good companion to the interactive Anthropic tutorial above.
 
-**Full Claude beginner course (Productive Dude, 2026)** — walkthrough of every Claude surface area for new users [^src13]: account setup, privacy settings (data-training toggle), web vs. desktop app distinction, projects vs. folders, knowledge base attachment, voice mode, capabilities (memory, tool access, artifacts/visuals), Projects with system instructions, Claude Code, Claude Cowork. Practical orientation for someone starting from zero, useful companion to the 7-continent mental map at [[ai-engineering/claude-cowork|Claude Cowork]].
+**Full Claude beginner course (Productive Dude, 2026)** — walkthrough of every Claude surface area for new users [^src13]: account setup, privacy settings (data-training toggle), web vs. desktop app distinction, projects vs. folders, knowledge base attachment, voice mode, capabilities (memory, tool access, artifacts/visuals), Projects with system instructions, Claude Code, Claude Cowork. Practical orientation for someone starting from zero, useful companion to the 7-continent mental map at [Claude Cowork](/ai-engineering/claude-cowork.md).
 
 **cladius/agentic-ai** (★73) — hands-on jumpstart repo for Agentic AI frameworks [^src14]: frameworks covered: ADK, Agno, Bedrock, LangFlow, LangGraph. Approach: single "5-level sample problem" solved across all frameworks. Good for comparing agentic framework APIs against a common problem set.
 
@@ -280,7 +280,7 @@ A curated reference list of 100+ libraries, frameworks, and tools for production
 - **Structured generation**: Outlines, Instructor, Guidance
 - **Local development**: Ollama, LM Studio, Jan
 
-**Use case**: a quick reference for choosing the right library when building RAG pipelines, agent systems, evaluation harnesses, or local inference setups. Complements [[ai-engineering/rag|RAG]], [[ai-engineering/agent-evaluation|Agent Evaluation]], and [[ai-engineering/llm|LLM]] pages as a practical tooling index.
+**Use case**: a quick reference for choosing the right library when building RAG pipelines, agent systems, evaluation harnesses, or local inference setups. Complements [RAG](/ai-engineering/rag.md), [Agent Evaluation](/ai-engineering/agent-evaluation.md), and [LLM](/ai-engineering/llm.md) pages as a practical tooling index.
 
 ## High-signal AI/ML blogs and newsletters
 

@@ -48,7 +48,7 @@ updated: 2026-07-01
 
 In a data context, semantics is the *meaning* behind fields, metrics, and labels — usually learned informally over years [^src1]. A semantic layer replicates that knowledge formally, providing shared definitions easy to find and consistent across teams [^src1]. It ranges from [^src1]:
 - a small **glossary** of business terms,
-- a set of **taxonomies / entity definitions** (see [[data-engineering/data-modeling-meaning|meaning in data modeling]]),
+- a set of **taxonomies / entity definitions** (see [meaning in data modeling](/data-engineering/data-modeling-meaning.md)),
 - a simple **YAML metric definition**, e.g.:
 
 ```yaml
@@ -68,7 +68,7 @@ Whatever the form, the purpose is the same: clear, reliable definitions of what 
 
 The semantic layer plays the role of *onboarding* for generative AI — giving the agent the context to do its job well immediately [^src1]. Ask an LLM "How much revenue last month?" without it, and it may count refunds, include deleted transactions, and mis-convert currency — confidently wrong, hard to detect [^src1]. Research cited (Sequeda & Allemang, 2025): pairing LLMs with business semantics via ontologies/knowledge graphs raised question-answering accuracy **from 16% to 72%** vs querying raw databases directly [^src1]. "Generative AI eats semantics for breakfast" — it cannot tap you on the shoulder to ask whether revenue includes refunds; it needs that written down and accessible [^src1].
 
-This is the modeling complement to [[data-engineering/progressive-disclosure-analytics-agents|progressive disclosure]] — semantics is *what* the agent must know; progressive disclosure governs *when* to load it.
+This is the modeling complement to [progressive disclosure](/data-engineering/progressive-disclosure-analytics-agents.md) — semantics is *what* the agent must know; progressive disclosure governs *when* to load it.
 
 ## Data teams → context teams
 
@@ -86,9 +86,9 @@ Trade-off to optimise: too little context → wrong/no answers; too much → exp
 
 The **Boring Semantic Layer (BSL)** is a lightweight open-source semantic layer built on **Ibis**, so it works with almost any query engine out of the box (`pip install boring-semantic-layer`) [^src4]. It demonstrates *why* a semantic layer is the right interface for LLMs: a brute-force "let the LLM query raw tables" approach quickly produces **wrong joins and bad aggregations**, whereas the semantic layer exposes only **pre-built aggregations and validated relationships** — e.g. expose "number of flights per origin/destination" rather than the raw `flights`/`carriers` tables [^src4]. "That constraint is a feature, not a bug" — you trade SQL flexibility for reliability, letting the LLM focus on *intent* rather than SQL correctness [^src4].
 
-The bridge to the agent is **[[ai-engineering/mcp|MCP]]**: BSL ships `MCPSemanticModel`, a class extending Anthropic's **FastMCP**, that exposes the semantic model as built-in MCP tools — `list_models`, `get_model`, `get_time_range`, and `query_model` [^src4]. Each tool's **docstring acts as the prompt** that teaches the LLM how to call it (e.g. how to format JSON filters, the available time grains) [^src4]. End to end: the user asks a question → the LLM picks an MCP tool → the MCP forwards the query to BSL → BSL translates it to SQL → results return for the LLM to phrase in natural language [^src4]. Observed behaviour: the LLM usually understands the model, occasionally errors (e.g. a malformed `in` filter), and **learns from the error message to self-correct on the next attempt** [^src4].
+The bridge to the agent is **[MCP](/ai-engineering/mcp.md)**: BSL ships `MCPSemanticModel`, a class extending Anthropic's **FastMCP**, that exposes the semantic model as built-in MCP tools — `list_models`, `get_model`, `get_time_range`, and `query_model` [^src4]. Each tool's **docstring acts as the prompt** that teaches the LLM how to call it (e.g. how to format JSON filters, the available time grains) [^src4]. End to end: the user asks a question → the LLM picks an MCP tool → the MCP forwards the query to BSL → BSL translates it to SQL → results return for the LLM to phrase in natural language [^src4]. Observed behaviour: the LLM usually understands the model, occasionally errors (e.g. a malformed `in` filter), and **learns from the error message to self-correct on the next attempt** [^src4].
 
-The punchline reinforces the page's thesis: **"the LLM is only as good as your semantic model"** — if a measure isn't exposed, the LLM can't retrieve it, so **building the semantic model is becoming the new bottleneck in the analytics process** [^src4]. (The open question the source raises: could the LLM help *build* the semantic model incrementally as users ask questions? — i.e. the model itself becomes an [[data-engineering/agentic-data-modeling|agentic]] artifact.)
+The punchline reinforces the page's thesis: **"the LLM is only as good as your semantic model"** — if a measure isn't exposed, the LLM can't retrieve it, so **building the semantic model is becoming the new bottleneck in the analytics process** [^src4]. (The open question the source raises: could the LLM help *build* the semantic model incrementally as users ask questions? — i.e. the model itself becomes an [agentic](/data-engineering/agentic-data-modeling.md) artifact.)
 
 ## The "agentic architect" role shift
 
@@ -102,13 +102,13 @@ From the Tableau Conference report: data analysts are no longer just building da
 
 ## Related
 
-- [[data-engineering/data-modeling-meaning|Meaning in Data Modeling]] — semantics/ontology/taxonomy foundations
-- [[data-engineering/progressive-disclosure-analytics-agents|Progressive Disclosure for Analytics Agents]] — *when* to load semantic context
-- [[data-engineering/data-quality|Data Quality]] · [[data-engineering/dbt|dbt]] (dbt metrics)
-- [[ai-engineering/context-engineering|Context Engineering]] · [[ai-engineering/rag|RAG]] · [[ai-engineering/mcp|MCP]] (ai-engineering)
-- [[data-engineering/agentic-data-modeling|Agentic Data Modeling]] — LLM-assisted schema/semantic-model building
-- [[data-engineering/ai-impact-on-data-engineering|AI's Impact on Data Engineering]]
-- [[data-engineering/README|Data Engineering hub]]
+- [Meaning in Data Modeling](/data-engineering/data-modeling-meaning.md) — semantics/ontology/taxonomy foundations
+- [Progressive Disclosure for Analytics Agents](/data-engineering/progressive-disclosure-analytics-agents.md) — *when* to load semantic context
+- [Data Quality](/data-engineering/data-quality.md) · [dbt](/data-engineering/dbt.md) (dbt metrics)
+- [Context Engineering](/ai-engineering/context-engineering.md) · [RAG](/ai-engineering/rag.md) · [MCP](/ai-engineering/mcp.md) (ai-engineering)
+- [Agentic Data Modeling](/data-engineering/agentic-data-modeling.md) — LLM-assisted schema/semantic-model building
+- [AI's Impact on Data Engineering](/data-engineering/ai-impact-on-data-engineering.md)
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

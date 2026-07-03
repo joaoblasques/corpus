@@ -63,11 +63,11 @@ A class is a **blueprint** for objects [^src1]:
 
 ## See also
 
-- [[mlops/dev-environment-stack|Dev Environment Stack]] — Python is the Layer-3 runtime; install/isolate it with [[mlops/uv|uv]]
-- [[software-engineering/fastapi|FastAPI]] — a Python API framework (software-engineering) that builds on these language fundamentals
-- [[data-engineering/README|Data Engineering]] — Python is the glue for many data pipelines; links back here for language basics
-- [[ai-engineering/claude-api|Claude API]] — uses the Python language reference here (ai-engineering)
-- [[mlops/README|MLOps hub]]
+- [Dev Environment Stack](/mlops/dev-environment-stack.md) — Python is the Layer-3 runtime; install/isolate it with [uv](/mlops/uv.md)
+- [FastAPI](/software-engineering/fastapi.md) — a Python API framework (software-engineering) that builds on these language fundamentals
+- [Data Engineering](/data-engineering/README.md) — Python is the glue for many data pipelines; links back here for language basics
+- [Claude API](/ai-engineering/claude-api.md) — uses the Python language reference here (ai-engineering)
+- [MLOps hub](/mlops/README.md)
 
 ---
 

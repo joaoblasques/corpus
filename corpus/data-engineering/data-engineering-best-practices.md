@@ -54,15 +54,15 @@ last_confirmed: 2026-06-26
 Follow a **3-hop (layered) architecture** so common issues are already handled and references abound [^src1]:
 
 - **Raw layer** — upstream data as-is (maybe type/column-name standardisation).
-- **Transformed layer** — modeled per a principle (Kimball [[data-engineering/dimensional-modeling|dimensional modeling]], Data Vault, ER).
+- **Transformed layer** — modeled per a principle (Kimball [dimensional modeling](/data-engineering/dimensional-modeling.md), Data Vault, ER).
 - **Consumption layer** — joined/aggregated datasets mapping to end-user use cases; **a metric is defined in exactly one place**.
 - **Interface layer [optional]** — a view that presents warehouse tables in an easy-to-consume form.
 
-Most tools ship their own 3-hop variant: Spark's [[data-engineering/medallion-architecture|Medallion (bronze/silver/gold)]], dbt's project structure (staging/warehouse/marts — see [[data-engineering/pipeline-layers|Pipeline Layers]]) [^src1]. Inputs to a step are *upstream*; consumers are *downstream*. At scale, different teams own different layers [^src1].
+Most tools ship their own 3-hop variant: Spark's [Medallion (bronze/silver/gold)](/data-engineering/medallion-architecture.md), dbt's project structure (staging/warehouse/marts — see [Pipeline Layers](/data-engineering/pipeline-layers.md)) [^src1]. Inputs to a step are *upstream*; consumers are *downstream*. At scale, different teams own different layers [^src1].
 
 ### 2. Validate data before exposing it (data-quality checks)
 
-Define expectations for each dataset and check them *before* downstream consumers can use the data — bad data is disastrous and expensive to unwind (re-running every affected process) [^src1]. The reference project uses **Great Expectations**, storing expectations as JSON separate from code for cleaner code [^src1]. Caveat: *don't overdo it* — too many tests raise run time, cost (full-table scans), and redundancy; a common approach checks only **source data and final consumption data**, skipping intermediates [^src1]. See [[data-engineering/data-quality|Data Quality]].
+Define expectations for each dataset and check them *before* downstream consumers can use the data — bad data is disastrous and expensive to unwind (re-running every affected process) [^src1]. The reference project uses **Great Expectations**, storing expectations as JSON separate from code for cleaner code [^src1]. Caveat: *don't overdo it* — too many tests raise run time, cost (full-table scans), and redundancy; a common approach checks only **source data and final consumption data**, skipping intermediates [^src1]. See [Data Quality](/data-engineering/data-quality.md).
 
 ### 3. Avoid duplicates with idempotent pipelines
 
@@ -70,7 +70,7 @@ Backfilling (re-running pipelines) is common; re-runs must not duplicate rows. T
 - **Run-id-based overwrites** — for append-only output; partition by a `run_id` (time range) and overwrite that partition on reprocess (requires tracking run-ids, e.g. Airflow backfill).
 - **Natural-key UPSERTS** — for inserts+updates on a natural key (e.g. SCD2); re-runs update existing rows instead of inserting new ones.
 
-See [[data-engineering/idempotent-pipelines|Idempotent Pipelines]] and [[data-engineering/scd2|SCD2]].
+See [Idempotent Pipelines](/data-engineering/idempotent-pipelines.md) and [SCD2](/data-engineering/scd2.md).
 
 ### 4. Write DRY code; keep I/O separate from transformation
 
@@ -112,13 +112,13 @@ The nine serving questions (full detail paywalled) are: (1) how data will be sto
 
 Zach Wilson's 2025 roadmap frames the *same* practices as the durable, "low-disruption-risk" core to know now that AI writes much of the SQL — grouped for prompting an AI coding tool [^src5]:
 
-- **Data modeling** — proper table/column naming; clear separation of dimension, fact, and aggregation tables [^src5]. (See [[data-engineering/dimensional-modeling|Dimensional Modeling]].)
+- **Data modeling** — proper table/column naming; clear separation of dimension, fact, and aggregation tables [^src5]. (See [Dimensional Modeling](/data-engineering/dimensional-modeling.md).)
 - **Partitioning** — "almost every dataset in your data lake should be partitioned"; minimize/anonymize PII [^src5].
-- **Data-lake storage** — maximize **run-length-encoding** compression, store as **Parquet**, set sensible retention, avoid duplicating datasets that already exist [^src5]. (See [[data-engineering/parquet|Parquet]].)
-- **DAG idempotency** — a task runs the same whether backfilled or in production and regardless of how many times it's run; solved with partition sensors / cumulative-DAG awareness and using `MERGE`/`INSERT OVERWRITE` rather than `INSERT INTO` [^src5]. (See [[data-engineering/idempotent-pipelines|Idempotent Pipelines]] and [[data-engineering/merge-into|MERGE INTO]].)
+- **Data-lake storage** — maximize **run-length-encoding** compression, store as **Parquet**, set sensible retention, avoid duplicating datasets that already exist [^src5]. (See [Parquet](/data-engineering/parquet.md).)
+- **DAG idempotency** — a task runs the same whether backfilled or in production and regardless of how many times it's run; solved with partition sensors / cumulative-DAG awareness and using `MERGE`/`INSERT OVERWRITE` rather than `INSERT INTO` [^src5]. (See [Idempotent Pipelines](/data-engineering/idempotent-pipelines.md) and [MERGE INTO](/data-engineering/merge-into.md).)
 - **Serving / dashboarding** — serve from a low-latency store (Druid/Snowflake), pre-aggregate before loading, and don't put non-aggregated data into low-latency stores [^src5].
 
-This independently confirms the idempotency, partitioning, and storage-layering practices above; the role-level framing is in [[data-engineering/ai-impact-on-data-engineering|AI's Impact on Data Engineering]] [^src5].
+This independently confirms the idempotency, partitioning, and storage-layering practices above; the role-level framing is in [AI's Impact on Data Engineering](/data-engineering/ai-impact-on-data-engineering.md) [^src5].
 
 ## Software engineering skills every data engineer should have
 
@@ -144,15 +144,15 @@ What survived [^src7]:
 
 ## Corroboration: the same practices framed as AI-era durable skills
 
-StartDataEngineering's "6 skills in the age of AI" independently reaches the same core: design patterns exist to keep pipelines maintainable, so the durable skill is knowing *when to apply a best practice and when to break it* [^src8]. Its six concepts map onto this page — the **3-stage progressive transform** (source → type conversions → Kimball model → summary tables) restates practice #1's layered architecture; **validating data before exposing it** + an orchestrator (Airflow) restates practice #2; and it points to four companion best-practice resources (Data Flow patterns, Code patterns, Implementation best practices, Metadata & Logging best practices) covering practices #1, #4, and #5 [^src8]. The role-level "fundamentals endure as codegen commoditises" framing is in [[data-engineering/ai-impact-on-data-engineering|AI's Impact on Data Engineering]] [^src8].
+StartDataEngineering's "6 skills in the age of AI" independently reaches the same core: design patterns exist to keep pipelines maintainable, so the durable skill is knowing *when to apply a best practice and when to break it* [^src8]. Its six concepts map onto this page — the **3-stage progressive transform** (source → type conversions → Kimball model → summary tables) restates practice #1's layered architecture; **validating data before exposing it** + an orchestrator (Airflow) restates practice #2; and it points to four companion best-practice resources (Data Flow patterns, Code patterns, Implementation best practices, Metadata & Logging best practices) covering practices #1, #4, and #5 [^src8]. The role-level "fundamentals endure as codegen commoditises" framing is in [AI's Impact on Data Engineering](/data-engineering/ai-impact-on-data-engineering.md) [^src8].
 
 ## Related
 
-- [[data-engineering/idempotent-pipelines|Idempotent Pipelines]] · [[data-engineering/data-quality|Data Quality]]
-- [[data-engineering/pipeline-layers|Pipeline Layers]] · [[data-engineering/medallion-architecture|Medallion Architecture]]
-- [[data-engineering/de-portfolio-projects|DE Portfolio Projects]] — runnable projects applying these
-- [[data-engineering/data-engineer-role|The Data Engineer Role]] — fundamentals over tools
-- [[data-engineering/README|Data Engineering hub]]
+- [Idempotent Pipelines](/data-engineering/idempotent-pipelines.md) · [Data Quality](/data-engineering/data-quality.md)
+- [Pipeline Layers](/data-engineering/pipeline-layers.md) · [Medallion Architecture](/data-engineering/medallion-architecture.md)
+- [DE Portfolio Projects](/data-engineering/de-portfolio-projects.md) — runnable projects applying these
+- [The Data Engineer Role](/data-engineering/data-engineer-role.md) — fundamentals over tools
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

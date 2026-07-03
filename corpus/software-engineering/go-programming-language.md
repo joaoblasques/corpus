@@ -287,12 +287,12 @@ The middleware-closure and API-key-via-header patterns are the reusable takeaway
 
 ## See also
 
-- [[software-engineering/data-structures|Data Structures and Big O Notation]] — Go slices/maps implement the same underlying structures
-- [[software-engineering/software-design-principles|Software Design Principles]] — Go's compiler-enforced constraints (no unused vars/imports) operationalize the simplicity principle
-- [[software-engineering/algorithms|Algorithms]] — Go is widely used for algorithm implementations
-- [[software-engineering/javascript-fundamentals|JavaScript Fundamentals]] — the Tech With Tim course frames Go as a deliberately contrasting language (static/compiled vs dynamic/interpreted); Go pairs with a JS frontend
-- [[software-engineering/system-design-fundamentals|System Design Fundamentals]] — the RSS-aggregator capstone exercises REST status codes, auth (API keys), SQL vs NoSQL, and routing covered there
-- [[software-engineering/terminal-cli-tools|Terminal / CLI Tools]] — Go's sweet spot includes CLIs; `go build` ships a single static binary
+- [Data Structures and Big O Notation](/software-engineering/data-structures.md) — Go slices/maps implement the same underlying structures
+- [Software Design Principles](/software-engineering/software-design-principles.md) — Go's compiler-enforced constraints (no unused vars/imports) operationalize the simplicity principle
+- [Algorithms](/software-engineering/algorithms.md) — Go is widely used for algorithm implementations
+- [JavaScript Fundamentals](/software-engineering/javascript-fundamentals.md) — the Tech With Tim course frames Go as a deliberately contrasting language (static/compiled vs dynamic/interpreted); Go pairs with a JS frontend
+- [System Design Fundamentals](/software-engineering/system-design-fundamentals.md) — the RSS-aggregator capstone exercises REST status codes, auth (API keys), SQL vs NoSQL, and routing covered there
+- [Terminal / CLI Tools](/software-engineering/terminal-cli-tools.md) — Go's sweet spot includes CLIs; `go build` ships a single static binary
 
 ---
 

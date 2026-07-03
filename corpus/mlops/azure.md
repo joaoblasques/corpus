@@ -30,7 +30,7 @@ updated: 2026-06-15
 
 # Azure
 
-**TL;DR**: Microsoft Azure is the **second-largest cloud provider** behind AWS, growing fast; strongest fit for .NET / PowerShell / Windows shops via native Visual Studio integration [^src3]. This page maps Azure's core services onto the [[mlops/cloud-computing-fundamentals|cloud fundamentals]] and covers the **AZ-900 (Azure Fundamentals)** certification scope — the entry-level exam these courses target [^src1][^src2].
+**TL;DR**: Microsoft Azure is the **second-largest cloud provider** behind AWS, growing fast; strongest fit for .NET / PowerShell / Windows shops via native Visual Studio integration [^src3]. This page maps Azure's core services onto the [cloud fundamentals](/mlops/cloud-computing-fundamentals.md) and covers the **AZ-900 (Azure Fundamentals)** certification scope — the entry-level exam these courses target [^src1][^src2].
 
 ## Resource organization hierarchy
 
@@ -60,16 +60,16 @@ Azure nests governance scopes top-down, with policies/permissions inherited down
 
 ## AZ-900 fundamentals emphasis
 
-Both AZ-900 courses agree on the conceptual core [^src1][^src2]: IaaS/PaaS/SaaS, public/private/hybrid cloud, **CapEx→OpEx**, high availability / fault tolerance, vertical vs. horizontal scaling and elasticity, **regions / availability zones / region pairs**, and cost tooling (pay-as-you-go, reserved capacity, pricing calculator, TCO). File2 is more hands-on (portal demos of VMs, Functions, networking, storage); File1 leans conceptual/exam-domain [^src1][^src2]. See [[mlops/cloud-computing-fundamentals|Cloud Computing Fundamentals]] for the provider-agnostic versions.
+Both AZ-900 courses agree on the conceptual core [^src1][^src2]: IaaS/PaaS/SaaS, public/private/hybrid cloud, **CapEx→OpEx**, high availability / fault tolerance, vertical vs. horizontal scaling and elasticity, **regions / availability zones / region pairs**, and cost tooling (pay-as-you-go, reserved capacity, pricing calculator, TCO). File2 is more hands-on (portal demos of VMs, Functions, networking, storage); File1 leans conceptual/exam-domain [^src1][^src2]. See [Cloud Computing Fundamentals](/mlops/cloud-computing-fundamentals.md) for the provider-agnostic versions.
 
 > The Intellipaat source [^src3] is largely a *why-Azure* pitch (security investment, free-tier credits, 54 regions / 140 countries, regional expansion) plus a VM-launch portal demo; its substantive points (resource groups, virtual networks as isolated clouds, pay-per-use VMs) are subsumed by the two AZ-900 courses above and corroborate them.
 
 ## See also
 
-- [[mlops/cloud-computing-fundamentals|Cloud Computing Fundamentals]] — the concepts these services implement
-- [[mlops/aws|AWS]] · [[mlops/gcp|GCP]] — peer providers (Azure VNet ≈ AWS VPC; Blob ≈ S3; Cosmos DB ≈ DynamoDB)
-- [[mlops/infrastructure-as-code|Infrastructure as Code]] — ARM templates are Azure's native IaC
-- [[mlops/README|MLOps hub]]
+- [Cloud Computing Fundamentals](/mlops/cloud-computing-fundamentals.md) — the concepts these services implement
+- [AWS](/mlops/aws.md) · [GCP](/mlops/gcp.md) — peer providers (Azure VNet ≈ AWS VPC; Blob ≈ S3; Cosmos DB ≈ DynamoDB)
+- [Infrastructure as Code](/mlops/infrastructure-as-code.md) — ARM templates are Azure's native IaC
+- [MLOps hub](/mlops/README.md)
 
 ---
 

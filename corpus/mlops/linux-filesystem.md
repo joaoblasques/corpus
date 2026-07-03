@@ -67,7 +67,7 @@ updated: 2026-06-25
 | `/etc/fstab` | Filesystem mounts at boot |
 | `/etc/hosts` | Static hostname→IP mapping |
 | `/etc/ssh/sshd_config` | SSH server configuration |
-| `/etc/crontab` | System-wide cron entries (see [[mlops/cron-scheduling|Cron Scheduling]]) |
+| `/etc/crontab` | System-wide cron entries (see [Cron Scheduling](/mlops/cron-scheduling.md)) |
 
 ## Relevance for DevOps/MLOps
 
@@ -81,11 +81,11 @@ updated: 2026-06-25
 
 ## See also
 
-- [[mlops/linux-commands|Linux Commands]] — the 20% of commands for 80% of work
-- [[mlops/cron-scheduling|Cron Scheduling]] — `/etc/cron.*` directories and system crontab
-- [[mlops/vps-for-agents|VPS for Agents]] — VPS Ubuntu filesystem in practice
-- [[mlops/networking-fundamentals|Networking Fundamentals]] — `/etc/hosts`, `/etc/resolv.conf` in network config context
-- [[mlops/README|MLOps hub]]
+- [Linux Commands](/mlops/linux-commands.md) — the 20% of commands for 80% of work
+- [Cron Scheduling](/mlops/cron-scheduling.md) — `/etc/cron.*` directories and system crontab
+- [VPS for Agents](/mlops/vps-for-agents.md) — VPS Ubuntu filesystem in practice
+- [Networking Fundamentals](/mlops/networking-fundamentals.md) — `/etc/hosts`, `/etc/resolv.conf` in network config context
+- [MLOps hub](/mlops/README.md)
 
 ---
 

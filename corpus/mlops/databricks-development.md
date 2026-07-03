@@ -53,7 +53,7 @@ Databricks supports three serverless environment versions, each with its own req
 
 ## Python project management with uv
 
-The course uses **[[mlops/uv|uv]]** for Python project management [^src1]. Python version and dependencies live in `pyproject.toml`, with **exact version pins** for all packages — intentional *because the project is not meant to be reused as a library*; for reusable packages, locking too strictly causes resolution issues [^src1]. The `marvel-characters` package is self-contained: when installed inside a Databricks environment, its specific versions should override the existing ones [^src1]. Setup is one command, building a `.venv` in the project folder [^src1]:
+The course uses **[uv](/mlops/uv.md)** for Python project management [^src1]. Python version and dependencies live in `pyproject.toml`, with **exact version pins** for all packages — intentional *because the project is not meant to be reused as a library*; for reusable packages, locking too strictly causes resolution issues [^src1]. The `marvel-characters` package is self-contained: when installed inside a Databricks environment, its specific versions should override the existing ones [^src1]. Setup is one command, building a `.venv` in the project folder [^src1]:
 
 ```bash
 uv sync --extra dev   # dev extras: databricks-connect, ipykernel, pip, pre-commit
@@ -77,13 +77,13 @@ The three environments map to dedicated catalogs `mlops_dev`, `mlops_acc`, `mlop
 
 ## See also
 
-- [[mlops/uv|uv]] — the package/project manager used here
-- [[mlops/vs-code|VS Code]] — the editor hosting the Databricks extension
-- [[mlops/git|Git]] — Git folders and the branch workflow
-- [[mlops/mlflow|MLflow]] — reuses the `is_databricks()` / profile auth pattern set up here
-- [[mlops/ci-cd-for-ml|CI/CD for ML]] — the dev/acc/prd catalog split feeds the deployment strategy
-- [[data-engineering/databricks|Databricks]] — the platform and Unity Catalog this builds on
-- [[mlops/README|MLOps hub]]
+- [uv](/mlops/uv.md) — the package/project manager used here
+- [VS Code](/mlops/vs-code.md) — the editor hosting the Databricks extension
+- [Git](/mlops/git.md) — Git folders and the branch workflow
+- [MLflow](/mlops/mlflow.md) — reuses the `is_databricks()` / profile auth pattern set up here
+- [CI/CD for ML](/mlops/ci-cd-for-ml.md) — the dev/acc/prd catalog split feeds the deployment strategy
+- [Databricks](/data-engineering/databricks.md) — the platform and Unity Catalog this builds on
+- [MLOps hub](/mlops/README.md)
 
 ---
 

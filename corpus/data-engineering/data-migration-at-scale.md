@@ -50,7 +50,7 @@ Keep comparing; if no discrepancies, remove the shadow job (now the *old* system
 
 ## CDC makes rollback essential
 
-Both systems used **[[data-engineering/change-data-capture|change data capture]]** to incrementally ingest. A property of CDC: *generated data feeds the next generation*, so problematic data **propagates** — any bad landed data passes to new landed data [^src1]. Two mitigations [^src1]:
+Both systems used **[change data capture](/data-engineering/change-data-capture.md)** to incrementally ingest. A property of CDC: *generated data feeds the next generation*, so problematic data **propagates** — any bad landed data passes to new landed data [^src1]. Two mitigations [^src1]:
 - **Early signals after rollout** — during reverse shadow, trigger backfill on both jobs; if results still match, success; if not, roll back immediately so consumers are never impacted.
 - **Stop the bleeding on rollback** — mark a partition's metadata as bad-quality; a bad *delta* partition halts new landing + alerts; a bad *target* partition makes the system pick an older partition and merge more deltas. On rollback, query metadata for all bad partitions and fix with backfill.
 
@@ -63,15 +63,15 @@ Both systems used **[[data-engineering/change-data-capture|change data capture]]
 
 ## Pattern summary
 
-The transferable pattern: **run both systems → compare continuously (row count + checksum) → promote per-job automatically on objective criteria → keep the old system live as a shadow for fast rollback → clean up only when proven**. This complements [[data-engineering/cicd-for-data-infrastructure|CI/CD]]'s plan-then-gate discipline and the idempotency required for safe backfills.
+The transferable pattern: **run both systems → compare continuously (row count + checksum) → promote per-job automatically on objective criteria → keep the old system live as a shadow for fast rollback → clean up only when proven**. This complements [CI/CD](/data-engineering/cicd-for-data-infrastructure.md)'s plan-then-gate discipline and the idempotency required for safe backfills.
 
 ## Related
 
-- [[data-engineering/change-data-capture|Change Data Capture]] — why bad data propagates in CDC
-- [[data-engineering/idempotent-pipelines|Idempotent Pipelines]] — backfill correctness
-- [[data-engineering/cicd-for-data-infrastructure|CI/CD for Data Infrastructure]] — staged rollout with gates
-- [[data-engineering/data-quality|Data Quality]] — checksum/row-count verification
-- [[data-engineering/README|Data Engineering hub]]
+- [Change Data Capture](/data-engineering/change-data-capture.md) — why bad data propagates in CDC
+- [Idempotent Pipelines](/data-engineering/idempotent-pipelines.md) — backfill correctness
+- [CI/CD for Data Infrastructure](/data-engineering/cicd-for-data-infrastructure.md) — staged rollout with gates
+- [Data Quality](/data-engineering/data-quality.md) — checksum/row-count verification
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

@@ -91,7 +91,7 @@ updated: 2026-06-24
 
 # Agent Security
 
-**TL;DR**: Hardening LLM agents for production rests on defense in depth — no single control is reliable. Layer input validation (prompt-injection classifiers, sanitization, human-in-the-loop), guardrails (LLM-as-judge, PII masking, moderation), output control ([[ai-engineering/structured-outputs|structured outputs]]), and architecture (least privilege, scoped tools, auth inheritance, observability) [^src1]. "Security is just good engineering applied to AI" [^src1]. Emerging protocols like auth.md extend this to agent identity and registration [^src3].
+**TL;DR**: Hardening LLM agents for production rests on defense in depth — no single control is reliable. Layer input validation (prompt-injection classifiers, sanitization, human-in-the-loop), guardrails (LLM-as-judge, PII masking, moderation), output control ([structured outputs](/ai-engineering/structured-outputs.md)), and architecture (least privilege, scoped tools, auth inheritance, observability) [^src1]. "Security is just good engineering applied to AI" [^src1]. Emerging protocols like auth.md extend this to agent identity and registration [^src3].
 
 ## Prompt injection
 
@@ -114,14 +114,14 @@ All are preventive — a gatekeeping layer before the LLM receives the request [
 A production-ready agent should layer all four [^src1]:
 1. **Input validation** — injection classifiers, input sanitization, custom pattern matching, human-in-the-loop.
 2. **Guardrails** — topical scope guardrails, PII detection/masking, content moderation, LLM-as-judge appropriateness checks.
-3. **Output control** — [[ai-engineering/structured-outputs|structured outputs]] with Pydantic schemas, response-format enforcement, the Instructor library for automatic retries, output validation before downstream use.
+3. **Output control** — [structured outputs](/ai-engineering/structured-outputs.md) with Pydantic schemas, response-format enforcement, the Instructor library for automatic retries, output validation before downstream use.
 4. **Architecture** — least-privilege database access, scoped tool permissions, authentication inheritance for multi-tenant apps, comprehensive logging/monitoring/observability, cloud content filtering.
 
 The recommended learning sequence is reliability first (structured outputs) → understand the threat (injection) → secure design → hands-on guardrails → observability [^src1].
 
 ### Human-in-the-loop (HITL)
 
-A code-driven guardrail that blocks execution if the user rejects an action, breaking the agent loop. Two types: **user permission** and **user input** [^src1]. Strongly recommended where destructive operations carry high impact — in testing, agents asked before destructive operations (e.g. DELETE endpoints) only "most of the time," frequently proceeding without asking [^src1]. (See [[ai-engineering/agent-harness|agent harness]] guidance on confirming irreversible actions.)
+A code-driven guardrail that blocks execution if the user rejects an action, breaking the agent loop. Two types: **user permission** and **user input** [^src1]. Strongly recommended where destructive operations carry high impact — in testing, agents asked before destructive operations (e.g. DELETE endpoints) only "most of the time," frequently proceeding without asking [^src1]. (See [agent harness](/ai-engineering/agent-harness.md) guidance on confirming irreversible actions.)
 
 ### Key principles
 
@@ -131,7 +131,7 @@ A code-driven guardrail that blocks execution if the user rejects an action, bre
 
 ## Production hardening at the harness level
 
-Coding-agent harnesses add their own real-time security passes. Anthropic's `security-guidance` plugin reviews Claude's edits as they happen and sends vulnerabilities back for immediate fix: every file write triggers a scan, a model double-checks diffs at turn end, high-severity issues are fed back for fixing, and on git commit an agentic reviewer traces data flow to catch cross-file bugs like IDOR or cross-file SSRF [^src5]. (See [[ai-engineering/claude-code|Claude Code]].) On the exfiltration side, ChatGPT's **Lockdown Mode** can't stop an injection from landing but "seals the exits," cutting the outbound requests attackers use to siphon data — at the cost of disabling agent mode, deep research, and downloads [^src6].
+Coding-agent harnesses add their own real-time security passes. Anthropic's `security-guidance` plugin reviews Claude's edits as they happen and sends vulnerabilities back for immediate fix: every file write triggers a scan, a model double-checks diffs at turn end, high-severity issues are fed back for fixing, and on git commit an agentic reviewer traces data flow to catch cross-file bugs like IDOR or cross-file SSRF [^src5]. (See [Claude Code](/ai-engineering/claude-code.md).) On the exfiltration side, ChatGPT's **Lockdown Mode** can't stop an injection from landing but "seals the exits," cutting the outbound requests attackers use to siphon data — at the cost of disabling agent mode, deep research, and downloads [^src6].
 
 ## Offensive use: agents as AppSec testers
 
@@ -168,7 +168,7 @@ The Snyk taint analysis hybrid approach addresses this: static taint tracking tr
 
 ## The overconfidence effect
 
-A 2022 study found developers using AI coding assistants were *more* confident in their code's security even when it was objectively less secure than code written without AI [^src8]. The effect is compounding: AI-generated code may contain more vulnerabilities *and* the developer is less likely to subject it to security review. "Trust but verify" (Russian proverb invoked in ch8) is the corrective stance: trust the output enough to use it as a starting point, but verify before it ships [^src8]. See [[ai-engineering/agent-testing|Agent Testing]] for the testing-side complement.
+A 2022 study found developers using AI coding assistants were *more* confident in their code's security even when it was objectively less secure than code written without AI [^src8]. The effect is compounding: AI-generated code may contain more vulnerabilities *and* the developer is less likely to subject it to security review. "Trust but verify" (Russian proverb invoked in ch8) is the corrective stance: trust the output enough to use it as a starting point, but verify before it ships [^src8]. See [Agent Testing](/ai-engineering/agent-testing.md) for the testing-side complement.
 
 ## Prompt injection in browser use
 
@@ -189,7 +189,7 @@ The result: **Claude Opus 4.5 achieved ~1% attack success rate** in Anthropic's 
 - **HITL gates for sensitive actions**: require human confirmation before any action triggered by information from external web pages.
 - **Least-privilege tool design**: the agent should not be able to exfiltrate data even if successfully injected.
 
-See [[ai-engineering/computer-use|Computer Use]] for implementation detail on browser-use configuration with Sonnet 4.6 (most robust for clicking tasks).
+See [Computer Use](/ai-engineering/computer-use.md) for implementation detail on browser-use configuration with Sonnet 4.6 (most robust for clicking tasks).
 
 ## Claude Security (enterprise vulnerability scanning product)
 
@@ -291,7 +291,7 @@ Specific documented risk vectors [^src17]:
 3. Read the full skill file before installing; look for unexplained network calls or broadly-scoped tool definitions.
 4. Use sandboxed environments (separate Claude account / project) for evaluating unknown skills.
 
-This connects to the MCP security surface (see [[ai-engineering/mcp|MCP]]): both skill files and MCP server instructions can carry injections, and the same defensive instinct applies — read what you're loading before you load it.
+This connects to the MCP security surface (see [MCP](/ai-engineering/mcp.md)): both skill files and MCP server instructions can carry injections, and the same defensive instinct applies — read what you're loading before you load it.
 
 ## The lethal trifecta (AI second brain risk model)
 
@@ -338,26 +338,26 @@ When agents handle per-customer credentials (API keys, OAuth tokens), passing th
 
 ## Local AI agent isolation model
 
-For [[ai-engineering/local-ai-agents|local AI agents]] — which run on your own machine and may touch your files, email, and the screen — safety is "the primary concern," because you are "giving this very intelligent agent access to your computer and hoping that it's not going to just go bananas" [^src21] [11:39](../../raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md#t=11:39). Documented incidents include agents deleting a user's emails or carrying viruses introduced via shared skills [^src21]. The practitioner isolation model [^src21] [12:05](../../raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md#t=12:05):
+For [local AI agents](/ai-engineering/local-ai-agents.md) — which run on your own machine and may touch your files, email, and the screen — safety is "the primary concern," because you are "giving this very intelligent agent access to your computer and hoping that it's not going to just go bananas" [^src21] [11:39](../../raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md#t=11:39). Documented incidents include agents deleting a user's emails or carrying viruses introduced via shared skills [^src21]. The practitioner isolation model [^src21] [12:05](../../raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md#t=12:05):
 
 1. **Isolate the machine** — run local agents on a dedicated/wiped machine, never on the primary machine holding sensitive data.
 2. **Scope access narrowly** — give it a *separate* email for screening, not the personal inbox with sensitive mail; grant only what each task needs.
-3. **Don't trust foreign skills** — others' workflow/skill files can hide malicious instructions; avoid skills except from trusted developers, and when you do want one, "give the skill to Claude and tell it to scan the skill and then rewrite it itself" before installing. This is the local-agent version of the [[ai-engineering/agent-skills|don't-download-skills]] rule.
-4. **Scheduled security audits** — use the agent's own heartbeat to run a security audit hourly (or at minimum daily); frameworks like [[ai-engineering/openclaw|OpenClaw]] expose dedicated security checks, and no-code [[ai-engineering/claude-cowork|Claude Cowork]] pre-bakes many of these protections.
+3. **Don't trust foreign skills** — others' workflow/skill files can hide malicious instructions; avoid skills except from trusted developers, and when you do want one, "give the skill to Claude and tell it to scan the skill and then rewrite it itself" before installing. This is the local-agent version of the [don't-download-skills](/ai-engineering/agent-skills.md) rule.
+4. **Scheduled security audits** — use the agent's own heartbeat to run a security audit hourly (or at minimum daily); frameworks like [OpenClaw](/ai-engineering/openclaw.md) expose dedicated security checks, and no-code [Claude Cowork](/ai-engineering/claude-cowork.md) pre-bakes many of these protections.
 
-General rule of thumb from the source: "be as paranoid as possible" [^src21]. This is the personal-machine analogue of the [[ai-engineering/claude-managed-agents|Managed Agents]] self-hosted-sandbox and credential-brokering patterns above — shrink the blast radius before granting write/action tools.
+General rule of thumb from the source: "be as paranoid as possible" [^src21]. This is the personal-machine analogue of the [Managed Agents](/ai-engineering/claude-managed-agents.md) self-hosted-sandbox and credential-brokering patterns above — shrink the blast radius before granting write/action tools.
 
 ## See also
 
-- [[ai-engineering/structured-outputs|Structured Outputs]] — output-control layer; reliability prerequisite for security
-- [[ai-engineering/prompt-engineering|Prompt Engineering]] — injection is the adversarial inverse; few-shot defenses
-- [[ai-engineering/agent-harness|Agent Harness]] — where HITL and confirmation gates live
-- [[ai-engineering/claude-code|Claude Code]] — real-time security plugin reviewing agent edits
-- [[ai-engineering/mcp|MCP]] — tool-exposure surface; scoped permissions and OAuth apply
-- [[ai-engineering/claude-models|Claude Model Lineup]] — Opus 4.7 powers Claude Security's model-backed scans
-- [[ai-engineering/agent-testing|Agent Testing]] — the testing-side complement to security; overconfidence effect
-- [[ai-engineering/vibe-coding|Vibe Coding]] — the 70% problem; why AI code needs more security review, not less
-- [[ai-engineering/sources/beyond-vibe-coding-book|Beyond Vibe Coding (Book)]] — ch8 as primary source for vulnerability taxonomy
+- [Structured Outputs](/ai-engineering/structured-outputs.md) — output-control layer; reliability prerequisite for security
+- [Prompt Engineering](/ai-engineering/prompt-engineering.md) — injection is the adversarial inverse; few-shot defenses
+- [Agent Harness](/ai-engineering/agent-harness.md) — where HITL and confirmation gates live
+- [Claude Code](/ai-engineering/claude-code.md) — real-time security plugin reviewing agent edits
+- [MCP](/ai-engineering/mcp.md) — tool-exposure surface; scoped permissions and OAuth apply
+- [Claude Model Lineup](/ai-engineering/claude-models.md) — Opus 4.7 powers Claude Security's model-backed scans
+- [Agent Testing](/ai-engineering/agent-testing.md) — the testing-side complement to security; overconfidence effect
+- [Vibe Coding](/ai-engineering/vibe-coding.md) — the 70% problem; why AI code needs more security review, not less
+- [Beyond Vibe Coding (Book)](/ai-engineering/sources/beyond-vibe-coding-book.md) — ch8 as primary source for vulnerability taxonomy
 
 ---
 

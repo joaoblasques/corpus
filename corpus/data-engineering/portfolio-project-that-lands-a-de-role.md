@@ -68,7 +68,7 @@ The corpus is emphatic and consistent: a DE's value is **business impact first, 
 
 ## 2. The rigor checklist — what makes it read as *senior*
 
-The corpus's [[data-engineering/data-engineering-best-practices|six best practices]] are the backbone of a credible project; map every one into the build and call it out in the README so a reviewer can find it [^be]. The meta-rule: **analyze requirements, fix high-priority gaps first — don't implement best practices for their own sake** [^be].
+The corpus's [six best practices](/data-engineering/data-engineering-best-practices.md) are the backbone of a credible project; map every one into the build and call it out in the README so a reviewer can find it [^be]. The meta-rule: **analyze requirements, fix high-priority gaps first — don't implement best practices for their own sake** [^be].
 
 | # | Practice | What "senior" looks like in the project | Corpus anchor |
 |---|---|---|---|
@@ -81,13 +81,13 @@ The corpus's [[data-engineering/data-engineering-best-practices|six best practic
 
 Two of these deserve emphasis because they are where juniors most visibly fall short:
 
-**Medallion is a *lifecycle*, not a *data model*.** Bronze/silver/gold says nothing about grain, keys, or whether gold is a star schema [^med]. A senior project shows an explicit **data model** at gold (Kimball star with an [[data-engineering/scd2|SCD2]] dimension, or a documented OBT) and can say *why* — *"Medallion owns the pipeline; modeling owns the entities, grain, and keys"* [^med]. Debating layer colors while ignoring grain is the tell of *"a genuine gap in data-modeling knowledge among data engineers who over-focus on pipelines"* [^med].
+**Medallion is a *lifecycle*, not a *data model*.** Bronze/silver/gold says nothing about grain, keys, or whether gold is a star schema [^med]. A senior project shows an explicit **data model** at gold (Kimball star with an [SCD2](/data-engineering/scd2.md) dimension, or a documented OBT) and can say *why* — *"Medallion owns the pipeline; modeling owns the entities, grain, and keys"* [^med]. Debating layer colors while ignoring grain is the tell of *"a genuine gap in data-modeling knowledge among data engineers who over-focus on pipelines"* [^med].
 
 **Idempotency is the real test of pipeline maturity.** Non-idempotent pipelines create *"tests that pass but prod fails"* bugs that surface on backfill [^idem]. The clearest proof you can put in a README: a backfill that reruns a date range and produces consistent output, ideally **parallelized** because each partition reads/writes only its own `ds` [^idem]. That single demonstration signals functional-data-engineering literacy more than any tool badge.
 
 Beyond the six, two more belong on a 2026 checklist:
 
-- **IaC + CI/CD.** Provision with [[mlops/terraform|Terraform]]; wire the standard skeleton — **CI runs fmt/validate/plan and posts the plan to the PR; CD applies to dev on merge, then a human-gated apply to prod** [^cicd]. Even a solo project benefits: it proves you understand *"deploying infra changes as easily as a code change"* and the dev→gate→prod flow employers actually run [^cicd].
+- **IaC + CI/CD.** Provision with [Terraform](/mlops/terraform.md); wire the standard skeleton — **CI runs fmt/validate/plan and posts the plan to the PR; CD applies to dev on merge, then a human-gated apply to prod** [^cicd]. Even a solo project benefits: it proves you understand *"deploying infra changes as easily as a code change"* and the dev→gate→prod flow employers actually run [^cicd].
 - **Cost awareness as a first-class artifact.** See §5; this is the dimension juniors omit entirely.
 
 ## 3. Realism and ops — the difference between a demo and a system
@@ -150,28 +150,28 @@ Build **one** project that a hiring manager can describe in a sentence — *a re
 
 ## See also
 
-- [[data-engineering/de-portfolio-projects|DE Portfolio Projects]] — runnable batch/stream/event-driven templates and a stack-comparison matrix
-- [[data-engineering/data-engineering-best-practices|Data Engineering Best Practices]] — the six-practice backbone (3-hop, DQ, idempotency, DRY, metadata, tests)
-- [[data-engineering/data-engineer-role|The Data Engineer Role]] — business impact + fundamentals; the DA→DE transition playbook
-- [[data-engineering/medallion-architecture|Medallion Architecture]] — lifecycle vs. data model; where modeling actually lives
-- [[data-engineering/idempotent-pipelines|Idempotent Pipelines]] — backfill as the real maturity test
-- [[data-engineering/data-quality|Data Quality]] — validate at ingestion; contracts and schema-aware checks
-- [[data-engineering/cicd-for-data-infrastructure|CI/CD for Data Infrastructure]] — plan→gate→apply with Terraform + GitHub Actions
-- [[data-engineering/databricks|Databricks]] — when (and when not) to use it; Unity Catalog, Lakeflow, Liquid Clustering, cost model
-- [[data-engineering/sources/aws-duckdb-etl-fargate|DuckDB ETL on ECS Fargate]] — a sub-$1 end-to-end AWS reference build (Terraform/EventBridge/Slack)
-- [[ai-business/technical-career|Navigating a Technical Career]] — portfolio signal, role targeting, taste vs. AI-slop
-- [[data-engineering/dimensional-modeling|Dimensional Modeling]] / [[data-engineering/scd2|SCD2]] — the gold-layer modeling fundamentals
-- [[mlops/terraform|Terraform]] / [[mlops/aws|AWS]] — the IaC and cloud substrate
-- [[data-engineering/README|Data Engineering hub]]
+- [DE Portfolio Projects](/data-engineering/de-portfolio-projects.md) — runnable batch/stream/event-driven templates and a stack-comparison matrix
+- [Data Engineering Best Practices](/data-engineering/data-engineering-best-practices.md) — the six-practice backbone (3-hop, DQ, idempotency, DRY, metadata, tests)
+- [The Data Engineer Role](/data-engineering/data-engineer-role.md) — business impact + fundamentals; the DA→DE transition playbook
+- [Medallion Architecture](/data-engineering/medallion-architecture.md) — lifecycle vs. data model; where modeling actually lives
+- [Idempotent Pipelines](/data-engineering/idempotent-pipelines.md) — backfill as the real maturity test
+- [Data Quality](/data-engineering/data-quality.md) — validate at ingestion; contracts and schema-aware checks
+- [CI/CD for Data Infrastructure](/data-engineering/cicd-for-data-infrastructure.md) — plan→gate→apply with Terraform + GitHub Actions
+- [Databricks](/data-engineering/databricks.md) — when (and when not) to use it; Unity Catalog, Lakeflow, Liquid Clustering, cost model
+- [DuckDB ETL on ECS Fargate](/data-engineering/sources/aws-duckdb-etl-fargate.md) — a sub-$1 end-to-end AWS reference build (Terraform/EventBridge/Slack)
+- [Navigating a Technical Career](/ai-business/technical-career.md) — portfolio signal, role targeting, taste vs. AI-slop
+- [Dimensional Modeling](/data-engineering/dimensional-modeling.md) / [SCD2](/data-engineering/scd2.md) — the gold-layer modeling fundamentals
+- [Terraform](/mlops/terraform.md) / [AWS](/mlops/aws.md) — the IaC and cloud substrate
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 
-[^role]: [[data-engineering/data-engineer-role|The Data Engineer Role]] (corpus) — business impact + fundamentals over tool lists; work-backward-from-output; STAR + stakeholder triad
-[^be]: [[data-engineering/data-engineering-best-practices|Data Engineering Best Practices]] (corpus) — the six practices; one-wide-table anti-pattern; don't-over-test
-[^career]: [[ai-business/technical-career|Navigating a Technical Career]] (corpus) — portfolio signal, role targeting, solved-business-problem, taste vs. AI-slop, business proximity
-[^med]: [[data-engineering/medallion-architecture|Medallion Architecture]] (corpus) — lifecycle stages not a data model; grain/keys live in modeling
-[^dq]: [[data-engineering/data-quality|Data Quality]] (corpus) — validate at ingestion; contracts; freshness/volume/schema signals; silent-null join failure
-[^idem]: [[data-engineering/idempotent-pipelines|Idempotent Pipelines]] (corpus) — fixed windows, run-id/merge, parallel backfill as the proof
-[^cicd]: [[data-engineering/cicd-for-data-infrastructure|CI/CD for Data Infrastructure]] (corpus) — CI plan-to-PR, CD apply-dev→human-gate→prod with Terraform
-[^db]: [[data-engineering/databricks|Databricks]] (corpus) — when/when-not, "boring is hireable," Unity Catalog, Lakeflow, Liquid Clustering, DBU cost model, adoption mistakes
-[^aws]: [[data-engineering/sources/aws-duckdb-etl-fargate|DuckDB ETL on ECS Fargate]] (corpus) — end-to-end AWS build; EventBridge/Slack/Secrets Manager ops; sub-$1 cost realism
+[^role]: [The Data Engineer Role](/data-engineering/data-engineer-role.md) (corpus) — business impact + fundamentals over tool lists; work-backward-from-output; STAR + stakeholder triad
+[^be]: [Data Engineering Best Practices](/data-engineering/data-engineering-best-practices.md) (corpus) — the six practices; one-wide-table anti-pattern; don't-over-test
+[^career]: [Navigating a Technical Career](/ai-business/technical-career.md) (corpus) — portfolio signal, role targeting, solved-business-problem, taste vs. AI-slop, business proximity
+[^med]: [Medallion Architecture](/data-engineering/medallion-architecture.md) (corpus) — lifecycle stages not a data model; grain/keys live in modeling
+[^dq]: [Data Quality](/data-engineering/data-quality.md) (corpus) — validate at ingestion; contracts; freshness/volume/schema signals; silent-null join failure
+[^idem]: [Idempotent Pipelines](/data-engineering/idempotent-pipelines.md) (corpus) — fixed windows, run-id/merge, parallel backfill as the proof
+[^cicd]: [CI/CD for Data Infrastructure](/data-engineering/cicd-for-data-infrastructure.md) (corpus) — CI plan-to-PR, CD apply-dev→human-gate→prod with Terraform
+[^db]: [Databricks](/data-engineering/databricks.md) (corpus) — when/when-not, "boring is hireable," Unity Catalog, Lakeflow, Liquid Clustering, DBU cost model, adoption mistakes
+[^aws]: [DuckDB ETL on ECS Fargate](/data-engineering/sources/aws-duckdb-etl-fargate.md) (corpus) — end-to-end AWS build; EventBridge/Slack/Secrets Manager ops; sub-$1 cost realism

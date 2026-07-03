@@ -87,7 +87,7 @@ Real opportunities "start with a boring workflow someone is already tired of doi
 - Keep a **human reviewing** anything important before it's "submitted, changed, paid, deleted, or sent."
 - Save logs/screenshots for verification.
 
-The goal is "not to make an AI agent rethink the whole process from scratch every morning" but to make repeatable parts run identically each time [^src2]. One such solution can become a portfolio project, a freelance offer, an interview story, and proof of business value all at once — see [[ai-business/technical-career|Navigating a Technical Career]].
+The goal is "not to make an AI agent rethink the whole process from scratch every morning" but to make repeatable parts run identically each time [^src2]. One such solution can become a portfolio project, a freelance offer, an interview story, and proof of business value all at once — see [Navigating a Technical Career](/ai-business/technical-career.md).
 
 ## Start with one offer, one case study
 
@@ -152,7 +152,7 @@ Aush Singh (freeCodeCamp) documents the **Ad Snap Studio** build — a polished 
 
 **The monetization framing** [^src6]: present the project to small business clients (e-commerce, real estate, marketing agencies) as a product that solves a real problem (ad creative generation). Price at $1,000–$2,000 for the initial build; recurring for maintenance and new features. "The same code you wrote once is worth $1,000+ every time you deploy it for a new client."
 
-Connects to [[ai-business/ai-consulting-playbook|AI Consulting Playbook]] — the discovery call identifies the client's workflow; the polished project is the prescription from call two.
+Connects to [AI Consulting Playbook](/ai-business/ai-consulting-playbook.md) — the discovery call identifies the client's workflow; the polished project is the prescription from call two.
 
 ## AI OS as a productized service: six income streams
 
@@ -169,7 +169,7 @@ Six revenue streams attached to building and selling these systems [^src7]:
 5. **AI education** — courses, workshops, cohorts teaching clients or other practitioners how to build AIOS
 6. **Internal businesses** — using your own AIOS to run a fully automated business unit (writing, research, content ops, outreach)
 
-**Relevance to the rest of this domain**: this builds directly on the "sell a result, not code" framing above. The result being sold is not a single automation but a system — and recurring AI services (item 2) recaptures the subscription economics that pure project work lacks. See [[ai-engineering/ai-operating-system|AI Operating System]] for the technical architecture.
+**Relevance to the rest of this domain**: this builds directly on the "sell a result, not code" framing above. The result being sold is not a single automation but a system — and recurring AI services (item 2) recaptures the subscription economics that pure project work lacks. See [AI Operating System](/ai-engineering/ai-operating-system.md) for the technical architecture.
 
 ## Vibe coding — niche apps as the unit of monetization
 
@@ -302,10 +302,10 @@ Chris Koerner (80+ businesses, low hundreds of millions cumulative revenue) on t
 
 ## Related
 
-- [[ai-business/technical-career|Navigating a Technical Career]] — a paid case study doubles as portfolio/interview material.
-- [[ai-business/ai-and-the-job-market|AI and the Job Market]] — the "build appliances on top of AI" framing maps to finding new monetizable workflows.
-- [[ai-business/ai-consulting-playbook|AI Consulting Playbook]] — the operational two-call discovery-and-close motion that finds the result to sell (this page is the positioning/offer layer above it).
-- [[ai-business/ai-synthetic-focus-group|AI Synthetic Focus Group]] — same "wash AI output before shipping" human-in-the-loop discipline; shares the unverified "92%" synthetic-audience claim.
+- [Navigating a Technical Career](/ai-business/technical-career.md) — a paid case study doubles as portfolio/interview material.
+- [AI and the Job Market](/ai-business/ai-and-the-job-market.md) — the "build appliances on top of AI" framing maps to finding new monetizable workflows.
+- [AI Consulting Playbook](/ai-business/ai-consulting-playbook.md) — the operational two-call discovery-and-close motion that finds the result to sell (this page is the positioning/offer layer above it).
+- [AI Synthetic Focus Group](/ai-business/ai-synthetic-focus-group.md) — same "wash AI output before shipping" human-in-the-loop discipline; shares the unverified "92%" synthetic-audience claim.
 
 [^src1]: [How to make money with code ASAP?](../../raw/email/email-2026-04-28-how-to-make-money-with-code-asap.md)
 [^src2]: [another opportunity to make money with code](../../raw/email/email-2026-05-16-another-opportunity-to-make-money-with-code.md)

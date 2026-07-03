@@ -18,7 +18,7 @@ updated: 2026-07-02
 
 # vime
 
-**TL;DR.** vime is an LLM post-training (RL) framework within the [[ai-engineering/vllm|vLLM]] ecosystem. It ports **slime**'s training-stack and data-generation design onto [[ai-engineering/vllm|vLLM]] as the rollout/inference backend, connecting Megatron (training) and vLLM (inference) into one RL pipeline, aiming for stable train-inference alignment across Dense and MoE models [^src1].
+**TL;DR.** vime is an LLM post-training (RL) framework within the [vLLM](/ai-engineering/vllm.md) ecosystem. It ports **slime**'s training-stack and data-generation design onto [vLLM](/ai-engineering/vllm.md) as the rollout/inference backend, connecting Megatron (training) and vLLM (inference) into one RL pipeline, aiming for stable train-inference alignment across Dense and MoE models [^src1].
 
 ## Architecture
 
@@ -53,9 +53,9 @@ vLLM's community already supports several post-training frameworks (NeMo RL, Ope
 
 ## Related
 
-- [[ai-engineering/vllm|vLLM]] — the inference/rollout backend vime pairs with Megatron
-- [[ai-engineering/mixture-of-experts|Mixture of Experts]] — R3 routing-replay specifically targets MoE train-inference mismatch
-- [[ai-engineering/README|AI Engineering hub]]
+- [vLLM](/ai-engineering/vllm.md) — the inference/rollout backend vime pairs with Megatron
+- [Mixture of Experts](/ai-engineering/mixture-of-experts.md) — R3 routing-replay specifically targets MoE train-inference mismatch
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

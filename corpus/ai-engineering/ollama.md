@@ -150,7 +150,7 @@ message = client.messages.create(
 )
 ```
 
-This is the bridge that lets practitioners use Claude Code's agent harness with local or open-weight models for cost control. See [[ai-engineering/pi-agent|Pi Agent]] for a similar multi-model-via-Ollama pattern.
+This is the bridge that lets practitioners use Claude Code's agent harness with local or open-weight models for cost control. See [Pi Agent](/ai-engineering/pi-agent.md) for a similar multi-model-via-Ollama pattern.
 
 ## Subagents and web search in Claude Code (Feb 2026)
 
@@ -165,7 +165,7 @@ This uses Claude Code's native subagent feature (`.claude/agents/`) but with Oll
 
 ## OpenClaw integration (Feb 2026)
 
-Ollama published documentation for running [[ai-engineering/openclaw|OpenClaw]] via `ollama launch openclaw` [^src_oc]:
+Ollama published documentation for running [OpenClaw](/ai-engineering/openclaw.md) via `ollama launch openclaw` [^src_oc]:
 
 - One command sets up an OpenClaw local agent with Ollama as the model server.
 - Recommended models by role:
@@ -178,18 +178,18 @@ Ollama published documentation for running [[ai-engineering/openclaw|OpenClaw]] 
 
 ## OpenJarvis integration
 
-[[ai-engineering/openjarvis|OpenJarvis]], a local-first personal-AI framework from Stanford's Hazy Research and Scaling Intelligence labs, ships v1.0 with built-in Ollama support — auto-detecting an existing Ollama install and defaulting to local models with cloud as optional fallback [^src_oj].
+[OpenJarvis](/ai-engineering/openjarvis.md), a local-first personal-AI framework from Stanford's Hazy Research and Scaling Intelligence labs, ships v1.0 with built-in Ollama support — auto-detecting an existing Ollama install and defaulting to local models with cloud as optional fallback [^src_oj].
 
 ## Related
 
-- [[ai-engineering/openclaw|OpenClaw]] — local agent framework; `ollama launch openclaw` integration
-- [[ai-engineering/openjarvis|OpenJarvis]] — Stanford local-first personal-AI framework built on Ollama
-- [[ai-engineering/pi-agent|Pi Agent]] — minimal coding agent with Ollama/OpenRouter multi-model backend
-- [[ai-engineering/gemini-cli|Gemini CLI]] — competing open-source agentic CLI
-- [[ai-engineering/claude-code|Claude Code]] — Anthropic API compatibility bridge
-- [[ai-engineering/mcp|MCP]] — web search MCP server for Cline/Codex/Goose integration
-- [[ai-engineering/lm-studio|LM Studio]] — competing local-model app; also ships Anthropic API compatibility + an MLX Apple Silicon engine
-- [[ai-engineering/README|AI Engineering hub]]
+- [OpenClaw](/ai-engineering/openclaw.md) — local agent framework; `ollama launch openclaw` integration
+- [OpenJarvis](/ai-engineering/openjarvis.md) — Stanford local-first personal-AI framework built on Ollama
+- [Pi Agent](/ai-engineering/pi-agent.md) — minimal coding agent with Ollama/OpenRouter multi-model backend
+- [Gemini CLI](/ai-engineering/gemini-cli.md) — competing open-source agentic CLI
+- [Claude Code](/ai-engineering/claude-code.md) — Anthropic API compatibility bridge
+- [MCP](/ai-engineering/mcp.md) — web search MCP server for Cline/Codex/Goose integration
+- [LM Studio](/ai-engineering/lm-studio.md) — competing local-model app; also ships Anthropic API compatibility + an MLX Apple Silicon engine
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

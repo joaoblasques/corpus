@@ -43,7 +43,7 @@ updated: 2026-07-02
 - **Transform** — convert raw extracted data into a form compatible with the destination and use case[^src1]. Common processing: filtering, aggregation, data cleaning, feature extraction, and re-shaping to conform to a schema — simple enough to automate, ensuring data arrives "clean, consistent, and won't cause errors"[^src1]. Complex exploratory analysis happens later in the lifecycle[^src1].
 - **Load** — write data into the target/destination (the inverse of extraction): data warehouses, SaaS apps, operational business systems, or visualizations/dashboards[^src1]. After loading you can measure **latency** — hours, minutes, or down to the millisecond with real-time streaming[^src1].
 
-See [[data-engineering/pipeline-layers|Pipeline Layers]] for the staging→warehouse→marts separation downstream of load, [[data-engineering/data-ingestion-patterns|Data Ingestion Patterns]] for stream-vs-batch extraction, and [[data-engineering/change-data-capture|Change Data Capture (CDC)]] for one real-time extraction mechanism.
+See [Pipeline Layers](/data-engineering/pipeline-layers.md) for the staging→warehouse→marts separation downstream of load, [Data Ingestion Patterns](/data-engineering/data-ingestion-patterns.md) for stream-vs-batch extraction, and [Change Data Capture (CDC)](/data-engineering/change-data-capture.md) for one real-time extraction mechanism.
 
 ## ETL pipeline vs data pipeline
 
@@ -57,7 +57,7 @@ A **data pipeline** is any system that moves data from source to destination —
 ETL transforms data **before** loading; **ELT** loads raw data first and transforms it **inside the destination warehouse** — the difference is the order of the last two steps[^src1].
 
 - **ETL** dominated when on-premises warehouses had limited compute and storage was expensive[^src1].
-- **ELT** became dominant once cloud warehouses (Snowflake, BigQuery, Redshift) made it cost-effective to load raw data first and transform at the destination[^src1]. (This is the model [[data-engineering/dbt|dbt]] and [[data-engineering/pipeline-layers|Pipeline Layers]] are built around.)
+- **ELT** became dominant once cloud warehouses (Snowflake, BigQuery, Redshift) made it cost-effective to load raw data first and transform at the destination[^src1]. (This is the model [dbt](/data-engineering/dbt.md) and [Pipeline Layers](/data-engineering/pipeline-layers.md) are built around.)
 - **ETL is still preferred** when source data must be cleaned before storage, when destinations have limited compute, when compliance requires transformation before persistence, or when streaming transformations are required in flight[^src1].
 - ELT's main advantage is **time** (no transform latency before load); its drawback is dumping disorganized/unclean — possibly corrupt — data into the store[^src1].
 
@@ -71,7 +71,7 @@ ETL transforms data **before** loading; **ELT** loads raw data first and transfo
 
 **Benefits**: centralizing data from various sources; reduced time to analysis (data arrives ready to use); deeper analytics by automating tedious transforms; easy operationalization (piping data straight to operational apps); ample tooling and support; and data-quality assurance (transforming before loading keeps corrupt data out, optionally with automated testing)[^src1].
 
-**Main limitation**: traditional ETL relies on **batch processing**, introducing delay — unacceptable for fraud detection, fast-paced inventory, or capturing an online sale before the customer leaves[^src1]. Real-time pipelines with in-flight transformation exist but rely on streaming infrastructure and "you won't hear these kinds of pipelines called 'ETL,'" because technically they are very different processes despite the same goal[^src1]. See [[data-engineering/stream-processing|Stream Processing]] for the batch-vs-stream decision, streaming engines, and delivery guarantees.
+**Main limitation**: traditional ETL relies on **batch processing**, introducing delay — unacceptable for fraud detection, fast-paced inventory, or capturing an online sale before the customer leaves[^src1]. Real-time pipelines with in-flight transformation exist but rely on streaming infrastructure and "you won't hear these kinds of pipelines called 'ETL,'" because technically they are very different processes despite the same goal[^src1]. See [Stream Processing](/data-engineering/stream-processing.md) for the batch-vs-stream decision, streaming engines, and delivery guarantees.
 
 ## Tooling and use cases
 
@@ -121,7 +121,7 @@ From a hands-on data warehouse project at Mercedes-Benz [^src2]:
 - **SCD1** — override/upsert with new value; history lost
 - **SCD2** — insert new row per change; keep old row inactive; preserves full history
 
-See [[data-engineering/scd2|SCD2]] for the complete SCD2 implementation and join patterns.
+See [SCD2](/data-engineering/scd2.md) for the complete SCD2 implementation and join patterns.
 
 ### Data warehouse architecture approaches
 
@@ -130,7 +130,7 @@ See [[data-engineering/scd2|SCD2]] for the complete SCD2 implementation and join
 | Inmon (3NF EDW) | Staging → EDW → Data Marts | Comprehensive, but slow to build |
 | Kimball | Staging → Data Marts | Faster, but risks logic duplication across marts |
 | Data Vault | Staging → Raw Vault → Business Vault → Data Marts | Adds standards to the EDW middle layer |
-| Medallion | Bronze → Silver → Gold | Modern, lakehouse-native; see [[data-engineering/medallion-architecture|Medallion Architecture]] |
+| Medallion | Bronze → Silver → Gold | Modern, lakehouse-native; see [Medallion Architecture](/data-engineering/medallion-architecture.md) |
 
 Why data management matters [^src2]: without a warehouse, analysts manually collect and transform data — slow (weeks/months), error-prone, and incompatible across teams. A warehouse with automated ETL produces consistent, fresh data accessible to all consumers and supports integrated multi-source reporting.
 
@@ -148,7 +148,7 @@ The **Context Store** is the key addition: a semantic store that captures what d
 
 > "The consumer changed from forgiving to unforgiving." [^src3] Human analysts can ask follow-up questions and interpret ambiguity; AI agents cannot.
 
-The argument is directional, not prescriptive — ETL pipelines continue to exist; the professional identity and skill set of data engineers is what needs updating. See [[data-engineering/semantic-layer|Semantic Layer]] for the Context Store concept elaborated, and [[data-engineering/ai-impact-on-data-engineering|AI's Impact on Data Engineering]] for the Markdown Team framing of the same shift (context encoding as the new DE job 2).
+The argument is directional, not prescriptive — ETL pipelines continue to exist; the professional identity and skill set of data engineers is what needs updating. See [Semantic Layer](/data-engineering/semantic-layer.md) for the Context Store concept elaborated, and [AI's Impact on Data Engineering](/data-engineering/ai-impact-on-data-engineering.md) for the Markdown Team framing of the same shift (context encoding as the new DE job 2).
 
 [^src1]: [What Is An ETL Pipeline? Examples, Tools (Updated 2026)](../../raw/web/what-is-an-etl-pipeline-examples-tools-updated-2026.md)
 [^src2]: [SQL Data Warehouse from Scratch | Full Hands-On Data Engineering Project (Data with Baraa)](../../raw/youtube/youtube-9GVqKuTVANE-sql-data-warehouse-from-scratch-full-hands-on-data-engineeri.md)

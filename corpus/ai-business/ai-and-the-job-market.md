@@ -78,7 +78,7 @@ His answer: "The hard part is rarely clicking the buttons. The hard part is unde
 - Likewise, a company can give every employee AI and still only manage "Write this email / Summarize this meeting / Help with this spreadsheet" — useful, not transformative [^src1].
 - The labs want to partner with consultants who ask "What kind of work can exist *now* that this capability is available?" — and to increase token consumption [^src1].
 
-Implication for the job market: there is durable demand for people who can build the "appliances" — turn raw AI capability into reliable, observable workflows over messy business processes. This is the same opportunity surfaced in [[ai-business/monetizing-code|Monetizing Code]].
+Implication for the job market: there is durable demand for people who can build the "appliances" — turn raw AI capability into reliable, observable workflows over messy business processes. This is the same opportunity surfaced in [Monetizing Code](/ai-business/monetizing-code.md).
 
 ## Future-proofing an engineering career
 
@@ -93,7 +93,7 @@ The Engineering Leadership newsletter (note: largely paywalled — only the tren
 - **Go a level deeper.** "The deepness of an engineer's knowledge will be worth more and more as time goes on" [^src2].
 - **Human-related skills "will shine bright"** — communication, leadership, teamwork, empathy, being great to work with. As work becomes "robotic," people crave human touch (quoting Gary Vaynerchuk on people paying for a walk) [^src2].
 - **Problem-solving, pragmatism, resourcefulness, and using AI tools** matter alongside deep domain understanding.
-- **Make your impact visible.** "Good work alone is not enough, you need to make sure that everyone understands how great of the work you are doing" [^src2] — directly echoing the leverage/visibility argument in [[ai-business/technical-career|Navigating a Technical Career]].
+- **Make your impact visible.** "Good work alone is not enough, you need to make sure that everyone understands how great of the work you are doing" [^src2] — directly echoing the leverage/visibility argument in [Navigating a Technical Career](/ai-business/technical-career.md).
 - **Don't rely on a single income source** (full list paywalled).
 
 ## Synthesis: where the two agree
@@ -114,7 +114,7 @@ Neither source provides hard data — both are explicitly opinion/trend pieces (
 
 ## The demand side: how candidates respond
 
-A third source (a job-search how-to) shows the *worker-side* corollary of the utility thesis: AI's value in a job hunt is also in *applying* it well, not in raw volume. "Spraying generic applications doesn't work anymore — recruiters and their AI screeners can smell it"; the winning move is AI that **scores and tailors** each application against a real, honestly-described profile [^src3]. This is the same "apply AI to messy real context" edge, viewed from the candidate's chair — and it confirms both sources' read that legibility and fit, not output volume, are what get rewarded. The mechanics are split out into [[ai-business/ai-job-search|Finding a Job Using AI]].
+A third source (a job-search how-to) shows the *worker-side* corollary of the utility thesis: AI's value in a job hunt is also in *applying* it well, not in raw volume. "Spraying generic applications doesn't work anymore — recruiters and their AI screeners can smell it"; the winning move is AI that **scores and tailors** each application against a real, honestly-described profile [^src3]. This is the same "apply AI to messy real context" edge, viewed from the candidate's chair — and it confirms both sources' read that legibility and fit, not output volume, are what get rewarded. The mechanics are split out into [Finding a Job Using AI](/ai-business/ai-job-search.md).
 
 ## AI will replace knowledge work: the bull case
 
@@ -198,7 +198,7 @@ Joe Reis's 2026 pieces offer the most detailed sector-level analysis of this dyn
 
 **The scenario: three data industries** (from the satirical 2028 scenario piece, labeled "a scenario, not a prediction" [^src8]):
 - *Data Tooling* (vendors): vendors who sold picks and shovels to the gold rush; AI dissolved the category boundaries between tools ("the seams between the tools died") — a $200B lesson in confusing infrastructure for value
-- *Data Practitioners* (engineers): bifurcated into top 20%/bottom 40%/middle 40% (see [[data-engineering/data-engineer-role|Data Engineer Role]])
+- *Data Practitioners* (engineers): bifurcated into top 20%/bottom 40%/middle 40% (see [Data Engineer Role](/data-engineering/data-engineer-role.md))
 - *Data Theater* (content/conferences): the content economy running on vendor sponsorships collapsed with vendor budgets; 340 annual data conferences shrank to ~40
 
 **Tribal knowledge as the surprise survivor**: against all engineering best practice, the practitioners who survived were those who had been hoarding context in their heads rather than documenting it — because AI could not replicate the organizational-specific knowledge of why the data is the way it is [^src8].
@@ -231,7 +231,7 @@ Joe Reis's 2026 moat analysis [^src14]:
 
 The pattern generalizes to careers: practitioners who have proprietary context (institutional knowledge, domain depth, stakeholder trust) are moated; practitioners whose value was configuration knowledge are not [^src14].
 
-See also [[ai-business/ai-transition-economics|AI Transition Economics]] for the macro-level framing.
+See also [AI Transition Economics](/ai-business/ai-transition-economics.md) for the macro-level framing.
 
 ## Cycles: gold rush analogy
 
@@ -250,14 +250,14 @@ From "Life Outside the Bay Area Bubble" [^src12]:
 
 ## Related
 
-- [[ai-business/monetizing-code|Monetizing Code]] — "build the appliances" = finding monetizable AI workflows.
-- [[ai-business/technical-career|Navigating a Technical Career]] — depth + visibility as the promotion lever; the articulation gap.
-- [[ai-business/ai-job-search|Finding a Job Using AI]] — the candidate-side playbook (career-strategist projects; autonomous apply).
-- [[ai-business/ai-spreadsheets|AI Spreadsheets & the Data-Skill Shift]] — a concrete instance of the tool-operation → AI-direction skill shift.
-- [[ai-business/agent-infrastructure|Agent Infrastructure]] — the stack for deploying production agents at enterprise scale.
-- [[ai-business/ai-transition-economics|AI Transition Economics]] — Paul David 1905 analogy; "swapping motors not factories"; cycles and adoption.
-- [[data-engineering/vibe-engineering|Vibe Engineering]] — building without theoretical framework; the DE-specific reckoning.
-- [[software-engineering/README|Software Engineering]] — the "shallow understanding" trend in junior engineers.
+- [Monetizing Code](/ai-business/monetizing-code.md) — "build the appliances" = finding monetizable AI workflows.
+- [Navigating a Technical Career](/ai-business/technical-career.md) — depth + visibility as the promotion lever; the articulation gap.
+- [Finding a Job Using AI](/ai-business/ai-job-search.md) — the candidate-side playbook (career-strategist projects; autonomous apply).
+- [AI Spreadsheets & the Data-Skill Shift](/ai-business/ai-spreadsheets.md) — a concrete instance of the tool-operation → AI-direction skill shift.
+- [Agent Infrastructure](/ai-business/agent-infrastructure.md) — the stack for deploying production agents at enterprise scale.
+- [AI Transition Economics](/ai-business/ai-transition-economics.md) — Paul David 1905 analogy; "swapping motors not factories"; cycles and adoption.
+- [Vibe Engineering](/data-engineering/vibe-engineering.md) — building without theoretical framework; the DE-specific reckoning.
+- [Software Engineering](/software-engineering/README.md) — the "shallow understanding" trend in junior engineers.
 
 [^src1]: [If AI Can Replace Workers, Why Is It Hiring Consultants?](../../raw/email/email-2026-05-26-if-ai-can-replace-workers-why-is-it-hiring-consultants.md)
 [^src2]: [Future Proof Your Career as an Engineer in Gen AI World](../../raw/web/future-proof-your-career-as-an-engineer-in-gen-ai-world.md)

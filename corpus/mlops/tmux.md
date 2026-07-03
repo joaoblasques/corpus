@@ -142,20 +142,20 @@ claude # → "Subscription" → paste code → done
 
 ## Herder — an agent-aware modern alternative
 
-[[mlops/herder|Herder]] is a newer multiplexer modeled on tmux (same prefix/keymap idioms, splits, detach/reattach) that targets two of tmux's weak points for agentic work [^src3]:
+[Herder](/mlops/herder.md) is a newer multiplexer modeled on tmux (same prefix/keymap idioms, splits, detach/reattach) that targets two of tmux's weak points for agentic work [^src3]:
 
 - **Session state is decoupled from process state** — the layout (tabs/panes/workspaces) is saved as a snapshot, so it can be restored after a server restart. With tmux, "if your tmux server dies, everything dies" unless a restore plugin is installed [^src3].
 - **Built-in agent awareness** — Herder auto-detects running coding agents and shows each one's state (working / idle / blocked / done) in a sidebar, searchable and filterable — the monitoring layer that the multi-agent tmux pattern above lacks [^src3].
 
-It also ships mouse support and a thin-client `--remote` mode out of the box (tmux requires enabling mouse and gives only the remote machine's keybindings over SSH). See [[mlops/herder|Herder]] for the full breakdown.
+It also ships mouse support and a thin-client `--remote` mode out of the box (tmux requires enabling mouse and gives only the remote machine's keybindings over SSH). See [Herder](/mlops/herder.md) for the full breakdown.
 
 ## See also
 
-- [[mlops/herder|Herder]] — agent-aware modern multiplexer modeled on tmux; snapshots layout, monitors agent state
-- [[mlops/terminal-and-shell|Terminal & Shell]] — Alacritty/zsh/Powerlevel10k, the desktop-side complement
-- [[mlops/cli-tools|CLI Tools]] — fzf, zoxide, and other productivity tools in the same layer
-- [[mlops/vps-for-agents|VPS for Agents]] — full VPS provisioning + agent workflow context
-- [[mlops/README|MLOps hub]]
+- [Herder](/mlops/herder.md) — agent-aware modern multiplexer modeled on tmux; snapshots layout, monitors agent state
+- [Terminal & Shell](/mlops/terminal-and-shell.md) — Alacritty/zsh/Powerlevel10k, the desktop-side complement
+- [CLI Tools](/mlops/cli-tools.md) — fzf, zoxide, and other productivity tools in the same layer
+- [VPS for Agents](/mlops/vps-for-agents.md) — full VPS provisioning + agent workflow context
+- [MLOps hub](/mlops/README.md)
 
 ---
 

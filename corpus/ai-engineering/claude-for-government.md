@@ -58,17 +58,17 @@ Anthropic markets three properties for the government segment [^src1]:
 
 ## Context
 
-- The **FedRAMP** authorization track is shared with the financial services vertical — both require auditable, traceable outputs. See [[ai-engineering/claude-for-finance|Claude for Finance]] for the finance-domain analogue.
+- The **FedRAMP** authorization track is shared with the financial services vertical — both require auditable, traceable outputs. See [Claude for Finance](/ai-engineering/claude-for-finance.md) for the finance-domain analogue.
 - **Claude Gov models** (classified, AWS) represent a distinct product variant from the commercial lineup. No public performance details are available.
-- For the underlying infrastructure: [[ai-engineering/claude-api|Claude API]] covers the Claude Platform on AWS (commercial). For the security-research side of Anthropic's government relationship, see [[ai-engineering/anthropic|Anthropic]] §Project Glasswing.
-- Enterprise plan tier is the relevant procurement tier for non-classified government deployments; see [[ai-engineering/claude-plans|Claude Plans & Pricing]].
+- For the underlying infrastructure: [Claude API](/ai-engineering/claude-api.md) covers the Claude Platform on AWS (commercial). For the security-research side of Anthropic's government relationship, see [Anthropic](/ai-engineering/anthropic.md) §Project Glasswing.
+- Enterprise plan tier is the relevant procurement tier for non-classified government deployments; see [Claude Plans & Pricing](/ai-engineering/claude-plans.md).
 
 ## See also
 
-- [[ai-engineering/anthropic|Anthropic]] — company, Project Glasswing (security initiative), Claude Security product
-- [[ai-engineering/claude-for-finance|Claude for Finance]] — analogous vertical with SOC 2/FedRAMP compliance
-- [[ai-engineering/claude-api|Claude API]] — the underlying platform (commercial)
-- [[ai-engineering/claude-plans|Claude Plans & Pricing]] — Enterprise tier; HIPAA-ready offering available
+- [Anthropic](/ai-engineering/anthropic.md) — company, Project Glasswing (security initiative), Claude Security product
+- [Claude for Finance](/ai-engineering/claude-for-finance.md) — analogous vertical with SOC 2/FedRAMP compliance
+- [Claude API](/ai-engineering/claude-api.md) — the underlying platform (commercial)
+- [Claude Plans & Pricing](/ai-engineering/claude-plans.md) — Enterprise tier; HIPAA-ready offering available
 
 ---
 

@@ -106,10 +106,10 @@ The 20% / 80% rule holds: the ~20 commands covered in the existing page above co
 
 ## See also
 
-- [[mlops/cli-tools|CLI Tools]] — modern replacements: `rg` for `grep`, `fd` for `find`, `bat` for `cat`, `eza` for `ls`
-- [[mlops/terminal-and-shell|Terminal & Shell]] — the shell these commands run in
-- [[mlops/git|Git]] — versioning the files you navigate and edit
-- [[mlops/README|MLOps hub]]
+- [CLI Tools](/mlops/cli-tools.md) — modern replacements: `rg` for `grep`, `fd` for `find`, `bat` for `cat`, `eza` for `ls`
+- [Terminal & Shell](/mlops/terminal-and-shell.md) — the shell these commands run in
+- [Git](/mlops/git.md) — versioning the files you navigate and edit
+- [MLOps hub](/mlops/README.md)
 
 ---
 

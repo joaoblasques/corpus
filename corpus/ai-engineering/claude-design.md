@@ -50,7 +50,7 @@ The launch sat directly on the Opus 4.7 release: the announcement called out a j
 
 ## Planning phase and in-canvas iteration
 
-Claude Design front-loads a **question-asking planning phase**: on a vague prompt it interviews the user before building. For a workshop landing page it surfaced a run of clickable clarifications — "what is the workshop called?", confirm dates, time per day, seat cap, who's hosting, what students walk away with — and only then generated the page [^src1]. This mirrors the agentic-coding lesson that a strong upfront plan avoids burning tokens chasing the wrong path [^src1][^src3]; see [[ai-engineering/prompt-engineering|Prompt Engineering]] (the "ask me questions first" / model-led elicitation pattern).
+Claude Design front-loads a **question-asking planning phase**: on a vague prompt it interviews the user before building. For a workshop landing page it surfaced a run of clickable clarifications — "what is the workshop called?", confirm dates, time per day, seat cap, who's hosting, what students walk away with — and only then generated the page [^src1]. This mirrors the agentic-coding lesson that a strong upfront plan avoids burning tokens chasing the wrong path [^src1][^src3]; see [Prompt Engineering](/ai-engineering/prompt-engineering.md) (the "ask me questions first" / model-led elicitation pattern).
 
 Inside a project, four in-canvas iteration controls reduce the need to re-prompt in natural language [^src1][^src2]:
 - **Tweaks** — a side panel of generated knobs (palette, accent hue, font, headline size, section rhythm, textures, layout) the user toggles in real time; "making tweaks and then saving those changes is going to save you more time and also more of your session limit" than prompting back and forth [^src2]. The user can ask Claude to "give me a bunch of tweaks" when lacking creative direction [^src2].
@@ -82,7 +82,7 @@ The hand-off generates a copyable command — "fetch this design file, read its 
 
 ## The Anthropic-ecosystem argument
 
-The strategic framing across the sources is **ecosystem lock-in by context gravity**: Claude Design "basically just loops everything into Anthropic's ecosystem," potentially displacing separate Gamma and Canva subscriptions [^src1]. The load-bearing argument is that **context already lives in the Claude environment** — "when I'm making presentations in Gamma, I have to go get from my Claude Code projects so much context… but if all of that already lives inside of my Claude Code environment… that's a huge help" [^src1]. Versus **Gamma** specifically, Claude Design is positioned as more flexible at structuring a raw brain-dump/transcript into an on-brand deck, where "Gamma… is a bit more inflexible" [^src1] — see [[ai-engineering/ai-presentation-tools|AI Presentation Tools]].
+The strategic framing across the sources is **ecosystem lock-in by context gravity**: Claude Design "basically just loops everything into Anthropic's ecosystem," potentially displacing separate Gamma and Canva subscriptions [^src1]. The load-bearing argument is that **context already lives in the Claude environment** — "when I'm making presentations in Gamma, I have to go get from my Claude Code projects so much context… but if all of that already lives inside of my Claude Code environment… that's a huge help" [^src1]. Versus **Gamma** specifically, Claude Design is positioned as more flexible at structuring a raw brain-dump/transcript into an on-brand deck, where "Gamma… is a bit more inflexible" [^src1] — see [AI Presentation Tools](/ai-engineering/ai-presentation-tools.md).
 
 ## Market context
 
@@ -91,13 +91,13 @@ The strategic framing across the sources is **ecosystem lock-in by context gravi
 
 ## See also
 
-- [[ai-engineering/ai-presentation-tools|AI Presentation Tools]] — Claude Design is approach #1 in the slide/deck landscape
-- [[ai-engineering/claude-code|Claude Code]] — the build/sync target Claude Design hands off to; `skill.md`/`design.md` conventions
-- [[ai-engineering/sources/claude-code-website-build-workflow|Claude Code website build workflow (Charlie Hills)]] — the in-repo `CONTEXT.md`/`COPY.md`/`DESIGN.md` alternative to the hosted Design app; structural-donor component rule to avoid the generic "AI look"
-- [[ai-engineering/claude-cowork|Claude Cowork]] — the sibling Labs product; Claude Design is "another iteration of Cowork, but for design"
-- [[ai-engineering/claude-models|Claude Model Lineup]] — Opus 4.7 (vision) powers Claude Design; model-switching to conserve the limit
-- [[ai-engineering/agent-cost-management|Agent Cost Management]] — plan-first to avoid burning the (separate, weekly) Design limit
-- [[ai-engineering/README|AI Engineering hub]]
+- [AI Presentation Tools](/ai-engineering/ai-presentation-tools.md) — Claude Design is approach #1 in the slide/deck landscape
+- [Claude Code](/ai-engineering/claude-code.md) — the build/sync target Claude Design hands off to; `skill.md`/`design.md` conventions
+- [Claude Code website build workflow (Charlie Hills)](/ai-engineering/sources/claude-code-website-build-workflow.md) — the in-repo `CONTEXT.md`/`COPY.md`/`DESIGN.md` alternative to the hosted Design app; structural-donor component rule to avoid the generic "AI look"
+- [Claude Cowork](/ai-engineering/claude-cowork.md) — the sibling Labs product; Claude Design is "another iteration of Cowork, but for design"
+- [Claude Model Lineup](/ai-engineering/claude-models.md) — Opus 4.7 (vision) powers Claude Design; model-switching to conserve the limit
+- [Agent Cost Management](/ai-engineering/agent-cost-management.md) — plan-first to avoid burning the (separate, weekly) Design limit
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

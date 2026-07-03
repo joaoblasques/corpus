@@ -90,7 +90,7 @@ updated: 2026-06-26
 
 # Prompt Engineering
 
-**TL;DR**: The craft of writing instructions, examples, and structured input that steer an LLM toward higher-quality output. Core levers: clarity and explicitness, examples (zero/one/few-shot), XML/delimiter structuring, role assignment, chain-of-thought, and output-format control. Distinct from [[ai-engineering/context-engineering|context engineering]] — prompting shapes *what you say to the model in a single instruction*; context engineering manages *what information occupies the window over a session*.
+**TL;DR**: The craft of writing instructions, examples, and structured input that steer an LLM toward higher-quality output. Core levers: clarity and explicitness, examples (zero/one/few-shot), XML/delimiter structuring, role assignment, chain-of-thought, and output-format control. Distinct from [context engineering](/ai-engineering/context-engineering.md) — prompting shapes *what you say to the model in a single instruction*; context engineering manages *what information occupies the window over a session*.
 
 ## Prompt engineering vs. context engineering
 
@@ -124,14 +124,14 @@ For 20k+ token inputs [^src2]:
 - **Structure with XML** — wrap each document in `<document>` tags with `<document_content>` and `<source>` subtags.
 - **Ground responses in quotes** — ask the model to quote relevant parts first to "cut through the noise."
 
-Context placement matters: providing context at the beginning *and* end of a prompt is much more effective than in the middle [^src6] (the "lost in the middle" effect — see [[ai-engineering/context-engineering|context engineering]]).
+Context placement matters: providing context at the beginning *and* end of a prompt is much more effective than in the middle [^src6] (the "lost in the middle" effect — see [context engineering](/ai-engineering/context-engineering.md)).
 
 ## LLM controls behind prompting
 
 Output is non-deterministic by default [^src6]. Knobs that interact with prompting [^src6]:
 - **Temperature** — 0 (deterministic) to 2 (random); controls how often the model picks the next-most-likely token.
 - **Top-P** — alternative to temperature; removes low-probability candidates from the sampling set.
-- **Tokens / context window** — tokens are ~0.75 words on average; the full conversation is re-sent each turn since the model has no memory, and long conversations risk filling the window and inducing hallucinations. (See [[ai-engineering/structured-outputs|tokenization]].)
+- **Tokens / context window** — tokens are ~0.75 words on average; the full conversation is re-sent each turn since the model has no memory, and long conversations risk filling the window and inducing hallucinations. (See [tokenization](/ai-engineering/structured-outputs.md).)
 
 ## Steering agentic models (current generation)
 
@@ -146,7 +146,7 @@ OpenAI's Codex guidance converges on similar themes for agentic coding: a starte
 
 ## The "ask me questions first" pattern (model-led elicitation)
 
-The single most useful trick for non-technical users inverts the prompt entirely: instead of writing a good prompt, append **"ask me questions first"** so the model interviews *you* — Claude's `AskUserQuestion` tool surfaces 3–5 clickable questions and builds context from your answers, "and you're already using AI better than 99.9% of the population" [^src7]. Going pro: "give me 3 different strategies" lets the model lay out options for you to pick [^src7]. This is the elicitation counterpart to the [[ai-engineering/agent-harness|harness]] principle that models should *manage their confusion and ask for clarification* rather than guessing silently — and it overlaps with the [[ai-engineering/vibe-coding|spec-driven]] habit of pinning down intent before building. (The "interview me" framing also drives the project-setup loop in [[ai-engineering/ai-product-management|AI Product Management]].)
+The single most useful trick for non-technical users inverts the prompt entirely: instead of writing a good prompt, append **"ask me questions first"** so the model interviews *you* — Claude's `AskUserQuestion` tool surfaces 3–5 clickable questions and builds context from your answers, "and you're already using AI better than 99.9% of the population" [^src7]. Going pro: "give me 3 different strategies" lets the model lay out options for you to pick [^src7]. This is the elicitation counterpart to the [harness](/ai-engineering/agent-harness.md) principle that models should *manage their confusion and ask for clarification* rather than guessing silently — and it overlaps with the [spec-driven](/ai-engineering/vibe-coding.md) habit of pinning down intent before building. (The "interview me" framing also drives the project-setup loop in [AI Product Management](/ai-engineering/ai-product-management.md).)
 
 ## Vibe-coding-specific prompt antipatterns
 
@@ -159,7 +159,7 @@ Beyond general prompt quality, vibe coding introduces antipatterns tied to how p
 - **Inconsistency across turns** — using different terminology for the same concept in different messages; the model can't reliably unify them.
 - **Vague references** — "fix that bug" without identifying which one; in code especially, reference must be precise.
 
-The prompt-antipattern discipline connects directly to the [[ai-engineering/vibe-coding|70% problem]]: vague prompts are how human judgment fails to guard the 30% the AI cannot fill independently.
+The prompt-antipattern discipline connects directly to the [70% problem](/ai-engineering/vibe-coding.md): vague prompts are how human judgment fails to guard the 30% the AI cannot fill independently.
 
 ## Advanced techniques (ch2 additions)
 
@@ -167,7 +167,7 @@ The prompt-antipattern discipline connects directly to the [[ai-engineering/vibe
 
 **ReAct (Reason + Act).** Interleave reasoning steps with action calls (tool use) so the model can observe results of each action before deciding the next step — grounding multi-step agentic tasks in real feedback rather than up-front planning only [^src8].
 
-**Contextual prompting.** Provide all context the model needs within the same prompt — role, relevant background, constraints, output format — rather than relying on what the model may have "learned." This is the prompt-level version of the [[ai-engineering/context-engineering|context engineering]] principle of supplying unique context rather than general knowledge [^src8].
+**Contextual prompting.** Provide all context the model needs within the same prompt — role, relevant background, constraints, output format — rather than relying on what the model may have "learned." This is the prompt-level version of the [context engineering](/ai-engineering/context-engineering.md) principle of supplying unique context rather than general knowledge [^src8].
 
 ## Practical gotchas
 
@@ -247,7 +247,7 @@ General prompt levers harden into **domain-specific structured workflows** when 
 - **Plan-before-execute as governance.** Claude must "act like a senior FP&A lead, not like an operator," producing an approved numbered work plan (objective, inputs, outputs, acceptance checks, a "do not proceed if" gate per step) before any edit — "if Claude starts making fixes before you approve a plan, hidden assumptions quietly turn into formulas" [^src21]. Same plan-first reflex as agentic-coding guidance, with acceptance criteria baked into every step.
 - **Model-selection-by-task-type.** Rather than one model for everything, the workflow assigns the model to the *kind* of cognitive work: stronger reasoning models for ingestion/planning/valuation (structural reasoning), a faster model for drafting the executive memo [^src21]. Matching model to task is itself a prompt-engineering-adjacent decision (cf. §"not every failure is a prompting problem" — some are model-selection problems [^src1]).
 
-Full workflow: [[ai-engineering/claude-for-finance|Claude for Finance]].
+Full workflow: [Claude for Finance](/ai-engineering/claude-for-finance.md).
 
 ## What leaked system prompts reveal
 
@@ -275,14 +275,14 @@ This rule appeared in every prompt reviewed, regardless of tool or vendor. It ge
 
 ## See also
 
-- [[ai-engineering/claude-for-finance|Claude for Finance]] — domain-specific structured prompting for FP&A (inventory-before-insight, plan-first, model-by-task)
-- [[ai-engineering/context-engineering|Context Engineering]] — sibling discipline; managing window contents over a session
-- [[ai-engineering/structured-outputs|Structured Outputs]] — enforcing schema on prompt results; tokenization
-- [[ai-engineering/agent-harness|Agent Harness]] — where prompt scaffolding lives in coding agents
-- [[ai-engineering/claude-code|Claude Code]] — agent harness whose behavior is shaped by these techniques
-- [[ai-engineering/agent-security|Agent Security]] — prompt injection is the adversarial side of prompting
-- [[ai-engineering/vibe-coding|Vibe Coding]] — where prompt antipatterns cause the 70% problem
-- [[ai-engineering/sources/beyond-vibe-coding-book|Beyond Vibe Coding (Book)]] — ch2 as the fullest treatment of the vibe-coding prompt toolkit
+- [Claude for Finance](/ai-engineering/claude-for-finance.md) — domain-specific structured prompting for FP&A (inventory-before-insight, plan-first, model-by-task)
+- [Context Engineering](/ai-engineering/context-engineering.md) — sibling discipline; managing window contents over a session
+- [Structured Outputs](/ai-engineering/structured-outputs.md) — enforcing schema on prompt results; tokenization
+- [Agent Harness](/ai-engineering/agent-harness.md) — where prompt scaffolding lives in coding agents
+- [Claude Code](/ai-engineering/claude-code.md) — agent harness whose behavior is shaped by these techniques
+- [Agent Security](/ai-engineering/agent-security.md) — prompt injection is the adversarial side of prompting
+- [Vibe Coding](/ai-engineering/vibe-coding.md) — where prompt antipatterns cause the 70% problem
+- [Beyond Vibe Coding (Book)](/ai-engineering/sources/beyond-vibe-coding-book.md) — ch2 as the fullest treatment of the vibe-coding prompt toolkit
 
 ---
 

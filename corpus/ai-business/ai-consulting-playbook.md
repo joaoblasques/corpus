@@ -44,7 +44,7 @@ last_confirmed: 2026-06-17
 
 # AI Consulting Playbook
 
-**TL;DR.** A **free "AI mini assessment"** is a two-call client-acquisition framework for AI consultants: call one is a 15-minute, prescribe-nothing discovery using five questions; between calls you pick the single bottleneck at the intersection of *frequency × friction*; call two delivers one free fix and then asks "the money question" to upsell into a paid build. The presenter claims this converts 30–50% of free assessments into paying clients [^src1]. Self-reported and promotional (funnels to a free Notion template + the presenter's own consulting), but the discovery structure is concrete and reusable. This is the *client-acquisition* counterpart to the *offer-positioning* discipline in [[ai-business/monetizing-code|Monetizing Code]].
+**TL;DR.** A **free "AI mini assessment"** is a two-call client-acquisition framework for AI consultants: call one is a 15-minute, prescribe-nothing discovery using five questions; between calls you pick the single bottleneck at the intersection of *frequency × friction*; call two delivers one free fix and then asks "the money question" to upsell into a paid build. The presenter claims this converts 30–50% of free assessments into paying clients [^src1]. Self-reported and promotional (funnels to a free Notion template + the presenter's own consulting), but the discovery structure is concrete and reusable. This is the *client-acquisition* counterpart to the *offer-positioning* discipline in [Monetizing Code](/ai-business/monetizing-code.md).
 
 ## The lens: three levers of ROI
 
@@ -111,8 +111,8 @@ A concrete AI-consulting offer structure: convert a **15-minute discovery call**
 
 ## Relationship to other pages
 
-- **vs. [[ai-business/monetizing-code|Monetizing Code]].** Monetizing Code covers *selling a result* and the *positioning one-pager* (articulating the offer); this page is the *operational discovery-and-close motion* that finds the result to sell. They reference the same "paid assessment as sales mechanism" idea — Monetizing Code's "the assessment is the pitch" and the asset-library "pull the matching skill, tune it, deliver" model — applied here as a structured two-call script with a custom-Claude-skill prescription path.
-- **vs. [[ai-business/ai-synthetic-focus-group|AI Synthetic Focus Group]].** Sibling business-tactics source from the same newsletter ecosystem; both are concrete AI-monetization playbooks rather than capability/research content.
+- **vs. [Monetizing Code](/ai-business/monetizing-code.md).** Monetizing Code covers *selling a result* and the *positioning one-pager* (articulating the offer); this page is the *operational discovery-and-close motion* that finds the result to sell. They reference the same "paid assessment as sales mechanism" idea — Monetizing Code's "the assessment is the pitch" and the asset-library "pull the matching skill, tune it, deliver" model — applied here as a structured two-call script with a custom-Claude-skill prescription path.
+- **vs. [AI Synthetic Focus Group](/ai-business/ai-synthetic-focus-group.md).** Sibling business-tactics source from the same newsletter ecosystem; both are concrete AI-monetization playbooks rather than capability/research content.
 
 ## Client onboarding automation (the "invisible tax" on closing)
 

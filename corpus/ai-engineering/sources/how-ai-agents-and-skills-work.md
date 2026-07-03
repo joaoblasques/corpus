@@ -47,16 +47,16 @@ This is an opinionated practitioner talk, not a tutorial or paper. Claims below 
 
 ## Where it routes in the corpus
 
-- [[ai-engineering/agent-skills|Agent Skills]] — new concept page (progressive disclosure, recursive building, don't-download)
-- [[ai-engineering/context-window-management|Context Window Management]] — window-fill degradation, token efficiency
-- [[ai-engineering/context-engineering|Context Engineering]] — "less is more"; code-as-context; supply unique workflow not general knowledge
-- [[ai-engineering/ai-agent|AI Agent]] — token-predictor mental model; agents-as-new-employees
-- [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] — one-agent-first → sub-agents for productivity
-- [[ai-engineering/openclaw|OpenClaw]] — the guest's own-email-isolated sponsor-vetting agent + recursive skill-from-failure loop (re-confirmed via a fresh 2026-06-26 Whisper transcript of the same episode)
+- [Agent Skills](/ai-engineering/agent-skills.md) — new concept page (progressive disclosure, recursive building, don't-download)
+- [Context Window Management](/ai-engineering/context-window-management.md) — window-fill degradation, token efficiency
+- [Context Engineering](/ai-engineering/context-engineering.md) — "less is more"; code-as-context; supply unique workflow not general knowledge
+- [AI Agent](/ai-engineering/ai-agent.md) — token-predictor mental model; agents-as-new-employees
+- [Multi-Agent Systems](/ai-engineering/multi-agent-systems.md) — one-agent-first → sub-agents for productivity
+- [OpenClaw](/ai-engineering/openclaw.md) — the guest's own-email-isolated sponsor-vetting agent + recursive skill-from-failure loop (re-confirmed via a fresh 2026-06-26 Whisper transcript of the same episode)
 
 ## See also
 
-- [[ai-engineering/README|AI Engineering hub]]
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

@@ -58,7 +58,7 @@ updated: 2026-06-26
 ## Approaches
 
 ### 1. Claude Design (Anthropic Labs) — now shipped
-What was previewed as "Claude Designs" shipped as **Claude Design**, a standalone Anthropic Labs product (launched 2026-04-17, the day after Opus 4.7) for generating polished visual work — slide decks, one-pagers, prototypes, websites, even launch videos — from natural language [^src8][^src10]. It is powered by the Opus 4.7 vision model and runs on a **separate, weekly usage quota** distinct from Claude/Claude Code [^src10]. For decks specifically: import or build a **design system** so every deck is on-brand by default, generate from a PDF/brain-dump/transcript, then iterate in-canvas via tweaks/comment/draw/edit and **present** or **export** (Canva/PDF/PowerPoint/HTML/zip) or **hand off to Claude Code** [^src8][^src9][^src10]. Full treatment: [[ai-engineering/claude-design|Claude Design]]. The feature was also previewed under an update characterized as Claude "destroying PowerPoint" [^src2].
+What was previewed as "Claude Designs" shipped as **Claude Design**, a standalone Anthropic Labs product (launched 2026-04-17, the day after Opus 4.7) for generating polished visual work — slide decks, one-pagers, prototypes, websites, even launch videos — from natural language [^src8][^src10]. It is powered by the Opus 4.7 vision model and runs on a **separate, weekly usage quota** distinct from Claude/Claude Code [^src10]. For decks specifically: import or build a **design system** so every deck is on-brand by default, generate from a PDF/brain-dump/transcript, then iterate in-canvas via tweaks/comment/draw/edit and **present** or **export** (Canva/PDF/PowerPoint/HTML/zip) or **hand off to Claude Code** [^src8][^src9][^src10]. Full treatment: [Claude Design](/ai-engineering/claude-design.md). The feature was also previewed under an update characterized as Claude "destroying PowerPoint" [^src2].
 
 **Trade-off vs Gamma**: Claude Design is more flexible at structuring an unstructured brain-dump or 50-page transcript into a deck the way you want, and the output "feels like it comes from your brand," whereas "Gamma… is a bit more inflexible" [^src8]. The structural advantage is **context gravity** — if your source material already lives in the Claude/Claude Code environment, generating the deck there avoids ferrying context into a separate tool [^src8].
 
@@ -84,7 +84,7 @@ The result is version-controllable, diff-able, and deployable as a static page. 
 One practitioner also documented building slides using design tokens and 20 design principles — consistent typography scale, color tokens, spacing system, and component hierarchy [^src4].
 
 ### 5. Claude Cowork presentation skill
-A custom skill in [[ai-engineering/claude-cowork|Claude Cowork]] that wraps a presentation-builder workflow — triggered by `/presentations` or similar, guiding the operator through structure, content, and output format [^src5]. Integrates with the Cowork folder system for persisting slide templates and brand assets.
+A custom skill in [Claude Cowork](/ai-engineering/claude-cowork.md) that wraps a presentation-builder workflow — triggered by `/presentations` or similar, guiding the operator through structure, content, and output format [^src5]. Integrates with the Cowork folder system for persisting slide templates and brand assets.
 
 ### 6. Basic prompt-to-PowerPoint
 The simplest workflow: paste an outline into Claude.ai and instruct it to produce a PowerPoint-compatible structure, then copy into slides. Lower quality than the above but zero setup [^src6]. Primarily useful as a first draft accelerator.
@@ -111,11 +111,11 @@ When generating HTML slides, twenty design principles improve output quality [^s
 
 ## See also
 
-- [[ai-engineering/claude-design|Claude Design]] — the now-shipped Anthropic Labs product (approach #1); decks, prototypes, websites, launch videos
-- [[ai-engineering/claude-cowork|Claude Cowork]] — skill system; `/presentations` workflow
-- [[ai-engineering/claude-code|Claude Code]] — HTML generation, design.md conventions
-- [[ai-engineering/agent-skills|Agent Skills]] — wrapping presentation workflows as skills
-- [[ai-engineering/README|AI Engineering hub]]
+- [Claude Design](/ai-engineering/claude-design.md) — the now-shipped Anthropic Labs product (approach #1); decks, prototypes, websites, launch videos
+- [Claude Cowork](/ai-engineering/claude-cowork.md) — skill system; `/presentations` workflow
+- [Claude Code](/ai-engineering/claude-code.md) — HTML generation, design.md conventions
+- [Agent Skills](/ai-engineering/agent-skills.md) — wrapping presentation workflows as skills
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

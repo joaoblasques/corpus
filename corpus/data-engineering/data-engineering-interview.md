@@ -44,13 +44,13 @@ last_confirmed: 2026-07-01
 
 The skills are ranked by how often they come up [^skills]:
 
-1. **SQL** — the most critical. Expect an ERD + analytical queries: `SELECT/FROM/WHERE/LIKE`, all join types (incl. anti-join) and *when* to use each, [[data-engineering/sql-window-functions|window functions]], table relationships (1:1/1:many/many:many), primary/foreign keys, subqueries/derived tables/CTEs, and what an index is and why [^skills].
+1. **SQL** — the most critical. Expect an ERD + analytical queries: `SELECT/FROM/WHERE/LIKE`, all join types (incl. anti-join) and *when* to use each, [window functions](/data-engineering/sql-window-functions.md), table relationships (1:1/1:many/many:many), primary/foreign keys, subqueries/derived tables/CTEs, and what an index is and why [^skills].
 2. **Python** — the most common pipeline language; core data structures and idioms [^skills].
 3. **Leetcode DSA** — standard SWE bar; Blind/Leetcode 75, NeetCode practice [^skills].
-4. **Data modeling** — star schema, facts & dimensions, warehousing, OLTP; know *what* and *why* [^skills]. See [[data-engineering/dimensional-modeling|Dimensional Modeling]].
-5. **Data pipelines** — a design question is near-certain; then probed on testing, backfilling, scaling, bad data, dependencies. Know orchestration basics (Airflow/dbt), backfilling, [[data-engineering/etl-pipeline|ETL vs ELT]], EL tools (Stitch/Fivetran), data testing, and the [[data-engineering/idempotent-pipelines|idempotent pipeline]] concept [^skills]. The corpus pages backing this design round: [[data-engineering/data-flow-patterns|Data Flow Patterns]] (extraction/behavioral/structural axes), [[data-engineering/scaling-data-pipelines|Scaling Data Pipelines]] (the scaling probe), [[data-engineering/data-quality|Data Quality]] (the bad-data probe), and [[data-engineering/requirements-gathering|Requirements Gathering]] (the "understand source, schedule, usage pattern" framing).
-6. **Distributed systems fundamentals** — how they work, job-dependent [^skills]. See [[software-engineering/distributed-systems-fallacies|Distributed Systems Fallacies]].
-7. **Event streaming** — what event streams are, why and how to use them [^skills]. See [[data-engineering/kafka|Kafka]] and [[data-engineering/stream-processing|Stream Processing]] (batch-vs-stream, watermarks, delivery guarantees — a recurring real-time interview topic).
+4. **Data modeling** — star schema, facts & dimensions, warehousing, OLTP; know *what* and *why* [^skills]. See [Dimensional Modeling](/data-engineering/dimensional-modeling.md).
+5. **Data pipelines** — a design question is near-certain; then probed on testing, backfilling, scaling, bad data, dependencies. Know orchestration basics (Airflow/dbt), backfilling, [ETL vs ELT](/data-engineering/etl-pipeline.md), EL tools (Stitch/Fivetran), data testing, and the [idempotent pipeline](/data-engineering/idempotent-pipelines.md) concept [^skills]. The corpus pages backing this design round: [Data Flow Patterns](/data-engineering/data-flow-patterns.md) (extraction/behavioral/structural axes), [Scaling Data Pipelines](/data-engineering/scaling-data-pipelines.md) (the scaling probe), [Data Quality](/data-engineering/data-quality.md) (the bad-data probe), and [Requirements Gathering](/data-engineering/requirements-gathering.md) (the "understand source, schedule, usage pattern" framing).
+6. **Distributed systems fundamentals** — how they work, job-dependent [^skills]. See [Distributed Systems Fallacies](/software-engineering/distributed-systems-fallacies.md).
+7. **Event streaming** — what event streams are, why and how to use them [^skills]. See [Kafka](/data-engineering/kafka.md) and [Stream Processing](/data-engineering/stream-processing.md) (batch-vs-stream, watermarks, delivery guarantees — a recurring real-time interview topic).
 8. **System design** — for DE, usually pipeline design (understand source, schedule, usage pattern); classics like *"design a clickstream store"* or *"use CDC to replicate OLTP into a warehouse"*; sometimes standard SWE design (Twitter/Netflix) [^skills].
 9. **Business questions** — design/justify business metrics; explain *your impact* via KPI/SLA using the **STAR method** [^skills].
 10. **Cloud computing** — general fluency: object storage (S3), compute (EC2), DB (RDS), managed Spark/Flink (EMR), serverless (Lambda), managed Kafka (Kinesis); equivalents on GCP/Azure [^skills].
@@ -62,7 +62,7 @@ The skills are ranked by how often they come up [^skills]:
 ## Part 2 — The 5-step job search
 
 1. **Choose companies** worth your time. Research on **TeamBlind, Glassdoor, Levels.fyi, Reddit**; look for trends, not a few stray comments; talking to an ex-employee is one of the best signals [^job]. Weigh: total pay (base/bonus/stock/refreshers/perks), work-life balance/on-call, tech-stack fit, *analytics-engineer vs software-engineer-in-data* expectations, work process (JIRA-heavy?), the product/values, name recognition (FAANGMULAD resume boost), startup-vs-big-tech tradeoffs, and team culture [^job].
-2. **Optimize LinkedIn & resume** — recruiters search LinkedIn Recruiter. Correct titles, **STAR-method** achievements, skills tagged to jobs (Python, SQL, Airflow, dbt, Spark, Redshift, Snowflake), a professional photo, location for hybrid roles, and a **data portfolio** if work experience is thin [^job]. See [[data-engineering/de-portfolio-projects|DE Portfolio Projects]] and [[data-engineering/portfolio-project-that-lands-a-de-role|The Portfolio Project That Lands a DE Role]].
+2. **Optimize LinkedIn & resume** — recruiters search LinkedIn Recruiter. Correct titles, **STAR-method** achievements, skills tagged to jobs (Python, SQL, Airflow, dbt, Spark, Redshift, Snowflake), a professional photo, location for hybrid roles, and a **data portfolio** if work experience is thin [^job]. See [DE Portfolio Projects](/data-engineering/de-portfolio-projects.md) and [The Portfolio Project That Lands a DE Role](/data-engineering/portfolio-project-that-lands-a-de-role.md).
 3. **Land interviews** — applications mostly yield silence; **referrals** are the high-yield path. Asking well: include the job link, describe experience in a line or two that **matches ≥60% of the requirements**, and *don't* ask them to find you a role [^job]. An up-to-date LinkedIn draws recruiters; you can also message the posting's recruiter directly. Conversion is high at small/medium-stage startups [^job].
 4. **Prepare per company** — research company-specific questions *before* grinding. Typical rounds: recruiter call (talk experience, ask tech-screen format) → tech screen (45–60 min DSA + SQL) → pre-onsite recruiter call (ask # and type of interviews, prep docs) → onsite (DSA — failing usually = no-hire; SQL — Leetcode-hard practice; system design — standard or data-oriented; behavioral — prep STAR answers, read the company blog). Have **>3 questions ready per interviewer** [^job].
 5. **Offers & negotiation** — get **multiple offers from publicly-traded companies** for leverage even if you won't join them; research pay on Levels.fyi/TeamBlind; don't accept a lowball [^job].
@@ -108,13 +108,13 @@ Databricks appears on both tracks — analysts use it for querying and notebook-
 
 ## See also
 
-- [[data-engineering/data-engineer-role|The Data Engineer Role]] — value = business impact + fundamentals; seniority; the DA→DE transition
-- [[data-engineering/de-portfolio-projects|DE Portfolio Projects]] — runnable templates to build portfolio experience
-- [[data-engineering/portfolio-project-that-lands-a-de-role|The Portfolio Project That Lands a DE Role]] — making one project read as senior
-- [[data-engineering/sql-window-functions|SQL Window Functions]] — a recurring SQL-round topic
-- [[data-engineering/dimensional-modeling|Dimensional Modeling]] · [[data-engineering/idempotent-pipelines|Idempotent Pipelines]] · [[data-engineering/change-data-capture|CDC]] — common design-round fundamentals
-- [[ai-business/technical-career|Navigating a Technical Career]] — broader career strategy, role targeting, prioritization
-- [[data-engineering/README|Data Engineering hub]]
+- [The Data Engineer Role](/data-engineering/data-engineer-role.md) — value = business impact + fundamentals; seniority; the DA→DE transition
+- [DE Portfolio Projects](/data-engineering/de-portfolio-projects.md) — runnable templates to build portfolio experience
+- [The Portfolio Project That Lands a DE Role](/data-engineering/portfolio-project-that-lands-a-de-role.md) — making one project read as senior
+- [SQL Window Functions](/data-engineering/sql-window-functions.md) — a recurring SQL-round topic
+- [Dimensional Modeling](/data-engineering/dimensional-modeling.md) · [Idempotent Pipelines](/data-engineering/idempotent-pipelines.md) · [CDC](/data-engineering/change-data-capture.md) — common design-round fundamentals
+- [Navigating a Technical Career](/ai-business/technical-career.md) — broader career strategy, role targeting, prioritization
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

@@ -226,11 +226,11 @@ Seniors are paid for architectural decisions, performance engineering, and trade
 
 ## See also
 
-- [[software-engineering/distributed-systems-fallacies|Distributed Systems Fallacies]] — the eight assumptions that break in distributed systems
-- [[software-engineering/cap-theorem|CAP Theorem]] — consistency vs availability under network partition — the core distributed systems trade-off
-- [[software-engineering/microservices|Microservices]] — decomposed service architecture
-- [[software-engineering/kubernetes|Kubernetes]] — container orchestration for horizontal scaling
-- [[software-engineering/ci-cd|CI/CD and Progressive Delivery]] — deploying into this infrastructure
+- [Distributed Systems Fallacies](/software-engineering/distributed-systems-fallacies.md) — the eight assumptions that break in distributed systems
+- [CAP Theorem](/software-engineering/cap-theorem.md) — consistency vs availability under network partition — the core distributed systems trade-off
+- [Microservices](/software-engineering/microservices.md) — decomposed service architecture
+- [Kubernetes](/software-engineering/kubernetes.md) — container orchestration for horizontal scaling
+- [CI/CD and Progressive Delivery](/software-engineering/ci-cd.md) — deploying into this infrastructure
 
 ---
 

@@ -70,12 +70,12 @@ Three types [^src1]:
 - **Label shift** — P(Y) changes (e.g., prevalence of a disease)
 - **Concept drift** — the relationship P(Y|X) itself changes
 
-Detection: compare reference (training) distribution to analysis (production) distribution using univariate metrics (JS divergence, Wasserstein, KS test, etc.) — see [[mlops/drift-detection|Drift Detection]] for detail.
+Detection: compare reference (training) distribution to analysis (production) distribution using univariate metrics (JS divergence, Wasserstein, KS test, etc.) — see [Drift Detection](/mlops/drift-detection.md) for detail.
 
 ## Infrastructure chapter highlights (Ch 10)
 
 Cron, schedulers, and orchestrators occupy a critical niche [^src1]:
-- **Cron**: simple periodic triggers; covered in [[mlops/cron-scheduling|Cron Scheduling]]
+- **Cron**: simple periodic triggers; covered in [Cron Scheduling](/mlops/cron-scheduling.md)
 - **Schedulers** (Airflow, Prefect): DAG-based; depend on conditions/state
 - **Orchestrators** (Kubernetes): manage compute resources across tasks
 - **Model store**: versioned model artifacts with metadata (lineage, performance)
@@ -102,12 +102,12 @@ Praised by [^src1]:
 
 ## See also
 
-- [[mlops/mlops-principles|MLOps Principles]] — aligned concepts (traceability, reproducibility, DevOps loop)
-- [[mlops/model-monitoring|Model Monitoring]] — implementation of the Ch 8 monitoring approach
-- [[mlops/drift-detection|Drift Detection]] — univariate drift metrics (expands on Ch 8)
-- [[mlops/model-serving|Model Serving]] — Ch 7 deployment patterns in practice
-- [[mlops/production-ml-workflow|Production ML Workflow]] — training/eval workflow aligned with Ch 4–6
-- [[mlops/README|MLOps hub]]
+- [MLOps Principles](/mlops/mlops-principles.md) — aligned concepts (traceability, reproducibility, DevOps loop)
+- [Model Monitoring](/mlops/model-monitoring.md) — implementation of the Ch 8 monitoring approach
+- [Drift Detection](/mlops/drift-detection.md) — univariate drift metrics (expands on Ch 8)
+- [Model Serving](/mlops/model-serving.md) — Ch 7 deployment patterns in practice
+- [Production ML Workflow](/mlops/production-ml-workflow.md) — training/eval workflow aligned with Ch 4–6
+- [MLOps hub](/mlops/README.md)
 
 ---
 

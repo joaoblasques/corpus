@@ -25,7 +25,7 @@ updated: 2026-06-15
 
 # AWS
 
-**TL;DR**: Amazon Web Services is the largest cloud provider (~30% of global cloud infrastructure, ahead of Azure ~25% and GCP ~13%) [^src2]. It has 300+ services, but ~50 matter and far fewer need depth [^src1]. This page maps the important services onto the [[mlops/cloud-computing-fundamentals|cloud fundamentals]], framed (per the source) by building an e-commerce app end-to-end [^src1].
+**TL;DR**: Amazon Web Services is the largest cloud provider (~30% of global cloud infrastructure, ahead of Azure ~25% and GCP ~13%) [^src2]. It has 300+ services, but ~50 matter and far fewer need depth [^src1]. This page maps the important services onto the [cloud fundamentals](/mlops/cloud-computing-fundamentals.md), framed (per the source) by building an e-commerce app end-to-end [^src1].
 
 ## Service map (by layer)
 
@@ -44,7 +44,7 @@ updated: 2026-06-15
 | **CI/CD + IaC** | CodeBuild/CodeDeploy/CodePipeline, **CloudFormation** (YAML/JSON templates), **CDK** (IaC in real languages) [^src1] |
 | **Identity / network** | IAM (users + roles + policies), Identity Center, **VPC**, VPN, PrivateLink [^src1] |
 
-These map directly onto [[mlops/cloud-computing-fundamentals|cloud fundamentals]]: ELB ↔ load balancing, Lambda ↔ serverless, SNS/SQS/EventBridge ↔ event-driven architecture, S3/EBS ↔ object/block storage, VPC ↔ cloud networks.
+These map directly onto [cloud fundamentals](/mlops/cloud-computing-fundamentals.md): ELB ↔ load balancing, Lambda ↔ serverless, SNS/SQS/EventBridge ↔ event-driven architecture, S3/EBS ↔ object/block storage, VPC ↔ cloud networks.
 
 ## Serverless lean
 
@@ -63,11 +63,11 @@ A four-step path from a data/AI engineer [^src2]:
 
 ## See also
 
-- [[mlops/cloud-computing-fundamentals|Cloud Computing Fundamentals]] — the concepts these services implement
-- [[mlops/azure|Azure]] · [[mlops/gcp|GCP]] — the other two major providers
-- [[mlops/infrastructure-as-code|Infrastructure as Code]] — CloudFormation/CDK are AWS's IaC tools
-- [[data-engineering/sources/aws-duckdb-etl-fargate|DuckDB ETL on ECS Fargate]] — a concrete AWS ETL build (data-engineering)
-- [[mlops/README|MLOps hub]]
+- [Cloud Computing Fundamentals](/mlops/cloud-computing-fundamentals.md) — the concepts these services implement
+- [Azure](/mlops/azure.md) · [GCP](/mlops/gcp.md) — the other two major providers
+- [Infrastructure as Code](/mlops/infrastructure-as-code.md) — CloudFormation/CDK are AWS's IaC tools
+- [DuckDB ETL on ECS Fargate](/data-engineering/sources/aws-duckdb-etl-fargate.md) — a concrete AWS ETL build (data-engineering)
+- [MLOps hub](/mlops/README.md)
 
 ---
 

@@ -74,7 +74,7 @@ updated: 2026-06-29
 
 **TL;DR.** Hermes is an AI coding agent that one developer runs on their own VPS and drives remotely over Telegram chat — the framing is using it as a **"lead developer" from a phone**: host it on a server so it stays available, connect it to GitHub, and message it to edit and ship code while away from your computer [^src1]. The cited source is a sponsored ZazenCodes newsletter introducing a video walkthrough of this setup [^src1].
 
-> Not to be confused with the React Native/Expo **Hermes** JavaScript engine referenced in [[ai-engineering/agent-security|Agent Security]] — unrelated tool, same name.
+> Not to be confused with the React Native/Expo **Hermes** JavaScript engine referenced in [Agent Security](/ai-engineering/agent-security.md) — unrelated tool, same name.
 
 ## The pitch: a lead developer on your phone
 
@@ -94,7 +94,7 @@ The stated stack [^src1]:
 - **Connect it to GitHub.**
 - **Use GitHub Actions to deploy code changes.**
 
-Operationally this is a **remote, chat-driven agent harness** — operating a coding agent through a messaging UI, the pattern discussed in [[ai-engineering/agent-ui|Agent UI]], here applied to an always-on, phone-first deployment. See also [[ai-engineering/agent-harness|Agent Harness]] and [[ai-engineering/agentic-coding|Agentic Coding]].
+Operationally this is a **remote, chat-driven agent harness** — operating a coding agent through a messaging UI, the pattern discussed in [Agent UI](/ai-engineering/agent-ui.md), here applied to an always-on, phone-first deployment. See also [Agent Harness](/ai-engineering/agent-harness.md) and [Agentic Coding](/ai-engineering/agentic-coding.md).
 
 ## Setting up Hermes on a VPS
 
@@ -129,13 +129,13 @@ A walkthrough of advanced workflows using Claude Code Desktop branded as "Hermes
 
 **Hack 2 — Pinned sessions as persistent workspaces.** Instead of opening a new session per task, create named pinned sessions per domain of work (e.g., "Newsletter," "Client Projects," "Dev"). Each pinned session accumulates context and tooling relevant to that domain and stays open indefinitely. Switching between projects means switching sessions, not re-explaining context [^src2].
 
-**Hack 3 — Skills as SOPs.** Encode every recurring workflow as a `SKILL.md` file. The pattern: identify a workflow you explain more than once → record yourself doing it (Loom auto-generates the SOP) → convert to a skill → the next time, type the skill name instead of explaining. "The goal is to have the agent already know how to do it" [^src2]. See [[ai-engineering/agent-skills|Agent Skills]] for the full skill design discipline.
+**Hack 3 — Skills as SOPs.** Encode every recurring workflow as a `SKILL.md` file. The pattern: identify a workflow you explain more than once → record yourself doing it (Loom auto-generates the SOP) → convert to a skill → the next time, type the skill name instead of explaining. "The goal is to have the agent already know how to do it" [^src2]. See [Agent Skills](/ai-engineering/agent-skills.md) for the full skill design discipline.
 
-**Hack 4 — Cron jobs for scheduled intelligence.** Use Claude Code routines (or a simple launchd/cron on the server) to run scheduled tasks: daily competitor monitoring, weekly content calendar generation, nightly data pulls. The session runs headlessly; results arrive in email or Slack the next morning [^src2]. See [[ai-engineering/claude-code|Claude Code]] (Routines section) for the routing infrastructure.
+**Hack 4 — Cron jobs for scheduled intelligence.** Use Claude Code routines (or a simple launchd/cron on the server) to run scheduled tasks: daily competitor monitoring, weekly content calendar generation, nightly data pulls. The session runs headlessly; results arrive in email or Slack the next morning [^src2]. See [Claude Code](/ai-engineering/claude-code.md) (Routines section) for the routing infrastructure.
 
 **Hack 5 — Webhooks for event-triggered intelligence.** Connect external services (Zapier, n8n, Make.com) to fire a Hermes session on events: a new form submission starts a CRM entry + follow-up email draft; a calendar event ending triggers a meeting summary post [^src2]. The underlying mechanism is the API-triggered routine (see Claude Code § Routines).
 
-**Hack 6 — Specialist agent profiles.** Create named Claude Code sessions with custom system prompts for each recurring specialist need. The documented example is "Nova" — a YouTube content research agent with tools and context scoped only for video research and scripting [^src2]. Switching to Nova means switching to a session where Claude is already a YouTube specialist, not a generalist who needs domain context re-injected. See [[ai-engineering/agent-skills|Agent Skills]] (Specialist agent profiles section).
+**Hack 6 — Specialist agent profiles.** Create named Claude Code sessions with custom system prompts for each recurring specialist need. The documented example is "Nova" — a YouTube content research agent with tools and context scoped only for video research and scripting [^src2]. Switching to Nova means switching to a session where Claude is already a YouTube specialist, not a generalist who needs domain context re-injected. See [Agent Skills](/ai-engineering/agent-skills.md) (Specialist agent profiles section).
 
 **Hack 7 — Remote gateway connection.** Run Claude Code on an always-on server (VPS, home server, cloud instance) and connect to it from anywhere via SSH or the Desktop remote-control feature. Benefits: tasks run while the laptop is closed, no context lost when switching devices, and team members can share access to the same running session [^src2]. This is the Desktop-app complement to the VPS/Telegram pattern described above.
 
@@ -143,11 +143,11 @@ A walkthrough of advanced workflows using Claude Code Desktop branded as "Hermes
 
 ## See also
 
-- [[ai-engineering/agent-ui|Agent UI]] — operating agents through chat/messaging interfaces
-- [[ai-engineering/agent-harness|Agent Harness]] — the harness around a coding agent
-- [[ai-engineering/agent-skills|Agent Skills]] — skills as SOPs (Hack 3); specialist profiles (Hack 6)
-- [[ai-engineering/agentic-coding|Agentic Coding]] — delegating coding work to agents
-- [[ai-engineering/README|AI Engineering hub]]
+- [Agent UI](/ai-engineering/agent-ui.md) — operating agents through chat/messaging interfaces
+- [Agent Harness](/ai-engineering/agent-harness.md) — the harness around a coding agent
+- [Agent Skills](/ai-engineering/agent-skills.md) — skills as SOPs (Hack 3); specialist profiles (Hack 6)
+- [Agentic Coding](/ai-engineering/agentic-coding.md) — delegating coding work to agents
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ## Hermes use cases: /goal, kanban, research, memory wiki, Tailscale
 
@@ -182,7 +182,7 @@ This limitation (keyword-only injection) is why the composite stack pairs Hermes
 
 ## Origin and background
 
-Hermes is an open-source MIT-licensed Python project from **Nous Research** — a research-oriented AI collective known for a hacker-origin-story, Discord community culture, and a dog-food mentality (the team uses Hermes as their primary agent) [^src9]. The key framing: **Hermes is a harness, not the agent itself** — the LLM running inside (Claude, GPT-4o, local models via OpenRouter) is the intelligence; Hermes provides the memory, skills, crons, and orchestration around it [^src9]. This puts it in the same category as [[ai-engineering/openclaw|OpenClaw]] — a framework you deploy, not a product you subscribe to.
+Hermes is an open-source MIT-licensed Python project from **Nous Research** — a research-oriented AI collective known for a hacker-origin-story, Discord community culture, and a dog-food mentality (the team uses Hermes as their primary agent) [^src9]. The key framing: **Hermes is a harness, not the agent itself** — the LLM running inside (Claude, GPT-4o, local models via OpenRouter) is the intelligence; Hermes provides the memory, skills, crons, and orchestration around it [^src9]. This puts it in the same category as [OpenClaw](/ai-engineering/openclaw.md) — a framework you deploy, not a product you subscribe to.
 
 Reliability vs OpenClaw: practitioners switching from OpenClaw to Hermes cite themed releases (no breaking changes without warning), a self-improvement loop that compounds over time, and support for local models (LoRA fine-tuning, Swarms integration) [^src7][^src9].
 
@@ -194,9 +194,9 @@ From a comprehensive 1-hour practitioner course [^src6]:
 - `user.md` — who you are: preferences, communication style, timezone, recurring projects, personal context about you as a person.
 - `memory.md` — ongoing state: active projects, business context, tasks-in-flight. Updated immediately as Hermes learns new things (not batched).
 
-Both files inject a frozen snapshot into every session start; the agent always "knows" the user without re-explaining. See [[ai-engineering/agent-memory|Agent Memory]] for how this compares to RAG-based recall.
+Both files inject a frozen snapshot into every session start; the agent always "knows" the user without re-explaining. See [Agent Memory](/ai-engineering/agent-memory.md) for how this compares to RAG-based recall.
 
-**2. Skills** — the same `SKILL.md` format as Claude Code (see [[ai-engineering/agent-skills|Agent Skills]]). 520+ community skills are available via the Hermes skills hub; 91 are built-in. Hermes auto-creates and auto-patches skills as it learns new workflows from use — the self-improving loop.
+**2. Skills** — the same `SKILL.md` format as Claude Code (see [Agent Skills](/ai-engineering/agent-skills.md)). 520+ community skills are available via the Hermes skills hub; 91 are built-in. Hermes auto-creates and auto-patches skills as it learns new workflows from use — the self-improving loop.
 
 **3. soul.md** — personality shaping. Unlike `user.md` (about the user), `soul.md` is about the *agent's* character: tone, communication style, personal identity, how it pushes back. "Honey" (NetworkChuck's wife's nickname for their Hermes instance) is partly a product of soul.md [^src9].
 
@@ -224,7 +224,7 @@ Hermes integrates OpenRouter for model routing, applying three heuristics per ta
 | Cost-sensitive, bulk processing | Cheap model |
 | Complex, intensive (research, long-horizon coding) | Expensive model |
 
-"Opus is the best model for AI agents" — the practitioner framing is to spend Opus tokens selectively on the tasks that deserve frontier reasoning; route everything else cheaper [^src9]. This mirrors the planner-Opus / worker-Sonnet split in [[ai-engineering/multi-agent-systems|Multi-Agent Systems]].
+"Opus is the best model for AI agents" — the practitioner framing is to spend Opus tokens selectively on the tasks that deserve frontier reasoning; route everything else cheaper [^src9]. This mirrors the planner-Opus / worker-Sonnet split in [Multi-Agent Systems](/ai-engineering/multi-agent-systems.md).
 
 One-line VPS deploy via Open Router Spawn on Google Cloud, AWS, or DigitalOcean [^src5]. Apple Health, calendar, and Gmail integrations available post-setup [^src5].
 

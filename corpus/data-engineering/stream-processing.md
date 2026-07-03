@@ -92,9 +92,9 @@ Terms that recur in streaming systems (and interviews) [^src1]:
 
 Streaming splits into a **messaging/transport** layer, a **processing engine**, and a **sink** [^src2]:
 
-- **Messaging & transport** — **[[data-engineering/kafka|Apache Kafka]]** (industry standard, high-throughput, durable, replayable; the most-asked tool in real-time DE interviews), **AWS Kinesis**, **GCP Pub/Sub**, **Azure Event Hubs** [^src1][^src2].
+- **Messaging & transport** — **[Apache Kafka](/data-engineering/kafka.md)** (industry standard, high-throughput, durable, replayable; the most-asked tool in real-time DE interviews), **AWS Kinesis**, **GCP Pub/Sub**, **Azure Event Hubs** [^src1][^src2].
 - **Processing engines** — **Apache Flink** (stateful, event-time, windowing, watermarks), **Kafka Streams** (lightweight JVM library over Kafka topics), **Spark Structured Streaming** (familiar Spark APIs, micro-batch or continuous), **Apache Storm** (older spouts/bolts topology, legacy) [^src1][^src2].
-- **Batch tools (for contrast)** — warehouse SQL engines ([[data-engineering/snowflake|Snowflake]]/[[data-engineering/bigquery|BigQuery]]/[[data-engineering/redshift|Redshift]]/Databricks SQL), **[[data-engineering/dbt|dbt]]** (transformation), **[[data-engineering/apache-spark|Apache Spark]]** (large-scale batch), Pandas/Polars (small-scale); orchestrated by **[[data-engineering/data-orchestration|Airflow, Dagster, or Prefect]]** [^src2].
+- **Batch tools (for contrast)** — warehouse SQL engines ([Snowflake](/data-engineering/snowflake.md)/[BigQuery](/data-engineering/bigquery.md)/[Redshift](/data-engineering/redshift.md)/Databricks SQL), **[dbt](/data-engineering/dbt.md)** (transformation), **[Apache Spark](/data-engineering/apache-spark.md)** (large-scale batch), Pandas/Polars (small-scale); orchestrated by **[Airflow, Dagster, or Prefect](/data-engineering/data-orchestration.md)** [^src2].
 
 ## Delivery guarantees
 
@@ -104,7 +104,7 @@ A core interview topic — pick by the business cost of duplicates vs loss [^src
 - **At-least-once** — every event processed, but retries may produce **duplicates** → need downstream deduplication.
 - **Exactly-once** — processed once and only once even under failure; needs checkpointing + transactional writes → more complex, more overhead.
 
-For financial transactions, lean **exactly-once** (or solid at-least-once with idempotent/dedup sinks) — the risk of double-processing or missing a transaction is too high [^src1]. This is the streaming analogue of [[data-engineering/idempotent-pipelines|idempotent pipelines]] in batch.
+For financial transactions, lean **exactly-once** (or solid at-least-once with idempotent/dedup sinks) — the risk of double-processing or missing a transaction is too high [^src1]. This is the streaming analogue of [idempotent pipelines](/data-engineering/idempotent-pipelines.md) in batch.
 
 ## Choosing the right method
 
@@ -117,7 +117,7 @@ Best practices: *start simple, optimize only when necessary, let the use case dr
 
 ## Worked example: a real-time pipeline on AWS
 
-A minimal IoT pipeline from the source [^src1]: a Python script simulates temperature sensors emitting readings every second → **Amazon Kinesis Data Stream** (ingestion buffer) → **AWS Lambda** (real-time processing engine, triggered per record) → **Amazon DynamoDB** (NoSQL store of the latest reading per device); optionally an **SNS** alert on threshold breach [^src1]. Resources are provisioned with **[[mlops/terraform|Terraform]]** (`providers.tf`, `kinesis.tf`, `dynamodb.tf`, `iam.tf`, `lambda.tf`, `outputs.tf`) [^src1].
+A minimal IoT pipeline from the source [^src1]: a Python script simulates temperature sensors emitting readings every second → **Amazon Kinesis Data Stream** (ingestion buffer) → **AWS Lambda** (real-time processing engine, triggered per record) → **Amazon DynamoDB** (NoSQL store of the latest reading per device); optionally an **SNS** alert on threshold breach [^src1]. Resources are provisioned with **[Terraform](/mlops/terraform.md)** (`providers.tf`, `kinesis.tf`, `dynamodb.tf`, `iam.tf`, `lambda.tf`, `outputs.tf`) [^src1].
 
 ## Interview questions (real-time)
 
@@ -203,15 +203,15 @@ These cumulative delays are the primary motivation for switching to streaming wh
 
 ## Related
 
-- [[data-engineering/kafka|Apache Kafka]] — the dominant transport layer; producer/consumer internals
-- [[data-engineering/etl-pipeline|ETL Pipeline]] — batch vs real-time extraction; ETL vs ELT
-- [[data-engineering/data-ingestion-patterns|Data Ingestion Patterns]] — stream-via-event-log vs batch-extract
-- [[data-engineering/data-orchestration|Data Orchestration]] — scheduling batch/micro-batch jobs
-- [[data-engineering/idempotent-pipelines|Idempotent Pipelines]] — the batch analogue of exactly-once
-- [[data-engineering/apache-spark|Apache Spark]] — Spark Structured Streaming is one of the named processing engines
-- [[data-engineering/databricks|Databricks]] — runs Spark Structured Streaming / Lakeflow for streaming + micro-batch
-- [[data-engineering/data-engineering-interview|Data Engineering Interview]] — event streaming is a tested skill
-- [[data-engineering/README|Data Engineering hub]]
+- [Apache Kafka](/data-engineering/kafka.md) — the dominant transport layer; producer/consumer internals
+- [ETL Pipeline](/data-engineering/etl-pipeline.md) — batch vs real-time extraction; ETL vs ELT
+- [Data Ingestion Patterns](/data-engineering/data-ingestion-patterns.md) — stream-via-event-log vs batch-extract
+- [Data Orchestration](/data-engineering/data-orchestration.md) — scheduling batch/micro-batch jobs
+- [Idempotent Pipelines](/data-engineering/idempotent-pipelines.md) — the batch analogue of exactly-once
+- [Apache Spark](/data-engineering/apache-spark.md) — Spark Structured Streaming is one of the named processing engines
+- [Databricks](/data-engineering/databricks.md) — runs Spark Structured Streaming / Lakeflow for streaming + micro-batch
+- [Data Engineering Interview](/data-engineering/data-engineering-interview.md) — event streaming is a tested skill
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

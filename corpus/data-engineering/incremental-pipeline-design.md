@@ -52,10 +52,10 @@ Three load strategies, matched to output type [^src1]:
 | Strategy | How | Re-runnability | Common models |
 |---|---|---|---|
 | **Overwrite partitions** | Replace whole partitions per run; destination partitioned by event time (`created_at`/`updated_at`); e.g. `overwritePartitions` | **Gold standard** — re-runnable with no manual intervention | Facts, snapshot dimensions [^src1] |
-| **Row-based update/insert/delete** | Modify rows by id; `MERGE INTO`, `INSERT ON CONFLICT`, `DELETE & INSERT` | Inefficient; needs a clean-up step before re-run | [[data-engineering/scd2|SCD2]], updating destination tables [^src1] |
+| **Row-based update/insert/delete** | Modify rows by id; `MERGE INTO`, `INSERT ON CONFLICT`, `DELETE & INSERT` | Inefficient; needs a clean-up step before re-run | [SCD2](/data-engineering/scd2.md), updating destination tables [^src1] |
 | **Append** | Append all rows | Fine where duplication is OK or de-duped downstream | High-velocity stream ingest; Kafka at-most-once settings [^src1] |
 
-Overwrite-partition is favored precisely because it is **idempotent** without manual cleanup — re-running a window reproduces the same partition. Row-based loads (the [[data-engineering/merge-into|MERGE INTO]] family) require destination cleanup before a backfill. See [[data-engineering/idempotent-pipelines|Idempotent Pipelines]].
+Overwrite-partition is favored precisely because it is **idempotent** without manual cleanup — re-running a window reproduces the same partition. Row-based loads (the [MERGE INTO](/data-engineering/merge-into.md) family) require destination cleanup before a backfill. See [Idempotent Pipelines](/data-engineering/idempotent-pipelines.md).
 
 ## Decision 3 — design for easy backfilling
 
@@ -105,17 +105,17 @@ A safety wrapper pairing naturally with full refresh [^src3]:
 2. **Audit** — run data quality checks on staged data: row count comparisons vs. previous version, null checks on required columns, duplicate key detection, metric range validation. If any check fails, stop before touching the production table.
 3. **Publish** — if all checks pass, promote staged data to production.
 
-Pairing WAP with full refresh provides a quality gate without modifying production data directly. The same write-audit-publish approach applies to incremental patterns. See [[data-engineering/data-quality|Data Quality]] for the full DQ framework.
+Pairing WAP with full refresh provides a quality gate without modifying production data directly. The same write-audit-publish approach applies to incremental patterns. See [Data Quality](/data-engineering/data-quality.md) for the full DQ framework.
 
 ## See also
 
-- [[data-engineering/idempotent-pipelines|Idempotent Pipelines]] — why overwrite-partition + fixed windows make backfills safe and parallel
-- [[data-engineering/data-ingestion-patterns|Data Ingestion Patterns]] — stream vs batch entry point
-- [[data-engineering/scd2|SCD2]] — the row-based-update load case; datestamp alternative
-- [[data-engineering/merge-into|MERGE INTO]] — the row-based update/insert/delete mechanism
-- [[data-engineering/change-data-capture|Change Data Capture]] — full load vs incremental vs CDC
-- [[data-engineering/data-orchestration|Data Orchestration]] — orchestrator backfill semantics
-- [[data-engineering/README|Data Engineering hub]]
+- [Idempotent Pipelines](/data-engineering/idempotent-pipelines.md) — why overwrite-partition + fixed windows make backfills safe and parallel
+- [Data Ingestion Patterns](/data-engineering/data-ingestion-patterns.md) — stream vs batch entry point
+- [SCD2](/data-engineering/scd2.md) — the row-based-update load case; datestamp alternative
+- [MERGE INTO](/data-engineering/merge-into.md) — the row-based update/insert/delete mechanism
+- [Change Data Capture](/data-engineering/change-data-capture.md) — full load vs incremental vs CDC
+- [Data Orchestration](/data-engineering/data-orchestration.md) — orchestrator backfill semantics
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

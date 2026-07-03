@@ -85,6 +85,6 @@ This separation of concerns — one agent trades, one tunes parameters, one gove
 - **Hermes** — installed as CLI tool; manages the improvement loop
 - **Strategy YAML** — machine-readable strategy definition that Hermes can read and modify
 
-Related: [[trading/ai-trading-agents|AI Trading Agents]]
+Related: [AI Trading Agents](/trading/ai-trading-agents.md)
 
 [^src1]: [How To Build A Self-Improving AI Trading Agent (Insanely Cool)](../../raw/youtube/youtube-6njREUQAFdg-how-to-build-a-self-improving-ai-trading-agent-insanely-cool.md)

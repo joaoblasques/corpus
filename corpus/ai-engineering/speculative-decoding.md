@@ -26,7 +26,7 @@ updated: 2026-07-02
 
 # Speculative Decoding
 
-**TL;DR.** Speculative decoding accelerates LLM inference by having a small **draft model** propose several candidate tokens, which the large **target model** then verifies in a single batched forward pass — accepting or rejecting the draft in one step instead of running the target model once per token. **Eagle 3** (autoregressive drafting) and **Eagle 3.1** (a robustness-hardened successor) [^src1], and **DFlash** (single-pass block-diffusion drafting) [^src2] are two families of draft-model algorithms trained via the **Speculators** library and served through [[ai-engineering/vllm|vLLM]]'s speculative-decoding data path. See [[ai-engineering/laguna-xs2|Laguna XS.2]] for a production DFlash deployment.
+**TL;DR.** Speculative decoding accelerates LLM inference by having a small **draft model** propose several candidate tokens, which the large **target model** then verifies in a single batched forward pass — accepting or rejecting the draft in one step instead of running the target model once per token. **Eagle 3** (autoregressive drafting) and **Eagle 3.1** (a robustness-hardened successor) [^src1], and **DFlash** (single-pass block-diffusion drafting) [^src2] are two families of draft-model algorithms trained via the **Speculators** library and served through [vLLM](/ai-engineering/vllm.md)'s speculative-decoding data path. See [Laguna XS.2](/ai-engineering/laguna-xs2.md) for a production DFlash deployment.
 
 ## Eagle 3.1: fixing attention drift
 
@@ -47,7 +47,7 @@ Two contributing causes were identified [^src1]:
 
 ## DFlash: single-pass block-diffusion drafting
 
-DFlash is architecturally distinct from the Eagle family: instead of autoregressive drafting (multiple forward passes, one token at a time), it uses **block diffusion** to generate an entire block of draft tokens of length *B* in a single forward pass, using a **non-causal attention pattern** — queries within a block can attend to every other token in the same block [^src2]. See [[ai-engineering/laguna-xs2|Laguna XS.2]] for a concrete deployment (0.6B 5-layer draft model, 8 tokens/pass, 2–3x speedup, no quality loss).
+DFlash is architecturally distinct from the Eagle family: instead of autoregressive drafting (multiple forward passes, one token at a time), it uses **block diffusion** to generate an entire block of draft tokens of length *B* in a single forward pass, using a **non-causal attention pattern** — queries within a block can attend to every other token in the same block [^src2]. See [Laguna XS.2](/ai-engineering/laguna-xs2.md) for a concrete deployment (0.6B 5-layer draft model, 8 tokens/pass, 2–3x speedup, no quality loss).
 
 - **Training constraint**: naively starting a prediction block at every sequence position blows up the attention mask (memory + compute infeasible for long sequences). Speculators v0.5.0 instead randomly samples a fixed, smaller set of "anchor" positions (from locations that contribute to the training loss) and attaches predicted blocks only to those anchors — keeping mask size independent of sequence length and letting training scale to long contexts [^src2].
 - **Performance**: on Gemma 4, DFlash achieves better inter-token latency than both Eagle 3 and a standalone FP8-quantized verifier; combining DFlash with an FP8-quantized verifier compounds the gain further [^src2].
@@ -64,11 +64,11 @@ Speculators v0.5.0 migrated fully onto vLLM's native hidden-states-extraction sy
 
 ## Related
 
-- [[ai-engineering/vllm|vLLM]] — serving engine hosting the speculative-decoding data path both Eagle and DFlash models run through
-- [[ai-engineering/laguna-xs2|Laguna XS.2]] — Poolside's agentic-coding model with a production DFlash deployment
-- [[ai-engineering/minimax-m3|MiniMax M3]] — uses EAGLE3 speculative decoding for latency reduction
-- [[ai-engineering/quantization|Quantization]] — FP8-quantized verifier models combine with DFlash for compounded latency gains
-- [[ai-engineering/README|AI Engineering hub]]
+- [vLLM](/ai-engineering/vllm.md) — serving engine hosting the speculative-decoding data path both Eagle and DFlash models run through
+- [Laguna XS.2](/ai-engineering/laguna-xs2.md) — Poolside's agentic-coding model with a production DFlash deployment
+- [MiniMax M3](/ai-engineering/minimax-m3.md) — uses EAGLE3 speculative decoding for latency reduction
+- [Quantization](/ai-engineering/quantization.md) — FP8-quantized verifier models combine with DFlash for compounded latency gains
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

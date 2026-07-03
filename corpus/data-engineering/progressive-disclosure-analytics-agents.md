@@ -21,7 +21,7 @@ updated: 2026-06-15
 
 # Progressive Disclosure for Analytics Agents
 
-**TL;DR.** Most analytics agents load *all* schema and semantic metadata upfront — the fastest path to **context rot** and hallucinated queries [^src1]. **Progressive disclosure** (a Jakob Nielsen UX principle: show only what's needed now, reveal more on demand) applied to agent architecture gives a **three-layer flow: Discover → Understand → Execute** [^src1]. Caveat: dumping the *entire semantic layer* every time is "the same flat-context trap with better guidance," and none of it works if the underlying metadata is garbage [^src1]. (Cross-domain: the agent/context mechanics are owned by [[ai-engineering/context-engineering|ai-engineering]]; this page covers the *data/analytics* application.)
+**TL;DR.** Most analytics agents load *all* schema and semantic metadata upfront — the fastest path to **context rot** and hallucinated queries [^src1]. **Progressive disclosure** (a Jakob Nielsen UX principle: show only what's needed now, reveal more on demand) applied to agent architecture gives a **three-layer flow: Discover → Understand → Execute** [^src1]. Caveat: dumping the *entire semantic layer* every time is "the same flat-context trap with better guidance," and none of it works if the underlying metadata is garbage [^src1]. (Cross-domain: the agent/context mechanics are owned by [ai-engineering](/ai-engineering/context-engineering.md); this page covers the *data/analytics* application.)
 
 ## The problem
 
@@ -41,7 +41,7 @@ Mirroring how a good analyst onboards (schema overview first, then zoom into tas
 
 ## Static semantic layers aren't enough
 
-The [[data-engineering/semantic-layer|semantic layer]] is essential — without clear definitions agents hallucinate confidently — **but loading the whole semantic layer every session is just the flat-context trap again** (50 Cube/dbt/Looker definitions dumped per call) [^src1]. Remedies [^src1]:
+The [semantic layer](/data-engineering/semantic-layer.md) is essential — without clear definitions agents hallucinate confidently — **but loading the whole semantic layer every session is just the flat-context trap again** (50 Cube/dbt/Looker definitions dumped per call) [^src1]. Remedies [^src1]:
 - Better **data modeling from scratch**: AI-ready business descriptions, explicit filtering, cleansing noise, pre-computing complex metrics at the model level (without overdoing one-big-table).
 - **Avoid ambiguity**: the single greatest source of hallucinated SQL is *metric-selection ambiguity* — cut cases where multiple tables answer the same thing.
 - The semantic layer **needs its own index layer** — a compressed representation to decide what to load before loading it. Add the semantic layer's complexity only when modeling complexity demands it ("don't add layers until the simpler approach breaks").
@@ -53,7 +53,7 @@ Tools embodying this: **The Boring Semantic Layer** exposes `list_models → des
 - **Claude Code / claude.ai deferred tools** — the "Tool loaded." message is progressive disclosure: rather than burning tokens loading every tool/MCP schema upfront, the agent calls `ToolSearch`/fetches a schema on demand [^src1]. (This is exactly the mechanism this corpus environment uses.)
 - **FastMCP** — a **BM25 search transform** wraps all tools behind `search_tools` (natural-language → ranked top matches load), and **Code Mode** has the agent write Python orchestrating multiple calls in a sandbox so only the final result re-enters context (`get_tags → search_tools → get_schemas → execute`) [^src1].
 - **Postgres MCP** — three-layer fix for a 20+-tool context bomb: `list_schemas + list_tables` (names/row counts) → `execute_sql` on selected tables → `get_query_plan` before executing [^src1].
-- **OpenMetadata MCP** — `searchEntities → getEntityDetails → impact analysis` is two-layer progressive disclosure out of the box [^src1]. See [[data-engineering/agentic-data-modeling|Agentic Data Modeling]].
+- **OpenMetadata MCP** — `searchEntities → getEntityDetails → impact analysis` is two-layer progressive disclosure out of the box [^src1]. See [Agentic Data Modeling](/data-engineering/agentic-data-modeling.md).
 - **Pipeline debugging** — scope each MCP log scan to the entity the previous layer pointed to (scheduler → worker → task instance), not "here's everything" [^src1].
 
 ## The principle
@@ -64,11 +64,11 @@ Discovering what matters first beats loading everything and filtering noise, and
 
 ## Related
 
-- [[data-engineering/semantic-layer|Semantic Layer]] — *what* context to give the agent
-- [[data-engineering/agentic-data-modeling|Agentic Data Modeling]] — OpenMetadata MCP discovery layers
-- [[ai-engineering/context-engineering|Context Engineering]] · [[ai-engineering/agent-skills|Agent Skills]] · [[ai-engineering/mcp|MCP]] (ai-engineering)
-- [[ai-engineering/context-window-management|Context Window Management]] — context rot (ai-engineering)
-- [[data-engineering/README|Data Engineering hub]]
+- [Semantic Layer](/data-engineering/semantic-layer.md) — *what* context to give the agent
+- [Agentic Data Modeling](/data-engineering/agentic-data-modeling.md) — OpenMetadata MCP discovery layers
+- [Context Engineering](/ai-engineering/context-engineering.md) · [Agent Skills](/ai-engineering/agent-skills.md) · [MCP](/ai-engineering/mcp.md) (ai-engineering)
+- [Context Window Management](/ai-engineering/context-window-management.md) — context rot (ai-engineering)
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

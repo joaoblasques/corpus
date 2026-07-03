@@ -57,7 +57,7 @@ The core idea is **persistent context, not vending-machine chat**: a self-contai
 
 The non-obvious lesson: the **"be honest about weaknesses" section** is what makes the output useful instead of flattering — "An AI that only knows your highlights will write you a delusional cover letter," whereas one that knows your real gaps (a career break, a pivot) can *frame* them well [^src1]. Two anti-fabrication rules are baked into the template: "Never invent experience, titles, or numbers… do not claim I 'led' something unless I told you I led it" [^src1].
 
-A realism caveat the source flags: a chat assistant **won't autonomously browse your feed at 7am** — it's "the brain" (strategy, scoring, tailoring, prep), not a hands-free applicant [^src1]. For the persistence/projects mechanics and prompting craft, this leans on Anthropic's own Claude documentation and prompt-engineering guide (cited in the email) — see [[ai-engineering/prompt-engineering|Prompt Engineering]] and [[ai-engineering/claude-code|Claude Code]] in the ai-engineering domain.
+A realism caveat the source flags: a chat assistant **won't autonomously browse your feed at 7am** — it's "the brain" (strategy, scoring, tailoring, prep), not a hands-free applicant [^src1]. For the persistence/projects mechanics and prompting craft, this leans on Anthropic's own Claude documentation and prompt-engineering guide (cited in the email) — see [Prompt Engineering](/ai-engineering/prompt-engineering.md) and [Claude Code](/ai-engineering/claude-code.md) in the ai-engineering domain.
 
 ## Path Two — autonomous apply (ApplyPilot)
 
@@ -74,7 +74,7 @@ For the terminal-comfortable, **ApplyPilot** is an open-source, AGPL-3.0 **six-s
 
 Stages are independent — run all or just the trusted ones [^src2]. Stack: Python 3.11+, Node 18+ (auto-apply), a **free-tier Gemini API key**, Chrome, and the Claude Code CLI; setup is `pip install applypilot` → `init` → `doctor` → `run` → `apply` [^src1][^src2]. Its differentiator vs. tools like AIHawk (LinkedIn Easy Apply only) is **breadth** — "any site, any form" including Workday/Greenhouse [^src1][^src2].
 
-> Cross-domain: ApplyPilot is an **AI agent** (Playwright MCP, Claude Code as the browser driver) — the agent architecture is owned by ai-engineering ([[ai-engineering/ai-agent|AI Agent]], where this source is also cited). This page keeps the job-search/career angle.
+> Cross-domain: ApplyPilot is an **AI agent** (Playwright MCP, Claude Code as the browser driver) — the agent architecture is owned by ai-engineering ([AI Agent](/ai-engineering/ai-agent.md), where this source is also cited). This page keeps the job-search/career angle.
 
 ## Remote SWE job search: a 5-phase guide
 
@@ -95,7 +95,7 @@ Projects for remote job search are proof of independent work capacity, not just 
 - Project README must include: what it does, decisions made, tradeoffs considered — "enough detail to make it feel like real development work" [^src3]
 - Depth per role: backend → real API depth; ML → modeling depth + data handling + deployment decisions
 
-This is the remote-specific flavor of the portfolio guidance in [[ai-business/technical-career|Navigating a Technical Career]] (signal fit fast; pick 2–3 role-targeted projects) — the remote context adds explicit depth and README quality as trust proxies.
+This is the remote-specific flavor of the portfolio guidance in [Navigating a Technical Career](/ai-business/technical-career.md) (signal fit fast; pick 2–3 role-targeted projects) — the remote context adds explicit depth and README quality as trust proxies.
 
 ### Phase 3 — Position your resume around one role
 
@@ -143,7 +143,7 @@ This data directly supports the "quality over volume" principle — but also rai
 
 ## The discipline: quality over volume
 
-The source is emphatic that mass application backfires: "'1,000 applications' is a great headline, but plenty of mass-apply tools produce dismal interview rates because spraying generic applications doesn't work anymore — recruiters and their AI screeners can smell it" [^src1]. The mitigations are **per-job scoring with a high threshold** and **per-job tailoring**, plus operational safety — use `--dry-run` first, run in your own present browser, and read the open-source code before handing it your resume and browser session [^src1][^src2]. This mirrors the portfolio/interview guidance in [[ai-business/technical-career|Navigating a Technical Career]] (target roles; signal fit fast) — tailoring *is* the human judgment the tool automates, not replaces.
+The source is emphatic that mass application backfires: "'1,000 applications' is a great headline, but plenty of mass-apply tools produce dismal interview rates because spraying generic applications doesn't work anymore — recruiters and their AI screeners can smell it" [^src1]. The mitigations are **per-job scoring with a high threshold** and **per-job tailoring**, plus operational safety — use `--dry-run` first, run in your own present browser, and read the open-source code before handing it your resume and browser session [^src1][^src2]. This mirrors the portfolio/interview guidance in [Navigating a Technical Career](/ai-business/technical-career.md) (target roles; signal fit fast) — tailoring *is* the human judgment the tool automates, not replaces.
 
 ## The STAR method: answering behavioral interview questions
 
@@ -181,9 +181,9 @@ Behavioral interview questions ("tell me about a time when…") require a struct
 
 ## Related
 
-- [[ai-business/technical-career|Navigating a Technical Career]] — portfolio signals, interview behavior; the human-judgment layer over the tooling.
-- [[ai-business/ai-and-the-job-market|AI and the Job Market]] — why "apply AI to messy real work" is the durable skill; the layoff backdrop.
-- [[ai-business/monetizing-code|Monetizing Code]] — **complements** the job search: a paid, solved business problem doubles as the strongest portfolio/case-study signal a tailored application can point to.
+- [Navigating a Technical Career](/ai-business/technical-career.md) — portfolio signals, interview behavior; the human-judgment layer over the tooling.
+- [AI and the Job Market](/ai-business/ai-and-the-job-market.md) — why "apply AI to messy real work" is the durable skill; the layoff backdrop.
+- [Monetizing Code](/ai-business/monetizing-code.md) — **complements** the job search: a paid, solved business problem doubles as the strongest portfolio/case-study signal a tailored application can point to.
 
 [^src1]: [The Subtle Art of Finding a Job Using AI](../../raw/email/email-2026-06-01-the-subtle-art-of-finding-a-job-using-ai.md) (AI+ Community newsletter)
 [^src2]: [Pickle-Pixel / ApplyPilot — autonomous job-application agent](../../raw/web/github-pickle-pixel-applypilot-ai-agent-that-applies-to-jobs.md) (fetched via the source email)

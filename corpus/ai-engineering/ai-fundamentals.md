@@ -29,7 +29,7 @@ updated: 2026-06-15
 
 # AI Fundamentals (Classical & Modern)
 
-**TL;DR**: Artificial intelligence is the broad field of getting computers to do things that appear intelligent — searching for solutions, representing knowledge, reasoning under uncertainty, optimizing, and learning from data [^src1]. Modern LLMs sit at one end of a much older tree whose classical branches (search, logic, constraint satisfaction, probabilistic reasoning) still underpin how agents plan and reason [^src1]. This page is the foundational scaffold; deeper branches live in [[ai-engineering/machine-learning|Machine Learning]], [[ai-engineering/neural-network|Neural Networks]], [[ai-engineering/llm|LLM]], and [[ai-engineering/transformer|Transformer]].
+**TL;DR**: Artificial intelligence is the broad field of getting computers to do things that appear intelligent — searching for solutions, representing knowledge, reasoning under uncertainty, optimizing, and learning from data [^src1]. Modern LLMs sit at one end of a much older tree whose classical branches (search, logic, constraint satisfaction, probabilistic reasoning) still underpin how agents plan and reason [^src1]. This page is the foundational scaffold; deeper branches live in [Machine Learning](/ai-engineering/machine-learning.md), [Neural Networks](/ai-engineering/neural-network.md), [LLM](/ai-engineering/llm.md), and [Transformer](/ai-engineering/transformer.md).
 
 ## The scope of the field
 
@@ -56,7 +56,7 @@ A *knowledge-based agent* represents facts in a **knowledge base** and uses **in
 
 ## Uncertainty
 
-When facts are only probable, AI uses probability theory — **Bayesian networks** model conditional dependence among variables, and **Markov models / Markov chains** model state sequences where the next state depends only on the current one [^src1]. (The probability machinery itself — distributions, Bayes' theorem, expectation — is in [[ai-engineering/statistics-for-ml|Statistics & Probability for ML]].)
+When facts are only probable, AI uses probability theory — **Bayesian networks** model conditional dependence among variables, and **Markov models / Markov chains** model state sequences where the next state depends only on the current one [^src1]. (The probability machinery itself — distributions, Bayes' theorem, expectation — is in [Statistics & Probability for ML](/ai-engineering/statistics-for-ml.md).)
 
 ## Optimization
 
@@ -64,7 +64,7 @@ Finding the best solution under constraints: local search (hill-climbing, simula
 
 ## Types of AI (capability framing)
 
-A common taxonomy distinguishes **Artificial Narrow Intelligence** (task-specific, all systems today), **Artificial General Intelligence** (human-level across domains — see [[ai-engineering/agi|AGI]]), and **Artificial Super Intelligence** (beyond human) [^src2]. AI is the umbrella; **machine learning** is the subset that learns from data; **deep learning** is the subset of ML using multi-layer neural networks [^src2].
+A common taxonomy distinguishes **Artificial Narrow Intelligence** (task-specific, all systems today), **Artificial General Intelligence** (human-level across domains — see [AGI](/ai-engineering/agi.md)), and **Artificial Super Intelligence** (beyond human) [^src2]. AI is the umbrella; **machine learning** is the subset that learns from data; **deep learning** is the subset of ML using multi-layer neural networks [^src2].
 
 ## The 10 concepts that bridge classical AI to LLM engineering
 
@@ -72,13 +72,13 @@ A practitioner's reduction of "what every AI engineer should know in 2026" maps 
 
 ## See also
 
-- [[ai-engineering/machine-learning|Machine Learning]] — the learning-from-data branch (supervised/unsupervised/RL)
-- [[ai-engineering/neural-network|Neural Networks]] — perceptrons, backprop, CNN/RNN
-- [[ai-engineering/statistics-for-ml|Statistics & Probability for ML]] — the probability and inference substrate
-- [[ai-engineering/llm|LLM]] · [[ai-engineering/transformer|Transformer]] — the modern statistical-AI core
-- [[ai-engineering/ai-agent|AI Agent]] — search + reasoning realized as an LLM agent loop
-- [[ai-engineering/learning-ai-engineering|Learning AI Engineering]] — how to learn this stack
-- [[ai-engineering/README|AI Engineering hub]]
+- [Machine Learning](/ai-engineering/machine-learning.md) — the learning-from-data branch (supervised/unsupervised/RL)
+- [Neural Networks](/ai-engineering/neural-network.md) — perceptrons, backprop, CNN/RNN
+- [Statistics & Probability for ML](/ai-engineering/statistics-for-ml.md) — the probability and inference substrate
+- [LLM](/ai-engineering/llm.md) · [Transformer](/ai-engineering/transformer.md) — the modern statistical-AI core
+- [AI Agent](/ai-engineering/ai-agent.md) — search + reasoning realized as an LLM agent loop
+- [Learning AI Engineering](/ai-engineering/learning-ai-engineering.md) — how to learn this stack
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

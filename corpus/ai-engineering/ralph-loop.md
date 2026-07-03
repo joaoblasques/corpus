@@ -40,7 +40,7 @@ updated: 2026-06-25
 
 # Ralph Loop
 
-**TL;DR.** The Ralph technique (a.k.a. the Ralph Wiggum technique) is, in its purest form, a Bash loop that repeatedly feeds the same prompt to a coding agent until a project is built [^src1]. State lives on the filesystem — a plan file, a progress file, and a rulebook — so each amnesiac iteration reads enough from disk to keep going [^src2]. Coined by Geoffrey Huntley, it is one of the simplest practitioner versions of a [[ai-engineering/long-running-agents|long-running agent]] [^src2]. Huntley's framing: "Ralph is a technique. In its purest form, Ralph is a Bash loop." [^src1]
+**TL;DR.** The Ralph technique (a.k.a. the Ralph Wiggum technique) is, in its purest form, a Bash loop that repeatedly feeds the same prompt to a coding agent until a project is built [^src1]. State lives on the filesystem — a plan file, a progress file, and a rulebook — so each amnesiac iteration reads enough from disk to keep going [^src2]. Coined by Geoffrey Huntley, it is one of the simplest practitioner versions of a [long-running agent](/ai-engineering/long-running-agents.md) [^src2]. Huntley's framing: "Ralph is a technique. In its purest form, Ralph is a Bash loop." [^src1]
 
 ## The loop
 
@@ -52,7 +52,7 @@ while :; do cat PROMPT.md | claude-code ; done
 
 Ralph can run on any tool "that does not cap tool calls and usage" [^src1]. Addy Osmani's reference implementation expands the same idea into discrete steps: pick the next unfinished task from a list (`prd.json` or equivalent), build a prompt with task + context + persistent notes, call the agent, run tests/checks, append the outcome to `progress.txt`, update the task list (done/failed/blocked), and loop [^src2].
 
-The reason it works is that **state lives outside the agent's context window** [^src2]. The agent is amnesiac each iteration; the filesystem is not. In Osmani's mapping, `prd.json` is the plan, `progress.txt` is the lab notes, and `AGENTS.md` is the rolling rulebook [^src2]. This is the same principle behind larger [[ai-engineering/agent-harness|harnesses]] — externalize the plan, progress, and rules so a fresh session can resume.
+The reason it works is that **state lives outside the agent's context window** [^src2]. The agent is amnesiac each iteration; the filesystem is not. In Osmani's mapping, `prd.json` is the plan, `progress.txt` is the lab notes, and `AGENTS.md` is the rolling rulebook [^src2]. This is the same principle behind larger [harnesses](/ai-engineering/agent-harness.md) — externalize the plan, progress, and rules so a fresh session can resume.
 
 ## Core operating principles (from CURSED)
 
@@ -60,7 +60,7 @@ Huntley developed the technique building CURSED, "a brand new production-grade e
 
 - **Monolithic, one task per loop.** "Ralph works autonomously in a single repository as a single process that performs one task per loop." [^src1] You must "ask Ralph to do one thing per loop. Only one thing" — and trust the LLM to pick the most important next step; the restriction may relax as the project stabilizes but must be re-narrowed if it goes off the rails [^src1].
 - **Deterministic stack allocation.** Allocate the same items to context every loop — the plan (`fix_plan.md`) and the specifications [^src1]. Specs are written out one-per-file after a long up-front requirements conversation with the agent, before any implementation [^src1].
-- **Context frugality + subagents.** "You only have approximately 170k of context window to work with" so use as little as possible; more usage means worse outcomes [^src1]. The primary context window should act as a *scheduler*, spawning [[ai-engineering/multi-agent-systems|subagents]] to do expensive allocation work like summarizing test results [^src1]. Parallelism is tunable — fan out widely for filesystem search/file-writing, but use only a *single* subagent for build/test to avoid "bad form back pressure" [^src1].
+- **Context frugality + subagents.** "You only have approximately 170k of context window to work with" so use as little as possible; more usage means worse outcomes [^src1]. The primary context window should act as a *scheduler*, spawning [subagents](/ai-engineering/multi-agent-systems.md) to do expensive allocation work like summarizing test results [^src1]. Parallelism is tunable — fan out widely for filesystem search/file-writing, but use only a *single* subagent for build/test to avoid "bad form back pressure" [^src1].
 - **Don't assume it's not implemented.** A common failure: the LLM runs ripgrep, wrongly concludes code is missing, and re-implements it. Code-search is non-deterministic; the fix is a prompt "sign" telling Ralph to search before assuming and not duplicate work [^src1].
 
 ## Generate, then backpressure
@@ -88,7 +88,7 @@ Building with Ralph "requires a great deal of faith and a belief in eventual con
 
 ## Relation to long-running agents
 
-Osmani classes the Ralph loop as a "simpler" practitioner version of [[ai-engineering/long-running-agents|long-running agents]], popularized by Geoffrey Huntley and Ryan Carson [^src2]. Carson's Compound Product extends it by chaining multiple loops — an analysis loop reading daily reports, a planning loop emitting a PRD, an execution loop writing code — described as roughly the open-source version of the planner/generator/evaluator triad Anthropic landed on independently [^src2]. Anthropic's scientific-computing stack reduces the same idea to a `for` loop "that kicks the agent back into context whenever it claims completion and asks if it's really done" [^src2]. Osmani's summary: "you can build a working long-running agent in an evening with a bash script and a JSON file" [^src2].
+Osmani classes the Ralph loop as a "simpler" practitioner version of [long-running agents](/ai-engineering/long-running-agents.md), popularized by Geoffrey Huntley and Ryan Carson [^src2]. Carson's Compound Product extends it by chaining multiple loops — an analysis loop reading daily reports, a planning loop emitting a PRD, an execution loop writing code — described as roughly the open-source version of the planner/generator/evaluator triad Anthropic landed on independently [^src2]. Anthropic's scientific-computing stack reduces the same idea to a `for` loop "that kicks the agent back into context whenever it claims completion and asks if it's really done" [^src2]. Osmani's summary: "you can build a working long-running agent in an evening with a bash script and a JSON file" [^src2].
 
 ## Loop engineering: the generalized concept
 
@@ -122,7 +122,7 @@ The practical driver: "Both products [Claude Code and Codex] have all five [buil
 2. **Comprehension debt** — the faster the loop ships code you didn't write, the bigger the gap between what exists and what you understand.
 3. **Cognitive surrender** — the temptation to stop having an opinion and just take whatever the loop returns. "Designing the loop is the cure when you do it with judgement and the accelerant when you do it to avoid thinking" [^src3].
 
-Cross-reference: Boris Cherny (head of Claude Code): "I don't prompt Claude anymore. I have loops running that prompt Claude... My job is to write loops" [^src3]. See [[ai-engineering/claude-code|Claude Code]] for routines (the native scheduled-automation primitive) and [[ai-engineering/agent-skills|Agent Skills]] for the skill-building prerequisite.
+Cross-reference: Boris Cherny (head of Claude Code): "I don't prompt Claude anymore. I have loops running that prompt Claude... My job is to write loops" [^src3]. See [Claude Code](/ai-engineering/claude-code.md) for routines (the native scheduled-automation primitive) and [Agent Skills](/ai-engineering/agent-skills.md) for the skill-building prerequisite.
 
 ## Loops creating loops: Theo's dynamic sub-loop architecture
 
@@ -151,7 +151,7 @@ Theo (t3.gg) documents a concrete application where a single master loop dynamic
 
 **Contrast with the Ralph loop**: Ralph is a static loop — same prompt, same context reload, repeat. Theo's architecture is a *meta-loop* — an orchestrating thread that dynamically instantiates specialized sub-loops shaped by the problem. Neither requires elaborate pre-built agent personas; the agent constructs the work structure dynamically. "The idea of pre-defining personas to go do things in your codebase fundamentally misses the cool part... It's dynamic" [^src5].
 
-See [[ai-engineering/claude-code|Claude Code]] for native loop primitives (`/loop`, `/goal`, `/schedule`) and worktrees that prevent file collisions across parallel threads.
+See [Claude Code](/ai-engineering/claude-code.md) for native loop primitives (`/loop`, `/goal`, `/schedule`) and worktrees that prevent file collisions across parallel threads.
 
 [^src1]: [Ralph Wiggum as a "software engineer"](../../raw/web/ralph-wiggum-as-a-software-engineer.md)
 [^src2]: [Long-running Agents](../../raw/web/long-running-agents.md)

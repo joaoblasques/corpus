@@ -30,7 +30,7 @@ last_confirmed: 2026-06-23
 
 # Environment Promotion (dev → acc → prd)
 
-**TL;DR.** Independently across ML CI/CD, data-infrastructure CI/CD, and Databricks packaging, the same deployment discipline recurs: **changes are authored only in `dev`, promoted automatically through `acc`/staging, and reach `prd` only behind an automated check plus a human approval gate, executed by a non-human identity — never a person pushing to prod.** This page names that cross-source pattern and maps its four invariants onto each source. It generalizes [[mlops/ci-cd-for-ml|CI/CD for ML]], [[data-engineering/cicd-for-data-infrastructure|CI/CD for Data Infrastructure]], and [[mlops/databricks-asset-bundles|Databricks Asset Bundles]].
+**TL;DR.** Independently across ML CI/CD, data-infrastructure CI/CD, and Databricks packaging, the same deployment discipline recurs: **changes are authored only in `dev`, promoted automatically through `acc`/staging, and reach `prd` only behind an automated check plus a human approval gate, executed by a non-human identity — never a person pushing to prod.** This page names that cross-source pattern and maps its four invariants onto each source. It generalizes [CI/CD for ML](/mlops/ci-cd-for-ml.md), [CI/CD for Data Infrastructure](/data-engineering/cicd-for-data-infrastructure.md), and [Databricks Asset Bundles](/mlops/databricks-asset-bundles.md).
 
 ## The four invariants
 
@@ -59,12 +59,12 @@ last_confirmed: 2026-06-23
 
 ## Related
 
-- [[mlops/ci-cd-for-ml|CI/CD for ML]] — Unity Catalog tiers + Service Principals + Git Flow (the ML instance)
-- [[data-engineering/cicd-for-data-infrastructure|CI/CD for Data Infrastructure]] — the data-infra sibling: plan-on-PR → gated prod apply
-- [[mlops/databricks-asset-bundles|Databricks Asset Bundles]] — declarative `targets` + the deploy payload
-- [[mlops/databricks-development|Databricks Development]] — where the dev/acc/prd catalog split originates
-- [[mlops/terraform|Terraform]] · [[mlops/infrastructure-as-code|Infrastructure as Code]] — the IaC substrate both CI/CD flows apply
-- [[mlops/README|MLOps hub]]
+- [CI/CD for ML](/mlops/ci-cd-for-ml.md) — Unity Catalog tiers + Service Principals + Git Flow (the ML instance)
+- [CI/CD for Data Infrastructure](/data-engineering/cicd-for-data-infrastructure.md) — the data-infra sibling: plan-on-PR → gated prod apply
+- [Databricks Asset Bundles](/mlops/databricks-asset-bundles.md) — declarative `targets` + the deploy payload
+- [Databricks Development](/mlops/databricks-development.md) — where the dev/acc/prd catalog split originates
+- [Terraform](/mlops/terraform.md) · [Infrastructure as Code](/mlops/infrastructure-as-code.md) — the IaC substrate both CI/CD flows apply
+- [MLOps hub](/mlops/README.md)
 
 ---
 

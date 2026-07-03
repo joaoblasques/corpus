@@ -55,18 +55,18 @@ The cited cost is "under 13 cents per run" for ads (20¢ for the sales-page vers
 
 > [verbatim] "this is 13 cents for three ads, and it's about as good as a top 1% copywriter" [^src1].
 
-A claimed second-order benefit: it democratizes copy quality — "this gives Nancy who answers the phones the ability to now be your Facebook ad person," because bad input copy gets diagnosed and rewritten [^src1]. The general pattern Brooke recommends: have AI draft content, "but then run it through something like this before it goes out the door" to "wash it" [^src1]. This maps to the **code + AI + human-in-the-loop** review pattern in [[ai-business/monetizing-code|Monetizing Code]] — AI generates, a structured agent layer reviews, a human ships.
+A claimed second-order benefit: it democratizes copy quality — "this gives Nancy who answers the phones the ability to now be your Facebook ad person," because bad input copy gets diagnosed and rewritten [^src1]. The general pattern Brooke recommends: have AI draft content, "but then run it through something like this before it goes out the door" to "wash it" [^src1]. This maps to the **code + AI + human-in-the-loop** review pattern in [Monetizing Code](/ai-business/monetizing-code.md) — AI generates, a structured agent layer reviews, a human ships.
 
 ## Gotchas / promo framing
 
-- **Accuracy claims are unsourced.** The "92% accuracy against real human focus groups," Harvard/Stanford studies, and NYT "synthetic audience" usage are asserted without primary links [^src1]. The same "92%" figure surfaces in unrelated newsletter content also without a primary source (see [[ai-business/monetizing-code|Monetizing Code]] gotchas) — a recurring unverified industry talking point, **not corpus-confirmed**.
+- **Accuracy claims are unsourced.** The "92% accuracy against real human focus groups," Harvard/Stanford studies, and NYT "synthetic audience" usage are asserted without primary links [^src1]. The same "92%" figure surfaces in unrelated newsletter content also without a primary source (see [Monetizing Code](/ai-business/monetizing-code.md) gotchas) — a recurring unverified industry talking point, **not corpus-confirmed**.
 - **Self-reported ROI.** "$260,000 personally," "4–6x ROAS" (with a "16x" outlier), an "$36,000 in a couple of days" offer, and "18 spots sold out" are anecdotal/self-reported [^src1].
 - **The video is a sales vehicle.** Brooke sells the agents at \$5,000 each / \$10,000 packaged (with a ~\$4,995 one-off "done-with-you" tier); the episode is a build-along promo [^src1].
 - **No primary validation captured.** Confidence on this page's *effectiveness* claims is low; the *method* (parallel persona panel → copywriter → scoring) is well-described and reproducible.
 
 ## Related
 
-- [[ai-business/monetizing-code|Monetizing Code]] — same "wash AI output before shipping" / human-in-the-loop review discipline; shared unsourced "92%" claim.
-- [[ai-business/ai-consulting-playbook|AI Consulting Playbook]] — a sibling business-tactics source from the same newsletter ecosystem; prescribing AI tools/skills to business owners.
+- [Monetizing Code](/ai-business/monetizing-code.md) — same "wash AI output before shipping" / human-in-the-loop review discipline; shared unsourced "92%" claim.
+- [AI Consulting Playbook](/ai-business/ai-consulting-playbook.md) — a sibling business-tactics source from the same newsletter ecosystem; prescribing AI tools/skills to business owners.
 
 [^src1]: [Justin Brooke — AI virtual focus group / "prediction wear" build](../../raw/youtube/youtube-m8hcuiud9xo.md) — direct-response marketer demo; promotional (sells the agents at \$5k each)

@@ -19,11 +19,11 @@ updated: 2026-06-16
 
 # CodeGraph
 
-**TL;DR.** CodeGraph is a 100%-local tool that gives AI coding agents a pre-indexed knowledge graph of a codebase — symbol relationships, call graphs, and code structure — so agents query the graph instantly instead of scanning files with grep/glob/Read [^src1]. It is delivered as an [[ai-engineering/mcp|MCP]] server that auto-configures Claude Code, Cursor, Codex, opencode, Hermes Agent, Gemini, Antigravity, and Kiro [^src1]. Benchmarked across 7 repos/7 languages, it reported on average "16% cheaper · 47% fewer tokens · 22% faster · 58% fewer tool calls" [^src1].
+**TL;DR.** CodeGraph is a 100%-local tool that gives AI coding agents a pre-indexed knowledge graph of a codebase — symbol relationships, call graphs, and code structure — so agents query the graph instantly instead of scanning files with grep/glob/Read [^src1]. It is delivered as an [MCP](/ai-engineering/mcp.md) server that auto-configures Claude Code, Cursor, Codex, opencode, Hermes Agent, Gemini, Antigravity, and Kiro [^src1]. Benchmarked across 7 repos/7 languages, it reported on average "16% cheaper · 47% fewer tokens · 22% faster · 58% fewer tool calls" [^src1].
 
 ## What it does
 
-When an agent explores a codebase, it spawns Explore agents that scan files with grep, glob, and Read — consuming tokens on every tool call; CodeGraph replaces that discovery loop with graph queries against a pre-built index [^src1]. The mechanism: tree-sitter parses source into ASTs, language-specific queries extract nodes (functions, classes, methods) and edges (calls, imports, extends, implements), everything is stored in a local SQLite database (`.codegraph/codegraph.db`) with FTS5 full-text search, and references are resolved post-extraction [^src1]. This is a concrete instance of [[ai-engineering/agentic-search|agentic search]] — pre-indexed structural retrieval rather than a grep/read sweep — and an [[ai-engineering/agent-cost-management|agent-cost]] play (fewer tool calls, fewer tokens).
+When an agent explores a codebase, it spawns Explore agents that scan files with grep, glob, and Read — consuming tokens on every tool call; CodeGraph replaces that discovery loop with graph queries against a pre-built index [^src1]. The mechanism: tree-sitter parses source into ASTs, language-specific queries extract nodes (functions, classes, methods) and edges (calls, imports, extends, implements), everything is stored in a local SQLite database (`.codegraph/codegraph.db`) with FTS5 full-text search, and references are resolved post-extraction [^src1]. This is a concrete instance of [agentic search](/ai-engineering/agentic-search.md) — pre-indexed structural retrieval rather than a grep/read sweep — and an [agent-cost](/ai-engineering/agent-cost-management.md) play (fewer tool calls, fewer tokens).
 
 ## Setup
 
@@ -58,8 +58,8 @@ The benchmark compares a headless Claude Code (Opus 4.8) answering one architect
 
 ## Relationships
 
-- Delivered as an [[ai-engineering/mcp|MCP]] server; usage guidance ships in the MCP `initialize` response, so nothing is written to CLAUDE.md/AGENTS.md [^src1].
-- Targets [[ai-engineering/claude-code|Claude Code]] and other coding agents including [[ai-engineering/hermes|Hermes]].
+- Delivered as an [MCP](/ai-engineering/mcp.md) server; usage guidance ships in the MCP `initialize` response, so nothing is written to CLAUDE.md/AGENTS.md [^src1].
+- Targets [Claude Code](/ai-engineering/claude-code.md) and other coding agents including [Hermes](/ai-engineering/hermes.md).
 - A hosted product (getcodegraph.com) is in beta; the CLI/MCP server is MIT-licensed [^src1].
 
 [^src1]: [colbymchenry/codegraph — pre-indexed code knowledge graph](../../raw/web/github-colbymchenry-codegraph-pre-indexed-code-knowledge-gra.md)

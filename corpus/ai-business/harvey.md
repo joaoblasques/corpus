@@ -32,6 +32,6 @@ updated: 2026-06-25
 
 Harvey is a concrete example of the **vertical AI** pattern — taking general LLM capability and wrapping it in domain-specific trust, security, and workflow integration for a high-value professional services niche where the customer is willing to pay premium for compliance and expertise alignment.
 
-This maps to the compliance/expert-business thesis in [[ai-business/boring-expert-businesses|Boring Expert Businesses]]: legal is a "recurring, painful, document-heavy" sector where the customer's name is on the line if you get it wrong — exactly where AI can provide leverage while the human expert retains sign-off authority.
+This maps to the compliance/expert-business thesis in [Boring Expert Businesses](/ai-business/boring-expert-businesses.md): legal is a "recurring, painful, document-heavy" sector where the customer's name is on the line if you get it wrong — exactly where AI can provide leverage while the human expert retains sign-off authority.
 
 [^src1]: [Harvey – Professional Class AI](../../raw/web/web-harvey-professional-class-ai.md)

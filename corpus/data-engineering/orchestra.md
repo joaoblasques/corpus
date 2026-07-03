@@ -22,15 +22,15 @@ updated: 2026-06-19
 
 # Orchestra
 
-**TL;DR.** Orchestra is a **managed, declarative Data & AI workflow platform** — a UI-first orchestrator that aims to "give everyone the power to build and manage Data and AI workflows, even with little engineering experience" [^src1]. It abstracts away the setup burden of a traditional orchestrator like [[data-engineering/data-orchestration|Airflow]] (custom operators, environment management, scheduling glue) and exposes **managed integrations** + a visual pipeline builder, while still supporting Python/dbt and Git-based version control [^src1].
+**TL;DR.** Orchestra is a **managed, declarative Data & AI workflow platform** — a UI-first orchestrator that aims to "give everyone the power to build and manage Data and AI workflows, even with little engineering experience" [^src1]. It abstracts away the setup burden of a traditional orchestrator like [Airflow](/data-engineering/data-orchestration.md) (custom operators, environment management, scheduling glue) and exposes **managed integrations** + a visual pipeline builder, while still supporting Python/dbt and Git-based version control [^src1].
 
 ## Motivation
 
-The modern ELT pattern (cloud warehouse + [[data-engineering/dbt|dbt]]) is powerful but still requires standing up an orchestrator and scheduling dbt tasks — and the free dbt tier supports only the dbt Cloud operator, so a self-hosted setup means writing a custom operator yourself [^src1]. Orchestra's pitch is to **democratize** building, deploying, and monitoring pipelines — log in, connect your external systems, and build a pipeline without that operational overhead [^src1].
+The modern ELT pattern (cloud warehouse + [dbt](/data-engineering/dbt.md)) is powerful but still requires standing up an orchestrator and scheduling dbt tasks — and the free dbt tier supports only the dbt Cloud operator, so a self-hosted setup means writing a custom operator yourself [^src1]. Orchestra's pitch is to **democratize** building, deploying, and monitoring pipelines — log in, connect your external systems, and build a pipeline without that operational overhead [^src1].
 
 ## Core concepts
 
-- **Integrations** — managed connections to external systems that handle auth, error handling, triggering, polling, and metadata gathering out of the box [^src1]. A wide range is supported: ETL (Airbyte, Fivetran), data warehouses ([[data-engineering/databricks|Databricks]], [[data-engineering/snowflake|Snowflake]], [[data-engineering/bigquery|BigQuery]]), cloud services (AWS/Azure/GCP), BI (Power BI, Tableau, Sigma, Lightdash), transformation ([[data-engineering/dbt|dbt core/cloud]], Coalesce), and utilities (Python, http) [^src1].
+- **Integrations** — managed connections to external systems that handle auth, error handling, triggering, polling, and metadata gathering out of the box [^src1]. A wide range is supported: ETL (Airbyte, Fivetran), data warehouses ([Databricks](/data-engineering/databricks.md), [Snowflake](/data-engineering/snowflake.md), [BigQuery](/data-engineering/bigquery.md)), cloud services (AWS/Azure/GCP), BI (Power BI, Tableau, Sigma, Lightdash), transformation ([dbt core/cloud](/data-engineering/dbt.md), Coalesce), and utilities (Python, http) [^src1].
 - **Task** — the most basic execution unit; leverages an integration to run user-defined logic (like an Airflow task) [^src1].
 - **Pipeline** — tasks arranged with upstream/downstream dependencies defining run order; **task groups** run their tasks in parallel [^src1].
 - **Triggers** — manual, webhook, triggered-by-another-pipeline, sensor, or **cron** [^src1].
@@ -56,15 +56,15 @@ Orchestra is built for scale and makes modern dbt + cloud-warehouse pipelines ea
 
 ## Worked example (AdventureWorks: S3 → Snowflake → dbt)
 
-The companion project orchestrates a classic ELT pipeline [^src1][^src2]: a **Python task** uploads AdventureWorks CSVs (product, product_category, product_subcategory, sales, territories) to **S3** via boto3; a **Snowflake task** runs `COPY INTO` from an external **stage** pointing at the S3 bucket into `dev`/`prod` schemas; then two **dbt tasks** run staging models (`dbt build -s tag:staging`) and curated fact/dimension models (`dbt build -s tag:curated`) [^src2]. Standalone, the same pipeline is run locally step-by-step; Orchestra automates and schedules it end-to-end [^src2]. See [[data-engineering/de-portfolio-projects|DE Portfolio Projects]].
+The companion project orchestrates a classic ELT pipeline [^src1][^src2]: a **Python task** uploads AdventureWorks CSVs (product, product_category, product_subcategory, sales, territories) to **S3** via boto3; a **Snowflake task** runs `COPY INTO` from an external **stage** pointing at the S3 bucket into `dev`/`prod` schemas; then two **dbt tasks** run staging models (`dbt build -s tag:staging`) and curated fact/dimension models (`dbt build -s tag:curated`) [^src2]. Standalone, the same pipeline is run locally step-by-step; Orchestra automates and schedules it end-to-end [^src2]. See [DE Portfolio Projects](/data-engineering/de-portfolio-projects.md).
 
 ## Related
 
-- [[data-engineering/data-orchestration|Data Orchestration]] — the scheduling/orchestration/observability concerns Orchestra bundles; Airflow/Dagster/Prefect alternatives
-- [[data-engineering/dbt|dbt]] — the transformation layer Orchestra commonly schedules
-- [[data-engineering/snowflake|Snowflake]] · [[data-engineering/de-portfolio-projects|DE Portfolio Projects]] — the warehouse and project pattern in the worked example
-- [[data-engineering/cicd-for-data-infrastructure|CI/CD for Data Infrastructure]] — the GitHub-Action environment-gating pattern
-- [[data-engineering/README|Data Engineering hub]]
+- [Data Orchestration](/data-engineering/data-orchestration.md) — the scheduling/orchestration/observability concerns Orchestra bundles; Airflow/Dagster/Prefect alternatives
+- [dbt](/data-engineering/dbt.md) — the transformation layer Orchestra commonly schedules
+- [Snowflake](/data-engineering/snowflake.md) · [DE Portfolio Projects](/data-engineering/de-portfolio-projects.md) — the warehouse and project pattern in the worked example
+- [CI/CD for Data Infrastructure](/data-engineering/cicd-for-data-infrastructure.md) — the GitHub-Action environment-gating pattern
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

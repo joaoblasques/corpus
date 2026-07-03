@@ -82,8 +82,8 @@ chmod +x <file>      # make file executable
 
 ## See also
 
-- [[software-engineering/git-basics|Git Basics]] — most git operations happen in the terminal
-- [[software-engineering/xonsh|Xonsh]] — Python-superset shell that extends terminal capabilities
+- [Git Basics](/software-engineering/git-basics.md) — most git operations happen in the terminal
+- [Xonsh](/software-engineering/xonsh.md) — Python-superset shell that extends terminal capabilities
 
 ---
 

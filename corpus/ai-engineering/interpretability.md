@@ -100,9 +100,9 @@ Inspectus is in the "practitioner tool for attention debugging" category rather 
 
 ## See also
 
-- [[ai-engineering/anthropic|Anthropic]] — the lab conducting this research; Dario Amodei is co-founder and CEO
-- [[ai-engineering/llm|LLM]] — the subject of interpretation; neural networks being decoded
-- [[ai-engineering/agent-security|Agent Security]] — safety audit tools are the intended downstream application
+- [Anthropic](/ai-engineering/anthropic.md) — the lab conducting this research; Dario Amodei is co-founder and CEO
+- [LLM](/ai-engineering/llm.md) — the subject of interpretation; neural networks being decoded
+- [Agent Security](/ai-engineering/agent-security.md) — safety audit tools are the intended downstream application
 
 ---
 

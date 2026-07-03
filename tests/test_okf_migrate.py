@@ -63,3 +63,18 @@ def test_ensure_type_adds_or_inserts():
         "---\ntype: domain-registry\n---\n")
     got = mig.ensure_type("---\nfoo: 1\n---\nbody", "domain-registry")
     assert "type: domain-registry" in got and "foo: 1" in got
+
+
+def test_migrate_bundle_end_to_end(tmp_path):
+    b = tmp_path / "corpus"; (b / "ai-engineering").mkdir(parents=True)
+    (b / "_index.md").write_text("# Corpus Index\n\n### ai-engineering\n- [[ai-engineering/x|X]]\n")
+    (b / "_log.md").write_text("# Corpus Log\n\n## [2026-05-07] schema | boot\n- a\n")
+    (b / "_domains.md").write_text("# Domains\n")
+    (b / "ai-engineering" / "x.md").write_text("---\ntype: entity\n---\nsee [[ai-engineering/y|Y]]\n")
+    r = mig.migrate_bundle(b, dry_run=False)
+    assert (b / "index.md").exists() and not (b / "_index.md").exists()
+    assert (b / "log.md").exists() and not (b / "_log.md").exists()
+    assert (b / "index.md").read_text().startswith('---\nokf_version: "0.1"\n---')
+    assert "[Y](/ai-engineering/y.md)" in (b / "ai-engineering" / "x.md").read_text()
+    assert "type: domain-registry" in (b / "_domains.md").read_text()
+    assert r["links"] >= 2

@@ -56,7 +56,7 @@ This is not a universal answer — at large scale or with specialized access pat
 
 ## Note on `pgvector`
 
-`pgvector` makes Postgres a viable option as a [[ai-engineering/vector-database|vector database]] for RAG pipelines at moderate scale. See [[ai-engineering/rag|RAG]] for the retrieval architecture context.
+`pgvector` makes Postgres a viable option as a [vector database](/ai-engineering/vector-database.md) for RAG pipelines at moderate scale. See [RAG](/ai-engineering/rag.md) for the retrieval architecture context.
 
 ## PostgreSQL as a financial ledger (pgledger)
 
@@ -72,10 +72,10 @@ A lesser-known but powerful Postgres use case: **double-entry bookkeeping** impl
 
 ## See also
 
-- [[data-engineering/postgresql-views|PostgreSQL Views]] — views as rewrite-rule macros; the `SELECT *` trap, `security_invoker`/RLS, schema-evolution pain
-- [[data-engineering/README|Data Engineering hub]]
+- [PostgreSQL Views](/data-engineering/postgresql-views.md) — views as rewrite-rule macros; the `SELECT *` trap, `security_invoker`/RLS, schema-evolution pain
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 
-[^src1]: [[03_Resources/Study Notes/Data Engineering - Just Use Postgres|Data Engineering - Just Use Postgres]]
+[^src1]: [Data Engineering - Just Use Postgres](/03_Resources/Study Notes/Data Engineering - Just Use Postgres.md)
 [^src2]: [pgledger — double-entry ledger implementation in PostgreSQL (pgr0ss/pgledger)](../../raw/github/github-pgr0ss-pgledger.md)

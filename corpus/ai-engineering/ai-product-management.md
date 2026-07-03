@@ -82,13 +82,13 @@ The application layer is "where you can drive a lot of value without investing a
 ## What an AIPM must understand about LLM behavior
 
 The course's core technical literacy for PMs [^src1]:
-- **LLMs are next-token predictors** trained in three stages (pre-training on crawled internet text → training → post-training/RLHF), fitting billions of parameters via a loss function (see [[ai-engineering/llm|LLM]], [[ai-engineering/machine-learning|Machine Learning]]).
-- **Tokenization & pricing** — tokens are numeric representations of text (~2 words ≈ 3 tokens); APIs bill per input/output/cached token, so token economics is a product cost lever (see [[ai-engineering/structured-outputs|tokenization]]).
-- **LLMs are stochastic, not deterministic** — the same prompt can yield different outputs; this is "the foundation of when we go ahead and learn about AI evaluations" (see [[ai-engineering/agent-evaluation|Agent Evaluation]]).
-- **The transformer & attention** — "attention is all you need" let models weigh every word against every other word, enabling parallel processing on GPUs (see [[ai-engineering/transformer|Transformer]]).
+- **LLMs are next-token predictors** trained in three stages (pre-training on crawled internet text → training → post-training/RLHF), fitting billions of parameters via a loss function (see [LLM](/ai-engineering/llm.md), [Machine Learning](/ai-engineering/machine-learning.md)).
+- **Tokenization & pricing** — tokens are numeric representations of text (~2 words ≈ 3 tokens); APIs bill per input/output/cached token, so token economics is a product cost lever (see [tokenization](/ai-engineering/structured-outputs.md)).
+- **LLMs are stochastic, not deterministic** — the same prompt can yield different outputs; this is "the foundation of when we go ahead and learn about AI evaluations" (see [Agent Evaluation](/ai-engineering/agent-evaluation.md)).
+- **The transformer & attention** — "attention is all you need" let models weigh every word against every other word, enabling parallel processing on GPUs (see [Transformer](/ai-engineering/transformer.md)).
 - **Three LLM capabilities** — understand, transform, generate content. AI gives a "brain" to software that was previously just CRUD (create/read/update/delete) [^src1].
 
-The course covers the applied toolkit an AIPM must spec around: [[ai-engineering/context-engineering|context engineering]], [[ai-engineering/rag|RAG]], [[ai-engineering/prompt-engineering|prompt engineering]], fine-tuning, [[ai-engineering/ai-agent|AI agents]], and AI evals — using product teardowns (Granola, NotebookLM, Gamma) to show how each is built [^src1].
+The course covers the applied toolkit an AIPM must spec around: [context engineering](/ai-engineering/context-engineering.md), [RAG](/ai-engineering/rag.md), [prompt engineering](/ai-engineering/prompt-engineering.md), fine-tuning, [AI agents](/ai-engineering/ai-agent.md), and AI evals — using product teardowns (Granola, NotebookLM, Gamma) to show how each is built [^src1].
 
 ## "We are all going to be AI managers"
 
@@ -98,7 +98,7 @@ The practitioner framing: shipping a 20k-line solution "with no code I wrote mys
 - **Product management** — write a **PRD before spawning agents**: specific, decomposable, testable, with a clear **Definition of Done** (user stories + validation steps) and **Non-Goals** for scoping. "When you add non-goals, the AI won't implement them" — the cited fix for AI over-engineering [^src2].
 - **Technical program management** — decompose work into small ownable tasks, define explicit dependencies and what can run in parallel, set validation/retry/escalation conditions, and log **ADRs** (architecture decision records) so agents inherit past design history. Pro tip: "always have a completely new agent review the PRD and implementation plan" [^src2].
 
-The strategic claim: if you already manage (as TPM/PM/EM), that is a competitive advantage as an AI engineer — the same best practices that make human teams ship make agent fleets ship [^src2]. This connects directly to [[ai-engineering/agentic-coding|Agentic Coding]] (orchestration) and [[ai-engineering/multi-agent-systems|Multi-Agent Systems]].
+The strategic claim: if you already manage (as TPM/PM/EM), that is a competitive advantage as an AI engineer — the same best practices that make human teams ship make agent fleets ship [^src2]. This connects directly to [Agentic Coding](/ai-engineering/agentic-coding.md) (orchestration) and [Multi-Agent Systems](/ai-engineering/multi-agent-systems.md).
 
 ## Outcomes, not outputs: writing goals (the PM's new core skill)
 
@@ -115,7 +115,7 @@ The blog-post anatomy of a strong goal (six properties) the source highlights fo
 | **Iteration policy** | How should it decide what to try next? |
 | **Stop condition** | When should it stop and report it's blocked? |
 
-The canonical example — "reduce P95 checkout latency below a threshold, verified by the checkout benchmark, keeping the correctness suite green" — is measurable, testable, guarded, and has executable surface area [^src4]. Goals are *strongest* with three properties: "a durable objective, an evidence-based finish line, and a path that may require several turns of investigation"; they are the *wrong* tool for one-line edits or vague finish lines ("make my customers happy"), and even for "refactor this code" [^src4]. The strategic read: as `/goal`-style loops spread, "product managers are going to have to get a lot better at prompting these AIs with good goals" — the same OKR-writing skill, now up-leveled with technical validation rigor [^src4]. The goal mechanics live in [[ai-engineering/agentic-coding|Agentic Coding]]; this is the *product-discipline* lens on them.
+The canonical example — "reduce P95 checkout latency below a threshold, verified by the checkout benchmark, keeping the correctness suite green" — is measurable, testable, guarded, and has executable surface area [^src4]. Goals are *strongest* with three properties: "a durable objective, an evidence-based finish line, and a path that may require several turns of investigation"; they are the *wrong* tool for one-line edits or vague finish lines ("make my customers happy"), and even for "refactor this code" [^src4]. The strategic read: as `/goal`-style loops spread, "product managers are going to have to get a lot better at prompting these AIs with good goals" — the same OKR-writing skill, now up-leveled with technical validation rigor [^src4]. The goal mechanics live in [Agentic Coding](/ai-engineering/agentic-coding.md); this is the *product-discipline* lens on them.
 
 ### Manager mode (and its discomfort)
 
@@ -127,7 +127,7 @@ Cherny's frontier observation reinforces the practitioner framing above: "I thin
 
 ### Latent demand: the most important product principle
 
-Cherny calls **latent demand** "the single most important principle in product": build a product that can be "misused" for something users want, then build the dedicated product for that behavior [^src5]. Examples: Facebook Marketplace (40% of group posts were buying/selling), Facebook Dating (60% of profile views were non-friends of opposite gender), and Claude Cowork (people used Claude Code non-technically — recovering wedding photos from a corrupted drive, analyzing an MRI or a genome) [^src5]. The **modern, AI-era twist**: instead of "look at what people are doing and make it easier," look at "what the *model* is trying to do and make that a little bit easier" — the product analog of keeping the model "on distribution" [^src5]. Two further AIPM-relevant build principles from the same source: **don't box the model in** ("give the model tools... a goal, and let it figure it out") and **build for the model 6 months out** (expect weak PMF early, then it clicks) — see [[ai-engineering/sources/boris-cherny-100-percent-claude-code|the source page]] and [[ai-engineering/context-engineering|Context Engineering]].
+Cherny calls **latent demand** "the single most important principle in product": build a product that can be "misused" for something users want, then build the dedicated product for that behavior [^src5]. Examples: Facebook Marketplace (40% of group posts were buying/selling), Facebook Dating (60% of profile views were non-friends of opposite gender), and Claude Cowork (people used Claude Code non-technically — recovering wedding photos from a corrupted drive, analyzing an MRI or a genome) [^src5]. The **modern, AI-era twist**: instead of "look at what people are doing and make it easier," look at "what the *model* is trying to do and make that a little bit easier" — the product analog of keeping the model "on distribution" [^src5]. Two further AIPM-relevant build principles from the same source: **don't box the model in** ("give the model tools... a goal, and let it figure it out") and **build for the model 6 months out** (expect weak PMF early, then it clicks) — see [the source page](/ai-engineering/sources/boris-cherny-100-percent-claude-code.md) and [Context Engineering](/ai-engineering/context-engineering.md).
 
 ## PM workflow on the AI exponential (Anthropic practitioner view)
 
@@ -154,7 +154,7 @@ The central rhythm change: "Instead of a long-term roadmap, we encourage everyon
 
 ## Managed Agents as a PM tool
 
-A second Anthropic PM (anonymous, product lead on Managed Agents) documents the next layer: using [[ai-engineering/claude-managed-agents|Claude Managed Agents]] to build bespoke internal agents for operational PM work [^src7]. The workflow split: Claude / Cowork for open-ended discovery (murky early-stage exploration); Claude Code to write and ship custom agents once the "job to be done" is clear [^src7].
+A second Anthropic PM (anonymous, product lead on Managed Agents) documents the next layer: using [Claude Managed Agents](/ai-engineering/claude-managed-agents.md) to build bespoke internal agents for operational PM work [^src7]. The workflow split: Claude / Cowork for open-ended discovery (murky early-stage exploration); Claude Code to write and ship custom agents once the "job to be done" is clear [^src7].
 
 Three example PM agents built on Managed Agents [^src7]:
 
@@ -233,20 +233,20 @@ Hamel Husain argues traditional feature-with-deadline roadmaps "fail spectacular
 
 **Commit to a cadence of experimentation, not specific outcomes** [^src11]. Eugene Yan's timeboxes (developed for ML, applies to LLMs): ~2 weeks data-feasibility ("do I have the right data?") → ~1 month technical-feasibility ("can AI solve this?") → ~6 weeks prototype/A-B; "at any step of the way, if it doesn't work out, we pivot." This gives leadership decision points while preserving room to learn — shift the conversation from outputs to outcomes ("commit to a process that maximizes the chances of the business outcome," not a feature by a date) [^src11].
 
-The pattern this protects: a content-moderation project where "for the first two to three months, nothing worked," then a new technique solved ~80% within a month — a feature-based roadmap would have killed it before the breakthrough [^src11]. The enabling substrate is robust [[ai-engineering/agent-evaluation|evaluation infrastructure]] (the early GitHub Copilot offline-eval investment), and a **failure-sharing culture** — Eugene's weekly "fifteen-five" (15 min to write, 5 to read) deliberately documents failures so the team learns faster [^src11]. "The key metric for AI roadmaps isn't features shipped — it's experiments run" [^src11]. The upstream discovery loop for these experiments is [[ai-engineering/error-analysis|error analysis]].
+The pattern this protects: a content-moderation project where "for the first two to three months, nothing worked," then a new technique solved ~80% within a month — a feature-based roadmap would have killed it before the breakthrough [^src11]. The enabling substrate is robust [evaluation infrastructure](/ai-engineering/agent-evaluation.md) (the early GitHub Copilot offline-eval investment), and a **failure-sharing culture** — Eugene's weekly "fifteen-five" (15 min to write, 5 to read) deliberately documents failures so the team learns faster [^src11]. "The key metric for AI roadmaps isn't features shipped — it's experiments run" [^src11]. The upstream discovery loop for these experiments is [error analysis](/ai-engineering/error-analysis.md).
 
 ## Cross-domain
 
-The *career* dimension of AIPM (job market, "what should I become") lives in [[ai-business/ai-and-the-job-market|AI and the Job Market]] and [[ai-business/technical-career|Navigating a Technical Career]]; this page owns the product/engineering discipline.
+The *career* dimension of AIPM (job market, "what should I become") lives in [AI and the Job Market](/ai-business/ai-and-the-job-market.md) and [Navigating a Technical Career](/ai-business/technical-career.md); this page owns the product/engineering discipline.
 
 ## See also
 
-- [[ai-engineering/llm|LLM]] · [[ai-engineering/transformer|Transformer]] — the technical literacy a core AIPM needs
-- [[ai-engineering/agentic-coding|Agentic Coding]] — managing agent fleets in practice
-- [[ai-engineering/agent-evaluation|Agent Evaluation]] — measuring non-deterministic products
-- [[ai-engineering/error-analysis|Error Analysis]] — the highest-ROI improvement loop that feeds the roadmap
-- [[ai-engineering/learning-ai-engineering|Learning AI Engineering]] — the broader learning path
-- [[ai-engineering/README|AI Engineering hub]]
+- [LLM](/ai-engineering/llm.md) · [Transformer](/ai-engineering/transformer.md) — the technical literacy a core AIPM needs
+- [Agentic Coding](/ai-engineering/agentic-coding.md) — managing agent fleets in practice
+- [Agent Evaluation](/ai-engineering/agent-evaluation.md) — measuring non-deterministic products
+- [Error Analysis](/ai-engineering/error-analysis.md) — the highest-ROI improvement loop that feeds the roadmap
+- [Learning AI Engineering](/ai-engineering/learning-ai-engineering.md) — the broader learning path
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

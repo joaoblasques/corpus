@@ -22,7 +22,7 @@ updated: 2026-06-30
 
 # Claude Sub-Agents
 
-**TL;DR** — Claude Code sub-agents are isolated AI workers defined as markdown files in `.claude/agents/<name>.md`. Unlike [[ai-engineering/agent-skills|Agent Skills]], sub-agents get a clean context window, can run in parallel, and can use a different model than the orchestrating session — enabling cost-efficient parallel work and separation of concerns [^src1].
+**TL;DR** — Claude Code sub-agents are isolated AI workers defined as markdown files in `.claude/agents/<name>.md`. Unlike [Agent Skills](/ai-engineering/agent-skills.md), sub-agents get a clean context window, can run in parallel, and can use a different model than the orchestrating session — enabling cost-efficient parallel work and separation of concerns [^src1].
 
 ## Sub-agents vs Skills
 
@@ -74,7 +74,7 @@ Claude reads only the YAML front matter to decide whether a sub-agent applies �
 
 Ambiguous descriptions cause misfires. The description should name the exact context (e.g., "Use when asked to review a PR, not for general questions") rather than a generic capability label [^src1].
 
-This mirrors the [[ai-engineering/agent-skills|Agent Skills]] progressive-disclosure pattern where SKILL.md files are indexed but not loaded until invoked.
+This mirrors the [Agent Skills](/ai-engineering/agent-skills.md) progressive-disclosure pattern where SKILL.md files are indexed but not loaded until invoked.
 
 ## Model routing and cost management
 
@@ -88,7 +88,7 @@ The **ultracode** trigger (Opus 4.8 with dynamic workflows enabled) can spawn 40
 
 Use cases for dynamic fan-out: running tests across all files in parallel, reviewing multiple PRs simultaneously, generating variations for evaluation.
 
-See [[ai-engineering/agentic-workflow|Agentic Workflows]] for the fan-out/tournament/adversarial patterns this enables.
+See [Agentic Workflows](/ai-engineering/agentic-workflow.md) for the fan-out/tournament/adversarial patterns this enables.
 
 ## Security
 
@@ -118,12 +118,12 @@ The YAML front matter supports a `max_turns` field capping how many tool-call it
 
 ## See also
 
-- [[ai-engineering/agent-skills|Agent Skills]] — skill.md files (same format, session-level execution)
-- [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] — coordination patterns for multiple agents
-- [[ai-engineering/agentic-workflow|Agentic Workflows]] — fan-out, tournament, adversarial patterns
-- [[ai-engineering/claude-code|Claude Code]] — the host harness for sub-agents
-- [[ai-engineering/claude-md-conventions|CLAUDE.md Conventions]] — the `.claude/` directory structure
-- [[ai-engineering/agent-cost-management|Agent Cost Management]] — model routing as a cost-reduction strategy
+- [Agent Skills](/ai-engineering/agent-skills.md) — skill.md files (same format, session-level execution)
+- [Multi-Agent Systems](/ai-engineering/multi-agent-systems.md) — coordination patterns for multiple agents
+- [Agentic Workflows](/ai-engineering/agentic-workflow.md) — fan-out, tournament, adversarial patterns
+- [Claude Code](/ai-engineering/claude-code.md) — the host harness for sub-agents
+- [CLAUDE.md Conventions](/ai-engineering/claude-md-conventions.md) — the `.claude/` directory structure
+- [Agent Cost Management](/ai-engineering/agent-cost-management.md) — model routing as a cost-reduction strategy
 
 ---
 

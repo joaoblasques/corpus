@@ -168,13 +168,13 @@ Key metrics: task success rate, tool call accuracy, latency and cost per task, r
 
 **Context window growth** degrades agent quality across turns — thread-level evaluation catches this; a naive per-call eval misses it [^src2].
 
-See [[ai-engineering/agent-evaluation|Agent Evaluation]] for full treatment of evaluation patterns, golden datasets, and the production feedback loop.
+See [Agent Evaluation](/ai-engineering/agent-evaluation.md) for full treatment of evaluation patterns, golden datasets, and the production feedback loop.
 
 ## Mental model: agents are new employees, not magic boxes
 
-A complementary framing for *working with* agents [^src4]: LLMs don't reason the way humans do — they **predict tokens**, mapping input onto a vector space and returning the closest resemblance. The implication is operational, not philosophical: an agent "will mimic you perfectly, but you've given it nothing to mimic" unless you supply a worked example. So treat a new agent like a **new employee** — give it the workflow, let it fail, correct it, and codify the result (see [[ai-engineering/agent-skills|Agent Skills]] for the recursive skill-building loop this motivates).
+A complementary framing for *working with* agents [^src4]: LLMs don't reason the way humans do — they **predict tokens**, mapping input onto a vector space and returning the closest resemblance. The implication is operational, not philosophical: an agent "will mimic you perfectly, but you've given it nothing to mimic" unless you supply a worked example. So treat a new agent like a **new employee** — give it the workflow, let it fail, correct it, and codify the result (see [Agent Skills](/ai-engineering/agent-skills.md) for the recursive skill-building loop this motivates).
 
-The same source reframes capability: with strong models, differentiation now comes from **the harness, tools, and context** around the model, plus the user's unique workflow — not from model choice alone [^src4]. See [[ai-engineering/context-engineering|Context Engineering]].
+The same source reframes capability: with strong models, differentiation now comes from **the harness, tools, and context** around the model, plus the user's unique workflow — not from model choice alone [^src4]. See [Context Engineering](/ai-engineering/context-engineering.md).
 
 ## Production concerns
 
@@ -192,18 +192,18 @@ The same source reframes capability: with strong models, differentiation now com
 
 The quality/latency/cost triangle and the security concerns below apply directly to such autonomous agents (CAPTCHA-blocked applications "fail gracefully" rather than escalating) [^src6].
 
-Another agent-mode pattern is **agent-as-search-orchestrator**: `/last30days` is a skill that, given any topic, has the agent first *resolve who matters* (X handles, GitHub repos, subreddits, YouTube channels) and then fan out parallel searches across a dozen walled-garden platforms (Reddit, X, YouTube, TikTok, HN, Polymarket, GitHub), scoring results by real engagement and synthesizing one cited brief [^src11]. The framed unlock is exactly the agentic loop applied to retrieval: "Not one better search engine. A dozen disconnected platforms, bridged by an agent" — each platform has its own API and auth, but an agent with the user's keys can query them all at once [^src11]. It runs cross-harness via the open Agent Skills CLI (50+ hosts) and is distributed as both a Claude Code marketplace plugin and an `npx skills` package (see [[ai-engineering/agent-skills|Agent Skills]]) [^src11]. This is also a concrete [[ai-engineering/agentic-search|Agentic Search]] instance.
+Another agent-mode pattern is **agent-as-search-orchestrator**: `/last30days` is a skill that, given any topic, has the agent first *resolve who matters* (X handles, GitHub repos, subreddits, YouTube channels) and then fan out parallel searches across a dozen walled-garden platforms (Reddit, X, YouTube, TikTok, HN, Polymarket, GitHub), scoring results by real engagement and synthesizing one cited brief [^src11]. The framed unlock is exactly the agentic loop applied to retrieval: "Not one better search engine. A dozen disconnected platforms, bridged by an agent" — each platform has its own API and auth, but an agent with the user's keys can query them all at once [^src11]. It runs cross-harness via the open Agent Skills CLI (50+ hosts) and is distributed as both a Claude Code marketplace plugin and an `npx skills` package (see [Agent Skills](/ai-engineering/agent-skills.md)) [^src11]. This is also a concrete [Agentic Search](/ai-engineering/agentic-search.md) instance.
 
 ## The agent harness: minimal, self-modifying runtimes
 
-A growing view holds that with strong models, differentiation comes from the **harness** — the runtime, tools, and context around the model — not the model alone (see [[ai-engineering/context-engineering|Context Engineering]]). **Pi** is an open-source exemplar: "a minimal agent harness" whose thesis is "adapt Pi to your workflows, not the other way around" [^src7]. Defining properties [^src7]:
+A growing view holds that with strong models, differentiation comes from the **harness** — the runtime, tools, and context around the model — not the model alone (see [Context Engineering](/ai-engineering/context-engineering.md)). **Pi** is an open-source exemplar: "a minimal agent harness" whose thesis is "adapt Pi to your workflows, not the other way around" [^src7]. Defining properties [^src7]:
 
 - **Skips defaults like sub-agents and plan mode** — you ask Pi to build them, or install a package that adds them. Extensions are TypeScript modules with access to tools, commands, events, and the TUI.
 - **Self-modifying**: "Have Pi manipulate itself in place, hit `/reload`, and keep going." The agent can add its own commands, tools, and providers on the fly.
 - **Four run modes**: interactive TUI, print/JSON (for scripts), RPC (JSON over stdin/stdout), and SDK (embed in apps).
 - **Context-engineering surface**: minimal system prompt, `AGENTS.md` project instructions, `SYSTEM.md` per-project prompt override, customizable compaction, and on-demand skills with progressive disclosure that doesn't bust the prompt cache [^src7].
 
-This harness is deployable as a **serverless agent**: app code is separated from cloud memory (GitHub for app/agent files, cloud object storage for data), wrapped in a thin web chat UI, and deployed to a cloud run target with shared-password protection [^src8]. Pi is also a first-class backend in multi-runtime tools like Boring UI (see [[ai-engineering/agent-ui|Agent UI]]) and Ouroboros (below).
+This harness is deployable as a **serverless agent**: app code is separated from cloud memory (GitHub for app/agent files, cloud object storage for data), wrapped in a thin web chat UI, and deployed to a cloud run target with shared-password protection [^src8]. Pi is also a first-class backend in multi-runtime tools like Boring UI (see [Agent UI](/ai-engineering/agent-ui.md)) and Ouroboros (below).
 
 ## Spec-driven agent OS
 
@@ -214,7 +214,7 @@ A distinct architectural layer treats agent work as an **operating system**: a r
 - **Immutable seed spec** locks intent so architecture doesn't drift mid-build; a 3-stage evaluation gate (Mechanical → Semantic → Multi-Model Consensus) replaces "looks good" QA.
 - **OS layering**: a stable kernel (Seed, Ledger, Runtime, MCP) under user-level plugins (PR ops, Jira sync, releases) under a terminal shell — every action becomes a ledger-recorded, replayable event regardless of which LLM executes it [^src9].
 
-Ouroboros and Pi both target **runtime portability** — one workflow spec, many execution engines (Claude Code, Codex, Gemini, Copilot, Pi, and more) [^src7][^src9]. This is the agent-side analog of the cross-platform convention work in [[ai-engineering/claude-md-conventions|CLAUDE.md & Agent Instruction Conventions]].
+Ouroboros and Pi both target **runtime portability** — one workflow spec, many execution engines (Claude Code, Codex, Gemini, Copilot, Pi, and more) [^src7][^src9]. This is the agent-side analog of the cross-platform convention work in [CLAUDE.md & Agent Instruction Conventions](/ai-engineering/claude-md-conventions.md).
 
 ## Agents for data engineers
 
@@ -237,13 +237,13 @@ An introductory framing of agents specifically for the DE context [^src12]:
 
 **Four building blocks** [^src12]:
 1. **Tools** — functions the agent can call (run SQL, call API, read file, write file).
-2. **MCP** — the protocol for connecting agents to tools and data stores without custom integration per tool. See [[ai-engineering/mcp|MCP]].
-3. **Memory** — what the agent retains across steps: short-term (context window), long-term (vector DB, files, database rows). See [[ai-engineering/agent-memory|Agent Memory]].
+2. **MCP** — the protocol for connecting agents to tools and data stores without custom integration per tool. See [MCP](/ai-engineering/mcp.md).
+3. **Memory** — what the agent retains across steps: short-term (context window), long-term (vector DB, files, database rows). See [Agent Memory](/ai-engineering/agent-memory.md).
 4. **Sub-agents** — orchestration of specialized agents: one for schema discovery, one for SQL generation, one for QA, coordinated by a parent agent.
 
 ## Files vs database: the agent-memory architecture debate
 
-A live debate concerns whether a folder of files is sufficient agent state, or whether agents need a database [^src10]. The "files are all you need" position (Karpathy's evolving-markdown LLM knowledge base, LlamaIndex) is contrasted with the limits of file-based workflows and **massive context windows that "tend to collapse"** as they fill [^src10]. The same source reinforces the **model-vs-harness** framing and "context rot and tool loadouts" as first-order concerns [^src10]. See [[ai-engineering/agent-memory|Agent Memory]] and [[ai-engineering/context-window-management|Context Window Management]] for the underlying mechanics.
+A live debate concerns whether a folder of files is sufficient agent state, or whether agents need a database [^src10]. The "files are all you need" position (Karpathy's evolving-markdown LLM knowledge base, LlamaIndex) is contrasted with the limits of file-based workflows and **massive context windows that "tend to collapse"** as they fill [^src10]. The same source reinforces the **model-vs-harness** framing and "context rot and tool loadouts" as first-order concerns [^src10]. See [Agent Memory](/ai-engineering/agent-memory.md) and [Context Window Management](/ai-engineering/context-window-management.md) for the underlying mechanics.
 
 ## Goose: open-source agentic framework (AAIF)
 
@@ -261,26 +261,26 @@ Key properties [^src14]:
 
 ## See also
 
-- [[ai-engineering/context-engineering|Context Engineering]] — the highest-leverage skill in agent development
-- [[ai-engineering/agent-skills|Agent Skills]] — codifying workflow into on-demand skills; the recursive build loop
-- [[ai-engineering/tool-calling|Tool Calling]] — how agents interact with tools
-- [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] — patterns for multiple cooperating agents
-- [[ai-engineering/langgraph|LangGraph]] — recommended framework for production multi-agent systems
-- [[ai-engineering/tool-calling-and-context-engineering|Tool Calling & Context Engineering]] — synthesis: how tool results feed the context loop and why context engineering governs tool call design
-- [[ai-engineering/agent-evaluation|Agent Evaluation]] — full treatment of evaluation patterns
-- [[ai-engineering/langsmith|LangSmith]] — platform for agent observability and evaluation
-- [[ai-engineering/agent-memory|Agent Memory]] — short-term (context window) and long-term (vector DB) memory
-- [[ai-engineering/mcp|MCP]] — coordination protocol for agents, tools, and memory
-- [[ai-engineering/agent-ui|Agent UI]] — chat + workbench shells for agent-centric apps (Boring UI on Pi)
-- [[ai-engineering/claude-md-conventions|CLAUDE.md & Agent Instruction Conventions]] — configuring the harness; cross-platform portability
-- [[ai-engineering/agent-testing|Agent Testing]] — verification loops that keep autonomous agents honest
-- [[data-engineering/README|Data Engineering]] — how agents are applied in data pipelines
+- [Context Engineering](/ai-engineering/context-engineering.md) — the highest-leverage skill in agent development
+- [Agent Skills](/ai-engineering/agent-skills.md) — codifying workflow into on-demand skills; the recursive build loop
+- [Tool Calling](/ai-engineering/tool-calling.md) — how agents interact with tools
+- [Multi-Agent Systems](/ai-engineering/multi-agent-systems.md) — patterns for multiple cooperating agents
+- [LangGraph](/ai-engineering/langgraph.md) — recommended framework for production multi-agent systems
+- [Tool Calling & Context Engineering](/ai-engineering/tool-calling-and-context-engineering.md) — synthesis: how tool results feed the context loop and why context engineering governs tool call design
+- [Agent Evaluation](/ai-engineering/agent-evaluation.md) — full treatment of evaluation patterns
+- [LangSmith](/ai-engineering/langsmith.md) — platform for agent observability and evaluation
+- [Agent Memory](/ai-engineering/agent-memory.md) — short-term (context window) and long-term (vector DB) memory
+- [MCP](/ai-engineering/mcp.md) — coordination protocol for agents, tools, and memory
+- [Agent UI](/ai-engineering/agent-ui.md) — chat + workbench shells for agent-centric apps (Boring UI on Pi)
+- [CLAUDE.md & Agent Instruction Conventions](/ai-engineering/claude-md-conventions.md) — configuring the harness; cross-platform portability
+- [Agent Testing](/ai-engineering/agent-testing.md) — verification loops that keep autonomous agents honest
+- [Data Engineering](/data-engineering/README.md) — how agents are applied in data pipelines
 
 ---
 
-[^src1]: [[03_Resources/Study Notes/AI Agents - Complete Course Beginner to Pro|AI Agents - Complete Course Beginner to Pro]]
-[^src2]: [[03_Resources/Study Notes/LangSmith - Debugging and Evaluating AI Agents|LangSmith - Debugging and Evaluating AI Agents]]
-[^src3]: [[03_Resources/Study Notes/AI Dev - Agentic AI Architecture Explained|AI Dev - Agentic AI Architecture Explained]]
+[^src1]: [AI Agents - Complete Course Beginner to Pro](/03_Resources/Study Notes/AI Agents - Complete Course Beginner to Pro.md)
+[^src2]: [LangSmith - Debugging and Evaluating AI Agents](/03_Resources/Study Notes/LangSmith - Debugging and Evaluating AI Agents.md)
+[^src3]: [AI Dev - Agentic AI Architecture Explained](/03_Resources/Study Notes/AI Dev - Agentic AI Architecture Explained.md)
 [^src4]: [How AI agents & Claude skills work (Clearly Explained)](<../../raw/youtube/How AI agents & Claude skills work (Clearly Explained).md>) — Greg Isenberg × Ras Mic, YouTube
 [^src5]: [Agent Mode — Autonomous AI Agents for Real-World Tasks](../../raw/web/agent-mode-autonomous-ai-agents-for-real-world-tasks.md)
 [^src6]: [Pickle-Pixel/ApplyPilot — AI agent that applies to jobs](../../raw/web/github-pickle-pixel-applypilot-ai-agent-that-applies-to-jobs.md)
@@ -353,7 +353,7 @@ Three types of quality gates between agent output and final delivery [^src20]:
 
 Most production systems use at least two types [^src20]. The LLM-judge pattern creates a self-correction loop: judge flags failure → agent gets explanation → agent revises and tries again [^src20].
 
-See [[ai-engineering/generator-evaluator-separation|Generator–Evaluator Separation]] for the principle behind the LLM-judge pattern, and [[ai-engineering/agent-evaluation|Agent Evaluation]] for the full evaluation discipline.
+See [Generator–Evaluator Separation](/ai-engineering/generator-evaluator-separation.md) for the principle behind the LLM-judge pattern, and [Agent Evaluation](/ai-engineering/agent-evaluation.md) for the full evaluation discipline.
 
 ## Multi-agent MCP orchestration (platform routing)
 
@@ -365,7 +365,7 @@ A multi-model architecture from Nick Saraev's 2026 course: Claude Code acts as o
 | UI/frontend worker | Gemini | Frontend/multimodal tasks |
 | Backend/TDD worker | GPT/Codex | Backend code, test-driven development |
 
-Each model connects via its own MCP server; Claude routes tasks by matching capability fit. This instantiates the [[ai-engineering/multi-agent-systems|orchestrator-subagent]] pattern across different LLM providers [^src21].
+Each model connects via its own MCP server; Claude routes tasks by matching capability fit. This instantiates the [orchestrator-subagent](/ai-engineering/multi-agent-systems.md) pattern across different LLM providers [^src21].
 
 ## Self-modifying agent instructions
 
@@ -375,4 +375,4 @@ Nick Saraev's pattern for compounding agent improvement over time [^src21]:
 2. Agent appends the preference rule to its instruction file (`CLAUDE.md`, `GEMINI.md`, `AGENTS.md`)
 3. Next session, the rule loads automatically — the agent doesn't repeat the mistake
 
-Different platforms read different files: Claude reads `CLAUDE.md`, Gemini reads `GEMINI.md`, Codex reads `AGENTS.md`. In a multi-model setup, each model reads its own file and accumulates its own preference history [^src21]. See [[ai-engineering/claude-md-conventions|CLAUDE.md Conventions]].
+Different platforms read different files: Claude reads `CLAUDE.md`, Gemini reads `GEMINI.md`, Codex reads `AGENTS.md`. In a multi-model setup, each model reads its own file and accumulates its own preference history [^src21]. See [CLAUDE.md Conventions](/ai-engineering/claude-md-conventions.md).

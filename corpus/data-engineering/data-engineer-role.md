@@ -78,11 +78,11 @@ The antidote to tool-overload analysis paralysis is a short list of fundamentals
 
 - **Data storage** — distributed storage, partitioning, clustering, column encoding, table formats
 - **Data processing** — shuffling, in-memory processing, query planner
-- **Data modeling** — *The Data Warehouse Toolkit* (Kimball) → see [[data-engineering/dimensional-modeling|dimensional modeling]]
+- **Data modeling** — *The Data Warehouse Toolkit* (Kimball) → see [dimensional modeling](/data-engineering/dimensional-modeling.md)
 - **Cloud basics** — object storage (S3), warehouse (Redshift), Python API (boto3)
 - **Data quality** — pipeline tests, CI testing with GitHub Actions, end-to-end testing
 - **Coding patterns** — design and coding patterns for pipelines
-- **Orchestration & scheduling** — Airflow concepts → see [[data-engineering/pipeline-layers|pipeline layers]]
+- **Orchestration & scheduling** — Airflow concepts → see [pipeline layers](/data-engineering/pipeline-layers.md)
 - **Alerting & monitoring** — Prometheus concepts
 - **Data discovery, access control, data readers** — Datahub, Snowflake object access, dashboards/APIs
 
@@ -143,7 +143,7 @@ No need for a full orchestration stack to start. The minimum viable pipeline is 
 - Scheduled via crontab (Linux) or Task Scheduler (Windows) — or your company's existing scheduler (Airflow, dbt Cloud, Dagster) if available
 - Run via a CLI tool (e.g. `psql -f summary_table.sql`)
 
-The pattern is deliberately minimal: if the company already has a scheduler, use it — otherwise start with cron. See [[data-engineering/de-portfolio-projects|DE Portfolio Projects]] for more complex stack patterns once the basics are proven.
+The pattern is deliberately minimal: if the company already has a scheduler, use it — otherwise start with cron. See [DE Portfolio Projects](/data-engineering/de-portfolio-projects.md) for more complex stack patterns once the basics are proven.
 
 ### 3. Showcase with a stakeholder-first demo
 
@@ -201,13 +201,13 @@ The specific advice: understand data modeling, architecture, and business contex
 
 ## See also
 
-- [[data-engineering/dimensional-modeling|Dimensional Modeling]] — the data-modeling fundamental both sources flag as core
-- [[data-engineering/pipeline-layers|Pipeline Layers]] — orchestration / architecture fundamentals
-- [[data-engineering/dbt|dbt]] — a common tool, but a tool — apply the fundamentals
-- [[data-engineering/de-portfolio-projects|DE Portfolio Projects]] — a portfolio of runnable projects for the next step after cron+SQL
-- [[data-engineering/data-engineering-interview|Data Engineering Interview]] — the skills-and-job-search complement to this role/seniority framing
-- [[data-engineering/sources/data-engineering-zoomcamp|Data Engineering Zoomcamp]] — a free, fundamentals-first end-to-end course
-- [[data-engineering/README|Data Engineering hub]]
+- [Dimensional Modeling](/data-engineering/dimensional-modeling.md) — the data-modeling fundamental both sources flag as core
+- [Pipeline Layers](/data-engineering/pipeline-layers.md) — orchestration / architecture fundamentals
+- [dbt](/data-engineering/dbt.md) — a common tool, but a tool — apply the fundamentals
+- [DE Portfolio Projects](/data-engineering/de-portfolio-projects.md) — a portfolio of runnable projects for the next step after cron+SQL
+- [Data Engineering Interview](/data-engineering/data-engineering-interview.md) — the skills-and-job-search complement to this role/seniority framing
+- [Data Engineering Zoomcamp](/data-engineering/sources/data-engineering-zoomcamp.md) — a free, fundamentals-first end-to-end course
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

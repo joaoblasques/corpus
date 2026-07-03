@@ -27,7 +27,7 @@ updated: 2026-06-11
 
 # Open Table Formats
 
-**TL;DR.** An open table format (OTF) is a **separate, database-independent metadata layer** that lets a query engine "see" a directory of Parquet objects in object storage as a single transactional table. The big three are Apache Iceberg, Delta Lake, and Apache Hudi; newer entrants include Apache Paimon and DuckLake [^src1]. Because the metadata layer is open (not owned by any one database), the same data can be read and written by many engines — the foundation of **Open Data Infrastructure (ODI)**, which separates storage, compute, and tooling into independently-evolving layers to avoid vendor lock-in [^src2]. See [[data-engineering/apache-iceberg|Apache Iceberg]] for the reference implementation.
+**TL;DR.** An open table format (OTF) is a **separate, database-independent metadata layer** that lets a query engine "see" a directory of Parquet objects in object storage as a single transactional table. The big three are Apache Iceberg, Delta Lake, and Apache Hudi; newer entrants include Apache Paimon and DuckLake [^src1]. Because the metadata layer is open (not owned by any one database), the same data can be read and written by many engines — the foundation of **Open Data Infrastructure (ODI)**, which separates storage, compute, and tooling into independently-evolving layers to avoid vendor lock-in [^src2]. See [Apache Iceberg](/data-engineering/apache-iceberg.md) for the reference implementation.
 
 ## The core idea: metadata as source of truth
 
@@ -42,7 +42,7 @@ ODI is the architecture OTFs enable: store data **once** in open formats and use
 Three architectural principles [^src2]:
 
 1. **Open, standards-based movement and transformation** — pipelines are portable, not locked into proprietary APIs/runtimes.
-2. **A unified, open data lake foundation** — data landed once in open formats on object storage (S3, ADLS, GCS); compute engines plug in on top. See [[data-engineering/data-lake|data lake]].
+2. **A unified, open data lake foundation** — data landed once in open formats on object storage (S3, ADLS, GCS); compute engines plug in on top. See [data lake](/data-engineering/data-lake.md).
 3. **Activation, semantics, and AI consumption** — business entities and metrics defined once and reused everywhere, so dashboards, workflows, and AI agents act on the same trusted logic.
 
 Four claimed benefits: no vendor lock-in; lower cost at scale (store once, apply compute where needed, no duplicate pipelines); faster innovation (adopt new tools without large migrations); and a foundation built for AI/real-time workloads [^src2].
@@ -59,21 +59,21 @@ The Iceberg PMC frames an open table format as "the reliability of SQL on top of
 
 ## OTF capability is a ladder of atomic operations
 
-A useful mental model from Iceberg's version history: a table format's power is defined by **which things it can change atomically** [^src4]. Iceberg climbed: **add/remove/replace files** (V1) → also **add/remove/change rows** via delete files + merge-on-read (V2) → and in V4, **add/remove/change columns** by letting a column live in a separate file [^src4]. The same row/column-delete primitives are being pushed down to the *metadata* layer too [^src4]. This ladder is the deep reason OTFs need a real metadata layer: directory structure can't express row- or column-level atomic change — only a transaction log + per-file statistics can. See [[data-engineering/apache-iceberg|Apache Iceberg]] for the V1→V4 detail.
+A useful mental model from Iceberg's version history: a table format's power is defined by **which things it can change atomically** [^src4]. Iceberg climbed: **add/remove/replace files** (V1) → also **add/remove/change rows** via delete files + merge-on-read (V2) → and in V4, **add/remove/change columns** by letting a column live in a separate file [^src4]. The same row/column-delete primitives are being pushed down to the *metadata* layer too [^src4]. This ladder is the deep reason OTFs need a real metadata layer: directory structure can't express row- or column-level atomic change — only a transaction log + per-file statistics can. See [Apache Iceberg](/data-engineering/apache-iceberg.md) for the V1→V4 detail.
 
 ## Gotchas / things to watch
 
-- **Format is not the whole story.** A separate metadata layer (transaction log + per-file statistics) replaces directory structure as the planning mechanism — e.g. on Delta and Iceberg, directory-pruning does not exist; the engine prunes against statistics in the log, not the directory tree (see [[data-engineering/databricks|Databricks]] Liquid Clustering) [^src3].
+- **Format is not the whole story.** A separate metadata layer (transaction log + per-file statistics) replaces directory structure as the planning mechanism — e.g. on Delta and Iceberg, directory-pruning does not exist; the engine prunes against statistics in the log, not the directory tree (see [Databricks](/data-engineering/databricks.md) Liquid Clustering) [^src3].
 - **Separate storage from compute from day one** is the practical ODI starting move; adopt open formats early to preserve portability [^src2].
-- **More than three players now.** Beyond Iceberg/Delta/Hudi, Paimon and DuckLake have entered the market [^src1]; see [[data-engineering/duckdb|DuckDB]] for DuckLake.
+- **More than three players now.** Beyond Iceberg/Delta/Hudi, Paimon and DuckLake have entered the market [^src1]; see [DuckDB](/data-engineering/duckdb.md) for DuckLake.
 
 ## Related
 
-- [[data-engineering/apache-iceberg|Apache Iceberg]] — reference open table format
-- [[data-engineering/data-lake|Data lake]] — the storage substrate
-- [[data-engineering/parquet|Parquet]] — the underlying file format
-- [[data-engineering/databricks|Databricks]] — lakehouse platform built on Delta/Iceberg
-- [[data-engineering/query-engine-routing|Query-engine routing]] — multi-engine access enabled by OTFs
+- [Apache Iceberg](/data-engineering/apache-iceberg.md) — reference open table format
+- [Data lake](/data-engineering/data-lake.md) — the storage substrate
+- [Parquet](/data-engineering/parquet.md) — the underlying file format
+- [Databricks](/data-engineering/databricks.md) — lakehouse platform built on Delta/Iceberg
+- [Query-engine routing](/data-engineering/query-engine-routing.md) — multi-engine access enabled by OTFs
 
 [^src1]: [5 insights to help you learn any open table format faster](../../raw/email/email-2026-05-26-5-insights-to-help-you-learn-any-open-table-format-faster.md)
 [^src2]: [What is Open Data Infrastructure? (Fivetran)](../../raw/web/what-is-open-data-infrastructure-blog-fivetran.md)

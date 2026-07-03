@@ -163,14 +163,14 @@ These findings were produced with **Dimster** (DIMensional teSTER), an open-sour
 
 ## See also
 
-- [[data-engineering/idempotent-pipelines|Idempotent Pipelines]] — append-only stream ingestion with at-most-once settings
-- [[data-engineering/stream-processing|Stream Processing]] — Kafka as the transport layer in real-time pipelines
-- [[data-engineering/storage-fundamentals|Storage Fundamentals]] — the object-storage trend (tiered/diskless Kafka) builds on the object-storage layer covered there
-- [[data-engineering/README|Data Engineering hub]]
+- [Idempotent Pipelines](/data-engineering/idempotent-pipelines.md) — append-only stream ingestion with at-most-once settings
+- [Stream Processing](/data-engineering/stream-processing.md) — Kafka as the transport layer in real-time pipelines
+- [Storage Fundamentals](/data-engineering/storage-fundamentals.md) — the object-storage trend (tiered/diskless Kafka) builds on the object-storage layer covered there
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 
-[^src1]: [[03_Resources/Study Notes/Kafka Tutorial for Beginners - Core Concepts|Kafka Tutorial for Beginners - Core Concepts]]
+[^src1]: [Kafka Tutorial for Beginners - Core Concepts](/03_Resources/Study Notes/Kafka Tutorial for Beginners - Core Concepts.md)
 [^src2]: [Can Kafka Queues Make Consumers Faster? Part 2: Head-Of-Line Blocking](../../raw/web/can-kafka-queues-make-consumers-faster-part-2-head-of-line-b.md)
 [^src3]: [Kafka Share Groups and Parallelizing Consumption — Part 1: Tuning max.poll.records](../../raw/web/kafka-share-groups-and-parallelizing-consumption-part-1-tuni.md)
 [^src4]: [Introducing Dimster, a performance benchmarking tool for Apache Kafka](../../raw/web/introducing-dimster-a-performance-benchmarking-tool-for-apac.md)

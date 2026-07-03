@@ -88,20 +88,20 @@ A second, complementary use: not training data but **eval data when you have no 
 - **Verify scenario coverage.** A query meant to test "no matches found" should actually return zero results when run — pseudo-code asserts this before accepting the case.
 - **Diversify**, and **start simple, then add complexity** to isolate issues and establish a baseline.
 
-What often "starts as a stopgap" becomes a permanent part of the evaluation infrastructure even after real user data arrives [^src2]. This use is orthogonal to Simula's training-data focus above and feeds directly into [[ai-engineering/agent-evaluation|Agent Evaluation]] golden datasets and [[ai-engineering/error-analysis|error analysis]].
+What often "starts as a stopgap" becomes a permanent part of the evaluation infrastructure even after real user data arrives [^src2]. This use is orthogonal to Simula's training-data focus above and feeds directly into [Agent Evaluation](/ai-engineering/agent-evaluation.md) golden datasets and [error analysis](/ai-engineering/error-analysis.md).
 
 ## Relationship to training and fine-tuning
 
-Synthetic data is primarily a **training data** tool — it supplements (or replaces) real-world data for fine-tuning or distillation when real data is unavailable. It is orthogonal to [[ai-engineering/rag|RAG]] (which injects retrieved facts at inference time) and to [[ai-engineering/agent-evaluation|Agent Evaluation]] golden datasets (which test trained models, not train them). The Simula paper explicitly positions synthetic data as foundational for "reinforcement learning from AI feedback (RLAIF)" and edge-device distillation [^src1]. See [[ai-engineering/machine-learning|Machine Learning]] §RAG vs fine-tuning for where fine-tuning and distillation fit in the broader training stack.
+Synthetic data is primarily a **training data** tool — it supplements (or replaces) real-world data for fine-tuning or distillation when real data is unavailable. It is orthogonal to [RAG](/ai-engineering/rag.md) (which injects retrieved facts at inference time) and to [Agent Evaluation](/ai-engineering/agent-evaluation.md) golden datasets (which test trained models, not train them). The Simula paper explicitly positions synthetic data as foundational for "reinforcement learning from AI feedback (RLAIF)" and edge-device distillation [^src1]. See [Machine Learning](/ai-engineering/machine-learning.md) §RAG vs fine-tuning for where fine-tuning and distillation fit in the broader training stack.
 
 ## See also
 
-- [[ai-engineering/machine-learning|Machine Learning]] — training paradigms; RAG vs fine-tuning trade-off
-- [[ai-engineering/llm|LLM]] — pre-training + RLHF; where synthetic data feeds in
-- [[ai-engineering/agent-evaluation|Agent Evaluation]] — evaluation methodology for trained models
-- [[ai-engineering/error-analysis|Error Analysis]] — synthetic data exercises failure modes you can't yet observe
-- [[ai-engineering/rag|RAG]] — inference-time knowledge injection (complementary, not competing)
-- [[ai-engineering/README|AI Engineering hub]]
+- [Machine Learning](/ai-engineering/machine-learning.md) — training paradigms; RAG vs fine-tuning trade-off
+- [LLM](/ai-engineering/llm.md) — pre-training + RLHF; where synthetic data feeds in
+- [Agent Evaluation](/ai-engineering/agent-evaluation.md) — evaluation methodology for trained models
+- [Error Analysis](/ai-engineering/error-analysis.md) — synthetic data exercises failure modes you can't yet observe
+- [RAG](/ai-engineering/rag.md) — inference-time knowledge injection (complementary, not competing)
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

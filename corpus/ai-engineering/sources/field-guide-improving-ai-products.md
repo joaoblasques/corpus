@@ -20,7 +20,7 @@ updated: 2026-06-26
 
 # A Field Guide to Rapidly Improving AI Products (Hamel Husain)
 
-**TL;DR**: After helping 30+ companies build AI products, Hamel Husain finds the teams that succeed "barely talk about tools at all" — instead they "obsess over measurement and iteration" [^src1]. The field guide distills six process patterns that beat tool/framework selection: (1) start with [[ai-engineering/error-analysis|error analysis]], not architecture; (2) build a simple custom data viewer; (3) let domain experts write prompts directly; (4) bootstrap with synthetic data even at zero users; (5) maintain trust in [[ai-engineering/agent-evaluation|evals]] against criteria drift; (6) make the [[ai-engineering/ai-product-management|roadmap]] count experiments, not features.
+**TL;DR**: After helping 30+ companies build AI products, Hamel Husain finds the teams that succeed "barely talk about tools at all" — instead they "obsess over measurement and iteration" [^src1]. The field guide distills six process patterns that beat tool/framework selection: (1) start with [error analysis](/ai-engineering/error-analysis.md), not architecture; (2) build a simple custom data viewer; (3) let domain experts write prompts directly; (4) bootstrap with synthetic data even at zero users; (5) maintain trust in [evals](/ai-engineering/agent-evaluation.md) against criteria drift; (6) make the [roadmap](/ai-engineering/ai-product-management.md) count experiments, not features.
 
 ## Why this source matters
 
@@ -30,12 +30,12 @@ It is a practitioner consensus document on the *non-glamorous* half of AI engine
 
 | # | Pattern | Corpus page |
 |---|---|---|
-| 1 | **Error analysis** is the single highest-ROI activity; bottom-up beats top-down | [[ai-engineering/error-analysis|Error Analysis]] |
-| 2 | **A simple custom data viewer** is the most important AI investment (teams with one iterate 10× faster) | [[ai-engineering/error-analysis|Error Analysis]] §Data viewer |
-| 3 | **Empower domain experts** to write/iterate prompts directly ("prompts are just English") | [[ai-engineering/error-analysis|Error Analysis]] §Domain experts |
-| 4 | **Synthetic data** bootstraps evaluation with zero users | [[ai-engineering/synthetic-data|Synthetic Data]] §For evaluation |
-| 5 | **Maintain trust in evals** — binary + critique, criteria drift, human↔LLM alignment | [[ai-engineering/agent-evaluation|Agent Evaluation]] |
-| 6 | **Count experiments, not features** — capability funnel, timeboxes | [[ai-engineering/ai-product-management|AI Product Management]] |
+| 1 | **Error analysis** is the single highest-ROI activity; bottom-up beats top-down | [Error Analysis](/ai-engineering/error-analysis.md) |
+| 2 | **A simple custom data viewer** is the most important AI investment (teams with one iterate 10× faster) | [Error Analysis](/ai-engineering/error-analysis.md) §Data viewer |
+| 3 | **Empower domain experts** to write/iterate prompts directly ("prompts are just English") | [Error Analysis](/ai-engineering/error-analysis.md) §Domain experts |
+| 4 | **Synthetic data** bootstraps evaluation with zero users | [Synthetic Data](/ai-engineering/synthetic-data.md) §For evaluation |
+| 5 | **Maintain trust in evals** — binary + critique, criteria drift, human↔LLM alignment | [Agent Evaluation](/ai-engineering/agent-evaluation.md) |
+| 6 | **Count experiments, not features** — capability funnel, timeboxes | [AI Product Management](/ai-engineering/ai-product-management.md) |
 
 ## Notable claims and worked examples
 
@@ -49,11 +49,11 @@ It is a practitioner consensus document on the *non-glamorous* half of AI engine
 
 ## See also
 
-- [[ai-engineering/error-analysis|Error Analysis]] — the central pattern, given its own page
-- [[ai-engineering/agent-evaluation|Agent Evaluation]] — eval-trust, criteria drift, binary+critique
-- [[ai-engineering/synthetic-data|Synthetic Data]] — bootstrapping evals without users
-- [[ai-engineering/ai-product-management|AI Product Management]] — experiment-based roadmaps
-- [[ai-engineering/generator-evaluator-separation|Generator–Evaluator Separation]] — the over-trust-in-self-grading failure mode this guide warns about
+- [Error Analysis](/ai-engineering/error-analysis.md) — the central pattern, given its own page
+- [Agent Evaluation](/ai-engineering/agent-evaluation.md) — eval-trust, criteria drift, binary+critique
+- [Synthetic Data](/ai-engineering/synthetic-data.md) — bootstrapping evals without users
+- [AI Product Management](/ai-engineering/ai-product-management.md) — experiment-based roadmaps
+- [Generator–Evaluator Separation](/ai-engineering/generator-evaluator-separation.md) — the over-trust-in-self-grading failure mode this guide warns about
 
 ---
 

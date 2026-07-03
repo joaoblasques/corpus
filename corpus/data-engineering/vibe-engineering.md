@@ -25,7 +25,7 @@ updated: 2026-06-30
 
 Joe Reis defines vibe engineering as building without a theoretical framework — using dbt, Spark, or the lakehouse stack without understanding what dimensional modeling is, what a relational algebra is, or why a query plan behaves a certain way [^src1]. The analogy: "vibe coding" is writing code by prompting an AI without reading what it produces; vibe engineering is building data systems without reading the theory underneath them.
 
-Distinct from [[ai-engineering/vibe-coding|Vibe Coding]] (which is about AI-assisted code generation), vibe engineering is a fundamentals deficit that predates AI tools and is now accelerated by them [^src1].
+Distinct from [Vibe Coding](/ai-engineering/vibe-coding.md) (which is about AI-assisted code generation), vibe engineering is a fundamentals deficit that predates AI tools and is now accelerated by them [^src1].
 
 ## Spolsky's Law of Leaky Abstractions
 
@@ -45,18 +45,18 @@ The risk is asymmetric: building a pipeline is easier with AI, but debugging a m
 
 The 2026 State of Data Engineering Survey (n=1,101) found 82% of DEs use AI daily, yet bottlenecks are still overwhelmingly non-technical: requirements, ownership, and moving fast without understanding [^src1]. Vibe engineering is one named cause of the "move fast without understanding" failure mode.
 
-See also [[data-engineering/data-modeling-meaning|Meaning in Data Modeling]] for the semantic layer consequence: when teams build without understanding meaning, the data catalog becomes unqueryable and AI context platforms (like Euno) become necessary remediation.
+See also [Meaning in Data Modeling](/data-engineering/data-modeling-meaning.md) for the semantic layer consequence: when teams build without understanding meaning, the data catalog becomes unqueryable and AI context platforms (like Euno) become necessary remediation.
 
 ## See also
 
-- [[data-engineering/data-work-in-the-ai-transition|Data Work in the AI Transition]] — synthesis: this is the *skills*-scale instance of Reis's one argument (with tokenmaxxing and the 1905 analogy)
-- [[productivity/tokenmaxxing|Tokenmaxxing]] — Reis's sibling diagnosis: vibe engineering skips the theory; tokenmaxxing mistakes output volume for value
-- [[ai-business/ai-transition-economics|AI Transition Economics (1905)]] — Reis's macro frame: the same "build without rethinking" at the org/architecture level ("swap the motor, not the factory")
-- [[data-engineering/sources/dbt-summit-2026-speakers|dbt Summit 2026]] — Euno (co-founder Sarah Levy) as the "AI context platform" remediation named here
-- [[data-engineering/data-modeling-meaning|Meaning in Data Modeling]] — semantics as the missing foundation
-- [[data-engineering/ai-impact-on-data-engineering|AI's Impact on Data Engineering]] — the 2026 landscape
-- [[software-engineering/engineering-craft|Engineering Craft]] — the fundamentals discipline vibe engineering erodes
-- [[ai-engineering/vibe-coding|Vibe Coding]] — the analogous concept in software development (different domain, shared pattern)
+- [Data Work in the AI Transition](/data-engineering/data-work-in-the-ai-transition.md) — synthesis: this is the *skills*-scale instance of Reis's one argument (with tokenmaxxing and the 1905 analogy)
+- [Tokenmaxxing](/productivity/tokenmaxxing.md) — Reis's sibling diagnosis: vibe engineering skips the theory; tokenmaxxing mistakes output volume for value
+- [AI Transition Economics (1905)](/ai-business/ai-transition-economics.md) — Reis's macro frame: the same "build without rethinking" at the org/architecture level ("swap the motor, not the factory")
+- [dbt Summit 2026](/data-engineering/sources/dbt-summit-2026-speakers.md) — Euno (co-founder Sarah Levy) as the "AI context platform" remediation named here
+- [Meaning in Data Modeling](/data-engineering/data-modeling-meaning.md) — semantics as the missing foundation
+- [AI's Impact on Data Engineering](/data-engineering/ai-impact-on-data-engineering.md) — the 2026 landscape
+- [Engineering Craft](/software-engineering/engineering-craft.md) — the fundamentals discipline vibe engineering erodes
+- [Vibe Coding](/ai-engineering/vibe-coding.md) — the analogous concept in software development (different domain, shared pattern)
 
 ---
 

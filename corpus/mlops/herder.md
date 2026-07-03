@@ -68,7 +68,7 @@ Relevant config [^src1]:
 - **Show agent labels on pane borders** — displays the detected agent name on the pane.
 - Supported agents are listed in the settings **integrations** tab (Hermes and Codex are shown as supported; Grok is not) [^src1].
 
-This makes Herder a candidate persistence/observability layer for the same long-running-agent workflows that today run on [[mlops/tmux|tmux]] — see [[ai-engineering/long-running-agents|Long-Running Agents]].
+This makes Herder a candidate persistence/observability layer for the same long-running-agent workflows that today run on [tmux](/mlops/tmux.md) — see [Long-Running Agents](/ai-engineering/long-running-agents.md).
 
 ## Remote mode (thin client)
 
@@ -91,12 +91,12 @@ The **Herda Plus** plugin (requires v7.0) adds two fuzzy-list systems [^src1]:
 
 ## See also
 
-- [[mlops/tmux|tmux]] — the incumbent Herder is modeled on and competes with; tmux's VPS-persistence pattern applies equally here
-- [[mlops/terminal-and-shell|Terminal & Shell]] — the desktop terminal/shell layer Herder runs inside
-- [[mlops/cli-tools|CLI Tools]] — lazygit, yazi, fzf and the other tools Herder's custom commands invoke
-- [[mlops/terax|Terax]] — an adjacent "AI-native terminal" entity in the same dev-setup cluster
-- [[ai-engineering/long-running-agents|Long-Running Agents]] — why agent-aware, persistent multiplexers matter
-- [[mlops/README|MLOps hub]]
+- [tmux](/mlops/tmux.md) — the incumbent Herder is modeled on and competes with; tmux's VPS-persistence pattern applies equally here
+- [Terminal & Shell](/mlops/terminal-and-shell.md) — the desktop terminal/shell layer Herder runs inside
+- [CLI Tools](/mlops/cli-tools.md) — lazygit, yazi, fzf and the other tools Herder's custom commands invoke
+- [Terax](/mlops/terax.md) — an adjacent "AI-native terminal" entity in the same dev-setup cluster
+- [Long-Running Agents](/ai-engineering/long-running-agents.md) — why agent-aware, persistent multiplexers matter
+- [MLOps hub](/mlops/README.md)
 
 ---
 

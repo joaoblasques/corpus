@@ -58,7 +58,7 @@ confidence: 0.9
 | Shell | **zsh** | macOS default; check with `echo $0` [^src1] |
 | Prompt theme | **Powerlevel10k** | `p10k configure` wizard; lean/rainbow styles [^src1][^src2] |
 | Font | **MesloLGS Nerd Font** | required for prompt icons to render [^src1][^src2] |
-| Multiplexer | tmux | windows/panes/sessions — see [[mlops/cli-tools|CLI Tools]] |
+| Multiplexer | tmux | windows/panes/sessions — see [CLI Tools](/mlops/cli-tools.md) |
 
 ## Alacritty configuration
 
@@ -156,7 +156,7 @@ Zinit's `ice` command adds modifiers to the next plugin call (like "ice added to
 | | `uptime` | How long since last boot |
 | | `shutdown -r now` | Restart from terminal |
 
-**Homebrew** is the prerequisite for most modern tools on macOS — "the missing package manager" [^src6]. See [[mlops/dev-environment-stack|Dev Environment Stack]].
+**Homebrew** is the prerequisite for most modern tools on macOS — "the missing package manager" [^src6]. See [Dev Environment Stack](/mlops/dev-environment-stack.md).
 
 **TouchID for sudo** (requires `/etc/pam.d/sudo` edit): add `auth sufficient pam_tid.so` below the first comment line — `sudo` prompts use Touch ID instead of the password [^src6].
 
@@ -164,7 +164,7 @@ Zinit's `ice` command adds modifiers to the next plugin call (like "ice added to
 
 Beyond traditional terminal emulators, a class of AI-native terminals is emerging:
 
-- **[[mlops/terax|Terax]]** — open-source, Tauri 2 + Rust, ~7 MB, <300 ms cold start; bundles terminal + code editor + file sidebar + browser + AI agent (Vercel AI SDK, any model). Agent proposes edits as reviewable diffs. Reviewer compared it favorably to Warp. Pre-1.0 with some rough edges (NeoVim crash, no sidebar keyboard nav) [^src4].
+- **[Terax](/mlops/terax.md)** — open-source, Tauri 2 + Rust, ~7 MB, <300 ms cold start; bundles terminal + code editor + file sidebar + browser + AI agent (Vercel AI SDK, any model). Agent proposes edits as reviewable diffs. Reviewer compared it favorably to Warp. Pre-1.0 with some rough edges (NeoVim crash, no sidebar keyboard nav) [^src4].
 - **Warp** — commercial AI terminal; 58k+ GitHub stars; more mature but closed-source and VC-backed.
 - **WezTerm** — fast, cross-platform, GPU-accelerated (used by the Terax reviewer as their personal choice alongside NeoVim) [^src4].
 - **Ghostty** — modern cross-platform terminal emulator, referenced alongside WezTerm and NeoVim as high-performance alternatives.
@@ -173,13 +173,13 @@ The key distinction between tools like Terax and multi-agent setups via tmux: Te
 
 ## See also
 
-- [[mlops/cli-tools|CLI Tools]] — fzf, zoxide, eza, bat, tmux, etc., installed into this environment
-- [[mlops/tmux|tmux]] — terminal multiplexer for persistent sessions and multi-agent workflows
-- [[mlops/terax|Terax]] — AI-native terminal (Tauri 2 + Rust, 7 MB, built-in agent)
-- [[mlops/vps-for-agents|VPS for Agents]] — running terminal-based agents on a remote always-on server
-- [[mlops/dev-environment-stack|Dev Environment Stack]] — the shell + OS is Layer 1; Homebrew is the Layer-2 package manager here
-- [[mlops/git|Git]] — dotfiles (incl. this config) are version-controlled with git
-- [[mlops/README|MLOps hub]]
+- [CLI Tools](/mlops/cli-tools.md) — fzf, zoxide, eza, bat, tmux, etc., installed into this environment
+- [tmux](/mlops/tmux.md) — terminal multiplexer for persistent sessions and multi-agent workflows
+- [Terax](/mlops/terax.md) — AI-native terminal (Tauri 2 + Rust, 7 MB, built-in agent)
+- [VPS for Agents](/mlops/vps-for-agents.md) — running terminal-based agents on a remote always-on server
+- [Dev Environment Stack](/mlops/dev-environment-stack.md) — the shell + OS is Layer 1; Homebrew is the Layer-2 package manager here
+- [Git](/mlops/git.md) — dotfiles (incl. this config) are version-controlled with git
+- [MLOps hub](/mlops/README.md)
 
 ---
 

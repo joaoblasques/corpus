@@ -32,7 +32,7 @@ Marina's formulation: "Reason about what to do next, Act (often by calling a too
 Most production agents sit in the middle (semi-autonomous) [^src1].
 
 ### Context engineering for agents
-"It's not the model alone, it's how you engineer the context around it" [^src1]. Context includes: background of the task, agent's role, memory of past actions, available tools. Context steers non-deterministic models toward consistent outputs [^src1]. See [[ai-engineering/context-engineering|Context Engineering]].
+"It's not the model alone, it's how you engineer the context around it" [^src1]. Context includes: background of the task, agent's role, memory of past actions, available tools. Context steers non-deterministic models toward consistent outputs [^src1]. See [Context Engineering](/ai-engineering/context-engineering.md).
 
 ### Task decomposition methodology
 1. Start with how *you* would do the task
@@ -72,13 +72,13 @@ Good tools: error handling, caching (memoize identical inputs), async support, v
 
 ## Pages populated
 
-- [[ai-engineering/ai-agent|AI Agent]] — ReAct loop name, use-case matrix, task decomposition, guardrails
-- [[ai-engineering/agent-evaluation|Agent Evaluation]] — trace inspection, component + end-to-end eval
-- [[ai-engineering/tool-calling|Tool Calling]] — tool anatomy (interface vs implementation), tool design best practices
+- [AI Agent](/ai-engineering/ai-agent.md) — ReAct loop name, use-case matrix, task decomposition, guardrails
+- [Agent Evaluation](/ai-engineering/agent-evaluation.md) — trace inspection, component + end-to-end eval
+- [Tool Calling](/ai-engineering/tool-calling.md) — tool anatomy (interface vs implementation), tool design best practices
 
 ## Related sources
 
-- [[ai-engineering/sources/nick-saraev-ai-agents-course-2026|Nick Saraev — AI Agents Full Course 2026]] — companion 2026 agent course; agrees on the core loop (Saraev's observe→think→act ≈ Wyss's ReAct) but emphasizes multi-model MCP orchestration and self-modifying instruction files over Wyss's evaluation/guardrails focus
+- [Nick Saraev — AI Agents Full Course 2026](/ai-engineering/sources/nick-saraev-ai-agents-course-2026.md) — companion 2026 agent course; agrees on the core loop (Saraev's observe→think→act ≈ Wyss's ReAct) but emphasizes multi-model MCP orchestration and self-modifying instruction files over Wyss's evaluation/guardrails focus
 
 ---
 

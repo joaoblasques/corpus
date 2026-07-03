@@ -111,9 +111,9 @@ Note: the source is from an author who advocates for this approach based on pers
 
 ## Related
 
-- [[data-engineering/dbt|dbt]] — provides the transformed models that BI as Code dashboards query
-- [[data-engineering/semantic-layer|Semantic Layer]] — complements BI as Code by providing a shared metric layer
-- [[data-engineering/pipeline-layers|Pipeline Layers]] — the marts layer that BI tools sit on top of
-- [[data-engineering/cicd-for-data-infrastructure|CI/CD for Data Infrastructure]] — the same Git-based workflow applies to dashboard deployment
+- [dbt](/data-engineering/dbt.md) — provides the transformed models that BI as Code dashboards query
+- [Semantic Layer](/data-engineering/semantic-layer.md) — complements BI as Code by providing a shared metric layer
+- [Pipeline Layers](/data-engineering/pipeline-layers.md) — the marts layer that BI tools sit on top of
+- [CI/CD for Data Infrastructure](/data-engineering/cicd-for-data-infrastructure.md) — the same Git-based workflow applies to dashboard deployment
 
 [^src1]: [BI as Code for Data Engineers: Faster Analytics With SQL & Markdown](../../raw/web/web-bi-as-code-for-data-engineers-faster-analytics-with-sql-mark.md)

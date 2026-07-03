@@ -36,10 +36,10 @@ Contrasted with sibling tools in the ecosystem:
 
 ## See also
 
-- [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] — the patterns LangGraph is built to implement
-- [[ai-engineering/ai-agent|AI Agent]] — single-agent foundation
-- [[ai-engineering/langsmith|LangSmith]] — sibling LangChain product for agent observability and evaluation
+- [Multi-Agent Systems](/ai-engineering/multi-agent-systems.md) — the patterns LangGraph is built to implement
+- [AI Agent](/ai-engineering/ai-agent.md) — single-agent foundation
+- [LangSmith](/ai-engineering/langsmith.md) — sibling LangChain product for agent observability and evaluation
 
 ---
 
-[^src1]: [[03_Resources/Study Notes/AI Agents - Complete Course Beginner to Pro|AI Agents - Complete Course Beginner to Pro]]
+[^src1]: [AI Agents - Complete Course Beginner to Pro](/03_Resources/Study Notes/AI Agents - Complete Course Beginner to Pro.md)

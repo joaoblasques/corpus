@@ -35,11 +35,11 @@ updated: 2026-06-17
 
 # Algorithms (Strategies, Not Tricks)
 
-**TL;DR** — Algorithms are best learned as **strategies to reach for**, not solutions to memorize. "The goal is not to memorize every algorithm as a separate trick… [it's] to understand the strategy behind each one, so when a similar problem shows up, you know what to reach for" [^src2]. The recurring strategies: **recursion** (break a problem into smaller copies of itself), **divide and conquer** (e.g. binary search halves the search space), and **dynamic programming / memoization** (cache results so you never recompute the same subproblem) [^src1][^src2]. This is the algorithmic companion to [[software-engineering/data-structures|Data Structures and Big O Notation]].
+**TL;DR** — Algorithms are best learned as **strategies to reach for**, not solutions to memorize. "The goal is not to memorize every algorithm as a separate trick… [it's] to understand the strategy behind each one, so when a similar problem shows up, you know what to reach for" [^src2]. The recurring strategies: **recursion** (break a problem into smaller copies of itself), **divide and conquer** (e.g. binary search halves the search space), and **dynamic programming / memoization** (cache results so you never recompute the same subproblem) [^src1][^src2]. This is the algorithmic companion to [Data Structures and Big O Notation](/software-engineering/data-structures.md).
 
 ## The six interview-relevant categories
 
-The source frames the curriculum as **six key types of algorithms** worth knowing for any CS course or technical interview: recursion, linear/binary search, sorting algorithms, pathfinding, minimum spanning tree, and dynamic programming [^src1]. The presenter is explicit that the point is strategy acquisition, not memorization: the goal is "to teach you how recursion works and how you can apply this to any arbitrary problem" so the strategies live "in your tool belt" for harder problems later [^src1]. The categories below build on the recursion / binary-search / DP core already detailed; the remaining three — sorting, pathfinding (Dijkstra), and MST (Prim's) — operate over the [[software-engineering/data-structures|data structures]] (arrays, heaps, graphs) catalogued separately.
+The source frames the curriculum as **six key types of algorithms** worth knowing for any CS course or technical interview: recursion, linear/binary search, sorting algorithms, pathfinding, minimum spanning tree, and dynamic programming [^src1]. The presenter is explicit that the point is strategy acquisition, not memorization: the goal is "to teach you how recursion works and how you can apply this to any arbitrary problem" so the strategies live "in your tool belt" for harder problems later [^src1]. The categories below build on the recursion / binary-search / DP core already detailed; the remaining three — sorting, pathfinding (Dijkstra), and MST (Prim's) — operate over the [data structures](/software-engineering/data-structures.md) (arrays, heaps, graphs) catalogued separately.
 
 ## Recursion
 
@@ -86,11 +86,11 @@ The source splits the algorithms by efficiency [^src1]:
 | Heap sort | O(n log n) | No (uses a heap) |
 | Quick sort | O(n log n) | No |
 
-Practical takeaway: selection / insertion / bubble are the simple-but-slow O(n²) family; merge / heap / quick are the efficient O(n log n) family. Because languages typically implement quick sort or merge sort under the hood (e.g. JavaScript's built-in `sort`), "we assume that when we need to sort something that it will run in… O(n log n)" — which is exactly the precondition the [[software-engineering/algorithms|binary search]] above trades against [^src1].
+Practical takeaway: selection / insertion / bubble are the simple-but-slow O(n²) family; merge / heap / quick are the efficient O(n log n) family. Because languages typically implement quick sort or merge sort under the hood (e.g. JavaScript's built-in `sort`), "we assume that when we need to sort something that it will run in… O(n log n)" — which is exactly the precondition the [binary search](/software-engineering/algorithms.md) above trades against [^src1].
 
 ## Pathfinding — Dijkstra's algorithm
 
-Dijkstra's is a pathfinding algorithm over a **weighted graph** that finds "the smallest distance and path from any starting vertex to every other vertex in the graph" [^src1]. Run from a start vertex A, it yields both the shortest distance and the shortest path to every other vertex [^src1]. The motivation is scale: a human can trace shortest paths on a tiny graph, but past ~20–50 nodes it becomes infeasible by hand, so "having computer systems that can… determine the shortest possible path in a graph is actually very powerful" — used in "millions of different programs," GPS routing being the canonical example [^src1]. Operates over the graph structures in [[software-engineering/data-structures|Data Structures and Big O Notation]].
+Dijkstra's is a pathfinding algorithm over a **weighted graph** that finds "the smallest distance and path from any starting vertex to every other vertex in the graph" [^src1]. Run from a start vertex A, it yields both the shortest distance and the shortest path to every other vertex [^src1]. The motivation is scale: a human can trace shortest paths on a tiny graph, but past ~20–50 nodes it becomes infeasible by hand, so "having computer systems that can… determine the shortest possible path in a graph is actually very powerful" — used in "millions of different programs," GPS routing being the canonical example [^src1]. Operates over the graph structures in [Data Structures and Big O Notation](/software-engineering/data-structures.md).
 
 ## Minimum spanning tree — Prim's algorithm
 
@@ -100,12 +100,12 @@ A **spanning tree** of a graph is "a set of edges such that they connect all of 
 
 ## Why this still matters under AI tooling
 
-"You may use built-in tools most of the time, but understanding algorithms still matters because the same ideas show up everywhere: slow code, repeated work, structured data, and simple solutions that do more work than they should" [^src2]. The strategies-not-tricks framing is also interview advice — these are "the parts of the algorithms you actually need to know… [for] technical interviews" [^src1]. This connects to the fundamentals-under-AI argument in [[software-engineering/ai-assisted-development|AI-Assisted Development]] and the interview-fluency point in [[ai-business/technical-career|Navigating a Technical Career]] (practice DSA without autocomplete).
+"You may use built-in tools most of the time, but understanding algorithms still matters because the same ideas show up everywhere: slow code, repeated work, structured data, and simple solutions that do more work than they should" [^src2]. The strategies-not-tricks framing is also interview advice — these are "the parts of the algorithms you actually need to know… [for] technical interviews" [^src1]. This connects to the fundamentals-under-AI argument in [AI-Assisted Development](/software-engineering/ai-assisted-development.md) and the interview-fluency point in [Navigating a Technical Career](/ai-business/technical-career.md) (practice DSA without autocomplete).
 
 ## See also
 
-- [[software-engineering/data-structures|Data Structures and Big O Notation]] — the complexity classes (O(1)/O(log n)/O(n)/O(n²)) these strategies trade in, and the structures (stacks, trees, hashmaps) the algorithms operate on.
-- [[software-engineering/software-design-principles|Software Design Principles]] — simplicity as a design value mirrors "don't do more work than needed."
+- [Data Structures and Big O Notation](/software-engineering/data-structures.md) — the complexity classes (O(1)/O(log n)/O(n)/O(n²)) these strategies trade in, and the structures (stacks, trees, hashmaps) the algorithms operate on.
+- [Software Design Principles](/software-engineering/software-design-principles.md) — simplicity as a design value mirrors "don't do more work than needed."
 
 [^src1]: [Famous Computer Science Algorithms (recursion, search, DP)](../../raw/youtube/youtube-fkcfaapypuq.md) (Tech With Tim; fetched via the source email)
 [^src2]: [you're learning algorithms the wrong way](../../raw/email/email-2026-06-08-youre-learning-algorithms-the-wrong-way.md) (Tech With Tim newsletter)

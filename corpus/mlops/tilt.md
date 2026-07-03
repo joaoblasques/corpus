@@ -53,10 +53,10 @@ Complementary to production GitOps tools (Argo CD, Flux). Tilt owns the *develop
 
 ## See also
 
-- [[mlops/dev-environment-stack|Dev Environment Stack]] — the environment Tilt runs within
-- [[mlops/ci-cd-for-ml|CI/CD for ML]] — CI/CD in the broader pipeline
-- [[mlops/infrastructure-as-code|Infrastructure as Code]] — Terraform for the cluster itself
-- [[mlops/README|MLOps hub]]
+- [Dev Environment Stack](/mlops/dev-environment-stack.md) — the environment Tilt runs within
+- [CI/CD for ML](/mlops/ci-cd-for-ml.md) — CI/CD in the broader pipeline
+- [Infrastructure as Code](/mlops/infrastructure-as-code.md) — Terraform for the cluster itself
+- [MLOps hub](/mlops/README.md)
 
 ---
 

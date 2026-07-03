@@ -20,7 +20,7 @@ updated: 2026-06-26
 
 # Cursor
 
-**TL;DR** — Cursor is an AI code editor (a VS Code fork) whose draw is not the models — it runs the same frontier models as everyone else — but the **coding harness the Cursor team builds around them**. One practitioner's stated reason for choosing it over Claude Code or Codex: "while it's using the same models, it has a coding harness… that I just find works a lot better" [^src1]. It is the recurring counterpoint to [[ai-engineering/claude-code|Claude Code]] in the [[ai-engineering/agentic-coding|agentic coding]] tool landscape, and was cited as a breakout commercial success ($100M in its first year, ~$2B valuation) in [[ai-business/ai-business-models|AI Business Models]].
+**TL;DR** — Cursor is an AI code editor (a VS Code fork) whose draw is not the models — it runs the same frontier models as everyone else — but the **coding harness the Cursor team builds around them**. One practitioner's stated reason for choosing it over Claude Code or Codex: "while it's using the same models, it has a coding harness… that I just find works a lot better" [^src1]. It is the recurring counterpoint to [Claude Code](/ai-engineering/claude-code.md) in the [agentic coding](/ai-engineering/agentic-coding.md) tool landscape, and was cited as a breakout commercial success ($100M in its first year, ~$2B valuation) in [AI Business Models](/ai-business/ai-business-models.md).
 
 ## Harness, not model
 
@@ -34,19 +34,19 @@ Model-by-task practice: a frontier Claude model for building from scratch, switc
 ## Workflow surfaces
 
 - **Views**: a default chat-only "agents" view vs a file-visible view; the practitioner prefers seeing the code being written rather than just chatting [^src1].
-- **Rules** — Cursor generates rule files in a `rules/` folder that are always injected into the prompt (e.g. "always commit after any major change"), the Cursor analogue of [[ai-engineering/claude-md-conventions|CLAUDE.md conventions]] [^src1].
+- **Rules** — Cursor generates rule files in a `rules/` folder that are always injected into the prompt (e.g. "always commit after any major change"), the Cursor analogue of [CLAUDE.md conventions](/ai-engineering/claude-md-conventions.md) [^src1].
 - **Agent skills + MCP servers** — install a tool's skills with one terminal command and they appear in Cursor; MCP servers are added to `.cursor/mcp` (GitHub MCP, ImageKit MCP shown), then connected/authenticated via the command palette (`Cmd/Ctrl+Shift+P` → "MCP: Open MCP Settings") [^src1]. Installing a vendor's skills + MCP server means the agent learns the tool without the user pasting docs.
 - **Multi-agent / multitask mode** — spins up multiple sub-agents in parallel; useful on a well-structured project but "sometimes it just goes crazy… makes it a little bit unmaintainable" [^src1].
 - **Dictation** — Whisper Flow voice-to-text works natively, including file tagging, to speed up long planning prompts [^src1].
 
 ## See also
 
-- [[ai-engineering/agentic-coding|Agentic Coding]] — the workflow discipline (research-first, context files, skills+MCP, iterative prompt-and-debug) Cursor is used inside; see the "real AI coding workflow" section
-- [[ai-engineering/claude-code|Claude Code]] — the CLI agent Cursor is most often compared against
-- [[ai-engineering/mcp|MCP]] — the connector layer Cursor adds via `.cursor/mcp`
-- [[ai-engineering/agent-skills|Agent Skills]] — the installable skills Cursor consumes
-- [[ai-engineering/vibe-coding|Vibe Coding]] · [[ai-engineering/spec-driven-development|Spec-Driven Development]] — the plan-first posture the workflow depends on
-- [[ai-engineering/README|AI Engineering hub]]
+- [Agentic Coding](/ai-engineering/agentic-coding.md) — the workflow discipline (research-first, context files, skills+MCP, iterative prompt-and-debug) Cursor is used inside; see the "real AI coding workflow" section
+- [Claude Code](/ai-engineering/claude-code.md) — the CLI agent Cursor is most often compared against
+- [MCP](/ai-engineering/mcp.md) — the connector layer Cursor adds via `.cursor/mcp`
+- [Agent Skills](/ai-engineering/agent-skills.md) — the installable skills Cursor consumes
+- [Vibe Coding](/ai-engineering/vibe-coding.md) · [Spec-Driven Development](/ai-engineering/spec-driven-development.md) — the plan-first posture the workflow depends on
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

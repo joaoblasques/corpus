@@ -72,29 +72,29 @@ The optimizer (called the "compiler," Oracle-vernacular) is **Cascades-style top
 Snowflake's storage story expanded over time [^src1]:
 - **Snowpipe** — a Kafka-style endpoint ingesting Arrow-format data (written into the proprietary format).
 - **External tables** (2021) — read data not in the proprietary format (Hive metastore catalogs, Parquet).
-- **Apache Iceberg** support (2022) — Parquet + Iceberg metadata; simple insert/update/delete. See [[data-engineering/apache-iceberg|Apache Iceberg]], [[data-engineering/open-table-formats|Open Table Formats]].
-- **Hybrid tables / Unistore** (2022) — a full transactional **row store** inside Snowflake; rows land log-structured, then background compaction converts to columnar (a fracture-mirrors / HTAP approach merging row + column data at query time) [^src1]. Compare [[data-engineering/mondaydb|mondayDB]], also a DuckDB-powered HTAP design.
+- **Apache Iceberg** support (2022) — Parquet + Iceberg metadata; simple insert/update/delete. See [Apache Iceberg](/data-engineering/apache-iceberg.md), [Open Table Formats](/data-engineering/open-table-formats.md).
+- **Hybrid tables / Unistore** (2022) — a full transactional **row store** inside Snowflake; rows land log-structured, then background compaction converts to columnar (a fracture-mirrors / HTAP approach merging row + column data at query time) [^src1]. Compare [mondayDB](/data-engineering/mondaydb.md), also a DuckDB-powered HTAP design.
 
 ## The Databricks vs Snowflake benchmark war (2021)
 
-Databricks published audited TPC-DS results (Nov 2021) claiming the fastest implementation ever, with a graph beating Snowflake; the two French founders rebutted that Databricks ran Snowflake wrong [^src1]. The crux: Snowflake's published numbers run on data **already ingested into the proprietary format with micro-partition re-clustering done** — preparation that official TPC rules require counting in the measured time — whereas the Databricks/Barcelona run threw raw TPC-DS files at it without preparation [^src1]. Net: a win for Databricks' positioning as a high-performance warehouse (see [[data-engineering/databricks|Databricks]]). Caveat: vendor benchmarks carry well-known TPC-specific optimization tricks ("Volkswagen-style" test detection) [^src1].
+Databricks published audited TPC-DS results (Nov 2021) claiming the fastest implementation ever, with a graph beating Snowflake; the two French founders rebutted that Databricks ran Snowflake wrong [^src1]. The crux: Snowflake's published numbers run on data **already ingested into the proprietary format with micro-partition re-clustering done** — preparation that official TPC rules require counting in the measured time — whereas the Databricks/Barcelona run threw raw TPC-DS files at it without preparation [^src1]. Net: a win for Databricks' positioning as a high-performance warehouse (see [Databricks](/data-engineering/databricks.md)). Caveat: vendor benchmarks carry well-known TPC-specific optimization tricks ("Volkswagen-style" test detection) [^src1].
 
 ## Cross-warehouse view
 
-A second source (Vu Trinh's cloud-warehouse internals survey) corroborates and frames Snowflake against its peers [^src2]: founded **July 2012** by two ex-Oracle engineers plus VectorWise co-founder Marcin Żukowski, built in **C++**, separating compute (proprietary shared-nothing engine on cloud VMs) from storage (S3/GCS) with local-disk caching [^src2]. Distinctively, Snowflake **avoids shuffle-based execution** — workers exchange data directly with one another — unlike BigQuery's Dremel or Databricks' Photon [^src2]. Its **Virtual Warehouses** are abstract "T-shirt sizes" (X-Small→XX-Large); each query runs on exactly one VW with non-shared nodes for performance isolation [^src2]. The worker cache stores **file headers + specific columns** (not whole files), under LRU, and uses **consistent hashing** so queries hitting the same data land on the same node; **file stealing** (reading stolen files from S3, not the busy peer) handles skew [^src2]. Storage uses large immutable files with **min-max-based pruning** [^src2]. See [[data-engineering/cloud-data-warehouse-internals|Cloud Data Warehouse Internals]] for the four-way comparison and [[data-engineering/bigquery|BigQuery]]/[[data-engineering/redshift|Redshift]] for the peers.
+A second source (Vu Trinh's cloud-warehouse internals survey) corroborates and frames Snowflake against its peers [^src2]: founded **July 2012** by two ex-Oracle engineers plus VectorWise co-founder Marcin Żukowski, built in **C++**, separating compute (proprietary shared-nothing engine on cloud VMs) from storage (S3/GCS) with local-disk caching [^src2]. Distinctively, Snowflake **avoids shuffle-based execution** — workers exchange data directly with one another — unlike BigQuery's Dremel or Databricks' Photon [^src2]. Its **Virtual Warehouses** are abstract "T-shirt sizes" (X-Small→XX-Large); each query runs on exactly one VW with non-shared nodes for performance isolation [^src2]. The worker cache stores **file headers + specific columns** (not whole files), under LRU, and uses **consistent hashing** so queries hitting the same data land on the same node; **file stealing** (reading stolen files from S3, not the busy peer) handles skew [^src2]. Storage uses large immutable files with **min-max-based pruning** [^src2]. See [Cloud Data Warehouse Internals](/data-engineering/cloud-data-warehouse-internals.md) for the four-way comparison and [BigQuery](/data-engineering/bigquery.md)/[Redshift](/data-engineering/redshift.md) for the peers.
 
 ## Related
 
-- [[data-engineering/cloud-data-warehouse-internals|Cloud Data Warehouse Internals]] — BigQuery/Snowflake/Databricks/Redshift compared
-- [[data-engineering/bigquery|BigQuery]] · [[data-engineering/redshift|Redshift]] — the other shared-disk pioneers
-- [[data-engineering/databricks|Databricks]] — the competing lakehouse platform; benchmark rivalry
-- [[data-engineering/apache-iceberg|Apache Iceberg]] · [[data-engineering/open-table-formats|Open Table Formats]] — external/Iceberg table support
-- [[data-engineering/parquet|Parquet]] — the open analogue of Snowflake's proprietary PAX format
-- [[data-engineering/duckdb|DuckDB]] — embedded OLAP engine covered in the same lecture series
-- [[data-engineering/apache-spark|Apache Spark]] — Spark SQL / Photon, the contrasting "random files on S3" model
-- [[data-engineering/query-engine-routing|Query-Engine Routing]] — multi-engine access over open formats
-- [[data-engineering/mondaydb|mondayDB]] — another HTAP serving-layer design
-- [[data-engineering/README|Data Engineering hub]]
+- [Cloud Data Warehouse Internals](/data-engineering/cloud-data-warehouse-internals.md) — BigQuery/Snowflake/Databricks/Redshift compared
+- [BigQuery](/data-engineering/bigquery.md) · [Redshift](/data-engineering/redshift.md) — the other shared-disk pioneers
+- [Databricks](/data-engineering/databricks.md) — the competing lakehouse platform; benchmark rivalry
+- [Apache Iceberg](/data-engineering/apache-iceberg.md) · [Open Table Formats](/data-engineering/open-table-formats.md) — external/Iceberg table support
+- [Parquet](/data-engineering/parquet.md) — the open analogue of Snowflake's proprietary PAX format
+- [DuckDB](/data-engineering/duckdb.md) — embedded OLAP engine covered in the same lecture series
+- [Apache Spark](/data-engineering/apache-spark.md) — Spark SQL / Photon, the contrasting "random files on S3" model
+- [Query-Engine Routing](/data-engineering/query-engine-routing.md) — multi-engine access over open formats
+- [mondayDB](/data-engineering/mondaydb.md) — another HTAP serving-layer design
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

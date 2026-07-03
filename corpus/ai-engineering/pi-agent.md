@@ -71,7 +71,7 @@ Extensions are installed as files in `.pi/extensions/` and are loaded automatica
 
 Pi skills follow the same SKILL.md format as Claude Code skills — a directory with a `SKILL.md` frontmatter + body [^src1]. Invoked with a slash command: `/my-skill`.
 
-The key difference from Claude Code: Pi has no built-in skills. Every skill must be written or imported. This forces intentionality — you install only what you use, and you understand what you're installing. See [[ai-engineering/agent-skills|Agent Skills]] for the general discipline.
+The key difference from Claude Code: Pi has no built-in skills. Every skill must be written or imported. This forces intentionality — you install only what you use, and you understand what you're installing. See [Agent Skills](/ai-engineering/agent-skills.md) for the general discipline.
 
 ## System prompt customization
 
@@ -81,7 +81,7 @@ Pi's system prompt is fully replaceable (not just appendable) [^src1]. Workflow:
 2. Modify to match your project or team conventions
 3. Set `PI_SYSTEM_PROMPT` env var or pass via `--system-prompt` flag
 
-This makes Pi suitable for creating **specialized agents**: replace the default system prompt with a domain-specific one (security auditor, database engineer, API designer) and Pi becomes that specialist. See the "Specialist agent profiles" pattern in [[ai-engineering/agent-skills|Agent Skills]].
+This makes Pi suitable for creating **specialized agents**: replace the default system prompt with a domain-specific one (security auditor, database engineer, API designer) and Pi becomes that specialist. See the "Specialist agent profiles" pattern in [Agent Skills](/ai-engineering/agent-skills.md).
 
 ## Model support
 
@@ -119,12 +119,12 @@ From the 2026 coding agent survey [^src2]:
 
 ## See also
 
-- [[ai-engineering/agent-skills|Agent Skills]] — Pi skill format is compatible with the SKILL.md open standard
-- [[ai-engineering/agentic-coding|Agentic Coding]] — survey data on Pi adoption and comparison context
-- [[ai-engineering/claude-code|Claude Code]] — the primary alternative; comparison table above
-- [[ai-engineering/agent-harness|Agent Harness]] — minimal vs. maximal harness philosophy
-- [[ai-engineering/gemini-cli|Gemini CLI]] — another open-source coding agent alternative
-- [[ai-engineering/README|AI Engineering hub]]
+- [Agent Skills](/ai-engineering/agent-skills.md) — Pi skill format is compatible with the SKILL.md open standard
+- [Agentic Coding](/ai-engineering/agentic-coding.md) — survey data on Pi adoption and comparison context
+- [Claude Code](/ai-engineering/claude-code.md) — the primary alternative; comparison table above
+- [Agent Harness](/ai-engineering/agent-harness.md) — minimal vs. maximal harness philosophy
+- [Gemini CLI](/ai-engineering/gemini-cli.md) — another open-source coding agent alternative
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 
@@ -156,7 +156,7 @@ JSONL format (one JSON object per line) makes appending cheap — no need to rew
 
 ## RPC and SDK access mode
 
-Beyond the interactive TUI, Pi's agent core is callable programmatically via RPC or an SDK [^src4]. This makes Pi embeddable in larger systems — e.g. a product (like Boring UI, see [[ai-engineering/agent-harness|Agent Harness]]) can use Pi as its internal agent runtime and drive it via the SDK rather than through the terminal [^src4].
+Beyond the interactive TUI, Pi's agent core is callable programmatically via RPC or an SDK [^src4]. This makes Pi embeddable in larger systems — e.g. a product (like Boring UI, see [Agent Harness](/ai-engineering/agent-harness.md)) can use Pi as its internal agent runtime and drive it via the SDK rather than through the terminal [^src4].
 
 ## Extensions — the Pi killer feature
 

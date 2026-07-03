@@ -91,7 +91,7 @@ The jump from individual decisions to **game theory** happens the moment your op
 
 ## Related
 
-See [[productivity/mental-models|Mental Models]] for complementary heuristic frameworks (Circle of Competence, Ladder of Inference). The **Test** and **Own** moves in the [[productivity/learning-to-learn|ACTOR framework]] are calibration tools for beliefs — forming judgments in the face of incomplete information. The VNM framework is also foundational in [[productivity/working-with-stakeholders|stakeholder negotiations]] where outcome preferences and uncertainty trade-offs must be made explicit.
+See [Mental Models](/productivity/mental-models.md) for complementary heuristic frameworks (Circle of Competence, Ladder of Inference). The **Test** and **Own** moves in the [ACTOR framework](/productivity/learning-to-learn.md) are calibration tools for beliefs — forming judgments in the face of incomplete information. The VNM framework is also foundational in [stakeholder negotiations](/productivity/working-with-stakeholders.md) where outcome preferences and uncertainty trade-offs must be made explicit.
 
 ---
 

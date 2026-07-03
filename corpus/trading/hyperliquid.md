@@ -60,6 +60,6 @@ Workflow demonstrated live [^src1]:
 4. Compares profitable vs. losing wallets; cross-references positions token by token
 5. Identifies tokens where smart money and losing traders are on **opposite sides** — that divergence is the signal
 
-Related: [[trading/ai-trading-agents|AI Trading Agents]], [[trading/tradingview-pine-script|TradingView & Pine Script]]
+Related: [AI Trading Agents](/trading/ai-trading-agents.md), [TradingView & Pine Script](/trading/tradingview-pine-script.md)
 
 [^src1]: [How Claude Changes Crypto Trading Forever](../../raw/youtube/youtube-3r7u6q-egP8-how-claude-changes-crypto-trading-forever.md)

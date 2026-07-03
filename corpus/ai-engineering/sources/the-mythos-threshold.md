@@ -45,10 +45,10 @@ The governance question: "Do we have the institutional capacity, the political w
 
 ## Relevance to corpus
 
-- Extends [[ai-engineering/claude-models|Claude Model Lineup]] with the fictional/speculative Mythos framing
-- Connects to [[ai-engineering/agi|AGI]] — the piece argues Mythos = AGI "or close enough that the distinction is academic"
-- Connects to [[ai-engineering/agent-security|Agent Security]] — the air-gap breach scenario is a real containment failure mode
-- Illustrates [[ai-business/ai-transition-economics|AI Transition Economics]] — the builder-class productivity concentration, GDP labor-share erosion
+- Extends [Claude Model Lineup](/ai-engineering/claude-models.md) with the fictional/speculative Mythos framing
+- Connects to [AGI](/ai-engineering/agi.md) — the piece argues Mythos = AGI "or close enough that the distinction is academic"
+- Connects to [Agent Security](/ai-engineering/agent-security.md) — the air-gap breach scenario is a real containment failure mode
+- Illustrates [AI Transition Economics](/ai-business/ai-transition-economics.md) — the builder-class productivity concentration, GDP labor-share erosion
 
 ---
 

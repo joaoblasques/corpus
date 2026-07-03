@@ -93,10 +93,10 @@ Rule: **never roll your own crypto**.
 
 ## Related pages
 
-- [[blockchain/hash-functions|Hash Functions]] — SHA-256 and RIPEMD160 are used in address derivation
-- [[blockchain/bitcoin|Bitcoin]] — how key pairs function as identity in the network
-- [[blockchain/the-cypherpunks|The Cypherpunks]] — the movement that fought for public cryptography access
-- [[blockchain/zero-knowledge-proofs|Zero-Knowledge Proofs]] — **depends-on** the same asymmetric primitives (ECC, discrete log) that underpin SNARKs; Shor's algorithm threatens both
-- [[blockchain/proof-of-work|Proof-of-Work]] — **complements** public-key crypto in Bitcoin: signatures authorize transactions, PoW orders them into consensus
+- [Hash Functions](/blockchain/hash-functions.md) — SHA-256 and RIPEMD160 are used in address derivation
+- [Bitcoin](/blockchain/bitcoin.md) — how key pairs function as identity in the network
+- [The Cypherpunks](/blockchain/the-cypherpunks.md) — the movement that fought for public cryptography access
+- [Zero-Knowledge Proofs](/blockchain/zero-knowledge-proofs.md) — **depends-on** the same asymmetric primitives (ECC, discrete log) that underpin SNARKs; Shor's algorithm threatens both
+- [Proof-of-Work](/blockchain/proof-of-work.md) — **complements** public-key crypto in Bitcoin: signatures authorize transactions, PoW orders them into consensus
 
 [^src1]: [Public-Key Cryptography](../../raw/notes/notes-public-key-cryptography-scrape.md)

@@ -37,7 +37,7 @@ A dbt model that "works" in isolation says nothing about safety; the danger is s
 
 ## Pattern 1 — Catalog-grounded modeling (OpenMetadata + MCP)
 
-A self-contained stack wires [[ai-engineering/claude-code|Claude Code]] to a data stack via **two MCP servers** so the agent has both metadata intelligence and raw data access [^src1]:
+A self-contained stack wires [Claude Code](/ai-engineering/claude-code.md) to a data stack via **two MCP servers** so the agent has both metadata intelligence and raw data access [^src1]:
 
 | MCP server | Purpose | Representative tools |
 |---|---|---|
@@ -55,11 +55,11 @@ Four custom Claude Code skills encode repeatable workflows as slash commands [^s
 
 The same setup is demonstrated end-to-end with four use-case questions — impact analysis on a column rename, data discovery/validation, lineage exploration, and ownership/governance — answered in natural language against the catalogue [^src2]. A Slack bot brings the catalog assistant and skills into channels, with **write operations always requiring explicit confirmation** before any file or catalog change [^src1]. Both Claude Code and Cursor are supported via the same MCP approach [^src2].
 
-> This is the companion deep-dive to the [[ai-engineering/claude-code|Claude Code]]-for-DE tooling map; see [[data-engineering/claude-code-for-data-engineering|Claude Code for Data Engineering]] for the PRD→ERD→dbt workflow and the exposure-enrichment / Metabase-MCP variant.
+> This is the companion deep-dive to the [Claude Code](/ai-engineering/claude-code.md)-for-DE tooling map; see [Claude Code for Data Engineering](/data-engineering/claude-code-for-data-engineering.md) for the PRD→ERD→dbt workflow and the exposure-enrichment / Metabase-MCP variant.
 
 ## Pattern 2 — Staged change-analysis pipeline (SchemaFlow)
 
-SchemaFlow treats a schema change as a multi-stage agent workflow rather than one black-box SQL generator [^src3]. A deceptively simple request — "add a nullable column and backfill it" — can affect "landing tables, staging models, dimensional tables, marts, reporting logic, lineage assumptions, validation checks, rollback procedures, and release sequencing" [^src3]. The pipeline breaks the task into specialized [[ai-engineering/ai-agent|agents]], each producing a typed, inspectable output:
+SchemaFlow treats a schema change as a multi-stage agent workflow rather than one black-box SQL generator [^src3]. A deceptively simple request — "add a nullable column and backfill it" — can affect "landing tables, staging models, dimensional tables, marts, reporting logic, lineage assumptions, validation checks, rollback procedures, and release sequencing" [^src3]. The pipeline breaks the task into specialized [agents](/ai-engineering/ai-agent.md), each producing a typed, inspectable output:
 
 | Stage | Agent | Output |
 |---|---|---|
@@ -91,11 +91,11 @@ A more experimental direction inverts the usual relationship: instead of an agen
 
 ## See also
 
-- [[data-engineering/claude-code-for-data-engineering|Claude Code for Data Engineering]] — the tooling map (Skills/MCPs/Hooks), PRD→ERD→dbt workflow, exposure enrichment
-- [[data-engineering/dbt|dbt]] — the transformation framework these workflows target; exposures and lineage
-- [[data-engineering/dimensional-modeling|Dimensional Modeling]] — the modeling output (grain, dimensions, facts)
-- [[ai-engineering/ai-agent|AI agent]] · [[ai-engineering/mcp|MCP]] · [[ai-engineering/agent-skills|Agent Skills]] — the underlying ai-engineering primitives
-- [[data-engineering/README|Data Engineering hub]]
+- [Claude Code for Data Engineering](/data-engineering/claude-code-for-data-engineering.md) — the tooling map (Skills/MCPs/Hooks), PRD→ERD→dbt workflow, exposure enrichment
+- [dbt](/data-engineering/dbt.md) — the transformation framework these workflows target; exposures and lineage
+- [Dimensional Modeling](/data-engineering/dimensional-modeling.md) — the modeling output (grain, dimensions, facts)
+- [AI agent](/ai-engineering/ai-agent.md) · [MCP](/ai-engineering/mcp.md) · [Agent Skills](/ai-engineering/agent-skills.md) — the underlying ai-engineering primitives
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

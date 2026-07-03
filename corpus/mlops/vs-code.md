@@ -40,7 +40,7 @@ updated: 2026-06-15
 
 ## Integrated terminal
 
-*Terminal → New Terminal* opens a shell rooted at the open folder; on modern macOS the default is zsh [^src1]. You can run commands against the project directory and keep **multiple terminals** open side-by-side (e.g. one for frontend, one for the backend server) [^src1]. See [[mlops/terminal-and-shell|Terminal & Shell]].
+*Terminal → New Terminal* opens a shell rooted at the open folder; on modern macOS the default is zsh [^src1]. You can run commands against the project directory and keep **multiple terminals** open side-by-side (e.g. one for frontend, one for the backend server) [^src1]. See [Terminal & Shell](/mlops/terminal-and-shell.md).
 
 ## Search bar & command palette
 
@@ -60,10 +60,10 @@ Settings apply at two scopes [^src1]:
 
 ## See also
 
-- [[mlops/terminal-and-shell|Terminal & Shell]] — VS Code's integrated terminal runs your configured shell
-- [[mlops/git|Git]] — VS Code's Source Control panel wraps git
-- [[ai-engineering/claude-code|Claude Code]] — terminal-native coding agent, an alternative/complement to an editor like VS Code (ai-engineering)
-- [[mlops/README|MLOps hub]]
+- [Terminal & Shell](/mlops/terminal-and-shell.md) — VS Code's integrated terminal runs your configured shell
+- [Git](/mlops/git.md) — VS Code's Source Control panel wraps git
+- [Claude Code](/ai-engineering/claude-code.md) — terminal-native coding agent, an alternative/complement to an editor like VS Code (ai-engineering)
+- [MLOps hub](/mlops/README.md)
 
 ---
 

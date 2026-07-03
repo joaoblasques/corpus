@@ -61,8 +61,8 @@ Neovim is a fork of Vim that adds Lua scripting, async job control, and a clean 
 
 ## See also
 
-- [[software-engineering/terminal-cli-tools|Terminal / CLI Tools]] — Vim lives in the terminal
-- [[software-engineering/xonsh|Xonsh]] — Python-superset shell where Vim could be integrated as the editor
+- [Terminal / CLI Tools](/software-engineering/terminal-cli-tools.md) — Vim lives in the terminal
+- [Xonsh](/software-engineering/xonsh.md) — Python-superset shell where Vim could be integrated as the editor
 
 ---
 

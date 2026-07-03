@@ -41,8 +41,8 @@ This stack (tRPC + Drizzle + Zod + Next.js) is a common modern TypeScript fullst
 
 ## See also
 
-- [[software-engineering/system-design-fundamentals|System Design Fundamentals]] — API design patterns (REST vs tRPC)
-- [[software-engineering/insforge|InsForge]] — another open-source backend dev tool
+- [System Design Fundamentals](/software-engineering/system-design-fundamentals.md) — API design patterns (REST vs tRPC)
+- [InsForge](/software-engineering/insforge.md) — another open-source backend dev tool
 
 ---
 

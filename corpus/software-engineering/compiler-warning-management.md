@@ -38,7 +38,7 @@ Why not alternatives [^src1]: `#ifndef` spreads build logic into control flow; `
 
 ## See also
 
-- [[software-engineering/README|Software Engineering hub]]
+- [Software Engineering hub](/software-engineering/README.md)
 
 ---
 

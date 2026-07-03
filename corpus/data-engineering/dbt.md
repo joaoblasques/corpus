@@ -130,7 +130,7 @@ dbt projects mirror the database schema structure [^src1]:
 | `models/warehouse/` | `warehouse` | `table` | Joined, enriched, business-logic models |
 | `models/marts/` | `marts` | `table` | Consumption-ready tables for BI tools and end users |
 
-See [[data-engineering/pipeline-layers|Pipeline Layers]] for the architecture pattern this implements.
+See [Pipeline Layers](/data-engineering/pipeline-layers.md) for the architecture pattern this implements.
 
 ## `dbt_project.yml` configuration
 
@@ -192,7 +192,7 @@ exposures:
 - Exposures can be **manual** (YAML) or **automatic** — dbt creates and visualizes downstream exposures for supported integrations, stored in metadata (appear in Catalog) without YAML files [^src3].
 - Reference them in commands with the `exposure:` selector: `dbt run -s +exposure:weekly_jaffle_report` [^src3].
 
-Exposures close the "last mile" of lineage: dbt natively provides model-to-model lineage, while an enriched exposure maps model → dashboard → individual card/column [^src7]. A barebones exposure is "a pointer with no payload" — it links to a dashboard but tells AI tooling nothing about what's inside [^src7]. Enriching exposure descriptions (business purpose, cards, key columns) turns them into a lean data catalog supporting impact analysis without a dedicated metadata platform [^src7]. Caveat: enrichment is a snapshot that **drifts** as dashboards change, so it must be periodically refreshed [^src7]. See [[data-engineering/claude-code-for-data-engineering|Claude Code for Data Engineering]] for the AI-assisted enrichment workflow.
+Exposures close the "last mile" of lineage: dbt natively provides model-to-model lineage, while an enriched exposure maps model → dashboard → individual card/column [^src7]. A barebones exposure is "a pointer with no payload" — it links to a dashboard but tells AI tooling nothing about what's inside [^src7]. Enriching exposure descriptions (business purpose, cards, key columns) turns them into a lean data catalog supporting impact analysis without a dedicated metadata platform [^src7]. Caveat: enrichment is a snapshot that **drifts** as dashboards change, so it must be periodically refreshed [^src7]. See [Claude Code for Data Engineering](/data-engineering/claude-code-for-data-engineering.md) for the AI-assisted enrichment workflow.
 
 > A 2022 critique noted exposures were a promising step but at the time were **manual only**, with "no clear way for vendors to integrate" with them [^src6]. The automatic-exposure capability above is a later development.
 
@@ -225,7 +225,7 @@ A concrete production pattern that pushes `defer`/slim-CI all the way through de
 - **Slim CI on PRs** — compute the **merge-base** SHA between the PR branch and `main`, `dbt parse` both, then `dbt ls --state base_state --select state:modified state:new` to find changed models. Merge-base (not latest `main`) avoids false positives from other PRs that merged meanwhile. A **macro change with no flagged model selects all models** (macros can affect any dependent). Use `dbt clone` to zero-copy-clone prod tables into a throwaway `STAGING` schema so unchanged upstream models are available without rebuilding. CI builds its own baseline manifest and never touches the prod state [^src19].
 - **Incremental CD on merge** — `dbt build --select state:modified+ --defer --favor-state --state prod_state` after downloading the prior `manifest.json` from S3; rebuilds only modified models + downstream, defers unchanged refs to existing prod tables, and uploads the new manifest for the next deploy to diff against. First deploy (no manifest) falls back to a full `dbt run` + `dbt test`. Concurrency control **queues** rather than cancels a second deploy to avoid races on the shared manifest [^src19].
 
-See [[data-engineering/sources/skytrax-dbt-transformation-project|Skytrax dbt transformation project]] for the full worked example (Snowflake RBAC-as-Terraform, OIDC keyless auth, CloudFront-hosted docs) and [[data-engineering/cicd-for-data-infrastructure|CI/CD for Data Infrastructure]] for the general skeleton.
+See [Skytrax dbt transformation project](/data-engineering/sources/skytrax-dbt-transformation-project.md) for the full worked example (Snowflake RBAC-as-Terraform, OIDC keyless auth, CloudFront-hosted docs) and [CI/CD for Data Infrastructure](/data-engineering/cicd-for-data-infrastructure.md) for the general skeleton.
 
 ### data-diff (deprecated)
 
@@ -278,13 +278,13 @@ dbt Core v2.0 shipped alongside the completed **Fivetran + dbt Labs merger** ("t
 
 **Quigley Malcolm** presented on **MetricFlow** and **OSI (Open Semantic Interface)** — dbt Labs' semantic layer and agentic context standard. MetricFlow defines semantic models (entities, measures, dimensions) declaratively; OSI exposes those to AI agents. This positions dbt as the "transformation + semantic layer + agentic context" stack [^src29].
 
-See [[data-engineering/sources/dbt-summit-2026-speakers|dbt Summit 2026 source page]] for speaker profiles. Combined first innovations announced: dbt Core v2.0 (open-sourcing the Fusion runtime), **dbt State** (a caching layer claimed to cut underlying infra costs >30%), **dbt Wizard** (beta — autonomous model authoring/refactoring/debugging), and an **Agents Schema** open standard for agentic context [^src9]. Note: vendor (sponsor) framing — claims are promotional.
+See [dbt Summit 2026 source page](/data-engineering/sources/dbt-summit-2026-speakers.md) for speaker profiles. Combined first innovations announced: dbt Core v2.0 (open-sourcing the Fusion runtime), **dbt State** (a caching layer claimed to cut underlying infra costs >30%), **dbt Wizard** (beta — autonomous model authoring/refactoring/debugging), and an **Agents Schema** open standard for agentic context [^src9]. Note: vendor (sponsor) framing — claims are promotional.
 
 ## Why dbt exists / learning it
 
 dbt was created because storage got cheaper and SQL OLAP systems more powerful, shifting **ETL → ELT** and moving transformation *inside* the warehouse, written in SQL — democratised so analysts/analytics engineers (not only strong coders) can transform data [^src10]. But that logic still needs to be **tested, modularised, and documented**, which is dbt's purpose [^src10]. A dbt model is "purely Jinja + SQL," so it can be version-controlled, rolled back, and CI/CD-deployed like application code [^src10]. With just **dbt + Airflow + a cloud warehouse**, a company can build a complete analytics pipeline — making dbt one of the most in-demand DE tools [^src10]. Learning resources noted: the `learn_dbt` CLI tool (49 hands-on exercises run locally) [^src10], and dbt Labs' free **"Zero to dbt"** live workshops and on-demand demos [^src11].
 
-dbt rose to prominence as the **transform-focused tool of the MDS (Modern Data Stack) boom** of the early 2020s, especially at startups [^src14]. It wasn't the first transform tool — earlier platforms were typically drag-and-drop UIs with some SQL — but it stood out by embracing **version control, modular SQL, testing, and documentation**, and by making SQL-based workflows accessible to a broader set of users [^src14]. It is not the only option: **SQLMesh** and [[data-engineering/dataform|Dataform]] are alternative SQL-based transform tools [^src14]. See [[data-engineering/data-transformation|Data Transformation]] for the broader "T"-in-ETL context.
+dbt rose to prominence as the **transform-focused tool of the MDS (Modern Data Stack) boom** of the early 2020s, especially at startups [^src14]. It wasn't the first transform tool — earlier platforms were typically drag-and-drop UIs with some SQL — but it stood out by embracing **version control, modular SQL, testing, and documentation**, and by making SQL-based workflows accessible to a broader set of users [^src14]. It is not the only option: **SQLMesh** and [Dataform](/data-engineering/dataform.md) are alternative SQL-based transform tools [^src14]. See [Data Transformation](/data-engineering/data-transformation.md) for the broader "T"-in-ETL context.
 
 ## Community criticism (2022 love-letter)
 
@@ -305,11 +305,11 @@ An 8-article series covering dbt end-to-end, with a companion `sql-to-dbt-series
 3. **Medallion architecture** — Bronze/Silver/Gold pattern; staging vs. intermediate vs. mart layers and why folder structure matters.
 4. **Data quality workflows** — data integrity (keeps pipelines running) vs. data quality (prevents bad decisions); data contracts, generic tests, singular tests, `dbt-expectations`.
 5. **Macros and reusability** — DRY principles; five project macros (performance classification, safe division, target comparison, percentage calculation, touchpoint attribution); before/after with `LAG` window functions reduced to single invocations.
-6. **SCD2 with snapshots** — see [[data-engineering/scd2|SCD2]] for the timestamp vs. check strategy details.
+6. **SCD2 with snapshots** — see [SCD2](/data-engineering/scd2.md) for the timestamp vs. check strategy details.
 7. **dbt internals** — reverse-engineering dbt's core: dependency parsing with regex, DAG construction, topological sort (Kahn's algorithm), ordered execution in ~500 lines of Python.
 8. **Portable data stack** — dbt-core + DuckDB + GitHub Actions (cron) + Google Sheets + Looker Studio. All portable, low-cost, containerized.
 
-Key insight from the series: *"Contracts block bad schemas during compilation, while tests catch quality issues after builds."* [^src12] The series also includes an agentic data modeling demo (OpenMetadata MCP + AI for downstream impact analysis) — see [[data-engineering/agentic-data-modeling|Agentic Data Modeling]].
+Key insight from the series: *"Contracts block bad schemas during compilation, while tests catch quality issues after builds."* [^src12] The series also includes an agentic data modeling demo (OpenMetadata MCP + AI for downstream impact analysis) — see [Agentic Data Modeling](/data-engineering/agentic-data-modeling.md).
 
 ## Building a dbt project with Claude Code
 
@@ -331,7 +331,7 @@ A hands-on evaluation of Claude Code's capability to build a dbt project from re
 
 **The verdict** [^src13]: *"Claude Code is an amazing productivity companion. Do not, if you value your job, use it to one-shot a dbt project."* DE + AI > DE alone — agentic coding tools make DEs vastly more productive for specific tasks and iteration, but the net gain still requires the engineer's mental model, verification, and domain knowledge. The prompt and skills (dbt-agent-skills from dbt Labs) matter more than the model — Sonnet 4.5 with good context produces respectable results.
 
-See [[data-engineering/claude-code-for-data-engineering|Claude Code for Data Engineering]] for the broader AI-assisted DE workflow and [[data-engineering/ai-impact-on-data-engineering|AI's Impact on Data Engineering]] for the role-level framing.
+See [Claude Code for Data Engineering](/data-engineering/claude-code-for-data-engineering.md) for the broader AI-assisted DE workflow and [AI's Impact on Data Engineering](/data-engineering/ai-impact-on-data-engineering.md) for the role-level framing.
 
 ## The sql-to-dbt-series reference project
 
@@ -385,7 +385,7 @@ dbt Core for teams that want infrastructure control; dbt Cloud for teams that wa
 - **Tests** — verify data quality of models. Two types [^src18]:
   - *Generic tests* — four built-in: `not_null`, `unique`, `accepted_values`, `relationships`
   - *Singular tests* — custom SQL tests for specific business logic
-- **Snapshots** — track **SCD Type 2** changes over time. dbt only handles SCD Type 2 (timestamp or check strategy). See [[data-engineering/scd2|SCD2]] [^src18].
+- **Snapshots** — track **SCD Type 2** changes over time. dbt only handles SCD Type 2 (timestamp or check strategy). See [SCD2](/data-engineering/scd2.md) [^src18].
 
 ### dbt project structure (initial layout)
 
@@ -409,20 +409,20 @@ At time of recording (Dec 2023): AlloyDB, BigQuery, Databricks, Dremio, Postgres
 
 ## See also
 
-- [[data-engineering/pipeline-layers|Pipeline Layers]] — the staging → warehouse → marts architecture pattern
-- [[data-engineering/dimensional-modeling|Dimensional Modeling]] — Kimball star schemas dbt commonly builds
-- [[data-engineering/scd2|SCD Type 2]] — slowly-changing dimensions via dbt snapshots
-- [[data-engineering/data-orchestration|Data Orchestration]] — scheduling dbt runs vs. transforming in dbt
-- [[data-engineering/orchestra|Orchestra]] — a managed orchestrator that runs dbt staging/curated tasks via tag selection
-- [[data-engineering/dataform|Dataform]] — the BigQuery-native, SQLX-based dbt analogue
-- [[data-engineering/dbt-fusion|dbt Fusion Engine]] — Rust-powered compiler replacing Python core; ~30× faster parse, state-aware orchestration
-- [[data-engineering/claude-code-for-data-engineering|Claude Code for Data Engineering]] — AI-assisted dbt modeling and exposure enrichment
-- [[data-engineering/sources/dbt-kimball-project|dbt Kimball reference project]] — SCD2 example project
-- [[data-engineering/README|Data Engineering hub]]
+- [Pipeline Layers](/data-engineering/pipeline-layers.md) — the staging → warehouse → marts architecture pattern
+- [Dimensional Modeling](/data-engineering/dimensional-modeling.md) — Kimball star schemas dbt commonly builds
+- [SCD Type 2](/data-engineering/scd2.md) — slowly-changing dimensions via dbt snapshots
+- [Data Orchestration](/data-engineering/data-orchestration.md) — scheduling dbt runs vs. transforming in dbt
+- [Orchestra](/data-engineering/orchestra.md) — a managed orchestrator that runs dbt staging/curated tasks via tag selection
+- [Dataform](/data-engineering/dataform.md) — the BigQuery-native, SQLX-based dbt analogue
+- [dbt Fusion Engine](/data-engineering/dbt-fusion.md) — Rust-powered compiler replacing Python core; ~30× faster parse, state-aware orchestration
+- [Claude Code for Data Engineering](/data-engineering/claude-code-for-data-engineering.md) — AI-assisted dbt modeling and exposure enrichment
+- [dbt Kimball reference project](/data-engineering/sources/dbt-kimball-project.md) — SCD2 example project
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 
-[^src1]: [[03_Resources/Study Notes/dbt Data Architecture - Simple Stack Design|dbt Data Architecture - Simple Stack Design]]
+[^src1]: [dbt Data Architecture - Simple Stack Design](/03_Resources/Study Notes/dbt Data Architecture - Simple Stack Design.md)
 [^src2]: [About dbt seed command](../../raw/web/about-dbt-seed-command-dbt-developer-hub.md)
 [^src3]: [Add Exposures to your DAG](../../raw/web/add-exposures-to-your-dag-dbt-developer-hub.md)
 [^src4]: [Uplevel your dbt workflow with these tools and techniques](../../raw/web/uplevel-your-dbt-workflow-with-these-tools-and-techniques-st.md)
@@ -443,5 +443,5 @@ At time of recording (Dec 2023): AlloyDB, BigQuery, Databricks, Dremio, Postgres
 [^src19]: [I spent 12 Hours rebuilding my Junior year project: Part 2 — The Transformation Layer (Minh Pham, guest on Vu Trinh's newsletter)](../../raw/email/email-2026-06-25-i-spent-12-hours-rebuilding-my-junior-year-project-part-2-th.md)
 [^src20]: [dbt-labs/dbt-core (GitHub README, v2.0 alpha)](../../raw/github/github-dbt-labs-dbt-core.md)
 [^src28]: [dbt-labs/dbt-core — GitHub repo digest](../../raw/github/github-dbt-labs-dbt-core.md) — dbt Labs; OSS health signal (13K stars); v2 on main, v1 on 1.latest branch
-[^src29]: [dbt Summit 2026 — Speakers & Training](../../raw/_inbox/web-tristan-handy-dbt-summit-58ecab01.md) — Tristan Handy (Co-founder+President Fivetran+dbt Labs, 100K+ teams); Quigley Malcolm (MetricFlow, OSI); dbt Architect/data quality/cost visibility training courses. See [[data-engineering/sources/dbt-summit-2026-speakers|dbt-summit-2026-speakers.md]] for full catalog.
-[^src30]: [Fusion in Bloom — dbt Labs](../../raw/web/web-fusion-in-bloom-dbt-labs-98d5a43b.md) — SDF acquisition Jan 2025; 8,611 commits first year; ~30× parse speedup; ~40% model reuse, 30% compute savings; 450+ weekly projects; VS Code Extension 104K downloads. See [[data-engineering/dbt-fusion|dbt Fusion Engine]] for full detail.
+[^src29]: [dbt Summit 2026 — Speakers & Training](../../raw/_inbox/web-tristan-handy-dbt-summit-58ecab01.md) — Tristan Handy (Co-founder+President Fivetran+dbt Labs, 100K+ teams); Quigley Malcolm (MetricFlow, OSI); dbt Architect/data quality/cost visibility training courses. See [dbt-summit-2026-speakers.md](/data-engineering/sources/dbt-summit-2026-speakers.md) for full catalog.
+[^src30]: [Fusion in Bloom — dbt Labs](../../raw/web/web-fusion-in-bloom-dbt-labs-98d5a43b.md) — SDF acquisition Jan 2025; 8,611 commits first year; ~30× parse speedup; ~40% model reuse, 30% compute savings; 450+ weekly projects; VS Code Extension 104K downloads. See [dbt Fusion Engine](/data-engineering/dbt-fusion.md) for full detail.

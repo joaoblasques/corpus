@@ -39,11 +39,11 @@ Bitcoin combines five key technical layers:
 
 | Layer | Mechanism | Corpus page |
 |---|---|---|
-| Identity | Public/private key pairs (secp256k1 ECC) | [[blockchain/public-key-cryptography|Public-Key Cryptography]] |
-| Data integrity | Merkle trees in block headers | [[blockchain/merkle-trees|Merkle Trees]] |
-| Consensus | Proof-of-work (Nakamoto Consensus) | [[blockchain/proof-of-work|Proof-of-Work]] |
-| Network | Gossip protocol over P2P overlay | [[blockchain/p2p-networking|P2P Networking]] |
-| Hash function | SHA-256 (double-hashed in many contexts) | [[blockchain/hash-functions|Hash Functions]] |
+| Identity | Public/private key pairs (secp256k1 ECC) | [Public-Key Cryptography](/blockchain/public-key-cryptography.md) |
+| Data integrity | Merkle trees in block headers | [Merkle Trees](/blockchain/merkle-trees.md) |
+| Consensus | Proof-of-work (Nakamoto Consensus) | [Proof-of-Work](/blockchain/proof-of-work.md) |
+| Network | Gossip protocol over P2P overlay | [P2P Networking](/blockchain/p2p-networking.md) |
+| Hash function | SHA-256 (double-hashed in many contexts) | [Hash Functions](/blockchain/hash-functions.md) |
 
 ## Key facts
 
@@ -59,11 +59,11 @@ The nakamoto.ghost.io course by Haseeb Qureshi (managing partner at Dragonfly Ca
 
 ## Related pages
 
-- [[blockchain/satoshi-nakamoto|Satoshi Nakamoto]] — creator
-- [[blockchain/history-of-money|History of Money]] — what Bitcoin responds to
-- [[blockchain/the-cypherpunks|The Cypherpunks]] — ideological lineage
-- [[blockchain/proof-of-work|Proof-of-Work]] — consensus mechanism
-- [[blockchain/p2p-networking|P2P Networking]] — network layer
+- [Satoshi Nakamoto](/blockchain/satoshi-nakamoto.md) — creator
+- [History of Money](/blockchain/history-of-money.md) — what Bitcoin responds to
+- [The Cypherpunks](/blockchain/the-cypherpunks.md) — ideological lineage
+- [Proof-of-Work](/blockchain/proof-of-work.md) — consensus mechanism
+- [P2P Networking](/blockchain/p2p-networking.md) — network layer
 
 [^src1]: [Introduction to Cryptocurrency](../../raw/notes/notes-introduction-to-cryptocurrency-scrape.md)
 [^src2]: [A Brief History of Money](../../raw/notes/notes-a-brief-history-of-money-scrape.md)

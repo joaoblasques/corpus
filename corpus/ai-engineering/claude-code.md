@@ -263,7 +263,7 @@ A common misconception is that capability is defined solely by the model [^src1]
 
 Two further capabilities round out the setup: **LSP integrations** give symbol-level navigation ("go to definition", "find all references"), which is one of the highest-value investments for multi-language codebases — without it Claude pattern-matches on text and can land on the wrong symbol [^src1]. **Subagents** are isolated Claude instances with their own context window that take a task and return only the final result, splitting exploration from editing [^src1].
 
-Hooks' most valuable use is continuous improvement, not just prevention: a stop hook can reflect on a session and propose CLAUDE.md updates while context is fresh; a start hook can load module-specific context dynamically [^src1]. See [[ai-engineering/agent-skills|Agent Skills]] for progressive disclosure and [[ai-engineering/mcp|MCP]].
+Hooks' most valuable use is continuous improvement, not just prevention: a stop hook can reflect on a session and propose CLAUDE.md updates while context is fresh; a start hook can load module-specific context dynamically [^src1]. See [Agent Skills](/ai-engineering/agent-skills.md) for progressive disclosure and [MCP](/ai-engineering/mcp.md).
 
 ## Large-codebase practices
 
@@ -284,7 +284,7 @@ Maintain CLAUDE.md as models evolve: instructions written to compensate for a cu
 
 ## Model configuration
 
-The `model` setting accepts an alias or a full model name [^src2]. Key aliases: `opus` (resolves to Opus 4.8), `sonnet` (Sonnet 4.6), `haiku`, `fable` (Claude Fable 5, the most capable for the hardest/longest tasks), `best` (Fable 5 where available, else latest Opus), and `opusplan` (Opus during plan mode, switches to Sonnet for execution) [^src2]. Append `[1m]` for the 1M-token context window [^src2]. See [[ai-engineering/anthropic|Anthropic]] for the model lineup.
+The `model` setting accepts an alias or a full model name [^src2]. Key aliases: `opus` (resolves to Opus 4.8), `sonnet` (Sonnet 4.6), `haiku`, `fable` (Claude Fable 5, the most capable for the hardest/longest tasks), `best` (Fable 5 where available, else latest Opus), and `opusplan` (Opus during plan mode, switches to Sonnet for execution) [^src2]. Append `[1m]` for the 1M-token context window [^src2]. See [Anthropic](/ai-engineering/anthropic.md) for the model lineup.
 
 **Effort levels** control adaptive reasoning (`low`/`medium`/`high`/`xhigh`/`max`); higher effort gives deeper reasoning at higher token spend, default is `high` on Fable 5 and Opus 4.8 [^src2]. `ultracode` is a Claude Code setting (not a model effort level) that sends `xhigh` and additionally has Claude orchestrate dynamic workflows [^src2]. Including `ultrathink` in a prompt requests deeper reasoning for that turn only [^src2]. **Fallback model chains** let Claude switch to a backup model when the primary is overloaded [^src2].
 
@@ -304,10 +304,10 @@ A reusable framework for custom tooling that integrates natively with the agent 
 
 ## The fire-and-forget loop (`/goal` + agent view)
 
-Claude Code 2.1.139 (May 2026) added two features that together enable a workflow "that didn't exist before" [^src6]. **`/goal`** sets a completion condition and Claude "keeps working across turns until it's met" — across interactive, `-p`, and Remote Control modes, with a live overlay showing elapsed time, turns, and tokens [^src6]. **Agent view** (`claude agents`) lists every session in one place, grouped by state — running, blocked on you, or done [^src6]. The pattern: set a `/goal` ("all tests pass and the PR is ready"), walk away, and check `claude agents` later to see which sessions need input [^src6]. This is the harness-level expression of the autonomous, long-running agent loop ([[ai-engineering/agent-testing|Agent Testing]]'s verification loops are what make a `/goal` exit condition trustworthy).
+Claude Code 2.1.139 (May 2026) added two features that together enable a workflow "that didn't exist before" [^src6]. **`/goal`** sets a completion condition and Claude "keeps working across turns until it's met" — across interactive, `-p`, and Remote Control modes, with a live overlay showing elapsed time, turns, and tokens [^src6]. **Agent view** (`claude agents`) lists every session in one place, grouped by state — running, blocked on you, or done [^src6]. The pattern: set a `/goal` ("all tests pass and the PR is ready"), walk away, and check `claude agents` later to see which sessions need input [^src6]. This is the harness-level expression of the autonomous, long-running agent loop ([Agent Testing](/ai-engineering/agent-testing.md)'s verification loops are what make a `/goal` exit condition trustworthy).
 
 Other notable harness mechanics from the same release [^src6]:
-- **Compaction now preserves sensitive user instructions** — directly targeting the failure mode where compaction dropped CLAUDE.md directives mid-session (see [[ai-engineering/context-window-management|Context Window Management]]).
+- **Compaction now preserves sensitive user instructions** — directly targeting the failure mode where compaction dropped CLAUDE.md directives mid-session (see [Context Window Management](/ai-engineering/context-window-management.md)).
 - **Hook exec form** (`args: string[]`) spawns commands without a shell, so path placeholders never need quoting; `continueOnBlock` on `PostToolUse` feeds a hook's rejection reason back to Claude instead of blocking the turn.
 - **MCP stdio servers now receive `CLAUDE_PROJECT_DIR`**, closing a gap where hooks had project context but MCP servers did not.
 - **API-key gating**: setting `ANTHROPIC_API_KEY`/`apiKeyHelper`/`ANTHROPIC_AUTH_TOKEN` disables Remote Control, `/schedule`, claude.ai MCP connectors, and notifications even with a Claude.ai login present — unset the key to re-enable.
@@ -340,7 +340,7 @@ Patterns observed from early users [^src9]:
 - **Fast context switching**: left-arrow mid-session → start a related task → arrow right back; the peek shows the answer without losing your place.
 - **Shipping status scan**: status indicators + peek title make it easy to see which sessions produced a PR.
 
-Agent view is the harness-level expression of parallel agentic work — see also `[[ai-engineering/long-running-agents|Long-Running Agents]]` and the `/goal` discussion above.
+Agent view is the harness-level expression of parallel agentic work — see also `[Long-Running Agents](/ai-engineering/long-running-agents.md)` and the `/goal` discussion above.
 
 ## Dynamic workflows
 
@@ -374,7 +374,7 @@ Dynamic workflows counter these by orchestrating **separate subagents with their
 
 **Availability** (as of 2026-06-17): research preview in Claude Code CLI, Desktop, and VS Code extension for Max, Team, and Enterprise plans; also available via the Claude API, Amazon Bedrock, Vertex AI, and Microsoft Foundry [^src13]. Dynamic workflows are on by default for Max/Team/API; Enterprise admins must enable them. The first time a workflow triggers, Claude Code shows a confirmation prompt [^src13].
 
-See [[ai-engineering/agent-harness|Agent Harness]] for the underlying harness concepts, and [[ai-engineering/agentic-workflow|Agentic Workflows]] for the broader workflow patterns.
+See [Agent Harness](/ai-engineering/agent-harness.md) for the underlying harness concepts, and [Agentic Workflows](/ai-engineering/agentic-workflow.md) for the broader workflow patterns.
 
 ## Subagents
 
@@ -410,14 +410,14 @@ Rule of thumb: ten or more files to explore, or three or more independent work i
 
 > **Background execution.** Ctrl+B sends a running subagent to the background; the conversation continues and results surface automatically. `/tasks` shows anything running in the background [^src14].
 
-See [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] for the broader orchestration patterns and [[ai-engineering/agent-skills|Agent Skills]] for the skill-based invocation pattern.
+See [Multi-Agent Systems](/ai-engineering/multi-agent-systems.md) for the broader orchestration patterns and [Agent Skills](/ai-engineering/agent-skills.md) for the skill-based invocation pattern.
 
 ## Practitioner workflow (head-of-Claude-Code usage)
 
 Boris Cherny, who leads Claude Code, runs the tool at its full-agentic limit and offers concrete usage tips [^src7]:
 
 - **Parallel sessions ("multi-clouding").** "At the moment I have like five agents running"; "I always have a bunch of agents running" [^src7]. He spreads work across surfaces — "maybe a third of my code now is in the terminal but also a third is using the desktop app and then a third is the iOS app" — all "the same quad agent running everywhere" [^src7]. Designers and non-engineers favor the desktop app's code tab specifically because you can "run as many cloud sessions in parallel as you want" without opening many terminals [^src7].
-- **Tip 1 — use the most capable model.** "Just use the most capable model... I have maximum effort enabled always." A weaker model can be *more* expensive: "because it's less intelligent, it actually takes more tokens in the end to do the same task" [^src7]. (See effort levels above and [[ai-engineering/agent-cost-management|Agent Cost Management]].)
+- **Tip 1 — use the most capable model.** "Just use the most capable model... I have maximum effort enabled always." A weaker model can be *more* expensive: "because it's less intelligent, it actually takes more tokens in the end to do the same task" [^src7]. (See effort levels above and [Agent Cost Management](/ai-engineering/agent-cost-management.md).)
 - **Tip 2 — plan mode for ~80% of tasks.** "I start almost all of my tasks in plan mode, maybe like 80%." Plan mode is mechanically trivial — "we inject one sentence into the model's prompt to say, 'Please don't write any code yet'" (terminal: shift-tab twice). After a solid plan he auto-accepts edits because "it's just going to one-shot it... almost every time with Opus 4.6" [^src7].
 - **Tip 3 — try different interfaces.** Terminal, iOS/Android, desktop, Slack — "there's no one right way to use Claude Code"; and Claude Code "kind of knows about itself, so it can help" edit settings and recommend a setup [^src7].
 - **Build for the model 6 months out.** Claude Code's enduring design bet: build for where the model will be, not where it is — accept poor PMF for ~6 months, then "the product is going to click" when the model lands. The inflection arrived with Opus 4 / Sonnet 4 [^src7]. The original Claude CLI demo shocked Cherny by using a bare bash tool to answer "what music am I listening to" with no tool-specific instruction — the seed of the minimal-harness philosophy [^src7].
@@ -474,7 +474,7 @@ Routines are a Claude Code automation you configure once — including a prompt,
 - *Deploy verification*: CD pipeline triggers after each deploy; Claude runs smoke checks and posts go/no-go to release channel
 - *Library port*: every PR merged to a Python SDK triggers a routine that ports the change to the parallel Go SDK
 
-See [[ai-engineering/ralph-loop|Ralph Loop]] for the underlying "loop engineering" concept; routines are the native Claude Code implementation of that pattern, without the DIY cron and MCP server management.
+See [Ralph Loop](/ai-engineering/ralph-loop.md) for the underlying "loop engineering" concept; routines are the native Claude Code implementation of that pattern, without the DIY cron and MCP server management.
 
 ### Routines in production: patterns, costs, failure modes
 
@@ -563,7 +563,7 @@ Boris Cherny's viral X thread (2026) catalogued features "most people use maybe 
 
 **`--agent` (custom agent loader).** Loads a custom system prompt and tool set from `.claude/agents/<name>` at launch — defining specialized agents (reviewer, deployer, researcher) each with scoped rules and tools. Cherny calls it "the most overlooked feature in Claude Code" [^src22]. (Note: custom agent *files* are documented above in the Subagents section; `--agent` is the CLI flag to load one at startup without entering a general session first.)
 
-**Cowork dispatch.** Secure remote control of your entire laptop via Claude Code — not just code, but Slack, file management, any desktop action. Cherny uses it daily when away from his computer [^src22]. See [[ai-engineering/claude-cowork|Claude Cowork]] for the full product page.
+**Cowork dispatch.** Secure remote control of your entire laptop via Claude Code — not just code, but Slack, file management, any desktop action. Cherny uses it daily when away from his computer [^src22]. See [Claude Cowork](/ai-engineering/claude-cowork.md) for the full product page.
 
 ## Permission modes
 
@@ -682,7 +682,7 @@ The Claude Code Desktop app offers permission modes, a built-in preview server, 
 
 **Diff view** [^src28]: file changes appear in a side-by-side diff with inline comments — the same review experience as GitHub PR reviews, but inside the desktop app.
 
-**Computer use** (research preview, Pro/Max) [^src28]: available on macOS and Windows. Claude can see and control the desktop — clicking, typing, scrolling — for any app, not just the terminal. Requires opt-in in settings; uses a separate, isolated session context. See [[ai-engineering/computer-use|Computer Use]] for the full API and safety details.
+**Computer use** (research preview, Pro/Max) [^src28]: available on macOS and Windows. Claude can see and control the desktop — clicking, typing, scrolling — for any app, not just the terminal. Requires opt-in in settings; uses a separate, isolated session context. See [Computer Use](/ai-engineering/computer-use.md) for the full API and safety details.
 
 **Dispatch** [^src28]: remote control of multiple Claude Code instances from one central interface. Useful for managing parallel long-running agents across multiple machines.
 
@@ -763,7 +763,7 @@ Precise definitions from Anthropic's official glossary [^src30]:
 
 ## Lazy Senior Dev mode (community skill)
 
-A Reddit community skill that forces Claude Code to write as little code as possible by adopting a "lazy senior dev" persona [^src31]. The pattern: the persona values understanding over volume, pushes back on over-engineering, and asks clarifying questions instead of assuming requirements and building speculatively. Consistently with the Karpathy Simplicity First principle — see [[ai-engineering/claude-md-conventions|CLAUDE.md Conventions]].
+A Reddit community skill that forces Claude Code to write as little code as possible by adopting a "lazy senior dev" persona [^src31]. The pattern: the persona values understanding over volume, pushes back on over-engineering, and asks clarifying questions instead of assuming requirements and building speculatively. Consistently with the Karpathy Simplicity First principle — see [CLAUDE.md Conventions](/ai-engineering/claude-md-conventions.md).
 
 ## Quickstart (installation and shell commands)
 
@@ -805,11 +805,11 @@ A practitioner survey of 13 production Claude Code workflows demonstrates the sc
 
 **Context farming**: dedicated sub-agents poll external tools (CRM, email, calendar) via MCPs on a regular schedule, pulling live data into the wiki/context layer so the main agent always has fresh information without real-time MCP calls during task execution [^src33].
 
-**Skills as living SOPs** (see also [[ai-engineering/agent-skills|Agent Skills]]): "A skill is a living thing — every time you run it or tweak something, it gets a little better." The iteration loop is: run → identify failure → update skill → rerun [^src33].
+**Skills as living SOPs** (see also [Agent Skills](/ai-engineering/agent-skills.md)): "A skill is a living thing — every time you run it or tweak something, it gets a little better." The iteration loop is: run → identify failure → update skill → rerun [^src33].
 
 ## Anthropic claude-cookbooks (official recipe collection)
 
-The `anthropic/claude-cookbooks` GitHub repository (★45,788) is Anthropic's official collection of notebooks and code recipes for the Claude API [^src34]. Covers: RAG patterns, tool use, multi-modal input, classification, summarization, prompt caching, and agent workflows. Used as the canonical reference when building integrations against the Claude API (as opposed to the Claude Code harness). See [[ai-engineering/anthropic|Anthropic]].
+The `anthropic/claude-cookbooks` GitHub repository (★45,788) is Anthropic's official collection of notebooks and code recipes for the Claude API [^src34]. Covers: RAG patterns, tool use, multi-modal input, classification, summarization, prompt caching, and agent workflows. Used as the canonical reference when building integrations against the Claude API (as opposed to the Claude Code harness). See [Anthropic](/ai-engineering/anthropic.md).
 
 ## Tool comparison: Claude Code vs no-code builders
 
@@ -917,7 +917,7 @@ Three ways to schedule recurring or one-off prompts in Claude Code [^src40]:
 
 **`/loop`** [^src40]: sessions-scoped recurring prompt. Without a prompt, uses the built-in maintenance prompt (tend unfinished work, PR comments, CI failures, cleanup passes). Dynamic interval mode: Claude chooses delay based on what it observes (short when active, longer when idle). Tasks expire after 7 days. Customize with `~/.claude/loop.md` or `.claude/loop.md`.
 
-See also [[ai-engineering/agent-harness|Agent Harness]] for the broader scheduling context.
+See also [Agent Harness](/ai-engineering/agent-harness.md) for the broader scheduling context.
 
 ## Official documentation: how Claude Code works
 
@@ -951,7 +951,7 @@ The official Anthropic docs describe the agentic loop in three phases [^src41]:
 Cole Medin's framework for effective Claude Code agents [^src42]:
 
 - **Director mindset**: treat Claude Code as a highly capable employee — provide clear requirements and success criteria, not step-by-step instructions. "Your job is to specify *what*, Claude's job is to figure out *how*."
-- **Plan → Build → Verify → Evolve loop**: plan with Claude (requirements, approach), build in isolation (subagents with clean context), verify rigorously (run tests, check logs), evolve CLAUDE.md with lessons learned. This is the same [[ai-engineering/compound-engineering|compound engineering]] loop.
+- **Plan → Build → Verify → Evolve loop**: plan with Claude (requirements, approach), build in isolation (subagents with clean context), verify rigorously (run tests, check logs), evolve CLAUDE.md with lessons learned. This is the same [compound engineering](/ai-engineering/compound-engineering.md) loop.
 - **"Dumb zone" at 250K tokens**: Opus degrades noticeably above ~250K tokens context length — keep individual sessions well below this with proactive compaction and subagent offloading.
 - **The AI layer distinction**: CLAUDE.md (standing rules), skills (reusable procedures), hooks (lifecycle enforcement), MCPs (external tools) — these four together define the agent's capabilities, not the model alone.
 
@@ -1089,7 +1089,7 @@ Claude for Legal is Anthropic's reference plugin suite for legal teams [^src49].
 
 **Key use cases** [^src49]: research briefs, due diligence document review, SOW drafting, outside counsel billing review, compliance gap analysis, contract comparison and redline.
 
-This is the most detailed Anthropic-published example of the **plugin-marketplace pattern** at domain scale: 12+ practice-area plugins, each bundling skills (legal reasoning procedures) + MCP connectors (legal data sources) + agent skills (managed-agent cookbooks for complex multi-document workflows). See [[ai-engineering/claude-managed-agents|Claude Managed Agents]] for the managed-agent deployment model.
+This is the most detailed Anthropic-published example of the **plugin-marketplace pattern** at domain scale: 12+ practice-area plugins, each bundling skills (legal reasoning procedures) + MCP connectors (legal data sources) + agent skills (managed-agent cookbooks for complex multi-document workflows). See [Claude Managed Agents](/ai-engineering/claude-managed-agents.md) for the managed-agent deployment model.
 
 ## Claude Agent SDK
 
@@ -1152,11 +1152,11 @@ From Mastering Claude Code in 30 Minutes [^src56], the creator's recommended lea
 
 ## See also
 
-- [[ai-engineering/sources/boris-cherny-100-percent-claude-code|Boris Cherny — 100% Claude Code]] — the full interview source page
-- [[ai-engineering/claude-cowork|Claude Cowork]] — the non-developer counterpart to Claude Code
-- [[ai-engineering/anthropic|Anthropic]] — model lineup and provider
-- [[ai-engineering/claude-managed-agents|Claude Managed Agents]] — cloud-hosted agent runtime; integrates via built-in `claude-api` skill
-- [[ai-engineering/agent-skills|Agent Skills]], [[ai-engineering/mcp|MCP]], [[ai-engineering/optimizing-claude|Optimizing a Claude Setup]]
+- [Boris Cherny — 100% Claude Code](/ai-engineering/sources/boris-cherny-100-percent-claude-code.md) — the full interview source page
+- [Claude Cowork](/ai-engineering/claude-cowork.md) — the non-developer counterpart to Claude Code
+- [Anthropic](/ai-engineering/anthropic.md) — model lineup and provider
+- [Claude Managed Agents](/ai-engineering/claude-managed-agents.md) — cloud-hosted agent runtime; integrates via built-in `claude-api` skill
+- [Agent Skills](/ai-engineering/agent-skills.md), [MCP](/ai-engineering/mcp.md), [Optimizing a Claude Setup](/ai-engineering/optimizing-claude.md)
 
 [^src1]: [How Claude Code works in large codebases](../../raw/web/how-claude-code-works-in-large-codebases-best-practices-and.md)
 [^src2]: [Model configuration — Claude Code docs](../../raw/web/model-configuration-claude-code-docs.md)

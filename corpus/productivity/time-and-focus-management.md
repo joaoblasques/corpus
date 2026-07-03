@@ -40,7 +40,7 @@ Without structured planning you drown in reactive tasks; planning across horizon
 
 > "You do not rise to the level of your goals. You fall to the level of your systems." — James Clear [^src1]
 
-This systems-over-goals framing connects to the broader [[productivity/mental-models|Mental Models]] toolkit.
+This systems-over-goals framing connects to the broader [Mental Models](/productivity/mental-models.md) toolkit.
 
 ## Protect focus
 
@@ -97,11 +97,11 @@ macOS includes underutilized automation layers that address time and attention m
 - Mail.app rules (`Mail → Settings → Rules`) auto-file, auto-tag, or auto-forward email by sender, subject, or list header. Practical patterns: newsletters auto-moved to "Read Later" folder; GitHub notifications auto-archived; direct manager emails flagged.
 - Prevents inbox as interrupt queue. Combine with designated "email time" blocks (not continuous monitoring) from the engineering guide above [^src1].
 
-**Complementarity with AI dictation (SuperWhisper)**: the native dictation + Apple Intelligence setup handles light transcription and rewriting; SuperWhisper (see [[productivity/ai-augmented-knowledge-work|AI-Augmented Knowledge Work]] §10) handles heavier AI-processing modes with full context awareness. They coexist on the same machine with different use cases [^src2].
+**Complementarity with AI dictation (SuperWhisper)**: the native dictation + Apple Intelligence setup handles light transcription and rewriting; SuperWhisper (see [AI-Augmented Knowledge Work](/productivity/ai-augmented-knowledge-work.md) §10) handles heavier AI-processing modes with full context awareness. They coexist on the same machine with different use cases [^src2].
 
 ## Context
 
-This is the productivity domain's time-and-focus reference; it complements [[productivity/shipping-and-scope|Shipping and Scope]] (deciding when work is *done*), [[productivity/working-with-stakeholders|Working with Stakeholders]] (protecting time against external demands), and [[productivity/ai-augmented-knowledge-work|AI-Augmented Knowledge Work]] (offloading low-value work). The source is a guest-authored guide (Aleš Žehelj, via Gregor Ojstersek's Engineering Leadership newsletter) aimed at both engineers and managers.
+This is the productivity domain's time-and-focus reference; it complements [Shipping and Scope](/productivity/shipping-and-scope.md) (deciding when work is *done*), [Working with Stakeholders](/productivity/working-with-stakeholders.md) (protecting time against external demands), and [AI-Augmented Knowledge Work](/productivity/ai-augmented-knowledge-work.md) (offloading low-value work). The source is a guest-authored guide (Aleš Žehelj, via Gregor Ojstersek's Engineering Leadership newsletter) aimed at both engineers and managers.
 
 [^src1]: [15 Productivity Hacks Every Engineer & Manager Should Know (Engineering Leadership)](../../raw/email/email-2025-06-01-15-productivity-hacks-every-engineer-manager-should-know.md)
 [^src2]: [Your Mac Can Work Like a Personal Assistant](../../raw/youtube/youtube-BYjIIRpos0I-your-mac-can-work-like-a-personal-assistant-most-people-neve.md) — Crazy Errors
