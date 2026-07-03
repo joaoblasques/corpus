@@ -1946,3 +1946,58 @@ upstream, see 'push.autoSetupRemote' in 'git help config'.
   - docs_quick: 0 intake · 0 thin · 0 llm_fail · status=ok
 - lint:
   - 0 broken wikilinks · 0 broken citations · 0 orphans · 0 stubs
+
+## [2026-07-03] ingest | ingest-auto batch — LM Studio 0.3.26-0.3.33, Unsloth expansion, Tim Dettmers (50 processed, 28 ingested, 22 deferred)
+- source: raw/_inbox/web-lm-studio-0-3-26-16ef563c.md
+- source: raw/_inbox/web-lm-studio-0-3-27-find-in-chat-and-search-all-chats-e119d512.md
+- source: raw/_inbox/web-lm-studio-0-3-28-bb6b8820.md
+- source: raw/_inbox/web-use-openai-s-responses-api-with-local-models-9f7db029.md
+- source: raw/_inbox/web-lm-studio-0-3-30-7b47cdd3.md
+- source: raw/_inbox/web-lm-studio-0-3-31-740b775d.md
+- source: raw/_inbox/web-lm-studio-0-3-32-e271d763.md
+- source: raw/_inbox/web-nvidia-dgx-spark-2e2f1a48.md
+- source: raw/_inbox/web-openai-gpt-oss-safeguard-a1bcc0bc.md
+- source: raw/_inbox/web-ministral-3-100687ba.md
+- source: raw/_inbox/web-finetune-gemma-with-unsloth-7508cf36.md
+- source: raw/_inbox/web-unsloth-fixing-gemma-bugs-83cc4e6a.md
+- source: raw/_inbox/web-unsloth-gradient-checkpointing-4x-longer-context-windows-41aa4fad.md
+- source: raw/_inbox/web-finetune-llama-3-with-unsloth-874ddb0c.md
+- source: raw/_inbox/web-finetune-phi-3-with-unsloth-2e7d3c85.md
+- source: raw/_inbox/web-finetune-gemma-2-with-unsloth-2a306483.md
+- source: raw/_inbox/web-finetune-mistral-nemo-with-unsloth-80d57a28.md
+- source: raw/_inbox/web-finetune-llama-3-1-with-unsloth-4eca0b7c.md
+- source: raw/_inbox/web-unsloth-x-ycombinator-979219d6.md
+- source: raw/_inbox/web-fine-tune-llama-3-2-vision-with-unsloth-16376271.md
+- source: raw/_inbox/web-llama-3-2-vision-fine-tuning-with-unsloth-d41b7f19.md
+- source: raw/_inbox/web-qwen-2-5-coder-fine-tuning-with-unsloth-b5ba9d9d.md
+- source: raw/_inbox/web-my-journey-towards-coding-agents-building-sera-tim-dettmers-58b0f056.md
+- source: raw/_inbox/web-use-agents-or-be-left-behind-a-personal-guide-to-automating-150c50c7.md
+- source: raw/_inbox/web-why-agi-will-not-happen-tim-dettmers-567ed1d9.md
+- source: raw/_inbox/web-the-best-gpus-for-deep-learning-in-2023-an-in-depth-analysis-c9ee20ca.md
+- source: raw/_inbox/web-llm-int8-and-emergent-features-tim-dettmers-f06a54c9.md
+- source: raw/_inbox/web-understanding-convolution-in-deep-learning-tim-dettmers-e358cbcf.md
+- source: (how-to-choose-grad-school + 20 other files deferred — see _REVIEW.md)
+- channel: web (all 29 ingested)
+- domain: ai-engineering
+- pages touched: [corpus/ai-engineering/lm-studio.md, corpus/ai-engineering/unsloth.md, corpus/ai-engineering/quantization.md, corpus/ai-engineering/README.md, corpus/_index.md]
+- new pages: [corpus/ai-engineering/tim-dettmers.md]
+- notes: ingest-auto run; 50 in list, 28 ingested, 22 deferred. Three clusters: (1) LM Studio 0.3.26-0.3.33 patch history — added 8 release rows to the changelog table in lm-studio.md plus new DGX Spark ARM/Linux section and gpt-oss-safeguard safety-model partnership section; (2) Unsloth expansion — promoted unsloth.md from stub→draft with comprehensive model-support history (Gemma/Llama3/Phi-3/Gemma2/MistralNeMo/Llama3.1/Llama3.2Vision/Qwen2.5Coder), per-model performance benchmarks (2–2.5× faster, 50–70% less VRAM vs HF+FA2), gradient-checkpointing 4× longer context innovation (April 2024), YC backing + 2M monthly HF downloads, GGUF export workflow, Unsloth Studio roadmap; (3) Tim Dettmers — new entity page created covering LLM.int8() mixed-precision decomposition + emergent-outlier-features discovery (6.7B phase transition), SERA coding-agent data-generation pipeline at Ai2 (imaginary-bug injection + two-rollout soft verification), agent automation personal workflow, AGI skepticism from physical computation limits, and GPU hardware expertise (Tensor Cores, memory-bandwidth primacy, BF16/TF32/FP8/NVFP4 data-type progression). Also expanded quantization.md with LLM.int8() history and GPU data-type table, cross-linked to Tim Dettmers. 21 deferred: 11 Tim Dettmers URLs with scrape failure (frontmatter only), 9 Unsloth static/legal/code-snippet-only pages, 1 grad-school advice article (no domain fit). No orphans; no contradictions detected.
+
+## [2026-07-03T03:08] config | scheduled run
+- collectors:
+  - gmail: 3 collected · status=ok
+  - obsidian: 0 collected · status=ok
+  - pdf: 0 collected · status=ok
+  - youtube: 0 collected · status=failed
+  - github_discover: 0 collected · status=ok
+  - github: 0 collected · status=ok
+  - x: 0 collected · status=ok
+  - links_refetch: 0 refetched · status=ok
+- ingest:
+  - ingest: 28 ingested · 22 deferred · status=ok
+- youtube_quick:
+  - youtube_quick: 0 intake · 0 rescued · 60 skipped · status=ok
+- docs_quick:
+  - docs_quick: 0 intake · 0 thin · 0 llm_fail · status=failed · error=Command '['/usr/local/bin/python3', '/Users/jonasblasques/Dev/corpus/bin/quick_ingest_docs.py', '--channel', 'web,notes', '--backend', 'openrouter', '--max', '80', '--sleep', '0.5']' timed out after 2400 seconds
+- lint:
+  - 1 broken wikilinks · 80 broken citations · 424 orphans · 446 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py

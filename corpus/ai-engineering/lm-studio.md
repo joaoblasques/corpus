@@ -39,6 +39,36 @@ sources:
   - path: raw/web/web-lm-studio-0-3-38-e91acb98.md
     channel: web
     ingested_at: 2026-07-02
+  - path: raw/web/web-lm-studio-0-3-26-16ef563c.md
+    channel: web
+    ingested_at: 2026-07-03
+  - path: raw/web/web-lm-studio-0-3-27-find-in-chat-and-search-all-chats-e119d512.md
+    channel: web
+    ingested_at: 2026-07-03
+  - path: raw/web/web-lm-studio-0-3-28-bb6b8820.md
+    channel: web
+    ingested_at: 2026-07-03
+  - path: raw/web/web-use-openai-s-responses-api-with-local-models-9f7db029.md
+    channel: web
+    ingested_at: 2026-07-03
+  - path: raw/web/web-lm-studio-0-3-30-7b47cdd3.md
+    channel: web
+    ingested_at: 2026-07-03
+  - path: raw/web/web-lm-studio-0-3-31-740b775d.md
+    channel: web
+    ingested_at: 2026-07-03
+  - path: raw/web/web-lm-studio-0-3-32-e271d763.md
+    channel: web
+    ingested_at: 2026-07-03
+  - path: raw/web/web-nvidia-dgx-spark-2e2f1a48.md
+    channel: web
+    ingested_at: 2026-07-03
+  - path: raw/web/web-openai-gpt-oss-safeguard-a1bcc0bc.md
+    channel: web
+    ingested_at: 2026-07-03
+  - path: raw/web/web-ministral-3-100687ba.md
+    channel: web
+    ingested_at: 2026-07-03
 aliases:
   - LM Studio
   - lmstudio
@@ -50,7 +80,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-07-02
-updated: 2026-07-02
+updated: 2026-07-03
 ---
 
 # LM Studio
@@ -123,17 +153,40 @@ LM Studio acquired **Locally AI**, an app for running local models on iPhone/iPa
 
 LM Studio collaborated with NVIDIA on DGX Station's general-availability launch — a deskside AI supercomputer built on the GB300 Blackwell Ultra Superchip, with 748GB of coherent memory and up to 20 petaFLOPS of AI compute [^src7]. The recommended on-prem pattern pairs **llmster** (headless daemon) with **LM Link** so teams can securely share frontier open models from the Station even across networks; models downloaded to the Station become available to all linked devices for inference (e.g., driving `gpt-oss-120b` from a laptop while the Station executes it). LM Studio's SDKs (`lmstudio-js`, `lmstudio-python`), native API, and Anthropic/OpenAI-compatible APIs all work against a Station-hosted server [^src7].
 
-## Earlier releases: 0.3.34–0.3.38
+## Earlier releases: 0.3.26–0.3.38
 
-A run of patch releases preceding 0.4.0, chiefly model-support additions and MLX/tool-call bugfixes [^src8][^src9][^src10][^src11][^src12]:
+A run of patch releases preceding 0.4.0, chiefly model-support additions and MLX/tool-call bugfixes [^src8][^src9][^src10][^src11][^src12][^src14][^src15][^src16][^src17][^src18][^src19][^src20]:
 
 | Version | Notes |
 |---|---|
+| 0.3.26 | CLI log upgrades: `lms log stream` with `--source`, `--filter`, `--json`, `--stats` flags; Linux RAG-v1 fix; native context menus [^src14] |
+| 0.3.27 | Find-in-chat (search within current conversation); search-all-chats feature for searching across conversation history [^src15] |
+| 0.3.28 | Model variant picker in My Models view — select specific GGUF quantization variants before downloading [^src16] |
+| 0.3.29 | `/v1/responses` endpoint added — stateful OpenAI Responses API compatibility; `previous_response_id` for multi-turn state tracking [^src17] |
+| 0.3.30 | Qwen3 VL Thinking MLX fix; Qwen 3 Coder streaming tool-call fix; developer role in `/v1/responses`; iGPU Vulkan fix [^src18] |
+| 0.3.31 | Improved image understanding and OCR quality [^src19] |
+| 0.3.32 | GLM 4.5 tool calling; olmOCR-2; base64 images in `/v1/responses`; Flash Attention default enabled on Vulkan/Metal [^src20] |
+| 0.3.33 | Ministral 3/8/14B (MistralAI) support — vision, multilingual, 256K context; Olmo-3 tool calling [^src21] |
 | 0.3.34 | Support for EssentialAI's rnj-1 model; fixed a Jinja prompt-formatting bug where EOS tokens were not included properly for some models [^src8] |
 | 0.3.35 | [MLX] Support for Devstral-2 and GLM-4.6V; fixed a bug sending the default system prompt to the model even after the system-prompt field was cleared; fixed an associated incorrect token count; fixed tool-call results sometimes not being added to context correctly [^src9] |
 | 0.3.36 | Support for Google's [[ai-engineering/functiongemma|FunctionGemma]] (270M) [^src10] |
 | 0.3.37 | Support for the LFM2 tool-call format; fixed a "Cannot read properties of null (reading 'architecture')" crash when using a generator [^src11] |
 | 0.3.38 | [Mac][M5] Enabled auto-upgrade to the optimized MLX NAX engine, fixing MLX model crashes on macOS 26.2 and improving performance (0.3.38 shipped Mac-only; other platforms remained on 0.3.37) [^src12] |
+
+## Safety: OpenAI gpt-oss-safeguard partnership
+
+LM Studio partnered with OpenAI to integrate **gpt-oss-safeguard** — OpenAI's open-weights safety-reasoning models — directly into local inference [^src22]. Two variants: `gpt-oss-safeguard-20b` and `gpt-oss-safeguard-120b`. These models evaluate input/output against a configurable safety policy at inference time, enabling operators to enforce content policies locally without sending data to a remote classifier. LM Studio's 0.4.1 release is the vehicle; the models are downloadable via My Models [^src22].
+
+## DGX Spark: NVIDIA ARM/Linux launch partnership
+
+LM Studio was named a launch partner for NVIDIA's **DGX Spark** (not to be confused with DGX Station GB300 — Spark is a single-socket desk-side unit) [^src23]. Key DGX Spark specs:
+
+- 128 GB unified RAM (LPDDR5X), 273 GB/s memory bandwidth
+- GB10 Blackwell Superchip (20 Arm CPU cores)
+- LM Studio extended its llama.cpp engine to a new CUDA 13 backend for Spark (separately from the Metal/Vulkan macOS path and the mlx-engine Apple Silicon path)
+- Linux ARM (aarch64) support: LM Studio's Linux build now supports aarch64, not just x86 [^src23]
+
+This positions LM Studio as the primary desktop-class UX for Spark, bridging the gap between NVIDIA's hardware announcement and usable consumer software [^src23].
 
 ## Fine-tuning workflow: [[ai-engineering/functiongemma|FunctionGemma]] via [[ai-engineering/unsloth|Unsloth]]
 
@@ -171,3 +224,13 @@ LM Studio's example shows FunctionGemma failing to produce a useful response pre
 [^src11]: [LM Studio 0.3.37](../../raw/web/web-lm-studio-0-3-37-e14de702.md) — LM Studio blog
 [^src12]: [LM Studio 0.3.38](../../raw/web/web-lm-studio-0-3-38-e91acb98.md) — LM Studio blog
 [^src13]: [How to fine-tune FunctionGemma and run it locally](../../raw/web/web-how-to-fine-tune-functiongemma-and-run-it-locally-9eeb0a45.md) — LM Studio blog
+[^src14]: [LM Studio 0.3.26](../../raw/web/web-lm-studio-0-3-26-16ef563c.md) — LM Studio blog
+[^src15]: [LM Studio 0.3.27 — Find in Chat and Search All Chats](../../raw/web/web-lm-studio-0-3-27-find-in-chat-and-search-all-chats-e119d512.md) — LM Studio blog
+[^src16]: [LM Studio 0.3.28](../../raw/web/web-lm-studio-0-3-28-bb6b8820.md) — LM Studio blog
+[^src17]: [Use OpenAI's Responses API with local models](../../raw/web/web-use-openai-s-responses-api-with-local-models-9f7db029.md) — LM Studio blog
+[^src18]: [LM Studio 0.3.30](../../raw/web/web-lm-studio-0-3-30-7b47cdd3.md) — LM Studio blog
+[^src19]: [LM Studio 0.3.31](../../raw/web/web-lm-studio-0-3-31-740b775d.md) — LM Studio blog
+[^src20]: [LM Studio 0.3.32](../../raw/web/web-lm-studio-0-3-32-e271d763.md) — LM Studio blog
+[^src21]: [LM Studio — Ministral 3](../../raw/web/web-ministral-3-100687ba.md) — LM Studio blog
+[^src22]: [OpenAI gpt-oss-safeguard in LM Studio](../../raw/web/web-openai-gpt-oss-safeguard-a1bcc0bc.md) — LM Studio blog
+[^src23]: [LM Studio on NVIDIA DGX Spark](../../raw/web/web-nvidia-dgx-spark-2e2f1a48.md) — LM Studio blog
