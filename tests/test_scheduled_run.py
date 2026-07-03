@@ -216,8 +216,12 @@ class TestCLI:
         # Bypass the on-main branch guard so this test is branch-independent
         # (it exercises the lock path, not the branch guard).
         monkeypatch.setenv("SCHEDULED_RUN_ALLOW_ANY_BRANCH", "1")
-        # Simulate a lock already held by another process.
-        lock.write_text("pid=99999\n", encoding="utf-8")
+        # Simulate a lock genuinely held by a LIVE process. Must be a live PID:
+        # acquire_lock is self-healing and reclaims a lock whose PID is dead —
+        # a dead PID (e.g. 99999) would be treated as stale, the lock reclaimed,
+        # and the REAL pipeline would run against the live corpus (collectors +
+        # whisper/docs drains, ~90min hang). os.getpid() is alive for the whole test.
+        lock.write_text(f"pid={os.getpid()}\n", encoding="utf-8")
         rc, out = self._run_cli("run", lock_path=lock, log_path=log)
         assert rc == 0, f"expected exit 0 when lock is held, got {rc}"
         parsed = json.loads(out)
