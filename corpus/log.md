@@ -64,6 +64,8 @@
   - lint:
   - 1 broken wikilinks · 80 broken citations · 424 orphans · 446 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
 
+* **Schema**: OKF v0.1 alignment (v2.0) — see docs/superpowers/specs/2026-07-03-okf-alignment-design.md
+
 ## 2026-07-02
 * **Ingest**: ingest-auto batch — 25 ingested, 25 deferred
   - source: raw/_inbox/ (50 pre-specified files)

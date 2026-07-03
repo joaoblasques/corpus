@@ -1,6 +1,6 @@
-# CLAUDE.md — LLM Corpus Schema (v1.0)
+# CLAUDE.md — LLM Corpus Schema (v2.0)
 
-Personal knowledge corpus (Karpathy LLM-Wiki pattern). **Read this file fully before any operation**, then read `corpus/_index.md`, `corpus/_domains.md`, `corpus/_config.md`.
+Personal knowledge corpus (Karpathy LLM-Wiki pattern). **Read this file fully before any operation**, then read `corpus/index.md`, `corpus/_domains.md`, `corpus/_config.md`.
 
 ---
 
@@ -24,7 +24,7 @@ Ingest raw sources → route into self-organizing corpus pages → maintain cros
 |---|---|---|
 | Raw sources (no PARA home) | `raw/matter/` · `raw/youtube/` · `raw/web/` · `raw/notes/` · `raw/_inbox/` | Read-only + stamp exception |
 | PARA-native sources | Listed in `corpus/_config.md` | Read + stamp in place; never copy to `raw/` |
-| Your output | `corpus/` (`_index.md`, `_log.md`, `_config.md`, `_domains.md`, `<domain>/README.md`, `<domain>/<page>.md`, `<domain>/sources/<slug>.md`) | Full ownership |
+| Your output | `corpus/` (`index.md`, `log.md`, `_config.md`, `_domains.md`, `<domain>/README.md`, `<domain>/<page>.md`, `<domain>/sources/<slug>.md`) | Full ownership |
 | Schema | `CLAUDE.md` | Co-evolve with user |
 
 **Write exceptions** (only these, nothing else outside `corpus/`):
@@ -84,6 +84,8 @@ superseded_by:              # optional (v0.6); page that replaced this one (stal
 
 **Claim-lifecycle fields (v0.6)** — `confidence`, `last_confirmed`, `supersedes`, `superseded_by` are optional and managed per §7.1. Use them to track staleness and supersession; omit when not meaningful.
 
+**OKF conformance (v0.1):** `type` is the **OKF-required** field — every page must have a non-empty value. `title`, `description`, `resource`, `tags`, `timestamp` are OKF-recommended-optional (add where cheap; absence is legal). All other fields above (`domain`, `status`, `sources`, `aliases`, `confidence`, `supersedes`, etc.) are OKF-legal producer extensions — preserved on round-trip by any conformant consumer.
+
 **`sources` migration note**: existing pages use the old flat `- raw/<path>` format. Migrate to the structured form when you next touch the page (re-ingest, update, lint). Do not mass-update all pages in one pass without user approval.
 
 ---
@@ -99,19 +101,17 @@ superseded_by:              # optional (v0.6); page that replaced this one (stal
 
 ## 6. Linking
 
-Use Obsidian wikilinks with full path: `[[<domain>/<page>|Display Name]]`. Always include the path so links resolve from any context.
+Cross-links are plain markdown links using bundle-root-relative absolute paths: `[Display](/<domain>/<page>.md)`. Do NOT use `[[wikilinks]]`. Links are untyped edges — express the relationship type in prose (§7.1). Broken links are tolerated (a link may point to not-yet-written knowledge).
 
-For source citations, link to the canonical file path:
-- Raw-channel sources: `[source title](../../raw/<channel>/<file>.md)` (relative from corpus page)
-- PARA-native sources: use an Obsidian wikilink: `[[03_Resources/<subfolder>/<file>|source title]]`
+For source citations, use footnote format with plain markdown links (sources live outside the OKF bundle — tolerated as external references):
+- Raw-channel: `[^src1]: [source title](../../raw/<channel>/<file>.md)` (relative from corpus page)
+- PARA-native: `[^src1]: [source title](../../../03_Resources/<subfolder>/<file>.md)` (relative from corpus page)
 
-**Consistency rule**: use the same **format type** in a corpus page's footnote block and in that page's `sources:` frontmatter `path:` field — wikilink for PARA-native, relative markdown link for raw-channel. The `path:` field stores the vault-relative path only (no markdown link syntax):
+The `sources:` frontmatter `path:` field stores the vault-relative path only (no link syntax):
 ```
-# PARA-native: path: 03_Resources/Articles/foo.md  →  [^src1]: [[03_Resources/Articles/foo|Foo Article]]
-# Raw-channel: path: raw/web/bar.md                →  [^src1]: [Bar Article](../../raw/web/bar.md)
+# PARA-native: path: 03_Resources/Articles/foo.md
+# Raw-channel: path: raw/web/bar.md
 ```
-
-**Citation format migration note**: existing footnote citations may use the legacy `(raw/<channel>/<file>.md)` format (without `../../`). Migrate to the file-relative `(../../raw/<channel>/<file>.md)` form when you next touch the page. Do not mass-update all pages in one pass without user approval.
 
 ---
 
@@ -159,7 +159,7 @@ When a corpus page would benefit from context not present in the source (backgro
 1. Read fully → identify domain (existing `_domains.md` first, then tags, then content). Default: route to existing.
 2. Extract 3–10 entities/concepts. For each: find existing page (grep aliases) → update, or create stub.
 3. Write source-summary page only if >1000w AND synthetically rich.
-4. Update `corpus/_index.md`. Append to `corpus/_log.md` (`## [YYYY-MM-DD HH:MM] ingest | <title>` + source/channel/domain/pages).
+4. Update `corpus/index.md`. Append to `corpus/log.md` (`## YYYY-MM-DD` date group + `* **Ingest**: …` bullet with source/channel/domain/pages).
 5. Stamp source: `corpus_ingested: true`, `corpus_ingested_at: <today>`, `corpus_pages: [...]`.
 6. Branch A only: move file to `raw/<channel>/`.
 
@@ -169,21 +169,21 @@ When a corpus page would benefit from context not present in the source (backgro
 |---|---|---|
 | 0 Pre-flight | Coordinator | Re-read CLAUDE.md + index/domains/config. Check stamps/collisions → skip/force/append list. |
 | 1 Survey & cluster | Coordinator | Title+tags+¶1 per source (no full reads). Cluster thematically → route to existing domains (default); ≥3 distinct sources with no fit → propose new domain (confirm first); 1–2 sources → provisional; <3 no fit → fold as pages. Surface cluster→domain map for confirmation. |
-| 2 Entity registry | Coordinator | Extract 3–10 candidates/source. Dedup against `_index.md` + across clusters by name/alias. Build `{slug → aliases, domain, path}` registry before any writes. |
+| 2 Entity registry | Coordinator | Extract 3–10 candidates/source. Dedup against `index.md` + across clusters by name/alias. Build `{slug → aliases, domain, path}` registry before any writes. |
 | 3 Per-cluster ingest | Workers (one/domain, parallel) | Read full bodies. Create/update pages via registry (no dupes). Citation gate every claim (§7). Target 10–15 page cascade. Link new pages from domain hub — no orphans. Workers return deltas; never write shared files. |
-| 4 Integrate | Coordinator | Stamps, `_index.md` update, `_log.md` append, inbox moves — all serialized. |
+| 4 Integrate | Coordinator | Stamps, `index.md` update, `log.md` append, inbox moves — all serialized. |
 | 5 Verify | Coordinator | Lint scoped to touched domains (orphans, dupes, contradictions, stubs, domain health). Apply safe fixes; surface rest. |
 
-**Coordinator-owns-shared-files:** only Coordinator writes `_index.md`, `_log.md`, `_domains.md`, `_config.md`. Workers own disjoint domains.
+**Coordinator-owns-shared-files:** only Coordinator writes `index.md`, `log.md`, `_domains.md`, `_config.md`. Workers own disjoint domains.
 
 ### 8.2 Query (`/query`)
 
 Driven by `query` skill + `bin/query.py`. Steps:
-1. Read `_index.md` → select candidate pages by topic/aliases → read them.
+1. Read `index.md` → select candidate pages by topic/aliases → read them.
 2. **Coverage gate**: fully covered → answer from corpus only (read-only, no log).
 3. Answer with inline citations (§7). Never present model knowledge as corpus claim.
 4. **Gap top-up**: thin/missing → WebSearch up to 3 URLs → `bin/query.py fetch-and-queue`. Label fetched claims `[fresh — not yet in corpus]`. Auto-queue to `raw/_inbox/` (channel `web`/`youtube`, `via_query`), deduped by `source_url`. Fetch failure → state plainly, nothing fabricated.
-5. Log gap to `_log.md` via `bin/query.py log-gap`.
+5. Log gap to `log.md` via `bin/query.py log-gap`.
 6. Offer synthesis file-back when answer drew on 2+ pages or kept web top-up. Write only on approval.
 
 ### 8.3 Lint
@@ -234,15 +234,21 @@ See [docs/source-channels.md](docs/source-channels.md).
 
 ---
 
-## 11. Index file format
+## 11. Index file format + OKF conformance
 
-See [docs/file-formats.md](docs/file-formats.md).
+OKF reserved file: `corpus/index.md`. Bundle root carries `okf_version: "0.1"` in frontmatter. Body: `# Section` headings + `* [Title](/path.md) - desc` bullets (root-relative links, no wikilinks).
+
+**The corpus is a Google OKF v0.1 bundle** ([spec](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md)). Validate with `python3 bin/okf_lint.py`. Three conformance rules: (1) every non-reserved `.md` has parseable YAML frontmatter; (2) every frontmatter has a non-empty `type`; (3) reserved files follow the `index.md`/`log.md` format when present.
+
+See [docs/file-formats.md](docs/file-formats.md) for full format spec.
 
 ---
 
 ## 12. Log file format
 
-See [docs/file-formats.md](docs/file-formats.md).
+OKF reserved file: `corpus/log.md`. Newest-first. `## YYYY-MM-DD` date-group headings. Entries: `* **Op**: …` bullets (op types: `Ingest`, `Schema`, `Config`, `Query`, `Lint`, `Domain`).
+
+See [docs/file-formats.md](docs/file-formats.md) for full format spec.
 
 ---
 
@@ -278,6 +284,6 @@ Pages are **dense reference**, not blog posts.
 
 ## 15. Version
 
-Current: v1.0. Full history → [docs/changelog.md](docs/changelog.md).
+Current: v2.0. Full history → [docs/changelog.md](docs/changelog.md).
 
 Co-evolve with user. Bump version + log entry on every change.
