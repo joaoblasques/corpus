@@ -35,19 +35,53 @@ def _make_proc(returncode=0, stdout="", stderr=""):
 
 
 @pytest.fixture(autouse=True)
-def _stub_quick_intake(request, monkeypatch):
-    """Full-run integration tests call main(["run"]) and mock collectors/ingest but not
-    the native quick-intake steps — stub those so tests never hit the network, spawn
-    subprocesses, or mutate the real corpus. The direct unit tests of these functions
-    (named *quick_intake*) opt out so they exercise the real implementation."""
-    if "quick_intake" in request.node.name:
-        return
-    monkeypatch.setattr(scheduled_run, "run_youtube_quick_intake",
-                        lambda **k: {"status": "ok", "ingested": 0, "rescued": 0, "skipped": 0},
-                        raising=False)
-    monkeypatch.setattr(scheduled_run, "run_docs_quick_intake",
-                        lambda **k: {"status": "ok", "ingested": 0, "skipped_thin": 0, "llm_fail": 0},
-                        raising=False)
+def _isolate_pipeline(monkeypatch, tmp_path):
+    """Make the whole scheduled-run pipeline test-safe.
+
+    main(["run"]) fans out to real, side-effectful steps: run_collectors (spawns the
+    gmail/obsidian/youtube collector subprocesses), run_ingest (spawns a headless
+    `claude --print /ingest-auto`), the quick-intake drains (captions/Whisper/OpenRouter),
+    the reaps, and commit_and_push (git add/commit/PUSH). On the `main` branch the branch
+    guard lets a `run` proceed, so any integration test that forgets to mock one of these
+    would execute the REAL pipeline against the live corpus — draining the backlog, hanging
+    ~90 min in the Whisper drain, or pushing to the real remote.
+
+    Stub every such step here. Each stub calls the REAL implementation ONLY when the test
+    injects that function's isolation seam (`_subprocess_run=`, or `inbox_dir=` for
+    move_processed_inbox) — the direct unit-test path. When main() calls the function with
+    defaults (no seam), the stub returns a benign result. A test that patches a function
+    explicitly (patch.object) still overrides the stub within its `with` block.
+    """
+    # (attribute, seam-kwarg that means "a unit test is injecting mocks", benign default)
+    guarded = [
+        ("run_collectors", "_subprocess_run", {}),
+        ("run_ingest", "_subprocess_run", {"status": "ok", "ingested": 0, "deferred": 0, "note": "stubbed"}),
+        ("run_youtube_quick_intake", "_subprocess_run", {"status": "ok", "ingested": 0, "rescued": 0, "skipped": 0}),
+        ("run_docs_quick_intake", "_subprocess_run", {"status": "ok", "ingested": 0, "skipped_thin": 0, "llm_fail": 0}),
+        ("run_email_relabel", "_subprocess_run", {"status": "ok"}),
+        ("run_x_reap", "_subprocess_run", {"status": "ok"}),
+        ("run_obsidian_reap", "_subprocess_run", {"status": "ok"}),
+        ("run_pdf_reap", "_subprocess_run", {"status": "ok"}),
+        ("run_github_reap", "_subprocess_run", {"status": "ok"}),
+        ("commit_and_push", "_subprocess_run", {"status": "skipped", "note": "stubbed"}),
+        ("move_processed_inbox", "inbox_dir", {"moved": 0, "by_channel": {}, "skipped": 0}),
+    ]
+
+    def _make(real, seam, default):
+        def wrapper(*args, **kwargs):
+            if kwargs.get(seam) is not None:   # unit test injected its seam -> real impl
+                return real(*args, **kwargs)
+            return dict(default)               # main()'s default call -> benign stub
+        return wrapper
+
+    for attr, seam, default in guarded:
+        if hasattr(scheduled_run, attr):
+            monkeypatch.setattr(scheduled_run, attr, _make(getattr(scheduled_run, attr), seam, default))
+
+    # Default write_run_report / commit target is the REAL corpus/log.md. Redirect it to a
+    # throwaway so a main(["run"]) test that forgets to patch LOG_PATH never writes the live
+    # log. Tests that patch LOG_PATH themselves override this within their own `with` block.
+    monkeypatch.setattr(scheduled_run, "LOG_PATH", tmp_path / "_isolated_log.md")
 
 
 # ---------------------------------------------------------------------------
@@ -777,8 +811,10 @@ class TestWriteRunReport:
 
     def test_log_path_constant_is_log_md(self):
         """LOG_PATH must point to corpus/log.md (OKF conformant name, not _log.md)."""
-        assert scheduled_run.LOG_PATH.name == "log.md", (
-            f"LOG_PATH filename should be 'log.md', got {scheduled_run.LOG_PATH.name!r}"
+        # The autouse isolation fixture redirects LOG_PATH to a tmp file so tests never write
+        # the live corpus/log.md — assert on the unpatched default constant instead.
+        assert scheduled_run._LOG_PATH_DEFAULT.name == "log.md", (
+            f"default log path filename should be 'log.md', got {scheduled_run._LOG_PATH_DEFAULT.name!r}"
         )
 
     def test_appends_well_formed_block(self, tmp_path):
@@ -1117,7 +1153,9 @@ class TestRunIntegration:
         ingest_mock.assert_called_once()
         assert not lock.exists(), "lock should be released after run"
         log_text = log.read_text(encoding="utf-8")
-        assert "scheduled run" in log_text
+        # OKF run-report block: a `## YYYY-MM-DD` date heading + `* **Collectors**:`/`* **Ingest**:`
+        # bullets (the old pre-OKF "config | scheduled run" heading text is gone).
+        assert "* **Ingest**:" in log_text
 
     def test_lint_result_lands_in_report(self, tmp_path):
         """A full run lints the corpus and flags integrity issues in the report."""
@@ -1182,7 +1220,9 @@ class TestRunIntegration:
     def test_exits_skipped_when_lock_already_held(self, tmp_path):
         """run() exits with skipped status when the lock is already held."""
         lock = tmp_path / ".held.lock"
-        lock.write_text("pid=99999\n", encoding="utf-8")
+        # LIVE pid: acquire_lock is self-healing and reclaims a DEAD-pid lock as stale — a dead
+        # pid here would let run() PROCEED (calling the collector) instead of skipping.
+        lock.write_text(f"pid={os.getpid()}\n", encoding="utf-8")
 
         collector_mock = MagicMock()
 
