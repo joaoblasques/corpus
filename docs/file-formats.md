@@ -13,16 +13,24 @@ okf_version: "0.1"
 ```
 
 ```markdown
-# <domain-slug>
-* [Page Title](/<domain>/<page>.md) — type · status · one-line summary
-* ...
+# Corpus Index
 
-# <domain-slug-2>
-* ...
+> Last updated: YYYY-MM-DD | Total pages: N | Total sources: M
 
-# Recent additions
-* YYYY-MM-DD: [Page Title](/<domain>/<page>.md) (new)
-* YYYY-MM-DD: [Page Title](/<domain>/<page>.md) (updated, +N sources)
+This file is auto-maintained by Claude. Do not edit by hand.
+
+## Domains
+
+### <domain-slug>
+- [Page Title](/<domain>/<page>.md) — type · status · one-line summary
+- ...
+
+### <domain-slug-2>
+- ...
+
+## Recent additions
+- YYYY-MM-DD: [Page Title](/<domain>/<page>.md) (new)
+- YYYY-MM-DD: [Page Title](/<domain>/<page>.md) (updated, +N sources)
 ```
 
 ---

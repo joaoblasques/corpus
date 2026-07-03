@@ -224,7 +224,7 @@ If a rule repeatedly causes problems, surface it. User updates the file; bump ve
 
 **Domain-change protocol:** always log creation/merge/split to `corpus/_domains.md` with rationale + date.
 
-**PARA-native collision rule:** Branch B — read frontmatter before ingesting. If `corpus_ingested: true` → **STOP**, surface: "Ingested `<corpus_ingested_at>`, produced `<corpus_pages>`. Re-ingest? skip (default) / force-update / append-only." Apply even for bulk "ingest everything" commands — enumerate collisions first. Default: skip. `corpus_ingested_at` = most recent op only; `_log.md` is full history.
+**PARA-native collision rule:** Branch B — read frontmatter before ingesting. If `corpus_ingested: true` → **STOP**, surface: "Ingested `<corpus_ingested_at>`, produced `<corpus_pages>`. Re-ingest? skip (default) / force-update / append-only." Apply even for bulk "ingest everything" commands — enumerate collisions first. Default: skip. `corpus_ingested_at` = most recent op only; `log.md` is full history.
 
 ---
 
