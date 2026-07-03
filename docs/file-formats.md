@@ -56,3 +56,13 @@ OKF reserved file. Newest-first, grouped by date. Update on every ingest/operati
 Op types: `Ingest`, `Schema`, `Config`, `Query`, `Lint`, `Domain`.
 
 - `Config` — changes to `corpus/_config.md`: PARA-native path additions, stamp field spec adjustments.
+
+---
+
+## §4 frontmatter — externalized detail
+
+*(Moved from CLAUDE.md §4, third compression pass, Thrift #8.)*
+
+**OKF conformance (v0.1):** `type` is the **OKF-required** field — every page must have a non-empty value. `title`, `description`, `resource`, `tags`, `timestamp` are OKF-recommended-optional (add where cheap; absence is legal). All other CLAUDE.md §4 fields (`domain`, `status`, `sources`, `aliases`, `confidence`, `supersedes`, etc.) are OKF-legal producer extensions — preserved on round-trip by any conformant consumer.
+
+**`sources` migration note**: existing pages use the old flat `- raw/<path>` format. Migrate to the structured form when you next touch the page (re-ingest, update, lint). Do not mass-update all pages in one pass without user approval.

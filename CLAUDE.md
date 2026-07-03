@@ -84,9 +84,7 @@ superseded_by:              # optional (v0.6); page that replaced this one (stal
 
 **Claim-lifecycle fields (v0.6)** — `confidence`, `last_confirmed`, `supersedes`, `superseded_by` are optional and managed per §7.1. Use them to track staleness and supersession; omit when not meaningful.
 
-**OKF conformance (v0.1):** `type` is the **OKF-required** field — every page must have a non-empty value. `title`, `description`, `resource`, `tags`, `timestamp` are OKF-recommended-optional (add where cheap; absence is legal). All other fields above (`domain`, `status`, `sources`, `aliases`, `confidence`, `supersedes`, etc.) are OKF-legal producer extensions — preserved on round-trip by any conformant consumer.
-
-**`sources` migration note**: existing pages use the old flat `- raw/<path>` format. Migrate to the structured form when you next touch the page (re-ingest, update, lint). Do not mass-update all pages in one pass without user approval.
+**OKF conformance (v0.1):** `type` is **OKF-required** — every page must have a non-empty value; all other fields above are OKF-legal. Full conformance detail + old-flat-`sources` migration rule: [docs/file-formats.md](docs/file-formats.md).
 
 ---
 
@@ -163,18 +161,7 @@ When a corpus page would benefit from context not present in the source (backgro
 5. Stamp source: `corpus_ingested: true`, `corpus_ingested_at: <today>`, `corpus_pages: [...]`.
 6. Branch A only: move file to `raw/<channel>/`.
 
-**Batch ingest (N>10) — cluster pipeline** (Coordinator + parallel Workers):
-
-| Phase | Owner | What |
-|---|---|---|
-| 0 Pre-flight | Coordinator | Re-read CLAUDE.md + index/domains/config. Check stamps/collisions → skip/force/append list. |
-| 1 Survey & cluster | Coordinator | Title+tags+¶1 per source (no full reads). Cluster thematically → route to existing domains (default); ≥3 distinct sources with no fit → propose new domain (confirm first); 1–2 sources → provisional; <3 no fit → fold as pages. Surface cluster→domain map for confirmation. |
-| 2 Entity registry | Coordinator | Extract 3–10 candidates/source. Dedup against `index.md` + across clusters by name/alias. Build `{slug → aliases, domain, path}` registry before any writes. |
-| 3 Per-cluster ingest | Workers (one/domain, parallel) | Read full bodies. Create/update pages via registry (no dupes). Citation gate every claim (§7). Target 10–15 page cascade. Link new pages from domain hub — no orphans. Workers return deltas; never write shared files. |
-| 4 Integrate | Coordinator | Stamps, `index.md` update, `log.md` append, inbox moves — all serialized. |
-| 5 Verify | Coordinator | Lint scoped to touched domains (orphans, dupes, contradictions, stubs, domain health). Apply safe fixes; surface rest. |
-
-**Coordinator-owns-shared-files:** only Coordinator writes `index.md`, `log.md`, `_domains.md`, `_config.md`. Workers own disjoint domains.
+**Batch ingest (N>10)** — cluster pipeline (Coordinator + parallel Workers, Phases 0–5): see [docs/batch-ingest-pipeline.md](docs/batch-ingest-pipeline.md). Invariant: **only the Coordinator writes shared files** (`index.md`, `log.md`, `_domains.md`, `_config.md`); Workers own disjoint domains.
 
 ### 8.2 Query (`/query`)
 
@@ -188,19 +175,7 @@ Driven by `query` skill + `bin/query.py`. Steps:
 
 ### 8.3 Lint
 
-**Triggered by**: "lint" (full) or "lint `<domain>`" (scoped). Check in order, output report, apply fixes only with approval:
-
-| Check | Action |
-|---|---|
-| Orphan pages (0 inbound hub links) | Link or flag for archive |
-| Stubs >14 days old | Flag for expansion or archive |
-| Duplicate entities (alias overlap) | Propose merge |
-| Contradictions between pages | Create/update synthesis page |
-| Implicit concepts (3+ page references, no own page) | Propose creation |
-| Stale claims (newer source contradicts) | Update with citation |
-| Domain health (<3 pages, >30 days) | Propose merge into sibling |
-| Provisional domains (>30 days, <3 sources) | Propose merge or removal |
-| Topic-mixed pages | Propose split |
+**Triggered by**: "lint" (full) or "lint `<domain>`" (scoped). Run the checks in [docs/lint-checks.md](docs/lint-checks.md) in order, output report, apply fixes only with approval.
 
 ### 8.4 Schema update
 
