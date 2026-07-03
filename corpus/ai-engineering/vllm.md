@@ -45,6 +45,9 @@ sources:
   - path: raw/web/web-run-highly-efficient-multimodal-agentic-ai-with-nvidia-nemot-b0ef6e3c.md
     channel: web
     ingested_at: 2026-07-02
+  - path: raw/web/web-run-a-vllm-server-on-hf-jobs-in-one-command-7f1a19cb.md
+    channel: web
+    ingested_at: 2026-07-03
 aliases:
   - vLLM
   - vllm
@@ -172,6 +175,23 @@ Agentic workloads (Claude Code, OpenClaw-style long-horizon tool-use loops) gene
 - **Post-training**: multi-environment RL via NVIDIA NeMo RL and NeMo Gym across text/image/audio/video environments [^src14].
 - **Role in an agent system**: functions as the perception/context sub-agent feeding structured understanding into downstream orchestration/execution agents — targeted at computer-use agents, document-intelligence workflows, and audio-video understanding pipelines [^src14]. Supported on B200, H100, H200, A100, L40S, DGX Spark, RTX 6000 [^src14]. See [Nemotron 3 Ultra](/ai-engineering/nemotron-3-ultra.md) for NVIDIA's related agentic-reasoning model.
 
+## Ad-hoc serving on Hugging Face Jobs
+
+`hf jobs run` provisions a container ("`docker run` for HF infrastructure") that can boot a vLLM server on demand, billed per-second — a fit for tests, evals, and batch generation rather than a durable production endpoint [^src15]:
+
+```
+hf jobs run --flavor a10g-large --expose 8000 --timeout 2h \
+  vllm/vllm-openai:latest \
+  vllm serve Qwen/Qwen3-4B --host 0.0.0.0 --port 8000
+```
+
+- **`--expose`** routes the container's port through HF's public jobs proxy; the resulting `https://<job_id>--8000.hf.jobs` URL is gated (requires an HF token with read access to the job's namespace), not a public endpoint [^src15].
+- **OpenAI-compatible**: the exposed server speaks the OpenAI API — an `OpenAI` client can point `base_url` at the job URL and pass `get_token()` as the API key, same interface as any other vLLM deployment [^src15].
+- **Scaling to large models**: `--flavor h200x2`/`h200x8` + `--tensor-parallel-size` matching the GPU count shards a model across GPUs (example: a 122B hybrid Mamba/attention MoE model on 2×H200, with `--max-model-len`/`--max-num-seqs` capped down from vLLM's defaults to fit a 256K-context model's memory footprint) [^src15].
+- **`--ssh`** opens a shell directly into the running job container (`hf jobs ssh <job_id>`) for interactive debugging — `nvidia-smi`, log tailing, process inspection — without relying on log output alone; requires registering a public key and `huggingface_hub >= 1.20.0` [^src15].
+- **Coding-agent backend**: launching with `--enable-auto-tool-choice --tool-call-parser hermes` (parser matched to the model family) lets a self-hosted vLLM job back a terminal coding agent (e.g. [Pi Agent](/ai-engineering/pi-agent.md)) as a custom OpenAI-compatible provider [^src15].
+- **HF Jobs vs. Inference Endpoints**: Jobs is billed per-second, maximally flexible (pick the image, flags, hardware), and best for one-off/experimental use; [Hugging Face](/ai-engineering/hugging-face.md) Inference Endpoints are the managed counterpart — access control tiers (public/protected/private) and scale-to-zero — for a durable, production-facing service [^src15].
+
 ## Related
 
 - [Mixture of Experts](/ai-engineering/mixture-of-experts.md) — MoE execution is a first-class vLLM serving concern (expert parallelism, Elastic EP runtime scaling, quantized MoE backends)
@@ -182,6 +202,8 @@ Agentic workloads (Claude Code, OpenClaw-style long-horizon tool-use loops) gene
 - [vime](/ai-engineering/vime.md) — RL post-training framework consuming vLLM's native weight-sync/pause-resume RL APIs
 - [vLLM Semantic Router](/ai-engineering/vllm-semantic-router.md) — request-routing control plane sitting in front of vLLM
 - [Ollama](/ai-engineering/ollama.md) — contrasting local-first single-user serving tool vs. vLLM's production/datacenter serving focus
+- [Hugging Face](/ai-engineering/hugging-face.md) — the platform hosting HF Jobs, Inference Endpoints, and the models vLLM serves
+- [Pi Agent](/ai-engineering/pi-agent.md) — minimal coding agent that can point at a self-hosted HF Jobs vLLM endpoint as a custom provider
 - [AI Engineering hub](/ai-engineering/README.md)
 
 ---
@@ -200,3 +222,4 @@ Agentic workloads (Claude Code, OpenClaw-style long-horizon tool-use loops) gene
 [^src12]: [vLLM Tops the Artificial Analysis Leaderboard](../../raw/web/web-vllm-tops-the-artificial-analysis-leaderboard-762bd790.md) — vLLM blog, 2026-05-11
 [^src13]: [Serving Agentic Workloads at Scale with vLLM x Mooncake](../../raw/web/web-serving-agentic-workloads-at-scale-with-vllm-x-mooncake-78c3044b.md) — vLLM blog, 2026-05-06
 [^src14]: [Run Highly Efficient Multimodal Agentic AI with NVIDIA Nemotron 3 Nano Omni Using vLLM](../../raw/web/web-run-highly-efficient-multimodal-agentic-ai-with-nvidia-nemot-b0ef6e3c.md) — vLLM blog, 2026-04-28
+[^src15]: [Run a vLLM Server on HF Jobs in One Command](../../raw/web/web-run-a-vllm-server-on-hf-jobs-in-one-command-7f1a19cb.md) — Hugging Face blog
