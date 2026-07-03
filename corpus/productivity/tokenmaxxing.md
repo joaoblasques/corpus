@@ -53,7 +53,7 @@ The AI hamster wheel = high AI activity, minimal real progress [^src1]. Characte
 - The sprint feels productive; the sprint review reveals nothing shipped
 - Common in teams that adopted AI tooling without changing workflow fundamentals
 
-The hamster wheel is distinct from [[productivity/shipping-and-scope|shipping]] work — it's motion without delivery, not perfectionism blocking delivery [^src1].
+The hamster wheel is distinct from [shipping](/productivity/shipping-and-scope.md) work — it's motion without delivery, not perfectionism blocking delivery [^src1].
 
 ## Centaur vs Reverse Centaur
 
@@ -71,7 +71,7 @@ Two collaboration models named in Joe Reis + Eric Weber's "Surviving the AI Grin
 
 The aspiration is Centaur. The trap is Reverse Centaur — which often emerges gradually as humans delegate more of the thinking to AI and retain only the implementation steps [^src2].
 
-Reverse Centaur is the organizational analog of [[software-engineering/cognitive-debt|Cognitive Surrender]] at the individual level: in both cases, human judgment exits the loop and borrowed confidence fills the vacuum [^src2].
+Reverse Centaur is the organizational analog of [Cognitive Surrender](/software-engineering/cognitive-debt.md) at the individual level: in both cases, human judgment exits the loop and borrowed confidence fills the vacuum [^src2].
 
 ## Identity crisis and token junkies
 
@@ -84,13 +84,13 @@ The strategic response named: lean into the judgment, accountability, and contex
 
 ## See also
 
-- [[data-engineering/data-work-in-the-ai-transition|Data Work in the AI Transition]] — synthesis: tokenmaxxing is the *productivity*-scale instance of Reis's one argument
-- [[data-engineering/vibe-engineering|Vibe Engineering]] — Reis's sibling diagnosis at the skills level; a vibe engineer with no mental model defaults to generating more (tokenmaxxing from the inside)
-- [[ai-business/ai-transition-economics|AI Transition Economics (1905)]] — Reis's macro frame; the hamster-wheel/reverse-centaur is the micro of "swap the motor, not the factory"
-- [[software-engineering/cognitive-debt|Cognitive Debt and Cognitive Surrender]] — the individual-level failure mode; borrowed confidence
-- [[productivity/ai-augmented-knowledge-work|AI-Augmented Knowledge Work]] — how to stay the "head" in the centaur model
-- [[productivity/learning-to-learn|Learning to Learn]] — keeping reasoning sharp under AI delegation pressure
-- [[data-engineering/ai-impact-on-data-engineering|AI's Impact on Data Engineering]] — the broader professional reckoning
+- [Data Work in the AI Transition](/data-engineering/data-work-in-the-ai-transition.md) — synthesis: tokenmaxxing is the *productivity*-scale instance of Reis's one argument
+- [Vibe Engineering](/data-engineering/vibe-engineering.md) — Reis's sibling diagnosis at the skills level; a vibe engineer with no mental model defaults to generating more (tokenmaxxing from the inside)
+- [AI Transition Economics (1905)](/ai-business/ai-transition-economics.md) — Reis's macro frame; the hamster-wheel/reverse-centaur is the micro of "swap the motor, not the factory"
+- [Cognitive Debt and Cognitive Surrender](/software-engineering/cognitive-debt.md) — the individual-level failure mode; borrowed confidence
+- [AI-Augmented Knowledge Work](/productivity/ai-augmented-knowledge-work.md) — how to stay the "head" in the centaur model
+- [Learning to Learn](/productivity/learning-to-learn.md) — keeping reasoning sharp under AI delegation pressure
+- [AI's Impact on Data Engineering](/data-engineering/ai-impact-on-data-engineering.md) — the broader professional reckoning
 
 ---
 

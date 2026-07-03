@@ -40,14 +40,14 @@ In classic software, if code, data, and environment stay the same, so does behav
 - **Data drift** — the distribution of the *input* data shifts over time, even if the relationship between inputs and outputs stays the same [^src1]. Housing example: lots of new houses enter a district; preferences and the feature→price relationship are unchanged, but the model hasn't seen enough new-house examples, so its performance drops — data drift is the root cause of the degradation [^src1].
 - **Concept drift** — the *relationship* between input features and the target changes, so the model's original assumptions no longer hold [^src1]. Housing example: a government subsidy for families with children leads to larger houses selling for lower prices — a shift in the underlying feature→price relationship; even if the input distribution barely changes, predictions become less accurate [^src1].
 
-**Not all drift is bad.** Sometimes the model is robust to input changes and performance stays stable [^src1]. The canonical example: you detect significant drift in a "temperature" feature via Jensen-Shannon distance, but the model's **MAE** is still within acceptable bounds — so no action is needed [^src1]. The rule: *monitor both data and performance before retraining or raising alarms* [^src1]. The univariate-metric selection behind this (JS, Wasserstein, etc.) is detailed in [[mlops/drift-detection|Drift Detection]].
+**Not all drift is bad.** Sometimes the model is robust to input changes and performance stays stable [^src1]. The canonical example: you detect significant drift in a "temperature" feature via Jensen-Shannon distance, but the model's **MAE** is still within acceptable bounds — so no action is needed [^src1]. The rule: *monitor both data and performance before retraining or raising alarms* [^src1]. The univariate-metric selection behind this (JS, Wasserstein, etc.) is detailed in [Drift Detection](/mlops/drift-detection.md).
 
 ## Databricks Lakehouse Monitoring
 
 **Databricks Lakehouse Monitoring** lets you monitor the statistical properties and quality of data in Delta tables, and (by creating inference tables with model inputs and predictions) track the performance of models and serving endpoints [^src1]. It auto-generates two key tables [^src1]:
 
 - **Profile Metrics Table** — summary stats per feature per time window (count, nulls, mean, stddev, min/max). For inference logs it also tracks accuracy, confusion matrix, F1, MSE, R², and fairness metrics; supports slicing/grouping (e.g. by model id or feature value).
-- **Drift Metrics Table** — tracks how column distributions evolve over time using drift-detection techniques, to identify data-quality issues and shifts. Two primary detection types: **Consecutive Drift** (current window vs the previous one, for short-term anomalies) and **Baseline Drift** (current data vs a fixed reference/baseline, typically built from training data) [^src1]. Drift is computed via a combination of statistical tests, distance metrics, and simple delta metrics, with method depending on data type [^src1] — see [[mlops/drift-detection|Drift Detection]].
+- **Drift Metrics Table** — tracks how column distributions evolve over time using drift-detection techniques, to identify data-quality issues and shifts. Two primary detection types: **Consecutive Drift** (current window vs the previous one, for short-term anomalies) and **Baseline Drift** (current data vs a fixed reference/baseline, typically built from training data) [^src1]. Drift is computed via a combination of statistical tests, distance metrics, and simple delta metrics, with method depending on data type [^src1] — see [Drift Detection](/mlops/drift-detection.md).
 
 ### Inference tables
 
@@ -60,20 +60,20 @@ The monitoring system has four components [^src2]: inference logging → monitor
 1. **Inference logging.** With inference tables enabled, send requests to the endpoint (via HTTPS or the Workspace Client) to generate logs [^src2].
 2. **Monitoring-table creation.** A `create_or_refresh_monitoring` function (in `src/marvel_characters/monitoring.py`) reads the raw inference Delta table, **parses the request and response JSON** into a structured schema (`F.from_json` with explicit `StructType` schemas, then `F.explode` over `dataframe_records`), selects timestamp/features/prediction columns, drops null predictions, and appends to a `model_monitoring` Delta table [^src2].
 3. **Monitor creation.** If no monitor exists, `create_monitoring_table` calls **`workspace.quality_monitors.create(...)`** with a **`MonitorInferenceLog`** spec — `problem_type=PROBLEM_TYPE_CLASSIFICATION`, `prediction_col`, `timestamp_col`, `granularities=["30 minutes"]`, `model_id_col` — then enables **Change Data Feed** on the table (`ALTER TABLE ... SET TBLPROPERTIES (delta.enableChangeDataFeed = true)`), which is important for updating monitoring [^src2]. This auto-creates two tables (profile + drift) plus a dashboard [^src2].
-4. **Scheduled refresh.** A **[[mlops/databricks-asset-bundles|Databricks Asset Bundle]]** job (`resources/bundle_monitoring.yml`) runs `scripts/refresh_monitor.py` on a weekly Quartz cron (Mondays 6 AM Amsterdam), calling `create_or_refresh_monitoring` — which runs `quality_monitors.run_refresh(...)` on an existing monitor [^src2].
+4. **Scheduled refresh.** A **[Databricks Asset Bundle](/mlops/databricks-asset-bundles.md)** job (`resources/bundle_monitoring.yml`) runs `scripts/refresh_monitor.py` on a weekly Quartz cron (Mondays 6 AM Amsterdam), calling `create_or_refresh_monitoring` — which runs `quality_monitors.run_refresh(...)` on an existing monitor [^src2].
 5. **Dashboard & alerts.** The auto-created dashboard has default panels (extendable with SQL queries); you can configure alerts to be notified when performance drops or data shifts [^src1][^src2].
 
 The net effect: inference tables + monitoring pipelines enable end-to-end visibility and alerting, so you can detect issues early and make data-driven retraining decisions [^src1][^src2].
 
 ## See also
 
-- [[mlops/drift-detection|Drift Detection]] — the univariate distance-metric/test selection detail under this broader monitoring picture
-- [[data-engineering/data-quality|Data Quality]] — complements this: its input-distribution monitoring layer watches for the same data drift from the *upstream data* side (schema/contract checks, `null_rate`/`mean` over time), where this page watches it from the *served-model* side
-- [[mlops/model-serving|Model Serving]] — inference tables log the endpoints this monitors
-- [[mlops/databricks-asset-bundles|Databricks Asset Bundles]] — the DAB job that schedules monitor refreshes
-- [[mlops/mlflow|MLflow]] — the registered models being served and monitored
-- [[data-engineering/databricks|Databricks]] — Unity Catalog, Delta tables, and the platform
-- [[mlops/README|MLOps hub]]
+- [Drift Detection](/mlops/drift-detection.md) — the univariate distance-metric/test selection detail under this broader monitoring picture
+- [Data Quality](/data-engineering/data-quality.md) — complements this: its input-distribution monitoring layer watches for the same data drift from the *upstream data* side (schema/contract checks, `null_rate`/`mean` over time), where this page watches it from the *served-model* side
+- [Model Serving](/mlops/model-serving.md) — inference tables log the endpoints this monitors
+- [Databricks Asset Bundles](/mlops/databricks-asset-bundles.md) — the DAB job that schedules monitor refreshes
+- [MLflow](/mlops/mlflow.md) — the registered models being served and monitored
+- [Databricks](/data-engineering/databricks.md) — Unity Catalog, Delta tables, and the platform
+- [MLOps hub](/mlops/README.md)
 
 ---
 

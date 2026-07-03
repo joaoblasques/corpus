@@ -133,9 +133,9 @@ The failure spanned four layers of a cross-language serving stack (Go image load
 
 ## Related
 
-- [[ai-engineering/vllm|vLLM]] — the inference-serving engine vLLM-SR routes requests to
-- [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] — Fusion's panel-judge-synthesis pattern is a Mixture-of-Models variant of multi-agent coordination
-- [[ai-engineering/README|AI Engineering hub]]
+- [vLLM](/ai-engineering/vllm.md) — the inference-serving engine vLLM-SR routes requests to
+- [Multi-Agent Systems](/ai-engineering/multi-agent-systems.md) — Fusion's panel-judge-synthesis pattern is a Mixture-of-Models variant of multi-agent coordination
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

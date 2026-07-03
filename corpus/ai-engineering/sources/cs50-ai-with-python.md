@@ -19,7 +19,7 @@ updated: 2026-06-15
 
 # Source: Harvard CS50's AI with Python
 
-**What it is**: Harvard's full university course "Introduction to Artificial Intelligence with Python," taught by Brian Yu — a comprehensive tour of classical and modern AI [^src1]. The canonical reference for the [[ai-engineering/ai-fundamentals|AI Fundamentals]] scaffold in this corpus.
+**What it is**: Harvard's full university course "Introduction to Artificial Intelligence with Python," taught by Brian Yu — a comprehensive tour of classical and modern AI [^src1]. The canonical reference for the [AI Fundamentals](/ai-engineering/ai-fundamentals.md) scaffold in this corpus.
 
 ## Curriculum (six units)
 
@@ -34,12 +34,12 @@ Each unit ships hands-on Python projects to implement the algorithms [^src1].
 
 ## Why it's filed
 
-It is the load-bearing source for [[ai-engineering/ai-fundamentals|AI Fundamentals]], [[ai-engineering/machine-learning|Machine Learning]], and [[ai-engineering/neural-network|Neural Networks]] — the classical-AI substrate that the corpus's LLM-heavy pages otherwise assume.
+It is the load-bearing source for [AI Fundamentals](/ai-engineering/ai-fundamentals.md), [Machine Learning](/ai-engineering/machine-learning.md), and [Neural Networks](/ai-engineering/neural-network.md) — the classical-AI substrate that the corpus's LLM-heavy pages otherwise assume.
 
 ## See also
 
-- [[ai-engineering/ai-fundamentals|AI Fundamentals]] · [[ai-engineering/machine-learning|Machine Learning]] · [[ai-engineering/neural-network|Neural Networks]]
-- [[ai-engineering/README|AI Engineering hub]]
+- [AI Fundamentals](/ai-engineering/ai-fundamentals.md) · [Machine Learning](/ai-engineering/machine-learning.md) · [Neural Networks](/ai-engineering/neural-network.md)
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

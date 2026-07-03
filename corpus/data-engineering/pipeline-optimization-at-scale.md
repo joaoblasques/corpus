@@ -92,11 +92,11 @@ This reduces from O(N²) operations to O(N log N). Latency: 9.5 hours → 45 min
 
 ## See also
 
-- [[data-engineering/idempotent-pipelines|Idempotent Pipelines]] — the functional foundation: same input → same output
-- [[data-engineering/scd2|SCD2]] — similar "avoid depends_on_past" framing for datestamp pipelines
-- [[data-engineering/apache-spark|Apache Spark]] — SMB joins, Adaptive Execution to fix skew
-- [[data-engineering/data-orchestration|Data Orchestration]] — Airflow `{{ ds }}` templating; SLA-based triggering
-- [[data-engineering/scaling-data-pipelines|Scaling Data Pipelines]] — when horizontal vs vertical matters
+- [Idempotent Pipelines](/data-engineering/idempotent-pipelines.md) — the functional foundation: same input → same output
+- [SCD2](/data-engineering/scd2.md) — similar "avoid depends_on_past" framing for datestamp pipelines
+- [Apache Spark](/data-engineering/apache-spark.md) — SMB joins, Adaptive Execution to fix skew
+- [Data Orchestration](/data-engineering/data-orchestration.md) — Airflow `{{ ds }}` templating; SLA-based triggering
+- [Scaling Data Pipelines](/data-engineering/scaling-data-pipelines.md) — when horizontal vs vertical matters
 
 ---
 

@@ -56,9 +56,9 @@ Satoshi was libertarian and distrustful of central banks and fiat currency. The 
 
 ## Related pages
 
-- [[blockchain/bitcoin|Bitcoin]] — the system Satoshi created
-- [[blockchain/proof-of-work|Proof-of-Work]] — Satoshi's core innovation
-- [[blockchain/the-cypherpunks|The Cypherpunks]] — the movement that preceded Bitcoin
-- [[blockchain/history-of-money|History of Money]] — the context that motivated Bitcoin
+- [Bitcoin](/blockchain/bitcoin.md) — the system Satoshi created
+- [Proof-of-Work](/blockchain/proof-of-work.md) — Satoshi's core innovation
+- [The Cypherpunks](/blockchain/the-cypherpunks.md) — the movement that preceded Bitcoin
+- [History of Money](/blockchain/history-of-money.md) — the context that motivated Bitcoin
 
 [^src1]: [Satoshi Nakamoto](../../raw/notes/notes-satoshi-nakamoto-scrape.md)

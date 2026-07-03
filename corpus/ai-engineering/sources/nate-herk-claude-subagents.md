@@ -17,7 +17,7 @@ updated: 2026-06-30
 
 **Source**: [How to Build Claude Subagents — Better Than 99% of People](../../../raw/youtube/youtube-e18sdZLwP7o-how-to-build-claude-subagents-better-than-99-of-people.md) — Nate Herk, YouTube, 2026.
 
-**Summary**: Practitioner deep-dive on Claude Code custom sub-agents — file format, YAML front matter fields, progressive disclosure mechanics, sub-agents vs skills distinction, model routing, dynamic workflows, and security hardening. Primary source for [[ai-engineering/claude-subagents|Claude Sub-Agents]].
+**Summary**: Practitioner deep-dive on Claude Code custom sub-agents — file format, YAML front matter fields, progressive disclosure mechanics, sub-agents vs skills distinction, model routing, dynamic workflows, and security hardening. Primary source for [Claude Sub-Agents](/ai-engineering/claude-subagents.md).
 
 ## Key claims
 
@@ -31,8 +31,8 @@ updated: 2026-06-30
 
 ## Pages populated
 
-- [[ai-engineering/claude-subagents|Claude Sub-Agents]] — primary: full concept page
-- [[ai-engineering/agent-skills|Agent Skills]] — updated with sub-agents vs skills distinction
+- [Claude Sub-Agents](/ai-engineering/claude-subagents.md) — primary: full concept page
+- [Agent Skills](/ai-engineering/agent-skills.md) — updated with sub-agents vs skills distinction
 
 ---
 

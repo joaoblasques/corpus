@@ -45,13 +45,13 @@ Put it on **GitHub** to version and share it [^src1]. The author notes this buil
 
 ## Why it's filed
 
-This is the most direct external articulation of the **LLM-Wiki / compounding-knowledge-base** pattern that this corpus itself implements — knowledge + skills + an ingest loop + an improve loop, all in version control. It corroborates [[ai-engineering/agent-skills|Agent Skills]] (skills as reusable processes), [[ai-engineering/claude-md-conventions|CLAUDE.md Conventions]] (the root brain file), and [[ai-engineering/agent-harness|Agent Harness]] (the self-improvement ratchet).
+This is the most direct external articulation of the **LLM-Wiki / compounding-knowledge-base** pattern that this corpus itself implements — knowledge + skills + an ingest loop + an improve loop, all in version control. It corroborates [Agent Skills](/ai-engineering/agent-skills.md) (skills as reusable processes), [CLAUDE.md Conventions](/ai-engineering/claude-md-conventions.md) (the root brain file), and [Agent Harness](/ai-engineering/agent-harness.md) (the self-improvement ratchet).
 
 ## See also
 
-- [[ai-engineering/agent-skills|Agent Skills]] · [[ai-engineering/claude-md-conventions|CLAUDE.md Conventions]] · [[ai-engineering/agent-harness|Agent Harness]]
-- [[ai-engineering/vibe-coding|Vibe Coding]] — the build-MVP-then-iterate loop
-- [[ai-engineering/README|AI Engineering hub]]
+- [Agent Skills](/ai-engineering/agent-skills.md) · [CLAUDE.md Conventions](/ai-engineering/claude-md-conventions.md) · [Agent Harness](/ai-engineering/agent-harness.md)
+- [Vibe Coding](/ai-engineering/vibe-coding.md) — the build-MVP-then-iterate loop
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

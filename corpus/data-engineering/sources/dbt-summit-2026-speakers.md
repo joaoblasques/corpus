@@ -112,8 +112,8 @@ The AI-assisted analytics course and the architect track reflect 2026 priorities
 
 ## Pages populated
 
-- [[data-engineering/dbt|dbt]] — updated: Tristan Handy role, 100K+ teams stat, Fivetran acquisition, v2 training
-- [[data-engineering/semantic-layer|Semantic Layer]] — OSI (Open Semantic Interchange) cross-tool metric standardization mentioned
+- [dbt](/data-engineering/dbt.md) — updated: Tristan Handy role, 100K+ teams stat, Fivetran acquisition, v2 training
+- [Semantic Layer](/data-engineering/semantic-layer.md) — OSI (Open Semantic Interchange) cross-tool metric standardization mentioned
 
 ---
 

@@ -89,6 +89,6 @@ The economic model [^src1]:
 - Subnet tokens (e.g. SIRE for Score) represent subnet-specific economic participation
 - Validators and miners within subnets earn emissions proportional to performance
 
-Related: [[blockchain/bitcoin|Bitcoin]], [[blockchain/proof-of-work|Proof-of-Work]]
+Related: [Bitcoin](/blockchain/bitcoin.md), [Proof-of-Work](/blockchain/proof-of-work.md)
 
 [^src1]: [Top 3 Bittensor TAO Subnets (Explained)](../../raw/youtube/youtube-99JCA0JScoA-top-3-bittensor-tao-subnets-explained.md)

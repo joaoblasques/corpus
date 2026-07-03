@@ -112,7 +112,7 @@ AI can scaffold ~80% of an interface quickly, producing a working prototype in m
 
 ## Why vibe coding isn't enough
 
-Vibe coding is fast but loses intent across agent sessions and invites scope drift [^src1]. The failure mode generalizes the [[ai-engineering/agent-harness|harness]] lesson: without written constraints, the agent picks interpretations silently and runs with them.
+Vibe coding is fast but loses intent across agent sessions and invites scope drift [^src1]. The failure mode generalizes the [harness](/ai-engineering/agent-harness.md) lesson: without written constraints, the agent picks interpretations silently and runs with them.
 
 ## Spec-Driven Development (the better approach)
 
@@ -120,13 +120,13 @@ SDD introduces a **plan → implement → verify** workflow [^src1]:
 
 - Write **project constitutions** and **feature specs** that preserve context across agent sessions [^src1].
 - Apply plan-implement-verify to guide the agent step by step, reducing cognitive overhead and keeping output aligned with intent [^src1].
-- Use the same workflow in new *and* existing codebases; package it into reusable [[ai-engineering/agent-skills|agent skills]] [^src1].
+- Use the same workflow in new *and* existing codebases; package it into reusable [agent skills](/ai-engineering/agent-skills.md) [^src1].
 
-The deeper case: SDD "aligns both humans and agents around the project's main non-negotiables" and addresses the core issues of vibe coding [^src2]. This is the same discipline as the [[ai-engineering/ai-product-management|PRD-before-agents]] practice (clear Definition of Done + Non-Goals) and Karpathy's **Goal-Driven Execution** ("don't tell it what to do; give it success criteria and watch it go") in [[ai-engineering/claude-md-conventions|CLAUDE.md Conventions]].
+The deeper case: SDD "aligns both humans and agents around the project's main non-negotiables" and addresses the core issues of vibe coding [^src2]. This is the same discipline as the [PRD-before-agents](/ai-engineering/ai-product-management.md) practice (clear Definition of Done + Non-Goals) and Karpathy's **Goal-Driven Execution** ("don't tell it what to do; give it success criteria and watch it go") in [CLAUDE.md Conventions](/ai-engineering/claude-md-conventions.md).
 
 ## "Coding is describing, not writing"
 
-At the frontier of full-agentic work the *definition of coding itself* shifts: Boris Cherny (head of Claude Code), who hasn't hand-edited a line since November, describes his day as still "coding" even though it is "just talking to Claude code to code for you" — **"coding now is describing what you want, not writing actual code"** [^src5]. This is the endpoint of the vibe-coding on-ramp, but distinct from naive vibe coding because the discipline (plan mode, reading the output, human review, verifiable specs) is retained — the SDD discipline below scales *up* to this level rather than being discarded. See [[ai-engineering/sources/boris-cherny-100-percent-claude-code|Boris Cherny — 100% Claude Code]].
+At the frontier of full-agentic work the *definition of coding itself* shifts: Boris Cherny (head of Claude Code), who hasn't hand-edited a line since November, describes his day as still "coding" even though it is "just talking to Claude code to code for you" — **"coding now is describing what you want, not writing actual code"** [^src5]. This is the endpoint of the vibe-coding on-ramp, but distinct from naive vibe coding because the discipline (plan mode, reading the output, human review, verifiable specs) is retained — the SDD discipline below scales *up* to this level rather than being discarded. See [Boris Cherny — 100% Claude Code](/ai-engineering/sources/boris-cherny-100-percent-claude-code.md).
 
 ## Relationship to other operating modes
 
@@ -134,7 +134,7 @@ At the frontier of full-agentic work the *definition of coding itself* shifts: B
 |---|---|---|
 | **Vibe coding** | Minimal — describe intent | Prototypes, personal tools, learning |
 | **Spec-Driven Development** | Up-front spec + verify loop | Production, multi-session, existing codebases |
-| **[[ai-engineering/agentic-workflow|Agentic workflow]]** | Structured workflow files (WAT) | Repeatable multi-step automations |
+| **[Agentic workflow](/ai-engineering/agentic-workflow.md)** | Structured workflow files (WAT) | Repeatable multi-step automations |
 
 ## Non-technical practitioners building real workflows
 
@@ -146,7 +146,7 @@ The gap between "I wish this existed" and "I can build it myself" is now smaller
 
 Key practice patterns [^src10]: start with a tiny experiment (first project: a simple calculator app); let Claude read the existing API docs and prototype; describe the problem as you would to a colleague, not as a spec; treat Claude as a brainstorming partner who gets better with refinement. "All I would have to do is specify the frame of the creative… and with the click of a button, the Figma plugin will create all the different permutations."
 
-**Vibecode** — a mobile-first app builder where users speak or type in natural language from their phone; Claude Code programmatically does the React Native/Expo generation, backend creation, and multi-file orchestration [^src11]. Real examples users built: a marketplace app for land sales in Australia; a virtual sensory board for children with autism. Company grew 3x to $10M ARR using this natural-conversation interface. "Coding is describing what you want, not writing actual code" — matches [[ai-engineering/vibe-coding#coding-is-describing-not-writing|"Coding is describing"]] above.
+**Vibecode** — a mobile-first app builder where users speak or type in natural language from their phone; Claude Code programmatically does the React Native/Expo generation, backend creation, and multi-file orchestration [^src11]. Real examples users built: a marketplace app for land sales in Australia; a virtual sensory board for children with autism. Company grew 3x to $10M ARR using this natural-conversation interface. "Coding is describing what you want, not writing actual code" — matches ["Coding is describing"](/ai-engineering/vibe-coding#coding-is-describing-not-writing.md) above.
 
 ## Website building as a structured 9-step workflow
 
@@ -179,15 +179,15 @@ The practical implication for the vibe-coding workflow: the permissive "just bui
 
 ## See also
 
-- [[ai-engineering/agentic-coding|Agentic Coding]] — the broader coding-agent practice
-- [[ai-engineering/agent-harness|Agent Harness]] — written constraints are what vibe coding lacks
-- [[ai-engineering/ai-product-management|AI Product Management]] — PRD / Definition of Done / Non-Goals
-- [[ai-engineering/prompt-engineering|Prompt Engineering]] — the "ask me questions first" pattern
-- [[ai-engineering/agent-security|Agent Security]] — security risks specific to AI-generated code
-- [[ai-engineering/agent-testing|Agent Testing]] — verification loops that catch what vibe coding misses
-- [[ai-engineering/learning-ai-engineering|Learning AI Engineering]] — where vibe coding fits a beginner path
-- [[ai-engineering/sources/beyond-vibe-coding-book|Beyond Vibe Coding (Book)]] — full source treatment
-- [[ai-engineering/README|AI Engineering hub]]
+- [Agentic Coding](/ai-engineering/agentic-coding.md) — the broader coding-agent practice
+- [Agent Harness](/ai-engineering/agent-harness.md) — written constraints are what vibe coding lacks
+- [AI Product Management](/ai-engineering/ai-product-management.md) — PRD / Definition of Done / Non-Goals
+- [Prompt Engineering](/ai-engineering/prompt-engineering.md) — the "ask me questions first" pattern
+- [Agent Security](/ai-engineering/agent-security.md) — security risks specific to AI-generated code
+- [Agent Testing](/ai-engineering/agent-testing.md) — verification loops that catch what vibe coding misses
+- [Learning AI Engineering](/ai-engineering/learning-ai-engineering.md) — where vibe coding fits a beginner path
+- [Beyond Vibe Coding (Book)](/ai-engineering/sources/beyond-vibe-coding-book.md) — full source treatment
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 
@@ -225,4 +225,4 @@ Unlike technical debt (which announces itself through mounting friction), **comp
 
 **What it demands** [^src15]: "Making code cheap to generate doesn't make understanding cheap to skip. The comprehension work is the job."
 
-See also: [[ai-engineering/intent-debt|Intent Debt]] — related concept about loss of authorial intent in AI-generated code.
+See also: [Intent Debt](/ai-engineering/intent-debt.md) — related concept about loss of authorial intent in AI-generated code.

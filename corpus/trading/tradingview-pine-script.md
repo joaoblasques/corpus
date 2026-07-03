@@ -62,7 +62,7 @@ AI can automate chart analysis that used to be manual [^src1]:
 
 This analysis takes Claude seconds vs. 20 minutes manually per chart [^src1].
 
-Related: [[trading/ai-trading-agents|AI Trading Agents]], [[trading/hyperliquid|Hyperliquid]]
+Related: [AI Trading Agents](/trading/ai-trading-agents.md), [Hyperliquid](/trading/hyperliquid.md)
 
 [^src1]: [How Claude Changes Crypto Trading Forever](../../raw/youtube/youtube-3r7u6q-egP8-how-claude-changes-crypto-trading-forever.md)
 [^src2]: [The Simple 4-Step Process To Build Your Own AI Trading Assistant With Claude](../../raw/youtube/youtube-45eaVU5NVi8-the-simple-4-step-process-to-build-your-own-ai-trading-assis.md)

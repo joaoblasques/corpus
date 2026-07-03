@@ -9,7 +9,7 @@ sources:
 aliases:
   - Perspective
   - perspective-dev
-  - @finos/perspective
+  - "@finos/perspective"
   - perspective-python
   - WebAssembly analytics
   - streaming data visualization
@@ -44,17 +44,17 @@ updated: 2026-06-25
 
 ## Positioning in the data stack
 
-Perspective sits at the **visualization/serving layer** — the consumer of processed data, not the producer. In a [[data-engineering/modern-data-stack|modern data stack]] context, it connects downstream of the transformation layer (dbt, Spark) to provide real-time or near-real-time dashboards without requiring a separate BI tool. Its WebAssembly engine enables query execution in the browser, reducing server-side compute costs for interactive analytics.
+Perspective sits at the **visualization/serving layer** — the consumer of processed data, not the producer. In a [modern data stack](/data-engineering/modern-data-stack.md) context, it connects downstream of the transformation layer (dbt, Spark) to provide real-time or near-real-time dashboards without requiring a separate BI tool. Its WebAssembly engine enables query execution in the browser, reducing server-side compute costs for interactive analytics.
 
-The DuckDB integration is particularly notable: it positions Perspective alongside [[data-engineering/duckdb|DuckDB]] as part of a lightweight, embeddable analytics stack that can process large datasets locally without cloud warehouse compute. See also [[data-engineering/bi-as-code|BI as Code]] for the broader SQL-first visualization paradigm.
+The DuckDB integration is particularly notable: it positions Perspective alongside [DuckDB](/data-engineering/duckdb.md) as part of a lightweight, embeddable analytics stack that can process large datasets locally without cloud warehouse compute. See also [BI as Code](/data-engineering/bi-as-code.md) for the broader SQL-first visualization paradigm.
 
 ## Related
 
-- [[data-engineering/duckdb|DuckDB]] — DuckDB is one of the supported external Data Model query engines
-- [[data-engineering/bi-as-code|BI as Code]] — broader concept of code-driven analytics dashboards
-- [[data-engineering/stream-processing|Stream Processing]] — Perspective is designed for streaming data visualization
-- [[data-engineering/apache-spark|Apache Spark]] / [[data-engineering/kafka|Apache Kafka]] — typical upstream producers for streaming data Perspective visualizes
-- [[data-engineering/README|Data Engineering hub]]
+- [DuckDB](/data-engineering/duckdb.md) — DuckDB is one of the supported external Data Model query engines
+- [BI as Code](/data-engineering/bi-as-code.md) — broader concept of code-driven analytics dashboards
+- [Stream Processing](/data-engineering/stream-processing.md) — Perspective is designed for streaming data visualization
+- [Apache Spark](/data-engineering/apache-spark.md) / [Apache Kafka](/data-engineering/kafka.md) — typical upstream producers for streaming data Perspective visualizes
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

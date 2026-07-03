@@ -143,21 +143,21 @@ A flagged gap: organizational context and memory improve agent output, but there
 
 ## Maintaining trust in evals (against criteria drift)
 
-A recurring failure pattern: teams build eval systems, then "gradually lose faith in them" — metrics stop matching production, or the evals get too complex to interpret — and revert to gut feeling, defeating the purpose [^src10]. Front-loading [[ai-engineering/error-analysis|error analysis]] tells you *what* to measure; the practices below keep the measurement trustworthy as it scales [^src10].
+A recurring failure pattern: teams build eval systems, then "gradually lose faith in them" — metrics stop matching production, or the evals get too complex to interpret — and revert to gut feeling, defeating the purpose [^src10]. Front-loading [error analysis](/ai-engineering/error-analysis.md) tells you *what* to measure; the practices below keep the measurement trustworthy as it scales [^src10].
 
 **Criteria drift.** Per Shankar et al. (*Who Validates the Validators?*), "the process of grading outputs helps [people] define that very criteria" — so you cannot fully fix eval criteria before judging real outputs [^src10]. Treat criteria as living documents that evolve with understanding, and reconcile contradictory stakeholder criteria rather than imposing one [^src10]. (Honeycomb's Phillip Carter: "Seeing how the LLM breaks down its reasoning made me realize I wasn't being consistent about how I judged certain edge cases.")
 
 **Favor binary decisions over arbitrary scales** [^src10]. A 1–5 scale forces evaluators to agonize over 3-vs-4 boundary cases, injecting noise; a pass/fail forces a clear "did this output achieve its purpose?" and makes progress legible ("a 10% increase in passing outputs is immediately meaningful"). Even teams using 1–5 inevitably ask where "good enough" is — a binary decision in disguise.
 
-**Pair binary judgments with detailed critiques** [^src10]. The nuance isn't lost — it moves into a written critique of *why* something passed/failed. Used as few-shot examples in judge prompts, these critiques yield "15–20% higher agreement rates between human and LLM evaluations" and seed high-quality [[ai-engineering/synthetic-data|synthetic data]].
+**Pair binary judgments with detailed critiques** [^src10]. The nuance isn't lost — it moves into a written critique of *why* something passed/failed. Used as few-shot examples in judge prompts, these critiques yield "15–20% higher agreement rates between human and LLM evaluations" and seed high-quality [synthetic data](/ai-engineering/synthetic-data.md).
 
-**Measure human↔LLM alignment, don't assume it** [^src10]. People "over-rely and over-trust AI systems" (e.g. the debunked MIT-EECS-GPT-4 pre-print where the model graded itself), and LLM judges can be swayed by option order or formatting. With Honeycomb it took **three iterations to reach >90% agreement** between the LLM-judge and human labels — alignment is "an ongoing conversation," not a one-time setup (cf. Eugene Yan's AlignEval). This is the [[ai-engineering/generator-evaluator-separation|generator–evaluator separation]] principle applied to grading.
+**Measure human↔LLM alignment, don't assume it** [^src10]. People "over-rely and over-trust AI systems" (e.g. the debunked MIT-EECS-GPT-4 pre-print where the model graded itself), and LLM judges can be swayed by option order or formatting. With Honeycomb it took **three iterations to reach >90% agreement** between the LLM-judge and human labels — alignment is "an ongoing conversation," not a one-time setup (cf. Eugene Yan's AlignEval). This is the [generator–evaluator separation](/ai-engineering/generator-evaluator-separation.md) principle applied to grading.
 
 **Scale without losing trust** [^src10]: start with high human involvement → study where automated evals align vs diverge → use strategic sampling on the weakest-alignment cases → keep calibrating. The goal is to *direct* human effort to the most informative cases, not eliminate it.
 
 ## Evaluation infrastructure as the foundation
 
-The key enabler of an experiment-based [[ai-engineering/ai-product-management|roadmap]] is robust eval infrastructure — "without it, you're just guessing whether your experiments are working" [^src10]. In early GitHub Copilot development the team "invested heavily in building sophisticated offline evaluation infrastructure": systems that cloned repositories at scale, set up their environments, and ran each repo's **existing unit-test suites** as an automated way to verify completion correctness across many languages and frameworks [^src10]. That foundation let them run thousands of experiments and say "this change improved quality by X%" instead of debating — "this wasn't wasted time, it was the foundation that accelerated everything" [^src10]. This mirrors the SWE-bench philosophy above: binary outcomes tied to executable criteria beat rubric scoring.
+The key enabler of an experiment-based [roadmap](/ai-engineering/ai-product-management.md) is robust eval infrastructure — "without it, you're just guessing whether your experiments are working" [^src10]. In early GitHub Copilot development the team "invested heavily in building sophisticated offline evaluation infrastructure": systems that cloned repositories at scale, set up their environments, and ran each repo's **existing unit-test suites** as an automated way to verify completion correctness across many languages and frameworks [^src10]. That foundation let them run thousands of experiments and say "this change improved quality by X%" instead of debating — "this wasn't wasted time, it was the foundation that accelerated everything" [^src10]. This mirrors the SWE-bench philosophy above: binary outcomes tied to executable criteria beat rubric scoring.
 
 ## Trace-based production monitoring
 
@@ -172,7 +172,7 @@ Beyond golden-dataset evals, production agents are monitored via **trace data** 
 
 A monitoring **maturation curve**: moment-in-time snapshots → dashboards → anomaly detection on trends → incident management for SLAs [^src4]. The three baseline metrics where abnormal behavior shows up first [^src4]:
 
-- **Total tokens** (per span, not per conversation) — a step-change up signals a persistent config change; gradual drift signals multi-turn context accumulation (a session can climb from 5k to 40k tokens by turn 10), the case for explicit [[ai-engineering/context-window-management|context window management]] [^src4].
+- **Total tokens** (per span, not per conversation) — a step-change up signals a persistent config change; gradual drift signals multi-turn context accumulation (a session can climb from 5k to 40k tokens by turn 10), the case for explicit [context window management](/ai-engineering/context-window-management.md) [^src4].
 - **Duration** — correlates with tokens but can spike independently on extra tool calls or retries; watch P50/P90, not just the mean, since a stable mean hides a growing slow tail [^src4].
 - **Status codes** (`STATUS_CODE_OK` vs `STATUS_CODE_ERROR`) per span — distinguishes planning vs tool-call vs response-generation failures, and a span-level completion rate catches silent failures that token/duration miss [^src4].
 
@@ -246,21 +246,21 @@ When evaluating whether a task is suitable for a fully autonomous overnight agen
 
 This checklist comes from Karpathy's `autoresearch` repo practice and is directly applicable to deciding whether a custom eval can run headlessly. If all three must-haves hold, the agent loop is self-sustaining; if the score is subjective, a human must be in the loop (which breaks the overnight compounding pattern).
 
-See also: [[ai-engineering/compound-engineering|Compound Engineering]] §Autoresearch for the 3-file system (instructions / asset / scoring file) that implements this pattern.
+See also: [Compound Engineering](/ai-engineering/compound-engineering.md) §Autoresearch for the 3-file system (instructions / asset / scoring file) that implements this pattern.
 
 ## See also
 
-- [[ai-engineering/error-analysis|Error Analysis]] — the discovery phase that defines what these evals measure
-- [[ai-engineering/langsmith|LangSmith]] — platform that implements these patterns
-- [[ai-engineering/ai-agent|AI Agent]] — the systems being evaluated
-- [[ai-engineering/context-engineering|Context Engineering]] — context window growth directly affects evaluation quality (thread evaluator catches degradation)
-- [[ai-engineering/context-window-management|Context Window Management]] — token-drift monitoring surfaces multi-turn context accumulation
-- [[ai-engineering/rag|RAG]] — temporal accuracy is an eval dimension most RAG benchmarks miss
-- [[ai-engineering/agent-harness|Agent Harness]] — harness choice can swing eval scores independent of the model
+- [Error Analysis](/ai-engineering/error-analysis.md) — the discovery phase that defines what these evals measure
+- [LangSmith](/ai-engineering/langsmith.md) — platform that implements these patterns
+- [AI Agent](/ai-engineering/ai-agent.md) — the systems being evaluated
+- [Context Engineering](/ai-engineering/context-engineering.md) — context window growth directly affects evaluation quality (thread evaluator catches degradation)
+- [Context Window Management](/ai-engineering/context-window-management.md) — token-drift monitoring surfaces multi-turn context accumulation
+- [RAG](/ai-engineering/rag.md) — temporal accuracy is an eval dimension most RAG benchmarks miss
+- [Agent Harness](/ai-engineering/agent-harness.md) — harness choice can swing eval scores independent of the model
 
 ---
 
-[^src1]: [[03_Resources/Study Notes/LangSmith - Debugging and Evaluating AI Agents|LangSmith - Debugging and Evaluating AI Agents]]
+[^src1]: [LangSmith - Debugging and Evaluating AI Agents](/03_Resources/Study Notes/LangSmith - Debugging and Evaluating AI Agents.md)
 [^src2]: [Better Experiments with LLM Evals — A Funnel, Not a Fork](../../raw/web/better-experiments-with-llm-evals-a-funnel-not-a-fork-spotif.md)
 [^src3]: [What Data Agent Benchmarks Do and Don't Tell Us](../../raw/web/what-data-agent-benchmarks-do-and-don-t-tell-us.md)
 [^src4]: [Monitoring Cortex Agent Performance With Trace Data](../../raw/web/monitoring-cortex-agent-performance-with-trace-data.md)

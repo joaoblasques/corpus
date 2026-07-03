@@ -104,7 +104,7 @@ Clay (clay.com) is a go-to-market platform that exemplifies how AI agents integr
 
 - Aggregates data from 150+ providers (lead enrichment, account scoring, intent signals, contact data).
 - **Claygent** — an AI agent that can search public databases, navigate gated forms, and find unique data points; agents are versionable and reusable across workflows.
-- **MCP integration**: Claygent connects to any MCP server (Salesforce, Gong, Google Docs) for deeper business context — a live example of the MCP-as-front-door architecture described in [[ai-business/selling-to-ai-agents|Selling to AI Agents]].
+- **MCP integration**: Claygent connects to any MCP server (Salesforce, Gong, Google Docs) for deeper business context — a live example of the MCP-as-front-door architecture described in [Selling to AI Agents](/ai-business/selling-to-ai-agents.md).
 - Sculptor: an AI chat interface for GTM idea generation, analysis, and table building.
 - Anthropic uses Clay internally: "Clay has helped Anthropic significantly improve our lead enrichment and sales data pipelines. We've been able to consolidate our tech stack to core essentials, like our CRM, Clay, and email tool." [^src3]
 
@@ -112,10 +112,10 @@ Clay represents the "orchestrate and act on data at scale" layer — connecting 
 
 ## Related
 
-- [[ai-business/ai-and-the-job-market|AI and the Job Market]] — the broader narrative on AI's economic impact; the Toyota/GM analogy is covered in depth there too.
-- [[ai-business/monetizing-code|Monetizing Code]] — building AI workflows as the monetization opportunity.
-- [[ai-business/technical-career|Navigating a Technical Career]] — human skills that compound alongside agents.
-- [[ai-business/selling-to-ai-agents|Selling to AI Agents]] — the commercial layer: how to build products that *sell to* AI agents, not just how to build them.
+- [AI and the Job Market](/ai-business/ai-and-the-job-market.md) — the broader narrative on AI's economic impact; the Toyota/GM analogy is covered in depth there too.
+- [Monetizing Code](/ai-business/monetizing-code.md) — building AI workflows as the monetization opportunity.
+- [Navigating a Technical Career](/ai-business/technical-career.md) — human skills that compound alongside agents.
+- [Selling to AI Agents](/ai-business/selling-to-ai-agents.md) — the commercial layer: how to build products that *sell to* AI agents, not just how to build them.
 
 [^src1]: [The Agent Stack Bet](../../raw/web/web-the-agent-stack-bet.md)
 [^src2]: [We Need to Talk About Agents](../../raw/web/web-we-need-to-talk-about-agents.md)

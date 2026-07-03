@@ -40,7 +40,7 @@ updated: 2026-06-24
 The term blurs three distinct things [^src1]:
 
 - **Long-horizon reasoning** — planning/executing over many dependent steps; mostly a model-quality story. METR's time-horizon metric (length of task a model completes at 50% reliability) has doubled roughly every seven months since 2019; on that curve frontier agents hit day-scale tasks by 2028 and year-scale by 2034 [^src1].
-- **Long-running execution** — the process runs for hours or days, with the model invoked thousands of times; mostly a [[ai-engineering/agent-harness|harness]] story [^src1].
+- **Long-running execution** — the process runs for hours or days, with the model invoked thousands of times; mostly a [harness](/ai-engineering/agent-harness.md) story [^src1].
 - **Persistent agency** — an identity that outlives any single task, accumulating memory and preferences; the "Memory Bank" flavor [^src1].
 
 Production agents blend all three, but the engineering problems and the products that solve them differ [^src1].
@@ -54,13 +54,13 @@ Production agents blend all three, but the engineering problems and the products
 
 Long-running designs are mostly answers to three recurring problems [^src1]:
 
-1. **Finite context.** Even a 1M-token window fills, and [[ai-engineering/context-window-management|context rot]] degrades performance well before the hard limit; a 24-hour run will not fit any window on the roadmap [^src1].
+1. **Finite context.** Even a 1M-token window fills, and [context rot](/ai-engineering/context-window-management.md) degrades performance well before the hard limit; a 24-hour run will not fit any window on the roadmap [^src1].
 2. **No persistent state.** A new session starts blank — "imagine a software project staffed by engineers working in shifts, where each new engineer arrives with no memory of what happened on the previous shift." [^src1]
 3. **No self-verification.** Models skew positive grading their own work, so without a separate signal you get "the agent that ships at 30% complete with full confidence" [^src1].
 
 ## Architectural patterns
 
-- **The [[ai-engineering/ralph-loop|Ralph loop]].** The simplest practitioner version — a Bash loop where `prd.json` is the plan and `progress.txt` is the lab notes, state on disk [^src1]. See its own page.
+- **The [Ralph loop](/ai-engineering/ralph-loop.md).** The simplest practitioner version — a Bash loop where `prd.json` is the plan and `progress.txt` is the lab notes, state on disk [^src1]. See its own page.
 - **Anthropic — harness, then brain/hands/session.** An initializer agent sets up the environment and writes a `feature-list.json` + `init.sh`; a coding agent is woken repeatedly to make incremental progress, run tests, leave a `claude-progress.txt`, and commit, with a "test ratchet" forbidding editing/removing tests [^src1]. The "Decoupling the brain from the hands" architecture splits the **Brain** (model + harness loop), **Hands** (sandboxed ephemeral execution), and **Session** (append-only event log); a fresh container calls `wake(sessionId)` to reconstitute state, and decoupling dropped time-to-first-token ~60% at p50 and over 90% at p95 [^src1]. "Every component in a harness encodes an assumption about what the model can't do on its own." [^src1]
 - **Cursor — planners, workers, judges.** After a flat lock-based model bottlenecked and an optimistic-concurrency version didn't fix coordination, Cursor's production design uses **planners** (explore the codebase, emit tasks, recursively spawn sub-planners), **workers** (focused executors that don't coordinate), and **judges** (decide when an iteration finishes/restarts) [^src1]. Notable findings: "a surprising amount of the system's behavior comes down to how we prompt the agents," and different models slot into different roles — a GPT model beat Opus for extended autonomous work because Opus "tended to stop early and take shortcuts" [^src1].
 - **Google — Agent Platform.** Cloud Next '26 folded Vertex AI into the Gemini Enterprise Agent Platform, productizing long-running agents with SLAs: Agent Runtime (runs "for days at a time," sub-second cold starts), Agent Sessions (pinnable to custom session IDs), Agent Memory Bank (persistent curated long-term memory with a search API), Agent Sandbox, plus orchestration/registry/identity/gateway/observability services [^src1]. Architecturally "the same brain/hands/session split... just productized at platform scale." [^src1]
@@ -81,7 +81,7 @@ Osmani and Shubham Saboo distill five patterns separating working long-running a
 
 By use case [^src1]:
 
-- **Coding on your own repo** — just use [[ai-engineering/claude-code|Claude Code]] (or Antigravity/Cursor/Codex); treat `AGENTS.md` "like a pilot's checklist," add typecheck/lint hooks, write a plan file, use the Ralph loop when you don't believe "done," and run in a worktree so a closed laptop doesn't kill the run [^src1].
+- **Coding on your own repo** — just use [Claude Code](/ai-engineering/claude-code.md) (or Antigravity/Cursor/Codex); treat `AGENTS.md` "like a pilot's checklist," add typecheck/lint hooks, write a plan file, use the Ralph loop when you don't believe "done," and run in a worktree so a closed laptop doesn't kill the run [^src1].
 - **Hosted agent product** — "Don't build the runtime. Pick a managed one" (Google Agent Platform, Claude Managed Agents, or self-host on ADK / Claude Agent SDK / Codex SDK) [^src1].
 - **Autonomous/operational (monitoring, research, ops)** — Memory-Bank-style persistence (ADK + Memory Bank + Cloud Run + Cloud Scheduler) [^src1].
 
@@ -120,7 +120,7 @@ Ch10 surfaces challenges that don't arise with interactive AI tools [^src2]:
 
 ## Limitations
 
-Still genuinely unsolved [^src1]: **cost** (a 24-hour frontier run can "quietly burn through a week's API budget in an afternoon" without budgets/circuit breakers — see [[ai-engineering/agent-cost-management|Agent Cost Management]]); **security** (a larger attack surface; the brain/hands split keeps credentials unreachable from the sandbox); **alignment drift** (goals lose fidelity across re-summarization); **verification** (auditing 24 hours of activity is a human-time problem); and **the human role** — "the skill that's appreciating in value isn't writing code. It's writing specs that survive contact with an autonomous executor." [^src1]
+Still genuinely unsolved [^src1]: **cost** (a 24-hour frontier run can "quietly burn through a week's API budget in an afternoon" without budgets/circuit breakers — see [Agent Cost Management](/ai-engineering/agent-cost-management.md)); **security** (a larger attack surface; the brain/hands split keeps credentials unreachable from the sandbox); **alignment drift** (goals lose fidelity across re-summarization); **verification** (auditing 24 hours of activity is a human-time problem); and **the human role** — "the skill that's appreciating in value isn't writing code. It's writing specs that survive contact with an autonomous executor." [^src1]
 
 ## Goal-based delegation for long-running agents (Rakuten)
 
@@ -132,14 +132,14 @@ Specialist agents (engineering/product/sales/marketing/finance) were deployed wi
 
 ## Phone-to-desktop persistent sessions (Cowork Dispatch)
 
-**Dispatch** (Pro/Max beta) extends the long-running agent pattern to cross-device persistence: a single conversation thread lives across mobile and desktop, so delegating a task from your phone to a Claude Code or Cowork session on your desktop isn't a separate handoff — it's the same persistent context [^src4]. This operationalizes the `wake(sessionId)` pattern from [[ai-engineering/claude-managed-agents|Claude Managed Agents]] Brain-Hands-Session architecture: the phone is the human-in-the-loop checkpoint, and the desktop is the execution environment. Push notifications handle the async completion loop.
+**Dispatch** (Pro/Max beta) extends the long-running agent pattern to cross-device persistence: a single conversation thread lives across mobile and desktop, so delegating a task from your phone to a Claude Code or Cowork session on your desktop isn't a separate handoff — it's the same persistent context [^src4]. This operationalizes the `wake(sessionId)` pattern from [Claude Managed Agents](/ai-engineering/claude-managed-agents.md) Brain-Hands-Session architecture: the phone is the human-in-the-loop checkpoint, and the desktop is the execution environment. Push notifications handle the async completion loop.
 
 ## See also
 
-- [[ai-engineering/agentic-coding|Agentic Coding]] — the conductor→orchestrator shift that autonomous agents represent
-- [[ai-engineering/agent-testing|Agent Testing]] — verification loops become more important, not less, with autonomous agents
-- [[ai-engineering/agent-security|Agent Security]] — trust model implications; autonomous agents as a larger attack surface
-- [[ai-engineering/sources/beyond-vibe-coding-book|Beyond Vibe Coding (Book)]] — ch10 as primary source for the copilot→autopilot framing
+- [Agentic Coding](/ai-engineering/agentic-coding.md) — the conductor→orchestrator shift that autonomous agents represent
+- [Agent Testing](/ai-engineering/agent-testing.md) — verification loops become more important, not less, with autonomous agents
+- [Agent Security](/ai-engineering/agent-security.md) — trust model implications; autonomous agents as a larger attack surface
+- [Beyond Vibe Coding (Book)](/ai-engineering/sources/beyond-vibe-coding-book.md) — ch10 as primary source for the copilot→autopilot framing
 
 [^src1]: [Long-running Agents](../../raw/web/long-running-agents.md)
 [^src2]: [Ch10 — Autonomous Background Coding Agents](../../raw/notes/notes-10-autonomous-background-coding-agents.md)

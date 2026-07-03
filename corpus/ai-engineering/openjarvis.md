@@ -19,11 +19,11 @@ updated: 2026-07-02
 
 # OpenJarvis
 
-**TL;DR.** OpenJarvis is an open-source framework, built by Stanford's Hazy Research and Scaling Intelligence labs (part of their "Intelligence Per Watt" research into efficient local AI), for building personal AI agents that run on the user's own hardware. It makes local-first the default — models run locally via [[ai-engineering/ollama|Ollama]], with cloud as optional fallback — and tracks energy, cost, and latency alongside accuracy [^src1].
+**TL;DR.** OpenJarvis is an open-source framework, built by Stanford's Hazy Research and Scaling Intelligence labs (part of their "Intelligence Per Watt" research into efficient local AI), for building personal AI agents that run on the user's own hardware. It makes local-first the default — models run locally via [Ollama](/ai-engineering/ollama.md), with cloud as optional fallback — and tracks energy, cost, and latency alongside accuracy [^src1].
 
 ## Positioning
 
-Most personal-AI tools send every request to the cloud even though local models can already handle most day-to-day chat and reasoning. OpenJarvis inverts that default: local-first, cloud-optional [^src1]. Version 1.0 ships with built-in [[ai-engineering/ollama|Ollama]] support.
+Most personal-AI tools send every request to the cloud even though local models can already handle most day-to-day chat and reasoning. OpenJarvis inverts that default: local-first, cloud-optional [^src1]. Version 1.0 ships with built-in [Ollama](/ai-engineering/ollama.md) support.
 
 ## Setup
 
@@ -58,10 +58,10 @@ Each preset bundles an agent with the engines/tools it needs [^src1]:
 
 ## Related
 
-- [[ai-engineering/ollama|Ollama]] — the local model-serving backend OpenJarvis runs on
-- [[ai-engineering/local-ai-agents|Local AI Agents]] — the broader category of always-on, own-hardware agents
-- [[ai-engineering/openclaw|OpenClaw]] — a comparable open-source local-agent framework, also Ollama-integrated
-- [[ai-engineering/README|AI Engineering hub]]
+- [Ollama](/ai-engineering/ollama.md) — the local model-serving backend OpenJarvis runs on
+- [Local AI Agents](/ai-engineering/local-ai-agents.md) — the broader category of always-on, own-hardware agents
+- [OpenClaw](/ai-engineering/openclaw.md) — a comparable open-source local-agent framework, also Ollama-integrated
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

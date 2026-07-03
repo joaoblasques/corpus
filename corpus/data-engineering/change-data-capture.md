@@ -57,7 +57,7 @@ CDC sidesteps the snapshot-comparison trap. Both full load and incremental loadi
 At an HVAC-services company, a PM needed to know **every time a technician was reassigned to a project, the moment it happened** — because some secure facilities required specially trained technicians, and the wrong assignment needed immediate remediation [^src1]. The SQL Server `assignments` table stored **only current state**: no history, no timestamps. An assignment change overwrote the row, with no record of the previous value or when it changed [^src1].
 
 - **Full load on a schedule** could tell you *something* changed between two snapshots, but a daily run would surface a 9am reassignment only the next morning, and multiple reassignments between snapshots would collapse to the final state [^src1].
-- **[[data-engineering/scd2|SCD Type 2]]** preserves history by inserting a new row on change and marking the old row inactive — better, but it still only captures changes **when the snapshot process runs**, so intermediate changes between snapshots are missed entirely [^src1].
+- **[SCD Type 2](/data-engineering/scd2.md)** preserves history by inserting a new row on change and marking the old row inactive — better, but it still only captures changes **when the snapshot process runs**, so intermediate changes between snapshots are missed entirely [^src1].
 
 Note on SCD types: **SCD Type 1** overwrites old values, keeping only the latest state; **SCD Type 2** preserves history by storing multiple versions of a row [^src1]. The use case needed Type 2 for historical tracking, but even Type 2 could not catch changes between snapshots — which is what pushed the author toward CDC [^src1].
 
@@ -110,19 +110,19 @@ Not all systems emit change logs. AutoCDC treats snapshot-based CDC as a first-c
 
 Lakeflow SDP tracks incremental progress and handles out-of-sequence data automatically. Pipelines recover from failures, reprocess historical data, and evolve without double-applying or losing changes — removing the need to manage sequencing logic, watermark bookkeeping, or reprocessing safety manually [^src2].
 
-> Note: AutoCDC is a Databricks-proprietary feature requiring Lakeflow Spark Declarative Pipelines. See [[data-engineering/databricks|Databricks]] for platform context.
+> Note: AutoCDC is a Databricks-proprietary feature requiring Lakeflow Spark Declarative Pipelines. See [Databricks](/data-engineering/databricks.md) for platform context.
 
 ## The dbt vs. native pipeline debate for CDC on Databricks
 
-One practitioner argument: dbt managed inside Databricks Asset Bundles (DABs) breaks Unity Catalog's native lineage, making features like the Feature Store or native DQ monitoring harder to implement [^src2]. Native Lakeflow SDP preserves end-to-end lineage from ingestion to consumption. Counter-argument: dbt's platform-agnosticism provides portability and stronger vendor-negotiating power in hybrid architectures (Databricks for heavy transformation + separate SQL serving environment). See [[data-engineering/dbt|dbt]].
+One practitioner argument: dbt managed inside Databricks Asset Bundles (DABs) breaks Unity Catalog's native lineage, making features like the Feature Store or native DQ monitoring harder to implement [^src2]. Native Lakeflow SDP preserves end-to-end lineage from ingestion to consumption. Counter-argument: dbt's platform-agnosticism provides portability and stronger vendor-negotiating power in hybrid architectures (Databricks for heavy transformation + separate SQL serving environment). See [dbt](/data-engineering/dbt.md).
 
 ## Related
 
-- [[data-engineering/scd2|SCD Type 2]] — history-tracking dimension pattern; complements but does not replace CDC.
-- [[data-engineering/medallion-architecture|Medallion architecture]] — CDC streams are a canonical bronze-layer source.
-- [[data-engineering/idempotent-pipelines|Idempotent pipelines]] — relevant when replaying or backfilling change streams.
-- [[data-engineering/databricks|Databricks]] — AutoCDC and Lakeflow SDP platform.
-- [[data-engineering/data-observability|Data Observability]] — flow interruption detection is critical for CDC pipeline monitoring.
+- [SCD Type 2](/data-engineering/scd2.md) — history-tracking dimension pattern; complements but does not replace CDC.
+- [Medallion architecture](/data-engineering/medallion-architecture.md) — CDC streams are a canonical bronze-layer source.
+- [Idempotent pipelines](/data-engineering/idempotent-pipelines.md) — relevant when replaying or backfilling change streams.
+- [Databricks](/data-engineering/databricks.md) — AutoCDC and Lakeflow SDP platform.
+- [Data Observability](/data-engineering/data-observability.md) — flow interruption detection is critical for CDC pipeline monitoring.
 
 [^src1]: [Change Data Capture (CDC) Fundamentals for Data Engineers](../../raw/email/email-2026-05-16-change-data-capture-cdc-fundamentals-for-data-engineers.md)
 [^src2]: [Stop hand-coding change data capture pipelines (Databricks AutoCDC)](../../raw/web/web-stop-hand-coding-change-data-capture-pipelines.md)

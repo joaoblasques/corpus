@@ -53,7 +53,7 @@ class UserCreate(BaseModel):
 
 ### Dependency injection via `Depends()`
 
-FastAPI's primary mechanism for sharing logic across routes — DB sessions, auth, any reusable dependency [^src1]. Implements the same [[software-engineering/software-design-principles|loose coupling / dependency injection principle]] used in general software design:
+FastAPI's primary mechanism for sharing logic across routes — DB sessions, auth, any reusable dependency [^src1]. Implements the same [loose coupling / dependency injection principle](/software-engineering/software-design-principles.md) used in general software design:
 
 ```python
 @app.get("/posts/")
@@ -100,9 +100,9 @@ def get_db():
 
 ## See also
 
-- [[software-engineering/software-design-principles|Software Design Principles]] — loose coupling and dependency injection (shared vocabulary with `Depends()`)
-- [[software-engineering/README|Software Architecture hub]]
+- [Software Design Principles](/software-engineering/software-design-principles.md) — loose coupling and dependency injection (shared vocabulary with `Depends()`)
+- [Software Architecture hub](/software-engineering/README.md)
 
 ---
 
-[^src1]: [[03_Resources/Study Notes/Python - FastAPI Complete Course with Auth and Database|Python - FastAPI Complete Course with Auth and Database]]
+[^src1]: [Python - FastAPI Complete Course with Auth and Database](/03_Resources/Study Notes/Python - FastAPI Complete Course with Auth and Database.md)

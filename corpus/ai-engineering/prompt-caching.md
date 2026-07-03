@@ -126,11 +126,11 @@ The Anthropic API supports two caching modes [^src2]:
 
 ## See also
 
-- [[ai-engineering/agent-cost-management|Agent Cost Management]] — cost economics of long-running agents; prompt caching as the primary lever
-- [[ai-engineering/claude-code|Claude Code]] — plan mode, compaction, and the full harness built around prompt caching
-- [[ai-engineering/context-window-management|Context Window Management]] — compaction strategy and what to keep/compress/drop
-- [[ai-engineering/mcp|MCP]] — `defer_loading` via the tool search tool; keeping MCP tool stubs stable
-- [[ai-engineering/claude-managed-agents|Claude Managed Agents]] — cloud agent pricing; prompt caching reduces per-session-hour costs
+- [Agent Cost Management](/ai-engineering/agent-cost-management.md) — cost economics of long-running agents; prompt caching as the primary lever
+- [Claude Code](/ai-engineering/claude-code.md) — plan mode, compaction, and the full harness built around prompt caching
+- [Context Window Management](/ai-engineering/context-window-management.md) — compaction strategy and what to keep/compress/drop
+- [MCP](/ai-engineering/mcp.md) — `defer_loading` via the tool search tool; keeping MCP tool stubs stable
+- [Claude Managed Agents](/ai-engineering/claude-managed-agents.md) — cloud agent pricing; prompt caching reduces per-session-hour costs
 
 ---
 

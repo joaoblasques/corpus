@@ -20,7 +20,7 @@ updated: 2026-07-02
 
 # Laguna XS.2
 
-**TL;DR.** Laguna XS.2 is Poolside's first open-weight model in the Laguna family — a 33B-A3B Mixture-of-Experts model built for agentic coding and long-horizon software tasks. Red Hat AI and Poolside collaborated on serving/inference optimization: first-class [[ai-engineering/vllm|vLLM]] integration, a **DFlash** speculative-decoding draft model, and quantized checkpoints via LLM Compressor [^src1].
+**TL;DR.** Laguna XS.2 is Poolside's first open-weight model in the Laguna family — a 33B-A3B Mixture-of-Experts model built for agentic coding and long-horizon software tasks. Red Hat AI and Poolside collaborated on serving/inference optimization: first-class [vLLM](/ai-engineering/vllm.md) integration, a **DFlash** speculative-decoding draft model, and quantized checkpoints via LLM Compressor [^src1].
 
 ## DFlash speculative decoding
 
@@ -33,15 +33,15 @@ DFlash is described as the current state of the art in speculative decoding, mov
 
 ## Quantized checkpoints
 
-Poolside also released quantized Laguna XS.2 checkpoints built with **LLM Compressor**, in FP8, NVFP4, and INT4/INT8 variants using the compressed-tensors format, for deployment flexibility across hardware/latency/memory constraints [^src1]. See [[ai-engineering/quantization|Quantization]].
+Poolside also released quantized Laguna XS.2 checkpoints built with **LLM Compressor**, in FP8, NVFP4, and INT4/INT8 variants using the compressed-tensors format, for deployment flexibility across hardware/latency/memory constraints [^src1]. See [Quantization](/ai-engineering/quantization.md).
 
 ## Related
 
-- [[ai-engineering/vllm|vLLM]] — serving engine with first-class Laguna XS.2 integration
-- [[ai-engineering/speculative-decoding|Speculative Decoding]] — DFlash's block-diffusion drafting mechanism and its Eagle-family alternative, in depth
-- [[ai-engineering/quantization|Quantization]] — LLM Compressor quantized checkpoints (FP8/NVFP4/INT4/INT8)
-- [[ai-engineering/mixture-of-experts|Mixture of Experts]] — Laguna XS.2's 33B-A3B MoE architecture
-- [[ai-engineering/README|AI Engineering hub]]
+- [vLLM](/ai-engineering/vllm.md) — serving engine with first-class Laguna XS.2 integration
+- [Speculative Decoding](/ai-engineering/speculative-decoding.md) — DFlash's block-diffusion drafting mechanism and its Eagle-family alternative, in depth
+- [Quantization](/ai-engineering/quantization.md) — LLM Compressor quantized checkpoints (FP8/NVFP4/INT4/INT8)
+- [Mixture of Experts](/ai-engineering/mixture-of-experts.md) — Laguna XS.2's 33B-A3B MoE architecture
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

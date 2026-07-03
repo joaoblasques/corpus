@@ -99,10 +99,10 @@ The automation chains produce assets efficiently, but "never send raw output" wi
 
 ## See also
 
-- [[ai-engineering/agent-skills|Agent Skills]] — Claude skills that can orchestrate NotebookLM workflows
-- [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] — chaining agents with specialist tools
-- [[ai-engineering/computer-use|Computer Use]] — how Claude navigates a browser to interact with NotebookLM
-- [[productivity/ai-augmented-knowledge-work|AI-Augmented Knowledge Work]] — NotebookLM as a second-brain tool
+- [Agent Skills](/ai-engineering/agent-skills.md) — Claude skills that can orchestrate NotebookLM workflows
+- [Multi-Agent Systems](/ai-engineering/multi-agent-systems.md) — chaining agents with specialist tools
+- [Computer Use](/ai-engineering/computer-use.md) — how Claude navigates a browser to interact with NotebookLM
+- [AI-Augmented Knowledge Work](/productivity/ai-augmented-knowledge-work.md) — NotebookLM as a second-brain tool
 
 ---
 

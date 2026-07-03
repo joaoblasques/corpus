@@ -32,7 +32,7 @@ import collect_youtube as cy  # noqa: E402
 INBOX = ROOT / "raw" / "_inbox"
 YT_CHANNEL = ROOT / "raw" / "youtube"
 CORPUS = ROOT / "corpus"
-INDEX = CORPUS / "_index.md"
+INDEX = CORPUS / "index.md"
 PLAYLISTS_CFG = BIN / "youtube_playlists.yaml"
 
 # The corpus's real domains (keep in sync with corpus/_domains.md + the corpus/ folders).
@@ -181,7 +181,7 @@ def _index_append(domain: str, slug: str, title: str, one_line: str) -> None:
     if not INDEX.exists():
         return
     text = INDEX.read_text(encoding="utf-8")
-    bullet = f"- [[{domain}/sources/{slug}|{title}]] — source · stub · {one_line}"
+    bullet = f"- [{title}](/{domain}/sources/{slug}.md) — source · stub · {one_line}"
     header = f"### {domain}"
     lines = text.splitlines()
     out, inserted = [], False

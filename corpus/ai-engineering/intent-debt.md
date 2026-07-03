@@ -76,7 +76,7 @@ Four documented practices [^src1]:
 
 ## Connection to agent design
 
-Intent debt directly connects to [[ai-engineering/spec-driven-development|Spec-Driven Development]] (the spec carries intent), [[ai-engineering/claude-md-conventions|CLAUDE.md Conventions]] (CLAUDE.md as intent ledger), [[ai-engineering/agent-harness|Agent Harness]] (harnesses encode intent in config), and [[ai-engineering/compound-engineering|Compound Engineering]] (AGENTS.md as compound learning store).
+Intent debt directly connects to [Spec-Driven Development](/ai-engineering/spec-driven-development.md) (the spec carries intent), [CLAUDE.md Conventions](/ai-engineering/claude-md-conventions.md) (CLAUDE.md as intent ledger), [Agent Harness](/ai-engineering/agent-harness.md) (harnesses encode intent in config), and [Compound Engineering](/ai-engineering/compound-engineering.md) (AGENTS.md as compound learning store).
 
 The agentic era's "where the value moved": code is cheap, comprehension is recoverable, but "intent — the goals and constraints and reasons — is the one input that still has to originate with a human" [^src1].
 

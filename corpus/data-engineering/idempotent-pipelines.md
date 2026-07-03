@@ -38,7 +38,7 @@ Non-idempotent pipelines create a class of bugs that are exceptionally hard to d
 
 ### Prerequisite: a replayable source and an overwritable sink
 
-Idempotency is not free — it is only *achievable* when two data-flow properties hold: the **source is replayable** (it can answer "what did the data look like *n* periods ago?" — e.g. an event stream, logs, or a CDC/WAL dump, but not a constantly-mutated OLTP table) and the **sink is overwritable** (rows are addressable by a unique key, or storage is namespaced by a unique run id) [^src3]. Lacking either, you cannot rerun cleanly; the pragmatic fallback is a **self-healing pipeline**, where the *next* run catches up failed/unprocessed data instead of guaranteeing identical reruns — simpler to build, but bugs can hide for several runs [^src3]. See [[data-engineering/data-flow-patterns|Data Flow Patterns]] for the full extraction/behavioral/structural taxonomy this sits in.
+Idempotency is not free — it is only *achievable* when two data-flow properties hold: the **source is replayable** (it can answer "what did the data look like *n* periods ago?" — e.g. an event stream, logs, or a CDC/WAL dump, but not a constantly-mutated OLTP table) and the **sink is overwritable** (rows are addressable by a unique key, or storage is namespaced by a unique run id) [^src3]. Lacking either, you cannot rerun cleanly; the pragmatic fallback is a **self-healing pipeline**, where the *next* run catches up failed/unprocessed data instead of guaranteeing identical reruns — simpler to build, but bugs can hide for several runs [^src3]. See [Data Flow Patterns](/data-engineering/data-flow-patterns.md) for the full extraction/behavioral/structural taxonomy this sits in.
 
 ## Common pitfalls and fixes
 
@@ -70,7 +70,7 @@ Full reload is easier to make idempotent. Incremental pipelines require explicit
 | Type 2 | ✅ | New row per change; history preserved; safe to backfill |
 | Type 3 | ❌ | Loses intermediate changes |
 
-SCD Type 2 is the only acceptable type for analytics history tracking that maintains idempotency [^src1]. See [[data-engineering/scd2|SCD2]].
+SCD Type 2 is the only acceptable type for analytics history tracking that maintains idempotency [^src1]. See [SCD2](/data-engineering/scd2.md).
 
 ## Functional data engineering and datestamps
 
@@ -83,18 +83,18 @@ SCD Type 2 is the only acceptable type for analytics history tracking that maint
 
 ### Parallel backfills as the payoff
 
-The clearest proof of idempotency is the backfill. When each day reads and writes only its own `ds` partition with **no dependency on the previous day**, an orchestrator can launch the whole range **in parallel** — the entire month finishes in roughly the time of one day's run, using the exact same SQL as the daily job [^src2]. The anti-pattern to avoid: a task that depends on the **previous day's partition of its own table**, which forces sequential, un-parallelizable backfills (the `depends_on_past=True` chain) [^src2]. This is sometimes unavoidable for cumulative metrics, but most dimension tables should recompute from raw each day and keep `depends_on_past=False` [^src2]. See [[data-engineering/scd2|SCD2]] for how this critique applies to slowly-changing dimensions specifically.
+The clearest proof of idempotency is the backfill. When each day reads and writes only its own `ds` partition with **no dependency on the previous day**, an orchestrator can launch the whole range **in parallel** — the entire month finishes in roughly the time of one day's run, using the exact same SQL as the daily job [^src2]. The anti-pattern to avoid: a task that depends on the **previous day's partition of its own table**, which forces sequential, un-parallelizable backfills (the `depends_on_past=True` chain) [^src2]. This is sometimes unavoidable for cumulative metrics, but most dimension tables should recompute from raw each day and keep `depends_on_past=False` [^src2]. See [SCD2](/data-engineering/scd2.md) for how this critique applies to slowly-changing dimensions specifically.
 
 ## See also
 
-- [[data-engineering/scd2|SCD2]] — idempotent history-preserving dimension pattern; datestamps vs valid_from/valid_to
-- [[data-engineering/dimensional-modeling|Dimensional Modeling]] — the data modeling context in which idempotency matters most
-- [[data-engineering/incremental-pipeline-design|Incremental Pipeline Design]] — extraction, load, and backfill design decisions
-- [[data-engineering/data-flow-patterns|Data Flow Patterns]] — idempotent vs self-healing as behavioral choices; the replayability/overwritability prerequisites
-- [[data-engineering/README|Data Engineering hub]]
+- [SCD2](/data-engineering/scd2.md) — idempotent history-preserving dimension pattern; datestamps vs valid_from/valid_to
+- [Dimensional Modeling](/data-engineering/dimensional-modeling.md) — the data modeling context in which idempotency matters most
+- [Incremental Pipeline Design](/data-engineering/incremental-pipeline-design.md) — extraction, load, and backfill design decisions
+- [Data Flow Patterns](/data-engineering/data-flow-patterns.md) — idempotent vs self-healing as behavioral choices; the replayability/overwritability prerequisites
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 
-[^src1]: [[03_Resources/Study Notes/Dimensional Data Modeling - Idempotent Pipelines and SCD Patterns|Dimensional Data Modeling - Idempotent Pipelines and SCD Patterns]]
+[^src1]: [Dimensional Data Modeling - Idempotent Pipelines and SCD Patterns](/03_Resources/Study Notes/Dimensional Data Modeling - Idempotent Pipelines and SCD Patterns.md)
 [^src2]: [SCD-2 considered harmful! Part 2](../../raw/email/email-2025-11-04-scd-2-considered-harmful-part-2.md)
 [^src3]: [Data Pipeline Design Patterns - #1 Data Flow Patterns](../../raw/web/data-pipeline-design-patterns-1-data-flow-patterns-start-dat.md)

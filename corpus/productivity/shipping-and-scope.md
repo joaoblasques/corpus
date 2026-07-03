@@ -55,7 +55,7 @@ Define the edges before shipping so you are not pulled back indefinitely [^src1]
 
 ## The AI angle
 
-"The craft argument for over-polishing has collapsed" now that AI writes much of the code; the scarce, unreplicable input is judgment about *what to build and whether it worked* [^src1]. Cross-reference [[productivity/ai-augmented-knowledge-work|AI-Augmented Knowledge Work]] and the stakeholder-trust mechanics in [[productivity/working-with-stakeholders|Working with Stakeholders]].
+"The craft argument for over-polishing has collapsed" now that AI writes much of the code; the scarce, unreplicable input is judgment about *what to build and whether it worked* [^src1]. Cross-reference [AI-Augmented Knowledge Work](/productivity/ai-augmented-knowledge-work.md) and the stakeholder-trust mechanics in [Working with Stakeholders](/productivity/working-with-stakeholders.md).
 
 ---
 

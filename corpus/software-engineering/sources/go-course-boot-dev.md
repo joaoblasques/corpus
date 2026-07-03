@@ -68,13 +68,13 @@ The final project builds a production-shaped HTTP backend from scratch [^src1]:
 
 ## Relationship to the corpus
 
-Corroborates and extends [[software-engineering/go-programming-language|Go Programming Language]] (compiled-vs-interpreted speed, the Go runtime memory trade-off, interfaces, slices, import-path convention). Its project-driven structure complements the project list already on that page (Dreams of Code's five projects) and the syntax-first [[software-engineering/sources/go-full-course-tech-with-tim|Tech With Tim full course]].
+Corroborates and extends [Go Programming Language](/software-engineering/go-programming-language.md) (compiled-vs-interpreted speed, the Go runtime memory trade-off, interfaces, slices, import-path convention). Its project-driven structure complements the project list already on that page (Dreams of Code's five projects) and the syntax-first [Tech With Tim full course](/software-engineering/sources/go-full-course-tech-with-tim.md).
 
 ## See also
 
-- [[software-engineering/go-programming-language|Go Programming Language]] — the concept page this source feeds
-- [[software-engineering/sources/go-full-course-tech-with-tim|Go Full Course (Tech With Tim)]] — the syntax-first counterpart course
-- [[software-engineering/fastapi|FastAPI]] — comparable backend-API building, in Python
+- [Go Programming Language](/software-engineering/go-programming-language.md) — the concept page this source feeds
+- [Go Full Course (Tech With Tim)](/software-engineering/sources/go-full-course-tech-with-tim.md) — the syntax-first counterpart course
+- [FastAPI](/software-engineering/fastapi.md) — comparable backend-API building, in Python
 
 ---
 

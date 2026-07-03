@@ -36,7 +36,7 @@ last_confirmed: 2026-06-19
 "Functional code" in a DE context means three properties [^src1]:
 
 - **Atomicity** — a function should only do one task [^src1].
-- **Idempotency** — same input run multiple times yields the same output; stored output should not be duplicated [^src1]. (See [[data-engineering/idempotent-pipelines|Idempotent Pipelines]].)
+- **Idempotency** — same input run multiple times yields the same output; stored output should not be duplicated [^src1]. (See [Idempotent Pipelines](/data-engineering/idempotent-pipelines.md).)
 - **No side effects** — a function should not affect external data beyond its output [^src1].
 
 > "Atomicity: A function should only do one task." [^src1]
@@ -63,7 +63,7 @@ For **batch** data pipelines, a Factory method for DB connections is usually pre
 
 ## Python helpers
 
-- **Typing** — type hints + a static checker (mypy) catch type-incompatibility at "compile" time rather than runtime; `Callable[[List[X]], List[X]]` types a higher-order function (first param = input types, second = output type) [^src1].
+- **Typing** — type hints + a static checker (mypy) catch type-incompatibility at "compile" time rather than runtime; `CallableList[x, List[X]]` types a higher-order function (first param = input types, second = output type) [^src1].
 - **Dataclasses** — represent data as objects: type hints + IDE completion, default values, `__post_init__` custom processing, frozen (immutability emulation), inheritance. Cons: slight creation overhead; overkill for simple dict data [^src1].
 - **Context managers** — clean up external connections on success or error without duplicating `try/except/finally`; build with the `@contextmanager` decorator and a `yield`, consumed via a `with` block (the post-`yield` code runs on exit to commit and close) [^src1]. This is the proper home for the cursor creation that functional `load` should not own [^src1].
 - **Testing with pytest** — one test file per pipeline (`test_reddit.py`); set up / tear down tables per run at session / class / function **scope** for straightforward assertions; **fixtures** supply static data so tests avoid hitting external APIs; **mocking** (`mocker` / `session_mocker`) overrides behavior — mock at the location a function is *used*, not where it is defined; `conftest.py` holds directory-wide fixtures [^src1].
@@ -71,7 +71,7 @@ For **batch** data pipelines, a Factory method for DB connections is usually pre
 
 ## Misc engineering hygiene
 
-Consistent project structure and naming (Google style guide); automated formatting/lint/type checks (`black`, `isort`, `flake8`, `mypy`) run via a `Makefile` and enforced with a **pre-commit git hook**; `dotenv` for per-environment config from `.env`; `venv` (or Docker) for reproducible environments [^src1]. This same format/lint/type/test gate is what the [[data-engineering/cicd-for-data-infrastructure|CI/CD]] pipeline runs on every PR — the pre-commit hook is the local mirror of the CI check.
+Consistent project structure and naming (Google style guide); automated formatting/lint/type checks (`black`, `isort`, `flake8`, `mypy`) run via a `Makefile` and enforced with a **pre-commit git hook**; `dotenv` for per-environment config from `.env`; `venv` (or Docker) for reproducible environments [^src1]. This same format/lint/type/test gate is what the [CI/CD](/data-engineering/cicd-for-data-infrastructure.md) pipeline runs on every PR — the pre-commit hook is the local mirror of the CI check.
 
 ## Guiding principle
 
@@ -79,11 +79,11 @@ The design patterns are presented as suggestions, not requirements [^src1]. Ask 
 
 ## Related pages
 
-- [[data-engineering/idempotent-pipelines|Idempotent Pipelines]] — the idempotency property of functional design, in depth
-- [[data-engineering/python-for-data-engineering|Python for Data Engineering]] — Python as glue across ETL/DQ/test/orchestrate; disk vs memory
-- [[data-engineering/data-engineering-best-practices|Data Engineering Best Practices]] — pipeline-level best practices (3-hop, DQ, idempotency, DRY, metadata, tests)
-- [[data-engineering/cicd-for-data-infrastructure|CI/CD for Data Infrastructure]] — where the same lint/type/test gate runs automatically on each PR
-- [[data-engineering/small-scale-pipeline-design|Small-Scale Pipeline Design]] — the implementation mindset (CLI, logging, retries) these code patterns formalize
-- [[data-engineering/etl-pipeline|ETL Pipeline]] — Extract/Transform/Load; the structure these patterns refactor
+- [Idempotent Pipelines](/data-engineering/idempotent-pipelines.md) — the idempotency property of functional design, in depth
+- [Python for Data Engineering](/data-engineering/python-for-data-engineering.md) — Python as glue across ETL/DQ/test/orchestrate; disk vs memory
+- [Data Engineering Best Practices](/data-engineering/data-engineering-best-practices.md) — pipeline-level best practices (3-hop, DQ, idempotency, DRY, metadata, tests)
+- [CI/CD for Data Infrastructure](/data-engineering/cicd-for-data-infrastructure.md) — where the same lint/type/test gate runs automatically on each PR
+- [Small-Scale Pipeline Design](/data-engineering/small-scale-pipeline-design.md) — the implementation mindset (CLI, logging, retries) these code patterns formalize
+- [ETL Pipeline](/data-engineering/etl-pipeline.md) — Extract/Transform/Load; the structure these patterns refactor
 
 [^src1]: [Data Pipeline Design Patterns - #2. Coding patterns in Python](../../raw/web/data-pipeline-design-patterns-2-coding-patterns-in-python-st.md)

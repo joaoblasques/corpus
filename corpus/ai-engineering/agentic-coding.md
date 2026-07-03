@@ -173,7 +173,7 @@ updated: 2026-06-26
 
 # Agentic Coding
 
-**TL;DR**: Agentic coding is the discipline of orchestrating one or more coding agents to ship software, as distinct from *vibe coding* (one-prompt-and-ship without reading the code) [^src2]. The shift over 2025–2026 is **from conductor (one agent, synchronous, your context window as ceiling) to orchestrator (many agents, asynchronous, the codebase as canvas)** [^src1]. The bottleneck moves from *generation* to *verification* [^src1], and the new leverage is your *spec* and your *taste* [^src1] [^src2]. This page is the sub-hub for coding-agent pages: see [[ai-engineering/agent-harness|Agent Harness]], [[ai-engineering/agent-skills|Agent Skills]], and [[ai-engineering/multi-agent-systems|Multi-Agent Systems]].
+**TL;DR**: Agentic coding is the discipline of orchestrating one or more coding agents to ship software, as distinct from *vibe coding* (one-prompt-and-ship without reading the code) [^src2]. The shift over 2025–2026 is **from conductor (one agent, synchronous, your context window as ceiling) to orchestrator (many agents, asynchronous, the codebase as canvas)** [^src1]. The bottleneck moves from *generation* to *verification* [^src1], and the new leverage is your *spec* and your *taste* [^src1] [^src2]. This page is the sub-hub for coding-agent pages: see [Agent Harness](/ai-engineering/agent-harness.md), [Agent Skills](/ai-engineering/agent-skills.md), and [Multi-Agent Systems](/ai-engineering/multi-agent-systems.md).
 
 ## Vibe coding vs agentic engineering
 
@@ -192,7 +192,7 @@ The skills that matter become clear specs, work decomposition, and output verifi
 
 ### Why multi-agent
 
-Four compounding (multiplying, not additive) reasons: **parallelism** (3× throughput), **specialization** (each agent only sees the files it owns — an agent that only knows `db.js` writes better DB code than a generalist), **isolation** (git worktrees, no merge conflicts), and **compound learning** (an `AGENTS.md` accumulates patterns across sessions) [^src1]. Detailed orchestration patterns — subagents, hierarchical teams-of-teams, Agent Teams with shared task lists and peer messaging, and the three orchestration tiers — live in [[ai-engineering/multi-agent-systems|Multi-Agent Systems]].
+Four compounding (multiplying, not additive) reasons: **parallelism** (3× throughput), **specialization** (each agent only sees the files it owns — an agent that only knows `db.js` writes better DB code than a generalist), **isolation** (git worktrees, no merge conflicts), and **compound learning** (an `AGENTS.md` accumulates patterns across sessions) [^src1]. Detailed orchestration patterns — subagents, hierarchical teams-of-teams, Agent Teams with shared task lists and peer messaging, and the three orchestration tiers — live in [Multi-Agent Systems](/ai-engineering/multi-agent-systems.md).
 
 ## The bottleneck has shifted: generation → verification
 
@@ -203,7 +203,7 @@ Four compounding (multiplying, not additive) reasons: **parallelism** (3× throu
 Three gates make agent output trustworthy [^src1]:
 
 - **Plan approval** — require a written plan before coding; it's far cheaper to fix a bad plan than bad code.
-- **Hooks** — automated checks on lifecycle events (a `TaskCompleted` hook runs lint/tests before marking done; if it fails the agent keeps working). See the hooks discussion in [[ai-engineering/agent-harness|Agent Harness]].
+- **Hooks** — automated checks on lifecycle events (a `TaskCompleted` hook runs lint/tests before marking done; if it fails the agent keeps working). See the hooks discussion in [Agent Harness](/ai-engineering/agent-harness.md).
 - **`AGENTS.md` for compound learning** — captures patterns and gotchas; every session reads it and adds to it.
 
 A notable empirical caveat on `AGENTS.md`: research (Gloaguen et al., ETH Zurich) found **LLM-generated `AGENTS.md` files offer no benefit and can marginally reduce success (~3%) while raising inference cost by 20%+, whereas developer-written context files give ~4% improvement** [^src1]. The lead must approve every line; never let an agent write to `AGENTS.md` directly [^src1].
@@ -218,7 +218,7 @@ Addy Osmani's "factory model" frames the current shift in software engineering [
 
 **"Generation is not the bottleneck anymore."** The bottleneck is *verification* — knowing which output is correct, catching regressions, and ensuring the factory's output meets intent. "Engineers don't stop writing code; they stop writing boilerplate. The cognitive load shifts from syntax and structure to intent and judgment" [^src20].
 
-**The spec is leverage.** A one-sentence prompt and a full spec can both produce code; the spec produces code that actually works for the intended purpose. Osmani's quantification: time spent writing a thorough spec vs. debugging misaligned output is typically 1:5 — "the spec is the cheapest work in the pipeline" [^src20]. This mirrors [[ai-engineering/agentic-coding|spec-driven development]] as the entry discipline.
+**The spec is leverage.** A one-sentence prompt and a full spec can both produce code; the spec produces code that actually works for the intended purpose. Osmani's quantification: time spent writing a thorough spec vs. debugging misaligned output is typically 1:5 — "the spec is the cheapest work in the pipeline" [^src20]. This mirrors [spec-driven development](/ai-engineering/agentic-coding.md) as the entry discipline.
 
 **Red/green TDD is mandatory** in the factory model [^src20]:
 - Write failing tests first; verify the agent fixes them.
@@ -232,7 +232,7 @@ Addy Osmani's "factory model" frames the current shift in software engineering [
 
 **Engineering skills shift up the stack** [^src20]: architecture, debugging, requirements elicitation, and taste become more valuable as syntax/implementation become automated. The senior engineer's leverage multiplies; the junior engineer's learning curve changes (fewer "learn by writing" opportunities, more "learn by reviewing").
 
-See [[ai-engineering/compound-engineering|Compound Engineering]] for the learning-loop complement — the method for making this factory progressively smarter session over session.
+See [Compound Engineering](/ai-engineering/compound-engineering.md) for the learning-loop complement — the method for making this factory progressively smarter session over session.
 
 ## Agent Experience (AX) is the new Developer Experience
 
@@ -242,7 +242,7 @@ Builder.io frames **agent experience (AX)** as "the discipline of designing the 
 - **Deterministic environment** — "the environment is literally part of the prompt." A human who hits a missing env var stops and investigates; "an agent will route around the failure, change the wrong file, and ship a guess with a polite commit message" [^src3].
 - **Prove the work** — agents should present evidence (tests, screenshots, browser flows, logs) before handoff. **"Spend tokens before spending reviewer attention"** — tokens are cheap and 24/7; senior focus is precious and burns out [^src3].
 - **Structural safety** — "Good DX made dangerous actions hard. Good AX needs to make dangerous actions impossible." Prompts like "don't mess with the database!" are bypassable; safety must be sandboxing, scoped credentials, and human-in-the-loop gates [^src3].
-- **Codebase as the source of truth** — a messy codebase makes the agent "synthesize that confusion into elegant-looking garbage"; deep modules with thin interfaces are "progressive disclosure for machines" [^src3]. (Echoes [[ai-engineering/agent-skills|Agent Skills]] progressive disclosure.)
+- **Codebase as the source of truth** — a messy codebase makes the agent "synthesize that confusion into elegant-looking garbage"; deep modules with thin interfaces are "progressive disclosure for machines" [^src3]. (Echoes [Agent Skills](/ai-engineering/agent-skills.md) progressive disclosure.)
 
 The organizing line: **"LLMs should do the glue work. People should do the interesting work"** [^src3].
 
@@ -255,17 +255,17 @@ A practitioner deep-dive on running Claude Code "as a programmable agent, not dr
 - **Compounding `CLAUDE.md`** — "Update CLAUDE.md so you don't repeat this" after every mistake; Boris calls Claude "eerily good at writing rules for itself," and frames every PR review becoming a rule as **"Compounding Engineering"** [^src4]. The team's own `CLAUDE.md` is edited multiple times a week and is "a curated list of every gotcha," with no style preferences or codebase tours [^src4].
 - **The `.claude/` directory** is a layered config system — project scope (`.claude/`, committed) vs global (`~/.claude/`); files describe either the project or you; `CLAUDE.md` cascades in monorepos and `rules/*.md` is path-gated [^src4].
 - **Parallel sessions** across 3–5 git worktrees are called "the single biggest productivity unlock," with the agent view as a control plane [^src4].
-- **`/goal` = the Ralph Loop built in** — sets a verifiable completion condition and grinds until it holds; "Pick something verifiable and deterministic... Write 'the code is good' and you've already lost" [^src4]. See the Ralph Loop in [[ai-engineering/agent-harness|Agent Harness]].
+- **`/goal` = the Ralph Loop built in** — sets a verifiable completion condition and grinds until it holds; "Pick something verifiable and deterministic... Write 'the code is good' and you've already lost" [^src4]. See the Ralph Loop in [Agent Harness](/ai-engineering/agent-harness.md).
 
-This source also grounds [[ai-engineering/agent-skills|Agent Skills]] (skills as "the unit of reusable expertise"), subagents, plugins, and [[ai-engineering/mcp|MCP]] as the layers above the prompt.
+This source also grounds [Agent Skills](/ai-engineering/agent-skills.md) (skills as "the unit of reusable expertise"), subagents, plugins, and [MCP](/ai-engineering/mcp.md) as the layers above the prompt.
 
 ## A real end-to-end AI coding workflow (research-first, harness setup)
 
-Tech With Tim's documented build of an "AI shorts tool" is a pragmatic walk-through of the full agentic-coding loop an experienced developer runs in [[ai-engineering/cursor|Cursor]] [^src38]:
+Tech With Tim's documented build of an "AI shorts tool" is a pragmatic walk-through of the full agentic-coding loop an experienced developer runs in [Cursor](/ai-engineering/cursor.md) [^src38]:
 
 1. **Research before prompting.** "The first step in my workflow… a lot of people skip this and it leads to really poor results." Spend time picking the tech stack and tools and writing a high-level outline before generating any code — he used Claude Code itself to research alternatives and produce an architecture slideshow [^src38].
-2. **Generate persistent context, not a one-off prompt.** The opening prompt states the idea and every decision already made, then asks the model to "create a high-level plan and architecture document… ask me any questions before we proceed" — producing markdown files every later chat (and parallel agents) can re-read [^src38]. The "ask me questions first" interview is the same gate as [[ai-engineering/vibe-coding|vibe coding]]'s spec discipline.
-3. **Install the harness: skills + MCP servers + rules.** Rather than pasting docs, install a vendor's agent skills and MCP server (ImageKit + GitHub MCP shown) so the agent learns the tool itself; add a project **rule** ("always commit after any major change") injected on every prompt [^src38]. See [[ai-engineering/mcp|MCP]], [[ai-engineering/agent-skills|Agent Skills]], [[ai-engineering/claude-md-conventions|CLAUDE.md Conventions]].
+2. **Generate persistent context, not a one-off prompt.** The opening prompt states the idea and every decision already made, then asks the model to "create a high-level plan and architecture document… ask me any questions before we proceed" — producing markdown files every later chat (and parallel agents) can re-read [^src38]. The "ask me questions first" interview is the same gate as [vibe coding](/ai-engineering/vibe-coding.md)'s spec discipline.
+3. **Install the harness: skills + MCP servers + rules.** Rather than pasting docs, install a vendor's agent skills and MCP server (ImageKit + GitHub MCP shown) so the agent learns the tool itself; add a project **rule** ("always commit after any major change") injected on every prompt [^src38]. See [MCP](/ai-engineering/mcp.md), [Agent Skills](/ai-engineering/agent-skills.md), [CLAUDE.md Conventions](/ai-engineering/claude-md-conventions.md).
 4. **Iterate via the prompt→run→debug loop.** Get something working, then fix bugs by pasting the error plus context ("the first phase is working, the transcription isn't"); read the model's tool calls to catch a wrong direction early and interject; screenshot the UI to show the model the actual result [^src38]. "This is what happens when you build with AI — there are mistakes, there are issues."
 5. **The leverage came from setup, not the model.** "Had we not added the tools, the MCP server… spent the time to plan, it would have taken significantly longer." Model-by-task: a frontier Claude model for from-scratch building, a faster model for UI-only tweaks [^src38].
 
@@ -275,7 +275,7 @@ The throughline matches the page's **spec-is-the-leverage** and **read-less-stee
 
 The barrier to agentic coding has dropped far enough that people with no programming background are building production workflows. Two documented cases:
 
-**Austin Tedesco** (Every's head of growth, "the first to tell you he doesn't have a technical background") built **Montaigne** — a personal agent using the compound knowledge system, with tools connected to Stripe, PostHog, Slack, Notion, Figma, email, and calendar [^src21]. After 3 weeks of exploration, he built a system that handles execution of recurring growth tasks so he can focus on the hard, creative parts of the job. Montaigne lives in the Claude Code terminal and as an OpenClaw Slack bot. See [[ai-engineering/compound-engineering|Compound Engineering]] for the methodology.
+**Austin Tedesco** (Every's head of growth, "the first to tell you he doesn't have a technical background") built **Montaigne** — a personal agent using the compound knowledge system, with tools connected to Stripe, PostHog, Slack, Notion, Figma, email, and calendar [^src21]. After 3 weeks of exploration, he built a system that handles execution of recurring growth tasks so he can focus on the hard, creative parts of the job. Montaigne lives in the Claude Code terminal and as an OpenClaw Slack bot. See [Compound Engineering](/ai-engineering/compound-engineering.md) for the methodology.
 
 **Austin Lau** (Anthropic growth marketer, never opened a terminal before Claude Code) built two production ad-tech workflows within one week [^src22]: a Figma plugin generating ad creative variations across all aspect ratios with a single click (30 min to build; saves ~30 min per update cycle), and a Google Ads copy workflow (`/rsa`) that takes campaign data → applies brand voice skills → exports upload-ready CSV files. What used to take 30 minutes per ad now takes 30 seconds. Key insight: "you don't need to know how to code. All you need to know is how to explain your challenge... in a very clear, concise manner." Non-technical employees are already subject-matter experts in their domains — Claude gives them the tools to fix their own friction points.
 
@@ -289,19 +289,19 @@ The unifying discipline across sources: let agents handle scoped tasks with tigh
 
 ## `/goal` and the "let Claude prompt Claude" default
 
-The clearest sign of the conductor→orchestrator shift is goal-mode execution. Anthropic shipped **`/goal`** (Claude Code v2.1.139): you give a *done-condition* and Claude runs turns until it thinks it's met, showing elapsed time, turn count, and tokens [^src6]. Boris Cherny's framing at Code with Claude: **"The default is no longer 'I prompt Claude Code.' The default now is 'I let Claude prompt Claude Code.'"** [^src6]. It is the same idea as the **Ralph Loop** (see [[ai-engineering/multi-agent-systems|Multi-Agent Systems]]) and Codex's months-old equivalent; Cherny's prior tool of choice was `/loop` — "point Claude at a cron, walk away... loops are the future" [^src6].
+The clearest sign of the conductor→orchestrator shift is goal-mode execution. Anthropic shipped **`/goal`** (Claude Code v2.1.139): you give a *done-condition* and Claude runs turns until it thinks it's met, showing elapsed time, turn count, and tokens [^src6]. Boris Cherny's framing at Code with Claude: **"The default is no longer 'I prompt Claude Code.' The default now is 'I let Claude prompt Claude Code.'"** [^src6]. It is the same idea as the **Ralph Loop** (see [Multi-Agent Systems](/ai-engineering/multi-agent-systems.md)) and Codex's months-old equivalent; Cherny's prior tool of choice was `/loop` — "point Claude at a cron, walk away... loops are the future" [^src6].
 
 The discipline that makes goals work is **writing the goal so it can't be gamed** [^src6]:
 - **Name the task, list the loopholes, name the check.** A weak goal ("fix the type error so it works on Node 24") got "fixed" with a `// @ts-expect-error` — error gone, code unchanged. The rewrite spells out forbidden moves ("must not use ts-expect-error, ts-ignore, or any type assertion") and the verification ("run pnpm typecheck and confirm zero errors before declaring done") [^src6].
 - **"If a goal has a loophole, Claude will use it."** "Make the test pass" is permission to delete the test; pair every condition with a constraint ("without disabling, skipping, or weakening any test") or run on a worktree [^src6].
 
-Three things to watch: **token spend** (a multi-hour Opus loop isn't free; set a soft budget like `--tokens 250K` — sharper after programmatic Claude Code moved to API rates on 2026-06-15), the **review queue** (overnight `/goal` runs produce PRs nobody scoped — write a machine-authored-PR policy first), and **blast radius** [^src6]. Robobun (an agent with more Bun commits than Bun's creator) and the two-reviewers-on-one-PR setup (CodeRabbit for style + Claude for cross-file reasoning) are the production exemplars [^src6]. This is the structural sibling of the **reconcile** self-improvement move in [[ai-engineering/learning-ai-engineering|Learning AI Engineering]] and the verification loop in [[ai-engineering/agent-testing|Agent Testing]].
+Three things to watch: **token spend** (a multi-hour Opus loop isn't free; set a soft budget like `--tokens 250K` — sharper after programmatic Claude Code moved to API rates on 2026-06-15), the **review queue** (overnight `/goal` runs produce PRs nobody scoped — write a machine-authored-PR policy first), and **blast radius** [^src6]. Robobun (an agent with more Bun commits than Bun's creator) and the two-reviewers-on-one-PR setup (CodeRabbit for style + Claude for cross-file reasoning) are the production exemplars [^src6]. This is the structural sibling of the **reconcile** self-improvement move in [Learning AI Engineering](/ai-engineering/learning-ai-engineering.md) and the verification loop in [Agent Testing](/ai-engineering/agent-testing.md).
 
 ### Goal anatomy and when *not* to use it (Codex `/goal`)
 
-A product-leader walkthrough of Codex's `/goal` (Claire Vo, *How I AI*, hosted on Coda's "Goals" feature) gives the cross-tool view: a goal is "a description of what a good outcome is and how to get to that outcome," and the model loops work→verify→decide-next-step until it gathers *evidence* the goal is met [^src7]. The six-part anatomy of a strong goal — **outcome, verification, constraints, boundaries, iteration policy, stop condition** — is the OpenAI-documented spec; the canonical example is "reduce P95 checkout latency below a threshold, verified by the benchmark, keeping the correctness suite green" [^src7]. The same loophole discipline as the Claude-Code framing applies: a guardrail like "keep the correctness suite green" is what stops the agent from deleting the slow page to make latency "go away" [^src7]. (See the full product-discipline treatment in [[ai-engineering/ai-product-management|AI Product Management]].)
+A product-leader walkthrough of Codex's `/goal` (Claire Vo, *How I AI*, hosted on Coda's "Goals" feature) gives the cross-tool view: a goal is "a description of what a good outcome is and how to get to that outcome," and the model loops work→verify→decide-next-step until it gathers *evidence* the goal is met [^src7]. The six-part anatomy of a strong goal — **outcome, verification, constraints, boundaries, iteration policy, stop condition** — is the OpenAI-documented spec; the canonical example is "reduce P95 checkout latency below a threshold, verified by the benchmark, keeping the correctness suite green" [^src7]. The same loophole discipline as the Claude-Code framing applies: a guardrail like "keep the correctness suite green" is what stops the agent from deleting the slow page to make latency "go away" [^src7]. (See the full product-discipline treatment in [AI Product Management](/ai-engineering/ai-product-management.md).)
 
-**When *not* to use a goal** [^src7]: one-line edits ("too big a tool for the job — you want an outcome, not an output"), vague finish lines ("make my customers happy" — no definitive completion condition), and, notably, "refactor this code" (no evidence-based finish line). Goals are strongest with "a durable objective, an evidence-based finish line, and a path that may require several turns of investigation" [^src7]. Demonstrated run lengths: a Sentry-error-burn-down ran "several hours" and produced "a systematic fix... not band-aid fixes," and a non-coding inbox cleanup ran ~4 hours / ~6M tokens — concrete evidence for the multi-hour autonomy [[ai-engineering/long-running-agents|Long-Running Agents]] describes [^src7]. The source equates `/goal` with the **Ralph Loop** as "functionally the same framework" [^src7] (see [[ai-engineering/ralph-loop|Ralph Loop]]).
+**When *not* to use a goal** [^src7]: one-line edits ("too big a tool for the job — you want an outcome, not an output"), vague finish lines ("make my customers happy" — no definitive completion condition), and, notably, "refactor this code" (no evidence-based finish line). Goals are strongest with "a durable objective, an evidence-based finish line, and a path that may require several turns of investigation" [^src7]. Demonstrated run lengths: a Sentry-error-burn-down ran "several hours" and produced "a systematic fix... not band-aid fixes," and a non-coding inbox cleanup ran ~4 hours / ~6M tokens — concrete evidence for the multi-hour autonomy [Long-Running Agents](/ai-engineering/long-running-agents.md) describes [^src7]. The source equates `/goal` with the **Ralph Loop** as "functionally the same framework" [^src7] (see [Ralph Loop](/ai-engineering/ralph-loop.md)).
 
 ## Compound Engineering: the "make each unit easier than the last" philosophy
 
@@ -318,9 +318,9 @@ The core loop [^src8]:
 
 Upstream of the loop: `/ce-strategy` creates and maintains `STRATEGY.md` — the product's target problem, approach, persona, key metrics — as a "short durable anchor" that ideate, brainstorm, and plan read as grounding [^src8]. The read-side companion, `/ce-product-pulse`, generates a time-windowed report on what users actually experienced and how the product performed (24h, 7d, etc.), saved to `docs/pulse-reports/` so past pulses form a browseable timeline [^src8].
 
-The `/ce-compound` step is what converts individual sessions into organizational knowledge: it extracts 1–3 learnings, checks for stale knowledge the new learning contradicts, and saves to `docs/` with searchable YAML frontmatter [^src8]. The next brainstorm or plan automatically searches those files [^src8]. This is the [[ai-engineering/agent-skills|Agent Skills]] compounding pattern applied specifically to software engineering work.
+The `/ce-compound` step is what converts individual sessions into organizational knowledge: it extracts 1–3 learnings, checks for stale knowledge the new learning contradicts, and saves to `docs/` with searchable YAML frontmatter [^src8]. The next brainstorm or plan automatically searches those files [^src8]. This is the [Agent Skills](/ai-engineering/agent-skills.md) compounding pattern applied specifically to software engineering work.
 
-**Cross-platform distribution.** The compound-engineering plugin ships 37 skills and 51 agents, installable via the plugin marketplace across Claude Code, Cursor, Codex, GitHub Copilot, Factory Droid, Qwen Code, and more [^src8]. It is cited as the engineering counterpart to the Compound Knowledge plugin for non-coding work [^src9]. See [[ai-engineering/claude-md-conventions|CLAUDE.md Conventions]] for the cross-platform plugin model this exemplifies.
+**Cross-platform distribution.** The compound-engineering plugin ships 37 skills and 51 agents, installable via the plugin marketplace across Claude Code, Cursor, Codex, GitHub Copilot, Factory Droid, Qwen Code, and more [^src8]. It is cited as the engineering counterpart to the Compound Knowledge plugin for non-coding work [^src9]. See [CLAUDE.md Conventions](/ai-engineering/claude-md-conventions.md) for the cross-platform plugin model this exemplifies.
 
 ## How developers still learn
 
@@ -335,7 +335,7 @@ Practical moves [^src12]:
 - **Use a local script as the integration layer** — e.g. `ai_dev_assist` classifies a prompt into `code`/`design`/`test`/`optimize` categories and routes to the appropriate specialist model, with optional piping to a second model for review.
 - **Match the model to the task type** — smaller specialized models or deterministic tools for arithmetic/algorithms; LLMs for synthesis and generation; summarization-tuned models for commit messages.
 
-The shift in human role: from **AI prompter** to **AI conductor**, analogous to the microservices principle (each service does one thing well, each AI model does one thing well) [^src12]. This is the multi-agent pattern from [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] applied at the model-selection layer rather than the orchestration layer.
+The shift in human role: from **AI prompter** to **AI conductor**, analogous to the microservices principle (each service does one thing well, each AI model does one thing well) [^src12]. This is the multi-agent pattern from [Multi-Agent Systems](/ai-engineering/multi-agent-systems.md) applied at the model-selection layer rather than the orchestration layer.
 
 ## HTML as the agentic output format
 
@@ -361,7 +361,7 @@ HTML's advantages over Markdown for agent output [^src10]:
 
 **Token concern**: "With the 1MM context window in Opus 4.7, the increased token usage is not really noticeable" [^src10]. The practitioner using this daily has "stopped using Markdown altogether for almost everything" [^src10].
 
-The deeper reason: HTML keeps the human more engaged with agent outputs. As agents do more, there is a risk of reading plans less closely; richer output formats counteract that drift [^src10]. This is the output-format counterpart to the verification discipline in [[ai-engineering/agent-testing|Agent Testing]].
+The deeper reason: HTML keeps the human more engaged with agent outputs. As agents do more, there is a risk of reading plans less closely; richer output formats counteract that drift [^src10]. This is the output-format counterpart to the verification discipline in [Agent Testing](/ai-engineering/agent-testing.md).
 
 ## AI-native engineering org norms
 
@@ -382,7 +382,7 @@ When an engineering team goes fully agentic, the existing processes (built aroun
 2. **PR cycle time** — a lagging bottleneck here may reveal CI/CD struggling to keep up with the volume of AI-generated PRs
 3. **Claude-assisted commits** — directional signal, not a success metric by itself; "don't confuse throughput with success"
 
-See [[ai-engineering/claude-code|Claude Code]] for organizational governance patterns and [[ai-engineering/agentic-workflow|Agentic Workflows]] for the broader dynamic-workflow layer.
+See [Claude Code](/ai-engineering/claude-code.md) for organizational governance patterns and [Agentic Workflows](/ai-engineering/agentic-workflow.md) for the broader dynamic-workflow layer.
 
 ## Solve by default
 
@@ -429,7 +429,7 @@ A curated set of GitHub repositories that practitioners use as reference impleme
 | VoltAgent/awesome-claude-code-subagents | Library of specialized subagent definitions by task type | Subagent role specialization examples |
 | Piebald-AI/claude-code-system-prompts | Tracks Claude Code system prompts, tool descriptions, and changes across versions | Prompt researchers studying harness evolution |
 
-See [[ai-engineering/agent-harness|Agent Harness]] for the core scaffolding concepts these repos build on.
+See [Agent Harness](/ai-engineering/agent-harness.md) for the core scaffolding concepts these repos build on.
 
 ## AI-assisted engineering round-up (15 practitioners)
 
@@ -525,7 +525,7 @@ A practitioner-led walkthrough of real agentic coding workflows in 2026 surfaces
 **Tool landscape (practitioners' self-reported primary tools)** [^src23]:
 - **Claude Code** (#1 overall) — used by the majority of senior practitioners
 - **CodeX** — popular for cost efficiency (running on cheaper models)
-- **Pi agent** — gaining traction with senior developers (see [[ai-engineering/pi-agent|Pi Agent]] for full coverage)
+- **Pi agent** — gaining traction with senior developers (see [Pi Agent](/ai-engineering/pi-agent.md) for full coverage)
 - **GitHub Copilot Agent** — dominant in enterprise environments due to existing licensing
 - **Skills and MCP servers** — "standard practice" across all tools, not an advanced technique
 
@@ -546,14 +546,14 @@ A practitioner-led walkthrough of real agentic coding workflows in 2026 surfaces
 
 ## Human on the loop, not in the loop
 
-The shift implied: the human's job moves from *writing* to *directing and verifying*. "Human on the loop" means you design the loop (tooling, test scaffolding, review gates), review the output, and approve before merge — rather than writing code yourself or approving each agent step interactively [^src18]. See also the [[ai-engineering/multi-agent-systems|Ralph Loop]] for the compound version of this in multi-agent engineering.
+The shift implied: the human's job moves from *writing* to *directing and verifying*. "Human on the loop" means you design the loop (tooling, test scaffolding, review gates), review the output, and approve before merge — rather than writing code yourself or approving each agent step interactively [^src18]. See also the [Ralph Loop](/ai-engineering/multi-agent-systems.md) for the compound version of this in multi-agent engineering.
 
 ## See also
 
-- [[ai-engineering/agent-harness|Agent Harness]] — the scaffolding (hooks, loops, context policies) every coding agent runs inside
-- [[ai-engineering/agent-skills|Agent Skills]] — reusable expertise units; progressive disclosure
-- [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] — subagents, Agent Teams, orchestration tiers, Ralph Loop
-- [[ai-engineering/context-engineering|Context Engineering]] — supply unique workflow, not general knowledge
+- [Agent Harness](/ai-engineering/agent-harness.md) — the scaffolding (hooks, loops, context policies) every coding agent runs inside
+- [Agent Skills](/ai-engineering/agent-skills.md) — reusable expertise units; progressive disclosure
+- [Multi-Agent Systems](/ai-engineering/multi-agent-systems.md) — subagents, Agent Teams, orchestration tiers, Ralph Loop
+- [Context Engineering](/ai-engineering/context-engineering.md) — supply unique workflow, not general knowledge
 ## Claude Code Review (managed code review service)
 
 Claude Code ships a managed code review service (Team and Enterprise subscriptions, not Zero Data Retention orgs) that integrates with GitHub as a GitHub App [^src19]:
@@ -687,7 +687,7 @@ The agent reads the instructions and scoring definition, modifies the asset, run
 
 **The 701× claim** (from the "Skill Issue" episode, [^src26]): agent found a hyperparameter combination Karpathy had not tried — weight decay on value embeddings + Adam beta tuning — that improved model loss. The agent can search a space humans don't have patience to explore manually.
 
-The auto-research pattern and the 3-file system are an operationalized version of the theoretical loop in [[ai-engineering/spec-driven-development|Spec-Driven Development]]: instructions file = spec, scoring mechanism = automated eval, asset = implementation.
+The auto-research pattern and the 3-file system are an operationalized version of the theoretical loop in [Spec-Driven Development](/ai-engineering/spec-driven-development.md): instructions file = spec, scoring mechanism = automated eval, asset = implementation.
 
 ## HTML as agentic output format
 
@@ -706,7 +706,7 @@ Anthropic's SWE-bench 49% result reinforces a counter-intuitive principle: **sim
 
 Practitioners building custom agentic coding systems tend to over-engineer the harness — custom retry logic, elaborate state machines, multi-layer fallbacks. The SWE-bench result suggests that the model's judgment (given good tool descriptions) is more reliable than the scaffold's control flow. The winning pattern: clear tool descriptions, standard tools (bash, edit, read), minimal guardrails, let the model navigate.
 
-This is not an argument against harnesses (see [[ai-engineering/agent-harness|Agent Harness]]) — it's an argument for **harnesses that amplify model judgment** rather than replacing it with procedural control flow [^src30].
+This is not an argument against harnesses (see [Agent Harness](/ai-engineering/agent-harness.md)) — it's an argument for **harnesses that amplify model judgment** rather than replacing it with procedural control flow [^src30].
 
 ## Slot-free zones and malleable software (Conductor)
 
@@ -778,14 +778,14 @@ Two distinct phases:
 - Enables model swapping without modifying agent code
 - Available on Tailscale's free plan
 
-This is the first documented case in the corpus of a **self-healing CI/CD pipeline** where the agentic phase targets code fixes specifically, not just notification/routing. See [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] for how the part-deterministic architecture relates to the orchestrator/worker split.
+This is the first documented case in the corpus of a **self-healing CI/CD pipeline** where the agentic phase targets code fixes specifically, not just notification/routing. See [Multi-Agent Systems](/ai-engineering/multi-agent-systems.md) for how the part-deterministic architecture relates to the orchestrator/worker split.
 
 ## See also
 
-- [[ai-engineering/mcp|MCP]] — connecting agents to external systems
-- [[ai-engineering/ai-agent|AI Agent]] — the ReAct loop and agent fundamentals
-- [[software-engineering/ai-assisted-development|AI-Assisted Development]] (software-engineering) — the software-craft counterpart: fundamentals, the write→review shift, deterministic guardrails
-- [[ai-engineering/README|AI Engineering hub]]
+- [MCP](/ai-engineering/mcp.md) — connecting agents to external systems
+- [AI Agent](/ai-engineering/ai-agent.md) — the ReAct loop and agent fundamentals
+- [AI-Assisted Development](/software-engineering/ai-assisted-development.md) (software-engineering) — the software-craft counterpart: fundamentals, the write→review shift, deterministic guardrails
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 
@@ -833,7 +833,7 @@ This is the first documented case in the corpus of a **self-healing CI/CD pipeli
 
 ## ProteoWizard pwiz-ai — LLM context docs pattern
 
-The `pwiz-ai` repository ([GitHub](https://github.com/ProteoWizard/pwiz-ai)) stores all AI context for the ProteoWizard/Skyline codebase (700,000+ lines of C#, 17 years of history) in a separate repo [^src37]. This is a production case study of the [[ai-engineering/context-engineering|context engineering]] principle "reference don't embed."
+The `pwiz-ai` repository ([GitHub](https://github.com/ProteoWizard/pwiz-ai)) stores all AI context for the ProteoWizard/Skyline codebase (700,000+ lines of C#, 17 years of history) in a separate repo [^src37]. This is a production case study of the [context engineering](/ai-engineering/context-engineering.md) principle "reference don't embed."
 
 **Three-file pattern** [^src37]: the pwiz-ai docs follow an under-500-line total constraint across three files:
 
@@ -851,4 +851,4 @@ The `pwiz-ai` repository ([GitHub](https://github.com/ProteoWizard/pwiz-ai)) sto
 
 **Why it scales** [^src37]: in a 700K-line codebase maintained for 17 years, the AI context that persists across sessions is not "all the code" but the curated rules, decisions, and workflows that a skilled newcomer needs to orient themselves. The same context works for new contributors and for AI agents.
 
-See also: [[ai-engineering/claude-code|Claude Code]] — the Skyline/onboarding case study is documented there under "Onboarding Claude Code to a legacy codebase."
+See also: [Claude Code](/ai-engineering/claude-code.md) — the Skyline/onboarding case study is documented there under "Onboarding Claude Code to a legacy codebase."

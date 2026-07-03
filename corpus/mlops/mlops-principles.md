@@ -51,7 +51,7 @@ Beyond traceability, the source names three further pillars that make ML systems
 
 - **Documentation** — business goals, KPIs, architectural decisions, and model-selection rationale; ensures continuity across onboarding, handovers, and cross-team integration.
 - **Code quality** — code review on all PRs, style/structure conventions, and automated testing (unit, integration, and ideally ML-specific tests). Makes experimentation safer and deployments more reliable.
-- **Monitoring** — extends beyond system metrics to **model performance**: offline evaluation metrics tracked over time, plus production business KPIs and model cost. Surfaces unintended outcomes early. See [[mlops/model-monitoring|Model Monitoring]] and [[mlops/drift-detection|Drift Detection]] for the mechanics.
+- **Monitoring** — extends beyond system metrics to **model performance**: offline evaluation metrics tracked over time, plus production business KPIs and model cost. Surfaces unintended outcomes early. See [Model Monitoring](/mlops/model-monitoring.md) and [Drift Detection](/mlops/drift-detection.md) for the mechanics.
 
 ## Tooling: think in categories, not products
 
@@ -70,7 +70,7 @@ Following the principles needs tooling, but the source's key claim is **you need
 
 The mapping the source draws: version control + orchestration + CI/CD → code reproducibility/traceability and code quality; model registry → model traceability; feature store + data versioning → data traceability; container registry → environment traceability [^src1]. "A simple, purpose-driven stack is all you need to do MLOps well." [^src1]
 
-Several of these categories have dedicated corpus pages: [[mlops/git|Git]] (version control), [[mlops/ci-cd-for-ml|CI/CD for ML]], [[mlops/mlflow|MLflow]] (model registry), [[data-engineering/data-orchestration|Data Orchestration]] / [[data-engineering/kafka|orchestration tooling]], and [[mlops/model-serving|Model Serving]] (compute & serving).
+Several of these categories have dedicated corpus pages: [Git](/mlops/git.md) (version control), [CI/CD for ML](/mlops/ci-cd-for-ml.md), [MLflow](/mlops/mlflow.md) (model registry), [Data Orchestration](/data-engineering/data-orchestration.md) / [orchestration tooling](/data-engineering/kafka.md), and [Model Serving](/mlops/model-serving.md) (compute & serving).
 
 ## MLOps vs DevOps
 
@@ -91,7 +91,7 @@ The source argues the build-your-own-platform advice is now dated given the "too
 - **Lakehouse Monitoring** → data + model drift detection
 - **Databricks Asset Bundles** → CI/CD and deployment
 
-These map onto existing corpus pages: [[data-engineering/databricks|Databricks]], [[mlops/mlflow|MLflow]], [[mlops/databricks-asset-bundles|Databricks Asset Bundles]], [[mlops/model-serving|Model Serving]], [[mlops/model-monitoring|Model Monitoring]], and [[mlops/ci-cd-for-ml|CI/CD for ML]].
+These map onto existing corpus pages: [Databricks](/data-engineering/databricks.md), [MLflow](/mlops/mlflow.md), [Databricks Asset Bundles](/mlops/databricks-asset-bundles.md), [Model Serving](/mlops/model-serving.md), [Model Monitoring](/mlops/model-monitoring.md), and [CI/CD for ML](/mlops/ci-cd-for-ml.md).
 
 ## The DevOps loop (foundational model)
 
@@ -101,7 +101,7 @@ Before MLOps, the parent concept: the **DevOps infinity loop** — eight continu
 
 CI/CD automates Build + Test + Release + Deploy. Monitoring closes the loop (Operate + Monitor feeding back into Plan). MLOps extends this loop with a *data track* running alongside the code track — the same stages apply to data pipelines and model artifacts, not only application code.
 
-See [[mlops/devops-learning-roadmap|DevOps Learning Roadmap]] for the practitioner's path through these concepts.
+See [DevOps Learning Roadmap](/mlops/devops-learning-roadmap.md) for the practitioner's path through these concepts.
 
 ## Concepts-over-tools principle
 
@@ -115,7 +115,7 @@ MLOps' emphasis on *categories of tools* (above) applies the same logic within M
 
 ## Context
 
-This page is the foundational "what is MLOps" entry for the domain; the [[mlops/README|MLOps hub]] tool/practice pages are the specific capabilities this overview frames. It is lecture 1 of the Marvelous MLOps "End-to-end MLOps with Databricks" course (Databricks Free Edition); lectures 2–10 (developing on Databricks, MLflow, model serving, Asset Bundles, CI/CD, monitoring) were ingested previously and live in the pages linked above.
+This page is the foundational "what is MLOps" entry for the domain; the [MLOps hub](/mlops/README.md) tool/practice pages are the specific capabilities this overview frames. It is lecture 1 of the Marvelous MLOps "End-to-end MLOps with Databricks" course (Databricks Free Edition); lectures 2–10 (developing on Databricks, MLflow, model serving, Asset Bundles, CI/CD, monitoring) were ingested previously and live in the pages linked above.
 
 [^src1]: [Introduction to MLOps (Marvelous MLOps)](../../raw/email/email-2025-07-28-introduction-to-mlops.md)
 [^src2]: [DevOps from Zero to Hero: Build and Deploy a Production API](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-devops-from-zero-report.md) — [01:00](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-devops-from-zero-report.md#t=01:00) DevOps loop diagram

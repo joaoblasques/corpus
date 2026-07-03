@@ -47,7 +47,7 @@ updated: 2026-06-25
 
 ## Why projects matter
 
-Data infra is "notoriously hard to set up," which blocks practice [^src1]. These templates remove setup friction so you can try a tool/framework, see code changes' impact quickly, and showcase expertise [^src1]. (Apply the [[data-engineering/data-engineering-best-practices|best practices]] within each.)
+Data infra is "notoriously hard to set up," which blocks practice [^src1]. These templates remove setup friction so you can try a tool/framework, see code changes' impact quickly, and showcase expertise [^src1]. (Apply the [best practices](/data-engineering/data-engineering-best-practices.md) within each.)
 
 ## Batch pipelines
 
@@ -56,26 +56,26 @@ Each project mixes a source, destination, scheduler, orchestrator, processor, DQ
 | Project | Source → Dest | Orchestrator | Processor | DQ |
 |---|---|---|---|---|
 | `bitcoin_monitor` | CoinCap API → Postgres | Python native (cron) | stdlib | — |
-| `simple_dbt_project` | CSV → DuckDB | [[data-engineering/dbt|dbt]] | DuckDB | dbt tests |
-| `cost_effective_data_pipelines` | sqlite3 (TPC-H) → DuckDB | Python native | [[data-engineering/duckdb|DuckDB]] | — |
+| `simple_dbt_project` | CSV → DuckDB | [dbt](/data-engineering/dbt.md) | DuckDB | dbt tests |
+| `cost_effective_data_pipelines` | sqlite3 (TPC-H) → DuckDB | Python native | [DuckDB](/data-engineering/duckdb.md) | — |
 | `data_engineering_project_template` | CoinCap API → DuckDB | Airflow | Python + DuckDB | Cuallee |
-| `beginner_de_project` | CSV/Postgres → DuckDB | Airflow | [[data-engineering/apache-spark|Spark]] + DuckDB | Cuallee |
+| `beginner_de_project` | CSV/Postgres → DuckDB | Airflow | [Spark](/data-engineering/apache-spark.md) + DuckDB | Cuallee |
 | `rainforest` | Postgres → cloud storage | Spark DAG | Spark | Great Expectations |
 
 Common production tooling across the richer projects: Minio (open-source S3), Quarto/Metabase viz, Prometheus+Grafana monitoring, GitHub Actions CI/CD, Terraform IaC, pytest, and black/isort/mypy/flake8 [^src1].
 
 ## Stream pipelines
 
-`beginner_de_project_stream` — Postgres tables → Postgres + [[data-engineering/kafka|Kafka]]; a continuously-running stream orchestrated by an **Apache Flink** DAG, Flink as processor, Flink UI + Grafana viz, Prometheus/Grafana monitoring [^src1].
+`beginner_de_project_stream` — Postgres tables → Postgres + [Kafka](/data-engineering/kafka.md); a continuously-running stream orchestrated by an **Apache Flink** DAG, Flink as processor, Flink UI + Grafana viz, Prometheus/Grafana monitoring [^src1].
 
 ## Event-driven pipelines
 
-- **CDC with Kafka and Debezium** — Postgres insert/update/delete events → DuckDB via Debezium reading the WAL + Kafka Connect + S3 sink [^src1]. See [[data-engineering/change-data-capture|Change Data Capture]].
+- **CDC with Kafka and Debezium** — Postgres insert/update/delete events → DuckDB via Debezium reading the WAL + Kafka Connect + S3 sink [^src1]. See [Change Data Capture](/data-engineering/change-data-capture.md).
 - **End-to-end test simulating AWS Lambda** — CSV on SFTP → Postgres, triggered by S3 inserts; tested with `moto` + pytest [^src1].
 
 ## LLM / RAG pipeline
 
-A retrieval-augmented-generation pipeline (`data_helper`) is also provided, bridging DE and AI workloads [^src1]. (RAG itself is owned by [[ai-engineering/rag|ai-engineering/RAG]].)
+A retrieval-augmented-generation pipeline (`data_helper`) is also provided, bridging DE and AI workloads [^src1]. (RAG itself is owned by [ai-engineering/RAG](/ai-engineering/rag.md).)
 
 ## "Show, don't tell" — make a hiring manager *look*
 
@@ -85,11 +85,11 @@ Building the project is only half the job; getting a hiring manager to read your
 - Make the repo legible: a **concise README** (problem description, architecture diagram, setup), clear project organization, and coding best practices on display — **tests, lint, types, formatting** [^src4].
 - Don't expect anyone to read the codebase; lead with the dashboard and the architecture diagram [^src4].
 
-This is the same instinct the [[data-engineering/portfolio-project-that-lands-a-de-role|portfolio synthesis]] generalizes into a full rigor checklist.
+This is the same instinct the [portfolio synthesis](/data-engineering/portfolio-project-that-lands-a-de-role.md) generalizes into a full rigor checklist.
 
 ### The dev-workflow toolchain these templates standardize on
 
-Every template ships the same "set up data infra with code" workflow so new features deploy quickly [^src3][^src5]: **Docker + Docker Compose** for local dev, **[[mlops/terraform|Terraform]]** for IaC, **GitHub Actions** for CI/CD, **pytest** for testing, **isort + black** for formatting, **flake8** for lint, **mypy** for type checks, and a **Makefile** of command aliases [^src3]. The free starter template runs an **Airflow + Postgres + Metabase** stack on AWS with **yoyo-migrations** (a lightweight Alembic alternative) for DB changes [^src5]. CI runs the format/lint/type/test gate on each PR; CD copies merged code to an EC2 Docker host — see [[data-engineering/cicd-for-data-infrastructure|CI/CD for Data Infrastructure]] [^src3].
+Every template ships the same "set up data infra with code" workflow so new features deploy quickly [^src3][^src5]: **Docker + Docker Compose** for local dev, **[Terraform](/mlops/terraform.md)** for IaC, **GitHub Actions** for CI/CD, **pytest** for testing, **isort + black** for formatting, **flake8** for lint, **mypy** for type checks, and a **Makefile** of command aliases [^src3]. The free starter template runs an **Airflow + Postgres + Metabase** stack on AWS with **yoyo-migrations** (a lightweight Alembic alternative) for DB changes [^src5]. CI runs the format/lint/type/test gate on each PR; CD copies merged code to an EC2 Docker host — see [CI/CD for Data Infrastructure](/data-engineering/cicd-for-data-infrastructure.md) [^src3].
 
 *Why* standardize the local environment with Docker: most data pipelines touch multiple systems, which makes a local dev setup hard; good **developer ergonomics** (reproducible Docker environment + automated formatting/lint/tests) reduce bugs, keep morale high, and increase development velocity [^src6].
 
@@ -97,8 +97,8 @@ Every template ships the same "set up data infra with code" workflow so new feat
 
 Two further runnable projects (outside the Start Data Engineering set) make good portfolio pieces:
 
-- **Cloud ELT: S3 → Snowflake → dbt, orchestrated by [[data-engineering/orchestra|Orchestra]]** — uploads AdventureWorks CSVs to S3 (boto3), `COPY INTO` Snowflake staging tables, then dbt staging + curated (fact/dimension) models; the whole pipeline is then scheduled/observed in Orchestra [^src7]. Demonstrates the modern cloud-warehouse + dbt stack with a managed declarative orchestrator [^src7].
-- **Local data platform with [[mlops/terraform|Terraform]] + Docker** — replicates a cloud data stack *locally and for free* using **Minio** (S3-compatible object store), **LocalStack** (emulates AWS SQS), **Dockerized Airflow** (orchestration), and **[[data-engineering/duckdb|DuckDB]]** (analytical warehouse), wired together by Terraform modules; includes an **event-driven** path (SQS message → Docker ETL container, the AWS-Lambda analogue) [^src8]. Each component maps to a cloud service, so the same boto3/Airflow code stays cloud-portable [^src8]. A strong showcase of **IaC + event-driven architecture** without cloud cost [^src8]. See [[mlops/infrastructure-as-code|Infrastructure as Code]].
+- **Cloud ELT: S3 → Snowflake → dbt, orchestrated by [Orchestra](/data-engineering/orchestra.md)** — uploads AdventureWorks CSVs to S3 (boto3), `COPY INTO` Snowflake staging tables, then dbt staging + curated (fact/dimension) models; the whole pipeline is then scheduled/observed in Orchestra [^src7]. Demonstrates the modern cloud-warehouse + dbt stack with a managed declarative orchestrator [^src7].
+- **Local data platform with [Terraform](/mlops/terraform.md) + Docker** — replicates a cloud data stack *locally and for free* using **Minio** (S3-compatible object store), **LocalStack** (emulates AWS SQS), **Dockerized Airflow** (orchestration), and **[DuckDB](/data-engineering/duckdb.md)** (analytical warehouse), wired together by Terraform modules; includes an **event-driven** path (SQS message → Docker ETL container, the AWS-Lambda analogue) [^src8]. Each component maps to a cloud service, so the same boto3/Airflow code stays cloud-portable [^src8]. A strong showcase of **IaC + event-driven architecture** without cloud cost [^src8]. See [Infrastructure as Code](/mlops/infrastructure-as-code.md).
 
 ## Azure cloud end-to-end project
 
@@ -112,7 +112,7 @@ An Azure-focused end-to-end pipeline project addressing the business need to und
 - **Security**: Azure Key Vault (credentials management)
 - **Automation**: daily scheduled pipeline run
 
-The stack demonstrates the full **Microsoft Azure data stack** (ADF → ADLS → Databricks → Synapse → Power BI) in a business-framed scenario. Useful contrast to the AWS-native templates above — hiring managers in Azure shops will respond to this. See [[data-engineering/medallion-architecture|Medallion Architecture]] for the Bronze/Silver/Gold pattern and [[data-engineering/databricks|Databricks]] for the transformation layer [^src9].
+The stack demonstrates the full **Microsoft Azure data stack** (ADF → ADLS → Databricks → Synapse → Power BI) in a business-framed scenario. Useful contrast to the AWS-native templates above — hiring managers in Azure shops will respond to this. See [Medallion Architecture](/data-engineering/medallion-architecture.md) for the Bronze/Silver/Gold pattern and [Databricks](/data-engineering/databricks.md) for the transformation layer [^src9].
 
 ## How to use
 
@@ -120,11 +120,11 @@ Run on Codespaces (fork → "Create codespace" → `make up` → open the expose
 
 ## Related
 
-- [[data-engineering/data-engineering-best-practices|Data Engineering Best Practices]] — the practices these projects embody
-- [[data-engineering/python-for-data-engineering|Python for Data Engineering]] — the language glue
-- [[data-engineering/change-data-capture|Change Data Capture]] · [[data-engineering/dbt|dbt]] · [[data-engineering/duckdb|DuckDB]]
-- [[data-engineering/data-engineer-role|The Data Engineer Role]] — portfolio as a career signal; see the DA→DE transition section for the simpler SQL+cron starting point before tackling these templates
-- [[data-engineering/README|Data Engineering hub]]
+- [Data Engineering Best Practices](/data-engineering/data-engineering-best-practices.md) — the practices these projects embody
+- [Python for Data Engineering](/data-engineering/python-for-data-engineering.md) — the language glue
+- [Change Data Capture](/data-engineering/change-data-capture.md) · [dbt](/data-engineering/dbt.md) · [DuckDB](/data-engineering/duckdb.md)
+- [The Data Engineer Role](/data-engineering/data-engineer-role.md) — portfolio as a career signal; see the DA→DE transition section for the simpler SQL+cron starting point before tackling these templates
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

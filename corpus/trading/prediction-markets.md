@@ -24,7 +24,7 @@ TL;DR: Prediction markets are financial instruments where prices represent the c
 
 A prediction market contract resolves to $1 if the predicted event occurs, $0 otherwise. The contract's current price represents the market's implied probability. Example: a contract priced at $0.60 implies the market believes there's a 60% chance the event happens.
 
-Types of contracts on platforms like [[trading/polymarket|Polymarket]]:
+Types of contracts on platforms like [Polymarket](/trading/polymarket.md):
 - **Binary political/sports events** — will X win the election? Will Y win the championship?
 - **Short-duration crypto price contracts** — will Bitcoin be above $N in the next 15 minutes?
 - **Macro/economic events** — will the Fed raise rates?
@@ -54,8 +54,8 @@ Polymarket data provides a rare measurable view of how quickly AI closes ineffic
 - The pattern generalizes: once AI identifies a gap, exploitation compresses the window until only the most sophisticated actors survive
 - 94–95% of Polymarket wallets lose money; tools being available to everyone does not mean the edge is distributed evenly
 
-This compression pattern is argued to apply across every industry — see [[trading/arbitrage-compression|Arbitrage Compression]].
+This compression pattern is argued to apply across every industry — see [Arbitrage Compression](/trading/arbitrage-compression.md).
 
-Related: [[trading/polymarket|Polymarket]], [[trading/arbitrage-compression|Arbitrage Compression]]
+Related: [Polymarket](/trading/polymarket.md), [Arbitrage Compression](/trading/arbitrage-compression.md)
 
 [^src1]: [A Polymarket Bot Made $438,000 In 30 Days](../../raw/youtube/youtube-BiqG3it0gY0-a-polymarket-bot-made-438-000-in-30-days-your-industry-is-ne.md)

@@ -24,7 +24,7 @@ updated: 2026-06-15
 
 # Statistics & Probability for ML
 
-**TL;DR**: The mathematical substrate under [[ai-engineering/machine-learning|machine learning]] and the "uncertainty" branch of [[ai-engineering/ai-fundamentals|AI]] — describing data, quantifying uncertainty, and inferring from samples [^src1]. A practitioner needs working fluency in the ten areas below, not proofs; they recur in loss functions, evaluation metrics, A/B tests, and probabilistic reasoning.
+**TL;DR**: The mathematical substrate under [machine learning](/ai-engineering/machine-learning.md) and the "uncertainty" branch of [AI](/ai-engineering/ai-fundamentals.md) — describing data, quantifying uncertainty, and inferring from samples [^src1]. A practitioner needs working fluency in the ten areas below, not proofs; they recur in loss functions, evaluation metrics, A/B tests, and probabilistic reasoning.
 
 ## Describing data
 
@@ -48,14 +48,14 @@ updated: 2026-06-15
 
 ## Why it matters for AI engineering
 
-These primitives are not academic decoration: standard deviation and the normal distribution underpin model evaluation and anomaly detection; regression is the simplest [[ai-engineering/machine-learning|ML]] model; Bayesian/probabilistic reasoning is the "uncertainty" pillar of [[ai-engineering/ai-fundamentals|classical AI]]; and confidence intervals / hypothesis tests are the math behind A/B experiments and [[ai-engineering/agent-evaluation|eval]] funnels. The "learn the math you actually need" advice for ML emphasizes exactly this practical subset (distributions, mean/variance, Bayes, gradients) over proofs.
+These primitives are not academic decoration: standard deviation and the normal distribution underpin model evaluation and anomaly detection; regression is the simplest [ML](/ai-engineering/machine-learning.md) model; Bayesian/probabilistic reasoning is the "uncertainty" pillar of [classical AI](/ai-engineering/ai-fundamentals.md); and confidence intervals / hypothesis tests are the math behind A/B experiments and [eval](/ai-engineering/agent-evaluation.md) funnels. The "learn the math you actually need" advice for ML emphasizes exactly this practical subset (distributions, mean/variance, Bayes, gradients) over proofs.
 
 ## See also
 
-- [[ai-engineering/machine-learning|Machine Learning]] — regression, loss, and evaluation rest on this
-- [[ai-engineering/ai-fundamentals|AI Fundamentals]] — the "uncertainty" pillar (Bayesian/Markov)
-- [[ai-engineering/agent-evaluation|Agent Evaluation]] — eval funnels and statistical experiment design
-- [[ai-engineering/README|AI Engineering hub]]
+- [Machine Learning](/ai-engineering/machine-learning.md) — regression, loss, and evaluation rest on this
+- [AI Fundamentals](/ai-engineering/ai-fundamentals.md) — the "uncertainty" pillar (Bayesian/Markov)
+- [Agent Evaluation](/ai-engineering/agent-evaluation.md) — eval funnels and statistical experiment design
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

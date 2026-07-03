@@ -102,7 +102,7 @@ Claude Code, Cursor, Codex, Aider, Cline are all harnesses; the model underneath
 
 **Official Anthropic definition**: a harness is "a wrapper around the LLM, the tools and context it has access to" [^src16]. Claude Code itself is a harness — one specifically designed around software engineering workflows. The **AI layer** (the harness layer you control) consists of: `CLAUDE.md` / `AGENTS.md` (standing instructions), skills (reusable procedures), hooks (lifecycle enforcement), and MCPs (external tools) [^src17].
 
-**Pi** (Mario Zechner) is a notable open-source harness in this class — described as "super lightweight and built to be highly extensible," provider-agnostic, and embeddable via a Node.js SDK [^src7]. It is the runtime Boring UI builds on (Boring UI *uses* Pi as its agent harness and extends Pi's plugin model), a concrete case of a product picking an existing harness rather than rolling its own loop [^src7]. See [[ai-engineering/agent-ui|Agent UI]].
+**Pi** (Mario Zechner) is a notable open-source harness in this class — described as "super lightweight and built to be highly extensible," provider-agnostic, and embeddable via a Node.js SDK [^src7]. It is the runtime Boring UI builds on (Boring UI *uses* Pi as its agent harness and extends Pi's plugin model), a concrete case of a product picking an existing harness rather than rolling its own loop [^src7]. See [Agent UI](/ai-engineering/agent-ui.md).
 
 ## 10% model, 90% harness
 
@@ -117,7 +117,7 @@ The harness is the *hidden variable* in agent performance. Two independent bench
 - **Terminal Bench 2.0**: the same model (Claude Opus 4.6) scores far lower inside Claude Code than inside a custom harness; Trivedy's team moved a coding agent from Top 30 to Top 5 by changing *only the harness* [^src1].
 - **PwC LongMemEval study** ("Is Grep All You Need?"): across 4 harnesses × 5 models × 2 retrieval methods, holding model and corpus fixed and swapping only the harness moved accuracy by double digits — Claude Opus 4.6 scored 93.1% on the Chronos harness vs 76.7% on Claude Code, a 16-point gap from the wrapper alone [^src2].
 
-A key sub-finding: **result-delivery mode** (a harness decision) can invert retrieval results. Switching from inline delivery (results dumped into context) to file-based delivery (results written to disk, fetched via tool calls) erased or reversed grep's lead with no change to the data; Codex CLI with GPT-5.4 dropped from 93.1% inline to 55.2% file-based [^src2]. The harness controls prompting, tool framing, and how much of the window retrieved results consume — decisions that rival the retrieval method itself [^src2]. See [[ai-engineering/rag|RAG]] and [[ai-engineering/context-window-management|Context Window Management]].
+A key sub-finding: **result-delivery mode** (a harness decision) can invert retrieval results. Switching from inline delivery (results dumped into context) to file-based delivery (results written to disk, fetched via tool calls) erased or reversed grep's lead with no change to the data; Codex CLI with GPT-5.4 dropped from 93.1% inline to 55.2% file-based [^src2]. The harness controls prompting, tool framing, and how much of the window retrieved results consume — decisions that rival the retrieval method itself [^src2]. See [RAG](/ai-engineering/rag.md) and [Context Window Management](/ai-engineering/context-window-management.md).
 
 > Models get post-training coupled to the harness they were trained against; moving them into a different harness with better tools, a tighter prompt, and sharper back-pressure "can unlock capability the original harness was leaving on the floor" [^src1].
 
@@ -127,7 +127,7 @@ The harness-engineering mindset rejects "blame the model, wait for the next vers
 
 ## The ratchet: every mistake becomes a rule
 
-The most important habit: treat agent mistakes as permanent signals, not one-off bad runs [^src1]. You add a constraint only when you've seen a real failure, and remove it only when a capable model has made it redundant. **"Every line in a good AGENTS.md should be traceable back to a specific thing that went wrong"** [^src1]. This is why a harness is a *discipline shaped by your failure history*, not a downloadable framework [^src1]. (Note the resonance with the [[ai-engineering/agent-skills|Agent Skills]] recursive-building loop and the "let Claude write rules for itself" pattern in [[ai-engineering/agentic-coding|Agentic Coding]].)
+The most important habit: treat agent mistakes as permanent signals, not one-off bad runs [^src1]. You add a constraint only when you've seen a real failure, and remove it only when a capable model has made it redundant. **"Every line in a good AGENTS.md should be traceable back to a specific thing that went wrong"** [^src1]. This is why a harness is a *discipline shaped by your failure history*, not a downloadable framework [^src1]. (Note the resonance with the [Agent Skills](/ai-engineering/agent-skills.md) recursive-building loop and the "let Claude write rules for itself" pattern in [Agentic Coding](/ai-engineering/agentic-coding.md).)
 
 ## Harness building blocks (working backwards from behavior)
 
@@ -141,11 +141,11 @@ The design heuristic: start from the *behavior you want* and derive the harness 
 
 ### Battling context rot
 
-The harness is largely a delivery mechanism for good [[ai-engineering/context-engineering|context engineering]]. Three recurring techniques against *context rot* (models degrade as the window fills) [^src1]:
+The harness is largely a delivery mechanism for good [context engineering](/ai-engineering/context-engineering.md). Three recurring techniques against *context rot* (models degrade as the window fills) [^src1]:
 
 1. **Compaction** — summarize/offload older context near the window limit.
 2. **Tool-call offloading** — keep head/tail of large outputs in context, offload the full output to the filesystem for on-demand reading.
-3. **Skills with progressive disclosure** — reveal instructions/tools only when the task calls for them (see [[ai-engineering/agent-skills|Agent Skills]]).
+3. **Skills with progressive disclosure** — reveal instructions/tools only when the task calls for them (see [Agent Skills](/ai-engineering/agent-skills.md)).
 
 Anthropic adds **full context resets** for long jobs: tear the session down and rebuild from a compact hand-off file — compaction alone was insufficient for long tasks [^src1].
 
@@ -179,7 +179,7 @@ Hooks separate "I told the agent to do X" from "the system enforces X" — scrip
 
 ### AGENTS.md and tool choice
 
-The root markdown rulebook lands in the system prompt every turn — the highest-leverage configuration point [^src1]. Two hard-won lessons: **keep it short** (HumanLayer keeps theirs under 60 lines — "pilot's checklist, not style guide") and **earn each line** (trace to a past failure or hard constraint) [^src1]. Same discipline for tools: each tool's name/description/schema is stamped into the prompt every request, so ten focused tools outperform fifty overlapping ones [^src1]. Security note: tool descriptions are *trusted text the model reads*, so a sloppy or malicious MCP can prompt-inject your agent before you type anything [^src1]. See [[ai-engineering/mcp|MCP]].
+The root markdown rulebook lands in the system prompt every turn — the highest-leverage configuration point [^src1]. Two hard-won lessons: **keep it short** (HumanLayer keeps theirs under 60 lines — "pilot's checklist, not style guide") and **earn each line** (trace to a past failure or hard constraint) [^src1]. Same discipline for tools: each tool's name/description/schema is stamped into the prompt every request, so ten focused tools outperform fifty overlapping ones [^src1]. Security note: tool descriptions are *trusted text the model reads*, so a sloppy or malicious MCP can prompt-inject your agent before you type anything [^src1]. See [MCP](/ai-engineering/mcp.md).
 
 ## Harnesses don't shrink, they move
 
@@ -191,12 +191,12 @@ A related feedback loop: today's agent products are post-trained *with harnesses
 
 Anthropic's own large-codebase post makes the harness thesis first-party: **"the ecosystem built around the model — the harness — determines how Claude Code performs more than the model alone"** [^src5]. Two concrete points reinforce earlier sections:
 
-- **No index by design.** Claude Code doesn't embed or upload the codebase; it greps, lists directories, reads files, and follows references the way a developer would. The rationale is staleness: "by the time a developer queries the index, it reflects the codebase as it existed weeks, days, or even hours before. Retrieval returns a function the team renamed two weeks ago" [^src5]. The tradeoff: it works best "when Claude has enough starting context to know where to look," so the burden on a big/unfamiliar repo is on *you* (the harness), not the model [^src5]. See [[ai-engineering/agentic-search|Agentic Search]] for the grep-vs-index debate; codegraph is the week's attempt to bolt a local knowledge graph back on via MCP [^src5].
-- **The CLAUDE.md operating rules** [^src5]: keep the root file thin ("pointers and critical gotchas only; everything else drifts into noise"), push local conventions into subdirectory files that load as Claude walks the tree, codify build/test commands so Claude can't guess, tell Claude to "update CLAUDE.md so you don't repeat this" after a mistake, and **re-read it after model upgrades** — an old single-file-refactor rule that helped a weaker model can block a stronger one from cross-file edits it's now good at (Anthropic suggests a review every 3–6 months). The summary: "give Claude a thin map and a way to check its own work, then get out of the way" [^src5]. These overlap with [[ai-engineering/claude-md-conventions|CLAUDE.md Conventions]].
+- **No index by design.** Claude Code doesn't embed or upload the codebase; it greps, lists directories, reads files, and follows references the way a developer would. The rationale is staleness: "by the time a developer queries the index, it reflects the codebase as it existed weeks, days, or even hours before. Retrieval returns a function the team renamed two weeks ago" [^src5]. The tradeoff: it works best "when Claude has enough starting context to know where to look," so the burden on a big/unfamiliar repo is on *you* (the harness), not the model [^src5]. See [Agentic Search](/ai-engineering/agentic-search.md) for the grep-vs-index debate; codegraph is the week's attempt to bolt a local knowledge graph back on via MCP [^src5].
+- **The CLAUDE.md operating rules** [^src5]: keep the root file thin ("pointers and critical gotchas only; everything else drifts into noise"), push local conventions into subdirectory files that load as Claude walks the tree, codify build/test commands so Claude can't guess, tell Claude to "update CLAUDE.md so you don't repeat this" after a mistake, and **re-read it after model upgrades** — an old single-file-refactor rule that helped a weaker model can block a stronger one from cross-file edits it's now good at (Anthropic suggests a review every 3–6 months). The summary: "give Claude a thin map and a way to check its own work, then get out of the way" [^src5]. These overlap with [CLAUDE.md Conventions](/ai-engineering/claude-md-conventions.md).
 
 ### The QA-agent harness pattern
 
-A specific high-value harness component: a **QA agent layered on top of existing tests** rather than replacing them. Salvatore Sanfilippo's pattern — the LLM agent reads new commits, analyzes the impact, stands up an environment (e.g. replication + persistence), and simulates days of multi-user traffic to surface what looks broken — "tests like a real user" and catches the performance/UX issues rigid scripts miss [^src6]. The setup is a single Markdown file with goals and SSH details, instructing the agent to compare the new branch against the last stable release and flag *relative* regressions (e.g. speed drops) without hardcoded limits [^src6]. This is the harness-side complement to [[ai-engineering/agent-testing|Agent Testing]].
+A specific high-value harness component: a **QA agent layered on top of existing tests** rather than replacing them. Salvatore Sanfilippo's pattern — the LLM agent reads new commits, analyzes the impact, stands up an environment (e.g. replication + persistence), and simulates days of multi-user traffic to surface what looks broken — "tests like a real user" and catches the performance/UX issues rigid scripts miss [^src6]. The setup is a single Markdown file with goals and SSH details, instructing the agent to compare the new branch against the last stable release and flag *relative* regressions (e.g. speed drops) without hardcoded limits [^src6]. This is the harness-side complement to [Agent Testing](/ai-engineering/agent-testing.md).
 
 ## Harness-as-a-Service (HaaS)
 
@@ -208,7 +208,7 @@ A concrete, shipping harness system is **ECC (everything-claude-code)** by Affaa
 
 - **Memory persistence hooks** — `SessionStart`/`Stop` hooks save/load context across sessions automatically [^src3].
 - **Continuous learning v2 (instincts)** — auto-extract patterns from sessions into reusable skills with confidence scoring, import/export, and `/evolve` to cluster instincts into skills [^src3] (an automated version of the ratchet).
-- **Context discipline as a documented failure mode** — "Too many MCP servers eat your context. Each MCP tool description consumes tokens... potentially reducing it to ~70k"; ECC's guidance is to keep under 10 MCPs and under 80 tools active [^src3]. Mirrors the tool-choice lesson above and [[ai-engineering/context-window-management|Context Window Management]].
+- **Context discipline as a documented failure mode** — "Too many MCP servers eat your context. Each MCP tool description consumes tokens... potentially reducing it to ~70k"; ECC's guidance is to keep under 10 MCPs and under 80 tools active [^src3]. Mirrors the tool-choice lesson above and [Context Window Management](/ai-engineering/context-window-management.md).
 - **AgentShield** — a security scanner for the harness config itself (CLAUDE.md, settings.json, MCP configs, hooks, agents, skills); the `--opus` mode runs red-team/blue-team/auditor Opus agents adversarially rather than pattern-matching [^src3].
 
 ## Self-generating harnesses (dynamic workflows)
@@ -221,7 +221,7 @@ The default Claude Code harness is built for coding but breaks down on long-runn
 
 **Dynamic workflows** are Anthropic's harness-level response: Claude writes a JavaScript orchestration file on the fly that spawns separate subagents with their own context windows and focused, isolated goals [^src8]. The harness is therefore *task-specific* rather than general-purpose. Claude can choose which model each subagent uses and whether subagents run in isolated worktrees [^src8]. This represents a shift from "configure a static harness" to "the model generates the harness as part of the task." The distinction vs static workflows: "static workflows need to work for all edge cases, so they are usually more generic. With dynamic workflows, Claude is now intelligent enough to write a custom harness tailor-made for your use case" [^src8].
 
-Harness failure modes become harness design criteria: agentic laziness → use separate agents for each work unit; self-preferential bias → use adversarial verifier agents; goal drift → preserve original intent through fresh context windows rather than compaction. See [[ai-engineering/claude-code|Claude Code]] for the full dynamic-workflow pattern catalog.
+Harness failure modes become harness design criteria: agentic laziness → use separate agents for each work unit; self-preferential bias → use adversarial verifier agents; goal drift → preserve original intent through fresh context windows rather than compaction. See [Claude Code](/ai-engineering/claude-code.md) for the full dynamic-workflow pattern catalog.
 
 ## Three patterns for building with Claude's evolving intelligence
 
@@ -392,16 +392,16 @@ The starter pack provided: Vertex AI + Cloud Run scaffolding, session management
 
 ## See also
 
-- [[ai-engineering/agentic-coding|Agentic Coding]] — orchestration patterns built on top of the harness
-- [[ai-engineering/agent-skills|Agent Skills]] — progressive disclosure as a harness context technique
-- [[ai-engineering/context-engineering|Context Engineering]] — the harness is a delivery mechanism for good context
-- [[ai-engineering/context-window-management|Context Window Management]] — compaction, offloading, context rot
-- [[ai-engineering/mcp|MCP]] — tools and the prompt-injection surface they add
-- [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] — subagent orchestration, planner/evaluator splits
-- [[ai-engineering/generator-evaluator-separation|Generator–Evaluator Separation]] — the GAN-harness insight generalized across the week's sources (a generator can't grade itself)
-- [[ai-engineering/rag|RAG]] — grep-vs-vector and how delivery mode reshapes retrieval
-- [[ai-engineering/ai-agent|AI Agent]] — the ReAct loop the harness wraps
-- [[ai-engineering/README|AI Engineering hub]]
+- [Agentic Coding](/ai-engineering/agentic-coding.md) — orchestration patterns built on top of the harness
+- [Agent Skills](/ai-engineering/agent-skills.md) — progressive disclosure as a harness context technique
+- [Context Engineering](/ai-engineering/context-engineering.md) — the harness is a delivery mechanism for good context
+- [Context Window Management](/ai-engineering/context-window-management.md) — compaction, offloading, context rot
+- [MCP](/ai-engineering/mcp.md) — tools and the prompt-injection surface they add
+- [Multi-Agent Systems](/ai-engineering/multi-agent-systems.md) — subagent orchestration, planner/evaluator splits
+- [Generator–Evaluator Separation](/ai-engineering/generator-evaluator-separation.md) — the GAN-harness insight generalized across the week's sources (a generator can't grade itself)
+- [RAG](/ai-engineering/rag.md) — grep-vs-vector and how delivery mode reshapes retrieval
+- [AI Agent](/ai-engineering/ai-agent.md) — the ReAct loop the harness wraps
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

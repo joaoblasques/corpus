@@ -46,9 +46,9 @@ Order: `terraform apply` (as the infra role) → `build_and_deploy.sh` to push t
 
 ## See also
 
-- [[data-engineering/parquet|Parquet]] — source/target file format in the pipeline
-- [[data-engineering/pipeline-layers|Pipeline Layers]] — ETL staging context
-- [[data-engineering/README|Data Engineering hub]]
+- [Parquet](/data-engineering/parquet.md) — source/target file format in the pipeline
+- [Pipeline Layers](/data-engineering/pipeline-layers.md) — ETL staging context
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

@@ -213,7 +213,7 @@ DataFrames (introduced Spark 1.3) follow the same immutability and lazy rules as
 - **Catalyst** — the query optimizer. RDDs are a "black box" Spark cannot see inside, so it cannot optimize them; DataFrames carry column-level metadata that Catalyst uses [^src5]. It applies **rule-based optimization** (predicate pushdown, constant folding, projection pruning, null propagation, Boolean simplification) and **cost-based optimization** (CBO costs alternative plans and picks the cheaper), with the two working together [^src5]. Example: a filter written *after* a join gets pushed down before the join — and even pushed into the JDBC source (`PushedFilters`) — automatically [^src5].
 - **Tungsten** — the execution engine (Project Tungsten, Spark 1.6). It stores data **off-heap in binary format** and generates **encoder code on the fly**, avoiding the expensive double serialization PySpark otherwise pays (Java/Scala ↔ Python via cloudpickle). Off-heap storage also reduces GC pauses since the data is out of the garbage collector's scope [^src5].
 
-For PySpark especially, the DataFrame API is critical: serialization, not computation, is often the dominant cost, and DataFrames let you write Python while keeping data and processing in the efficient JVM/off-heap format [^src5]. The RDD-based MLlib API has been in maintenance mode since Spark 2.0; `spark.ml` (DataFrame-based) is the primary ML API [^src4][^src5]. See [[data-engineering/parquet|Parquet]] for the recommended analytical file format that pairs with Catalyst column pruning and predicate pushdown [^src4].
+For PySpark especially, the DataFrame API is critical: serialization, not computation, is often the dominant cost, and DataFrames let you write Python while keeping data and processing in the efficient JVM/off-heap format [^src5]. The RDD-based MLlib API has been in maintenance mode since Spark 2.0; `spark.ml` (DataFrame-based) is the primary ML API [^src4][^src5]. See [Parquet](/data-engineering/parquet.md) for the recommended analytical file format that pairs with Catalyst column pruning and predicate pushdown [^src4].
 
 ## Caching and persist mechanics
 
@@ -249,7 +249,7 @@ Memory-specific checklist items [^src4]:
 Distilled production guidance [^src4]:
 
 - **Use the DataFrame/Dataset API, not RDDs** — everything else depends on it (Catalyst, predicate pushdown, AQE, cost-based join reordering) [^src4][^src5].
-- **Pick the right file format** — [[data-engineering/parquet|Parquet]] for analytics; a table format ([[data-engineering/apache-iceberg|Iceberg]] or Delta) for anything read repeatedly, for ACID, time travel, and planner stats. Always specify schema explicitly for CSV/JSON to avoid full-scan inference [^src4].
+- **Pick the right file format** — [Parquet](/data-engineering/parquet.md) for analytics; a table format ([Iceberg](/data-engineering/apache-iceberg.md) or Delta) for anything read repeatedly, for ACID, time travel, and planner stats. Always specify schema explicitly for CSV/JSON to avoid full-scan inference [^src4].
 - **Splittable compression** — Snappy/LZ4/ZSTD, never GZIP (a single node must decompress the whole file). ZSTD runs parallel for shuffle as of Spark 4.x [^src4].
 - **Partitioning** — tune `spark.sql.files.maxPartitionBytes` (128MB default) to file layout; target 2–4 partitions per core; coalesce after heavy filtering; repartition on join keys before multiple joins; use low-cardinality columns for `.partitionBy()` writes [^src4].
 - **Filter early** — partition pruning and Dynamic Partition Pruning (default-on, multi-key in 4.x) avoid touching irrelevant data [^src4].
@@ -280,7 +280,7 @@ The execution proceeds as: both datasets are (1) partitioned and sorted on the j
 | **Batch processing** | Break job into small pieces, run on individual machines |
 | **Real-time processing** | Immediate processing of data as it arrives |
 
-Hadoop/MapReduce was the first dominant distributed framework — scalable and fault-tolerant, but slow (disk-heavy) and inflexible (strict Map+Reduce paradigm, poorly suited to ML or interactive queries) [^src10]. Spark replaced it as the preferred framework — "open source, general purpose and lightning fast" with both batch and real-time support [^src10]. Nowadays single-node engines (DuckDB, Polars) challenge whether distributed processing is needed at all for medium-scale data [^src13]. See [[data-engineering/duckdb|DuckDB]].
+Hadoop/MapReduce was the first dominant distributed framework — scalable and fault-tolerant, but slow (disk-heavy) and inflexible (strict Map+Reduce paradigm, poorly suited to ML or interactive queries) [^src10]. Spark replaced it as the preferred framework — "open source, general purpose and lightning fast" with both batch and real-time support [^src10]. Nowadays single-node engines (DuckDB, Polars) challenge whether distributed processing is needed at all for medium-scale data [^src13]. See [DuckDB](/data-engineering/duckdb.md).
 
 ## PySpark: the Python API for Spark
 
@@ -300,7 +300,7 @@ from pyspark.sql import SparkSession
 spark = SparkSession.builder.appName("MySparkApp").getOrCreate()
 ```
 
-In **Databricks**, the `spark` object is pre-initialized — you do not need to create it [^src13]. See [[data-engineering/databricks|Databricks]].
+In **Databricks**, the `spark` object is pre-initialized — you do not need to create it [^src13]. See [Databricks](/data-engineering/databricks.md).
 
 ### Spark shells
 
@@ -408,7 +408,7 @@ When you call `.explain("extended")` on a DataFrame, Spark prints four plan stag
 3. **Optimized logical plan** — Catalyst applies optimizations (filter pushdown, null propagation, combined predicates); optimizations happen *before* execution
 4. **Physical plan** — how to execute on the cluster (scan, filter, project, column→row conversion for output)
 
-Key insight: **Catalyst pushes filters before selects** in the optimized plan, even if your code writes `select` first then `filter` — so writing "natural" code is fine [^src13]. The Photon executor (C++, vectorized) handles actual execution; it operates on the physical plan and scans only the columns needed (projection pushdown automatic) [^src13]. See [[data-engineering/databricks|Databricks]] for Photon details.
+Key insight: **Catalyst pushes filters before selects** in the optimized plan, even if your code writes `select` first then `filter` — so writing "natural" code is fine [^src13]. The Photon executor (C++, vectorized) handles actual execution; it operates on the physical plan and scans only the columns needed (projection pushdown automatic) [^src13]. See [Databricks](/data-engineering/databricks.md) for Photon details.
 
 ## PySpark MLlib
 
@@ -455,7 +455,7 @@ Databricks offers a **free edition** for learning — the only compute available
 - SQL Editor with serverless compute attached for ad-hoc queries
 - Notebook-based development with the pre-initialized `spark` object
 
-The **catalog → schema → tables/volumes** hierarchy: a workspace has catalogs, each catalog has schemas (databases), each schema has tables (registered data) and volumes (raw file storage) [^src13]. See [[data-engineering/databricks|Databricks]] for the full platform overview.
+The **catalog → schema → tables/volumes** hierarchy: a workspace has catalogs, each catalog has schemas (databases), each schema has tables (registered data) and volumes (raw file storage) [^src13]. See [Databricks](/data-engineering/databricks.md) for the full platform overview.
 
 ## Pair RDDs (key-value RDDs)
 
@@ -621,11 +621,11 @@ Apache DataFusion Comet is a Rust/Arrow-based native execution plugin for Spark,
 
 ## Related pages
 
-- [[data-engineering/parquet|Parquet]] — recommended columnar format for Spark analytics
-- [[data-engineering/apache-iceberg|Apache Iceberg]] — table format enabling SPJ and planner stats
-- [[data-engineering/dbt|dbt]], [[data-engineering/dimensional-modeling|Dimensional Modeling]] — adjacent transformation/modeling tooling
-- [[data-engineering/databricks|Databricks]] — managed Spark platform; Lakeflow SDP for declarative pipelines
-- [[data-engineering/duckdb|DuckDB]] — single-node alternative for medium-scale analytics
+- [Parquet](/data-engineering/parquet.md) — recommended columnar format for Spark analytics
+- [Apache Iceberg](/data-engineering/apache-iceberg.md) — table format enabling SPJ and planner stats
+- [dbt](/data-engineering/dbt.md), [Dimensional Modeling](/data-engineering/dimensional-modeling.md) — adjacent transformation/modeling tooling
+- [Databricks](/data-engineering/databricks.md) — managed Spark platform; Lakeflow SDP for declarative pipelines
+- [DuckDB](/data-engineering/duckdb.md) — single-node alternative for medium-scale analytics
 
 ---
 

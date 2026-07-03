@@ -40,7 +40,7 @@ The most important step is to fully understand the problem before writing a sing
 
 1. **Keep it simple** — choose the simplest tool that solves the problem; you build faster, debug quicker, and onboard others more easily [^src1].
 2. **Modularise** — split into clear Extract / Transform / Load stages; separation improves readability and makes parts testable and replaceable [^src1].
-3. **Make it reproducible** — same inputs should always produce the same result [^src1]. (See [[data-engineering/idempotent-pipelines|Idempotent Pipelines]].)
+3. **Make it reproducible** — same inputs should always produce the same result [^src1]. (See [Idempotent Pipelines](/data-engineering/idempotent-pipelines.md).)
 4. **Log properly** — even a few lines to stdout/log file tracking start/end time per step, record counts, warnings, and edge cases save a lot [^src1].
 5. **Consider failures** — things break; even simple retry logic or writing errors to a separate file prevents data loss and headaches [^src1].
 6. **Build for "small but growing"** — start small but think a step ahead, so the pipeline isn't rebuilt from scratch when scope expands slightly [^src1].
@@ -71,20 +71,20 @@ A one-off report script quietly becomes part of weekly ops; a simple scheduled j
 
 - **Pipeline logic is hard to follow** — constant scrolling to trace one transformation; blurred E/T/L stages; tightly coupled logic that's hard to test separately.
 - **Copy-pasting or rewriting code often** — a strong sign a shared utility module, config file, or lightweight library would help.
-- **The pipeline fails more frequently** — add retries, fallbacks, error logging, validation; maybe move from ad-hoc scripts to a scheduler with retries and alerts (see [[data-engineering/data-orchestration|Data Orchestration]]).
-- **Data volumes have grown** — memory issues, timeouts, runtimes outgrowing the local machine/scheduler; consider chunking, batching, or moving parts to a database or scalable tool (see [[data-engineering/scaling-data-pipelines|Scaling Data Pipelines]]).
+- **The pipeline fails more frequently** — add retries, fallbacks, error logging, validation; maybe move from ad-hoc scripts to a scheduler with retries and alerts (see [Data Orchestration](/data-engineering/data-orchestration.md)).
+- **Data volumes have grown** — memory issues, timeouts, runtimes outgrowing the local machine/scheduler; consider chunking, batching, or moving parts to a database or scalable tool (see [Scaling Data Pipelines](/data-engineering/scaling-data-pipelines.md)).
 - **More stakeholders rely on the output** — needs better documentation, more consistent delivery, monitoring, and ownership.
 
 The rule of thumb: "If you're spending more time maintaining the pipeline than benefiting from it, it's time to refactor or scale." [^src1]
 
 ## See also
 
-- [[data-engineering/etl-pipeline|ETL Pipeline]] — Extract/Transform/Load; ETL vs ELT; batch vs streaming
-- [[data-engineering/pipeline-coding-patterns|Pipeline Coding Patterns]] — Python code patterns (CLI, logging, retries, testing) for implementation
-- [[data-engineering/requirements-gathering|Requirements Gathering]] — the structured version of "understand the problem scope"
-- [[data-engineering/data-engineering-best-practices|Data Engineering Best Practices]] — broader pipeline best-practice set
-- [[data-engineering/idempotent-pipelines|Idempotent Pipelines]] — the reproducibility design principle
-- [[data-engineering/scaling-data-pipelines|Scaling Data Pipelines]] — what to do when "small but growing" outgrows its shape
+- [ETL Pipeline](/data-engineering/etl-pipeline.md) — Extract/Transform/Load; ETL vs ELT; batch vs streaming
+- [Pipeline Coding Patterns](/data-engineering/pipeline-coding-patterns.md) — Python code patterns (CLI, logging, retries, testing) for implementation
+- [Requirements Gathering](/data-engineering/requirements-gathering.md) — the structured version of "understand the problem scope"
+- [Data Engineering Best Practices](/data-engineering/data-engineering-best-practices.md) — broader pipeline best-practice set
+- [Idempotent Pipelines](/data-engineering/idempotent-pipelines.md) — the reproducibility design principle
+- [Scaling Data Pipelines](/data-engineering/scaling-data-pipelines.md) — what to do when "small but growing" outgrows its shape
 
 ---
 

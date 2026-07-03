@@ -22,7 +22,7 @@ updated: 2026-05-22
 
 # Distributed Systems Fallacies
 
-**TL;DR**: Eight false assumptions developers make about distributed networks — network reliability and zero latency being the most commonly violated — that cause production failures in [[software-engineering/microservices|microservices]] architectures when left unaddressed [^src1].
+**TL;DR**: Eight false assumptions developers make about distributed networks — network reliability and zero latency being the most commonly violated — that cause production failures in [microservices](/software-engineering/microservices.md) architectures when left unaddressed [^src1].
 
 ## The eight fallacies
 
@@ -48,9 +48,9 @@ Sourced failure modes from ingested sources cover fallacies 1, 2, 4, and 5. Fall
 Microservices make these assumptions visible: assumptions about network reliability and latency that don't hold in production cause failures in inter-service communication and data consistency [^src1]. Partial failures are not edge cases — distributed systems will have them, and explicit resilience strategies are required [^src1].
 
 **Design responses (sourced):**
-- Resilience planning: explicit strategies for handling partial failures; centralized observability — logging and monitoring across all services — to detect anomalies [^src1]. See [[software-engineering/microservices|Microservices — best practices]].
-- Eventual consistency: in distributed microservices systems, updates are not immediately visible everywhere; temporary inconsistencies are expected and must be designed for explicitly [^src1]. See [[software-engineering/microservices|Microservices — eventual consistency]].
-- Kubernetes auto-restart and health checks catch failed containers and route traffic away from unhealthy pods — a direct infrastructure response to the reliability assumption [^src2]. See [[software-engineering/kubernetes|Kubernetes — relationship to microservices]].
+- Resilience planning: explicit strategies for handling partial failures; centralized observability — logging and monitoring across all services — to detect anomalies [^src1]. See [Microservices — best practices](/software-engineering/microservices.md).
+- Eventual consistency: in distributed microservices systems, updates are not immediately visible everywhere; temporary inconsistencies are expected and must be designed for explicitly [^src1]. See [Microservices — eventual consistency](/software-engineering/microservices.md).
+- Kubernetes auto-restart and health checks catch failed containers and route traffic away from unhealthy pods — a direct infrastructure response to the reliability assumption [^src2]. See [Kubernetes — relationship to microservices](/software-engineering/kubernetes.md).
 
 ### Fallacy 4 — The network is secure
 
@@ -60,7 +60,7 @@ In Kubernetes, Secrets are base64-encoded but not encrypted by default [^src2] �
 
 In Kubernetes, pod IPs are ephemeral: pods are replaced rather than restarted in place, and receive new IP addresses each time [^src2]. Any service addressing a pod directly by IP breaks on pod restart — the topology fallacy made literal.
 
-**Kubernetes mitigation**: Service objects provide stable virtual endpoints backed by selector-matched pods, fully decoupling callers from topology churn [^src2]. This is the primary mechanism Kubernetes uses to operationalize microservices at scale. See [[software-engineering/kubernetes|Kubernetes — core components (Service)]].
+**Kubernetes mitigation**: Service objects provide stable virtual endpoints backed by selector-matched pods, fully decoupling callers from topology churn [^src2]. This is the primary mechanism Kubernetes uses to operationalize microservices at scale. See [Kubernetes — core components (Service)](/software-engineering/kubernetes.md).
 
 ### Fallacies 3, 6, 7, 8 — Bandwidth / Administration / Transport cost / Homogeneity
 
@@ -72,20 +72,20 @@ Every microservices deployment is subject to all eight fallacies; ignoring them 
 
 | Fallacy | Response | Source |
 |---|---|---|
-| Network reliability | Resilience planning; centralized observability | [[software-engineering/microservices\|Microservices]] [^src1] |
-| Latency | Eventual consistency design; async where possible | [[software-engineering/microservices\|Microservices]] [^src1] |
-| Network secure | Explicit secret encryption; mTLS | [[software-engineering/kubernetes\|Kubernetes]] [^src2] |
-| Topology changes | Service objects with stable endpoints | [[software-engineering/kubernetes\|Kubernetes]] [^src2] |
+| Network reliability | Resilience planning; centralized observability | [Microservices](/software-engineering/microservices.md) [^src1] |
+| Latency | Eventual consistency design; async where possible | [Microservices](/software-engineering/microservices.md) [^src1] |
+| Network secure | Explicit secret encryption; mTLS | [Kubernetes](/software-engineering/kubernetes.md) [^src2] |
+| Topology changes | Service objects with stable endpoints | [Kubernetes](/software-engineering/kubernetes.md) [^src2] |
 
 ## See also
 
-- [[software-engineering/microservices|Microservices]] — architectural context where fallacies 1+2 most commonly bite; resilience planning and eventual consistency
-- [[software-engineering/kubernetes|Kubernetes]] — infrastructure mitigations for fallacies 1 (auto-restart), 5 (Service stable endpoints), 4 (Secrets caveat)
-- [[software-engineering/software-design-principles|Software Design Principles]] — the defensibility principle (handle edge cases; fail loudly) is the code-level response to these fallacies
-- [[software-engineering/system-design-fundamentals|System Design Fundamentals]] — load balancing, database selection, horizontal scaling as practical mitigations for fallacies 1, 2, and 5
-- [[software-engineering/README|Software Engineering hub]]
+- [Microservices](/software-engineering/microservices.md) — architectural context where fallacies 1+2 most commonly bite; resilience planning and eventual consistency
+- [Kubernetes](/software-engineering/kubernetes.md) — infrastructure mitigations for fallacies 1 (auto-restart), 5 (Service stable endpoints), 4 (Secrets caveat)
+- [Software Design Principles](/software-engineering/software-design-principles.md) — the defensibility principle (handle edge cases; fail loudly) is the code-level response to these fallacies
+- [System Design Fundamentals](/software-engineering/system-design-fundamentals.md) — load balancing, database selection, horizontal scaling as practical mitigations for fallacies 1, 2, and 5
+- [Software Engineering hub](/software-engineering/README.md)
 
 ---
 
-[^src1]: [[03_Resources/Articles/Disasters in a Microservices World|Disasters I've Seen in a Microservices World]]
-[^src2]: [[03_Resources/Study Notes/DevOps - Kubernetes Complete Course for Beginners|DevOps - Kubernetes Complete Course for Beginners]]
+[^src1]: [Disasters I've Seen in a Microservices World](/03_Resources/Articles/Disasters in a Microservices World.md)
+[^src2]: [DevOps - Kubernetes Complete Course for Beginners](/03_Resources/Study Notes/DevOps - Kubernetes Complete Course for Beginners.md)

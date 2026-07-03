@@ -71,10 +71,10 @@ For any business, role, or industry [^src1]:
 
 ## Empirical evidence from Polymarket
 
-[[trading/polymarket|Polymarket]] provides rare measurable data on compression [^src1]:
+[Polymarket](/trading/polymarket.md) provides rare measurable data on compression [^src1]:
 - Average arbitrage window: 12.3 seconds (2024) → 2.7 seconds (early 2026)
 - 94–95% of wallets lose money despite AI tools being democratized — availability ≠ distributed edge
 
-Related: [[trading/polymarket|Polymarket]], [[trading/prediction-markets|Prediction Markets]]
+Related: [Polymarket](/trading/polymarket.md), [Prediction Markets](/trading/prediction-markets.md)
 
 [^src1]: [A Polymarket Bot Made $438,000 In 30 Days](../../raw/youtube/youtube-BiqG3it0gY0-a-polymarket-bot-made-438-000-in-30-days-your-industry-is-ne.md)

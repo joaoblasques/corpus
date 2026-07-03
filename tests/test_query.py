@@ -8,6 +8,15 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "bin"))
 import query  # noqa: E402
 
 
+# ===== UNIT 0 — OKF conformance: path constants =====
+
+def test_log_path_constant_is_log_md():
+    """LOG_PATH must point to corpus/log.md (OKF conformant name, not _log.md)."""
+    assert query.LOG_PATH.name == "log.md", (
+        f"LOG_PATH filename should be 'log.md', got {query.LOG_PATH.name!r}"
+    )
+
+
 # ===== UNIT 1 — already_queued =====
 
 def test_already_queued_true_when_needle_present(tmp_path):

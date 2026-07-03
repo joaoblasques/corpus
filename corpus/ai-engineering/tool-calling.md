@@ -89,7 +89,7 @@ Anthropic's agent documentation identifies patterns for tools that work well at 
 
 **Replace UUIDs with natural language identifiers.** Tools that return or accept `"user-id: 9f2a3b"` force the model to manage opaque references; tools that return `"user: Alice Chen (alice@example.com)"` let the model reason about the objects themselves. "Use natural language identifiers and descriptions whenever possible" [^src2].
 
-See also the MCP "One Thing" principle in [[ai-engineering/mcp|MCP]] — the same discipline applied to MCP server tools.
+See also the MCP "One Thing" principle in [MCP](/ai-engineering/mcp.md) — the same discipline applied to MCP server tools.
 
 ## Programmatic tool calling
 
@@ -216,7 +216,7 @@ The Tool Search Tool enables deferred loading of tools — preventing all tool s
 
 ## Relationship to context engineering
 
-Tool results are one of the four context components injected into an agent's context window after each call. See [[ai-engineering/context-engineering|Context Engineering]].
+Tool results are one of the four context components injected into an agent's context window after each call. See [Context Engineering](/ai-engineering/context-engineering.md).
 
 ## Client tools vs server tools (official API overview)
 
@@ -245,13 +245,13 @@ These are added on top of normal input/output tokens and apply whenever ≥1 too
 
 ## See also
 
-- [[ai-engineering/ai-agent|AI Agent]] — tool calling is a core part of the agent loop
-- [[ai-engineering/context-engineering|Context Engineering]] — tool results as a context component
-- [[ai-engineering/tool-calling-and-context-engineering|Tool Calling & Context Engineering]] — synthesis: how tool results drive context growth and the compounding-window problem
+- [AI Agent](/ai-engineering/ai-agent.md) — tool calling is a core part of the agent loop
+- [Context Engineering](/ai-engineering/context-engineering.md) — tool results as a context component
+- [Tool Calling & Context Engineering](/ai-engineering/tool-calling-and-context-engineering.md) — synthesis: how tool results drive context growth and the compounding-window problem
 
 ---
 
-[^src1]: [[03_Resources/Study Notes/AI Agents - Complete Course Beginner to Pro|AI Agents - Complete Course Beginner to Pro]]
+[^src1]: [AI Agents - Complete Course Beginner to Pro](/03_Resources/Study Notes/AI Agents - Complete Course Beginner to Pro.md)
 [^src2]: [Writing Effective Tools for AI Agents](../../raw/web/web-writing-effective-tools-for-ai-agentsusing-ai-agents.md) — Anthropic
 [^src4]: [Agents in Action #2: How Agents Interact with the Real World](../../raw/email/email-2026-06-21-agents-in-action-2-how-agents-interact-with-the-real-world.md) — Pipeline to Insights newsletter
 [^src5]: [Web fetch tool — Claude Platform docs](../../raw/web/web-web-fetch-tool.md) — Anthropic

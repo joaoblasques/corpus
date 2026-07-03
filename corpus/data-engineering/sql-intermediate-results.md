@@ -42,7 +42,7 @@ updated: 2026-06-19
 
 The non-materialized three store *transformation logic only* — the query re-executes every time they're called, producing no stored data [^src1]. The materialized two store *results*, avoiding recomputation at the cost of storage and staleness management [^src1]. The opinionated default: **use CTEs by default; promote to a view only when the logic must be shared; reach for a temp table when one transformation feeds several downstream steps** [^src1].
 
-This page is the decision framework. For the rewrite-rule mechanics of views see [[data-engineering/postgresql-views|PostgreSQL Views]]; for MV refresh internals and incremental view maintenance see [[data-engineering/materialized-views|Materialized Views]].
+This page is the decision framework. For the rewrite-rule mechanics of views see [PostgreSQL Views](/data-engineering/postgresql-views.md); for MV refresh internals and incremental view maintenance see [Materialized Views](/data-engineering/materialized-views.md).
 
 ## The non-materialized three: CTE vs subquery vs view
 
@@ -54,9 +54,9 @@ All three "do not store the results — every time they're called the query is e
 
 > Verbatim opinion: "subqueries are pretty terrible... generally speaking you want to mostly use CTE" [^src1].
 
-**CTEs in dbt — a tell.** In a [[data-engineering/dbt|dbt]] context, whether (and how) a team uses CTEs is treated as "a key indicator of how a team thinks about and uses dbt" — and of how well they understand the way cloud databases operate [^src2]. The framing matches this page: CTEs are valued *not* for performance (they don't drastically change it) but for letting you structure a model into named steps that improve cleanliness, simplify debugging, and provide functionality analogous to breaking a Python program into functions [^src2].
+**CTEs in dbt — a tell.** In a [dbt](/data-engineering/dbt.md) context, whether (and how) a team uses CTEs is treated as "a key indicator of how a team thinks about and uses dbt" — and of how well they understand the way cloud databases operate [^src2]. The framing matches this page: CTEs are valued *not* for performance (they don't drastically change it) but for letting you structure a model into named steps that improve cleanliness, simplify debugging, and provide functionality analogous to breaking a Python program into functions [^src2].
 
-**View gotcha — dependency locking.** Because views depend on their base tables, dropping or altering a table that a view references is blocked ("it yells at you"), making views harder to move and manage your data around [^src1]. This is the same rigidity covered structurally in [[data-engineering/postgresql-views|PostgreSQL Views]] (columns pinned by attribute number; `DROP`/restructure refused or cascaded).
+**View gotcha — dependency locking.** Because views depend on their base tables, dropping or altering a table that a view references is blocked ("it yells at you"), making views harder to move and manage your data around [^src1]. This is the same rigidity covered structurally in [PostgreSQL Views](/data-engineering/postgresql-views.md) (columns pinned by attribute number; `DROP`/restructure refused or cascaded).
 
 ## The materialized two: temporary table vs materialized view
 
@@ -70,7 +70,7 @@ Both **store data** so it can be reused without re-running the heavy transformat
 
 The big drawback of MVs: they **recompute the entire dataset on every refresh — no incremental gains** [^src1]. This is where temp tables (and, more broadly, hand-built incremental tables via the plain table API) win: you can update only the new window instead of recomputing everything [^src1]. The expressed bias is against MVs precisely because "they marry you to the idea of having to compute the entire window all the time" [^src1].
 
-> This is the productized version of the incremental-vs-full tension covered in [[data-engineering/materialized-views|Materialized Views]] — where engines like Databricks add cost-based incremental refresh and the DBSP/IVM line of work makes deltas cheap. The opinion here ("build the incremental table yourself") is one resolution; incremental MV maintenance is the other.
+> This is the productized version of the incremental-vs-full tension covered in [Materialized Views](/data-engineering/materialized-views.md) — where engines like Databricks add cost-based incremental refresh and the DBSP/IVM line of work makes deltas cheap. The opinion here ("build the incremental table yourself") is one resolution; incremental MV maintenance is the other.
 
 ## Decision rules (summary)
 
@@ -82,12 +82,12 @@ The big drawback of MVs: they **recompute the entire dataset on every refresh �
 
 ## See also
 
-- [[data-engineering/postgresql-views|PostgreSQL Views]] — view = rewrite rule (macro); schema-evolution rigidity
-- [[data-engineering/materialized-views|Materialized Views]] — refresh models, incremental view maintenance, restricted SQL surface
-- [[data-engineering/pipeline-layers|Pipeline Layers]] — staging tables in the ELT layering pattern
-- [[data-engineering/sql-window-functions|SQL Window Functions]] — common content inside these transformations
-- [[data-engineering/etl-pipeline|ETL Pipeline]] — where intermediate-result choices live
-- [[data-engineering/README|Data Engineering hub]]
+- [PostgreSQL Views](/data-engineering/postgresql-views.md) — view = rewrite rule (macro); schema-evolution rigidity
+- [Materialized Views](/data-engineering/materialized-views.md) — refresh models, incremental view maintenance, restricted SQL surface
+- [Pipeline Layers](/data-engineering/pipeline-layers.md) — staging tables in the ELT layering pattern
+- [SQL Window Functions](/data-engineering/sql-window-functions.md) — common content inside these transformations
+- [ETL Pipeline](/data-engineering/etl-pipeline.md) — where intermediate-result choices live
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

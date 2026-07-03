@@ -69,7 +69,7 @@ The course uses a version of **Git Flow** [^src1]:
 
 **CI** (`.github/workflows/ci.yml`), triggered on PR/push to `main`/`dev` [^src1]:
 
-- Installs deps with **[[mlops/uv|uv]]** (`uv sync --extra test`).
+- Installs deps with **[uv](/mlops/uv.md)** (`uv sync --extra test`).
 - Runs pre-commit checks (`uv run pre-commit run --all-files`) and pytest.
 - Tags a git version from `version.txt` to enforce **version uniqueness** (prevents accidental duplicate releases) [^src1].
 
@@ -77,7 +77,7 @@ The course uses a version of **Git Flow** [^src1]:
 
 - Uses a **strategy matrix** `environment: [acc, prd]` so the job runs per environment, with `environment: ${{ matrix.environment }}` selecting **environment-scoped secrets** [^src1].
 - Reads `DATABRICKS_HOST` (variable), `DATABRICKS_CLIENT_ID` / `DATABRICKS_CLIENT_SECRET` (secrets) — the SPN credentials, written to `~/.databrickscfg` [^src1].
-- Installs the Databricks CLI + uv, then runs **`databricks bundle deploy`** (which builds the wheel and deploys the [[mlops/databricks-asset-bundles|Databricks Asset Bundle]] / Lakeflow job to acc and prd), tagging + pushing the version only on `prd` [^src1].
+- Installs the Databricks CLI + uv, then runs **`databricks bundle deploy`** (which builds the wheel and deploys the [Databricks Asset Bundle](/mlops/databricks-asset-bundles.md) / Lakeflow job to acc and prd), tagging + pushing the version only on `prd` [^src1].
 
 To wire it up, create GitHub **Environments** `prd` and `acc`, add the SPN's `DATABRICKS_CLIENT_ID`/`DATABRICKS_CLIENT_SECRET` as environment secrets and `DATABRICKS_HOST` as a variable; the CLI picks these up and authenticates as the SPN [^src1].
 
@@ -87,13 +87,13 @@ Catalogs, schemas, and workspaces provide clean separation and access control; s
 
 ## See also
 
-- [[mlops/databricks-asset-bundles|Databricks Asset Bundles]] — `databricks bundle deploy` is this pipeline's deployment payload
-- [[mlops/environment-promotion|Environment Promotion (dev → acc → prd)]] — the cross-source synthesis this page is one instance of
-- [[data-engineering/cicd-for-data-infrastructure|CI/CD for Data Infrastructure]] — the data-infra sibling of this ML CI/CD discipline
-- [[mlops/databricks-development|Databricks Development]] — the dev/acc/prd catalog split originates in the local-dev setup
-- [[mlops/model-serving|Model Serving]] — the SPN OAuth flow authenticates serverless endpoint calls
-- [[data-engineering/databricks|Databricks]] — Unity Catalog and the platform
-- [[mlops/README|MLOps hub]]
+- [Databricks Asset Bundles](/mlops/databricks-asset-bundles.md) — `databricks bundle deploy` is this pipeline's deployment payload
+- [Environment Promotion (dev → acc → prd)](/mlops/environment-promotion.md) — the cross-source synthesis this page is one instance of
+- [CI/CD for Data Infrastructure](/data-engineering/cicd-for-data-infrastructure.md) — the data-infra sibling of this ML CI/CD discipline
+- [Databricks Development](/mlops/databricks-development.md) — the dev/acc/prd catalog split originates in the local-dev setup
+- [Model Serving](/mlops/model-serving.md) — the SPN OAuth flow authenticates serverless endpoint calls
+- [Databricks](/data-engineering/databricks.md) — Unity Catalog and the platform
+- [MLOps hub](/mlops/README.md)
 
 ---
 

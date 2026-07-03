@@ -118,13 +118,13 @@ Both agree: Linux basics first.
 
 ## See also
 
-- [[mlops/mlops-principles|MLOps Principles]] — how MLOps extends DevOps (the data difference)
-- [[mlops/linux-commands|Linux Commands]] — the 20% of Linux commands for 80% of work
-- [[mlops/terraform|Terraform]] — IaC tool at the heart of step 8
-- [[mlops/ci-cd-for-ml|CI/CD for ML]] — CI/CD pipelines in an ML context
-- [[mlops/infrastructure-as-code|Infrastructure as Code]] — IaC concepts and tools
-- [[mlops/networking-fundamentals|Networking Fundamentals]] — IP, DNS, VPCs
-- [[mlops/README|MLOps hub]]
+- [MLOps Principles](/mlops/mlops-principles.md) — how MLOps extends DevOps (the data difference)
+- [Linux Commands](/mlops/linux-commands.md) — the 20% of Linux commands for 80% of work
+- [Terraform](/mlops/terraform.md) — IaC tool at the heart of step 8
+- [CI/CD for ML](/mlops/ci-cd-for-ml.md) — CI/CD pipelines in an ML context
+- [Infrastructure as Code](/mlops/infrastructure-as-code.md) — IaC concepts and tools
+- [Networking Fundamentals](/mlops/networking-fundamentals.md) — IP, DNS, VPCs
+- [MLOps hub](/mlops/README.md)
 
 ---
 

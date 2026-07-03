@@ -103,9 +103,9 @@ Example: Carla (1,500 YouTube subscribers, 100–200 views/video) closed a six-f
 
 ## Relationship to other pages
 
-- **[[ai-business/monetizing-code|Monetizing Code]]** — the positioning one-pager (seven-question self-interview) + "clarity test" prompt maps to conversion engineering here; both are about selling outcomes in the buyer's language.
-- **[[ai-business/ai-consulting-playbook|AI Consulting Playbook]]** — the "ghost voice" skill is the same mechanism as the client-specific Claude skills described there; this page provides the *content creation* use case.
-- **[[ai-business/boring-expert-businesses|Boring Expert Businesses]]** — a compliance or fractional executive business can use ghost voice / conversion engineering to scale outreach messaging.
+- **[Monetizing Code](/ai-business/monetizing-code.md)** — the positioning one-pager (seven-question self-interview) + "clarity test" prompt maps to conversion engineering here; both are about selling outcomes in the buyer's language.
+- **[AI Consulting Playbook](/ai-business/ai-consulting-playbook.md)** — the "ghost voice" skill is the same mechanism as the client-specific Claude skills described there; this page provides the *content creation* use case.
+- **[Boring Expert Businesses](/ai-business/boring-expert-businesses.md)** — a compliance or fractional executive business can use ghost voice / conversion engineering to scale outreach messaging.
 
 [^src1]: [Claude + LinkedIn (Ruben Hassid newsletter)](../../raw/email/email-2026-06-21-claude-linkedin.md)
 [^src2]: [5 Claude AI Skills That Pay More Than a College Degree](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-5-claude-ai-skill-report.md) — lead-gen video funneling to coaching program; income screenshots used as social proof; video report from Obsidian vault

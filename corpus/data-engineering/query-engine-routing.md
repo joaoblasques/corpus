@@ -29,7 +29,7 @@ updated: 2026-06-15
 
 # Query-Engine Routing
 
-**TL;DR.** One promise of [[data-engineering/apache-iceberg|Apache Iceberg]] is **multi-engine access**: Spark writes, Trino queries, Flink streams, DuckDB explores, Athena scans — all on the same tables in the same object storage [^src1]. But "nothing in the stack decides which engine should run which query" [^src1]. **Query routing** is a proxy layer that sits between clients and engines, evaluates each query, picks the cheapest/fastest engine for its shape, translates the SQL dialect if needed, and returns results — so to the client "it looks like a regular database" [^src1]. Two examples synthesized here: **QueryFlux/LakeOps** (open-source Iceberg routing) and **Greybeam** (a drop-in Snowflake proxy).
+**TL;DR.** One promise of [Apache Iceberg](/data-engineering/apache-iceberg.md) is **multi-engine access**: Spark writes, Trino queries, Flink streams, DuckDB explores, Athena scans — all on the same tables in the same object storage [^src1]. But "nothing in the stack decides which engine should run which query" [^src1]. **Query routing** is a proxy layer that sits between clients and engines, evaluates each query, picks the cheapest/fastest engine for its shape, translates the SQL dialect if needed, and returns results — so to the client "it looks like a regular database" [^src1]. Two examples synthesized here: **QueryFlux/LakeOps** (open-source Iceberg routing) and **Greybeam** (a drop-in Snowflake proxy).
 
 ## The problem routing solves
 
@@ -51,7 +51,7 @@ Each engine has a distinct operational sweet spot [^src1]:
 | Spark | Batch ETL, heavy transforms, streaming ingest, all Iceberg maintenance (compaction, snapshot expiry) |
 | Trino | Interactive SQL, low-latency analytics, ad-hoc exploration |
 | Flink | Continuous streaming writes, exactly-once |
-| [[data-engineering/duckdb|DuckDB]] | Single-node sub-second selective queries; zero infra; cannot distribute |
+| [DuckDB](/data-engineering/duckdb.md) | Single-node sub-second selective queries; zero infra; cannot distribute |
 | Athena | Serverless, scan-priced; infrequent/unpredictable volumes |
 | Snowflake | Managed warehouse, BI integrations; reads Iceberg via external/REST catalogs |
 | StarRocks | High-concurrency, low-latency MPP for BI dashboards |
@@ -116,10 +116,10 @@ Why neither obvious fix works [^src3]:
 
 ## Related
 
-- [[data-engineering/apache-iceberg|Apache Iceberg]] — the multi-engine substrate
-- [[data-engineering/duckdb|DuckDB]] — the cheap, fast selective-query tier
-- [[data-engineering/open-table-formats|Open table formats]] · [[data-engineering/data-lake|Data lake]]
-- [[data-engineering/databricks|Databricks]] — alternative single-platform lakehouse model
+- [Apache Iceberg](/data-engineering/apache-iceberg.md) — the multi-engine substrate
+- [DuckDB](/data-engineering/duckdb.md) — the cheap, fast selective-query tier
+- [Open table formats](/data-engineering/open-table-formats.md) · [Data lake](/data-engineering/data-lake.md)
+- [Databricks](/data-engineering/databricks.md) — alternative single-platform lakehouse model
 
 [^src1]: [Routing multiple query engines with Iceberg (LakeOps)](../../raw/web/routing-multiple-query-engines-with-iceberg-lakeops-blog.md)
 [^src2]: [Greybeam: drop-in query engines for Snowflake](../../raw/web/greybeam-drop-in-query-engines-for-snowflake.md)

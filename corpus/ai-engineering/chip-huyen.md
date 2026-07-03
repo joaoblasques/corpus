@@ -36,9 +36,9 @@ Her book has become "the most comprehensive, well-structured guide to the essent
 
 ## See also
 
-- [[ai-engineering/ai-fundamentals|AI Fundamentals]] — foundational ML concepts
-- [[ai-engineering/learning-ai-engineering|Learning AI Engineering]] — AI Engineering as a skill path
-- [[ai-engineering/README|AI Engineering hub]]
+- [AI Fundamentals](/ai-engineering/ai-fundamentals.md) — foundational ML concepts
+- [Learning AI Engineering](/ai-engineering/learning-ai-engineering.md) — AI Engineering as a skill path
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

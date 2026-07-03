@@ -116,14 +116,14 @@ Three modes [^src1]:
 
 ## Adoption: scale for productivity, not for looks
 
-A practitioner caution on *when* to add agents [^src2]: don't stand up "15 sub-agents, 30 skills" before you have working single-agent workflows. The recommended path is to **start with one main agent**, build up skills through hands-on iteration, and add a sub-agent only once a workflow is proven and the sub-agent will carry real skills and context. The guiding phrase: scale for productivity, not for what looks cool. A purpose-built sub-agent (e.g. one for marketing, one for business) earns its coordination cost; a speculative fleet does not. See [[ai-engineering/agent-skills|Agent Skills]] for the skill-building prerequisite.
+A practitioner caution on *when* to add agents [^src2]: don't stand up "15 sub-agents, 30 skills" before you have working single-agent workflows. The recommended path is to **start with one main agent**, build up skills through hands-on iteration, and add a sub-agent only once a workflow is proven and the sub-agent will carry real skills and context. The guiding phrase: scale for productivity, not for what looks cool. A purpose-built sub-agent (e.g. one for marketing, one for business) earns its coordination cost; a speculative fleet does not. See [Agent Skills](/ai-engineering/agent-skills.md) for the skill-building prerequisite.
 
 ## Local-agent teams (org chart, chief-of-staff, start lean)
 
-[[ai-engineering/local-ai-agents|Local AI agents]] form teams the same way: each agent gets a specialized function and the team produces "something greater than the sum of its parts" — e.g. a research team scouting stocks plus a software team building product [^src11] [09:26](../../raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md#t=9:26). Two practitioner patterns recur in production local-agent fleets:
+[Local AI agents](/ai-engineering/local-ai-agents.md) form teams the same way: each agent gets a specialized function and the team produces "something greater than the sum of its parts" — e.g. a research team scouting stocks plus a software team building product [^src11] [09:26](../../raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md#t=9:26). Two practitioner patterns recur in production local-agent fleets:
 
 - **A chief-of-staff (manager) agent.** Rather than the human supervising every worker, a dedicated manager agent checks for blockers at the start and end of each day and only escalates what it can't resolve — "I don't want to manage the agents" [^src12] [06:30](../../raw/youtube/youtube-iRew6HOY0ho-paperclip-agent-collab-made-easy.md#t=6:30). Workers surface a **blocked** status (missing tool/API access) into an **autonomy log** the manager maintains. This is the supervisor/coordinator pattern (§ above) promoted to a standing role.
-- **Start lean — fire agents that aren't earning their keep.** A documented fleet was *cut in half* after the operator hit rate limits and realized "if you were just more efficient and structured agents better... you don't need like 10" [^src12] [07:23](../../raw/youtube/youtube-iRew6HOY0ho-paperclip-agent-collab-made-easy.md#t=7:23). This is the same scale-for-productivity-not-for-looks discipline as the §Adoption caution, validated under real rate-limit pressure. [[ai-engineering/paperclip|Paperclip]] is a control plane built specifically to run such an org-chart of agents; [[ai-engineering/openclaw|OpenClaw]] shows the complementary cost lever of routing each agent to a different model.
+- **Start lean — fire agents that aren't earning their keep.** A documented fleet was *cut in half* after the operator hit rate limits and realized "if you were just more efficient and structured agents better... you don't need like 10" [^src12] [07:23](../../raw/youtube/youtube-iRew6HOY0ho-paperclip-agent-collab-made-easy.md#t=7:23). This is the same scale-for-productivity-not-for-looks discipline as the §Adoption caution, validated under real rate-limit pressure. [Paperclip](/ai-engineering/paperclip.md) is a control plane built specifically to run such an org-chart of agents; [OpenClaw](/ai-engineering/openclaw.md) shows the complementary cost lever of routing each agent to a different model.
 
 ## Case study: Grab's specialist-agent support system
 
@@ -141,16 +141,16 @@ Grab's Analytics Data Warehouse team (1,000+ monthly users, 15,000+ tables) was 
 **Why specialists beat one giant agent** [^src3]: a monolith means "every new tool increases prompt complexity," and a failure is hard to localize across classification, data access, code search, reasoning, or summarization. Specialists are independently improvable and debuggable — "the choice was obvious. When replacing a manual process that used to take hours, a few minutes of agent coordination is not a serious downside." This is the supervisor/worker pattern with a classifier-driven router on top.
 
 **Production lessons** (each maps to a pitfall above) [^src3]:
-- **Context discipline across handoffs.** "In multi-agent systems, context grows quickly." The orchestrator cleans context between agents — "removes unnecessary tokens and invokes the next agent" — tracks tokens with [[ai-engineering/structured-outputs|tiktoken]], summarizes earlier messages on overflow while preserving the original question, and prunes [[ai-engineering/rag|RAG]] context (small LLMs extract snippets rather than passing whole files). See [[ai-engineering/context-window-management|Context Window Management]].
-- **Fewer, sharper tools.** An early version had 30+ generic-API tools whose descriptions and outputs bloated the prompt; redesigning tools around real usage and trimming outputs improved responsiveness. See [[ai-engineering/tool-calling|Tool Calling]].
-- **Guardrails assuming agents are *not* safe.** Classifier PII checks, SQL validation (blocks risky DDL/DML, enforces timeouts), and no direct commits to main — all Enhancement-Agent changes go through reviewed MRs in a test environment. See [[ai-engineering/agent-security|Agent Security]].
-- **Human review designed in, not bolted on.** Reviewers approve/reject/refine/re-route/annotate; answers post immediately but are labeled **"unreviewed"** so users get speed without false authority. Annotations feed offline evals — "tested against real failure cases rather than only synthetic examples." See [[ai-engineering/agent-evaluation|Agent Evaluation]].
+- **Context discipline across handoffs.** "In multi-agent systems, context grows quickly." The orchestrator cleans context between agents — "removes unnecessary tokens and invokes the next agent" — tracks tokens with [tiktoken](/ai-engineering/structured-outputs.md), summarizes earlier messages on overflow while preserving the original question, and prunes [RAG](/ai-engineering/rag.md) context (small LLMs extract snippets rather than passing whole files). See [Context Window Management](/ai-engineering/context-window-management.md).
+- **Fewer, sharper tools.** An early version had 30+ generic-API tools whose descriptions and outputs bloated the prompt; redesigning tools around real usage and trimming outputs improved responsiveness. See [Tool Calling](/ai-engineering/tool-calling.md).
+- **Guardrails assuming agents are *not* safe.** Classifier PII checks, SQL validation (blocks risky DDL/DML, enforces timeouts), and no direct commits to main — all Enhancement-Agent changes go through reviewed MRs in a test environment. See [Agent Security](/ai-engineering/agent-security.md).
+- **Human review designed in, not bolted on.** Reviewers approve/reject/refine/re-route/annotate; answers post immediately but are labeled **"unreviewed"** so users get speed without false authority. Annotations feed offline evals — "tested against real failure cases rather than only synthetic examples." See [Agent Evaluation](/ai-engineering/agent-evaluation.md).
 
-Stack: FastAPI, [[ai-engineering/langgraph|LangGraph]] (chosen because the agents "needed to loop, pass work to each other... and maintain state"), Redis, PostgreSQL [^src3].
+Stack: FastAPI, [LangGraph](/ai-engineering/langgraph.md) (chosen because the agents "needed to loop, pass work to each other... and maintain state"), Redis, PostgreSQL [^src3].
 
 ## Worked implementations (GenAI_Agents)
 
-NirDiamant's `GenAI_Agents` (52+ tutorials) is a large reference catalog of agent and multi-agent implementations, the majority built on [[ai-engineering/langgraph|LangGraph]] for stateful workflow orchestration [^src4]. Recurring multi-agent shapes across the collection: supervisor/coordinator + specialist workers (ATLAS academic system: Coordinator/Planner/Notewriter/Advisor), role-based crews (AutoGen research team: admin/developer/planner/executor/QA; OpenAI Swarm blog team: researcher/planner/writer/editor), and CrewAI inventory agents [^src4]. The catalog also pairs with companion resources on RAG (40+ notebooks) and agent memory (30 notebooks on vector stores, graphs, Mem0, Zep) — see [[ai-engineering/agent-memory|Agent Memory]] [^src4].
+NirDiamant's `GenAI_Agents` (52+ tutorials) is a large reference catalog of agent and multi-agent implementations, the majority built on [LangGraph](/ai-engineering/langgraph.md) for stateful workflow orchestration [^src4]. Recurring multi-agent shapes across the collection: supervisor/coordinator + specialist workers (ATLAS academic system: Coordinator/Planner/Notewriter/Advisor), role-based crews (AutoGen research team: admin/developer/planner/executor/QA; OpenAI Swarm blog team: researcher/planner/writer/editor), and CrewAI inventory agents [^src4]. The catalog also pairs with companion resources on RAG (40+ notebooks) and agent memory (30 notebooks on vector stores, graphs, Mem0, Zep) — see [Agent Memory](/ai-engineering/agent-memory.md) [^src4].
 
 ## Five coordination patterns (Anthropic taxonomy)
 
@@ -256,7 +256,7 @@ The `description` field is what the orchestrator uses to decide when to delegate
 | **delegate** | Lightweight general-purpose | Quick tasks that don't fit a specialist role |
 
 **Key patterns** [^src7]:
-- **Parallel reviewers**: run multiple reviewer agents on the same code simultaneously (e.g. security-lens reviewer + correctness reviewer), then merge findings — the same adversarial verification pattern as [[ai-engineering/generator-evaluator-separation|Generator–Evaluator Separation]].
+- **Parallel reviewers**: run multiple reviewer agents on the same code simultaneously (e.g. security-lens reviewer + correctness reviewer), then merge findings — the same adversarial verification pattern as [Generator–Evaluator Separation](/ai-engineering/generator-evaluator-separation.md).
 - **Review loops**: worker → reviewer → worker cycle until reviewer is satisfied.
 - **Foreground vs background**: agents can run in the background while you continue working.
 - **Model overrides**: each agent can be assigned a different model (e.g. planner on Opus, worker on Sonnet).
@@ -273,9 +273,9 @@ Anthropic identifies three core justifications for adding agents to a system [^s
 
 **Context-centric vs problem-centric decomposition** [^src10]: the standard instinct is to decompose by problem domain ("have a research agent and a writing agent"). A more principled approach is to decompose by context: "what information does each phase need, and would co-mingling that information hurt quality?" This produces tighter agent boundaries with less irrelevant context leakage.
 
-**Verification subagent pattern** [^src10]: add an explicit verification agent whose only job is to check the primary agent's output against criteria. The key property: "the verifier runs in its own context window, so it is not influenced by the reasoning the primary agent used to produce the output." This is the Generator-Verifier pattern (§ Five coordination patterns) applied as a default component. Without it, the primary agent tends to verify its own work using the same reasoning that produced it — the self-preferential bias that [[ai-engineering/claude-code|Dynamic Workflows]] was designed to counter.
+**Verification subagent pattern** [^src10]: add an explicit verification agent whose only job is to check the primary agent's output against criteria. The key property: "the verifier runs in its own context window, so it is not influenced by the reasoning the primary agent used to produce the output." This is the Generator-Verifier pattern (§ Five coordination patterns) applied as a default component. Without it, the primary agent tends to verify its own work using the same reasoning that produced it — the self-preferential bias that [Dynamic Workflows](/ai-engineering/claude-code.md) was designed to counter.
 
-**Tool Search Tool (85% token reduction)** [^src10]: loading all tool definitions upfront costs disproportionate tokens when only a fraction of tools are used per turn. The Tool Search Tool loads tool definitions on demand: the model describes what capability it needs; the Tool Search Tool returns matching tool definitions; the model calls the tool. In Anthropic's testing this reduces tool-definition tokens by 85%+ while maintaining high selection accuracy. See [[ai-engineering/mcp|MCP]] (§ Client-side context efficiency) for the same optimization applied to MCP tool sets.
+**Tool Search Tool (85% token reduction)** [^src10]: loading all tool definitions upfront costs disproportionate tokens when only a fraction of tools are used per turn. The Tool Search Tool loads tool definitions on demand: the model describes what capability it needs; the Tool Search Tool returns matching tool definitions; the model calls the tool. In Anthropic's testing this reduces tool-definition tokens by 85%+ while maintaining high selection accuracy. See [MCP](/ai-engineering/mcp.md) (§ Client-side context efficiency) for the same optimization applied to MCP tool sets.
 
 ## 30-40 parallel task pattern (Notion)
 
@@ -325,20 +325,20 @@ The longest Factory Mission documented: **16 days** — a single coordinated run
 
 ### Mission Control UI
 
-Factory provides a **Mission Control** visual interface showing each agent, its current state, task assignments, and the full handoff log — the same monitoring problem that motivates [[ai-engineering/openclaw|OpenClaw]]'s Mission Control and [[ai-engineering/paperclip|Paperclip]]'s project-management UI [^src13].
+Factory provides a **Mission Control** visual interface showing each agent, its current state, task assignments, and the full handoff log — the same monitoring problem that motivates [OpenClaw](/ai-engineering/openclaw.md)'s Mission Control and [Paperclip](/ai-engineering/paperclip.md)'s project-management UI [^src13].
 
 ## See also
 
-- [[ai-engineering/ai-agent|AI Agent]] — single-agent building block
-- [[ai-engineering/agent-skills|Agent Skills]] — the skills a sub-agent should carry before it's worth creating
-- [[ai-engineering/langgraph|LangGraph]] — recommended framework for stateful multi-agent workflows
-- [[ai-engineering/mcp|MCP]] — coordination protocol for tool calls, memory, and context sharing across agents
-- [[ai-engineering/claude-code|Claude Code]] — subagent invocation patterns, custom agent definitions, Agent Teams
-- [[ai-engineering/agent-harness|Agent Harness]] — the harness layer that enables multi-agent orchestration
+- [AI Agent](/ai-engineering/ai-agent.md) — single-agent building block
+- [Agent Skills](/ai-engineering/agent-skills.md) — the skills a sub-agent should carry before it's worth creating
+- [LangGraph](/ai-engineering/langgraph.md) — recommended framework for stateful multi-agent workflows
+- [MCP](/ai-engineering/mcp.md) — coordination protocol for tool calls, memory, and context sharing across agents
+- [Claude Code](/ai-engineering/claude-code.md) — subagent invocation patterns, custom agent definitions, Agent Teams
+- [Agent Harness](/ai-engineering/agent-harness.md) — the harness layer that enables multi-agent orchestration
 
 ---
 
-[^src1]: [[03_Resources/Study Notes/AI Agents - Complete Course Beginner to Pro|AI Agents - Complete Course Beginner to Pro]]
+[^src1]: [AI Agents - Complete Course Beginner to Pro](/03_Resources/Study Notes/AI Agents - Complete Course Beginner to Pro.md)
 [^src2]: [How AI agents & Claude skills work (Clearly Explained)](<../../raw/youtube/How AI agents & Claude skills work (Clearly Explained).md>) — Greg Isenberg × Ras Mic, YouTube
 [^src3]: [How Grab Reclaimed Hundreds of Data Engineering Hours With Multi-Agent AI](../../raw/email/email-2026-05-28-how-grab-reclaimed-hundreds-of-data-engineering-hours-with-m.md) — Chief Data Tinkerer
 [^src4]: [NirDiamant/GenAI_Agents — 52+ tutorials and implementations](../../raw/web/github-nirdiamant-genai-agents-50-tutorials-and-implementati.md) — GitHub
@@ -401,6 +401,6 @@ Multi-agent systems can compound their quality over time through self-modificati
 
 In a cross-model setup, each model maintains its own instruction file. Over time, each file becomes a behavioral profile for that model's role in the system — preferences discovered through correction accumulate without requiring prompts to repeat them [^src15].
 
-This is the organizational analog of the "compounds across sessions" property of [[ai-engineering/agent-memory|Agent Memory]] applied to behavioral conventions rather than factual context. See [[ai-engineering/claude-md-conventions|CLAUDE.md Conventions]] for the file format.
+This is the organizational analog of the "compounds across sessions" property of [Agent Memory](/ai-engineering/agent-memory.md) applied to behavioral conventions rather than factual context. See [CLAUDE.md Conventions](/ai-engineering/claude-md-conventions.md) for the file format.
 
 [^src15]: [AI Agents Full Course 2026 — Master Agentic AI (2 hours)](../../raw/_inbox/youtube-EsTrWCV0Ph4-ai-agents-full-course-2026-master-agentic-ai-2-hours.md) — Nick Saraev, YouTube, 2026; cross-LLM MCP orchestration, self-modifying instruction files

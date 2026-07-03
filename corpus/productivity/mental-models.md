@@ -47,7 +47,7 @@ A model popularized by Warren Buffett and Charlie Munger to justify investing on
 - **Three nested zones**: an inner circle of what you truly know; a larger circle of what you *think* you know; and the gap between them, where "ego and overconfidence live" [^src1].
 - **The tell**: a task that should take minutes but eats hours is a signal you have wandered outside your circle [^src1].
 - **The forest analogy**: lumberjacks, biologists, and runners each have a valid circle over the same forest — a complex system no single specialist fully owns. "You don't have to learn everything. You just have to know who to ask" [^src1].
-- **Generalists as routers**: foresters hold enough overlapping knowledge across specialties to manage the whole; "being a generalist helps you know exactly whom to ask" [^src1]. This connects directly to cross-training (see [[productivity/learning-to-learn|Learning to Learn]]).
+- **Generalists as routers**: foresters hold enough overlapping knowledge across specialties to manage the whole; "being a generalist helps you know exactly whom to ask" [^src1]. This connects directly to cross-training (see [Learning to Learn](/productivity/learning-to-learn.md)).
 
 ## Thought Experiments
 
@@ -130,13 +130,13 @@ The **Blind quadrant** is the highest-leverage area for growth: it contains patt
 2. **Look for patterns** — feedback you've heard more than once from different sources is a signal, not a coincidence. "If three different people, in three different contexts, notice the same thing, believe them."
 3. **Notice your reactions** — strong emotional reactions (defensiveness, dismissiveness) to a comment often signal you've hit the edge of your blind spot. Curiosity instead of defensiveness is the habit.
 
-Connects to [[productivity/mental-models|Circle of Competence]]: both models ask you to be accurate about the boundary between what you know (or see) and what you don't.
+Connects to [Circle of Competence](/productivity/mental-models.md): both models ask you to be accurate about the boundary between what you know (or see) and what you don't.
 
 ## Why this matters now
 
-All five models frame judgment — knowing limits, simulating outcomes, seeing what abstractions hide, checking reasoning chains — as the durable human contribution as AI absorbs execution. See [[productivity/ai-augmented-knowledge-work|AI-Augmented Knowledge Work]] and [[productivity/shipping-and-scope|Shipping and Scope]] for where this judgment gets applied.
+All five models frame judgment — knowing limits, simulating outcomes, seeing what abstractions hide, checking reasoning chains — as the durable human contribution as AI absorbs execution. See [AI-Augmented Knowledge Work](/productivity/ai-augmented-knowledge-work.md) and [Shipping and Scope](/productivity/shipping-and-scope.md) for where this judgment gets applied.
 
-For the *formal* foundation of rational choice under uncertainty — utility theory, Bayesian beliefs, and when strategic interdependence changes the logic — see [[productivity/decision-making|Decision Making]].
+For the *formal* foundation of rational choice under uncertainty — utility theory, Bayesian beliefs, and when strategic interdependence changes the logic — see [Decision Making](/productivity/decision-making.md).
 
 ---
 

@@ -77,7 +77,7 @@ def predict():
 Run with `python app.py` (defaults to `http://localhost:5000`) and test with **Postman** (GUI) or **cURL** [^src1]. *"With less than 50 lines of code, you've built a working ML service"* — but a `debug=True` Flask dev server is **not** production-safe [^src1].
 
 ### Hardening a serving API for production
-Minimal-setup caveats and the fixes [^src1]: add **input validation and logging**, **limit request size and rate**, **disable debug mode**, serve behind a production WSGI/ASGI server (**gunicorn / uvicorn**) rather than the Flask dev server, then **containerize with Docker** and deploy to a cloud platform (AWS / GCP / Heroku). See [[mlops/infrastructure-as-code|Infrastructure as Code]] and [[software-engineering/kubernetes|Kubernetes]] for the deployment substrate, and [[ai-engineering/agent-security|Agent Security]] for the input-validation mindset on any model-facing endpoint.
+Minimal-setup caveats and the fixes [^src1]: add **input validation and logging**, **limit request size and rate**, **disable debug mode**, serve behind a production WSGI/ASGI server (**gunicorn / uvicorn**) rather than the Flask dev server, then **containerize with Docker** and deploy to a cloud platform (AWS / GCP / Heroku). See [Infrastructure as Code](/mlops/infrastructure-as-code.md) and [Kubernetes](/software-engineering/kubernetes.md) for the deployment substrate, and [Agent Security](/ai-engineering/agent-security.md) for the input-validation mindset on any model-facing endpoint.
 
 ## Batch inference with Airflow
 
@@ -95,7 +95,7 @@ ingest >> preprocess >> score
 Inputs are passed between tasks via **XCom**; in the Docker-based setup the `dags/`, `models/`, and `data/` directories are mounted as volumes so tasks can read the trained model and the input/output CSVs [^src2]. Output rows carry `prob_spam`, `prediction`, and a `label` column [^src2].
 
 ### Production tips for batch jobs
-[^src2]: use **dynamic filenames** (`incoming_emails_{{ ds }}.csv`) so each run reads its own partition; **log metrics** (spam rate, volume) to BigQuery or Postgres; **store data on S3/GCS** rather than local disk; and use **Airflow sensors** to trigger the DAG after an upload lands. Airflow itself supplies the scheduling, per-task logs, and dependency visualization — see [[data-engineering/data-orchestration|Data Orchestration]] for why an orchestrator beats bare `cron` here.
+[^src2]: use **dynamic filenames** (`incoming_emails_{{ ds }}.csv`) so each run reads its own partition; **log metrics** (spam rate, volume) to BigQuery or Postgres; **store data on S3/GCS** rather than local disk; and use **Airflow sensors** to trigger the DAG after an upload lands. Airflow itself supplies the scheduling, per-task logs, and dependency visualization — see [Data Orchestration](/data-engineering/data-orchestration.md) for why an orchestrator beats bare `cron` here.
 
 ## Real-time vs batch — choosing
 
@@ -126,7 +126,7 @@ Databricks supports a range of architectures [^src3]:
 
 Serving one model is easy; comparing two in production needs **A/B testing** — and "a common misconception is that simply splitting traffic between model versions qualifies as A/B testing but that's not accurate" [^src4]. True A/B testing requires that a customer *consistently sees the same model version* throughout the experiment, which is critical for accurately measuring performance differences (CTR, conversion) [^src4]. A **naive traffic split** (like Databricks' built-in routing) doesn't guarantee this — a user might hit model A then model B on the next request [^src4].
 
-The fix is **sticky assignment**: assign each user to a variant based on a stable identifier so they always get the same model during the test [^src4]. The course implements this with a pyfunc wrapper ([[mlops/mlflow|MLflow]] `PythonModel`) that **hashes a stable user id** and routes A vs B by parity [^src4]:
+The fix is **sticky assignment**: assign each user to a variant based on a stable identifier so they always get the same model during the test [^src4]. The course implements this with a pyfunc wrapper ([MLflow](/mlops/mlflow.md) `PythonModel`) that **hashes a stable user id** and routes A vs B by parity [^src4]:
 
 ```python
 hashed_id = hashlib.md5(page_id.encode("UTF-8")).hexdigest()
@@ -136,7 +136,7 @@ else:
     return {"Prediction": self.model_b.predict(...)[0], "model": "Model B"}
 ```
 
-Both models (A and B, differing in config/hyperparameters) are trained, logged, and registered with the `latest-model` alias, then the wrapper is registered and deployed so requests are split deterministically and you can see which model served each prediction [^src4]. For serving-endpoint authentication, the course uses a PAT in this lecture but moves to Service Principal OAuth for production — see [[mlops/ci-cd-for-ml|CI/CD for ML]] [^src4].
+Both models (A and B, differing in config/hyperparameters) are trained, logged, and registered with the `latest-model` alias, then the wrapper is registered and deployed so requests are split deterministically and you can see which model served each prediction [^src4]. For serving-endpoint authentication, the course uses a PAT in this lecture but moves to Service Principal OAuth for production — see [CI/CD for ML](/mlops/ci-cd-for-ml.md) [^src4].
 
 ## TTS Inference Engineering (vLLM-Omni)
 
@@ -179,14 +179,14 @@ TTS systems are **multi-stage pipelines**: a Talker predicts codec tokens autore
 
 ## Related
 
-- [[mlops/drift-detection|Drift Detection]] — monitoring a served model once it's in production
-- [[mlops/mlflow|MLflow]] — the registry/format and pyfunc wrapper behind Databricks Model Serving
-- [[mlops/model-monitoring|Model Monitoring]] — inference tables log requests/responses from these endpoints
-- [[mlops/production-ml-workflow|Production ML Workflow]] — Part 2 of the series: the training that produces the saved pipeline
-- [[data-engineering/data-orchestration|Data Orchestration]] — Airflow DAGs, scheduling vs orchestration vs observability
-- [[mlops/infrastructure-as-code|Infrastructure as Code]] · [[software-engineering/kubernetes|Kubernetes]] — the deployment/containerization substrate
-- [[ai-engineering/machine-learning|Machine Learning]] — the training half that produces the saved pipeline (ai-engineering)
-- [[mlops/README|MLOps hub]]
+- [Drift Detection](/mlops/drift-detection.md) — monitoring a served model once it's in production
+- [MLflow](/mlops/mlflow.md) — the registry/format and pyfunc wrapper behind Databricks Model Serving
+- [Model Monitoring](/mlops/model-monitoring.md) — inference tables log requests/responses from these endpoints
+- [Production ML Workflow](/mlops/production-ml-workflow.md) — Part 2 of the series: the training that produces the saved pipeline
+- [Data Orchestration](/data-engineering/data-orchestration.md) — Airflow DAGs, scheduling vs orchestration vs observability
+- [Infrastructure as Code](/mlops/infrastructure-as-code.md) · [Kubernetes](/software-engineering/kubernetes.md) — the deployment/containerization substrate
+- [Machine Learning](/ai-engineering/machine-learning.md) — the training half that produces the saved pipeline (ai-engineering)
+- [MLOps hub](/mlops/README.md)
 
 ---
 

@@ -19,11 +19,11 @@ updated: 2026-06-27
 
 # Perplexity Computer
 
-**TL;DR**: Perplexity Computer is a cloud-native AI agent product from Perplexity AI — zero local setup, model-agnostic auto-routing across frontier models, and parallel sub-agents running in an isolated VPS environment. The practical split from practitioners: use [[ai-engineering/openclaw|OpenClaw]] for repeatable business automations, use Perplexity Computer for one-off complex research and analysis tasks [^src1].
+**TL;DR**: Perplexity Computer is a cloud-native AI agent product from Perplexity AI — zero local setup, model-agnostic auto-routing across frontier models, and parallel sub-agents running in an isolated VPS environment. The practical split from practitioners: use [OpenClaw](/ai-engineering/openclaw.md) for repeatable business automations, use Perplexity Computer for one-off complex research and analysis tasks [^src1].
 
 ## What it is
 
-Perplexity Computer is a "fully cloud-native" agent — the agent runs on Perplexity's infrastructure in an isolated virtual machine, so there is nothing to install, configure, or host locally [^src1]. It competes directly with [[ai-engineering/openclaw|OpenClaw]] (local, maximally customizable) at the opposite end of the setup spectrum: zero setup, fully managed, subscription-only [^src1].
+Perplexity Computer is a "fully cloud-native" agent — the agent runs on Perplexity's infrastructure in an isolated virtual machine, so there is nothing to install, configure, or host locally [^src1]. It competes directly with [OpenClaw](/ai-engineering/openclaw.md) (local, maximally customizable) at the opposite end of the setup spectrum: zero setup, fully managed, subscription-only [^src1].
 
 Key properties [^src1]:
 - **Cloud-native, zero setup** — no installation, no VPS, no Docker; sign in and use
@@ -55,20 +55,20 @@ The documented Slack connector workflow [^src1]:
 3. The agent reads connected data sources (Drive/email context if authorized), composes the message, and posts to Slack
 4. No bot tokens, no webhook configuration, no developer setup required
 
-This is the same philosophy as [[ai-engineering/claude-managed-agents|Claude Managed Agents]] Vaults — OAuth credentials handled by the platform, injected automatically, never exposed to the agent sandbox.
+This is the same philosophy as [Claude Managed Agents](/ai-engineering/claude-managed-agents.md) Vaults — OAuth credentials handled by the platform, injected automatically, never exposed to the agent sandbox.
 
 ## Relationship to other tools
 
-- **[[ai-engineering/openclaw|OpenClaw]]** — the local, customizable counterpart; better for repeatable automated workflows with custom skills and scheduled runs [^src1]
-- **[[ai-engineering/local-ai-agents|Local AI Agents]]** — the full category: Perplexity Computer sits at the fully-managed cloud end; OpenClaw/Hermes sit at the self-hosted local end
-- **[[ai-engineering/claude-managed-agents|Claude Managed Agents]]** — Anthropic's cloud-hosted agent platform; similar cloud-native positioning but with deeper API access for developers building production systems vs. Perplexity Computer's consumer/prosumer focus
+- **[OpenClaw](/ai-engineering/openclaw.md)** — the local, customizable counterpart; better for repeatable automated workflows with custom skills and scheduled runs [^src1]
+- **[Local AI Agents](/ai-engineering/local-ai-agents.md)** — the full category: Perplexity Computer sits at the fully-managed cloud end; OpenClaw/Hermes sit at the self-hosted local end
+- **[Claude Managed Agents](/ai-engineering/claude-managed-agents.md)** — Anthropic's cloud-hosted agent platform; similar cloud-native positioning but with deeper API access for developers building production systems vs. Perplexity Computer's consumer/prosumer focus
 
 ## See also
 
-- [[ai-engineering/openclaw|OpenClaw]] — primary comparison point; local vs cloud tradeoff
-- [[ai-engineering/local-ai-agents|Local AI Agents]] — the broader category and anatomy
-- [[ai-engineering/hermes|Hermes]] — another self-hosted alternative in the same space
-- [[ai-engineering/README|AI Engineering hub]]
+- [OpenClaw](/ai-engineering/openclaw.md) — primary comparison point; local vs cloud tradeoff
+- [Local AI Agents](/ai-engineering/local-ai-agents.md) — the broader category and anatomy
+- [Hermes](/ai-engineering/hermes.md) — another self-hosted alternative in the same space
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

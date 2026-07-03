@@ -41,7 +41,7 @@ Osmani frames these as two linked ideas [^src1]:
 
 The consequences Osmani names: you stop thinking critically for yourself, and you lose the ability to properly debug systems because you no longer understand how they work — ending up with a large, fragile house of cards [^src1].
 
-The prescribed habit is to stay sharp by deliberately understanding the generated code and the decisions behind it as you build, rather than only optimizing for shipping faster [^src1]. This is the failure mode that the [[software-engineering/engineering-craft|learning loops]] (mutual amplification, adversarial mentor) are designed to prevent.
+The prescribed habit is to stay sharp by deliberately understanding the generated code and the decisions behind it as you build, rather than only optimizing for shipping faster [^src1]. This is the failure mode that the [learning loops](/software-engineering/engineering-craft.md) (mutual amplification, adversarial mentor) are designed to prevent.
 
 ## Three models of debt
 
@@ -96,11 +96,11 @@ Osmani's prescription: **don't outsource the learning**. When AI generates somet
 
 ## See also
 
-- [[software-engineering/engineering-craft|Engineering Craft]] — learning loops (mutual amplification, adversarial mentor) and habits that keep you in the loop
-- [[software-engineering/ai-assisted-development|AI-Assisted Development]] — the write→review shift and why fundamentals matter more under AI
-- [[ai-engineering/generator-evaluator-separation|Generator–Evaluator Separation]] — cognitive surrender is the collapse of the human evaluator role this pattern depends on
-- [[productivity/tokenmaxxing|Tokenmaxxing and AI Fake Productivity]] — organizational analog: borrowed confidence and the reverse centaur pattern
-- [[software-engineering/README|Software Engineering hub]]
+- [Engineering Craft](/software-engineering/engineering-craft.md) — learning loops (mutual amplification, adversarial mentor) and habits that keep you in the loop
+- [AI-Assisted Development](/software-engineering/ai-assisted-development.md) — the write→review shift and why fundamentals matter more under AI
+- [Generator–Evaluator Separation](/ai-engineering/generator-evaluator-separation.md) — cognitive surrender is the collapse of the human evaluator role this pattern depends on
+- [Tokenmaxxing and AI Fake Productivity](/productivity/tokenmaxxing.md) — organizational analog: borrowed confidence and the reverse centaur pattern
+- [Software Engineering hub](/software-engineering/README.md)
 
 ---
 

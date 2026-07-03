@@ -23,7 +23,7 @@ updated: 2026-06-26
 
 # Error Analysis
 
-**TL;DR**: Error analysis — systematically reading real AI outputs, annotating failures in open-ended notes, then letting a failure-mode taxonomy *emerge* from the data — is, per Hamel Husain, "the single most valuable activity in AI development and consistently the highest-ROI activity" [^src1]. It is the front end of the [[ai-engineering/agent-evaluation|evaluation]] loop: it tells you *what* to measure before you build evals to measure it. Its enabling investment is a simple, custom **data viewer**; teams that have one "iterate 10× faster than those without them" [^src1].
+**TL;DR**: Error analysis — systematically reading real AI outputs, annotating failures in open-ended notes, then letting a failure-mode taxonomy *emerge* from the data — is, per Hamel Husain, "the single most valuable activity in AI development and consistently the highest-ROI activity" [^src1]. It is the front end of the [evaluation](/ai-engineering/agent-evaluation.md) loop: it tells you *what* to measure before you build evals to measure it. Its enabling investment is a simple, custom **data viewer**; teams that have one "iterate 10× faster than those without them" [^src1].
 
 ## The mistake it fixes: the "tools trap"
 
@@ -57,26 +57,26 @@ What makes a good annotation tool [^src1]:
 - **Quick filtering/sorting** — dive into specific error types (e.g. by channel: voice/text/chat).
 - **Hotkeys** — navigate and annotate without clicking.
 
-These viewers "can be built in hours using AI-assisted development (like [[ai-engineering/cursor|Cursor]] or Loveable)" [^src1]. Hamel's own stack is FastHTML + MonsterUI (back-end and front-end in one Python file); but "a spreadsheet is better than nothing" — the point is to start [^src1].
+These viewers "can be built in hours using AI-assisted development (like [Cursor](/ai-engineering/cursor.md) or Loveable)" [^src1]. Hamel's own stack is FastHTML + MonsterUI (back-end and front-end in one Python file); but "a spreadsheet is better than nothing" — the point is to start [^src1].
 
 ## Domain experts should write the prompts
 
 "The people best positioned to improve your AI system are often the ones who know the least about AI" [^src1]. Because "prompts are just English," the friction of a domain expert (learning designer, lawyer, doctor) explaining principles in slides → engineers translating to prompts is wasted; the most effective teams give experts tools to write and iterate on prompts directly [^src1].
 
-- **Build bridges, not gatekeepers** — playgrounds (Arize, [[ai-engineering/langsmith|LangSmith]], Braintrust) are a start, but the next step many miss is **integrated prompt environments**: an admin version of the real UI that exposes prompt editing within the app's actual RAG/agent/business-logic context [^src1].
+- **Build bridges, not gatekeepers** — playgrounds (Arize, [LangSmith](/ai-engineering/langsmith.md), Braintrust) are a start, but the next step many miss is **integrated prompt environments**: an admin version of the real UI that exposes prompt editing within the app's actual RAG/agent/business-logic context [^src1].
 - **Kill the jargon** — calling everything "an agent" makes domain experts feel they can't contribute. Translate: "we're implementing RAG" → "we're making sure the model has the right context to answer"; "prevent prompt injection" → "make sure users can't trick the AI into ignoring our rules." Not dumbing down — being precise about what you're actually doing [^src1].
 
 ## Where it sits
 
-Error analysis is the *discovery* phase that feeds the rest of the evaluation discipline: the failure modes it surfaces become the [[ai-engineering/agent-evaluation|eval]] criteria and golden-dataset labels; [[ai-engineering/synthetic-data|synthetic data]] generates inputs to exercise the failure modes you can't yet observe; and the experiment-based [[ai-engineering/ai-product-management|roadmap]] prioritizes fixes by frequency. It is the antidote to the [[ai-engineering/generator-evaluator-separation|over-trust]] failure mode — you can't grade what you haven't looked at.
+Error analysis is the *discovery* phase that feeds the rest of the evaluation discipline: the failure modes it surfaces become the [eval](/ai-engineering/agent-evaluation.md) criteria and golden-dataset labels; [synthetic data](/ai-engineering/synthetic-data.md) generates inputs to exercise the failure modes you can't yet observe; and the experiment-based [roadmap](/ai-engineering/ai-product-management.md) prioritizes fixes by frequency. It is the antidote to the [over-trust](/ai-engineering/generator-evaluator-separation.md) failure mode — you can't grade what you haven't looked at.
 
 ## See also
 
-- [[ai-engineering/agent-evaluation|Agent Evaluation]] — error analysis defines what the evals measure
-- [[ai-engineering/synthetic-data|Synthetic Data]] — bootstraps data to analyze when you have no users
-- [[ai-engineering/ai-product-management|AI Product Management]] — experiment-based roadmaps built on this loop
-- [[ai-engineering/sources/field-guide-improving-ai-products|Source: Hamel Husain's field guide]]
-- [[ai-engineering/README|AI Engineering hub]]
+- [Agent Evaluation](/ai-engineering/agent-evaluation.md) — error analysis defines what the evals measure
+- [Synthetic Data](/ai-engineering/synthetic-data.md) — bootstraps data to analyze when you have no users
+- [AI Product Management](/ai-engineering/ai-product-management.md) — experiment-based roadmaps built on this loop
+- [Source: Hamel Husain's field guide](/ai-engineering/sources/field-guide-improving-ai-products.md)
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

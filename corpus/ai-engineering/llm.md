@@ -59,7 +59,7 @@ Scale context: GPT-3's training data would take a human 2,600+ years to read con
 
 ## Architecture: Transformer
 
-The [[ai-engineering/transformer|Transformer]] (Google, 2017) is the architecture that makes parallel sequence processing feasible. Key mechanism: **attention** — embeddings update their representations by attending to other tokens in context [^src1].
+The [Transformer](/ai-engineering/transformer.md) (Google, 2017) is the architecture that makes parallel sequence processing feasible. Key mechanism: **attention** — embeddings update their representations by attending to other tokens in context [^src1].
 
 The specific model behavior is *emergent* — researchers design the framework, but the billions of parameters determine exactly what the model does [^src1].
 
@@ -67,7 +67,7 @@ The specific model behavior is *emergent* — researchers design the framework, 
 
 The next-token, dense-Transformer baseline above is not the only shape modern open-weights LLMs take. Two 2026 model families illustrate divergence on both axes — *how* tokens are generated and *how* parameters are activated.
 
-**Mixture-of-Experts (MoE) — sparse activation.** Both families are MoE: only a fraction of total parameters fire per token. Cohere's **Command A+** is a decoder-only sparse-MoE Transformer with **25B active / 218B total** parameters — 128 experts, 8 active per token plus one shared expert, with a token-choice router using a normalized-sigmoid (not softmax) activation [^src3]. This decouples capacity (total params) from inference cost (active params), so a 218B-class model serves on a single B200 at 4-bit (W4A4) quantization [^src3]. Architectural details worth noting: sliding-window + global attention interleaved 3:1, RoPE on the windowed layers only, and native conversational tool use with optional grounding-span **citations** (`<co>…</co>` tags mapping spans to tool results) — see [[ai-engineering/tool-calling|Tool Calling]] and [[ai-engineering/structured-outputs|Structured Outputs]] [^src3].
+**Mixture-of-Experts (MoE) — sparse activation.** Both families are MoE: only a fraction of total parameters fire per token. Cohere's **Command A+** is a decoder-only sparse-MoE Transformer with **25B active / 218B total** parameters — 128 experts, 8 active per token plus one shared expert, with a token-choice router using a normalized-sigmoid (not softmax) activation [^src3]. This decouples capacity (total params) from inference cost (active params), so a 218B-class model serves on a single B200 at 4-bit (W4A4) quantization [^src3]. Architectural details worth noting: sliding-window + global attention interleaved 3:1, RoPE on the windowed layers only, and native conversational tool use with optional grounding-span **citations** (`<co>…</co>` tags mapping spans to tool results) — see [Tool Calling](/ai-engineering/tool-calling.md) and [Structured Outputs](/ai-engineering/structured-outputs.md) [^src3].
 
 **Diffusion LMs — parallel denoising instead of token-by-token.** Google DeepMind's **DiffusionGemma** (26B-A4B, also MoE: 3.8B active / 25.2B total) replaces left-to-right autoregression with **discrete text diffusion** — it "generates text by iteratively denoising blocks of tokens (a 'canvas') in parallel" [^src2]. An autoregressive encoder prefills/caches the prompt; a decoder applies *bidirectional* attention over the canvas and denoises ~15–20 tokens per forward pass, reaching >1,100 tokens/sec at low batch size [^src2]. Compute is **adaptive**: simpler prompts need fewer denoising steps. The cost is a measurable quality gap vs the autoregressive Gemma 4 sibling on hard benchmarks (e.g. AIME 69.1% vs 88.3%, GPQA Diamond 73.2% vs 82.3%) — the speed/quality tradeoff of the diffusion approach is explicit [^src2].
 
@@ -117,18 +117,18 @@ Perplexity does not directly measure downstream task quality (a model with low p
 
 ## Relationship to agents and context engineering
 
-An LLM is the reasoning engine at the center of an [[ai-engineering/ai-agent|AI Agent]]. The agent's context window — the input to the LLM — is what [[ai-engineering/context-engineering|Context Engineering]] optimizes. Everything the agent knows at any moment is what fits in the context window.
+An LLM is the reasoning engine at the center of an [AI Agent](/ai-engineering/ai-agent.md). The agent's context window — the input to the LLM — is what [Context Engineering](/ai-engineering/context-engineering.md) optimizes. Everything the agent knows at any moment is what fits in the context window.
 
 ## See also
 
-- [[ai-engineering/transformer|Transformer]] — the architecture underlying all modern LLMs
-- [[ai-engineering/ai-agent|AI Agent]] — LLM + tools + memory + orchestration
-- [[ai-engineering/context-engineering|Context Engineering]] — optimizing the LLM's context window
-- [[ai-engineering/rag|RAG]] — injecting external knowledge into the context window at inference time
+- [Transformer](/ai-engineering/transformer.md) — the architecture underlying all modern LLMs
+- [AI Agent](/ai-engineering/ai-agent.md) — LLM + tools + memory + orchestration
+- [Context Engineering](/ai-engineering/context-engineering.md) — optimizing the LLM's context window
+- [RAG](/ai-engineering/rag.md) — injecting external knowledge into the context window at inference time
 
 ---
 
-[^src1]: [[03_Resources/Study Notes/AI - How Large Language Models Work|AI - How Large Language Models Work]]
+[^src1]: [AI - How Large Language Models Work](/03_Resources/Study Notes/AI - How Large Language Models Work.md)
 [^src2]: [DiffusionGemma 26B-A4B-it (model card)](../../raw/web/google-diffusiongemma-26b-a4b-it-hugging-face.md) — Google DeepMind, Hugging Face
 [^src3]: [Command A+ (command-a-plus-05-2026-w4a4, model card)](../../raw/web/coherelabs-command-a-plus-05-2026-w4a4-hugging-face.md) — Cohere Labs, Hugging Face
 [^src4]: [Stanford CS229 — Building Large Language Models](../../raw/youtube/youtube-9vM4p9NN0Ts-stanford-cs229-i-machine-learning-i-building-large-language.md) — Stanford, YouTube

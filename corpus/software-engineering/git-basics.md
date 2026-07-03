@@ -171,8 +171,8 @@ A merge conflict occurs when two branches make different changes to the same lin
 
 ## See also
 
-- [[software-engineering/ci-cd|CI/CD and Progressive Delivery]] — Git is the foundation of GitOps and CI pipelines
-- [[software-engineering/engineering-craft|Engineering Craft]] — version control fluency as a baseline skill
+- [CI/CD and Progressive Delivery](/software-engineering/ci-cd.md) — Git is the foundation of GitOps and CI pipelines
+- [Engineering Craft](/software-engineering/engineering-craft.md) — version control fluency as a baseline skill
 
 ---
 

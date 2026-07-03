@@ -71,7 +71,7 @@ Animation can undo all the engineering work [^src1]. Browsers have three propert
 
 ## Relationship to other concepts
 
-- Local-first is a counterpoint to the [[software-engineering/cap-theorem|CAP Theorem]] framing: the local store *uses* eventual reconciliation with the server, trading immediate global consistency for availability and responsiveness on the client.
-- The stack uses [[software-engineering/kubernetes|Kubernetes]] (one workload per concern) and Postgres on the backend; the sync server is the reconciliation target, not the UI's read path [^src1].
+- Local-first is a counterpoint to the [CAP Theorem](/software-engineering/cap-theorem.md) framing: the local store *uses* eventual reconciliation with the server, trading immediate global consistency for availability and responsiveness on the client.
+- The stack uses [Kubernetes](/software-engineering/kubernetes.md) (one workload per concern) and Postgres on the backend; the sync server is the reconciliation target, not the UI's read path [^src1].
 
 [^src1]: [How's Linear so fast? A technical breakdown](../../raw/web/how-s-linear-so-fast-a-technical-breakdown.md)

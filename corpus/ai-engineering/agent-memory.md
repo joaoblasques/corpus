@@ -172,11 +172,11 @@ confidence: 0.87
 | Tier | Mechanism | Scope |
 |---|---|---|
 | **Short-term** | Conversation history in the context window | Current session; lost when context resets or compacts |
-| **Long-term** | [[ai-engineering/vector-database\|Vector databases]] (Pinecone, Weaviate, FAISS) **or** persistent documents (CLAUDE.md) | Persists across sessions; retrieved or referenced at any time |
+| **Long-term** | [Vector databases](/ai-engineering/vector-database.md) (Pinecone, Weaviate, FAISS) **or** persistent documents (CLAUDE.md) | Persists across sessions; retrieved or referenced at any time |
 
-Short-term memory is bounded by the context window limit — see [[ai-engineering/context-window-management|Context Window Management]] for strategies to manage what stays in window.
+Short-term memory is bounded by the context window limit — see [Context Window Management](/ai-engineering/context-window-management.md) for strategies to manage what stays in window.
 
-Long-term memory retrieval is a RAG operation: embed the query, similarity-search the vector store, inject retrieved memories into context [^src1]. See [[ai-engineering/rag|RAG]].
+Long-term memory retrieval is a RAG operation: embed the query, similarity-search the vector store, inject retrieved memories into context [^src1]. See [RAG](/ai-engineering/rag.md).
 
 ## Two long-term memory patterns
 
@@ -201,7 +201,7 @@ The defining feature is **bi-temporal edges**: each edge carries the period for 
 - Beats prior SOTA MemGPT on the Deep Memory Retrieval benchmark (94.8% vs 93.4%) [^src3].
 - On the harder LongMemEval benchmark, up to 18.5% accuracy improvement while **reducing response latency by 90%** vs baseline, strongest on cross-session synthesis and long-term context maintenance [^src3].
 
-This is the same graph-over-flat-vectors insight as GraphRAG applied to memory — see [[ai-engineering/rag|RAG]] (GraphRAG section).
+This is the same graph-over-flat-vectors insight as GraphRAG applied to memory — see [RAG](/ai-engineering/rag.md) (GraphRAG section).
 
 ### Memory infrastructure (the data layer)
 
@@ -225,11 +225,11 @@ A recurring 2026 theme is making memory **portable** rather than locked to one t
 - **A portable knowledge layer ("vault architecture")** — an external, auto-updated store of context the agent reads from, decoupled from any single chat/session, so you don't "start from scratch every single time."
 - **Unified agentic memory via hooks** — even when a tool ships built-in memory, maintaining and *moving it between platforms* is the hard part; lifecycle hooks (`SessionStart`/`Stop`) that save and load context make memory portable across harnesses.
 
-This is the memory-layer counterpart to the harness-level persistence hooks in [[ai-engineering/agent-harness|Agent Harness]] (ECC's memory-persistence hooks) and the knowledge-folder pattern in the [[ai-engineering/sources/internal-operating-system-claude-projects|internal-operating-system]] approach — and it mirrors the `CLAUDE.md`/`MEMORY.md` files of [[ai-engineering/claude-cowork|Claude Cowork]].
+This is the memory-layer counterpart to the harness-level persistence hooks in [Agent Harness](/ai-engineering/agent-harness.md) (ECC's memory-persistence hooks) and the knowledge-folder pattern in the [internal-operating-system](/ai-engineering/sources/internal-operating-system-claude-projects.md) approach — and it mirrors the `CLAUDE.md`/`MEMORY.md` files of [Claude Cowork](/ai-engineering/claude-cowork.md).
 
 ## Production-scale filesystem memory (Claude Managed Agents)
 
-Anthropic's [[ai-engineering/claude-managed-agents|Claude Managed Agents]] extends the filesystem-as-memory pattern to production at enterprise scale [^src7]. Key properties that go beyond the basic CLAUDE.md/MEMORY.md pattern:
+Anthropic's [Claude Managed Agents](/ai-engineering/claude-managed-agents.md) extends the filesystem-as-memory pattern to production at enterprise scale [^src7]. Key properties that go beyond the basic CLAUDE.md/MEMORY.md pattern:
 
 - Memory mounts directly onto a filesystem so Claude uses the same bash and code tools it already knows — no new abstraction layer.
 - **Scoped stores** — org-wide stores can be read-only; per-user stores allow writes; multiple agents can work against the same store concurrently without overwriting each other.
@@ -356,7 +356,7 @@ Claude Co-work's file access enables a distinct memory pattern: using a local fo
 3. Run Claude Co-work against the vault to: draft project outputs, synthesize across notes, generate feedback-loop artifacts
 4. Close the loop by saving Claude's outputs back into the vault
 
-This is the file-as-memory pattern from [[ai-engineering/claude-managed-agents|Claude Managed Agents]] simplified for solo practitioners — no database, no API, just a folder of markdown.
+This is the file-as-memory pattern from [Claude Managed Agents](/ai-engineering/claude-managed-agents.md) simplified for solo practitioners — no database, no API, just a folder of markdown.
 
 ## Anthropic memory tool (official client-side memory)
 
@@ -434,7 +434,7 @@ A deliberately minimal second-brain setup built on Karpathy's self-improving kno
 
 **The translate loop** [^src20]: `translate.md` instructs the agent to read everything in `raw/`, create/merge matching markdown files in `wiki/`, move processed files to `archive/`, and never delete. Running this prompt manually or on a schedule (daily 9am Sonnet 4.6 via Claude Cowork) is the complete maintenance task. "You don't have to maintain any of this system, really. The AI is doing it for you." [^src20]
 
-Git/GitHub provides version history ("nothing ever lost"); team access works naturally as each member pushes to a shared repo [^src20]. See also [[ai-engineering/claude-cowork|Claude Cowork]] for the Cowork-as-host pattern and [[ai-engineering/agent-memory|the LLM wiki pattern]] above.
+Git/GitHub provides version history ("nothing ever lost"); team access works naturally as each member pushes to a shared repo [^src20]. See also [Claude Cowork](/ai-engineering/claude-cowork.md) for the Cowork-as-host pattern and [the LLM wiki pattern](/ai-engineering/agent-memory.md) above.
 
 ## Karpathy LLM-wiki — the compounding insight
 
@@ -485,7 +485,7 @@ Setup requires: Python (repeatable scripts, save tokens), Git (save points; esse
 - `maintain` (lint) — validate front matter, links, check structure after changes
 - `query` — pull answers from index and catalog, opening only relevant pages (more efficient than RAG chunk retrieval)
 
-**Non-negotiable rules in `agents.md`** [^src23]: don't overwrite raw source material; use Obsidian wiki-linking format (`[[...]]`); consistent front matter per schema; use templates for every note type.
+**Non-negotiable rules in `agents.md`** [^src23]: don't overwrite raw source material; use Obsidian wiki-linking format (`...`); consistent front matter per schema; use templates for every note type.
 
 The schema decouples naming conventions from content — update the schema, and all future notes conform automatically without touching existing ones [^src23].
 
@@ -572,19 +572,19 @@ Hermes requires meta-prompting with the `/goal` command to produce useful result
 
 ## See also
 
-- [[ai-engineering/context-window-management|Context Window Management]] — strategies for what to keep, compress, or drop from short-term memory
-- [[ai-engineering/context-engineering|Context Engineering]] — governs how context is assembled at inference time
-- [[ai-engineering/rag|RAG]] — long-term memory retrieval is structurally identical to RAG; GraphRAG mirrors temporal-graph memory
-- [[ai-engineering/agentic-search|Agentic Search]] — AI-native search uses the same hybrid-retrieval-over-subgraph pattern
-- [[ai-engineering/vector-database|Vector Database]] — the flat-vector storage layer that temporal graphs improve upon
-- [[ai-engineering/embeddings|Embeddings]] — long-term memory stores facts as embeddings; their blob-like flatness is exactly what typed/graph memory fixes
-- [[ai-engineering/ai-agent|AI Agent]] — memory is one of the four core agent components
-- [[ai-engineering/claude-managed-agents|Claude Managed Agents]] — production implementation of filesystem memory with audit, scoping, and vault patterns
+- [Context Window Management](/ai-engineering/context-window-management.md) — strategies for what to keep, compress, or drop from short-term memory
+- [Context Engineering](/ai-engineering/context-engineering.md) — governs how context is assembled at inference time
+- [RAG](/ai-engineering/rag.md) — long-term memory retrieval is structurally identical to RAG; GraphRAG mirrors temporal-graph memory
+- [Agentic Search](/ai-engineering/agentic-search.md) — AI-native search uses the same hybrid-retrieval-over-subgraph pattern
+- [Vector Database](/ai-engineering/vector-database.md) — the flat-vector storage layer that temporal graphs improve upon
+- [Embeddings](/ai-engineering/embeddings.md) — long-term memory stores facts as embeddings; their blob-like flatness is exactly what typed/graph memory fixes
+- [AI Agent](/ai-engineering/ai-agent.md) — memory is one of the four core agent components
+- [Claude Managed Agents](/ai-engineering/claude-managed-agents.md) — production implementation of filesystem memory with audit, scoping, and vault patterns
 
 ---
 
-[^src1]: [[03_Resources/Study Notes/AI Dev - Agentic AI Architecture Explained|AI Dev - Agentic AI Architecture Explained]]
-[^src2]: [[03_Resources/Study Notes/Claude Code - Solving the Memory Problem with Context Engineering|Claude Code - Solving the Memory Problem with Context Engineering]]
+[^src1]: [AI Dev - Agentic AI Architecture Explained](/03_Resources/Study Notes/AI Dev - Agentic AI Architecture Explained.md)
+[^src2]: [Claude Code - Solving the Memory Problem with Context Engineering](/03_Resources/Study Notes/Claude Code - Solving the Memory Problem with Context Engineering.md)
 [^src3]: [Zep: A Temporal Knowledge Graph Architecture for Agent Memory](../../raw/web/zep-a-temporal-knowledge-graph-architecture-for-agent-memory.md)
 [^src4]: [RushDB 2.0: Memory Infrastructure for the Agentic Era](../../raw/web/rushdb-2-0-memory-infrastructure-for-the-agentic-era-rushdb.md)
 [^src5]: [But Context First: A Field Guide to AI-Native Search](../../raw/email/email-2026-05-28-but-context-first-a-field-guide-to-ai-native-search.md)

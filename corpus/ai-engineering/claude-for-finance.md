@@ -39,7 +39,7 @@ last_confirmed: 2026-06-28
 
 # Claude for Finance
 
-**TL;DR**: An applied **structured-prompting workflow** for FP&A / financial modeling that turns "generic Claude outputs into high-level finance work" — moving "from unstructured prompts and fragile outputs to controlled, auditable and boardroom-ready financial workflows that hold up in the real FP&A world" [^src1]. The discipline is a **9-stage pipeline** run through the **Claude Excel add-in**, gated at each step, designed so that "every number you use later is verifiable" and no hidden assumption ever becomes a formula [^src1]. It is the finance-domain specialization of [[ai-engineering/prompt-engineering|prompt engineering]]: inventory-before-insight, plan-before-execute, and **model-selection-by-task-type**.
+**TL;DR**: An applied **structured-prompting workflow** for FP&A / financial modeling that turns "generic Claude outputs into high-level finance work" — moving "from unstructured prompts and fragile outputs to controlled, auditable and boardroom-ready financial workflows that hold up in the real FP&A world" [^src1]. The discipline is a **9-stage pipeline** run through the **Claude Excel add-in**, gated at each step, designed so that "every number you use later is verifiable" and no hidden assumption ever becomes a formula [^src1]. It is the finance-domain specialization of [prompt engineering](/ai-engineering/prompt-engineering.md): inventory-before-insight, plan-before-execute, and **model-selection-by-task-type**.
 
 ## Core principles
 
@@ -48,7 +48,7 @@ The workflow rests on a few cross-cutting disciplines [^src1]:
 - **Inventory before insight.** "Most people upload a workbook and immediately request insights" — instead, force Claude to "do inventory before anything else," producing "a complete documented inventory of the workbook so that nothing remains implicit" [^src1]. The biggest modeling errors "come from inputs that were never properly examined or mislabeled," not from formulas [^src1].
 - **Eliminate hidden assumptions at the source.** "Any assumptions must be eliminated before they become part of the projections" — structural validation up front so weaknesses surface "early," not "after the model has already been built… when fixing them is costly and your credibility is already on the line" [^src1].
 - **Protected baseline.** "Establish a protected baseline by saving an untouched version of the workbook before ingestion begins" [^src1].
-- **Plan-first, never execute silently.** Claude must "act like a senior FP&A lead, not like an operator" and produce an approved step-by-step work plan before any edits — "if Claude starts making fixes before you approve a plan, hidden assumptions quietly turn into formulas" [^src1]. This is the finance instance of the [[ai-engineering/prompt-engineering|plan-first prompting]] and [[ai-engineering/agentic-workflow|describe-what-not-how]] patterns.
+- **Plan-first, never execute silently.** Claude must "act like a senior FP&A lead, not like an operator" and produce an approved step-by-step work plan before any edits — "if Claude starts making fixes before you approve a plan, hidden assumptions quietly turn into formulas" [^src1]. This is the finance instance of the [plan-first prompting](/ai-engineering/prompt-engineering.md) and [describe-what-not-how](/ai-engineering/agentic-workflow.md) patterns.
 - **Auditable / formula-driven outputs.** Three-statement models and the DCF must be "formula-driven and auditable" — "if the model is built with hard-coded numbers or hidden logic or missing links, everything downstream… becomes non-auditable" [^src1]. Every step carries explicit **acceptance checks** and a **"do not proceed if" gate** [^src1].
 - **Verifiable inputs / traceability.** "You must be able to trace from source to output"; mismatches are "documented, not auto-fixed" via a mapping log [^src1].
 
@@ -67,7 +67,7 @@ The workflow assigns models to task *kinds*, not uniformly — an applied case o
 | CFO memo (executive comms) | **Sonnet 4.5** | drafting, not structural reasoning [^src1] |
 | Contract-risk extraction | **Opus 4.5** | structured extraction from legal text [^src1] |
 
-> [unsourced — note] The source predates the Opus 4.7/4.8 lineup (published 2026-03-12); the model names reflect what was current then. See [[ai-engineering/claude-models|Claude Model Lineup]] for the current family.
+> [unsourced — note] The source predates the Opus 4.7/4.8 lineup (published 2026-03-12); the model names reflect what was current then. See [Claude Model Lineup](/ai-engineering/claude-models.md) for the current family.
 
 ## The nine stages
 
@@ -107,7 +107,7 @@ Pre-built agent workflows for the four verticals [^src2]:
 
 ### Compliance certifications
 
-The financial services deployment carries **SOC 2 Type 2** and **FedRAMP** certifications [^src2] — a compliance posture shared with the government vertical (see [[ai-engineering/claude-for-government|Claude for Government]]).
+The financial services deployment carries **SOC 2 Type 2** and **FedRAMP** certifications [^src2] — a compliance posture shared with the government vertical (see [Claude for Government](/ai-engineering/claude-for-government.md)).
 
 ### Use-case verticals
 
@@ -122,15 +122,15 @@ Claude for Microsoft 365 (**Claude in Excel/Word/PowerPoint/Outlook**) extends t
 
 ## Why it generalizes
 
-The throughline — inventory the inputs before asking for insight, get a numbered plan approved before any execution, keep every output formula-traceable, and pick the model by the *type* of cognitive work — is domain-specific structured prompting: the same prompt-engineering levers ([[ai-engineering/prompt-engineering|clarity, plan-first, acceptance criteria, persona]]) hardened into a gated, auditable workflow for a high-stakes domain where "the wrong output" is the real cost [^src1].
+The throughline — inventory the inputs before asking for insight, get a numbered plan approved before any execution, keep every output formula-traceable, and pick the model by the *type* of cognitive work — is domain-specific structured prompting: the same prompt-engineering levers ([clarity, plan-first, acceptance criteria, persona](/ai-engineering/prompt-engineering.md)) hardened into a gated, auditable workflow for a high-stakes domain where "the wrong output" is the real cost [^src1].
 
 ## See also
 
-- [[ai-engineering/prompt-engineering|Prompt Engineering]] — the general discipline this specializes (plan-first, personas, acceptance criteria, model-led elicitation)
-- [[ai-engineering/claude-cowork|Claude Cowork]] — Claude in Excel/PowerPoint/Word/Outlook (the Microsoft 365 add-in surface)
-- [[ai-engineering/claude-models|Claude Model Lineup]] — current Opus/Sonnet family; the source's model names predate the 4.7/4.8 lineup
-- [[ai-engineering/agentic-workflow|Agentic Workflows]] — describe-what-not-how; gated multi-step orchestration
-- [[ai-engineering/README|AI Engineering hub]]
+- [Prompt Engineering](/ai-engineering/prompt-engineering.md) — the general discipline this specializes (plan-first, personas, acceptance criteria, model-led elicitation)
+- [Claude Cowork](/ai-engineering/claude-cowork.md) — Claude in Excel/PowerPoint/Word/Outlook (the Microsoft 365 add-in surface)
+- [Claude Model Lineup](/ai-engineering/claude-models.md) — current Opus/Sonnet family; the source's model names predate the 4.7/4.8 lineup
+- [Agentic Workflows](/ai-engineering/agentic-workflow.md) — describe-what-not-how; gated multi-step orchestration
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

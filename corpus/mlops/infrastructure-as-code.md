@@ -45,7 +45,7 @@ Data pipelines span many components — S3, Spark, databases, Airflow. Setting t
 
 ## The core loop: desired vs current state
 
-The defining mechanic is **reconciliation** — the tool diffs declared configuration against recorded current state and produces a plan of changes before applying anything [^src1]. In [[mlops/terraform|Terraform]] this is `.tf` files (desired) vs the `.tfstate` file (current); the `plan` command shows the diff, `apply` executes it [^src1].
+The defining mechanic is **reconciliation** — the tool diffs declared configuration against recorded current state and produces a plan of changes before applying anything [^src1]. In [Terraform](/mlops/terraform.md) this is `.tf` files (desired) vs the `.tfstate` file (current); the `plan` command shows the diff, `apply` executes it [^src1].
 
 Change classes to read in a plan [^src1]:
 
@@ -57,7 +57,7 @@ The tool resolves cascading changes and applies them in dependency order [^src1]
 
 ## Environment configuration
 
-Real projects parameterize infrastructure per environment (dev/staging/prod) via variable files rather than hardcoding values, and store shared state in a remote **backend** so a team sees a single source of truth [^src1]. See [[mlops/terraform|Terraform]] for the concrete `.tfvars` + S3-backend mechanics.
+Real projects parameterize infrastructure per environment (dev/staging/prod) via variable files rather than hardcoding values, and store shared state in a remote **backend** so a team sees a single source of truth [^src1]. See [Terraform](/mlops/terraform.md) for the concrete `.tfvars` + S3-backend mechanics.
 
 ## Caveat
 
@@ -70,7 +70,7 @@ The book *Terraform: Up and Running* (Yevgeniy Brikman) classifies IaC tooling i
 1. **Ad-hoc scripts** — the simplest automation: a Bash/Python script doing what you'd otherwise do by hand [^src4].
 2. **Configuration management** — Chef, Puppet, **Ansible**: install and manage software on *existing* servers by declaring how each should look [^src4].
 3. **Server templating** — **Docker**, Vagrant: bake a reusable image (OS + software + files + settings), a snapshot of a fully set-up machine, then deploy it to many servers [^src4].
-4. **Orchestration** — **Kubernetes**, Docker Swarm, Amazon ECS: run containers/VMs *at scale* with auto-healing, auto-scaling, load balancing, and service discovery [^src4]. See [[software-engineering/kubernetes|Kubernetes]].
+4. **Orchestration** — **Kubernetes**, Docker Swarm, Amazon ECS: run containers/VMs *at scale* with auto-healing, auto-scaling, load balancing, and service discovery [^src4]. See [Kubernetes](/software-engineering/kubernetes.md).
 5. **Provisioning** — **Terraform**, CloudFormation, Pulumi: build the servers/databases/networks *themselves* (vs. configuring what runs on them) [^src4].
 
 This is the historical arc too: from manually racking servers, to CFEngine/Puppet/Chef/Ansible (late-90s→2000s), to the cloud era and the ~2009 rise of "Infrastructure as Code" alongside DevOps [^src4].
@@ -86,7 +86,7 @@ The cloud overviews motivate IaC by the pain of clicking through a console: erro
 - **Declarative** — describe the desired end state in a template; the provider creates it. **AWS CloudFormation** (YAML/JSON templates) and **Azure ARM templates** (JSON) are examples [^src2][^src3].
 - **Imperative / programmatic** — write infra in a real programming language with loops/conditionals. **AWS CDK** (Cloud Development Kit, in Python/TS/Java/etc.) compiles down to CloudFormation and is favored over raw CloudFormation, which "kind of sucks to use" and grows unwieldy [^src2][^src3].
 
-[[mlops/terraform|Terraform]] is the cross-provider third-party option (one tool targeting AWS/Azure/GCP); the AWS-centric source recommends CDK *if you're all-in on AWS*, Terraform for multi-cloud [^src2]. Putting IaC in source control enables code review of infra changes — the discipline IaC exists to provide [^src2][^src3].
+[Terraform](/mlops/terraform.md) is the cross-provider third-party option (one tool targeting AWS/Azure/GCP); the AWS-centric source recommends CDK *if you're all-in on AWS*, Terraform for multi-cloud [^src2]. Putting IaC in source control enables code review of infra changes — the discipline IaC exists to provide [^src2][^src3].
 
 ## 10 years of infrastructure evolution (TechWorld with Nana)
 
@@ -119,11 +119,11 @@ The emerging layer: AI tools generate IaC from natural language ("create an EC2 
 
 ## See also
 
-- [[mlops/terraform|Terraform]] — the cross-provider IaC tool this concept is taught through (incl. the local-Docker-platform example)
-- [[mlops/aws|AWS]] — CloudFormation/CDK · [[mlops/azure|Azure]] — ARM templates · [[mlops/gcp|GCP]]
-- [[mlops/cloud-computing-fundamentals|Cloud Computing Fundamentals]] — IaC sits over the resources defined there
-- [[data-engineering/README|Data Engineering]] — IaC provisions the cloud data infrastructure (S3, EC2/EMR) pipelines run on
-- [[mlops/README|MLOps hub]]
+- [Terraform](/mlops/terraform.md) — the cross-provider IaC tool this concept is taught through (incl. the local-Docker-platform example)
+- [AWS](/mlops/aws.md) — CloudFormation/CDK · [Azure](/mlops/azure.md) — ARM templates · [GCP](/mlops/gcp.md)
+- [Cloud Computing Fundamentals](/mlops/cloud-computing-fundamentals.md) — IaC sits over the resources defined there
+- [Data Engineering](/data-engineering/README.md) — IaC provisions the cloud data infrastructure (S3, EC2/EMR) pipelines run on
+- [MLOps hub](/mlops/README.md)
 
 ---
 

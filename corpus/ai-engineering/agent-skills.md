@@ -218,7 +218,7 @@ The source argues most always-on context files are unnecessary: **"95% of people
 - An `AGENTS.md`/`CLAUDE.md` file is re-added to context on *every* turn, spending its full token cost repeatedly (e.g. a 1,000-line file ≈ 7,000 tokens per run) [^src1].
 - The legitimate ~5% case: **proprietary information or a personal methodology** that genuinely must be referenced on every turn [^src1].
 
-> Note: this is one practitioner's opinionated stance (Ras Mic). It concerns *what to put in always-on context*, not a claim that project-level instruction files have no use. Contrast with [[ai-engineering/context-engineering|Context Engineering]] sources that treat CLAUDE.md as valuable long-term memory.
+> Note: this is one practitioner's opinionated stance (Ras Mic). It concerns *what to put in always-on context*, not a claim that project-level instruction files have no use. Contrast with [Context Engineering](/ai-engineering/context-engineering.md) sources that treat CLAUDE.md as valuable long-term memory.
 
 ## Recursively building skills (the recommended method)
 
@@ -233,7 +233,7 @@ The recommended loop [^src1] [9:34](<../../raw/youtube/How AI agents & Claude sk
 5. **After the fix works, tell it: "update the skill so this doesn't happen again."**
 6. **Repeat.** The source's eight-source report generator took ~5 iterations of this loop to become reliable.
 
-Mental model behind the method: LLMs **don't think — they predict tokens**, mapping input onto a vector space and returning the closest resemblance [^src1]. So an agent "will mimic you perfectly, but you've given it nothing to mimic" unless you supply a worked example. Treat agents like new employees, not magic boxes. See [[ai-engineering/ai-agent|AI Agent]].
+Mental model behind the method: LLMs **don't think — they predict tokens**, mapping input onto a vector space and returning the closest resemblance [^src1]. So an agent "will mimic you perfectly, but you've given it nothing to mimic" unless you supply a worked example. Treat agents like new employees, not magic boxes. See [AI Agent](/ai-engineering/ai-agent.md).
 
 ## Don't download other people's skills
 
@@ -244,13 +244,13 @@ Two reasons [^src1] [12:34](<../../raw/youtube/How AI agents & Claude skills wor
 
 ## Relationship to context efficiency
 
-Skills are fundamentally a [[ai-engineering/context-window-management|context window management]] technique: progressive disclosure keeps the window lean, and a leaner window is both cheaper and more performant (the model degrades as the window fills). See [[ai-engineering/context-window-management|Context Window Management]] and [[ai-engineering/context-engineering|Context Engineering]].
+Skills are fundamentally a [context window management](/ai-engineering/context-window-management.md) technique: progressive disclosure keeps the window lean, and a leaner window is both cheaper and more performant (the model degrades as the window fills). See [Context Window Management](/ai-engineering/context-window-management.md) and [Context Engineering](/ai-engineering/context-engineering.md).
 
 ## Skills as the cure for context rot
 
 A second source frames skills primarily as the remedy for **context rot** — the failure mode where, after "70 tools, 5 MCP connections... RAG capabilities for 5K documents and 7 pages system prompts," the agent "starts not giving a f*** about the instructions" [^src2]. Skills fix this because they are "reusable prompts that Agents can load ON DEMAND" rather than at startup [^src2]. The reframing of system-prompt architecture: **"Your system prompt now becomes the identity and sitemap of what your Agents can do, and SKILLs are guidance to execute certain actions"** [^src2].
 
-The most-emphasized point in this source: skills don't just store reusable prompts — **they tell the agent *how* and *when* to use its tools**. "You can configure a tool and specify what the tool does, but a skill can tell the agent how and when to use" it [^src2]. This makes skills complementary to, not a replacement for, [[ai-engineering/mcp|MCP]] and [[ai-engineering/rag|RAG]]: combine them to keep the system prompt lean while giving the agent deep capabilities on demand [^src2]. The named hard part is the same as in the YouTube source — writing the *description* well enough that the agent invokes the skill in the right situation [^src2].
+The most-emphasized point in this source: skills don't just store reusable prompts — **they tell the agent *how* and *when* to use its tools**. "You can configure a tool and specify what the tool does, but a skill can tell the agent how and when to use" it [^src2]. This makes skills complementary to, not a replacement for, [MCP](/ai-engineering/mcp.md) and [RAG](/ai-engineering/rag.md): combine them to keep the system prompt lean while giving the agent deep capabilities on demand [^src2]. The named hard part is the same as in the YouTube source — writing the *description* well enough that the agent invokes the skill in the right situation [^src2].
 
 ## Anatomy and the anti-rationalization (description) problem
 
@@ -266,7 +266,7 @@ As teams accumulate skills across multiple agents, skill management becomes its 
 
 **Universal skill manager (luongnv89/asm)**: a TUI+CLI to "install, search, audit, and organize all your agent skills — everywhere," across 19 providers (Claude Code, Codex, OpenClaw, Cursor, Windsurf, Cline, Gemini CLI, Antigravity, etc.) [^src4]. It addresses skills "scattered everywhere... installed three times" with no visibility and risky manual installs [^src4]. The full lifecycle: `asm init` (scaffold), `asm link` (symlink for live-editing iteration), `asm audit security` / `asm eval` (score), `asm install github:user/repo`, and `asm publish` (security audit → signed manifest → PR to the registry) [^src4].
 
-**Security and verification are first-class.** Both managers treat installing third-party skills as an attack surface (consistent with the YouTube source's "don't download other people's skills" security point). asm's scanner flags shell execution, network access, credential exposure, and obfuscation *before* install [^src4]. Its automated **verification** requires four criteria for a verified badge: valid frontmatter (`name`+`description`), ≥20 characters of body instruction, no malicious patterns (`atob()`, suspicious base64, hex escapes, hardcoded `API_KEY`/`SECRET_KEY`/`PASSWORD`), and proper directory structure [^src4]. The ecosystem is large: asm's catalog indexes 2,800+ skills, including Anthropic's official skills (95,957★), superpowers (89,816★), and everything-claude-code (81,392★) [^src4]. (everything-claude-code is the harness system covered in [[ai-engineering/agent-harness|Agent Harness]].)
+**Security and verification are first-class.** Both managers treat installing third-party skills as an attack surface (consistent with the YouTube source's "don't download other people's skills" security point). asm's scanner flags shell execution, network access, credential exposure, and obfuscation *before* install [^src4]. Its automated **verification** requires four criteria for a verified badge: valid frontmatter (`name`+`description`), ≥20 characters of body instruction, no malicious patterns (`atob()`, suspicious base64, hex escapes, hardcoded `API_KEY`/`SECRET_KEY`/`PASSWORD`), and proper directory structure [^src4]. The ecosystem is large: asm's catalog indexes 2,800+ skills, including Anthropic's official skills (95,957★), superpowers (89,816★), and everything-claude-code (81,392★) [^src4]. (everything-claude-code is the harness system covered in [Agent Harness](/ai-engineering/agent-harness.md).)
 
 **Where to find/learn skills**: the official Anthropic marketplace via `/plugin marketplace add anthropics/skills` (pre-installed in claude.ai), plus `skill-creator` — "a skill... that creates skills" following Anthropic's formatting/packaging best practices [^src2]. The recommended single learning resource is Anthropic's "Agent Skills" Deep Learning course [^src2].
 
@@ -286,7 +286,7 @@ Osmani's library organizes ~20 skills around six lifecycle phases with slash-com
 
 1. **Process over prose** — workflows are agent-actionable; essays are not.
 2. **Anti-rationalization tables** (the most distinctive decision) — each skill ships a table of excuses paired with pre-written rebuttals, because *"LLMs are excellent at rationalisation"* and will produce a plausible paragraph explaining why this task doesn't need a spec/test/review. E.g. "I'll write tests later." → "Later is the load-bearing word. There is no later." The pattern works for human teams too: "Anti-rationalization tables are pre-written rebuttals to lies the agent hasn't yet told" [^src5].
-3. **Verification is non-negotiable** — every skill terminates in concrete evidence (tests pass, clean build, runtime trace, reviewer sign-off); "seems right" never closes the loop. Same principle as [[ai-engineering/agent-testing|Agent Testing]].
+3. **Verification is non-negotiable** — every skill terminates in concrete evidence (tests pass, clean build, runtime trace, reviewer sign-off); "seems right" never closes the loop. Same principle as [Agent Testing](/ai-engineering/agent-testing.md).
 4. **Progressive disclosure** — don't load all 20 skills at start; the router loads what's relevant ("a twenty-skill library into a 5K-token slot without poisoning the well") [^src5].
 5. **Scope discipline** — *"touch only what you're asked to touch."* Named "the single biggest determinant of whether an agent's PR is mergeable" [^src5].
 
@@ -374,7 +374,7 @@ Safe skill practices [^src25]:
 - Skills you build yourself are safe (you know what's inside).
 - Before installing any third-party skill, open the file and read what it tells Claude to do.
 
-See [[ai-engineering/agent-security|Agent Security]] for the broader prompt injection and trust-hierarchy attack surface.
+See [Agent Security](/ai-engineering/agent-security.md) for the broader prompt injection and trust-hierarchy attack surface.
 
 ## Anthropic's Introduction to Agent Skills course
 
@@ -496,7 +496,7 @@ Selected agent categories [^src15]:
 - `product/` — PRD writer, feature spec, user story generation
 - `marketing/` — copy generation, SEO analysis
 
-See [[ai-engineering/claude-managed-agents|Claude Managed Agents]] for the cloud-hosted version; this is the local, open-source equivalent.
+See [Claude Managed Agents](/ai-engineering/claude-managed-agents.md) for the cloud-hosted version; this is the local, open-source equivalent.
 
 ## claude-watch: video-watching skill
 
@@ -507,19 +507,19 @@ Key capabilities [^src16]:
 - **Hook microscope** — 2fps dense sampling for the first 10 seconds (where audience retention is determined) + word-level timestamp alignment
 - **`$WATCH_VAULT_DIR`** — if set, the report auto-saves to an Obsidian vault folder, making it part of a PKM workflow
 
-The `report.md` template uses Claude-fill markers that the agent fills from video content, producing a consistent structure (TL;DR, key moments, hook microscope, editorial profile, quotable moments, entities mentioned, concepts surfaced, transcript) [^src16]. See also [[ai-engineering/computer-use|Computer Use]] for related screen-perception patterns.
+The `report.md` template uses Claude-fill markers that the agent fills from video content, producing a consistent structure (TL;DR, key moments, hook microscope, editorial profile, quotable moments, entities mentioned, concepts surfaced, transcript) [^src16]. See also [Computer Use](/ai-engineering/computer-use.md) for related screen-perception patterns.
 
 ## Specialist agent profiles (Hermes pattern)
 
 The Hermes desktop workflow demonstrates using named **specialist agent profiles** as a skill-like pattern for Claude Code Desktop [^src17]. Each profile is a separate Claude Code session with a tailored system prompt, tool permissions, and CLAUDE.md — a "Nova" YouTube research agent, a "DevOps" deployment agent, etc. Switching profiles is switching sessions [^src17].
 
-This extends the sub-agent concept: instead of a task-triggered sub-agent, a specialist profile is a *persistent workspace* — a pinned Claude Code session that always has the right tools, context, and permissions loaded for one domain of work [^src17]. See [[ai-engineering/hermes|Hermes]] for the full desktop workflow.
+This extends the sub-agent concept: instead of a task-triggered sub-agent, a specialist profile is a *persistent workspace* — a pinned Claude Code session that always has the right tools, context, and permissions loaded for one domain of work [^src17]. See [Hermes](/ai-engineering/hermes.md) for the full desktop workflow.
 
 ## pi-ask-user as a bundled skill example
 
 The `pi-ask-user` package ships a companion skill (`skills/ask-user/SKILL.md`) that is the skill for the `ask_user` tool [^src13]. This is a production example of the "bundle a skill alongside each capability" pattern: the tool provides the mechanical capability (presenting a structured question with options), and the skill provides the procedural knowledge of *when* to use it (architectural trade-offs, ambiguous requirements, high-stakes assumptions).
 
-The skill trains Claude to follow a "decision handshake" before asking: gather evidence → formulate one well-informed question → wait → confirm understanding → proceed. Without the skill, Claude might either ask too early (before sufficient context) or never ask at all (silently picking an interpretation). See [[ai-engineering/agentic-workflow|Agentic Workflows]] for the full pi-ask-user documentation.
+The skill trains Claude to follow a "decision handshake" before asking: gather evidence → formulate one well-informed question → wait → confirm understanding → proceed. Without the skill, Claude might either ask too early (before sufficient context) or never ask at all (silently picking an interpretation). See [Agentic Workflows](/ai-engineering/agentic-workflow.md) for the full pi-ask-user documentation.
 
 ## Measuring skill usage (PreToolUse hook)
 
@@ -615,7 +615,7 @@ Core capabilities [^src28]:
 
 The central insight: most agent failure modes aren't model quality failures, they're "the model didn't know the rules" failures — hallucinating conventions, writing inconsistent tests, using a deprecated pattern that hasn't been removed yet. Agent OS addresses this by making the standards themselves an agent-queryable resource [^src28].
 
-See [[ai-engineering/spec-driven-development|Spec-Driven Development]] for the broader pattern.
+See [Spec-Driven Development](/ai-engineering/spec-driven-development.md) for the broader pattern.
 
 ## ZazenCodes agent-skills monorepo — cross-tool skill sharing
 
@@ -641,7 +641,7 @@ Key patterns from this plugin [^src30]:
 
 The plugin demonstrates the scalable pattern: skills handle business logic; connectors handle integrations; approval gates handle risk; the "plugin" is just a collection of cohesive skills presented as an installable unit.
 
-See [[ai-engineering/claude-cowork|Claude Cowork]] where plugins install directly and run as scheduled tasks.
+See [Claude Cowork](/ai-engineering/claude-cowork.md) where plugins install directly and run as scheduled tasks.
 
 ## Skills at enterprise scale: Fortune 100 patterns (Anthropic)
 
@@ -844,22 +844,22 @@ Skills (SKILL.md) and sub-agents (.claude/agents/<name>.md) use the same markdow
 
 The `description:` field in a sub-agent's YAML front matter serves the same **progressive disclosure** purpose as in a SKILL.md: Claude reads it to decide whether to invoke the agent, without loading the full system prompt until needed [^src_nate].
 
-See [[ai-engineering/claude-subagents|Claude Sub-Agents]] for the full sub-agent reference.
+See [Claude Sub-Agents](/ai-engineering/claude-subagents.md) for the full sub-agent reference.
 
 ## See also
 
-- [[ai-engineering/context-window-management|Context Window Management]] — why a lean window matters; sub-agents
-- [[ai-engineering/context-engineering|Context Engineering]] — "less is more"; supply unique workflow, not general knowledge
-- [[ai-engineering/ai-agent|AI Agent]] — token-predictor mental model; agents as new employees
-- [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] — scaling from one agent to sub-agents *for productivity*
-- [[ai-engineering/claude-subagents|Claude Sub-Agents]] — the sub-agent format in detail
-- [[ai-engineering/agent-harness|Agent Harness]] — skills as a harness context technique; everything-claude-code
-- [[ai-engineering/agentic-coding|Agentic Coding]] — skills as "the unit of reusable expertise"
-- [[ai-engineering/mcp|MCP]] — skills tell the agent *how/when* to use MCP tools
-- [[ai-engineering/rag|RAG]] — combine skills with RAG/MCP on demand
-- [[ai-engineering/sources/how-ai-agents-and-skills-work|Source: How AI agents & Claude skills work]]
-- [[ai-engineering/sources/internal-operating-system-claude-projects|Source: 4 Claude Projects / Internal OS]] — skills as reusable processes (`ask-the-board`, `ingest-resource`, `/improve-system`)
-- [[ai-engineering/README|AI Engineering hub]]
+- [Context Window Management](/ai-engineering/context-window-management.md) — why a lean window matters; sub-agents
+- [Context Engineering](/ai-engineering/context-engineering.md) — "less is more"; supply unique workflow, not general knowledge
+- [AI Agent](/ai-engineering/ai-agent.md) — token-predictor mental model; agents as new employees
+- [Multi-Agent Systems](/ai-engineering/multi-agent-systems.md) — scaling from one agent to sub-agents *for productivity*
+- [Claude Sub-Agents](/ai-engineering/claude-subagents.md) — the sub-agent format in detail
+- [Agent Harness](/ai-engineering/agent-harness.md) — skills as a harness context technique; everything-claude-code
+- [Agentic Coding](/ai-engineering/agentic-coding.md) — skills as "the unit of reusable expertise"
+- [MCP](/ai-engineering/mcp.md) — skills tell the agent *how/when* to use MCP tools
+- [RAG](/ai-engineering/rag.md) — combine skills with RAG/MCP on demand
+- [Source: How AI agents & Claude skills work](/ai-engineering/sources/how-ai-agents-and-skills-work.md)
+- [Source: 4 Claude Projects / Internal OS](/ai-engineering/sources/internal-operating-system-claude-projects.md) — skills as reusable processes (`ask-the-board`, `ingest-resource`, `/improve-system`)
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

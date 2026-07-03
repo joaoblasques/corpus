@@ -19,7 +19,7 @@ updated: 2026-06-27
 
 # Claude Corps
 
-**TL;DR.** Claude Corps is an Anthropic talent program — a collaboration between **Anthropic, CodePath, and Social Finance** — that trains early-career talent and embeds them as **fellows inside US nonprofits for 12 months** to build AI tools and systems for mission-driven organizations [^src1]. Where [[ai-business/claude-for-startups|Claude for Startups (and Nonprofits)]] subsidizes *access* (credits, discounted plans), Claude Corps supplies *people* — the labor and skills to actually build with AI inside organizations that "lack the resources to do so" [^src1].
+**TL;DR.** Claude Corps is an Anthropic talent program — a collaboration between **Anthropic, CodePath, and Social Finance** — that trains early-career talent and embeds them as **fellows inside US nonprofits for 12 months** to build AI tools and systems for mission-driven organizations [^src1]. Where [Claude for Startups (and Nonprofits)](/ai-business/claude-for-startups.md) subsidizes *access* (credits, discounted plans), Claude Corps supplies *people* — the labor and skills to actually build with AI inside organizations that "lack the resources to do so" [^src1].
 
 ## What it is
 
@@ -35,15 +35,15 @@ Anthropic frames Claude Corps around three goals [^src1]:
 
 ## Business relevance
 
-Claude Corps is a **go-to-market and ecosystem play dressed as social impact**: it seeds Anthropic-trained builders into the nonprofit sector (the same sector targeted by the [[ai-business/claude-for-startups|Nonprofits access program]]), creating both skilled Claude users and reference deployments. For operators in this domain it signals where Anthropic sees durable, mission-aligned demand — and a model (sponsored embedded talent) distinct from pure credits/discounts.
+Claude Corps is a **go-to-market and ecosystem play dressed as social impact**: it seeds Anthropic-trained builders into the nonprofit sector (the same sector targeted by the [Nonprofits access program](/ai-business/claude-for-startups.md)), creating both skilled Claude users and reference deployments. For operators in this domain it signals where Anthropic sees durable, mission-aligned demand — and a model (sponsored embedded talent) distinct from pure credits/discounts.
 
 > [unsourced — please verify] Application timelines, cohort size, and stipend amounts are not stated in the source page (it links to a separate blog post and FAQ that were not ingested).
 
 ## See also
 
-- [[ai-business/claude-for-startups|Claude for Startups (and Nonprofits)]] — the access-subsidy counterpart (credits/discounted plans) to Corps' talent supply
-- [[ai-business/ai-and-the-job-market|AI and the Job Market]] — early-career AI talent pipelines
-- [[ai-business/README|AI Business hub]]
+- [Claude for Startups (and Nonprofits)](/ai-business/claude-for-startups.md) — the access-subsidy counterpart (credits/discounted plans) to Corps' talent supply
+- [AI and the Job Market](/ai-business/ai-and-the-job-market.md) — early-career AI talent pipelines
+- [AI Business hub](/ai-business/README.md)
 
 ---
 

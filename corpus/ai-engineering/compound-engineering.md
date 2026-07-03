@@ -63,7 +63,7 @@ After each work session, write to `AGENTS.md` [^src1]:
 
 The test: any time the model makes a mistake, you should be able to add exactly one rule to `AGENTS.md` that would have prevented it [^src1].
 
-This is the same mechanism as the [[ai-engineering/agent-harness|ratchet principle]] — "every line in a good AGENTS.md should be traceable back to a specific thing that went wrong."
+This is the same mechanism as the [ratchet principle](/ai-engineering/agent-harness.md) — "every line in a good AGENTS.md should be traceable back to a specific thing that went wrong."
 
 ## Scale: 5 products, 1 person
 
@@ -75,7 +75,7 @@ Every.to applies compound engineering across their software business: 5 products
 
 Every.to's reported split: **80% planning and review, 20% execution** [^src1]. More time spent NOT coding (spec work, review, `AGENTS.md` updates) produces more output because the model executes the implementation.
 
-This mirrors [[ai-engineering/spec-driven-development|Spec-Driven Development]] — the engineer moves up the abstraction ladder. Compound engineering *extends* spec-driven development with a fourth, learning-capture step (the spec front-loads intent; the compound step writes back what the run taught).
+This mirrors [Spec-Driven Development](/ai-engineering/spec-driven-development.md) — the engineer moves up the abstraction ladder. Compound engineering *extends* spec-driven development with a fourth, learning-capture step (the spec front-loads intent; the compound step writes back what the run taught).
 
 ## The compound engineering plugin
 
@@ -155,12 +155,12 @@ Three significant plugin changes from recent changelog entries [^src6]:
 
 ## See also
 
-- [[ai-engineering/agentic-coding|Agentic Coding]] — the broader orchestration discipline; compound engineering is its learning-loop layer
-- [[ai-engineering/spec-driven-development|Spec-Driven Development]] — the plan stage formalized; compound engineering adds the learning-capture step that spec-driven omits
-- [[ai-engineering/generator-evaluator-separation|Generator–Evaluator Separation]] — the review stage as a structural pattern (separate grader)
-- [[ai-engineering/agent-harness|Agent Harness]] — the ratchet principle (same mechanism)
-- [[ai-engineering/claude-md-conventions|CLAUDE.md Conventions]] — where `AGENTS.md`/`CLAUDE.md` fit in the context stack
-- [[ai-engineering/agent-skills|Agent Skills]] — skill files as an alternative to always-loaded AGENTS.md
+- [Agentic Coding](/ai-engineering/agentic-coding.md) — the broader orchestration discipline; compound engineering is its learning-loop layer
+- [Spec-Driven Development](/ai-engineering/spec-driven-development.md) — the plan stage formalized; compound engineering adds the learning-capture step that spec-driven omits
+- [Generator–Evaluator Separation](/ai-engineering/generator-evaluator-separation.md) — the review stage as a structural pattern (separate grader)
+- [Agent Harness](/ai-engineering/agent-harness.md) — the ratchet principle (same mechanism)
+- [CLAUDE.md Conventions](/ai-engineering/claude-md-conventions.md) — where `AGENTS.md`/`CLAUDE.md` fit in the context stack
+- [Agent Skills](/ai-engineering/agent-skills.md) — skill files as an alternative to always-loaded AGENTS.md
 
 ---
 

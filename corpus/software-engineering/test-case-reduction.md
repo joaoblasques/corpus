@@ -68,6 +68,6 @@ A reducer is effectively a hill-climbing algorithm using input *length* as the p
 
 ## Relationship to debugging practice
 
-Test-case reduction sits in the same toolkit as the [[software-engineering/engineering-craft|engineering craft]] disciplines of persistence and resourcefulness through hard debugging. It is reached for after classic techniques (printf, debuggers, sanitizers, valgrind) when an input is too large to reason about manually [^src1]. Reducers can also be (ab)used as fuzzers [^src1].
+Test-case reduction sits in the same toolkit as the [engineering craft](/software-engineering/engineering-craft.md) disciplines of persistence and resourcefulness through hard debugging. It is reached for after classic techniques (printf, debuggers, sanitizers, valgrind) when an input is too large to reason about manually [^src1]. Reducers can also be (ab)used as fuzzers [^src1].
 
 [^src1]: [Test-case reducers are underappreciated debugging tools](../../raw/web/test-case-reducers-are-underappreciated-debugging-tools.md)

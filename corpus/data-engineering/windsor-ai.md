@@ -55,11 +55,11 @@ Windsor.ai represents the **no-code/low-code ETL** segment that sits adjacent to
 
 ## Related
 
-- [[data-engineering/etl-pipeline|ETL Pipeline]] — the extract-load-transform pattern Windsor.ai automates
-- [[data-engineering/data-ingestion-patterns|Data Ingestion Patterns]] — ingestion approaches (batch vs streaming)
-- [[data-engineering/ingestr|ingestr]] — another connector-based ELT tool (CLI-first, open-source)
-- [[data-engineering/modern-data-stack|Modern Data Stack]] — Windsor.ai fills the ingestion layer of the MDS
-- [[data-engineering/README|Data Engineering hub]]
+- [ETL Pipeline](/data-engineering/etl-pipeline.md) — the extract-load-transform pattern Windsor.ai automates
+- [Data Ingestion Patterns](/data-engineering/data-ingestion-patterns.md) — ingestion approaches (batch vs streaming)
+- [ingestr](/data-engineering/ingestr.md) — another connector-based ELT tool (CLI-first, open-source)
+- [Modern Data Stack](/data-engineering/modern-data-stack.md) — Windsor.ai fills the ingestion layer of the MDS
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

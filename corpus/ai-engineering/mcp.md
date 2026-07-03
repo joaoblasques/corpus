@@ -352,7 +352,7 @@ Anthropic maintains a public connector directory at claude.ai/connectors [^src20
 - **Enterprise plan**: required for large-scale knowledge uploads (file/document ingestion connectors that go beyond per-session context).
 - **Relationship to MCP**: connectors are the consumer-facing product surface; each connector is backed by an MCP server [^src20].
 
-This is the discovery layer for the MCP ecosystem — similar to a plugin marketplace for MCP servers. For individual server setup, see the Claude Code `claude mcp add` workflow; for the full connector experience with persistent state, see [[ai-engineering/claude-cowork|Claude Cowork]].
+This is the discovery layer for the MCP ecosystem — similar to a plugin marketplace for MCP servers. For individual server setup, see the Claude Code `claude mcp add` workflow; for the full connector experience with persistent state, see [Claude Cowork](/ai-engineering/claude-cowork.md).
 
 ## Connector types and distribution (official taxonomy)
 
@@ -406,7 +406,7 @@ DesktopCommanderMCP (★6,196) expands beyond the earlier terminal-control descr
 - **Toolset definition via YAML** — queries and operations are declared as named tools in a YAML config; the LLM sees only what the config exposes. Enforces the "group tools around intent" principle at the data layer.
 - **Production-tested**: used by Google teams to power data-access agents on internal codebases [^src24].
 
-MCP Toolbox is the database-layer complement to WrenAI (semantic layer, text-to-SQL) — see [[ai-engineering/rag|RAG § WrenAI]] for the semantic layer discussion.
+MCP Toolbox is the database-layer complement to WrenAI (semantic layer, text-to-SQL) — see [RAG § WrenAI](/ai-engineering/rag.md) for the semantic layer discussion.
 
 ## Awesome MCP Servers (punkpeye/awesome-mcp-servers)
 
@@ -416,18 +416,18 @@ Use this when evaluating whether a service has an existing MCP server before bui
 
 ## See also
 
-- [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] — MCP is the coordination layer for multi-agent architectures
-- [[ai-engineering/tool-calling|Tool Calling]] — MCP standardizes how tool calls are structured
-- [[ai-engineering/agent-memory|Agent Memory]] — MCP governs memory access protocols
-- [[ai-engineering/agent-security|Agent Security]] — scoped permissions and OAuth (e.g. Metabase) limit tool blast radius
-- [[ai-engineering/claude-code|Claude Code]] — MCP client; configures servers via `claude mcp add`
-- [[ai-engineering/claude-managed-agents|Claude Managed Agents]] — uses MCP for external system access; Vaults handle OAuth tokens per session
-- [[ai-engineering/claude-cowork|Claude Cowork]] — the end-user product surface where consumer connectors are most active
-- [[data-engineering/semantic-layer|Semantic Layer]] (data-engineering) — an MCP server (`MCPSemanticModel`/FastMCP) can expose a governed semantic layer as LLM-queryable tools, constraining the model to validated aggregations
+- [Multi-Agent Systems](/ai-engineering/multi-agent-systems.md) — MCP is the coordination layer for multi-agent architectures
+- [Tool Calling](/ai-engineering/tool-calling.md) — MCP standardizes how tool calls are structured
+- [Agent Memory](/ai-engineering/agent-memory.md) — MCP governs memory access protocols
+- [Agent Security](/ai-engineering/agent-security.md) — scoped permissions and OAuth (e.g. Metabase) limit tool blast radius
+- [Claude Code](/ai-engineering/claude-code.md) — MCP client; configures servers via `claude mcp add`
+- [Claude Managed Agents](/ai-engineering/claude-managed-agents.md) — uses MCP for external system access; Vaults handle OAuth tokens per session
+- [Claude Cowork](/ai-engineering/claude-cowork.md) — the end-user product surface where consumer connectors are most active
+- [Semantic Layer](/data-engineering/semantic-layer.md) (data-engineering) — an MCP server (`MCPSemanticModel`/FastMCP) can expose a governed semantic layer as LLM-queryable tools, constraining the model to validated aggregations
 
 ---
 
-[^src1]: [[03_Resources/Study Notes/AI Dev - Agentic AI Architecture Explained|AI Dev - Agentic AI Architecture Explained]]
+[^src1]: [AI Dev - Agentic AI Architecture Explained](/03_Resources/Study Notes/AI Dev - Agentic AI Architecture Explained.md)
 [^src2]: [Behind Substack Author MCP: Resources, Prompts, and Tools Explained](../../raw/web/behind-substack-author-mcp-resources-prompts-and-tools-expla.md)
 [^src3]: [Building a Substack Agent with SKILLs and MCP](../../raw/web/building-a-substack-agent-with-skills-and-mcp.md)
 [^src4]: [Desktop Commander MCP](../../raw/web/github-wonderwhy-er-desktopcommandermcp-this-is-mcp-server-f.md)
@@ -452,4 +452,4 @@ Use this when evaluating whether a service has an existing MCP server before bui
 [^src23]: [DesktopCommanderMCP — GitHub ★6196](../../raw/github/github-wonderwhy-er-desktopcommandermcp.md) — wonderwhy-er
 [^src24]: [googleapis/mcp-toolbox-for-databases — MCP server for databases (★15,684)](../../raw/github/github-googleapis-mcp-toolbox.md) — Google, GitHub
 [^src25]: [punkpeye/awesome-mcp-servers — curated MCP server directory (★89,588)](../../raw/github/github-punkpeye-awesome-mcp-servers.md) — punkpeye, GitHub
-[^src26]: [Playwright CLI vs MCP Server — token comparison](../../raw/youtube/youtube-V2qjnBDZZ7A-playwright-cli-vs-mcp-server-which-is-actually-better-for-cl.md) — Better Stack, YouTube; 68-token CLI vs 3.6K-token MCP server comparison; see [[ai-engineering/tool-calling|Tool Calling]] for full analysis
+[^src26]: [Playwright CLI vs MCP Server — token comparison](../../raw/youtube/youtube-V2qjnBDZZ7A-playwright-cli-vs-mcp-server-which-is-actually-better-for-cl.md) — Better Stack, YouTube; 68-token CLI vs 3.6K-token MCP server comparison; see [Tool Calling](/ai-engineering/tool-calling.md) for full analysis

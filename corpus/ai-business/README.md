@@ -17,24 +17,24 @@ Career, monetization, and business in the AI era: navigating a technical career,
 ## Pages
 
 ### Concepts
-- [[ai-business/technical-career|Navigating a Technical Career]] — concept · draft · portfolio signals, interview behavior, prioritization-as-leverage; AI engineering skills (taste, clarity/vision, thinking-first, articulation gap)
-- [[ai-business/monetizing-code|Monetizing Code]] — concept · draft · sell a result not code; automate boring workflows; offer positioning
-- [[ai-business/ai-job-search|Finding a Job Using AI]] — concept · draft · AI career-strategist projects (Path One) + autonomous apply / ApplyPilot (Path Two); quality over volume
-- [[ai-business/ai-spreadsheets|AI Spreadsheets & the Data-Skill Shift]] — concept · draft · "stop learning Excel"; direct the AI via an assumptions-first build spec + standing context
-- [[ai-business/ai-economics-bubble|AI Economics & the Bubble Thesis]] — concept · draft · Zitron's bear case; token-billing spend caps (Uber/Brex/T-Mobile) read as demand slowing; capex unsustainability (opinion)
-- [[ai-business/ai-synthetic-focus-group|AI Synthetic Focus Group]] — concept · draft · ~13 LLM buyer-personas critique ads/sales pages pre-spend (~13¢/run); copywriter + prediction-engine pipeline; accuracy claims unsourced
-- [[ai-business/ai-consulting-playbook|AI Consulting Playbook]] — concept · draft · free "AI mini assessment" two-call close (5 discovery Qs → frequency×friction bottleneck → "money question"); 30–50% claimed conversion
-- [[ai-business/agent-infrastructure|Agent Infrastructure]] — concept · draft · four architectural bets for production agents (identity, context, persistence, platforms); "capability not agent" framing vs. GM/Toyota; Clay as GTM example
-- [[ai-business/boring-expert-businesses|Boring Expert Businesses]] — concept · draft · Filter Buy operator's F-to-S tier list of remote businesses; S-tier = compliance/certification (insurance-policy pricing); fractional executives (A); software implementation partners (high B); AI as leverage multiplier for boring expert businesses
-- [[ai-business/selling-to-ai-agents|Selling to AI Agents]] — concept · draft · agents as a new customer class; AEO vs SEO; MCP as front door; x402 per-call payments; two plays (make existing product agent-buyable vs. picks-and-shovels for agent economy)
-- [[ai-business/ai-content-with-voice|AI Content With Your Voice]] — concept · draft · ghost voice / stylometry; Claude trained on LinkedIn posts; Spiral tool; conversion engineering
-- [[ai-business/ai-business-models|AI Business Models (Profit Per Hour)]] — concept · draft · five-tier ranking: automation agency (#5) → productized services (#4) → custom app dev (#3) → outcome-based consulting (#2) → vertical micro-SaaS (#1); profit/hour as the true metric; "start where you are, fund the next tier"
-- [[ai-business/ai-transition-economics|AI Transition Economics]] — concept · draft · Paul David 1905/electricity analogy; "swapping motors not factories" critique; productivity paradox and adoption curve; field notes on energy shocks
+- [Navigating a Technical Career](/ai-business/technical-career.md) — concept · draft · portfolio signals, interview behavior, prioritization-as-leverage; AI engineering skills (taste, clarity/vision, thinking-first, articulation gap)
+- [Monetizing Code](/ai-business/monetizing-code.md) — concept · draft · sell a result not code; automate boring workflows; offer positioning
+- [Finding a Job Using AI](/ai-business/ai-job-search.md) — concept · draft · AI career-strategist projects (Path One) + autonomous apply / ApplyPilot (Path Two); quality over volume
+- [AI Spreadsheets & the Data-Skill Shift](/ai-business/ai-spreadsheets.md) — concept · draft · "stop learning Excel"; direct the AI via an assumptions-first build spec + standing context
+- [AI Economics & the Bubble Thesis](/ai-business/ai-economics-bubble.md) — concept · draft · Zitron's bear case; token-billing spend caps (Uber/Brex/T-Mobile) read as demand slowing; capex unsustainability (opinion)
+- [AI Synthetic Focus Group](/ai-business/ai-synthetic-focus-group.md) — concept · draft · ~13 LLM buyer-personas critique ads/sales pages pre-spend (~13¢/run); copywriter + prediction-engine pipeline; accuracy claims unsourced
+- [AI Consulting Playbook](/ai-business/ai-consulting-playbook.md) — concept · draft · free "AI mini assessment" two-call close (5 discovery Qs → frequency×friction bottleneck → "money question"); 30–50% claimed conversion
+- [Agent Infrastructure](/ai-business/agent-infrastructure.md) — concept · draft · four architectural bets for production agents (identity, context, persistence, platforms); "capability not agent" framing vs. GM/Toyota; Clay as GTM example
+- [Boring Expert Businesses](/ai-business/boring-expert-businesses.md) — concept · draft · Filter Buy operator's F-to-S tier list of remote businesses; S-tier = compliance/certification (insurance-policy pricing); fractional executives (A); software implementation partners (high B); AI as leverage multiplier for boring expert businesses
+- [Selling to AI Agents](/ai-business/selling-to-ai-agents.md) — concept · draft · agents as a new customer class; AEO vs SEO; MCP as front door; x402 per-call payments; two plays (make existing product agent-buyable vs. picks-and-shovels for agent economy)
+- [AI Content With Your Voice](/ai-business/ai-content-with-voice.md) — concept · draft · ghost voice / stylometry; Claude trained on LinkedIn posts; Spiral tool; conversion engineering
+- [AI Business Models (Profit Per Hour)](/ai-business/ai-business-models.md) — concept · draft · five-tier ranking: automation agency (#5) → productized services (#4) → custom app dev (#3) → outcome-based consulting (#2) → vertical micro-SaaS (#1); profit/hour as the true metric; "start where you are, fund the next tier"
+- [AI Transition Economics](/ai-business/ai-transition-economics.md) — concept · draft · Paul David 1905/electricity analogy; "swapping motors not factories" critique; productivity paradox and adoption curve; field notes on energy shocks
 
 ### Entities
-- [[ai-business/harvey|Harvey]] — entity · stub · AI for legal/professional services; 142K+ professionals; 1,500+ firms; 65+ AmLaw 100
-- [[ai-business/claude-for-startups|Claude for Startups (and Nonprofits)]] — entity · stub · Anthropic's access programs; startup credits + priority rate limits; nonprofit discounted plans
-- [[ai-business/claude-corps|Claude Corps]] — entity · stub · Anthropic + CodePath + Social Finance; trains early-career fellows, embeds them in US nonprofits for 12 months; talent-supply counterpart to the access programs
+- [Harvey](/ai-business/harvey.md) — entity · stub · AI for legal/professional services; 142K+ professionals; 1,500+ firms; 65+ AmLaw 100
+- [Claude for Startups (and Nonprofits)](/ai-business/claude-for-startups.md) — entity · stub · Anthropic's access programs; startup credits + priority rate limits; nonprofit discounted plans
+- [Claude Corps](/ai-business/claude-corps.md) — entity · stub · Anthropic + CodePath + Social Finance; trains early-career fellows, embeds them in US nonprofits for 12 months; talent-supply counterpart to the access programs
 
 ### Syntheses
-- [[ai-business/ai-and-the-job-market|AI and the Job Market]] — synthesis · draft · AI-as-utility; future-proofing via depth + human skills + business proximity; articulation gap; world models; Toyota/GM framing
+- [AI and the Job Market](/ai-business/ai-and-the-job-market.md) — synthesis · draft · AI-as-utility; future-proofing via depth + human skills + business proximity; articulation gap; world models; Toyota/GM framing

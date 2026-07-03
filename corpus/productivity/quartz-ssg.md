@@ -35,7 +35,7 @@ updated: 2026-06-25
 
 Quartz reads a directory of Markdown files and emits a static website [^src1]. Key features:
 
-- Converts `[[WikiLink]]` syntax to resolved HTML links (critical for Obsidian vaults where all internal links are WikiLinks).
+- Converts `Wikilink` syntax to resolved HTML links (critical for Obsidian vaults where all internal links are WikiLinks).
 - Renders the **backlinks graph** as an interactive, explorable visualization.
 - Generates a **graph view** per page and a global graph for the whole vault.
 - Produces a search index (full-text search in-browser, no backend).
@@ -55,7 +55,7 @@ This is a non-destructive publishing pipeline: source files are untouched; Quart
 
 Publishing a second brain / digital garden externally turns a private knowledge system into a shareable reference — the "learn in public" and "digital garden" patterns favoured by PKM communities. Quartz is the standard implementation path for Obsidian users who want an external-facing garden without a CMS or database.
 
-See [[productivity/obsidian-pkm|Obsidian & PKM]] for vault architecture and [[productivity/ai-augmented-knowledge-work|AI-Augmented Knowledge Work]] for the relationship between the vault and AI context layers.
+See [Obsidian & PKM](/productivity/obsidian-pkm.md) for vault architecture and [AI-Augmented Knowledge Work](/productivity/ai-augmented-knowledge-work.md) for the relationship between the vault and AI context layers.
 
 ---
 

@@ -61,10 +61,10 @@ kubectl get nodes
 
 ## See also
 
-- [[mlops/terraform|Terraform]] — the IaC tool used to provision the cluster
-- [[mlops/infrastructure-as-code|Infrastructure as Code]] — broader IaC context
-- [[mlops/cloud-computing-fundamentals|Cloud Computing Fundamentals]] — cloud concepts; OCI as a provider
-- [[mlops/README|MLOps hub]]
+- [Terraform](/mlops/terraform.md) — the IaC tool used to provision the cluster
+- [Infrastructure as Code](/mlops/infrastructure-as-code.md) — broader IaC context
+- [Cloud Computing Fundamentals](/mlops/cloud-computing-fundamentals.md) — cloud concepts; OCI as a provider
+- [MLOps hub](/mlops/README.md)
 
 ---
 

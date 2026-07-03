@@ -23,7 +23,7 @@ updated: 2026-06-16
 
 ## What it is
 
-A programmatic harness for [[ai-engineering/long-running-agents|AFK/long-running coding agents]]. You invoke `run()` (one-shot), `createSandbox()` (multiple runs in one container), `createWorktree()` (worktree as a first-class concept), or `interactive()`, passing an **agent provider** and a **sandbox provider** [^src1]. The package is installed via `npm install --save-dev @ai-hero/sandcastle`, with `npx @ai-hero/sandcastle init` scaffolding a `.sandcastle/` config directory [^src1].
+A programmatic harness for [AFK/long-running coding agents](/ai-engineering/long-running-agents.md). You invoke `run()` (one-shot), `createSandbox()` (multiple runs in one container), `createWorktree()` (worktree as a first-class concept), or `interactive()`, passing an **agent provider** and a **sandbox provider** [^src1]. The package is installed via `npm install --save-dev @ai-hero/sandcastle`, with `npx @ai-hero/sandcastle init` scaffolding a `.sandcastle/` config directory [^src1].
 
 ```ts
 import { run, claudeCode } from "@ai-hero/sandcastle";
@@ -61,8 +61,8 @@ The harness is multi-agent-provider: `claudeCode`, `pi`, `codex`, `cursor`, `ope
 
 ## Relationships
 
-- A concrete harness for running [[ai-engineering/long-running-agents|long-running / AFK agents]]; the `sequential-reviewer` and `parallel-planner-with-review` templates implement [[ai-engineering/multi-agent-systems|multi-agent]] reviewer patterns.
-- Built to orchestrate [[ai-engineering/claude-code|Claude Code]] (its default agent provider) among other coding agents.
+- A concrete harness for running [long-running / AFK agents](/ai-engineering/long-running-agents.md); the `sequential-reviewer` and `parallel-planner-with-review` templates implement [multi-agent](/ai-engineering/multi-agent-systems.md) reviewer patterns.
+- Built to orchestrate [Claude Code](/ai-engineering/claude-code.md) (its default agent provider) among other coding agents.
 - Authored by Matt Pocock, shipped under the `@ai-hero/` npm scope; MIT-licensed [^src1].
 
 [^src1]: [mattpocock/sandcastle — orchestrate sandboxed coding agents](../../raw/web/github-mattpocock-sandcastle-orchestrate-sandboxed-coding-ag.md)

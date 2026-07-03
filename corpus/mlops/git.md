@@ -135,10 +135,10 @@ SSH key is the recommended authentication method — access tokens are possible 
 
 ## See also
 
-- [[mlops/dev-environment-stack|Dev Environment Stack]] — Git is a Layer-1 system-foundation tool
-- [[mlops/cli-tools|CLI Tools]] — the GitHub CLI (`gh`), `pass` (git-backed secrets), and `delta` (git diffs) build on Git
-- [[mlops/ci-cd-for-ml|CI/CD for ML]] — Git Flow + branch protection + GitHub Actions integration
-- [[mlops/README|MLOps hub]]
+- [Dev Environment Stack](/mlops/dev-environment-stack.md) — Git is a Layer-1 system-foundation tool
+- [CLI Tools](/mlops/cli-tools.md) — the GitHub CLI (`gh`), `pass` (git-backed secrets), and `delta` (git diffs) build on Git
+- [CI/CD for ML](/mlops/ci-cd-for-ml.md) — Git Flow + branch protection + GitHub Actions integration
+- [MLOps hub](/mlops/README.md)
 
 ---
 

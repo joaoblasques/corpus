@@ -50,9 +50,9 @@ updated: 2026-06-28
 
 # Claude Plans & Pricing (consumer / team subscriptions)
 
-**TL;DR.** [[ai-engineering/anthropic|Anthropic]] sells Claude through five subscription tiers — **Free, Pro, Max, Team, Enterprise** (plus an institutional **Education** plan) — gating usage limits, model access, and admin/governance features rather than capabilities per se [^src1]. This is the **consumer/seat-subscription** axis (claude.com), distinct from the per-million-token **API pricing** tracked on [[ai-engineering/claude-models|Claude Model Lineup]]. Snapshot collected 2026-06-27 from claude.com localized plan pages; prices are USD and may change.
+**TL;DR.** [Anthropic](/ai-engineering/anthropic.md) sells Claude through five subscription tiers — **Free, Pro, Max, Team, Enterprise** (plus an institutional **Education** plan) — gating usage limits, model access, and admin/governance features rather than capabilities per se [^src1]. This is the **consumer/seat-subscription** axis (claude.com), distinct from the per-million-token **API pricing** tracked on [Claude Model Lineup](/ai-engineering/claude-models.md). Snapshot collected 2026-06-27 from claude.com localized plan pages; prices are USD and may change.
 
-The product framing across all plan pages: brainstorm in chat, then build in [[ai-engineering/claude-cowork|Cowork]] [^src2]. Claude is positioned as an assistant "trained by Anthropic with Constitutional AI to be safe, accurate, and secure" [^src1].
+The product framing across all plan pages: brainstorm in chat, then build in [Cowork](/ai-engineering/claude-cowork.md) [^src2]. Claude is positioned as an assistant "trained by Anthropic with Constitutional AI to be safe, accurate, and secure" [^src1].
 
 ## Tier comparison
 
@@ -67,9 +67,9 @@ The product framing across all plan pages: brainstorm in chat, then build in [[a
 
 ## What each tier adds
 
-**Free** [^src2] — chat on web/iOS/Android/desktop; code generation and data visualization; content writing/editing; text and image analysis; web search; file creation and code execution; desktop extensions; Slack and Google Workspace connectors; any context or tool via **remote [[ai-engineering/mcp|MCP]] connectors**; extended thinking for complex work.
+**Free** [^src2] — chat on web/iOS/Android/desktop; code generation and data visualization; content writing/editing; text and image analysis; web search; file creation and code execution; desktop extensions; Slack and Google Workspace connectors; any context or tool via **remote [MCP](/ai-engineering/mcp.md) connectors**; extended thinking for complex work.
 
-**Pro** (everything in Free, plus) [^src2] — more usage; **[[ai-engineering/claude-code|Claude Code]]**; **[[ai-engineering/claude-cowork|Cowork]]**; unlimited Projects; Research access; memory across conversations; more Claude models; **Claude in Excel**; **Claude in Chrome** (the Italian page lists **Claude for PowerPoint (beta)** in place of Chrome) [^src1].
+**Pro** (everything in Free, plus) [^src2] — more usage; **[Claude Code](/ai-engineering/claude-code.md)**; **[Cowork](/ai-engineering/claude-cowork.md)**; unlimited Projects; Research access; memory across conversations; more Claude models; **Claude in Excel**; **Claude in Chrome** (the Italian page lists **Claude for PowerPoint (beta)** in place of Chrome) [^src1].
 
 **Max** (everything in Pro, plus) [^src1] — choose 5× or 20× Pro usage; recommended for Claude Code & Cowork; higher output limits on all tasks; early access to advanced Claude features; priority access during high-traffic periods.
 
@@ -109,11 +109,11 @@ Three request-priority levels for the Claude API [^src6]:
 
 **Legacy** (still available): Opus 4.7, Opus 4.6, Sonnet 4.5, Opus 4.5, Opus 4.1 [^src6].
 
-[^note-fable]: Fable 5 is currently unavailable due to US export control restrictions. See [[ai-engineering/anthropic|Anthropic]] §Fable 5 launch controversy.
+[^note-fable]: Fable 5 is currently unavailable due to US export control restrictions. See [Anthropic](/ai-engineering/anthropic.md) §Fable 5 launch controversy.
 
 ## Additional Enterprise features
 
-The Enterprise tier adds **Claude Security** (beta) — a vulnerability-scanning product using Opus 4.7; see [[ai-engineering/anthropic|Anthropic]] §Project Glasswing [^src6]. Enterprise also offers AWS Marketplace availability, committed-spend tiered incentives, trials, custom MSAs, and customer success support at certain spend thresholds [^src6].
+The Enterprise tier adds **Claude Security** (beta) — a vulnerability-scanning product using Opus 4.7; see [Anthropic](/ai-engineering/anthropic.md) §Project Glasswing [^src6]. Enterprise also offers AWS Marketplace availability, committed-spend tiered incentives, trials, custom MSAs, and customer success support at certain spend thresholds [^src6].
 
 ## Feature flags visible in the comparison table
 
@@ -129,13 +129,13 @@ New features present in the 2026-06-28 pricing page not in earlier snapshots [^s
 ## Notes
 
 - The plan tiers gate **usage volume, model selection, and admin/compliance controls** — Claude Code and Cowork themselves start at the Pro tier [^src2].
-- Subscription prices here are independent of **API token pricing** (e.g. Opus 4.8 at $5/$25 per M, Fable 5 at $10/$50 per M) — see [[ai-engineering/claude-models|Claude Model Lineup]] for the per-model, per-token rates and which model is default on each account type.
+- Subscription prices here are independent of **API token pricing** (e.g. Opus 4.8 at $5/$25 per M, Fable 5 at $10/$50 per M) — see [Claude Model Lineup](/ai-engineering/claude-models.md) for the per-model, per-token rates and which model is default on each account type.
 
 ## See also
 
-- [[ai-engineering/anthropic|Anthropic]] — the lab; company, funding, products
-- [[ai-engineering/claude-models|Claude Model Lineup]] — model family and per-token API pricing
-- [[ai-engineering/claude-code|Claude Code]] · [[ai-engineering/claude-cowork|Claude Cowork]] — the products gated behind Pro+
+- [Anthropic](/ai-engineering/anthropic.md) — the lab; company, funding, products
+- [Claude Model Lineup](/ai-engineering/claude-models.md) — model family and per-token API pricing
+- [Claude Code](/ai-engineering/claude-code.md) · [Claude Cowork](/ai-engineering/claude-cowork.md) — the products gated behind Pro+
 
 [^src1]: [Claude by Anthropic — plans (it)](../../raw/web/web-claude-by-anthropic-90b51f29.md) — claude.com/it (most complete: Team/Enterprise/Education)
 [^src2]: [Claude — plans (de)](../../raw/web/web-claude-796a7cce.md) — claude.com/de

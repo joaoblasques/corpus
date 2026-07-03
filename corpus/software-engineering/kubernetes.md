@@ -100,19 +100,19 @@ kubectl delete -f manifest.yaml
 
 ## Relationship to microservices
 
-Kubernetes is the natural runtime platform for [[software-engineering/microservices|microservices]] architecture [^src1]:
+Kubernetes is the natural runtime platform for [microservices](/software-engineering/microservices.md) architecture [^src1]:
 - Services provide stable endpoints despite ephemeral pods — solving the network identity problem in distributed systems
 - Namespaces enforce the service isolation that prevents shared-database anti-patterns
 - Deployments implement zero-downtime rolling updates — critical when services must evolve independently
-- Auto-restart and health checks address partial failure modes discussed in [[software-engineering/distributed-systems-fallacies|Distributed Systems Fallacies]]
+- Auto-restart and health checks address partial failure modes discussed in [Distributed Systems Fallacies](/software-engineering/distributed-systems-fallacies.md)
 
 ## See also
 
-- [[software-engineering/microservices|Microservices]] — the architectural style Kubernetes operationalizes at runtime
-- [[software-engineering/distributed-systems-fallacies|Distributed Systems Fallacies]] — Kubernetes addresses partial failure and network unreliability via auto-restart and load balancing
-- [[software-engineering/software-design-principles|Software Design Principles]] — loose coupling is enforced at infrastructure level via Service objects (stable endpoints over dynamic pods)
-- [[software-engineering/README|Software Architecture hub]]
+- [Microservices](/software-engineering/microservices.md) — the architectural style Kubernetes operationalizes at runtime
+- [Distributed Systems Fallacies](/software-engineering/distributed-systems-fallacies.md) — Kubernetes addresses partial failure and network unreliability via auto-restart and load balancing
+- [Software Design Principles](/software-engineering/software-design-principles.md) — loose coupling is enforced at infrastructure level via Service objects (stable endpoints over dynamic pods)
+- [Software Architecture hub](/software-engineering/README.md)
 
 ---
 
-[^src1]: [[03_Resources/Study Notes/DevOps - Kubernetes Complete Course for Beginners|DevOps - Kubernetes Complete Course for Beginners]]
+[^src1]: [DevOps - Kubernetes Complete Course for Beginners](/03_Resources/Study Notes/DevOps - Kubernetes Complete Course for Beginners.md)

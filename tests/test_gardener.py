@@ -37,10 +37,20 @@ def test_rank_by_inbound_then_created(tmp_path):
     c = tmp_path / "corpus"; d = c / "ai"; d.mkdir(parents=True)
     _stub(d, "pop.md", ["raw/x.md"], created="2026-02-01")
     _stub(d, "old.md", ["raw/x.md"], created="2026-01-01")
-    # a draft page links to ai/pop twice → pop has higher inbound
-    (d / "linker.md").write_text("see [[ai/pop|Pop]] and [[ai/pop]] vs [[ai/old]]", encoding="utf-8")
+    # a draft page links to ai/pop twice via markdown links → pop has higher inbound
+    (d / "linker.md").write_text(
+        "see [Pop](/ai/pop.md) and [pop](/ai/pop.md) vs [old](/ai/old.md)", encoding="utf-8")
     ranked = [p.name for p in g.rank_stubs([d / "old.md", d / "pop.md"], corpus_dir=c)]
     assert ranked == ["pop.md", "old.md"]   # pop: 2 inbound > old: 1
+
+
+def test_inbound_count_markdown_link(tmp_path):
+    """inbound_count detects root-relative markdown links [text](/domain/slug.md)."""
+    c = tmp_path / "corpus"; d = c / "ai"; d.mkdir(parents=True)
+    (d / "linker.md").write_text(
+        "[OpenAI](/ai/openai.md) mentioned twice [again](/ai/openai.md)", encoding="utf-8")
+    assert g.inbound_count("ai/openai", corpus_dir=c) == 2
+    assert g.inbound_count("ai/other", corpus_dir=c) == 0
 
 
 def test_worklist_skips_unexpandable_and_queues_them(tmp_path):

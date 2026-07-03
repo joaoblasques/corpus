@@ -43,10 +43,10 @@ One of the top ML repositories on GitHub (self-described). Targets developers wa
 
 ## See also
 
-- [[mlops/mlops-principles|MLOps Principles]] — the discipline this course teaches
-- [[mlops/production-ml-workflow|Production ML Workflow]] — production-minded training concepts
-- [[mlops/model-monitoring|Model Monitoring]] — monitoring in production
-- [[mlops/README|MLOps hub]]
+- [MLOps Principles](/mlops/mlops-principles.md) — the discipline this course teaches
+- [Production ML Workflow](/mlops/production-ml-workflow.md) — production-minded training concepts
+- [Model Monitoring](/mlops/model-monitoring.md) — monitoring in production
+- [MLOps hub](/mlops/README.md)
 
 ---
 

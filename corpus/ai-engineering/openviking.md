@@ -119,11 +119,11 @@ An Anthropic OpenClaw integration is the primary benchmarked agent; Claude Code 
 
 ## See also
 
-- [[ai-engineering/agent-memory|Agent Memory]] — the broader memory architecture; typed-memory taxonomy; RAG vs. memory systems distinction
-- [[ai-engineering/rag|RAG]] — the flat-vector pattern OpenViking extends with the filesystem paradigm
-- [[ai-engineering/vector-database|Vector Database]] — storage layer; OpenViking's tiered loading is an alternative indexing strategy
-- [[ai-engineering/context-window-management|Context Window Management]] — L0/L1/L2 tiered loading directly addresses context rot and token budget
-- [[ai-engineering/README|AI Engineering hub]]
+- [Agent Memory](/ai-engineering/agent-memory.md) — the broader memory architecture; typed-memory taxonomy; RAG vs. memory systems distinction
+- [RAG](/ai-engineering/rag.md) — the flat-vector pattern OpenViking extends with the filesystem paradigm
+- [Vector Database](/ai-engineering/vector-database.md) — storage layer; OpenViking's tiered loading is an alternative indexing strategy
+- [Context Window Management](/ai-engineering/context-window-management.md) — L0/L1/L2 tiered loading directly addresses context rot and token budget
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

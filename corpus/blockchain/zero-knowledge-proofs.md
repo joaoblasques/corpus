@@ -93,8 +93,8 @@ The "Lindy Effect" here: symmetric primitives have been battle-tested much longe
 
 ## Related pages
 
-- [[blockchain/hash-functions|Hash Functions]] — symmetric primitives (SHA-2) underpin STARKs and commitment schemes
-- [[blockchain/merkle-trees|Merkle Trees]] — Merkle-tree-based commitment schemes are the primary LDC method for STARKs
-- [[blockchain/public-key-cryptography|Public-Key Cryptography]] — asymmetric assumptions (ECC, discrete log) underpin SNARKs
+- [Hash Functions](/blockchain/hash-functions.md) — symmetric primitives (SHA-2) underpin STARKs and commitment schemes
+- [Merkle Trees](/blockchain/merkle-trees.md) — Merkle-tree-based commitment schemes are the primary LDC method for STARKs
+- [Public-Key Cryptography](/blockchain/public-key-cryptography.md) — asymmetric assumptions (ECC, discrete log) underpin SNARKs
 
 [^src1]: [A Cambrian Explosion of Crypto Proofs](../../raw/notes/notes-cambrian-explosion-of-crypto-proofs-scrape.md)

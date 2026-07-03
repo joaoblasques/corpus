@@ -30,7 +30,7 @@ updated: 2026-06-25
 
 # VPS for Agents
 
-**TL;DR** — Running AI coding agents (Codex CLI, Claude Code) on a **Virtual Private Server** rather than your local machine is the key to: (1) keeping long-running tasks alive without keeping a laptop open, (2) eliminating battery/Wi-Fi dependencies, (3) controlling agents from a phone, and (4) scheduling unattended automations via cron. The persistence layer is [[mlops/tmux|tmux]] — a detachable terminal multiplexer that keeps sessions alive after SSH disconnect [^src1][^src2].
+**TL;DR** — Running AI coding agents (Codex CLI, Claude Code) on a **Virtual Private Server** rather than your local machine is the key to: (1) keeping long-running tasks alive without keeping a laptop open, (2) eliminating battery/Wi-Fi dependencies, (3) controlling agents from a phone, and (4) scheduling unattended automations via cron. The persistence layer is [tmux](/mlops/tmux.md) — a detachable terminal multiplexer that keeps sessions alive after SSH disconnect [^src1][^src2].
 
 ## Why a VPS instead of local
 
@@ -193,10 +193,10 @@ This is a rhetorical framing, not a technical judgment — both approaches have 
 
 ## See also
 
-- [[mlops/tmux|tmux]] — the persistence mechanism (sessions, windows, panes, core commands)
-- [[mlops/terminal-and-shell|Terminal & Shell]] — local shell setup (complementary)
-- [[mlops/cli-tools|CLI Tools]] — other productivity tools in the same layer
-- [[mlops/README|MLOps hub]]
+- [tmux](/mlops/tmux.md) — the persistence mechanism (sessions, windows, panes, core commands)
+- [Terminal & Shell](/mlops/terminal-and-shell.md) — local shell setup (complementary)
+- [CLI Tools](/mlops/cli-tools.md) — other productivity tools in the same layer
+- [MLOps hub](/mlops/README.md)
 
 ---
 

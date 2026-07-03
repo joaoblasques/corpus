@@ -108,9 +108,9 @@ Bitcoin is **eventually consistent** — no hard timing guarantees. Historically
 
 ## Related pages
 
-- [[blockchain/bitcoin|Bitcoin]] — the P2P network serves Bitcoin's consensus
-- [[blockchain/proof-of-work|Proof-of-Work]] — blocks propagated via gossip network
-- [[blockchain/hash-functions|Hash Functions]] — used to identify and deduplicate blocks in the gossip layer
+- [Bitcoin](/blockchain/bitcoin.md) — the P2P network serves Bitcoin's consensus
+- [Proof-of-Work](/blockchain/proof-of-work.md) — blocks propagated via gossip network
+- [Hash Functions](/blockchain/hash-functions.md) — used to identify and deduplicate blocks in the gossip layer
 
 [^src1]: [P2P Networking](../../raw/notes/notes-p2p-networking-scrape.md)
 [^src2]: [Gnutella: an Intro to Gossip](../../raw/notes/notes-gnutella-scrape.md)

@@ -28,7 +28,7 @@ updated: 2026-06-16
 
 **TL;DR.** A PostgreSQL VIEW is not a stored object the executor consults — it is a stored parse tree (a macro) that the *rewriter* pastes into your query before planning[^src1]. This makes simple views free (the planner inlines them) but rigid: columns are pinned to attribute numbers, types and `SELECT *` are frozen at `CREATE VIEW` time, and any structural change to an underlying column is blocked or cascades. "Rigidity is the feature, not a bug"[^src1].
 
-This page is a focused deep-dive on view mechanics and schema-evolution pain. For PostgreSQL as a general data platform see [[data-engineering/postgres|PostgreSQL]]; for materialized views across engines see [[data-engineering/materialized-views|Materialized Views]].
+This page is a focused deep-dive on view mechanics and schema-evolution pain. For PostgreSQL as a general data platform see [PostgreSQL](/data-engineering/postgres.md); for materialized views across engines see [Materialized Views](/data-engineering/materialized-views.md).
 
 ## The appeal
 
@@ -107,9 +107,9 @@ The pain traces to one gap: there is no structural `ALTER VIEW`[^src1]. `ALTER V
 
 ## See also
 
-- [[data-engineering/sql-intermediate-results|Storing Intermediate Results in SQL]] — when to use a view vs CTE vs temp table vs materialized view
-- [[data-engineering/materialized-views|Materialized Views]] — the materialized counterpart
-- [[data-engineering/postgres|PostgreSQL]] — Postgres as a general data platform
-- [[data-engineering/README|Data Engineering hub]]
+- [Storing Intermediate Results in SQL](/data-engineering/sql-intermediate-results.md) — when to use a view vs CTE vs temp table vs materialized view
+- [Materialized Views](/data-engineering/materialized-views.md) — the materialized counterpart
+- [PostgreSQL](/data-engineering/postgres.md) — Postgres as a general data platform
+- [Data Engineering hub](/data-engineering/README.md)
 
 [^src1]: [Strong Views on PostgreSQL Views](../../raw/web/strong-views-on-postgresql-views.md)

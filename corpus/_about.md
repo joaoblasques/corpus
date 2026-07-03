@@ -1,3 +1,6 @@
+---
+type: internal
+---
 # About the Corpus
 
 > *A personal knowledge corpus with citation discipline, schema versioning, and synthesis-aware structure.*

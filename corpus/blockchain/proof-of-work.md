@@ -74,11 +74,11 @@ Proof-of-work solves the central problem of digital money without a trusted thir
 
 ## Related pages
 
-- [[blockchain/hash-functions|Hash Functions]] — **uses** SHA-256 (and Hashcash's SHA-1) as the one-way primitive PoW brute-forces
-- [[blockchain/bitcoin|Bitcoin]] — Nakamoto Consensus applied at scale
-- [[blockchain/satoshi-nakamoto|Satoshi Nakamoto]] — synthesizer of the PoW insight
-- [[blockchain/the-cypherpunks|The Cypherpunks]] — **predecessor-of** Bitcoin's PoW: Hashcash (Adam Back) and the b-money/BitGold proposals, all of which failed to solve sybil resistance
-- [[blockchain/public-key-cryptography|Public-Key Cryptography]] — **complements** PoW: digital signatures authorize who can spend, PoW decides whose history is canonical
+- [Hash Functions](/blockchain/hash-functions.md) — **uses** SHA-256 (and Hashcash's SHA-1) as the one-way primitive PoW brute-forces
+- [Bitcoin](/blockchain/bitcoin.md) — Nakamoto Consensus applied at scale
+- [Satoshi Nakamoto](/blockchain/satoshi-nakamoto.md) — synthesizer of the PoW insight
+- [The Cypherpunks](/blockchain/the-cypherpunks.md) — **predecessor-of** Bitcoin's PoW: Hashcash (Adam Back) and the b-money/BitGold proposals, all of which failed to solve sybil resistance
+- [Public-Key Cryptography](/blockchain/public-key-cryptography.md) — **complements** PoW: digital signatures authorize who can spend, PoW decides whose history is canonical
 
 [^src1]: [Hashcash](../../raw/notes/notes-hashcash-scrape.md)
 [^src2]: [Satoshi Nakamoto](../../raw/notes/notes-satoshi-nakamoto-scrape.md)

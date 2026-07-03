@@ -48,7 +48,7 @@ updated: 2026-06-17
 
 LLMs "like to call something done before it really is" [^src2]. Left to self-report, an agent's claim that a feature works is unverified. A test that drives the real application the way a user would — clicking, typing, waiting for loads, then asserting the app behaved correctly — converts a claim into evidence [^src1].
 
-Reinforcement tools (tests, linters) are the **external loop** that keeps an agent from prematurely declaring success [^src2]. The framing inverts the engineer's job: the real work "was never typing code" but architecting systems you can be confident in [^src2]. See [[ai-engineering/context-engineering|Context Engineering]] — agents need the right information at the right time, and a failing test with rich context is exactly that.
+Reinforcement tools (tests, linters) are the **external loop** that keeps an agent from prematurely declaring success [^src2]. The framing inverts the engineer's job: the real work "was never typing code" but architecting systems you can be confident in [^src2]. See [Context Engineering](/ai-engineering/context-engineering.md) — agents need the right information at the right time, and a failing test with rich context is exactly that.
 
 ## Playwright as the reality check
 
@@ -103,9 +103,9 @@ Key nondeterminism distinction: AI *code generation* is deterministic once commi
 
 ## The overconfidence effect
 
-A 2022 study found that developers using AI coding assistants were *more* confident in their code's security even when the code was objectively less secure than code written without AI [^src7]. This is the testing-specific instance of the [[ai-engineering/vibe-coding|70% problem]]: the developer's trust in the AI's output substitutes for the verification loop the AI cannot perform on itself. The implication for testing discipline: AI-assisted code needs *more* scrutiny for security, not less, precisely because the confidence signal is inverted.
+A 2022 study found that developers using AI coding assistants were *more* confident in their code's security even when the code was objectively less secure than code written without AI [^src7]. This is the testing-specific instance of the [70% problem](/ai-engineering/vibe-coding.md): the developer's trust in the AI's output substitutes for the verification loop the AI cannot perform on itself. The implication for testing discipline: AI-assisted code needs *more* scrutiny for security, not less, precisely because the confidence signal is inverted.
 
-Supporting data: 25–33% of GitHub Copilot-generated code has security weaknesses (2023 analysis); 40% of AI-generated code had potential vulnerabilities in a 2021 study [^src7]. See [[ai-engineering/agent-security|Agent Security]] for the full vulnerability taxonomy.
+Supporting data: 25–33% of GitHub Copilot-generated code has security weaknesses (2023 analysis); 40% of AI-generated code had potential vulnerabilities in a 2021 study [^src7]. See [Agent Security](/ai-engineering/agent-security.md) for the full vulnerability taxonomy.
 
 ## Bug-regression evidence: did agents make things worse?
 
@@ -132,12 +132,12 @@ The single worst release in rsync history (v3.4.1, 97th percentile) was **entire
 
 ## Related
 
-- [[ai-engineering/ai-agent|AI Agent]] — agents claim completion; tests verify it
-- [[ai-engineering/agent-evaluation|Agent Evaluation]] — offline/online eval is the systematic version of this loop
-- [[ai-engineering/context-engineering|Context Engineering]] — traces and failing tests as just-in-time context
-- [[ai-engineering/agent-security|Agent Security]] — vulnerability taxonomy; the overconfidence effect connects security + testing
-- [[ai-engineering/vibe-coding|Vibe Coding]] — the 70% problem; why testing discipline is mandatory, not optional
-- [[ai-engineering/sources/beyond-vibe-coding-book|Beyond Vibe Coding (Book)]] — ch5, ch7, ch8 as primary sources
+- [AI Agent](/ai-engineering/ai-agent.md) — agents claim completion; tests verify it
+- [Agent Evaluation](/ai-engineering/agent-evaluation.md) — offline/online eval is the systematic version of this loop
+- [Context Engineering](/ai-engineering/context-engineering.md) — traces and failing tests as just-in-time context
+- [Agent Security](/ai-engineering/agent-security.md) — vulnerability taxonomy; the overconfidence effect connects security + testing
+- [Vibe Coding](/ai-engineering/vibe-coding.md) — the 70% problem; why testing discipline is mandatory, not optional
+- [Beyond Vibe Coding (Book)](/ai-engineering/sources/beyond-vibe-coding-book.md) — ch5, ch7, ch8 as primary sources
 
 ---
 

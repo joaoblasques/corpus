@@ -26,7 +26,7 @@ updated: 2026-06-19
 
 # Production-Minded ML Training Workflow
 
-**TL;DR.** This is **Part 2 of the Practical ML Series** — training a spam classifier on the SMS Spam Collection dataset, but taking "a production-minded, real-world approach at every step" [^src1]. The disciplines: a **holdout set** for final unbiased evaluation, robust text preprocessing, comparing multiple models with real-world tradeoffs, **optimizing for the right business metric**, and serializing the model as one sklearn pipeline for seamless deployment [^src1]. The headline lesson: *"it's not about the most optimized score — it's about optimizing for the right business metric"* [^src1]. The serving half of the series (Parts 3 & 4) is covered in [[mlops/model-serving|Model Serving]]; this page is the training half that produces the saved pipeline.
+**TL;DR.** This is **Part 2 of the Practical ML Series** — training a spam classifier on the SMS Spam Collection dataset, but taking "a production-minded, real-world approach at every step" [^src1]. The disciplines: a **holdout set** for final unbiased evaluation, robust text preprocessing, comparing multiple models with real-world tradeoffs, **optimizing for the right business metric**, and serializing the model as one sklearn pipeline for seamless deployment [^src1]. The headline lesson: *"it's not about the most optimized score — it's about optimizing for the right business metric"* [^src1]. The serving half of the series (Parts 3 & 4) is covered in [Model Serving](/mlops/model-serving.md); this page is the training half that produces the saved pipeline.
 
 ## Holdout set (prevent leakage, final eval)
 
@@ -64,7 +64,7 @@ final_model.fit(X_full, y_full)
 pickle.dump(final_model, open('logreg_spam_pipeline.pkl', 'wb'))
 ```
 
-This bundling of vectorizer + classifier in one `.pkl` is exactly the saved pipeline the [[mlops/model-serving|Flask serving API]] later loads in Part 3 [^src1].
+This bundling of vectorizer + classifier in one `.pkl` is exactly the saved pipeline the [Flask serving API](/mlops/model-serving.md) later loads in Part 3 [^src1].
 
 ## Final holdout check
 
@@ -95,16 +95,16 @@ A second reference implementation (Aush Singh, freeCodeCamp) takes the opposite 
 
 ### The 12–14 step build
 
-The full project spans: data discovery → source loading → pre-processing (cleaning/chunking) → embedding → semantic deduplication → quality scoring → classification → summarization → storage → lineage tracking → QA → export for LLM training [^src2]. Each step is a standalone pipeline stage that can be re-run independently — the same idempotency principle as [[data-engineering/idempotent-pipelines|Idempotent Pipelines]].
+The full project spans: data discovery → source loading → pre-processing (cleaning/chunking) → embedding → semantic deduplication → quality scoring → classification → summarization → storage → lineage tracking → QA → export for LLM training [^src2]. Each step is a standalone pipeline stage that can be re-run independently — the same idempotency principle as [Idempotent Pipelines](/data-engineering/idempotent-pipelines.md).
 
 > "Real ML engineering is building systems that *reliably produce* good data for the model — not tweaking model hyperparameters." [^src2]
 
 ## See also
 
-- [[mlops/model-serving|Model Serving]] — Parts 3 & 4 of this series: the Flask API and Airflow batch job that serve this saved pipeline
-- [[mlops/mlflow|MLflow]] — the registry/format that wraps a similar sklearn pipeline in the Databricks course
-- [[mlops/model-monitoring|Model Monitoring]] — what watches such a model once it's deployed
-- [[mlops/README|MLOps hub]]
+- [Model Serving](/mlops/model-serving.md) — Parts 3 & 4 of this series: the Flask API and Airflow batch job that serve this saved pipeline
+- [MLflow](/mlops/mlflow.md) — the registry/format that wraps a similar sklearn pipeline in the Databricks course
+- [Model Monitoring](/mlops/model-monitoring.md) — what watches such a model once it's deployed
+- [MLOps hub](/mlops/README.md)
 
 ---
 

@@ -23,7 +23,7 @@ updated: 2026-06-21
 
 # GitHub Copilot (Agent Mode)
 
-**TL;DR.** GitHub Copilot's **Agent Mode** is an agentic coding capability inside VS Code that, per GitHub, "comprehends your entire project context, implementing complex features across multiple files with simple natural language prompts" [^src1]. It identifies which files need changing, makes coordinated multi-file edits, runs the necessary commands to test, and self-corrects errors it encounters — backed by models from OpenAI, Anthropic, and Google [^src1]. GitHub frames it as a fundamental evolution in AI-assisted development that turns ideas into functional code [^src1]. It is GitHub's entry in the conductor→orchestrator shift covered in [[ai-engineering/agentic-coding|Agentic Coding]], where it sits alongside Claude Code and Cursor as an orchestration-tier tool.
+**TL;DR.** GitHub Copilot's **Agent Mode** is an agentic coding capability inside VS Code that, per GitHub, "comprehends your entire project context, implementing complex features across multiple files with simple natural language prompts" [^src1]. It identifies which files need changing, makes coordinated multi-file edits, runs the necessary commands to test, and self-corrects errors it encounters — backed by models from OpenAI, Anthropic, and Google [^src1]. GitHub frames it as a fundamental evolution in AI-assisted development that turns ideas into functional code [^src1]. It is GitHub's entry in the conductor→orchestrator shift covered in [Agentic Coding](/ai-engineering/agentic-coding.md), where it sits alongside Claude Code and Cursor as an orchestration-tier tool.
 
 ## What Agent Mode does
 
@@ -46,7 +46,7 @@ The source is GitHub's "Agent Evolution: Master GitHub Copilot Agent Mode" annou
 
 ## MCP integration
 
-Agent Mode integrates with **[[ai-engineering/mcp|Model Context Protocol]] servers** to extend its capabilities beyond the editor — the campaign frames this as a partnership that supercharges Agent Mode with MCP servers [^src1]. The campaign also references a more advanced **Copilot Coding Agents** tier as the next step beyond Agent Mode [^src1].
+Agent Mode integrates with **[Model Context Protocol](/ai-engineering/mcp.md) servers** to extend its capabilities beyond the editor — the campaign frames this as a partnership that supercharges Agent Mode with MCP servers [^src1]. The campaign also references a more advanced **Copilot Coding Agents** tier as the next step beyond Agent Mode [^src1].
 
 ## Limitations (community observations)
 
@@ -71,12 +71,12 @@ The key pattern: a Copilot extension is a chat participant with a `@handle` in C
 
 ## Related
 
-- [[ai-engineering/agentic-coding|Agentic Coding]] — the conductor→orchestrator framing where Copilot is an orchestration-tier tool; the verification bottleneck
-- [[ai-engineering/claude-code|Claude Code]] — the comparable Anthropic coding agent
-- [[ai-engineering/openai|OpenAI]] — one of the model providers (alongside Anthropic, Google) powering Agent Mode
-- [[ai-engineering/mcp|MCP]] — the protocol Agent Mode integrates for external capabilities
-- [[ai-engineering/vibe-coding|Vibe Coding]] — the "everyone can build" framing the campaign leans on
-- [[ai-engineering/README|AI Engineering hub]]
+- [Agentic Coding](/ai-engineering/agentic-coding.md) — the conductor→orchestrator framing where Copilot is an orchestration-tier tool; the verification bottleneck
+- [Claude Code](/ai-engineering/claude-code.md) — the comparable Anthropic coding agent
+- [OpenAI](/ai-engineering/openai.md) — one of the model providers (alongside Anthropic, Google) powering Agent Mode
+- [MCP](/ai-engineering/mcp.md) — the protocol Agent Mode integrates for external capabilities
+- [Vibe Coding](/ai-engineering/vibe-coding.md) — the "everyone can build" framing the campaign leans on
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

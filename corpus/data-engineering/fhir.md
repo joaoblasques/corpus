@@ -85,7 +85,7 @@ The `Observation` resource is notably broad: it covers vital signs, lab results,
 - Raw FHIR resources are deeply nested JSON/XML — not query-friendly. Typical pipelines flatten FHIR into tabular form, often mapped to **OMOP CDM** (Observational Medical Outcomes Partnership Common Data Model) for standardized analytics [^unsourced — verify].
 - Key challenges: handling resource versioning, extensions, and profile variants; managing PHI (Protected Health Information) under HIPAA; deduplicating patient matching across systems (MPI — Master Patient Index).
 
-**FHIR and data warehousing**: raw FHIR JSON lands in a bronze/raw layer; transformations produce flattened clinical tables (silver) and OMOP or domain-specific analytical models (gold). See [[data-engineering/medallion-architecture|Medallion Architecture]].
+**FHIR and data warehousing**: raw FHIR JSON lands in a bronze/raw layer; transformations produce flattened clinical tables (silver) and OMOP or domain-specific analytical models (gold). See [Medallion Architecture](/data-engineering/medallion-architecture.md).
 
 **Tooling**: Spark's `from_json` + schema inference handles FHIR JSON in a data lake; AWS HealthLake and Google Cloud Healthcare API provide managed FHIR servers with BigQuery export.
 
@@ -93,11 +93,11 @@ The `Observation` resource is notably broad: it covers vital signs, lab results,
 
 ## Related
 
-- [[data-engineering/medallion-architecture|Medallion Architecture]] — bronze → silver → gold fits FHIR data lakes
-- [[data-engineering/bigquery|BigQuery]] / [[data-engineering/snowflake|Snowflake]] — common analytical targets for FHIR-sourced clinical data
-- [[data-engineering/etl-pipeline|ETL Pipeline]] — FHIR is an API-based extraction source
-- [[data-engineering/change-data-capture|Change Data Capture (CDC)]] — capturing EHR changes can use CDC alongside FHIR subscriptions
-- [[data-engineering/README|Data Engineering hub]]
+- [Medallion Architecture](/data-engineering/medallion-architecture.md) — bronze → silver → gold fits FHIR data lakes
+- [BigQuery](/data-engineering/bigquery.md) / [Snowflake](/data-engineering/snowflake.md) — common analytical targets for FHIR-sourced clinical data
+- [ETL Pipeline](/data-engineering/etl-pipeline.md) — FHIR is an API-based extraction source
+- [Change Data Capture (CDC)](/data-engineering/change-data-capture.md) — capturing EHR changes can use CDC alongside FHIR subscriptions
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

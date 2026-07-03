@@ -32,7 +32,7 @@ last_confirmed: 2026-06-27
 
 # Claude for Education
 
-**TL;DR.** Anthropic's **university-wide program** that packages Claude for students, faculty, and administrators while aiming to "maintain academic integrity" as institutions adopt AI [^src1]. Its product centerpiece is a **learning mode** that "works like a tutor — it asks the questions that help you find the answers yourself" rather than handing over answers [^src1]. This is the education-domain counterpart to the applied [[ai-engineering/claude-for-finance|Claude for Finance]] workflow, and the program is distinct from the **Education subscription tier** tracked on [[ai-engineering/claude-plans|Claude Plans & Pricing]]. Source is Anthropic's own `claude.com/solutions/education` marketing page (collected in English, German, French, and Korean), so claims are positioning, not independent evaluation [^src1].
+**TL;DR.** Anthropic's **university-wide program** that packages Claude for students, faculty, and administrators while aiming to "maintain academic integrity" as institutions adopt AI [^src1]. Its product centerpiece is a **learning mode** that "works like a tutor — it asks the questions that help you find the answers yourself" rather than handing over answers [^src1]. This is the education-domain counterpart to the applied [Claude for Finance](/ai-engineering/claude-for-finance.md) workflow, and the program is distinct from the **Education subscription tier** tracked on [Claude Plans & Pricing](/ai-engineering/claude-plans.md). Source is Anthropic's own `claude.com/solutions/education` marketing page (collected in English, German, French, and Korean), so claims are positioning, not independent evaluation [^src1].
 
 ## Anthropic's stated commitments
 
@@ -52,7 +52,7 @@ The learning mode is positioned as "a thinking partner — not answer machine," 
 - Focuses on principles instead of solutions.
 - Provides templates for research, study guides, and more.
 
-This mirrors the broader corpus theme that capability gains come from structuring *how* the model engages, not just *what* it outputs — compare the plan-first, elicitation-led discipline in [[ai-engineering/prompt-engineering|Prompt Engineering]] and the clarifying-questions design behind Claude Code's AskUserQuestion tool ([[ai-engineering/claude-code|Claude Code]]).
+This mirrors the broader corpus theme that capability gains come from structuring *how* the model engages, not just *what* it outputs — compare the plan-first, elicitation-led discipline in [Prompt Engineering](/ai-engineering/prompt-engineering.md) and the clarifying-questions design behind Claude Code's AskUserQuestion tool ([Claude Code](/ai-engineering/claude-code.md)).
 
 ## The three audiences
 
@@ -68,16 +68,16 @@ The "comprehensive university-wide plan" splits across roles [^src1]:
 
 Two existing Claude products are repositioned for the education context [^src1]:
 
-- **Claude Code for students** — pitched as "where students learn to code," working "like a scaled apprenticeship, pairing with students in development environments to show how professional programmers think through real problems" across disciplines [^src1]. See [[ai-engineering/claude-code|Claude Code]].
-- **Claude API for research and tools** — faculty use the [[ai-engineering/claude-api|Claude API]] to "accelerate research — analyzing datasets, exploring theoretical questions, and processing volumes of text," and to build "learning tools that ask better questions and create adaptive assignments" [^src1].
+- **Claude Code for students** — pitched as "where students learn to code," working "like a scaled apprenticeship, pairing with students in development environments to show how professional programmers think through real problems" across disciplines [^src1]. See [Claude Code](/ai-engineering/claude-code.md).
+- **Claude API for research and tools** — faculty use the [Claude API](/ai-engineering/claude-api.md) to "accelerate research — analyzing datasets, exploring theoretical questions, and processing volumes of text," and to build "learning tools that ask better questions and create adaptive assignments" [^src1].
 
 ## See also
 
-- [[ai-engineering/claude-plans|Claude Plans & Pricing]] — the Education subscription *tier* (distinct from this program)
-- [[ai-engineering/claude-for-finance|Claude for Finance]] — the finance-domain applied workflow (sibling vertical)
-- [[ai-engineering/claude-code|Claude Code]] · [[ai-engineering/claude-api|Claude API]] — the products repositioned for students and faculty
-- [[ai-engineering/anthropic|Anthropic]] — the lab behind the program
-- [[ai-engineering/README|AI Engineering hub]]
+- [Claude Plans & Pricing](/ai-engineering/claude-plans.md) — the Education subscription *tier* (distinct from this program)
+- [Claude for Finance](/ai-engineering/claude-for-finance.md) — the finance-domain applied workflow (sibling vertical)
+- [Claude Code](/ai-engineering/claude-code.md) · [Claude API](/ai-engineering/claude-api.md) — the products repositioned for students and faculty
+- [Anthropic](/ai-engineering/anthropic.md) — the lab behind the program
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

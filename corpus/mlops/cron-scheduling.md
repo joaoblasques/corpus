@@ -113,7 +113,7 @@ These are unrelated to a user's crontab and run as root (or as the user specifie
 0 9 * * 1-5  codex exec "review all PRs in myrepo and commit a status.md"
 ```
 
-For the `codex exec` pattern, see [[mlops/tmux|tmux]] and [[mlops/vps-for-agents|VPS for Agents]].
+For the `codex exec` pattern, see [tmux](/mlops/tmux.md) and [VPS for Agents](/mlops/vps-for-agents.md).
 
 ## Cron vs. alternatives
 
@@ -125,7 +125,7 @@ For the `codex exec` pattern, see [[mlops/tmux|tmux]] and [[mlops/vps-for-agents
 | **Kubernetes CronJob** | Container-based periodic tasks | Medium |
 | **Task Scheduler (Windows)** | Event-triggered or scheduled tasks | Low–Medium |
 
-Per the *Designing ML Systems* framework: cron handles the simplest tier (§10); schedulers handle condition/dependency aware runs; orchestrators handle resource and compute management [See [[mlops/designing-ml-systems|Designing ML Systems]] §10].
+Per the *Designing ML Systems* framework: cron handles the simplest tier (§10); schedulers handle condition/dependency aware runs; orchestrators handle resource and compute management [See [Designing ML Systems](/mlops/designing-ml-systems.md) §10].
 
 ## Windows Task Scheduler (reference)
 
@@ -138,11 +138,11 @@ APIs: Task Scheduler 2.0 (COM objects for C++ and scripting, Vista+) and 1.0 (C+
 
 ## See also
 
-- [[mlops/tmux|tmux]] — `codex exec` + cron as the unattended agent automation pattern
-- [[mlops/vps-for-agents|VPS for Agents]] — the VPS as the host for cron-based agent scheduling
-- [[mlops/linux-commands|Linux Commands]] — shell fundamentals that underpin cron scripts
-- [[mlops/designing-ml-systems|Designing ML Systems]] — Chip Huyen's placement of cron in the MLOps infrastructure stack (Ch 10)
-- [[mlops/README|MLOps hub]]
+- [tmux](/mlops/tmux.md) — `codex exec` + cron as the unattended agent automation pattern
+- [VPS for Agents](/mlops/vps-for-agents.md) — the VPS as the host for cron-based agent scheduling
+- [Linux Commands](/mlops/linux-commands.md) — shell fundamentals that underpin cron scripts
+- [Designing ML Systems](/mlops/designing-ml-systems.md) — Chip Huyen's placement of cron in the MLOps infrastructure stack (Ch 10)
+- [MLOps hub](/mlops/README.md)
 
 ---
 

@@ -46,7 +46,7 @@ If meaning is what we agree something is, **semantics is how we describe and pre
 - **Controlled vocabulary** — a pre-defined authorised list of terms ensuring consistent labelling; controls synonyms (e.g. "Data Engineer" maps to "ETL Developer", "Data Platform Engineer") and disambiguates polysemous terms ("platform" → "cloud platform" / "data platform").
 - **Thesaurus** — an advanced controlled vocabulary that also defines *relationships*: hierarchical broad/narrow (Data → Data Modeling), related-term (Data Modeling ↔ Data Governance), and equivalence (MLOps ↔ ML Operations).
 
-This disambiguation gets harder moving from SQL keys (`client_id` vs `customer_id`) to **natural-language prompts** ("top clients" vs "top customers for region X") — exactly where an LLM needs correctly-mapped semantics [^src1]. See [[data-engineering/semantic-layer|Semantic Layer]] for the operational layer.
+This disambiguation gets harder moving from SQL keys (`client_id` vs `customer_id`) to **natural-language prompts** ("top clients" vs "top customers for region X") — exactly where an LLM needs correctly-mapped semantics [^src1]. See [Semantic Layer](/data-engineering/semantic-layer.md) for the operational layer.
 
 ## Taxonomies — organising into hierarchies
 
@@ -66,11 +66,11 @@ Semantics also clarifies *individual attributes* through rich **metadata** that 
 
 ## Why this matters now (AI)
 
-With AI as both consumer and generator of data, semantics is "no longer a second-class citizen" — the difference between an agent that **reasons** and one that **guesses** [^src1]. This is the modeling foundation beneath the [[data-engineering/semantic-layer|semantic layer]] and [[data-engineering/progressive-disclosure-analytics-agents|analytics-agent]] reliability.
+With AI as both consumer and generator of data, semantics is "no longer a second-class citizen" — the difference between an agent that **reasons** and one that **guesses** [^src1]. This is the modeling foundation beneath the [semantic layer](/data-engineering/semantic-layer.md) and [analytics-agent](/data-engineering/progressive-disclosure-analytics-agents.md) reliability.
 
 ## The master-data layer as the locus of agreed meaning
 
-The book's "shared meaning" abstraction has a concrete operational home in practice. Zach Wilson describes a **master-data layer** built by joining, deduping, and **conforming** production snapshots into one consistent definition — "this is the layer where truth is... where trust is" [^src2]. This is the semantic-agreement problem in physical form: without it, five analysts compute the same metric five subtly-different ways on raw snapshots [^src2]. Capturing shared meaning (this page) and materializing it as conformed master data (operational) are two faces of the same discipline. See [[data-engineering/dimensional-modeling|Dimensional Modeling]] for the OLTP→master-data→OLAP continuum, and [[data-engineering/data-quality|Data Quality]] for conformance enforcement.
+The book's "shared meaning" abstraction has a concrete operational home in practice. Zach Wilson describes a **master-data layer** built by joining, deduping, and **conforming** production snapshots into one consistent definition — "this is the layer where truth is... where trust is" [^src2]. This is the semantic-agreement problem in physical form: without it, five analysts compute the same metric five subtly-different ways on raw snapshots [^src2]. Capturing shared meaning (this page) and materializing it as conformed master data (operational) are two faces of the same discipline. See [Dimensional Modeling](/data-engineering/dimensional-modeling.md) for the OLTP→master-data→OLAP continuum, and [Data Quality](/data-engineering/data-quality.md) for conformance enforcement.
 
 ## Theory vs reality: the organizational dimension
 
@@ -82,7 +82,7 @@ Capturing meaning is the *theory*; a separate draft chapter from the same book s
 - **Compromises happen.** A perfect textbook model that takes years loses to delivering value quickly under real time/budget constraints. What matters is value for the situation at hand, not textbook fidelity.
 - **Don't fixate on tools and technology.** The goal is a *shared understanding* of the data; overly technical diagrams distract non-technical people. "Engaging and thoughtful conversations are more critical than diagrams — diagrams are the *result* of those conversations, not the reason to have them."
 
-The takeaway: data modeling demands **situational and social awareness**, not only technical approaches — the same "shared meaning across a group" problem this page frames semantically, viewed through organizational dynamics [^src3]. See [[productivity/working-with-stakeholders|Working with Stakeholders]] and [[data-engineering/requirements-gathering|Requirements Gathering]] for the practitioner-and-sales side.
+The takeaway: data modeling demands **situational and social awareness**, not only technical approaches — the same "shared meaning across a group" problem this page frames semantically, viewed through organizational dynamics [^src3]. See [Working with Stakeholders](/productivity/working-with-stakeholders.md) and [Requirements Gathering](/data-engineering/requirements-gathering.md) for the practitioner-and-sales side.
 
 ## The 2026 crisis: survey data
 
@@ -119,17 +119,17 @@ Joe Reis's 2026 survey data reframes the modeling failure as organizational rath
 
 The implication: better tooling (dbt v2, AI-assisted schema design) addresses the 4.8%, while the 95.2% is a management and organization design problem. Teams that jump to new tools without solving the ownership and requirements problem get faster data modeling failure, not better data modeling [^src6].
 
-See also [[data-engineering/vibe-engineering|Vibe Engineering]] for the related problem of building data systems without theoretical grounding.
+See also [Vibe Engineering](/data-engineering/vibe-engineering.md) for the related problem of building data systems without theoretical grounding.
 
 ## Related
 
-- [[data-engineering/requirements-gathering|Requirements Gathering]] — the practitioner/sales/servant work of pulling requirements out of stakeholders
-- [[data-engineering/semantic-layer|Semantic Layer]] — the operational layer applying these foundations to AI
-- [[data-engineering/dimensional-modeling|Dimensional Modeling]] — master-data layer; consumer-driven modeling
-- [[data-engineering/dimensional-modeling|Dimensional Modeling]] — structural modeling (Kimball)
-- [[data-engineering/data-quality|Data Quality]] — taxonomies as governance/constraint enforcement
-- [[ai-engineering/rag|RAG]] — knowledge graphs / ontologies as retrieval substrate (ai-engineering)
-- [[data-engineering/README|Data Engineering hub]]
+- [Requirements Gathering](/data-engineering/requirements-gathering.md) — the practitioner/sales/servant work of pulling requirements out of stakeholders
+- [Semantic Layer](/data-engineering/semantic-layer.md) — the operational layer applying these foundations to AI
+- [Dimensional Modeling](/data-engineering/dimensional-modeling.md) — master-data layer; consumer-driven modeling
+- [Dimensional Modeling](/data-engineering/dimensional-modeling.md) — structural modeling (Kimball)
+- [Data Quality](/data-engineering/data-quality.md) — taxonomies as governance/constraint enforcement
+- [RAG](/ai-engineering/rag.md) — knowledge graphs / ontologies as retrieval substrate (ai-engineering)
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

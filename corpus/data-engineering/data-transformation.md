@@ -22,7 +22,7 @@ updated: 2026-06-23
 
 # Data Transformation (the "T" in ETL/ELT)
 
-**TL;DR.** The transform step is where raw data gets standardized, integrated, and turned into something accessible to analysts and the business [^src1]. Analytics and data engineers spend much of their time here, whether standardizing inputs or layering in business logic [^src1]. The "T" exists to solve four core problems — **business logic, standardization, data integration, and pre-aggregation** [^src1] — historically handled by hand-built stored procs / SSIS / cron and now by transform-focused tools like [[data-engineering/dbt|dbt]] (also SQLMesh and [[data-engineering/dataform|Dataform]]) [^src1]. The transform layer is itself a place messiness creeps back in (3000-line queries, dependency sprawl, unclear ownership), so it deserves real structure — typically a raw/stage/prod or [[data-engineering/medallion-architecture|bronze/silver/gold]] layering [^src1].
+**TL;DR.** The transform step is where raw data gets standardized, integrated, and turned into something accessible to analysts and the business [^src1]. Analytics and data engineers spend much of their time here, whether standardizing inputs or layering in business logic [^src1]. The "T" exists to solve four core problems — **business logic, standardization, data integration, and pre-aggregation** [^src1] — historically handled by hand-built stored procs / SSIS / cron and now by transform-focused tools like [dbt](/data-engineering/dbt.md) (also SQLMesh and [Dataform](/data-engineering/dataform.md)) [^src1]. The transform layer is itself a place messiness creeps back in (3000-line queries, dependency sprawl, unclear ownership), so it deserves real structure — typically a raw/stage/prod or [bronze/silver/gold](/data-engineering/medallion-architecture.md) layering [^src1].
 
 ## What "transform" actually solves
 
@@ -45,7 +45,7 @@ This works, but with limitations depending on how it's set up. A recurring pain 
 
 ## The rise of transform-focused tools
 
-[[data-engineering/dbt|dbt]] wasn't the first transform tool — there were earlier drag-and-drop-plus-SQL platforms — but many companies adopted it, especially at startups during the **MDS (Modern Data Stack) boom of the early 2020s** [^src1]. It stood out because it embraced **version control, modular SQL, testing, and documentation**, and made SQL-based workflows accessible to a broader set of users [^src1]. It is not the only option: **SQLMesh** and [[data-engineering/dataform|Dataform]] are alternative SQL-based transform tools [^src1].
+[dbt](/data-engineering/dbt.md) wasn't the first transform tool — there were earlier drag-and-drop-plus-SQL platforms — but many companies adopted it, especially at startups during the **MDS (Modern Data Stack) boom of the early 2020s** [^src1]. It stood out because it embraced **version control, modular SQL, testing, and documentation**, and made SQL-based workflows accessible to a broader set of users [^src1]. It is not the only option: **SQLMesh** and [Dataform](/data-engineering/dataform.md) are alternative SQL-based transform tools [^src1].
 
 ## Common transform types (with SQL)
 
@@ -106,32 +106,32 @@ FROM recent_spending;
 
 Even with tooling like dbt, the "T" layer can become as messy as the raw data it was meant to clean [^src1]:
 
-- **3000-line queries.** Transform models grow organically — someone needs a metric, tacks on another CTE or join, repeat, and you get a *"3000-line SQL file, 17 CTEs deep, with a bunch of CASE WHEN logic buried in subqueries"* that technically works but nobody wants to touch [^src1]. The choice of *how* to structure those intermediate steps (CTE vs view vs temp table vs materialized view) is the subject of [[data-engineering/sql-intermediate-results|Storing Intermediate Results in SQL]].
+- **3000-line queries.** Transform models grow organically — someone needs a metric, tacks on another CTE or join, repeat, and you get a *"3000-line SQL file, 17 CTEs deep, with a bunch of CASE WHEN logic buried in subqueries"* that technically works but nobody wants to touch [^src1]. The choice of *how* to structure those intermediate steps (CTE vs view vs temp table vs materialized view) is the subject of [Storing Intermediate Results in SQL](/data-engineering/sql-intermediate-results.md).
 - **Dependency sprawl.** The more models depend on each other, the more fragile things get; small upstream changes ripple downstream and break dashboards in non-obvious ways. Without clear lineage/dependency mapping you get a fragile system [^src1].
 - **Lack of ownership.** In a "move fast" data world, engineers, analytics engineers, and even analysts all build transforms — so who owns the definitions, cleans up deprecated models, gets final say on business logic? Without clear ownership, speed eventually bites [^src1].
 
 ## Organizing the transform layer
 
-To avoid chaos the transform logic needs structure. The author's original layering was **raw / stage / prod** ("prod" being a poor name if you also have dev/prod deployment environments) [^src1]. Two later approaches co-opted and renamed those same layers — what you encounter through [[data-engineering/dbt|dbt]] projects or the medallion architecture [^src1]:
+To avoid chaos the transform logic needs structure. The author's original layering was **raw / stage / prod** ("prod" being a poor name if you also have dev/prod deployment environments) [^src1]. Two later approaches co-opted and renamed those same layers — what you encounter through [dbt](/data-engineering/dbt.md) projects or the medallion architecture [^src1]:
 
-- **Medallion** (Databricks-popularized) maps onto the same long-standing three-layer pattern: **bronze** = raw / as-is, **silver** = standardized/enriched (an enterprise view enabling self-service analytics/ML), **gold** = business-level aggregates/consumption-ready tables for dashboards and KPIs [^src1]. See [[data-engineering/medallion-architecture|Medallion Architecture]] for why these are lifecycle stages, not a data model.
+- **Medallion** (Databricks-popularized) maps onto the same long-standing three-layer pattern: **bronze** = raw / as-is, **silver** = standardized/enriched (an enterprise view enabling self-service analytics/ML), **gold** = business-level aggregates/consumption-ready tables for dashboards and KPIs [^src1]. See [Medallion Architecture](/data-engineering/medallion-architecture.md) for why these are lifecycle stages, not a data model.
 
 ## Other considerations
 
-- **Data quality.** Each transform/SQL script is another opportunity to introduce errors, so unit tests and DQ checks *"aren't just nice to have, they're essential for catching issues before they hit production"* [^src1]. See [[data-engineering/data-quality|Data Quality]].
+- **Data quality.** Each transform/SQL script is another opportunity to introduce errors, so unit tests and DQ checks *"aren't just nice to have, they're essential for catching issues before they hit production"* [^src1]. See [Data Quality](/data-engineering/data-quality.md).
 - **Ownership boundaries.** Tools like dbt broadened who can build platform layers — great for speed and collaboration, but it blurs where ownership of the core warehouse ends and use-case-specific layers begin [^src1].
 - **Developer experience.** How safely can you develop and test changes? Pushing straight to production with no staging or review may be fine solo but is "a recipe for broken pipelines" in a shared, multi-dependency environment [^src1].
 
 ## See also
 
-- [[data-engineering/dbt|dbt]] — the dominant transform-focused tool (modular SQL, version control, testing)
-- [[data-engineering/dataform|Dataform]] — BigQuery-native SQL transform alternative (also SQLMesh)
-- [[data-engineering/medallion-architecture|Medallion Architecture]] — bronze/silver/gold layering of the transform layer
-- [[data-engineering/pipeline-layers|Pipeline Layers]] — staging → warehouse → marts separation pattern
-- [[data-engineering/data-quality|Data Quality]] — tests and DQ checks at the transform layer
-- [[data-engineering/sql-intermediate-results|Storing Intermediate Results in SQL]] — how to structure transform steps (CTE/view/temp table/materialized view) to avoid the 3000-line-query trap
-- [[data-engineering/sql-window-functions|SQL Window Functions]] — a core SQL technique used inside transform models (ranking, running aggregates, period-over-period)
-- [[data-engineering/etl-pipeline|ETL Pipeline]] — where transform sits in ETL vs ELT
+- [dbt](/data-engineering/dbt.md) — the dominant transform-focused tool (modular SQL, version control, testing)
+- [Dataform](/data-engineering/dataform.md) — BigQuery-native SQL transform alternative (also SQLMesh)
+- [Medallion Architecture](/data-engineering/medallion-architecture.md) — bronze/silver/gold layering of the transform layer
+- [Pipeline Layers](/data-engineering/pipeline-layers.md) — staging → warehouse → marts separation pattern
+- [Data Quality](/data-engineering/data-quality.md) — tests and DQ checks at the transform layer
+- [Storing Intermediate Results in SQL](/data-engineering/sql-intermediate-results.md) — how to structure transform steps (CTE/view/temp table/materialized view) to avoid the 3000-line-query trap
+- [SQL Window Functions](/data-engineering/sql-window-functions.md) — a core SQL technique used inside transform models (ranking, running aggregates, period-over-period)
+- [ETL Pipeline](/data-engineering/etl-pipeline.md) — where transform sits in ETL vs ELT
 
 ---
 

@@ -58,7 +58,7 @@ updated: 2026-06-28
 
 # Claude API
 
-**TL;DR.** The Claude API is Anthropic's REST API for the Claude models, with an official Python SDK (`anthropic`). The fastest path: install `anthropic`, set `ANTHROPIC_API_KEY`, and call `client.messages.create()` — a working response in a handful of lines [^src1]. The package "gets you to a working response in a handful of lines" without wiring up heavier frameworks [^src1]. Billed by token (input + output); responses are non-deterministic [^src1]. See [[ai-engineering/anthropic|Anthropic]] for model ids and [[ai-engineering/claude-code|Claude Code]] for the agent CLI.
+**TL;DR.** The Claude API is Anthropic's REST API for the Claude models, with an official Python SDK (`anthropic`). The fastest path: install `anthropic`, set `ANTHROPIC_API_KEY`, and call `client.messages.create()` — a working response in a handful of lines [^src1]. The package "gets you to a working response in a handful of lines" without wiring up heavier frameworks [^src1]. Billed by token (input + output); responses are non-deterministic [^src1]. See [Anthropic](/ai-engineering/anthropic.md) for model ids and [Claude Code](/ai-engineering/claude-code.md) for the agent CLI.
 
 ## Setup
 
@@ -113,7 +113,7 @@ response = client.messages.parse(..., output_format=FunctionDescription)
 result = response.parsed_output  # a validated model instance
 ```
 
-This returns a typed, validated object with attribute access; if Claude's response doesn't match, Pydantic raises before downstream code sees it [^src1]. Use the handwritten schema for simple scripts with no extra dependencies; use Pydantic + `parse()` for production and type safety [^src1]. See [[ai-engineering/tool-calling|Tool Calling]] for the related `tool_use` path to structured output.
+This returns a typed, validated object with attribute access; if Claude's response doesn't match, Pydantic raises before downstream code sees it [^src1]. Use the handwritten schema for simple scripts with no extra dependencies; use Pydantic + `parse()` for production and type safety [^src1]. See [Tool Calling](/ai-engineering/tool-calling.md) for the related `tool_use` path to structured output.
 
 ## Common errors & costs
 
@@ -174,7 +174,7 @@ The advisor must be at least as capable as the executor; invalid pairs return 40
 - Sonnet + Opus advisor: +2.7 pp on SWE-bench Multilingual vs Sonnet alone; 11.9% cost reduction per task
 - Haiku + Opus advisor on BrowseComp: 41.2% vs Haiku solo 19.7% (more than double); 85% cheaper than Sonnet solo
 
-See [[ai-engineering/optimizing-claude|Optimizing a Claude Setup]] §7 for the full advisor-strategy discussion.
+See [Optimizing a Claude Setup](/ai-engineering/optimizing-claude.md) §7 for the full advisor-strategy discussion.
 
 ## Enterprise Analytics API
 
@@ -216,10 +216,10 @@ Context Editing sits alongside Citations, File API, Skills, Memory, MCP Connecto
 
 ## See also
 
-- [[ai-engineering/anthropic|Anthropic]] — model lineup and ids
-- [[ai-engineering/claude-code|Claude Code]] — the agent CLI built on the same models
-- [[ai-engineering/claude-managed-agents|Claude Managed Agents]] — available via the Claude Platform on AWS
-- [[ai-engineering/tool-calling|Tool Calling]], [[ai-engineering/llm|LLM]]
+- [Anthropic](/ai-engineering/anthropic.md) — model lineup and ids
+- [Claude Code](/ai-engineering/claude-code.md) — the agent CLI built on the same models
+- [Claude Managed Agents](/ai-engineering/claude-managed-agents.md) — available via the Claude Platform on AWS
+- [Tool Calling](/ai-engineering/tool-calling.md), [LLM](/ai-engineering/llm.md)
 
 [^src1]: [How to Use the Claude API in Python (Real Python)](../../raw/web/how-to-use-the-claude-api-in-python-real-python.md)
 [^src2]: [How to Use the Claude API in Python (email)](../../raw/email/email-2026-05-20-how-to-use-the-claude-api-in-python.md)

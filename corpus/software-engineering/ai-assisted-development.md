@@ -57,7 +57,7 @@ Software engineering "has shifted from writing code to reviewing it" — the Pra
 
 ## AI rockstars and the maintainability cost
 
-"Rockstar" developers leave behind overly complex, idiosyncratic codebases that prioritize individual cleverness over team maintainability — and "AI tools usually make this problematic pattern worse by rapidly producing massive amounts of fragmented code" without a cohesive architectural vision [^src3]. The counter-discipline is the same simplicity principle from [[software-engineering/software-design-principles|software design principles]]: not building unnecessary features avoids tech debt, a risk amplified now that AI makes code so cheap to generate [^src2].
+"Rockstar" developers leave behind overly complex, idiosyncratic codebases that prioritize individual cleverness over team maintainability — and "AI tools usually make this problematic pattern worse by rapidly producing massive amounts of fragmented code" without a cohesive architectural vision [^src3]. The counter-discipline is the same simplicity principle from [software design principles](/software-engineering/software-design-principles.md): not building unnecessary features avoids tech debt, a risk amplified now that AI makes code so cheap to generate [^src2].
 
 ## Deterministic guardrails around probabilistic agents
 
@@ -67,7 +67,7 @@ The most reliable AI-tooling pattern across sources is **pairing a probabilistic
 - **Open Code Review** (Alibaba, open-sourced after two years of internal use serving tens of thousands of developers) — a CLI that reads Git diffs and produces line-level review comments. Its core philosophy: "combine deterministic engineering with an agent, each handling what it does best" [^src5]. Deterministic logic handles file selection, bundling related files, and rule matching (the steps that must not go wrong); the agent handles dynamic decisions and context retrieval [^src5].
 - General-purpose review agents (e.g. Claude Code with Skills) suffer **incomplete coverage** (cutting corners on large changesets), **position drift** (line numbers off target), and **unstable quality** — "a purely language-driven architecture lacks hard constraints on the review process" [^src5].
 
-This mirrors the architectural argument that AI risk is bounded by the system, not the model — see [[software-engineering/ai-risk-architecture|AI Risk Architecture]].
+This mirrors the architectural argument that AI risk is bounded by the system, not the model — see [AI Risk Architecture](/software-engineering/ai-risk-architecture.md).
 
 ## AI Studio + Firebase: vibe coding and loss of control
 
@@ -82,16 +82,16 @@ A live walkthrough of Google AI Studio + Firebase integration reveals structural
 3. **Prompt injection**: AI-generated cloud function injected raw user story text directly into a system prompt — "if the user tries a prompt injection, they can just try to prompt inject my app right here" [^src6].
 4. **Loss of control framing**: "when we're starting to use these AI tools, it's more like it we lose a bit of control. It's kind of like hiring an employee to write code for you. You don't get control over the code." [^src6]
 
-Mitigation path applied: move AI matching logic to Firebase Cloud Functions (serverless, secrets safe), clone from GitHub, deploy independently of AI Studio [^src6]. Related: [[software-engineering/ai-risk-architecture|AI Risk Architecture]] — output risk vs. data risk vs. action risk.
+Mitigation path applied: move AI matching logic to Firebase Cloud Functions (serverless, secrets safe), clone from GitHub, deploy independently of AI Studio [^src6]. Related: [AI Risk Architecture](/software-engineering/ai-risk-architecture.md) — output risk vs. data risk vs. action risk.
 
 ## See also
 
-- [[ai-engineering/agentic-coding|Agentic Coding]] (ai-engineering) — the agent-orchestration counterpart: coding-agent harness, skills, and workflow mechanics
-- [[software-engineering/ai-risk-architecture|AI Risk Architecture]] — pairing probabilistic components with deterministic checks at the system level
-- [[software-engineering/software-design-principles|Software Design Principles]] — deep modules, simplicity, and testability that AI coding stresses
-- [[software-engineering/engineering-craft|Engineering Craft]] — the durable human skills (resourcefulness, persistence) under AI
-- [[software-engineering/insforge|InsForge]] — agent-operated backend platform (DB/auth/storage/compute via MCP or CLI)
-- [[software-engineering/README|Software Engineering hub]]
+- [Agentic Coding](/ai-engineering/agentic-coding.md) (ai-engineering) — the agent-orchestration counterpart: coding-agent harness, skills, and workflow mechanics
+- [AI Risk Architecture](/software-engineering/ai-risk-architecture.md) — pairing probabilistic components with deterministic checks at the system level
+- [Software Design Principles](/software-engineering/software-design-principles.md) — deep modules, simplicity, and testability that AI coding stresses
+- [Engineering Craft](/software-engineering/engineering-craft.md) — the durable human skills (resourcefulness, persistence) under AI
+- [InsForge](/software-engineering/insforge.md) — agent-operated backend platform (DB/auth/storage/compute via MCP or CLI)
+- [Software Engineering hub](/software-engineering/README.md)
 
 ---
 

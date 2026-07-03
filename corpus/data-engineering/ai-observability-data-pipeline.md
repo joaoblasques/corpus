@@ -75,10 +75,10 @@ The source's thesis: this part of AI projects will fall on Data Engineers as cor
 
 ## See also
 
-- [[data-engineering/pipeline-layers|Pipeline Layers]] — the staged-pipeline mental model this maps onto
-- [[data-engineering/dbt|dbt]] — the data-quality-test analogy (online evals ≈ dbt tests)
-- [[data-engineering/data-engineer-role|The Data Engineer Role]] — DE value extending into the AI era
-- [[data-engineering/README|Data Engineering hub]]
+- [Pipeline Layers](/data-engineering/pipeline-layers.md) — the staged-pipeline mental model this maps onto
+- [dbt](/data-engineering/dbt.md) — the data-quality-test analogy (online evals ≈ dbt tests)
+- [The Data Engineer Role](/data-engineering/data-engineer-role.md) — DE value extending into the AI era
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

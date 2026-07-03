@@ -121,7 +121,7 @@ Solo operator potential: five, sometimes six or seven figure+ ARR, with the most
 A separate "AI side-hustle" source proposes a sixth model the ranked list above omits: a **paid community / membership business**, where the product is access to a community rather than software or a service [^src2]. The mechanics are a two-stage funnel:
 
 1. **Free community as top-of-funnel.** Build a free Facebook *group* around any niche (hobby, money, health, tech). The argument for Facebook is contrarian: it has "almost no competition" for groups because creators chase TikTok/Instagram/YouTube, and Facebook's algorithm surfaces the group to people searching that niche once you post consistently [^src2].
-2. **Paid community as monetization.** Migrate trusting members from the free group to a paid [[ai-business/boring-expert-businesses|Skool]]/membership community (courses, live coaching calls, weekly value). The free tier's job is trust: "people actually see who you are... the purpose is to make people trust you" before they pay a monthly fee [^src2].
+2. **Paid community as monetization.** Migrate trusting members from the free group to a paid [Skool](/ai-business/boring-expert-businesses.md)/membership community (courses, live coaching calls, weekly value). The free tier's job is trust: "people actually see who you are... the purpose is to make people trust you" before they pay a monthly fee [^src2].
 
 **Cited examples** (independently unverified, single-source) [^src2]:
 - A chess coach: ~50 members × $99/mo ≈ $4,000/mo teaching only "improve your chess."
@@ -133,9 +133,9 @@ This maps onto the page's spectrum as a **distribution-first, low-margin-to-star
 
 ## Relationship to other pages
 
-- [[ai-business/monetizing-code|Monetizing Code]] — positioning, offer clarity, and "sell a result not code" apply across all five tiers; the $100M agency playbook maps to the #2/3 tier.
-- [[ai-business/ai-consulting-playbook|AI Consulting Playbook]] — the two-call discovery motion fits the #5 and #2 tier operating models.
-- [[ai-business/boring-expert-businesses|Boring Expert Businesses]] — the "boring, compliance-adjacent, expert-moat" thesis maps well to #1 and #2.
+- [Monetizing Code](/ai-business/monetizing-code.md) — positioning, offer clarity, and "sell a result not code" apply across all five tiers; the $100M agency playbook maps to the #2/3 tier.
+- [AI Consulting Playbook](/ai-business/ai-consulting-playbook.md) — the two-call discovery motion fits the #5 and #2 tier operating models.
+- [Boring Expert Businesses](/ai-business/boring-expert-businesses.md) — the "boring, compliance-adjacent, expert-moat" thesis maps well to #1 and #2.
 
 ## Gotchas
 

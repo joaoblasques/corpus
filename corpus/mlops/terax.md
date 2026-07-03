@@ -66,10 +66,10 @@ updated: 2026-06-25
 
 ## See also
 
-- [[mlops/terminal-and-shell|Terminal & Shell]] — alternative terminals (Alacritty, WezTerm, Ghostty)
-- [[mlops/cli-tools|CLI Tools]] — tmux (for multi-agent via terminal multiplexing)
-- [[mlops/vps-for-agents|VPS for Agents]] — running agents remotely rather than in a local terminal
-- [[mlops/README|MLOps hub]]
+- [Terminal & Shell](/mlops/terminal-and-shell.md) — alternative terminals (Alacritty, WezTerm, Ghostty)
+- [CLI Tools](/mlops/cli-tools.md) — tmux (for multi-agent via terminal multiplexing)
+- [VPS for Agents](/mlops/vps-for-agents.md) — running agents remotely rather than in a local terminal
+- [MLOps hub](/mlops/README.md)
 
 ---
 

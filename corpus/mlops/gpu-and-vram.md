@@ -38,7 +38,7 @@ PyTorch acceleration requires matching hardware [^src1]:
 | MPS | Apple Silicon | absent on Intel Macs |
 | CPU | always available | usable for dev + small experiments, not GPU-bound training |
 
-On an Intel Mac, neither CUDA nor MPS is available, so all GPU work moves to the cloud — see [[mlops/cloud-gpu-providers|Cloud GPU Providers]] [^src1].
+On an Intel Mac, neither CUDA nor MPS is available, so all GPU work moves to the cloud — see [Cloud GPU Providers](/mlops/cloud-gpu-providers.md) [^src1].
 
 ## Timing gotcha
 
@@ -46,9 +46,9 @@ GPU ops are **asynchronous** — Python returns before the GPU finishes. Forgett
 
 ## See also
 
-- [[mlops/cloud-gpu-providers|Cloud GPU Providers]] — where to rent VRAM when local hardware can't
-- [[mlops/dev-environment-stack|Dev Environment Stack]] — GPU as the optional Layer-1 capability
-- [[mlops/README|MLOps hub]]
+- [Cloud GPU Providers](/mlops/cloud-gpu-providers.md) — where to rent VRAM when local hardware can't
+- [Dev Environment Stack](/mlops/dev-environment-stack.md) — GPU as the optional Layer-1 capability
+- [MLOps hub](/mlops/README.md)
 
 ---
 

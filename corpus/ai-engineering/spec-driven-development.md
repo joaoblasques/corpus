@@ -85,7 +85,7 @@ For a quick fix with a clear test, just prompt and move on.
 ## Related patterns
 
 - **Factory 2.0** (Factory AI, used by NVIDIA/Adobe/EY): extends the spec-driven idea into a "software factory" where Droids handle everything from bug-triage to shipping in a single loop; a Router picks the most efficient model per job. Engineers shift from writing code to building the systems that write it [^src1].
-- **Spec-driven development vs vibe-coding**: see [[ai-engineering/vibe-coding|Vibe Coding]] for the contrast; spec-driven development is the discipline vibe-coding opts out of.
+- **Spec-driven development vs vibe-coding**: see [Vibe Coding](/ai-engineering/vibe-coding.md) for the contrast; spec-driven development is the discipline vibe-coding opts out of.
 
 ## Website building as a spec-driven workflow (Charlie Hills 9-step)
 
@@ -157,12 +157,12 @@ A full end-to-end spec-to-agent pipeline [^src5]:
 
 ## See also
 
-- [[ai-engineering/agentic-coding|Agentic Coding]] — the coding-agent context this sits in
-- [[ai-engineering/compound-engineering|Compound Engineering]] — extends the spec-first plan stage with a learning-capture (compound) step that writes run learnings back to `AGENTS.md`
-- [[ai-engineering/claude-md-conventions|CLAUDE.md Conventions]] — the constitution as a CLAUDE.md file
-- [[ai-engineering/agent-evaluation|Agent Evaluation]] — validation step in the spec loop
-- [[ai-engineering/vibe-coding|Vibe Coding]] — the counter-pattern
-- [[ai-engineering/README|AI Engineering hub]]
+- [Agentic Coding](/ai-engineering/agentic-coding.md) — the coding-agent context this sits in
+- [Compound Engineering](/ai-engineering/compound-engineering.md) — extends the spec-first plan stage with a learning-capture (compound) step that writes run learnings back to `AGENTS.md`
+- [CLAUDE.md Conventions](/ai-engineering/claude-md-conventions.md) — the constitution as a CLAUDE.md file
+- [Agent Evaluation](/ai-engineering/agent-evaluation.md) — validation step in the spec loop
+- [Vibe Coding](/ai-engineering/vibe-coding.md) — the counter-pattern
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

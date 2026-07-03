@@ -33,7 +33,7 @@ updated: 2026-06-26
 
 ## Why it's worth designing well
 
-Updating pipeline infrastructure risks bringing down prod [^src2]. A good CI/CD flow lets changes flow seamlessly, multiplying delivery speed [^src1]. The reference uses **GitHub Actions** (free tier, easier than Jenkins; steps run on ephemeral/serverless VMs) with **[[mlops/terraform|Terraform]]** for the infrastructure-as-code (see [[mlops/infrastructure-as-code|Infrastructure as Code]], owned by mlops) [^src1].
+Updating pipeline infrastructure risks bringing down prod [^src2]. A good CI/CD flow lets changes flow seamlessly, multiplying delivery speed [^src1]. The reference uses **GitHub Actions** (free tier, easier than Jenkins; steps run on ephemeral/serverless VMs) with **[Terraform](/mlops/terraform.md)** for the infrastructure-as-code (see [Infrastructure as Code](/mlops/infrastructure-as-code.md), owned by mlops) [^src1].
 
 ## CI — make the PR ready for human review
 
@@ -69,7 +69,7 @@ PR opened ─► CI: fmt + validate + plan(dev) → comment on PR ─► human r
 
 ## The concrete toolchain (portfolio template)
 
-A reference data-project template wires this skeleton with a standard stack [^src3]: **GitHub-flow** branching, **GitHub Actions** for both CI and CD, and a **Makefile** of command aliases. CI runs **isort + black** (formatting), **flake8** (lint/style), **mypy** (type check), and **pytest** (tests) automatically on each pull request before merge to `main` [^src3]. CD then copies the merged code to an **EC2** Docker host, using repository secrets (`SERVER_SSH_KEY`, `REMOTE_HOST`, `REMOTE_USER`) whose values come from **Terraform outputs** — concretely tying the CD step to the IaC layer [^src3]. See [[data-engineering/de-portfolio-projects|DE Portfolio Projects]] for the full template.
+A reference data-project template wires this skeleton with a standard stack [^src3]: **GitHub-flow** branching, **GitHub Actions** for both CI and CD, and a **Makefile** of command aliases. CI runs **isort + black** (formatting), **flake8** (lint/style), **mypy** (type check), and **pytest** (tests) automatically on each pull request before merge to `main` [^src3]. CD then copies the merged code to an **EC2** Docker host, using repository secrets (`SERVER_SSH_KEY`, `REMOTE_HOST`, `REMOTE_USER`) whose values come from **Terraform outputs** — concretely tying the CD step to the IaC layer [^src3]. See [DE Portfolio Projects](/data-engineering/de-portfolio-projects.md) for the full template.
 
 ## Worked example: a dbt project (slim CI + manifest-state CD + OIDC)
 
@@ -77,9 +77,9 @@ The same skeleton, specialized for a dbt-on-Snowflake project, with state carrie
 
 - **CI (PR)** is *slim* — compute the **merge-base** vs `main`, and via `dbt ls --select state:modified state:new` lint/compile/run/test **only the changed models** in a throwaway `STAGING` schema (using `dbt clone` to reuse prod tables), then run downstream models to catch breakage. CI builds its own baseline manifest and never touches the prod state [^src4].
 - **CD (merge)** is *incremental* — `dbt build --select state:modified+ --defer --favor-state --state prod_state`, deferring unchanged refs to existing prod tables and uploading the new manifest for the next deploy. This is the dbt analogue of "plan only the delta," saving warehouse credits [^src4].
-- **Keyless auth** — instead of the human-gate model above, machine identity comes from **GitHub OIDC**: Actions assume an IAM role scoped (`StringLike` on the `sub` claim) to `repo:<owner>/<repo>:*`, getting 15-minute STS credentials with no static keys in GitHub Secrets [^src4]. This is the same principle as the [[mlops/environment-promotion|machine-identity]] discipline.
+- **Keyless auth** — instead of the human-gate model above, machine identity comes from **GitHub OIDC**: Actions assume an IAM role scoped (`StringLike` on the `sub` claim) to `repo:<owner>/<repo>:*`, getting 15-minute STS credentials with no static keys in GitHub Secrets [^src4]. This is the same principle as the [machine-identity](/mlops/environment-promotion.md) discipline.
 
-See [[data-engineering/sources/skytrax-dbt-transformation-project|Skytrax dbt transformation project]] for the full build and [[data-engineering/dbt|dbt]] for the manifest-state deploy mechanics.
+See [Skytrax dbt transformation project](/data-engineering/sources/skytrax-dbt-transformation-project.md) for the full build and [dbt](/data-engineering/dbt.md) for the manifest-state deploy mechanics.
 
 ## Takeaway
 
@@ -87,13 +87,13 @@ Map any intimidating 1000-line Terraform file or complex YAML workflow onto this
 
 ## Related
 
-- [[mlops/environment-promotion|Environment Promotion (dev → acc → prd)]] — the cross-source synthesis (ML + data-infra + DAB) this dev→gate→prod flow is one instance of
-- [[mlops/terraform|Terraform]] · [[mlops/infrastructure-as-code|Infrastructure as Code]] — the IaC layer (mlops)
-- [[data-engineering/data-engineering-best-practices|Data Engineering Best Practices]] — testing & version control
-- [[data-engineering/dbt|dbt]] — slim CI for dbt models (PR-specific schemas)
-- [[data-engineering/data-migration-at-scale|Data Migration at Scale]] — safe rollout/rollback patterns
-- [[data-engineering/de-portfolio-projects|DE Portfolio Projects]] — the template that ships this CI/CD toolchain
-- [[data-engineering/README|Data Engineering hub]]
+- [Environment Promotion (dev → acc → prd)](/mlops/environment-promotion.md) — the cross-source synthesis (ML + data-infra + DAB) this dev→gate→prod flow is one instance of
+- [Terraform](/mlops/terraform.md) · [Infrastructure as Code](/mlops/infrastructure-as-code.md) — the IaC layer (mlops)
+- [Data Engineering Best Practices](/data-engineering/data-engineering-best-practices.md) — testing & version control
+- [dbt](/data-engineering/dbt.md) — slim CI for dbt models (PR-specific schemas)
+- [Data Migration at Scale](/data-engineering/data-migration-at-scale.md) — safe rollout/rollback patterns
+- [DE Portfolio Projects](/data-engineering/de-portfolio-projects.md) — the template that ships this CI/CD toolchain
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

@@ -58,7 +58,7 @@ last_confirmed: 2026-06-25
 
 ## The foundational idea: disk vs memory
 
-A running script is a **process** using part of RAM. Reading from disk (CSV, etc.) means moving data from disk *into memory* to process it [^src1]. RAM is expensive, disk (HDD/SSD) cheap; often the data is larger than memory — that's when you reach for distributed systems like [[data-engineering/apache-spark|Spark]] or larger-than-memory engines like [[data-engineering/duckdb|DuckDB]] [^src1]. (See [[data-engineering/storage-fundamentals|Storage Fundamentals]] for the hierarchy.)
+A running script is a **process** using part of RAM. Reading from disk (CSV, etc.) means moving data from disk *into memory* to process it [^src1]. RAM is expensive, disk (HDD/SSD) cheap; often the data is larger than memory — that's when you reach for distributed systems like [Spark](/data-engineering/apache-spark.md) or larger-than-memory engines like [DuckDB](/data-engineering/duckdb.md) [^src1]. (See [Storage Fundamentals](/data-engineering/storage-fundamentals.md) for the hierarchy.)
 
 ## Python basics that matter
 
@@ -77,7 +77,7 @@ Python is the glue: **Extract** from sources, **Transform**, **Load** into desti
 | APIs | `requests` for HTTPS endpoints [^src1] |
 | Files | stdlib `csv`; libs for XML, xlsx, `parquet` [^src1] |
 | SFTP/FTP | `paramiko`, `ftplib` [^src1] |
-| Queues | `pykafka` etc. for [[data-engineering/kafka|Kafka]], Kinesis, Redpanda [^src1] |
+| Queues | `pykafka` etc. for [Kafka](/data-engineering/kafka.md), Kinesis, Redpanda [^src1] |
 
 ### Transform — in Python or push to the database
 
@@ -89,7 +89,7 @@ Key nuance: with Spark/Dask/Snowflake/BigQuery you *interact* via Python but the
 
 ### Data Quality — define and check expectations
 
-Libraries: **Great Expectations** (define/run checks across DuckDB/Spark/Snowflake) and **Cuallee** (lightweight, multi-engine) [^src1]. See [[data-engineering/data-quality|Data Quality]].
+Libraries: **Great Expectations** (define/run checks across DuckDB/Spark/Snowflake) and **Cuallee** (lightweight, multi-engine) [^src1]. See [Data Quality](/data-engineering/data-quality.md).
 
 ### Code Testing — ensure code does what it should
 
@@ -98,7 +98,7 @@ Run *before* deploy (distinct from runtime data-quality checks) [^src1]. stdlib 
 ### Scheduler & Orchestrator
 
 - **Scheduler** — runs pipelines at set times (loop: check for due tasks, run, sleep) [^src1].
-- **Orchestrator** — controls execution order/parallelism via a **DAG** (Directed Acyclic Graph): [[data-engineering/dbt|dbt core]] (orders SQL models), Airflow, Dagster [^src1]. See [[data-engineering/data-orchestration|Data Orchestration]].
+- **Orchestrator** — controls execution order/parallelism via a **DAG** (Directed Acyclic Graph): [dbt core](/data-engineering/dbt.md) (orders SQL models), Airflow, Dagster [^src1]. See [Data Orchestration](/data-engineering/data-orchestration.md).
 
 ## API extraction patterns in Python
 
@@ -209,7 +209,7 @@ with open(f"data_{datetime.now().strftime('%Y%m%d')}.json", "w") as f:
     json.dump(data, f)
 ```
 
-See [[data-engineering/data-observability|Data Observability]] for monitoring pipelines that consume API data (lag detection, flow interruption patterns apply directly to API extraction failure modes).
+See [Data Observability](/data-engineering/data-observability.md) for monitoring pipelines that consume API data (lag detection, flow interruption patterns apply directly to API extraction failure modes).
 
 ## Shell data download: curl and wget
 
@@ -354,19 +354,19 @@ echo "* * * * * python /path/to/create_model.py" | crontab
 
 `* * * * *` = run every minute. Use **https://crontab.guru/** to validate cron expressions [^src8]. The most frequent schedule is one minute. cron is native to macOS/Linux; Windows uses Task Scheduler as the equivalent.
 
-**When to graduate to a full orchestrator**: cron gives no dependency management, no retry logic, no UI — use [[data-engineering/data-orchestration|Airflow / Dagster / Prefect]] once pipelines have multi-step dependencies or need retries.
+**When to graduate to a full orchestrator**: cron gives no dependency management, no retry logic, no UI — use [Airflow / Dagster / Prefect](/data-engineering/data-orchestration.md) once pipelines have multi-step dependencies or need retries.
 
 ## Takeaway
 
-The library landscape is overwhelming, but the point is that **most DE tasks can be done with Python** — when faced with tool/vendor overload, find the Python library that fulfils the requirement [^src1]. Each concept ships with a hands-on workbook (`python_essentials_for_data_engineers`) runnable in GitHub Codespaces [^src1][^src3]. This reinforces the [[data-engineering/data-engineer-role|fundamentals-over-tools]] principle.
+The library landscape is overwhelming, but the point is that **most DE tasks can be done with Python** — when faced with tool/vendor overload, find the Python library that fulfils the requirement [^src1]. Each concept ships with a hands-on workbook (`python_essentials_for_data_engineers`) runnable in GitHub Codespaces [^src1][^src3]. This reinforces the [fundamentals-over-tools](/data-engineering/data-engineer-role.md) principle.
 
 ## Related
 
-- [[data-engineering/storage-fundamentals|Storage Fundamentals]] — disk vs memory in depth
-- [[data-engineering/data-quality|Data Quality]] · [[data-engineering/data-orchestration|Data Orchestration]]
-- [[data-engineering/dbt|dbt]] · [[data-engineering/apache-spark|Apache Spark]] · [[data-engineering/duckdb|DuckDB]]
-- [[data-engineering/de-portfolio-projects|DE Portfolio Projects]]
-- [[data-engineering/README|Data Engineering hub]]
+- [Storage Fundamentals](/data-engineering/storage-fundamentals.md) — disk vs memory in depth
+- [Data Quality](/data-engineering/data-quality.md) · [Data Orchestration](/data-engineering/data-orchestration.md)
+- [dbt](/data-engineering/dbt.md) · [Apache Spark](/data-engineering/apache-spark.md) · [DuckDB](/data-engineering/duckdb.md)
+- [DE Portfolio Projects](/data-engineering/de-portfolio-projects.md)
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

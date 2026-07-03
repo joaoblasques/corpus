@@ -49,8 +49,8 @@ Explicitly excludes timely topics (job market conditions, funding levels, emergi
 
 ## Relationship to corpus pages
 
-- [[software-engineering/engineering-craft|Engineering Craft]] — resourcefulness, curiosity, staying current; directly maps to Orosz's "owning your career" framing
-- [[software-engineering/ai-assisted-development|AI-Assisted Development]] — the shift under AI coding tools is referenced in the book as a timely topic covered in the newsletter
+- [Engineering Craft](/software-engineering/engineering-craft.md) — resourcefulness, curiosity, staying current; directly maps to Orosz's "owning your career" framing
+- [AI-Assisted Development](/software-engineering/ai-assisted-development.md) — the shift under AI coding tools is referenced in the book as a timely topic covered in the newsletter
 
 ---
 

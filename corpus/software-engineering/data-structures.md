@@ -60,10 +60,10 @@ updated: 2026-06-16
 
 ## See also
 
-- [[software-engineering/algorithms|Algorithms (Strategies, Not Tricks)]] — recursion, binary search, and DP/memoization that operate over these structures and trade in these complexity classes
-- [[software-engineering/software-design-principles|Software Design Principles]] — code-level design choices that interact with structure selection (e.g., encapsulation of data structure internals)
-- [[software-engineering/README|Software Architecture hub]]
+- [Algorithms (Strategies, Not Tricks)](/software-engineering/algorithms.md) — recursion, binary search, and DP/memoization that operate over these structures and trade in these complexity classes
+- [Software Design Principles](/software-engineering/software-design-principles.md) — code-level design choices that interact with structure selection (e.g., encapsulation of data structure internals)
+- [Software Architecture hub](/software-engineering/README.md)
 
 ---
 
-[^src1]: [[03_Resources/Study Notes/Data Structures and Big O Notation Explained|Data Structures and Big O Notation Explained]]
+[^src1]: [Data Structures and Big O Notation Explained](/03_Resources/Study Notes/Data Structures and Big O Notation Explained.md)

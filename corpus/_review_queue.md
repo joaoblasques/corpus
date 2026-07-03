@@ -1,3 +1,6 @@
+---
+type: internal
+---
 # Custodian Review Queue
 
 > Items needing your decision. Clear as you go.

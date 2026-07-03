@@ -105,19 +105,19 @@ Default frame when `ORDER BY` present: `RANGE BETWEEN UNBOUNDED PRECEDING AND CU
 ## Usage in data engineering
 
 Window functions appear throughout the DE stack [^src1]:
-- **dbt models**: enrichment and ranking in `warehouse` and `marts` layers — see [[data-engineering/dbt|dbt]]
+- **dbt models**: enrichment and ranking in `warehouse` and `marts` layers — see [dbt](/data-engineering/dbt.md)
 - **Spark SQL**: same syntax; used in pipeline transformations
-- **SCD2 construction**: `LAG()` identifies change points; cumulative `SUM()` builds streak IDs — see [[data-engineering/dimensional-modeling|Dimensional Modeling]] (streak_identifier pattern)
+- **SCD2 construction**: `LAG()` identifies change points; cumulative `SUM()` builds streak IDs — see [Dimensional Modeling](/data-engineering/dimensional-modeling.md) (streak_identifier pattern)
 
 ## See also
 
-- [[data-engineering/dimensional-modeling|Dimensional Modeling]] — streak_identifier pattern uses LAG + cumulative SUM as core building blocks
-- [[data-engineering/dbt|dbt]] — window functions used in mart-layer enrichment
-- [[data-engineering/data-transformation|Data Transformation]] — the transform layer where these functions are applied (categorization, enrichment, pre-aggregation)
-- [[data-engineering/sql-intermediate-results|Storing Intermediate Results in SQL]] — CTEs/temp tables that hold the window-function logic
-- [[data-engineering/data-engineering-interview|Data Engineering Interview]] — window functions are a recurring SQL-round topic
-- [[data-engineering/README|Data Engineering hub]]
+- [Dimensional Modeling](/data-engineering/dimensional-modeling.md) — streak_identifier pattern uses LAG + cumulative SUM as core building blocks
+- [dbt](/data-engineering/dbt.md) — window functions used in mart-layer enrichment
+- [Data Transformation](/data-engineering/data-transformation.md) — the transform layer where these functions are applied (categorization, enrichment, pre-aggregation)
+- [Storing Intermediate Results in SQL](/data-engineering/sql-intermediate-results.md) — CTEs/temp tables that hold the window-function logic
+- [Data Engineering Interview](/data-engineering/data-engineering-interview.md) — window functions are a recurring SQL-round topic
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 
-[^src1]: [[03_Resources/Study Notes/SQL - Window Functions Reference|SQL - Window Functions Reference]]
+[^src1]: [SQL - Window Functions Reference](/03_Resources/Study Notes/SQL - Window Functions Reference.md)

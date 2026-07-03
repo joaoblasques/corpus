@@ -15,7 +15,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 REVIEW_PATH = ROOT / "raw" / "_inbox" / "_REVIEW.md"
-LOG_PATH = ROOT / "corpus" / "_log.md"
+LOG_PATH = ROOT / "corpus" / "log.md"
 
 
 # ---------------------------------------------------------------------------
@@ -33,46 +33,58 @@ def count_deferred(review_text: str) -> int:
 
 def latest_run_summary(log_text: str) -> dict | None:
     """Return a dict with keys 'date', 'collected', 'ingested' from the most
-    recent '## [...] config | scheduled run' block in log_text, or None when
-    no such block exists or parsing fails.
+    recent scheduled-run block in log_text (OKF format), or None when no such
+    block exists or parsing fails.
+
+    The log uses OKF format (newest first, grouped by ``## YYYY-MM-DD`` date
+    headings).  A scheduled-run block is identified by the presence of a
+    ``* **Collectors**:`` bullet (only scheduled runs emit this).  The
+    enclosing ``## YYYY-MM-DD`` date heading provides the run date.
 
     Expected block shape (produced by scheduled_run.write_run_report):
-        ## [2026-06-15 08:00] config | scheduled run
-        - collectors:
-          - gmail: 3 collected · status=ok
-          - obsidian: 1 collected · status=ok
-        - ingest:
-          - ingest: 2 ingested · 0 deferred · status=ok
+        ## YYYY-MM-DD
+        * **Collectors**: gmail=3, obsidian=0, pdf=0, youtube=24, ...
+        * **Ingest**: 41 ingested · 9 deferred · status=ok
+        [* **YoutubeQuick**: ...]  (optional)
+        [* **DocsQuick**: ...]     (optional)
+        [* **Lint**: ...]          (optional)
+        [* **Commit**: ...]        (optional)
+
+    Channel counts in the Collectors bullet use ``channel=N`` format joined by
+    ``', '``.  The scheduled-run Ingest bullet starts with ``N ingested``
+    (a digit), distinguishing it from regular ingest entries like
+    ``* **Ingest**: ingest-auto batch — ...``.
     """
-    # Find all block header positions (we want the LAST one)
-    header_re = re.compile(
-        r"^## \[([^\]]+)\] config \| scheduled run$", re.MULTILINE
-    )
-    matches = list(header_re.finditer(log_text))
-    if not matches:
+    # Find the first (newest) '* **Collectors**:' bullet — log is newest-first
+    collectors_re = re.compile(r"^\* \*\*Collectors\*\*:(.*)$", re.MULTILINE)
+    collectors_match = collectors_re.search(log_text)
+    if not collectors_match:
         return None
 
-    last_match = matches[-1]
-    date_str = last_match.group(1)  # e.g. "2026-06-15 08:00" or "2026-06-15T08:00"
-    # Keep only the date part for display — split on T or space (ISO 8601 variants)
-    date_display = re.split(r"[T ]", date_str)[0] if date_str else date_str
+    # Find the enclosing ## YYYY-MM-DD heading by scanning backwards from the bullet
+    preamble = log_text[: collectors_match.start()]
+    date_re = re.compile(r"^## (\d{4}-\d{2}-\d{2})\s*$", re.MULTILINE)
+    date_matches = list(date_re.finditer(preamble))
+    if not date_matches:
+        return None
+    date_display = date_matches[-1].group(1)
 
-    # Slice the block text from the header to the next "## " or end-of-string
-    block_start = last_match.start()
-    next_header = re.search(r"\n## ", log_text[last_match.end():])
-    if next_header:
-        block_text = log_text[block_start: last_match.end() + next_header.start()]
-    else:
-        block_text = log_text[block_start:]
-
-    # Sum all "N collected" mentions in the block (one per channel)
+    # Parse per-channel counts from the Collectors line: channel=N format
+    collectors_line = collectors_match.group(1)
     collected_total = sum(
-        int(m.group(1)) for m in re.finditer(r"(\d+) collected", block_text)
+        int(m.group(1)) for m in re.finditer(r"\b\w+=(\d+)", collectors_line)
     )
 
-    # Extract "N ingested" from the ingest line
-    ingested_match = re.search(r"(\d+) ingested", block_text)
-    ingested_total = int(ingested_match.group(1)) if ingested_match else 0
+    # Slice to just this scheduled-run block: Collectors bullet → next date group
+    rest = log_text[collectors_match.start():]
+    next_date = re.search(r"\n## \d{4}-\d{2}-\d{2}", rest)
+    block_text = rest[: next_date.start()] if next_date else rest
+
+    # Parse '* **Ingest**: N ingested' (scheduled-run format: digit immediately
+    # after ': ', not text like 'ingest-auto batch')
+    ingest_re = re.compile(r"^\* \*\*Ingest\*\*: (\d+) ingested", re.MULTILINE)
+    ingest_match = ingest_re.search(block_text)
+    ingested_total = int(ingest_match.group(1)) if ingest_match else 0
 
     return {
         "date": date_display,

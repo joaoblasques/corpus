@@ -32,7 +32,7 @@ Concrete affordances [^src1]:
 
 ## See also
 
-- [[software-engineering/README|Software Engineering hub]]
+- [Software Engineering hub](/software-engineering/README.md)
 
 ---
 

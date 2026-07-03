@@ -54,7 +54,7 @@ updated: 2026-07-03
 
 # Unsloth
 
-**TL;DR.** Unsloth is a fine-tuning toolkit that makes training modern LLMs 2–2.5× faster and uses 50–70% less VRAM than Hugging Face + Flash Attention 2, through custom Triton/CUDA kernels and LoRA optimizations. It supports a wide range of models (Llama, Gemma, Mistral, Phi, Qwen, Llama Vision), works on consumer hardware including free Colab T4 GPUs, and exports trained adapters as GGUF for use in [[ai-engineering/lm-studio|LM Studio]] or llama.cpp. YC-backed; ~2M monthly Hugging Face downloads as of late 2024 [^src10].
+**TL;DR.** Unsloth is a fine-tuning toolkit that makes training modern LLMs 2–2.5× faster and uses 50–70% less VRAM than Hugging Face + Flash Attention 2, through custom Triton/CUDA kernels and LoRA optimizations. It supports a wide range of models (Llama, Gemma, Mistral, Phi, Qwen, Llama Vision), works on consumer hardware including free Colab T4 GPUs, and exports trained adapters as GGUF for use in [LM Studio](/ai-engineering/lm-studio.md) or llama.cpp. YC-backed; ~2M monthly Hugging Face downloads as of late 2024 [^src10].
 
 ## Core approach
 
@@ -103,7 +103,7 @@ After fine-tuning, Unsloth provides two export paths to GGUF for local inference
 1. **Direct GGUF conversion**: `model.save_pretrained_gguf(...)` exports directly at a chosen quantization (Q8_0, F16, BF16).
 2. **LoRA merge + convert**: `model.save_pretrained_merged(...)` merges the LoRA adapters into the base model at FP16, then a separate step converts to any quantization level (e.g., Q4_K_M for smaller file sizes).
 
-The exported GGUF is importable into [[ai-engineering/lm-studio|LM Studio]] via `lms import <path/to/model.gguf>` [^src1].
+The exported GGUF is importable into [LM Studio](/ai-engineering/lm-studio.md) via `lms import <path/to/model.gguf>` [^src1].
 
 ## Company / ecosystem
 
@@ -115,10 +115,10 @@ The exported GGUF is importable into [[ai-engineering/lm-studio|LM Studio]] via 
 
 ## Related
 
-- [[ai-engineering/lm-studio|LM Studio]] — local inference app; the fine-tuned GGUF output is imported and served here
-- [[ai-engineering/functiongemma|FunctionGemma]] — the model fine-tuned in LM Studio's Unsloth walkthrough
-- [[ai-engineering/quantization|Quantization]] — GGUF quantization levels (Q8_0, F16, BF16, Q4_K_M) used when exporting an Unsloth fine-tune
-- [[ai-engineering/README|AI Engineering hub]]
+- [LM Studio](/ai-engineering/lm-studio.md) — local inference app; the fine-tuned GGUF output is imported and served here
+- [FunctionGemma](/ai-engineering/functiongemma.md) — the model fine-tuned in LM Studio's Unsloth walkthrough
+- [Quantization](/ai-engineering/quantization.md) — GGUF quantization levels (Q8_0, F16, BF16, Q4_K_M) used when exporting an Unsloth fine-tune
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

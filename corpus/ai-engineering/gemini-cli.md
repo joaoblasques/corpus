@@ -42,7 +42,7 @@ updated: 2026-06-25
 
 Gemini CLI supports project-level and user-level custom slash commands stored in `.gemini/commands/` (project) or `~/.gemini/commands/` (user) [^src1]. The format is a markdown file with a frontmatter block declaring the command name, description, and optional tool permissions.
 
-Custom commands are the Gemini CLI equivalent of Claude Code skills — load on demand, describe the workflow, and invoke with a slash prefix. See [[ai-engineering/agent-skills|Agent Skills]] for the cross-tool concept.
+Custom commands are the Gemini CLI equivalent of Claude Code skills — load on demand, describe the workflow, and invoke with a slash prefix. See [Agent Skills](/ai-engineering/agent-skills.md) for the cross-tool concept.
 
 ### MCP extension
 
@@ -128,16 +128,16 @@ A companion project that turns a Git repository into an autonomous, self-improvi
 
 **Why this matters**: the merge-to-learn pattern closes a feedback loop that most coding agents leave open — every accepted change teaches the agent something (the learnings file is its persistent memory of "this is what the team actually approves"). [^src2]
 
-Functionally equivalent to the "merge as teaching event" pattern discussed in [[ai-engineering/spec-driven-development|Spec-Driven Development]].
+Functionally equivalent to the "merge as teaching event" pattern discussed in [Spec-Driven Development](/ai-engineering/spec-driven-development.md).
 
 ## See also
 
-- [[ai-engineering/claude-code|Claude Code]] — primary comparison; parallel architecture
-- [[ai-engineering/agent-skills|Agent Skills]] — slash commands in Gemini CLI are the same concept as skills
-- [[ai-engineering/mcp|MCP]] — MCP server support is shared infrastructure across all major coding CLIs
-- [[ai-engineering/pi-agent|Pi Agent]] — another open-source coding agent alternative
-- [[ai-engineering/agentic-coding|Agentic Coding]] — landscape comparison of coding agents
-- [[ai-engineering/README|AI Engineering hub]]
+- [Claude Code](/ai-engineering/claude-code.md) — primary comparison; parallel architecture
+- [Agent Skills](/ai-engineering/agent-skills.md) — slash commands in Gemini CLI are the same concept as skills
+- [MCP](/ai-engineering/mcp.md) — MCP server support is shared infrastructure across all major coding CLIs
+- [Pi Agent](/ai-engineering/pi-agent.md) — another open-source coding agent alternative
+- [Agentic Coding](/ai-engineering/agentic-coding.md) — landscape comparison of coding agents
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

@@ -44,7 +44,7 @@ The lakehouse pattern adds an **open table format** (Iceberg, Delta Lake, or Hud
 | Time travel | Snapshots tracked in metadata; query any prior state |
 | Efficient querying | Manifest files avoid full-bucket `list_files`; partition pruning skips irrelevant files |
 
-The underlying files remain [[data-engineering/parquet|Parquet]] — the table format just manages them [^src1].
+The underlying files remain [Parquet](/data-engineering/parquet.md) — the table format just manages them [^src1].
 
 ### The lake as a unified, open foundation
 
@@ -68,12 +68,12 @@ The most important cost optimization is minimizing data read — achieved throug
 
 ## See also
 
-- [[data-engineering/parquet|Parquet]] — the file format layer
-- [[data-engineering/apache-iceberg|Apache Iceberg]] — the primary open table format covered here
-- [[data-engineering/open-table-formats|Open Table Formats]] — the format layer that promotes a lake to a lakehouse
-- [[data-engineering/README|Data Engineering hub]]
+- [Parquet](/data-engineering/parquet.md) — the file format layer
+- [Apache Iceberg](/data-engineering/apache-iceberg.md) — the primary open table format covered here
+- [Open Table Formats](/data-engineering/open-table-formats.md) — the format layer that promotes a lake to a lakehouse
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 
-[^src1]: [[03_Resources/Study Notes/Data Lake Fundamentals - Apache Iceberg and Parquet|Data Lake Fundamentals - Apache Iceberg and Parquet]]
+[^src1]: [Data Lake Fundamentals - Apache Iceberg and Parquet](/03_Resources/Study Notes/Data Lake Fundamentals - Apache Iceberg and Parquet.md)
 [^src2]: [What is Open Data Infrastructure?](../../raw/web/what-is-open-data-infrastructure-blog-fivetran.md)

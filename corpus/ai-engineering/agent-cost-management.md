@@ -49,7 +49,7 @@ updated: 2026-06-25
 
 ## Why current budgets break
 
-A chatbot query triggers one inference call; an agentic workflow reasons iteratively, calls tools, verifies, and self-corrects — 10–20 model calls per task [^src1]. Gartner's March 2026 analysis puts agentic models at 5–30× more tokens per task than a standard chatbot, a multiplier teams discover "only after their production bills arrived" [^src1]. Enterprise AI inference now represents 85% of total AI budgets [^src1]. Uber's [[ai-engineering/claude-code|Claude Code]] adoption jumped 32%→84% of its 5,000-engineer org (Dec 2025→Mar 2026); by April the annual AI budget was gone, with monthly API costs of $500–$2,000 per engineer [^src1]. Cheaper tokens won't lower bills: "Chief Product Officers should not confuse the deflation of commodity tokens with the democratization of frontier reasoning." [^src1]
+A chatbot query triggers one inference call; an agentic workflow reasons iteratively, calls tools, verifies, and self-corrects — 10–20 model calls per task [^src1]. Gartner's March 2026 analysis puts agentic models at 5–30× more tokens per task than a standard chatbot, a multiplier teams discover "only after their production bills arrived" [^src1]. Enterprise AI inference now represents 85% of total AI budgets [^src1]. Uber's [Claude Code](/ai-engineering/claude-code.md) adoption jumped 32%→84% of its 5,000-engineer org (Dec 2025→Mar 2026); by April the annual AI budget was gone, with monthly API costs of $500–$2,000 per engineer [^src1]. Cheaper tokens won't lower bills: "Chief Product Officers should not confuse the deflation of commodity tokens with the democratization of frontier reasoning." [^src1]
 
 ## The four cost layers
 
@@ -57,26 +57,26 @@ Inference is only ~20% of total cost of ownership; the majority "lives in what s
 
 ### Cost 1 — Inference and the re-sent context problem
 
-Re-sent context is the repeated transmission of system prompts, tool definitions, instructions, and state history across calls in one workflow — "teams often pay for the model to reprocess information it has already seen." [^src1] Stanford Digital Economy Lab (2025) found **re-sent context accounts for 62% of total agent inference bills** [^src1]. It applies to proprietary APIs (per-token) and self-hosted models alike (GPU compute, memory pressure, lower throughput) [^src1]. Unit *price* fell ~$10→$2.50 per million tokens in a year (Ramp), but "the problem is not unit cost... the problem is unit count" — one team cut monthly API costs $40K→$24K purely by auditing usage and routing simpler subtasks to cheaper [[ai-engineering/claude-models|models]] [^src1].
+Re-sent context is the repeated transmission of system prompts, tool definitions, instructions, and state history across calls in one workflow — "teams often pay for the model to reprocess information it has already seen." [^src1] Stanford Digital Economy Lab (2025) found **re-sent context accounts for 62% of total agent inference bills** [^src1]. It applies to proprietary APIs (per-token) and self-hosted models alike (GPU compute, memory pressure, lower throughput) [^src1]. Unit *price* fell ~$10→$2.50 per million tokens in a year (Ramp), but "the problem is not unit cost... the problem is unit count" — one team cut monthly API costs $40K→$24K purely by auditing usage and routing simpler subtasks to cheaper [models](/ai-engineering/claude-models.md) [^src1].
 
 ### Cost 2 — Context management and context rot
 
-[[ai-engineering/context-window-management|Context rot]] is output-quality degradation as context grows; Chroma's 2025 research tested 18 frontier models and "every single one gets worse as input length increases." [^src1] It is architectural — transformer attention scales as n² pairwise relationships — and degrades accuracy 30%+ in mid-window positions, noticeable after 20–30 turns [^src1]. A 1M-token window does not solve it; rot is distinct from context-window overflow and a 200K model can degrade significantly at 50K tokens [^src1]. Four levers [^src1]:
+[Context rot](/ai-engineering/context-window-management.md) is output-quality degradation as context grows; Chroma's 2025 research tested 18 frontier models and "every single one gets worse as input length increases." [^src1] It is architectural — transformer attention scales as n² pairwise relationships — and degrades accuracy 30%+ in mid-window positions, noticeable after 20–30 turns [^src1]. A 1M-token window does not solve it; rot is distinct from context-window overflow and a 200K model can degrade significantly at 50K tokens [^src1]. Four levers [^src1]:
 
 - **Compaction** — near the limit, summarize and restart with the summary (Claude Code preserves decisions/outstanding tasks while shedding tool outputs).
-- **Layered tool calling** — tiered [[ai-engineering/tool-calling|tools]] so a coordinator holds high-level tools and activates focused sub-agents; a flat 40-tool design sends all 40 schemas every call.
+- **Layered tool calling** — tiered [tools](/ai-engineering/tool-calling.md) so a coordinator holds high-level tools and activates focused sub-agents; a flat 40-tool design sends all 40 schemas every call.
 - **Just-in-time retrieval** — pull context only when signaled; keeps working context under 8K tokens.
-- **Sub-agent isolation** — [[ai-engineering/multi-agent-systems|sub-agents]] with clean windows return 1,000–2,000-token summaries.
+- **Sub-agent isolation** — [sub-agents](/ai-engineering/multi-agent-systems.md) with clean windows return 1,000–2,000-token summaries.
 
 "The challenge is no longer writing the right prompt. It is deciding what goes into context at every step." [^src1]
 
 ### Cost 3 — Retrieval (RAG) costs
 
-[[ai-engineering/rag|RAG]] stack costs are "systematically underestimated" [^src1]: embeddings 3–8% of visible inference spend, vector-DB hosting/queries 5–12%, plus re-embedding/re-indexing (budget 20% of monthly) and data cleaning/preprocessing (30–50% of total RAG project cost) [^src1]. The RAG-vs-long-context trade-off flips with volume: at low volume a full RAG pipeline can exceed sending large context directly, but at high volume retrieving a few thousand tokens beats sending 1M per request — and for user-facing work, speed settles it [^src1]. Menlo Ventures shows RAG adoption rising 31%→51% in a year, so "RAG is dead" is contradicted by production data [^src1].
+[RAG](/ai-engineering/rag.md) stack costs are "systematically underestimated" [^src1]: embeddings 3–8% of visible inference spend, vector-DB hosting/queries 5–12%, plus re-embedding/re-indexing (budget 20% of monthly) and data cleaning/preprocessing (30–50% of total RAG project cost) [^src1]. The RAG-vs-long-context trade-off flips with volume: at low volume a full RAG pipeline can exceed sending large context directly, but at high volume retrieving a few thousand tokens beats sending 1M per request — and for user-facing work, speed settles it [^src1]. Menlo Ventures shows RAG adoption rising 31%→51% in a year, so "RAG is dead" is contradicted by production data [^src1].
 
 ### Cost 4 — Orchestration and the hidden 80%
 
-Beyond inference: orchestration (planning, retries, state), [[ai-engineering/agent-evaluation|evaluation/monitoring]] (LLM-as-judge at $0.01–$0.10 per eval, 100+ test cycles), governance/compliance (audit logs, human-in-the-loop), and **runaway loops** — "Autonomy is the main cost amplifier"; uncontrolled retries drive runaway spend, so escalate to humans at defined thresholds [^src1]. Real examples: OpenClaw creator Peter Steinberger spent $1.3M over 30 days (Fast Mode); one user burned 10 billion tokens over eight months on a $100/month plan; a healthcare firm's costs jumped $12K→$68K in six weeks from one agent's retrieval fault pulling documents 8× too large [^src1].
+Beyond inference: orchestration (planning, retries, state), [evaluation/monitoring](/ai-engineering/agent-evaluation.md) (LLM-as-judge at $0.01–$0.10 per eval, 100+ test cycles), governance/compliance (audit logs, human-in-the-loop), and **runaway loops** — "Autonomy is the main cost amplifier"; uncontrolled retries drive runaway spend, so escalate to humans at defined thresholds [^src1]. Real examples: OpenClaw creator Peter Steinberger spent $1.3M over 30 days (Fast Mode); one user burned 10 billion tokens over eight months on a $100/month plan; a healthcare firm's costs jumped $12K→$68K in six weeks from one agent's retrieval fault pulling documents 8× too large [^src1].
 
 ## Highest-return move: prompt caching
 
@@ -109,7 +109,7 @@ The root mechanic: Claude re-reads the entire conversation from the top on every
 | Use Projects for recurring documents | Project files are cached; re-uploading the same PDF re-tokenizes it |
 | Spread sessions across the day | Usage limits use a rolling 5-hour window |
 
-**Prompt caching (structural)**: similar prompts used frequently get partially cached on Anthropic's platform — structure prompts static-content-first, dynamic content last [^src2]. This is the same discipline documented in [[ai-engineering/prompt-caching|Prompt Caching]].
+**Prompt caching (structural)**: similar prompts used frequently get partially cached on Anthropic's platform — structure prompts static-content-first, dynamic content last [^src2]. This is the same discipline documented in [Prompt Caching](/ai-engineering/prompt-caching.md).
 
 **Skills vs CLAUDE.md**: skills load on demand; CLAUDE.md loads every session. Move recurring workflows into skills so they're only loaded when needed [^src2].
 
@@ -137,7 +137,7 @@ Contrast with Manifest: Manifest saves 30–70% by using cheaper models; Headroo
 
 Each connected MCP server adds tool descriptions to every session's context window. Measured practitioner data: **~18,000 tokens per MCP server** loaded at session start [^src5]. With 3 MCP servers active, that's ~54,000 tokens of fixed overhead before the first user message.
 
-Mitigation: replace MCP calls with bash tool calls to the equivalent CLI (e.g., `gh` CLI instead of GitHub MCP). One practitioner reported **~40% context savings** by swapping MCP servers for CLI equivalents [^src5]. See [[ai-engineering/context-window-management|Context Window Management]] for the full analysis.
+Mitigation: replace MCP calls with bash tool calls to the equivalent CLI (e.g., `gh` CLI instead of GitHub MCP). One practitioner reported **~40% context savings** by swapping MCP servers for CLI equivalents [^src5]. See [Context Window Management](/ai-engineering/context-window-management.md) for the full analysis.
 
 ## Local LLMs as cost fallback
 

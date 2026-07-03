@@ -32,7 +32,7 @@ updated: 2026-06-23
 
 **TL;DR**: A binary, column-oriented file format for analytical data. Replaces CSV for any serious data work by enabling column pruning, lossless compression, and dramatic I/O reduction for analytical queries [^src1].
 
-Parquet is the **file format layer**. [[data-engineering/apache-iceberg|Apache Iceberg]] is the **table format layer** that sits on top of Parquet files to add transactional metadata.
+Parquet is the **file format layer**. [Apache Iceberg](/data-engineering/apache-iceberg.md) is the **table format layer** that sits on top of Parquet files to add transactional metadata.
 
 ## Columnar storage
 
@@ -87,7 +87,7 @@ A Parquet file is a hierarchical structure with three nested units [^src2]:
 
 Each column in a row group carries **min/max statistics** in its metadata. Query engines use these to skip entire row groups that can't satisfy a filter — this is **predicate pushdown**, applied at row-group selection time during reads [^src2].
 
-This is a distinct mechanism from partition pruning (above): pruning skips whole files/directories before the file is opened, while min/max statistics skip row groups *inside* a file. They compose. See [[data-engineering/query-engine-routing|Query Engine Routing]] for how engines exploit these read-time optimizations.
+This is a distinct mechanism from partition pruning (above): pruning skips whole files/directories before the file is opened, while min/max statistics skip row groups *inside* a file. They compose. See [Query Engine Routing](/data-engineering/query-engine-routing.md) for how engines exploit these read-time optimizations.
 
 ## Footer metadata (self-describing files)
 
@@ -129,7 +129,7 @@ Parquet is optimized for read-heavy analytics, not transactional workloads. The 
 Parquet is the canonical columnar format; the deeper question is *why* columnar storage suits analytics at all [^src3]. Four reasons [^src3]:
 
 - **Performance (less I/O)** — analytical queries touch a few of many columns; a columnar engine reads **only the relevant columns**, scanning less data, whereas row-based systems must read whole rows even for one field [^src3].
-- **Compression** — storing values of the same type together compresses far better [^src3]. Beyond [[#Run Length Encoding (RLE)|RLE]] and dictionary encoding (above), the article names **bit-packing** (use only the minimum bits needed for small numeric values) and **delta encoding** (store the difference between consecutive values) [^src3].
+- **Compression** — storing values of the same type together compresses far better [^src3]. Beyond RLE and dictionary encoding (above), the article names **bit-packing** (use only the minimum bits needed for small numeric values) and **delta encoding** (store the difference between consecutive values) [^src3].
 - **Vectorized processing** — columnar layout unlocks **vectorized execution**: operations applied to batches of column values at once, letting engines (DuckDB, Presto, Spark) use **SIMD** (Single Instruction, Multiple Data) CPU instructions to evaluate e.g. `price > 100` across a whole column segment in one shot [^src3].
 - **Parallelism** — each column stored separately can be read in parallel across CPU cores/nodes [^src3].
 
@@ -154,7 +154,7 @@ Two petabyte-scale cases (note: lessons apply at PB scale, not to a 100 GB wareh
 
 ## Iceberg adds the table format layer
 
-Parquet alone is just files. [[data-engineering/apache-iceberg|Apache Iceberg]] wraps Parquet with:
+Parquet alone is just files. [Apache Iceberg](/data-engineering/apache-iceberg.md) wraps Parquet with:
 - Manifest files that track all Parquet files (avoids expensive S3 `list_files`)
 - ACID transactions, schema evolution, time travel
 - Hidden partitioning (partition on `day(event_timestamp)` without adding a column)
@@ -177,15 +177,15 @@ WITH (
 
 ## See also
 
-- [[data-engineering/apache-iceberg|Apache Iceberg]] — table format layer on top of Parquet
-- [[data-engineering/apache-spark|Apache Spark]] — pairs Parquet with Catalyst column pruning + predicate pushdown (min/max stats)
-- [[data-engineering/cloud-data-warehouse-internals|Cloud Data Warehouse Internals]] — the hybrid row-group/column-chunk layout Parquet shares with BigQuery/Snowflake/Databricks
-- [[data-engineering/data-lake|Data Lake / Lakehouse]] — storage architecture that uses Parquet as the file format
-- [[data-engineering/dimensional-modeling|Dimensional Modeling]] — how joins/shuffles destroy RLE compression (temporal cardinality explosion)
-- [[data-engineering/README|Data Engineering hub]]
+- [Apache Iceberg](/data-engineering/apache-iceberg.md) — table format layer on top of Parquet
+- [Apache Spark](/data-engineering/apache-spark.md) — pairs Parquet with Catalyst column pruning + predicate pushdown (min/max stats)
+- [Cloud Data Warehouse Internals](/data-engineering/cloud-data-warehouse-internals.md) — the hybrid row-group/column-chunk layout Parquet shares with BigQuery/Snowflake/Databricks
+- [Data Lake / Lakehouse](/data-engineering/data-lake.md) — storage architecture that uses Parquet as the file format
+- [Dimensional Modeling](/data-engineering/dimensional-modeling.md) — how joins/shuffles destroy RLE compression (temporal cardinality explosion)
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 
-[^src1]: [[03_Resources/Study Notes/Data Lake Fundamentals - Apache Iceberg and Parquet|Data Lake Fundamentals - Apache Iceberg and Parquet]]
+[^src1]: [Data Lake Fundamentals - Apache Iceberg and Parquet](/03_Resources/Study Notes/Data Lake Fundamentals - Apache Iceberg and Parquet.md)
 [^src2]: [Apache Parquet for Data Engineers](../../raw/web/apache-parquet-for-data-engineers-optimized-data-storage.md)
 [^src3]: [Back To The Basics: What Is Columnar Storage (SeattleDataGuy)](../../raw/email/email-2025-05-08-back-to-the-basics-what-is-columnar-storage.md)

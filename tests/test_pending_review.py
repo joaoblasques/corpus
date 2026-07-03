@@ -12,6 +12,17 @@ import pending_review  # noqa: E402
 
 
 # ---------------------------------------------------------------------------
+# OKF conformance: path constants
+# ---------------------------------------------------------------------------
+
+def test_log_path_constant_is_log_md():
+    """LOG_PATH must point to corpus/log.md (OKF conformant name, not _log.md)."""
+    assert pending_review.LOG_PATH.name == "log.md", (
+        f"LOG_PATH filename should be 'log.md', got {pending_review.LOG_PATH.name!r}"
+    )
+
+
+# ---------------------------------------------------------------------------
 # count_deferred
 # ---------------------------------------------------------------------------
 
@@ -51,33 +62,28 @@ class TestCountDeferred:
 
 
 # ---------------------------------------------------------------------------
-# latest_run_summary
+# latest_run_summary — OKF format fixtures
 # ---------------------------------------------------------------------------
 
-_MULTI_BLOCK_LOG = """\
+# Newest-first: 2026-06-15 is the first (most recent) date group
+_OKF_MULTI_DATE_LOG = """\
 # Corpus Log
 
-## [2026-06-14 07:00] config | scheduled run
-- collectors:
-  - gmail: 5 collected · status=ok
-  - obsidian: 2 collected · status=ok
-- ingest:
-  - ingest: 3 ingested · 1 deferred · status=ok
+> OKF v0.1 change log. Newest first, grouped by date.
 
-## [2026-06-15 08:30] config | scheduled run
-- collectors:
-  - gmail: 3 collected · status=ok
-  - obsidian: 1 collected · status=ok
-- ingest:
-  - ingest: 2 ingested · 0 deferred · status=ok
+## 2026-06-15
+* **Collectors**: gmail=3, obsidian=1
+* **Ingest**: 2 ingested · 0 deferred · status=ok
+
+## 2026-06-14
+* **Collectors**: gmail=5, obsidian=2
+* **Ingest**: 3 ingested · 1 deferred · status=ok
 """
 
-_SINGLE_BLOCK_LOG = """\
-## [2026-06-15 09:00] config | scheduled run
-- collectors:
-  - gmail: 7 collected · status=ok
-- ingest:
-  - ingest: 5 ingested · 2 deferred · status=ok
+_OKF_SINGLE_DATE_LOG = """\
+## 2026-06-15
+* **Collectors**: gmail=7
+* **Ingest**: 5 ingested · 2 deferred · status=ok
 """
 
 
@@ -86,33 +92,34 @@ class TestLatestRunSummary:
         assert pending_review.latest_run_summary("") is None
 
     def test_returns_none_when_no_scheduled_run_block(self):
-        text = "## [2026-06-15] ingest | Some source\n- notes: nothing\n"
+        # Regular ingest entries (no Collectors bullet) must return None
+        text = (
+            "## 2026-06-15\n"
+            "* **Ingest**: ingest-auto batch — some sources\n"
+        )
         assert pending_review.latest_run_summary(text) is None
 
     def test_extracts_single_block(self):
-        result = pending_review.latest_run_summary(_SINGLE_BLOCK_LOG)
+        result = pending_review.latest_run_summary(_OKF_SINGLE_DATE_LOG)
         assert result is not None
         assert result["date"] == "2026-06-15"
         assert result["collected"] == 7
         assert result["ingested"] == 5
 
     def test_extracts_most_recent_block_when_multiple(self):
-        result = pending_review.latest_run_summary(_MULTI_BLOCK_LOG)
+        # Log is newest-first: 2026-06-15 group appears first → that is the answer
+        result = pending_review.latest_run_summary(_OKF_MULTI_DATE_LOG)
         assert result is not None
         assert result["date"] == "2026-06-15"
-        # Second block: 3 + 1 = 4 collected
+        # First (newest) block: gmail=3, obsidian=1 → total 4
         assert result["collected"] == 4
         assert result["ingested"] == 2
 
     def test_sums_multiple_channel_collected_counts(self):
         log = (
-            "## [2026-06-15 10:00] config | scheduled run\n"
-            "- collectors:\n"
-            "  - gmail: 5 collected · status=ok\n"
-            "  - obsidian: 3 collected · status=ok\n"
-            "  - youtube: 2 collected · status=ok\n"
-            "- ingest:\n"
-            "  - ingest: 8 ingested · 0 deferred · status=ok\n"
+            "## 2026-06-15\n"
+            "* **Collectors**: gmail=5, obsidian=3, pdf=0, youtube=2\n"
+            "* **Ingest**: 8 ingested · 0 deferred · status=ok\n"
         )
         result = pending_review.latest_run_summary(log)
         assert result is not None
@@ -126,16 +133,47 @@ class TestLatestRunSummary:
 
     def test_handles_block_with_zero_counts(self):
         log = (
-            "## [2026-06-15 12:00] config | scheduled run\n"
-            "- collectors:\n"
-            "  - gmail: 0 collected · status=ok\n"
-            "- ingest:\n"
-            "  - ingest: 0 ingested · 0 deferred · status=ok\n"
+            "## 2026-06-15\n"
+            "* **Collectors**: gmail=0, obsidian=0\n"
+            "* **Ingest**: 0 ingested · 0 deferred · status=ok\n"
         )
         result = pending_review.latest_run_summary(log)
         assert result is not None
         assert result["collected"] == 0
         assert result["ingested"] == 0
+
+    def test_does_not_confuse_regular_ingest_with_scheduled_run(self):
+        # Date group with a regular ingest (no Collectors bullet) appears BEFORE
+        # the date group that has a scheduled run — the first Collectors bullet
+        # is in the older group; date must be taken from that group's heading.
+        log = (
+            "## 2026-06-16\n"
+            "* **Ingest**: ingest-auto batch — some sources (10 processed, 5 ingested)\n"
+            "\n"
+            "## 2026-06-15\n"
+            "* **Collectors**: gmail=3, obsidian=1\n"
+            "* **Ingest**: 2 ingested · 0 deferred · status=ok\n"
+        )
+        result = pending_review.latest_run_summary(log)
+        assert result is not None
+        assert result["date"] == "2026-06-15"
+        assert result["collected"] == 4
+        assert result["ingested"] == 2
+
+    def test_all_run_channels_parsed(self):
+        # Full realistic Collectors line with all channels including links_refetch
+        log = (
+            "## 2026-07-03\n"
+            "* **Collectors**: gmail=3, obsidian=0, pdf=0, youtube=29, "
+            "github_discover=0, github=0, x=0, links_refetch=0\n"
+            "* **Ingest**: 14 ingested · 0 deferred · status=ok\n"
+        )
+        result = pending_review.latest_run_summary(log)
+        assert result is not None
+        assert result["date"] == "2026-07-03"
+        # 3+0+0+29+0+0+0+0 = 32
+        assert result["collected"] == 32
+        assert result["ingested"] == 14
 
 
 # ---------------------------------------------------------------------------
@@ -200,13 +238,11 @@ class TestMain:
             "- DEFER UNCERTAIN: source-c.md — unclear\n",
             encoding="utf-8",
         )
-        log = tmp_path / "_log.md"
+        log = tmp_path / "log.md"
         log.write_text(
-            "## [2026-06-15 08:00] config | scheduled run\n"
-            "- collectors:\n"
-            "  - gmail: 4 collected · status=ok\n"
-            "- ingest:\n"
-            "  - ingest: 3 ingested · 3 deferred · status=ok\n",
+            "## 2026-06-15\n"
+            "* **Collectors**: gmail=4\n"
+            "* **Ingest**: 3 ingested · 3 deferred · status=ok\n",
             encoding="utf-8",
         )
         ret = pending_review.main(review_path=review, log_path=log)
@@ -254,20 +290,18 @@ class TestMain:
 
 
 # ---------------------------------------------------------------------------
-# M1 — latest_run_summary with T-format timestamps
+# OKF date-heading extraction
 # ---------------------------------------------------------------------------
 
-class TestLatestRunSummaryTFormat:
-    """M1: latest_run_summary must extract only the date when the timestamp uses T-separator."""
+class TestOKFDateHeadingExtraction:
+    """latest_run_summary must read the date from ## YYYY-MM-DD headings (OKF format)."""
 
-    def test_iso_t_format_date_extracted_correctly(self):
-        """Timestamp '2026-06-15T08:00' → date field is '2026-06-15' (not the full string)."""
+    def test_date_extracted_from_heading(self):
+        """## YYYY-MM-DD heading → date field is exactly 'YYYY-MM-DD'."""
         log = (
-            "## [2026-06-15T08:00] config | scheduled run\n"
-            "- collectors:\n"
-            "  - gmail: 3 collected · status=ok\n"
-            "- ingest:\n"
-            "  - ingest: 2 ingested · 0 deferred · status=ok\n"
+            "## 2026-06-15\n"
+            "* **Collectors**: gmail=3\n"
+            "* **Ingest**: 2 ingested · 0 deferred · status=ok\n"
         )
         result = pending_review.latest_run_summary(log)
         assert result is not None
@@ -275,24 +309,17 @@ class TestLatestRunSummaryTFormat:
             f"expected '2026-06-15', got {result['date']!r}"
         )
 
-    def test_iso_t_format_build_line_renders_date_only(self):
-        """build_line with a T-format date shows only YYYY-MM-DD in the output line."""
+    def test_build_line_renders_date_only(self):
+        """build_line shows only YYYY-MM-DD in the output line (no time component)."""
         summary = {"date": "2026-06-15", "collected": 3, "ingested": 2}
         line = pending_review.build_line(summary, 0)
-        assert "2026-06-15T08:00" not in line, (
-            "full ISO timestamp should not appear in output; only the date part"
-        )
         assert "2026-06-15" in line
+        # No stray time or bracket characters
+        assert "[" not in line
+        assert "08:00" not in line
 
-    def test_space_separator_timestamp_still_works(self):
-        """Existing space-separator format '2026-06-15 08:00' still yields date '2026-06-15'."""
-        log = (
-            "## [2026-06-15 08:00] config | scheduled run\n"
-            "- collectors:\n"
-            "  - gmail: 1 collected · status=ok\n"
-            "- ingest:\n"
-            "  - ingest: 1 ingested · 0 deferred · status=ok\n"
-        )
+    def test_no_heading_returns_none(self):
+        """A Collectors bullet with no preceding ## YYYY-MM-DD heading → None."""
+        log = "* **Collectors**: gmail=3\n* **Ingest**: 1 ingested · 0 deferred · status=ok\n"
         result = pending_review.latest_run_summary(log)
-        assert result is not None
-        assert result["date"] == "2026-06-15"
+        assert result is None

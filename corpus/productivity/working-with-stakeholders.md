@@ -55,7 +55,7 @@ A stakeholder remembers two things: whether your work was good, and whether you 
 
 ## Manage the relationship after delivery
 
-What converts a *delivered* project into *trust* is what happens after "done": reading when the stakeholder has stopped hunting for gaps, asking only what is **critical** rather than inviting scope creep, and setting clear expectations for post-launch support. The mechanics of all three — the feedback shift, the "is there anything critical missing?" closing question, and the post-launch contract — live in [[productivity/shipping-and-scope|Shipping and Scope]].
+What converts a *delivered* project into *trust* is what happens after "done": reading when the stakeholder has stopped hunting for gaps, asking only what is **critical** rather than inviting scope creep, and setting clear expectations for post-launch support. The mechanics of all three — the feedback shift, the "is there anything critical missing?" closing question, and the post-launch contract — live in [Shipping and Scope](/productivity/shipping-and-scope.md).
 
 The relationship point layered on top of those mechanics: "a stakeholder who knows what to expect from you after launch trusts you more" — both the engineer who disappears and the one who commits to everything indefinitely damage the relationship [^src2].
 
@@ -73,7 +73,7 @@ The business always moves faster than it communicates — that is not a dysfunct
 
 **Reputation compounding**: "The person known for calm, prepared delivery gets pulled into bigger problems. The person known for handling chaos gets handed more chaos." Reputation around *prevention* (rather than *execution*) is the career unlock for senior ICs and managers alike [^src3].
 
-This connects to the Map Is Not Territory model (see [[productivity/mental-models|Mental Models]]): the team that firefights is relying on a roadmap that was already stale before it was written. Proactive alignment is the act of checking the terrain before committing to the map.
+This connects to the Map Is Not Territory model (see [Mental Models](/productivity/mental-models.md)): the team that firefights is relying on a roadmap that was already stale before it was written. Proactive alignment is the act of checking the terrain before committing to the map.
 
 ## The human layer of technical work
 
@@ -109,7 +109,7 @@ The same filter applied to stakeholders' requests should apply to your own ideas
 
 ## Related
 
-The scoping discipline underneath all of this lives in [[productivity/shipping-and-scope|Shipping and Scope]]. The slower stakeholder-satisfaction feedback loop is part of the senior "new ruler" in [[productivity/learning-to-learn|Learning to Learn]]. The Johari Window model (blind spots in how others perceive you) in [[productivity/mental-models|Mental Models]] provides a complementary personal-awareness frame.
+The scoping discipline underneath all of this lives in [Shipping and Scope](/productivity/shipping-and-scope.md). The slower stakeholder-satisfaction feedback loop is part of the senior "new ruler" in [Learning to Learn](/productivity/learning-to-learn.md). The Johari Window model (blind spots in how others perceive you) in [Mental Models](/productivity/mental-models.md) provides a complementary personal-awareness frame.
 
 ---
 

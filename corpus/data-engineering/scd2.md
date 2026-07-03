@@ -107,7 +107,7 @@ Claimed benefits over SCD2 [^src3]:
 - **Resilient pipelines** — each day's partition is independent and re-runnable
 - **History for free** — every snapshot is preserved, giving a "time machine" without closing/opening rows
 - **Fewer bugs** — no risk of a half-applied SCD2 update; ~90% fewer bugs claimed
-- **Tool-agnostic** — works with Hive metastore, [[data-engineering/apache-iceberg|Iceberg]], Delta, or Hudi
+- **Tool-agnostic** — works with Hive metastore, [Iceberg](/data-engineering/apache-iceberg.md), Delta, or Hudi
 
 This is the *functional data engineering* lineage (Maxime Beauchemin), repackaged as date-stamping as the organizing principle, not an afterthought [^src3]. The trade-off is storage volume: daily full snapshots duplicate unchanged rows, which is precisely the cost SCD2 was designed to avoid at very large scale — see the "When to skip SCD entirely" thresholds above [^src2]. The two views agree on the boundary: SCD2 only pays off where storage savings outweigh complexity.
 
@@ -117,7 +117,7 @@ A follow-up sharpens the critique with concrete mechanics [^src4]. The motivatin
 
 The append/datestamp alternative reduces every historical query to a flat `WHERE ds = '{date}'` filter per table — complexity stays in the business logic, not in date-range gymnastics [^src4]. **`ds`** (datestamp) marks when each row was valid/ingested; it is named `ds` rather than `date` to avoid confusion with the event date [^src4]. "Date partitions" are how warehouses physically implement datestamps — `WHERE ds='...'` scans one partition instead of the whole table, making it faster and cheaper [^src4].
 
-The decisive pain is **backfilling**. SCD2's `valid_to`/`is_current` close-out logic chains each day to the previous day's state (`depends_on_past=True` in Airflow), forcing **sequential** reruns — backfilling November means 30 days run one-at-a-time, and the daily SQL doesn't even work for backfills (you maintain a *second* codebase that reconstructs `valid_from`/`valid_to` for historical dates) [^src4]. With datestamps each day reads/writes only its own `ds` partition with **no inter-day dependency**, so an Airflow `dags backfill` runs all 30 days **in parallel** with the *same* SQL — "a button you push" [^src4]. The one pattern to avoid is a table whose day depends on its own previous day's partition (cumulative metrics); for most dimensions, recompute from raw and keep `depends_on_past=False` [^src4]. See [[data-engineering/idempotent-pipelines|Idempotent Pipelines]] for the functional-pipeline framing this rests on.
+The decisive pain is **backfilling**. SCD2's `valid_to`/`is_current` close-out logic chains each day to the previous day's state (`depends_on_past=True` in Airflow), forcing **sequential** reruns — backfilling November means 30 days run one-at-a-time, and the daily SQL doesn't even work for backfills (you maintain a *second* codebase that reconstructs `valid_from`/`valid_to` for historical dates) [^src4]. With datestamps each day reads/writes only its own `ds` partition with **no inter-day dependency**, so an Airflow `dags backfill` runs all 30 days **in parallel** with the *same* SQL — "a button you push" [^src4]. The one pattern to avoid is a table whose day depends on its own previous day's partition (cumulative metrics); for most dimensions, recompute from raw and keep `depends_on_past=False` [^src4]. See [Idempotent Pipelines](/data-engineering/idempotent-pipelines.md) for the functional-pipeline framing this rests on.
 
 ## dbt Snapshot strategies for SCD2
 
@@ -191,16 +191,16 @@ The `BETWEEN` join ensures each purchase maps to the user's address *as of that 
 
 ## See also
 
-- [[data-engineering/merge-into|MERGE INTO]] — the Spark SQL operation used to implement this pattern
-- [[data-engineering/apache-iceberg|Apache Iceberg]] — table format required for MERGE INTO in Spark SQL
-- [[data-engineering/dimensional-modeling|Dimensional Modeling]] — the broader modeling context; streak_identifier pattern for building SCD2
-- [[data-engineering/idempotent-pipelines|Idempotent Pipelines]] — SCD2 is idempotent; SCD1 and SCD3 are not
-- [[data-engineering/README|Data Engineering hub]]
+- [MERGE INTO](/data-engineering/merge-into.md) — the Spark SQL operation used to implement this pattern
+- [Apache Iceberg](/data-engineering/apache-iceberg.md) — table format required for MERGE INTO in Spark SQL
+- [Dimensional Modeling](/data-engineering/dimensional-modeling.md) — the broader modeling context; streak_identifier pattern for building SCD2
+- [Idempotent Pipelines](/data-engineering/idempotent-pipelines.md) — SCD2 is idempotent; SCD1 and SCD3 are not
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 
-[^src1]: [[03_Resources/Articles/scd2-table-creation-merge-into-spark-iceberg|SCD2 Table Creation with MERGE INTO in Spark and Iceberg]]
-[^src2]: [[03_Resources/Study Notes/Dimensional Data Modeling - Idempotent Pipelines and SCD Patterns|Dimensional Data Modeling - Idempotent Pipelines and SCD Patterns]]
+[^src1]: [SCD2 Table Creation with MERGE INTO in Spark and Iceberg](/03_Resources/Articles/scd2-table-creation-merge-into-spark-iceberg.md)
+[^src2]: [Dimensional Data Modeling - Idempotent Pipelines and SCD Patterns](/03_Resources/Study Notes/Dimensional Data Modeling - Idempotent Pipelines and SCD Patterns.md)
 [^src3]: [Stop Using Slowly Changing Dimensions (Part 1)](../../raw/web/stop-using-slowly-changing-dimensions-part-1.md)
 [^src4]: [SCD-2 considered harmful! Part 2](../../raw/email/email-2025-11-04-scd-2-considered-harmful-part-2.md)
 [^src5]: [SQL to dbt guide: Slowly Changing Dimensions with dbt Snapshots](../../raw/web/web-sql-to-dbt-guide-slowly-changing-dimensions-with-dbt-snapsho.md)

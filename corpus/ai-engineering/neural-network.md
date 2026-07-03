@@ -34,7 +34,7 @@ updated: 2026-06-15
 
 # Neural Networks
 
-**TL;DR**: Computing structures loosely inspired by the brain — layers of weighted "neurons" that transform inputs to outputs and learn by adjusting weights to reduce error [^src1]. **Deep learning** is ML with many such layers; neural networks are the substrate of every modern LLM via the [[ai-engineering/transformer|Transformer]] [^src2].
+**TL;DR**: Computing structures loosely inspired by the brain — layers of weighted "neurons" that transform inputs to outputs and learn by adjusting weights to reduce error [^src1]. **Deep learning** is ML with many such layers; neural networks are the substrate of every modern LLM via the [Transformer](/ai-engineering/transformer.md) [^src2].
 
 ## From perceptron to multi-layer network
 
@@ -53,11 +53,11 @@ Training drives weights to minimize a **loss function** (MSE, cross-entropy) mea
 | **RNN / LSTM** | Sequences (older NLP, time series) [^src2] |
 | **Transformer** | Modern language/multimodal — parallel attention [^src3] |
 
-Transformers (Phase 7 of the from-scratch curriculum: self-attention → multi-head → positional encoding → MoE → KV cache/Flash Attention) superseded RNNs for language because they process sequences in parallel and model long-range dependencies [^src3]. See [[ai-engineering/transformer|Transformer]].
+Transformers (Phase 7 of the from-scratch curriculum: self-attention → multi-head → positional encoding → MoE → KV cache/Flash Attention) superseded RNNs for language because they process sequences in parallel and model long-range dependencies [^src3]. See [Transformer](/ai-engineering/transformer.md).
 
 ## Reasoning models: a neural-network training direction
 
-A newer breed of LLM is trained to "think step-by-step before generating an answer" — generating an internal **chain of thought**, breaking problems down and working through logic before producing a final answer [^src4]. These are trained on problems with verifiably correct answers (math, code that compiles) via reinforcement learning, so they learn reasoning steps that lead to correct solutions [^src4]. "This is why you'll sometimes see an LLM say 'thinking' before it responds" [^src4]; reasoning models are especially important for agents, where multi-step tasks need planning, not just pattern matching [^src4]. See [[ai-engineering/llm|LLM]].
+A newer breed of LLM is trained to "think step-by-step before generating an answer" — generating an internal **chain of thought**, breaking problems down and working through logic before producing a final answer [^src4]. These are trained on problems with verifiably correct answers (math, code that compiles) via reinforcement learning, so they learn reasoning steps that lead to correct solutions [^src4]. "This is why you'll sometimes see an LLM say 'thinking' before it responds" [^src4]; reasoning models are especially important for agents, where multi-step tasks need planning, not just pattern matching [^src4]. See [LLM](/ai-engineering/llm.md).
 
 ## Multimodal networks
 
@@ -65,11 +65,11 @@ Models trained on multiple data types (text, image, audio, video) "develop a dee
 
 ## See also
 
-- [[ai-engineering/machine-learning|Machine Learning]] — deep learning is the multi-layer extension of ML
-- [[ai-engineering/transformer|Transformer]] — the attention architecture behind LLMs
-- [[ai-engineering/llm|LLM]] — neural networks at billion-parameter scale; reasoning models
-- [[ai-engineering/ai-fundamentals|AI Fundamentals]] — where neural nets sit in the field
-- [[ai-engineering/README|AI Engineering hub]]
+- [Machine Learning](/ai-engineering/machine-learning.md) — deep learning is the multi-layer extension of ML
+- [Transformer](/ai-engineering/transformer.md) — the attention architecture behind LLMs
+- [LLM](/ai-engineering/llm.md) — neural networks at billion-parameter scale; reasoning models
+- [AI Fundamentals](/ai-engineering/ai-fundamentals.md) — where neural nets sit in the field
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

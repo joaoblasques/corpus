@@ -28,29 +28,29 @@ updated: 2026-06-17
 
 ## The organizing principle: context economy
 
-Model output quality *degrades as the context window fills* — the practical target is to keep usage between the system-prompt baseline (~10%) and roughly 70%; performance falls off as it approaches 90–100% ([[ai-engineering/context-window-management|Context Window Management]]). The consequence reframes "efficiency": saving tokens is not only a cost play, it is a **quality** play. A flooded window degrades the agent regardless of model strength ([[ai-engineering/tool-calling-and-context-engineering|Tool Calling & Context Engineering]]).
+Model output quality *degrades as the context window fills* — the practical target is to keep usage between the system-prompt baseline (~10%) and roughly 70%; performance falls off as it approaches 90–100% ([Context Window Management](/ai-engineering/context-window-management.md)). The consequence reframes "efficiency": saving tokens is not only a cost play, it is a **quality** play. A flooded window degrades the agent regardless of model strength ([Tool Calling & Context Engineering](/ai-engineering/tool-calling-and-context-engineering.md)).
 
 ## The levers (ordered by leverage)
 
 ### 1. Skills over an always-on `CLAUDE.md`
-A skill loads only its name + description into context until it is invoked (progressive disclosure); a `CLAUDE.md`/`AGENTS.md` file is re-injected on *every* turn. Measured contrast: one skill cost 944 tokens always-on vs **53 tokens** as name + description ([[ai-engineering/agent-skills|Agent Skills]]). Reserve always-on instruction files for the minority of content that genuinely must be present every turn (proprietary information, a personal methodology).
+A skill loads only its name + description into context until it is invoked (progressive disclosure); a `CLAUDE.md`/`AGENTS.md` file is re-injected on *every* turn. Measured contrast: one skill cost 944 tokens always-on vs **53 tokens** as name + description ([Agent Skills](/ai-engineering/agent-skills.md)). Reserve always-on instruction files for the minority of content that genuinely must be present every turn (proprietary information, a personal methodology).
 
-> Calibration: the corpus flags this as an opinionated stance that tensions with sources treating `CLAUDE.md` as valuable long-term memory ([[ai-engineering/context-engineering|Context Engineering]]). The defensible synthesis: put *stable, must-be-every-turn* rules in `CLAUDE.md`; put *situational, reusable workflows* in skills.
+> Calibration: the corpus flags this as an opinionated stance that tensions with sources treating `CLAUDE.md` as valuable long-term memory ([Context Engineering](/ai-engineering/context-engineering.md)). The defensible synthesis: put *stable, must-be-every-turn* rules in `CLAUDE.md`; put *situational, reusable workflows* in skills.
 
 ### 2. Build skills by doing, then codify — and let them self-heal
-Hand-writing a skill cold captures no experience of a successful run. Instead: walk the agent through the workflow once, secure a successful run in context, then have it write the skill; when it later fails, ask *why*, fix the cause, and instruct it to "update the skill so this doesn't happen again." Iteration converges (~5 loops for a robust multi-source workflow) ([[ai-engineering/agent-skills|Agent Skills]]).
+Hand-writing a skill cold captures no experience of a successful run. Instead: walk the agent through the workflow once, secure a successful run in context, then have it write the skill; when it later fails, ask *why*, fix the cause, and instruct it to "update the skill so this doesn't happen again." Iteration converges (~5 loops for a robust multi-source workflow) ([Agent Skills](/ai-engineering/agent-skills.md)).
 
 ### 3. Spend context on what is unique to you
-"Code itself is context" — telling the agent which framework a codebase uses is redundant. Reserve instructions for your specific workflow, taste, and conventions; omit general knowledge the model already has ([[ai-engineering/context-engineering|Context Engineering]]).
+"Code itself is context" — telling the agent which framework a codebase uses is redundant. Reserve instructions for your specific workflow, taste, and conventions; omit general knowledge the model already has ([Context Engineering](/ai-engineering/context-engineering.md)).
 
 ### 4. Isolate work in sub-agents
-Delegating to a sub-agent opens a *fresh* window; its file reads and large retrievals never enter the main window (observed savings 3.5k–9k tokens/task). Assign a cheaper model to simple sub-tasks ([[ai-engineering/context-window-management|Context Window Management]]).
+Delegating to a sub-agent opens a *fresh* window; its file reads and large retrievals never enter the main window (observed savings 3.5k–9k tokens/task). Assign a cheaper model to simple sub-tasks ([Context Window Management](/ai-engineering/context-window-management.md)).
 
 ### 5. Scale for productivity, not for looks
-Start with one agent; add sub-agents only after a workflow is proven and the sub-agent carries real skills and context — not a speculative fleet of agents and skills up front ([[ai-engineering/multi-agent-systems|Multi-Agent Systems]]).
+Start with one agent; add sub-agents only after a workflow is proven and the sub-agent carries real skills and context — not a speculative fleet of agents and skills up front ([Multi-Agent Systems](/ai-engineering/multi-agent-systems.md)).
 
 ### 6. Be concise; manage the window actively
-Verbose instructions hurt — extra tokens add confusion. Give clear specs and let the agent ask. Compact proactively with preservation notes (`/compact keep …`) before the window fills, and reset (`/clear`) between unrelated tasks ([[ai-engineering/context-window-management|Context Window Management]]). Treat the agent like a senior developer / new employee: specify intent, supply a worked example, correct iteratively ([[ai-engineering/ai-agent|AI Agent]]).
+Verbose instructions hurt — extra tokens add confusion. Give clear specs and let the agent ask. Compact proactively with preservation notes (`/compact keep …`) before the window fills, and reset (`/clear`) between unrelated tasks ([Context Window Management](/ai-engineering/context-window-management.md)). Treat the agent like a senior developer / new employee: specify intent, supply a worked example, correct iteratively ([AI Agent](/ai-engineering/ai-agent.md)).
 
 ### 7. The advisor strategy: Sonnet executor + Opus advisor
 
@@ -67,25 +67,25 @@ This inverts the common orchestrator-subagent pattern where the large model deco
 
 The key insight: "frontier-level reasoning applies only when the executor needs it, and the rest of the run stays at executor-level cost" [^src_adv]. This is the cost-intelligence lever that sits between "run Sonnet alone" and "run Opus end-to-end."
 
-See [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] for the broader generator-verifier and orchestrator-subagent patterns this fits into, and [[ai-engineering/claude-api|Claude API]] for the full platform context.
+See [Multi-Agent Systems](/ai-engineering/multi-agent-systems.md) for the broader generator-verifier and orchestrator-subagent patterns this fits into, and [Claude API](/ai-engineering/claude-api.md) for the full platform context.
 
 ### 8. Don't install other people's skills
-Two reasons: security (a downloaded skill is an attack vector) and missing context (it lacks *your* successful-run experience). Review others' skills to learn from them; don't adopt them wholesale ([[ai-engineering/agent-skills|Agent Skills]]).
+Two reasons: security (a downloaded skill is an attack vector) and missing context (it lacks *your* successful-run experience). Review others' skills to learn from them; don't adopt them wholesale ([Agent Skills](/ai-engineering/agent-skills.md)).
 
 [^src_adv]: [The advisor strategy: Give Sonnet an intelligence boost with Opus](../../raw/notes/notes-clippings-the-advisor-strategy-give-sonnet-an-intelligence-boost-with.md) — Anthropic
 
 ## What this synthesis does not yet cover
 
-The corpus now covers Claude Code mechanics well (slash commands, hooks, skills, subagents, dynamic workflows via [[ai-engineering/claude-code|Claude Code]]), official Anthropic docs, and the advisor strategy (§7 above). Remaining gaps:
+The corpus now covers Claude Code mechanics well (slash commands, hooks, skills, subagents, dynamic workflows via [Claude Code](/ai-engineering/claude-code.md)), official Anthropic docs, and the advisor strategy (§7 above). Remaining gaps:
 
 - **A specific personal setup** — the corpus has no record of an individual's actual configuration end-to-end.
 - **Eval-driven optimization** — how to systematically measure before/after on a personal workflow.
 
 ## See also
 
-- [[ai-engineering/agent-skills|Agent Skills]]
-- [[ai-engineering/context-window-management|Context Window Management]]
-- [[ai-engineering/context-engineering|Context Engineering]]
-- [[ai-engineering/multi-agent-systems|Multi-Agent Systems]]
-- [[ai-engineering/ai-agent|AI Agent]]
-- [[ai-engineering/README|AI Engineering hub]]
+- [Agent Skills](/ai-engineering/agent-skills.md)
+- [Context Window Management](/ai-engineering/context-window-management.md)
+- [Context Engineering](/ai-engineering/context-engineering.md)
+- [Multi-Agent Systems](/ai-engineering/multi-agent-systems.md)
+- [AI Agent](/ai-engineering/ai-agent.md)
+- [AI Engineering hub](/ai-engineering/README.md)

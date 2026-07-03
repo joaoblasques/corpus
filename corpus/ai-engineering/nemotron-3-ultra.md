@@ -19,7 +19,7 @@ updated: 2026-07-02
 
 # Nemotron 3 Ultra
 
-**TL;DR.** Nemotron 3 Ultra is NVIDIA's open-weight frontier reasoning model, built for long-running autonomous agent workflows (planning, tool calling, error recovery, multi-step orchestration). It combines a hybrid Transformer-Mamba Mixture-of-Experts architecture with multi-token prediction and NVFP4 precision, and shipped with **Day-0 support in [[ai-engineering/vllm|vLLM]]** [^src1].
+**TL;DR.** Nemotron 3 Ultra is NVIDIA's open-weight frontier reasoning model, built for long-running autonomous agent workflows (planning, tool calling, error recovery, multi-step orchestration). It combines a hybrid Transformer-Mamba Mixture-of-Experts architecture with multi-token prediction and NVFP4 precision, and shipped with **Day-0 support in [vLLM](/ai-engineering/vllm.md)** [^src1].
 
 ## Architecture
 
@@ -29,7 +29,7 @@ updated: 2026-07-02
 - **Mamba layers** improve sequence efficiency for long-context workloads; **Transformer layers** preserve precise recall when agents need to retrieve specific facts from large context windows [^src1].
 - **Latent MoE** — supports more efficient expert routing across reasoning, code generation, tool calls, and domain-specific logic [^src1].
 - **Multi-Token Prediction (MTP)** — predicts multiple future tokens per forward pass, reducing generation time for long outputs and multi-turn workflows [^src1].
-- **NVFP4 precision** — the same NVFP4 checkpoint runs on both NVIDIA Hopper and Blackwell GPUs via specialized quantization kernels, letting one checkpoint serve both architectures [^src1]. See [[ai-engineering/quantization|Quantization]].
+- **NVFP4 precision** — the same NVFP4 checkpoint runs on both NVIDIA Hopper and Blackwell GPUs via specialized quantization kernels, letting one checkpoint serve both architectures [^src1]. See [Quantization](/ai-engineering/quantization.md).
 
 ## Training and role in vLLM's own development loop
 
@@ -50,11 +50,12 @@ Per NVIDIA/vLLM's own reported figures (vLLM config: 10k/2k ISL/OSL, batch size 
 
 ## Related
 
-- [[ai-engineering/vllm|vLLM]] — serving engine providing Day-0 support; also used as Nemotron 3 Ultra's RL rollout/eval backend
-- [[ai-engineering/quantization|Quantization]] — NVFP4 precision path
-- [[ai-engineering/mixture-of-experts|Mixture of Experts]] — Latent MoE routing
-- [[ai-engineering/minimax-m3|MiniMax M3]] — another day-0 vLLM model with a hybrid long-context attention design
-- [[ai-engineering/README|AI Engineering hub]]
+- [vLLM](/ai-engineering/vllm.md) — serving engine providing Day-0 support; also used as Nemotron 3 Ultra's RL rollout/eval backend
+- [Quantization](/ai-engineering/quantization.md) — NVFP4 precision path
+- [Mixture of Experts](/ai-engineering/mixture-of-experts.md) — Latent MoE routing
+- [MiniMax M3](/ai-engineering/minimax-m3.md) — another day-0 vLLM model with a hybrid long-context attention design
+- [Olmo](/ai-engineering/olmo.md) — Ai2's matched transformer/hybrid model pair; token-level study of where hybrid (attention+recurrent) architectures beat pure attention
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

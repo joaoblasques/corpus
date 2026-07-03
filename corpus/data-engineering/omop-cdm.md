@@ -25,7 +25,7 @@ updated: 2026-06-25
 
 # OMOP Common Data Model (CDM)
 
-**TL;DR.** The OMOP CDM (Observational Medical Outcomes Partnership Common Data Model), developed and maintained by **OHDSI** (Observational Health Data Sciences and Informatics), is a standardized schema for converting heterogeneous observational health databases into a common format. Once converted, a library of standard analytic tools can run against any OMOP-conformant database, enabling collaborative research across institutions and countries [^src1]. It is the dominant interoperability standard for real-world observational health data — distinct from [[data-engineering/fhir|FHIR]] (a real-time data exchange standard) in that OMOP targets analytics over accumulated records rather than point-of-care data exchange.
+**TL;DR.** The OMOP CDM (Observational Medical Outcomes Partnership Common Data Model), developed and maintained by **OHDSI** (Observational Health Data Sciences and Informatics), is a standardized schema for converting heterogeneous observational health databases into a common format. Once converted, a library of standard analytic tools can run against any OMOP-conformant database, enabling collaborative research across institutions and countries [^src1]. It is the dominant interoperability standard for real-world observational health data — distinct from [FHIR](/data-engineering/fhir.md) (a real-time data exchange standard) in that OMOP targets analytics over accumulated records rather than point-of-care data exchange.
 
 ## Why it exists
 
@@ -71,7 +71,7 @@ The CDM accommodates both major real-world data types [^src1]:
 | **Temporal** | Accumulated longitudinal history | Current + point-in-time |
 | **Audience** | Researchers, epidemiologists, clinical analysts | EHR vendors, HIE, clinical workflows |
 
-Both standards increasingly interact: FHIR-to-OMOP pipelines (e.g. `fhir2omop`) convert FHIR resources into CDM tables to enable OHDSI analytics on FHIR-native systems. See [[data-engineering/fhir|FHIR]] for the exchange-standard detail.
+Both standards increasingly interact: FHIR-to-OMOP pipelines (e.g. `fhir2omop`) convert FHIR resources into CDM tables to enable OHDSI analytics on FHIR-native systems. See [FHIR](/data-engineering/fhir.md) for the exchange-standard detail.
 
 ## ETL to OMOP
 
@@ -94,11 +94,11 @@ After ETL to OMOP CDM, evidence can be generated for [^src1]:
 
 ## Related
 
-- [[data-engineering/fhir|FHIR]] — the complementary HL7 standard for real-time healthcare data exchange
-- [[data-engineering/etl-pipeline|ETL Pipeline]] — OMOP conversion is one of the most standardized ETL use cases in healthcare
-- [[data-engineering/dbt|dbt]] — increasingly used for OMOP ETL pipelines
-- [[data-engineering/data-quality|Data Quality]] — ACHILLES is essentially a data-quality framework for the CDM
-- [[data-engineering/README|Data Engineering hub]]
+- [FHIR](/data-engineering/fhir.md) — the complementary HL7 standard for real-time healthcare data exchange
+- [ETL Pipeline](/data-engineering/etl-pipeline.md) — OMOP conversion is one of the most standardized ETL use cases in healthcare
+- [dbt](/data-engineering/dbt.md) — increasingly used for OMOP ETL pipelines
+- [Data Quality](/data-engineering/data-quality.md) — ACHILLES is essentially a data-quality framework for the CDM
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

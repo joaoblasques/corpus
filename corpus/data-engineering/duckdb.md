@@ -78,13 +78,13 @@ The v1.5.3 patch release (May 2026) is "not an ordinary patch": DuckDB core chan
 
 - **Quack as a core extension** — transparently autoinstalled/autoloaded on first use [^src1].
 - **DuckLake + Quack** — DuckLake now supports a DuckDB-with-Quack instance as its **catalog database**, so a remote DuckDB server can be a remotely-accessible catalog [^src1][^src2].
-- **Iceberg** — `MERGE INTO` now supported for Iceberg tables; `INSERT`/`UPDATE` on partitioned Iceberg tables (truncate/bucket transforms); CTAS via ADBC; `ALTER TABLE`; `GEOMETRY` type [^src1]. See [[data-engineering/apache-iceberg|Apache Iceberg]] and [[data-engineering/merge-into|MERGE INTO]].
+- **Iceberg** — `MERGE INTO` now supported for Iceberg tables; `INSERT`/`UPDATE` on partitioned Iceberg tables (truncate/bucket transforms); CTAS via ADBC; `ALTER TABLE`; `GEOMETRY` type [^src1]. See [Apache Iceberg](/data-engineering/apache-iceberg.md) and [MERGE INTO](/data-engineering/merge-into.md).
 - **AWS / HTTPS** — IRSA web_identity chain, IAM auth for RDS/Aurora PostgreSQL, `HTTP_PROXY` support [^src1].
 - **Internals** — jemalloc now statically linked into core (was an extension) so other extensions can load dynamically [^src1].
 
 ## DuckLake
 
-A lakehouse format/catalog approach (referenced alongside Iceberg as a newer OTF entrant in [[data-engineering/open-table-formats|open table formats]]). Quack makes multi-process modification "far simpler" than DuckLake alone and at higher performance; DuckLake can use a remote DuckDB-via-Quack server as its catalog, unlocking capabilities like data inlining [^src1][^src2].
+A lakehouse format/catalog approach (referenced alongside Iceberg as a newer OTF entrant in [open table formats](/data-engineering/open-table-formats.md)). Quack makes multi-process modification "far simpler" than DuckLake alone and at higher performance; DuckLake can use a remote DuckDB-via-Quack server as its catalog, unlocking capabilities like data inlining [^src1][^src2].
 
 ## Obsidian / MotherDuck integration
 
@@ -118,13 +118,13 @@ A secondary argument: the industry may be swinging back toward simplicity after 
 
 ## Where DuckDB fits in multi-engine routing
 
-In multi-engine Iceberg deployments DuckDB is the **selective-lookup / sub-second tier** — "a point lookup that costs $0.01 on DuckDB costs $0.08 on Snowflake" — but cannot distribute across nodes, so heavy distributed joins go elsewhere. Table compaction expands the set of queries DuckDB can serve. See [[data-engineering/query-engine-routing|Query-engine routing]].
+In multi-engine Iceberg deployments DuckDB is the **selective-lookup / sub-second tier** — "a point lookup that costs $0.01 on DuckDB costs $0.08 on Snowflake" — but cannot distribute across nodes, so heavy distributed joins go elsewhere. Table compaction expands the set of queries DuckDB can serve. See [Query-engine routing](/data-engineering/query-engine-routing.md).
 
 ## Related
 
-- [[data-engineering/query-engine-routing|Query-engine routing]] — DuckDB as the cheap fast tier
-- [[data-engineering/apache-iceberg|Apache Iceberg]] · [[data-engineering/open-table-formats|Open table formats]] · [[data-engineering/parquet|Parquet]]
-- [[data-engineering/merge-into|MERGE INTO]]
+- [Query-engine routing](/data-engineering/query-engine-routing.md) — DuckDB as the cheap fast tier
+- [Apache Iceberg](/data-engineering/apache-iceberg.md) · [Open table formats](/data-engineering/open-table-formats.md) · [Parquet](/data-engineering/parquet.md)
+- [MERGE INTO](/data-engineering/merge-into.md)
 
 [^src1]: [DuckDB 1.5.3: Not an Ordinary Patch Release](../../raw/web/duckdb-1-5-3-not-an-ordinary-patch-release.md)
 [^src2]: [Quack: The DuckDB Client-Server Protocol](../../raw/web/quack-the-duckdb-client-server-protocol.md)

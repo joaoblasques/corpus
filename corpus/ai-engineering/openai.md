@@ -25,7 +25,7 @@ updated: 2026-06-21
 
 # OpenAI
 
-**TL;DR**: OpenAI's developer model lineup as announced in its April 2025 Dev Digest — the **o3 / o4-mini** reasoning models, the developer-focused **GPT-4.1** family (up to 1M-token context), the open-source **Codex CLI** coding agent, a programmatic **Evals API**, and a new suite of audio models for voice agents [^src1]. Peer lab/models to Anthropic's Claude (contrast: [[ai-engineering/claude-models|Claude Model Lineup]]).
+**TL;DR**: OpenAI's developer model lineup as announced in its April 2025 Dev Digest — the **o3 / o4-mini** reasoning models, the developer-focused **GPT-4.1** family (up to 1M-token context), the open-source **Codex CLI** coding agent, a programmatic **Evals API**, and a new suite of audio models for voice agents [^src1]. Peer lab/models to Anthropic's Claude (contrast: [Claude Model Lineup](/ai-engineering/claude-models.md)).
 
 This page captures a single point-in-time announcement: OpenAI framed the release as "a slew of new models and features for developers" spanning coding, voice experiences, and "faster, more capable agentic apps" [^src1]. The lineup below therefore reads as four parallel tracks — reasoning, developer-first, coding agent, and audio — rather than one model.
 
@@ -43,11 +43,11 @@ This page captures a single point-in-time announcement: OpenAI framed the releas
 
 ## Codex CLI
 
-**Codex CLI** is an open-source **local coding agent** that turns natural language into working code — tell it what to build, fix, or explain [^src1]. It works with all OpenAI models, including o3, o4-mini, and GPT-4.1 [^src1]. A peer to [[ai-engineering/agentic-coding|Agentic Coding]] tools and to Anthropic's [[ai-engineering/claude-code|Claude Code]].
+**Codex CLI** is an open-source **local coding agent** that turns natural language into working code — tell it what to build, fix, or explain [^src1]. It works with all OpenAI models, including o3, o4-mini, and GPT-4.1 [^src1]. A peer to [Agentic Coding](/ai-engineering/agentic-coding.md) tools and to Anthropic's [Claude Code](/ai-engineering/claude-code.md).
 
 ## Evals API
 
-The **Evals API** lets developers programmatically define tests, automate evaluation runs, and iterate quickly on prompts [^src1]. See [[ai-engineering/agent-evaluation|Agent Evaluation]] for the broader evaluation methodology.
+The **Evals API** lets developers programmatically define tests, automate evaluation runs, and iterate quickly on prompts [^src1]. See [Agent Evaluation](/ai-engineering/agent-evaluation.md) for the broader evaluation methodology.
 
 ## Audio models & voice agents
 
@@ -57,11 +57,11 @@ The **Evals API** lets developers programmatically define tests, automate evalua
 
 ## See also
 
-- [[ai-engineering/claude-models|Claude Model Lineup]] — peer lab/models for contrast
-- [[ai-engineering/llm|LLM]] — the underlying model class
-- [[ai-engineering/agentic-coding|Agentic Coding]] — Codex CLI sits in this space
-- [[ai-engineering/claude-code|Claude Code]] — peer coding agent
-- [[ai-engineering/agent-evaluation|Agent Evaluation]] — the Evals API operationalizes this
+- [Claude Model Lineup](/ai-engineering/claude-models.md) — peer lab/models for contrast
+- [LLM](/ai-engineering/llm.md) — the underlying model class
+- [Agentic Coding](/ai-engineering/agentic-coding.md) — Codex CLI sits in this space
+- [Claude Code](/ai-engineering/claude-code.md) — peer coding agent
+- [Agent Evaluation](/ai-engineering/agent-evaluation.md) — the Evals API operationalizes this
 
 ---
 

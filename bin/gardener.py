@@ -61,9 +61,14 @@ def is_expandable(stub_path, root=None) -> bool:
 
 
 def inbound_count(slug: str, corpus_dir=None) -> int:
-    """How many wikilinks across the corpus point at this page slug (domain/name)."""
+    """How many root-relative markdown links across the corpus point at this page.
+
+    Counts occurrences of ``/{slug}.md)`` which appears in ``[text](/domain/slug.md)``
+    links. The slug is the page's relative path within the corpus without extension
+    (e.g. ``ai-engineering/openai``).
+    """
     cdir = Path(corpus_dir) if corpus_dir is not None else CORPUS
-    needle = f"[[{slug}"
+    needle = f"/{slug}.md)"
     n = 0
     for md in cdir.rglob("*.md"):
         try:

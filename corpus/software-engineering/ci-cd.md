@@ -191,10 +191,10 @@ The linked series covers (9–12 videos): CI pipelines → CD/delivery → Terra
 
 ## See also
 
-- [[software-engineering/kubernetes|Kubernetes]] — declarative orchestration platform that GitOps builds on
-- [[software-engineering/microservices|Microservices]] — architectural context driving platform team formation
-- [[software-engineering/distributed-systems-fallacies|Distributed Systems Fallacies]] — reliability assumptions that CI/CD is designed to surface and contain
-- [[software-engineering/git-basics|Git Basics]] — underlying VCS that GitHub Actions workflows target
+- [Kubernetes](/software-engineering/kubernetes.md) — declarative orchestration platform that GitOps builds on
+- [Microservices](/software-engineering/microservices.md) — architectural context driving platform team formation
+- [Distributed Systems Fallacies](/software-engineering/distributed-systems-fallacies.md) — reliability assumptions that CI/CD is designed to surface and contain
+- [Git Basics](/software-engineering/git-basics.md) — underlying VCS that GitHub Actions workflows target
 
 ---
 

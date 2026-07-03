@@ -35,7 +35,7 @@ Store data objects from source systems in any format in a cloud server [^src1]:
 - **Databases** (Data Warehouse): single source of truth + business logic, well-defined query languages (SQL), structured and performant
   - Tools: Snowflake, Databricks, BigQuery (warehouses); MySQL, Postgres, SQL Server (OLTP); MongoDB, Cassandra (NoSQL)
 
-See [[data-engineering/data-lake|Data Lake]] and [[data-engineering/cloud-data-warehouse-internals|Cloud Data Warehouse Internals]].
+See [Data Lake](/data-engineering/data-lake.md) and [Cloud Data Warehouse Internals](/data-engineering/cloud-data-warehouse-internals.md).
 
 ### 2. Ingestion
 
@@ -46,7 +46,7 @@ Extract data from various sources and load it into a consolidated landing zone [
 - Streaming: Apache Kafka, Kinesis, Debezium
 - Destination: data lake or staging area (ETL vs ELT)
 
-See [[data-engineering/data-ingestion-patterns|Data Ingestion Patterns]], [[data-engineering/change-data-capture|Change Data Capture]], [[data-engineering/kafka|Kafka]].
+See [Data Ingestion Patterns](/data-engineering/data-ingestion-patterns.md), [Change Data Capture](/data-engineering/change-data-capture.md), [Kafka](/data-engineering/kafka.md).
 
 ### 3. Transformation
 
@@ -58,7 +58,7 @@ Turn raw loaded data into clean, organized data ready for analytics [^src1]:
 - Applies real-world rules: filtering, aggregation, standardization, schema conformance
 - Languages: SQL, Python, Jinja; File types: CSV, Parquet, JSON, YAML
 
-See [[data-engineering/data-transformation|Data Transformation]], [[data-engineering/dbt|dbt]], [[data-engineering/apache-spark|Apache Spark]].
+See [Data Transformation](/data-engineering/data-transformation.md), [dbt](/data-engineering/dbt.md), [Apache Spark](/data-engineering/apache-spark.md).
 
 ### 4. Reporting & Analytics / Visualization
 
@@ -69,7 +69,7 @@ Provides insights from transformed data for better decision-making [^src1]:
 - ML tools can also sit here
 - Languages: SQL, Python, R
 
-See [[data-engineering/bi-as-code|BI as Code]], [[data-engineering/semantic-layer|Semantic Layer]].
+See [BI as Code](/data-engineering/bi-as-code.md), [Semantic Layer](/data-engineering/semantic-layer.md).
 
 ### 5. Version Control & CI/CD
 
@@ -79,7 +79,7 @@ Monitor all code changes and automate deployment [^src1]:
 - **CI/CD**: event-triggered automation (vs schedule-based orchestration) — faster to production, removes manual steps
 - Typically YAML-configured (GitHub Actions)
 
-See [[data-engineering/cicd-for-data-infrastructure|CI/CD for Data Infrastructure]].
+See [CI/CD for Data Infrastructure](/data-engineering/cicd-for-data-infrastructure.md).
 
 ## The 5 advanced components
 
@@ -93,7 +93,7 @@ Connect and trigger different parts of a pipeline through a single tool [^src1]:
 - Tools: Airflow, Prefect, Dagster, Luigi (pure orchestration); Kubernetes, OpenShift (container orchestration); Jenkins (CI/CD can double as orchestration); SQL Agent Job, SSIS (server-based)
 - Languages: Python, Bash/Zsh; YAML
 
-See [[data-engineering/data-orchestration|Data Orchestration]].
+See [Data Orchestration](/data-engineering/data-orchestration.md).
 
 ### 7. Containers
 
@@ -114,7 +114,7 @@ Create and manage cloud resources with version-controlled code, rather than manu
 - Tools: **Terraform** (primary), Ansible; cloud-native: AWS CloudFormation, Azure Resource Manager, GCP Deployment Manager
 - Languages: Bash/Zsh, Python; Terraform `.tf` files, YAML/JSON
 
-See [[data-engineering/cicd-for-data-infrastructure|CI/CD for Data Infrastructure]].
+See [CI/CD for Data Infrastructure](/data-engineering/cicd-for-data-infrastructure.md).
 
 ### 9. Data Quality
 
@@ -126,7 +126,7 @@ Ensure data accuracy, completeness, consistency, and reliability [^src1]:
 - Catalog/observability tools: DataHub, Atlan, Castor, Collibra (catalogs); Monte Carlo, Amundsen (observability)
 - Languages: SQL, Python, Bash/Zsh; YAML
 
-See [[data-engineering/data-quality|Data Quality]], [[data-engineering/data-observability|Data Observability]].
+See [Data Quality](/data-engineering/data-quality.md), [Data Observability](/data-engineering/data-observability.md).
 
 ### 10. Reverse ETL
 
@@ -174,13 +174,13 @@ Ingestion  Transform    Data Quality   Visualization
 
 ## Related
 
-- [[data-engineering/etl-pipeline|ETL Pipeline]] — the Extract-Transform-Load pattern (MDS component interaction)
-- [[data-engineering/data-ingestion-patterns|Data Ingestion Patterns]] — ingestion layer in depth
-- [[data-engineering/medallion-architecture|Medallion Architecture]] — bronze/silver/gold within the storage + transformation layers
-- [[data-engineering/data-orchestration|Data Orchestration]] — the orchestration component
-- [[data-engineering/data-quality|Data Quality]] — the DQ component
-- [[data-engineering/cicd-for-data-infrastructure|CI/CD for Data Infrastructure]] — CI/CD and IaC components
-- [[data-engineering/README|Data Engineering hub]]
+- [ETL Pipeline](/data-engineering/etl-pipeline.md) — the Extract-Transform-Load pattern (MDS component interaction)
+- [Data Ingestion Patterns](/data-engineering/data-ingestion-patterns.md) — ingestion layer in depth
+- [Medallion Architecture](/data-engineering/medallion-architecture.md) — bronze/silver/gold within the storage + transformation layers
+- [Data Orchestration](/data-engineering/data-orchestration.md) — the orchestration component
+- [Data Quality](/data-engineering/data-quality.md) — the DQ component
+- [CI/CD for Data Infrastructure](/data-engineering/cicd-for-data-infrastructure.md) — CI/CD and IaC components
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

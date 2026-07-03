@@ -74,8 +74,8 @@ Bitcoin uses SHA-256 in multiple contexts:
 
 ## Related pages
 
-- [[blockchain/merkle-trees|Merkle Trees]] — built from pairwise hash operations; relies on avalanche effect
-- [[blockchain/proof-of-work|Proof-of-Work]] — PoW mining is a hash-finding exercise
-- [[blockchain/public-key-cryptography|Public-Key Cryptography]] — address derivation combines SHA-256 and RIPEMD160
+- [Merkle Trees](/blockchain/merkle-trees.md) — built from pairwise hash operations; relies on avalanche effect
+- [Proof-of-Work](/blockchain/proof-of-work.md) — PoW mining is a hash-finding exercise
+- [Public-Key Cryptography](/blockchain/public-key-cryptography.md) — address derivation combines SHA-256 and RIPEMD160
 
 [^src1]: [Hash Functions](../../raw/notes/notes-hash-functions-scrape.md)

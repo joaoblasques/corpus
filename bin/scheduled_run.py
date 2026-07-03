@@ -44,7 +44,7 @@ GIT_BIN = shutil.which("git") or "/usr/bin/git"
 YOUTUBE_TOKEN_PATH = BIN / "youtube_token.json"
 
 # Default log path (injectable via log_path kwarg or CORPUS_LOG_PATH env var for CLI tests)
-_LOG_PATH_DEFAULT = ROOT / "corpus" / "_log.md"
+_LOG_PATH_DEFAULT = ROOT / "corpus" / "log.md"
 LOG_PATH = Path(os.environ["CORPUS_LOG_PATH"]) if "CORPUS_LOG_PATH" in os.environ else _LOG_PATH_DEFAULT
 
 
@@ -958,93 +958,125 @@ def write_run_report(
     *,
     log_path: Path | None = None,
 ) -> None:
-    """Append a scheduled run summary block to corpus/_log.md.
+    """Write a scheduled run summary block into corpus/log.md (OKF format).
+
+    Writes newest-first: the new block is INSERTED right after the log's
+    title/intro header (before any existing ## date-group entries).  When a
+    ``## YYYY-MM-DD`` group for today already sits at the top, the new bullets
+    are appended under that existing heading instead of creating a duplicate.
 
     Args:
         tallies: dict with keys "collectors" (output of run_collectors),
                  "ingest" (output of run_ingest), and optionally "commit"
                  (output of commit_and_push).
-        at: ISO timestamp string for the log entry header.
-        log_path: Path to _log.md (defaults to LOG_PATH); tests pass tmp_path.
+        at: ISO timestamp string (YYYY-MM-DD or YYYY-MM-DDTHH:MM etc.); only
+            the date part is used for the OKF heading.
+        log_path: Path to log.md (defaults to LOG_PATH); tests pass tmp_path.
     """
     path = log_path if log_path is not None else LOG_PATH
+
+    # Extract YYYY-MM-DD from the `at` string (split on T or space)
+    today = re.split(r"[T ]", at)[0]
+    date_heading = f"## {today}"
 
     collectors = tallies.get("collectors", {})
     ingest = tallies.get("ingest", {})
     commit = tallies.get("commit", {})
 
-    # Per-channel lines
-    channel_lines = []
-    for channel, info in collectors.items():
-        status = info.get("status", "unknown")
-        if "refetched" in info:
-            channel_lines.append(f"  - {channel}: {info['refetched']} refetched · status={status}")
-        else:
-            collected = info.get("collected", 0)
-            channel_lines.append(f"  - {channel}: {collected} collected · status={status}")
+    # --- Build bullet lines ---
+    bullets: list[str] = []
 
+    # Collectors summary
+    channel_parts = []
+    for channel, info in collectors.items():
+        n = info.get("refetched", info.get("collected", 0))
+        channel_parts.append(f"{channel}={n}")
+    collectors_str = ", ".join(channel_parts) if channel_parts else "none"
+    bullets.append(f"* **Collectors**: {collectors_str}")
+
+    # Ingest
     ingested = ingest.get("ingested", 0)
     deferred = ingest.get("deferred", 0)
     ingest_status = ingest.get("status", "unknown")
     ingest_error = ingest.get("error", "")
-    ingest_line = f"  - ingest: {ingested} ingested · {deferred} deferred · status={ingest_status}"
+    ingest_str = f"{ingested} ingested · {deferred} deferred · status={ingest_status}"
     if ingest_error:
-        ingest_line += f" · error={ingest_error}"
+        ingest_str += f" · error={ingest_error}"
+    bullets.append(f"* **Ingest**: {ingest_str}")
 
-    channels_text = "\n".join(channel_lines)
-    block = (
-        f"\n## [{at}] config | scheduled run\n"
-        f"- collectors:\n{channels_text}\n"
-        f"- ingest:\n{ingest_line}\n"
-    )
-
-    # YouTube quick-intake line (native Groq drain of the tech-video backlog)
+    # YouTube quick-intake (native Groq drain of the tech-video backlog)
     yq = tallies.get("youtube_quick")
     if yq:
-        yq_status = yq.get("status", "unknown")
-        yq_line = (f"  - youtube_quick: {yq.get('ingested', 0)} intake · "
-                   f"{yq.get('rescued', 0)} rescued · {yq.get('skipped', 0)} skipped · "
-                   f"status={yq_status}")
+        yq_str = (f"{yq.get('ingested', 0)} intake · {yq.get('rescued', 0)} rescued · "
+                  f"{yq.get('skipped', 0)} skipped · status={yq.get('status', 'unknown')}")
         if yq.get("error"):
-            yq_line += f" · error={yq['error']}"
-        block += f"- youtube_quick:\n{yq_line}\n"
+            yq_str += f" · error={yq['error']}"
+        bullets.append(f"* **YoutubeQuick**: {yq_str}")
 
-    # Web/notes quick-intake line (free-LLM drain of the clippings/blog/notes backlog)
+    # Web/notes quick-intake (free-LLM drain of the clippings/blog/notes backlog)
     dq = tallies.get("docs_quick")
     if dq:
-        dq_line = (f"  - docs_quick: {dq.get('ingested', 0)} intake · "
-                   f"{dq.get('skipped_thin', 0)} thin · {dq.get('llm_fail', 0)} llm_fail · "
-                   f"status={dq.get('status', 'unknown')}")
+        dq_str = (f"{dq.get('ingested', 0)} intake · {dq.get('skipped_thin', 0)} thin · "
+                  f"{dq.get('llm_fail', 0)} llm_fail · status={dq.get('status', 'unknown')}")
         if dq.get("error"):
-            dq_line += f" · error={dq['error']}"
-        block += f"- docs_quick:\n{dq_line}\n"
+            dq_str += f" · error={dq['error']}"
+        bullets.append(f"* **DocsQuick**: {dq_str}")
 
-    # Post-ingest corpus integrity check (deterministic backstop on the agent's work).
+    # Post-ingest corpus integrity check
     lint = tallies.get("lint")
     if lint:
         if "error" in lint:
-            block += f"- lint:\n  - error={lint['error']}\n"
+            bullets.append(f"* **Lint**: error={lint['error']}")
         else:
             bw, bc = lint.get("broken_wikilinks", 0), lint.get("broken_citations", 0)
             flag = "  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py" if (bw or bc) else ""
-            block += (f"- lint:\n  - {bw} broken wikilinks · {bc} broken citations · "
-                      f"{lint.get('orphans', 0)} orphans · {lint.get('stubs', 0)} stubs{flag}\n")
+            bullets.append(f"* **Lint**: {bw} broken wikilinks · {bc} broken citations · "
+                           f"{lint.get('orphans', 0)} orphans · {lint.get('stubs', 0)} stubs{flag}")
+            # OKF conformance guard
+            okf_n = lint.get("okf_violations")
+            if okf_n is not None:
+                okf_flag = " ⚠" if okf_n else ""
+                bullets.append(f"* **OKF**: {okf_n} violations{okf_flag}")
 
-    # Include commit/push line when present
+    # Commit/push
     if commit:
         commit_status = commit.get("status", "unknown")
-        commit_line = f"  - commit: status={commit_status}"
+        commit_str = f"status={commit_status}"
         sha = commit.get("sha", "")
         if sha:
-            commit_line += f" · sha={sha}"
+            commit_str += f" · sha={sha}"
         push_error = commit.get("push_error", "")
         if push_error:
-            commit_line += f" · error={push_error}"
-        block += f"- commit/push:\n{commit_line}\n"
+            commit_str += f" · error={push_error}"
+        bullets.append(f"* **Commit**: {commit_str}")
 
+    bullets_text = "\n".join(bullets)
+
+    # --- Insert newest-first into the log ---
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("a", encoding="utf-8") as f:
-        f.write(block)
+    existing = path.read_text(encoding="utf-8") if path.exists() else ""
+    lines = existing.splitlines(keepends=True)
+
+    # Find the first ## heading in the file
+    first_h2_idx: int | None = None
+    for i, line in enumerate(lines):
+        if line.startswith("## "):
+            first_h2_idx = i
+            break
+
+    if first_h2_idx is not None and lines[first_h2_idx].rstrip() == date_heading:
+        # Same-day: find end of today's group and append bullets there
+        end = first_h2_idx + 1
+        while end < len(lines) and not lines[end].startswith("## "):
+            end += 1
+        new_lines = lines[:end] + [bullets_text + "\n"] + lines[end:]
+    else:
+        # New day: prepend a new ## today block before the first existing ## heading
+        insert_at = first_h2_idx if first_h2_idx is not None else len(lines)
+        new_block = f"{date_heading}\n{bullets_text}\n\n"
+        new_lines = lines[:insert_at] + [new_block] + lines[insert_at:]
+
+    path.write_text("".join(new_lines), encoding="utf-8")
 
 
 # ---------------------------------------------------------------------------
@@ -1200,6 +1232,7 @@ def main(argv=None) -> int:
                         "broken_citations": len(report["broken_citations"]),
                         "orphans": len(report["orphans"]),
                         "stubs": len(report["stubs"]),
+                        "okf_violations": report["okf_violations"],
                     }
                 except Exception as exc:  # noqa: BLE001
                     tallies["lint"] = {"error": str(exc)}

@@ -52,13 +52,13 @@ Attempting both fails by construction: if a client writes `x = 1` to Node A and 
 
 ## Relationship to distributed systems
 
-CAP is the formal statement behind several [[software-engineering/distributed-systems-fallacies|distributed systems fallacies]] — chiefly "the network is reliable" and "the network is secure." The eventual-consistency design used in [[software-engineering/microservices|microservices]] is an AP-side tradeoff: temporary inconsistency is accepted to keep the system answering [^src1].
+CAP is the formal statement behind several [distributed systems fallacies](/software-engineering/distributed-systems-fallacies.md) — chiefly "the network is reliable" and "the network is secure." The eventual-consistency design used in [microservices](/software-engineering/microservices.md) is an AP-side tradeoff: temporary inconsistency is accepted to keep the system answering [^src1].
 
 ## See also
 
-- [[software-engineering/distributed-systems-fallacies|Distributed Systems Fallacies]] — partition tolerance is the formalization of "the network is reliable" being false
-- [[software-engineering/microservices|Microservices]] — eventual consistency as an AP tradeoff
-- [[software-engineering/README|Software Engineering hub]]
+- [Distributed Systems Fallacies](/software-engineering/distributed-systems-fallacies.md) — partition tolerance is the formalization of "the network is reliable" being false
+- [Microservices](/software-engineering/microservices.md) — eventual consistency as an AP tradeoff
+- [Software Engineering hub](/software-engineering/README.md)
 
 ---
 

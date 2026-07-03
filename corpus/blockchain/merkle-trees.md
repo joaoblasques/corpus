@@ -71,8 +71,8 @@ Mobile Bitcoin wallets are SPV clients. They can verify a transaction was includ
 
 ## Related pages
 
-- [[blockchain/hash-functions|Hash Functions]] — the avalanche effect that makes Merkle trees work
-- [[blockchain/bitcoin|Bitcoin]] — block headers contain the Merkle root of transactions
-- [[blockchain/public-key-cryptography|Public-Key Cryptography]] — RIPEMD160(SHA-256(pub_key)) is another hash-based commitment scheme
+- [Hash Functions](/blockchain/hash-functions.md) — the avalanche effect that makes Merkle trees work
+- [Bitcoin](/blockchain/bitcoin.md) — block headers contain the Merkle root of transactions
+- [Public-Key Cryptography](/blockchain/public-key-cryptography.md) — RIPEMD160(SHA-256(pub_key)) is another hash-based commitment scheme
 
 [^src1]: [Merkle Trees](../../raw/notes/notes-merkle-trees-scrape.md)

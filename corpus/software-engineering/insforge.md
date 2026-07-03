@@ -26,12 +26,12 @@ updated: 2026-06-16
 
 "The all-in-one, open-source backend platform for agentic coding" — it gives a coding agent database, auth, storage, compute, hosting, and an AI gateway to ship full-stack apps end-to-end [^src1]. Agents drive it through one of two interfaces: an **MCP server** (exposes operations as tools any MCP-compatible agent can call) or a **CLI + Skills** (cloud only) [^src1]. Both let agents "operate the backend like backend engineers" — reading schemas, metadata, and runtime logs, and configuring primitives (deploy edge functions, run migrations, create buckets, set up auth) [^src1].
 
-Primitives: Postgres database, S3-compatible storage, OpenAI-compatible model gateway across providers, edge functions, long-running container compute (private preview), and site deployment [^src1]. Self-hostable via Docker Compose; Apache 2.0 licensed [^src1]. It is a backend analogue to the agent-operated tooling pattern in [[software-engineering/ai-assisted-development|AI-assisted development]].
+Primitives: Postgres database, S3-compatible storage, OpenAI-compatible model gateway across providers, edge functions, long-running container compute (private preview), and site deployment [^src1]. Self-hostable via Docker Compose; Apache 2.0 licensed [^src1]. It is a backend analogue to the agent-operated tooling pattern in [AI-assisted development](/software-engineering/ai-assisted-development.md).
 
 ## See also
 
-- [[software-engineering/ai-assisted-development|AI-Assisted Development]] — agent-operated CLI/MCP tooling and review agents
-- [[software-engineering/README|Software Engineering hub]]
+- [AI-Assisted Development](/software-engineering/ai-assisted-development.md) — agent-operated CLI/MCP tooling and review agents
+- [Software Engineering hub](/software-engineering/README.md)
 
 ---
 

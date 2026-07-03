@@ -49,7 +49,7 @@ Plain self-attention has no built-in word-order representation; the embedding fo
 
 - **Additive sinusoidal (Vaswani et al. 2017)**: each position gets its own pattern of sine/cosine waves at different frequencies, added to the embedding before any processing. Chosen partly to extrapolate beyond training sequence lengths [^src2]. Two scaling problems: the embedding must carry both meaning *and* position in the same numbers, and learned absolute positions don't generalize to unseen lengths [^src2].
 - **RoPE (Rotary Position Embeddings, Su et al. 2021)** — used in LLaMA, Mistral, Gemma, Qwen, and most open-weight families. Instead of *adding* position info, RoPE **rotates the Query and Key vectors** by an angle that depends on position; what matters during attention is the *difference* between two tokens' rotations, encoding relative distance [^src2]. Advantages: encodes relative position naturally, generalizes better to longer contexts, and adds no new parameters [^src2].
-- **"Lost in the middle" (Liu et al. 2023)**: even with good positional encoding, models use information at the **start and end** of long prompts more reliably than information buried in the middle — why "put important context first" / "repeat key info at the end" prompt-engineering tips help [^src2]. See [[ai-engineering/context-window-management|Context Window Management]].
+- **"Lost in the middle" (Liu et al. 2023)**: even with good positional encoding, models use information at the **start and end** of long prompts more reliably than information buried in the middle — why "put important context first" / "repeat key info at the end" prompt-engineering tips help [^src2]. See [Context Window Management](/ai-engineering/context-window-management.md).
 
 ## Attention
 
@@ -78,7 +78,7 @@ After attention mixes information *between* tokens, each layer's FFN processes *
 - **The non-linearity** prevents collapse: two stacked linear layers are mathematically equivalent to one, so without a bend in the middle the FFN couldn't do anything richer than a single matrix multiply [^src2]. Iteration: original transformer used **ReLU**; GPT and BERT moved to **GELU**; LLaMA, Mistral, PaLM use **SwiGLU** — the expand-compress structure stayed the same [^src2].
 - **Where factual knowledge lives**: most parameters in a dense transformer sit in the FFN, not attention [^src2]. Those weights store much of the model's factual/semantic structure — researchers found individual neurons strongly associated with specific concepts (Eiffel-Tower text, programming languages, past-tense verbs) [^src2].
 - **ROME editing**: Rank-One Model Editing can change a stored fact (e.g. "the Eiffel Tower is in Paris" → "in Rome") via a targeted low-rank edit to a specific FFN weight matrix, without retraining [^src2].
-- **MoE**: some frontier models replace the dense FFN with [[ai-engineering/mixture-of-experts|Mixture of Experts]] — many parallel expert FFNs plus a router that activates only a few per token [^src2].
+- **MoE**: some frontier models replace the dense FFN with [Mixture of Experts](/ai-engineering/mixture-of-experts.md) — many parallel expert FFNs plus a router that activates only a few per token [^src2].
 
 ## Residual stream and layer normalization
 
@@ -108,19 +108,19 @@ Behavior is emergent — the architecture defines the framework; the billions of
 
 **Pipeline stages** [^src3]: Input embeddings → Position encodings → Layer normalization → Self-attention (Q/K/V computation) → Output projection → MLP (linear + GeLU + linear) → Softmax → Logits
 
-Each cell contains the actual numeric computation so every value can be traced from input to output. The purpose is pedagogical — making each architectural component legible at the cell level, not producing a usable model [^src3]. See also the parent concept in [[ai-engineering/llm|LLM]].
+Each cell contains the actual numeric computation so every value can be traced from input to output. The purpose is pedagogical — making each architectural component legible at the cell level, not producing a usable model [^src3]. See also the parent concept in [LLM](/ai-engineering/llm.md).
 
 ## See also
 
-- [[ai-engineering/llm|LLM]] — the Transformer is the architecture underlying all modern LLMs
-- [[ai-engineering/embeddings|Embeddings]] — the token-embedding lookup (this page's §Embeddings) is the same dense-vector idea reused at retrieval time
-- [[ai-engineering/neural-network|Neural Networks]] — the broader network family the Transformer belongs to
-- [[ai-engineering/mixture-of-experts|Mixture of Experts]] — sparse FFN variant used in the largest frontier models
-- [[ai-engineering/context-window-management|Context Window Management]] — "lost in the middle" and the n² attention cost shape what to keep in context
-- [[ai-engineering/context-engineering|Context Engineering]] — attention is what makes context-window structure matter; tokens attend across the full window
+- [LLM](/ai-engineering/llm.md) — the Transformer is the architecture underlying all modern LLMs
+- [Embeddings](/ai-engineering/embeddings.md) — the token-embedding lookup (this page's §Embeddings) is the same dense-vector idea reused at retrieval time
+- [Neural Networks](/ai-engineering/neural-network.md) — the broader network family the Transformer belongs to
+- [Mixture of Experts](/ai-engineering/mixture-of-experts.md) — sparse FFN variant used in the largest frontier models
+- [Context Window Management](/ai-engineering/context-window-management.md) — "lost in the middle" and the n² attention cost shape what to keep in context
+- [Context Engineering](/ai-engineering/context-engineering.md) — attention is what makes context-window structure matter; tokens attend across the full window
 
 ---
 
-[^src1]: [[03_Resources/Study Notes/AI - How Large Language Models Work|AI - How Large Language Models Work]]
+[^src1]: [AI - How Large Language Models Work](/03_Resources/Study Notes/AI - How Large Language Models Work.md)
 [^src2]: [How LLMs Actually Work](../../raw/web/how-llms-actually-work.md)
 [^src3]: [dabochen/spreadsheet-is-all-you-need — GPT inference in a spreadsheet (★2,159)](../../raw/github/github-dabochen-spreadsheet-is-all-you-need.md) — GitHub

@@ -71,8 +71,8 @@ This is opinion, and the author is openly hostile to AI boosters; attribute its 
 ## Relationship to other corpus claims
 
 This page is a deliberate **counterweight** to the more pragmatic-bullish reads elsewhere in the domain. It does not contradict them on facts so much as on outlook:
-- [[ai-business/ai-and-the-job-market|AI and the Job Market]] argues the durable edge is *applying* AI to messy business context (AI-as-utility). This source agrees AI is hard to extract ROI from, but draws the opposite macro conclusion — that the spend itself is unsustainable, not just under-applied. Where that page sees new "appliance-building" roles, this one sees CFOs capping budgets [^src1]. (Deferred-update: the job-market synthesis may later be enriched with this contrarian/economic lens; not edited here.)
-- [[ai-business/monetizing-code|Monetizing Code]] — the "sell a result, prove the ROI" discipline is directly reinforced by the enterprise demand for measurable AI spend [^src1].
+- [AI and the Job Market](/ai-business/ai-and-the-job-market.md) argues the durable edge is *applying* AI to messy business context (AI-as-utility). This source agrees AI is hard to extract ROI from, but draws the opposite macro conclusion — that the spend itself is unsustainable, not just under-applied. Where that page sees new "appliance-building" roles, this one sees CFOs capping budgets [^src1]. (Deferred-update: the job-market synthesis may later be enriched with this contrarian/economic lens; not edited here.)
+- [Monetizing Code](/ai-business/monetizing-code.md) — the "sell a result, prove the ROI" discipline is directly reinforced by the enterprise demand for measurable AI spend [^src1].
 
 ## Gotchas
 

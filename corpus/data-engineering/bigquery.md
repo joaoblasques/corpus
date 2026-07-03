@@ -22,7 +22,7 @@ updated: 2026-06-19
 
 # Google BigQuery
 
-**TL;DR.** BigQuery is Google's **serverless cloud data warehouse** (publicly launched 2010), one of the two pioneers — with [[data-engineering/snowflake|Snowflake]] — of the **cloud-native shared-disk OLAP** architecture that separates compute from storage [^src1]. It combines three internal Google technologies: **Dremel** (query engine), **Colossus** (storage), and **Borg** (compute/cluster management, "think Kubernetes") [^src1]. Users get advanced distributed query processing without managing any infrastructure [^src1].
+**TL;DR.** BigQuery is Google's **serverless cloud data warehouse** (publicly launched 2010), one of the two pioneers — with [Snowflake](/data-engineering/snowflake.md) — of the **cloud-native shared-disk OLAP** architecture that separates compute from storage [^src1]. It combines three internal Google technologies: **Dremel** (query engine), **Colossus** (storage), and **Borg** (compute/cluster management, "think Kubernetes") [^src1]. Users get advanced distributed query processing without managing any infrastructure [^src1].
 
 ## The three pillars
 
@@ -38,20 +38,20 @@ Dremel began on a few hundred **shared-nothing** servers, each keeping a subset 
 
 A second bottleneck was **shuffling**. In MapReduce's first phase each worker maps its assigned data and writes output to temporary local storage (RAM/disk); in the reduce phase each worker pulls the keys it owns (the shuffle) [^src1]. Because mapper/reducer scaling is unpredictable and shuffle storage was colocated with compute, the two could not scale independently — so Google **separated the shuffle layer** into a distributed storage system of its own [^src1].
 
-Because storage/compute separation means Dremel often processes **unseen data** with no good statistics, optimal up-front planning is hard; Google's answer is to let Dremel **dynamically change the query execution plan at runtime** based on statistics collected during execution [^src1]. (This runtime-adaptivity theme recurs across all four warehouses — see [[data-engineering/cloud-data-warehouse-internals|Cloud Data Warehouse Internals]].)
+Because storage/compute separation means Dremel often processes **unseen data** with no good statistics, optimal up-front planning is hard; Google's answer is to let Dremel **dynamically change the query execution plan at runtime** based on statistics collected during execution [^src1]. (This runtime-adaptivity theme recurs across all four warehouses — see [Cloud Data Warehouse Internals](/data-engineering/cloud-data-warehouse-internals.md).)
 
 ## Storage: the Capacitor format
 
-BigQuery stores data in Colossus using an internal columnar format called **Capacitor** [^src1]. From a high level Capacitor organizes data in a **hybrid format** like [[data-engineering/parquet|Parquet]] (row groups containing per-column chunks) — and in fact **Capacitor inspired the design of Parquet**, especially in how it handles nested and repeated fields [^src1]. Capacitor carries metadata to help engines **prune unnecessary data** (e.g. per-column min/max values) and applies **Run-Length Encoding (RLE)** and **dictionary encoding** to optimize storage space [^src1].
+BigQuery stores data in Colossus using an internal columnar format called **Capacitor** [^src1]. From a high level Capacitor organizes data in a **hybrid format** like [Parquet](/data-engineering/parquet.md) (row groups containing per-column chunks) — and in fact **Capacitor inspired the design of Parquet**, especially in how it handles nested and repeated fields [^src1]. Capacitor carries metadata to help engines **prune unnecessary data** (e.g. per-column min/max values) and applies **Run-Length Encoding (RLE)** and **dictionary encoding** to optimize storage space [^src1].
 
 ## Related
 
-- [[data-engineering/cloud-data-warehouse-internals|Cloud Data Warehouse Internals]] — the cross-warehouse comparison this page feeds
-- [[data-engineering/snowflake|Snowflake]] · [[data-engineering/databricks|Databricks]] · [[data-engineering/redshift|Redshift]] — the other three cloud warehouses
-- [[data-engineering/parquet|Apache Parquet]] — the open format Capacitor inspired; the hybrid row-group/column-chunk layout
-- [[data-engineering/dataform|Dataform]] — BigQuery-native transformation orchestration
-- [[data-engineering/storage-fundamentals|Storage Fundamentals]] — column vs hybrid format
-- [[data-engineering/README|Data Engineering hub]]
+- [Cloud Data Warehouse Internals](/data-engineering/cloud-data-warehouse-internals.md) — the cross-warehouse comparison this page feeds
+- [Snowflake](/data-engineering/snowflake.md) · [Databricks](/data-engineering/databricks.md) · [Redshift](/data-engineering/redshift.md) — the other three cloud warehouses
+- [Apache Parquet](/data-engineering/parquet.md) — the open format Capacitor inspired; the hybrid row-group/column-chunk layout
+- [Dataform](/data-engineering/dataform.md) — BigQuery-native transformation orchestration
+- [Storage Fundamentals](/data-engineering/storage-fundamentals.md) — column vs hybrid format
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

@@ -44,7 +44,7 @@ Supacode is a macOS terminal multiplexer / session manager positioned as the har
 
 ## Why it matters
 
-The core value proposition: running multiple coding agents in parallel (à la Karpathy's multi-monitor Codex setup in [[ai-engineering/agentic-coding|Agentic Coding]]) becomes manageable when the harness layer organizes them rather than relying on raw terminal windows. Each agent in its own Supacode session has its own context about the project's branch, PR, and CI state [^src1].
+The core value proposition: running multiple coding agents in parallel (à la Karpathy's multi-monitor Codex setup in [Agentic Coding](/ai-engineering/agentic-coding.md)) becomes manageable when the harness layer organizes them rather than relying on raw terminal windows. Each agent in its own Supacode session has its own context about the project's branch, PR, and CI state [^src1].
 
 The Supacode CLI inversion — agent calls CLI to manage its own environment — is a new pattern: the agent becomes a first-class actor in session management, not just a passive occupant of a terminal [^src1].
 
@@ -55,9 +55,9 @@ The Supacode CLI inversion — agent calls CLI to manage its own environment —
 
 ## Relationship to other pages
 
-- [[ai-engineering/agent-harness|Agent Harness]] — Supacode is a specialized harness for the macOS developer environment
-- [[ai-engineering/claude-code|Claude Code]] — primary agent that Supacode integrates with
-- [[ai-engineering/agentic-coding|Agentic Coding]] — the parallel agent paradigm Supacode enables operationally
+- [Agent Harness](/ai-engineering/agent-harness.md) — Supacode is a specialized harness for the macOS developer environment
+- [Claude Code](/ai-engineering/claude-code.md) — primary agent that Supacode integrates with
+- [Agentic Coding](/ai-engineering/agentic-coding.md) — the parallel agent paradigm Supacode enables operationally
 
 ---
 

@@ -20,7 +20,7 @@ updated: 2026-06-15
 
 # Source: End-to-End SQL Sales-Funnel Analysis (Lore So What)
 
-**TL;DR.** A 30-minute end-to-end SQL data-analytics walkthrough (Lore So What, ex-Deloitte senior analyst / ex-AWS analytics lead) on **Google BigQuery**, using e-commerce event data to build a **sales-funnel analysis** [^src1]. The throughline: *SQL is a tool, not the goal* — the analyst's real job is turning queries into business insight and stakeholder recommendations [^src1]. A practical reference for funnel/conversion SQL patterns ([[data-engineering/sql-window-functions|CTEs, conditional aggregation]]) tied to real domain reasoning.
+**TL;DR.** A 30-minute end-to-end SQL data-analytics walkthrough (Lore So What, ex-Deloitte senior analyst / ex-AWS analytics lead) on **Google BigQuery**, using e-commerce event data to build a **sales-funnel analysis** [^src1]. The throughline: *SQL is a tool, not the goal* — the analyst's real job is turning queries into business insight and stakeholder recommendations [^src1]. A practical reference for funnel/conversion SQL patterns ([CTEs, conditional aggregation](/data-engineering/sql-window-functions.md)) tied to real domain reasoning.
 
 ## Setup
 
@@ -36,7 +36,7 @@ BigQuery (browser-based, free, no install) — upload CSV, auto-detect schema, s
 
 ## The takeaway
 
-The deliverable is not the SQL — it's three stakeholder recommendations (UX: don't touch the working checkout flow; marketing: stop over-investing in social, double down on email; finance: watch AOV vs CAC), drafted for an email or slide deck [^t1641]. Demonstrates the [[data-engineering/data-engineer-role|"business value first"]] principle in an analytics context.
+The deliverable is not the SQL — it's three stakeholder recommendations (UX: don't touch the working checkout flow; marketing: stop over-investing in social, double down on email; finance: watch AOV vs CAC), drafted for an email or slide deck [^t1641]. Demonstrates the ["business value first"](/data-engineering/data-engineer-role.md) principle in an analytics context.
 
 ## Techniques worth reusing
 
@@ -47,9 +47,9 @@ The deliverable is not the SQL — it's three stakeholder recommendations (UX: d
 
 ## Related
 
-- [[data-engineering/sql-window-functions|SQL Window Functions]] — adjacent SQL-analytics reference
-- [[data-engineering/data-engineer-role|The Data Engineer Role]] — insight/recommendation over raw querying
-- [[data-engineering/README|Data Engineering hub]]
+- [SQL Window Functions](/data-engineering/sql-window-functions.md) — adjacent SQL-analytics reference
+- [The Data Engineer Role](/data-engineering/data-engineer-role.md) — insight/recommendation over raw querying
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

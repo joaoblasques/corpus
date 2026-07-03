@@ -39,10 +39,30 @@ def test_recent_pages_selects_window_and_skips_catalog(tmp_path):
     c.mkdir(parents=True)
     (c / "fresh.md").write_text("---\ntype: concept\nupdated: 2026-06-18\n---\nx", encoding="utf-8")
     (c / "old.md").write_text("---\ntype: concept\nupdated: 2026-05-01\n---\nx", encoding="utf-8")
-    (tmp_path / "corpus" / "_index.md").write_text("---\nupdated: 2026-06-18\n---\nx", encoding="utf-8")
+    # OKF reserved names at the corpus root: must be skipped even though they have updated: dates
+    (tmp_path / "corpus" / "index.md").write_text("---\nupdated: 2026-06-18\n---\nx", encoding="utf-8")
+    (tmp_path / "corpus" / "log.md").write_text("---\nupdated: 2026-06-18\n---\nx", encoding="utf-8")
     out = ws.recent_pages(since_days=7, _today=datetime.date(2026, 6, 19),
                           corpus_dir=tmp_path / "corpus")
-    assert [p.name for p in out] == ["fresh.md"]   # old excluded; _index skipped
+    assert [p.name for p in out] == ["fresh.md"]   # old excluded; index.md/log.md skipped
+
+
+def test_recent_pages_skips_okf_reserved_names(tmp_path):
+    """recent_pages must explicitly skip index.md and log.md regardless of content."""
+    c = tmp_path / "corpus"
+    c.mkdir()
+    # Add OKF reserved files with recent dates at root level
+    (c / "index.md").write_text("---\nokf_version: '0.1'\nupdated: 2026-06-19\n---\ncatalog",
+                                 encoding="utf-8")
+    (c / "log.md").write_text("---\nupdated: 2026-06-19\n---\nlog entries", encoding="utf-8")
+    # A real concept page
+    (c / "real.md").write_text("---\ntype: concept\nupdated: 2026-06-19\n---\ncontent",
+                               encoding="utf-8")
+    out = ws.recent_pages(since_days=7, _today=datetime.date(2026, 6, 19), corpus_dir=c)
+    names = [p.name for p in out]
+    assert "real.md" in names, "real concept page should be included"
+    assert "index.md" not in names, "index.md should be skipped (OKF reserved)"
+    assert "log.md" not in names, "log.md should be skipped (OKF reserved)"
 
 
 # --- run_synthesis short-circuit ---

@@ -23,7 +23,7 @@ updated: 2026-05-21
 
 LangSmith addresses the core challenge of AI agents being non-deterministic — bugs live in the agent's *reasoning*, not just the code. Traditional stack traces don't surface reasoning failures; deep tracing of LLM calls, tool usage, and decision logic is required [^src1].
 
-Built by LangChain. Commonly used with [[ai-engineering/langgraph|LangGraph]].
+Built by LangChain. Commonly used with [LangGraph](/ai-engineering/langgraph.md).
 
 ## Setup
 
@@ -60,10 +60,10 @@ LANGCHAIN_PROJECT=<project-name>
 
 ## See also
 
-- [[ai-engineering/agent-evaluation|Agent Evaluation]] — evaluation patterns LangSmith implements (LLM-as-judge, golden datasets, online vs offline)
-- [[ai-engineering/ai-agent|AI Agent]] — the systems LangSmith instruments
-- [[ai-engineering/langgraph|LangGraph]] — sibling LangChain product; commonly used together
+- [Agent Evaluation](/ai-engineering/agent-evaluation.md) — evaluation patterns LangSmith implements (LLM-as-judge, golden datasets, online vs offline)
+- [AI Agent](/ai-engineering/ai-agent.md) — the systems LangSmith instruments
+- [LangGraph](/ai-engineering/langgraph.md) — sibling LangChain product; commonly used together
 
 ---
 
-[^src1]: [[03_Resources/Study Notes/LangSmith - Debugging and Evaluating AI Agents|LangSmith - Debugging and Evaluating AI Agents]]
+[^src1]: [LangSmith - Debugging and Evaluating AI Agents](/03_Resources/Study Notes/LangSmith - Debugging and Evaluating AI Agents.md)

@@ -168,7 +168,7 @@ Claude for Legal is a suite of plugins, connectors, and integrations for legal t
 - Compliance gap analysis
 - Contract comparison and redline
 
-Custom skills and connectors are extensible for firm-specific workflows [^src12]. A subset of practice-area plugins (Commercial Legal, Corporate Legal, Litigation, Product Legal) are also deployable as Managed Agents via the Claude Platform — see [[ai-engineering/claude-cowork|Claude Cowork]] for the Cowork legal vertical integration.
+Custom skills and connectors are extensible for firm-specific workflows [^src12]. A subset of practice-area plugins (Commercial Legal, Corporate Legal, Litigation, Product Legal) are also deployable as Managed Agents via the Claude Platform — see [Claude Cowork](/ai-engineering/claude-cowork.md) for the Cowork legal vertical integration.
 
 ## Self-hosted sandboxes and MCP tunnels
 
@@ -207,7 +207,7 @@ Real-world result: Harvey (legal AI) used dreaming for long-form drafting agents
 
 In internal benchmarks, outcomes improved task success by up to 10 points over a standard prompting loop, with the largest gains on the hardest problems; file generation improved +8.4% (docx) and +10.1% (pptx) [^src4]. Works for both objective criteria and subjective quality (brand voice, visual guidelines).
 
-Outcomes is a production instance of [[ai-engineering/generator-evaluator-separation|generator–evaluator separation]] — the grader runs in its own context so it isn't influenced by the agent's reasoning, the same principle behind the 3-agent GAN harness in [[ai-engineering/agent-harness|Agent Harness]].
+Outcomes is a production instance of [generator–evaluator separation](/ai-engineering/generator-evaluator-separation.md) — the grader runs in its own context so it isn't influenced by the agent's reasoning, the same principle behind the 3-agent GAN harness in [Agent Harness](/ai-engineering/agent-harness.md).
 
 Wisedocs (document verification) used outcomes to grade reviews against internal guidelines; reviews now run 50% faster while staying aligned with team standards [^src4].
 
@@ -372,7 +372,7 @@ Managed Agents supports running tool execution on the customer's own infrastruct
 - **EnvironmentWorker** — customer-side worker process that polls for tool call requests and executes them locally
 - **AgentToolContext** — context object carrying request metadata and session state, passed to each tool execution
 - **MCP tunnel alternative** — instead of polling, expose tools as an MCP server and connect via tunnel; same model-side experience, different implementation
-- **Security benefit**: private data never leaves the customer trust boundary. This directly addresses the [[ai-engineering/agent-security|lethal trifecta]] risk model (private data + untrusted content + exfiltration) — the exfiltration surface shrinks when execution stays inside the customer perimeter [^src19].
+- **Security benefit**: private data never leaves the customer trust boundary. This directly addresses the [lethal trifecta](/ai-engineering/agent-security.md) risk model (private data + untrusted content + exfiltration) — the exfiltration surface shrinks when execution stays inside the customer perimeter [^src19].
 
 ## Vercel Sandbox integration (control + compute plane pattern)
 
@@ -501,12 +501,12 @@ The Managed Agents toolset (`agent_toolset_20260401`) provides 8 built-in tools,
 
 ## See also
 
-- [[ai-engineering/mcp|MCP]] — agents connect to external systems via MCP; Vaults handle OAuth credentials per session
-- [[ai-engineering/agent-memory|Agent Memory]] — filesystem-based memory is the pattern Managed Agents extends to production
-- [[ai-engineering/long-running-agents|Long-Running Agents]] — the underlying agent patterns Managed Agents operationalizes at scale
-- [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] — multi-agent coordination is available in research preview
-- [[ai-engineering/claude-code|Claude Code]] — Managed Agents integrates with Claude Code via the built-in `claude-api` skill
-- [[ai-engineering/ai-agent|AI Agent]] — core agent concepts underlying Managed Agents
+- [MCP](/ai-engineering/mcp.md) — agents connect to external systems via MCP; Vaults handle OAuth credentials per session
+- [Agent Memory](/ai-engineering/agent-memory.md) — filesystem-based memory is the pattern Managed Agents extends to production
+- [Long-Running Agents](/ai-engineering/long-running-agents.md) — the underlying agent patterns Managed Agents operationalizes at scale
+- [Multi-Agent Systems](/ai-engineering/multi-agent-systems.md) — multi-agent coordination is available in research preview
+- [Claude Code](/ai-engineering/claude-code.md) — Managed Agents integrates with Claude Code via the built-in `claude-api` skill
+- [AI Agent](/ai-engineering/ai-agent.md) — core agent concepts underlying Managed Agents
 
 ---
 

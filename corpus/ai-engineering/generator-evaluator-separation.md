@@ -45,7 +45,7 @@ updated: 2026-06-23
 
 ## The core claim
 
-In Anthropic's 3-agent GAN harness for long-running development, the evaluator runs "in a separate context window with no access to the generator's chain-of-thought" because **"a generator can't reliably grade itself"** [^gan]. The dynamic-workflows post names the failure mode directly: **self-preferential bias** — "when asked to verify or judge its own output, the model skews toward self-approval" — structurally identical to a GAN generator grading itself instead of facing a separate discriminator [^dyn]. See [[ai-engineering/agent-harness|Agent Harness]].
+In Anthropic's 3-agent GAN harness for long-running development, the evaluator runs "in a separate context window with no access to the generator's chain-of-thought" because **"a generator can't reliably grade itself"** [^gan]. The dynamic-workflows post names the failure mode directly: **self-preferential bias** — "when asked to verify or judge its own output, the model skews toward self-approval" — structurally identical to a GAN generator grading itself instead of facing a separate discriminator [^dyn]. See [Agent Harness](/ai-engineering/agent-harness.md).
 
 The fix is architectural, not a better prompt: isolate the grader so its judgment is not contaminated by the reasoning that produced the work.
 
@@ -53,12 +53,12 @@ The fix is architectural, not a better prompt: isolate the grader so its judgmen
 
 | Instance | What is separated | Mechanism | Source |
 |---|---|---|---|
-| **3-agent GAN harness** | Generator vs. evaluator | Evaluator in its own context window, blind to the generator's chain-of-thought; each rejection is a learning signal | [[ai-engineering/agent-harness|Agent Harness]] [^gan] |
-| **Managed Agents — Outcomes** | Agent vs. rubric grader | A separate grader "evaluates the output against your criteria in its own context window, so it isn't influenced by the agent's reasoning"; output that falls short is sent back for another pass | [[ai-engineering/claude-managed-agents|Claude Managed Agents]] [^outcomes] |
-| **Computer-use advisor tool** | Executor vs. advisor | A higher-intelligence advisor model (e.g. Opus advising a Sonnet executor) is called mid-task for planning and course-correction | [[ai-engineering/computer-use|Computer Use]] [^cu] |
-| **Compound engineering** | Build vs. review | The human read-the-code review step is a non-negotiable stage even in agentic workflows; ~80% of time is planning + review | [[ai-engineering/compound-engineering|Compound Engineering]] [^compound] |
-| **Fable 5 loop engineering** | Doing vs. verifying-the-right-work | "Verify the right work, not that the work is right" — the model self-checks each step; the human verifies the *task* was worth doing | [[ai-engineering/claude-models|Claude Model Lineup]] [^fable] |
-| **Cognitive surrender (anti-pattern)** | (collapse of separation) | When the human stops evaluating and blindly accepts model output, the separation disappears and a fragile "house of cards" accrues | [[software-engineering/cognitive-debt|Cognitive Debt]] [^cog] |
+| **3-agent GAN harness** | Generator vs. evaluator | Evaluator in its own context window, blind to the generator's chain-of-thought; each rejection is a learning signal | [Agent Harness](/ai-engineering/agent-harness.md) [^gan] |
+| **Managed Agents — Outcomes** | Agent vs. rubric grader | A separate grader "evaluates the output against your criteria in its own context window, so it isn't influenced by the agent's reasoning"; output that falls short is sent back for another pass | [Claude Managed Agents](/ai-engineering/claude-managed-agents.md) [^outcomes] |
+| **Computer-use advisor tool** | Executor vs. advisor | A higher-intelligence advisor model (e.g. Opus advising a Sonnet executor) is called mid-task for planning and course-correction | [Computer Use](/ai-engineering/computer-use.md) [^cu] |
+| **Compound engineering** | Build vs. review | The human read-the-code review step is a non-negotiable stage even in agentic workflows; ~80% of time is planning + review | [Compound Engineering](/ai-engineering/compound-engineering.md) [^compound] |
+| **Fable 5 loop engineering** | Doing vs. verifying-the-right-work | "Verify the right work, not that the work is right" — the model self-checks each step; the human verifies the *task* was worth doing | [Claude Model Lineup](/ai-engineering/claude-models.md) [^fable] |
+| **Cognitive surrender (anti-pattern)** | (collapse of separation) | When the human stops evaluating and blindly accepts model output, the separation disappears and a fragile "house of cards" accrues | [Cognitive Debt](/software-engineering/cognitive-debt.md) [^cog] |
 
 ## Why it works: bias, not capability
 
@@ -67,7 +67,7 @@ The evaluator does not need to be *smarter* than the generator (though in the ad
 Two design corollaries from the sources:
 
 - **Diversity of lens beats redundancy.** The advisor pattern uses a *different, stronger* model for the hard judgment calls rather than a second copy of the executor [^cu]; the GAN framing treats the evaluator as a discriminator the generator is trained (via prompting) to satisfy [^gan].
-- **The done-condition must precede generation.** Anthropic's harness negotiates the "sprint contract" (scope + done-condition) *before* the generator starts; retroactively changing the bar once generation is underway is "the primary source of rework" [^gan]. This is why [[ai-engineering/spec-driven-development|Spec-Driven Development]]'s constitution/spec and compound engineering's plan stage are the front half of the same loop the evaluator closes.
+- **The done-condition must precede generation.** Anthropic's harness negotiates the "sprint contract" (scope + done-condition) *before* the generator starts; retroactively changing the bar once generation is underway is "the primary source of rework" [^gan]. This is why [Spec-Driven Development](/ai-engineering/spec-driven-development.md)'s constitution/spec and compound engineering's plan stage are the front half of the same loop the evaluator closes.
 
 ## The human's job moves up a level
 
@@ -77,18 +77,18 @@ The failure mode is **cognitive surrender**: abandoning the evaluator role entir
 
 ## Relation to evaluation-as-testing
 
-This pattern is the *in-the-loop* sibling of offline evaluation. [[ai-engineering/agent-evaluation|Agent Evaluation]] covers golden datasets, online/offline evals, and LLM-as-judge as a *measurement* discipline; the separation here is the *runtime* version — a grader embedded in the production loop that gates each pass rather than scoring a batch after the fact. Both rest on the same premise that judgment must come from outside the thing being judged. See also [[ai-engineering/agent-testing|Agent Testing]] for the verification-loop view and [[ai-engineering/multi-agent-systems|Multi-Agent Systems]] for planner/generator/evaluator as a coordination topology.
+This pattern is the *in-the-loop* sibling of offline evaluation. [Agent Evaluation](/ai-engineering/agent-evaluation.md) covers golden datasets, online/offline evals, and LLM-as-judge as a *measurement* discipline; the separation here is the *runtime* version — a grader embedded in the production loop that gates each pass rather than scoring a batch after the fact. Both rest on the same premise that judgment must come from outside the thing being judged. See also [Agent Testing](/ai-engineering/agent-testing.md) for the verification-loop view and [Multi-Agent Systems](/ai-engineering/multi-agent-systems.md) for planner/generator/evaluator as a coordination topology.
 
 ## See also
 
-- [[ai-engineering/agent-harness|Agent Harness]] — the 3-agent GAN harness; self-preferential bias as a harness design criterion
-- [[ai-engineering/claude-managed-agents|Claude Managed Agents]] — Outcomes (rubric-driven self-correction)
-- [[ai-engineering/compound-engineering|Compound Engineering]] — review as a first-class stage
-- [[ai-engineering/claude-models|Claude Model Lineup]] — Fable 5 loop engineering ("verify the right work")
-- [[ai-engineering/computer-use|Computer Use]] — the executor/advisor split
-- [[ai-engineering/agent-evaluation|Agent Evaluation]] — the offline/measurement sibling
-- [[software-engineering/cognitive-debt|Cognitive Debt]] — what happens when the human drops the evaluator role
-- [[ai-engineering/README|AI Engineering hub]]
+- [Agent Harness](/ai-engineering/agent-harness.md) — the 3-agent GAN harness; self-preferential bias as a harness design criterion
+- [Claude Managed Agents](/ai-engineering/claude-managed-agents.md) — Outcomes (rubric-driven self-correction)
+- [Compound Engineering](/ai-engineering/compound-engineering.md) — review as a first-class stage
+- [Claude Model Lineup](/ai-engineering/claude-models.md) — Fable 5 loop engineering ("verify the right work")
+- [Computer Use](/ai-engineering/computer-use.md) — the executor/advisor split
+- [Agent Evaluation](/ai-engineering/agent-evaluation.md) — the offline/measurement sibling
+- [Cognitive Debt](/software-engineering/cognitive-debt.md) — what happens when the human drops the evaluator role
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

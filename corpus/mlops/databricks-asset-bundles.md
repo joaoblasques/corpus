@@ -23,7 +23,7 @@ updated: 2026-06-19
 
 # Databricks Asset Bundles (DAB)
 
-**TL;DR.** A Databricks Asset Bundle packages your code, jobs, configuration, and dependencies together in a structured, version-controlled format defined with YAML files [^src1]. When deploying resources on Databricks you have three options — raw **[[mlops/terraform|Terraform]]** (full IaC control but complex), **Databricks APIs** (flexible but needs custom scripting), or **DAB** (the recommended declarative YAML approach) [^src1]. DAB strikes a balance: *"Under the hood, it leverages Terraform, so you get all the benefits of infrastructure-as-code, without having to manage raw Terraform code yourself"* [^src1]. This page covers the `databricks.yml` structure, Lakeflow Jobs, resource job definitions with task dependencies, and the bundle CLI lifecycle.
+**TL;DR.** A Databricks Asset Bundle packages your code, jobs, configuration, and dependencies together in a structured, version-controlled format defined with YAML files [^src1]. When deploying resources on Databricks you have three options — raw **[Terraform](/mlops/terraform.md)** (full IaC control but complex), **Databricks APIs** (flexible but needs custom scripting), or **DAB** (the recommended declarative YAML approach) [^src1]. DAB strikes a balance: *"Under the hood, it leverages Terraform, so you get all the benefits of infrastructure-as-code, without having to manage raw Terraform code yourself"* [^src1]. This page covers the `databricks.yml` structure, Lakeflow Jobs, resource job definitions with task dependencies, and the bundle CLI lifecycle.
 
 ## Why DAB (vs Terraform vs raw APIs)
 
@@ -35,7 +35,7 @@ The deployment-tooling tradeoff [^src1]:
 | Databricks APIs | Flexible, but requires custom scripting |
 | Databricks Asset Bundles | Recommended, declarative, YAML-based |
 
-DAB `depends-on` Terraform internally, giving IaC benefits without raw TF [^src1]. Its key features: declarative YAML config (everything in one place), multi-environment support (dev/staging/prod), CI/CD friendliness, and version control of all changes in the repo [^src1]. See [[mlops/infrastructure-as-code|Infrastructure as Code]] for the underlying declarative model.
+DAB `depends-on` Terraform internally, giving IaC benefits without raw TF [^src1]. Its key features: declarative YAML config (everything in one place), multi-environment support (dev/staging/prod), CI/CD friendliness, and version control of all changes in the repo [^src1]. See [Infrastructure as Code](/mlops/infrastructure-as-code.md) for the underlying declarative model.
 
 ## Lakeflow Jobs (orchestration)
 
@@ -69,7 +69,7 @@ targets:
     mode: production
 ```
 
-The build uses **[[mlops/uv|uv]]** (`uv build`) to produce the wheel [^src1].
+The build uses **[uv](/mlops/uv.md)** (`uv build`) to produce the wheel [^src1].
 
 ## ML pipeline as a resource job
 
@@ -80,7 +80,7 @@ Resources are defined as separate `.yml` files under `resources/`, pulled in via
 3. **model_updated** — a **`condition_task`** (`EQUAL_TO` on `{{tasks.train_model.values.model_updated}} == "1"`): only proceed if the new model is better [^src1].
 4. **deploy_model** — `depends_on: model_updated` with `outcome: "true"`; deploys the registered model by creating/updating a serving endpoint via `scripts/deploy_model.py` [^src1].
 
-Parameters are passed between tasks using DAB templating (e.g. `--root_path ${workspace.root_path}`, `--env ${bundle.target}`, `--git_sha ${var.git_sha}`, `{{job.run_id}}`) [^src1]. The conditional `model_updated` gate means deployment only happens *if the model improved*, with the train step setting `dbutils.jobs.taskValues` to flag `model_updated` [^src1]. This is the same train→register→deploy flow that uses [[mlops/mlflow|MLflow]] and [[mlops/model-serving|Model Serving]].
+Parameters are passed between tasks using DAB templating (e.g. `--root_path ${workspace.root_path}`, `--env ${bundle.target}`, `--git_sha ${var.git_sha}`, `{{job.run_id}}`) [^src1]. The conditional `model_updated` gate means deployment only happens *if the model improved*, with the train step setting `dbutils.jobs.taskValues` to flag `model_updated` [^src1]. This is the same train→register→deploy flow that uses [MLflow](/mlops/mlflow.md) and [Model Serving](/mlops/model-serving.md).
 
 ## Managing bundles (CLI lifecycle)
 
@@ -97,13 +97,13 @@ Once deployed, the workflow appears in the target workspace [^src1]. With DAB yo
 
 ## See also
 
-- [[mlops/terraform|Terraform]] — the IaC tool DAB wraps under the hood
-- [[mlops/infrastructure-as-code|Infrastructure as Code]] — the declarative desired-state model DAB embodies
-- [[mlops/ci-cd-for-ml|CI/CD for ML]] — `databricks bundle deploy` is the CD pipeline's deployment step
-- [[mlops/uv|uv]] — `uv build` produces the deployed wheel
-- [[mlops/mlflow|MLflow]] · [[mlops/model-serving|Model Serving]] — the train/register/deploy steps the DAB job orchestrates
-- [[data-engineering/databricks|Databricks]] — the platform
-- [[mlops/README|MLOps hub]]
+- [Terraform](/mlops/terraform.md) — the IaC tool DAB wraps under the hood
+- [Infrastructure as Code](/mlops/infrastructure-as-code.md) — the declarative desired-state model DAB embodies
+- [CI/CD for ML](/mlops/ci-cd-for-ml.md) — `databricks bundle deploy` is the CD pipeline's deployment step
+- [uv](/mlops/uv.md) — `uv build` produces the deployed wheel
+- [MLflow](/mlops/mlflow.md) · [Model Serving](/mlops/model-serving.md) — the train/register/deploy steps the DAB job orchestrates
+- [Databricks](/data-engineering/databricks.md) — the platform
+- [MLOps hub](/mlops/README.md)
 
 ---
 

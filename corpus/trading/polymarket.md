@@ -50,6 +50,6 @@ Polymarket data makes the compression of arbitrage windows measurable in a way m
 - The mechanism: AI identifies the gap, builds the system to exploit it, compresses the window until only the most sophisticated players survive
 - 94–95% of Polymarket wallets lose money, feeding the few sophisticated bots
 
-See also: [[trading/prediction-markets|Prediction Markets]], [[trading/arbitrage-compression|Arbitrage Compression]]
+See also: [Prediction Markets](/trading/prediction-markets.md), [Arbitrage Compression](/trading/arbitrage-compression.md)
 
 [^src1]: [A Polymarket Bot Made $438,000 In 30 Days](../../raw/youtube/youtube-BiqG3it0gY0-a-polymarket-bot-made-438-000-in-30-days-your-industry-is-ne.md)

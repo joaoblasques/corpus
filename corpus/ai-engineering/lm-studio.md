@@ -85,7 +85,7 @@ updated: 2026-07-03
 
 # LM Studio
 
-**TL;DR.** LM Studio is a local LLM app that ships **mlx-engine**, an MIT-licensed inference engine optimized for Apple Silicon (built on `mlx-lm`/`mlx-vlm`, Apple's MLX ML library). It exposes an Anthropic-compatible API (so [[ai-engineering/claude-code|Claude Code]] can run against any local model), and mlx-engine v1.8.5 added disk-backed KV-cache checkpointing plus continuous batching for vision-model requests, aimed at repeated long-context agentic workflows [^src1]. Version 0.4.0 introduced **llmster**, a headless daemon that decouples the LM Studio core from its GUI for server/CI/cloud deployment, plus parallel request batching and a stateful REST API [^src2]. Version 0.4.1 added a native Anthropic-compatible `/v1/messages` endpoint for direct [[ai-engineering/claude-code|Claude Code]] use [^src3], and 0.3.39 added support for the provider-agnostic **Open Responses** spec (logprobs, cached-token stats, remote image URLs) [^src4]. LM Studio has also expanded beyond desktop: it acquired the **Locally** mobile app to bring a native mobile surface [^src5], and shipped **LM Link**, an end-to-end-encrypted remote-connection feature letting a phone or laptop drive models running on a larger machine — including an NVIDIA DGX Station GB300 [^src6][^src7].
+**TL;DR.** LM Studio is a local LLM app that ships **mlx-engine**, an MIT-licensed inference engine optimized for Apple Silicon (built on `mlx-lm`/`mlx-vlm`, Apple's MLX ML library). It exposes an Anthropic-compatible API (so [Claude Code](/ai-engineering/claude-code.md) can run against any local model), and mlx-engine v1.8.5 added disk-backed KV-cache checkpointing plus continuous batching for vision-model requests, aimed at repeated long-context agentic workflows [^src1]. Version 0.4.0 introduced **llmster**, a headless daemon that decouples the LM Studio core from its GUI for server/CI/cloud deployment, plus parallel request batching and a stateful REST API [^src2]. Version 0.4.1 added a native Anthropic-compatible `/v1/messages` endpoint for direct [Claude Code](/ai-engineering/claude-code.md) use [^src3], and 0.3.39 added support for the provider-agnostic **Open Responses** spec (logprobs, cached-token stats, remote image URLs) [^src4]. LM Studio has also expanded beyond desktop: it acquired the **Locally** mobile app to bring a native mobile surface [^src5], and shipped **LM Link**, an end-to-end-encrypted remote-connection feature letting a phone or laptop drive models running on a larger machine — including an NVIDIA DGX Station GB300 [^src6][^src7].
 
 ## The problem: KV cache isn't arbitrarily rewindable
 
@@ -169,7 +169,7 @@ A run of patch releases preceding 0.4.0, chiefly model-support additions and MLX
 | 0.3.33 | Ministral 3/8/14B (MistralAI) support — vision, multilingual, 256K context; Olmo-3 tool calling [^src21] |
 | 0.3.34 | Support for EssentialAI's rnj-1 model; fixed a Jinja prompt-formatting bug where EOS tokens were not included properly for some models [^src8] |
 | 0.3.35 | [MLX] Support for Devstral-2 and GLM-4.6V; fixed a bug sending the default system prompt to the model even after the system-prompt field was cleared; fixed an associated incorrect token count; fixed tool-call results sometimes not being added to context correctly [^src9] |
-| 0.3.36 | Support for Google's [[ai-engineering/functiongemma|FunctionGemma]] (270M) [^src10] |
+| 0.3.36 | Support for Google's [FunctionGemma](/ai-engineering/functiongemma.md) (270M) [^src10] |
 | 0.3.37 | Support for the LFM2 tool-call format; fixed a "Cannot read properties of null (reading 'architecture')" crash when using a generator [^src11] |
 | 0.3.38 | [Mac][M5] Enabled auto-upgrade to the optimized MLX NAX engine, fixing MLX model crashes on macOS 26.2 and improving performance (0.3.38 shipped Mac-only; other platforms remained on 0.3.37) [^src12] |
 
@@ -188,7 +188,7 @@ LM Studio was named a launch partner for NVIDIA's **DGX Spark** (not to be confu
 
 This positions LM Studio as the primary desktop-class UX for Spark, bridging the gap between NVIDIA's hardware announcement and usable consumer software [^src23].
 
-## Fine-tuning workflow: [[ai-engineering/functiongemma|FunctionGemma]] via [[ai-engineering/unsloth|Unsloth]]
+## Fine-tuning workflow: [FunctionGemma](/ai-engineering/functiongemma.md) via [Unsloth](/ai-engineering/unsloth.md)
 
 LM Studio published a walkthrough for fine-tuning Google's FunctionGemma (270M, tool-call-specialized) using Unsloth and running the result locally [^src13]:
 
@@ -201,13 +201,13 @@ LM Studio's example shows FunctionGemma failing to produce a useful response pre
 
 ## Related
 
-- [[ai-engineering/ollama|Ollama]] — competing local-model serving tool; also ships Anthropic API compatibility for Claude Code and an MLX Apple Silicon backend
-- [[ai-engineering/functiongemma|FunctionGemma]] — Google's 270M tool-calling-specialized model, importable into LM Studio after Unsloth fine-tuning
-- [[ai-engineering/unsloth|Unsloth]] — fine-tuning toolkit used in LM Studio's model-import workflow
-- [[ai-engineering/claude-code|Claude Code]] — the agentic coding client LM Studio's Anthropic-compatible API and KV-cache rewind fix specifically target
-- [[ai-engineering/vllm|vLLM]] — contrasting production/datacenter serving engine also solving agentic-workload KV-cache reuse (via distributed Mooncake Store rather than local disk); also targets NVIDIA DGX Spark, a smaller desk-side single-GPU sibling of the DGX Station GB300
-- [[ai-engineering/quantization|Quantization]] — MLX 4-bit quantized model used in the benchmarks
-- [[ai-engineering/README|AI Engineering hub]]
+- [Ollama](/ai-engineering/ollama.md) — competing local-model serving tool; also ships Anthropic API compatibility for Claude Code and an MLX Apple Silicon backend
+- [FunctionGemma](/ai-engineering/functiongemma.md) — Google's 270M tool-calling-specialized model, importable into LM Studio after Unsloth fine-tuning
+- [Unsloth](/ai-engineering/unsloth.md) — fine-tuning toolkit used in LM Studio's model-import workflow
+- [Claude Code](/ai-engineering/claude-code.md) — the agentic coding client LM Studio's Anthropic-compatible API and KV-cache rewind fix specifically target
+- [vLLM](/ai-engineering/vllm.md) — contrasting production/datacenter serving engine also solving agentic-workload KV-cache reuse (via distributed Mooncake Store rather than local disk); also targets NVIDIA DGX Spark, a smaller desk-side single-GPU sibling of the DGX Station GB300
+- [Quantization](/ai-engineering/quantization.md) — MLX 4-bit quantized model used in the benchmarks
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

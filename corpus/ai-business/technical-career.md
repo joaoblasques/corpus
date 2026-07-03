@@ -87,7 +87,7 @@ Recruiters skim and look for quick signals; a portfolio must make obvious what k
 - **No role targeting.** A grab-bag (ML model + WordPress blog + Python game + React app) looks unfocused, not versatile. Pick 2–3 projects aligned to the target role [^src1].
 - **Amateur presentation.** With AI design help there is "no real excuse for having a poor-looking portfolio" — use complementary colors, modern fonts, consistent spacing, mobile-friendly layout [^src1].
 
-A solved real business problem makes a stronger portfolio piece than a side project nobody asked for — see [[ai-business/monetizing-code|Monetizing Code]]. The mechanics of turning these signals into applications — persistent career-strategist context, per-job tailoring, remote-trust proxies — are **applied in** [[ai-business/ai-job-search|Finding a Job Using AI]].
+A solved real business problem makes a stronger portfolio piece than a side project nobody asked for — see [Monetizing Code](/ai-business/monetizing-code.md). The mechanics of turning these signals into applications — persistent career-strategist context, per-job tailoring, remote-trust proxies — are **applied in** [Finding a Job Using AI](/ai-business/ai-job-search.md).
 
 ## Interview behavior: communication is the majority of the score
 
@@ -97,7 +97,7 @@ The coding interview judges what you *say* as much as what you build. Three rule
 2. **Code fluidly.** Over-reliance on autocomplete and IDE help leaves candidates unable to write basic syntax from memory — a bad signal regardless of underlying skill. Practice DSA prep *without autocomplete* [^src2].
 3. **Treat the interviewer as a teammate.** They are asking "do I want to work with this person?" Collaboration earns hints and goodwill; most interviewers want you to succeed [^src2].
 
-> [unsourced — note] Rule 2 (atrophied fundamentals from AI tooling) connects to the broader "shallow understanding" trend covered in [[ai-business/ai-and-the-job-market|AI and the Job Market]] and [[software-engineering/README|Software Engineering]].
+> [unsourced — note] Rule 2 (atrophied fundamentals from AI tooling) connects to the broader "shallow understanding" trend covered in [AI and the Job Market](/ai-business/ai-and-the-job-market.md) and [Software Engineering](/software-engineering/README.md).
 
 ## On-the-job leverage: control what you work on
 
@@ -108,7 +108,7 @@ A data engineer reports going from "drowning in work and still not getting notic
 - **Make priorities public and boring.** A weekly Slack update (done / in progress / next) makes work undeniable; redirect "urgent" interrupters to the VP, and "nine out of ten times, they backed off" [^src3].
 - **Proximity to the business beats tool mastery.** "Your proximity to the business is what makes you irreplaceable, not just your skill with SQL or Airflow" [^src3]. The unlock is moving from the *execution* layer to the *decision-making* layer — choosing what to build.
 
-This dovetails with the gen-AI career advice that good work alone is insufficient: you must "let everyone know how impactful your work is" — see [[ai-business/ai-and-the-job-market|AI and the Job Market]]. Prioritization as a discipline overlaps with [[productivity/README|Productivity]].
+This dovetails with the gen-AI career advice that good work alone is insufficient: you must "let everyone know how impactful your work is" — see [AI and the Job Market](/ai-business/ai-and-the-job-market.md). Prioritization as a discipline overlaps with [Productivity](/productivity/README.md).
 
 ## AI engineering skills: the human capabilities that compound
 
@@ -153,7 +153,7 @@ The real barrier between human expertise and AI isn't capability — it's *captu
 
 This is a one-way ratchet: "Once expertise gets captured — into a skill, an open source project, a documented SOP, a published process — it never comes back out" [^src7]. The implication for engineers: your competitive edge is not keeping knowledge in your head; it's being the person who builds the scaffolding that captures and operationalizes it.
 
-This connects directly to [[ai-business/ai-and-the-job-market|AI and the Job Market]]: the "utility" framing and the articulation gap are the same observation from different angles — AI capability exists, but human-structured context is what makes it deploy reliably.
+This connects directly to [AI and the Job Market](/ai-business/ai-and-the-job-market.md): the "utility" framing and the articulation gap are the same observation from different angles — AI capability exists, but human-structured context is what makes it deploy reliably.
 
 ## Competing with AI: 10 principles for hard-to-commoditize value
 
@@ -171,7 +171,7 @@ A condensed, practitioner-level distillation of the positioning problem — stru
 
 4. **Your expertise must become files.** "AI is only as good as the context it has. Your unique context is your moat" [^src8]. Concretely: `about-me.md`, `examples-i-love.md`, `examples-i-hate.md`, `mistakes-i-won't-repeat.md`, `audience.md`, `templates/`. Turn prompts into reusable memory; feed AI your taste, scars, standards, and constraints. This is the tactical implementation of what Miessler calls the "articulation gap" — make your expertise externalizable so you, not only AI, can reuse it.
 
-5. **Stop selling hours.** Time spent is irrelevant when AI can replicate output faster. Better pitches: "I understood the real problem / I knew what to ignore / I found the missing risk / I made the decision easier" [^src8]. Sell taste, judgment, and outcomes. Relates to the [[ai-business/monetizing-code|Monetizing Code]] framing (sell a result, not code).
+5. **Stop selling hours.** Time spent is irrelevant when AI can replicate output faster. Better pitches: "I understood the real problem / I knew what to ignore / I found the missing risk / I made the decision easier" [^src8]. Sell taste, judgment, and outcomes. Relates to the [Monetizing Code](/ai-business/monetizing-code.md) framing (sell a result, not code).
 
 6. **Use AI where you already have taste.** Use AI to multiply strengths, not hide weaknesses. "Your skill is the steering wheel. AI is the engine" [^src8]. Keep one manual skill alive to avoid capability atrophy.
 

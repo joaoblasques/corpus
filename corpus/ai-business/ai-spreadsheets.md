@@ -31,7 +31,7 @@ updated: 2026-06-15
 
 The author benchmarked "every single AI to make spreadsheets" and ranks them, concluding Claude Cowork is best to build from scratch and a ChatGPT Google Sheets extension is best to edit; Copilot, Grok, and bare Gemini underperformed [^src1]. The strategic takeaway for the job market: the differentiating skill becomes **writing a precise build spec and controlling the AI**, not memorizing Excel formulas — "I am the one controlling the AI, not the other way around" [^src1].
 
-This is a concrete instance of the broader thesis in [[ai-business/ai-and-the-job-market|AI and the Job Market]]: raw tool operation commoditizes; the durable edge is *applying* AI to a real deliverable. And it overlaps with [[ai-business/monetizing-code|Monetizing Code]] — board-ready models and consulting deliverables are exactly the "boring, valuable workflow" worth selling.
+This is a concrete instance of the broader thesis in [AI and the Job Market](/ai-business/ai-and-the-job-market.md): raw tool operation commoditizes; the durable edge is *applying* AI to a real deliverable. And it overlaps with [Monetizing Code](/ai-business/monetizing-code.md) — board-ready models and consulting deliverables are exactly the "boring, valuable workflow" worth selling.
 
 ## The reusable prompt structure
 
@@ -46,7 +46,7 @@ The load-bearing line, appended to every build [^src1]:
 
 > "Before building, list your top 10 assumptions so I can sanity-check them, then execute."
 
-This **assumptions-first gate** is the transferable technique — it keeps a human in control of judgment before the AI commits work, the same human-in-the-loop discipline seen in [[ai-business/monetizing-code|Monetizing Code]]. A worked example (a 12-month revenue forecast for a consulting firm) keeps every assumption "as a labeled, editable input on the Assumptions sheet — never hardcoded inside a downstream formula — so each one can be challenged and the model updates instantly" [^src1] — i.e. good modeling hygiene, AI or not.
+This **assumptions-first gate** is the transferable technique — it keeps a human in control of judgment before the AI commits work, the same human-in-the-loop discipline seen in [Monetizing Code](/ai-business/monetizing-code.md). A worked example (a 12-month revenue forecast for a consulting firm) keeps every assumption "as a labeled, editable input on the Assumptions sheet — never hardcoded inside a downstream formula — so each one can be challenged and the model updates instantly" [^src1] — i.e. good modeling hygiene, AI or not.
 
 ## Context setup beats per-task prompting
 
@@ -54,7 +54,7 @@ The deeper move (from the linked Cowork guide) is **standing context** so you ne
 
 Token-economy habits that lower the cost of this workflow [^src2]: restart/branch conversations instead of stacking follow-ups (every message re-reads the whole history); start fresh sessions every ~20 messages; batch tasks into one prompt; use Sonnet/Haiku for light tasks and reserve Opus + extended thinking for deep work.
 
-> Cross-domain: the Cowork product, its folder/Global-Instructions mechanics, context-window economy, and the about-me/voice file are owned by ai-engineering — see [[ai-engineering/claude-cowork|Claude Cowork]] — and, on the productivity side, [[productivity/ai-augmented-knowledge-work|AI-Augmented Knowledge Work]]. This page keeps only the spreadsheet/career angle.
+> Cross-domain: the Cowork product, its folder/Global-Instructions mechanics, context-window economy, and the about-me/voice file are owned by ai-engineering — see [Claude Cowork](/ai-engineering/claude-cowork.md) — and, on the productivity side, [AI-Augmented Knowledge Work](/productivity/ai-augmented-knowledge-work.md). This page keeps only the spreadsheet/career angle.
 
 ## Gotchas / promo framing
 
@@ -64,8 +64,8 @@ Token-economy habits that lower the cost of this workflow [^src2]: restart/branc
 
 ## Related
 
-- [[ai-business/ai-and-the-job-market|AI and the Job Market]] — the skill-shift / "apply AI to messy real work" thesis this instantiates.
-- [[ai-business/monetizing-code|Monetizing Code]] — turning a spreadsheet/automation deliverable into a paid offer.
+- [AI and the Job Market](/ai-business/ai-and-the-job-market.md) — the skill-shift / "apply AI to messy real work" thesis this instantiates.
+- [Monetizing Code](/ai-business/monetizing-code.md) — turning a spreadsheet/automation deliverable into a paid offer.
 
 [^src1]: [Stop learning Excel.](../../raw/email/email-2026-05-24-stop-learning-excel.md) (Ruben Hassid newsletter)
 [^src2]: [Cowork (Claude Cowork for Excel, updated guide)](../../raw/web/cowork.md) (fetched via the source email)

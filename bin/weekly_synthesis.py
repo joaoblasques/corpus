@@ -76,7 +76,7 @@ def recent_pages(since_days: int = 7, *, limit=None, _today=None, corpus_dir=Non
     cutoff = today - datetime.timedelta(days=since_days)
     dated: list[tuple] = []
     for md in cdir.rglob("*.md"):
-        if md.name.startswith("_"):
+        if md.name.startswith("_") or md.name in {"index.md", "log.md"}:
             continue
         try:
             head = md.read_text(encoding="utf-8", errors="ignore")[:2000]
@@ -110,7 +110,7 @@ def _synthesis_prompt(pages: list[Path]) -> str:
         "create a synthesis page that names the disagreement (§7).\n"
         "4. Where the week's pages reveal a cross-source theme, write AT MOST 2 new "
         "synthesis pages (§3/§4 conventions; §7 provenance — every non-trivial claim cited).\n"
-        "5. Update corpus/_index.md and append a corpus/_log.md entry.\n"
+        "5. Update corpus/index.md and append a corpus/log.md entry.\n"
         "Do NOT rewrite unrelated pages or survey the whole corpus. Your FINAL message "
         'must be EXACTLY one flat JSON object and nothing else: '
         '{"pages_touched": <int>, "synthesis_pages_created": <int>, "fixes": <int>}'

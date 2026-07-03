@@ -34,26 +34,26 @@ Both are free and open-source [^src1].
 
 The syllabus is a good index of the modern DE stack [^src1]:
 
-- **Containerization & IaC** — intro to GCP, Docker & Docker Compose, PostgreSQL in Docker, infrastructure setup with **[[mlops/terraform|Terraform]]** [^src1].
-- **Workflow orchestration** — data lakes + orchestration with **Kestra** [^src1]. (See [[data-engineering/data-orchestration|Data Orchestration]].)
-- **Ingestion** — API reading, pipeline scalability, data normalization, incremental loading [^src1]. (See [[data-engineering/incremental-pipeline-design|Incremental Pipeline Design]].)
-- **Data warehouse** — **[[data-engineering/bigquery|BigQuery]]**: partitioning, clustering, best practices, ML in BigQuery [^src1].
-- **Analytics engineering** — **[[data-engineering/dbt|dbt]]** with **[[data-engineering/duckdb|DuckDB]]** & BigQuery; testing, documentation, deployment [^src1].
-- **End-to-end with Bruin** — ingestion, transformation, data quality, deployment to BigQuery [^src1]. (Bruin/ingestr — see [[data-engineering/ingestr|ingestr]].)
-- **Batch processing** — **[[data-engineering/apache-spark|Apache Spark]]**: DataFrames & SQL, internals of GroupBy and Joins [^src1].
-- **Streaming** — **[[data-engineering/kafka|Kafka]]**: Kafka Streams & KSQL, schema management with Avro [^src1]. (See [[data-engineering/stream-processing|Stream Processing]].)
+- **Containerization & IaC** — intro to GCP, Docker & Docker Compose, PostgreSQL in Docker, infrastructure setup with **[Terraform](/mlops/terraform.md)** [^src1].
+- **Workflow orchestration** — data lakes + orchestration with **Kestra** [^src1]. (See [Data Orchestration](/data-engineering/data-orchestration.md).)
+- **Ingestion** — API reading, pipeline scalability, data normalization, incremental loading [^src1]. (See [Incremental Pipeline Design](/data-engineering/incremental-pipeline-design.md).)
+- **Data warehouse** — **[BigQuery](/data-engineering/bigquery.md)**: partitioning, clustering, best practices, ML in BigQuery [^src1].
+- **Analytics engineering** — **[dbt](/data-engineering/dbt.md)** with **[DuckDB](/data-engineering/duckdb.md)** & BigQuery; testing, documentation, deployment [^src1].
+- **End-to-end with Bruin** — ingestion, transformation, data quality, deployment to BigQuery [^src1]. (Bruin/ingestr — see [ingestr](/data-engineering/ingestr.md).)
+- **Batch processing** — **[Apache Spark](/data-engineering/apache-spark.md)**: DataFrames & SQL, internals of GroupBy and Joins [^src1].
+- **Streaming** — **[Kafka](/data-engineering/kafka.md)**: Kafka Streams & KSQL, schema management with Avro [^src1]. (See [Stream Processing](/data-engineering/stream-processing.md).)
 - **Final project** — applies all concepts end-to-end, with peer review [^src1].
 
 ## Why it's notable
 
-A widely-recommended free entry point into data engineering, emphasizing **fundamentals and principles over ever-evolving tools** (a learner testimonial), with a hands-on, build-a-pipeline structure and an active Slack community [^src1]. Fits the [[data-engineering/data-engineer-role|"learn concepts, not tools"]] thesis and gives a concrete portfolio project (see [[data-engineering/de-portfolio-projects|DE Portfolio Projects]]).
+A widely-recommended free entry point into data engineering, emphasizing **fundamentals and principles over ever-evolving tools** (a learner testimonial), with a hands-on, build-a-pipeline structure and an active Slack community [^src1]. Fits the ["learn concepts, not tools"](/data-engineering/data-engineer-role.md) thesis and gives a concrete portfolio project (see [DE Portfolio Projects](/data-engineering/de-portfolio-projects.md)).
 
 ## Related
 
-- [[data-engineering/data-engineer-role|The Data Engineer Role]] — the fundamentals-first learning path this course embodies
-- [[data-engineering/de-portfolio-projects|DE Portfolio Projects]] — the final project as a portfolio piece
-- [[data-engineering/data-engineering-interview|Data Engineering Interview]] — the skills the curriculum builds
-- [[data-engineering/README|Data Engineering hub]]
+- [The Data Engineer Role](/data-engineering/data-engineer-role.md) — the fundamentals-first learning path this course embodies
+- [DE Portfolio Projects](/data-engineering/de-portfolio-projects.md) — the final project as a portfolio piece
+- [Data Engineering Interview](/data-engineering/data-engineering-interview.md) — the skills the curriculum builds
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

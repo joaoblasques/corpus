@@ -46,7 +46,7 @@ Routing becomes part of the database: a request must consistently hit the node h
 
 ## Why DuckDB, and turning its constraint into an asset
 
-The workload is analytical, not transactional — "textbook columnar territory" — so DuckDB won for in-process execution (no network round-trips), runtime per-tenant attach/detach mapping one file per board, and vectorized execution over 2,048-value batches [^src1]. DuckDB's single-writer-per-file limitation became the key architectural decision: by never writing to DuckDB from the write path and managing writes in an external distributed WAL instead, they got full read/write separation, independent scaling, and failure isolation [^src1]. See [[data-engineering/duckdb|DuckDB]].
+The workload is analytical, not transactional — "textbook columnar territory" — so DuckDB won for in-process execution (no network round-trips), runtime per-tenant attach/detach mapping one file per board, and vectorized execution over 2,048-value batches [^src1]. DuckDB's single-writer-per-file limitation became the key architectural decision: by never writing to DuckDB from the write path and managing writes in an external distributed WAL instead, they got full read/write separation, independent scaling, and failure isolation [^src1]. See [DuckDB](/data-engineering/duckdb.md).
 
 ## Zero-downtime migration
 
@@ -58,6 +58,6 @@ An 18-month, feature-flag-controlled, reversible migration: months of **dual-rea
 
 ## Related corpus pages
 
-Built on [[data-engineering/duckdb|DuckDB]]; uses [[data-engineering/kafka|Apache Kafka]] in the write path and [[data-engineering/redis|Redis]] as a high-frequency write-cache WAL backend. Compare with [[data-engineering/change-data-capture|Change Data Capture]] and [[data-engineering/materialized-views|Materialized Views]].
+Built on [DuckDB](/data-engineering/duckdb.md); uses [Apache Kafka](/data-engineering/kafka.md) in the write path and [Redis](/data-engineering/redis.md) as a high-frequency write-cache WAL backend. Compare with [Change Data Capture](/data-engineering/change-data-capture.md) and [Materialized Views](/data-engineering/materialized-views.md).
 
 [^src1]: [mondayDB 3 – Solving HTAP for a Trillion-Table System](../../raw/web/mondaydb-3-solving-htap-for-a-trillion-table-system-monday-e.md)

@@ -72,7 +72,7 @@ Files are concatenated, not overridden; on conflict the model follows the **last
 
 ## The attention budget — why less is more
 
-Claude Code's system prompt already contains ~50 instructions — "a third of the ~150–200 instruction limit frontier models can reliably follow" [^src1]. The practical benchmark: if a project `CLAUDE.md` exceeds ~80 lines (HumanLayer keeps theirs under 60), the model "starts ignoring parts of it" [^src1]. This is the same context-rot constraint covered in [[ai-engineering/context-window-management|Context Window Management]].
+Claude Code's system prompt already contains ~50 instructions — "a third of the ~150–200 instruction limit frontier models can reliably follow" [^src1]. The practical benchmark: if a project `CLAUDE.md` exceeds ~80 lines (HumanLayer keeps theirs under 60), the model "starts ignoring parts of it" [^src1]. This is the same context-rot constraint covered in [Context Window Management](/ai-engineering/context-window-management.md).
 
 ### What to put where
 
@@ -131,7 +131,7 @@ A widely-shared single `CLAUDE.md` (43,000+ installs in its first week, per one 
 | **Surgical Changes** | Touch only what the request requires; don't refactor or delete pre-existing dead code |
 | **Goal-Driven Execution** | Transform "fix the bug" into "write a failing test, then make it pass" |
 
-The fourth captures Karpathy's "give it success criteria and watch it go" — strong, verifiable criteria let the model loop independently (see [[ai-engineering/agent-testing|Agent Testing]]) [^src4]. It ships both as a Claude Code plugin and as a `CLAUDE.md`, plus a committed `.cursor/rules/karpathy-guidelines.mdc` so the same rules apply in Cursor — an early example of cross-platform convention sharing [^src4].
+The fourth captures Karpathy's "give it success criteria and watch it go" — strong, verifiable criteria let the model loop independently (see [Agent Testing](/ai-engineering/agent-testing.md)) [^src4]. It ships both as a Claude Code plugin and as a `CLAUDE.md`, plus a committed `.cursor/rules/karpathy-guidelines.mdc` so the same rules apply in Cursor — an early example of cross-platform convention sharing [^src4].
 
 **Observed behavioral differences with vs without the Karpathy CLAUDE.md** [^src7]:
 
@@ -144,7 +144,7 @@ The core insight: changing from **imperative** (commanding agents how to do thin
 
 ## Cross-platform conventions
 
-The newer frontier is keeping one set of conventions working across **Claude Code, Codex, Cursor, Copilot, and Antigravity** [^src3]. The pattern: a central, version-controlled monorepo of agent skills that each tool picks up automatically, so changes "stay in sync everywhere" without per-tool reconfiguration [^src3]. See [[ai-engineering/agent-skills|Agent Skills]] for the skill mechanic this builds on.
+The newer frontier is keeping one set of conventions working across **Claude Code, Codex, Cursor, Copilot, and Antigravity** [^src3]. The pattern: a central, version-controlled monorepo of agent skills that each tool picks up automatically, so changes "stay in sync everywhere" without per-tool reconfiguration [^src3]. See [Agent Skills](/ai-engineering/agent-skills.md) for the skill mechanic this builds on.
 
 **Cursor plugins** formalize this on Cursor's side: each plugin is a directory with a `.cursor-plugin/plugin.json` manifest and may contain `skills/` (`SKILL.md` with frontmatter), `rules/` (`.mdc` files), and `mcp.json` — bundling skills, rules, and MCP servers into one installable, marketplace-distributable unit [^src5]. Notable official plugins include `continual-learning` (incremental transcript-driven `AGENTS.md` memory updates), `cli-for-agent` (patterns for CLIs agents can run reliably), and `orchestrate` (fan tasks across parallel cloud agents) [^src5].
 
@@ -158,13 +158,13 @@ The Compound Engineering plugin (EveryInc) demonstrates the mature form of cross
 
 The plugin ships 37 skills and 51 agents. The core convention it distributes is the compound engineering loop (brainstorm → plan → work → review → compound), implemented as slash commands with accompanying review and research agents. Each `/ce-compound` run saves a learning to `docs/` with YAML frontmatter; `/ce-plan` searches that directory on every run — conventions compound across sessions [^src6].
 
-This illustrates the current state of cross-platform portability: the base layer (Claude Code's plugin manifest + `SKILL.md` format) is the lingua franca, but different harnesses require adapter steps as their native plugin specs evolve [^src6]. See [[ai-engineering/agentic-coding|Agentic Coding]] for the full Compound Engineering methodology.
+This illustrates the current state of cross-platform portability: the base layer (Claude Code's plugin manifest + `SKILL.md` format) is the lingua franca, but different harnesses require adapter steps as their native plugin specs evolve [^src6]. See [Agentic Coding](/ai-engineering/agentic-coding.md) for the full Compound Engineering methodology.
 
 ## Karpathy's four principles (karpathy-skills CLAUDE.md — 43K stars)
 
 Jay's breakdown of the karpathy-skills CLAUDE.md (the most starred public `CLAUDE.md` as of mid-2026) distills four operating principles that make the file unusually effective [^src8]:
 
-1. **Think and clarify before coding** — the file opens with "Before writing any code, think about the problem first." Ask clarifying questions before starting implementation. This is the planning-first discipline also in [[ai-engineering/compound-engineering|Compound Engineering]] and [[ai-engineering/spec-driven-development|Spec-Driven Development]].
+1. **Think and clarify before coding** — the file opens with "Before writing any code, think about the problem first." Ask clarifying questions before starting implementation. This is the planning-first discipline also in [Compound Engineering](/ai-engineering/compound-engineering.md) and [Spec-Driven Development](/ai-engineering/spec-driven-development.md).
 2. **Simplicity first** — "Write the simplest code that could possibly work." Prioritize clarity over cleverness; avoid over-engineering. When asked for a 5-step example, Karpathy-Claude produces 20 clean lines; vanilla Claude produces 50 with edge cases that weren't asked for.
 3. **Surgical changes only** — make minimal targeted changes. "Don't refactor code you're not working on." This prevents scope creep and reduces the blast radius of agent edits — the same discipline as the Ponytail YAGNI plugin.
 4. **Goal-driven (declarative) execution** — declare *what* you want, not *how* to do it. The CLAUDE.md shifts the agent from imperative ("do this, then this") to declarative ("the user should be able to do X") — consistently produces better results across coding tasks [^src8].
@@ -209,10 +209,10 @@ The preferred pattern: root `CLAUDE.md` contains only critical constraints, buil
 
 ## Related
 
-- [[ai-engineering/agent-skills|Agent Skills]] — progressive disclosure; skills vs always-on instruction files
-- [[ai-engineering/context-window-management|Context Window Management]] — the attention-budget constraint
-- [[ai-engineering/agent-testing|Agent Testing]] — the verification loop Goal-Driven Execution depends on
-- [[ai-engineering/ai-agent|AI Agent]] — instruction files configure the agent's harness
+- [Agent Skills](/ai-engineering/agent-skills.md) — progressive disclosure; skills vs always-on instruction files
+- [Context Window Management](/ai-engineering/context-window-management.md) — the attention-budget constraint
+- [Agent Testing](/ai-engineering/agent-testing.md) — the verification loop Goal-Driven Execution depends on
+- [AI Agent](/ai-engineering/ai-agent.md) — instruction files configure the agent's harness
 
 ---
 

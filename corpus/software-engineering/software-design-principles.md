@@ -99,7 +99,7 @@ Many GoF patterns are workarounds for missing language features [^src2]. Java's 
 
 **The honest value of patterns**: "giving a short name to a big idea" — it's easier to say "that's a facade" than re-explain a wrapper each time [^src2]. Patterns are "for talking about code that's already written," not a checklist to apply [^src2]. The failure mode is **overengineering** — shoehorning patterns in solves "imaginary problems," producing labyrinths of interfaces. The evaluation rule is the **simplicity principle** above: weigh the technique's benefit against its cost. "If your solution needs a diagram to explain it, you've gone too far." [^src2] A developer who internalizes separation of concerns, encapsulation, and composition over inheritance "will write clean code naturally, even if they've never heard the word 'Singleton'" [^src2].
 
-This connects to the maintainability cost of AI-generated code — see [[software-engineering/ai-assisted-development|AI-Assisted Development]], where the same simplicity discipline guards against AI-amplified over-abstraction.
+This connects to the maintainability cost of AI-generated code — see [AI-Assisted Development](/software-engineering/ai-assisted-development.md), where the same simplicity discipline guards against AI-amplified over-abstraction.
 
 ## Open/Closed Principle — concrete example
 
@@ -122,22 +122,22 @@ class DiscountCalculator:
         return self.discount_strategy.apply(total)
 ```
 
-"Before, adding a new discount meant editing `DiscountCalculator`. Now, adding a new discount means creating a new class." [^src4] `DiscountCalculator` never needs to know every discount type — it only cares that its strategy has an `apply()` method. The same structural pattern as the DIP example above, applied at the feature level rather than infrastructure level. See [[software-engineering/software-design-principles|Dependency Inversion Principle]] above.
+"Before, adding a new discount meant editing `DiscountCalculator`. Now, adding a new discount means creating a new class." [^src4] `DiscountCalculator` never needs to know every discount type — it only cares that its strategy has an `apply()` method. The same structural pattern as the DIP example above, applied at the feature level rather than infrastructure level. See [Dependency Inversion Principle](/software-engineering/software-design-principles.md) above.
 
 ## Relationship to architecture-level patterns
 
-SRP and cohesion operate at the code level, but the same principle drives [[software-engineering/microservices|microservices]] decomposition at the service level — each service should have one reason to change, with clear boundaries and limited proliferation. Hype-driven microservices adoption often violates the simplicity principle: services are added before the complexity is warranted [^src1].
+SRP and cohesion operate at the code level, but the same principle drives [microservices](/software-engineering/microservices.md) decomposition at the service level — each service should have one reason to change, with clear boundaries and limited proliferation. Hype-driven microservices adoption often violates the simplicity principle: services are added before the complexity is warranted [^src1].
 
 ## See also
 
-- [[software-engineering/microservices|Microservices]] — service-level application of SRP, cohesion, and loose coupling
-- [[software-engineering/distributed-systems-fallacies|Distributed Systems Fallacies]] — distributed context where defensibility (explicit failure handling) becomes critical
-- [[software-engineering/ai-assisted-development|AI-Assisted Development]] — deep modules, simplicity, and testability under AI code generation
-- [[software-engineering/README|Software Architecture hub]]
+- [Microservices](/software-engineering/microservices.md) — service-level application of SRP, cohesion, and loose coupling
+- [Distributed Systems Fallacies](/software-engineering/distributed-systems-fallacies.md) — distributed context where defensibility (explicit failure handling) becomes critical
+- [AI-Assisted Development](/software-engineering/ai-assisted-development.md) — deep modules, simplicity, and testability under AI code generation
+- [Software Architecture hub](/software-engineering/README.md)
 
 ---
 
-[^src1]: [[03_Resources/Study Notes/Python - Production Code Principles Senior Developer|Python - Production Code Principles Senior Developer]]
+[^src1]: [Python - Production Code Principles Senior Developer](/03_Resources/Study Notes/Python - Production Code Principles Senior Developer.md)
 [^src2]: [Design Patterns Suck](../../raw/email/email-2026-06-09-design-patterns-suck.md)
 [^src3]: [Tech With Tim — "Joao, here's another challenge for you" (Dependency Inversion)](../../raw/email/email-2026-06-10-joao-here-s-another-challenge-for-you.md)
 [^src4]: [Tech With Tim — "Joao, quick code challenge for you" (Open/Closed)](../../raw/email/email-2026-06-16-joao-quick-code-challenge-for-you.md)

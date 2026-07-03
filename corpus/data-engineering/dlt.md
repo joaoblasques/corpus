@@ -86,10 +86,10 @@ dlt auto-detects when not specified explicitly [^src1].
 
 ## See also
 
-- [[data-engineering/data-ingestion-patterns|Data Ingestion Patterns]] — dlt fits the REST API pattern
-- [[data-engineering/etl-pipeline|ETL Pipeline]] — overall pipeline taxonomy
-- [[data-engineering/data-quality|Data Quality]] — schema validation that dlt enables
-- [[data-engineering/README|Data Engineering hub]]
+- [Data Ingestion Patterns](/data-engineering/data-ingestion-patterns.md) — dlt fits the REST API pattern
+- [ETL Pipeline](/data-engineering/etl-pipeline.md) — overall pipeline taxonomy
+- [Data Quality](/data-engineering/data-quality.md) — schema validation that dlt enables
+- [Data Engineering hub](/data-engineering/README.md)
 
 ---
 

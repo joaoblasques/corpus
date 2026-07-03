@@ -67,7 +67,7 @@ The anti-pattern: opening a blank chat every morning and re-explaining yourself 
 - **Profile preferences**: tell the model exactly how to behave (skip preamble, lead with the answer, give a real recommendation not a neutral list, push back on bad ideas) [^src1].
 - **Projects as memory**: a workspace where instructions and files ride into every chat; train 2–3 on your real samples [^src1].
 - **Make it interrogate you first**: have the model attack then steel-man your plan before giving an opinion — "two minutes answering > twenty minutes correcting" [^src1].
-- **Prompting mechanics** (attributed to Anthropic's guidance): say what *to* do not what to avoid; explain the *why*; 3–5 examples is the sweet spot for steering tone; **query-last ordering** (long doc on top, question at the bottom) can improve answers up to 30% on big inputs [^src1]. See [[ai-engineering/prompt-engineering|Prompt Engineering]] if present.
+- **Prompting mechanics** (attributed to Anthropic's guidance): say what *to* do not what to avoid; explain the *why*; 3–5 examples is the sweet spot for steering tone; **query-last ordering** (long doc on top, question at the bottom) can improve answers up to 30% on big inputs [^src1]. See [Prompt Engineering](/ai-engineering/prompt-engineering.md) if present.
 
 ## 2. The about-me / voice file
 
@@ -94,7 +94,7 @@ The anti-pattern: opening a blank chat every morning and re-explaining yourself 
 
 > Two people can build the same loop and get opposite results — one to move faster on work they understand, the other to avoid understanding it. "The loop doesn't know the difference. You do" [^src3].
 
-This is the productivity face of agent orchestration; see [[ai-engineering/agentic-coding|Agentic Coding]] / loop and harness pages in the ai-engineering domain for the engineering depth, and [[productivity/shipping-and-scope|Shipping and Scope]] for why verification of outcomes is the durable skill.
+This is the productivity face of agent orchestration; see [Agentic Coding](/ai-engineering/agentic-coding.md) / loop and harness pages in the ai-engineering domain for the engineering depth, and [Shipping and Scope](/productivity/shipping-and-scope.md) for why verification of outcomes is the durable skill.
 
 ## 6. The three-brain model (human / AI / shared second brain)
 
@@ -225,7 +225,7 @@ The three Claude+NotebookLM automation chains illustrate the distinction [^src11
 
 The consumer does the first half of each chain manually (asks Claude, reads the answer). The founder builds the full chain so the output arrives without being requested [^src11].
 
-This connects to the [[ai-engineering/notebooklm|NotebookLM]] page for source-specific AI and [[ai-engineering/agent-skills|skills vs sub-agents]] for the technical building blocks.
+This connects to the [NotebookLM](/ai-engineering/notebooklm.md) page for source-specific AI and [skills vs sub-agents](/ai-engineering/agent-skills.md) for the technical building blocks.
 
 ---
 

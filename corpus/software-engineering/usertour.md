@@ -51,8 +51,8 @@ Commercial alternatives (Appcues, Userflow, Intercom Tours) are expensive SaaS. 
 
 ## See also
 
-- [[software-engineering/kan|Kan]] — another open-source alternative to a commercial SaaS product (Trello replacement)
-- [[software-engineering/insforge|InsForge]] — open-source backend toolkit for similar self-hosted infrastructure stacks
+- [Kan](/software-engineering/kan.md) — another open-source alternative to a commercial SaaS product (Trello replacement)
+- [InsForge](/software-engineering/insforge.md) — open-source backend toolkit for similar self-hosted infrastructure stacks
 
 ---
 

@@ -20,7 +20,7 @@ updated: 2026-07-02
 
 # MiniMax M3
 
-**TL;DR.** MiniMax M3 is a model family (BF16 and MXFP8 checkpoints) built for million-token-context, native multimodal reasoning, coding/agentic workflows, and controllable thinking behavior. Its core architectural change is **MiniMax Sparse Attention (MSA)** — a hybrid dense/sparse attention design that makes 1M-token context practical to serve [^src1]. [[ai-engineering/vllm|vLLM]] shipped day-0 serving support for it.
+**TL;DR.** MiniMax M3 is a model family (BF16 and MXFP8 checkpoints) built for million-token-context, native multimodal reasoning, coding/agentic workflows, and controllable thinking behavior. Its core architectural change is **MiniMax Sparse Attention (MSA)** — a hybrid dense/sparse attention design that makes 1M-token context practical to serve [^src1]. [vLLM](/ai-engineering/vllm.md) shipped day-0 serving support for it.
 
 ## MiniMax Sparse Attention (MSA)
 
@@ -70,9 +70,9 @@ MiniMax M3 also has day-0 GRPO (Group Relative Policy Optimization) post-trainin
 
 ## Related
 
-- [[ai-engineering/vllm|vLLM]] — serving engine providing day-0 support
-- [[ai-engineering/mixture-of-experts|Mixture of Experts]] — M3's MXFP8 MoE execution path
-- [[ai-engineering/README|AI Engineering hub]]
+- [vLLM](/ai-engineering/vllm.md) — serving engine providing day-0 support
+- [Mixture of Experts](/ai-engineering/mixture-of-experts.md) — M3's MXFP8 MoE execution path
+- [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 

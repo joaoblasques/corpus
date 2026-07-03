@@ -43,7 +43,7 @@ Running ClickHouse in production requires [^src1]:
 
 Tinybird abstracts the operational burden by providing a managed ClickHouse-based architecture [^src1]:
 
-**Storage architecture**: stateless replicas backed by object storage (S3 or GCS) with local SSDs for caching — separating storage and compute. This enables horizontal scaling (add/remove replicas without data rebalancing) and vertical scaling (changing replica resource specs) — similar to Snowflake's virtual warehouse model. See [[data-engineering/snowflake|Snowflake]].
+**Storage architecture**: stateless replicas backed by object storage (S3 or GCS) with local SSDs for caching — separating storage and compute. This enables horizontal scaling (add/remove replicas without data rebalancing) and vertical scaling (changing replica resource specs) — similar to Snowflake's virtual warehouse model. See [Snowflake](/data-engineering/snowflake.md).
 
 **Ingestion**: managed connectors for Kafka, object storage, and the Events API (HTTP payload streaming). The datasource abstraction encapsulates schema, storage engine, and connection config. Reliability features: flush interval batching, staging area for retriable errors, quarantine table (dead-letter queue concept) for non-retriable errors, and backpressure mechanisms (delay → rate-limit) when a source consumes excessive resources [^src1].
 
@@ -67,10 +67,10 @@ For daily-batch analytics workloads, cloud data warehouses (Snowflake, BigQuery,
 
 ## Related
 
-- [[data-engineering/kafka|Apache Kafka]] — primary ingestion source for ClickHouse streaming workloads
-- [[data-engineering/snowflake|Snowflake]] — competing OLAP engine; shared-storage architecture similar to Tinybird's design
-- [[data-engineering/duckdb|DuckDB]] — also uses vectorized execution; embedded OLAP for smaller datasets
-- [[data-engineering/data-orchestration|Data Orchestration]] — pipeline scheduling for batch loads into ClickHouse
-- [[data-engineering/data-observability|Data Observability]] — lag detection and SLA monitoring for real-time pipelines
+- [Apache Kafka](/data-engineering/kafka.md) — primary ingestion source for ClickHouse streaming workloads
+- [Snowflake](/data-engineering/snowflake.md) — competing OLAP engine; shared-storage architecture similar to Tinybird's design
+- [DuckDB](/data-engineering/duckdb.md) — also uses vectorized execution; embedded OLAP for smaller datasets
+- [Data Orchestration](/data-engineering/data-orchestration.md) — pipeline scheduling for batch loads into ClickHouse
+- [Data Observability](/data-engineering/data-observability.md) — lag detection and SLA monitoring for real-time pipelines
 
 [^src1]: [ClickHouse® → Real-time insight in 15 minutes](../../raw/web/web-clickhouse-real-time-insight-in-15-minutes.md)

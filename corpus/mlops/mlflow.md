@@ -125,12 +125,12 @@ Loading: `mlflow.pyfunc.load_model("models:/<name>@latest-model")`; use `unwrap_
 
 ## See also
 
-- [[mlops/model-serving|Model Serving]] — where MLflow-registered models are exposed as REST endpoints (Databricks Model Serving)
-- [[mlops/databricks-development|Databricks Development]] — the local-dev setup and `is_databricks()` / profile pattern MLflow reuses
-- [[mlops/databricks-asset-bundles|Databricks Asset Bundles]] — the DAB jobs that train/register models through MLflow
-- [[mlops/model-monitoring|Model Monitoring]] — inference logging and Lakehouse Monitoring downstream of a served MLflow model
-- [[data-engineering/databricks|Databricks]] — Unity Catalog and the platform MLflow's Databricks flavor runs on
-- [[mlops/README|MLOps hub]]
+- [Model Serving](/mlops/model-serving.md) — where MLflow-registered models are exposed as REST endpoints (Databricks Model Serving)
+- [Databricks Development](/mlops/databricks-development.md) — the local-dev setup and `is_databricks()` / profile pattern MLflow reuses
+- [Databricks Asset Bundles](/mlops/databricks-asset-bundles.md) — the DAB jobs that train/register models through MLflow
+- [Model Monitoring](/mlops/model-monitoring.md) — inference logging and Lakehouse Monitoring downstream of a served MLflow model
+- [Databricks](/data-engineering/databricks.md) — Unity Catalog and the platform MLflow's Databricks flavor runs on
+- [MLOps hub](/mlops/README.md)
 
 ---
 

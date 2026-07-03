@@ -30,7 +30,7 @@ updated: 2026-06-19
 
 # Terraform
 
-**TL;DR**: HashiCorp's IaC tool. Infrastructure is declared in `.tf` files written in HCL (HashiCorp Configuration Language); Terraform compares them against a `.tfstate` record of current infrastructure and applies the difference [^src1]. The concrete instance of [[mlops/infrastructure-as-code|Infrastructure as Code]].
+**TL;DR**: HashiCorp's IaC tool. Infrastructure is declared in `.tf` files written in HCL (HashiCorp Configuration Language); Terraform compares them against a `.tfstate` record of current infrastructure and applies the difference [^src1]. The concrete instance of [Infrastructure as Code](/mlops/infrastructure-as-code.md).
 
 ## Config file building blocks
 
@@ -114,14 +114,14 @@ Terraform was originally **MPL** (true open source). In **August 2023** HashiCor
 
 ## Beyond the cloud: provisioning local Docker infra
 
-The **`provider` abstraction isn't cloud-only** — Terraform can target the **Docker provider** to declaratively provision a *local* data platform [^src3]. A worked example builds a free local analogue of a cloud data stack: Terraform modules (`airflow/`, `localstack/`, `minio/`) each declare a container, image, and volumes, plus a dedicated **Docker network** so containers reach each other by hostname (`http://minio:9000`) instead of dynamic IPs [^src3]. Terraform even **builds custom Docker images** as part of `apply` (e.g. an Airflow image with boto3 + duckdb baked in, an ETL image whose `context = ".."` reaches scripts at the project root) — so provisioning containers/networks *and* building the application images they depend on are all declarative [^src3]. The cloud-service → local-tool mapping: S3→Minio, Lambda→Docker containers, MWAA→Dockerized Airflow, SQS/SNS→LocalStack, Redshift/BigQuery→[[data-engineering/duckdb|DuckDB]] [^src3]. The IaC payoff is identical to cloud use — one `terraform apply` reproduces the whole stack, `destroy` tears it down [^src3]. See [[data-engineering/de-portfolio-projects|DE Portfolio Projects]] for this as a portfolio piece.
+The **`provider` abstraction isn't cloud-only** — Terraform can target the **Docker provider** to declaratively provision a *local* data platform [^src3]. A worked example builds a free local analogue of a cloud data stack: Terraform modules (`airflow/`, `localstack/`, `minio/`) each declare a container, image, and volumes, plus a dedicated **Docker network** so containers reach each other by hostname (`http://minio:9000`) instead of dynamic IPs [^src3]. Terraform even **builds custom Docker images** as part of `apply` (e.g. an Airflow image with boto3 + duckdb baked in, an ETL image whose `context = ".."` reaches scripts at the project root) — so provisioning containers/networks *and* building the application images they depend on are all declarative [^src3]. The cloud-service → local-tool mapping: S3→Minio, Lambda→Docker containers, MWAA→Dockerized Airflow, SQS/SNS→LocalStack, Redshift/BigQuery→[DuckDB](/data-engineering/duckdb.md) [^src3]. The IaC payoff is identical to cloud use — one `terraform apply` reproduces the whole stack, `destroy` tears it down [^src3]. See [DE Portfolio Projects](/data-engineering/de-portfolio-projects.md) for this as a portfolio piece.
 
 ## See also
 
-- [[mlops/infrastructure-as-code|Infrastructure as Code]] — the general pattern; the five types of IaC tools
-- [[data-engineering/cicd-for-data-infrastructure|CI/CD for Data Infrastructure]] — Terraform plan→gate→apply in a pipeline
-- [[data-engineering/de-portfolio-projects|DE Portfolio Projects]] — the local-platform project as a portfolio piece
-- [[mlops/README|MLOps hub]]
+- [Infrastructure as Code](/mlops/infrastructure-as-code.md) — the general pattern; the five types of IaC tools
+- [CI/CD for Data Infrastructure](/data-engineering/cicd-for-data-infrastructure.md) — Terraform plan→gate→apply in a pipeline
+- [DE Portfolio Projects](/data-engineering/de-portfolio-projects.md) — the local-platform project as a portfolio piece
+- [MLOps hub](/mlops/README.md)
 
 ---
 

@@ -79,7 +79,7 @@ Framed as "Mixed Model Arts" for data modeling, but general: when a new game arr
 - A boxer entering an MMA cage isn't bad at boxing — he's "playing a different game from the one they'd trained for." Decades of data-modeling turf wars (Kimball vs. Inmon, etc.) "were never really about which approach was correct... but which was correct for a particular game" [^src3].
 - **The new game** adds machines as first-class data consumers — agents querying, models grounding on your data — which reframes the questions without retiring the fundamentals (grain, entities, relationships, trust) [^src3].
 - **The practice**: keep a base/specialty, then "round out your game for the problem in front of you." Borrow relentlessly, stay loyal to none, respect each lineage. "The comparison game of 'my camp versus your camp' is a status game dressed up as a technical debate" [^src3].
-- This is the generalist-as-router idea from the Circle of Competence, applied to skill-building — see [[productivity/mental-models|Mental Models]].
+- This is the generalist-as-router idea from the Circle of Competence, applied to skill-building — see [Mental Models](/productivity/mental-models.md).
 
 ## Environment as a multiplier
 
@@ -120,7 +120,7 @@ Five moves for reading and learning that produce lasting retention and action. A
 
 ## Related
 
-The judgment-over-execution thesis here is the same one in [[productivity/shipping-and-scope|Shipping and Scope]] and [[productivity/ai-augmented-knowledge-work|AI-Augmented Knowledge Work]]. See also [[productivity/decision-making|Decision Making]] for frameworks that complement the Test and Own moves.
+The judgment-over-execution thesis here is the same one in [Shipping and Scope](/productivity/shipping-and-scope.md) and [AI-Augmented Knowledge Work](/productivity/ai-augmented-knowledge-work.md). See also [Decision Making](/productivity/decision-making.md) for frameworks that complement the Test and Own moves.
 
 ---
 
