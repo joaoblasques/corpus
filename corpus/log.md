@@ -3,6 +3,13 @@
 > OKF v0.1 change log. Newest first, grouped by date.
 
 ## 2026-07-03
+* **Ingest**: ingest-auto batch — Kai Waehner "Trinity" article (6 pre-specified files, 1 ingested, 5 deferred)
+  - source: raw/_inbox/web-the-trinity-of-modern-data-architecture-process-intelligence-b19b93a7.md
+  - channel: web
+  - domain: data-engineering (primary), ai-engineering (cross-domain enrichment)
+  - pages touched: [corpus/data-engineering/kafka.md, corpus/ai-engineering/agent-security.md, corpus/data-engineering/README.md, corpus/index.md]
+  - new pages: [corpus/data-engineering/process-intelligence.md]
+  - notes: ingest-auto manual pass; 6 pre-specified files, 1 substantive (Kai Waehner's "Trinity" article on process intelligence + event-driven integration + trusted agentic AI). New concept page process-intelligence.md covers process mining/orchestration/agentic process orchestration (Celonis/Camunda) and the process-level-guardrail framing for agentic AI. Enriched kafka.md with the enterprise event-driven-integration-backbone angle (Zeebe, SAP/Salesforce/ServiceNow eventing+CDC adoption) and agent-security.md with the model-level-vs-process-level safety distinction, cross-linked both ways. 5 deferred: kai-waehner.de "Coming Soon" page (reCAPTCHA/Turnstile placeholder boilerplate only, no content — scrape failure) + 4 confessionsofadataguy.com podcast-episode pages (From COBOL to Copilot/Dave Langer, Semantic Intelligence/David Jayatillake, I Watched Every Databricks Summit 2026, The Truth About Lakehouse Scalability/Rust+Delta Lake — all four scrapes captured only site-nav/archive sidebar links, no article or transcript body). No orphans; no contradictions.
 * **Ingest**: ingest-auto batch — LM Studio 0.3.26-0.3.33, Unsloth expansion, Tim Dettmers (50 processed, 28 ingested, 22 deferred)
   - source: raw/_inbox/web-lm-studio-0-3-26-16ef563c.md
   - source: raw/_inbox/web-lm-studio-0-3-27-find-in-chat-and-search-all-chats-e119d512.md

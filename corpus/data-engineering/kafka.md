@@ -44,7 +44,7 @@ tags:
   - corpus/data-engineering
   - entity
 created: 2026-05-21
-updated: 2026-06-23
+updated: 2026-07-03
 ---
 
 # Apache Kafka
@@ -164,11 +164,16 @@ With the default 500, a single consumer can grab 25% of a 2000-record budget; at
 
 These findings were produced with **Dimster** (DIMensional teSTER), an open-source Kafka-centric performance benchmarking tool [^src4]. Its design idea is **dimensional testing**: treat each config/workload aspect (batch size, acks, consumer count, partition count, produce rate) as a dimension in N-dimensional space and run identical benchmarks sweeping one or two dimensions at a time [^src4]. It ships four test modes — **run** (fixed throughput + live interaction to mutate a running workload), **explore** (find peak sustainable throughput under a latency target), **drain-backlog**, and **correctness** (detect loss, corruption, out-of-order, duplicates) — and emits self-contained, reproducible result bundles (JSON/CSV, source configs, broker logs, charts, Grafana-as-HTML) [^src4]. It uses Kubernetes as a standardized runtime (minikube/k3d locally up to EKS/GKE) [^src4]. In an explore test, a 300-member share group hit 95% of theoretical max on only 10 partitions, where a consumer group needed 300 partitions [^src4].
 
+## Kafka as the enterprise event-driven integration backbone
+
+Beyond a single pipeline's transport layer, Kafka has become "the de facto standard for event-driven integration at enterprise scale" — the architectural commitment to events (not scheduler cadence) as the primary integration primitive, ensuring decoupling, scalability, and data consistency across real-time and batch systems [^src8]. Process-orchestration engines have followed the same shift: Camunda's **Zeebe** is itself an event-driven engine, letting organizations implement event-driven workflows without Kafka as a prerequisite; for broader enterprise integration, Kafka complements the orchestration layer, connecting the full landscape of operational systems, SaaS platforms, and data infrastructure into one event-driven backbone [^src8]. Core SaaS platforms have added eventing/CDC interfaces alongside their traditional request-response APIs — SAP S/4HANA, Salesforce CRM, and ServiceNow are named examples — signaling that even systems designed around synchronous HTTP are moving toward event-driven models [^src8]. See [Process Intelligence](/data-engineering/process-intelligence.md) for how this event layer pairs with process orchestration and agentic AI guardrails.
+
 ## See also
 
 - [Idempotent Pipelines](/data-engineering/idempotent-pipelines.md) — append-only stream ingestion with at-most-once settings
 - [Stream Processing](/data-engineering/stream-processing.md) — Kafka as the transport layer in real-time pipelines
 - [Storage Fundamentals](/data-engineering/storage-fundamentals.md) — the object-storage trend (tiered/diskless Kafka) builds on the object-storage layer covered there
+- [Process Intelligence](/data-engineering/process-intelligence.md) — event-driven integration as one of three converged architecture layers
 - [Data Engineering hub](/data-engineering/README.md)
 
 ---
@@ -180,3 +185,4 @@ These findings were produced with **Dimster** (DIMensional teSTER), an open-sour
 [^src5]: [TLDR Data — Kafka Queues / Head-of-Line Blocking (newsletter origin)](../../raw/email/email-2026-05-14-duckdb-goes-remote-when-lakehouses-guess-netflix-tames-data.md)
 [^src6]: [TLDR Data — Kafka's New Bottleneck / Share Groups (newsletter origin)](../../raw/email/email-2026-05-28-slashing-snowflake-costs-open-source-agent-tradeoffs-kafkas.md)
 [^src7]: [If you're learning Kafka, this article is for you (Vu Trinh)](../../raw/email/email-2025-05-15-if-you-re-learning-kafka-this-article-is-for-you.md)
+[^src8]: [The Trinity of Modern Data Architecture: Process Intelligence, Event-Driven Integration, and Trusted Agentic AI](../../raw/web/the-trinity-of-modern-data-architecture-process-intelligence-b19b93a7.md)

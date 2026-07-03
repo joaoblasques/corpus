@@ -6,7 +6,7 @@ tags:
   - corpus/data-engineering
   - hub
 created: 2026-05-07
-updated: 2026-06-26
+updated: 2026-07-03
 ---
 
 # Data Engineering
@@ -61,6 +61,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [FHIR (Fast Healthcare Interoperability Resources)](/data-engineering/fhir.md) — concept · draft · HL7 standard for healthcare data exchange; Resources as typed forms; REST/Document/Message/Service paradigms; FHIR analytics pipeline patterns
 - [OMOP Common Data Model (CDM)](/data-engineering/omop-cdm.md) — concept · draft · OHDSI standard for observational health data analytics; standardized schema + vocabularies; post-ETL analytic tooling (ACHILLES, ATLAS, HADES)
 - [Vibe Engineering](/data-engineering/vibe-engineering.md) — concept · draft · building without theoretical framework (Joe Reis); Spolsky's Law of Leaky Abstractions; 2026 DE context; AI as vibe-engineering accelerant
+- [Process Intelligence](/data-engineering/process-intelligence.md) — concept · draft · BPM evolution (process mining/orchestration/agentic process orchestration); process-level guardrails for agentic AI; the "Trinity" architecture with event-driven integration + trusted agentic AI (cross-domain → ai-engineering)
 
 ### Entities
 - [PostgreSQL](/data-engineering/postgres.md) — entity · draft · relational database as full-stack data platform via extensions (pgvector, pgcron, tsvector, etc.); pgledger double-entry ledger pattern

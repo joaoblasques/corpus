@@ -69,6 +69,9 @@ sources:
   - path: raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md
     channel: youtube
     ingested_at: 2026-06-26
+  - path: raw/web/the-trinity-of-modern-data-architecture-process-intelligence-b19b93a7.md
+    channel: web
+    ingested_at: 2026-07-03
 aliases:
   - prompt injection
   - LLM security
@@ -86,7 +89,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-12
-updated: 2026-06-24
+updated: 2026-07-03
 ---
 
 # Agent Security
@@ -347,8 +350,13 @@ For [local AI agents](/ai-engineering/local-ai-agents.md) — which run on your 
 
 General rule of thumb from the source: "be as paranoid as possible" [^src21]. This is the personal-machine analogue of the [Managed Agents](/ai-engineering/claude-managed-agents.md) self-hosted-sandbox and credential-brokering patterns above — shrink the blast radius before granting write/action tools.
 
+## Model-level vs. process-level safety (trusted agentic AI)
+
+Kai Waehner frames "trusted agentic AI" as operating at two levels, not one [^src22]. **Model-level safety** — vendors like Anthropic and Mistral build alignment, constitutional constraints, and refusal behaviors directly into their models; this provides a baseline, but "a well-aligned model can still be manipulated through prompt injection or adversarial inputs. It can still hallucinate when the surrounding data is stale or incomplete" [^src22]. **Process-level safety** — the enterprise-workflow layer defining the operational envelope: what the agent is allowed to do, which decisions require human approval, and what the fallback is when the agent is wrong [^src22]. Waehner's conclusion matches this page's defense-in-depth framing directly: "Both levels are necessary. Neither is sufficient alone" [^src22]. See [Process Intelligence](/data-engineering/process-intelligence.md) for the workflow-gate mechanics (process mining, process orchestration) that implement process-level safety in practice, and how a batch-fed (vs. event-fed) agent can be architecturally "trustworthy" yet still act on stale context.
+
 ## See also
 
+- [Process Intelligence](/data-engineering/process-intelligence.md) — the workflow-layer implementation of process-level safety (cross-domain → data-engineering)
 - [Structured Outputs](/ai-engineering/structured-outputs.md) — output-control layer; reliability prerequisite for security
 - [Prompt Engineering](/ai-engineering/prompt-engineering.md) — injection is the adversarial inverse; few-shot defenses
 - [Agent Harness](/ai-engineering/agent-harness.md) — where HITL and confirmation gates live
@@ -382,3 +390,4 @@ General rule of thumb from the source: "be as paranoid as possible" [^src21]. Th
 [^src19]: [Build a Claude Managed Agent with Vercel Sandbox](../../raw/web/web-build-a-claude-managed-agent-with-vercel-sandbox-vercel-know.md) — Vercel Knowledge Base
 [^src20]: [Set up Claude Managed Agents · Cloudflare Sandbox SDK docs](../../raw/web/web-set-up-claude-managed-agents-cloudflare-sandbox-sdk-docs.md) — Cloudflare
 [^src21]: [Local AI Agents In 26 Minutes](../../raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md) — Tina Huang, YouTube
+[^src22]: [The Trinity of Modern Data Architecture: Process Intelligence, Event-Driven Integration, and Trusted Agentic AI](../../raw/web/the-trinity-of-modern-data-architecture-process-intelligence-b19b93a7.md) — Kai Waehner
