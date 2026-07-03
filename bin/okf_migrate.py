@@ -13,6 +13,7 @@ BUNDLE = ROOT / "corpus"
 
 _WIKILINK = re.compile(r"\[\[([^\]|]+?)(?:\|([^\]]+?))?\]\]")
 _FENCE = re.compile(r"```.*?```", re.S)
+_LOG_ENTRY = re.compile(r"^## \[(\d{4}-\d{2}-\d{2})[^\]]*\]\s*(\w+)\s*\|\s*(.+)$")
 
 
 def _titlecase(seg: str) -> str:
@@ -48,3 +49,44 @@ def rewrite_wikilinks(text: str, resolve=None):
     for i, f in enumerate(fences):
         out = out.replace(f"\x00FENCE{i}\x00", f)
     return out, unresolved
+
+
+def reformat_log(text: str) -> str:
+    """Group log entries by date, newest first, under `## YYYY-MM-DD` headings. Lossless."""
+    lines = text.splitlines()
+    groups: dict[str, list[str]] = {}
+    order: list[str] = []
+    cur_date = None
+    for ln in lines:
+        m = _LOG_ENTRY.match(ln)
+        if m:
+            cur_date, op, subject = m.group(1), m.group(2), m.group(3)
+            groups.setdefault(cur_date, [])
+            if cur_date not in order:
+                order.append(cur_date)
+            groups[cur_date].append(f"* **{op.capitalize()}**: {subject.strip()}")
+        elif cur_date is not None and ln.strip():
+            # continuation lines of the current entry -> nested detail
+            groups[cur_date].append(f"  {ln.strip()}")
+    out = ["# Corpus Log", "", "> OKF v0.1 change log. Newest first, grouped by date.", ""]
+    for d in sorted(order, reverse=True):
+        out.append(f"## {d}")
+        out.extend(groups[d])
+        out.append("")
+    return "\n".join(out).rstrip() + "\n"
+
+
+def stamp_index(text: str) -> str:
+    if text.startswith("---\n") and "okf_version:" in text.split("---\n", 2)[1]:
+        return text
+    return '---\nokf_version: "0.1"\n---\n' + text
+
+
+def ensure_type(text: str, type_value: str) -> str:
+    m = re.match(r"^---\n(.*?)\n---\n(.*)$", text, re.S)
+    if not m:
+        return f"---\ntype: {type_value}\n---\n{text}"
+    fm, body = m.group(1), m.group(2)
+    if re.search(r"^type:", fm, re.M):
+        return text
+    return f"---\ntype: {type_value}\n{fm}\n---\n{body}"

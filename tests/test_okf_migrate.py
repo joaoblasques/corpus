@@ -39,3 +39,27 @@ def test_idempotent_on_plain_markdown_links():
     src = "already [markdown](/a/b.md) link"
     out, _ = mig.rewrite_wikilinks(src)
     assert out == src
+
+
+def test_reformat_log_newest_first_iso_groups():
+    src = ("# Corpus Log\n\n"
+           "## [2026-05-07] schema | bootstrap\n- did x\n\n"
+           "## [2026-07-02] ingest | Foo\n- did y\n")
+    out = mig.reformat_log(src)
+    # newest date first, ISO group headings, no bracket/op-in-heading
+    assert out.index("## 2026-07-02") < out.index("## 2026-05-07")
+    assert "## [2026-" not in out
+    assert "bootstrap" in out and "Foo" in out           # no entry lost
+
+
+def test_stamp_index_adds_okf_version_once():
+    once = mig.stamp_index("# Corpus Index\n\n## Domains\n")
+    assert once.startswith('---\nokf_version: "0.1"\n---\n')
+    assert mig.stamp_index(once) == once                 # idempotent
+
+
+def test_ensure_type_adds_or_inserts():
+    assert mig.ensure_type("# Domains\n", "domain-registry").startswith(
+        "---\ntype: domain-registry\n---\n")
+    got = mig.ensure_type("---\nfoo: 1\n---\nbody", "domain-registry")
+    assert "type: domain-registry" in got and "foo: 1" in got
