@@ -3,7 +3,7 @@ type: concept
 domain: data-engineering
 status: draft
 sources:
-  - path: raw/web/the-trinity-of-modern-data-architecture-process-intelligence-b19b93a7.md
+  - path: raw/web/web-the-trinity-of-modern-data-architecture-process-intelligence-b19b93a7.md
     channel: web
     ingested_at: 2026-07-03
 aliases:
@@ -51,4 +51,4 @@ A workflow engine automates a credit decision, but the data feeding it comes fro
 
 ---
 
-[^src1]: [The Trinity of Modern Data Architecture: Process Intelligence, Event-Driven Integration, and Trusted Agentic AI](../../raw/web/the-trinity-of-modern-data-architecture-process-intelligence-b19b93a7.md)
+[^src1]: [The Trinity of Modern Data Architecture: Process Intelligence, Event-Driven Integration, and Trusted Agentic AI](../../raw/web/web-the-trinity-of-modern-data-architecture-process-intelligence-b19b93a7.md)

@@ -52,8 +52,8 @@ The word covers two related but different objects, and conflating them is a comm
 
 | Sense | What it is | Where it lives |
 |---|---|---|
-| **Token embedding** (internal) | The model's learned representation of a single vocabulary token, looked up at the start of every forward pass | Inside the [Transformer](/ai-engineering/transformer\.md) |
-| **Sentence/document embedding** (external) | A single vector summarizing a whole chunk of text, produced by an embedding model for retrieval | In a [Vector Database](/ai-engineering/vector-database\.md) |
+| **Token embedding** (internal) | The model's learned representation of a single vocabulary token, looked up at the start of every forward pass | Inside the [Transformer](/ai-engineering/transformer.md) |
+| **Sentence/document embedding** (external) | A single vector summarizing a whole chunk of text, produced by an embedding model for retrieval | In a [Vector Database](/ai-engineering/vector-database.md) |
 
 Both are dense vectors in which geometric closeness means semantic closeness, but the first is a building block of the LLM's own computation while the second is an artifact you store and query.
 

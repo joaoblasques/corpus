@@ -17,7 +17,7 @@ This `corpus/` directory is a standalone OKF v0.1 bundle, conforming to the spec
 
 - **Version declaration**: OKF version is declared as `okf_version: "0.1"` in `index.md`.
 - **Concept documents**: Every markdown file in this directory is a concept document. Each document MUST begin with YAML frontmatter containing a non-empty `type` field. Other fields (title, domain, status, etc.) are optional and used by this corpus's schema, but `type` is required for OKF conformance.
-- **Cross-links**: Markdown links are root-relative (e.g., `[Text](/domain/page.md)`) with no Obsidian wikilinks. Links are untyped; broken links are tolerated per the OKF spec.
+- **Cross-links**: Markdown links are root-relative (e.g., ``[Text](/<domain>/<page>.md)``) with no Obsidian wikilinks. Links are untyped; broken links are tolerated per the OKF spec.
 - **Reserved files**:
   - `index.md` — directory catalog (no frontmatter, progressive-disclosure format).
   - `log.md` — append-only change history (newest-first, `## YYYY-MM-DD` format).

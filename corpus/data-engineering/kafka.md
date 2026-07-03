@@ -24,7 +24,7 @@ sources:
   - path: raw/email/email-2025-05-15-if-you-re-learning-kafka-this-article-is-for-you.md
     channel: email
     ingested_at: 2026-06-19
-  - path: raw/web/the-trinity-of-modern-data-architecture-process-intelligence-b19b93a7.md
+  - path: raw/web/web-the-trinity-of-modern-data-architecture-process-intelligence-b19b93a7.md
     channel: web
     ingested_at: 2026-07-03
 aliases:
@@ -185,4 +185,4 @@ Beyond a single pipeline's transport layer, Kafka has become "the de facto stand
 [^src5]: [TLDR Data — Kafka Queues / Head-of-Line Blocking (newsletter origin)](../../raw/email/email-2026-05-14-duckdb-goes-remote-when-lakehouses-guess-netflix-tames-data.md)
 [^src6]: [TLDR Data — Kafka's New Bottleneck / Share Groups (newsletter origin)](../../raw/email/email-2026-05-28-slashing-snowflake-costs-open-source-agent-tradeoffs-kafkas.md)
 [^src7]: [If you're learning Kafka, this article is for you (Vu Trinh)](../../raw/email/email-2025-05-15-if-you-re-learning-kafka-this-article-is-for-you.md)
-[^src8]: [The Trinity of Modern Data Architecture: Process Intelligence, Event-Driven Integration, and Trusted Agentic AI](../../raw/web/the-trinity-of-modern-data-architecture-process-intelligence-b19b93a7.md)
+[^src8]: [The Trinity of Modern Data Architecture: Process Intelligence, Event-Driven Integration, and Trusted Agentic AI](../../raw/web/web-the-trinity-of-modern-data-architecture-process-intelligence-b19b93a7.md)

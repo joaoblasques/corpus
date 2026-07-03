@@ -96,9 +96,9 @@ The coach layer is a performance-analysis module that reads all historical trade
 | Component | Examples |
 |---|---|
 | AI agent | Claude Code (Opus 4.7), Hermes agent |
-| Broker API | [Alpaca](/trading/alpaca-api\.md) (equities), exchange APIs (crypto) |
+| Broker API | [Alpaca](/trading/alpaca-api.md) (equities), exchange APIs (crypto) |
 | Research | Perplexity API, native web fetch/search |
-| Charting | [TradingView](/trading/tradingview-pine-script\.md) + Pine Script |
+| Charting | [TradingView](/trading/tradingview-pine-script.md) + Pine Script |
 | Notifications | ClickUp, Telegram, Slack |
 | Hosting | Claude Code remote routines, Railway |
 | Version control | GitHub (required for remote routines) |
@@ -106,7 +106,7 @@ The coach layer is a performance-analysis module that reads all historical trade
 ## Crypto-specific capabilities
 
 When applied to crypto, agents can additionally [^src3]:
-- Scan thousands of on-chain wallets on [Hyperliquid](/trading/hyperliquid\.md) (public data; no API key required)
+- Scan thousands of on-chain wallets on [Hyperliquid](/trading/hyperliquid.md) (public data; no API key required)
 - Identify top 20 most profitable vs. most losing wallets; cross-reference positions to find divergence signals
 - Scan all perpetuals pairs for funding rate opportunities (collect funding by positioning on the paying side; some annualized rates exceed 50–100%)
 - Execute trades from natural-language commands via Telegram

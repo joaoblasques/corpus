@@ -72,10 +72,10 @@ Every microservices deployment is subject to all eight fallacies; ignoring them 
 
 | Fallacy | Response | Source |
 |---|---|---|
-| Network reliability | Resilience planning; centralized observability | [Microservices](/software-engineering/microservices\.md) [^src1] |
-| Latency | Eventual consistency design; async where possible | [Microservices](/software-engineering/microservices\.md) [^src1] |
-| Network secure | Explicit secret encryption; mTLS | [Kubernetes](/software-engineering/kubernetes\.md) [^src2] |
-| Topology changes | Service objects with stable endpoints | [Kubernetes](/software-engineering/kubernetes\.md) [^src2] |
+| Network reliability | Resilience planning; centralized observability | [Microservices](/software-engineering/microservices.md) [^src1] |
+| Latency | Eventual consistency design; async where possible | [Microservices](/software-engineering/microservices.md) [^src1] |
+| Network secure | Explicit secret encryption; mTLS | [Kubernetes](/software-engineering/kubernetes.md) [^src2] |
+| Topology changes | Service objects with stable endpoints | [Kubernetes](/software-engineering/kubernetes.md) [^src2] |
 
 ## See also
 

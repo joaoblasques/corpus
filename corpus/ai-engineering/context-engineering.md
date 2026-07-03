@@ -122,7 +122,7 @@ Context engineering primarily operates on the in-context tier, but retrieval (fr
 | Component | Role |
 |---|---|
 | System prompt | Core instructions and constraints |
-| Retrieved context | Relevant docs/data from [RAG](/ai-engineering/rag\.md) |
+| Retrieved context | Relevant docs/data from [RAG](/ai-engineering/rag.md) |
 | Conversation history | Prior turns |
 | Tool results | Function call outputs |
 

@@ -69,7 +69,7 @@ sources:
   - path: raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md
     channel: youtube
     ingested_at: 2026-06-26
-  - path: raw/web/the-trinity-of-modern-data-architecture-process-intelligence-b19b93a7.md
+  - path: raw/web/web-the-trinity-of-modern-data-architecture-process-intelligence-b19b93a7.md
     channel: web
     ingested_at: 2026-07-03
 aliases:
@@ -390,4 +390,4 @@ Kai Waehner frames "trusted agentic AI" as operating at two levels, not one [^sr
 [^src19]: [Build a Claude Managed Agent with Vercel Sandbox](../../raw/web/web-build-a-claude-managed-agent-with-vercel-sandbox-vercel-know.md) — Vercel Knowledge Base
 [^src20]: [Set up Claude Managed Agents · Cloudflare Sandbox SDK docs](../../raw/web/web-set-up-claude-managed-agents-cloudflare-sandbox-sdk-docs.md) — Cloudflare
 [^src21]: [Local AI Agents In 26 Minutes](../../raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md) — Tina Huang, YouTube
-[^src22]: [The Trinity of Modern Data Architecture: Process Intelligence, Event-Driven Integration, and Trusted Agentic AI](../../raw/web/the-trinity-of-modern-data-architecture-process-intelligence-b19b93a7.md) — Kai Waehner
+[^src22]: [The Trinity of Modern Data Architecture: Process Intelligence, Event-Driven Integration, and Trusted Agentic AI](../../raw/web/web-the-trinity-of-modern-data-architecture-process-intelligence-b19b93a7.md) — Kai Waehner

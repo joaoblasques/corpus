@@ -172,7 +172,7 @@ confidence: 0.87
 | Tier | Mechanism | Scope |
 |---|---|---|
 | **Short-term** | Conversation history in the context window | Current session; lost when context resets or compacts |
-| **Long-term** | [Vector databases](/ai-engineering/vector-database\.md) (Pinecone, Weaviate, FAISS) **or** persistent documents (CLAUDE.md) | Persists across sessions; retrieved or referenced at any time |
+| **Long-term** | [Vector databases](/ai-engineering/vector-database.md) (Pinecone, Weaviate, FAISS) **or** persistent documents (CLAUDE.md) | Persists across sessions; retrieved or referenced at any time |
 
 Short-term memory is bounded by the context window limit — see [Context Window Management](/ai-engineering/context-window-management.md) for strategies to manage what stays in window.
 
