@@ -17,20 +17,23 @@ def _corpus(tmp_path: Path) -> Path:
 
 def test_broken_wikilink_detected(tmp_path):
     c = _corpus(tmp_path)
-    (c / "ai-engineering" / "README.md").write_text("# AI\n[[ai-engineering/llm|LLM]]\n", encoding="utf-8")
+    (c / "ai-engineering" / "README.md").write_text(
+        "# AI\n[LLM](/ai-engineering/llm.md)\n", encoding="utf-8")
     (c / "ai-engineering" / "llm.md").write_text(
-        "links to [[ai-engineering/missing|Missing]] and [[ai-engineering/llm|self]]\n", encoding="utf-8")
+        "links to [Missing](/ai-engineering/missing.md) and [self](/ai-engineering/llm.md)\n",
+        encoding="utf-8")
     broken = cl.find_broken_wikilinks(c)
     targets = [t for _, t in broken]
-    assert "ai-engineering/missing" in targets
-    assert "ai-engineering/llm" not in targets  # exists
+    assert "/ai-engineering/missing.md" in targets
+    assert "/ai-engineering/llm.md" not in targets  # exists
 
 
-def test_para_native_wikilink_skipped(tmp_path):
+def test_external_and_relative_links_skipped(tmp_path):
     c = _corpus(tmp_path)
     (c / "ai-engineering" / "README.md").write_text("# AI\n", encoding="utf-8")
-    (c / "ai-engineering" / "p.md").write_text("[[03_Resources/Articles/foo|Foo]]\n", encoding="utf-8")
-    assert cl.find_broken_wikilinks(c) == []  # not a corpus domain → skipped
+    (c / "ai-engineering" / "p.md").write_text(
+        "[Foo](https://example.com/page.md)\n[Bar](../../raw/web/foo.md)\n", encoding="utf-8")
+    assert cl.find_broken_wikilinks(c) == []  # external and relative links → skipped
 
 
 def test_broken_citation_detected(tmp_path):
@@ -105,11 +108,11 @@ def test_index_and_log_not_checked_for_broken_wikilinks(tmp_path):
     """index.md and log.md at the corpus root must be skipped (not checked for broken links)."""
     c = _corpus(tmp_path)
     (c / "ai-engineering" / "README.md").write_text("# AI\n", encoding="utf-8")
-    # Place files with wikilinks at the corpus root — they should be skipped
-    (c / "index.md").write_text("[[ai-engineering/does-not-exist|X]]\n", encoding="utf-8")
-    (c / "log.md").write_text("[[ai-engineering/also-missing|Y]]\n", encoding="utf-8")
+    # Place files with markdown links at the corpus root — they should be skipped
+    (c / "index.md").write_text("[X](/ai-engineering/does-not-exist.md)\n", encoding="utf-8")
+    (c / "log.md").write_text("[Y](/ai-engineering/also-missing.md)\n", encoding="utf-8")
     broken = cl.find_broken_wikilinks(c)
-    # Neither index.md nor log.md should produce broken-wikilink reports
+    # Neither index.md nor log.md should produce broken-link reports
     paths = [src for src, _ in broken]
     assert not any("index.md" in p for p in paths), "index.md should be skipped"
     assert not any("log.md" in p for p in paths), "log.md should be skipped"

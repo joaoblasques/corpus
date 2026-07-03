@@ -21,6 +21,10 @@ _META = {"index.md", "log.md", "_domains.md", "_config.md", "_REVIEW.md"}
 # target stops at ] | or \ (a `\|` escaped pipe appears in markdown-table wikilinks)
 _WIKILINK_RE = re.compile(r"\[\[([^\]|\\]+)")
 _CITATION_RE = re.compile(r"\]\((\.\./[^)#]+?\.md)")
+# root-relative markdown links: [text](/domain/page.md) — the capture group is the full /...md path
+_MDLINK_RE = re.compile(r"\]\((/[^\s)#]+?\.md)\)")
+# fenced code blocks to strip before link scanning
+_FENCE_RE = re.compile(r"```[\s\S]*?```")
 _STATUS_RE = re.compile(r"^status:\s*(\S+)", re.M)
 
 
@@ -39,22 +43,24 @@ def content_pages(corpus: Path) -> list[Path]:
 
 
 def find_broken_wikilinks(corpus: Path) -> list[tuple[str, str]]:
-    """[[domain/page|...]] links whose target corpus/domain/page.md is missing.
+    """Root-relative markdown links [text](/path.md) whose target file is missing.
 
-    Only checks links whose first segment is an existing corpus domain dir
-    (skips PARA-native vault links like [[03_Resources/...]]).
+    Scans corpus/*.md for links of the form [text](/domain/page.md) and reports those
+    whose target corpus/<domain>/<page>.md does not exist. External links (https://)
+    and relative citations (../../raw/...) are naturally excluded by the leading-slash
+    requirement. Fenced code blocks are stripped before scanning.
+
+    OKF tolerates broken links, so this is informational only (no exit failure).
+    The dict key is kept as ``broken_wikilinks`` for backward compatibility.
     """
-    domains = {d.name for d in _domain_dirs(corpus)}
     broken = []
     for p in list(corpus.rglob("*.md")):
         if p.name in _META:
             continue
-        for target in _WIKILINK_RE.findall(p.read_text(encoding="utf-8", errors="ignore")):
-            target = target.strip()
-            seg0 = target.split("/", 1)[0]
-            if seg0 not in domains:
-                continue  # not a corpus link
-            if not (corpus / f"{target}.md").exists():
+        text = _FENCE_RE.sub("", p.read_text(encoding="utf-8", errors="ignore"))
+        for target in _MDLINK_RE.findall(text):
+            target_path = corpus / target.lstrip("/")
+            if not target_path.exists():
                 broken.append((str(p.relative_to(corpus.parent)), target))
     return broken
 
@@ -109,7 +115,7 @@ def lint(corpus: Path | None = None) -> dict:
 def main(argv=None) -> int:
     report = lint()
     integrity = report["broken_wikilinks"] + report["broken_citations"]
-    print(f"corpus lint — {len(report['broken_wikilinks'])} broken wikilinks · "
+    print(f"corpus lint — {len(report['broken_wikilinks'])} broken links · "
           f"{len(report['broken_citations'])} broken citations · "
           f"{len(report['orphans'])} orphans · {len(report['stubs'])} stubs")
     for label in ("broken_wikilinks", "broken_citations"):
