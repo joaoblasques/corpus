@@ -55,7 +55,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-07-02
-updated: 2026-07-02
+updated: 2026-07-03
 ---
 
 # vLLM
@@ -192,8 +192,21 @@ hf jobs run --flavor a10g-large --expose 8000 --timeout 2h \
 - **Coding-agent backend**: launching with `--enable-auto-tool-choice --tool-call-parser hermes` (parser matched to the model family) lets a self-hosted vLLM job back a terminal coding agent (e.g. [Pi Agent](/ai-engineering/pi-agent.md)) as a custom OpenAI-compatible provider [^src15].
 - **HF Jobs vs. Inference Endpoints**: Jobs is billed per-second, maximally flexible (pick the image, flags, hardware), and best for one-off/experimental use; [Hugging Face](/ai-engineering/hugging-face.md) Inference Endpoints are the managed counterpart — access control tiers (public/protected/private) and scale-to-zero — for a durable, production-facing service [^src15].
 
+## One-command serving on HF Jobs
+
+[Hugging Face](/ai-engineering/hugging-face.md) **Jobs** (`hf jobs run`) is a `docker run`-style, per-second-billed way to stand up a vLLM server on demand — the quickest path to a running endpoint for tests, evals, or batch generation, as distinct from HF's managed Inference Endpoints product [^src15]:
+
+```
+hf jobs run --flavor a10g-large --expose 8000 --timeout 2h \
+  vllm/vllm-openai:latest \
+  vllm serve Qwen/Qwen3-4B --host 0.0.0.0 --port 8000
+```
+
+`--expose` routes the container's port through HF's public jobs proxy; requests need an HF token as a bearer token (the endpoint is gated, not public). The same pattern scales to large hybrid Mamba/attention MoE models on multi-GPU flavors (e.g. `h200x2` with `--tensor-parallel-size 2`), with `--max-model-len`/`--max-num-seqs` capped to fit long-context models within GPU memory. `--ssh` opens a shell into the running job for debugging, and the exposed endpoint can back **Pi** (a provider-agnostic terminal coding-agent harness) once tool calling is enabled via `--enable-auto-tool-choice --tool-call-parser hermes` [^src15]. See [Hugging Face](/ai-engineering/hugging-face.md) for the full HF Jobs reference and the billing/access-control tradeoffs vs. Inference Endpoints.
+
 ## Related
 
+- [Hugging Face](/ai-engineering/hugging-face.md) — HF Jobs (`hf jobs run`) is a one-command way to launch a vLLM server on demand, per-second billed
 - [Mixture of Experts](/ai-engineering/mixture-of-experts.md) — MoE execution is a first-class vLLM serving concern (expert parallelism, Elastic EP runtime scaling, quantized MoE backends)
 - [Quantization](/ai-engineering/quantization.md) — AutoRound/NVFP4/LLM Compressor checkpoint quantization, used across DGX Spark, Nemotron 3 Ultra, and Laguna XS.2 deployments
 - [Nemotron 3 Ultra](/ai-engineering/nemotron-3-ultra.md) — hybrid Transformer-Mamba MoE agentic reasoning model with vLLM day-0 support
@@ -222,4 +235,5 @@ hf jobs run --flavor a10g-large --expose 8000 --timeout 2h \
 [^src12]: [vLLM Tops the Artificial Analysis Leaderboard](../../raw/web/web-vllm-tops-the-artificial-analysis-leaderboard-762bd790.md) — vLLM blog, 2026-05-11
 [^src13]: [Serving Agentic Workloads at Scale with vLLM x Mooncake](../../raw/web/web-serving-agentic-workloads-at-scale-with-vllm-x-mooncake-78c3044b.md) — vLLM blog, 2026-05-06
 [^src14]: [Run Highly Efficient Multimodal Agentic AI with NVIDIA Nemotron 3 Nano Omni Using vLLM](../../raw/web/web-run-highly-efficient-multimodal-agentic-ai-with-nvidia-nemot-b0ef6e3c.md) — vLLM blog, 2026-04-28
+[^src15]: [Run a vLLM Server on HF Jobs in One Command](../../raw/web/web-run-a-vllm-server-on-hf-jobs-in-one-command-7f1a19cb.md) — Hugging Face blog, 2026-06-28
 [^src15]: [Run a vLLM Server on HF Jobs in One Command](../../raw/web/web-run-a-vllm-server-on-hf-jobs-in-one-command-7f1a19cb.md) — Hugging Face blog

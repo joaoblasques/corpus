@@ -54,6 +54,7 @@ Per NVIDIA/vLLM's own reported figures (vLLM config: 10k/2k ISL/OSL, batch size 
 - [Quantization](/ai-engineering/quantization.md) — NVFP4 precision path
 - [Mixture of Experts](/ai-engineering/mixture-of-experts.md) — Latent MoE routing
 - [MiniMax M3](/ai-engineering/minimax-m3.md) — another day-0 vLLM model with a hybrid long-context attention design
+- [Olmo](/ai-engineering/olmo.md) — Ai2's matched transformer/hybrid model pair; token-level study of where hybrid (attention+recurrent) architectures beat pure attention
 - [AI Engineering hub](/ai-engineering/README.md)
 
 ---
