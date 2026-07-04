@@ -45,6 +45,12 @@ sources:
   - path: raw/_inbox/web-claude-code-with-anthropic-api-compatibility-ollama-blog-eb664f1b.md
     channel: web
     ingested_at: 2026-07-02
+  - path: raw/_inbox/web-runlocal-local-ai-on-your-own-hardware-a5000279.md
+    channel: web
+    ingested_at: 2026-07-04
+  - path: raw/_inbox/web-runlocal-local-ai-on-your-own-hardware-94e161ca.md
+    channel: web
+    ingested_at: 2026-07-04
 aliases:
   - Ollama
   - ollama
@@ -55,7 +61,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-07-02
-updated: 2026-07-02
+updated: 2026-07-04
 ---
 
 # Ollama

@@ -3,9 +3,9 @@ type: entity
 domain: ai-engineering
 status: draft
 sources:
-  - path: raw/web/web-experimenting-with-the-proposed-cross-origin-storage-api-in-dba1e8f0.md
+  - path: raw/_inbox/web-experimenting-with-the-proposed-cross-origin-storage-api-in-dba1e8f0.md
     channel: web
-    ingested_at: 2026-07-03
+    ingested_at: 2026-07-04
 aliases:
   - Transformers.js
   - transformers.js

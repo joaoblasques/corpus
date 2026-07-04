@@ -3,12 +3,39 @@ type: entity
 domain: ai-engineering
 status: draft
 sources:
-  - path: raw/web/web-run-a-vllm-server-on-hf-jobs-in-one-command-7f1a19cb.md
+  - path: raw/_inbox/web-run-a-vllm-server-on-hf-jobs-in-one-command-7f1a19cb.md
     channel: web
-    ingested_at: 2026-07-03
-  - path: raw/web/web-shipping-huggingface-hub-every-week-with-ai-open-tools-and-a-49c16039.md
+    ingested_at: 2026-07-04
+  - path: raw/_inbox/web-shipping-huggingface-hub-every-week-with-ai-open-tools-and-a-49c16039.md
     channel: web
-    ingested_at: 2026-07-03
+    ingested_at: 2026-07-04
+  - path: raw/_inbox/web-designing-the-hf-cli-as-an-agent-optimized-way-to-work-with-431ad766.md
+    channel: web
+    ingested_at: 2026-07-04
+  - path: raw/_inbox/web-migrating-your-github-ci-to-hugging-face-jobs-eb987eaf.md
+    channel: web
+    ingested_at: 2026-07-04
+  - path: raw/_inbox/web-how-an-agent-built-a-3d-paris-gallery-by-chaining-two-huggin-92ae8342.md
+    channel: web
+    ingested_at: 2026-07-04
+  - path: raw/_inbox/web-we-got-local-models-to-triage-the-openclaw-repo-for-free-d1c7fe87.md
+    channel: web
+    ingested_at: 2026-07-04
+  - path: raw/_inbox/web-is-it-agentic-enough-benchmarking-open-models-on-your-own-to-d44bbcfd.md
+    channel: web
+    ingested_at: 2026-07-04
+  - path: raw/_inbox/web-mosaicleaks-can-your-research-agent-keep-a-secret-e9b8182d.md
+    channel: web
+    ingested_at: 2026-07-04
+  - path: raw/_inbox/web-profiling-in-pytorch-part-2-from-nn-linear-to-a-fused-mlp-47d05ada.md
+    channel: web
+    ingested_at: 2026-07-04
+  - path: raw/_inbox/web-the-open-source-community-is-backing-openenv-for-agentic-rl-fbaf22fc.md
+    channel: web
+    ingested_at: 2026-07-04
+  - path: raw/_inbox/web-nemotron-3-5-content-safety-customizable-multimodal-safety-f-3c2e7a73.md
+    channel: web
+    ingested_at: 2026-07-04
 aliases:
   - HF
   - HuggingFace
@@ -17,7 +44,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-07-03
-updated: 2026-07-03
+updated: 2026-07-04
 ---
 
 # Hugging Face
@@ -62,14 +89,54 @@ extra   = found - expected               # belongs to a different release
 - **Cost**: roughly $0.25 per full release (notes + Slack announcement, 20–40 PRs, several prompting rounds) on pay-as-you-go open-weights inference [^src2].
 - **Effect on cadence**: notes quality went up, not down (review time shifts to polishing, not drafting from scratch); downstream breakages surface earlier via automatic RC test branches opened in dependent libraries; an automatic "shipped in vX.Y.Z" PR comment shortened the contributor feedback loop [^src2].
 
+## HF CLI — agent-optimized Hub access
+
+The `hf` CLI detects agent use via environment variables (`CLAUDECODE`, `CODEX_SANDBOX`, `CURSOR`, `AI_AGENT`) and renders different output for humans vs. agents: humans get ANSI color, truncated tables, progress bars; agents get no ANSI, full untruncated values, compact token-efficient output [^src3].
+
+On complex multi-step tasks (e.g. managing a Space across multiple operations), the `hf` CLI uses up to **6× fewer tokens** than hand-rolling `curl` or Python SDK calls from an agent [^src3]. As of April 2026, HF tracks ~40k Claude Code users and ~49M requests; Codex is close behind [^src3].
+
+## GitHub CI on HF Jobs
+
+HF provides a `jobs-actions` GitHub Actions dispatcher that lets jobs run on HF hardware while GitHub Actions remains the CI orchestrator [^src4]. Result for Trackio: CPU CI time cut ~30%; new GPU test suite enabled without maintaining always-on runners [^src4].
+
+## HF Spaces as agent-callable tools (`agents.md`)
+
+Every Gradio Space on the Hub now exposes a plain-text `agents.md` file that tells an agent exactly how to call it — same pattern as tool-use schemas but for Spaces [^src5]. This makes Spaces composable building blocks: an agent can chain two Spaces (e.g., image generation → 3D reconstruction) to produce multimedia assets without the integration overhead of SDKs, weight downloads, GPU setup, and polling [^src5].
+
+## Local models for repo triage (OpenClaw + Pi harness)
+
+HF engineers use local models (Gemma-4-26B, Qwen3.6-35B-A3B) inside the Pi agent harness for cost-free, real-time classification of OpenClaw issues and PRs [^src6]. Key safety pattern: **reposhell** (read-only bash-like shell) instead of bare bash access — prevents prompt-injected issues from steering the model into unrelated writes [^src6].
+
+## Agentic benchmarking of open models (`is-it-agentic-enough`)
+
+HF measured not just whether an open model got the right answer, but how much work it took across models × library-revision × task, using `transformers` as the case study [^src7]. The harness ran on open models via Pi, with tasks fanned out across HF Jobs for identical hardware per run. Design insight: "If it isn't documented, it doesn't exist" — agentic performance tracks documentation quality [^src7].
+
+## MosaicLeaks: research agent privacy leakage
+
+ServiceNow's MosaicLeaks benchmark (1,001 multi-hop chains) shows deep research agents frequently leak private enterprise information through web queries — the "mosaic effect" where individually innocuous queries collectively reveal private facts [^src8]. Privacy-Aware Deep Research (PA-DR), an RL training method, raises strict chain success from 48.7% to 58.7% while reducing answer leakage from 34.0% to 9.9% [^src8]. See [Agent Security](/ai-engineering/agent-security.md).
+
+## PyTorch profiling on HF infrastructure
+
+HF's "Profiling in PyTorch" series uses HF Spaces Dev Mode and HF Jobs for GPU profiler experiments — enabling reproducible performance work without local GPU setup [^src9]. Part 2 covers optimizing `nn.Linear` → fused MLP kernels via `torch.compile` and CUDA graphs.
+
 ## Related
 
 - [vLLM](/ai-engineering/vllm.md) — the serving engine HF Jobs' quickstart example launches
 - [Quantization](/ai-engineering/quantization.md) — relevant to sizing models for HF Jobs GPU flavors
-- [Agentic Coding](/ai-engineering/agentic-coding.md) — the trust-but-verify (deterministic-check-wraps-model-output) pattern generalizes beyond release notes
+- [Agentic Coding](/ai-engineering/agentic-coding.md) — the trust-but-verify pattern generalizes beyond release notes
+- [OpenEnv](/ai-engineering/openenv.md) — OpenEnv governance includes Hugging Face
+- [Agent Security](/ai-engineering/agent-security.md) — MosaicLeaks privacy leakage
+- [Strands Robots](/ai-engineering/strands-robots.md) — uses HF Hub for robot dataset storage
 - [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 
-[^src1]: [Run a vLLM Server on HF Jobs in One Command](../../raw/web/web-run-a-vllm-server-on-hf-jobs-in-one-command-7f1a19cb.md) — Hugging Face blog, 2026-06-28
-[^src2]: [Shipping huggingface_hub every week with AI, open tools, and a human in the loop](../../raw/web/web-shipping-huggingface-hub-every-week-with-ai-open-tools-and-a-49c16039.md) — Hugging Face blog, 2026-06-28
+[^src1]: [Run a vLLM Server on HF Jobs in One Command](../../raw/_inbox/web-run-a-vllm-server-on-hf-jobs-in-one-command-7f1a19cb.md) — Hugging Face blog, 2026-06-28
+[^src2]: [Shipping huggingface_hub every week with AI, open tools, and a human in the loop](../../raw/_inbox/web-shipping-huggingface-hub-every-week-with-ai-open-tools-and-a-49c16039.md) — Hugging Face blog, 2026-06-28
+[^src3]: [Designing the hf CLI as an agent-optimized way to work with the Hub](../../raw/_inbox/web-designing-the-hf-cli-as-an-agent-optimized-way-to-work-with-431ad766.md) — Hugging Face blog, 2026-06
+[^src4]: [Migrating Your GitHub CI to Hugging Face Jobs](../../raw/_inbox/web-migrating-your-github-ci-to-hugging-face-jobs-eb987eaf.md) — Hugging Face blog, 2026-06
+[^src5]: [How an Agent Built a 3D Paris Gallery by Chaining Two Hugging Face Spaces](../../raw/_inbox/web-how-an-agent-built-a-3d-paris-gallery-by-chaining-two-huggin-92ae8342.md) — Hugging Face blog, 2026-06
+[^src6]: [We got local models to triage the OpenClaw repo for FREE!*](../../raw/_inbox/web-we-got-local-models-to-triage-the-openclaw-repo-for-free-d1c7fe87.md) — Hugging Face blog, 2026-06
+[^src7]: [Is it agentic enough? Benchmarking open models on your own tooling](../../raw/_inbox/web-is-it-agentic-enough-benchmarking-open-models-on-your-own-to-d44bbcfd.md) — Hugging Face blog, 2026-06
+[^src8]: [MosaicLeaks: Can your research agent keep a secret?](../../raw/_inbox/web-mosaicleaks-can-your-research-agent-keep-a-secret-e9b8182d.md) — Hugging Face blog, ServiceNow, 2026-06
+[^src9]: [Profiling in PyTorch (Part 2): From nn.Linear to a Fused MLP](../../raw/_inbox/web-profiling-in-pytorch-part-2-from-nn-linear-to-a-fused-mlp-47d05ada.md) — Hugging Face blog, 2026-06

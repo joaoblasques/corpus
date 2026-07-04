@@ -45,9 +45,9 @@ sources:
   - path: raw/web/web-run-highly-efficient-multimodal-agentic-ai-with-nvidia-nemot-b0ef6e3c.md
     channel: web
     ingested_at: 2026-07-02
-  - path: raw/web/web-run-a-vllm-server-on-hf-jobs-in-one-command-7f1a19cb.md
+  - path: raw/_inbox/web-run-a-vllm-server-on-hf-jobs-in-one-command-7f1a19cb.md
     channel: web
-    ingested_at: 2026-07-03
+    ingested_at: 2026-07-04
 aliases:
   - vLLM
   - vllm

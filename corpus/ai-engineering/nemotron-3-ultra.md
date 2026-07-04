@@ -6,15 +6,20 @@ sources:
   - path: raw/web/web-announcing-day-0-support-for-nvidia-nemotron-3-ultra-on-vllm-bc7c306b.md
     channel: web
     ingested_at: 2026-07-02
+  - path: raw/_inbox/web-nemotron-3-5-content-safety-customizable-multimodal-safety-f-3c2e7a73.md
+    channel: web
+    ingested_at: 2026-07-04
 aliases:
   - Nemotron 3 Ultra
   - NVIDIA Nemotron 3 Ultra
   - Nemotron
+  - Nemotron 3.5
+  - Nemotron 3.5 Content Safety
 tags:
   - corpus/ai-engineering
   - entity
 created: 2026-07-02
-updated: 2026-07-02
+updated: 2026-07-04
 ---
 
 # Nemotron 3 Ultra
@@ -48,6 +53,17 @@ Served through vLLM with an OpenAI-compatible API; open weights, open data, and 
 
 Per NVIDIA/vLLM's own reported figures (vLLM config: 10k/2k ISL/OSL, batch size 1), Nemotron 3 Ultra leads other open models on agentic benchmarks (agent productivity, coding, instruction following) and sits in the leading-accuracy/leading-throughput quadrant, claiming up to 30% cost savings vs. other leading open models [^src1]. These are vendor-reported numbers, not independently verified.
 
+## Nemotron 3.5 Content Safety
+
+A separate NVIDIA model in the Nemotron 3.x family, specifically designed for **multimodal safety classification** of LLM inputs and outputs [^src2].
+
+Key additions in 3.5 vs. 3.x [^src2]:
+
+- **Unified multimodal evaluation** — takes user prompt + optional image + optional assistant response as a single context window; catches violations that only emerge from the interaction between text and image
+- **Global language coverage** — 12-language explicit training + ~140-language zero-shot via Gemma 3 base model inheritance
+- **Custom policy enforcement** — accepts a custom policy specification alongside the input; reasons over the custom policy rather than a fixed built-in taxonomy; extends the work from Nemotron Content Safety Reasoning 4B to the full multimodal/multilingual setting
+- **THINK mode** — optional step-by-step reasoning trace before the `safe/unsafe` verdict
+
 ## Related
 
 - [vLLM](/ai-engineering/vllm.md) — serving engine providing Day-0 support; also used as Nemotron 3 Ultra's RL rollout/eval backend
@@ -55,8 +71,10 @@ Per NVIDIA/vLLM's own reported figures (vLLM config: 10k/2k ISL/OSL, batch size 
 - [Mixture of Experts](/ai-engineering/mixture-of-experts.md) — Latent MoE routing
 - [MiniMax M3](/ai-engineering/minimax-m3.md) — another day-0 vLLM model with a hybrid long-context attention design
 - [Olmo](/ai-engineering/olmo.md) — Ai2's matched transformer/hybrid model pair; token-level study of where hybrid (attention+recurrent) architectures beat pure attention
+- [Agent Security](/ai-engineering/agent-security.md) — safety classifiers in agentic pipelines
 - [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 
 [^src1]: [Announcing Day-0 Support for NVIDIA Nemotron 3 Ultra on vLLM](../../raw/web/web-announcing-day-0-support-for-nvidia-nemotron-3-ultra-on-vllm-bc7c306b.md) — vLLM blog, 2026-06-04
+[^src2]: [Nemotron 3.5 Content Safety: Customizable Multimodal Safety for Global Enterprise AI](../../raw/_inbox/web-nemotron-3-5-content-safety-customizable-multimodal-safety-f-3c2e7a73.md) — Hugging Face blog, NVIDIA, 2026-06

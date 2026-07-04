@@ -18,6 +18,9 @@ sources:
   - path: raw/web/web-the-best-gpus-for-deep-learning-in-2023-an-in-depth-analysis-c9ee20ca.md
     channel: web
     ingested_at: 2026-07-03
+  - path: raw/_inbox/web-runlocal-local-ai-on-your-own-hardware-6c5a69ff.md
+    channel: web
+    ingested_at: 2026-07-04
 aliases:
   - Quantization
   - Post-training quantization

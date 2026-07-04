@@ -3,9 +3,9 @@ type: entity
 domain: ai-engineering
 status: draft
 sources:
-  - path: raw/web/web-pp-ocrv6-on-hugging-face-50-language-ocr-from-1-5m-to-34-5m-493a508e.md
+  - path: raw/_inbox/web-pp-ocrv6-on-hugging-face-50-language-ocr-from-1-5m-to-34-5m-493a508e.md
     channel: web
-    ingested_at: 2026-07-03
+    ingested_at: 2026-07-04
 aliases:
   - PP-OCRv6
   - PaddleOCR

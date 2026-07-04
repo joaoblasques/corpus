@@ -3,6 +3,9 @@ type: entity
 domain: ai-engineering
 status: draft
 sources:
+  - path: raw/_inbox/web-runlocal-local-ai-on-your-own-hardware-2a373f8f.md
+    channel: web
+    ingested_at: 2026-07-04
   - path: raw/web/web-improving-lm-studio-s-mlx-engine-for-agentic-workflows-bef5274a.md
     channel: web
     ingested_at: 2026-07-02

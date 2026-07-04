@@ -3,9 +3,9 @@ type: entity
 domain: ai-engineering
 status: draft
 sources:
-  - path: raw/web/web-which-tokens-does-a-hybrid-model-predict-better-04bd4874.md
+  - path: raw/_inbox/web-which-tokens-does-a-hybrid-model-predict-better-04bd4874.md
     channel: web
-    ingested_at: 2026-07-03
+    ingested_at: 2026-07-04
 aliases:
   - Olmo
   - Olmo 3

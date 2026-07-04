@@ -3,9 +3,9 @@ type: entity
 domain: ai-engineering
 status: draft
 sources:
-  - path: raw/web/web-introducing-the-ffasr-leaderboard-benchmarking-asr-in-the-re-c8f31042.md
+  - path: raw/_inbox/web-introducing-the-ffasr-leaderboard-benchmarking-asr-in-the-re-c8f31042.md
     channel: web
-    ingested_at: 2026-07-03
+    ingested_at: 2026-07-04
 aliases:
   - Far-Field ASR Leaderboard
   - FFASR
