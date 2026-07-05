@@ -78,6 +78,15 @@ sources:
   - path: raw/youtube/youtube-V2qjnBDZZ7A-playwright-cli-vs-mcp-server-which-is-actually-better-for-cl.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/email/email-2026-06-28-agents-in-action-3-model-context-protocol-mcp-for-data-engin.md
+    channel: email
+    ingested_at: 2026-07-05
+  - path: raw/web/web-a-quote-from-sean-lynch-f248e4ad.md
+    channel: web
+    ingested_at: 2026-07-05
+  - path: raw/web/web-temporary-cloudflare-accounts-for-ai-agents-9feea510.md
+    channel: web
+    ingested_at: 2026-07-05
 aliases:
   - MCP
   - Model Context Protocol
@@ -89,7 +98,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-21
-updated: 2026-06-25
+updated: 2026-07-05
 ---
 
 # MCP (Model Context Protocol)
@@ -414,6 +423,66 @@ MCP Toolbox is the database-layer complement to WrenAI (semantic layer, text-to-
 
 Use this when evaluating whether a service has an existing MCP server before building from scratch. The directory is updated by community PRs and covers: databases, dev tools, cloud providers, communication platforms, file systems, browser automation, data analytics, and more [^src25].
 
+## MCP vs function calling: decision rule
+
+From a practitioner data-engineering perspective [^src27]:
+- **Function calling** is a model capability — the LLM invokes a locally-registered tool. Best for single-agent, single-service use.
+- **MCP** is infrastructure — a standardized, shareable, network-accessible server. Reach for MCP when "a second client needs the same capability."
+- "Function calling is how the model uses a tool; MCP is how that tool gets standardised, shared, and secured." [^src27]
+
+**The N×M problem MCP solves**: the same tool (e.g. a warehouse query function) would otherwise need to be re-implemented for every agent/client, spreading credentials everywhere, and requiring cascading updates on schema changes. One MCP server, many clients [^src27].
+
+**When to stay with function calling**: "stay with function calling until it hurts" — premature MCP abstraction adds operational overhead [^src27].
+
+## FastMCP (data engineering tutorial)
+
+A minimal FastMCP server for a data warehouse integration [^src27]:
+
+```python
+from fastmcp import FastMCP
+
+mcp = FastMCP("warehouse")
+
+@mcp.tool()
+def query_table(table: str, filter: str) -> dict:
+    """Query a warehouse table with optional filter."""
+    # DB access here
+    ...
+
+@mcp.resource("schema://warehouse/sales")
+def get_schema() -> str:
+    """Return the sales schema."""
+    return "..."
+
+if __name__ == "__main__":
+    mcp.run()  # stdio transport
+```
+
+Connect to Claude Code: `claude mcp add warehouse -- python /full/path/to/server.py` [^src27].
+
+**Design constraints from practitioners** [^src27]:
+- Keep servers small and focused; 30+ tools wastes thousands of context tokens per request
+- Isolate credentials on the server side — the agent never sees them
+- Treat the server as an attack surface: validate inputs, use read-only DB roles
+- Expose one capability first; iterate
+
+## MCP as auth gateway (community insight)
+
+Sean Lynch (Hacker News, 2026-06-19): the real unique value of MCP over CLI/skills is **isolating auth flow outside the agent's context window**, and potentially out of the harness completely [^src28]. Neither CLIs nor skills have a natural credential boundary; MCP servers can hold OAuth tokens, rotate them, and inject them per request without the agent ever seeing them.
+
+"Maybe the idealized form of MCP is just an auth gateway for the API and nothing else. That'd still be a win." [^src28]
+
+This echoes the credential-brokering pattern in [Agent Security](/ai-engineering/agent-security.md): Vercel and Cloudflare sandbox network policies inject credentials at the network layer rather than passing them as environment variables. MCP servers can implement the same pattern server-side.
+
+## Cloudflare ephemeral deploy (for AI agents)
+
+Cloudflare Workers can now be deployed without creating an account using `npx wrangler deploy --temporary` [^src29]:
+- Project stays live for **60 minutes**
+- Cloudflare provides a claim URL for making the project permanent
+- Useful for AI agents that need a temporary, internet-accessible endpoint for a single task
+
+This pattern fits MCP server deployment: an agent can spin up a temporary HTTP MCP server for a task, use it, and let it expire — no account management required [^src29].
+
 ## See also
 
 - [Multi-Agent Systems](/ai-engineering/multi-agent-systems.md) — MCP is the coordination layer for multi-agent architectures
@@ -453,3 +522,6 @@ Use this when evaluating whether a service has an existing MCP server before bui
 [^src24]: [googleapis/mcp-toolbox-for-databases — MCP server for databases (★15,684)](../../raw/github/github-googleapis-mcp-toolbox.md) — Google, GitHub
 [^src25]: [punkpeye/awesome-mcp-servers — curated MCP server directory (★89,588)](../../raw/github/github-punkpeye-awesome-mcp-servers.md) — punkpeye, GitHub
 [^src26]: [Playwright CLI vs MCP Server — token comparison](../../raw/youtube/youtube-V2qjnBDZZ7A-playwright-cli-vs-mcp-server-which-is-actually-better-for-cl.md) — Better Stack, YouTube; 68-token CLI vs 3.6K-token MCP server comparison; see [Tool Calling](/ai-engineering/tool-calling.md) for full analysis
+[^src27]: [Agents in Action #3: Model Context Protocol (MCP) for Data Engineers](../../raw/email/email-2026-06-28-agents-in-action-3-model-context-protocol-mcp-for-data-engin.md) — Pipeline to Insights (Substack), 2026-06-28
+[^src28]: [A quote from Sean Lynch](../../raw/web/web-a-quote-from-sean-lynch-f248e4ad.md) — Simon Willison curating HN comment by Sean Lynch, 2026-06-19
+[^src29]: [Temporary Cloudflare Accounts for AI agents](../../raw/web/web-temporary-cloudflare-accounts-for-ai-agents-9feea510.md) — Simon Willison, 2026-06-21

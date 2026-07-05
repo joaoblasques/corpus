@@ -9,6 +9,9 @@ sources:
   - path: raw/youtube/youtube-yeFNKgRst9o-these-3-claude-notebooklm-systems-will-make-you-so-good-it-f.md
     channel: youtube
     ingested_at: 2026-06-30
+  - path: raw/email/email-2026-06-28-notebooklm-claude-code.md
+    channel: email
+    ingested_at: 2026-07-05
 aliases:
   - NotebookLM
   - Notebook LM
@@ -18,7 +21,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-06-30
-updated: 2026-06-30
+updated: 2026-07-05
 ---
 
 # NotebookLM
@@ -97,6 +100,28 @@ The leverage insight: "Claude does what NotebookLM can't. And NotebookLM creates
 
 The automation chains produce assets efficiently, but "never send raw output" without a human skimming and tightening the tone [^src2]. The engine manufactures the artifacts; the human remains the quality gate.
 
+## Expert knowledge base via NotebookLM + Claude Code
+
+A documented practitioner pattern: load a large body of an expert's public content into NotebookLM, then connect the notebook to Claude Code for queried analysis against your own data [^src3].
+
+Setup (4 components: NotebookLM, Claude Code, `notebooklm-py`, your data) [^src3]:
+
+**Mode 1 — Mentor cloning:**
+1. Create a NotebookLM notebook; add YouTube links or transcripts (example: 300 podcast episodes loaded, with citations back to exact episodes)
+2. Install `notebooklm-py` (open-source, by Teng Lin) via `uv` or `pipx`; run `notebooklm skill install` then `notebooklm use YOUR_NOTEBOOK_ID` inside Claude Code
+3. Drop real business data in a folder; run an audit prompt: Claude queries the notebook + reads local data + reports gap with specific episode citations
+
+Example finding at 300-episode scale: 513,858 impressions/week but only 319 email clicks (0.16%) — flagged as a list-building gap, backed by specific episode references [^src3].
+
+**Mode 2 — Skill extraction:**
+Pull any YouTube tutorial's transcript, paste into Claude Code with instructions to extract the step-by-step workflow and write it as a reusable `SKILL.md`. The skill runs that process on demand for new inputs [^src3].
+
+**Limitations** [^src3]:
+- Garbage sources → garbage advice
+- Skills are snapshots and don't auto-update when a creator changes their process
+- Setup takes an afternoon, not five minutes
+- The expert advises; the human makes every editorial decision
+
 ## See also
 
 - [Agent Skills](/ai-engineering/agent-skills.md) — Claude skills that can orchestrate NotebookLM workflows
@@ -108,3 +133,4 @@ The automation chains produce assets efficiently, but "never send raw output" wi
 
 [^src1]: [Google just did the UNTHINKABLE with NotebookLM & Gemini](../../raw/youtube/youtube-PLP-KHrahqA-google-just-did-the-unthinkable-with-notebooklm-gemini.md) — DLO Brands, YouTube, April 2026
 [^src2]: [These 3 Claude + NotebookLM Systems Will Make You So Good It Feels Unfair](../../raw/youtube/youtube-yeFNKgRst9o-these-3-claude-notebooklm-systems-will-make-you-so-good-it-f.md) — AI Founders, YouTube, May 2026
+[^src3]: [NotebookLM + Claude Code](../../raw/email/email-2026-06-28-notebooklm-claude-code.md) — Charlie Hills (MarTech AI newsletter), 2026-06-28

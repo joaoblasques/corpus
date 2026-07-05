@@ -9,6 +9,15 @@ sources:
   - path: raw/youtube/youtube-iRew6HOY0ho-paperclip-agent-collab-made-easy.md
     channel: youtube
     ingested_at: 2026-06-26
+  - path: raw/web/web-runlocal-local-ai-on-your-own-hardware-027a9c2e.md
+    channel: web
+    ingested_at: 2026-07-05
+  - path: raw/web/web-runlocal-local-ai-on-your-own-hardware-65633d61.md
+    channel: web
+    ingested_at: 2026-07-05
+  - path: raw/web/web-runlocal-local-ai-on-your-own-hardware-35dd9657.md
+    channel: web
+    ingested_at: 2026-07-05
 aliases:
   - local AI agent
   - local AI agents
@@ -19,7 +28,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-26
-updated: 2026-06-26
+updated: 2026-07-05
 ---
 
 # Local AI Agents
@@ -72,12 +81,55 @@ You aren't limited to one agent — multiple local agents can run different task
 
 Practitioners commonly run **both** at once for different use cases [^src1] [24:10](../../raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md#t=24:10). The strongest-leverage recommendation: don't just *use* prebuilt local agents — learn to *build your own* agents and combine that with AI coding skills [^src1] [25:05](../../raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md#t=25:05).
 
+## Local inference engine selection
+
+When running a local model to power a local AI agent, the inference engine choice depends on scale [^src3]:
+
+| Engine | Best for | Notes |
+|---|---|---|
+| **Ollama** | First model, developer use | Lowest friction; 4,500+ model variants; OpenAI-compatible API |
+| **LM Studio** | Model comparisons, GUI workflow | llama.cpp backend; Hugging Face browser; side-by-side eval |
+| **llama.cpp** | Max single-machine performance | Runs on CUDA/ROCm/Metal/CPU; best Apple Silicon throughput |
+| **vLLM** | Multi-user / shared deployment | PagedAttention, continuous batching, expects Linux + datacenter GPU |
+
+**Throughput caveat**: vLLM achieves ~793 tokens/sec vs. Ollama ~41 tokens/sec under concurrent load — but the gap is irrelevant for single-user local agents [^src3]. Latency under no load is similar across all tools.
+
+**OpenAI-compatible API**: all four tools expose an OpenAI-compatible API, making switching cost low — the client code doesn't change [^src3].
+
+**Recommended trajectory**: Ollama → LM Studio for model exploration → Ollama or vLLM on a server when sharing [^src3].
+
+## Open-weights model landscape (May 2026)
+
+For agents needing a local model brain, five frontier-tier releases clustered in the 30 days preceding May 12, 2026 [^src4]:
+- **Qwen 3.5** (Alibaba, Apache 2.0 for smaller sizes) — recommended for 32 GB Mac Mini at 14B parameter tier
+- **DeepSeek V4** (MIT, core) — recommended for 96 GB+ multi-GPU server at Pro tier
+- **Meta Llama 4** (Scout/Maverick, MoE) — claims 10M token context at Scout tier
+- **Google Gemma 4** — best laptop deployment story despite lower raw capability
+- **Mistral Medium 3.5** (Apache 2.0, SWE-Bench Verified 77.6%)
+
+**Hardware recommendations** [^src4]:
+- 16 GB laptop → Qwen 3.5 7B Q4_K_M
+- 24-32 GB workstation → Qwen 3.5 14B or Llama 4 Scout
+- 96 GB+ multi-GPU server → DeepSeek V4 Pro
+
+## Linux for AI workloads
+
+For self-hosted inference appliances, **openSUSE MicroOS** is one documented option [^src5]:
+- Root filesystem is read-only; updates are transactional with automatic rollback
+- Pattern: install MicroOS → install NVIDIA driver → run vLLM or Ollama in a container → expose OpenAI-compatible API
+- NVIDIA driver handled via a dedicated repo that ships driver + CUDA runtime as a unit (reduces version skew)
+- **Tumbleweed** (rolling release) recommended for workstations; ships CUDA/ROCm/Python updates as they land
+
 ## See also
 
 - [OpenClaw](/ai-engineering/openclaw.md) — open-source local-agent framework; model routing; Cloud Hub
 - [OpenJarvis](/ai-engineering/openjarvis.md) — Stanford Hazy Research local-first agent framework on Ollama
 - [Claude Cowork](/ai-engineering/claude-cowork.md) — Anthropic's safer no-code local agent
 - [Paperclip](/ai-engineering/paperclip.md) — fleet management / supervision control plane
+- [Ollama](/ai-engineering/ollama.md) — local inference engine detail
+- [vLLM](/ai-engineering/vllm.md) — production serving engine detail
+- [LM Studio](/ai-engineering/lm-studio.md) — GUI-based local model browser
+
 - [AI Agent](/ai-engineering/ai-agent.md) — the underlying single-agent building block
 - [Agent Memory](/ai-engineering/agent-memory.md) — file-based memory the anatomy depends on
 - [Agent Security](/ai-engineering/agent-security.md) — the isolation model for local agents
@@ -88,3 +140,6 @@ Practitioners commonly run **both** at once for different use cases [^src1] [24:
 
 [^src1]: [Local AI Agents In 26 Minutes](../../raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md) — Tina Huang, YouTube
 [^src2]: [Paperclip: Agent Collab Made Easy](../../raw/youtube/youtube-iRew6HOY0ho-paperclip-agent-collab-made-easy.md) — The Next New Thing, YouTube
+[^src3]: [Which local inference engine should you actually use](../../raw/web/web-runlocal-local-ai-on-your-own-hardware-027a9c2e.md) — RunLocal blog, May 2026
+[^src4]: [The state of open weights in May 2026](../../raw/web/web-runlocal-local-ai-on-your-own-hardware-65633d61.md) — RunLocal blog, May 2026
+[^src5]: [Why openSUSE is a serious option for running AI locally](../../raw/web/web-runlocal-local-ai-on-your-own-hardware-35dd9657.md) — RunLocal blog, May 2026

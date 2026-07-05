@@ -6,6 +6,9 @@ sources:
   - path: raw/_inbox/web-glm-5-2-built-for-long-horizon-tasks-64d6b4cb.md
     channel: web
     ingested_at: 2026-07-04
+  - path: raw/web/web-glm-5-2-is-probably-the-most-powerful-text-only-open-weights-42e4b84f.md
+    channel: web
+    ingested_at: 2026-07-05
 aliases:
   - GLM-5
   - GLM-5.2
@@ -15,7 +18,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-07-04
-updated: 2026-07-04
+updated: 2026-07-05
 ---
 
 # GLM-5
@@ -54,12 +57,26 @@ GLM-5.2 introduces explicit **effort levels** for users to trade capability agai
 - **Context**: 1M tokens, with training specifically expanded for messy long-context coding-agent trajectories [^src1]
 - **Available on**: Hugging Face Hub (weights)
 
+## Community benchmarks (independent)
+
+Simon Willison reported in June 2026 that GLM-5.2 was "probably the most powerful text-only open weights LLM" based on the Artificial Analysis Intelligence Index [^src2]:
+- Score of **51** on the Artificial Analysis Intelligence Index — leading open-weights model at that date
+- Ranked **#2 on Code Arena WebDev leaderboard** (behind Claude Fable 5)
+- Available on **OpenRouter at $1.40 input / $4.40 output per million tokens** [^src2]
+- Token-hungry: averages ~**43,000 output tokens per task** on the WebDev benchmark — notably higher than other models [^src2]
+
+These are Artificial Analysis / Code Arena leaderboard figures as reported by Simon Willison, not ZhipuAI self-reported benchmarks.
+
+Note: Z.ai (source of the Hugging Face blog) and ZhipuAI are the same entity — Z.ai is ZhipuAI's rebranded name.
+
 ## Related
 
 - [vLLM](/ai-engineering/vllm.md) — high-throughput serving engine; GLM-5.x is vLLM-compatible
 - [Quantization](/ai-engineering/quantization.md) — effort levels affect token budget (not quantization bits directly, but related to inference cost)
+- [Simon Willison](/ai-engineering/simon-willison.md) — independent coverage of GLM-5.2 community benchmarks
 - [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 
 [^src1]: [GLM-5.2: Built for Long-Horizon Tasks](../../raw/_inbox/web-glm-5-2-built-for-long-horizon-tasks-64d6b4cb.md) — Hugging Face blog, ZhipuAI, 2026-06
+[^src2]: [GLM-5.2 is probably the most powerful text-only open weights LLM](../../raw/web/web-glm-5-2-is-probably-the-most-powerful-text-only-open-weights-42e4b84f.md) — Simon Willison, 2026-06-17

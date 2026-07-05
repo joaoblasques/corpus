@@ -7,7 +7,7 @@ tags:
   - corpus/blockchain
   - hub
 created: 2026-06-17
-updated: 2026-06-25
+updated: 2026-07-05
 ---
 
 # Blockchain
@@ -40,3 +40,6 @@ This domain covers the full technical and historical stack of blockchain and cry
 
 ### Decentralized AI Networks
 - [Bittensor (TAO)](/blockchain/bittensor.md) — entity · draft · Decentralized AI subnet marketplace; TAO token; Score Vision (subnet 44), Hippias storage (subnet 75), Quasar extended-context (subnet 24)
+
+### Market Dynamics
+- [NFT Market Dynamics](/blockchain/nft-markets.md) — concept · draft · Floor price mechanics, supply manipulation (burns/staking), royalty fragility, pump-and-dump patterns, OpenSea data breach (2022 era documentation)

@@ -6,7 +6,7 @@ tags:
   - corpus/ai-engineering
   - hub
 created: 2026-05-07
-updated: 2026-07-02
+updated: 2026-07-05
 ---
 
 # AI Engineering
@@ -108,6 +108,10 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [FunctionGemma](/ai-engineering/functiongemma.md) — entity · stub · Google's 270M tool-calling-specialized Gemma variant; not a dialogue model; fine-tuned via Unsloth and served in LM Studio
 - [Unsloth](/ai-engineering/unsloth.md) — entity · draft · fine-tuning toolkit; 2–2.5× faster, 50–70% less VRAM via custom kernels + LoRA; YC-backed; ~2M monthly HF downloads; Llama/Gemma/Mistral/Phi/Qwen/Vision support; gradient checkpointing 4× longer contexts; GGUF export
 - [Tim Dettmers](/ai-engineering/tim-dettmers.md) — entity · draft · ML researcher; LLM.int8() + QLoRA + bitsandbytes; SERA coding-agent data generation (Ai2); GPU hardware guide; AGI skepticism from physical computation limits
+- [Simon Willison](/ai-engineering/simon-willison.md) — entity · draft · creator of Datasette and sqlite-utils; Django co-creator; practitioner on AI-assisted development, role confusion, MCP auth gateways
+- [Datasette](/ai-engineering/datasette.md) — entity · draft · Python tool for exploring and publishing SQLite databases; read-write editing (1.0a34+), table management UI, datasette-apps sandboxed iframe extensions, datasette-acl access control, Datasette Lite + OPFS browser exploration
+- [sqlite-utils](/ai-engineering/sqlite-utils.md) — entity · draft · Python library for programmatic SQLite manipulation; 4.0rc1: migrations (`@migrations()` decorator, ported from sqlite-migrate), nested transactions (`db.atomic()` via SQLite savepoints)
+- [Zenflow](/ai-engineering/zenflow.md) — entity · draft · Zencoder AI platform; AI agent connects coding environment to enterprise tools (PagerDuty, Snowflake, Slack, GitHub, Jira, ServiceNow) via natural language; OAuth 2.0 + Pipedream auth layer
 
 ### Concepts (continued)
 - [Claude Sub-Agents](/ai-engineering/claude-subagents.md) — concept · draft · .claude/agents/ files, isolated context, parallel execution, model routing, progressive disclosure, dynamic workflows (ultracode), security (disallowed_tools)

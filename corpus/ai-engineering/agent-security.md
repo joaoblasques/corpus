@@ -72,8 +72,15 @@ sources:
   - path: raw/web/web-the-trinity-of-modern-data-architecture-process-intelligence-b19b93a7.md
     channel: web
     ingested_at: 2026-07-03
+  - path: raw/web/web-prompt-injection-as-role-confusion-f81ed04e.md
+    channel: web
+    ingested_at: 2026-07-05
+  - path: raw/web/web-what-happened-after-2-000-people-tried-to-hack-my-ai-assista-20e22694.md
+    channel: web
+    ingested_at: 2026-07-05
 aliases:
   - prompt injection
+  - role confusion
   - LLM security
   - AI guardrails
   - agent hardening
@@ -89,7 +96,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-12
-updated: 2026-07-03
+updated: 2026-07-05
 ---
 
 # Agent Security
@@ -172,6 +179,20 @@ The Snyk taint analysis hybrid approach addresses this: static taint tracking tr
 ## The overconfidence effect
 
 A 2022 study found developers using AI coding assistants were *more* confident in their code's security even when it was objectively less secure than code written without AI [^src8]. The effect is compounding: AI-generated code may contain more vulnerabilities *and* the developer is less likely to subject it to security review. "Trust but verify" (Russian proverb invoked in ch8) is the corrective stance: trust the output enough to use it as a starting point, but verify before it ships [^src8]. See [Agent Testing](/ai-engineering/agent-testing.md) for the testing-side complement.
+
+## Role confusion: the structural root of prompt injection
+
+Research by Charles Ye, Jasmine Cui, and Dylan Hadfield-Menell (2026) identifies the structural mechanism underlying most prompt injection attacks as **role confusion** — LLMs weight the *style* of text more heavily than the role tag wrapping it [^src23].
+
+**The finding**: models cannot reliably distinguish their own privileged text (tagged `<system>`, `<think>`, `<assistant>`) from untrusted user input (`<user>`) based on tag content alone. When adversarial text mimics the *style* of model-internal chain-of-thought formatting, models are confused into treating it as authoritative [^src23].
+
+**Empirical result**: "destyling" — rewriting an injection payload so its formatting no longer resembles internal model thinking — drops the attack success rate from **61% to 10%** on their dataset. "A change nearly invisible to humans completely changes the LLM's role perception." [^src23]
+
+**Implication**: injection defense by role tagging alone is "whack-a-mole." Unless models achieve genuine role perception (distinguishing content origin, not just formatting), injections designed to shift model state through *style mimicry* remain viable at scale [^src23].
+
+**Practical parallel — frontier model resistance**: a real-world test by Fernando Irarrázaval (hackmyclaw.com) found that 6,000 injection attempts against an Opus 4.6 instance with explicit anti-injection rules all failed over several weeks of public testing (~$500 token spend) [^src24]. Simon Willison's interpretation: frontier labs' training against injection attacks "do appear effective in making these attacks much harder to pull off" — but 6,000 failed attempts provides no guarantee against more sophisticated approaches, and deploying production systems where injection could cause irreversible damage remains inadvisable [^src24].
+
+The role confusion research and the hackmyclaw result are consistent: current defenses are meaningful but not complete, and the attack surface is structural, not just a matter of adding more rules.
 
 ## Prompt injection in browser use
 
@@ -391,3 +412,5 @@ Kai Waehner frames "trusted agentic AI" as operating at two levels, not one [^sr
 [^src20]: [Set up Claude Managed Agents · Cloudflare Sandbox SDK docs](../../raw/web/web-set-up-claude-managed-agents-cloudflare-sandbox-sdk-docs.md) — Cloudflare
 [^src21]: [Local AI Agents In 26 Minutes](../../raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md) — Tina Huang, YouTube
 [^src22]: [The Trinity of Modern Data Architecture: Process Intelligence, Event-Driven Integration, and Trusted Agentic AI](../../raw/web/web-the-trinity-of-modern-data-architecture-process-intelligence-b19b93a7.md) — Kai Waehner
+[^src23]: [Prompt Injection as Role Confusion](../../raw/web/web-prompt-injection-as-role-confusion-f81ed04e.md) — Charles Ye, Jasmine Cui, Dylan Hadfield-Menell; via Simon Willison, 2026-06-22
+[^src24]: [What happened after 2,000 people tried to hack my AI assistant](../../raw/web/web-what-happened-after-2-000-people-tried-to-hack-my-ai-assista-20e22694.md) — Simon Willison, 2026-06-26

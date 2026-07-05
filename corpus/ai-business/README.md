@@ -6,7 +6,7 @@ tags:
   - corpus/ai-business
   - hub
 created: 2026-06-12
-updated: 2026-06-25
+updated: 2026-07-05
 provisional: true
 ---
 
@@ -30,6 +30,8 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [AI Content With Your Voice](/ai-business/ai-content-with-voice.md) — concept · draft · ghost voice / stylometry; Claude trained on LinkedIn posts; Spiral tool; conversion engineering
 - [AI Business Models (Profit Per Hour)](/ai-business/ai-business-models.md) — concept · draft · five-tier ranking: automation agency (#5) → productized services (#4) → custom app dev (#3) → outcome-based consulting (#2) → vertical micro-SaaS (#1); profit/hour as the true metric; "start where you are, fund the next tier"
 - [AI Transition Economics](/ai-business/ai-transition-economics.md) — concept · draft · Paul David 1905/electricity analogy; "swapping motors not factories" critique; productivity paradox and adoption curve; field notes on energy shocks
+
+- [Vibe Coding Entrepreneurship](/ai-business/vibe-coding-entrepreneurship.md) — concept · draft · Alex Finn's Ship/It framework: Creator Buddy case study ($100K ARR, author-reported), "first dollar" playbook, 10x AI skill development, local model for unlimited inference, starter-kit pattern; includes survivorship bias critique
 
 ### Entities
 - [Harvey](/ai-business/harvey.md) — entity · stub · AI for legal/professional services; 142K+ professionals; 1,500+ firms; 65+ AmLaw 100
