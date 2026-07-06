@@ -80,3 +80,15 @@
   distributed-systems, quant-trading). Add/edit feeds in arxiv_feeds.yaml.
 - **Still open** (other Bucket-B feeds, lower priority): National Academies Press, MIT OCW,
   Open Textbook Library, QuantEcon — heterogeneous, no uniform API; build per-source if/when wanted.
+
+## Book auto-acquisition SHIPPED (2026-07-06)
+Manual Drive drops are now optional. Three layers, all allowlist-safe:
+- **book_fetch** (commit 5757c01): manifest `bin/book_sources.yaml` of KNOWN-LEGAL direct URLs →
+  nightly download into CorpusInbox/PDFs/_auto (allowlist-gated: arXiv/.edu/CC-GitHub/author/
+  publisher-giveaway hosts only). Adding a book = one manifest line.
+- **book_discover** (commit dd387b0): scans ONE curated legal index (free-programming-books, CC BY)
+  → proposes corpus-relevant PDF books into `raw/_book_review.md`. Trusted-host finds pre-checked
+  [x] (auto-download); untrusted-host finds [ ] await a human tick. Never crawls the open web.
+- **review promotion**: book_fetch downloads every [x] review entry (approval = trusted pre-check
+  OR human tick, bypassing the allowlist for those vouched URLs only).
+To approve a reviewed book: tick [x] in raw/_book_review.md — the next nightly fetches it.
