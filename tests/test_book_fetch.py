@@ -23,6 +23,7 @@ def test_host_allowed_exact_subdomain_and_edu():
 
 def test_collect_refuses_untrusted_host(tmp_path, monkeypatch, capsys):
     monkeypatch.setattr(bf, "LEDGER", tmp_path / "ledger.txt")
+    monkeypatch.setattr(bf, "REVIEW", tmp_path / "no_review.md")
     cfg = tmp_path / "s.yaml"
     cfg.write_text('allowlist: [d2l.ai]\nbooks:\n'
                    '  - name: pirate\n    url: https://z-lib.example.org/book.pdf\n'
@@ -38,6 +39,7 @@ def test_collect_refuses_untrusted_host(tmp_path, monkeypatch, capsys):
 
 def test_collect_downloads_allowlisted_and_ledgers(tmp_path, monkeypatch, capsys):
     monkeypatch.setattr(bf, "LEDGER", tmp_path / "ledger.txt")
+    monkeypatch.setattr(bf, "REVIEW", tmp_path / "no_review.md")
     land = tmp_path / "land"
     cfg = tmp_path / "s.yaml"
     cfg.write_text('allowlist: [d2l.ai]\nbooks:\n'

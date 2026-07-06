@@ -229,6 +229,28 @@ def run_collectors(
     except Exception as exc:  # noqa: BLE001
         results["obsidian"] = {"status": "failed", "collected": 0, "error": str(exc)}
 
+    # --- Book discovery (scan the curated legal index → review queue) ---
+    # Runs BEFORE book_fetch so trusted-host finds it pre-approves are fetched the same night.
+    try:
+        proc = _run(
+            [sys.executable, str(BIN / "book_discover.py"), "collect"],
+            capture_output=True,
+            text=True,
+            timeout=COLLECTOR_TIMEOUT,
+        )
+        if proc.returncode != 0:
+            results["book_discover"] = {
+                "status": "failed", "collected": 0,
+                "error": proc.stderr.strip() or f"exit {proc.returncode}"}
+        else:
+            try:
+                collected = json.loads(proc.stdout).get("proposed", 0)
+            except (json.JSONDecodeError, AttributeError):
+                collected = 0
+            results["book_discover"] = {"status": "ok", "collected": collected}
+    except Exception as exc:  # noqa: BLE001
+        results["book_discover"] = {"status": "failed", "collected": 0, "error": str(exc)}
+
     # --- Book auto-fetch (allowlisted legal PDFs → CorpusInbox/PDFs/_auto) ---
     # Runs BEFORE the PDF collector so a freshly-downloaded book is picked up the same night.
     try:

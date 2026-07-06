@@ -17,6 +17,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 import shutil
 import sys
 from pathlib import Path
@@ -26,7 +27,10 @@ from urllib.request import Request, urlopen
 BIN = Path(__file__).resolve().parent
 ROOT = BIN.parent
 CONFIG = BIN / "book_sources.yaml"
+REVIEW = ROOT / "raw" / "_book_review.md"
 LEDGER = ROOT / "raw" / ".books_fetched.txt"
+# Matches a CHECKED review line: `- [x] [Title](url) · ...`
+_REVIEW_CHECKED_RE = re.compile(r"^- \[[xX]\]\s+\[([^\]]+)\]\((https?://[^)]+)\)")
 LANDING = Path(
     "/Users/jonasblasques/Library/CloudStorage/GoogleDrive-tilakapash@gmail.com/"
     "My Drive/CorpusInbox/PDFs/_auto"
@@ -45,6 +49,29 @@ DEFAULT_ALLOWLIST = [
 
 def _url_hash(url: str) -> str:
     return hashlib.sha1(url.strip().encode("utf-8")).hexdigest()[:16]
+
+
+def _name_slug(title: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "-", (title or "").lower()).strip("-")[:50] or "book"
+
+
+def review_approved(review_path=None) -> list:
+    """Parse `[x]`-checked entries from the review queue → [{name, title, url}].
+
+    A checked entry is APPROVED for download: either a trusted-host find that book_discover
+    pre-checked, or one a human ticked. Approval is the gate here, so these bypass the host
+    allowlist (book_discover never pre-checks an untrusted host, and a manual tick is a
+    deliberate human authorization for that specific URL)."""
+    p = Path(review_path) if review_path else REVIEW
+    if not p.exists():
+        return []
+    out = []
+    for line in p.read_text(encoding="utf-8", errors="ignore").splitlines():
+        m = _REVIEW_CHECKED_RE.match(line)
+        if m:
+            out.append({"name": _name_slug(m.group(1)), "title": m.group(1).strip(),
+                        "url": m.group(2).strip()})
+    return out
 
 
 def host_allowed(url: str, allowlist) -> bool:
@@ -101,13 +128,18 @@ def cmd_collect(args) -> int:
     landing = Path(args.dir) if args.dir else LANDING
     done = _ledger()
     _dl = getattr(args, "_download", None) or _download
+    # Two fetch sources: (1) the hand-curated manifest — gated by the host allowlist;
+    # (2) `[x]`-approved review-queue entries — gated by approval (trusted-host pre-check or a
+    # human tick), so the allowlist is waived for those specific, vouched-for URLs.
+    manifest = [{**b, "gate": "allowlist"} for b in cfg.get("books", [])]
+    approved = [{**r, "gate": "approved"} for r in review_approved()]
     t = {"fetched": 0, "skipped": 0, "refused": 0, "failed": 0, "refused_urls": []}
-    for book in cfg.get("books", []):
+    for book in manifest + approved:
         url = book.get("url", "")
         if _url_hash(url) in done:
             t["skipped"] += 1
             continue
-        if not host_allowed(url, allowlist):
+        if book["gate"] == "allowlist" and not host_allowed(url, allowlist):
             t["refused"] += 1
             t["refused_urls"].append(url)
             continue

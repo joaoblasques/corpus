@@ -65,3 +65,5 @@ raw/.weekly_synthesis.log
 .superpowers/
 raw/.books_fetched.txt
 raw/.gaps_dispatched.txt
+raw/_book_review.md
+raw/.books_discovered.txt
