@@ -59,6 +59,8 @@ def _isolate_pipeline(monkeypatch, tmp_path):
         ("run_youtube_quick_intake", "_subprocess_run", {"status": "ok", "ingested": 0, "rescued": 0, "skipped": 0}),
         ("run_docs_quick_intake", "_subprocess_run", {"status": "ok", "ingested": 0, "skipped_thin": 0, "llm_fail": 0}),
         ("run_youtube_playlist_reap", "_subprocess_run", {"status": "ok", "removed": 0}),
+        ("run_gardener", "_subprocess_run", {"status": "ok", "expanded": 0}),
+        ("run_gap_resolver", "_subprocess_run", {"status": "ok", "dispatched": 0, "queued": 0}),
         ("run_email_relabel", "_subprocess_run", {"status": "ok"}),
         ("run_x_reap", "_subprocess_run", {"status": "ok"}),
         ("run_obsidian_reap", "_subprocess_run", {"status": "ok"}),
@@ -2217,3 +2219,40 @@ def test_run_docs_quick_intake_failure_is_recorded_not_raised():
     assert out["status"] == "failed"
     assert out["ingested"] == 0
     assert "openrouter down" in out["error"]
+
+
+def test_run_gardener_parses_summary_and_pins_sonnet():
+    def fake_run(cmd, **kw):
+        assert "gardener.py" in cmd[1] and "--max" in cmd
+        assert kw.get("env", {}).get("GARDENER_MODEL") == "claude-sonnet-4-6"  # protect Opus cap
+        return _make_proc(returncode=0, stdout=json.dumps(
+            {"label": "gardener", "iterations": 2, "pages_touched": 2, "stop_reason": "max"}))
+
+    out = scheduled_run.run_gardener(_subprocess_run=fake_run)
+    assert out["status"] == "ok" and out["expanded"] == 2
+
+
+def test_run_gardener_failure_is_recorded_not_raised():
+    def fake_run(cmd, **kw):
+        return _make_proc(returncode=1, stderr="gardener broke")
+
+    out = scheduled_run.run_gardener(_subprocess_run=fake_run)
+    assert out["status"] == "failed" and out["expanded"] == 0
+
+
+def test_run_gap_resolver_parses_dispatch():
+    def fake_run(cmd, **kw):
+        assert "gap_resolver.py" in cmd[1]
+        return _make_proc(returncode=0, stdout=json.dumps(
+            {"status": "ok", "dispatched": 1, "queued": 3, "question": "Crypto momentum..."}))
+
+    out = scheduled_run.run_gap_resolver(_subprocess_run=fake_run)
+    assert out["status"] == "ok" and out["dispatched"] == 1 and out["queued"] == 3
+
+
+def test_run_gap_resolver_failure_is_recorded_not_raised():
+    def fake_run(cmd, **kw):
+        return _make_proc(returncode=1, stderr="resolver broke")
+
+    out = scheduled_run.run_gap_resolver(_subprocess_run=fake_run)
+    assert out["status"] == "failed" and out["dispatched"] == 0

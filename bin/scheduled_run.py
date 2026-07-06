@@ -647,6 +647,56 @@ def run_docs_quick_intake(*, max_n: int = 80, backend: str = "openrouter",
         return {"status": "failed", "ingested": 0, "error": str(exc)}
 
 
+def run_gap_resolver(*, timeout_s: int = 600, _subprocess_run=None) -> dict:
+    """Demand-driven growth: dispatch ONE logged query-gap to a bounded headless resolver
+    that WebSearches up to 3 written sources and queues them via query.py fetch-and-queue
+    (they drain through the normal ingest). Once-per-gap ledger inside the tool. Failure
+    recorded, never raised."""
+    _run = _subprocess_run if _subprocess_run is not None else subprocess.run
+    try:
+        proc = _run([sys.executable, str(BIN / "gap_resolver.py"), "run"],
+                    capture_output=True, text=True, timeout=timeout_s)
+        if proc.returncode != 0:
+            return {"status": "failed", "dispatched": 0, "error": (proc.stderr or "").strip()[:200]}
+        try:
+            d = json.loads((proc.stdout or "").strip().splitlines()[-1])
+        except (json.JSONDecodeError, IndexError):
+            d = {}
+        return {"status": d.get("status", "ok"), "dispatched": d.get("dispatched", 0),
+                "queued": d.get("queued", 0), "question": d.get("question", ""),
+                "note": d.get("note", "")}
+    except Exception as exc:  # noqa: BLE001
+        return {"status": "failed", "dispatched": 0, "error": str(exc)}
+
+
+def run_gardener(*, max_stubs: int = 2, timeout_s: int = 2400, _subprocess_run=None) -> dict:
+    """Deepen the highest-value stub pages (the depth loop, docs/strategy/2026-07-06).
+
+    Runs bin/gardener.py (Opus-quality writer + fail-closed Sonnet critic) with a small
+    nightly quota. Writer pinned to Sonnet here — nightly jobs draw the Sonnet budget and
+    must not touch the scarce Opus cap (that stays for the interactive/weekly work).
+    Gardener has its own lock + main-branch guard. Failure recorded, never raised."""
+    _run = _subprocess_run if _subprocess_run is not None else subprocess.run
+    try:
+        env = dict(os.environ)
+        env.setdefault("GARDENER_MODEL", "claude-sonnet-4-6")
+        proc = _run([sys.executable, str(BIN / "gardener.py"), "run", "--max", str(max_stubs)],
+                    capture_output=True, text=True, timeout=timeout_s, env=env)
+        if proc.returncode != 0:
+            return {"status": "failed", "expanded": 0, "error": (proc.stderr or "").strip()[:200]}
+        try:
+            d = json.loads((proc.stdout or "").strip().splitlines()[-1])
+        except (json.JSONDecodeError, IndexError):
+            d = {}
+        if d.get("status") == "skipped":
+            return {"status": "skipped", "expanded": 0, "reason": d.get("reason", "")}
+        return {"status": "ok",
+                "expanded": d.get("pages_touched", d.get("iterations", 0)),
+                "reverted": d.get("reverted", 0)}
+    except Exception as exc:  # noqa: BLE001
+        return {"status": "failed", "expanded": 0, "error": str(exc)}
+
+
 def run_youtube_playlist_reap(*, max_removals: int = 120, _subprocess_run=None) -> dict:
     """Remove already-ingested videos from collect-remove (tech) YouTube playlists.
 
@@ -681,6 +731,8 @@ def build_summary(tallies: dict, dry_run: bool) -> dict:
         "youtube_quick": tallies.get("youtube_quick", {}),
         "docs_quick": tallies.get("docs_quick", {}),
         "youtube_reap": tallies.get("youtube_reap", {}),
+        "gardener": tallies.get("gardener", {}),
+        "gap_resolver": tallies.get("gap_resolver", {}),
         "ingest": tallies.get("ingest", {}),
         "email_relabel": tallies.get("email_relabel", {}),
         "x_reap": tallies.get("x_reap", {}),
@@ -1060,6 +1112,23 @@ def write_run_report(
             yr_str += f" · error={yr['error']}"
         bullets.append(f"* **YoutubeReap**: {yr_str}")
 
+    # Depth loop (gardener) + growth loop (gap resolver)
+    gd = tallies.get("gardener")
+    if gd:
+        gd_str = f"{gd.get('expanded', 0)} stubs deepened · status={gd.get('status', 'unknown')}"
+        if gd.get("error"):
+            gd_str += f" · error={gd['error']}"
+        bullets.append(f"* **Gardener**: {gd_str}")
+    gp = tallies.get("gap_resolver")
+    if gp:
+        gp_str = (f"{gp.get('dispatched', 0)} gap dispatched · {gp.get('queued', 0)} sources queued"
+                  f" · status={gp.get('status', 'unknown')}")
+        if gp.get("question"):
+            gp_str += f" · gap={gp['question'][:60]}"
+        if gp.get("error"):
+            gp_str += f" · error={gp['error']}"
+        bullets.append(f"* **GapResolver**: {gp_str}")
+
     # Post-ingest corpus integrity check
     lint = tallies.get("lint")
     if lint:
@@ -1266,6 +1335,20 @@ def main(argv=None) -> int:
                     tallies["github_reap"] = run_github_reap()
                 except Exception as exc:  # noqa: BLE001
                     tallies["github_reap"] = {"status": "failed", "error": str(exc)}
+
+                # Depth loop: deepen a small quota of high-value stub pages from already-
+                # ingested sources (Sonnet writer + fail-closed critic). Never aborts.
+                try:
+                    tallies["gardener"] = run_gardener()
+                except Exception as exc:  # noqa: BLE001
+                    tallies["gardener"] = {"status": "failed", "expanded": 0, "error": str(exc)}
+
+                # Growth loop: resolve one logged query-gap into queued written sources.
+                # Never aborts.
+                try:
+                    tallies["gap_resolver"] = run_gap_resolver()
+                except Exception as exc:  # noqa: BLE001
+                    tallies["gap_resolver"] = {"status": "failed", "dispatched": 0, "error": str(exc)}
 
                 # Post-ingest integrity backstop: deterministically lint the corpus
                 # the unattended agent just wrote to, and record any broken
