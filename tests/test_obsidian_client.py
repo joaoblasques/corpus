@@ -445,6 +445,38 @@ def test_reap_clears_persistent_staging_note_underscore_filename(tmp_path, monke
     assert json.loads(capsys.readouterr().out)["notes_cleared"] == 1
 
 
+def test_reap_never_flag_leaves_operational_file_fully_intact(tmp_path, monkeypatch, capsys):
+    """A vault note with `reap: never` frontmatter is neither deleted NOR cleared —
+    it stays fully intact (procedure the vault executes must stay in the vault)."""
+    import json
+    vault = tmp_path / "vault"
+    rel = "06_Metadata/Reference/note_taking_protocol.md"
+    note = vault / rel
+    note.parent.mkdir(parents=True)
+    body = "---\nreap: never\n---\n# Note-taking protocol\n\nStep 1: do the thing.\n"
+    note.write_text(body, encoding="utf-8")
+    monkeypatch.setattr(oc.co, "reapable",
+                        lambda *a, **k: {"vault_notes": [rel], "url_strikes": [], "seed_strikes": []})
+    called = []
+    monkeypatch.setattr(oc, "remove_vault_note", lambda v, r: (called.append(r), True)[1])
+    oc.cmd_reap(oc._args(["reap", "--vault", str(vault)]))
+    assert note.read_text() == body       # content untouched (not deleted, not cleared)
+    assert called == []                    # never handed to git rm
+    out = json.loads(capsys.readouterr().out)
+    assert out["notes_exempt"] == 1
+    assert out["notes_removed"] == 0 and out["notes_cleared"] == 0
+
+
+def test_reap_never_helper_reads_frontmatter_only(tmp_path):
+    """_reap_never keys off the frontmatter flag, not body text mentioning it."""
+    vault = tmp_path / "v"; (vault / "d").mkdir(parents=True)
+    (vault / "d/flagged.md").write_text("---\nreap: never\n---\nbody", encoding="utf-8")
+    (vault / "d/normal.md").write_text("---\ntitle: x\n---\nreap: never (in body)", encoding="utf-8")
+    assert oc._reap_never(vault, "d/flagged.md") is True
+    assert oc._reap_never(vault, "d/normal.md") is False
+    assert oc._reap_never(vault, "d/missing.md") is False
+
+
 def test_reap_clears_persistent_staging_note_in_place(tmp_path, monkeypatch, capsys):
     """An exempted persistent-staging note is emptied in place, never deleted."""
     import json

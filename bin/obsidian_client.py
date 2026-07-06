@@ -171,6 +171,7 @@ DEEP_REPORT_RE = re.compile(r"^00_Inbox/Clippings/youtube_raw/raw/watched/[^/]+/
 # body back to empty instead of removing the file.
 PERSISTENT_STAGING_NOTES = {
     "00_Inbox/Clippings/Articles to Process.md",
+    "00_Inbox/Clippings/YouTube to process.md",
 }
 
 
@@ -194,6 +195,23 @@ PERSISTENT_STAGING_KEYS = {_staging_key(p) for p in PERSISTENT_STAGING_NOTES}
 def _is_persistent_staging(rel_path: str) -> bool:
     """True if this vault note is a persistent staging file to clear, never delete."""
     return _staging_key(rel_path) in PERSISTENT_STAGING_KEYS
+
+
+def _reap_never(vault_root: Path, rel_path: str) -> bool:
+    """True if the vault note carries a `reap: never` frontmatter flag.
+
+    An operational/protocol file the vault ITSELF executes (e.g. the note-taking
+    protocol the /inbox-processor command follows step-by-step) may be ingested into
+    the corpus, but must never be deleted from the vault: knowledge can migrate, but
+    procedure the vault runs must stay in the vault. Unlike persistent-staging notes
+    (which are emptied in place), a reap:never file is left fully intact.
+    """
+    try:
+        text = (vault_root / rel_path).read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return False
+    val = co.fm_field(text, "reap")
+    return bool(val) and val.strip().lower() == "never"
 
 
 def _clear_vault_note(vault_root: Path, rel_path: str) -> bool:
@@ -227,11 +245,16 @@ def cmd_reap(args) -> int:
     vault = Path(args.vault) if args.vault else co.VAULT_ROOT
     r = co.reapable()
     t = {"notes_removed": 0, "frames_removed": 0, "urls_struck": 0,
-         "seeds_struck": 0, "notes_cleared": 0, "not_removed": []}
+         "seeds_struck": 0, "notes_cleared": 0, "notes_exempt": 0, "not_removed": []}
     for rel in r["vault_notes"]:
         if not _under_vault(vault, rel):
             continue
         if not (vault / rel).exists():
+            continue
+        if _reap_never(vault, rel):
+            # Operational/protocol file the vault executes — leave fully intact
+            # (ingest yes, delete never). Never cleared, never removed.
+            t["notes_exempt"] += 1
             continue
         if _is_persistent_staging(rel):
             # Never delete a persistent staging note — clear its body in place so
