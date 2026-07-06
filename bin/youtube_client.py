@@ -427,19 +427,52 @@ def cmd_reap_ingested(args) -> int:
     cfg = load_config()
     tech = [p for p in cfg["playlists"] if p.get("policy") == "collect-remove"]
     service = get_service()
+    from googleapiclient.errors import HttpError
+
+    def _status(e):
+        return getattr(getattr(e, "resp", None), "status", None)
+
     removed = 0
     scanned = 0
     per_playlist: dict = {}
+    missing: list = []
+    quota_exceeded = False
+    cap = getattr(args, "max", None)
     for p in tech:
-        for item in list_playlist_items(service, p["id"]):
+        if quota_exceeded or (cap and removed >= cap):
+            break
+        try:
+            items = list(list_playlist_items(service, p["id"]))
+        except HttpError as e:
+            if _status(e) == 404:            # playlist deleted/renamed on YouTube — skip
+                missing.append(p["name"])
+                continue
+            if _status(e) == 403:            # quota exhausted — stop cleanly (each delete costs 50 units)
+                quota_exceeded = True
+                break
+            raise
+        for item in items:
             scanned += 1
-            if item["video_id"] in ingested:
-                ok = True if args.dry_run else delete_playlist_item(service, item["playlist_item_id"])
-                if ok:
+            if item["video_id"] not in ingested:
+                continue
+            if cap and removed >= cap:
+                break
+            if args.dry_run:
+                removed += 1
+                per_playlist[p["name"]] = per_playlist.get(p["name"], 0) + 1
+                continue
+            try:
+                if delete_playlist_item(service, item["playlist_item_id"]):
                     removed += 1
                     per_playlist[p["name"]] = per_playlist.get(p["name"], 0) + 1
+            except HttpError as e:
+                if _status(e) == 403:        # quota mid-run — stop, report what we did
+                    quota_exceeded = True
+                    break
+                # other per-item error (e.g. 404 race) — skip this one, keep going
     print(json.dumps({"removed": removed, "scanned": scanned,
                       "ingested_known": len(ingested), "by_playlist": per_playlist,
+                      "missing_playlists": missing, "quota_exceeded": quota_exceeded,
                       "dry_run": bool(args.dry_run)}, indent=2))
     return 0
 
@@ -452,6 +485,9 @@ def _args(argv):
     ri = sub.add_parser("reap-ingested",
                         help="remove already-ingested videos from collect-remove (tech) playlists only")
     ri.add_argument("--dry-run", action="store_true")
+    ri.add_argument("--max", type=int, default=None,
+                    help="cap deletions per run (each delete costs 50 API quota units; the daily "
+                         "quota is ~10000, so keep <=150/run to leave room for the collector)")
     ri.set_defaults(func=cmd_reap_ingested)
     pr = sub.add_parser("run")
     pr.add_argument("--dry-run", action="store_true")
