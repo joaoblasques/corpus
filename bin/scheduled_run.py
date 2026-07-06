@@ -253,6 +253,30 @@ def run_collectors(
     except Exception as exc:  # noqa: BLE001
         results["pdf"] = {"status": "failed", "collected": 0, "error": str(exc)}
 
+    # --- Books (EPUB → chapter stubs; the highest-signal channel) ---
+    try:
+        proc = _run(
+            [sys.executable, str(BIN / "book_client.py"), "collect"],
+            capture_output=True,
+            text=True,
+            timeout=COLLECTOR_TIMEOUT,
+        )
+        if proc.returncode != 0:
+            results["books"] = {
+                "status": "failed",
+                "collected": 0,
+                "error": proc.stderr.strip() or f"exit {proc.returncode}",
+            }
+        else:
+            try:
+                data = json.loads(proc.stdout)
+                collected = data.get("chapters", 0)
+            except (json.JSONDecodeError, AttributeError):
+                collected = 0
+            results["books"] = {"status": "ok", "collected": collected}
+    except Exception as exc:  # noqa: BLE001
+        results["books"] = {"status": "failed", "collected": 0, "error": str(exc)}
+
     # --- YouTube ---
     if not token_path.exists():
         results["youtube"] = {"status": "not configured", "collected": 0}
@@ -554,6 +578,23 @@ def run_pdf_reap(*, _subprocess_run=None) -> dict:
         return {"status": "failed", "error": str(exc)}
 
 
+def run_book_reap(*, _subprocess_run=None) -> dict:
+    """Post-ingest: move EPUBs whose chapter stubs are ALL corpus_ingested into the watch
+    dir's _processed/ (book_client.py file). Failure recorded, never raised."""
+    _run = _subprocess_run if _subprocess_run is not None else subprocess.run
+    try:
+        proc = _run([sys.executable, str(BIN / "book_client.py"), "file"],
+                    capture_output=True, text=True)
+        if proc.returncode != 0:
+            return {"status": "failed", "error": proc.stderr.strip() or f"exit {proc.returncode}"}
+        try:
+            return {"status": "ok", **json.loads(proc.stdout)}
+        except (json.JSONDecodeError, AttributeError):
+            return {"status": "ok"}
+    except Exception as exc:  # noqa: BLE001
+        return {"status": "failed", "error": str(exc)}
+
+
 def run_github_reap(*, _subprocess_run=None) -> dict:
     """Post-ingest: invoke `github_client.py reap` to un-star repos whose digest is
     now corpus_ingested, keeping the user's GitHub stars a clean 'not yet processed
@@ -739,6 +780,7 @@ def build_summary(tallies: dict, dry_run: bool) -> dict:
         "obsidian_reap": tallies.get("obsidian_reap", {}),
         "pdf_reap": tallies.get("pdf_reap", {}),
         "github_reap": tallies.get("github_reap", {}),
+        "book_reap": tallies.get("book_reap", {}),
         "commit": tallies.get("commit", {}),
     }
 
@@ -1331,6 +1373,12 @@ def main(argv=None) -> int:
                 # Post-ingest: un-star GitHub repos now corpus_ingested, so the user's
                 # stars stay a clean 'not yet processed' list (gated on corpus_ingested
                 # ∩ still-starred). Failure must NOT abort the run.
+                # Post-ingest: move fully-ingested EPUBs to _processed. Never aborts.
+                try:
+                    tallies["book_reap"] = run_book_reap()
+                except Exception as exc:  # noqa: BLE001
+                    tallies["book_reap"] = {"status": "failed", "error": str(exc)}
+
                 try:
                     tallies["github_reap"] = run_github_reap()
                 except Exception as exc:  # noqa: BLE001

@@ -66,6 +66,7 @@ def _isolate_pipeline(monkeypatch, tmp_path):
         ("run_obsidian_reap", "_subprocess_run", {"status": "ok"}),
         ("run_pdf_reap", "_subprocess_run", {"status": "ok"}),
         ("run_github_reap", "_subprocess_run", {"status": "ok"}),
+        ("run_book_reap", "_subprocess_run", {"status": "ok"}),
         ("commit_and_push", "_subprocess_run", {"status": "skipped", "note": "stubbed"}),
         ("move_processed_inbox", "inbox_dir", {"moved": 0, "by_channel": {}, "skipped": 0}),
     ]
