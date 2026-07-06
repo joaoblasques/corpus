@@ -71,3 +71,12 @@
 - **Ingest prioritization**: book/pdf channels now sort ahead of the general web/youtube backlog
   (behind labeled email), so books drain first — they were landing at the back of the oldest-first
   queue (position ~1067/1098). Now top of the queue.
+
+## Phase 3 SHIPPED (2026-07-06, commit 09ffdc8)
+- **arXiv feed collector LIVE** (bin/arxiv_client.py collect + collect_arxiv.py + arxiv_feeds.yaml):
+  standing per-domain queries → `arxiv`-channel abstract stubs → normal ingest → queryable source
+  pages pointing back to the papers. Wired into the nightly (--max 24). Stdlib-only, id-deduped,
+  polite. 6 domain feeds (llm-agents, rag-and-context, llm-systems-eval, data-systems,
+  distributed-systems, quant-trading). Add/edit feeds in arxiv_feeds.yaml.
+- **Still open** (other Bucket-B feeds, lower priority): National Academies Press, MIT OCW,
+  Open Textbook Library, QuantEcon — heterogeneous, no uniform API; build per-source if/when wanted.
