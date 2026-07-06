@@ -351,12 +351,22 @@ def cmd_run(args) -> int:
                         t["duplicate"] += 1
                         status = cy.collected_status(vid) or "unknown"
                     else:
-                        fetched = True
-                        # --refetch-blocked last resort: a previously-blocked video that the
-                        # caption paths still can't reach falls through to Whisper.
-                        whisper_on_blocked = bool(
-                            args.refetch_blocked and cy.collected_status(vid) == "blocked")
-                        body, status = extract_transcript(vid, whisper_on_blocked=whisper_on_blocked)
+                        if pl.get("tier") != "transcript":
+                            # Metadata tier (default): collect the pointer-back stub WITHOUT
+                            # touching any transcript surface (captions/browser/Whisper) —
+                            # spoken tech content rarely justifies the rate-limit cost
+                            # (docs/strategy/2026-07-06 roadmap). Only `tier: transcript`
+                            # playlists (deliberate curation, e.g. Corpus_queue) earn transcript
+                            # fetching. Status "metadata" is terminal: --refetch-blocked never
+                            # retries it; quick-intake lands a metadata pointer-back page.
+                            body, status = "", "metadata"
+                        else:
+                            fetched = True
+                            # --refetch-blocked last resort: a previously-blocked video that the
+                            # caption paths still can't reach falls through to Whisper.
+                            whisper_on_blocked = bool(
+                                args.refetch_blocked and cy.collected_status(vid) == "blocked")
+                            body, status = extract_transcript(vid, whisper_on_blocked=whisper_on_blocked)
                         meta = {"video_id": vid, "title": item["title"],
                                 "channel_name": item["channel_name"], "published": item["published"],
                                 "playlist": pl["name"], "transcript_status": status,

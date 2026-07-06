@@ -115,7 +115,7 @@ def test_run_collects_and_removes_only_with_transcript(tmp_path, monkeypatch):
     monkeypatch.setattr(yc.cy, "INBOX", tmp_path)
     monkeypatch.setattr(yc.cy, "DEDUP_DIRS", [tmp_path])
     monkeypatch.setattr(yc, "load_config", lambda: {
-        "playlists": [{"id": "PL1", "name": "AI", "policy": "collect-remove"}],
+        "playlists": [{"id": "PL1", "name": "AI", "policy": "collect-remove", "tier": "transcript"}],
         "default_policy": "ignore"})
     monkeypatch.setattr(yc, "get_service", lambda: "SVC")
     monkeypatch.setattr(yc, "list_playlist_items", lambda svc, pid: iter([
@@ -144,7 +144,7 @@ def test_run_stops_on_quota_error(tmp_path, monkeypatch):
     monkeypatch.setattr(yc.cy, "INBOX", tmp_path)
     monkeypatch.setattr(yc.cy, "DEDUP_DIRS", [tmp_path])
     monkeypatch.setattr(yc, "load_config", lambda: {
-        "playlists": [{"id": "PL1", "name": "AI", "policy": "collect-remove"}],
+        "playlists": [{"id": "PL1", "name": "AI", "policy": "collect-remove", "tier": "transcript"}],
         "default_policy": "ignore"})
     monkeypatch.setattr(yc, "get_service", lambda: "SVC")
     monkeypatch.setattr(yc, "list_playlist_items", lambda svc, pid: iter([
@@ -173,7 +173,7 @@ def test_run_unknown_status_duplicate_not_removed(tmp_path, monkeypatch):
     (tmp_path / "youtube-V1-a.md").write_text(
         "---\nyoutube_video_id: V1\n---\n\nbody\n", encoding="utf-8")
     monkeypatch.setattr(yc, "load_config", lambda: {
-        "playlists": [{"id": "PL1", "name": "AI", "policy": "collect-remove"}],
+        "playlists": [{"id": "PL1", "name": "AI", "policy": "collect-remove", "tier": "transcript"}],
         "default_policy": "ignore"})
     monkeypatch.setattr(yc, "get_service", lambda: "SVC")
     monkeypatch.setattr(yc, "list_playlist_items", lambda svc, pid: iter([
@@ -197,7 +197,7 @@ def test_run_refetch_blocked_reextracts_and_removes(tmp_path, monkeypatch):
         "---\nyoutube_video_id: V1\ntranscript_status: blocked\n---\n\n_No transcript available._\n",
         encoding="utf-8")
     monkeypatch.setattr(yc, "load_config", lambda: {
-        "playlists": [{"id": "PL1", "name": "AI", "policy": "collect-remove"}],
+        "playlists": [{"id": "PL1", "name": "AI", "policy": "collect-remove", "tier": "transcript"}],
         "default_policy": "ignore"})
     monkeypatch.setattr(yc, "get_service", lambda: "SVC")
     monkeypatch.setattr(yc, "list_playlist_items", lambda svc, pid: iter([
@@ -220,7 +220,7 @@ def test_run_blocked_stub_not_refetched_by_default(tmp_path, monkeypatch):
         "---\nyoutube_video_id: V1\ntranscript_status: blocked\n---\n\n_No transcript available._\n",
         encoding="utf-8")
     monkeypatch.setattr(yc, "load_config", lambda: {
-        "playlists": [{"id": "PL1", "name": "AI", "policy": "collect-remove"}],
+        "playlists": [{"id": "PL1", "name": "AI", "policy": "collect-remove", "tier": "transcript"}],
         "default_policy": "ignore"})
     monkeypatch.setattr(yc, "get_service", lambda: "SVC")
     monkeypatch.setattr(yc, "list_playlist_items", lambda svc, pid: iter([
@@ -240,7 +240,7 @@ def test_run_dry_run_never_deletes(tmp_path, monkeypatch):
     monkeypatch.setattr(yc.cy, "INBOX", tmp_path)
     monkeypatch.setattr(yc.cy, "DEDUP_DIRS", [tmp_path])
     monkeypatch.setattr(yc, "load_config", lambda: {
-        "playlists": [{"id": "PL1", "name": "AI", "policy": "collect-remove"}], "default_policy": "ignore"})
+        "playlists": [{"id": "PL1", "name": "AI", "policy": "collect-remove", "tier": "transcript"}], "default_policy": "ignore"})
     monkeypatch.setattr(yc, "get_service", lambda: "SVC")
     monkeypatch.setattr(yc, "list_playlist_items", lambda svc, pid: iter([
         {"playlist_item_id": "I1", "video_id": "V1", "title": "A", "channel_name": "C",
@@ -258,7 +258,7 @@ def test_run_sleeps_after_fetch(tmp_path, monkeypatch):
     monkeypatch.setattr(yc.cy, "INBOX", tmp_path)
     monkeypatch.setattr(yc.cy, "DEDUP_DIRS", [tmp_path])
     monkeypatch.setattr(yc, "load_config", lambda: {
-        "playlists": [{"id": "PL1", "name": "AI", "policy": "collect-keep"}],
+        "playlists": [{"id": "PL1", "name": "AI", "policy": "collect-keep", "tier": "transcript"}],
         "default_policy": "ignore"})
     monkeypatch.setattr(yc, "get_service", lambda: "SVC")
     monkeypatch.setattr(yc, "list_playlist_items", lambda svc, pid: iter([
@@ -279,7 +279,7 @@ def test_run_no_sleep_on_duplicate(tmp_path, monkeypatch):
     (tmp_path / "youtube-VDUP-x.md").write_text(
         "---\nyoutube_video_id: VDUP\ntranscript_status: ok\n---\nbody\n", encoding="utf-8")
     monkeypatch.setattr(yc, "load_config", lambda: {
-        "playlists": [{"id": "PL1", "name": "AI", "policy": "collect-keep"}],
+        "playlists": [{"id": "PL1", "name": "AI", "policy": "collect-keep", "tier": "transcript"}],
         "default_policy": "ignore"})
     monkeypatch.setattr(yc, "get_service", lambda: "SVC")
     monkeypatch.setattr(yc, "list_playlist_items", lambda svc, pid: iter([
@@ -308,7 +308,7 @@ def _blocked_run_setup(tmp_path, monkeypatch, vids):
     monkeypatch.setattr(yc.cy, "DEDUP_DIRS", [tmp_path])
     _seed_blocked(tmp_path, *vids)
     monkeypatch.setattr(yc, "load_config", lambda: {
-        "playlists": [{"id": "PL1", "name": "AI", "policy": "collect-keep"}],
+        "playlists": [{"id": "PL1", "name": "AI", "policy": "collect-keep", "tier": "transcript"}],
         "default_policy": "ignore"})
     monkeypatch.setattr(yc, "get_service", lambda: "SVC")
     monkeypatch.setattr(yc, "list_playlist_items", lambda svc, pid: iter([
@@ -345,7 +345,7 @@ def test_run_browser_pacing_calls_human_delay(tmp_path, monkeypatch):
     monkeypatch.setattr(yc.cy, "INBOX", tmp_path)
     monkeypatch.setattr(yc.cy, "DEDUP_DIRS", [tmp_path])
     monkeypatch.setattr(yc, "load_config", lambda: {
-        "playlists": [{"id": "PL1", "name": "AI", "policy": "collect-keep"}],
+        "playlists": [{"id": "PL1", "name": "AI", "policy": "collect-keep", "tier": "transcript"}],
         "default_policy": "ignore"})
     monkeypatch.setattr(yc, "get_service", lambda: "SVC")
     monkeypatch.setattr(yc, "list_playlist_items", lambda svc, pid: iter([
@@ -413,3 +413,35 @@ def test_browser_disabled_skips_browser_on_blocked(monkeypatch):
     monkeypatch.setattr(yc, "_whisper_enabled", lambda: False)
     body, status = yc.extract_transcript("VID")
     assert status == "blocked"
+
+
+# --- metadata tier (default): no transcript surface is touched at collect time ---
+
+def test_run_metadata_tier_collects_without_transcript_fetch(monkeypatch, tmp_path):
+    """A collect-remove playlist WITHOUT tier: transcript collects metadata-only stubs:
+    extract_transcript is never called, status is 'metadata', and the video is NOT
+    removed at collect time (removal happens post-ingest via reap-ingested)."""
+    import yt_browser_transcript as bt
+    monkeypatch.setenv("CORPUS_YT_BROWSER", "0")
+    monkeypatch.setattr(yc, "get_service", lambda: MagicMock())
+    monkeypatch.setattr(yc, "load_config", lambda: {
+        "playlists": [{"id": "PL1", "name": "AI", "policy": "collect-remove"}],  # no tier
+    })
+    monkeypatch.setattr(yc, "list_playlist_items", lambda svc, pid: iter([
+        {"playlist_item_id": "IT1", "video_id": "V1", "title": "T",
+         "channel_name": "C", "published": "2026-01-01", "privacy": "public"}]))
+    monkeypatch.setattr(yc, "extract_transcript",
+                        lambda *a, **k: (_ for _ in ()).throw(AssertionError("transcript fetched")))
+    deleted = []
+    monkeypatch.setattr(yc, "delete_playlist_item", lambda svc, iid: deleted.append(iid) or True)
+    monkeypatch.setattr(yc.cy, "should_collect", lambda vid, refetch: True)
+    monkeypatch.setattr(yc.cy, "collected_status", lambda vid: None)
+    written = {}
+    monkeypatch.setattr(yc.cy, "target_filename", lambda vid, title: tmp_path / f"{vid}.md")
+    monkeypatch.setattr(yc.cy, "build_document",
+                        lambda meta, body: written.update(meta=meta, body=body) or "doc")
+    rc = yc.cmd_run(yc._args(["run"]))
+    assert rc == 0
+    assert written["meta"]["transcript_status"] == "metadata"
+    assert written["body"] == ""
+    assert deleted == []                      # not removed at collect time

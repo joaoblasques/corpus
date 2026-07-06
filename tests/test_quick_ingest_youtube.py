@@ -9,24 +9,10 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "bin"))
 
 
-# ---------------------------------------------------------------------------
-# Import: patch external dependencies that would fail without network/API keys
-# ---------------------------------------------------------------------------
-
-import types
-import unittest.mock as mock
-
-# Stub out the heavy imports before loading the module under test.
-_stub_yc = types.ModuleType("youtube_client")
-_stub_yc._groq_key = lambda: "fake-key"
-_stub_yc._caption_transcript = lambda vid: ("", "none")
-_stub_yc._whisper_transcript = lambda vid: None
-sys.modules.setdefault("youtube_client", _stub_yc)
-
-_stub_cy = types.ModuleType("collect_youtube")
-sys.modules.setdefault("collect_youtube", _stub_cy)
-
-import yaml  # noqa: E402 — used after stubs
+# NOTE: import the REAL modules. youtube_client's heavy deps (googleapiclient, transcript
+# APIs) are all lazy inside functions, so importing offline is safe. Never inject fakes into
+# sys.modules here — a fake module leaks into every later test file in the same pytest
+# process (it once broke test_youtube_client.py's entire suite).
 import quick_ingest_youtube as qy  # noqa: E402
 
 

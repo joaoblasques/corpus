@@ -588,7 +588,11 @@ def run_youtube_quick_intake(*, max_n: int = 60, rescue_max: int = 25,
     _run = _subprocess_run if _subprocess_run is not None else subprocess.run
     try:
         cmd = [sys.executable, str(BIN / "quick_ingest_youtube.py"),
-               "--rescue", "--rescue-max", str(rescue_max), "--max", str(max_n), "--sleep", "1"]
+               "--rescue", "--rescue-max", str(rescue_max), "--max", str(max_n), "--sleep", "1",
+               # Tiering (docs/strategy/2026-07-06): non-whitelist playlists land metadata
+               # pointer-back pages with zero transcript-surface calls; only transcript-tier
+               # playlists (Corpus_queue) take the rescue/Whisper path below.
+               "--metadata-fallback"]
         if whisper:
             cmd.append("--whisper")
         proc = _run(cmd, capture_output=True, text=True, timeout=timeout_s)

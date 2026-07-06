@@ -2147,6 +2147,7 @@ def test_run_youtube_quick_intake_parses_tally():
         # default so the nightly drains both transcript surfaces autonomously.
         assert "--rescue" in cmd and "--rescue-max" in cmd
         assert "--whisper" in cmd
+        assert "--metadata-fallback" in cmd   # tiering: non-whitelist -> metadata pages
         return _make_proc(returncode=0, stdout='{"stub":"x","result":"ok:ai-engineering+transcript"}\n' + tally_line)
 
     out = scheduled_run.run_youtube_quick_intake(_subprocess_run=fake_run)

@@ -62,6 +62,14 @@ def tech_playlists() -> set[str]:
     return {p["name"] for p in d.get("playlists", []) if p.get("policy") == "collect-remove"}
 
 
+def transcript_playlists() -> set[str]:
+    """Playlists whose videos earn full transcript rescue (deliberate curation, e.g.
+    Corpus_queue). Everything else defaults to the metadata pointer-back tier."""
+    import yaml
+    d = yaml.safe_load(PLAYLISTS_CFG.read_text(encoding="utf-8"))
+    return {p["name"] for p in d.get("playlists", []) if p.get("tier") == "transcript"}
+
+
 def _front(text: str, key: str) -> str | None:
     m = re.search(rf"^{re.escape(key)}:[^\S\n]*(.+)$", text, re.M)
     return m.group(1).strip() if m else None
@@ -335,6 +343,7 @@ def main(argv=None) -> int:
     import time
 
     tech = tech_playlists()
+    transcript_tier = transcript_playlists()
     today = datetime.date.today().isoformat()
     tally = {"ok_transcript": 0, "ok_metaonly": 0, "no_id": 0, "rescued": 0,
              "skipped_ratelimit": 0, "skipped_norescue": 0, "skipped_whisperfail": 0}
@@ -349,9 +358,12 @@ def main(argv=None) -> int:
             break
         allow_rescue = rescue_on and rescued < rescue_cap
         was_blocked = (_front(text, "transcript_status") or "") == "blocked"
+        # Tiering: --metadata-fallback applies only to non-transcript-tier playlists;
+        # transcript-tier stubs (Corpus_queue whitelist) always take the rescue path.
+        stub_metadata_fb = args.metadata_fallback and pl not in transcript_tier
         res = process_stub(f, text, pl, model=args.model, rescue=allow_rescue,
                            today=today, dry_run=args.dry_run, whisper=args.whisper,
-                           metadata_fallback=args.metadata_fallback)
+                           metadata_fallback=stub_metadata_fb)
         processed += 1
         if res.startswith("ok:"):
             consec_ratelimit = 0
