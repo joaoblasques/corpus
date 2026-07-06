@@ -25,6 +25,24 @@ PDF_WATCH_DIR = Path(
 )
 PROCESSED_SUBDIR = "_processed"
 MIN_TEXT_WORDS = 50
+# Book-scale PDFs: one 250k-word stub would choke the headless ingest. Above the
+# threshold, split into part-stubs at paragraph boundaries (~CHUNK_WORDS each).
+CHUNK_THRESHOLD_WORDS = 12000
+CHUNK_WORDS = 8000
+
+
+def split_for_ingest(markdown: str, chunk_words: int = CHUNK_WORDS) -> list:
+    """Split long extracted text into ~chunk_words parts at paragraph boundaries."""
+    paras = markdown.split("\n\n")
+    parts, cur, n = [], [], 0
+    for para in paras:
+        w = len(para.split())
+        if cur and n + w > chunk_words:
+            parts.append("\n\n".join(cur)); cur, n = [], 0
+        cur.append(para); n += w
+    if cur:
+        parts.append("\n\n".join(cur))
+    return parts
 
 sys.path.insert(0, str(BIN))
 from collect_email import slugify, yaml_scalar  # noqa: E402
@@ -75,6 +93,7 @@ def build_pdf_source(meta: dict, body: str) -> str:
         f"title: {yaml_scalar(meta.get('title', ''))}",
         f"author: {yaml_scalar(meta.get('author', ''))}",
         f"pages: {meta.get('pages', 0)}",
+        *([f"pdf_part: {meta['pdf_part']}"] if meta.get("pdf_part") else []),
         f"content_sha: {meta['content_sha']}",
         f"collected_at: {meta['collected_at']}", "---", "", body.strip(), "",
     ]

@@ -58,13 +58,25 @@ def cmd_collect(args) -> int:
             if args.dry_run:
                 t["collected"] += 1
                 continue
-            path = cp.pdf_filename(d["filename"])
-            path.parent.mkdir(parents=True, exist_ok=True)
-            path.write_text(cp.build_pdf_source(
-                {"pdf_origin": d["filename"], "source_path": d["abs_path"],
-                 "title": meta["title"], "author": meta["author"], "pages": meta["pages"],
-                 "content_sha": sha, "collected_at": collected_at},
-                meta["markdown"]), encoding="utf-8")
+            base_meta = {"pdf_origin": d["filename"], "source_path": d["abs_path"],
+                         "title": meta["title"], "author": meta["author"], "pages": meta["pages"],
+                         "content_sha": sha, "collected_at": collected_at}
+            if meta["words"] > cp.CHUNK_THRESHOLD_WORDS:
+                # book-scale PDF -> one stub per ~CHUNK_WORDS part (ingestable pieces)
+                parts = cp.split_for_ingest(meta["markdown"])
+                for i, part in enumerate(parts, 1):
+                    path = cp.pdf_filename(d["filename"])
+                    path = path.with_name(f"{path.stem}-part-{i:02d}.md")
+                    path.parent.mkdir(parents=True, exist_ok=True)
+                    pm = dict(base_meta)
+                    pm["pdf_part"] = f"{i}/{len(parts)}"
+                    pm["title"] = f"{meta['title'] or d['filename']} (part {i}/{len(parts)})"
+                    path.write_text(cp.build_pdf_source(pm, part), encoding="utf-8")
+            else:
+                path = cp.pdf_filename(d["filename"])
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text(cp.build_pdf_source(base_meta, meta["markdown"]),
+                                encoding="utf-8")
             t["collected"] += 1
         except Exception:  # noqa: BLE001 — a bad/locked file must not abort the batch
             t["skipped"] += 1

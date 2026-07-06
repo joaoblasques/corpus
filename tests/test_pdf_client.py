@@ -119,3 +119,33 @@ def test_file_source_path_outside_watch_is_skipped(tmp_path, monkeypatch):
     monkeypatch.setattr(pc.cp, "DEDUP_DIRS", [raw])
     pc.cmd_file(pc._args(["file", "--dir", str(watch)]))
     assert pdf.exists()                                                  # untouched
+
+
+def test_split_for_ingest_paragraph_boundaries():
+    md = "\n\n".join(f"para {i} " + ("word " * 100) for i in range(30))  # ~3000 words
+    parts = pc.cp.split_for_ingest(md, chunk_words=1000)
+    assert len(parts) >= 3
+    assert "\n\n".join(parts).split() == md.split()          # lossless
+    assert all(len(p.split()) <= 1200 for p in parts)         # near the cap
+
+
+def test_collect_chunks_book_scale_pdf(tmp_path, monkeypatch, capsys):
+    """A PDF over the chunk threshold produces multiple part-stubs, each with pdf_part."""
+    import json as _json
+    watch = tmp_path / "PDFs"; watch.mkdir()
+    (watch / "big-book.pdf").write_bytes(b"%PDF fake")
+    inbox = tmp_path / "inbox"
+    monkeypatch.setattr(pc.cp, "INBOX", inbox)
+    monkeypatch.setattr(pc.cp, "DEDUP_DIRS", [inbox])
+    big_text = "\n\n".join("paragraph " + ("w " * 200) for _ in range(100))  # ~20k words
+    monkeypatch.setattr(pc, "extract", lambda p: {
+        "title": "Big Book", "author": "A", "pages": 700,
+        "words": len(big_text.split()), "markdown": big_text})
+    rc = pc.cmd_collect(pc._args(["collect", "--dir", str(watch)]))
+    assert rc == 0
+    out = _json.loads(capsys.readouterr().out)
+    assert out["collected"] == 1
+    parts = sorted(inbox.glob("pdf-big-book-part-*.md"))
+    assert len(parts) >= 2
+    text0 = parts[0].read_text()
+    assert "pdf_part: 1/" in text0 and "(part 1/" in text0
