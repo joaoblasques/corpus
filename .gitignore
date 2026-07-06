@@ -63,3 +63,5 @@ raw/.weekly_synthesis.log
 # session scratch — browser-MCP artifacts + superpowers SDD ledger
 .playwright-mcp/
 .superpowers/
+raw/.books_fetched.txt
+raw/.gaps_dispatched.txt

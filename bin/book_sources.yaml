@@ -1,0 +1,40 @@
+# Auto-download manifest for KNOWN-LEGAL book PDFs (bin/book_fetch.py).
+# Add a book = one entry here; the nightly then downloads it into the PDF pipeline once and
+# never again. ONLY add genuinely legal direct URLs (author/university/CC/publisher-giveaway).
+# A URL is refused unless its host is on the allowlist below (or ends in .edu).
+allowlist:
+  - arxiv.org
+  - d2l.ai
+  - mml-book.github.io
+  - mml-book.com
+  - statlearning.com
+  - hastie.su.domains
+  - databookuw.com
+  - aosabook.org
+  - sre.google
+  - pages.cs.wisc.edu
+  - raw.githubusercontent.com
+  - github.com
+  - info.microsoft.com
+  - microsoft.com
+
+# Books already pulled this session are pre-seeded in the ledger (raw/.books_fetched.txt),
+# so listing them here is documentation only — they won't re-download. New entries flow in.
+books:
+  - name: d2l-dive-into-deep-learning
+    title: "Dive into Deep Learning"
+    url: https://d2l.ai/d2l-en.pdf
+    license: "CC BY-SA 4.0"
+    domain: ai-engineering
+
+  - name: mml-mathematics-for-machine-learning
+    title: "Mathematics for Machine Learning"
+    url: https://mml-book.github.io/book/mml-book.pdf
+    license: "author-hosted free"
+    domain: ai-engineering
+
+  - name: isl-intro-statistical-learning
+    title: "An Introduction to Statistical Learning (R)"
+    url: https://www.statlearning.com/s/ISLR-Seventh-Printing.pdf
+    license: "author-hosted free"
+    domain: ai-engineering
