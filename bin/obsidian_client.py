@@ -174,6 +174,28 @@ PERSISTENT_STAGING_NOTES = {
 }
 
 
+def _staging_key(rel_path: str) -> str:
+    """Normalize a vault-relative path for persistent-staging comparison.
+
+    The user's file is `Articles_to_Process.md` but the exemption was written
+    `Articles to Process.md`; an exact-string match silently failed and the reaper
+    deleted the file. Collapsing spaces/underscores and lowercasing makes the
+    exemption robust to that (and to case) so a filename quirk can never again defeat
+    the "never delete this staging note" guarantee.
+    """
+    norm = rel_path.replace("\\", "/")
+    norm = re.sub(r"[ _]+", " ", norm)
+    return norm.strip().lower()
+
+
+PERSISTENT_STAGING_KEYS = {_staging_key(p) for p in PERSISTENT_STAGING_NOTES}
+
+
+def _is_persistent_staging(rel_path: str) -> bool:
+    """True if this vault note is a persistent staging file to clear, never delete."""
+    return _staging_key(rel_path) in PERSISTENT_STAGING_KEYS
+
+
 def _clear_vault_note(vault_root: Path, rel_path: str) -> bool:
     """Empty a persistent staging note's body in place instead of deleting it.
 
@@ -211,7 +233,7 @@ def cmd_reap(args) -> int:
             continue
         if not (vault / rel).exists():
             continue
-        if rel in PERSISTENT_STAGING_NOTES:
+        if _is_persistent_staging(rel):
             # Never delete a persistent staging note — clear its body in place so
             # it stays as an empty file ready for the user's next batch of links.
             if args.dry_run:

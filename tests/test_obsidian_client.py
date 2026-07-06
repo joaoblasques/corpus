@@ -418,6 +418,33 @@ def test_cmd_collect_capped_seed_increments_capped_tally(tmp_path, monkeypatch, 
     assert out["capped"] == 1, f"expected capped=1, got {out}"
 
 
+def test_staging_key_normalizes_spaces_underscores_case():
+    """The exemption must match whether the file uses spaces or underscores (the
+    real file is Articles_to_Process.md; the exemption was written with spaces)."""
+    assert oc._is_persistent_staging("00_Inbox/Clippings/Articles_to_Process.md")
+    assert oc._is_persistent_staging("00_Inbox/Clippings/Articles to Process.md")
+    assert oc._is_persistent_staging("00_Inbox/Clippings/articles_to_process.md")
+    assert not oc._is_persistent_staging("00_Inbox/Clippings/Something Else.md")
+
+
+def test_reap_clears_persistent_staging_note_underscore_filename(tmp_path, monkeypatch, capsys):
+    """Regression: the ACTUAL vault filename uses underscores — it must be cleared, not deleted."""
+    import json
+    vault = tmp_path / "vault"
+    rel = "00_Inbox/Clippings/Articles_to_Process.md"     # underscores, as on disk
+    note = vault / rel
+    note.parent.mkdir(parents=True)
+    note.write_text("- https://a.com/x\n", encoding="utf-8")
+    monkeypatch.setattr(oc.co, "reapable",
+                        lambda *a, **k: {"vault_notes": [rel], "url_strikes": [], "seed_strikes": []})
+    called = []
+    monkeypatch.setattr(oc, "remove_vault_note", lambda v, r: (called.append(r), True)[1])
+    oc.cmd_reap(oc._args(["reap", "--vault", str(vault)]))
+    assert note.exists() and note.read_text() == ""      # cleared in place, not deleted
+    assert called == []                                   # never handed to git rm
+    assert json.loads(capsys.readouterr().out)["notes_cleared"] == 1
+
+
 def test_reap_clears_persistent_staging_note_in_place(tmp_path, monkeypatch, capsys):
     """An exempted persistent-staging note is emptied in place, never deleted."""
     import json
