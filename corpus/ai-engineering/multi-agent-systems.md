@@ -51,6 +51,18 @@ sources:
   - path: raw/_inbox/youtube-EsTrWCV0Ph4-ai-agents-full-course-2026-master-agentic-ai-2-hours.md
     channel: youtube
     ingested_at: 2026-06-30
+  - path: raw/_inbox/web-incident-report-cve-2026-lgtm-61a73fa6.md
+    channel: web
+    ingested_at: 2026-07-06
+  - path: raw/_inbox/web-rpa-vs-ai-agents-what-are-the-differences-36f86eaf.md
+    channel: web
+    ingested_at: 2026-07-06
+  - path: raw/_inbox/web-what-is-ai-agent-orchestration-how-it-works-examples-c4e0c48a.md
+    channel: web
+    ingested_at: 2026-07-06
+  - path: raw/_inbox/web-the-orchestrator-is-the-product-the-model-is-a-commodity-3e693062.md
+    channel: web
+    ingested_at: 2026-07-06
 aliases:
   - multi-agent
   - multi-agent system
@@ -76,7 +88,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-07
-updated: 2026-06-25
+updated: 2026-07-06
 ---
 
 # Multi-Agent Systems
@@ -327,6 +339,72 @@ The longest Factory Mission documented: **16 days** — a single coordinated run
 
 Factory provides a **Mission Control** visual interface showing each agent, its current state, task assignments, and the full handoff log — the same monitoring problem that motivates [OpenClaw](/ai-engineering/openclaw.md)'s Mission Control and [Paperclip](/ai-engineering/paperclip.md)'s project-management UI [^src13].
 
+## RPA vs. AI agents
+
+Robotic Process Automation (RPA) and AI agents address different problem shapes and are often complementary [^src16]:
+
+| Dimension | RPA | AI Agents |
+|---|---|---|
+| Decision-making | Fixed scripts; repeats same steps | Plans at run time; adapts based on feedback |
+| Data handling | Structured data from predictable sources | Unstructured text, images, inconsistent formats |
+| Task complexity | Repetitive, rule-based (invoices, reports, data transfers) | Reasoning-heavy: emails, research, DevOps orchestration |
+| Predictability | High — easy to audit and debug | Lower — requires monitoring and governance |
+| Scaling | Add more bots per workflow | Expand compute; same agent handles multiple tasks |
+| Maintenance | Interface changes break scripts | Model updates / retraining rather than rewiring |
+
+"RPA offers consistency, auditability, and reliable execution in regulated environments. AI agents provide more autonomy and can solve more complex problems, but they require stronger oversight, governance, and monitoring." [^src16]
+
+**Hybrid approach**: many organizations combine both — RPA for stable backend workflows, AI agents for judgment-heavy tasks. Example: in employee onboarding, RPA creates accounts while an AI agent answers questions and personalizes onboarding resources [^src16].
+
+**When AI agents fail the RPA test**: avoid agents when workflows require high predictability, or when the organization lacks governance and observability infrastructure to manage autonomous decision-making [^src16].
+
+## Orchestration patterns taxonomy
+
+Four coordination patterns by execution structure [^src17]:
+
+| Pattern | How agents coordinate | Best for |
+|---|---|---|
+| **Sequential** | Linear pipeline; each agent's output feeds the next | Step-by-step transformation, clear stage dependencies |
+| **Fan-out / fan-in** | Multiple agents in parallel on the same input; results merged | Speed, diverse perspectives, reducing latency |
+| **Hierarchical** | High-level orchestrators supervise specialist sub-workflows | Complex multi-layered processes |
+| **Group chat / collaborative** | Agents share a conversational environment to critique and refine | Iterative refinement, multi-perspective review |
+
+**Five-step build framework** for production orchestration [^src17]:
+1. Define the problem and success KPIs
+2. Decompose tasks and assign roles (Planner / Retriever / Summariser / Coder / QA-Validator)
+3. Set up communication and shared memory (A2A, MCP, AGNTCY protocols; vector store for state)
+4. Implement the orchestration engine (manages lifecycles, sequences tasks, detects failures)
+5. Monitor performance, apply governance, include human oversight
+
+**Key principle**: "distributed intelligence and specialization" outperforms a single all-purpose model for complex enterprise workflows [^src17].
+
+## Model-as-commodity / orchestrator-as-product thesis
+
+A structural shift underway in 2026: the "model as the product" frame is aging [^src18].
+
+> "A model can suggest a patch. An orchestrator decides whether the patch should exist." [^src18]
+
+The core argument: when models converge on price and capability parity, the durable advantage moves to the runtime that coordinates them. The orchestrator must handle scheduling, permissions, observability, memory, sandboxing, rollback, and policy — "orchestration quality is invisible until it fails" [^src18]. Evidence from the 2026 landscape [^src18]:
+
+- Anthropic's Claude Opus 4.8 ships with support for up to **1,000 parallel subagents** and dynamic workflows as a managed execution surface.
+- NVIDIA Polar trains agents inside real harnesses — "agent behavior is now trained against the real harness, not a toy environment."
+- CoreWeave's unified agentic platform treats training, inference, and telemetry as one system.
+- Google's Agent Executor adds durable long-running workflows with snapshotting and sandboxing.
+
+**The Intel mirror**: in 1985 Intel exited DRAM because the commodity layer was crowded; it owned microprocessors (the architecture future hardware organized around). The analogy: if base models compress toward parity, the durable advantage moves to the runtime that coordinates them [^src18].
+
+**What this means for teams**: code review expands to ask "which agent created this diff, under which policy, from which plan?" On-call will include failures where an agent did "the locally correct thing inside the globally wrong workflow." RFCs must describe not just a feature but the agent workflow allowed to modify it [^src18].
+
+## Multi-agent failure modes: the CVE-2026-LGTM incident
+
+A satirical-but-instructive hypothetical incident report by Andrew Nesbitt illustrates a concrete multi-agent failure mode [^src19]:
+
+> "Day 2, 16:00 UTC — Two AI review agents from competing vendors, both attached to a downstream pull request bumping `foxhole-lz4`, enter a disagreement loop over whether the package is malicious. After 340 comments and $41,255 in inference spend, Finance revokes both API keys; one vendor's marketing team, cc'd on the cost anomaly alert, issues a press release citing 'a 430% YoY increase in adversarial multi-agent security reasoning.' The stock opens up 6%."
+
+This captures three real multi-agent failure modes: (1) **disagreement loops** — agents with no convergence protocol cycle indefinitely; (2) **runaway token spend** — without budget guardrails, a disagreement loop is a financial hazard; (3) **missing termination conditions** — neither agent had a "stop if unresolved after N turns, escalate to human" rule. The "agentjacking" framing suggests the loop was potentially exploitable by supplying adversarial inputs that maximized agent disagreement. Compare the [Shared State pattern's termination requirement](/ai-engineering/multi-agent-systems.md#5-shared-state): "systems that treat termination as an afterthought tend to cycle indefinitely."
+
+**Mitigations**: explicit max-iteration limits; budget caps per session; neutral arbiter agent or human-in-the-loop escalation when two agents disagree past a threshold; cost-anomaly alerting before Finance has to revoke keys manually.
+
 ## See also
 
 - [AI Agent](/ai-engineering/ai-agent.md) — single-agent building block
@@ -335,6 +413,7 @@ Factory provides a **Mission Control** visual interface showing each agent, its 
 - [MCP](/ai-engineering/mcp.md) — coordination protocol for tool calls, memory, and context sharing across agents
 - [Claude Code](/ai-engineering/claude-code.md) — subagent invocation patterns, custom agent definitions, Agent Teams
 - [Agent Harness](/ai-engineering/agent-harness.md) — the harness layer that enables multi-agent orchestration
+- [Agent Security](/ai-engineering/agent-security.md) — MCP agentjacking, tool permission threat model
 
 ---
 
@@ -404,3 +483,7 @@ In a cross-model setup, each model maintains its own instruction file. Over time
 This is the organizational analog of the "compounds across sessions" property of [Agent Memory](/ai-engineering/agent-memory.md) applied to behavioral conventions rather than factual context. See [CLAUDE.md Conventions](/ai-engineering/claude-md-conventions.md) for the file format.
 
 [^src15]: [AI Agents Full Course 2026 — Master Agentic AI (2 hours)](../../raw/_inbox/youtube-EsTrWCV0Ph4-ai-agents-full-course-2026-master-agentic-ai-2-hours.md) — Nick Saraev, YouTube, 2026; cross-LLM MCP orchestration, self-modifying instruction files
+[^src16]: [RPA vs. AI Agents: What Are the Differences?](../../raw/_inbox/web-rpa-vs-ai-agents-what-are-the-differences-36f86eaf.md) — Zencoder, 2026
+[^src17]: [What Is AI Agent Orchestration? How It Works & Examples](../../raw/_inbox/web-what-is-ai-agent-orchestration-how-it-works-examples-c4e0c48a.md) — Zencoder, 2026
+[^src18]: [The Orchestrator Is the Product. The Model Is a Commodity.](../../raw/_inbox/web-the-orchestrator-is-the-product-the-model-is-a-commodity-3e693062.md) — Neeraj Khandelwal, Zencoder newsletter, Jun 2026
+[^src19]: [Incident Report: CVE-2026-LGTM](../../raw/_inbox/web-incident-report-cve-2026-lgtm-61a73fa6.md) — Andrew Nesbitt, via Simon Willison, 26 Jun 2026

@@ -69,9 +69,16 @@ sources:
   - path: raw/_inbox/youtube-XOddQHz4gtA-somebody-leaked-the-system-prompts-of-32-ai-agents-cursor-cl.md
     channel: youtube
     ingested_at: 2026-06-27
+  - path: raw/_inbox/web-fuck-you-show-me-the-prompt-ad95e5b5.md
+    channel: web
+    ingested_at: 2026-07-06
 aliases:
   - prompting
   - prompt design
+  - prompt transparency
+  - show me the prompt
+  - mitmproxy LLM
+  - accidental complexity LLM
   - few-shot prompting
   - zero-shot prompting
   - chain-of-thought
@@ -85,7 +92,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-12
-updated: 2026-06-26
+updated: 2026-07-06
 ---
 
 # Prompt Engineering
@@ -249,6 +256,28 @@ General prompt levers harden into **domain-specific structured workflows** when 
 
 Full workflow: [Claude for Finance](/ai-engineering/claude-for-finance.md).
 
+## Prompt transparency: "Fuck you, show me the prompt"
+
+Hamel Husain's case for always inspecting what LLM frameworks actually send to the model [^src23]:
+
+**The accidental complexity danger**: LLM abstractions can "force the user to regress towards writing code instead of conversing with the AI in natural language, which runs counter to the purpose of LLMs." Two types of automation exist: (1) interleaving code and LLMs (appropriately done in code — routing, retries, chaining), and (2) rewriting and constructing prompts (appropriately done in natural language). Going too far with type 2 hides what the system is doing [^src23].
+
+**Why see the prompt**: Viewing the actual prompt lets you decide whether the framework is necessary, whether you can "steal the final prompt as a string and jettison the framework," whether a better prompt could be written, and whether the number of API calls is appropriate [^src23].
+
+**mitmproxy as framework-agnostic interceptor**: Rather than monkey-patching source code or hunting through docs, set up `mitmproxy` (free, open-source HTTPS proxy) to log all outgoing API requests. Scope it to a specific Python program using environment variables (`REQUESTS_CA_BUNDLE`, `SSL_CERT_FILE`, `HTTPS_PROXY`) [^src23].
+
+**Findings from inspecting popular libraries** [^src23]:
+
+| Library | What you find |
+|---|---|
+| **Guardrails** | XML schema injection into the prompt + a second API call to repair invalid JSON — "a whole lot of ceremony to get structured output" |
+| **Guidance** | 7 API calls for a "plan for goal" task; 5 of 7 generate redundant "ideas" at temperature 1.0; single-shot generation would likely be more diverse |
+| **LangChain SmartLLMChain** | 4 API calls with a spelled-wrong prompt ("Let'w work this out") and a negative focus ("list the flaws") — signals an unoptimized prompt |
+| **Instructor (basic)** | Zero-cost abstraction — uses function calling exactly as you'd write it manually; an example of when a library is genuinely worth it |
+| **DSPy (minimal example)** | Hundreds of API calls, 30+ minutes runtime, no prior warning — critical for cost budgeting; the `inspect_history()` method lets you verify what was sent |
+
+The lesson is not "hate LLM libraries" — it's that adopting abstractions without seeing what they do leads to hidden cost, latency, and quality surprises. "Looking at prompts is one way to mitigate that temptation" [^src23].
+
 ## What leaked system prompts reveal
 
 In 2025, a practitioner compiled the system prompts of 32 AI coding agents into one GitHub repository (137K stars; 14 months old as of mid-2026). Analyzing them reveals consistent patterns that have since shaped the broader discourse on prompt design [^src22].
@@ -283,6 +312,7 @@ This rule appeared in every prompt reviewed, regardless of tool or vendor. It ge
 - [Agent Security](/ai-engineering/agent-security.md) — prompt injection is the adversarial side of prompting
 - [Vibe Coding](/ai-engineering/vibe-coding.md) — where prompt antipatterns cause the 70% problem
 - [Beyond Vibe Coding (Book)](/ai-engineering/sources/beyond-vibe-coding-book.md) — ch2 as the fullest treatment of the vibe-coding prompt toolkit
+- [Hamel Husain](/ai-engineering/hamel-husain.md) — practitioner behind the "show me the prompt" discipline and nbdev-to-AI-tools transition
 
 ---
 
@@ -307,3 +337,4 @@ This rule appeared in every prompt reviewed, regardless of tool or vendor. It ge
 [^src20]: [Advanced Prompt Engineering (Mindstream × HubSpot PDF guide)](../../raw/pdf/pdf-advanced-chatgpt-prompt-engineering-mindstream-x-hubspot.md) — Mindstream / HubSpot
 [^src21]: [How to use Claude For Finance Better Than 99% of People](../../raw/youtube/youtube-qLDwThdc3WQ-how-to-use-claude-for-finance-better-than-99-of-people.md) — Luke Finance, YouTube playlist: Claude Finance
 [^src22]: [Somebody Leaked the System Prompts of 32 AI Agents — Cursor, Claude Code, Devin](../../raw/_inbox/youtube-XOddQHz4gtA-somebody-leaked-the-system-prompts-of-32-ai-agents-cursor-cl.md) — Bitwise AI, YouTube; 137K-star GitHub repo compilation
+[^src23]: [Fuck You, Show Me The Prompt](../../raw/_inbox/web-fuck-you-show-me-the-prompt-ad95e5b5.md) — Hamel Husain, hamel.dev

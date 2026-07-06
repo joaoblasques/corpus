@@ -6,6 +6,9 @@ sources:
   - path: 03_Resources/Study Notes/DevOps - Kubernetes Complete Course for Beginners.md
     channel: notes
     ingested_at: 2026-05-21
+  - path: raw/email/email-2026-06-27-0-years-experience-kubernetes-homelab-devops-job.md
+    channel: email
+    ingested_at: 2026-07-06
 aliases:
   - Kubernetes
   - k8s
@@ -16,7 +19,7 @@ tags:
   - corpus/software-engineering
   - entity
 created: 2026-05-21
-updated: 2026-05-21
+updated: 2026-07-06
 ---
 
 # Kubernetes (k8s)
@@ -106,6 +109,18 @@ Kubernetes is the natural runtime platform for [microservices](/software-enginee
 - Deployments implement zero-downtime rolling updates — critical when services must evolve independently
 - Auto-restart and health checks address partial failure modes discussed in [Distributed Systems Fallacies](/software-engineering/distributed-systems-fallacies.md)
 
+## Kubernetes homelab as hiring proof
+
+Interviewers for DevOps/platform roles increasingly weight demonstrated proof over years of experience [^src2]. A homelab cluster enables candidates to speak to:
+
+- How a pod goes from `kubectl apply` to running (Scheduler → kubelet → container runtime)
+- How traffic reaches a pod (Service → kube-proxy → pod IP)
+- Real incidents created and debugged in a personal lab
+
+The KubeCraft pattern: build real clusters, document everything, surface it via GitHub + LinkedIn. Interviews become "tell me what you built" rather than trivia exams [^src2].
+
+> "Companies don't hire years. They hire proof." [^src2]
+
 ## See also
 
 - [Microservices](/software-engineering/microservices.md) — the architectural style Kubernetes operationalizes at runtime
@@ -116,3 +131,4 @@ Kubernetes is the natural runtime platform for [microservices](/software-enginee
 ---
 
 [^src1]: [DevOps - Kubernetes Complete Course for Beginners](/03_Resources/Study Notes/DevOps - Kubernetes Complete Course for Beginners.md)
+[^src2]: [0 years experience. Kubernetes homelab. DevOps job](../../raw/email/email-2026-06-27-0-years-experience-kubernetes-homelab-devops-job.md)

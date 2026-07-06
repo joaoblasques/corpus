@@ -6,6 +6,12 @@ sources:
   - path: raw/web/web-a-field-guide-to-rapidly-improving-ai-products-hamels-blog-h.md
     channel: web
     ingested_at: 2026-06-26
+  - path: raw/_inbox/web-llm-evals-everything-you-need-to-know-hamels-blog-hamel-husa-5bf201ee.md
+    channel: web
+    ingested_at: 2026-07-06
+  - path: raw/_inbox/web-the-revenge-of-the-data-scientist-hamels-blog-hamel-husain-28a4d4c3.md
+    channel: web
+    ingested_at: 2026-07-06
 aliases:
   - error analysis
   - AI error analysis
@@ -18,7 +24,8 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-26
-updated: 2026-06-26
+updated: 2026-07-06
+last_confirmed: 2026-07-06
 ---
 
 # Error Analysis
@@ -66,6 +73,28 @@ These viewers "can be built in hours using AI-assisted development (like [Cursor
 - **Build bridges, not gatekeepers** — playgrounds (Arize, [LangSmith](/ai-engineering/langsmith.md), Braintrust) are a start, but the next step many miss is **integrated prompt environments**: an admin version of the real UI that exposes prompt editing within the app's actual RAG/agent/business-logic context [^src1].
 - **Kill the jargon** — calling everything "an agent" makes domain experts feel they can't contribute. Translate: "we're implementing RAG" → "we're making sure the model has the right context to answer"; "prevent prompt injection" → "make sure users can't trick the AI into ignoring our rules." Not dumbing down — being precise about what you're actually doing [^src1].
 
+## The formal open/axial coding process
+
+From the evals FAQ [^src2], the structured four-step process:
+
+1. **Creating a dataset** — gather representative traces. If no data exists, generate synthetic data to bootstrap.
+2. **Open coding** — human annotator(s) (ideally the principal domain expert / "benevolent dictator") review traces and write open-ended notes about issues. Like "journaling" — adapted from qualitative research methodology. Focus on the *first* failure in each trace (upstream errors cause downstream issues).
+3. **Axial coding** — categorize open-ended notes into a failure taxonomy. Group similar failures into distinct categories. Count failures per category. LLMs can help at this step, but only after the human has done the initial open coding.
+4. **Iterative refinement** — keep reviewing more traces until theoretical saturation (new traces stop revealing new failure modes). Rule of thumb: review at least 100 traces; if ~20 consecutive traces produce no new category, stop.
+
+**What LLMs can help with** [^src2]: first-pass axial coding (after you've open coded 30-50 traces yourself), mapping annotations to failure modes, suggesting prompt improvements, analyzing annotation data. **What LLMs should NOT do** [^src2]: initial open coding (never skip or delegate this — it's how you discover new failure types), validating failure taxonomies (LLM groupings need human review), ground truth labeling (hand-validate every label used for judge calibration), root cause analysis (humans catch workflow-specific patterns an LLM would miss).
+
+## Efficient sampling beyond random
+
+For mature systems where most traces lack obvious errors [^src2]:
+- **Outlier detection** — sort by any metric (response length, latency, tool calls) and review extremes.
+- **User feedback signals** — prioritize traces with negative feedback, support tickets, escalations.
+- **Metric-based sorting** — generic metrics as *exploration signals* even when they don't measure quality: review both high and low scores as investigation leads.
+- **Stratified sampling** — sample from key dimension groups (user type, feature, query category).
+- **Embedding clustering** — embed queries, cluster them, sample proportionally; oversample small clusters for edge cases.
+
+Re-run error analysis when making significant changes (new features, prompt updates, model switches). Between major analyses: review 10-20 traces weekly, focusing on outliers. New systems need weekly analysis until failure patterns stabilize; mature systems may need only monthly analysis.
+
 ## Where it sits
 
 Error analysis is the *discovery* phase that feeds the rest of the evaluation discipline: the failure modes it surfaces become the [eval](/ai-engineering/agent-evaluation.md) criteria and golden-dataset labels; [synthetic data](/ai-engineering/synthetic-data.md) generates inputs to exercise the failure modes you can't yet observe; and the experiment-based [roadmap](/ai-engineering/ai-product-management.md) prioritizes fixes by frequency. It is the antidote to the [over-trust](/ai-engineering/generator-evaluator-separation.md) failure mode — you can't grade what you haven't looked at.
@@ -75,9 +104,12 @@ Error analysis is the *discovery* phase that feeds the rest of the evaluation di
 - [Agent Evaluation](/ai-engineering/agent-evaluation.md) — error analysis defines what the evals measure
 - [Synthetic Data](/ai-engineering/synthetic-data.md) — bootstraps data to analyze when you have no users
 - [AI Product Management](/ai-engineering/ai-product-management.md) — experiment-based roadmaps built on this loop
+- [LLM Evals](/ai-engineering/llm-evals.md) — the full Hamel Husain evaluation methodology (critique shadowing, judges, anti-patterns)
+- [Hamel Husain](/ai-engineering/hamel-husain.md) — the practitioner who developed and refined this methodology
 - [Source: Hamel Husain's field guide](/ai-engineering/sources/field-guide-improving-ai-products.md)
 - [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 
 [^src1]: [A Field Guide to Rapidly Improving AI Products](../../raw/web/web-a-field-guide-to-rapidly-improving-ai-products-hamels-blog-h.md) — Hamel Husain, hamel.dev
+[^src2]: [LLM Evals: Everything You Need to Know](../../raw/_inbox/web-llm-evals-everything-you-need-to-know-hamels-blog-hamel-husa-5bf201ee.md) — Hamel Husain & Shreya Shankar, hamel.dev

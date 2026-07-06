@@ -33,6 +33,27 @@ sources:
   - path: raw/web/web-a-field-guide-to-rapidly-improving-ai-products-hamels-blog-h.md
     channel: web
     ingested_at: 2026-06-26
+  - path: raw/_inbox/web-swe-bench-pro-results-2026-ai-coding-model-rankings-dca3b106.md
+    channel: web
+    ingested_at: 2026-07-06
+  - path: raw/_inbox/web-your-ai-product-needs-evals-2b2dee98.md
+    channel: web
+    ingested_at: 2026-07-06
+  - path: raw/_inbox/web-using-llm-as-a-judge-for-evaluation-a-complete-guide-9693f495.md
+    channel: web
+    ingested_at: 2026-07-06
+  - path: raw/_inbox/web-llm-evals-everything-you-need-to-know-hamels-blog-hamel-husa-5bf201ee.md
+    channel: web
+    ingested_at: 2026-07-06
+  - path: raw/_inbox/web-the-revenge-of-the-data-scientist-hamels-blog-hamel-husain-28a4d4c3.md
+    channel: web
+    ingested_at: 2026-07-06
+  - path: raw/_inbox/web-evals-skills-for-coding-agents-hamels-blog-hamel-husain-f8a26550.md
+    channel: web
+    ingested_at: 2026-07-06
+  - path: raw/_inbox/web-selecting-the-right-ai-evals-tool-hamels-blog-hamel-husain-daa87ecb.md
+    channel: web
+    ingested_at: 2026-07-06
 aliases:
   - agent evaluation
   - LLM evaluation
@@ -49,12 +70,25 @@ aliases:
   - task-completion time horizon
   - 50%-time horizon
   - 80%-time horizon
+  - critique shadowing
+  - LLM-as-judge
+  - benevolent dictator
+  - principal domain expert
+  - eval anti-patterns
+  - evals skills
+  - eval-audit
+  - SWE-Bench Pro
+  - SWE-Bench Pro 2026
+  - Harbor benchmark tool
+  - regression-style eval
+  - model overlap analysis
+  - Jaccard overlap
 tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-21
-updated: 2026-06-26
-last_confirmed: 2026-06-26
+updated: 2026-07-06
+last_confirmed: 2026-07-06
 ---
 
 # Agent Evaluation
@@ -248,9 +282,78 @@ This checklist comes from Karpathy's `autoresearch` repo practice and is directl
 
 See also: [Compound Engineering](/ai-engineering/compound-engineering.md) §Autoresearch for the 3-file system (instructions / asset / scoring file) that implements this pattern.
 
+## Evaluating agentic workflows
+
+Hamel Husain's recommended two-phase approach for agent evaluation [^src11]:
+
+**Phase 1 — End-to-end task success.** Treat the agent as a black box: "did we meet the user's goal?" Define a precise success rule per task (exact answer, correct side-effect) and measure with human or aligned LLM judges. Note the first upstream failure when conducting error analysis.
+
+**Phase 2 — Step-level diagnostics.** Once error analysis reveals which workflows fail, score individual components: tool choice (was the selected tool appropriate?), parameter extraction (were inputs complete?), error handling (did the agent recover from empty results?), context retention (were earlier constraints preserved?), efficiency (steps, tokens, time), and goal checkpoints.
+
+**Transition failure matrices**: "Create a matrix where rows represent the last successful state and columns represent where the first failure occurred." This transforms overwhelming agent complexity into actionable insights — immediately surfacing whether, e.g., `GenSQL → ExecSQL` transitions cause 12 failures while `DecideTool → PlanCal` causes only 2 [^src11].
+
+## SWE-Bench Pro 2026: task specification as a hidden eval variable
+
+A large-scale 2026 benchmarking study ($50k total compute) on SWE-Bench Pro produced two major findings about what benchmarks actually measure [^src13].
+
+**Setup**: Zencoder ran 15 frontier models using native CLIs on SWE-Bench Pro via Harbor (an open-source tool for local SWE-Bench execution), supplemented by Fireworks inference for open-weights models. Benchmark: real GitHub issues across multiple languages.
+
+### The $20k bug that changed the analysis
+
+A Harbor adapter bug accidentally leaked fail-to-pass tests from the golden patch while keeping task descriptions minimal — creating a "regression-style" setup resembling real CI/CD: CI catches a failure, developer gets a short description plus a stack trace and failing tests, and must figure out both what's wrong and how to fix it — "without a detailed implementation spec" [^src13].
+
+This unintentional fork produced two radically different tables:
+
+**Standard results** (detailed instructions: exact class names, interface definitions, variable naming):
+
+| Model | Standard Score |
+|---|---|
+| claude-opus-4-6 | 52.7% |
+| openai/gpt-5.4 | 51.3% |
+| claude-sonnet-4-6 | 50.7% |
+| google/gemini-3.1-pro | 49.9% |
+
+All frontier models cluster within a ~6-point band.
+
+**Regression-style results** (minimal description + leaked failing tests — more representative of real engineering):
+
+| Model | Regression Score | Δ vs Standard |
+|---|---|---|
+| claude-sonnet-4.6 | 78.90% | +28.2 |
+| claude-opus-4.6 | 76.58% | +23.9 |
+| gpt-5.3-codex | 63.42% | +13.8 |
+| gpt-5.4 | 62.33% | +11.0 |
+| gemini-3.1-pro | 52.33% | +2.4 |
+| kimi-k2.5 | 43.15% | -1.7 |
+| minimax-2.5 | 32.60% | -8.5 |
+
+Spread explodes from ~6 points to ~46 points. Anthropic dominates. Some models (Minimax, Kimi) get *worse* with ambiguity [^src13].
+
+### Key findings
+
+**Task specification is a hidden variable** [^src13]: "When you measure performance on perfectly specified tasks, all models look the same. The real differentiation shows up exactly where benchmarks usually don't look: in the messy, ambiguous, underspecified reality of day-to-day engineering."
+
+**Models solve different problems even at similar scores** [^src13]: cross-cutting analysis of 730 tasks showed only 68–84% pairwise Jaccard overlap between same-vendor model pairs, and as low as 68% cross-vendor. Of 730 tasks: 144 (19.7%) trivially solved by all models; 224 (30.7%) solved by none; 259 (35.5%) are the differentiating set.
+
+**Model pairing for ensembles** [^src13]: highest-value pairs are cross-vendor (Anthropic + Google: 68% overlap); same-vendor pairs are largely redundant (OpenAI Codex ↔ GPT-5.4: 84% overlap). "If you're picking two models for an ensemble, you get far more out of pairing Anthropic + Google than pairing two OpenAI models."
+
+**Orchestration implication** [^src13]: "Relying on a single model is leaving performance on the table. Under the hood, each model has blind spots that others cover. A well-designed orchestration layer can push your effective solve rate well beyond what any individual model achieves." This is the production case for multi-model agent review pipelines.
+
+**The 80% ceiling and what it means** [^src13]: Sonnet 4.6 at ~79% on regression-style tasks "essentially means this benchmark has been beaten" — but "real-world tasks are far messier than any benchmark, and no single model will sustain 80% in production." The areas humans still own: system design and architecture, UX, "peripheral vision" (noticing a problem before it becomes one).
+
+**Sonnet over Opus at high resolve rates**: at the ~80% level, Opus tends to "overthink and produce solutions that may theoretically be better, but don't pass the specific tests" — hitting the benchmark ceiling of reliable measurement, not model capability [^src13].
+
+## Evals-skills for coding agents
+
+OpenAI's Harness Engineering result: three engineers, five months, ~1M lines of code built with Codex agents — "improving the infrastructure around the agent mattered more than improving the model" [^src12]. Documentation tells the agent what to do; telemetry tells it whether it worked; evals tell it whether the output is good.
+
+The `evals-skills` open-source plugin (Hamel Husain) provides Claude Code skills that guard against common eval mistakes: `eval-audit` (diagnostic sweep across six areas with prioritized action list), `error-analysis`, `write-judge-prompt`, `validate-evaluator`, `evaluate-rag`, `build-review-interface`, `generate-synthetic-data` [^src12]. All major eval vendors (Braintrust, LangSmith, Phoenix) now ship MCP servers — agents can query traces directly, but methodology is still required to know what to do with them.
+
 ## See also
 
 - [Error Analysis](/ai-engineering/error-analysis.md) — the discovery phase that defines what these evals measure
+- [LLM Evals](/ai-engineering/llm-evals.md) — full Hamel Husain evaluation methodology: critique shadowing, binary pass/fail, domain experts, anti-patterns
+- [Hamel Husain](/ai-engineering/hamel-husain.md) — practitioner who developed the methodology; 50+ company engagements
 - [LangSmith](/ai-engineering/langsmith.md) — platform that implements these patterns
 - [AI Agent](/ai-engineering/ai-agent.md) — the systems being evaluated
 - [Context Engineering](/ai-engineering/context-engineering.md) — context window growth directly affects evaluation quality (thread evaluator catches degradation)
@@ -270,3 +373,6 @@ See also: [Compound Engineering](/ai-engineering/compound-engineering.md) §Auto
 [^src8]: [Claude on SWE-bench Verified — Anthropic blog](../../raw/web/web-claude-swe-bench-performance.md) — Anthropic
 [^src9]: [This "Karpathy System" could 701x your AI Workflows — autoresearch fit checklist](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-this-karpathy-sys-report.md) — YouTube (processed report)
 [^src10]: [A Field Guide to Rapidly Improving AI Products](../../raw/web/web-a-field-guide-to-rapidly-improving-ai-products-hamels-blog-h.md) — Hamel Husain, hamel.dev
+[^src11]: [LLM Evals: Everything You Need to Know](../../raw/_inbox/web-llm-evals-everything-you-need-to-know-hamels-blog-hamel-husa-5bf201ee.md) — Hamel Husain & Shreya Shankar, hamel.dev
+[^src12]: [Evals Skills for Coding Agents](../../raw/_inbox/web-evals-skills-for-coding-agents-hamels-blog-hamel-husain-f8a26550.md) — Hamel Husain, hamel.dev
+[^src13]: [SWE-Bench Pro Results 2026: AI Coding Model Rankings](../../raw/_inbox/web-swe-bench-pro-results-2026-ai-coding-model-rankings-dca3b106.md) — Andrew Filev & Dmitry Krasnov, Zencoder blog, 2026

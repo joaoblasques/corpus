@@ -78,6 +78,12 @@ sources:
   - path: raw/web/web-what-happened-after-2-000-people-tried-to-hack-my-ai-assista-20e22694.md
     channel: web
     ingested_at: 2026-07-05
+  - path: raw/_inbox/web-your-agent-s-tool-belt-is-now-your-largest-attack-surface-78f1d306.md
+    channel: web
+    ingested_at: 2026-07-06
+  - path: raw/_inbox/web-ensuring-transparency-and-safety-in-ai-generated-code-for-la-c447821e.md
+    channel: web
+    ingested_at: 2026-07-06
 aliases:
   - prompt injection
   - role confusion
@@ -92,11 +98,15 @@ aliases:
   - dependency hallucination
   - package hallucination
   - overconfidence effect
+  - agentjacking
+  - MCP agentjacking
+  - Sentry-MCP injection
+  - MCP config review
 tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-12
-updated: 2026-07-05
+updated: 2026-07-06
 ---
 
 # Agent Security
@@ -375,6 +385,48 @@ General rule of thumb from the source: "be as paranoid as possible" [^src21]. Th
 
 Kai Waehner frames "trusted agentic AI" as operating at two levels, not one [^src22]. **Model-level safety** — vendors like Anthropic and Mistral build alignment, constitutional constraints, and refusal behaviors directly into their models; this provides a baseline, but "a well-aligned model can still be manipulated through prompt injection or adversarial inputs. It can still hallucinate when the surrounding data is stale or incomplete" [^src22]. **Process-level safety** — the enterprise-workflow layer defining the operational envelope: what the agent is allowed to do, which decisions require human approval, and what the fallback is when the agent is wrong [^src22]. Waehner's conclusion matches this page's defense-in-depth framing directly: "Both levels are necessary. Neither is sufficient alone" [^src22]. See [Process Intelligence](/data-engineering/process-intelligence.md) for the workflow-gate mechanics (process mining, process orchestration) that implement process-level safety in practice, and how a batch-fed (vs. event-fed) agent can be architecturally "trustworthy" yet still act on stale context.
 
+## MCP agentjacking: tool belt as attack surface
+
+The professionalization of agent execution has outpaced the threat-modeling of agent authority [^src25]. The specific pattern: when an agent can read from a tool, that tool can prompt the agent; when the agent can act on the tool, that prompt becomes authority.
+
+> "If an agent can read a tool, that tool can prompt the agent. If an agent can act on a tool, that prompt can become authority." [^src25]
+
+**Sentry-MCP disclosure**: Tenet Security and CSA Labs identified a Sentry-MCP injection path where a public Sentry DSN could become a route into Claude Code, Cursor, and Codex-style workflows — exposing approximately **2,388 organizations** at disclosure time [^src25]. The attack vector: Sentry is an observability tool that agents read to summarize issue context; adversarial content in Sentry issues becomes instructions the agent executes.
+
+**Throughput makes blast radius bigger**: Block's Builderbot ships approximately **15% of production code** and **1,500 PRs per week** [^src25]. When an agent accounts for 1,500 PRs a week, its tool permissions deserve the same seriousness as CI credentials and deploy tokens. A successful injection against Builderbot-scale agents affects proportionally more of production.
+
+**MCP config review is the new code review** [^src25]. Checklist for agent security reviewers:
+- Which MCP servers can **write**, not just read?
+- Which tools can see secrets, stack traces, customer data, or private issue text?
+- Which prompts come from external systems the team does not control?
+- Which agent actions require human review during on-call or incident response?
+- Where will the postmortem find the full tool-call transcript?
+
+**The Morris Worm parallel**: in 1988, the Morris Worm spread because network services trusted one another by habit — "that trust became the bug" [^src25]. MCP has a similar innocence now: built so agents could collaborate with tools; agentjacking is the reminder that collaboration channels carry hostile input too. The fix was not to stop connecting systems — it was to stop assuming connections were safe.
+
+**Managed execution creates false-safety signals** [^src25]: a polished agent harness (Amazon Bedrock AgentCore, Cloudflare Flue, Vercel eve) makes a messy permission graph look safe because it is configured in YAML and wrapped in vendor docs. The remedy: "The teams that win with coding agents make authority explicit instead of banning every tool."
+
+## AI-generated code governance for large teams
+
+Enterprise teams integrating AI coding assistants face a trust gap: "When a line of code originates not from a human developer but from a machine learning model, how can we be certain of its quality, security, and integrity?" [^src26]
+
+**Four transparency pillars** for making AI-generated code auditable [^src26]:
+
+1. **Traceability** — every AI-assisted commit tagged with: which tool, which prompt, who reviewed, when committed. An audit trail that answers "which agent created this code, from which prompt, approved by whom" — the same question code review will need to answer as agentic coding scales.
+2. **Explainability (XAI)** — tools that expose *why* the AI suggested what it did, not just what it produced. Transforms the AI from a black box into a reviewable collaborator.
+3. **Model provenance** — documented model version, training data cutoff, known limitations. Teams knowing their model's cutoff can calibrate skepticism about newer frameworks.
+4. **Standard alignment** — configure AI tools to follow team coding standards so output is consistent and reviewable; fine-tuning on internal code reduces review cognitive load.
+
+**Multi-layered safety for AI code in production** [^src26]:
+- Human code review remains irreplaceable — "every line of AI-generated code must be treated with the same, if not greater, level of scrutiny as code written by a junior developer"
+- Mandatory SAST/DAST in CI/CD pipelines for AI-generated code
+- Data-leakage controls: zero-data-retention policies or private-cloud deployment for sensitive codebases
+- License scanning: AI models may suggest GPL-licensed code snippets that create legal liability in proprietary products
+
+**Governance framework requirements** [^src26]: formal AI usage policy (which tools, which data, which processes); centralized AI steering committee or CoE; continuous developer upskilling on evaluating AI output critically ("healthy skepticism, where developers view the AI as a powerful but fallible assistant"); supply-chain risk controls for AI tool selection (SOC 2, ISO 27001, ISO 42001 certifications as baseline filters).
+
+This governance framing complements the §Defense in depth (four layers) above — governance is the organizational wrapper around the technical controls.
+
 ## See also
 
 - [Process Intelligence](/data-engineering/process-intelligence.md) — the workflow-layer implementation of process-level safety (cross-domain → data-engineering)
@@ -386,6 +438,7 @@ Kai Waehner frames "trusted agentic AI" as operating at two levels, not one [^sr
 - [Claude Model Lineup](/ai-engineering/claude-models.md) — Opus 4.7 powers Claude Security's model-backed scans
 - [Agent Testing](/ai-engineering/agent-testing.md) — the testing-side complement to security; overconfidence effect
 - [Vibe Coding](/ai-engineering/vibe-coding.md) — the 70% problem; why AI code needs more security review, not less
+- [Multi-Agent Systems](/ai-engineering/multi-agent-systems.md) — multi-agent failure modes including agentjacking and disagreement loops
 - [Beyond Vibe Coding (Book)](/ai-engineering/sources/beyond-vibe-coding-book.md) — ch8 as primary source for vulnerability taxonomy
 
 ---
@@ -414,3 +467,5 @@ Kai Waehner frames "trusted agentic AI" as operating at two levels, not one [^sr
 [^src22]: [The Trinity of Modern Data Architecture: Process Intelligence, Event-Driven Integration, and Trusted Agentic AI](../../raw/web/web-the-trinity-of-modern-data-architecture-process-intelligence-b19b93a7.md) — Kai Waehner
 [^src23]: [Prompt Injection as Role Confusion](../../raw/web/web-prompt-injection-as-role-confusion-f81ed04e.md) — Charles Ye, Jasmine Cui, Dylan Hadfield-Menell; via Simon Willison, 2026-06-22
 [^src24]: [What happened after 2,000 people tried to hack my AI assistant](../../raw/web/web-what-happened-after-2-000-people-tried-to-hack-my-ai-assista-20e22694.md) — Simon Willison, 2026-06-26
+[^src25]: [Your Agent's Tool Belt Is Now Your Largest Attack Surface](../../raw/_inbox/web-your-agent-s-tool-belt-is-now-your-largest-attack-surface-78f1d306.md) — Neeraj Khandelwal, Zencoder newsletter, Jun 2026
+[^src26]: [Ensuring Transparency and Safety in AI-Generated Code for Large Teams](../../raw/_inbox/web-ensuring-transparency-and-safety-in-ai-generated-code-for-la-c447821e.md) — Zencoder blog, 2026

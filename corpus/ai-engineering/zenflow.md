@@ -9,15 +9,33 @@ sources:
   - path: raw/web/web-how-to-connect-zenflow-to-snowflake-ai-powered-data-warehous-1926ba31.md
     channel: web
     ingested_at: 2026-07-05
+  - path: raw/web/web-how-to-connect-zenflow-to-servicenow-enterprise-itsm-automat-177526aa.md
+    channel: web
+    ingested_at: 2026-07-06
+  - path: raw/web/web-zenflow-slack-integration-how-enterprise-engineering-teams-s-5dd04d0a.md
+    channel: web
+    ingested_at: 2026-07-06
+  - path: raw/web/web-zenflow-miro-integration-ai-powered-board-analysis-7c23c14a.md
+    channel: web
+    ingested_at: 2026-07-06
+  - path: raw/web/web-zenflow-custom-workflows-for-servicenow-zencoder-2cb819eb.md
+    channel: web
+    ingested_at: 2026-07-06
+  - path: raw/web/web-how-to-implement-ai-in-business-using-workflows-ai-agents-4eb9b707.md
+    channel: web
+    ingested_at: 2026-07-06
 aliases:
   - Zenflow
   - Zencoder AI
+  - Zencoder
   - zencoder.ai
+  - zenflow work
+  - zenflow code
 tags:
   - corpus/ai-engineering
   - entity
 created: 2026-07-05
-updated: 2026-07-05
+updated: 2026-07-06
 ---
 
 # Zenflow (Zencoder AI)
@@ -68,17 +86,79 @@ The Snowflake integration is powered by Pipedream's OAuth infrastructure [^src2]
 
 **Security posture** [^src2]: credentials stored exclusively in Pipedream's OAuth infrastructure; network policy enforcement stays with the operator; read-only role connection limits agent to SELECT-only; all queries appear in Snowflake query history under the connected username for audit.
 
+## ServiceNow integration
+
+Connects via Pipedream's OAuth layer (Authorization Code Grant) — credentials stored in Pipedream's encrypted vault, never in Zenflow's application layer [^src3]. Gives prompt-driven access to incidents, CMDB, service catalog, change requests, and user records without navigating the ServiceNow UI [^src3].
+
+> "ITSM teams spend an average of 3.2 hours per week on manual data retrieval tasks that could be automated." [^src3] (Forrester Total Economic Impact study, cited in source)
+
+Representative use cases [^src3]: incident triage and summarization; CMDB audit and cross-reference; change risk assessment (blast radius from CI dependencies); user provisioning/role audit; service catalog sync and documentation. All API calls appear in ServiceNow's System Log for full audit trail; connection revocable at any time from ServiceNow Application Registry [^src3].
+
+## Slack integration
+
+Outbound delivery model: Zenflow does the work, Slack receives the output — not a chatbot that responds to Slack messages [^src4]. Connects via standard OAuth; can post to any authorized public or private channel [^src4].
+
+Use cases: bug fix notifications with PR links; sprint summaries from Linear/Jira; weekly engineering velocity reports; incident and monitoring alerts from Sentry; cross-tool intelligence digests combining HubSpot, Amplitude, and Jira [^src4]. Any task posting to Slack can be set as a recurring automation on any cadence [^src4].
+
+Demo stat: 8–10 day manual incident resolution → under 25 minutes with Zenflow → Slack loop (illustrative demo figures) [^src4].
+
+## Miro integration
+
+Reads boards, items, sticky notes, connectors, comments, and prototypes via Miro MCP protocol — no API keys required [^src5]. With Read and Write scope, can also create/modify board content [^src5]. One limitation: Miro's search API doesn't return direct board URLs, requiring a manual URL paste per board [^src5].
+
+Use cases: architecture review (agent explains diagrams before code reviews), sprint retrospective summarization and action-item extraction, design handoff documentation generation, onboarding flow mapping [^src5].
+
+## Custom Workflows for ServiceNow
+
+**Zenflow Custom Workflows** — version-controlled Markdown files under `.zenflow/workflows/` [^src6]. Each step produces a physical, verifiable file in an isolated Git worktree, eliminating browser-based copy-paste and credential exposure [^src6].
+
+Problem addressed: "token drift" in single-chat-window multi-component development — model loses track of field types, writes invalid GlideRecord queries, or misses ACL constraints [^src6].
+
+**Multi-model orchestration** [^src6]:
+
+| Phase | Model | Responsibility | Accuracy improvement |
+|---|---|---|---|
+| Requirements parsing | Gemini 3.5 Flash | Extract catalog variables, field types, UI policies | 95% higher |
+| Script Include coding | GPT-5.3 Codex | Generate ServiceNow Script Includes, Client Scripts | 90% higher |
+| Async API review | Sonnet 4.6 | Verify async workflows, validate compliance | 85% higher |
+
+Reported outcome: 65% reduction in API overhead, zero syntax errors in generated scripts [^src6].
+
+## Zenflow Work (business/operational automation)
+
+Goal-oriented workflow execution: teams define desired outcome; agents determine steps, monitor progress, interact with connected systems, and continue until task complete — not just single-action automation [^src7].
+
+Use cases [^src7]: daily standups/executive summaries from Jira, Linear, GitHub; customer feedback monitoring → automatic ticket creation; support request routing; lead enrichment; meeting brief preparation; recurring audits and backlog triage; security and dependency monitoring.
+
+## Zenflow Code
+
+Extends the workflow-driven approach into software development: AI agents coordinate coding, testing, verification, and code review through structured engineering workflows [^src7].
+
+## Security posture
+
+- OAuth 2.0 for all integrations; credentials in Pipedream's encrypted vault (not Zenflow's application layer) [^src3]
+- SOC 2 Type II, ISO 27001, ISO 42001 certified [^src4]
+- Zero model training on customer data [^src4]
+- Isolated execution environments per task (clean Git worktrees) [^src4]
+- Human review before merge enforced — Zenflow never merges directly to main [^src4]
+
 ## Supported integrations (partial list)
 
-Slack, GitHub, Jira, HubSpot, Snowflake, Miro, ServiceNow, Cisco Webex, Sentry, Stripe, Amplitude, PagerDuty [^src1].
+Slack, GitHub, Jira, HubSpot, Snowflake, Miro, ServiceNow, Cisco Webex, Sentry, Stripe, Amplitude, PagerDuty, Linear, Google Workspace, Notion, Gmail [^src1][^src7].
 
 ## See also
 
 - [MCP](/ai-engineering/mcp.md) — protocol underlying tool integrations in AI agent platforms
 - [Agent Security](/ai-engineering/agent-security.md) — OAuth delegation and least-privilege patterns for agent integrations
 - [Agentic Workflows](/ai-engineering/agentic-workflow.md) — multi-step cross-tool orchestration patterns
+- [AI-Assisted Development](/software-engineering/ai-assisted-development.md) — AI tooling in broader engineering context
 
 ---
 
 [^src1]: [How to Connect Zenflow to PagerDuty](../../raw/web/web-how-to-connect-zenflow-to-pagerduty-ai-powered-incident-mana-1d4ced00.md) — Zencoder AI blog, 2026-06-28
 [^src2]: [How to Connect Zenflow to Snowflake](../../raw/web/web-how-to-connect-zenflow-to-snowflake-ai-powered-data-warehous-1926ba31.md) — Zencoder AI blog, 2026-06-28
+[^src3]: [How to Connect Zenflow to ServiceNow: Enterprise ITSM Automation Without Code](../../raw/web/web-how-to-connect-zenflow-to-servicenow-enterprise-itsm-automat-177526aa.md)
+[^src4]: [Zenflow Slack Integration: How Enterprise Engineering Teams Ship Code Directly From Slack](../../raw/web/web-zenflow-slack-integration-how-enterprise-engineering-teams-s-5dd04d0a.md)
+[^src5]: [Zenflow Miro Integration: AI-Powered Board Analysis](../../raw/web/web-zenflow-miro-integration-ai-powered-board-analysis-7c23c14a.md)
+[^src6]: [Zenflow Custom Workflows for ServiceNow](../../raw/web/web-zenflow-custom-workflows-for-servicenow-zencoder-2cb819eb.md)
+[^src7]: [How to Implement AI in Business Using Workflows & AI Agents](../../raw/web/web-how-to-implement-ai-in-business-using-workflows-ai-agents-4eb9b707.md)

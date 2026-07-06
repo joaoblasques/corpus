@@ -36,6 +36,21 @@ sources:
   - path: raw/youtube/youtube-0Hd5vYqin7w-databricks-data-engineer-associate-certification-course-pass.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/web/web-how-databricks-is-turning-video-into-searchable-actionable-i-f044690d.md
+    channel: web
+    ingested_at: 2026-07-06
+  - path: raw/web/web-how-the-english-office-for-students-leverages-databricks-to-8fc137c4.md
+    channel: web
+    ingested_at: 2026-07-06
+  - path: raw/web/web-how-daikin-applied-americas-builds-consistent-data-pipelines-1bb3ddbe.md
+    channel: web
+    ingested_at: 2026-07-06
+  - path: raw/web/web-what-if-the-answer-was-already-in-your-data-5e70850d.md
+    channel: web
+    ingested_at: 2026-07-06
+  - path: raw/web/web-the-rise-of-sports-intelligence-how-the-lakehouse-turns-trac-3c304692.md
+    channel: web
+    ingested_at: 2026-07-06
 aliases:
   - Databricks
   - Unity Catalog
@@ -46,11 +61,16 @@ aliases:
   - Databricks Data Engineer Associate
   - DBD-DEA
   - Databricks certification
+  - Genie Code
+  - Lakebase
+  - Databricks Lakebase
+  - Serverless GPU Compute
+  - Databricks SGC
 tags:
   - corpus/data-engineering
   - entity
 created: 2026-06-11
-updated: 2026-06-25
+updated: 2026-07-06
 ---
 
 # Databricks
@@ -213,6 +233,61 @@ Exam format [^src10]: 45 multiple-choice questions, 90-minute time limit, passin
 
 Study guidance [^src10]: allocate 15–20 hours (~60% lecture/labs + 40% practice exams). Recommended path: Data Engineer Associate → Data Engineer Professional (skip other Databricks certifications). A certification alone does not validate programming, SQL, or production data engineering skills — it demonstrates platform familiarity [^src10].
 
+## Genie Code (AI-assisted pipeline generation)
+
+Genie Code is Databricks' AI-assisted approach to data engineering that works against governed data in Unity Catalog to plan and generate multi-step pipelines [^src11]. Pipelines that previously took days to prototype can be generated in minutes; iteration cycles shorten, and engineers spend less time on boilerplate and more time refining business logic [^src11].
+
+A recurring structural challenge is that LLMs produce inconsistent outputs when teams rely on varied prompts or loosely defined instructions — the same request can yield architectural drift over time [^src11]. Daikin Applied Americas solved this with a **MECE (Mutually Exclusive, Collectively Exhaustive) skill framework**: each skill defines one coherent competency of the data engineering lifecycle (medallion architecture design, source readiness and grain definition, transformation patterns, canonical alignment, governance standards), non-overlapping and collectively exhaustive [^src11]. Standards are embedded directly into the execution environment rather than stored in prompts:
+
+> "Prompts get you started, but they are a bad place to enforce team standards. If the same rule matters more than once, it should live in the workspace as a skill, where Genie Code can actually use it." [^src12]
+
+The same team uses medallion layer checkpoints as explicit decision boundaries during pipeline generation: before data advances across layers, requirements (source grain definition, join validation, data stability checks) must be satisfied — enforced in the development workflow, not as downstream review steps [^src11]. The outcome: "pipeline prototyping reduced from days to minutes" with governed, consistent outputs [^src11].
+
+Genie Code also supports natural-language queries over Unity-Catalog-registered datasets, converting questions to SQL without requiring BI or SQL expertise [^src13]. In sports analytics contexts, coaches can ask "How have my starting five's third-quarter shot mechanics changed against zone defense over the last ten games?" and receive an immediate data-backed answer [^src14].
+
+## Lakebase (serverless Postgres on Databricks)
+
+Lakebase is Databricks' fully managed, serverless PostgreSQL database built for AI applications and agents [^src15]. It separates compute from storage for transactional data — the architectural differentiator that enables true elastic scaling, eliminates idle compute costs, and keeps data consistently available regardless of whether compute is running [^src15]. Key properties:
+
+- **Co-located with the lakehouse**: Lakebase sits on the same storage and governance layer as the data lakehouse, so operational data, analytics, and AI workloads share a single platform — eliminating ETL pipelines to move data between systems [^src15].
+- **Postgres-compatible**: teams continue using familiar drivers, ORMs, and development practices from day one [^src15].
+- **Unity Catalog governed**: access controls, lineage, and auditing remain consistent across every layer [^src15].
+- **Sub-second query latency**: serves interactive analyst-facing applications and real-time dashboards without waiting on a warehouse [^src14].
+
+In production at Kythera Labs (AI-native healthcare strategy), Lakebase powers the operational layer alongside Delta Lake, Delta Sharing, and Unity Catalog — "No ETL. No data movement. No seams between the question and the answer." [^src13] At Superhuman (AI email platform), feature onboarding and reverse-ETL projects previously taking months were compressed into weeks or hours after adopting Lakebase [^src15].
+
+See [Serverless Databases](/data-engineering/serverless-databases.md) for the broader concept (serverless PostgreSQL, compute-storage decoupling for OLTP, AI workload patterns).
+
+## Video intelligence pipeline (Serverless GPU Compute)
+
+Databricks frames video analytics as a **data engineering problem**, not a computer vision problem [^src11b]. The pipeline:
+
+1. User uploads video to a Databricks Volume and issues a natural-language prompt (e.g., "white box trucks, security guards, solar panels").
+2. A Lakeflow job is triggered; **Serverless GPU Compute (SGC)** grabs pre-warmed NVIDIA GPUs within seconds.
+3. Meta's **SAM3** segmentation model identifies matching objects in each frame; video is truncated to relevant segments (example: 26-minute traffic camera → 1 minute 55 seconds of relevant footage with original timestamps preserved) [^src11b].
+4. Each truncated clip is passed via the **Databricks Foundation Model API (FMAPI)** to a VLM for AI-generated summarization; text is written to tables or flows downstream.
+5. Concurrency is trivially configurable: 20 videos → 20 parallel jobs, each grabbing its own GPU compute independently [^src11b].
+
+The pipeline is **model-agnostic via MLflow**: SAM3 can be swapped for YOLO, other transformer-based vision models, or fine-tuned domain-specific models without breaking the pipeline; the summarization/anomaly-detection layer is similarly swappable [^src11b]. The same architecture supports event-driven triggering (video lands in a Volume → auto-triggers Lakeflow) and human-triggered workflows [^src11b].
+
+## Sports intelligence use case (SkeleTRACK + Lakehouse)
+
+Professional sports analytics on the Databricks lakehouse illustrates both scale and the cross-domain analysis problem [^src14]. The **NBA Hawk-Eye SkeleTRACK** system (deployed March 2023 across all 29 arenas) captures 29 skeletal joints on every player and referee at 60 fps — approximately **22,620 positional updates per second**, ~**65 million records per 48-minute game**, and ~**80 billion records** across an 82-game regular season [^src14].
+
+The lakehouse mediates the fragmentation problem: tracking data, wearables, video, opponent scouting, injury analytics, and medical data all arrive from different vendors [^src14]. Without a unified governed platform, this fragmentation produces missed injury signals, slower in-game decisions, and an inability to run cross-domain analysis combining tracking with medical history, workload, and opponent tendencies [^src14]. The medallion pipeline on Databricks:
+
+- **Bronze**: continuous 60 Hz frames from Hawk-Eye, wearable, and event feeds ingested via Lakeflow.
+- **Silver**: event catalog — possessions, shots, screens, defensive matchups, with frame ranges correlated to camera output and arena calibration applied.
+- **Gold**: analytics-ready feature layer that drives injury-risk, shot-probability, and fatigue-index models [^src14].
+
+Unity Catalog provides lineage and access control across the combined data estate — critical when medical data sits next to performance data [^src14]. The same lakehouse producing the injury risk model also produces broadcast feeds; the NBA's Christmas Day 2024 game was the league's first fully animated broadcast built on SkeleTRACK data [^src14].
+
+## Enterprise case studies
+
+**Office for Students (UK)** — manages data spanning millions of student records over decades from 400+ higher-education providers [^src12]. A 300-million-record data-wrangling job that took 8 hours on legacy systems runs in minutes on Databricks; a student segmentation analysis that required two analysts two weeks now completes in half a day [^src12]. Genie Code reduced a provider-registration-triage task from two to three colleagues reading documents over a month to an automated flagging system [^src12]. Unity Catalog provides the lineage, consistent access controls, and security patterns required in a regulated environment [^src12].
+
+**Kythera Labs (healthcare)** — AI-native healthcare strategy platform built on Databricks that processes 339 billion medical/prescription drug claims (300M patients, 8 years, 3+ petabytes) [^src13]. Claims data is transformed from billing exhaust into event-based structures where a knee replacement is "a surgical event with a pre-operative history, a discharge, and a post-operative care trajectory" — the translation work that makes AI answers trustworthy [^src13]. A Louisiana health system went from contract to first insight in 10 days, achieving 150% increased patient-encounter visibility and $3.8M estimated annualized value from retained encounters [^src13].
+
 ## Related
 
 - [Cloud Data Warehouse Internals](/data-engineering/cloud-data-warehouse-internals.md) — Photon vs Dremel/Snowflake/Redshift compared
@@ -223,6 +298,7 @@ Study guidance [^src10]: allocate 15–20 hours (~60% lecture/labs + 40% practic
 - [DuckDB](/data-engineering/duckdb.md) — reads Liquid-Clustered output
 - [Snowflake](/data-engineering/snowflake.md) — competing cloud OLAP platform; lakehouse rivalry
 - [Apache Spark](/data-engineering/apache-spark.md) — the processing engine at Databricks' core
+- [Serverless Databases](/data-engineering/serverless-databases.md) — Lakebase, serverless PostgreSQL, compute-storage decoupling for OLTP
 
 [^src1]: [When (and when not) to use Databricks](../../raw/email/email-2026-05-25-when-and-when-not-to-use-databricks.md)
 [^src2]: [Debunking 8 data layout myths: why Liquid Clustering outperforms partitioning](../../raw/web/debunking-8-data-layout-myths-why-liquid-clustering-outperfo.md)
@@ -234,3 +310,9 @@ Study guidance [^src10]: allocate 15–20 hours (~60% lecture/labs + 40% practic
 [^src8]: [The internal of BigQuery, Snowflake, Databricks and Redshift (Vu Trinh)](../../raw/email/email-2025-04-17-the-internal-of-bigquery-snowflake-databricks-and-redshift.md)
 [^src9]: [Databricks Tutorial | Databricks Free Edition End-to-End (codebasics)](../../raw/youtube/youtube-761SQ9Hxbic-databricks-tutorial-databricks-free-edition-tutorial-with-en.md)
 [^src10]: [Databricks Data Engineer Associate Certification Course – Pass the Exam! (Andrew Brown / freeCodeCamp)](../../raw/youtube/youtube-0Hd5vYqin7w-databricks-data-engineer-associate-certification-course-pass.md)
+[^src11]: [How Daikin Applied Americas builds consistent data pipelines at scale with Genie Code](../../raw/web/web-how-daikin-applied-americas-builds-consistent-data-pipelines-1bb3ddbe.md)
+[^src11b]: [How Databricks is turning video into searchable, actionable intelligence](../../raw/web/web-how-databricks-is-turning-video-into-searchable-actionable-i-f044690d.md)
+[^src12]: [How the English Office for Students leverages Databricks to enhance higher education standards](../../raw/web/web-how-the-english-office-for-students-leverages-databricks-to-8fc137c4.md)
+[^src13]: [What if the answer was already in your data? (Kythera Labs)](../../raw/web/web-what-if-the-answer-was-already-in-your-data-5e70850d.md)
+[^src14]: [The Rise of Sports Intelligence: How the Lakehouse Turns Tracking Data into Competitive Advantage](../../raw/web/web-the-rise-of-sports-intelligence-how-the-lakehouse-turns-trac-3c304692.md)
+[^src15]: [What To Look For in a Serverless Database for AI Applications](../../raw/web/web-what-to-look-for-in-a-serverless-database-for-ai-application-8e1ddee7.md)

@@ -21,6 +21,9 @@ sources:
   - path: raw/youtube/youtube-9GVqKuTVANE-sql-data-warehouse-from-scratch-full-hands-on-data-engineeri.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/web/web-from-test-bench-to-lakehouse-how-avl-modernizes-measurement-7ce88761.md
+    channel: web
+    ingested_at: 2026-07-06
 aliases:
   - medallion
   - bronze silver gold
@@ -30,7 +33,7 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-11
-updated: 2026-06-25
+updated: 2026-07-06
 ---
 
 # Medallion Architecture
@@ -127,9 +130,30 @@ Medallion is described as "the favorite" by practitioners at companies like Merc
 - The confusion is *not* pedantic bikeshedding; it reflects a genuine gap in data-modeling knowledge among data engineers who over-focus on pipelines (moving data A→B) [^src1].
 - "Is medallion truly an *architecture*?" is a separate debate the source declines; the practical point stands regardless [^src1].
 
+## Medallion in production: time-series sensor data (AVL / Impulse)
+
+**AVL's Lakehouse for Measurement Data** demonstrates medallion applied to automotive test data — a domain where data traditionally stayed in siloed desktop tools (NI DIAdem, MATLAB) disconnected from enterprise governance [^src7]. The architecture follows medallion with Unity Catalog across all layers and Databricks Workflows for orchestration [^src7]:
+
+| Layer | Contents | Tools |
+|---|---|---|
+| **Bronze** | Raw MDF4 measurement files (binary ASAM format); contextual metadata (vehicle IDs, software versions, project tags) | Databricks Solution Accelerator + AVL Concerto integration |
+| **Silver** | Hierarchical data model: containers (individual files) + channels (sensor signals), each enriched with container-level and channel-level attributes/metrics; validated by Databricks DQX framework | Impulse library (Databricks Labs) |
+| **Gold** | Star schema for reporting, ad-hoc DataFrames for exploration, feature matrices for ML | SQL Warehouses, Databricks Dashboards, MLflow |
+
+**Impulse** is the Python analytics library (Databricks Labs) that translates declarative analysis logic into distributed Spark execution via the **Time Series Analytics Language (TSAL)** [^src7]. TSAL expressions are composable: virtual channels (e.g. temperature imbalance = max - min cell temp), boolean event conditions (e.g. cell temp > 60°C OR temp variation > 5°C), and aggregations (e.g. duration-weighted histogram) can all reference each other. Two method calls trigger distributed computation across all matching recordings and persist to Gold [^src7].
+
+Impulse supports three usage modes on the same TSAL query engine [^src7]:
+- **Structured reporting**: events and aggregations executed in parallel across all recordings → Gold-layer star schema → dashboards
+- **Ad-hoc**: TSAL evaluated → Spark DataFrames for notebook exploration (no Gold write)
+- **ML mode**: event-scoped statistics and histogram distributions extracted as flat feature matrices → MLflow / AutoML
+
+The medallion framing is also operationalized for AI-assisted pipeline generation at Daikin Applied Americas, where Bronze/Silver/Gold become explicit decision boundaries with checkpoints enforced during Genie Code execution — not just naming conventions [^src8].
+
 [^src1]: [Medallion Architecture is NOT a Data Model](../../raw/email/email-2025-09-08-medallion-architecture-is-not-a-data-model.md)
 [^src2]: [Data Identity Politics and The Kimball vs. Inmon War](../../raw/web/data-identity-politics-and-the-kimball-vs-inmon-war.md)
 [^src3]: [The Medallion Data Architecture (Pros & Cons) (KahanDataSolutions)](../../raw/email/email-2025-11-20-the-medallion-data-architecture-pros-cons.md)
 [^src4]: [Understanding the "T" in ETL: A Back-to-Basics Guide to Data Transformations](../../raw/email/email-2025-04-16-understanding-the-t-in-etl-a-back-to-basics-guide-to-data-tr.md)
 [^src5]: [SQL to dbt Guide — How Data Layers Flow with Medallion Architecture](../../raw/web/web-sql-to-dbt-guide-how-data-layers-flow-with-medallion-archite.md) — Alejandro Aboy, Pipeline to Insights
 [^src6]: [SQL Data Warehouse from Scratch | Full Hands-On Data Engineering Project (Data with Baraa)](../../raw/youtube/youtube-9GVqKuTVANE-sql-data-warehouse-from-scratch-full-hands-on-data-engineeri.md)
+[^src7]: [From test bench to lakehouse: how AVL modernizes measurement data analytics with Impulse](../../raw/web/web-from-test-bench-to-lakehouse-how-avl-modernizes-measurement-7ce88761.md)
+[^src8]: [How Daikin Applied Americas builds consistent data pipelines at scale with Genie Code](../../raw/web/web-how-daikin-applied-americas-builds-consistent-data-pipelines-1bb3ddbe.md)

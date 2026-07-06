@@ -48,6 +48,12 @@ sources:
   - path: raw/web/web-comprehension-debt-the-hidden-cost-of-ai-generated-code.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/_inbox/web-a-quote-from-timothy-b-lee-ef10a2fd.md
+    channel: web
+    ingested_at: 2026-07-06
+  - path: raw/_inbox/web-a-quote-from-charity-majors-e9a95537.md
+    channel: web
+    ingested_at: 2026-07-06
 aliases:
   - vibe coding
   - vibe-coding
@@ -58,9 +64,9 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-15
-updated: 2026-06-24
+updated: 2026-07-06
 confidence: 0.8
-last_confirmed: 2026-06-17
+last_confirmed: 2026-07-06
 ---
 
 # Vibe Coding (and why Spec-Driven Development supersedes it)
@@ -97,6 +103,16 @@ The discipline that keeps the 70% from becoming 50% [^src7]:
 ## Human 30%: durable skills by seniority
 
 The skills AI cannot substitute for, organized by career stage [^src8]:
+
+## Practitioner assessments of LLM skill curves
+
+Two widely-circulated quotes capture the emerging consensus among practitioners on what changes and what doesn't:
+
+**"There is no learning curve"** is the claim Timothy B. Lee challenged: "This is like saying there's no learning curve to being a manager because your employees will just do whatever you tell them to do" [^src16]. The analogy is exact — both managers and LLM operators must translate vague goals into clear instructions, handle misunderstandings, and recognize when output diverges from intent.
+
+**The economics of code production were turned upside down** in 2025, per Charity Majors: "Instead of being very hard, time-consuming, and expensive to generate code, it became effectively free and instant. Lines of code went from being treasured, reused, cared for and carefully curated, to being disposable and regenerable, practically overnight" [^src17]. Her conclusion — from an essay titled "AI demands more engineering discipline. Not less." — is that this inversion *raises* the bar on engineering judgment (architecture, testing, review), not lowers it.
+
+These two quotes address different sides of the same shift: the skill of *directing* LLMs is real and non-trivial (Lee); and the disposability of generated code changes what engineering mastery looks like (Majors). Both point away from the naive vibe-coding frame and toward the SDD discipline.
 
 **Senior**: architect-and-editor role (the human frames the architecture, the agent fills it in); Chat-Oriented Programming (CHOP — Steve Yegge's term for prompt-refinement-as-coding); mentoring and domain mastery; leadership and system-level judgment.
 
@@ -206,6 +222,8 @@ The practical implication for the vibe-coding workflow: the permissive "just bui
 [^src13]: [AI Writes Code Faster. Your Job Is Still to Prove It Works.](../../raw/web/web-ai-writes-code-faster-your-job-is-still-to-prove-it-works.md) — Addy Osmani, addyosmani.com
 [^src14]: [Local AI coding: compliance and performance report](../../raw/notes/notes-local-ai-coding-report.md) — notes report
 [^src15]: [Comprehension Debt — The Hidden Cost of AI-Generated Code](../../raw/web/web-comprehension-debt-the-hidden-cost-of-ai-generated-code.md) — Addy Osmani, addyosmani.com (March 2026)
+[^src16]: [A quote from Timothy B. Lee](../../raw/_inbox/web-a-quote-from-timothy-b-lee-ef10a2fd.md) — via Simon Willison, 26 Jun 2026
+[^src17]: [A quote from Charity Majors](../../raw/_inbox/web-a-quote-from-charity-majors-e9a95537.md) — via Simon Willison, 17 Jun 2026; from "AI demands more engineering discipline. Not less."
 
 ## Comprehension debt — the hidden cost of AI-generated code
 

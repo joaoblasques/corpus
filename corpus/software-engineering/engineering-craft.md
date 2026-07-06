@@ -21,6 +21,15 @@ sources:
   - path: raw/web/web-from-failure-to-aws-what-actually-makes-a-great-engineer-e79c203f.md
     channel: web
     ingested_at: 2026-07-01
+  - path: raw/web/web-how-to-create-a-software-engineer-portfolio-in-2026-3585cdf1.md
+    channel: web
+    ingested_at: 2026-07-06
+  - path: raw/web/web-top-7-tips-tricks-to-improve-your-coding-skills-today-5f90fcc2.md
+    channel: web
+    ingested_at: 2026-07-06
+  - path: raw/web/web-how-to-create-a-productive-developer-environment-for-saas-b839e28f.md
+    channel: web
+    ingested_at: 2026-07-06
 aliases:
   - engineering craft
   - resourceful engineer
@@ -31,11 +40,13 @@ aliases:
   - mutual amplification
   - adversarial mentor
   - senior engineer
+  - software engineer portfolio
+  - developer environment
 tags:
   - corpus/software-engineering
   - concept
 created: 2026-06-12
-updated: 2026-07-01
+updated: 2026-07-06
 ---
 
 # Engineering Craft
@@ -113,10 +124,60 @@ Key lessons from the interview:
 
 The Software Engineer's Guidebook by Gergely Orosz (Pragmatic Engineer) frames career growth as the engineer's responsibility to own, not the manager's job to deliver [^src4]. Key observations: at Big Tech (Google L5, Meta E5), senior expectations are noticeably higher than at lower-tier companies — "it's not always those who work hardest or deliver the highest quality work who are awarded the biggest promotions" [^src4]. The book's structure mirrors the maturity ladder: competent developer → well-rounded senior → pragmatic tech lead → staff/principal. See [The Software Engineer's Guidebook](/software-engineering/sources/software-engineers-guidebook.md) for the full source summary.
 
+## Portfolio: making skills visible
+
+A software engineering portfolio is a personal website showcasing significant projects and serving as tangible evidence of skills — "87% of hiring managers consider portfolios more valuable than resumes when evaluating technical skills" [^src7]. Key advantage: not every candidate has one, so having one creates a distinct edge; also accessible 24/7 without active job hunting [^src7].
+
+**Structure of an effective portfolio** [^src7]:
+- Bio + "About Me" (background, specialties, some personality — not generic AI text)
+- Top 3–5 projects with: brief description, technologies, your specific role, challenges overcome, screenshot/demo, links to live site and source repo
+- Skills section organized by category (front-end, back-end, databases)
+- Links to GitHub, LinkedIn, technical blog
+- Easy navigation and a contact form
+
+**Hosting options** (in ascending complexity) [^src7]: GitHub Pages / Netlify (free, Git-integrated, best for static sites) → website builders (Wix, Squarespace, no-code, limited customization) → personal domain with self-hosted site (demonstrates DevOps skills, most control) → cloud providers (AWS/GCP/Azure — overkill for a simple portfolio).
+
+**Maintenance discipline**: treat as a living document — add projects as they complete, update skills as acquired; even small monthly updates signal ongoing growth [^src7].
+
+## Practical skill-building habits
+
+From a practitioner survey of effective coding improvement strategies [^src8]:
+
+**Common barriers**: information overload from too many frameworks, lack of real-world application (tutorials create an "illusion of mastery"), inconsistent practice [^src8].
+
+**High-signal habits** [^src8]:
+- Build real projects — real learning happens through hands-on application, not tutorials
+- Observe open-source projects without contributing: review PRs, monitor commits, follow issue discussions, and set up the dev environment locally to get familiar with project structure
+- Deconstruct websites you admire: use DevTools to inspect HTML/CSS/JS, study API calls in the Network tab, then recreate features incrementally
+- Build custom debugging tools — a simple function-timing script surfaces bottlenecks and deepens understanding of runtime behavior
+- Consistent short sessions beat irregular long ones; 10 minutes daily > 2-hour weekend sprint
+
+**Psychological dimension** [^src8]: imposter syndrome and self-comparison are structural hazards. Reframe failure as puzzle pieces revealing how something works; review past work regularly to see tangible progression; avoid comparison to idealized peers (the "learned in months at age 19" stories).
+
+## Developer environment setup (SaaS context)
+
+Physical + digital environment as a "holistic ecosystem" — both constrain developer productivity [^src9].
+
+**Physical**: ergonomic chairs/desks (reduces back strain → productivity loss), dual monitors (described as "a no-brainer"), noise-canceling headphones or quiet zones for focus work, natural or quality artificial lighting [^src9].
+
+**Digital**: fast hardware (slow machines are a productivity constant); separate dev/staging/production environments; version control (Git); IDE optimization (shortcuts, plugins, themes — "small tweaks add up to significant time savings"); good documentation tooling [^src9].
+
+**Workflow practices** that compound productivity [^src9]:
+- Agile (Scrum/Kanban) embraced as mindset, not just ceremony
+- CI/CD automation — see [CI/CD](/software-engineering/ci-cd.md)
+- Code reviews for knowledge sharing, not just bug finding
+- TDD — counter-intuitive upfront, better design and fewer bugs overall
+- Pair programming — not only juniors-with-seniors; cross-team knowledge spreading
+- Regular refactoring ("clean your house a little bit every day")
+- Feature flags for gradual rollouts and A/B testing without deployment risk
+
+**Communication norms** [^src9]: asynchronous by default; "no-meeting Wednesdays" for uninterrupted focus; "Do Not Disturb" modes respected; not all decisions need synchronous resolution.
+
 ## See also
 
 - [AI-Assisted Development](/software-engineering/ai-assisted-development.md) — why fundamentals and human judgment matter more, not less, under AI
 - [Cognitive Debt and Cognitive Surrender](/software-engineering/cognitive-debt.md) — the erosion-of-understanding failure mode these learning loops guard against
+- [CI/CD](/software-engineering/ci-cd.md) — pipeline automation that directly supports the developer environment practices above
 - [The Software Engineer's Guidebook](/software-engineering/sources/software-engineers-guidebook.md) — Orosz's full career arc reference
 - [Software Engineering hub](/software-engineering/README.md)
 
@@ -128,3 +189,6 @@ The Software Engineer's Guidebook by Gergely Orosz (Pragmatic Engineer) frames c
 [^src4]: [The Software Engineer's Guidebook v1.08 (Gergely Orosz)](../../raw/pdf/pdf-the-software-engineers-guidebook-v1-08-pdf.md)
 [^src5]: [How to 10x the 100x Claude Engineer (Data Engineering Central)](../../raw/web/web-how-to-10x-the-100x-claude-engineer-bdabdf44.md)
 [^src6]: [From Failure to AWS: What Actually Makes a Great Engineer (Victor Moreno interview)](../../raw/web/web-from-failure-to-aws-what-actually-makes-a-great-engineer-e79c203f.md)
+[^src7]: [How to Create a Software Engineer Portfolio in 2026](../../raw/web/web-how-to-create-a-software-engineer-portfolio-in-2026-3585cdf1.md)
+[^src8]: [Top 7 Tips & Tricks To Improve Your Coding Skills Today](../../raw/web/web-top-7-tips-tricks-to-improve-your-coding-skills-today-5f90fcc2.md)
+[^src9]: [How To Create a Productive Developer Environment For SaaS](../../raw/web/web-how-to-create-a-productive-developer-environment-for-saas-b839e28f.md)

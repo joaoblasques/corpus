@@ -12,6 +12,12 @@ sources:
   - path: raw/email/email-2025-05-15-if-you-re-learning-kafka-this-article-is-for-you.md
     channel: email
     ingested_at: 2026-06-19
+  - path: raw/web/web-what-to-look-for-in-a-serverless-database-for-ai-application-8e1ddee7.md
+    channel: web
+    ingested_at: 2026-07-06
+  - path: raw/web/web-what-is-serverless-postgresql-3e7858c3.md
+    channel: web
+    ingested_at: 2026-07-06
 aliases:
   - compute-storage decoupling
   - compute storage separation
@@ -22,9 +28,9 @@ tags:
   - corpus/data-engineering
   - synthesis
 created: 2026-06-23
-updated: 2026-06-23
+updated: 2026-07-06
 confidence: 0.8
-last_confirmed: 2026-06-23
+last_confirmed: 2026-07-06
 ---
 
 # Compute–Storage Decoupling
@@ -49,6 +55,22 @@ The **lakehouse** combines a lake's raw-data flexibility with a warehouse's fast
 
 Streaming is the latest paradigm to make the move, and it is instructive *because Kafka historically did the opposite*. Kafka's page-cache design **tightly couples compute and storage** — you cannot scale them independently, and cross-AZ replication is expensive in the cloud [^src3]. The fixes all reach for object storage: **tiered storage** (recent data on broker disk, historical data in S3/GCS/HDFS), **object-storage-native Kafka** (WarpStream, AutoMQ, Bufstream, Redpanda) that runs **directly on object storage** and *eliminates replication* because object storage already guarantees durability, and Aiven's **KIP-1150 "Diskless Topics"** that delegate replication to object storage, targeting up to 80% infrastructure-cost cuts [^src3]. This is the warehouse story replayed a decade later for streams — see [Apache Kafka](/data-engineering/kafka.md) and [Stream Processing](/data-engineering/stream-processing.md).
 
+### OLTP databases — the newest convergence
+
+The most recent front of compute–storage decoupling is **transactional (OLTP) databases**. Traditional provisioned databases size around expected demand, but AI workloads are unpredictable: agents fan out queries without warning, pipelines sit idle during model development, then traffic surges. Modern serverless databases address this by fully decoupling compute from storage [^src4]:
+
+- **True scale-to-zero**: compute can drop to zero during idle periods; storage persists independently (data, replicas, backups, point-in-time recovery remain available whether compute is running or not) [^src4].
+- **Independent scaling**: compute scales vertically (more vCores), horizontally (more nodes), or both; storage grows separately [^src4].
+- **Cost model alignment**: a 2025 study found enterprises using serverless databases reported average cost reductions of **38% vs traditional provisioned databases** and potential savings of 40–65% for intermittent inference workloads; 65% reduction in infrastructure management tasks [^src4].
+
+The key architectural distinction: *not every product labeled "serverless" is architecturally serverless*. Some are autoscaling clusters with usage-based billing layered on top of a traditionally coupled system — limiting how far they can scale down, how independently each layer can grow, and how cost-efficient they can be at idle and peak extremes [^src4].
+
+**Serverless PostgreSQL** extends the pattern to the most widely adopted open relational database [^src5]. Compute provisions on demand, scales to zero when idle, and billing is usage-based rather than fixed-capacity. **Lakebase architecture** (Databricks Lakebase) goes further: it unifies transactional and analytical workloads on a shared data foundation, so operational data and analytics share the same storage layer — eliminating ETL pipelines between OLTP and analytical systems [^src5]. Neon and Databricks Lakebase are the leading implementations "built for the demands of AI-forward applications and agent-based systems" [^src5].
+
+The cold start trade-off is the same across streaming and databases: compute paused to zero requires reactivation latency (milliseconds to several seconds depending on provider) when a query arrives; latency-sensitive workloads maintain a non-zero compute floor [^src4][^src5].
+
+See [Serverless Databases](/data-engineering/serverless-databases.md) for the full concept (criteria, AI workload patterns, connection models, database branching).
+
 ## Why it matters
 
 - **Cost follows the same logic everywhere.** Once durable state is in object storage, the optimization problem becomes *minimizing reads of it* — caching (Snowflake), eliminating replication (diskless Kafka), pruning via partitions/row-groups (Parquet/Capacitor). Recognizing the shared pattern means a cost lever learned on one system **transfers** to the next [^src1].
@@ -63,6 +85,7 @@ Streaming is the latest paradigm to make the move, and it is instructive *becaus
 - [Stream Processing](/data-engineering/stream-processing.md) — the streaming paradigm context
 - [Apache Parquet](/data-engineering/parquet.md) · [Open Table Formats](/data-engineering/open-table-formats.md) — the file + metadata layers that live in object storage
 - [Data Lake / Lakehouse](/data-engineering/data-lake.md) — the lake/lakehouse abstraction
+- [Serverless Databases](/data-engineering/serverless-databases.md) — concept page: serverless OLTP decoupling, AI workload patterns, Lakebase
 - [Data Engineering hub](/data-engineering/README.md)
 
 ---
@@ -70,4 +93,6 @@ Streaming is the latest paradigm to make the move, and it is instructive *becaus
 [^src1]: [The internal of BigQuery, Snowflake, Databricks and Redshift (Vu Trinh)](../../raw/email/email-2025-04-17-the-internal-of-bigquery-snowflake-databricks-and-redshift.md)
 [^src2]: [Storage Fundamentals for Data Engineers](../../raw/email/email-2025-09-28-storage-fundamentals-for-data-engineers.md)
 [^src3]: [If you're learning Kafka, this article is for you (Vu Trinh)](../../raw/email/email-2025-05-15-if-you-re-learning-kafka-this-article-is-for-you.md)
+[^src4]: [What To Look For in a Serverless Database for AI Applications](../../raw/web/web-what-to-look-for-in-a-serverless-database-for-ai-application-8e1ddee7.md)
+[^src5]: [What Is Serverless PostgreSQL?](../../raw/web/web-what-is-serverless-postgresql-3e7858c3.md)
 </content>

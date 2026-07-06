@@ -198,6 +198,9 @@ sources:
   - path: raw/web/web-github-proteowizard-pwiz-ai-ai-tooling-and-documentation-for.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/_inbox/web-porting-the-moebius-0-2b-image-inpainting-model-to-run-in-th-71cb4d77.md
+    channel: web
+    ingested_at: 2026-07-06
 aliases:
   - Claude Code
   - claude-code
@@ -220,8 +223,8 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-06-12
-updated: 2026-06-25
-last_confirmed: 2026-06-25
+updated: 2026-07-06
+last_confirmed: 2026-07-06
 confidence: 0.95
 ---
 
@@ -1290,6 +1293,31 @@ The `shanraisshan/claude-code-best-practice` repo ("from vibe coding to agentic 
 
 Topics: `agentic-ai`, `agentic-coding`, `agentic-engineering`, `context-engineering`, `vibe-coding`. The repo itself is updated using Claude Code (badge shows last update time).
 
+## Parallel agent workflow: Moebius ML model port to browser
+
+Simon Willison's June 2026 writeup of porting the Moebius 0.2B image inpainting model to run in a browser demonstrates the parallel-agent pattern — running two coding agents simultaneously on different tasks [^src59].
+
+**The setup**: Willison was working on a large Datasette feature in Codex Desktop, with 5–10-minute wait times between agent completions. Rather than idle, he spun up Claude Code in a terminal to start a parallel project — porting Moebius (PyTorch + NVIDIA CUDA) to WebGPU via ONNX Runtime Web [^src59].
+
+**Research phase first**: before giving Claude Code any implementation task, Willison used Claude.ai to assess feasibility — cloning the repo, checking model weights, and asking Claude to "muse on the feasibility of porting it to Transformers.js or similar." Claude suggested using ONNX Runtime Web on the WebGPU backend. The feasibility notes were saved to `research.md` and committed for the coding agent to read [^src59].
+
+**Claude Code's actual role**: given the research context plus model weights (from Hugging Face), Claude Code:
+1. Converted the PyTorch model to ONNX format (using PyTorch's built-in `torch.onnx.export`)
+2. Built a browser-based WebGPU inference runtime
+3. Published 1.24GB of ONNX weights to Hugging Face (`huggingface.co/simonw/Moebius-ONNX`)
+4. Deployed the frontend to GitHub Pages
+5. Added CacheStorage API caching for the large model files (using a subagent to reverse-engineer how Whisper Web handles this)
+
+Willison describes this as "vibe coding" — "I didn't look at a single line of code from the project, restricting my input to testing, suggesting small feature improvements... and pointing the model in the direction of examples of how I wanted things to work" [^src59].
+
+**What this validates** [^src59]:
+- Claude Opus 4.8 can convert a PyTorch model to ONNX, publish to Hugging Face, and build a browser app that loads and runs the model
+- Chrome, Firefox, and Safari can all run ~200M parameter models via WebGPU
+- The CacheStorage API handles ~1.3GB model files — enabling client-only ML apps without a server
+- Using a subagent (`look in /tmp/Moebius/whisper-web with a subagent`) to examine obfuscated build artifacts preserved top-level context
+
+**The productivity pattern**: the parallel agent loop — one agent on the main project, another on a side project during wait time — compressed what would normally be sequentially blocked into concurrent value creation. The only coordination cost was occasional check-ins to review what Claude Code had done [^src59].
+
 [^src49]: [Anthropic's Claude for Legal — a suite of plugins for legal teams](../../raw/web/web-github-anthropics-claude-for-legal-a-suite-of-plugins-for-le.md) — Anthropic
 [^src50]: [Common workflows — Claude Code docs](../../raw/web/web-common-workflows-claude-code-docs.md) — Anthropic
 [^src51]: [Create custom subagents — Claude Code docs](../../raw/web/web-create-custom-subagents-claude-code-docs.md) — Anthropic
@@ -1300,3 +1328,4 @@ Topics: `agentic-ai`, `agentic-coding`, `agentic-engineering`, `context-engineer
 [^src56]: [Mastering Claude Code in 30 minutes](../../raw/youtube/youtube-6eBSHbLKuN0-mastering-claude-code-in-30-minutes.md) — Boris Cherny, Anthropic, YouTube
 [^src57]: [Agent SDK overview — Claude Code Docs](../../raw/web/web-agent-sdk-overview-claude-code-docs.md) — Anthropic
 [^src58]: [ProteoWizard/pwiz-ai — AI tooling and documentation for ProteoWizard/Skyline development](../../raw/web/web-github-proteowizard-pwiz-ai-ai-tooling-and-documentation-for.md) — ProteoWizard/Skyline, GitHub
+[^src59]: [Porting the Moebius 0.2B image inpainting model to run in the browser with Claude Code](../../raw/_inbox/web-porting-the-moebius-0-2b-image-inpainting-model-to-run-in-th-71cb4d77.md) — Simon Willison, simonwillison.net, 22 Jun 2026
