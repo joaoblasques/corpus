@@ -1,0 +1,34 @@
+# Standing arXiv queries → abstract stubs (channel: arxiv) → normal ingest.
+# One query per corpus domain that recurs in the corpus's actual interests + gap log.
+# arXiv search syntax: cat:<category>, abs:"phrase", ti:"phrase", AND/OR/ANDNOT.
+# Keep max_results modest — the nightly is bounded, and dedup makes re-runs cheap.
+feeds:
+  - name: llm-agents
+    query: 'cat:cs.AI AND (abs:"language model agent" OR abs:"LLM agent" OR abs:"agentic")'
+    domain: ai-engineering
+    max_results: 8
+
+  - name: rag-and-context
+    query: 'cat:cs.CL AND (abs:"retrieval-augmented" OR abs:"long context" OR abs:"context window")'
+    domain: ai-engineering
+    max_results: 8
+
+  - name: llm-systems-eval
+    query: 'cat:cs.LG AND (abs:"LLM evaluation" OR abs:"prompt" OR abs:"fine-tuning")'
+    domain: ai-engineering
+    max_results: 6
+
+  - name: data-systems
+    query: 'cat:cs.DB AND (abs:"data pipeline" OR abs:"query optimization" OR abs:"stream processing")'
+    domain: data-engineering
+    max_results: 6
+
+  - name: distributed-systems
+    query: 'cat:cs.DC AND (abs:"distributed" OR abs:"consensus" OR abs:"fault tolerance")'
+    domain: software-engineering
+    max_results: 6
+
+  - name: quant-trading
+    query: 'cat:q-fin.TR OR cat:q-fin.PM'
+    domain: trading
+    max_results: 6

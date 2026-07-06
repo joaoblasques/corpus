@@ -277,6 +277,30 @@ def run_collectors(
     except Exception as exc:  # noqa: BLE001
         results["books"] = {"status": "failed", "collected": 0, "error": str(exc)}
 
+    # --- arXiv (open-access papers → abstract stubs; the recurring high-signal feed) ---
+    try:
+        proc = _run(
+            [sys.executable, str(BIN / "arxiv_client.py"), "collect", "--max", "24"],
+            capture_output=True,
+            text=True,
+            timeout=COLLECTOR_TIMEOUT,
+        )
+        if proc.returncode != 0:
+            results["arxiv"] = {
+                "status": "failed",
+                "collected": 0,
+                "error": proc.stderr.strip() or f"exit {proc.returncode}",
+            }
+        else:
+            try:
+                data = json.loads(proc.stdout)
+                collected = data.get("papers", 0)
+            except (json.JSONDecodeError, AttributeError):
+                collected = 0
+            results["arxiv"] = {"status": "ok", "collected": collected}
+    except Exception as exc:  # noqa: BLE001
+        results["arxiv"] = {"status": "failed", "collected": 0, "error": str(exc)}
+
     # --- YouTube ---
     if not token_path.exists():
         results["youtube"] = {"status": "not configured", "collected": 0}
