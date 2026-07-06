@@ -94,6 +94,18 @@ def is_ingestable(path: Path) -> bool:
 
 
 _LABELS_RE = re.compile(r"^gmail_corpus_labels:\s*$", re.M)
+_BOOK_CHANNEL_RE = re.compile(r"^channel:\s*(?:book|pdf)\s*$", re.M)
+
+
+def is_book_source(path: Path) -> bool:
+    """True for book / book-scale-PDF chapter stubs (channel: book|pdf) — the highest-signal
+    channel. Prioritized in the nightly ingest ahead of the general web/youtube backlog so the
+    books-and-PDFs pivot (2026-07-06) actually drains books first instead of parking them at the
+    back of the oldest-first queue behind hundreds of low-value metadata stubs."""
+    try:
+        return bool(_BOOK_CHANNEL_RE.search(path.read_text(encoding="utf-8", errors="ignore")[:4000]))
+    except OSError:
+        return False
 
 
 def has_corpus_labels(path: Path) -> bool:
@@ -120,7 +132,9 @@ def select_candidates(inbox_dir=None, limit: int = 20) -> list[Path]:
         p for p in inbox.glob("*.md")
         if p.name != REVIEW_FILE and p.name not in deferred and is_ingestable(p)
     ]
-    files.sort(key=lambda p: (not has_corpus_labels(p), p.stat().st_mtime))
+    # Priority tiers (each oldest-first within tier): labeled emails (must drain to
+    # un-label+archive) → books/PDFs (highest signal, the 2026-07-06 pivot) → everything else.
+    files.sort(key=lambda p: (not has_corpus_labels(p), not is_book_source(p), p.stat().st_mtime))
     return files[:limit]
 
 

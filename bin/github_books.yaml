@@ -1,0 +1,21 @@
+# CC-licensed books authored openly on GitHub → chapter stubs (channel: book) → FULL ingest.
+# chapter_glob is matched against the repo root (sorted = spine order). Only add genuinely
+# free/redistributable (CC / author-sanctioned) books — never repos that re-host commercial books.
+books:
+  - name: mastering-bitcoin
+    title: "Mastering Bitcoin (3rd Edition)"
+    author: "Andreas M. Antonopoulos, David A. Harding"
+    repo: https://github.com/bitcoinbook/bitcoinbook
+    ref: develop
+    chapter_glob: "ch*.adoc"
+    license: "CC BY-SA 4.0"
+
+  - name: mastering-ethereum
+    title: "Mastering Ethereum"
+    author: "Andreas M. Antonopoulos, Gavin Wood"
+    repo: https://github.com/ethereumbook/ethereumbook
+    ref: develop
+    # repo is an mdBook (src/*.md); published 2018 so now under CC BY-SA 4.0 (past the
+    # initial 12-month CC BY-NC-ND window). chapter_*.md are the substantive chapters.
+    chapter_glob: "src/chapter_*.md"
+    license: "CC BY-SA 4.0"

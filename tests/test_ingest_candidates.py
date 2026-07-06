@@ -137,3 +137,27 @@ def test_select_candidates_prioritizes_labeled(tmp_path):
     out = [p.name for p in ic.select_candidates(inbox_dir=tmp_path, limit=10)]
     assert out[:2] == ["c-older-labeled.md", "b-new-labeled.md"]  # both labeled, oldest-first
     assert out[2] == "a-old-plain.md"                              # unlabeled last
+
+
+def test_book_sources_prioritized_over_older_backlog(tmp_path):
+    """Book/PDF chapter stubs ingest ahead of the older web/youtube backlog (books pivot),
+    but still behind label-collected emails."""
+    import ingest_candidates as ic
+    inbox = tmp_path / "_inbox"; inbox.mkdir()
+    # old general backlog (oldest mtimes)
+    for i in range(3):
+        f = inbox / f"web-old-{i}.md"
+        f.write_text("---\nchannel: web\n---\nbody", encoding="utf-8")
+    # a book chapter added NOW (newest mtime) — should still jump ahead of the web backlog
+    book = inbox / "book-mastering-bitcoin-01-intro.md"
+    book.write_text("---\nchannel: book\n---\nbody", encoding="utf-8")
+    pdf = inbox / "pdf-ostep-cpu-intro.md"
+    pdf.write_text("---\nchannel: pdf\n---\nbody", encoding="utf-8")
+    # a labeled email — highest priority
+    email = inbox / "email-labeled.md"
+    email.write_text("---\nchannel: email\ngmail_corpus_labels:\n---\nbody", encoding="utf-8")
+
+    picked = [p.name for p in ic.select_candidates(inbox_dir=inbox, limit=10)]
+    assert picked[0] == "email-labeled.md"                       # labels first
+    assert set(picked[1:3]) == {"book-mastering-bitcoin-01-intro.md", "pdf-ostep-cpu-intro.md"}
+    assert picked[3:] == ["web-old-0.md", "web-old-1.md", "web-old-2.md"]  # backlog last

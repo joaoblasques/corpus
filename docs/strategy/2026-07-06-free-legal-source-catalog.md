@@ -58,3 +58,16 @@
 2. **You (5 min each, form-gated)**: grab Spark Definitive Guide + Big Book of Data Engineering → drop in `CorpusInbox/PDFs/`.
 3. **Me (build)**: a `github-book` ingest path for the CC AsciiDoc books (Mastering Bitcoin/Ethereum, AOSA) — markdown ingest, no PDF extraction, highest fidelity.
 4. **Me (Phase 3)**: arXiv + OA-repository feed collectors for the recurring high-signal stream.
+
+---
+
+## Execution status (2026-07-06)
+- **Downloaded & queued** (CorpusInbox): d2l, mml-book, Intro to Statistical Learning, Brunton-Kutz,
+  Burns, + 68 OSTEP chapter PDFs. (ESL landing page is a JS redirect stub — left as a manual grab.)
+- **GitHub-book pipeline BUILT & RUN** (bin/collect_github_book.py + github_book_client.py +
+  github_books.yaml): Mastering Bitcoin (14 ch) + Mastering Ethereum (17 ch) collected as chapter
+  stubs. On-demand: `python3 bin/github_book_client.py collect`. AsciiDoc/Markdown → clean prose,
+  no PDF extraction. AOSA can be added to the config once its glob is verified.
+- **Ingest prioritization**: book/pdf channels now sort ahead of the general web/youtube backlog
+  (behind labeled email), so books drain first — they were landing at the back of the oldest-first
+  queue (position ~1067/1098). Now top of the queue.
