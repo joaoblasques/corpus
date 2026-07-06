@@ -330,7 +330,18 @@ def cmd_run(args) -> int:
                 break
             policy = pl["policy"]
             t["playlists"] += 1
-            for item in list_playlist_items(service, pl["id"]):
+            try:
+                items = list(list_playlist_items(service, pl["id"]))
+            except HttpError as e:
+                sc = getattr(getattr(e, "resp", None), "status", None)
+                if sc == 404:      # playlist deleted/renamed on YouTube — skip, don't abort
+                    t.setdefault("missing_playlists", []).append(pl["name"])
+                    continue
+                if sc in (403, 429, 503):
+                    stopped = "quota_or_rate_limit"
+                    break
+                raise
+            for item in items:
                 if args.max and processed >= args.max:
                     break
                 processed += 1
