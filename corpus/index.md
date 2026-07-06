@@ -10,6 +10,96 @@ This file is auto-maintained by Claude. Do not edit by hand.
 ## Domains
 
 ### ai-engineering
+- [I Turned Karpathy's Second Brain Into an AI Operating System](/ai-engineering/sources/i-turned-karpathy-s-second-brain-into-an-ai-operating-system-zmrPY6S1FwY.md) — source · stub · quick intake
+- [Google Just Dropped a Masterclass on Agentic Engineering (It's SO Good)](/ai-engineering/sources/google-just-dropped-a-masterclass-on-agentic-engineering-it--zbmuiaPuiNM.md) — source · stub · quick intake
+- [Data analyst vs data engineer in 2026 (Which Career Should You Choose?)](/ai-engineering/sources/data-analyst-vs-data-engineer-in-2026-which-career-should-yo-yxYaRKEghF4.md) — source · stub · quick intake
+- [He Turned $400 Into $2.5M Using AI (No Coding)](/ai-engineering/sources/he-turned-400-into-2-5m-using-ai-no-coding-y_ON1Qbb274.md) — source · stub · quick intake
+- [Lets Build An Agent from Scratch — Kam Lasater](/ai-engineering/sources/lets-build-an-agent-from-scratch-kam-lasater-xzXdLRUyjUg.md) — source · stub · quick intake
+- [What does if __name__ == '__main__' do in Python?](/ai-engineering/sources/what-does-if-name-main-do-in-python-x5IbdKnvt6k.md) — source · stub · quick intake
+- [Claude’s New Trading Agent Is Insane! (Tutorial)](/ai-engineering/sources/claude-s-new-trading-agent-is-insane-tutorial-x2pY9kI0zBY.md) — source · stub · quick intake
+- [Common Table Expressions vs Subqueries vs Views vs Temp Tables for data engineers](/ai-engineering/sources/common-table-expressions-vs-subqueries-vs-views-vs-temp-tabl-vstJyDo88kA.md) — source · stub · quick intake
+- [Airbnb Data Warehouse Schema - Data Engineering Mock Interview](/ai-engineering/sources/airbnb-data-warehouse-schema-data-engineering-mock-interview-vsBo2CzJHeY.md) — source · stub · quick intake
+- ["Harness Engineering: What Separates Top Agentic Engineers Right Now"](/ai-engineering/sources/harness-engineering-what-separates-top-agentic-engineers-rig-ulNsa0sD8N0.md) — source · stub · quick intake
+- [The Complete Data Architecture Explained - Building a Trading Robot Episode 2](/ai-engineering/sources/the-complete-data-architecture-explained-building-a-trading--uDZaz09gKv4.md) — source · stub · quick intake
+- [Your codebase is NOT ready for AI (here's how to fix it)](/ai-engineering/sources/your-codebase-is-not-ready-for-ai-here-s-how-to-fix-it-uC44zFz7JSM.md) — source · stub · quick intake
+- [The only AutoResearch tutorial you’ll ever need](/ai-engineering/sources/the-only-autoresearch-tutorial-you-ll-ever-need-uBWuKh1nZ2Y.md) — source · stub · quick intake
+- [Learn Databricks for FREE (Step-by-Step Guide)](/ai-engineering/sources/learn-databricks-for-free-step-by-step-guide-trJTgk8miw4.md) — source · stub · quick intake
+- ["Tokens can make you rich, just do this – Mario Zechner"](/ai-engineering/sources/tokens-can-make-you-rich-just-do-this-mario-zechner-sqtX2OmgOF0.md) — source · stub · quick intake
+- ["How I Use Claude Code with Gemma 4 (Local LLMs, No API Costs)"](/ai-engineering/sources/how-i-use-claude-code-with-gemma-4-local-llms-no-api-costs-sKNq4CqWkT4.md) — source · stub · quick intake
+- [9 Claude Code Plugins to Build 10x Faster](/ai-engineering/sources/9-claude-code-plugins-to-build-10x-faster-sBF3UumkL4Y.md) — source · stub · quick intake
+- [10 Money Myths That Keep You Broke](/ai-engineering/sources/10-money-myths-that-keep-you-broke-rTO0GofZJzA.md) — source · stub · quick intake
+- [FULL Claude Tutorial for Beginners in 2026! (Become a PRO!)](/ai-engineering/sources/full-claude-tutorial-for-beginners-in-2026-become-a-pro-rRrBbyv3ChM.md) — source · stub · quick intake
+- [5 Ways to Make Money From an AI the Government Fears](/ai-engineering/sources/5-ways-to-make-money-from-an-ai-the-government-fears-q_FIJmSB0Ro.md) — source · stub · quick intake
+- [I Took All 7 Anthropic Courses in One Weekend (Honest Review)](/ai-engineering/sources/i-took-all-7-anthropic-courses-in-one-weekend-honest-review-qUQbU7h4RoE.md) — source · stub · quick intake
+- [How Anthropic Engineers ACTUALLY Prompt Claude Code](/ai-engineering/sources/how-anthropic-engineers-actually-prompt-claude-code-qOvc9IUKEIc.md) — source · stub · quick intake
+- ["Build a Full-Stack GenAI Project in 4 Hours (FastAPI, React, Supabase)"](/ai-engineering/sources/build-a-full-stack-genai-project-in-4-hours-fastapi-react-su-qF5il_9IwME.md) — source · stub · quick intake
+- [Frontend is HARDER for AI than backend (here's how to fix it)](/ai-engineering/sources/frontend-is-harder-for-ai-than-backend-here-s-how-to-fix-it-pSritFeoYFo.md) — source · stub · quick intake
+- [Claude's 13 Free AI Courses in 12 Minutes](/ai-engineering/sources/claude-s-13-free-ai-courses-in-12-minutes-pG5Zd3sGOrY.md) — source · stub · quick intake
+- [Top Repos Explained](/ai-engineering/sources/top-repos-explained-pBnJdOJd550.md) — source · stub · quick intake
+- [Use Claude Better than 99% of People (BEGINNER to PRO in 20 mins)](/ai-engineering/sources/use-claude-better-than-99-of-people-beginner-to-pro-in-20-mi-nxY_QXB-hY8.md) — source · stub · quick intake
+- [Build & Sell with Claude Code (10+ Hour Course)](/ai-engineering/sources/build-sell-with-claude-code-10-hour-course-mpALXah_PBg.md) — source · stub · quick intake
+- ["Claude Fable 5 builds INSANE $10,000 Websites! (with 1 prompt)"](/ai-engineering/sources/claude-fable-5-builds-insane-10-000-websites-with-1-prompt-mokCv4xaPWM.md) — source · stub · quick intake
+- [How I use Claude Code (Meta Staff Engineer Tips)](/ai-engineering/sources/how-i-use-claude-code-meta-staff-engineer-tips-mZzhfPle9QU.md) — source · stub · quick intake
+- ["Harness Engineering Masterclass: Technical Deep Dive on how to build Agentic Systems"](/ai-engineering/sources/harness-engineering-masterclass-technical-deep-dive-on-how-t-mQfTdNVCOB0.md) — source · stub · quick intake
+- ["The Man Who Mastered AI: The New Way To Use AI Agents In Your Business & Life (The Truth About AI!)"](/ai-engineering/sources/the-man-who-mastered-ai-the-new-way-to-use-ai-agents-in-your-m16v8-Lnekc.md) — source · stub · quick intake
+- [5 Skills That'll Make You a $300K AI Engineer in 2026](/ai-engineering/sources/5-skills-that-ll-make-you-a-300k-ai-engineer-in-2026-lxYpYQ-v3is.md) — source · stub · quick intake
+- ["Data Modeling: One Big Table vs Kimball vs Relational for data engineers"](/ai-engineering/sources/data-modeling-one-big-table-vs-kimball-vs-relational-for-dat-ltQgbSs99WU.md) — source · stub · quick intake
+- [5 Things in Data Engineering That Still Hold True After 10 Years](/ai-engineering/sources/5-things-in-data-engineering-that-still-hold-true-after-10-y-lXvDqREYhI4.md) — source · stub · quick intake
+- [He Asked AI To Make Money. It Did.](/ai-engineering/sources/he-asked-ai-to-make-money-it-did-l0Vqm0ZIySc.md) — source · stub · quick intake
+- [I Built A Business With AI In 24 Hours](/ai-engineering/sources/i-built-a-business-with-ai-in-24-hours-ksRcFGLPoSk.md) — source · stub · quick intake
+- [My Favourite AI Workflow Nobody Talks About](/ai-engineering/sources/my-favourite-ai-workflow-nobody-talks-about-kKG5MDF_234.md) — source · stub · quick intake
+- [The Only Web Design Video You Will Ever Need](/ai-engineering/sources/the-only-web-design-video-you-will-ever-need-kEN4pp-UFf0.md) — source · stub · quick intake
+- [Google's New Release Just Fixed AI Systems](/ai-engineering/sources/google-s-new-release-just-fixed-ai-systems-k4sMSsMzX2g.md) — source · stub · quick intake
+- [Claude Just Changed Accounting Forever (Tutorial)](/ai-engineering/sources/claude-just-changed-accounting-forever-tutorial-jrnxOBOW6LQ.md) — source · stub · quick intake
+- [32 Tricks to Level Up Claude Code in 16 Mins](/ai-engineering/sources/32-tricks-to-level-up-claude-code-in-16-mins-jqoFP9QapXI.md) — source · stub · quick intake
+- [If you don’t run Pi locally you’re falling behind…](/ai-engineering/sources/if-you-don-t-run-pi-locally-you-re-falling-behind-jcUqsNpDDDk.md) — source · stub · quick intake
+- [Claude Code Just Changed YouTube Videos Forever (Tutorial)](/ai-engineering/sources/claude-code-just-changed-youtube-videos-forever-tutorial-idVMGLzrrnU.md) — source · stub · quick intake
+- [NEW Claude A.I. Side Hustle Nobody is Talking About](/ai-engineering/sources/new-claude-a-i-side-hustle-nobody-is-talking-about-iVNiNdNnmu0.md) — source · stub · quick intake
+- [I asked Claude Code to make me as much money as possible](/ai-engineering/sources/i-asked-claude-code-to-make-me-as-much-money-as-possible-iTY8Q449YNQ.md) — source · stub · quick intake
+- [The ONLY Data Analytics Portfolio You Need (get hired GUARANTEED)](/ai-engineering/sources/the-only-data-analytics-portfolio-you-need-get-hired-guarant-iNaDxZXc_Ao.md) — source · stub · quick intake
+- ["Self-Hosting Honcho: Free Local Memory for My Hermes Agent"](/ai-engineering/sources/self-hosting-honcho-free-local-memory-for-my-hermes-agent-i2KK85h0bYo.md) — source · stub · quick intake
+- [Common Data Pipeline Patterns You’ll See in the Real World - Types Of Data Pipelines You'll Build](/ai-engineering/sources/common-data-pipeline-patterns-you-ll-see-in-the-real-world-t-htAipJ6yYFs.md) — source · stub · quick intake
+- [How I would start as a Data Consultant - if I could press Restart](/ai-engineering/sources/how-i-would-start-as-a-data-consultant-if-i-could-press-rest-heirGGdGsOg.md) — source · stub · quick intake
+- ["Building a REAL feature with Claude Code: every step explained"](/ai-engineering/sources/building-a-real-feature-with-claude-code-every-step-explaine-hX7yG1KVYhI.md) — source · stub · quick intake
+- ["Automate The Best SILVER Trading Strategy (TradingView, China, Taiwan)"](/ai-engineering/sources/automate-the-best-silver-trading-strategy-tradingview-china--hVa9aShnCN0.md) — source · stub · quick intake
+- ["Claude Code for Beginners Tutorial [Full Course]"](/ai-engineering/sources/claude-code-for-beginners-tutorial-full-course-gh2_PhgZGsM.md) — source · stub · quick intake
+- ["Claude Code + Hermes Agent = $10,000 AI Agents"](/ai-engineering/sources/claude-code-hermes-agent-10-000-ai-agents-gYzlgK5Dw1s.md) — source · stub · quick intake
+- ["Data Modeling Tutorial: Star Schema (aka Kimball Approach)"](/ai-engineering/sources/data-modeling-tutorial-star-schema-aka-kimball-approach-gRE3E7VUzRU.md) — source · stub · quick intake
+- [Data Modeling - Walking Through How To Data Model As A Data Engineer - Dimensional Modeling 101](/ai-engineering/sources/data-modeling-walking-through-how-to-data-model-as-a-data-en-gG7upg6QaBI.md) — source · stub · quick intake
+- [Master All 6 Claude Code Dynamic Workflows](/ai-engineering/sources/master-all-6-claude-code-dynamic-workflows-g9b9G8dcS8Y.md) — source · stub · quick intake
+- [This Might Be the Easiest Way to Sell AI to Businesses](/ai-engineering/sources/this-might-be-the-easiest-way-to-sell-ai-to-businesses-g4-3AxelI_Y.md) — source · stub · quick intake
+- ["Google OKF: The Simple Folder That Gives AI Agents Your Entire Company Data"](/ai-engineering/sources/google-okf-the-simple-folder-that-gives-ai-agents-your-entir-fI7hZap7mZ4.md) — source · stub · quick intake
+- [Build an OKF brain like mine!](/ai-engineering/sources/build-an-okf-brain-like-mine-esYAIA6lU-s.md) — source · stub · quick intake
+- [Common Mistakes in Conceptual and Logical Data Modeling - Ellie.ai](/ai-engineering/sources/common-mistakes-in-conceptual-and-logical-data-modeling-elli-ehdtev4JwHg.md) — source · stub · quick intake
+- [Anthropic Just Dropped a Masterclass on Building Agent Harnesses (for Large Codebases)](/ai-engineering/sources/anthropic-just-dropped-a-masterclass-on-building-agent-harne-efRIrLXoOVA.md) — source · stub · quick intake
+- [Build a proactive agent workflow with Claude Code](/ai-engineering/sources/build-a-proactive-agent-workflow-with-claude-code-eSP7PLTXNy8.md) — source · stub · quick intake
+- [Firecrawl AI clearly explained (and how to make $$)](/ai-engineering/sources/firecrawl-ai-clearly-explained-and-how-to-make-eH8JdttKIdA.md) — source · stub · quick intake
+- [Building AI Agents that actually work (Full Course)](/ai-engineering/sources/building-ai-agents-that-actually-work-full-course-eA9Zf2-qYYM.md) — source · stub · quick intake
+- [Will AI Replace Data Jobs? (Data Engineers & Data Analysts)](/ai-engineering/sources/will-ai-replace-data-jobs-data-engineers-data-analysts-e3KQ8ziMp2o.md) — source · stub · quick intake
+- [Never Hit Your Claude Usage Limit Again (save money)](/ai-engineering/sources/never-hit-your-claude-usage-limit-again-save-money-e1k754hjeEE.md) — source · stub · quick intake
+- [How I Built a Trading Bot That Trades Automatically (Full Data Platform Overview)](/ai-engineering/sources/how-i-built-a-trading-bot-that-trades-automatically-full-dat-e-oUwZOXVbM.md) — source · stub · quick intake
+- [How to Build a Reusable Finance Workflow in Claude 2.0 (Full Tutorial)](/ai-engineering/sources/how-to-build-a-reusable-finance-workflow-in-claude-2-0-full--dTPndJ5VG_I.md) — source · stub · quick intake
+- [Як влаштовані Dynamic Workflows зсередини? Сотні AI-агентів працюють паралельно](/ai-engineering/sources/dynamic-workflows-ai-cbQ0QCK7ujc.md) — source · stub · quick intake
+- [Full Machine Learning Project — Coding a Fitness Tracker with Python (Part 1)](/ai-engineering/sources/full-machine-learning-project-coding-a-fitness-tracker-with--cCONIdrM2VI.md) — source · stub · quick intake
+- ["Ryan Lopopolo - Harness Engineering: How to Build Software When Humans Steer and Agents Execute"](/ai-engineering/sources/ryan-lopopolo-harness-engineering-how-to-build-software-when-c8bE0cj7vHY.md) — source · stub · quick intake
+- [The Skill That 10x’d My Claude Code Projects](/ai-engineering/sources/the-skill-that-10x-d-my-claude-code-projects-c0kaKxM2pHg.md) — source · stub · quick intake
+- [Claude Code Essentials](/ai-engineering/sources/claude-code-essentials-brLhhkUqcn4.md) — source · stub · quick intake
+- [What I Learned From 100+ Data Engineering Interviews - Interview Tips](/ai-engineering/sources/what-i-learned-from-100-data-engineering-interviews-intervie-bqCXVpRqTpE.md) — source · stub · quick intake
+- [A Philosophy of Software Design | John Ousterhout | Talks at Google](/ai-engineering/sources/a-philosophy-of-software-design-john-ousterhout-talks-at-goo-bmSAYlu0NcY.md) — source · stub · quick intake
+- ["Context Is the New Code — Patrick Debois, Tessl"](/ai-engineering/sources/context-is-the-new-code-patrick-debois-tessl-bSG9wUYaHWU.md) — source · stub · quick intake
+- [Power BI Data Modeling Crash Course Learn Fast and Build Smarter Models! Full Course](/ai-engineering/sources/power-bi-data-modeling-crash-course-learn-fast-and-build-sma-air7T8wCYkU.md) — source · stub · quick intake
+- [Fastest way to become an AI Engineer in 2026](/ai-engineering/sources/fastest-way-to-become-an-ai-engineer-in-2026-aPpvAYp0xDc.md) — source · stub · quick intake
+- ["NotebookLM Changed Completely: Here's What Matters (in 2026)"](/ai-engineering/sources/notebooklm-changed-completely-here-s-what-matters-in-2026-_uXnyhrqmsU.md) — source · stub · quick intake
+- [How to Never Hit Your Claude Session Limit Again](/ai-engineering/sources/how-to-never-hit-your-claude-session-limit-again-_qZvORxGqI0.md) — source · stub · quick intake
+- [Claude Code + Construction Drawings](/ai-engineering/sources/claude-code-construction-drawings-_k1jQBS4Nk8.md) — source · stub · quick intake
+- [I analyzed 373 AI startups selected by Y Combinator in 2026 (Build these with AI)](/ai-engineering/sources/i-analyzed-373-ai-startups-selected-by-y-combinator-in-2026--_Tb8IP_KRYQ.md) — source · stub · quick intake
+- [How to Become an AI Engineer Fast](/ai-engineering/sources/how-to-become-an-ai-engineer-fast-Zk9LxO_dB64.md) — source · stub · quick intake
+- [Every Level of Claude Explained in 21 Minutes](/ai-engineering/sources/every-level-of-claude-explained-in-21-minutes-ZRb7D6R64hM.md) — source · stub · quick intake
+- [How to Build Websites in 15 minutes Using Claude (no coding)](/ai-engineering/sources/how-to-build-websites-in-15-minutes-using-claude-no-coding-YAiCC9a6QVA.md) — source · stub · quick intake
+- [AI Web Scraping Is Insanely Good | Browserbase Full Tutorial](/ai-engineering/sources/ai-web-scraping-is-insanely-good-browserbase-full-tutorial-XTQTJoSfeMg.md) — source · stub · quick intake
+- [5 Claude AI Side Hustles That Pay More Than a 9–5](/ai-engineering/sources/5-claude-ai-side-hustles-that-pay-more-than-a-9-5-XRL9Pl9x2xk.md) — source · stub · quick intake
+- [The best way to create agent skills in 2026](/ai-engineering/sources/the-best-way-to-create-agent-skills-in-2026-XCOkCwgKwAA.md) — source · stub · quick intake
+- [Use Claude Code 100% FREE (2 Ways)](/ai-engineering/sources/use-claude-code-100-free-2-ways-WqHYZh22hVU.md) — source · stub · quick intake
 - ["API Discovery & Instructions :: LocalAI"](/ai-engineering/sources/api-discovery-instructions-localai-9e1faed6.md) — source · stub · ['LocalAI exposes discovery endpoints for external agents and automation tools to learn instance cap…
 - [A Tale of Two Models](/ai-engineering/sources/a-tale-of-two-models-ffdbb929.md) — source · stub · Anthropic launched two models, Fable 5 and Sonnet 5, with varying degrees of success. Fable 5 excell…
 - [Claude Code - Building Full-Stack App with 5 Sub-Agents](/ai-engineering/sources/claude-code-building-full-stack-app-with-5-sub-agents-ae.md) — source · stub · ['The document describes building a full-stack app using Claude Code with 5 sub-agents.', 'Each sub-…
@@ -439,6 +529,36 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [Hugging Face](/ai-engineering/hugging-face.md) — entity · draft · open-model hub; HF Jobs (on-demand GPU compute); hf CLI agent-optimized (6× token savings); Spaces agents.md; local model repo triage; agentic benchmarking; MosaicLeaks privacy; PyTorch profiling
 
 ### data-engineering
+- [Azure End-To-End Data Engineering Project for Beginners (FREE Account) | SQL DB Tutorial](/data-engineering/sources/azure-end-to-end-data-engineering-project-for-beginners-free-ygJ11fzq_ik.md) — source · stub · quick intake
+- [End-To-End Data Engineering Project in 40 Minutes | AWS Cloud | PySpark](/data-engineering/sources/end-to-end-data-engineering-project-in-40-minutes-aws-cloud--yIc5a7C8aHs.md) — source · stub · quick intake
+- [The ONLY Data Cleaning Framework You Need | Playbook Ep. 3](/data-engineering/sources/the-only-data-cleaning-framework-you-need-playbook-ep-3-y9wFFD2bXQM.md) — source · stub · quick intake
+- ["Databricks End-To-End Project | Zero-To-Expert | Streaming, AI, Lakeflow, Unity Catalog, AI/BI"](/data-engineering/sources/databricks-end-to-end-project-zero-to-expert-streaming-ai-la-vy4G86q1rQY.md) — source · stub · quick intake
+- [Create a Standout Project Write-Up | Data Analyst Insights](/data-engineering/sources/create-a-standout-project-write-up-data-analyst-insights-vgZuTpOj9fE.md) — source · stub · quick intake
+- [Every Data Structure Simply Explained in 25 Minutes!](/data-engineering/sources/every-data-structure-simply-explained-in-25-minutes-vVL6NFzr0Rg.md) — source · stub · quick intake
+- [The Medallion Architecture Most Teams Get Wrong (And What It Costs)](/data-engineering/sources/the-medallion-architecture-most-teams-get-wrong-and-what-it--uNtMetMNVgw.md) — source · stub · quick intake
+- [Learn MLOps with MLflow and Databricks – Full Course for Machine Learning Engineers](/data-engineering/sources/learn-mlops-with-mlflow-and-databricks-full-course-for-machi-tVskbekONlw.md) — source · stub · quick intake
+- [Data Engineering System Design Made Easy](/data-engineering/sources/data-engineering-system-design-made-easy-t1E4qAVMdqw.md) — source · stub · quick intake
+- [Introduction to Big Data Architecture](/data-engineering/sources/introduction-to-big-data-architecture-rvqCqK2Lpjg.md) — source · stub · quick intake
+- [How Data Engineering Works](/data-engineering/sources/how-data-engineering-works-qWru-b6m030.md) — source · stub · quick intake
+- ["Databricks AI Dev Kit + Claude Code: Vibe Coding"](/data-engineering/sources/databricks-ai-dev-kit-claude-code-vibe-coding-q7vwfBbx9Wk.md) — source · stub · quick intake
+- ["Data Engineer Bootcamp (FREE 27+ Hour Course) - SQL, Python, Cloud, Bash, AI, Git & GitHub"](/data-engineering/sources/data-engineer-bootcamp-free-27-hour-course-sql-python-cloud--ol9_NnC9-cc.md) — source · stub · quick intake
+- [Databricks Full Course for Beginners (2 Hours) - Declarative Pipelines & Lakeflow Designer](/data-engineering/sources/databricks-full-course-for-beginners-2-hours-declarative-pip-nrfP2_frM5k.md) — source · stub · quick intake
+- [How To Structure Terraform Project (3 Levels)](/data-engineering/sources/how-to-structure-terraform-project-3-levels-nMVXs8VnrF4.md) — source · stub · quick intake
+- [Intuitive SQL For Data Analytics - Tutorial](/data-engineering/sources/intuitive-sql-for-data-analytics-tutorial-mXW7JHJM34k.md) — source · stub · quick intake
+- [How to Undo Mistakes With Git Using the Command Line](/data-engineering/sources/how-to-undo-mistakes-with-git-using-the-command-line-lX9hsdsAeTk.md) — source · stub · quick intake
+- [Fundamentals Of Data Engineering Masterclass](/data-engineering/sources/fundamentals-of-data-engineering-masterclass-hf2go3E2m8g.md) — source · stub · quick intake
+- ["Build an End to End Data Pipeline on AWS | AWS Lambda, S3 Bucket, EventBridge Trigger , Marvel Data"](/data-engineering/sources/build-an-end-to-end-data-pipeline-on-aws-aws-lambda-s3-bucke-goSGk2VwVcM.md) — source · stub · quick intake
+- [Databricks End-To-End Project 2026 | Zero-To-Hero](/data-engineering/sources/databricks-end-to-end-project-2026-zero-to-hero-gFAnlTM-3Zo.md) — source · stub · quick intake
+- [VS Code Agent Mode Just Changed Everything](/data-engineering/sources/vs-code-agent-mode-just-changed-everything-dutyOc_cAEU.md) — source · stub · quick intake
+- [16 Cool GitHub Repos You WILL Use (no pressure)](/data-engineering/sources/16-cool-github-repos-you-will-use-no-pressure-cgOPg5cCr2g.md) — source · stub · quick intake
+- [Programming Is NOT Enough | Add these 5 skills…](/data-engineering/sources/programming-is-not-enough-add-these-5-skills-bZa2uicOTAE.md) — source · stub · quick intake
+- [DataOps  – The Foundation for Your Agile Data Architecture](/data-engineering/sources/dataops-the-foundation-for-your-agile-data-architecture-_fzZnPW-yjM.md) — source · stub · quick intake
+- [Build Real-World Data Projects That Match Your Target Job Requirements!](/data-engineering/sources/build-real-world-data-projects-that-match-your-target-job-re-_bTKFoxo1ls.md) — source · stub · quick intake
+- [You must learn Databricks in 2026 - The DataExpert.io Roadmap](/data-engineering/sources/you-must-learn-databricks-in-2026-the-dataexpert-io-roadmap-_Y17ST_VwKk.md) — source · stub · quick intake
+- [🧹Watch me CLEAN DATA in Minutes with Python (+10 Tips for Complex Datasets)](/data-engineering/sources/watch-me-clean-data-in-minutes-with-python-10-tips-for-compl-Y_s3hndYbB0.md) — source · stub · quick intake
+- [End-to-End ETL Pipeline in Azure Databricks | Tutorial](/data-engineering/sources/end-to-end-etl-pipeline-in-azure-databricks-tutorial-XxKgYc10Wtg.md) — source · stub · quick intake
+- [🚖 Uber Data Analytics | End-To-End Data Engineering Project](/data-engineering/sources/uber-data-analytics-end-to-end-data-engineering-project-WpQECq5Hx9g.md) — source · stub · quick intake
+- [SQL Full Course for Beginners (30 Hours) – From Zero to Hero](/data-engineering/sources/sql-full-course-for-beginners-30-hours-from-zero-to-hero-SSKVgrwhzus.md) — source · stub · quick intake
 - [Caroline Peika | Databricks](/data-engineering/sources/caroline-peika-databricks-44c5fbcd.md) — source · stub · ['Caroline Peika is a Data & AI executive with 15+ years of experience building and scaling machine …
 - [Arianna Gentile | Databricks](/data-engineering/sources/arianna-gentile-databricks-4f0f16ea.md) — source · stub · ['Arianna Gentile is a Senior Data Engineer at Data Reply Italy, designing cloud-native data platfor…
 - ["AWS Data Lake with S3, Glue & Athena"](/data-engineering/sources/aws-data-lake-with-s3-glue-athena-aea.md) — source · stub · ['This document covers building a basic data lake on AWS using S3, Glue, and Athena.', 'It demonstra…
@@ -615,6 +735,9 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [dbt Summit 2026 — Speakers & Training](/data-engineering/sources/dbt-summit-2026-speakers.md) — source · draft · Tristan Handy (Fivetran+dbt Labs, 100K+ teams), Quigley Malcolm (MetricFlow/OSI), 6 training courses
 
 ### software-engineering
+- [From 0 to IDE in NEOVIM from scratch | FREE COURSE // EP 1](/software-engineering/sources/from-0-to-ide-in-neovim-from-scratch-free-course-ep-1-zHTeCSVAFNY.md) — source · stub · quick intake
+- [Why I Love Using Vim To Write Code](/software-engineering/sources/why-i-love-using-vim-to-write-code-o4X8GU7CCSU.md) — source · stub · quick intake
+- [The best TUIs - powerful terminal apps](/software-engineering/sources/the-best-tuis-powerful-terminal-apps-_fLmA4fjiAE.md) — source · stub · quick intake
 - [Career - 5 Boring Certifications for Tech Career Growth](/software-engineering/sources/career-5-boring-certifications-for-tech-career-growth-doc.md) — source · stub · The document discusses 5 certifications for tech career growth, highlighting their cost, work opport…
 - [Bass - 10 Basslines That Teach Scales](/software-engineering/sources/bass-10-basslines-that-teach-scales-cae.md) — source · stub · ['The document covers learning iconic basslines and understanding the scales they demonstrate.', 'It…
 - [How to NOT Fail a System Design Interview (By a Data Engineer)](/software-engineering/sources/how-to-not-fail-a-system-design-interview-by-a-data-engineer-WQBc2mY9Jng.md) — source · stub · The video covers system design interview preparation, focusing on application and data pipeline desi…
@@ -789,6 +912,25 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [Tokenmaxxing and AI Fake Productivity](/productivity/tokenmaxxing.md) — concept · draft · tokenmaxxing defined (Joe Reis), centaur vs reverse centaur, AI hamster wheel, token junkies
 
 ### ai-business
+- [Master Prompt Engineering (Full Guide)](/ai-business/sources/master-prompt-engineering-full-guide-ydjRYmM19DY.md) — source · stub · quick intake
+- ["How to Make Professional Logos Using AI ($34,901/Month)"](/ai-business/sources/how-to-make-professional-logos-using-ai-34-901-month-uffB2onuZsU.md) — source · stub · quick intake
+- [AI agents making money on their own? The future is already here](/ai-business/sources/ai-agents-making-money-on-their-own-the-future-is-already-he-sHZ5qCoEDtg.md) — source · stub · quick intake
+- [How to do FREE Etsy Niche and Keyword Research (NO PAID TOOLS)](/ai-business/sources/how-to-do-free-etsy-niche-and-keyword-research-no-paid-tools-qti661Wuso4.md) — source · stub · quick intake
+- [The Actual Easiest AI Side Hustle of 2026 ($307K+)](/ai-business/sources/the-actual-easiest-ai-side-hustle-of-2026-307k-pjzWx7CxWog.md) — source · stub · quick intake
+- [Deleted video](/ai-business/sources/deleted-video-oWH71VUACZ0.md) — source · stub · quick intake
+- [This Boring Website Earns $6M/Year. Here's How to Clone it (No Coding!).](/ai-business/sources/this-boring-website-earns-6m-year-here-s-how-to-clone-it-no--nQOGK72IHx8.md) — source · stub · quick intake
+- [I Made 700 Monetizable YouTube Shorts for Faceless Channel in 18 MINUTES using AI Automation](/ai-business/sources/i-made-700-monetizable-youtube-shorts-for-faceless-channel-i-lqXWVzWkkyc.md) — source · stub · quick intake
+- ["If I Wanted to Become AI Millionaire In 2026, This is What I'd Do [FULL BLUEPRINT]"](/ai-business/sources/if-i-wanted-to-become-ai-millionaire-in-2026-this-is-what-i--jxOsPBXYKzE.md) — source · stub · quick intake
+- [DRIP - SEE your ACTUAL profits & know your REAL passive income](/ai-business/sources/drip-see-your-actual-profits-know-your-real-passive-income-jj8fzzxhI4g.md) — source · stub · quick intake
+- ["Complete ChatGPT Tutorial - [Become A Power User in 30 Minutes]"](/ai-business/sources/complete-chatgpt-tutorial-become-a-power-user-in-30-minutes-jHv63Uvk5VA.md) — source · stub · quick intake
+- [I Built a Trading Bot with ChatGPT](/ai-business/sources/i-built-a-trading-bot-with-chatgpt-fhBw3j_O9LE.md) — source · stub · quick intake
+- [I Tried EVERY Claude AI Side Hustle… This One Made The Most Money](/ai-business/sources/i-tried-every-claude-ai-side-hustle-this-one-made-the-most-m-fb-5GoBZw8E.md) — source · stub · quick intake
+- [Deleted video](/ai-business/sources/deleted-video-eVbKRAO7pb0.md) — source · stub · quick intake
+- [Forget AI. Make $10K+ With These Offline Side Hustles](/ai-business/sources/forget-ai-make-10k-with-these-offline-side-hustles-dTnidR4eLus.md) — source · stub · quick intake
+- ["Create a Passive Income with ChatGPT and MidJourney: Write a Children's Book Today! [2023 Guide]"](/ai-business/sources/create-a-passive-income-with-chatgpt-and-midjourney-write-a--c7_vcoBbh70.md) — source · stub · quick intake
+- [Python web scraper $$$ - Easy step by step guide | How to make money with Python Episode 1](/ai-business/sources/python-web-scraper-easy-step-by-step-guide-how-to-make-money-awoEELnQzVg.md) — source · stub · quick intake
+- [The Simplest Side Hustle You Can Start Under $100](/ai-business/sources/the-simplest-side-hustle-you-can-start-under-100-Y4pvrjtb1cI.md) — source · stub · quick intake
+- [Private video](/ai-business/sources/private-video-Cz9QD6-TYeY.md) — source · stub · quick intake
 - [Data Privacy - Kai Waehner](/ai-business/sources/data-privacy-kai-waehner-20821876.md) — source · stub · This document outlines Kai Waehner's data privacy policy, explaining how personal data is collected,…
 - [Claude AI - Self-Publishing Romance Novels on KDP](/ai-business/sources/claude-ai-self-publishing-romance-novels-on-kdp-d.md) — source · stub · A business model for self-publishing romance novels on Amazon KDP using AI, targeting underserved ni…
 - ["Career - Overemployment: How to Earn $250k+ With Multiple Remote Jobs"](/ai-business/sources/career-overemployment-how-to-earn-250k-with-multiple-remote--ee.md) — source · stub · The document discusses overemployment, a strategy to earn $250k+ by working multiple remote jobs. It…
@@ -920,6 +1062,19 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [NFT Market Dynamics](/blockchain/nft-markets.md) — concept · draft · floor price mechanics, supply manipulation (burn/staking), royalty fragility, pump-and-dump patterns (2022 historical record from NFT God newsletter)
 
 ### trading
+- ["Full AI Trading Course 2026: Master Agentic Trading (Beginner to Pro)"](/trading/sources/full-ai-trading-course-2026-master-agentic-trading-beginner--yxouoQw-C_M.md) — source · stub · quick intake
+- [How To Actually Build a Trading Bot With Claude Code (Fully Automated)](/trading/sources/how-to-actually-build-a-trading-bot-with-claude-code-fully-a-y_bsjZThP0o.md) — source · stub · quick intake
+- [I Built the ULTIMATE Claude Code trading assistant (Setup Tutorial)](/trading/sources/i-built-the-ultimate-claude-code-trading-assistant-setup-tut-vTkZK8PK114.md) — source · stub · quick intake
+- [My Exact $1M Trading Blueprint + Tools Using Claude](/trading/sources/my-exact-1m-trading-blueprint-tools-using-claude-t4GSCXvFb8E.md) — source · stub · quick intake
+- [How to Make MORE PROFIT in Crypto with Free Indicators](/trading/sources/how-to-make-more-profit-in-crypto-with-free-indicators-sr2R195CFW4.md) — source · stub · quick intake
+- [Claude Released An investing Tool! (Underrated)](/trading/sources/claude-released-an-investing-tool-underrated-reiPfBnUBys.md) — source · stub · quick intake
+- [How To Build Your Own Claude AI Trading Assistant (Easy For Beginners)](/trading/sources/how-to-build-your-own-claude-ai-trading-assistant-easy-for-b-mssPkDuQnmY.md) — source · stub · quick intake
+- [Claude Just Changed the Stock Market Forever! (Tutorial)](/trading/sources/claude-just-changed-the-stock-market-forever-tutorial-lH5wrfNwL3k.md) — source · stub · quick intake
+- [Coding a Market Making Bot with Claude AI](/trading/sources/coding-a-market-making-bot-with-claude-ai-kC1aoMSzsWM.md) — source · stub · quick intake
+- [Claude Can Now TRADE For You On TradingView (Insane)](/trading/sources/claude-can-now-trade-for-you-on-tradingview-insane-aDWJ6lLemJU.md) — source · stub · quick intake
+- [How I Made a Polymarket AI Agent Using Claude Code](/trading/sources/how-i-made-a-polymarket-ai-agent-using-claude-code-_lA1M_t4lnE.md) — source · stub · quick intake
+- [NEW Claude Opus 4.6 AI Good For TradingView Strategies? (Backtesting Engine) (watch ASAP)](/trading/sources/new-claude-opus-4-6-ai-good-for-tradingview-strategies-backt-Zepx8mARre0.md) — source · stub · quick intake
+- [I Re-Created A Quant Trading Strategy With Claude Code (Insanely Cool)](/trading/sources/i-re-created-a-quant-trading-strategy-with-claude-code-insan-ZVMTeDBmSrI.md) — source · stub · quick intake
 - ["Bitcoin Bear Flag Confirmed, BUT THERE IS SOMETHING WORSE"](/trading/sources/bitcoin-bear-flag-confirmed-but-there-is-something-worse-SR5gayuF4m0.md) — source · stub · The video discusses a bear flag in Bitcoin's price chart, confirming a bearish continuation pattern.…
 - [Trading](/trading/README.md) — hub · draft · AI-driven automated trading for crypto & equities — architectures, brokers, strategy (provisional)
 - [AI Trading Agents](/trading/ai-trading-agents.md) — concept · draft · cron-driven agentic LLM that researches, trades via broker API, and updates file-based memory

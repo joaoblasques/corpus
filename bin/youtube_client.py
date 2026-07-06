@@ -404,11 +404,55 @@ def cmd_run(args) -> int:
     return 0
 
 
+def cmd_reap_ingested(args) -> int:
+    """Remove already-ingested videos from their collect-remove (tech) playlists.
+
+    A video counts as ingested when a raw/youtube/ stub for it is stamped
+    ``corpus_ingested: true`` (covers both transcript and metadata-only intake). ONLY
+    collect-remove playlists are touched — collect-keep/ignore playlists (music, exercise,
+    skateboarding, …) are never modified. Uses the playlist API (not the rate-limited
+    transcript API). Idempotent; supports --dry-run.
+    """
+    import re
+    ingested = set()
+    yt_dir = ROOT / "raw" / "youtube"
+    if yt_dir.exists():
+        for f in yt_dir.glob("*.md"):
+            t = f.read_text(encoding="utf-8", errors="ignore")
+            if re.search(r"^corpus_ingested:\s*true", t, re.M):
+                m = re.search(r"^youtube_video_id:\s*(\S+)", t, re.M)
+                if m:
+                    ingested.add(m.group(1))
+
+    cfg = load_config()
+    tech = [p for p in cfg["playlists"] if p.get("policy") == "collect-remove"]
+    service = get_service()
+    removed = 0
+    scanned = 0
+    per_playlist: dict = {}
+    for p in tech:
+        for item in list_playlist_items(service, p["id"]):
+            scanned += 1
+            if item["video_id"] in ingested:
+                ok = True if args.dry_run else delete_playlist_item(service, item["playlist_item_id"])
+                if ok:
+                    removed += 1
+                    per_playlist[p["name"]] = per_playlist.get(p["name"], 0) + 1
+    print(json.dumps({"removed": removed, "scanned": scanned,
+                      "ingested_known": len(ingested), "by_playlist": per_playlist,
+                      "dry_run": bool(args.dry_run)}, indent=2))
+    return 0
+
+
 def _args(argv):
     p = argparse.ArgumentParser(description="Owned-credential YouTube playlist collector.")
     sub = p.add_subparsers(dest="cmd", required=True)
     sub.add_parser("auth").set_defaults(func=cmd_auth)
     sub.add_parser("list-playlists").set_defaults(func=cmd_list_playlists)
+    ri = sub.add_parser("reap-ingested",
+                        help="remove already-ingested videos from collect-remove (tech) playlists only")
+    ri.add_argument("--dry-run", action="store_true")
+    ri.set_defaults(func=cmd_reap_ingested)
     pr = sub.add_parser("run")
     pr.add_argument("--dry-run", action="store_true")
     pr.add_argument("--max", type=int, default=None)

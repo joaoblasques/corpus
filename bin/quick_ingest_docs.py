@@ -55,7 +55,7 @@ def _openrouter_key(env_file="~/.config/watch/.env") -> str | None:
 
 
 def _front(text: str, key: str) -> str | None:
-    m = re.search(rf"^{re.escape(key)}:\s*(.+)$", text, re.M)
+    m = re.search(rf"^{re.escape(key)}:[^\S\n]*(.+)$", text, re.M)
     return m.group(1).strip() if m else None
 
 

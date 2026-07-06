@@ -63,7 +63,7 @@ def tech_playlists() -> set[str]:
 
 
 def _front(text: str, key: str) -> str | None:
-    m = re.search(rf"^{re.escape(key)}:\s*(.+)$", text, re.M)
+    m = re.search(rf"^{re.escape(key)}:[^\S\n]*(.+)$", text, re.M)
     return m.group(1).strip() if m else None
 
 
@@ -217,7 +217,8 @@ def iter_tech_stubs(tech: set[str], ready_only: bool = False):
 
 
 def process_stub(f: Path, text: str, playlist: str, *, model: str, rescue: bool,
-                 today: str, dry_run: bool, whisper: bool = False) -> str:
+                 today: str, dry_run: bool, whisper: bool = False,
+                 metadata_fallback: bool = False) -> str:
     vid = _front(text, "youtube_video_id") or ""
     if not vid:
         return "no_id"
@@ -235,21 +236,27 @@ def process_stub(f: Path, text: str, playlist: str, *, model: str, rescue: bool,
     #   - captions `blocked` no whisper -> rate-limited: skip (retry a future window)
     #   - captions none_found/disabled, no whisper -> caption-less: metadata-only page
     if not has_transcript:
-        if not rescue:
+        if metadata_fallback:
+            # Land a metadata-only page directly (title/channel/playlist/URL = pointer-back),
+            # WITHOUT attempting caption/Whisper rescue — the caption API is IP rate-limited and
+            # retrying only re-triggers the block. Enrich with a transcript later when it clears.
+            pass
+        elif not rescue:
             return "skipped_norescue"
-        tbody, tst = yc._caption_transcript(vid)
-        if tst == "ok" and tbody:
-            body = "\n\n" + tbody
-            has_transcript, tstatus = True, "ok"
-        elif whisper:
-            wbody = yc._whisper_transcript(vid)
-            if wbody:
-                body = "\n\n" + wbody
+        else:
+            tbody, tst = yc._caption_transcript(vid)
+            if tst == "ok" and tbody:
+                body = "\n\n" + tbody
                 has_transcript, tstatus = True, "ok"
-            else:
-                return "skipped_whisperfail"
-        elif tst == "blocked":
-            return "skipped_ratelimit"
+            elif whisper:
+                wbody = yc._whisper_transcript(vid)
+                if wbody:
+                    body = "\n\n" + wbody
+                    has_transcript, tstatus = True, "ok"
+                else:
+                    return "skipped_whisperfail"
+            elif tst == "blocked":
+                return "skipped_ratelimit"
 
     meta = {
         "video_id": vid, "url": _front(text, "url") or f"https://youtu.be/{vid}",
@@ -319,6 +326,10 @@ def main(argv=None) -> int:
                     help="seconds between videos (stay under Groq tokens-per-minute)")
     ap.add_argument("--ready-only", action="store_true",
                     help="only process stubs that already have transcript_status: ok (no rescue, no rate-limit)")
+    ap.add_argument("--metadata-fallback", action="store_true",
+                    help="land a metadata-only page (title/playlist/URL pointer-back) for any stub "
+                         "without a transcript, WITHOUT attempting rescue (use when captions are "
+                         "rate-limited; enrich later). Tech playlists only, as always.")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args(argv)
     import time
@@ -339,7 +350,8 @@ def main(argv=None) -> int:
         allow_rescue = rescue_on and rescued < rescue_cap
         was_blocked = (_front(text, "transcript_status") or "") == "blocked"
         res = process_stub(f, text, pl, model=args.model, rescue=allow_rescue,
-                           today=today, dry_run=args.dry_run, whisper=args.whisper)
+                           today=today, dry_run=args.dry_run, whisper=args.whisper,
+                           metadata_fallback=args.metadata_fallback)
         processed += 1
         if res.startswith("ok:"):
             consec_ratelimit = 0
