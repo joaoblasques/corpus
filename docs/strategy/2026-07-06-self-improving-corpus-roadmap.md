@@ -110,3 +110,24 @@ Signal-density ranking (tokens of durable insight per token ingested):
 - Quick-intake share of corpus: 67% → <45%; stubs <35%; orphans <25%.
 - ≥80% of new `/query` gaps answered from corpus within 7 days of being logged.
 - ≥3 books fully ingested chapter-wise; YouTube ingest cost ≈ 0 engineering hours/month.
+
+---
+
+## Addendum (2026-07-06, later): full YouTube demotion + phased source-acquisition plan
+
+User decision: **Corpus_queue also demoted** — no transcript tier remains anywhere; YouTube is
+metadata-pointer-back only, clearing itself out via the nightly (collect-as-metadata → quick
+intake → playlist reap, quota-bounded). Focus: **books and PDFs**.
+
+### Source acquisition — phases (all automatic once built)
+
+| Phase | Channel | Status | Mechanics |
+|---|---|---|---|
+| 0 | YouTube wind-down | **live** | all playlists metadata-tier; nightly clears remaining videos + reaps playlists (~1-3 nights, quota-bounded); zero transcript surfaces touched ever again |
+| 1 | **Books (EPUB) + PDFs** | **live** | drop files in Drive `CorpusInbox/Books/` (epub) or `CorpusInbox/PDFs/`; nightly splits books into chapter stubs → FULL §8.1 ingest (~50 chapters/night ≈ 1-2 books/week); reaped to `_processed/` when fully ingested. Only manual step in the whole system: acquiring DRM-free files (Manning/PragProg/No Starch/O'Reilly sell DRM-free; Kindle is DRM'd) |
+| 2 | Release notes + curated blog RSS | next build | `feeds.yaml` (tool changelogs: Claude Code, Spark, dbt, DuckDB…; blogs: Willison, Karpathy, Osmani, hamel.dev — seeds exist in blogs-to-scrape); nightly fetch new entries → quick-intake or full ingest by substance. Replaces YouTube's "news" function at zero friction |
+| 3 | Papers (arXiv) | after 2 | standing arXiv queries derived from domains + gap log (agents, RAG/context, time-series momentum); abstract stubs, LLM triage promotes high-relevance papers to full ingest |
+| 4 | Consolidation + fitness | after 3 | merge shallow page clusters into synthesis pages; stub/orphan/gap-hit metrics in the run report reallocate nightly quotas. Gap resolver (live) keeps demand-driven growth running throughout |
+
+Priority routing stands: books/papers → full ingest (Sonnet); feeds/blogs → tiered by substance
+(free LLMs for triage); YouTube → metadata only, forever.
