@@ -643,6 +643,29 @@ def run_docs_quick_intake(*, max_n: int = 80, backend: str = "openrouter",
         return {"status": "failed", "ingested": 0, "error": str(exc)}
 
 
+def run_youtube_playlist_reap(*, max_removals: int = 120, _subprocess_run=None) -> dict:
+    """Remove already-ingested videos from collect-remove (tech) YouTube playlists.
+
+    Runs bin/youtube_client.py reap-ingested, bounded by max_removals because each delete
+    costs 50 API quota units (daily quota ~10000; the collector needs some too) — so a large
+    backlog drains over successive nights. NEVER touches collect-keep/ignore playlists
+    (music, exercise, skateboarding). Failure recorded, never raised."""
+    _run = _subprocess_run if _subprocess_run is not None else subprocess.run
+    try:
+        proc = _run([sys.executable, str(BIN / "youtube_client.py"), "reap-ingested",
+                     "--max", str(max_removals)], capture_output=True, text=True, timeout=900)
+        if proc.returncode != 0:
+            return {"status": "failed", "removed": 0, "error": (proc.stderr or "").strip()[:200]}
+        try:
+            d = json.loads(proc.stdout)
+        except json.JSONDecodeError:
+            d = {}
+        return {"status": "ok", "removed": d.get("removed", 0),
+                "quota_exceeded": bool(d.get("quota_exceeded", False))}
+    except Exception as exc:  # noqa: BLE001
+        return {"status": "failed", "removed": 0, "error": str(exc)}
+
+
 def build_summary(tallies: dict, dry_run: bool) -> dict:
     """Assemble the run's stdout summary from the collected tallies. Surfaces the
     post-ingest `email_relabel` (reap-labels), `x_reap`, and `pdf_reap` results
@@ -653,6 +676,7 @@ def build_summary(tallies: dict, dry_run: bool) -> dict:
         "collectors": tallies.get("collectors", {}),
         "youtube_quick": tallies.get("youtube_quick", {}),
         "docs_quick": tallies.get("docs_quick", {}),
+        "youtube_reap": tallies.get("youtube_reap", {}),
         "ingest": tallies.get("ingest", {}),
         "email_relabel": tallies.get("email_relabel", {}),
         "x_reap": tallies.get("x_reap", {}),
@@ -1022,6 +1046,16 @@ def write_run_report(
             dq_str += f" · error={dq['error']}"
         bullets.append(f"* **DocsQuick**: {dq_str}")
 
+    # YouTube playlist reap (remove ingested videos from tech playlists, quota-bounded)
+    yr = tallies.get("youtube_reap")
+    if yr:
+        yr_str = f"{yr.get('removed', 0)} removed · status={yr.get('status', 'unknown')}"
+        if yr.get("quota_exceeded"):
+            yr_str += " · quota_exceeded (resumes next run)"
+        if yr.get("error"):
+            yr_str += f" · error={yr['error']}"
+        bullets.append(f"* **YoutubeReap**: {yr_str}")
+
     # Post-ingest corpus integrity check
     lint = tallies.get("lint")
     if lint:
@@ -1168,6 +1202,14 @@ def main(argv=None) -> int:
                     tallies["docs_quick"] = run_docs_quick_intake()
                 except Exception as exc:  # noqa: BLE001
                     tallies["docs_quick"] = {"status": "failed", "ingested": 0, "error": str(exc)}
+
+                # Remove already-ingested videos from collect-remove (tech) playlists — the
+                # collect-remove policy's cleanup, quota-bounded so it drains over nights and
+                # never touches music/exercise/skate playlists. Never aborts the run.
+                try:
+                    tallies["youtube_reap"] = run_youtube_playlist_reap()
+                except Exception as exc:  # noqa: BLE001
+                    tallies["youtube_reap"] = {"status": "failed", "removed": 0, "error": str(exc)}
 
                 tallies["ingest"] = run_ingest(
                     max_n=args.max,

@@ -58,6 +58,7 @@ def _isolate_pipeline(monkeypatch, tmp_path):
         ("run_ingest", "_subprocess_run", {"status": "ok", "ingested": 0, "deferred": 0, "note": "stubbed"}),
         ("run_youtube_quick_intake", "_subprocess_run", {"status": "ok", "ingested": 0, "rescued": 0, "skipped": 0}),
         ("run_docs_quick_intake", "_subprocess_run", {"status": "ok", "ingested": 0, "skipped_thin": 0, "llm_fail": 0}),
+        ("run_youtube_playlist_reap", "_subprocess_run", {"status": "ok", "removed": 0}),
         ("run_email_relabel", "_subprocess_run", {"status": "ok"}),
         ("run_x_reap", "_subprocess_run", {"status": "ok"}),
         ("run_obsidian_reap", "_subprocess_run", {"status": "ok"}),
@@ -2183,6 +2184,28 @@ def test_run_docs_quick_intake_parses_tally():
     assert out["ingested"] == 12
     assert out["skipped_thin"] == 3
     assert out["llm_fail"] == 1
+
+
+def test_run_youtube_playlist_reap_parses_and_bounds():
+    def fake_run(cmd, **kw):
+        assert "youtube_client.py" in cmd[1] and "reap-ingested" in cmd
+        assert "--max" in cmd                       # quota-bounded
+        return _make_proc(returncode=0, stdout=json.dumps(
+            {"removed": 120, "scanned": 300, "quota_exceeded": True, "dry_run": False}))
+
+    out = scheduled_run.run_youtube_playlist_reap(_subprocess_run=fake_run)
+    assert out["status"] == "ok"
+    assert out["removed"] == 120
+    assert out["quota_exceeded"] is True
+
+
+def test_run_youtube_playlist_reap_failure_is_recorded_not_raised():
+    def fake_run(cmd, **kw):
+        return _make_proc(returncode=1, stderr="youtube api down")
+
+    out = scheduled_run.run_youtube_playlist_reap(_subprocess_run=fake_run)
+    assert out["status"] == "failed"
+    assert out["removed"] == 0
 
 
 def test_run_docs_quick_intake_failure_is_recorded_not_raised():
