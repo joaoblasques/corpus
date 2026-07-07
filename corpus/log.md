@@ -2,6 +2,40 @@
 
 > OKF v0.1 change log. Newest first, grouped by date.
 
+## 2026-07-07
+* **Ingest**: Brunton-Kutz "Data-Driven Science and Engineering" (31 PDF parts) — routed to ai-engineering
+  - sources: pdf-brunton-kutz-data-driven-science-and-engineering-v2-author-f-part-01.md through part-31.md (channel: pdf)
+  - channel: pdf
+  - domain: ai-engineering
+  - new pages: [/ai-engineering/sources/brunton-kutz-data-driven-science-engineering.md, /ai-engineering/singular-value-decomposition.md, /ai-engineering/dynamic-mode-decomposition.md, /ai-engineering/sindy.md, /ai-engineering/compressed-sensing.md, /ai-engineering/koopman-operator.md]
+  - pages updated: [/ai-engineering/README.md, corpus/index.md]
+  - notes: Cambridge Press 2021 textbook (author free edition, 761pp). Brunton & Kutz. Covers SVD/PCA (Ch1), Fourier/Wavelet (Ch2), Compressed Sensing (Ch3), regression/classification (Ch4-5), clustering/neural networks, DMD (Ch7), SINDy (Ch7.3), Koopman theory, control (LQR/LQG/MPC/RL), reduced-order models. Routed to ai-engineering (plausible fit: ML fundamentals + data-driven methods). 31 parts treated as one logical source; source summary page + 5 new concept pages. All 31 source files stamped in raw/_inbox/ (headless mode, not moved).
+
+* **Ingest**: Burns "Designing Distributed Systems" (6 PDF parts) — routed to software-engineering
+  - sources: pdf-burns-designing-distributed-systems-microsoft-free-edition-part-01.md through part-06.md (channel: pdf)
+  - channel: pdf
+  - domain: software-engineering
+  - new pages: [/software-engineering/sources/burns-designing-distributed-systems.md, /software-engineering/container-patterns.md, /software-engineering/scatter-gather-pattern.md]
+  - pages updated: [/software-engineering/README.md, corpus/index.md]
+  - notes: O'Reilly/Microsoft 2018, 164pp, Brendan Burns (co-founder of Kubernetes). Pattern catalog: single-node (sidecar, ambassador, adapter), multi-node serving (replicated, sharded, scatter/gather), batch (work queues, event-driven, coordinated). Source summary + 2 concept pages.
+
+* **Ingest**: Antonopoulos & Harding "Mastering Bitcoin 3rd Edition" (13 chapters) — routed to blockchain
+  - sources: book-mastering-bitcoin-3rd-edition-01-introduction.md through 13-bitcoin-security.md (channel: book)
+  - channel: book
+  - domain: blockchain
+  - new pages: [/blockchain/sources/mastering-bitcoin-3rd-edition.md, /blockchain/bitcoin-transactions.md, /blockchain/bitcoin-script.md, /blockchain/bitcoin-security.md]
+  - pages updated: [/blockchain/README.md, corpus/index.md]
+  - notes: CC BY-SA 4.0; GitHub source; 3rd edition (2023) adds Taproot, Schnorr/MAST, PSBT. 13 chapters cover full Bitcoin stack. Source summary + 3 new concept pages. Existing blockchain pages (bitcoin.md, proof-of-work.md, public-key-cryptography.md, hash-functions.md, merkle-trees.md, p2p-networking.md) not modified — no contradictions detected. ingest-auto run; 50 processed, 0 deferred.
+
+* **Collectors**: gmail=4, obsidian=25, book_discover=15, book_fetch=6, pdf=0, books=0, arxiv=24, youtube=0, github_discover=0, github=0, x=0, links_refetch=0
+* **Ingest**: 50 ingested · 0 deferred · status=ok
+* **YoutubeQuick**: 0 intake · 0 rescued · 0 skipped · status=ok
+* **DocsQuick**: 38 intake · 41 thin · 1 llm_fail · status=ok
+* **YoutubeReap**: 0 removed · status=ok · quota_exceeded (resumes next run)
+* **Gardener**: 2 stubs deepened · status=ok
+* **GapResolver**: 1 gap dispatched · 3 sources queued · status=ok · gap=Systematic crypto trend-following / time-series momentum: re
+* **Lint**: 5 broken wikilinks · 127 broken citations · 766 orphans · 773 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+* **OKF**: 0 violations
 ## 2026-07-06
 * **Ingest**: ai-engineering batch (simonwillison.net + zencoder.ai) — 10 sources from raw/_inbox/
   - sources: web-a-quote-from-timothy-b-lee-ef10a2fd.md · web-incident-report-cve-2026-lgtm-61a73fa6.md · web-porting-the-moebius-0-2b-image-inpainting-model-to-run-in-th-71cb4d77.md · web-a-quote-from-charity-majors-e9a95537.md · web-rpa-vs-ai-agents-what-are-the-differences-36f86eaf.md · web-what-is-ai-agent-orchestration-how-it-works-examples-c4e0c48a.md · web-your-agent-s-tool-belt-is-now-your-largest-attack-surface-78f1d306.md · web-the-orchestrator-is-the-product-the-model-is-a-commodity-3e693062.md · web-swe-bench-pro-results-2026-ai-coding-model-rankings-dca3b106.md · web-ensuring-transparency-and-safety-in-ai-generated-code-for-la-c447821e.md

@@ -7,12 +7,12 @@ tags:
   - corpus/blockchain
   - hub
 created: 2026-06-17
-updated: 2026-07-05
+updated: 2026-07-07
 ---
 
 # Blockchain
 
-TL;DR: Concepts, history, cryptographic primitives, and network design underlying Bitcoin and the broader cryptocurrency ecosystem. Sourced from the nakamoto.ghost.io developer course (Haseeb Qureshi, 2019–2020) and Eli Ben-Sasson's survey of cryptographic proof systems.
+TL;DR: Concepts, history, cryptographic primitives, and network design underlying Bitcoin and the broader cryptocurrency ecosystem. Sourced from the nakamoto.ghost.io developer course (Haseeb Qureshi, 2019–2020), Eli Ben-Sasson's survey of cryptographic proof systems, and Mastering Bitcoin 3rd Edition (Antonopoulos & Harding, CC BY-SA 4.0).
 
 ## Domain description
 
@@ -27,6 +27,9 @@ This domain covers the full technical and historical stack of blockchain and cry
 
 ### Core Concepts
 - [Bitcoin](/blockchain/bitcoin.md) — entity · draft · Bitcoin as a system: consensus, identity, network, history; first prices and transactions
+- [Bitcoin Transactions](/blockchain/bitcoin-transactions.md) — concept · draft · UTXO model; inputs/outputs; fee market (RBF, CPFP); coinbase transaction
+- [Bitcoin Script](/blockchain/bitcoin-script.md) — concept · draft · Forth-like stack language; P2PKH/P2WPKH/Taproot; authorization and authentication
+- [Bitcoin Security](/blockchain/bitcoin-security.md) — concept · draft · bearer asset model; key custody tiers; HD wallets (BIP-32/39/44); cold storage
 - [Proof-of-Work](/blockchain/proof-of-work.md) — concept · draft · Hashcash origins; PoW mechanics; Bitcoin mining; difficulty scaling
 - [Public-Key Cryptography](/blockchain/public-key-cryptography.md) — concept · draft · Asymmetric encryption; digital signatures; ECC / secp256k1; wallet types; quantum threats
 - [Hash Functions](/blockchain/hash-functions.md) — concept · draft · SHA-256; cryptographic properties; birthday attacks; broken algorithms
@@ -43,3 +46,6 @@ This domain covers the full technical and historical stack of blockchain and cry
 
 ### Market Dynamics
 - [NFT Market Dynamics](/blockchain/nft-markets.md) — concept · draft · Floor price mechanics, supply manipulation (burns/staking), royalty fragility, pump-and-dump patterns, OpenSea data breach (2022 era documentation)
+
+### Sources
+- [Mastering Bitcoin, 3rd Edition (Antonopoulos & Harding)](/blockchain/sources/mastering-bitcoin-3rd-edition.md) — source · draft · full technical reference; 13 chapters; CC BY-SA 4.0
