@@ -10,6 +10,7 @@ Never raises: all file-reads are defensive; exit 0 always.
 from __future__ import annotations
 
 import datetime
+import os
 import re
 import sys
 from pathlib import Path
@@ -17,7 +18,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 REVIEW_PATH = ROOT / "raw" / "_inbox" / "_REVIEW.md"
 LOG_PATH = ROOT / "corpus" / "log.md"
-BOOK_REVIEW_PATH = ROOT / "raw" / "_book_review.md"
+# Book-review queue lives in the Obsidian vault (phone-tickable); reading it here is fine.
+BOOK_REVIEW_PATH = Path(os.environ.get(
+    "CORPUS_BOOK_REVIEW",
+    str(Path.home() / "Dev" / "second-brain" / "00_Inbox" / "Clippings" / "Books to review.md")))
 BOOK_REMINDER_STAMP = ROOT / "raw" / ".book_review_reminded"
 BOOK_REMINDER_INTERVAL_DAYS = 7
 

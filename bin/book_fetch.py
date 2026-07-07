@@ -17,6 +17,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import re
 import shutil
 import sys
@@ -27,7 +28,11 @@ from urllib.request import Request, urlopen
 BIN = Path(__file__).resolve().parent
 ROOT = BIN.parent
 CONFIG = BIN / "book_sources.yaml"
-REVIEW = ROOT / "raw" / "_book_review.md"
+# The review queue lives INSIDE the Obsidian vault (00_Inbox/Clippings) so the user can tick it
+# from their phone — it syncs via their vault sync. Overridable via env for tests.
+REVIEW = Path(os.environ.get(
+    "CORPUS_BOOK_REVIEW",
+    str(Path.home() / "Dev" / "second-brain" / "00_Inbox" / "Clippings" / "Books to review.md")))
 LEDGER = ROOT / "raw" / ".books_fetched.txt"
 # Matches a CHECKED review line: `- [x] [Title](url) · ...`
 _REVIEW_CHECKED_RE = re.compile(r"^- \[[xX]\]\s+\[([^\]]+)\]\((https?://[^)]+)\)")

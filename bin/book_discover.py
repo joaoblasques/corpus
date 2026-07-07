@@ -15,6 +15,7 @@ import argparse
 import datetime
 import hashlib
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -27,7 +28,9 @@ sys.path.insert(0, str(BIN))
 import book_fetch as bf  # noqa: E402 — reuse host_allowed + the trusted allowlist
 
 CONFIG = BIN / "book_discover.yaml"
-REVIEW = ROOT / "raw" / "_book_review.md"
+# Review queue lives in the Obsidian vault (phone-tickable); shared with book_fetch via the
+# same env override. Keep book_discover and book_fetch pointed at the SAME file.
+REVIEW = Path(os.environ.get("CORPUS_BOOK_REVIEW", str(bf.REVIEW)))
 LEDGER = ROOT / "raw" / ".books_discovered.txt"
 _UA = "corpus-book-discover/1.0 (personal knowledge base; read-only curated-index scan)"
 
