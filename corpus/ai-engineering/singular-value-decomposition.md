@@ -60,8 +60,8 @@ The Moore-Penrose pseudo-inverse **X**† = **VΣ**⁻¹**U*** solves the least-
 
 - **Image compression**: JPEG-like compression via rank-r SVD (trade quality for file size)
 - **Noise filtering**: zero out small singular values corresponding to noise
-- **DMD**: SVD is the first step of Dynamic Mode Decomposition (see [DMD](/ai-engineering/dynamic-mode-decomposition.md))
+- **DMD**: SVD is the first step of Dynamic Mode Decomposition (see [DMD](/ai-engineering/dynamic-mode-decomposition.md)), which in turn approximates the [Koopman operator](/ai-engineering/koopman-operator.md); Koopman theory frames SVD/PCA as an implicit discovery of linear observables of a nonlinear system
 - **Reduced-order models**: SVD modes (**U**) form the projection basis
-- **Compressed sensing**: SVD basis is optimal for sparse signal recovery (see [Compressed Sensing](/ai-engineering/compressed-sensing.md))
+- **Compressed sensing**: the SVD basis is a data-adapted sparsity basis for sparse signal recovery (see [Compressed Sensing](/ai-engineering/compressed-sensing.md)); the same ℓ₁ sparse-regression machinery underpins [SINDy](/ai-engineering/sindy.md)'s equation discovery
 
 [^src1]: [Data-Driven Science and Engineering](../../raw/pdf/pdf-brunton-kutz-data-driven-science-and-engineering-v2-author-f-part-01.md), Brunton & Kutz (2021), Chapter 1

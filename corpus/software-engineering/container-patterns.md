@@ -70,4 +70,10 @@ The inverse of Ambassador: the adapter normalizes the **output** of the main con
 | Ambassador | Routes/adapts requests inbound | External → internal |
 | Adapter | Normalizes output | Internal → external |
 
+## Related
+
+- [Designing Distributed Systems (Burns)](/software-engineering/sources/burns-designing-distributed-systems.md) — the source catalog; these are its Part I (single-node) patterns
+- [Kubernetes](/software-engineering/kubernetes.md) — the implementation platform; these containers are co-scheduled in a single pod, sharing namespaces
+- [Scatter/Gather Pattern](/software-engineering/scatter-gather-pattern.md) — a multi-node serving pattern from the same catalog (Part II)
+
 [^src1]: [Designing Distributed Systems, parts 1–2](../../raw/pdf/pdf-burns-designing-distributed-systems-microsoft-free-edition-part-01.md), Brendan Burns, O'Reilly, 2018

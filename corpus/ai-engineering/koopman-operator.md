@@ -46,6 +46,6 @@ EDMD lifts the state **x** to a higher-dimensional feature space **ψ(x)** (e.g.
 
 ## Significance
 
-Koopman theory provides the theoretical foundation explaining why linear methods (DMD, PCA) can successfully analyze nonlinear systems: they are implicitly discovering approximate Koopman eigenfunctions. This connects data-driven system identification to spectral operator theory [^src1].
+Koopman theory provides the theoretical foundation explaining why linear methods (DMD, PCA — i.e. [SVD](/ai-engineering/singular-value-decomposition.md)) can successfully analyze nonlinear systems: they are implicitly discovering approximate Koopman eigenfunctions. This connects data-driven system identification to spectral operator theory [^src1].
 
 [^src1]: [Data-Driven Science and Engineering](../../raw/pdf/pdf-brunton-kutz-data-driven-science-and-engineering-v2-author-f-part-16.md), Brunton & Kutz (2021), Chapter 7 (Koopman sections)

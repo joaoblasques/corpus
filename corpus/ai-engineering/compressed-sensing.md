@@ -45,7 +45,7 @@ where **Θ** = **CΨ** is the sensing matrix and **y** are the compressive measu
 |---|---|
 | Fourier (DCT) | Signals bandlimited or with few dominant frequencies |
 | Wavelets | Natural images (piecewise smooth) |
-| SVD modes | Data-adapted; optimal when the system's dominant subspace is known |
+| [SVD](/ai-engineering/singular-value-decomposition.md) modes | Data-adapted; optimal when the system's dominant subspace is known |
 | Random | Theory-optimal; works when signal structure is unknown |
 
 **Bad measurements**: measuring in the same basis as the sparsity basis (e.g., sampling the Fourier coefficients to recover a Fourier-sparse signal) loses information — the sensing matrix collapses [^src1].

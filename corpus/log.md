@@ -3,6 +3,13 @@
 > OKF v0.1 change log. Newest first, grouped by date.
 
 ## 2026-07-07
+* **Lint**: Weekly Opus synthesis+lint pass (Medium scope) over the week's 29 changed pages.
+  - broken links/citations: none found across the 5 data-driven-dynamics concept pages, the 2 Burns pattern pages, or the 20 claude-code source stubs (survey confirmed zero body cross-links and all frontmatter source paths resolve).
+  - cross-links added (typed, §7.1): SVD→{SINDy, Koopman} (backbone-of / approximated-by chain); Koopman→SVD (explains-why PCA works); Compressed-Sensing→SVD (uses data-adapted basis); DMD part-15 source now cited (added [^src2]); Burns source page↔{container-patterns, scatter-gather} bidirectional; both Burns concept pages→{Kubernetes (runs-on), Burns source, sibling pattern}.
+  - pages updated: [/ai-engineering/singular-value-decomposition.md, /ai-engineering/koopman-operator.md, /ai-engineering/compressed-sensing.md, /ai-engineering/dynamic-mode-decomposition.md, /software-engineering/container-patterns.md, /software-engineering/scatter-gather-pattern.md, /software-engineering/sources/burns-designing-distributed-systems.md]
+  - contradictions: none. FunctionGemma (270M, LM Studio 0.3.36) claim is corroborated by lm-studio.md, not conflicting.
+  - synthesis pages: 0 new. The Brunton-Kutz source page and the claude-code.md hub already serve as the synthesis for their respective clusters; a new page would duplicate them (anti-drift §9/§13). The 20 claude-code stubs are single-source YouTube summaries whose content the claude-code.md hub already synthesizes.
+
 * **Ingest**: Brunton-Kutz "Data-Driven Science and Engineering" (31 PDF parts) — routed to ai-engineering
   - sources: pdf-brunton-kutz-data-driven-science-and-engineering-v2-author-f-part-01.md through part-31.md (channel: pdf)
   - channel: pdf

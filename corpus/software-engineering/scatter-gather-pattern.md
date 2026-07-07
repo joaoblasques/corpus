@@ -65,4 +65,12 @@ Single-replica leaf failure = user request failure (all leaves required). Soluti
 | Sharded Service | No (request goes to one shard) | Yes |
 | Replicated Load-Balanced | No (request goes to any replica) | No |
 
+The Sharded Service and Replicated Load-Balanced patterns are the sibling serving patterns cataloged in [Designing Distributed Systems (Burns)](/software-engineering/sources/burns-designing-distributed-systems.md), Part II.
+
+## Related
+
+- [Designing Distributed Systems (Burns)](/software-engineering/sources/burns-designing-distributed-systems.md) — the source catalog; scatter/gather is a Part II (multi-node serving) pattern
+- [Kubernetes](/software-engineering/kubernetes.md) — the implementation platform (Deployments + Services for the leaf replicas and root)
+- [Container Patterns (Single-Node)](/software-engineering/container-patterns.md) — the single-node (Part I) patterns from the same catalog
+
 [^src1]: [Designing Distributed Systems, part 4](../../raw/pdf/pdf-burns-designing-distributed-systems-microsoft-free-edition-part-04.md), Brendan Burns, O'Reilly, 2018

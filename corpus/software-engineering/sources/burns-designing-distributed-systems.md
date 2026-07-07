@@ -43,7 +43,7 @@ Prior to containers, distributed system architectures were bespoke: each team bu
 
 ### Part I — Single-Node Patterns (containers on one machine)
 
-These patterns decompose a single application into cooperating containers sharing resources (filesystem, network, namespace) on one node.
+These patterns decompose a single application into cooperating containers sharing resources (filesystem, network, namespace) on one node. Covered in depth in [Container Patterns (Single-Node)](/software-engineering/container-patterns.md).
 
 | Pattern | Description |
 |---|---|
@@ -59,7 +59,7 @@ These patterns decompose a single application into cooperating containers sharin
 |---|---|
 | **Replicated Load-Balanced** | Stateless service replicated N≥2 times behind a load balancer; uses readiness probes to gate traffic |
 | **Sharded Services** | Stateful service where requests are deterministically routed by a shard key to the owning replica; reduces hot-spot and enables state partitioning |
-| **Scatter/Gather** | Root node fans out a request to all leaf nodes; leaves process in parallel; root merges partial results. Parallelizes latency-bound workloads at the cost of "straggler" amplification |
+| **Scatter/Gather** | Root node fans out a request to all leaf nodes; leaves process in parallel; root merges partial results. Parallelizes latency-bound workloads at the cost of "straggler" amplification. Covered in depth in [Scatter/Gather Pattern](/software-engineering/scatter-gather-pattern.md) |
 
 **SLA math on replication**: achieving three-nines (99.9% = 1.4 min/day downtime) with continuous delivery requires either sub-3.6-second rollouts or ≥2 replicas — replicas are the practical path [^src3].
 

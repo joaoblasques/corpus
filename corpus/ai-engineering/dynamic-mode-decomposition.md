@@ -63,6 +63,7 @@ Each DMD mode φⱼ oscillates at frequency ω_j = Im(log(λⱼ))/Δt and grows/
 
 ## Relationship to SINDy
 
-DMD produces the best-fit **linear** operator; [SINDy](/ai-engineering/sindy.md) discovers the best-fit **nonlinear** sparse governing equation. For many systems, DMD is the first diagnostic; SINDy is the next step when the system is clearly nonlinear [^src1].
+DMD produces the best-fit **linear** operator; [SINDy](/ai-engineering/sindy.md) discovers the best-fit **nonlinear** sparse governing equation. For many systems, DMD is the first diagnostic; SINDy is the next step when the system is clearly nonlinear [^src2].
 
 [^src1]: [Data-Driven Science and Engineering](../../raw/pdf/pdf-brunton-kutz-data-driven-science-and-engineering-v2-author-f-part-14.md), Brunton & Kutz (2021), Chapter 7
+[^src2]: [Data-Driven Science and Engineering](../../raw/pdf/pdf-brunton-kutz-data-driven-science-and-engineering-v2-author-f-part-15.md), Brunton & Kutz (2021), Chapter 7 (DMD/SINDy sections)
