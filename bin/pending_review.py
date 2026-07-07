@@ -9,6 +9,7 @@ Never raises: all file-reads are defensive; exit 0 always.
 """
 from __future__ import annotations
 
+import datetime
 import re
 import sys
 from pathlib import Path
@@ -16,6 +17,27 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 REVIEW_PATH = ROOT / "raw" / "_inbox" / "_REVIEW.md"
 LOG_PATH = ROOT / "corpus" / "log.md"
+BOOK_REVIEW_PATH = ROOT / "raw" / "_book_review.md"
+BOOK_REMINDER_STAMP = ROOT / "raw" / ".book_review_reminded"
+BOOK_REMINDER_INTERVAL_DAYS = 7
+
+
+def count_unticked_books(text: str) -> int:
+    """Count '- [ ]' entries (books awaiting approval) in the book-review queue."""
+    return sum(1 for line in text.splitlines() if line.lstrip().startswith("- [ ]"))
+
+
+def reminder_due(stamp_text: str, today: datetime.date,
+                 interval_days: int = BOOK_REMINDER_INTERVAL_DAYS) -> bool:
+    """True if the weekly book-review reminder is due (never shown, or >= interval days ago)."""
+    m = re.search(r"\d{4}-\d{2}-\d{2}", stamp_text or "")
+    if not m:
+        return True
+    try:
+        last = datetime.date.fromisoformat(m.group(0))
+    except ValueError:
+        return True
+    return (today - last).days >= interval_days
 
 
 # ---------------------------------------------------------------------------
@@ -131,6 +153,9 @@ def main(
     *,
     review_path: Path | None = None,
     log_path: Path | None = None,
+    book_review_path: Path | None = None,
+    stamp_path: Path | None = None,
+    today: datetime.date | None = None,
 ) -> int:
     _review_path = review_path if review_path is not None else REVIEW_PATH
     _log_path = log_path if log_path is not None else LOG_PATH
@@ -151,6 +176,28 @@ def main(
 
     if line:
         print(line)
+
+    # Weekly book-review nudge: at most once per BOOK_REMINDER_INTERVAL_DAYS, and only when
+    # books actually await a tick. Stamped on show so it stays roughly weekly across sessions.
+    try:
+        book_text = (book_review_path if book_review_path is not None
+                     else BOOK_REVIEW_PATH).read_text(encoding="utf-8")
+    except (OSError, UnicodeDecodeError):
+        book_text = ""
+    unticked = count_unticked_books(book_text)
+    stamp = stamp_path if stamp_path is not None else BOOK_REMINDER_STAMP
+    try:
+        stamp_text = stamp.read_text(encoding="utf-8")
+    except (OSError, UnicodeDecodeError):
+        stamp_text = ""
+    today = today if today is not None else datetime.date.today()
+    if unticked > 0 and reminder_due(stamp_text, today):
+        print(f"📚 Corpus: {unticked} book(s) await your review — skim raw/_book_review.md "
+              f"and tick [x] the good ones (they auto-download next run).")
+        try:
+            stamp.write_text(today.isoformat() + "\n", encoding="utf-8")
+        except OSError:
+            pass
 
     return 0
 
