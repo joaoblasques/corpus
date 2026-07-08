@@ -3,15 +3,15 @@ type: concept
 domain: ai-engineering
 status: draft
 sources:
-  - path: raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-18.md
+  - path: raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-19.md
     channel: pdf
     ingested_at: 2026-07-08
 aliases:
   - SVM
   - support vector machine
-  - max-margin classifier
-  - kernel SVM
-  - soft-margin SVM
+  - maximum margin classifier
+  - kernel methods
+  - soft margin SVM
 tags:
   - corpus/ai-engineering
   - concept
@@ -21,84 +21,169 @@ updated: 2026-07-08
 
 # Support Vector Machines
 
-TL;DR: An SVM finds the maximum-margin hyperplane separating two classes. The margin is determined solely by the **support vectors** (boundary training points). The dual formulation introduces the kernel trick for nonlinear boundaries, and soft-margin SVMs handle non-separable data via slack variables.
+TL;DR: SVMs find the maximum-margin separating hyperplane between two classes. The margin — distance from hyperplane to nearest training points — measures classifier robustness; maximizing it leads to a convex QP. The dual SVM reformulation involves only inner products between training points, enabling the kernel trick to extend SVMs to nonlinear boundaries without explicitly mapping to high-dimensional feature space. Soft-margin SVMs allow misclassification with a penalty C that trades off margin size against training error.
 
-## Separating Hyperplanes
+## Binary Classification Setup
 
-For binary classification with labels y_n ∈ {+1, −1}, a hyperplane in R^D is {x : w^T x + b = 0}. A **separating hyperplane** satisfies [^src1]:
+Given training set {(x_1, y_1), ..., (x_N, y_N)} where x_n in R^D and y_n in {-1, +1} [^src1].
 
-y_n (w^T x_n + b) ≥ 0 for all n
+Goal: find a function f: R^D → {-1, +1} that correctly classifies unseen data.
 
-Many hyperplanes may separate the data — SVM selects the one with **maximum margin** (the widest "street" between the two classes).
+**Separating hyperplane**: defined by weights w in R^D and bias b in R:
 
-## Primal SVM: Max-Margin Formulation
+```
+<w, x> + b = 0
+```
 
-The margin between the two class boundaries {w^T x + b = +1} and {w^T x + b = −1} has width 2/||w||. Maximizing margin is equivalent to minimizing ||w|| [^src1]:
+A point x is classified as:
+- positive: <w, x> + b > 0
+- negative: <w, x> + b < 0
 
-min_{w,b} (1/2) ||w||^2
-subject to: y_n (w^T x_n + b) ≥ 1 for all n
+**Linear classifier**: f(x) = sign(<w, x> + b).
 
-This is a **quadratic program** (convex objective, linear constraints) — always has a unique global solution.
+When data is **linearly separable**, infinitely many hyperplanes separate the classes (Figure 12.3 in MML). SVMs choose the unique one that maximizes the margin [^src1].
 
-**Support vectors**: training points where y_n (w^T x_n + b) = 1 (i.e., on the margin boundary). The decision boundary depends only on these points — all other training points could be removed without changing w and b.
+## Concept of Margin
+
+The **margin** is the distance from the separating hyperplane to the closest training examples (support vectors) [^src1].
+
+For a point x_a on the positive side, its distance to the hyperplane is [^src1]:
+
+```
+r = <w/||w||, x_a> + b/||w||
+```
+
+The convention: parameterize so ||w|| = 1 (unit-norm weight vector). Then r is directly the geometric distance.
+
+**Margin = 2r**: there is a margin r on each side of the hyperplane, so total margin width is 2r.
+
+**Intuition for maximizing margin**: classifiers with larger margins tend to generalize better. A point that must be misclassified needs to cross the entire margin, so larger margins are more robust to perturbations.
+
+## Hard-Margin SVM (Primal)
+
+**Primal formulation**: find w, b to maximize margin subject to correct classification [^src1]:
+
+```
+max_{w, b}  r
+subject to: y_n (<w, x_n> + b) >= r    for all n = 1, ..., N
+            ||w|| = 1
+```
+
+**Equivalent reformulation** (standard form): rescale so margin endpoints satisfy y_n (<w, x_n> + b) = 1. Then the margin is 2/||w||. Maximizing margin = minimizing ||w||:
+
+```
+min_{w, b}  (1/2) ||w||^2
+subject to: y_n (<w, x_n> + b) >= 1    for all n = 1, ..., N
+```
+
+This is a **convex QP** (quadratic objective, linear constraints). Unique global solution [^src1].
+
+**Support vectors**: training points that achieve y_n (<w, x_n> + b) = 1, i.e., lie exactly on the margin boundary. They are the critical points — removing non-support vectors doesn't change the solution.
 
 ## Dual SVM
 
-Applying Lagrange multipliers α_n ≥ 0 (one per constraint) and solving via KKT conditions yields the dual problem [^src1]:
+The dual of the hard-margin primal involves Lagrange multipliers alpha_n >= 0 (one per training point) [^src1]:
 
-max_{α} Σ_n α_n − (1/2) Σ_n Σ_m α_n α_m y_n y_m x_n^T x_m
-subject to: α_n ≥ 0, Σ_n α_n y_n = 0
+```
+max_{alpha}  sum_n alpha_n - (1/2) sum_{n,m} alpha_n alpha_m y_n y_m <x_n, x_m>
+subject to:  sum_n alpha_n y_n = 0
+             alpha_n >= 0
+```
 
-The dual depends only on **dot products x_n^T x_m** between training points — enabling the kernel trick. At the optimum, complementary slackness requires α_n = 0 for non-support-vectors.
+**KKT conditions** (complementary slackness):
+- alpha_n (y_n (<w, x_n> + b) - 1) = 0  for all n
+- alpha_n >= 0
+- Either alpha_n = 0 (non-support vector) or y_n (<w, x_n> + b) = 1 (support vector)
 
-The decision function becomes:
-f(x) = sign(Σ_n α_n y_n x_n^T x + b)
+**Recovering the primal from dual**:
 
-where the sum runs only over support vectors (α_n > 0).
+```
+w* = sum_n alpha_n y_n x_n    (w is a linear combination of support vectors)
+b* = y_n - <w*, x_n>          (for any support vector x_n)
+```
 
-## Kernel Trick
+**Prediction**: f(x) = sign(<w*, x> + b*) = sign(sum_n alpha_n y_n <x_n, x> + b*).
 
-Replace the dot product x_n^T x_m with a **kernel function** K(x_n, x_m) = φ(x_n)^T φ(x_m), where φ maps inputs to a (possibly infinite-dimensional) feature space. The kernel trick computes inner products in feature space without explicitly computing φ [^src1].
-
-Common kernels:
-- **Linear**: K(x,x') = x^T x' (standard SVM; D-dimensional)
-- **Polynomial**: K(x,x') = (x^T x' + c)^p
-- **RBF (Gaussian)**: K(x,x') = exp(−||x−x'||^2 / (2σ^2)) — infinite-dimensional feature space; universal approximator
-- **String/graph kernels**: for discrete-structured inputs
-
-A valid kernel must correspond to a positive semi-definite Gram matrix K_{nm} = K(x_n, x_m) (Mercer's theorem).
+**Critical observation**: both the dual objective and prediction involve only **inner products** <x_n, x_m> between training points. This enables the kernel trick [^src1].
 
 ## Soft-Margin SVM
 
-When data is not linearly separable (even in feature space), introduce **slack variables** ξ_n ≥ 0 allowing some misclassification [^src1]:
+**Problem**: if data is not linearly separable, the hard-margin SVM has no feasible solution.
 
-min_{w,b,ξ} (1/2)||w||^2 + C Σ_n ξ_n
-subject to: y_n (w^T x_n + b) ≥ 1 − ξ_n, ξ_n ≥ 0 for all n
+**Soft-margin SVM** introduces slack variables xi_n >= 0 to allow constraint violations [^src1]:
 
-- ξ_n = 0: correctly classified with margin ≥ 1
-- 0 < ξ_n ≤ 1: correctly classified but within the margin
-- ξ_n > 1: misclassified
+```
+min_{w, b, xi}  (1/2) ||w||^2 + C sum_n xi_n
+subject to:  y_n (<w, x_n> + b) >= 1 - xi_n    for all n
+             xi_n >= 0
+```
 
-**C > 0**: regularization parameter trading off margin width vs. training errors.
-- Large C: penalizes violations heavily → narrow margin, fewer training errors, risk of overfitting
-- Small C: tolerates violations → wide margin, more training errors, better generalization
+**Interpretation**:
+- xi_n = 0: point correctly classified outside margin
+- 0 < xi_n <= 1: point correctly classified inside margin
+- xi_n > 1: point misclassified
 
-## Comparison to Logistic Regression
+**Hyperparameter C** controls the tradeoff:
+- Large C: small xi_n → hard margin (few violations, may overfit)
+- Small C: large xi_n → soft margin (many violations allowed, more regularization)
 
-Both SVM and logistic regression learn a linear decision boundary w^T x + b = 0. Key differences [^src1]:
+The soft-margin SVM is also a convex QP. Its dual has the same form as the hard-margin dual but with additional box constraints: 0 <= alpha_n <= C [^src1].
 
-| Property | SVM | Logistic Regression |
-|---|---|---|
-| Objective | Max margin (hinge loss) | Max likelihood (log loss) |
-| Support | Only boundary points matter | All points influence boundary |
-| Calibration | No probability outputs | Outputs calibrated probabilities |
-| Kernel extension | Natural via kernel trick | Less natural |
-| Sparsity | Sparse (only support vectors) | Dense solution |
+## Kernel Trick
+
+**Motivation**: linear SVMs cannot classify non-linearly separable data. Solution: map x → phi(x) to a high-dimensional feature space where data becomes separable, then train a linear SVM there [^src1].
+
+**Kernel function**: k(x_i, x_j) = <phi(x_i), phi(x_j)>. The kernel computes the inner product in feature space without explicitly computing phi.
+
+**Dual SVM with kernels** — replace all inner products:
+
+```
+max_{alpha}  sum_n alpha_n - (1/2) sum_{n,m} alpha_n alpha_m y_n y_m k(x_n, x_m)
+```
+
+**Common kernels**:
+- **Linear**: k(x, x') = <x, x'>  (recovers standard SVM)
+- **Polynomial**: k(x, x') = (<x, x'> + c)^d
+- **RBF (Gaussian)**: k(x, x') = exp(-gamma ||x - x'||^2). Maps to infinite-dimensional feature space; very flexible.
+- **Sigmoid**: k(x, x') = tanh(kappa <x, x'> + c)
+
+**Mercer's condition**: a function k is a valid kernel iff the corresponding Gram matrix K (with K_{ij} = k(x_i, x_j)) is symmetric positive semidefinite for any set of inputs [^src1].
 
 ## Numerical Solution
 
-The dual QP is solved with SMO (Sequential Minimal Optimization) or interior-point methods. SMO decomposes the problem into 2-variable subproblems with analytic solutions, scaling to large datasets. Libraries: scikit-learn wraps LIBSVM; `sklearn.svm.SVC` for classification, `SVR` for regression.
+SVMs are solved as QPs using specialized solvers [^src1]:
+- **Sequential minimal optimization (SMO)**: breaks the QP into 2-variable subproblems, each with closed-form solution. Standard algorithm in `libsvm` and `sklearn.svm`.
+- **Pegasos**: stochastic sub-gradient method for large-scale SVMs.
+- **Cutting plane**: efficient for structured SVMs.
 
-For the KKT conditions and Lagrangian duality theory underlying SVMs, see [Optimization for ML](/ai-engineering/optimization-for-ml.md).
+**Computational complexity**:
+- Training: O(N^2) to O(N^3) depending on kernel and solver
+- Prediction: O(N_sv * D) where N_sv = number of support vectors (often small fraction of N)
 
-[^src1]: [Mathematics for Machine Learning, Part 18](../../raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-18.md)
+## SVM vs. Logistic Regression
+
+| | SVM | Logistic Regression |
+|---|---|---|
+| Loss | Hinge loss: max(0, 1 - y f(x)) | Log-loss: log(1 + exp(-y f(x))) |
+| Sparsity | Sparse: only support vectors matter | Dense: all training points influence w |
+| Probability output | Not directly (calibration needed) | Natural probability output |
+| Non-linearity | Kernel trick | Feature engineering or deep features |
+| Scalability | Slow for large N | Efficient (SGD) |
+| Margin concept | Explicit maximum margin | Implicit via loss function |
+
+## Mathematical Connections
+
+- SVMs as regularized risk minimization: minimize (1/N) sum_n hinge_loss(x_n, y_n) + lambda ||w||^2
+- Relationship to Ridge regression: same form, different loss function
+- Connection to deep learning: neural nets can be seen as learning the feature map phi that SVMs then classify over
+
+## Related Corpus Pages
+
+- [/ai-engineering/optimization-for-ml.md](/ai-engineering/optimization-for-ml.md) — convex QP; KKT conditions; Lagrange multipliers; duality
+- [/ai-engineering/linear-algebra-for-ml.md](/ai-engineering/linear-algebra-for-ml.md) — inner products; orthogonal projections; hyperplanes
+- [/ai-engineering/probability-and-statistics-for-ml.md](/ai-engineering/probability-and-statistics-for-ml.md) — probability perspective on classification
+- [/ai-engineering/sources/mathematics-for-machine-learning.md](/ai-engineering/sources/mathematics-for-machine-learning.md) — full book summary
+
+---
+
+[^src1]: [Mathematics for Machine Learning, Part 19](../../raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-19.md)

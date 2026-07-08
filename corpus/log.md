@@ -31,6 +31,15 @@
   - pages updated: [/ai-engineering/support-vector-machines.md, /ai-engineering/README.md]
   - notes: ISLR 2nd ed.; 12 parts of 21-part PDF (parts 1-12 in scope). Statistical learning framework, bias-variance, regularization, resampling, trees/forests/boosting, classification. 6 new pages. All 12 source files stamped.
 
+* **Collectors**: gmail=2, obsidian=25, book_discover=15, book_fetch=0, pdf=3, books=0, arxiv=24, youtube=19, github_discover=0, github=0, x=0, links_refetch=0
+* **Ingest**: 0 ingested · 0 deferred · status=ok
+* **YoutubeQuick**: 19 intake · 0 rescued · 0 skipped · status=ok
+* **DocsQuick**: 0 intake · 0 thin · 0 llm_fail · status=failed · error=Command '['/usr/local/bin/python3', '/Users/jonasblasques/Dev/corpus/bin/quick_ingest_docs.py', '--channel', 'web,notes', '--backend', 'openrouter', '--max', '80', '--sleep', '0.5']' timed out after 2400 seconds
+* **YoutubeReap**: 45 removed · status=ok
+* **Gardener**: 2 stubs deepened · status=ok
+* **GapResolver**: 1 gap dispatched · 3 sources queued · status=ok · gap=Healthcare data engineering showcase: feature store vs vecto
+* **Lint**: 5 broken wikilinks · 174 broken citations · 810 orphans · 816 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+* **OKF**: 0 violations
 ## 2026-07-07
 * **Lint**: Weekly Opus synthesis+lint pass (Medium scope) over the week's 29 changed pages.
   - broken links/citations: none found across the 5 data-driven-dynamics concept pages, the 2 Burns pattern pages, or the 20 claude-code source stubs (survey confirmed zero body cross-links and all frontmatter source paths resolve).

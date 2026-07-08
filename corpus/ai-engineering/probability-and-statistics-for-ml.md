@@ -3,9 +3,6 @@ type: concept
 domain: ai-engineering
 status: draft
 sources:
-  - path: raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-08.md
-    channel: pdf
-    ingested_at: 2026-07-08
   - path: raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-10.md
     channel: pdf
     ingested_at: 2026-07-08
@@ -13,10 +10,11 @@ sources:
     channel: pdf
     ingested_at: 2026-07-08
 aliases:
-  - probability theory
-  - probabilistic ML
+  - probability ML
   - Bayesian inference
-  - probability distributions
+  - Gaussian distribution
+  - exponential family
+  - conjugate prior
 tags:
   - corpus/ai-engineering
   - concept
@@ -24,67 +22,170 @@ created: 2026-07-08
 updated: 2026-07-08
 ---
 
-TL;DR: Probability theory formalizes uncertainty in data and models; key tools are Bayes' theorem (updating beliefs), the Gaussian distribution (with closed-form marginals/conditionals), and the exponential family (conjugate priors enabling tractable inference).
+# Probability and Statistics for Machine Learning
 
-## Probability Space
+TL;DR: ML models uncertainty via probability distributions. The Gaussian is central (conjugate to itself, closed under linear transforms, marginals/conditionals stay Gaussian). Bayes' theorem converts likelihood × prior to posterior. Exponential families unify named distributions and guarantee finite-dimensional sufficient statistics and conjugate priors. Change of variables enables sampling and density estimation. These foundations underpin linear regression, GMMs, Bayesian inference, and neural network training.
 
-A probability space is a triple (Ω, A, P): **sample space** Ω (all outcomes), **event space** A (subsets of Ω we can assign probability to), and **probability measure** P (P: A → [0,1] with P(Ω) = 1) [^src1].
+## Probability Space Basics
 
-A **random variable** X: Ω → T is a function from outcomes to a target space T (often R^n). The distribution P_X is the induced probability on T. "Random variable" is a function, not a variable [^src1].
+A probability space (Omega, F, P) consists of a sample space, a sigma-algebra (event space), and a probability measure P mapping to [0, 1] with P(Omega) = 1 [^src1].
 
-## Sum Rule, Product Rule, Bayes' Theorem
+**Key rules**:
+- **Sum rule** (marginalization): p(x) = sum_y p(x, y) or integral p(x, y) dy
+- **Product rule** (chain rule): p(x, y) = p(y|x) p(x)
+- **Bayes' theorem**: p(theta|x) = p(x|theta) p(theta) / p(x) proportional to p(x|theta) p(theta) [^src1]
 
-- **Sum rule** (marginalization): p(x) = ∫ p(x,y) dy — integrate out unwanted variables
-- **Product rule**: p(x,y) = p(x|y)p(y) = p(y|x)p(x)
-- **Bayes' theorem**: p(θ|data) = p(data|θ)p(θ) / p(data)
-
-Bayes' theorem is the engine of probabilistic ML: posterior = likelihood × prior / evidence. The denominator p(data) is a normalizing constant, often intractable, which motivates variational inference and MCMC [^src1].
+**Independence**: X and Y are independent iff p(x, y) = p(x)p(y) iff p(x|y) = p(x) [^src1].
 
 ## Summary Statistics
 
-**Mean/Expectation**: E[x] = ∫ x p(x) dx (continuous); the "center of mass" of the distribution.
+**Mean (expectation)**: E_X[x] = sum x p(x) or integral x p(x) dx.
 
-**Variance**: Var[x] = E[(x − E[x])^2] = E[x^2] − (E[x])^2; measures spread.
+**Variance**: V_X[x] = E[(x - E[x])^2] = E[x^2] - (E[x])^2. Standard deviation = sqrt(V).
 
-**Covariance matrix** (multivariate): Σ = E[(x − μ)(x − μ)^T]; always symmetric, positive semi-definite. Off-diagonal entries Σ_{ij} = Cov[x_i, x_j] measure linear co-variation.
+**Covariance**: Cov[x, y] = E[(x - E[x])(y - E[y])] = E[xy] - E[x]E[y].
 
-**Correlation**: ρ(X,Y) = Cov[X,Y] / (std(X) std(Y)) ∈ [−1, 1]. Geometrically, correlation is the cosine of the angle between two random variables viewed as vectors in an inner-product space [^src2].
+**Correlation**: rho(x, y) = Cov[x, y] / (sqrt(V[x]) sqrt(V[y])). This is the cosine of the angle between random variables viewed as vectors: uncorrelated variables are orthogonal in that space [^src1].
 
-## Common Distributions
+**Covariance matrix**: Sigma = Cov[x, x] in R^{D x D}. Always symmetric positive semidefinite.
 
-**Gaussian (Normal)**: N(μ, Σ) with density p(x) ∝ exp(−½(x−μ)^T Σ^{-1} (x−μ)). Arises as the limit of sums of i.i.d. random variables (central limit theorem). Key properties:
-- Marginals of a joint Gaussian are Gaussian: p(x) = N(μ_x, Σ_{xx})
-- Conditionals of a joint Gaussian are Gaussian: p(x|y) = N(μ_{x|y}, Σ_{x|y}) with closed-form parameters
-- Product of two Gaussians is a scaled Gaussian: N(x|a,A) N(x|b,B) = c N(x|c,C) [^src2]
+**Affine transformations**: if y = Ax + b, then E[y] = AE[x] + b and V[y] = A V[x] A^T [^src1].
 
-**Bernoulli**: Ber(μ) for binary outcomes; p(x=1) = μ.
+## Gaussian Distribution
 
-**Beta**: Beta(α,β) for μ ∈ [0,1]; conjugate prior for Bernoulli likelihood. Shape controlled by α,β.
+The **multivariate Gaussian** (normal distribution) N(mu, Sigma) has density [^src1]:
 
-**Dirichlet**: Dir(α) generalizes Beta to K-dimensional probability vectors; conjugate prior for categorical/multinomial.
+```
+p(x) = (2pi)^{-D/2} |Sigma|^{-1/2} exp(-0.5 (x - mu)^T Sigma^{-1} (x - mu))
+```
 
-**Binomial**: Bin(N,μ); counts of successes in N Bernoulli trials.
+where mu in R^D is the mean vector and Sigma in R^{D x D} is the SPD covariance matrix.
 
-## Exponential Family and Conjugate Priors
+**Why the Gaussian is ubiquitous in ML**:
+- Closed-form marginals and conditionals (both Gaussian)
+- Closed under linear transformations
+- Central limit theorem: sums of i.i.d. variables converge to Gaussian
+- Maximum entropy distribution given fixed mean and variance
+- Computationally convenient for Bayesian inference (conjugate prior to itself for the mean)
 
-The **exponential family** of distributions has density p(x|η) = h(x) exp(η^T φ(x) − A(η)) where η are natural parameters, φ(x) are sufficient statistics, and A(η) is the log-partition function. Gaussians, Bernoulli, Beta, Gamma, Dirichlet all belong to this family [^src1].
+**Marginal distribution**: if [x, y] ~ N([mu_x, mu_y], Sigma), then p(x) = N(x | mu_x, Sigma_xx) [^src1].
 
-**Conjugate prior**: a prior p(θ) is conjugate to a likelihood p(data|θ) if the posterior p(θ|data) is in the same distribution family as the prior. Conjugacy makes Bayesian updates analytic — no integration required. Examples: Beta-Bernoulli, Gaussian-Gaussian (linear regression), Dirichlet-Categorical (topic models).
+**Conditional distribution**: p(x|y) = N(x | mu_{x|y}, Sigma_{x|y}) where [^src1]:
+```
+mu_{x|y} = mu_x + Sigma_xy Sigma_yy^{-1} (y - mu_y)
+Sigma_{x|y} = Sigma_xx - Sigma_xy Sigma_yy^{-1} Sigma_yx
+```
+This formula underlies the Kalman filter and Gaussian processes.
 
-## Change of Variables
+**Product of two Gaussians**: N(x|a, A) N(x|b, B) = c N(x|c_mean, C) where [^src1]:
+```
+C = (A^{-1} + B^{-1})^{-1}
+c_mean = C(A^{-1}a + B^{-1}b)
+c = N(a | b, A + B)   (scaling constant)
+```
 
-If Y = U(X) and U is invertible and differentiable, then [^src3]:
+**Sums of independent Gaussians**: if X ~ N(mu_x, Sigma_x) and Y ~ N(mu_y, Sigma_y) independent, then X+Y ~ N(mu_x + mu_y, Sigma_x + Sigma_y) [^src1].
 
-p_Y(y) = p_X(U^{-1}(y)) |det(∂U^{-1}/∂y)|
+**Linear transform**: if X ~ N(mu, Sigma) and y = Ax, then Y ~ N(Amu, A Sigma A^T) [^src1].
 
-The term |det J| (absolute value of the Jacobian determinant) accounts for how the transformation stretches/shrinks volume. This is used in normalizing flows, variational inference (reparametrization trick), and density estimation. For linear transformations Y = AX: p_Y(y) = p_X(A^{-1}y) / |det(A)|.
+**Sampling algorithm**: To sample x ~ N(mu, Sigma) [^src1]:
+1. Compute Cholesky: Sigma = LL^T
+2. Draw z ~ N(0, I) (standard normal, i.i.d. components)
+3. Return x = Lz + mu
 
-## Independence
+## Named Distributions
 
-X and Y are **independent** if p(x,y) = p(x)p(y). Independence implies zero covariance, but zero covariance does not imply independence (only for Gaussians does it).
+**Bernoulli** Ber(mu): binary X in {0,1}. p(X=1) = mu. Mean = mu, Var = mu(1-mu) [^src1].
 
-**Conditional independence**: X ⊥⊥ Y | Z if p(x,y|z) = p(x|z)p(y|z). Conditional independence structures are encoded in graphical models.
+**Binomial** Bin(N, mu): number of successes in N Bernoulli trials. Mean = Nmu, Var = Nmu(1-mu) [^src1].
 
-[^src1]: [Mathematics for Machine Learning, Part 8](../../raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-08.md)
-[^src2]: [Mathematics for Machine Learning, Part 10](../../raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-10.md)
-[^src3]: [Mathematics for Machine Learning, Part 11](../../raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-11.md)
+**Beta** Beta(alpha, beta): continuous X in [0,1]. p(x|alpha,beta) proportional to x^{alpha-1}(1-x)^{beta-1}. Used as prior on probabilities.
+- alpha = beta = 1: uniform distribution
+- alpha, beta > 1: unimodal
+- alpha, beta < 1: bimodal (U-shaped)
+- alpha moves probability mass toward 1; beta moves it toward 0 [^src1]
+
+## Conjugate Priors
+
+**Definition**: a prior is conjugate to a likelihood if the posterior has the same parametric form as the prior [^src1].
+
+**Why conjugacy matters**: Bayesian inference requires computing posterior p(theta|x) proportional to p(x|theta)p(theta). With conjugate priors, the posterior is computed in closed form by updating the prior parameters — no numerical integration needed.
+
+**Key conjugate pairs** [^src1]:
+
+| Likelihood | Conjugate prior | Posterior |
+|---|---|---|
+| Bernoulli(mu) | Beta(alpha, beta) | Beta(alpha+x, beta+1-x) |
+| Binomial(N, mu) | Beta(alpha, beta) | Beta(alpha+h, beta+N-h) |
+| Gaussian (mean unknown, univariate) | Gaussian/inverse-Gamma | Gaussian/inverse-Gamma |
+| Gaussian (mean unknown, multivariate) | Gaussian/inverse-Wishart | Gaussian/inverse-Wishart |
+| Multinomial | Dirichlet | Dirichlet |
+
+**Beta-Bernoulli example**: prior p(theta) = Beta(alpha, beta); posterior after observing x in {0,1} is Beta(alpha+x, beta+1-x). Each observation just increments the appropriate hyperparameter [^src1].
+
+## Exponential Family
+
+The **exponential family** unifies all major named distributions into one parametric form [^src1]:
+
+```
+p(x | theta) = h(x) exp(theta^T phi(x) - A(theta))
+```
+
+where:
+- **theta** = natural parameters
+- **phi(x)** = sufficient statistics vector
+- **A(theta)** = log-partition function (normalizer)
+- **h(x)** = base measure
+
+**Members**: Gaussian, Bernoulli, Binomial, Beta, Poisson, Gamma, Dirichlet.
+
+**Key properties** [^src1]:
+1. **Finite sufficient statistics**: phi(x) captures all information about theta from data. As N grows, no more parameters needed (Pitman-Koopman-Darmois theorem, 1935-36).
+2. **Conjugate prior always exists**: every exponential family has an exponential-family conjugate prior
+3. **MLE behaves well**: log-likelihood is concave — convex optimization problem, gradient methods guaranteed to find global optimum
+4. **Moment matching**: MLE sets expected sufficient statistics equal to empirical sufficient statistics
+
+**Gaussian as exponential family**: N(mu, sigma^2) with phi(x) = [x, x^2]^T [^src1].
+
+**Bernoulli as exponential family**: natural parameter theta = log(mu/(1-mu)) (logit function). Inverse is sigmoid: mu = 1/(1+exp(-theta)) — used in logistic regression and neural network activations [^src1].
+
+**Sufficient statistics** (Fisher-Neyman theorem): phi(x) is sufficient for theta iff p(x|theta) = h(x) g_theta(phi(x)). All information about theta needed from the data is captured in phi(x) [^src1].
+
+## Change of Variables / Inverse Transform
+
+If Y = U(X) and U is invertible, the pdf of Y is [^src1]:
+
+```
+f_Y(y) = f_X(U^{-1}(y)) |d/dy U^{-1}(y)|         (univariate)
+f_Y(y) = f_X(U^{-1}(y)) |det(J_{U^{-1}}(y))|       (multivariate)
+```
+
+where the Jacobian |det J| accounts for volume distortion of the transformation.
+
+**Inverse transform method** (Theorem 6.15): if F_X(x) is the CDF of X, then Y = F_X(X) is uniformly distributed. Corollary: to sample from any distribution with known CDF, draw U ~ Uniform[0,1] and return X = F_X^{-1}(U) [^src1].
+
+**Applications in ML**:
+- Normalizing flows: chain of invertible transformations converts simple base distribution to complex target
+- Reparametrization trick in VAEs: sample z = mu + sigma*epsilon where epsilon ~ N(0,1) — keeps gradient flowing through sampling operation
+
+## Geometry of Random Variables
+
+Random variables can be viewed as vectors with inner product ⟨X, Y⟩ = Cov[x, y] (for zero-mean variables) [^src1]:
+- Length = standard deviation sqrt(Var[X])
+- Angle between X and Y gives correlation rho(X, Y) = cos(theta)
+- Orthogonality = zero correlation (uncorrelated)
+
+Uncorrelated variables satisfy Pythagoras: Var[X + Y] = Var[X] + Var[Y].
+
+## Related Corpus Pages
+
+- [/ai-engineering/matrix-decompositions.md](/ai-engineering/matrix-decompositions.md) — Cholesky for Gaussian sampling
+- [/ai-engineering/optimization-for-ml.md](/ai-engineering/optimization-for-ml.md) — MLE/MAP as optimization problems
+- [/ai-engineering/gaussian-mixture-models.md](/ai-engineering/gaussian-mixture-models.md) — GMM density estimation using Gaussians
+- [/ai-engineering/pca-and-dimensionality-reduction.md](/ai-engineering/pca-and-dimensionality-reduction.md) — probabilistic PCA
+- [/ai-engineering/sources/mathematics-for-machine-learning.md](/ai-engineering/sources/mathematics-for-machine-learning.md) — full book summary
+
+---
+
+[^src1]: [Mathematics for Machine Learning, Part 10](../../raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-10.md)
+[^src2]: [Mathematics for Machine Learning, Part 11](../../raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-11.md)

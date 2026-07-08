@@ -3,20 +3,18 @@ type: concept
 domain: ai-engineering
 status: draft
 sources:
-  - path: raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-11.md
+  - path: raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-12.md
     channel: pdf
     ingested_at: 2026-07-08
-  - path: raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-12.md
+  - path: raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-08.md
     channel: pdf
     ingested_at: 2026-07-08
 aliases:
   - gradient descent
-  - continuous optimization
   - convex optimization
-  - stochastic gradient descent
-  - SGD
   - Lagrange multipliers
   - KKT conditions
+  - Newton's method
 tags:
   - corpus/ai-engineering
   - concept
@@ -24,88 +22,190 @@ created: 2026-07-08
 updated: 2026-07-08
 ---
 
-TL;DR: ML training reduces to minimizing a loss function; gradient descent is the workhorse (batch, mini-batch, stochastic variants); constrained problems use Lagrange multipliers / KKT; convexity guarantees global optima.
+# Optimization for Machine Learning
+
+TL;DR: ML training = optimization: minimize a loss L(theta) over parameters theta. Gradient descent and variants (momentum, Adam) are workhorses. For constrained problems, Lagrange multipliers yield KKT conditions. Convex optimization guarantees global optimum and includes linear programming (LP) and quadratic programming (QP) as subclasses — SVMs and regularized regression are convex QPs. Backpropagation (chain rule applied to computation graphs) computes gradients of scalar losses w.r.t. all parameters efficiently.
+
+## Gradients and the Jacobian
+
+For f: R^n -> R, the **gradient** is the vector of partial derivatives:
+
+```
+nabla_x f = [df/dx_1, ..., df/dx_n]^T  in R^n
+```
+
+For f: R^n -> R^m (vector-valued), the **Jacobian** is:
+
+```
+J = df/dx  in R^{m x n},  J_{ij} = df_i/dx_j
+```
+
+For matrix-valued functions, gradients become higher-order tensors. A practical approach: flatten A in R^{m x n} to a vector in R^{mn}, compute Jacobian, reshape [^src2].
+
+**Key gradient identities** (for scalar/vector/matrix derivatives common in ML):
+- d/dx (x^T a) = a
+- d/dx (x^T Ax) = (A + A^T)x = 2Ax if A symmetric
+- d/dA (tr(AB)) = B^T
+- d/dA (ln det A) = A^{-T}
+
+**Backpropagation** applies the chain rule across a computation graph: for scalar loss L and intermediate variable z = f(x), dL/dx = dL/dz * dz/dx. Chained over network layers, this yields gradients for all parameters in a single backward pass [^src2].
 
 ## Gradient Descent
 
-To find a local minimum of f: R^n → R, start at x_0 and iterate [^src1]:
+**Update rule**: given loss L(theta), iterate:
 
-x_{i+1} = x_i − α ∇_x f(x_i)
+```
+theta_{t+1} = theta_t - alpha * nabla_theta L(theta_t)
+```
 
-The gradient ∇f points toward steepest ascent, so subtracting it moves toward a local minimum. The **step size** (learning rate) α controls convergence:
-- Too small → slow convergence
-- Too large → overshooting or divergence
-- Adaptive schedules (e.g., learning rate decay) are commonly used in practice
+where alpha > 0 is the **learning rate** (step size) [^src1].
 
-Gradient descent converges to a stationary point (∇f = 0) but may be a saddle point or local minimum, not necessarily global. Convergence near minima can be slow ("zigzagging" in ill-conditioned landscapes) [^src1].
+**Intuition**: the gradient points in the direction of steepest ascent. Subtracting it moves toward lower loss.
 
-## Gradient Descent with Momentum
+**Convergence**:
+- Too large alpha: oscillates or diverges
+- Too small alpha: converges but slowly
+- For convex L with Lipschitz gradient, gradient descent converges at rate O(1/t)
 
-Standard gradient descent oscillates in narrow valleys. **Momentum** introduces memory of the previous update [^src1]:
+**Variants in practice**:
+- **Stochastic gradient descent (SGD)**: use mini-batch gradient estimate; O(1) cost per step
+- **Momentum**: accumulate velocity; helps navigate ravines
+- **Adam**: adaptive learning rates per parameter; de facto default for neural networks
 
-∆x_i = α ∇_x f(x_{i-1}) + β ∆x_{i-1}
-
-with β ∈ [0,1]. The momentum term β ∆x_{i-1} acts like a moving average of gradients, dampening oscillations and accelerating convergence in consistent descent directions.
-
-## Stochastic and Mini-Batch Gradient Descent
-
-**Batch gradient descent** uses the full training set to compute each gradient update — expensive for large datasets.
-
-**Stochastic gradient descent (SGD)** uses a single randomly sampled data point per update: noisy but cheap. The noise can help escape local minima [^src1].
-
-**Mini-batch SGD** uses a small random subset (batch size B) — the practical standard. Benefits:
-- Vectorized computation (GPU efficiency)
-- Lower variance than pure SGD
-- Can escape sharp local minima
-
-SGD with decreasing learning rate converges almost surely to a local minimum under mild assumptions (Bottou, 1998) [^src1].
-
-## Newton's Method
-
-Uses second-order (curvature) information via the Hessian H = ∇^2 f:
-
-x_{i+1} = x_i − H^{-1} ∇f(x_i)
-
-Converges much faster than gradient descent near the optimum (quadratic vs. linear convergence rate) but requires computing and inverting the Hessian (O(n^3) cost). Quasi-Newton methods (BFGS, L-BFGS) approximate H^{-1} without full computation.
+**Gradient descent does NOT guarantee global optimum for non-convex L** (neural network losses are non-convex). In practice, local minima are often near-global in high dimensions, but saddle points can slow convergence [^src1].
 
 ## Constrained Optimization and Lagrange Multipliers
 
-For the problem min_x f(x) subject to g(x) = 0, the **Lagrangian** is [^src2]:
+Standard form of constrained optimization [^src1]:
 
-L(x, λ) = f(x) + λ g(x)
+```
+min_x f(x)
+subject to:
+  g_i(x) <= 0   (inequality constraints)
+  h_j(x) = 0    (equality constraints)
+```
 
-At an optimum, ∂L/∂x = 0 and ∂L/∂λ = 0. The scalar λ is the **Lagrange multiplier** — it encodes how much the constraint is "costing" the objective.
+**Lagrangian**: convert to unconstrained by introducing Lagrange multipliers lambda_i >= 0 (for inequalities) and nu_j (for equalities):
 
-For inequality constraints g(x) ≤ 0, the Lagrangian is L(x, λ) = f(x) + λ g(x) with λ ≥ 0 (KKT conditions below).
+```
+L(x, lambda, nu) = f(x) + sum_i lambda_i g_i(x) + sum_j nu_j h_j(x)
+```
 
-## KKT Conditions
+**KKT (Karush-Kuhn-Tucker) conditions**: necessary conditions for optimality [^src1]:
+1. **Stationarity**: nabla_x L = 0 (gradient of Lagrangian w.r.t. x vanishes)
+2. **Primal feasibility**: g_i(x*) <= 0, h_j(x*) = 0
+3. **Dual feasibility**: lambda_i >= 0
+4. **Complementary slackness**: lambda_i g_i(x*) = 0 (either constraint is active or multiplier is zero)
 
-For the general constrained problem min_x f(x) subject to g_i(x) ≤ 0, h_j(x) = 0, the **Karush-Kuhn-Tucker (KKT) conditions** are necessary (and sufficient for convex problems):
+KKT conditions are sufficient for optimality when the problem is convex.
 
-1. Stationarity: ∇_x L = 0
-2. Primal feasibility: g_i(x*) ≤ 0, h_j(x*) = 0
-3. Dual feasibility: λ_i ≥ 0
-4. Complementary slackness: λ_i g_i(x*) = 0 for all i
+**Lagrange multipliers (equality-only case)**: minimize f(x) subject to h(x) = 0. At the optimum, nabla f and nabla h are parallel:
 
-Complementary slackness says each constraint is either active (g_i = 0) or its multiplier is zero. KKT conditions are central to SVM derivation — see [Support Vector Machines](/ai-engineering/support-vector-machines.md).
+```
+nabla f(x*) = nu nabla h(x*)
+```
+
+This says the level curves of f and the constraint surface are tangent at the optimum.
 
 ## Convex Optimization
 
-A function f is **convex** if for all x,y and θ ∈ [0,1] [^src2]:
+A **convex set** C: for all x, y in C and theta in [0,1], theta*x + (1-theta)*y in C. A set is convex iff the line segment between any two points lies in the set.
 
-f(θx + (1−θ)y) ≤ θf(x) + (1−θ)f(y)
+A **convex function** f: R^D -> R satisfies [^src1]:
 
-Equivalently (when twice differentiable): the Hessian ∇^2 f(x) is positive semi-definite everywhere. Convex functions have no local minima that are not global — a critical property for reliable optimization.
+```
+f(theta*x + (1-theta)*y) <= theta*f(x) + (1-theta)*f(y)
+```
 
-A **convex optimization problem** has a convex objective and convex inequality constraints (and linear equality constraints). For convex problems: every local minimum is a global minimum; KKT conditions are sufficient; duality gap is zero (strong duality).
+for all x, y in domain and theta in [0,1]. Geometrically: chord lies above function.
 
-**Linear programming**: convex objective and constraints both linear; solved in polynomial time via simplex or interior point methods.
+**Equivalent characterizations** (for differentiable f):
+- First-order: f(y) >= f(x) + nabla f(x)^T (y - x)  (function lies above tangent)
+- Second-order: nabla^2 f(x) is positive semidefinite everywhere
 
-**Quadratic programming**: quadratic convex objective with linear constraints. Arises in SVM training (dual formulation).
+**Jensen's inequality**: for convex f and weights alpha_i summing to 1: f(sum_i alpha_i x_i) <= sum_i alpha_i f(x_i) [^src1].
 
-## Primal-Dual Duality
+**Key property**: every local minimum of a convex function over a convex set is a **global minimum**. This makes convex problems tractable.
 
-The **dual problem** of min_x f(x) s.t. g(x) ≤ 0 is max_λ D(λ) where D(λ) = min_x L(x, λ). The dual is always convex regardless of the primal. Under strong duality (Slater's condition for convex problems), the primal and dual optima coincide — enabling the dual formulation of SVMs which is often easier to solve [^src2].
+**Convex optimization problem**: minimize f(x) subject to g_i(x) <= 0 and h_j(x) = 0 where f and g_i are convex, and h_j = 0 are convex sets [^src1].
 
-[^src1]: [Mathematics for Machine Learning, Part 11](../../raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-11.md)
-[^src2]: [Mathematics for Machine Learning, Part 12](../../raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-12.md)
+## Linear Programming (LP)
+
+Special case: linear objective and linear constraints [^src1]:
+
+```
+min_x c^T x
+subject to Ax <= b
+```
+
+- d variables, m constraints
+- The feasible set is a convex polytope; the optimum is always at a vertex
+- Dual LP: max_{lambda>=0} -lambda^T b  subject to A^T lambda + c = 0
+- Can solve primal or dual depending on which has fewer variables
+
+LP is one of the most widely used optimization classes in industry (supply chain, scheduling, portfolio optimization).
+
+## Quadratic Programming (QP)
+
+Special case: quadratic objective, linear constraints [^src1]:
+
+```
+min_x 0.5 x^T Q x + c^T x
+subject to Ax <= b
+```
+
+where Q is symmetric positive definite (so objective is convex).
+
+**Key property**: the dual of a QP is also a QP. SVMs (support vector machines) are solved as QPs (see [/ai-engineering/support-vector-machines.md](/ai-engineering/support-vector-machines.md)).
+
+**Regularized regression as QP**: Ridge regression minimizes ||y - Phi theta||^2 + lambda||theta||^2 — a QP with no constraints (unconstrained, convex).
+
+## Newton's Method
+
+Gradient descent uses first-order information; Newton's method uses second-order (Hessian) [^src1]:
+
+```
+theta_{t+1} = theta_t - (nabla^2 L(theta_t))^{-1} nabla L(theta_t)
+```
+
+- Converges quadratically (doubles digits of precision per step) vs linearly for gradient descent
+- Computationally expensive: requires O(n^3) to invert n×n Hessian
+- **Quasi-Newton methods** (L-BFGS): approximate Hessian without full computation; standard for medium-scale ML
+
+## Duality
+
+For any primal optimization problem, the **Lagrange dual** is:
+
+```
+max_{lambda>=0, nu} D(lambda, nu) = min_x L(x, lambda, nu)
+```
+
+**Weak duality**: D(lambda*, nu*) <= f(x*) always. The dual is a lower bound.
+
+**Strong duality**: D(lambda*, nu*) = f(x*) holds for convex problems satisfying Slater's condition (there exists a strictly feasible point). Dual solution = primal solution.
+
+**Dual SVM**: the SVM dual expresses the problem purely in terms of inner products between training points, enabling the kernel trick.
+
+## ML Training as Optimization
+
+| ML task | Optimization problem | Key property |
+|---|---|---|
+| Linear regression (MLE) | min ||y - X theta||^2 | Closed form: theta = (X^T X)^{-1} X^T y |
+| Ridge regression (MAP) | min ||y - X theta||^2 + lambda||theta||^2 | Closed form: theta = (X^T X + lambda I)^{-1} X^T y |
+| Logistic regression | min sum log(1 + exp(-y_n theta^T x_n)) | Convex, no closed form; use gradient descent |
+| SVM (hard margin) | min ||w||^2 s.t. y_n(w^T x_n + b) >= 1 | Convex QP; dual has kernel trick |
+| Deep learning | min L(theta) for non-convex L | No convergence guarantee; SGD with momentum in practice |
+| EM algorithm (GMMs) | max E[log p(X, Z | theta)] | Monotone non-decreasing in each step; converges to local optimum |
+
+## Related Corpus Pages
+
+- [/ai-engineering/linear-algebra-for-ml.md](/ai-engineering/linear-algebra-for-ml.md) — vector calculus prerequisites
+- [/ai-engineering/probability-and-statistics-for-ml.md](/ai-engineering/probability-and-statistics-for-ml.md) — MLE/MAP objectives to optimize
+- [/ai-engineering/support-vector-machines.md](/ai-engineering/support-vector-machines.md) — SVM as a QP with dual formulation
+- [/ai-engineering/gaussian-mixture-models.md](/ai-engineering/gaussian-mixture-models.md) — EM algorithm for GMM optimization
+- [/ai-engineering/sources/mathematics-for-machine-learning.md](/ai-engineering/sources/mathematics-for-machine-learning.md) — full book summary
+
+---
+
+[^src1]: [Mathematics for Machine Learning, Part 12](../../raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-12.md)
+[^src2]: [Mathematics for Machine Learning, Part 8](../../raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-08.md)
