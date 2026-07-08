@@ -42,6 +42,9 @@ sources:
   - path: raw/pdf/book-mastering-bitcoin-3rd-edition-13-bitcoin-security.md
     channel: book
     ingested_at: 2026-07-07
+  - path: raw/_inbox/book-mastering-bitcoin-3rd-edition-14-second-layer-applications.md
+    channel: book
+    ingested_at: 2026-07-08
 aliases:
   - Mastering Bitcoin
   - Mastering Bitcoin 3rd Edition
@@ -50,7 +53,7 @@ tags:
   - corpus/blockchain
   - source
 created: 2026-07-07
-updated: 2026-07-07
+updated: 2026-07-08
 ---
 
 # Mastering Bitcoin (3rd Edition) — Antonopoulos & Harding
@@ -80,15 +83,18 @@ The 3rd edition adds coverage of Taproot (Schnorr signatures, Tapscript, MAST), 
 | 11 | The Blockchain: block structure, headers, Merkle paths, forks |
 | 12 | Mining and Consensus: PoW, difficulty adjustment, halvings, mempool |
 | 13 | Bitcoin Security: key management, cold storage, hardware wallets |
+| 14 | Second-Layer Applications: UTXO primitives, colored coins, client-side validation, payment channels, Lightning Network |
 
 ## Key concepts introduced
 
 - [Bitcoin Transactions](/blockchain/bitcoin-transactions.md) — UTXO model; inputs spend previous outputs; no intrinsic "accounts"
 - [Bitcoin Script](/blockchain/bitcoin-script.md) — Forth-like stack language for authorization/authentication
 - [Bitcoin Security](/blockchain/bitcoin-security.md) — decentralized security model; key custody as bearer asset
+- [Payment Channels](/blockchain/payment-channels.md) — funding/commitment/settlement lifecycle; timelocks and revocation keys for trustless off-chain state
+- [Lightning Network](/blockchain/lightning-network.md) — routed payment channel network; HTLC chaining; onion routing via Sphinx
 
 ## Source provenance
 
-All 13 chapters collected from the public GitHub repository (CC BY-SA 4.0). Each chapter is a separate source file in the inbox, collected 2026-07-06.
+Chapters 1–13 collected from the public GitHub repository (CC BY-SA 4.0), each as a separate source file, collected 2026-07-06. Chapter 14 (Second-Layer Applications) collected 2026-07-06 and ingested 2026-07-08.
 
 [^src1]: Mastering Bitcoin, 3rd Edition, Antonopoulos & Harding, CC BY-SA 4.0, https://github.com/bitcoinbook/bitcoinbook

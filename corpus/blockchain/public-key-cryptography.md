@@ -6,6 +6,9 @@ sources:
   - path: raw/notes/notes-public-key-cryptography-scrape.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/_inbox/book-mastering-ethereum-12-chapter-4-cryptography.md
+    channel: book
+    ingested_at: 2026-07-08
 aliases:
   - asymmetric cryptography
   - PKI
@@ -18,7 +21,7 @@ tags:
   - corpus/blockchain
   - concept
 created: 2026-06-17
-updated: 2026-06-23
+updated: 2026-07-08
 ---
 
 # Public-Key Cryptography
@@ -91,6 +94,32 @@ Rule: **never roll your own crypto**.
 | Software (Bitcoin Core, Electrum, Wasabi) | Medium | Medium |
 | Hardware (Ledger, Trezor, KeepKey) | High | Medium |
 
+## Ethereum-Specific Cryptography
+
+Ethereum uses the same secp256k1 elliptic curve as Bitcoin for EOA key pairs, but the address derivation differs [^src2]:
+
+- **Ethereum address derivation**: `keccak256(public_key)[12:]` — take the last 20 bytes of the Keccak-256 hash of the uncompressed public key.
+- **vs Bitcoin**: Bitcoin uses `RIPEMD160(SHA256(public_key))`.
+
+Ethereum uses **Keccak-256** (NOT SHA-3 — Keccak was submitted to the SHA-3 competition but Ethereum adopted it before NIST finalized the standard with padding changes) [^src2].
+
+### Validator Keys (BLS)
+
+Post-Merge, Ethereum validators use a different key scheme for consensus signatures [^src2]:
+
+- **BLS12-381** elliptic curve (not secp256k1).
+- BLS signatures can be **aggregated**: hundreds of validator signatures are combined into one compact signature, enabling efficient attestation aggregation across the 1M+ validator set.
+- Each validator has two key pairs: a signing key (hot, used frequently) and a withdrawal key (cold, used only to exit).
+
+### KZG Commitments (EIP-4844)
+
+KZG (Kate-Zaverucha-Goldberg) polynomial commitments are used in blob transactions (EIP-4844) [^src2]:
+
+- A KZG commitment is a constant-size (~48 byte) representation of a polynomial (the blob data).
+- KZG commitments are verifiable: a prover can produce a proof that the polynomial evaluates to a specific value at a specific point.
+- Used by ZK rollups to commit to their data batches on Ethereum L1.
+- Requires a trusted setup ceremony (Ethereum held "The Ceremony" with 141,000+ participants in 2023).
+
 ## Related pages
 
 - [Hash Functions](/blockchain/hash-functions.md) — SHA-256 and RIPEMD160 are used in address derivation
@@ -98,5 +127,7 @@ Rule: **never roll your own crypto**.
 - [The Cypherpunks](/blockchain/the-cypherpunks.md) — the movement that fought for public cryptography access
 - [Zero-Knowledge Proofs](/blockchain/zero-knowledge-proofs.md) — **depends-on** the same asymmetric primitives (ECC, discrete log) that underpin SNARKs; Shor's algorithm threatens both
 - [Proof-of-Work](/blockchain/proof-of-work.md) — **complements** public-key crypto in Bitcoin: signatures authorize transactions, PoW orders them into consensus
+- [Ethereum](/blockchain/ethereum.md) — Ethereum uses secp256k1 (EOA keys) and BLS12-381 (validator keys)
 
 [^src1]: [Public-Key Cryptography](../../raw/notes/notes-public-key-cryptography-scrape.md)
+[^src2]: [Mastering Ethereum — Chapter 4. Cryptography](../../raw/_inbox/book-mastering-ethereum-12-chapter-4-cryptography.md)

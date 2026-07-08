@@ -7,12 +7,12 @@ tags:
   - corpus/blockchain
   - hub
 created: 2026-06-17
-updated: 2026-07-07
+updated: 2026-07-08
 ---
 
 # Blockchain
 
-TL;DR: Concepts, history, cryptographic primitives, and network design underlying Bitcoin and the broader cryptocurrency ecosystem. Sourced from the nakamoto.ghost.io developer course (Haseeb Qureshi, 2019–2020), Eli Ben-Sasson's survey of cryptographic proof systems, and Mastering Bitcoin 3rd Edition (Antonopoulos & Harding, CC BY-SA 4.0).
+TL;DR: Concepts, history, cryptographic primitives, and network design underlying Bitcoin and the broader cryptocurrency ecosystem. Sourced from the nakamoto.ghost.io developer course (Haseeb Qureshi, 2019–2020), Eli Ben-Sasson's survey of cryptographic proof systems, Mastering Bitcoin 3rd Edition (Antonopoulos & Harding, CC BY-SA 4.0), and Mastering Ethereum (Antonopoulos & Wood, CC BY-SA 4.0). Now covers the full Ethereum technical stack: EVM, smart contracts, DeFi, scaling, and consensus.
 
 ## Domain description
 
@@ -35,6 +35,24 @@ This domain covers the full technical and historical stack of blockchain and cry
 - [Hash Functions](/blockchain/hash-functions.md) — concept · draft · SHA-256; cryptographic properties; birthday attacks; broken algorithms
 - [Merkle Trees](/blockchain/merkle-trees.md) — concept · draft · Construction; inclusion proofs; O(log n) verification; Bitcoin SPV light clients
 
+### Second-Layer Applications
+- [Lightning Network](/blockchain/lightning-network.md) — concept · draft · Payment channels + HTLC routing; Bitcoin's L2 for micropayments
+- [Payment Channels](/blockchain/payment-channels.md) — concept · draft · Bidirectional off-chain channels; revocable commitment transactions; trustless settlement
+
+### Ethereum
+- [Ethereum](/blockchain/ethereum.md) — entity · draft · World computer; Turing-complete smart contract platform; ETH currency; The Merge (PoS)
+- [Ethereum Nodes](/blockchain/ethereum-nodes.md) — concept · draft · Execution + consensus client split; full/archive/light nodes; client diversity
+- [Ethereum Transactions](/blockchain/ethereum-transactions.md) — concept · draft · Nonce, gas, EIP-1559 base fee + priority fee; transaction lifecycle
+- [Smart Contracts](/blockchain/smart-contracts.md) — concept · draft · Solidity vs Vyper; ABI; deployment; events; visibility modifiers
+- [Smart Contract Security](/blockchain/smart-contract-security.md) — concept · draft · Defensive programming; reentrancy; overflow; access control; Swiss cheese model
+- [Ethereum Tokens](/blockchain/ethereum-tokens.md) — concept · draft · ERC-20, ERC-721 (NFT), ERC-1155, ERC-4626; fungibility
+- [Oracles](/blockchain/oracles.md) — concept · draft · Oracle problem; Chainlink; VRF; decentralized oracle networks
+- [Decentralized Applications](/blockchain/decentralized-applications.md) — concept · draft · DApp architecture; Web3 stack; IPFS; ENS
+- [DeFi](/blockchain/defi.md) — concept · draft · AMMs; lending/borrowing; flash loans; stablecoins; composability
+- [Ethereum Virtual Machine](/blockchain/ethereum-virtual-machine.md) — concept · draft · Quasi-Turing-complete stack machine; 256-bit word; gas metering; opcodes; EVM compatibility
+- [Ethereum Consensus](/blockchain/ethereum-consensus.md) — concept · draft · PoS; Gasper (Casper FFG + LMD GHOST); validators; slashing; The Merge
+- [Ethereum Scaling](/blockchain/ethereum-scaling.md) — concept · draft · Scalability trilemma; L2 rollups (optimistic/ZK); EIP-4844; danksharding
+
 ### Networking
 - [P2P Networking](/blockchain/p2p-networking.md) — concept · draft · P2P architecture; gossip protocols; Gnutella; Bitcoin's peer discovery, spam protection, and privacy (Dandelion)
 
@@ -48,4 +66,5 @@ This domain covers the full technical and historical stack of blockchain and cry
 - [NFT Market Dynamics](/blockchain/nft-markets.md) — concept · draft · Floor price mechanics, supply manipulation (burns/staking), royalty fragility, pump-and-dump patterns, OpenSea data breach (2022 era documentation)
 
 ### Sources
-- [Mastering Bitcoin, 3rd Edition (Antonopoulos & Harding)](/blockchain/sources/mastering-bitcoin-3rd-edition.md) — source · draft · full technical reference; 13 chapters; CC BY-SA 4.0
+- [Mastering Bitcoin, 3rd Edition (Antonopoulos & Harding)](/blockchain/sources/mastering-bitcoin-3rd-edition.md) — source · draft · full technical reference; 14 chapters; CC BY-SA 4.0
+- [Mastering Ethereum (Antonopoulos & Wood)](/blockchain/sources/mastering-ethereum.md) — source · draft · 17 chapters; full Ethereum technical reference; CC BY-SA 4.0

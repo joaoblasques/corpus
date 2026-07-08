@@ -5,21 +5,21 @@ status: stub
 sources:
   - path: raw/youtube/youtube-eA9Zf2-qYYM-building-ai-agents-that-actually-work-full-course.md
     channel: youtube
-    ingested_at: 2026-07-06
+    ingested_at: 2026-07-08
 aliases: []
 tags:
   - corpus/ai-engineering
   - source
   - youtube-quick-intake
-created: 2026-07-06
-updated: 2026-07-06
+created: 2026-07-08
+updated: 2026-07-08
 provisional: false
 youtube_video_id: eA9Zf2-qYYM
 url: https://youtu.be/eA9Zf2-qYYM
 channel_name: Greg Isenberg
 playlist: Corpus_queue
 published: 2026-03-17
-transcript_status: blocked
+transcript_status: metadata
 ---
 
 # Building AI Agents that actually work (Full Course)

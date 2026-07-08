@@ -2,6 +2,35 @@
 
 > OKF v0.1 change log. Newest first, grouped by date.
 
+## 2026-07-08
+* **Ingest**: Mastering Bitcoin 3rd Ed. Ch14 (second-layer applications) — routed to blockchain
+  - sources: book-mastering-bitcoin-3rd-edition-14-second-layer-applications.md (channel: book)
+  - domain: blockchain
+  - new pages: [/blockchain/lightning-network.md, /blockchain/payment-channels.md]
+  - pages updated: [/blockchain/sources/mastering-bitcoin-3rd-edition.md, /blockchain/README.md]
+  - notes: Ch14 covers Lightning Network, HTLC routing, Sphinx onion, penalty transactions. 2 new concept pages + source page update.
+
+* **Ingest**: Mastering Ethereum (Antonopoulos & Wood, all 17 chapters) — routed to blockchain
+  - sources: book-mastering-ethereum-01 through -17 (channel: book, 17 files)
+  - domain: blockchain
+  - new pages: [/blockchain/ethereum.md, /blockchain/ethereum-nodes.md, /blockchain/ethereum-transactions.md, /blockchain/smart-contracts.md, /blockchain/smart-contract-security.md, /blockchain/ethereum-tokens.md, /blockchain/oracles.md, /blockchain/decentralized-applications.md, /blockchain/defi.md, /blockchain/ethereum-virtual-machine.md, /blockchain/ethereum-consensus.md, /blockchain/ethereum-scaling.md, /blockchain/sources/mastering-ethereum.md]
+  - pages updated: [/blockchain/zero-knowledge-proofs.md, /blockchain/README.md]
+  - notes: Full Ethereum technical stack. 17 chapters → 13 new pages + 2 updated. CC BY-SA 4.0. All 17 source files stamped.
+
+* **Ingest**: Mathematics for Machine Learning (Deisenroth, Faisal, Ong — Cambridge 2020, 20 PDF parts) — routed to ai-engineering
+  - sources: pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-01 through -20 (channel: pdf, 20 files)
+  - domain: ai-engineering
+  - new pages: [/ai-engineering/linear-algebra-for-ml.md, /ai-engineering/matrix-decompositions.md, /ai-engineering/probability-and-statistics-for-ml.md, /ai-engineering/optimization-for-ml.md, /ai-engineering/pca-and-dimensionality-reduction.md, /ai-engineering/gaussian-mixture-models.md, /ai-engineering/support-vector-machines.md, /ai-engineering/sources/mathematics-for-machine-learning.md]
+  - pages updated: [/ai-engineering/README.md]
+  - notes: Parts I (linear algebra, probability, optimization) and II (PCA, GMMs, SVMs, deep learning). 8 new pages. All 20 source files stamped.
+
+* **Ingest**: Introduction to Statistical Learning (James, Witten, Hastie, Tibshirani — 12 PDF parts) — routed to ai-engineering
+  - sources: pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-01 through -12 (channel: pdf, 12 files)
+  - domain: ai-engineering
+  - new pages: [/ai-engineering/statistical-learning.md, /ai-engineering/regularization.md, /ai-engineering/resampling-methods.md, /ai-engineering/tree-based-methods.md, /ai-engineering/classification-methods.md, /ai-engineering/sources/introduction-to-statistical-learning.md]
+  - pages updated: [/ai-engineering/support-vector-machines.md, /ai-engineering/README.md]
+  - notes: ISLR 2nd ed.; 12 parts of 21-part PDF (parts 1-12 in scope). Statistical learning framework, bias-variance, regularization, resampling, trees/forests/boosting, classification. 6 new pages. All 12 source files stamped.
+
 ## 2026-07-07
 * **Lint**: Weekly Opus synthesis+lint pass (Medium scope) over the week's 29 changed pages.
   - broken links/citations: none found across the 5 data-driven-dynamics concept pages, the 2 Burns pattern pages, or the 20 claude-code source stubs (survey confirmed zero body cross-links and all frontmatter source paths resolve).

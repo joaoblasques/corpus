@@ -6,6 +6,9 @@ sources:
   - path: raw/notes/notes-cambrian-explosion-of-crypto-proofs-scrape.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/_inbox/book-mastering-ethereum-09-chapter-17-zero-knowledge-proofs.md
+    channel: book
+    ingested_at: 2026-07-08
 aliases:
   - ZKP
   - zero knowledge proof
@@ -21,7 +24,7 @@ tags:
   - corpus/blockchain
   - concept
 created: 2026-06-17
-updated: 2026-06-17
+updated: 2026-07-08
 ---
 
 # Zero-Knowledge Proofs & Proof Systems
@@ -91,10 +94,66 @@ The "Lindy Effect" here: symmetric primitives have been battle-tested much longe
 - **Groth16 / PLONK SNARKs**: use when proof size is the constraint (e.g., on-chain verification costs)
 - **Symmetric STARKs**: use for scalability, post-quantum security, and transparency (no trusted setup) [^src1]
 
-## Related pages
+## ZK Proofs in Ethereum
+
+This section covers ZK proof applications specific to Ethereum, sourced from Chapter 17 of Mastering Ethereum [^src2].
+
+### Why Ethereum Needs ZK Proofs
+
+The EVM is a state transition function: every new block applies transactions to produce a new state. Today, every full node re-executes all transactions in every block to trustlessly verify the new state. This approach creates a hardware/decentralization tradeoff: higher throughput requires stronger hardware, which pushes toward centralization [^src2].
+
+ZK proofs break this tradeoff: a small set of powerful provers can execute transactions and generate a proof; all other nodes verify the proof (much cheaper) and update state trustlessly [^src2].
+
+### ZK Rollups
+
+ZK rollups post aggregated proofs to Ethereum L1 once per batch (roughly hourly). The L1 verifies the ZK proof before accepting the new state root. This means [^src2]:
+- L2 transactions are final when the proof is verified on L1.
+- Time to finality = posting interval (avg ~30 min for current rollups).
+- L1 does not need to re-execute L2 transactions — just verify the proof.
+
+**zkSync Era** and **Starknet** are the leading ZK rollups:
+- zkSync Era uses Groth16 and PLONK proofs; is EVM-compatible.
+- Starknet uses zk-STARKs (Cairo VM); requires transpiling or rewriting contracts in Cairo.
+
+### zkEVM
+
+A zkEVM is a circuit proving EVM execution. It produces a validity proof that a specific EVM state transition (given the transactions and prior state) was computed correctly, without re-executing [^src2].
+
+Challenges: EVM was not designed with ZK proving in mind; some opcodes are expensive to circuit-encode. As of 2025, zkEVMs are live but proof generation time is a known bottleneck.
+
+### ZK Proof Systems Used in Ethereum
+
+| System | Used By | Properties |
+|---|---|---|
+| Groth16 | zkSync, Tornado Cash | Shortest proofs (<200 bytes); trusted setup; fast verify |
+| PLONK | Many L2s | Universal trusted setup; flexible; efficient |
+| zk-STARKs | Starknet | No trusted setup; post-quantum; larger proofs |
+
+**Trusted setup** — for Groth16 and early PLONK, a multi-party ceremony generates public parameters. If any participant in the ceremony is honest (destroys their secret), the system is secure. PLONK (2019) introduced *universal and updatable* trusted setups [^src2].
+
+**Post-quantum security** — STARKs rely only on collision-resistant hash functions (symmetric cryptography), which quantum computers cannot efficiently attack. SNARKs rely on elliptic curve discrete logarithm, which Shor's algorithm breaks [^src1].
+
+### Groth16 Timeline
+
+Introduced in 2016, Groth16 "significantly improved the efficiency of zk-SNARKs by reducing proof size and verification time. Because of its exceptional succinctness, Groth16 remains widely used today, despite the availability of newer systems" [^src2].
+
+### zk-SNARK vs. zk-STARK in Ethereum Context
+
+| Dimension | zk-SNARK (Groth16/PLONK) | zk-STARK |
+|---|---|---|
+| Proof size | Very small (200 bytes – few KB) | Large (100s of KB) |
+| On-chain verification cost | Low | Higher (larger calldata) |
+| Trusted setup | Required (Groth16) / Universal (PLONK) | None (transparent) |
+| Post-quantum | No | Yes |
+| L2 examples | zkSync Era | Starknet |
+
+## Related Pages
 
 - [Hash Functions](/blockchain/hash-functions.md) — symmetric primitives (SHA-2) underpin STARKs and commitment schemes
 - [Merkle Trees](/blockchain/merkle-trees.md) — Merkle-tree-based commitment schemes are the primary LDC method for STARKs
 - [Public-Key Cryptography](/blockchain/public-key-cryptography.md) — asymmetric assumptions (ECC, discrete log) underpin SNARKs
+- [Ethereum Scaling](/blockchain/ethereum-scaling.md) — ZK rollups are the primary scaling path
+- [Ethereum Virtual Machine](/blockchain/ethereum-virtual-machine.md) — the zkEVM proves EVM execution
 
 [^src1]: [A Cambrian Explosion of Crypto Proofs](../../raw/notes/notes-cambrian-explosion-of-crypto-proofs-scrape.md)
+[^src2]: [Mastering Ethereum — Chapter 17. Zero-Knowledge Proofs](../../raw/_inbox/book-mastering-ethereum-09-chapter-17-zero-knowledge-proofs.md)

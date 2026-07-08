@@ -3,13 +3,66 @@ okf_version: "0.1"
 ---
 # Corpus Index
 
-> Last updated: 2026-07-07 | Total pages: 357 | Total sources: 1490
+> Last updated: 2026-07-08 | Total pages: 386 | Total sources: 1540
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
 ## Domains
 
 ### ai-engineering
+- [Linear Algebra for ML](/ai-engineering/linear-algebra-for-ml.md) — concept · draft · Vector spaces, basis, rank, inner products, projections, Gram-Schmidt
+- [Matrix Decompositions](/ai-engineering/matrix-decompositions.md) — concept · draft · Eigenvalues, eigendecomposition, Cholesky, LU; cross-links to SVD
+- [Probability and Statistics for ML](/ai-engineering/probability-and-statistics-for-ml.md) — concept · draft · Bayes' theorem, Gaussian, exponential family, conjugate priors, change of variables
+- [Optimization for ML](/ai-engineering/optimization-for-ml.md) — concept · draft · Gradient descent, Newton's method, KKT conditions, convex optimization
+- [PCA and Dimensionality Reduction](/ai-engineering/pca-and-dimensionality-reduction.md) — concept · draft · Variance maximization, reconstruction error, eigenfaces, data compression
+- [Gaussian Mixture Models](/ai-engineering/gaussian-mixture-models.md) — concept · draft · EM algorithm, responsibilities, density estimation
+- [Support Vector Machines](/ai-engineering/support-vector-machines.md) — concept · draft · Max-margin classifier, kernel trick, soft-margin, dual formulation
+- [Statistical Learning](/ai-engineering/statistical-learning.md) — concept · draft · Supervised/unsupervised framework, bias-variance tradeoff, flexibility vs interpretability
+- [Regularization](/ai-engineering/regularization.md) — concept · draft · Ridge (L2), lasso (L1), elastic net; lambda selection via cross-validation
+- [Resampling Methods](/ai-engineering/resampling-methods.md) — concept · draft · Cross-validation (LOOCV, k-fold), bootstrap, one-standard-error rule
+- [Tree-Based Methods](/ai-engineering/tree-based-methods.md) — concept · draft · CART, bagging, random forests, boosting (AdaBoost, gradient boosting, XGBoost)
+- [Classification Methods](/ai-engineering/classification-methods.md) — concept · draft · Logistic regression, LDA, QDA, KNN; ROC/AUC
+- [Mathematics for Machine Learning (Deisenroth et al.)](/ai-engineering/sources/mathematics-for-machine-learning.md) — source · draft · Cambridge 2020 textbook; Parts I (math) and II (ML algorithms); 20-part PDF ingest
+- [Introduction to Statistical Learning (James et al.)](/ai-engineering/sources/introduction-to-statistical-learning.md) — source · draft · 2nd ed.; ISLR; supervised learning taxonomy through advanced methods; 12-part PDF ingest
+- ["AI for SaaS: Scale Growth with Customer Retention Software"](/ai-engineering/sources/ai-for-saas-scale-growth-with-customer-retention-software-0daea80b.md) — source · stub · The document discusses how to scale SaaS growth using customer retention software powered by AI. It …
+- ["AI Agent Observability: How to Monitor Agents Running for Hours Without Babysitting"](/ai-engineering/sources/ai-agent-observability-how-to-monitor-agents-running-for-hou-48922d8f.md) — source · stub · This document covers AI agent observability, focusing on monitoring long-running AI agents to preven…
+- ["AI Agent Evaluators and Verifiers: How to Stop Agents from Grading Their Own Work"](/ai-engineering/sources/ai-agent-evaluators-and-verifiers-how-to-stop-agents-from-gr-b22aadef.md) — source · stub · The article discusses the issue of AI agents evaluating their own work, which leads to biased result…
+- [AI Agent Development Company | Custom AI Agents & Services](/ai-engineering/sources/ai-agent-development-company-custom-ai-agents-services-fe611269.md) — source · stub · ['AY Automate develops custom AI agents for businesses to automate complex workflows and make data-d…
+- [A global workspace in language models](/ai-engineering/sources/a-global-workspace-in-language-models-22b32121.md) — source · stub · Researchers discovered a 'J-space' in a language model, a mental workspace that enables deliberate r…
+- [Cursor AI - Complete Guide for Beginners](/ai-engineering/sources/cursor-ai-complete-guide-for-beginners-bee.md) — source · stub · Cursor AI is a comprehensive tool for AI engineering, offering features like task management, UI com…
+- [Cloud Engineering - Roadmap From Beginner to Advanced](/ai-engineering/sources/cloud-engineering-roadmap-from-beginner-to-advanced-adaced.md) — source · stub · A structured learning roadmap for becoming a cloud engineer, covering essential skills, cloud concep…
+- [Claude Cowork - Getting Started Guide](/ai-engineering/sources/claude-cowork-getting-started-guide-de.md) — source · stub · Claude Cowork is a non-developer accessible version of Claude Code, allowing users to read and write…
+- [Claude Code - Three MCPs That Unlock True Potential](/ai-engineering/sources/claude-code-three-mcps-that-unlock-true-potential-ea.md) — source · stub · This document discusses three MCPs (Model and Code Partners) that can be used with Claude Code: Cont…
+- [Claude Code - SuperClaude Framework for Complex Commands](/ai-engineering/sources/claude-code-superclaude-framework-for-complex-commands-cad.md) — source · stub · ['SuperClaude is a framework for complex commands in Claude Code, providing 17 powerful slash comman…
+- [Claude Code - Sub-Agents with MCP Tools Practical Demo](/ai-engineering/sources/claude-code-sub-agents-with-mcp-tools-practical-demo-de.md) — source · stub · This document covers creating sub-agents with MCP tools using Claude Code, including practical walkt…
+- [Claude Code - Sub-Agents Tutorial Build Test and Reuse](/ai-engineering/sources/claude-code-sub-agents-tutorial-build-test-and-reuse-ee.md) — source · stub · ['This document covers the concept of sub-agents in Claude Code, a pre-configured AI personality tha…
+- [Claude Code - Sub-Agents Quick Start Guide](/ai-engineering/sources/claude-code-sub-agents-quick-start-guide-de.md) — source · stub · ['This document provides a quick start guide to using Claude for building sub-agents.', 'It explains…
+- [Claude Code - Skills Deep Dive and 5 Essential Skills](/ai-engineering/sources/claude-code-skills-deep-dive-and-5-essential-skills-doc.md) — source · stub · Claude Code is a system that can be specialized with skills to perform specific tasks, transforming …
+- [Claude Code - Skills Complete Guide with Live Build](/ai-engineering/sources/claude-code-skills-complete-guide-with-live-build-bd.md) — source · stub · Claude Code Skills are repeatable automation packages that provide consistent instructions for perfo…
+- [Claude Code - Skills and CLAUDE.md Context Engineering](/ai-engineering/sources/claude-code-skills-and-claude-md-context-engineering-eee.md) — source · stub · The document discusses Claude Code, a business automation system that utilizes context engineering t…
+- [Claude Code - Quiet Session Limits Explained](/ai-engineering/sources/claude-code-quiet-session-limits-explained-eaed.md) — source · stub · This document explains Claude's session-based limit system, a 5-hour timer that starts with the firs…
+- [Claude Code - Pro Plan vs API Cost Comparison](/ai-engineering/sources/claude-code-pro-plan-vs-api-cost-comparison-ca.md) — source · stub · ['This document compares the cost of different plans for Claude Code, a large language model.', 'It …
+- [Claude Code - btw and fork-session Features](/ai-engineering/sources/claude-code-btw-and-fork-session-features-feae.md) — source · stub · Claude Code introduces two new features: /btw for quick side questions and /fork-session for deep di…
+- [Claude Code Best Practices - Anthropic Official](/ai-engineering/sources/claude-code-best-practices-anthropic-official-ffca.md) — source · stub · The document discusses Claude Code, a 'pure agent' AI tool that operates through the terminal, augme…
+- [I'm using claude --worktree for everything now](/ai-engineering/sources/i-m-using-claude-worktree-for-everything-now-yv8VZpov8bk.md) — source · stub · quick intake
+- [Common Table Expressions vs Subqueries vs Views vs Temp Tables for data engineers](/ai-engineering/sources/common-table-expressions-vs-subqueries-vs-views-vs-temp-tabl-vstJyDo88kA.md) — source · stub · quick intake
+- [Your codebase is NOT ready for AI (here's how to fix it)](/ai-engineering/sources/your-codebase-is-not-ready-for-ai-here-s-how-to-fix-it-uC44zFz7JSM.md) — source · stub · quick intake
+- [10 Money Myths That Keep You Broke](/ai-engineering/sources/10-money-myths-that-keep-you-broke-rTO0GofZJzA.md) — source · stub · quick intake
+- [Herdr in about 6 minutes](/ai-engineering/sources/herdr-in-about-6-minutes-qnIu-Xu64H0.md) — source · stub · quick intake
+- [Frontend is HARDER for AI than backend (here's how to fix it)](/ai-engineering/sources/frontend-is-harder-for-ai-than-backend-here-s-how-to-fix-it-pSritFeoYFo.md) — source · stub · quick intake
+- ["Data Modeling: One Big Table vs Kimball vs Relational for data engineers"](/ai-engineering/sources/data-modeling-one-big-table-vs-kimball-vs-relational-for-dat-ltQgbSs99WU.md) — source · stub · quick intake
+- [He Asked AI To Make Money. It Did.](/ai-engineering/sources/he-asked-ai-to-make-money-it-did-l0Vqm0ZIySc.md) — source · stub · quick intake
+- ["Building a REAL feature with Claude Code: every step explained"](/ai-engineering/sources/building-a-real-feature-with-claude-code-every-step-explaine-hX7yG1KVYhI.md) — source · stub · quick intake
+- ["Data Modeling Tutorial: Star Schema (aka Kimball Approach)"](/ai-engineering/sources/data-modeling-tutorial-star-schema-aka-kimball-approach-gRE3E7VUzRU.md) — source · stub · quick intake
+- [Data Modeling - Walking Through How To Data Model As A Data Engineer - Dimensional Modeling 101](/ai-engineering/sources/data-modeling-walking-through-how-to-data-model-as-a-data-en-gG7upg6QaBI.md) — source · stub · quick intake
+- [Building AI Agents that actually work (Full Course)](/ai-engineering/sources/building-ai-agents-that-actually-work-full-course-eA9Zf2-qYYM.md) — source · stub · quick intake
+- [How to Build a Reusable Finance Workflow in Claude 2.0 (Full Tutorial)](/ai-engineering/sources/how-to-build-a-reusable-finance-workflow-in-claude-2-0-full--dTPndJ5VG_I.md) — source · stub · quick intake
+- ["Understand AI in 14 minutes – with Anthropic's Chloe Lubinski [ARC 2026]"](/ai-engineering/sources/understand-ai-in-14-minutes-with-anthropic-s-chloe-lubinski--aBUniZHgCnE.md) — source · stub · quick intake
+- [How to Become an AI Engineer Fast](/ai-engineering/sources/how-to-become-an-ai-engineer-fast-Zk9LxO_dB64.md) — source · stub · quick intake
+- [The best way to create agent skills in 2026](/ai-engineering/sources/the-best-way-to-create-agent-skills-in-2026-XCOkCwgKwAA.md) — source · stub · quick intake
+- [How I Set Up Python for Professional AI Development](/ai-engineering/sources/how-i-set-up-python-for-professional-ai-development-PHICGGjN5Pc.md) — source · stub · quick intake
+- [Start This Business With No Experience](/ai-engineering/sources/start-this-business-with-no-experience-GiGCLwVRoCk.md) — source · stub · quick intake
+- [Breaking Down the Obsidian CEO’s Personal Vault System](/ai-engineering/sources/breaking-down-the-obsidian-ceo-s-personal-vault-system-0Wbw1e7wNK0.md) — source · stub · quick intake
 - [Data-Driven Science and Engineering (Brunton & Kutz, 2021)](/ai-engineering/sources/brunton-kutz-data-driven-science-engineering.md) — source · draft · SVD, DMD, SINDy, Koopman operator, compressed sensing; textbook on data-driven methods for dynamical systems
 - [Singular Value Decomposition (SVD/PCA)](/ai-engineering/singular-value-decomposition.md) — concept · draft · optimal low-rank matrix approximation; Eckart-Young theorem; PCA; eigenfaces; rSVD
 - [Dynamic Mode Decomposition (DMD)](/ai-engineering/dynamic-mode-decomposition.md) — concept · draft · data-driven spectral analysis; DMD modes; Koopman connection; mrDMD; HAVOK
@@ -561,8 +614,29 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [RunLocal](/ai-engineering/runlocal.md) — entity · draft · editorial site for local LLM deployment; Ollama/LM Studio/llama.cpp guides; GGUF quantization guide; Apple Silicon vs NVIDIA analysis; model picker
 - [MosaicLeaks source](/ai-engineering/sources/web-mosaicleaks-can-your-research-agent-keep-a-secret-e9b8182d.md) — source · stub · MosaicLeaks benchmark: 1001 multi-hop chains; PA-DR RL training reduces leakage 34%→9.9%; mosaic effect in deep research agents
 - [Hugging Face](/ai-engineering/hugging-face.md) — entity · draft · open-model hub; HF Jobs (on-demand GPU compute); hf CLI agent-optimized (6× token savings); Spaces agents.md; local model repo triage; agentic benchmarking; MosaicLeaks privacy; PyTorch profiling
+- [Linear Algebra for ML](/ai-engineering/linear-algebra-for-ml.md) — concept · draft · Vector spaces, basis, rank, inner products, projections, Gram-Schmidt
+- [Matrix Decompositions](/ai-engineering/matrix-decompositions.md) — concept · draft · Eigenvalues, eigendecomposition, Cholesky, LU; cross-links to SVD
+- [Probability and Statistics for ML](/ai-engineering/probability-and-statistics-for-ml.md) — concept · draft · Bayes' theorem, Gaussian, exponential family, conjugate priors, change of variables
+- [Optimization for ML](/ai-engineering/optimization-for-ml.md) — concept · draft · Gradient descent, Newton's method, KKT conditions, convex optimization
+- [PCA and Dimensionality Reduction](/ai-engineering/pca-and-dimensionality-reduction.md) — concept · draft · Variance maximization, reconstruction error, eigenfaces, data compression
+- [Gaussian Mixture Models](/ai-engineering/gaussian-mixture-models.md) — concept · draft · EM algorithm, responsibilities, density estimation
+- [Support Vector Machines](/ai-engineering/support-vector-machines.md) — concept · draft · Max-margin classifier, kernel trick, soft-margin, dual formulation
+- [Statistical Learning](/ai-engineering/statistical-learning.md) — concept · draft · Supervised/unsupervised framework, bias-variance tradeoff, flexibility vs interpretability
+- [Regularization](/ai-engineering/regularization.md) — concept · draft · Ridge (L2), lasso (L1), elastic net; lambda selection via cross-validation
+- [Resampling Methods](/ai-engineering/resampling-methods.md) — concept · draft · Cross-validation (LOOCV, k-fold), bootstrap, one-standard-error rule
+- [Tree-Based Methods](/ai-engineering/tree-based-methods.md) — concept · draft · CART, bagging, random forests, boosting (AdaBoost, gradient boosting, XGBoost)
+- [Classification Methods](/ai-engineering/classification-methods.md) — concept · draft · Logistic regression, LDA, QDA, KNN; ROC/AUC
+- [Mathematics for Machine Learning (Deisenroth, Faisal, Ong)](/ai-engineering/sources/mathematics-for-machine-learning.md) — source · draft · 12-chapter textbook; Part I math foundations + Part II ML applications
+- [Introduction to Statistical Learning (James et al.)](/ai-engineering/sources/introduction-to-statistical-learning.md) — source · draft · Statistical learning methods; regression, classification, trees, SVMs, deep learning
 
 ### data-engineering
+- [Databricks - Lakehouse Architecture and Data Engineering Patterns](/data-engineering/sources/databricks-lakehouse-architecture-and-data-engineering-patte-ae.md) — source · stub · This document covers Databricks' Lakehouse Architecture and Data Engineering Patterns, including the…
+- [Databricks - Introduction and Unity Catalog](/data-engineering/sources/databricks-introduction-and-unity-catalog-caa.md) — source · stub · This document introduces Databricks, a managed Spark platform, and its key components, including Uni…
+- [Databricks - End-to-End Project 2026 Lakehouse Architecture](/data-engineering/sources/databricks-end-to-end-project-2026-lakehouse-architecture-acece.md) — source · stub · ['This document covers a full end-to-end Databricks course using a car insurance company use case.',…
+- [Data Engineering - The Data Movie Visual Data Literacy](/data-engineering/sources/data-engineering-the-data-movie-visual-data-literacy-eac.md) — source · stub · ['The document provides a comprehensive visual explainer of the modern data ecosystem, covering data…
+- [Data Engineering - Resume-Based Job Matching Tool with KNIME](/data-engineering/sources/data-engineering-resume-based-job-matching-tool-with-knime-e.md) — source · stub · A resume-based job matching tool built with KNIME is introduced, highlighting its features and use c…
+- [Data Engineering - LakeFlow Declarative Pipelines and CDC](/data-engineering/sources/data-engineering-lakeflow-declarative-pipelines-and-cdc-cdc.md) — source · stub · LakeFlow Declarative Pipelines simplify change data capture (CDC) using declarative SQL, reducing co…
+- [Data Engineering - If I Started Over with Databricks](/data-engineering/sources/data-engineering-if-i-started-over-with-databricks-daabc.md) — source · stub · A 25-year experienced data engineer shares a 6-step playbook for mastering Databricks, focusing on S…
 - [books.md](/data-engineering/sources/books-md-d.md) — source · stub · A list of recommended data engineering books covering various topics such as data architecture, data…
 - [Azure End-To-End Data Engineering Project for Beginners (FREE Account) | SQL DB Tutorial](/data-engineering/sources/azure-end-to-end-data-engineering-project-for-beginners-free-ygJ11fzq_ik.md) — source · stub · quick intake
 - [End-To-End Data Engineering Project in 40 Minutes | AWS Cloud | PySpark](/data-engineering/sources/end-to-end-data-engineering-project-in-40-minutes-aws-cloud--yIc5a7C8aHs.md) — source · stub · quick intake
@@ -770,6 +844,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [dbt Summit 2026 — Speakers & Training](/data-engineering/sources/dbt-summit-2026-speakers.md) — source · draft · Tristan Handy (Fivetran+dbt Labs, 100K+ teams), Quigley Malcolm (MetricFlow/OSI), 6 training courses
 
 ### software-engineering
+- [Claude Code - Session Timing Strategy to Double Productivity](/software-engineering/sources/claude-code-session-timing-strategy-to-double-productivity-dc.md) — source · stub · The document discusses a session timing strategy for the Claude Code tool to double productivity. It…
 - [Designing Distributed Systems (Burns, O'Reilly, 2018)](/software-engineering/sources/burns-designing-distributed-systems.md) — source · draft · sidecar/ambassador/adapter patterns; scatter/gather; work queues; distributed locking
 - [Container Patterns (Single-Node)](/software-engineering/container-patterns.md) — concept · draft · sidecar/ambassador/adapter; container reuse philosophy; OOP analogy
 - [Scatter/Gather Pattern](/software-engineering/scatter-gather-pattern.md) — concept · draft · fan-out to all leaves; straggler amplification; replicated-sharded variant
@@ -824,6 +899,10 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [Source: The Software Engineer's Guidebook](/software-engineering/sources/software-engineers-guidebook.md) — source · draft · Gergely Orosz 359-page career reference (full SWE arc)
 
 ### mlops
+- [systematic-trend-following-with-adaptive-portfolio-construct](/mlops/sources/systematic-trend-following-with-adaptive-portfolio-construct-cc.md) — source · stub · ['The document presents a systematic trend-following trading strategy called AdaptiveTrend, which in…
+- [Crypto Trading Bot Masterclass 2026 — Architecture and Risk Guide](/mlops/sources/crypto-trading-bot-masterclass-2026-architecture-and-risk-gu-2026.md) — source · stub · The document covers the architecture and risk guide for crypto trading bots in 2026, emphasizing the…
+- [Claude Code Second Brain — Managing Life in Obsidian](/mlops/sources/claude-code-second-brain-managing-life-in-obsidian-bda.md) — source · stub · The document describes a system architecture for managing life using Obsidian and Claude Code, a Chi…
+- [a-novel-approach-to-trading-strategy-parameter-optimization](/mlops/sources/a-novel-approach-to-trading-strategy-parameter-optimization-a.md) — source · stub · A novel approach to trading strategy parameter optimization using double out-of-sample data and walk…
 - [Building a data stack for trusted AI | dbt Labs](/mlops/sources/building-a-data-stack-for-trusted-ai-dbt-labs-408a3692.md) — source · stub · The article discusses the importance of a governed data foundation for trusted AI, highlighting the …
 - ["Automatic Upgrades: best practice features for your lakehouse tables"](/mlops/sources/automatic-upgrades-best-practice-features-for-your-lakehouse-afb2599c.md) — source · stub · Databricks introduces Auto Upgrades, a feature that automatically applies best-practice capabilities…
 - ["29%+ warehouse savings: How the dbt Fusion engine drives cost efficiency | dbt Labs"](/mlops/sources/29-warehouse-savings-how-the-dbt-fusion-engine-drives-cost-e-121b247d.md) — source · stub · dbt Labs implemented state-aware orchestration to reduce data warehouse costs by 10%+ and further op…
@@ -956,6 +1035,12 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [Tokenmaxxing and AI Fake Productivity](/productivity/tokenmaxxing.md) — concept · draft · tokenmaxxing defined (Joe Reis), centaur vs reverse centaur, AI hamster wheel, token junkies
 
 ### ai-business
+- ["AI for Marketing Agencies: Scale Production & Boost ROI"](/ai-business/sources/ai-for-marketing-agencies-scale-production-boost-roi-8b779993.md) — source · stub · The document discusses how AI can help marketing agencies automate repetitive tasks, freeing up time…
+- ["AI for Law Firms: Modernize Legal Practice Management"](/ai-business/sources/ai-for-law-firms-modernize-legal-practice-management-64b85b2f.md) — source · stub · AI for Law Firms: Modernize Legal Practice Management automates admin tasks, freeing attorneys to fo…
+- ["AI for Consulting Firms: Scale White-Glove Advisory"](/ai-business/sources/ai-for-consulting-firms-scale-white-glove-advisory-394bc07b.md) — source · stub · The document discusses how to scale a consulting firm without adding headcount by automating tasks s…
+- [AI Automation by Industry | AY Automate](/ai-business/sources/ai-automation-by-industry-ay-automate-46ddc862.md) — source · stub · AY Automate helps consulting firms automate research, proposal creation, and client reporting to inc…
+- [A Script for Mark Zuckerberg](/ai-business/sources/a-script-for-mark-zuckerberg-87056ab8.md) — source · stub · Meta CEO Mark Zuckerberg delivers a mea culpa on past mistakes, including his obsession with platfor…
+- [a-decade-of-evidence-of-trend-following-investing-in-cryptoc](/ai-business/sources/a-decade-of-evidence-of-trend-following-investing-in-cryptoc-cc.md) — source · stub · A decade of evidence supports trend following investing in cryptocurrencies, offering similar return…
 - [Change the visibility of your Gists](/ai-business/sources/change-the-visibility-of-your-gists-3a0c7229.md) — source · stub · GitHub introduces a feature to change the visibility of Gists, allowing users to toggle between publ…
 - [Blog Grid](/ai-business/sources/blog-grid-93fa46da.md) — source · stub · The blog discusses the impact of AI writing tools on content creation and communication, highlightin…
 - [AI Worldviews](/ai-business/sources/ai-worldviews-08d76d01.md) — source · stub · The Economist ran AI models through a moral beliefs survey, revealing their worldviews. This raises …
@@ -1111,6 +1196,21 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [Zero-Knowledge Proofs](/blockchain/zero-knowledge-proofs.md) — concept · draft · SNARKs vs STARKs; arithmetization + LDC; tradeoffs
 - [Bittensor (TAO)](/blockchain/bittensor.md) — entity · draft · decentralized AI network where subnets compete for token rewards (Score Vision, Hippias, Quasar)
 - [NFT Market Dynamics](/blockchain/nft-markets.md) — concept · draft · floor price mechanics, supply manipulation (burn/staking), royalty fragility, pump-and-dump patterns (2022 historical record from NFT God newsletter)
+- [Lightning Network](/blockchain/lightning-network.md) — concept · draft · Payment channels + HTLC routing; Bitcoin's L2 for micropayments
+- [Payment Channels](/blockchain/payment-channels.md) — concept · draft · Bidirectional off-chain channels; revocable commitment transactions; trustless settlement
+- [Ethereum](/blockchain/ethereum.md) — entity · draft · World computer; Turing-complete smart contract platform; ETH currency; The Merge (PoS)
+- [Ethereum Nodes](/blockchain/ethereum-nodes.md) — concept · draft · Execution + consensus client split; full/archive/light nodes; client diversity
+- [Ethereum Transactions](/blockchain/ethereum-transactions.md) — concept · draft · Nonce, gas, EIP-1559 base fee + priority fee; transaction lifecycle
+- [Smart Contracts](/blockchain/smart-contracts.md) — concept · draft · Solidity vs Vyper; ABI; deployment; events; visibility modifiers
+- [Smart Contract Security](/blockchain/smart-contract-security.md) — concept · draft · Defensive programming; reentrancy; overflow; access control; Swiss cheese model
+- [Ethereum Tokens](/blockchain/ethereum-tokens.md) — concept · draft · ERC-20, ERC-721 (NFT), ERC-1155, ERC-4626; fungibility
+- [Oracles](/blockchain/oracles.md) — concept · draft · Oracle problem; Chainlink; VRF; decentralized oracle networks
+- [Decentralized Applications](/blockchain/decentralized-applications.md) — concept · draft · DApp architecture; Web3 stack; IPFS; ENS
+- [DeFi](/blockchain/defi.md) — concept · draft · AMMs; lending/borrowing; flash loans; stablecoins; composability
+- [Ethereum Virtual Machine](/blockchain/ethereum-virtual-machine.md) — concept · draft · Quasi-Turing-complete stack machine; 256-bit word; gas metering; opcodes; EVM compatibility
+- [Ethereum Consensus](/blockchain/ethereum-consensus.md) — concept · draft · PoS; Gasper (Casper FFG + LMD GHOST); validators; slashing; The Merge
+- [Ethereum Scaling](/blockchain/ethereum-scaling.md) — concept · draft · Scalability trilemma; L2 rollups (optimistic/ZK); EIP-4844; danksharding
+- [Mastering Ethereum (Antonopoulos & Wood)](/blockchain/sources/mastering-ethereum.md) — source · draft · 17 chapters; full Ethereum technical reference; CC BY-SA 4.0
 
 ### trading
 - ["Full AI Trading Course 2026: Master Agentic Trading (Beginner to Pro)"](/trading/sources/full-ai-trading-course-2026-master-agentic-trading-beginner--yxouoQw-C_M.md) — source · stub · quick intake

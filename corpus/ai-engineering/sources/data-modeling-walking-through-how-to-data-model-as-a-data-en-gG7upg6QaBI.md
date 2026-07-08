@@ -5,21 +5,21 @@ status: stub
 sources:
   - path: raw/youtube/youtube-gG7upg6QaBI-data-modeling-walking-through-how-to-data-model-as-a-data-en.md
     channel: youtube
-    ingested_at: 2026-07-06
+    ingested_at: 2026-07-08
 aliases: []
 tags:
   - corpus/ai-engineering
   - source
   - youtube-quick-intake
-created: 2026-07-06
-updated: 2026-07-06
+created: 2026-07-08
+updated: 2026-07-08
 provisional: false
 youtube_video_id: gG7upg6QaBI
 url: https://youtu.be/gG7upg6QaBI
 channel_name: Seattle Data Guy
 playlist: Corpus_queue
 published: 2024-02-14
-transcript_status: blocked
+transcript_status: metadata
 ---
 
 # Data Modeling - Walking Through How To Data Model As A Data Engineer - Dimensional Modeling 101

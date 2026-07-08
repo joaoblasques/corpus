@@ -5,21 +5,21 @@ status: stub
 sources:
   - path: raw/youtube/youtube-XCOkCwgKwAA-the-best-way-to-create-agent-skills-in-2026.md
     channel: youtube
-    ingested_at: 2026-07-06
+    ingested_at: 2026-07-08
 aliases: []
 tags:
   - corpus/ai-engineering
   - source
   - youtube-quick-intake
-created: 2026-07-06
-updated: 2026-07-06
+created: 2026-07-08
+updated: 2026-07-08
 provisional: false
 youtube_video_id: XCOkCwgKwAA
 url: https://youtu.be/XCOkCwgKwAA
 channel_name: ZazenCodes
 playlist: Corpus_queue
 published: 2026-03-19
-transcript_status: blocked
+transcript_status: metadata
 ---
 
 # The best way to create agent skills in 2026

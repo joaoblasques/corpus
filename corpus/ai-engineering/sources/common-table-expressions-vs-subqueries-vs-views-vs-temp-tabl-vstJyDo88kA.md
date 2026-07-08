@@ -5,21 +5,21 @@ status: stub
 sources:
   - path: raw/youtube/youtube-vstJyDo88kA-common-table-expressions-vs-subqueries-vs-views-vs-temp-tabl.md
     channel: youtube
-    ingested_at: 2026-07-06
+    ingested_at: 2026-07-08
 aliases: []
 tags:
   - corpus/ai-engineering
   - source
   - youtube-quick-intake
-created: 2026-07-06
-updated: 2026-07-06
+created: 2026-07-08
+updated: 2026-07-08
 provisional: false
 youtube_video_id: vstJyDo88kA
 url: https://youtu.be/vstJyDo88kA
 channel_name: Data with Zach
 playlist: Corpus_queue
 published: 2024-03-05
-transcript_status: blocked
+transcript_status: metadata
 ---
 
 # Common Table Expressions vs Subqueries vs Views vs Temp Tables for data engineers
