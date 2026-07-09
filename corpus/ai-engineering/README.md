@@ -22,7 +22,8 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Optimization for ML](/ai-engineering/optimization-for-ml.md) — concept · draft · Gradient descent, Newton's method, KKT conditions, convex optimization
 - [PCA and Dimensionality Reduction](/ai-engineering/pca-and-dimensionality-reduction.md) — concept · draft · Variance maximization, reconstruction error, eigenfaces, data compression
 - [Gaussian Mixture Models](/ai-engineering/gaussian-mixture-models.md) — concept · draft · EM algorithm, responsibilities, density estimation
-- [Support Vector Machines](/ai-engineering/support-vector-machines.md) — concept · draft · Max-margin classifier, kernel trick, soft-margin, dual formulation
+- [Support Vector Machines](/ai-engineering/support-vector-machines.md) — concept · draft · Max-margin classifier, kernel trick, soft-margin, dual formulation; R lab (radial kernel, ROC curves, multi-class, Khan gene expression)
+- [Clustering Methods](/ai-engineering/clustering-methods.md) — concept · draft · K-means (within-cluster variance minimization, centroid reassignment, nstart); hierarchical (dendrogram, four linkage types); practical issues (validation, outlier sensitivity, non-nested structure)
 - [Statistical Learning](/ai-engineering/statistical-learning.md) — concept · draft · Supervised/unsupervised framework, bias-variance tradeoff, flexibility vs interpretability
 - [Regularization](/ai-engineering/regularization.md) — concept · draft · Ridge (L2), lasso (L1), elastic net; lambda selection via cross-validation
 - [Resampling Methods](/ai-engineering/resampling-methods.md) — concept · draft · Cross-validation (LOOCV, k-fold), bootstrap, one-standard-error rule

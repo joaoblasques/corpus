@@ -2,6 +2,31 @@
 
 > OKF v0.1 change log. Newest first, grouped by date.
 
+## 2026-07-09
+
+* **Ingest**: Introduction to Statistical Learning (James et al.) — parts 19-21 — routed to ai-engineering
+  - sources: pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-19 through part-21 (channel: pdf, 3 files)
+  - domain: ai-engineering
+  - new pages: [/ai-engineering/clustering-methods.md]
+  - pages updated: [/ai-engineering/support-vector-machines.md, /ai-engineering/pca-and-dimensionality-reduction.md, /ai-engineering/sources/introduction-to-statistical-learning.md, /ai-engineering/README.md]
+  - notes: ISL parts 19-21 (Ch 9 SVM lab + Ch 10 unsupervised learning). SVM page: radial kernel, ROC curves, multi-class, Khan gene expression. PCA page: loading vectors, PVE, scree plot, USArrests example. New clustering-methods page: K-means + hierarchical clustering. 1 new concept page, 3 updated.
+
+* **Ingest**: OSTEP — Operating Systems: Three Easy Pieces (Arpaci-Dusseau, 2023) — routed to software-engineering
+  - sources: pdf-intro.md, pdf-preface.md, pdf-cpu-intro.md, pdf-cpu-api.md, pdf-cpu-mechanisms.md, pdf-cpu-dialogue.md, pdf-dialogue-virtualization.md, pdf-dialogue-threeeasy.md, pdf-cpu-sched.md, pdf-cpu-sched-mlfq.md, pdf-cpu-sched-lottery.md, pdf-cpu-sched-multi.md, pdf-threads-api.md, pdf-threads-locks.md, pdf-threads-locks-usage.md, pdf-threads-sema.md, pdf-threads-cv.md, pdf-threads-bugs.md, pdf-threads-events.md, pdf-threads-dialogue.md, pdf-dialogue-concurrency.md, pdf-dialogue-monitors.md, pdf-file-intro.md, pdf-file-implementation.md, pdf-file-journaling.md, pdf-file-ffs.md, pdf-file-lfs.md, pdf-file-ssd.md, pdf-file-raid.md, pdf-file-disks.md, pdf-file-devices.md, pdf-file-integrity.md, pdf-file-dialogue.md, pdf-dialogue-persistence.md, pdf-dist-intro.md, pdf-dist-nfs.md, pdf-dist-afs.md, pdf-dist-dialogue.md, pdf-dialogue-distribution.md, pdf-security-intro.md, pdf-security-authentication.md, pdf-security-access.md, pdf-security-crypto.md, pdf-security-distributed.md, pdf-dialogue-security.md, pdf-vm-intro.md, pdf-vm-api.md (channel: pdf, 47 files)
+  - domain: software-engineering
+  - new pages: [/software-engineering/sources/ostep-operating-systems-three-easy-pieces.md, /software-engineering/operating-systems.md, /software-engineering/cpu-scheduling.md, /software-engineering/concurrency-and-threads.md, /software-engineering/file-systems.md, /software-engineering/distributed-file-systems.md, /software-engineering/os-security.md]
+  - pages updated: [/software-engineering/README.md]
+  - notes: Full OSTEP OS textbook (47 chapters). 6 concept pages + 1 source page, all new. Thematic clustering: OS fundamentals (process/LDE), scheduling (FIFO→MLFQ→lottery→multi-CPU), concurrency (locks/CVs/deadlock), file systems (inode/journaling/FFS/LFS/SSD/RAID), distributed (NFS/AFS), security (auth/ACL/crypto/distributed). 7 new pages, 1 updated hub.
+
+* **Collectors**: gmail=5, obsidian=25, book_discover=15, book_fetch=3, pdf=3, books=0, arxiv=24, youtube=0, github_discover=0, github=0, x=0, links_refetch=0
+* **Ingest**: 50 ingested · 0 deferred · status=ok
+* **YoutubeQuick**: 0 intake · 0 rescued · 0 skipped · status=ok
+* **DocsQuick**: 0 intake · 0 thin · 0 llm_fail · status=failed · error=Command '['/usr/local/bin/python3', '/Users/jonasblasques/Dev/corpus/bin/quick_ingest_docs.py', '--channel', 'web,notes', '--backend', 'openrouter', '--max', '80', '--sleep', '0.5']' timed out after 2400 seconds
+* **YoutubeReap**: 0 removed · status=ok
+* **Gardener**: 2 stubs deepened · status=ok
+* **GapResolver**: 1 gap dispatched · 2 sources queued · status=ok · gap=Three advanced agentic patterns and how they interrelate: co
+* **Lint**: 5 broken wikilinks · 213 broken citations · 848 orphans · 853 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+* **OKF**: 0 violations
 ## 2026-07-08
 * **Ingest**: Mastering Bitcoin 3rd Ed. Ch14 (second-layer applications) — routed to blockchain
   - sources: book-mastering-bitcoin-3rd-edition-14-second-layer-applications.md (channel: book)

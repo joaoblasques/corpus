@@ -39,6 +39,15 @@ sources:
   - path: raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-12.md
     channel: pdf
     ingested_at: 2026-07-08
+  - path: raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-19.md
+    channel: pdf
+    ingested_at: 2026-07-09
+  - path: raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-20.md
+    channel: pdf
+    ingested_at: 2026-07-09
+  - path: raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-21.md
+    channel: pdf
+    ingested_at: 2026-07-09
 aliases:
   - ISL
   - ISLR
@@ -75,9 +84,10 @@ An Introduction to Statistical Learning (ISL) by Gareth James, Daniela Witten, T
 | Ch 6 | Model selection and regularization: stepwise, ridge, lasso, PCR, PLS | [/ai-engineering/regularization.md](/ai-engineering/regularization.md) |
 | Ch 7 | Beyond linearity: polynomial regression, splines, GAMs | — |
 | Ch 8 | Tree-based methods: CART, bagging, random forests, boosting | [/ai-engineering/tree-based-methods.md](/ai-engineering/tree-based-methods.md) |
-| Ch 9 | Support vector machines | [/ai-engineering/support-vector-machines.md](/ai-engineering/support-vector-machines.md) |
+| Ch 9 | Support vector machines; R lab: radial kernel, ROC curves, multi-class, gene expression | [/ai-engineering/support-vector-machines.md](/ai-engineering/support-vector-machines.md) |
 | Ch 10 | Deep learning | — |
-| Ch 11–13 | Survival analysis, unsupervised learning (PCA, k-means, hierarchical clustering), multiple testing | [/ai-engineering/pca-and-dimensionality-reduction.md](/ai-engineering/pca-and-dimensionality-reduction.md) |
+| Ch 10 (unsupervised) | Unsupervised learning: PCA (loading vectors, PVE, scree plot, biplot) + K-means + hierarchical clustering (dendrogram, linkage, dissimilarity) | [/ai-engineering/pca-and-dimensionality-reduction.md](/ai-engineering/pca-and-dimensionality-reduction.md), [/ai-engineering/clustering-methods.md](/ai-engineering/clustering-methods.md) |
+| Ch 11–13 | Survival analysis, multiple testing | — |
 
 ## Key Themes
 
@@ -99,3 +109,6 @@ An Introduction to Statistical Learning (ISL) by Gareth James, Daniela Witten, T
 [^src1]: [Introduction to Statistical Learning, Part 1](../../raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-01.md)
 [^src2]: [Introduction to Statistical Learning, Part 2](../../raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-02.md)
 [^src3]: [Introduction to Statistical Learning, Part 3](../../raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-03.md)
+[^src19]: [Introduction to Statistical Learning, Part 19](../../raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-19.md)
+[^src20]: [Introduction to Statistical Learning, Part 20](../../raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-20.md)
+[^src21]: [Introduction to Statistical Learning, Part 21](../../raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-21.md)

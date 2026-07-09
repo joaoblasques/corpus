@@ -6,6 +6,9 @@ sources:
   - path: raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-19.md
     channel: pdf
     ingested_at: 2026-07-08
+  - path: raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-19.md
+    channel: pdf
+    ingested_at: 2026-07-09
 aliases:
   - SVM
   - support vector machine
@@ -177,13 +180,28 @@ SVMs are solved as QPs using specialized solvers [^src1]:
 - Relationship to Ridge regression: same form, different loss function
 - Connection to deep learning: neural nets can be seen as learning the feature map phi that SVMs then classify over
 
+## SVM in Practice (R Lab, ISL Ch. 9)
+
+**Radial kernel.** For non-linearly separable data, a radial (RBF) kernel `exp(-gamma * ||x-x'||^2)` with cross-validated cost and gamma produces a non-linear decision boundary. ISL example: gamma=2, cost=1 achieves 10% test error on a 100-obs simulated set [^src2].
+
+**Hyperparameter selection.** Use `tune()` (R e1071 package) with cross-validation over a grid of cost and gamma values. ISL tip: large cost with radial kernel risks overfitting; optimal parameters often have moderate cost [^src2].
+
+**ROC curves.** Obtain fitted values via `decision.values=TRUE` in the `svm()` call, then pass to ROCR's `prediction()`/`performance()`. Comparing train vs. test ROC curves detects overfitting; a more flexible model (higher gamma) may improve train-ROC but worsen test-ROC [^src2].
+
+**Multi-class SVMs.** When the response has >2 levels, `svm()` uses **one-versus-one** classification: it fits C(K,2) binary SVMs and assigns the class that wins the most pairwise contests [^src2].
+
+**High-p, low-n setting.** When p >> n (e.g., gene expression data with 2308 genes, 63 training samples), a **linear kernel** is preferred — additional flexibility from non-linear kernels is unnecessary and risks overfitting. ISL Khan dataset: linear SVM achieves zero training error and 2 test errors out of 20 observations [^src2].
+
 ## Related Corpus Pages
 
 - [/ai-engineering/optimization-for-ml.md](/ai-engineering/optimization-for-ml.md) — convex QP; KKT conditions; Lagrange multipliers; duality
 - [/ai-engineering/linear-algebra-for-ml.md](/ai-engineering/linear-algebra-for-ml.md) — inner products; orthogonal projections; hyperplanes
 - [/ai-engineering/probability-and-statistics-for-ml.md](/ai-engineering/probability-and-statistics-for-ml.md) — probability perspective on classification
+- [/ai-engineering/classification-methods.md](/ai-engineering/classification-methods.md) — logistic regression; LDA; KNN; ROC/AUC
 - [/ai-engineering/sources/mathematics-for-machine-learning.md](/ai-engineering/sources/mathematics-for-machine-learning.md) — full book summary
+- [/ai-engineering/sources/introduction-to-statistical-learning.md](/ai-engineering/sources/introduction-to-statistical-learning.md) — ISL book summary
 
 ---
 
 [^src1]: [Mathematics for Machine Learning, Part 19](../../raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-19.md)
+[^src2]: [Introduction to Statistical Learning, Part 19](../../raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-19.md)

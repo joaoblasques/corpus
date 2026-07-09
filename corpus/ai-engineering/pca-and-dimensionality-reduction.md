@@ -9,6 +9,12 @@ sources:
   - path: raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-17.md
     channel: pdf
     ingested_at: 2026-07-08
+  - path: raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-19.md
+    channel: pdf
+    ingested_at: 2026-07-09
+  - path: raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-20.md
+    channel: pdf
+    ingested_at: 2026-07-09
 aliases:
   - PCA
   - principal component analysis
@@ -164,12 +170,33 @@ A classic PCA application: face recognition via the eigenfaces method [^src1].
 
 The eigenfaces are interpretable: early ones capture broad illumination and face shape; later ones capture finer features. This reveals that face space is low-dimensional (~50-100 components often sufficient for recognition).
 
+## Loading Vectors, Score Vectors, and the Biplot (ISL)
+
+ISL introduces PCA via the **loading vector** φ_m (each element a loading) and **score vector** z_m (the projections of observations onto φ_m) [^src3].
+
+**Loading vector** φ_1 = (φ_11, φ_21, ..., φ_p1): defines the direction of maximum variance. Elements constrained to sum-of-squares = 1. The first PC score for observation i: z_i1 = φ_11*x_i1 + ... + φ_p1*x_ip [^src3].
+
+**Biplot**: a plot that simultaneously displays the score vectors (observations in PC space) and the loading vectors (variable directions) on the same axes. Standard tool for interpreting PCA results [^src3].
+
+**Uniqueness**: each loading vector is unique up to a sign flip; flipping the sign of a loading vector simultaneously requires flipping the corresponding scores, leaving the product z_im * φ_jm unchanged [^src3].
+
+## Proportion of Variance Explained (PVE) and Scree Plot
+
+**PVE of the m-th PC** = (sum_i z_im^2) / (sum_j sum_i x_ij^2). The total variance in a mean-centered dataset is sum_j sum_i x_ij^2 [^src4].
+
+**Scree plot**: bar/line chart of PVE per component. Look for an "elbow" — the point where PVE drops sharply — to decide how many components to retain. ISL USArrests example: PC1=62.0%, PC2=24.7%, together 86.7%; elbow after PC2 [^src4].
+
+**Selecting M**: no universal rule for unsupervised PCA. Contrast with supervised PCR (principal components regression), where the number of PCs is selected by cross-validation as a tuning parameter [^src4].
+
+**PCA as denoising**: running clustering on the first few PC score vectors rather than the full data can yield better results, treating the PC step as denoising (signal concentrates in leading PCs) [^src4].
+
 ## Limitations of PCA
 
 - **Linear only**: cannot capture nonlinear structure (manifolds). Kernel PCA or autoencoders address this.
 - **Unsupervised**: does not use labels; the directions of maximum variance may not be discriminative directions.
-- **Sensitive to scale**: standardization required when features have different units.
+- **Sensitive to scale**: standardization required when features have different units — ISL confirms this with the USArrests example (unscaled PCA dominated by Assault's large variance) [^src3].
 - **Global structure only**: does not preserve local neighborhoods (t-SNE and UMAP do).
+- **Subjective M selection**: for unsupervised PCA, how many components to keep is an inherently ad hoc, exploratory decision [^src4].
 
 ## Related Corpus Pages
 
@@ -177,9 +204,13 @@ The eigenfaces are interpretable: early ones capture broad illumination and face
 - [/ai-engineering/matrix-decompositions.md](/ai-engineering/matrix-decompositions.md) — eigendecomposition; SVD overview
 - [/ai-engineering/singular-value-decomposition.md](/ai-engineering/singular-value-decomposition.md) — Eckart-Young theorem, low-rank approximation
 - [/ai-engineering/probability-and-statistics-for-ml.md](/ai-engineering/probability-and-statistics-for-ml.md) — probabilistic PCA; Gaussian marginals
+- [/ai-engineering/clustering-methods.md](/ai-engineering/clustering-methods.md) — K-means and hierarchical clustering; complement to PCA for unsupervised learning
 - [/ai-engineering/sources/mathematics-for-machine-learning.md](/ai-engineering/sources/mathematics-for-machine-learning.md) — full book summary
+- [/ai-engineering/sources/introduction-to-statistical-learning.md](/ai-engineering/sources/introduction-to-statistical-learning.md) — ISL book summary
 
 ---
 
 [^src1]: [Mathematics for Machine Learning, Part 16](../../raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-16.md)
 [^src2]: [Mathematics for Machine Learning, Part 17](../../raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-17.md)
+[^src3]: [Introduction to Statistical Learning, Part 19](../../raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-19.md)
+[^src4]: [Introduction to Statistical Learning, Part 20](../../raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-20.md)

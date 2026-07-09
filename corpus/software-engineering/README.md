@@ -58,7 +58,16 @@ Domain covering software engineering practice from foundational CS through deplo
 - [System Design Fundamentals](/software-engineering/system-design-fundamentals.md) — concept · draft · scaling strategies; load balancing algorithms; SQL vs NoSQL selection; REST/GraphQL/gRPC; ACID; frontend patterns (microfrontends, BFF, CDN, design systems, API gateway); OSI protocols; auth vs authz
 - [CI/CD, Progressive Delivery, and GitOps](/software-engineering/ci-cd.md) — concept · draft · CI/CD maturity ladder; canary/blue-green/feature flags; GitOps four pillars; platform teams; roll-forward over rollback; GitHub Actions (events/jobs/steps/runners/actions)
 
+### OS and Systems
+- [Operating Systems](/software-engineering/operating-systems.md) — concept · draft · process abstraction (machine state, PCB, process API); limited direct execution; mechanism vs policy; fork/exec/wait
+- [CPU Scheduling](/software-engineering/cpu-scheduling.md) — concept · draft · FIFO, SJF, STCF, Round Robin, MLFQ, lottery scheduling, multi-CPU scheduling; turnaround vs response time tradeoff
+- [Concurrency and Threads](/software-engineering/concurrency-and-threads.md) — concept · draft · pthreads API; locks, condition variables; atomicity violations, deadlock (4 conditions + prevention); producer-consumer pattern
+- [File Systems](/software-engineering/file-systems.md) — concept · draft · inode layout, crash consistency, journaling (WAL), FFS cylinder groups, LFS append-only log, SSD FTL, RAID 0/1/4/5
+- [Distributed File Systems](/software-engineering/distributed-file-systems.md) — concept · draft · NFS stateless protocol; idempotent ops; client-side caching; AFS whole-file caching + callback promises
+- [OS Security](/software-engineering/os-security.md) — concept · draft · authentication (MFA, salted hashes), access control (ACL/RBAC/MAC/Unix model), cryptography (symmetric/asymmetric/AEAD), distributed security (Kerberos, TLS/PKI)
+
 ### Sources
+- [OSTEP: Operating Systems — Three Easy Pieces (Arpaci-Dusseau, 2023)](/software-engineering/sources/ostep-operating-systems-three-easy-pieces.md) — source · draft · 47-chapter free textbook; virtualization, concurrency, persistence, security; xv6 lab companion
 - [Designing Distributed Systems (Burns, O'Reilly, 2018)](/software-engineering/sources/burns-designing-distributed-systems.md) — source · draft · pattern catalog for container-based distributed systems: sidecar/ambassador/adapter (single-node), replicated/sharded/scatter-gather (multi-node), batch patterns
 - [The Software Engineer's Guidebook](/software-engineering/sources/software-engineers-guidebook.md) — source · draft · Gergely Orosz; full career arc from new dev to staff; six-part reference book
 - [Go Course with Bonus Projects (boot.dev / freeCodeCamp)](/software-engineering/sources/go-course-boot-dev.md) — source · draft · Lane Wagner; 100+ lessons + 7 projects; Textio running example; RSS-aggregator capstone (chi/sqlc/Goose, API-key auth)
