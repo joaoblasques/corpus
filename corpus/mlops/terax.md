@@ -1,7 +1,7 @@
 ---
 type: entity
 domain: mlops
-status: stub
+status: draft
 sources:
   - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-terax-ai-terminal-report.md
     channel: notes
@@ -16,14 +16,18 @@ tags:
   - corpus/mlops
   - entity
 created: 2026-06-25
-updated: 2026-06-25
+updated: 2026-07-09
 ---
 
 # Terax
 
-**TL;DR** — Terax is an open-source, AI-native terminal built by solo developer Krinter using **Tauri 2 + Rust** backend and **React + Xterm.js (WebGPU) + CodeMirror 6** frontend. Key specs: ~**7 MB** app, **<300 ms cold start**, bundles a multi-tab terminal, code editor, file-preview sidebar, and embedded browser. Has a built-in agent (Vercel AI SDK, any model including local) that reads the entire codebase and proposes edits as **reviewable accept/reject diffs** [^src1].
+**TL;DR** — Terax is an open-source, AI-native terminal built by solo developer Krinter using **Tauri 2 + Rust** backend and **React + Xterm.js (WebGPU) + CodeMirror 6** frontend. Key specs: ~**7 MB** app, **<300 ms cold start**, bundles a multi-tab terminal, code editor, file-preview sidebar, and embedded browser. Has a built-in agent (Vercel AI SDK, any model including local) that reads the entire codebase and proposes edits as **reviewable accept/reject diffs** [^src1][^src2].
 
-> "It's amazing what can be done nowadays by a single developer using AI and many open source tools — this almost rivals Warp, which was built by a whole company and has VC funding." [^src1]
+> "…a multi-tab terminal, a code editor, a file preview sidebar and a web browser all in a 7MB app that starts in under 300 milliseconds." [^src2]
+
+## Origin
+
+Terax was created by a developer known as **Krinter** as a side project: "a faster, lighter version of Warp with AI built into it for coding and not bolted on as an afterthought" [^src2]. The motivation was AI-native design from the start, distinguishing it from terminals that add AI capabilities as an overlay.
 
 ## Architecture
 
@@ -38,21 +42,22 @@ updated: 2026-06-25
 
 ## Features
 
-- File sidebar auto-navigates on `cd` — no `ls` needed
-- Multi-tab + pane splits
-- Agent reads whole codebase, shows context usage, supports session history
-- `plan` mode → `TERAX.md` (analogous to `CLAUDE.md`) — project context file
-- `build` mode → accepts/rejects diffs one-by-one
-- "Privacy tab" hidden from AI agent
-- Built-in browser with common-ports shortcut list (dev server on one tab, code on another)
-- Vim mode, custom agent instructions, reusable prompts in settings
+- **File sidebar**: auto-navigates on `cd` — no `ls` needed [^src2]
+- **Multi-tab + pane splits** — standard terminal UX
+- **AI agent panel**: reads whole codebase, displays context usage, supports switching agent type and revisiting prior sessions; API keys stored in OS native keyring [^src2]
+- **Two agent subcommands** [^src1]:
+  - `init` — scans the project and generates a `TERAX.md` context file (analogous to `CLAUDE.md`/`agent.md`); presents output as an accept/reject diff
+  - `plan` → toggles plan mode; `plan` again returns to `build` mode — proposed edits shown as diffs with add/remove highlighting
+- **Privacy tab** — a browser tab hidden from the AI agent [^src2]
+- **Built-in browser** with a common-ports shortcut list — run the app and edit code in separate tabs without switching tools [^src2]
+- **Settings**: editor themes, Vim mode, custom agent instructions, reusable prompts [^src2]
 
 ## Known limitations (pre-1.0)
 
-- NeoVim crashes inside Terax
-- No keyboard navigation for the left sidebar (mouse only)
-- No `Cmd+` zoom
-- Cross-origin browser pages blocked by `X-Frame-Options` (iframes) [^src1]
+- **NeoVim crashes** inside Terax (possibly Nix/fish shell interaction; WezTerm unaffected) [^src2]
+- **No keyboard navigation** for the left sidebar — files must be opened by mouse click; `Cmd+B` toggles the sidebar but no `terax open` command or keyboard shortcut navigates into it [^src2]
+- **No `Cmd+` zoom** [^src2]
+- **Cross-origin browser pages blocked** by `X-Frame-Options` (iframe restriction) [^src1]
 
 ## Positioning vs. competitors
 
@@ -60,9 +65,22 @@ updated: 2026-06-25
 |---|---|
 | **Terax** | Agentic *development* environment — agent scoped to code files |
 | **Warp** | AI terminal with company/VC backing, 58k+ GitHub stars |
+| **Zed Max** | Editor with agent-based notifications (compared in a separate review by the same channel) |
 | **CMUX** | Agent controls the *whole terminal* (tabs/panes/sidebar) — for multi-agent workflows |
 
 > "With Terax the agent is only scoped to look at the code and files… if you want agents to open browsers and spin up sub-agents, check out CMUX." [^src1]
+
+The reviewer's verdict: "astonishingly performant for mostly-JS" and "almost rivals Warp, which was built by a whole company and has VC funding" — but personally stayed with **WezTerm + NeoVim** [^src1].
+
+## Key concepts
+
+**AI-native vs AI-bolted-on** — Terax's agent was designed into the terminal from the start, not added later. The architecture enforces agent scope (code and files only), which distinguishes it from full-terminal-control agents like CMUX [^src1].
+
+**Tauri-over-Electron footprint** — dropping bundled Chromium for the OS webview reduces app size from ~200 MB+ (Electron baseline) to ~7 MB. The Rust backend owns the OS surface (PTY, filesystem, process management); the React frontend renders only [^src2].
+
+**Reviewable-diff agent loop** — the agent proposes edits as accept/reject diffs rather than applying changes directly. The `TERAX.md` context file (generated by `init`) mirrors the `CLAUDE.md`/`agent.md` pattern for priming the agent with project context [^src1][^src2].
+
+**Agent scope as product axis** — code-scoped agent (Terax: reads files, proposes diffs) vs full-terminal-control agent (CMUX: opens browsers, spins up sub-agents). Each targets a different workflow: single-developer coding vs multi-agent orchestration [^src1].
 
 ## See also
 
@@ -73,4 +91,6 @@ updated: 2026-06-25
 
 ---
 
-[^src1]: [Terax: One Developer Built an AI Terminal Better Than Warp (Better Stack channel)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-terax-ai-terminal-report.md) — [00:00](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-terax-ai-terminal-report.md#t=00:00) overview; [01:09](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-terax-ai-terminal-report.md#t=01:09) Tauri vs Electron; [02:47](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-terax-ai-terminal-report.md#t=02:47) plan/build modes; [04:58](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-terax-ai-terminal-report.md#t=04:58) verdict; [05:18](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-terax-ai-terminal-report.md#t=05:18) vs CMUX
+[^src1]: [Terax: One Developer Built an AI Terminal Better Than Warp — notes/report](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-terax-ai-terminal-report.md) — overview, Tauri vs Electron, plan/build modes, verdict, vs CMUX
+
+[^src2]: [Terax: One Developer Built an AI Terminal Better Than Warp — YouTube transcript (Better Stack, 2026-05-15)](../../raw/youtube/youtube-3L8htHUzAI4-terax-one-developer-built-an-ai-terminal-better-than-warp.md) — full timestamped transcript
