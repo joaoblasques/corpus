@@ -194,4 +194,4 @@ TTS systems are **multi-stage pipelines**: a Talker predicts codec tokens autore
 [^src2]: [Batch Inference with Airflow: Scaling Your Spam Classifier (Vivek Bharti, Practical ML Series Part 4)](../../raw/email/email-2025-07-20-batch-inference-with-airflow-scaling-your-spam-classifier.md)
 [^src3]: [Model serving architectures (Marvelous MLOps, Lecture 5)](../../raw/email/email-2025-08-01-model-serving-architectures.md)
 [^src4]: [Deploying Model Serving Endpoint & A/B Testing on Databricks (Marvelous MLOps, Lecture 6)](../../raw/email/email-2025-08-02-lecture-6-deploying-model-serving-endpoint-a-b-testing-on-da.md)
-[^src5]: [Engineering TTS Inference in vLLM-Omni (vLLM blog, Jun 23 2026)](../../raw/_inbox/web-engineering-tts-inference-in-vllm-omni-3d405d3c.md)
+[^src5]: [Engineering TTS Inference in vLLM-Omni (vLLM blog, Jun 23 2026)](../../raw/web/web-engineering-tts-inference-in-vllm-omni-3d405d3c.md)

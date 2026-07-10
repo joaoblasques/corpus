@@ -887,7 +887,7 @@ See [Claude Sub-Agents](/ai-engineering/claude-subagents.md) for the full sub-ag
 [^src22]: [I Tried 100 Claude Code Skills — These 6 Are the Best](../../raw/youtube/youtube-eRS3CmvrOvA-i-tried-100-claude-code-skills-these-6-are-the-best.md) — Nate Herk, YouTube
 [^src23]: [This Claude Code Plugin Writes 94% Less Code (Ponytail)](../../raw/youtube/youtube-2xuFcmUAQUc-this-claude-code-plugin-writes-94-less-code-ponytail.md) — YouTube
 [^src24]: [How Anthropic Employees ACTUALLY Use Claude Skills](../../raw/youtube/youtube-3UWxMPUko1k-how-anthropic-employees-actually-use-claude-skills.md) — Austin Marchese, YouTube
-[^src25]: [What AI Agent Skills Are and How They Work](../../raw/_inbox/youtube-Lg-meK5IU8Q-what-ai-agent-skills-are-and-how-they-work.md) — IBM Technology, YouTube; corroborates the progressive disclosure / 3-tier architecture; introduces "assets" folder for templates and reference data within a skill package
+[^src25]: [What AI Agent Skills Are and How They Work](../../raw/youtube/youtube-Lg-meK5IU8Q-what-ai-agent-skills-are-and-how-they-work.md) — IBM Technology, YouTube; corroborates the progressive disclosure / 3-tier architecture; introduces "assets" folder for templates and reference data within a skill package
 [^src25]: [Claude Skills: Everything You Need to Know About Claude Skills](../../raw/youtube/youtube-P4rv9RSM1IE-claude-skills-everything-you-need-to-know-about-claude-skill.md) — Nicole AI, YouTube
 [^src26]: [How to Make AI Write in YOUR Voice (Claude Skill Tutorial)](../../raw/youtube/youtube-C1snRnGbNRM-how-to-make-ai-write-in-your-voice-claude-skill-tutorial.md) — The Nerdy Novelist, YouTube
 [^src27]: [Anthropic Courses — Introduction to Agent Skills](../../raw/web/web-anthropic-courses.md) — Anthropic (Skilljar)
@@ -968,6 +968,6 @@ For Team/Enterprise customers, skills can be deployed as managed plugins at org 
 
 **Access pattern** [^src45]: users don't install org plugins manually; admin assigns them, and they appear automatically in the user's Claude interface. An admin can revoke a plugin, which removes it from all users immediately.
 
-[^src_nate]: [How to Build Claude Subagents — Better Than 99% of People](../../raw/_inbox/youtube-e18sdZLwP7o-how-to-build-claude-subagents-better-than-99-of-people.md) — Nate Herk, YouTube, 2026; sub-agents vs skills distinction, progressive disclosure via description field, model routing
+[^src_nate]: [How to Build Claude Subagents — Better Than 99% of People](../../raw/youtube/youtube-e18sdZLwP7o-how-to-build-claude-subagents-better-than-99-of-people.md) — Nate Herk, YouTube, 2026; sub-agents vs skills distinction, progressive disclosure via description field, model routing
 
 **GitHub sync vs manual** [^src45]: GitHub sync is the recommended approach for managed plugin distribution — version-controlled, auto-deploys on push, auditable. Manual upload is for one-off or emergency deployments.

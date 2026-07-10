@@ -152,4 +152,4 @@ The argument is directional, not prescriptive — ETL pipelines continue to exis
 
 [^src1]: [What Is An ETL Pipeline? Examples, Tools (Updated 2026)](../../raw/web/what-is-an-etl-pipeline-examples-tools-updated-2026.md)
 [^src2]: [SQL Data Warehouse from Scratch | Full Hands-On Data Engineering Project (Data with Baraa)](../../raw/youtube/youtube-9GVqKuTVANE-sql-data-warehouse-from-scratch-full-hands-on-data-engineeri.md)
-[^src3]: [ETL is Dead (Data Engineering Weekly)](../../raw/_inbox/web-etl-is-dead-b598202a.md)
+[^src3]: [ETL is Dead (Data Engineering Weekly)](../../raw/web/web-etl-is-dead-b598202a.md)

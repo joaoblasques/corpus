@@ -112,4 +112,4 @@ Error analysis is the *discovery* phase that feeds the rest of the evaluation di
 ---
 
 [^src1]: [A Field Guide to Rapidly Improving AI Products](../../raw/web/web-a-field-guide-to-rapidly-improving-ai-products-hamels-blog-h.md) — Hamel Husain, hamel.dev
-[^src2]: [LLM Evals: Everything You Need to Know](../../raw/_inbox/web-llm-evals-everything-you-need-to-know-hamels-blog-hamel-husa-5bf201ee.md) — Hamel Husain & Shreya Shankar, hamel.dev
+[^src2]: [LLM Evals: Everything You Need to Know](../../raw/web/web-llm-evals-everything-you-need-to-know-hamels-blog-hamel-husa-5bf201ee.md) — Hamel Husain & Shreya Shankar, hamel.dev

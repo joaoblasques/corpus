@@ -154,5 +154,5 @@ Boosting builds trees **sequentially**, with each tree fitting the residuals of 
 - [Support Vector Machines](/ai-engineering/support-vector-machines.md) — alternative non-linear classification approach
 - [Classification Methods](/ai-engineering/classification-methods.md) — logistic/LDA comparison for classification problems
 
-[^src1]: [Introduction to Statistical Learning, Part 16](../../raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-16.md)
-[^src2]: [Introduction to Statistical Learning, Part 17](../../raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-17.md)
+[^src1]: [Introduction to Statistical Learning, Part 16](../../raw/pdf/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-16.md)
+[^src2]: [Introduction to Statistical Learning, Part 17](../../raw/pdf/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-17.md)

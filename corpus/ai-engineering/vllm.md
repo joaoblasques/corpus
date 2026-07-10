@@ -235,5 +235,5 @@ hf jobs run --flavor a10g-large --expose 8000 --timeout 2h \
 [^src12]: [vLLM Tops the Artificial Analysis Leaderboard](../../raw/web/web-vllm-tops-the-artificial-analysis-leaderboard-762bd790.md) — vLLM blog, 2026-05-11
 [^src13]: [Serving Agentic Workloads at Scale with vLLM x Mooncake](../../raw/web/web-serving-agentic-workloads-at-scale-with-vllm-x-mooncake-78c3044b.md) — vLLM blog, 2026-05-06
 [^src14]: [Run Highly Efficient Multimodal Agentic AI with NVIDIA Nemotron 3 Nano Omni Using vLLM](../../raw/web/web-run-highly-efficient-multimodal-agentic-ai-with-nvidia-nemot-b0ef6e3c.md) — vLLM blog, 2026-04-28
-[^src15]: [Run a vLLM Server on HF Jobs in One Command](../../raw/web/web-run-a-vllm-server-on-hf-jobs-in-one-command-7f1a19cb.md) — Hugging Face blog, 2026-06-28
-[^src15]: [Run a vLLM Server on HF Jobs in One Command](../../raw/web/web-run-a-vllm-server-on-hf-jobs-in-one-command-7f1a19cb.md) — Hugging Face blog
+[^src15]: [Run a vLLM Server on HF Jobs in One Command](../../raw/_inbox/web-run-a-vllm-server-on-hf-jobs-in-one-command-7f1a19cb.md) — Hugging Face blog, 2026-06-28
+[^src15]: [Run a vLLM Server on HF Jobs in One Command](../../raw/_inbox/web-run-a-vllm-server-on-hf-jobs-in-one-command-7f1a19cb.md) — Hugging Face blog

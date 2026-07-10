@@ -159,6 +159,6 @@ For linear regression, the book shows the analytic solution (normal equations: w
 
 ---
 
-[^src1]: [D2L Part 1 — TOC/Introduction](../../raw/_inbox/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-01.md)
-[^src2]: [D2L Part 2 — Motivating Example / Key Components](../../raw/_inbox/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-02.md)
-[^src6]: [D2L Part 6 — Linear Regression from scratch](../../raw/_inbox/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-06.md)
+[^src1]: [D2L Part 1 — TOC/Introduction](../../../raw/pdf/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-01.md)
+[^src2]: [D2L Part 2 — Motivating Example / Key Components](../../../raw/pdf/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-02.md)
+[^src6]: [D2L Part 6 — Linear Regression from scratch](../../../raw/pdf/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-06.md)

@@ -160,4 +160,4 @@ RNNs remain useful for:
 
 ---
 
-[^src1]: [D2L Part 11 — Backpropagation, RNN internals (Chapters 9–10 coverage)](../../raw/_inbox/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-11.md)
+[^src1]: [D2L Part 11 — Backpropagation, RNN internals (Chapters 9–10 coverage)](../../raw/pdf/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-11.md)

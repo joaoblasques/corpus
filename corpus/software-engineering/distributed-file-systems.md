@@ -100,6 +100,6 @@ A single machine providing shared persistent storage fails if that machine fails
 
 ---
 
-[^src1]: [OSTEP Distributed Systems Introduction](../../raw/_inbox/pdf-dist-intro.md)
-[^src2]: [OSTEP NFS: Sun's Network File System](../../raw/_inbox/pdf-dist-nfs.md)
-[^src3]: [OSTEP AFS: Andrew File System](../../raw/_inbox/pdf-dist-afs.md)
+[^src1]: [OSTEP Distributed Systems Introduction](../../raw/pdf/pdf-dist-intro.md)
+[^src2]: [OSTEP NFS: Sun's Network File System](../../raw/pdf/pdf-dist-nfs.md)
+[^src3]: [OSTEP AFS: Andrew File System](../../raw/pdf/pdf-dist-afs.md)

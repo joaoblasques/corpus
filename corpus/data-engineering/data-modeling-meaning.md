@@ -136,6 +136,6 @@ See also [Vibe Engineering](/data-engineering/vibe-engineering.md) for the relat
 [^src1]: [Semantics, Ontology, and Taxonomy, and Metadata — Foundations for Meaning in Data Modeling](../../raw/email/email-2025-11-05-semantics-ontology-and-taxonomy-and-metadata-foundations-for.md)
 [^src2]: [Dimensional Data Modeling Day 1 (Zach Wilson / DataExpert)](../../raw/youtube/youtube-7jbcvxmj1bs.md)
 [^src3]: [Data Modeling - Theory vs Reality (Joe Reis, Practical Data Modeling)](../../raw/email/email-2025-08-06-data-modeling-theory-vs-reality.md)
-[^src4]: [Where Data Engineering Is Heading in 2026 — 5+ Trends](../../raw/_inbox/web-where-data-engineering-is-heading-in-2026-5-trends-fe513e25.md) — Joe Reis, Practical Data Community survey (1,101 respondents, Feb 2026)
-[^src5]: [The Insanity of Data Education](../../raw/_inbox/web-the-insanity-of-data-education-c2478cdc.md) — Joe Reis, Practical Data Community
-[^src6]: [Why 90% of Data Teams Are Failing at Data Modeling](../../raw/_inbox/web-why-90-of-data-teams-are-failing-at-data-modeling-33d8f9be.md) — Joe Reis, Practical Data Community
+[^src4]: [Where Data Engineering Is Heading in 2026 — 5+ Trends](../../raw/web/web-where-data-engineering-is-heading-in-2026-5-trends-fe513e25.md) — Joe Reis, Practical Data Community survey (1,101 respondents, Feb 2026)
+[^src5]: [The Insanity of Data Education](../../raw/web/web-the-insanity-of-data-education-c2478cdc.md) — Joe Reis, Practical Data Community
+[^src6]: [Why 90% of Data Teams Are Failing at Data Modeling](../../raw/web/web-why-90-of-data-teams-are-failing-at-data-modeling-33d8f9be.md) — Joe Reis, Practical Data Community

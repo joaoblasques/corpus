@@ -104,4 +104,4 @@ Later Intel and AMD processors added hardware virtualization extensions (Intel V
 
 ---
 
-[^src1]: [OSTEP Appendix B: Virtual Machine Monitors](../../raw/_inbox/pdf-vmm-intro.md)
+[^src1]: [OSTEP Appendix B: Virtual Machine Monitors](../../raw/pdf/pdf-vmm-intro.md)

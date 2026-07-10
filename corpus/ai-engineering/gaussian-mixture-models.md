@@ -162,5 +162,5 @@ K is a hyperparameter. Model selection criteria:
 
 ---
 
-[^src1]: [Mathematics for Machine Learning, Part 18](../../raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-18.md)
-[^src2]: [Mathematics for Machine Learning, Part 17](../../raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-17.md)
+[^src1]: [Mathematics for Machine Learning, Part 18](../../raw/pdf/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-18.md)
+[^src2]: [Mathematics for Machine Learning, Part 17](../../raw/pdf/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-17.md)

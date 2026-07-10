@@ -69,5 +69,5 @@ The first transaction in every block. It:
 - Awards the block subsidy (currently 3.125 BTC after the 2024 halving) + all transaction fees in the block
 - Is the mechanism through which new bitcoin enters circulation
 
-[^src1]: [Mastering Bitcoin, ch. 6](../../raw/pdf/book-mastering-bitcoin-3rd-edition-06-transactions.md), Antonopoulos & Harding, CC BY-SA 4.0
-[^src2]: [Mastering Bitcoin, ch. 9](../../raw/pdf/book-mastering-bitcoin-3rd-edition-09-transaction-fees.md), Antonopoulos & Harding, CC BY-SA 4.0
+[^src1]: [Mastering Bitcoin, ch. 6](../../raw/_inbox/book-mastering-bitcoin-3rd-edition-06-transactions.md), Antonopoulos & Harding, CC BY-SA 4.0
+[^src2]: [Mastering Bitcoin, ch. 9](../../raw/_inbox/book-mastering-bitcoin-3rd-edition-09-transaction-fees.md), Antonopoulos & Harding, CC BY-SA 4.0

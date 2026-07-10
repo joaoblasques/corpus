@@ -54,4 +54,4 @@ Actively explored future tracks: multi-talker scenarios (more than one active sp
 
 ---
 
-[^src1]: [Introducing the FFASR Leaderboard: Benchmarking ASR in the Real World](../../raw/web/web-introducing-the-ffasr-leaderboard-benchmarking-asr-in-the-re-c8f31042.md) — Hugging Face blog (Treble Technologies × Hugging Face), 2026-06-28
+[^src1]: [Introducing the FFASR Leaderboard: Benchmarking ASR in the Real World](../../raw/_inbox/web-introducing-the-ffasr-leaderboard-benchmarking-asr-in-the-re-c8f31042.md) — Hugging Face blog (Treble Technologies × Hugging Face), 2026-06-28

@@ -79,4 +79,4 @@ With the flag set, Transformers.js resolves the SHA-256 hash for each Xet-tracke
 
 ---
 
-[^src1]: [Experimenting with the proposed Cross-Origin Storage API in Transformers.js](../../raw/web/web-experimenting-with-the-proposed-cross-origin-storage-api-in-dba1e8f0.md) — Hugging Face blog / Chrome team, 2026-06-28
+[^src1]: [Experimenting with the proposed Cross-Origin Storage API in Transformers.js](../../raw/_inbox/web-experimenting-with-the-proposed-cross-origin-storage-api-in-dba1e8f0.md) — Hugging Face blog / Chrome team, 2026-06-28

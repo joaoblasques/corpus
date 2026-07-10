@@ -257,13 +257,13 @@ Install the Vapi MCP into the running Hermes instance. Hermes then acts as the "
 [^src2]: [7 Hermes Desktop Hacks That Will Change Your Life](../../raw/youtube/youtube-6kGXn-j16QM-7-hermes-desktop-hacks-that-will-change-your-life.md) — YouTube
 [^src3]: [I Built The Best Claude Memory System (YouTube)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-i-built-the-best-report.md) — composite memory stack analysis
 [^src4]: [Hermes use cases: /goal, kanban, memory wiki, Tailscale](../../raw/youtube/youtube-AQHlyGA2cZM-6-hermes-agent-use-cases-i-promise-will-change-your-life.md) — YouTube
-[^src5]: [Master Hermes Agent in 41 Minutes](../../raw/_inbox/youtube-EmF06O4vOWI-master-hermes-agent-in-41-mins.md) — Keith AI, YouTube
-[^src6]: [Hermes Agent: Zero to Personal AI Assistant (1 Hour Course)](../../raw/_inbox/youtube-gb5TlGw6Uks-hermes-agent-zero-to-personal-ai-assistant-1-hour-course.md) — Nate Herk, YouTube
-[^src7]: [Hermes Agent Is Blowing Me Away](../../raw/_inbox/youtube-cEo95olh2j4-hermes-agent-is-blowing-me-away.md) — Alex Finn, YouTube
-[^src8]: [Full Hermes Agent Set Up for Beginners in 2026 — 24/7 AI Agent](../../raw/_inbox/youtube-w4xOiuBQHKA-full-hermes-agent-set-up-for-beginners-in-2026-24-7-ai-agent.md) — AI Foundations, YouTube
-[^src9]: [You Need to Use Hermes RIGHT NOW — Goodbye OpenClaw](../../raw/_inbox/youtube-QQEgIo4Juxg-you-need-to-use-hermes-right-now-goodbye-openclaw.md) — NetworkChuck, YouTube
-[^src10]: [I Gave My Hermes Agent a Phone Number — It's Crazy](../../raw/_inbox/youtube-zHE434sBw2U-i-gave-my-hermes-agent-a-phone-number-its-crazy.md) — David Ondrej, YouTube
-[^src11]: [How I Use Hermes as a Lead Developer (YouTube)](../../raw/_inbox/youtube-y4hiT-j5J24-how-i-use-hermes-as-a-lead-developer.md) — ZazenCodes, YouTube
-[^src12]: [Hermes Agent Full Course — Setup Guide for Complete Beginners](../../raw/_inbox/youtube-mTYxpIRK7xA-hermes-agent-full-course-setup-guide-for-complete-beginners.md) — Tech With Tim, YouTube
-[^src13]: [Hermes Agent is Crazy — 180,000+ GitHub Stars](../../raw/_inbox/youtube-u6L9aedHqZc-hermes-agent-is-crazy-180-000-github-stars.md) — David Ondrej, YouTube (sponsored by Minimax)
-[^src14]: [The Hermes Agent Briefing — What It Is, Why It Matters, and How to Get Started](../../raw/_inbox/youtube-yzlvDnxvi1I-the-hermes-agent-briefing-what-it-is-why-it-matters-and-how.md) — Dmitri Shapiro (MindStudio CEO), YouTube
+[^src5]: [Master Hermes Agent in 41 Minutes](../../raw/youtube/youtube-EmF06O4vOWI-master-hermes-agent-in-41-mins.md) — Keith AI, YouTube
+[^src6]: [Hermes Agent: Zero to Personal AI Assistant (1 Hour Course)](../../raw/youtube/youtube-gb5TlGw6Uks-hermes-agent-zero-to-personal-ai-assistant-1-hour-course.md) — Nate Herk, YouTube
+[^src7]: [Hermes Agent Is Blowing Me Away](../../raw/youtube/youtube-cEo95olh2j4-hermes-agent-is-blowing-me-away.md) — Alex Finn, YouTube
+[^src8]: [Full Hermes Agent Set Up for Beginners in 2026 — 24/7 AI Agent](../../raw/youtube/youtube-w4xOiuBQHKA-full-hermes-agent-set-up-for-beginners-in-2026-24-7-ai-agent.md) — AI Foundations, YouTube
+[^src9]: [You Need to Use Hermes RIGHT NOW — Goodbye OpenClaw](../../raw/youtube/youtube-QQEgIo4Juxg-you-need-to-use-hermes-right-now-goodbye-openclaw.md) — NetworkChuck, YouTube
+[^src10]: [I Gave My Hermes Agent a Phone Number — It's Crazy](../../raw/youtube/youtube-zHE434sBw2U-i-gave-my-hermes-agent-a-phone-number-its-crazy.md) — David Ondrej, YouTube
+[^src11]: [How I Use Hermes as a Lead Developer (YouTube)](../../raw/youtube/youtube-y4hiT-j5J24-how-i-use-hermes-as-a-lead-developer.md) — ZazenCodes, YouTube
+[^src12]: [Hermes Agent Full Course — Setup Guide for Complete Beginners](../../raw/youtube/youtube-mTYxpIRK7xA-hermes-agent-full-course-setup-guide-for-complete-beginners.md) — Tech With Tim, YouTube
+[^src13]: [Hermes Agent is Crazy — 180,000+ GitHub Stars](../../raw/youtube/youtube-u6L9aedHqZc-hermes-agent-is-crazy-180-000-github-stars.md) — David Ondrej, YouTube (sponsored by Minimax)
+[^src14]: [The Hermes Agent Briefing — What It Is, Why It Matters, and How to Get Started](../../raw/youtube/youtube-yzlvDnxvi1I-the-hermes-agent-briefing-what-it-is-why-it-matters-and-how.md) — Dmitri Shapiro (MindStudio CEO), YouTube

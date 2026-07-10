@@ -175,4 +175,4 @@ D2L Chapter 16 demonstrates fine-tuning pretrained representations for [^src1]:
 
 ---
 
-[^src1]: [D2L Part 22 — NLP Pretraining context (Chapters 15–16 coverage)](../../raw/_inbox/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-22.md)
+[^src1]: [D2L Part 22 — NLP Pretraining context (Chapters 15–16 coverage)](../../raw/pdf/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-22.md)

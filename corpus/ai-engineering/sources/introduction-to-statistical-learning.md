@@ -106,9 +106,9 @@ An Introduction to Statistical Learning (ISL) by Gareth James, Daniela Witten, T
 - y ∈ ℝ^n response vector
 - f̂: estimated function; ε: irreducible error
 
-[^src1]: [Introduction to Statistical Learning, Part 1](../../raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-01.md)
-[^src2]: [Introduction to Statistical Learning, Part 2](../../raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-02.md)
-[^src3]: [Introduction to Statistical Learning, Part 3](../../raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-03.md)
-[^src19]: [Introduction to Statistical Learning, Part 19](../../raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-19.md)
-[^src20]: [Introduction to Statistical Learning, Part 20](../../raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-20.md)
-[^src21]: [Introduction to Statistical Learning, Part 21](../../raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-21.md)
+[^src1]: [Introduction to Statistical Learning, Part 1](../../../raw/pdf/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-01.md)
+[^src2]: [Introduction to Statistical Learning, Part 2](../../../raw/pdf/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-02.md)
+[^src3]: [Introduction to Statistical Learning, Part 3](../../../raw/pdf/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-03.md)
+[^src19]: [Introduction to Statistical Learning, Part 19](../../../raw/pdf/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-19.md)
+[^src20]: [Introduction to Statistical Learning, Part 20](../../../raw/pdf/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-20.md)
+[^src21]: [Introduction to Statistical Learning, Part 21](../../../raw/pdf/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-21.md)

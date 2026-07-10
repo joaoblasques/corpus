@@ -130,4 +130,4 @@ The `ollama launch` family of commands (also available for Claude Code, Codex, O
 [^src2]: [Paperclip: Agent Collab Made Easy](../../raw/youtube/youtube-iRew6HOY0ho-paperclip-agent-collab-made-easy.md) — The Next New Thing, YouTube
 [^src3]: [How AI agents & Claude skills work (Clearly Explained)](../../raw/youtube/youtube-S_oN3vlzpMw-how-ai-agents-claude-skills-work-clearly-explained.md) — Greg Isenberg × Ras Mic, YouTube
 [^src4]: [I Replaced OpenClaw with Perplexity Computer](../../raw/youtube/youtube-fgr6Sm-dmmM-i-replaced-openclaw-with-perplexity-computer.md) — Tech With Tim, YouTube
-[^src5]: [OpenClaw on Ollama](../../raw/_inbox/web-openclaw-ollama-blog-ba2f528e.md) — Ollama blog, Feb 1 2026
+[^src5]: [OpenClaw on Ollama](../../raw/web/web-openclaw-ollama-blog-ba2f528e.md) — Ollama blog, Feb 1 2026

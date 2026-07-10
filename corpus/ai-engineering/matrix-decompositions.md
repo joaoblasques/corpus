@@ -165,5 +165,5 @@ All matrices (A ∈ R^{m×n})
 
 ---
 
-[^src1]: [Mathematics for Machine Learning, Part 6](../../raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-06.md)
-[^src2]: [Mathematics for Machine Learning, Part 7](../../raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-07.md)
+[^src1]: [Mathematics for Machine Learning, Part 6](../../raw/pdf/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-06.md)
+[^src2]: [Mathematics for Machine Learning, Part 7](../../raw/pdf/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-07.md)

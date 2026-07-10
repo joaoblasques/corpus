@@ -237,6 +237,6 @@ Each chapter presents a "crux of the problem" (the central design challenge) bef
 
 ---
 
-[^src1]: [OSTEP Preface](../../raw/_inbox/pdf-preface.md)
-[^src2]: [OSTEP CPU Scheduling MLFQ](../../raw/_inbox/pdf-cpu-sched-mlfq.md)
-[^src3]: [OSTEP Lab Projects](../../raw/_inbox/pdf-lab-projects-xv6.md)
+[^src1]: [OSTEP Preface](../../../raw/pdf/pdf-preface.md)
+[^src2]: [OSTEP CPU Scheduling MLFQ](../../../raw/pdf/pdf-cpu-sched-mlfq.md)
+[^src3]: [OSTEP Lab Projects](../../../raw/pdf/pdf-lab-projects-xv6.md)

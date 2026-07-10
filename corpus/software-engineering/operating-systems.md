@@ -144,8 +144,8 @@ Separating them allows changing policy without changing mechanism — an importa
 
 ---
 
-[^src1]: [OSTEP Introduction](../../raw/_inbox/pdf-intro.md)
-[^src2]: [OSTEP Preface](../../raw/_inbox/pdf-preface.md)
-[^src3]: [OSTEP CPU Introduction: The Abstraction: The Process](../../raw/_inbox/pdf-cpu-intro.md)
-[^src4]: [OSTEP CPU API: Interlude: Process API](../../raw/_inbox/pdf-cpu-api.md)
-[^src5]: [OSTEP CPU Mechanisms: Limited Direct Execution](../../raw/_inbox/pdf-cpu-mechanisms.md)
+[^src1]: [OSTEP Introduction](../../raw/pdf/pdf-intro.md)
+[^src2]: [OSTEP Preface](../../raw/pdf/pdf-preface.md)
+[^src3]: [OSTEP CPU Introduction: The Abstraction: The Process](../../raw/pdf/pdf-cpu-intro.md)
+[^src4]: [OSTEP CPU API: Interlude: Process API](../../raw/pdf/pdf-cpu-api.md)
+[^src5]: [OSTEP CPU Mechanisms: Limited Direct Execution](../../raw/pdf/pdf-cpu-mechanisms.md)

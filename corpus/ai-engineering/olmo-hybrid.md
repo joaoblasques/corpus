@@ -48,4 +48,4 @@ A single overall loss (average error across all tokens) is "too blunt" to compar
 
 ---
 
-[^src1]: [Which tokens does a hybrid model predict better?](../../raw/web/web-which-tokens-does-a-hybrid-model-predict-better-04bd4874.md) — Hugging Face blog (Ai2 / Allen Institute for AI), 2026-06-28
+[^src1]: [Which tokens does a hybrid model predict better?](../../raw/_inbox/web-which-tokens-does-a-hybrid-model-predict-better-04bd4874.md) — Hugging Face blog (Ai2 / Allen Institute for AI), 2026-06-28

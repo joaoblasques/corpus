@@ -111,4 +111,4 @@ The lasso objective is equivalent to minimizing RSS subject to Σ|βⱼ| ≤ s, 
 - [Resampling Methods](/ai-engineering/resampling-methods.md) — cross-validation for λ selection
 - [Optimization for ML](/ai-engineering/optimization-for-ml.md) — constrained optimization geometry
 
-[^src1]: [Introduction to Statistical Learning, Part 12](../../raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-12.md)
+[^src1]: [Introduction to Statistical Learning, Part 12](../../raw/pdf/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-12.md)

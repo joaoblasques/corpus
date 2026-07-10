@@ -100,6 +100,6 @@ This reduces from O(N²) operations to O(N log N). Latency: 9.5 hours → 45 min
 
 ---
 
-[^src1]: [How I cut Airbnb's Pricing pipeline backfill time 95%](../../../raw/web/web-how-i-cut-airbnb-s-pricing-pipeline-backfill-time-95-8b32b07b.md)
-[^src2]: [How I got a 12x speed up in a 50 TB pipeline at Meta](../../../raw/web/web-how-i-got-a-12x-speed-up-in-a-50-tb-pipeline-at-meta-ec9a8d44.md)
-[^src3]: [Stopping Silent Failures for Meta's Fake Accounts Pipeline](../../../raw/web/web-stopping-silent-failures-for-meta-s-fake-accounts-pipeline-69a353ea.md)
+[^src1]: [How I cut Airbnb's Pricing pipeline backfill time 95%](../../raw/web/web-how-i-cut-airbnb-s-pricing-pipeline-backfill-time-95-8b32b07b.md)
+[^src2]: [How I got a 12x speed up in a 50 TB pipeline at Meta](../../raw/web/web-how-i-got-a-12x-speed-up-in-a-50-tb-pipeline-at-meta-ec9a8d44.md)
+[^src3]: [Stopping Silent Failures for Meta's Fake Accounts Pipeline](../../raw/web/web-stopping-silent-failures-for-meta-s-fake-accounts-pipeline-69a353ea.md)

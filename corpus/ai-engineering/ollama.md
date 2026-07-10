@@ -199,18 +199,18 @@ Ollama published documentation for running [OpenClaw](/ai-engineering/openclaw.m
 
 ---
 
-[^src1]: [Ollama's New App](../../raw/_inbox/web-ollama-s-new-app-ollama-blog-1344542b.md) — Ollama blog, Jul 30 2025
-[^src4]: [OpenAI gpt-oss on Ollama](../../raw/_inbox/web-openai-gpt-oss-ollama-blog-0a0ad7a4.md) — Ollama blog, Aug 5 2025
-[^src3]: [Cloud Models](../../raw/_inbox/web-cloud-models-ollama-blog-ec2bfe12.md) — Ollama blog, Sep 19 2025
-[^src6]: [New Model Scheduling](../../raw/_inbox/web-new-model-scheduling-ollama-blog-9f9b5356.md) — Ollama blog, Sep 23 2025
-[^src5]: [Web Search](../../raw/_inbox/web-web-search-ollama-blog-aa148e97.md) — Ollama blog, Sep 24 2025
-[^src7]: [ollama launch](../../raw/_inbox/web-ollama-launch-ollama-blog-bb057651.md) — Ollama blog, Jan 23 2026
-[^src_oc]: [OpenClaw on Ollama](../../raw/_inbox/web-openclaw-ollama-blog-ba2f528e.md) — Ollama blog, Feb 1 2026
-[^src8]: [Subagents and Web Search in Claude Code](../../raw/_inbox/web-subagents-and-web-search-in-claude-code-ollama-blog-198284bb.md) — Ollama blog, Feb 16 2026
-[^src9]: [Improved Performance and Model Support with GGUF](../../raw/_inbox/web-improved-performance-and-model-support-with-gguf-ollama-blog-6d9dbd48.md) — Ollama blog, v0.30
-[^src10]: [Ollama is Now Powered by MLX on Apple Silicon (Preview)](../../raw/_inbox/web-ollama-is-now-powered-by-mlx-on-apple-silicon-in-preview-oll-23d29d28.md) — Ollama blog, Mar 30 2026
-[^src11]: [Ollama's Highest Performance on Apple Silicon Yet with MLX](../../raw/_inbox/web-ollama-s-highest-performance-on-apple-silicon-yet-with-mlx-o-c1ddb6ae.md) — Ollama blog, Jun 11 2026
-[^src12]: [NVIDIA DGX Spark Performance](../../raw/_inbox/web-nvidia-dgx-spark-performance-ollama-blog-ed001519.md) — Ollama blog, Oct 23 2025
-[^src13]: [NVIDIA Nemotron 3 Ultra](../../raw/_inbox/web-nvidia-nemotron-3-ultra-ollama-blog-6c770119.md) — Ollama blog, Jun 4 2026
-[^src14]: [Claude Code with Anthropic API Compatibility](../../raw/_inbox/web-claude-code-with-anthropic-api-compatibility-ollama-blog-eb664f1b.md) — Ollama blog, v0.14+
+[^src1]: [Ollama's New App](../../raw/web/web-ollama-s-new-app-ollama-blog-1344542b.md) — Ollama blog, Jul 30 2025
+[^src4]: [OpenAI gpt-oss on Ollama](../../raw/web/web-openai-gpt-oss-ollama-blog-0a0ad7a4.md) — Ollama blog, Aug 5 2025
+[^src3]: [Cloud Models](../../raw/web/web-cloud-models-ollama-blog-ec2bfe12.md) — Ollama blog, Sep 19 2025
+[^src6]: [New Model Scheduling](../../raw/web/web-new-model-scheduling-ollama-blog-9f9b5356.md) — Ollama blog, Sep 23 2025
+[^src5]: [Web Search](../../raw/web/web-web-search-ollama-blog-aa148e97.md) — Ollama blog, Sep 24 2025
+[^src7]: [ollama launch](../../raw/web/web-ollama-launch-ollama-blog-bb057651.md) — Ollama blog, Jan 23 2026
+[^src_oc]: [OpenClaw on Ollama](../../raw/web/web-openclaw-ollama-blog-ba2f528e.md) — Ollama blog, Feb 1 2026
+[^src8]: [Subagents and Web Search in Claude Code](../../raw/web/web-subagents-and-web-search-in-claude-code-ollama-blog-198284bb.md) — Ollama blog, Feb 16 2026
+[^src9]: [Improved Performance and Model Support with GGUF](../../raw/web/web-improved-performance-and-model-support-with-gguf-ollama-blog-6d9dbd48.md) — Ollama blog, v0.30
+[^src10]: [Ollama is Now Powered by MLX on Apple Silicon (Preview)](../../raw/web/web-ollama-is-now-powered-by-mlx-on-apple-silicon-in-preview-oll-23d29d28.md) — Ollama blog, Mar 30 2026
+[^src11]: [Ollama's Highest Performance on Apple Silicon Yet with MLX](../../raw/web/web-ollama-s-highest-performance-on-apple-silicon-yet-with-mlx-o-c1ddb6ae.md) — Ollama blog, Jun 11 2026
+[^src12]: [NVIDIA DGX Spark Performance](../../raw/web/web-nvidia-dgx-spark-performance-ollama-blog-ed001519.md) — Ollama blog, Oct 23 2025
+[^src13]: [NVIDIA Nemotron 3 Ultra](../../raw/web/web-nvidia-nemotron-3-ultra-ollama-blog-6c770119.md) — Ollama blog, Jun 4 2026
+[^src14]: [Claude Code with Anthropic API Compatibility](../../raw/web/web-claude-code-with-anthropic-api-compatibility-ollama-blog-eb664f1b.md) — Ollama blog, v0.14+
 [^src_oj]: [OpenJarvis: a local-first personal AI is now available to run with Ollama](../../raw/web/web-openjarvis-a-local-first-personal-ai-is-now-available-to-run-559ec7e6.md) — Ollama Blog, 2026-05-28

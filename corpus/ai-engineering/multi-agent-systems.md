@@ -429,8 +429,8 @@ This captures three real multi-agent failure modes: (1) **disagreement loops** �
 [^src10]: [When to use multi-agent systems — and when not to](../../raw/web/web-when-to-use-multi-agent-systems-and-when-not-to-claude.md) — Anthropic
 [^src11]: [Local AI Agents In 26 Minutes](../../raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md) — Tina Huang, YouTube
 [^src12]: [Paperclip: Agent Collab Made Easy](../../raw/youtube/youtube-iRew6HOY0ho-paperclip-agent-collab-made-easy.md) — The Next New Thing, YouTube
-[^src13]: [The Multi-Agent Architecture That Actually Ships — Luke Alvoeiro (Factory)](../../raw/_inbox/youtube-ow1we5PzK-o-the-multi-agent-architecture-that-actually-ships-luke-alvoei.md) — AI Engineer channel, YouTube
-[^src14]: [Build 3 PRODUCTION AI Agents in Python — Full Course (AgentSpan)](../../raw/_inbox/youtube-zFw19qGAeGo-build-3-production-ai-agents-in-python-full-course-agentspan.md) — Tech With Tim, YouTube
+[^src13]: [The Multi-Agent Architecture That Actually Ships — Luke Alvoeiro (Factory)](../../raw/youtube/youtube-ow1we5PzK-o-the-multi-agent-architecture-that-actually-ships-luke-alvoei.md) — AI Engineer channel, YouTube
+[^src14]: [Build 3 PRODUCTION AI Agents in Python — Full Course (AgentSpan)](../../raw/youtube/youtube-zFw19qGAeGo-build-3-production-ai-agents-in-python-full-course-agentspan.md) — Tech With Tim, YouTube
 
 ## AgentSpan: production Python multi-agent framework
 
@@ -482,8 +482,8 @@ In a cross-model setup, each model maintains its own instruction file. Over time
 
 This is the organizational analog of the "compounds across sessions" property of [Agent Memory](/ai-engineering/agent-memory.md) applied to behavioral conventions rather than factual context. See [CLAUDE.md Conventions](/ai-engineering/claude-md-conventions.md) for the file format.
 
-[^src15]: [AI Agents Full Course 2026 — Master Agentic AI (2 hours)](../../raw/_inbox/youtube-EsTrWCV0Ph4-ai-agents-full-course-2026-master-agentic-ai-2-hours.md) — Nick Saraev, YouTube, 2026; cross-LLM MCP orchestration, self-modifying instruction files
-[^src16]: [RPA vs. AI Agents: What Are the Differences?](../../raw/_inbox/web-rpa-vs-ai-agents-what-are-the-differences-36f86eaf.md) — Zencoder, 2026
-[^src17]: [What Is AI Agent Orchestration? How It Works & Examples](../../raw/_inbox/web-what-is-ai-agent-orchestration-how-it-works-examples-c4e0c48a.md) — Zencoder, 2026
-[^src18]: [The Orchestrator Is the Product. The Model Is a Commodity.](../../raw/_inbox/web-the-orchestrator-is-the-product-the-model-is-a-commodity-3e693062.md) — Neeraj Khandelwal, Zencoder newsletter, Jun 2026
-[^src19]: [Incident Report: CVE-2026-LGTM](../../raw/_inbox/web-incident-report-cve-2026-lgtm-61a73fa6.md) — Andrew Nesbitt, via Simon Willison, 26 Jun 2026
+[^src15]: [AI Agents Full Course 2026 — Master Agentic AI (2 hours)](../../raw/youtube/youtube-EsTrWCV0Ph4-ai-agents-full-course-2026-master-agentic-ai-2-hours.md) — Nick Saraev, YouTube, 2026; cross-LLM MCP orchestration, self-modifying instruction files
+[^src16]: [RPA vs. AI Agents: What Are the Differences?](../../raw/web/web-rpa-vs-ai-agents-what-are-the-differences-36f86eaf.md) — Zencoder, 2026
+[^src17]: [What Is AI Agent Orchestration? How It Works & Examples](../../raw/web/web-what-is-ai-agent-orchestration-how-it-works-examples-c4e0c48a.md) — Zencoder, 2026
+[^src18]: [The Orchestrator Is the Product. The Model Is a Commodity.](../../raw/web/web-the-orchestrator-is-the-product-the-model-is-a-commodity-3e693062.md) — Neeraj Khandelwal, Zencoder newsletter, Jun 2026
+[^src19]: [Incident Report: CVE-2026-LGTM](../../raw/web/web-incident-report-cve-2026-lgtm-61a73fa6.md) — Andrew Nesbitt, via Simon Willison, 26 Jun 2026

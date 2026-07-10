@@ -216,6 +216,6 @@ The specific advice: understand data modeling, architecture, and business contex
 [^src3]: [How to become a senior data engineer?](../../raw/email/email-2026-05-19-how-to-become-a-senior-data-engineer.md)
 [^src4]: [How to Transition from Data Analyst to Data Engineer](../../raw/notes/notes-clippings-how-to-transition-from-data-analyst-to-data-engineer.md)
 [^src5]: [DataExpert-io/data-engineer-handbook (GitHub)](../../raw/github/github-dataexpert-io-data-engineer-handbook.md)
-[^src6]: [Where Data Engineering Is Heading in 2026 — 5+ Trends](../../raw/_inbox/web-where-data-engineering-is-heading-in-2026-5-trends-fe513e25.md) — Joe Reis, Practical Data Community survey (1,101 respondents, Feb 2026)
-[^src7]: [The Insanity of Data Education](../../raw/_inbox/web-the-insanity-of-data-education-c2478cdc.md) — Joe Reis, Practical Data Community
-[^src8]: [2028 — THE GREAT DATA RECKONING](../../raw/_inbox/web-2028-the-great-data-reckoning-73fdab45.md) — Joe Reis, satirical/scenario piece (labeled "a scenario, not a prediction")
+[^src6]: [Where Data Engineering Is Heading in 2026 — 5+ Trends](../../raw/web/web-where-data-engineering-is-heading-in-2026-5-trends-fe513e25.md) — Joe Reis, Practical Data Community survey (1,101 respondents, Feb 2026)
+[^src7]: [The Insanity of Data Education](../../raw/web/web-the-insanity-of-data-education-c2478cdc.md) — Joe Reis, Practical Data Community
+[^src8]: [2028 — THE GREAT DATA RECKONING](../../raw/web/web-2028-the-great-data-reckoning-73fdab45.md) — Joe Reis, satirical/scenario piece (labeled "a scenario, not a prediction")

@@ -140,8 +140,8 @@ In distributed systems, principals (users, servers) communicate over a network t
 
 ---
 
-[^src1]: [OSTEP Introduction to Operating System Security (Peter Reiher, UCLA)](../../raw/_inbox/pdf-security-intro.md)
-[^src2]: [OSTEP Authentication](../../raw/_inbox/pdf-security-authentication.md)
-[^src3]: [OSTEP Access Control](../../raw/_inbox/pdf-security-access.md)
-[^src4]: [OSTEP Protecting Information With Cryptography](../../raw/_inbox/pdf-security-crypto.md)
-[^src5]: [OSTEP Distributed System Security](../../raw/_inbox/pdf-security-distributed.md)
+[^src1]: [OSTEP Introduction to Operating System Security (Peter Reiher, UCLA)](../../raw/pdf/pdf-security-intro.md)
+[^src2]: [OSTEP Authentication](../../raw/pdf/pdf-security-authentication.md)
+[^src3]: [OSTEP Access Control](../../raw/pdf/pdf-security-access.md)
+[^src4]: [OSTEP Protecting Information With Cryptography](../../raw/pdf/pdf-security-crypto.md)
+[^src5]: [OSTEP Distributed System Security](../../raw/pdf/pdf-security-distributed.md)

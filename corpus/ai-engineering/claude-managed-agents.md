@@ -537,4 +537,4 @@ The Managed Agents toolset (`agent_toolset_20260401`) provides 8 built-in tools,
 [^src25]: [Define outcomes — Claude Managed Agents docs](../../raw/web/web-define-outcomes.md) — Anthropic; primary source for Outcomes API, rubric format, grader states, chaining
 [^src26]: [Subscribe to webhooks — Claude Managed Agents docs](../../raw/web/web-subscribe-to-webhooks.md) — Anthropic; primary source for webhook setup, signature verification, delivery behavior
 [^src27]: [Tools — Claude Managed Agents docs](../../raw/web/web-tools.md) — Anthropic; primary source for built-in tool table, selective enabling, custom tools, 100K overflow
-[^src28]: [What is Claude Managed Agents](../../raw/_inbox/youtube-haMS2-JXL6s-what-is-claude-managed-agents.md) — KodeKloud, YouTube; harnessing framing, $700/year cost calculation, vendor lock-in risk
+[^src28]: [What is Claude Managed Agents](../../raw/youtube/youtube-haMS2-JXL6s-what-is-claude-managed-agents.md) — KodeKloud, YouTube; harnessing framing, $700/year cost calculation, vendor lock-in risk

@@ -175,4 +175,4 @@ D2L presents the Transformer (Vaswani et al. 2017) as the culmination of the att
 
 ---
 
-[^src1]: [D2L Part 22 — Attention Scoring Functions, Bahdanau, Multi-Head](../../raw/_inbox/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-22.md)
+[^src1]: [D2L Part 22 — Attention Scoring Functions, Bahdanau, Multi-Head](../../raw/pdf/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-22.md)

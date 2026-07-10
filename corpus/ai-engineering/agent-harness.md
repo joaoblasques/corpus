@@ -423,4 +423,4 @@ The starter pack provided: Vertex AI + Cloud Run scaffolding, session management
 [^src16]: [How Claude Code Works — Claude Code docs](../../raw/web/web-how-claude-code-works-claude-code-docs.md) — Anthropic
 [^src17]: [How to Build Effective Claude Code Agents in 2026](../../raw/youtube/youtube-RzLV8sfFdMM-how-to-build-effective-claude-code-agents-in-2026.md) — Cole Medin, YouTube
 [^src18]: [google/agent-starter-pack — GCP agent harness (maintenance mode)](../../raw/github/github-googlecloudplatform-agent-starter-pack.md) — Google Cloud, GitHub
-[^src19]: [The New Software Lifecycle](../../raw/_inbox/web-the-new-software-lifecycle-840140b4.md) — Addy Osmani, Google SDLC whitepaper summary, June 2026
+[^src19]: [The New Software Lifecycle](../../raw/web/web-the-new-software-lifecycle-840140b4.md) — Addy Osmani, Google SDLC whitepaper summary, June 2026

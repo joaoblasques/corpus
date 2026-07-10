@@ -51,4 +51,4 @@ A single aggregate loss is "too blunt to compare transformer and hybrid architec
 
 ---
 
-[^src1]: [Which tokens does a hybrid model predict better?](../../raw/web/web-which-tokens-does-a-hybrid-model-predict-better-04bd4874.md) — Hugging Face blog (Allen Institute for AI)
+[^src1]: [Which tokens does a hybrid model predict better?](../../raw/_inbox/web-which-tokens-does-a-hybrid-model-predict-better-04bd4874.md) — Hugging Face blog (Allen Institute for AI)

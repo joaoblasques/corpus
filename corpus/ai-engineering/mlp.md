@@ -136,4 +136,4 @@ The `from-scratch` version (D2L Chapter 5) implements the forward pass and param
 
 ---
 
-[^src1]: [D2L Part 11 — Forward Prop, Backprop, Numerical Stability](../../raw/_inbox/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-11.md)
+[^src1]: [D2L Part 11 — Forward Prop, Backprop, Numerical Stability](../../raw/pdf/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-11.md)

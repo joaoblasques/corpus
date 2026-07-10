@@ -187,5 +187,5 @@ Uncorrelated variables satisfy Pythagoras: Var[X + Y] = Var[X] + Var[Y].
 
 ---
 
-[^src1]: [Mathematics for Machine Learning, Part 10](../../raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-10.md)
-[^src2]: [Mathematics for Machine Learning, Part 11](../../raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-11.md)
+[^src1]: [Mathematics for Machine Learning, Part 10](../../raw/pdf/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-10.md)
+[^src2]: [Mathematics for Machine Learning, Part 11](../../raw/pdf/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-11.md)

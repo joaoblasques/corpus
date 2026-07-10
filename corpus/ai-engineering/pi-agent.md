@@ -131,7 +131,7 @@ From the 2026 coding agent survey [^src2]:
 [^src1]: [Pi Coding Agent — Free Course](../../raw/youtube/youtube-BZ0w0JhPQ9o-pi-coding-agent-free-course.md) — YouTube
 [^src2]: [How Software Engineers Actually Use Coding Agents in 2026](../../raw/youtube/youtube-2HtqFVLgjLI-how-software-engineers-actually-use-coding-agents-in-2026.md) — YouTube
 [^src3]: [Pi Coding Agent (Free Course) — processed notes report](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-pi-coding-agent-f-report.md) — YouTube (processed report); primary source for extensions deep-dive and workflow extension
-[^src4]: [PI Architecture EXPLAINED — Agent Loop, Tools, TUI and More](../../raw/_inbox/youtube-gTeujlv8qK0-pi-architecture-explained-agent-loop-tools-tui-and-more.md) — Alejandro AO, YouTube, June 2026
+[^src4]: [PI Architecture EXPLAINED — Agent Loop, Tools, TUI and More](../../raw/youtube/youtube-gTeujlv8qK0-pi-architecture-explained-agent-loop-tools-tui-and-more.md) — Alejandro AO, YouTube, June 2026
 
 ## Agent loop initialization sequence
 

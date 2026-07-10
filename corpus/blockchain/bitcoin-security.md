@@ -62,5 +62,5 @@ A single 12-word seed phrase recovers the entire wallet including all derived ad
 - Treat keys like bearer cash; assume any digital copy is compromised
 - For Bitcoin applications: never request unnecessary permissions; use the most restrictive script type; watch for signature malleability (historical issue, mitigated by SegWit) [^src1]
 
-[^src1]: [Mastering Bitcoin, ch. 13](../../raw/pdf/book-mastering-bitcoin-3rd-edition-13-bitcoin-security.md), Antonopoulos & Harding, CC BY-SA 4.0
-[^src2]: [Mastering Bitcoin, ch. 5](../../raw/pdf/book-mastering-bitcoin-3rd-edition-05-wallet-recovery.md), Antonopoulos & Harding, CC BY-SA 4.0
+[^src1]: [Mastering Bitcoin, ch. 13](../../raw/_inbox/book-mastering-bitcoin-3rd-edition-13-bitcoin-security.md), Antonopoulos & Harding, CC BY-SA 4.0
+[^src2]: [Mastering Bitcoin, ch. 5](../../raw/_inbox/book-mastering-bitcoin-3rd-edition-05-wallet-recovery.md), Antonopoulos & Harding, CC BY-SA 4.0

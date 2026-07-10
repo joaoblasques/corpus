@@ -181,10 +181,10 @@ FFS forms the basis for ext2/ext3/ext4 and most modern Unix file systems [^src4]
 
 ---
 
-[^src1]: [OSTEP Interlude: Files and Directories](../../raw/_inbox/pdf-file-intro.md)
-[^src2]: [OSTEP File System Implementation](../../raw/_inbox/pdf-file-implementation.md)
-[^src3]: [OSTEP Crash Consistency: FSCK and Journaling](../../raw/_inbox/pdf-file-journaling.md)
-[^src4]: [OSTEP FFS: Fast File System](../../raw/_inbox/pdf-file-ffs.md)
-[^src5]: [OSTEP LFS: Log-Structured File System](../../raw/_inbox/pdf-file-lfs.md)
-[^src6]: [OSTEP Solid-State Drives](../../raw/_inbox/pdf-file-ssd.md)
-[^src7]: [OSTEP RAID](../../raw/_inbox/pdf-file-raid.md)
+[^src1]: [OSTEP Interlude: Files and Directories](../../raw/pdf/pdf-file-intro.md)
+[^src2]: [OSTEP File System Implementation](../../raw/pdf/pdf-file-implementation.md)
+[^src3]: [OSTEP Crash Consistency: FSCK and Journaling](../../raw/pdf/pdf-file-journaling.md)
+[^src4]: [OSTEP FFS: Fast File System](../../raw/pdf/pdf-file-ffs.md)
+[^src5]: [OSTEP LFS: Log-Structured File System](../../raw/pdf/pdf-file-lfs.md)
+[^src6]: [OSTEP Solid-State Drives](../../raw/pdf/pdf-file-ssd.md)
+[^src7]: [OSTEP RAID](../../raw/pdf/pdf-file-raid.md)

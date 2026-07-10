@@ -828,8 +828,8 @@ This is the first documented case in the corpus of a **self-healing CI/CD pipeli
 [^src36]: [How Software Engineers Actually Use Coding Agents in 2026](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-how-software-engi-report.md) — YouTube (processed notes report); Pragmatic Engineer 2026 adoption survey
 [^src37]: [ProteoWizard/pwiz-ai — AI tooling and documentation for ProteoWizard/Skyline](../../raw/web/web-github-proteowizard-pwiz-ai-ai-tooling-and-documentation-for.md) — Brendan MacLean / MacCoss Lab, GitHub; primary source (alongside the Skyline case study note) for the pwiz-ai "reference don't embed" context architecture
 [^src38]: [My Real AI Coding Workflow (build anything)](../../raw/youtube/youtube-gpOfsGW1xRk-my-real-ai-coding-workflow-build-anything.md) — Tech With Tim, YouTube; research-first workflow, Cursor + skills/MCP/rules harness setup, prompt→run→debug loop
-[^src39]: [I Finally Found a Reason to Build My Own AI Agent](../../raw/_inbox/youtube-WkpEuogh3OY-i-finally-found-a-reason-to-build-my-own-ai-agent.md) — Dreams of Code, YouTube; homelab CI/CD failure-fixing agent, Cersei Rust crate, Tailscale Aperture LLM proxy
-[^src40]: [Agentic Code Review](../../raw/_inbox/web-agentic-code-review-a6ceec31.md) — Addy Osmani, June 15, 2026
+[^src39]: [I Finally Found a Reason to Build My Own AI Agent](../../raw/youtube/youtube-WkpEuogh3OY-i-finally-found-a-reason-to-build-my-own-ai-agent.md) — Dreams of Code, YouTube; homelab CI/CD failure-fixing agent, Cersei Rust crate, Tailscale Aperture LLM proxy
+[^src40]: [Agentic Code Review](../../raw/web/web-agentic-code-review-a6ceec31.md) — Addy Osmani, June 15, 2026
 
 ## ProteoWizard pwiz-ai — LLM context docs pattern
 

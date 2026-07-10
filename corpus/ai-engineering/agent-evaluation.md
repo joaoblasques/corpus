@@ -373,6 +373,6 @@ The `evals-skills` open-source plugin (Hamel Husain) provides Claude Code skills
 [^src8]: [Claude on SWE-bench Verified — Anthropic blog](../../raw/web/web-claude-swe-bench-performance.md) — Anthropic
 [^src9]: [This "Karpathy System" could 701x your AI Workflows — autoresearch fit checklist](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-this-karpathy-sys-report.md) — YouTube (processed report)
 [^src10]: [A Field Guide to Rapidly Improving AI Products](../../raw/web/web-a-field-guide-to-rapidly-improving-ai-products-hamels-blog-h.md) — Hamel Husain, hamel.dev
-[^src11]: [LLM Evals: Everything You Need to Know](../../raw/_inbox/web-llm-evals-everything-you-need-to-know-hamels-blog-hamel-husa-5bf201ee.md) — Hamel Husain & Shreya Shankar, hamel.dev
-[^src12]: [Evals Skills for Coding Agents](../../raw/_inbox/web-evals-skills-for-coding-agents-hamels-blog-hamel-husain-f8a26550.md) — Hamel Husain, hamel.dev
-[^src13]: [SWE-Bench Pro Results 2026: AI Coding Model Rankings](../../raw/_inbox/web-swe-bench-pro-results-2026-ai-coding-model-rankings-dca3b106.md) — Andrew Filev & Dmitry Krasnov, Zencoder blog, 2026
+[^src11]: [LLM Evals: Everything You Need to Know](../../raw/web/web-llm-evals-everything-you-need-to-know-hamels-blog-hamel-husa-5bf201ee.md) — Hamel Husain & Shreya Shankar, hamel.dev
+[^src12]: [Evals Skills for Coding Agents](../../raw/web/web-evals-skills-for-coding-agents-hamels-blog-hamel-husain-f8a26550.md) — Hamel Husain, hamel.dev
+[^src13]: [SWE-Bench Pro Results 2026: AI Coding Model Rankings](../../raw/web/web-swe-bench-pro-results-2026-ai-coding-model-rankings-dca3b106.md) — Andrew Filev & Dmitry Krasnov, Zencoder blog, 2026

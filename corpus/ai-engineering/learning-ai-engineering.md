@@ -301,4 +301,4 @@ A curated list of practitioner-level blogs for staying current on AI/ML research
 
 **Usage pattern for staying current**: read Ahead of AI for research depth; The Gradient for narrative context; Towards Data Science for applied how-tos; PyTorch Blog for framework changes that affect practice.
 
-[^src17]: [Top AI Blogs Every Software Developer Must Follow in 2026](../../raw/_inbox/web-top-ai-blogs-every-software-developer-must-follow-in-2026.md)
+[^src17]: [Top AI Blogs Every Software Developer Must Follow in 2026](../../raw/web/web-top-ai-blogs-every-software-developer-must-follow-in-2026.md)

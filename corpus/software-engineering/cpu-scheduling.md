@@ -115,7 +115,7 @@ Multiple CPUs introduce complications beyond single-CPU scheduling [^src4]:
 
 ---
 
-[^src1]: [OSTEP Scheduling: Introduction](../../raw/_inbox/pdf-cpu-sched.md)
-[^src2]: [OSTEP Scheduling: Multi-Level Feedback Queue](../../raw/_inbox/pdf-cpu-sched-mlfq.md)
-[^src3]: [OSTEP Scheduling: Proportional Share (Lottery)](../../raw/_inbox/pdf-cpu-sched-lottery.md)
-[^src4]: [OSTEP Scheduling: Multi-CPU](../../raw/_inbox/pdf-cpu-sched-multi.md)
+[^src1]: [OSTEP Scheduling: Introduction](../../raw/pdf/pdf-cpu-sched.md)
+[^src2]: [OSTEP Scheduling: Multi-Level Feedback Queue](../../raw/pdf/pdf-cpu-sched-mlfq.md)
+[^src3]: [OSTEP Scheduling: Proportional Share (Lottery)](../../raw/pdf/pdf-cpu-sched-lottery.md)
+[^src4]: [OSTEP Scheduling: Multi-CPU](../../raw/pdf/pdf-cpu-sched-multi.md)

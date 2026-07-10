@@ -144,5 +144,5 @@ Overall error rate = (FP + FN) / n
 - [Support Vector Machines](/ai-engineering/support-vector-machines.md) — alternative approach to linear and non-linear classification
 - [Tree-Based Methods](/ai-engineering/tree-based-methods.md) — non-parametric tree classifiers
 
-[^src1]: [Introduction to Statistical Learning, Part 8](../../raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-08.md)
-[^src2]: [Introduction to Statistical Learning, Part 9](../../raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-09.md)
+[^src1]: [Introduction to Statistical Learning, Part 8](../../raw/pdf/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-08.md)
+[^src2]: [Introduction to Statistical Learning, Part 9](../../raw/pdf/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-09.md)

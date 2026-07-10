@@ -160,4 +160,4 @@ Beyond classification, CNNs power [^src1]:
 
 ---
 
-[^src1]: [D2L Part 16 — GoogLeNet, Batch Normalization, ResNet, DenseNet](../../raw/_inbox/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-16.md)
+[^src1]: [D2L Part 16 — GoogLeNet, Batch Normalization, ResNet, DenseNet](../../raw/pdf/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-16.md)

@@ -210,7 +210,7 @@ ISL introduces PCA via the **loading vector** φ_m (each element a loading) and 
 
 ---
 
-[^src1]: [Mathematics for Machine Learning, Part 16](../../raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-16.md)
-[^src2]: [Mathematics for Machine Learning, Part 17](../../raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-17.md)
-[^src3]: [Introduction to Statistical Learning, Part 19](../../raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-19.md)
-[^src4]: [Introduction to Statistical Learning, Part 20](../../raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-20.md)
+[^src1]: [Mathematics for Machine Learning, Part 16](../../raw/pdf/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-16.md)
+[^src2]: [Mathematics for Machine Learning, Part 17](../../raw/pdf/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-17.md)
+[^src3]: [Introduction to Statistical Learning, Part 19](../../raw/pdf/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-19.md)
+[^src4]: [Introduction to Statistical Learning, Part 20](../../raw/pdf/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-20.md)

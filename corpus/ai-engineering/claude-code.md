@@ -1328,4 +1328,4 @@ Willison describes this as "vibe coding" — "I didn't look at a single line of 
 [^src56]: [Mastering Claude Code in 30 minutes](../../raw/youtube/youtube-6eBSHbLKuN0-mastering-claude-code-in-30-minutes.md) — Boris Cherny, Anthropic, YouTube
 [^src57]: [Agent SDK overview — Claude Code Docs](../../raw/web/web-agent-sdk-overview-claude-code-docs.md) — Anthropic
 [^src58]: [ProteoWizard/pwiz-ai — AI tooling and documentation for ProteoWizard/Skyline development](../../raw/web/web-github-proteowizard-pwiz-ai-ai-tooling-and-documentation-for.md) — ProteoWizard/Skyline, GitHub
-[^src59]: [Porting the Moebius 0.2B image inpainting model to run in the browser with Claude Code](../../raw/_inbox/web-porting-the-moebius-0-2b-image-inpainting-model-to-run-in-th-71cb4d77.md) — Simon Willison, simonwillison.net, 22 Jun 2026
+[^src59]: [Porting the Moebius 0.2B image inpainting model to run in the browser with Claude Code](../../raw/web/web-porting-the-moebius-0-2b-image-inpainting-model-to-run-in-th-71cb4d77.md) — Simon Willison, simonwillison.net, 22 Jun 2026

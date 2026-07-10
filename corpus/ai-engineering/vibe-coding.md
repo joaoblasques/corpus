@@ -222,8 +222,8 @@ The practical implication for the vibe-coding workflow: the permissive "just bui
 [^src13]: [AI Writes Code Faster. Your Job Is Still to Prove It Works.](../../raw/web/web-ai-writes-code-faster-your-job-is-still-to-prove-it-works.md) — Addy Osmani, addyosmani.com
 [^src14]: [Local AI coding: compliance and performance report](../../raw/notes/notes-local-ai-coding-report.md) — notes report
 [^src15]: [Comprehension Debt — The Hidden Cost of AI-Generated Code](../../raw/web/web-comprehension-debt-the-hidden-cost-of-ai-generated-code.md) — Addy Osmani, addyosmani.com (March 2026)
-[^src16]: [A quote from Timothy B. Lee](../../raw/_inbox/web-a-quote-from-timothy-b-lee-ef10a2fd.md) — via Simon Willison, 26 Jun 2026
-[^src17]: [A quote from Charity Majors](../../raw/_inbox/web-a-quote-from-charity-majors-e9a95537.md) — via Simon Willison, 17 Jun 2026; from "AI demands more engineering discipline. Not less."
+[^src16]: [A quote from Timothy B. Lee](../../raw/web/web-a-quote-from-timothy-b-lee-ef10a2fd.md) — via Simon Willison, 26 Jun 2026
+[^src17]: [A quote from Charity Majors](../../raw/web/web-a-quote-from-charity-majors-e9a95537.md) — via Simon Willison, 17 Jun 2026; from "AI demands more engineering discipline. Not less."
 
 ## Comprehension debt — the hidden cost of AI-generated code
 

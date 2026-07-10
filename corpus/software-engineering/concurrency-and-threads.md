@@ -239,9 +239,9 @@ All modern systems use Mesa semantics. The `while`-loop pattern for `cond_wait` 
 
 ---
 
-[^src1]: [OSTEP Interlude: Thread API](../../raw/_inbox/pdf-threads-api.md)
-[^src2]: [OSTEP Condition Variables](../../raw/_inbox/pdf-threads-cv.md)
-[^src3]: [OSTEP Common Concurrency Problems](../../raw/_inbox/pdf-threads-bugs.md)
-[^src4]: [OSTEP Summary Dialogue on Concurrency](../../raw/_inbox/pdf-threads-dialogue.md)
-[^src5]: [OSTEP Ch. 26: Concurrency — An Introduction](../../raw/_inbox/pdf-threads-intro.md)
-[^src6]: [OSTEP Appendix D: Monitors (Deprecated)](../../raw/_inbox/pdf-threads-monitors.md)
+[^src1]: [OSTEP Interlude: Thread API](../../raw/pdf/pdf-threads-api.md)
+[^src2]: [OSTEP Condition Variables](../../raw/pdf/pdf-threads-cv.md)
+[^src3]: [OSTEP Common Concurrency Problems](../../raw/pdf/pdf-threads-bugs.md)
+[^src4]: [OSTEP Summary Dialogue on Concurrency](../../raw/pdf/pdf-threads-dialogue.md)
+[^src5]: [OSTEP Ch. 26: Concurrency — An Introduction](../../raw/pdf/pdf-threads-intro.md)
+[^src6]: [OSTEP Appendix D: Monitors (Deprecated)](../../raw/pdf/pdf-threads-monitors.md)

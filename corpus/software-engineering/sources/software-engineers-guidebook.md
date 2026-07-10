@@ -54,4 +54,4 @@ Explicitly excludes timely topics (job market conditions, funding levels, emergi
 
 ---
 
-[^src1]: [The Software Engineer's Guidebook v1.08 (Gergely Orosz)](../../raw/pdf/pdf-the-software-engineers-guidebook-v1-08-pdf.md)
+[^src1]: [The Software Engineer's Guidebook v1.08 (Gergely Orosz)](../../../raw/pdf/pdf-the-software-engineers-guidebook-v1-08-pdf.md)

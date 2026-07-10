@@ -203,5 +203,5 @@ SVMs are solved as QPs using specialized solvers [^src1]:
 
 ---
 
-[^src1]: [Mathematics for Machine Learning, Part 19](../../raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-19.md)
-[^src2]: [Introduction to Statistical Learning, Part 19](../../raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-19.md)
+[^src1]: [Mathematics for Machine Learning, Part 19](../../raw/pdf/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-19.md)
+[^src2]: [Introduction to Statistical Learning, Part 19](../../raw/pdf/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-19.md)

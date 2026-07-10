@@ -60,6 +60,7 @@ def _isolate_pipeline(monkeypatch, tmp_path):
         ("run_docs_quick_intake", "_subprocess_run", {"status": "ok", "ingested": 0, "skipped_thin": 0, "llm_fail": 0}),
         ("run_youtube_playlist_reap", "_subprocess_run", {"status": "ok", "removed": 0}),
         ("run_gardener", "_subprocess_run", {"status": "ok", "expanded": 0}),
+        ("run_corpus_heal", "_subprocess_run", {"status": "ok", "repaired": 0}),
         ("run_gap_resolver", "_subprocess_run", {"status": "ok", "dispatched": 0, "queued": 0}),
         ("run_email_relabel", "_subprocess_run", {"status": "ok"}),
         ("run_x_reap", "_subprocess_run", {"status": "ok"}),

@@ -467,5 +467,5 @@ This governance framing complements the §Defense in depth (four layers) above �
 [^src22]: [The Trinity of Modern Data Architecture: Process Intelligence, Event-Driven Integration, and Trusted Agentic AI](../../raw/web/web-the-trinity-of-modern-data-architecture-process-intelligence-b19b93a7.md) — Kai Waehner
 [^src23]: [Prompt Injection as Role Confusion](../../raw/web/web-prompt-injection-as-role-confusion-f81ed04e.md) — Charles Ye, Jasmine Cui, Dylan Hadfield-Menell; via Simon Willison, 2026-06-22
 [^src24]: [What happened after 2,000 people tried to hack my AI assistant](../../raw/web/web-what-happened-after-2-000-people-tried-to-hack-my-ai-assista-20e22694.md) — Simon Willison, 2026-06-26
-[^src25]: [Your Agent's Tool Belt Is Now Your Largest Attack Surface](../../raw/_inbox/web-your-agent-s-tool-belt-is-now-your-largest-attack-surface-78f1d306.md) — Neeraj Khandelwal, Zencoder newsletter, Jun 2026
-[^src26]: [Ensuring Transparency and Safety in AI-Generated Code for Large Teams](../../raw/_inbox/web-ensuring-transparency-and-safety-in-ai-generated-code-for-la-c447821e.md) — Zencoder blog, 2026
+[^src25]: [Your Agent's Tool Belt Is Now Your Largest Attack Surface](../../raw/web/web-your-agent-s-tool-belt-is-now-your-largest-attack-surface-78f1d306.md) — Neeraj Khandelwal, Zencoder newsletter, Jun 2026
+[^src26]: [Ensuring Transparency and Safety in AI-Generated Code for Large Teams](../../raw/web/web-ensuring-transparency-and-safety-in-ai-generated-code-for-la-c447821e.md) — Zencoder blog, 2026

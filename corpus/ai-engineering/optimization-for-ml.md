@@ -234,6 +234,6 @@ Default hyperparameters: beta_1=0.9, beta_2=0.999, eps=1e-8. Adam is the de fact
 
 ---
 
-[^src1]: [Mathematics for Machine Learning, Part 12](../../raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-12.md)
-[^src2]: [Mathematics for Machine Learning, Part 8](../../raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-08.md)
-[^src3]: [D2L Part 26 — Adagrad, RMSProp, Adam (Ch 12 Optimization Algorithms)](../../raw/_inbox/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-26.md)
+[^src1]: [Mathematics for Machine Learning, Part 12](../../raw/pdf/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-12.md)
+[^src2]: [Mathematics for Machine Learning, Part 8](../../raw/pdf/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-08.md)
+[^src3]: [D2L Part 26 — Adagrad, RMSProp, Adam (Ch 12 Optimization Algorithms)](../../raw/pdf/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-26.md)

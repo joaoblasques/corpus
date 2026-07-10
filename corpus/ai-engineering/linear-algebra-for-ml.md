@@ -166,8 +166,8 @@ An **affine subspace** is a translated linear subspace: x_0 + U, where x_0 is a 
 
 ---
 
-[^src1]: [Mathematics for Machine Learning, Part 1](../../raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-01.md)
-[^src2]: [Mathematics for Machine Learning, Part 2](../../raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-02.md)
-[^src3]: [Mathematics for Machine Learning, Part 3](../../raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-03.md)
-[^src4]: [Mathematics for Machine Learning, Part 4](../../raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-04.md)
-[^src5]: [Mathematics for Machine Learning, Part 5](../../raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-05.md)
+[^src1]: [Mathematics for Machine Learning, Part 1](../../raw/pdf/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-01.md)
+[^src2]: [Mathematics for Machine Learning, Part 2](../../raw/pdf/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-02.md)
+[^src3]: [Mathematics for Machine Learning, Part 3](../../raw/pdf/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-03.md)
+[^src4]: [Mathematics for Machine Learning, Part 4](../../raw/pdf/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-04.md)
+[^src5]: [Mathematics for Machine Learning, Part 5](../../raw/pdf/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-05.md)

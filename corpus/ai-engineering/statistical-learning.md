@@ -100,5 +100,5 @@ The **Bayes classifier** assigns each observation to the most probable class giv
 - [Tree-Based Methods](/ai-engineering/tree-based-methods.md) — flexible non-parametric models
 - [Introduction to Statistical Learning (source)](/ai-engineering/sources/introduction-to-statistical-learning.md)
 
-[^src1]: [Introduction to Statistical Learning, Part 2](../../raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-02.md)
-[^src2]: [Introduction to Statistical Learning, Part 3](../../raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-03.md)
+[^src1]: [Introduction to Statistical Learning, Part 2](../../raw/pdf/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-02.md)
+[^src2]: [Introduction to Statistical Learning, Part 3](../../raw/pdf/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-03.md)

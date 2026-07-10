@@ -66,4 +66,4 @@ PaddleOCR 3.7 exposes a unified inference-engine interface (`engine=` parameter)
 
 ---
 
-[^src1]: [PP-OCRv6 on Hugging Face: 50-Language OCR from 1.5M to 34.5M Parameters](../../raw/web/web-pp-ocrv6-on-hugging-face-50-language-ocr-from-1-5m-to-34-5m-493a508e.md) — Hugging Face blog (PaddlePaddle), 2026-06-28
+[^src1]: [PP-OCRv6 on Hugging Face: 50-Language OCR from 1.5M to 34.5M Parameters](../../raw/_inbox/web-pp-ocrv6-on-hugging-face-50-language-ocr-from-1-5m-to-34-5m-493a508e.md) — Hugging Face blog (PaddlePaddle), 2026-06-28

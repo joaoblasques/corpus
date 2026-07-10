@@ -336,5 +336,5 @@ This rule appeared in every prompt reviewed, regardless of tool or vendor. It ge
 [^src19]: [Anthropic London prompting playbook (Margo van Laar)](../../raw/youtube/youtube-G2B0YWuJUgI-the-prompting-playbook.md) — YouTube, Anthropic
 [^src20]: [Advanced Prompt Engineering (Mindstream × HubSpot PDF guide)](../../raw/pdf/pdf-advanced-chatgpt-prompt-engineering-mindstream-x-hubspot.md) — Mindstream / HubSpot
 [^src21]: [How to use Claude For Finance Better Than 99% of People](../../raw/youtube/youtube-qLDwThdc3WQ-how-to-use-claude-for-finance-better-than-99-of-people.md) — Luke Finance, YouTube playlist: Claude Finance
-[^src22]: [Somebody Leaked the System Prompts of 32 AI Agents — Cursor, Claude Code, Devin](../../raw/_inbox/youtube-XOddQHz4gtA-somebody-leaked-the-system-prompts-of-32-ai-agents-cursor-cl.md) — Bitwise AI, YouTube; 137K-star GitHub repo compilation
-[^src23]: [Fuck You, Show Me The Prompt](../../raw/_inbox/web-fuck-you-show-me-the-prompt-ad95e5b5.md) — Hamel Husain, hamel.dev
+[^src22]: [Somebody Leaked the System Prompts of 32 AI Agents — Cursor, Claude Code, Devin](../../raw/youtube/youtube-XOddQHz4gtA-somebody-leaked-the-system-prompts-of-32-ai-agents-cursor-cl.md) — Bitwise AI, YouTube; 137K-star GitHub repo compilation
+[^src23]: [Fuck You, Show Me The Prompt](../../raw/web/web-fuck-you-show-me-the-prompt-ad95e5b5.md) — Hamel Husain, hamel.dev

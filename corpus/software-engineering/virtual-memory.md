@@ -239,11 +239,11 @@ The clock algorithm avoids scanning all pages on every eviction while approximat
 
 ---
 
-[^src1]: [OSTEP Ch. 15: Mechanism: Address Translation](../../raw/_inbox/pdf-vm-mechanism.md)
-[^src2]: [OSTEP Ch. 16: Segmentation](../../raw/_inbox/pdf-vm-segmentation.md)
-[^src3]: [OSTEP Ch. 17: Free-Space Management](../../raw/_inbox/pdf-vm-freespace.md)
-[^src4]: [OSTEP Ch. 18: Paging: Introduction](../../raw/_inbox/pdf-vm-paging.md)
-[^src5]: [OSTEP Ch. 19: Paging: Faster Translations (TLBs)](../../raw/_inbox/pdf-vm-tlbs.md)
-[^src6]: [OSTEP Ch. 20: Paging: Smaller Tables](../../raw/_inbox/pdf-vm-smalltables.md)
-[^src7]: [OSTEP Ch. 21: Beyond Physical Memory: Mechanisms](../../raw/_inbox/pdf-vm-beyondphys.md)
-[^src8]: [OSTEP Ch. 22: Beyond Physical Memory: Policies](../../raw/_inbox/pdf-vm-beyondphys-policy.md)
+[^src1]: [OSTEP Ch. 15: Mechanism: Address Translation](../../raw/pdf/pdf-vm-mechanism.md)
+[^src2]: [OSTEP Ch. 16: Segmentation](../../raw/pdf/pdf-vm-segmentation.md)
+[^src3]: [OSTEP Ch. 17: Free-Space Management](../../raw/pdf/pdf-vm-freespace.md)
+[^src4]: [OSTEP Ch. 18: Paging: Introduction](../../raw/pdf/pdf-vm-paging.md)
+[^src5]: [OSTEP Ch. 19: Paging: Faster Translations (TLBs)](../../raw/pdf/pdf-vm-tlbs.md)
+[^src6]: [OSTEP Ch. 20: Paging: Smaller Tables](../../raw/pdf/pdf-vm-smalltables.md)
+[^src7]: [OSTEP Ch. 21: Beyond Physical Memory: Mechanisms](../../raw/pdf/pdf-vm-beyondphys.md)
+[^src8]: [OSTEP Ch. 22: Beyond Physical Memory: Policies](../../raw/pdf/pdf-vm-beyondphys-policy.md)

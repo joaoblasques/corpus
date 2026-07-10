@@ -83,8 +83,8 @@ Distributed locks via key-value stores (etcd, Redis) use compare-and-swap (CAS) 
 
 All examples use [Kubernetes](/software-engineering/kubernetes.md) (Deployments, Services, readiness probes, Kafka on k8s). The author (Brendan Burns) is co-founder of Kubernetes [^src1].
 
-[^src1]: [Designing Distributed Systems, part 1](../../raw/pdf/pdf-burns-designing-distributed-systems-microsoft-free-edition-part-01.md), Brendan Burns, O'Reilly, 2018
-[^src2]: [Designing Distributed Systems, part 2](../../raw/pdf/pdf-burns-designing-distributed-systems-microsoft-free-edition-part-02.md), Brendan Burns, O'Reilly, 2018
-[^src3]: [Designing Distributed Systems, part 3](../../raw/pdf/pdf-burns-designing-distributed-systems-microsoft-free-edition-part-03.md), Brendan Burns, O'Reilly, 2018
-[^src4]: [Designing Distributed Systems, part 4](../../raw/pdf/pdf-burns-designing-distributed-systems-microsoft-free-edition-part-04.md), Brendan Burns, O'Reilly, 2018
-[^src5]: [Designing Distributed Systems, part 5](../../raw/pdf/pdf-burns-designing-distributed-systems-microsoft-free-edition-part-05.md), Brendan Burns, O'Reilly, 2018
+[^src1]: [Designing Distributed Systems, part 1](../../../raw/pdf/pdf-burns-designing-distributed-systems-microsoft-free-edition-part-01.md), Brendan Burns, O'Reilly, 2018
+[^src2]: [Designing Distributed Systems, part 2](../../../raw/pdf/pdf-burns-designing-distributed-systems-microsoft-free-edition-part-02.md), Brendan Burns, O'Reilly, 2018
+[^src3]: [Designing Distributed Systems, part 3](../../../raw/pdf/pdf-burns-designing-distributed-systems-microsoft-free-edition-part-03.md), Brendan Burns, O'Reilly, 2018
+[^src4]: [Designing Distributed Systems, part 4](../../../raw/pdf/pdf-burns-designing-distributed-systems-microsoft-free-edition-part-04.md), Brendan Burns, O'Reilly, 2018
+[^src5]: [Designing Distributed Systems, part 5](../../../raw/pdf/pdf-burns-designing-distributed-systems-microsoft-free-edition-part-05.md), Brendan Burns, O'Reilly, 2018

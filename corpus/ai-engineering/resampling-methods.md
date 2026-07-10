@@ -115,5 +115,5 @@ Because we sample with replacement, each bootstrap dataset omits ~36.8% of origi
 - [Regularization](/ai-engineering/regularization.md) — cross-validation is the standard way to choose λ
 - [Optimization for ML](/ai-engineering/optimization-for-ml.md) — model fitting procedure repeated per fold/sample
 
-[^src1]: [Introduction to Statistical Learning, Part 10](../../raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-10.md)
-[^src2]: [Introduction to Statistical Learning, Part 11](../../raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-11.md)
+[^src1]: [Introduction to Statistical Learning, Part 10](../../raw/pdf/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-10.md)
+[^src2]: [Introduction to Statistical Learning, Part 11](../../raw/pdf/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-11.md)

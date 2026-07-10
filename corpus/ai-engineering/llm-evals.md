@@ -234,9 +234,9 @@ Error analysis IS data science [^src4]:
 
 ---
 
-[^src1]: [Your AI Product Needs Evals](../../raw/_inbox/web-your-ai-product-needs-evals-2b2dee98.md) — Hamel Husain, hamel.dev
-[^src2]: [Using LLM-as-a-Judge For Evaluation: A Complete Guide](../../raw/_inbox/web-using-llm-as-a-judge-for-evaluation-a-complete-guide-9693f495.md) — Hamel Husain, hamel.dev
-[^src3]: [LLM Evals: Everything You Need to Know](../../raw/_inbox/web-llm-evals-everything-you-need-to-know-hamels-blog-hamel-husa-5bf201ee.md) — Hamel Husain & Shreya Shankar, hamel.dev
-[^src4]: [The Revenge of the Data Scientist](../../raw/_inbox/web-the-revenge-of-the-data-scientist-hamels-blog-hamel-husain-28a4d4c3.md) — Hamel Husain, hamel.dev
-[^src5]: [Evals Skills for Coding Agents](../../raw/_inbox/web-evals-skills-for-coding-agents-hamels-blog-hamel-husain-f8a26550.md) — Hamel Husain, hamel.dev
-[^src6]: [Selecting The Right AI Evals Tool](../../raw/_inbox/web-selecting-the-right-ai-evals-tool-hamels-blog-hamel-husain-daa87ecb.md) — Hamel Husain, hamel.dev
+[^src1]: [Your AI Product Needs Evals](../../raw/web/web-your-ai-product-needs-evals-2b2dee98.md) — Hamel Husain, hamel.dev
+[^src2]: [Using LLM-as-a-Judge For Evaluation: A Complete Guide](../../raw/web/web-using-llm-as-a-judge-for-evaluation-a-complete-guide-9693f495.md) — Hamel Husain, hamel.dev
+[^src3]: [LLM Evals: Everything You Need to Know](../../raw/web/web-llm-evals-everything-you-need-to-know-hamels-blog-hamel-husa-5bf201ee.md) — Hamel Husain & Shreya Shankar, hamel.dev
+[^src4]: [The Revenge of the Data Scientist](../../raw/web/web-the-revenge-of-the-data-scientist-hamels-blog-hamel-husain-28a4d4c3.md) — Hamel Husain, hamel.dev
+[^src5]: [Evals Skills for Coding Agents](../../raw/web/web-evals-skills-for-coding-agents-hamels-blog-hamel-husain-f8a26550.md) — Hamel Husain, hamel.dev
+[^src6]: [Selecting The Right AI Evals Tool](../../raw/web/web-selecting-the-right-ai-evals-tool-hamels-blog-hamel-husain-daa87ecb.md) — Hamel Husain, hamel.dev

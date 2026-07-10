@@ -105,6 +105,6 @@ Osmani's prescription: **don't outsource the learning**. When AI generates somet
 ---
 
 [^src1]: [What Modern Software Engineering Means (Google Cloud podcast — Seroter, Hammerly, Jaspan, Osmani)](../../raw/youtube/youtube-vtyx7ex-0ba.md)
-[^src2]: [Agentic Code Review](../../raw/_inbox/web-agentic-code-review-a6ceec31.md) — Addy Osmani, June 15, 2026
-[^src3]: [Don't Outsource the Learning](../../raw/_inbox/web-don-t-outsource-the-learning-173a7539.md) — Addy Osmani, 2026; Anthropic study (50% vs 67%), MIT EEG study (83%), CHI 2026 LLM framing effect
-[^src4]: [Cognitive Surrender](../../raw/_inbox/web-cognitive-surrender-be38214f.md) — Addy Osmani, 2026; Shaw & Nave (Wharton) cognitive offloading vs surrender; 73% acceptance of AI wrong answers
+[^src2]: [Agentic Code Review](../../raw/web/web-agentic-code-review-a6ceec31.md) — Addy Osmani, June 15, 2026
+[^src3]: [Don't Outsource the Learning](../../raw/web/web-don-t-outsource-the-learning-173a7539.md) — Addy Osmani, 2026; Anthropic study (50% vs 67%), MIT EEG study (83%), CHI 2026 LLM framing effect
+[^src4]: [Cognitive Surrender](../../raw/web/web-cognitive-surrender-be38214f.md) — Addy Osmani, 2026; Shaw & Nave (Wharton) cognitive offloading vs surrender; 73% acceptance of AI wrong answers

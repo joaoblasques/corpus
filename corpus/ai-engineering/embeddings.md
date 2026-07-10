@@ -134,7 +134,7 @@ The single most impactful optimization when querying embeddings is to **filter b
 
 ---
 
-[^src8]: [How Google DeepMind Is Researching the Next Frontier of AI](../../raw/_inbox/youtube-zZsTVBXcbow-how-google-deepmind-is-researching-the-next-frontier-of-ai-f.md) — DeepMind, YouTube; Raia Hadsell on concept neurons and modality-invariant embeddings
+[^src8]: [How Google DeepMind Is Researching the Next Frontier of AI](../../raw/youtube/youtube-zZsTVBXcbow-how-google-deepmind-is-researching-the-next-frontier-of-ai-f.md) — DeepMind, YouTube; Raia Hadsell on concept neurons and modality-invariant embeddings
 [^src1]: [How LLMs Actually Work](../../raw/web/how-llms-actually-work.md)
 [^src2]: [AI - How Large Language Models Work](/03_Resources/Study Notes/AI - How Large Language Models Work.md)
 [^src3]: [How CockroachDB Built Vector Indexing at Scale](../../raw/web/how-cockroachdb-built-vector-indexing-at-scale.md)

@@ -292,4 +292,4 @@ Context Buddy (★52, addyosmani/context-buddy) implements this as a visual inte
 [^src12]: [IncomeStreamSurfer/context-engineering-intro (★267) — PRP workflow template](../../raw/github/github-incomestreamsurfer-context-engineering-intro.md) — IncomeStreamSurfer, GitHub
 [^src13]: [addyosmani/context-buddy (★52) — 10-section prompt structure builder](../../raw/github/github-addyosmani-context-buddy.md) — Addy Osmani, GitHub
 [^src14]: [coleam00/context-engineering-intro (★13479) — PRP template](../../raw/github/github-coleam00-context-engineering-intro.md) — coleam00, GitHub
-[^src15]: [The New Software Lifecycle](../../raw/_inbox/web-the-new-software-lifecycle-840140b4.md) — Addy Osmani, Google SDLC whitepaper summary, June 2026
+[^src15]: [The New Software Lifecycle](../../raw/web/web-the-new-software-lifecycle-840140b4.md) — Addy Osmani, Google SDLC whitepaper summary, June 2026

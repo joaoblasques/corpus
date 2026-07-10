@@ -72,4 +72,4 @@ The dbt v2 migration path runs *through* Fusion — Fusion provides the deeper S
 
 ---
 
-[^src1]: [Fusion in Bloom — dbt Labs](../../../raw/web/web-fusion-in-bloom-dbt-labs-98d5a43b.md)
+[^src1]: [Fusion in Bloom — dbt Labs](../../raw/web/web-fusion-in-bloom-dbt-labs-98d5a43b.md)

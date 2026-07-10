@@ -783,7 +783,27 @@ def run_gap_resolver(*, timeout_s: int = 600, _subprocess_run=None) -> dict:
         return {"status": "failed", "dispatched": 0, "error": str(exc)}
 
 
-def run_gardener(*, max_stubs: int = 2, timeout_s: int = 2400, _subprocess_run=None) -> dict:
+def run_corpus_heal(*, _subprocess_run=None) -> dict:
+    """Deterministic self-healing (no LLM): repoint broken source citations to raw files that
+    moved during ingest. Runs after ingest, before the integrity lint, so the lint reports the
+    healed state and the repairs land in the same nightly commit. Failure recorded, never raised."""
+    _run = _subprocess_run if _subprocess_run is not None else subprocess.run
+    try:
+        proc = _run([sys.executable, str(BIN / "corpus_heal.py"), "citations", "--apply"],
+                    capture_output=True, text=True, timeout=600)
+        if proc.returncode != 0:
+            return {"status": "failed", "repaired": 0, "error": (proc.stderr or "").strip()[:200]}
+        try:
+            d = json.loads(proc.stdout)
+        except json.JSONDecodeError:
+            d = {}
+        return {"status": "ok", "repaired": d.get("repaired", 0),
+                "pages_changed": d.get("pages_changed", 0), "missing": d.get("missing", 0)}
+    except Exception as exc:  # noqa: BLE001
+        return {"status": "failed", "repaired": 0, "error": str(exc)}
+
+
+def run_gardener(*, max_stubs: int = 4, timeout_s: int = 2400, _subprocess_run=None) -> dict:
     """Deepen the highest-value stub pages (the depth loop, docs/strategy/2026-07-06).
 
     Runs bin/gardener.py (Opus-quality writer + fail-closed Sonnet critic) with a small
@@ -846,6 +866,7 @@ def build_summary(tallies: dict, dry_run: bool) -> dict:
         "docs_quick": tallies.get("docs_quick", {}),
         "youtube_reap": tallies.get("youtube_reap", {}),
         "gardener": tallies.get("gardener", {}),
+        "heal": tallies.get("heal", {}),
         "gap_resolver": tallies.get("gap_resolver", {}),
         "ingest": tallies.get("ingest", {}),
         "email_relabel": tallies.get("email_relabel", {}),
@@ -1234,6 +1255,13 @@ def write_run_report(
         if gd.get("error"):
             gd_str += f" · error={gd['error']}"
         bullets.append(f"* **Gardener**: {gd_str}")
+    hl = tallies.get("heal")
+    if hl:
+        hl_str = (f"{hl.get('repaired', 0)} citations repointed · {hl.get('missing', 0)} unfixable"
+                  f" · status={hl.get('status', 'unknown')}")
+        if hl.get("error"):
+            hl_str += f" · error={hl['error']}"
+        bullets.append(f"* **Heal**: {hl_str}")
     gp = tallies.get("gap_resolver")
     if gp:
         gp_str = (f"{gp.get('dispatched', 0)} gap dispatched · {gp.get('queued', 0)} sources queued"
@@ -1470,6 +1498,13 @@ def main(argv=None) -> int:
                     tallies["gap_resolver"] = run_gap_resolver()
                 except Exception as exc:  # noqa: BLE001
                     tallies["gap_resolver"] = {"status": "failed", "dispatched": 0, "error": str(exc)}
+
+                # Deterministic self-healing BEFORE the lint: repoint broken citations to
+                # raw files moved by ingest, so the lint reports the healed state.
+                try:
+                    tallies["heal"] = run_corpus_heal()
+                except Exception as exc:  # noqa: BLE001
+                    tallies["heal"] = {"status": "failed", "repaired": 0, "error": str(exc)}
 
                 # Post-ingest integrity backstop: deterministically lint the corpus
                 # the unattended agent just wrote to, and record any broken

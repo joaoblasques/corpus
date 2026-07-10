@@ -260,8 +260,8 @@ This connects directly to [Meaning in Data Modeling](/data-engineering/data-mode
 [^src7]: [The 2025 AI-enabled Data Engineering roadmap (Zach Wilson, DataEngineer.io)](../../raw/email/email-2025-04-25-the-2025-ai-enabled-data-engineering-roadmap.md)
 [^src8]: [AI Data Engineering Project for Beginners — LangChain + Vertex AI + BigQuery (Nataindata)](../../raw/youtube/youtube-14kTQXsVB3g-ai-data-engineering-project-for-beginners.md)
 [^src9]: [6 Data Engineering Skills To Progress in the Age of AI (Joseph Machado, StartDataEngineering)](../../raw/web/6-data-engineering-skills-to-progress-in-the-age-of-ai-start.md)
-[^src10]: [The 2026 State of Data Engineering Survey (Interactive)](../../raw/_inbox/web-the-2026-state-of-data-engineering-survey-interactive-862c7648.md) — Joe Reis, Practical Data Community, n=1,101
-[^src11]: [Data Engineering in 2026 with Zach Wilson](../../raw/_inbox/web-data-engineering-in-2026-w-zach-wilson-1c383199.md) — Joe Reis × Zach Wilson, Practical Data Community
-[^src12]: [AI Is Here, But the Hard Parts Haven't Changed](../../raw/_inbox/web-ai-is-here-but-the-hard-parts-haven-t-changed-06b5a092.md) — Joe Reis, March 2026 pulse survey (n=194)
-[^src13]: [The Buzzword Industrial Complex](../../raw/_inbox/web-the-buzzword-industrial-complex-08877f32.md) — Joe Reis, Practical Data Community; data governance as prerequisite to AI context
-[^src14]: [Gartner Declares 2026 the "Year of Context™"](../../raw/_inbox/web-gartner-declares-2026-the-year-of-contexttm-everything-you-k-dcf082b0.md) — Joe Reis; satire: Context Fabric / Context Mesh as rebranded data fabric / data mesh
+[^src10]: [The 2026 State of Data Engineering Survey (Interactive)](../../raw/web/web-the-2026-state-of-data-engineering-survey-interactive-862c7648.md) — Joe Reis, Practical Data Community, n=1,101
+[^src11]: [Data Engineering in 2026 with Zach Wilson](../../raw/web/web-data-engineering-in-2026-w-zach-wilson-1c383199.md) — Joe Reis × Zach Wilson, Practical Data Community
+[^src12]: [AI Is Here, But the Hard Parts Haven't Changed](../../raw/web/web-ai-is-here-but-the-hard-parts-haven-t-changed-06b5a092.md) — Joe Reis, March 2026 pulse survey (n=194)
+[^src13]: [The Buzzword Industrial Complex](../../raw/web/web-the-buzzword-industrial-complex-08877f32.md) — Joe Reis, Practical Data Community; data governance as prerequisite to AI context
+[^src14]: [Gartner Declares 2026 the "Year of Context™"](../../raw/web/web-gartner-declares-2026-the-year-of-contexttm-everything-you-k-dcf082b0.md) — Joe Reis; satire: Context Fabric / Context Mesh as rebranded data fabric / data mesh

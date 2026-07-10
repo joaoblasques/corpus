@@ -67,4 +67,4 @@ Benefits:
 - Complex smart contract conditions remain hidden unless exercised
 - Schnorr signatures are linear (enable MuSig, adaptor signatures, cross-input aggregation)
 
-[^src1]: [Mastering Bitcoin, ch. 7](../../raw/pdf/book-mastering-bitcoin-3rd-edition-07-authorization-and-authentication.md), Antonopoulos & Harding, CC BY-SA 4.0
+[^src1]: [Mastering Bitcoin, ch. 7](../../raw/_inbox/book-mastering-bitcoin-3rd-edition-07-authorization-and-authentication.md), Antonopoulos & Harding, CC BY-SA 4.0

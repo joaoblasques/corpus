@@ -57,4 +57,4 @@ It is a practitioner consensus document on the *non-glamorous* half of AI engine
 
 ---
 
-[^src1]: [A Field Guide to Rapidly Improving AI Products](../../raw/web/web-a-field-guide-to-rapidly-improving-ai-products-hamels-blog-h.md) — Hamel Husain, hamel.dev
+[^src1]: [A Field Guide to Rapidly Improving AI Products](../../../raw/web/web-a-field-guide-to-rapidly-improving-ai-products-hamels-blog-h.md) — Hamel Husain, hamel.dev

@@ -24,4 +24,4 @@ Three leakage types measured: intent leakage (adversary infers research goals), 
 
 PA-DR raises strict chain success from 48.7% to 58.7% while reducing answer/full-information leakage from 34.0% to 9.9% [^src1]. Key insight: "training only for task performance made it worse" [^src1].
 
-[^src1]: [MosaicLeaks: Can your research agent keep a secret?](../../raw/_inbox/web-mosaicleaks-can-your-research-agent-keep-a-secret-e9b8182d.md) — Hugging Face blog, ServiceNow, 2026-06
+[^src1]: [MosaicLeaks: Can your research agent keep a secret?](../../../raw/_inbox/web-mosaicleaks-can-your-research-agent-keep-a-secret-e9b8182d.md) — Hugging Face blog, ServiceNow, 2026-06

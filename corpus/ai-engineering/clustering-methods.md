@@ -143,5 +143,5 @@ hclust(dd, method="complete")
 
 ---
 
-[^src1]: [Introduction to Statistical Learning, Part 20](../../raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-20.md)
-[^src2]: [Introduction to Statistical Learning, Part 21](../../raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-21.md)
+[^src1]: [Introduction to Statistical Learning, Part 20](../../raw/pdf/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-20.md)
+[^src2]: [Introduction to Statistical Learning, Part 21](../../raw/pdf/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-21.md)
