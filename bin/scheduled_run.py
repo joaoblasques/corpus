@@ -739,7 +739,10 @@ def run_docs_quick_intake(*, max_n: int = 80, backend: str = "openrouter",
     try:
         proc = _run(
             [sys.executable, str(BIN / "quick_ingest_docs.py"),
-             "--channel", "web,notes", "--backend", backend, "--max", str(max_n), "--sleep", "0.5"],
+             "--channel", "web,notes", "--backend", backend, "--max", str(max_n), "--sleep", "0.5",
+             # Stop cleanly (emitting a tally) well before this subprocess's timeout_s, so a
+             # rate-limited free tier can never let the run be hard-killed with no result.
+             "--time-budget", str(max(timeout_s - 600, 300))],
             capture_output=True, text=True, timeout=timeout_s)
         if proc.returncode != 0:
             return {"status": "failed", "ingested": 0, "error": (proc.stderr or "").strip()[:200]}

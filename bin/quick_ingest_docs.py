@@ -87,10 +87,16 @@ def _parse(data: dict, fallback_domain: str) -> dict:
     return {"domain": dom, "summary": str(data.get("summary") or "").strip(), "topics": topics}
 
 
+class _RateLimited(Exception):
+    """Raised when a backend fails purely due to 429s — signals process() to stop trying
+    that backend for the rest of the run and fall straight through to the fallback."""
+
+
 def _llm_summary(title: str, source: str, content: str, *, backend: str, model: str,
                  fallback_domain: str, attempts: int = 4) -> dict:
     """One cheap LLM call -> {domain, summary, topics}. backend: openrouter|groq.
-    Retries on 429/transient errors with backoff. Raises after `attempts`."""
+    Retries on transient errors with backoff. Raises _RateLimited if it failed only on 429s;
+    otherwise raises the last error after `attempts`."""
     import requests
     if backend == "openrouter":
         url = "https://openrouter.ai/api/v1/chat/completions"
@@ -109,11 +115,14 @@ def _llm_summary(title: str, source: str, content: str, *, backend: str, model: 
                "response_format": {"type": "json_object"},
                "messages": [{"role": "user", "content": _prompt(title, source, content)}]}
     last = None
+    saw_429 = False
     for i in range(attempts):
         try:
-            r = requests.post(url, headers=headers, json=payload, timeout=90)
+            r = requests.post(url, headers=headers, json=payload, timeout=45)
             if r.status_code == 429:
-                time.sleep(min(float(r.headers.get("retry-after", 0)) or 3.0 * (i + 1), 30))
+                saw_429 = True
+                if i < attempts - 1:   # don't burn the retry-after sleep on the final attempt
+                    time.sleep(min(float(r.headers.get("retry-after", 0)) or 3.0 * (i + 1), 15))
                 continue
             r.raise_for_status()
             content_out = r.json()["choices"][0]["message"]["content"]
@@ -124,7 +133,10 @@ def _llm_summary(title: str, source: str, content: str, *, backend: str, model: 
             last = ValueError("empty summary")
         except Exception as e:  # noqa: BLE001
             last = e
-        time.sleep(1.5 * (i + 1))
+        if i < attempts - 1:
+            time.sleep(1.5 * (i + 1))
+    if last is None and saw_429:
+        raise _RateLimited(f"{backend} rate-limited")
     raise last or RuntimeError("llm failed")
 
 
@@ -186,7 +198,7 @@ def _stamp(text: str, today: str, page: str) -> str:
 
 
 def process(f: Path, text: str, ch: str, *, backend: str, model: str, today: str,
-            dry_run: bool) -> str:
+            dry_run: bool, state: dict | None = None) -> str:
     body = _body(text)
     if len(body.split()) < MIN_WORDS:
         return "skipped_thin"
@@ -195,18 +207,27 @@ def process(f: Path, text: str, ch: str, *, backend: str, model: str, today: str
     origin = _front(text, "source") or ch or "web"
     fb = qy._fallback_domain(title + " " + origin)
     info = None
-    # Try the requested backend; if OpenRouter's free model is rate-limited (frequent),
-    # fall back to Groq's free tier so the drain stays reliable AND free.
-    # (backend, model, attempts): try OpenRouter free briefly (fail fast on 429),
-    # then fall back to Groq free with more retries for reliability.
-    plan = [(backend, model, 2)]
+    state = state if state is not None else {}
+    # Try OpenRouter's free model briefly (1 shot, fail-fast on 429), then fall back to Groq's
+    # free tier for reliability. CIRCUIT BREAKER: once OpenRouter rate-limits (429), it's
+    # limited for the whole window — skip it for every later stub and go straight to Groq, so
+    # the run doesn't pay a ~30s retry-after per stub (that was blowing the 2400s budget).
+    plan = []
     if backend == "openrouter":
+        if not state.get("openrouter_disabled"):
+            plan.append(("openrouter", model, 1))
         plan.append(("groq", "llama-3.1-8b-instant", 4))
+    else:
+        plan.append((backend, model, 2))
     for bk, md, att in plan:
         try:
             info = _llm_summary(title, origin, _plain(body), backend=bk, model=md,
                                 fallback_domain=fb, attempts=att)
             break
+        except _RateLimited:
+            if bk == "openrouter":
+                state["openrouter_disabled"] = True   # trip the breaker for the rest of the run
+            continue
         except Exception:
             continue
     if info is None:
@@ -237,6 +258,9 @@ def main(argv=None) -> int:
     ap.add_argument("--backend", choices=["openrouter", "groq"], default="openrouter")
     ap.add_argument("--model", default=None, help="model id (default: free OpenRouter / groq 8b-instant)")
     ap.add_argument("--sleep", type=float, default=0.5)
+    ap.add_argument("--time-budget", type=float, default=None,
+                    help="wall-clock seconds; stop cleanly (and still emit the tally) before this. "
+                         "Keep below the caller's subprocess timeout so the run is never hard-killed.")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args(argv)
 
@@ -247,18 +271,26 @@ def main(argv=None) -> int:
     today = datetime.date.today().isoformat()
     tally = {"ok": 0, "skipped_thin": 0, "llm_fail": 0}
     processed = 0
+    stopped_early = False
+    state: dict = {}   # shared per-run backend health (circuit breaker)
+    start = time.monotonic()
     for f, text, ch in iter_stubs(channels, sources):
         if args.max and processed >= args.max:
             break
+        if args.time_budget and (time.monotonic() - start) >= args.time_budget:
+            stopped_early = True
+            break
         res = process(f, text, ch, backend=args.backend, model=model, today=today,
-                      dry_run=args.dry_run)
+                      dry_run=args.dry_run, state=state)
         processed += 1
         key = "ok" if res.startswith(("ok:", "DRY")) else res
         tally[key] = tally.get(key, 0) + 1
         print(json.dumps({"stub": f.name, "result": res}), flush=True)
         if not args.dry_run and args.sleep and res.startswith("ok:"):
             time.sleep(args.sleep)
-    print(json.dumps({"tally": tally, "processed": processed, "backend": args.backend, "model": model}))
+    print(json.dumps({"tally": tally, "processed": processed, "backend": args.backend,
+                      "model": model, "stopped_early": stopped_early,
+                      "openrouter_disabled": bool(state.get("openrouter_disabled"))}))
     return 0
 
 
