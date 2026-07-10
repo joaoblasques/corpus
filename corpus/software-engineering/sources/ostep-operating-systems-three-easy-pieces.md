@@ -144,6 +144,48 @@ sources:
   - path: raw/_inbox/pdf-threads-dialogue.md
     channel: pdf
     ingested_at: 2026-07-09
+  - path: raw/_inbox/pdf-threads-intro.md
+    channel: pdf
+    ingested_at: 2026-07-10
+  - path: raw/_inbox/pdf-threads-monitors.md
+    channel: pdf
+    ingested_at: 2026-07-10
+  - path: raw/_inbox/pdf-vm-mechanism.md
+    channel: pdf
+    ingested_at: 2026-07-10
+  - path: raw/_inbox/pdf-vm-segmentation.md
+    channel: pdf
+    ingested_at: 2026-07-10
+  - path: raw/_inbox/pdf-vm-freespace.md
+    channel: pdf
+    ingested_at: 2026-07-10
+  - path: raw/_inbox/pdf-vm-paging.md
+    channel: pdf
+    ingested_at: 2026-07-10
+  - path: raw/_inbox/pdf-vm-tlbs.md
+    channel: pdf
+    ingested_at: 2026-07-10
+  - path: raw/_inbox/pdf-vm-smalltables.md
+    channel: pdf
+    ingested_at: 2026-07-10
+  - path: raw/_inbox/pdf-vm-beyondphys.md
+    channel: pdf
+    ingested_at: 2026-07-10
+  - path: raw/_inbox/pdf-vm-beyondphys-policy.md
+    channel: pdf
+    ingested_at: 2026-07-10
+  - path: raw/_inbox/pdf-vm-complete.md
+    channel: pdf
+    ingested_at: 2026-07-10
+  - path: raw/_inbox/pdf-vm-dialogue.md
+    channel: pdf
+    ingested_at: 2026-07-10
+  - path: raw/_inbox/pdf-vmm-intro.md
+    channel: pdf
+    ingested_at: 2026-07-10
+  - path: raw/_inbox/pdf-toc.md
+    channel: pdf
+    ingested_at: 2026-07-10
 aliases:
   - OSTEP
   - Operating Systems Three Easy Pieces
@@ -153,7 +195,7 @@ tags:
   - corpus/software-engineering
   - source
 created: 2026-07-09
-updated: 2026-07-09
+updated: 2026-07-10
 ---
 
 TL;DR: OSTEP (ostep.org) is the canonical undergraduate OS textbook by Remzi Arpaci-Dussouri and Andrea Arpaci-Dussouri. Free online. Organized around three "easy" pieces: virtualization, concurrency, and persistence. Short focused chapters, each stating a "crux of the problem" before solving it.
@@ -174,10 +216,12 @@ Each chapter presents a "crux of the problem" (the central design challenge) bef
 |---|---|---|
 | Introduction | What is an OS; Von Neumann model; virtualization, concurrency, persistence abstractions | [/software-engineering/operating-systems.md](/software-engineering/operating-systems.md) |
 | Virtualization: CPU | Processes; process API (fork/exec/wait); limited direct execution; scheduling (FIFO, SJF, MLFQ, lottery, multi-CPU) | [/software-engineering/operating-systems.md](/software-engineering/operating-systems.md), [/software-engineering/cpu-scheduling.md](/software-engineering/cpu-scheduling.md) |
-| Concurrency | Threads; locks; condition variables; monitors; semaphores; concurrency bugs (deadlock, atomicity, order) | [/software-engineering/concurrency-and-threads.md](/software-engineering/concurrency-and-threads.md) |
+| Virtualization: Memory | Address translation; base+bounds; segmentation; free-space management; paging; TLBs; multi-level page tables; swapping; page replacement policies (OPT, FIFO, LRU, clock); complete VM systems | [/software-engineering/virtual-memory.md](/software-engineering/virtual-memory.md) |
+| Concurrency | Threads (intro, TCB, race conditions); locks; condition variables; monitors (deprecated, Mesa vs Hoare semantics); semaphores; concurrency bugs (deadlock, atomicity, order) | [/software-engineering/concurrency-and-threads.md](/software-engineering/concurrency-and-threads.md) |
 | Persistence: File Systems | Files/directories API; disk internals; RAID; FFS; LFS; journaling/crash consistency; SSDs; data integrity | [/software-engineering/file-systems.md](/software-engineering/file-systems.md) |
 | Persistence: Distributed | Distributed systems intro (failure model, communication); NFS; AFS | [/software-engineering/distributed-file-systems.md](/software-engineering/distributed-file-systems.md) |
 | Security | OS security intro; authentication; access control; cryptography; distributed security | [/software-engineering/os-security.md](/software-engineering/os-security.md) |
+| Appendix B: VMMs | Virtual machine monitors; CPU and memory virtualization; binary translation; shadow page tables; para-virtualization; hardware support (VT-x, AMD-V) | [/software-engineering/virtual-machine-monitors.md](/software-engineering/virtual-machine-monitors.md) |
 
 ## Pedagogical Approach
 

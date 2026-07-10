@@ -9,6 +9,9 @@ sources:
   - path: raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-08.md
     channel: pdf
     ingested_at: 2026-07-08
+  - path: raw/_inbox/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-26.md
+    channel: pdf
+    ingested_at: 2026-07-10
 aliases:
   - gradient descent
   - convex optimization
@@ -19,7 +22,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-07-08
-updated: 2026-07-08
+updated: 2026-07-10
 ---
 
 # Optimization for Machine Learning
@@ -197,6 +200,30 @@ max_{lambda>=0, nu} D(lambda, nu) = min_x L(x, lambda, nu)
 | Deep learning | min L(theta) for non-convex L | No convergence guarantee; SGD with momentum in practice |
 | EM algorithm (GMMs) | max E[log p(X, Z | theta)] | Monotone non-decreasing in each step; converges to local optimum |
 
+## Adaptive Optimization Algorithms (D2L Chapter 12)
+
+Beyond plain SGD, a family of adaptive algorithms adjust learning rates per parameter [^src3]:
+
+**Adagrad** (Duchi et al. 2011): accumulates squared gradient magnitudes; divides learning rate by the square root. Coordinates with historically large gradients get smaller updates. "Particularly effective for sparse features where the learning rate needs to decrease more slowly for infrequently occurring terms." Problem: accumulated sum grows without bound → learning rate → 0 [^src3].
+
+**RMSProp** (Tieleman and Hinton 2012): fixes Adagrad's unbounded accumulation with an exponential moving average: s_t = gamma * s_{t-1} + (1-gamma) * g_t^2. Decouples the learning rate schedule from coordinate-adaptive scaling. gamma ≈ 0.9 typical [^src3].
+
+**Adadelta**: variant of Adagrad that uses a ratio of running averages to avoid needing to set a global learning rate. Less commonly used in practice.
+
+**Adam** (Kingma and Ba 2014): combines momentum (first moment of gradient) with adaptive learning rates (second moment of gradient squared); adds bias correction for the first few steps [^src3]:
+
+```
+m_t = beta_1 * m_{t-1} + (1 - beta_1) * g_t          (first moment)
+v_t = beta_2 * v_{t-1} + (1 - beta_2) * g_t^2         (second moment)
+m_hat = m_t / (1 - beta_1^t)                           (bias correction)
+v_hat = v_t / (1 - beta_2^t)
+theta_{t+1} = theta_t - eta * m_hat / (sqrt(v_hat) + eps)
+```
+
+Default hyperparameters: beta_1=0.9, beta_2=0.999, eps=1e-8. Adam is the de facto default for deep learning. "Yogi" (Zaheer et al. 2018) is a variant that addresses Adam's convergence issues on non-stationary data.
+
+**Learning rate scheduling**: decay the learning rate over training. Common schedules: step decay (halve every N epochs), cosine annealing, warmup + decay (ramp LR from 0 over first K steps before decaying). Warmup is critical for Transformer training [^src3].
+
 ## Related Corpus Pages
 
 - [/ai-engineering/linear-algebra-for-ml.md](/ai-engineering/linear-algebra-for-ml.md) — vector calculus prerequisites
@@ -209,3 +236,4 @@ max_{lambda>=0, nu} D(lambda, nu) = min_x L(x, lambda, nu)
 
 [^src1]: [Mathematics for Machine Learning, Part 12](../../raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-12.md)
 [^src2]: [Mathematics for Machine Learning, Part 8](../../raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-08.md)
+[^src3]: [D2L Part 26 — Adagrad, RMSProp, Adam (Ch 12 Optimization Algorithms)](../../raw/_inbox/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-26.md)

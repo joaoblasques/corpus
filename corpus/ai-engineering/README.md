@@ -6,7 +6,7 @@ tags:
   - corpus/ai-engineering
   - hub
 created: 2026-05-07
-updated: 2026-07-08
+updated: 2026-07-10
 ---
 
 # AI Engineering
@@ -33,6 +33,11 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 ### Concepts
 - [AI Fundamentals](/ai-engineering/ai-fundamentals.md) — concept · draft · classical + modern AI scaffold: search, logic, uncertainty, optimization, learning
 - [Machine Learning](/ai-engineering/machine-learning.md) — concept · draft · supervised/unsupervised/RL; overfitting; RAG-vs-fine-tuning
+- [MLP](/ai-engineering/mlp.md) — concept · draft · multilayer perceptrons; hidden layers; activation functions (ReLU/sigmoid/tanh); forward prop; backprop derivation; vanishing gradients; dropout; weight decay
+- [Convolutional Neural Networks](/ai-engineering/convolutional-neural-networks.md) — concept · draft · translation invariance/locality inductive biases; cross-correlation; pooling; LeNet/AlexNet/VGG/GoogLeNet/ResNet/DenseNet; batch normalization
+- [Recurrent Neural Networks](/ai-engineering/recurrent-neural-networks.md) — concept · draft · sequence modeling; hidden state; BPTT; vanishing/exploding gradients; GRU; LSTM; encoder-decoder; seq2seq; beam search
+- [Attention Mechanisms](/ai-engineering/attention-mechanisms.md) — concept · draft · Nadaraya-Watson proto-attention; query-key-value abstraction; additive attention (Bahdanau); scaled dot-product; multi-head; self-attention; positional encoding; Transformer architecture
+- [NLP Deep Learning](/ai-engineering/nlp-deep-learning.md) — concept · draft · word2vec (CBOW/skip-gram); GloVe; fastText; subword BPE; contextualized representations (ELMo); BERT (masked LM, NSP, fine-tuning); GPT; sentiment/NLI/QA fine-tuning
 - [Singular Value Decomposition (SVD/PCA)](/ai-engineering/singular-value-decomposition.md) — concept · draft · optimal low-rank matrix approximation; Eckart-Young theorem; eigenfaces; pseudo-inverse; rSVD
 - [Dynamic Mode Decomposition (DMD)](/ai-engineering/dynamic-mode-decomposition.md) — concept · draft · data-driven spectral analysis; DMD modes (frequency + growth rate); Koopman connection; variants (mrDMD, HAVOK)
 - [SINDy](/ai-engineering/sindy.md) — concept · draft · sparse identification of nonlinear governing equations from time-series; ℓ₁/STLS regression
@@ -147,6 +152,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Generator–Evaluator Separation](/ai-engineering/generator-evaluator-separation.md) — synthesis · draft · a model can't reliably grade its own output; move evaluation into a separate agent/model/rubric/human
 
 ### Sources
+- [Dive into Deep Learning (Zhang, Lipton, Li, Smola)](/ai-engineering/sources/dive-into-deep-learning.md) — source · draft · comprehensive DL textbook (1151 pages, CC BY-SA 4.0, d2l.ai); code-first, Jupyter notebooks; linear regression → transformers → optimization → computer vision → NLP pretraining
 - [Mathematics for Machine Learning (Deisenroth, Faisal, Ong)](/ai-engineering/sources/mathematics-for-machine-learning.md) — source · draft · 12-chapter textbook; Part I math foundations + Part II ML applications
 - [Introduction to Statistical Learning (James et al.)](/ai-engineering/sources/introduction-to-statistical-learning.md) — source · draft · Statistical learning methods; regression, classification, trees, SVMs, deep learning
 - [The New Software Lifecycle (Addy Osmani)](/ai-engineering/sources/the-new-software-lifecycle.md) — source · draft · Google/Osmani SDLC paper; 10%/90% model/harness split; 6 context types; static vs dynamic; METR productivity data

@@ -15,6 +15,9 @@ sources:
   - path: raw/youtube/youtube-5DtjQrROUzY-ai-was-hard-until-i-learned-these-10-concepts.md
     channel: youtube
     ingested_at: 2026-06-15
+  - path: raw/_inbox/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-06.md
+    channel: pdf
+    ingested_at: 2026-07-10
 aliases:
   - neural network
   - neural networks
@@ -66,6 +69,7 @@ Models trained on multiple data types (text, image, audio, video) "develop a dee
 ## See also
 
 - [Machine Learning](/ai-engineering/machine-learning.md) — deep learning is the multi-layer extension of ML
+- [MLP](/ai-engineering/mlp.md) — multilayer perceptrons: hidden layers, activation functions, backprop, vanishing gradients
 - [Transformer](/ai-engineering/transformer.md) — the attention architecture behind LLMs
 - [LLM](/ai-engineering/llm.md) — neural networks at billion-parameter scale; reasoning models
 - [AI Fundamentals](/ai-engineering/ai-fundamentals.md) — where neural nets sit in the field

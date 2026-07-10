@@ -2,6 +2,31 @@
 
 > OKF v0.1 change log. Newest first, grouped by date.
 
+## 2026-07-10
+
+* **Ingest**: Dive into Deep Learning (Zhang, Lipton, Li, Smola — D2L, CC BY-SA 4.0) — routed to ai-engineering
+  - sources: pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-01.md through part-30.md (channel: pdf, 30 files)
+  - domain: ai-engineering
+  - new pages: [/ai-engineering/sources/dive-into-deep-learning.md, /ai-engineering/mlp.md, /ai-engineering/convolutional-neural-networks.md, /ai-engineering/recurrent-neural-networks.md, /ai-engineering/attention-mechanisms.md, /ai-engineering/nlp-deep-learning.md]
+  - pages updated: [/ai-engineering/neural-network.md (added D2L part-06 source + MLP cross-link), /ai-engineering/optimization-for-ml.md (added D2L part-26 source + adaptive optimizer section), /ai-engineering/README.md, /corpus/index.md]
+  - notes: D2L is the standard open DL textbook (1151pp, d2l.ai). Part 01 = full TOC (Chs 1-21). Extracted: MLP (Ch 5 — hidden layers, ReLU/sigmoid/tanh, forward prop, backprop derivation, vanishing/exploding gradients, Xavier init, dropout, weight decay); CNNs (Chs 7-8, 14 — cross-correlation, padding/stride, multiple channels, pooling, LeNet, AlexNet, VGG, NiN, GoogLeNet/inception, batch normalization, ResNet residual connections, DenseNet, computer vision applications); RNNs (Chs 9-10 — hidden state, BPTT, gradient clipping, LSTM gates/cell state, GRU reset/update gates, deep/bidirectional RNNs, seq2seq encoder-decoder, teacher forcing, beam search); Attention (Ch 11 — Nadaraya-Watson kernel regression as proto-attention, QKV abstraction, additive attention/Bahdanau, scaled dot-product, masked softmax, multi-head attention, self-attention, sinusoidal positional encoding, Transformer encoder/decoder, ViT, large-scale pretraining BERT/GPT/T5); NLP pretraining (Chs 15-16 — one-hot problems, word2vec CBOW/skip-gram, negative sampling, hierarchical softmax, GloVe co-occurrence statistics, fastText character n-grams, BPE, ELMo contextualized, BERT MLM+NSP+fine-tuning, downstream tasks: sentiment/NLI/QA); Optimization (Ch 12 — Adagrad, RMSProp, Adadelta, Adam with bias correction, Yogi, learning rate scheduling). 6 new pages, 2 concept pages updated.
+
+* **Ingest**: OSTEP — VM chapters + concurrency fundamentals (Arpaci-Dusseau, 2023) — routed to software-engineering
+  - sources: pdf-threads-intro.md, pdf-threads-monitors.md, pdf-vm-mechanism.md, pdf-vm-segmentation.md, pdf-vm-freespace.md, pdf-vm-paging.md, pdf-vm-tlbs.md, pdf-vm-smalltables.md, pdf-vm-beyondphys.md, pdf-vm-beyondphys-policy.md, pdf-vm-complete.md, pdf-vm-dialogue.md, pdf-vmm-intro.md, pdf-dialogue-vm.md, pdf-dialogue-vmm.md, pdf-dialogue-labs.md, pdf-lab-tutorial.md, pdf-lab-projects-systems.md, pdf-lab-projects-xv6.md, pdf-toc.md (channel: pdf, 20 files)
+  - domain: software-engineering
+  - new pages: [/software-engineering/virtual-memory.md, /software-engineering/virtual-machine-monitors.md]
+  - pages updated: [/software-engineering/concurrency-and-threads.md, /software-engineering/sources/ostep-operating-systems-three-easy-pieces.md, /software-engineering/README.md]
+  - notes: VM section (Chs 15-23): address translation, base+bounds, segmentation (external fragmentation, coarse/fine-grained), free-space management (splitting/coalescing, best/worst/first-fit), paging (PTEs, valid/present/dirty bits), TLBs (hardware vs software managed, ASIDs, context switch flush), multi-level page tables, swapping, page replacement policies (OPT/FIFO/LRU/clock/dirty-bit). VMM appendix (B): hypervisors, CPU virtualization via limited direct execution, memory virtualization with shadow page tables / double-indirection (VPN→PFN→MFN), information gap, para-virtualization. Thread chapter (26): TCB, per-thread stacks, race conditions on x86 counter example. Monitors appendix (D): Brinch Hansen/Hoare origin, monitor lock, condition variables, Hoare vs Mesa semantics (signal-as-hint, while-not-if), broadcast/thundering herd, Java synchronized. 2 new concept pages, 3 updated pages.
+
+* **Collectors**: gmail=5, obsidian=25, book_discover=15, book_fetch=2, pdf=2, books=0, arxiv=24, youtube=0, github_discover=0, github=0, x=0, links_refetch=0
+* **Ingest**: 50 ingested · 0 deferred · status=ok
+* **YoutubeQuick**: 0 intake · 0 rescued · 0 skipped · status=ok
+* **DocsQuick**: 0 intake · 0 thin · 0 llm_fail · status=failed · error=Command '['/usr/local/bin/python3', '/Users/jonasblasques/Dev/corpus/bin/quick_ingest_docs.py', '--channel', 'web,notes', '--backend', 'openrouter', '--max', '80', '--sleep', '0.5']' timed out after 2400 seconds
+* **YoutubeReap**: 0 removed · status=ok
+* **Gardener**: 2 stubs deepened · status=ok
+* **GapResolver**: 1 gap dispatched · 3 sources queued · status=ok · gap=Open-source AI agents/frameworks for data engineering (like 
+* **Lint**: 5 broken wikilinks · 233 broken citations · 888 orphans · 893 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+* **OKF**: 0 violations
 ## 2026-07-09
 
 * **Ingest**: Introduction to Statistical Learning (James et al.) — parts 19-21 — routed to ai-engineering
