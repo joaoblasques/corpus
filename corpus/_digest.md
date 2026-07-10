@@ -47,3 +47,7 @@ type: internal
 ## [2026-07-09T03:34] gardener · run
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/mlops/terax.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/cursor.md", "verdict_ok": false, "gov": "reverted+queued"}
+
+## [2026-07-10T03:41] gardener · run
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/cursor.md", "verdict_ok": false, "gov": "reverted+queued"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/mlops/handson-ml3.md", "verdict_ok": false, "gov": "reverted+queued"}
