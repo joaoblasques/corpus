@@ -93,6 +93,60 @@ sources:
   - path: raw/_inbox/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-30.md
     channel: pdf
     ingested_at: 2026-07-10
+  - path: raw/_inbox/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-31.md
+    channel: pdf
+    ingested_at: 2026-07-11
+  - path: raw/_inbox/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-32.md
+    channel: pdf
+    ingested_at: 2026-07-11
+  - path: raw/_inbox/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-33.md
+    channel: pdf
+    ingested_at: 2026-07-11
+  - path: raw/_inbox/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-34.md
+    channel: pdf
+    ingested_at: 2026-07-11
+  - path: raw/_inbox/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-35.md
+    channel: pdf
+    ingested_at: 2026-07-11
+  - path: raw/_inbox/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-36.md
+    channel: pdf
+    ingested_at: 2026-07-11
+  - path: raw/_inbox/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-37.md
+    channel: pdf
+    ingested_at: 2026-07-11
+  - path: raw/_inbox/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-38.md
+    channel: pdf
+    ingested_at: 2026-07-11
+  - path: raw/_inbox/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-39.md
+    channel: pdf
+    ingested_at: 2026-07-11
+  - path: raw/_inbox/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-40.md
+    channel: pdf
+    ingested_at: 2026-07-11
+  - path: raw/_inbox/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-41.md
+    channel: pdf
+    ingested_at: 2026-07-11
+  - path: raw/_inbox/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-42.md
+    channel: pdf
+    ingested_at: 2026-07-11
+  - path: raw/_inbox/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-43.md
+    channel: pdf
+    ingested_at: 2026-07-11
+  - path: raw/_inbox/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-44.md
+    channel: pdf
+    ingested_at: 2026-07-11
+  - path: raw/_inbox/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-45.md
+    channel: pdf
+    ingested_at: 2026-07-11
+  - path: raw/_inbox/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-46.md
+    channel: pdf
+    ingested_at: 2026-07-11
+  - path: raw/_inbox/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-47.md
+    channel: pdf
+    ingested_at: 2026-07-11
+  - path: raw/_inbox/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-48.md
+    channel: pdf
+    ingested_at: 2026-07-11
 aliases:
   - D2L
   - Dive into Deep Learning
@@ -104,7 +158,7 @@ tags:
   - corpus/ai-engineering
   - source
 created: 2026-07-10
-updated: 2026-07-10
+updated: 2026-07-11
 ---
 
 # Dive into Deep Learning (D2L)
@@ -138,10 +192,16 @@ The authors describe the book's goal as bridging "the gap between theoretical fo
 | 13 | Computational Performance (compilers, async, parallelism, multi-GPU, param servers) | [Neural Networks](/ai-engineering/neural-network.md) |
 | 14 | Computer Vision (augmentation, fine-tuning, detection, segmentation, style transfer) | [CNNs](/ai-engineering/convolutional-neural-networks.md) |
 | 15–16 | NLP: Pretraining + Applications (word2vec, GloVe, fastText, BERT, fine-tuning) | [NLP Deep Learning](/ai-engineering/nlp-deep-learning.md) |
-| 17 | Reinforcement Learning (MDP, value iteration, Q-learning) | — |
-| 18 | Gaussian Processes | — |
-| 19–20 | Hyperparameter Optimization, Generative Adversarial Networks | — |
-| 21 | Recommender Systems | — |
+| 14 (cont.) | Computer Vision: Semantic Segmentation (Pascal VOC2012, CIFAR-10 Kaggle competition) | [CNNs](/ai-engineering/convolutional-neural-networks.md) |
+| 15 (cont.) | NLP Pretraining: word2vec PTB dataset implementation, negative sampling | [NLP Deep Learning](/ai-engineering/nlp-deep-learning.md) |
+| 16 | NLP Applications: sentiment analysis, Natural Language Inference (entailment/contradiction/neutral), BERT fine-tuning | [NLP Deep Learning](/ai-engineering/nlp-deep-learning.md) |
+| 17 | Reinforcement Learning (MDP, value iteration, Q-learning, policy gradient) | [Reinforcement Learning](/ai-engineering/reinforcement-learning.md) |
+| 18 | Gaussian Processes (RBF covariance, epistemic vs. observation uncertainty) | — |
+| 19 | Hyperparameter Optimization (random search, Bayesian optimization, successive halving, ASHA) | [Hyperparameter Optimization](/ai-engineering/hyperparameter-optimization.md) |
+| 20 | Generative Adversarial Networks (GAN minimax, DCGAN, mode collapse) | [Generative Adversarial Networks](/ai-engineering/generative-adversarial-networks.md) |
+| 21 | Recommender Systems (collaborative filtering, matrix factorization, NCF, CTR, Factorization Machines) | [Recommender Systems](/ai-engineering/recommender-systems.md) |
+| Appendix A | Mathematics for Deep Learning (linear algebra: eigenvalues/eigenvectors/decompositions; multivariable calculus: chain rule/backprop; probability: PDFs/CDFs/KL divergence/entropy; statistics: hypothesis testing, statistical power) | [Linear Algebra for ML](/ai-engineering/linear-algebra-for-ml.md), [Probability and Statistics for ML](/ai-engineering/probability-and-statistics-for-ml.md) |
+| Appendix B | Tools for Deep Learning (utility functions, trainer classes) | — |
 
 ## Key pedagogical approach
 
@@ -152,10 +212,16 @@ For linear regression, the book shows the analytic solution (normal equations: w
 ## Corpus pages produced from this source
 
 - [MLP](/ai-engineering/mlp.md) — Chapter 5 (multilayer perceptrons, backprop, vanishing gradients)
-- [CNNs](/ai-engineering/convolutional-neural-networks.md) — Chapters 7–8, 14 (convolution, architectures, computer vision)
+- [CNNs](/ai-engineering/convolutional-neural-networks.md) — Chapters 7–8, 14 (convolution, architectures, computer vision, segmentation)
 - [RNNs](/ai-engineering/recurrent-neural-networks.md) — Chapters 9–10 (sequence modeling, LSTM, GRU, seq2seq)
 - [Attention Mechanisms](/ai-engineering/attention-mechanisms.md) — Chapter 11 (Bahdanau, scaled dot-product, multi-head, transformer)
-- [NLP Deep Learning](/ai-engineering/nlp-deep-learning.md) — Chapters 15–16 (word2vec, GloVe, BERT, fine-tuning)
+- [NLP Deep Learning](/ai-engineering/nlp-deep-learning.md) — Chapters 15–16 (word2vec, GloVe, BERT, fine-tuning, NLI)
+- [Reinforcement Learning](/ai-engineering/reinforcement-learning.md) — Chapter 17 (MDPs, value iteration, Q-learning)
+- [Hyperparameter Optimization](/ai-engineering/hyperparameter-optimization.md) — Chapter 19 (random search, successive halving)
+- [Generative Adversarial Networks](/ai-engineering/generative-adversarial-networks.md) — Chapter 20 (GAN, DCGAN)
+- [Recommender Systems](/ai-engineering/recommender-systems.md) — Chapter 21 (CF, matrix factorization, NCF, FM)
+- [Linear Algebra for ML](/ai-engineering/linear-algebra-for-ml.md) — Appendix A.1–A.3 (eigenvalues, matrix decompositions)
+- [Probability and Statistics for ML](/ai-engineering/probability-and-statistics-for-ml.md) — Appendix A.5–A.9 (PDFs, KL divergence, hypothesis testing)
 
 ---
 

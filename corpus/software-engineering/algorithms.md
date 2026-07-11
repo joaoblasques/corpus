@@ -9,6 +9,12 @@ sources:
   - path: raw/email/email-2026-06-08-youre-learning-algorithms-the-wrong-way.md
     channel: email
     ingested_at: 2026-06-15
+  - path: raw/_inbox/pdf-algorithms-and-complexity-part-01.md
+    channel: pdf
+    ingested_at: 2026-07-11
+  - path: raw/_inbox/pdf-algorithms-part-01.md
+    channel: pdf
+    ingested_at: 2026-07-11
 aliases:
   - algorithms
   - recursion
@@ -22,15 +28,25 @@ aliases:
   - merge sort
   - quick sort
   - bubble sort
+  - quicksort
   - pathfinding
   - Dijkstra's algorithm
   - minimum spanning tree
   - Prim's algorithm
+  - Borůvka's algorithm
+  - Kruskal's algorithm
+  - greedy algorithm
+  - Huffman codes
+  - network flow
+  - Ford-Fulkerson
+  - FFT
+  - discrete Fourier transform
+  - Strassen matrix multiplication
 tags:
   - corpus/software-engineering
   - concept
 created: 2026-06-15
-updated: 2026-06-17
+updated: 2026-07-11
 ---
 
 # Algorithms (Strategies, Not Tricks)
@@ -102,10 +118,40 @@ A **spanning tree** of a graph is "a set of edges such that they connect all of 
 
 "You may use built-in tools most of the time, but understanding algorithms still matters because the same ideas show up everywhere: slow code, repeated work, structured data, and simple solutions that do more work than they should" [^src2]. The strategies-not-tricks framing is also interview advice — these are "the parts of the algorithms you actually need to know… [for] technical interviews" [^src1]. This connects to the fundamentals-under-AI argument in [AI-Assisted Development](/software-engineering/ai-assisted-development.md) and the interview-fluency point in [Navigating a Technical Career](/ai-business/technical-career.md) (practice DSA without autocomplete).
 
+## Greedy algorithms
+
+Greedy algorithms make the locally optimal choice at each step and never reconsider. Correctness proofs use the **exchange argument**: assume an optimal solution differs from greedy at the "first" point; show swapping the optimal choice for the greedy choice doesn't worsen the solution; conclude greedy is optimal by induction [^src4].
+
+**Huffman codes**: given symbol frequencies, build an optimal prefix-free binary code by repeatedly merging the two least-frequent nodes. Each symbol's code length equals its depth in the code tree; minimizing weighted depth minimizes the total encoded message length. The proof is a greedy exchange argument — the two least-frequent symbols must be at the same (maximum) depth in any optimal code [^src4].
+
+**Scheduling**: greedy task scheduling by increasing deadline order minimizes maximum lateness. Tape sorting (minimize average seek time) solved by scheduling in order of increasing processing time [^src4].
+
+## Advanced graph algorithms
+
+**Network flow (Ford-Fulkerson)**: finds the maximum flow from a source *s* to a sink *t* in a directed capacitated network by repeatedly finding augmenting paths in the residual graph. The **max-flow min-cut theorem** guarantees maximum flow = minimum cut capacity — the most important duality in combinatorial optimization [^src3].
+
+**Minimum spanning tree algorithms**:
+- **Borůvka's (1926)**: in each phase, every component adds its cheapest outgoing edge; halves component count per phase → O(E log V). Unique advantages: parallelism-friendly (each component is independent), often faster than worst-case, and generalizes to all known sub-O(E log V) MST algorithms. Erickson argues this is "the MST algorithm you want" in practice [^src5].
+- **Kruskal's**: sort all edges by weight; add the next edge if it doesn't create a cycle (use Union-Find). O(E log E).
+- **Prim's / Jarník's**: grow a single tree by repeatedly adding the cheapest edge to a non-tree vertex. O(E log V) with a binary heap. Originally by Vojtěch Jarník (1930), not Prim.
+
+**FFT (Fast Fourier Transform)**: reduces polynomial multiplication from O(n²) to O(n log n) by converting between coefficient and value representations at *n* roots of unity. Critical for signal processing, high-precision arithmetic, and polynomial operations [^src3_wilf].
+
+**Strassen matrix multiplication**: multiplies n×n matrices in O(n^{log_2 7}) ≈ O(n^{2.81}) by reducing 8 recursive multiplications to 7. A divide-and-conquer algorithm — the structure generalizes: any method doing *k* multiplications of M×M blocks yields O(n^{log_M k}) [^src3_wilf].
+
+## NP-completeness
+
+Some problems have no known polynomial algorithm and are suspected to require exponential time. See [Complexity Theory](/software-engineering/complexity-theory.md) for full coverage.
+
 ## See also
 
 - [Data Structures and Big O Notation](/software-engineering/data-structures.md) — the complexity classes (O(1)/O(log n)/O(n)/O(n²)) these strategies trade in, and the structures (stacks, trees, hashmaps) the algorithms operate on.
+- [Complexity Theory](/software-engineering/complexity-theory.md) — P vs NP, NP-complete problems, reductions.
 - [Software Design Principles](/software-engineering/software-design-principles.md) — simplicity as a design value mirrors "don't do more work than needed."
 
 [^src1]: [Famous Computer Science Algorithms (recursion, search, DP)](../../raw/youtube/youtube-fkcfaapypuq.md) (Tech With Tim; fetched via the source email)
 [^src2]: [you're learning algorithms the wrong way](../../raw/email/email-2026-06-08-youre-learning-algorithms-the-wrong-way.md) (Tech With Tim newsletter)
+[^src3_wilf]: [Algorithms and Complexity, Wilf — Part 5 (FFT, Strassen)](../../raw/pdf/pdf-algorithms-and-complexity-part-05.md)
+[^src4]: [Algorithms, Erickson — Part 10 (Greedy: exchange argument, Huffman)](../../raw/pdf/pdf-algorithms-part-10.md)
+[^src5]: [Algorithms, Erickson — Part 15 (MST: Borůvka, Jarník)](../../raw/pdf/pdf-algorithms-part-15.md)
+[^src3]: [Algorithms, Erickson — Part 21 (Network Flow applications)](../../raw/pdf/pdf-algorithms-part-21.md)

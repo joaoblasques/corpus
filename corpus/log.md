@@ -2,6 +2,39 @@
 
 > OKF v0.1 change log. Newest first, grouped by date.
 
+## 2026-07-11
+
+* **Ingest**: Dive into Deep Learning parts 31-48 (D2L continuation, CC BY-SA 4.0) — routed to ai-engineering
+  - sources: pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-31.md through part-48.md (channel: pdf, 18 files)
+  - domain: ai-engineering
+  - new pages: [/ai-engineering/reinforcement-learning.md, /ai-engineering/generative-adversarial-networks.md, /ai-engineering/recommender-systems.md, /ai-engineering/hyperparameter-optimization.md]
+  - pages updated: [/ai-engineering/sources/dive-into-deep-learning.md, /ai-engineering/convolutional-neural-networks.md (segmentation cross-link), /ai-engineering/nlp-deep-learning.md (NLI cross-link), /ai-engineering/README.md, /corpus/index.md]
+  - notes: ingest-auto run; 50 processed, 0 deferred. Parts 31-32 = CV segmentation (Pascal VOC2012, CIFAR-10); parts 33-35 = NLP applications (NLI, BERT fine-tuning); part 36 = RL/MDPs; part 37 = Gaussian Processes; parts 38-39 = HPO (random search, successive halving) + GANs; part 40 = Recommender Systems; parts 41-44 = Appendix A linear algebra; parts 45-46 = Appendix A statistics; parts 47-48 = utility code + references. 4 new concept pages.
+
+* **Ingest**: Algorithms and Complexity (Wilf, 1994) — routed to software-engineering
+  - sources: pdf-algorithms-and-complexity-part-01.md through part-11.md (channel: pdf, 11 files)
+  - domain: software-engineering
+  - new pages: [/software-engineering/sources/algorithms-and-complexity-wilf.md, /software-engineering/complexity-theory.md]
+  - pages updated: [/software-engineering/algorithms.md, /software-engineering/README.md, /corpus/index.md]
+  - notes: Herbert S. Wilf (UPenn), 1994. 139 pages. Chapters: Mathematical Prelims (orders of magnitude, recurrences, graphs), Recursive Algorithms (Quicksort, FFT, Strassen), Network Flow (Ford-Fulkerson, max-flow/min-cut), Number Theory, NP-completeness (backtracking, graph coloring average-case O(1)). Seeded complexity-theory concept page + significantly expanded algorithms.md with advanced content (FFT, Strassen, network flow, greedy). 2 new pages.
+
+* **Ingest**: Algorithms (Erickson, 2019) — routed to software-engineering
+  - sources: pdf-algorithms-part-01.md through part-21.md (channel: pdf, 21 files)
+  - domain: software-engineering
+  - new pages: [/software-engineering/sources/algorithms-erickson.md]
+  - pages updated: [/software-engineering/algorithms.md, /software-engineering/complexity-theory.md, /software-engineering/README.md, /corpus/index.md]
+  - notes: Jeff Erickson (UIUC), 2019, CC BY 4.0. 472 pages, 21 of 24 parts ingested. Key content: Recursion Fairy mental model (Tower of Hanoi); greedy exchange argument (Huffman codes, scheduling); Borůvka's MST algorithm (parallelism-friendly, historically earliest, Erickson's recommended choice); Jarník/Prim attribution history; network flow applications (bipartite matching, demographic assignment); NP-hardness via Cook-Levin. 1 new source page, 2 concept pages expanded.
+
+* **Collectors**: gmail=1, obsidian=25, book_discover=15, book_fetch=10, pdf=0, books=0, arxiv=0, youtube=0, github_discover=0, github=0, x=0, links_refetch=0
+* **Ingest**: 50 ingested · 0 deferred · status=ok
+* **YoutubeQuick**: 0 intake · 0 rescued · 0 skipped · status=ok
+* **DocsQuick**: 46 intake · 32 thin · 2 llm_fail · status=ok
+* **YoutubeReap**: 0 removed · status=ok
+* **Gardener**: 4 stubs deepened · status=ok
+* **Heal**: 18 citations repointed · 6 unfixable · status=ok
+* **GapResolver**: 1 gap dispatched · 3 sources queued · status=ok · gap=data-engineering agents landscape (build-time vs consume-tim
+* **Lint**: 5 broken wikilinks · 6 broken citations · 934 orphans · 936 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+* **OKF**: 0 violations
 ## 2026-07-10
 
 * **Ingest**: Dive into Deep Learning (Zhang, Lipton, Li, Smola — D2L, CC BY-SA 4.0) — routed to ai-engineering
