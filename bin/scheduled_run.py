@@ -784,23 +784,32 @@ def run_gap_resolver(*, timeout_s: int = 600, _subprocess_run=None) -> dict:
 
 
 def run_corpus_heal(*, _subprocess_run=None) -> dict:
-    """Deterministic self-healing (no LLM): repoint broken source citations to raw files that
-    moved during ingest. Runs after ingest, before the integrity lint, so the lint reports the
-    healed state and the repairs land in the same nightly commit. Failure recorded, never raised."""
+    """Deterministic self-healing (no LLM), run after ingest and before the integrity lint so the
+    lint reports the healed state and repairs land in the same nightly commit:
+      • citations — repoint broken source citations to raw files moved during ingest;
+      • hubs      — regenerate each domain README's auto-index so new pages aren't orphans.
+    Each sub-step is isolated; failure recorded, never raised."""
     _run = _subprocess_run if _subprocess_run is not None else subprocess.run
-    try:
-        proc = _run([sys.executable, str(BIN / "corpus_heal.py"), "citations", "--apply"],
-                    capture_output=True, text=True, timeout=600)
-        if proc.returncode != 0:
-            return {"status": "failed", "repaired": 0, "error": (proc.stderr or "").strip()[:200]}
+
+    def _sub(*cmd):
         try:
-            d = json.loads(proc.stdout)
-        except json.JSONDecodeError:
-            d = {}
-        return {"status": "ok", "repaired": d.get("repaired", 0),
-                "pages_changed": d.get("pages_changed", 0), "missing": d.get("missing", 0)}
-    except Exception as exc:  # noqa: BLE001
-        return {"status": "failed", "repaired": 0, "error": str(exc)}
+            proc = _run([sys.executable, str(BIN / "corpus_heal.py"), *cmd, "--apply"],
+                        capture_output=True, text=True, timeout=600)
+            if proc.returncode != 0:
+                return {"status": "failed", "error": (proc.stderr or "").strip()[:200]}
+            try:
+                return {"status": "ok", **json.loads(proc.stdout)}
+            except json.JSONDecodeError:
+                return {"status": "ok"}
+        except Exception as exc:  # noqa: BLE001
+            return {"status": "failed", "error": str(exc)}
+
+    cit = _sub("citations")
+    hubs = _sub("hubs")
+    status = "ok" if cit.get("status") == "ok" and hubs.get("status") == "ok" else "failed"
+    return {"status": status, "repaired": cit.get("repaired", 0),
+            "missing": cit.get("missing", 0), "hubs_changed": hubs.get("domains_changed", 0),
+            "error": cit.get("error") or hubs.get("error")}
 
 
 def run_gardener(*, max_stubs: int = 4, timeout_s: int = 2400, _subprocess_run=None) -> dict:
@@ -1258,7 +1267,7 @@ def write_run_report(
     hl = tallies.get("heal")
     if hl:
         hl_str = (f"{hl.get('repaired', 0)} citations repointed · {hl.get('missing', 0)} unfixable"
-                  f" · status={hl.get('status', 'unknown')}")
+                  f" · {hl.get('hubs_changed', 0)} hubs reindexed · status={hl.get('status', 'unknown')}")
         if hl.get("error"):
             hl_str += f" · error={hl['error']}"
         bullets.append(f"* **Heal**: {hl_str}")
