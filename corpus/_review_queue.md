@@ -32,3 +32,5 @@ type: internal
 - [stub-no-source] {"pages": ["corpus/ai-engineering/langgraph.md"]}
 - [verify-failed] {"paths": ["/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/cursor.md"], "notes": ["critic[cursor.md]: critic error: Extra data: line 1 column 2914 (char 2913)"]}
 - [verify-failed] {"paths": ["/Users/jonasblasques/Dev/corpus/corpus/mlops/handson-ml3.md"], "notes": ["critic[handson-ml3.md]: critic error: Extra data: line 3 column 1 (char 994)"]}
+- [stub-no-source] {"pages": ["corpus/ai-engineering/langgraph.md"]}
+- [verify-failed] {"paths": ["/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/cursor.md"], "notes": ["critic[cursor.md]: critic error: Extra data: line 3 column 1 (char 781)"]}
