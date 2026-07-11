@@ -1,7 +1,7 @@
 ---
 type: entity
 domain: mlops
-status: stub
+status: draft
 sources:
   - path: raw/github/github-ageron-handson-ml3.md
     channel: github
@@ -15,7 +15,7 @@ tags:
   - corpus/mlops
   - entity
 created: 2026-06-25
-updated: 2026-06-25
+updated: 2026-07-11
 ---
 
 # Hands-On Machine Learning (3rd Edition)
@@ -32,15 +32,36 @@ updated: 2026-06-25
 
 ## Running options
 
-- **Google Colab** (recommended by author) — no local install needed; temporary environment [^src1]
-- **Kaggle** — alternative cloud notebook environment
-- **Binder** — browser-based notebooks
-- **Local** — requires Anaconda/Miniconda + git + GPU driver (if using TensorFlow GPU) + CUDA/cuDNN [^src1]
-- **Docker** — Docker instructions available in the repo
+| Option | Notes |
+|---|---|
+| **Google Colab** (recommended) | No install; "anything you do will be deleted after a while" [^src1] |
+| **Kaggle** | Alternative cloud notebook environment |
+| **Binder** | Browser-based; not fully tested by author [^src1] |
+| **Deepnote** | Browser-based; not fully tested by author [^src1] |
+| **nbviewer** | Read-only rendering; no code execution |
+| **Docker** | Docker directory in the repo; created by contributors [^src1] |
+| **Local** | Anaconda/Miniconda + git; GPU needs driver + CUDA/cuDNN [^src1] |
+
+### Local install steps
+
+```
+git clone https://github.com/ageron/handson-ml3.git
+cd handson-ml3
+conda env create -f environment.yml
+conda activate homl3
+python -m ipykernel install --user --name=python3
+jupyter notebook
+```
+
+Author recommends Python 3.10 (bundled in the env); any version ≥3.7 works [^src1].
 
 ## Positioning
 
-Established standard reference for hands-on ML fundamentals. The 3rd edition updates the prior editions to TensorFlow 2 / Keras 3 and is the most current. Prior editions (`handson-ml2`, `handson-ml`) remain available [^src1].
+Established standard reference for hands-on ML fundamentals. The 3rd edition updates prior editions to TensorFlow 2 / Keras 3 and is the most current; `handson-ml2` (2nd ed.) and `handson-ml` (1st ed.) remain available [^src1].
+
+## Community & contributors
+
+Haesun Park and Ian Beauregard reviewed every notebook and submitted many PRs including exercise solutions. Steven Bunkley and Ziembla created the `docker` directory. Victor Khaustov submitted "plenty of excellent PRs, fixing many errors" [^src1].
 
 ## See also
 
