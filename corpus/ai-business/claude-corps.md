@@ -1,7 +1,7 @@
 ---
 type: entity
 domain: ai-business
-status: stub
+status: draft
 sources:
   - path: raw/web/web-claude-corps.md
     channel: web
@@ -14,7 +14,7 @@ tags:
   - corpus/ai-business
   - entity
 created: 2026-06-27
-updated: 2026-06-27
+updated: 2026-07-11
 ---
 
 # Claude Corps
