@@ -1,7 +1,7 @@
 ---
 type: entity
 domain: software-engineering
-status: stub
+status: draft
 sources:
   - path: raw/web/web-bun-is-a-fast-javascriptall-in-one-toolkit.md
     channel: web
@@ -18,7 +18,7 @@ tags:
   - corpus/software-engineering
   - entity
 created: 2026-06-25
-updated: 2026-06-25
+updated: 2026-07-11
 ---
 
 # Bun
