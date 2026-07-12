@@ -1,7 +1,7 @@
 ---
 type: entity
 domain: ai-engineering
-status: stub
+status: draft
 sources:
   - path: raw/web/web-education-claude-by-anthropic-16c564ed.md
     channel: web
@@ -25,7 +25,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-06-27
-updated: 2026-06-27
+updated: 2026-07-12
 confidence: 0.6
 last_confirmed: 2026-06-27
 ---
