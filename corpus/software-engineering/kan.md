@@ -1,7 +1,7 @@
 ---
 type: entity
 domain: software-engineering
-status: stub
+status: draft
 sources:
   - path: raw/github/github-kanbn-kan.md
     channel: github
@@ -15,16 +15,26 @@ tags:
   - corpus/software-engineering
   - entity
 created: 2026-06-25
-updated: 2026-06-25
+updated: 2026-07-12
 ---
 
 # Kan
 
-**TL;DR**: Open-source Trello alternative for project management (★5,049). TypeScript full-stack app using Next.js, tRPC, Drizzle ORM, Better Auth, Tailwind CSS, Zod, and Turborepo monorepo architecture [^src1].
+**TL;DR**: Open-source Trello alternative for project management (★5,049). TypeScript full-stack app using Next.js, tRPC, Drizzle ORM, Better Auth, Tailwind CSS, Zod, and Turborepo monorepo architecture. AGPLv3 licensed, self-hostable via Docker or Railway [^src1].
 
 ## What it is
 
-A kanban board SaaS app with board visibility controls, workspace collaboration, Trello import, labels/filters, card comments, activity log, and templates [^src1]. AGPLv3 licensed. Live at kan.bn.
+Kan is a kanban-style project management tool positioned as "the open-source project management alternative to Trello" [^src1]. It runs as a SaaS web app (kan.bn) and is fully self-hostable.
+
+Core features [^src1]:
+- **Board Visibility** — control who can view and edit boards
+- **Workspace Members** — invite members and collaborate
+- **Trello Imports** — import existing Trello boards
+- **Labels & Filters** — organise and find cards quickly
+- **Comments** — discuss on cards
+- **Activity Log** — track all card changes with detailed history
+- **Templates** — reusable custom board templates
+- **Integrations** — listed as coming soon on the roadmap
 
 ## Tech stack
 
@@ -35,9 +45,31 @@ Built with [^src1]:
 - **Better Auth** — authentication
 - **Tailwind CSS** — utility-first styling
 - **Zod** — schema validation
+- **React Email** — transactional email rendering
 - **Turborepo** — monorepo build tooling
 
-This stack (tRPC + Drizzle + Zod + Next.js) is a common modern TypeScript fullstack pattern — type safety all the way from DB schema to UI.
+The tRPC + Drizzle + Zod + Next.js combination enforces end-to-end type safety from the database schema through API layer to the UI, without a separate API specification document.
+
+## Self-hosting
+
+Two supported paths [^src1]:
+
+**Railway (one-click):** official template maintained in partnership with Railway; recommended for minimal setup.
+
+**Docker Compose:** ships a `docker-compose.yml` with three services — `postgres` (Postgres 15), `migrate` (runs Drizzle migrations on startup), and `web` (the Next.js app). The `migrate` service must complete before `web` starts; this is enforced via `depends_on` with `condition: service_completed_successfully`. App defaults to port 3000.
+
+Key environment variables required: `POSTGRES_URL`, `BETTER_AUTH_SECRET`, `NEXT_PUBLIC_BASE_URL` [^src1].
+
+## Local development
+
+Uses `pnpm` as the package manager. Standard workflow: clone → `pnpm install` → copy `.env.example` → `pnpm db:migrate` → `pnpm dev` [^src1].
+
+## Metadata
+
+- **Language**: TypeScript
+- **License**: AGPLv3
+- **Stars**: ★5,049 (collected 2026-06-22)
+- **Topics**: better-auth, drizzle-orm, nextjs, open-source, tailwindcss, trpc, turborepo, typescript, zod
 
 ## See also
 
