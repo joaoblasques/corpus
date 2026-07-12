@@ -70,7 +70,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [AI and the Job Market](/ai-business/ai-and-the-job-market.md)
 
 <details>
-<summary>Source summaries (148)</summary>
+<summary>Source summaries (157)</summary>
 
 - ["$1,300/Day Automated Bittensor Investing With Claude Code (34 Min Free Masterclass)"](/ai-business/sources/1-300-day-automated-bittensor-investing-with-claude-code-34--SHEs8gNh7sQ.md)
 - ["20-30 Years Old Is The Tutorial Phase, Don't F*ck It Up - Dan Koe"](/ai-business/sources/20-30-years-old-is-the-tutorial-phase-don-t-f-ck-it-up-dan-k-67066ee2.md)
@@ -118,6 +118,8 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - ["Dear AI Companies: Stop the “Doom Trolling” - Cal Newport"](/ai-business/sources/dear-ai-companies-stop-the-doom-trolling-cal-newport-7ef15a31.md)
 - ["How to Make Professional Logos Using AI ($34,901/Month)"](/ai-business/sources/how-to-make-professional-logos-using-ai-34-901-month-uffB2onuZsU.md)
 - ["If I Wanted to Become AI Millionaire In 2026, This is What I'd Do [FULL BLUEPRINT]"](/ai-business/sources/if-i-wanted-to-become-ai-millionaire-in-2026-this-is-what-i--jxOsPBXYKzE.md)
+- ["🎧 Best of the Pod: How to Prepare for AGI According to Reid Hoffman"](/ai-business/sources/best-of-the-pod-how-to-prepare-for-agi-according-to-reid-hof-e217dd3a.md)
+- ["🎧 Best of the Pod: She Built an AI Product Manager Bringing in Six Figures—As a Side Hustle"](/ai-business/sources/best-of-the-pod-she-built-an-ai-product-manager-bringing-in--b54f5383.md)
 - [10 Middle-Class Money Traps (and Fixes)](/ai-business/sources/10-middle-class-money-traps-and-fixes-WfFDrqrHC4g.md)
 - [14-Day Video Challenge](/ai-business/sources/14-day-video-challenge-0137fce9.md)
 - [15 year of AppSumo - Noah Kagan](/ai-business/sources/15-year-of-appsumo-noah-kagan-cd106e60.md)
@@ -136,6 +138,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [A TikTok Competitor Is About to IPO—And It's Deeply Suspicious](/ai-business/sources/a-tiktok-competitor-is-about-to-ipo-and-it-s-deeply-suspicio-79367032.md)
 - [a-decade-of-evidence-of-trend-following-investing-in-cryptoc](/ai-business/sources/a-decade-of-evidence-of-trend-following-investing-in-cryptoc-cc.md)
 - [Accounting for Computer Scientists](/ai-business/sources/accounting-for-computer-scientists-ce.md)
+- [Ads in the Age of AI](/ai-business/sources/ads-in-the-age-of-ai-03396ce0.md)
 - [Advisory Database now includes an Unreviewed Advisories section - GitHub Changelog](/ai-business/sources/advisory-database-now-includes-an-unreviewed-advisories-sect-9a794a5b.md)
 - [AI - 101 Use Cases in Daily Life](/ai-business/sources/ai-101-use-cases-in-daily-life-fe.md)
 - [AI agents making money on their own? The future is already here](/ai-business/sources/ai-agents-making-money-on-their-own-the-future-is-already-he-sHZ5qCoEDtg.md)
@@ -151,6 +154,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [AI Strategy Consulting & Fractional CAIO Services - AY Automate](/ai-business/sources/ai-strategy-consulting-fractional-caio-services-ay-automate-7797e4a9.md)
 - [AI Turned Me Into a Content Agency of One](/ai-business/sources/ai-turned-me-into-a-content-agency-of-one-521529bc.md)
 - [AI Worldviews](/ai-business/sources/ai-worldviews-08d76d01.md)
+- [AI-Powered Obsidian Smart Note System](/ai-business/sources/ai-powered-obsidian-smart-note-system-e.md)
 - [AirPods Max Sweepstakes — Official Rules | dbt Labs at Databricks Data+AI Summit 2026 | dbt Labs](/ai-business/sources/airpods-max-sweepstakes-official-rules-dbt-labs-at-databrick-f8604542.md)
 - [America's Next 250](/ai-business/sources/america-s-next-250-38b5ab71.md)
 - [An Interview with Figma CEO Dylan Field About Design and AI](/ai-business/sources/an-interview-with-figma-ceo-dylan-field-about-design-and-ai-0132d18e.md)
@@ -208,14 +212,19 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [How the CEO of Obsidian Takes Notes (Underrated Genius)](/ai-business/sources/how-the-ceo-of-obsidian-takes-notes-underrated-genius-e.md)
 - [How To Build A Profitable Personal Brand In 30 Days With AI](/ai-business/sources/how-to-build-a-profitable-personal-brand-in-30-days-with-ai-fae.md)
 - [How to do FREE Etsy Niche and Keyword Research (NO PAID TOOLS)](/ai-business/sources/how-to-do-free-etsy-niche-and-keyword-research-no-paid-tools-qti661Wuso4.md)
+- [How To Think Like A Strategic Genius — 5-Dimensional Thinking](/ai-business/sources/how-to-think-like-a-strategic-genius-5-dimensional-thinking-fae.md)
 - [Hydroponics - DIY Vertical PVC Tower System](/ai-business/sources/hydroponics-diy-vertical-pvc-tower-system-e.md)
 - [I Built a Trading Bot with ChatGPT](/ai-business/sources/i-built-a-trading-bot-with-chatgpt-fhBw3j_O9LE.md)
 - [I Made 700 Monetizable YouTube Shorts for Faceless Channel in 18 MINUTES using AI Automation](/ai-business/sources/i-made-700-monetizable-youtube-shorts-for-faceless-channel-i-lqXWVzWkkyc.md)
 - [I Tried EVERY Claude AI Side Hustle… This One Made The Most Money](/ai-business/sources/i-tried-every-claude-ai-side-hustle-this-one-made-the-most-m-fb-5GoBZw8E.md)
 - [Master Prompt Engineering (Full Guide)](/ai-business/sources/master-prompt-engineering-full-guide-ydjRYmM19DY.md)
 - [Music - Vocal Harmonies How They Work Thirds and Sixths](/ai-business/sources/music-vocal-harmonies-how-they-work-thirds-and-sixths-doc.md)
+- [Piano - Chord Octave Technique for Rhythm Patterns](/ai-business/sources/piano-chord-octave-technique-for-rhythm-patterns-ae.md)
 - [Private video](/ai-business/sources/private-video-Cz9QD6-TYeY.md)
 - [Python web scraper $$$ - Easy step by step guide | How to make money with Python Episode 1](/ai-business/sources/python-web-scraper-easy-step-by-step-guide-how-to-make-money-awoEELnQzVg.md)
+- [Remote Work Over 60 — High-Paying Jobs Hiring Right Now 2026](/ai-business/sources/remote-work-over-60-high-paying-jobs-hiring-right-now-2026-2026.md)
+- [Running - Heart Rate Zones Guide](/ai-business/sources/running-heart-rate-zones-guide-de.md)
+- [Surf Skate - Open Face Carve and Bowl Training](/ai-business/sources/surf-skate-open-face-carve-and-bowl-training-a.md)
 - [The Actual Easiest AI Side Hustle of 2026 ($307K+)](/ai-business/sources/the-actual-easiest-ai-side-hustle-of-2026-307k-pjzWx7CxWog.md)
 - [The Claude AI Side Hustle — Selling Notion Templates](/ai-business/sources/the-claude-ai-side-hustle-selling-notion-templates-a.md)
 - [The Simplest Side Hustle You Can Start Under $100](/ai-business/sources/the-simplest-side-hustle-you-can-start-under-100-Y4pvrjtb1cI.md)

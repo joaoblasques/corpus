@@ -210,7 +210,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [The Portfolio Project That Lands a DE Role](/data-engineering/portfolio-project-that-lands-a-de-role.md)
 
 <details>
-<summary>Source summaries (136)</summary>
+<summary>Source summaries (140)</summary>
 
 - ["A dbt \"logic mesh\" with packages: standard model and metrics across 25 autonomous organizations | dbt Summit"](/data-engineering/sources/a-dbt-logic-mesh-with-packages-standard-model-and-metrics-ac-bf162a97.md)
 - ["Academic → CTO: What Actually Matters in Data (Matthew Housley) - Confessions of a Data Guy"](/data-engineering/sources/academic-cto-what-actually-matters-in-data-matthew-housley-c-e9eae58c.md)
@@ -262,6 +262,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [Accelerating dbt with dbt v2 | dbt Summit](/data-engineering/sources/accelerating-dbt-with-dbt-v2-dbt-summit-8afb6363.md)
 - [AI Is Changing Data Engineering Fast](/data-engineering/sources/ai-is-changing-data-engineering-fast-82a12a3f.md)
 - [AI is Changing Data Engineering Fast! - Confessions of a Data Guy](/data-engineering/sources/ai-is-changing-data-engineering-fast-confessions-of-a-data-g-2c6e6401.md)
+- [ai-agent-use-cases-for-data-engineering-5-proven-workflows](/data-engineering/sources/ai-agent-use-cases-for-data-engineering-5-proven-workflows-f.md)
 - [Amit Joshi | Databricks](/data-engineering/sources/amit-joshi-databricks-4c1faee9.md)
 - [Analytics Engineer / Practitioner | dbt Labs](/data-engineering/sources/analytics-engineer-practitioner-dbt-labs-65dee396.md)
 - [Announcing leetdata.ai — A Practice Ground for Data Engineers](/data-engineering/sources/announcing-leetdata-ai-a-practice-ground-for-data-engineers-38e39f8d.md)
@@ -269,9 +270,11 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [Apache Arrow as Data Interchange - Confessions of a Data Guy](/data-engineering/sources/apache-arrow-as-data-interchange-confessions-of-a-data-guy-b8370823.md)
 - [Arianna Gentile | Databricks](/data-engineering/sources/arianna-gentile-databricks-4f0f16ea.md)
 - [Arnab Sen | Databricks](/data-engineering/sources/arnab-sen-databricks-a1e85d61.md)
+- [Automate Data Vault modeling at scale with dbt | dbt Labs](/data-engineering/sources/automate-data-vault-modeling-at-scale-with-dbt-dbt-labs-1cd10039.md)
 - [Axel Torbenson | Databricks](/data-engineering/sources/axel-torbenson-databricks-2624dbed.md)
 - [Azure End-To-End Data Engineering Project for Beginners (FREE Account) | SQL DB Tutorial](/data-engineering/sources/azure-end-to-end-data-engineering-project-for-beginners-free-ygJ11fzq_ik.md)
 - [Becoming a dbt Architect | dbt Summit](/data-engineering/sources/becoming-a-dbt-architect-dbt-summit-7e38a8ee.md)
+- [Best Data Version Control Tools in 2026 | lakeFS](/data-engineering/sources/best-data-version-control-tools-in-2026-lakefs-824d7c11.md)
 - [Book a Custom dbt Demo | Reduce Costs & Improve Data ROI | dbt Labs](/data-engineering/sources/book-a-custom-dbt-demo-reduce-costs-improve-data-roi-dbt-lab-75922ab2.md)
 - [Book a dbt demo for your data team | dbt Labs](/data-engineering/sources/book-a-dbt-demo-for-your-data-team-dbt-labs-0461ebec.md)
 - [Book a dbt demo today | dbt Labs](/data-engineering/sources/book-a-dbt-demo-today-dbt-labs-10fc1aeb.md)
@@ -295,6 +298,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [Data Modeling With Joe Reis - Understanding What Data Modeling Is And Where It's Going](/data-engineering/sources/data-modeling-with-joe-reis-understanding-what-data-modeling-NKo02ThtAto.md)
 - [Data Pipeline Design for Fact & Dimension Tables – Start Data Engineering](/data-engineering/sources/data-pipeline-design-for-fact-dimension-tables-start-data-en-27355b52.md)
 - [Data share as a service — generalizing Snowflake DataShare across Mitratech products | dbt Summit](/data-engineering/sources/data-share-as-a-service-generalizing-snowflake-datashare-acr-d16efffa.md)
+- [data-engineering-in-2026-what-changes](/data-engineering/sources/data-engineering-in-2026-what-changes-cae.md)
 - [data-quality-monitoring-at-scale-with-agentic-ai](/data-engineering/sources/data-quality-monitoring-at-scale-with-agentic-ai-a.md)
 - [Databases Vs Data Warehouses Vs Data Lakes - What Is The Difference And Why Should You Care?](/data-engineering/sources/databases-vs-data-warehouses-vs-data-lakes-what-is-the-diffe-FxpRL0m9BcA.md)
 - [Databricks - End-to-End Project 2026 Lakehouse Architecture](/data-engineering/sources/databricks-end-to-end-project-2026-lakehouse-architecture-acece.md)

@@ -49,19 +49,27 @@ Personal and professional effectiveness for knowledge workers: mental models, ti
 - [Quartz SSG](/productivity/quartz-ssg.md)
 
 <details>
-<summary>Source summaries (12)</summary>
+<summary>Source summaries (20)</summary>
 
 - [7-Day Live Video Challenge Celebration](/productivity/sources/7-day-live-video-challenge-celebration-0240cd2a.md)
 - [9 Lessons from 2024 + My Goals for 2025 - Noah Kagan](/productivity/sources/9-lessons-from-2024-my-goals-for-2025-noah-kagan-1e3af730.md)
 - [A Brief History of the Annual Review](/productivity/sources/a-brief-history-of-the-annual-review-abdd034b.md)
 - [A few thoughts on suffering - Noah Kagan](/productivity/sources/a-few-thoughts-on-suffering-noah-kagan-fe410fa2.md)
 - [About Forte Labs - Forte Labs](/productivity/sources/about-forte-labs-forte-labs-d0bfb7e4.md)
+- [Be Sincere—Not Serious](/productivity/sources/be-sincere-not-serious-7162b644.md)
 - [Beware of Productivity Paradoxes - Cal Newport](/productivity/sources/beware-of-productivity-paradoxes-cal-newport-9c92dd3d.md)
 - [Books](/productivity/sources/books-a3feacfa.md)
 - [Fitness - 7 Minute Morning Mobility Routine](/productivity/sources/fitness-7-minute-morning-mobility-routine-e.md)
 - [Gardening - DIY Hydroponic Rooting Box](/productivity/sources/gardening-diy-hydroponic-rooting-box-b.md)
 - [Harmonica - 5-Minute Daily Practice Routine (Big Tone Train)](/productivity/sources/harmonica-5-minute-daily-practice-routine-big-tone-train-a.md)
 - [Health - Preventing Chlorine Irritation for Swimmers](/productivity/sources/health-preventing-chlorine-irritation-for-swimmers-e.md)
+- [Productivity - Dan Koe Strategic Thinking Mental Model](/productivity/sources/productivity-dan-koe-strategic-thinking-mental-model-de.md)
+- [Productivity - Raycast AI Extensions and Automation](/productivity/sources/productivity-raycast-ai-extensions-and-automation-aa.md)
+- [Productivity - Rewire Your Brain for Discipline Dopamine](/productivity/sources/productivity-rewire-your-brain-for-discipline-dopamine-dae.md)
+- [Productivity - Top 8 Ways to Use Raycast](/productivity/sources/productivity-top-8-ways-to-use-raycast-aca.md)
+- [Sports - Wing Foiling in Waves Guide](/productivity/sources/sports-wing-foiling-in-waves-guide-de.md)
+- [The Only 6 Obsidian Plugins You Actually Need in 2026](/productivity/sources/the-only-6-obsidian-plugins-you-actually-need-in-2026-2026.md)
+- [Thinking - 5-Dimensional Thinking on Paper](/productivity/sources/thinking-5-dimensional-thinking-on-paper-ae.md)
 - [What Happens to YOUR BRAIN When You Hum for 60 Seconds?](/productivity/sources/what-happens-to-your-brain-when-you-hum-for-60-seconds-QVoGbaq8xos.md)
 
 </details>

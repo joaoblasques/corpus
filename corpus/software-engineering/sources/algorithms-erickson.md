@@ -66,6 +66,15 @@ sources:
   - path: raw/_inbox/pdf-algorithms-part-21.md
     channel: pdf
     ingested_at: 2026-07-11
+  - path: raw/_inbox/pdf-algorithms-part-22.md
+    channel: pdf
+    ingested_at: 2026-07-12
+  - path: raw/_inbox/pdf-algorithms-part-23.md
+    channel: pdf
+    ingested_at: 2026-07-12
+  - path: raw/_inbox/pdf-algorithms-part-24.md
+    channel: pdf
+    ingested_at: 2026-07-12
 aliases:
   - Algorithms Erickson
   - Jeff Erickson algorithms
@@ -75,7 +84,7 @@ tags:
   - corpus/software-engineering
   - source
 created: 2026-07-11
-updated: 2026-07-11
+updated: 2026-07-12
 ---
 
 # Algorithms (Erickson, 2019)
@@ -102,7 +111,7 @@ Discrete mathematics, proof techniques (induction, contradiction, exchange argum
 | 9 | All-Pairs Shortest Paths | Floyd-Warshall |
 | 10 | Maximum Flows & Min Cuts | Ford-Fulkerson |
 | 11 | Applications of Flows | Bipartite matching, demographic ad assignment |
-| 12 | NP-Hardness | Polynomial-time reductions, Cook-Levin theorem |
+| 12 | NP-Hardness | Polynomial-time reductions, Cook-Levin; MaxIndSet, MaxClique, VertexCover, 3-colorability, HamCycle (two proofs), SubsetSum; NP-hard problems list; draughts reduction from HamCycle |
 
 ## Key pedagogical concepts
 
@@ -116,10 +125,20 @@ Discrete mathematics, proof techniques (induction, contradiction, exchange argum
 
 **Jarník's ("Prim's") algorithm**: actually independently discovered by Vojtěch Jarník (1930), then Kruskal (1956), Prim (1957), Loberman & Weinberger (1957), and Dijkstra (1958). Named after Prim in most textbooks despite Jarník's priority [^src15].
 
+**NP-hardness proof patterns (Ch 12)**: reductions follow a three-part template — (1) polynomial-time transform of arbitrary instance of X to special instance of Y; (2) "if X is good then Y is good"; (3) "if Y is good then X is good" (the hardest direction). The certificate transformation must be reversible; the instance transformation need not be. Decomposing into **gadgets** (subgraphs encoding semantics) is the key design strategy [^src22].
+
+**Key reductions from Ch 12**:
+- MaxIndSet ← 3-SAT (clause triangles + variable edges); MaxClique = MaxIndSet on complement graph; MinVertexCover = n − MaxIndSet.
+- 3-colorability ← 3-SAT (truth gadget + variable gadgets + clause gadgets with "majority gate" triangles).
+- DirectedHamCycle ← VertexCover (edge gadgets + vertex chains + cover vertices); also ← 3-SAT (variable gadgets as doubly-linked lists + clause vertices).
+- SubsetSum ← VertexCover (base-4 integer encoding; each edge contributes one digit, each vertex contributes its incident edges + a 1 in the top digit).
+- **Pseudo-polynomial vs. strongly NP-hard**: SubsetSum is solvable in O(nT) pseudo-polynomial DP (T can be exponential in input bits — weakly NP-hard). TravelingSalesman on unit-weight graphs is strongly NP-hard [^src22].
+- **International draughts example**: finding a legal move in the n×n generalization is NP-hard by reduction from HamCycle; this is unique in being a real-world game where merely following the rules is NP-hard [^src23] [^src22].
+
 ## Corpus pages produced from this source
 
-- [Algorithms](/software-engineering/algorithms.md) — updated with divide-and-conquer, greedy, MST, shortest paths content
-- [Complexity Theory](/software-engineering/complexity-theory.md) — NP-hardness, reductions content
+- [Algorithms](/software-engineering/algorithms.md) — updated with divide-and-conquer, greedy, MST, shortest paths, sorting lower bound content
+- [Complexity Theory](/software-engineering/complexity-theory.md) — NP-hardness, reductions, gadget-based proofs content
 - [Data Structures](/software-engineering/data-structures.md) — graph representations referenced
 
 ---
@@ -128,3 +147,5 @@ Discrete mathematics, proof techniques (induction, contradiction, exchange argum
 [^src3]: [Algorithms, Erickson — Part 3 (Recursion: Tower of Hanoi, Recursion Fairy)](../../../raw/pdf/pdf-algorithms-part-03.md)
 [^src10]: [Algorithms, Erickson — Part 10 (Greedy: exchange arguments, Huffman codes)](../../../raw/pdf/pdf-algorithms-part-10.md)
 [^src15]: [Algorithms, Erickson — Part 15 (MST: Borůvka, Jarník/Prim)](../../../raw/pdf/pdf-algorithms-part-15.md)
+[^src22]: [Algorithms, Erickson — Part 22 (NP-hardness: MaxIndSet→MaxClique/VertexCover, 3-colorability, HamCycle, SubsetSum, NP-hard list)](../../../raw/pdf/pdf-algorithms-part-22.md)
+[^src23]: [Algorithms, Erickson — Part 23 (NP-hardness: draughts reduction from HamCycle)](../../../raw/pdf/pdf-algorithms-part-23.md)

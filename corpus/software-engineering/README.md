@@ -6,7 +6,7 @@ tags:
   - corpus/software-engineering
   - hub
 created: 2026-05-07
-updated: 2026-07-07
+updated: 2026-07-12
 ---
 
 # Software Engineering
@@ -77,7 +77,9 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Go Course with Bonus Projects (boot.dev / freeCodeCamp)](/software-engineering/sources/go-course-boot-dev.md) — source · draft · Lane Wagner; 100+ lessons + 7 projects; Textio running example; RSS-aggregator capstone (chi/sqlc/Goose, API-key auth)
 - [Go Programming Full Course (Tech With Tim)](/software-engineering/sources/go-full-course-tech-with-tim.md) — source · draft · 21-lesson syntax-first course; slice internals, value/pointer receivers, goroutines + channels
 - [Algorithms and Complexity (Wilf, 1994)](/software-engineering/sources/algorithms-and-complexity-wilf.md) — source · draft · Herbert Wilf; 139p; recursion/FFT, network flow (Ford-Fulkerson), number theory, NP-completeness; free educational use
-- [Algorithms (Erickson, 2019)](/software-engineering/sources/algorithms-erickson.md) — source · draft · Jeff Erickson (UIUC); 472p; recursion → divide-and-conquer → DP → greedy → graph algorithms → MST → shortest paths → network flow → NP-hardness; CC BY 4.0
+- [Algorithms (Erickson, 2019)](/software-engineering/sources/algorithms-erickson.md) — source · draft �� Jeff Erickson (UIUC); 472p; recursion → divide-and-conquer → DP → greedy → graph algorithms → MST → shortest paths → network flow → NP-hardness; CC BY 4.0
+- [Data Structures and Algorithm Analysis in C++ (Shaffer, Ed. 3.2)](/software-engineering/sources/algorithms-shaffer-c.md) — source · draft · Clifford Shaffer (Virginia Tech); 615p; ADT philosophy, data structures, sorting, hashing, B-trees, graphs, NP-completeness; free PDF
+- [Data Structures and Algorithm Analysis in Java (Shaffer, Ed. 3.2)](/software-engineering/sources/algorithms-shaffer-java.md) — source · draft · Java edition of Shaffer's DSA textbook; same content as C++ edition; 601p; free PDF
 
 ## Sources ingested
 - [Disasters I've Seen in a Microservices World](/03_Resources/Articles/Disasters in a Microservices World.md) — article note, João Alves / Hey World, 2025-10-30
@@ -136,7 +138,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [AI-Assisted Development](/software-engineering/ai-assisted-development.md)
 
 <details>
-<summary>Source summaries (49)</summary>
+<summary>Source summaries (52)</summary>
 
 - ["Guitar - 3 Easy Jazz Standards (Stormy Monday, Blue Bossa, Blue in Green)"](/software-engineering/sources/guitar-3-easy-jazz-standards-stormy-monday-blue-bossa-blue-i-doc.md)
 - [30 Vim commands you NEED TO KNOW (in just 10 minutes)](/software-engineering/sources/30-vim-commands-you-need-to-know-in-just-10-minutes-RSlrxE21l_k.md)
@@ -150,6 +152,8 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Career - 5 Boring Certifications for Tech Career Growth](/software-engineering/sources/career-5-boring-certifications-for-tech-career-growth-doc.md)
 - [Claude Code - Session Timing Strategy to Double Productivity](/software-engineering/sources/claude-code-session-timing-strategy-to-double-productivity-dc.md)
 - [Coming Soon - Kai Waehner](/software-engineering/sources/coming-soon-kai-waehner-3fd775a7.md)
+- [Data Structures and Algorithm Analysis in C++ (Shaffer, Ed. 3.2)](/software-engineering/sources/algorithms-shaffer-c.md)
+- [Data Structures and Algorithm Analysis in Java (Shaffer, Ed. 3.2)](/software-engineering/sources/algorithms-shaffer-java.md)
 - [Designing Distributed Systems (Brendan Burns, O'Reilly, 2018)](/software-engineering/sources/burns-designing-distributed-systems.md)
 - [Dev - 9-Step Coding Project Planning Process](/software-engineering/sources/dev-9-step-coding-project-planning-process-ce.md)
 - [Dev - Vibe Coding 3-Stage Planning Method](/software-engineering/sources/dev-vibe-coding-3-stage-planning-method-ed.md)
@@ -181,6 +185,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Matt Pocock’s Agentic Engineering Workflow (just copy him)](/software-engineering/sources/matt-pocock-s-agentic-engineering-workflow-just-copy-him-nQwJVHCtDDY.md)
 - [Obsidian Markdown Made Ridiculously Simple](/software-engineering/sources/obsidian-markdown-made-ridiculously-simple-e.md)
 - [ostep operating systems three easy pieces](/software-engineering/sources/ostep-operating-systems-three-easy-pieces.md)
+- [Python - Complete Beginner Course 5 Hours TechWorld with Nana](/software-engineering/sources/python-complete-beginner-course-5-hours-techworld-with-nana-aa.md)
 - [Software Engineering in the Age of AI](/software-engineering/sources/software-engineering-in-the-age-of-ai-a.md)
 - [Source: Go Programming — Full Course (Tech With Tim)](/software-engineering/sources/go-full-course-tech-with-tim.md)
 - [Source: Go Programming — Golang Course with Bonus Projects (boot.dev / freeCodeCamp)](/software-engineering/sources/go-course-boot-dev.md)

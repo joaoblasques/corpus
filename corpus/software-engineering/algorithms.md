@@ -15,6 +15,12 @@ sources:
   - path: raw/_inbox/pdf-algorithms-part-01.md
     channel: pdf
     ingested_at: 2026-07-11
+  - path: raw/_inbox/pdf-data-structures-and-algorithm-analysis-in-c-part-01.md
+    channel: pdf
+    ingested_at: 2026-07-12
+  - path: raw/_inbox/pdf-data-structures-and-algorithm-analysis-in-java-part-01.md
+    channel: pdf
+    ingested_at: 2026-07-12
 aliases:
   - algorithms
   - recursion
@@ -42,11 +48,15 @@ aliases:
   - FFT
   - discrete Fourier transform
   - Strassen matrix multiplication
+  - external sorting
+  - replacement selection
+  - multiway merge
+  - lower bound for sorting
 tags:
   - corpus/software-engineering
   - concept
 created: 2026-06-15
-updated: 2026-07-11
+updated: 2026-07-12
 ---
 
 # Algorithms (Strategies, Not Tricks)
@@ -118,6 +128,22 @@ A **spanning tree** of a graph is "a set of edges such that they connect all of 
 
 "You may use built-in tools most of the time, but understanding algorithms still matters because the same ideas show up everywhere: slow code, repeated work, structured data, and simple solutions that do more work than they should" [^src2]. The strategies-not-tricks framing is also interview advice — these are "the parts of the algorithms you actually need to know… [for] technical interviews" [^src1]. This connects to the fundamentals-under-AI argument in [AI-Assisted Development](/software-engineering/ai-assisted-development.md) and the interview-fluency point in [Navigating a Technical Career](/ai-business/technical-career.md) (practice DSA without autocomplete).
 
+## Sorting lower bound
+
+Any comparison-based sorting algorithm requires Ω(n log n) comparisons in the worst case. Proof via decision tree: a decision tree for n elements has n! leaves (one per permutation); a binary tree with n! leaves has height ≥ log₂(n!) = Θ(n log n) by Stirling's approximation [^src_shaffer]. This implies merge sort, heapsort, and quicksort are asymptotically optimal (can't improve beyond Θ(n log n)). Non-comparison sorts (radix sort, counting sort, binsort) bypass the lower bound by exploiting structure in key values.
+
+**Shell sort**: a practical Θ(n^{3/2}) or better variant of insertion sort that moves elements by large increments first, reducing disorder before the final pass. A useful gap sequence (Sedgewick's) achieves O(n^{4/3}) in practice. Bridges the gap between O(n²) and O(n log n) sorts [^src_shaffer].
+
+**Binsort and radix sort**: when keys are integers in a bounded range [0, k), a stable linear scan into k buckets takes O(n + k). Radix sort applies binsort digit-by-digit (least significant first) achieving O(nk) total for k-digit numbers, or O(n log_r k) for base-r digits. Effective when k = O(n); degrades when the key range is large [^src_shaffer].
+
+## External sorting
+
+When data doesn't fit in main memory, disk I/O cost dominates — reading/writing one disk block (thousands of records) costs ~1ms vs. nanoseconds per in-memory operation [^src_shaffer].
+
+**Replacement selection**: produces initial runs longer than memory size by using a heap. Each record from disk is compared against the min in the heap; if it can extend the current run it replaces it (heap push); otherwise it becomes part of the next run. Average run length = 2M for M-record memory [^src_shaffer].
+
+**Multiway merging**: merge r runs at once using a min-heap of r elements; reduces the number of merge passes from ⌈log₂(N/M)⌉ to ⌈log_r(N/M)⌉, dramatically reducing I/O [^src_shaffer].
+
 ## Greedy algorithms
 
 Greedy algorithms make the locally optimal choice at each step and never reconsider. Correctness proofs use the **exchange argument**: assume an optimal solution differs from greedy at the "first" point; show swapping the optimal choice for the greedy choice doesn't worsen the solution; conclude greedy is optimal by induction [^src4].
@@ -155,3 +181,4 @@ Some problems have no known polynomial algorithm and are suspected to require ex
 [^src4]: [Algorithms, Erickson — Part 10 (Greedy: exchange argument, Huffman)](../../raw/pdf/pdf-algorithms-part-10.md)
 [^src5]: [Algorithms, Erickson — Part 15 (MST: Borůvka, Jarník)](../../raw/pdf/pdf-algorithms-part-15.md)
 [^src3]: [Algorithms, Erickson — Part 21 (Network Flow applications)](../../raw/pdf/pdf-algorithms-part-21.md)
+[^src_shaffer]: [Data Structures and Algorithm Analysis in C++ (Shaffer) — Part 1 (Preface, Ch 1, sorting/external sorting)](../../raw/pdf/pdf-data-structures-and-algorithm-analysis-in-c-part-01.md)

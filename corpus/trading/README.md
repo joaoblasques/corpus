@@ -53,7 +53,7 @@ This domain covers AI-assisted and fully autonomous trading systems: agent archi
 - [TradingView & Pine Script](/trading/tradingview-pine-script.md)
 
 <details>
-<summary>Source summaries (14)</summary>
+<summary>Source summaries (15)</summary>
 
 - ["Bitcoin Bear Flag Confirmed, BUT THERE IS SOMETHING WORSE"](/trading/sources/bitcoin-bear-flag-confirmed-but-there-is-something-worse-SR5gayuF4m0.md)
 - ["Full AI Trading Course 2026: Master Agentic Trading (Beginner to Pro)"](/trading/sources/full-ai-trading-course-2026-master-agentic-trading-beginner--yxouoQw-C_M.md)
@@ -69,6 +69,7 @@ This domain covers AI-assisted and fully autonomous trading systems: agent archi
 - [I Re-Created A Quant Trading Strategy With Claude Code (Insanely Cool)](/trading/sources/i-re-created-a-quant-trading-strategy-with-claude-code-insan-ZVMTeDBmSrI.md)
 - [My Exact $1M Trading Blueprint + Tools Using Claude](/trading/sources/my-exact-1m-trading-blueprint-tools-using-claude-t4GSCXvFb8E.md)
 - [NEW Claude Opus 4.6 AI Good For TradingView Strategies? (Backtesting Engine) (watch ASAP)](/trading/sources/new-claude-opus-4-6-ai-good-for-tradingview-strategies-backt-Zepx8mARre0.md)
+- [Trading - AI Agents on Polymarket Prediction Markets](/trading/sources/trading-ai-agents-on-polymarket-prediction-markets-ae.md)
 
 </details>
 

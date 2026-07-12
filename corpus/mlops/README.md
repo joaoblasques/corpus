@@ -137,12 +137,13 @@ The engineering substrate for building ML and software systems: how the developm
 - [Environment Promotion (dev → acc → prd)](/mlops/environment-promotion.md)
 
 <details>
-<summary>Source summaries (80)</summary>
+<summary>Source summaries (84)</summary>
 
 - ["29%+ warehouse savings: How the dbt Fusion engine drives cost efficiency | dbt Labs"](/mlops/sources/29-warehouse-savings-how-the-dbt-fusion-engine-drives-cost-e-121b247d.md)
 - ["AL 005: 60% Growth in 60 Days? How?!"](/mlops/sources/al-005-60-growth-in-60-days-how-150a587c.md)
 - ["Announcing the Monetization Gateway: charge for any resource behind Cloudflare via x402"](/mlops/sources/announcing-the-monetization-gateway-charge-for-any-resource--88fda6db.md)
 - ["Artifacts: versioned storage that speaks Git"](/mlops/sources/artifacts-versioned-storage-that-speaks-git-882e9a38.md)
+- ["Ask, build, compose: What our 5th Genie Hackathon taught us about Databricks Genie"](/mlops/sources/ask-build-compose-what-our-5th-genie-hackathon-taught-us-abo-733b3260.md)
 - ["Automatic Upgrades: best practice features for your lakehouse tables"](/mlops/sources/automatic-upgrades-best-practice-features-for-your-lakehouse-afb2599c.md)
 - ["Automating Cisco Webex Sprint Meetings with Zenflow: Enterprise Integration Guide"](/mlops/sources/automating-cisco-webex-sprint-meetings-with-zenflow-enterpri-3546511b.md)
 - ["Automating the impossible: migrating 40,000+ objects to dbt in 9 months | dbt Summit"](/mlops/sources/automating-the-impossible-migrating-40-000-objects-to-dbt-in-b213f86c.md)
@@ -172,6 +173,7 @@ The engineering substrate for building ML and software systems: how the developm
 - [AI agent versioned filesystem with E2B and lakeFS](/mlops/sources/ai-agent-versioned-filesystem-with-e2b-and-lakefs-5b56487a.md)
 - [AI Sped Up Coding Faster Than It Sped Up Delivery](/mlops/sources/ai-sped-up-coding-faster-than-it-sped-up-delivery-b8e50c89.md)
 - [Apache Iceberg and the catalog layer (w/ Russell Spitzer)](/mlops/sources/apache-iceberg-and-the-catalog-layer-w-russell-spitzer-b1237b12.md)
+- [Automating cross-repo documentation with GitHub Agentic Workflows](/mlops/sources/automating-cross-repo-documentation-with-github-agentic-work-7eb481ee.md)
 - [Best LinkedIn scrapers for sales and marketing teams](/mlops/sources/best-linkedin-scrapers-for-sales-and-marketing-teams-f3159d29.md)
 - [BI’s Second Unbundling](/mlops/sources/bi-s-second-unbundling-2274b40d.md)
 - [Book a Demo and See lakeFS in Action](/mlops/sources/book-a-demo-and-see-lakefs-in-action-18b22a81.md)
@@ -218,7 +220,9 @@ The engineering substrate for building ML and software systems: how the developm
 - [The Most Passive Online Side Hustle I've Ever Seen](/mlops/sources/the-most-passive-online-side-hustle-i-ve-ever-seen-Wl0NMNbYRDk.md)
 - [This Underrated Tool Replaced 3 Homelab Services (and it's open source!)](/mlops/sources/this-underrated-tool-replaced-3-homelab-services-and-it-s-op-3wJ0IQ3rHjA.md)
 - [This Will Blow Up Your Etsy Store.. (How To Sell Midjourney Art On Etsy)](/mlops/sources/this-will-blow-up-your-etsy-store-how-to-sell-midjourney-art-IokqNEjKKPY.md)
+- [Trading - HMM Regime-Based Strategy with Claude Code](/mlops/sources/trading-hmm-regime-based-strategy-with-claude-code-cde.md)
 - [Turn Famous Songs into Cash with Suno AI Remixes LEGALLY!](/mlops/sources/turn-famous-songs-into-cash-with-suno-ai-remixes-legally-M9EgmsugWXk.md)
+- [Using OpenClaw for Automated Trading](/mlops/sources/using-openclaw-for-automated-trading-ad.md)
 
 </details>
 

@@ -2,6 +2,39 @@
 
 > OKF v0.1 change log. Newest first, grouped by date.
 
+## 2026-07-12
+
+* **Ingest**: Algorithms (Erickson, 2019) — parts 22–24 (NP-hardness chapter conclusion + index) — routed to software-engineering
+  - sources: pdf-algorithms-part-22.md, pdf-algorithms-part-23.md, pdf-algorithms-part-24.md (channel: pdf, 3 files)
+  - domain: software-engineering
+  - new pages: none
+  - pages updated: [/software-engineering/sources/algorithms-erickson.md, /software-engineering/complexity-theory.md]
+  - notes: Completes the Erickson textbook (24/24 parts). Ch 12 content: MaxIndSet↔MaxClique↔VertexCover duality; 3-colorability←3-SAT via truth/variable/clause gadgets; DirectedHamCycle←VertexCover (edge gadgets+vertex chains) and ←3-SAT (variable gadgets as doubly-linked lists); SubsetSum←VertexCover (base-4 encoding); pseudo-polynomial vs. strongly NP-hard; Karp's list of NP-hard problems; international draughts as NP-hard real game; reduction heuristics. Part 24 is the index only.
+
+* **Ingest**: Data Structures and Algorithm Analysis in C++ (Shaffer, Ed. 3.2) — routed to software-engineering
+  - sources: pdf-data-structures-and-algorithm-analysis-in-c-part-01.md through part-31.md (channel: pdf, 31 files)
+  - domain: software-engineering
+  - new pages: [/software-engineering/sources/algorithms-shaffer-c.md]
+  - pages updated: [/software-engineering/data-structures.md, /software-engineering/algorithms.md, /software-engineering/complexity-theory.md, /software-engineering/README.md, /corpus/index.md]
+  - notes: Clifford Shaffer (Virginia Tech), Ed. 3.2 (C++ version), 615 pages, free educational PDF. Key content added: ADT vs. data structure framing (logical vs. physical form); four design principles (costs/benefits, tradeoffs, common practice, data-structures-follow-needs); design patterns (Flyweight, Visitor, Composite, Strategy); sorting lower bound Ω(n log n) via decision tree; Shell sort; binsort/radix sort; replacement selection + multiway merging for external sorting; hashing (open/closed, tombstone deletion); B-tree/B+-tree (disk I/O minimization, range query advantage); union-find with path compression; NP-completeness coping strategies.
+
+* **Ingest**: Data Structures and Algorithm Analysis in Java (Shaffer, Ed. 3.2) — routed to software-engineering
+  - sources: pdf-data-structures-and-algorithm-analysis-in-java-part-01.md through part-16.md (channel: pdf, 16 files)
+  - domain: software-engineering
+  - new pages: [/software-engineering/sources/algorithms-shaffer-java.md]
+  - pages updated: [/software-engineering/data-structures.md, /software-engineering/algorithms.md, /software-engineering/README.md, /corpus/index.md]
+  - notes: Clifford Shaffer (Virginia Tech), Ed. 3.2 (Java version), 601 pages. Same content as C++ edition; Java-specific differences: uses generics, notes Java's weakness for file processing and fine memory control. Cross-linked to C++ edition source page. Corroborates all DSA concept pages already updated by the C++ edition.
+
+* **Collectors**: gmail=0, obsidian=25, book_discover=15, book_fetch=3, pdf=0, books=0, arxiv=0, youtube=0, github_discover=0, github=0, x=0, links_refetch=0
+* **Ingest**: 50 ingested · 0 deferred · status=ok
+* **YoutubeQuick**: 0 intake · 0 rescued · 0 skipped · status=ok
+* **DocsQuick**: 40 intake · 38 thin · 2 llm_fail · status=ok
+* **YoutubeReap**: 0 removed · status=ok
+* **Gardener**: 4 stubs deepened · status=ok
+* **Heal**: 7 citations repointed · 6 unfixable · 7 hubs reindexed · status=ok
+* **GapResolver**: 1 gap dispatched · 3 sources queued · status=ok · gap=file-back: The Portfolio Project That Lands a DE Role
+* **Lint**: 5 broken wikilinks · 6 broken citations · 0 orphans · 973 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+* **OKF**: 0 violations
 ## 2026-07-11
 
 * **Ingest**: Dive into Deep Learning parts 31-48 (D2L continuation, CC BY-SA 4.0) — routed to ai-engineering
