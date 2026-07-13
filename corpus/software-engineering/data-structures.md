@@ -12,6 +12,15 @@ sources:
   - path: raw/_inbox/pdf-data-structures-and-algorithm-analysis-in-java-part-01.md
     channel: pdf
     ingested_at: 2026-07-12
+  - path: raw/_inbox/pdf-purely-functional-data-structures-part-01.md
+    channel: pdf
+    ingested_at: 2026-07-13
+  - path: raw/_inbox/pdf-data-structures-part-01.md
+    channel: pdf
+    ingested_at: 2026-07-13
+  - path: raw/_inbox/pdf-algorithms-and-data-structures-part-01.md
+    channel: pdf
+    ingested_at: 2026-07-13
 aliases:
   - data structures
   - Big O notation
@@ -30,11 +39,18 @@ aliases:
   - union find
   - union-find
   - UNION FIND
+  - 2-3 tree
+  - self-organizing list
+  - move-to-front
+  - Zipf distribution
+  - deque
+  - double-ended queue
+  - implicit data structure
 tags:
   - corpus/software-engineering
   - concept
 created: 2026-05-21
-updated: 2026-07-12
+updated: 2026-07-13
 ---
 
 # Data Structures and Big O Notation
@@ -102,15 +118,76 @@ B+-trees vs. hashing: use hashing for exact-match-only workloads (faster); use B
 
 Maintains a partition of a set into disjoint groups. Operations: `FIND(x)` returns the group representative; `UNION(a, b)` merges two groups. Used in Kruskal's MST algorithm. With **union by weight** + **path compression**, amortized cost per operation approaches O(1) (inverse Ackermann function) [^src2].
 
+## Self-organizing lists and Zipf distribution
+
+Real-world access patterns are rarely uniform. The **Zipf distribution** (80/20 rule) describes natural access: 20% of records account for ~80% of accesses. Self-organizing lists exploit this by moving recently-accessed records toward the front [^src_shaffer_java]:
+
+- **Move-to-front**: accessed record is moved to the head of the list. Excellent for highly skewed distributions; poor for random access.
+- **Transposition**: accessed record swaps with the record immediately before it. Converges more slowly but avoids "promoting" a record that was accessed just once.
+
+Both heuristics are applicable when the distribution is not known in advance and cannot be used to build a perfect hash or sorted index.
+
+## 2-3 trees
+
+A **2-3 tree** is a balanced search tree that always maintains exact balance by allowing internal nodes to hold either 1 or 2 keys (2-nodes or 3-nodes) [^src_shaffer_java]:
+
+- **Search**: similar to BST — compare against node's key(s) to select correct child (left/middle/right).
+- **Insert**: add to leaf; if the leaf becomes a 3-key node, split it and push the middle key up to the parent; repeat up the tree if necessary. Inserting never creates an unbalanced tree — height increases by promoting to a new root.
+- **Guarantee**: all leaf nodes are at the same depth; height is always O(log n).
+
+2-3 trees are a conceptual predecessor to B-trees (generalized to nodes with k keys and k+1 children for disk-based storage).
+
+## 2-3 trees vs B+-trees
+
+| Property | 2-3 tree | B+-tree |
+|---|---|---|
+| Node capacity | 1–2 keys | k–2k keys (disk-block-sized) |
+| Leaf linkage | None | Leaves linked for range scans |
+| Primary use | In-memory balanced search | Disk-based database indexing |
+
+## Closed hashing methods
+
+Three collision resolution strategies for closed (open-addressing) hash tables [^src_shaffer_java]:
+
+- **Linear probing**: probe `h(k)+i` (mod m) for i=1,2,… Primary clustering — consecutive filled slots grow, increasing collision probability.
+- **Quadratic probing**: probe `h(k)+i²` (mod m). Reduces primary clustering but may not visit all slots if m is not prime.
+- **Double hashing**: probe `h(k) + i·h₂(k)` (mod m) with a second hash function. Best distribution; eliminates clustering patterns.
+
+All three degrade above ~70% load factor. **Tombstone markers** are required for deletion: simply erasing a record breaks probe chains. A tombstone occupies the slot and allows insertion but not search termination.
+
+**Perfect hashing**: a hash function tailored to a specific static set of records, guaranteeing zero collisions. Viable only when the full dataset is known before the hash function is selected (e.g., read-only CD-ROM databases) [^src_shaffer_java].
+
+## Deque (double-ended queue)
+
+A **deque** supports efficient insert and remove at both front and back. Key use case: **work-stealing** job scheduling (A-Steal algorithm) — each processor maintains a deque of threads; the processor takes from the front; when its deque is empty, it steals from the *back* of another processor's deque. The front/back asymmetry prevents conflicts between the owner (front) and thieves (back) [^src_wikipedia].
+
+## Implicit data structures
+
+An **implicit data structure** encodes relationships among elements via address formulas rather than explicit pointers. The array is the canonical example: element positions are determined by index arithmetic (row-major layout for 2D: address = base + row*cols + col). The heap is the exemplary implicit structure — parent of node i is at i/2, children are 2i and 2i+1. Without the accessing code, the array reveals no structure; with it, full heap ordering is maintained [^src_nievergelt].
+
+Implicit structures save memory (no pointer fields) and improve cache locality. They require static or predictable shape — use explicit pointer structures (linked lists, trees) when shape is dynamic or irregular.
+
+## Functional and persistent data structures
+
+When old versions of a data structure must remain accessible after updates (persistence), imperative structures are insufficient — mutation destroys old versions. Functional data structures avoid mutation entirely; every update returns a new version sharing structure with the old one. Lazy evaluation with memoization enables amortized O(1)–O(log n) bounds to hold even with persistence (see [Functional and Persistent Data Structures](/software-engineering/functional-persistent-data-structures.md)) [^src_okasaki].
+
 ## See also
 
-- [Algorithms (Strategies, Not Tricks)](/software-engineering/algorithms.md) — recursion, binary search, and DP/memoization that operate over these structures and trade in these complexity classes
-- [Software Design Principles](/software-engineering/software-design-principles.md) — code-level design choices that interact with structure selection (e.g., encapsulation of data structure internals)
+- [Algorithms (Strategies, Not Tricks)](/software-engineering/algorithms.md) — recursion, binary search, and DP/memoization that operate over these structures
+- [Functional and Persistent Data Structures](/software-engineering/functional-persistent-data-structures.md) — immutable, persistence-safe versions
+- [Software Design Principles](/software-engineering/software-design-principles.md) — code-level design choices that interact with structure selection
 - [Software Architecture hub](/software-engineering/README.md)
 - [Data Structures and Algorithm Analysis in C++ (Shaffer)](/software-engineering/sources/algorithms-shaffer-c.md) — full textbook source; ADT philosophy, hashing, B-trees, union-find
-- [Data Structures and Algorithm Analysis in Java (Shaffer)](/software-engineering/sources/algorithms-shaffer-java.md) — Java edition of the same text
+- [Data Structures and Algorithm Analysis in Java (Shaffer)](/software-engineering/sources/algorithms-shaffer-java.md) — Java edition; also covers 2-3 trees, graphs, lower bounds
+- [Purely Functional Data Structures (Okasaki)](/software-engineering/sources/purely-functional-data-structures-okasaki.md) — functional/persistent data structure source
+- [Algorithms and Data Structures (Nievergelt)](/software-engineering/sources/algorithms-nievergelt.md) — open-access textbook; implicit data structures
+- [Data Structures — Wikipedia Compilation](/software-engineering/sources/data-structures-wikipedia.md) — broad reference survey
 
 ---
 
 [^src1]: [Data Structures and Big O Notation Explained](/03_Resources/Study Notes/Data Structures and Big O Notation Explained.md)
 [^src2]: [Data Structures and Algorithm Analysis in C++ (Shaffer) — Part 1](../../raw/pdf/pdf-data-structures-and-algorithm-analysis-in-c-part-01.md)
+[^src_shaffer_java]: [Data Structures and Algorithm Analysis in Java (Shaffer) — Parts 17-30](../../raw/pdf/pdf-data-structures-and-algorithm-analysis-in-java-part-17.md)
+[^src_okasaki]: [Purely Functional Data Structures, Okasaki — Part 1](../../raw/pdf/pdf-purely-functional-data-structures-part-01.md)
+[^src_wikipedia]: [Data Structures (Wikipedia) — Part 3](../../raw/pdf/pdf-data-structures-part-03.md)
+[^src_nievergelt]: [Algorithms and Data Structures (Nievergelt) — Part 10](../../raw/pdf/pdf-algorithms-and-data-structures-part-10.md)

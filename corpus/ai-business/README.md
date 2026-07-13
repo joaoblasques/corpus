@@ -70,7 +70,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [AI and the Job Market](/ai-business/ai-and-the-job-market.md)
 
 <details>
-<summary>Source summaries (157)</summary>
+<summary>Source summaries (161)</summary>
 
 - ["$1,300/Day Automated Bittensor Investing With Claude Code (34 Min Free Masterclass)"](/ai-business/sources/1-300-day-automated-bittensor-investing-with-claude-code-34--SHEs8gNh7sQ.md)
 - ["20-30 Years Old Is The Tutorial Phase, Don't F*ck It Up - Dan Koe"](/ai-business/sources/20-30-years-old-is-the-tutorial-phase-don-t-f-ck-it-up-dan-k-67066ee2.md)
@@ -103,6 +103,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - ["Apple Price Increases, Apple Intelligence and the E.U."](/ai-business/sources/apple-price-increases-apple-intelligence-and-the-e-u-49b55400.md)
 - ["Apple’s iPhone Event, Apple and California, Additional Notes"](/ai-business/sources/apple-s-iphone-event-apple-and-california-additional-notes-9d56606c.md)
 - ["Beyond Acceptance: The Transformational Journey of Applying to Grad School (or Anything Else)"](/ai-business/sources/beyond-acceptance-the-transformational-journey-of-applying-t-3329bd9d.md)
+- ["Beyond Redaction: Anatomy of a Privacy-Safe Data Platform"](/ai-business/sources/beyond-redaction-anatomy-of-a-privacy-safe-data-platform-ec95d625.md)
 - ["Building an Audience Through Technical Writing: Strategies and Mistakes – Hamel’s Blog - Hamel Husain"](/ai-business/sources/building-an-audience-through-technical-writing-strategies-an-78d4028f.md)
 - ["Business critical data teams: Building a demand prediction engine at TIER | dbt Labs"](/ai-business/sources/business-critical-data-teams-building-a-demand-prediction-en-ec5019e5.md)
 - ["ByteDance Volcano Arc: How Seedance Is Solving the IP Problem for AI Video"](/ai-business/sources/bytedance-volcano-arc-how-seedance-is-solving-the-ip-problem-1f9038e6.md)
@@ -128,9 +129,11 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [4 daily AI routines that will change your life](/ai-business/sources/4-daily-ai-routines-that-will-change-your-life-3a393f13.md)
 - [5 Questions to Help You Navigate Uncertainty](/ai-business/sources/5-questions-to-help-you-navigate-uncertainty-d1126310.md)
 - [6 challenges of AI implementation you need to know about](/ai-business/sources/6-challenges-of-ai-implementation-you-need-to-know-about-d84334df.md)
+- [6 months to live for open models](/ai-business/sources/6-months-to-live-for-open-models-ab23329c.md)
 - [7-Day Live Video Challenge](/ai-business/sources/7-day-live-video-challenge-dcbb663f.md)
 - [A Complete Knowledge Base Of HUMAN 3.0 - Dan Koe](/ai-business/sources/a-complete-knowledge-base-of-human-3-0-dan-koe-a4cb9cd1.md)
 - [A Founder’s Guide to Finding a Great Name](/ai-business/sources/a-founder-s-guide-to-finding-a-great-name-71185a7e.md)
+- [A Guide to Lifelong Learning—With AI](/ai-business/sources/a-guide-to-lifelong-learning-with-ai-7cb419ca.md)
 - [A New Kind of Startup Is Coming](/ai-business/sources/a-new-kind-of-startup-is-coming-f6742332.md)
 - [A quote from Josh W. Comeau](/ai-business/sources/a-quote-from-josh-w-comeau-35ed231c.md)
 - [A quote from Tom MacWright](/ai-business/sources/a-quote-from-tom-macwright-634faec0.md)
@@ -154,6 +157,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [AI Strategy Consulting & Fractional CAIO Services - AY Automate](/ai-business/sources/ai-strategy-consulting-fractional-caio-services-ay-automate-7797e4a9.md)
 - [AI Turned Me Into a Content Agency of One](/ai-business/sources/ai-turned-me-into-a-content-agency-of-one-521529bc.md)
 - [AI Worldviews](/ai-business/sources/ai-worldviews-08d76d01.md)
+- [AI Writing Will Feel Real—Eventually](/ai-business/sources/ai-writing-will-feel-real-eventually-6c49679d.md)
 - [AI-Powered Obsidian Smart Note System](/ai-business/sources/ai-powered-obsidian-smart-note-system-e.md)
 - [AirPods Max Sweepstakes — Official Rules | dbt Labs at Databricks Data+AI Summit 2026 | dbt Labs](/ai-business/sources/airpods-max-sweepstakes-official-rules-dbt-labs-at-databrick-f8604542.md)
 - [America's Next 250](/ai-business/sources/america-s-next-250-38b5ab71.md)

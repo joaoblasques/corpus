@@ -6,7 +6,7 @@ tags:
   - corpus/software-engineering
   - hub
 created: 2026-05-07
-updated: 2026-07-12
+updated: 2026-07-13
 ---
 
 # Software Engineering
@@ -34,7 +34,8 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Container Patterns (Single-Node)](/software-engineering/container-patterns.md) — concept · draft · sidecar/ambassador/adapter patterns for containerized distributed systems; reuse philosophy; design principles
 - [Scatter/Gather Pattern](/software-engineering/scatter-gather-pattern.md) — concept · draft · fan-out to all leaf nodes, merge partial results; straggler amplification math; replicated-sharded variant
 - [Software Design Principles](/software-engineering/software-design-principles.md) — concept · draft · 8 code-level principles (SRP, cohesion, loose coupling, DI, open/closed, simplicity) separating maintainable from fragile code
-- [Data Structures and Big O Notation](/software-engineering/data-structures.md) — concept · draft · time complexity classes and trade-off table for 8 core data structures
+- [Data Structures and Big O Notation](/software-engineering/data-structures.md) — concept · draft · time complexity classes and trade-off table for 8 core data structures; hashing (open/closed, tombstones), 2-3 trees, self-organizing lists, implicit data structures, deque
+- [Functional and Persistent Data Structures](/software-engineering/functional-persistent-data-structures.md) — concept · draft · purely functional structures that maintain old versions; lazy evaluation resolves amortization-persistence conflict; binomial heaps, finger trees
 - [Algorithms (Strategies, Not Tricks)](/software-engineering/algorithms.md) — concept · draft · six interview categories: recursion, linear/binary search, sorting, pathfinding (Dijkstra), MST (Prim's), dynamic programming / memoization; strategies-not-tricks framing
 - [CAP Theorem](/software-engineering/cap-theorem.md) — concept · draft · pick CP or AP under network partitions; CAP vs ACID consistency
 - [AI Risk Architecture](/software-engineering/ai-risk-architecture.md) — concept · draft · data/output/action risk; risk is a system property, not a component
@@ -79,7 +80,10 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Algorithms and Complexity (Wilf, 1994)](/software-engineering/sources/algorithms-and-complexity-wilf.md) — source · draft · Herbert Wilf; 139p; recursion/FFT, network flow (Ford-Fulkerson), number theory, NP-completeness; free educational use
 - [Algorithms (Erickson, 2019)](/software-engineering/sources/algorithms-erickson.md) — source · draft �� Jeff Erickson (UIUC); 472p; recursion → divide-and-conquer → DP → greedy → graph algorithms → MST → shortest paths → network flow → NP-hardness; CC BY 4.0
 - [Data Structures and Algorithm Analysis in C++ (Shaffer, Ed. 3.2)](/software-engineering/sources/algorithms-shaffer-c.md) — source · draft · Clifford Shaffer (Virginia Tech); 615p; ADT philosophy, data structures, sorting, hashing, B-trees, graphs, NP-completeness; free PDF
-- [Data Structures and Algorithm Analysis in Java (Shaffer, Ed. 3.2)](/software-engineering/sources/algorithms-shaffer-java.md) — source · draft · Java edition of Shaffer's DSA textbook; same content as C++ edition; 601p; free PDF
+- [Data Structures and Algorithm Analysis in Java (Shaffer, Ed. 3.2)](/software-engineering/sources/algorithms-shaffer-java.md) — source · draft · Java edition of Shaffer's DSA textbook; same content as C++ edition; 601p; free PDF; parts 17-30 cover searching/hashing, indexing/2-3 trees, graphs, MST, lower bounds, limits of computation
+- [Purely Functional Data Structures (Okasaki, CMU 1996)](/software-engineering/sources/purely-functional-data-structures-okasaki.md) — source · draft · CMU PhD thesis; functional/persistent data structures; lazy evaluation resolves amortization-persistence conflict; binomial heaps, finger trees, numerical representations
+- [Algorithms and Data Structures (Nievergelt & Hinrichs, Global Text)](/software-engineering/sources/algorithms-nievergelt.md) — source · draft · open-access CC BY 3.0 textbook; implicit data structures; algorithm animation emphasis; EBNF/syntax diagrams
+- [Data Structures — Wikipedia Compilation (2010)](/software-engineering/sources/data-structures-wikipedia.md) — source · draft · 503-page Wikipedia-sourced reference survey; deque/A-Steal work-stealing; bit fields and type safety
 
 ## Sources ingested
 - [Disasters I've Seen in a Microservices World](/03_Resources/Articles/Disasters in a Microservices World.md) — article note, João Alves / Hey World, 2025-10-30
@@ -92,7 +96,7 @@ Domain covering software engineering practice from foundational CS through deplo
 
 ## Pages in this domain
 
-### Concepts (28)
+### Concepts (29)
 - [AI Risk Architecture](/software-engineering/ai-risk-architecture.md)
 - [Algorithms (Strategies, Not Tricks)](/software-engineering/algorithms.md)
 - [CAP Theorem](/software-engineering/cap-theorem.md)
@@ -108,6 +112,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Distributed Systems Fallacies](/software-engineering/distributed-systems-fallacies.md)
 - [Engineering Craft](/software-engineering/engineering-craft.md)
 - [File Systems](/software-engineering/file-systems.md)
+- [Functional and Persistent Data Structures](/software-engineering/functional-persistent-data-structures.md)
 - [Go Programming Language](/software-engineering/go-programming-language.md)
 - [JavaScript Fundamentals](/software-engineering/javascript-fundamentals.md)
 - [Local-First Sync Architecture](/software-engineering/local-first-sync-architecture.md)
@@ -138,22 +143,27 @@ Domain covering software engineering practice from foundational CS through deplo
 - [AI-Assisted Development](/software-engineering/ai-assisted-development.md)
 
 <details>
-<summary>Source summaries (52)</summary>
+<summary>Source summaries (60)</summary>
 
+- ["2024-05-25-15-54-25 - move-base-up by josephmachado · Pull Request #17 · josephmachado/simple_dbt_project"](/software-engineering/sources/2024-05-25-15-54-25-move-base-up-by-josephmachado-pull-reque-ee.md)
 - ["Guitar - 3 Easy Jazz Standards (Stormy Monday, Blue Bossa, Blue in Green)"](/software-engineering/sources/guitar-3-easy-jazz-standards-stormy-monday-blue-bossa-blue-i-doc.md)
 - [30 Vim commands you NEED TO KNOW (in just 10 minutes)](/software-engineering/sources/30-vim-commands-you-need-to-know-in-just-10-minutes-RSlrxE21l_k.md)
+- [5 Simple Habits for Writing Clean Code](/software-engineering/sources/5-simple-habits-for-writing-clean-code-cde.md)
 - [6 security settings every GitHub maintainer should enable this week](/software-engineering/sources/6-security-settings-every-github-maintainer-should-enable-th-ab782b95.md)
 - [6 Software Engineering Challenges & Ways To Overcome Them](/software-engineering/sources/6-software-engineering-challenges-ways-to-overcome-them-7af11149.md)
 - [Algorithms (Erickson, 2019)](/software-engineering/sources/algorithms-erickson.md)
 - [Algorithms and Complexity (Wilf, 1994)](/software-engineering/sources/algorithms-and-complexity-wilf.md)
+- [Algorithms and Data Structures (Nievergelt & Hinrichs, Global Text Project)](/software-engineering/sources/algorithms-nievergelt.md)
 - [All Python Syntax in 25 Minutes – Tutorial](/software-engineering/sources/all-python-syntax-in-25-minutes-tutorial-PNSIWjWAA7o.md)
 - [Announcing Guides](/software-engineering/sources/announcing-guides-3eabcba3.md)
 - [Bass - 10 Basslines That Teach Scales](/software-engineering/sources/bass-10-basslines-that-teach-scales-cae.md)
 - [Career - 5 Boring Certifications for Tech Career Growth](/software-engineering/sources/career-5-boring-certifications-for-tech-career-growth-doc.md)
 - [Claude Code - Session Timing Strategy to Double Productivity](/software-engineering/sources/claude-code-session-timing-strategy-to-double-productivity-dc.md)
+- [Code Review Best Practices](/software-engineering/sources/code-review-best-practices-acce.md)
 - [Coming Soon - Kai Waehner](/software-engineering/sources/coming-soon-kai-waehner-3fd775a7.md)
 - [Data Structures and Algorithm Analysis in C++ (Shaffer, Ed. 3.2)](/software-engineering/sources/algorithms-shaffer-c.md)
 - [Data Structures and Algorithm Analysis in Java (Shaffer, Ed. 3.2)](/software-engineering/sources/algorithms-shaffer-java.md)
+- [Data Structures — Wikipedia Reference Compilation (2010)](/software-engineering/sources/data-structures-wikipedia.md)
 - [Designing Distributed Systems (Brendan Burns, O'Reilly, 2018)](/software-engineering/sources/burns-designing-distributed-systems.md)
 - [Dev - 9-Step Coding Project Planning Process](/software-engineering/sources/dev-9-step-coding-project-planning-process-ce.md)
 - [Dev - Vibe Coding 3-Stage Planning Method](/software-engineering/sources/dev-vibe-coding-3-stage-planning-method-ed.md)
@@ -182,9 +192,12 @@ Domain covering software engineering practice from foundational CS through deplo
 - [How I Play Guitar (In This Economy) — Budget Digital Rig Guide](/software-engineering/sources/how-i-play-guitar-in-this-economy-budget-digital-rig-guide-de.md)
 - [How I would learn music production (If I had to start over in 2026)](/software-engineering/sources/how-i-would-learn-music-production-if-i-had-to-start-over-in-3RjQ1WjAl7Q.md)
 - [How to NOT Fail a System Design Interview (By a Data Engineer)](/software-engineering/sources/how-to-not-fail-a-system-design-interview-by-a-data-engineer-WQBc2mY9Jng.md)
+- [macOS - Aerospace Tiling Window Manager with Leader Key](/software-engineering/sources/macos-aerospace-tiling-window-manager-with-leader-key-e.md)
+- [macOS - Simple Window Management with Raycast](/software-engineering/sources/macos-simple-window-management-with-raycast-aca.md)
 - [Matt Pocock’s Agentic Engineering Workflow (just copy him)](/software-engineering/sources/matt-pocock-s-agentic-engineering-workflow-just-copy-him-nQwJVHCtDDY.md)
 - [Obsidian Markdown Made Ridiculously Simple](/software-engineering/sources/obsidian-markdown-made-ridiculously-simple-e.md)
 - [ostep operating systems three easy pieces](/software-engineering/sources/ostep-operating-systems-three-easy-pieces.md)
+- [Purely Functional Data Structures (Okasaki, CMU 1996)](/software-engineering/sources/purely-functional-data-structures-okasaki.md)
 - [Python - Complete Beginner Course 5 Hours TechWorld with Nana](/software-engineering/sources/python-complete-beginner-course-5-hours-techworld-with-nana-aa.md)
 - [Software Engineering in the Age of AI](/software-engineering/sources/software-engineering-in-the-age-of-ai-a.md)
 - [Source: Go Programming — Full Course (Tech With Tim)](/software-engineering/sources/go-full-course-tech-with-tim.md)

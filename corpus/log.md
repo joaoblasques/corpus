@@ -2,6 +2,46 @@
 
 > OKF v0.1 change log. Newest first, grouped by date.
 
+## 2026-07-13
+
+* **Ingest**: Data Structures and Algorithm Analysis in Java (Shaffer, Ed. 3.2) — parts 17–30 — routed to software-engineering
+  - sources: pdf-data-structures-and-algorithm-analysis-in-java-part-17.md through part-30.md (channel: pdf, 14 files)
+  - domain: software-engineering
+  - new pages: none
+  - pages updated: [/software-engineering/sources/algorithms-shaffer-java.md, /software-engineering/data-structures.md]
+  - notes: Extends the previously-ingested parts 1-16 (Java edition of Shaffer DSA). Parts 17-30 cover: Ch 8 (disk I/O: platters/tracks/sectors, seek time, buffer pools with FIFO/LFU/LRU, batch vs interactive queries), Ch 9 (self-organizing lists: move-to-front/transposition heuristics, Zipf distribution; hashing: mid-square/folding/Horner methods, collision resolution: linear probe/quadratic probe/double hashing/separate chaining, perfect hashing, tombstone deletion, ~70% load threshold), Ch 10 (2-3 trees: always balanced, 1-2 keys per node, insert splits upward; ISAM; B+-tree leaf linkage), Ch 11 (graph representations: adjacency matrix/list; topological sort via DFS; Dijkstra's shortest paths; Prim's and Kruskal's MST with exchange-argument proofs), Ch 14 (amortization; space/time tradeoffs), Ch 15 (Ω(n log n) sorting lower bound via decision tree; median-of-medians O(n) worst-case selection), Ch 17 (countability diagonalization → unsolvable problems exist; Halting Problem).
+
+* **Ingest**: Purely Functional Data Structures (Okasaki, CMU PhD thesis, 1996) — all 9 parts — routed to software-engineering
+  - sources: pdf-purely-functional-data-structures-part-01.md through part-09.md (channel: pdf, 9 files)
+  - domain: software-engineering
+  - new pages: [/software-engineering/sources/purely-functional-data-structures-okasaki.md, /software-engineering/functional-persistent-data-structures.md]
+  - pages updated: [/software-engineering/data-structures.md, /software-engineering/README.md]
+  - notes: Chris Okasaki's CMU PhD thesis (162p, 1996). Core thesis: lazy evaluation with memoization (call-by-need) reconciles amortization and persistence. Traditional amortization (banker's/physicist's method) assumes unique future per operation; persistence creates multiple logical futures that would each try to spend the same savings — causing failure. Lazy evaluation suspends expensive computations; first caller pays the cost and memoizes; subsequent callers get the result for free regardless of how many futures exist. Key structures: functional queues (two-list F/R representation with lazy reversal), binomial heaps, leftist heaps, binary random-access lists (size encoded in binary; 1-bit → complete binary tree), finger trees (O(1) amortized front/back, O(log n) split/concat), numerical representations framework (positions = tree ranks, carry = linking two same-rank trees), bootstrapping.
+
+* **Ingest**: Algorithms and Data Structures (Nievergelt & Hinrichs, Global Text Project) — all 15 parts — routed to software-engineering
+  - sources: pdf-algorithms-and-data-structures-part-01.md through part-15.md (channel: pdf, 15 files)
+  - domain: software-engineering
+  - new pages: [/software-engineering/sources/algorithms-nievergelt.md]
+  - pages updated: [/software-engineering/data-structures.md]
+  - notes: Open-access CC BY 3.0 textbook (371p). Part 1 has corrupted character encoding; parts 2-15 readable. Emphasis on algorithm animation/visualization and implicit data structures. Key content: implicit vs explicit data structures (arrays encode structure in formulas, not pointers — saves memory and improves cache locality; heap is the exemplary implicit structure); array storage (row-major C vs column-major Fortran); EBNF syntax diagrams for context-free grammars; recurrence relations for algorithm analysis; floating-point precision sensitivity.
+
+* **Ingest**: Data Structures — Wikipedia Compilation (2010) — all 12 parts — routed to software-engineering
+  - sources: pdf-data-structures-part-01.md through part-12.md (channel: pdf, 12 files)
+  - domain: software-engineering
+  - new pages: [/software-engineering/sources/data-structures-wikipedia.md]
+  - pages updated: [/software-engineering/data-structures.md]
+  - notes: Wikipedia-generated PDF (503p, May 2010). Broad reference survey covering introduction through advanced structures. Key additive content: deque/A-Steal work-stealing algorithm (processor takes from own deque front; steals from another's back); bit field type safety (OR combinations violate enum type bounds; elements of (Z/2Z)^n with partial order; safe via EnumSet/bit array with enumerated indices); thread safety issue for flag+counter in same word (need single mutex).
+
+* **Collectors**: gmail=2, obsidian=25, book_discover=15, book_fetch=0, pdf=4, books=0, arxiv=24, youtube=0, github_discover=0, github=0, x=0, links_refetch=0
+* **Ingest**: 50 ingested · 0 deferred · status=ok
+* **YoutubeQuick**: 0 intake · 0 rescued · 0 skipped · status=ok
+* **DocsQuick**: 36 intake · 42 thin · 2 llm_fail · status=ok
+* **YoutubeReap**: 0 removed · status=ok
+* **Gardener**: 4 stubs deepened · status=ok
+* **Heal**: 1 citations repointed · 6 unfixable · 4 hubs reindexed · status=ok
+* **GapResolver**: 1 gap dispatched · 3 sources queued · status=ok · gap=how to optimize my Claude setup for efficiency & productivit
+* **Lint**: 5 broken wikilinks · 6 broken citations · 0 orphans · 1006 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+* **OKF**: 0 violations
 ## 2026-07-12
 
 * **Ingest**: Algorithms (Erickson, 2019) — parts 22–24 (NP-hardness chapter conclusion + index) — routed to software-engineering
