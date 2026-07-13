@@ -74,3 +74,48 @@ def queue_reject(cluster: dict, verdict: dict, review_path: Path) -> None:
             f"{verdict.get('reason', '')}\n")
     with review_path.open("a", encoding="utf-8") as f:
         f.write(line)
+
+
+_CONSOLIDATED_RE = re.compile(r"^consolidated_into:\s*\S+\s*\n", re.M)
+
+
+def synthesize(cluster: dict, triage: dict, corpus: Path, *, _run=None) -> Path | None:
+    slug = triage.get("slug") or co._norm(cluster["topic"])
+    prompt = cp.synthesis_prompt(cluster["topic"], cluster["domain"], slug, cluster["members"])
+    _headless(prompt, CONSOLIDATE_MODEL, ["Read", "Write", "Edit"], _run=_run)
+    out = corpus / cluster["domain"] / f"{slug}.md"
+    return out if out.exists() else None
+
+
+def stamp_members(cluster: dict, synthesis_rel: str, corpus: Path) -> int:
+    n = 0
+    for rel in cluster["members"]:
+        p = corpus / rel
+        if not p.exists():
+            continue
+        text = p.read_text(encoding="utf-8", errors="ignore")
+        if "consolidated_into:" in text:
+            n += 1
+            continue
+        # insert the flag just before the closing '---' of the frontmatter
+        if text.startswith("---"):
+            end = text.find("\n---", 3)
+            if end != -1:
+                text = text[:end] + f"\nconsolidated_into: {synthesis_rel}" + text[end:]
+                p.write_text(text, encoding="utf-8")
+                n += 1
+    return n
+
+
+def unstamp_members(cluster: dict, corpus: Path) -> int:
+    n = 0
+    for rel in cluster["members"]:
+        p = corpus / rel
+        if not p.exists():
+            continue
+        text = p.read_text(encoding="utf-8", errors="ignore")
+        new = _CONSOLIDATED_RE.sub("", text)
+        if new != text:
+            p.write_text(new, encoding="utf-8")
+            n += 1
+    return n

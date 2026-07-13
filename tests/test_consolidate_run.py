@@ -32,3 +32,45 @@ def test_queue_reject_appends_line(tmp_path):
                     {"mode": "reject", "reason": "incoherent"}, review)
     txt = review.read_text()
     assert "grab bag" in txt and "reject" in txt and "incoherent" in txt
+
+
+def _write_member(corpus: Path, rel: str):
+    p = corpus / rel
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text("---\ntype: source\ndomain: ai-engineering\nstatus: stub\n---\n# M\nbody\n",
+                 encoding="utf-8")
+    return p
+
+def test_synthesize_returns_path_when_writer_creates_file(tmp_path):
+    corpus = tmp_path / "corpus"
+    cluster = {"topic": "rag", "domain": "ai-engineering",
+               "members": ["ai-engineering/sources/s1.md"]}
+    triage = {"mode": "new-synthesis", "title": "RAG", "slug": "rag-patterns"}
+
+    def fake_run(cmd, **kw):
+        # simulate the writer creating the synthesis page
+        out = corpus / "ai-engineering" / "rag-patterns.md"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text("---\ntype: synthesis\n---\n# RAG\n", encoding="utf-8")
+        p = type("P", (), {})(); p.stdout = json.dumps({"result": "done"}); p.returncode = 0
+        return p
+
+    path = cr.synthesize(cluster, triage, corpus, _run=fake_run)
+    assert path is not None and path.name == "rag-patterns.md" and path.exists()
+
+def test_stamp_and_unstamp_members(tmp_path):
+    corpus = tmp_path / "corpus"
+    _write_member(corpus, "ai-engineering/sources/s1.md")
+    cluster = {"topic": "rag", "domain": "ai-engineering",
+               "members": ["ai-engineering/sources/s1.md"]}
+    n = cr.stamp_members(cluster, "ai-engineering/rag-patterns.md", corpus)
+    assert n == 1
+    txt = (corpus / "ai-engineering/sources/s1.md").read_text()
+    assert "consolidated_into: ai-engineering/rag-patterns.md" in txt
+    # idempotent: stamping again does not duplicate
+    assert cr.stamp_members(cluster, "ai-engineering/rag-patterns.md", corpus) == 1
+    assert txt.count("consolidated_into:") == 1 or \
+        (corpus / "ai-engineering/sources/s1.md").read_text().count("consolidated_into:") == 1
+    # unstamp removes it
+    assert cr.unstamp_members(cluster, corpus) == 1
+    assert "consolidated_into:" not in (corpus / "ai-engineering/sources/s1.md").read_text()
