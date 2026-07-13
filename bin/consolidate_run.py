@@ -119,3 +119,40 @@ def unstamp_members(cluster: dict, corpus: Path) -> int:
             p.write_text(new, encoding="utf-8")
             n += 1
     return n
+
+
+def _member_sources_text(cluster: dict, corpus: Path) -> str:
+    parts = []
+    for rel in cluster["members"]:
+        p = corpus / rel
+        if p.exists():
+            parts.append(f"=== {rel} ===\n{p.read_text(encoding='utf-8', errors='ignore')}")
+    return "\n\n".join(parts)
+
+
+def process_cluster(cluster: dict, triage: dict, corpus: Path, review_path: Path,
+                    *, _run=None, _critic=None) -> dict:
+    mode = triage.get("mode")
+    if mode != "new-synthesis":
+        queue_reject(cluster, triage, review_path)
+        return {"status": "queued", "mode": mode}
+
+    page = synthesize(cluster, triage, corpus, _run=_run)
+    if page is None:
+        queue_reject(cluster, {**triage, "mode": "reject", "reason": "writer produced no page"},
+                     review_path)
+        return {"status": "reverted", "reason": "no page written"}
+
+    synthesis_rel = str(page.relative_to(corpus))
+    critic = _critic if _critic is not None else \
+        (lambda pg, src: gd._critic_call(Path(pg), src))
+    ok, issues = critic(str(page), _member_sources_text(cluster, corpus))
+    if not ok:
+        page.unlink(missing_ok=True)                       # revert the new page (only new file)
+        unstamp_members(cluster, corpus)
+        queue_reject(cluster, {**triage, "mode": "reject",
+                               "reason": "critic: " + "; ".join(issues)[:160]}, review_path)
+        return {"status": "reverted", "issues": issues}
+
+    stamped = stamp_members(cluster, synthesis_rel, corpus)
+    return {"status": "synthesized", "page": synthesis_rel, "members_stamped": stamped}

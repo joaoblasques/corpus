@@ -74,3 +74,53 @@ def test_stamp_and_unstamp_members(tmp_path):
     # unstamp removes it
     assert cr.unstamp_members(cluster, corpus) == 1
     assert "consolidated_into:" not in (corpus / "ai-engineering/sources/s1.md").read_text()
+
+def test_process_cluster_commits_on_critic_pass(tmp_path):
+    corpus = tmp_path / "corpus"
+    _write_member(corpus, "ai-engineering/sources/s1.md")
+    cluster = {"topic": "rag", "domain": "ai-engineering", "size": 5,
+               "members": ["ai-engineering/sources/s1.md"]}
+    triage = {"mode": "new-synthesis", "title": "RAG", "slug": "rag-patterns"}
+
+    def fake_writer(cmd, **kw):
+        (corpus / "ai-engineering" / "rag-patterns.md").write_text(
+            "---\ntype: synthesis\n---\n# RAG\ncited[^1]\n", encoding="utf-8")
+        p = type("P", (), {})(); p.stdout = json.dumps({"result": "ok"}); p.returncode = 0
+        return p
+
+    res = cr.process_cluster(cluster, triage, corpus, tmp_path / "rev.md",
+                             _run=fake_writer, _critic=lambda page, src: (True, []))
+    assert res["status"] == "synthesized"
+    assert (corpus / "ai-engineering" / "rag-patterns.md").exists()
+    assert "consolidated_into:" in (corpus / "ai-engineering/sources/s1.md").read_text()
+
+def test_process_cluster_reverts_on_critic_fail(tmp_path):
+    corpus = tmp_path / "corpus"
+    _write_member(corpus, "ai-engineering/sources/s1.md")
+    cluster = {"topic": "rag", "domain": "ai-engineering", "size": 5,
+               "members": ["ai-engineering/sources/s1.md"]}
+    triage = {"mode": "new-synthesis", "title": "RAG", "slug": "rag-patterns"}
+
+    def fake_writer(cmd, **kw):
+        (corpus / "ai-engineering" / "rag-patterns.md").write_text(
+            "---\ntype: synthesis\n---\n# RAG\nfabricated claim\n", encoding="utf-8")
+        p = type("P", (), {})(); p.stdout = json.dumps({"result": "ok"}); p.returncode = 0
+        return p
+
+    review = tmp_path / "rev.md"
+    res = cr.process_cluster(cluster, triage, corpus, review,
+                             _run=fake_writer, _critic=lambda page, src: (False, ["fabricated"]))
+    assert res["status"] == "reverted"
+    assert not (corpus / "ai-engineering" / "rag-patterns.md").exists()   # page removed
+    assert "consolidated_into:" not in (corpus / "ai-engineering/sources/s1.md").read_text()
+    assert "reject" in review.read_text() or "rag" in review.read_text()
+
+def test_process_cluster_queues_deepen_and_reject(tmp_path):
+    corpus = tmp_path / "corpus"
+    review = tmp_path / "rev.md"
+    for mode in ("deepen-existing", "reject"):
+        res = cr.process_cluster(
+            {"topic": "t", "domain": "ai-engineering", "size": 6, "members": []},
+            {"mode": mode, "title": "", "slug": "", "reason": "r"}, corpus, review, _run=None)
+        assert res["status"] == "queued" and res["mode"] == mode
+    assert review.read_text().count("\n") >= 2
