@@ -147,3 +147,23 @@ def test_process_cluster_queues_deepen_and_reject(tmp_path):
             {"mode": mode, "title": "", "slug": "", "reason": "r"}, corpus, review, _run=None)
         assert res["status"] == "queued" and res["mode"] == mode
     assert review.read_text().count("\n") >= 2
+
+
+def test_run_consolidation_dry_run_lists_without_writing(tmp_path, monkeypatch):
+    corpus = tmp_path / "corpus"
+    d = corpus / "ai-engineering" / "sources"; d.mkdir(parents=True)
+    for i in range(5):
+        (d / f"s{i}.md").write_text(
+            "---\ntype: source\ndomain: ai-engineering\ntags:\n  - source\n  - RAG\n---\n# t\nx\n",
+            encoding="utf-8")
+    res = cr.run_consolidation(corpus, "ai-engineering", 3, dry_run=True)
+    assert res["status"] == "ok" and res["clusters_seen"] >= 1
+    assert res["synthesized"] == 0                          # dry-run writes nothing
+    # no synthesis page created
+    assert not list((corpus / "ai-engineering").glob("rag*.md"))
+
+def test_main_skips_when_not_on_main(monkeypatch, capsys):
+    monkeypatch.setattr(cr.sr, "_on_main", lambda *a, **k: False)
+    rc = cr.main(["run"])
+    assert rc == 0
+    assert json.loads(capsys.readouterr().out)["reason"] == "not_on_main"

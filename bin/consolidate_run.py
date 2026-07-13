@@ -159,3 +159,52 @@ def process_cluster(cluster: dict, triage: dict, corpus: Path, review_path: Path
 
     stamped = stamp_members(cluster, synthesis_rel, corpus)
     return {"status": "synthesized", "page": synthesis_rel, "members_stamped": stamped}
+
+
+def run_consolidation(corpus: Path, domain: str, max_clusters: int, *, dry_run: bool = False,
+                      _run=None, _critic=None, review_path: Path | None = None) -> dict:
+    review = review_path if review_path is not None else REVIEW
+    clusters = co.build_clusters(corpus, domain)
+    ranked = co.rank_clusters(clusters, co.existing_topic_keys(corpus, domain))
+    t = {"status": "ok", "synthesized": 0, "reverted": 0, "queued": 0,
+         "clusters_seen": len(ranked)}
+    for cluster in ranked[:max_clusters]:
+        if dry_run:
+            continue
+        triage = triage_cluster(cluster, _run=_run)
+        res = process_cluster(cluster, triage, corpus, review, _run=_run, _critic=_critic)
+        if res["status"] == "synthesized":
+            t["synthesized"] += 1
+        elif res["status"] == "reverted":
+            t["reverted"] += 1
+        else:
+            t["queued"] += 1
+    return t
+
+
+def main(argv=None) -> int:
+    ap = argparse.ArgumentParser(description="Consolidate source clusters into synthesis pages.")
+    sub = ap.add_subparsers(dest="cmd", required=True)
+    pr = sub.add_parser("run")
+    pr.add_argument("--domain", default="ai-engineering")
+    pr.add_argument("--max-clusters", type=int, default=3)
+    pr.add_argument("--dry-run", action="store_true")
+    pr.add_argument("--lock-path", default=LOCK, type=Path)
+    args = ap.parse_args(argv)
+
+    if not sr._on_main():
+        print(json.dumps({"status": "skipped", "reason": "not_on_main"})); return 0
+    if args.dry_run:
+        print(json.dumps(run_consolidation(CORPUS, args.domain, args.max_clusters, dry_run=True)))
+        return 0
+    if not sr.acquire_lock(args.lock_path):
+        print(json.dumps({"status": "skipped", "reason": "lock_held"})); return 0
+    try:
+        print(json.dumps(run_consolidation(CORPUS, args.domain, args.max_clusters)))
+        return 0
+    finally:
+        sr.release_lock(args.lock_path)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
