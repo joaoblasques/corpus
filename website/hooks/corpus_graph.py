@@ -2,7 +2,9 @@
 
 At every build, walks `corpus/<domain>/<page>.md`, emits one node per page (grouped by
 domain) plus one hub node per domain, and edges for (a) each page → its domain hub and
-(b) each `[[domain/slug]]` wikilink between pages. Writes `docs/assets/graph-data.json`,
+(b) each root-relative markdown link `](/domain/slug.md)` between pages (OKF §6/§11 — the
+corpus migrated off `[[wikilinks]]` to OKF markdown links, so this is the real link syntax;
+legacy `[[domain/slug]]` is still matched for safety). Writes `docs/assets/graph-data.json`,
 which the Home page renders with vis-network. Emits ONLY page titles + link structure —
 never page content — so the public graph leaks no knowledge text.
 """
@@ -10,6 +12,10 @@ import json
 import re
 from pathlib import Path
 
+# `](/domain/slug.md)` — OKF root-relative markdown link between two top-level domain pages.
+# The two-segment shape naturally excludes `](/domain/sources/slug.md)` (source pages aren't
+# graph nodes). Legacy `[[domain/slug]]` is still matched so a pre-migration page won't drop out.
+MDLINK = re.compile(r"\]\(/([a-z0-9][a-z0-9-]*/[a-z0-9][a-z0-9-]*)\.md\)")
 WIKILINK = re.compile(r"\[\[([a-z0-9][a-z0-9-]*/[a-z0-9][a-z0-9-]*)")
 H1 = re.compile(r"^#\s+(.+?)\s*$", re.M)
 
@@ -62,7 +68,7 @@ def build_graph(corpus_dir) -> dict:
             continue
         add(node_id, domain)  # spoke to its hub
         text = md.read_text(encoding="utf-8", errors="ignore")
-        for tgt in set(WIKILINK.findall(text)):
+        for tgt in set(MDLINK.findall(text)) | set(WIKILINK.findall(text)):
             if tgt in nodes:
                 add(node_id, tgt)
 
