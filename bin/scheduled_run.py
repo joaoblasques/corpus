@@ -787,7 +787,9 @@ def run_corpus_heal(*, _subprocess_run=None) -> dict:
     """Deterministic self-healing (no LLM), run after ingest and before the integrity lint so the
     lint reports the healed state and repairs land in the same nightly commit:
       • citations — repoint broken source citations to raw files moved during ingest;
-      • hubs      — regenerate each domain README's auto-index so new pages aren't orphans.
+      • hubs      — regenerate each domain README's auto-index so new pages aren't orphans;
+      • related   — add a reversible 'Related across domains' block linking genuinely-related
+                    knowledge pages across domains (deterministic ≥2-signal / shared-alias match).
     Each sub-step is isolated; failure recorded, never raised."""
     _run = _subprocess_run if _subprocess_run is not None else subprocess.run
 
@@ -806,10 +808,12 @@ def run_corpus_heal(*, _subprocess_run=None) -> dict:
 
     cit = _sub("citations")
     hubs = _sub("hubs")
-    status = "ok" if cit.get("status") == "ok" and hubs.get("status") == "ok" else "failed"
+    related = _sub("related")
+    status = "ok" if all(s.get("status") == "ok" for s in (cit, hubs, related)) else "failed"
     return {"status": status, "repaired": cit.get("repaired", 0),
             "missing": cit.get("missing", 0), "hubs_changed": hubs.get("domains_changed", 0),
-            "error": cit.get("error") or hubs.get("error")}
+            "related_pairs": related.get("pairs", 0), "related_links": related.get("links", 0),
+            "error": cit.get("error") or hubs.get("error") or related.get("error")}
 
 
 def run_gardener(*, max_stubs: int = 4, timeout_s: int = 2400, _subprocess_run=None) -> dict:
@@ -1289,7 +1293,8 @@ def write_run_report(
     hl = tallies.get("heal")
     if hl:
         hl_str = (f"{hl.get('repaired', 0)} citations repointed · {hl.get('missing', 0)} unfixable"
-                  f" · {hl.get('hubs_changed', 0)} hubs reindexed · status={hl.get('status', 'unknown')}")
+                  f" · {hl.get('hubs_changed', 0)} hubs reindexed · {hl.get('related_pairs', 0)} "
+                  f"cross-domain links · status={hl.get('status', 'unknown')}")
         if hl.get("error"):
             hl_str += f" · error={hl['error']}"
         bullets.append(f"* **Heal**: {hl_str}")
