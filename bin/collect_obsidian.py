@@ -38,7 +38,7 @@ EXCLUDE_DIRS = [
 ]
 # 'Books to review.md' is the corpus's own operational review queue placed in the vault so
 # the user can tick it from their phone — it must NOT be collected/scraped/ingested as a source.
-EXCLUDE_FILE_RE = re.compile(r"(?i)(_processed\.md$|(^|/)README\.md$|(^|/)Books to review\.md$)")
+EXCLUDE_FILE_RE = re.compile(r"(?i)(_processed\.md$|(^|/)README\.md$|(^|/)Books to review\.md$|(^|/)Blogs to review\.md$)")
 URL_LIST_NAMES = {"articles to process.md", "blogs to scrape.md"}
 # Per-list default scrape mode for UNTAGGED lines (an explicit [blog]/[series]
 # tag on a line still overrides). "blogs to scrape" treats every line as a blog

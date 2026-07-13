@@ -1,0 +1,14 @@
+# blog_discover.py — propose blogs the corpus cites but doesn't scrape, for phone review.
+min_cited: 3          # a domain must be cited this many times to be proposed
+max_new_per_run: 15   # cap per run so the review queue doesn't flood
+# extra aggregator/doc hosts to never propose (added to the built-in DEFAULT_IGNORE)
+ignore_hosts:
+  - tldr.tech
+  - a.tldrnewsletter.com
+  - newsletter.towardsdatascience.com
+  - platform.claude.com
+  - code.claude.com
+  - support.claude.com
+  - docs.databricks.com
+  - cloud.google.com
+  - developers.openai.com

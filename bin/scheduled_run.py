@@ -204,6 +204,24 @@ def run_collectors(
     except Exception as exc:  # noqa: BLE001
         results["gmail"] = {"status": "failed", "collected": 0, "error": str(exc)}
 
+    # --- Blog promote (approved review blogs → scrape list) — BEFORE Obsidian so a blog the
+    # user just ticked in 'Blogs to review.md' is added to 'blogs to scrape.md' and scraped
+    # THIS run by the Obsidian collector below. ---
+    try:
+        proc = _run([sys.executable, str(BIN / "blog_discover.py"), "promote"],
+                    capture_output=True, text=True, timeout=COLLECTOR_TIMEOUT)
+        if proc.returncode != 0:
+            results["blog_promote"] = {"status": "failed", "collected": 0,
+                                       "error": (proc.stderr or "").strip()[:200]}
+        else:
+            try:
+                collected = json.loads(proc.stdout).get("promoted", 0)
+            except (json.JSONDecodeError, AttributeError):
+                collected = 0
+            results["blog_promote"] = {"status": "ok", "collected": collected}
+    except Exception as exc:  # noqa: BLE001
+        results["blog_promote"] = {"status": "failed", "collected": 0, "error": str(exc)}
+
     # --- Obsidian ---
     try:
         proc = _run(
@@ -250,6 +268,22 @@ def run_collectors(
             results["book_discover"] = {"status": "ok", "collected": collected}
     except Exception as exc:  # noqa: BLE001
         results["book_discover"] = {"status": "failed", "collected": 0, "error": str(exc)}
+
+    # --- Blog discovery (blogs the corpus cites but doesn't scrape → review queue) ---
+    try:
+        proc = _run([sys.executable, str(BIN / "blog_discover.py"), "collect"],
+                    capture_output=True, text=True, timeout=COLLECTOR_TIMEOUT)
+        if proc.returncode != 0:
+            results["blog_discover"] = {"status": "failed", "collected": 0,
+                                        "error": (proc.stderr or "").strip()[:200]}
+        else:
+            try:
+                collected = json.loads(proc.stdout).get("proposed", 0)
+            except (json.JSONDecodeError, AttributeError):
+                collected = 0
+            results["blog_discover"] = {"status": "ok", "collected": collected}
+    except Exception as exc:  # noqa: BLE001
+        results["blog_discover"] = {"status": "failed", "collected": 0, "error": str(exc)}
 
     # --- Book auto-fetch (allowlisted legal PDFs → CorpusInbox/PDFs/_auto) ---
     # Runs BEFORE the PDF collector so a freshly-downloaded book is picked up the same night.
