@@ -6,6 +6,8 @@ synthesize each cluster into one cited page. Spec: docs/superpowers/specs/2026-0
 """
 from __future__ import annotations
 
+import argparse
+import json
 import re
 import sys
 from pathlib import Path
@@ -112,3 +114,28 @@ def rank_clusters(clusters: list[dict], existing: set[str]) -> list[dict]:
         out.append(c)
     out.sort(key=lambda c: (c["has_existing_page"], -c["size"], c["topic"]))
     return out
+
+
+def main(argv=None) -> int:
+    ap = argparse.ArgumentParser(description="List consolidation clusters (dry-run, no writes).")
+    sub = ap.add_subparsers(dest="cmd", required=True)
+    c = sub.add_parser("clusters")
+    c.add_argument("--corpus", default=None)
+    c.add_argument("--domain", default="ai-engineering")
+    c.add_argument("--min", type=int, default=5)
+    args = ap.parse_args(argv)
+
+    corpus = Path(args.corpus) if args.corpus else CORPUS
+    clusters = build_clusters(corpus, args.domain, min_cluster=args.min)
+    ranked = rank_clusters(clusters, existing_topic_keys(corpus, args.domain))
+    print(json.dumps({
+        "domain": args.domain, "count": len(ranked),
+        "clusters": [{"topic": c["topic"], "size": c["size"],
+                      "has_existing_page": c["has_existing_page"],
+                      "members": c["members"][:5]} for c in ranked],
+    }, indent=2))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

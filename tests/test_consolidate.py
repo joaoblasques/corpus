@@ -86,3 +86,17 @@ def test_existing_topic_keys_and_ranking(tmp_path):
     # 'agents' has no existing page -> ranks before 'rag' despite smaller size
     assert ranked[0]["topic"] == "agents" and ranked[0]["has_existing_page"] is False
     assert ranked[1]["topic"] == "rag" and ranked[1]["has_existing_page"] is True
+
+def test_clusters_cli_prints_ranked_json(tmp_path, capsys):
+    import json
+    corpus = tmp_path / "corpus"
+    d = corpus / "ai-engineering" / "sources"
+    d.mkdir(parents=True)
+    for i in range(5):
+        (d / f"s{i}.md").write_text(_src(["RAG"]), encoding="utf-8")
+    rc = co.main(["clusters", "--corpus", str(corpus), "--domain", "ai-engineering", "--min", "5"])
+    assert rc == 0
+    out = json.loads(capsys.readouterr().out)
+    assert out["domain"] == "ai-engineering"
+    assert out["count"] == 1
+    assert out["clusters"][0]["topic"] == "rag" and out["clusters"][0]["size"] == 5
