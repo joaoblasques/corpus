@@ -1,4 +1,4 @@
-# CLAUDE.md — LLM Corpus Schema (v2.0)
+# CLAUDE.md — LLM Corpus Schema (v2.1)
 
 Personal knowledge corpus (Karpathy LLM-Wiki pattern). **Read this file fully before any operation**, then read `corpus/index.md`, `corpus/_domains.md`, `corpus/_config.md`.
 
@@ -83,6 +83,9 @@ superseded_by:              # optional (v0.6); page that replaced this one (stal
 **`aliases`** is critical for entity dedup. Always populate when you know variants ("GPT-4", "gpt4", "GPT 4").
 
 **Claim-lifecycle fields (v0.6)** — `confidence`, `last_confirmed`, `supersedes`, `superseded_by` are optional and managed per §7.1. Use them to track staleness and supersession; omit when not meaningful.
+
+- `consolidates:` (optional, v2.1) — on a `synthesis` page: list of member source-page paths it consolidates.
+- `consolidated_into:` (optional, v2.1) — on a `source` page: path of the synthesis that consolidated it (member is kept, not deleted).
 
 **OKF conformance (v0.1):** `type` is **OKF-required** — every page must have a non-empty value; all other fields above are OKF-legal. Full conformance detail + old-flat-`sources` migration rule: [docs/file-formats.md](docs/file-formats.md).
 
@@ -259,6 +262,6 @@ Pages are **dense reference**, not blog posts.
 
 ## 15. Version
 
-Current: v2.0. Full history → [docs/changelog.md](docs/changelog.md).
+Current: v2.1. Full history → [docs/changelog.md](docs/changelog.md).
 
 Co-evolve with user. Bump version + log entry on every change.
