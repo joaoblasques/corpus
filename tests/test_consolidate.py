@@ -100,3 +100,11 @@ def test_clusters_cli_prints_ranked_json(tmp_path, capsys):
     assert out["domain"] == "ai-engineering"
     assert out["count"] == 1
     assert out["clusters"][0]["topic"] == "rag" and out["clusters"][0]["size"] == 5
+
+
+def test_read_topics_drops_none_extracted_placeholder():
+    src = ("---\ntype: source\ntags:\n  - source\n  - RAG\n---\n# t\n\n"
+           "**Key topics**\n- (none extracted)\n- RAG\n")
+    topics = co.read_topics(src)
+    assert "rag" in topics
+    assert "(none extracted)" not in topics and "none extracted" not in topics

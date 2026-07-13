@@ -22,6 +22,8 @@ _TOPICS_BULLET_RE = re.compile(r"\*\*Key topics\*\*\s*((?:\n-\s+.+)+)", re.M)
 _BULLET_RE = re.compile(r"^-\s+(.+?)\s*$", re.M)
 # tags that carry no topical signal
 _GENERIC_TAG_RE = re.compile(r"^(corpus/|source$|hub$|entity$|concept$|synthesis$|.*-quick-intake$)")
+# placeholders a quick-intake page writes when the LLM extracted no topics — not real topics
+_JUNK_TOPICS = {"(none extracted)", "none extracted", "none", "n/a", "na", "unknown", "-"}
 
 
 def page_type(text: str) -> str:
@@ -44,6 +46,10 @@ def read_topics(text: str) -> list[str]:
     seen, out = set(), []
     for t in topics:
         k = t.lower().strip()
+        # drop the quick-intake "no topics" placeholder and empty-ish junk — else every
+        # topic-less source page clusters together under a meaningless mega-topic.
+        if k in _JUNK_TOPICS:
+            continue
         if k and k not in seen:
             seen.add(k)
             out.append(k)
