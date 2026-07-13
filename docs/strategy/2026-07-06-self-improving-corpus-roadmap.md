@@ -131,3 +131,40 @@ intake → playlist reap, quota-bounded). Focus: **books and PDFs**.
 
 Priority routing stands: books/papers → full ingest (Sonnet); feeds/blogs → tiered by substance
 (free LLMs for triage); YouTube → metadata only, forever.
+
+---
+
+## Addendum (2026-07-13): cross-domain linking pass
+
+**Motivation.** The graph looked domain-siloed (a graph-builder bug — it parsed dead
+`[[wikilinks]]`; fixed 2026-07-13 to read OKF markdown links → 110 cross-domain edges surfaced).
+But the deeper finding stands: the corpus UNDER-links across domains. Ingest cites *sources* well
+but rarely links a page to a *related concept in another domain*. Only ~3% of links are
+cross-domain; ai-engineering↔software-engineering has just 3 knowledge-page edges.
+
+**Grounding (measured 2026-07-13).** Across 370 knowledge pages, a conservative deterministic
+signal — a cross-domain pair sharing ≥2 of {non-generic tags, aliases, ≥4-char title/slug tokens},
+not already linked — yields **20 high-precision candidate pairs**, e.g. *Intent Debt* (ai-eng) ↔
+*Cognitive Debt* (software-eng); *Claude Code* (ai-eng) ↔ *Claude Code for Data Engineering*
+(data-eng); *Optimization/Linear Algebra for ML* (ai-eng) ↔ *Designing ML Systems* / *Hands-On ML*
+(mlops). Every sampled candidate is genuinely related — the signal is precise, not noisy.
+
+**Design (two tiers, both reversible, provenance-safe).**
+1. **Candidate detection (deterministic, no LLM)** — `bin/corpus_heal.py related`: build the
+   cross-domain pairs above; skip pairs already linked.
+2. **Confirm + write:**
+   - *High-confidence* (≥3 shared signals, or a shared alias) → auto-add.
+   - *Marginal* (exactly 2 shared) → a one-shot Sonnet confirm ("are these genuinely related? yes/no
+     + 6-word reason") before adding; a "no" is dropped, logged.
+3. **Output** — a delimited, auto-managed `## Related across domains` section per page (SYMMETRIC:
+   the link is added to both pages), root-relative links, idempotent + regenerable. Same mechanism
+   as the hub auto-index — prose is never touched, the section is fully reversible.
+4. **Cadence** — deterministic high-confidence tier runs nightly inside `run_corpus_heal` (corpus_heal
+   safety class); the Sonnet-confirm tier weekly or on-demand. Bounded per run.
+5. **Effect** — thickens GENUINE inter-domain edges (the graph shows real bridges, not just reveals
+   old ones), improves navigability, and complements the consolidation job (which creates syntheses;
+   this links across domains). Fitness signal: cross-domain-link share, tracked in the run report.
+
+**Safety.** Conservative validated signal; delimited/reversible section; LLM-confirm only for the
+marginal 2-signal pairs; no deletion, no prose edits. Lower-risk than consolidation (adds edges, not
+new content), so it can ship as a deterministic v1 with the LLM-confirm tier added second.
