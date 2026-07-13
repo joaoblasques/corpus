@@ -92,7 +92,9 @@ def test_processable_selects_only_ingested(tmp_path):
         "---\nchannel: pdf\npdf_origin: a.pdf\ncorpus_ingested: true\n---\nx", encoding="utf-8")
     (raw / "pdf-b.md").write_text(
         "---\nchannel: pdf\npdf_origin: b.pdf\n---\nx", encoding="utf-8")  # not ingested
-    assert cp.processable(dirs=[raw]) == ["a.pdf"]
+    # processable() returns (source_path, pdf_origin) tuples; source_path is None when the
+    # stub predates the subfolder-aware collector (only pdf_origin recorded).
+    assert cp.processable(dirs=[raw]) == [(None, "a.pdf")]
 
 
 def test_discover_recurses_into_subfolders(tmp_path):
