@@ -226,6 +226,7 @@ class TestMain:
             review_path=tmp_path / "nonexistent_REVIEW.md",
             log_path=tmp_path / "nonexistent_log.md",
             book_review_path=tmp_path / "nonexistent_book_review.md",
+            blog_review_path=tmp_path / "nonexistent_blog_review.md",
             stamp_path=tmp_path / "nonexistent_stamp",
         )
         assert ret == 0
@@ -239,17 +240,21 @@ class TestMain:
                         "- [ ] [C](https://z/c.pdf)\n", encoding="utf-8")
         stamp = tmp_path / ".reminded"
         empty = tmp_path / "none.md"
-        kw = dict(review_path=empty, log_path=empty, book_review_path=book, stamp_path=stamp)
+        blog = tmp_path / "_blog_review.md"
+        blog.write_text("- [ ] https://x.dev/\n", encoding="utf-8")
+        kw = dict(review_path=empty, log_path=empty, book_review_path=book,
+                  blog_review_path=blog, stamp_path=stamp)
 
         pending_review.main(**kw, today=datetime.date(2026, 7, 7))
-        assert "2 book(s) await your review" in capsys.readouterr().out
+        out1 = capsys.readouterr().out
+        assert "2 book(s)" in out1 and "1 blog(s)" in out1
         assert stamp.read_text().strip() == "2026-07-07"
 
         pending_review.main(**kw, today=datetime.date(2026, 7, 10))   # 3 days later
         assert capsys.readouterr().out.strip() == ""                  # still within the week
 
         pending_review.main(**kw, today=datetime.date(2026, 7, 14))   # 7 days later
-        assert "book(s) await your review" in capsys.readouterr().out
+        assert "await your review" in capsys.readouterr().out
 
     def test_prints_line_when_deferred_and_run_exist(self, tmp_path, capsys):
         review = tmp_path / "_REVIEW.md"

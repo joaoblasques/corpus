@@ -22,13 +22,20 @@ LOG_PATH = ROOT / "corpus" / "log.md"
 BOOK_REVIEW_PATH = Path(os.environ.get(
     "CORPUS_BOOK_REVIEW",
     str(Path.home() / "Dev" / "second-brain" / "00_Inbox" / "Clippings" / "Books to review.md")))
+BLOG_REVIEW_PATH = Path(os.environ.get(
+    "CORPUS_BLOG_REVIEW",
+    str(Path.home() / "Dev" / "second-brain" / "00_Inbox" / "Clippings" / "Blogs to review.md")))
 BOOK_REMINDER_STAMP = ROOT / "raw" / ".book_review_reminded"
 BOOK_REMINDER_INTERVAL_DAYS = 7
 
 
-def count_unticked_books(text: str) -> int:
-    """Count '- [ ]' entries (books awaiting approval) in the book-review queue."""
+def count_unticked(text: str) -> int:
+    """Count '- [ ]' entries (items awaiting approval) in a review queue."""
     return sum(1 for line in text.splitlines() if line.lstrip().startswith("- [ ]"))
+
+
+# back-compat alias
+count_unticked_books = count_unticked
 
 
 def reminder_due(stamp_text: str, today: datetime.date,
@@ -158,6 +165,7 @@ def main(
     review_path: Path | None = None,
     log_path: Path | None = None,
     book_review_path: Path | None = None,
+    blog_review_path: Path | None = None,
     stamp_path: Path | None = None,
     today: datetime.date | None = None,
 ) -> int:
@@ -181,23 +189,31 @@ def main(
     if line:
         print(line)
 
-    # Weekly book-review nudge: at most once per BOOK_REMINDER_INTERVAL_DAYS, and only when
-    # books actually await a tick. Stamped on show so it stays roughly weekly across sessions.
-    try:
-        book_text = (book_review_path if book_review_path is not None
-                     else BOOK_REVIEW_PATH).read_text(encoding="utf-8")
-    except (OSError, UnicodeDecodeError):
-        book_text = ""
-    unticked = count_unticked_books(book_text)
+    # Weekly review nudge: at most once per BOOK_REMINDER_INTERVAL_DAYS, and only when items
+    # actually await a tick. Covers BOTH review queues (books + blogs). Stamped on show so it
+    # stays roughly weekly across sessions.
+    def _unticked(path):
+        try:
+            return count_unticked(path.read_text(encoding="utf-8"))
+        except (OSError, UnicodeDecodeError):
+            return 0
+
+    books = _unticked(book_review_path if book_review_path is not None else BOOK_REVIEW_PATH)
+    blogs = _unticked(blog_review_path if blog_review_path is not None else BLOG_REVIEW_PATH)
     stamp = stamp_path if stamp_path is not None else BOOK_REMINDER_STAMP
     try:
         stamp_text = stamp.read_text(encoding="utf-8")
     except (OSError, UnicodeDecodeError):
         stamp_text = ""
     today = today if today is not None else datetime.date.today()
-    if unticked > 0 and reminder_due(stamp_text, today):
-        print(f"📚 Corpus: {unticked} book(s) await your review — skim raw/_book_review.md "
-              f"and tick [x] the good ones (they auto-download next run).")
+    if (books > 0 or blogs > 0) and reminder_due(stamp_text, today):
+        parts = []
+        if books:
+            parts.append(f"📚 {books} book(s)")
+        if blogs:
+            parts.append(f"📰 {blogs} blog(s)")
+        print(f"{' + '.join(parts)} await your review in 00_Inbox/Clippings — tick [x] the good "
+              f"ones (they flow in next run).")
         try:
             stamp.write_text(today.isoformat() + "\n", encoding="utf-8")
         except OSError:
