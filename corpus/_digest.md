@@ -63,3 +63,9 @@ type: internal
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/software-engineering/vim.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/software-engineering/kan.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/claude-for-education.md", "verdict_ok": true, "gov": "committed"}
+
+## [2026-07-13T03:07] gardener · run
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/cursor.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/chip-huyen.md", "verdict_ok": false, "gov": "reverted+queued"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/data-engineering/matthew-housley.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/web-scraping.md", "verdict_ok": true, "gov": "committed"}
