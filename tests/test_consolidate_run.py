@@ -115,6 +115,29 @@ def test_process_cluster_reverts_on_critic_fail(tmp_path):
     assert "consolidated_into:" not in (corpus / "ai-engineering/sources/s1.md").read_text()
     assert "reject" in review.read_text() or "rag" in review.read_text()
 
+def test_process_cluster_reverts_when_critic_raises(tmp_path):
+    corpus = tmp_path / "corpus"
+    _write_member(corpus, "ai-engineering/sources/s1.md")
+    cluster = {"topic": "rag", "domain": "ai-engineering", "size": 5,
+               "members": ["ai-engineering/sources/s1.md"]}
+    triage = {"mode": "new-synthesis", "title": "RAG", "slug": "rag-patterns"}
+
+    def fake_writer(cmd, **kw):
+        (corpus / "ai-engineering" / "rag-patterns.md").write_text(
+            "---\ntype: synthesis\n---\n# RAG\n", encoding="utf-8")
+        p = type("P", (), {})(); p.stdout = json.dumps({"result": "ok"}); p.returncode = 0
+        return p
+
+    def raising_critic(page, src):
+        raise RuntimeError("critic exploded")
+
+    res = cr.process_cluster(cluster, triage, corpus, tmp_path / "rev.md",
+                             _run=fake_writer, _critic=raising_critic)
+    assert res["status"] == "reverted"                                   # fail closed
+    assert not (corpus / "ai-engineering" / "rag-patterns.md").exists()  # page removed
+    assert "consolidated_into:" not in (corpus / "ai-engineering/sources/s1.md").read_text()
+
+
 def test_process_cluster_queues_deepen_and_reject(tmp_path):
     corpus = tmp_path / "corpus"
     review = tmp_path / "rev.md"

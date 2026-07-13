@@ -146,7 +146,10 @@ def process_cluster(cluster: dict, triage: dict, corpus: Path, review_path: Path
     synthesis_rel = str(page.relative_to(corpus))
     critic = _critic if _critic is not None else \
         (lambda pg, src: gd._critic_call(Path(pg), src))
-    ok, issues = critic(str(page), _member_sources_text(cluster, corpus))
+    try:
+        ok, issues = critic(str(page), _member_sources_text(cluster, corpus))
+    except Exception as exc:  # noqa: BLE001 — fail CLOSED: a critic that errors is not trusted
+        ok, issues = False, [f"critic error: {exc}"]
     if not ok:
         page.unlink(missing_ok=True)                       # revert the new page (only new file)
         unstamp_members(cluster, corpus)
