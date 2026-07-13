@@ -840,6 +840,28 @@ def run_gardener(*, max_stubs: int = 4, timeout_s: int = 2400, _subprocess_run=N
         return {"status": "failed", "expanded": 0, "error": str(exc)}
 
 
+def run_consolidation(*, max_clusters: int = 3, domain: str = "ai-engineering",
+                      timeout_s: int = 3000, _subprocess_run=None) -> dict:
+    """Weekly consolidation: cluster shallow sources -> cited synthesis pages (Opus writer +
+    fail-closed Sonnet critic in consolidate_run.py). Bounded; failure recorded, never raised."""
+    _run = _subprocess_run if _subprocess_run is not None else subprocess.run
+    try:
+        proc = _run([sys.executable, str(BIN / "consolidate_run.py"), "run",
+                     "--domain", domain, "--max-clusters", str(max_clusters)],
+                    capture_output=True, text=True, timeout=timeout_s)
+        if proc.returncode != 0:
+            return {"status": "failed", "synthesized": 0,
+                    "error": (proc.stderr or "").strip()[:200]}
+        try:
+            d = json.loads((proc.stdout or "").strip().splitlines()[-1])
+        except (json.JSONDecodeError, IndexError):
+            d = {}
+        return {"status": d.get("status", "ok"), "synthesized": d.get("synthesized", 0),
+                "reverted": d.get("reverted", 0), "queued": d.get("queued", 0)}
+    except Exception as exc:  # noqa: BLE001
+        return {"status": "failed", "synthesized": 0, "error": str(exc)}
+
+
 def run_youtube_playlist_reap(*, max_removals: int = 120, _subprocess_run=None) -> dict:
     """Remove already-ingested videos from collect-remove (tech) YouTube playlists.
 
@@ -1271,6 +1293,24 @@ def write_run_report(
         if hl.get("error"):
             hl_str += f" · error={hl['error']}"
         bullets.append(f"* **Heal**: {hl_str}")
+    # Depth ratio (fitness metric the consolidation job moves)
+    try:
+        import consolidate as _co
+        corpus = ROOT / "corpus"
+        knowledge = sources = 0
+        for p in corpus.rglob("*.md"):
+            if p.name in ("README.md", "index.md", "log.md", "_domains.md", "_config.md"):
+                continue
+            ty = _co.page_type(p.read_text(encoding="utf-8", errors="ignore"))
+            if ty in ("concept", "entity", "synthesis"):
+                knowledge += 1
+            elif ty == "source":
+                sources += 1
+        if knowledge:
+            ratio = round(sources / knowledge, 1)
+            bullets.append(f"* **Depth**: {knowledge} knowledge · {sources} sources · ratio 1:{ratio}")
+    except Exception:  # noqa: BLE001 — advisory metric, never break the report
+        pass
     gp = tallies.get("gap_resolver")
     if gp:
         gp_str = (f"{gp.get('dispatched', 0)} gap dispatched · {gp.get('queued', 0)} sources queued"
