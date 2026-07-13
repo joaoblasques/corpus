@@ -61,3 +61,54 @@ def iter_source_pages(corpus: Path, domain: str | None = None) -> list[Path]:
             if page_type(p.read_text(encoding="utf-8", errors="ignore")) == "source":
                 out.append(p)
     return sorted(out)
+
+
+_H1_RE = re.compile(r"^#\s+(.+?)\s*$", re.M)
+
+
+def _norm(s: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
+
+
+def existing_topic_keys(corpus: Path, domain: str) -> set[str]:
+    """Normalized titles + slugs of concept/entity/synthesis pages in the domain."""
+    keys: set[str] = set()
+    root = corpus / domain
+    if not root.exists():
+        return keys
+    for p in root.rglob("*.md"):
+        if p.name == "README.md":
+            continue
+        text = p.read_text(encoding="utf-8", errors="ignore")
+        if page_type(text) in ("concept", "entity", "synthesis"):
+            keys.add(_norm(p.stem))
+            body = text.split("---", 2)[-1] if text.startswith("---") else text
+            hm = _H1_RE.search(body)
+            if hm:
+                keys.add(_norm(hm.group(1)))
+    return keys
+
+
+def build_clusters(corpus: Path, domain: str, min_cluster: int = 5) -> list[dict]:
+    index: dict[str, list[str]] = {}
+    for p in iter_source_pages(corpus, domain):
+        rel = str(p.relative_to(corpus))
+        for topic in read_topics(p.read_text(encoding="utf-8", errors="ignore")):
+            index.setdefault(topic, []).append(rel)
+    clusters = []
+    for topic, members in index.items():
+        members = sorted(set(members))
+        if len(members) >= min_cluster:
+            clusters.append({"topic": topic, "domain": domain,
+                             "members": members, "size": len(members)})
+    return clusters
+
+
+def rank_clusters(clusters: list[dict], existing: set[str]) -> list[dict]:
+    out = []
+    for c in clusters:
+        c = dict(c)
+        c["has_existing_page"] = _norm(c["topic"]) in existing
+        out.append(c)
+    out.sort(key=lambda c: (c["has_existing_page"], -c["size"], c["topic"]))
+    return out

@@ -51,3 +51,38 @@ def test_iter_source_pages_filters_type_and_domain(tmp_path):
     assert len(all_src) == 2  # both source pages, concept excluded
     ai_only = co.iter_source_pages(corpus, domain="ai-engineering")
     assert [p.name for p in ai_only] == ["s1.md"]
+
+def _src(topics):
+    tags = "\n".join(f"  - {t}" for t in topics)
+    return f"---\ntype: source\ndomain: ai-engineering\ntags:\n  - source\n{tags}\n---\n# t\nbody\n"
+
+def test_build_clusters_groups_by_topic_and_min_size(tmp_path):
+    corpus = tmp_path / "corpus"
+    d = corpus / "ai-engineering" / "sources"
+    d.mkdir(parents=True)
+    for i in range(5):
+        (d / f"s{i}.md").write_text(_src(["RAG", "context"]), encoding="utf-8")
+    for i in range(2):
+        (d / f"o{i}.md").write_text(_src(["obscure"]), encoding="utf-8")
+    clusters = co.build_clusters(corpus, "ai-engineering", min_cluster=5)
+    topics = {c["topic"]: c for c in clusters}
+    assert "rag" in topics and topics["rag"]["size"] == 5          # 5 sources share RAG
+    assert "context" in topics                                      # also shared by 5
+    assert "obscure" not in topics                                  # only 2 -> below min
+    assert topics["rag"]["members"][0].startswith("ai-engineering/sources/")
+
+def test_existing_topic_keys_and_ranking(tmp_path):
+    corpus = tmp_path / "corpus"
+    (corpus / "ai-engineering" / "sources").mkdir(parents=True)
+    (corpus / "ai-engineering" / "rag.md").write_text(
+        "---\ntype: concept\n---\n# RAG\n", encoding="utf-8")
+    existing = co.existing_topic_keys(corpus, "ai-engineering")
+    assert "rag" in existing
+    clusters = [
+        {"topic": "rag", "domain": "ai-engineering", "members": ["a", "b"], "size": 8},
+        {"topic": "agents", "domain": "ai-engineering", "members": ["c"], "size": 6},
+    ]
+    ranked = co.rank_clusters(clusters, existing)
+    # 'agents' has no existing page -> ranks before 'rag' despite smaller size
+    assert ranked[0]["topic"] == "agents" and ranked[0]["has_existing_page"] is False
+    assert ranked[1]["topic"] == "rag" and ranked[1]["has_existing_page"] is True
