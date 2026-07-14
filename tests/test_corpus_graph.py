@@ -1,8 +1,47 @@
 import sys
 from pathlib import Path
-
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "website" / "hooks"))
 import corpus_graph as cg  # noqa: E402
+
+
+def _page(corpus: Path, domain: str, slug: str, typ: str, body: str, links=()):
+    d = corpus / domain
+    d.mkdir(parents=True, exist_ok=True)
+    link_md = "".join(f"\nSee [x](/{t}.md)." for t in links)
+    (d / f"{slug}.md").write_text(
+        f"---\ntype: {typ}\ndomain: {domain}\nstatus: draft\n---\n# {slug.title()}\n\n{body}{link_md}\n",
+        encoding="utf-8")
+
+
+def test_depth_is_body_word_count_excluding_frontmatter(tmp_path):
+    corpus = tmp_path / "corpus"
+    _page(corpus, "ai-engineering", "rag", "concept", "one two three four five")
+    g = cg.build_graph(corpus)
+    node = next(n for n in g["nodes"] if n["id"] == "ai-engineering/rag")
+    # body is "# Rag" + blank + "one two three four five" => 5 content words + heading words.
+    # frontmatter (type/domain/status) must NOT be counted.
+    assert node["depth"] >= 5
+    assert "status" not in str(node)              # status value never leaks into the node
+    # a deeper page has a strictly larger depth
+    _page(corpus, "ai-engineering", "big", "concept", "word " * 200)
+    g2 = cg.build_graph(corpus)
+    big = next(n for n in g2["nodes"] if n["id"] == "ai-engineering/big")
+    assert big["depth"] > node["depth"]
+
+
+def test_degree_counts_incident_edges(tmp_path):
+    corpus = tmp_path / "corpus"
+    # rag links to pipelines; both also spoke to their hubs
+    _page(corpus, "ai-engineering", "rag", "concept", "body", links=["data-engineering/pipelines"])
+    _page(corpus, "data-engineering", "pipelines", "concept", "body")
+    g = cg.build_graph(corpus)
+    deg = {n["id"]: n["degree"] for n in g["nodes"]}
+    # rag: spoke(->ai-engineering hub) + link(->pipelines) = 2
+    assert deg["ai-engineering/rag"] == 2
+    # pipelines: spoke + the incoming link = 2
+    assert deg["data-engineering/pipelines"] == 2
+    # a hub's degree >= number of its pages (each page spokes to it)
+    assert deg["ai-engineering"] >= 1
 
 
 def _corpus(tmp_path):
@@ -43,3 +82,38 @@ def test_edges_wikilink_and_spoke(tmp_path):
     assert tuple(sorted(("ai-engineering/transformer", "ai-engineering"))) in pairs            # spoke to hub
     # no duplicate edges
     assert len(g["edges"]) == len(pairs)
+
+
+def _source(corpus: Path, domain: str, slug: str):
+    d = corpus / domain / "sources"
+    d.mkdir(parents=True, exist_ok=True)
+    (d / f"{slug}.md").write_text(
+        f"---\ntype: source\ndomain: {domain}\n---\n# {slug}\n\nsummary\n", encoding="utf-8")
+
+
+def test_hub_sources_counts_source_pages_in_domain(tmp_path):
+    corpus = tmp_path / "corpus"
+    _page(corpus, "data-engineering", "pipelines", "concept", "body")   # knowledge, not a source
+    _source(corpus, "data-engineering", "s1")
+    _source(corpus, "data-engineering", "s2")
+    g = cg.build_graph(corpus)
+    hub = next(n for n in g["nodes"] if n["id"] == "data-engineering" and n.get("hub"))
+    assert hub["sources"] == 2                        # two source pages; the concept isn't counted
+
+
+def test_bridge_flag_only_on_cross_domain_page_edges(tmp_path):
+    corpus = tmp_path / "corpus"
+    _page(corpus, "ai-engineering", "rag", "concept", "b", links=["data-engineering/pipelines"])
+    _page(corpus, "data-engineering", "pipelines", "concept", "b")
+    _page(corpus, "ai-engineering", "agents", "concept", "b", links=["ai-engineering/rag"])
+    g = cg.build_graph(corpus)
+
+    def edge(a, b):
+        return next(e for e in g["edges"]
+                    if {e["from"], e["to"]} == {a, b})
+    # cross-domain page->page: bridge
+    assert edge("ai-engineering/rag", "data-engineering/pipelines").get("bridge") is True
+    # same-domain page->page: NOT a bridge
+    assert edge("ai-engineering/agents", "ai-engineering/rag").get("bridge") is not True
+    # spoke (page->hub): NOT a bridge
+    assert edge("ai-engineering/rag", "ai-engineering").get("bridge") is not True
