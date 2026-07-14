@@ -235,3 +235,28 @@ def test_deepen_page_reverts_on_critic_fail(tmp_path):
                          _run=ok_writer, _critic=lambda pg, src: (False, ["fabricated"]))
     assert res["status"] == "reverted"
     assert (corpus / "ai-engineering/openai.md").read_text() == _ORIG   # restored
+
+
+def test_deepen_page_fails_closed_when_critic_raises(tmp_path):
+    # The core safety guarantee: a critic that ERRORS must revert, never silently pass.
+    corpus = tmp_path / "corpus"
+    _page(corpus, "ai-engineering/openai.md", _ORIG)
+    _write_member(corpus, "ai-engineering/sources/o1.md")
+    cluster = {"topic": "openai", "domain": "ai-engineering",
+               "members": ["ai-engineering/sources/o1.md"]}
+
+    def ok_writer(cmd, **kw):
+        # keeps [^a] so the superset guard passes — the raising critic is the sole trigger
+        (corpus / "ai-engineering/openai.md").write_text(
+            _ORIG.rstrip() + "\n\nAdded.[^b]\n\n[^b]: [s](../y.md)\n", encoding="utf-8")
+        p = type("P", (), {})(); p.stdout = json.dumps({"result": "ok"}); p.returncode = 0
+        return p
+
+    def exploding_critic(pg, src):
+        raise RuntimeError("critic backend down")
+
+    res = cr.deepen_page(cluster, "ai-engineering/openai.md", corpus, tmp_path / "rev.md",
+                         _run=ok_writer, _critic=exploding_critic)
+    assert res["status"] == "reverted"                                   # fail CLOSED, not open
+    assert (corpus / "ai-engineering/openai.md").read_text() == _ORIG    # restored byte-for-byte
+    assert "consolidated_into:" not in (corpus / "ai-engineering/sources/o1.md").read_text()
