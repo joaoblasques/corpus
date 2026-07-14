@@ -61,6 +61,7 @@ def _isolate_pipeline(monkeypatch, tmp_path):
         ("run_youtube_playlist_reap", "_subprocess_run", {"status": "ok", "removed": 0}),
         ("run_gardener", "_subprocess_run", {"status": "ok", "expanded": 0}),
         ("run_consolidation", "_subprocess_run", {"status": "ok", "synthesized": 0, "reverted": 0, "queued": 0}),
+        ("run_deepen", "_subprocess_run", {"status": "ok", "deepened": 0, "reverted": 0, "no_change": 0, "candidates_seen": 0}),
         ("run_corpus_heal", "_subprocess_run", {"status": "ok", "repaired": 0}),
         ("run_gap_resolver", "_subprocess_run", {"status": "ok", "dispatched": 0, "queued": 0}),
         ("run_email_relabel", "_subprocess_run", {"status": "ok"}),
@@ -2275,3 +2276,19 @@ def test_run_consolidation_failure_recorded_not_raised():
         return _make_proc(returncode=1, stderr="boom")
     out = scheduled_run.run_consolidation(_subprocess_run=fake_run)
     assert out["status"] == "failed" and out["synthesized"] == 0
+
+
+def test_run_deepen_parses_summary():
+    def fake_run(cmd, **kw):
+        assert "consolidate_run.py" in cmd[1] and "run" in cmd and "--mode" in cmd and "deepen" in cmd
+        return _make_proc(returncode=0, stdout=json.dumps(
+            {"status": "ok", "deepened": 1, "reverted": 0, "no_change": 0, "candidates_seen": 12}))
+    out = scheduled_run.run_deepen(_subprocess_run=fake_run)
+    assert out["status"] == "ok" and out["deepened"] == 1 and out["candidates_seen"] == 12
+
+
+def test_run_deepen_failure_recorded_not_raised():
+    def fake_run(cmd, **kw):
+        return _make_proc(returncode=1, stderr="boom")
+    out = scheduled_run.run_deepen(_subprocess_run=fake_run)
+    assert out["status"] == "failed" and out["deepened"] == 0

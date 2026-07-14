@@ -900,6 +900,32 @@ def run_consolidation(*, max_clusters: int = 3, domain: str = "ai-engineering",
         return {"status": "failed", "synthesized": 0, "error": str(exc)}
 
 
+def run_deepen(*, max_candidates: int = 2, domain: str = "ai-engineering",
+               timeout_s: int = 3000, _subprocess_run=None) -> dict:
+    """Weekly deepen-existing: integrate coherent source-clusters into deepening their existing
+    concept/entity pages, thinnest-page-first (Opus writer + fail-closed critic + byte-exact revert
+    in consolidate_run.py). Opus — belongs in the weekly cap-protected slot, NOT the nightly Sonnet
+    budget. Bounded; failure recorded, never raised."""
+    _run = _subprocess_run if _subprocess_run is not None else subprocess.run
+    try:
+        proc = _run([sys.executable, str(BIN / "consolidate_run.py"), "run",
+                     "--mode", "deepen", "--domain", domain,
+                     "--max-clusters", str(max_candidates)],
+                    capture_output=True, text=True, timeout=timeout_s)
+        if proc.returncode != 0:
+            return {"status": "failed", "deepened": 0,
+                    "error": (proc.stderr or "").strip()[:200]}
+        try:
+            d = json.loads((proc.stdout or "").strip().splitlines()[-1])
+        except (json.JSONDecodeError, IndexError):
+            d = {}
+        return {"status": d.get("status", "ok"), "deepened": d.get("deepened", 0),
+                "reverted": d.get("reverted", 0), "no_change": d.get("no_change", 0),
+                "candidates_seen": d.get("candidates_seen", 0)}
+    except Exception as exc:  # noqa: BLE001
+        return {"status": "failed", "deepened": 0, "error": str(exc)}
+
+
 def run_youtube_playlist_reap(*, max_removals: int = 120, _subprocess_run=None) -> dict:
     """Remove already-ingested videos from collect-remove (tech) YouTube playlists.
 

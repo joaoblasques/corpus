@@ -205,6 +205,13 @@ def _run_guarded(args) -> int:
         print(json.dumps({"status": "ok", "dry_run": True, "recent_pages": len(pages)}))
         return 0
     result = run_synthesis(pages, timeout_s=args.timeout)
+    # Weekly Opus deepen: integrate coherent source-clusters into the thinnest existing pages
+    # (bounded, thinnest-first, fail-closed + byte-exact revert). Rides this cap-protected weekly
+    # Opus slot; its edits get linted + committed by the same pass below. Never aborts the run.
+    try:
+        result["deepen"] = sr.run_deepen(max_candidates=2)
+    except Exception as exc:  # noqa: BLE001
+        result["deepen"] = {"status": "failed", "deepened": 0, "error": str(exc)}
     try:
         rpt = corpus_lint.lint()
         result["lint"] = {"broken_citations": len(rpt["broken_citations"]),
