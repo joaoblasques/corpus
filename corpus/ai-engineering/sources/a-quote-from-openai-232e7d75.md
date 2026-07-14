@@ -16,6 +16,7 @@ updated: 2026-07-02
 provisional: false
 url: https://simonwillison.net/2026/Jun/26/openai/#atom-everything
 origin: obsidian-list
+consolidated_into: ai-engineering/openai.md
 ---
 
 # A quote from OpenAI

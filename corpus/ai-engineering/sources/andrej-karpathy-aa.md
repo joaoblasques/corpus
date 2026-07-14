@@ -16,6 +16,7 @@ updated: 2026-07-02
 provisional: false
 url: https://karpathy.ai/
 origin: obsidian-list
+consolidated_into: ai-engineering/openai.md
 ---
 
 # Andrej Karpathy

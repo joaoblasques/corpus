@@ -16,6 +16,7 @@ updated: 2026-07-12
 provisional: false
 url: https://www.latent.space/p/ainews-not-much-happened-today-f5c
 origin: obsidian-list
+consolidated_into: ai-engineering/openai.md
 ---
 
 # "[AINews] not much happened today"

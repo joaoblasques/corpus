@@ -20,6 +20,7 @@ channel_name: David Ondrej
 playlist: Corpus_queue
 published: 2026-06-24
 transcript_status: ok
+consolidated_into: ai-engineering/openai.md
 ---
 
 # "“I spent $50,000 self-hosting AI models. You should too.” - 0xSero"

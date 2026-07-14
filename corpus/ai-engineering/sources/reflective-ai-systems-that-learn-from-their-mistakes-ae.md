@@ -16,6 +16,7 @@ updated: 2026-07-14
 provisional: false
 url: 
 origin: obsidian
+consolidated_into: ai-engineering/openai.md
 ---
 
 # Reflective AI - Systems That Learn From Their Mistakes

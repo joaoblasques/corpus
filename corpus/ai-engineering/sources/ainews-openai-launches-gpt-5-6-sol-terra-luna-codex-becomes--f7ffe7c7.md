@@ -16,6 +16,7 @@ updated: 2026-07-11
 provisional: false
 url: https://www.latent.space/p/ainews-openai-launches-gpt-56-solterraluna
 origin: obsidian-list
+consolidated_into: ai-engineering/openai.md
 ---
 
 # "[AINews] OpenAI launches GPT 5.6 Sol/Terra/Luna, Codex becomes ChatGPT superapp"

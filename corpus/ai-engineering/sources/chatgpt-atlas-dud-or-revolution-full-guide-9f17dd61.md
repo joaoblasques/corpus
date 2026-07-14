@@ -16,6 +16,7 @@ updated: 2026-07-02
 provisional: false
 url: https://www.alexfinn.ai/p/chatgpt-atlas-dud-or-revolution-full
 origin: obsidian-list
+consolidated_into: ai-engineering/openai.md
 ---
 
 # "ChatGPT Atlas: Dud or Revolution? (Full Guide)"
