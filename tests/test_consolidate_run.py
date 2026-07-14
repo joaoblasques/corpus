@@ -260,3 +260,21 @@ def test_deepen_page_fails_closed_when_critic_raises(tmp_path):
     assert res["status"] == "reverted"                                   # fail CLOSED, not open
     assert (corpus / "ai-engineering/openai.md").read_text() == _ORIG    # restored byte-for-byte
     assert "consolidated_into:" not in (corpus / "ai-engineering/sources/o1.md").read_text()
+
+
+def test_run_deepen_dry_run_ranks_without_writing(tmp_path, monkeypatch):
+    corpus = tmp_path / "corpus"
+    d = corpus / "ai-engineering"; (d / "sources").mkdir(parents=True)
+    d.joinpath("openai.md").write_text("---\ntype: entity\n---\n# OpenAI\n\n" + "w " * 30, encoding="utf-8")
+    for i in range(4):
+        (d / "sources" / f"o{i}.md").write_text(
+            "---\ntype: source\ntags:\n  - source\n  - OpenAI\n---\n# s\nbody", encoding="utf-8")
+    res = cr.run_deepen(corpus, "ai-engineering", 3, dry_run=True)
+    assert res["status"] == "ok" and res["candidates_seen"] >= 1
+    assert res["deepened"] == 0                          # dry-run writes nothing
+    assert "# OpenAI\n\nw w" in (d / "openai.md").read_text()   # page untouched
+
+def test_main_mode_deepen_skips_when_not_on_main(monkeypatch, capsys):
+    monkeypatch.setattr(cr.sr, "_on_main", lambda *a, **k: False)
+    rc = cr.main(["run", "--mode", "deepen"])
+    assert rc == 0 and json.loads(capsys.readouterr().out)["reason"] == "not_on_main"

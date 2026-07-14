@@ -182,26 +182,46 @@ def run_consolidation(corpus: Path, domain: str, max_clusters: int, *, dry_run: 
     return t
 
 
+def run_deepen(corpus: Path, domain: str, max_candidates: int, *, dry_run: bool = False,
+               _run=None, _critic=None, review_path: Path | None = None) -> dict:
+    review = review_path if review_path is not None else REVIEW
+    ranked = co.rank_deepen_candidates(corpus, domain)
+    t = {"status": "ok", "deepened": 0, "reverted": 0, "no_change": 0,
+         "candidates_seen": len(ranked)}
+    for cand in ranked[:max_candidates]:
+        if dry_run:
+            continue
+        cluster = {"topic": cand["topic"], "domain": cand["domain"], "members": cand["members"]}
+        res = deepen_page(cluster, cand["target_page"], corpus, review,
+                          _run=_run, _critic=_critic)
+        t[res["status"]] = t.get(res["status"], 0) + 1
+    return t
+
+
 def main(argv=None) -> int:
-    ap = argparse.ArgumentParser(description="Consolidate source clusters into synthesis pages.")
+    ap = argparse.ArgumentParser(description="Consolidate source clusters (synthesize | deepen).")
     sub = ap.add_subparsers(dest="cmd", required=True)
     pr = sub.add_parser("run")
     pr.add_argument("--domain", default="ai-engineering")
     pr.add_argument("--max-clusters", type=int, default=3)
+    pr.add_argument("--mode", choices=["synthesize", "deepen"], default="synthesize")
     pr.add_argument("--dry-run", action="store_true")
     pr.add_argument("--lock-path", default=LOCK, type=Path)
     args = ap.parse_args(argv)
 
+    def _go(dry):
+        if args.mode == "deepen":
+            return run_deepen(CORPUS, args.domain, args.max_clusters, dry_run=dry)
+        return run_consolidation(CORPUS, args.domain, args.max_clusters, dry_run=dry)
+
     if not sr._on_main():
         print(json.dumps({"status": "skipped", "reason": "not_on_main"})); return 0
     if args.dry_run:
-        print(json.dumps(run_consolidation(CORPUS, args.domain, args.max_clusters, dry_run=True)))
-        return 0
+        print(json.dumps(_go(True))); return 0
     if not sr.acquire_lock(args.lock_path):
         print(json.dumps({"status": "skipped", "reason": "lock_held"})); return 0
     try:
-        print(json.dumps(run_consolidation(CORPUS, args.domain, args.max_clusters)))
-        return 0
+        print(json.dumps(_go(False))); return 0
     finally:
         sr.release_lock(args.lock_path)
 
