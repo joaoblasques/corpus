@@ -234,13 +234,19 @@
    ---------------------------------------------------------------------------- */
 .md-typeset .corpus-card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 1px;
   background: var(--corpus-hairline);
   border: 1px solid var(--corpus-hairline);
   border-radius: 14px;
   overflow: hidden;
   margin: 0 0 1.5rem;
+}
+@media screen and (max-width: 60em) {
+  .md-typeset .corpus-card-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media screen and (max-width: 40em) {
+  .md-typeset .corpus-card-grid { grid-template-columns: 1fr; }
 }
 .md-typeset .corpus-card {
   position: relative;
