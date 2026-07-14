@@ -331,7 +331,7 @@
   display: flex;
   align-items: center;
   gap: 18px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 .md-typeset .corpus-pipeline-sources {
   display: flex;
@@ -391,10 +391,13 @@
   margin: 1.9rem 0 0;
 }
 
-/* Below ~1050px the horizontal chain has no good wrap point (steps and
-   arrows break onto ragged, viewport-dependent lines) — switch to an
-   explicit vertical stack instead of hoping flex-wrap finds a nice spot. */
-@media screen and (max-width: 65em) {
+/* Below ~1360px the horizontal chain (source list + 4 pill-cards + arrows)
+   no longer fits on one line. flex-wrap would break it at an arbitrary
+   point (stranded arrows, cards colliding without a connector) depending
+   on exact width, so the row is nowrap above this breakpoint and switches
+   to an explicit vertical stack below it instead — never an in-between
+   half-wrapped state. */
+@media screen and (max-width: 1360px) {
   .md-typeset .corpus-pipeline-row {
     flex-direction: column;
     align-items: stretch;
@@ -414,7 +417,7 @@
     transform: rotate(90deg);
   }
 }
-@media screen and (max-width: 30em) {
+@media screen and (max-width: 480px) {
   .md-typeset .corpus-pipeline { padding: 2rem calc(50vw - 50%); }
   .md-typeset .corpus-pipeline-sources { flex-direction: column; gap: 7px; }
 }
