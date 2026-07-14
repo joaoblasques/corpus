@@ -27,6 +27,17 @@ def _body_wordcount(text: str) -> int:
     return len(body.split())
 
 
+def _source_count(domain_dir: Path) -> int:
+    """Count `type: source` pages anywhere under a domain dir (incl. its sources/ subdir)."""
+    n = 0
+    if domain_dir.exists():
+        for p in domain_dir.rglob("*.md"):
+            m = _TYPE_RE.search(p.read_text(encoding="utf-8", errors="ignore"))
+            if m and m.group(1) == "source":
+                n += 1
+    return n
+
+
 def _title(text: str, slug: str) -> str:
     m = H1.search(text)
     return m.group(1).strip() if m else slug.replace("-", " ")
@@ -52,7 +63,8 @@ def build_graph(corpus_dir) -> dict:
 
     # Hub node per domain
     for d in sorted(domains):
-        nodes[d] = {"id": d, "label": d.replace("-", " "), "group": d, "hub": True, "value": 40}
+        nodes[d] = {"id": d, "label": d.replace("-", " "), "group": d, "hub": True,
+                    "value": 40, "sources": _source_count(corpus / d)}
 
     # Pass 2 — edges: spoke (page → hub) + wikilink connections
     edge_keys: set[tuple] = set()
@@ -65,7 +77,11 @@ def build_graph(corpus_dir) -> dict:
         if k in edge_keys:
             return
         edge_keys.add(k)
-        edges.append({"from": a, "to": b})
+        edge = {"from": a, "to": b}
+        # bridge = a link between two PAGE nodes (ids contain "/") in DIFFERENT domains.
+        if "/" in a and "/" in b and a.split("/")[0] != b.split("/")[0]:
+            edge["bridge"] = True
+        edges.append(edge)
 
     for md in sorted(corpus.glob("*/*.md")):
         domain = md.parent.name

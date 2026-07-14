@@ -82,3 +82,38 @@ def test_edges_wikilink_and_spoke(tmp_path):
     assert tuple(sorted(("ai-engineering/transformer", "ai-engineering"))) in pairs            # spoke to hub
     # no duplicate edges
     assert len(g["edges"]) == len(pairs)
+
+
+def _source(corpus: Path, domain: str, slug: str):
+    d = corpus / domain / "sources"
+    d.mkdir(parents=True, exist_ok=True)
+    (d / f"{slug}.md").write_text(
+        f"---\ntype: source\ndomain: {domain}\n---\n# {slug}\n\nsummary\n", encoding="utf-8")
+
+
+def test_hub_sources_counts_source_pages_in_domain(tmp_path):
+    corpus = tmp_path / "corpus"
+    _page(corpus, "data-engineering", "pipelines", "concept", "body")   # knowledge, not a source
+    _source(corpus, "data-engineering", "s1")
+    _source(corpus, "data-engineering", "s2")
+    g = cg.build_graph(corpus)
+    hub = next(n for n in g["nodes"] if n["id"] == "data-engineering" and n.get("hub"))
+    assert hub["sources"] == 2                        # two source pages; the concept isn't counted
+
+
+def test_bridge_flag_only_on_cross_domain_page_edges(tmp_path):
+    corpus = tmp_path / "corpus"
+    _page(corpus, "ai-engineering", "rag", "concept", "b", links=["data-engineering/pipelines"])
+    _page(corpus, "data-engineering", "pipelines", "concept", "b")
+    _page(corpus, "ai-engineering", "agents", "concept", "b", links=["ai-engineering/rag"])
+    g = cg.build_graph(corpus)
+
+    def edge(a, b):
+        return next(e for e in g["edges"]
+                    if {e["from"], e["to"]} == {a, b})
+    # cross-domain page->page: bridge
+    assert edge("ai-engineering/rag", "data-engineering/pipelines").get("bridge") is True
+    # same-domain page->page: NOT a bridge
+    assert edge("ai-engineering/agents", "ai-engineering/rag").get("bridge") is not True
+    # spoke (page->hub): NOT a bridge
+    assert edge("ai-engineering/rag", "ai-engineering").get("bridge") is not True
