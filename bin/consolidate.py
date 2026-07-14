@@ -121,6 +121,53 @@ def rank_clusters(clusters: list[dict], existing: set[str]) -> list[dict]:
     return out
 
 
+def _page_wordcount(path: Path) -> int:
+    t = path.read_text(encoding="utf-8", errors="ignore")
+    body = t.split("---", 2)[-1] if t.startswith("---") else t
+    return len(body.split())
+
+
+def _find_target_page(corpus: Path, domain: str, topic: str) -> Path | None:
+    """The concept/entity/synthesis page whose slug OR H1 title normalizes to `topic`."""
+    key = _norm(topic)
+    root = corpus / domain
+    if not root.exists():
+        return None
+    for p in root.rglob("*.md"):
+        if p.name == "README.md":
+            continue
+        text = p.read_text(encoding="utf-8", errors="ignore")
+        tm = _TYPE_RE.search(text)
+        if not tm or tm.group(1) not in ("concept", "entity", "synthesis"):
+            continue
+        if _norm(p.stem) == key:
+            return p
+        body = text.split("---", 2)[-1] if text.startswith("---") else text
+        hm = _H1_RE.search(body)
+        if hm and _norm(hm.group(1)) == key:
+            return p
+    return None
+
+
+def rank_deepen_candidates(corpus: Path, domain: str, min_cluster: int = 4) -> list[dict]:
+    """Clusters whose topic already has a concept/entity/synthesis page, scored thinnest-first
+    (score = cluster size / target page word count). These feed the deepen-existing pass."""
+    existing = existing_topic_keys(corpus, domain)
+    out = []
+    for c in build_clusters(corpus, domain, min_cluster=min_cluster):
+        if _norm(c["topic"]) not in existing:
+            continue
+        page = _find_target_page(corpus, domain, c["topic"])
+        if page is None:
+            continue
+        words = _page_wordcount(page)
+        out.append({"topic": c["topic"], "domain": domain, "members": c["members"],
+                    "size": c["size"], "target_page": str(page.relative_to(corpus)),
+                    "page_words": words, "score": c["size"] / max(words, 1)})
+    out.sort(key=lambda c: c["score"], reverse=True)
+    return out
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="List consolidation clusters (dry-run, no writes).")
     sub = ap.add_subparsers(dest="cmd", required=True)
