@@ -18,6 +18,13 @@ from pathlib import Path
 MDLINK = re.compile(r"\]\(/([a-z0-9][a-z0-9-]*/[a-z0-9][a-z0-9-]*)\.md\)")
 WIKILINK = re.compile(r"\[\[([a-z0-9][a-z0-9-]*/[a-z0-9][a-z0-9-]*)")
 H1 = re.compile(r"^#\s+(.+?)\s*$", re.M)
+_TYPE_RE = re.compile(r"^type:\s*(\w+)", re.M)
+
+
+def _body_wordcount(text: str) -> int:
+    """Word count of the page BODY (frontmatter stripped) — a depth signal, never the text."""
+    body = text.split("---", 2)[-1] if text.startswith("---") else text
+    return len(body.split())
 
 
 def _title(text: str, slug: str) -> str:
@@ -40,7 +47,8 @@ def build_graph(corpus_dir) -> dict:
             continue
         node_id = f"{domain}/{md.stem}"
         text = md.read_text(encoding="utf-8", errors="ignore")
-        nodes[node_id] = {"id": node_id, "label": _title(text, md.stem), "group": domain}
+        nodes[node_id] = {"id": node_id, "label": _title(text, md.stem), "group": domain,
+                          "depth": _body_wordcount(text)}
 
     # Hub node per domain
     for d in sorted(domains):
@@ -71,6 +79,14 @@ def build_graph(corpus_dir) -> dict:
         for tgt in set(MDLINK.findall(text)) | set(WIKILINK.findall(text)):
             if tgt in nodes:
                 add(node_id, tgt)
+
+    # degree = incident-edge count per node (orphans -> 1: their lone spoke to the hub)
+    degree: dict[str, int] = {}
+    for e in edges:
+        degree[e["from"]] = degree.get(e["from"], 0) + 1
+        degree[e["to"]] = degree.get(e["to"], 0) + 1
+    for n in nodes.values():
+        n["degree"] = degree.get(n["id"], 0)
 
     return {"nodes": list(nodes.values()), "edges": edges}
 
