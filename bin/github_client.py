@@ -317,10 +317,13 @@ def cmd_run(args) -> int:
 
 
 def cmd_reap(args) -> int:
-    """Post-ingest: un-star repos whose digest is now corpus_ingested, so the user's
-    GitHub stars stay a clean 'not yet processed by Corpus' list. Only un-stars repos
-    that are BOTH corpus_ingested AND still starred (intersection) — idempotent and
-    quiet once drained. Fails closed: if the star list can't be read, un-stars nothing."""
+    """Un-star repos whose digest has been COLLECTED (captured), so the user's GitHub
+    stars stay a clean 'not yet captured by Corpus' list. Keys on collection, not full
+    ingestion, so stars drain as soon as a repo is captured rather than waiting on the
+    (bottlenecked) ingest step — the digest remains for later ingestion, so no knowledge
+    is lost. Only un-stars repos that are BOTH collected AND still starred (intersection)
+    — idempotent and quiet once drained. Fails closed: if the star list can't be read,
+    un-stars nothing."""
     if not gh_available():
         print(json.dumps({"status": "not configured", "unstarred": 0}))
         return 0

@@ -46,13 +46,14 @@ def test_already_collected_matches_frontmatter_repo_line(tmp_path):
     assert cg.already_collected("owner/other", dirs=[d], ledger_path=led) is False
 
 
-def test_reapable_returns_only_ingested_repo_fullnames(tmp_path):
+def test_reapable_returns_all_collected_repo_fullnames(tmp_path):
     d = tmp_path / "github"; d.mkdir()
     (d / "ingested.md").write_text(
         "---\nchannel: github\nrepo: owner/done\ncorpus_ingested: true\n---\nbody", encoding="utf-8")
     (d / "pending.md").write_text(
         "---\nchannel: github\nrepo: owner/todo\n---\nbody", encoding="utf-8")
-    assert cg.reapable(dirs=[d]) == ["owner/done"]   # only the corpus_ingested digest
+    # keys on COLLECTION, not ingestion: both captured digests are reapable regardless of ingest state
+    assert set(cg.reapable(dirs=[d])) == {"owner/done", "owner/todo"}
 
 
 def test_reapable_dedups_across_dirs(tmp_path):
@@ -64,9 +65,10 @@ def test_reapable_dedups_across_dirs(tmp_path):
     assert cg.reapable(dirs=[a, b]) == ["owner/dup"]   # same repo once, not twice
 
 
-def test_reapable_empty_when_nothing_ingested(tmp_path):
+def test_reapable_empty_when_no_github_digests(tmp_path):
     d = tmp_path / "github"; d.mkdir()
-    (d / "p.md").write_text("---\nchannel: github\nrepo: owner/todo\n---\nbody", encoding="utf-8")
+    # a non-github file with no `repo:` field is never reapable (nothing collected here)
+    (d / "note.md").write_text("---\nchannel: web\ntitle: something\n---\nbody", encoding="utf-8")
     assert cg.reapable(dirs=[d]) == []
 
 
