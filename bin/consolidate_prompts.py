@@ -40,3 +40,23 @@ def synthesis_prompt(topic: str, domain: str, slug: str, member_rel_paths: list[
         f"{domain}/sources/<slug>.md).\n"
         "- Impersonal, reference-dense. Do NOT edit any file other than the one synthesis page."
     )
+
+
+def deepen_prompt(target_page_rel: str, topic: str, member_rel_paths: list[str]) -> str:
+    members = "\n".join(f"- corpus/{m}" for m in member_rel_paths)
+    return (
+        f"Deepen the EXISTING corpus page on \"{topic}\" by integrating additional source-summary "
+        f"pages into it. Edit EXACTLY this file in place: corpus/{target_page_rel}\n\n"
+        f"Read the current page first, then read these member sources and weave their material in:\n"
+        f"{members}\n\n"
+        "Rules (from CLAUDE.md):\n"
+        "- PRESERVE every existing claim and every existing footnote citation on the page — you may "
+        "reorganize or expand prose, but do NOT remove or weaken any existing cited claim, and do "
+        "NOT delete any existing [^footnote] definition.\n"
+        "- ADD the new material from the member sources, each new non-trivial claim carrying a "
+        "footnote [^n] citing the member it came from (reuse the members' own source citations). "
+        "NEVER invent a claim absent from the page or the members. Keep any verbatim quote to 25 "
+        "words max.\n"
+        "- Keep the frontmatter (type/domain/etc.) and the page's H1 title. Impersonal, reference-"
+        "dense. Do NOT edit any file other than this one page."
+    )

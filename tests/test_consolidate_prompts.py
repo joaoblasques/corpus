@@ -19,3 +19,15 @@ def test_synthesis_prompt_enforces_provenance_and_paths():
     assert "cite" in p.lower() and "type: synthesis" in p        # provenance + type
     assert "consolidates:" in p                                   # required frontmatter field
     assert "25" in p                                              # quote length limit
+
+def test_deepen_prompt_preserves_existing_and_integrates_new():
+    p = cp.deepen_prompt("ai-engineering/openai.md", "openai",
+                         ["ai-engineering/sources/o1.md", "ai-engineering/sources/o2.md"])
+    assert "corpus/ai-engineering/openai.md" in p            # the exact file to edit
+    assert "o1.md" in p and "o2.md" in p                      # member sources listed
+    # must instruct: preserve existing, integrate new, cite, don't drop, don't invent
+    low = p.lower()
+    assert "preserve" in low or "keep" in low
+    assert "do not" in low or "never" in low                 # a prohibition (drop/invent)
+    assert "cite" in low and "footnote" in low
+    assert "25" in p                                          # quote length limit
