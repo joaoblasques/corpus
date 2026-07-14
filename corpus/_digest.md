@@ -69,3 +69,9 @@ type: internal
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/chip-huyen.md", "verdict_ok": false, "gov": "reverted+queued"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/data-engineering/matthew-housley.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/web-scraping.md", "verdict_ok": true, "gov": "committed"}
+
+## [2026-07-14T03:13] gardener · run
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/chip-huyen.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/mlops/tilt.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/mlops/100-days-of-ml-code.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/mlops/ampernetacle.md", "verdict_ok": true, "gov": "committed"}
