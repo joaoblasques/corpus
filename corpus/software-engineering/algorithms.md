@@ -21,6 +21,33 @@ sources:
   - path: raw/_inbox/pdf-data-structures-and-algorithm-analysis-in-java-part-01.md
     channel: pdf
     ingested_at: 2026-07-12
+  - path: raw/_inbox/pdf-learning-algorithm-part-01.md
+    channel: pdf
+    ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-learning-algorithm-part-02.md
+    channel: pdf
+    ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-learning-algorithm-part-03.md
+    channel: pdf
+    ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-learning-algorithm-part-04.md
+    channel: pdf
+    ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-learning-algorithm-part-05.md
+    channel: pdf
+    ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-learning-algorithm-part-06.md
+    channel: pdf
+    ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-learning-algorithm-part-07.md
+    channel: pdf
+    ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-learning-algorithm-part-08.md
+    channel: pdf
+    ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-learning-algorithm-part-09.md
+    channel: pdf
+    ingested_at: 2026-07-14
 aliases:
   - algorithms
   - recursion
@@ -52,11 +79,22 @@ aliases:
   - replacement selection
   - multiway merge
   - lower bound for sorting
+  - Floyd-Warshall
+  - all-pairs shortest path
+  - BFS
+  - breadth-first search
+  - shortest path algorithms
+  - interval scheduling
+  - KMP algorithm
+  - Knuth-Morris-Pratt
+  - string matching
+  - Hoare partition
+  - Lomuto partition
 tags:
   - corpus/software-engineering
   - concept
 created: 2026-06-15
-updated: 2026-07-12
+updated: 2026-07-14
 ---
 
 # Algorithms (Strategies, Not Tricks)
@@ -169,6 +207,30 @@ Greedy algorithms make the locally optimal choice at each step and never reconsi
 
 Some problems have no known polynomial algorithm and are suspected to require exponential time. See [Complexity Theory](/software-engineering/complexity-theory.md) for full coverage.
 
+## Shortest path algorithms (graph traversal)
+
+**BFS for unweighted shortest paths**: In an unweighted graph, BFS gives the shortest path. Because BFS visits nodes in FIFO order, a node reached first via BFS is always reached by the fewest edges. In a weighted graph, BFS can update node distances multiple times (a node reachable in one hop may later be reached more cheaply via two hops), making it inefficient — Dijkstra's heap-based approach avoids this [^src_learning].
+
+**Dijkstra's algorithm** (weighted, non-negative edges): greedily extracts the min-distance node from a priority queue, then relaxes its neighbors. Guarantees each node is finalized on first extraction. Time: O((V + E) log V) with a binary heap; O(E + V log V) with a Fibonacci heap [^src_learning].
+
+**Floyd-Warshall** (all-pairs shortest path): DP over k, i, j where `dist[i][j]` is the shortest path using only nodes {1..k} as intermediaries. Runs in O(V³); detects negative cycles by checking the main diagonal for negative values. Better than running Dijkstra from every source when edges may be negative (Bellman-Ford) or the graph is dense [^src_learning].
+
+## Interval scheduling (greedy)
+
+**Interval scheduling maximization**: given jobs with start times s_j and finish times f_j, maximize the number of compatible (non-overlapping) jobs. Three greedy orderings (earliest start, shortest interval, earliest finish) only one is optimal: **earliest deadline (finish time) first**. Proof: exchange argument — any optimal solution can be modified step-by-step to match the greedy solution without reducing feasibility [^src_learning].
+
+## Quicksort partition schemes
+
+**Lomuto partition**: picks the last element as pivot; single-pointer scan. Simple to implement but requires 3x more swaps on average than Hoare's scheme.
+
+**Hoare's partition**: two pointers starting at opposite ends, scanning inward until they find an inversion (element ≥ pivot on left, ≤ pivot on right), then swap. Three times fewer swaps on average; efficient even when all values are equal. The pivot is not necessarily in its final position after partitioning — this is the key difference from Lomuto [^src_learning].
+
+## String matching — KMP algorithm
+
+The **Knuth-Morris-Pratt (KMP) algorithm** avoids redundant comparisons in naïve string search. Pre-processing phase: build a failure function S[i] = length of the longest proper prefix of Pattern[0..i] that is also a suffix. Matching phase: on mismatch at position j in the pattern, resume matching at S[j-1] rather than starting over at Pattern[0]. This enables O(n + m) matching instead of O(nm) [^src_learning].
+
+Key invariant: if a match of length L is found ending at Text[i], and S[L-1] = k, then the last k characters before Text[i+1] already match the first k characters of the pattern — so the next comparison starts at Pattern[k] [^src_learning].
+
 ## See also
 
 - [Data Structures and Big O Notation](/software-engineering/data-structures.md) — the complexity classes (O(1)/O(log n)/O(n)/O(n²)) these strategies trade in, and the structures (stacks, trees, hashmaps) the algorithms operate on.
@@ -182,3 +244,4 @@ Some problems have no known polynomial algorithm and are suspected to require ex
 [^src5]: [Algorithms, Erickson — Part 15 (MST: Borůvka, Jarník)](../../raw/pdf/pdf-algorithms-part-15.md)
 [^src3]: [Algorithms, Erickson — Part 21 (Network Flow applications)](../../raw/pdf/pdf-algorithms-part-21.md)
 [^src_shaffer]: [Data Structures and Algorithm Analysis in C++ (Shaffer) — Part 1 (Preface, Ch 1, sorting/external sorting)](../../raw/pdf/pdf-data-structures-and-algorithm-analysis-in-c-part-01.md)
+[^src_learning]: [Learning Algorithm PDF — Parts 1-9 (greedy scheduling, BFS/Dijkstra, Floyd-Warshall, DP, quicksort, KMP)](../../raw/pdf/pdf-learning-algorithm-part-01.md)

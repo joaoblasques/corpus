@@ -210,11 +210,12 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [The Portfolio Project That Lands a DE Role](/data-engineering/portfolio-project-that-lands-a-de-role.md)
 
 <details>
-<summary>Source summaries (151)</summary>
+<summary>Source summaries (156)</summary>
 
 - ["A dbt \"logic mesh\" with packages: standard model and metrics across 25 autonomous organizations | dbt Summit"](/data-engineering/sources/a-dbt-logic-mesh-with-packages-standard-model-and-metrics-ac-bf162a97.md)
 - ["Academic → CTO: What Actually Matters in Data (Matthew Housley) - Confessions of a Data Guy"](/data-engineering/sources/academic-cto-what-actually-matters-in-data-matthew-housley-c-e9eae58c.md)
 - ["AWS Data Lake with S3, Glue & Athena"](/data-engineering/sources/aws-data-lake-with-s3-glue-athena-aea.md)
+- ["Beyond the Perimeter: Practical Patterns for Fine‑Grained Data Access"](/data-engineering/sources/beyond-the-perimeter-practical-patterns-for-fine-grained-dat-ae.md)
 - ["Build an End to End Data Pipeline on AWS | AWS Lambda, S3 Bucket, EventBridge Trigger , Marvel Data"](/data-engineering/sources/build-an-end-to-end-data-pipeline-on-aws-aws-lambda-s3-bucke-goSGk2VwVcM.md)
 - ["Choose Your Path: Data Leaders, Platform Owners, Practitioners & Analysts | dbt Labs"](/data-engineering/sources/choose-your-path-data-leaders-platform-owners-practitioners--682257ae.md)
 - ["CI/CD for Databricks: ETL Testing and Automation"](/data-engineering/sources/ci-cd-for-databricks-etl-testing-and-automation-ff3308c6.md)
@@ -324,6 +325,9 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [Designing Data-intensive Applications with Martin Kleppmann](/data-engineering/sources/designing-data-intensive-applications-with-martin-kleppmann-SVOrURyOu_U.md)
 - [DevOps - Bash Scripting Tutorial for Beginners](/data-engineering/sources/devops-bash-scripting-tutorial-for-beginners-bee.md)
 - [DevOps - Setting Up a Production-Ready VPS from Scratch](/data-engineering/sources/devops-setting-up-a-production-ready-vps-from-scratch-cac.md)
+- [Dimensional Data Modeling - Day 1](/data-engineering/sources/dimensional-data-modeling-day-1-1.md)
+- [Dimensional Data Modeling - Day 2](/data-engineering/sources/dimensional-data-modeling-day-2-2.md)
+- [Dimensional Data Modeling - Day 3](/data-engineering/sources/dimensional-data-modeling-day-3-3.md)
 - [End-To-End Data Engineering Project in 40 Minutes | AWS Cloud | PySpark](/data-engineering/sources/end-to-end-data-engineering-project-in-40-minutes-aws-cloud--yIc5a7C8aHs.md)
 - [End-to-End ETL Pipeline in Azure Databricks | Tutorial](/data-engineering/sources/end-to-end-etl-pipeline-in-azure-databricks-tutorial-XxKgYc10Wtg.md)
 - [Every Data Structure Simply Explained in 25 Minutes!](/data-engineering/sources/every-data-structure-simply-explained-in-25-minutes-vVL6NFzr0Rg.md)
@@ -344,6 +348,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [MySQL - The Basics // Learn SQL in 23 Easy Steps](/data-engineering/sources/mysql-the-basics-learn-sql-in-23-easy-steps-Cz3WcZLRaWc.md)
 - [portfolio-to-paycheck-7-data-engineering-projects-hiring-man](/data-engineering/sources/portfolio-to-paycheck-7-data-engineering-projects-hiring-man-a.md)
 - [Programming Is NOT Enough | Add these 5 skills…](/data-engineering/sources/programming-is-not-enough-add-these-5-skills-bZa2uicOTAE.md)
+- [Python Practice Environment Setup](/data-engineering/sources/python-practice-environment-setup-e.md)
 - [Real Data Engineering Stories (No One Tells You This) | Baraa & Simon](/data-engineering/sources/real-data-engineering-stories-no-one-tells-you-this-baraa-si-Vvv5FG0EF1U.md)
 - [Realtime Data Streaming |  End To End Data Engineering Project](/data-engineering/sources/realtime-data-streaming-end-to-end-data-engineering-project-GqAcTrqKcrY.md)
 - [Skytrax Reviews — dbt Transformation Layer (portfolio project)](/data-engineering/sources/skytrax-dbt-transformation-project.md)

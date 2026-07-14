@@ -2,6 +2,19 @@
 
 > OKF v0.1 change log. Newest first, grouped by date.
 
+## 2026-07-14
+* **Collectors**: gmail=3, blog_promote=0, obsidian=25, book_discover=7, blog_discover=15, book_fetch=12, pdf=12, books=0, arxiv=0, youtube=0, github_discover=0, github=0, x=0, links_refetch=0
+* **Ingest**: 50 ingested · 0 deferred · status=ok
+* **YoutubeQuick**: 0 intake · 0 rescued · 0 skipped · status=ok
+* **DocsQuick**: 35 intake · 42 thin · 3 llm_fail · status=ok
+* **YoutubeReap**: 0 removed · status=ok
+* **Gardener**: 4 stubs deepened · status=ok
+* **Heal**: 1 citations repointed · 6 unfixable · 5 hubs reindexed · 23 cross-domain links · status=ok
+* **Depth**: 372 knowledge · 1071 sources · ratio 1:2.9
+* **GapResolver**: 1 gap dispatched · 3 sources queued · status=ok · gap=tool calling and context engineering
+* **Lint**: 5 broken wikilinks · 6 broken citations · 0 orphans · 1039 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+* **OKF**: 0 violations
+
 ## 2026-07-13
 
 * **Ingest**: Data Structures and Algorithm Analysis in Java (Shaffer, Ed. 3.2) — parts 17–30 — routed to software-engineering
@@ -2124,3 +2137,33 @@
   - §2: added raw/notes/ to architecture listing
   - §10.4: new subsection for first-party PARA vault notes; higher trust signal than web clippings
   - retroactive: Context Engineering source moved raw/web/ → raw/notes/; all citations updated
+
+## 2026-07-14
+
+* **Ingest**: Data Structures — Wikipedia Compilation (parts 13-26) — routed to software-engineering
+  - sources: pdf-data-structures-part-13.md through pdf-data-structures-part-26.md (channel: pdf, 14 files)
+  - domain: software-engineering
+  - new pages: none
+  - pages updated: [/software-engineering/data-structures.md, /software-engineering/sources/data-structures-wikipedia.md]
+  - notes: ingest-auto run; continuation of parts 1-12 ingested 2026-07-13. Parts 13-26 cover: heap variants (binary heap sift-up/sift-down, binomial heap (1+2^k+…+2^n structure), Fibonacci heap (lazy union, O(1) amortized decrease-key), pairing heap (multi-pass/two-pass linking), leftist/HBLT trees (path-length bias)); spatial data structures (BSP trees, segment trees, interval trees, range trees, R-trees, spatial bins); advanced hashing (Robin Hood, cuckoo, hopscotch, extendible hashing, Bloom filters); graph representations (adjacency matrix/list, incidence matrix, edge list, CSR for sparse); scene graphs.
+
+* **Ingest**: Learning Algorithm PDF (parts 1-9) — routed to software-engineering
+  - sources: pdf-learning-algorithm-part-01.md through pdf-learning-algorithm-part-09.md (channel: pdf, 9 files)
+  - domain: software-engineering
+  - new pages: [/software-engineering/sources/learning-algorithm.md]
+  - pages updated: [/software-engineering/algorithms.md]
+  - notes: ingest-auto run; 327-page compact algorithms reference. Key additions to algorithms.md: interval scheduling (earliest-finish-time greedy + exchange-argument proof), BFS for unweighted shortest paths, Dijkstra's algorithm, Floyd-Warshall all-pairs shortest path, Hoare vs Lomuto quicksort partition schemes, KMP string matching (failure function + matching phase).
+
+* **Ingest**: Foundations of Data Science (Blum, Hopcroft, Kannan 2018) — parts 1-26 — routed to ai-engineering
+  - sources: pdf-foundations-of-data-science-part-01.md through pdf-foundations-of-data-science-part-26.md (channel: pdf, 26 files)
+  - domain: ai-engineering
+  - new pages: [/ai-engineering/sources/foundations-of-data-science-blum-hopcroft-kannan.md]
+  - pages updated: [/ai-engineering/machine-learning.md, /ai-engineering/singular-value-decomposition.md, /ai-engineering/clustering-methods.md]
+  - notes: ingest-auto run; rigorous 479-page graduate textbook. machine-learning.md: added VC dimension / PAC learning / halving algorithm / perceptron bound / AdaBoost sections. singular-value-decomposition.md: added BHK source entry. clustering-methods.md: added spectral clustering section (graph Laplacian, Fiedler vector, conductance, approximation stability).
+
+* **Ingest**: The Quest for Artificial Intelligence (Nilsson, 2010) — part 1/33 — routed to ai-engineering
+  - sources: pdf-the-quest-for-artificial-intelligence-a-history-of-part-01.md (channel: pdf, 1 file)
+  - domain: ai-engineering
+  - new pages: [/ai-engineering/ai-history.md, /ai-engineering/nils-nilsson.md]
+  - pages updated: [/ai-engineering/README.md, /software-engineering/README.md]
+  - notes: ingest-auto run; part 1 contains TOC (35 chapters, 8 parts), Preface, and Chapter 1 "Dreams and Dreamers." Stub pages created for the concept (AI history timeline from antiquity through modern AI) and the entity (Nils Nilsson, Stanford emeritus, 50-year AI participant). Remaining 32 parts pending.

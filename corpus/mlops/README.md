@@ -137,7 +137,7 @@ The engineering substrate for building ML and software systems: how the developm
 - [Environment Promotion (dev → acc → prd)](/mlops/environment-promotion.md)
 
 <details>
-<summary>Source summaries (84)</summary>
+<summary>Source summaries (85)</summary>
 
 - ["29%+ warehouse savings: How the dbt Fusion engine drives cost efficiency | dbt Labs"](/mlops/sources/29-warehouse-savings-how-the-dbt-fusion-engine-drives-cost-e-121b247d.md)
 - ["AL 005: 60% Growth in 60 Days? How?!"](/mlops/sources/al-005-60-growth-in-60-days-how-150a587c.md)
@@ -211,6 +211,7 @@ The engineering substrate for building ML and software systems: how the developm
 - [I Found Where AI Agents Are Beating Humans on Polymarket (perfect for OpenClaw)](/mlops/sources/i-found-where-ai-agents-are-beating-humans-on-polymarket-per-Kz3kZOTd_tI.md)
 - [I Wish Someone Had Explained Cowork Like This Earlier (in under 10 min)](/mlops/sources/i-wish-someone-had-explained-cowork-like-this-earlier-in-und-IBI8DecuFyg.md)
 - [mbta-on-time-lakehouse-retrospective](/mlops/sources/mbta-on-time-lakehouse-retrospective-eece.md)
+- [NotebookLM + Obsidian Integration Workflow](/mlops/sources/notebooklm-obsidian-integration-workflow-f.md)
 - [OpenClaw 2.0 is here.](/mlops/sources/openclaw-2-0-is-here-6vPaitNQMGY.md)
 - [Seedance 2.0 + Claude Code Creates $10k Websites in Minutes](/mlops/sources/seedance-2-0-claude-code-creates-10k-websites-in-minutes-NvxiSG34mPU.md)
 - [Sell Your API to AI Agents & Make SERIOUS Money in 2026 (full guide / beginner friendly)](/mlops/sources/sell-your-api-to-ai-agents-make-serious-money-in-2026-full-g-GyijriMIKPA.md)

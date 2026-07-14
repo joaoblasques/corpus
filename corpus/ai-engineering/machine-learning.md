@@ -21,6 +21,9 @@ sources:
   - path: raw/youtube/youtube-_hdUddANh_o-how-to-learn-machine-learning-like-a-genius-and-not-waste-ti.md
     channel: youtube
     ingested_at: 2026-06-20
+  - path: raw/_inbox/pdf-foundations-of-data-science-part-01.md
+    channel: pdf
+    ingested_at: 2026-07-14
 aliases:
   - machine learning
   - ML
@@ -29,11 +32,20 @@ aliases:
   - reinforcement learning
   - fine-tuning
   - classical ML
+  - VC dimension
+  - Vapnik-Chervonenkis dimension
+  - perceptron
+  - boosting
+  - stochastic gradient descent
+  - SGD
+  - online learning
+  - Occam's Razor
+  - generalization
 tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-15
-updated: 2026-06-15
+updated: 2026-07-14
 ---
 
 # Machine Learning
@@ -82,6 +94,18 @@ An interview with Anil Ananthaswamy (author, *Why Machines Learn*) on Machine Le
 
 The video companion to the "how I'd learn ML in 2026" email: same 70/30 build/theory framework, same 6–9 months timeline, same Python-first → scikit-learn → PyTorch progression [^src7]. The video adds one concrete practice: "spend more time *building* than watching" — a ratio check the email states but doesn't make visual. See [Learning AI Engineering](/ai-engineering/learning-ai-engineering.md) for the full curriculum structure.
 
+## Theoretical generalization — VC dimension (Blum/Hopcroft/Kannan)
+
+The **Vapnik-Chervonenkis (VC) dimension** formalizes when a hypothesis class H can generalize from finite training data. A set S is *shattered* by H if for every labeling of S there exists an h ∈ H consistent with it. VC(H) = the largest set H can shatter [^src_bhk].
+
+**Fundamental theorem of learning**: with m ≥ O(VC(H)/ε² · log(1/δ)) samples, empirical risk minimization (ERM) achieves true error ≤ ε with probability ≥ 1-δ. The sample complexity grows linearly with VC(H). Infinite VC dimension → not PAC-learnable [^src_bhk].
+
+Examples: linear separators in R^d have VC dimension d+1. Neural networks have finite VC dimension polynomial in the number of weights [^src_bhk].
+
+**Online learning**: the halving algorithm — maintain a version space of consistent hypotheses; predict majority vote; on error, eliminate all inconsistent hypotheses. Makes at most log₂|H| mistakes before converging. The perceptron algorithm achieves at most (R/γ)² mistakes for R-bounded data and γ-margin classifier [^src_bhk].
+
+**Boosting** (Adaboost): combine weak learners (each just above 50% accuracy) into a strong learner with arbitrarily low error. Each round re-weights examples: misclassified examples get higher weight. Final classifier is a weighted majority vote. Converts weak learning to strong learning in polynomial time [^src_bhk].
+
 ## See also
 
 - [AI Fundamentals](/ai-engineering/ai-fundamentals.md) — ML is the learning branch of the broader field
@@ -89,6 +113,7 @@ The video companion to the "how I'd learn ML in 2026" email: same 70/30 build/th
 - [Statistics & Probability for ML](/ai-engineering/statistics-for-ml.md) — the math ML rests on (distributions, regression, inference)
 - [LLM](/ai-engineering/llm.md) — large-scale supervised next-token learning + RLHF
 - [Learning AI Engineering](/ai-engineering/learning-ai-engineering.md) — the "learn ML in 2026" path
+- [Foundations of Data Science (Blum/Hopcroft/Kannan)](/ai-engineering/sources/foundations-of-data-science-blum-hopcroft-kannan.md) — rigorous textbook source
 - [AI Engineering hub](/ai-engineering/README.md)
 
 ---
@@ -100,3 +125,4 @@ The video companion to the "how I'd learn ML in 2026" email: same 70/30 build/th
 [^src5]: [AI was HARD until I Learned these 10 Concepts](../../raw/youtube/youtube-5DtjQrROUzY-ai-was-hard-until-i-learned-these-10-concepts.md) — Maddy Zhang, [06:31](../../raw/youtube/youtube-5DtjQrROUzY-ai-was-hard-until-i-learned-these-10-concepts.md#t=6:31)
 [^src6]: [The Elegant Math Behind Machine Learning (MLST interview — Anil Ananthaswamy, Why Machines Learn)](../../raw/youtube/youtube-URtF_UHYBSo-the-elegant-math-behind-machine-learning.md)
 [^src7]: [How to Learn Machine Learning Like a Genius (Tech With Tim)](../../raw/youtube/youtube-_hdUddANh_o-how-to-learn-machine-learning-like-a-genius-and-not-waste-ti.md)
+[^src_bhk]: [Foundations of Data Science (Blum, Hopcroft, Kannan 2018) — Chapter 5](../../raw/pdf/pdf-foundations-of-data-science-part-01.md)

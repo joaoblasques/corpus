@@ -70,7 +70,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [AI and the Job Market](/ai-business/ai-and-the-job-market.md)
 
 <details>
-<summary>Source summaries (161)</summary>
+<summary>Source summaries (169)</summary>
 
 - ["$1,300/Day Automated Bittensor Investing With Claude Code (34 Min Free Masterclass)"](/ai-business/sources/1-300-day-automated-bittensor-investing-with-claude-code-34--SHEs8gNh7sQ.md)
 - ["20-30 Years Old Is The Tutorial Phase, Don't F*ck It Up - Dan Koe"](/ai-business/sources/20-30-years-old-is-the-tutorial-phase-don-t-f-ck-it-up-dan-k-67066ee2.md)
@@ -78,10 +78,12 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - ["2026.26: Summer Vibes"](/ai-business/sources/2026-26-summer-vibes-510e62ae.md)
 - ["2026.28: XBOX On the Rocks"](/ai-business/sources/2026-28-xbox-on-the-rocks-8fc35a37.md)
 - ["3-Year Update: A Financial Analysis of My Book’s Unit Economics"](/ai-business/sources/3-year-update-a-financial-analysis-of-my-book-s-unit-economi-5be171a1.md)
+- ["7 Reasons Media Is a No-Good, Horrible, Rotten Business That I Love Anyways"](/ai-business/sources/7-reasons-media-is-a-no-good-horrible-rotten-business-that-i-9b1bb1df.md)
 - ["A book, a baby, and a billionaire - Noah Kagan"](/ai-business/sources/a-book-a-baby-and-a-billionaire-noah-kagan-a33bc9e0.md)
 - ["About the Interview, The Metaverse and VR, Why Not a Startup?"](/ai-business/sources/about-the-interview-the-metaverse-and-vr-why-not-a-startup-af6ea3fb.md)
 - ["Adam Mosseri: AI is a tailwind for authenticity"](/ai-business/sources/adam-mosseri-ai-is-a-tailwind-for-authenticity-492d9944.md)
 - ["Adobe Max, Photoshop on the Web, Photoshop and NFTs"](/ai-business/sources/adobe-max-photoshop-on-the-web-photoshop-and-nfts-4299d0e0.md)
+- ["Agentic misalignment: How LLMs could be insider threats"](/ai-business/sources/agentic-misalignment-how-llms-could-be-insider-threats-b0f94303.md)
 - ["AI Automation Business Opportunities: Real Use Cases"](/ai-business/sources/ai-automation-business-opportunities-real-use-cases-dcccc5e8.md)
 - ["AI Commerce Payments: How Checkout Works in ChatGPT, Gemini, and Claude"](/ai-business/sources/ai-commerce-payments-how-checkout-works-in-chatgpt-gemini-an-f1f34d58.md)
 - ["AI for Consulting Firms: Scale White-Glove Advisory"](/ai-business/sources/ai-for-consulting-firms-scale-white-glove-advisory-394bc07b.md)
@@ -101,6 +103,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - ["Anti-Money Laundering in a Nutshell: Awareness and Comp…"](/ai-business/sources/anti-money-laundering-in-a-nutshell-awareness-and-comp-c.md)
 - ["Apple Ads and the Anti-Steering Argument, Additional Follow-up"](/ai-business/sources/apple-ads-and-the-anti-steering-argument-additional-follow-u-e0194f5e.md)
 - ["Apple Price Increases, Apple Intelligence and the E.U."](/ai-business/sources/apple-price-increases-apple-intelligence-and-the-e-u-49b55400.md)
+- ["Apple Sues OpenAI, Apple’s Real Problem"](/ai-business/sources/apple-sues-openai-apple-s-real-problem-a151d0da.md)
 - ["Apple’s iPhone Event, Apple and California, Additional Notes"](/ai-business/sources/apple-s-iphone-event-apple-and-california-additional-notes-9d56606c.md)
 - ["Beyond Acceptance: The Transformational Journey of Applying to Grad School (or Anything Else)"](/ai-business/sources/beyond-acceptance-the-transformational-journey-of-applying-t-3329bd9d.md)
 - ["Beyond Redaction: Anatomy of a Privacy-Safe Data Platform"](/ai-business/sources/beyond-redaction-anatomy-of-a-privacy-safe-data-platform-ec95d625.md)
@@ -129,6 +132,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [4 daily AI routines that will change your life](/ai-business/sources/4-daily-ai-routines-that-will-change-your-life-3a393f13.md)
 - [5 Questions to Help You Navigate Uncertainty](/ai-business/sources/5-questions-to-help-you-navigate-uncertainty-d1126310.md)
 - [6 challenges of AI implementation you need to know about](/ai-business/sources/6-challenges-of-ai-implementation-you-need-to-know-about-d84334df.md)
+- [6 Days of deals](/ai-business/sources/6-days-of-deals-d35fdd92.md)
 - [6 months to live for open models](/ai-business/sources/6-months-to-live-for-open-models-ab23329c.md)
 - [7-Day Live Video Challenge](/ai-business/sources/7-day-live-video-challenge-dcbb663f.md)
 - [A Complete Knowledge Base Of HUMAN 3.0 - Dan Koe](/ai-business/sources/a-complete-knowledge-base-of-human-3-0-dan-koe-a4cb9cd1.md)
@@ -150,6 +154,8 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [AI Business - AI-First Service Agencies Boring Business Model](/ai-business/sources/ai-business-ai-first-service-agencies-boring-business-model-de.md)
 - [AI Business - Complete Guide to Making Money with MCPs](/ai-business/sources/ai-business-complete-guide-to-making-money-with-mcps-c.md)
 - [AI Business Models for Beginners 2026](/ai-business/sources/ai-business-models-for-beginners-2026-2026.md)
+- [AI Doesn't Care About Your Résume](/ai-business/sources/ai-doesn-t-care-about-your-r-sume-5bd77f6e.md)
+- [AI for GTM — Best of Growth Unhinged | Kyle Poyar’s Growth Unhinged](/ai-business/sources/ai-for-gtm-best-of-growth-unhinged-kyle-poyar-s-growth-unhin-50e04191.md)
 - [AI for Superfans](/ai-business/sources/ai-for-superfans-7188444f.md)
 - [AI Isn’t Breaking Work. It’s Already Broken. - Cal Newport](/ai-business/sources/ai-isn-t-breaking-work-it-s-already-broken-cal-newport-16eace99.md)
 - [AI Phobia Is Just Fear That ‘Easier’ Equals ‘Cheating’](/ai-business/sources/ai-phobia-is-just-fear-that-easier-equals-cheating-446f560e.md)
@@ -161,6 +167,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [AI-Powered Obsidian Smart Note System](/ai-business/sources/ai-powered-obsidian-smart-note-system-e.md)
 - [AirPods Max Sweepstakes — Official Rules | dbt Labs at Databricks Data+AI Summit 2026 | dbt Labs](/ai-business/sources/airpods-max-sweepstakes-official-rules-dbt-labs-at-databrick-f8604542.md)
 - [America's Next 250](/ai-business/sources/america-s-next-250-38b5ab71.md)
+- [Amir Khoshniyati | Databricks](/ai-business/sources/amir-khoshniyati-databricks-cd2aefa0.md)
 - [An Interview with Figma CEO Dylan Field About Design and AI](/ai-business/sources/an-interview-with-figma-ceo-dylan-field-about-design-and-ai-0132d18e.md)
 - [An Interview with Michael Morton About E-Commerce in the Age of AI](/ai-business/sources/an-interview-with-michael-morton-about-e-commerce-in-the-age-49be6de7.md)
 - [Andrew Schoen | Databricks](/ai-business/sources/andrew-schoen-databricks-febb806e.md)
@@ -190,6 +197,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [Career - ML and Data Science Side Hustles](/ai-business/sources/career-ml-and-data-science-side-hustles-e.md)
 - [Change the visibility of your Gists](/ai-business/sources/change-the-visibility-of-your-gists-3a0c7229.md)
 - [Claude AI - Self-Publishing Romance Novels on KDP](/ai-business/sources/claude-ai-self-publishing-romance-novels-on-kdp-d.md)
+- [Claude Cowork as Personal COO — Delegation Framework](/ai-business/sources/claude-cowork-as-personal-coo-delegation-framework-fae.md)
 - [Contact SPI](/ai-business/sources/contact-spi-91f481e7.md)
 - [Control content use for AI training with Cloudflare’s managed robots.txt and blocking for monetized content](/ai-business/sources/control-content-use-for-ai-training-with-cloudflare-s-manage-c3b4ee37.md)
 - [Conversational analytics built on governed data | dbt Labs](/ai-business/sources/conversational-analytics-built-on-governed-data-dbt-labs-ff9175c0.md)

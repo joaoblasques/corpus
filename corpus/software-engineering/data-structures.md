@@ -21,6 +21,48 @@ sources:
   - path: raw/_inbox/pdf-algorithms-and-data-structures-part-01.md
     channel: pdf
     ingested_at: 2026-07-13
+  - path: raw/_inbox/pdf-data-structures-part-13.md
+    channel: pdf
+    ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-data-structures-part-14.md
+    channel: pdf
+    ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-data-structures-part-15.md
+    channel: pdf
+    ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-data-structures-part-16.md
+    channel: pdf
+    ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-data-structures-part-17.md
+    channel: pdf
+    ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-data-structures-part-18.md
+    channel: pdf
+    ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-data-structures-part-19.md
+    channel: pdf
+    ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-data-structures-part-20.md
+    channel: pdf
+    ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-data-structures-part-21.md
+    channel: pdf
+    ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-data-structures-part-22.md
+    channel: pdf
+    ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-data-structures-part-23.md
+    channel: pdf
+    ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-data-structures-part-24.md
+    channel: pdf
+    ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-data-structures-part-25.md
+    channel: pdf
+    ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-data-structures-part-26.md
+    channel: pdf
+    ingested_at: 2026-07-14
 aliases:
   - data structures
   - Big O notation
@@ -46,11 +88,37 @@ aliases:
   - deque
   - double-ended queue
   - implicit data structure
+  - binary heap
+  - binomial heap
+  - Fibonacci heap
+  - pairing heap
+  - leftist tree
+  - leftist heap
+  - HBLT
+  - height-biased leftist tree
+  - priority queue
+  - BSP tree
+  - binary space partitioning
+  - segment tree
+  - interval tree
+  - range tree
+  - R-tree
+  - spatial data structure
+  - space partitioning
+  - Robin Hood hashing
+  - cuckoo hashing
+  - hopscotch hashing
+  - extendible hashing
+  - bloom filter
+  - adjacency list
+  - incidence list
+  - graph representation
+  - scene graph
 tags:
   - corpus/software-engineering
   - concept
 created: 2026-05-21
-updated: 2026-07-13
+updated: 2026-07-14
 ---
 
 # Data Structures and Big O Notation
@@ -171,6 +239,72 @@ Implicit structures save memory (no pointer fields) and improve cache locality. 
 
 When old versions of a data structure must remain accessible after updates (persistence), imperative structures are insufficient — mutation destroys old versions. Functional data structures avoid mutation entirely; every update returns a new version sharing structure with the old one. Lazy evaluation with memoization enables amortized O(1)–O(log n) bounds to hold even with persistence (see [Functional and Persistent Data Structures](/software-engineering/functional-persistent-data-structures.md)) [^src_okasaki].
 
+## Heap variants and priority queues
+
+All heap variants implement a **priority queue** ADT: insert, find-min, delete-min. They differ in merge performance and constant factors [^src_wikipedia_heaps]:
+
+| Variant | Insert | Delete-min | Decrease-key | Merge | Key property |
+|---|---|---|---|---|---|
+| Binary heap | O(log n) | O(log n) | O(log n) | O(n) | Simple array-backed; shape + heap property |
+| Binomial heap | O(log n) | O(log n) | O(log n) | O(log n) | Forest of binomial trees; each order appears 0 or 1 times |
+| Fibonacci heap | O(1) amortized | O(log n) amortized | O(1) amortized | O(1) | Lazy merging; cuts marked nodes; improves Dijkstra/Prim |
+| Pairing heap | O(1) | O(log n) amortized | O(log n) amortized* | O(1) | Simple but tight amortized bounds unproven in theory |
+| Leftist tree | O(log n) | O(log n) | — | O(log n) | Right spine always shorter; s-value tracks nearest leaf |
+
+*Pairing heap decrease-key is conjectured O(1) amortized but proven only O(log n).
+
+**Binary heap** is the standard priority queue — array-indexed, complete binary tree. Parent at `i/2`, children at `2i` and `2i+1` (1-indexed). `Build-Heap` from n elements in O(n) via bottom-up heapify [^src_wikipedia_heaps].
+
+**Fibonacci heap** improves Dijkstra's algorithm from O((V+E) log V) to O(E + V log V) — critical for dense graphs. Operations on the root list are lazy; consolidation happens only during extract-min [^src_wikipedia_heaps].
+
+**Height-biased leftist tree (HBLT)**: a min-leftist tree where every node's right child has a smaller s-value than its left child. Two trees merge recursively via the right spine; swap children when s-values invert. Initialization from n elements via a queue in O(n) [^src_wikipedia_heaps].
+
+## Spatial data structures (space partitioning)
+
+For efficient geometric queries (collision detection, range search, nearest neighbor), hierarchical spatial structures partition space [^src_wikipedia_spatial]:
+
+| Structure | Space split | Primary use |
+|---|---|---|
+| BSP tree | Arbitrary hyperplane | 3D scene rendering; painter's algorithm ordering |
+| Quadtree / Octree | Equal quadrants (2D / 3D) | 2D/3D spatial queries |
+| kd-tree | Axis-aligned planes, alternating | Point sets; k-nearest-neighbor |
+| Segment tree | 1D intervals | Stabbing queries (which intervals contain point p?) |
+| Interval tree | 1D intervals | Interval overlap queries |
+| Range tree | Multi-dim points | All points in a d-dim query box; O(log^d n + k) |
+| R-tree | Bounding boxes (MBRs) | Spatial databases; multi-dim index (overlapping MBRs) |
+| Bin structure | Uniform grid cells | Region query for axis-aligned rectangles |
+
+**BSP tree** (Binary Space Partitioning): recursively splits space with hyperplanes to produce a back-to-front ordering for the painter's algorithm. Used in early 3D games (Doom, Quake). Preprocessing is expensive; not suitable for dynamic scenes without Z-buffer assistance [^src_wikipedia_spatial].
+
+**Segment tree**: built in O(n log n), supports stabbing queries (find all intervals containing point q) in O(log n + k). Each interval is stored at most twice per tree depth [^src_wikipedia_spatial].
+
+**R-tree**: organizes bounding boxes (MBRs) in a hierarchy; MBRs may overlap (unlike BSP). Used in spatial databases for "find all museums within 2 km" queries [^src_wikipedia_spatial].
+
+## Advanced hashing techniques
+
+Beyond linear/quadratic probing and double hashing (covered in §Closed hashing), three open-addressing variants improve worst-case or cache behavior [^src_wikipedia_hash]:
+
+- **Robin Hood hashing**: when inserting, a key already placed is displaced if the new key has a longer probe sequence. Reduces worst-case search time. Variant: probe from the expected position in both directions.
+- **Cuckoo hashing**: two hash functions, two tables. Insert: try table 1; if occupied, evict the resident to table 2; repeat. Guarantees O(1) worst-case lookup. Failure triggers rehash.
+- **Hopscotch hashing**: maintains a neighborhood of H buckets near the hash position. Lookup is bounded to H comparisons (near constant). Works at load factors >0.9. Easily parallelized.
+- **Extendible hashing**: disk-based. A directory doubles when a page overflows; only the overflowing page splits (not the whole table). Avoids full rehash on disk-based hash tables.
+
+**Bloom filter**: space-efficient probabilistic set membership test. k hash functions; each maps a key to one of m bits. False positives are possible; false negatives are not. Union/intersection supported bitwise. Used in BigTable, cache digests, network routing [^src_wikipedia_hash].
+
+## Graph representations
+
+| Representation | Space | Edge query | Iterate neighbors |
+|---|---|---|---|
+| Adjacency matrix | O(V²) | O(1) | O(V) |
+| Adjacency list | O(V + E) | O(degree) | O(degree) |
+| Incidence list | O(V + E) | O(degree) | O(degree) |
+
+**Adjacency list** is preferred for sparse graphs. **Incidence list** (Goodrich/Tamassia variant): each vertex stores a list of *edge objects*; each edge object points back to both endpoints. The edge objects store per-edge data (e.g., weight) without a separate lookup, at the cost of extra memory [^src_wikipedia_graph].
+
+## Scene graphs
+
+A **scene graph** is a hierarchical data structure organizing 3D scenes as a tree of nodes (transforms, geometries, materials). Traversal determines rendering order. First standardized in PHIGS (ANSI 1988). IRIS Inventor (SGI 1992) and Open Inventor (1994) are foundational implementations [^src_wikipedia_graph].
+
 ## See also
 
 - [Algorithms (Strategies, Not Tricks)](/software-engineering/algorithms.md) — recursion, binary search, and DP/memoization that operate over these structures
@@ -181,7 +315,7 @@ When old versions of a data structure must remain accessible after updates (pers
 - [Data Structures and Algorithm Analysis in Java (Shaffer)](/software-engineering/sources/algorithms-shaffer-java.md) — Java edition; also covers 2-3 trees, graphs, lower bounds
 - [Purely Functional Data Structures (Okasaki)](/software-engineering/sources/purely-functional-data-structures-okasaki.md) — functional/persistent data structure source
 - [Algorithms and Data Structures (Nievergelt)](/software-engineering/sources/algorithms-nievergelt.md) — open-access textbook; implicit data structures
-- [Data Structures — Wikipedia Compilation](/software-engineering/sources/data-structures-wikipedia.md) — broad reference survey
+- [Data Structures — Wikipedia Compilation](/software-engineering/sources/data-structures-wikipedia.md) — broad reference survey (parts 1-26 ingested)
 
 ---
 
@@ -191,3 +325,7 @@ When old versions of a data structure must remain accessible after updates (pers
 [^src_okasaki]: [Purely Functional Data Structures, Okasaki — Part 1](../../raw/pdf/pdf-purely-functional-data-structures-part-01.md)
 [^src_wikipedia]: [Data Structures (Wikipedia) — Part 3](../../raw/pdf/pdf-data-structures-part-03.md)
 [^src_nievergelt]: [Algorithms and Data Structures (Nievergelt) — Part 10](../../raw/pdf/pdf-algorithms-and-data-structures-part-10.md)
+[^src_wikipedia_heaps]: [Data Structures (Wikipedia) — Parts 13-14 (Binary heap, Binomial heap, Fibonacci heap, Leftist tree, Pairing heap)](../../raw/pdf/pdf-data-structures-part-13.md)
+[^src_wikipedia_spatial]: [Data Structures (Wikipedia) — Parts 16-18 (BSP tree, Segment tree, Interval tree, R-tree, Bin)](../../raw/pdf/pdf-data-structures-part-16.md)
+[^src_wikipedia_hash]: [Data Structures (Wikipedia) — Parts 19-22 (Robin Hood, Cuckoo, Hopscotch, Extendible hashing, Bloom filter)](../../raw/pdf/pdf-data-structures-part-19.md)
+[^src_wikipedia_graph]: [Data Structures (Wikipedia) — Parts 23-25 (Adjacency/incidence list, Scene graph, STL)](../../raw/pdf/pdf-data-structures-part-23.md)

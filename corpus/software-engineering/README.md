@@ -84,6 +84,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Purely Functional Data Structures (Okasaki, CMU 1996)](/software-engineering/sources/purely-functional-data-structures-okasaki.md) — source · draft · CMU PhD thesis; functional/persistent data structures; lazy evaluation resolves amortization-persistence conflict; binomial heaps, finger trees, numerical representations
 - [Algorithms and Data Structures (Nievergelt & Hinrichs, Global Text)](/software-engineering/sources/algorithms-nievergelt.md) — source · draft · open-access CC BY 3.0 textbook; implicit data structures; algorithm animation emphasis; EBNF/syntax diagrams
 - [Data Structures — Wikipedia Compilation (2010)](/software-engineering/sources/data-structures-wikipedia.md) — source · draft · 503-page Wikipedia-sourced reference survey; deque/A-Steal work-stealing; bit fields and type safety
+- [Learning Algorithm (PDF, 327 pages)](/software-engineering/sources/learning-algorithm.md) — source · draft · compact algorithms reference; interval scheduling, BFS/Dijkstra/Floyd-Warshall, Hoare/Lomuto quicksort, KMP string matching
 
 ## Sources ingested
 - [Disasters I've Seen in a Microservices World](/03_Resources/Articles/Disasters in a Microservices World.md) — article note, João Alves / Hey World, 2025-10-30
@@ -143,9 +144,10 @@ Domain covering software engineering practice from foundational CS through deplo
 - [AI-Assisted Development](/software-engineering/ai-assisted-development.md)
 
 <details>
-<summary>Source summaries (60)</summary>
+<summary>Source summaries (63)</summary>
 
 - ["2024-05-25-15-54-25 - move-base-up by josephmachado · Pull Request #17 · josephmachado/simple_dbt_project"](/software-engineering/sources/2024-05-25-15-54-25-move-base-up-by-josephmachado-pull-reque-ee.md)
+- ["Disasters I've seen in a microservices world, part II"](/software-engineering/sources/disasters-i-ve-seen-in-a-microservices-world-part-ii-doc.md)
 - ["Guitar - 3 Easy Jazz Standards (Stormy Monday, Blue Bossa, Blue in Green)"](/software-engineering/sources/guitar-3-easy-jazz-standards-stormy-monday-blue-bossa-blue-i-doc.md)
 - [30 Vim commands you NEED TO KNOW (in just 10 minutes)](/software-engineering/sources/30-vim-commands-you-need-to-know-in-just-10-minutes-RSlrxE21l_k.md)
 - [5 Simple Habits for Writing Clean Code](/software-engineering/sources/5-simple-habits-for-writing-clean-code-cde.md)
@@ -192,6 +194,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [How I Play Guitar (In This Economy) — Budget Digital Rig Guide](/software-engineering/sources/how-i-play-guitar-in-this-economy-budget-digital-rig-guide-de.md)
 - [How I would learn music production (If I had to start over in 2026)](/software-engineering/sources/how-i-would-learn-music-production-if-i-had-to-start-over-in-3RjQ1WjAl7Q.md)
 - [How to NOT Fail a System Design Interview (By a Data Engineer)](/software-engineering/sources/how-to-not-fail-a-system-design-interview-by-a-data-engineer-WQBc2mY9Jng.md)
+- [Learning Algorithm (PDF, 327 pages)](/software-engineering/sources/learning-algorithm.md)
 - [macOS - Aerospace Tiling Window Manager with Leader Key](/software-engineering/sources/macos-aerospace-tiling-window-manager-with-leader-key-e.md)
 - [macOS - Simple Window Management with Raycast](/software-engineering/sources/macos-simple-window-management-with-raycast-aca.md)
 - [Matt Pocock’s Agentic Engineering Workflow (just copy him)](/software-engineering/sources/matt-pocock-s-agentic-engineering-workflow-just-copy-him-nQwJVHCtDDY.md)
@@ -199,6 +202,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [ostep operating systems three easy pieces](/software-engineering/sources/ostep-operating-systems-three-easy-pieces.md)
 - [Purely Functional Data Structures (Okasaki, CMU 1996)](/software-engineering/sources/purely-functional-data-structures-okasaki.md)
 - [Python - Complete Beginner Course 5 Hours TechWorld with Nana](/software-engineering/sources/python-complete-beginner-course-5-hours-techworld-with-nana-aa.md)
+- [Refactoring Techniques Guide](/software-engineering/sources/refactoring-techniques-guide-de.md)
 - [Software Engineering in the Age of AI](/software-engineering/sources/software-engineering-in-the-age-of-ai-a.md)
 - [Source: Go Programming — Full Course (Tech With Tim)](/software-engineering/sources/go-full-course-tech-with-tim.md)
 - [Source: Go Programming — Golang Course with Bonus Projects (boot.dev / freeCodeCamp)](/software-engineering/sources/go-course-boot-dev.md)

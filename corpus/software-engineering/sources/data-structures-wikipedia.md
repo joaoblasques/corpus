@@ -39,6 +39,48 @@ sources:
   - path: raw/_inbox/pdf-data-structures-part-12.md
     channel: pdf
     ingested_at: 2026-07-13
+  - path: raw/_inbox/pdf-data-structures-part-13.md
+    channel: pdf
+    ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-data-structures-part-14.md
+    channel: pdf
+    ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-data-structures-part-15.md
+    channel: pdf
+    ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-data-structures-part-16.md
+    channel: pdf
+    ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-data-structures-part-17.md
+    channel: pdf
+    ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-data-structures-part-18.md
+    channel: pdf
+    ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-data-structures-part-19.md
+    channel: pdf
+    ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-data-structures-part-20.md
+    channel: pdf
+    ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-data-structures-part-21.md
+    channel: pdf
+    ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-data-structures-part-22.md
+    channel: pdf
+    ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-data-structures-part-23.md
+    channel: pdf
+    ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-data-structures-part-24.md
+    channel: pdf
+    ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-data-structures-part-25.md
+    channel: pdf
+    ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-data-structures-part-26.md
+    channel: pdf
+    ingested_at: 2026-07-14
 aliases:
   - Wikipedia data structures
   - data structures reference PDF
@@ -47,7 +89,7 @@ tags:
   - corpus/software-engineering
   - source
 created: 2026-07-13
-updated: 2026-07-13
+updated: 2026-07-14
 ---
 
 # Data Structures — Wikipedia Reference Compilation (2010)
@@ -68,12 +110,18 @@ Table of contents spans: introduction (data structure types: linked, succinct, i
 
 **Concurrent data structures** (pre-Java-8): thread-safety patterns for basic structures; lock-based vs lock-free approaches. Coverage reflects the state of practice circa 2010.
 
+Parts 13-26 cover: heap variants (binary heap, binomial heap, Fibonacci heap, 2-3 heap, pairing heap, beap, leftist tree), spatial data structures (space partitioning, BSP tree, quadtree, segment tree, interval tree, range tree, bin, R-tree), advanced hashing (Robin Hood, cuckoo, hopscotch, extendible hashing, hash functions, Bloom filter), disjoint-set forests (Tarjan 1975 inverse Ackermann proof), graph representations (adjacency list, incidence list), scene graphs, and the C++ STL overview.
+
 ## Relation to corpus pages
 
-- [Data Structures and Big O Notation](/software-engineering/data-structures.md) — broad corroboration; deque, bit arrays, and concurrent structures add detail to existing coverage
+- [Data Structures and Big O Notation](/software-engineering/data-structures.md) — broad corroboration; deque, bit arrays, concurrent structures, heap variants, spatial structures, and advanced hashing add detail to existing coverage
 - [Data Structures and Algorithm Analysis in Java (Shaffer)](/software-engineering/sources/algorithms-shaffer-java.md) — the Shaffer textbook is the primary structured reference; this Wikipedia compilation is a secondary broad survey
 
 ---
 
 [^src1]: [Data Structures (Wikipedia) — Part 3 (Deque, A-Steal work-stealing algorithm)](../../../raw/pdf/pdf-data-structures-part-03.md)
 [^src2]: [Data Structures (Wikipedia) — Part 5 (Bit fields, type safety, thread safety)](../../../raw/pdf/pdf-data-structures-part-05.md)
+[^src3]: [Data Structures (Wikipedia) — Parts 13-14 (Heap variants: binary, binomial, Fibonacci, leftist, pairing)](../../../raw/pdf/pdf-data-structures-part-13.md)
+[^src4]: [Data Structures (Wikipedia) — Parts 16-18 (Spatial: BSP, segment, interval, range, R-tree, bin)](../../../raw/pdf/pdf-data-structures-part-16.md)
+[^src5]: [Data Structures (Wikipedia) — Parts 19-22 (Hashing: Robin Hood, cuckoo, hopscotch, extendible, Bloom filter)](../../../raw/pdf/pdf-data-structures-part-19.md)
+[^src6]: [Data Structures (Wikipedia) — Parts 23-25 (Graph representations, scene graphs, STL)](../../../raw/pdf/pdf-data-structures-part-23.md)

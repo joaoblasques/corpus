@@ -9,6 +9,9 @@ sources:
   - path: raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-21.md
     channel: pdf
     ingested_at: 2026-07-09
+  - path: raw/_inbox/pdf-foundations-of-data-science-part-01.md
+    channel: pdf
+    ingested_at: 2026-07-14
 aliases:
   - clustering
   - K-means clustering
@@ -19,7 +22,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-07-09
-updated: 2026-07-09
+updated: 2026-07-14
 ---
 
 # Clustering Methods
@@ -134,6 +137,22 @@ hclust(dd, method="complete")
 
 **PCA + clustering**: perform clustering on the first few PC score vectors instead of the raw data. Treats PCA as a denoising step; often yields cleaner clusters [^src2].
 
+## Spectral Clustering (Blum/Hopcroft/Kannan)
+
+Spectral clustering handles non-convex cluster shapes by leveraging the **graph Laplacian**. Unlike k-means (which assumes convex clusters), spectral methods can separate rings, crescents, or clusters connected by thin bridges [^src_bhk].
+
+**Algorithm**:
+1. Build a similarity graph on the data (k-nearest-neighbor or ε-ball).
+2. Compute the normalized graph Laplacian L = I - D⁻¹/²AD⁻¹/² (A = adjacency, D = degree diagonal).
+3. Take the top-k eigenvectors of L; this embeds each node as a k-dimensional vector.
+4. Run k-means on the embedded vectors.
+
+**Why eigenvectors?** The Fiedler vector (second eigenvector) minimizes the graph **conductance** — the ratio of edge weight crossing the cut to the total edge weight on the smaller side. Minimizing conductance finds the best balanced partition [^src_bhk].
+
+**Approximation stability**: BHK show that if the true k-clustering has a large approximation-stability margin (any other k-clustering with similar cost differs in a bounded number of points), then spectral clustering recovers the true partition even under perturbation [^src_bhk].
+
+**Limitation**: spectral clustering is O(n³) naively (eigendecomposition); for large n, power-method or sparse-Laplacian tricks are needed. K-means remains preferred when clusters are roughly spherical [^src_bhk].
+
 ## Related Corpus Pages
 
 - [/ai-engineering/pca-and-dimensionality-reduction.md](/ai-engineering/pca-and-dimensionality-reduction.md) — complement to clustering; both are unsupervised; PCA for variance explanation, clustering for partition discovery
@@ -145,3 +164,4 @@ hclust(dd, method="complete")
 
 [^src1]: [Introduction to Statistical Learning, Part 20](../../raw/pdf/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-20.md)
 [^src2]: [Introduction to Statistical Learning, Part 21](../../raw/pdf/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-21.md)
+[^src_bhk]: [Foundations of Data Science (Blum, Hopcroft, Kannan 2018) — Chapter 7](../../raw/pdf/pdf-foundations-of-data-science-part-01.md)

@@ -6,6 +6,9 @@ sources:
   - path: raw/pdf/pdf-brunton-kutz-data-driven-science-and-engineering-v2-author-f-part-01.md
     channel: pdf
     ingested_at: 2026-07-07
+  - path: raw/_inbox/pdf-foundations-of-data-science-part-01.md
+    channel: pdf
+    ingested_at: 2026-07-14
 aliases:
   - SVD
   - Singular Value Decomposition
@@ -17,7 +20,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-07-07
-updated: 2026-07-07
+updated: 2026-07-14
 ---
 
 # Singular Value Decomposition (SVD)
