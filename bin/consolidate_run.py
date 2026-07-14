@@ -206,5 +206,52 @@ def main(argv=None) -> int:
         sr.release_lock(args.lock_path)
 
 
+_FOOTNOTE_DEF_RE = re.compile(r"^\[\^([^\]]+)\]:", re.M)
+
+
+def _footnote_targets(text: str) -> set:
+    """The set of footnote-definition ids (`[^id]:`) declared in a page."""
+    return set(_FOOTNOTE_DEF_RE.findall(text))
+
+
+def deepen_page(cluster: dict, target_rel: str, corpus: Path, review_path: Path,
+                *, _run=None, _critic=None) -> dict:
+    target = corpus / target_rel
+    if not target.exists():
+        return {"status": "no_change", "reason": "target missing"}
+    pre = target.read_text(encoding="utf-8", errors="ignore")   # saved pre-image for revert
+
+    prompt = cp.deepen_prompt(target_rel, cluster["topic"], cluster["members"])
+    _headless(prompt, CONSOLIDATE_MODEL, ["Read", "Write", "Edit"], _run=_run)
+    post = target.read_text(encoding="utf-8", errors="ignore")
+
+    if post == pre:                                             # writer did nothing
+        return {"status": "no_change", "page": target_rel}
+
+    def _restore(reason):
+        target.write_text(pre, encoding="utf-8")               # byte-for-byte restore
+        unstamp_members(cluster, corpus)
+        queue_reject({**cluster, "size": len(cluster["members"])},
+                     {"mode": "deepen-existing", "reason": reason}, review_path)
+        return {"status": "reverted", "reason": reason}
+
+    # deterministic guard: the deepened page must keep every original footnote
+    dropped = _footnote_targets(pre) - _footnote_targets(post)
+    if dropped:
+        return _restore("dropped citations: " + ", ".join(sorted(dropped))[:120])
+
+    critic = _critic if _critic is not None else (lambda pg, src: gd._critic_call(Path(pg), src))
+    try:
+        ok, issues = critic(str(target), _member_sources_text(cluster, corpus))
+    except Exception as exc:  # noqa: BLE001 — fail CLOSED
+        ok, issues = False, [f"critic error: {exc}"]
+    if not ok:
+        return _restore("critic: " + "; ".join(issues)[:140])
+
+    stamped = stamp_members(cluster, target_rel, corpus)
+    return {"status": "deepened", "page": target_rel, "members_stamped": stamped,
+            "added_words": len(post.split()) - len(pre.split())}
+
+
 if __name__ == "__main__":
     raise SystemExit(main())

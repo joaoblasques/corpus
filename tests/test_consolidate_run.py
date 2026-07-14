@@ -167,3 +167,71 @@ def test_main_skips_when_not_on_main(monkeypatch, capsys):
     rc = cr.main(["run"])
     assert rc == 0
     assert json.loads(capsys.readouterr().out)["reason"] == "not_on_main"
+
+
+def _page(corpus, rel, text):
+    p = corpus / rel
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(text, encoding="utf-8")
+    return p
+
+_ORIG = "---\ntype: entity\ndomain: ai-engineering\n---\n# OpenAI\n\nExisting claim.[^a]\n\n[^a]: [s](../x.md)\n"
+
+def test_deepen_page_commits_on_pass(tmp_path):
+    corpus = tmp_path / "corpus"
+    _page(corpus, "ai-engineering/openai.md", _ORIG)
+    _write_member(corpus, "ai-engineering/sources/o1.md")           # helper from earlier tasks
+    cluster = {"topic": "openai", "domain": "ai-engineering",
+               "members": ["ai-engineering/sources/o1.md"]}
+
+    def fake_writer(cmd, **kw):
+        # simulate the writer ADDING a cited claim while keeping [^a]
+        pg = corpus / "ai-engineering/openai.md"
+        pg.write_text(_ORIG.rstrip() + "\n\nNew claim.[^b]\n\n[^b]: [s](../y.md)\n", encoding="utf-8")
+        p = type("P", (), {})(); p.stdout = json.dumps({"result": "ok"}); p.returncode = 0
+        return p
+
+    res = cr.deepen_page(cluster, "ai-engineering/openai.md", corpus, tmp_path / "rev.md",
+                         _run=fake_writer, _critic=lambda pg, src: (True, []))
+    assert res["status"] == "deepened"
+    txt = (corpus / "ai-engineering/openai.md").read_text()
+    assert "[^a]" in txt and "[^b]" in txt                          # kept old, added new
+    assert "consolidated_into:" in (corpus / "ai-engineering/sources/o1.md").read_text()
+
+def test_deepen_page_reverts_and_restores_on_dropped_citation(tmp_path):
+    corpus = tmp_path / "corpus"
+    _page(corpus, "ai-engineering/openai.md", _ORIG)
+    _write_member(corpus, "ai-engineering/sources/o1.md")
+    cluster = {"topic": "openai", "domain": "ai-engineering",
+               "members": ["ai-engineering/sources/o1.md"]}
+
+    def dropping_writer(cmd, **kw):
+        # BAD: rewrites the page and DROPS the existing [^a] footnote
+        (corpus / "ai-engineering/openai.md").write_text(
+            "---\ntype: entity\n---\n# OpenAI\n\nOnly new stuff.[^b]\n\n[^b]: [s](../y.md)\n", encoding="utf-8")
+        p = type("P", (), {})(); p.stdout = json.dumps({"result": "ok"}); p.returncode = 0
+        return p
+
+    res = cr.deepen_page(cluster, "ai-engineering/openai.md", corpus, tmp_path / "rev.md",
+                         _run=dropping_writer, _critic=lambda pg, src: (True, []))
+    assert res["status"] == "reverted"
+    assert (corpus / "ai-engineering/openai.md").read_text() == _ORIG   # restored byte-for-byte
+    assert "consolidated_into:" not in (corpus / "ai-engineering/sources/o1.md").read_text()
+
+def test_deepen_page_reverts_on_critic_fail(tmp_path):
+    corpus = tmp_path / "corpus"
+    _page(corpus, "ai-engineering/openai.md", _ORIG)
+    _write_member(corpus, "ai-engineering/sources/o1.md")
+    cluster = {"topic": "openai", "domain": "ai-engineering",
+               "members": ["ai-engineering/sources/o1.md"]}
+
+    def ok_writer(cmd, **kw):
+        (corpus / "ai-engineering/openai.md").write_text(
+            _ORIG.rstrip() + "\n\nFabricated.[^b]\n\n[^b]: [s](../y.md)\n", encoding="utf-8")
+        p = type("P", (), {})(); p.stdout = json.dumps({"result": "ok"}); p.returncode = 0
+        return p
+
+    res = cr.deepen_page(cluster, "ai-engineering/openai.md", corpus, tmp_path / "rev.md",
+                         _run=ok_writer, _critic=lambda pg, src: (False, ["fabricated"]))
+    assert res["status"] == "reverted"
+    assert (corpus / "ai-engineering/openai.md").read_text() == _ORIG   # restored
