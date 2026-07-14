@@ -148,7 +148,7 @@
    overrides/partials/header.html). Replaces Material's default logo-only
    header + scroll-triggered page title. */
 .md-header__inner.md-grid { align-items: center; gap: 30px; }
-.corpus-logo { display: flex; align-items: center; gap: 11px; }
+.md-header .corpus-logo.md-logo { display: flex; align-items: center; gap: 11px; }
 .corpus-wordmark {
   font-family: "Newsreader", Georgia, serif;
   font-size: 23px;
@@ -191,11 +191,12 @@
   line-height: 1.02;
   letter-spacing: -0.02em;
 }
-.md-typeset .hero p:first-of-type {
+.md-typeset .hero h1 + p {
   font-family: "Newsreader", Georgia, serif;
   font-style: italic;
   font-size: 1.4rem;
   color: var(--corpus-ink-soft);
+  margin-top: 0.9rem;
   max-width: 34rem;
 }
 .md-typeset .hero-stats {
