@@ -3,13 +3,13 @@ type: concept
 domain: ai-engineering
 status: draft
 sources:
-  - path: raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-20.md
+  - path: raw/pdf/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-20.md
     channel: pdf
     ingested_at: 2026-07-09
-  - path: raw/_inbox/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-21.md
+  - path: raw/pdf/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-21.md
     channel: pdf
     ingested_at: 2026-07-09
-  - path: raw/_inbox/pdf-foundations-of-data-science-part-01.md
+  - path: raw/pdf/pdf-foundations-of-data-science-part-01.md
     channel: pdf
     ingested_at: 2026-07-14
 aliases:

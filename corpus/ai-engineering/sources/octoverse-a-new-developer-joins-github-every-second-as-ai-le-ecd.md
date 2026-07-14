@@ -31,3 +31,9 @@ GitHub's rapid growth in 2025 is driven by AI tools, with TypeScript becoming th
 - Global Developer Distribution
 - Open Source and AI
 - Generative AI Impact on Engineering Workflows
+
+## Relation to corpus pages
+
+- [AI and the Job Market](/ai-business/ai-and-the-job-market.md) — GitHub's growth and language-mix data is evidence for the broader claim about AI reshaping developer work
+- [Agentic Coding](/ai-engineering/agentic-coding.md) — the workflow shift this report measures at population scale
+- [AI Engineering hub](/ai-engineering/README.md)

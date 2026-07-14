@@ -31,3 +31,9 @@ Spec-driven development improves AI coding quality by providing structure and pr
 - Precision
 - Collaboration
 - Scalability
+
+## Relation to corpus pages
+
+- [Spec-Driven Development](/ai-engineering/spec-driven-development.md) — this source is evidence *for* the concept page's central claim that specifying before coding raises output quality; the Red Hat framing (structure and precision reduce errors) corroborates the spec-kit loop documented there
+- [Agentic Coding](/ai-engineering/agentic-coding.md) — the coding-agent practice this discipline constrains
+- [AI Engineering hub](/ai-engineering/README.md)

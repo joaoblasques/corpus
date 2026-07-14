@@ -31,3 +31,9 @@ This article introduces Spec-Driven Development (SDD) using GitHub Spec Kit, a m
 - Slash Commands
 - Living Specifications
 - Shared Context
+
+## Relation to corpus pages
+
+- [Spec-Driven Development](/ai-engineering/spec-driven-development.md) — this Microsoft source documents the same GitHub Spec Kit tooling the concept page describes as the Constitution→Specify→Plan→Tasks→Implement→Validate loop; it is a second, independent account of that workflow
+- [Agentic Coding](/ai-engineering/agentic-coding.md) — the surrounding coding-agent practice
+- [AI Engineering hub](/ai-engineering/README.md)

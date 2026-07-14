@@ -162,6 +162,8 @@ A full end-to-end spec-to-agent pipeline [^src5]:
 - [CLAUDE.md Conventions](/ai-engineering/claude-md-conventions.md) — the constitution as a CLAUDE.md file
 - [Agent Evaluation](/ai-engineering/agent-evaluation.md) — validation step in the spec loop
 - [Vibe Coding](/ai-engineering/vibe-coding.md) — the counter-pattern
+- [How spec-driven development improves AI coding quality (Red Hat)](/ai-engineering/sources/how-spec-driven-development-improves-ai-coding-quality-red-h-a.md) — independent source corroborating the spec-first quality claim
+- [Diving Into Spec-Driven Development With GitHub Spec Kit (Microsoft)](/ai-engineering/sources/diving-into-spec-driven-development-with-github-spec-kit-mic-doc.md) — second account of the spec-kit loop described above
 - [AI Engineering hub](/ai-engineering/README.md)
 
 ---

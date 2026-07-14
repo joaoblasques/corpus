@@ -31,3 +31,10 @@ The document discusses patterns and anti-patterns for building with Large Langua
 - Prompt Engineering
 - RAG Systems
 - AI Agents
+
+## Relation to corpus pages
+
+- [LLM](/ai-engineering/llm.md) — the model capabilities and limits these patterns are built around
+- [RAG](/ai-engineering/rag.md) · [Prompt Engineering](/ai-engineering/prompt-engineering.md) — two of the subsystems this source catalogues sins and fixes for
+- [AI Agent](/ai-engineering/ai-agent.md) — the agent layer covered by the same anti-pattern list
+- [AI Engineering hub](/ai-engineering/README.md)

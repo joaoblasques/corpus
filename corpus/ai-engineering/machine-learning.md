@@ -21,7 +21,7 @@ sources:
   - path: raw/youtube/youtube-_hdUddANh_o-how-to-learn-machine-learning-like-a-genius-and-not-waste-ti.md
     channel: youtube
     ingested_at: 2026-06-20
-  - path: raw/_inbox/pdf-foundations-of-data-science-part-01.md
+  - path: raw/pdf/pdf-foundations-of-data-science-part-01.md
     channel: pdf
     ingested_at: 2026-07-14
 aliases:

@@ -31,3 +31,11 @@ Edge AI refers to running AI models directly on local devices, offering reduced 
 - Model compression
 - Efficiency gains
 - NVIDIA edge AI hardware
+
+## Relation to corpus pages
+
+- [Quantization](/ai-engineering/quantization.md) — the model-compression technique edge deployment depends on to fit models on-device
+- [RunLocal](/ai-engineering/runlocal.md) · [LocalAI](/ai-engineering/localai.md) — tooling that runs models locally rather than in the cloud
+- [Local AI Agents](/ai-engineering/local-ai-agents.md) — agents built on the on-device execution this source argues for
+- ["7 AI Terms You'll Hear a Lot This Year" (Alex Wang)](/ai-engineering/seven-ai-terms-2026-alex-wang.md) — shared-provenance synthesis: this page and four siblings all derive from that single article, so they do not corroborate each other
+- [AI Engineering hub](/ai-engineering/README.md)

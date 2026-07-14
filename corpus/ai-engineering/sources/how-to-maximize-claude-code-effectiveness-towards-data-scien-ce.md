@@ -31,3 +31,11 @@ The article discusses the effectiveness of Claude Code, a coding tool that utili
 - Agentic Coding
 - Slash Commands
 - User Memory
+
+## Relation to corpus pages
+
+- [Claude Code](/ai-engineering/claude-code.md) — the tool this source documents
+- [Claude Code Power User Tips (Anthropic help centre)](/ai-engineering/sources/claude-code-power-user-tips-claude-help-center-cee.md) — first-party companion on the same techniques
+- [CLAUDE.md Conventions](/ai-engineering/claude-md-conventions.md) — the project/user memory mechanism this source recommends
+- [Agentic Coding](/ai-engineering/agentic-coding.md) — the surrounding practice
+- [AI Engineering hub](/ai-engineering/README.md)

@@ -31,3 +31,10 @@ The document discusses the application of AI in engineering project planning, fo
 - AI in Engineering Project Planning
 - Jinja Templates
 - LLM Integration
+
+## Relation to corpus pages
+
+- [Context Engineering](/ai-engineering/context-engineering.md) — the discipline this source's C.R.A.F.T.E.D. framework operationalizes for project planning
+- [Prompt Engineering](/ai-engineering/prompt-engineering.md) — the prompt-as-infrastructure-as-code framing extends this
+- [Spec-Driven Development](/ai-engineering/spec-driven-development.md) — a related plan-before-code discipline
+- [AI Engineering hub](/ai-engineering/README.md)

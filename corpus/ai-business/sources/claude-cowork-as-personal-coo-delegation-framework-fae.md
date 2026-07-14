@@ -31,3 +31,9 @@ origin: obsidian
 - Mental-Model Change
 - ROI
 - Context Files
+
+## Relation to corpus pages
+
+- [Claude Cowork](/ai-engineering/claude-cowork.md) — the product this source applies; the delegation framing is a usage pattern layered on that tool
+- [AI Consulting Playbook](/ai-business/ai-consulting-playbook.md) — the same delegate-outcomes-not-steps move, seen from the consulting-practice side
+- [AI Business hub](/ai-business/README.md)

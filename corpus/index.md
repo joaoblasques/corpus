@@ -686,6 +686,8 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [Agentic Workflows](/ai-engineering/agentic-workflow.md) — concept · draft · describe-what-not-how; WAT framework; deterministic vs non-deterministic
 - [Vibe Coding](/ai-engineering/vibe-coding.md) — concept · draft · vibe coding vs spec-driven development; "ask me questions first"
 - [Spec-Driven Development](/ai-engineering/spec-driven-development.md) — concept · draft · GitHub Spec Kit 6-step loop; constitution-first spec; when NOT to spec
+- [Spec-Driven Development: Independent Vendor Convergence](/ai-engineering/spec-driven-development-industry-convergence.md) — synthesis · draft · Red Hat + Microsoft independently prescribe spec-first; corroboration, plus the vendor-optimism gap on when NOT to spec
+- ["7 AI Terms You'll Hear a Lot This Year" (Alex Wang) — One Source, Six Corpus Pages](/ai-engineering/seven-ai-terms-2026-alex-wang.md) — synthesis · draft · provenance hygiene: 6 source pages all derive from one LinkedIn article; do not count as independent corroboration
 - [AI Presentation Tools](/ai-engineering/ai-presentation-tools.md) — concept · draft · 6 approaches (Claude Designs, PowerPoint add-in, Gamma API, HTML, Cowork skill, basic prompt); trade-off table
 - [AGI](/ai-engineering/agi.md) — concept · stub · ANI/AGI/ASI; AGI-by-2030 forecast; future-of-work framing
 - [Compound Engineering](/ai-engineering/compound-engineering.md) — concept · draft · plan-work-review-compound loop; AGENTS.md as compound learning store; 5-product-1-person scale (Every.to)

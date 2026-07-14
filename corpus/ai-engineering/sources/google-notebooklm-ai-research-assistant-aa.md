@@ -31,3 +31,10 @@ Google NotebookLM is a source-grounded AI research assistant built by Google, po
 - Retrieval Augmented Generation
 - Multi-modal outputs
 - Active research-to-content pipeline
+
+## Relation to corpus pages
+
+- [NotebookLM + Obsidian Integration Workflow](/mlops/sources/notebooklm-obsidian-integration-workflow-f.md) — companion source; this page covers what NotebookLM is, that one covers how it is wired into a note vault
+- [RAG](/ai-engineering/rag.md) — source-grounded citation-backed answering is retrieval-augmented generation applied as a product
+- [Obsidian PKM](/productivity/obsidian-pkm.md) — the note system the companion workflow integrates with
+- [AI Engineering hub](/ai-engineering/README.md)

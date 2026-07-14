@@ -3,7 +3,7 @@ type: entity
 domain: ai-engineering
 status: stub
 sources:
-  - path: raw/_inbox/pdf-the-quest-for-artificial-intelligence-a-history-of-part-01.md
+  - path: raw/pdf/pdf-the-quest-for-artificial-intelligence-a-history-of-part-01.md
     channel: pdf
     ingested_at: 2026-07-14
 aliases:

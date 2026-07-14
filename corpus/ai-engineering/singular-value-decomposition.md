@@ -6,16 +6,16 @@ sources:
   - path: raw/pdf/pdf-brunton-kutz-data-driven-science-and-engineering-v2-author-f-part-01.md
     channel: pdf
     ingested_at: 2026-07-07
-  - path: raw/_inbox/pdf-foundations-of-data-science-part-01.md
+  - path: raw/pdf/pdf-foundations-of-data-science-part-01.md
     channel: pdf
     ingested_at: 2026-07-14
 aliases:
   - SVD
   - Singular Value Decomposition
-  - PCA
-  - Principal Component Analysis
   - truncated SVD
   - rSVD
+  - Eckart-Young theorem
+  - Moore-Penrose pseudo-inverse
 tags:
   - corpus/ai-engineering
   - concept
@@ -43,6 +43,8 @@ The rank-r truncation **X** ≈ **Ũ** **Σ̃** **Ṽ*** using only the top r si
 ## PCA connection
 
 Principal Component Analysis (PCA) is a special case of SVD applied to centered data. PCA finds the directions of maximum variance (principal components = left singular vectors **U**). The proportion of variance explained by each component = σᵢ² / Σσⱼ² [^src1].
+
+PCA *uses* SVD as its computational engine, but the two are not interchangeable: SVD is the general matrix factorization, PCA is its application to a centered covariance structure. Full treatment of PCA — the maximum-variance and minimum-reconstruction-error derivations, eigenfaces, and the practical center/standardize/project recipe — lives on [PCA and Dimensionality Reduction](/ai-engineering/pca-and-dimensionality-reduction.md), which is the canonical page for that name; this page covers the decomposition itself.
 
 **Eigenfaces** (face recognition on image matrices) is the canonical PCA example: a 100×100-pixel face image lives in ℝ^10000 but the "face manifold" is ~50-dimensional. SVD reveals this intrinsic low-rank structure [^src1].
 

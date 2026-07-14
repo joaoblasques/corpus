@@ -3,31 +3,31 @@ type: source
 domain: software-engineering
 status: draft
 sources:
-  - path: raw/_inbox/pdf-learning-algorithm-part-01.md
+  - path: raw/pdf/pdf-learning-algorithm-part-01.md
     channel: pdf
     ingested_at: 2026-07-14
-  - path: raw/_inbox/pdf-learning-algorithm-part-02.md
+  - path: raw/pdf/pdf-learning-algorithm-part-02.md
     channel: pdf
     ingested_at: 2026-07-14
-  - path: raw/_inbox/pdf-learning-algorithm-part-03.md
+  - path: raw/pdf/pdf-learning-algorithm-part-03.md
     channel: pdf
     ingested_at: 2026-07-14
-  - path: raw/_inbox/pdf-learning-algorithm-part-04.md
+  - path: raw/pdf/pdf-learning-algorithm-part-04.md
     channel: pdf
     ingested_at: 2026-07-14
-  - path: raw/_inbox/pdf-learning-algorithm-part-05.md
+  - path: raw/pdf/pdf-learning-algorithm-part-05.md
     channel: pdf
     ingested_at: 2026-07-14
-  - path: raw/_inbox/pdf-learning-algorithm-part-06.md
+  - path: raw/pdf/pdf-learning-algorithm-part-06.md
     channel: pdf
     ingested_at: 2026-07-14
-  - path: raw/_inbox/pdf-learning-algorithm-part-07.md
+  - path: raw/pdf/pdf-learning-algorithm-part-07.md
     channel: pdf
     ingested_at: 2026-07-14
-  - path: raw/_inbox/pdf-learning-algorithm-part-08.md
+  - path: raw/pdf/pdf-learning-algorithm-part-08.md
     channel: pdf
     ingested_at: 2026-07-14
-  - path: raw/_inbox/pdf-learning-algorithm-part-09.md
+  - path: raw/pdf/pdf-learning-algorithm-part-09.md
     channel: pdf
     ingested_at: 2026-07-14
 aliases:

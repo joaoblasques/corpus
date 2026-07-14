@@ -31,3 +31,8 @@ The article discusses common challenges and pitfalls in microservices architectu
 - Technology Standardization
 - Organizational Alignment
 - Continuous Learning
+
+## Relation to corpus pages
+
+- [Microservices](/software-engineering/microservices.md) — primary concept page; this source is a field report of how that architecture fails in practice (service-to-engineer ratio, gateway complexity, technology sprawl)
+- [Software Engineering hub](/software-engineering/README.md)

@@ -31,3 +31,10 @@ origin: obsidian
 - Autonomous Runs
 - Fable
 - Opus 4.8
+
+## Relation to corpus pages
+
+- [Spec-Driven Development](/ai-engineering/spec-driven-development.md) — surfacing hidden assumptions before implementation is the same discipline the `/grill-me` interview stage encodes there
+- [Claude Models](/ai-engineering/claude-models.md) — Fable 5 and Opus 4.8 model context
+- [Agentic Workflow](/ai-engineering/agentic-workflow.md) — the workflow-architecture layer this source argues matters more than prompt wording
+- [AI Engineering hub](/ai-engineering/README.md)

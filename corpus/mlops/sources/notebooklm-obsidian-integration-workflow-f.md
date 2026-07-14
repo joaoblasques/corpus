@@ -31,3 +31,10 @@ This document outlines a workflow for integrating NotebookLM with Obsidian for c
 - Markdown Upload
 - Batch PDF Export
 - Weekly Knowledge Review
+
+## Relation to corpus pages
+
+- [Google NotebookLM — AI Research Assistant](/ai-engineering/sources/google-notebooklm-ai-research-assistant-aa.md) — companion source describing the tool this workflow integrates
+- [Obsidian PKM](/productivity/obsidian-pkm.md) — the vault side of the integration
+- [AI-Augmented Knowledge Work](/productivity/ai-augmented-knowledge-work.md) — the broader practice this closed-loop workflow is an instance of
+- [MLOps hub](/mlops/README.md)

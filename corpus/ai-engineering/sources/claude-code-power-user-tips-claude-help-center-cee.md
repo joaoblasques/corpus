@@ -31,3 +31,10 @@ This document provides power-user tips for using Claude Code, including workflow
 - Customization
 - Parallel Execution
 - Planning
+
+## Relation to corpus pages
+
+- [Claude Code](/ai-engineering/claude-code.md) — the tool this source documents; first-party (Anthropic help centre) guidance, so it outranks third-party tips on questions of intended behaviour
+- [How to Maximize Claude Code Effectiveness (Towards Data Science)](/ai-engineering/sources/how-to-maximize-claude-code-effectiveness-towards-data-scien-ce.md) — third-party companion covering the same slash-command/plan-mode surface
+- [Agentic Coding](/ai-engineering/agentic-coding.md) — the practice these tips serve
+- [AI Engineering hub](/ai-engineering/README.md)

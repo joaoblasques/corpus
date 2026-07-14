@@ -31,3 +31,10 @@ Model routing is a practice that dynamically selects the right AI model for a ta
 - Cost Optimization
 - Latency Reduction
 - Quality Improvement
+
+## Relation to corpus pages
+
+- [Agent Cost Management](/ai-engineering/agent-cost-management.md) — routing is one lever for the cost control described there; picking a cheaper model per task is the same tradeoff seen from the spend side
+- [vLLM Semantic Router](/ai-engineering/vllm-semantic-router.md) — a concrete implementation of the routing pattern this source describes
+- ["7 AI Terms You'll Hear a Lot This Year" (Alex Wang)](/ai-engineering/seven-ai-terms-2026-alex-wang.md) — shared-provenance synthesis: this page and four siblings all derive from that single article, so they do not corroborate each other
+- [AI Engineering hub](/ai-engineering/README.md)

@@ -31,3 +31,11 @@ Reflective AI refers to systems that can evaluate and improve their outputs. Thi
 - Reflection Loops
 - DeepMind
 - OpenAI
+
+## Relation to corpus pages
+
+- [AI Agent](/ai-engineering/ai-agent.md) — reflection loops are presented here as foundational to autonomous agents
+- [Agent Evaluation](/ai-engineering/agent-evaluation.md) — self-evaluation is the same judgement the eval layer applies externally
+- [Neurosymbolic AI](/ai-engineering/sources/neurosymbolic-ai-improving-ai-reasoning-ea.md) — sibling section of the same Alex Wang article; complementary approach to reasoning reliability (symbolic grounding there, self-correction here), not a competing claim
+- ["7 AI Terms You'll Hear a Lot This Year" (Alex Wang)](/ai-engineering/seven-ai-terms-2026-alex-wang.md) — shared-provenance synthesis: this page and four siblings all derive from that single article, so they do not corroborate each other
+- [AI Engineering hub](/ai-engineering/README.md)
