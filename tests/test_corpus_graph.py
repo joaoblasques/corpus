@@ -117,3 +117,23 @@ def test_bridge_flag_only_on_cross_domain_page_edges(tmp_path):
     assert edge("ai-engineering/agents", "ai-engineering/rag").get("bridge") is not True
     # spoke (page->hub): NOT a bridge
     assert edge("ai-engineering/rag", "ai-engineering").get("bridge") is not True
+
+
+def test_node_carries_created_and_aliases(tmp_path):
+    corpus = tmp_path / "corpus"; d = corpus / "ai-engineering"; d.mkdir(parents=True)
+    (d / "openai.md").write_text(
+        "---\ntype: entity\ncreated: 2026-06-17\naliases:\n  - GPT-4\n  - o4-mini\n---\n# OpenAI\nbody",
+        encoding="utf-8")
+    g = cg.build_graph(corpus)
+    n = next(x for x in g["nodes"] if x["id"] == "ai-engineering/openai")
+    assert n["created"] == "2026-06-17"
+    assert n["aliases"] == ["GPT-4", "o4-mini"]
+
+
+def test_node_without_created_or_aliases_is_safe(tmp_path):
+    corpus = tmp_path / "corpus"; d = corpus / "ai-engineering"; d.mkdir(parents=True)
+    (d / "bare.md").write_text("---\ntype: concept\n---\n# Bare\nbody", encoding="utf-8")
+    g = cg.build_graph(corpus)
+    n = next(x for x in g["nodes"] if x["id"] == "ai-engineering/bare")
+    assert n.get("created") is None
+    assert n["aliases"] == []

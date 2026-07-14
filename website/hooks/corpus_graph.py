@@ -19,6 +19,29 @@ MDLINK = re.compile(r"\]\(/([a-z0-9][a-z0-9-]*/[a-z0-9][a-z0-9-]*)\.md\)")
 WIKILINK = re.compile(r"\[\[([a-z0-9][a-z0-9-]*/[a-z0-9][a-z0-9-]*)")
 H1 = re.compile(r"^#\s+(.+?)\s*$", re.M)
 _TYPE_RE = re.compile(r"^type:\s*(\w+)", re.M)
+_CREATED_RE = re.compile(r"^created:\s*(\S+)", re.M)
+_ALIASES_BLOCK_RE = re.compile(r"^aliases:\s*\n((?:[ \t]*-[ \t]*.+\n?)+)", re.M)
+
+
+def _created(text: str) -> str | None:
+    """The page's `created:` frontmatter date (ISO string), or None. Content-safe (a date)."""
+    fm = text.split("---", 2)[1] if text.startswith("---") else ""
+    m = _CREATED_RE.search(fm)
+    return m.group(1).strip().strip('"\'') if m else None
+
+
+def _aliases(text: str) -> list:
+    """The page's `aliases:` list (short alternate names), or []. Content-safe (labels)."""
+    fm = text.split("---", 2)[1] if text.startswith("---") else ""
+    m = _ALIASES_BLOCK_RE.search(fm)
+    if not m:
+        return []
+    out = []
+    for line in m.group(1).splitlines():
+        line = line.strip()
+        if line.startswith("-"):
+            out.append(line[1:].strip().strip('"\''))
+    return [a for a in out if a]
 
 
 def _body_wordcount(text: str) -> int:
@@ -59,7 +82,8 @@ def build_graph(corpus_dir) -> dict:
         node_id = f"{domain}/{md.stem}"
         text = md.read_text(encoding="utf-8", errors="ignore")
         nodes[node_id] = {"id": node_id, "label": _title(text, md.stem), "group": domain,
-                          "depth": _body_wordcount(text)}
+                          "depth": _body_wordcount(text),
+                          "created": _created(text), "aliases": _aliases(text)}
 
     # Hub node per domain
     for d in sorted(domains):
