@@ -391,6 +391,34 @@
   margin: 1.9rem 0 0;
 }
 
+/* Below ~1050px the horizontal chain has no good wrap point (steps and
+   arrows break onto ragged, viewport-dependent lines) — switch to an
+   explicit vertical stack instead of hoping flex-wrap finds a nice spot. */
+@media screen and (max-width: 65em) {
+  .md-typeset .corpus-pipeline-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+  .md-typeset .corpus-pipeline-sources {
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 20px;
+    row-gap: 8px;
+    margin-bottom: 20px;
+  }
+  .md-typeset .corpus-pipeline-step { min-width: 0; }
+  .md-typeset .corpus-pipeline-arrow {
+    align-self: center;
+    padding: 10px 0;
+    transform: rotate(90deg);
+  }
+}
+@media screen and (max-width: 30em) {
+  .md-typeset .corpus-pipeline { padding: 2rem calc(50vw - 50%); }
+  .md-typeset .corpus-pipeline-sources { flex-direction: column; gap: 7px; }
+}
+
 /* "Why this exists" — heading left, body + pull-quote right */
 .md-typeset .corpus-ethos {
   display: grid;
