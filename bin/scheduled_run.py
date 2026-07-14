@@ -413,10 +413,10 @@ def run_collectors(
         except Exception as exc:  # noqa: BLE001
             results["youtube"] = {"status": "failed", "collected": 0, "error": str(exc)}
 
-    # --- GitHub: discover + star top repos in corpus domains (before collect) ---
+    # --- GitHub: propose top corpus-domain repos to the review queue (no auto-star) ---
     try:
         proc = _run(
-            [sys.executable, str(BIN / "github_client.py"), "discover"],
+            [sys.executable, str(BIN / "github_discover.py"), "propose"],
             capture_output=True,
             text=True,
             timeout=COLLECTOR_TIMEOUT,
@@ -428,12 +428,34 @@ def run_collectors(
             }
         else:
             try:
-                starred = json.loads(proc.stdout).get("count", 0)
+                proposed = json.loads(proc.stdout).get("proposed", 0)
             except (json.JSONDecodeError, AttributeError):
-                starred = 0
-            results["github_discover"] = {"status": "ok", "starred": starred}
+                proposed = 0
+            results["github_discover"] = {"status": "ok", "proposed": proposed}
     except Exception as exc:  # noqa: BLE001
         results["github_discover"] = {"status": "failed", "error": str(exc)}
+
+    # --- GitHub: promote [x]-ticked review repos into the ingest inbox ---
+    try:
+        proc = _run(
+            [sys.executable, str(BIN / "github_discover.py"), "promote"],
+            capture_output=True,
+            text=True,
+            timeout=COLLECTOR_TIMEOUT,
+        )
+        if proc.returncode != 0:
+            results["github_promote"] = {
+                "status": "failed",
+                "error": proc.stderr.strip() or f"exit {proc.returncode}",
+            }
+        else:
+            try:
+                promoted = json.loads(proc.stdout).get("promoted", 0)
+            except (json.JSONDecodeError, AttributeError):
+                promoted = 0
+            results["github_promote"] = {"status": "ok", "promoted": promoted}
+    except Exception as exc:  # noqa: BLE001
+        results["github_promote"] = {"status": "failed", "error": str(exc)}
 
     # --- GitHub: collect new starred repos (README + docs + overview) ---
     try:
@@ -1300,7 +1322,9 @@ def write_run_report(
     # Collectors summary
     channel_parts = []
     for channel, info in collectors.items():
-        n = info.get("refetched", info.get("collected", 0))
+        n = info.get("refetched",
+                     info.get("collected",
+                              info.get("proposed", info.get("promoted", 0))))
         channel_parts.append(f"{channel}={n}")
     collectors_str = ", ".join(channel_parts) if channel_parts else "none"
     bullets.append(f"* **Collectors**: {collectors_str}")
