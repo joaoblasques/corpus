@@ -26,20 +26,39 @@ Most personal knowledge bases decay. Notes pile up, links rot, and the insights 
 
 The result compounds. Each new source enriches the pages that are already there. Each query can surface what the corpus knows *and* identify what it doesn't — automatically queuing the gap for the next ingest run.
 
-```mermaid
-flowchart LR
-    A[Email] --> I
-    B[YouTube] --> I
-    C[PDF] --> I
-    D[Obsidian vault] --> I
-    E[Web articles] --> I
-    I[/"📥 Inbox\n(raw/_inbox/)"/] --> AG
-    AG["🤖 Ingest agent"] --> CP
-    CP[/"📚 Corpus pages\n(cited, cross-linked)"/] --> IDX
-    IDX["📑 Indexes\n(_index · _log · _domains)"]
-```
-
-Every arrow is automated. Every corpus page cites its sources. Every source is stamped once it's processed — so nothing gets ingested twice.
+<div class="corpus-pipeline">
+<p class="corpus-pipeline-eyebrow">The pipeline · collect → ingest → cite</p>
+<div class="corpus-pipeline-row">
+<div class="corpus-pipeline-sources">
+<div class="corpus-pipeline-source"><span class="dot" style="background:#4c5e40"></span>Email</div>
+<div class="corpus-pipeline-source"><span class="dot" style="background:#a9762a"></span>YouTube</div>
+<div class="corpus-pipeline-source"><span class="dot" style="background:#5f6f8a"></span>PDF</div>
+<div class="corpus-pipeline-source"><span class="dot" style="background:#7d6f9a"></span>Obsidian</div>
+<div class="corpus-pipeline-source"><span class="dot" style="background:#4f7a70"></span>GitHub</div>
+</div>
+<div class="corpus-pipeline-arrow">→</div>
+<div class="corpus-pipeline-step">
+<div class="corpus-pipeline-step-title">Inbox</div>
+<div class="corpus-pipeline-step-sub">raw/_inbox/</div>
+</div>
+<div class="corpus-pipeline-arrow">→</div>
+<div class="corpus-pipeline-step corpus-pipeline-step-inverted">
+<div class="corpus-pipeline-step-title">Ingest agent</div>
+<div class="corpus-pipeline-step-sub">reads · extracts · links</div>
+</div>
+<div class="corpus-pipeline-arrow">→</div>
+<div class="corpus-pipeline-step">
+<div class="corpus-pipeline-step-title">Corpus pages</div>
+<div class="corpus-pipeline-step-sub corpus-pipeline-step-sub-accent">cited · cross-linked</div>
+</div>
+<div class="corpus-pipeline-arrow">→</div>
+<div class="corpus-pipeline-step">
+<div class="corpus-pipeline-step-title">Indexes</div>
+<div class="corpus-pipeline-step-sub">_index · _log · _domains</div>
+</div>
+</div>
+<p class="corpus-pipeline-caption">Every arrow is automated. Every corpus page cites its sources. Every source is stamped once it's processed — so nothing gets ingested twice.</p>
+</div>
 
 ---
 

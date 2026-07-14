@@ -302,6 +302,88 @@
   color: var(--corpus-ink-faint);
 }
 
+/* Pipeline band — source dot-chips -> Inbox -> Ingest agent (inverted) ->
+   Corpus pages -> Indexes, joined by arrow glyphs. Replaces a mermaid
+   flowchart with the design's flat pill-card chain. */
+.md-typeset .corpus-pipeline {
+  background: var(--corpus-band);
+  border-top: 1px solid var(--corpus-hairline-2);
+  border-bottom: 1px solid var(--corpus-hairline-2);
+  margin: 2rem calc(50% - 50vw);
+  padding: 2.6rem calc(50vw - 50%);
+}
+.md-typeset .corpus-pipeline-eyebrow {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--corpus-ink-faint);
+  margin: 0 0 1.6rem;
+}
+.md-typeset .corpus-pipeline-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.md-typeset .corpus-pipeline-sources {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.md-typeset .corpus-pipeline-source {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.8rem;
+  color: var(--corpus-ink-soft);
+}
+.md-typeset .corpus-pipeline-source .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.md-typeset .corpus-pipeline-arrow {
+  font-size: 1.25rem;
+  color: var(--corpus-ink-faint);
+}
+.md-typeset .corpus-pipeline-step {
+  background: var(--corpus-surface);
+  border: 1px solid var(--corpus-hairline);
+  border-radius: 10px;
+  padding: 18px 22px;
+  min-width: 150px;
+}
+.md-typeset .corpus-pipeline-step-title {
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--corpus-ink);
+}
+.md-typeset .corpus-pipeline-step-sub {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  color: var(--corpus-ink-faint);
+  margin-top: 5px;
+}
+.md-typeset .corpus-pipeline-step-sub-accent { color: var(--corpus-ochre); }
+.md-typeset .corpus-pipeline-step-inverted {
+  background: var(--corpus-ink);
+  border-color: var(--corpus-ink);
+}
+.md-typeset .corpus-pipeline-step-inverted .corpus-pipeline-step-title {
+  color: var(--corpus-paper);
+}
+.md-typeset .corpus-pipeline-caption {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--corpus-ink-soft);
+  max-width: 40rem;
+  margin: 1.9rem 0 0;
+}
+
 /* "Why this exists" — heading left, body + pull-quote right */
 .md-typeset .corpus-ethos {
   display: grid;
