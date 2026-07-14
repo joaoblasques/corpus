@@ -33,7 +33,7 @@ Every arrow is automated. Every corpus page cites its sources. Every source is s
 
 ## The corpus, mapped
 
-Each dot is a page; the larger nodes are the seven domain **hubs**, and the lines are the **citations and cross-links** between pages. This map is **generated from the live corpus on every commit** — it grows as the corpus does.
+Each dot is a page; the larger nodes are the eight domain **hubs**, and the lines are the **citations and cross-links** between pages. This map is **generated from the live corpus on every commit** — it grows as the corpus does.
 
 <div id="corpus-graph"></div>
 <p class="graph-caption">Drag to explore · hover a node for its title · {{ corpus_stats().pages }} pages · {{ corpus_stats().domains }} domains · {{ corpus_stats().sources }} sources.</p>

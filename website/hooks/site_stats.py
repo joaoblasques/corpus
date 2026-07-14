@@ -14,7 +14,7 @@ _HEADER = re.compile(r"Total pages:\s*(\d+)\s*\|\s*Total sources:\s*(\d+)")
 
 def read_corpus_stats(index_path=None) -> dict:
     # website/hooks/site_stats.py → parents[2] == repo root → corpus/_index.md
-    idx = Path(index_path) if index_path else Path(__file__).resolve().parents[2] / "corpus" / "_index.md"
+    idx = Path(index_path) if index_path else Path(__file__).resolve().parents[2] / "corpus" / "index.md"
     try:
         text = idx.read_text(encoding="utf-8", errors="ignore")
     except OSError:
