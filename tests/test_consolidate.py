@@ -108,3 +108,39 @@ def test_read_topics_drops_none_extracted_placeholder():
     topics = co.read_topics(src)
     assert "rag" in topics
     assert "(none extracted)" not in topics and "none extracted" not in topics
+
+
+def test_rank_deepen_candidates_matches_pages_and_scores_thin_first(tmp_path):
+    corpus = tmp_path / "corpus"
+    d = corpus / "ai-engineering"
+    (d / "sources").mkdir(parents=True)
+    # existing pages: 'openai' is THIN, 'prompt-engineering' is DEEP
+    (d / "openai.md").write_text("---\ntype: entity\n---\n# OpenAI\n\n" + "word " * 40, encoding="utf-8")
+    (d / "prompt-engineering.md").write_text(
+        "---\ntype: concept\n---\n# Prompt Engineering\n\n" + "word " * 400, encoding="utf-8")
+    # 3 sources tagged OpenAI, 3 tagged Prompt Engineering
+    for i in range(3):
+        (d / "sources" / f"o{i}.md").write_text(
+            "---\ntype: source\ntags:\n  - source\n  - OpenAI\n---\n# s\nbody", encoding="utf-8")
+        (d / "sources" / f"p{i}.md").write_text(
+            "---\ntype: source\ntags:\n  - source\n  - Prompt Engineering\n---\n# s\nbody", encoding="utf-8")
+
+    cands = co.rank_deepen_candidates(corpus, "ai-engineering", min_cluster=3)
+    topics = [c["topic"] for c in cands]
+    assert "openai" in topics and "prompt engineering" in topics
+    # thin page (openai, ~40 words) outranks the deep page (prompt-engineering, ~400 words)
+    assert topics[0] == "openai"
+    top = cands[0]
+    assert top["target_page"] == "ai-engineering/openai.md"
+    assert top["size"] == 3 and top["page_words"] >= 40
+    assert top["score"] > cands[topics.index("prompt engineering")]["score"]
+
+
+def test_rank_deepen_skips_clusters_without_an_existing_page(tmp_path):
+    corpus = tmp_path / "corpus"
+    d = corpus / "ai-engineering"
+    (d / "sources").mkdir(parents=True)
+    for i in range(3):   # a cluster with NO matching page
+        (d / "sources" / f"x{i}.md").write_text(
+            "---\ntype: source\ntags:\n  - source\n  - Nonesuch\n---\n# s\nbody", encoding="utf-8")
+    assert co.rank_deepen_candidates(corpus, "ai-engineering", min_cluster=3) == []

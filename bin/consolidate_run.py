@@ -182,28 +182,95 @@ def run_consolidation(corpus: Path, domain: str, max_clusters: int, *, dry_run: 
     return t
 
 
+def run_deepen(corpus: Path, domain: str, max_candidates: int, *, dry_run: bool = False,
+               _run=None, _critic=None, review_path: Path | None = None) -> dict:
+    review = review_path if review_path is not None else REVIEW
+    ranked = co.rank_deepen_candidates(corpus, domain)
+    t = {"status": "ok", "deepened": 0, "reverted": 0, "no_change": 0,
+         "candidates_seen": len(ranked)}
+    for cand in ranked[:max_candidates]:
+        if dry_run:
+            continue
+        cluster = {"topic": cand["topic"], "domain": cand["domain"], "members": cand["members"]}
+        res = deepen_page(cluster, cand["target_page"], corpus, review,
+                          _run=_run, _critic=_critic)
+        t[res["status"]] = t.get(res["status"], 0) + 1
+    return t
+
+
 def main(argv=None) -> int:
-    ap = argparse.ArgumentParser(description="Consolidate source clusters into synthesis pages.")
+    ap = argparse.ArgumentParser(description="Consolidate source clusters (synthesize | deepen).")
     sub = ap.add_subparsers(dest="cmd", required=True)
     pr = sub.add_parser("run")
     pr.add_argument("--domain", default="ai-engineering")
     pr.add_argument("--max-clusters", type=int, default=3)
+    pr.add_argument("--mode", choices=["synthesize", "deepen"], default="synthesize")
     pr.add_argument("--dry-run", action="store_true")
     pr.add_argument("--lock-path", default=LOCK, type=Path)
     args = ap.parse_args(argv)
 
+    def _go(dry):
+        if args.mode == "deepen":
+            return run_deepen(CORPUS, args.domain, args.max_clusters, dry_run=dry)
+        return run_consolidation(CORPUS, args.domain, args.max_clusters, dry_run=dry)
+
     if not sr._on_main():
         print(json.dumps({"status": "skipped", "reason": "not_on_main"})); return 0
     if args.dry_run:
-        print(json.dumps(run_consolidation(CORPUS, args.domain, args.max_clusters, dry_run=True)))
-        return 0
+        print(json.dumps(_go(True))); return 0
     if not sr.acquire_lock(args.lock_path):
         print(json.dumps({"status": "skipped", "reason": "lock_held"})); return 0
     try:
-        print(json.dumps(run_consolidation(CORPUS, args.domain, args.max_clusters)))
-        return 0
+        print(json.dumps(_go(False))); return 0
     finally:
         sr.release_lock(args.lock_path)
+
+
+_FOOTNOTE_DEF_RE = re.compile(r"^\[\^([^\]]+)\]:", re.M)
+
+
+def _footnote_targets(text: str) -> set:
+    """The set of footnote-definition ids (`[^id]:`) declared in a page."""
+    return set(_FOOTNOTE_DEF_RE.findall(text))
+
+
+def deepen_page(cluster: dict, target_rel: str, corpus: Path, review_path: Path,
+                *, _run=None, _critic=None) -> dict:
+    target = corpus / target_rel
+    if not target.exists():
+        return {"status": "no_change", "reason": "target missing"}
+    pre = target.read_text(encoding="utf-8", errors="ignore")   # saved pre-image for revert
+
+    prompt = cp.deepen_prompt(target_rel, cluster["topic"], cluster["members"])
+    _headless(prompt, CONSOLIDATE_MODEL, ["Read", "Write", "Edit"], _run=_run)
+    post = target.read_text(encoding="utf-8", errors="ignore")
+
+    if post == pre:                                             # writer did nothing
+        return {"status": "no_change", "page": target_rel}
+
+    def _restore(reason):
+        target.write_text(pre, encoding="utf-8")               # byte-for-byte restore
+        unstamp_members(cluster, corpus)
+        queue_reject({**cluster, "size": len(cluster["members"])},
+                     {"mode": "deepen-existing", "reason": reason}, review_path)
+        return {"status": "reverted", "reason": reason}
+
+    # deterministic guard: the deepened page must keep every original footnote
+    dropped = _footnote_targets(pre) - _footnote_targets(post)
+    if dropped:
+        return _restore("dropped citations: " + ", ".join(sorted(dropped))[:120])
+
+    critic = _critic if _critic is not None else (lambda pg, src: gd._critic_call(Path(pg), src))
+    try:
+        ok, issues = critic(str(target), _member_sources_text(cluster, corpus))
+    except Exception as exc:  # noqa: BLE001 — fail CLOSED
+        ok, issues = False, [f"critic error: {exc}"]
+    if not ok:
+        return _restore("critic: " + "; ".join(issues)[:140])
+
+    stamped = stamp_members(cluster, target_rel, corpus)
+    return {"status": "deepened", "page": target_rel, "members_stamped": stamped,
+            "added_words": len(post.split()) - len(pre.split())}
 
 
 if __name__ == "__main__":

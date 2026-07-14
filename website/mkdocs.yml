@@ -27,7 +27,7 @@ theme:
     - search.suggest
     - toc.follow
   icon:
-    logo: material/sprout
+    logo: corpus/leaf
 
 nav:
   - Home: index.md
