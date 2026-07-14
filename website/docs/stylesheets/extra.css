@@ -26,6 +26,7 @@
   --corpus-moss:      #4c5e40;
   --corpus-moss-deep: #3a4a30;
   --corpus-ochre:     #a9762a;
+  --corpus-active:    #e6ead9;
 }
 
 [data-md-color-scheme="default"] {
@@ -58,6 +59,7 @@
   --corpus-moss:      #9cbf93;
   --corpus-moss-deep: #b6d4ac;
   --corpus-ochre:     #e0a747;
+  --corpus-active:    #2c3527;
 
   --md-default-bg-color:        var(--corpus-paper);
   --md-default-fg-color:        var(--corpus-ink);
@@ -107,10 +109,37 @@
 .md-header--shadow { box-shadow: none; }
 .md-tabs { background: transparent; }
 
+/* Corpus header nav — The Idea / How It Works / Collectors / The Custodian,
+   inline next to the logo (see overrides/partials/header.html). */
+.corpus-header-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-left: 6px;
+}
+.corpus-header-nav a {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 14px;
+  color: var(--corpus-ink-soft);
+  white-space: nowrap;
+}
+.corpus-header-nav a:hover { color: var(--corpus-ochre); }
+@media screen and (max-width: 76.234375em) {
+  .corpus-header-nav { display: none; }
+}
+
 /* ----------------------------------------------------------------------------
    4. Home hero  (wrap the intro block in <div class="hero"> … </div>)
    ---------------------------------------------------------------------------- */
 .md-typeset .hero { padding: 2.6rem 0 0.4rem; }
+.md-typeset .hero-eyebrow {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--corpus-ochre);
+  margin: 0 0 1rem;
+}
 .md-typeset .hero h1 {
   font-size: 3.6rem;
   line-height: 1.02;
@@ -121,6 +150,36 @@
   font-style: italic;
   font-size: 1.4rem;
   color: var(--corpus-ink-soft);
+  max-width: 34rem;
+}
+.md-typeset .hero-stats {
+  display: flex;
+  gap: 0;
+  margin-top: 2.4rem;
+  border-top: 1px solid var(--corpus-hairline);
+  border-bottom: 1px solid var(--corpus-hairline);
+  max-width: 34rem;
+}
+.md-typeset .hero-stat {
+  padding: 1.2rem 2.2rem 1.2rem 0;
+  border-right: 1px solid var(--corpus-hairline-2);
+}
+.md-typeset .hero-stat:last-child { border-right: none; padding-right: 0; }
+.md-typeset .hero-stat + .hero-stat { padding-left: 2.2rem; }
+.md-typeset .hero-stat-n {
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 2.2rem;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--corpus-ink);
+}
+.md-typeset .hero-stat-l {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--corpus-ink-faint);
+  margin-top: 0.45rem;
 }
 
 /* ----------------------------------------------------------------------------
@@ -164,6 +223,41 @@
   font-size: 1.25rem;
   line-height: 1.45;
   color: var(--corpus-ink);
+}
+/* Material colors .admonition-title's background/icon per type (info=blue,
+   warning=orange, abstract=cyan, …) via `.admonition.<type> .admonition-title`
+   rules — same specificity as a per-type override here, so list every
+   built-in type explicitly to reset them all to one flat/quiet treatment. */
+.md-typeset .admonition.note .admonition-title,
+.md-typeset .admonition.abstract .admonition-title,
+.md-typeset .admonition.info .admonition-title,
+.md-typeset .admonition.tip .admonition-title,
+.md-typeset .admonition.success .admonition-title,
+.md-typeset .admonition.question .admonition-title,
+.md-typeset .admonition.warning .admonition-title,
+.md-typeset .admonition.failure .admonition-title,
+.md-typeset .admonition.danger .admonition-title,
+.md-typeset .admonition.bug .admonition-title,
+.md-typeset .admonition.example .admonition-title,
+.md-typeset .admonition.quote .admonition-title {
+  background-color: transparent;
+  color: var(--corpus-ink);
+}
+.md-typeset .admonition.note .admonition-title::before,
+.md-typeset .admonition.abstract .admonition-title::before,
+.md-typeset .admonition.info .admonition-title::before,
+.md-typeset .admonition.tip .admonition-title::before,
+.md-typeset .admonition.success .admonition-title::before,
+.md-typeset .admonition.question .admonition-title::before,
+.md-typeset .admonition.failure .admonition-title::before,
+.md-typeset .admonition.danger .admonition-title::before,
+.md-typeset .admonition.bug .admonition-title::before,
+.md-typeset .admonition.example .admonition-title::before {
+  background-color: var(--corpus-ink-soft);
+}
+.md-typeset .admonition.quote .admonition-title::before,
+.md-typeset .admonition.warning .admonition-title::before {
+  background-color: var(--corpus-ochre);
 }
 
 /* ----------------------------------------------------------------------------
@@ -213,4 +307,7 @@
 .md-nav__item .md-nav__link--active {
   color: var(--corpus-moss-deep);
   font-weight: 600;
+  background: var(--corpus-active);
+  border-left: 2px solid var(--corpus-moss);
+  border-radius: 0 4px 4px 0;
 }

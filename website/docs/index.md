@@ -1,10 +1,21 @@
+---
+hide:
+  - navigation
+---
+
 <div class="hero" markdown>
+
+<p class="hero-eyebrow">A self-tending knowledge base</p>
 
 # A knowledge base that tends itself.
 
-**Sources in. Cited pages out.**
+*Sources in. Cited pages out. The agent reads everything, writes it into a cross-linked web of citable pages, and keeps that web consistent as new sources arrive.*
 
-**{{ corpus_stats().pages }}** pages · **{{ corpus_stats().sources }}** sources · **{{ corpus_stats().domains }}** domains
+<div class="hero-stats" markdown>
+<div class="hero-stat"><div class="hero-stat-n">{{ corpus_stats().pages }}</div><div class="hero-stat-l">Pages</div></div>
+<div class="hero-stat"><div class="hero-stat-n">{{ corpus_stats().sources }}</div><div class="hero-stat-l">Sources</div></div>
+<div class="hero-stat"><div class="hero-stat-n">{{ corpus_stats().domains }}</div><div class="hero-stat-l">Domains</div></div>
+</div>
 
 </div>
 
