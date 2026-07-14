@@ -109,8 +109,53 @@
 .md-header--shadow { box-shadow: none; }
 .md-tabs { background: transparent; }
 
-/* Corpus header nav — The Idea / How It Works / Collectors / The Custodian,
-   inline next to the logo (see overrides/partials/header.html). */
+.corpus-footer {
+  background: var(--corpus-band);
+  border-top: 1px solid var(--corpus-hairline);
+  color: var(--corpus-ink-soft);
+}
+.corpus-footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 18px;
+  padding: 40px 0;
+}
+.corpus-footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  color: var(--corpus-ink-soft);
+}
+.corpus-footer-brand svg { fill: var(--corpus-ink-faint); width: 20px; height: 20px; }
+.corpus-footer-name {
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--corpus-ink);
+}
+.corpus-footer-tagline,
+.corpus-footer-meta {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  color: var(--corpus-ink-faint);
+}
+.corpus-footer-tagline { margin-left: 6px; }
+
+/* Corpus header: logo + static wordmark, inline nav, spacer, then the
+   stock search/palette/repo controls pushed to the right (see
+   overrides/partials/header.html). Replaces Material's default logo-only
+   header + scroll-triggered page title. */
+.md-header__inner.md-grid { align-items: center; gap: 30px; }
+.corpus-logo { display: flex; align-items: center; gap: 11px; }
+.corpus-wordmark {
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 23px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--corpus-ink);
+}
 .corpus-header-nav {
   display: flex;
   align-items: center;
@@ -124,6 +169,7 @@
   white-space: nowrap;
 }
 .corpus-header-nav a:hover { color: var(--corpus-ochre); }
+.corpus-header-spacer { flex: 1; }
 @media screen and (max-width: 76.234375em) {
   .corpus-header-nav { display: none; }
 }
@@ -183,22 +229,90 @@
 }
 
 /* ----------------------------------------------------------------------------
-   5. Cards on the home grid — flat, hairline, ochre number, quiet hover
+   5. Cards on the home grid — numbered eyebrow, hairline mesh, inverted CTA
    ---------------------------------------------------------------------------- */
-.md-typeset .grid.cards > ul > li {
+.md-typeset .corpus-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1px;
+  background: var(--corpus-hairline);
   border: 1px solid var(--corpus-hairline);
   border-radius: 14px;
+  overflow: hidden;
+  margin: 0 0 1.5rem;
+}
+.md-typeset .corpus-card {
+  position: relative;
+  display: block;
   background: var(--corpus-surface);
-  padding: 1.6rem 1.5rem;
-  transition: background .18s ease, border-color .18s ease;
+  padding: 34px 32px;
+  color: var(--corpus-ink);
+  transition: background .18s ease;
 }
-.md-typeset .grid.cards > ul > li:hover {
-  border-color: var(--corpus-hairline);
-  background: var(--corpus-band);
-  box-shadow: none;
+.md-typeset .corpus-card:hover { background: var(--corpus-band); }
+.md-typeset .corpus-card-n {
+  display: block;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.75rem;
+  color: var(--corpus-ochre);
+  margin-bottom: 1rem;
 }
-.md-typeset .grid.cards > ul > li > hr {
-  border-color: var(--corpus-hairline);
+.md-typeset .corpus-card strong {
+  display: block;
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--corpus-ink);
+  margin-bottom: 0.6rem;
+}
+.md-typeset .corpus-card strong a {
+  color: inherit;
+}
+.md-typeset .corpus-card strong a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.md-typeset .corpus-card p {
+  font-size: 0.905rem;
+  line-height: 1.6;
+  color: var(--corpus-ink-soft);
+  margin: 0;
+}
+.md-typeset .corpus-card-more {
+  display: block;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.78rem;
+  margin-top: 1.25rem;
+}
+.md-typeset .corpus-card-more a { color: var(--corpus-moss); }
+.md-typeset .corpus-card-cta {
+  background: var(--corpus-ink);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.md-typeset .corpus-card-cta:hover { background: var(--corpus-moss-deep); }
+.md-typeset .corpus-card-cta strong {
+  color: var(--corpus-paper);
+  margin-bottom: 0.5rem;
+}
+.md-typeset .corpus-card-cta strong a { color: inherit; }
+.md-typeset .corpus-card-cta p {
+  color: var(--corpus-ink-faint);
+}
+
+/* "Why this exists" — heading left, body + pull-quote right */
+.md-typeset .corpus-ethos {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 64px;
+  align-items: start;
+  margin: 1.5rem 0;
+}
+.md-typeset .corpus-ethos-title h2 { margin-top: 0; }
+@media screen and (max-width: 60em) {
+  .md-typeset .corpus-ethos { grid-template-columns: 1fr; gap: 1rem; }
 }
 
 /* ----------------------------------------------------------------------------
