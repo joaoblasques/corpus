@@ -85,10 +85,13 @@ def build_graph(corpus_dir) -> dict:
                           "depth": _body_wordcount(text),
                           "created": _created(text), "aliases": _aliases(text)}
 
-    # Hub node per domain
+    # Hub node per domain (+ content-safe per-domain aggregates: page count, mean depth)
     for d in sorted(domains):
+        dom_pages = [n for n in nodes.values() if not n.get("hub") and n.get("group") == d]
+        avg_depth = round(sum(p["depth"] for p in dom_pages) / len(dom_pages)) if dom_pages else 0
         nodes[d] = {"id": d, "label": d.replace("-", " "), "group": d, "hub": True,
-                    "value": 40, "sources": _source_count(corpus / d)}
+                    "value": 40, "sources": _source_count(corpus / d),
+                    "pages": len(dom_pages), "avg_depth": avg_depth}
 
     # Pass 2 — edges: spoke (page → hub) + wikilink connections
     edge_keys: set[tuple] = set()

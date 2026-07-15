@@ -137,3 +137,21 @@ def test_node_without_created_or_aliases_is_safe(tmp_path):
     n = next(x for x in g["nodes"] if x["id"] == "ai-engineering/bare")
     assert n.get("created") is None
     assert n["aliases"] == []
+
+
+def test_hub_carries_pages_and_avg_depth(tmp_path):
+    corpus = tmp_path / "corpus"; d = corpus / "ai-engineering"; d.mkdir(parents=True)
+    (d / "a.md").write_text("---\ntype: entity\n---\n" + "word " * 100, encoding="utf-8")
+    (d / "b.md").write_text("---\ntype: concept\n---\n" + "word " * 300, encoding="utf-8")
+    g = cg.build_graph(corpus)
+    hub = next(n for n in g["nodes"] if n.get("hub") and n["id"] == "ai-engineering")
+    assert hub["pages"] == 2
+    assert hub["avg_depth"] == 200   # mean of 100 and 300
+
+
+def test_hub_aggregates_zero_when_no_pages(tmp_path):
+    corpus = tmp_path / "corpus"; d = corpus / "empty-domain"; d.mkdir(parents=True)
+    (d / "README.md").write_text("---\ntype: hub\n---\n# hub\n", encoding="utf-8")
+    g = cg.build_graph(corpus)
+    hub = next((n for n in g["nodes"] if n.get("hub") and n["id"] == "empty-domain"), None)
+    assert hub is not None and hub["pages"] == 0 and hub["avg_depth"] == 0
