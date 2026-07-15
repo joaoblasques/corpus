@@ -118,7 +118,7 @@ def _llm_summary(title: str, source: str, content: str, *, backend: str, model: 
     saw_429 = False
     for i in range(attempts):
         try:
-            r = requests.post(url, headers=headers, json=payload, timeout=45)
+            r = requests.post(url, headers=headers, json=payload, timeout=30)
             if r.status_code == 429:
                 saw_429 = True
                 if i < attempts - 1:   # don't burn the retry-after sleep on the final attempt

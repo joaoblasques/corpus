@@ -782,15 +782,19 @@ def run_youtube_quick_intake(*, max_n: int = 60, rescue_max: int = 25,
         return {"status": "failed", "ingested": 0, "error": str(exc)}
 
 
-def run_docs_quick_intake(*, max_n: int = 80, backend: str = "openrouter",
-                          timeout_s: int = 2400, _subprocess_run=None) -> dict:
+def run_docs_quick_intake(*, max_n: int = 50, backend: str = "openrouter",
+                          timeout_s: int = 3600, _subprocess_run=None) -> dict:
     """Quick-intake content-bearing web/notes stubs into lightweight source pages.
 
     A native drain (bin/quick_ingest_docs.py) for the raw/_inbox backlog the slow ~6/night
     headless-claude ingest can't keep up with — vault clippings, blog/article scrapes, notes.
     Uses OpenRouter FREE models (Groq free fallback when they 429), so it's free. Bounded by
     max_n to respect free-tier daily limits; the rest drains over successive nights. Thin/
-    URL-only stubs are skipped (they need a fetch pass). Failure recorded, never raised."""
+    URL-only stubs are skipped (they need a fetch pass). Failure recorded, never raised.
+
+    max_n=50 / timeout_s=3600: per-request HTTP timeout in quick_ingest_docs.py is 30s; at
+    6 LLM calls per doc worst-case, 80 docs at 90s/call blew the old 2400s wall. 50 docs at
+    30s/call typical = ~1500s, well inside 1 hour."""
     _run = _subprocess_run if _subprocess_run is not None else subprocess.run
     try:
         proc = _run(
