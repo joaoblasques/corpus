@@ -18,8 +18,9 @@ def _wire(monkeypatch, tmp_path, *, starred=(), search=None, meta=None):
     monkeypatch.setattr(gd.gh, "list_starred", lambda *a, **k: [{"full_name": s} for s in starred])
     monkeypatch.setattr(gd.cg, "discover_topics", lambda: ["t"])
     monkeypatch.setattr(gd.gh, "search_repos", lambda *a, **k: (search or []))
+    # default meta carries a corpus-domain topic so it passes the _relevant() filter
     monkeypatch.setattr(gd, "repo_meta", lambda fn, **k: (meta or {}).get(
-        fn, {"full_name": fn, "stars": 0, "language": "Py", "description": "d"}))
+        fn, {"full_name": fn, "stars": 0, "language": "Py", "description": "d", "topics": ["llm"]}))
 
 
 def test_propose_writes_tickable_lines_and_skips_starred_and_collected(tmp_path, monkeypatch, capsys):
@@ -88,3 +89,17 @@ def test_promote_collects_only_ticked_repos(tmp_path, monkeypatch, capsys):
 def test_promote_no_review_file_is_safe(tmp_path, monkeypatch, capsys):
     monkeypatch.setattr(gd, "REVIEW", tmp_path / "missing.md")
     gd.cmd_promote(_args(max_docs=8, dry_run=False))  # must not raise
+
+
+def test_relevant_keeps_ontopic_drops_junk_and_offtopic():
+    # on-topic: carries a corpus-domain topic, not junk → kept
+    assert gd._relevant({"full_name": "o/rag-lib", "topics": ["rag", "llm"], "description": "a RAG library"})
+    assert gd._relevant({"full_name": "o/airflow-plugin", "topics": ["apache-airflow"], "description": "dags"})
+    # junk (dropped even when on-topic): leaked prompts, awesome-lists, roadmaps, interview prep
+    assert not gd._relevant({"full_name": "x/system_prompts_leaks", "topics": ["llm"], "description": "prompts"})
+    assert not gd._relevant({"full_name": "x/awesome-llm", "topics": ["llm"], "description": "awesome list"})
+    assert not gd._relevant({"full_name": "x/ai-roadmap", "topics": ["llm"], "description": "learning roadmap"})
+    assert not gd._relevant({"full_name": "x/interview-prep", "topics": ["mlops"], "description": "interview qs"})
+    # off-topic: no corpus-domain topic → dropped
+    assert not gd._relevant({"full_name": "x/worldmonitor", "topics": ["news", "dashboard"], "description": "monitor"})
+    assert not gd._relevant({"full_name": "x/notopics", "topics": [], "description": "cool tool"})

@@ -75,6 +75,32 @@ def _stars_h(n: int) -> str:
     return f"{n / 1000:.1f}k" if n >= 1000 else str(n)
 
 
+# Relevance vocabulary = the corpus's own domain topics (a repo must actually carry one of these
+# to count as genuinely on-topic — GitHub's fuzzy topic search otherwise drags in tangential repos).
+_RELEVANT_TOPICS = {t for topics in cg.DOMAIN_TOPICS.values() for t in topics}
+
+# Never surface: leaked/jailbreak prompt dumps, curation lists, career/interview prep, roadmaps —
+# low-signal for a knowledge corpus even when they rank high by stars.
+_JUNK_RE = re.compile(
+    r"(system[\s_-]?prompts?|prompt[\s_-]?leak|jailbreak|\bleaked?\b|awesome[\s_-]|"
+    r"roadmap|cheat[\s_-]?sheet|interview|curated|\bawesome\b|good[\s_-]?first[\s_-]?issue)",
+    re.I,
+)
+
+
+def _relevant(meta: dict) -> bool:
+    """True if a repo is genuinely corpus-relevant: it carries at least one corpus-domain topic
+    AND is not a curation / leaked-prompt / career-prep repo."""
+    topics = {str(t).lower() for t in (meta.get("topics") or [])}
+    haystack = f"{meta.get('full_name', '')} {meta.get('description', '')} {' '.join(topics)}"
+    if _JUNK_RE.search(haystack):
+        return False
+    return bool(topics & _RELEVANT_TOPICS)
+
+
+_SCAN_CAP = 120  # hard bound on candidates examined per run (each needs one metadata fetch)
+
+
 def cmd_propose(args) -> int:
     """Search corpus-domain repos and append the freshest to the review queue (no auto-star)."""
     if not gh.gh_available():
@@ -91,29 +117,31 @@ def cmd_propose(args) -> int:
     fresh = cg.rank_candidates(candidates, starred, cg.already_collected)
 
     seen = _ledger() | _repos_in_review()
-    picks = []
-    for fn, stars in fresh:
-        if len(picks) >= args.max:
+    picks = []  # (full_name, stars, meta) — meta carried so the line-builder needn't re-fetch
+    for i, (fn, stars) in enumerate(fresh):
+        if len(picks) >= args.max or i >= _SCAN_CAP:
             break
         if fn in seen:
             continue
+        meta = repo_meta(fn)
+        if not _relevant(meta):        # drop off-topic + junk (leaks, awesome-lists, roadmaps)
+            continue
         seen.add(fn)
-        picks.append((fn, stars))
+        picks.append((fn, stars, meta))
 
     if picks and not args.dry_run:
         REVIEW.parent.mkdir(parents=True, exist_ok=True)
         body = REVIEW.read_text(encoding="utf-8") if REVIEW.exists() else REVIEW_HEADER
         lines = []
-        for fn, stars in picks:
-            m = repo_meta(fn)
-            lang = m.get("language") or ""
-            desc = (m.get("description") or "")[:90]
+        for fn, stars, meta in picks:
+            lang = meta.get("language") or ""
+            desc = (meta.get("description") or "")[:90]
             tag = f" · {lang}" if lang else ""
             lines.append(f"- [ ] {fn} · ★{_stars_h(stars)}{tag} · {desc}".rstrip(" ·"))
         REVIEW.write_text(body.rstrip() + "\n" + "\n".join(lines) + "\n", encoding="utf-8")
-        for fn, _ in picks:
+        for fn, _, _ in picks:
             _mark(fn)
-    print(json.dumps({"proposed": len(picks), "top": [fn for fn, _ in picks[:8]],
+    print(json.dumps({"proposed": len(picks), "top": [fn for fn, _, _ in picks[:8]],
                       "dry_run": bool(args.dry_run)}, indent=2))
     return 0
 
