@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: docs-deploy
@@ -27,17 +27,13 @@ jobs:
         run: pip install -r website/requirements.txt
       - name: Build (regenerates graph-data.json + live stats)
         run: cd website && mkdocs build --strict
-      - name: Publish to public Pages repo
+      - name: Publish to gh-pages on this repo
         env:
-          TOKEN: ${{ secrets.DOCS_DEPLOY_TOKEN }}
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          if [ -z "$TOKEN" ]; then
-            echo "::notice::DOCS_DEPLOY_TOKEN not set — built & validated, skipping deploy."
-            exit 0
-          fi
           cd website/site
           touch .nojekyll
           git init -q && git checkout -q -b gh-pages && git add -A
           git -c user.email=ci@corpus -c user.name=corpus-ci commit -q -m "deploy: ${GITHUB_SHA::7}"
-          git push -fq "https://x-access-token:${TOKEN}@github.com/joaoblasques/corpus-docs.git" gh-pages
-          echo "::notice::Deployed to https://joaoblasques.github.io/corpus-docs/"
+          git push -fq "https://x-access-token:${TOKEN}@github.com/joaoblasques/corpus.git" gh-pages
+          echo "::notice::Deployed to https://joaoblasques.com/corpus/"
