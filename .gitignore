@@ -73,3 +73,7 @@ raw/.consolidate.lock
 raw/.blogs_discovered.txt
 raw/.github_proposed.txt
 corpus-map-*.png
+map-v2.png
+map-filter-state.png
+map-territories*.png
+map-*.png
