@@ -1,21 +1,23 @@
 /* Corpus knowledge graph — "Archive" theme + diagnostic encodings + interactivity.
-   Rendering is truthful: node SIZE = connection count (degree), LIGHTNESS = page depth
-   (word count), hub labels carry source counts, cross-domain "bridge" edges are accented,
-   and orphans (degree 1) get a dashed ring. On top of that: click a node for a summary +
-   link to its source, search by title/alias, filter by domain/depth/orphan, and a
-   grown-over-time slider (by each page's `created` date). Data is regenerated from the real
-   corpus at every build (hooks/corpus_graph.py) — only titles + structure, never page text. */
+   Truthful rendering: node SIZE = connection count (degree), LIGHTNESS = page depth (word count),
+   hub labels carry source counts, cross-domain "bridge" edges are accented, orphans (degree 1)
+   get a dashed ring. Interactions: click a node for a summary (+ link to its GitHub source),
+   search by title/alias, filter by domain/depth/orphan, and a grown-over-time slider (by each
+   page's `created` date). Data is regenerated from the real corpus at every build — only titles +
+   structure, never page text. */
 (function () {
   var REPO = "https://github.com/joaoblasques/corpus/";
 
+  // Muted, earthy per-domain palette. We DELETE the vis `group` property from nodes and colour
+  // every node explicitly, so vis-network never falls back to its bright default group palette.
   var GROUP_COLORS = {
-    "ai-engineering":       "#5a7a5a",
-    "data-engineering":     "#c08a3a",
-    "mlops":                "#b06a34",
+    "ai-engineering":       "#5f7d5a",
+    "data-engineering":     "#bf8a3c",
+    "mlops":                "#b06a3f",
     "software-engineering": "#6a7d9c",
-    "ai-business":          "#a89228",
-    "blockchain":           "#8a7aa8",
-    "productivity":         "#7a9a5a",
+    "ai-business":          "#a08a3c",
+    "blockchain":           "#8a7aa2",
+    "productivity":         "#7a955a",
     "trading":              "#4f8a7c"
   };
 
@@ -32,37 +34,34 @@
     };
   }
 
-  // --- diagnostic helpers -------------------------------------------------
   function _rgb(hex) {
     hex = hex.replace("#", "");
     return [parseInt(hex.slice(0, 2), 16), parseInt(hex.slice(2, 4), 16), parseInt(hex.slice(4, 6), 16)];
   }
-  function lighten(hex, frac) {        // mix a domain color toward the surface (paler = thinner page)
+  function lighten(hex, frac) {           // mix a domain colour toward the surface (paler = thinner page)
     var a = _rgb(hex), b = _rgb(tokens().surface);
     var m = a.map(function (v, i) { return Math.round(v + (b[i] - v) * frac); });
     return "rgb(" + m[0] + "," + m[1] + "," + m[2] + ")";
   }
-  function depthFrac(depth) {          // thin pages get more lightening
-    if (!depth || depth < 300) return 0.55;
-    if (depth < 800) return 0.35;
-    if (depth < 1800) return 0.15;
+  function depthFrac(depth) {
+    if (!depth || depth < 300) return 0.5;
+    if (depth < 800) return 0.32;
+    if (depth < 1800) return 0.14;
     return 0.0;
   }
   function depthLabel(d) { return !d || d < 300 ? "thin" : d < 800 ? "medium" : d < 1800 ? "deep" : "very deep"; }
   function titleCase(s) { return (s || "").replace(/\b\w/g, function (m) { return m.toUpperCase(); }); }
   function nodeMatches(n, q) {
-    if (!q) return true;
     var hay = [(n.title || "")].concat(n.aliases || []).join(" ").toLowerCase();
-    return hay.indexOf(q.toLowerCase()) !== -1;
+    return hay.indexOf(q) !== -1;
   }
   function showNodePanel(panel, n) {
     if (n.hub) {
-      panel.innerHTML = "<b>" + (n.title || "") + "</b><br>domain hub<br>" + (n.sources || 0) + " source pages"
+      panel.innerHTML = "<b>" + (n.title || "") + "</b><br>domain hub · " + (n.sources || 0) + " source pages"
         + '<br><a href="' + REPO + "tree/main/corpus/" + n.id + '" target="_blank" rel="noopener">Browse domain →</a>';
     } else {
-      panel.innerHTML = "<b>" + (n.title || "") + "</b><br>" + n.group
-        + "<br>depth: " + depthLabel(n.depth) + " (" + (n.depth || 0) + " words)"
-        + "<br>connections: " + (n.degree || 0)
+      panel.innerHTML = "<b>" + (n.title || "") + "</b><br>" + n.domain
+        + "<br>" + depthLabel(n.depth) + " · " + (n.depth || 0) + " words · " + (n.degree || 0) + " links"
         + '<br><a href="' + REPO + "blob/main/corpus/" + n.id + '.md" target="_blank" rel="noopener">Open page →</a>';
     }
     panel.style.display = "block";
@@ -82,35 +81,31 @@
       .then(function (r) { return r.json(); })
       .then(function (data) {
         data.nodes.forEach(function (n) {
-          var base = GROUP_COLORS[n.group] || t.inkFaint;
+          n.domain = n.group;                  // keep the domain for filtering + colour…
+          delete n.group;                      // …but strip `group` so vis won't apply its bright default palette
+          var base = GROUP_COLORS[n.domain] || t.inkFaint;
           n.shape = "dot";
-          n.title = n.label;                                  // keep the original label for panel + search
+          n.title = n.label;                   // original label for the panel + search
           if (n.hub) {
             n.value = 46;
-            n.label = titleCase(n.label) + (n.sources ? "  ·  " + n.sources + " sources" : "");
-            n.font = { size: 19, face: "Newsreader, Georgia, serif", color: t.ink, strokeWidth: 6, strokeColor: t.surface };
+            n.label = titleCase(n.domain) + (n.sources ? "  ·  " + n.sources + " sources" : "");
+            n.font = { size: 18, face: "Newsreader, Georgia, serif", color: t.ink, strokeWidth: 6, strokeColor: t.surface };
             n.color = { background: base, border: base, highlight: { background: base, border: t.accent }, hover: { background: base, border: t.accent } };
             n.borderWidth = 0;
           } else {
             n.value = Math.max(n.degree || 1, 1);             // SIZE = degree
-            var shaded = lighten(base, depthFrac(n.depth));   // LIGHTNESS = depth
-            n.color = { background: shaded, border: shaded, highlight: { background: shaded, border: t.accent }, hover: { background: shaded, border: t.accent } };
+            var c = lighten(base, depthFrac(n.depth));        // LIGHTNESS = depth
+            n.color = { background: c, border: c, highlight: { background: c, border: t.accent }, hover: { background: c, border: t.accent } };
             n.label = undefined;
             if ((n.degree || 0) <= 1) {                       // ORPHAN marker
-              n.borderWidth = 1.5;
-              n.shapeProperties = { borderDashes: [2, 2] };
-              n.color.border = t.inkFaint;
-            } else {
-              n.borderWidth = 0;
-            }
+              n.borderWidth = 1.4; n.shapeProperties = { borderDashes: [2, 2] }; n.color.border = t.inkFaint;
+            } else { n.borderWidth = 0; }
           }
         });
         var nodes = new vis.DataSet(data.nodes);
         var edges = new vis.DataSet(data.edges.map(function (e) {
           var col = e.bridge ? t.accent : t.edge;             // cross-domain BRIDGE edges stand out
-          return { from: e.from, to: e.to,
-                   color: { color: col, highlight: t.accent, hover: t.accent },
-                   width: e.bridge ? 0.9 : 0.5 };
+          return { from: e.from, to: e.to, color: { color: col, highlight: t.accent, hover: t.accent }, width: e.bridge ? 0.9 : 0.5 };
         }));
         var network = new vis.Network(el, { nodes: nodes, edges: edges }, {
           nodes: { scaling: { min: 6, max: 46 } },
@@ -122,89 +117,97 @@
           interaction: { hover: true, tooltipDelay: 120, hideEdgesOnDrag: true },
           layout: { improvedLayout: false }
         });
-        network.once("stabilizationIterationsDone", function () { network.setOptions({ physics: false }); });
+        // Freeze the layout once settled: store positions + turn physics off, so filtering never
+        // re-runs the (expensive) layout — toggles become instant and nothing flies around.
+        network.once("stabilizationIterationsDone", function () {
+          network.storePositions();
+          network.setOptions({ physics: false });
+        });
 
-        // Overlay containers — created AFTER vis.Network (which replaces the container's contents,
-        // so anything appended before init would be wiped). Positioned absolutely over the canvas.
+        // --- overlay UI (created AFTER vis.Network, which replaces the container's contents) ---
         var panel = document.createElement("div");
         panel.id = "corpus-graph-panel"; panel.style.display = "none"; el.appendChild(panel);
         var controls = document.createElement("div");
         controls.id = "corpus-graph-controls"; el.appendChild(controls);
 
-        // --- filters + time compose through one visibility pass; hubs never hidden ---
-        var state = { domains: {}, thinOnly: false, orphanOnly: false, cutoff: null };
-        function applyVisibility() {
+        var state = { domains: {}, thinOnly: false, orphanOnly: false, cutoff: null, query: "" };
+
+        // ONE batched pass — only nodes whose visibility/opacity actually changes are updated.
+        function apply() {
+          var upd = [];
           nodes.forEach(function (n) {
-            if (n.hub) { nodes.update({ id: n.id, hidden: false }); return; }
-            var show = state.domains[n.group] !== false;
-            if (state.thinOnly && (n.depth || 0) >= 300) show = false;
-            if (state.orphanOnly && (n.degree || 0) > 1) show = false;
-            if (state.cutoff && n.created && n.created > state.cutoff) show = false;
-            nodes.update({ id: n.id, hidden: !show });
+            var hide = false, dim = false;
+            if (!n.hub) {
+              if (state.domains[n.domain] === false) hide = true;
+              if (state.thinOnly && (n.depth || 0) >= 300) hide = true;
+              if (state.orphanOnly && (n.degree || 0) > 1) hide = true;
+              if (state.cutoff && n.created && n.created > state.cutoff) hide = true;
+              if (state.query && !nodeMatches(n, state.query)) dim = true;
+            }
+            var op = dim ? 0.12 : 1;
+            if (!!n.hidden !== hide || (n.opacity == null ? 1 : n.opacity) !== op) {
+              upd.push({ id: n.id, hidden: hide, opacity: op });
+            }
           });
+          if (upd.length) nodes.update(upd);
         }
 
-        // click → summary panel
-        network.on("click", function (params) {
-          if (params.nodes.length) { showNodePanel(panel, nodes.get(params.nodes[0])); }
+        network.on("click", function (p) {
+          if (p.nodes.length) { showNodePanel(panel, nodes.get(p.nodes[0])); }
           else { panel.style.display = "none"; }
         });
 
-        // search box (dims non-matches by title/alias)
-        var searchBox = document.createElement("input");
-        searchBox.type = "search"; searchBox.placeholder = "search…"; searchBox.id = "corpus-graph-search";
-        controls.appendChild(searchBox);
-        searchBox.addEventListener("input", function () {
-          var q = searchBox.value.trim();
-          nodes.forEach(function (n) {
-            var on = n.hub || nodeMatches(n, q);
-            nodes.update({ id: n.id, opacity: q ? (on ? 1 : 0.12) : 1 });
-          });
-        });
+        // search (title + alias)
+        var search = document.createElement("input");
+        search.type = "search"; search.placeholder = "search…"; search.id = "corpus-graph-search";
+        search.addEventListener("input", function () { state.query = search.value.trim().toLowerCase(); apply(); });
+        controls.appendChild(search);
 
         // domain chips + thin/orphan toggles
         var domains = Array.from(new Set(data.nodes.filter(function (n) { return !n.hub; })
-                                             .map(function (n) { return n.group; }))).sort();
+                                             .map(function (n) { return n.domain; }))).sort();
         domains.forEach(function (dm) {
           state.domains[dm] = true;
           var chip = document.createElement("label"); chip.className = "cg-chip";
-          chip.style.borderColor = GROUP_COLORS[dm] || "#999";
+          chip.style.setProperty("--chip", GROUP_COLORS[dm] || "#999");
           var cb = document.createElement("input"); cb.type = "checkbox"; cb.checked = true;
-          cb.addEventListener("change", function () { state.domains[dm] = cb.checked; applyVisibility(); });
+          cb.addEventListener("change", function () { state.domains[dm] = cb.checked; apply(); });
           chip.appendChild(cb); chip.appendChild(document.createTextNode(dm));
           controls.appendChild(chip);
         });
         [["thinOnly", "thin only"], ["orphanOnly", "orphans"]].forEach(function (pair) {
-          var lab = document.createElement("label"); lab.className = "cg-chip";
+          var lab = document.createElement("label"); lab.className = "cg-chip cg-chip--flag";
           var cb = document.createElement("input"); cb.type = "checkbox";
-          cb.addEventListener("change", function () { state[pair[0]] = cb.checked; applyVisibility(); });
+          cb.addEventListener("change", function () { state[pair[0]] = cb.checked; apply(); });
           lab.appendChild(cb); lab.appendChild(document.createTextNode(pair[1]));
           controls.appendChild(lab);
         });
 
-        // grown-over-time slider (by page `created` date)
+        // grown-over-time slider — its own bar, pinned to the bottom of the map
         var dates = data.nodes.filter(function (n) { return n.created; })
                               .map(function (n) { return n.created; }).sort();
         if (dates.length) {
           var row = document.createElement("div"); row.id = "corpus-graph-time";
+          var play = document.createElement("button"); play.textContent = "▶"; play.type = "button"; play.title = "play growth";
           var slider = document.createElement("input");
           slider.type = "range"; slider.min = 0; slider.max = dates.length - 1; slider.value = dates.length - 1;
-          var lbl = document.createElement("span"); lbl.textContent = dates[dates.length - 1];
-          var play = document.createElement("button"); play.textContent = "▶"; play.type = "button";
+          var lbl = document.createElement("span"); lbl.className = "cg-date"; lbl.textContent = dates[dates.length - 1];
           slider.addEventListener("input", function () {
-            state.cutoff = dates[+slider.value]; lbl.textContent = state.cutoff; applyVisibility();
+            var v = +slider.value;
+            state.cutoff = v >= dates.length - 1 ? null : dates[v];
+            lbl.textContent = dates[v]; apply();
           });
           var timer = null;
           play.addEventListener("click", function () {
             if (timer) { clearInterval(timer); timer = null; play.textContent = "▶"; return; }
-            play.textContent = "⏸"; if (+slider.value >= +slider.max) { slider.value = 0; }
+            play.textContent = "❙❙"; if (+slider.value >= +slider.max) slider.value = 0;
             timer = setInterval(function () {
               if (+slider.value >= +slider.max) { clearInterval(timer); timer = null; play.textContent = "▶"; return; }
               slider.value = +slider.value + 1; slider.dispatchEvent(new Event("input"));
-            }, 180);
+            }, 140);
           });
           row.appendChild(play); row.appendChild(slider); row.appendChild(lbl);
-          controls.appendChild(row);
+          el.appendChild(row);
         }
       })
       .catch(function () {});

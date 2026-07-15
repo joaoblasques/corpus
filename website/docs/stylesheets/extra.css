@@ -528,36 +528,61 @@
   margin: 1rem 0 0.4rem;
 }
 
-/* interactivity overlay: click-panel, search, filter chips, time slider */
-#corpus-graph-panel {
-  position: absolute; top: .6rem; right: .6rem; max-width: 15rem; z-index: 5;
-  background: var(--corpus-surface); border: 1px solid var(--corpus-hairline);
-  border-radius: .4rem; padding: .55rem .7rem; font-size: .74rem; line-height: 1.5;
-  color: var(--corpus-ink); box-shadow: 0 2px 12px rgba(0,0,0,.14);
-}
-#corpus-graph-panel a { color: var(--corpus-moss-deep, #a9762a); font-weight: 600; }
+/* interactivity overlay: centered top controls, bottom slider, click-panel — all translucent
+   so the map reads through, and responsive to the viewport via flex-wrap + fluid widths. */
 #corpus-graph-controls {
-  position: absolute; top: .6rem; left: .6rem; right: 16rem; z-index: 5;
-  display: flex; flex-wrap: wrap; gap: .3rem; align-items: center;
+  position: absolute; top: .55rem; left: 50%; transform: translateX(-50%); z-index: 6;
+  display: flex; flex-wrap: wrap; gap: .35rem; align-items: center; justify-content: center;
+  max-width: calc(100% - 1.2rem); padding: .4rem .55rem; border-radius: .7rem;
+  background: color-mix(in srgb, var(--corpus-surface) 82%, transparent);
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+  box-shadow: 0 1px 8px rgba(0,0,0,.06);
 }
 #corpus-graph-search {
-  font-size: .72rem; padding: .22rem .5rem; border: 1px solid var(--corpus-hairline);
-  border-radius: .3rem; background: var(--corpus-surface); color: var(--corpus-ink);
+  font-size: .72rem; padding: .26rem .6rem; min-width: 8rem; border: 1px solid var(--corpus-hairline);
+  border-radius: 1rem; background: var(--corpus-surface); color: var(--corpus-ink);
 }
+#corpus-graph-search:focus { outline: none; border-color: var(--corpus-moss, #7a955a); }
 .cg-chip {
-  font-size: .66rem; padding: .12rem .42rem; border: 1px solid #999; border-radius: 1rem;
-  background: var(--corpus-surface); color: var(--corpus-ink); cursor: pointer;
-  display: inline-flex; gap: .25rem; align-items: center;
+  --chip: #999;
+  font-size: .68rem; padding: .16rem .5rem; border: 1px solid color-mix(in srgb, var(--chip) 55%, transparent);
+  border-radius: 1rem; background: var(--corpus-surface); color: var(--corpus-ink); cursor: pointer;
+  display: inline-flex; gap: .3rem; align-items: center; user-select: none;
+  transition: background .12s ease, border-color .12s ease;
 }
-.cg-chip input { margin: 0; }
+.cg-chip:has(input:checked) { background: color-mix(in srgb, var(--chip) 15%, var(--corpus-surface)); border-color: var(--chip); }
+.cg-chip--flag { --chip: var(--corpus-ink-faint); }
+.cg-chip input { margin: 0; accent-color: var(--chip); }
+
 #corpus-graph-time {
-  flex-basis: 100%; display: flex; gap: .4rem; align-items: center;
-  font-size: .66rem; color: var(--corpus-ink-faint); margin-top: .15rem;
+  position: absolute; bottom: .6rem; left: 50%; transform: translateX(-50%); z-index: 6;
+  display: flex; gap: .55rem; align-items: center; width: min(560px, calc(100% - 1.6rem));
+  padding: .3rem .7rem; border-radius: 1rem;
+  background: color-mix(in srgb, var(--corpus-surface) 82%, transparent);
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+  box-shadow: 0 1px 8px rgba(0,0,0,.06);
+  font-size: .68rem; color: var(--corpus-ink-faint);
 }
-#corpus-graph-time input[type=range] { flex: 1; }
+#corpus-graph-time input[type=range] { flex: 1; accent-color: var(--corpus-moss, #7a955a); }
+#corpus-graph-time .cg-date { font-family: "IBM Plex Mono", monospace; min-width: 5.2rem; text-align: right; }
 #corpus-graph-time button {
-  border: 1px solid var(--corpus-hairline); border-radius: .25rem;
-  background: var(--corpus-surface); color: var(--corpus-ink); cursor: pointer; padding: 0 .45rem;
+  border: 1px solid var(--corpus-hairline); border-radius: 50%; width: 1.5rem; height: 1.5rem;
+  line-height: 1; font-size: .6rem; background: var(--corpus-surface); color: var(--corpus-ink);
+  cursor: pointer; flex: none; display: inline-flex; align-items: center; justify-content: center;
+}
+
+#corpus-graph-panel {
+  position: absolute; top: .6rem; right: .6rem; max-width: 15rem; z-index: 7;
+  background: color-mix(in srgb, var(--corpus-surface) 92%, transparent);
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+  border: 1px solid var(--corpus-hairline); border-radius: .5rem; padding: .55rem .7rem;
+  font-size: .74rem; line-height: 1.5; color: var(--corpus-ink); box-shadow: 0 2px 14px rgba(0,0,0,.14);
+}
+#corpus-graph-panel a { color: var(--corpus-moss-deep, #a9762a); font-weight: 600; }
+
+@media (max-width: 48em) {                 /* phones: search full-width, controls stay centered */
+  #corpus-graph-controls { max-width: calc(100% - .8rem); }
+  #corpus-graph-search { min-width: 0; flex: 1 1 100%; }
 }
 .graph-caption {
   text-align: center;
