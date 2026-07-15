@@ -124,6 +124,24 @@
           network.setOptions({ physics: false });
         });
 
+        // Mark the eight domain hubs with a small centre dot — a subtle bullseye so a hub reads as
+        // distinct from the similarly-coloured, similarly-sized sub-nodes around it. Drawn in network
+        // coordinates so it scales with zoom and sits dead-centre.
+        var hubIds = data.nodes.filter(function (n) { return n.hub; }).map(function (n) { return n.id; });
+        network.on("afterDrawing", function (ctx) {
+          var pos = network.getPositions(hubIds);
+          ctx.save();
+          ctx.fillStyle = "rgba(34,29,23,0.88)";
+          hubIds.forEach(function (id) {
+            var p = pos[id];
+            if (!p) return;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, 5, 0, 2 * Math.PI);
+            ctx.fill();
+          });
+          ctx.restore();
+        });
+
         // --- overlay UI (created AFTER vis.Network, which replaces the container's contents) ---
         var panel = document.createElement("div");
         panel.id = "corpus-graph-panel"; panel.style.display = "none"; el.appendChild(panel);
