@@ -519,12 +519,45 @@
    8. Knowledge-graph canvas
    ---------------------------------------------------------------------------- */
 #corpus-graph {
+  position: relative;                 /* anchor the overlay controls + summary panel */
   height: 560px;
   width: 100%;
   border: 1px solid var(--corpus-hairline);
   border-radius: 14px;
   background: var(--corpus-surface);
   margin: 1rem 0 0.4rem;
+}
+
+/* interactivity overlay: click-panel, search, filter chips, time slider */
+#corpus-graph-panel {
+  position: absolute; top: .6rem; right: .6rem; max-width: 15rem; z-index: 5;
+  background: var(--corpus-surface); border: 1px solid var(--corpus-hairline);
+  border-radius: .4rem; padding: .55rem .7rem; font-size: .74rem; line-height: 1.5;
+  color: var(--corpus-ink); box-shadow: 0 2px 12px rgba(0,0,0,.14);
+}
+#corpus-graph-panel a { color: var(--corpus-moss-deep, #a9762a); font-weight: 600; }
+#corpus-graph-controls {
+  position: absolute; top: .6rem; left: .6rem; right: 16rem; z-index: 5;
+  display: flex; flex-wrap: wrap; gap: .3rem; align-items: center;
+}
+#corpus-graph-search {
+  font-size: .72rem; padding: .22rem .5rem; border: 1px solid var(--corpus-hairline);
+  border-radius: .3rem; background: var(--corpus-surface); color: var(--corpus-ink);
+}
+.cg-chip {
+  font-size: .66rem; padding: .12rem .42rem; border: 1px solid #999; border-radius: 1rem;
+  background: var(--corpus-surface); color: var(--corpus-ink); cursor: pointer;
+  display: inline-flex; gap: .25rem; align-items: center;
+}
+.cg-chip input { margin: 0; }
+#corpus-graph-time {
+  flex-basis: 100%; display: flex; gap: .4rem; align-items: center;
+  font-size: .66rem; color: var(--corpus-ink-faint); margin-top: .15rem;
+}
+#corpus-graph-time input[type=range] { flex: 1; }
+#corpus-graph-time button {
+  border: 1px solid var(--corpus-hairline); border-radius: .25rem;
+  background: var(--corpus-surface); color: var(--corpus-ink); cursor: pointer; padding: 0 .45rem;
 }
 .graph-caption {
   text-align: center;
