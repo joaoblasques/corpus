@@ -102,17 +102,66 @@
             } else { n.borderWidth = 0; }
           }
         });
+        // --- anchored territories: pin hubs on a bridge-affinity ring, seed pages around their hub ---
+        function domOf(id) { var i = id.indexOf("/"); return i < 0 ? id : id.slice(0, i); }
+        var byId = {}; data.nodes.forEach(function (n) { byId[n.id] = n; });
+        var hubDomains = data.nodes.filter(function (n) { return n.hub; }).map(function (n) { return n.id; });
+
+        // domain×domain bridge counts (bridge edges join two page nodes in different domains)
+        var bridges = {};
+        function pk(a, b) { return a < b ? a + "|" + b : b + "|" + a; }
+        data.edges.forEach(function (e) {
+          if (!e.bridge) return;
+          var a = domOf(e.from), b = domOf(e.to);
+          if (a !== b && byId[a] && byId[b]) bridges[pk(a, b)] = (bridges[pk(a, b)] || 0) + 1;
+        });
+        function pair(a, b) { return bridges[pk(a, b)] || 0; }
+
+        // greedy nearest-neighbour ring order — most-bridged pairs adjacent (short, uncrossed arcs)
+        var remaining = hubDomains.slice().sort(function (a, b) {
+          var ta = 0, tb = 0; hubDomains.forEach(function (d) { ta += pair(a, d); tb += pair(b, d); });
+          return tb - ta;
+        });
+        var order = remaining.length ? [remaining.shift()] : [];
+        while (remaining.length) {
+          var last = order[order.length - 1];
+          remaining.sort(function (a, b) { return pair(last, b) - pair(last, a); });
+          order.push(remaining.shift());
+        }
+
+        // pin hubs on the ring (fixed + heavy so nothing drags them into the centre)
+        var R = 360;
+        order.forEach(function (dom, i) {
+          var ang = (i / order.length) * 2 * Math.PI - Math.PI / 2;
+          var h = byId[dom];
+          h.x = Math.round(Math.cos(ang) * R); h.y = Math.round(Math.sin(ang) * R);
+          h.fixed = { x: true, y: true }; h.mass = 8;
+        });
+
+        // seed each domain's pages in a small ring around their hub so physics starts them in-territory
+        var pagesByDom = {};
+        data.nodes.forEach(function (n) { if (!n.hub) (pagesByDom[n.domain] = pagesByDom[n.domain] || []).push(n); });
+        Object.keys(pagesByDom).forEach(function (dom) {
+          var h = byId[dom]; if (!h) return;
+          var ps = pagesByDom[dom];
+          ps.forEach(function (n, j) {
+            var a = (j / ps.length) * 2 * Math.PI, rr = 36 + (j % 6) * 15;
+            n.x = h.x + Math.cos(a) * rr; n.y = h.y + Math.sin(a) * rr;
+          });
+        });
+
         var nodes = new vis.DataSet(data.nodes);
         var edges = new vis.DataSet(data.edges.map(function (e) {
           var col = e.bridge ? t.accent : t.edge;             // cross-domain BRIDGE edges stand out
-          return { from: e.from, to: e.to, color: { color: col, highlight: t.accent, hover: t.accent }, width: e.bridge ? 0.9 : 0.5 };
+          return { from: e.from, to: e.to, color: { color: col, highlight: t.accent, hover: t.accent },
+                   width: e.bridge ? 0.9 : 0.5, length: e.bridge ? 520 : 85 };
         }));
         var network = new vis.Network(el, { nodes: nodes, edges: edges }, {
           nodes: { scaling: { min: 6, max: 46 } },
           edges: { smooth: { type: "continuous" }, width: 0.5, selectionWidth: 1 },
           physics: {
-            barnesHut: { gravitationalConstant: -3600, springLength: 155, springConstant: 0.02, damping: 0.5, avoidOverlap: 0.3 },
-            stabilization: { iterations: 200 }
+            barnesHut: { gravitationalConstant: -2200, centralGravity: 0, springLength: 90, springConstant: 0.03, damping: 0.55, avoidOverlap: 0.4 },
+            stabilization: { iterations: 250 }
           },
           interaction: { hover: true, tooltipDelay: 120, hideEdgesOnDrag: true },
           layout: { improvedLayout: false }
