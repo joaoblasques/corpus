@@ -3,6 +3,7 @@
 > OKF v0.1 change log. Newest first, grouped by date.
 
 ## 2026-07-15
+* **Ingest**: [personal-knowledge-corpus-pipeline] · channel=conversation · domain=ai-engineering · pages=[corpus/ai-engineering/personal-knowledge-corpus-pipeline.md]
 * **Ingest**: "Artificial Intelligence and the Future of Teaching and Learning" (US Dept of Education, May 2023, 71pp) · channel=pdf · 4 source parts · domain=ai-engineering · pages=[corpus/ai-engineering/ai-education.md, corpus/ai-engineering/sources/ai-future-teaching-learning-us-doe.md]
 
 * **Collectors**: gmail=6, blog_promote=0, obsidian=25, book_discover=0, blog_discover=15, book_fetch=1, pdf=1, books=0, arxiv=24, youtube=0, github_discover=0, github_promote=0, github=0, x=0, links_refetch=0

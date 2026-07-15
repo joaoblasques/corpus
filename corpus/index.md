@@ -1681,3 +1681,4 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - 2026-07-14: [Clustering Methods](/ai-engineering/clustering-methods.md) (updated +1 source — foundations-of-data-science; spectral clustering section)
 - 2026-07-14: [AI History](/ai-engineering/ai-history.md) (new — concept, stub)
 - 2026-07-14: [Nils J. Nilsson](/ai-engineering/nils-nilsson.md) (new — entity, stub)
+- 2026-07-15: [Personal Knowledge Corpus Pipeline](/ai-engineering/personal-knowledge-corpus-pipeline.md) (new — concept, draft; local vs cloud pipeline architecture)
