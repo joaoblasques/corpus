@@ -70,7 +70,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [AI and the Job Market](/ai-business/ai-and-the-job-market.md)
 
 <details>
-<summary>Source summaries (169)</summary>
+<summary>Source summaries (173)</summary>
 
 - ["$1,300/Day Automated Bittensor Investing With Claude Code (34 Min Free Masterclass)"](/ai-business/sources/1-300-day-automated-bittensor-investing-with-claude-code-34--SHEs8gNh7sQ.md)
 - ["20-30 Years Old Is The Tutorial Phase, Don't F*ck It Up - Dan Koe"](/ai-business/sources/20-30-years-old-is-the-tutorial-phase-don-t-f-ck-it-up-dan-k-67066ee2.md)
@@ -97,6 +97,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - ["AL 002: Are Huge Sales Pages Worth It or Just Too Much?"](/ai-business/sources/al-002-are-huge-sales-pages-worth-it-or-just-too-much-9112eb56.md)
 - ["AL 003: Will These New Lead Magnet Ideas Grow My Email List?"](/ai-business/sources/al-003-will-these-new-lead-magnet-ideas-grow-my-email-list-83a0d124.md)
 - ["AL 004: Can I Use Low-Lift Collabs to Grow My Audience?"](/ai-business/sources/al-004-can-i-use-low-lift-collabs-to-grow-my-audience-34b95956.md)
+- ["AL 006: Why Do Some Memberships Last While Others Fizzle Out?"](/ai-business/sources/al-006-why-do-some-memberships-last-while-others-fizzle-out-a971dd25.md)
 - ["Announcing Lex’s $2.75m Seed Round, Led by True Ventures"](/ai-business/sources/announcing-lex-s-2-75m-seed-round-led-by-true-ventures-a884d8c3.md)
 - ["Anthropic 3Q26 Profit Over $1B: The Anthropic IPO Financials Sneak Peak"](/ai-business/sources/anthropic-3q26-profit-over-1b-the-anthropic-ipo-financials-s-e3ec8fe9.md)
 - ["Anthropic Economic Index report: Cadences"](/ai-business/sources/anthropic-economic-index-report-cadences-50380117.md)
@@ -148,7 +149,9 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [Ads in the Age of AI](/ai-business/sources/ads-in-the-age-of-ai-03396ce0.md)
 - [Advisory Database now includes an Unreviewed Advisories section - GitHub Changelog](/ai-business/sources/advisory-database-now-includes-an-unreviewed-advisories-sect-9a794a5b.md)
 - [AI - 101 Use Cases in Daily Life](/ai-business/sources/ai-101-use-cases-in-daily-life-fe.md)
+- [AI agents are quietly rewriting prediction market trading](/ai-business/sources/ai-agents-are-quietly-rewriting-prediction-market-trading-ad.md)
 - [AI agents making money on their own? The future is already here](/ai-business/sources/ai-agents-making-money-on-their-own-the-future-is-already-he-sHZ5qCoEDtg.md)
+- [AI Agents Quietly Rewriting Prediction Market Trading — Polymarket and Olas Protocol](/ai-business/sources/ai-agents-quietly-rewriting-prediction-market-trading-polyma-a.md)
 - [AI and Liability](/ai-business/sources/ai-and-liability-33e587b3.md)
 - [AI Automation by Industry | AY Automate](/ai-business/sources/ai-automation-by-industry-ay-automate-46ddc862.md)
 - [AI Business - AI-First Service Agencies Boring Business Model](/ai-business/sources/ai-business-ai-first-service-agencies-boring-business-model-de.md)
@@ -241,6 +244,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [The Claude AI Side Hustle — Selling Notion Templates](/ai-business/sources/the-claude-ai-side-hustle-selling-notion-templates-a.md)
 - [The Simplest Side Hustle You Can Start Under $100](/ai-business/sources/the-simplest-side-hustle-you-can-start-under-100-Y4pvrjtb1cI.md)
 - [This Boring Website Earns $6M/Year. Here's How to Clone it (No Coding!).](/ai-business/sources/this-boring-website-earns-6m-year-here-s-how-to-clone-it-no--nQOGK72IHx8.md)
+- [What Clients Really Ask for in AI Projects | Towards Data Science](/ai-business/sources/what-clients-really-ask-for-in-ai-projects-towards-data-scie-ec.md)
 
 </details>
 

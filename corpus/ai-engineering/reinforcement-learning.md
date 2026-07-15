@@ -6,6 +6,12 @@ sources:
   - path: raw/_inbox/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-36.md
     channel: pdf
     ingested_at: 2026-07-11
+  - path: raw/_inbox/pdf-the-quest-for-artificial-intelligence-a-history-of-part-24.md
+    channel: pdf
+    ingested_at: 2026-07-15
+  - path: raw/_inbox/pdf-the-quest-for-artificial-intelligence-a-history-of-part-25.md
+    channel: pdf
+    ingested_at: 2026-07-15
 aliases:
   - reinforcement learning
   - RL
@@ -18,7 +24,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-07-11
-updated: 2026-07-11
+updated: 2026-07-15
 ---
 
 # Reinforcement Learning
@@ -55,6 +61,10 @@ The **Markov property**: the next state *s_{t+1}* depends only on the current st
 | Credit assignment | Immediate | Over many time steps (temporal credit assignment) |
 | Exploration | None needed | Explicit: must try new actions to discover rewards |
 
+## Historical milestone: TD-Gammon (Tesauro, 1992)
+
+**TD-GAMMON** combined temporal-difference learning (TD(λ)) with a multi-layer neural network trained entirely by self-play from a random initial network [^src2]. Starting from scratch with no human expert knowledge beyond the rules of backgammon, TD-Gammon reached world-class play after ~1.5M self-play games — the first RL system to achieve expert human performance in a complex game. TD-Gammon's opening move recommendations also changed human expert theory; positions it preferred differently from convention were later validated by human grandmasters [^src2]. The system demonstrated that function approximation (neural nets) + TD learning could scale to large state spaces, prefiguring deep RL (DQN, AlphaGo) by two decades. See [/ai-engineering/ai-history.md](/ai-engineering/ai-history.md) for broader context.
+
 ## Practical challenges
 
 - **Sample efficiency**: RL often needs millions of environment steps; supervised learning needs far less data for similar task complexity.
@@ -70,3 +80,4 @@ The **Markov property**: the next state *s_{t+1}* depends only on the current st
 ---
 
 [^src1]: [D2L Part 36 — Reinforcement Learning (MDPs, Value Iteration)](../../raw/pdf/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-36.md)
+[^src2]: [The Quest for Artificial Intelligence — Part 25 (Ch. 29: TD-GAMMON, reinforcement learning applications)](../../raw/pdf/pdf-the-quest-for-artificial-intelligence-a-history-of-part-25.md) — Nils Nilsson (Cambridge, 2010)

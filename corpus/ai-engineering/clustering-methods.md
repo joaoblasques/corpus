@@ -159,6 +159,7 @@ Spectral clustering handles non-convex cluster shapes by leveraging the **graph 
 - [/ai-engineering/statistical-learning.md](/ai-engineering/statistical-learning.md) — supervised vs unsupervised framing
 - [/ai-engineering/gaussian-mixture-models.md](/ai-engineering/gaussian-mixture-models.md) — soft/probabilistic alternative to K-means; handles outliers
 - [/ai-engineering/sources/introduction-to-statistical-learning.md](/ai-engineering/sources/introduction-to-statistical-learning.md) — ISL book summary
+- [/data-engineering/data-mining.md](/data-engineering/data-mining.md) — data mining domain page (Han/Kamber/Pei textbook); covers DBSCAN and advanced hierarchical methods (BIRCH, CURE, CHAMELEON) beyond ISL's treatment; situates clustering within the KDD pipeline (cross-domain → data-engineering)
 
 ---
 

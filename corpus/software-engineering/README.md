@@ -144,7 +144,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [AI-Assisted Development](/software-engineering/ai-assisted-development.md)
 
 <details>
-<summary>Source summaries (63)</summary>
+<summary>Source summaries (67)</summary>
 
 - ["2024-05-25-15-54-25 - move-base-up by josephmachado · Pull Request #17 · josephmachado/simple_dbt_project"](/software-engineering/sources/2024-05-25-15-54-25-move-base-up-by-josephmachado-pull-reque-ee.md)
 - ["Disasters I've seen in a microservices world, part II"](/software-engineering/sources/disasters-i-ve-seen-in-a-microservices-world-part-ii-doc.md)
@@ -153,6 +153,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [5 Simple Habits for Writing Clean Code](/software-engineering/sources/5-simple-habits-for-writing-clean-code-cde.md)
 - [6 security settings every GitHub maintainer should enable this week](/software-engineering/sources/6-security-settings-every-github-maintainer-should-enable-th-ab782b95.md)
 - [6 Software Engineering Challenges & Ways To Overcome Them](/software-engineering/sources/6-software-engineering-challenges-ways-to-overcome-them-7af11149.md)
+- [A quote from Armin Ronacher](/software-engineering/sources/a-quote-from-armin-ronacher-7d60c1dd.md)
 - [Algorithms (Erickson, 2019)](/software-engineering/sources/algorithms-erickson.md)
 - [Algorithms and Complexity (Wilf, 1994)](/software-engineering/sources/algorithms-and-complexity-wilf.md)
 - [Algorithms and Data Structures (Nievergelt & Hinrichs, Global Text Project)](/software-engineering/sources/algorithms-nievergelt.md)
@@ -203,11 +204,14 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Purely Functional Data Structures (Okasaki, CMU 1996)](/software-engineering/sources/purely-functional-data-structures-okasaki.md)
 - [Python - Complete Beginner Course 5 Hours TechWorld with Nana](/software-engineering/sources/python-complete-beginner-course-5-hours-techworld-with-nana-aa.md)
 - [Refactoring Techniques Guide](/software-engineering/sources/refactoring-techniques-guide-de.md)
+- [Software Engineering Best Practices MOC](/software-engineering/sources/software-engineering-best-practices-moc-c.md)
 - [Software Engineering in the Age of AI](/software-engineering/sources/software-engineering-in-the-age-of-ai-a.md)
+- [SOLID Principles in Practice](/software-engineering/sources/solid-principles-in-practice-acce.md)
 - [Source: Go Programming — Full Course (Tech With Tim)](/software-engineering/sources/go-full-course-tech-with-tim.md)
 - [Source: Go Programming — Golang Course with Bonus Projects (boot.dev / freeCodeCamp)](/software-engineering/sources/go-course-boot-dev.md)
 - [Source: The Software Engineer's Guidebook (Gergely Orosz)](/software-engineering/sources/software-engineers-guidebook.md)
 - [The best TUIs - powerful terminal apps](/software-engineering/sources/the-best-tuis-powerful-terminal-apps-_fLmA4fjiAE.md)
+- [The C.R.A.F.T.E.D. Prompt Framework for Software Engineers](/software-engineering/sources/the-c-r-a-f-t-e-d-prompt-framework-for-software-engineers-eee.md)
 - [Why I Love Using Vim To Write Code](/software-engineering/sources/why-i-love-using-vim-to-write-code-o4X8GU7CCSU.md)
 
 </details>

@@ -18,6 +18,15 @@ sources:
   - path: raw/_inbox/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-06.md
     channel: pdf
     ingested_at: 2026-07-10
+  - path: raw/_inbox/pdf-the-quest-for-artificial-intelligence-a-history-of-part-05.md
+    channel: pdf
+    ingested_at: 2026-07-15
+  - path: raw/_inbox/pdf-the-quest-for-artificial-intelligence-a-history-of-part-20.md
+    channel: pdf
+    ingested_at: 2026-07-15
+  - path: raw/_inbox/pdf-the-quest-for-artificial-intelligence-a-history-of-part-24.md
+    channel: pdf
+    ingested_at: 2026-07-15
 aliases:
   - neural network
   - neural networks
@@ -32,12 +41,20 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-15
-updated: 2026-06-15
+updated: 2026-07-15
 ---
 
 # Neural Networks
 
 **TL;DR**: Computing structures loosely inspired by the brain — layers of weighted "neurons" that transform inputs to outputs and learn by adjusting weights to reduce error [^src1]. **Deep learning** is ML with many such layers; neural networks are the substrate of every modern LLM via the [Transformer](/ai-engineering/transformer.md) [^src2].
+
+## Historical arc: Perceptron → AI winter → backprop revival
+
+**Perceptron (Frank Rosenblatt, 1957):** Single-layer linear classifier with weighted inputs summed and thresholded. The **Perceptron Convergence Theorem** proves it learns any linearly separable function in finite steps [^src5]. Rosenblatt's claims of general intelligence triggered a decade of neural-network enthusiasm.
+
+**Minsky-Papert critique (1969):** *Perceptrons* (Minsky & Papert) formally proved that single-layer perceptrons cannot solve linearly inseparable problems (e.g., XOR). The book argued that scaling to multi-layer networks would face fundamental difficulties. Combined with DARPA's refocus on symbolic AI, this triggered a sharp drop in neural-network funding — the first "neural network winter" [^src5].
+
+**Backpropagation revival (Rumelhart, Hinton, Williams, 1986):** Published in *Nature* and the *Parallel Distributed Processing* (PDP) volumes, backpropagation provided efficient gradient computation through multi-layer networks via the chain rule, enabling the training of hidden-layer representations. This restarted the field; NETtalk (1987, learned English pronunciation) and ALVINN (1989, autonomous vehicle) were early demonstrations [^src6].
 
 ## From perceptron to multi-layer network
 
@@ -68,6 +85,7 @@ Models trained on multiple data types (text, image, audio, video) "develop a dee
 
 ## See also
 
+- [AI History](/ai-engineering/ai-history.md) — full arc from Perceptron (1957) through deep learning revival; Nilsson's insider account
 - [Machine Learning](/ai-engineering/machine-learning.md) — deep learning is the multi-layer extension of ML
 - [MLP](/ai-engineering/mlp.md) — multilayer perceptrons: hidden layers, activation functions, backprop, vanishing gradients
 - [Transformer](/ai-engineering/transformer.md) — the attention architecture behind LLMs
@@ -81,3 +99,5 @@ Models trained on multiple data types (text, image, audio, video) "develop a dee
 [^src2]: [Artificial Intelligence Full Course](../../raw/youtube/youtube-JMUxmLyrhSk-artificial-intelligence-full-course-artificial-intelligence.md) — Edureka
 [^src3]: [ai-engineering-from-scratch](../../raw/web/github-rohitg00-ai-engineering-from-scratch-learn-it-build-i.md) — Rohit Ghumare (Phases 3 & 7)
 [^src4]: [AI was HARD until I Learned these 10 Concepts](../../raw/youtube/youtube-5DtjQrROUzY-ai-was-hard-until-i-learned-these-10-concepts.md) — Maddy Zhang, [07:48](../../raw/youtube/youtube-5DtjQrROUzY-ai-was-hard-until-i-learned-these-10-concepts.md#t=7:48)
+[^src5]: [The Quest for Artificial Intelligence — Part 5 (Ch. 4: Perceptrons, ADALINE, statistical pattern recognition)](../../raw/pdf/pdf-the-quest-for-artificial-intelligence-a-history-of-part-05.md) — Nils Nilsson (Cambridge, 2010)
+[^src6]: [The Quest for Artificial Intelligence — Part 20 (Ch. 25: subsumption, connectionism, backprop, PDP volumes)](../../raw/pdf/pdf-the-quest-for-artificial-intelligence-a-history-of-part-20.md) — Nils Nilsson (Cambridge, 2010)

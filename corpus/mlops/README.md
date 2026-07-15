@@ -137,10 +137,11 @@ The engineering substrate for building ML and software systems: how the developm
 - [Environment Promotion (dev → acc → prd)](/mlops/environment-promotion.md)
 
 <details>
-<summary>Source summaries (85)</summary>
+<summary>Source summaries (90)</summary>
 
 - ["29%+ warehouse savings: How the dbt Fusion engine drives cost efficiency | dbt Labs"](/mlops/sources/29-warehouse-savings-how-the-dbt-fusion-engine-drives-cost-e-121b247d.md)
 - ["AL 005: 60% Growth in 60 Days? How?!"](/mlops/sources/al-005-60-growth-in-60-days-how-150a587c.md)
+- ["Alternative data for hedge funds: from web to signals"](/mlops/sources/alternative-data-for-hedge-funds-from-web-to-signals-3f1968e5.md)
 - ["Announcing the Monetization Gateway: charge for any resource behind Cloudflare via x402"](/mlops/sources/announcing-the-monetization-gateway-charge-for-any-resource--88fda6db.md)
 - ["Artifacts: versioned storage that speaks Git"](/mlops/sources/artifacts-versioned-storage-that-speaks-git-882e9a38.md)
 - ["Ask, build, compose: What our 5th Genie Hackathon taught us about Databricks Genie"](/mlops/sources/ask-build-compose-what-our-5th-genie-hackathon-taught-us-abo-733b3260.md)
@@ -163,6 +164,7 @@ The engineering substrate for building ML and software systems: how the developm
 - ["Web Scraping 101: A Million Dollar Project Idea"](/mlops/sources/web-scraping-101-a-million-dollar-project-idea-DJnH0jR8y5Q.md)
 - [100% REMOTE Boring Businesses (That Almost Never Fail)](/mlops/sources/100-remote-boring-businesses-that-almost-never-fail-EnSJN9zl-yA.md)
 - [5 powerful scrapers to add to your SEO tool kit](/mlops/sources/5-powerful-scrapers-to-add-to-your-seo-tool-kit-906d6a15.md)
+- [A broken DNSSEC rollover took down .AL. Now 1.1.1.1 tells you when validation is bypassed](/mlops/sources/a-broken-dnssec-rollover-took-down-al-now-1-1-1-1-tells-you--a9e7f215.md)
 - [A Catalog Is All You Need](/mlops/sources/a-catalog-is-all-you-need-1015a427.md)
 - [A Decision Framework for ETL Migration to Databricks](/mlops/sources/a-decision-framework-for-etl-migration-to-databricks-9db6e9d6.md)
 - [a-novel-approach-to-trading-strategy-parameter-optimization](/mlops/sources/a-novel-approach-to-trading-strategy-parameter-optimization-a.md)
@@ -210,12 +212,15 @@ The engineering substrate for building ML and software systems: how the developm
 - [I Built an AI Trading System With Claude + TradingView](/mlops/sources/i-built-an-ai-trading-system-with-claude-tradingview-IqvnryFzZD4.md)
 - [I Found Where AI Agents Are Beating Humans on Polymarket (perfect for OpenClaw)](/mlops/sources/i-found-where-ai-agents-are-beating-humans-on-polymarket-per-Kz3kZOTd_tI.md)
 - [I Wish Someone Had Explained Cowork Like This Earlier (in under 10 min)](/mlops/sources/i-wish-someone-had-explained-cowork-like-this-earlier-in-und-IBI8DecuFyg.md)
+- [Manage budgets and cost controls for Genie](/mlops/sources/manage-budgets-and-cost-controls-for-genie-ee.md)
 - [mbta-on-time-lakehouse-retrospective](/mlops/sources/mbta-on-time-lakehouse-retrospective-eece.md)
 - [NotebookLM + Obsidian Integration Workflow](/mlops/sources/notebooklm-obsidian-integration-workflow-f.md)
 - [OpenClaw 2.0 is here.](/mlops/sources/openclaw-2-0-is-here-6vPaitNQMGY.md)
 - [Seedance 2.0 + Claude Code Creates $10k Websites in Minutes](/mlops/sources/seedance-2-0-claude-code-creates-10k-websites-in-minutes-NvxiSG34mPU.md)
 - [Sell Your API to AI Agents & Make SERIOUS Money in 2026 (full guide / beginner friendly)](/mlops/sources/sell-your-api-to-ai-agents-make-serious-money-in-2026-full-g-GyijriMIKPA.md)
 - [systematic-trend-following-with-adaptive-portfolio-construct](/mlops/sources/systematic-trend-following-with-adaptive-portfolio-construct-cc.md)
+- [TerraForm - WPP](/mlops/sources/terraform-wpp-doc.md)
+- [Terraform Interview Cheat Sheet](/mlops/sources/terraform-interview-cheat-sheet-ee.md)
 - [The Easiest $3K/Day Business — Photo Magnets](/mlops/sources/the-easiest-3k-day-business-photo-magnets-da.md)
 - [The Four Step Process to Loop Engineer ANYTHING (+ Why Prompt Engineering Isn't Dead)](/mlops/sources/the-four-step-process-to-loop-engineer-anything-why-prompt-e-JirDfgJcJFU.md)
 - [The Most Passive Online Side Hustle I've Ever Seen](/mlops/sources/the-most-passive-online-side-hustle-i-ve-ever-seen-Wl0NMNbYRDk.md)

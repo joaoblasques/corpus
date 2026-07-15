@@ -24,6 +24,33 @@ sources:
   - path: raw/pdf/pdf-foundations-of-data-science-part-01.md
     channel: pdf
     ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-a-brief-introduction-to-machine-learning-for-engin-part-01.md
+    channel: pdf
+    ingested_at: 2026-07-15
+  - path: raw/_inbox/pdf-a-brief-introduction-to-machine-learning-for-engin-part-02.md
+    channel: pdf
+    ingested_at: 2026-07-15
+  - path: raw/_inbox/pdf-a-brief-introduction-to-machine-learning-for-engin-part-03.md
+    channel: pdf
+    ingested_at: 2026-07-15
+  - path: raw/_inbox/pdf-a-brief-introduction-to-machine-learning-for-engin-part-04.md
+    channel: pdf
+    ingested_at: 2026-07-15
+  - path: raw/_inbox/pdf-a-brief-introduction-to-machine-learning-for-engin-part-05.md
+    channel: pdf
+    ingested_at: 2026-07-15
+  - path: raw/_inbox/pdf-a-brief-introduction-to-machine-learning-for-engin-part-06.md
+    channel: pdf
+    ingested_at: 2026-07-15
+  - path: raw/_inbox/pdf-a-brief-introduction-to-machine-learning-for-engin-part-07.md
+    channel: pdf
+    ingested_at: 2026-07-15
+  - path: raw/_inbox/pdf-a-brief-introduction-to-machine-learning-for-engin-part-08.md
+    channel: pdf
+    ingested_at: 2026-07-15
+  - path: raw/_inbox/pdf-a-brief-introduction-to-machine-learning-for-engin-part-09.md
+    channel: pdf
+    ingested_at: 2026-07-15
 aliases:
   - machine learning
   - ML
@@ -41,11 +68,24 @@ aliases:
   - online learning
   - Occam's Razor
   - generalization
+  - frequentist learning
+  - Bayesian learning
+  - empirical risk minimization
+  - ERM
+  - MLE
+  - MAP
+  - exponential family
+  - GLM
+  - generalized linear model
+  - ELBO
+  - EM algorithm
+  - PAC learning
+  - variational inference
 tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-15
-updated: 2026-07-14
+updated: 2026-07-15
 ---
 
 # Machine Learning
@@ -106,6 +146,78 @@ Examples: linear separators in R^d have VC dimension d+1. Neural networks have f
 
 **Boosting** (Adaboost): combine weak learners (each just above 50% accuracy) into a strong learner with arbitrarily low error. Each round re-weights examples: misclassified examples get higher weight. Final classifier is a weighted majority vote. Converts weak learning to strong learning in polynomial time [^src_bhk].
 
+## Probabilistic framework: frequentist vs. Bayesian (Simeone)
+
+A compact unifying framework from Simeone (2018) treats every ML algorithm as an **inference procedure over a probabilistic model** [^simeone_p1]. The two philosophies:
+
+| Framework | Estimate | Analogy |
+|---|---|---|
+| **Frequentist (MLE/ERM)** | Point estimate θ* = argmax log p(D|θ) | "Best single setting of the knob" |
+| **Frequentist (MAP)** | Point estimate with prior penalty | ERM + regularization |
+| **Bayesian** | Full posterior p(θ|D); predictive = ∫ p(t*|x*,θ) p(θ|D) dθ | "Average over all plausible knob settings" |
+
+**Empirical Risk Minimization (ERM)** is the frequentist canonical algorithm: find h ∈ H minimizing (1/m) Σ L(h(xᵢ), tᵢ). MLE is ERM with log-loss [^simeone_p2]. MAP adds a prior log p(θ) as a regularization term; Gaussian prior → ridge regression (L2); Laplace prior → LASSO (L1, sparse solutions) [^simeone_p2].
+
+**Bayesian posterior predictive** automatically quantifies uncertainty — more conservative predictions when data is scarce. The price is computational: the posterior integral is often intractable, motivating approximate inference (variational methods, MCMC) [^simeone_p2].
+
+**MDL (Minimum Description Length)** provides a compression-theoretic grounding: the best model minimizes total description length of model + data given model. MDL recovers MLE as a special case and formalizes Occam's Razor [^simeone_p2].
+
+## The discriminative vs. generative model split
+
+A key design decision for any supervised learning problem [^simeone_p1][^simeone_p4]:
+
+| Model class | What it learns | Examples |
+|---|---|---|
+| **Discriminative deterministic** | Decision boundary f(x) | Linear classifier, perceptron, SVM |
+| **Discriminative probabilistic** | Posterior p(t\|x) directly | Logistic regression, GLM, neural network |
+| **Generative probabilistic** | Joint p(x,t); infer p(t\|x) via Bayes | Naive Bayes, QDA/LDA, VAE, GMM |
+
+Generative models require estimating the data distribution (harder) but enable: sampling new data, handling missing features, and semi-supervised learning. Discriminative models only learn the decision boundary (easier), typically achieving better classification accuracy with less data [^simeone_p4][^simeone_p5].
+
+## Exponential family unification
+
+The **exponential family** p(x|η) = h(x) exp(η⊤φ(x) − A(η)) encompasses Gaussian, Bernoulli, Categorical, Poisson and others under one roof [^simeone_p3]. Benefits: (1) MLE via **moment matching** — set E[φ(x)] = empirical mean of sufficient statistics, closed form; (2) conjugate priors for Bayesian learning; (3) log-partition A(η) is convex — optimization is tractable; (4) maximum entropy property — the exponential family is the maximum-entropy distribution subject to fixed sufficient-statistic constraints [^simeone_p3].
+
+**Generalized Linear Models (GLMs)** extend this to supervised learning: E[t|x] = g⁻¹(wᵀx) where g is the canonical link. Logistic regression (Bernoulli + sigmoid) and Poisson regression (Poisson + log) are instances. GLMs are one-layer neural networks with specific activations [^simeone_p3][^simeone_p4].
+
+## Learning algorithms: a unified view
+
+| Algorithm | Loss | Key insight |
+|---|---|---|
+| Linear regression | MSE | Closed-form MLE; MAP = ridge/LASSO |
+| Logistic regression | Cross-entropy | GLM; gradient descent or Newton |
+| Perceptron | Hinge (hard) | Convergence theorem: finite steps if separable |
+| SVM | Hinge (soft-margin) | Max-margin; dual solution uses only support vectors; kernel trick for nonlinear boundaries [^simeone_p4][^simeone_p5] |
+| Neural network | Cross-entropy | Composition of GLM layers; backpropagation is chain rule applied to computation graph [^simeone_p4] |
+| Naive Bayes | Log-likelihood (generative) | Assumes feature independence given class |
+| QDA/LDA | Log-likelihood (generative) | Class-conditional Gaussians; LDA assumes equal covariance |
+| AdaBoost | Exponential | Reweight examples on each round; combines weak learners into strong [^simeone_p5] |
+
+**SGD as unifier**: all gradient-based methods above can be implemented via mini-batch SGD: θ ← θ − α ∇L(θ; batch). Mini-batch noise acts as implicit regularization — SGD often generalizes better than full-batch gradient descent [^simeone_p4].
+
+## Bias-estimation error tradeoff (formal)
+
+Total expected loss decomposes as: E[L] = irreducible noise + bias² + estimation error [^simeone_p2].
+
+- **Bias** = error from the model class being too simple (underfitting; high bias).
+- **Estimation error** (variance) = error from fitting noise in finite training data (overfitting; high variance).
+- As model complexity increases: bias falls, estimation error rises. Optimal complexity via **cross-validation**.
+- Regularization (ridge, LASSO, dropout, weight decay) trades a little more bias for a large reduction in estimation error [^simeone_p2].
+
+**Validation procedure**: split data into train / validation / test. Select model order on validation set; report final performance on held-out test set only once. Never tune on the test set [^simeone_p2].
+
+## Unsupervised learning: ELBO and the EM algorithm
+
+For models with latent variables z (e.g., mixture of Gaussians), direct ML maximization is intractable. Introduce variational distribution q(z|x) to derive [^simeone_p6]:
+
+log p(x|θ) = ELBO(q, θ) + KL(q(z|x) ‖ p(z|x, θ))
+
+Since KL ≥ 0, ELBO is a lower bound on the log-likelihood. **EM** iterates:
+- **E-step**: set q = posterior p(z|x, θ_old) → KL = 0, ELBO = log-likelihood.
+- **M-step**: maximize ELBO over θ, holding q fixed.
+
+K-means is a hard-assignment limit of EM on Gaussian mixtures (q assigns all mass to the nearest centroid) [^simeone_p6]. **Variational Autoencoders** extend the ELBO framework to deep generative models, using the **reparametrization trick** (z = μ + σ·ε, ε ~ N(0,I)) to backpropagate through the sampling step [^simeone_p8].
+
 ## See also
 
 - [AI Fundamentals](/ai-engineering/ai-fundamentals.md) — ML is the learning branch of the broader field
@@ -114,6 +226,9 @@ Examples: linear separators in R^d have VC dimension d+1. Neural networks have f
 - [LLM](/ai-engineering/llm.md) — large-scale supervised next-token learning + RLHF
 - [Learning AI Engineering](/ai-engineering/learning-ai-engineering.md) — the "learn ML in 2026" path
 - [Foundations of Data Science (Blum/Hopcroft/Kannan)](/ai-engineering/sources/foundations-of-data-science-blum-hopcroft-kannan.md) — rigorous textbook source
+- [ML for Engineers (Simeone 2018)](/ai-engineering/sources/ml-for-engineers-simeone.md) — full source summary: probabilistic models, PAC theory, approximate inference
+- [Generative Adversarial Networks](/ai-engineering/generative-adversarial-networks.md) — GAN architecture from the ELBO generalization perspective
+- [Gaussian Mixture Models](/ai-engineering/gaussian-mixture-models.md) — EM algorithm in detail
 - [AI Engineering hub](/ai-engineering/README.md)
 
 ---
@@ -126,3 +241,18 @@ Examples: linear separators in R^d have VC dimension d+1. Neural networks have f
 [^src6]: [The Elegant Math Behind Machine Learning (MLST interview — Anil Ananthaswamy, Why Machines Learn)](../../raw/youtube/youtube-URtF_UHYBSo-the-elegant-math-behind-machine-learning.md)
 [^src7]: [How to Learn Machine Learning Like a Genius (Tech With Tim)](../../raw/youtube/youtube-_hdUddANh_o-how-to-learn-machine-learning-like-a-genius-and-not-waste-ti.md)
 [^src_bhk]: [Foundations of Data Science (Blum, Hopcroft, Kannan 2018) — Chapter 5](../../raw/pdf/pdf-foundations-of-data-science-part-01.md)
+[^simeone_p1]: [ML for Engineers — Part 1/9 (Introduction + Book Overview)](../../raw/pdf/pdf-a-brief-introduction-to-machine-learning-for-engin-part-01.md)
+[^simeone_p2]: [ML for Engineers — Part 2/9 (MAP, Bayesian learning, MDL, KL divergence)](../../raw/pdf/pdf-a-brief-introduction-to-machine-learning-for-engin-part-02.md)
+[^simeone_p3]: [ML for Engineers — Part 3/9 (Exponential family, GLMs, maximum entropy)](../../raw/pdf/pdf-a-brief-introduction-to-machine-learning-for-engin-part-03.md)
+[^simeone_p4]: [ML for Engineers — Part 4/9 (SGD, SVM, logistic regression, backpropagation)](../../raw/pdf/pdf-a-brief-introduction-to-machine-learning-for-engin-part-04.md)
+[^simeone_p5]: [ML for Engineers — Part 5/9 (Generative models, boosting, PAC learnability, VC dimension)](../../raw/pdf/pdf-a-brief-introduction-to-machine-learning-for-engin-part-05.md)
+[^simeone_p6]: [ML for Engineers — Part 6/9 (ELBO, EM algorithm, Gaussian mixtures, GANs)](../../raw/pdf/pdf-a-brief-introduction-to-machine-learning-for-engin-part-06.md)
+[^simeone_p8]: [ML for Engineers — Part 8/9 (Approximate inference, variational inference, reparametrization trick)](../../raw/pdf/pdf-a-brief-introduction-to-machine-learning-for-engin-part-08.md)
+
+<!-- RELATED:START (generated by bin/corpus_heal.py related — do not edit inside) -->
+
+## Related across domains
+
+- [Python Built-in Functions](/mlops/python-built-in-functions.md) · _mlops_
+
+<!-- RELATED:END -->

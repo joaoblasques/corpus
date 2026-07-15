@@ -2,6 +2,20 @@
 
 > OKF v0.1 change log. Newest first, grouped by date.
 
+## 2026-07-15
+* **Ingest**: "Artificial Intelligence and the Future of Teaching and Learning" (US Dept of Education, May 2023, 71pp) · channel=pdf · 4 source parts · domain=ai-engineering · pages=[corpus/ai-engineering/ai-education.md, corpus/ai-engineering/sources/ai-future-teaching-learning-us-doe.md]
+
+* **Collectors**: gmail=6, blog_promote=0, obsidian=25, book_discover=0, blog_discover=15, book_fetch=1, pdf=1, books=0, arxiv=24, youtube=0, github_discover=0, github_promote=0, github=0, x=0, links_refetch=0
+* **Ingest**: 0 ingested · 0 deferred · status=ok
+* **YoutubeQuick**: 0 intake · 0 rescued · 0 skipped · status=ok
+* **DocsQuick**: 40 intake · 37 thin · 3 llm_fail · status=ok
+* **YoutubeReap**: 0 removed · status=ok
+* **Gardener**: 4 stubs deepened · status=ok
+* **Heal**: 75 citations repointed · 6 unfixable · 5 hubs reindexed · 24 cross-domain links · status=ok
+* **Depth**: 376 knowledge · 1115 sources · ratio 1:3.0
+* **GapResolver**: 0 gap dispatched · 0 sources queued · status=ok
+* **Lint**: 8 broken wikilinks · 6 broken citations · 0 orphans · 1076 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+* **OKF**: 0 violations
 ## 2026-07-14
 * **Deepen**: Supervised first run of the diagnostic-driven deepen-existing path (`consolidate_run.py run --mode deepen`, ai-engineering, 1 cluster). Deepened `openai.md` 550→1245 words by integrating 7 cluster member sources (GPT-5.6/Sol-Terra-Luna, Codex→ChatGPT Work, Atlas, self-hosting, reflective-AI, Karpathy) — original `[^src1]` claim preserved, footnote set grew `[^src1]`→`[^src1..src8]` (superset guard held), members stamped `consolidated_into:`, critic passed, okf_lint 0. Ranked thinnest-page-first by the map's weak-spot signal.
 * **Lint**: Weekly Opus synthesis+lint pass (scope=MEDIUM, 30 changed pages + direct neighbours). Fixed 15 stale `raw/_inbox/` source paths across 5 pages (singular-value-decomposition, machine-learning, clustering-methods, nils-nilsson, sources/learning-algorithm) — sources had moved to `raw/pdf/` after Branch-A ingest without frontmatter follow-up; each rewrite gated on target existence. Resolved a §13 alias collision: `PCA`/`Principal Component Analysis` were claimed by both singular-value-decomposition.md and pca-and-dimensionality-reduction.md — removed from SVD (PCA page is canonical owner), relationship moved to prose per §7.1. All citations + wikilinks on scoped pages verified resolving; okf_lint 0 violations across 1461 files.
