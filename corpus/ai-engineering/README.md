@@ -58,6 +58,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [AGI](/ai-engineering/agi.md) — concept · stub · ANI/AGI/ASI; the AGI-by-2030 forecast; future-of-work framing
 - [AI in Education](/ai-engineering/ai-education.md) — concept · draft · Intelligent Tutoring Systems (ITS), adaptive learning, formative assessment (AES), human-in-the-loop principle, algorithmic bias/equity, ACE/IEO teacher-centered frameworks; U.S. DoE 2023 policy recommendations
 - [AI Operating System](/ai-engineering/ai-operating-system.md) — concept · draft · structured folder/file system providing persistent context, memory, skills, and connections; applied context engineering for compounding AI intelligence
+- [Personal Knowledge Corpus Pipeline](/ai-engineering/personal-knowledge-corpus-pipeline.md) — concept · draft · collect→quick-ingest→deep-ingest→pages→index pipeline; local/cloud split; why collectors and headless Claude ingest run locally; role of the cloud session
 - [Context Engineering](/ai-engineering/context-engineering.md) — concept · draft · dynamically building and optimizing LLM inputs at inference time
 - [AI Agent](/ai-engineering/ai-agent.md) — concept · draft · LLM + tools + memory + orchestration in an iterative loop
 - [Multi-Agent Systems](/ai-engineering/multi-agent-systems.md) — concept · draft · patterns for multiple cooperating agents (sequential, parallel, supervisor, data-driven)

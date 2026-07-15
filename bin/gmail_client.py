@@ -256,6 +256,16 @@ def archive_message(service, message_id: str) -> dict:
     ).execute()
 
 
+def send_message(service, to: str, subject: str, body_text: str) -> dict:
+    """Send a plain-text email from the authenticated Gmail account."""
+    from email.mime.text import MIMEText
+    msg = MIMEText(body_text, "plain", "utf-8")
+    msg["to"] = to
+    msg["subject"] = subject
+    raw = base64.urlsafe_b64encode(msg.as_bytes()).decode("ascii")
+    return service.users().messages().send(userId="me", body={"raw": raw}).execute()
+
+
 # --------------------------------------------------------------------------
 # CLI
 # --------------------------------------------------------------------------
@@ -373,6 +383,15 @@ def cmd_reap_labels(args) -> int:
             errors += 1
     print(json.dumps({"relabeled": relabeled, "archived": relabeled,
                       "dry_run": bool(args.dry_run), "errors": errors}))
+    return 0
+
+
+def cmd_send_report(args) -> int:
+    """Send a nightly run-report email. Body is read from stdin."""
+    body = sys.stdin.read()
+    service = get_service()
+    result = send_message(service, args.to, args.subject, body)
+    print(json.dumps({"status": "sent", "message_id": result.get("id", "")}))
     return 0
 
 
@@ -495,6 +514,11 @@ def _build_parser():
                          help="Post-ingest: un-label + archive corpus-labeled emails.")
     prl.add_argument("--dry-run", action="store_true", help="Report only; no Gmail mutation.")
     prl.set_defaults(func=cmd_reap_labels)
+
+    psr = sub.add_parser("send-report", help="Send a run-report email; body read from stdin.")
+    psr.add_argument("--to", required=True, help="Recipient email address.")
+    psr.add_argument("--subject", required=True, help="Email subject line.")
+    psr.set_defaults(func=cmd_send_report)
 
     return p
 

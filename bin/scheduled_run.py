@@ -821,6 +821,85 @@ def run_docs_quick_intake(*, max_n: int = 50, backend: str = "openrouter",
         return {"status": "failed", "ingested": 0, "error": str(exc)}
 
 
+def _format_report_email(tallies: dict, at: str) -> str:
+    """Format the nightly run tallies as a plain-text email body."""
+    lines = [f"Corpus nightly run — {at}", ""]
+    collectors = tallies.get("collectors", {})
+    col_parts = [f"{ch}={info.get('collected', info.get('refetched', 0))}"
+                 for ch, info in collectors.items()]
+    lines.append(f"Collectors:    {', '.join(col_parts) or 'none'}")
+    ingest = tallies.get("ingest", {})
+    lines.append(f"Ingest:        {ingest.get('ingested', 0)} ingested · "
+                 f"{ingest.get('deferred', 0)} deferred · status={ingest.get('status', '?')}")
+    yq = tallies.get("youtube_quick", {})
+    if yq:
+        lines.append(f"YoutubeQuick:  {yq.get('ingested', 0)} intake · {yq.get('rescued', 0)} rescued · "
+                     f"{yq.get('skipped', 0)} skipped · status={yq.get('status', '?')}")
+    dq = tallies.get("docs_quick", {})
+    if dq:
+        dq_line = (f"DocsQuick:     {dq.get('ingested', 0)} intake · {dq.get('skipped_thin', 0)} thin · "
+                   f"{dq.get('llm_fail', 0)} llm_fail · status={dq.get('status', '?')}")
+        if dq.get("error"):
+            dq_line += f" · error={dq['error'][:100]}"
+        lines.append(dq_line)
+    gd = tallies.get("gardener", {})
+    if gd:
+        lines.append(f"Gardener:      {gd.get('expanded', 0)} stubs deepened · status={gd.get('status', '?')}")
+    gp = tallies.get("gap_resolver", {})
+    if gp:
+        gp_line = (f"GapResolver:   {gp.get('dispatched', 0)} gap · {gp.get('queued', 0)} sources queued"
+                   f" · status={gp.get('status', '?')}")
+        if gp.get("question"):
+            gp_line += f"\n               gap: {gp['question'][:80]}"
+        lines.append(gp_line)
+    lint = tallies.get("lint", {})
+    if lint and "error" not in lint:
+        flag = " ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py" if (
+            lint.get("broken_wikilinks") or lint.get("broken_citations")) else ""
+        lines.append(f"Lint:          {lint.get('broken_wikilinks', 0)} broken wikilinks · "
+                     f"{lint.get('broken_citations', 0)} broken citations · "
+                     f"{lint.get('stubs', 0)} stubs{flag}")
+    commit = tallies.get("commit", {})
+    if commit:
+        sha_str = f" · sha={commit['sha']}" if commit.get("sha") else ""
+        err_str = f" · error={commit['push_error'][:100]}" if commit.get("push_error") else ""
+        lines.append(f"Commit:        status={commit.get('status', '?')}{sha_str}{err_str}")
+    return "\n".join(lines)
+
+
+def run_email_report(tallies: dict, at: str, to_address: str, *,
+                     _subprocess_run=None) -> dict:
+    """Send the nightly run summary as a plain-text email via gmail_client.py send-report.
+
+    Opt-in: only called when CORPUS_REPORT_EMAIL is set. Uses the existing Gmail OAuth
+    (gmail.modify scope covers sending). Never raises — failure is recorded, not re-raised.
+    """
+    _run = _subprocess_run if _subprocess_run is not None else subprocess.run
+    ingest = tallies.get("ingest", {})
+    dq = tallies.get("docs_quick", {})
+    subject = (f"Corpus run {at} — "
+               f"{ingest.get('ingested', 0)} ingested · "
+               f"{dq.get('ingested', 0)} docs_quick")
+    body = _format_report_email(tallies, at)
+    try:
+        proc = _run(
+            [sys.executable, str(BIN / "gmail_client.py"), "send-report",
+             "--to", to_address, "--subject", subject],
+            input=body,
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+        if proc.returncode != 0:
+            return {"status": "failed", "error": proc.stderr.strip() or f"exit {proc.returncode}"}
+        try:
+            return json.loads(proc.stdout)
+        except (json.JSONDecodeError, AttributeError):
+            return {"status": "ok"}
+    except Exception as exc:  # noqa: BLE001
+        return {"status": "failed", "error": str(exc)}
+
+
 def run_gap_resolver(*, timeout_s: int = 600, _subprocess_run=None) -> dict:
     """Demand-driven growth: dispatch ONE logged query-gap to a bounded headless resolver
     that WebSearches up to 3 written sources and queues them via query.py fetch-and-queue
@@ -1669,6 +1748,16 @@ def main(argv=None) -> int:
                 # left between runs. (Commit status lives in git history + stdout.)
                 at = datetime.datetime.now().isoformat(timespec="minutes")
                 write_run_report(tallies, at=at)
+
+                # Optional email report — set CORPUS_REPORT_EMAIL=you@gmail.com to enable.
+                # Uses the existing Gmail OAuth (gmail.modify covers sending). Never aborts.
+                report_email = os.environ.get("CORPUS_REPORT_EMAIL")
+                if report_email:
+                    try:
+                        tallies["email_report"] = run_email_report(
+                            tallies, at=at, to_address=report_email)
+                    except Exception as exc:  # noqa: BLE001
+                        tallies["email_report"] = {"status": "failed", "error": str(exc)}
 
                 # U5 SEAM: commit/push — scoped to corpus/ only (R10), now also
                 # carrying the report block. Push failures are recorded, not raised.
