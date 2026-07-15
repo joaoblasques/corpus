@@ -57,7 +57,9 @@
   }
   function showNodePanel(panel, n) {
     if (n.hub) {
-      panel.innerHTML = "<b>" + (n.title || "") + "</b><br>domain hub · " + (n.sources || 0) + " source pages"
+      panel.innerHTML = "<b>" + (n.title || "") + "</b><br>domain hub"
+        + "<br>" + (n.pages || 0) + " pages · " + (n.sources || 0) + " sources"
+        + "<br>avg depth: " + depthLabel(n.avg_depth)
         + '<br><a href="' + REPO + "tree/main/corpus/" + n.id + '" target="_blank" rel="noopener">Browse domain →</a>';
     } else {
       panel.innerHTML = "<b>" + (n.title || "") + "</b><br>" + n.domain
@@ -148,6 +150,15 @@
             var a = (j / ps.length) * 2 * Math.PI, rr = 36 + (j % 6) * 15;
             n.x = h.x + Math.cos(a) * rr; n.y = h.y + Math.sin(a) * rr;
           });
+        });
+
+        // landmark labels — name the 2 most-connected pages per domain so each territory has anchors
+        Object.keys(pagesByDom).forEach(function (dom) {
+          pagesByDom[dom].slice().sort(function (a, b) { return (b.degree || 0) - (a.degree || 0); })
+            .slice(0, 2).forEach(function (n) {
+              n.label = (n.title || "").length > 22 ? n.title.slice(0, 20) + "…" : n.title;
+              n.font = { size: 11, face: "Newsreader, Georgia, serif", color: t.inkFaint, strokeWidth: 4, strokeColor: t.surface };
+            });
         });
 
         var nodes = new vis.DataSet(data.nodes);
