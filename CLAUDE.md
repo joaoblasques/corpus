@@ -1,4 +1,4 @@
-# CLAUDE.md — LLM Corpus Schema (v2.1)
+# CLAUDE.md — LLM Corpus Schema (v2.2)
 
 Personal knowledge corpus (Karpathy LLM-Wiki pattern). **Read this file fully before any operation**, then read `corpus/index.md`, `corpus/_domains.md`, `corpus/_config.md`.
 
@@ -52,42 +52,13 @@ Every corpus page declares its type in frontmatter. **One type per page.** If a 
 
 ## 4. Frontmatter (every corpus page)
 
-```yaml
----
-type: hub | entity | concept | synthesis | source
-domain: <domain-slug>
-status: stub | draft | mature
-sources:
-  - path: raw/<channel>/<file>.md          # or 03_Resources/<subfolder>/<file>.md for PARA-native
-    channel: matter | notes | web | youtube | inbox
-    ingested_at: YYYY-MM-DD
-    ingested_sha: <optional git SHA of source file at ingest time>
-aliases:
-  - alternate name
-  - another spelling
-tags:
-  - corpus/<domain>
-  - <type>
-created: YYYY-MM-DD
-updated: YYYY-MM-DD
-provisional: true | false  # optional; only on hub pages in provisional domains; mirrors corpus/_domains.md
-confidence: 0.0-1.0         # optional (v0.6); confidence in the page's core claims
-last_confirmed: YYYY-MM-DD  # optional (v0.6); most recent date a source reconfirmed the claims
-supersedes:                 # optional (v0.6); page(s) this one replaces
-  - corpus/<domain>/<old-page>.md
-superseded_by:              # optional (v0.6); page that replaced this one (stale stub kept)
-  - corpus/<domain>/<new-page>.md
----
-```
+Every page declares `type`, `domain`, `status`, `sources`, `aliases`, `tags`, `created`, `updated`,
+plus optional claim-lifecycle and consolidation fields. `aliases` is critical for entity dedup —
+always populate when you know variants ("GPT-4", "gpt4", "GPT 4"). Claim-lifecycle fields
+(`confidence`, `last_confirmed`, `supersedes`, `superseded_by`) are managed per §7.1.
 
-**`aliases`** is critical for entity dedup. Always populate when you know variants ("GPT-4", "gpt4", "GPT 4").
-
-**Claim-lifecycle fields (v0.6)** — `confidence`, `last_confirmed`, `supersedes`, `superseded_by` are optional and managed per §7.1. Use them to track staleness and supersession; omit when not meaningful.
-
-- `consolidates:` (optional, v2.1) — on a `synthesis` page: list of member source-page paths it consolidates.
-- `consolidated_into:` (optional, v2.1) — on a `source` page: path of the synthesis that consolidated it (member is kept, not deleted).
-
-**OKF conformance (v0.1):** `type` is **OKF-required** — every page must have a non-empty value; all other fields above are OKF-legal. Full conformance detail + old-flat-`sources` migration rule: [docs/file-formats.md](docs/file-formats.md).
+Full YAML block + field-by-field detail + OKF conformance + `sources` migration rule:
+[docs/file-formats.md](docs/file-formats.md).
 
 ---
 
@@ -104,15 +75,7 @@ superseded_by:              # optional (v0.6); page that replaced this one (stal
 
 Cross-links are plain markdown links using bundle-root-relative absolute paths: `[Display](/<domain>/<page>.md)`. Do NOT use `[[wikilinks]]`. Links are untyped edges — express the relationship type in prose (§7.1). Broken links are tolerated (a link may point to not-yet-written knowledge).
 
-For source citations, use footnote format with plain markdown links (sources live outside the OKF bundle — tolerated as external references):
-- Raw-channel: `[^src1]: [source title](../../raw/<channel>/<file>.md)` (relative from corpus page)
-- PARA-native: `[^src1]: [source title](../../../03_Resources/<subfolder>/<file>.md)` (relative from corpus page)
-
-The `sources:` frontmatter `path:` field stores the vault-relative path only (no link syntax):
-```
-# PARA-native: path: 03_Resources/Articles/foo.md
-# Raw-channel: path: raw/web/bar.md
-```
+Source citations use footnote format, relative paths (raw-channel vs PARA-native differ). Full formats + examples: [docs/file-formats.md](docs/file-formats.md).
 
 ---
 
@@ -120,12 +83,7 @@ The `sources:` frontmatter `path:` field stores the vault-relative path only (no
 
 **Every non-trivial claim cites a source.** This is the single most important discipline. Without provenance, the corpus becomes lossy compression you can't audit.
 
-Inline format:
-```markdown
-Self-attention scales quadratically with context length [^src1].
-
-[^src1]: [Attention is All You Need](../../raw/web/attention-is-all-you-need.md)
-```
+Citation format + example: [docs/file-formats.md](docs/file-formats.md).
 
 When a claim is supported by multiple sources, cite all. When sources **disagree**, do not pick one — create or update a `synthesis` page about the disagreement and link both.
 
@@ -262,6 +220,6 @@ Pages are **dense reference**, not blog posts.
 
 ## 15. Version
 
-Current: v2.1. Full history → [docs/changelog.md](docs/changelog.md).
+Current: v2.2. Full history → [docs/changelog.md](docs/changelog.md).
 
 Co-evolve with user. Bump version + log entry on every change.

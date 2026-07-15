@@ -3,6 +3,7 @@
 > OKF v0.1 change log. Newest first, grouped by date.
 
 ## 2026-07-15
+* **Schema**: v2.1→v2.2. Trimmed CLAUDE.md (1997→1759w, thrift-loop compression pass) by externalizing three purely-duplicated reference blocks to `docs/file-formats.md` — §4 full frontmatter YAML + OKF/migration detail, §6 citation link-format examples, §7 inline citation example. No rule content changed; each block left a pointer. Reviewed from a corpus-rooted session; restored the dropped "member is KEPT, not deleted" clause on `consolidated_into` so the move is lossless.
 * **Ingest**: [personal-knowledge-corpus-pipeline] · channel=conversation · domain=ai-engineering · pages=[corpus/ai-engineering/personal-knowledge-corpus-pipeline.md]
 * **Ingest**: "Artificial Intelligence and the Future of Teaching and Learning" (US Dept of Education, May 2023, 71pp) · channel=pdf · 4 source parts · domain=ai-engineering · pages=[corpus/ai-engineering/ai-education.md, corpus/ai-engineering/sources/ai-future-teaching-learning-us-doe.md]
 
