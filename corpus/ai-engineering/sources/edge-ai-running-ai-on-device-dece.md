@@ -1,7 +1,7 @@
 ---
 type: source
 domain: ai-engineering
-status: stub
+status: draft
 sources:
   - path: raw/notes/notes-03-resources-articles-edge-ai-running-ai-on-device.md
     channel: notes
@@ -12,25 +12,54 @@ tags:
   - source
   - doc-quick-intake
 created: 2026-07-14
-updated: 2026-07-14
+updated: 2026-07-15
 provisional: false
 url: 
 origin: obsidian
 ---
 
-# Edge AI - Running AI On Device
+# Edge AI — Running AI On Device
 
-> **Quick intake** (obsidian). raw stub: `notes-03-resources-articles-edge-ai-running-ai-on-device.md`
+**TL;DR:** Edge AI runs AI models directly on local devices rather than the cloud, trading compute power for speed, privacy, and resilience. Hybrid cloud + edge architectures are projected to become the default deployment pattern as models shrink [^src1].
 
-Edge AI refers to running AI models directly on local devices, offering reduced latency, improved privacy, and lower infrastructure costs. This approach is becoming increasingly practical as models become smaller and more efficient. Hybrid cloud + edge architectures will likely become the default pattern.
+---
 
-**Key topics**
-- Edge AI
-- On-device AI
-- Hybrid cloud + edge architectures
-- Model compression
-- Efficiency gains
-- NVIDIA edge AI hardware
+## Definition
+
+Edge AI refers to running AI models on local devices — phones, laptops, cameras, or industrial machines — rather than sending data to a remote server [^src1].
+
+---
+
+## Why It Matters
+
+Four properties distinguish edge from cloud inference [^src1]:
+
+- **Reduced latency** — no round-trip to a server.
+- **Improved privacy** — data never leaves the device.
+- **Lower infrastructure costs** — less cloud compute required.
+- **Offline capability** — works without constant internet access.
+
+The source frames the core trade-off as: edge AI "trades cloud power for **speed, privacy, and resilience**" [^src1].
+
+Model compression and efficiency gains are making on-device inference increasingly viable as models become smaller [^src1].
+
+---
+
+## Where It Is Showing Up
+
+Three hardware vendors are cited as active players [^src1]:
+
+- **Apple** — local AI models on iPhones and Macs (Apple Intelligence).
+- **Qualcomm** — on-device AI chipsets for mobile and IoT.
+- **NVIDIA** — edge AI hardware for industrial and automotive use.
+
+---
+
+## Hybrid Architectures
+
+The source projects that many AI systems will run in hybrid configurations — partly in the cloud, partly on the device — rather than pure cloud or pure edge [^src1].
+
+---
 
 ## Relation to corpus pages
 
@@ -39,3 +68,7 @@ Edge AI refers to running AI models directly on local devices, offering reduced 
 - [Local AI Agents](/ai-engineering/local-ai-agents.md) — agents built on the on-device execution this source argues for
 - ["7 AI Terms You'll Hear a Lot This Year" (Alex Wang)](/ai-engineering/seven-ai-terms-2026-alex-wang.md) — shared-provenance synthesis: this page and four siblings all derive from that single article, so they do not corroborate each other
 - [AI Engineering hub](/ai-engineering/README.md)
+
+---
+
+[^src1]: [Edge AI — Running AI On Device](../../../raw/notes/notes-03-resources-articles-edge-ai-running-ai-on-device.md)
