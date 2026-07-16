@@ -75,27 +75,30 @@ def _stars_h(n: int) -> str:
     return f"{n / 1000:.1f}k" if n >= 1000 else str(n)
 
 
-# Relevance vocabulary = the corpus's own domain topics (a repo must actually carry one of these
-# to count as genuinely on-topic — GitHub's fuzzy topic search otherwise drags in tangential repos).
-_RELEVANT_TOPICS = {t for topics in cg.DOMAIN_TOPICS.values() for t in topics}
+# Precise vs broad domain topics. A lone BROAD-only match admits off-domain mega-starred repos
+# (apache/dubbo via distributed-systems, files-community/Files via developer-tools, siyuan/GitHubDaily
+# too), so a candidate is admitted only if its matched search-topics include ≥1 PRECISE topic OR ≥2
+# topics total. Relevance belongs to the generator, not the reviewer (Jonas ticks everything).
+_BROAD_TOPICS = {"distributed-systems", "developer-tools", "observability"}
+_PRECISE_TOPICS = {t for tt in cg.DOMAIN_TOPICS.values() for t in tt} - _BROAD_TOPICS
 
-# Never surface: leaked/jailbreak prompt dumps, curation lists, career/interview prep, roadmaps —
-# low-signal for a knowledge corpus even when they rank high by stars.
-_JUNK_RE = re.compile(
-    r"(system[\s_-]?prompts?|prompt[\s_-]?leak|jailbreak|\bleaked?\b|awesome[\s_-]|"
-    r"roadmap|cheat[\s_-]?sheet|interview|curated|\bawesome\b|good[\s_-]?first[\s_-]?issue)",
-    re.I,
-)
+# Hard-block only the clearest non-recommendations (leaked/jailbreak prompt dumps). Everything else is
+# governed by the topic-admission rule, so a genuine in-domain resource list is NOT blanket-dropped
+# just for being an "awesome-*" list.
+_JUNK_RE = re.compile(r"(system[\s_-]?prompts?|prompt[\s_-]?leak|jailbreak|\bleaked?\b)", re.I)
 
 
-def _relevant(meta: dict) -> bool:
-    """True if a repo is genuinely corpus-relevant: it carries at least one corpus-domain topic
-    AND is not a curation / leaked-prompt / career-prep repo."""
+def _topic_admits(hit_topics) -> bool:
+    """Admit only if the candidate's matched search-topics include ≥1 precise domain topic OR ≥2
+    topics total — a single broad-topic match (distributed-systems / developer-tools) is dropped."""
+    hit = {str(t).lower() for t in hit_topics}
+    return len(hit & _PRECISE_TOPICS) >= 1 or len(hit) >= 2
+
+
+def _is_junk(meta: dict) -> bool:
     topics = {str(t).lower() for t in (meta.get("topics") or [])}
-    haystack = f"{meta.get('full_name', '')} {meta.get('description', '')} {' '.join(topics)}"
-    if _JUNK_RE.search(haystack):
-        return False
-    return bool(topics & _RELEVANT_TOPICS)
+    hay = f"{meta.get('full_name', '')} {meta.get('description', '')} {' '.join(topics)}"
+    return bool(_JUNK_RE.search(hay))
 
 
 _SCAN_CAP = 120  # hard bound on candidates examined per run (each needs one metadata fetch)
@@ -108,26 +111,30 @@ def cmd_propose(args) -> int:
         return 0
     pushed_after = (datetime.date.today()
                     - datetime.timedelta(days=cg.DISCOVER_PUSHED_WITHIN_DAYS)).isoformat()
-    candidates: dict = {}
+    candidates: dict = {}   # fn -> {"stars": int, "topics": set}  (which of OUR topics it matched)
     for topic in cg.discover_topics():
         for repo in gh.search_repos(topic, min_stars=cg.DISCOVER_MIN_STARS, pushed_after=pushed_after):
             fn = repo["full_name"]
-            candidates[fn] = max(candidates.get(fn, 0), repo["stars"])
+            c = candidates.setdefault(fn, {"stars": 0, "topics": set()})
+            c["stars"] = max(c["stars"], repo["stars"])
+            c["topics"].add(topic)
     starred = {r["full_name"] for r in gh.list_starred() if r.get("full_name")}
-    fresh = cg.rank_candidates(candidates, starred, cg.already_collected)
+    fresh = sorted(((fn, c) for fn, c in candidates.items()
+                    if fn not in starred and not cg.already_collected(fn)),
+                   key=lambda kv: -kv[1]["stars"])
 
     seen = _ledger() | _repos_in_review()
     picks = []  # (full_name, stars, meta) — meta carried so the line-builder needn't re-fetch
-    for i, (fn, stars) in enumerate(fresh):
+    for i, (fn, c) in enumerate(fresh):
         if len(picks) >= args.max or i >= _SCAN_CAP:
             break
-        if fn in seen:
+        if fn in seen or not _topic_admits(c["topics"]):   # drop lone-broad-topic off-domain repos
             continue
         meta = repo_meta(fn)
-        if not _relevant(meta):        # drop off-topic + junk (leaks, awesome-lists, roadmaps)
+        if _is_junk(meta):                                 # drop the clearest non-recs (leaks/jailbreak)
             continue
         seen.add(fn)
-        picks.append((fn, stars, meta))
+        picks.append((fn, c["stars"], meta))
 
     if picks and not args.dry_run:
         REVIEW.parent.mkdir(parents=True, exist_ok=True)
