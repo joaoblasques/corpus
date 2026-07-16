@@ -81,3 +81,9 @@ type: internal
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/diving-into-spec-driven-development-with-github-spec-kit-mic-doc.md", "verdict_ok": false, "gov": "reverted+queued"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/how-spec-driven-development-improves-ai-coding-quality-red-h-a.md", "verdict_ok": false, "gov": "reverted+queued"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/edge-ai-running-ai-on-device-dece.md", "verdict_ok": true, "gov": "committed"}
+
+## [2026-07-16T02:55] gardener · run
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/diving-into-spec-driven-development-with-github-spec-kit-mic-doc.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/how-spec-driven-development-improves-ai-coding-quality-red-h-a.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/neurosymbolic-ai-improving-ai-reasoning-ea.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/reflective-ai-systems-that-learn-from-their-mistakes-ae.md", "verdict_ok": true, "gov": "committed"}
