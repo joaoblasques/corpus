@@ -2,6 +2,22 @@
 
 > OKF v0.1 change log. Newest first, grouped by date.
 
+## 2026-07-16
+* **Ingest**: Data Mining: Concepts and Techniques (Han, Kamber, Pei, 3rd ed.) — parts 06–39 (34 PDF parts, Ch. 3–13) · channel=pdf · domain=data-engineering · pages=[corpus/data-engineering/data-mining.md (updated), corpus/data-engineering/olap.md (created), corpus/data-engineering/frequent-pattern-mining.md (created), corpus/data-engineering/sources/data-mining-han-kamber-pei.md (updated), corpus/data-engineering/sources/data-mining-han-kamber-pei-ch8-13.md (created)]
+* **Ingest**: High-Dimensional Data Analysis with Low-Dimensional Models (Wright & Ma) — parts 01–16 (16 PDF parts) · channel=pdf · domain=ai-engineering · pages=[corpus/ai-engineering/compressed-sensing.md (updated), corpus/ai-engineering/low-rank-matrix-recovery.md (created), corpus/ai-engineering/sources/wright-ma-high-dimensional-data-analysis.md (created)]
+* **Notes**: 50 sources ingested · 0 deferred · 5 pages created · 2 pages updated · run by /ingest-auto skill (interactive mode)
+
+* **Collectors**: gmail=3, blog_promote=0, obsidian=25, book_discover=0, blog_discover=15, book_fetch=0, pdf=0, books=0, arxiv=24, youtube=0, github_discover=0, github_promote=0, github=0, x=0, links_refetch=0
+* **Ingest**: 50 ingested · 0 deferred · status=ok
+* **YoutubeQuick**: 0 intake · 0 rescued · 0 skipped · status=ok
+* **DocsQuick**: 31 intake · 16 thin · 3 llm_fail · status=ok
+* **YoutubeReap**: 0 removed · status=ok
+* **Gardener**: 4 stubs deepened · status=ok
+* **Heal**: 35 citations repointed · 6 unfixable · 3 hubs reindexed · 25 cross-domain links · status=ok
+* **Depth**: 380 knowledge · 1148 sources · ratio 1:3.0
+* **GapResolver**: 0 gap dispatched · 0 sources queued · status=ok
+* **Lint**: 8 broken wikilinks · 6 broken citations · 0 orphans · 1103 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+* **OKF**: 0 violations
 ## 2026-07-15
 * **Schema**: v2.1→v2.2. Trimmed CLAUDE.md (1997→1759w, thrift-loop compression pass) by externalizing three purely-duplicated reference blocks to `docs/file-formats.md` — §4 full frontmatter YAML + OKF/migration detail, §6 citation link-format examples, §7 inline citation example. No rule content changed; each block left a pointer. Reviewed from a corpus-rooted session; restored the dropped "member is KEPT, not deleted" clause on `consolidated_into` so the move is lossless.
 * **Ingest**: [personal-knowledge-corpus-pipeline] · channel=conversation · domain=ai-engineering · pages=[corpus/ai-engineering/personal-knowledge-corpus-pipeline.md]

@@ -18,6 +18,15 @@ sources:
   - path: raw/_inbox/pdf-data-mining-concepts-and-techniques-part-05.md
     channel: pdf
     ingested_at: 2026-07-15
+  - path: raw/_inbox/pdf-data-mining-concepts-and-techniques-part-06.md
+    channel: pdf
+    ingested_at: 2026-07-16
+  - path: raw/_inbox/pdf-data-mining-concepts-and-techniques-part-07.md
+    channel: pdf
+    ingested_at: 2026-07-16
+  - path: raw/_inbox/pdf-data-mining-concepts-and-techniques-part-08.md
+    channel: pdf
+    ingested_at: 2026-07-16
 aliases:
   - Han Kamber Pei data mining
   - Data Mining Concepts and Techniques 3rd edition
@@ -25,7 +34,7 @@ tags:
   - corpus/data-engineering
   - source
 created: 2026-07-15
-updated: 2026-07-15
+updated: 2026-07-16
 ---
 
 # Data Mining: Concepts and Techniques (Han, Kamber, Pei — 3rd ed., 2011)
@@ -104,9 +113,30 @@ The book's content maps directly to several corpus concept pages:
 - **Data warehousing and OLAP** → [/data-engineering/data-lake.md](/data-engineering/data-lake.md), [/data-engineering/dimensional-modeling.md](/data-engineering/dimensional-modeling.md)
 - **Data preprocessing and quality** → [/data-engineering/data-quality.md](/data-engineering/data-quality.md)
 
+## Chapter 3: Data Preprocessing
+
+Chapter 3 covers preprocessing workflows essential before mining [^src6]:
+
+**Data cleaning**:
+- Missing values: fill with column mean (numeric), most frequent value (nominal), or use model-based prediction. Delete records sparingly.
+- Noise smoothing: binning (smooth by bin mean/median/boundary), regression, clustering-based, or manual.
+- Inconsistencies: detect with integrity constraints, metadata rules, or external reference data.
+
+**Data reduction**:
+- *Dimensionality reduction*: wavelet transforms (Haar-2, Daubechies), PCA (retain top principal components), attribute subset selection, attribute construction.
+- *Numerosity reduction*: parametric models (regression, log-linear); non-parametric (histograms, clustering, sampling, data cube aggregation).
+- *Data compression*: lossless (wavelet truncation retains high-magnitude coefficients); lossy (significant information loss tolerated).
+
+**Data transformation**:
+- Normalization: min-max [0,1], z-score, decimal scaling.
+- Data discretization: binning, histogram analysis, entropy-based splitting, cluster analysis.
+- Concept hierarchy generation: automatic from schema or attribute value counts.
+
+The **Discrete Wavelet Transform (DWT)** is a key dimensionality reduction tool: transforms the data vector into wavelet coefficients, then truncates by keeping only the largest coefficients — effectively sparse compression. DWT achieves better compression than DFT because wavelets are localized in space [^src6].
+
 ## Coverage Assessment
 
-Parts 1–5 (this ingest) cover Ch. 1 introduction and Ch. 2 data familiarity topics through proximity measures. Chapters 3–13 (preprocessing, warehousing, cube technology, pattern mining, classification, advanced clustering, outlier detection, frontiers) are in parts 6–39 of the PDF but were not ingested in this batch. Remaining parts should be queued for follow-up ingest to fully populate classification, association rules, outlier detection, and OLAP corpus pages.
+Parts 1–8 now cover Ch. 1 (introduction, KDD pipeline), Ch. 2 (data familiarity, proximity measures), and Ch. 3 (preprocessing: cleaning, reduction, transformation). Ch. 4–5 (data warehousing, OLAP, data cubes) and Ch. 6–7 (frequent pattern mining, association rules) from parts 9–19 are summarized in corpus pages [/data-engineering/olap.md](/data-engineering/olap.md) and [/data-engineering/frequent-pattern-mining.md](/data-engineering/frequent-pattern-mining.md). Ch. 8–13 (classification, clustering, outlier detection, trends) are summarized in [/data-engineering/sources/data-mining-han-kamber-pei-ch8-13.md](/data-engineering/sources/data-mining-han-kamber-pei-ch8-13.md). Full ingest of all 39 parts now complete.
 
 ---
 
@@ -115,3 +145,4 @@ Parts 1–5 (this ingest) cover Ch. 1 introduction and Ch. 2 data familiarity to
 [^src3]: [Data Mining: Concepts and Techniques, Part 3 (Ch. 1 — interestingness, technologies, challenges)](../../../raw/pdf/pdf-data-mining-concepts-and-techniques-part-03.md)
 [^src4]: [Data Mining: Concepts and Techniques, Part 4 (Ch. 2 — attribute types and statistics)](../../../raw/pdf/pdf-data-mining-concepts-and-techniques-part-04.md)
 [^src5]: [Data Mining: Concepts and Techniques, Part 5 (Ch. 2 — proximity measures)](../../../raw/pdf/pdf-data-mining-concepts-and-techniques-part-05.md)
+[^src6]: [Data Mining: Concepts and Techniques, Parts 6–8 (Ch. 3 — preprocessing: cleaning, DWT, normalization)](../../../raw/pdf/pdf-data-mining-concepts-and-techniques-part-07.md)

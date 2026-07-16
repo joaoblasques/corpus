@@ -63,6 +63,8 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [Vibe Engineering](/data-engineering/vibe-engineering.md) — concept · draft · building without theoretical framework (Joe Reis); Spolsky's Law of Leaky Abstractions; 2026 DE context; AI as vibe-engineering accelerant
 - [Process Intelligence](/data-engineering/process-intelligence.md) — concept · draft · BPM evolution (process mining/orchestration/agentic process orchestration); process-level guardrails for agentic AI; the "Trinity" architecture with event-driven integration + trusted agentic AI (cross-domain → ai-engineering)
 - [Data Mining](/data-engineering/data-mining.md) — concept · draft · KDD pipeline; classification, clustering, association rules, outlier detection, regression; pattern interestingness (support/confidence + actionability); OLAP vs data mining; preprocessing, proximity measures; Han/Kamber/Pei textbook
+- [OLAP and Data Warehousing](/data-engineering/olap.md) — concept · draft · star/snowflake/galaxy schemas; data cube lattice; roll-up/drill-down/slice/dice/pivot; iceberg cubes, BUC algorithm, shell-fragment approach; materialization strategies; discovery-driven exploration
+- [Frequent Pattern Mining](/data-engineering/frequent-pattern-mining.md) — concept · draft · Apriori algorithm (antimonotonicity property, join+prune); FP-growth (prefix-tree divide-and-conquer); closed/maximal frequent itemsets; null-invariant interestingness measures; constraint-based pattern mining
 
 ### Entities
 - [PostgreSQL](/data-engineering/postgres.md) — entity · draft · relational database as full-stack data platform via extensions (pgvector, pgcron, tsvector, etc.); pgledger double-entry ledger pattern
@@ -124,7 +126,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 
 ## Pages in this domain
 
-### Concepts (47)
+### Concepts (49)
 - [BI as Code](/data-engineering/bi-as-code.md)
 - [Change Data Capture (CDC)](/data-engineering/change-data-capture.md)
 - [CI/CD for Data Infrastructure](/data-engineering/cicd-for-data-infrastructure.md)
@@ -146,6 +148,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [Dimensional Modeling](/data-engineering/dimensional-modeling.md)
 - [ETL Pipeline](/data-engineering/etl-pipeline.md)
 - [FHIR (Fast Healthcare Interoperability Resources)](/data-engineering/fhir.md)
+- [Frequent Pattern Mining](/data-engineering/frequent-pattern-mining.md)
 - [Graph Databases (RDF vs Labeled Property Graph)](/data-engineering/graph-databases.md)
 - [Idempotent Pipelines](/data-engineering/idempotent-pipelines.md)
 - [Incremental Pipeline Design](/data-engineering/incremental-pipeline-design.md)
@@ -154,6 +157,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [Medallion Architecture](/data-engineering/medallion-architecture.md)
 - [MERGE INTO](/data-engineering/merge-into.md)
 - [Modern Data Stack (MDS) — The 10 Components](/data-engineering/modern-data-stack.md)
+- [OLAP and Data Warehousing](/data-engineering/olap.md)
 - [OMOP Common Data Model (CDM)](/data-engineering/omop-cdm.md)
 - [Open Table Formats](/data-engineering/open-table-formats.md)
 - [Pipeline Coding Patterns (Python)](/data-engineering/pipeline-coding-patterns.md)
@@ -213,15 +217,18 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [The Portfolio Project That Lands a DE Role](/data-engineering/portfolio-project-that-lands-a-de-role.md)
 
 <details>
-<summary>Source summaries (159)</summary>
+<summary>Source summaries (170)</summary>
 
 - ["A dbt \"logic mesh\" with packages: standard model and metrics across 25 autonomous organizations | dbt Summit"](/data-engineering/sources/a-dbt-logic-mesh-with-packages-standard-model-and-metrics-ac-bf162a97.md)
 - ["Academic → CTO: What Actually Matters in Data (Matthew Housley) - Confessions of a Data Guy"](/data-engineering/sources/academic-cto-what-actually-matters-in-data-matthew-housley-c-e9eae58c.md)
+- ["Apache Spark Fundamentals: Architecture and Execution Model"](/data-engineering/sources/apache-spark-fundamentals-architecture-and-execution-model-acece.md)
 - ["AWS Data Lake with S3, Glue & Athena"](/data-engineering/sources/aws-data-lake-with-s3-glue-athena-aea.md)
 - ["Beyond the Perimeter: Practical Patterns for Fine‑Grained Data Access"](/data-engineering/sources/beyond-the-perimeter-practical-patterns-for-fine-grained-dat-ae.md)
 - ["Build an End to End Data Pipeline on AWS | AWS Lambda, S3 Bucket, EventBridge Trigger , Marvel Data"](/data-engineering/sources/build-an-end-to-end-data-pipeline-on-aws-aws-lambda-s3-bucke-goSGk2VwVcM.md)
 - ["Choose Your Path: Data Leaders, Platform Owners, Practitioners & Analysts | dbt Labs"](/data-engineering/sources/choose-your-path-data-leaders-platform-owners-practitioners--682257ae.md)
 - ["CI/CD for Databricks: ETL Testing and Automation"](/data-engineering/sources/ci-cd-for-databricks-etl-testing-and-automation-ff3308c6.md)
+- ["Claude Code for Data Engineers — MCP, Skills, and Hooks Integrations"](/data-engineering/sources/claude-code-for-data-engineers-mcp-skills-and-hooks-integrat-doc.md)
+- ["Claude Code for Data Engineers: Data Modeling with dbt, Miro & PostgreSQL Using Skills & MCPs"](/data-engineering/sources/claude-code-for-data-engineers-data-modeling-with-dbt-miro-p-c.md)
 - ["Code along - build an ELT Pipeline in 1 Hour (dbt, Snowflake, Airflow)"](/data-engineering/sources/code-along-build-an-elt-pipeline-in-1-hour-dbt-snowflake-air-OLXkGB7krGo.md)
 - ["Creating a Data Model w/ dbt: Facts (Part 2/3)"](/data-engineering/sources/creating-a-data-model-w-dbt-facts-part-2-3-SGMnsP7M3Tc.md)
 - ["Data Agility: Building Faster, Smarter, Scalable Workflows"](/data-engineering/sources/data-agility-building-faster-smarter-scalable-workflows-29a2c4a8.md)
@@ -266,17 +273,22 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - ["Modern Data Warehousing: Stop Using Slowly-Changing Dimensions (Part 1)"](/data-engineering/sources/modern-data-warehousing-stop-using-slowly-changing-dimension-1.md)
 - ["Project A Data Modelling Best Practices Part I: How to Model Data in a Data Warehouse?"](/data-engineering/sources/project-a-data-modelling-best-practices-part-i-how-to-model--8HlNG8bdlM0.md)
 - [16 Cool GitHub Repos You WILL Use (no pressure)](/data-engineering/sources/16-cool-github-repos-you-will-use-no-pressure-cgOPg5cCr2g.md)
+- [2026 State of Analytics Engineering Report | dbt Labs](/data-engineering/sources/2026-state-of-analytics-engineering-report-dbt-labs-6831862d.md)
 - [5 data led digital marketing services your agency needs to offer today](/data-engineering/sources/5-data-led-digital-marketing-services-your-agency-needs-to-o-ba3019f0.md)
+- [A 9-minute simple explanation of Spark Shuffle](/data-engineering/sources/a-9-minute-simple-explanation-of-spark-shuffle-ffe.md)
 - [A Response to Our Reader Survey](/data-engineering/sources/a-response-to-our-reader-survey-b371c77b.md)
 - [Accelerating dbt with dbt v2 | dbt Summit](/data-engineering/sources/accelerating-dbt-with-dbt-v2-dbt-summit-8afb6363.md)
 - [AI Is Changing Data Engineering Fast](/data-engineering/sources/ai-is-changing-data-engineering-fast-82a12a3f.md)
 - [AI is Changing Data Engineering Fast! - Confessions of a Data Guy](/data-engineering/sources/ai-is-changing-data-engineering-fast-confessions-of-a-data-g-2c6e6401.md)
+- [AI Tools in Data Engineering — Where to Delegate and What to Own](/data-engineering/sources/ai-tools-in-data-engineering-where-to-delegate-and-what-to-o-bdae.md)
 - [ai-agent-use-cases-for-data-engineering-5-proven-workflows](/data-engineering/sources/ai-agent-use-cases-for-data-engineering-5-proven-workflows-f.md)
 - [Amit Joshi | Databricks](/data-engineering/sources/amit-joshi-databricks-4c1faee9.md)
 - [Analytics Engineer / Practitioner | dbt Labs](/data-engineering/sources/analytics-engineer-practitioner-dbt-labs-65dee396.md)
 - [Announcing leetdata.ai — A Practice Ground for Data Engineers](/data-engineering/sources/announcing-leetdata-ai-a-practice-ground-for-data-engineers-38e39f8d.md)
 - [Apache Arrow + DuckDB (the GOAT + the GOAT) - Confessions of a Data Guy](/data-engineering/sources/apache-arrow-duckdb-the-goat-the-goat-confessions-of-a-data--8fc14713.md)
 - [Apache Arrow as Data Interchange - Confessions of a Data Guy](/data-engineering/sources/apache-arrow-as-data-interchange-confessions-of-a-data-guy-b8370823.md)
+- [API Data Extraction Patterns for Production Data Pipelines](/data-engineering/sources/api-data-extraction-patterns-for-production-data-pipelines-ee.md)
+- [API Fundamentals for Data Engineers (Part 1)](/data-engineering/sources/api-fundamentals-for-data-engineers-part-1-a.md)
 - [Arianna Gentile | Databricks](/data-engineering/sources/arianna-gentile-databricks-4f0f16ea.md)
 - [Arnab Sen | Databricks](/data-engineering/sources/arnab-sen-databricks-a1e85d61.md)
 - [Automate Data Vault modeling at scale with dbt | dbt Labs](/data-engineering/sources/automate-data-vault-modeling-at-scale-with-dbt-dbt-labs-1cd10039.md)
@@ -284,6 +296,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [Azure End-To-End Data Engineering Project for Beginners (FREE Account) | SQL DB Tutorial](/data-engineering/sources/azure-end-to-end-data-engineering-project-for-beginners-free-ygJ11fzq_ik.md)
 - [Becoming a dbt Architect | dbt Summit](/data-engineering/sources/becoming-a-dbt-architect-dbt-summit-7e38a8ee.md)
 - [Best Data Version Control Tools in 2026 | lakeFS](/data-engineering/sources/best-data-version-control-tools-in-2026-lakefs-824d7c11.md)
+- [BI as Code — SQL and Markdown Dashboards for Data Engineers](/data-engineering/sources/bi-as-code-sql-and-markdown-dashboards-for-data-engineers-dabad.md)
 - [Book a Custom dbt Demo | Reduce Costs & Improve Data ROI | dbt Labs](/data-engineering/sources/book-a-custom-dbt-demo-reduce-costs-improve-data-roi-dbt-lab-75922ab2.md)
 - [Book a dbt demo for your data team | dbt Labs](/data-engineering/sources/book-a-dbt-demo-for-your-data-team-dbt-labs-0461ebec.md)
 - [Book a dbt demo today | dbt Labs](/data-engineering/sources/book-a-dbt-demo-today-dbt-labs-10fc1aeb.md)
@@ -308,6 +321,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [Data Engineering System Design Made Easy](/data-engineering/sources/data-engineering-system-design-made-easy-t1E4qAVMdqw.md)
 - [Data Engineering with Python and AI/LLMs – Data Loading Tutorial](/data-engineering/sources/data-engineering-with-python-and-ai-llms-data-loading-tutori-T23Bs75F7ZQ.md)
 - [Data Mining: Concepts and Techniques (Han, Kamber, Pei — 3rd ed., 2011)](/data-engineering/sources/data-mining-han-kamber-pei.md)
+- [Data Mining: Concepts and Techniques — Chapters 8–13 (Han, Kamber, Pei)](/data-engineering/sources/data-mining-han-kamber-pei-ch8-13.md)
 - [Data Modeling With Joe Reis - Understanding What Data Modeling Is And Where It's Going](/data-engineering/sources/data-modeling-with-joe-reis-understanding-what-data-modeling-NKo02ThtAto.md)
 - [Data Pipeline Design for Fact & Dimension Tables – Start Data Engineering](/data-engineering/sources/data-pipeline-design-for-fact-dimension-tables-start-data-en-27355b52.md)
 - [Data share as a service — generalizing Snowflake DataShare across Mitratech products | dbt Summit](/data-engineering/sources/data-share-as-a-service-generalizing-snowflake-datashare-acr-d16efffa.md)
@@ -366,6 +380,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [Stop Doing Data Analyst Projects (Do This Instead)](/data-engineering/sources/stop-doing-data-analyst-projects-do-this-instead-6Ps7houk6i8.md)
 - [Stop Starting Data Projects — Process Beats Code for Adoption](/data-engineering/sources/stop-starting-data-projects-process-beats-code-for-adoption-ce.md)
 - [Terraform Course - Automate your AWS cloud infrastructure](/data-engineering/sources/terraform-course-automate-your-aws-cloud-infrastructure-SLB_c_ayRMo.md)
+- [The Analytical Skills No One Teaches You](/data-engineering/sources/the-analytical-skills-no-one-teaches-you-doc.md)
 - [The Data Movie | Data Literacy Explained Visually](/data-engineering/sources/the-data-movie-data-literacy-explained-visually-J2rQTJby8XM.md)
 - [The Medallion Architecture Most Teams Get Wrong (And What It Costs)](/data-engineering/sources/the-medallion-architecture-most-teams-get-wrong-and-what-it--uNtMetMNVgw.md)
 - [The ONLY Data Cleaning Framework You Need | Playbook Ep. 3](/data-engineering/sources/the-only-data-cleaning-framework-you-need-playbook-ep-3-y9wFFD2bXQM.md)

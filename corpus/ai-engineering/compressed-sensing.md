@@ -9,6 +9,18 @@ sources:
   - path: raw/pdf/pdf-brunton-kutz-data-driven-science-and-engineering-v2-author-f-part-07.md
     channel: pdf
     ingested_at: 2026-07-07
+  - path: raw/_inbox/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-01.md
+    channel: pdf
+    ingested_at: 2026-07-16
+  - path: raw/_inbox/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-03.md
+    channel: pdf
+    ingested_at: 2026-07-16
+  - path: raw/_inbox/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-07.md
+    channel: pdf
+    ingested_at: 2026-07-16
+  - path: raw/_inbox/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-08.md
+    channel: pdf
+    ingested_at: 2026-07-16
 aliases:
   - compressed sensing
   - compressive sensing
@@ -18,7 +30,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-07-07
-updated: 2026-07-07
+updated: 2026-07-16
 ---
 
 # Compressed Sensing
@@ -61,4 +73,17 @@ The ℓ₁ norm (rather than ℓ₂) promotes sparsity because the ℓ₁ unit b
 - Neuroscience: recover full neural population activity from few electrode recordings
 - SINDy foundation: the sparse regression engine in [SINDy](/ai-engineering/sindy.md) is a compressed-sensing-style ℓ₁ recovery problem
 
+## Phase transition (Wright & Ma treatment)
+
+Wright & Ma provide the rigorous phase transition characterization absent from Brunton-Kutz. Recovery probability transitions sharply from 1 to 0 as k/m increases past a threshold ψ(k/n); the transition width vanishes as O(1/√n) [^src2]. This is a fundamental property of high-dimensional geometry — not an artifact of any particular algorithm.
+
+**Incoherence for structured measurements**: for random rows of a DFT matrix (frequency sampling), recovery requires incoherence: ‖**F**‖∞ = 1/√n — the DFT basis has maximum incoherence with the standard basis, which is why random frequency measurements efficiently reconstruct time-sparse signals [^src3]. Circulant matrices (random convolutions) also satisfy RIP with O(k log²k log n) measurements — nearly as efficient as random Gaussian but with fast O(n log n) multiply [^src3].
+
+**Noisy recovery (BPDN)**: if measurements **y** = **Ax₀** + **z** with ‖**z**‖₂ ≤ ε, Basis Pursuit Denoising recovers **x̂** with ‖**x̂** − **x₀**‖₂ ≤ Cε — noise-proportional error bound [^src4].
+
+Matrix extension: [/ai-engineering/low-rank-matrix-recovery.md](/ai-engineering/low-rank-matrix-recovery.md) generalizes all of this to rank-r matrices via nuclear norm minimization.
+
 [^src1]: [Data-Driven Science and Engineering](../../raw/pdf/pdf-brunton-kutz-data-driven-science-and-engineering-v2-author-f-part-06.md), Brunton & Kutz (2021), Chapter 3
+[^src2]: [High-Dimensional Data Analysis with Low-Dimensional Models, Part 8 — Ch. 3 phase transition theorem, RIP, probability bounds](../../raw/pdf/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-08.md)
+[^src3]: [High-Dimensional Data Analysis with Low-Dimensional Models, Part 7 — Ch. 3 incoherence, DFT measurements, circulant matrices](../../raw/pdf/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-07.md)
+[^src4]: [High-Dimensional Data Analysis with Low-Dimensional Models, Part 3 — Ch. 1 sparse signal recovery, ℓ₁ minimization, BPDN](../../raw/pdf/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-03.md)

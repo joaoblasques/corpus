@@ -144,7 +144,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [AI-Assisted Development](/software-engineering/ai-assisted-development.md)
 
 <details>
-<summary>Source summaries (67)</summary>
+<summary>Source summaries (68)</summary>
 
 - ["2024-05-25-15-54-25 - move-base-up by josephmachado · Pull Request #17 · josephmachado/simple_dbt_project"](/software-engineering/sources/2024-05-25-15-54-25-move-base-up-by-josephmachado-pull-reque-ee.md)
 - ["Disasters I've seen in a microservices world, part II"](/software-engineering/sources/disasters-i-ve-seen-in-a-microservices-world-part-ii-doc.md)
@@ -162,6 +162,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Bass - 10 Basslines That Teach Scales](/software-engineering/sources/bass-10-basslines-that-teach-scales-cae.md)
 - [Career - 5 Boring Certifications for Tech Career Growth](/software-engineering/sources/career-5-boring-certifications-for-tech-career-growth-doc.md)
 - [Claude Code - Session Timing Strategy to Double Productivity](/software-engineering/sources/claude-code-session-timing-strategy-to-double-productivity-dc.md)
+- [Claude Code Productivity Tips from the SaaS Trenches](/software-engineering/sources/claude-code-productivity-tips-from-the-saas-trenches-ada.md)
 - [Code Review Best Practices](/software-engineering/sources/code-review-best-practices-acce.md)
 - [Coming Soon - Kai Waehner](/software-engineering/sources/coming-soon-kai-waehner-3fd775a7.md)
 - [Data Structures and Algorithm Analysis in C++ (Shaffer, Ed. 3.2)](/software-engineering/sources/algorithms-shaffer-c.md)

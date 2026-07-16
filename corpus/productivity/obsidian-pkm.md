@@ -187,6 +187,7 @@ A contrarian take: VS Code + Claude may be functionally superior to Obsidian for
 
 ## Related across domains
 
+- [Personal Knowledge Corpus Pipeline](/ai-engineering/personal-knowledge-corpus-pipeline.md) · _ai-engineering_
 - [Semantic Layer](/data-engineering/semantic-layer.md) · _data-engineering_
 - [Context Engineering](/ai-engineering/context-engineering.md) · _ai-engineering_
 - [Navigating a Technical Career](/ai-business/technical-career.md) · _ai-business_

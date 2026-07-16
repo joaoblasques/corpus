@@ -49,6 +49,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [SINDy](/ai-engineering/sindy.md) — concept · draft · sparse identification of nonlinear governing equations from time-series; ℓ₁/STLS regression
 - [Compressed Sensing](/ai-engineering/compressed-sensing.md) — concept · draft · sub-Nyquist sparse signal recovery; incoherence + RIP; ℓ₁ vs ℓ₂; LASSO; MRI acceleration
 - [Koopman Operator](/ai-engineering/koopman-operator.md) — concept · draft · lifts nonlinear dynamics to infinite-dimensional linear system; EDMD; deep Koopman eigenfunctions
+- [Low-Rank Matrix Recovery](/ai-engineering/low-rank-matrix-recovery.md) — concept · draft · nuclear norm as rank surrogate; matrix RIP; stable recovery (BPDN analogue); matrix completion (Netflix problem, incoherence condition); Robust PCA (PCP); benign optimization landscape
 - [Neural Networks](/ai-engineering/neural-network.md) — concept · draft · perceptron→backprop→CNN/RNN; reasoning & multimodal models
 - [Statistics & Probability for ML](/ai-engineering/statistics-for-ml.md) — concept · draft · distributions, inference, regression — the math under ML
 - [Agentic Workflows](/ai-engineering/agentic-workflow.md) — concept · draft · describe-what-not-how; WAT framework; dynamic workflow orchestration patterns (fan-out, tournament, adversarial)
@@ -161,6 +162,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 
 ### Sources
 - [The Quest for Artificial Intelligence (Nils Nilsson, Cambridge 2010)](/ai-engineering/sources/the-quest-for-artificial-intelligence-nilsson.md) — source · draft · 707-page canonical insider history of AI from antiquity through 2009; 35 chapters; covers founding gatherings, expert systems, AI winters, neural-net revivals, Bayesian methods, and modern achievements
+- [High-Dimensional Data Analysis with Low-Dimensional Models (Wright & Ma)](/ai-engineering/sources/wright-ma-high-dimensional-data-analysis.md) — source · draft · 730pp graduate textbook (Cambridge 2018); unified treatment of sparse recovery (ℓ₁, phase transition, RIP), low-rank recovery (nuclear norm, matrix completion, RPCA), and optimization geometry (benign landscape, saddle points)
 - [A Brief Introduction to Machine Learning for Engineers (Simeone, 2018)](/ai-engineering/sources/ml-for-engineers-simeone.md) — source · draft · 237pp monograph; unified probabilistic framework (frequentist vs. Bayesian); supervised/unsupervised/graphical models/approximate inference; PAC theory; ELBO/EM/VAE; f-divergences
 - [Dive into Deep Learning (Zhang, Lipton, Li, Smola)](/ai-engineering/sources/dive-into-deep-learning.md) — source · draft · comprehensive DL textbook (1151 pages, CC BY-SA 4.0, d2l.ai); code-first, Jupyter notebooks; linear regression → transformers → optimization → computer vision → NLP pretraining
 - [Mathematics for Machine Learning (Deisenroth, Faisal, Ong)](/ai-engineering/sources/mathematics-for-machine-learning.md) — source · draft · 12-chapter textbook; Part I math foundations + Part II ML applications
@@ -221,7 +223,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 
 ## Pages in this domain
 
-### Concepts (81)
+### Concepts (83)
 - [Agent Cost Management](/ai-engineering/agent-cost-management.md)
 - [Agent Evaluation](/ai-engineering/agent-evaluation.md)
 - [Agent Harness](/ai-engineering/agent-harness.md)
@@ -267,6 +269,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [LLM Evals (Product Evaluation Methodology)](/ai-engineering/llm-evals.md)
 - [Local AI Agents](/ai-engineering/local-ai-agents.md)
 - [Long-Running Agents](/ai-engineering/long-running-agents.md)
+- [Low-Rank Matrix Recovery](/ai-engineering/low-rank-matrix-recovery.md)
 - [Machine Learning](/ai-engineering/machine-learning.md)
 - [Matrix Decompositions](/ai-engineering/matrix-decompositions.md)
 - [MCP (Model Context Protocol)](/ai-engineering/mcp.md)
@@ -277,6 +280,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [NLP with Deep Learning](/ai-engineering/nlp-deep-learning.md)
 - [Optimization for Machine Learning](/ai-engineering/optimization-for-ml.md)
 - [PCA and Dimensionality Reduction](/ai-engineering/pca-and-dimensionality-reduction.md)
+- [Personal Knowledge Corpus Pipeline](/ai-engineering/personal-knowledge-corpus-pipeline.md)
 - [Probability and Statistics for Machine Learning](/ai-engineering/probability-and-statistics-for-ml.md)
 - [Prompt Caching](/ai-engineering/prompt-caching.md)
 - [Prompt Engineering](/ai-engineering/prompt-engineering.md)
@@ -376,8 +380,9 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Tool Calling & Context Engineering: How They Interlock](/ai-engineering/tool-calling-and-context-engineering.md)
 
 <details>
-<summary>Source summaries (588)</summary>
+<summary>Source summaries (609)</summary>
 
+- ["2024 State of Analytics Engineering, crafted by dbt Labs | dbt Labs"](/ai-engineering/sources/2024-state-of-analytics-engineering-crafted-by-dbt-labs-dbt--cb342df0.md)
 - ["9 AI Concepts Explained: Tokenization, RAG, RLHF, LoRA & More"](/ai-engineering/sources/9-ai-concepts-explained-tokenization-rag-rlhf-lora-more-a.md)
 - ["[AINews] Codex usage up >10x in 6 months to 7M users, +1M in the past ~day; did Codex overtake Claude Code??"](/ai-engineering/sources/ainews-codex-usage-up-10x-in-6-months-to-7m-users-1m-in-the--ac1def65.md)
 - ["[AINews] Lilian Weng summarizes 35 papers on Harness Engineering for RSI"](/ai-engineering/sources/ainews-lilian-weng-summarizes-35-papers-on-harness-engineeri-b1619a08.md)
@@ -390,6 +395,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - ["[AINews] Sonnet 5 today, and Fable 5 tomorrow"](/ai-engineering/sources/ainews-sonnet-5-today-and-fable-5-tomorrow-5f80fed9.md)
 - ["[AINews] SpaceXAI launches Grok 4.5, first Opus-class model post Cursor acquisition"](/ai-engineering/sources/ainews-spacexai-launches-grok-4-5-first-opus-class-model-pos-d9aedbf9.md)
 - ["[AINews] The Field Guide to Fable"](/ai-engineering/sources/ainews-the-field-guide-to-fable-663b198d.md)
+- ["A Copilot for the Mind, SVB's Explosion, LLMs are the new CPUs, and More"](/ai-engineering/sources/a-copilot-for-the-mind-svb-s-explosion-llms-are-the-new-cpus-24a221d5.md)
 - ["A First Comprehensive Study of TurboQuant: Accuracy and Performance"](/ai-engineering/sources/a-first-comprehensive-study-of-turboquant-accuracy-and-perfo-5bd07006.md)
 - ["A free year of Devin: the world’s most advanced autonomous AI software engineer"](/ai-engineering/sources/a-free-year-of-devin-the-world-s-most-advanced-autonomous-ai-8859faee.md)
 - ["A New Generation Studies AI, Apple's Recipe for On-Device Models, GLM5.2 Tackles Open-Ended Problems"](/ai-engineering/sources/a-new-generation-studies-ai-apple-s-recipe-for-on-device-mod-d.md)
@@ -419,6 +425,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - ["AI in the analyst toolkit: What's actually working (and what isn't) | dbt Summit"](/ai-engineering/sources/ai-in-the-analyst-toolkit-what-s-actually-working-and-what-i-2b4c103b.md)
 - ["AI Industry Shift: Why the Model Race Is No Longer the Only Race That Matters"](/ai-engineering/sources/ai-industry-shift-why-the-model-race-is-no-longer-the-only-r-a0134d82.md)
 - ["AI Industry Shift: Why the Model Race Is No Longer the Only Race That Matters"](/ai-engineering/sources/ai-industry-shift-why-the-model-race-is-no-longer-the-only-r-de00bc8e.md)
+- ["AI Integration Beyond Chatbots: Incremental Approach with SLMs"](/ai-engineering/sources/ai-integration-beyond-chatbots-incremental-approach-with-slm-aac.md)
 - ["AI Model Pricing in 2026: GPT-5.6, Grok 4.5, Muse Spark, and Claude Fable 5 Compared"](/ai-engineering/sources/ai-model-pricing-in-2026-gpt-5-6-grok-4-5-muse-spark-and-cla-1af6bcbc.md)
 - ["AI Model Routing: How to Cut Costs 60% by Matching Tasks to the Right Model"](/ai-engineering/sources/ai-model-routing-how-to-cut-costs-60-by-matching-tasks-to-th-c6fc2480.md)
 - ["AI Model Routing: When to Use Frontier Models vs Cheap Models in Your Agent Stack"](/ai-engineering/sources/ai-model-routing-when-to-use-frontier-models-vs-cheap-models-84db1b99.md)
@@ -448,6 +455,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - ["Backend Monitor :: LocalAI"](/ai-engineering/sources/backend-monitor-localai-a51e2a12.md)
 - ["Backends :: LocalAI"](/ai-engineering/sources/backends-localai-44436f62.md)
 - ["Better Models: Worse Tools"](/ai-engineering/sources/better-models-worse-tools-63516e89.md)
+- ["Beyond CLAUDE.md: What 38 Skills and 7 Agents Actually Look Like"](/ai-engineering/sources/beyond-claude-md-what-38-skills-and-7-agents-actually-look-l-acece.md)
 - ["Beyond LoRA: Can you beat the most popular fine-tuning technique?"](/ai-engineering/sources/beyond-lora-can-you-beat-the-most-popular-fine-tuning-techni-dc672d00.md)
 - ["Boundary Intelligence: Why What You Can Access Matters More Than What You Know"](/ai-engineering/sources/boundary-intelligence-why-what-you-can-access-matters-more-t-270b143f.md)
 - ["Build $10,000 Websites using Claude Code (Ultimate Guide)"](/ai-engineering/sources/build-10-000-websites-using-claude-code-ultimate-guide-VMvZuhcDdnw.md)
@@ -455,11 +463,13 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - ["Build real agentic apps using CUGA: two dozen working examples on a lightweight harness"](/ai-engineering/sources/build-real-agentic-apps-using-cuga-two-dozen-working-example-f0c4ab46.md)
 - ["Building a REAL feature with Claude Code: every step explained"](/ai-engineering/sources/building-a-real-feature-with-claude-code-every-step-explaine-hX7yG1KVYhI.md)
 - ["ByteDance Volcano Arc: How Seedance Is Solving the IP Problem for AI Video"](/ai-engineering/sources/bytedance-volcano-arc-how-seedance-is-solving-the-ip-problem-442c1de8.md)
+- ["ChatBI 101: From Wild Horses to Workhorse LLMs"](/ai-engineering/sources/chatbi-101-from-wild-horses-to-workhorse-llms-acece.md)
 - ["ChatGPT Atlas: Dud or Revolution? (Full Guide)"](/ai-engineering/sources/chatgpt-atlas-dud-or-revolution-full-guide-9f17dd61.md)
 - ["Claude Code + Hermes Agent = $10,000 AI Agents"](/ai-engineering/sources/claude-code-hermes-agent-10-000-ai-agents-gYzlgK5Dw1s.md)
 - ["Claude Code Auto Mode, /goal, and /routines: How to Run Agents Without You"](/ai-engineering/sources/claude-code-auto-mode-goal-and-routines-how-to-run-agents-wi-2cf08a11.md)
 - ["Claude Code Auto Mode, /goal, and Routines: How to Run Agents Without You"](/ai-engineering/sources/claude-code-auto-mode-goal-and-routines-how-to-run-agents-wi-1c200027.md)
 - ["Claude Code for Beginners Tutorial [Full Course]"](/ai-engineering/sources/claude-code-for-beginners-tutorial-full-course-gh2_PhgZGsM.md)
+- ["Claude Code for Fullstack Development: The 3 Things You Actually Need"](/ai-engineering/sources/claude-code-for-fullstack-development-the-3-things-you-actua-eea.md)
 - ["Claude Design Review: An Innovative Way to Brainstorm with AI"](/ai-engineering/sources/claude-design-review-an-innovative-way-to-brainstorm-with-ai-352a967c.md)
 - ["Claude Fable 5 builds INSANE $10,000 Websites! (with 1 prompt)"](/ai-engineering/sources/claude-fable-5-builds-insane-10-000-websites-with-1-prompt-mokCv4xaPWM.md)
 - ["Claude Science, an AI workbench for scientists"](/ai-engineering/sources/claude-science-an-ai-workbench-for-scientists-d5f7bd1f.md)
@@ -530,6 +540,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - ["How I Use Claude Code with Gemma 4 (Local LLMs, No API Costs)"](/ai-engineering/sources/how-i-use-claude-code-with-gemma-4-local-llms-no-api-costs-sKNq4CqWkT4.md)
 - ["How to Design APIs Like a Senior Engineer (REST, GraphQL, Auth, Security)"](/ai-engineering/sources/how-to-design-apis-like-a-senior-engineer-rest-graphql-auth--Rrd6xkyjPB8.md)
 - ["I Built the Same App 10 Times: Evaluating Frameworks for Mobile Performance | Loren Stewart"](/ai-engineering/sources/i-built-the-same-app-10-times-evaluating-frameworks-for-mobi-eaa.md)
+- ["If AI Writes the Code, Where's the Edge?"](/ai-engineering/sources/if-ai-writes-the-code-where-s-the-edge-eface.md)
 - ["If I Started AI Freelancing in 2026, I'd Do This"](/ai-engineering/sources/if-i-started-ai-freelancing-in-2026-i-d-do-this-CRYea6gFWgk.md)
 - ["INTERACTIVE CLAUDE FULL COURSE 4 HOURS: Build & Sell (2026)"](/ai-engineering/sources/interactive-claude-full-course-4-hours-build-sell-2026-KTEe5705RHw.md)
 - ["Intro to Warp - essentials, Claude Code setup, and cloud orchestration"](/ai-engineering/sources/intro-to-warp-essentials-claude-code-setup-and-cloud-orchest-VeBwYKlS0mw.md)
@@ -560,6 +571,8 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [12 Claude Code Settings You Should Enable Right Now](/ai-engineering/sources/12-claude-code-settings-you-should-enable-right-now-9f9c0529.md)
 - [12 Ways to Use Claude So Well It Feels Illegal (Tutorial)](/ai-engineering/sources/12-ways-to-use-claude-so-well-it-feels-illegal-tutorial-L2CXXmDG-mM.md)
 - [12. Virtual Environments and Packages](/ai-engineering/sources/12-virtual-environments-and-packages-acae.md)
+- [2023 State of Analytics Engineering | dbt Labs](/ai-engineering/sources/2023-state-of-analytics-engineering-dbt-labs-c6fa38f7.md)
+- [2026 State of Analytics Engineering Report | dbt Labs](/ai-engineering/sources/2026-state-of-analytics-engineering-report-dbt-labs-f0fa98f1.md)
 - [3 Boring AI Systems That Sell For $4000+ Right Now (With PROOF)](/ai-engineering/sources/3-boring-ai-systems-that-sell-for-4000-right-now-with-proof-KqjWm2bexUc.md)
 - [32 Tricks to Level Up Claude Code in 16 Mins](/ai-engineering/sources/32-tricks-to-level-up-claude-code-in-16-mins-jqoFP9QapXI.md)
 - [4 trends shaping open source funding—and what they mean for maintainers](/ai-engineering/sources/4-trends-shaping-open-source-funding-and-what-they-mean-for--doc.md)
@@ -581,6 +594,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [8.9 Million AI Users](/ai-engineering/sources/8-9-million-ai-users-f79fd178.md)
 - [9 Claude Code Plugins to Build 10x Faster](/ai-engineering/sources/9-claude-code-plugins-to-build-10x-faster-sBF3UumkL4Y.md)
 - [98.01% of sites on Cloudflare now use IPv6](/ai-engineering/sources/98-01-of-sites-on-cloudflare-now-use-ipv6-f7d08248.md)
+- [A 9-Minute Simple Explanation of Spark Shuffle](/ai-engineering/sources/a-9-minute-simple-explanation-of-spark-shuffle-a.md)
 - [A Brief Introduction to Machine Learning for Engineers (Simeone, 2018)](/ai-engineering/sources/ml-for-engineers-simeone.md)
 - [A Dispatch from the Jagged Frontier of Analytics Engineering](/ai-engineering/sources/a-dispatch-from-the-jagged-frontier-of-analytics-engineering-2bad3d09.md)
 - [A Field Guide to Rapidly Improving AI Products (Hamel Husain)](/ai-engineering/sources/field-guide-improving-ai-products.md)
@@ -616,6 +630,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [AI agents and the data lake (w/ Lauren Anderson)](/ai-engineering/sources/ai-agents-and-the-data-lake-w-lauren-anderson-aaeef605.md)
 - [AI Agents Full Course 2026 (Nick Saraev)](/ai-engineering/sources/nick-saraev-ai-agents-course-2026.md)
 - [AI Agents in 38 Minutes (Marina Wyss)](/ai-engineering/sources/marina-wyss-ai-agents-course.md)
+- [AI Agents Require Good Code Practices to Function](/ai-engineering/sources/ai-agents-require-good-code-practices-to-function-acce.md)
 - [AI Automation - DOE Framework for Reliable Agentic Workflows](/ai-engineering/sources/ai-automation-doe-framework-for-reliable-agentic-workflows-f.md)
 - [AI Certifications - Top 5 for 2026](/ai-engineering/sources/ai-certifications-top-5-for-2026-2026.md)
 - [AI Coding - Advanced Vibe Coding with Warp Build and Deploy](/ai-engineering/sources/ai-coding-advanced-vibe-coding-with-warp-build-and-deploy-de.md)
@@ -679,6 +694,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Assistance à la clientèle | Claude](/ai-engineering/sources/assistance-la-client-le-claude-fa55744d.md)
 - [Automate with Python – Full Course for Beginners](/ai-engineering/sources/automate-with-python-full-course-for-beginners-PXMJ6FS7llk.md)
 - [Automation Maintenance Services - Support & Managed Solutions](/ai-engineering/sources/automation-maintenance-services-support-managed-solutions-bc69ad1b.md)
+- [Autonomous Agents Running Asynchronously — The Quality Verification Problem](/ai-engineering/sources/autonomous-agents-running-asynchronously-the-quality-verific-cea.md)
 - [AWS Lambda MicroVMs - What new devilry](/ai-engineering/sources/aws-lambda-microvms-what-new-devilry-aa6586c6.md)
 - [backbone-fundamentals](/ai-engineering/sources/backbone-fundamentals-702daf3c.md)
 - [Barracuda makes security logs conversational with Genie](/ai-engineering/sources/barracuda-makes-security-logs-conversational-with-genie-71d0cd2f.md)
@@ -706,9 +722,11 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Building A Generative AI Platform](/ai-engineering/sources/building-a-generative-ai-platform-21fea981.md)
 - [Building a multimodal lakehouse for AI (w/ Chang She)](/ai-engineering/sources/building-a-multimodal-lakehouse-for-ai-w-chang-she-1e8e4aa6.md)
 - [Building a Personal AI Infrastructure (PAI) | Daniel Miessler](/ai-engineering/sources/building-a-personal-ai-infrastructure-pai-daniel-miessler-face.md)
+- [Building a Substack Agent with SKILLs and MCP](/ai-engineering/sources/building-a-substack-agent-with-skills-and-mcp-acece.md)
 - [Building a World Map with only 500 bytes](/ai-engineering/sources/building-a-world-map-with-only-500-bytes-ad1d5380.md)
 - [Building AI Agents that actually work (Full Course)](/ai-engineering/sources/building-ai-agents-that-actually-work-full-course-eA9Zf2-qYYM.md)
 - [Building Beautiful Websites with Claude Code — 5 Hacks](/ai-engineering/sources/building-beautiful-websites-with-claude-code-5-hacks-ac.md)
+- [Building Effective Internal Tooling with Claude Code](/ai-engineering/sources/building-effective-internal-tooling-with-claude-code-cde.md)
 - [Building in the Age of Collaborative Coding](/ai-engineering/sources/building-in-the-age-of-collaborative-coding-f5246f70.md)
 - [Celebrating the Winners of the 2026 Built-On Databricks Startup Challenge](/ai-engineering/sources/celebrating-the-winners-of-the-2026-built-on-databricks-star-ed62dda1.md)
 - [Claude + NotebookLM Chains (AI Founders + DLO Brands)](/ai-engineering/sources/ai-founders-claude-notebooklm.md)
@@ -767,6 +785,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Claude Code Essentials](/ai-engineering/sources/claude-code-essentials-brLhhkUqcn4.md)
 - [Claude Code has a new UI (pair it with Claude OS)](/ai-engineering/sources/claude-code-has-a-new-ui-pair-it-with-claude-os-J6tPNRc9m2Q.md)
 - [Claude Code Just Changed YouTube Videos Forever (Tutorial)](/ai-engineering/sources/claude-code-just-changed-youtube-videos-forever-tutorial-idVMGLzrrnU.md)
+- [Claude Code Review — Automated PR Analysis with Multi-Agent Codebase Context](/ai-engineering/sources/claude-code-review-automated-pr-analysis-with-multi-agent-co-ae.md)
 - [Claude Code website build — the CONTEXT/COPY/DESIGN workflow (Charlie Hills)](/ai-engineering/sources/claude-code-website-build-workflow.md)
 - [Claude Code — Full Tutorial for Beginners 2026](/ai-engineering/sources/claude-code-full-tutorial-for-beginners-2026-bee.md)
 - [Claude Code's New Agent Teams Are Insane (Opus 4.6)](/ai-engineering/sources/claude-code-s-new-agent-teams-are-insane-opus-4-6-1JeDsxnX1nY.md)
@@ -774,6 +793,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Claude Cowork - Getting Started Guide](/ai-engineering/sources/claude-cowork-getting-started-guide-de.md)
 - [Claude Cowork Fundamentals In 22 Minutes](/ai-engineering/sources/claude-cowork-fundamentals-in-22-minutes-uGwDuvSqgYI.md)
 - [Claude Fable 5 — Workflow Architecture over Prompt Optimization](/ai-engineering/sources/claude-fable-5-workflow-architecture-over-prompt-optimizatio-de.md)
+- [Claude Interactive Visualizations — Inline Charts and Diagrams in Conversations](/ai-engineering/sources/claude-interactive-visualizations-inline-charts-and-diagrams-ca.md)
 - [Claude Just Changed Accounting Forever (Tutorial)](/ai-engineering/sources/claude-just-changed-accounting-forever-tutorial-jrnxOBOW6LQ.md)
 - [Claude's 13 Free AI Courses in 12 Minutes](/ai-engineering/sources/claude-s-13-free-ai-courses-in-12-minutes-pG5Zd3sGOrY.md)
 - [Claude's extended thinking](/ai-engineering/sources/claude-s-extended-thinking-90ce207a.md)
@@ -830,6 +850,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Gemini CLI - Deep Dive with MCPs](/ai-engineering/sources/gemini-cli-deep-dive-with-mcps-c.md)
 - [Gemini CLI - Free Coding Agent Complete Guide](/ai-engineering/sources/gemini-cli-free-coding-agent-complete-guide-de.md)
 - [Gemini CLI - Multi-Instance Coding Workflow with MCPs](/ai-engineering/sources/gemini-cli-multi-instance-coding-workflow-with-mcps-c.md)
+- [GitHubs to review](/ai-engineering/sources/githubs-to-review-ee.md)
 - [Give Me 20 Minutes. I'll Teach You 80% of Claude Cowork](/ai-engineering/sources/give-me-20-minutes-i-ll-teach-you-80-of-claude-cowork-s3ccD6m6WKc.md)
 - [Google Just Dropped a Masterclass on Agentic Engineering (It's SO Good)](/ai-engineering/sources/google-just-dropped-a-masterclass-on-agentic-engineering-it--zbmuiaPuiNM.md)
 - [Google NotebookLM - AI Research Assistant](/ai-engineering/sources/google-notebooklm-ai-research-assistant-aa.md)
@@ -839,9 +860,11 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [He Asked AI To Make Money. It Did.](/ai-engineering/sources/he-asked-ai-to-make-money-it-did-l0Vqm0ZIySc.md)
 - [He Turned $400 Into $2.5M Using AI (No Coding)](/ai-engineering/sources/he-turned-400-into-2-5m-using-ai-no-coding-y_ON1Qbb274.md)
 - [Herdr in about 6 minutes](/ai-engineering/sources/herdr-in-about-6-minutes-qnIu-Xu64H0.md)
+- [High-Dimensional Data Analysis with Low-Dimensional Models (Wright & Ma)](/ai-engineering/sources/wright-ma-high-dimensional-data-analysis.md)
 - [How Anthropic Engineers ACTUALLY Prompt Claude Code](/ai-engineering/sources/how-anthropic-engineers-actually-prompt-claude-code-qOvc9IUKEIc.md)
 - [How Claude Code’s Creator Starts EVERY Project](/ai-engineering/sources/how-claude-code-s-creator-starts-every-project-M5tBN-I8AYo.md)
 - [How DeepSeek Runs a 284B LLM on a Laptop (Run AI Locally)](/ai-engineering/sources/how-deepseek-runs-a-284b-llm-on-a-laptop-run-ai-locally-3gk-9p9DSGs.md)
+- [How Good Is AI at Coding React? The Complexity Cliff](/ai-engineering/sources/how-good-is-ai-at-coding-react-the-complexity-cliff-beca.md)
 - [How I Built a Trading Bot That Trades Automatically (Full Data Platform Overview)](/ai-engineering/sources/how-i-built-a-trading-bot-that-trades-automatically-full-dat-e-oUwZOXVbM.md)
 - [How I Get Fable 5 Level Results with Any Model (Seriously) Using AI Harness Engineering](/ai-engineering/sources/how-i-get-fable-5-level-results-with-any-model-seriously-usi-R_Nf-IDVZEg.md)
 - [How I Set Up Python for Professional AI Development](/ai-engineering/sources/how-i-set-up-python-for-professional-ai-development-PHICGGjN5Pc.md)
@@ -899,19 +922,20 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [n8n - Mastering the Code Node](/ai-engineering/sources/n8n-mastering-the-code-node-de.md)
 - [n8n - Stock Analyst AI Agent with Telegram No-Code](/ai-engineering/sources/n8n-stock-analyst-ai-agent-with-telegram-no-code-cde.md)
 - [n8n - Zero to Hero Full Course 6 Hours](/ai-engineering/sources/n8n-zero-to-hero-full-course-6-hours-doc.md)
-- [Neurosymbolic AI - Improving AI Reasoning](/ai-engineering/sources/neurosymbolic-ai-improving-ai-reasoning-ea.md)
+- [Neurosymbolic AI — Improving AI Reasoning](/ai-engineering/sources/neurosymbolic-ai-improving-ai-reasoning-ea.md)
 - [Never Hit Your Claude Usage Limit Again (save money)](/ai-engineering/sources/never-hit-your-claude-usage-limit-again-save-money-e1k754hjeEE.md)
 - [Never Run claude /init](/ai-engineering/sources/never-run-claude-init-9tmsq-Gvx6g.md)
 - [NEW Claude A.I. Side Hustle Nobody is Talking About](/ai-engineering/sources/new-claude-a-i-side-hustle-nobody-is-talking-about-iVNiNdNnmu0.md)
 - [NotebookLM In 30 Minutes](/ai-engineering/sources/notebooklm-in-30-minutes-qbt-MFVvQQY.md)
 - [OpenClaw 2.0 - AI Agent Orchestrator Setup](/ai-engineering/sources/openclaw-2-0-ai-agent-orchestrator-setup-e.md)
 - [Opencode - Senior Engineer Workflow 2026](/ai-engineering/sources/opencode-senior-engineer-workflow-2026-2026.md)
+- [Optimizing the AI Coding Environment — Tools Over Prompts](/ai-engineering/sources/optimizing-the-ai-coding-environment-tools-over-prompts-a.md)
 - [Patterns and Anti-Patterns for Building with LLMs](/ai-engineering/sources/patterns-and-anti-patterns-for-building-with-llms-doc.md)
 - [Physical AI - When AI Gets a Body](/ai-engineering/sources/physical-ai-when-ai-gets-a-body-bd.md)
 - [Power BI Data Modeling Crash Course Learn Fast and Build Smarter Models! Full Course](/ai-engineering/sources/power-bi-data-modeling-crash-course-learn-fast-and-build-sma-air7T8wCYkU.md)
 - [Python - 10 Essential Built-in Functions to Master](/ai-engineering/sources/python-10-essential-built-in-functions-to-master-ae.md)
 - [Python - 3 Unique Modern Features You Need to Know](/ai-engineering/sources/python-3-unique-modern-features-you-need-to-know-doc.md)
-- [Reflective AI - Systems That Learn From Their Mistakes](/ai-engineering/sources/reflective-ai-systems-that-learn-from-their-mistakes-ae.md)
+- [Reflective AI — Systems That Learn From Their Mistakes](/ai-engineering/sources/reflective-ai-systems-that-learn-from-their-mistakes-ae.md)
 - [Running - Olympic Endurance Training Principles](/ai-engineering/sources/running-olympic-endurance-training-principles-ce.md)
 - [Running - Science-Based Strategy to Run a Faster 5K](/ai-engineering/sources/running-science-based-strategy-to-run-a-faster-5k-5.md)
 - [SaaS is Minting Millionaires Again — AI-Era Playbook](/ai-engineering/sources/saas-is-minting-millionaires-again-ai-era-playbook-ab.md)
@@ -948,6 +972,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [The Skill That 10x’d My Claude Code Projects](/ai-engineering/sources/the-skill-that-10x-d-my-claude-code-projects-c0kaKxM2pHg.md)
 - [The Top 10 Claude Code Plugins to 10x Your Next Project (June '26)](/ai-engineering/sources/the-top-10-claude-code-plugins-to-10x-your-next-project-june-IShdbDP4Jgg.md)
 - [This Might Be the Easiest Way to Sell AI to Businesses](/ai-engineering/sources/this-might-be-the-easiest-way-to-sell-ai-to-businesses-g4-3AxelI_Y.md)
+- [Top 10 AI Engineering Questions from 300+ Practitioners](/ai-engineering/sources/top-10-ai-engineering-questions-from-300-practitioners-ace.md)
 - [Top Repos Explained](/ai-engineering/sources/top-repos-explained-pBnJdOJd550.md)
 - [Understand the FULL Claude Ecosystem in One Video](/ai-engineering/sources/understand-the-full-claude-ecosystem-in-one-video-MS7E5TXNviM.md)
 - [Use Claude Better than 99% of People (BEGINNER to PRO in 20 mins)](/ai-engineering/sources/use-claude-better-than-99-of-people-beginner-to-pro-in-20-mi-nxY_QXB-hY8.md)
