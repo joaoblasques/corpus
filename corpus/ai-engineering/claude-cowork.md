@@ -745,8 +745,8 @@ In the emerging [local AI agent](/ai-engineering/local-ai-agents.md) category �
 [^src44]: [Get started with Claude Cowork — Help Center](../../raw/web/web-get-started-with-claude-cowork-claude-help-center.md) — Anthropic Help Center
 [^src45]: [My Simple Claude Cowork System for Normal People (Jeff Su)](../../raw/youtube/youtube-0_dSWLOHKng-my-simple-claude-cowork-system-for-normal-people.md) — Jeff Su, YouTube
 [^src46]: [Full Guide: Build an AI Second Brain (Cole Medin)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-full-guide-build-report.md) — Cole Medin, YouTube (processed report)
-[^src47]: [Build a Claude Knowledge Base That Self-Improves](../../raw/notes/notes-build-a-claude-kn-report.md) — notes report; Karpathy 3-folder pattern + Claude as librarian
-[^src48]: [Give Claude Your Files and Watch What Happens (report)](../../raw/notes/notes-give-claude-your-report.md) — notes report; 7 Cowork tasks + PARA method + sycophancy warning
+[^src47]: Build a Claude Knowledge Base That Self-Improves [source reaped] — notes report; Karpathy 3-folder pattern + Claude as librarian
+[^src48]: Give Claude Your Files and Watch What Happens (report) [source reaped] — notes report; 7 Cowork tasks + PARA method + sycophancy warning
 [^src49]: [You're Learning Claude The Wrong Way | Here's My Cheat Code](../../raw/youtube/youtube-GaA7hohgCCw-you-re-learning-claude-the-wrong-way-here-s-my-cheat-code.md) — AI Founders, YouTube; 7-continent mental map for Claude beginners
 [^src50]: [Product management on the AI exponential — Claude blog](../../raw/web/web-product-management-on-the-ai-exponential-claude.md) — Cat Wu, Head of Product for Claude Code, Anthropic; describes Claude Cowork as the "knowledge work" tool in a three-product PM workflow (claude.ai = thought partner, Claude Code = builds code, Cowork = everything else)
 [^src51]: [Local AI Agents In 26 Minutes](../../raw/youtube/youtube-M-NTwkM3VwM-local-ai-agents-in-26-minutes.md) — Tina Huang, YouTube

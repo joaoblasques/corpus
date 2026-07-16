@@ -850,7 +850,6 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Gemini CLI - Deep Dive with MCPs](/ai-engineering/sources/gemini-cli-deep-dive-with-mcps-c.md)
 - [Gemini CLI - Free Coding Agent Complete Guide](/ai-engineering/sources/gemini-cli-free-coding-agent-complete-guide-de.md)
 - [Gemini CLI - Multi-Instance Coding Workflow with MCPs](/ai-engineering/sources/gemini-cli-multi-instance-coding-workflow-with-mcps-c.md)
-- [GitHubs to review](/ai-engineering/sources/githubs-to-review-ee.md)
 - [Give Me 20 Minutes. I'll Teach You 80% of Claude Cowork](/ai-engineering/sources/give-me-20-minutes-i-ll-teach-you-80-of-claude-cowork-s3ccD6m6WKc.md)
 - [Google Just Dropped a Masterclass on Agentic Engineering (It's SO Good)](/ai-engineering/sources/google-just-dropped-a-masterclass-on-agentic-engineering-it--zbmuiaPuiNM.md)
 - [Google NotebookLM - AI Research Assistant](/ai-engineering/sources/google-notebooklm-ai-research-assistant-aa.md)

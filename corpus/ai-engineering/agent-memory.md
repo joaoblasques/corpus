@@ -612,7 +612,7 @@ Hermes requires meta-prompting with the `/goal` command to produce useful result
 [^src27]: [Claude Code Has Quietly Evolved (People Haven't Noticed)](../../raw/youtube/youtube-4iMZA1omCkM-claude-code-has-quietly-evolved-people-haven-t-noticed.md) — Simon Scrapes, YouTube; covers the 3-function memory framing (storage/injection/recall) and the memsarch + GBrain stack
 [^src28]: [Every Level of a Claude Second Brain Explained (full video)](../../raw/youtube/youtube-DTCyvo6cC54-every-level-of-a-claude-second-brain-explained.md) — Nate Herk, YouTube; primary source for §"Five levels of AI second brain"
 [^src29]: [Stop Using Obsidian: Simple Second Brain (full video)](../../raw/youtube/youtube-h0HYpONXgjk-stop-using-obsidian-this-simple-second-brain-setup-actually.md) — Chris Ashby, YouTube; primary source for §Simple Brain pattern
-[^src30]: [Build a Claude Knowledge Base That Self-Improves](../../raw/notes/notes-build-a-claude-kn-report.md) — processed report; Karpathy 3-folder pattern
+[^src30]: Build a Claude Knowledge Base That Self-Improves [source reaped] — processed report; Karpathy 3-folder pattern
 [^src31]: [AI Second Brain: soul.md + memory.md + daily log (Cole Medin)](../../raw/youtube/youtube-1FiER-40zng-full-guide-build-your-own-ai-second-brain-with-claude-code.md) — Cole Medin, YouTube
 [^src32]: [Obsidian as PKM and agentic backend](../../raw/youtube/youtube-VaGpWWiHXm8-obsidian-vault-deep-dive-custom-plugins-agentic-loops-my-ful.md) — YouTube
 [^src33]: [Hermes Agent: memory wiki + Tailscale](../../raw/youtube/youtube-AQHlyGA2cZM-6-hermes-agent-use-cases-i-promise-will-change-your-life.md) — YouTube

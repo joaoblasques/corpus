@@ -351,9 +351,13 @@ def test_iter_scrape_targets_default_none_keeps_single_page():
     assert out[0]["mode"] is None
 
 
-def test_books_to_review_is_excluded_from_collection():
-    """The vault-hosted book-review queue must never be collected/scraped/ingested."""
+def test_review_queues_are_excluded_from_collection():
+    """The vault-hosted review queues must never be collected/scraped/ingested/reaped."""
     import collect_obsidian as co
     assert co.is_included("00_Inbox/Clippings/Books to review.md") is False
-    # sibling staging lists remain collected
+    assert co.is_included("00_Inbox/Clippings/Blogs to review.md") is False
+    assert co.is_included("00_Inbox/Clippings/GitHubs to review.md") is False   # regression: this got reaped
+    # a hypothetical future queue is auto-protected by the generic "<X> to review.md" pattern
+    assert co.is_included("00_Inbox/Clippings/Papers to review.md") is False
+    # URL-list staging inputs remain collected (they're scraped, not review queues)
     assert co.is_included("00_Inbox/Clippings/blogs to scrape.md") is True

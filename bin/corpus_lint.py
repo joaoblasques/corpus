@@ -53,14 +53,22 @@ def find_broken_wikilinks(corpus: Path) -> list[tuple[str, str]]:
     OKF tolerates broken links, so this is informational only (no exit failure).
     The dict key is kept as ``broken_wikilinks`` for backward compatibility.
     """
+    # A real corpus cross-link is /<domain>/<page>.md where <domain> is an actual corpus domain.
+    # Anything else with a leading slash is either a template placeholder (/<domain>/<page>.md) or an
+    # external vault/PARA reference (/03_Resources/..., /01_Projects/...) — a citation, not a broken
+    # cross-link — so it is not counted here.
+    domains = {d.name for d in corpus.iterdir() if d.is_dir() and not d.name.startswith("_")}
     broken = []
     for p in list(corpus.rglob("*.md")):
         if p.name in _META:
             continue
         text = _FENCE_RE.sub("", p.read_text(encoding="utf-8", errors="ignore"))
         for target in _MDLINK_RE.findall(text):
-            target_path = corpus / target.lstrip("/")
-            if not target_path.exists():
+            if "<" in target or ">" in target:                       # template placeholder, not a link
+                continue
+            if target.lstrip("/").split("/", 1)[0] not in domains:   # external vault/PARA ref, not a cross-link
+                continue
+            if not (corpus / target.lstrip("/")).exists():
                 broken.append((str(p.relative_to(corpus.parent)), target))
     return broken
 

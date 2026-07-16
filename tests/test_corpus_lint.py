@@ -116,3 +116,17 @@ def test_index_and_log_not_checked_for_broken_wikilinks(tmp_path):
     paths = [src for src, _ in broken]
     assert not any("index.md" in p for p in paths), "index.md should be skipped"
     assert not any("log.md" in p for p in paths), "log.md should be skipped"
+
+
+def test_broken_wikilink_skips_placeholders_and_external_refs(tmp_path):
+    """Template placeholders (/<domain>/<page>.md) and external vault/PARA refs (/03_Resources/...)
+    are not corpus cross-links, so they must not be reported as broken wikilinks."""
+    c = tmp_path / "corpus"; d = c / "ai-engineering"; d.mkdir(parents=True)
+    (d / "p.md").write_text(
+        "---\ntype: concept\n---\n"
+        "tmpl [a](/<domain>/<page>.md) ext [b](/03_Resources/Articles/foo.md) "
+        "real [c](/ai-engineering/missing.md)\n", encoding="utf-8")
+    targets = [t for _, t in cl.find_broken_wikilinks(c)]
+    assert "/ai-engineering/missing.md" in targets          # genuine broken corpus link → flagged
+    assert "/<domain>/<page>.md" not in targets             # placeholder → skipped
+    assert "/03_Resources/Articles/foo.md" not in targets   # external vault ref → skipped

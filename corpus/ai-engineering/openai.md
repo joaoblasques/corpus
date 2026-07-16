@@ -110,7 +110,7 @@ Alongside GPT-5.6, OpenAI introduced **ChatGPT Work**, a **desktop app that merg
 
 ## Positioning against other labs
 
-- **Chinese open-weight models as a self-hosting alternative.** One practitioner account compares **GLM 5.2**, a Chinese AI model, against OpenAI and Anthropic across **coding, DevOps, and GPU programming**, weighing strengths and weaknesses [^src6]. The framing is that self-hosting is a live alternative to OpenAI's API rather than a strictly inferior one — see [Local LLM](/ai-engineering/local-llm.md) for the general trade-off.
+- **Chinese open-weight models as a self-hosting alternative.** One practitioner account compares **GLM 5.2**, a Chinese AI model, against OpenAI and Anthropic across **coding, DevOps, and GPU programming**, weighing strengths and weaknesses [^src6]. The framing is that self-hosting is a live alternative to OpenAI's API rather than a strictly inferior one — see [Local LLM](/ai-engineering/localai.md) for the general trade-off.
 - **Reflective AI.** OpenAI appears among the labs associated with **reflective AI** — systems that **evaluate and improve their own outputs**, improving accuracy **without requiring additional training data**, positioned as foundational to the next generation of autonomous agents [^src7]. This is the same judgement the eval layer applies externally; compare the [Evals API](#evals-api) [^src1] and [Agent Evaluation](/ai-engineering/agent-evaluation.md).
 
 ## People
@@ -125,7 +125,7 @@ Alongside GPT-5.6, OpenAI introduced **ChatGPT Work**, a **desktop app that merg
 - [Claude Code](/ai-engineering/claude-code.md) — peer coding agent
 - [Agent Evaluation](/ai-engineering/agent-evaluation.md) — the Evals API operationalizes this
 - [AI Agent](/ai-engineering/ai-agent.md) — reflection loops are foundational to autonomous agents
-- [Local LLM](/ai-engineering/local-llm.md) — the self-hosting alternative GLM 5.2 is weighed against
+- [Local LLM](/ai-engineering/localai.md) — the self-hosting alternative GLM 5.2 is weighed against
 
 ---
 

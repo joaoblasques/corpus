@@ -34,5 +34,5 @@ A comprehensive guide to refactoring techniques, covering common code smells, es
 
 ## Relation to corpus pages
 
-- [Refactoring](/software-engineering/refactoring.md) — concept page this source would seed (not yet written; the corpus has no dedicated refactoring/code-smells page, so this link is a forward reference per §6)
+- Refactoring — concept page this source would seed (not yet written; the corpus has no dedicated refactoring/code-smells page, so this link is a forward reference per §6)
 - [Software Engineering hub](/software-engineering/README.md) — domain hub

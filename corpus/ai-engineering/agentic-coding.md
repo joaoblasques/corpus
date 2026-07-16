@@ -822,7 +822,7 @@ This is the first documented case in the corpus of a **self-healing CI/CD pipeli
 [^src30]: [Claude on SWE-bench Verified](../../raw/web/web-claude-swe-bench-performance.md) — Anthropic
 [^src31]: [The Unreasonable Effectiveness of HTML for Agentic Output](../../raw/web/web-the-unreasonable-effectiveness-of-html.md) — blog post
 [^src32]: [Conductor CEO Charlie Holtz — AI Coding Setup](../../raw/youtube/youtube-fQmlML9Lay4-conductor-ceo-charlie-holtz-walks-us-through-his-ai-coding-s.md) — Charlie Holtz, YouTube
-[^src33]: [Local AI Coding: Report](../../raw/notes/notes-local-ai-coding-report.md) — notes report
+[^src33]: Local AI Coding: Report [source reaped] — notes report
 [^src34]: [Local Agentic Coding Guide](../../raw/youtube/youtube-hfba9dAT6xE-the-best-local-agentic-coding-workflow-complete-guide.md) — YouTube
 [^src35]: [The Unreasonable Effectiveness of HTML (gallery)](../../raw/web/web-github-anthropics-html-effectiveness-html-effectiveness-exam.md) — Anthropic gallery
 [^src36]: [How Software Engineers Actually Use Coding Agents in 2026](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-how-software-engi-report.md) — YouTube (processed notes report); Pragmatic Engineer 2026 adoption survey

@@ -36,9 +36,14 @@ INCLUDE_DIRS = [
 EXCLUDE_DIRS = [
     "03_Resources/llm-wiki-system",
 ]
-# 'Books to review.md' is the corpus's own operational review queue placed in the vault so
-# the user can tick it from their phone — it must NOT be collected/scraped/ingested as a source.
-EXCLUDE_FILE_RE = re.compile(r"(?i)(_processed\.md$|(^|/)README\.md$|(^|/)Books to review\.md$|(^|/)Blogs to review\.md$)")
+# The corpus's own operational REVIEW queues (Books/Blogs/GitHubs to review) are placed in the vault
+# so the user can tick them from their phone — they must NOT be collected/scraped/ingested as
+# sources (nor reaped). Matched generically as "<X> to review.md" so a future review queue is
+# protected automatically (this bug ate GitHubs to review.md because it was added after the
+# hard-coded Books/Blogs entries). NOTE: "<X> to scrape.md" is deliberately NOT excluded — those are
+# URL-list inputs the collector reads (see URL_LIST_NAMES).
+EXCLUDE_FILE_RE = re.compile(
+    r"(?i)(_processed\.md$|(^|/)README\.md$|(^|/)[\w][\w ]* to review\.md$)")
 URL_LIST_NAMES = {"articles to process.md", "blogs to scrape.md"}
 # Per-list default scrape mode for UNTAGGED lines (an explicit [blog]/[series]
 # tag on a line still overrides). "blogs to scrape" treats every line as a blog
