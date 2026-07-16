@@ -1,24 +1,38 @@
-# Discovery config for book_discover.py — scans ONE curated legal index and proposes
-# corpus-relevant PDF books for review. Never an open-web crawler.
+# Discovery config for book_discover.py — scans curated LEGAL indexes and proposes corpus-relevant
+# PDF books for review. Never an open-web crawler.
 index_urls:
   - https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-subjects.md
 
 # A book entry is proposed only if its section heading contains one of these (case-insensitive).
+# Scoped to the corpus's domains (ai-engineering, data-engineering, mlops, software-engineering,
+# ai-business, blockchain, productivity, trading) — kept relevant, not a general programming dump.
 relevant_sections:
   - machine learning
   - deep learning
   - artificial intelligence
+  - neural network
+  - computer vision
+  - natural language processing
+  - reinforcement learning
   - data science
   - data mining
+  - data engineering
+  - big data
+  - information retrieval
   - databases
   - sql
   - distributed
   - operating systems
   - cloud
+  - devops
+  - microservices
   - software architecture
   - python
   - statistics
+  - mathematics
   - algorithms
   - mlops
+  - blockchain
+  - cryptography
 
 max_new_per_run: 15
