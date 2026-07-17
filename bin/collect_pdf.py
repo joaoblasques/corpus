@@ -164,19 +164,24 @@ def processable(dirs=None) -> list:
 
 
 def extract(abs_path: str) -> dict:
-    """Extract a PDF to markdown + metadata. Seam over pymupdf4llm/fitz (stubbable)."""
-    import pymupdf4llm
+    """Extract a PDF to markdown + metadata. Seam over pymupdf4llm/fitz (stubbable).
+
+    Uses pymupdf4llm's CLASSIC converter (helpers.pymupdf_rag) rather than the default
+    layout parser. Since ≥1.27 the default ``to_markdown`` runs RapidOCR neural
+    text-region detection plus Tesseract on every image-based page — which adds nothing
+    on digital PDFs and lets a single image-heavy slide deck wedge the whole batch for
+    tens of minutes (and blow COLLECTOR_TIMEOUT in the nightly). The classic converter is
+    pure PyMuPDF: fast, no OCR, no model. It can still crash on malformed tables, so any
+    failure falls back to plain page text — one PDF can never wedge or abort the batch.
+    """
     import fitz
-    # pymupdf4llm ≥1.27 routes to a layout parser that OCRs every image-based page by
-    # default (Tesseract). On digital PDFs that adds nothing, and one image-heavy slide
-    # deck can wedge the whole batch for tens of minutes — so disable OCR. Older versions
-    # lack the kwarg (and don't OCR by default): fall back to the plain call.
-    with _suppress_fd_stdout():
-        try:
-            markdown = pymupdf4llm.to_markdown(abs_path, use_ocr=False) or ""
-        except TypeError:
-            markdown = pymupdf4llm.to_markdown(abs_path) or ""
+    from pymupdf4llm.helpers import pymupdf_rag
     doc = fitz.open(abs_path)
+    try:
+        with _suppress_fd_stdout():
+            markdown = pymupdf_rag.to_markdown(doc) or ""
+    except Exception:  # noqa: BLE001 — malformed tables etc.; never let one PDF abort the batch
+        markdown = "\n\n".join(page.get_text() for page in doc) or ""
     meta = doc.metadata or {}
     pages = doc.page_count
     doc.close()

@@ -35,41 +35,38 @@ def test_extract_does_not_pollute_stdout(tmp_path, capfd):
     assert "Tesseract" not in out and "Document parser" not in out
 
 
-def test_extract_disables_ocr(tmp_path, monkeypatch):
-    """pymupdf4llm 1.27 OCRs every image page by default — one image-heavy PDF then wedges
-    the whole batch for tens of minutes. extract() must pass use_ocr=False to skip it."""
-    import pymupdf4llm
-    captured = {}
+def test_extract_uses_classic_converter_not_layout_ocr(tmp_path, monkeypatch):
+    """The default layout parser OCRs every image page (RapidOCR + Tesseract) and wedges the
+    batch. extract() must use the classic pymupdf_rag converter instead."""
+    from pymupdf4llm.helpers import pymupdf_rag
+    called = {}
 
-    def fake_to_markdown(path, **kw):
-        captured.update(kw)
+    def fake_classic(doc, *a, **kw):
+        called["hit"] = True
         return "# Title\n" + ("body text " * 20)
 
-    monkeypatch.setattr(pymupdf4llm, "to_markdown", fake_to_markdown)
+    monkeypatch.setattr(pymupdf_rag, "to_markdown", fake_classic)
     pdf = tmp_path / "doc.pdf"
     _make_pdf(pdf, "hello world " * 40)
     r = cp.extract(str(pdf))
-    assert captured.get("use_ocr") is False
+    assert called.get("hit") is True
     assert "body text" in r["markdown"]
 
 
-def test_extract_falls_back_when_use_ocr_unsupported(tmp_path, monkeypatch):
-    """Older pymupdf4llm has no use_ocr kwarg (and no OCR-by-default) — extract must still work."""
-    import pymupdf4llm
-    calls = []
+def test_extract_falls_back_to_plain_text_on_converter_crash(tmp_path, monkeypatch):
+    """The classic converter can crash on malformed tables (ValueError in find_tables). One bad
+    PDF must not abort the batch — extract() falls back to plain page text."""
+    from pymupdf4llm.helpers import pymupdf_rag
 
-    def fake_to_markdown(path, **kw):
-        calls.append(kw)
-        if "use_ocr" in kw:                       # simulate the old signature rejecting it
-            raise TypeError("unexpected keyword argument 'use_ocr'")
-        return "# Title\n" + ("legacy body " * 20)
+    def boom(doc, *a, **kw):
+        raise ValueError("min() iterable argument is empty")
 
-    monkeypatch.setattr(pymupdf4llm, "to_markdown", fake_to_markdown)
+    monkeypatch.setattr(pymupdf_rag, "to_markdown", boom)
     pdf = tmp_path / "doc.pdf"
-    _make_pdf(pdf, "hello " * 40)
+    _make_pdf(pdf, "unique fallback marker text here. " * 20)
     r = cp.extract(str(pdf))
-    assert len(calls) == 2                         # tried with kwarg, then fell back without
-    assert "legacy body" in r["markdown"]
+    assert "unique fallback marker text" in r["markdown"]   # recovered via page.get_text()
+    assert r["words"] >= 50
 
 
 def test_extract_title_falls_back_to_stem(tmp_path):
