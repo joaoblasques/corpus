@@ -87,3 +87,9 @@ type: internal
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/how-spec-driven-development-improves-ai-coding-quality-red-h-a.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/neurosymbolic-ai-improving-ai-reasoning-ea.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/reflective-ai-systems-that-learn-from-their-mistakes-ae.md", "verdict_ok": true, "gov": "committed"}
+
+## [2026-07-17T02:59] gardener · run
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/data-engineering/sources/data-crash-course-tinybird-e.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-business/harvey.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/data-engineering/windsor-ai.md", "verdict_ok": false, "gov": "reverted+queued"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/data-engineering/perspective.md", "verdict_ok": true, "gov": "committed"}
