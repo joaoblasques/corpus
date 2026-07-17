@@ -1,7 +1,7 @@
 ---
 type: entity
 domain: data-engineering
-status: stub
+status: draft
 sources:
   - path: raw/github/github-perspective-dev-perspective.md
     channel: github
@@ -17,7 +17,7 @@ tags:
   - corpus/data-engineering
   - entity
 created: 2026-06-25
-updated: 2026-06-25
+updated: 2026-07-17
 ---
 
 # Perspective
@@ -29,16 +29,29 @@ updated: 2026-06-25
 - **Framework-agnostic UI** — packaged as a [Custom Element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements); connects to a Data Model in-browser (via WebAssembly) or remotely (via WebSocket with Python, Node.js, Rust integration). Includes a data grid and 10+ chart types: line, bar, area, scatter, heatmap, treemap, sunburst, candlestick, and more [^src1].
 - **Pluggable data model** — the Data Model API supports external query engines (e.g. **DuckDB**) translating view configurations into native queries [^src1].
 - **Streaming Data Model (built-in)** — written in C++, compiled for WebAssembly, Python, and Rust; supports read/write/streaming for **Apache Arrow** with a columnar expression language based on ExprTK [^src1].
-- **JupyterLab widget** — first-class Jupyter integration for data exploration in notebooks.
+- **JupyterLab widget** — first-class Jupyter integration via `perspective.widget`; also ships a Python client library for interactive data analysis in notebooks [^src1].
+- **Virtual servers** — pluggable server backends for ClickHouse (`perspective.virtual_servers.clickhouse`) and DuckDB (`perspective.virtual_servers.duckdb`) let Perspective translate UI view configurations into native engine queries [^src1].
+- **Python async handlers** — integrations for `aiohttp`, `starlette`, and `tornado` enable serving the Perspective WebSocket protocol from standard Python web frameworks [^src1].
+
+## Distribution packages
+
+| Package | Registry | Language |
+|---|---|---|
+| `@perspective-dev/client` | npm | JavaScript (browser + Node.js) |
+| `@perspective-dev/viewer` | npm | Web Component |
+| `perspective-python` | PyPI | Python |
+| `perspective` | crates.io | Rust |
+
+Latest release at collection time: **v4.5.1** [^src1].
 
 ## Language targets
 
 | Runtime | Use |
 |---|---|
 | WebAssembly | In-browser analytics, zero-server compute |
-| Python | Server-side data model (`perspective-python`); Jupyter widget |
-| Rust | Low-level embedding, custom integrations |
-| Node.js | Server-side JS integration |
+| Python | Server-side data model (`perspective-python`); Jupyter widget; aiohttp/starlette/tornado handlers |
+| Rust | Low-level embedding; `perspective-server` + `perspective-client` crates |
+| Node.js | Server-side JS integration via `@perspective-dev/client` |
 
 [^src1]
 
