@@ -51,6 +51,63 @@ sources:
   - path: raw/_inbox/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-16.md
     channel: pdf
     ingested_at: 2026-07-16
+  - path: raw/_inbox/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-17.md
+    channel: pdf
+    ingested_at: 2026-07-17
+  - path: raw/_inbox/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-18.md
+    channel: pdf
+    ingested_at: 2026-07-17
+  - path: raw/_inbox/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-19.md
+    channel: pdf
+    ingested_at: 2026-07-17
+  - path: raw/_inbox/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-20.md
+    channel: pdf
+    ingested_at: 2026-07-17
+  - path: raw/_inbox/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-21.md
+    channel: pdf
+    ingested_at: 2026-07-17
+  - path: raw/_inbox/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-22.md
+    channel: pdf
+    ingested_at: 2026-07-17
+  - path: raw/_inbox/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-23.md
+    channel: pdf
+    ingested_at: 2026-07-17
+  - path: raw/_inbox/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-24.md
+    channel: pdf
+    ingested_at: 2026-07-17
+  - path: raw/_inbox/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-25.md
+    channel: pdf
+    ingested_at: 2026-07-17
+  - path: raw/_inbox/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-26.md
+    channel: pdf
+    ingested_at: 2026-07-17
+  - path: raw/_inbox/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-27.md
+    channel: pdf
+    ingested_at: 2026-07-17
+  - path: raw/_inbox/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-28.md
+    channel: pdf
+    ingested_at: 2026-07-17
+  - path: raw/_inbox/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-29.md
+    channel: pdf
+    ingested_at: 2026-07-17
+  - path: raw/_inbox/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-30.md
+    channel: pdf
+    ingested_at: 2026-07-17
+  - path: raw/_inbox/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-31.md
+    channel: pdf
+    ingested_at: 2026-07-17
+  - path: raw/_inbox/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-32.md
+    channel: pdf
+    ingested_at: 2026-07-17
+  - path: raw/_inbox/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-33.md
+    channel: pdf
+    ingested_at: 2026-07-17
+  - path: raw/_inbox/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-34.md
+    channel: pdf
+    ingested_at: 2026-07-17
+  - path: raw/_inbox/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-35.md
+    channel: pdf
+    ingested_at: 2026-07-17
 aliases:
   - Wright Ma high-dimensional data analysis
   - HDLM textbook
@@ -59,7 +116,7 @@ tags:
   - corpus/ai-engineering
   - source
 created: 2026-07-16
-updated: 2026-07-16
+updated: 2026-07-17
 ---
 
 # High-Dimensional Data Analysis with Low-Dimensional Models (Wright & Ma)
@@ -82,7 +139,7 @@ Three pillars:
 2. **Low-rank matrix recovery** (nuclear norm minimization, matrix completion, robust PCA)
 3. **General low-dimensional structures** (union of subspaces, concave signal models)
 
-## Structure (Parts 1–16 of 35 ingested here)
+## Structure (All 35 parts ingested)
 
 | Chapters | Topic |
 |---|---|
@@ -91,7 +148,11 @@ Three pillars:
 | Ch. 3 | Restricted Isometry Property, phase transition analysis, random matrix theory |
 | Ch. 4 | Low-rank matrix recovery — nuclear norm minimization, matrix RIP, matrix completion, RPCA |
 | Ch. 5 | Stable recovery under noise |
-| Ch. 6–7 | General signal models; optimization geometry (saddle points, benign landscape) |
+| Ch. 6–7 | General signal models; nonconvex optimization (saddle points, benign landscape, dictionary learning) |
+| Ch. 8 | Convex optimization for structured signal recovery — proximal gradient (ISTA/FISTA), ADMM, ALM |
+| Ch. 9 | Nonconvex optimization algorithms — gradient descent on benign landscapes, phase retrieval |
+| Ch. 13 | Robust face recognition via sparse representation (SRC) — ℓ₁ classification; dense error correction |
+| Ch. 16 | Deep networks and low-dimensional models — NTK (Neural Tangent Kernel), overparameterization, manifold classification |
 
 ## Key Results and Concepts
 
@@ -132,10 +193,53 @@ Non-convex matrix factorization **X = UV^T** has a benign landscape: no spurious
 - Low-rank matrix completion got its decisive theory from Candès-Recht and Candès-Tao (2010).
 - The unifying low-dimensional models framework is the book's main contribution.
 
+## Convex Optimization for Structured Signal Recovery (Ch. 8)
+
+Four model problems: Basis Pursuit (ℓ₁ minimization with equality constraint), BPDN (Lasso), Principal Component Pursuit, and stable PCP [^src7].
+
+**Proximal Gradient (PG) / ISTA**: for composite objective F(x) = f(x) + g(x) with f smooth and g nonsmooth but tractable, replace gradient step on f with proximal step on g [^src7]:
+
+```
+w_k = x_k - (1/L) ∇f(x_k)
+x_{k+1} = prox_{g/L}[w_k]
+```
+
+Convergence rate: O(1/k). For Lasso: prox of λ‖·‖₁ is soft-thresholding → ISTA (Iterative Soft-Thresholding Algorithm). For PCP: proximal operators of nuclear norm (singular-value soft-thresholding) and ℓ₁ norm decouple by separability [^src7].
+
+**Nesterov Acceleration (FISTA)**: momentum-based extrapolation improves convergence to O(1/k²) [^src7]:
+
+```
+y_{k+1} = x_k + (t_k - 1)/t_{k+1} * (x_k - x_{k-1})
+x_{k+1} = prox_{g/L}[y_{k+1} - (1/L)∇f(y_{k+1})]
+```
+
+This is optimal among first-order methods for this problem class.
+
+**ADMM (Alternating Direction Method of Multipliers)**: for problems with separable structure min f(x) + g(z) s.t. Ax + Bz = c. Alternates updates of x, z, and dual variable y (Lagrange multiplier). Splits PCP into two proximal steps (SVT for L, soft-threshold for S) [^src7]. Convergence rate O(1/k).
+
+**Augmented Lagrangian Method (ALM)**: adds a penalty term ρ/2 ‖Ax - b‖² to the Lagrangian to improve conditioning; avoids the ill-conditioning of penalty methods as μ → ∞ [^src7].
+
+## Classification via Sparse Representation (Ch. 13)
+
+Sparse Representation Classifier (SRC): represent a test sample as a sparse linear combination of all training samples. The class identity is revealed by which class's training samples dominate the sparse code [^src8].
+
+Face recognition under occlusion: even dense occlusion (corrupting a large fraction of pixels) can be modeled as a sparse error; jointly solving for the sparse identity code and sparse error via ℓ₁ minimization recovers the true identity. Under the cross-and-bouquet dictionary model, ℓ₁ guarantees robust classification up to nearly 100% dense corruption [^src8].
+
+## Deep Networks and Low-Dimensional Models (Ch. 16)
+
+**Neural Tangent Kernel (NTK)**: in the infinite-width limit, a randomly initialized neural network's output is governed by a kernel function K(x, x') = E[∇_θf(x) · ∇_θf(x')], called the NTK. Under the NTK regime, gradient descent on the network is equivalent to kernel regression with this kernel; the network converges to a global minimum [^src9].
+
+**Overparameterization and manifold classification**: deep networks exploit low-dimensional data structure (manifolds). Network depth is a computation resource (sharper kernels, more expressive functions); width is a statistical resource (NTK concentration). A well-initialized deep network can provably classify manifolds with small reach and large separation between classes [^src9].
+
+Connection to sparse/low-rank recovery: the NTK's eigenvector structure parallels the dual certificates in compressed sensing and matrix completion — in both cases, a random operator must "cover" the relevant signal directions [^src9].
+
 ## Relationship to Corpus Pages
 
 - Sparse recovery: [/ai-engineering/compressed-sensing.md](/ai-engineering/compressed-sensing.md)
 - Low-rank recovery: [/ai-engineering/low-rank-matrix-recovery.md](/ai-engineering/low-rank-matrix-recovery.md)
+- Proximal gradient methods: [/ai-engineering/proximal-gradient-methods.md](/ai-engineering/proximal-gradient-methods.md)
+- Neural Tangent Kernel: [/ai-engineering/neural-tangent-kernel.md](/ai-engineering/neural-tangent-kernel.md)
+- Convex/nonconvex optimization: [/ai-engineering/optimization-for-ml.md](/ai-engineering/optimization-for-ml.md)
 - SVD and Eckart-Young: [/ai-engineering/singular-value-decomposition.md](/ai-engineering/singular-value-decomposition.md)
 - PCA: [/ai-engineering/pca-and-dimensionality-reduction.md](/ai-engineering/pca-and-dimensionality-reduction.md)
 
@@ -147,3 +251,6 @@ Non-convex matrix factorization **X = UV^T** has a benign landscape: no spurious
 [^src4]: [HDLM Part 7 — Ch. 3 incoherence, DFT measurements, circulant matrices, RIP](../../../raw/pdf/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-07.md)
 [^src5]: [HDLM Part 10 — Ch. 4 low-rank recovery, matrix RIP, stable BPDN, matrix completion, RPCA](../../../raw/pdf/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-10.md)
 [^src6]: [HDLM Part 16 — Ch. 7 optimization geometry, saddle points, benign landscape for matrix factorization](../../../raw/pdf/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-16.md)
+[^src7]: [HDLM Part 17–21 — Ch. 8 convex optimization: proximal gradient (ISTA), Nesterov (FISTA), ADMM, ALM](../../../raw/pdf/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-17.md)
+[^src8]: [HDLM Part 25 — Ch. 13 robust face recognition via sparse representation (SRC), dense error correction](../../../raw/pdf/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-25.md)
+[^src9]: [HDLM Part 30 — Ch. 16 deep networks: NTK, overparameterization, manifold classification](../../../raw/pdf/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-30.md)

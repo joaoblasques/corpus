@@ -217,7 +217,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [The Portfolio Project That Lands a DE Role](/data-engineering/portfolio-project-that-lands-a-de-role.md)
 
 <details>
-<summary>Source summaries (170)</summary>
+<summary>Source summaries (181)</summary>
 
 - ["A dbt \"logic mesh\" with packages: standard model and metrics across 25 autonomous organizations | dbt Summit"](/data-engineering/sources/a-dbt-logic-mesh-with-packages-standard-model-and-metrics-ac-bf162a97.md)
 - ["Academic → CTO: What Actually Matters in Data (Matthew Housley) - Confessions of a Data Guy"](/data-engineering/sources/academic-cto-what-actually-matters-in-data-matthew-housley-c-e9eae58c.md)
@@ -232,6 +232,8 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - ["Code along - build an ELT Pipeline in 1 Hour (dbt, Snowflake, Airflow)"](/data-engineering/sources/code-along-build-an-elt-pipeline-in-1-hour-dbt-snowflake-air-OLXkGB7krGo.md)
 - ["Creating a Data Model w/ dbt: Facts (Part 2/3)"](/data-engineering/sources/creating-a-data-model-w-dbt-facts-part-2-3-SGMnsP7M3Tc.md)
 - ["Data Agility: Building Faster, Smarter, Scalable Workflows"](/data-engineering/sources/data-agility-building-faster-smarter-scalable-workflows-29a2c4a8.md)
+- ["Data Architecture Comparison: Warehouse, Lake, Lakehouse, and Mesh"](/data-engineering/sources/data-architecture-comparison-warehouse-lake-lakehouse-and-me-ca.md)
+- ["Data Architecture Fundamentals — Warehouse, Lake, Lakehouse, Centralized vs Decentralized"](/data-engineering/sources/data-architecture-fundamentals-warehouse-lake-lakehouse-cent-dece.md)
 - ["Data Engineer Bootcamp (FREE 27+ Hour Course) - SQL, Python, Cloud, Bash, AI, Git & GitHub"](/data-engineering/sources/data-engineer-bootcamp-free-27-hour-course-sql-python-cloud--ol9_NnC9-cc.md)
 - ["Data Engineer Project: An end-to-end Airflow data pipeline with BigQuery, dbt Soda, and more!"](/data-engineering/sources/data-engineer-project-an-end-to-end-airflow-data-pipeline-wi-DzxtCxi4YaA.md)
 - ["Data Engineering Weekly #256"](/data-engineering/sources/data-engineering-weekly-256-fb255f87.md)
@@ -268,6 +270,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - ["DBT Beginner to Pro: End to End Pipeline with Airflow, Snowflake and DBT!!"](/data-engineering/sources/dbt-beginner-to-pro-end-to-end-pipeline-with-airflow-snowfla-RXWYPZ3T9ys.md)
 - ["DBT Rookie to Guru: End-to-End ELT Pipeline Project with DBT, Snowflake, and Tableau"](/data-engineering/sources/dbt-rookie-to-guru-end-to-end-elt-pipeline-project-with-dbt--KOd_KTgou4A.md)
 - ["Dimensional Data Modeling: Slowly Changing Dimensions and Idempotency — Day 2 Lecture"](/data-engineering/sources/dimensional-data-modeling-slowly-changing-dimensions-and-ide-doc.md)
+- ["Framework Dimensions: The Hidden Lever in Data Science Analysis"](/data-engineering/sources/framework-dimensions-the-hidden-lever-in-data-science-analys-cece.md)
 - ["GitHub Actions (Branch Protection, Automated Testing) - Full Tutorial"](/data-engineering/sources/github-actions-branch-protection-automated-testing-full-tuto-UEOtZvTCmDo.md)
 - ["Learn Database Normalization - 1NF, 2NF, 3NF, 4NF, 5NF"](/data-engineering/sources/learn-database-normalization-1nf-2nf-3nf-4nf-5nf-GFQaEYEc8_8.md)
 - ["Modern Data Warehousing: Stop Using Slowly-Changing Dimensions (Part 1)"](/data-engineering/sources/modern-data-warehousing-stop-using-slowly-changing-dimension-1.md)
@@ -310,6 +313,11 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [Create a free dbt account | dbt Labs](/data-engineering/sources/create-a-free-dbt-account-dbt-labs-a22db025.md)
 - [Create a Standout Project Write-Up | Data Analyst Insights](/data-engineering/sources/create-a-standout-project-write-up-data-analyst-insights-vgZuTpOj9fE.md)
 - [Data Analyst | dbt Labs](/data-engineering/sources/data-analyst-dbt-labs-e88f1a35.md)
+- [Data Crash Course · Tinybird](/data-engineering/sources/data-crash-course-tinybird-f.md)
+- [Data Crash Course · Tinybird](/data-engineering/sources/data-crash-course-tinybird-doc.md)
+- [Data Crash Course · Tinybird](/data-engineering/sources/data-crash-course-tinybird-ee.md)
+- [Data Crash Course · Tinybird](/data-engineering/sources/data-crash-course-tinybird-fe.md)
+- [Data Crash Course · Tinybird — Chapter Zero](/data-engineering/sources/data-crash-course-tinybird-e.md)
 - [Data Engineering - Core Concepts](/data-engineering/sources/data-engineering-core-concepts-eee.md)
 - [Data Engineering - If I Started Over with Databricks](/data-engineering/sources/data-engineering-if-i-started-over-with-databricks-daabc.md)
 - [Data Engineering - LakeFlow Declarative Pipelines and CDC](/data-engineering/sources/data-engineering-lakeflow-declarative-pipelines-and-cdc-cdc.md)
@@ -317,6 +325,8 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [Data Engineering - The Data Movie Visual Data Literacy](/data-engineering/sources/data-engineering-the-data-movie-visual-data-literacy-eac.md)
 - [Data Engineering After AI](/data-engineering/sources/data-engineering-after-ai-bc5fa80b.md)
 - [Data Engineering Course for Beginners](/data-engineering/sources/data-engineering-course-for-beginners-PHsC_t0j1dU.md)
+- [Data Engineering Fundamentals That Don't Change](/data-engineering/sources/data-engineering-fundamentals-that-don-t-change-cae.md)
+- [Data Engineering Interview Preparation](/data-engineering/sources/data-engineering-interview-preparation-eaa.md)
 - [Data Engineering MOC](/data-engineering/sources/data-engineering-moc-c.md)
 - [Data Engineering System Design Made Easy](/data-engineering/sources/data-engineering-system-design-made-easy-t1E4qAVMdqw.md)
 - [Data Engineering with Python and AI/LLMs – Data Loading Tutorial](/data-engineering/sources/data-engineering-with-python-and-ai-llms-data-loading-tutori-T23Bs75F7ZQ.md)
@@ -381,6 +391,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [Stop Starting Data Projects — Process Beats Code for Adoption](/data-engineering/sources/stop-starting-data-projects-process-beats-code-for-adoption-ce.md)
 - [Terraform Course - Automate your AWS cloud infrastructure](/data-engineering/sources/terraform-course-automate-your-aws-cloud-infrastructure-SLB_c_ayRMo.md)
 - [The Analytical Skills No One Teaches You](/data-engineering/sources/the-analytical-skills-no-one-teaches-you-doc.md)
+- [The Data Engineer's GitHub Portfolio (2026 Edition)](/data-engineering/sources/the-data-engineer-s-github-portfolio-2026-edition-2026.md)
 - [The Data Movie | Data Literacy Explained Visually](/data-engineering/sources/the-data-movie-data-literacy-explained-visually-J2rQTJby8XM.md)
 - [The Medallion Architecture Most Teams Get Wrong (And What It Costs)](/data-engineering/sources/the-medallion-architecture-most-teams-get-wrong-and-what-it--uNtMetMNVgw.md)
 - [The ONLY Data Cleaning Framework You Need | Playbook Ep. 3](/data-engineering/sources/the-only-data-cleaning-framework-you-need-playbook-ep-3-y9wFFD2bXQM.md)

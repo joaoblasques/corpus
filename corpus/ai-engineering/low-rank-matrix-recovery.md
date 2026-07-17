@@ -15,6 +15,9 @@ sources:
   - path: raw/_inbox/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-13.md
     channel: pdf
     ingested_at: 2026-07-16
+  - path: raw/_inbox/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-30.md
+    channel: pdf
+    ingested_at: 2026-07-17
 aliases:
   - nuclear norm minimization
   - matrix completion
@@ -26,7 +29,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-07-16
-updated: 2026-07-16
+updated: 2026-07-17
 ---
 
 # Low-Rank Matrix Recovery
@@ -103,14 +106,28 @@ min ‖X‖* + λ‖S‖₁  subject to  X + S = M
 
 With λ = 1/√max(m,n), PCP recovers **X₀** and **S₀** exactly under incoherence + random sparse support conditions [^src1]. Applications: video surveillance (background = low-rank; moving objects = sparse), face recognition under occlusion.
 
+## Deep Network Connection (NTK / Overparameterization)
+
+The benign-landscape results for matrix factorization (Ch. 7) are an early instance of a broader principle: **overparameterization removes spurious local minima**. This same principle resurfaces in the theory of deep networks:
+
+- For matrix factorization X = UV*, gradient descent with extra rank (more columns in U, V than in X₀) implicitly regularizes toward the minimum nuclear-norm solution.
+- For wide neural networks, the **Neural Tangent Kernel (NTK)** captures the same "stays near initialization" phenomenon: an infinitely wide network's training is equivalent to kernel regression, guaranteeing convergence [^src3].
+
+The NTK is thus the deep network analogue of the benign landscape theorem for matrix factorization: both guarantee gradient descent converges to a good solution when the model is "overparameterized" relative to the complexity of the target.
+
+See [/ai-engineering/neural-tangent-kernel.md](/ai-engineering/neural-tangent-kernel.md) for the full treatment.
+
 ## Relationship to Corpus Pages
 
 - Sparse vector foundation: [/ai-engineering/compressed-sensing.md](/ai-engineering/compressed-sensing.md)
 - SVD and low-rank approximation: [/ai-engineering/singular-value-decomposition.md](/ai-engineering/singular-value-decomposition.md)
 - PCA as low-rank projection: [/ai-engineering/pca-and-dimensionality-reduction.md](/ai-engineering/pca-and-dimensionality-reduction.md)
 - Optimization landscape theory: [/ai-engineering/optimization-for-ml.md](/ai-engineering/optimization-for-ml.md)
+- Neural Tangent Kernel (deep network analogue): [/ai-engineering/neural-tangent-kernel.md](/ai-engineering/neural-tangent-kernel.md)
+- Proximal gradient solvers (nuclear norm via SVT): [/ai-engineering/proximal-gradient-methods.md](/ai-engineering/proximal-gradient-methods.md)
 
 ---
 
 [^src1]: [High-Dimensional Data Analysis, Part 10 — Ch. 4 low-rank recovery, matrix RIP, stable recovery via BPDN analogue](../../raw/pdf/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-10.md)
 [^src2]: [High-Dimensional Data Analysis, Part 16 — Ch. 7 optimization geometry of matrix factorization, saddle points, benign landscape](../../raw/pdf/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-16.md)
+[^src3]: [HDLM Part 30 — Ch. 16 Neural Tangent Kernel, overparameterized networks, depth and width as resources](../../raw/pdf/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-30.md)

@@ -77,6 +77,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [The Software Engineer's Guidebook](/software-engineering/sources/software-engineers-guidebook.md) — source · draft · Gergely Orosz; full career arc from new dev to staff; six-part reference book
 - [Go Course with Bonus Projects (boot.dev / freeCodeCamp)](/software-engineering/sources/go-course-boot-dev.md) — source · draft · Lane Wagner; 100+ lessons + 7 projects; Textio running example; RSS-aggregator capstone (chi/sqlc/Goose, API-key auth)
 - [Go Programming Full Course (Tech With Tim)](/software-engineering/sources/go-full-course-tech-with-tim.md) — source · draft · 21-lesson syntax-first course; slice internals, value/pointer receivers, goroutines + channels
+- [Matters Computational (Arndt)](/software-engineering/sources/matters-computational.md) — source · complete · 978pp reference: bit wizardry, permutations, FFT/NTT/Walsh/Haar/Hartley transforms, combinatorial generation, fast arithmetic; full C++ FXT library
 - [Algorithms and Complexity (Wilf, 1994)](/software-engineering/sources/algorithms-and-complexity-wilf.md) — source · draft · Herbert Wilf; 139p; recursion/FFT, network flow (Ford-Fulkerson), number theory, NP-completeness; free educational use
 - [Algorithms (Erickson, 2019)](/software-engineering/sources/algorithms-erickson.md) — source · draft �� Jeff Erickson (UIUC); 472p; recursion → divide-and-conquer → DP → greedy → graph algorithms → MST → shortest paths → network flow → NP-hardness; CC BY 4.0
 - [Data Structures and Algorithm Analysis in C++ (Shaffer, Ed. 3.2)](/software-engineering/sources/algorithms-shaffer-c.md) — source · draft · Clifford Shaffer (Virginia Tech); 615p; ADT philosophy, data structures, sorting, hashing, B-trees, graphs, NP-completeness; free PDF
@@ -144,9 +145,10 @@ Domain covering software engineering practice from foundational CS through deplo
 - [AI-Assisted Development](/software-engineering/ai-assisted-development.md)
 
 <details>
-<summary>Source summaries (68)</summary>
+<summary>Source summaries (70)</summary>
 
 - ["2024-05-25-15-54-25 - move-base-up by josephmachado · Pull Request #17 · josephmachado/simple_dbt_project"](/software-engineering/sources/2024-05-25-15-54-25-move-base-up-by-josephmachado-pull-reque-ee.md)
+- ["A Guide to Multi-Tenancy: Benefits and Challenges"](/software-engineering/sources/a-guide-to-multi-tenancy-benefits-and-challenges-e55e9184.md)
 - ["Disasters I've seen in a microservices world, part II"](/software-engineering/sources/disasters-i-ve-seen-in-a-microservices-world-part-ii-doc.md)
 - ["Guitar - 3 Easy Jazz Standards (Stormy Monday, Blue Bossa, Blue in Green)"](/software-engineering/sources/guitar-3-easy-jazz-standards-stormy-monday-blue-bossa-blue-i-doc.md)
 - [30 Vim commands you NEED TO KNOW (in just 10 minutes)](/software-engineering/sources/30-vim-commands-you-need-to-know-in-just-10-minutes-RSlrxE21l_k.md)
@@ -200,6 +202,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [macOS - Aerospace Tiling Window Manager with Leader Key](/software-engineering/sources/macos-aerospace-tiling-window-manager-with-leader-key-e.md)
 - [macOS - Simple Window Management with Raycast](/software-engineering/sources/macos-simple-window-management-with-raycast-aca.md)
 - [Matt Pocock’s Agentic Engineering Workflow (just copy him)](/software-engineering/sources/matt-pocock-s-agentic-engineering-workflow-just-copy-him-nQwJVHCtDDY.md)
+- [Matters Computational: Ideas, Algorithms, Source Code (Joerg Arndt)](/software-engineering/sources/matters-computational.md)
 - [Obsidian Markdown Made Ridiculously Simple](/software-engineering/sources/obsidian-markdown-made-ridiculously-simple-e.md)
 - [ostep operating systems three easy pieces](/software-engineering/sources/ostep-operating-systems-three-easy-pieces.md)
 - [Purely Functional Data Structures (Okasaki, CMU 1996)](/software-engineering/sources/purely-functional-data-structures-okasaki.md)

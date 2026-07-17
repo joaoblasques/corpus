@@ -48,6 +48,9 @@ sources:
   - path: raw/_inbox/pdf-learning-algorithm-part-09.md
     channel: pdf
     ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-matters-computational-ideas-algorithms-source-code-part-01.md
+    channel: pdf
+    ingested_at: 2026-07-17
 aliases:
   - algorithms
   - recursion
@@ -74,6 +77,11 @@ aliases:
   - Ford-Fulkerson
   - FFT
   - discrete Fourier transform
+  - bit manipulation
+  - bit tricks
+  - popcount
+  - De Bruijn sequence
+  - bit wizardry
   - Strassen matrix multiplication
   - external sorting
   - replacement selection
@@ -94,7 +102,7 @@ tags:
   - corpus/software-engineering
   - concept
 created: 2026-06-15
-updated: 2026-07-14
+updated: 2026-07-17
 ---
 
 # Algorithms (Strategies, Not Tricks)
@@ -231,11 +239,33 @@ The **Knuth-Morris-Pratt (KMP) algorithm** avoids redundant comparisons in naïv
 
 Key invariant: if a match of length L is found ending at Text[i], and S[L-1] = k, then the last k characters before Text[i+1] already match the first k characters of the pattern — so the next comparison starts at Pattern[k] [^src_learning].
 
+## Bit Manipulation (Low-Level Algorithms)
+
+Bit manipulation algorithms operate directly on the binary representation of integers. Key patterns from Arndt's *Matters Computational* [^src_arndt]:
+
+| Operation | Idiom |
+|---|---|
+| Isolate lowest set bit | `x & -x` |
+| Clear lowest set bit | `x & (x-1)` |
+| Is power of 2? | `!(x & (x-1))` |
+| Round up to next power of 2 | `next_pow_of_2(x)` |
+| Bit count (popcount) | Parallel mask reduction using `0x5555...` etc.; or `__builtin_popcountl` |
+| Index of single set bit | De Bruijn sequence: multiply by de Bruijn constant, shift, table lookup |
+
+**Popcount** (population count): counts set bits in a word. The parallel method uses O(log₂ WORD_SIZE) AND/ADD operations by summing in pairs then fours etc. Equivalent to `__builtin_popcountl` in GCC. Table-driven alternatives are fast in benchmarks but cause cache misses with large inputs [^src_arndt].
+
+**De Bruijn sequence trick**: a binary De Bruijn sequence of length 2ⁿ contains every n-bit substring exactly once. Multiplying a single-set-bit word by the De Bruijn constant and shifting extracts a unique index into a lookup table — gives bit index in O(1) branchless operations [^src_arndt].
+
+**Branchless programming**: modern CPUs have long pipelines; mispredicted branches cause ~10–20 cycle penalties. Common technique: replace `if (x<0) x=0` with arithmetic: `x & ~(x >> (BITS_PER_LONG-1))`. GCC sometimes generates better code for the "obvious" version (conditional move), so always benchmark [^src_arndt].
+
+For the full treatment including FFT, NTT, combinatorial generation, and number theory: [/software-engineering/sources/matters-computational.md](/software-engineering/sources/matters-computational.md).
+
 ## See also
 
 - [Data Structures and Big O Notation](/software-engineering/data-structures.md) — the complexity classes (O(1)/O(log n)/O(n)/O(n²)) these strategies trade in, and the structures (stacks, trees, hashmaps) the algorithms operate on.
 - [Complexity Theory](/software-engineering/complexity-theory.md) — P vs NP, NP-complete problems, reductions.
 - [Software Design Principles](/software-engineering/software-design-principles.md) — simplicity as a design value mirrors "don't do more work than needed."
+- [Matters Computational](/software-engineering/sources/matters-computational.md) — exhaustive C++ reference on bit wizardry, FFT, NTT, combinatorial generation (Arndt).
 
 [^src1]: [Famous Computer Science Algorithms (recursion, search, DP)](../../raw/youtube/youtube-fkcfaapypuq.md) (Tech With Tim; fetched via the source email)
 [^src2]: [you're learning algorithms the wrong way](../../raw/email/email-2026-06-08-youre-learning-algorithms-the-wrong-way.md) (Tech With Tim newsletter)
@@ -245,3 +275,4 @@ Key invariant: if a match of length L is found ending at Text[i], and S[L-1] = k
 [^src3]: [Algorithms, Erickson — Part 21 (Network Flow applications)](../../raw/pdf/pdf-algorithms-part-21.md)
 [^src_shaffer]: [Data Structures and Algorithm Analysis in C++ (Shaffer) — Part 1 (Preface, Ch 1, sorting/external sorting)](../../raw/pdf/pdf-data-structures-and-algorithm-analysis-in-c-part-01.md)
 [^src_learning]: [Learning Algorithm PDF — Parts 1-9 (greedy scheduling, BFS/Dijkstra, Floyd-Warshall, DP, quicksort, KMP)](../../raw/pdf/pdf-learning-algorithm-part-01.md)
+[^src_arndt]: [Matters Computational — Parts 1-27 (bit wizardry, FFT, NTT, combinatorial generation)](../../raw/pdf/pdf-matters-computational-ideas-algorithms-source-code-part-01.md)

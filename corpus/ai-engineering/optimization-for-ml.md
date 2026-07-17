@@ -12,6 +12,9 @@ sources:
   - path: raw/_inbox/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-26.md
     channel: pdf
     ingested_at: 2026-07-10
+  - path: raw/_inbox/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-17.md
+    channel: pdf
+    ingested_at: 2026-07-17
 aliases:
   - gradient descent
   - convex optimization
@@ -22,7 +25,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-07-08
-updated: 2026-07-10
+updated: 2026-07-17
 ---
 
 # Optimization for Machine Learning
@@ -224,12 +227,24 @@ Default hyperparameters: beta_1=0.9, beta_2=0.999, eps=1e-8. Adam is the de fact
 
 **Learning rate scheduling**: decay the learning rate over training. Common schedules: step decay (halve every N epochs), cosine annealing, warmup + decay (ramp LR from 0 over first K steps before decaying). Warmup is critical for Transformer training [^src3].
 
+## Proximal Gradient Methods for Composite Objectives
+
+When the loss decomposes as F(x) = f(x) + g(x) with f smooth (e.g. data fidelity) and g nonsmooth (e.g. ℓ₁ or nuclear norm regularizer), subgradient methods converge too slowly. **Proximal gradient** methods handle g via its proximal operator instead of a subgradient step, achieving O(1/k) convergence — matching gradient descent on smooth functions [^src4].
+
+Key algorithms:
+- **ISTA** (Iterative Soft-Thresholding): PG applied to Lasso; prox = element-wise soft-thresholding
+- **FISTA** (Fast ISTA + Nesterov momentum): achieves optimal O(1/k²) convergence
+- **ADMM** (Alternating Direction Method of Multipliers): handles separable structure; basis for PCP (Robust PCA) solver
+
+Proximal gradient bridges the gap between smooth first-order methods (gradient descent, Adam) and structured signal recovery problems — see [/ai-engineering/proximal-gradient-methods.md](/ai-engineering/proximal-gradient-methods.md) for the full treatment.
+
 ## Related Corpus Pages
 
 - [/ai-engineering/linear-algebra-for-ml.md](/ai-engineering/linear-algebra-for-ml.md) — vector calculus prerequisites
 - [/ai-engineering/probability-and-statistics-for-ml.md](/ai-engineering/probability-and-statistics-for-ml.md) — MLE/MAP objectives to optimize
 - [/ai-engineering/support-vector-machines.md](/ai-engineering/support-vector-machines.md) — SVM as a QP with dual formulation
 - [/ai-engineering/gaussian-mixture-models.md](/ai-engineering/gaussian-mixture-models.md) — EM algorithm for GMM optimization
+- [/ai-engineering/proximal-gradient-methods.md](/ai-engineering/proximal-gradient-methods.md) — ISTA, FISTA, ADMM for composite/structured objectives
 - [/ai-engineering/sources/mathematics-for-machine-learning.md](/ai-engineering/sources/mathematics-for-machine-learning.md) — full book summary
 
 ---
@@ -237,3 +252,4 @@ Default hyperparameters: beta_1=0.9, beta_2=0.999, eps=1e-8. Adam is the de fact
 [^src1]: [Mathematics for Machine Learning, Part 12](../../raw/pdf/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-12.md)
 [^src2]: [Mathematics for Machine Learning, Part 8](../../raw/pdf/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-08.md)
 [^src3]: [D2L Part 26 — Adagrad, RMSProp, Adam (Ch 12 Optimization Algorithms)](../../raw/pdf/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-26.md)
+[^src4]: [HDLM Part 17 — Ch. 8 proximal gradient, ISTA, FISTA, ADMM for composite objectives](../../raw/pdf/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-17.md)

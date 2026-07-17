@@ -2,6 +2,24 @@
 
 > OKF v0.1 change log. Newest first, grouped by date.
 
+## 2026-07-17
+* **Ingest**: High-Dimensional Data Analysis with Low-Dimensional Models (Wright & Ma) — parts 17–35 (19 PDF parts, Ch. 8–16) · channel=pdf · domain=ai-engineering · pages=[corpus/ai-engineering/proximal-gradient-methods.md (created), corpus/ai-engineering/neural-tangent-kernel.md (created), corpus/ai-engineering/sources/wright-ma-high-dimensional-data-analysis.md (updated), corpus/ai-engineering/optimization-for-ml.md (updated), corpus/ai-engineering/low-rank-matrix-recovery.md (updated)]
+* **Ingest**: Internet Advertising Survey — parts 01–03 (3 PDF parts) · channel=pdf · domain=ai-engineering · pages=[corpus/ai-engineering/sources/internet-advertising-survey.md (created)]
+* **Ingest**: Mastering Generative AI and Prompt Engineering (ebook) — 1 PDF · channel=pdf · domain=ai-engineering · pages=[corpus/ai-engineering/sources/mastering-generative-ai-prompt-engineering.md (created)]
+* **Ingest**: Matters Computational (Arndt) — parts 01–27 (27 PDF parts) · channel=pdf · domain=software-engineering · pages=[corpus/software-engineering/sources/matters-computational.md (created), corpus/software-engineering/algorithms.md (updated)]
+* **Notes**: 50 sources ingested · 0 deferred · 6 pages created · 4 pages updated · run by /ingest-auto skill (interactive mode, resuming from compacted context)
+
+* **Collectors**: gmail=6, blog_promote=0, obsidian=25, book_discover=15, blog_discover=6, book_fetch=3, pdf=3, books=0, arxiv=21, youtube=0, github_discover=0, github_promote=0, github=0, x=0, links_refetch=0
+* **Ingest**: 50 ingested · 0 deferred · status=ok
+* **YoutubeQuick**: 0 intake · 0 rescued · 0 skipped · status=ok
+* **DocsQuick**: 29 intake · 18 thin · 3 llm_fail · status=ok
+* **YoutubeReap**: 0 removed · status=ok
+* **Gardener**: 4 stubs deepened · status=ok
+* **Heal**: 20 citations repointed · 0 unfixable · 3 hubs reindexed · 25 cross-domain links · status=ok
+* **Depth**: 382 knowledge · 1174 sources · ratio 1:3.1
+* **GapResolver**: 0 gap dispatched · 0 sources queued · status=ok
+* **Lint**: 1 broken wikilinks · 0 broken citations · 0 orphans · 1123 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+* **OKF**: 0 violations
 ## 2026-07-16
 * **Ingest**: Data Mining: Concepts and Techniques (Han, Kamber, Pei, 3rd ed.) — parts 06–39 (34 PDF parts, Ch. 3–13) · channel=pdf · domain=data-engineering · pages=[corpus/data-engineering/data-mining.md (updated), corpus/data-engineering/olap.md (created), corpus/data-engineering/frequent-pattern-mining.md (created), corpus/data-engineering/sources/data-mining-han-kamber-pei.md (updated), corpus/data-engineering/sources/data-mining-han-kamber-pei-ch8-13.md (created)]
 * **Ingest**: High-Dimensional Data Analysis with Low-Dimensional Models (Wright & Ma) — parts 01–16 (16 PDF parts) · channel=pdf · domain=ai-engineering · pages=[corpus/ai-engineering/compressed-sensing.md (updated), corpus/ai-engineering/low-rank-matrix-recovery.md (created), corpus/ai-engineering/sources/wright-ma-high-dimensional-data-analysis.md (created)]
