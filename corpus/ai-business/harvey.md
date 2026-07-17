@@ -1,7 +1,7 @@
 ---
 type: entity
 domain: ai-business
-status: stub
+status: draft
 sources:
   - path: raw/web/web-harvey-professional-class-ai.md
     channel: web
@@ -14,7 +14,7 @@ tags:
   - corpus/ai-business
   - entity
 created: 2026-06-25
-updated: 2026-06-25
+updated: 2026-07-17
 ---
 
 # Harvey
@@ -23,10 +23,20 @@ updated: 2026-06-25
 
 ## What Harvey does
 
-- Targets "top law firms and in-house legal teams."
-- Core use case: "advance your expertise on a secure platform that lets you focus on high-value work" [^src1].
-- Enterprise security: SAML SSO, audit logs, IP allow-listing, data lifecycle management [^src1].
-- Reported average: 20+ hours saved per month per user [^src1].
+- Targets "top law firms and in-house legal teams" [^src1].
+- Core pitch: "advance your expertise on a secure platform that lets you focus on high-value work" [^src1].
+- Enterprise security controls: SAML SSO, audit logs, IP allow-listing, data lifecycle management [^src1].
+- Self-reported outcome: 20+ hours saved per month per user [^src1].
+
+## Adoption footprint
+
+Named enterprise customers include Syngenta, Repsol, Cuatrecasas, The Adecco Group, CMS, and Burges Salmon [^src1]. The source frames each as a partnership case study emphasizing time savings and team-level impact rather than individual productivity.
+
+Scale metrics as of collection date [^src1]:
+- 142,000+ professionals
+- 1,500+ law firms and in-house legal teams
+- 60 countries
+- 65+ AmLaw 100 firms
 
 ## Why it matters for this domain
 
