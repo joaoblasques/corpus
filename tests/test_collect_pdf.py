@@ -35,6 +35,43 @@ def test_extract_does_not_pollute_stdout(tmp_path, capfd):
     assert "Tesseract" not in out and "Document parser" not in out
 
 
+def test_extract_disables_ocr(tmp_path, monkeypatch):
+    """pymupdf4llm 1.27 OCRs every image page by default — one image-heavy PDF then wedges
+    the whole batch for tens of minutes. extract() must pass use_ocr=False to skip it."""
+    import pymupdf4llm
+    captured = {}
+
+    def fake_to_markdown(path, **kw):
+        captured.update(kw)
+        return "# Title\n" + ("body text " * 20)
+
+    monkeypatch.setattr(pymupdf4llm, "to_markdown", fake_to_markdown)
+    pdf = tmp_path / "doc.pdf"
+    _make_pdf(pdf, "hello world " * 40)
+    r = cp.extract(str(pdf))
+    assert captured.get("use_ocr") is False
+    assert "body text" in r["markdown"]
+
+
+def test_extract_falls_back_when_use_ocr_unsupported(tmp_path, monkeypatch):
+    """Older pymupdf4llm has no use_ocr kwarg (and no OCR-by-default) — extract must still work."""
+    import pymupdf4llm
+    calls = []
+
+    def fake_to_markdown(path, **kw):
+        calls.append(kw)
+        if "use_ocr" in kw:                       # simulate the old signature rejecting it
+            raise TypeError("unexpected keyword argument 'use_ocr'")
+        return "# Title\n" + ("legacy body " * 20)
+
+    monkeypatch.setattr(pymupdf4llm, "to_markdown", fake_to_markdown)
+    pdf = tmp_path / "doc.pdf"
+    _make_pdf(pdf, "hello " * 40)
+    r = cp.extract(str(pdf))
+    assert len(calls) == 2                         # tried with kwarg, then fell back without
+    assert "legacy body" in r["markdown"]
+
+
 def test_extract_title_falls_back_to_stem(tmp_path):
     pdf = tmp_path / "Untitled Paper.pdf"
     _make_pdf(pdf, "some text " * 30)

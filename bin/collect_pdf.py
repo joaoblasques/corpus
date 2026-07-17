@@ -167,8 +167,15 @@ def extract(abs_path: str) -> dict:
     """Extract a PDF to markdown + metadata. Seam over pymupdf4llm/fitz (stubbable)."""
     import pymupdf4llm
     import fitz
+    # pymupdf4llm ≥1.27 routes to a layout parser that OCRs every image-based page by
+    # default (Tesseract). On digital PDFs that adds nothing, and one image-heavy slide
+    # deck can wedge the whole batch for tens of minutes — so disable OCR. Older versions
+    # lack the kwarg (and don't OCR by default): fall back to the plain call.
     with _suppress_fd_stdout():
-        markdown = pymupdf4llm.to_markdown(abs_path) or ""
+        try:
+            markdown = pymupdf4llm.to_markdown(abs_path, use_ocr=False) or ""
+        except TypeError:
+            markdown = pymupdf4llm.to_markdown(abs_path) or ""
     doc = fitz.open(abs_path)
     meta = doc.metadata or {}
     pages = doc.page_count
