@@ -333,6 +333,31 @@ def run_collectors(
     except Exception as exc:  # noqa: BLE001
         results["pdf"] = {"status": "failed", "collected": 0, "error": str(exc)}
 
+    # --- Images (diagrams/screenshots in the Drive inbox → Claude-vision transcription) ---
+    # Each image is one headless vision call (~60s); --max caps the per-run count so the
+    # subprocess stays well inside COLLECTOR_TIMEOUT.
+    try:
+        proc = _run(
+            [sys.executable, str(BIN / "collect_image.py"), "collect", "--max", "6"],
+            capture_output=True,
+            text=True,
+            timeout=COLLECTOR_TIMEOUT,
+        )
+        if proc.returncode != 0:
+            results["image"] = {
+                "status": "failed",
+                "collected": 0,
+                "error": proc.stderr.strip() or f"exit {proc.returncode}",
+            }
+        else:
+            try:
+                collected = json.loads(proc.stdout).get("written", 0)
+            except (json.JSONDecodeError, AttributeError):
+                collected = 0
+            results["image"] = {"status": "ok", "collected": collected}
+    except Exception as exc:  # noqa: BLE001
+        results["image"] = {"status": "failed", "collected": 0, "error": str(exc)}
+
     # --- Books (EPUB → chapter stubs; the highest-signal channel) ---
     try:
         proc = _run(
@@ -545,6 +570,7 @@ _CHANNEL_DIR: dict[str, str] = {
     "matter": "matter",
     "notes": "notes",
     "pdf": "pdf",
+    "image": "image",
     "github": "github",
     "x": "x",
 }
@@ -693,6 +719,24 @@ def run_pdf_reap(*, _subprocess_run=None) -> dict:
     _run = _subprocess_run if _subprocess_run is not None else subprocess.run
     try:
         proc = _run([sys.executable, str(BIN / "pdf_client.py"), "file"],
+                    capture_output=True, text=True)
+        if proc.returncode != 0:
+            return {"status": "failed", "error": proc.stderr.strip() or f"exit {proc.returncode}"}
+        try:
+            return json.loads(proc.stdout)
+        except (json.JSONDecodeError, AttributeError):
+            return {"status": "ok"}
+    except Exception as exc:  # noqa: BLE001
+        return {"status": "failed", "error": str(exc)}
+
+
+def run_image_reap(*, _subprocess_run=None) -> dict:
+    """Post-ingest: invoke `collect_image.py file` to move images now corpus_ingested
+    out of the Drive watch dir into its `_processed/` subfolder (gated on corpus_ingested
+    inside the subcommand). Mirrors run_pdf_reap. Failure recorded, never raised."""
+    _run = _subprocess_run if _subprocess_run is not None else subprocess.run
+    try:
+        proc = _run([sys.executable, str(BIN / "collect_image.py"), "file"],
                     capture_output=True, text=True)
         if proc.returncode != 0:
             return {"status": "failed", "error": proc.stderr.strip() or f"exit {proc.returncode}"}
@@ -1691,6 +1735,13 @@ def main(argv=None) -> int:
                     tallies["pdf_reap"] = run_pdf_reap()
                 except Exception as exc:  # noqa: BLE001
                     tallies["pdf_reap"] = {"status": "failed", "error": str(exc)}
+
+                # Post-ingest: move now-ingested images out of the Drive watch dir into
+                # _processed/ (gated on corpus_ingested). Mirrors pdf_reap. Never aborts.
+                try:
+                    tallies["image_reap"] = run_image_reap()
+                except Exception as exc:  # noqa: BLE001
+                    tallies["image_reap"] = {"status": "failed", "error": str(exc)}
 
                 # Post-ingest: un-star GitHub repos now corpus_ingested, so the user's
                 # stars stay a clean 'not yet processed' list (gated on corpus_ingested
