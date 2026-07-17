@@ -361,3 +361,19 @@ def test_review_queues_are_excluded_from_collection():
     assert co.is_included("00_Inbox/Clippings/Papers to review.md") is False
     # URL-list staging inputs remain collected (they're scraped, not review queues)
     assert co.is_included("00_Inbox/Clippings/blogs to scrape.md") is True
+
+
+def test_reapable_skips_review_queues_even_with_stale_ingested_raw_copy(tmp_path):
+    """Regression: a stale raw copy of a review queue (stamped corpus_ingested before the collection
+    exclude landed) must NOT cause the reaper to delete the vault queue. Normal notes still reap."""
+    import collect_obsidian as co
+    raw = tmp_path / "notes"; raw.mkdir()
+    (raw / "stale-queue.md").write_text(
+        "---\nvault_origin: 00_Inbox/Clippings/GitHubs to review.md\ncorpus_ingested: true\n---\nx",
+        encoding="utf-8")
+    (raw / "normal.md").write_text(
+        "---\nvault_origin: 03_Resources/Books/deep-learning.md\ncorpus_ingested: true\n---\nx",
+        encoding="utf-8")
+    notes = co.reapable(dedup_dirs=[raw])["vault_notes"]
+    assert "00_Inbox/Clippings/GitHubs to review.md" not in notes   # review queue protected
+    assert "03_Resources/Books/deep-learning.md" in notes           # normal ingested note still reaped

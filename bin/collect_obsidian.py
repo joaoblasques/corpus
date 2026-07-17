@@ -336,8 +336,8 @@ def reapable(dedup_dirs=None) -> dict:
         if "corpus_ingested: true" not in t:
             continue
         vo = fm_field(t, "vault_origin")
-        if vo:
-            notes.append(vo)
+        if vo and is_included(vo):   # never reap an excluded path (review queues) even if a stale
+            notes.append(vo)         # raw copy is still stamped corpus_ingested (that's what ate GitHubs to review)
         vl, su = fm_field(t, "via_vault_list"), fm_field(t, "source_url")
         if vl and su:
             url_strikes.append((vl, su))
