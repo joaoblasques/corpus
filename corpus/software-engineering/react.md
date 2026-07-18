@@ -1,7 +1,7 @@
 ---
 type: entity
 domain: software-engineering
-status: stub
+status: draft
 sources:
   - path: raw/github/github-frontendmasters-react-enlightenment.md
     channel: github
@@ -19,7 +19,7 @@ tags:
   - corpus/software-engineering
   - entity
 created: 2026-06-25
-updated: 2026-06-25
+updated: 2026-07-18
 ---
 
 # React
@@ -30,15 +30,15 @@ updated: 2026-06-25
 
 React builds UIs out of **React nodes** — the fundamental unit. A node is created via `React.createElement()` or, more commonly, JSX syntax [^src1].
 
-The lifecycle from the React Enlightenment curriculum [^src1]:
+The React Enlightenment curriculum covers these topics in order [^src1]:
 
-1. **React Nodes** — what a node is, how to create one, render to DOM
-2. **JSX** — JavaScript Syntax Extension: syntactic sugar over `React.createElement()` calls; compiled by Babel
-3. **React Components** — functions (or classes) that return React nodes; can accept props
-4. **Component Lifecycle** (class components: mounting → updating → unmounting)
-5. **State and events** — `this.setState()` / `useState()` triggers re-renders
-6. **Props** — read-only data passed from parent to child; `defaultProps` for fallbacks
-7. **Inline styles** — CSS-in-JS via style objects (camelCase keys)
+1. **What Is React** — library overview and semantics/terminology
+2. **React & Babel Setup** — `react.js` + `react-dom.js`, JSX via Babel, ES6/ES*, JSFiddle
+3. **React Nodes** — what a node is, creating nodes, rendering to DOM, attributes/props, inline CSS, built-in element factories, node events
+4. **JSX** — JavaScript Syntax Extension: expressions, comments, inline CSS, attributes/props, events
+5. **Basic React Components** — what a component is, creating components, single root node constraint, component instances, events, composition, lifecycle, children, `ref` attribute, re-rendering
+6. **React Component Props** — sending/getting props, default props, non-string props, prop validation
+7. **React Component State** — what state is, working with state, state vs. props, stateless function components
 
 ## JSX essentials
 
@@ -48,10 +48,45 @@ JSX is not HTML — it compiles to `React.createElement(type, props, ...children
 - JavaScript expressions embedded in `{}`
 - Self-closing tags required: `<img />`, not `<img>`
 - Event handlers use camelCase: `onClick`, `onChange`
+- JSX supports inline CSS, JS comments, and attribute/prop definitions as first-class features
+
+## Components
+
+React components are the building blocks of a UI — each returns React nodes and can be composed into larger trees [^src1]. Key component concepts from the curriculum:
+
+- **Single root constraint**: a component must return one starting node/component [^src1]
+- **Component instances**: how to refer to an instance after creation [^src1]
+- **Events on components**: defining and handling DOM events at the component level [^src1]
+- **Composition**: combining components into parent/child trees [^src1]
+- **Lifecycle** (class components): mounting → updating → unmounting phases [^src1]
+- **Children**: accessing child components/nodes via `props.children` [^src1]
+- **`ref` attribute**: direct access to underlying DOM node or component instance [^src1]
+- **Re-rendering**: how and when React triggers a re-render of a component [^src1]
+
+## Props
+
+Props are read-only data passed from parent to child [^src1]. The curriculum covers:
+
+- **Sending props**: passing values into a component at instantiation [^src1]
+- **Getting props**: reading props inside a component [^src1]
+- **Default props**: fallback values when a prop is not supplied (`defaultProps`) [^src1]
+- **Non-string props**: props can be any JS value (numbers, booleans, objects, functions) [^src1]
+- **Prop validation**: runtime type-checking via `propTypes` to catch incorrect usage early [^src1]
+
+## State
+
+State is mutable data owned by a component; changing it triggers a re-render [^src1]. Key distinctions:
+
+- **State vs. props**: props flow down from parent (read-only); state is internal and mutable [^src1]
+- **Stateless function components**: components with no state — pure functions of props; simpler and easier to test [^src1]
+
+## Setup
+
+React requires `react.js` and `react-dom.js`; JSX is compiled at runtime (or build time) via Babel [^src1]. The curriculum also covers ES6/ES* usage with React and prototyping via JSFiddle [^src1]. An advanced setup chapter exists separately [^src1].
 
 ## React Enlightenment reference
 
-Written by Cody Lindley, sponsored by Frontend Masters [^src1]. Terse cookbook format (like jQuery Enlightenment, JavaScript Enlightenment, DOM Enlightenment series). Available at reactenlightenment.com. GitHub repo: 427 stars, HTML-format docs organized as a gitbook. CC BY-NC-ND 3.0 license [^src1].
+Written by Cody Lindley, sponsored by Frontend Masters [^src1]. Terse cookbook format (like jQuery Enlightenment, JavaScript Enlightenment, DOM Enlightenment series). Available at reactenlightenment.com; downloadable as PDF, ePub, or MOBI. GitHub repo: 427 stars, HTML-format docs organized as a gitbook. CC BY-NC-ND 3.0 license [^src1].
 
 ## See also
 
