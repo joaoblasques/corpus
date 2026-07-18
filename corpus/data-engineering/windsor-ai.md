@@ -1,7 +1,7 @@
 ---
 type: entity
 domain: data-engineering
-status: stub
+status: draft
 sources:
   - path: raw/web/web-windsor-ai-no-code-data-connectors-etl-elt-software.md
     channel: web
@@ -15,7 +15,7 @@ tags:
   - corpus/data-engineering
   - entity
 created: 2026-06-25
-updated: 2026-06-25
+updated: 2026-07-18
 ---
 
 # Windsor.ai
