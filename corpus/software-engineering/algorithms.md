@@ -51,6 +51,75 @@ sources:
   - path: raw/_inbox/pdf-matters-computational-ideas-algorithms-source-code-part-01.md
     channel: pdf
     ingested_at: 2026-07-17
+  - path: raw/_inbox/pdf-matters-computational-ideas-algorithms-source-code-part-28.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-matters-computational-ideas-algorithms-source-code-part-29.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-matters-computational-ideas-algorithms-source-code-part-30.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-matters-computational-ideas-algorithms-source-code-part-31.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-matters-computational-ideas-algorithms-source-code-part-32.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-matters-computational-ideas-algorithms-source-code-part-33.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-matters-computational-ideas-algorithms-source-code-part-34.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-matters-computational-ideas-algorithms-source-code-part-35.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-matters-computational-ideas-algorithms-source-code-part-36.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-matters-computational-ideas-algorithms-source-code-part-37.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-matters-computational-ideas-algorithms-source-code-part-38.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-matters-computational-ideas-algorithms-source-code-part-39.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-matters-computational-ideas-algorithms-source-code-part-40.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-matters-computational-ideas-algorithms-source-code-part-41.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-matters-computational-ideas-algorithms-source-code-part-42.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-matters-computational-ideas-algorithms-source-code-part-43.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-matters-computational-ideas-algorithms-source-code-part-44.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-matters-computational-ideas-algorithms-source-code-part-45.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-matters-computational-ideas-algorithms-source-code-part-46.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-matters-computational-ideas-algorithms-source-code-part-47.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-matters-computational-ideas-algorithms-source-code-part-48.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-matters-computational-ideas-algorithms-source-code-part-49.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-matters-computational-ideas-algorithms-source-code-part-50.md
+    channel: pdf
+    ingested_at: 2026-07-18
 aliases:
   - algorithms
   - recursion
@@ -98,11 +167,20 @@ aliases:
   - string matching
   - Hoare partition
   - Lomuto partition
+  - CORDIC
+  - number-theoretic transform
+  - NTT
+  - Galois field
+  - LFSR
+  - Chinese Remainder Theorem
+  - CRT
+  - Hartley transform
+  - FHT
 tags:
   - corpus/software-engineering
   - concept
 created: 2026-06-15
-updated: 2026-07-17
+updated: 2026-07-18
 ---
 
 # Algorithms (Strategies, Not Tricks)
@@ -260,6 +338,18 @@ Bit manipulation algorithms operate directly on the binary representation of int
 
 For the full treatment including FFT, NTT, combinatorial generation, and number theory: [/software-engineering/sources/matters-computational.md](/software-engineering/sources/matters-computational.md).
 
+## Signal Processing and Transform Algorithms
+
+The second half of "Matters Computational" (parts 28–50) covers specialized numerical and signal-processing algorithms. These are covered in detail at [Signal Processing Algorithms](/software-engineering/signal-processing-algorithms.md). Key topics:
+
+- **Fast Fourier Transform (FFT)**: radix-2 DIT/DIF, split-radix, mixed-radix variants. All achieve O(n log n) vs. naive O(n²) DFT [^srcMatters28].
+- **Fast Hartley Transform (FHT)**: real-valued analog of FFT; no complex arithmetic required for real inputs [^srcMatters30].
+- **Walsh-Hadamard transforms**: Walsh-Sequency, Walsh-Paley, Haar. Used in signal processing, error-correcting codes, and combinatorics [^srcMatters28].
+- **CORDIC algorithms**: shift-and-add computation of sin/cos/exp/log without division or multiplication — only shifts and adds plus a precomputed table [^srcMatters35].
+- **Number-Theoretic Transforms (NTT)**: FFT over Z/pZ instead of complex numbers; exact integer arithmetic, used in cryptography and arbitrary-precision multiplication [^srcMatters40].
+- **Galois field arithmetic (GF(2^n))**: LFSR sequences, irreducible polynomials, applications in error-correcting codes and cryptography [^srcMatters45].
+- **Chinese Remainder Theorem (CRT)**: modular recombination from residues to full values; parallelism in modular arithmetic [^srcMatters40].
+
 ## See also
 
 - [Data Structures and Big O Notation](/software-engineering/data-structures.md) — the complexity classes (O(1)/O(log n)/O(n)/O(n²)) these strategies trade in, and the structures (stacks, trees, hashmaps) the algorithms operate on.
@@ -276,3 +366,8 @@ For the full treatment including FFT, NTT, combinatorial generation, and number 
 [^src_shaffer]: [Data Structures and Algorithm Analysis in C++ (Shaffer) — Part 1 (Preface, Ch 1, sorting/external sorting)](../../raw/pdf/pdf-data-structures-and-algorithm-analysis-in-c-part-01.md)
 [^src_learning]: [Learning Algorithm PDF — Parts 1-9 (greedy scheduling, BFS/Dijkstra, Floyd-Warshall, DP, quicksort, KMP)](../../raw/pdf/pdf-learning-algorithm-part-01.md)
 [^src_arndt]: [Matters Computational — Parts 1-27 (bit wizardry, FFT, NTT, combinatorial generation)](../../raw/pdf/pdf-matters-computational-ideas-algorithms-source-code-part-01.md)
+[^srcMatters28]: [Matters Computational — Part 28](../../raw/pdf/pdf-matters-computational-ideas-algorithms-source-code-part-28.md)
+[^srcMatters30]: [Matters Computational — Part 30](../../raw/pdf/pdf-matters-computational-ideas-algorithms-source-code-part-30.md)
+[^srcMatters35]: [Matters Computational — Part 35](../../raw/pdf/pdf-matters-computational-ideas-algorithms-source-code-part-35.md)
+[^srcMatters40]: [Matters Computational — Part 40](../../raw/pdf/pdf-matters-computational-ideas-algorithms-source-code-part-40.md)
+[^srcMatters45]: [Matters Computational — Part 45](../../raw/pdf/pdf-matters-computational-ideas-algorithms-source-code-part-45.md)

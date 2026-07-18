@@ -120,16 +120,101 @@ sources:
   - path: raw/_inbox/pdf-data-mining-concepts-and-techniques-part-39.md
     channel: pdf
     ingested_at: 2026-07-16
+  - path: raw/_inbox/pdf-mining-of-massive-datasets-part-01.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-mining-of-massive-datasets-part-02.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-mining-of-massive-datasets-part-03.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-mining-of-massive-datasets-part-04.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-mining-of-massive-datasets-part-05.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-mining-of-massive-datasets-part-06.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-mining-of-massive-datasets-part-07.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-mining-of-massive-datasets-part-08.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-mining-of-massive-datasets-part-09.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-mining-of-massive-datasets-part-10.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-mining-of-massive-datasets-part-11.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-mining-of-massive-datasets-part-12.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-mining-of-massive-datasets-part-13.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-mining-of-massive-datasets-part-14.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-mining-of-massive-datasets-part-15.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-mining-of-massive-datasets-part-16.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-mining-of-massive-datasets-part-17.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-mining-of-massive-datasets-part-18.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-mining-of-massive-datasets-part-19.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-mining-of-massive-datasets-part-20.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-mining-of-massive-datasets-part-21.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-mining-of-massive-datasets-part-22.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-mining-of-massive-datasets-part-23.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-mining-of-massive-datasets-part-24.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-mining-of-massive-datasets-part-25.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-mining-of-massive-datasets-part-26.md
+    channel: pdf
+    ingested_at: 2026-07-18
+  - path: raw/_inbox/pdf-mining-of-massive-datasets-part-27.md
+    channel: pdf
+    ingested_at: 2026-07-18
 aliases:
   - KDD
   - knowledge discovery from data
   - knowledge discovery in databases
   - data mining pipeline
+  - Mining of Massive Datasets
+  - MMDS
+  - large-scale data mining
+  - web-scale mining
 tags:
   - corpus/data-engineering
   - concept
 created: 2026-07-15
-updated: 2026-07-16
+updated: 2026-07-18
 ---
 
 # Data Mining
@@ -322,6 +407,19 @@ Data mining is multidisciplinary, drawing from [^src3]:
 - Book structure and Ch. 1–5: [/data-engineering/sources/data-mining-han-kamber-pei.md](/data-engineering/sources/data-mining-han-kamber-pei.md)
 - Chapters 8–13 (classification, clustering, outlier detection, frontiers): [/data-engineering/sources/data-mining-han-kamber-pei-ch8-13.md](/data-engineering/sources/data-mining-han-kamber-pei-ch8-13.md)
 
+## Mining of Massive Datasets (Scale-First Approach)
+
+The Leskovec/Rajaraman/Ullman textbook (Stanford CS246, 2014) takes a scale-first view: data mining algorithms must work when the dataset doesn't fit in main memory. This introduces different algorithm families from traditional data mining (Han/Kamber) [^srcMMDS1]:
+
+- **MapReduce** (Ch. 2): parallel computation model; tasks decompose into Map (key-value pairs) and Reduce (aggregate by key). Communication cost model measures data moved between mappers and reducers — the key optimization target [^srcMMDS5].
+- **Similarity search** (Ch. 3): near-duplicate detection at web scale via shingling, MinHash signatures, and Locality-Sensitive Hashing (LSH). Full coverage: [/data-engineering/similarity-search.md](/data-engineering/similarity-search.md).
+- **Streaming algorithms** (Ch. 4): single-pass, bounded-memory algorithms: Bloom filters, DGIM (sliding windows), Flajolet-Martin (cardinality estimation), Count-Min Sketch. Full coverage: [/data-engineering/streaming-algorithms.md](/data-engineering/streaming-algorithms.md).
+- **PageRank** (Ch. 5): random-surfer model, teleportation, topic-sensitive PageRank, HITS. Full coverage: [/data-engineering/pagerank.md](/data-engineering/pagerank.md).
+- **Frequent itemsets at scale** (Ch. 6): PCY algorithm (hash-based pruning), Toivonen's sampling algorithm, SON (Savasere-Omiecinski-Navathe) for distributed frequent itemsets.
+- **Recommender systems** (Ch. 9): collaborative filtering, UV matrix factorization, Netflix Challenge. Full coverage: [/data-engineering/recommender-systems.md](/data-engineering/recommender-systems.md).
+
+Traditional mining (Han/Kamber, in-memory) vs. scale-first (MMDS, distributed): the core distinction is whether algorithms are designed for main-memory or for data that exceeds memory/disk boundaries [^srcMMDS1].
+
 ---
 
 [^src1]: [Data Mining: Concepts and Techniques, Part 1 (TOC and structure)](../../raw/pdf/pdf-data-mining-concepts-and-techniques-part-01.md)
@@ -331,3 +429,5 @@ Data mining is multidisciplinary, drawing from [^src3]:
 [^src5]: [Data Mining: Concepts and Techniques, Part 5 (Ch. 2 — proximity measures)](../../raw/pdf/pdf-data-mining-concepts-and-techniques-part-05.md)
 [^src6]: [Data Mining: Concepts and Techniques, Parts 9–14 (Ch. 4–5 — data warehousing, OLAP, data cube)](../../raw/pdf/pdf-data-mining-concepts-and-techniques-part-09.md)
 [^src7]: [Data Mining: Concepts and Techniques, Parts 15–19 (Ch. 6–7 — frequent pattern mining, Apriori, FP-growth)](../../raw/pdf/pdf-data-mining-concepts-and-techniques-part-15.md)
+[^srcMMDS1]: [Mining of Massive Datasets, Part 1 (Preface)](../../raw/pdf/pdf-mining-of-massive-datasets-part-01.md)
+[^srcMMDS5]: [Mining of Massive Datasets, Part 5 (MapReduce joins)](../../raw/pdf/pdf-mining-of-massive-datasets-part-05.md)

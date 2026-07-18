@@ -384,7 +384,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Tool Calling & Context Engineering: How They Interlock](/ai-engineering/tool-calling-and-context-engineering.md)
 
 <details>
-<summary>Source summaries (622)</summary>
+<summary>Source summaries (625)</summary>
 
 - ["2024 State of Analytics Engineering, crafted by dbt Labs | dbt Labs"](/ai-engineering/sources/2024-state-of-analytics-engineering-crafted-by-dbt-labs-dbt--cb342df0.md)
 - ["9 AI Concepts Explained: Tokenization, RAG, RLHF, LoRA & More"](/ai-engineering/sources/9-ai-concepts-explained-tokenization-rag-rlhf-lora-more-a.md)
@@ -540,6 +540,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - ["Data Modeling: One Big Table vs Kimball vs Relational for data engineers"](/ai-engineering/sources/data-modeling-one-big-table-vs-kimball-vs-relational-for-dat-ltQgbSs99WU.md)
 - ["Deep Reinforcement Learning: 0 to 100 | Towards Data Science"](/ai-engineering/sources/deep-reinforcement-learning-0-to-100-towards-data-science-100.md)
 - ["deepseek-r1 vs gpt-5.1: Benchmarks, Pricing & Context Window | Requesty"](/ai-engineering/sources/deepseek-r1-vs-gpt-5-1-benchmarks-pricing-context-window-req-ea9f6e94.md)
+- ["Developing AI-Powered Solutions: A Five-Phase Framework Accelerated by AI"](/ai-engineering/sources/developing-ai-powered-solutions-a-five-phase-framework-accel-fae.md)
 - ["Free Wispr Flow, ElevenLabs & CapCut alternatives + more GitHub hits"](/ai-engineering/sources/free-wispr-flow-elevenlabs-capcut-alternatives-more-github-h-3Cni6_JubQk.md)
 - ["Google OKF: The Simple Folder That Gives AI Agents Your Entire Company Data"](/ai-engineering/sources/google-okf-the-simple-folder-that-gives-ai-agents-your-entir-fI7hZap7mZ4.md)
 - ["Harness Engineering Masterclass: Technical Deep Dive on how to build Agentic Systems"](/ai-engineering/sources/harness-engineering-masterclass-technical-deep-dive-on-how-t-mQfTdNVCOB0.md)
@@ -588,6 +589,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [5 Claude AI Side Hustles That Pay More Than a 9–5](/ai-engineering/sources/5-claude-ai-side-hustles-that-pay-more-than-a-9-5-XRL9Pl9x2xk.md)
 - [5 Claude Code skills I use every single day](/ai-engineering/sources/5-claude-code-skills-i-use-every-single-day-EJyuu6zlQCg.md)
 - [5 NEW Vibe Coding Repos You Haven't Heard of Yet](/ai-engineering/sources/5-new-vibe-coding-repos-you-haven-t-heard-of-yet-UnzD_bwylWs.md)
+- [5 open-source AI agents on Apify that save you time](/ai-engineering/sources/5-open-source-ai-agents-on-apify-that-save-you-time-6798c478.md)
 - [5 Questions to Ask Before Implementing an Agentic Development Platform](/ai-engineering/sources/5-questions-to-ask-before-implementing-an-agentic-developmen-0b82c386.md)
 - [5 Skills That'll Make You a $300K AI Engineer in 2026](/ai-engineering/sources/5-skills-that-ll-make-you-a-300k-ai-engineer-in-2026-lxYpYQ-v3is.md)
 - [5 Steps to Become an AI Engineer (Without the Hype) - Confessions of a Data Guy](/ai-engineering/sources/5-steps-to-become-an-ai-engineer-without-the-hype-confession-b7195e1a.md)
@@ -841,6 +843,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Dev Tools - Tech Stack Changes 2025 (Dreams of Code)](/ai-engineering/sources/dev-tools-tech-stack-changes-2025-dreams-of-code-cde.md)
 - [Dev Tools - Warp Agentic Development Environment Overview](/ai-engineering/sources/dev-tools-warp-agentic-development-environment-overview-ee.md)
 - [Dev Tools - Warp Tutorial Multi-Agent Web Scraper Build](/ai-engineering/sources/dev-tools-warp-tutorial-multi-agent-web-scraper-build-bd.md)
+- [Devin Review — Free PR Review Tool by Cognition](/ai-engineering/sources/devin-review-free-pr-review-tool-by-cognition-c.md)
 - [DevTools - 7 Open Source Projects Worth Knowing](/ai-engineering/sources/devtools-7-open-source-projects-worth-knowing-doc.md)
 - [Dive into Deep Learning (D2L)](/ai-engineering/sources/dive-into-deep-learning.md)
 - [Diving Into Spec-Driven Development With GitHub Spec Kit - Microsoft for Developers](/ai-engineering/sources/diving-into-spec-driven-development-with-github-spec-kit-mic-doc.md)

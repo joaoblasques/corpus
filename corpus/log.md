@@ -2,6 +2,19 @@
 
 > OKF v0.1 change log. Newest first, grouped by date.
 
+## 2026-07-18
+* **Collectors**: gmail=6, blog_promote=0, obsidian=25, book_discover=15, blog_discover=1, book_fetch=3, pdf=0, image=0, books=0, arxiv=5, youtube=0, github_discover=0, github_promote=0, github=0, x=0, links_refetch=0
+* **Ingest**: 0 ingested · 0 deferred · status=ok
+* **YoutubeQuick**: 0 intake · 0 rescued · 0 skipped · status=ok
+* **DocsQuick**: 30 intake · 17 thin · 3 llm_fail · status=ok
+* **YoutubeReap**: 0 removed · status=ok
+* **Gardener**: 4 stubs deepened · status=ok
+* **Heal**: 18 citations repointed · 0 unfixable · 5 hubs reindexed · 30 cross-domain links · status=ok
+* **Depth**: 387 knowledge · 1204 sources · ratio 1:3.1
+* **GapResolver**: 0 gap dispatched · 0 sources queued · status=ok
+* **Lint**: 1 broken wikilinks · 0 broken citations · 0 orphans · 1149 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+* **OKF**: 0 violations
+
 ## 2026-07-17
 * **Ingest**: High-Dimensional Data Analysis with Low-Dimensional Models (Wright & Ma) — parts 17–35 (19 PDF parts, Ch. 8–16) · channel=pdf · domain=ai-engineering · pages=[corpus/ai-engineering/proximal-gradient-methods.md (created), corpus/ai-engineering/neural-tangent-kernel.md (created), corpus/ai-engineering/sources/wright-ma-high-dimensional-data-analysis.md (updated), corpus/ai-engineering/optimization-for-ml.md (updated), corpus/ai-engineering/low-rank-matrix-recovery.md (updated)]
 * **Ingest**: Internet Advertising Survey — parts 01–03 (3 PDF parts) · channel=pdf · domain=ai-engineering · pages=[corpus/ai-engineering/sources/internet-advertising-survey.md (created)]

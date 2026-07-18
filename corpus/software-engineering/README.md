@@ -98,7 +98,7 @@ Domain covering software engineering practice from foundational CS through deplo
 
 ## Pages in this domain
 
-### Concepts (29)
+### Concepts (30)
 - [AI Risk Architecture](/software-engineering/ai-risk-architecture.md)
 - [Algorithms (Strategies, Not Tricks)](/software-engineering/algorithms.md)
 - [CAP Theorem](/software-engineering/cap-theorem.md)
@@ -122,6 +122,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Operating Systems Fundamentals](/software-engineering/operating-systems.md)
 - [OS Security](/software-engineering/os-security.md)
 - [Scatter/Gather Pattern](/software-engineering/scatter-gather-pattern.md)
+- [signal processing algorithms](/software-engineering/signal-processing-algorithms.md)
 - [Software Design Principles](/software-engineering/software-design-principles.md)
 - [System Design Fundamentals](/software-engineering/system-design-fundamentals.md)
 - [Terminal / CLI Tools](/software-engineering/terminal-cli-tools.md)
@@ -145,12 +146,15 @@ Domain covering software engineering practice from foundational CS through deplo
 - [AI-Assisted Development](/software-engineering/ai-assisted-development.md)
 
 <details>
-<summary>Source summaries (70)</summary>
+<summary>Source summaries (73)</summary>
 
 - ["2024-05-25-15-54-25 - move-base-up by josephmachado · Pull Request #17 · josephmachado/simple_dbt_project"](/software-engineering/sources/2024-05-25-15-54-25-move-base-up-by-josephmachado-pull-reque-ee.md)
 - ["A Guide to Multi-Tenancy: Benefits and Challenges"](/software-engineering/sources/a-guide-to-multi-tenancy-benefits-and-challenges-e55e9184.md)
 - ["Disasters I've seen in a microservices world, part II"](/software-engineering/sources/disasters-i-ve-seen-in-a-microservices-world-part-ii-doc.md)
 - ["Guitar - 3 Easy Jazz Standards (Stormy Monday, Blue Bossa, Blue in Green)"](/software-engineering/sources/guitar-3-easy-jazz-standards-stormy-monday-blue-bossa-blue-i-doc.md)
+- [14 More lessons from 14 years at Google](/software-engineering/sources/14-more-lessons-from-14-years-at-google-e.md)
+- [21 Engineering Career Lessons from 14 Years at Google](/software-engineering/sources/21-engineering-career-lessons-from-14-years-at-google-e.md)
+- [21 Lessons from 14 Years at Google](/software-engineering/sources/21-lessons-from-14-years-at-google-e.md)
 - [30 Vim commands you NEED TO KNOW (in just 10 minutes)](/software-engineering/sources/30-vim-commands-you-need-to-know-in-just-10-minutes-RSlrxE21l_k.md)
 - [5 Simple Habits for Writing Clean Code](/software-engineering/sources/5-simple-habits-for-writing-clean-code-cde.md)
 - [6 security settings every GitHub maintainer should enable this week](/software-engineering/sources/6-security-settings-every-github-maintainer-should-enable-th-ab782b95.md)

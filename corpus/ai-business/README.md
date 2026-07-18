@@ -70,13 +70,14 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [AI and the Job Market](/ai-business/ai-and-the-job-market.md)
 
 <details>
-<summary>Source summaries (173)</summary>
+<summary>Source summaries (175)</summary>
 
 - ["$1,300/Day Automated Bittensor Investing With Claude Code (34 Min Free Masterclass)"](/ai-business/sources/1-300-day-automated-bittensor-investing-with-claude-code-34--SHEs8gNh7sQ.md)
 - ["20-30 Years Old Is The Tutorial Phase, Don't F*ck It Up - Dan Koe"](/ai-business/sources/20-30-years-old-is-the-tutorial-phase-don-t-f-ck-it-up-dan-k-67066ee2.md)
 - ["2026.25: The Stuff of Myth(os)"](/ai-business/sources/2026-25-the-stuff-of-myth-os-5c0d0378.md)
 - ["2026.26: Summer Vibes"](/ai-business/sources/2026-26-summer-vibes-510e62ae.md)
 - ["2026.28: XBOX On the Rocks"](/ai-business/sources/2026-28-xbox-on-the-rocks-8fc35a37.md)
+- ["2026.29: Mainframes and Main Characters"](/ai-business/sources/2026-29-mainframes-and-main-characters-774b4848.md)
 - ["3-Year Update: A Financial Analysis of My Book’s Unit Economics"](/ai-business/sources/3-year-update-a-financial-analysis-of-my-book-s-unit-economi-5be171a1.md)
 - ["7 Reasons Media Is a No-Good, Horrible, Rotten Business That I Love Anyways"](/ai-business/sources/7-reasons-media-is-a-no-good-horrible-rotten-business-that-i-9b1bb1df.md)
 - ["A book, a baby, and a billionaire - Noah Kagan"](/ai-business/sources/a-book-a-baby-and-a-billionaire-noah-kagan-a33bc9e0.md)
@@ -129,6 +130,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [14-Day Video Challenge](/ai-business/sources/14-day-video-challenge-0137fce9.md)
 - [15 year of AppSumo - Noah Kagan](/ai-business/sources/15-year-of-appsumo-noah-kagan-cd106e60.md)
 - [1•2•3 Affiliate Marketing](/ai-business/sources/1-2-3-affiliate-marketing-a80ce4c4.md)
+- [2025 Advice to my old selves](/ai-business/sources/2025-advice-to-my-old-selves-fdcbebef.md)
 - [3 Online Revenue Streams You Can Start Today That YOU Control](/ai-business/sources/3-online-revenue-streams-you-can-start-today-that-you-contro-0f0bff8c.md)
 - [4 daily AI routines that will change your life](/ai-business/sources/4-daily-ai-routines-that-will-change-your-life-3a393f13.md)
 - [5 Questions to Help You Navigate Uncertainty](/ai-business/sources/5-questions-to-help-you-navigate-uncertainty-d1126310.md)
