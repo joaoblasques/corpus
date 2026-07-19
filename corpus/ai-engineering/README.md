@@ -16,6 +16,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 ## Pages
 
 ### Mathematical Foundations for ML
+- [CUR Decomposition](/ai-engineering/cur-decomposition.md) — concept · draft · sparse-friendly alternative to SVD; selects actual rows/columns with Frobenius-norm probability weighting; middle matrix U via pseudoinverse
 - [Linear Algebra for ML](/ai-engineering/linear-algebra-for-ml.md) — concept · draft · Vector spaces, basis, rank, inner products, projections, Gram-Schmidt
 - [Matrix Decompositions](/ai-engineering/matrix-decompositions.md) — concept · draft · Eigenvalues, eigendecomposition, Cholesky, LU; cross-links to SVD
 - [Probability and Statistics for ML](/ai-engineering/probability-and-statistics-for-ml.md) — concept · draft · Bayes' theorem, Gaussian, exponential family, conjugate priors, change of variables
@@ -107,6 +108,8 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Speculative Decoding](/ai-engineering/speculative-decoding.md) — concept · draft · draft-model-proposes/target-model-verifies inference acceleration; Eagle 3.1's attention-drift fix, DFlash's single-pass block-diffusion drafting, Speculators v0.5.0 unified online/offline training
 
 ### Entities
+- [Christopher M. Bishop](/ai-engineering/christopher-bishop.md) — entity · draft · ML researcher at Microsoft Research Cambridge; author of PRML (2006), the canonical Bayesian ML textbook; F.R.Eng.
+- [Kevin P. Murphy](/ai-engineering/kevin-murphy.md) — entity · draft · ML researcher at Google; author of Probabilistic Machine Learning: An Introduction (MIT Press, 2022) and two companion volumes; De Groot prize 2013
 - [LangGraph](/ai-engineering/langgraph.md) — entity · stub · production framework for stateful multi-agent workflows
 - [LangSmith](/ai-engineering/langsmith.md) — entity · draft · agent engineering platform for debugging, evaluation, and observability
 - [Claude Code](/ai-engineering/claude-code.md) — entity · draft · Anthropic CLI coding agent; harness, large-codebase practices, model config, security review
@@ -163,6 +166,9 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Generator–Evaluator Separation](/ai-engineering/generator-evaluator-separation.md) — synthesis · draft · a model can't reliably grade its own output; move evaluation into a separate agent/model/rubric/human
 
 ### Sources
+- [Pattern Recognition and Machine Learning (Bishop, 2006)](/ai-engineering/sources/pattern-recognition-and-machine-learning.md) — source · draft · canonical Bayesian ML textbook (758pp, Springer); covers probability distributions, linear models, neural networks, kernel methods/GPs/SVMs, graphical models, EM, variational inference, MCMC, PCA, HMMs, boosting
+- [Probabilistic Machine Learning: An Introduction (Murphy, 2022)](/ai-engineering/sources/probabilistic-machine-learning-intro.md) — source · draft · modern probabilistic ML textbook (860pp, MIT Press, CC-BY-NC-ND); Python-first (JAX/PyTorch); foundations → linear models → deep learning → nonparametric → clustering → dimensionality reduction
+- [Mining of Massive Datasets (Leskovec, Rajaraman, Ullman)](/ai-engineering/sources/mining-of-massive-datasets.md) — source · draft · large-scale data algorithms textbook; ingested parts 25-28 covering SVD, CUR decomposition, perceptrons, SVMs, and kNN at scale
 - [The Quest for Artificial Intelligence (Nils Nilsson, Cambridge 2010)](/ai-engineering/sources/the-quest-for-artificial-intelligence-nilsson.md) — source · draft · 707-page canonical insider history of AI from antiquity through 2009; 35 chapters; covers founding gatherings, expert systems, AI winters, neural-net revivals, Bayesian methods, and modern achievements
 - [High-Dimensional Data Analysis with Low-Dimensional Models (Wright & Ma)](/ai-engineering/sources/wright-ma-high-dimensional-data-analysis.md) — source · draft · 730pp graduate textbook (Cambridge 2018); unified treatment of sparse recovery (ℓ₁, phase transition, RIP), low-rank recovery (nuclear norm, matrix completion, RPCA), and optimization geometry (benign landscape, saddle points)
 - [A Brief Introduction to Machine Learning for Engineers (Simeone, 2018)](/ai-engineering/sources/ml-for-engineers-simeone.md) — source · draft · 237pp monograph; unified probabilistic framework (frequentist vs. Bayesian); supervised/unsupervised/graphical models/approximate inference; PAC theory; ELBO/EM/VAE; f-divergences

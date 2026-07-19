@@ -51,6 +51,15 @@ sources:
   - path: raw/_inbox/pdf-a-brief-introduction-to-machine-learning-for-engin-part-09.md
     channel: pdf
     ingested_at: 2026-07-15
+  - path: raw/pdf/pdf-pattern-recognition-and-machine-learning-part-01.md
+    channel: pdf
+    ingested_at: 2026-07-19
+  - path: raw/pdf/pdf-probabilistic-machine-learning-an-introduction-part-01.md
+    channel: pdf
+    ingested_at: 2026-07-19
+  - path: raw/pdf/pdf-mining-of-massive-datasets-part-26.md
+    channel: pdf
+    ingested_at: 2026-07-19
 aliases:
   - machine learning
   - ML
