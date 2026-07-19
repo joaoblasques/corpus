@@ -99,3 +99,9 @@ type: internal
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/software-engineering/usertour.md", "verdict_ok": false, "gov": "reverted+queued"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/software-engineering/react.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/scaling-your-ai-models-with-micro-ddp-tutorial-7q4D6_3syuE.md", "verdict_ok": true, "gov": "committed"}
+
+## [2026-07-19T03:09] gardener · run
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/software-engineering/usertour.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/automate-with-python-full-course-for-beginners-PXMJ6FS7llk.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/a-new-generation-studies-ai-apple-s-recipe-for-on-device-mod-d.md", "verdict_ok": false, "gov": "reverted+queued"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-business/sources/a-book-a-baby-and-a-billionaire-noah-kagan-a33bc9e0.md", "verdict_ok": false, "gov": "reverted+queued"}
