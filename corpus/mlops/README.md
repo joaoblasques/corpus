@@ -137,7 +137,7 @@ The engineering substrate for building ML and software systems: how the developm
 - [Environment Promotion (dev → acc → prd)](/mlops/environment-promotion.md)
 
 <details>
-<summary>Source summaries (91)</summary>
+<summary>Source summaries (93)</summary>
 
 - ["29%+ warehouse savings: How the dbt Fusion engine drives cost efficiency | dbt Labs"](/mlops/sources/29-warehouse-savings-how-the-dbt-fusion-engine-drives-cost-e-121b247d.md)
 - ["AL 005: 60% Growth in 60 Days? How?!"](/mlops/sources/al-005-60-growth-in-60-days-how-150a587c.md)
@@ -159,6 +159,7 @@ The engineering substrate for building ML and software systems: how the developm
 - ["CytoReason: Smarter Data Pipelines with Nextflow & lakeFS"](/mlops/sources/cytoreason-smarter-data-pipelines-with-nextflow-lakefs-a44471df.md)
 - ["Data Projects: Managing Data Assets at Netflix Scale"](/mlops/sources/data-projects-managing-data-assets-at-netflix-scale-4da3ecae.md)
 - ["Databricks Zerobus: Event Streams + The Lakehouse - Confessions of a Data Guy"](/mlops/sources/databricks-zerobus-event-streams-the-lakehouse-confessions-o-01431550.md)
+- ["Metadata Management — Architecture, Patterns, and Operational Playbook"](/mlops/sources/metadata-management-architecture-patterns-and-operational-pl-eace.md)
 - ["Stop Thinking in Salaries: Build Systems That Pay You for Life | Best Audiobooks"](/mlops/sources/stop-thinking-in-salaries-build-systems-that-pay-you-for-lif-JAN3fFcDG8Y.md)
 - ["The Mom Who Mastered Claude: How To Build An Audience That Buys Using Claude Code (Step by Step!)"](/mlops/sources/the-mom-who-mastered-claude-how-to-build-an-audience-that-bu-DnZ53NQXfuA.md)
 - ["Web Scraping 101: A Million Dollar Project Idea"](/mlops/sources/web-scraping-101-a-million-dollar-project-idea-DJnH0jR8y5Q.md)
@@ -215,6 +216,7 @@ The engineering substrate for building ML and software systems: how the developm
 - [Make your AI better at data work with dbt's agent skills](/mlops/sources/make-your-ai-better-at-data-work-with-dbt-s-agent-skills-eca.md)
 - [Manage budgets and cost controls for Genie](/mlops/sources/manage-budgets-and-cost-controls-for-genie-ee.md)
 - [mbta-on-time-lakehouse-retrospective](/mlops/sources/mbta-on-time-lakehouse-retrospective-eece.md)
+- [MetadataOps — How Data Engineers Are Adapting to Serve AI Consumers](/mlops/sources/metadataops-how-data-engineers-are-adapting-to-serve-ai-cons-f.md)
 - [NotebookLM + Obsidian Integration Workflow](/mlops/sources/notebooklm-obsidian-integration-workflow-f.md)
 - [OpenClaw 2.0 is here.](/mlops/sources/openclaw-2-0-is-here-6vPaitNQMGY.md)
 - [Seedance 2.0 + Claude Code Creates $10k Websites in Minutes](/mlops/sources/seedance-2-0-claude-code-creates-10k-websites-in-minutes-NvxiSG34mPU.md)

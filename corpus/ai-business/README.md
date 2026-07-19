@@ -70,7 +70,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [AI and the Job Market](/ai-business/ai-and-the-job-market.md)
 
 <details>
-<summary>Source summaries (175)</summary>
+<summary>Source summaries (176)</summary>
 
 - ["$1,300/Day Automated Bittensor Investing With Claude Code (34 Min Free Masterclass)"](/ai-business/sources/1-300-day-automated-bittensor-investing-with-claude-code-34--SHEs8gNh7sQ.md)
 - ["20-30 Years Old Is The Tutorial Phase, Don't F*ck It Up - Dan Koe"](/ai-business/sources/20-30-years-old-is-the-tutorial-phase-don-t-f-ck-it-up-dan-k-67066ee2.md)
@@ -234,6 +234,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [I Built a Trading Bot with ChatGPT](/ai-business/sources/i-built-a-trading-bot-with-chatgpt-fhBw3j_O9LE.md)
 - [I Made 700 Monetizable YouTube Shorts for Faceless Channel in 18 MINUTES using AI Automation](/ai-business/sources/i-made-700-monetizable-youtube-shorts-for-faceless-channel-i-lqXWVzWkkyc.md)
 - [I Tried EVERY Claude AI Side Hustle… This One Made The Most Money](/ai-business/sources/i-tried-every-claude-ai-side-hustle-this-one-made-the-most-m-fb-5GoBZw8E.md)
+- [LinkedIn Personal Brand Strategy for Recruiter Attraction](/ai-business/sources/linkedin-personal-brand-strategy-for-recruiter-attraction-ae.md)
 - [Master Prompt Engineering (Full Guide)](/ai-business/sources/master-prompt-engineering-full-guide-ydjRYmM19DY.md)
 - [Music - Vocal Harmonies How They Work Thirds and Sixths](/ai-business/sources/music-vocal-harmonies-how-they-work-thirds-and-sixths-doc.md)
 - [Piano - Chord Octave Technique for Rhythm Patterns](/ai-business/sources/piano-chord-octave-technique-for-rhythm-patterns-ae.md)

@@ -146,12 +146,13 @@ Domain covering software engineering practice from foundational CS through deplo
 - [AI-Assisted Development](/software-engineering/ai-assisted-development.md)
 
 <details>
-<summary>Source summaries (73)</summary>
+<summary>Source summaries (74)</summary>
 
 - ["2024-05-25-15-54-25 - move-base-up by josephmachado · Pull Request #17 · josephmachado/simple_dbt_project"](/software-engineering/sources/2024-05-25-15-54-25-move-base-up-by-josephmachado-pull-reque-ee.md)
 - ["A Guide to Multi-Tenancy: Benefits and Challenges"](/software-engineering/sources/a-guide-to-multi-tenancy-benefits-and-challenges-e55e9184.md)
 - ["Disasters I've seen in a microservices world, part II"](/software-engineering/sources/disasters-i-ve-seen-in-a-microservices-world-part-ii-doc.md)
 - ["Guitar - 3 Easy Jazz Standards (Stormy Monday, Blue Bossa, Blue in Green)"](/software-engineering/sources/guitar-3-easy-jazz-standards-stormy-monday-blue-bossa-blue-i-doc.md)
+- ["The Next Two Years of Software Engineering: Five Critical Questions"](/software-engineering/sources/the-next-two-years-of-software-engineering-five-critical-que-ac.md)
 - [14 More lessons from 14 years at Google](/software-engineering/sources/14-more-lessons-from-14-years-at-google-e.md)
 - [21 Engineering Career Lessons from 14 Years at Google](/software-engineering/sources/21-engineering-career-lessons-from-14-years-at-google-e.md)
 - [21 Lessons from 14 Years at Google](/software-engineering/sources/21-lessons-from-14-years-at-google-e.md)
