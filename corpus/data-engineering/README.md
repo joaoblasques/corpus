@@ -221,7 +221,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [The Portfolio Project That Lands a DE Role](/data-engineering/portfolio-project-that-lands-a-de-role.md)
 
 <details>
-<summary>Source summaries (212)</summary>
+<summary>Source summaries (220)</summary>
 
 - ["A dbt \"logic mesh\" with packages: standard model and metrics across 25 autonomous organizations | dbt Summit"](/data-engineering/sources/a-dbt-logic-mesh-with-packages-standard-model-and-metrics-ac-bf162a97.md)
 - ["Academic → CTO: What Actually Matters in Data (Matthew Housley) - Confessions of a Data Guy"](/data-engineering/sources/academic-cto-what-actually-matters-in-data-matthew-housley-c-e9eae58c.md)
@@ -292,6 +292,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - ["MetadataOps — Concept, Definition, and Role in Modern Data Platforms"](/data-engineering/sources/metadataops-concept-definition-and-role-in-modern-data-platf-def.md)
 - ["Modern Data Warehousing: Stop Using Slowly-Changing Dimensions (Part 1)"](/data-engineering/sources/modern-data-warehousing-stop-using-slowly-changing-dimension-1.md)
 - ["Project A Data Modelling Best Practices Part I: How to Model Data in a Data Warehouse?"](/data-engineering/sources/project-a-data-modelling-best-practices-part-i-how-to-model--8HlNG8bdlM0.md)
+- ["SQL vs Python for Data Transformations: A Decision Framework"](/data-engineering/sources/sql-vs-python-for-data-transformations-a-decision-framework-fae.md)
 - ["Types of Data Quality Checks: Where and When to Apply Them"](/data-engineering/sources/types-of-data-quality-checks-where-and-when-to-apply-them-acee.md)
 - ["Your Data Model Isn't Broken — Refactor, Don't Rebuild (Part 1)"](/data-engineering/sources/your-data-model-isn-t-broken-refactor-don-t-rebuild-part-1-ce.md)
 - [10 Lessons to Become a More Impactful Data Engineer](/data-engineering/sources/10-lessons-to-become-a-more-impactful-data-engineer-e.md)
@@ -395,6 +396,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [How Kafka Works - by Neo Kim and Stanislav Kozlovski](/data-engineering/sources/how-kafka-works-by-neo-kim-and-stanislav-kozlovski-doc.md)
 - [How NOT to Become a Data Engineer in 2026 (Avoid These Mistakes)](/data-engineering/sources/how-not-to-become-a-data-engineer-in-2026-avoid-these-mistak-8vSdjx-QLIs.md)
 - [How to Build a Professional Data Portfolio Website (Full Tutorial)](/data-engineering/sources/how-to-build-a-professional-data-portfolio-website-full-tuto-U69s3XXBMbg.md)
+- [How to Build Synthetic Datasets Using AI for Portfolio Projects](/data-engineering/sources/how-to-build-synthetic-datasets-using-ai-for-portfolio-proje-ec.md)
 - [How to Make a Data Science Portfolio With GitHub Pages (2025)](/data-engineering/sources/how-to-make-a-data-science-portfolio-with-github-pages-2025-D9CLhQdLp8w.md)
 - [How To Structure Terraform Project (3 Levels)](/data-engineering/sources/how-to-structure-terraform-project-3-levels-nMVXs8VnrF4.md)
 - [How to Undo Mistakes With Git Using the Command Line](/data-engineering/sources/how-to-undo-mistakes-with-git-using-the-command-line-lX9hsdsAeTk.md)
@@ -402,6 +404,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [Implementing Data Quality with Great Expectations](/data-engineering/sources/implementing-data-quality-with-great-expectations-eea.md)
 - [Introduction to Big Data Architecture](/data-engineering/sources/introduction-to-big-data-architecture-rvqCqK2Lpjg.md)
 - [Intuitive SQL For Data Analytics - Tutorial](/data-engineering/sources/intuitive-sql-for-data-analytics-tutorial-mXW7JHJM34k.md)
+- [Joining Fact Tables and SCD2 Dimension Tables](/data-engineering/sources/joining-fact-tables-and-scd2-dimension-tables-abe.md)
 - [Kafka is fast -- I'll use Postgres](/data-engineering/sources/kafka-is-fast-i-ll-use-postgres-beca.md)
 - [lakeflow-a-new-era-of-agentic-data-engineering](/data-engineering/sources/lakeflow-a-new-era-of-agentic-data-engineering-eee.md)
 - [Learn Databricks in Under 2 Hours](/data-engineering/sources/learn-databricks-in-under-2-hours-CoqZTt528ew.md)
@@ -409,11 +412,16 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [Learn Snowflake with ONE Project](/data-engineering/sources/learn-snowflake-with-one-project-7QisFjITGlI.md)
 - [Mining of Massive Datasets — Leskovec, Rajaraman, Ullman (2014)](/data-engineering/sources/mining-of-massive-datasets-leskovec.md)
 - [MySQL - The Basics // Learn SQL in 23 Easy Steps](/data-engineering/sources/mysql-the-basics-learn-sql-in-23-easy-steps-Cz3WcZLRaWc.md)
+- [Parquet Columnar Format & Compression Internals](/data-engineering/sources/parquet-columnar-format-compression-internals-ea.md)
 - [portfolio-to-paycheck-7-data-engineering-projects-hiring-man](/data-engineering/sources/portfolio-to-paycheck-7-data-engineering-projects-hiring-man-a.md)
 - [Programming Is NOT Enough | Add these 5 skills…](/data-engineering/sources/programming-is-not-enough-add-these-5-skills-bZa2uicOTAE.md)
+- [Python Essentials for Data Engineers](/data-engineering/sources/python-essentials-for-data-engineers-eee.md)
 - [Python Practice Environment Setup](/data-engineering/sources/python-practice-environment-setup-e.md)
 - [Real Data Engineering Stories (No One Tells You This) | Baraa & Simon](/data-engineering/sources/real-data-engineering-stories-no-one-tells-you-this-baraa-si-Vvv5FG0EF1U.md)
 - [Realtime Data Streaming |  End To End Data Engineering Project](/data-engineering/sources/realtime-data-streaming-end-to-end-data-engineering-project-GqAcTrqKcrY.md)
+- [Remote Job Boards for High-Paying Data and Tech Roles](/data-engineering/sources/remote-job-boards-for-high-paying-data-and-tech-roles-100.md)
+- [Schema Evolution & Advanced Data Types for Rapid Data Delivery](/data-engineering/sources/schema-evolution-advanced-data-types-for-rapid-data-delivery-dee.md)
+- [Self-Healing Tables — A Deterministic Approach to Historical Backfills](/data-engineering/sources/self-healing-tables-a-deterministic-approach-to-historical-b-cd.md)
 - [Skytrax Reviews — dbt Transformation Layer (portfolio project)](/data-engineering/sources/skytrax-dbt-transformation-project.md)
 - [Smart City End to End Realtime Data Engineering Project | Get Hired as an AWS Data Engineer](/data-engineering/sources/smart-city-end-to-end-realtime-data-engineering-project-get--Vv_fvwF41_0.md)
 - [Source: Data Engineering Zoomcamp (DataTalksClub)](/data-engineering/sources/data-engineering-zoomcamp.md)

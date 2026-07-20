@@ -70,7 +70,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [AI and the Job Market](/ai-business/ai-and-the-job-market.md)
 
 <details>
-<summary>Source summaries (176)</summary>
+<summary>Source summaries (177)</summary>
 
 - ["$1,300/Day Automated Bittensor Investing With Claude Code (34 Min Free Masterclass)"](/ai-business/sources/1-300-day-automated-bittensor-investing-with-claude-code-34--SHEs8gNh7sQ.md)
 - ["20-30 Years Old Is The Tutorial Phase, Don't F*ck It Up - Dan Koe"](/ai-business/sources/20-30-years-old-is-the-tutorial-phase-don-t-f-ck-it-up-dan-k-67066ee2.md)
@@ -242,6 +242,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [Python web scraper $$$ - Easy step by step guide | How to make money with Python Episode 1](/ai-business/sources/python-web-scraper-easy-step-by-step-guide-how-to-make-money-awoEELnQzVg.md)
 - [Remote Work Over 60 — High-Paying Jobs Hiring Right Now 2026](/ai-business/sources/remote-work-over-60-high-paying-jobs-hiring-right-now-2026-2026.md)
 - [Running - Heart Rate Zones Guide](/ai-business/sources/running-heart-rate-zones-guide-de.md)
+- [Stop Using AI to Replace Thinking — The Problem with AI Slop](/ai-business/sources/stop-using-ai-to-replace-thinking-the-problem-with-ai-slop-doc.md)
 - [Surf Skate - Open Face Carve and Bowl Training](/ai-business/sources/surf-skate-open-face-carve-and-bowl-training-a.md)
 - [The Actual Easiest AI Side Hustle of 2026 ($307K+)](/ai-business/sources/the-actual-easiest-ai-side-hustle-of-2026-307k-pjzWx7CxWog.md)
 - [The Claude AI Side Hustle — Selling Notion Templates](/ai-business/sources/the-claude-ai-side-hustle-selling-notion-templates-a.md)

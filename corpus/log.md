@@ -2,6 +2,23 @@
 
 > OKF v0.1 change log. Newest first, grouped by date.
 
+## 2026-07-20
+* **Ingest**: 50 sources ingested · 0 deferred · pages_created=3 · pages_updated=2 · status=ok · run=ingest-auto
+* **Ingest detail**:
+  - PML parts 10-43 (34 sources): updated `corpus/ai-engineering/sources/probabilistic-machine-learning-intro.md` (full 43-part coverage: Chapters 5-23 + bibliography) and `corpus/ai-engineering/kevin-murphy.md`; channel=pdf; domain=ai-engineering
+  - SLP parts 1-16 (16 sources): created `corpus/ai-engineering/sources/speech-and-language-processing.md` (Jurafsky & Martin 3rd draft, Chapters 1-12 partial); created entity pages `corpus/ai-engineering/daniel-jurafsky.md` and `corpus/ai-engineering/james-martin.md`; channel=pdf; domain=ai-engineering
+
+* **Collectors**: gmail=5, blog_promote=0, obsidian=25, book_discover=0, blog_discover=1, book_fetch=0, pdf=4, image=0, books=0, arxiv=0, youtube=0, github_discover=0, github_promote=0, github=0, x=0, links_refetch=0
+* **Ingest**: 50 ingested · 0 deferred · status=ok
+* **YoutubeQuick**: 0 intake · 0 rescued · 0 skipped · status=ok
+* **DocsQuick**: 28 intake · 19 thin · 3 llm_fail · status=ok
+* **YoutubeReap**: 0 removed · status=ok
+* **Gardener**: 4 stubs deepened · status=ok
+* **Heal**: 0 citations repointed · 0 unfixable · 5 hubs reindexed · 30 cross-domain links · status=ok
+* **Depth**: 392 knowledge · 1263 sources · ratio 1:3.2
+* **GapResolver**: 0 gap dispatched · 0 sources queued · status=ok
+* **Lint**: 1 broken wikilinks · 0 broken citations · 0 orphans · 1201 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+* **OKF**: 0 violations
 ## 2026-07-19
 * **Collectors**: gmail=3, blog_promote=0, obsidian=25, book_discover=12, blog_discover=0, book_fetch=10, pdf=0, image=0, books=0, arxiv=0, youtube=0, github_discover=0, github_promote=0, github=0, x=0, links_refetch=0
 * **Ingest**: 50 ingested · 0 deferred · status=ok

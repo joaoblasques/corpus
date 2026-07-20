@@ -146,12 +146,13 @@ Domain covering software engineering practice from foundational CS through deplo
 - [AI-Assisted Development](/software-engineering/ai-assisted-development.md)
 
 <details>
-<summary>Source summaries (74)</summary>
+<summary>Source summaries (76)</summary>
 
 - ["2024-05-25-15-54-25 - move-base-up by josephmachado · Pull Request #17 · josephmachado/simple_dbt_project"](/software-engineering/sources/2024-05-25-15-54-25-move-base-up-by-josephmachado-pull-reque-ee.md)
 - ["A Guide to Multi-Tenancy: Benefits and Challenges"](/software-engineering/sources/a-guide-to-multi-tenancy-benefits-and-challenges-e55e9184.md)
 - ["Disasters I've seen in a microservices world, part II"](/software-engineering/sources/disasters-i-ve-seen-in-a-microservices-world-part-ii-doc.md)
 - ["Guitar - 3 Easy Jazz Standards (Stormy Monday, Blue Bossa, Blue in Green)"](/software-engineering/sources/guitar-3-easy-jazz-standards-stormy-monday-blue-bossa-blue-i-doc.md)
+- ["Senior Engineer Mindset — Ownership, Systems Thinking, and Ego Dissolution"](/software-engineering/sources/senior-engineer-mindset-ownership-systems-thinking-and-ego-d-doc.md)
 - ["The Next Two Years of Software Engineering: Five Critical Questions"](/software-engineering/sources/the-next-two-years-of-software-engineering-five-critical-que-ac.md)
 - [14 More lessons from 14 years at Google](/software-engineering/sources/14-more-lessons-from-14-years-at-google-e.md)
 - [21 Engineering Career Lessons from 14 Years at Google](/software-engineering/sources/21-engineering-career-lessons-from-14-years-at-google-e.md)
@@ -213,6 +214,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Purely Functional Data Structures (Okasaki, CMU 1996)](/software-engineering/sources/purely-functional-data-structures-okasaki.md)
 - [Python - Complete Beginner Course 5 Hours TechWorld with Nana](/software-engineering/sources/python-complete-beginner-course-5-hours-techworld-with-nana-aa.md)
 - [Refactoring Techniques Guide](/software-engineering/sources/refactoring-techniques-guide-de.md)
+- [Software Engineering at Google — Key Lessons on Code That Lasts](/software-engineering/sources/software-engineering-at-google-key-lessons-on-code-that-last-e.md)
 - [Software Engineering Best Practices MOC](/software-engineering/sources/software-engineering-best-practices-moc-c.md)
 - [Software Engineering in the Age of AI](/software-engineering/sources/software-engineering-in-the-age-of-ai-a.md)
 - [SOLID Principles in Practice](/software-engineering/sources/solid-principles-in-practice-acce.md)

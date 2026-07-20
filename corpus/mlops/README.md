@@ -137,7 +137,7 @@ The engineering substrate for building ML and software systems: how the developm
 - [Environment Promotion (dev → acc → prd)](/mlops/environment-promotion.md)
 
 <details>
-<summary>Source summaries (93)</summary>
+<summary>Source summaries (97)</summary>
 
 - ["29%+ warehouse savings: How the dbt Fusion engine drives cost efficiency | dbt Labs"](/mlops/sources/29-warehouse-savings-how-the-dbt-fusion-engine-drives-cost-e-121b247d.md)
 - ["AL 005: 60% Growth in 60 Days? How?!"](/mlops/sources/al-005-60-growth-in-60-days-how-150a587c.md)
@@ -165,6 +165,7 @@ The engineering substrate for building ML and software systems: how the developm
 - ["Web Scraping 101: A Million Dollar Project Idea"](/mlops/sources/web-scraping-101-a-million-dollar-project-idea-DJnH0jR8y5Q.md)
 - [100% REMOTE Boring Businesses (That Almost Never Fail)](/mlops/sources/100-remote-boring-businesses-that-almost-never-fail-EnSJN9zl-yA.md)
 - [5 powerful scrapers to add to your SEO tool kit](/mlops/sources/5-powerful-scrapers-to-add-to-your-seo-tool-kit-906d6a15.md)
+- [5% ownership is probably the most common final stake for VC funded startup founders — @levelsio (Pieter Levels)](/mlops/sources/5-ownership-is-probably-the-most-common-final-stake-for-vc-f-73fd6897.md)
 - [A broken DNSSEC rollover took down .AL. Now 1.1.1.1 tells you when validation is bypassed](/mlops/sources/a-broken-dnssec-rollover-took-down-al-now-1-1-1-1-tells-you--a9e7f215.md)
 - [A Catalog Is All You Need](/mlops/sources/a-catalog-is-all-you-need-1015a427.md)
 - [A Decision Framework for ETL Migration to Databricks](/mlops/sources/a-decision-framework-for-etl-migration-to-databricks-9db6e9d6.md)
@@ -219,11 +220,14 @@ The engineering substrate for building ML and software systems: how the developm
 - [MetadataOps — How Data Engineers Are Adapting to Serve AI Consumers](/mlops/sources/metadataops-how-data-engineers-are-adapting-to-serve-ai-cons-f.md)
 - [NotebookLM + Obsidian Integration Workflow](/mlops/sources/notebooklm-obsidian-integration-workflow-f.md)
 - [OpenClaw 2.0 is here.](/mlops/sources/openclaw-2-0-is-here-6vPaitNQMGY.md)
+- [Proactive Alignment — How Data Teams Avoid Being Blindsided by Surprise Projects](/mlops/sources/proactive-alignment-how-data-teams-avoid-being-blindsided-by-ec.md)
 - [Seedance 2.0 + Claude Code Creates $10k Websites in Minutes](/mlops/sources/seedance-2-0-claude-code-creates-10k-websites-in-minutes-NvxiSG34mPU.md)
 - [Sell Your API to AI Agents & Make SERIOUS Money in 2026 (full guide / beginner friendly)](/mlops/sources/sell-your-api-to-ai-agents-make-serious-money-in-2026-full-g-GyijriMIKPA.md)
+- [Silent Data Loss Detection — Pipeline Volume Anomaly Monitoring with BigQuery and AI](/mlops/sources/silent-data-loss-detection-pipeline-volume-anomaly-monitorin-be.md)
 - [systematic-trend-following-with-adaptive-portfolio-construct](/mlops/sources/systematic-trend-following-with-adaptive-portfolio-construct-cc.md)
 - [TerraForm - WPP](/mlops/sources/terraform-wpp-doc.md)
 - [Terraform Interview Cheat Sheet](/mlops/sources/terraform-interview-cheat-sheet-ee.md)
+- [terraform_cheatsheet](/mlops/sources/terraform-cheatsheet-ceaee.md)
 - [The Easiest $3K/Day Business — Photo Magnets](/mlops/sources/the-easiest-3k-day-business-photo-magnets-da.md)
 - [The Four Step Process to Loop Engineer ANYTHING (+ Why Prompt Engineering Isn't Dead)](/mlops/sources/the-four-step-process-to-loop-engineer-anything-why-prompt-e-JirDfgJcJFU.md)
 - [The Most Passive Online Side Hustle I've Ever Seen](/mlops/sources/the-most-passive-online-side-hustle-i-ve-ever-seen-Wl0NMNbYRDk.md)

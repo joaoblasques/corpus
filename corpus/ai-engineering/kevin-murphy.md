@@ -30,7 +30,7 @@ TL;DR: ML researcher at Google; author of three major probabilistic ML textbooks
 
 ## Books in corpus
 
-- [Probabilistic Machine Learning: An Introduction](/ai-engineering/sources/probabilistic-machine-learning-intro.md) — source page for the 2022 textbook (parts 1-9 ingested)
+- [Probabilistic Machine Learning: An Introduction](/ai-engineering/sources/probabilistic-machine-learning-intro.md) — source page for the 2022 textbook (all 43 parts ingested; full chapter coverage)
 
 ## Relationship to other corpus entities
 
