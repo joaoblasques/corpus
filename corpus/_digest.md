@@ -105,3 +105,9 @@ type: internal
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/automate-with-python-full-course-for-beginners-PXMJ6FS7llk.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/a-new-generation-studies-ai-apple-s-recipe-for-on-device-mod-d.md", "verdict_ok": false, "gov": "reverted+queued"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-business/sources/a-book-a-baby-and-a-billionaire-noah-kagan-a33bc9e0.md", "verdict_ok": false, "gov": "reverted+queued"}
+
+## [2026-07-20T03:11] gardener · run
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/daniel-jurafsky.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/james-martin.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/a-new-generation-studies-ai-apple-s-recipe-for-on-device-mod-d.md", "verdict_ok": false, "gov": "reverted+queued"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-business/sources/a-book-a-baby-and-a-billionaire-noah-kagan-a33bc9e0.md", "verdict_ok": true, "gov": "committed"}
