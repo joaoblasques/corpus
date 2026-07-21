@@ -111,3 +111,9 @@ type: internal
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/james-martin.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/a-new-generation-studies-ai-apple-s-recipe-for-on-device-mod-d.md", "verdict_ok": false, "gov": "reverted+queued"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-business/sources/a-book-a-baby-and-a-billionaire-noah-kagan-a33bc9e0.md", "verdict_ok": true, "gov": "committed"}
+
+## [2026-07-21T03:00] gardener · run
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/a-new-generation-studies-ai-apple-s-recipe-for-on-device-mod-d.md", "verdict_ok": false, "gov": "reverted+queued"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-business/sources/2026-26-summer-vibes-510e62ae.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-business/sources/a-quote-from-tom-macwright-634faec0.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/data-engineering/sources/data-modeling-with-joe-reis-understanding-what-data-modeling-NKo02ThtAto.md", "verdict_ok": false, "gov": "reverted+queued"}
