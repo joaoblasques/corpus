@@ -18,6 +18,9 @@ sources:
   - path: raw/_inbox/pdf-data-structures-and-algorithm-analysis-in-c-part-01.md
     channel: pdf
     ingested_at: 2026-07-12
+  - path: raw/pdf/pdf-the-design-of-approximation-algorithms-part-01.md
+    channel: pdf
+    ingested_at: 2026-07-21
 aliases:
   - complexity theory
   - NP-completeness
@@ -28,11 +31,20 @@ aliases:
   - NP
   - P
   - co-NP
+  - approximation ratio
+  - performance guarantee
+  - PTAS
+  - FPTAS
+  - APTAS
+  - submodular maximization
+  - PCP theorem
+  - MAX SAT
+  - MAX CUT
 tags:
   - corpus/software-engineering
   - concept
 created: 2026-07-11
-updated: 2026-07-12
+updated: 2026-07-21
 ---
 
 # Complexity Theory and NP-Completeness
@@ -93,11 +105,19 @@ This is why NP-completeness does not mean "hard in practice" for most real input
 
 ## Approximation algorithms
 
-When exact polynomial-time solution is impossible (assuming P ≠ NP), approximation algorithms guarantee a solution within a constant factor of optimal:
+When exact polynomial-time solution is impossible (assuming P ≠ NP), approximation algorithms guarantee a solution within a constant factor of optimal. The **performance guarantee** (or approximation ratio) is ρ such that ALG ≤ ρ × OPT (for minimization) or ALG ≥ OPT/ρ (for maximization). Key design techniques (Williamson & Shmoys 2011): [^src_daa]
 
-- **Vertex Cover**: a 2-approximation exists (take both endpoints of any maximal matching).
+- **Greedy set cover**: H_n ≈ ln n approximation (tight — no better factor unless NP ⊆ DTIME(n^{O(log log n)})).
+- **Submodular function maximization**: greedy gives **(1 − 1/e)** approximation when the function is monotone and subject to a cardinality constraint; tight for greedy.
+- **LP rounding**: solve LP relaxation (fractional solution), then round fractional variables. Weighted vertex cover: round all x_v ≥ 1/2 to 1; gives 2-approximation (all edges covered, cost ≤ 2 × OPT_LP).
+- **Randomized rounding**: set each variable randomly according to LP solution. MAX SAT: independently set each variable TRUE with probability 1/2; expected satisfied weight ≥ OPT/2 (½-approximation).
+- **MAX CUT**: independently assign each vertex to a side with probability 1/2; expected cut weight ≥ OPT/2.
+- **PCP theorem** (Theorem 5.2 in Williamson & Shmoys): if there is a (7/8 + ε)-approximation for MAX E3SAT for any ε > 0, then P = NP. This is the canonical example of inapproximability.
 - **TSP with triangle inequality**: 1.5-approximation via Christofides algorithm.
-- **General TSP**: no constant-factor approximation exists unless P = NP.
+- **General TSP (no triangle inequality)**: no constant-factor approximation exists unless P = NP.
+- **Bin packing APTAS**: for any ε > 0, there is a polynomial-time algorithm achieving at most (1+ε)OPT + O(1/ε²) bins (asymptotic polynomial-time approximation scheme).
+
+Approximation classes: a **PTAS** (polynomial-time approximation scheme) gives (1+ε)OPT for any fixed ε > 0; an **FPTAS** (fully polynomial) runs in time polynomial in both n and 1/ε — applicable to knapsack but impossible for bin packing unless P = NP.
 
 ## Dealing with NP-hardness in practice
 
@@ -114,9 +134,11 @@ When exact polynomial-time solution is impossible (assuming P ≠ NP), approxima
 - [Algorithms and Complexity (Wilf)](/software-engineering/sources/algorithms-and-complexity-wilf.md) — Chapter 5 source.
 - [Algorithms (Erickson)](/software-engineering/sources/algorithms-erickson.md) — Chapter 12 source (full gadget-based proofs).
 - [Data Structures and Algorithm Analysis in C++ (Shaffer)](/software-engineering/sources/algorithms-shaffer-c.md) — Chapter 17 source (coping strategies, Halting Problem).
+- [The Design of Approximation Algorithms (Williamson & Shmoys)](/software-engineering/sources/design-of-approximation-algorithms.md) — graduate textbook on approximation algorithm design techniques (LP rounding, greedy, randomized rounding, primal-dual).
 
 ---
 
 [^src1]: [Algorithms and Complexity, Wilf — Part 11 (Ch 5: NP, backtracking, graph coloring)](../../raw/pdf/pdf-algorithms-and-complexity-part-11.md)
 [^src2]: [Algorithms, Erickson — Part 19 (NP-hardness, reductions)](../../raw/pdf/pdf-algorithms-part-19.md)
 [^src3]: [Algorithms, Erickson — Part 22 (MaxIndSet→MaxClique/VertexCover, 3-colorability, HamCycle, SubsetSum, NP-hard list, draughts reduction)](../../raw/pdf/pdf-algorithms-part-22.md)
+[^src_daa]: [The Design of Approximation Algorithms — Williamson & Shmoys (greedy set cover, submodular maximization, LP rounding, MAX SAT/CUT, PCP theorem)](../../raw/pdf/pdf-the-design-of-approximation-algorithms-part-01.md)

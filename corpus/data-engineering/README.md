@@ -221,7 +221,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [The Portfolio Project That Lands a DE Role](/data-engineering/portfolio-project-that-lands-a-de-role.md)
 
 <details>
-<summary>Source summaries (220)</summary>
+<summary>Source summaries (221)</summary>
 
 - ["A dbt \"logic mesh\" with packages: standard model and metrics across 25 autonomous organizations | dbt Summit"](/data-engineering/sources/a-dbt-logic-mesh-with-packages-standard-model-and-metrics-ac-bf162a97.md)
 - ["Academic → CTO: What Actually Matters in Data (Matthew Housley) - Confessions of a Data Guy"](/data-engineering/sources/academic-cto-what-actually-matters-in-data-matthew-housley-c-e9eae58c.md)
@@ -438,6 +438,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [The Medallion Architecture Most Teams Get Wrong (And What It Costs)](/data-engineering/sources/the-medallion-architecture-most-teams-get-wrong-and-what-it--uNtMetMNVgw.md)
 - [The ONLY Data Cleaning Framework You Need | Playbook Ep. 3](/data-engineering/sources/the-only-data-cleaning-framework-you-need-playbook-ep-3-y9wFFD2bXQM.md)
 - [Uplevel Your dbt Workflow with These Tools and Techniques](/data-engineering/sources/uplevel-your-dbt-workflow-with-these-tools-and-techniques-ece.md)
+- [Visual Studio Code (VSCode) Extensions for Data Engineers](/data-engineering/sources/visual-studio-code-vscode-extensions-for-data-engineers-e.md)
 - [VS Code Agent Mode Just Changed Everything](/data-engineering/sources/vs-code-agent-mode-just-changed-everything-dutyOc_cAEU.md)
 - [Web Scraping - Finding Profitable Amazon Products](/data-engineering/sources/web-scraping-finding-profitable-amazon-products-dc.md)
 - [You must learn Databricks in 2026 - The DataExpert.io Roadmap](/data-engineering/sources/you-must-learn-databricks-in-2026-the-dataexpert-io-roadmap-_Y17ST_VwKk.md)

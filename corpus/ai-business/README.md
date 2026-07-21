@@ -70,9 +70,10 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [AI and the Job Market](/ai-business/ai-and-the-job-market.md)
 
 <details>
-<summary>Source summaries (177)</summary>
+<summary>Source summaries (178)</summary>
 
 - ["$1,300/Day Automated Bittensor Investing With Claude Code (34 Min Free Masterclass)"](/ai-business/sources/1-300-day-automated-bittensor-investing-with-claude-code-34--SHEs8gNh7sQ.md)
+- ["$100 million for open source: A milestone built by the community"](/ai-business/sources/100-million-for-open-source-a-milestone-built-by-the-communi-580ab93c.md)
 - ["20-30 Years Old Is The Tutorial Phase, Don't F*ck It Up - Dan Koe"](/ai-business/sources/20-30-years-old-is-the-tutorial-phase-don-t-f-ck-it-up-dan-k-67066ee2.md)
 - ["2026.25: The Stuff of Myth(os)"](/ai-business/sources/2026-25-the-stuff-of-myth-os-5c0d0378.md)
 - ["2026.26: Summer Vibes"](/ai-business/sources/2026-26-summer-vibes-510e62ae.md)

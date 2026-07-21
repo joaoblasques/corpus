@@ -6,7 +6,7 @@ tags:
   - corpus/software-engineering
   - hub
 created: 2026-05-07
-updated: 2026-07-13
+updated: 2026-07-21
 ---
 
 # Software Engineering
@@ -86,6 +86,8 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Algorithms and Data Structures (Nievergelt & Hinrichs, Global Text)](/software-engineering/sources/algorithms-nievergelt.md) — source · draft · open-access CC BY 3.0 textbook; implicit data structures; algorithm animation emphasis; EBNF/syntax diagrams
 - [Data Structures — Wikipedia Compilation (2010)](/software-engineering/sources/data-structures-wikipedia.md) — source · draft · 503-page Wikipedia-sourced reference survey; deque/A-Steal work-stealing; bit fields and type safety
 - [Learning Algorithm (PDF, 327 pages)](/software-engineering/sources/learning-algorithm.md) — source · draft · compact algorithms reference; interval scheduling, BFS/Dijkstra/Floyd-Warshall, Hoare/Lomuto quicksort, KMP string matching
+- [Efficient Algorithms on Texts (Crochemore & Rytter, 1994)](/software-engineering/sources/text-algorithms.md) — source · draft · suffix trees, DAWG, KMP/BM/Aho-Corasick, palindromes (Rad table, palstars), 2D pattern matching, LZ compression, shortest common superstring; all 20 parts ingested
+- [The Design of Approximation Algorithms (Williamson & Shmoys, 2011)](/software-engineering/sources/design-of-approximation-algorithms.md) — source · draft · graduate textbook; greedy (set cover, submodular (1−1/e)), LP rounding (vertex cover 2-approx), randomized rounding (MAX SAT, MAX CUT), APTAS/FPTAS, PCP hardness; parts 1-8 of 34 ingested
 
 ## Sources ingested
 - [Disasters I've Seen in a Microservices World](/03_Resources/Articles/Disasters in a Microservices World.md) — article note, João Alves / Hey World, 2025-10-30
@@ -146,7 +148,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [AI-Assisted Development](/software-engineering/ai-assisted-development.md)
 
 <details>
-<summary>Source summaries (76)</summary>
+<summary>Source summaries (78)</summary>
 
 - ["2024-05-25-15-54-25 - move-base-up by josephmachado · Pull Request #17 · josephmachado/simple_dbt_project"](/software-engineering/sources/2024-05-25-15-54-25-move-base-up-by-josephmachado-pull-reque-ee.md)
 - ["A Guide to Multi-Tenancy: Benefits and Challenges"](/software-engineering/sources/a-guide-to-multi-tenancy-benefits-and-challenges-e55e9184.md)
@@ -182,6 +184,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Devin The AI Software Engineer Coding AI Agent Builds & Deploys Full Stack Apps From Prompt For FREE](/software-engineering/sources/devin-the-ai-software-engineer-coding-ai-agent-builds-deploy-mV1SAj9qXtU.md)
 - [DevOps - Starship Terminal Prompt Configuration](/software-engineering/sources/devops-starship-terminal-prompt-configuration-cfa.md)
 - [DevOps - Terminal Customization Oh My Zsh Powerlevel10k](/software-engineering/sources/devops-terminal-customization-oh-my-zsh-powerlevel10k-eee10.md)
+- [Efficient Algorithms on Texts (Crochemore & Rytter, 1994)](/software-engineering/sources/text-algorithms.md)
 - [From 0 to IDE in NEOVIM from scratch | FREE COURSE // EP 1](/software-engineering/sources/from-0-to-ide-in-neovim-from-scratch-free-course-ep-1-zHTeCSVAFNY.md)
 - [Fundamentals of Backend Architecture - How to Design Scalable Software](/software-engineering/sources/fundamentals-of-backend-architecture-how-to-design-scalable--Qa-7iWxDz1A.md)
 - [Git & GitHub Tutorial | Visualized Git Course for Beginner & Professional Developers in 2024](/software-engineering/sources/git-github-tutorial-visualized-git-course-for-beginner-profe-S7XpTAnSDL4.md)
@@ -223,6 +226,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Source: The Software Engineer's Guidebook (Gergely Orosz)](/software-engineering/sources/software-engineers-guidebook.md)
 - [The best TUIs - powerful terminal apps](/software-engineering/sources/the-best-tuis-powerful-terminal-apps-_fLmA4fjiAE.md)
 - [The C.R.A.F.T.E.D. Prompt Framework for Software Engineers](/software-engineering/sources/the-c-r-a-f-t-e-d-prompt-framework-for-software-engineers-eee.md)
+- [The Design of Approximation Algorithms (Williamson & Shmoys, 2011)](/software-engineering/sources/design-of-approximation-algorithms.md)
 - [Why I Love Using Vim To Write Code](/software-engineering/sources/why-i-love-using-vim-to-write-code-o4X8GU7CCSU.md)
 
 </details>

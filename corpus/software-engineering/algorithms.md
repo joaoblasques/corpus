@@ -120,6 +120,9 @@ sources:
   - path: raw/_inbox/pdf-matters-computational-ideas-algorithms-source-code-part-50.md
     channel: pdf
     ingested_at: 2026-07-18
+  - path: raw/pdf/pdf-text-algorithms-part-01.md
+    channel: pdf
+    ingested_at: 2026-07-21
 aliases:
   - algorithms
   - recursion
@@ -165,6 +168,13 @@ aliases:
   - KMP algorithm
   - Knuth-Morris-Pratt
   - string matching
+  - suffix tree
+  - directed acyclic word graph
+  - DAWG
+  - Boyer-Moore
+  - Aho-Corasick
+  - palindrome algorithms
+  - palstar
   - Hoare partition
   - Lomuto partition
   - CORDIC
@@ -180,7 +190,7 @@ tags:
   - corpus/software-engineering
   - concept
 created: 2026-06-15
-updated: 2026-07-18
+updated: 2026-07-21
 ---
 
 # Algorithms (Strategies, Not Tricks)
@@ -350,12 +360,23 @@ The second half of "Matters Computational" (parts 28–50) covers specialized nu
 - **Galois field arithmetic (GF(2^n))**: LFSR sequences, irreducible polynomials, applications in error-correcting codes and cryptography [^srcMatters45].
 - **Chinese Remainder Theorem (CRT)**: modular recombination from residues to full values; parallelism in modular arithmetic [^srcMatters40].
 
+## Suffix data structures (Text Algorithms)
+
+**Suffix tree**: a compressed trie of all n suffixes of a string. Each chain of degree-1 nodes is collapsed into a single edge labeled by a text interval [i,j]. Size is O(n): ≤n leaves + ≤n-1 internal nodes = ≤2n-1 nodes. Enables exact pattern matching in O(m + occ), longest repeated substring, and many other queries. Related structure: the **directed acyclic word graph (DAWG)** merges isomorphic subtrees instead of compressing chains; also O(n) states (≤2n-1); recognizes all subwords of the text; edges carry single characters (unlike suffix tree interval labels). [^src_ta]
+
+**Multi-pattern matching (Aho-Corasick)**: construct a trie of all k patterns; add failure links (analogous to KMP failure function, but cross-pattern); scan text once in O(n + total_pattern_length + occ). Used in grep for fixed-string sets, antivirus engines, network packet inspection.
+
+**Palindromes**: the radius table Rad[i] gives the half-length of the maximal odd palindrome centered at position i, computed in O(n). A **palstar** is a text decomposable into a concatenation of palindromes; recognized in O(n) via a stack-based algorithm using Rad plus a first-smallest-palindrome table. [^src_ta]
+
+For the full rigorous treatment of suffix trees, DAWG construction, text compression (LZ77/LZ78), 2D pattern matching, and shortest common superstring approximation: [Text Algorithms (Crochemore & Rytter)](/software-engineering/sources/text-algorithms.md).
+
 ## See also
 
 - [Data Structures and Big O Notation](/software-engineering/data-structures.md) — the complexity classes (O(1)/O(log n)/O(n)/O(n²)) these strategies trade in, and the structures (stacks, trees, hashmaps) the algorithms operate on.
 - [Complexity Theory](/software-engineering/complexity-theory.md) — P vs NP, NP-complete problems, reductions.
 - [Software Design Principles](/software-engineering/software-design-principles.md) — simplicity as a design value mirrors "don't do more work than needed."
 - [Matters Computational](/software-engineering/sources/matters-computational.md) — exhaustive C++ reference on bit wizardry, FFT, NTT, combinatorial generation (Arndt).
+- [Text Algorithms (Crochemore & Rytter)](/software-engineering/sources/text-algorithms.md) — rigorous treatment of suffix trees, DAWG, KMP/BM/Aho-Corasick, palindromes, text compression, 2D matching.
 
 [^src1]: [Famous Computer Science Algorithms (recursion, search, DP)](../../raw/youtube/youtube-fkcfaapypuq.md) (Tech With Tim; fetched via the source email)
 [^src2]: [you're learning algorithms the wrong way](../../raw/email/email-2026-06-08-youre-learning-algorithms-the-wrong-way.md) (Tech With Tim newsletter)
@@ -366,6 +387,7 @@ The second half of "Matters Computational" (parts 28–50) covers specialized nu
 [^src_shaffer]: [Data Structures and Algorithm Analysis in C++ (Shaffer) — Part 1 (Preface, Ch 1, sorting/external sorting)](../../raw/pdf/pdf-data-structures-and-algorithm-analysis-in-c-part-01.md)
 [^src_learning]: [Learning Algorithm PDF — Parts 1-9 (greedy scheduling, BFS/Dijkstra, Floyd-Warshall, DP, quicksort, KMP)](../../raw/pdf/pdf-learning-algorithm-part-01.md)
 [^src_arndt]: [Matters Computational — Parts 1-27 (bit wizardry, FFT, NTT, combinatorial generation)](../../raw/pdf/pdf-matters-computational-ideas-algorithms-source-code-part-01.md)
+[^src_ta]: [Text Algorithms — Crochemore & Rytter (suffix trees, DAWG, palindromes, 2D matching)](../../raw/pdf/pdf-text-algorithms-part-01.md)
 [^srcMatters28]: [Matters Computational — Part 28](../../raw/pdf/pdf-matters-computational-ideas-algorithms-source-code-part-28.md)
 [^srcMatters30]: [Matters Computational — Part 30](../../raw/pdf/pdf-matters-computational-ideas-algorithms-source-code-part-30.md)
 [^srcMatters35]: [Matters Computational — Part 35](../../raw/pdf/pdf-matters-computational-ideas-algorithms-source-code-part-35.md)

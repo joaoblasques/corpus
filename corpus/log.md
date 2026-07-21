@@ -2,6 +2,24 @@
 
 > OKF v0.1 change log. Newest first, grouped by date.
 
+## 2026-07-21
+* **Ingest**: 50 sources ingested · 0 deferred · pages_created=2 · pages_updated=4 · status=ok · run=ingest-auto
+* **Ingest detail**:
+  - SLP parts 17-38 (22 sources): updated `corpus/ai-engineering/sources/speech-and-language-processing.md` (complete 38-part coverage: Chapters 12-25, MT through Conversation + bibliography); channel=pdf; domain=ai-engineering
+  - Text Algorithms parts 1-20 (20 sources): created `corpus/software-engineering/sources/text-algorithms.md` (Crochemore & Rytter; suffix trees, DAWG, KMP, palindromes, 2D matching, LZ); updated `corpus/software-engineering/algorithms.md` (suffix data structures section); channel=pdf; domain=software-engineering
+  - Design of Approximation Algorithms parts 1-8 (8 sources): created `corpus/software-engineering/sources/design-of-approximation-algorithms.md` (Williamson & Shmoys; greedy set cover, submodular (1−1/e), LP rounding, MAX SAT/CUT); updated `corpus/software-engineering/complexity-theory.md` (expanded approximation algorithms section); channel=pdf; domain=software-engineering
+
+* **Collectors**: gmail=4, blog_promote=0, obsidian=4, book_discover=0, blog_discover=0, book_fetch=0, pdf=0, image=0, books=0, arxiv=0, youtube=0, github_discover=0, github_promote=0, github=0, x=0, links_refetch=0
+* **Ingest**: 50 ingested · 0 deferred · status=ok
+* **YoutubeQuick**: 0 intake · 0 rescued · 0 skipped · status=ok
+* **DocsQuick**: 16 intake · 32 thin · 2 llm_fail · status=ok
+* **YoutubeReap**: 0 removed · status=ok
+* **Gardener**: 4 stubs deepened · status=ok
+* **Heal**: 0 citations repointed · 0 unfixable · 6 hubs reindexed · 30 cross-domain links · status=ok
+* **Depth**: 392 knowledge · 1281 sources · ratio 1:3.3
+* **GapResolver**: 0 gap dispatched · 0 sources queued · status=ok
+* **Lint**: 1 broken wikilinks · 0 broken citations · 0 orphans · 1215 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+* **OKF**: 0 violations
 ## 2026-07-20
 * **Ingest**: 50 sources ingested · 0 deferred · pages_created=3 · pages_updated=2 · status=ok · run=ingest-auto
 * **Ingest detail**:

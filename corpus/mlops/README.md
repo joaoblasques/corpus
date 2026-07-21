@@ -137,7 +137,7 @@ The engineering substrate for building ML and software systems: how the developm
 - [Environment Promotion (dev → acc → prd)](/mlops/environment-promotion.md)
 
 <details>
-<summary>Source summaries (97)</summary>
+<summary>Source summaries (100)</summary>
 
 - ["29%+ warehouse savings: How the dbt Fusion engine drives cost efficiency | dbt Labs"](/mlops/sources/29-warehouse-savings-how-the-dbt-fusion-engine-drives-cost-e-121b247d.md)
 - ["AL 005: 60% Growth in 60 Days? How?!"](/mlops/sources/al-005-60-growth-in-60-days-how-150a587c.md)
@@ -170,9 +170,12 @@ The engineering substrate for building ML and software systems: how the developm
 - [A Catalog Is All You Need](/mlops/sources/a-catalog-is-all-you-need-1015a427.md)
 - [A Decision Framework for ETL Migration to Databricks](/mlops/sources/a-decision-framework-for-etl-migration-to-databricks-9db6e9d6.md)
 - [a-novel-approach-to-trading-strategy-parameter-optimization](/mlops/sources/a-novel-approach-to-trading-strategy-parameter-optimization-a.md)
+- [About MetricFlow | dbt Developer Hub](/mlops/sources/about-metricflow-dbt-developer-hub-b.md)
 - [about-dbt-wizard-in-the-dbt-platform-previewstarterenterpris](/mlops/sources/about-dbt-wizard-in-the-dbt-platform-previewstarterenterpris-eeaeee.md)
 - [Activities - Kai Waehner](/mlops/sources/activities-kai-waehner-0cf0b10c.md)
+- [ADBC?](/mlops/sources/adbc-b0c21ff6.md)
 - [Add Git-Like Data Versioning to MATLAB with lakeFS](/mlops/sources/add-git-like-data-versioning-to-matlab-with-lakefs-8ae9afe5.md)
+- [Add snapshots to your DAG | dbt Developer Hub](/mlops/sources/add-snapshots-to-your-dag-dbt-developer-hub-b.md)
 - [Agent Bricks and the Commoditization of AI Systems - Confessions of a Data Guy](/mlops/sources/agent-bricks-and-the-commoditization-of-ai-systems-confessio-4ec6fbca.md)
 - [AI agent versioned filesystem with E2B and lakeFS](/mlops/sources/ai-agent-versioned-filesystem-with-e2b-and-lakefs-5b56487a.md)
 - [AI Sped Up Coding Faster Than It Sped Up Delivery](/mlops/sources/ai-sped-up-coding-faster-than-it-sped-up-delivery-b8e50c89.md)

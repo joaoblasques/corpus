@@ -170,7 +170,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 ### Sources
 - [Pattern Recognition and Machine Learning (Bishop, 2006)](/ai-engineering/sources/pattern-recognition-and-machine-learning.md) — source · draft · canonical Bayesian ML textbook (758pp, Springer); covers probability distributions, linear models, neural networks, kernel methods/GPs/SVMs, graphical models, EM, variational inference, MCMC, PCA, HMMs, boosting
 - [Probabilistic Machine Learning: An Introduction (Murphy, 2022)](/ai-engineering/sources/probabilistic-machine-learning-intro.md) — source · draft · modern probabilistic ML textbook (860pp, MIT Press, CC-BY-NC-ND); all 43 parts ingested; foundations → linear models → deep learning → nonparametric → clustering → dimensionality reduction → graph embeddings
-- [Speech and Language Processing, 3rd Edition Draft (Jurafsky & Martin, 2026)](/ai-engineering/sources/speech-and-language-processing.md) — source · draft · definitive NLP/speech textbook (626pp); LLMs, transformers, n-grams, embeddings, RNNs, ASR, TTS, linguistic structure; parts 1-16 of 38 ingested
+- [Speech and Language Processing, 3rd Edition Draft (Jurafsky & Martin, 2026)](/ai-engineering/sources/speech-and-language-processing.md) — source · draft · definitive NLP/speech textbook (626pp); LLMs, transformers, n-grams, embeddings, RNNs, ASR (Whisper), TTS, MT, sequence labeling (CRF/HMM), parsing (CKY), coreference; all 38 parts ingested (complete)
 - [Mining of Massive Datasets (Leskovec, Rajaraman, Ullman)](/ai-engineering/sources/mining-of-massive-datasets.md) — source · draft · large-scale data algorithms textbook; ingested parts 25-28 covering SVD, CUR decomposition, perceptrons, SVMs, and kNN at scale
 - [The Quest for Artificial Intelligence (Nils Nilsson, Cambridge 2010)](/ai-engineering/sources/the-quest-for-artificial-intelligence-nilsson.md) — source · draft · 707-page canonical insider history of AI from antiquity through 2009; 35 chapters; covers founding gatherings, expert systems, AI winters, neural-net revivals, Bayesian methods, and modern achievements
 - [High-Dimensional Data Analysis with Low-Dimensional Models (Wright & Ma)](/ai-engineering/sources/wright-ma-high-dimensional-data-analysis.md) — source · draft · 730pp graduate textbook (Cambridge 2018); unified treatment of sparse recovery (ℓ₁, phase transition, RIP), low-rank recovery (nuclear norm, matrix completion, RPCA), and optimization geometry (benign landscape, saddle points)
@@ -398,7 +398,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Tool Calling & Context Engineering: How They Interlock](/ai-engineering/tool-calling-and-context-engineering.md)
 
 <details>
-<summary>Source summaries (655)</summary>
+<summary>Source summaries (665)</summary>
 
 - ["2024 State of Analytics Engineering, crafted by dbt Labs | dbt Labs"](/ai-engineering/sources/2024-state-of-analytics-engineering-crafted-by-dbt-labs-dbt--cb342df0.md)
 - ["9 AI Concepts Explained: Tokenization, RAG, RLHF, LoRA & More"](/ai-engineering/sources/9-ai-concepts-explained-tokenization-rag-rlhf-lora-more-a.md)
@@ -432,6 +432,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - ["Agentic test processes, LLM benchmarks, and other notes on agentic coding from Galapagos Island"](/ai-engineering/sources/agentic-test-processes-llm-benchmarks-and-other-notes-on-age-bb44adf3.md)
 - ["Agents :: LocalAI"](/ai-engineering/sources/agents-localai-cee8af6c.md)
 - ["Agents, MCPs and buzzword fatigue: what AI actually changes for analytics engineers | dbt Summit"](/ai-engineering/sources/agents-mcps-and-buzzword-fatigue-what-ai-actually-changes-fo-0a7530d2.md)
+- ["AI Agent Automations in Claude, ChatGPT, and Grok: Which Platform Does It Best?"](/ai-engineering/sources/ai-agent-automations-in-claude-chatgpt-and-grok-which-platfo-be217894.md)
 - ["AI Agent Evaluators and Verifiers: How to Stop Agents from Grading Their Own Work"](/ai-engineering/sources/ai-agent-evaluators-and-verifiers-how-to-stop-agents-from-gr-b22aadef.md)
 - ["AI Agent Observability: How to Monitor Agents Running for Hours Without Babysitting"](/ai-engineering/sources/ai-agent-observability-how-to-monitor-agents-running-for-hou-48922d8f.md)
 - ["AI Agent vs Chatbot: Key Differences and Examples"](/ai-engineering/sources/ai-agent-vs-chatbot-key-differences-and-examples-8bd5654c.md)
@@ -564,6 +565,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - ["How Coding Agents Are Reshaping Engineering, Product and Design"](/ai-engineering/sources/how-coding-agents-are-reshaping-engineering-product-and-desi-cae17.md)
 - ["How I Use Claude Code with Gemma 4 (Local LLMs, No API Costs)"](/ai-engineering/sources/how-i-use-claude-code-with-gemma-4-local-llms-no-api-costs-sKNq4CqWkT4.md)
 - ["How to Design APIs Like a Senior Engineer (REST, GraphQL, Auth, Security)"](/ai-engineering/sources/how-to-design-apis-like-a-senior-engineer-rest-graphql-auth--Rrd6xkyjPB8.md)
+- ["How to Write a Good Spec for AI Agents: Five Principles"](/ai-engineering/sources/how-to-write-a-good-spec-for-ai-agents-five-principles-ce.md)
 - ["I Built the Same App 10 Times: Evaluating Frameworks for Mobile Performance | Loren Stewart"](/ai-engineering/sources/i-built-the-same-app-10-times-evaluating-frameworks-for-mobi-eaa.md)
 - ["If AI Writes the Code, Where's the Edge?"](/ai-engineering/sources/if-ai-writes-the-code-where-s-the-edge-eface.md)
 - ["If I Started AI Freelancing in 2026, I'd Do This"](/ai-engineering/sources/if-i-started-ai-freelancing-in-2026-i-d-do-this-CRYea6gFWgk.md)
@@ -595,6 +597,8 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - ["Unix Philosophy in the AI Age — Simplicity, Composability, and Taste as Engineering Virtues"](/ai-engineering/sources/unix-philosophy-in-the-ai-age-simplicity-composability-and-t-afe.md)
 - ["UV: The Modern Go-To Python Environment and Package Manager"](/ai-engineering/sources/uv-the-modern-go-to-python-environment-and-package-manager-aae.md)
 - ["Vector Sync Patterns: Keeping AI Features Fresh When Your Data Changes - InfoQ"](/ai-engineering/sources/vector-sync-patterns-keeping-ai-features-fresh-when-your-dat-fe.md)
+- ["When code is free, research is all that matters"](/ai-engineering/sources/when-code-is-free-research-is-all-that-matters-aa01.md)
+- ["Writing a Good CLAUDE.md: Context Engineering for Coding Agents"](/ai-engineering/sources/writing-a-good-claude-md-context-engineering-for-coding-agen-eee.md)
 - ["You Can Learn AI Agent Harness & Loop Engineering In 19 Min | LLM Ops, Eval, Tracing, RAG"](/ai-engineering/sources/you-can-learn-ai-agent-harness-loop-engineering-in-19-min-ll-GrNbuWWJYiI.md)
 - ["“I spent $50,000 self-hosting AI models. You should too.” - 0xSero"](/ai-engineering/sources/i-spent-50-000-self-hosting-ai-models-you-should-too-0xsero-ImPESBftwr8.md)
 - ["🎧 Best of the Pod: Vercel’s Guillermo Rauch on What Comes After Coding"](/ai-engineering/sources/best-of-the-pod-vercel-s-guillermo-rauch-on-what-comes-after-5edc7ba5.md)
@@ -627,6 +631,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [7 Best Web Search APIs for Grounding LLMs in 2026 - Confident AI](/ai-engineering/sources/7-best-web-search-apis-for-grounding-llms-in-2026-confident--a319ebfc.md)
 - [7 Hermes uses you must try (that actually work)](/ai-engineering/sources/7-hermes-uses-you-must-try-that-actually-work-6BHh8BoKim4.md)
 - [7 INSANE loops you need to try right now](/ai-engineering/sources/7-insane-loops-you-need-to-try-right-now-F4a8aMLb678.md)
+- [7 real-world AI agent examples you need to know](/ai-engineering/sources/7-real-world-ai-agent-examples-you-need-to-know-cd3a270f.md)
 - [8.9 Million AI Users](/ai-engineering/sources/8-9-million-ai-users-f79fd178.md)
 - [9 Claude Code Plugins to Build 10x Faster](/ai-engineering/sources/9-claude-code-plugins-to-build-10x-faster-sBF3UumkL4Y.md)
 - [98.01% of sites on Cloudflare now use IPv6](/ai-engineering/sources/98-01-of-sites-on-cloudflare-now-use-ipv6-f7d08248.md)
@@ -645,8 +650,11 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [A quote from Linus Torvalds](/ai-engineering/sources/a-quote-from-linus-torvalds-cf5f6e53.md)
 - [A quote from Nilay Patel](/ai-engineering/sources/a-quote-from-nilay-patel-bc84c97b.md)
 - [A quote from OpenAI](/ai-engineering/sources/a-quote-from-openai-232e7d75.md)
+- [A quote from Sam Altman](/ai-engineering/sources/a-quote-from-sam-altman-b5d7973c.md)
+- [A quote from Thibault Sottiaux](/ai-engineering/sources/a-quote-from-thibault-sottiaux-b62b68c9.md)
 - [A Science-based Guide to Thinking Creatively—With LLMs](/ai-engineering/sources/a-science-based-guide-to-thinking-creatively-with-llms-274a50e2.md)
 - [A Tale of Two Models](/ai-engineering/sources/a-tale-of-two-models-ffdbb929.md)
+- [A Unix Manifesto for the Age of AI](/ai-engineering/sources/a-unix-manifesto-for-the-age-of-ai-a.md)
 - [a-guide-to-context-engineering-for-llms](/ai-engineering/sources/a-guide-to-context-engineering-for-llms-doc.md)
 - [a-technical-roadmap-to-context-engineering-in-llms-mechanism](/ai-engineering/sources/a-technical-roadmap-to-context-engineering-in-llms-mechanism-eca.md)
 - [Abhishek Pandey | Databricks](/ai-engineering/sources/abhishek-pandey-databricks-b56978a3.md)
@@ -660,6 +668,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Agentic coding in analytics engineering (w/ Mikkel Dengsøe)](/ai-engineering/sources/agentic-coding-in-analytics-engineering-w-mikkel-dengs-e-cf1522dd.md)
 - [Agents](/ai-engineering/sources/agents-adfd540d.md)
 - [Agents Category | Blog | Claude by Anthropic](/ai-engineering/sources/agents-category-blog-claude-by-anthropic-ac.md)
+- [Agents need their own computer. Here's how to give them one safely.](/ai-engineering/sources/agents-need-their-own-computer-here-s-how-to-give-them-one-s-4934c442.md)
 - [AGENTS.md — What Belongs There and What Wastes Context](/ai-engineering/sources/agents-md-what-belongs-there-and-what-wastes-context-ce.md)
 - [Ahmad Osman on why local AI is catching up](/ai-engineering/sources/ahmad-osman-on-why-local-ai-is-catching-up-f0383cc6.md)
 - [AI - Google GenAI Leadership Course Summary](/ai-engineering/sources/ai-google-genai-leadership-course-summary-a.md)
@@ -1009,6 +1018,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Superpowers — Agentic Skills Framework for TDD-First Software Development](/ai-engineering/sources/superpowers-agentic-skills-framework-for-tdd-first-software--f.md)
 - [Synthetic Data - Training AI With Artificial Worlds](/ai-engineering/sources/synthetic-data-training-ai-with-artificial-worlds-d.md)
 - [Synthetic Data Generation with LLMs — No Kaggle Needed](/ai-engineering/sources/synthetic-data-generation-with-llms-no-kaggle-needed-eeded.md)
+- [Testing Best Practices and Strategies](/ai-engineering/sources/testing-best-practices-and-strategies-aee.md)
 - [The 2025 AI + Data Engineering Career Roadmap](/ai-engineering/sources/the-2025-ai-data-engineering-career-roadmap-ada.md)
 - [The 7 phases of AI-driven development](/ai-engineering/sources/the-7-phases-of-ai-driven-development-Ah9p7v7nJWg.md)
 - [The 8 Levels of Agentic Engineering](/ai-engineering/sources/the-8-levels-of-agentic-engineering-ee.md)
