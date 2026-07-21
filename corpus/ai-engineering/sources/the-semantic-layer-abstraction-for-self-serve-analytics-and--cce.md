@@ -22,7 +22,9 @@ origin: obsidian
 
 > **Quick intake** (obsidian). raw stub: `notes-03-resources-articles-semantic-layer-self-serve-analytics-concept.md`
 
-['The document discusses the semantic layer concept and its role in enabling self-serve analytics and AI comprehension of organizational data.', 'It explores the semantic layer as a translator between complex data infrastructure and business users.', 'The key takeaway is that the semantic layer abstracts the complexity of insight extraction, exposing only understandable, business-friendly concepts.']
+- The document discusses the semantic layer concept and its role in enabling self-serve analytics and AI comprehension of organizational data.
+- It explores the semantic layer as a translator between complex data infrastructure and business users.
+- The key takeaway is that the semantic layer abstracts the complexity of insight extraction, exposing only understandable, business-friendly concepts.
 
 **Key topics**
 - Semantic Layer

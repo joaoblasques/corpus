@@ -216,6 +216,10 @@ The preferred pattern: root `CLAUDE.md` contains only critical constraints, buil
 
 ---
 
+## Further sources (not yet expanded)
+
+- [Writing a Good CLAUDE.md: Context Engineering for Coding Agents](/ai-engineering/sources/writing-a-good-claude-md-context-engineering-for-coding-agen-eee.md) — quick-intake stub; argues brevity and universal applicability ("less is more"), consistent with this page's progressive-disclosure guidance
+
 [^src1]: [abhishekray07/claude-md-templates — CLAUDE.md best practices](../../raw/web/github-abhishekray07-claude-md-templates-claude-md-best-prac.md)
 [^src2]: [Cursor Rules in Action: How Our Engineers Use It at Atlan](../../raw/web/cursor-rules-in-action-how-our-engineers-use-it-at-atlan.md)
 [^src3]: [Cross-Platform Agent Skills Guide: Claude Code, Codex, Cursor & Copilot](../../raw/email/email-2026-04-17-cross-platform-agent-skills-guide-claude-code-codex-cursor-c.md)

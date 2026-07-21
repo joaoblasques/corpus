@@ -22,7 +22,9 @@ origin: obsidian
 
 > **Quick intake** (obsidian). raw stub: `notes-03-resources-articles-when-code-is-free-research-matters-amytam01.md`
 
-['The value of research in AI engineering lies in identifying and solving uncertain problems.', 'Reasoning under uncertainty is a high-value skill in AI engineering.', 'AI labs have inherited the dynamic of paying premiums for researchers with this skill.']
+- The value of research in AI engineering lies in identifying and solving uncertain problems.
+- Reasoning under uncertainty is a high-value skill in AI engineering.
+- AI labs have inherited the dynamic of paying premiums for researchers with this skill.
 
 **Key topics**
 - research

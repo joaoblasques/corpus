@@ -22,7 +22,9 @@ origin: obsidian
 
 > **Quick intake** (obsidian). raw stub: `notes-03-resources-articles-top-ai-github-repositories-2026-landscape.md`
 
-['The article surveys the top AI GitHub repositories in 2026, highlighting community-validated tools and frameworks.', 'It identifies four macro-trends: local AI, autonomous agents, open-weight models, and visual development tools.', 'The featured repositories showcase innovative solutions for AI development, including personal AI assistants, workflow automation, and agentic frameworks.']
+- The article surveys the top AI GitHub repositories in 2026, highlighting community-validated tools and frameworks.
+- It identifies four macro-trends: local AI, autonomous agents, open-weight models, and visual development tools.
+- The featured repositories showcase innovative solutions for AI development, including personal AI assistants, workflow automation, and agentic frameworks.
 
 **Key topics**
 - OpenClaw

@@ -440,6 +440,7 @@ This governance framing complements the §Defense in depth (four layers) above �
 - [Vibe Coding](/ai-engineering/vibe-coding.md) — the 70% problem; why AI code needs more security review, not less
 - [Multi-Agent Systems](/ai-engineering/multi-agent-systems.md) — multi-agent failure modes including agentjacking and disagreement loops
 - [Beyond Vibe Coding (Book)](/ai-engineering/sources/beyond-vibe-coding-book.md) — ch8 as primary source for vulnerability taxonomy
+- [Agent Execution Isolation](/ai-engineering/agent-execution-isolation.md) — depends-on this page's threat vocabulary; covers sandbox isolation tiers, the container-vs-microVM disagreement, and why isolation contains blast radius but not injection
 
 ---
 

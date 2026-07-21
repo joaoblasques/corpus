@@ -112,6 +112,11 @@ From the Tableau Conference report: data analysts are no longer just building da
 
 ---
 
+## Further sources (not yet expanded)
+
+- [The Semantic Layer: Abstraction for Self-Serve Analytics and AI](/ai-engineering/sources/the-semantic-layer-abstraction-for-self-serve-analytics-and--cce.md) — quick-intake stub; frames the semantic layer as a translator between data infrastructure and business users
+- [About MetricFlow | dbt Developer Hub](/mlops/sources/about-metricflow-dbt-developer-hub-b.md) — quick-intake stub; dbt Labs' YAML-driven SQL generation engine implementing this concept
+
 [^src1]: [Onboarding AI: Why the Semantic Layer Matters](../../raw/web/onboarding-ai-why-the-semantic-layer-matters.md)
 [^src2]: [Data teams should become context teams](../../raw/web/data-teams-should-become-context-teams.md)
 [^src3]: [I Started My Career in Tableau (Jess Ramos, Big Data Energy)](../../raw/email/email-2026-05-20-i-started-my-career-in-tableau.md)

@@ -31,3 +31,5 @@ The document discusses the importance of simplicity in AI software development, 
 - Composable architecture
 - AI tooling
 - Local inference
+
+Analysed on [Simplicity as an Engineering Constraint in the AI Age](/software-engineering/simplicity-as-engineering-constraint.md). Note: this page and [Unix Philosophy in the AI Age](/ai-engineering/sources/unix-philosophy-in-the-ai-age-simplicity-composability-and-t-afe.md) summarise the **same** underlying article (linuxtoaster.com/manifesto.html) collected via two channels — they are duplicates, not independent corroboration.

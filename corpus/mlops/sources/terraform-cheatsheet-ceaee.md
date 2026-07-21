@@ -22,7 +22,9 @@ origin: obsidian
 
 > **Quick intake** (obsidian). raw stub: `notes-03-resources-articles-terraform-cheatsheet.md`
 
-['This document provides a Terraform interview cheat sheet covering lessons 1-12, focusing on infrastructure as code, state management, and best practices for collaboration and security.', 'Key takeaways include the importance of reproducibility, auditability, and collaboration, as well as the use of remote state, versioning, and locking.', 'The document also covers advanced practices such as policy as code, shift left, and data engineering integrations.']
+- This document provides a Terraform interview cheat sheet covering lessons 1-12, focusing on infrastructure as code, state management, and best practices for collaboration and security.
+- Key takeaways include the importance of reproducibility, auditability, and collaboration, as well as the use of remote state, versioning, and locking.
+- The document also covers advanced practices such as policy as code, shift left, and data engineering integrations.
 
 **Key topics**
 - Terraform

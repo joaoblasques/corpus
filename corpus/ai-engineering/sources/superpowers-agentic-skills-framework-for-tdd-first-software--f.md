@@ -22,7 +22,9 @@ origin: obsidian
 
 > **Quick intake** (obsidian). raw stub: `notes-03-resources-articles-superpowers-agentic-skills-framework-tdd-workflow.md`
 
-['Superpowers is an agentic skills framework and software development methodology for AI coding agents.', 'It guides agents through a deliberate professional workflow emphasizing YAGNI, DRY, and red/green TDD.', 'The framework is available on the Claude Code, Cursor, and Gemini CLI plugin marketplaces.']
+- Superpowers is an agentic skills framework and software development methodology for AI coding agents.
+- It guides agents through a deliberate professional workflow emphasizing YAGNI, DRY, and red/green TDD.
+- The framework is available on the Claude Code, Cursor, and Gemini CLI plugin marketplaces.
 
 **Key topics**
 - Agentic Skills Framework

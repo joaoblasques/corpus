@@ -31,3 +31,5 @@ The article discusses the importance of giving agents their own isolated compute
 - LangSmith Sandboxes
 - AI Engineering
 - Model-Generated Code
+
+Analysed in depth on [Agent Execution Isolation](/ai-engineering/agent-execution-isolation.md), which contrasts this source's "containers are insufficient" position against [Sandcastle](/ai-engineering/sandcastle.md)'s container-as-valid-tier model, and notes that the source's own credential-brokering guidance corroborates the pattern already on [Agent Security](/ai-engineering/agent-security.md).

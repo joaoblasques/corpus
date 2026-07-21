@@ -199,6 +199,10 @@ The `BETWEEN` join ensures each purchase maps to the user's address *as of that 
 
 ---
 
+## Further sources (not yet expanded)
+
+- [Add snapshots to your DAG | dbt Developer Hub](/mlops/sources/add-snapshots-to-your-dag-dbt-developer-hub-b.md) — quick-intake stub; dbt snapshots as the tool-level implementation of type-2 SCD
+
 [^src1]: [SCD2 Table Creation with MERGE INTO in Spark and Iceberg](/03_Resources/Articles/scd2-table-creation-merge-into-spark-iceberg.md)
 [^src2]: [Dimensional Data Modeling - Idempotent Pipelines and SCD Patterns](/03_Resources/Study Notes/Dimensional Data Modeling - Idempotent Pipelines and SCD Patterns.md)
 [^src3]: [Stop Using Slowly Changing Dimensions (Part 1)](../../raw/web/stop-using-slowly-changing-dimensions-part-1.md)

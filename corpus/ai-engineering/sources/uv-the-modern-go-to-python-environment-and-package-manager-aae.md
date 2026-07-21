@@ -22,7 +22,9 @@ origin: obsidian
 
 > **Quick intake** (obsidian). raw stub: `notes-03-resources-articles-uv-python-environment-package-manager.md`
 
-['This document provides a practical tutorial on using UV as the definitive Python project and environment manager.', 'It covers project initialization, virtual environment management, dependency locking, and project structure.', 'UV replaces multiple tools like pip, venv, pyenv, and pip-tools with a single fast tool.']
+- This document provides a practical tutorial on using UV as the definitive Python project and environment manager.
+- It covers project initialization, virtual environment management, dependency locking, and project structure.
+- UV replaces multiple tools like pip, venv, pyenv, and pip-tools with a single fast tool.
 
 **Key topics**
 - UV

@@ -168,6 +168,11 @@ A full end-to-end spec-to-agent pipeline [^src5]:
 
 ---
 
+## Further sources (not yet expanded)
+
+- [How to Write a Good Spec for AI Agents: Five Principles](/ai-engineering/sources/how-to-write-a-good-spec-for-ai-agents-five-principles-ce.md) — quick-intake stub; five spec-writing principles balancing context limits against precision loss
+- [Superpowers — Agentic Skills Framework for TDD-First Software Development](/ai-engineering/sources/superpowers-agentic-skills-framework-for-tdd-first-software--f.md) — quick-intake stub; a skills framework encoding YAGNI/DRY/red-green TDD as agent workflow
+
 [^src1]: [Claude Max Plan Is Not What You Think (The Code newsletter)](../../raw/email/email-2026-06-16-claude-max-plan-is-not-what-you-think.md) — referencing Apoorv Gupta/Microsoft spec-driven development post, GitHub spec-kit, Böckeler/martinfowler.com
 [^src2]: [Claude Code built my website (9 steps)](../../raw/email/email-2026-06-14-claude-code-built-my-website-9-steps.md) — Charlie Hills
 [^src3]: [How Senior Engineers Actually Build With AI (Ghost AI build — six-file system)](../../raw/youtube/youtube-14RP8liACqo-how-senior-engineers-actually-build-with-ai-in-2026-build-a.md) — JavaScript Mastery, YouTube

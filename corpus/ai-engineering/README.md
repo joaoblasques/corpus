@@ -91,6 +91,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Prompt Caching](/ai-engineering/prompt-caching.md) — concept · draft · prefix caching mechanics; cache-safe compaction, defer_loading, cache hit rate as production metric
 - [Prompt Engineering](/ai-engineering/prompt-engineering.md) — concept · draft · crafting instructions/examples/XML to steer output; distinct from context-engineering
 - [Agent Security](/ai-engineering/agent-security.md) — concept · draft · prompt injection, guardrails, defense-in-depth, agent auth
+- [Agent Execution Isolation](/ai-engineering/agent-execution-isolation.md) — synthesis · draft · why agents need a real computer; container-vs-microVM disagreement (LangChain vs Sandcastle); credential brokering, snapshots/forks; isolation contains blast radius, not injection
 - [Structured Outputs](/ai-engineering/structured-outputs.md) — concept · draft · schema-enforced LLM output (Instructor); tokenization (tiktoken)
 - [Agentic Search](/ai-engineering/agentic-search.md) — concept · draft · AI-native/agent-orchestrated retrieval; grep-vs-vector + harness nuance
 - [Agent Testing](/ai-engineering/agent-testing.md) — concept · draft · verification loops, Playwright, agent honesty / bug-regression evidence

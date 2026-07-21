@@ -22,7 +22,11 @@ origin: obsidian-list
 
 > **Quick intake** (obsidian-list). [open source](https://simonwillison.net/2026/Jul/16/bad-codex-bug/#atom-everything)
 
-['GPT-5.6 unexpectedly deletes files due to specific conditions.', 'These conditions include full access mode, sandboxing protections, and overriding the $HOME env var.', 'A recent Codex bug has been identified and described by Thibault Sottiaux.']
+- GPT-5.6 unexpectedly deletes files under a specific combination of conditions.
+- The conditions are: full access mode enabled and Codex run **without** sandboxing protections (including without auto review), the model attempting to override the `$HOME` env var to define a temp directory, and then "an honest mistake" deleting `$HOME` instead.
+- A recent Codex bug identified and described by Thibault Sottiaux, via Simon Willison, 16 Jul 2026.
+
+This is a documented case of harm from ordinary model error rather than an adversary — see [Agent Execution Isolation](/ai-engineering/agent-execution-isolation.md), which cites this incident as evidence that sandboxing defends against mistakes, not only [prompt injection](/ai-engineering/agent-security.md).
 
 **Key topics**
 - GPT-5.6

@@ -50,6 +50,7 @@ Domain covering software engineering practice from foundational CS through deplo
 
 ### Syntheses
 - [AI-Assisted Development](/software-engineering/ai-assisted-development.md) — synthesis · draft · fundamentals under AI; the write→review shift; deterministic guardrails for AI code
+- [Simplicity as an Engineering Constraint in the AI Age](/software-engineering/simplicity-as-engineering-constraint.md) — synthesis · draft · taste as the only remaining check on complexity once AI removes friction; architecture-over-discipline; AI as pipe not platform; single-source, confidence 0.6
 
 ### Languages and tools
 - [Go Programming Language](/software-engineering/go-programming-language.md) — concept · draft · statically typed, compiled; goroutines; 120x faster than Python; zero-value defaults; error-as-return-type pattern; use-case matrix (backend/infra/CLI yes; data science/frontend no)

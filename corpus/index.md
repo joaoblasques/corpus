@@ -781,6 +781,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [Prompt Engineering](/ai-engineering/prompt-engineering.md) — concept · draft · crafting instructions/examples/XML; distinct from context-engineering
 - [Prompt Caching](/ai-engineering/prompt-caching.md) — concept · draft · prefix caching mechanics, cache-safe forking, defer_loading; the highest-return cost lever
 - [Agent Security](/ai-engineering/agent-security.md) — concept · draft · prompt injection, guardrails, defense-in-depth, agent auth
+- [Agent Execution Isolation](/ai-engineering/agent-execution-isolation.md) — synthesis · draft · why agents need a real computer; container-vs-microVM disagreement; credential brokering, snapshots/forks; isolation contains blast radius, not injection
 - [Structured Outputs](/ai-engineering/structured-outputs.md) — concept · draft · schema-enforced LLM output (Instructor); tokenization
 - [Agentic Search](/ai-engineering/agentic-search.md) — concept · draft · AI-native/agent-orchestrated retrieval; grep-vs-vector nuance
 - [Agent Testing](/ai-engineering/agent-testing.md) — concept · draft · verification loops, Playwright, bug-regression evidence
@@ -1266,6 +1267,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [Local-First Sync Architecture](/software-engineering/local-first-sync-architecture.md) — concept · draft · browser-as-database + optimistic mutations + granular reactivity; server as sync target (reverse-engineered from Linear)
 - [Test-Case Reduction](/software-engineering/test-case-reduction.md) — concept · draft · auto-shrink a failing input to a minimal reproducer via an interestingness test; ddmin/creduce/Shrink Ray
 - [AI-Assisted Development](/software-engineering/ai-assisted-development.md) — synthesis · draft · fundamentals under AI; write→review shift; deterministic guardrails
+- [Simplicity as an Engineering Constraint in the AI Age](/software-engineering/simplicity-as-engineering-constraint.md) — synthesis · draft · Unix manifesto: complexity as career strategy, architecture over discipline, AI as pipe not platform, deletion as mastery; single-source opinion piece
 - [Algorithms (Strategies, Not Tricks)](/software-engineering/algorithms.md) — concept · draft · recursion, binary search (divide & conquer), sorting, pathfinding/Dijkstra, MST/Prim's, dynamic programming / memoization; greedy (Huffman, exchange argument); network flow (Ford-Fulkerson); FFT; MST algorithms (Borůvka/Kruskal/Prim)
 - [Complexity Theory and NP-Completeness](/software-engineering/complexity-theory.md) — concept · draft · P vs NP; NP-complete (SAT, 3-coloring, TSP); polynomial-time reductions; approximation algorithms; average-case vs worst-case
 - [Algorithms and Complexity (Wilf, 1994)](/software-engineering/sources/algorithms-and-complexity-wilf.md) — source · draft · Herbert Wilf; 139p; recursion/FFT, network flow (Ford-Fulkerson), number theory, NP-completeness; free educational use

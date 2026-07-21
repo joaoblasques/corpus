@@ -64,5 +64,6 @@ The harness is multi-agent-provider: `claudeCode`, `pi`, `codex`, `cursor`, `ope
 - A concrete harness for running [long-running / AFK agents](/ai-engineering/long-running-agents.md); the `sequential-reviewer` and `parallel-planner-with-review` templates implement [multi-agent](/ai-engineering/multi-agent-systems.md) reviewer patterns.
 - Built to orchestrate [Claude Code](/ai-engineering/claude-code.md) (its default agent provider) among other coding agents.
 - Authored by Matt Pocock, shipped under the `@ai-hero/` npm scope; MIT-licensed [^src1].
+- Its provider model — Docker/Podman bind-mount as a first-class tier alongside Firecracker microVMs — *contradicts* LangChain's position that shared-kernel containers are structurally inadequate for model-generated code; the disagreement is set out on [Agent Execution Isolation](/ai-engineering/agent-execution-isolation.md).
 
 [^src1]: [mattpocock/sandcastle — orchestrate sandboxed coding agents](../../raw/web/github-mattpocock-sandcastle-orchestrate-sandboxed-coding-ag.md)

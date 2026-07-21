@@ -63,5 +63,9 @@ See [Databricks Development](/mlops/databricks-development.md) for the surroundi
 
 ---
 
+## Further sources (not yet expanded)
+
+- [UV: The Modern Go-To Python Environment and Package Manager](/ai-engineering/sources/uv-the-modern-go-to-python-environment-and-package-manager-aae.md) — quick-intake stub; tutorial framing of uv as a replacement for pip, venv, pyenv, and pip-tools
+
 [^src1]: [AI Engineering from Scratch — Phase 00 / 01 Dev Environment](../../raw/notes/00-01-dev-environment-kb.md)
 [^src2]: [Developing on Databricks (Marvelous MLOps, Lecture 2)](../../raw/email/email-2025-07-29-developing-on-databricks.md)

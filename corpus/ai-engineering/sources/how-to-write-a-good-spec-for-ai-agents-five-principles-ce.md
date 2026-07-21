@@ -22,7 +22,9 @@ origin: obsidian
 
 > **Quick intake** (obsidian). raw stub: `notes-03-resources-articles-writing-good-specs-ai-agents-prd-structure.md`
 
-['The document discusses the challenges of writing effective specs for AI coding agents.', 'It proposes five principles for smart spec-writing to guide agents clearly and stay within context limits.', 'The principles aim to address the core problem of large specs overwhelming models and small specs losing precision.']
+- The document discusses the challenges of writing effective specs for AI coding agents.
+- It proposes five principles for smart spec-writing to guide agents clearly and stay within context limits.
+- The principles aim to address the core problem of large specs overwhelming models and small specs losing precision.
 
 **Key topics**
 - AI coding agents
