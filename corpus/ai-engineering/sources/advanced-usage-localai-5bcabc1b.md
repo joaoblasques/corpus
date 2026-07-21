@@ -16,6 +16,7 @@ updated: 2026-07-02
 provisional: false
 url: https://localai.io/advanced/index.html
 origin: obsidian-list
+consolidated_into: ai-engineering/localai.md
 ---
 
 # "Advanced usage :: LocalAI"

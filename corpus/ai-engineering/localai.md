@@ -63,6 +63,21 @@ sources:
   - path: raw/_inbox/web-setting-up-models-localai-0352bf55.md
     channel: web
     ingested_at: 2026-07-04
+  - path: raw/web/web-advanced-usage-localai-5bcabc1b.md
+    channel: web
+    ingested_at: 2026-07-02
+  - path: raw/web/web-agents-localai-cee8af6c.md
+    channel: web
+    ingested_at: 2026-07-02
+  - path: raw/web/web-authentication-authorization-localai-48c354dc.md
+    channel: web
+    ingested_at: 2026-07-02
+  - path: raw/web/web-backends-localai-44436f62.md
+    channel: web
+    ingested_at: 2026-07-02
+  - path: raw/web/web-api-discovery-instructions-localai-9e1faed6.md
+    channel: web
+    ingested_at: 2026-07-06
 aliases:
   - LocalAI
   - LocalAGI
@@ -72,7 +87,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-07-04
-updated: 2026-07-04
+updated: 2026-07-21
 ---
 
 # LocalAI
@@ -89,6 +104,8 @@ LocalAI is "a small core that pulls model backends on demand, so you install onl
 - **Multi-modal backends** — LLMs, image/video generation, text-to-speech, speech-to-text, vision, embeddings [^src2]
 
 Backends are separate artifacts, not bundled. The FAQ is explicit: "You install only the backends your models use" [^src3]. This keeps the core binary small and avoids pulling in frameworks (Python, ONNX Runtime, PyTorch) unless a model backend specifically needs them.
+
+The backend layer spans more than text generation: backends cover LLMs, speech-to-text, text-to-speech, and further modalities [^src19]. Backends are managed either through the LocalAI web interface or by creating a **backend gallery**, and the docs cover authoring and publishing a new backend — so the backend set is extensible by third parties, not a fixed list [^src19]. Beyond installing gallery backends, LocalAI can also connect **external backends**, and supports **parallel requests** [^src15].
 
 ## Backend model compatibility
 
@@ -109,6 +126,23 @@ Both store gallery entries as self-describing GGUF files.
 
 Horizontal scaling across multiple machines uses **PostgreSQL** for state and node registry and **NATS** for real-time coordination [^src12]. Designed for Kubernetes production deployments; separate from the simpler P2P/federation mode.
 
+## Agent platform
+
+The agent platform runs **autonomous AI entities with configurable goals, personalities, and capabilities** [^src16]. Three capabilities define it: **tool execution**, **knowledge base management**, and a **skills system** that makes capabilities reusable across agents [^src16]. This is the LocalAGI/LocalRecall side of the three-product split — the core server's MCP tool support [^src2] is what the agents call out through.
+
+## Authentication and authorization
+
+Two authentication modes coexist [^src17]:
+
+- **Legacy API key authentication** — the single shared-secret path, matching the OpenAI-client convention.
+- **Full user authentication system** — user accounts with **roles**, **sessions**, **OAuth**, and **per-user usage tracking** [^src17].
+
+The second mode is what makes a shared/multi-tenant LocalAI deployment tractable; the first suffices for single-user local use. Pairs with the TLS/reverse-proxy configuration for network-exposed instances.
+
+## API discovery and instructions
+
+LocalAI exposes **discovery endpoints** so external agents and automation tools can learn an instance's capabilities and drive it programmatically [^src18]. Alongside them it ships **instructions/API guides** per area — chat, audio, images, model management, and others [^src18]. There are also **configuration-management APIs** letting an agent discover, read, and modify model config fields [^src18] — i.e. the YAML model configuration (below) is machine-writable at runtime, not only a file you hand-edit. Together these make a LocalAI instance self-describing to an agent that has never seen it before.
+
 ## Middleware: PII filtering and intelligent routing
 
 A request-middleware layer sits between the HTTP API and model backends [^src13]:
@@ -122,6 +156,8 @@ LocalAI supports the OpenAI Realtime API spec — low-latency, multi-modal (voic
 ## Model configuration (YAML)
 
 Models are configured with YAML files in the `models/` directory. Key fields: `name`, `backend`, `parameters`, `template`, `system_prompt`, `context_size`, `gpu_layers`, `f16` [^src7]. LocalAI resolves the backend from the YAML; without a YAML it auto-detects from the GGUF metadata.
+
+YAML files "define model parameters and behavior" and are the primary configuration and management surface, alongside prompt templates and the model gallery [^src15]. Two behaviours worth knowing at this layer: **automatic prompt caching**, and support for **parallel requests** [^src15]. The same fields are reachable programmatically through the configuration-management APIs [^src18].
 
 ## Installation paths
 
@@ -157,3 +193,8 @@ Models are configured with YAML files in the `models/` directory. Key fields: `n
 [^src12]: [Distributed Mode :: LocalAI](../../raw/_inbox/web-distributed-mode-localai-6d6b1d04.md) — localai.io distributed mode docs
 [^src13]: [Middleware: PII filtering and intelligent routing :: LocalAI](../../raw/_inbox/web-middleware-pii-filtering-and-intelligent-routing-localai-b630efa4.md) — localai.io middleware docs
 [^src14]: [Realtime API :: LocalAI](../../raw/_inbox/web-realtime-api-localai-f17b6e47.md) — localai.io realtime API docs
+[^src15]: [Advanced usage :: LocalAI](sources/advanced-usage-localai-5bcabc1b.md) — localai.io advanced usage docs (`https://localai.io/advanced/index.html`)
+[^src16]: [Agents :: LocalAI](sources/agents-localai-cee8af6c.md) — localai.io agents docs (`https://localai.io/features/agents/index.html`)
+[^src17]: [Authentication & Authorization :: LocalAI](sources/authentication-authorization-localai-48c354dc.md) — localai.io authentication docs (`https://localai.io/features/authentication/index.html`)
+[^src18]: [API Discovery & Instructions :: LocalAI](sources/api-discovery-instructions-localai-9e1faed6.md) — localai.io API discovery docs (`https://localai.io/features/api-discovery/index.html`)
+[^src19]: [Backends :: LocalAI](sources/backends-localai-44436f62.md) — localai.io backends docs (`https://localai.io/backends/index.html`)

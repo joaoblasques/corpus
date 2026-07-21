@@ -16,6 +16,7 @@ updated: 2026-07-06
 provisional: false
 url: https://localai.io/features/api-discovery/index.html
 origin: obsidian-list
+consolidated_into: ai-engineering/localai.md
 ---
 
 # "API Discovery & Instructions :: LocalAI"

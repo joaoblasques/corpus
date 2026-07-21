@@ -16,6 +16,7 @@ updated: 2026-07-02
 provisional: false
 url: https://localai.io/features/authentication/index.html
 origin: obsidian-list
+consolidated_into: ai-engineering/localai.md
 ---
 
 # "Authentication & Authorization :: LocalAI"

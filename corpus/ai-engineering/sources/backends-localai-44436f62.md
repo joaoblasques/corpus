@@ -16,6 +16,7 @@ updated: 2026-07-02
 provisional: false
 url: https://localai.io/backends/index.html
 origin: obsidian-list
+consolidated_into: ai-engineering/localai.md
 ---
 
 # "Backends :: LocalAI"
