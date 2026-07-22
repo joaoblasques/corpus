@@ -73,15 +73,27 @@ def reapable(dirs=None) -> list:
 
 # --- Discovery: find the most-starred repos in the corpus's technical domains ---
 # Curated domain -> GitHub topics map. Editable; tracks active technical domains.
-# ai-business / trading / blockchain / productivity are intentionally excluded
-# (noisier on GitHub).
+# ai-business / productivity are intentionally excluded (career/business content
+# doesn't cluster around code repos on GitHub).
 DOMAIN_TOPICS = {
     "ai-engineering": ["llm", "large-language-models", "ai-agents", "rag",
-                       "prompt-engineering", "mcp", "agentic-ai", "llmops"],
+                       "prompt-engineering", "mcp", "agentic-ai", "llmops",
+                       "fine-tuning", "vector-database", "embeddings", "chatbot",
+                       "langchain", "llm-inference", "multi-agent-systems"],
     "data-engineering": ["data-engineering", "dbt", "apache-spark",
-                         "apache-airflow", "etl", "data-pipeline", "duckdb"],
-    "mlops": ["mlops", "model-serving", "feature-store", "machine-learning-operations"],
-    "software-engineering": ["distributed-systems", "developer-tools", "observability"],
+                         "apache-airflow", "etl", "data-pipeline", "duckdb",
+                         "apache-kafka", "data-lake", "apache-iceberg",
+                         "data-warehouse", "orchestration", "elt", "data-quality"],
+    "mlops": ["mlops", "model-serving", "feature-store", "machine-learning-operations",
+              "model-monitoring", "experiment-tracking", "ml-infrastructure",
+              "kubeflow", "model-deployment"],
+    "software-engineering": ["distributed-systems", "developer-tools", "observability",
+                             "system-design", "microservices", "api-design",
+                             "software-architecture", "kubernetes", "devops"],
+    "blockchain": ["blockchain", "ethereum", "bitcoin", "smart-contracts",
+                   "web3", "cryptocurrency", "solidity", "defi"],
+    "trading": ["algorithmic-trading", "trading-bot", "quantitative-finance",
+               "backtesting", "trading-strategies", "quant"],
 }
 DISCOVER_MIN_STARS = 500
 DISCOVER_PUSHED_WITHIN_DAYS = 365

@@ -2,11 +2,13 @@
 """github_discover.py — the GitHub analog of book_discover / blog_discover: propose repos for review.
 
 Searches GitHub for the most-starred repos across the corpus's technical domains (the same demand
-signal the old auto-star `discover` used) and appends them to the vault review queue
-`00_Inbox/Clippings/GitHubs to review.md` (phone-tickable) — WITHOUT auto-starring, so the user's
-GitHub stars stay their own. `promote` reads the `[x]`-ticked ones and collects each into the ingest
-inbox (README + docs digest), so the normal ingest pipeline picks them up. A seen-ledger makes each
-repo proposed at most once.
+signal the old auto-star `discover` used) and appends them, pre-ticked, to the vault log
+`00_Inbox/Clippings/GitHubs to review.md` — WITHOUT auto-starring, so the user's GitHub stars stay
+their own. Entries are pre-approved because `_topic_admits`/`_is_junk`/star+recency thresholds
+already do the admission judgment call before a repo is written; the user no longer needs to tick
+each one by hand. `promote` reads the `[x]` lines and collects each into the ingest inbox (README +
+docs digest), so the normal ingest pipeline picks them up. A seen-ledger makes each repo proposed at
+most once; untick a line (`[ ]`) to skip a specific repo before the same nightly run's `promote` step.
 """
 from __future__ import annotations
 
@@ -34,8 +36,8 @@ _REVIEW_CHECKED_RE = re.compile(r"^- \[[xX]\]\s+([\w.-]+/[\w.-]+)", re.M)
 
 REVIEW_HEADER = (
     "# GitHubs to review\n\n"
-    "Repos proposed from your technical domains (most-starred first). Tick `[x]` the ones worth\n"
-    "ingesting; the nightly then collects each into the corpus (README + docs) and processes it.\n"
+    "Repos proposed from your technical domains (most-starred first), pre-approved and auto-ingested\n"
+    "the same night. Untick a line (`[ ] owner/repo`) before the nightly run to skip it instead.\n"
 )
 
 
@@ -144,7 +146,7 @@ def cmd_propose(args) -> int:
             lang = meta.get("language") or ""
             desc = (meta.get("description") or "")[:90]
             tag = f" · {lang}" if lang else ""
-            lines.append(f"- [ ] {fn} · ★{_stars_h(stars)}{tag} · {desc}".rstrip(" ·"))
+            lines.append(f"- [x] {fn} · ★{_stars_h(stars)}{tag} · {desc}".rstrip(" ·"))
         REVIEW.write_text(body.rstrip() + "\n" + "\n".join(lines) + "\n", encoding="utf-8")
         for fn, _, _ in picks:
             _mark(fn)

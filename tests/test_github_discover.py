@@ -32,7 +32,7 @@ def test_propose_writes_tickable_lines_and_skips_starred_and_collected(tmp_path,
     monkeypatch.setattr(gd.cg, "already_collected", lambda fn, *a, **k: fn == "owner/collected")
     gd.cmd_propose(_args(max=15, dry_run=False))
     txt = gd.REVIEW.read_text()
-    assert "- [ ] owner/new · ★4.2k · Py · d" in txt      # tickable, human-readable
+    assert "- [x] owner/new · ★4.2k · Py · d" in txt      # pre-approved, human-readable
     assert "owner/starred" not in txt                      # already starred → skipped
     assert "owner/collected" not in txt                    # already collected → skipped
     assert "owner/new" in gd.LEDGER.read_text()            # marked seen
