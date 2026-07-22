@@ -3,6 +3,9 @@
 > OKF v0.1 change log. Newest first, grouped by date.
 
 ## 2026-07-22
+* **Domain**: graduate | mlops | 30-day provisional review (due 2026-07-09, run late at user request). 41 pages, multi-channel sourcing (email/github/notes/pdf/web/youtube). Zero lint failures.
+* **Domain**: graduate | blockchain | 30-day provisional review (due 2026-07-17, run late at user request). 29 pages, 4 independent origins. Zero lint failures.
+* **Domain**: delete | trading | User request, ahead of its 2026-07-25 provisional review. Still single-origin (one YouTube playlist), 8 pages, zero query activity. Deleted `corpus/trading/` (README + 8 pages + sources/, 19 files) entirely — no cross-domain links pointed into it. Underlying raw sources left untouched/stamped (§2); not re-queued for ingestion.
 * **Ingest**: 45 sources ingested · 5 deferred · pages_created=5 · pages_updated=3 · status=ok · run=ingest-auto
 * **Ingest detail**:
   - Design of Approximation Algorithms parts 09-34 (26 sources): updated `corpus/software-engineering/sources/design-of-approximation-algorithms.md` (complete 34-part coverage: Chapters 6-15, SDP rounding/Goemans-Williamson 0.878 MAX CUT, primal-dual/Steiner forest/k-median, cuts+metrics/multiway cut/multicut/sparsest cut, iterated rounding/survivable network design, prize-collecting Steiner tree, PCP theorem/hardness of approximation); channel=pdf; domain=software-engineering

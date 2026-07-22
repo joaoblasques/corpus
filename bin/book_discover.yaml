@@ -5,7 +5,10 @@ index_urls:
 
 # A book entry is proposed only if its section heading contains one of these (case-insensitive).
 # Scoped to the corpus's domains (ai-engineering, data-engineering, mlops, software-engineering,
-# ai-business, blockchain, productivity, trading) — kept relevant, not a general programming dump.
+# blockchain, productivity) — kept relevant, not a general programming dump. The source index
+# (free-programming-books) is CS-subject-sectioned, so ai-business/trading have no matching
+# section headings there and stay uncovered by this channel; blog_discover (citation-driven, not
+# section-scoped) is what grows those two instead.
 relevant_sections:
   - machine learning
   - deep learning
@@ -34,5 +37,6 @@ relevant_sections:
   - mlops
   - blockchain
   - cryptography
+  - professional development
 
 max_new_per_run: 15

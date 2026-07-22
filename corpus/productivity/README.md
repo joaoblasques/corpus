@@ -6,13 +6,13 @@ tags:
   - corpus/productivity
   - hub
 created: 2026-06-12
-updated: 2026-06-25
-provisional: true
+updated: 2026-07-22
+provisional: false
 ---
 
 # Productivity
 
-Personal and professional effectiveness for knowledge workers: mental models, time and focus management, note-taking / second-brain practice, working effectively with stakeholders, and learning how to learn. Provisional domain created in the 2026-06-12 email-backlog ingest (wave 3); 30-day review 2026-07-12.
+Personal and professional effectiveness for knowledge workers: mental models, time and focus management, note-taking / second-brain practice, working effectively with stakeholders, and learning how to learn. Created in the 2026-06-12 email-backlog ingest (wave 3); graduated 2026-07-22 (10 pages, 6 distinct channels).
 
 ## Pages
 

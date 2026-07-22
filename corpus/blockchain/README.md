@@ -2,17 +2,19 @@
 type: hub
 domain: blockchain
 status: draft
-provisional: true
+provisional: false
 tags:
   - corpus/blockchain
   - hub
 created: 2026-06-17
-updated: 2026-07-08
+updated: 2026-07-22
 ---
 
 # Blockchain
 
 TL;DR: Concepts, history, cryptographic primitives, and network design underlying Bitcoin and the broader cryptocurrency ecosystem. Sourced from the nakamoto.ghost.io developer course (Haseeb Qureshi, 2019–2020), Eli Ben-Sasson's survey of cryptographic proof systems, Mastering Bitcoin 3rd Edition (Antonopoulos & Harding, CC BY-SA 4.0), and Mastering Ethereum (Antonopoulos & Wood, CC BY-SA 4.0). Now covers the full Ethereum technical stack: EVM, smart contracts, DeFi, scaling, and consensus.
+
+> Graduated 2026-07-22. 29 pages across 4 independent origins (nakamoto.ghost.io, Ben-Sasson survey, Mastering Bitcoin, Mastering Ethereum) — no longer single-origin.
 
 ## Domain description
 

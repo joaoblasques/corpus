@@ -1401,7 +1401,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - ["The Mom Who Mastered Claude: How To Build An Audience That Buys Using Claude Code (Step by Step!)"](/mlops/sources/the-mom-who-mastered-claude-how-to-build-an-audience-that-bu-DnZ53NQXfuA.md) — source · stub · The video discusses how to automate content creation using AI, specifically Claude Code, and how it …
 - ["Web Scraping 101: A Million Dollar Project Idea"](/mlops/sources/web-scraping-101-a-million-dollar-project-idea-DJnH0jR8y5Q.md) — source · stub · The video covers building a web scraper using Bright Data's scraping browser to collect real-time e-…
 - [Breaking Down the Obsidian CEO’s Personal Vault System](/mlops/sources/breaking-down-the-obsidian-ceo-s-personal-vault-system-0Wbw1e7wNK0.md) — source · stub · The video discusses Obsidian CEO Steph's personal vault system, highlighting its structure, organiza…
-- [MLOps](/mlops/README.md) — hub · draft · engineering substrate: environment, version control, compute, infrastructure-as-code (provisional)
+- [MLOps](/mlops/README.md) — hub · draft · engineering substrate: environment, version control, compute, infrastructure-as-code
 - [MLOps Principles](/mlops/mlops-principles.md) — concept · draft · what MLOps is; traceability/reproducibility core principle, tooling-by-category, MLOps vs DevOps (the data difference), Databricks mapping
 - [Dev Environment Stack](/mlops/dev-environment-stack.md) — concept · draft · four-layer dependency stack (OS → pkg mgrs → runtimes → AI libs); venv isolation; bottom-up install
 - [GPU & VRAM](/mlops/gpu-and-vram.md) — concept · draft · why GPUs win for ML, VRAM as the hard ceiling, fp16 rule, training ≈ 6× inference, LoRA
@@ -1468,7 +1468,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [A Brief History of the Annual Review](/productivity/sources/a-brief-history-of-the-annual-review-abdd034b.md) — source · stub · The article explores the history and evolution of annual reviews across cultures and traditions, hig…
 - [9 Lessons from 2024 + My Goals for 2025 - Noah Kagan](/productivity/sources/9-lessons-from-2024-my-goals-for-2025-noah-kagan-1e3af730.md) — source · stub · The author reflects on his learnings from 2024 and sets goals for 2025, covering topics such as focu…
 - [7-Day Live Video Challenge Celebration](/productivity/sources/7-day-live-video-challenge-celebration-0240cd2a.md) — source · stub · Celebrating a 7-day live video challenge, discussing wins, and revealing next steps for content crea…
-- [Productivity](/productivity/README.md) — hub · draft · personal & professional effectiveness for knowledge workers (provisional)
+- [Productivity](/productivity/README.md) — hub · draft · personal & professional effectiveness for knowledge workers
 - [Mental Models](/productivity/mental-models.md) — concept · draft · Circle of Competence + thought experiments
 - [Time & Focus Management](/productivity/time-and-focus-management.md) — concept · draft · plan in systems, protect focus (time blocking, context-switching, notifications, maker vs manager time, deep work), high-impact work, task breakdown, sustain the body
 - [Learning to Learn](/productivity/learning-to-learn.md) — concept · draft · growth without a mentor; writing-to-process; cross-training
@@ -1692,7 +1692,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [Bitcoin Script](/blockchain/bitcoin-script.md) — concept · draft · Forth-like stack language; P2PKH/P2WPKH/Taproot; Tapscript/MAST
 - [Bitcoin Security](/blockchain/bitcoin-security.md) — concept · draft · bearer asset model; key custody tiers; HD wallets (BIP-32/39/44)
 - ["$75,000,000 Crypto Wallet Bulk Hack"](/blockchain/sources/75-000-000-crypto-wallet-bulk-hack-MhJoJRqJ0Wc.md) — source · stub · The video describes a method for bulk hacking cryptocurrency wallets, specifically targeting the Tre…
-- [Blockchain](/blockchain/README.md) — hub · draft · cryptocurrency & blockchain fundamentals (provisional)
+- [Blockchain](/blockchain/README.md) — hub · draft · cryptocurrency & blockchain fundamentals
 - [History of Money](/blockchain/history-of-money.md) — concept · draft · barter→fiat→Bitcoin; money properties; social-consensus theory
 - [The Cypherpunks](/blockchain/the-cypherpunks.md) — entity · draft · the crypto movement; digital-cash predecessors (eCash, b-money, BitGold) and why they failed
 - [Satoshi Nakamoto](/blockchain/satoshi-nakamoto.md) — entity · draft · unknown identity; 2007–2011 timeline; Nakamoto Consensus as synthesis of prior work
@@ -1720,32 +1720,6 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [Ethereum Consensus](/blockchain/ethereum-consensus.md) — concept · draft · PoS; Gasper (Casper FFG + LMD GHOST); validators; slashing; The Merge
 - [Ethereum Scaling](/blockchain/ethereum-scaling.md) — concept · draft · Scalability trilemma; L2 rollups (optimistic/ZK); EIP-4844; danksharding
 - [Mastering Ethereum (Antonopoulos & Wood)](/blockchain/sources/mastering-ethereum.md) — source · draft · 17 chapters; full Ethereum technical reference; CC BY-SA 4.0
-
-### trading
-- [Trading - AI Agents on Polymarket Prediction Markets](/trading/sources/trading-ai-agents-on-polymarket-prediction-markets-ae.md) — source · stub · ['The document discusses AI agents on Polymarket prediction markets, highlighting their edge over hu…
-- ["Full AI Trading Course 2026: Master Agentic Trading (Beginner to Pro)"](/trading/sources/full-ai-trading-course-2026-master-agentic-trading-beginner--yxouoQw-C_M.md) — source · stub · quick intake
-- [How To Actually Build a Trading Bot With Claude Code (Fully Automated)](/trading/sources/how-to-actually-build-a-trading-bot-with-claude-code-fully-a-y_bsjZThP0o.md) — source · stub · quick intake
-- [I Built the ULTIMATE Claude Code trading assistant (Setup Tutorial)](/trading/sources/i-built-the-ultimate-claude-code-trading-assistant-setup-tut-vTkZK8PK114.md) — source · stub · quick intake
-- [My Exact $1M Trading Blueprint + Tools Using Claude](/trading/sources/my-exact-1m-trading-blueprint-tools-using-claude-t4GSCXvFb8E.md) — source · stub · quick intake
-- [How to Make MORE PROFIT in Crypto with Free Indicators](/trading/sources/how-to-make-more-profit-in-crypto-with-free-indicators-sr2R195CFW4.md) — source · stub · quick intake
-- [Claude Released An investing Tool! (Underrated)](/trading/sources/claude-released-an-investing-tool-underrated-reiPfBnUBys.md) — source · stub · quick intake
-- [How To Build Your Own Claude AI Trading Assistant (Easy For Beginners)](/trading/sources/how-to-build-your-own-claude-ai-trading-assistant-easy-for-b-mssPkDuQnmY.md) — source · stub · quick intake
-- [Claude Just Changed the Stock Market Forever! (Tutorial)](/trading/sources/claude-just-changed-the-stock-market-forever-tutorial-lH5wrfNwL3k.md) — source · stub · quick intake
-- [Coding a Market Making Bot with Claude AI](/trading/sources/coding-a-market-making-bot-with-claude-ai-kC1aoMSzsWM.md) — source · stub · quick intake
-- [Claude Can Now TRADE For You On TradingView (Insane)](/trading/sources/claude-can-now-trade-for-you-on-tradingview-insane-aDWJ6lLemJU.md) — source · stub · quick intake
-- [How I Made a Polymarket AI Agent Using Claude Code](/trading/sources/how-i-made-a-polymarket-ai-agent-using-claude-code-_lA1M_t4lnE.md) — source · stub · quick intake
-- [NEW Claude Opus 4.6 AI Good For TradingView Strategies? (Backtesting Engine) (watch ASAP)](/trading/sources/new-claude-opus-4-6-ai-good-for-tradingview-strategies-backt-Zepx8mARre0.md) — source · stub · quick intake
-- [I Re-Created A Quant Trading Strategy With Claude Code (Insanely Cool)](/trading/sources/i-re-created-a-quant-trading-strategy-with-claude-code-insan-ZVMTeDBmSrI.md) — source · stub · quick intake
-- ["Bitcoin Bear Flag Confirmed, BUT THERE IS SOMETHING WORSE"](/trading/sources/bitcoin-bear-flag-confirmed-but-there-is-something-worse-SR5gayuF4m0.md) — source · stub · The video discusses a bear flag in Bitcoin's price chart, confirming a bearish continuation pattern.…
-- [Trading](/trading/README.md) — hub · draft · AI-driven automated trading for crypto & equities — architectures, brokers, strategy (provisional)
-- [AI Trading Agents](/trading/ai-trading-agents.md) — concept · draft · cron-driven agentic LLM that researches, trades via broker API, and updates file-based memory
-- [Self-Improving Trading Agents](/trading/self-improving-agents.md) — concept · draft · trading strategy wrapped in a hypothesis→test→learn feedback loop
-- [Arbitrage Compression](/trading/arbitrage-compression.md) — concept · draft · AI collapsing market-inefficiency windows on the timescale of model releases
-- [Prediction Markets](/trading/prediction-markets.md) — concept · draft · prices as collective probability estimates of real-world events
-- [Alpaca API](/trading/alpaca-api.md) — entity · draft · commission-free brokerage with a REST API for algorithmic equity trading
-- [TradingView & Pine Script](/trading/tradingview-pine-script.md) — entity · draft · charting platform + DSL for encoding trading strategies
-- [Hyperliquid](/trading/hyperliquid.md) — entity · draft · decentralized perpetual-futures exchange on its own blockchain
-- [Polymarket](/trading/polymarket.md) — entity · draft · on-chain prediction market for betting on real-world event probabilities
 
 ## Recent additions
 - 2026-07-03: **ingest-auto batch (6 pre-specified files — 1 ingested, 5 deferred)** — only [Kai Waehner's "The Trinity of Modern Data Architecture"](../raw/web/web-the-trinity-of-modern-data-architecture-process-intelligence-b19b93a7.md) was substantive → **1 new page, 2 enriched**. New: [Process Intelligence](/data-engineering/process-intelligence.md) (concept — process mining/orchestration/agentic process orchestration; process-level guardrails for agentic AI). Enriched: [Apache Kafka](/data-engineering/kafka.md) (event-driven integration as enterprise architecture: Zeebe, SAP/Salesforce/ServiceNow CDC/eventing adoption), [Agent Security](/ai-engineering/agent-security.md) (model-level vs. process-level safety framing for trusted agentic AI). Deferred 5: 1 kai-waehner.de "coming soon" placeholder page (reCAPTCHA/Turnstile scrape-blocked boilerplate only) + 4 confessionsofadataguy.com podcast-episode pages (scrape captured only site nav/archive links, no article/transcript body) — see raw/_inbox/_REVIEW.md.

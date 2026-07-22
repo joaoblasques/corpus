@@ -6,8 +6,8 @@ tags:
   - corpus/mlops
   - hub
 created: 2026-06-09
-updated: 2026-06-25
-provisional: true
+updated: 2026-07-22
+provisional: false
 
 ---
 
@@ -15,7 +15,7 @@ provisional: true
 
 The engineering substrate for building ML and software systems: how the development environment is set up, how work is versioned, how compute is provisioned, and how infrastructure is declared and managed. Distinct from the content domains — `ai-engineering` (LLM internals, agents), `data-engineering` (ETL, modeling), and `software-engineering` (code design, application architecture) — this domain covers the layer *underneath* all of them: the tooling and infrastructure that the engineering work runs on.
 
-> **Provisional domain** (created 2026-06-09). Seeded by the "AI Engineering from Scratch" course (Phase 00, setup-and-tooling) plus an IaC article. Expected to grow as later course phases (fine-tuning, data management, deployment) are ingested. 30-day review: 2026-07-09.
+> Graduated 2026-07-22. Seeded by the "AI Engineering from Scratch" course (Phase 00, setup-and-tooling) plus an IaC article; grown to 41 pages across email/github/notes/pdf/web/youtube channels.
 
 ## Pages
 
