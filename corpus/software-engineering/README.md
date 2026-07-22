@@ -88,7 +88,8 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Data Structures — Wikipedia Compilation (2010)](/software-engineering/sources/data-structures-wikipedia.md) — source · draft · 503-page Wikipedia-sourced reference survey; deque/A-Steal work-stealing; bit fields and type safety
 - [Learning Algorithm (PDF, 327 pages)](/software-engineering/sources/learning-algorithm.md) — source · draft · compact algorithms reference; interval scheduling, BFS/Dijkstra/Floyd-Warshall, Hoare/Lomuto quicksort, KMP string matching
 - [Efficient Algorithms on Texts (Crochemore & Rytter, 1994)](/software-engineering/sources/text-algorithms.md) — source · draft · suffix trees, DAWG, KMP/BM/Aho-Corasick, palindromes (Rad table, palstars), 2D pattern matching, LZ compression, shortest common superstring; all 20 parts ingested
-- [The Design of Approximation Algorithms (Williamson & Shmoys, 2011)](/software-engineering/sources/design-of-approximation-algorithms.md) — source · draft · graduate textbook; greedy (set cover, submodular (1−1/e)), LP rounding (vertex cover 2-approx), randomized rounding (MAX SAT, MAX CUT), APTAS/FPTAS, PCP hardness; parts 1-8 of 34 ingested
+- [The Design of Approximation Algorithms (Williamson & Shmoys, 2011)](/software-engineering/sources/design-of-approximation-algorithms.md) — source · draft · graduate textbook; greedy (set cover, submodular (1−1/e)), LP rounding (vertex cover 2-approx), randomized rounding (MAX SAT, MAX CUT), SDP rounding (Goemans-Williamson 0.878 MAX CUT), primal-dual, cuts/metrics, iterated rounding, PCP hardness; all 34 parts ingested
+- [Code Simplicity: The Fundamentals of Software (Kanat-Alexander, 2012)](/software-engineering/sources/code-simplicity.md) — source · draft · software design laws: Equation of Software Design (V>M), Law of Change (YAGNI), Law of Defect Probability (DRY, ~1 defect/100 lines), Law of Simplicity (individual pieces); 3 of 4 parts ingested
 
 ## Sources ingested
 - [Disasters I've Seen in a Microservices World](/03_Resources/Articles/Disasters in a Microservices World.md) — article note, João Alves / Hey World, 2025-10-30
@@ -145,11 +146,12 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Vim](/software-engineering/vim.md)
 - [Xonsh — a Python-superset shell](/software-engineering/xonsh.md)
 
-### Syntheses (1)
+### Syntheses (2)
 - [AI-Assisted Development](/software-engineering/ai-assisted-development.md)
+- [Simplicity as an Engineering Constraint in the AI Age](/software-engineering/simplicity-as-engineering-constraint.md)
 
 <details>
-<summary>Source summaries (78)</summary>
+<summary>Source summaries (79)</summary>
 
 - ["2024-05-25-15-54-25 - move-base-up by josephmachado · Pull Request #17 · josephmachado/simple_dbt_project"](/software-engineering/sources/2024-05-25-15-54-25-move-base-up-by-josephmachado-pull-reque-ee.md)
 - ["A Guide to Multi-Tenancy: Benefits and Challenges"](/software-engineering/sources/a-guide-to-multi-tenancy-benefits-and-challenges-e55e9184.md)
@@ -175,6 +177,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Claude Code - Session Timing Strategy to Double Productivity](/software-engineering/sources/claude-code-session-timing-strategy-to-double-productivity-dc.md)
 - [Claude Code Productivity Tips from the SaaS Trenches](/software-engineering/sources/claude-code-productivity-tips-from-the-saas-trenches-ada.md)
 - [Code Review Best Practices](/software-engineering/sources/code-review-best-practices-acce.md)
+- [Code Simplicity: The Fundamentals of Software (Kanat-Alexander, 2012)](/software-engineering/sources/code-simplicity.md)
 - [Coming Soon - Kai Waehner](/software-engineering/sources/coming-soon-kai-waehner-3fd775a7.md)
 - [Data Structures and Algorithm Analysis in C++ (Shaffer, Ed. 3.2)](/software-engineering/sources/algorithms-shaffer-c.md)
 - [Data Structures and Algorithm Analysis in Java (Shaffer, Ed. 3.2)](/software-engineering/sources/algorithms-shaffer-java.md)

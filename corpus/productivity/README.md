@@ -49,7 +49,7 @@ Personal and professional effectiveness for knowledge workers: mental models, ti
 - [Quartz SSG](/productivity/quartz-ssg.md)
 
 <details>
-<summary>Source summaries (21)</summary>
+<summary>Source summaries (22)</summary>
 
 - [7-Day Live Video Challenge Celebration](/productivity/sources/7-day-live-video-challenge-celebration-0240cd2a.md)
 - [9 Lessons from 2024 + My Goals for 2025 - Noah Kagan](/productivity/sources/9-lessons-from-2024-my-goals-for-2025-noah-kagan-1e3af730.md)
@@ -57,6 +57,7 @@ Personal and professional effectiveness for knowledge workers: mental models, ti
 - [A few thoughts on suffering - Noah Kagan](/productivity/sources/a-few-thoughts-on-suffering-noah-kagan-fe410fa2.md)
 - [About Forte Labs - Forte Labs](/productivity/sources/about-forte-labs-forte-labs-d0bfb7e4.md)
 - [Actually Structured Journaling (Jan 2025)](/productivity/sources/actually-structured-journaling-jan-2025-c5377690.md)
+- [Addyist - EDM Music Artist](/productivity/sources/addyist-edm-music-artist-a623dd39.md)
 - [Be Sincere—Not Serious](/productivity/sources/be-sincere-not-serious-7162b644.md)
 - [Beware of Productivity Paradoxes - Cal Newport](/productivity/sources/beware-of-productivity-paradoxes-cal-newport-9c92dd3d.md)
 - [Books](/productivity/sources/books-a3feacfa.md)

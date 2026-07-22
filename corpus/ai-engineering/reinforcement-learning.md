@@ -12,6 +12,24 @@ sources:
   - path: raw/_inbox/pdf-the-quest-for-artificial-intelligence-a-history-of-part-25.md
     channel: pdf
     ingested_at: 2026-07-15
+  - path: raw/pdf/pdf-algorithms-for-reinforcement-learning-part-01.md
+    channel: pdf
+    ingested_at: 2026-07-22
+  - path: raw/pdf/pdf-algorithms-for-reinforcement-learning-part-02.md
+    channel: pdf
+    ingested_at: 2026-07-22
+  - path: raw/pdf/pdf-algorithms-for-reinforcement-learning-part-03.md
+    channel: pdf
+    ingested_at: 2026-07-22
+  - path: raw/pdf/pdf-algorithms-for-reinforcement-learning-part-04.md
+    channel: pdf
+    ingested_at: 2026-07-22
+  - path: raw/pdf/pdf-algorithms-for-reinforcement-learning-part-05.md
+    channel: pdf
+    ingested_at: 2026-07-22
+  - path: raw/pdf/pdf-algorithms-for-reinforcement-learning-part-06.md
+    channel: pdf
+    ingested_at: 2026-07-22
 aliases:
   - reinforcement learning
   - RL
@@ -20,11 +38,15 @@ aliases:
   - value iteration
   - Q-learning
   - policy gradient
+  - temporal difference learning
+  - TD(lambda)
+  - actor-critic RL
+  - Bellman optimality
 tags:
   - corpus/ai-engineering
   - concept
 created: 2026-07-11
-updated: 2026-07-15
+updated: 2026-07-22
 ---
 
 # Reinforcement Learning
@@ -76,8 +98,10 @@ The **Markov property**: the next state *s_{t+1}* depends only on the current st
 - [Optimization for ML](/ai-engineering/optimization-for-ml.md) — RL policy gradient is a form of stochastic gradient ascent.
 - [Gaussian Mixture Models](/ai-engineering/gaussian-mixture-models.md) — EM algorithm has structural similarities to policy evaluation/improvement alternation.
 - [Dive into Deep Learning](/ai-engineering/sources/dive-into-deep-learning.md) — Chapter 17 is the primary source.
+- [Algorithms for Reinforcement Learning (Szepesvári)](/ai-engineering/sources/algorithms-for-reinforcement-learning.md) — rigorous treatment of TD(λ), gradient TD, LSTD, Q-learning convergence, actor-critic, and PAC-MDP exploration algorithms. [^src3]
 
 ---
 
 [^src1]: [D2L Part 36 — Reinforcement Learning (MDPs, Value Iteration)](../../raw/pdf/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-36.md)
 [^src2]: [The Quest for Artificial Intelligence — Part 25 (Ch. 29: TD-GAMMON, reinforcement learning applications)](../../raw/pdf/pdf-the-quest-for-artificial-intelligence-a-history-of-part-25.md) — Nils Nilsson (Cambridge, 2010)
+[^src3]: raw/pdf/pdf-algorithms-for-reinforcement-learning-part-01.md — Csaba Szepesvári, *Algorithms for Reinforcement Learning* (Morgan & Claypool, 2009; updated 2019)

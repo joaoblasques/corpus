@@ -70,7 +70,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [AI and the Job Market](/ai-business/ai-and-the-job-market.md)
 
 <details>
-<summary>Source summaries (178)</summary>
+<summary>Source summaries (182)</summary>
 
 - ["$1,300/Day Automated Bittensor Investing With Claude Code (34 Min Free Masterclass)"](/ai-business/sources/1-300-day-automated-bittensor-investing-with-claude-code-34--SHEs8gNh7sQ.md)
 - ["$100 million for open source: A milestone built by the community"](/ai-business/sources/100-million-for-open-source-a-milestone-built-by-the-communi-580ab93c.md)
@@ -88,6 +88,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - ["Agentic misalignment: How LLMs could be insider threats"](/ai-business/sources/agentic-misalignment-how-llms-could-be-insider-threats-b0f94303.md)
 - ["AI Automation Business Opportunities: Real Use Cases"](/ai-business/sources/ai-automation-business-opportunities-real-use-cases-dcccc5e8.md)
 - ["AI Commerce Payments: How Checkout Works in ChatGPT, Gemini, and Claude"](/ai-business/sources/ai-commerce-payments-how-checkout-works-in-chatgpt-gemini-an-f1f34d58.md)
+- ["AI Customer Support at Scale: The Travel Industry’s $Billion Bet"](/ai-business/sources/ai-customer-support-at-scale-the-travel-industry-s-billion-b-033ed3a9.md)
 - ["AI for Consulting Firms: Scale White-Glove Advisory"](/ai-business/sources/ai-for-consulting-firms-scale-white-glove-advisory-394bc07b.md)
 - ["AI for Law Firms: Modernize Legal Practice Management"](/ai-business/sources/ai-for-law-firms-modernize-legal-practice-management-64b85b2f.md)
 - ["AI for Marketing Agencies: Scale Production & Boost ROI"](/ai-business/sources/ai-for-marketing-agencies-scale-production-boost-roi-8b779993.md)
@@ -125,6 +126,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - ["Dear AI Companies: Stop the “Doom Trolling” - Cal Newport"](/ai-business/sources/dear-ai-companies-stop-the-doom-trolling-cal-newport-7ef15a31.md)
 - ["How to Make Professional Logos Using AI ($34,901/Month)"](/ai-business/sources/how-to-make-professional-logos-using-ai-34-901-month-uffB2onuZsU.md)
 - ["If I Wanted to Become AI Millionaire In 2026, This is What I'd Do [FULL BLUEPRINT]"](/ai-business/sources/if-i-wanted-to-become-ai-millionaire-in-2026-this-is-what-i--jxOsPBXYKzE.md)
+- ["Recursive Self-Improvement: Evidence That AI Is Already Accelerating AI Development"](/ai-business/sources/recursive-self-improvement-evidence-that-ai-is-already-accel-ac.md)
 - ["🎧 Best of the Pod: How to Prepare for AGI According to Reid Hoffman"](/ai-business/sources/best-of-the-pod-how-to-prepare-for-agi-according-to-reid-hof-e217dd3a.md)
 - ["🎧 Best of the Pod: She Built an AI Product Manager Bringing in Six Figures—As a Side Hustle"](/ai-business/sources/best-of-the-pod-she-built-an-ai-product-manager-bringing-in--b54f5383.md)
 - [10 Middle-Class Money Traps (and Fixes)](/ai-business/sources/10-middle-class-money-traps-and-fixes-WfFDrqrHC4g.md)
@@ -143,6 +145,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [A Founder’s Guide to Finding a Great Name](/ai-business/sources/a-founder-s-guide-to-finding-a-great-name-71185a7e.md)
 - [A Guide to Lifelong Learning—With AI](/ai-business/sources/a-guide-to-lifelong-learning-with-ai-7cb419ca.md)
 - [A New Kind of Startup Is Coming](/ai-business/sources/a-new-kind-of-startup-is-coming-f6742332.md)
+- [A New Map to Guide You Through the Every-verse](/ai-business/sources/a-new-map-to-guide-you-through-the-every-verse-976fa8e4.md)
 - [A quote from Josh W. Comeau](/ai-business/sources/a-quote-from-josh-w-comeau-35ed231c.md)
 - [A quote from Tom MacWright](/ai-business/sources/a-quote-from-tom-macwright-634faec0.md)
 - [A Script for Mark Zuckerberg](/ai-business/sources/a-script-for-mark-zuckerberg-87056ab8.md)
@@ -157,6 +160,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [AI Agents Quietly Rewriting Prediction Market Trading — Polymarket and Olas Protocol](/ai-business/sources/ai-agents-quietly-rewriting-prediction-market-trading-polyma-a.md)
 - [AI and Liability](/ai-business/sources/ai-and-liability-33e587b3.md)
 - [AI Automation by Industry | AY Automate](/ai-business/sources/ai-automation-by-industry-ay-automate-46ddc862.md)
+- [AI Bureaucrats and the Hacking of Human Civilization - Yuval Noah Harari](/ai-business/sources/ai-bureaucrats-and-the-hacking-of-human-civilization-yuval-n-doc.md)
 - [AI Business - AI-First Service Agencies Boring Business Model](/ai-business/sources/ai-business-ai-first-service-agencies-boring-business-model-de.md)
 - [AI Business - Complete Guide to Making Money with MCPs](/ai-business/sources/ai-business-complete-guide-to-making-money-with-mcps-c.md)
 - [AI Business Models for Beginners 2026](/ai-business/sources/ai-business-models-for-beginners-2026-2026.md)

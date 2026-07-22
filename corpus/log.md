@@ -2,6 +2,26 @@
 
 > OKF v0.1 change log. Newest first, grouped by date.
 
+## 2026-07-22
+* **Ingest**: 45 sources ingested · 5 deferred · pages_created=5 · pages_updated=3 · status=ok · run=ingest-auto
+* **Ingest detail**:
+  - Design of Approximation Algorithms parts 09-34 (26 sources): updated `corpus/software-engineering/sources/design-of-approximation-algorithms.md` (complete 34-part coverage: Chapters 6-15, SDP rounding/Goemans-Williamson 0.878 MAX CUT, primal-dual/Steiner forest/k-median, cuts+metrics/multiway cut/multicut/sparsest cut, iterated rounding/survivable network design, prize-collecting Steiner tree, PCP theorem/hardness of approximation); channel=pdf; domain=software-engineering
+  - A Course in Machine Learning parts 01-10 (10 sources): created `corpus/ai-engineering/sources/a-course-in-machine-learning.md` (Daumé III 2015; 193pp; decision trees, perceptron, linear models, neural nets, kernels, learning theory/PAC/VC, ensembles, unsupervised/k-means/PCA, EM/GMMs); created `corpus/ai-engineering/hal-daume-iii.md` (entity stub); channel=pdf; domain=ai-engineering
+  - Algorithms for Reinforcement Learning parts 01-06 (6 sources): created `corpus/ai-engineering/sources/algorithms-for-reinforcement-learning.md` (Szepesvári 2009; 98pp; MDP formalism, Bellman equations, TD(λ), gradient TD GTD2/TDC, LSTD, UCB bandits, E³ PAC-MDP, Q-learning, actor-critic, natural policy gradient); created `corpus/ai-engineering/csaba-szepesvari.md` (entity stub); updated `corpus/ai-engineering/reinforcement-learning.md` (added 6 source entries + connections link); channel=pdf; domain=ai-engineering
+  - Code Simplicity parts 01-03 (3 sources): created `corpus/software-engineering/sources/code-simplicity.md` (Kanat-Alexander 2012; Equation of Software Design V>M, Law of Change/YAGNI, Law of Defect Probability/DRY, Law of Simplicity); channel=pdf; domain=software-engineering
+  - A Short Introduction to Operating Systems 2001 parts 01-05 (5 sources): DEFERRED UNCERTAIN — garbled binary text, PDF extractor produced unreadable mojibake encoding across all 5 parts
+
+* **Collectors**: gmail=5, blog_promote=0, obsidian=4, book_discover=0, blog_discover=0, book_fetch=0, pdf=0, image=0, books=0, arxiv=0, youtube=0, github_discover=0, github_promote=0, github=0, x=0, links_refetch=0
+* **Ingest**: 45 ingested · 5 deferred · status=ok
+* **YoutubeQuick**: 0 intake · 0 rescued · 0 skipped · status=ok
+* **DocsQuick**: 14 intake · 33 thin · 3 llm_fail · status=ok
+* **YoutubeReap**: 0 removed · status=ok
+* **Gardener**: 4 stubs deepened · status=ok
+* **Heal**: 0 citations repointed · 0 unfixable · 5 hubs reindexed · 30 cross-domain links · status=ok
+* **Depth**: 396 knowledge · 1298 sources · ratio 1:3.3
+* **GapResolver**: 0 gap dispatched · 0 sources queued · status=ok
+* **Lint**: 1 broken wikilinks · 0 broken citations · 0 orphans · 1228 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+* **OKF**: 0 violations
 ## 2026-07-21
 * **Lint**: weekly Opus synthesis + lint pass (scope=medium, 30 changed pages) — 2 synthesis pages created, 21 pages touched, 14 fixes.
   - Created `corpus/ai-engineering/agent-execution-isolation.md` (synthesis) — names the container-vs-microVM disagreement between the LangChain sandbox post ("a standard container boundary wasn't designed to hold untrusted, model-generated execution") and [Sandcastle](/ai-engineering/sandcastle.md)'s Docker/Podman bind-mount providers; per §7 both are linked rather than one silently preferred. Uses the Codex `$HOME`-deletion incident (Sottiaux) as evidence that isolation defends against model *error*, not only prompt injection.

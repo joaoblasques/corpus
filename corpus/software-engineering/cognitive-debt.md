@@ -114,6 +114,5 @@ Osmani's prescription: **don't outsource the learning**. When AI generates somet
 ## Related across domains
 
 - [Intent Debt](/ai-engineering/intent-debt.md) · _ai-engineering_
-- [Simplicity as an Engineering Constraint in the AI Age](/software-engineering/simplicity-as-engineering-constraint.md) — adds an incentive-level account of complexity (organizations rewarding it) alongside this page's individual-level erosion
 
 <!-- RELATED:END -->

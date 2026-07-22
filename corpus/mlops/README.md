@@ -137,7 +137,7 @@ The engineering substrate for building ML and software systems: how the developm
 - [Environment Promotion (dev → acc → prd)](/mlops/environment-promotion.md)
 
 <details>
-<summary>Source summaries (100)</summary>
+<summary>Source summaries (101)</summary>
 
 - ["29%+ warehouse savings: How the dbt Fusion engine drives cost efficiency | dbt Labs"](/mlops/sources/29-warehouse-savings-how-the-dbt-fusion-engine-drives-cost-e-121b247d.md)
 - ["AL 005: 60% Growth in 60 Days? How?!"](/mlops/sources/al-005-60-growth-in-60-days-how-150a587c.md)
@@ -221,6 +221,7 @@ The engineering substrate for building ML and software systems: how the developm
 - [Manage budgets and cost controls for Genie](/mlops/sources/manage-budgets-and-cost-controls-for-genie-ee.md)
 - [mbta-on-time-lakehouse-retrospective](/mlops/sources/mbta-on-time-lakehouse-retrospective-eece.md)
 - [MetadataOps — How Data Engineers Are Adapting to Serve AI Consumers](/mlops/sources/metadataops-how-data-engineers-are-adapting-to-serve-ai-cons-f.md)
+- [Monitoring Lakeflow Jobs Cost and Performance with System Tables](/mlops/sources/monitoring-lakeflow-jobs-cost-and-performance-with-system-ta-abe.md)
 - [NotebookLM + Obsidian Integration Workflow](/mlops/sources/notebooklm-obsidian-integration-workflow-f.md)
 - [OpenClaw 2.0 is here.](/mlops/sources/openclaw-2-0-is-here-6vPaitNQMGY.md)
 - [Proactive Alignment — How Data Teams Avoid Being Blindsided by Surprise Projects](/mlops/sources/proactive-alignment-how-data-teams-avoid-being-blindsided-by-ec.md)
