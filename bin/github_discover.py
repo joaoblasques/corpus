@@ -194,7 +194,7 @@ def _args(argv):
     p = argparse.ArgumentParser(description="Discover + promote GitHub repos for corpus ingestion.")
     sub = p.add_subparsers(dest="cmd", required=True)
     c = sub.add_parser("propose", help="Propose top corpus-domain repos into the review queue.")
-    c.add_argument("--max", type=int, default=15)
+    c.add_argument("--max", type=int, default=5)
     c.add_argument("--dry-run", action="store_true")
     c.set_defaults(func=cmd_propose)
     pr = sub.add_parser("promote", help="Collect [x]-ticked review repos into the ingest inbox.")
