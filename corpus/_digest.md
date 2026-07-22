@@ -117,3 +117,9 @@ type: internal
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-business/sources/2026-26-summer-vibes-510e62ae.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-business/sources/a-quote-from-tom-macwright-634faec0.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/data-engineering/sources/data-modeling-with-joe-reis-understanding-what-data-modeling-NKo02ThtAto.md", "verdict_ok": false, "gov": "reverted+queued"}
+
+## [2026-07-22T03:05] gardener · run
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/a-new-generation-studies-ai-apple-s-recipe-for-on-device-mod-d.md", "verdict_ok": false, "gov": "reverted+queued"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/data-engineering/sources/data-modeling-with-joe-reis-understanding-what-data-modeling-NKo02ThtAto.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/software-engineering/sources/all-python-syntax-in-25-minutes-tutorial-PNSIWjWAA7o.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/productivity/sources/what-happens-to-your-brain-when-you-hum-for-60-seconds-QVoGbaq8xos.md", "verdict_ok": true, "gov": "committed"}
