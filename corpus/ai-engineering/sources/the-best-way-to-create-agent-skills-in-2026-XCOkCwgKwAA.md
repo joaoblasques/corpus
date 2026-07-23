@@ -12,7 +12,7 @@ tags:
   - source
   - youtube-quick-intake
 created: 2026-07-08
-updated: 2026-07-08
+updated: 2026-07-23
 provisional: false
 youtube_video_id: XCOkCwgKwAA
 url: https://youtu.be/XCOkCwgKwAA
@@ -26,7 +26,13 @@ transcript_status: metadata
 
 > **Quick intake** (YouTube · ZazenCodes · playlist _Corpus_queue_). [watch on YouTube](https://youtu.be/XCOkCwgKwAA)
 
-[quick intake — no transcript] The best way to create agent skills in 2026
+**TL;DR:** No transcript available for this video. Expansion blocked — all claims would be unsourced per §7.
 
-**Key topics**
-- (none extracted)
+**Source metadata**
+
+- Channel: ZazenCodes
+- Published: 2026-03-19
+- Playlist: Corpus_queue
+- Transcript status: metadata-only (no captions retrieved)
+
+> [unsourced — expansion requires transcript; watch at https://youtu.be/XCOkCwgKwAA]
