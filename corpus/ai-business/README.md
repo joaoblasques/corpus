@@ -70,7 +70,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [AI and the Job Market](/ai-business/ai-and-the-job-market.md)
 
 <details>
-<summary>Source summaries (182)</summary>
+<summary>Source summaries (185)</summary>
 
 - ["$1,300/Day Automated Bittensor Investing With Claude Code (34 Min Free Masterclass)"](/ai-business/sources/1-300-day-automated-bittensor-investing-with-claude-code-34--SHEs8gNh7sQ.md)
 - ["$100 million for open source: A milestone built by the community"](/ai-business/sources/100-million-for-open-source-a-milestone-built-by-the-communi-580ab93c.md)
@@ -96,6 +96,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - ["AI in Logistics: Optimize Supply Chain with TMS & WMS Software"](/ai-business/sources/ai-in-logistics-optimize-supply-chain-with-tms-wms-software-ccc62864.md)
 - ["AI Model Export Controls Explained: What Government Review Means for Your AI Stack"](/ai-business/sources/ai-model-export-controls-explained-what-government-review-me-4c60d08e.md)
 - ["AI Model Regulation: What the GPT-5.6 Government Review Means for Your AI Stack"](/ai-business/sources/ai-model-regulation-what-the-gpt-5-6-government-review-means-e3f22d9f.md)
+- ["AI Transparency: Governance, Explainability, and Data Practices"](/ai-business/sources/ai-transparency-governance-explainability-and-data-practices-321763fe.md)
 - ["AL 001: Is Niching Down Overrated in 2026? (Welcome to AskLiz!)"](/ai-business/sources/al-001-is-niching-down-overrated-in-2026-welcome-to-askliz-234b7204.md)
 - ["AL 002: Are Huge Sales Pages Worth It or Just Too Much?"](/ai-business/sources/al-002-are-huge-sales-pages-worth-it-or-just-too-much-9112eb56.md)
 - ["AL 003: Will These New Lead Magnet Ideas Grow My Email List?"](/ai-business/sources/al-003-will-these-new-lead-magnet-ideas-grow-my-email-list-83a0d124.md)
@@ -168,7 +169,9 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [AI for GTM — Best of Growth Unhinged | Kyle Poyar’s Growth Unhinged](/ai-business/sources/ai-for-gtm-best-of-growth-unhinged-kyle-poyar-s-growth-unhin-50e04191.md)
 - [AI for Superfans](/ai-business/sources/ai-for-superfans-7188444f.md)
 - [AI Isn’t Breaking Work. It’s Already Broken. - Cal Newport](/ai-business/sources/ai-isn-t-breaking-work-it-s-already-broken-cal-newport-16eace99.md)
+- [AI Mania Is Eviscerating Global Decision-Making](/ai-business/sources/ai-mania-is-eviscerating-global-decision-making-c54ae55d.md)
 - [AI Phobia Is Just Fear That ‘Easier’ Equals ‘Cheating’](/ai-business/sources/ai-phobia-is-just-fear-that-easier-equals-cheating-446f560e.md)
+- [AI raises everyone's app quality but customers now vibecode their own clones to skip paying — @levelsio (Pieter Levels)](/ai-business/sources/ai-raises-everyone-s-app-quality-but-customers-now-vibecode--e58d345f.md)
 - [AI Side Income - 7 Methods Using AI Tools](/ai-business/sources/ai-side-income-7-methods-using-ai-tools-doc.md)
 - [AI Strategy Consulting & Fractional CAIO Services - AY Automate](/ai-business/sources/ai-strategy-consulting-fractional-caio-services-ay-automate-7797e4a9.md)
 - [AI Turned Me Into a Content Agency of One](/ai-business/sources/ai-turned-me-into-a-content-agency-of-one-521529bc.md)

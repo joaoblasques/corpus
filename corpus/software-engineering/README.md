@@ -6,7 +6,7 @@ tags:
   - corpus/software-engineering
   - hub
 created: 2026-05-07
-updated: 2026-07-21
+updated: 2026-07-23
 ---
 
 # Software Engineering
@@ -90,6 +90,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Efficient Algorithms on Texts (Crochemore & Rytter, 1994)](/software-engineering/sources/text-algorithms.md) — source · draft · suffix trees, DAWG, KMP/BM/Aho-Corasick, palindromes (Rad table, palstars), 2D pattern matching, LZ compression, shortest common superstring; all 20 parts ingested
 - [The Design of Approximation Algorithms (Williamson & Shmoys, 2011)](/software-engineering/sources/design-of-approximation-algorithms.md) — source · draft · graduate textbook; greedy (set cover, submodular (1−1/e)), LP rounding (vertex cover 2-approx), randomized rounding (MAX SAT, MAX CUT), SDP rounding (Goemans-Williamson 0.878 MAX CUT), primal-dual, cuts/metrics, iterated rounding, PCP hardness; all 34 parts ingested
 - [Code Simplicity: The Fundamentals of Software (Kanat-Alexander, 2012)](/software-engineering/sources/code-simplicity.md) — source · draft · software design laws: Equation of Software Design (V>M), Law of Change (YAGNI), Law of Defect Probability (DRY, ~1 defect/100 lines), Law of Simplicity (individual pieces); 3 of 4 parts ingested
+- [Practical File System Design: The Be File System (Giampaolo, Morgan Kaufmann, 1999)](/software-engineering/sources/practical-file-system-design.md) — source · draft · 247pp practitioner guide to implementing BFS, the 64-bit journaled FS of BeOS; block_run/inode/data_stream structures, B+tree indexing, attribute queries, write-ahead logging, vnode layer, performance benchmarks, testing methodology
 
 ## Sources ingested
 - [Disasters I've Seen in a Microservices World](/03_Resources/Articles/Disasters in a Microservices World.md) — article note, João Alves / Hey World, 2025-10-30
@@ -151,7 +152,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Simplicity as an Engineering Constraint in the AI Age](/software-engineering/simplicity-as-engineering-constraint.md)
 
 <details>
-<summary>Source summaries (79)</summary>
+<summary>Source summaries (80)</summary>
 
 - ["2024-05-25-15-54-25 - move-base-up by josephmachado · Pull Request #17 · josephmachado/simple_dbt_project"](/software-engineering/sources/2024-05-25-15-54-25-move-base-up-by-josephmachado-pull-reque-ee.md)
 - ["A Guide to Multi-Tenancy: Benefits and Challenges"](/software-engineering/sources/a-guide-to-multi-tenancy-benefits-and-challenges-e55e9184.md)
@@ -218,6 +219,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Matters Computational: Ideas, Algorithms, Source Code (Joerg Arndt)](/software-engineering/sources/matters-computational.md)
 - [Obsidian Markdown Made Ridiculously Simple](/software-engineering/sources/obsidian-markdown-made-ridiculously-simple-e.md)
 - [ostep operating systems three easy pieces](/software-engineering/sources/ostep-operating-systems-three-easy-pieces.md)
+- [Practical File System Design: The Be File System (Giampaolo, 1999)](/software-engineering/sources/practical-file-system-design.md)
 - [Purely Functional Data Structures (Okasaki, CMU 1996)](/software-engineering/sources/purely-functional-data-structures-okasaki.md)
 - [Python - Complete Beginner Course 5 Hours TechWorld with Nana](/software-engineering/sources/python-complete-beginner-course-5-hours-techworld-with-nana-aa.md)
 - [Refactoring Techniques Guide](/software-engineering/sources/refactoring-techniques-guide-de.md)

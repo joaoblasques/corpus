@@ -18,6 +18,12 @@ sources:
   - path: raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-05.md
     channel: pdf
     ingested_at: 2026-07-08
+  - path: raw/_inbox/pdf-mathematics-for-machine-learning-part-01.md
+    channel: pdf
+    ingested_at: 2026-07-23
+  - path: raw/_inbox/pdf-mathematics-for-machine-learning-part-02.md
+    channel: pdf
+    ingested_at: 2026-07-23
 aliases:
   - linear algebra ML
   - vector spaces
@@ -26,7 +32,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-07-08
-updated: 2026-07-08
+updated: 2026-07-23
 ---
 
 # Linear Algebra for Machine Learning
@@ -144,6 +150,41 @@ For a general (non-ONB) basis: **π_U(x) = B(B^T B)^{-1} B^T x** (pseudo-inverse
 
 An **affine subspace** is a translated linear subspace: x_0 + U, where x_0 is a fixed point and U is a linear subspace. Solutions to **Ax = b** (when non-empty) form an affine subspace: x_particular + ker(A) [^src3].
 
+## Rayleigh Quotient and Min-Max Theorem
+
+For a symmetric matrix A, the **Rayleigh quotient** is R_A(x) = x^T Ax / ‖x‖². Key properties [^t-src1]:
+- Scale invariant: R_A(αx) = R_A(x)
+- If x is an eigenvector of A with eigenvalue λ, then R_A(x) = λ
+- **Min-max theorem**: λ_min(A) ≤ R_A(x) ≤ λ_max(A) for all x ≠ 0, with equality iff x is a corresponding eigenvector
+
+This gives a variational characterization of eigenvalues: λ_max(A) = max_{‖x‖=1} x^T Ax. Useful for bounding matrix behaviors and understanding PCA.
+
+## Positive Definite Quadratic Forms: Geometry
+
+For f(x) = x^T Ax with A positive definite, the c-isocontours are **ellipsoids**. Axes point in directions of eigenvectors of A; axis radii are proportional to the inverse square roots of the corresponding eigenvalues (larger eigenvalue → shorter axis) [^t-src2].
+
+This is derived by computing the matrix square root A^{1/2} = QΛ^{1/2}Q^T and showing the isocontours map to the unit sphere under A^{1/2}. The ellipsoid undergoes a rigid rotation Q that aligns its axes with eigenvectors.
+
+Implication: the shape of a quadratic form (and hence the loss landscape near a minimum) is entirely determined by the eigenstructure of A.
+
+## Low-Rank Approximation (Eckart-Young-Mirsky Theorem)
+
+Given A ∈ R^{m×n} with SVD A = Σ σ_i u_i v_i^T, the **best rank-k approximation** in any unitary invariant norm (spectral or Frobenius) is [^t-src2]:
+
+```
+A_k = Σ_{i=1}^k σ_i u_i v_i^T
+```
+
+(i.e., keep only the top k singular values). The approximation error equals σ_{k+1} in the spectral norm.
+
+This underlies PCA (project onto top-k eigenvectors), image compression, and latent semantic analysis.
+
+## Moore-Penrose Pseudoinverse
+
+For A ∈ R^{m×n}, the **pseudoinverse** A† ∈ R^{n×m} is uniquely defined by four properties: AA†A = A, A†AA† = A†, AA† symmetric, A†A symmetric. Computed from SVD: if A = UΣV^T, then A† = VΣ†U^T where Σ† inverts nonzero singular values [^t-src2].
+
+When A is invertible, A† = A^{-1}. For overdetermined systems (m > n), A†b gives the least-squares solution. For underdetermined systems, A†b gives the minimum-norm solution.
+
 ## ML Connections
 
 | Linear algebra concept | ML use |
@@ -162,7 +203,8 @@ An **affine subspace** is a translated linear subspace: x_0 + U, where x_0 is a 
 - [/ai-engineering/matrix-decompositions.md](/ai-engineering/matrix-decompositions.md) — eigenvalues, Cholesky, eigendecomposition, SVD
 - [/ai-engineering/singular-value-decomposition.md](/ai-engineering/singular-value-decomposition.md) — SVD in depth (Brunton & Kutz perspective)
 - [/ai-engineering/pca-and-dimensionality-reduction.md](/ai-engineering/pca-and-dimensionality-reduction.md) — PCA as projection onto eigenvectors
-- [/ai-engineering/sources/mathematics-for-machine-learning.md](/ai-engineering/sources/mathematics-for-machine-learning.md) — full book summary
+- [/ai-engineering/sources/mathematics-for-machine-learning.md](/ai-engineering/sources/mathematics-for-machine-learning.md) — Deisenroth/Faisal/Ong 2020 full book summary
+- [/ai-engineering/sources/mathematics-for-machine-learning-thomas.md](/ai-engineering/sources/mathematics-for-machine-learning-thomas.md) — Thomas 2018 (CS 189 Berkeley), proof-oriented course notes
 
 ---
 
@@ -171,3 +213,5 @@ An **affine subspace** is a translated linear subspace: x_0 + U, where x_0 is a 
 [^src3]: [Mathematics for Machine Learning, Part 3](../../raw/pdf/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-03.md)
 [^src4]: [Mathematics for Machine Learning, Part 4](../../raw/pdf/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-04.md)
 [^src5]: [Mathematics for Machine Learning, Part 5](../../raw/pdf/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-05.md)
+[^t-src1]: [Mathematics for Machine Learning (Thomas 2018), Part 1/3](../../raw/pdf/pdf-mathematics-for-machine-learning-part-01.md)
+[^t-src2]: [Mathematics for Machine Learning (Thomas 2018), Part 2/3](../../raw/pdf/pdf-mathematics-for-machine-learning-part-02.md)

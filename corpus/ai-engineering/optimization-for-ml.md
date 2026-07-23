@@ -15,6 +15,12 @@ sources:
   - path: raw/_inbox/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-17.md
     channel: pdf
     ingested_at: 2026-07-17
+  - path: raw/_inbox/pdf-mathematics-for-machine-learning-part-02.md
+    channel: pdf
+    ingested_at: 2026-07-23
+  - path: raw/_inbox/pdf-mathematics-for-machine-learning-part-03.md
+    channel: pdf
+    ingested_at: 2026-07-23
 aliases:
   - gradient descent
   - convex optimization
@@ -25,7 +31,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-07-08
-updated: 2026-07-17
+updated: 2026-07-23
 ---
 
 # Optimization for Machine Learning
@@ -79,6 +85,42 @@ where alpha > 0 is the **learning rate** (step size) [^src1].
 - **Adam**: adaptive learning rates per parameter; de facto default for neural networks
 
 **Gradient descent does NOT guarantee global optimum for non-convex L** (neural network losses are non-convex). In practice, local minima are often near-global in high dimensions, but saddle points can slow convergence [^src1].
+
+## Necessary and Sufficient Conditions for Local Minima
+
+Thomas 2018 gives constructive proofs of these conditions using Taylor's theorem [^t-src-opt1]:
+
+**Necessary first-order condition**: if x* is a local minimum and f is continuously differentiable near x*, then ∇f(x*) = 0. Proof by contradiction: if ∇f(x*) ≠ 0, taking a step in direction −∇f(x*) yields a lower value, contradicting local minimality.
+
+**Necessary second-order condition**: if x* is a local minimum and f is twice continuously differentiable near x*, then ∇²f(x*) is positive semi-definite.
+
+**Sufficient conditions**: ∇f(x*) = 0 AND ∇²f is PSD throughout a neighborhood of x* → x* is a local minimum. If ∇²f(x*) is strictly positive definite, x* is a strict local minimum.
+
+**Important caveat**: ∇f(x*) = 0 and ∇²f(x*) PSD at a single point is insufficient. Counterexample: f(x) = x³ has ∇f(0) = 0 and ∇²f(0) = 0 (PSD), but x=0 is a saddle point, not a minimum. Requiring PSD in a neighborhood (not just at x*) is essential [^t-src-opt1].
+
+**Stationary points** where ∇f = 0 but no extremum exists are called **saddle points**. Classic example: f(x,y) = x² − y² has ∇f(0,0) = 0 but is a min along y=0 and a max along x=0.
+
+## Strict and Strong Convexity
+
+Beyond basic convexity, Thomas 2018 formalizes a three-level taxonomy [^t-src-opt1]:
+
+- **Convex**: f(tx + (1−t)y) ≤ tf(x) + (1−t)f(y)
+- **Strictly convex**: strict inequality for x ≠ y, t ∈ (0,1)
+- **m-strongly convex**: f(x) − (m/2)‖x‖² is convex
+
+Strength ordering: strong convexity → strict convexity → convexity.
+
+**Implications for minima uniqueness** [^t-src-opt1]:
+- Convex f over convex set X: any local minimum is a global minimum (Proposition 16)
+- Strictly convex f over convex set X: there is at most one local minimum, hence the unique global minimum (Proposition 17)
+- Strongly convex f: gradient descent converges linearly; useful for convergence rate analysis
+
+**Hessian characterizations** (twice differentiable f):
+- f convex ↔ ∇²f(x) ⪰ 0 everywhere
+- ∇²f(x) ≻ 0 everywhere → strictly convex (but not vice versa: x⁴ is strictly convex yet f''(0) = 0)
+- f is m-strongly convex ↔ ∇²f(x) ⪰ mI everywhere
+
+**Preservation rules**: nonneg linear combination of convex functions is convex; f(Ax + b) is convex when f is convex; max of convex functions is convex; all norms are convex [^t-src-opt1].
 
 ## Constrained Optimization and Lagrange Multipliers
 
@@ -245,7 +287,8 @@ Proximal gradient bridges the gap between smooth first-order methods (gradient d
 - [/ai-engineering/support-vector-machines.md](/ai-engineering/support-vector-machines.md) — SVM as a QP with dual formulation
 - [/ai-engineering/gaussian-mixture-models.md](/ai-engineering/gaussian-mixture-models.md) — EM algorithm for GMM optimization
 - [/ai-engineering/proximal-gradient-methods.md](/ai-engineering/proximal-gradient-methods.md) — ISTA, FISTA, ADMM for composite/structured objectives
-- [/ai-engineering/sources/mathematics-for-machine-learning.md](/ai-engineering/sources/mathematics-for-machine-learning.md) — full book summary
+- [/ai-engineering/sources/mathematics-for-machine-learning.md](/ai-engineering/sources/mathematics-for-machine-learning.md) — Deisenroth/Faisal/Ong 2020 full book summary
+- [/ai-engineering/sources/mathematics-for-machine-learning-thomas.md](/ai-engineering/sources/mathematics-for-machine-learning-thomas.md) — Thomas 2018 (CS 189 Berkeley), proof-oriented course notes
 
 ---
 
@@ -253,3 +296,5 @@ Proximal gradient bridges the gap between smooth first-order methods (gradient d
 [^src2]: [Mathematics for Machine Learning, Part 8](../../raw/pdf/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-08.md)
 [^src3]: [D2L Part 26 — Adagrad, RMSProp, Adam (Ch 12 Optimization Algorithms)](../../raw/pdf/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-26.md)
 [^src4]: [HDLM Part 17 — Ch. 8 proximal gradient, ISTA, FISTA, ADMM for composite objectives](../../raw/pdf/pdf-high-dimensional-data-analysis-with-low-dimensiona-part-17.md)
+[^t-src-opt1]: [Mathematics for Machine Learning (Thomas 2018), Part 2/3](../../raw/pdf/pdf-mathematics-for-machine-learning-part-02.md)
+[^t-src-opt2]: [Mathematics for Machine Learning (Thomas 2018), Part 3/3](../../raw/pdf/pdf-mathematics-for-machine-learning-part-03.md)

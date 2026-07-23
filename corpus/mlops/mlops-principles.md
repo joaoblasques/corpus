@@ -12,6 +12,9 @@ sources:
   - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-i-wasted-2-years-report.md
     channel: notes
     ingested_at: 2026-06-25
+  - path: raw/_inbox/pdf-practitioners-guide-to-mlops.md
+    channel: pdf
+    ingested_at: 2026-07-23
 aliases:
   - MLOps
   - MLOps principles
@@ -23,7 +26,7 @@ tags:
   - corpus/mlops
   - concept
 created: 2026-06-19
-updated: 2026-06-25
+updated: 2026-07-23
 ---
 
 # MLOps Principles
@@ -113,10 +116,35 @@ From DevOps practitioners with >10 years of experience: "Tools come and go. Conc
 
 MLOps' emphasis on *categories of tools* (above) applies the same logic within ML engineering [^src1][^src3].
 
+## The deployment gap (industry data)
+
+Google's 2021 whitepaper quantified the operationalization bottleneck: only 1 in 2 organizations had moved beyond pilots and proofs of concept; 72% of organizations that began AI pilots before 2019 had not deployed even a single application in production; 55% of companies surveyed by Algorithmia had not deployed an ML model. [^src4] Root causes: manual one-off work, no reusable components, difficult data-scientist-to-IT handoffs, lack of talent, and lack of governance. McKinsey identified having standard frameworks and development processes as a differentiating factor of high-performing ML teams. [^src4]
+
+## The MLOps lifecycle (seven phases)
+
+Google's canonical decomposition [^src4] (non-waterfall; phases can be skipped or repeated):
+
+1. **ML development** — experimenting to produce a reproducible training pipeline; primary output is either a registered model (if no ongoing retraining needed) or a continuous training pipeline implementation.
+2. **Training operationalization** — CI/CD to package, test, and deploy the training pipeline to a target execution environment.
+3. **Continuous training** — orchestrated, automated pipeline execution triggered by schedule, new data, model decay detection, or ad hoc invocation.
+4. **Model deployment** — packaging, testing, and progressive delivery of the model to a serving environment.
+5. **Prediction serving** — online, streaming, batch, or embedded inference.
+6. **Continuous monitoring** — detecting effectiveness decay (data/concept drift) and efficiency degradation (latency, throughput, error rates).
+7. **Data and model management** — cross-cutting governance for auditability, traceability, compliance, and asset reuse.
+
+## Training-serving skew
+
+A key production failure mode: "discrepancies between serving data and training data... can occur because the data is extracted from different sources in different forms during training and serving." [^src4] The primary mitigation is a unified feature and dataset repository that serves both the training pipeline and the online inference engine from a single data source, ensuring consistent feature definitions and transformations.
+
+## Model governance
+
+Governance is the process of registering, reviewing, validating, and approving models before deployment. [^src4] Five tasks: **Store** (version models and track property changes in the model registry) → **Evaluate** (compare challenger to champion on evaluation metrics and business KPIs from online experimentation) → **Check** (review business, legal, ethical risks) → **Release** (invoke deployment with specified delivery type and traffic split) → **Report** (aggregate and visualize production performance metrics). Explainability is required for decision-automation use cases: auditors need "a clear view of lineage and accountability." [^src4]
+
 ## Context
 
-This page is the foundational "what is MLOps" entry for the domain; the [MLOps hub](/mlops/README.md) tool/practice pages are the specific capabilities this overview frames. It is lecture 1 of the Marvelous MLOps "End-to-end MLOps with Databricks" course (Databricks Free Edition); lectures 2–10 (developing on Databricks, MLflow, model serving, Asset Bundles, CI/CD, monitoring) were ingested previously and live in the pages linked above.
+This page is the foundational "what is MLOps" entry for the domain; the [MLOps hub](/mlops/README.md) tool/practice pages are the specific capabilities this overview frames. It is lecture 1 of the Marvelous MLOps "End-to-end MLOps with Databricks" course (Databricks Free Edition); lectures 2–10 (developing on Databricks, MLflow, model serving, Asset Bundles, CI/CD, monitoring) were ingested previously and live in the pages linked above. The [Practitioners Guide to MLOps](/mlops/sources/practitioners-guide-to-mlops.md) source page covers the full Google lifecycle and capability framework.
 
 [^src1]: [Introduction to MLOps (Marvelous MLOps)](../../raw/email/email-2025-07-28-introduction-to-mlops.md)
 [^src2]: [DevOps from Zero to Hero: Build and Deploy a Production API](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-devops-from-zero-report.md) — [01:00](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-devops-from-zero-report.md#t=01:00) DevOps loop diagram
 [^src3]: [I Wasted 2 Years Learning DevOps Wrong. Here's What I'd Do Instead. (Nana)](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-i-wasted-2-years-report.md) — [01:26](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-i-wasted-2-years-report.md#t=01:26) tools vs. concepts
+[^src4]: [Practitioners guide to MLOps](../../raw/pdf/pdf-practitioners-guide-to-mlops.md) — Khalid Salama, Jarek Kazmierczak, Donna Schut; Google, May 2021; 37 pages

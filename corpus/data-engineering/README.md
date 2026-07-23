@@ -221,7 +221,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [The Portfolio Project That Lands a DE Role](/data-engineering/portfolio-project-that-lands-a-de-role.md)
 
 <details>
-<summary>Source summaries (221)</summary>
+<summary>Source summaries (222)</summary>
 
 - ["A dbt \"logic mesh\" with packages: standard model and metrics across 25 autonomous organizations | dbt Summit"](/data-engineering/sources/a-dbt-logic-mesh-with-packages-standard-model-and-metrics-ac-bf162a97.md)
 - ["Academic → CTO: What Actually Matters in Data (Matthew Housley) - Confessions of a Data Guy"](/data-engineering/sources/academic-cto-what-actually-matters-in-data-matthew-housley-c-e9eae58c.md)
@@ -380,6 +380,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [dbt-building a more pet friendly world | dbt Summit](/data-engineering/sources/dbt-building-a-more-pet-friendly-world-dbt-summit-5f3400b2.md)
 - [Design Uber's Data Model from Scratch | Complete Data Modeling Masterclass](/data-engineering/sources/design-uber-s-data-model-from-scratch-complete-data-modeling-RmugzY84iL4.md)
 - [Designing Data-intensive Applications with Martin Kleppmann](/data-engineering/sources/designing-data-intensive-applications-with-martin-kleppmann-SVOrURyOu_U.md)
+- [Designing Event-Driven Systems (Stopford, O'Reilly 2018)](/data-engineering/sources/designing-event-driven-systems.md)
 - [DevOps - Bash Scripting Tutorial for Beginners](/data-engineering/sources/devops-bash-scripting-tutorial-for-beginners-bee.md)
 - [DevOps - Setting Up a Production-Ready VPS from Scratch](/data-engineering/sources/devops-setting-up-a-production-ready-vps-from-scratch-cac.md)
 - [Dimensional Data Modeling - Day 1](/data-engineering/sources/dimensional-data-modeling-day-1-1.md)

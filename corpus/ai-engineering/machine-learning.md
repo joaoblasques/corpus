@@ -60,9 +60,36 @@ sources:
   - path: raw/pdf/pdf-mining-of-massive-datasets-part-26.md
     channel: pdf
     ingested_at: 2026-07-19
+  - path: raw/_inbox/pdf-patterns-predictions-and-actions-a-story-about-mac-part-01.md
+    channel: pdf
+    ingested_at: 2026-07-23
+  - path: raw/_inbox/pdf-patterns-predictions-and-actions-a-story-about-mac-part-02.md
+    channel: pdf
+    ingested_at: 2026-07-23
+  - path: raw/_inbox/pdf-patterns-predictions-and-actions-a-story-about-mac-part-03.md
+    channel: pdf
+    ingested_at: 2026-07-23
+  - path: raw/_inbox/pdf-patterns-predictions-and-actions-a-story-about-mac-part-04.md
+    channel: pdf
+    ingested_at: 2026-07-23
+  - path: raw/_inbox/pdf-patterns-predictions-and-actions-a-story-about-mac-part-05.md
+    channel: pdf
+    ingested_at: 2026-07-23
+  - path: raw/_inbox/pdf-patterns-predictions-and-actions-a-story-about-mac-part-06.md
+    channel: pdf
+    ingested_at: 2026-07-23
+  - path: raw/_inbox/pdf-patterns-predictions-and-actions-a-story-about-mac-part-07.md
+    channel: pdf
+    ingested_at: 2026-07-23
+  - path: raw/_inbox/pdf-patterns-predictions-and-actions-a-story-about-mac-part-08.md
+    channel: pdf
+    ingested_at: 2026-07-23
 aliases:
   - machine learning
   - ML
+  - double descent
+  - adaptivity problem
+  - fairness impossibility
   - supervised learning
   - unsupervised learning
   - reinforcement learning
@@ -94,7 +121,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-15
-updated: 2026-07-15
+updated: 2026-07-23
 ---
 
 # Machine Learning
@@ -227,6 +254,34 @@ Since KL ≥ 0, ELBO is a lower bound on the log-likelihood. **EM** iterates:
 
 K-means is a hard-assignment limit of EM on Gaussian mixtures (q assigns all mass to the nearest centroid) [^simeone_p6]. **Variational Autoencoders** extend the ELBO framework to deep generative models, using the **reparametrization trick** (z = μ + σ·ε, ε ~ N(0,I)) to backpropagate through the sampling step [^simeone_p8].
 
+## Double descent and overparameterization (Hardt & Recht)
+
+The classical bias-variance curve (test error rises monotonically with model complexity beyond a point) is wrong for modern ML. The **double descent** curve shows test error peaks at the **interpolation threshold** (parameters ≈ training samples), then *falls again* as the model grows larger [^ppa_p06]. Overparameterized models that perfectly fit training data can still generalize well because the minimum-norm solution (selected implicitly by SGD) has low complexity despite zero training loss. This reconciles "memorization = bad" folklore with empirical deep learning practice [^ppa_p06].
+
+## Fairness impossibility: three non-discrimination criteria
+
+For binary classifiers with a protected attribute A, three natural non-discrimination criteria are mutually incompatible unless base rates of the outcome Y differ equally across groups [^ppa_p02]:
+
+| Criterion | Formal | Informal |
+|---|---|---|
+| **Independence** | R ⊥ A | Equal acceptance rates |
+| **Separation** | R ⊥ A \| Y | Equal TPR and FPR |
+| **Sufficiency** | Y ⊥ A \| R | Equal predictive values |
+
+This was proven by Chouldechova (2017) and Kleinberg et al. (2017) and illustrated by the ProPublica/COMPAS recidivism controversy where Northpointe satisfied Sufficiency and ProPublica criticized the violation of Separation [^ppa_p02].
+
+## SGD generalization via algorithmic stability (Hardt, Recht, Singer 2016)
+
+**Uniform stability** of a learning algorithm: max over any two datasets differing by one example of ‖fS − fS'‖∞. Bousquet & Elisseeff (2002) show that expected generalization gap ≤ uniform stability. Hardt, Recht & Singer (2016) prove that **one-pass SGD** with step size η has uniform stability ≤ 2ηL·T/n (L = Lipschitz constant of loss), so the expected generalization gap is O(η·L·T/n) [^ppa_p06]. This explains why early stopping regularizes: it caps T, limiting stability error. The bound is dimension-free — unlike classical parameter-counting analysis.
+
+## Pattern classification as the historical root of ML (Hardt & Recht)
+
+Hardt & Recht argue that modern ML descends from **1960s pattern classification** (Rosenblatt's perceptron 1957, Duda & Hart 1973 textbook), not from the AI symbolic reasoning tradition. The core loop is: propose pattern classes → gather labeled data → learn a classifier → deploy predictions that prompt actions [^ppa_p01]. This lineage explains why image and speech classification (rather than theorem proving or game playing) drove the field's modern revival.
+
+## Adaptivity and benchmark longevity (Hardt & Recht)
+
+**The adaptivity problem** (Dwork et al. 2015): an analyst who repeatedly queries a holdout set can overfit it, even without seeing raw data, in O(n) adaptive queries [^ppa_p08]. Consequences for ML benchmarks: MNIST (1998), CIFAR, and ImageNet have been exploited for >20 years of model selection, causing inflated reported accuracy. The **leaderboard principle** (Mania et al. 2019): models with similar training-set accuracy show similar test-set accuracy under distribution shift — so improving leaderboard position by over-fitting does not transfer. The **Ladder algorithm** (Blum & Hardt 2015) enables safe leaderboard reuse by adding noise to each query [^ppa_p08].
+
 ## See also
 
 - [AI Fundamentals](/ai-engineering/ai-fundamentals.md) — ML is the learning branch of the broader field
@@ -236,6 +291,7 @@ K-means is a hard-assignment limit of EM on Gaussian mixtures (q assigns all mas
 - [Learning AI Engineering](/ai-engineering/learning-ai-engineering.md) — the "learn ML in 2026" path
 - [Foundations of Data Science (Blum/Hopcroft/Kannan)](/ai-engineering/sources/foundations-of-data-science-blum-hopcroft-kannan.md) — rigorous textbook source
 - [ML for Engineers (Simeone 2018)](/ai-engineering/sources/ml-for-engineers-simeone.md) — full source summary: probabilistic models, PAC theory, approximate inference
+- [Patterns, Predictions, and Actions (Hardt & Recht 2022)](/ai-engineering/sources/patterns-predictions-and-actions.md) — ML rooted in pattern classification; causality; sequential decisions; datasets; fairness impossibility
 - [Generative Adversarial Networks](/ai-engineering/generative-adversarial-networks.md) — GAN architecture from the ELBO generalization perspective
 - [Gaussian Mixture Models](/ai-engineering/gaussian-mixture-models.md) — EM algorithm in detail
 - [AI Engineering hub](/ai-engineering/README.md)
@@ -257,6 +313,10 @@ K-means is a hard-assignment limit of EM on Gaussian mixtures (q assigns all mas
 [^simeone_p5]: [ML for Engineers — Part 5/9 (Generative models, boosting, PAC learnability, VC dimension)](../../raw/pdf/pdf-a-brief-introduction-to-machine-learning-for-engin-part-05.md)
 [^simeone_p6]: [ML for Engineers — Part 6/9 (ELBO, EM algorithm, Gaussian mixtures, GANs)](../../raw/pdf/pdf-a-brief-introduction-to-machine-learning-for-engin-part-06.md)
 [^simeone_p8]: [ML for Engineers — Part 8/9 (Approximate inference, variational inference, reparametrization trick)](../../raw/pdf/pdf-a-brief-introduction-to-machine-learning-for-engin-part-08.md)
+[^ppa_p01]: [Patterns, Predictions, and Actions — Part 1/14 (Introduction)](../../raw/pdf/pdf-patterns-predictions-and-actions-a-story-about-mac-part-01.md) — Hardt & Recht, mlstory.org 2022
+[^ppa_p02]: [Patterns, Predictions, and Actions — Part 2/14 (Ch2: Fundamentals of prediction)](../../raw/pdf/pdf-patterns-predictions-and-actions-a-story-about-mac-part-02.md)
+[^ppa_p06]: [Patterns, Predictions, and Actions — Part 6/14 (Ch6: Generalization)](../../raw/pdf/pdf-patterns-predictions-and-actions-a-story-about-mac-part-06.md)
+[^ppa_p08]: [Patterns, Predictions, and Actions — Part 8/14 (Ch8: Datasets)](../../raw/pdf/pdf-patterns-predictions-and-actions-a-story-about-mac-part-08.md)
 
 <!-- RELATED:START (generated by bin/corpus_heal.py related — do not edit inside) -->
 

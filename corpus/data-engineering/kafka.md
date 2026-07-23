@@ -27,6 +27,9 @@ sources:
   - path: raw/web/web-the-trinity-of-modern-data-architecture-process-intelligence-b19b93a7.md
     channel: web
     ingested_at: 2026-07-03
+  - path: raw/_inbox/pdf-designing-event-driven-systems-concepts-and-patter-part-01.md
+    channel: pdf
+    ingested_at: 2026-07-23
 aliases:
   - Apache Kafka
   - Kafka
@@ -44,7 +47,7 @@ tags:
   - corpus/data-engineering
   - entity
 created: 2026-05-21
-updated: 2026-07-03
+updated: 2026-07-23
 ---
 
 # Apache Kafka
@@ -168,6 +171,16 @@ These findings were produced with **Dimster** (DIMensional teSTER), an open-sour
 
 Beyond a single pipeline's transport layer, Kafka has become "the de facto standard for event-driven integration at enterprise scale" — the architectural commitment to events (not scheduler cadence) as the primary integration primitive, ensuring decoupling, scalability, and data consistency across real-time and batch systems [^src8]. Process-orchestration engines have followed the same shift: Camunda's **Zeebe** is itself an event-driven engine, letting organizations implement event-driven workflows without Kafka as a prerequisite; for broader enterprise integration, Kafka complements the orchestration layer, connecting the full landscape of operational systems, SaaS platforms, and data infrastructure into one event-driven backbone [^src8]. Core SaaS platforms have added eventing/CDC interfaces alongside their traditional request-response APIs — SAP S/4HANA, Salesforce CRM, and ServiceNow are named examples — signaling that even systems designed around synchronous HTTP are moving toward event-driven models [^src8]. See [Process Intelligence](/data-engineering/process-intelligence.md) for how this event layer pairs with process orchestration and agentic AI guardrails.
 
+## Kafka as a Streaming Platform — the canonical framing (Stopford 2018)
+
+*Designing Event-Driven Systems* (Ben Stopford, O'Reilly 2018) is the canonical reference for what Kafka really is and is not [^eds-p01]:
+
+- **Not REST-async**: Kafka's home ground is persistent, replayable event streams shared across many services — not point-to-point request-response [^eds-p01].
+- **Not an ESB**: unlike traditional enterprise service buses that encourage central orchestration and schema management, Kafka's mantra is the opposite: "Centralize an immutable stream of facts. Decentralize the freedom to act, adapt, and change." [^eds-p01]
+- **Not a database (but database-like)**: Kafka provides storage, a SQL interface (KSQL), and transactions, but it is optimized for continuous computation and data movement — "a database inside out." The database's components (commit log, query engine, indexes, caches) are unbundled and distributed: Kafka is the commit log; Kafka Streams/KSQL creates the indexes and views wherever they are needed [^eds-p01].
+
+The book argues that Kafka enables a shift from shared databases (tight coupling) to a shared event log (loose coupling + a central source of truth). Services derive their own private read models from the log, keeping data local while staying synchronized with the organization's facts. See [Designing Event-Driven Systems (source)](/data-engineering/sources/designing-event-driven-systems.md) for the full treatment including Event Sourcing, CQRS, exactly-once semantics, and schema evolution.
+
 ## See also
 
 - [Idempotent Pipelines](/data-engineering/idempotent-pipelines.md) — append-only stream ingestion with at-most-once settings
@@ -186,3 +199,4 @@ Beyond a single pipeline's transport layer, Kafka has become "the de facto stand
 [^src6]: [TLDR Data — Kafka's New Bottleneck / Share Groups (newsletter origin)](../../raw/email/email-2026-05-28-slashing-snowflake-costs-open-source-agent-tradeoffs-kafkas.md)
 [^src7]: [If you're learning Kafka, this article is for you (Vu Trinh)](../../raw/email/email-2025-05-15-if-you-re-learning-kafka-this-article-is-for-you.md)
 [^src8]: [The Trinity of Modern Data Architecture: Process Intelligence, Event-Driven Integration, and Trusted Agentic AI](../../raw/web/web-the-trinity-of-modern-data-architecture-process-intelligence-b19b93a7.md)
+[^eds-p01]: [Designing Event-Driven Systems (part 1/6)](../../raw/pdf/pdf-designing-event-driven-systems-concepts-and-patter-part-01.md)

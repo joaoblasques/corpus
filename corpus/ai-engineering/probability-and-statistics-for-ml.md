@@ -9,6 +9,9 @@ sources:
   - path: raw/_inbox/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-11.md
     channel: pdf
     ingested_at: 2026-07-08
+  - path: raw/_inbox/pdf-mathematics-for-machine-learning-part-03.md
+    channel: pdf
+    ingested_at: 2026-07-23
 aliases:
   - probability ML
   - Bayesian inference
@@ -19,7 +22,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-07-08
-updated: 2026-07-08
+updated: 2026-07-23
 ---
 
 # Probability and Statistics for Machine Learning
@@ -34,6 +37,7 @@ A probability space (Omega, F, P) consists of a sample space, a sigma-algebra (e
 - **Sum rule** (marginalization): p(x) = sum_y p(x, y) or integral p(x, y) dy
 - **Product rule** (chain rule): p(x, y) = p(y|x) p(x)
 - **Bayes' theorem**: p(theta|x) = p(x|theta) p(theta) / p(x) proportional to p(x|theta) p(theta) [^src1]
+- **Union bound (Boole's inequality)**: P(∪ A_i) ≤ Σ P(A_i) for any countable set of events, disjoint or not [^t-src-prob]
 
 **Independence**: X and Y are independent iff p(x, y) = p(x)p(y) iff p(x|y) = p(x) [^src1].
 
@@ -47,7 +51,7 @@ A probability space (Omega, F, P) consists of a sample space, a sigma-algebra (e
 
 **Correlation**: rho(x, y) = Cov[x, y] / (sqrt(V[x]) sqrt(V[y])). This is the cosine of the angle between random variables viewed as vectors: uncorrelated variables are orthogonal in that space [^src1].
 
-**Covariance matrix**: Sigma = Cov[x, x] in R^{D x D}. Always symmetric positive semidefinite.
+**Covariance matrix**: Sigma = Cov[x, x] in R^{D x D}. Always symmetric positive semidefinite. The inverse Σ^{-1} is called the **precision matrix** [^t-src-prob].
 
 **Affine transformations**: if y = Ax + b, then E[y] = AE[x] + b and V[y] = A V[x] A^T [^src1].
 
@@ -60,6 +64,8 @@ p(x) = (2pi)^{-D/2} |Sigma|^{-1/2} exp(-0.5 (x - mu)^T Sigma^{-1} (x - mu))
 ```
 
 where mu in R^D is the mean vector and Sigma in R^{D x D} is the SPD covariance matrix.
+
+**Geometry of multivariate Gaussians**: the density is a strictly monotonically decreasing function of the precision quadratic form (x − µ)^T Σ^{-1} (x − µ). Therefore isocontours of the density are ellipsoids centered at µ, with axes pointing in directions of eigenvectors of Σ (equivalently of Σ^{-1}), and axis lengths proportional to square roots of eigenvalues of Σ [^t-src-prob]. This connects directly to the geometry of positive definite quadratic forms.
 
 **Why the Gaussian is ubiquitous in ML**:
 - Closed-form marginals and conditionals (both Gaussian)
@@ -183,9 +189,11 @@ Uncorrelated variables satisfy Pythagoras: Var[X + Y] = Var[X] + Var[Y].
 - [/ai-engineering/optimization-for-ml.md](/ai-engineering/optimization-for-ml.md) — MLE/MAP as optimization problems
 - [/ai-engineering/gaussian-mixture-models.md](/ai-engineering/gaussian-mixture-models.md) — GMM density estimation using Gaussians
 - [/ai-engineering/pca-and-dimensionality-reduction.md](/ai-engineering/pca-and-dimensionality-reduction.md) — probabilistic PCA
-- [/ai-engineering/sources/mathematics-for-machine-learning.md](/ai-engineering/sources/mathematics-for-machine-learning.md) — full book summary
+- [/ai-engineering/sources/mathematics-for-machine-learning.md](/ai-engineering/sources/mathematics-for-machine-learning.md) — Deisenroth/Faisal/Ong 2020 full book summary
+- [/ai-engineering/sources/mathematics-for-machine-learning-thomas.md](/ai-engineering/sources/mathematics-for-machine-learning-thomas.md) — Thomas 2018 (CS 189 Berkeley), proof-oriented course notes
 
 ---
 
 [^src1]: [Mathematics for Machine Learning, Part 10](../../raw/pdf/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-10.md)
 [^src2]: [Mathematics for Machine Learning, Part 11](../../raw/pdf/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-11.md)
+[^t-src-prob]: [Mathematics for Machine Learning (Thomas 2018), Part 3/3](../../raw/pdf/pdf-mathematics-for-machine-learning-part-03.md)

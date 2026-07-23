@@ -67,6 +67,7 @@ The engineering substrate for building ML and software systems: how the developm
 - [DevOps Learning Roadmap](/mlops/devops-learning-roadmap.md) — synthesis · draft · TWN 10-step canonical path + 26-week schedule; KubeCraft roadmap; 8 common learning mistakes (Nana); concepts-over-tools principle; Linux-first argument
 
 ## Sources ingested
+- [Practitioners Guide to MLOps (Google, May 2021)](sources/practitioners-guide-to-mlops.md) — Khalid Salama, Jarek Kazmierczak, Donna Schut; 37-page whitepaper defining the MLOps lifecycle (7 phases), 11 core capabilities, and 6 process deep-dives; 2026-07-23
 - [AI Engineering from Scratch — Phase 00 / 01 Dev Environment](../../raw/notes/00-01-dev-environment-kb.md) — first-party course note, 2026-05-25
 - [AI Engineering from Scratch — Phase 00 / 02 Git & Collaboration](../../raw/notes/00-02-git-and-collaboration-kb.md) — first-party course note, 2026-05-27
 - [AI Engineering from Scratch — Phase 00 / 03 GPU Setup & Cloud](../../raw/notes/00-03-gpu-setup-and-cloud-kb.md) — first-party course note, 2026-05-27
@@ -137,7 +138,7 @@ The engineering substrate for building ML and software systems: how the developm
 - [Environment Promotion (dev → acc → prd)](/mlops/environment-promotion.md)
 
 <details>
-<summary>Source summaries (101)</summary>
+<summary>Source summaries (103)</summary>
 
 - ["29%+ warehouse savings: How the dbt Fusion engine drives cost efficiency | dbt Labs"](/mlops/sources/29-warehouse-savings-how-the-dbt-fusion-engine-drives-cost-e-121b247d.md)
 - ["AL 005: 60% Growth in 60 Days? How?!"](/mlops/sources/al-005-60-growth-in-60-days-how-150a587c.md)
@@ -177,6 +178,7 @@ The engineering substrate for building ML and software systems: how the developm
 - [Add Git-Like Data Versioning to MATLAB with lakeFS](/mlops/sources/add-git-like-data-versioning-to-matlab-with-lakefs-8ae9afe5.md)
 - [Add snapshots to your DAG | dbt Developer Hub](/mlops/sources/add-snapshots-to-your-dag-dbt-developer-hub-b.md)
 - [Agent Bricks and the Commoditization of AI Systems - Confessions of a Data Guy](/mlops/sources/agent-bricks-and-the-commoditization-of-ai-systems-confessio-4ec6fbca.md)
+- [Agentic Data Engineering Is Here — But Can It Close the Loop?](/mlops/sources/agentic-data-engineering-is-here-but-can-it-close-the-loop-b94b0b55.md)
 - [AI agent versioned filesystem with E2B and lakeFS](/mlops/sources/ai-agent-versioned-filesystem-with-e2b-and-lakefs-5b56487a.md)
 - [AI Sped Up Coding Faster Than It Sped Up Delivery](/mlops/sources/ai-sped-up-coding-faster-than-it-sped-up-delivery-b8e50c89.md)
 - [Apache Iceberg and the catalog layer (w/ Russell Spitzer)](/mlops/sources/apache-iceberg-and-the-catalog-layer-w-russell-spitzer-b1237b12.md)
@@ -224,6 +226,7 @@ The engineering substrate for building ML and software systems: how the developm
 - [Monitoring Lakeflow Jobs Cost and Performance with System Tables](/mlops/sources/monitoring-lakeflow-jobs-cost-and-performance-with-system-ta-abe.md)
 - [NotebookLM + Obsidian Integration Workflow](/mlops/sources/notebooklm-obsidian-integration-workflow-f.md)
 - [OpenClaw 2.0 is here.](/mlops/sources/openclaw-2-0-is-here-6vPaitNQMGY.md)
+- [Practitioners Guide to MLOps (Google, 2021)](/mlops/sources/practitioners-guide-to-mlops.md)
 - [Proactive Alignment — How Data Teams Avoid Being Blindsided by Surprise Projects](/mlops/sources/proactive-alignment-how-data-teams-avoid-being-blindsided-by-ec.md)
 - [Seedance 2.0 + Claude Code Creates $10k Websites in Minutes](/mlops/sources/seedance-2-0-claude-code-creates-10k-websites-in-minutes-NvxiSG34mPU.md)
 - [Sell Your API to AI Agents & Make SERIOUS Money in 2026 (full guide / beginner friendly)](/mlops/sources/sell-your-api-to-ai-agents-make-serious-money-in-2026-full-g-GyijriMIKPA.md)
