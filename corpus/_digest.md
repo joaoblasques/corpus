@@ -123,3 +123,9 @@ type: internal
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/data-engineering/sources/data-modeling-with-joe-reis-understanding-what-data-modeling-NKo02ThtAto.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/software-engineering/sources/all-python-syntax-in-25-minutes-tutorial-PNSIWjWAA7o.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/productivity/sources/what-happens-to-your-brain-when-you-hum-for-60-seconds-QVoGbaq8xos.md", "verdict_ok": true, "gov": "committed"}
+
+## [2026-07-23T03:15] gardener · run
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/a-new-generation-studies-ai-apple-s-recipe-for-on-device-mod-d.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/data-modeling-tutorial-star-schema-aka-kimball-approach-gRE3E7VUzRU.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/your-codebase-is-not-ready-for-ai-here-s-how-to-fix-it-uC44zFz7JSM.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/the-best-way-to-create-agent-skills-in-2026-XCOkCwgKwAA.md", "verdict_ok": true, "gov": "committed"}
