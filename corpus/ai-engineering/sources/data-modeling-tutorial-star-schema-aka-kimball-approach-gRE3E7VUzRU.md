@@ -12,7 +12,7 @@ tags:
   - source
   - youtube-quick-intake
 created: 2026-07-08
-updated: 2026-07-08
+updated: 2026-07-23
 provisional: false
 youtube_video_id: gRE3E7VUzRU
 url: https://youtu.be/gRE3E7VUzRU
