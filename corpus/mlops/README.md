@@ -138,7 +138,7 @@ The engineering substrate for building ML and software systems: how the developm
 - [Environment Promotion (dev → acc → prd)](/mlops/environment-promotion.md)
 
 <details>
-<summary>Source summaries (103)</summary>
+<summary>Source summaries (104)</summary>
 
 - ["29%+ warehouse savings: How the dbt Fusion engine drives cost efficiency | dbt Labs"](/mlops/sources/29-warehouse-savings-how-the-dbt-fusion-engine-drives-cost-e-121b247d.md)
 - ["AL 005: 60% Growth in 60 Days? How?!"](/mlops/sources/al-005-60-growth-in-60-days-how-150a587c.md)
@@ -178,6 +178,7 @@ The engineering substrate for building ML and software systems: how the developm
 - [Add Git-Like Data Versioning to MATLAB with lakeFS](/mlops/sources/add-git-like-data-versioning-to-matlab-with-lakefs-8ae9afe5.md)
 - [Add snapshots to your DAG | dbt Developer Hub](/mlops/sources/add-snapshots-to-your-dag-dbt-developer-hub-b.md)
 - [Agent Bricks and the Commoditization of AI Systems - Confessions of a Data Guy](/mlops/sources/agent-bricks-and-the-commoditization-of-ai-systems-confessio-4ec6fbca.md)
+- [Agentic AI Data Infrastructure | lakeFS](/mlops/sources/agentic-ai-data-infrastructure-lakefs-139c0a67.md)
 - [Agentic Data Engineering Is Here — But Can It Close the Loop?](/mlops/sources/agentic-data-engineering-is-here-but-can-it-close-the-loop-b94b0b55.md)
 - [AI agent versioned filesystem with E2B and lakeFS](/mlops/sources/ai-agent-versioned-filesystem-with-e2b-and-lakefs-5b56487a.md)
 - [AI Sped Up Coding Faster Than It Sped Up Delivery](/mlops/sources/ai-sped-up-coding-faster-than-it-sped-up-delivery-b8e50c89.md)

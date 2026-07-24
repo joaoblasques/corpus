@@ -36,6 +36,72 @@ sources:
   - path: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-11.md
     channel: pdf
     ingested_at: 2026-07-23
+  - path: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-12.md
+    channel: pdf
+    ingested_at: 2026-07-24
+  - path: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-13.md
+    channel: pdf
+    ingested_at: 2026-07-24
+  - path: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-14.md
+    channel: pdf
+    ingested_at: 2026-07-24
+  - path: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-15.md
+    channel: pdf
+    ingested_at: 2026-07-24
+  - path: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-16.md
+    channel: pdf
+    ingested_at: 2026-07-24
+  - path: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-17.md
+    channel: pdf
+    ingested_at: 2026-07-24
+  - path: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-18.md
+    channel: pdf
+    ingested_at: 2026-07-24
+  - path: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-19.md
+    channel: pdf
+    ingested_at: 2026-07-24
+  - path: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-20.md
+    channel: pdf
+    ingested_at: 2026-07-24
+  - path: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-21.md
+    channel: pdf
+    ingested_at: 2026-07-24
+  - path: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-22.md
+    channel: pdf
+    ingested_at: 2026-07-24
+  - path: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-23.md
+    channel: pdf
+    ingested_at: 2026-07-24
+  - path: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-24.md
+    channel: pdf
+    ingested_at: 2026-07-24
+  - path: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-25.md
+    channel: pdf
+    ingested_at: 2026-07-24
+  - path: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-26.md
+    channel: pdf
+    ingested_at: 2026-07-24
+  - path: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-27.md
+    channel: pdf
+    ingested_at: 2026-07-24
+  - path: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-28.md
+    channel: pdf
+    ingested_at: 2026-07-24
+  - path: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-29.md
+    channel: pdf
+    ingested_at: 2026-07-24
+  - path: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-30.md
+    channel: pdf
+    ingested_at: 2026-07-24
+  - path: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-31.md
+    channel: pdf
+    ingested_at: 2026-07-24
+  - path: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-32.md
+    channel: pdf
+    ingested_at: 2026-07-24
+  - path: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-33.md
+    channel: pdf
+    ingested_at: 2026-07-24
 aliases:
   - Reinforcement Learning An Introduction
   - Sutton Barto
@@ -45,12 +111,12 @@ tags:
   - corpus/ai-engineering
   - source
 created: 2026-07-23
-updated: 2026-07-23
+updated: 2026-07-24
 ---
 
 # Reinforcement Learning: An Introduction (Sutton & Barto, 2018)
 
-**TL;DR**: 548-page definitive RL textbook by Richard S. Sutton and Andrew G. Barto (MIT Press, 2nd edition, 2018/2020; CC BY-NC-ND 2.0). Organized in three parts: tabular methods (Part I, Ch. 2–8), approximate solution methods (Part II, Ch. 9–13), and "Looking Deeper" covering psychology, neuroscience, applications, and frontiers (Part III, Ch. 14–17). The standard graduate reference for RL; most contemporary deep RL builds directly on foundations laid here. [^rl-p01]
+**TL;DR**: 548-page definitive RL textbook by Richard S. Sutton and Andrew G. Barto (MIT Press, 2nd edition, 2018/2020; CC BY-NC-ND 2.0). Organized in three parts: tabular methods (Part I, Ch. 2–8), approximate solution methods (Part II, Ch. 9–13), and "Looking Deeper" covering psychology, neuroscience, applications, and frontiers (Part III, Ch. 14–17). The standard graduate reference for RL; most contemporary deep RL builds directly on foundations laid here. All 33 parts ingested (complete). [^rl-p01]
 
 ## Book structure
 
@@ -136,19 +202,37 @@ Bridges TD (n=1) and Monte Carlo (n=∞). n-step return: G_{t:t+n} = R_{t+1} + �
 
 **Dyna architecture**: integrates learning, planning, and acting. Real experience updates both the model and the value function directly (TD learning); simulated experience from the model also updates the value function (planning). Adding planning steps to real-time TD can dramatically accelerate learning. [^rl-p01]
 
-**Monte Carlo Tree Search (MCTS)**: planning at decision time using simulation; builds a lookahead tree by selective expansion (UCB-based) and random rollouts; used in AlphaGo (combined with neural nets and policy gradient). [^rl-p01]
+**Prioritized sweeping** (Ch. 8.4): prioritizes backups for state-action pairs with large expected value changes using a priority queue. On maze tasks, prioritized sweeping reduces updates needed by 5–10× vs. unprioritized Dyna-Q; handles stochastic environments via expected updates. [^rl-p12]
+
+**Expected vs. sample updates** (Ch. 8.5): expected updates are uncorrupted by sampling error but require b times more computation (b = branching factor). Sample updates can achieve near-expected-update accuracy with a small fraction of b updates, especially for large stochastic branching factors and large state spaces. [^rl-p12]
+
+**Trajectory sampling** (Ch. 8.6): distributes updates according to the on-policy distribution rather than exhaustive sweeps. Provides large speed advantages early (up to 10x faster convergence for large sparse problems) by focusing on reachable relevant states; may hurt in the long run as commonly-visited states already have near-correct values. [^rl-p12]
+
+**Real-time dynamic programming (RTDP)** (Ch. 8.7): on-policy trajectory sampling version of value iteration. For stochastic shortest-path problems, RTDP converges to an optimal policy for all relevant states without visiting every state infinitely often — demonstrated requiring only ~50% of DP's updates on a racetrack example. [^rl-p12]
+
+**Decision-time planning** (Ch. 8.8–8.11): planning focused on the current state. Heuristic search, rollout algorithms, and MCTS are all decision-time methods. [^rl-p13]
+
+**Monte Carlo Tree Search (MCTS)** (Ch. 8.11): planning at decision time using simulation; builds a lookahead tree incrementally via four-step iterations: (1) **Selection** — tree policy (e.g. UCB) traverses to leaf; (2) **Expansion** — add child nodes for unexplored actions; (3) **Simulation** — rollout policy completes the episode; (4) **Backup** — returns backed up through tree. Only a subset of the state-action space (near the current state) is maintained; all nodes are discarded after action selection. MCTS responsible for Go improvement from weak amateur to grandmaster level (2005–2015); extended with neural networks in AlphaGo. [^rl-p13]
 
 ### Function Approximation (Ch. 9–10)
 
 Parameterize value function: v̂(s, w) ≈ v_π(s). **Mean Square Value Error (VE)**: VE(w) = Σ_s μ(s) [v_π(s) − v̂(s,w)]². Minimize by stochastic gradient descent on VE. [^rl-p01]
 
-**Semi-gradient TD**: update w toward bootstrapped targets; not true gradient descent since target also depends on w. Linear methods: v̂(s,w) = w⊤ x(s) where x(s) is a feature vector; converges near the VE optimum under on-policy distribution. Feature construction: tile coding, Fourier basis, radial basis functions. [^rl-p01]
+**Semi-gradient TD**: update w toward bootstrapped targets; not true gradient descent since target also depends on w. Linear methods: v̂(s,w) = w⊤ x(s) where x(s) is a feature vector; converges near the VE optimum under on-policy distribution. [^rl-p01]
+
+**State aggregation** (Ch. 9.3): groups states; one weight per group. A special case of SGD where the gradient is 1 for the state's group and 0 elsewhere. Produces staircase approximations; biased toward frequently-visited states within each group per the on-policy distribution μ. [^rl-p14]
+
+**Feature construction for linear methods** (Ch. 9.5) [^rl-p15]:
+- **Tile coding**: partition the state space into overlapping grids (tilings); each tile = one binary feature. Allows flexible generalization/discrimination control by mixing stripe, diagonal, and rectangular tilings. Hashing reduces memory requirements by random collapsing with little performance loss.
+- **Radial basis functions (RBFs)**: generalize coarse coding; continuous-valued features xi(s) = exp(−|s − ci|² / 2σi²). Natural for continuous state spaces; more computationally expensive than tile coding.
 
 **Artificial neural networks** (ANN): nonlinear function approximator; backpropagation computes gradients; combined with TD gives deep RL. Prefigured by Tesauro's TD-Gammon (backgammon, ≈10²⁰ states, 1992). [^rl-p01]
 
 ### Off-policy Methods with Approximation — The Deadly Triad (Ch. 11)
 
 Instability/divergence can arise when combining: **(1) function approximation + (2) bootstrapping + (3) off-policy training**. None of the three alone causes divergence; all three together (the "deadly triad") can. [^rl-p01]
+
+**Bellman error (BE) minimization** (Ch. 11.5): minimizing the mean-square Bellman error requires two independent samples of the next state (the residual-gradient algorithm); in practice only one sample is obtained per interaction step, making naive minimization biased. The A-presplit example shows BE minimization can converge to systematically wrong values even for deterministic problems. Semi-gradient TD converges to better values empirically than BE-minimizing methods in many cases. [^rl-p18]
 
 **Gradient-TD methods** (GTD2, TDC): address the deadly triad via two-timescale stochastic gradient descent on the projected Bellman error; converge under off-policy sampling. [^rl-p01]
 
@@ -185,12 +269,36 @@ Three threads converge in modern RL [^rl-p03]:
 
 The dopamine/TD error correspondence (Schultz, Dayan, Montague 1997) linking RL to neuroscience is one of the book's major themes (Ch. 15). [^rl-p03]
 
-## Applications covered (Ch. 16)
+## Part III — Looking Deeper (Ch. 14–17)
+
+### Psychology (Ch. 14)
+
+RL has deep connections to animal learning psychology. The **Rescorla-Wagner model** of classical conditioning is a supervised error-correction rule (equivalent to LMS/Widrow-Hoff); it explains blocking (prior learning blocks new CS learning when the prediction error is already near zero). The TD model of classical conditioning extends Rescorla-Wagner to within-trial temporal dynamics, predicting earlier and earlier reward prediction signals as conditioning proceeds. [^rl-p22]
+
+**Shaping** (Skinner): starting with easily-achieved rewards and gradually moving toward the target reward signal; an essential technique in animal training and computational RL for sparse reward problems. [^rl-p30]
+
+### Neuroscience (Ch. 15)
+
+**Dopamine / TD error correspondence** (Schultz, Dayan, Montague 1997): phasic activity of dopamine neurons in the basal ganglia matches the TD prediction error δ. Before conditioning, dopamine fires at reward; after, dopamine fires at the earliest reward-predicting stimulus; at reward omission, dopamine dips below baseline. This correspondence was discovered computationally — TD learning developed years before these neuroscience experiments were conducted. [^rl-p25]
+
+The **neural actor-critic** interpretation: the actor (policy) maps to frontal cortex/striatum; the critic (value) maps to the ventral striatum/nucleus accumbens; dopamine delivers δ as a teaching signal to both. The anatomy and physiology of the mammalian brain fits actor-critic algorithms particularly well. [^rl-p25]
+
+Discrepancies exist: when reward arrives earlier than expected, dopamine neuron activity does not show the negative TD error predicted at the original expected time. Addressed by microstimulus representations (Ludvig, Sutton, Kehoe 2008) which fit better than complete serial compound (CSC) representations. [^rl-p25]
+
+### Applications (Ch. 16)
 
 - **TD-Gammon** (Tesauro 1992/1995): backgammon at world-class level via self-play TD(λ) + neural net; ≈10²⁰ states; prefigures deep RL
 - **Watson's Daily-Double wagering** (IBM Jeopardy! 2011): RL for optimal bet sizing
 - **Atari DQN** (DeepMind 2015): human-level video game play from raw pixels via Q-learning + CNN
 - **AlphaGo / AlphaGo Zero** (Silver et al. 2016/2017): MCTS + policy/value neural networks; AlphaGo Zero learns entirely from self-play without human data
+
+### Frontiers (Ch. 17)
+
+**General Value Functions (GVFs)** and **option framework** (Sutton et al.): temporally extended actions (options) with intra-option policies and termination conditions enable planning and learning at multiple timescales. GVFs generalize value functions to arbitrary prediction targets (not just discounted cumulative reward), supporting off-policy simultaneous learning of many predictions. [^rl-p30]
+
+**Reward design** (Ch. 17.4): intrinsically motivated RL — reward signals sensitive to internal factors (motivational states, learning progress) enable an agent to control its own cognitive architecture. Inverse reinforcement learning recovers the expert's reward signal from behavior; bilevel optimization (analogous to evolution acting on the RL agent's reward signal) can yield reward functions better than intuitive hand-design. [^rl-p30]
+
+**Remaining frontier issues** (Ch. 17.5): (1) sample efficiency gap vs. human learning; (2) representation learning (where do state/feature representations come from?); (3) hierarchical RL; (4) model-based vs. model-free integration; (5) reward design and goal specification; (6) multi-agent / multi-task learning. [^rl-p30]
 
 ## Connections to other corpus pages
 
@@ -210,3 +318,25 @@ The dopamine/TD error correspondence (Schultz, Dayan, Montague 1997) linking RL 
 [^rl-p09]: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-09.md — Ch. 6: TD learning; TD(0), SARSA, Q-learning, Expected SARSA; central role of TD in RL
 [^rl-p10]: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-10.md — Ch. 6 §6.7: Maximization bias and Double Q-learning
 [^rl-p11]: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-11.md — Ch. 7: n-step bootstrapping; tree-backup algorithm; Q(σ) unifying algorithm
+[^rl-p12]: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-12.md — Ch. 8.4–8.7: Prioritized sweeping; expected vs. sample updates; trajectory sampling; RTDP
+[^rl-p13]: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-13.md — Ch. 8.8–8.11: Decision-time planning; heuristic search; rollout algorithms; Monte Carlo Tree Search
+[^rl-p14]: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-14.md — Ch. 9: On-policy prediction with approximation; SGD; state aggregation; 1000-state random walk example
+[^rl-p15]: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-15.md — Ch. 9.5: Feature construction; tile coding; radial basis functions; hashing
+[^rl-p16]: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-16.md — Ch. 9 continued; linear methods; LSTD; convergence near VE optimum
+[^rl-p17]: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-17.md — Ch. 10: On-policy control with approximation; episodic semi-gradient Sarsa; mountain car example; average reward
+[^rl-p18]: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-18.md — Ch. 11.5: Bellman error minimization; residual-gradient algorithm; A-presplit counterexample; BE vs. VE failure modes
+[^rl-p19]: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-19.md — Ch. 11: Off-policy methods with approximation; gradient-TD methods (GTD2, TDC); convergence proofs
+[^rl-p20]: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-20.md — Ch. 11 continued; emphatic-TD; importance sampling for off-policy approximation
+[^rl-p21]: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-21.md — Ch. 12: Eligibility traces; λ-return; TD(λ); True Online TD(λ); Sarsa(λ); forward/backward view equivalence
+[^rl-p22]: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-22.md — Ch. 14: Psychology; Rescorla-Wagner model; blocking; TD model of classical conditioning; trial-level vs. real-time representations
+[^rl-p23]: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-23.md — Ch. 13: Policy gradient methods; REINFORCE; actor-critic; softmax for continuous actions; policy gradient theorem
+[^rl-p24]: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-24.md — Ch. 14 continued; TD model of classical conditioning extended; within-trial temporal dynamics; CSC representation
+[^rl-p25]: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-25.md — Ch. 15: Neuroscience; dopamine/TD error correspondence; Schultz-Dayan-Montague 1997; early-reward discrepancy; neural actor-critic
+[^rl-p26]: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-26.md — Ch. 15 continued; neural actor-critic architecture; reward prediction error hypothesis; basal ganglia circuitry
+[^rl-p27]: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-27.md — Ch. 16: Applications; TD-Gammon; Watson; Atari DQN; AlphaGo / AlphaGo Zero; MCTS + neural net integration
+[^rl-p28]: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-28.md — Ch. 16 continued; AlphaGo Zero self-play training details; policy/value network architecture
+[^rl-p29]: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-29.md — Ch. 17: Frontiers; temporal abstraction; options framework; General Value Functions (GVFs); multi-step predictions
+[^rl-p30]: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-30.md — Ch. 17.4–17.5: Reward design; shaping; imitation learning; inverse RL; bilevel optimization; remaining frontier issues
+[^rl-p31]: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-31.md — Ch. 17 continued; intrinsically motivated RL; multi-agent issues; future directions
+[^rl-p32]: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-32.md — References (A–W); complete bibliography
+[^rl-p33]: raw/_inbox/pdf-reinforcement-learning-an-introduction-part-33.md — References (W–Z) and Index

@@ -115,6 +115,8 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Hal Daumé III](/ai-engineering/hal-daume-iii.md) — entity · stub · ML researcher; author of A Course in Machine Learning (2015, open access at hal3.name/courseml/)
 - [Csaba Szepesvári](/ai-engineering/csaba-szepesvari.md) — entity · stub · ML researcher; author of Algorithms for Reinforcement Learning (Morgan & Claypool, 2009); convergence analysis of TD-based algorithms
 - [James H. Martin](/ai-engineering/james-martin.md) — entity · stub · University of Colorado NLP professor; co-author of Speech and Language Processing (3rd draft 2026)
+- [Roberto Battiti](/ai-engineering/roberto-battiti.md) — entity · stub · ML/optimization researcher, LIONlab, University of Trento; creator of Reactive Search Optimization; co-author of The LION Way (2017)
+- [Mauro Brunato](/ai-engineering/mauro-brunato.md) — entity · stub · ML/optimization researcher, University of Trento; co-author of The LION Way (2017)
 - [LangGraph](/ai-engineering/langgraph.md) — entity · stub · production framework for stateful multi-agent workflows
 - [LangSmith](/ai-engineering/langsmith.md) — entity · draft · agent engineering platform for debugging, evaluation, and observability
 - [Claude Code](/ai-engineering/claude-code.md) — entity · draft · Anthropic CLI coding agent; harness, large-codebase practices, model config, security review
@@ -198,6 +200,8 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Claude Code website build workflow (Charlie Hills)](/ai-engineering/sources/claude-code-website-build-workflow.md) — source · draft · 9-step spec-driven site build (CONTEXT.md/COPY.md/DESIGN.md + approval gates); structural-donor component rule to avoid the generic "AI look"
 - [The Mythos Threshold (Joe Reis)](/ai-engineering/sources/the-mythos-threshold.md) — source · draft · speculative AGI fiction; Claude Mythos, Project Glasswing, air-gap breach, builder class, competence=danger thesis
 - [Artificial Intelligence and the Future of Teaching and Learning (US DoE, 2023)](/ai-engineering/sources/ai-future-teaching-learning-us-doe.md) — source · draft · 71-page policy report; ITS evidence base, ACE/IEO educator frameworks, AES limitations, 7 policy recommendations, algorithmic-bias-as-structural argument
+- [Reinforcement Learning: An Introduction (Sutton & Barto, 2nd ed. 2018)](/ai-engineering/sources/reinforcement-learning-introduction.md) — source · draft · definitive RL textbook (548pp, MIT Press); MDP formalism; Bellman equations; Monte Carlo; TD learning; Q-learning; SARSA; n-step bootstrapping; function approximation; eligibility traces; policy gradient; actor-critic; MCTS; psychology/dopamine correspondence; applications (TD-Gammon, DQN, AlphaGo); all 33 parts ingested (complete)
+- [The LION Way: Machine Learning plus Intelligent Optimization (Battiti & Brunato, 2017)](/ai-engineering/sources/the-lion-way.md) — source · draft · 516pp textbook; supervised learning (k-NN, linear models, SVMs, neural networks, ensembles); unsupervised (k-means, PCA, ICA); optimization (greedy, simulated annealing, gradient descent); Reactive Search Optimization (RSO); LP/QP; cooperative LION; all 28 parts ingested (complete)
 
 ### Cross-domain (primary home in data-engineering)
 - [Claude Code for Data Engineering](/data-engineering/claude-code-for-data-engineering.md) — synthesis · AI-assisted dbt / data workflows
@@ -327,7 +331,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Vector Database](/ai-engineering/vector-database.md)
 - [Vibe Coding (and why Spec-Driven Development supersedes it)](/ai-engineering/vibe-coding.md)
 
-### Entities (65)
+### Entities (67)
 - [Anthropic](/ai-engineering/anthropic.md)
 - [Chip Huyen](/ai-engineering/chip-huyen.md)
 - [Christopher M. Bishop](/ai-engineering/christopher-bishop.md)
@@ -363,6 +367,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [LM Studio](/ai-engineering/lm-studio.md)
 - [LocalAI](/ai-engineering/localai.md)
 - [Manus](/ai-engineering/manus.md)
+- [Mauro Brunato](/ai-engineering/mauro-brunato.md)
 - [MiniMax M3](/ai-engineering/minimax-m3.md)
 - [Nemotron 3 Ultra](/ai-engineering/nemotron-3-ultra.md)
 - [Nils J. Nilsson](/ai-engineering/nils-nilsson.md)
@@ -379,6 +384,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Perplexity Computer](/ai-engineering/perplexity-computer.md)
 - [Pi Agent](/ai-engineering/pi-agent.md)
 - [PP-OCRv6](/ai-engineering/pp-ocrv6.md)
+- [Roberto Battiti](/ai-engineering/roberto-battiti.md)
 - [RunLocal](/ai-engineering/runlocal.md)
 - [Sandcastle](/ai-engineering/sandcastle.md)
 - [Scrapling (Adaptive Web Scraping)](/ai-engineering/web-scraping.md)
@@ -406,10 +412,11 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Tool Calling & Context Engineering: How They Interlock](/ai-engineering/tool-calling-and-context-engineering.md)
 
 <details>
-<summary>Source summaries (686)</summary>
+<summary>Source summaries (695)</summary>
 
 - ["2024 State of Analytics Engineering, crafted by dbt Labs | dbt Labs"](/ai-engineering/sources/2024-state-of-analytics-engineering-crafted-by-dbt-labs-dbt--cb342df0.md)
 - ["9 AI Concepts Explained: Tokenization, RAG, RLHF, LoRA & More"](/ai-engineering/sources/9-ai-concepts-explained-tokenization-rag-rlhf-lora-more-a.md)
+- ["[AINews] \"Laguna S 2.1 Released: Cheaper than Deepseek v4 Flash, Better than V4 Pro\""](/ai-engineering/sources/ainews-laguna-s-2-1-released-cheaper-than-deepseek-v4-flash--43429d78.md)
 - ["[AINews] Codex usage up >10x in 6 months to 7M users, +1M in the past ~day; did Codex overtake Claude Code??"](/ai-engineering/sources/ainews-codex-usage-up-10x-in-6-months-to-7m-users-1m-in-the--ac1def65.md)
 - ["[AINews] Kimi K3 2.8T-A50B: the largest open model ever released; Opus 4.8-class at Sonnet 5 pricing"](/ai-engineering/sources/ainews-kimi-k3-2-8t-a50b-the-largest-open-model-ever-release-08f77354.md)
 - ["[AINews] Lilian Weng summarizes 35 papers on Harness Engineering for RSI"](/ai-engineering/sources/ainews-lilian-weng-summarizes-35-papers-on-harness-engineeri-b1619a08.md)
@@ -419,10 +426,13 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - ["[AINews] not much happened today"](/ai-engineering/sources/ainews-not-much-happened-today-b246fc07.md)
 - ["[AINews] not much happened today"](/ai-engineering/sources/ainews-not-much-happened-today-6d98c368.md)
 - ["[AINews] not much happened today"](/ai-engineering/sources/ainews-not-much-happened-today-22032595.md)
+- ["[AINews] not much happened today"](/ai-engineering/sources/ainews-not-much-happened-today-9c0be6c6.md)
 - ["[AINews] OpenAI launches GPT 5.6 Sol/Terra/Luna, Codex becomes ChatGPT superapp"](/ai-engineering/sources/ainews-openai-launches-gpt-5-6-sol-terra-luna-codex-becomes--f7ffe7c7.md)
 - ["[AINews] Sonnet 5 today, and Fable 5 tomorrow"](/ai-engineering/sources/ainews-sonnet-5-today-and-fable-5-tomorrow-5f80fed9.md)
 - ["[AINews] SpaceXAI launches Grok 4.5, first Opus-class model post Cursor acquisition"](/ai-engineering/sources/ainews-spacexai-launches-grok-4-5-first-opus-class-model-pos-d9aedbf9.md)
 - ["[AINews] The Field Guide to Fable"](/ai-engineering/sources/ainews-the-field-guide-to-fable-663b198d.md)
+- ["[AINews] Thinky's Inkling: 975B-A41B multimodal, new best American Apache 2.0 open model (with Inkling-Small, 276B-A12B)"](/ai-engineering/sources/ainews-thinky-s-inkling-975b-a41b-multimodal-new-best-americ-7b9538ff.md)
+- ["A Beginner’s Guide to Clocks, Causality, and Ordering in Distributed Systems"](/ai-engineering/sources/a-beginner-s-guide-to-clocks-causality-and-ordering-in-distr-4340eb83.md)
 - ["A Copilot for the Mind, SVB's Explosion, LLMs are the new CPUs, and More"](/ai-engineering/sources/a-copilot-for-the-mind-svb-s-explosion-llms-are-the-new-cpus-24a221d5.md)
 - ["A First Comprehensive Study of TurboQuant: Accuracy and Performance"](/ai-engineering/sources/a-first-comprehensive-study-of-turboquant-accuracy-and-perfo-5bd07006.md)
 - ["A free year of Devin: the world’s most advanced autonomous AI software engineer"](/ai-engineering/sources/a-free-year-of-devin-the-world-s-most-advanced-autonomous-ai-8859faee.md)
@@ -648,6 +658,9 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [7 INSANE loops you need to try right now](/ai-engineering/sources/7-insane-loops-you-need-to-try-right-now-F4a8aMLb678.md)
 - [7 real-world AI agent examples you need to know](/ai-engineering/sources/7-real-world-ai-agent-examples-you-need-to-know-cd3a270f.md)
 - [8 Best AI Evaluation Tools for CI/CD Pipelines in 2026 - Confident AI](/ai-engineering/sources/8-best-ai-evaluation-tools-for-ci-cd-pipelines-in-2026-confi-e77f209b.md)
+- [8 best AI production issue detection and alerting tools in 2026 - Confident AI](/ai-engineering/sources/8-best-ai-production-issue-detection-and-alerting-tools-in-2-2bc5dd54.md)
+- [8 best evaluation tools for conversational AI in 2026 - Confident AI](/ai-engineering/sources/8-best-evaluation-tools-for-conversational-ai-in-2026-confid-955a4a15.md)
+- [8 best LLM observability tools for enterprise in 2026 - Confident AI](/ai-engineering/sources/8-best-llm-observability-tools-for-enterprise-in-2026-confid-c668c4e3.md)
 - [8.9 Million AI Users](/ai-engineering/sources/8-9-million-ai-users-f79fd178.md)
 - [9 Best AI Quality Platforms for Human Annotators and Subject Matter Experts (2026) - Confident AI](/ai-engineering/sources/9-best-ai-quality-platforms-for-human-annotators-and-subject-e7f714d0.md)
 - [9 Claude Code Plugins to Build 10x Faster](/ai-engineering/sources/9-claude-code-plugins-to-build-10x-faster-sBF3UumkL4Y.md)
@@ -671,6 +684,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [A quote from Nilay Patel](/ai-engineering/sources/a-quote-from-nilay-patel-bc84c97b.md)
 - [A quote from OpenAI](/ai-engineering/sources/a-quote-from-openai-232e7d75.md)
 - [A quote from Sam Altman](/ai-engineering/sources/a-quote-from-sam-altman-b5d7973c.md)
+- [A quote from Seth Larson](/ai-engineering/sources/a-quote-from-seth-larson-d64f4f78.md)
 - [A quote from Thibault Sottiaux](/ai-engineering/sources/a-quote-from-thibault-sottiaux-b62b68c9.md)
 - [A Science-based Guide to Thinking Creatively—With LLMs](/ai-engineering/sources/a-science-based-guide-to-thinking-creatively-with-llms-274a50e2.md)
 - [A Tale of Two Models](/ai-engineering/sources/a-tale-of-two-models-ffdbb929.md)
@@ -1059,6 +1073,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [The Complete Data Architecture Explained - Building a Trading Robot Episode 2](/ai-engineering/sources/the-complete-data-architecture-explained-building-a-trading--uDZaz09gKv4.md)
 - [The Factory Model — Engineers as Orchestrators of Autonomous Coding Agents](/ai-engineering/sources/the-factory-model-engineers-as-orchestrators-of-autonomous-c-cea.md)
 - [The Future of AI (Do This Before 2027)](/ai-engineering/sources/the-future-of-ai-do-this-before-2027-9q5JnlCyu4U.md)
+- [The LION Way: Machine Learning plus Intelligent Optimization (Battiti & Brunato, 2017)](/ai-engineering/sources/the-lion-way.md)
 - [The most important concept to learn in AI...](/ai-engineering/sources/the-most-important-concept-to-learn-in-ai-C4vwvRMTlvc.md)
 - [The Mythos Threshold (Joe Reis, 2026)](/ai-engineering/sources/the-mythos-threshold.md)
 - [The New Software Lifecycle (Addy Osmani, June 2026)](/ai-engineering/sources/the-new-software-lifecycle.md)

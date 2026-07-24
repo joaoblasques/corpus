@@ -2,6 +2,22 @@
 
 > OKF v0.1 change log. Newest first, grouped by date.
 
+## 2026-07-24
+* **Ingest**: Reinforcement Learning: An Introduction (Sutton & Barto, MIT Press 2nd ed. 2018/2020) · 22 parts (parts 12–33) · channel=pdf · domain=ai-engineering · updated `corpus/ai-engineering/sources/reinforcement-learning-introduction.md` (added parts 12–33; extended coverage: Ch.8 continuation — prioritized sweeping, trajectory sampling, RTDP, MCTS; Ch.9 — state aggregation, tile coding, RBFs; Ch.10 — on-policy control with approximation; Ch.11 — Bellman error minimization, deadly triad detail; Ch.12 — eligibility trace detail; Ch.13 — policy gradient detail; Ch.14 — psychology/Rescorla-Wagner; Ch.15 — neuroscience/dopamine-TD correspondence; Ch.16 — applications; Ch.17 — frontiers, reward design, GVFs; bibliography; all 33 parts now ingested, complete)
+* **Ingest**: The LION Way: Machine Learning plus Intelligent Optimization (Battiti & Brunato, LIONlab, University of Trento, 2017) · 28 parts (all) · channel=pdf · domain=ai-engineering · created `corpus/ai-engineering/sources/the-lion-way.md` (516pp; supervised learning: k-NN, linear models/bootstrapping, decision trees/forests, feature selection, matrix factorization, SVMs/LS-SVM, neural networks/deep learning, ensembles/bagging/boosting/gradient boosting, text/web mining; unsupervised: k-means, agglomerative clustering, SOMs, PCA/ICA, graph visualization, semi-supervised; optimization: greedy/local search, simulated annealing, derivative-based; LION framework: RSO, tabu search, variable neighborhood, iterated local search, guided local search, adaptive random search, LP/QP, cooperative LION/F-RACE; all 28 parts ingested, complete) · created `corpus/ai-engineering/roberto-battiti.md` · created `corpus/ai-engineering/mauro-brunato.md` · updated `corpus/ai-engineering/optimization-for-ml.md` (added metaheuristic optimization section: local search, simulated annealing, RSO)
+* **Ingest**: 50 ingested · 0 deferred · pages_created=3 · pages_updated=4 · run=ingest-auto
+
+* **Collectors**: gmail=7, blog_promote=0, obsidian=1, book_discover=0, blog_discover=1, book_fetch=2, pdf=2, image=0, books=0, arxiv=24, youtube=0, github_discover=5, github_promote=5, github=0, x=0, links_refetch=0
+* **Ingest**: 50 ingested · 0 deferred · status=ok
+* **YoutubeQuick**: 0 intake · 0 rescued · 0 skipped · status=ok
+* **DocsQuick**: 11 intake · 36 thin · 3 llm_fail · status=ok
+* **YoutubeReap**: 0 removed · status=ok
+* **Gardener**: 4 stubs deepened · status=ok
+* **Heal**: 0 citations repointed · 0 unfixable · 3 hubs reindexed · 30 cross-domain links · status=ok
+* **Depth**: 390 knowledge · 1313 sources · ratio 1:3.4
+* **GapResolver**: 0 gap dispatched · 0 sources queued · status=ok
+* **Lint**: 1 broken wikilinks · 0 broken citations · 0 orphans · 1233 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+* **OKF**: 0 violations
 ## 2026-07-23
 * **Ingest**: Reinforcement Learning: An Introduction (Sutton & Barto, MIT Press 2nd ed. 2018/2020) · 11 parts (parts 01–11) · channel=pdf · domain=ai-engineering · created `corpus/ai-engineering/sources/reinforcement-learning-introduction.md` (548pp; definitive RL textbook; MDP formalism; Bellman equations; Monte Carlo; TD(0)/TD(λ); Q-learning; SARSA; n-step returns; function approximation; eligibility traces; policy gradient/REINFORCE; actor-critic) · updated `corpus/ai-engineering/reinforcement-learning.md` (added Sutton & Barto source entries and formal MDP definitions)
 * **Ingest**: Practitioners Guide to MLOps (Khalid Salama et al., Google, May 2021) · 1 part · channel=pdf · domain=mlops · created `corpus/mlops/sources/practitioners-guide-to-mlops.md` (37pp; MLOps lifecycle; 8 MLOps capabilities; 6 process deep-dives: ML development, training operationalization, continuous training, model deployment, prediction serving, continuous monitoring; data/model management; feature engineering) · updated `corpus/mlops/mlops-principles.md` · updated `corpus/mlops/README.md`

@@ -70,7 +70,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [AI and the Job Market](/ai-business/ai-and-the-job-market.md)
 
 <details>
-<summary>Source summaries (185)</summary>
+<summary>Source summaries (187)</summary>
 
 - ["$1,300/Day Automated Bittensor Investing With Claude Code (34 Min Free Masterclass)"](/ai-business/sources/1-300-day-automated-bittensor-investing-with-claude-code-34--SHEs8gNh7sQ.md)
 - ["$100 million for open source: A milestone built by the community"](/ai-business/sources/100-million-for-open-source-a-milestone-built-by-the-communi-580ab93c.md)
@@ -81,6 +81,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - ["2026.29: Mainframes and Main Characters"](/ai-business/sources/2026-29-mainframes-and-main-characters-774b4848.md)
 - ["3-Year Update: A Financial Analysis of My Book’s Unit Economics"](/ai-business/sources/3-year-update-a-financial-analysis-of-my-book-s-unit-economi-5be171a1.md)
 - ["7 Reasons Media Is a No-Good, Horrible, Rotten Business That I Love Anyways"](/ai-business/sources/7-reasons-media-is-a-no-good-horrible-rotten-business-that-i-9b1bb1df.md)
+- ["[AINews] AI Cybersecurity becomes top of mind"](/ai-business/sources/ainews-ai-cybersecurity-becomes-top-of-mind-0a8336e8.md)
 - ["A book, a baby, and a billionaire - Noah Kagan"](/ai-business/sources/a-book-a-baby-and-a-billionaire-noah-kagan-a33bc9e0.md)
 - ["About the Interview, The Metaverse and VR, Why Not a Startup?"](/ai-business/sources/about-the-interview-the-metaverse-and-vr-why-not-a-startup-af6ea3fb.md)
 - ["Adam Mosseri: AI is a tailwind for authenticity"](/ai-business/sources/adam-mosseri-ai-is-a-tailwind-for-authenticity-492d9944.md)
@@ -125,6 +126,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - ["Dangerous Idea Revisited: Sorry Paul Graham... - Cal Newport"](/ai-business/sources/dangerous-idea-revisited-sorry-paul-graham-cal-newport-04390c89.md)
 - ["Dangerous Ideas: Sorry Paul Graham, I Think it Does Matter Where You Went to College - Cal Newport"](/ai-business/sources/dangerous-ideas-sorry-paul-graham-i-think-it-does-matter-whe-13093a8e.md)
 - ["Dear AI Companies: Stop the “Doom Trolling” - Cal Newport"](/ai-business/sources/dear-ai-companies-stop-the-doom-trolling-cal-newport-7ef15a31.md)
+- ["Freshness Policy — Timeless, Dated, or a Pointer"](/ai-business/sources/freshness-policy-timeless-dated-or-a-pointer-c.md)
 - ["How to Make Professional Logos Using AI ($34,901/Month)"](/ai-business/sources/how-to-make-professional-logos-using-ai-34-901-month-uffB2onuZsU.md)
 - ["If I Wanted to Become AI Millionaire In 2026, This is What I'd Do [FULL BLUEPRINT]"](/ai-business/sources/if-i-wanted-to-become-ai-millionaire-in-2026-this-is-what-i--jxOsPBXYKzE.md)
 - ["Recursive Self-Improvement: Evidence That AI Is Already Accelerating AI Development"](/ai-business/sources/recursive-self-improvement-evidence-that-ai-is-already-accel-ac.md)

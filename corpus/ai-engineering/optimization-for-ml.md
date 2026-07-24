@@ -21,6 +21,9 @@ sources:
   - path: raw/_inbox/pdf-mathematics-for-machine-learning-part-03.md
     channel: pdf
     ingested_at: 2026-07-23
+  - path: raw/_inbox/pdf-the-lion-way-machine-learning-plus-intelligent-opt-part-01.md
+    channel: pdf
+    ingested_at: 2026-07-24
 aliases:
   - gradient descent
   - convex optimization
@@ -31,7 +34,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-07-08
-updated: 2026-07-23
+updated: 2026-07-24
 ---
 
 # Optimization for Machine Learning
@@ -279,6 +282,20 @@ Key algorithms:
 - **ADMM** (Alternating Direction Method of Multipliers): handles separable structure; basis for PCP (Robust PCA) solver
 
 Proximal gradient bridges the gap between smooth first-order methods (gradient descent, Adam) and structured signal recovery problems — see [/ai-engineering/proximal-gradient-methods.md](/ai-engineering/proximal-gradient-methods.md) for the full treatment.
+
+## Metaheuristic and Intelligent Optimization (LION Way)
+
+Beyond gradient-based methods, a distinct class of **metaheuristic** algorithms handles non-differentiable, combinatorial, or black-box objectives. The LION Way textbook (Battiti & Brunato 2017) unifies these under "intelligent optimization." [^lion-src]
+
+**Local search**: starts from an initial solution and iteratively applies perturbations (moves), accepting improving moves. The neighborhood defines which solutions are reachable in one step. For the TSP, 2-opt and 3-opt are common moves. "Big valley" property: local optima in combinatorial landscapes often cluster near the global optimum.
+
+**Simulated Annealing (SA)**: adds probabilistic acceptance of worsening moves (Metropolis criterion): P(accept) = exp(−ΔE/T), where T is temperature. As T → 0, SA converges to a greedy local search. Asymptotic convergence to global optimum under logarithmic cooling schedule — but impractical for large instances.
+
+**Reactive Search Optimization (RSO)**: Battiti's framework for online learning during search. Instead of fixed parameters, RSO adapts cooling schedules, neighborhood sizes, and prohibition lengths based on observed search history. Examples: tabu search (prohibits recently-visited solutions via a short-term memory), guided local search (penalizes features of local optima to escape them).
+
+These methods are complementary to gradient descent: they apply when no gradient exists (discrete decision variables, simulation-based objectives) or when the landscape has many local optima that gradient methods would get trapped in.
+
+[^lion-src]: raw/_inbox/pdf-the-lion-way-machine-learning-plus-intelligent-opt-part-01.md — Ch. 1: LION philosophy; Roberto Battiti and Mauro Brunato, *The LION Way: Machine Learning plus Intelligent Optimization*, LIONlab, 2017; see also [/ai-engineering/sources/the-lion-way.md](/ai-engineering/sources/the-lion-way.md)
 
 ## Related Corpus Pages
 
