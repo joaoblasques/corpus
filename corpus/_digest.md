@@ -129,3 +129,9 @@ type: internal
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/data-modeling-tutorial-star-schema-aka-kimball-approach-gRE3E7VUzRU.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/your-codebase-is-not-ready-for-ai-here-s-how-to-fix-it-uC44zFz7JSM.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/the-best-way-to-create-agent-skills-in-2026-XCOkCwgKwAA.md", "verdict_ok": true, "gov": "committed"}
+
+## [2026-07-24T03:04] gardener · run
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/data-modeling-tutorial-star-schema-aka-kimball-approach-gRE3E7VUzRU.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/the-best-way-to-create-agent-skills-in-2026-XCOkCwgKwAA.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/how-to-become-an-ai-engineer-fast-Zk9LxO_dB64.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/data-modeling-walking-through-how-to-data-model-as-a-data-en-gG7upg6QaBI.md", "verdict_ok": true, "gov": "committed"}
