@@ -1,7 +1,7 @@
 ---
 type: source
 domain: ai-engineering
-status: stub
+status: draft
 sources:
   - path: raw/youtube/youtube-Zk9LxO_dB64-how-to-become-an-ai-engineer-fast.md
     channel: youtube
@@ -12,7 +12,7 @@ tags:
   - source
   - youtube-quick-intake
 created: 2026-07-08
-updated: 2026-07-08
+updated: 2026-07-24
 provisional: false
 youtube_video_id: Zk9LxO_dB64
 url: https://youtu.be/Zk9LxO_dB64
