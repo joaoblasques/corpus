@@ -1,7 +1,7 @@
 ---
 type: source
 domain: ai-engineering
-status: stub
+status: draft
 sources:
   - path: raw/youtube/youtube-l0Vqm0ZIySc-he-asked-ai-to-make-money-it-did.md
     channel: youtube
@@ -12,7 +12,7 @@ tags:
   - source
   - youtube-quick-intake
 created: 2026-07-08
-updated: 2026-07-08
+updated: 2026-08-03
 provisional: false
 youtube_video_id: l0Vqm0ZIySc
 url: https://youtu.be/l0Vqm0ZIySc
