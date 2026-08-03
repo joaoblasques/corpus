@@ -70,7 +70,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [AI and the Job Market](/ai-business/ai-and-the-job-market.md)
 
 <details>
-<summary>Source summaries (187)</summary>
+<summary>Source summaries (190)</summary>
 
 - ["$1,300/Day Automated Bittensor Investing With Claude Code (34 Min Free Masterclass)"](/ai-business/sources/1-300-day-automated-bittensor-investing-with-claude-code-34--SHEs8gNh7sQ.md)
 - ["$100 million for open source: A milestone built by the community"](/ai-business/sources/100-million-for-open-source-a-milestone-built-by-the-communi-580ab93c.md)
@@ -79,6 +79,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - ["2026.26: Summer Vibes"](/ai-business/sources/2026-26-summer-vibes-510e62ae.md)
 - ["2026.28: XBOX On the Rocks"](/ai-business/sources/2026-28-xbox-on-the-rocks-8fc35a37.md)
 - ["2026.29: Mainframes and Main Characters"](/ai-business/sources/2026-29-mainframes-and-main-characters-774b4848.md)
+- ["2026.30: The Copium Wars"](/ai-business/sources/2026-30-the-copium-wars-321c1884.md)
 - ["3-Year Update: A Financial Analysis of My Book’s Unit Economics"](/ai-business/sources/3-year-update-a-financial-analysis-of-my-book-s-unit-economi-5be171a1.md)
 - ["7 Reasons Media Is a No-Good, Horrible, Rotten Business That I Love Anyways"](/ai-business/sources/7-reasons-media-is-a-no-good-horrible-rotten-business-that-i-9b1bb1df.md)
 - ["[AINews] AI Cybersecurity becomes top of mind"](/ai-business/sources/ainews-ai-cybersecurity-becomes-top-of-mind-0a8336e8.md)
@@ -133,6 +134,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - ["🎧 Best of the Pod: How to Prepare for AGI According to Reid Hoffman"](/ai-business/sources/best-of-the-pod-how-to-prepare-for-agi-according-to-reid-hof-e217dd3a.md)
 - ["🎧 Best of the Pod: She Built an AI Product Manager Bringing in Six Figures—As a Side Hustle"](/ai-business/sources/best-of-the-pod-she-built-an-ai-product-manager-bringing-in--b54f5383.md)
 - [10 Middle-Class Money Traps (and Fixes)](/ai-business/sources/10-middle-class-money-traps-and-fixes-WfFDrqrHC4g.md)
+- [10 Ways Clay's GTM Engineers Use AI to Accelerate Sales](/ai-business/sources/10-ways-clay-s-gtm-engineers-use-ai-to-accelerate-sales-252afc85.md)
 - [14-Day Video Challenge](/ai-business/sources/14-day-video-challenge-0137fce9.md)
 - [15 year of AppSumo - Noah Kagan](/ai-business/sources/15-year-of-appsumo-noah-kagan-cd106e60.md)
 - [1•2•3 Affiliate Marketing](/ai-business/sources/1-2-3-affiliate-marketing-a80ce4c4.md)
@@ -150,6 +152,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [A New Kind of Startup Is Coming](/ai-business/sources/a-new-kind-of-startup-is-coming-f6742332.md)
 - [A New Map to Guide You Through the Every-verse](/ai-business/sources/a-new-map-to-guide-you-through-the-every-verse-976fa8e4.md)
 - [A quote from Josh W. Comeau](/ai-business/sources/a-quote-from-josh-w-comeau-35ed231c.md)
+- [A quote from Matthew Green](/ai-business/sources/a-quote-from-matthew-green-37a1e544.md)
 - [A quote from Tom MacWright](/ai-business/sources/a-quote-from-tom-macwright-634faec0.md)
 - [A Script for Mark Zuckerberg](/ai-business/sources/a-script-for-mark-zuckerberg-87056ab8.md)
 - [A TikTok Competitor Is About to IPO—And It's Deeply Suspicious](/ai-business/sources/a-tiktok-competitor-is-about-to-ipo-and-it-s-deeply-suspicio-79367032.md)

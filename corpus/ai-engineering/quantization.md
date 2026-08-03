@@ -21,6 +21,9 @@ sources:
   - path: raw/_inbox/web-runlocal-local-ai-on-your-own-hardware-6c5a69ff.md
     channel: web
     ingested_at: 2026-07-04
+  - path: raw/_inbox/pdf-the-little-book-of-deep-learning-part-03.md
+    channel: pdf
+    ingested_at: 2026-08-03
 aliases:
   - Quantization
   - Post-training quantization
@@ -32,7 +35,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-07-02
-updated: 2026-07-03
+updated: 2026-08-03
 ---
 
 # Quantization
@@ -119,6 +122,22 @@ Context for understanding current quantization choices [^src5]:
 
 The progression shows quantization moving from "post-hoc trick" to "hardware-native format" — Blackwell silicon was designed with NVFP4 as a first-class compute format [^src5].
 
+## PTQ and QAT fundamentals (Fleuret, 2024)
+
+Quantization during inference is less damaging than during training because activations are sums of many terms — an **averaging effect** mitigates precision loss. This effect is larger for larger models. Models quantized to 6 or 4 bits per parameter show only marginal performance degradation [^src6].
+
+**Post-Training Quantization (PTQ)**: Apply quantization to a trained model's weights without additional training. Motivated the llama.cpp ecosystem for single-stream consumer-hardware inference [^src6].
+
+**llama.cpp Q4_1 format example**: Quantizes sub-blocks of 32 weight entries. Each block stores a scaling factor d and a bias m in FP16 (4 bytes each), and encodes each entry as a 4-bit value q ∈ {0,...,15}. Dequantized value: x̃ = dq + m. Storage: 32 entries × 4 bits = 16 bytes + 4 bytes for d + 4 bytes for m = 20 bytes per 32-entry block, versus 64 bytes for FP16. This Q4_1 format quantizes different weight matrices at different levels — W_V weights in attention blocks and feed-forward weights use more bits [^src6].
+
+Empirical result: Llama-7B and 13B models in various llama.cpp quantization levels show perplexity on wikitext remaining very close to the FP16 baseline across the 4–16 GB size range [^src6].
+
+**Quantization-Aware Training (QAT)**: Applies quantization during the forward pass but keeps high-precision encoding of parameters and gradients; propagates gradients during the backward pass as if there were no quantization [Ma et al., 2024]. Produces better accuracy than PTQ at equivalent bit-width, at the cost of requiring retraining [^src6].
+
+**QLoRA** (see [LoRA and Adapters](/ai-engineering/lora-adapters.md)): Combines a quantized base model with unquantized LoRA adapters, reducing fine-tuning memory requirements while preserving gradient quality for the adapter parameters [Dettmers et al., 2023] [^src6].
+
+**Single-stream inference bottleneck**: For individual LLM inference (not batched), the binding resource is memory bandwidth, not compute — all parameters must be read from memory for each token. Quantization directly reduces memory footprint and thus memory-bandwidth cost per token [^src6].
+
 ## Related
 
 - [vLLM](/ai-engineering/vllm.md) — the serving engine that auto-detects and dispatches quantized checkpoints at load time
@@ -136,3 +155,4 @@ The progression shows quantization moving from "post-hoc trick" to "hardware-nat
 [^src3]: [Accelerating Laguna XS.2 Inference with vLLM, Speculators, and LLM Compressor](../../raw/web/web-accelerating-laguna-xs-2-inference-with-vllm-speculators-and-afda11cd.md) — vLLM blog, 2026-05-28
 [^src4]: [LLM.int8() and emergent features](../../raw/web/web-llm-int8-and-emergent-features-tim-dettmers-f06a54c9.md) — Tim Dettmers blog
 [^src5]: [The best GPUs for deep learning in 2023 — an in-depth analysis](../../raw/web/web-the-best-gpus-for-deep-learning-in-2023-an-in-depth-analysis-c9ee20ca.md) — Tim Dettmers blog, 2023
+[^src6]: raw/_inbox/pdf-the-little-book-of-deep-learning-part-03.md — Fleuret, § 8.2

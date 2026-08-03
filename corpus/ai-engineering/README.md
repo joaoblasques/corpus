@@ -32,6 +32,8 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Classification Methods](/ai-engineering/classification-methods.md) — concept · draft · Logistic regression, LDA, QDA, KNN; ROC/AUC
 
 ### Concepts
+- [Classical Information Retrieval](/ai-engineering/information-retrieval.md) — concept · draft · TF-IDF, BM25/Okapi, vector space model, Boolean IR, extended Boolean (p-norm), precision/recall/F-measure, LSI/SVD, probabilistic IR (BIM, Bayesian networks), routing/classification; the foundational methods underlying hybrid RAG sparse retrieval (Greengrass 2000 survey)
+- [Query Expansion and Relevance Feedback](/ai-engineering/query-expansion.md) — concept · draft · Rocchio algorithm, pseudo-relevance feedback, Local Context Analysis (LCA), WordNet/thesaurus expansion, query reuse; classical IR methods for improving recall and precision; precursors to modern HyDE and query rewriting in RAG
 - [AI Fundamentals](/ai-engineering/ai-fundamentals.md) — concept · draft · classical + modern AI scaffold: search, logic, uncertainty, optimization, learning
 - [AI History](/ai-engineering/ai-history.md) — concept · draft · AI history from antiquity through LLM era (full Nilsson ingest 2026-07-15): Dartmouth project; perceptrons; expert systems (MYCIN, PROSPECTOR); AI winters; Bayesian networks; ML methods; modern achievements (Deep Blue, DARPA Grand Challenge, TD-Gammon)
 - [Nils J. Nilsson](/ai-engineering/nils-nilsson.md) — entity · stub · Stanford AI emeritus; 50-year participant; author of The Quest for Artificial Intelligence (Cambridge 2010)
@@ -105,10 +107,20 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Intent Debt](/ai-engineering/intent-debt.md) — concept · draft · third debt type (beyond technical/cognitive); lives in artifacts; agents can't fix it; pay down via specs, AGENTS.md as intent ledger, ADRs, self-improving learning files
 - [Sleep-Time Compute](/ai-engineering/sleep-time-compute.md) — concept · draft · LLMs "thinking" offline about contexts before queries arrive; ~5× test-time compute reduction on Stateful GSM-Symbolic/AIME; 2.5× cost reduction via amortization
 - [Claude for Finance](/ai-engineering/claude-for-finance.md) — concept · draft · structured-prompting FP&A workflow; 9-stage gated pipeline (inventory-before-insight, plan-first, formula-driven/auditable, model-by-task) via the Claude Excel add-in
-- [Quantization](/ai-engineering/quantization.md) — concept · draft · compressing weights/activations to low-bit formats (FP8/INT4/NVFP4) for memory + latency wins; AutoRound PTQ, LLM Compressor, memory-headroom-unlocks-parallelism pattern
+- [Quantization](/ai-engineering/quantization.md) — concept · draft · compressing weights/activations to low-bit formats (FP8/INT4/NVFP4) for memory + latency wins; AutoRound PTQ, LLM Compressor, memory-headroom-unlocks-parallelism pattern; PTQ/QAT/llama.cpp fundamentals (Fleuret 2024)
 - [Speculative Decoding](/ai-engineering/speculative-decoding.md) — concept · draft · draft-model-proposes/target-model-verifies inference acceleration; Eagle 3.1's attention-drift fix, DFlash's single-pass block-diffusion drafting, Speculators v0.5.0 unified online/offline training
+- [Deep Learning](/ai-engineering/deep-learning.md) — concept · draft · GPU/tensor computation, training mechanics (SGD/Adam/backpropagation, losses, autoregressive models), model components (activation functions, dropout, batch/layer normalization, skip connections, pooling); Fleuret 2024
+- [Scaling Laws](/ai-engineering/scaling-laws.md) — concept · draft · power-law improvement with compute/data/parameters (Kaplan et al. 2020); parallel training strategies (DDP, FSDP, pipeline, tensor parallelism); Fleuret 2024
+- [LoRA and Adapters](/ai-engineering/lora-adapters.md) — concept · draft · Low-Rank Adaptation: W → W+BA (rank R ≪ min(C,D)); only attention blocks fine-tuned; QLoRA combines quantized base + unquantized adapters; Hu et al. 2021 + Dettmers et al. 2023
+- [Model Merging](/ai-engineering/model-merging.md) — concept · draft · Task Arithmetic: task vectors τ_t = θ_t − θ can be summed for multi-task models; TIES-Merging reduces interference; evolutionary layer recombination (Akiba et al. 2024)
+- [Computer Vision Tasks](/ai-engineering/computer-vision-tasks.md) — concept · draft · image denoising (MSE denoising autoencoder), classification (ResNet/ViT + data augmentation), object detection (SSD multi-scale), semantic segmentation (U-Net skip connections + PSP), CLIP contrastive text-image embeddings + zero-shot prediction
+- [Classical Feature Detection](/ai-engineering/classical-feature-detection.md) — concept · draft · Harris corners, SIFT (scale-invariant keypoints + orientation-histogram descriptor), HoG (dense gradient histograms for detection), DoG scale-space, Canny edge detector, Hough transform, RANSAC robust fitting; Stanford CS131 2017
+- [Optical Flow](/ai-engineering/optical-flow.md) — concept · draft · dense 2D motion estimation between video frames; aperture problem; Lucas-Kanade (local least-squares using Harris matrix), Horn-Schunk (global energy minimization + smoothness regularizer), pyramidal flow for large motion, KLT feature tracker, 2D affine/projective transforms; Stanford CS131 2017
+- [Visual Bag of Words](/ai-engineering/visual-bag-of-words.md) — concept · draft · image-as-histogram-of-visual-words; SIFT → k-means codebook (visual vocabulary); TF-IDF weighting; inverted file retrieval; spatial pyramid matching; Naive Bayes classification; precursor to modern embedding-based retrieval; Stanford CS131 2017
+- [Deformable Parts Model](/ai-engineering/deformable-parts-model.md) — concept · draft · star-model object detector (root filter + spring-connected part filters + deformation cost); HoG pyramid; detection score formula; PASCAL VOC/IoU/AP evaluation; state-of-the-art 2008–2012 before CNN detectors; Stanford CS131 2017
 
 ### Entities
+- [François Fleuret](/ai-engineering/francois-fleuret.md) — entity · draft · Professor of CS at University of Geneva; author of The Little Book of Deep Learning (189pp, 2024, 500K+ downloads); co-author of linear attention (Transformers are RNNs, ICML 2020)
 - [Christopher M. Bishop](/ai-engineering/christopher-bishop.md) — entity · draft · ML researcher at Microsoft Research Cambridge; author of PRML (2006), the canonical Bayesian ML textbook; F.R.Eng.
 - [Kevin P. Murphy](/ai-engineering/kevin-murphy.md) — entity · draft · ML researcher at Google; author of Probabilistic Machine Learning: An Introduction (MIT Press, 2022) and two companion volumes; De Groot prize 2013
 - [Daniel Jurafsky](/ai-engineering/daniel-jurafsky.md) — entity · stub · Stanford NLP professor; co-author of Speech and Language Processing (3rd draft 2026)
@@ -173,6 +185,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Generator–Evaluator Separation](/ai-engineering/generator-evaluator-separation.md) — synthesis · draft · a model can't reliably grade its own output; move evaluation into a separate agent/model/rubric/human
 
 ### Sources
+- [The Little Book of Deep Learning (Fleuret, 2024)](/ai-engineering/sources/the-little-book-of-deep-learning.md) — source · draft · 189pp compact deep learning textbook (CC BY-NC-SA 4.0, fleuret.org); Foundations (ML, GPU, tensors, training, scaling laws, parallel training) → Components (layers, activations, attention, normalization, skip connections) → Architectures (MLP, ResNet-50, GPT, ViT) → Applications (denoising, classification, object detection, segmentation, CLIP, RL, text/image generation) → Compute Schism (prompt engineering, quantization, LoRA, model merging)
 - [Pattern Recognition and Machine Learning (Bishop, 2006)](/ai-engineering/sources/pattern-recognition-and-machine-learning.md) — source · draft · canonical Bayesian ML textbook (758pp, Springer); covers probability distributions, linear models, neural networks, kernel methods/GPs/SVMs, graphical models, EM, variational inference, MCMC, PCA, HMMs, boosting
 - [Probabilistic Machine Learning: An Introduction (Murphy, 2022)](/ai-engineering/sources/probabilistic-machine-learning-intro.md) — source · draft · modern probabilistic ML textbook (860pp, MIT Press, CC-BY-NC-ND); all 43 parts ingested; foundations → linear models → deep learning → nonparametric → clustering → dimensionality reduction → graph embeddings
 - [Speech and Language Processing, 3rd Edition Draft (Jurafsky & Martin, 2026)](/ai-engineering/sources/speech-and-language-processing.md) — source · draft · definitive NLP/speech textbook (626pp); LLMs, transformers, n-grams, embeddings, RNNs, ASR (Whisper), TTS, MT, sequence labeling (CRF/HMM), parsing (CKY), coreference; all 38 parts ingested (complete)
@@ -181,6 +194,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [High-Dimensional Data Analysis with Low-Dimensional Models (Wright & Ma)](/ai-engineering/sources/wright-ma-high-dimensional-data-analysis.md) — source · draft · 730pp graduate textbook (Cambridge 2018); unified treatment of sparse recovery (ℓ₁, phase transition, RIP), low-rank recovery (nuclear norm, matrix completion, RPCA), and optimization geometry (benign landscape, saddle points)
 - [A Brief Introduction to Machine Learning for Engineers (Simeone, 2018)](/ai-engineering/sources/ml-for-engineers-simeone.md) — source · draft · 237pp monograph; unified probabilistic framework (frequentist vs. Bayesian); supervised/unsupervised/graphical models/approximate inference; PAC theory; ELBO/EM/VAE; f-divergences
 - [Dive into Deep Learning (Zhang, Lipton, Li, Smola)](/ai-engineering/sources/dive-into-deep-learning.md) — source · draft · comprehensive DL textbook (1151 pages, CC BY-SA 4.0, d2l.ai); code-first, Jupyter notebooks; linear regression → transformers → optimization → computer vision → NLP pretraining
+- [Computer Vision: Foundations and Applications (Ranjay Krishna, Stanford, 2017)](/ai-engineering/sources/computer-vision-foundations-and-applications.md) — source · draft · Stanford CS131 course notes (213pp, Apache 2.0); classical CV pipeline: color science, edge detection (Sobel/Canny/Hough/RANSAC), Harris corners, SIFT, HoG, DoG, seam carving, clustering, visual bag of words, deformable parts model, optical flow (Lucas-Kanade/Horn-Schunk), KLT tracking; pre-deep-learning reference
 - [Mathematics for Machine Learning (Deisenroth, Faisal, Ong)](/ai-engineering/sources/mathematics-for-machine-learning.md) — source · draft · 12-chapter textbook; Part I math foundations + Part II ML applications
 - [Introduction to Statistical Learning (James et al.)](/ai-engineering/sources/introduction-to-statistical-learning.md) — source · draft · Statistical learning methods; regression, classification, trees, SVMs, deep learning
 - [The New Software Lifecycle (Addy Osmani)](/ai-engineering/sources/the-new-software-lifecycle.md) — source · draft · Google/Osmani SDLC paper; 10%/90% model/harness split; 6 context types; static vs dynamic; METR productivity data
@@ -202,6 +216,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Artificial Intelligence and the Future of Teaching and Learning (US DoE, 2023)](/ai-engineering/sources/ai-future-teaching-learning-us-doe.md) — source · draft · 71-page policy report; ITS evidence base, ACE/IEO educator frameworks, AES limitations, 7 policy recommendations, algorithmic-bias-as-structural argument
 - [Reinforcement Learning: An Introduction (Sutton & Barto, 2nd ed. 2018)](/ai-engineering/sources/reinforcement-learning-introduction.md) — source · draft · definitive RL textbook (548pp, MIT Press); MDP formalism; Bellman equations; Monte Carlo; TD learning; Q-learning; SARSA; n-step bootstrapping; function approximation; eligibility traces; policy gradient; actor-critic; MCTS; psychology/dopamine correspondence; applications (TD-Gammon, DQN, AlphaGo); all 33 parts ingested (complete)
 - [The LION Way: Machine Learning plus Intelligent Optimization (Battiti & Brunato, 2017)](/ai-engineering/sources/the-lion-way.md) — source · draft · 516pp textbook; supervised learning (k-NN, linear models, SVMs, neural networks, ensembles); unsupervised (k-means, PCA, ICA); optimization (greedy, simulated annealing, gradient descent); Reactive Search Optimization (RSO); LP/QP; cooperative LION; all 28 parts ingested (complete)
+- [Information Retrieval: A Survey (Ed Greengrass, 2000)](/ai-engineering/sources/information-retrieval-a-survey.md) — source · draft · 224pp comprehensive survey of classical IR (2000); Boolean IR, vector space (TF-IDF, BM25/Okapi, LSI/SVD), probabilistic models (BIM, Bayesian inference networks, logistic regression), NLP approaches (phrase ID, sense disambiguation, concept matching, IE), clustering (hierarchical, Buckshot, STC), query expansion (Rocchio, pseudo-relevance feedback, LCA, WordNet), result fusion (CombMNZ), Web IR (crawlers, link analysis, meta-search); all 16 parts ingested
 
 ### Cross-domain (primary home in data-engineering)
 - [Claude Code for Data Engineering](/data-engineering/claude-code-for-data-engineering.md) — synthesis · AI-assisted dbt / data workflows
@@ -243,7 +258,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 
 ## Pages in this domain
 
-### Concepts (86)
+### Concepts (97)
 - [Agent Cost Management](/ai-engineering/agent-cost-management.md)
 - [Agent Evaluation](/ai-engineering/agent-evaluation.md)
 - [Agent Harness](/ai-engineering/agent-harness.md)
@@ -261,6 +276,8 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [AI Operating System](/ai-engineering/ai-operating-system.md)
 - [AI Presentation Tools](/ai-engineering/ai-presentation-tools.md)
 - [Attention Mechanisms](/ai-engineering/attention-mechanisms.md)
+- [Classical Feature Detection](/ai-engineering/classical-feature-detection.md)
+- [Classical Information Retrieval](/ai-engineering/information-retrieval.md)
 - [classification methods](/ai-engineering/classification-methods.md)
 - [Claude API](/ai-engineering/claude-api.md)
 - [Claude for Finance](/ai-engineering/claude-for-finance.md)
@@ -270,10 +287,13 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Compound Engineering](/ai-engineering/compound-engineering.md)
 - [Compressed Sensing](/ai-engineering/compressed-sensing.md)
 - [Computer Use (Claude)](/ai-engineering/computer-use.md)
+- [Computer Vision Tasks](/ai-engineering/computer-vision-tasks.md)
 - [Context Engineering](/ai-engineering/context-engineering.md)
 - [Context Window Management](/ai-engineering/context-window-management.md)
 - [Convolutional Neural Networks (CNNs)](/ai-engineering/convolutional-neural-networks.md)
 - [CUR Decomposition](/ai-engineering/cur-decomposition.md)
+- [Deep Learning](/ai-engineering/deep-learning.md)
+- [Deformable Parts Model (DPM)](/ai-engineering/deformable-parts-model.md)
 - [Direct Preference Optimization (DPO)](/ai-engineering/dpo.md)
 - [Dynamic Mode Decomposition (DMD)](/ai-engineering/dynamic-mode-decomposition.md)
 - [Embeddings](/ai-engineering/embeddings.md)
@@ -290,16 +310,19 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [LLM Evals (Product Evaluation Methodology)](/ai-engineering/llm-evals.md)
 - [Local AI Agents](/ai-engineering/local-ai-agents.md)
 - [Long-Running Agents](/ai-engineering/long-running-agents.md)
+- [LoRA and Adapters](/ai-engineering/lora-adapters.md)
 - [Low-Rank Matrix Recovery](/ai-engineering/low-rank-matrix-recovery.md)
 - [Machine Learning](/ai-engineering/machine-learning.md)
 - [Matrix Decompositions](/ai-engineering/matrix-decompositions.md)
 - [MCP (Model Context Protocol)](/ai-engineering/mcp.md)
 - [Mixture of Experts (MoE)](/ai-engineering/mixture-of-experts.md)
+- [Model Merging](/ai-engineering/model-merging.md)
 - [Multi-Agent Systems](/ai-engineering/multi-agent-systems.md)
 - [Multilayer Perceptrons (MLP)](/ai-engineering/mlp.md)
 - [Neural Networks](/ai-engineering/neural-network.md)
 - [Neural Tangent Kernel (NTK)](/ai-engineering/neural-tangent-kernel.md)
 - [NLP with Deep Learning](/ai-engineering/nlp-deep-learning.md)
+- [Optical Flow](/ai-engineering/optical-flow.md)
 - [Optimization for Machine Learning](/ai-engineering/optimization-for-ml.md)
 - [PCA and Dimensionality Reduction](/ai-engineering/pca-and-dimensionality-reduction.md)
 - [Personal Knowledge Corpus Pipeline](/ai-engineering/personal-knowledge-corpus-pipeline.md)
@@ -308,6 +331,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Prompt Engineering](/ai-engineering/prompt-engineering.md)
 - [Proximal Gradient Methods](/ai-engineering/proximal-gradient-methods.md)
 - [Quantization](/ai-engineering/quantization.md)
+- [Query Expansion and Relevance Feedback](/ai-engineering/query-expansion.md)
 - [RAG (Retrieval-Augmented Generation)](/ai-engineering/rag.md)
 - [Ralph Loop](/ai-engineering/ralph-loop.md)
 - [Recommender Systems](/ai-engineering/recommender-systems.md)
@@ -315,6 +339,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [regularization](/ai-engineering/regularization.md)
 - [Reinforcement Learning](/ai-engineering/reinforcement-learning.md)
 - [resampling methods](/ai-engineering/resampling-methods.md)
+- [Scaling Laws](/ai-engineering/scaling-laws.md)
 - [SINDy — Sparse Identification of Nonlinear Dynamics](/ai-engineering/sindy.md)
 - [Singular Value Decomposition (SVD)](/ai-engineering/singular-value-decomposition.md)
 - [Sleep-Time Compute](/ai-engineering/sleep-time-compute.md)
@@ -330,8 +355,9 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [tree based methods](/ai-engineering/tree-based-methods.md)
 - [Vector Database](/ai-engineering/vector-database.md)
 - [Vibe Coding (and why Spec-Driven Development supersedes it)](/ai-engineering/vibe-coding.md)
+- [Visual Bag of Words](/ai-engineering/visual-bag-of-words.md)
 
-### Entities (67)
+### Entities (68)
 - [Anthropic](/ai-engineering/anthropic.md)
 - [Chip Huyen](/ai-engineering/chip-huyen.md)
 - [Christopher M. Bishop](/ai-engineering/christopher-bishop.md)
@@ -350,6 +376,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Datasette](/ai-engineering/datasette.md)
 - [DiffusionGemma](/ai-engineering/diffusiongemma.md)
 - [FFASR Leaderboard](/ai-engineering/ffasr-leaderboard.md)
+- [François Fleuret](/ai-engineering/francois-fleuret.md)
 - [FunctionGemma](/ai-engineering/functiongemma.md)
 - [Gemini CLI](/ai-engineering/gemini-cli.md)
 - [GitHub Copilot (Agent Mode)](/ai-engineering/github-copilot.md)
@@ -412,10 +439,11 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Tool Calling & Context Engineering: How They Interlock](/ai-engineering/tool-calling-and-context-engineering.md)
 
 <details>
-<summary>Source summaries (695)</summary>
+<summary>Source summaries (702)</summary>
 
 - ["2024 State of Analytics Engineering, crafted by dbt Labs | dbt Labs"](/ai-engineering/sources/2024-state-of-analytics-engineering-crafted-by-dbt-labs-dbt--cb342df0.md)
 - ["9 AI Concepts Explained: Tokenization, RAG, RLHF, LoRA & More"](/ai-engineering/sources/9-ai-concepts-explained-tokenization-rag-rlhf-lora-more-a.md)
+- ["9 Best Tools for Automating AI Workflows [2026 Comparison]"](/ai-engineering/sources/9-best-tools-for-automating-ai-workflows-2026-comparison-c224f0ed.md)
 - ["[AINews] \"Laguna S 2.1 Released: Cheaper than Deepseek v4 Flash, Better than V4 Pro\""](/ai-engineering/sources/ainews-laguna-s-2-1-released-cheaper-than-deepseek-v4-flash--43429d78.md)
 - ["[AINews] Codex usage up >10x in 6 months to 7M users, +1M in the past ~day; did Codex overtake Claude Code??"](/ai-engineering/sources/ainews-codex-usage-up-10x-in-6-months-to-7m-users-1m-in-the--ac1def65.md)
 - ["[AINews] Kimi K3 2.8T-A50B: the largest open model ever released; Opus 4.8-class at Sonnet 5 pricing"](/ai-engineering/sources/ainews-kimi-k3-2-8t-a50b-the-largest-open-model-ever-release-08f77354.md)
@@ -434,9 +462,11 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - ["[AINews] Thinky's Inkling: 975B-A41B multimodal, new best American Apache 2.0 open model (with Inkling-Small, 276B-A12B)"](/ai-engineering/sources/ainews-thinky-s-inkling-975b-a41b-multimodal-new-best-americ-7b9538ff.md)
 - ["A Beginner’s Guide to Clocks, Causality, and Ordering in Distributed Systems"](/ai-engineering/sources/a-beginner-s-guide-to-clocks-causality-and-ordering-in-distr-4340eb83.md)
 - ["A Copilot for the Mind, SVB's Explosion, LLMs are the new CPUs, and More"](/ai-engineering/sources/a-copilot-for-the-mind-svb-s-explosion-llms-are-the-new-cpus-24a221d5.md)
+- ["A Detailed Guide to Idempotency, Delivery Semantics, and Deduplication"](/ai-engineering/sources/a-detailed-guide-to-idempotency-delivery-semantics-and-dedup-ff1f3223.md)
 - ["A First Comprehensive Study of TurboQuant: Accuracy and Performance"](/ai-engineering/sources/a-first-comprehensive-study-of-turboquant-accuracy-and-perfo-5bd07006.md)
 - ["A free year of Devin: the world’s most advanced autonomous AI software engineer"](/ai-engineering/sources/a-free-year-of-devin-the-world-s-most-advanced-autonomous-ai-8859faee.md)
 - ["A New Generation Studies AI, Apple's Recipe for On-Device Models, GLM5.2 Tackles Open-Ended Problems"](/ai-engineering/sources/a-new-generation-studies-ai-apple-s-recipe-for-on-device-mod-d.md)
+- ["Abacus AI Supercomputer: Run Agents, Apps, and Games 24/7 for $10"](/ai-engineering/sources/abacus-ai-supercomputer-run-agents-apps-and-games-24-7-for-1-6ec95a7c.md)
 - ["Advanced usage :: LocalAI"](/ai-engineering/sources/advanced-usage-localai-5bcabc1b.md)
 - ["Agent Memory Frameworks Showdown: cognee vs Mem0 vs Zep vs Letta"](/ai-engineering/sources/agent-memory-frameworks-showdown-cognee-vs-mem0-vs-zep-vs-le-439007f9.md)
 - ["Agent Skills: Disseminating Expertise"](/ai-engineering/sources/agent-skills-disseminating-expertise-85dde52e.md)
@@ -625,6 +655,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - ["You Can Learn AI Agent Harness & Loop Engineering In 19 Min | LLM Ops, Eval, Tracing, RAG"](/ai-engineering/sources/you-can-learn-ai-agent-harness-loop-engineering-in-19-min-ll-GrNbuWWJYiI.md)
 - ["“I spent $50,000 self-hosting AI models. You should too.” - 0xSero"](/ai-engineering/sources/i-spent-50-000-self-hosting-ai-models-you-should-too-0xsero-ImPESBftwr8.md)
 - ["🎧 Best of the Pod: Vercel’s Guillermo Rauch on What Comes After Coding"](/ai-engineering/sources/best-of-the-pod-vercel-s-guillermo-rauch-on-what-comes-after-5edc7ba5.md)
+- [1 Billion ChatGPT users](/ai-engineering/sources/1-billion-chatgpt-users-ef4f16ff.md)
 - [10 Claude AI Side Hustles That Can Pay A Full-Time Income](/ai-engineering/sources/10-claude-ai-side-hustles-that-can-pay-a-full-time-income-nkf8SP71wo4.md)
 - [10 Money Myths That Keep You Broke](/ai-engineering/sources/10-money-myths-that-keep-you-broke-rTO0GofZJzA.md)
 - [11 best AI agent frameworks](/ai-engineering/sources/11-best-ai-agent-frameworks-01026a4c.md)
@@ -901,6 +932,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Common pitfalls when building generative AI applications](/ai-engineering/sources/common-pitfalls-when-building-generative-ai-applications-8b57107d.md)
 - [Common Table Expressions vs Subqueries vs Views vs Temp Tables for data engineers](/ai-engineering/sources/common-table-expressions-vs-subqueries-vs-views-vs-temp-tabl-vstJyDo88kA.md)
 - [Comprehension Debt — The Hidden Cost of AI-Generated Code](/ai-engineering/sources/comprehension-debt-the-hidden-cost-of-ai-generated-code-cde.md)
+- [Computer Vision: Foundations and Applications (Ranjay Krishna, Stanford, 2017)](/ai-engineering/sources/computer-vision-foundations-and-applications.md)
 - [Context Engineering as Your Competitive Edge](/ai-engineering/sources/context-engineering-as-your-competitive-edge-eee.md)
 - [Context Hub - Crowdsourced API Documentation for Coding Agents](/ai-engineering/sources/context-hub-crowdsourced-api-documentation-for-coding-agents-ae.md)
 - [Context Hub — Curated Versioned Documentation for AI Coding Agents](/ai-engineering/sources/context-hub-curated-versioned-documentation-for-ai-coding-ag-ae.md)
@@ -989,6 +1021,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [I was an AI skeptic. Then I tried plan mode](/ai-engineering/sources/i-was-an-ai-skeptic-then-i-tried-plan-mode-WNx-s-RxVxk.md)
 - [I'm using claude --worktree for everything now](/ai-engineering/sources/i-m-using-claude-worktree-for-everything-now-yv8VZpov8bk.md)
 - [If you don’t run Pi locally you’re falling behind…](/ai-engineering/sources/if-you-don-t-run-pi-locally-you-re-falling-behind-jcUqsNpDDDk.md)
+- [Information Retrieval: A Survey (Ed Greengrass, November 2000)](/ai-engineering/sources/information-retrieval-a-survey.md)
 - [INSANE DeepSeek AI Agent Can Automate ANYTHING For FREE!! (Step by Step Tutorial)](/ai-engineering/sources/insane-deepseek-ai-agent-can-automate-anything-for-free-step-LGiTLMhx_zo.md)
 - [Internet Advertising: An Interplay Among Advertisers, Online Publishers and Web Users](/ai-engineering/sources/internet-advertising-survey.md)
 - [introduction to statistical learning](/ai-engineering/sources/introduction-to-statistical-learning.md)
@@ -1074,6 +1107,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [The Factory Model — Engineers as Orchestrators of Autonomous Coding Agents](/ai-engineering/sources/the-factory-model-engineers-as-orchestrators-of-autonomous-c-cea.md)
 - [The Future of AI (Do This Before 2027)](/ai-engineering/sources/the-future-of-ai-do-this-before-2027-9q5JnlCyu4U.md)
 - [The LION Way: Machine Learning plus Intelligent Optimization (Battiti & Brunato, 2017)](/ai-engineering/sources/the-lion-way.md)
+- [The Little Book of Deep Learning (Fleuret, 2024)](/ai-engineering/sources/the-little-book-of-deep-learning.md)
 - [The most important concept to learn in AI...](/ai-engineering/sources/the-most-important-concept-to-learn-in-ai-C4vwvRMTlvc.md)
 - [The Mythos Threshold (Joe Reis, 2026)](/ai-engineering/sources/the-mythos-threshold.md)
 - [The New Software Lifecycle (Addy Osmani, June 2026)](/ai-engineering/sources/the-new-software-lifecycle.md)

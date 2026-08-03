@@ -12,17 +12,28 @@ sources:
   - path: raw/pdf/pdf-foundations-of-data-science-part-01.md
     channel: pdf
     ingested_at: 2026-07-14
+  - path: raw/_inbox/pdf-information-retrieval-a-survey-part-09.md
+    channel: pdf
+    ingested_at: 2026-08-03
+  - path: raw/_inbox/pdf-information-retrieval-a-survey-part-10.md
+    channel: pdf
+    ingested_at: 2026-08-03
 aliases:
   - clustering
   - K-means clustering
   - hierarchical clustering
   - dendrogram
   - unsupervised clustering
+  - Suffix Tree Clustering
+  - STC
+  - Buckshot clustering
+  - document clustering
+  - cluster hypothesis
 tags:
   - corpus/ai-engineering
   - concept
 created: 2026-07-09
-updated: 2026-07-14
+updated: 2026-08-03
 ---
 
 # Clustering Methods
@@ -153,6 +164,55 @@ Spectral clustering handles non-convex cluster shapes by leveraging the **graph 
 
 **Limitation**: spectral clustering is O(n³) naively (eigendecomposition); for large n, power-method or sparse-Laplacian tricks are needed. K-means remains preferred when clusters are roughly spherical [^src_bhk].
 
+## Document Clustering for Information Retrieval
+
+Document clustering applies the same methods above to text collections, with the goal of supporting browsing, navigation, and retrieval. The **cluster hypothesis** (van Rijsbergen, 1979): documents that are similar tend to be relevant to the same queries — so retrieving one relevant document and expanding to its cluster should yield additional relevant documents [^irsrc9].
+
+### Agglomerative Hierarchical Clustering (AHC) for documents
+
+Same algorithm as above, applied to document-document cosine similarity matrices. IR-specific linkage behavior [^irsrc9]:
+
+| Linkage | IR property |
+|---|---|
+| **Single-link** ("nearest neighbor") | Produces large, loose, "straggly" clusters; connected by chains of single high-similarity links; two documents in the same cluster are not guaranteed to be above the threshold |
+| **Complete-link** | Produces small, tight, cohesive clusters; every pair in a cluster is above the similarity threshold; better suited to IR |
+| **Group-average** | Intermediate: each member has greater average similarity to its own cluster than to any other |
+| **Ward's method** | Minimizes total within-cluster Euclidean distance increase at each merge |
+
+Complete-link clustering is O(N²) in time with O(N²) space; with O(N) space it requires O(N³) time [^irsrc9].
+
+### Heuristic clustering for large collections
+
+For collections of thousands of documents or more, O(N²) methods are impractical. Heuristic methods run in O(kN) (rectangular) time by sacrificing some theoretical guarantees [^irsrc9]:
+
+- **Buckshot** (Cutting et al., SIGIR 1992): apply a complete O(N²) AHC method to a random sample of √(kN) documents to obtain k seed clusters; then assign all N documents to the nearest seed in O(kN) time. Non-deterministic (results vary with random sample).
+- **Fractionation**: partition the corpus into N/m buckets of m documents each; cluster each bucket to mr centroids; treat centroids as new documents and repeat until k clusters remain. Applies AHC to the whole corpus but coarsely (in buckets); deterministic.
+- Both support O(kN log N) hierarchical clustering by iterative application.
+
+### Suffix Tree Clustering (STC) — incremental, linear-time
+
+STC (Zamir & Etzioni, SIGIR 1998) achieves O(N) time and space while producing clusters competitive with O(N²) methods in evaluation experiments [^irsrc10]. It was designed for interactive clustering of Web search results.
+
+Core insight: STC uses **shared phrase** as the similarity measure. If D1 and D2 share a phrase, and D2 and D3 share the same phrase, then D1 and D3 certainly share it too (transitivity). This allows complete clustering at the base-cluster level without O(N²) penalty.
+
+**Algorithm**:
+1. Build a **suffix tree** over all documents using Ukkonen's O(N) algorithm. Each internal node of the suffix tree represents a phrase shared by some subset of documents (the **base cluster** for that phrase).
+2. Score each base cluster: `score = |B| × f(|P|)` where |B| is the number of documents sharing phrase P and f(|P|) is a length bonus (linear for 2–6 word phrases; penalizes single-word and very long phrases).
+3. Cluster base clusters together (stage 2) if they share ≥ 50% of their documents, limiting revisits to the q best clusters per step to maintain O(1) amortized time.
+4. Rank the final clusters; present the best p to the user.
+
+STC labels clusters by the shared phrases that define them — human-readable cluster descriptions, unlike centroid-based methods [^irsrc10].
+
+In a comparative experiment (10 Web queries, human relevance judgments), STC outperformed Buckshot, Fractionation, K-means, and even Group-Average Hierarchical Clustering (O(N²)) in average precision when selecting the best clusters for interactive browsing [^irsrc10].
+
+### Cluster validation for IR
+
+Meaningful clusters are those that satisfy the **cluster hypothesis**: relevant documents cluster together. Validation approaches [^irsrc10]:
+
+1. **Inter-document similarity gap**: compare average similarity among relevant documents to average similarity between relevant-nonrelevant pairs. If the cluster hypothesis holds, the former should be substantially higher.
+2. **Nearest-neighbor relevance** (Voorhees): for each relevant document, check how many of its 5 nearest neighbors are also relevant.
+3. **Term density** (El-Hamdouchi & Willett): `postings / (documents × unique_terms)`. Higher density → more document pairs share terms → better clustering. This measure correlates best with retrieval effectiveness in comparative studies [^irsrc10].
+
 ## Related Corpus Pages
 
 - [/ai-engineering/pca-and-dimensionality-reduction.md](/ai-engineering/pca-and-dimensionality-reduction.md) — complement to clustering; both are unsupervised; PCA for variance explanation, clustering for partition discovery
@@ -166,3 +226,5 @@ Spectral clustering handles non-convex cluster shapes by leveraging the **graph 
 [^src1]: [Introduction to Statistical Learning, Part 20](../../raw/pdf/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-20.md)
 [^src2]: [Introduction to Statistical Learning, Part 21](../../raw/pdf/pdf-james-witten-hastie-tibshirani-intro-to-statistical-learning-part-21.md)
 [^src_bhk]: [Foundations of Data Science (Blum, Hopcroft, Kannan 2018) — Chapter 7](../../raw/pdf/pdf-foundations-of-data-science-part-01.md)
+[^irsrc9]: [Information Retrieval: A Survey (Greengrass, 2000) — Part 9](../../raw/pdf/pdf-information-retrieval-a-survey-part-09.md)
+[^irsrc10]: [Information Retrieval: A Survey (Greengrass, 2000) — Part 10](../../raw/pdf/pdf-information-retrieval-a-survey-part-10.md)

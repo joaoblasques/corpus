@@ -12,6 +12,12 @@ sources:
   - path: raw/github/github-dabochen-spreadsheet-is-all-you-need.md
     channel: github
     ingested_at: 2026-06-25
+  - path: raw/_inbox/pdf-the-little-book-of-deep-learning-part-02.md
+    channel: pdf
+    ingested_at: 2026-08-03
+  - path: raw/_inbox/pdf-the-little-book-of-deep-learning-part-03.md
+    channel: pdf
+    ingested_at: 2026-08-03
 aliases:
   - Transformer
   - transformer architecture
@@ -21,9 +27,9 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-21
-updated: 2026-06-23
+updated: 2026-08-03
 confidence: 0.9
-last_confirmed: 2026-06-23
+last_confirmed: 2026-08-03
 ---
 
 # Transformer
@@ -102,6 +108,46 @@ Pre-Transformer architectures (RNNs, LSTMs) processed sequences token-by-token, 
 
 Behavior is emergent — the architecture defines the framework; the billions of weights determine what the model actually does [^src1].
 
+## GPT and ViT architecture details (Fleuret, 2024)
+
+### GPT — decoder-only causal Transformer [Radford et al., 2018]
+
+The **Generative Pre-trained Transformer** (GPT) is a pure autoregressive model: a succession of **causal self-attention blocks** (the encoder without cross-attention, using a causal mask). All blocks are identical; the token sequence is processed with shared positional encoding and embedding layers [^src4].
+
+GPT-3 [Brown et al., 2020]: 175B parameters, 96 self-attention blocks, 96 heads per block, token embedding dimension 12,288, hidden dimension 49,152 in the MLP. Scales the Transformer architecture to unprecedented size [^src4].
+
+An LLM trained on a large dataset develops the ability to:
+- Predict continuation given any prefix ("few-shot prediction")
+- Solve novel tasks when given examples in the prompt (in-context learning)
+- Answer questions, solve problems, and produce chain-of-thought reasoning when prompted
+
+These models are called **foundation models** [Bommasani et al., 2021] [^src4].
+
+**RLHF fine-tuning** [Ouyang et al., 2022]: Pre-trained GPT models are repurposed as assistants by fine-tuning with **Reinforcement Learning from Human Feedback**. Small labeled datasets of human-rated responses train a reward model; the reward model's predictions drive RL fine-tuning. This shifts the model's output distribution from "internet text" to "helpful assistant" [^src4].
+
+### ViT — Transformer applied to images [Dosovitskiy et al., 2020]
+
+The **Vision Transformer** (ViT) adapts the Transformer encoder to image classification:
+
+1. Split image into M non-overlapping patches of size P×P pixels (typical P=16)
+2. Flatten each patch: M patches × 3P² features (for RGB)
+3. Project to embedding dimension D via trainable matrix W_E (3P² × D)
+4. Prepend a trainable **CLS token** (E₀) — its output is used for classification (introduced by BERT [Devlin et al., 2018])
+5. Add positional encodings to all M+1 vectors
+6. Process with N self-attention blocks
+7. Pass the final CLS token Z₀ through a 2-hidden-layer MLP → C class logits[^src4]
+
+ViT is one of the two standard architectures for image classification (alongside ResNet), and is used as the image encoder in **CLIP** [^src4].
+
+### Encoder-decoder Transformer for sequence-to-sequence [Vaswani et al., 2017]
+
+The original Transformer combined an encoder (non-causal self-attention over the source sequence) and a decoder (causal self-attention over the target sequence + cross-attention from the encoder). Used for machine translation and Whisper-style speech recognition [^src4].
+
+Block types in the standard Transformer (Radford et al. 2018 variant, used in GPT):
+- **Feed-forward block**: layer norm → two-layer MLP (with GELU) → residual add
+- **Self-attention block**: layer norm → Multi-Head Attention (all queries/keys/values from same sequence) → residual add
+- **Cross-attention block**: layer norm → Multi-Head Attention (queries from decoder; keys/values from encoder output) → residual add [^src4]
+
 ## Visual learning resource: nanoGPT spreadsheet
 
 `dabochen/spreadsheet-is-all-you-need` (★2,159) implements the full GPT inference pipeline as a spreadsheet [^src3]. Based on Karpathy's nanoGPT (~85K parameters, character-based with A/B/C tokens only), each column shows one step:
@@ -118,9 +164,12 @@ Each cell contains the actual numeric computation so every value can be traced f
 - [Mixture of Experts](/ai-engineering/mixture-of-experts.md) — sparse FFN variant used in the largest frontier models
 - [Context Window Management](/ai-engineering/context-window-management.md) — "lost in the middle" and the n² attention cost shape what to keep in context
 - [Context Engineering](/ai-engineering/context-engineering.md) — attention is what makes context-window structure matter; tokens attend across the full window
+- [Computer Vision Tasks](/ai-engineering/computer-vision-tasks.md) — ViT and CLIP applications
+- [The Little Book of Deep Learning](/ai-engineering/sources/the-little-book-of-deep-learning.md) — Fleuret, §§ 5.3, 6.5, 6.6, 7.1
 
 ---
 
 [^src1]: [AI - How Large Language Models Work](/03_Resources/Study Notes/AI - How Large Language Models Work.md)
 [^src2]: [How LLMs Actually Work](../../raw/web/how-llms-actually-work.md)
 [^src3]: [dabochen/spreadsheet-is-all-you-need — GPT inference in a spreadsheet (★2,159)](../../raw/github/github-dabochen-spreadsheet-is-all-you-need.md) — GitHub
+[^src4]: raw/_inbox/pdf-the-little-book-of-deep-learning-part-02.md; raw/_inbox/pdf-the-little-book-of-deep-learning-part-03.md — Fleuret, §§ 5.3, 7.1

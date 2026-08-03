@@ -222,6 +222,7 @@ BFS was designed by Dominic Giampaolo as a single implementor over 9 months for 
 
 ## Related across domains
 
+- [Computer Vision Tasks](/ai-engineering/computer-vision-tasks.md) · _ai-engineering_
 - [Learning to Learn](/productivity/learning-to-learn.md) · _productivity_
 
 <!-- RELATED:END -->

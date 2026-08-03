@@ -6,6 +6,9 @@ sources:
   - path: raw/_inbox/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-22.md
     channel: pdf
     ingested_at: 2026-07-10
+  - path: raw/_inbox/pdf-the-little-book-of-deep-learning-part-02.md
+    channel: pdf
+    ingested_at: 2026-08-03
 aliases:
   - attention mechanism
   - attention
@@ -20,7 +23,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-07-10
-updated: 2026-07-10
+updated: 2026-08-03
 ---
 
 # Attention Mechanisms
@@ -165,6 +168,30 @@ D2L presents the Transformer (Vaswani et al. 2017) as the culmination of the att
 
 "Scalability is the main advantage that has allowed Transformers to become the dominant architectures for large models over the past decade." [^src1]
 
+## Fleuret's precise formulation (LBDL § 4.8)
+
+Fleuret [2024] gives a clean operator-level definition of the attention layer, useful as a reference for implementation [^src2]:
+
+**Inputs**:
+- Q (queries): N_Q × D_QK
+- K (keys): N_KV × D_QK
+- V (values): N_KV × D_V
+
+**Attention scores** (per query q, key k):
+A_{q,k} = softmax(QK^T / √D_QK) — the scaling factor 1/√D_QK keeps the range of values roughly constant regardless of D_QK.
+
+**Output** (per query q):
+Y_q = Σ_k A_{q,k} V_k
+
+If query Q_q matches one key K_m far more than others → A_{q,m} ≈ 1 → Y_q ≈ V_m.
+If Q_q matches several keys equally → Y_q = weighted average of corresponding values.
+
+**Extensions**: (1) masking — multiply the attention matrix by a Boolean matrix M before softmax (e.g., causal mask: 1s below and on diagonal, 0s above, preventing position q from depending on keys k > q); (2) dropout on the attention matrix A before multiplying by V.
+
+**Computational cost**: O(N_Q × N_KV) per head — quadratic in sequence length. This is the main bottleneck for long sequences (tens of thousands of tokens). Approximate alternatives: Longformer (dense local + sparse long-range) [Beltagy et al., 2020], linear attention (key-value product before query multiplication) [Katharopoulos et al., 2020, co-authored by Fleuret].
+
+**Multi-Head Attention Layer**: H heads, each with weight matrices W_Q^h (H×D×D_QK), W_K^h (H×D×D_QK), W_V^h (H×D×D_V), and a final output matrix W_O (HD_V × D). Input sequences X_Q, X_K, X_V → per-head Q/K/V → per-head attention → concatenate H results → multiply by W_O. Multi-head attention is invariant to permutation of keys/values, equivariant to permutation of queries [^src2].
+
 ## See also
 
 - [Transformer](/ai-engineering/transformer.md) — full Transformer architecture; Q/K/V, multi-head, FFN, residuals, KV cache, RoPE
@@ -172,7 +199,9 @@ D2L presents the Transformer (Vaswani et al. 2017) as the culmination of the att
 - [NLP Deep Learning](/ai-engineering/nlp-deep-learning.md) — BERT/GPT use Transformer + pretraining
 - [MLP](/ai-engineering/mlp.md) — the positionwise FFN in Transformers is an MLP
 - [Dive into Deep Learning](/ai-engineering/sources/dive-into-deep-learning.md) — source textbook (Chapter 11)
+- [The Little Book of Deep Learning](/ai-engineering/sources/the-little-book-of-deep-learning.md) — Fleuret, § 4.8
 
 ---
 
 [^src1]: [D2L Part 22 — Attention Scoring Functions, Bahdanau, Multi-Head](../../raw/pdf/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-22.md)
+[^src2]: raw/_inbox/pdf-the-little-book-of-deep-learning-part-02.md — Fleuret, §§ 4.8–4.10

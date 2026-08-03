@@ -6,6 +6,12 @@ sources:
   - path: raw/_inbox/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-11.md
     channel: pdf
     ingested_at: 2026-07-10
+  - path: raw/_inbox/pdf-the-little-book-of-deep-learning-part-01.md
+    channel: pdf
+    ingested_at: 2026-08-03
+  - path: raw/_inbox/pdf-the-little-book-of-deep-learning-part-02.md
+    channel: pdf
+    ingested_at: 2026-08-03
 aliases:
   - multilayer perceptron
   - MLP
@@ -18,7 +24,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-07-10
-updated: 2026-07-10
+updated: 2026-08-03
 ---
 
 # Multilayer Perceptrons (MLP)
@@ -37,7 +43,7 @@ o = W^(2) h          (output layer)
 
 Adding more hidden layers builds deeper representations. Each layer learns progressively more abstract features: in vision, early layers detect edges, middle layers detect shapes, late layers detect object parts.
 
-**Universal Approximation Theorem** [unsourced — cited in D2L context]: a single hidden layer with sufficient width can approximate any continuous function on a compact domain. In practice, depth (many narrower layers) outperforms width (one very wide layer) for most tasks.
+**Universal Approximation Theorem** [Cybenko, 1989]: a single hidden layer with sufficient width can approximate any continuous function on a compact domain — specifically, any model of the form l₂ ∘ σ ∘ l₁ where l₁, l₂ are affine and σ is continuous and non-polynomial [^src2]. This holds when the hidden layer width is allowed to grow arbitrarily. In practice, depth (many narrower layers) outperforms width (one very wide layer) for most tasks — theoretical results show that for a fixed parameter budget, depth produces greater mapping complexity [Telgarsky, 2016] [^src2].
 
 ## Activation functions
 
@@ -133,7 +139,10 @@ The `from-scratch` version (D2L Chapter 5) implements the forward pass and param
 - [CNNs](/ai-engineering/convolutional-neural-networks.md) — convolutional variant for spatial data
 - [Transformer](/ai-engineering/transformer.md) — attention-based architecture; FFN layers are MLPs applied per-token
 - [Dive into Deep Learning](/ai-engineering/sources/dive-into-deep-learning.md) — source textbook (Chapter 5)
+- [Deep Learning](/ai-engineering/deep-learning.md) — training mechanics, activation functions, dropout, normalization
+- [The Little Book of Deep Learning](/ai-engineering/sources/the-little-book-of-deep-learning.md) — Fleuret, § 5.1
 
 ---
 
 [^src1]: [D2L Part 11 — Forward Prop, Backprop, Numerical Stability](../../raw/pdf/pdf-zhang-lipton-li-smola-dive-into-deep-learning-cc-by-sa-4-0-part-11.md)
+[^src2]: raw/_inbox/pdf-the-little-book-of-deep-learning-part-01.md; raw/_inbox/pdf-the-little-book-of-deep-learning-part-02.md — Fleuret, §§ 3.5, 5.1

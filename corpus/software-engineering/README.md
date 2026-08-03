@@ -6,7 +6,7 @@ tags:
   - corpus/software-engineering
   - hub
 created: 2026-05-07
-updated: 2026-07-23
+updated: 2026-08-03
 ---
 
 # Software Engineering
@@ -16,6 +16,10 @@ Domain covering software engineering practice from foundational CS through deplo
 ## Pages
 
 ### Entities
+- [Robert S. Boyer](/software-engineering/robert-s-boyer.md) — entity · stub · co-author of A Computational Logic (1979); SRI International; co-developer of Boyer-Moore theorem prover and string search algorithm
+- [J Strother Moore](/software-engineering/j-strother-moore.md) — entity · stub · co-author of A Computational Logic (1979); SRI International; co-developer of Boyer-Moore prover; later co-developed ACL2
+- [Richard Pawson](/software-engineering/richard-pawson.md) — entity · draft · creator of the Naked Objects approach; PhD Trinity College Dublin 2004; advisor to Irish DSFA Naked Object Architecture
+- [Trygve Reenskaug](/software-engineering/trygve-reenskaug.md) — entity · draft · inventor of Model-View-Controller (MVC, Xerox PARC 1978/79); Norwegian OO pioneer; external examiner for Pawson's Naked Objects thesis
 - [FastAPI](/software-engineering/fastapi.md) — entity · draft · Python API framework; Pydantic validation, dependency injection via Depends(), JWT auth, SQLAlchemy integration
 - [Kubernetes](/software-engineering/kubernetes.md) — entity · draft · container orchestration; Pod/Deployment/Service/Namespace; runtime platform for microservices
 - [Xonsh](/software-engineering/xonsh.md) — entity · draft · a Python-superset shell; objects/imports/stdlib alongside cd, pipes, and aliases
@@ -44,6 +48,8 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Compiler-Warning Management](/software-engineering/compiler-warning-management.md) — concept · draft · Git's `false_but_the_compiler_does_not_know_it_` trick; suppress a specific false-positive warning without disabling it globally; eliminated under LTO
 - [Local-First Sync Architecture](/software-engineering/local-first-sync-architecture.md) — concept · draft · browser-as-database + optimistic mutations + granular reactivity; server as sync target not source of truth (reverse-engineered from Linear)
 - [Test-Case Reduction](/software-engineering/test-case-reduction.md) — concept · draft · automatically shrink a failing input to a minimal reproducer via an interestingness test; ddmin/creduce/Shrink Ray; steering beyond input length
+- [Naked Objects](/software-engineering/naked-objects.md) — concept · draft · domain objects exposed directly to users via auto-generated generic UI; enforces behavioural completeness; 4:1 code reduction vs. 4-layer; validated at Irish DSFA and Safeway (Pawson, TCD PhD 2004)
+- [Model-View-Controller (MVC)](/software-engineering/model-view-controller.md) — concept · draft · Reenskaug/Xerox PARC 1978/79; three archetypes; Controller distorted into use-case controller; foundation of 4-layer architecture; relationship to naked objects
 
 ### Concepts (continued)
 - See also: [Go](/software-engineering/go-programming-language.md), [JavaScript](/software-engineering/javascript-fundamentals.md) under Languages above; [Terminal/CLI](/software-engineering/terminal-cli-tools.md) and [Vim](/software-engineering/vim.md) under tools
@@ -71,6 +77,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [OS Security](/software-engineering/os-security.md) — concept · draft · authentication (MFA, salted hashes), access control (ACL/RBAC/MAC/Unix model), cryptography (symmetric/asymmetric/AEAD), distributed security (Kerberos, TLS/PKI)
 
 - [Complexity Theory and NP-Completeness](/software-engineering/complexity-theory.md) — concept · draft · P vs NP; NP-complete problems; polynomial-time reductions; average-case vs worst-case; approximation algorithms
+- [Formal Verification and Mechanical Theorem Proving](/software-engineering/formal-verification.md) — concept · draft · Boyer-Moore theorem prover; induction from recursion; shell principle; rewrite-rule waterfall; compiler/string-search/prime-factorization proofs; NQTHM; ACL2
 
 ### Sources
 - [OSTEP: Operating Systems — Three Easy Pieces (Arpaci-Dusseau, 2023)](/software-engineering/sources/ostep-operating-systems-three-easy-pieces.md) — source · draft · 47-chapter free textbook; virtualization, concurrency, persistence, security; xv6 lab companion
@@ -91,6 +98,8 @@ Domain covering software engineering practice from foundational CS through deplo
 - [The Design of Approximation Algorithms (Williamson & Shmoys, 2011)](/software-engineering/sources/design-of-approximation-algorithms.md) — source · draft · graduate textbook; greedy (set cover, submodular (1−1/e)), LP rounding (vertex cover 2-approx), randomized rounding (MAX SAT, MAX CUT), SDP rounding (Goemans-Williamson 0.878 MAX CUT), primal-dual, cuts/metrics, iterated rounding, PCP hardness; all 34 parts ingested
 - [Code Simplicity: The Fundamentals of Software (Kanat-Alexander, 2012)](/software-engineering/sources/code-simplicity.md) — source · draft · software design laws: Equation of Software Design (V>M), Law of Change (YAGNI), Law of Defect Probability (DRY, ~1 defect/100 lines), Law of Simplicity (individual pieces); 3 of 4 parts ingested
 - [Practical File System Design: The Be File System (Giampaolo, Morgan Kaufmann, 1999)](/software-engineering/sources/practical-file-system-design.md) — source · draft · 247pp practitioner guide to implementing BFS, the 64-bit journaled FS of BeOS; block_run/inode/data_stream structures, B+tree indexing, attribute queries, write-ahead logging, vnode layer, performance benchmarks, testing methodology
+- [Naked Objects (Pawson, PhD Thesis, Trinity College Dublin, 2004)](/software-engineering/sources/naked-objects.md) — source · draft · 223pp PhD thesis; exposes domain objects directly to users via auto-generated UI; behavioural completeness; DSFA/Safeway/CarServ case studies; 4:1 code reduction vs. 4-layer; seven design guidelines
+- [A Computational Logic (Boyer & Moore, 1979)](/software-engineering/sources/a-computational-logic-1979.md) — source · draft · 440pp ACM monograph; mechanical theorem proving with induction; shell principle; rewrite-rule waterfall; tautology checker, compiler, string search, prime factorization proofs; ancestor of ACL2
 
 ## Sources ingested
 - [Disasters I've Seen in a Microservices World](/03_Resources/Articles/Disasters in a Microservices World.md) — article note, João Alves / Hey World, 2025-10-30
@@ -103,7 +112,7 @@ Domain covering software engineering practice from foundational CS through deplo
 
 ## Pages in this domain
 
-### Concepts (30)
+### Concepts (33)
 - [AI Risk Architecture](/software-engineering/ai-risk-architecture.md)
 - [Algorithms (Strategies, Not Tricks)](/software-engineering/algorithms.md)
 - [CAP Theorem](/software-engineering/cap-theorem.md)
@@ -119,11 +128,14 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Distributed Systems Fallacies](/software-engineering/distributed-systems-fallacies.md)
 - [Engineering Craft](/software-engineering/engineering-craft.md)
 - [File Systems](/software-engineering/file-systems.md)
+- [Formal Verification and Mechanical Theorem Proving](/software-engineering/formal-verification.md)
 - [Functional and Persistent Data Structures](/software-engineering/functional-persistent-data-structures.md)
 - [Go Programming Language](/software-engineering/go-programming-language.md)
 - [JavaScript Fundamentals](/software-engineering/javascript-fundamentals.md)
 - [Local-First Sync Architecture](/software-engineering/local-first-sync-architecture.md)
 - [Microservices](/software-engineering/microservices.md)
+- [Model-View-Controller (MVC)](/software-engineering/model-view-controller.md)
+- [Naked Objects](/software-engineering/naked-objects.md)
 - [Operating Systems Fundamentals](/software-engineering/operating-systems.md)
 - [OS Security](/software-engineering/os-security.md)
 - [Scatter/Gather Pattern](/software-engineering/scatter-gather-pattern.md)
@@ -135,14 +147,18 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Virtual Machine Monitors (VMMs / Hypervisors)](/software-engineering/virtual-machine-monitors.md)
 - [Virtual Memory](/software-engineering/virtual-memory.md)
 
-### Entities (10)
+### Entities (14)
 - [Bun](/software-engineering/bun.md)
 - [FastAPI](/software-engineering/fastapi.md)
 - [Git Basics](/software-engineering/git-basics.md)
 - [InsForge — backend platform for agentic coding](/software-engineering/insforge.md)
+- [J Strother Moore](/software-engineering/j-strother-moore.md)
 - [Kan](/software-engineering/kan.md)
 - [Kubernetes (k8s)](/software-engineering/kubernetes.md)
 - [React](/software-engineering/react.md)
+- [Richard Pawson](/software-engineering/richard-pawson.md)
+- [Robert S. Boyer](/software-engineering/robert-s-boyer.md)
+- [Trygve Reenskaug](/software-engineering/trygve-reenskaug.md)
 - [Usertour](/software-engineering/usertour.md)
 - [Vim](/software-engineering/vim.md)
 - [Xonsh — a Python-superset shell](/software-engineering/xonsh.md)
@@ -152,7 +168,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Simplicity as an Engineering Constraint in the AI Age](/software-engineering/simplicity-as-engineering-constraint.md)
 
 <details>
-<summary>Source summaries (80)</summary>
+<summary>Source summaries (83)</summary>
 
 - ["2024-05-25-15-54-25 - move-base-up by josephmachado · Pull Request #17 · josephmachado/simple_dbt_project"](/software-engineering/sources/2024-05-25-15-54-25-move-base-up-by-josephmachado-pull-reque-ee.md)
 - ["A Guide to Multi-Tenancy: Benefits and Challenges"](/software-engineering/sources/a-guide-to-multi-tenancy-benefits-and-challenges-e55e9184.md)
@@ -167,6 +183,8 @@ Domain covering software engineering practice from foundational CS through deplo
 - [5 Simple Habits for Writing Clean Code](/software-engineering/sources/5-simple-habits-for-writing-clean-code-cde.md)
 - [6 security settings every GitHub maintainer should enable this week](/software-engineering/sources/6-security-settings-every-github-maintainer-should-enable-th-ab782b95.md)
 - [6 Software Engineering Challenges & Ways To Overcome Them](/software-engineering/sources/6-software-engineering-challenges-ways-to-overcome-them-7af11149.md)
+- [7 Productivity Tips to Boost Developer Efficiency in 2026](/software-engineering/sources/7-productivity-tips-to-boost-developer-efficiency-in-2026-36d311c8.md)
+- [A Computational Logic (Boyer & Moore, 1979)](/software-engineering/sources/a-computational-logic-1979.md)
 - [A quote from Armin Ronacher](/software-engineering/sources/a-quote-from-armin-ronacher-7d60c1dd.md)
 - [Algorithms (Erickson, 2019)](/software-engineering/sources/algorithms-erickson.md)
 - [Algorithms and Complexity (Wilf, 1994)](/software-engineering/sources/algorithms-and-complexity-wilf.md)
@@ -217,6 +235,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [macOS - Simple Window Management with Raycast](/software-engineering/sources/macos-simple-window-management-with-raycast-aca.md)
 - [Matt Pocock’s Agentic Engineering Workflow (just copy him)](/software-engineering/sources/matt-pocock-s-agentic-engineering-workflow-just-copy-him-nQwJVHCtDDY.md)
 - [Matters Computational: Ideas, Algorithms, Source Code (Joerg Arndt)](/software-engineering/sources/matters-computational.md)
+- [Naked Objects (PhD Thesis, Pawson 2004)](/software-engineering/sources/naked-objects.md)
 - [Obsidian Markdown Made Ridiculously Simple](/software-engineering/sources/obsidian-markdown-made-ridiculously-simple-e.md)
 - [ostep operating systems three easy pieces](/software-engineering/sources/ostep-operating-systems-three-easy-pieces.md)
 - [Practical File System Design: The Be File System (Giampaolo, 1999)](/software-engineering/sources/practical-file-system-design.md)

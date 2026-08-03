@@ -138,9 +138,11 @@ The engineering substrate for building ML and software systems: how the developm
 - [Environment Promotion (dev → acc → prd)](/mlops/environment-promotion.md)
 
 <details>
-<summary>Source summaries (104)</summary>
+<summary>Source summaries (107)</summary>
 
+- ["12 Best DevOps Testing Tools for 2026 [Comparison List]"](/mlops/sources/12-best-devops-testing-tools-for-2026-comparison-list-c2c4844c.md)
 - ["29%+ warehouse savings: How the dbt Fusion engine drives cost efficiency | dbt Labs"](/mlops/sources/29-warehouse-savings-how-the-dbt-fusion-engine-drives-cost-e-121b247d.md)
+- ["7 MLOps Best Practices: Implementation, Challenges & Tools"](/mlops/sources/7-mlops-best-practices-implementation-challenges-tools-ce879e43.md)
 - ["AL 005: 60% Growth in 60 Days? How?!"](/mlops/sources/al-005-60-growth-in-60-days-how-150a587c.md)
 - ["Alternative data for hedge funds: from web to signals"](/mlops/sources/alternative-data-for-hedge-funds-from-web-to-signals-3f1968e5.md)
 - ["Announcing the Monetization Gateway: charge for any resource behind Cloudflare via x402"](/mlops/sources/announcing-the-monetization-gateway-charge-for-any-resource--88fda6db.md)
@@ -165,6 +167,7 @@ The engineering substrate for building ML and software systems: how the developm
 - ["The Mom Who Mastered Claude: How To Build An Audience That Buys Using Claude Code (Step by Step!)"](/mlops/sources/the-mom-who-mastered-claude-how-to-build-an-audience-that-bu-DnZ53NQXfuA.md)
 - ["Web Scraping 101: A Million Dollar Project Idea"](/mlops/sources/web-scraping-101-a-million-dollar-project-idea-DJnH0jR8y5Q.md)
 - [100% REMOTE Boring Businesses (That Almost Never Fail)](/mlops/sources/100-remote-boring-businesses-that-almost-never-fail-EnSJN9zl-yA.md)
+- [5 GTM Skills Your AI Agent Should Be Running by Now](/mlops/sources/5-gtm-skills-your-ai-agent-should-be-running-by-now-487c0816.md)
 - [5 powerful scrapers to add to your SEO tool kit](/mlops/sources/5-powerful-scrapers-to-add-to-your-seo-tool-kit-906d6a15.md)
 - [5% ownership is probably the most common final stake for VC funded startup founders — @levelsio (Pieter Levels)](/mlops/sources/5-ownership-is-probably-the-most-common-final-stake-for-vc-f-73fd6897.md)
 - [A broken DNSSEC rollover took down .AL. Now 1.1.1.1 tells you when validation is bypassed](/mlops/sources/a-broken-dnssec-rollover-took-down-al-now-1-1-1-1-tells-you--a9e7f215.md)
