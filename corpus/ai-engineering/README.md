@@ -439,7 +439,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Tool Calling & Context Engineering: How They Interlock](/ai-engineering/tool-calling-and-context-engineering.md)
 
 <details>
-<summary>Source summaries (702)</summary>
+<summary>Source summaries (706)</summary>
 
 - ["2024 State of Analytics Engineering, crafted by dbt Labs | dbt Labs"](/ai-engineering/sources/2024-state-of-analytics-engineering-crafted-by-dbt-labs-dbt--cb342df0.md)
 - ["9 AI Concepts Explained: Tokenization, RAG, RLHF, LoRA & More"](/ai-engineering/sources/9-ai-concepts-explained-tokenization-rag-rlhf-lora-more-a.md)
@@ -692,6 +692,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [8 best AI production issue detection and alerting tools in 2026 - Confident AI](/ai-engineering/sources/8-best-ai-production-issue-detection-and-alerting-tools-in-2-2bc5dd54.md)
 - [8 best evaluation tools for conversational AI in 2026 - Confident AI](/ai-engineering/sources/8-best-evaluation-tools-for-conversational-ai-in-2026-confid-955a4a15.md)
 - [8 best LLM observability tools for enterprise in 2026 - Confident AI](/ai-engineering/sources/8-best-llm-observability-tools-for-enterprise-in-2026-confid-c668c4e3.md)
+- [8 best LLM observability tools for startups in 2026 - Confident AI](/ai-engineering/sources/8-best-llm-observability-tools-for-startups-in-2026-confiden-17750fb3.md)
 - [8.9 Million AI Users](/ai-engineering/sources/8-9-million-ai-users-f79fd178.md)
 - [9 Best AI Quality Platforms for Human Annotators and Subject Matter Experts (2026) - Confident AI](/ai-engineering/sources/9-best-ai-quality-platforms-for-human-annotators-and-subject-e7f714d0.md)
 - [9 Claude Code Plugins to Build 10x Faster](/ai-engineering/sources/9-claude-code-plugins-to-build-10x-faster-sBF3UumkL4Y.md)
@@ -727,6 +728,8 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Accelerating analytics with AI | dbt Summit](/ai-engineering/sources/accelerating-analytics-with-ai-dbt-summit-e02cb4fb.md)
 - [Accelerating Transformers Fine-Tuning with NVIDIA NeMo AutoModel](/ai-engineering/sources/accelerating-transformers-fine-tuning-with-nvidia-nemo-autom-9662972e.md)
 - [Adding MCP Tools to Reachy Mini](/ai-engineering/sources/adding-mcp-tools-to-reachy-mini-79972631.md)
+- [Advancing the price-performance frontier with GPT‑5.6](/ai-engineering/sources/advancing-the-price-performance-frontier-with-gpt-5-6-cc6d8492.md)
+- [Aftermarket Harnesses](/ai-engineering/sources/aftermarket-harnesses-7d49adb4.md)
 - [Agent experience is the new developer experience](/ai-engineering/sources/agent-experience-is-the-new-developer-experience-91fcb5f2.md)
 - [Agent Productivity Is Creating a Quality Debt](/ai-engineering/sources/agent-productivity-is-creating-a-quality-debt-ba9ac32d.md)
 - [Agentic Autonomy Levels](/ai-engineering/sources/agentic-autonomy-levels-89f2d572.md)
@@ -769,6 +772,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [AI Engineering - Specifications as Code Sean Grove OpenAI](/ai-engineering/sources/ai-engineering-specifications-as-code-sean-grove-openai-ea.md)
 - [AI Engineering Productivity is Anything But Normal](/ai-engineering/sources/ai-engineering-productivity-is-anything-but-normal-2b858881.md)
 - [AI Fixed My Code Before I Could](/ai-engineering/sources/ai-fixed-my-code-before-i-could-b3bbc1cf.md)
+- [AI Governance and Audit Trails for Enterprise LLM Observability - Confident AI](/ai-engineering/sources/ai-governance-and-audit-trails-for-enterprise-llm-observabil-e25214b9.md)
 - [AI Has Learned How to Capture Our Emotional Metadata](/ai-engineering/sources/ai-has-learned-how-to-capture-our-emotional-metadata-f22254bd.md)
 - [AI Is Forcing Us To Write Good Code](/ai-engineering/sources/ai-is-forcing-us-to-write-good-code-cde.md)
 - [AI Isn’t Replacing Curious Developers | It’s Changing Who Wins - Confessions of a Data Guy](/ai-engineering/sources/ai-isn-t-replacing-curious-developers-it-s-changing-who-wins-8ed1577a.md)

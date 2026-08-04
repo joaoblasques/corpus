@@ -6,7 +6,7 @@ tags:
   - corpus/software-engineering
   - hub
 created: 2026-05-07
-updated: 2026-08-03
+updated: 2026-08-04
 ---
 
 # Software Engineering
@@ -16,6 +16,7 @@ Domain covering software engineering practice from foundational CS through deplo
 ## Pages
 
 ### Entities
+- [Stephen Davies](/software-engineering/stephen-davies.md) — entity · stub · CS professor at UMW; author of A Cool Brisk Walk Through Discrete Mathematics (v2.2.2, CC BY-SA)
 - [Robert S. Boyer](/software-engineering/robert-s-boyer.md) — entity · stub · co-author of A Computational Logic (1979); SRI International; co-developer of Boyer-Moore theorem prover and string search algorithm
 - [J Strother Moore](/software-engineering/j-strother-moore.md) — entity · stub · co-author of A Computational Logic (1979); SRI International; co-developer of Boyer-Moore prover; later co-developed ACL2
 - [Richard Pawson](/software-engineering/richard-pawson.md) — entity · draft · creator of the Naked Objects approach; PhD Trinity College Dublin 2004; advisor to Irish DSFA Naked Object Architecture
@@ -32,6 +33,15 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Bun](/software-engineering/bun.md) — entity · stub · all-in-one JS/TS toolkit; runtime + package manager + test runner + bundler; Node.js compatible
 
 ### Concepts
+- [Discrete Mathematics](/software-engineering/discrete-mathematics.md) — concept · draft · branch covering sets, logic, probability, graphs, counting, number systems, and proof — foundational CS
+- [Set Theory](/software-engineering/set-theory.md) — concept · draft · sets, cardinality, operations (∪∩−×), De Morgan's laws, subsets; Cantor's infinity results; foundation of all modern math
+- [Relations and Functions](/software-engineering/relations-and-functions.md) — concept · draft · relations as subsets of Cartesian products; injection/surjection/bijection and their CS implications
+- [Discrete Probability](/software-engineering/discrete-probability.md) — concept · draft · sample spaces, conditional probability, independence, Bayes' theorem; foundation of Bayesian inference and A/B testing
+- [Graph Theory](/software-engineering/graph-theory.md) — concept · draft · vertices/edges, trees, spanning trees, Prim's MST; MST ≠ shortest paths between pairs
+- [Combinatorics](/software-engineering/combinatorics.md) — concept · draft · multiplication principle, permutations, combinations, complement trick; key for security proofs and algorithm analysis
+- [Number Systems](/software-engineering/number-systems.md) — concept · draft · binary/octal/hex/decimal; positional notation; 1 hex digit = 4 bits; hex used everywhere low-level
+- [Propositional Logic](/software-engineering/propositional-logic.md) — concept · draft · ∧∨¬⇒⊕ operators, truth tables, De Morgan's equivalences; foundation of boolean algebra and SAT
+- [Mathematical Proof](/software-engineering/mathematical-proof.md) — concept · draft · direct proof, contradiction, induction; classic √2 irrational proof; CS relevance for loop invariants and impossibility results
 - [Terminal / CLI Tools](/software-engineering/terminal-cli-tools.md) — concept · draft · Mac terminal keyboard shortcuts; core bash commands; navigation, history, process control
 - [Microservices](/software-engineering/microservices.md) — concept · draft · architectural style decomposing systems into small independent services; pitfalls, granularity, data management
 - [Distributed Systems Fallacies](/software-engineering/distributed-systems-fallacies.md) — concept · draft · eight fallacies; sourced failure modes for network reliability, latency, topology change, and security; fallacies 3/6/7/8 awaiting dedicated source
@@ -80,6 +90,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Formal Verification and Mechanical Theorem Proving](/software-engineering/formal-verification.md) — concept · draft · Boyer-Moore theorem prover; induction from recursion; shell principle; rewrite-rule waterfall; compiler/string-search/prime-factorization proofs; NQTHM; ACL2
 
 ### Sources
+- [A Cool Brisk Walk Through Discrete Mathematics (Davies, v2.2.2)](/software-engineering/sources/a-cool-brisk-walk-through-discrete-mathematics.md) — source · draft · CS-oriented discrete math tour; 254pp, 9 chapters, CC BY-SA 4.0; all 9 parts ingested
 - [OSTEP: Operating Systems — Three Easy Pieces (Arpaci-Dusseau, 2023)](/software-engineering/sources/ostep-operating-systems-three-easy-pieces.md) — source · draft · 47-chapter free textbook; virtualization, concurrency, persistence, security; xv6 lab companion
 - [Designing Distributed Systems (Burns, O'Reilly, 2018)](/software-engineering/sources/burns-designing-distributed-systems.md) — source · draft · pattern catalog for container-based distributed systems: sidecar/ambassador/adapter (single-node), replicated/sharded/scatter-gather (multi-node), batch patterns
 - [The Software Engineer's Guidebook](/software-engineering/sources/software-engineers-guidebook.md) — source · draft · Gergely Orosz; full career arc from new dev to staff; six-part reference book
@@ -112,18 +123,21 @@ Domain covering software engineering practice from foundational CS through deplo
 
 ## Pages in this domain
 
-### Concepts (33)
+### Concepts (42)
 - [AI Risk Architecture](/software-engineering/ai-risk-architecture.md)
 - [Algorithms (Strategies, Not Tricks)](/software-engineering/algorithms.md)
 - [CAP Theorem](/software-engineering/cap-theorem.md)
 - [CI/CD, Progressive Delivery, and GitOps](/software-engineering/ci-cd.md)
 - [Cognitive Debt and Cognitive Surrender](/software-engineering/cognitive-debt.md)
+- [Combinatorics](/software-engineering/combinatorics.md)
 - [Compiler-Warning Management (Git's `false_but_the_compiler_does_not_know_it_`)](/software-engineering/compiler-warning-management.md)
 - [Complexity Theory and NP-Completeness](/software-engineering/complexity-theory.md)
 - [Concurrency and Threads](/software-engineering/concurrency-and-threads.md)
 - [Container Patterns (Single-Node)](/software-engineering/container-patterns.md)
 - [CPU Scheduling](/software-engineering/cpu-scheduling.md)
 - [Data Structures and Big O Notation](/software-engineering/data-structures.md)
+- [Discrete Mathematics](/software-engineering/discrete-mathematics.md)
+- [Discrete Probability](/software-engineering/discrete-probability.md)
 - [Distributed File Systems](/software-engineering/distributed-file-systems.md)
 - [Distributed Systems Fallacies](/software-engineering/distributed-systems-fallacies.md)
 - [Engineering Craft](/software-engineering/engineering-craft.md)
@@ -131,14 +145,20 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Formal Verification and Mechanical Theorem Proving](/software-engineering/formal-verification.md)
 - [Functional and Persistent Data Structures](/software-engineering/functional-persistent-data-structures.md)
 - [Go Programming Language](/software-engineering/go-programming-language.md)
+- [Graph Theory](/software-engineering/graph-theory.md)
 - [JavaScript Fundamentals](/software-engineering/javascript-fundamentals.md)
 - [Local-First Sync Architecture](/software-engineering/local-first-sync-architecture.md)
+- [Mathematical Proof](/software-engineering/mathematical-proof.md)
 - [Microservices](/software-engineering/microservices.md)
 - [Model-View-Controller (MVC)](/software-engineering/model-view-controller.md)
 - [Naked Objects](/software-engineering/naked-objects.md)
+- [Number Systems](/software-engineering/number-systems.md)
 - [Operating Systems Fundamentals](/software-engineering/operating-systems.md)
 - [OS Security](/software-engineering/os-security.md)
+- [Propositional Logic](/software-engineering/propositional-logic.md)
+- [Relations and Functions](/software-engineering/relations-and-functions.md)
 - [Scatter/Gather Pattern](/software-engineering/scatter-gather-pattern.md)
+- [Set Theory](/software-engineering/set-theory.md)
 - [signal processing algorithms](/software-engineering/signal-processing-algorithms.md)
 - [Software Design Principles](/software-engineering/software-design-principles.md)
 - [System Design Fundamentals](/software-engineering/system-design-fundamentals.md)
@@ -147,7 +167,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Virtual Machine Monitors (VMMs / Hypervisors)](/software-engineering/virtual-machine-monitors.md)
 - [Virtual Memory](/software-engineering/virtual-memory.md)
 
-### Entities (14)
+### Entities (15)
 - [Bun](/software-engineering/bun.md)
 - [FastAPI](/software-engineering/fastapi.md)
 - [Git Basics](/software-engineering/git-basics.md)
@@ -158,6 +178,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [React](/software-engineering/react.md)
 - [Richard Pawson](/software-engineering/richard-pawson.md)
 - [Robert S. Boyer](/software-engineering/robert-s-boyer.md)
+- [Stephen Davies](/software-engineering/stephen-davies.md)
 - [Trygve Reenskaug](/software-engineering/trygve-reenskaug.md)
 - [Usertour](/software-engineering/usertour.md)
 - [Vim](/software-engineering/vim.md)
@@ -168,7 +189,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Simplicity as an Engineering Constraint in the AI Age](/software-engineering/simplicity-as-engineering-constraint.md)
 
 <details>
-<summary>Source summaries (83)</summary>
+<summary>Source summaries (84)</summary>
 
 - ["2024-05-25-15-54-25 - move-base-up by josephmachado · Pull Request #17 · josephmachado/simple_dbt_project"](/software-engineering/sources/2024-05-25-15-54-25-move-base-up-by-josephmachado-pull-reque-ee.md)
 - ["A Guide to Multi-Tenancy: Benefits and Challenges"](/software-engineering/sources/a-guide-to-multi-tenancy-benefits-and-challenges-e55e9184.md)
@@ -185,6 +206,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [6 Software Engineering Challenges & Ways To Overcome Them](/software-engineering/sources/6-software-engineering-challenges-ways-to-overcome-them-7af11149.md)
 - [7 Productivity Tips to Boost Developer Efficiency in 2026](/software-engineering/sources/7-productivity-tips-to-boost-developer-efficiency-in-2026-36d311c8.md)
 - [A Computational Logic (Boyer & Moore, 1979)](/software-engineering/sources/a-computational-logic-1979.md)
+- [A Cool Brisk Walk Through Discrete Mathematics (Davies, v2.2.2)](/software-engineering/sources/a-cool-brisk-walk-through-discrete-mathematics.md)
 - [A quote from Armin Ronacher](/software-engineering/sources/a-quote-from-armin-ronacher-7d60c1dd.md)
 - [Algorithms (Erickson, 2019)](/software-engineering/sources/algorithms-erickson.md)
 - [Algorithms and Complexity (Wilf, 1994)](/software-engineering/sources/algorithms-and-complexity-wilf.md)

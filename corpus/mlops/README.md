@@ -138,11 +138,12 @@ The engineering substrate for building ML and software systems: how the developm
 - [Environment Promotion (dev → acc → prd)](/mlops/environment-promotion.md)
 
 <details>
-<summary>Source summaries (107)</summary>
+<summary>Source summaries (109)</summary>
 
 - ["12 Best DevOps Testing Tools for 2026 [Comparison List]"](/mlops/sources/12-best-devops-testing-tools-for-2026-comparison-list-c2c4844c.md)
 - ["29%+ warehouse savings: How the dbt Fusion engine drives cost efficiency | dbt Labs"](/mlops/sources/29-warehouse-savings-how-the-dbt-fusion-engine-drives-cost-e-121b247d.md)
 - ["7 MLOps Best Practices: Implementation, Challenges & Tools"](/mlops/sources/7-mlops-best-practices-implementation-challenges-tools-ce879e43.md)
+- ["Agents for production lines: Trusted decisions in real time"](/mlops/sources/agents-for-production-lines-trusted-decisions-in-real-time-a1c3f089.md)
 - ["AL 005: 60% Growth in 60 Days? How?!"](/mlops/sources/al-005-60-growth-in-60-days-how-150a587c.md)
 - ["Alternative data for hedge funds: from web to signals"](/mlops/sources/alternative-data-for-hedge-funds-from-web-to-signals-3f1968e5.md)
 - ["Announcing the Monetization Gateway: charge for any resource behind Cloudflare via x402"](/mlops/sources/announcing-the-monetization-gateway-charge-for-any-resource--88fda6db.md)
@@ -183,6 +184,7 @@ The engineering substrate for building ML and software systems: how the developm
 - [Agent Bricks and the Commoditization of AI Systems - Confessions of a Data Guy](/mlops/sources/agent-bricks-and-the-commoditization-of-ai-systems-confessio-4ec6fbca.md)
 - [Agentic AI Data Infrastructure | lakeFS](/mlops/sources/agentic-ai-data-infrastructure-lakefs-139c0a67.md)
 - [Agentic Data Engineering Is Here — But Can It Close the Loop?](/mlops/sources/agentic-data-engineering-is-here-but-can-it-close-the-loop-b94b0b55.md)
+- [Agentic media buying cannot scale without the right foundation. See how buyers and sellers get there on Databricks.](/mlops/sources/agentic-media-buying-cannot-scale-without-the-right-foundati-f609ca41.md)
 - [AI agent versioned filesystem with E2B and lakeFS](/mlops/sources/ai-agent-versioned-filesystem-with-e2b-and-lakefs-5b56487a.md)
 - [AI Sped Up Coding Faster Than It Sped Up Delivery](/mlops/sources/ai-sped-up-coding-faster-than-it-sped-up-delivery-b8e50c89.md)
 - [Apache Iceberg and the catalog layer (w/ Russell Spitzer)](/mlops/sources/apache-iceberg-and-the-catalog-layer-w-russell-spitzer-b1237b12.md)

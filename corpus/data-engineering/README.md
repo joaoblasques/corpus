@@ -221,7 +221,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [The Portfolio Project That Lands a DE Role](/data-engineering/portfolio-project-that-lands-a-de-role.md)
 
 <details>
-<summary>Source summaries (222)</summary>
+<summary>Source summaries (223)</summary>
 
 - ["A dbt \"logic mesh\" with packages: standard model and metrics across 25 autonomous organizations | dbt Summit"](/data-engineering/sources/a-dbt-logic-mesh-with-packages-standard-model-and-metrics-ac-bf162a97.md)
 - ["Academic → CTO: What Actually Matters in Data (Matthew Housley) - Confessions of a Data Guy"](/data-engineering/sources/academic-cto-what-actually-matters-in-data-matthew-housley-c-e9eae58c.md)
@@ -303,6 +303,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [A 9-minute simple explanation of Spark Shuffle](/data-engineering/sources/a-9-minute-simple-explanation-of-spark-shuffle-ffe.md)
 - [A Response to Our Reader Survey](/data-engineering/sources/a-response-to-our-reader-survey-b371c77b.md)
 - [Accelerating dbt with dbt v2 | dbt Summit](/data-engineering/sources/accelerating-dbt-with-dbt-v2-dbt-summit-8afb6363.md)
+- [Agentic Data Engineering Is Here — But Can It Close the Loop? - Confessions of a Data Guy](/data-engineering/sources/agentic-data-engineering-is-here-but-can-it-close-the-loop-c-e22f3250.md)
 - [AI Is Changing Data Engineering Fast](/data-engineering/sources/ai-is-changing-data-engineering-fast-82a12a3f.md)
 - [AI is Changing Data Engineering Fast! - Confessions of a Data Guy](/data-engineering/sources/ai-is-changing-data-engineering-fast-confessions-of-a-data-g-2c6e6401.md)
 - [AI Tools in Data Engineering — Where to Delegate and What to Own](/data-engineering/sources/ai-tools-in-data-engineering-where-to-delegate-and-what-to-o-bdae.md)
