@@ -16,6 +16,7 @@ updated: 2026-07-05
 provisional: false
 url: 
 origin: obsidian
+consolidated_into: ai-engineering/gemini-cli.md
 ---
 
 # AI Tools - Gemini CLI Web UI for Browser Access

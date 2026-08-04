@@ -3,7 +3,7 @@ type: entity
 domain: ai-engineering
 status: draft
 confidence: 0.8
-last_confirmed: 2026-07-12
+last_confirmed: 2026-08-04
 sources:
   - path: raw/email/email-2025-04-17-our-most-powerful-reasoning-models-gpt-4-1-codex-cli-and-new.md
     channel: email
@@ -11,6 +11,12 @@ sources:
   - path: raw/web/web-a-quote-from-openai-232e7d75.md
     channel: web
     ingested_at: 2026-07-02
+  - path: raw/web/web-a-quote-from-sam-altman-b5d7973c.md
+    channel: web
+    ingested_at: 2026-07-21
+  - path: raw/web/web-advancing-the-price-performance-frontier-with-gpt5-6-cc6d8492.md
+    channel: web
+    ingested_at: 2026-08-04
   - path: raw/web/web-ainews-openai-launches-gpt-5-6-sol-terra-luna-codex-becomes-f7ffe7c7.md
     channel: web
     ingested_at: 2026-07-11
@@ -45,6 +51,8 @@ aliases:
   - ChatGPT Atlas
 consolidates:
   - corpus/ai-engineering/sources/a-quote-from-openai-232e7d75.md
+  - corpus/ai-engineering/sources/a-quote-from-sam-altman-b5d7973c.md
+  - corpus/ai-engineering/sources/advancing-the-price-performance-frontier-with-gpt-5-6-cc6d8492.md
   - corpus/ai-engineering/sources/ainews-not-much-happened-today-41160de5.md
   - corpus/ai-engineering/sources/ainews-openai-launches-gpt-5-6-sol-terra-luna-codex-becomes--f7ffe7c7.md
   - corpus/ai-engineering/sources/andrej-karpathy-aa.md
@@ -55,7 +63,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-06-19
-updated: 2026-07-14
+updated: 2026-08-04
 ---
 
 # OpenAI
@@ -94,6 +102,7 @@ The **Evals API** lets developers programmatically define tests, automate evalua
 
 - OpenAI began a **limited preview of the GPT-5.6 series**, comprising **Sol**, **Terra**, and **Luna** [^src2]. The three are described as model **sizes**, priced per 1M tokens [^src2]. GPT-5.6 is characterised as a **frontier model** with improved performance and efficiency over its predecessors [^src4].
 - **Competitive framing.** The series is reported to offer competitive performance, pricing, and features — among them **predictable prompt caching** [^src2]. On benchmarks, GPT-5.6 is reported to outperform previous models [^src4], though the strength is uneven: it appears **strongest in agentic coding, presentation, and science tasks, but not unambiguously dominant everywhere** [^src3].
+- **Price-performance drop (late July 2026).** OpenAI announced a **significant price drop for GPT-5.6 Terra and Luna**, attributing it to efficiency work on **Sol that reduced serving costs by 20%** [^src9]. The reduction is positioned explicitly against rival budget tiers: **Luna is now cheaper than Google's Gemini 3.1 Flash-Lite and Anthropic's Claude Haiku 4.5** [^src9] — the same low-cost segment contrasted in [Claude Model Lineup](/ai-engineering/claude-models.md).
 - **Safety criticism.** Critics raised concerns about the model's **safety and security** [^src4]. The corpus has no resolution of that dispute; the two AINews items are the only sources here that touch it.
 
 ### Model/compute ladder and the Auto-routing stumble
@@ -111,6 +120,7 @@ Alongside GPT-5.6, OpenAI introduced **ChatGPT Work**, a **desktop app that merg
 ## Positioning against other labs
 
 - **Chinese open-weight models as a self-hosting alternative.** One practitioner account compares **GLM 5.2**, a Chinese AI model, against OpenAI and Anthropic across **coding, DevOps, and GPU programming**, weighing strengths and weaknesses [^src6]. The framing is that self-hosting is a live alternative to OpenAI's API rather than a strictly inferior one — see [Local LLM](/ai-engineering/localai.md) for the general trade-off.
+- **Open-source strategy as competitive lever.** A surfaced internal-strategy discussion attributed to Sam Altman frames OpenAI's consideration of **releasing a locally-run model similar to GPT-3** — with the stated goal of **discouraging others from releasing powerful models and making it harder for new efforts to get funded**, seen as a response to potential competitors like **Stability** [^src10]. The framing casts an open-source release as an offensive move against rival funding rather than a purely altruistic one — a contrast to the practitioner case for self-hosting Chinese open-weight models above [^src6].
 - **Reflective AI.** OpenAI appears among the labs associated with **reflective AI** — systems that **evaluate and improve their own outputs**, improving accuracy **without requiring additional training data**, positioned as foundational to the next generation of autonomous agents [^src7]. This is the same judgement the eval layer applies externally; compare the [Evals API](#evals-api) [^src1] and [Agent Evaluation](/ai-engineering/agent-evaluation.md).
 
 ## People
@@ -137,3 +147,5 @@ Alongside GPT-5.6, OpenAI introduced **ChatGPT Work**, a **desktop app that merg
 [^src6]: ["I spent $50,000 self-hosting AI models. You should too." - 0xSero](../../raw/youtube/youtube-ImPESBftwr8-i-spent-50-000-self-hosting-ai-models-you-should-too-0xsero.md) — David Ondrej, June 2026
 [^src7]: [Reflective AI - Systems That Learn From Their Mistakes](../../raw/notes/notes-03-resources-articles-reflective-ai-systems-that-learn-from-their-mistakes.md) — Alex Wang
 [^src8]: [Andrej Karpathy](../../raw/web/web-andrej-karpathy.md) — karpathy.ai
+[^src9]: [Advancing the price-performance frontier with GPT‑5.6](../../raw/web/web-advancing-the-price-performance-frontier-with-gpt5-6-cc6d8492.md) — Simon Willison, July 2026
+[^src10]: [A quote from Sam Altman](../../raw/web/web-a-quote-from-sam-altman-b5d7973c.md) — Simon Willison, July 2026

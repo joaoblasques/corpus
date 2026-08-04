@@ -16,6 +16,7 @@ updated: 2026-08-04
 provisional: false
 url: https://simonwillison.net/2026/Jul/30/luna-price-drop/#atom-everything
 origin: obsidian-list
+consolidated_into: ai-engineering/openai.md
 ---
 
 # Advancing the price-performance frontier with GPT‑5.6

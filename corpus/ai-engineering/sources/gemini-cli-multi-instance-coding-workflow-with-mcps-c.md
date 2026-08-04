@@ -16,6 +16,7 @@ updated: 2026-07-10
 provisional: false
 url: 
 origin: obsidian
+consolidated_into: ai-engineering/gemini-cli.md
 ---
 
 # Gemini CLI - Multi-Instance Coding Workflow with MCPs

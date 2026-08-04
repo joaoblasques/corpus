@@ -16,6 +16,7 @@ updated: 2026-07-21
 provisional: false
 url: https://simonwillison.net/2026/Jul/20/sam-altman/#atom-everything
 origin: obsidian-list
+consolidated_into: ai-engineering/openai.md
 ---
 
 # A quote from Sam Altman

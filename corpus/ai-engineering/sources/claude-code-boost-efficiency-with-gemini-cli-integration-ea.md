@@ -16,6 +16,7 @@ updated: 2026-07-06
 provisional: false
 url: 
 origin: obsidian
+consolidated_into: ai-engineering/gemini-cli.md
 ---
 
 # Claude Code - Boost Efficiency with Gemini CLI Integration

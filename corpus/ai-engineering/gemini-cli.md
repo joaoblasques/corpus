@@ -12,6 +12,30 @@ sources:
   - path: raw/github/github-jamubc-gemini-mcp-tool.md
     channel: github
     ingested_at: 2026-06-25
+  - path: raw/notes/notes-03-resources-study-notes-ai-tools-claude-code-and-gemini-cli-in-the-terminal-networkc.md
+    channel: notes
+    ingested_at: 2026-07-05
+  - path: raw/notes/notes-03-resources-study-notes-ai-tools-gemini-cli-web-ui-for-browser-access.md
+    channel: notes
+    ingested_at: 2026-07-05
+  - path: raw/notes/notes-03-resources-study-notes-claude-code-boost-efficiency-with-gemini-cli-integration.md
+    channel: notes
+    ingested_at: 2026-07-06
+  - path: raw/notes/notes-03-resources-study-notes-gemini-cli-deep-dive-with-mcps.md
+    channel: notes
+    ingested_at: 2026-07-10
+  - path: raw/notes/notes-03-resources-study-notes-gemini-cli-free-coding-agent-complete-guide.md
+    channel: notes
+    ingested_at: 2026-07-10
+  - path: raw/notes/notes-03-resources-study-notes-gemini-cli-multi-instance-coding-workflow-with-mcps.md
+    channel: notes
+    ingested_at: 2026-07-10
+  - path: raw/notes/notes-03-resources-articles-gemini-cli-tips-tricks-agentic-coding.md
+    channel: notes
+    ingested_at: 2026-07-19
+  - path: raw/notes/notes-03-resources-articles-superpowers-agentic-skills-framework-tdd-workflow.md
+    channel: notes
+    ingested_at: 2026-07-20
 aliases:
   - Gemini CLI
   - gemini-cli
@@ -22,12 +46,12 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-06-25
-updated: 2026-06-25
+updated: 2026-08-04
 ---
 
 # Gemini CLI
 
-**TL;DR.** Gemini CLI is Google's open-source agentic coding CLI — the Gemini counterpart to Claude Code. It uses `GEMINI.md` as its persistent context file (analogous to `CLAUDE.md`), supports custom slash commands, MCP server extension, memory recall, checkpointing/restore, and a headless/scripting mode. The Addy Osmani tip collection (2,382★) documents ~30 power-user patterns [^src1].
+**TL;DR.** Gemini CLI is Google's open-source agentic coding CLI — the Gemini counterpart to Claude Code. It uses `GEMINI.md` as its persistent context file (analogous to `CLAUDE.md`), supports custom slash commands, MCP server extension, memory recall, checkpointing/restore, and a headless/scripting mode. The Addy Osmani tip collection (2,382★) documents ~30 power-user patterns [^src1]; a companion article-length guide independently surveys the same ~30 agentic-coding tips, covering setup, authentication, persistent context, custom slash commands, and CI/CD integration [^src11].
 
 ## Core concepts
 
@@ -61,6 +85,12 @@ Gemini CLI supports MCP servers in `~/.gemini/mcp.json` (user-level) or `.gemini
 
 Tool approval: Gemini CLI prompts for tool approval on first use in a session; auto-approve is configurable per server.
 
+A deep-dive walkthrough demonstrates the practical MCP surface across three scenarios: building a Next.js chat app, a DuckDuckGo search MCP, and HuggingFace + Context7 MCPs — with the takeaway that the combination of built-in tools, the DuckDuckGo MCP, and Context7 MCPs covers most development needs [^src4]. Gemini CLI also ships built-in Google Search integration as a first-class tool for grounding [^src7].
+
+### Interfaces beyond the terminal
+
+Gemini CLI is not terminal-only. A **Web UI** provides a browser-based interface accessible from any browser, letting users manage projects, select models, and execute tasks without terminal comfort [^src5]. The CLI's own strengths derive from the terminal model: persistent context across a session and direct file-system access are cited as its key productivity advantages, with WSL recommended for Windows users [^src6].
+
 ## Key tips (30 documented by Addy Osmani)
 
 ### Context and memory
@@ -92,6 +122,16 @@ Tool approval: Gemini CLI prompts for tool approval on first use in a session; a
 - Gemini CLI ships an official GitHub Action (`google-gemini/gemini-cli-action`) for CI integration [^src1]
 - Trigger patterns: PR creation, push to branch, comment trigger (`/gemini review`)
 - Outputs: PR comments, file changes committed directly, or structured JSON for downstream steps
+
+## Capability profile and workflows
+
+### Strengths and weaknesses
+
+As a free coding agent, Gemini CLI **excels at adding features and making changes to existing codebases** but **struggles to build new projects from scratch** [^src7]. Its interactive mode drives AI-driven task development against an existing repo [^src7].
+
+### Multi-instance parallelism
+
+Multiple Gemini CLI instances can be run **in parallel**, each with a separate context, for concurrent coding workflows with MCP integration [^src8]. Practical observations from running instances in parallel include **model throttling behavior on Gemini 2.5 Pro**, which pushes workflows toward Gemini 2.5 Flash for the throttle-sensitive instances [^src8].
 
 ## Comparison with Claude Code
 
@@ -144,6 +184,14 @@ Functionally equivalent to the "merge as teaching event" pattern discussed in [S
 [^src1]: [addyosmani/gemini-cli-tips — ~30 power-user tips for Gemini CLI](../../raw/github/github-addyosmani-gemini-cli-tips.md) — Addy Osmani, GitHub ★2,382
 [^src2]: [eliasecchig/gemini-cli-git — Turn your Git repo into a self-improving autonomous agent](../../raw/github/github-eliasecchig-gemini-cli-git.md) — GitHub
 [^src3]: [jamubc/gemini-mcp-tool — MCP server enabling Claude to interact with Gemini CLI (★2,245)](../../raw/github/github-jamubc-gemini-mcp-tool.md) — GitHub; primary source for Antigravity CLI retirement announcement
+[^src4]: [Gemini CLI — Deep Dive with MCPs](/ai-engineering/sources/gemini-cli-deep-dive-with-mcps-c.md) — study note (obsidian quick-intake); Next.js chat app, DuckDuckGo MCP, HuggingFace + Context7 MCP walkthroughs
+[^src5]: [AI Tools — Gemini CLI Web UI for Browser Access](/ai-engineering/sources/ai-tools-gemini-cli-web-ui-for-browser-access-acce.md) — study note (obsidian quick-intake)
+[^src6]: [AI Tools — Claude Code and Gemini CLI in the Terminal (NetworkChuck)](/ai-engineering/sources/ai-tools-claude-code-and-gemini-cli-in-the-terminal-networkc-ec.md) — study note (obsidian quick-intake)
+[^src7]: [Gemini CLI — Free Coding Agent Complete Guide](/ai-engineering/sources/gemini-cli-free-coding-agent-complete-guide-de.md) — study note (obsidian quick-intake)
+[^src8]: [Gemini CLI — Multi-Instance Coding Workflow with MCPs](/ai-engineering/sources/gemini-cli-multi-instance-coding-workflow-with-mcps-c.md) — study note (obsidian quick-intake)
+[^src9]: [Claude Code — Boost Efficiency with Gemini CLI Integration](/ai-engineering/sources/claude-code-boost-efficiency-with-gemini-cli-integration-ea.md) — study note (obsidian quick-intake)
+[^src10]: [Superpowers — Agentic Skills Framework for TDD-First Software Development](/ai-engineering/sources/superpowers-agentic-skills-framework-for-tdd-first-software--f.md) — article note (obsidian quick-intake)
+[^src11]: ["Gemini CLI: ~30 Tips for Agentic Coding in the Terminal"](/ai-engineering/sources/gemini-cli-30-tips-for-agentic-coding-in-the-terminal-cd.md) — article note (obsidian quick-intake)
 
 ## Gemini CLI retirement and Antigravity CLI successor
 
@@ -164,3 +212,9 @@ The `gemini-mcp-tool` (★2,245) is an MCP server that lets Claude Code delegate
 **Primary use case** [^src3]: large file analysis and full-codebase understanding — tasks where Gemini's 1M token window is a decisive advantage over Claude's smaller context in cost-sensitive situations. "A party of 3" — Claude + Gemini reasoning together on the same task.
 
 **Install** [^src3]: `npm install -g gemini-mcp-tool`, then add to Claude Code's MCP config. The tool auto-detects whether to use `gemini` or `agy` based on the installation date.
+
+**Sub-contractor pattern** [^src9]: the recommended integration pattern is to use Gemini CLI as a **sub-contractor for Claude Code** when a task exceeds Claude's context window — Claude delegates large-analysis / large-codebase-understanding work to Gemini, whose larger context window absorbs the full input, then hands results back. This reinforces the "party of 3" framing above from the tool's own docs [^src3].
+
+## Cross-tool frameworks
+
+Gemini CLI participates in the same agentic-skills ecosystem as other coding agents. **Superpowers** — an agentic skills framework and software-development methodology that guides agents through a deliberate professional workflow emphasizing YAGNI, DRY, and red/green TDD — is published on the Claude Code, Cursor, and **Gemini CLI** plugin marketplaces [^src10], making the same TDD-first workflow portable across all three. See [Agent Skills](/ai-engineering/agent-skills.md) for the underlying skills concept.

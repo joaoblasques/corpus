@@ -16,6 +16,7 @@ updated: 2026-07-20
 provisional: false
 url: 
 origin: obsidian
+consolidated_into: ai-engineering/gemini-cli.md
 ---
 
 # Superpowers — Agentic Skills Framework for TDD-First Software Development
