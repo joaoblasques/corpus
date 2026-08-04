@@ -114,7 +114,7 @@ Empirically, adding pyramid matching consistently improves over single-level BoW
 
 ## Naive Bayes classification on BoW
 
-Once images are represented as BoW histograms, any classifier can be applied. Naive Bayes offers a probabilistic interpretation.[^p5]
+Once images are represented as BoW histograms, any classifier can be applied. Naive Bayes offers a probabilistic interpretation.[^p5] It applies [Bayes' theorem and the conditional-independence assumption](/software-engineering/discrete-probability.md) from discrete probability to the histogram features.
 
 **Model**: assume each visual word occurrence is conditionally independent given the object class c. For histogram X where xi ∈ {0,1} (presence/absence of word i):
 

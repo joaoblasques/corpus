@@ -70,7 +70,7 @@ To prove a proposition P(n) for all natural numbers n ≥ n₀:
 - **Complexity lower bounds**: adversarial arguments often use contradiction
 - **Formal verification** and type safety proofs
 - **Impossibility results**: many distributed systems impossibility proofs (FLP, CAP) use contradiction
-- **Computability theory**: diagonalization (Cantor, Halting problem) is proof by contradiction
+- **Computability theory**: diagonalization (Cantor, Halting problem) is proof by contradiction — it applies Cantor's [Set Theory](/software-engineering/set-theory.md) argument that |N| < |R| to show some problems are undecidable
 
 See also: [Propositional Logic](/software-engineering/propositional-logic.md), [Discrete Mathematics](/software-engineering/discrete-mathematics.md), [Formal Verification and Mechanical Theorem Proving](/software-engineering/formal-verification.md).
 

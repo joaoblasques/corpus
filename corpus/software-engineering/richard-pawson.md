@@ -5,8 +5,8 @@ status: draft
 confidence: 0.85
 last_confirmed: 2026-08-03
 sources:
-  - raw/_inbox/pdf-naked-objects-part-01.md
-  - raw/_inbox/pdf-naked-objects-part-02.md
+  - raw/pdf/pdf-naked-objects-part-01.md
+  - raw/pdf/pdf-naked-objects-part-02.md
 aliases:
   - Richard Pawson
   - Pawson
@@ -46,8 +46,8 @@ updated: 2026-08-03
 - Supervised by Professor Vincent Wade (TCD); external examiner was [Trygve Reenskaug](/software-engineering/trygve-reenskaug.md) (MVC inventor)[^p01]
 - Co-founded nakedobjects.org with Robert Matthews[^p02]
 
-[^p01]: raw/_inbox/pdf-naked-objects-part-01.md — Pawson, R. "Naked Objects." PhD Thesis, Trinity College Dublin, June 2004. Foreword, Acknowledgements, Chapters 1–3.
-[^p02]: raw/_inbox/pdf-naked-objects-part-02.md — Pawson (2004), Chapter 3, pp. 25–27 (framework descriptions).
-[^p03]: raw/_inbox/pdf-naked-objects-part-03.md — Pawson (2004), Chapter 5, pp. 58–72 (design guidelines).
-[^p04]: raw/_inbox/pdf-naked-objects-part-04.md — Pawson (2004), Chapter 7, pp. 88–95 (CarServ).
-[^p06]: raw/_inbox/pdf-naked-objects-part-06.md — Pawson (2004), Bibliography, p. 125 (ref [84]).
+[^p01]: raw/pdf/pdf-naked-objects-part-01.md — Pawson, R. "Naked Objects." PhD Thesis, Trinity College Dublin, June 2004. Foreword, Acknowledgements, Chapters 1–3.
+[^p02]: raw/pdf/pdf-naked-objects-part-02.md — Pawson (2004), Chapter 3, pp. 25–27 (framework descriptions).
+[^p03]: raw/pdf/pdf-naked-objects-part-03.md — Pawson (2004), Chapter 5, pp. 58–72 (design guidelines).
+[^p04]: raw/pdf/pdf-naked-objects-part-04.md — Pawson (2004), Chapter 7, pp. 88–95 (CarServ).
+[^p06]: raw/pdf/pdf-naked-objects-part-06.md — Pawson (2004), Bibliography, p. 125 (ref [84]).

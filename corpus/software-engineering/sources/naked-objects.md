@@ -3,14 +3,14 @@ type: source
 domain: software-engineering
 status: draft
 sources:
-  - raw/_inbox/pdf-naked-objects-part-01.md
-  - raw/_inbox/pdf-naked-objects-part-02.md
-  - raw/_inbox/pdf-naked-objects-part-03.md
-  - raw/_inbox/pdf-naked-objects-part-04.md
-  - raw/_inbox/pdf-naked-objects-part-05.md
-  - raw/_inbox/pdf-naked-objects-part-06.md
-  - raw/_inbox/pdf-naked-objects-part-07.md
-  - raw/_inbox/pdf-naked-objects-part-08.md
+  - raw/pdf/pdf-naked-objects-part-01.md
+  - raw/pdf/pdf-naked-objects-part-02.md
+  - raw/pdf/pdf-naked-objects-part-03.md
+  - raw/pdf/pdf-naked-objects-part-04.md
+  - raw/pdf/pdf-naked-objects-part-05.md
+  - raw/pdf/pdf-naked-objects-part-06.md
+  - raw/pdf/pdf-naked-objects-part-07.md
+  - raw/pdf/pdf-naked-objects-part-08.md
 aliases:
   - Naked Objects thesis
   - Pawson PhD thesis
@@ -148,11 +148,11 @@ Same automotive dealership application implemented twice by the same developer (
 - Alan Kay on the auto-UI idea: "One of the original motivations for the models, views and controller idea (that, in my opinion, never got well done) was to be able to automatically produce a default graphical interface for any object."[^p05]
 - Firesmith on use-case controllers: "a single functional control object representing the logic of an individual use-case and several dumb entity objects controlled by the controller object"[^p03]
 
-[^p01]: raw/_inbox/pdf-naked-objects-part-01.md — Pawson, R. "Naked Objects." PhD Thesis, Trinity College Dublin, June 2004. Chapters 1–3 (pp. 9–27).
-[^p02]: raw/_inbox/pdf-naked-objects-part-02.md — Pawson (2004), Chapters 3–4 (pp. 26–50).
-[^p03]: raw/_inbox/pdf-naked-objects-part-03.md — Pawson (2004), Chapters 4–5 (pp. 50–72).
-[^p04]: raw/_inbox/pdf-naked-objects-part-04.md — Pawson (2004), Chapters 5–7 (pp. 72–95).
-[^p05]: raw/_inbox/pdf-naked-objects-part-05.md — Pawson (2004), Chapters 8–9 (pp. 96–120).
-[^p06]: raw/_inbox/pdf-naked-objects-part-06.md — Pawson (2004), Bibliography + Appendix I–II (pp. 121–141).
-[^p07]: raw/_inbox/pdf-naked-objects-part-07.md — Pawson (2004), Appendices III–V, surveys (pp. 142–186).
-[^p08]: raw/_inbox/pdf-naked-objects-part-08.md — Pawson (2004), Appendices VI–IX (pp. 187–223).
+[^p01]: raw/pdf/pdf-naked-objects-part-01.md — Pawson, R. "Naked Objects." PhD Thesis, Trinity College Dublin, June 2004. Chapters 1–3 (pp. 9–27).
+[^p02]: raw/pdf/pdf-naked-objects-part-02.md — Pawson (2004), Chapters 3–4 (pp. 26–50).
+[^p03]: raw/pdf/pdf-naked-objects-part-03.md — Pawson (2004), Chapters 4–5 (pp. 50–72).
+[^p04]: raw/pdf/pdf-naked-objects-part-04.md — Pawson (2004), Chapters 5–7 (pp. 72–95).
+[^p05]: raw/pdf/pdf-naked-objects-part-05.md — Pawson (2004), Chapters 8–9 (pp. 96–120).
+[^p06]: raw/pdf/pdf-naked-objects-part-06.md — Pawson (2004), Bibliography + Appendix I–II (pp. 121–141).
+[^p07]: raw/pdf/pdf-naked-objects-part-07.md — Pawson (2004), Appendices III–V, surveys (pp. 142–186).
+[^p08]: raw/pdf/pdf-naked-objects-part-08.md — Pawson (2004), Appendices VI–IX (pp. 187–223).

@@ -5,7 +5,7 @@ status: draft
 confidence: 0.9
 last_confirmed: 2026-08-03
 sources:
-  - raw/_inbox/pdf-naked-objects-part-01.md
+  - raw/pdf/pdf-naked-objects-part-01.md
 aliases:
   - Trygve Reenskaug
   - Reenskaug
@@ -67,4 +67,4 @@ He highlighted two contributions of naked objects:
 - Reenskaug, T. "Model View Controller." Portland Pattern Repository, c2.com.
 - Krasner, G. and Pope, S. "A cookbook for using the Model-View-Controller user interface paradigm in Smalltalk-80." *JOOP*, 1988, 1(3), pp. 26–49. [first public MVC documentation]
 
-[^p01]: raw/_inbox/pdf-naked-objects-part-01.md — Pawson, R. "Naked Objects." PhD Thesis, Trinity College Dublin, June 2004. Foreword by Trygve Reenskaug (pp. 2–4); Chapter 2 "The Evolution of Object-Oriented Design" (pp. 15–23).
+[^p01]: raw/pdf/pdf-naked-objects-part-01.md — Pawson, R. "Naked Objects." PhD Thesis, Trinity College Dublin, June 2004. Foreword by Trygve Reenskaug (pp. 2–4); Chapter 2 "The Evolution of Object-Oriented Design" (pp. 15–23).

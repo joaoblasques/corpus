@@ -3,40 +3,40 @@ type: source
 domain: software-engineering
 status: draft
 sources:
-  - path: raw/_inbox/pdf-a-computational-logic-1979-part-01.md
+  - path: raw/pdf/pdf-a-computational-logic-1979-part-01.md
     channel: pdf
     ingested_at: 2026-08-03
-  - path: raw/_inbox/pdf-a-computational-logic-1979-part-02.md
+  - path: raw/pdf/pdf-a-computational-logic-1979-part-02.md
     channel: pdf
     ingested_at: 2026-08-03
-  - path: raw/_inbox/pdf-a-computational-logic-1979-part-03.md
+  - path: raw/pdf/pdf-a-computational-logic-1979-part-03.md
     channel: pdf
     ingested_at: 2026-08-03
-  - path: raw/_inbox/pdf-a-computational-logic-1979-part-04.md
+  - path: raw/pdf/pdf-a-computational-logic-1979-part-04.md
     channel: pdf
     ingested_at: 2026-08-03
-  - path: raw/_inbox/pdf-a-computational-logic-1979-part-05.md
+  - path: raw/pdf/pdf-a-computational-logic-1979-part-05.md
     channel: pdf
     ingested_at: 2026-08-03
-  - path: raw/_inbox/pdf-a-computational-logic-1979-part-06.md
+  - path: raw/pdf/pdf-a-computational-logic-1979-part-06.md
     channel: pdf
     ingested_at: 2026-08-03
-  - path: raw/_inbox/pdf-a-computational-logic-1979-part-07.md
+  - path: raw/pdf/pdf-a-computational-logic-1979-part-07.md
     channel: pdf
     ingested_at: 2026-08-03
-  - path: raw/_inbox/pdf-a-computational-logic-1979-part-08.md
+  - path: raw/pdf/pdf-a-computational-logic-1979-part-08.md
     channel: pdf
     ingested_at: 2026-08-03
-  - path: raw/_inbox/pdf-a-computational-logic-1979-part-09.md
+  - path: raw/pdf/pdf-a-computational-logic-1979-part-09.md
     channel: pdf
     ingested_at: 2026-08-03
-  - path: raw/_inbox/pdf-a-computational-logic-1979-part-10.md
+  - path: raw/pdf/pdf-a-computational-logic-1979-part-10.md
     channel: pdf
     ingested_at: 2026-08-03
-  - path: raw/_inbox/pdf-a-computational-logic-1979-part-11.md
+  - path: raw/pdf/pdf-a-computational-logic-1979-part-11.md
     channel: pdf
     ingested_at: 2026-08-03
-  - path: raw/_inbox/pdf-a-computational-logic-1979-part-12.md
+  - path: raw/pdf/pdf-a-computational-logic-1979-part-12.md
     channel: pdf
     ingested_at: 2026-08-03
 aliases:

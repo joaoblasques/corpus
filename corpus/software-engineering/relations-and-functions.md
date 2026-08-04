@@ -15,7 +15,7 @@ aliases:
   - bijective
 sources:
   - type: pdf
-    path: raw/pdf/pdf-a-cool-brisk-walk-through-discrete-mathematics-part-02.md
+    path: raw/pdf/pdf-a-cool-brisk-walk-through-discrete-mathematics-part-03.md
     channel: pdf
 tags:
   - corpus/software-engineering

@@ -5,7 +5,7 @@ status: draft
 confidence: 0.9
 last_confirmed: 2026-08-03
 sources:
-  - raw/_inbox/pdf-naked-objects-part-01.md
+  - raw/pdf/pdf-naked-objects-part-01.md
 aliases:
   - MVC
   - Model-View-Controller
@@ -112,5 +112,5 @@ The key design constraint is **enforced 1:1 correspondence** between the user-vi
 - **Morphic (Squeak/Self):** Any object inheriting from `Morph` is automatically displayable with a "halo" of manipulation methods. Closer in spirit to pre-MVC self-presentation, but not aimed at business systems or behaviourally-complete entities.
 - **Model-View-Presenter (MVP) / Model-View-ViewModel (MVVM):** Later evolutions in the .Net/WPF/mobile ecosystem; move some display logic into the Presenter/ViewModel to ease testing, but do not address the use-case controller problem.
 
-[^p01]: raw/_inbox/pdf-naked-objects-part-01.md — Pawson, R. "Naked Objects." PhD Thesis, Trinity College Dublin, June 2004. Chapter 2: "The Evolution of Object-Oriented Design" (pp. 15–23), referencing Reenskaug (1979, 1988, 1996), Rumbaugh (1994), Fowler (2003), Holub (1999), Buschmann et al. (1996).
-[^p05]: raw/_inbox/pdf-naked-objects-part-05.md — Pawson (2004), Chapter 8: "Related Work" (pp. 96–103), referencing Collins (1995), IBM CUA (1991), Tesler (1983).
+[^p01]: raw/pdf/pdf-naked-objects-part-01.md — Pawson, R. "Naked Objects." PhD Thesis, Trinity College Dublin, June 2004. Chapter 2: "The Evolution of Object-Oriented Design" (pp. 15–23), referencing Reenskaug (1979, 1988, 1996), Rumbaugh (1994), Fowler (2003), Holub (1999), Buschmann et al. (1996).
+[^p05]: raw/pdf/pdf-naked-objects-part-05.md — Pawson (2004), Chapter 8: "Related Work" (pp. 96–103), referencing Collins (1995), IBM CUA (1991), Tesler (1983).

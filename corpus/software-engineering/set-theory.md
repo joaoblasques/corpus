@@ -93,6 +93,8 @@ Distinguish: `a ∈ X` (element membership) vs. `A ⊆ X` (set containment). Eve
 
 Set theory was singlehandedly invented by **Georg Cantor** in the 1870s. After invention, nearly all mathematics was redefined in terms of sets. Cantor discovered that |N| < |R| (there are more reals than naturals), but that |Q| = |N| (rationals are countable). He went insane pursuing the full theory of infinity.[^1]
 
+Cantor's diagonalization argument (that |N| < |R|) is reused in CS as a [proof by contradiction](/software-engineering/mathematical-proof.md) template for impossibility results such as the undecidability of the Halting problem.
+
 See also: [Discrete Mathematics](/software-engineering/discrete-mathematics.md), [Relations and Functions](/software-engineering/relations-and-functions.md), [Combinatorics](/software-engineering/combinatorics.md).
 
 [^1]: raw/pdf/pdf-a-cool-brisk-walk-through-discrete-mathematics-part-01.md — Davies, Ch. 2 "Sets."

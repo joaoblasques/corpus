@@ -3,7 +3,7 @@ type: entity
 domain: software-engineering
 status: stub
 sources:
-  - path: raw/_inbox/pdf-a-computational-logic-1979-part-01.md
+  - path: raw/pdf/pdf-a-computational-logic-1979-part-01.md
     channel: pdf
     ingested_at: 2026-08-03
 aliases:

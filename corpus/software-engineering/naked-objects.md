@@ -5,14 +5,14 @@ status: draft
 confidence: 0.9
 last_confirmed: 2026-08-03
 sources:
-  - raw/_inbox/pdf-naked-objects-part-01.md
-  - raw/_inbox/pdf-naked-objects-part-02.md
-  - raw/_inbox/pdf-naked-objects-part-03.md
-  - raw/_inbox/pdf-naked-objects-part-04.md
-  - raw/_inbox/pdf-naked-objects-part-05.md
-  - raw/_inbox/pdf-naked-objects-part-06.md
-  - raw/_inbox/pdf-naked-objects-part-07.md
-  - raw/_inbox/pdf-naked-objects-part-08.md
+  - raw/pdf/pdf-naked-objects-part-01.md
+  - raw/pdf/pdf-naked-objects-part-02.md
+  - raw/pdf/pdf-naked-objects-part-03.md
+  - raw/pdf/pdf-naked-objects-part-04.md
+  - raw/pdf/pdf-naked-objects-part-05.md
+  - raw/pdf/pdf-naked-objects-part-06.md
+  - raw/pdf/pdf-naked-objects-part-07.md
+  - raw/pdf/pdf-naked-objects-part-08.md
 aliases:
   - Naked Objects
   - naked objects pattern
@@ -191,10 +191,10 @@ Seven guidelines from Chapter 5:[^p03][^p04]
 | DSDM | Compatible | Prototyping and iterative delivery emphasis matches |
 | Agile Modelling | Strong | Eliminates tension between light modelling and "prove it with code" |
 
-[^p01]: raw/_inbox/pdf-naked-objects-part-01.md — Pawson, R. "Naked Objects." PhD Thesis, Trinity College Dublin, June 2004. Chapters 1–3 (pp. 9–27).
-[^p02]: raw/_inbox/pdf-naked-objects-part-02.md — Pawson (2004), Chapters 3–4 (pp. 26–50).
-[^p03]: raw/_inbox/pdf-naked-objects-part-03.md — Pawson (2004), Chapters 4–5 (pp. 50–72).
-[^p04]: raw/_inbox/pdf-naked-objects-part-04.md — Pawson (2004), Chapters 5–7 (pp. 72–95).
-[^p05]: raw/_inbox/pdf-naked-objects-part-05.md — Pawson (2004), Chapters 8–9 (pp. 96–120).
-[^p07]: raw/_inbox/pdf-naked-objects-part-07.md — Pawson (2004), Appendices III–V, surveys (pp. 142–186).
-[^p08]: raw/_inbox/pdf-naked-objects-part-08.md — Pawson (2004), Appendix VI — Naked Objects framework description (pp. 187–189).
+[^p01]: raw/pdf/pdf-naked-objects-part-01.md — Pawson, R. "Naked Objects." PhD Thesis, Trinity College Dublin, June 2004. Chapters 1–3 (pp. 9–27).
+[^p02]: raw/pdf/pdf-naked-objects-part-02.md — Pawson (2004), Chapters 3–4 (pp. 26–50).
+[^p03]: raw/pdf/pdf-naked-objects-part-03.md — Pawson (2004), Chapters 4–5 (pp. 50–72).
+[^p04]: raw/pdf/pdf-naked-objects-part-04.md — Pawson (2004), Chapters 5–7 (pp. 72–95).
+[^p05]: raw/pdf/pdf-naked-objects-part-05.md — Pawson (2004), Chapters 8–9 (pp. 96–120).
+[^p07]: raw/pdf/pdf-naked-objects-part-07.md — Pawson (2004), Appendices III–V, surveys (pp. 142–186).
+[^p08]: raw/pdf/pdf-naked-objects-part-08.md — Pawson (2004), Appendix VI — Naked Objects framework description (pp. 187–189).
