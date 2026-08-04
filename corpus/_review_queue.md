@@ -60,3 +60,4 @@ type: internal
 - [stub-no-source] {"pages": ["corpus/ai-engineering/langgraph.md"]}
 - [stub-no-source] {"pages": ["corpus/ai-engineering/roberto-battiti.md", "corpus/ai-engineering/mauro-brunato.md", "corpus/ai-engineering/langgraph.md"]}
 - [stub-no-source] {"pages": ["corpus/ai-engineering/roberto-battiti.md", "corpus/ai-engineering/mauro-brunato.md", "corpus/ai-engineering/langgraph.md", "corpus/software-engineering/robert-s-boyer.md", "corpus/software-engineering/j-strother-moore.md"]}
+- [stub-no-source] {"pages": ["corpus/ai-engineering/roberto-battiti.md", "corpus/ai-engineering/mauro-brunato.md", "corpus/ai-engineering/langgraph.md", "corpus/software-engineering/stephen-davies.md", "corpus/software-engineering/robert-s-boyer.md", "corpus/software-engineering/j-strother-moore.md"]}

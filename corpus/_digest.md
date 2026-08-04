@@ -141,3 +141,9 @@ type: internal
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/he-asked-ai-to-make-money-it-did-l0Vqm0ZIySc.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/building-a-real-feature-with-claude-code-every-step-explaine-hX7yG1KVYhI.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/how-to-build-a-reusable-finance-workflow-in-claude-2-0-full--dTPndJ5VG_I.md", "verdict_ok": true, "gov": "committed"}
+
+## [2026-08-04T03:11] gardener · run
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/the-best-way-to-create-agent-skills-in-2026-XCOkCwgKwAA.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/how-to-build-a-reusable-finance-workflow-in-claude-2-0-full--dTPndJ5VG_I.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/data-modeling-one-big-table-vs-kimball-vs-relational-for-dat-ltQgbSs99WU.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/frontend-is-harder-for-ai-than-backend-here-s-how-to-fix-it-pSritFeoYFo.md", "verdict_ok": true, "gov": "committed"}
