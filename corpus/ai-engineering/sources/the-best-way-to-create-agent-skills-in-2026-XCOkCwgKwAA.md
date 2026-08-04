@@ -1,7 +1,7 @@
 ---
 type: source
 domain: ai-engineering
-status: stub
+status: draft
 sources:
   - path: raw/youtube/youtube-XCOkCwgKwAA-the-best-way-to-create-agent-skills-in-2026.md
     channel: youtube
@@ -12,7 +12,7 @@ tags:
   - source
   - youtube-quick-intake
 created: 2026-07-08
-updated: 2026-07-23
+updated: 2026-08-04
 provisional: false
 youtube_video_id: XCOkCwgKwAA
 url: https://youtu.be/XCOkCwgKwAA
