@@ -2,6 +2,22 @@
 
 > OKF v0.1 change log. Newest first, grouped by date.
 
+## 2026-08-05
+* **Ingest**: Information Retrieval: Implementing and Evaluating Search Engines (Büttcher, Clarke, Cormack; MIT Press 2010) · part 1/32 · channel=pdf · domain=ai-engineering · created `corpus/ai-engineering/sources/information-retrieval-implementing-and-evaluating.md` · created `corpus/ai-engineering/stefan-buttcher.md` · created `corpus/ai-engineering/charles-clarke.md` · created `corpus/ai-engineering/gordon-cormack.md` · updated `corpus/ai-engineering/information-retrieval.md` (added Probability Ranking Principle, efficiency/effectiveness dimensions, specificity/exhaustivity/novelty) · ingest-auto run; 1 ingested, 49 deferred
+* **Defer**: An Infinite Descent into Pure Mathematics (Clive Newstead) · parts 12–27 (16 files) · channel=pdf · G1 deferred — no existing domain covers pure mathematics (number theory, abstract algebra, ring theory); consistent with 2026-08-04 precedent for Elementary Differential Equations G1 deferral
+* **Defer**: Foundations of Constructive Probability Theory (Yuen-Kwok Chan, June 2019) · parts 1–33 (33 files) · channel=pdf · G2 deferred — 33 dense chapters of probability/stochastic processes (Martingales, Brownian motion, Markov processes, Daniell-Kolmogorov extensions) would produce ≥20 pages; constructive math framing also adds uncertainty about fit to ai-engineering
+
+* **Collectors**: gmail=9, blog_promote=0, obsidian=2, book_discover=0, blog_discover=1, book_fetch=0, pdf=0, image=0, books=0, arxiv=24, youtube=0, github_discover=5, github_promote=5, github=0, x=0, links_refetch=0
+* **Ingest**: 1 ingested · 49 deferred · status=ok
+* **YoutubeQuick**: 0 intake · 0 rescued · 0 skipped · status=ok
+* **DocsQuick**: 8 intake · 40 thin · 2 llm_fail · status=ok
+* **YoutubeReap**: 0 removed · status=ok
+* **Gardener**: 4 stubs deepened · status=ok
+* **Heal**: 5 citations repointed · 0 unfixable · 3 hubs reindexed · 31 cross-domain links · status=ok
+* **Depth**: 422 knowledge · 1347 sources · ratio 1:3.2
+* **GapResolver**: 0 gap dispatched · 0 sources queued · status=ok
+* **Lint**: 1 broken wikilinks · 0 broken citations · 0 orphans · 1260 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+* **OKF**: 0 violations
 ## 2026-08-04
 * **Ingest**: A Cool Brisk Walk Through Discrete Mathematics (Stephen Davies, UMW, v2.2.2) · 9 parts (all) · channel=pdf · domain=software-engineering · created `corpus/software-engineering/sources/a-cool-brisk-walk-through-discrete-mathematics.md` (254pp CC BY-SA 4.0; CS-practitioner-oriented discrete math tour; Ch1=discrete vs continuous; Ch2=sets; Ch3=relations/functions; Ch4=probability; Ch5=graphs/trees; Ch6=counting; Ch7=number systems; Ch8=propositional logic; Ch9=proof) · created `corpus/software-engineering/discrete-mathematics.md` · created `corpus/software-engineering/set-theory.md` · created `corpus/software-engineering/relations-and-functions.md` · created `corpus/software-engineering/discrete-probability.md` · created `corpus/software-engineering/graph-theory.md` · created `corpus/software-engineering/combinatorics.md` · created `corpus/software-engineering/number-systems.md` · created `corpus/software-engineering/propositional-logic.md` · created `corpus/software-engineering/mathematical-proof.md` · created `corpus/software-engineering/stephen-davies.md` · updated `corpus/software-engineering/README.md` · ingest-auto run; 9 processed, 41 deferred
 

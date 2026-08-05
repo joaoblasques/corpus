@@ -21,6 +21,9 @@ sources:
   - path: raw/_inbox/pdf-information-retrieval-a-survey-part-06.md
     channel: pdf
     ingested_at: 2026-08-03
+  - path: raw/_inbox/pdf-information-retrieval-implementing-and-evaluating-part-01.md
+    channel: pdf
+    ingested_at: 2026-08-05
 aliases:
   - IR
   - information retrieval
@@ -46,7 +49,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-08-03
-updated: 2026-08-03
+updated: 2026-08-05
 ---
 
 # Classical Information Retrieval
@@ -63,6 +66,26 @@ Two retrieval modes [^p01]:
 |---|---|---|
 | **Ad-hoc querying** | Many, arbitrary queries | Fixed, static collection |
 | **Routing/filtering** | Fixed topics or profiles | Incoming stream (dynamic) |
+
+## Probability Ranking Principle and relevance dimensions
+
+The **Probability Ranking Principle (PRP)** (Robertson, 1977): "If an IR system's response to each query is a ranking of the documents in the collection in order of decreasing probability of relevance, then the overall effectiveness of the system to its users will be maximized." [^bce01]
+
+PRP is the foundational axiom of ranked retrieval. It specifies what to optimize — estimated P(relevant | document, query) — but does not prescribe how to compute it (that is the job of BM25, language models, etc.).
+
+**Performance dimensions** [^bce01]:
+- **Efficiency**: latency (response time), throughput (queries/second), storage. Web-scale systems may require 10,000+ queries/second.
+- **Effectiveness**: relevance — depends entirely on human judgment.
+
+**Relevance nuances beyond binary** [^bce01]:
+
+| Dimension | Definition |
+|---|---|
+| **Specificity** | Fraction of document content related to the information need |
+| **Exhaustivity** | Fraction of the information need covered by the document |
+| **Novelty** | Incremental value after prior results already conveyed related content |
+
+Specificity and exhaustivity are independent dimensions. A large document can be exhaustive (covers everything) but not specific (contains much unrelated material); a focused paragraph can be specific but not exhaustive.
 
 ## Evaluation: precision, recall, and F-measure
 
@@ -260,3 +283,4 @@ BM25 is explicitly used in modern RAG as the keyword-matching complement to dens
 [^p05]: [Information Retrieval: A Survey (Greengrass, 2000) — Part 5](../../raw/pdf/pdf-information-retrieval-a-survey-part-05.md)
 [^p06]: [Information Retrieval: A Survey (Greengrass, 2000) — Part 6](../../raw/pdf/pdf-information-retrieval-a-survey-part-06.md)
 [^p12]: [Information Retrieval: A Survey (Greengrass, 2000) — Part 12](../../raw/pdf/pdf-information-retrieval-a-survey-part-12.md)
+[^bce01]: [Information Retrieval: Implementing and Evaluating Search Engines (Büttcher, Clarke, Cormack, 2010) — Part 1](../../raw/pdf/pdf-information-retrieval-implementing-and-evaluating-part-01.md)

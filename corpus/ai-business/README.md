@@ -70,7 +70,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [AI and the Job Market](/ai-business/ai-and-the-job-market.md)
 
 <details>
-<summary>Source summaries (191)</summary>
+<summary>Source summaries (193)</summary>
 
 - ["$1,300/Day Automated Bittensor Investing With Claude Code (34 Min Free Masterclass)"](/ai-business/sources/1-300-day-automated-bittensor-investing-with-claude-code-34--SHEs8gNh7sQ.md)
 - ["$100 million for open source: A milestone built by the community"](/ai-business/sources/100-million-for-open-source-a-milestone-built-by-the-communi-580ab93c.md)
@@ -97,6 +97,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - ["AI for Marketing Agencies: Scale Production & Boost ROI"](/ai-business/sources/ai-for-marketing-agencies-scale-production-boost-roi-8b779993.md)
 - ["AI in Finance: Automate Lending with Loan Origination Software"](/ai-business/sources/ai-in-finance-automate-lending-with-loan-origination-softwar-469c2eb0.md)
 - ["AI in Logistics: Optimize Supply Chain with TMS & WMS Software"](/ai-business/sources/ai-in-logistics-optimize-supply-chain-with-tms-wms-software-ccc62864.md)
+- ["AI is Oil, Not God"](/ai-business/sources/ai-is-oil-not-god-77ceb32f.md)
 - ["AI Model Export Controls Explained: What Government Review Means for Your AI Stack"](/ai-business/sources/ai-model-export-controls-explained-what-government-review-me-4c60d08e.md)
 - ["AI Model Regulation: What the GPT-5.6 Government Review Means for Your AI Stack"](/ai-business/sources/ai-model-regulation-what-the-gpt-5-6-government-review-means-e3f22d9f.md)
 - ["AI Transparency: Governance, Explainability, and Data Practices"](/ai-business/sources/ai-transparency-governance-explainability-and-data-practices-321763fe.md)
@@ -174,6 +175,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [AI Doesn't Care About Your Résume](/ai-business/sources/ai-doesn-t-care-about-your-r-sume-5bd77f6e.md)
 - [AI for GTM — Best of Growth Unhinged | Kyle Poyar’s Growth Unhinged](/ai-business/sources/ai-for-gtm-best-of-growth-unhinged-kyle-poyar-s-growth-unhin-50e04191.md)
 - [AI for Superfans](/ai-business/sources/ai-for-superfans-7188444f.md)
+- [AI is a Terrible Ghostwriter](/ai-business/sources/ai-is-a-terrible-ghostwriter-eaeb7f16.md)
 - [AI Isn’t Breaking Work. It’s Already Broken. - Cal Newport](/ai-business/sources/ai-isn-t-breaking-work-it-s-already-broken-cal-newport-16eace99.md)
 - [AI Mania Is Eviscerating Global Decision-Making](/ai-business/sources/ai-mania-is-eviscerating-global-decision-making-c54ae55d.md)
 - [AI Phobia Is Just Fear That ‘Easier’ Equals ‘Cheating’](/ai-business/sources/ai-phobia-is-just-fear-that-easier-equals-cheating-446f560e.md)

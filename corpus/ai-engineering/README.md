@@ -127,6 +127,9 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Hal Daumé III](/ai-engineering/hal-daume-iii.md) — entity · stub · ML researcher; author of A Course in Machine Learning (2015, open access at hal3.name/courseml/)
 - [Csaba Szepesvári](/ai-engineering/csaba-szepesvari.md) — entity · stub · ML researcher; author of Algorithms for Reinforcement Learning (Morgan & Claypool, 2009); convergence analysis of TD-based algorithms
 - [James H. Martin](/ai-engineering/james-martin.md) — entity · stub · University of Colorado NLP professor; co-author of Speech and Language Processing (3rd draft 2026)
+- [Stefan Büttcher](/ai-engineering/stefan-buttcher.md) — entity · stub · IR researcher at University of Waterloo; doctoral student of Clarke; developer of Wumpus IR system; co-author of Information Retrieval: Implementing and Evaluating Search Engines (MIT Press, 2010)
+- [Charles L.A. Clarke](/ai-engineering/charles-clarke.md) — entity · stub · IR researcher at University of Waterloo; doctoral advisor of Büttcher; co-author of Information Retrieval: Implementing and Evaluating Search Engines (MIT Press, 2010)
+- [Gordon V. Cormack](/ai-engineering/gordon-cormack.md) — entity · stub · IR researcher at University of Waterloo; doctoral advisor of Clarke; co-author of Information Retrieval: Implementing and Evaluating Search Engines (MIT Press, 2010)
 - [Roberto Battiti](/ai-engineering/roberto-battiti.md) — entity · stub · ML/optimization researcher, LIONlab, University of Trento; creator of Reactive Search Optimization; co-author of The LION Way (2017)
 - [Mauro Brunato](/ai-engineering/mauro-brunato.md) — entity · stub · ML/optimization researcher, University of Trento; co-author of The LION Way (2017)
 - [LangGraph](/ai-engineering/langgraph.md) — entity · stub · production framework for stateful multi-agent workflows
@@ -357,8 +360,9 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Vibe Coding (and why Spec-Driven Development supersedes it)](/ai-engineering/vibe-coding.md)
 - [Visual Bag of Words](/ai-engineering/visual-bag-of-words.md)
 
-### Entities (68)
+### Entities (71)
 - [Anthropic](/ai-engineering/anthropic.md)
+- [Charles L.A. Clarke](/ai-engineering/charles-clarke.md)
 - [Chip Huyen](/ai-engineering/chip-huyen.md)
 - [Christopher M. Bishop](/ai-engineering/christopher-bishop.md)
 - [Claude Code](/ai-engineering/claude-code.md)
@@ -381,6 +385,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Gemini CLI](/ai-engineering/gemini-cli.md)
 - [GitHub Copilot (Agent Mode)](/ai-engineering/github-copilot.md)
 - [GLM-5](/ai-engineering/glm-5.md)
+- [Gordon V. Cormack](/ai-engineering/gordon-cormack.md)
 - [Hal Daumé III](/ai-engineering/hal-daume-iii.md)
 - [Hamel Husain](/ai-engineering/hamel-husain.md)
 - [Hermes (coding agent)](/ai-engineering/hermes.md)
@@ -417,6 +422,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Scrapling (Adaptive Web Scraping)](/ai-engineering/web-scraping.md)
 - [Simon Willison](/ai-engineering/simon-willison.md)
 - [sqlite-utils](/ai-engineering/sqlite-utils.md)
+- [Stefan Büttcher](/ai-engineering/stefan-buttcher.md)
 - [Strands Robots](/ai-engineering/strands-robots.md)
 - [Supacode](/ai-engineering/supacode.md)
 - [Tim Dettmers](/ai-engineering/tim-dettmers.md)
@@ -439,7 +445,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Tool Calling & Context Engineering: How They Interlock](/ai-engineering/tool-calling-and-context-engineering.md)
 
 <details>
-<summary>Source summaries (706)</summary>
+<summary>Source summaries (711)</summary>
 
 - ["2024 State of Analytics Engineering, crafted by dbt Labs | dbt Labs"](/ai-engineering/sources/2024-state-of-analytics-engineering-crafted-by-dbt-labs-dbt--cb342df0.md)
 - ["9 AI Concepts Explained: Tokenization, RAG, RLHF, LoRA & More"](/ai-engineering/sources/9-ai-concepts-explained-tokenization-rag-rlhf-lora-more-a.md)
@@ -486,6 +492,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - ["AI Agent Evaluators and Verifiers: How to Stop Agents from Grading Their Own Work"](/ai-engineering/sources/ai-agent-evaluators-and-verifiers-how-to-stop-agents-from-gr-b22aadef.md)
 - ["AI Agent Harness Bloat: How to Audit and Clean Your Claude or ChatGPT Setup"](/ai-engineering/sources/ai-agent-harness-bloat-how-to-audit-and-clean-your-claude-or-06a30c25.md)
 - ["AI Agent Observability: How to Monitor Agents Running for Hours Without Babysitting"](/ai-engineering/sources/ai-agent-observability-how-to-monitor-agents-running-for-hou-48922d8f.md)
+- ["AI Agent Skills Explained: The Hidden Superpower in Claude and ChatGPT"](/ai-engineering/sources/ai-agent-skills-explained-the-hidden-superpower-in-claude-an-9129cd22.md)
 - ["AI Agent vs Chatbot: Key Differences and Examples"](/ai-engineering/sources/ai-agent-vs-chatbot-key-differences-and-examples-8bd5654c.md)
 - ["AI Coding Agents: What Are They and How Do They Work?"](/ai-engineering/sources/ai-coding-agents-what-are-they-and-how-do-they-work-164d0149.md)
 - ["AI Coding Tools: What Changed in the Last 6 Months"](/ai-engineering/sources/ai-coding-tools-what-changed-in-the-last-6-months-e030d69b.md)
@@ -503,6 +510,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - ["AI Model Routing: When to Use Frontier Models vs Cheap Models in Your Agent Stack"](/ai-engineering/sources/ai-model-routing-when-to-use-frontier-models-vs-cheap-models-84db1b99.md)
 - ["AI Orchestration vs. Traditional Automation: Key Differences"](/ai-engineering/sources/ai-orchestration-vs-traditional-automation-key-differences-cd8719f6.md)
 - ["AI Product Build: From Idea to Production | AY Automate"](/ai-engineering/sources/ai-product-build-from-idea-to-production-ay-automate-7e7a136b.md)
+- ["AI Production Issue Detection: A Failure Taxonomy and Detection Framework - Confident AI"](/ai-engineering/sources/ai-production-issue-detection-a-failure-taxonomy-and-detecti-1c57f592.md)
 - ["AI Ready Data Management: Process, Best Practices & Challenges"](/ai-engineering/sources/ai-ready-data-management-process-best-practices-challenges-3054055a.md)
 - ["AI Services - Workshops, Placement & Training"](/ai-engineering/sources/ai-services-workshops-placement-training-aab0832b.md)
 - ["AI Video Effects for Content Creators: Runway, Seedance, and Gemini Omni Compared"](/ai-engineering/sources/ai-video-effects-for-content-creators-runway-seedance-and-ge-82d50e3d.md)
@@ -679,6 +687,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [5 Things in Data Engineering That Still Hold True After 10 Years](/ai-engineering/sources/5-things-in-data-engineering-that-still-hold-true-after-10-y-lXvDqREYhI4.md)
 - [5 Trends That Defined AI Engineering at World’s Fair 2026](/ai-engineering/sources/5-trends-that-defined-ai-engineering-at-world-s-fair-2026-8ec1cf2b.md)
 - [5 Ways to Make Money From an AI the Government Fears](/ai-engineering/sources/5-ways-to-make-money-from-an-ai-the-government-fears-q_FIJmSB0Ro.md)
+- [5 Ways to Use AI for Developer Productivity in 2026](/ai-engineering/sources/5-ways-to-use-ai-for-developer-productivity-in-2026-190b1d52.md)
 - [52-Day Claude Code Challenge](/ai-engineering/sources/52-day-claude-code-challenge-732e0474.md)
 - [6 AI Agency Offers That Actually Make Money in 2026](/ai-engineering/sources/6-ai-agency-offers-that-actually-make-money-in-2026-vYRUpnnePmA.md)
 - [6 Best AI Evaluation Tools for Enterprises in 2026 - Confident AI](/ai-engineering/sources/6-best-ai-evaluation-tools-for-enterprises-in-2026-confident-89f35e7f.md)
@@ -690,6 +699,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [7 real-world AI agent examples you need to know](/ai-engineering/sources/7-real-world-ai-agent-examples-you-need-to-know-cd3a270f.md)
 - [8 Best AI Evaluation Tools for CI/CD Pipelines in 2026 - Confident AI](/ai-engineering/sources/8-best-ai-evaluation-tools-for-ci-cd-pipelines-in-2026-confi-e77f209b.md)
 - [8 best AI production issue detection and alerting tools in 2026 - Confident AI](/ai-engineering/sources/8-best-ai-production-issue-detection-and-alerting-tools-in-2-2bc5dd54.md)
+- [8 Best AI SQL Tools To Implement In Your Workflow](/ai-engineering/sources/8-best-ai-sql-tools-to-implement-in-your-workflow-93d8a61c.md)
 - [8 best evaluation tools for conversational AI in 2026 - Confident AI](/ai-engineering/sources/8-best-evaluation-tools-for-conversational-ai-in-2026-confid-955a4a15.md)
 - [8 best LLM observability tools for enterprise in 2026 - Confident AI](/ai-engineering/sources/8-best-llm-observability-tools-for-enterprise-in-2026-confid-c668c4e3.md)
 - [8 best LLM observability tools for startups in 2026 - Confident AI](/ai-engineering/sources/8-best-llm-observability-tools-for-startups-in-2026-confiden-17750fb3.md)
@@ -1026,6 +1036,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [I'm using claude --worktree for everything now](/ai-engineering/sources/i-m-using-claude-worktree-for-everything-now-yv8VZpov8bk.md)
 - [If you don’t run Pi locally you’re falling behind…](/ai-engineering/sources/if-you-don-t-run-pi-locally-you-re-falling-behind-jcUqsNpDDDk.md)
 - [Information Retrieval: A Survey (Ed Greengrass, November 2000)](/ai-engineering/sources/information-retrieval-a-survey.md)
+- [Information Retrieval: Implementing and Evaluating Search Engines (Büttcher, Clarke, Cormack, 2010)](/ai-engineering/sources/information-retrieval-implementing-and-evaluating.md)
 - [INSANE DeepSeek AI Agent Can Automate ANYTHING For FREE!! (Step by Step Tutorial)](/ai-engineering/sources/insane-deepseek-ai-agent-can-automate-anything-for-free-step-LGiTLMhx_zo.md)
 - [Internet Advertising: An Interplay Among Advertisers, Online Publishers and Web Users](/ai-engineering/sources/internet-advertising-survey.md)
 - [introduction to statistical learning](/ai-engineering/sources/introduction-to-statistical-learning.md)
