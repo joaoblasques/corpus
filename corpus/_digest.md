@@ -147,3 +147,9 @@ type: internal
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/how-to-build-a-reusable-finance-workflow-in-claude-2-0-full--dTPndJ5VG_I.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/data-modeling-one-big-table-vs-kimball-vs-relational-for-dat-ltQgbSs99WU.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/frontend-is-harder-for-ai-than-backend-here-s-how-to-fix-it-pSritFeoYFo.md", "verdict_ok": true, "gov": "committed"}
+
+## [2026-08-05T02:59] gardener · run
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/software-engineering/robert-s-boyer.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/software-engineering/j-strother-moore.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/superpowers-agentic-skills-framework-for-tdd-first-software--f.md", "verdict_ok": false, "gov": "reverted+queued"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/ai-tools-claude-code-and-gemini-cli-in-the-terminal-networkc-ec.md", "verdict_ok": false, "gov": "reverted+queued"}
