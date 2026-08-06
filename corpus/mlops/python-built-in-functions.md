@@ -81,6 +81,7 @@ Attribute access — `getattr()`, `setattr()`, `delattr()`, `hasattr()` [^src1].
 
 ## Related across domains
 
+- [Classical Information Retrieval](/ai-engineering/information-retrieval.md) · _ai-engineering_
 - [Machine Learning](/ai-engineering/machine-learning.md) · _ai-engineering_
 
 <!-- RELATED:END -->

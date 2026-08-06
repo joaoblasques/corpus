@@ -24,6 +24,99 @@ sources:
   - path: raw/_inbox/pdf-information-retrieval-implementing-and-evaluating-part-01.md
     channel: pdf
     ingested_at: 2026-08-05
+  - path: raw/_inbox/pdf-information-retrieval-implementing-and-evaluating-part-02.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-information-retrieval-implementing-and-evaluating-part-03.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-information-retrieval-implementing-and-evaluating-part-04.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-information-retrieval-implementing-and-evaluating-part-05.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-information-retrieval-implementing-and-evaluating-part-06.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-information-retrieval-implementing-and-evaluating-part-07.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-information-retrieval-implementing-and-evaluating-part-08.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-information-retrieval-implementing-and-evaluating-part-09.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-information-retrieval-implementing-and-evaluating-part-10.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-information-retrieval-implementing-and-evaluating-part-11.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-information-retrieval-implementing-and-evaluating-part-12.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-information-retrieval-implementing-and-evaluating-part-13.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-information-retrieval-implementing-and-evaluating-part-14.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-information-retrieval-implementing-and-evaluating-part-15.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-information-retrieval-implementing-and-evaluating-part-16.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-information-retrieval-implementing-and-evaluating-part-17.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-information-retrieval-implementing-and-evaluating-part-18.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-information-retrieval-implementing-and-evaluating-part-19.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-information-retrieval-implementing-and-evaluating-part-20.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-information-retrieval-implementing-and-evaluating-part-21.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-information-retrieval-implementing-and-evaluating-part-22.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-information-retrieval-implementing-and-evaluating-part-23.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-information-retrieval-implementing-and-evaluating-part-24.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-information-retrieval-implementing-and-evaluating-part-25.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-information-retrieval-implementing-and-evaluating-part-26.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-information-retrieval-implementing-and-evaluating-part-27.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-information-retrieval-implementing-and-evaluating-part-28.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-information-retrieval-implementing-and-evaluating-part-29.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-information-retrieval-implementing-and-evaluating-part-30.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-information-retrieval-implementing-and-evaluating-part-31.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-information-retrieval-implementing-and-evaluating-part-32.md
+    channel: pdf
+    ingested_at: 2026-08-06
 aliases:
   - IR
   - information retrieval
@@ -45,11 +138,40 @@ aliases:
   - precision
   - F-measure
   - inverted index
+  - WAND algorithm
+  - Weak AND
+  - top-k query processing
+  - index compression
+  - Elias gamma code
+  - variable-byte encoding
+  - VByte
+  - language model for IR
+  - query likelihood
+  - Dirichlet smoothing
+  - Jelinek-Mercer smoothing
+  - KL-divergence retrieval
+  - Divergence from Randomness
+  - DFR
+  - Bose-Einstein model
+  - nDCG
+  - normalized discounted cumulative gain
+  - DCG
+  - bpref
+  - MAP
+  - mean average precision
+  - CombSUM
+  - CombMNZ
+  - reciprocal rank fusion
+  - learning to rank
+  - RankSVM
+  - RankBoost
+  - LambdaRank
+  - BM25F
 tags:
   - corpus/ai-engineering
   - concept
 created: 2026-08-03
-updated: 2026-08-05
+updated: 2026-08-06
 ---
 
 # Classical Information Retrieval
@@ -265,6 +387,134 @@ Classical IR concepts remain live in production systems [^p01] [^p05]:
 
 BM25 is explicitly used in modern RAG as the keyword-matching complement to dense vector similarity. "Hybrid search blends dense embeddings with sparse keyword (BM25) matching" to recover exact-token matches (names, IDs, codes) that pure embeddings smooth away [^p01]. See [RAG](/ai-engineering/rag.md) §Hybrid search.
 
+## WAND algorithm (top-k query processing)
+
+WAND (Weak AND, Broder et al. 2003) is the standard algorithm for safe top-k retrieval without evaluating all posting-list entries [^bce13]:
+
+1. Assign each term t an **upper bound** UB(t) = max score contribution t can make to any document (e.g., max tf × idf across the posting list).
+2. Maintain a min-heap of current top-k candidate scores; the heap's minimum is the **threshold** θ.
+3. Advance posting-list iterators in DAAT fashion. At each step, order terms by their current iterator position and find the **pivot** — the first term position where the prefix sum of UBs exceeds θ.
+4. If the pivot document satisfies all terms whose UB pushes the sum past θ, fully evaluate it; otherwise skip all iterators to the pivot's document.
+5. Update the heap and threshold after each evaluation.
+
+**Safe vs. unsafe WAND**: safe WAND guarantees the same top-k as exhaustive evaluation. Unsafe (approximate) variants use looser upper bounds or stop early for higher throughput at slight recall cost [^bce14].
+
+**Impact-ordered index**: posting lists sorted by decreasing term frequency (impact) rather than docid. Enables scanning only the top-m postings per term for approximate retrieval. Trades sorted-merge traversal (DAAT) for early-exit batched scoring (TAAT with budget) [^bce14].
+
+## Index compression
+
+Posting lists store large integers (docids, term frequencies, positions). Compression is critical: an uncompressed positional index for a large web collection would require hundreds of GB [^bce10].
+
+**Delta encoding (d-gaps)**: instead of storing raw docids, store the gap between consecutive docids. Gaps are always positive and typically small (especially for frequent terms), making them compressible [^bce10].
+
+Integer codes for gaps and frequencies [^bce11]:
+
+| Code | Bit cost for integer x | Properties |
+|---|---|---|
+| **Unary** | x bits | Optimal for x ∈ {1, 2}; expensive for large x |
+| **Elias gamma** | 2⌊log₂ x⌋ + 1 | Unary-encoded length prefix + ⌊log₂ x⌋-bit offset; good for small integers |
+| **Elias delta** | ⌊log₂ x⌋ + 2⌊log₂ ⌊log₂ x⌋⌋ + 1 | Uses gamma to encode the length; better for moderately large integers |
+| **Variable-byte (VByte)** | ⌈log₁₂₈ x⌉ × 8 | 7 payload bits + 1 continuation bit per byte; byte-aligned; fast to decode |
+| **Huffman** | Approaches entropy | Requires known symbol distribution; tightest average-case but not universal |
+
+VByte is the practical standard: within ~10–15% of entropy for typical distributions, and decodable with a simple loop and no bit-manipulation overhead. Elias gamma/delta are theoretically tighter but require bit-level operations [^bce11].
+
+**LLRUN** (Büttcher & Clarke): a Huffman variant for positional indices that combines run-length encoding of within-document position gaps with a Huffman codebook learned from the corpus. Achieves near-optimal compression without the random-access overhead of generic arithmetic coding [^bce11].
+
+## Language models for IR
+
+The **query-likelihood model** ranks document D by P(Q|D) — the probability that D's language model would generate the query Q. Since ML estimates P(t|D) = tf(t,D)/dl are zero for unseen terms, smoothing with the collection language model P(t|C) is essential [^bce17]:
+
+**Dirichlet smoothing** (Zhai & Lafferty, 2001):
+```
+P(t|D) = (tf(t,D) + μ × P(t|C)) / (dl + μ)
+```
+μ ≈ 1000 by default. The smoothing strength is adaptive: short documents (dl ≪ μ) are pulled strongly toward the collection LM; long documents are mostly self-sufficient. This naturally implements length normalization without an explicit b parameter [^bce17].
+
+**Jelinek-Mercer smoothing** (Jelinek & Mercer, 1980):
+```
+P(t|D) = (1−λ) × tf(t,D)/dl + λ × P(t|C)
+```
+λ ≈ 0.1–0.5. A fixed mixture of document and collection LMs. Simpler than Dirichlet but less length-adaptive; λ must be tuned per collection [^bce17].
+
+**KL-divergence retrieval model** (Lafferty & Zhai, 2001): generalization of query-likelihood. Rank documents by the KL divergence between the query language model Q and the document language model D:
+```
+score(D, Q) = −KL(θ_Q || θ_D) = Σ_t P(t|Q) log P(t|D)
+```
+This framework makes query expansion principled: the query LM θ_Q can be modified (expanded) to reduce KL-divergence with the best-matching documents, without changing the retrieval formula [^bce17].
+
+Dirichlet LM (μ=1000) and BM25 (k1=1.2, b=0.75) produce nearly indistinguishable MAP on standard TREC ad-hoc tasks; the models are theoretically connected via the document-length normalization they each apply [^bce17].
+
+## Divergence from Randomness (DFR)
+
+DFR (Amati & van Rijsbergen, 2002) is a family of term-weighting models based on the intuition that a term's informativeness equals the degree to which its distribution across documents **deviates from what would be expected if terms were placed randomly** [^bce18].
+
+**General DFR formula**:
+```
+w(t, D) = −log P_random(tf(t,D) | λ_t) × normalization(tf, dl)
+```
+
+where P_random is a probability model of random term placement (Poisson, Bose-Einstein, etc.), λ_t = average term frequency per document, and normalization converts document-frequency into a document-length-independent weight.
+
+**Bose-Einstein (BE) model**: draws inspiration from statistical mechanics. Treats the placement of F(t) total term occurrences across N documents as an urn model (Bose-Einstein statistics). The weight for term t in document D:
+```
+w_BE(t, D) = log(1 + λ) + tf × log((1 + λ) / λ)  where λ = F(t) / N
+```
+
+DFR with Bose-Einstein normalization (called "In_expB2" in practice) has been shown to match or exceed BM25 on TREC ROBUST and TREC Web tracks [^bce18].
+
+## Fusion and learning to rank
+
+**Score fusion** combines ranked lists from multiple retrieval systems into a single ranking without access to relevance judgments [^bce22]:
+
+| Method | Description |
+|---|---|
+| **CombSUM** | Sum normalized scores across systems for each document |
+| **CombMNZ** | CombSUM × number of systems that retrieved the document |
+| **Reciprocal rank fusion (RRF)** | Score = Σ_s 1/(k + rank_s(d)), k ≈ 60; rank-based, no score normalization needed |
+
+RRF (Cormack, Clarke & Buettcher, 2009) is robust to score-scale differences between systems and has become the default fusion baseline in modern hybrid search (dense + sparse) [^bce22].
+
+**Learning to rank (L2R)** trains a ranking function from relevance-labeled query-document pairs. Three paradigms [^bce23]:
+
+| Paradigm | Loss | Examples |
+|---|---|---|
+| **Pointwise** | Predict relevance grade of each doc independently | Regression/classification on feature vectors |
+| **Pairwise** | Minimize inversions in pairs (relevant > non-relevant) | RankSVM, RankBoost |
+| **Listwise** | Optimize the entire ranked list metric directly | LambdaRank, ListNet |
+
+**RankSVM** (Joachims, 2002): convert pairwise preferences into SVM training examples; max-margin boundary between relevant and non-relevant feature vectors. Efficient with kernel tricks for large feature spaces [^bce23].
+
+**RankBoost** (Freund et al., 2003): boosting on pairwise ranking; iteratively upweights misranked pairs. Interpretable: final ranker is a weighted combination of weak feature-threshold classifiers [^bce23].
+
+**LambdaRank** (Burges et al., 2007): gradient descent on a surrogate loss that approximates the gradient of nDCG. Lambda = ΔnDCG × |Δ(1/rank)| — larger weight to swaps that most improve nDCG. Used in production ranking at major search engines. Enables direct nDCG optimization despite nDCG's non-differentiability [^bce23].
+
+## nDCG (graded relevance evaluation)
+
+**nDCG** (Järvelin & Kekäläinen, 2002) extends MAP to graded relevance judgments. TREC Web tracks use a 5-point scale: 0 (not relevant), 1 (relevant), 5 (highly relevant), 10 (perfectly relevant) [^bce25].
+
+**Discounted Cumulative Gain (DCG)**:
+```
+DCG@k = Σ_{i=1}^{k} (2^{rel_i} − 1) / log₂(i + 1)
+```
+
+Documents at rank 1 contribute full gain; contribution falls off as log of rank. The (2^rel − 1) gain formula emphasizes highly relevant documents exponentially [^bce25].
+
+**Normalized DCG**:
+```
+nDCG@k = DCG@k / IDCG@k
+```
+
+IDCG (Ideal DCG) is the DCG of the perfect ranking — all documents sorted by decreasing relevance. nDCG ∈ [0, 1]. A system returning only non-relevant documents scores 0; a perfect ranking scores 1 [^bce25].
+
+nDCG@10 is standard in Web search evaluation because it (1) reflects the graded nature of Web relevance and (2) caps at rank 10, matching user behavior. MAP remains standard for TREC ad-hoc tasks where binary relevance suffices [^bce25].
+
+**bpref** (Buckley & Voorhees, 2004): measures preference satisfaction over relevant vs. non-relevant pairs in the judged pool. Robust to missing judgments because it only considers documents that have been judged. Formula:
+```
+bpref = (1/R) Σ_{r} (1 − |n ranked above r| / min(R, N))
+```
+where R = judged relevant count, N = judged non-relevant count, n = judged non-relevant documents ranked above relevant document r. bpref and MAP converge as pool depth increases [^bce25].
+
 ## See also
 
 - [Embeddings](/ai-engineering/embeddings.md) — dense vectors as the deep-learning successor to TF-IDF and LSI
@@ -273,6 +523,7 @@ BM25 is explicitly used in modern RAG as the keyword-matching complement to dens
 - [Query Expansion](/ai-engineering/query-expansion.md) — relevance feedback and pseudo-relevance feedback
 - [Clustering Methods](/ai-engineering/clustering-methods.md) — document clustering for browsing and retrieval
 - [NLP Deep Learning](/ai-engineering/nlp-deep-learning.md) — modern NLP methods that succeeded classical IR approaches
+- [Information Retrieval: Implementing and Evaluating Search Engines](/ai-engineering/sources/information-retrieval-implementing-and-evaluating.md) — full source summary
 
 ---
 
@@ -284,3 +535,20 @@ BM25 is explicitly used in modern RAG as the keyword-matching complement to dens
 [^p06]: [Information Retrieval: A Survey (Greengrass, 2000) — Part 6](../../raw/pdf/pdf-information-retrieval-a-survey-part-06.md)
 [^p12]: [Information Retrieval: A Survey (Greengrass, 2000) — Part 12](../../raw/pdf/pdf-information-retrieval-a-survey-part-12.md)
 [^bce01]: [Information Retrieval: Implementing and Evaluating Search Engines (Büttcher, Clarke, Cormack, 2010) — Part 1](../../raw/pdf/pdf-information-retrieval-implementing-and-evaluating-part-01.md)
+[^bce10]: [Information Retrieval: Implementing and Evaluating Search Engines (Büttcher, Clarke, Cormack, 2010) — Part 10](../../raw/pdf/pdf-information-retrieval-implementing-and-evaluating-part-10.md)
+[^bce11]: [Information Retrieval: Implementing and Evaluating Search Engines (Büttcher, Clarke, Cormack, 2010) — Part 11](../../raw/pdf/pdf-information-retrieval-implementing-and-evaluating-part-11.md)
+[^bce13]: [Information Retrieval: Implementing and Evaluating Search Engines (Büttcher, Clarke, Cormack, 2010) — Part 13](../../raw/pdf/pdf-information-retrieval-implementing-and-evaluating-part-13.md)
+[^bce14]: [Information Retrieval: Implementing and Evaluating Search Engines (Büttcher, Clarke, Cormack, 2010) — Part 14](../../raw/pdf/pdf-information-retrieval-implementing-and-evaluating-part-14.md)
+[^bce17]: [Information Retrieval: Implementing and Evaluating Search Engines (Büttcher, Clarke, Cormack, 2010) — Part 17](../../raw/pdf/pdf-information-retrieval-implementing-and-evaluating-part-17.md)
+[^bce18]: [Information Retrieval: Implementing and Evaluating Search Engines (Büttcher, Clarke, Cormack, 2010) — Part 18](../../raw/pdf/pdf-information-retrieval-implementing-and-evaluating-part-18.md)
+[^bce22]: [Information Retrieval: Implementing and Evaluating Search Engines (Büttcher, Clarke, Cormack, 2010) — Part 22](../../raw/pdf/pdf-information-retrieval-implementing-and-evaluating-part-22.md)
+[^bce23]: [Information Retrieval: Implementing and Evaluating Search Engines (Büttcher, Clarke, Cormack, 2010) — Part 23](../../raw/pdf/pdf-information-retrieval-implementing-and-evaluating-part-23.md)
+[^bce25]: [Information Retrieval: Implementing and Evaluating Search Engines (Büttcher, Clarke, Cormack, 2010) — Part 25](../../raw/pdf/pdf-information-retrieval-implementing-and-evaluating-part-25.md)
+
+<!-- RELATED:START (generated by bin/corpus_heal.py related — do not edit inside) -->
+
+## Related across domains
+
+- [Python Built-in Functions](/mlops/python-built-in-functions.md) · _mlops_
+
+<!-- RELATED:END -->

@@ -2,6 +2,33 @@
 
 > OKF v0.1 change log. Newest first, grouped by date.
 
+## 2026-08-06
+
+* **Ingest**: Information Retrieval: Implementing and Evaluating (Büttcher, Clarke, Cormack, 2010) — parts 02-32 — routed to ai-engineering
+  - sources: pdf-information-retrieval-implementing-and-evaluating-part-02.md through part-32.md (channel: pdf, 31 files)
+  - domain: ai-engineering
+  - new pages: none (source page and authors created in part-01 ingest 2026-08-05)
+  - pages updated: [/ai-engineering/sources/information-retrieval-implementing-and-evaluating.md, /ai-engineering/information-retrieval.md, /ai-engineering/stefan-buttcher.md, /ai-engineering/charles-clarke.md, /ai-engineering/gordon-cormack.md]
+  - notes: ingest-auto run; completes 624pp textbook. source page expanded with implementation techniques (TAAT/DAAT, WAND algorithm, index compression: gamma/VByte/Huffman), ranking models (BM25 derivation from Two-Poisson model, Dirichlet LM, DFR/Bose-Einstein), evaluation (nDCG, bpref, statistical tests), and applications (PageRank, HITS, Web crawlers, XML/GC-lists). concept page gained 6 new sections. All 3 author stubs promoted to draft.
+
+* **Ingest**: Introduction to Probability (Grinstead & Snell, 2006) — parts 01-19 of 25 — routed to ai-engineering
+  - sources: pdf-introduction-to-probability-part-01.md through part-19.md (channel: pdf, 19 files)
+  - domain: ai-engineering
+  - new pages: [/ai-engineering/sources/introduction-to-probability-grinstead-snell.md, /ai-engineering/charles-grinstead.md, /ai-engineering/j-laurie-snell.md]
+  - pages updated: [/ai-engineering/probability-and-statistics-for-ml.md, /ai-engineering/README.md]
+  - notes: ingest-auto run; 19/25 parts covering chapters 1-9 (discrete/continuous distributions, combinatorics, conditional probability, Bayes' theorem, named distributions, LLN, generating functions, CLT). Remaining 6 parts (chapters 10-12: Markov chains, random walks, gambling) not in this batch. New source page created; probability-and-statistics-for-ml.md gained 3 new sections (discrete distributions, limit theorems, generating functions).
+
+* **Collectors**: gmail=0, blog_promote=0, obsidian=0, book_discover=0, blog_discover=0, book_fetch=0, pdf=0, image=0, books=0, arxiv=24, youtube=0, github_discover=5, github_promote=5, github=0, x=0, links_refetch=0
+* **Ingest**: 50 ingested · 0 deferred · status=ok
+* **YoutubeQuick**: 0 intake · 0 rescued · 0 skipped · status=ok
+* **DocsQuick**: 7 intake · 41 thin · 2 llm_fail · status=ok
+* **YoutubeReap**: 0 removed · status=ok
+* **Gardener**: 4 stubs deepened · status=ok
+* **Heal**: 40 citations repointed · 0 unfixable · 2 hubs reindexed · 32 cross-domain links · status=ok
+* **Depth**: 424 knowledge · 1355 sources · ratio 1:3.2
+* **GapResolver**: 0 gap dispatched · 0 sources queued · status=ok
+* **Lint**: 1 broken wikilinks · 0 broken citations · 0 orphans · 1262 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+* **OKF**: 0 violations
 ## 2026-08-05
 * **Ingest**: Information Retrieval: Implementing and Evaluating Search Engines (Büttcher, Clarke, Cormack; MIT Press 2010) · part 1/32 · channel=pdf · domain=ai-engineering · created `corpus/ai-engineering/sources/information-retrieval-implementing-and-evaluating.md` · created `corpus/ai-engineering/stefan-buttcher.md` · created `corpus/ai-engineering/charles-clarke.md` · created `corpus/ai-engineering/gordon-cormack.md` · updated `corpus/ai-engineering/information-retrieval.md` (added Probability Ranking Principle, efficiency/effectiveness dimensions, specificity/exhaustivity/novelty) · ingest-auto run; 1 ingested, 49 deferred
 * **Defer**: An Infinite Descent into Pure Mathematics (Clive Newstead) · parts 12–27 (16 files) · channel=pdf · G1 deferred — no existing domain covers pure mathematics (number theory, abstract algebra, ring theory); consistent with 2026-08-04 precedent for Elementary Differential Equations G1 deferral

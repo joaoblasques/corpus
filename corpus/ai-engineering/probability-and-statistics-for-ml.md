@@ -12,17 +12,79 @@ sources:
   - path: raw/_inbox/pdf-mathematics-for-machine-learning-part-03.md
     channel: pdf
     ingested_at: 2026-07-23
+  - path: raw/_inbox/pdf-introduction-to-probability-part-01.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-introduction-to-probability-part-02.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-introduction-to-probability-part-03.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-introduction-to-probability-part-04.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-introduction-to-probability-part-05.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-introduction-to-probability-part-06.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-introduction-to-probability-part-07.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-introduction-to-probability-part-08.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-introduction-to-probability-part-09.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-introduction-to-probability-part-10.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-introduction-to-probability-part-11.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-introduction-to-probability-part-12.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-introduction-to-probability-part-13.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-introduction-to-probability-part-14.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-introduction-to-probability-part-15.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-introduction-to-probability-part-16.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-introduction-to-probability-part-17.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-introduction-to-probability-part-18.md
+    channel: pdf
+    ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-introduction-to-probability-part-19.md
+    channel: pdf
+    ingested_at: 2026-08-06
 aliases:
   - probability ML
   - Bayesian inference
   - Gaussian distribution
   - exponential family
   - conjugate prior
+  - Polya urn
+  - Chebyshev's inequality
+  - Weak Law of Large Numbers
+  - Central Limit Theorem
+  - moment generating function
 tags:
   - corpus/ai-engineering
   - concept
 created: 2026-07-08
-updated: 2026-07-23
+updated: 2026-08-06
 ---
 
 # Probability and Statistics for Machine Learning
@@ -183,6 +245,53 @@ Random variables can be viewed as vectors with inner product ⟨X, Y⟩ = Cov[x,
 
 Uncorrelated variables satisfy Pythagoras: Var[X + Y] = Var[X] + Var[Y].
 
+## Discrete Distributions
+
+The following named discrete distributions are foundations for ML classifiers, language models, and count-based inference [^gns01][^gns02]:
+
+| Distribution | PMF | Mean | Variance |
+|---|---|---|---|
+| Bernoulli(p) | P(X=1)=p, P(X=0)=1-p | p | p(1-p) |
+| Binomial(n,p) | C(n,k)p^k(1-p)^{n-k} | np | np(1-p) |
+| Geometric(p) | (1-p)^{k-1}p, k=1,2,... | 1/p | (1-p)/p^2 |
+| Negative Binomial(r,p) | C(k-1,r-1)p^r(1-p)^{k-r} | r/p | r(1-p)/p^2 |
+| Poisson(λ) | e^{-λ}λ^k/k! | λ | λ |
+| Hypergeometric(N,K,n) | C(K,k)C(N-K,n-k)/C(N,n) | nK/N | — |
+
+**Poisson as limit of Binomial**: for large n and small p with λ = np fixed, Binomial(n,p) → Poisson(λ). This motivates the Poisson distribution as the natural model for rare events in large populations [^gns10].
+
+**Expected value**: E[X] = Σ_x x · p(x) — the probability-weighted average [^gns01].
+
+**Variance**: Var[X] = E[X^2] - (E[X])^2 — computing via E[X^2] is usually simpler than direct computation of E[(X-μ)^2] [^gns01].
+
+## Key Inequalities and Limit Theorems
+
+**Markov's inequality**: for any non-negative random variable X and a > 0: P(X ≥ a) ≤ E[X] / a [^gns06]. Proof: E[X] = ∫ x f(x) dx ≥ ∫_{x≥a} x f(x) dx ≥ a P(X ≥ a).
+
+**Chebyshev's inequality**: for any random variable X with mean μ and finite variance σ²: P(|X - μ| ≥ kσ) ≤ 1/k² for any k > 0 [^gns06]. Follows directly from Markov applied to (X-μ)^2. Distribution-free; bounds are loose in practice but hold universally.
+
+**Weak Law of Large Numbers (WLLN)**: let X_1, ..., X_n be i.i.d. with mean μ and variance σ² < ∞. The sample mean S_n/n = (X_1 + ... + X_n)/n satisfies: for every ε > 0, P(|S_n/n - μ| > ε) → 0 as n → ∞ [^gns06]. Proof: Var[S_n/n] = σ²/n → 0; apply Chebyshev.
+
+**Strong Law of Large Numbers (SLLN)**: under the same conditions, S_n/n → μ with probability 1 (almost surely) [^gns06]. Stronger than WLLN: convergence holds on an event of probability 1, not merely that individual probabilities go to zero.
+
+**Central Limit Theorem (CLT)**: let X_1, ..., X_n be i.i.d. with mean μ and variance σ² > 0. The standardized sum Z_n = (S_n - nμ)/(σ√n) converges in distribution to N(0,1) [^gns07]. Formally: P(a ≤ Z_n ≤ b) → Φ(b) - Φ(a) where Φ is the standard normal CDF. Justifies Gaussian approximations whenever outcomes are sums of many independent contributions — pervasive in ML (e.g., weight initialization, noise models, sampling distributions of estimators).
+
+## Generating Functions
+
+**Probability generating function (PGF)**: for a non-negative integer-valued random variable X, g(z) = E[z^X] = Σ_{k=0}^{∞} P(X=k) z^k [^gns07]. The k-th derivative at z=0 equals k! P(X=k). PGFs transform convolution (sums of independent RVs) into multiplication.
+
+**Moment generating function (MGF)**: M(t) = E[e^{tX}] [^gns07]. Expanding the exponential: M(t) = Σ_{k=0}^{∞} E[X^k] t^k / k!, so the k-th moment E[X^k] = M^{(k)}(0) (k-th derivative evaluated at 0).
+
+**MGF of sum of independent RVs**: if X and Y are independent, M_{X+Y}(t) = M_X(t) · M_Y(t) [^gns07]. This multiplicative property makes MGFs the natural tool for proving limit theorems about sums.
+
+**Key MGFs** [^gns07]:
+- Bernoulli(p): M(t) = 1 - p + p e^t
+- Poisson(λ): M(t) = exp(λ(e^t - 1))
+- Normal N(μ, σ²): M(t) = exp(μt + σ²t²/2)
+- Exponential(λ): M(t) = λ/(λ - t) for t < λ
+
+**CLT proof via MGFs**: the MGF of Z_n = (S_n - nμ)/(σ√n) is [M_X(t/(σ√n)) exp(-μt/(σ√n))]^n. Taylor-expanding M_X(s) = 1 + μs + (μ² + σ²)s²/2 + ... and taking n → ∞ gives exp(t²/2), the MGF of N(0,1) [^gns07].
+
 ## Related Corpus Pages
 
 - [/ai-engineering/matrix-decompositions.md](/ai-engineering/matrix-decompositions.md) — Cholesky for Gaussian sampling
@@ -197,3 +306,22 @@ Uncorrelated variables satisfy Pythagoras: Var[X + Y] = Var[X] + Var[Y].
 [^src1]: [Mathematics for Machine Learning, Part 10](../../raw/pdf/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-10.md)
 [^src2]: [Mathematics for Machine Learning, Part 11](../../raw/pdf/pdf-deisenroth-faisal-ong-mathematics-for-machine-learning-autho-part-11.md)
 [^t-src-prob]: [Mathematics for Machine Learning (Thomas 2018), Part 3/3](../../raw/pdf/pdf-mathematics-for-machine-learning-part-03.md)
+[^gns01]: [Introduction to Probability (Grinstead & Snell) — Part 01](../../raw/pdf/pdf-introduction-to-probability-part-01.md)
+[^gns02]: [Introduction to Probability (Grinstead & Snell) — Part 02](../../raw/pdf/pdf-introduction-to-probability-part-02.md)
+[^gns03]: [Introduction to Probability (Grinstead & Snell) — Part 03](../../raw/pdf/pdf-introduction-to-probability-part-03.md)
+[^gns04]: [Introduction to Probability (Grinstead & Snell) — Part 04](../../raw/pdf/pdf-introduction-to-probability-part-04.md)
+[^gns05]: [Introduction to Probability (Grinstead & Snell) — Part 05](../../raw/pdf/pdf-introduction-to-probability-part-05.md)
+[^gns06]: [Introduction to Probability (Grinstead & Snell) — Part 06](../../raw/pdf/pdf-introduction-to-probability-part-06.md)
+[^gns07]: [Introduction to Probability (Grinstead & Snell) — Part 07](../../raw/pdf/pdf-introduction-to-probability-part-07.md)
+[^gns08]: [Introduction to Probability (Grinstead & Snell) — Part 08](../../raw/pdf/pdf-introduction-to-probability-part-08.md)
+[^gns09]: [Introduction to Probability (Grinstead & Snell) — Part 09](../../raw/pdf/pdf-introduction-to-probability-part-09.md)
+[^gns10]: [Introduction to Probability (Grinstead & Snell) — Part 10](../../raw/pdf/pdf-introduction-to-probability-part-10.md)
+[^gns11]: [Introduction to Probability (Grinstead & Snell) — Part 11](../../raw/pdf/pdf-introduction-to-probability-part-11.md)
+[^gns12]: [Introduction to Probability (Grinstead & Snell) — Part 12](../../raw/pdf/pdf-introduction-to-probability-part-12.md)
+[^gns13]: [Introduction to Probability (Grinstead & Snell) — Part 13](../../raw/pdf/pdf-introduction-to-probability-part-13.md)
+[^gns14]: [Introduction to Probability (Grinstead & Snell) — Part 14](../../raw/pdf/pdf-introduction-to-probability-part-14.md)
+[^gns15]: [Introduction to Probability (Grinstead & Snell) — Part 15](../../raw/pdf/pdf-introduction-to-probability-part-15.md)
+[^gns16]: [Introduction to Probability (Grinstead & Snell) — Part 16](../../raw/pdf/pdf-introduction-to-probability-part-16.md)
+[^gns17]: [Introduction to Probability (Grinstead & Snell) — Part 17](../../raw/pdf/pdf-introduction-to-probability-part-17.md)
+[^gns18]: [Introduction to Probability (Grinstead & Snell) — Part 18](../../raw/pdf/pdf-introduction-to-probability-part-18.md)
+[^gns19]: [Introduction to Probability (Grinstead & Snell) — Part 19](../../raw/pdf/pdf-introduction-to-probability-part-19.md)

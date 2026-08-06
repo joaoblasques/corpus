@@ -16,6 +16,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 ## Pages
 
 ### Mathematical Foundations for ML
+- [Introduction to Probability (Grinstead & Snell, 2006)](/ai-engineering/sources/introduction-to-probability-grinstead-snell.md) — source · draft · classic undergraduate probability textbook (518pp, GNU FDL); simulation-first; discrete/continuous distributions, Bayes' theorem, CLT, LLN; 19/25 parts ingested (chapters 1–9)
 - [CUR Decomposition](/ai-engineering/cur-decomposition.md) — concept · draft · sparse-friendly alternative to SVD; selects actual rows/columns with Frobenius-norm probability weighting; middle matrix U via pseudoinverse
 - [Linear Algebra for ML](/ai-engineering/linear-algebra-for-ml.md) — concept · draft · Vector spaces, basis, rank, inner products, projections, Gram-Schmidt
 - [Matrix Decompositions](/ai-engineering/matrix-decompositions.md) — concept · draft · Eigenvalues, eigendecomposition, Cholesky, LU; cross-links to SVD
@@ -120,6 +121,8 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Deformable Parts Model](/ai-engineering/deformable-parts-model.md) — concept · draft · star-model object detector (root filter + spring-connected part filters + deformation cost); HoG pyramid; detection score formula; PASCAL VOC/IoU/AP evaluation; state-of-the-art 2008–2012 before CNN detectors; Stanford CS131 2017
 
 ### Entities
+- [Charles M. Grinstead](/ai-engineering/charles-grinstead.md) — entity · stub · mathematician at Swarthmore College; co-author of Introduction to Probability (AMS, 2003) with J. Laurie Snell; GNU FDL open-access textbook via CHANCE project
+- [J. Laurie Snell](/ai-engineering/j-laurie-snell.md) — entity · stub · probabilist at Dartmouth College; originator of the CHANCE project; co-author of Introduction to Probability (AMS, 2003) with Grinstead; GNU FDL open-access
 - [François Fleuret](/ai-engineering/francois-fleuret.md) — entity · draft · Professor of CS at University of Geneva; author of The Little Book of Deep Learning (189pp, 2024, 500K+ downloads); co-author of linear attention (Transformers are RNNs, ICML 2020)
 - [Christopher M. Bishop](/ai-engineering/christopher-bishop.md) — entity · draft · ML researcher at Microsoft Research Cambridge; author of PRML (2006), the canonical Bayesian ML textbook; F.R.Eng.
 - [Kevin P. Murphy](/ai-engineering/kevin-murphy.md) — entity · draft · ML researcher at Google; author of Probabilistic Machine Learning: An Introduction (MIT Press, 2022) and two companion volumes; De Groot prize 2013
@@ -360,9 +363,10 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Vibe Coding (and why Spec-Driven Development supersedes it)](/ai-engineering/vibe-coding.md)
 - [Visual Bag of Words](/ai-engineering/visual-bag-of-words.md)
 
-### Entities (71)
+### Entities (73)
 - [Anthropic](/ai-engineering/anthropic.md)
 - [Charles L.A. Clarke](/ai-engineering/charles-clarke.md)
+- [Charles M. Grinstead](/ai-engineering/charles-grinstead.md)
 - [Chip Huyen](/ai-engineering/chip-huyen.md)
 - [Christopher M. Bishop](/ai-engineering/christopher-bishop.md)
 - [Claude Code](/ai-engineering/claude-code.md)
@@ -390,6 +394,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Hamel Husain](/ai-engineering/hamel-husain.md)
 - [Hermes (coding agent)](/ai-engineering/hermes.md)
 - [Hugging Face](/ai-engineering/hugging-face.md)
+- [J. Laurie Snell](/ai-engineering/j-laurie-snell.md)
 - [James H. Martin](/ai-engineering/james-martin.md)
 - [Kevin P. Murphy](/ai-engineering/kevin-murphy.md)
 - [Laguna XS.2](/ai-engineering/laguna-xs2.md)
@@ -445,12 +450,15 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Tool Calling & Context Engineering: How They Interlock](/ai-engineering/tool-calling-and-context-engineering.md)
 
 <details>
-<summary>Source summaries (711)</summary>
+<summary>Source summaries (716)</summary>
 
 - ["2024 State of Analytics Engineering, crafted by dbt Labs | dbt Labs"](/ai-engineering/sources/2024-state-of-analytics-engineering-crafted-by-dbt-labs-dbt--cb342df0.md)
 - ["9 AI Concepts Explained: Tokenization, RAG, RLHF, LoRA & More"](/ai-engineering/sources/9-ai-concepts-explained-tokenization-rag-rlhf-lora-more-a.md)
 - ["9 Best Tools for Automating AI Workflows [2026 Comparison]"](/ai-engineering/sources/9-best-tools-for-automating-ai-workflows-2026-comparison-c224f0ed.md)
 - ["[AINews] \"Laguna S 2.1 Released: Cheaper than Deepseek v4 Flash, Better than V4 Pro\""](/ai-engineering/sources/ainews-laguna-s-2-1-released-cheaper-than-deepseek-v4-flash--43429d78.md)
+- ["[AINews] AI is eating Finance; AIE NYC now open"](/ai-engineering/sources/ainews-ai-is-eating-finance-aie-nyc-now-open-ba8a7302.md)
+- ["[AINews] Black Forest Labs FLUX 3 - Multimodal Flow Models that beat Seedance 2.0, Gemini Omni and Grok Imagine, and FLUX-mimic video-action robotics model"](/ai-engineering/sources/ainews-black-forest-labs-flux-3-multimodal-flow-models-that--1651e280.md)
+- ["[AINews] Claude Opus 5: Fable-level performance at Opus price (half Fable)"](/ai-engineering/sources/ainews-claude-opus-5-fable-level-performance-at-opus-price-h-801eea52.md)
 - ["[AINews] Codex usage up >10x in 6 months to 7M users, +1M in the past ~day; did Codex overtake Claude Code??"](/ai-engineering/sources/ainews-codex-usage-up-10x-in-6-months-to-7m-users-1m-in-the--ac1def65.md)
 - ["[AINews] Kimi K3 2.8T-A50B: the largest open model ever released; Opus 4.8-class at Sonnet 5 pricing"](/ai-engineering/sources/ainews-kimi-k3-2-8t-a50b-the-largest-open-model-ever-release-08f77354.md)
 - ["[AINews] Lilian Weng summarizes 35 papers on Harness Engineering for RSI"](/ai-engineering/sources/ainews-lilian-weng-summarizes-35-papers-on-harness-engineeri-b1619a08.md)
@@ -752,6 +760,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [AI - Google GenAI Leadership Course Summary](/ai-engineering/sources/ai-google-genai-leadership-course-summary-a.md)
 - [AI - Understand AI in 14 Minutes - Anthropic Chloe Lubinski ARC 2026](/ai-engineering/sources/ai-understand-ai-in-14-minutes-anthropic-chloe-lubinski-arc--ac.md)
 - [AI Agent Development Company | Custom AI Agents & Services](/ai-engineering/sources/ai-agent-development-company-custom-ai-agents-services-fe611269.md)
+- [AI agent infrastructure stack](/ai-engineering/sources/ai-agent-infrastructure-stack-44467119.md)
 - [AI Agents - Learn 90 Percent in 30 Minutes Cole Medin](/ai-engineering/sources/ai-agents-learn-90-percent-in-30-minutes-cole-medin-ed.md)
 - [AI agents and the data lake (w/ Lauren Anderson)](/ai-engineering/sources/ai-agents-and-the-data-lake-w-lauren-anderson-aaeef605.md)
 - [AI Agents Full Course 2026 (Nick Saraev)](/ai-engineering/sources/nick-saraev-ai-agents-course-2026.md)
@@ -795,7 +804,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [AI Tools - AI for Data Analysis DIG Framework](/ai-engineering/sources/ai-tools-ai-for-data-analysis-dig-framework-fae.md)
 - [AI Tools - Best AI Coding Tools for Developers 2025](/ai-engineering/sources/ai-tools-best-ai-coding-tools-for-developers-2025-2025.md)
 - [AI Tools - Build AI Employees in 10 Minutes](/ai-engineering/sources/ai-tools-build-ai-employees-in-10-minutes-e.md)
-- [AI Tools - Claude Code and Gemini CLI in the Terminal NetworkChuck](/ai-engineering/sources/ai-tools-claude-code-and-gemini-cli-in-the-terminal-networkc-ec.md)
+- [AI Tools - Claude Code and Gemini CLI in the Terminal (NetworkChuck)](/ai-engineering/sources/ai-tools-claude-code-and-gemini-cli-in-the-terminal-networkc-ec.md)
 - [AI Tools - Claude Desktop Super Agent with MCPs](/ai-engineering/sources/ai-tools-claude-desktop-super-agent-with-mcps-c.md)
 - [AI Tools - Gemini CLI Web UI for Browser Access](/ai-engineering/sources/ai-tools-gemini-cli-web-ui-for-browser-access-acce.md)
 - [AI Tools - Getting Started with CLI Coding Tools](/ai-engineering/sources/ai-tools-getting-started-with-cli-coding-tools-doc.md)
@@ -1039,6 +1048,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Information Retrieval: Implementing and Evaluating Search Engines (Büttcher, Clarke, Cormack, 2010)](/ai-engineering/sources/information-retrieval-implementing-and-evaluating.md)
 - [INSANE DeepSeek AI Agent Can Automate ANYTHING For FREE!! (Step by Step Tutorial)](/ai-engineering/sources/insane-deepseek-ai-agent-can-automate-anything-for-free-step-LGiTLMhx_zo.md)
 - [Internet Advertising: An Interplay Among Advertisers, Online Publishers and Web Users](/ai-engineering/sources/internet-advertising-survey.md)
+- [Introduction to Probability (Grinstead & Snell, 2006)](/ai-engineering/sources/introduction-to-probability-grinstead-snell.md)
 - [introduction to statistical learning](/ai-engineering/sources/introduction-to-statistical-learning.md)
 - [iPad - Complete Music Production Hub Setup](/ai-engineering/sources/ipad-complete-music-production-hub-setup-e.md)
 - [Learn 80% of Claude Cowork in Under 20 Minutes](/ai-engineering/sources/learn-80-of-claude-cowork-in-under-20-minutes-z9rdrNrkvDY.md)

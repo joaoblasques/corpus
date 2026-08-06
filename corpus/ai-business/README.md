@@ -70,7 +70,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [AI and the Job Market](/ai-business/ai-and-the-job-market.md)
 
 <details>
-<summary>Source summaries (193)</summary>
+<summary>Source summaries (196)</summary>
 
 - ["$1,300/Day Automated Bittensor Investing With Claude Code (34 Min Free Masterclass)"](/ai-business/sources/1-300-day-automated-bittensor-investing-with-claude-code-34--SHEs8gNh7sQ.md)
 - ["$100 million for open source: A milestone built by the community"](/ai-business/sources/100-million-for-open-source-a-milestone-built-by-the-communi-580ab93c.md)
@@ -180,10 +180,13 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [AI Mania Is Eviscerating Global Decision-Making](/ai-business/sources/ai-mania-is-eviscerating-global-decision-making-c54ae55d.md)
 - [AI Phobia Is Just Fear That ‘Easier’ Equals ‘Cheating’](/ai-business/sources/ai-phobia-is-just-fear-that-easier-equals-cheating-446f560e.md)
 - [AI raises everyone's app quality but customers now vibecode their own clones to skip paying — @levelsio (Pieter Levels)](/ai-business/sources/ai-raises-everyone-s-app-quality-but-customers-now-vibecode--e58d345f.md)
+- [AI Readiness Assessment](/ai-business/sources/ai-readiness-assessment-17443658.md)
 - [AI Side Income - 7 Methods Using AI Tools](/ai-business/sources/ai-side-income-7-methods-using-ai-tools-doc.md)
 - [AI Strategy Consulting & Fractional CAIO Services - AY Automate](/ai-business/sources/ai-strategy-consulting-fractional-caio-services-ay-automate-7797e4a9.md)
 - [AI Turned Me Into a Content Agency of One](/ai-business/sources/ai-turned-me-into-a-content-agency-of-one-521529bc.md)
+- [AI vs Human Employee Cost Calculator](/ai-business/sources/ai-vs-human-employee-cost-calculator-3904af11.md)
 - [AI Worldviews](/ai-business/sources/ai-worldviews-08d76d01.md)
+- [AI Worming through Word](/ai-business/sources/ai-worming-through-word-f34faab8.md)
 - [AI Writing Will Feel Real—Eventually](/ai-business/sources/ai-writing-will-feel-real-eventually-6c49679d.md)
 - [AI-Powered Obsidian Smart Note System](/ai-business/sources/ai-powered-obsidian-smart-note-system-e.md)
 - [AirPods Max Sweepstakes — Official Rules | dbt Labs at Databricks Data+AI Summit 2026 | dbt Labs](/ai-business/sources/airpods-max-sweepstakes-official-rules-dbt-labs-at-databrick-f8604542.md)
