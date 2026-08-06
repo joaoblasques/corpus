@@ -153,3 +153,9 @@ type: internal
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/software-engineering/j-strother-moore.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/superpowers-agentic-skills-framework-for-tdd-first-software--f.md", "verdict_ok": false, "gov": "reverted+queued"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/ai-tools-claude-code-and-gemini-cli-in-the-terminal-networkc-ec.md", "verdict_ok": false, "gov": "reverted+queued"}
+
+## [2026-08-06T12:09] gardener · run
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/superpowers-agentic-skills-framework-for-tdd-first-software--f.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/ai-tools-claude-code-and-gemini-cli-in-the-terminal-networkc-ec.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/ai-tools-gemini-cli-web-ui-for-browser-access-acce.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/claude-code-boost-efficiency-with-gemini-cli-integration-ea.md", "verdict_ok": true, "gov": "committed"}
