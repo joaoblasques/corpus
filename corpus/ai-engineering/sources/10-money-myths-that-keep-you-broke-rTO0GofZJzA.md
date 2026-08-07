@@ -1,7 +1,7 @@
 ---
 type: source
 domain: ai-engineering
-status: stub
+status: draft
 sources:
   - path: raw/youtube/youtube-rTO0GofZJzA-10-money-myths-that-keep-you-broke.md
     channel: youtube
@@ -12,7 +12,7 @@ tags:
   - source
   - youtube-quick-intake
 created: 2026-07-08
-updated: 2026-07-08
+updated: 2026-08-07
 provisional: false
 youtube_video_id: rTO0GofZJzA
 url: https://youtu.be/rTO0GofZJzA
