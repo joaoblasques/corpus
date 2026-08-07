@@ -90,6 +90,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Formal Verification and Mechanical Theorem Proving](/software-engineering/formal-verification.md) — concept · draft · Boyer-Moore theorem prover; induction from recursion; shell principle; rewrite-rule waterfall; compiler/string-search/prime-factorization proofs; NQTHM; ACL2
 
 ### Sources
+- [Mathematics for Computer Science (Lehman, Leighton, Meyer — MIT/Google, 2018)](/software-engineering/sources/mathematics-for-computer-science.md) — source · draft · definitive free CS math textbook (1048pp, CC BY-SA 3.0; MIT 6.042J); proofs (induction, contradiction, well-ordering), mathematical data types (sets/functions/relations), number theory (GCD, Bézout, RSA), graph theory (planarity, coloring, DAGs, partial orders), counting (combinatorics, asymptotics, generating functions), probability (Markov/Chebyshev/Chernoff bounds), recurrences (Hanoi, Fibonacci); 38 of 41 parts ingested
 - [A Cool Brisk Walk Through Discrete Mathematics (Davies, v2.2.2)](/software-engineering/sources/a-cool-brisk-walk-through-discrete-mathematics.md) — source · draft · CS-oriented discrete math tour; 254pp, 9 chapters, CC BY-SA 4.0; all 9 parts ingested
 - [OSTEP: Operating Systems — Three Easy Pieces (Arpaci-Dusseau, 2023)](/software-engineering/sources/ostep-operating-systems-three-easy-pieces.md) — source · draft · 47-chapter free textbook; virtualization, concurrency, persistence, security; xv6 lab companion
 - [Designing Distributed Systems (Burns, O'Reilly, 2018)](/software-engineering/sources/burns-designing-distributed-systems.md) — source · draft · pattern catalog for container-based distributed systems: sidecar/ambassador/adapter (single-node), replicated/sharded/scatter-gather (multi-node), batch patterns
@@ -189,7 +190,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Simplicity as an Engineering Constraint in the AI Age](/software-engineering/simplicity-as-engineering-constraint.md)
 
 <details>
-<summary>Source summaries (86)</summary>
+<summary>Source summaries (87)</summary>
 
 - ["2024-05-25-15-54-25 - move-base-up by josephmachado · Pull Request #17 · josephmachado/simple_dbt_project"](/software-engineering/sources/2024-05-25-15-54-25-move-base-up-by-josephmachado-pull-reque-ee.md)
 - ["A Guide to Multi-Tenancy: Benefits and Challenges"](/software-engineering/sources/a-guide-to-multi-tenancy-benefits-and-challenges-e55e9184.md)
@@ -257,6 +258,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Learning Algorithm (PDF, 327 pages)](/software-engineering/sources/learning-algorithm.md)
 - [macOS - Aerospace Tiling Window Manager with Leader Key](/software-engineering/sources/macos-aerospace-tiling-window-manager-with-leader-key-e.md)
 - [macOS - Simple Window Management with Raycast](/software-engineering/sources/macos-simple-window-management-with-raycast-aca.md)
+- [Mathematics for Computer Science (Lehman, Leighton, Meyer — MIT/Google, 2018)](/software-engineering/sources/mathematics-for-computer-science.md)
 - [Matt Pocock’s Agentic Engineering Workflow (just copy him)](/software-engineering/sources/matt-pocock-s-agentic-engineering-workflow-just-copy-him-nQwJVHCtDDY.md)
 - [Matters Computational: Ideas, Algorithms, Source Code (Joerg Arndt)](/software-engineering/sources/matters-computational.md)
 - [Naked Objects (PhD Thesis, Pawson 2004)](/software-engineering/sources/naked-objects.md)

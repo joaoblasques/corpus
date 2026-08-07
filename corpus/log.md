@@ -2,6 +2,40 @@
 
 > OKF v0.1 change log. Newest first, grouped by date.
 
+## 2026-08-07
+
+* **Ingest**: Mathematics for Computer Science (Lehman, Leighton, Meyer — MIT/Google, 2018) — parts 01-38 of 41 — routed to software-engineering
+  - sources: pdf-mathematics-for-computer-science-part-01.md through part-38.md (channel: pdf, 38 files)
+  - domain: software-engineering
+  - new pages: [/software-engineering/sources/mathematics-for-computer-science.md]
+  - pages updated: [/software-engineering/README.md]
+  - notes: ingest-auto run; 38/41 parts covering the complete textbook body (proofs, structures, counting, probability, recurrences). Parts 39–41 are appendices/index and remain in inbox for next run.
+
+* **Ingest**: Lies, Damned Lies, or Statistics (Poritz, 2017) — parts 01-06 of 06 — routed to ai-engineering
+  - sources: pdf-lies-damned-lies-or-statistics-how-to-tell-the-tru-part-01.md through part-06.md (channel: pdf, 6 files)
+  - domain: ai-engineering
+  - new pages: [/ai-engineering/sources/lies-damned-lies-or-statistics.md]
+  - pages updated: [/ai-engineering/README.md]
+  - notes: ingest-auto run; all 6 parts ingested (complete). Applied statistics textbook: descriptive stats, probability theory, study design (RCTs, sampling, ethics), CLT, confidence intervals, hypothesis testing.
+
+* **Ingest**: Introduction to Probability (Grinstead & Snell, 2006) — parts 20-25 of 25 — routed to ai-engineering (continuation)
+  - sources: pdf-introduction-to-probability-part-20.md through part-25.md (channel: pdf, 6 files)
+  - domain: ai-engineering
+  - new pages: none (updating existing source page)
+  - pages updated: [/ai-engineering/sources/introduction-to-probability-grinstead-snell.md, /ai-engineering/README.md]
+  - notes: ingest-auto run; completes the 25-part textbook. Added Ch10 (generating functions for continuous densities: MGFs, CLT proof via MGFs, Cauchy anomaly) and Ch11 (Markov chains: absorbing chains, fundamental matrix N=(I-Q)^{-1}, time to absorption t=Nc, absorption probabilities B=NR, Drunkard's Walk, ergodic chains, stationary distribution, Doeblin coupling).
+
+* **Collectors**: gmail=11, blog_promote=0, obsidian=0, book_discover=0, blog_discover=2, book_fetch=0, pdf=0, image=0, books=0, arxiv=24, youtube=0, github_discover=5, github_promote=5, github=0, x=0, links_refetch=0
+* **Ingest**: 50 ingested · 0 deferred · status=ok
+* **YoutubeQuick**: 0 intake · 0 rescued · 0 skipped · status=ok
+* **DocsQuick**: 6 intake · 42 thin · 2 llm_fail · status=ok
+* **YoutubeReap**: 0 removed · status=ok
+* **Gardener**: 4 stubs deepened · status=ok
+* **Heal**: 0 citations repointed · 0 unfixable · 3 hubs reindexed · 32 cross-domain links · status=ok
+* **Depth**: 424 knowledge · 1363 sources · ratio 1:3.2
+* **GapResolver**: 0 gap dispatched · 0 sources queued · status=ok
+* **Lint**: 1 broken wikilinks · 0 broken citations · 0 orphans · 1265 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+* **OKF**: 0 violations
 ## 2026-08-06
 
 * **Ingest**: Information Retrieval: Implementing and Evaluating (Büttcher, Clarke, Cormack, 2010) — parts 02-32 — routed to ai-engineering

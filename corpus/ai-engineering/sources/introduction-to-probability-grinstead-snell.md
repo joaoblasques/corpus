@@ -60,6 +60,24 @@ sources:
   - path: raw/_inbox/pdf-introduction-to-probability-part-19.md
     channel: pdf
     ingested_at: 2026-08-06
+  - path: raw/_inbox/pdf-introduction-to-probability-part-20.md
+    channel: pdf
+    ingested_at: 2026-08-07
+  - path: raw/_inbox/pdf-introduction-to-probability-part-21.md
+    channel: pdf
+    ingested_at: 2026-08-07
+  - path: raw/_inbox/pdf-introduction-to-probability-part-22.md
+    channel: pdf
+    ingested_at: 2026-08-07
+  - path: raw/_inbox/pdf-introduction-to-probability-part-23.md
+    channel: pdf
+    ingested_at: 2026-08-07
+  - path: raw/_inbox/pdf-introduction-to-probability-part-24.md
+    channel: pdf
+    ingested_at: 2026-08-07
+  - path: raw/_inbox/pdf-introduction-to-probability-part-25.md
+    channel: pdf
+    ingested_at: 2026-08-07
 aliases:
   - Grinstead Snell
   - Introduction to Probability
@@ -70,12 +88,12 @@ tags:
   - corpus/ai-engineering
   - source
 created: 2026-08-06
-updated: 2026-08-06
+updated: 2026-08-07
 ---
 
 # Introduction to Probability (Grinstead & Snell, 2006)
 
-TL;DR: Classic undergraduate probability textbook (518pp, GNU FDL open access). Simulation-first pedagogy: every concept introduced alongside a simulation experiment before the formal definition. Twelve chapters from discrete distributions through Markov chains. 19 of 25 parts ingested covering chapters 1–9; all foundational probability needed for ML (Bayes' theorem, CLT, LLN, MGFs, joint densities) is present.
+TL;DR: Classic undergraduate probability textbook (518pp, GNU FDL open access). Simulation-first pedagogy: every concept introduced alongside a simulation experiment before the formal definition. Twelve chapters from discrete distributions through Markov chains. All 25 parts now ingested (complete): foundational probability (Bayes' theorem, CLT, LLN, MGFs, joint densities) plus full Markov chain theory (absorbing, ergodic, regular chains, random walks).
 
 ## Authors
 
@@ -85,7 +103,7 @@ TL;DR: Classic undergraduate probability textbook (518pp, GNU FDL open access). 
 
 Published by the American Mathematical Society (AMS), 2003. The version dated 4 July 2006 was published by Peter Doyle and released under the GNU Free Documentation License, making it freely redistributable [^p01].
 
-## Scope (parts 01–19 ingested)
+## Scope (all 25 parts ingested — complete)
 
 | Chapter | Title | Content |
 |---|---|---|
@@ -98,6 +116,8 @@ Published by the American Mathematical Society (AMS), 2003. The version dated 4 
 | Ch7 | Generating Functions and CLT | PGF, MGF, moments from derivatives, CLT proof via MGFs |
 | Ch8 | Markov Chains (beginning) | Transition matrices, stationary distributions |
 | Ch9 | Random Variables | Joint density, marginal density, sums of independent RVs, MGF of continuous distributions |
+| Ch10 | Generating Functions (cont.) | MGF of continuous densities; CLT proof; Cauchy density; characteristic functions |
+| Ch11 | Markov Chains (complete) | Absorbing chains (fundamental matrix, absorption probabilities, gambler's ruin); ergodic/regular chains; stationary distribution; Doeblin coupling |
 
 ## Chapter 1: Discrete Probability Distributions
 
@@ -201,6 +221,59 @@ The **cumulative distribution function (CDF)**: F(x) = P(X ≤ x) = ∫_{-∞}^x
 
 **Normal approximation**: for large n, Binomial(n,p) ≈ N(np, np(1-p)). The normal approximation to the Poisson(λ) for large λ: N(λ, λ) [^p17].
 
+## Chapter 10: Generating Functions for Continuous Densities (parts 20–21)
+
+**Moment generating function for continuous distributions**: M(t) = E[e^{tX}] = ∫_{-∞}^{∞} e^{tx} f_X(x) dx; the k-th moment µ_k = M^{(k)}(0) [^p20].
+
+**Continuous MGF examples** [^p20]:
+- **Uniform[0,1]**: M(t) = (e^t − 1)/t
+- **Exponential(λ)**: M(t) = λ/(λ − t), converges only for |t| < λ
+- **Normal N(0,1)**: M(t) = e^{t²/2}, convergent for all t
+
+**Theorem**: if X is bounded (range in [−M, M]), then M(t) converges for all t, and M^{(n)}(0) = µ_n [^p20].
+
+**CLT proof via MGFs**: for i.i.d. X_i with mean 0, variance 1, the MGF of the standardized sum S_n* = S_n/√n satisfies M_{S_n*}(t) → e^{t²/2} (the MGF of N(0,1)) as n → ∞, by Taylor expansion and L'Hôpital's rule [^p20].
+
+**Cauchy density**: f(x) = 1/(π(1+x²)); variance is infinite; characteristic function k_X(τ) = e^{-|τ|}. The average of n i.i.d. Cauchy variables has the same Cauchy distribution — the LLN fails because variance is not finite [^p20].
+
+## Chapter 11: Markov Chains (parts 20–24)
+
+**Definition**: a Markov chain is a stochastic process where the transition probability from state s_i to s_j, denoted p_{ij}, depends only on the current state, not on past history [^p20]. The **transition matrix** P has entries p_{ij}; the n-step transition probability p^{(n)}_{ij} is the (i,j) entry of P^n [^p20].
+
+### Absorbing Markov Chains (parts 21–22)
+
+**Absorbing state**: s_i is absorbing if p_{ii} = 1 (impossible to leave). A chain is **absorbing** if it has at least one absorbing state and from every state it is possible to reach an absorbing state [^p21].
+
+**Canonical form**: reorder states so transient states come first (Q matrix, t×t) and absorbing states last. The transition matrix takes the form P = [Q R; 0 I] where I is r×r identity [^p21].
+
+**Fundamental matrix**: N = (I − Q)^{−1} = I + Q + Q² + ... ; the (i,j) entry n_{ij} is the expected number of times the chain is in transient state s_j before absorption, given it starts in s_i [^p21].
+
+**Time to absorption**: t = Nc, where c is an all-ones column vector; the i-th entry is the expected steps to absorption from state i [^p21].
+
+**Absorption probabilities**: B = NR; the (i,j) entry b_{ij} is the probability of being absorbed in absorbing state s_j starting from transient state s_i [^p21].
+
+**Gambler's Ruin**: a symmetric random walk on {0,...,T} with absorbing boundaries at 0 and T. Starting at x, the probability of reaching T before 0 is x/T when p = q = 1/2 [^p21][^p22].
+
+**Harmonic functions**: f is harmonic for P if f(i) = Σ_j p_{ij} f(j); a fair game (martingale). For an absorbing chain, the expected final fortune equals the initial fortune: E_i[f(absorption state)] = f(i) [^p22].
+
+### Ergodic and Regular Chains (parts 22–24)
+
+**Ergodic chain**: a Markov chain where it is possible to go from every state to every state (possibly in multiple steps); also called irreducible [^p22].
+
+**Regular chain**: a Markov chain where some power P^n has all positive entries; every regular chain is ergodic, but not vice versa. The Land of Oz example (pNN = 0 but P² > 0) is regular [^p22].
+
+**Ehrenfest urn model**: 4 balls in 2 urns; at each step a random ball moves. This is ergodic but NOT regular — from state 0, only even states are reachable in even steps [^p22].
+
+**Fundamental Theorem (Theorem 11.7)**: for a regular transition matrix P, P^n → W as n → ∞, where W has all rows equal to the unique stationary vector w. The vector w is the unique probability vector satisfying wP = w [^p22].
+
+**Stationary distribution**: w satisfies wP = w; solve the linear system w = wP together with Σ w_i = 1. Any row vector v with vP = v is a scalar multiple of w; any column vector x with Px = x is a multiple of the all-ones vector c [^p22].
+
+**Land of Oz stationary distribution**: w = (0.4, 0.2, 0.4) for states (Rain, Nice, Snow); convergence to 3 decimal places by P^6 [^p22].
+
+**Mean time in transient state**: for an ergodic chain, the mean recurrence time for state s_i is 1/w_i [^p23].
+
+**Doeblin's coupling argument** (Theorem 11.9): convergence rate to stationary is bounded by the coupling probability; if some power P^N has a row with all entries ≥ ε, then ||P^n - W||_∞ ≤ (1−ε)^{⌊n/N⌋} [^p23].
+
 ## Chapters 8–9: Markov Chains Beginning and Random Variables
 
 **Joint density**: for continuous random variables X, Y, the joint density f_{X,Y}(x,y) ≥ 0 satisfies ∫∫ f_{X,Y}(x,y) dx dy = 1 [^p18].
@@ -250,3 +323,9 @@ See also:
 [^p17]: [Introduction to Probability — Part 17](../../../raw/pdf/pdf-introduction-to-probability-part-17.md)
 [^p18]: [Introduction to Probability — Part 18](../../../raw/pdf/pdf-introduction-to-probability-part-18.md)
 [^p19]: [Introduction to Probability — Part 19](../../../raw/pdf/pdf-introduction-to-probability-part-19.md)
+[^p20]: [Introduction to Probability — Part 20](../../../raw/pdf/pdf-introduction-to-probability-part-20.md)
+[^p21]: [Introduction to Probability — Part 21](../../../raw/pdf/pdf-introduction-to-probability-part-21.md)
+[^p22]: [Introduction to Probability — Part 22](../../../raw/pdf/pdf-introduction-to-probability-part-22.md)
+[^p23]: [Introduction to Probability — Part 23](../../../raw/pdf/pdf-introduction-to-probability-part-23.md)
+[^p24]: [Introduction to Probability — Part 24](../../../raw/pdf/pdf-introduction-to-probability-part-24.md)
+[^p25]: [Introduction to Probability — Part 25](../../../raw/pdf/pdf-introduction-to-probability-part-25.md)

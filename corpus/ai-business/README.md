@@ -70,7 +70,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [AI and the Job Market](/ai-business/ai-and-the-job-market.md)
 
 <details>
-<summary>Source summaries (196)</summary>
+<summary>Source summaries (197)</summary>
 
 - ["$1,300/Day Automated Bittensor Investing With Claude Code (34 Min Free Masterclass)"](/ai-business/sources/1-300-day-automated-bittensor-investing-with-claude-code-34--SHEs8gNh7sQ.md)
 - ["$100 million for open source: A milestone built by the community"](/ai-business/sources/100-million-for-open-source-a-milestone-built-by-the-communi-580ab93c.md)
@@ -163,6 +163,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [Ads in the Age of AI](/ai-business/sources/ads-in-the-age-of-ai-03396ce0.md)
 - [Advisory Database now includes an Unreviewed Advisories section - GitHub Changelog](/ai-business/sources/advisory-database-now-includes-an-unreviewed-advisories-sect-9a794a5b.md)
 - [AI - 101 Use Cases in Daily Life](/ai-business/sources/ai-101-use-cases-in-daily-life-fe.md)
+- [AI Agency or In-House AI Hire? How to Pick Your Path in 2025](/ai-business/sources/ai-agency-or-in-house-ai-hire-how-to-pick-your-path-in-2025-80a6e586.md)
 - [AI agents are quietly rewriting prediction market trading](/ai-business/sources/ai-agents-are-quietly-rewriting-prediction-market-trading-ad.md)
 - [AI agents making money on their own? The future is already here](/ai-business/sources/ai-agents-making-money-on-their-own-the-future-is-already-he-sHZ5qCoEDtg.md)
 - [AI Agents Quietly Rewriting Prediction Market Trading — Polymarket and Olas Protocol](/ai-business/sources/ai-agents-quietly-rewriting-prediction-market-trading-polyma-a.md)

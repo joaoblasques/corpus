@@ -16,7 +16,8 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 ## Pages
 
 ### Mathematical Foundations for ML
-- [Introduction to Probability (Grinstead & Snell, 2006)](/ai-engineering/sources/introduction-to-probability-grinstead-snell.md) — source · draft · classic undergraduate probability textbook (518pp, GNU FDL); simulation-first; discrete/continuous distributions, Bayes' theorem, CLT, LLN; 19/25 parts ingested (chapters 1–9)
+- [Introduction to Probability (Grinstead & Snell, 2006)](/ai-engineering/sources/introduction-to-probability-grinstead-snell.md) — source · draft · classic undergraduate probability textbook (518pp, GNU FDL); simulation-first; discrete/continuous distributions, Bayes' theorem, CLT, LLN, Markov chains (absorbing/ergodic, fundamental matrix, stationary distribution); all 25 parts ingested (complete)
+- [Lies, Damned Lies, or Statistics (Poritz, 2017)](/ai-engineering/sources/lies-damned-lies-or-statistics.md) — source · draft · free undergraduate statistics textbook (143pp, CC BY-SA 4.0); descriptive stats (histograms, mean/median/IQR, regression, Simpson's paradox), probability theory (Bayes, normal distribution), study design (RCT, sampling bias, confounders, ethics), inferential statistics (CLT, confidence intervals, hypothesis testing); all 6 parts ingested (complete)
 - [CUR Decomposition](/ai-engineering/cur-decomposition.md) — concept · draft · sparse-friendly alternative to SVD; selects actual rows/columns with Frobenius-norm probability weighting; middle matrix U via pseudoinverse
 - [Linear Algebra for ML](/ai-engineering/linear-algebra-for-ml.md) — concept · draft · Vector spaces, basis, rank, inner products, projections, Gram-Schmidt
 - [Matrix Decompositions](/ai-engineering/matrix-decompositions.md) — concept · draft · Eigenvalues, eigendecomposition, Cholesky, LU; cross-links to SVD
@@ -450,7 +451,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Tool Calling & Context Engineering: How They Interlock](/ai-engineering/tool-calling-and-context-engineering.md)
 
 <details>
-<summary>Source summaries (716)</summary>
+<summary>Source summaries (722)</summary>
 
 - ["2024 State of Analytics Engineering, crafted by dbt Labs | dbt Labs"](/ai-engineering/sources/2024-state-of-analytics-engineering-crafted-by-dbt-labs-dbt--cb342df0.md)
 - ["9 AI Concepts Explained: Tokenization, RAG, RLHF, LoRA & More"](/ai-engineering/sources/9-ai-concepts-explained-tokenization-rag-rlhf-lora-more-a.md)
@@ -460,6 +461,8 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - ["[AINews] Black Forest Labs FLUX 3 - Multimodal Flow Models that beat Seedance 2.0, Gemini Omni and Grok Imagine, and FLUX-mimic video-action robotics model"](/ai-engineering/sources/ainews-black-forest-labs-flux-3-multimodal-flow-models-that--1651e280.md)
 - ["[AINews] Claude Opus 5: Fable-level performance at Opus price (half Fable)"](/ai-engineering/sources/ainews-claude-opus-5-fable-level-performance-at-opus-price-h-801eea52.md)
 - ["[AINews] Codex usage up >10x in 6 months to 7M users, +1M in the past ~day; did Codex overtake Claude Code??"](/ai-engineering/sources/ainews-codex-usage-up-10x-in-6-months-to-7m-users-1m-in-the--ac1def65.md)
+- ["[AINews] Fearing RSI: OpenAI, Anthropic, GDM, Meta, Thinky cosign letter to \"Pace\" AI development, as HuggingFace details Machine-Speed Offensive Cyberattack"](/ai-engineering/sources/ainews-fearing-rsi-openai-anthropic-gdm-meta-thinky-cosign-l-21bb05a8.md)
+- ["[AINews] GPT 5.6 price cut by 20%-80%: Cost of GPT 5.4 Intelligence dropped 13x in 4 months due to GPT 5.6 recursive self-optimization"](/ai-engineering/sources/ainews-gpt-5-6-price-cut-by-20-80-cost-of-gpt-5-4-intelligen-3ecd81bf.md)
 - ["[AINews] Kimi K3 2.8T-A50B: the largest open model ever released; Opus 4.8-class at Sonnet 5 pricing"](/ai-engineering/sources/ainews-kimi-k3-2-8t-a50b-the-largest-open-model-ever-release-08f77354.md)
 - ["[AINews] Lilian Weng summarizes 35 papers on Harness Engineering for RSI"](/ai-engineering/sources/ainews-lilian-weng-summarizes-35-papers-on-harness-engineeri-b1619a08.md)
 - ["[AINews] Loopcraft: The Art of Stacking Loops"](/ai-engineering/sources/ainews-loopcraft-the-art-of-stacking-loops-0c0aa940.md)
@@ -709,6 +712,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [8 best AI production issue detection and alerting tools in 2026 - Confident AI](/ai-engineering/sources/8-best-ai-production-issue-detection-and-alerting-tools-in-2-2bc5dd54.md)
 - [8 Best AI SQL Tools To Implement In Your Workflow](/ai-engineering/sources/8-best-ai-sql-tools-to-implement-in-your-workflow-93d8a61c.md)
 - [8 best evaluation tools for conversational AI in 2026 - Confident AI](/ai-engineering/sources/8-best-evaluation-tools-for-conversational-ai-in-2026-confid-955a4a15.md)
+- [8 Best Free AI Agents for Coding To Try in 2026](/ai-engineering/sources/8-best-free-ai-agents-for-coding-to-try-in-2026-c8a72ec3.md)
 - [8 best LLM observability tools for enterprise in 2026 - Confident AI](/ai-engineering/sources/8-best-llm-observability-tools-for-enterprise-in-2026-confid-c668c4e3.md)
 - [8 best LLM observability tools for startups in 2026 - Confident AI](/ai-engineering/sources/8-best-llm-observability-tools-for-startups-in-2026-confiden-17750fb3.md)
 - [8.9 Million AI Users](/ai-engineering/sources/8-9-million-ai-users-f79fd178.md)
@@ -717,6 +721,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [98.01% of sites on Cloudflare now use IPv6](/ai-engineering/sources/98-01-of-sites-on-cloudflare-now-use-ipv6-f7d08248.md)
 - [A 9-Minute Simple Explanation of Spark Shuffle](/ai-engineering/sources/a-9-minute-simple-explanation-of-spark-shuffle-a.md)
 - [A Brief Introduction to Machine Learning for Engineers (Simeone, 2018)](/ai-engineering/sources/ml-for-engineers-simeone.md)
+- [A Codex of One’s Own](/ai-engineering/sources/a-codex-of-one-s-own-8755a784.md)
 - [A Course in Machine Learning (Daumé III, 2015)](/ai-engineering/sources/a-course-in-machine-learning.md)
 - [A Dispatch from the Jagged Frontier of Analytics Engineering](/ai-engineering/sources/a-dispatch-from-the-jagged-frontier-of-analytics-engineering-2bad3d09.md)
 - [A Field Guide to Rapidly Improving AI Products (Hamel Husain)](/ai-engineering/sources/field-guide-improving-ai-products.md)
@@ -724,6 +729,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [A Full Hardware Guide to Deep Learning — Tim Dettmers](/ai-engineering/sources/a-full-hardware-guide-to-deep-learning-tim-dettmers-d1a5e2e1.md)
 - [A global workspace in language models](/ai-engineering/sources/a-global-workspace-in-language-models-22b32121.md)
 - [A Good Start for Claude Skills](/ai-engineering/sources/a-good-start-for-claude-skills-39c81568.md)
+- [A guide to slash commands in the GitHub Copilot app](/ai-engineering/sources/a-guide-to-slash-commands-in-the-github-copilot-app-fc2a0caa.md)
 - [A Human-Augmenting Agentic Workflow for Causal Inference](/ai-engineering/sources/a-human-augmenting-agentic-workflow-for-causal-inference-3cae1ff0.md)
 - [A Philosophy of Software Design | John Ousterhout | Talks at Google](/ai-engineering/sources/a-philosophy-of-software-design-john-ousterhout-talks-at-goo-bmSAYlu0NcY.md)
 - [A practical Guide To Becoming An AI Engineer](/ai-engineering/sources/a-practical-guide-to-becoming-an-ai-engineer-uAOIlkr0aVk.md)
@@ -1055,6 +1061,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Learn Databricks for FREE (Step-by-Step Guide)](/ai-engineering/sources/learn-databricks-for-free-step-by-step-guide-trJTgk8miw4.md)
 - [Learning - NotebookLM Critical Review and Effective Use](/ai-engineering/sources/learning-notebooklm-critical-review-and-effective-use-e.md)
 - [Lets Build An Agent from Scratch — Kam Lasater](/ai-engineering/sources/lets-build-an-agent-from-scratch-kam-lasater-xzXdLRUyjUg.md)
+- [Lies, Damned Lies, or Statistics: How to Tell the Truth with Statistics (Poritz, 2017)](/ai-engineering/sources/lies-damned-lies-or-statistics.md)
 - [LLM Coding Workflow — Spec-Driven Development and Human Oversight](/ai-engineering/sources/llm-coding-workflow-spec-driven-development-and-human-oversi-e.md)
 - [Machine Learning - Learning Path AI ML Fast Start](/ai-engineering/sources/machine-learning-learning-path-ai-ml-fast-start-a.md)
 - [Master All 6 Claude Code Dynamic Workflows](/ai-engineering/sources/master-all-6-claude-code-dynamic-workflows-g9b9G8dcS8Y.md)
