@@ -165,3 +165,9 @@ type: internal
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/frontend-is-harder-for-ai-than-backend-here-s-how-to-fix-it-pSritFeoYFo.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/10-money-myths-that-keep-you-broke-rTO0GofZJzA.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/building-ai-agents-that-actually-work-full-course-eA9Zf2-qYYM.md", "verdict_ok": true, "gov": "committed"}
+
+## [2026-08-08T02:56] gardener · run
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/how-to-build-a-reusable-finance-workflow-in-claude-2-0-full--dTPndJ5VG_I.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/common-table-expressions-vs-subqueries-vs-views-vs-temp-tabl-vstJyDo88kA.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/gemini-cli-multi-instance-coding-workflow-with-mcps-c.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/gemini-cli-deep-dive-with-mcps-c.md", "verdict_ok": true, "gov": "committed"}
