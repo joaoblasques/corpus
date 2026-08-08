@@ -1,7 +1,7 @@
 ---
 type: source
 domain: ai-engineering
-status: stub
+status: draft
 sources:
   - path: raw/youtube/youtube-dTPndJ5VG_I-how-to-build-a-reusable-finance-workflow-in-claude-2-0-full.md
     channel: youtube
@@ -12,7 +12,7 @@ tags:
   - source
   - youtube-quick-intake
 created: 2026-07-08
-updated: 2026-08-03
+updated: 2026-08-08
 provisional: false
 youtube_video_id: dTPndJ5VG_I
 url: https://youtu.be/dTPndJ5VG_I
