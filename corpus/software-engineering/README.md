@@ -16,6 +16,8 @@ Domain covering software engineering practice from foundational CS through deplo
 ## Pages
 
 ### Entities
+- [Brendan Fong](/software-engineering/brendan-fong.md) — entity · stub · MIT applied category theory researcher; co-author of Seven Sketches in Compositionality (2018)
+- [David I. Spivak](/software-engineering/david-spivak.md) — entity · stub · MIT applied category theory researcher; co-author of Seven Sketches in Compositionality; polynomial functor framework for dynamical systems
 - [Stephen Davies](/software-engineering/stephen-davies.md) — entity · stub · CS professor at UMW; author of A Cool Brisk Walk Through Discrete Mathematics (v2.2.2, CC BY-SA)
 - [Robert S. Boyer](/software-engineering/robert-s-boyer.md) — entity · stub · co-author of A Computational Logic (1979); SRI International; co-developer of Boyer-Moore theorem prover and string search algorithm
 - [J Strother Moore](/software-engineering/j-strother-moore.md) — entity · stub · co-author of A Computational Logic (1979); SRI International; co-developer of Boyer-Moore prover; later co-developed ACL2
@@ -90,7 +92,9 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Formal Verification and Mechanical Theorem Proving](/software-engineering/formal-verification.md) — concept · draft · Boyer-Moore theorem prover; induction from recursion; shell principle; rewrite-rule waterfall; compiler/string-search/prime-factorization proofs; NQTHM; ACL2
 
 ### Sources
-- [Mathematics for Computer Science (Lehman, Leighton, Meyer — MIT/Google, 2018)](/software-engineering/sources/mathematics-for-computer-science.md) — source · draft · definitive free CS math textbook (1048pp, CC BY-SA 3.0; MIT 6.042J); proofs (induction, contradiction, well-ordering), mathematical data types (sets/functions/relations), number theory (GCD, Bézout, RSA), graph theory (planarity, coloring, DAGs, partial orders), counting (combinatorics, asymptotics, generating functions), probability (Markov/Chebyshev/Chernoff bounds), recurrences (Hanoi, Fibonacci); 38 of 41 parts ingested
+- [Mathematics for Computer Science (Lehman, Leighton, Meyer — MIT/Google, 2018)](/software-engineering/sources/mathematics-for-computer-science.md) — source · draft · definitive free CS math textbook (1048pp, CC BY-SA 3.0; MIT 6.042J); proofs, graph theory, number theory, counting, probability, recurrences (plug-and-chug, Merge Sort, Akra-Bazzi, Gambler's Ruin); all 41 parts ingested
+- [Seven Sketches in Compositionality: An Invitation to Applied Category Theory (Fong & Spivak, 2018)](/software-engineering/sources/seven-sketches-in-compositionality.md) — source · draft · free applied category theory textbook (353pp, arXiv, CC BY); orders/adjunctions, monoidal preorders, databases as categories, functors/limits, signal flow graphs, hypergraph categories/operads, toposes/sheaves; all 18 parts ingested
+- [The Open Logic Text (Open Logic Project, 2026)](/software-engineering/sources/open-logic-text.md) — source · draft · open-source formal metalogic textbook (1016pp, CC BY 4.0); sets/functions/cardinality, propositional logic (sequent calculus, soundness/completeness), FOL syntax/semantics; 16 of 47 parts ingested
 - [A Cool Brisk Walk Through Discrete Mathematics (Davies, v2.2.2)](/software-engineering/sources/a-cool-brisk-walk-through-discrete-mathematics.md) — source · draft · CS-oriented discrete math tour; 254pp, 9 chapters, CC BY-SA 4.0; all 9 parts ingested
 - [OSTEP: Operating Systems — Three Easy Pieces (Arpaci-Dusseau, 2023)](/software-engineering/sources/ostep-operating-systems-three-easy-pieces.md) — source · draft · 47-chapter free textbook; virtualization, concurrency, persistence, security; xv6 lab companion
 - [Designing Distributed Systems (Burns, O'Reilly, 2018)](/software-engineering/sources/burns-designing-distributed-systems.md) — source · draft · pattern catalog for container-based distributed systems: sidecar/ambassador/adapter (single-node), replicated/sharded/scatter-gather (multi-node), batch patterns
@@ -168,8 +172,10 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Virtual Machine Monitors (VMMs / Hypervisors)](/software-engineering/virtual-machine-monitors.md)
 - [Virtual Memory](/software-engineering/virtual-memory.md)
 
-### Entities (15)
+### Entities (17)
+- [Brendan Fong](/software-engineering/brendan-fong.md)
 - [Bun](/software-engineering/bun.md)
+- [David I. Spivak](/software-engineering/david-spivak.md)
 - [FastAPI](/software-engineering/fastapi.md)
 - [Git Basics](/software-engineering/git-basics.md)
 - [InsForge — backend platform for agentic coding](/software-engineering/insforge.md)
@@ -190,7 +196,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Simplicity as an Engineering Constraint in the AI Age](/software-engineering/simplicity-as-engineering-constraint.md)
 
 <details>
-<summary>Source summaries (87)</summary>
+<summary>Source summaries (89)</summary>
 
 - ["2024-05-25-15-54-25 - move-base-up by josephmachado · Pull Request #17 · josephmachado/simple_dbt_project"](/software-engineering/sources/2024-05-25-15-54-25-move-base-up-by-josephmachado-pull-reque-ee.md)
 - ["A Guide to Multi-Tenancy: Benefits and Challenges"](/software-engineering/sources/a-guide-to-multi-tenancy-benefits-and-challenges-e55e9184.md)
@@ -268,6 +274,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Purely Functional Data Structures (Okasaki, CMU 1996)](/software-engineering/sources/purely-functional-data-structures-okasaki.md)
 - [Python - Complete Beginner Course 5 Hours TechWorld with Nana](/software-engineering/sources/python-complete-beginner-course-5-hours-techworld-with-nana-aa.md)
 - [Refactoring Techniques Guide](/software-engineering/sources/refactoring-techniques-guide-de.md)
+- [Seven Sketches in Compositionality: An Invitation to Applied Category Theory (Fong & Spivak, 2018)](/software-engineering/sources/seven-sketches-in-compositionality.md)
 - [Software Engineering at Google — Key Lessons on Code That Lasts](/software-engineering/sources/software-engineering-at-google-key-lessons-on-code-that-last-e.md)
 - [Software Engineering Best Practices MOC](/software-engineering/sources/software-engineering-best-practices-moc-c.md)
 - [Software Engineering in the Age of AI](/software-engineering/sources/software-engineering-in-the-age-of-ai-a.md)
@@ -278,6 +285,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [The best TUIs - powerful terminal apps](/software-engineering/sources/the-best-tuis-powerful-terminal-apps-_fLmA4fjiAE.md)
 - [The C.R.A.F.T.E.D. Prompt Framework for Software Engineers](/software-engineering/sources/the-c-r-a-f-t-e-d-prompt-framework-for-software-engineers-eee.md)
 - [The Design of Approximation Algorithms (Williamson & Shmoys, 2011)](/software-engineering/sources/design-of-approximation-algorithms.md)
+- [The Open Logic Text (Open Logic Project, 2026)](/software-engineering/sources/open-logic-text.md)
 - [Why I Love Using Vim To Write Code](/software-engineering/sources/why-i-love-using-vim-to-write-code-o4X8GU7CCSU.md)
 
 </details>

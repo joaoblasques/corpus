@@ -117,6 +117,15 @@ sources:
   - path: raw/_inbox/pdf-mathematics-for-computer-science-part-38.md
     channel: pdf
     ingested_at: 2026-08-07
+  - path: raw/_inbox/pdf-mathematics-for-computer-science-part-39.md
+    channel: pdf
+    ingested_at: 2026-08-08
+  - path: raw/_inbox/pdf-mathematics-for-computer-science-part-40.md
+    channel: pdf
+    ingested_at: 2026-08-08
+  - path: raw/_inbox/pdf-mathematics-for-computer-science-part-41.md
+    channel: pdf
+    ingested_at: 2026-08-08
 aliases:
   - Mathematics for Computer Science
   - MCS textbook
@@ -127,7 +136,7 @@ tags:
   - corpus/software-engineering
   - source
 created: 2026-08-07
-updated: 2026-08-07
+updated: 2026-08-08
 ---
 
 # Mathematics for Computer Science (Lehman, Leighton, Meyer — MIT/Google, 2018)
@@ -152,7 +161,7 @@ Released 2018. License: CC BY-SA 3.0. Used as the official textbook for MIT 6.04
 | IV — Probability | 16–19 | Events, conditional probability, random variables, deviation from the mean |
 | V — Recurrences | 20 | Recurrence relations and their solutions |
 
-Parts 1–38 (ingested) cover through Chapter 20 (Deviation from the Mean). Parts 39–41 contain remaining recurrences and appendices.
+All 41 parts now ingested. Parts 1–38 cover through Chapter 20 (Deviation from the Mean). Parts 39–41 add Chapter 21 (Random Walks / Gambler's Ruin) and Chapter 22 (Recurrences: plug-and-chug, Merge Sort, Akra-Bazzi theorem), plus the bibliography (pages 1023–1048).
 
 ---
 
@@ -302,7 +311,7 @@ Standard sets: ∅ (empty), ℕ (nonneg integers), ℤ (integers), ℚ (rational
 
 ---
 
-## Part V: Recurrences (Chapter 16 excerpt — generating functions)
+## Part V: Recurrences (Chapters 16, 21–22)
 
 **Linear recurrence**: a recurrence of the form f(n) = c₁f(n−1) + c₂f(n−2) + … + cₖf(n−k) [^p30].
 
@@ -311,6 +320,27 @@ Standard sets: ∅ (empty), ℕ (nonneg integers), ℤ (integers), ℚ (rational
 **Fibonacci recurrence**: F₀ = 0, F₁ = 1, Fₙ = Fₙ₋₁ + Fₙ₋₂. Characteristic equation x² = x + 1; roots φ = (1+√5)/2 (golden ratio) and ψ = (1−√5)/2. Closed form (Binet's formula): Fₙ = (φⁿ − ψⁿ)/√5 [^p30].
 
 **Generating function method**: encode a sequence as power series G(x) = Σ aₙ xⁿ; algebraic manipulation on G(x) (e.g., multiplying by x, shifting) mirrors recurrence operations; partial fractions decompose G(x) to extract closed-form coefficients [^p30].
+
+### Chapter 21: Random Walks
+
+**Gambler's Ruin**: gambler starts with n dollars, target T, wins each bet with probability p, loses with q = 1 − p. Let wₙ = probability of reaching T before 0. Recurrence: wₙ = p·wₙ₊₁ + q·wₙ₋₁; boundary conditions w₀ = 0, wT = 1 [^p39].
+
+**Closed-form solution (Gambler's Ruin)**: let r = q/p.
+- If p = 1/2 (fair game): wₙ = n/T.
+- If p ≠ 1/2 (biased): wₙ = (rⁿ − 1) / (rᵀ − 1).
+
+Derived via generating functions: W(x) = Σ wₙ xⁿ; the denominator rx² − x/p + 1 factors as (1 − x)(1 − rx), enabling partial fractions [^p39].
+
+**Optional stopping theorem (informal)**: in a fair game (r = 1), the generating function derivation confirms wₙ = n/T — the proportion of the target the gambler starts with equals their win probability. More generally, expected worth under a fair betting system stays constant [^p39].
+
+### Chapter 22: Recurrences — Plug-and-Chug, Merge Sort, Akra-Bazzi
+
+**Plug-and-chug method**: alternative to guess-and-verify. Work backward from Tₙ by substituting the recurrence repeatedly (plugging), then simplify without losing the pattern (chugging). Once a pattern is visible, collapse the geometric sum and verify by induction. Example (Towers of Hanoi):
+- Tₙ = 2ᵏ · Tₙ₋ₖ + (2ᵏ − 1); choosing k = n − 1 and T₁ = 1 yields Tₙ = 2ⁿ − 1 [^p40].
+
+**Merge Sort recurrence**: T₁ = 0; Tₙ = 2·Tₙ/₂ + n − 1 (n a power of 2). Solution via plug-and-chug: Tₙ = n log₂ n − n + 1 = Θ(n log n). This matches the lower bound for comparison-based sorting [^p40].
+
+**Akra-Bazzi theorem**: general technique for divide-and-conquer recurrences of the form T(n) = Σᵢ aᵢ · T(bᵢn + hᵢ(n)) + g(n). Find p such that Σᵢ aᵢ bᵢᵖ = 1, then T(n) = Θ(nᵖ · (1 + ∫₁ⁿ g(u)/uᵖ⁺¹ du)). Generalizes the Master Theorem to non-uniform splits [^p41].
 
 ---
 
@@ -341,3 +371,6 @@ Cross-links to existing pages: [/software-engineering/discrete-mathematics.md](/
 [^p25]: [Mathematics for Computer Science — Part 25](../../../raw/pdf/pdf-mathematics-for-computer-science-part-25.md)
 [^p30]: [Mathematics for Computer Science — Part 30](../../../raw/pdf/pdf-mathematics-for-computer-science-part-30.md)
 [^p38]: [Mathematics for Computer Science — Part 38](../../../raw/pdf/pdf-mathematics-for-computer-science-part-38.md)
+[^p39]: [Mathematics for Computer Science — Part 39](../../../raw/pdf/pdf-mathematics-for-computer-science-part-39.md)
+[^p40]: [Mathematics for Computer Science — Part 40](../../../raw/pdf/pdf-mathematics-for-computer-science-part-40.md)
+[^p41]: [Mathematics for Computer Science — Part 41](../../../raw/pdf/pdf-mathematics-for-computer-science-part-41.md)

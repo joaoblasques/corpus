@@ -34,9 +34,13 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [Vibe Coding Entrepreneurship](/ai-business/vibe-coding-entrepreneurship.md) — concept · draft · Alex Finn's Ship/It framework: Creator Buddy case study ($100K ARR, author-reported), "first dollar" playbook, 10x AI skill development, local model for unlimited inference, starter-kit pattern; includes survivorship bias critique
 
 ### Entities
+- [Neil Davidson](/ai-business/neil-davidson.md) — entity · stub · co-founder Red Gate Software; founder Business of Software conference; author Don't Just Roll the Dice (2009)
 - [Harvey](/ai-business/harvey.md) — entity · stub · AI for legal/professional services; 142K+ professionals; 1,500+ firms; 65+ AmLaw 100
 - [Claude for Startups (and Nonprofits)](/ai-business/claude-for-startups.md) — entity · stub · Anthropic's access programs; startup credits + priority rate limits; nonprofit discounted plans
 - [Claude Corps](/ai-business/claude-corps.md) — entity · stub · Anthropic + CodePath + Social Finance; trains early-career fellows, embeds them in US nonprofits for 12 months; talent-supply counterpart to the access programs
+
+### Sources (selected)
+- [Don't Just Roll the Dice: A Usefully Short Guide to Software Pricing (Neil Davidson, 2009)](/ai-business/sources/dont-just-roll-the-dice.md) — source · draft · 73pp; economics of pricing (EVC, willingness to pay), psychology (anchoring, fairness), pitfalls (competitors, pirates, cost-based pricing), versioning/bundling/freemium; practical checklist; all 2 parts ingested
 
 ### Syntheses
 - [AI and the Job Market](/ai-business/ai-and-the-job-market.md) — synthesis · draft · AI-as-utility; future-proofing via depth + human skills + business proximity; articulation gap; world models; Toyota/GM framing
@@ -61,16 +65,17 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [Selling to AI Agents](/ai-business/selling-to-ai-agents.md)
 - [Vibe Coding Entrepreneurship](/ai-business/vibe-coding-entrepreneurship.md)
 
-### Entities (3)
+### Entities (4)
 - [Claude Corps](/ai-business/claude-corps.md)
 - [Claude for Startups (and Nonprofits)](/ai-business/claude-for-startups.md)
 - [Harvey](/ai-business/harvey.md)
+- [Neil Davidson](/ai-business/neil-davidson.md)
 
 ### Syntheses (1)
 - [AI and the Job Market](/ai-business/ai-and-the-job-market.md)
 
 <details>
-<summary>Source summaries (197)</summary>
+<summary>Source summaries (199)</summary>
 
 - ["$1,300/Day Automated Bittensor Investing With Claude Code (34 Min Free Masterclass)"](/ai-business/sources/1-300-day-automated-bittensor-investing-with-claude-code-34--SHEs8gNh7sQ.md)
 - ["$100 million for open source: A milestone built by the community"](/ai-business/sources/100-million-for-open-source-a-milestone-built-by-the-communi-580ab93c.md)
@@ -81,6 +86,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - ["2026.28: XBOX On the Rocks"](/ai-business/sources/2026-28-xbox-on-the-rocks-8fc35a37.md)
 - ["2026.29: Mainframes and Main Characters"](/ai-business/sources/2026-29-mainframes-and-main-characters-774b4848.md)
 - ["2026.30: The Copium Wars"](/ai-business/sources/2026-30-the-copium-wars-321c1884.md)
+- ["2026.32: Earnings and Learnings"](/ai-business/sources/2026-32-earnings-and-learnings-ba471028.md)
 - ["3-Year Update: A Financial Analysis of My Book’s Unit Economics"](/ai-business/sources/3-year-update-a-financial-analysis-of-my-book-s-unit-economi-5be171a1.md)
 - ["7 Reasons Media Is a No-Good, Horrible, Rotten Business That I Love Anyways"](/ai-business/sources/7-reasons-media-is-a-no-good-horrible-rotten-business-that-i-9b1bb1df.md)
 - ["[AINews] AI Cybersecurity becomes top of mind"](/ai-business/sources/ainews-ai-cybersecurity-becomes-top-of-mind-0a8336e8.md)
@@ -231,6 +237,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [Data Privacy - Kai Waehner](/ai-business/sources/data-privacy-kai-waehner-20821876.md)
 - [Deleted video](/ai-business/sources/deleted-video-eVbKRAO7pb0.md)
 - [Deleted video](/ai-business/sources/deleted-video-oWH71VUACZ0.md)
+- [Don't Just Roll the Dice: A Usefully Short Guide to Software Pricing (Neil Davidson, 2009)](/ai-business/sources/dont-just-roll-the-dice.md)
 - [DRIP - SEE your ACTUAL profits & know your REAL passive income](/ai-business/sources/drip-see-your-actual-profits-know-your-real-passive-income-jj8fzzxhI4g.md)
 - [Finance - Crypto Market Structure and Money Flow 2025](/ai-business/sources/finance-crypto-market-structure-and-money-flow-2025-2025.md)
 - [Finance - Grok Crypto Market Top Predictions Bitcoin 2025](/ai-business/sources/finance-grok-crypto-market-top-predictions-bitcoin-2025-2025.md)

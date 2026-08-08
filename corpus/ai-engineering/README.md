@@ -451,9 +451,11 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Tool Calling & Context Engineering: How They Interlock](/ai-engineering/tool-calling-and-context-engineering.md)
 
 <details>
-<summary>Source summaries (722)</summary>
+<summary>Source summaries (725)</summary>
 
 - ["2024 State of Analytics Engineering, crafted by dbt Labs | dbt Labs"](/ai-engineering/sources/2024-state-of-analytics-engineering-crafted-by-dbt-labs-dbt--cb342df0.md)
+- ["6 AI Agent Orchestration Best Practices in 2026 [Explained]"](/ai-engineering/sources/6-ai-agent-orchestration-best-practices-in-2026-explained-8144e2d2.md)
+- ["8 Examples of Autonomous AI Agents Explained [+ Use Cases]"](/ai-engineering/sources/8-examples-of-autonomous-ai-agents-explained-use-cases-88433e1d.md)
 - ["9 AI Concepts Explained: Tokenization, RAG, RLHF, LoRA & More"](/ai-engineering/sources/9-ai-concepts-explained-tokenization-rag-rlhf-lora-more-a.md)
 - ["9 Best Tools for Automating AI Workflows [2026 Comparison]"](/ai-engineering/sources/9-best-tools-for-automating-ai-workflows-2026-comparison-c224f0ed.md)
 - ["[AINews] \"Laguna S 2.1 Released: Cheaper than Deepseek v4 Flash, Better than V4 Pro\""](/ai-engineering/sources/ainews-laguna-s-2-1-released-cheaper-than-deepseek-v4-flash--43429d78.md)
@@ -747,6 +749,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [A Unix Manifesto for the Age of AI](/ai-engineering/sources/a-unix-manifesto-for-the-age-of-ai-a.md)
 - [a-guide-to-context-engineering-for-llms](/ai-engineering/sources/a-guide-to-context-engineering-for-llms-doc.md)
 - [a-technical-roadmap-to-context-engineering-in-llms-mechanism](/ai-engineering/sources/a-technical-roadmap-to-context-engineering-in-llms-mechanism-eca.md)
+- [Aaron Mardis | dbt Summit](/ai-engineering/sources/aaron-mardis-dbt-summit-9206b2e0.md)
 - [Abhishek Pandey | Databricks](/ai-engineering/sources/abhishek-pandey-databricks-b56978a3.md)
 - [About AI Tool](/ai-engineering/sources/about-ai-tool-28961411.md)
 - [Accelerating analytics with AI | dbt Summit](/ai-engineering/sources/accelerating-analytics-with-ai-dbt-summit-e02cb4fb.md)
@@ -1003,9 +1006,9 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [FULL Claude Cowork Tutorial For Beginners in 2026! (Zero to PRO)](/ai-engineering/sources/full-claude-cowork-tutorial-for-beginners-in-2026-zero-to-pr-JdQ_FHgP5ms.md)
 - [FULL Claude Tutorial for Beginners in 2026! (Become a PRO!)](/ai-engineering/sources/full-claude-tutorial-for-beginners-in-2026-become-a-pro-rRrBbyv3ChM.md)
 - [Full Machine Learning Project — Coding a Fitness Tracker with Python (Part 1)](/ai-engineering/sources/full-machine-learning-project-coding-a-fitness-tracker-with--cCONIdrM2VI.md)
-- [Gemini CLI - Deep Dive with MCPs](/ai-engineering/sources/gemini-cli-deep-dive-with-mcps-c.md)
 - [Gemini CLI - Free Coding Agent Complete Guide](/ai-engineering/sources/gemini-cli-free-coding-agent-complete-guide-de.md)
-- [Gemini CLI - Multi-Instance Coding Workflow with MCPs](/ai-engineering/sources/gemini-cli-multi-instance-coding-workflow-with-mcps-c.md)
+- [Gemini CLI — Deep Dive with MCPs](/ai-engineering/sources/gemini-cli-deep-dive-with-mcps-c.md)
+- [Gemini CLI — Multi-Instance Coding Workflow with MCPs](/ai-engineering/sources/gemini-cli-multi-instance-coding-workflow-with-mcps-c.md)
 - [Give Me 20 Minutes. I'll Teach You 80% of Claude Cowork](/ai-engineering/sources/give-me-20-minutes-i-ll-teach-you-80-of-claude-cowork-s3ccD6m6WKc.md)
 - [Google Just Dropped a Masterclass on Agentic Engineering (It's SO Good)](/ai-engineering/sources/google-just-dropped-a-masterclass-on-agentic-engineering-it--zbmuiaPuiNM.md)
 - [Google NotebookLM - AI Research Assistant](/ai-engineering/sources/google-notebooklm-ai-research-assistant-aa.md)

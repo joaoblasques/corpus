@@ -2,6 +2,53 @@
 
 > OKF v0.1 change log. Newest first, grouped by date.
 
+## 2026-08-08
+
+* **Ingest**: Mathematics for Computer Science (Lehman, Leighton, Meyer — MIT/Google, 2018) — parts 39-41 of 41 — routed to software-engineering
+  - sources: pdf-mathematics-for-computer-science-part-39.md through part-41.md (channel: pdf, 3 files)
+  - domain: software-engineering
+  - pages updated: [/software-engineering/sources/mathematics-for-computer-science.md, /software-engineering/README.md]
+  - notes: ingest-auto run; completes MCS (all 41 parts now ingested). Added Ch.21 (Random Walks/Gambler's Ruin) and Ch.22 (Recurrences: plug-and-chug, Merge Sort, Akra-Bazzi theorem).
+
+* **Ingest**: Seven Sketches in Compositionality: An Invitation to Applied Category Theory (Fong & Spivak, 2018) — parts 01-18 of 18 — routed to software-engineering
+  - sources: pdf-seven-sketches-in-compositionality-an-invitation-t-part-01.md through part-18.md (channel: pdf, 18 files)
+  - domain: software-engineering
+  - new pages: [/software-engineering/sources/seven-sketches-in-compositionality.md, /software-engineering/brendan-fong.md, /software-engineering/david-spivak.md]
+  - pages updated: [/software-engineering/README.md]
+  - notes: ingest-auto run; all 18 parts ingested (complete 353pp). Covers 7 chapters: orders/adjunctions, monoidal preorders/resources, databases as categories/functors/(co)limits, co-design/profunctors, signal flow graphs/PROPs, hypergraph categories/operads, logic/toposes/sheaves.
+
+* **Ingest**: Confessions of an IT Manager (Phil Factor, Simple Talk Publishing, 2009) — parts 01-11 of 11 — routed to productivity
+  - sources: pdf-confessions-of-an-it-manager-part-01.md through part-11.md (channel: pdf, 11 files)
+  - domain: productivity
+  - new pages: [/productivity/sources/confessions-of-an-it-manager.md]
+  - pages updated: [/productivity/README.md]
+  - notes: ingest-auto run; all 11 parts ingested (complete 306pp). Humorous IT management essay collection; key themes: boring-tech-ships principle, workplace information as power, rigid change control, vendor adversarialism, Standish CHAOS report.
+
+* **Ingest**: Don't Just Roll the Dice: A Usefully Short Guide to Software Pricing (Neil Davidson, 2009) — parts 01-02 of 02 — routed to ai-business
+  - sources: pdf-don-t-just-roll-the-dice-part-01.md through part-02.md (channel: pdf, 2 files)
+  - domain: ai-business
+  - new pages: [/ai-business/sources/dont-just-roll-the-dice.md, /ai-business/neil-davidson.md]
+  - pages updated: [/ai-business/README.md]
+  - notes: ingest-auto run; all 2 parts ingested (complete 116pp). Software pricing guide: EVC, willingness-to-pay, versioning (compromise effect), bundling, freemium/network effects, pricing pitfalls checklist.
+
+* **Ingest**: The Open Logic Text (Open Logic Project, 2026) — parts 01-16 of 47 — routed to software-engineering
+  - sources: pdf-the-open-logic-text-part-01.md through part-16.md (channel: pdf, 16 files)
+  - domain: software-engineering
+  - new pages: [/software-engineering/sources/open-logic-text.md]
+  - pages updated: [/software-engineering/README.md]
+  - notes: ingest-auto run; 16 of 47 parts ingested (covering Part I: Sets/Functions, Part II: Propositional Logic, Part III: FOL syntax/semantics/completeness). Remaining 31 parts (model theory, computability, incompleteness, modal logics) pending.
+
+* **Collectors**: gmail=4, blog_promote=0, obsidian=0, book_discover=0, blog_discover=0, book_fetch=0, pdf=0, image=0, books=0, arxiv=0, youtube=0, github_discover=5, github_promote=5, github=0, x=0, links_refetch=0
+* **Ingest**: 50 ingested · 0 deferred · status=ok
+* **YoutubeQuick**: 0 intake · 0 rescued · 0 skipped · status=ok
+* **DocsQuick**: 5 intake · 43 thin · 2 llm_fail · status=ok
+* **YoutubeReap**: 0 removed · status=ok
+* **Gardener**: 4 stubs deepened · status=ok
+* **Heal**: 32 citations repointed · 0 unfixable · 5 hubs reindexed · 32 cross-domain links · status=ok
+* **Depth**: 427 knowledge · 1372 sources · ratio 1:3.2
+* **GapResolver**: 0 gap dispatched · 0 sources queued · status=ok
+* **Lint**: 1 broken wikilinks · 0 broken citations · 0 orphans · 1270 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+* **OKF**: 0 violations
 ## 2026-08-07
 
 * **Ingest**: Mathematics for Computer Science (Lehman, Leighton, Meyer — MIT/Google, 2018) — parts 01-38 of 41 — routed to software-engineering

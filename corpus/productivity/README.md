@@ -27,6 +27,9 @@ Personal and professional effectiveness for knowledge workers: mental models, ti
 - [Obsidian & Personal Knowledge Management](/productivity/obsidian-pkm.md) — concept · draft · local-first Markdown vault; linking over filing; emergent structure, MOCs, graph, canvas; context engineering + Kepano skills repo; VS Code alternative; Zettelkasten thinking/doing separation; Quartz SSG
 - [Tokenmaxxing and AI Fake Productivity](/productivity/tokenmaxxing.md) — concept · draft · tokenmaxxing defined (Joe Reis), tokenminimize+brainmaxx, AI hamster wheel, centaur vs reverse centaur (Reis+Weber), token junkies, identity crisis
 
+### Sources
+- [Confessions of an IT Manager (Phil Factor, 2009)](/productivity/sources/confessions-of-an-it-manager.md) — source · draft · humorous IT management essay collection (306pp, Simple Talk Publishing); workplace intelligence, project failure patterns, vendor adversarialism, hiring pitfalls; all 11 parts ingested
+
 ### Entities
 - [Quartz SSG](/productivity/quartz-ssg.md) — entity · stub · TypeScript static-site generator for Obsidian vaults / digital gardens (jackyzha0/quartz, 12k+ stars)
 
@@ -49,7 +52,7 @@ Personal and professional effectiveness for knowledge workers: mental models, ti
 - [Quartz SSG](/productivity/quartz-ssg.md)
 
 <details>
-<summary>Source summaries (22)</summary>
+<summary>Source summaries (23)</summary>
 
 - [7-Day Live Video Challenge Celebration](/productivity/sources/7-day-live-video-challenge-celebration-0240cd2a.md)
 - [9 Lessons from 2024 + My Goals for 2025 - Noah Kagan](/productivity/sources/9-lessons-from-2024-my-goals-for-2025-noah-kagan-1e3af730.md)
@@ -61,6 +64,7 @@ Personal and professional effectiveness for knowledge workers: mental models, ti
 - [Be Sincere—Not Serious](/productivity/sources/be-sincere-not-serious-7162b644.md)
 - [Beware of Productivity Paradoxes - Cal Newport](/productivity/sources/beware-of-productivity-paradoxes-cal-newport-9c92dd3d.md)
 - [Books](/productivity/sources/books-a3feacfa.md)
+- [Confessions of an IT Manager (Phil Factor, 2009)](/productivity/sources/confessions-of-an-it-manager.md)
 - [Fitness - 7 Minute Morning Mobility Routine](/productivity/sources/fitness-7-minute-morning-mobility-routine-e.md)
 - [Gardening - DIY Hydroponic Rooting Box](/productivity/sources/gardening-diy-hydroponic-rooting-box-b.md)
 - [Harmonica - 5-Minute Daily Practice Routine (Big Tone Train)](/productivity/sources/harmonica-5-minute-daily-practice-routine-big-tone-train-a.md)
