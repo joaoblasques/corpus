@@ -224,6 +224,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Reinforcement Learning: An Introduction (Sutton & Barto, 2nd ed. 2018)](/ai-engineering/sources/reinforcement-learning-introduction.md) — source · draft · definitive RL textbook (548pp, MIT Press); MDP formalism; Bellman equations; Monte Carlo; TD learning; Q-learning; SARSA; n-step bootstrapping; function approximation; eligibility traces; policy gradient; actor-critic; MCTS; psychology/dopamine correspondence; applications (TD-Gammon, DQN, AlphaGo); all 33 parts ingested (complete)
 - [The LION Way: Machine Learning plus Intelligent Optimization (Battiti & Brunato, 2017)](/ai-engineering/sources/the-lion-way.md) — source · draft · 516pp textbook; supervised learning (k-NN, linear models, SVMs, neural networks, ensembles); unsupervised (k-means, PCA, ICA); optimization (greedy, simulated annealing, gradient descent); Reactive Search Optimization (RSO); LP/QP; cooperative LION; all 28 parts ingested (complete)
 - [Information Retrieval: A Survey (Ed Greengrass, 2000)](/ai-engineering/sources/information-retrieval-a-survey.md) — source · draft · 224pp comprehensive survey of classical IR (2000); Boolean IR, vector space (TF-IDF, BM25/Okapi, LSI/SVD), probabilistic models (BIM, Bayesian inference networks, logistic regression), NLP approaches (phrase ID, sense disambiguation, concept matching, IE), clustering (hierarchical, Buckshot, STC), query expansion (Rocchio, pseudo-relevance feedback, LCA, WordNet), result fusion (CombMNZ), Web IR (crawlers, link analysis, meta-search); all 16 parts ingested
+- [Databricks Data + AI Summit 2026 — AI Engineering Speakers](/ai-engineering/sources/databricks-summit-2026-speakers-ai.md) — source · stub · bios for Timothy Chen (Essence VC), Callum Adamson (Applied Computing), Denny Lee (Databricks DevRel), Rohan Varma (OpenAI PM), Jai Behl (Anthropic Applied AI)
 
 ### Cross-domain (primary home in data-engineering)
 - [Claude Code for Data Engineering](/data-engineering/claude-code-for-data-engineering.md) — synthesis · AI-assisted dbt / data workflows
@@ -451,7 +452,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Tool Calling & Context Engineering: How They Interlock](/ai-engineering/tool-calling-and-context-engineering.md)
 
 <details>
-<summary>Source summaries (725)</summary>
+<summary>Source summaries (728)</summary>
 
 - ["2024 State of Analytics Engineering, crafted by dbt Labs | dbt Labs"](/ai-engineering/sources/2024-state-of-analytics-engineering-crafted-by-dbt-labs-dbt--cb342df0.md)
 - ["6 AI Agent Orchestration Best Practices in 2026 [Explained]"](/ai-engineering/sources/6-ai-agent-orchestration-best-practices-in-2026-explained-8144e2d2.md)
@@ -494,6 +495,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - ["Agentic AI for Full-Cycle Software Development [CTO Guide]"](/ai-engineering/sources/agentic-ai-for-full-cycle-software-development-cto-guide-4947a67d.md)
 - ["Agentic AI from First Principles: Reflection | Towards Data Science"](/ai-engineering/sources/agentic-ai-from-first-principles-reflection-towards-data-sci-efec.md)
 - ["Agentic AI vs. Generative AI: Key Differences Explained"](/ai-engineering/sources/agentic-ai-vs-generative-ai-key-differences-explained-4948cfbc.md)
+- ["Agentic AI vs. Traditional Automation: Key Differences"](/ai-engineering/sources/agentic-ai-vs-traditional-automation-key-differences-71114318.md)
 - ["Agentic Coding: Context Management is Everything"](/ai-engineering/sources/agentic-coding-context-management-is-everything-aaee.md)
 - ["Agentic Data Access: How AI Agents Access Enterprise Data"](/ai-engineering/sources/agentic-data-access-how-ai-agents-access-enterprise-data-3e9a8720.md)
 - ["Agentic Engineering vs Vibe Coding: Google's Spectrum and What It Means for Your Stack"](/ai-engineering/sources/agentic-engineering-vs-vibe-coding-google-s-spectrum-and-wha-6f404253.md)
@@ -521,6 +523,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - ["AI Model Pricing in 2026: GPT-5.6, Grok 4.5, Muse Spark, and Claude Fable 5 Compared"](/ai-engineering/sources/ai-model-pricing-in-2026-gpt-5-6-grok-4-5-muse-spark-and-cla-1af6bcbc.md)
 - ["AI Model Routing: How to Cut Costs 60% by Matching Tasks to the Right Model"](/ai-engineering/sources/ai-model-routing-how-to-cut-costs-60-by-matching-tasks-to-th-c6fc2480.md)
 - ["AI Model Routing: When to Use Frontier Models vs Cheap Models in Your Agent Stack"](/ai-engineering/sources/ai-model-routing-when-to-use-frontier-models-vs-cheap-models-84db1b99.md)
+- ["AI Needs Us—Yes, Really"](/ai-engineering/sources/ai-needs-us-yes-really-bb49e311.md)
 - ["AI Orchestration vs. Traditional Automation: Key Differences"](/ai-engineering/sources/ai-orchestration-vs-traditional-automation-key-differences-cd8719f6.md)
 - ["AI Product Build: From Idea to Production | AY Automate"](/ai-engineering/sources/ai-product-build-from-idea-to-production-ay-automate-7e7a136b.md)
 - ["AI Production Issue Detection: A Failure Taxonomy and Detection Framework - Confident AI"](/ai-engineering/sources/ai-production-issue-detection-a-failure-taxonomy-and-detecti-1c57f592.md)
@@ -973,6 +976,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Cursor AI - Complete Guide for Beginners](/ai-engineering/sources/cursor-ai-complete-guide-for-beginners-bee.md)
 - [Cursor · Mobile](/ai-engineering/sources/cursor-mobile-0165516d.md)
 - [Cybersecurity Looks Like Proof of Work Now](/ai-engineering/sources/cybersecurity-looks-like-proof-of-work-now-doc.md)
+- [Data + AI Summit 2026 — AI Engineering Speaker Profiles (Databricks)](/ai-engineering/sources/databricks-summit-2026-speakers-ai.md)
 - [Data analyst vs data engineer in 2026 (Which Career Should You Choose?)](/ai-engineering/sources/data-analyst-vs-data-engineer-in-2026-which-career-should-yo-yxYaRKEghF4.md)
 - [Data Modeling - Walking Through How To Data Model As A Data Engineer - Dimensional Modeling 101](/ai-engineering/sources/data-modeling-walking-through-how-to-data-model-as-a-data-en-gG7upg6QaBI.md)
 - [Data-Driven Science and Engineering (Brunton & Kutz, 2021)](/ai-engineering/sources/brunton-kutz-data-driven-science-engineering.md)
@@ -1011,7 +1015,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Gemini CLI — Multi-Instance Coding Workflow with MCPs](/ai-engineering/sources/gemini-cli-multi-instance-coding-workflow-with-mcps-c.md)
 - [Give Me 20 Minutes. I'll Teach You 80% of Claude Cowork](/ai-engineering/sources/give-me-20-minutes-i-ll-teach-you-80-of-claude-cowork-s3ccD6m6WKc.md)
 - [Google Just Dropped a Masterclass on Agentic Engineering (It's SO Good)](/ai-engineering/sources/google-just-dropped-a-masterclass-on-agentic-engineering-it--zbmuiaPuiNM.md)
-- [Google NotebookLM - AI Research Assistant](/ai-engineering/sources/google-notebooklm-ai-research-assistant-aa.md)
+- [Google NotebookLM — AI Research Assistant](/ai-engineering/sources/google-notebooklm-ai-research-assistant-aa.md)
 - [Google's New Release Just Fixed AI Systems](/ai-engineering/sources/google-s-new-release-just-fixed-ai-systems-k4sMSsMzX2g.md)
 - [Grab — From Firefighting to Building (multi-agent data-warehouse support)](/ai-engineering/sources/grab-multi-agent-data-warehouse-support.md)
 - [Guitar - Jazz Harmony Practice Methods](/ai-engineering/sources/guitar-jazz-harmony-practice-methods-ed.md)

@@ -196,7 +196,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Simplicity as an Engineering Constraint in the AI Age](/software-engineering/simplicity-as-engineering-constraint.md)
 
 <details>
-<summary>Source summaries (89)</summary>
+<summary>Source summaries (90)</summary>
 
 - ["2024-05-25-15-54-25 - move-base-up by josephmachado · Pull Request #17 · josephmachado/simple_dbt_project"](/software-engineering/sources/2024-05-25-15-54-25-move-base-up-by-josephmachado-pull-reque-ee.md)
 - ["A Guide to Multi-Tenancy: Benefits and Challenges"](/software-engineering/sources/a-guide-to-multi-tenancy-benefits-and-challenges-e55e9184.md)
@@ -282,6 +282,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Source: Go Programming — Full Course (Tech With Tim)](/software-engineering/sources/go-full-course-tech-with-tim.md)
 - [Source: Go Programming — Golang Course with Bonus Projects (boot.dev / freeCodeCamp)](/software-engineering/sources/go-course-boot-dev.md)
 - [Source: The Software Engineer's Guidebook (Gergely Orosz)](/software-engineering/sources/software-engineers-guidebook.md)
+- [terminal-craft-retrospective](/software-engineering/sources/terminal-craft-retrospective-eece.md)
 - [The best TUIs - powerful terminal apps](/software-engineering/sources/the-best-tuis-powerful-terminal-apps-_fLmA4fjiAE.md)
 - [The C.R.A.F.T.E.D. Prompt Framework for Software Engineers](/software-engineering/sources/the-c-r-a-f-t-e-d-prompt-framework-for-software-engineers-eee.md)
 - [The Design of Approximation Algorithms (Williamson & Shmoys, 2011)](/software-engineering/sources/design-of-approximation-algorithms.md)

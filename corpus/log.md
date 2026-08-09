@@ -2,6 +2,53 @@
 
 > OKF v0.1 change log. Newest first, grouped by date.
 
+## 2026-08-09
+
+* **Ingest**: The Open Logic Text (Open Logic Project, 2026) — parts 17-47 of 47 — routed to software-engineering (update of existing source page)
+  - sources: pdf-the-open-logic-text-part-17.md through part-47.md (channel: pdf, 31 files)
+  - domain: software-engineering
+  - pages updated: [/software-engineering/sources/open-logic-text.md, /software-engineering/README.md, /corpus/index.md]
+  - notes: ingest-auto run; completes OLT (all 47 parts now ingested). Parts 17-47 add: Tableaux + identity predicate soundness (Ch.21), Sequent Calculus (Ch.27), Model Theory including non-standard models and Löwenheim-Skolem (Ch.25-26), Computability including Church-Turing thesis/Universal TM/Halting Problem (Ch.28-35), Gödel incompleteness Theorems 1 & 2 (Ch.36-37), Second-Order Logic (Ch.38-40), Modal Logic/Kripke semantics (Ch.41-52), Temporal/Epistemic/Intuitionistic logic (Ch.53-57), Mathematical history (Ch.76).
+
+* **Ingest**: Yet Another Introductory Number Theory Textbook (Poritz, 2014) — parts 01-05 of 05 — routed to blockchain
+  - sources: pdf-yet-another-introductory-number-theory-textbook-part-01.md through part-05.md (channel: pdf, 5 files)
+  - domain: blockchain
+  - new pages: [/blockchain/sources/yet-another-introductory-number-theory-textbook.md, /blockchain/jonathan-poritz.md]
+  - pages updated: [/blockchain/README.md, /corpus/index.md]
+  - notes: ingest-auto run; all 5 parts ingested (complete 128pp). Covers divisibility/GCD, modular arithmetic, congruences, CRT, Euler's theorem, RSA cryptosystem, digital signatures, and discrete logarithms (indices). Cryptology emphasis directly relevant to blockchain's cryptographic primitives domain.
+
+* **Ingest**: "You Don't Graduate From Data Engineering: Why We Built aide" (Data Engineering Weekly, 2026) — routed to data-engineering
+  - sources: web-you-don-t-graduate-from-data-engineering-why-we-built-aide-f-a261589c.md (channel: web, 1 file)
+  - domain: data-engineering
+  - new pages: [/data-engineering/sources/you-dont-graduate-from-data-engineering-aide.md]
+  - pages updated: [/data-engineering/README.md, /corpus/index.md]
+  - notes: ingest-auto run; product launch article for aidataengineer.io continuous learning platform.
+
+* **Ingest**: "The Missing Interface in Data Platform Engineering" (Data Engineering Weekly, 2026) — routed to data-engineering
+  - sources: web-the-missing-interface-in-data-platform-engineering-fc83c2ea.md (channel: web, 1 file)
+  - domain: data-engineering
+  - new pages: [/data-engineering/sources/missing-interface-data-platform-engineering.md]
+  - pages updated: [/data-engineering/README.md, /corpus/index.md]
+  - notes: ingest-auto run; 5-layer operating interface framework + 5-level platform maturity model.
+
+* **Ingest**: Databricks Data + AI Summit 2026 — speaker bios (web, 12 files) — routed to data-engineering (7) + ai-engineering (5)
+  - sources: web-tim-riddle-databricks-7089d3cb.md, web-vijay-parmeshwaran-databricks-a2d0a0df.md, web-francisco-cruz-databricks-e7b6c754.md, web-zhou-sun-databricks-739fb0d1.md, web-madhu-kudaravalli-databricks-b8ccd06e.md, web-christina-busmalis-databricks-38e90c7e.md, web-zach-rothstein-databricks-6bf5a599.md, web-timothy-chen-databricks-638a36c5.md, web-callum-adamson-databricks-04520812.md, web-denny-lee-databricks-f837b1bd.md, web-rohan-varma-databricks-262a3441.md, web-jai-behl-databricks-0c8027bd.md (channel: web, 12 files)
+  - domains: data-engineering, ai-engineering
+  - new pages: [/data-engineering/sources/databricks-summit-2026-speakers-de.md, /ai-engineering/sources/databricks-summit-2026-speakers-ai.md]
+  - pages updated: [/data-engineering/README.md, /ai-engineering/README.md, /corpus/index.md]
+  - notes: ingest-auto run; 50 sources total this run, 0 deferred.
+
+* **Collectors**: gmail=2, blog_promote=0, obsidian=1, book_discover=0, blog_discover=0, book_fetch=0, pdf=0, image=0, books=0, arxiv=0, youtube=0, github_discover=5, github_promote=5, github=0, x=0, links_refetch=0
+* **Ingest**: 50 ingested · 0 deferred · status=ok
+* **YoutubeQuick**: 0 intake · 0 rescued · 0 skipped · status=ok
+* **DocsQuick**: 3 intake · 45 thin · 2 llm_fail · status=ok
+* **YoutubeReap**: 0 removed · status=ok
+* **Gardener**: 4 stubs deepened · status=ok
+* **Heal**: 15 citations repointed · 0 unfixable · 4 hubs reindexed · 32 cross-domain links · status=ok
+* **Depth**: 428 knowledge · 1380 sources · ratio 1:3.2
+* **GapResolver**: 0 gap dispatched · 0 sources queued · status=ok
+* **Lint**: 1 broken wikilinks · 0 broken citations · 0 orphans · 1274 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+* **OKF**: 0 violations
 ## 2026-08-08
 
 * **Ingest**: Mathematics for Computer Science (Lehman, Leighton, Meyer — MIT/Google, 2018) — parts 39-41 of 41 — routed to software-engineering

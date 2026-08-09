@@ -105,6 +105,9 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [Compute–Storage Decoupling](/data-engineering/compute-storage-decoupling.md) — synthesis · draft · the separate-compute-from-object-storage move as one convergent pattern across cloud warehouses, the lakehouse, event streaming (tiered/diskless Kafka), and now OLTP databases (serverless Postgres / Lakebase)
 
 ### Source summaries
+- ["You Don't Graduate From Data Engineering: Why We Built aide"](/data-engineering/sources/you-dont-graduate-from-data-engineering-aide.md) — source · draft · product launch for aidataengineer.io; continuous learning platform on DEW archive; Socratic AI tutor, skill tracking, team dashboards
+- [The Missing Interface in Data Platform Engineering](/data-engineering/sources/missing-interface-data-platform-engineering.md) — source · draft · 5-layer operating interface (technical, operational contract, ownership, adoption, communication); 5-level platform maturity model (Reactive→Community)
+- [Databricks Data + AI Summit 2026 — Data Engineering Speakers](/data-engineering/sources/databricks-summit-2026-speakers-de.md) — source · stub · bios for Tim Riddle, Vijay Parmeshwaran, Francisco Cruz, Zhou Sun, Madhu Kudaravalli, Christina Busmalis, Zach Rothstein
 - [dbt Kimball reference project](/data-engineering/sources/dbt-kimball-project.md) — source · draft · reference dbt Kimball SCD2 project (BigQuery/DuckDB)
 - [DuckDB ETL on ECS Fargate](/data-engineering/sources/aws-duckdb-etl-fargate.md) — source · draft · end-to-end AWS ETL (Terraform, EventBridge, Slack observability)
 - [SQL Sales-Funnel Analysis project](/data-engineering/sources/sql-funnel-analysis-project.md) — source · draft · end-to-end BigQuery funnel/conversion/AOV-vs-CAC SQL walkthrough
@@ -221,7 +224,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [The Portfolio Project That Lands a DE Role](/data-engineering/portfolio-project-that-lands-a-de-role.md)
 
 <details>
-<summary>Source summaries (224)</summary>
+<summary>Source summaries (227)</summary>
 
 - ["A dbt \"logic mesh\" with packages: standard model and metrics across 25 autonomous organizations | dbt Summit"](/data-engineering/sources/a-dbt-logic-mesh-with-packages-standard-model-and-metrics-ac-bf162a97.md)
 - ["Academic → CTO: What Actually Matters in Data (Matthew Housley) - Confessions of a Data Guy"](/data-engineering/sources/academic-cto-what-actually-matters-in-data-matthew-housley-c-e9eae58c.md)
@@ -293,7 +296,9 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - ["Modern Data Warehousing: Stop Using Slowly-Changing Dimensions (Part 1)"](/data-engineering/sources/modern-data-warehousing-stop-using-slowly-changing-dimension-1.md)
 - ["Project A Data Modelling Best Practices Part I: How to Model Data in a Data Warehouse?"](/data-engineering/sources/project-a-data-modelling-best-practices-part-i-how-to-model--8HlNG8bdlM0.md)
 - ["SQL vs Python for Data Transformations: A Decision Framework"](/data-engineering/sources/sql-vs-python-for-data-transformations-a-decision-framework-fae.md)
+- ["The Missing Interface in Data Platform Engineering" (Data Engineering Weekly, 2026)](/data-engineering/sources/missing-interface-data-platform-engineering.md)
 - ["Types of Data Quality Checks: Where and When to Apply Them"](/data-engineering/sources/types-of-data-quality-checks-where-and-when-to-apply-them-acee.md)
+- ["You Don't Graduate From Data Engineering: Why We Built aide" (Data Engineering Weekly, 2026)](/data-engineering/sources/you-dont-graduate-from-data-engineering-aide.md)
 - ["Your Data Model Isn't Broken — Refactor, Don't Rebuild (Part 1)"](/data-engineering/sources/your-data-model-isn-t-broken-refactor-don-t-rebuild-part-1-ce.md)
 - [10 Lessons to Become a More Impactful Data Engineer](/data-engineering/sources/10-lessons-to-become-a-more-impactful-data-engineer-e.md)
 - [16 Cool GitHub Repos You WILL Use (no pressure)](/data-engineering/sources/16-cool-github-repos-you-will-use-no-pressure-cgOPg5cCr2g.md)
@@ -336,6 +341,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [Christina Taylor | Databricks](/data-engineering/sources/christina-taylor-databricks-cf6a27a7.md)
 - [Create a free dbt account | dbt Labs](/data-engineering/sources/create-a-free-dbt-account-dbt-labs-a22db025.md)
 - [Create a Standout Project Write-Up | Data Analyst Insights](/data-engineering/sources/create-a-standout-project-write-up-data-analyst-insights-vgZuTpOj9fE.md)
+- [Data + AI Summit 2026 — Data Engineering Speaker Profiles (Databricks)](/data-engineering/sources/databricks-summit-2026-speakers-de.md)
 - [Data Analyst | dbt Labs](/data-engineering/sources/data-analyst-dbt-labs-e88f1a35.md)
 - [Data Crash Course · Tinybird](/data-engineering/sources/data-crash-course-tinybird-f.md)
 - [Data Crash Course · Tinybird](/data-engineering/sources/data-crash-course-tinybird-doc.md)

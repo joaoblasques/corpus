@@ -3,13 +3,15 @@ okf_version: "0.1"
 ---
 # Corpus Index
 
-> Last updated: 2026-08-08 | Total pages: 512 | Total sources: 2264
+> Last updated: 2026-08-09 | Total pages: 519 | Total sources: 2314
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
 ## Domains
 
 ### ai-engineering
+- ["AI Needs Us—Yes, Really"](/ai-engineering/sources/ai-needs-us-yes-really-bb49e311.md) — source · stub · The article discusses the benefits of using Midjourney, a less accurate AI model, for creative work.…
+- ["Agentic AI vs. Traditional Automation: Key Differences"](/ai-engineering/sources/agentic-ai-vs-traditional-automation-key-differences-71114318.md) — source · stub · Agentic AI is a type of AI system that can operate autonomously, perceive its environment, reason ab…
 - [Aaron Mardis | dbt Summit](/ai-engineering/sources/aaron-mardis-dbt-summit-9206b2e0.md) — source · stub · ['Aaron Mardis is a customer solutions engineer at dbt Labs.', 'He has experience in enabling custom…
 - ["8 Examples of Autonomous AI Agents Explained [+ Use Cases]"](/ai-engineering/sources/8-examples-of-autonomous-ai-agents-explained-use-cases-88433e1d.md) — source · stub · The document discusses autonomous AI agents, their capabilities, and applications across various ind…
 - ["6 AI Agent Orchestration Best Practices in 2026 [Explained]"](/ai-engineering/sources/6-ai-agent-orchestration-best-practices-in-2026-explained-8144e2d2.md) — source · stub · The document discusses AI agent orchestration best practices, including defining clear agent roles a…
@@ -1204,6 +1206,9 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [The Data Engineer Role](/data-engineering/data-engineer-role.md) — synthesis · draft · value = business impact + technical fundamentals; seniority
 - [Claude Code for Data Engineering](/data-engineering/claude-code-for-data-engineering.md) — synthesis · draft · AI-assisted dbt scaffolding; PRD→ERD→dbt (cross-domain)
 - [AI Observability as a Data Pipeline](/data-engineering/ai-observability-data-pipeline.md) — synthesis · draft · AI observability mapped to the DE pipeline model (cross-domain)
+- ["You Don't Graduate From Data Engineering: Why We Built aide"](/data-engineering/sources/you-dont-graduate-from-data-engineering-aide.md) — source · draft · aidataengineer.io launch; continuous learning platform on DEW archive; Socratic AI tutor, skill tracking, team dashboards
+- [The Missing Interface in Data Platform Engineering](/data-engineering/sources/missing-interface-data-platform-engineering.md) — source · draft · 5-layer operating interface model; 5-level platform maturity (Reactive→Community)
+- [Databricks Data + AI Summit 2026 — Data Engineering Speakers](/data-engineering/sources/databricks-summit-2026-speakers-de.md) — source · stub · bios for Tim Riddle, Vijay Parmeshwaran, Francisco Cruz, Zhou Sun, Madhu Kudaravalli, Christina Busmalis, Zach Rothstein
 - [dbt Kimball reference project](/data-engineering/sources/dbt-kimball-project.md) — source · draft · reference dbt Kimball SCD2 project (BigQuery/DuckDB)
 - [DuckDB ETL on ECS Fargate](/data-engineering/sources/aws-duckdb-etl-fargate.md) — source · draft · end-to-end AWS ETL (Terraform, EventBridge, Slack)
 - [Agentic Data Modeling](/data-engineering/agentic-data-modeling.md) — synthesis · draft · AI agents for schema design & change-impact analysis (OpenMetadata MCP, SchemaFlow, pg_infer)
@@ -1247,13 +1252,15 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [Windsor.ai](/data-engineering/windsor-ai.md) — entity · stub · no-code ETL/ELT platform, 345+ connectors
 - [Vibe Engineering](/data-engineering/vibe-engineering.md) — concept · draft · building without theoretical framework (Joe Reis); Spolsky's Law of Leaky Abstractions; 2026 DE context
 - [dbt Summit 2026 — Speakers & Training](/data-engineering/sources/dbt-summit-2026-speakers.md) — source · draft · Tristan Handy (Fivetran+dbt Labs, 100K+ teams), Quigley Malcolm (MetricFlow/OSI), 6 training courses
+- [Databricks Data + AI Summit 2026 — AI Engineering Speakers](/ai-engineering/sources/databricks-summit-2026-speakers-ai.md) — source · stub · bios for Timothy Chen (Essence VC), Callum Adamson (Applied Computing), Denny Lee (Databricks DevRel), Rohan Varma (OpenAI PM), Jai Behl (Anthropic Applied AI)
 
 ### software-engineering
+- [terminal-craft-retrospective](/software-engineering/sources/terminal-craft-retrospective-eece.md) — source · stub · A retrospective on Terminal-Craft, a hands-on curriculum for building real tmux and nvim fluency for…
 - [gtd-vs-para-audit-2026-08-04](/software-engineering/sources/gtd-vs-para-audit-2026-08-04-04.md) — source · stub · ["This document is a gap map between David Allen's GTD mechanics and the author's vault's actual com…
 - [gtd-second-brain-guide](/software-engineering/sources/gtd-second-brain-guide-de.md) — source · stub · A guide to implementing a GTD (Getting Things Done) system using a personal knowledge vault, with a …
 - [A Cool Brisk Walk Through Discrete Mathematics (Davies, v2.2.2)](/software-engineering/sources/a-cool-brisk-walk-through-discrete-mathematics.md) — source · draft · CS-oriented discrete math tour; 254pp, 9 chapters (sets, relations, probability, graphs, counting, numbers, logic, proof); CC BY-SA 4.0; all 9 parts ingested
 - [Seven Sketches in Compositionality: An Invitation to Applied Category Theory (Fong & Spivak, 2018)](/software-engineering/sources/seven-sketches-in-compositionality.md) — source · draft · free applied category theory textbook (353pp, arXiv:1803.05316, CC BY); orders/adjunctions, monoidal preorders, databases as categories, functors/limits, signal flow graphs/PROPs, hypergraph categories/operads, toposes/sheaves; all 18 parts ingested
-- [The Open Logic Text (Open Logic Project, 2026)](/software-engineering/sources/open-logic-text.md) — source · draft · open-source formal metalogic textbook (1016pp, CC BY 4.0); sets, functions, cardinality (Cantor), propositional logic (sequent calculus, soundness/completeness), FOL (syntax/semantics); 16 of 47 parts ingested
+- [The Open Logic Text (Open Logic Project, 2026)](/software-engineering/sources/open-logic-text.md) — source · draft · open-source formal metalogic textbook (1016pp, CC BY 4.0); sets, FOL, model theory, computability (Turing/Church-Turing), Gödel incompleteness, second-order logic, modal/temporal/epistemic/intuitionistic logic; all 47 parts ingested (complete)
 - [Brendan Fong](/software-engineering/brendan-fong.md) — entity · stub · MIT applied category theory; co-author Seven Sketches in Compositionality (2018)
 - [David I. Spivak](/software-engineering/david-spivak.md) — entity · stub · MIT applied category theory; co-author Seven Sketches in Compositionality; polynomial functors for dynamical systems
 - [Stephen Davies](/software-engineering/stephen-davies.md) — entity · stub · CS professor at UMW; author of A Cool Brisk Walk Through Discrete Mathematics
@@ -1813,6 +1820,8 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [Neil Davidson](/ai-business/neil-davidson.md) — entity · stub · co-founder Red Gate Software; founder Business of Software conference; author Don't Just Roll the Dice
 
 ### blockchain
+- [Yet Another Introductory Number Theory Textbook (Poritz, 2014)](/blockchain/sources/yet-another-introductory-number-theory-textbook.md) — source · draft · 128pp; modular arithmetic, congruences, RSA, digital signatures, discrete logarithms; complete (5/5 parts)
+- [Jonathan A. Poritz](/blockchain/jonathan-poritz.md) — entity · stub · mathematician at CSU-Pueblo; author of Yet Another Introductory Number Theory Textbook (2014)
 - [Mastering Bitcoin, 3rd Edition (Antonopoulos & Harding)](/blockchain/sources/mastering-bitcoin-3rd-edition.md) — source · draft · 13 chapters; full Bitcoin technical reference; CC BY-SA 4.0
 - [Bitcoin Transactions](/blockchain/bitcoin-transactions.md) — concept · draft · UTXO model; inputs/outputs; fee market (RBF, CPFP); coinbase transaction
 - [Bitcoin Script](/blockchain/bitcoin-script.md) — concept · draft · Forth-like stack language; P2PKH/P2WPKH/Taproot; Tapscript/MAST
