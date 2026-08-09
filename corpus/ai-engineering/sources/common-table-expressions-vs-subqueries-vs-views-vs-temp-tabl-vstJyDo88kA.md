@@ -12,7 +12,7 @@ tags:
   - source
   - youtube-quick-intake
 created: 2026-07-08
-updated: 2026-08-08
+updated: 2026-08-09
 provisional: false
 youtube_video_id: vstJyDo88kA
 url: https://youtu.be/vstJyDo88kA
