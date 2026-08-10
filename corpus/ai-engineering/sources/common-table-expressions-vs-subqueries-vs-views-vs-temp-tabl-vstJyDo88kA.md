@@ -1,7 +1,7 @@
 ---
 type: source
 domain: ai-engineering
-status: stub
+status: draft
 sources:
   - path: raw/youtube/youtube-vstJyDo88kA-common-table-expressions-vs-subqueries-vs-views-vs-temp-tabl.md
     channel: youtube
@@ -12,7 +12,7 @@ tags:
   - source
   - youtube-quick-intake
 created: 2026-07-08
-updated: 2026-08-09
+updated: 2026-08-10
 provisional: false
 youtube_video_id: vstJyDo88kA
 url: https://youtu.be/vstJyDo88kA
