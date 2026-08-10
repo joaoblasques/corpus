@@ -177,3 +177,9 @@ type: internal
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/gemini-cli-free-coding-agent-complete-guide-de.md", "verdict_ok": false, "gov": "reverted+queued"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/deep-reinforcement-learning-0-to-100-towards-data-science-100.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/google-notebooklm-ai-research-assistant-aa.md", "verdict_ok": true, "gov": "committed"}
+
+## [2026-08-10T03:37] gardener · run
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/common-table-expressions-vs-subqueries-vs-views-vs-temp-tabl-vstJyDo88kA.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/gemini-cli-free-coding-agent-complete-guide-de.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/physical-ai-when-ai-gets-a-body-bd.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/model-routing-choosing-the-right-model-for-the-job-b.md", "verdict_ok": true, "gov": "committed"}
