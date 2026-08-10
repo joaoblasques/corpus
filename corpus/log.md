@@ -2,6 +2,27 @@
 
 > OKF v0.1 change log. Newest first, grouped by date.
 
+## 2026-08-10
+
+* **Ingest**: Batch ingest — Kai Waehner cluster, dbt Roundup cluster, AI landscape cluster (33 sources) — ingest-auto run
+  - sources: 22 files stamped in raw/_inbox/ (22 still present; 14 previously moved to raw/web/)
+  - domains: data-engineering, ai-engineering
+  - pages created: [/data-engineering/shift-left-architecture.md, /data-engineering/data-integration-patterns.md]
+  - pages updated: [/data-engineering/stream-processing.md, /data-engineering/kafka.md, /data-engineering/dbt.md, /ai-engineering/mcp.md, /ai-engineering/anthropic.md, /data-engineering/compute-storage-decoupling.md, /ai-engineering/agentic-workflow.md, /data-engineering/process-intelligence.md, /data-engineering/data-engineering-interview.md, /data-engineering/duckdb.md, /ai-engineering/agent-security.md]
+  - deferred: 17 files (G1: 12 thin/promo/form pages + 1 travel; UNCERTAIN: 4 scrape failures or truncations)
+  - notes: 3-context-window run spanning 2026-08-09/10; Kai Waehner data integration/streaming cluster (24 articles); dbt Roundup analytics-in-AI-era cluster (5 articles); AI landscape (2 articles); rogue agent incident (OpenAI/HuggingFace July 2026); Claude Code auto mode safety evals; DuckDB agent architecture; Vercel eve framework
+
+* **Collectors**: gmail=2, blog_promote=0, obsidian=0, book_discover=0, blog_discover=0, book_fetch=0, pdf=0, image=0, books=0, arxiv=0, youtube=0, github_discover=5, github_promote=5, github=0, x=0, links_refetch=0
+* **Ingest**: 38 ingested · 12 deferred · status=ok
+* **YoutubeQuick**: 0 intake · 0 rescued · 0 skipped · status=ok
+* **DocsQuick**: 3 intake · 45 thin · 2 llm_fail · status=ok
+* **YoutubeReap**: 0 removed · status=ok
+* **Gardener**: 4 stubs deepened · status=ok
+* **Heal**: 23 citations repointed · 0 unfixable · 2 hubs reindexed · 32 cross-domain links · status=ok
+* **Depth**: 430 knowledge · 1383 sources · ratio 1:3.2
+* **GapResolver**: 0 gap dispatched · 0 sources queued · status=ok
+* **Lint**: 1 broken wikilinks · 0 broken citations · 0 orphans · 1273 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+* **OKF**: 0 violations
 ## 2026-08-09
 
 * **Ingest**: The Open Logic Text (Open Logic Project, 2026) — parts 17-47 of 47 — routed to software-engineering (update of existing source page)

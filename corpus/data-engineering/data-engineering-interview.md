@@ -21,6 +21,9 @@ sources:
   - path: raw/web/web-how-to-craft-the-perfect-data-engineer-resume-and-linkedin-p-1446bdb1.md
     channel: web
     ingested_at: 2026-07-01
+  - path: raw/_inbox/web-the-new-rules-of-behavioral-interviews-after-ai-29edd283.md
+    channel: web
+    ingested_at: 2026-08-10
 aliases:
   - data engineering interview
   - DE interview prep
@@ -28,11 +31,13 @@ aliases:
   - landing a data engineering job
   - high paying data job
   - DE job search
+  - behavioral interview
+  - AI and behavioral interviews
 tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-19
-updated: 2026-07-01
+updated: 2026-08-10
 last_confirmed: 2026-07-01
 ---
 
@@ -116,6 +121,12 @@ Databricks appears on both tracks — analysts use it for querying and notebook-
 - [Navigating a Technical Career](/ai-business/technical-career.md) — broader career strategy, role targeting, prioritization
 - [Data Engineering hub](/data-engineering/README.md)
 
+## Behavioral interviews in the AI era
+
+Meta dropped the LeetCode round. Tools like Interview Coder make DSA questions trivially solvable [^beh1]. The implication: **behavioral rounds and leadership signals have become the primary filter for level decisions in Big Tech**, while the technical round filters candidacy itself [^beh1]. AI tools haven't changed what interviewers are looking for behaviorally — they've made the technical filter less discriminating, pushing more weight onto behavioral signal [^beh1].
+
+> [unsourced — article truncated after intro; full behavioral framework not available from scraped content]
+
 ---
 
 [^skills]: [10 Skills to Ace Your Data Engineering Interviews](../../raw/web/10-skills-to-ace-your-data-engineering-interviews-start-data.md)
@@ -123,3 +134,4 @@ Databricks appears on both tracks — analysts use it for querying and notebook-
 [^da]: [2026 Free Data Analyst Bootcamp (Alex The Analyst)](../../raw/youtube/youtube-cnjhHZNJEDk-2026-free-data-analyst-bootcamp-24-hours-for-free-sql-excel.md) — YouTube
 [^roadmap]: [The 2025 AI + Data Engineering Roadmap (EcZachly)](../../raw/web/web-the-2025-ai-data-engineering-roadmap-da18cb3e.md) — Zach Wilson, DataExpert.io
 [^resume]: [How to craft the perfect data engineer resume and LinkedIn profile in 2024 (EcZachly)](../../raw/web/web-how-to-craft-the-perfect-data-engineer-resume-and-linkedin-p-1446bdb1.md) — Zach Wilson, DataExpert.io
+[^beh1]: [The New Rules of Behavioral Interviews after AI (DataExpert.io)](../../raw/_inbox/web-the-new-rules-of-behavioral-interviews-after-ai-29edd283.md) — Zach Wilson

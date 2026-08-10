@@ -18,6 +18,9 @@ sources:
   - path: raw/web/web-what-is-serverless-postgresql-3e7858c3.md
     channel: web
     ingested_at: 2026-07-06
+  - path: raw/_inbox/web-diskless-kafka-at-fintech-robinhood-for-cost-efficient-log-a-0ec9eb53.md
+    channel: web
+    ingested_at: 2026-08-10
 aliases:
   - compute-storage decoupling
   - compute storage separation
@@ -28,9 +31,9 @@ tags:
   - corpus/data-engineering
   - synthesis
 created: 2026-06-23
-updated: 2026-07-06
+updated: 2026-08-10
 confidence: 0.8
-last_confirmed: 2026-07-06
+last_confirmed: 2026-08-10
 ---
 
 # Compute–Storage Decoupling
@@ -54,6 +57,8 @@ The **lakehouse** combines a lake's raw-data flexibility with a warehouse's fast
 ### Event streaming — the newest convergence
 
 Streaming is the latest paradigm to make the move, and it is instructive *because Kafka historically did the opposite*. Kafka's page-cache design **tightly couples compute and storage** — you cannot scale them independently, and cross-AZ replication is expensive in the cloud [^src3]. The fixes all reach for object storage: **tiered storage** (recent data on broker disk, historical data in S3/GCS/HDFS), **object-storage-native Kafka** (WarpStream, AutoMQ, Bufstream, Redpanda) that runs **directly on object storage** and *eliminates replication* because object storage already guarantees durability, and Aiven's **KIP-1150 "Diskless Topics"** that delegate replication to object storage, targeting up to 80% infrastructure-cost cuts [^src3]. This is the warehouse story replayed a decade later for streams — see [Apache Kafka](/data-engineering/kafka.md) and [Stream Processing](/data-engineering/stream-processing.md).
+
+**Production validation — Robinhood case study (2025):** Robinhood migrated its log analytics and observability pipelines from open-source Kafka to WarpStream (diskless, BYOC). The core driver: log traffic followed market hours, requiring chronic overprovisioning of static Kafka clusters for peak loads that sat idle most of the time. With stateless diskless compute, Robinhood pays only for what it uses. Results: **45% total cost reduction, 99% inter-AZ networking savings** (no cross-AZ broker replication), 36% lower compute, 13% lower storage. Critically, Robinhood kept its mission-critical trading Kafka on Confluent's managed platform (latency-sensitive) while moving to diskless only for the log analytics workload (latency-tolerant). This is a textbook application of the decoupling principle: **match the storage model to the latency tolerance of the workload** [^src6]. WarpStream's integration with Amazon S3 Express One Zone narrows the latency gap for near-real-time workloads [^src6].
 
 ### OLTP databases — the newest convergence
 
@@ -95,4 +100,5 @@ See [Serverless Databases](/data-engineering/serverless-databases.md) for the fu
 [^src3]: [If you're learning Kafka, this article is for you (Vu Trinh)](../../raw/email/email-2025-05-15-if-you-re-learning-kafka-this-article-is-for-you.md)
 [^src4]: [What To Look For in a Serverless Database for AI Applications](../../raw/web/web-what-to-look-for-in-a-serverless-database-for-ai-application-8e1ddee7.md)
 [^src5]: [What Is Serverless PostgreSQL?](../../raw/web/web-what-is-serverless-postgresql-3e7858c3.md)
+[^src6]: [Diskless Kafka at FinTech Robinhood for Cost-Efficient Log Analytics and Observability](../../raw/_inbox/web-diskless-kafka-at-fintech-robinhood-for-cost-efficient-log-a-0ec9eb53.md) — Kai Waehner, kai-waehner.de, 2026-01-22
 </content>

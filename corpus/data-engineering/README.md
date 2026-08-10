@@ -6,7 +6,7 @@ tags:
   - corpus/data-engineering
   - hub
 created: 2026-05-07
-updated: 2026-07-06
+updated: 2026-08-10
 ---
 
 # Data Engineering
@@ -55,6 +55,8 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [Storing Intermediate Results in SQL](/data-engineering/sql-intermediate-results.md) — concept · draft · CTE vs subquery vs view vs temp table vs materialized view; materialized-or-not decision framework; staging tables
 - [Requirements Gathering](/data-engineering/requirements-gathering.md) — concept · draft · the 5-step process (identify end-users, define via a question set, validate, deliver iteratively, gate changes) + output-led engineering
 - [Stream Processing](/data-engineering/stream-processing.md) — concept · draft · batch vs stream/micro-batch; latency/throughput/backpressure/state/event-time; engines (Flink/Kafka Streams/Spark SS/Storm); delivery guarantees; Lambda architecture
+- [Shift Left Architecture](/data-engineering/shift-left-architecture.md) — concept · draft · three consumer interfaces (Operational/Kafka, Analytical/Iceberg, AI/MCP); Rivian Mega Filter; dbt-Flink integration; real-time context engine
+- [Data Integration Patterns (2026)](/data-engineering/data-integration-patterns.md) — concept · draft · three paradigms (request-response, batch, event streaming); SAP API policy §2.2.2; edge-to-cloud; ERP migration; data format trade-offs
 - [Data Transformation (the "T" in ETL/ELT)](/data-engineering/data-transformation.md) — concept · draft · what the T solves (business logic, standardization, integration, pre-aggregation); transform-focused tools (dbt/SQLMesh/Dataform); common SQL transforms; transform-layer challenges + raw/stage/prod ↔ medallion
 - [Small-Scale Pipeline Design](/data-engineering/small-scale-pipeline-design.md) — concept · draft · small ≠ low-stakes; problem-scope questions; design principles; tool choice; the DE's 7-step implementation mindset; signals to refactor/scale up
 - [Modern Data Stack (MDS)](/data-engineering/modern-data-stack.md) — concept · draft · 10 components of a cloud-native data platform: storage, ingestion, transformation, visualization, version control, orchestration, containers, IaC, data quality, reverse ETL
@@ -129,7 +131,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 
 ## Pages in this domain
 
-### Concepts (53)
+### Concepts (55)
 - [BI as Code](/data-engineering/bi-as-code.md)
 - [Change Data Capture (CDC)](/data-engineering/change-data-capture.md)
 - [CI/CD for Data Infrastructure](/data-engineering/cicd-for-data-infrastructure.md)
@@ -138,6 +140,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [Data Engineering Team OS](/data-engineering/data-engineering-team-os.md)
 - [Data Flow Patterns](/data-engineering/data-flow-patterns.md)
 - [Data Ingestion Patterns](/data-engineering/data-ingestion-patterns.md)
+- [Data Integration Patterns (2026)](/data-engineering/data-integration-patterns.md)
 - [Data Lake / Lakehouse](/data-engineering/data-lake.md)
 - [Data Mart](/data-engineering/data-mart.md)
 - [Data Migration at Scale](/data-engineering/data-migration-at-scale.md)
@@ -175,6 +178,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [SCD2 (Slowly Changing Dimension Type 2)](/data-engineering/scd2.md)
 - [Semantic Layer](/data-engineering/semantic-layer.md)
 - [Serverless Databases](/data-engineering/serverless-databases.md)
+- [Shift Left Architecture](/data-engineering/shift-left-architecture.md)
 - [similarity search](/data-engineering/similarity-search.md)
 - [Small-Scale Pipeline Design](/data-engineering/small-scale-pipeline-design.md)
 - [SQL Window Functions](/data-engineering/sql-window-functions.md)

@@ -21,17 +21,26 @@ sources:
   - path: raw/web/web-processing-1-tb-with-duckdb-in-less-than-30-seconds-b3c369dc.md
     channel: web
     ingested_at: 2026-07-01
+  - path: raw/_inbox/web-duckdb-s-agent-moment-jordan-tigani-c09530c6.md
+    channel: web
+    ingested_at: 2026-08-10
 aliases:
   - DuckDB
   - MotherDuck
   - Quack
   - DuckLake
   - single-node OLAP
+  - Jordan Tigani
+  - local-first database
+  - DuckDB agent moment
+  - Water Town
+  - ETL vibe coding
+  - big data is dead
 tags:
   - corpus/data-engineering
   - entity
 created: 2026-06-11
-updated: 2026-07-01
+updated: 2026-08-10
 ---
 
 # DuckDB
@@ -120,11 +129,28 @@ A secondary argument: the industry may be swinging back toward simplicity after 
 
 In multi-engine Iceberg deployments DuckDB is the **selective-lookup / sub-second tier** — "a point lookup that costs $0.01 on DuckDB costs $0.08 on Snowflake" — but cannot distribute across nodes, so heavy distributed joins go elsewhere. Table compaction expands the set of queries DuckDB can serve. See [Query-engine routing](/data-engineering/query-engine-routing.md).
 
+## DuckDB's agent moment (MotherDuck, 2026)
+
+Jordan Tigani (Founder/CEO, MotherDuck; 11 years at Google BigQuery) argues that DuckDB's local-first architecture is a structural advantage for agents [^src7]:
+
+**"Big Data is Dead" revisited: two axes of scale** — data size and compute size are independent. Most enterprise workloads are: (a) small-data/small-compute (BI dashboards), (b) big-data/small-compute (last hour of logs from a 10-year dataset), or (c) small-data/big-compute (500 BI users hitting the same dashboard). Only the small minority of genuinely big-data/big-compute workloads require distributed systems — and that's the only case DuckDB doesn't win [^src7].
+
+**Why local-first is an agent feature**: agents want their own sandbox and software they can install. DuckDB installs with `brew install duckdb`, starts instantly, and requires no server process. The transition from local DuckDB to cloud MotherDuck is changing one character: if the database name starts with `md:`, it runs in MotherDuck; otherwise it runs locally. No code changes [^src7].
+
+**Agent swarm architecture (Water Town)**: Tigani's "Water Town" concept — always-on agents handling the long list of small data management tasks: profiling columns, running evals, detecting schema drift, curating context for downstream consumers, flagging anomalies before a human ever sees them. For instance, a MotherDuck user distills conversational context into hard evals: "when I say revenue, here's the SQL calculation; these two tables are joinable 1:1" — context the agent captures and operationalizes. The agent then persists that understanding for future queries, becoming progressively more accurate [^src7].
+
+**Multi-agent tenancy**: MotherDuck's architecture is "amazing for agents" — a swarm of 100 agents branching and querying simultaneously fits the tenancy model. Agents hammering Snowflake at that rate would be prohibitively expensive [^src7].
+
+**ETL is "vibe codable"**: after launching the MotherDuck MCP server (December 2025), users began building entire data products — dashboards ("Dives"), data ingestion pipelines, analytical interfaces — using only Claude and SQL against MotherDuck, with no traditional front-end or ETL tooling. "Their whole company was an MCP server" [^src7].
+
+**The Jevons paradox of analytics**: making DuckDB/MotherDuck cheaper doesn't reduce compute spend — it generates new analytics use cases. Agents flagging the weird dashboard number before a human sees it, or tracing where a metric came from by examining pipeline lineage, expands the total demand for analytical compute rather than displacing it [^src7].
+
 ## Related
 
 - [Query-engine routing](/data-engineering/query-engine-routing.md) — DuckDB as the cheap fast tier
 - [Apache Iceberg](/data-engineering/apache-iceberg.md) · [Open table formats](/data-engineering/open-table-formats.md) · [Parquet](/data-engineering/parquet.md)
 - [MERGE INTO](/data-engineering/merge-into.md)
+- [Agentic Workflows](/ai-engineering/agentic-workflow.md) — agent swarm pattern and agent data management
 
 [^src1]: [DuckDB 1.5.3: Not an Ordinary Patch Release](../../raw/web/duckdb-1-5-3-not-an-ordinary-patch-release.md)
 [^src2]: [Quack: The DuckDB Client-Server Protocol](../../raw/web/quack-the-duckdb-client-server-protocol.md)
@@ -132,3 +158,4 @@ In multi-engine Iceberg deployments DuckDB is the **selective-lookup / sub-secon
 [^src4]: [DuckDB at a High Level (Vu Trinh / The Data Engineers)](../../raw/email/email-2026-06-23-duckdb-at-a-high-level.md)
 [^src5]: [Processing 1 TB with DuckDB in less than 30 seconds (EcZachly + MotherDuck)](../../raw/web/web-processing-1-tb-with-duckdb-in-less-than-30-seconds-b3c369dc.md)
 [^src6]: [Data, AI, and DuckDB — Jacob Matson, Developer Advocate, MotherDuck (DEC Podcast)](../../raw/web/web-data-ai-and-duckdb-f6875fcc.md)
+[^src7]: [DuckDB's Agent Moment (Jordan Tigani / dbt Roundup, Season 9)](../../raw/web/web-duckdb-s-agent-moment-jordan-tigani-c09530c6.md)

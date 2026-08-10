@@ -87,6 +87,12 @@ sources:
   - path: raw/web/web-temporary-cloudflare-accounts-for-ai-agents-9feea510.md
     channel: web
     ingested_at: 2026-07-05
+  - path: raw/_inbox/web-mcp-vs-rest-http-api-vs-kafka-the-architect-s-guide-to-agent-e36f1d1c.md
+    channel: web
+    ingested_at: 2026-08-10
+  - path: raw/_inbox/web-enterprise-agentic-ai-landscape-2026-trust-flexibility-and-v-d6ce5909.md
+    channel: web
+    ingested_at: 2026-08-10
 aliases:
   - MCP
   - Model Context Protocol
@@ -98,7 +104,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-21
-updated: 2026-07-05
+updated: 2026-08-10
 ---
 
 # MCP (Model Context Protocol)
@@ -474,6 +480,53 @@ Sean Lynch (Hacker News, 2026-06-19): the real unique value of MCP over CLI/skil
 
 This echoes the credential-brokering pattern in [Agent Security](/ai-engineering/agent-security.md): Vercel and Cloudflare sandbox network policies inject credentials at the network layer rather than passing them as environment variables. MCP servers can implement the same pattern server-side.
 
+## MCP vs REST vs Kafka: enterprise architectural positioning
+
+An enterprise-practitioner framework for when MCP is — and is not — the right tool [^src30]:
+
+| Technology | Role | Designed for |
+|---|---|---|
+| MCP | Tool access interface | Standardized, discoverable tool calls for AI agents |
+| REST/HTTP API | Direct integration | Moderate-volume, latency-sensitive, well-documented API access |
+| Apache Kafka | Event backbone | High-volume streaming, multi-consumer pub/sub, ordering guarantees |
+
+**The key test for MCP**: does it matter if the data the agent receives is a few seconds or minutes old? If yes, MCP should not own that responsibility — the data layer (Kafka + Flink) should guarantee freshness before the MCP interface is reached. If no (supplementary, low-frequency, eventual consistency acceptable), MCP is the right interface [^src30].
+
+### When MCP is right
+
+- Supplementary, tool-like access: Slack, Google Drive, ServiceNow tickets, internal knowledge bases
+- The agent needs context to act, not a stream of events to react to
+- Eventual consistency acceptable
+- Low-frequency, discoverable tool calls across many services and vendors [^src30]
+
+### What MCP does NOT do
+
+MCP does not manage data, guarantee message delivery, enforce governance, or guarantee consistency across systems. It is an interface layer, not a data pipeline. "Data consistency is not delegated to MCP. It is enforced upstream inside the streaming platform before the MCP interface comes into play." [^src30]
+
+### The real-time context engine (MCP + Kafka)
+
+The most powerful pattern: Kafka + Flink process and govern live operational data, producing real-time materialized views; those views are exposed to AI agents through MCP. The streaming platform owns freshness and consistency guarantees; MCP owns the agent interface [^src30].
+
+```
+Operational sources → [Kafka + Flink: govern, process, materialize] → [MCP: standardized agent interface]
+                                                                              ↑
+                                                                    AI agent (Claude, ChatGPT, LangChain)
+```
+
+This eliminates a class of hallucination errors at the source — agents working from stale data produce unreliable outputs [^src30]. See [Shift Left Architecture](/data-engineering/shift-left-architecture.md) for the full three-interface pattern.
+
+## MCP security posture (2025-2026)
+
+Enterprise adoption has outpaced security maturity. An Endor Labs analysis of 2,614 MCP implementations found [^src30]:
+- **82%** use file system operations prone to path traversal
+- **67%** use APIs related to code injection
+
+Most 2025-2026 incidents are implementation failures, not protocol flaws. The 2026 roadmap targets enterprise-grade authentication (OAuth 2.1, SAML/OIDC), scalable transport, agent-to-agent communication, and audit trails [^src30].
+
+**Controls for today**: apply least privilege, limit MCP server access to only what each tool requires, monitor tool definitions for unexpected changes.
+
+**MCP as structural counterforce to lock-in**: Anthropic donated MCP to the Linux Foundation's Agentic AI Foundation (AWS, Google, Microsoft, Bloomberg, OpenAI as platinum members). Enterprises building agentic workflows on MCP-compatible infrastructure preserve interoperability across models and vendors — reducing the risk of agent architecture becoming inseparable from a single vendor's ecosystem [^src31].
+
 ## Cloudflare ephemeral deploy (for AI agents)
 
 Cloudflare Workers can now be deployed without creating an account using `npx wrangler deploy --temporary` [^src29]:
@@ -492,6 +545,8 @@ This pattern fits MCP server deployment: an agent can spin up a temporary HTTP M
 - [Claude Code](/ai-engineering/claude-code.md) — MCP client; configures servers via `claude mcp add`
 - [Claude Managed Agents](/ai-engineering/claude-managed-agents.md) — uses MCP for external system access; Vaults handle OAuth tokens per session
 - [Claude Cowork](/ai-engineering/claude-cowork.md) — the end-user product surface where consumer connectors are most active
+- [Kafka](/data-engineering/kafka.md) — the event backbone that pairs with MCP for the real-time context engine
+- [Shift Left Architecture](/data-engineering/shift-left-architecture.md) — MCP as the AI interface layer in the three-consumer architecture
 - [Semantic Layer](/data-engineering/semantic-layer.md) (data-engineering) — an MCP server (`MCPSemanticModel`/FastMCP) can expose a governed semantic layer as LLM-queryable tools, constraining the model to validated aggregations
 
 ---
@@ -525,3 +580,5 @@ This pattern fits MCP server deployment: an agent can spin up a temporary HTTP M
 [^src27]: [Agents in Action #3: Model Context Protocol (MCP) for Data Engineers](../../raw/email/email-2026-06-28-agents-in-action-3-model-context-protocol-mcp-for-data-engin.md) — Pipeline to Insights (Substack), 2026-06-28
 [^src28]: [A quote from Sean Lynch](../../raw/web/web-a-quote-from-sean-lynch-f248e4ad.md) — Simon Willison curating HN comment by Sean Lynch, 2026-06-19
 [^src29]: [Temporary Cloudflare Accounts for AI agents](../../raw/web/web-temporary-cloudflare-accounts-for-ai-agents-9feea510.md) — Simon Willison, 2026-06-21
+[^src30]: [MCP vs. REST/HTTP API vs. Kafka: The Architect's Guide to Agentic AI Integration](../../raw/_inbox/web-mcp-vs-rest-http-api-vs-kafka-the-architect-s-guide-to-agent-e36f1d1c.md) — Kai Waehner, kai-waehner.de, 2026-04-10
+[^src31]: [Enterprise Agentic AI Landscape 2026: Trust, Flexibility, and Vendor Lock-in](../../raw/_inbox/web-enterprise-agentic-ai-landscape-2026-trust-flexibility-and-v-d6ce5909.md) — Kai Waehner, kai-waehner.de, 2026-04-06

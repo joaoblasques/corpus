@@ -24,6 +24,24 @@ sources:
   - path: raw/_inbox/pdf-designing-event-driven-systems-concepts-and-patter-part-01.md
     channel: pdf
     ingested_at: 2026-07-23
+  - path: raw/_inbox/web-flink-cep-and-agentic-ai-real-time-pattern-detection-as-the-d81fcf0b.md
+    channel: web
+    ingested_at: 2026-08-10
+  - path: raw/_inbox/web-shift-left-in-automotive-real-time-intelligence-from-vehicle-ba65affa.md
+    channel: web
+    ingested_at: 2026-08-10
+  - path: raw/_inbox/web-cariads-unified-data-platform-a-data-streaming-automotive-su-3b1f21f1.md
+    channel: web
+    ingested_at: 2026-08-10
+  - path: raw/_inbox/web-data-streaming-at-mwc-2026-how-kafka-flink-and-agentic-ai-po-d18087ce.md
+    channel: web
+    ingested_at: 2026-08-10
+  - path: raw/_inbox/web-from-takeoff-to-touchdown-real-time-aviation-with-data-strea-630a7870.md
+    channel: web
+    ingested_at: 2026-08-10
+  - path: raw/_inbox/web-etihad-airways-makes-airline-operations-real-time-with-data-dc1e3991.md
+    channel: web
+    ingested_at: 2026-08-10
 aliases:
   - stream processing
   - real-time processing
@@ -43,11 +61,19 @@ aliases:
   - vertical scaling
   - horizontal scaling
   - embarrassingly parallel
+  - CEP
+  - Complex Event Processing
+  - Flink CEP
+  - Flink Agents
+  - Mega Filter
+  - Event Watch
+  - Rivian data streaming
+  - Qantas DSP
 tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-19
-updated: 2026-07-23
+updated: 2026-08-10
 ---
 
 # Stream Processing (and Batch vs Stream)
@@ -204,6 +230,89 @@ These cumulative delays are the primary motivation for switching to streaming wh
 - Need order but can pause → **queue**
 - Continuous data / unknown volume / can't stop → **stream**
 
+## Flink CEP (Complex Event Processing) and Agentic AI
+
+**Complex Event Processing (CEP)** is the missing layer between raw event streams and AI agents [^cep1]. The problem: AI agents cannot evaluate every raw event in a high-volume stream meaningfully — at 500,000 transactions/hour the cost and noise are prohibitive. CEP filters the stream to only confirmed pattern matches before any LLM is involved.
+
+### The filter math
+
+A payment platform processing 500,000 transactions/hour might generate 200 confirmed fraud pattern matches per hour. CEP achieves a >99% volume reduction before any LLM inference runs. The agent receives 200 specific, grounded inputs instead of 500,000 ambiguous raw events [^cep1].
+
+### Why this matters for trust and cost
+
+**Determinism**: CEP pattern detection is deterministic — given the same event sequence, the same pattern fires every time. For regulated industries needing audit trails, the detection step is rule-based and reproducible. The AI agent adds reasoning on top of a deterministic detection foundation [^cep1].
+
+**Cost proportionality**: LLM inference is invoked only when a pattern match has already been confirmed. CEP evaluation costs orders of magnitude less than LLM inference [^cep1].
+
+### The four-layer architecture
+
+```
+Layer 1: Event Ingestion (Kafka CDC connectors, or direct Flink CDC)
+Layer 2: Flink CEP Pattern Detection (Pattern API or MATCH_RECOGNIZE; output: low-volume confirmed matches)
+Layer 3: Enrichment + Serving (relational DB, vector store, materialized views; MCP or REST agent interface)
+Layer 4: Flink Agents (FLIP-531; event-driven, autonomous, always-on — not chatbots)
+```
+
+The CEP job does one thing: detect. It does not enrich, does not decide, does not call external systems. Its output is a clean, low-volume stream of confirmed pattern detections [^cep1].
+
+### Flink Agents (FLIP-531)
+
+Flink Agents (formalized as FLIP-531) enables natively event-driven AI agents built directly on Flink's streaming runtime. Recent releases: exactly-once consistency for agent actions and native MCP tool invocation [^cep1]. These are always-on agents that react to events — a CEP pattern-match triggers the agent, which receives pattern details, queries the enrichment layer, reasons about the response, and executes an action within defined boundaries [^cep1].
+
+**Maturity caveat**: Flink Agents is a preview sub-project with experimental APIs as of 2026. Evaluate production readiness carefully [^cep1].
+
+### CEP vs ML vs LLM: complementary tools
+
+| Tool | Best for |
+|---|---|
+| Flink CEP | Known, defined patterns; determinism and auditability required |
+| ML-based stream processing | Dynamic anomaly detection; pattern space too complex/evolving for explicit rules |
+| LLM reasoning | Deciding what to do about a confirmed detection; NOT for raw stream evaluation |
+
+The practical sequence: Flink CEP first (reduce volume), ML for dynamic patterns, LLM last on confirmed high-signal inputs [^cep1].
+
+### Flink CEP vs Process Orchestration
+
+Flink CEP handles real-time, sub-second reaction. After detection, long-running workflows (investigation, human decision points, compensation logic) belong in orchestration engines: Camunda, Temporal, Apache Airflow. Flink publishes a pattern-match event; the orchestration engine consumes it and starts a workflow instance — neither layer bleeds into the other [^cep1].
+
+## Real-world streaming case studies
+
+### Rivian: Mega Filter at scale (automotive)
+
+Rivian vehicles stream **5,500 telemetry signals every 5 seconds** from 150,000+ connected vehicles — a firehose where only a small fraction of signals are relevant. Every Flink job was consuming the entire Kafka topic, filtering internally. The solution: **Mega Filter**, a stateful pre-filtering layer built with Flink + RocksDB [^rivian1].
+
+Results: daily data volume dropped **88% (288 TB → 34 TB/day)**. Kafka stays lean; Flink jobs focus on business logic, not filtering. New signal specifications are added via REST API; Flink state updates in real time [^rivian1].
+
+Rivian's **Event Watch** platform (built on Kafka and Flink) powers 120+ Flink pipelines serving **250+ unique Kafka consumers** across fleet operations, mobile apps, cybersecurity, ADAS, charging, and safety/compliance [^rivian1]. Architecture evolution: Kinesis + Redshift (original) → Kafka + Flink + Druid (current). The original system hit latency, coupling, and scaling limits as connected vehicle volume grew [^rivian1].
+
+### MWC 2026: five telecom trends, one real-time data requirement
+
+MWC 2026 in Barcelona (100,000+ attendees) surfaced five dominant telecom trends, all converging on the same underlying requirement — continuous real-time data streaming [^mwc1]:
+
+1. **AI and agentic automation**: Telco AI fails if it acts on stale data. An agent reacting to a 30-minute-old network anomaly is too slow; the problem has cascaded [^mwc1]. Kafka continuously collects data from RAN, core, edge, BSS, OSS; Flink detects service degradations and triggers remediation before human operators alert [^mwc1].
+2. **Network API monetization (Aduna)**: Every API call, response, and error published to Kafka topics; Flink calculates usage metrics, rate limits, detects abuse, feeds billing. Without streaming, batch billing means inaccurate invoices and slow misuse response [^mwc1].
+3. **Sovereign cloud and data residency**: GDPR + EU AI Act compliance means data cannot cross borders. Kafka deploys across on-prem/private/sovereign/edge; Flink filters/masks sensitive data before it leaves a sovereign boundary [^mwc1]. "If the data pipeline is not sovereign, the cloud is not sovereign either" [^mwc1].
+4. **Autonomous network operations**: Closed-loop automation (sense → decide → act) must run continuously, not in batch cycles. Flink detects anomalies and triggers automated responses in milliseconds [^mwc1].
+5. **5G monetization**: Real-time network slice performance monitoring and billing via streaming event processing [^mwc1].
+
+### Qantas: Airport CDM and Turn Manager
+
+Qantas built a **Data Streaming Platform (DSP)** as a shared group streaming platform for Qantas, Jetstar, Loyalty, and Freight. Key capabilities: Kafka Connect for data integration, ksqlDB for stream processing, governance/security/retry policies [^qantas1].
+
+Two core use cases [^qantas1]:
+- **Airport Collaborative Decision Making (A-CDM)**: Kafka integrates flight event timestamps (TOBT, AOBT, takeoff/landing, arrival block) across all airport stakeholders in real time — improving prediction accuracy and reducing delays
+- **Turn Manager**: tracks all turnaround activities (baggage unload, catering, crew change, refueling, boarding) providing a "single pane of glass" per flight; if one activity delays, downstream tasks update automatically
+
+AIDX XML aviation messages are integrated via Kafka Connect with Single Message Transforms (SMT) that convert, validate, and redact PII [^qantas1]. Industry peer: Lufthansa, Etihad Airways, Cathay Pacific, Virgin Australia all use similar streaming approaches.
+
+### Etihad Airways: Real-time disruption management
+
+Etihad (16.1M passengers H1 2025, 40+ countries) uses Confluent Cloud (fully managed SaaS) with Kafka + Flink for **Complex Event Processing (CEP)** of airline operations [^etihad1].
+
+Key use case: when a flight delays, the event stream triggers a CEP process that joins passenger booking data in real time, correlates the delay with itineraries and loyalty status, and creates alerts for service recovery teams — enabling instant passenger notification, rebooking assistance, and meal/hotel arrangements while the delay is still unfolding [^etihad1].
+
+> "Our challenge was to move from reactive to proactive — from data lag to data flow." — Rajeev Nair, Etihad Airways [^etihad1]
+
 ## Event Sourcing and CQRS in stream processing
 
 *Designing Event-Driven Systems* (Stopford 2018) identifies Event Sourcing and CQRS as the patterns that connect stream processing to durable state management [^eds-p03].
@@ -247,6 +356,11 @@ For the full treatment see [Designing Event-Driven Systems (source)](/data-engin
 [^eds-p03]: [Designing Event-Driven Systems (part 3/6)](../../raw/pdf/pdf-designing-event-driven-systems-concepts-and-patter-part-03.md)
 [^eds-p04]: [Designing Event-Driven Systems (part 4/6)](../../raw/pdf/pdf-designing-event-driven-systems-concepts-and-patter-part-04.md)
 [^eds-p05]: [Designing Event-Driven Systems (part 5/6)](../../raw/pdf/pdf-designing-event-driven-systems-concepts-and-patter-part-05.md)
+[^mwc1]: [Data Streaming at MWC 2026: How Kafka, Flink and Agentic AI Power Telecom (Kai Waehner)](../../raw/_inbox/web-data-streaming-at-mwc-2026-how-kafka-flink-and-agentic-ai-po-d18087ce.md)
+[^cep1]: [Flink CEP and Agentic AI: Real-Time Pattern Detection as the Default (Kai Waehner)](../../raw/_inbox/web-flink-cep-and-agentic-ai-real-time-pattern-detection-as-the-d81fcf0b.md)
+[^rivian1]: [Shift Left in Automotive: Real-Time Intelligence from Vehicle Telemetry with Data Streaming at Rivian (Kai Waehner)](../../raw/web/web-shift-left-in-automotive-real-time-intelligence-from-vehicle-ba65affa.md)
+[^qantas1]: [From Takeoff to Touchdown: Real-Time Aviation with Data Streaming (Kai Waehner)](../../raw/web/web-from-takeoff-to-touchdown-real-time-aviation-with-data-strea-630a7870.md)
+[^etihad1]: [Etihad Airways Makes Airline Operations Real-Time with Data Streaming (Kai Waehner)](../../raw/web/web-etihad-airways-makes-airline-operations-real-time-with-data-dc1e3991.md)
 
 <!-- RELATED:START (generated by bin/corpus_heal.py related — do not edit inside) -->
 

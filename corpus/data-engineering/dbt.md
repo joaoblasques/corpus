@@ -81,6 +81,9 @@ sources:
   - path: raw/web/web-fusion-in-bloom-dbt-labs-98d5a43b.md
     channel: web
     ingested_at: 2026-07-01
+  - path: raw/_inbox/web-dbt-meets-apache-flink-one-workflow-for-data-engineers-on-co-cf1939e1.md
+    channel: web
+    ingested_at: 2026-08-10
 aliases:
   - dbt
   - data build tool
@@ -91,6 +94,9 @@ aliases:
   - dbt tests
   - generic tests
   - singular tests
+  - dbt-confluent adapter
+  - dbt Flink
+  - confluent-sql
 tags:
   - corpus/data-engineering
   - entity
@@ -407,6 +413,30 @@ Sources → **Data Loaders** (raw) → **Warehouse** → **dbt** (transforms bas
 
 At time of recording (Dec 2023): AlloyDB, BigQuery, Databricks, Dremio, Postgres, Redshift, Snowflake, Spark, Trino, Microsoft Fabric, Azure Synapse Analytics, Teradata — see dbt docs for the current list [^src18].
 
+## dbt for Apache Flink (dbt-confluent adapter)
+
+The separation between batch and streaming engineering has always been more organizational than technical — both use SQL, both require testing, documentation, and reliable deployment, but the tools never bridged the gap [^src31].
+
+**The dbt-confluent adapter** (Confluent + dbt Labs) extends dbt to Apache Flink: data engineers who run dbt on Snowflake or BigQuery apply the same commands (`dbt run`, `dbt test`, `dbt docs generate`) to Flink streaming pipelines on Confluent Cloud [^src31].
+
+```bash
+pip install dbt-confluent
+dbt run   # deploys Flink SQL models to Confluent Cloud Flink compute pools
+dbt test  # deterministic testing via snapshot query capability (bounded point-in-time results)
+dbt docs generate  # same browsable catalog as Snowflake/BigQuery projects
+```
+
+**Three materializations** [^src31]:
+- `view` — virtual Flink SQL view over a Kafka topic
+- `streaming_table` — continuous always-current result set
+- `streaming_source` — Kafka topic as a dbt source
+
+The underlying `confluent-sql` Python driver is DB-API v2 compliant: Airflow, Dagster, Pandas, Streamlit, and LangChain can all connect directly [^src31]. This is a direct enabler of the [Shift Left Architecture](/data-engineering/shift-left-architecture.md) — the same dbt team can now own both the streaming-layer transformations and the warehouse transformations, with one governance standard across both.
+
+The Flink adapter is "earlier in maturity" than dbt on Snowflake or BigQuery; expect an evolving ecosystem. But the architectural direction is clear: one team, one tool, one governance standard, across operational and analytical workloads [^src31].
+
+Context: the Fivetran + dbt Labs merger created a combined entity with ~$600M ARR, signaling dbt's shift from popular open-source tool to foundational enterprise data infrastructure [^src31].
+
 ## See also
 
 - [Pipeline Layers](/data-engineering/pipeline-layers.md) — the staging → warehouse → marts architecture pattern
@@ -415,6 +445,7 @@ At time of recording (Dec 2023): AlloyDB, BigQuery, Databricks, Dremio, Postgres
 - [Data Orchestration](/data-engineering/data-orchestration.md) — scheduling dbt runs vs. transforming in dbt
 - [Orchestra](/data-engineering/orchestra.md) — a managed orchestrator that runs dbt staging/curated tasks via tag selection
 - [Dataform](/data-engineering/dataform.md) — the BigQuery-native, SQLX-based dbt analogue
+- [Shift Left Architecture](/data-engineering/shift-left-architecture.md) — the three-interface pattern; dbt-confluent enables dbt teams to own the streaming layer
 - [dbt Fusion Engine](/data-engineering/dbt-fusion.md) — Rust-powered compiler replacing Python core; ~30× faster parse, state-aware orchestration
 - [Claude Code for Data Engineering](/data-engineering/claude-code-for-data-engineering.md) — AI-assisted dbt modeling and exposure enrichment
 - [dbt Kimball reference project](/data-engineering/sources/dbt-kimball-project.md) — SCD2 example project
@@ -444,4 +475,5 @@ At time of recording (Dec 2023): AlloyDB, BigQuery, Databricks, Dremio, Postgres
 [^src20]: [dbt-labs/dbt-core (GitHub README, v2.0 alpha)](../../raw/github/github-dbt-labs-dbt-core.md)
 [^src28]: [dbt-labs/dbt-core — GitHub repo digest](../../raw/github/github-dbt-labs-dbt-core.md) — dbt Labs; OSS health signal (13K stars); v2 on main, v1 on 1.latest branch
 [^src29]: [dbt Summit 2026 — Speakers & Training](../../raw/web/web-tristan-handy-dbt-summit-58ecab01.md) — Tristan Handy (Co-founder+President Fivetran+dbt Labs, 100K+ teams); Quigley Malcolm (MetricFlow, OSI); dbt Architect/data quality/cost visibility training courses. See [dbt-summit-2026-speakers.md](/data-engineering/sources/dbt-summit-2026-speakers.md) for full catalog.
-[^src30]: [Fusion in Bloom — dbt Labs](../../raw/web/web-fusion-in-bloom-dbt-labs-98d5a43b.md) — SDF acquisition Jan 2025; 8,611 commits first year; ~30× parse speedup; ~40% model reuse, 30% compute savings; 450+ weekly projects; VS Code Extension 104K downloads. See [dbt Fusion Engine](/data-engineering/dbt-fusion.md) for full detail.
+[^src30]: [Fusion in Bloom — dbt Labs](../../raw/web/web-fusion-in-bloom-dbt-labs-98d5a43b.md)
+[^src31]: [dbt Meets Apache Flink: One Workflow for Data Engineers on Confluent, Snowflake, BigQuery, and Databricks](../../raw/_inbox/web-dbt-meets-apache-flink-one-workflow-for-data-engineers-on-co-cf1939e1.md) — Kai Waehner, kai-waehner.de, 2026-03-26 — SDF acquisition Jan 2025; 8,611 commits first year; ~30× parse speedup; ~40% model reuse, 30% compute savings; 450+ weekly projects; VS Code Extension 104K downloads. See [dbt Fusion Engine](/data-engineering/dbt-fusion.md) for full detail.

@@ -452,7 +452,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Tool Calling & Context Engineering: How They Interlock](/ai-engineering/tool-calling-and-context-engineering.md)
 
 <details>
-<summary>Source summaries (728)</summary>
+<summary>Source summaries (731)</summary>
 
 - ["2024 State of Analytics Engineering, crafted by dbt Labs | dbt Labs"](/ai-engineering/sources/2024-state-of-analytics-engineering-crafted-by-dbt-labs-dbt--cb342df0.md)
 - ["6 AI Agent Orchestration Best Practices in 2026 [Explained]"](/ai-engineering/sources/6-ai-agent-orchestration-best-practices-in-2026-explained-8144e2d2.md)
@@ -461,11 +461,13 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - ["9 Best Tools for Automating AI Workflows [2026 Comparison]"](/ai-engineering/sources/9-best-tools-for-automating-ai-workflows-2026-comparison-c224f0ed.md)
 - ["[AINews] \"Laguna S 2.1 Released: Cheaper than Deepseek v4 Flash, Better than V4 Pro\""](/ai-engineering/sources/ainews-laguna-s-2-1-released-cheaper-than-deepseek-v4-flash--43429d78.md)
 - ["[AINews] AI is eating Finance; AIE NYC now open"](/ai-engineering/sources/ainews-ai-is-eating-finance-aie-nyc-now-open-ba8a7302.md)
+- ["[AINews] AMD buys Taalas"](/ai-engineering/sources/ainews-amd-buys-taalas-2fea1307.md)
 - ["[AINews] Black Forest Labs FLUX 3 - Multimodal Flow Models that beat Seedance 2.0, Gemini Omni and Grok Imagine, and FLUX-mimic video-action robotics model"](/ai-engineering/sources/ainews-black-forest-labs-flux-3-multimodal-flow-models-that--1651e280.md)
 - ["[AINews] Claude Opus 5: Fable-level performance at Opus price (half Fable)"](/ai-engineering/sources/ainews-claude-opus-5-fable-level-performance-at-opus-price-h-801eea52.md)
 - ["[AINews] Codex usage up >10x in 6 months to 7M users, +1M in the past ~day; did Codex overtake Claude Code??"](/ai-engineering/sources/ainews-codex-usage-up-10x-in-6-months-to-7m-users-1m-in-the--ac1def65.md)
 - ["[AINews] Fearing RSI: OpenAI, Anthropic, GDM, Meta, Thinky cosign letter to \"Pace\" AI development, as HuggingFace details Machine-Speed Offensive Cyberattack"](/ai-engineering/sources/ainews-fearing-rsi-openai-anthropic-gdm-meta-thinky-cosign-l-21bb05a8.md)
 - ["[AINews] GPT 5.6 price cut by 20%-80%: Cost of GPT 5.4 Intelligence dropped 13x in 4 months due to GPT 5.6 recursive self-optimization"](/ai-engineering/sources/ainews-gpt-5-6-price-cut-by-20-80-cost-of-gpt-5-4-intelligen-3ecd81bf.md)
+- ["[AINews] Jeff, Sanjay, Oriol, and Quoc depart DeepMind; Demis to Chair; Koray to SVP — what is going on at GDM???"](/ai-engineering/sources/ainews-jeff-sanjay-oriol-and-quoc-depart-deepmind-demis-to-c-3189f1ce.md)
 - ["[AINews] Kimi K3 2.8T-A50B: the largest open model ever released; Opus 4.8-class at Sonnet 5 pricing"](/ai-engineering/sources/ainews-kimi-k3-2-8t-a50b-the-largest-open-model-ever-release-08f77354.md)
 - ["[AINews] Lilian Weng summarizes 35 papers on Harness Engineering for RSI"](/ai-engineering/sources/ainews-lilian-weng-summarizes-35-papers-on-harness-engineeri-b1619a08.md)
 - ["[AINews] Loopcraft: The Art of Stacking Loops"](/ai-engineering/sources/ainews-loopcraft-the-art-of-stacking-loops-0c0aa940.md)
@@ -739,6 +741,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [A Philosophy of Software Design | John Ousterhout | Talks at Google](/ai-engineering/sources/a-philosophy-of-software-design-john-ousterhout-talks-at-goo-bmSAYlu0NcY.md)
 - [A practical Guide To Becoming An AI Engineer](/ai-engineering/sources/a-practical-guide-to-becoming-an-ai-engineer-uAOIlkr0aVk.md)
 - [A Preview of Production-Scale Kimi K3 Support on vLLM](/ai-engineering/sources/a-preview-of-production-scale-kimi-k3-support-on-vllm-ec01fafe.md)
+- [A quote from Claude Opus 5 system prompt](/ai-engineering/sources/a-quote-from-claude-opus-5-system-prompt-b9793ca1.md)
 - [A quote from Dean W. Ball](/ai-engineering/sources/a-quote-from-dean-w-ball-89fa7394.md)
 - [A quote from Jon Udell](/ai-engineering/sources/a-quote-from-jon-udell-c1b6e8d9.md)
 - [A quote from Linus Torvalds](/ai-engineering/sources/a-quote-from-linus-torvalds-cf5f6e53.md)
@@ -1010,8 +1013,8 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [FULL Claude Cowork Tutorial For Beginners in 2026! (Zero to PRO)](/ai-engineering/sources/full-claude-cowork-tutorial-for-beginners-in-2026-zero-to-pr-JdQ_FHgP5ms.md)
 - [FULL Claude Tutorial for Beginners in 2026! (Become a PRO!)](/ai-engineering/sources/full-claude-tutorial-for-beginners-in-2026-become-a-pro-rRrBbyv3ChM.md)
 - [Full Machine Learning Project — Coding a Fitness Tracker with Python (Part 1)](/ai-engineering/sources/full-machine-learning-project-coding-a-fitness-tracker-with--cCONIdrM2VI.md)
-- [Gemini CLI - Free Coding Agent Complete Guide](/ai-engineering/sources/gemini-cli-free-coding-agent-complete-guide-de.md)
 - [Gemini CLI — Deep Dive with MCPs](/ai-engineering/sources/gemini-cli-deep-dive-with-mcps-c.md)
+- [Gemini CLI — Free Coding Agent Complete Guide](/ai-engineering/sources/gemini-cli-free-coding-agent-complete-guide-de.md)
 - [Gemini CLI — Multi-Instance Coding Workflow with MCPs](/ai-engineering/sources/gemini-cli-multi-instance-coding-workflow-with-mcps-c.md)
 - [Give Me 20 Minutes. I'll Teach You 80% of Claude Cowork](/ai-engineering/sources/give-me-20-minutes-i-ll-teach-you-80-of-claude-cowork-s3ccD6m6WKc.md)
 - [Google Just Dropped a Masterclass on Agentic Engineering (It's SO Good)](/ai-engineering/sources/google-just-dropped-a-masterclass-on-agentic-engineering-it--zbmuiaPuiNM.md)
@@ -1078,7 +1081,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Mining of Massive Datasets (Leskovec, Rajaraman, Ullman)](/ai-engineering/sources/mining-of-massive-datasets.md)
 - [ML - Best Way to Learn Machine Learning (Career Paths Compared)](/ai-engineering/sources/ml-best-way-to-learn-machine-learning-career-paths-compared-caed.md)
 - [ML - Why Math is Essential for Machine Learning](/ai-engineering/sources/ml-why-math-is-essential-for-machine-learning-ea.md)
-- [Model Routing - Choosing the Right Model for the Job](/ai-engineering/sources/model-routing-choosing-the-right-model-for-the-job-b.md)
+- [Model Routing — Choosing the Right Model for the Job](/ai-engineering/sources/model-routing-choosing-the-right-model-for-the-job-b.md)
 - [MosaicLeaks: Can your research agent keep a secret?](/ai-engineering/sources/web-mosaicleaks-can-your-research-agent-keep-a-secret-e9b8182d.md)
 - [MotherDuck MCP - Natural Language SQL Analysis](/ai-engineering/sources/motherduck-mcp-natural-language-sql-analysis-aa.md)
 - [Music - Zero Pedals Live Looping with Loopy Pro](/ai-engineering/sources/music-zero-pedals-live-looping-with-loopy-pro-doc.md)
@@ -1110,7 +1113,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Pattern Recognition and Machine Learning (Bishop, 2006)](/ai-engineering/sources/pattern-recognition-and-machine-learning.md)
 - [Patterns and Anti-Patterns for Building with LLMs](/ai-engineering/sources/patterns-and-anti-patterns-for-building-with-llms-doc.md)
 - [Patterns, Predictions, and Actions: A Story about Machine Learning](/ai-engineering/sources/patterns-predictions-and-actions.md)
-- [Physical AI - When AI Gets a Body](/ai-engineering/sources/physical-ai-when-ai-gets-a-body-bd.md)
+- [Physical AI — When AI Gets a Body](/ai-engineering/sources/physical-ai-when-ai-gets-a-body-bd.md)
 - [Power BI Data Modeling Crash Course Learn Fast and Build Smarter Models! Full Course](/ai-engineering/sources/power-bi-data-modeling-crash-course-learn-fast-and-build-sma-air7T8wCYkU.md)
 - [Probabilistic Machine Learning: An Introduction (Murphy, 2022)](/ai-engineering/sources/probabilistic-machine-learning-intro.md)
 - [Production-Ready Code with Claude Code — Agentic AI in the Development Workflow](/ai-engineering/sources/production-ready-code-with-claude-code-agentic-ai-in-the-dev-cde.md)
