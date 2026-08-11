@@ -183,3 +183,9 @@ type: internal
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/gemini-cli-free-coding-agent-complete-guide-de.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/physical-ai-when-ai-gets-a-body-bd.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/model-routing-choosing-the-right-model-for-the-job-b.md", "verdict_ok": true, "gov": "committed"}
+
+## [2026-08-11T03:32] gardener · run
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/claude-code-power-user-tips-claude-help-center-cee.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/how-to-maximize-claude-code-effectiveness-towards-data-scien-ce.md", "verdict_ok": false, "gov": "reverted+queued"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/mlops/sources/notebooklm-obsidian-integration-workflow-f.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/data-engineering/sources/data-crash-course-tinybird-doc.md", "verdict_ok": true, "gov": "committed"}
