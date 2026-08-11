@@ -16,6 +16,7 @@ updated: 2026-07-17
 provisional: false
 url: 
 origin: obsidian
+consolidated_into: ai-engineering/cursor.md
 ---
 
 # Claude Replay — AI Coding Session to Interactive HTML Replay

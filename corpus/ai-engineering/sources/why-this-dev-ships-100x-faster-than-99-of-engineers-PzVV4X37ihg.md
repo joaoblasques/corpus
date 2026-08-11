@@ -20,6 +20,7 @@ channel_name: David Ondrej
 playlist: AI Engineering
 published: 2026-05-17
 transcript_status: ok
+consolidated_into: ai-engineering/cursor.md
 ---
 
 # Why This Dev Ships 100x Faster Than 99% of Engineers

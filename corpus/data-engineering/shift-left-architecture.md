@@ -105,6 +105,8 @@ Each platform layer brings its own governance tooling (Confluent Schema Registry
 - [dbt](/data-engineering/dbt.md) — dbt-confluent adapter for Flink
 - [MCP](/ai-engineering/mcp.md) — the AI interface layer
 - [Apache Iceberg](/data-engineering/apache-iceberg.md) — the analytical interface storage format
+- [Real-Time Data as the Foundation for Agentic AI](/data-engineering/real-time-data-for-agentic-ai.md) — the cross-source synthesis this architecture anchors
+- [Kai Waehner](/data-engineering/kai-waehner.md) — author of all three sources on this page
 - [Data Engineering hub](/data-engineering/README.md)
 
 ---

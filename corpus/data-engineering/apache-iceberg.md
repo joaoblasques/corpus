@@ -197,7 +197,7 @@ AWS VP Andy Warfield: S3 evolved from storage into a compute-adjacent layer; **S
 [^src2]: [Data Lake Fundamentals - Apache Iceberg and Parquet](/03_Resources/Study Notes/Data Lake Fundamentals - Apache Iceberg and Parquet.md)
 [^src3]: [Understanding Open Table Formats with Apache Iceberg](../../raw/email/email-2025-09-24-understanding-open-table-formats-with-apache-iceberg.md)
 [^src4]: [Apache Iceberg Summit Keynote — the future of Iceberg (Russell Spitzer)](../../raw/youtube/youtube-4bg64wnkfge.md)
-[^src5]: raw/_inbox/web-the-iceberg-ecosystem-today-anders-swanson-3afb0089.md
-[^src6]: raw/_inbox/web-under-the-hood-of-apache-iceberg-w-christian-thiel-2573cee1.md
-[^src7]: raw/_inbox/web-the-future-of-the-lakehouse-delta-lake-rust-and-data-platfor-8d2f4c75.md
-[^src8]: raw/_inbox/web-how-amazon-s3-works-w-andy-warfield-b9737b60.md
+[^src5]: [The Iceberg Ecosystem Today (Anders Swanson)](../../raw/web/web-the-iceberg-ecosystem-today-anders-swanson-3afb0089.md)
+[^src6]: [Under the Hood of Apache Iceberg (Christian Thiel)](../../raw/web/web-under-the-hood-of-apache-iceberg-w-christian-thiel-2573cee1.md)
+[^src7]: [The Future of the Lakehouse: Delta Lake, Rust, and Data Platforms](../../raw/web/web-the-future-of-the-lakehouse-delta-lake-rust-and-data-platfor-8d2f4c75.md)
+[^src8]: [How Amazon S3 Works (Andy Warfield)](../../raw/web/web-how-amazon-s3-works-w-andy-warfield-b9737b60.md)

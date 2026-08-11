@@ -80,15 +80,18 @@ From MWC 2026 Barcelona (100,000+ attendees), Kai Waehner identifies five domina
 ## Related
 
 - [Apache Kafka](/data-engineering/kafka.md)
-- [Confluent](/data-engineering/confluent.md)
-- [Shift Left Architecture](/data-engineering/shift-left-architecture.md)
+- [Confluent](/data-engineering/confluent.md) — where he was Field CTO 2017–2026
+- [Shift Left Architecture](/data-engineering/shift-left-architecture.md) — his 2.0 framework (operational/analytical/AI interfaces)
+- [Data Integration Patterns (2026)](/data-engineering/data-integration-patterns.md) — his three-paradigm map (request-response/batch/event-streaming) and SAP-agentic-AI argument
+- [Process Intelligence](/data-engineering/process-intelligence.md) — his "Trinity" (event-driven integration + process intelligence + trusted agentic AI)
+- [Compute–Storage Decoupling](/data-engineering/compute-storage-decoupling.md) — his diskless/Robinhood case study feeds this synthesis
 - [Stream processing](/data-engineering/stream-processing.md)
 
-[^src1]: raw/_inbox/web-my-confluent-chapter-from-apache-kafka-startup-to-11-billion-9dcd0637.md
-[^src2]: raw/_inbox/web-why-databricks-and-snowflake-speak-the-kafka-protocol-ingest-b83e18be.md
-[^src3]: raw/_inbox/web-flink-cep-and-agentic-ai-real-time-pattern-detection-as-the-d81fcf0b.md
-[^src4]: raw/_inbox/web-the-shift-left-architecture-2-0-operational-analytical-and-a-8be93f81.md
-[^src9]: raw/_inbox/web-the-ultimate-data-streaming-guide-is-back-second-edition-of-abed4a1f.md
-[^src10]: raw/_inbox/web-enterprise-agentic-ai-landscape-2026-trust-flexibility-and-v-d6ce5909.md
-[^src11]: raw/_inbox/web-mcp-vs-rest-http-api-vs-kafka-the-architect-s-guide-to-agent-e36f1d1c.md
-[^src6]: raw/_inbox/web-data-streaming-at-mwc-2026-how-kafka-flink-and-agentic-ai-po-d18087ce.md — Kai Waehner, kai-waehner.de, MWC 2026 Barcelona
+[^src1]: [My Confluent Chapter: From Apache Kafka Startup to $11 Billion](../../raw/web/web-my-confluent-chapter-from-apache-kafka-startup-to-11-billion-9dcd0637.md)
+[^src2]: [Why Databricks and Snowflake Speak the Kafka Protocol](../../raw/web/web-why-databricks-and-snowflake-speak-the-kafka-protocol-ingest-b83e18be.md)
+[^src3]: [Flink CEP and Agentic AI: Real-Time Pattern Detection](../../raw/web/web-flink-cep-and-agentic-ai-real-time-pattern-detection-as-the-d81fcf0b.md)
+[^src4]: [The Shift Left Architecture 2.0](../../raw/web/web-the-shift-left-architecture-2-0-operational-analytical-and-a-8be93f81.md)
+[^src9]: [The Ultimate Data Streaming Guide is Back — Second Edition](../../raw/web/web-the-ultimate-data-streaming-guide-is-back-second-edition-of-abed4a1f.md)
+[^src10]: [Enterprise Agentic AI Landscape 2026](../../raw/web/web-enterprise-agentic-ai-landscape-2026-trust-flexibility-and-v-d6ce5909.md)
+[^src11]: [MCP vs REST/HTTP API vs Kafka: The Architect's Guide](../../raw/web/web-mcp-vs-rest-http-api-vs-kafka-the-architect-s-guide-to-agent-e36f1d1c.md)
+[^src6]: [Data Streaming at MWC 2026](../../raw/web/web-data-streaming-at-mwc-2026-how-kafka-flink-and-agentic-ai-po-d18087ce.md) — Kai Waehner, kai-waehner.de, MWC 2026 Barcelona

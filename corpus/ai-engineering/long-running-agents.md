@@ -167,5 +167,5 @@ General rule: **any task with an easily verifiable outcome** (known source of tr
 [^src2]: [Ch10 — Autonomous Background Coding Agents](../../raw/notes/notes-10-autonomous-background-coding-agents.md)
 [^src3]: [Rakuten — Claude Managed Agents case study](../../raw/web/web-rakuten-claude-managed-agents-case-study-claude-by-anthropic.md) — Yusuke Kaji, Rakuten
 [^src4]: [Assign tasks from anywhere in Claude Cowork (Dispatch)](../../raw/web/web-assign-tasks-from-anywhere-in-claude-cowork-claude-help-cent.md) — Anthropic Help Center
-[^src5]: raw/_inbox/web-i-built-a-very-small-long-running-agent-ecfdf958.md — Jason Ganz, dbt Roundup
+[^src5]: [I Built a Very Small Long-Running Agent](../../raw/web/web-i-built-a-very-small-long-running-agent-ecfdf958.md) — Jason Ganz, dbt Roundup
 </content>

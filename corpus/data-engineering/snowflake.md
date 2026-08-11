@@ -132,11 +132,12 @@ Tristan Handy's report from Snowflake Summit [^src4]:
 - [Apache Spark](/data-engineering/apache-spark.md) — Spark SQL / Photon, the contrasting "random files on S3" model
 - [Query-Engine Routing](/data-engineering/query-engine-routing.md) — multi-engine access over open formats
 - [mondayDB](/data-engineering/mondaydb.md) — another HTAP serving-layer design
+- [Real-Time Data as the Foundation for Agentic AI](/data-engineering/real-time-data-for-agentic-ai.md) — Chris Child's governed-data-for-agents view feeds this synthesis
 - [Data Engineering hub](/data-engineering/README.md)
 
 ---
 
 [^src1]: [CMU Advanced Database Systems — Snowflake (Andy Pavlo)](../../raw/youtube/youtube-nhwp1btg0cw.md)
 [^src2]: [The internal of BigQuery, Snowflake, Databricks and Redshift (Vu Trinh)](../../raw/email/email-2025-04-17-the-internal-of-bigquery-snowflake-databricks-and-redshift.md)
-[^src3]: raw/_inbox/web-inside-snowflakes-ai-roadmap-w-chris-child-fe3830a6.md — dbt Roundup podcast, Chris Child (Snowflake VP Product)
-[^src4]: raw/_inbox/web-hunting-for-tokens-snowflake-summit-agent-use-cases-a1bf22b1.md — dbt Roundup, Tristan Handy
+[^src3]: [Inside Snowflake's AI Roadmap w/ Chris Child](../../raw/web/web-inside-snowflakes-ai-roadmap-w-chris-child-fe3830a6.md) — dbt Roundup podcast, Chris Child (Snowflake VP Product)
+[^src4]: [Hunting for Tokens: Snowflake Summit agent use cases](../../raw/web/web-hunting-for-tokens-snowflake-summit-agent-use-cases-a1bf22b1.md) — dbt Roundup, Tristan Handy

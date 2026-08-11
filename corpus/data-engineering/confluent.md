@@ -24,7 +24,7 @@ updated: 2026-08-11
 
 ## Origin
 
-Founded 2014 by [Jay Kreps](https://www.linkedin.com/in/jaykreps/) (CEO), Neha Narkhede, and Jun Rao — the engineers who created Apache Kafka at LinkedIn. The pitch was making Kafka enterprise-ready. In May 2017, when [Kai Waehner](#kai-waehner) joined, the company had ~100 employees [^src1].
+Founded 2014 by Jay Kreps (CEO), Neha Narkhede, and Jun Rao — the engineers who created Apache Kafka at LinkedIn. The pitch was making Kafka enterprise-ready. In May 2017, when [Kai Waehner](/data-engineering/kai-waehner.md) joined as Field CTO, the company had ~100 employees [^src1].
 
 ## Growth arc
 
@@ -41,7 +41,7 @@ Confluent grew the Kafka framework progressively [^src1]:
 - **Apache Flink** — stateful computation added at scale
 - **Apache Iceberg** — open table format connecting streaming to lakehouse/AI pipelines
 - **WarpStream (BYOC)** — bring-your-own-cloud diskless Kafka deployment
-- **Tiered storage / Diskless Kafka** — separating compute from storage
+- **Tiered storage / Diskless Kafka** — separating compute from storage (an instance of [compute–storage decoupling](/data-engineering/compute-storage-decoupling.md), the same object-storage move warehouses and lakehouses made earlier)
 - **Queues for Kafka (QfK)** — native queue support (Kafka 4.2)
 
 Confluent is the company that established **data streaming as a recognized software category** (Forrester Wave 2023: Leader; IDC recognition) — no longer confused with "ESB", "ETL", or "iPaaS" [^src1].
@@ -55,7 +55,9 @@ IBM brings global enterprise reach; Confluent brings the leading data streaming 
 ## Related
 
 - [Apache Kafka](/data-engineering/kafka.md) — the underlying technology
+- [Kai Waehner](/data-engineering/kai-waehner.md) — Confluent Field CTO 2017–2026; primary source for this page
 - [Stream processing](/data-engineering/stream-processing.md) — processing paradigm
 - [Shift Left Architecture](/data-engineering/shift-left-architecture.md) — architectural pattern Confluent championed
+- [Data Integration Patterns (2026)](/data-engineering/data-integration-patterns.md) — the IBM/Confluent $11B deal opens the vendor-consolidation argument
 
-[^src1]: raw/_inbox/web-my-confluent-chapter-from-apache-kafka-startup-to-11-billion-9dcd0637.md
+[^src1]: [My Confluent Chapter: From Apache Kafka Startup to $11 Billion](../../raw/web/web-my-confluent-chapter-from-apache-kafka-startup-to-11-billion-9dcd0637.md) — Kai Waehner, kai-waehner.de

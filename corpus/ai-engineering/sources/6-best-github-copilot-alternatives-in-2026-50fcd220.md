@@ -16,6 +16,7 @@ updated: 2026-07-02
 provisional: false
 url: https://www.builder.io/blog/best-github-copilot-alternatives
 origin: obsidian-list
+consolidated_into: ai-engineering/cursor.md
 ---
 
 # 6 Best GitHub Copilot Alternatives in 2026

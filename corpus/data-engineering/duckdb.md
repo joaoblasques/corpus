@@ -196,6 +196,7 @@ conn.execute("COMMIT")
 - [Apache Iceberg](/data-engineering/apache-iceberg.md) · [Open table formats](/data-engineering/open-table-formats.md) · [Parquet](/data-engineering/parquet.md)
 - [MERGE INTO](/data-engineering/merge-into.md)
 - [Agentic Workflows](/ai-engineering/agentic-workflow.md) — agent swarm pattern and agent data management
+- [Real-Time Data as the Foundation for Agentic AI](/data-engineering/real-time-data-for-agentic-ai.md) — Tigani's local-first agent-swarm view feeds this synthesis
 
 [^src1]: [DuckDB 1.5.3: Not an Ordinary Patch Release](../../raw/web/duckdb-1-5-3-not-an-ordinary-patch-release.md)
 [^src2]: [Quack: The DuckDB Client-Server Protocol](../../raw/web/quack-the-duckdb-client-server-protocol.md)
@@ -204,6 +205,6 @@ conn.execute("COMMIT")
 [^src5]: [Processing 1 TB with DuckDB in less than 30 seconds (EcZachly + MotherDuck)](../../raw/web/web-processing-1-tb-with-duckdb-in-less-than-30-seconds-b3c369dc.md)
 [^src6]: [Data, AI, and DuckDB — Jacob Matson, Developer Advocate, MotherDuck (DEC Podcast)](../../raw/web/web-data-ai-and-duckdb-f6875fcc.md)
 [^src7]: [DuckDB's Agent Moment (Jordan Tigani / dbt Roundup, Season 9)](../../raw/web/web-duckdb-s-agent-moment-jordan-tigani-c09530c6.md)
-[^src8]: raw/_inbox/web-why-i-finally-pulled-the-plug-on-polars-and-moved-to-duckdb-81287dd3.md — confessionsofadataguy.com
-[^src9]: raw/_inbox/web-spark-is-dead-long-live-duckdb-confessions-of-a-data-guy-d9d141aa.md — confessionsofadataguy.com
-[^src10]: raw/_inbox/web-delta-lake-duckdb-catalog-commits-with-unity-catalog-unlocki-84d7e38b.md — DataEngineeringCentral, "Delta Lake + DuckDB. Catalog Commits with Unity Catalog."
+[^src8]: [Why I Finally Pulled the Plug on Polars and Moved to DuckDB](../../raw/web/web-why-i-finally-pulled-the-plug-on-polars-and-moved-to-duckdb-81287dd3.md) — confessionsofadataguy.com
+[^src9]: [Spark is Dead, Long Live DuckDB](../../raw/web/web-spark-is-dead-long-live-duckdb-confessions-of-a-data-guy-d9d141aa.md) — confessionsofadataguy.com
+[^src10]: [Delta Lake + DuckDB: Catalog Commits with Unity Catalog](../../raw/web/web-delta-lake-duckdb-catalog-commits-with-unity-catalog-unlocki-84d7e38b.md) — DataEngineeringCentral, "Delta Lake + DuckDB. Catalog Commits with Unity Catalog."

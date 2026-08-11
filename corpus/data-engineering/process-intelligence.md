@@ -95,6 +95,10 @@ A workflow engine automates a credit decision, but the data feeding it comes fro
 
 - [Apache Kafka](/data-engineering/kafka.md) — the event-driven integration layer process intelligence pairs with
 - [Agent Security](/ai-engineering/agent-security.md) — model-level vs. process-level safety for agentic AI
+- [Data Integration Patterns (2026)](/data-engineering/data-integration-patterns.md) — the integration half of the Trinity; integration-vs-orchestration distinction
+- [Shift Left Architecture](/data-engineering/shift-left-architecture.md) — the streaming layer that feeds live state to the decision gate
+- [Kai Waehner](/data-engineering/kai-waehner.md) — author of the "Trinity" framing
+- [Real-Time Data as the Foundation for Agentic AI](/data-engineering/real-time-data-for-agentic-ai.md) — the decision gate as the third layer of the agent data stack
 - [Data Engineering hub](/data-engineering/README.md)
 
 ---

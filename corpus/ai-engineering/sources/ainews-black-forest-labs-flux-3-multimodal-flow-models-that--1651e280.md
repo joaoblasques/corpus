@@ -16,6 +16,7 @@ updated: 2026-08-06
 provisional: false
 url: https://www.latent.space/p/ainews-black-forest-labs-flux-3-multimodal
 origin: obsidian-list
+consolidated_into: ai-engineering/openai.md
 ---
 
 # "[AINews] Black Forest Labs FLUX 3 - Multimodal Flow Models that beat Seedance 2.0, Gemini Omni and Grok Imagine, and FLUX-mimic video-action robotics model"

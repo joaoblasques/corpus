@@ -530,7 +530,7 @@ The dbt Roundup newsletter (Tristan Handy, Jason Ganz) covers the direction the 
 [^src29]: [dbt Summit 2026 — Speakers & Training](../../raw/web/web-tristan-handy-dbt-summit-58ecab01.md) — Tristan Handy (Co-founder+President Fivetran+dbt Labs, 100K+ teams); Quigley Malcolm (MetricFlow, OSI); dbt Architect/data quality/cost visibility training courses. See [dbt-summit-2026-speakers.md](/data-engineering/sources/dbt-summit-2026-speakers.md) for full catalog.
 [^src30]: [Fusion in Bloom — dbt Labs](../../raw/web/web-fusion-in-bloom-dbt-labs-98d5a43b.md)
 [^src31]: [dbt Meets Apache Flink: One Workflow for Data Engineers on Confluent, Snowflake, BigQuery, and Databricks](../../raw/web/web-dbt-meets-apache-flink-one-workflow-for-data-engineers-on-co-cf1939e1.md)
-[^src32]: raw/_inbox/web-sql-typescript-and-agents-2d655fc8.md — Tristan Handy, dbt Roundup
-[^src33]: raw/_inbox/web-five-things-i-believe-about-the-future-of-analytics-b2e79f98.md — Tristan Handy, dbt Roundup
-[^src34]: raw/_inbox/web-how-to-actually-move-up-the-stack-5294b47d.md — Jason Ganz, dbt Roundup
-[^src35]: raw/_inbox/web-the-computers-talk-to-us-now-122e67b3.md — Jason Ganz, dbt Roundup — Kai Waehner, kai-waehner.de, 2026-03-26 — SDF acquisition Jan 2025; 8,611 commits first year; ~30× parse speedup; ~40% model reuse, 30% compute savings; 450+ weekly projects; VS Code Extension 104K downloads. See [dbt Fusion Engine](/data-engineering/dbt-fusion.md) for full detail.
+[^src32]: ../../raw/web/web-sql-typescript-and-agents-2d655fc8.md — Tristan Handy, dbt Roundup
+[^src33]: ../../raw/web/web-five-things-i-believe-about-the-future-of-analytics-b2e79f98.md — Tristan Handy, dbt Roundup
+[^src34]: ../../raw/web/web-how-to-actually-move-up-the-stack-5294b47d.md — Jason Ganz, dbt Roundup
+[^src35]: ../../raw/web/web-the-computers-talk-to-us-now-122e67b3.md — Jason Ganz, dbt Roundup — Kai Waehner, kai-waehner.de, 2026-03-26 — SDF acquisition Jan 2025; 8,611 commits first year; ~30× parse speedup; ~40% model reuse, 30% compute savings; 450+ weekly projects; VS Code Extension 104K downloads. See [dbt Fusion Engine](/data-engineering/dbt-fusion.md) for full detail.

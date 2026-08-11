@@ -42,4 +42,4 @@ Solomon's next venture. Addresses "the messy, overlooked workflows of software d
 - [Stream processing](/data-engineering/stream-processing.md)
 - [CI/CD for data infrastructure](/data-engineering/cicd-for-data-infrastructure.md)
 
-[^src1]: raw/_inbox/web-from-docker-to-dagger-w-solomon-hykes-0a5ba681.md
+[^src1]: [From Docker to Dagger (Solomon Hykes)](../../raw/web/web-from-docker-to-dagger-w-solomon-hykes-0a5ba681.md)

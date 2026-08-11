@@ -196,6 +196,8 @@ The core advantage: Arrow's columnar in-memory format can be sent over the wire 
 - [Shift Left Architecture](/data-engineering/shift-left-architecture.md) — three consumer interfaces on a shared event-driven layer
 - [Process Intelligence](/data-engineering/process-intelligence.md) — orchestration layer above integration
 - [MCP vs REST vs Kafka](/ai-engineering/mcp.md) — which protocol for which AI use case
+- [Confluent](/data-engineering/confluent.md) — the IBM-$11B acquisition anchoring the vendor-consolidation opener
+- [Kai Waehner](/data-engineering/kai-waehner.md) — author of most sources on this page
 - [Data Engineering hub](/data-engineering/README.md)
 
 ---
@@ -208,4 +210,4 @@ The core advantage: Arrow's columnar in-memory format can be sent over the wire 
 [^fmt1]: [YAML vs XML vs JSON: Which Format Wins, and When (Kai Waehner)](../../raw/web/web-yaml-vs-xml-vs-json-which-format-wins-and-when-a13d6d07.md)
 [^e2c1]: [Edge to Cloud and Back: Four Data Movement Problems (Kai Waehner)](../../raw/web/web-edge-to-cloud-and-back-four-data-movement-problems-and-why-o-6e89b591.md)
 [^orch1]: [Data Integration vs Workflow Orchestration: Connecting Systems Is Not Coordinating the Work (Kai Waehner)](../../raw/web/web-data-integration-vs-workflow-orchestration-connecting-system-8dc4b75e.md)
-[^arrow1]: raw/_inbox/web-what-is-apache-arrow-flight-confessions-of-a-data-guy-70dad6f1.md — confessionsofadataguy.com, "What is Apache Arrow Flight?"
+[^arrow1]: [What is Apache Arrow Flight?](../../raw/web/web-what-is-apache-arrow-flight-confessions-of-a-data-guy-70dad6f1.md) — confessionsofadataguy.com, "What is Apache Arrow Flight?"

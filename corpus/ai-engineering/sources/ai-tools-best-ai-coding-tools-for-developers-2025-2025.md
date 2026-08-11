@@ -16,6 +16,7 @@ updated: 2026-07-05
 provisional: false
 url: 
 origin: obsidian
+consolidated_into: ai-engineering/cursor.md
 ---
 
 # AI Tools - Best AI Coding Tools for Developers 2025

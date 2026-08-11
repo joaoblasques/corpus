@@ -16,6 +16,7 @@ updated: 2026-07-04
 provisional: false
 url: 
 origin: obsidian
+consolidated_into: ai-engineering/cursor.md
 ---
 
 # AI Coding - BMAD Method Spec-Driven Development Workflow

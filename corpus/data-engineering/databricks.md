@@ -345,6 +345,6 @@ A practitioner review of the 2026 Databricks Data + AI Summit [^src18]:
 [^src13]: [What if the answer was already in your data? (Kythera Labs)](../../raw/web/web-what-if-the-answer-was-already-in-your-data-5e70850d.md)
 [^src14]: [The Rise of Sports Intelligence: How the Lakehouse Turns Tracking Data into Competitive Advantage](../../raw/web/web-the-rise-of-sports-intelligence-how-the-lakehouse-turns-trac-3c304692.md)
 [^src15]: [What To Look For in a Serverless Database for AI Applications](../../raw/web/web-what-to-look-for-in-a-serverless-database-for-ai-application-8e1ddee7.md)
-[^src16]: raw/_inbox/web-databricks-zerobus-event-streams-lake-house-be-gone-kafka-da3d747e.md — dataengineeringcentral.substack.com
-[^src17]: raw/_inbox/web-databricks-zerobus-streaming-ingestion-for-delta-lake-house-27d12529.md — confessionsofadataguy.com
-[^src18]: raw/_inbox/web-review-of-databricks-data-ai-summit-2026-ebe4579d.md — dataengineeringcentral.substack.com
+[^src16]: ../../raw/web/web-databricks-zerobus-event-streams-lake-house-be-gone-kafka-da3d747e.md — dataengineeringcentral.substack.com
+[^src17]: ../../raw/web/web-databricks-zerobus-streaming-ingestion-for-delta-lake-house-27d12529.md — confessionsofadataguy.com
+[^src18]: ../../raw/web/web-review-of-databricks-data-ai-summit-2026-ebe4579d.md — dataengineeringcentral.substack.com

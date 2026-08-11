@@ -16,6 +16,7 @@ updated: 2026-08-07
 provisional: false
 url: https://www.latent.space/p/ainews-gpt-56-price-cut-by-20-80
 origin: obsidian-list
+consolidated_into: ai-engineering/openai.md
 ---
 
 # "[AINews] GPT 5.6 price cut by 20%-80%: Cost of GPT 5.4 Intelligence dropped 13x in 4 months due to GPT 5.6 recursive self-optimization"

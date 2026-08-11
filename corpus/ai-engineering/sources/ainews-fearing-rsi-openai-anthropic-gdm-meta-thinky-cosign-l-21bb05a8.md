@@ -16,6 +16,7 @@ updated: 2026-08-07
 provisional: false
 url: https://www.latent.space/p/ainews-fearing-rsi-openai-anthropic
 origin: obsidian-list
+consolidated_into: ai-engineering/openai.md
 ---
 
 # "[AINews] Fearing RSI: OpenAI, Anthropic, GDM, Meta, Thinky cosign letter to \"Pace\" AI development, as HuggingFace details Machine-Speed Offensive Cyberattack"

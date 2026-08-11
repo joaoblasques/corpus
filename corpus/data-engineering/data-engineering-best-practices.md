@@ -198,5 +198,5 @@ The intermittent nature of duplicates is a useful signal: consistent duplicates 
 [^src6]: [9 Software Engineering Skills a DE Should Have (Alejandro Aboy)](../../raw/email/email-2026-06-16-9-software-engineering-skills-a-de-should-have-and-how-to-le.md)
 [^src7]: [In 2026, The Data Fundamentals Matter More Than Ever (Pipeline to Insights)](../../raw/email/email-2026-06-13-in-2026-the-data-fundamentals-matter-more-than-ever.md)
 [^src8]: [6 Data Engineering Skills To Progress in the Age of AI (Joseph Machado, StartDataEngineering)](../../raw/web/6-data-engineering-skills-to-progress-in-the-age-of-ai-start.md)
-[^src9]: raw/_inbox/web-how-to-actually-break-free-from-notebook-engineering-confess-c915de85.md — confessionsofadataguy.com
-[^src10]: raw/_inbox/web-spark-postgres-duplicates-dang-it-d9474a1f.md — DataEngineeringCentral, "Spark. Postgres. Duplicates. Dang it."
+[^src9]: [How to Actually Break Free from Notebook Engineering](../../raw/web/web-how-to-actually-break-free-from-notebook-engineering-confess-c915de85.md) — confessionsofadataguy.com
+[^src10]: [Spark. Postgres. Duplicates. Dang it.](../../raw/web/web-spark-postgres-duplicates-dang-it-d9474a1f.md) — DataEngineeringCentral, "Spark. Postgres. Duplicates. Dang it."

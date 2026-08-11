@@ -20,7 +20,7 @@ updated: 2026-07-13
 
 # Cursor
 
-**TL;DR** — Cursor is an AI code editor (a VS Code fork) whose draw is not the models — it runs the same frontier models as everyone else — but the **coding harness the Cursor team builds around them**. One practitioner's stated reason for choosing it over Claude Code or Codex: "while it's using the same models, it has a coding harness… that I just find works a lot better" [^src1]. It is the recurring counterpoint to [Claude Code](/ai-engineering/claude-code.md) in the [agentic coding](/ai-engineering/agentic-coding.md) tool landscape, and was cited as a breakout commercial success ($100M in its first year, ~$2B valuation) in [AI Business Models](/ai-business/ai-business-models.md).
+**TL;DR** — Cursor is an AI code editor (a VS Code fork) whose draw is not the models — it runs the same frontier models as everyone else — but the **coding harness the Cursor team builds around them**. One practitioner's stated reason for choosing it over Claude Code or Codex: "while it's using the same models, it has a coding harness… that I just find works a lot better" [^src1]. The harness-over-model thesis is echoed independently: a separate creator frames the model-vs-harness distinction as central to agentic engineering, arguing a good harness maximizes a model's output, and draws on hands-on use of Cursor and Claude Code to make the point [^ships-100x]. It is the recurring counterpoint to [Claude Code](/ai-engineering/claude-code.md) in the [agentic coding](/ai-engineering/agentic-coding.md) tool landscape, and was cited as a breakout commercial success ($100M in its first year, ~$2B valuation) in [AI Business Models](/ai-business/ai-business-models.md). In tool round-ups it is regularly listed first among GitHub Copilot alternatives, compared alongside Builder.io, Claude Code, Codex, Windsurf, and Zed on features, pricing, and best-fit use case [^copilot-alts].
 
 ## Harness, not model
 
@@ -46,9 +46,17 @@ Before writing any code, the practitioner creates markdown planning and architec
 
 The pattern: (1) initial planning prompt → Cursor generates architecture + asks questions; (2) practitioner answers; (3) context markdown files are committed to the repo; (4) all subsequent prompts — including in multi-agent mode — reference those files automatically [^src1].
 
+Cursor is also cited as a target editor for spec-driven frameworks: the **BMAD method** is a spec-driven development framework structured in two phases — planning and context-engineered development — whose emphasis on context engineering applies across tools including Gemini, Claude Code, and Cursor [^bmad].
+
+Beyond a single tool, one developer's practice is to run **multiple AI coding tools in parallel** — Cursor alongside terminal-based AI and ChatGPT — with the reported payoff being long-term context accumulation across the tools rather than depending on any one [^ai-tools].
+
 ## Debugging posture
 
 The practitioner reads the model's tool calls and reasoning in real time to catch wrong directions early and interject before the agent goes too far down an incorrect path [^src1]. When a bug appears: copy the error message, add minimal extra context (e.g., "the upload succeeded but transcription is failing"), and send it — "this is all I do when it fails" [^src1]. Screenshots of the broken UI are attached directly in the chat to localize the problem without lengthy description [^src1].
+
+## Ecosystem tooling
+
+Cursor's session transcripts are a supported input format for third-party tooling. **Claude Replay** is an open-source npm tool that converts AI coding-agent transcripts into self-contained, interactive HTML replay files with zero external dependencies; it supports multiple agent formats — Claude Code, Cursor, and Codex CLI — and offers interactive playback controls plus secret redaction, making it a way to showcase AI-assisted Cursor sessions [^claude-replay].
 
 ## See also
 
@@ -62,6 +70,16 @@ The practitioner reads the model's tool calls and reasoning in real time to catc
 ---
 
 [^src1]: [My Real AI Coding Workflow (build anything) (Tech With Tim)](../../raw/youtube/youtube-gpOfsGW1xRk-my-real-ai-coding-workflow-build-anything.md) — [03:59](../../raw/youtube/youtube-gpOfsGW1xRk-my-real-ai-coding-workflow-build-anything.md#t=239) Cursor + model selector setup; [05:45](../../raw/youtube/youtube-gpOfsGW1xRk-my-real-ai-coding-workflow-build-anything.md#t=345) why Cursor (harness over model); [10:25](../../raw/youtube/youtube-gpOfsGW1xRk-my-real-ai-coding-workflow-build-anything.md#t=625) installing skills + MCP servers; [14:13](../../raw/youtube/youtube-gpOfsGW1xRk-my-real-ai-coding-workflow-build-anything.md#t=853) rules
+
+[^ships-100x]: [Why This Dev Ships 100x Faster Than 99% of Engineers (David Ondrej)](sources/why-this-dev-ships-100x-faster-than-99-of-engineers-PzVV4X37ihg.md) — harness-vs-model distinction in agentic engineering; hands-on with Cursor and Claude Code.
+
+[^copilot-alts]: [6 Best GitHub Copilot Alternatives in 2026 (Builder.io)](sources/6-best-github-copilot-alternatives-in-2026-50fcd220.md) — Cursor compared alongside Builder.io, Claude Code, Codex, Windsurf, and Zed on features, pricing, and best use case.
+
+[^bmad]: [AI Coding — BMAD Method Spec-Driven Development Workflow](sources/ai-coding-bmad-method-spec-driven-development-workflow-f.md) — two-phase (planning + context-engineered development) spec-driven framework spanning Gemini, Claude Code, and Cursor.
+
+[^ai-tools]: [AI Tools — Best AI Coding Tools for Developers 2025](sources/ai-tools-best-ai-coding-tools-for-developers-2025-2025.md) — developer review favoring multiple tools (Cursor, terminal AI, ChatGPT) for long-term context accumulation.
+
+[^claude-replay]: [Claude Replay — AI Coding Session to Interactive HTML Replay](sources/claude-replay-ai-coding-session-to-interactive-html-replay-doc.md) — open-source npm tool converting agent transcripts (Claude Code, Cursor, Codex CLI) into self-contained interactive HTML with playback controls and secret redaction.
 
 <!-- RELATED:START (generated by bin/corpus_heal.py related — do not edit inside) -->
 
