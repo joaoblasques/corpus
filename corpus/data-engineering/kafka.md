@@ -374,9 +374,9 @@ The tools are borrowing each other's features (RabbitMQ added a log; AMQP standa
 [^src7]: [If you're learning Kafka, this article is for you (Vu Trinh)](../../raw/email/email-2025-05-15-if-you-re-learning-kafka-this-article-is-for-you.md)
 [^src8]: [The Trinity of Modern Data Architecture: Process Intelligence, Event-Driven Integration, and Trusted Agentic AI](../../raw/web/web-the-trinity-of-modern-data-architecture-process-intelligence-b19b93a7.md)
 [^eds-p01]: [Designing Event-Driven Systems (part 1/6)](../../raw/pdf/pdf-designing-event-driven-systems-concepts-and-patter-part-01.md)
-[^qfk1]: [When (Not) to Use Queues for Kafka?](../../raw/_inbox/web-when-not-to-use-queues-for-kafka-9296826b.md) — Kai Waehner, kai-waehner.de, 2026-01-28
-[^disk1]: [Diskless Kafka at FinTech Robinhood for Cost-Efficient Log Analytics and Observability](../../raw/_inbox/web-diskless-kafka-at-fintech-robinhood-for-cost-efficient-log-a-0ec9eb53.md) — Kai Waehner, kai-waehner.de, 2026-01-22
-[^mcp1]: [MCP vs. REST/HTTP API vs. Kafka: The Architect's Guide to Agentic AI Integration](../../raw/_inbox/web-mcp-vs-rest-http-api-vs-kafka-the-architect-s-guide-to-agent-e36f1d1c.md) — Kai Waehner, kai-waehner.de, 2026-04-10
-[^conf1]: [My Confluent Chapter: From Apache Kafka Startup to $11 Billion IBM Acquisition (Kai Waehner)](../../raw/_inbox/web-my-confluent-chapter-from-apache-kafka-startup-to-11-billion-9dcd0637.md)
-[^dbs1]: [Why Databricks and Snowflake Speak the Kafka Protocol: Ingestion vs. Architecture (Kai Waehner)](../../raw/_inbox/web-why-databricks-and-snowflake-speak-the-kafka-protocol-ingest-b83e18be.md)
-[^msg1]: [When to Use AMQP, JMS, Kafka, or MQTT: Trade-offs, Not a Winner (Kai Waehner)](../../raw/_inbox/web-when-to-use-amqp-jms-kafka-or-mqtt-trade-offs-not-a-winner-7db4e92a.md)
+[^qfk1]: [When (Not) to Use Queues for Kafka?](../../raw/web/web-when-not-to-use-queues-for-kafka-9296826b.md) — Kai Waehner, kai-waehner.de, 2026-01-28
+[^disk1]: [Diskless Kafka at FinTech Robinhood for Cost-Efficient Log Analytics and Observability](../../raw/web/web-diskless-kafka-at-fintech-robinhood-for-cost-efficient-log-a-0ec9eb53.md) — Kai Waehner, kai-waehner.de, 2026-01-22
+[^mcp1]: [MCP vs. REST/HTTP API vs. Kafka: The Architect's Guide to Agentic AI Integration](../../raw/web/web-mcp-vs-rest-http-api-vs-kafka-the-architect-s-guide-to-agent-e36f1d1c.md) — Kai Waehner, kai-waehner.de, 2026-04-10
+[^conf1]: [My Confluent Chapter: From Apache Kafka Startup to $11 Billion IBM Acquisition (Kai Waehner)](../../raw/web/web-my-confluent-chapter-from-apache-kafka-startup-to-11-billion-9dcd0637.md)
+[^dbs1]: [Why Databricks and Snowflake Speak the Kafka Protocol: Ingestion vs. Architecture (Kai Waehner)](../../raw/web/web-why-databricks-and-snowflake-speak-the-kafka-protocol-ingest-b83e18be.md)
+[^msg1]: [When to Use AMQP, JMS, Kafka, or MQTT: Trade-offs, Not a Winner (Kai Waehner)](../../raw/web/web-when-to-use-amqp-jms-kafka-or-mqtt-trade-offs-not-a-winner-7db4e92a.md)

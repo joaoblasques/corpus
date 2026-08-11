@@ -24,6 +24,15 @@ sources:
   - path: raw/_inbox/web-duckdb-s-agent-moment-jordan-tigani-c09530c6.md
     channel: web
     ingested_at: 2026-08-10
+  - path: raw/_inbox/web-why-i-finally-pulled-the-plug-on-polars-and-moved-to-duckdb-81287dd3.md
+    channel: web
+    ingested_at: 2026-08-11
+  - path: raw/_inbox/web-spark-is-dead-long-live-duckdb-confessions-of-a-data-guy-d9d141aa.md
+    channel: web
+    ingested_at: 2026-08-11
+  - path: raw/_inbox/web-delta-lake-duckdb-catalog-commits-with-unity-catalog-unlocki-84d7e38b.md
+    channel: web
+    ingested_at: 2026-08-11
 aliases:
   - DuckDB
   - MotherDuck
@@ -36,11 +45,17 @@ aliases:
   - Water Town
   - ETL vibe coding
   - big data is dead
+  - DuckDB vs Polars
+  - Polars S3 issues
+  - Catalog Commits
+  - DuckDB Lambda
+  - Unity Catalog DuckDB
+  - single node rebellion
 tags:
   - corpus/data-engineering
   - entity
 created: 2026-06-11
-updated: 2026-08-10
+updated: 2026-08-11
 ---
 
 # DuckDB
@@ -145,6 +160,36 @@ Jordan Tigani (Founder/CEO, MotherDuck; 11 years at Google BigQuery) argues that
 
 **The Jevons paradox of analytics**: making DuckDB/MotherDuck cheaper doesn't reduce compute spend — it generates new analytics use cases. Agents flagging the weird dashboard number before a human sees it, or tracing where a metric came from by examining pipeline lineage, expands the total demand for analytical compute rather than displacing it [^src7].
 
+## DuckDB vs. Polars: production reliability
+
+A practitioner retrospective (confessionsofadataguy.com): after years of using Polars in production — including early advocacy and production deployments — the author removed it from critical AWS Lambda pipelines and replaced with DuckDB [^src8]. The trigger: pinning Polars at a fixed version inside a standard AWS Python base image broke the next day without logic changes. Not a one-time incident; a pattern of S3 behavior inconsistencies (`read_csv` vs `scan_csv` differences, HEAD request failures, credential resolution issues) accumulated over time [^src8].
+
+The verdict: "What matters most in a production data platform is not theoretical performance or benchmark wins, but consistency, predictability, and trust that the tool behaves the same way every time it runs." DuckDB's S3 integrations feel more predictable; when something works, it keeps working [^src8]. Polars still makes sense for local exploration or tightly controlled environments; for cloud-native Lambda/S3 pipelines where reliability is non-negotiable, DuckDB wins the production argument [^src8].
+
+A related practitioner take: Spark "as we have known it" is dead — its main undoing is the abstraction/complexity reduction demanded by the current tech era [^src9]. Databricks absorbed and replaced OSS Spark (Photon, DBR); Spark clusters by hand have been replaced by Spark-as-a-service. DuckDB fills the space for pipelines that "have zero need for cluster compute" — Airflow jobs, AWS Lambdas, Python scripts, CLIs — with SQL as the interface, fast in-memory computation, and spill-to-disk for overflow [^src9].
+
+## DuckDB + Lambda + Unity Catalog: Catalog Commits for concurrent ingestion
+
+A practitioner experiment (DataEngineeringCentral) testing whether DuckDB inside AWS Lambda can write concurrently to Unity Catalog-governed Delta Lake tables with transactional correctness [^src10].
+
+**The architecture**: CSV files land in S3 → Lambda trigger → DuckDB inside a Lambda container → INSERT INTO a Unity Catalog-managed Delta Lake table. The appeal: no Spark cluster, no Databricks Job, dramatically cheaper compute for daily ingestion of hundreds of CSVs [^src10].
+
+**Why Catalog Commits matter**: without catalog-aware writes, external engines writing directly to Delta tables cause catalog metadata to silently diverge from the actual table state. Databricks' Catalog Commits proposal makes the Unity Catalog the primary mechanism through which engines interact with lakehouse storage — solving fragmented governance, inconsistent auditing, and the multi-writer safety problem [^src10].
+
+**Implementation pattern** [^src10]:
+```python
+# DuckDB inside Lambda attaches Unity Catalog
+conn.execute("INSTALL unity_catalog; LOAD unity_catalog; LOAD delta")
+conn.execute(f"CREATE SECRET (TYPE unity_catalog, TOKEN '{token}', ENDPOINT '{host}')")
+conn.execute("ATTACH 'catalog_name' AS uc_catalog (TYPE unity_catalog)")
+conn.execute("INSERT INTO uc_catalog.default.trips SELECT * FROM read_csv(s3_path)")
+conn.execute("COMMIT")
+```
+
+**Result (at time of writing)**: the architecture is "not working yet" — errors in the Delta Kernel when using Databricks Unity Catalog (OSS Unity Catalog worked fine in vendor blog posts). A subsequent update confirmed Databricks and the DuckDB team fixed the errors, available in nightly builds (ETA patch release June 15th) [^src10].
+
+**Significance**: if Catalog Commits work across engines, the lakehouse stops being synonymous with Spark and becomes genuinely multi-engine at the write layer — not just read. DuckDB Lambdas as production ingestion engines become viable for moderate-scale workloads [^src10].
+
 ## Related
 
 - [Query-engine routing](/data-engineering/query-engine-routing.md) — DuckDB as the cheap fast tier
@@ -159,3 +204,6 @@ Jordan Tigani (Founder/CEO, MotherDuck; 11 years at Google BigQuery) argues that
 [^src5]: [Processing 1 TB with DuckDB in less than 30 seconds (EcZachly + MotherDuck)](../../raw/web/web-processing-1-tb-with-duckdb-in-less-than-30-seconds-b3c369dc.md)
 [^src6]: [Data, AI, and DuckDB — Jacob Matson, Developer Advocate, MotherDuck (DEC Podcast)](../../raw/web/web-data-ai-and-duckdb-f6875fcc.md)
 [^src7]: [DuckDB's Agent Moment (Jordan Tigani / dbt Roundup, Season 9)](../../raw/web/web-duckdb-s-agent-moment-jordan-tigani-c09530c6.md)
+[^src8]: raw/_inbox/web-why-i-finally-pulled-the-plug-on-polars-and-moved-to-duckdb-81287dd3.md — confessionsofadataguy.com
+[^src9]: raw/_inbox/web-spark-is-dead-long-live-duckdb-confessions-of-a-data-guy-d9d141aa.md — confessionsofadataguy.com
+[^src10]: raw/_inbox/web-delta-lake-duckdb-catalog-commits-with-unity-catalog-unlocki-84d7e38b.md — DataEngineeringCentral, "Delta Lake + DuckDB. Catalog Commits with Unity Catalog."

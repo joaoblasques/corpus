@@ -3,13 +3,14 @@ okf_version: "0.1"
 ---
 # Corpus Index
 
-> Last updated: 2026-08-10 | Total pages: 521 | Total sources: 2336
+> Last updated: 2026-08-11 | Total pages: 524 | Total sources: 2380
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
 ## Domains
 
 ### ai-engineering
+- [5 useful things you'll learn in my post-training textbook](/ai-engineering/sources/5-useful-things-you-ll-learn-in-my-post-training-textbook-1b72e969.md) — source · stub · The document discusses a new post-training textbook on Reinforcement Learning from Human Feedback, c…
 - ["[AINews] Jeff, Sanjay, Oriol, and Quoc depart DeepMind; Demis to Chair; Koray to SVP — what is going on at GDM???"](/ai-engineering/sources/ainews-jeff-sanjay-oriol-and-quoc-depart-deepmind-demis-to-c-3189f1ce.md) — source · stub · ['Jeff Dean, Sanjay Ghemawat, Oriol Vinyals, and Quoc Le leave DeepMind to cofound Discovery Loop, a…
 - ["[AINews] AMD buys Taalas"](/ai-engineering/sources/ainews-amd-buys-taalas-2fea1307.md) — source · stub · The document discusses recent advancements in AI engineering, including OpenAI's ChatGPT update, Met…
 - [A quote from Claude Opus 5 system prompt](/ai-engineering/sources/a-quote-from-claude-opus-5-system-prompt-b9793ca1.md) — source · stub · ['Claude Opus 5 system prompt ensures accurate answers about export controls.', 'Anthropic suspended…
@@ -1196,6 +1197,9 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [Apache Spark](/data-engineering/apache-spark.md) — entity · draft · distributed engine on immutable RDDs + lazy DAG; DataFrames/Catalyst/Tungsten; caching, OOM tuning; Comet native accelerator
 - [Pipeline Optimization at Scale](/data-engineering/pipeline-optimization-at-scale.md) — synthesis · draft · 3 FAANG war stories (Airbnb 95% backfill reduction, Meta 12× 50TB dedup, Meta silent failure fix); anti-patterns + fixes table
 - [Databricks](/data-engineering/databricks.md) — entity · draft · lakehouse platform; Unity Catalog, Liquid Clustering, Lakeflow, Genie Code, Lakebase, video intelligence, sports analytics
+- [Confluent](/data-engineering/confluent.md) — entity · draft · Apache Kafka company; Jay Kreps 2014; $11B IBM acquisition; Confluent Platform, WarpStream, QfK
+- [Kai Waehner](/data-engineering/kai-waehner.md) — entity · draft · Field CTO at Confluent 2017–2026; author Ultimate Data Streaming Guide; Shift Left 2.0; MWC 2026 telecom streaming
+- [Solomon Hykes](/data-engineering/solomon-hykes.md) — entity · draft · Docker creator (PyCon 2013); Dagger founder (CI/CD for AI agent era)
 - [DuckDB](/data-engineering/duckdb.md) — entity · draft · embedded OLAP engine; Quack protocol, DuckLake, MotherDuck; 1TB benchmark (<17s on Mega); Zonemap index
 - [Matthew Housley](/data-engineering/matthew-housley.md) — entity · stub · co-author Data Engineering Fundamentals (O'Reilly); former CTO Ternary Data; "foundations over tools"
 - [Data Orchestration](/data-engineering/data-orchestration.md) — concept · draft · scheduling vs orchestration vs observability; when cron isn't enough
@@ -1411,6 +1415,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [Source: The Software Engineer's Guidebook](/software-engineering/sources/software-engineers-guidebook.md) — source · draft · Gergely Orosz 359-page career reference (full SWE arc)
 
 ### mlops
+- [AI Agent Deployment | AY Automate](/mlops/sources/ai-agent-deployment-ay-automate-2e023728.md) — source · stub · This document outlines a process for deploying AI agents in production, focusing on permission scopi…
 - ["Agents for production lines: Trusted decisions in real time"](/mlops/sources/agents-for-production-lines-trusted-decisions-in-real-time-a1c3f089.md) — source · stub · The document discusses a production line monitoring assistant built on Databricks, which uses stream…
 - [Agentic media buying cannot scale without the right foundation. See how buyers and sellers get there on Databricks.](/mlops/sources/agentic-media-buying-cannot-scale-without-the-right-foundati-f609ca41.md) — source · stub · The article discusses the challenges of autonomous buyer and seller agents in media buying and how D…
 - ["7 MLOps Best Practices: Implementation, Challenges & Tools"](/mlops/sources/7-mlops-best-practices-implementation-challenges-tools-ce879e43.md) — source · stub · The document discusses 7 MLOps best practices for implementation, challenges, and tools. It highligh…

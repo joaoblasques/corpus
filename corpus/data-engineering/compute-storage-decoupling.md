@@ -100,5 +100,5 @@ See [Serverless Databases](/data-engineering/serverless-databases.md) for the fu
 [^src3]: [If you're learning Kafka, this article is for you (Vu Trinh)](../../raw/email/email-2025-05-15-if-you-re-learning-kafka-this-article-is-for-you.md)
 [^src4]: [What To Look For in a Serverless Database for AI Applications](../../raw/web/web-what-to-look-for-in-a-serverless-database-for-ai-application-8e1ddee7.md)
 [^src5]: [What Is Serverless PostgreSQL?](../../raw/web/web-what-is-serverless-postgresql-3e7858c3.md)
-[^src6]: [Diskless Kafka at FinTech Robinhood for Cost-Efficient Log Analytics and Observability](../../raw/_inbox/web-diskless-kafka-at-fintech-robinhood-for-cost-efficient-log-a-0ec9eb53.md) — Kai Waehner, kai-waehner.de, 2026-01-22
+[^src6]: [Diskless Kafka at FinTech Robinhood for Cost-Efficient Log Analytics and Observability](../../raw/web/web-diskless-kafka-at-fintech-robinhood-for-cost-efficient-log-a-0ec9eb53.md) — Kai Waehner, kai-waehner.de, 2026-01-22
 </content>

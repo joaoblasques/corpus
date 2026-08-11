@@ -27,6 +27,9 @@ sources:
   - path: raw/_inbox/web-yaml-vs-xml-vs-json-which-format-wins-and-when-a13d6d07.md
     channel: web
     ingested_at: 2026-08-10
+  - path: raw/_inbox/web-what-is-apache-arrow-flight-confessions-of-a-data-guy-70dad6f1.md
+    channel: web
+    ingested_at: 2026-08-11
 aliases:
   - data integration
   - data integration patterns
@@ -48,11 +51,14 @@ aliases:
   - integration vs orchestration
   - Kestra
   - unified orchestration
+  - Apache Arrow Flight
+  - Arrow Flight
+  - gRPC data transport
 tags:
   - corpus/data-engineering
   - concept
 created: 2026-08-10
-updated: 2026-08-10
+updated: 2026-08-11
 confidence: 0.85
 last_confirmed: 2026-08-10
 ---
@@ -170,6 +176,19 @@ These formats serve different jobs [^fmt1]:
 
 **Data contracts**: authored in YAML, validated by JSON Schema, enforced in the pipeline — a pattern now common in dbt, Great Expectations, and streaming schema registries [^fmt1].
 
+## Apache Arrow Flight: high-performance columnar data transport
+
+Apache Arrow Flight is a high-performance data transport framework built on top of Apache Arrow and gRPC, enabling applications to move large datasets across networks much faster than JDBC, ODBC, CSV exports, or REST APIs [^arrow1].
+
+The core advantage: Arrow's columnar in-memory format can be sent over the wire as `RecordBatches` without serialization/deserialization at the destination — the data arrives in the format that is already directly usable by Arrow-aware consumers [^arrow1].
+
+**Architecture**:
+- **Client-server model**: clients make requests to an Arrow Flight Server via gRPC (Google's HTTP/2-based RPC framework) [^arrow1]
+- **Multiple endpoints**: Arrow Flight Servers have multiple endpoints that work together to fulfill requests — making data transfer parallelizable, unlike traditional single-coordinator distributed systems [^arrow1]
+- **Tight coupling**: Arrow Flight is a framework for building custom data transport layers; it does not provide ready-made connectors — implementers write `doGet`, `doPut` methods [^arrow1]
+
+**Practical uses**: high-speed data movement between ML pipelines, analytics engines, and storage layers where JDBC/ODBC bandwidth would be the bottleneck. Databricks' Zerobus uses gRPC + Apache Arrow RecordBatches for exactly this pattern (see [Databricks](/data-engineering/databricks.md)).
+
 ## Related
 
 - [Apache Kafka](/data-engineering/kafka.md) — event streaming backbone
@@ -189,3 +208,4 @@ These formats serve different jobs [^fmt1]:
 [^fmt1]: [YAML vs XML vs JSON: Which Format Wins, and When (Kai Waehner)](../../raw/web/web-yaml-vs-xml-vs-json-which-format-wins-and-when-a13d6d07.md)
 [^e2c1]: [Edge to Cloud and Back: Four Data Movement Problems (Kai Waehner)](../../raw/web/web-edge-to-cloud-and-back-four-data-movement-problems-and-why-o-6e89b591.md)
 [^orch1]: [Data Integration vs Workflow Orchestration: Connecting Systems Is Not Coordinating the Work (Kai Waehner)](../../raw/web/web-data-integration-vs-workflow-orchestration-connecting-system-8dc4b75e.md)
+[^arrow1]: raw/_inbox/web-what-is-apache-arrow-flight-confessions-of-a-data-guy-70dad6f1.md — confessionsofadataguy.com, "What is Apache Arrow Flight?"

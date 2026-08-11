@@ -109,6 +109,6 @@ Each platform layer brings its own governance tooling (Confluent Schema Registry
 
 ---
 
-[^src1]: [The Shift Left Architecture 2.0: Operational, Analytical and AI Interfaces for Real-Time Data Products](../../raw/_inbox/web-the-shift-left-architecture-2-0-operational-analytical-and-a-8be93f81.md) — Kai Waehner, kai-waehner.de, 2026-03-23
-[^src2]: [dbt Meets Apache Flink: One Workflow for Data Engineers on Confluent, Snowflake, BigQuery, and Databricks](../../raw/_inbox/web-dbt-meets-apache-flink-one-workflow-for-data-engineers-on-co-cf1939e1.md) — Kai Waehner, kai-waehner.de, 2026-03-26
+[^src1]: [The Shift Left Architecture 2.0: Operational, Analytical and AI Interfaces for Real-Time Data Products](../../raw/web/web-the-shift-left-architecture-2-0-operational-analytical-and-a-8be93f81.md) — Kai Waehner, kai-waehner.de, 2026-03-23
+[^src2]: [dbt Meets Apache Flink: One Workflow for Data Engineers on Confluent, Snowflake, BigQuery, and Databricks](../../raw/web/web-dbt-meets-apache-flink-one-workflow-for-data-engineers-on-co-cf1939e1.md) — Kai Waehner, kai-waehner.de, 2026-03-26
 [^src3]: [Shift Left in Automotive: Real-Time Intelligence from Vehicle Telemetry with Data Streaming at Rivian](../../raw/web/web-shift-left-in-automotive-real-time-intelligence-from-vehicle-ba65affa.md) — Kai Waehner, kai-waehner.de, 2026-01-16

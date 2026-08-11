@@ -138,7 +138,7 @@ The engineering substrate for building ML and software systems: how the developm
 - [Environment Promotion (dev → acc → prd)](/mlops/environment-promotion.md)
 
 <details>
-<summary>Source summaries (109)</summary>
+<summary>Source summaries (110)</summary>
 
 - ["12 Best DevOps Testing Tools for 2026 [Comparison List]"](/mlops/sources/12-best-devops-testing-tools-for-2026-comparison-list-c2c4844c.md)
 - ["29%+ warehouse savings: How the dbt Fusion engine drives cost efficiency | dbt Labs"](/mlops/sources/29-warehouse-savings-how-the-dbt-fusion-engine-drives-cost-e-121b247d.md)
@@ -185,6 +185,7 @@ The engineering substrate for building ML and software systems: how the developm
 - [Agentic AI Data Infrastructure | lakeFS](/mlops/sources/agentic-ai-data-infrastructure-lakefs-139c0a67.md)
 - [Agentic Data Engineering Is Here — But Can It Close the Loop?](/mlops/sources/agentic-data-engineering-is-here-but-can-it-close-the-loop-b94b0b55.md)
 - [Agentic media buying cannot scale without the right foundation. See how buyers and sellers get there on Databricks.](/mlops/sources/agentic-media-buying-cannot-scale-without-the-right-foundati-f609ca41.md)
+- [AI Agent Deployment | AY Automate](/mlops/sources/ai-agent-deployment-ay-automate-2e023728.md)
 - [AI agent versioned filesystem with E2B and lakeFS](/mlops/sources/ai-agent-versioned-filesystem-with-e2b-and-lakefs-5b56487a.md)
 - [AI Sped Up Coding Faster Than It Sped Up Delivery](/mlops/sources/ai-sped-up-coding-faster-than-it-sped-up-delivery-b8e50c89.md)
 - [Apache Iceberg and the catalog layer (w/ Russell Spitzer)](/mlops/sources/apache-iceberg-and-the-catalog-layer-w-russell-spitzer-b1237b12.md)

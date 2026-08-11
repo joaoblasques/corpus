@@ -9,6 +9,12 @@ sources:
   - path: raw/email/email-2025-04-17-the-internal-of-bigquery-snowflake-databricks-and-redshift.md
     channel: email
     ingested_at: 2026-06-19
+  - path: raw/_inbox/web-inside-snowflakes-ai-roadmap-w-chris-child-fe3830a6.md
+    channel: web
+    ingested_at: 2026-08-11
+  - path: raw/_inbox/web-hunting-for-tokens-snowflake-summit-agent-use-cases-a1bf22b1.md
+    channel: web
+    ingested_at: 2026-08-11
 aliases:
   - Snowflake
   - snowflake
@@ -18,11 +24,17 @@ aliases:
   - Snowpipe
   - Unistore
   - hybrid tables
+  - Snowflake Intelligence
+  - Cortex
+  - Snowflake Cortex
+  - Open Semantic Interchange
+  - OSI
+  - Snowpark
 tags:
   - corpus/data-engineering
   - entity
 created: 2026-06-17
-updated: 2026-06-19
+updated: 2026-08-11
 ---
 
 # Snowflake
@@ -83,6 +95,32 @@ Databricks published audited TPC-DS results (Nov 2021) claiming the fastest impl
 
 A second source (Vu Trinh's cloud-warehouse internals survey) corroborates and frames Snowflake against its peers [^src2]: founded **July 2012** by two ex-Oracle engineers plus VectorWise co-founder Marcin Żukowski, built in **C++**, separating compute (proprietary shared-nothing engine on cloud VMs) from storage (S3/GCS) with local-disk caching [^src2]. Distinctively, Snowflake **avoids shuffle-based execution** — workers exchange data directly with one another — unlike BigQuery's Dremel or Databricks' Photon [^src2]. Its **Virtual Warehouses** are abstract "T-shirt sizes" (X-Small→XX-Large); each query runs on exactly one VW with non-shared nodes for performance isolation [^src2]. The worker cache stores **file headers + specific columns** (not whole files), under LRU, and uses **consistent hashing** so queries hitting the same data land on the same node; **file stealing** (reading stolen files from S3, not the busy peer) handles skew [^src2]. Storage uses large immutable files with **min-max-based pruning** [^src2]. See [Cloud Data Warehouse Internals](/data-engineering/cloud-data-warehouse-internals.md) for the four-way comparison and [BigQuery](/data-engineering/bigquery.md)/[Redshift](/data-engineering/redshift.md) for the peers.
 
+## Snowflake AI roadmap (2026)
+
+Chris Child (Snowflake VP Product Management) on the AI roadmap [^src3]:
+
+**Core thesis**: Snowflake's moat is customer trust + access to governed enterprise data. The AI layer is built on top of that foundation — agents operating inside existing row/column-level security roles rather than bypassing governance [^src3].
+
+**AI stack layers** [^src3]:
+1. **Data foundation** — governed data with PII tagging, semantic models, catalog; AI raises the bar because "agents can expose sensitive data faster than dashboards"
+2. **Cortex** — higher-level APIs for unstructured processing (RAG), structured processing (Cortex AI SQL for fuzzy joins, sentiment filters), model choice (Anthropic, OpenAI, Mistral, Llama, etc.)
+3. **Snowflake Intelligence** — UI + agent framework; agents defined with datasets, semantic models, and gold queries; internal GTM assistant as production case study
+
+**Open Semantic Interchange (OSI)**: Snowflake's open standard for exposing semantic context to agents — LLMs need explicit semantics and cataloging, not tacit knowledge hidden in downstream tools. dbt Labs open-sourced MetricsFlow (powers the dbt Semantic Layer) to align with OSI [^src3].
+
+**Future of data engineering (Chris Child's view)**: "Fewer bespoke pipelines, more standardization and semantics, and a bigger focus on business context and data products. The role looks more like architect and manager — allocating budgets, deduplicating work, and deeply understanding the business." [^src3]
+
+**Iceberg strategy**: Snowflake is contributing to and adopting Iceberg (including Variant type in v3 spec) because openness expands the universe of data Snowflake can query and run Cortex on; lock-in is not the goal [^src3]. Catalog-link databases mirror metadata for native-speed access from Snowflake, solving the external catalog latency problem [^src3]. See [Apache Iceberg](/data-engineering/apache-iceberg.md).
+
+## Token budgeting and agent inference patterns (Snowflake Summit 2026)
+
+Tristan Handy's report from Snowflake Summit [^src4]:
+- Token budget engineering is becoming a real practice: Uber sets $1,500/engineer/year (11% of avg salary); dbt Labs set $500/month with a public accountability channel for overages
+- **Do not use Claude Code CLI for batch inference** — it injects large amounts of tool-context irrelevant to the call; an API key is dramatically cheaper and faster for batch workloads [^src4]
+- AWS Bedrock as a "cheat code": a single Bedrock key lets you benchmark 10+ models in parallel — critical for batch inference optimization before productionizing [^src4]
+- Build your own inference cost tracking with OTEL (simple, not over-engineered); treat inference compute as a managed resource [^src4]
+- Snowflake Summit 2026: "every single vendor booth used the word 'agent'"; true agentic enterprise use cases outside coding agents are still sparse [^src4]
+
 ## Related
 
 - [Cloud Data Warehouse Internals](/data-engineering/cloud-data-warehouse-internals.md) — BigQuery/Snowflake/Databricks/Redshift compared
@@ -100,3 +138,5 @@ A second source (Vu Trinh's cloud-warehouse internals survey) corroborates and f
 
 [^src1]: [CMU Advanced Database Systems — Snowflake (Andy Pavlo)](../../raw/youtube/youtube-nhwp1btg0cw.md)
 [^src2]: [The internal of BigQuery, Snowflake, Databricks and Redshift (Vu Trinh)](../../raw/email/email-2025-04-17-the-internal-of-bigquery-snowflake-databricks-and-redshift.md)
+[^src3]: raw/_inbox/web-inside-snowflakes-ai-roadmap-w-chris-child-fe3830a6.md — dbt Roundup podcast, Chris Child (Snowflake VP Product)
+[^src4]: raw/_inbox/web-hunting-for-tokens-snowflake-summit-agent-use-cases-a1bf22b1.md — dbt Roundup, Tristan Handy

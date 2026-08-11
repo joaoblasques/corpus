@@ -15,15 +15,36 @@ sources:
   - path: raw/youtube/youtube-4bg64wnkfge.md
     channel: youtube
     ingested_at: 2026-06-17
+  - path: raw/_inbox/web-the-iceberg-ecosystem-today-anders-swanson-3afb0089.md
+    channel: web
+    ingested_at: 2026-08-11
+  - path: raw/_inbox/web-inside-snowflakes-ai-roadmap-w-chris-child-fe3830a6.md
+    channel: web
+    ingested_at: 2026-08-11
+  - path: raw/_inbox/web-under-the-hood-of-apache-iceberg-w-christian-thiel-2573cee1.md
+    channel: web
+    ingested_at: 2026-08-11
+  - path: raw/_inbox/web-the-future-of-the-lakehouse-delta-lake-rust-and-data-platfor-8d2f4c75.md
+    channel: web
+    ingested_at: 2026-08-11
+  - path: raw/_inbox/web-how-amazon-s3-works-w-andy-warfield-b9737b60.md
+    channel: web
+    ingested_at: 2026-08-11
 aliases:
   - Apache Iceberg
   - Iceberg
   - iceberg
+  - Lakekeeper
+  - Iceberg REST catalog
+  - vended credentials
+  - external catalog
+  - four-part namespace
+  - S3 table buckets
 tags:
   - corpus/data-engineering
   - entity
 created: 2026-05-07
-updated: 2026-06-11
+updated: 2026-08-11
 ---
 
 # Apache Iceberg
@@ -125,6 +146,40 @@ SHOW STATS FOR (
 ```
 [^src2]
 
+## Iceberg ecosystem in production (2026)
+
+From Anders Swanson (dbt Labs developer experience advocate) [^src5]:
+
+**Three phases of Iceberg integration:**
+1. **Naive** — point engine at Parquet/JSON in object storage; reading works, but no version tracking
+2. **REST catalog** — engines connect to an Iceberg REST catalog to get the current table version; eliminates path management
+3. **Schema-scale** — discovery of new tables, schema synchronization, multi-table transactions; "producer-led sharing" where the upstream team writes to a shared catalog and downstream engines see it automatically
+
+**Catalog model:** Internal catalogs (Snowflake, SQL Server) vs. external catalogs (e.g., Lakekeeper, AWS Glue). The trend is a **four-part namespace** — `catalog.database.schema.identifier` — following Spark, Databricks Unity Catalog, and Snowflake catalog-link approaches [^src5].
+
+**Vended credentials** solve the "two keys" problem: authenticate once to the catalog; the catalog vends short-lived object-store credentials so you don't manage separate S3 keys [^src5]. Vended credentials do NOT solve cross-platform identity/grants — that remains the hardest unsolved problem [^src5].
+
+**Metadata performance** is the practical pain point: if listing tables in a federated world takes 5 seconds, users blame the query engine even if the external catalog is slow. Snowflake catalog-link databases mirror/cache metadata for native performance; DuckDB deliberately excludes external catalog tables from information_schema listing today [^src5].
+
+> "The making of a treaty is the treaty... The goodwill is the standard." — Anders Swanson, on why unprecedented vendor collaboration on Iceberg matters more than any specific feature [^src5]
+
+**Lakekeeper** (Christian Thiel, co-lead architect) is one of the most widely-used Iceberg catalogs as of 2026 [^src6].
+
+## Delta Lake and open Iceberg ecosystem (Ethan, delta-rs maintainer)
+
+Podcast conversation with Ethan (delta-rs maintainer, pharmaceutical industry) on open table formats and enterprise lakehouse architecture [^src7]:
+
+- **delta-rs** — the Rust implementation of the Delta Lake protocol; enables Delta table reads/writes outside Spark (Python, Rust, DuckDB, other engines). Ethan is a project maintainer and works on multi-engine lakehouse infrastructure in regulated environments (pharma).
+- **Delta Lake and Iceberg converging** — both formats are "becoming one" at the governance/catalog layer (Unity Catalog bridging Delta ↔ Iceberg via UniForm); the distinction between the two is narrowing for most practical use cases.
+- **Open catalogs** — Iceberg REST catalog and Databricks Unity Catalog are converging as the de facto open lakehouse catalog protocols; catalog-first architecture is now the primary way multi-engine access is managed safely.
+- **Rust in the data ecosystem** — Rust's performance and safety profile make it a natural fit for data infrastructure (DataFusion, DuckDB's Rust-written extensions, delta-rs), especially where latency and correctness matter.
+- **Enterprise data platform in pharma** — data governance and auditability requirements in regulated industries are not optional; Iceberg's time travel and metadata immutability are directly valuable there.
+- **Agentic analytics** — Ethan discusses the future of AI-enabled data systems: agents need stable, versioned, schema-aware table formats; open table formats and open catalogs are the infrastructure enabler for agentic pipelines (same direction as [dbt Roundup's agentic analytics thesis](/data-engineering/dbt.md)).
+
+## Amazon S3 and Iceberg (S3 table buckets)
+
+AWS VP Andy Warfield: S3 evolved from storage into a compute-adjacent layer; **S3 table buckets** are AWS's managed Iceberg offering — Iceberg tables stored and served natively from S3 without a separate catalog service [^src8]. This blurs the storage/catalog line and extends S3's role from object store to managed table layer.
+
 ## See also
 
 - [Parquet](/data-engineering/parquet.md) — the file format Iceberg manages
@@ -132,6 +187,8 @@ SHOW STATS FOR (
 - [SCD2](/data-engineering/scd2.md) — primary use case combining Iceberg + MERGE INTO
 - [Data Lake / Lakehouse](/data-engineering/data-lake.md) — architecture context for Iceberg
 - [Open Table Formats](/data-engineering/open-table-formats.md) — Iceberg vs. Hudi vs. Delta Lake comparison
+- [Snowflake](/data-engineering/snowflake.md) — Iceberg integration and catalog-link
+- [Databricks](/data-engineering/databricks.md) — Unity Catalog and Delta Lake / Iceberg convergence
 - [Data Engineering hub](/data-engineering/README.md)
 
 ---
@@ -140,3 +197,7 @@ SHOW STATS FOR (
 [^src2]: [Data Lake Fundamentals - Apache Iceberg and Parquet](/03_Resources/Study Notes/Data Lake Fundamentals - Apache Iceberg and Parquet.md)
 [^src3]: [Understanding Open Table Formats with Apache Iceberg](../../raw/email/email-2025-09-24-understanding-open-table-formats-with-apache-iceberg.md)
 [^src4]: [Apache Iceberg Summit Keynote — the future of Iceberg (Russell Spitzer)](../../raw/youtube/youtube-4bg64wnkfge.md)
+[^src5]: raw/_inbox/web-the-iceberg-ecosystem-today-anders-swanson-3afb0089.md
+[^src6]: raw/_inbox/web-under-the-hood-of-apache-iceberg-w-christian-thiel-2573cee1.md
+[^src7]: raw/_inbox/web-the-future-of-the-lakehouse-delta-lake-rust-and-data-platfor-8d2f4c75.md
+[^src8]: raw/_inbox/web-how-amazon-s3-works-w-andy-warfield-b9737b60.md

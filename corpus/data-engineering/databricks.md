@@ -51,6 +51,15 @@ sources:
   - path: raw/web/web-the-rise-of-sports-intelligence-how-the-lakehouse-turns-trac-3c304692.md
     channel: web
     ingested_at: 2026-07-06
+  - path: raw/_inbox/web-review-of-databricks-data-ai-summit-2026-ebe4579d.md
+    channel: web
+    ingested_at: 2026-08-11
+  - path: raw/_inbox/web-databricks-zerobus-event-streams-lake-house-be-gone-kafka-da3d747e.md
+    channel: web
+    ingested_at: 2026-08-11
+  - path: raw/_inbox/web-databricks-zerobus-streaming-ingestion-for-delta-lake-house-27d12529.md
+    channel: web
+    ingested_at: 2026-08-11
 aliases:
   - Databricks
   - Unity Catalog
@@ -66,11 +75,17 @@ aliases:
   - Databricks Lakebase
   - Serverless GPU Compute
   - Databricks SGC
+  - Databricks Zerobus
+  - Zerobus
+  - Lakehouse RT
+  - Reyden
+  - LTAP
+  - Lake Transactional Analytical Processing
 tags:
   - corpus/data-engineering
   - entity
 created: 2026-06-11
-updated: 2026-07-06
+updated: 2026-08-11
 ---
 
 # Databricks
@@ -288,6 +303,20 @@ Unity Catalog provides lineage and access control across the combined data estat
 
 **Kythera Labs (healthcare)** — AI-native healthcare strategy platform built on Databricks that processes 339 billion medical/prescription drug claims (300M patients, 8 years, 3+ petabytes) [^src13]. Claims data is transformed from billing exhaust into event-based structures where a knee replacement is "a surgical event with a pre-operative history, a discharge, and a post-operative care trajectory" — the translation work that makes AI answers trustworthy [^src13]. A Louisiana health system went from contract to first insight in 10 days, achieving 150% increased patient-encounter visibility and $3.8M estimated annualized value from retained encounters [^src13].
 
+## Zerobus: streaming ingestion to the Lakehouse
+
+Databricks Zerobus is a serverless streaming ingestion system designed to pipe data directly into Delta Lake tables — eliminating the need for Kafka, Spark Streaming, or Flink for common ingestion use cases [^src16][^src17]. Interface options: gRPC, REST, OpenTelemetry. Client SDKs available; the Python SDK sends Apache Arrow RecordBatches directly to a Delta Lake table with minimal boilerplate [^src17].
+
+The motivation: streaming to a Lakehouse has historically required expensive, complex third-party infrastructure. Zerobus is push-only and serverless — no running cluster to manage. It is not a replacement for Kafka as an enterprise event-driven backbone; it eats "at the edges" of use cases where organizations don't want to operate a full Kafka deployment but need streaming data in Delta Lake [^src16]. See [Apache Kafka](/data-engineering/kafka.md) for the Kafka protocol vs. Databricks Zerobus distinction.
+
+## Data + AI Summit 2026 highlights
+
+A practitioner review of the 2026 Databricks Data + AI Summit [^src18]:
+
+**Lakehouse//RT (Reyden)**: A new real-time compute engine designed for millisecond-latency, high-concurrency queries directly against Delta Lake — aiming to eliminate the separate serving layer (ClickHouse, Pinot, Druid, Redis) currently needed for operational analytics. Benchmarks: up to 16× faster than existing real-time serving layers; 10 ms latency; 12,000 qps. Architecture: specialized Reyden engine plus auto-scaling compute, all on the same Delta Lake data governed by Unity Catalog [^src18].
+
+**LTAP (Lake Transactional/Analytical Processing)**: Databricks' attempt to unify operational and analytical workloads on a single copy of data. Instead of HTAP (one engine for everything, creating resource contention), LTAP keeps specialized engines (Lakebase for PostgreSQL OLTP, Lakehouse for analytics, Lakehouse//RT for real-time serving) on a unified Delta/Iceberg storage layer [^src18]. The provocation: 80% of databases on Lakebase are already being created by agents rather than people — infrastructure built around many data copies "simply doesn't scale when your primary users become software instead of humans" [^src18].
+
 ## Related
 
 - [Cloud Data Warehouse Internals](/data-engineering/cloud-data-warehouse-internals.md) — Photon vs Dremel/Snowflake/Redshift compared
@@ -316,3 +345,6 @@ Unity Catalog provides lineage and access control across the combined data estat
 [^src13]: [What if the answer was already in your data? (Kythera Labs)](../../raw/web/web-what-if-the-answer-was-already-in-your-data-5e70850d.md)
 [^src14]: [The Rise of Sports Intelligence: How the Lakehouse Turns Tracking Data into Competitive Advantage](../../raw/web/web-the-rise-of-sports-intelligence-how-the-lakehouse-turns-trac-3c304692.md)
 [^src15]: [What To Look For in a Serverless Database for AI Applications](../../raw/web/web-what-to-look-for-in-a-serverless-database-for-ai-application-8e1ddee7.md)
+[^src16]: raw/_inbox/web-databricks-zerobus-event-streams-lake-house-be-gone-kafka-da3d747e.md — dataengineeringcentral.substack.com
+[^src17]: raw/_inbox/web-databricks-zerobus-streaming-ingestion-for-delta-lake-house-27d12529.md — confessionsofadataguy.com
+[^src18]: raw/_inbox/web-review-of-databricks-data-ai-summit-2026-ebe4579d.md — dataengineeringcentral.substack.com

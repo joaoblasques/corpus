@@ -580,5 +580,5 @@ This pattern fits MCP server deployment: an agent can spin up a temporary HTTP M
 [^src27]: [Agents in Action #3: Model Context Protocol (MCP) for Data Engineers](../../raw/email/email-2026-06-28-agents-in-action-3-model-context-protocol-mcp-for-data-engin.md) — Pipeline to Insights (Substack), 2026-06-28
 [^src28]: [A quote from Sean Lynch](../../raw/web/web-a-quote-from-sean-lynch-f248e4ad.md) — Simon Willison curating HN comment by Sean Lynch, 2026-06-19
 [^src29]: [Temporary Cloudflare Accounts for AI agents](../../raw/web/web-temporary-cloudflare-accounts-for-ai-agents-9feea510.md) — Simon Willison, 2026-06-21
-[^src30]: [MCP vs. REST/HTTP API vs. Kafka: The Architect's Guide to Agentic AI Integration](../../raw/_inbox/web-mcp-vs-rest-http-api-vs-kafka-the-architect-s-guide-to-agent-e36f1d1c.md) — Kai Waehner, kai-waehner.de, 2026-04-10
-[^src31]: [Enterprise Agentic AI Landscape 2026: Trust, Flexibility, and Vendor Lock-in](../../raw/_inbox/web-enterprise-agentic-ai-landscape-2026-trust-flexibility-and-v-d6ce5909.md) — Kai Waehner, kai-waehner.de, 2026-04-06
+[^src30]: [MCP vs. REST/HTTP API vs. Kafka: The Architect's Guide to Agentic AI Integration](../../raw/web/web-mcp-vs-rest-http-api-vs-kafka-the-architect-s-guide-to-agent-e36f1d1c.md) — Kai Waehner, kai-waehner.de, 2026-04-10
+[^src31]: [Enterprise Agentic AI Landscape 2026: Trust, Flexibility, and Vendor Lock-in](../../raw/web/web-enterprise-agentic-ai-landscape-2026-trust-flexibility-and-v-d6ce5909.md) — Kai Waehner, kai-waehner.de, 2026-04-06

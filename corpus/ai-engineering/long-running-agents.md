@@ -18,6 +18,9 @@ sources:
   - path: raw/_inbox/web-long-running-agents-322a7b71.md
     channel: web
     ingested_at: 2026-06-29
+  - path: raw/_inbox/web-i-built-a-very-small-long-running-agent-ecfdf958.md
+    channel: web
+    ingested_at: 2026-08-11
 aliases:
   - long-running agent
   - long-running agents
@@ -28,7 +31,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-16
-updated: 2026-06-24
+updated: 2026-08-11
 ---
 
 # Long-Running Agents
@@ -134,6 +137,25 @@ Specialist agents (engineering/product/sales/marketing/finance) were deployed wi
 
 **Dispatch** (Pro/Max beta) extends the long-running agent pattern to cross-device persistence: a single conversation thread lives across mobile and desktop, so delegating a task from your phone to a Claude Code or Cowork session on your desktop isn't a separate handoff — it's the same persistent context [^src4]. This operationalizes the `wake(sessionId)` pattern from [Claude Managed Agents](/ai-engineering/claude-managed-agents.md) Brain-Hands-Session architecture: the phone is the human-in-the-loop checkpoint, and the desktop is the execution environment. Push notifications handle the async completion loop.
 
+## Tinyberg: long-running agents for data engineering
+
+A minimal proof-of-concept (Jason Ganz, dbt Roundup) demonstrates applying the goal-based long-running agent pattern to data infrastructure [^src5]. The experiment: build a clean-room, read-only Apache Iceberg table inspector ("Tinyberg") with no external Iceberg dependencies (no DuckDB, Spark, or PyIceberg in the runtime implementation). Method: load the spec into a directory → boot Claude Code with `--goal` → let the agent run until complete [^src5].
+
+Result: ~2 hours of agent runtime → a working implementation of 6 spec requirements (load Iceberg table, resolve snapshots, read manifest metadata, produce scan plans, CLI, test suite). DuckDB/PyIceberg used only in tests as oracle [^src5].
+
+**Highly verifiable tasks for long-running data agents today** [^src5]:
+- Data platform migrations (validate data matches exactly between platforms)
+- dbt best-practices enforcement (`dbt project evaluator` as the oracle)
+- Library upgrades (e.g. dbt project from v1 to Fusion engine)
+- Pipeline cost/speed optimization loops
+- Data diff remediation ("iterate until the diff is gone")
+
+**Tasks NOT well-suited for long-running agents today** [^src5]:
+- Building a semantic layer from scratch (organizational buy-in can't be put in a verification loop)
+- Deciding on data platform architecture (no ground truth to verify against)
+
+General rule: **any task with an easily verifiable outcome** (known source of truth to compare against, or a metric to optimize) is a good candidate. The direction: toward multi-agent harnesses where multiple agents share a filesystem but maintain separate context windows, with an evaluator agent that dramatically improves performance even on tasks that aren't fully verifiable [^src5].
+
 ## See also
 
 - [Agentic Coding](/ai-engineering/agentic-coding.md) — the conductor→orchestrator shift that autonomous agents represent
@@ -145,4 +167,5 @@ Specialist agents (engineering/product/sales/marketing/finance) were deployed wi
 [^src2]: [Ch10 — Autonomous Background Coding Agents](../../raw/notes/notes-10-autonomous-background-coding-agents.md)
 [^src3]: [Rakuten — Claude Managed Agents case study](../../raw/web/web-rakuten-claude-managed-agents-case-study-claude-by-anthropic.md) — Yusuke Kaji, Rakuten
 [^src4]: [Assign tasks from anywhere in Claude Cowork (Dispatch)](../../raw/web/web-assign-tasks-from-anywhere-in-claude-cowork-claude-help-cent.md) — Anthropic Help Center
+[^src5]: raw/_inbox/web-i-built-a-very-small-long-running-agent-ecfdf958.md — Jason Ganz, dbt Roundup
 </content>

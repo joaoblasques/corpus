@@ -206,5 +206,5 @@ Established enterprise clients also listed on the customers page [^src15]: Postm
 [^src13]: [教育 | Claude (Claude for Education solutions page)](../../raw/web/web-claude-b824c3d1.md) — claude.com/ja/solutions/education
 [^src14]: [Customer Stories | Claude by Anthropic (en)](../../raw/web/web-customer-stories-claude-by-anthropic-980b0e92.md) — claude.com/customers; snapshot 2026-06-28
 [^src15]: [Customer Stories | Claude by Anthropic (it)](../../raw/web/web-customer-stories-claude-by-anthropic-e5e45d3c.md) — claude.com/it/customers; snapshot 2026-06-28
-[^src16]: [Enterprise Agentic AI Landscape 2026: Trust, Flexibility, and Vendor Lock-in](../../raw/_inbox/web-enterprise-agentic-ai-landscape-2026-trust-flexibility-and-v-d6ce5909.md) — Kai Waehner, kai-waehner.de, 2026-04-06
+[^src16]: [Enterprise Agentic AI Landscape 2026: Trust, Flexibility, and Vendor Lock-in](../../raw/web/web-enterprise-agentic-ai-landscape-2026-trust-flexibility-and-v-d6ce5909.md) — Kai Waehner, kai-waehner.de, 2026-04-06
 [^src17]: [Trusted Agentic AI Landscape Q3 2026: Enterprise Vendor Selection, Sovereignty, and Lock-in](../../raw/_inbox/web-trusted-agentic-ai-landscape-q3-2026-enterprise-vendor-selec-ce909b19.md) — Kai Waehner, kai-waehner.de, 2026-08-04

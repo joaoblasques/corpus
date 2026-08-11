@@ -2,6 +2,27 @@
 
 > OKF v0.1 change log. Newest first, grouped by date.
 
+## 2026-08-11
+
+* **Ingest**: Batch ingest — 50-file pre-filtered inbox pass — ingest-auto run
+  - sources: 44 files ingested · 6 deferred (UNCERTAIN: nav-menu-only scrapes + 3-line teasers)
+  - domains: data-engineering, ai-engineering
+  - pages created: [/data-engineering/confluent.md, /data-engineering/kai-waehner.md, /data-engineering/solomon-hykes.md]
+  - pages updated: [/data-engineering/apache-iceberg.md, /data-engineering/duckdb.md, /data-engineering/databricks.md, /data-engineering/snowflake.md, /data-engineering/long-running-agents.md, /data-engineering/dbt.md, /data-engineering/ai-impact-on-data-engineering.md, /data-engineering/data-engineering-best-practices.md, /data-engineering/data-integration-patterns.md, /data-engineering/kafka.md]
+  - deferred: 6 files (UNCERTAIN: 4 confessionsofadataguy.com nav-menu scrapes; 2 DEC 3-line teasers)
+  - notes: Kai Waehner MWC 2026 telecom trends; delta-rs/Rust Iceberg convergence (Ethan); DuckDB+Lambda+Unity Catalog Catalog Commits; fundamentals-over-tools podcast cluster (Yordan Ivanov, Ben Rogojan, Chris Gambill); Arrow Flight gRPC transport; notebook engineering mindset shift; Source-Transform-Destination dedup framework; Tristan Handy dbt+Claude Code 2-hour experiment; AI as human bottleneck revealer
+
+* **Collectors**: gmail=4, blog_promote=0, obsidian=0, book_discover=0, blog_discover=1, book_fetch=0, pdf=0, image=0, books=0, arxiv=0, youtube=0, github_discover=5, github_promote=5, github=0, x=0, links_refetch=0
+* **Ingest**: 44 ingested · 6 deferred · status=ok
+* **YoutubeQuick**: 0 intake · 0 rescued · 0 skipped · status=ok
+* **DocsQuick**: 2 intake · 46 thin · 2 llm_fail · status=ok
+* **YoutubeReap**: 0 removed · status=ok
+* **Gardener**: 4 stubs deepened · status=ok
+* **Heal**: 15 citations repointed · 0 unfixable · 3 hubs reindexed · 32 cross-domain links · status=ok
+* **Depth**: 433 knowledge · 1385 sources · ratio 1:3.2
+* **GapResolver**: 0 gap dispatched · 0 sources queued · status=ok
+* **Lint**: 2 broken wikilinks · 0 broken citations · 0 orphans · 1272 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+* **OKF**: 0 violations
 ## 2026-08-10
 
 * **Ingest**: Batch ingest — Kai Waehner cluster, dbt Roundup cluster, AI landscape cluster (33 sources) — ingest-auto run

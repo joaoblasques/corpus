@@ -78,6 +78,9 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [Apache Iceberg](/data-engineering/apache-iceberg.md) — entity · draft · open table format: ACID, schema evolution, time travel, hidden partitioning
 - [Apache Spark](/data-engineering/apache-spark.md) — entity · draft · distributed engine on immutable RDDs + lazy DAG; DataFrames/Catalyst/Tungsten; caching, OOM tuning
 - [Databricks](/data-engineering/databricks.md) — entity · draft · lakehouse platform; Unity Catalog, Liquid Clustering, Lakeflow, Genie Code, Lakebase, video intelligence, sports analytics, enterprise case studies
+- [Confluent](/data-engineering/confluent.md) — entity · draft · commercial Kafka company; Jay Kreps 2014; $11B IBM acquisition; Confluent Platform, WarpStream, QfK
+- [Kai Waehner](/data-engineering/kai-waehner.md) — entity · draft · Field CTO at Confluent 2017–2026; Ultimate Data Streaming Guide; Shift Left 2.0; MWC 2026 telecom trends
+- [Solomon Hykes](/data-engineering/solomon-hykes.md) — entity · draft · Docker creator (PyCon 2013); EpiTech; Dagger founder (CI/CD for AI agent era)
 - [Serverless Databases](/data-engineering/serverless-databases.md) — concept · draft · serverless OLTP; compute-storage decoupling for databases; AI workload patterns; cold starts; Lakebase architecture; serverless PostgreSQL evaluation
 - [DuckDB](/data-engineering/duckdb.md) — entity · draft · embedded OLAP engine; Quack protocol, DuckLake, MotherDuck; 1TB benchmark; Zonemap index
 - [Matthew Housley](/data-engineering/matthew-housley.md) — entity · stub · Data Engineering Fundamentals co-author; CTO Ternary Data; foundations>tools
@@ -188,13 +191,14 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [Streaming Algorithms](/data-engineering/streaming-algorithms.md)
 - [Vibe Engineering](/data-engineering/vibe-engineering.md)
 
-### Entities (22)
+### Entities (25)
 - [Amazon Redshift](/data-engineering/redshift.md)
 - [Apache Iceberg](/data-engineering/apache-iceberg.md)
 - [Apache Kafka](/data-engineering/kafka.md)
 - [Apache Parquet](/data-engineering/parquet.md)
 - [Apache Spark](/data-engineering/apache-spark.md)
 - [ClickHouse](/data-engineering/clickhouse.md)
+- [Confluent](/data-engineering/confluent.md)
 - [Databricks](/data-engineering/databricks.md)
 - [Dataform](/data-engineering/dataform.md)
 - [dbt (data build tool)](/data-engineering/dbt.md)
@@ -203,6 +207,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [DuckDB](/data-engineering/duckdb.md)
 - [Google BigQuery](/data-engineering/bigquery.md)
 - [ingestr](/data-engineering/ingestr.md)
+- [Kai Waehner](/data-engineering/kai-waehner.md)
 - [Matthew Housley](/data-engineering/matthew-housley.md)
 - [mondayDB](/data-engineering/mondaydb.md)
 - [Orchestra](/data-engineering/orchestra.md)
@@ -210,6 +215,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [PostgreSQL (Postgres)](/data-engineering/postgres.md)
 - [Redis](/data-engineering/redis.md)
 - [Snowflake](/data-engineering/snowflake.md)
+- [Solomon Hykes](/data-engineering/solomon-hykes.md)
 - [Windsor.ai](/data-engineering/windsor-ai.md)
 
 ### Syntheses (13)
@@ -348,9 +354,9 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [Data + AI Summit 2026 — Data Engineering Speaker Profiles (Databricks)](/data-engineering/sources/databricks-summit-2026-speakers-de.md)
 - [Data Analyst | dbt Labs](/data-engineering/sources/data-analyst-dbt-labs-e88f1a35.md)
 - [Data Crash Course · Tinybird](/data-engineering/sources/data-crash-course-tinybird-f.md)
-- [Data Crash Course · Tinybird](/data-engineering/sources/data-crash-course-tinybird-doc.md)
 - [Data Crash Course · Tinybird](/data-engineering/sources/data-crash-course-tinybird-ee.md)
 - [Data Crash Course · Tinybird](/data-engineering/sources/data-crash-course-tinybird-fe.md)
+- [Data Crash Course · Tinybird — Chapter Two](/data-engineering/sources/data-crash-course-tinybird-doc.md)
 - [Data Crash Course · Tinybird — Chapter Zero](/data-engineering/sources/data-crash-course-tinybird-e.md)
 - [Data Engineering - Core Concepts](/data-engineering/sources/data-engineering-core-concepts-eee.md)
 - [Data Engineering - If I Started Over with Databricks](/data-engineering/sources/data-engineering-if-i-started-over-with-databricks-daabc.md)

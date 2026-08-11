@@ -84,6 +84,30 @@ sources:
   - path: raw/_inbox/web-dbt-meets-apache-flink-one-workflow-for-data-engineers-on-co-cf1939e1.md
     channel: web
     ingested_at: 2026-08-10
+  - path: raw/_inbox/web-sql-typescript-and-agents-2d655fc8.md
+    channel: web
+    ingested_at: 2026-08-11
+  - path: raw/_inbox/web-i-built-a-very-small-long-running-agent-ecfdf958.md
+    channel: web
+    ingested_at: 2026-08-11
+  - path: raw/_inbox/web-five-things-i-believe-about-the-future-of-analytics-b2e79f98.md
+    channel: web
+    ingested_at: 2026-08-11
+  - path: raw/_inbox/web-the-computers-talk-to-us-now-122e67b3.md
+    channel: web
+    ingested_at: 2026-08-11
+  - path: raw/_inbox/web-how-to-actually-move-up-the-stack-5294b47d.md
+    channel: web
+    ingested_at: 2026-08-11
+  - path: raw/_inbox/web-hunting-for-tokens-snowflake-summit-agent-use-cases-a1bf22b1.md
+    channel: web
+    ingested_at: 2026-08-11
+  - path: raw/_inbox/web-inside-snowflakes-ai-roadmap-w-chris-child-fe3830a6.md
+    channel: web
+    ingested_at: 2026-08-11
+  - path: raw/_inbox/web-it-is-time-to-take-agentic-workflows-for-data-work-seriously-b1777c0f.md
+    channel: web
+    ingested_at: 2026-08-11
 aliases:
   - dbt
   - data build tool
@@ -97,12 +121,19 @@ aliases:
   - dbt-confluent adapter
   - dbt Flink
   - confluent-sql
+  - dbt MCP server
+  - dbt Wizard
+  - dbt Assist
+  - Tinyberg
+  - dbt Roundup
+  - agentic analytics
+  - agent-initiated queries
 tags:
   - corpus/data-engineering
   - entity
 created: 2026-05-21
 updated: 2026-07-01
-last_confirmed: 2026-07-01
+last_confirmed: 2026-08-11
 ---
 
 # dbt (data build tool)
@@ -437,6 +468,28 @@ The Flink adapter is "earlier in maturity" than dbt on Snowflake or BigQuery; ex
 
 Context: the Fivetran + dbt Labs merger created a combined entity with ~$600M ARR, signaling dbt's shift from popular open-source tool to foundational enterprise data infrastructure [^src31].
 
+## SQL's TypeScript moment: dbt Fusion as the type system
+
+Tristan Handy's analogy: dbt's Fusion engine is doing for SQL what TypeScript did for JavaScript [^src32]. TypeScript's value wasn't types per se — it was the tooling types made possible (Intellisense, refactoring, IDE-level error detection). SQL has lacked this for decades: no local compiler means tools can't know what a column reference means before runtime [^src32].
+
+Fusion brings to SQL [^src32]:
+- A real SQL compiler that parses and **type-checks across warehouse dialects before anything runs**
+- A **language server** — real-time error detection, autocomplete aware of your models and columns, hover insights, inline lineage, refactoring that propagates downstream automatically
+- The Arrow type system from drivers through adapters into the compiler
+- Agentic development loops that benefit most: write → check (language server) → fix → check again, all in milliseconds, without warehouse execution
+
+**For agents specifically**: an agent generating SQL has no way to know if it's correct until it hits production data — today. With Fusion's language server, structural errors (wrong column, invalid join) surface in milliseconds. But structural soundness is necessary, not sufficient; **semantic tests** (unit tests asserting business logic, not just schema integrity) are the missing piece for fully agentic dbt development loops [^src32]. Most dbt projects have structural data tests but few unit tests; this is one of the biggest friction points for safe agents on large, complex dbt repos [^src32].
+
+## dbt Roundup: agentic analytics directions (2026)
+
+The dbt Roundup newsletter (Tristan Handy, Jason Ganz) covers the direction the dbt/analytics ecosystem is heading:
+
+- **Agents as primary consumers of analytical data**: dbt MCP server calls growing 50% MoM since launch; "within 12 months, agent-initiated queries surpassing human-initiated will be common"; within 36 months, 100x more agent-initiated than human-initiated queries may be conservative [^src33]
+- **Harness quality = 6× performance gap**: a Stanford Meta-Harness paper showed changing the harness around a fixed model can produce a 6× performance gap on the same benchmark; vertical-specific harnesses (tuned to a domain) significantly outperform generic ones [^src33]
+- **Analyst role evolution**: analysts are moving to technical tooling (Claude Code, Cursor); data consumers staying in native tools (BI, Notion); the analyst role will look more like a front-end engineer building "the UI layer on top of a massive data-driven reasoning engine" [^src33]
+- **Change management as the real barrier**: moving up the stack with agents requires a whole-company mindset shift, not just a data-team change — organizational knowledge must be captured in agent-consumable formats; "change management will be the biggest barrier to capturing the value of the agentic era" [^src34]
+- **The computers talk to us now**: the underlying shift is that LLMs have acquired "something close to general comprehension" — the audience for dbt code has expanded from "humans only" to humans + agents; systems built for one are now being rebuilt for both [^src35]
+
 ## See also
 
 - [Pipeline Layers](/data-engineering/pipeline-layers.md) — the staging → warehouse → marts architecture pattern
@@ -476,4 +529,8 @@ Context: the Fivetran + dbt Labs merger created a combined entity with ~$600M AR
 [^src28]: [dbt-labs/dbt-core — GitHub repo digest](../../raw/github/github-dbt-labs-dbt-core.md) — dbt Labs; OSS health signal (13K stars); v2 on main, v1 on 1.latest branch
 [^src29]: [dbt Summit 2026 — Speakers & Training](../../raw/web/web-tristan-handy-dbt-summit-58ecab01.md) — Tristan Handy (Co-founder+President Fivetran+dbt Labs, 100K+ teams); Quigley Malcolm (MetricFlow, OSI); dbt Architect/data quality/cost visibility training courses. See [dbt-summit-2026-speakers.md](/data-engineering/sources/dbt-summit-2026-speakers.md) for full catalog.
 [^src30]: [Fusion in Bloom — dbt Labs](../../raw/web/web-fusion-in-bloom-dbt-labs-98d5a43b.md)
-[^src31]: [dbt Meets Apache Flink: One Workflow for Data Engineers on Confluent, Snowflake, BigQuery, and Databricks](../../raw/_inbox/web-dbt-meets-apache-flink-one-workflow-for-data-engineers-on-co-cf1939e1.md) — Kai Waehner, kai-waehner.de, 2026-03-26 — SDF acquisition Jan 2025; 8,611 commits first year; ~30× parse speedup; ~40% model reuse, 30% compute savings; 450+ weekly projects; VS Code Extension 104K downloads. See [dbt Fusion Engine](/data-engineering/dbt-fusion.md) for full detail.
+[^src31]: [dbt Meets Apache Flink: One Workflow for Data Engineers on Confluent, Snowflake, BigQuery, and Databricks](../../raw/web/web-dbt-meets-apache-flink-one-workflow-for-data-engineers-on-co-cf1939e1.md)
+[^src32]: raw/_inbox/web-sql-typescript-and-agents-2d655fc8.md — Tristan Handy, dbt Roundup
+[^src33]: raw/_inbox/web-five-things-i-believe-about-the-future-of-analytics-b2e79f98.md — Tristan Handy, dbt Roundup
+[^src34]: raw/_inbox/web-how-to-actually-move-up-the-stack-5294b47d.md — Jason Ganz, dbt Roundup
+[^src35]: raw/_inbox/web-the-computers-talk-to-us-now-122e67b3.md — Jason Ganz, dbt Roundup — Kai Waehner, kai-waehner.de, 2026-03-26 — SDF acquisition Jan 2025; 8,611 commits first year; ~30× parse speedup; ~40% model reuse, 30% compute savings; 450+ weekly projects; VS Code Extension 104K downloads. See [dbt Fusion Engine](/data-engineering/dbt-fusion.md) for full detail.

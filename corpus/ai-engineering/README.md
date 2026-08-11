@@ -452,7 +452,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Tool Calling & Context Engineering: How They Interlock](/ai-engineering/tool-calling-and-context-engineering.md)
 
 <details>
-<summary>Source summaries (731)</summary>
+<summary>Source summaries (732)</summary>
 
 - ["2024 State of Analytics Engineering, crafted by dbt Labs | dbt Labs"](/ai-engineering/sources/2024-state-of-analytics-engineering-crafted-by-dbt-labs-dbt--cb342df0.md)
 - ["6 AI Agent Orchestration Best Practices in 2026 [Explained]"](/ai-engineering/sources/6-ai-agent-orchestration-best-practices-in-2026-explained-8144e2d2.md)
@@ -704,6 +704,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [5 Steps to Become an AI Engineer (Without the Hype) - Confessions of a Data Guy](/ai-engineering/sources/5-steps-to-become-an-ai-engineer-without-the-hype-confession-b7195e1a.md)
 - [5 Things in Data Engineering That Still Hold True After 10 Years](/ai-engineering/sources/5-things-in-data-engineering-that-still-hold-true-after-10-y-lXvDqREYhI4.md)
 - [5 Trends That Defined AI Engineering at World’s Fair 2026](/ai-engineering/sources/5-trends-that-defined-ai-engineering-at-world-s-fair-2026-8ec1cf2b.md)
+- [5 useful things you'll learn in my post-training textbook](/ai-engineering/sources/5-useful-things-you-ll-learn-in-my-post-training-textbook-1b72e969.md)
 - [5 Ways to Make Money From an AI the Government Fears](/ai-engineering/sources/5-ways-to-make-money-from-an-ai-the-government-fears-q_FIJmSB0Ro.md)
 - [5 Ways to Use AI for Developer Productivity in 2026](/ai-engineering/sources/5-ways-to-use-ai-for-developer-productivity-in-2026-190b1d52.md)
 - [52-Day Claude Code Challenge](/ai-engineering/sources/52-day-claude-code-challenge-732e0474.md)
@@ -942,6 +943,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Claude Code Essentials](/ai-engineering/sources/claude-code-essentials-brLhhkUqcn4.md)
 - [Claude Code has a new UI (pair it with Claude OS)](/ai-engineering/sources/claude-code-has-a-new-ui-pair-it-with-claude-os-J6tPNRc9m2Q.md)
 - [Claude Code Just Changed YouTube Videos Forever (Tutorial)](/ai-engineering/sources/claude-code-just-changed-youtube-videos-forever-tutorial-idVMGLzrrnU.md)
+- [Claude Code Power-User Tips (Anthropic Help Centre)](/ai-engineering/sources/claude-code-power-user-tips-claude-help-center-cee.md)
 - [Claude Code Review — Automated PR Analysis with Multi-Agent Codebase Context](/ai-engineering/sources/claude-code-review-automated-pr-analysis-with-multi-agent-co-ae.md)
 - [Claude Code website build — the CONTEXT/COPY/DESIGN workflow (Charlie Hills)](/ai-engineering/sources/claude-code-website-build-workflow.md)
 - [Claude Code — Full Tutorial for Beginners 2026](/ai-engineering/sources/claude-code-full-tutorial-for-beginners-2026-bee.md)
@@ -955,7 +957,6 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Claude Replay — AI Coding Session to Interactive HTML Replay](/ai-engineering/sources/claude-replay-ai-coding-session-to-interactive-html-replay-doc.md)
 - [Claude's 13 Free AI Courses in 12 Minutes](/ai-engineering/sources/claude-s-13-free-ai-courses-in-12-minutes-pG5Zd3sGOrY.md)
 - [Claude's extended thinking](/ai-engineering/sources/claude-s-extended-thinking-90ce207a.md)
-- [claude-code-power-user-tips-claude-help-center](/ai-engineering/sources/claude-code-power-user-tips-claude-help-center-cee.md)
 - [Claude’s New Trading Agent Is Insane! (Tutorial)](/ai-engineering/sources/claude-s-new-trading-agent-is-insane-tutorial-x2pY9kI0zBY.md)
 - [Cloud Engineering - Roadmap From Beginner to Advanced](/ai-engineering/sources/cloud-engineering-roadmap-from-beginner-to-advanced-adaced.md)
 - [Cloud sandbox routines — network isolation, MCP capability gaps, and injection false alarms](/ai-engineering/sources/cloud-sandbox-routines-network-isolation-mcp-capability-gaps-a.md)

@@ -30,6 +30,12 @@ sources:
   - path: raw/web/6-data-engineering-skills-to-progress-in-the-age-of-ai-start.md
     channel: web
     ingested_at: 2026-06-26
+  - path: raw/_inbox/web-how-to-actually-break-free-from-notebook-engineering-confess-c915de85.md
+    channel: web
+    ingested_at: 2026-08-11
+  - path: raw/_inbox/web-spark-postgres-duplicates-dang-it-d9474a1f.md
+    channel: web
+    ingested_at: 2026-08-11
 aliases:
   - data engineering best practices
   - pipeline best practices
@@ -39,8 +45,8 @@ tags:
   - corpus/data-engineering
   - concept
 created: 2026-06-15
-updated: 2026-06-26
-last_confirmed: 2026-06-26
+updated: 2026-08-11
+last_confirmed: 2026-08-11
 ---
 
 # Data Engineering Best Practices
@@ -146,6 +152,34 @@ What survived [^src7]:
 
 StartDataEngineering's "6 skills in the age of AI" independently reaches the same core: design patterns exist to keep pipelines maintainable, so the durable skill is knowing *when to apply a best practice and when to break it* [^src8]. Its six concepts map onto this page — the **3-stage progressive transform** (source → type conversions → Kimball model → summary tables) restates practice #1's layered architecture; **validating data before exposing it** + an orchestrator (Airflow) restates practice #2; and it points to four companion best-practice resources (Data Flow patterns, Code patterns, Implementation best practices, Metadata & Logging best practices) covering practices #1, #4, and #5 [^src8]. The role-level "fundamentals endure as codegen commoditises" framing is in [AI's Impact on Data Engineering](/data-engineering/ai-impact-on-data-engineering.md) [^src8].
 
+## Breaking free from notebook engineering
+
+A recurring anti-pattern: data engineers use notebooks (Jupyter, Databricks) not just for exploration but as the primary interface for development, orchestration, and even production deployment [^src9]. The result: less modular code (cells not functions), no testing, messy version control, non-reproducible pipelines.
+
+The mindset shift is not about abandoning notebooks but about **changing the sequence** [^src9]:
+- Think before typing — understand inputs/outputs, failure modes, testing, and deployment before opening a notebook
+- Use notebooks for exploration and prototyping, not as the final destination
+- Move to structured repositories with modular design, proper testing frameworks, clean version control, and reproducible/deterministic execution
+
+The key irony (2026): AI coding tools (Claude, Cursor) now generate well-structured modules, test suites, and deployment configurations as fast as quick scripts — the friction that once justified notebook-centric shortcuts is gone [^src9]. Engineers who use AI to improve system quality advance; those who use AI to accelerate the same notebook habits accumulate technical debt faster [^src9].
+
+> "Breaking free from notebook engineering is not a tooling decision. It is a mindset shift. It is the decision to treat software as a craft, to take system design seriously, and to use the tools available to you not as shortcuts around good practices, but as accelerators for them." [^src9]
+
+## Debugging duplicate records: the source-transform-destination framework
+
+A practitioner walkthrough of a classic DE problem: intermittent duplicate records in a Databricks Spark + Delta Lake → Postgres pipeline [^src10].
+
+**Framework for scoping duplicate data issues** — separate any data system into three boxes:
+1. **Source** — is the raw data already duplicated?
+2. **Transformation** — is the logic introducing duplicates?
+3. **Destination** — is the write layer writing rows multiple times?
+
+The intermittent nature of duplicates is a useful signal: consistent duplicates often indicate a logic error; intermittent duplicates often indicate a concurrency/write issue [^src10].
+
+**First principle before debugging**: define what makes a record unique in this dataset ("What is the grain?"). Never assume — it's rarely the same for any two datasets [^src10]. Duplicates "by design" (valid business requirement) vs. duplicates by bug are different problems [^src10].
+
+**Delta Lake as the deduplication layer**: Delta Lake with ACID guarantees (MERGE INTO) is the right place to enforce uniqueness before data reaches the destination; a Postgres `ON CONFLICT DO NOTHING` or `DO UPDATE` clause is a secondary guard [^src10].
+
 ## Related
 
 - [Idempotent Pipelines](/data-engineering/idempotent-pipelines.md) · [Data Quality](/data-engineering/data-quality.md)
@@ -164,3 +198,5 @@ StartDataEngineering's "6 skills in the age of AI" independently reaches the sam
 [^src6]: [9 Software Engineering Skills a DE Should Have (Alejandro Aboy)](../../raw/email/email-2026-06-16-9-software-engineering-skills-a-de-should-have-and-how-to-le.md)
 [^src7]: [In 2026, The Data Fundamentals Matter More Than Ever (Pipeline to Insights)](../../raw/email/email-2026-06-13-in-2026-the-data-fundamentals-matter-more-than-ever.md)
 [^src8]: [6 Data Engineering Skills To Progress in the Age of AI (Joseph Machado, StartDataEngineering)](../../raw/web/6-data-engineering-skills-to-progress-in-the-age-of-ai-start.md)
+[^src9]: raw/_inbox/web-how-to-actually-break-free-from-notebook-engineering-confess-c915de85.md — confessionsofadataguy.com
+[^src10]: raw/_inbox/web-spark-postgres-duplicates-dang-it-d9474a1f.md — DataEngineeringCentral, "Spark. Postgres. Duplicates. Dang it."
