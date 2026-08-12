@@ -24,6 +24,9 @@ sources:
   - path: raw/youtube/youtube-qgAo-5uuO1E-claude-usage-limits-how-to-never-hit-them-again-2026.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/web/web-escaping-the-agentic-token-tax-replacing-claude-code-or-copi-c0fa1370.md
+    channel: web
+    ingested_at: 2026-08-12
 aliases:
   - agentic AI costs
   - agent cost management
@@ -176,6 +179,18 @@ Claude usage is governed by two quotas: a **5-hour rolling window** and a **week
 
 **Framing** [^src7]: "The era of flat-fee unlimited AI is ending" — as models become more capable, the compute per inference grows; flat-fee caps will tighten. Cost-efficiency becomes a first-class engineering concern rather than an afterthought.
 
+## The token tax transition (2026)
+
+Both GitHub Copilot and Anthropic shifted from flat-rate to usage-based (per-token) billing around 2026. Users are facing significant bill increases due to the high token cost of long autonomous coding tasks (agentic sessions consume far more tokens than single-query chatbot use).[^src8]
+
+**Open-source local alternative**: OpenCode + Ollama + Qwen 2.5 Coder 7B-instruct is a viable local substitute. Recommended hybrid: local model for boilerplate/grunt work, cloud model for complex reasoning. See [/ai-engineering/sources/token-tax-opencode-c0fa1370.md](/ai-engineering/sources/token-tax-opencode-c0fa1370.md) for setup details.
+
+Near-term mitigations before switching tools:[^src8]
+- Trim CLAUDE.md / context files
+- Use context-compression tools (e.g. Caveman)
+- Improve prompting discipline
+- Reduce context window usage
+
 [^src1]: [Managing Agentic AI Costs at Scale](../../raw/web/managing-agentic-ai-costs-at-scale.md)
 [^src2]: [How to stop hitting Claude usage limits — 23 habits](../../raw/web/web-how-to-stop-hitting-claude-usage-limits.md) — Ruben Hassid
 [^src3]: [mnfst/manifest — GitHub ★7094](../../raw/github/github-mnfst-manifest.md)
@@ -183,3 +198,4 @@ Claude usage is governed by two quotas: a **5-hour rolling window** and a **week
 [^src5]: [I Stopped Hitting Claude Code Usage Limits — Here's How](../../raw/youtube/youtube-9ToOfgZ4qqQ-i-stopped-hitting-claude-code-usage-limits-here-s-how.md) — Brad, YouTube
 [^src6]: [How to Run Claude Code for Free (Local LLMs)](../../raw/email/email-2026-06-21-how-to-run-claude-code-for-free.md) — email newsletter
 [^src7]: [Claude usage limits explained](../../raw/youtube/youtube-qgAo-5uuO1E-claude-usage-limits-how-to-never-hit-them-again-2026.md) — YouTube
+[^src8]: [Escaping the Agentic Token Tax: Replacing Claude Code or Copilot with OpenCode](../../raw/web/web-escaping-the-agentic-token-tax-replacing-claude-code-or-copi-c0fa1370.md)

@@ -2,69 +2,141 @@
 type: entity
 domain: ai-engineering
 status: draft
+aliases:
+  - Chip Huyen
+  - Huyền Chip
+  - huyenchip
+tags:
+  - corpus/ai-engineering
+  - author
+  - ml-engineering
+  - ai-systems
 sources:
   - path: raw/web/web-navigating-ai-s-new-frontier-with-chip-huyen-40e9c185.md
     channel: web
-    ingested_at: 2026-07-01
-aliases:
-  - Chip Huyen
-  - AI Engineering book
-  - Designing Machine Learning Systems
-tags:
-  - corpus/ai-engineering
-  - entity
-created: 2026-07-01
-updated: 2026-07-14
+    title: "Navigating AI's New Frontier with Chip Huyen"
+  - path: raw/web/web-measuring-personal-growth-7ca4a3a8.md
+    channel: web
+    title: Measuring personal growth
+  - path: raw/web/web-what-i-learned-from-looking-at-900-most-popular-open-source-e8358df7.md
+    channel: web
+    title: What I Learned from Looking at 900 Most Popular Open Source AI Tools
+  - path: raw/web/web-predictive-human-preference-from-model-ranking-to-model-rout-7fb3cf42.md
+    channel: web
+    title: "Predictive Human Preference: From Model Ranking to Model Routing"
+  - path: raw/web/web-generation-configurations-temperature-top-k-top-p-and-test-t-1ccdc7f1.md
+    channel: web
+    title: "Generation configurations: temperature, top-k, top-p, and test time compute"
+  - path: raw/web/web-multimodality-and-large-multimodal-models-lmms-427578c7.md
+    channel: web
+    title: Multimodality and Large Multimodal Models (LMMs)
+  - path: raw/web/web-open-challenges-in-llm-research-d184c921.md
+    channel: web
+    title: Open Challenges in LLM Research
+confidence: 0.95
+last_confirmed: 2026-08-12
+created: 2026-08-12
+updated: 2026-08-12
 ---
 
 # Chip Huyen
 
-**TL;DR.** AI researcher, former NVIDIA and Snorkel AI engineer, author of *AI Engineering* (2025) and *Designing Machine Learning Systems* (O'Reilly). One of the most widely-cited practitioners on building production AI systems. Her core thesis: AI progress is an engineering discipline of compute and data at scale, not a parade of breakthroughs.
+**TL;DR**: Vietnamese-American ML engineer and author (Stanford, NVIDIA, Snorkel AI). Author of *Designing Machine Learning Systems* (2022, O'Reilly) and *AI Engineering* (2025, O'Reilly). Blog at huyenchip.com covers sampling/generation mechanics, multimodality, open challenges in LLM research, model evaluation, and personal growth philosophy. Known for bridging production ML engineering with first-principles writing accessible to working engineers.
 
 ## Background
 
-Huyen's intellectual trajectory was shaped by a single line from the 2012 AlexNet paper, which she has cited as life-changing: > "Our experiments show that we can achieve better results by just waiting for more compute and more data." [^src1] That sentence reframed AI not as a field of breakthroughs but as one of compounding scale [^src1].
+- Author of *Designing Machine Learning Systems* (2022, O'Reilly) and *AI Engineering* (2025, O'Reilly).[^frontier]
+- Blog at huyenchip.com; Discord community for ML practitioners.
+- Vietnamese-American; obtained green card while working in the US tech industry (mentioned in personal writing).[^growth]
 
-Following that insight, she joined NVIDIA to understand compute infrastructure and later Snorkel AI to understand data workflows — deliberately choosing employers that represented each half of the scale equation [^src1].
+## Key theses
 
-Her relationship with AI predates the GenAI hype cycle. Before ChatGPT, she was designing games and algorithms to test how reasoning could be codified, not to outsmart people but to understand intelligence systematically [^src1].
+### Compute-scale thesis
 
-## *AI Engineering* (book, 2025)
+GenAI products that rely only on scaling compute without differentiating on data, application layer, or UX tend to fail because the underlying capability is commoditized. Successful products compete on what the model is applied to, not on the model itself.[^frontier]
 
-Described as "the most comprehensive, well-structured guide to the essential aspects of building generative AI systems," the book covers the full GenAI product stack: evaluation, RAG, agents, fine-tuning, and deployment [^src1]. It was adopted as curriculum in the DataExpert.io AI Engineering Boot Camp alongside a tech talk series featuring industry leaders [^src1].
+### Three-layer AI stack (2023 analysis of 896 open source repos)
 
-Her earlier book, *Designing Machine Learning Systems* (O'Reilly), is implied by the aliases but not detailed in the source [unsourced — please verify].
+Analysis of the 845 most-starred open source AI repos found them clustering into a three-layer stack:[^900]
 
-## Key positions
+| Layer | Categories | Observation |
+|---|---|---|
+| AI engineering (application) | Prompt engineering, AI interface, agent tooling, AIE frameworks | Biggest growth in 2023 |
+| Model development | Inference optimization, evaluation, fine-tuning (PEFT/QLoRA) | Dominant pre-ChatGPT; now secondary |
+| Infrastructure | Serving, monitoring, vector databases, data management | Least likely to be built by individuals; mostly corp-hosted |
 
-### Scale as engineering discipline
+Notable finding: "The lower we go in the stack, the harder it is for individuals to build." Applications started by individuals get more stars on average than org-built ones — pointing toward possible "one-person billion-dollar companies."[^900]
 
-The GPT-2 best-paper award in 2020 was the inflection point when academia stopped calling scaling "brute force" and acknowledged it as real research [^src1]. Huyen's framing: AI progress is more predictable than it appears because it is fundamentally an engineering problem of sufficient compute and data — not a waiting game for novel algorithmic ideas [^src1].
+AI tool hype pattern: ~19% of 845 repos had stalled (0 new stars in 24h as of analysis date). The "hype curve" is real.[^900]
 
-Ilya Sutskever, co-author of AlexNet and later co-founder of OpenAI, is identified as a connecting figure between the 2012 scaling insight and the LLM era [^src1].
+China's AI open-source ecosystem as significant as US: 6 of top 20 GitHub accounts are Chinese (THUDM, OpenGVLab, OpenBMB, InternLM, OpenMMLab, QwenLM).[^900]
 
-### GenAI products fail on UX, not models
+### Model ranking and predictive human preference
 
-Most GenAI products fail not because the underlying model is weak but because product teams underestimate the experience layer [^src1]. The source frames this as one of the core takeaways from her DataExpert.io talk, though the full argument is elaborated in sections of the article not included in the excerpt [unsourced — please verify full detail].
+Bradley-Terry algorithm (not Elo despite the label) is what LMSYS Chatbot Arena actually uses since December 2023.[^routing] Given match history, BT finds model scores that maximize likelihood of observed outcomes (maximum likelihood estimation). Scales scores to look Elo-like.
 
-### Staying informed without burning out
+**Predictive human preference** extends this: instead of ranking models overall, predict which model wins *per query* with inputs `(prompt, model_a, model_b)`. Enables model routing — if GPT-3.5 is predicted to perform as well as GPT-4 on a specific query, route to the cheaper model.[^routing]
 
-The source headline lists "How to stay informed without burning out" as one of seven takeaways from the conversation, but the excerpt does not detail this position [unsourced — please verify].
+Experiment results (July 2023 Chatbot Arena dataset, 33K comparisons, 20 models):[^routing]
+- BT accuracy on non-tie matches: 74.1% (always pick higher-ranked model)
+- Preference predictor with prompt+model inputs: 76.2%
+- GPT-4 won 85.1% of non-tie matches involving it (still occasionally beaten)
 
-## See also
+### Sampling and generation mechanics
 
-- [AI Fundamentals](/ai-engineering/ai-fundamentals.md) — foundational ML concepts
-- [Learning AI Engineering](/ai-engineering/learning-ai-engineering.md) — AI Engineering as a skill path
-- [AI Engineering hub](/ai-engineering/README.md)
+Temperature works by dividing logits by T before softmax:[^sampling]
+- T < 1 → sharpens distribution → more deterministic
+- T > 1 → flattens distribution → more diverse/creative
+- T = 0 → argmax (greedy sampling)
+
+Top-k: compute softmax over only the k highest logits (saves compute; k=50–500 typical). Top-p (nucleus sampling): sum probabilities of most likely tokens until cumulative sum ≥ p; dynamic vocabulary size per context.[^sampling]
+
+Test-time compute: sampling multiple outputs and picking the highest average logprob (or scoring with a reward model) improves performance — but gains plateau and can reverse (more samples → more chance of adversarial outputs fooling the verifier). OpenAI's verifier experiments: gains stopped around 400 samples.[^sampling]
+
+### Multimodality
+
+CLIP (OpenAI, 2021): contrastive pretraining on (text, image) pairs. Both modalities embedded to same space; trained so matching pairs have similar embeddings. Foundation for most subsequent multimodal work.[^lmm]
+
+Flamingo (DeepMind, 2022): first large-scale LMM. Visual inputs interleaved with text via cross-attention layers inserted into frozen LM backbone. Demonstrated few-shot visual question answering.[^lmm]
+
+Key data observation: "text-based models require so much text that there's a realistic concern that we'll soon run out of Internet data to train text-based models."[^challenges] Multimodality is a path beyond text-data limits.
+
+Multimodal data taxonomy: text, image, audio, tabular, video (= sequence of images + audio; most models treat it as images-only, losing audio signal), graphs, 3D assets.[^lmm]
+
+### Open LLM research challenges (as of 2023)
+
+Ten directions identified:[^challenges]
+1. **Hallucination** — factuality failures; models generate false content confidently
+2. **Context length** — quadratic attention complexity; research on efficient attention (S4/Monarch Mixer)
+3. **Multimodality** — "so powerful and yet so underrated"; multimodal models should outperform text-only
+4. **Faster and cheaper** — quantization (now 2-bit, vs 16-bit in 2020), distillation, pruning, LoRA
+5. **New architectures** — Transformer sticky since 2017; S4 from Chris Ré's lab as an attempt; subquadratic complexity is the target
+6. **GPU alternatives** — photonic chips (Lightmatter, Ayar Labs, Lightelligence), quantum computing (IBM/Google QPUs)
+7. **Make agents usable** — reliability gap; Auto-GPT as early demonstration; Stanford generative-agents social behavior experiment
+8. **Learning in context** — (not elaborated in excerpt)
+9. **Reasoning** — (not elaborated in excerpt)
+10. **Interpretability** — (not elaborated in excerpt)
+
+### Personal growth philosophy
+
+Three heuristics:[^growth]
+1. **Rate of change (3-6 year cycles)**: "Every 3-6 years, you become a different person." Life has a circadian rhythm — schools are structured this way, careers shift this way.
+2. **Time to solve big problems**: "Three big problems in life: career, family, finance. It usually takes people a decade to figure each out." Goal: solve them faster to unlock time for more interesting problems.
+3. **Empowerment maximization**: from reinforcement learning — "in the face of uncertainty, choose the action that maximizes future options." Applied to career: prefer jobs with more transferable skills and visibility over higher-paying niche roles.[^growth]
+
+"Becoming a new person isn't always a good thing, and probably not the goal for everyone. But for me, it is."[^growth]
+
+## Cross-links
+
+- [/ai-engineering/agent-cost-management.md](/ai-engineering/agent-cost-management.md) — model routing as cost optimization (predictive human preference)
+- [/productivity/learning-to-learn.md](/productivity/learning-to-learn.md) — personal growth frameworks; overlaps with empowerment maximization
 
 ---
 
-[^src1]: [Navigating AI's New Frontier with Chip Huyen (DataExpert.io Tech Talk)](../../raw/web/web-navigating-ai-s-new-frontier-with-chip-huyen-40e9c185.md)
-
-<!-- RELATED:START (generated by bin/corpus_heal.py related — do not edit inside) -->
-
-## Related across domains
-
-- [Designing Machine Learning Systems](/mlops/designing-ml-systems.md) · _mlops_
-
-<!-- RELATED:END -->
+[^frontier]: raw/web/web-navigating-ai-s-new-frontier-with-chip-huyen-40e9c185.md
+[^growth]: raw/web/web-measuring-personal-growth-7ca4a3a8.md
+[^900]: raw/web/web-what-i-learned-from-looking-at-900-most-popular-open-source-e8358df7.md
+[^routing]: raw/web/web-predictive-human-preference-from-model-ranking-to-model-rout-7fb3cf42.md
+[^sampling]: raw/web/web-generation-configurations-temperature-top-k-top-p-and-test-t-1ccdc7f1.md
+[^lmm]: raw/web/web-multimodality-and-large-multimodal-models-lmms-427578c7.md
+[^challenges]: raw/web/web-open-challenges-in-llm-research-d184c921.md

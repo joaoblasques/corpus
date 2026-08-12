@@ -3,13 +3,14 @@ okf_version: "0.1"
 ---
 # Corpus Index
 
-> Last updated: 2026-08-11 | Total pages: 524 | Total sources: 2380
+> Last updated: 2026-08-12 | Total pages: 534 | Total sources: 2398
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
 ## Domains
 
 ### ai-engineering
+- [Agents for Hire](/ai-engineering/sources/agents-for-hire-270347b2.md) — source · stub · The article discusses the emergence of 'agents for hire' in companies, which are AI-powered tools th…
 - [5 useful things you'll learn in my post-training textbook](/ai-engineering/sources/5-useful-things-you-ll-learn-in-my-post-training-textbook-1b72e969.md) — source · stub · The document discusses a new post-training textbook on Reinforcement Learning from Human Feedback, c…
 - ["[AINews] Jeff, Sanjay, Oriol, and Quoc depart DeepMind; Demis to Chair; Koray to SVP — what is going on at GDM???"](/ai-engineering/sources/ainews-jeff-sanjay-oriol-and-quoc-depart-deepmind-demis-to-c-3189f1ce.md) — source · stub · ['Jeff Dean, Sanjay Ghemawat, Oriol Vinyals, and Quoc Le leave DeepMind to cofound Discovery Loop, a…
 - ["[AINews] AMD buys Taalas"](/ai-engineering/sources/ainews-amd-buys-taalas-2fea1307.md) — source · stub · The document discusses recent advancements in AI engineering, including OpenAI's ChatGPT update, Met…
@@ -845,7 +846,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [Optimizing a Claude Setup](/ai-engineering/optimizing-claude.md) — synthesis · draft · context economy as organizing principle; skills, sub-agents, concise specs; filed back from a query
 - [The New Software Lifecycle](/ai-engineering/sources/the-new-software-lifecycle.md) — source · draft · Osmani/Google SDLC paper; 10%/90% model/harness; 6 context types; static vs dynamic; verification spectrum
 - [The Mythos Threshold (Joe Reis)](/ai-engineering/sources/the-mythos-threshold.md) — source · draft · speculative fiction: Claude Mythos, Project Glasswing, air-gap breach, builder class, AGI threshold, competence=danger thesis
-- [Chip Huyen](/ai-engineering/chip-huyen.md) — entity · stub · author AI Engineering book; AlexNet compute-scale insight; GenAI hype cycle; UX > backend thesis
+- [Chip Huyen](/ai-engineering/chip-huyen.md) — entity · draft · author AI Engineering (2025) + Designing ML Systems (2022); 900-repo OSS 3-layer stack analysis; Bradley-Terry (not Elo) for model ranking; temperature/top-k/top-p mechanics; CLIP/Flamingo multimodality; empowerment-maximization heuristic
 - [How AI agents & Claude skills work](/ai-engineering/sources/how-ai-agents-and-skills-work.md) — source · draft · Isenberg × Ras Mic; skills, progressive disclosure, less-is-more context
 - [Agent Harness](/ai-engineering/agent-harness.md) — concept · draft · the scaffolding around the model; "harness > model"; the ratchet, HaaS
 - [Ralph Loop](/ai-engineering/ralph-loop.md) — concept · draft · Huntley's Bash-loop coding technique; one task per loop, state on disk, generate-then-backpressure
@@ -939,6 +940,11 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [Classification Methods](/ai-engineering/classification-methods.md) — concept · draft · Logistic regression, LDA, QDA, KNN; ROC/AUC
 - [Mathematics for Machine Learning (Deisenroth, Faisal, Ong)](/ai-engineering/sources/mathematics-for-machine-learning.md) — source · draft · 12-chapter textbook; Part I math foundations + Part II ML applications
 - [Introduction to Statistical Learning (James et al.)](/ai-engineering/sources/introduction-to-statistical-learning.md) — source · draft · Statistical learning methods; regression, classification, trees, SVMs, deep learning
+- [Generation Configurations](/ai-engineering/generation-configs.md) — concept · draft · temperature (logit÷T→softmax); top-k (compute savings); top-p/nucleus sampling (dynamic vocab); test-time compute (N outputs→best logprob, plateau ~400 samples); structured output tiers
+- [Multimodal Models (LMMs)](/ai-engineering/multimodal-models.md) — concept · draft · CLIP (contrastive pretraining, 400M pairs); Flamingo (frozen LM + cross-attention); BLIP-2 (Q-Former); LLaVA (visual instruction tuning); text-data scarcity driver
+- [AI Sovereignty](/ai-engineering/ai-sovereignty.md) — concept · draft · 4 dimensions: data/technology/operational/assurance sovereignty; open source as enabler; Red Hat Field CTO Matthew Miller at AI-Ready Data Summit
+- [AI Brain Fry (source)](/ai-engineering/sources/ai-brain-fry-987d6d62.md) — source · draft · HBR term for cognitive exhaustion from AI agent oversight; 9 engineering impacts; burnout mitigations
+- [Agentic Token Tax and OpenCode (source)](/ai-engineering/sources/token-tax-opencode-c0fa1370.md) — source · draft · flat-rate → usage-based billing shift; OpenCode + Ollama + Qwen 2.5 Coder 7B as local alternative; CodeGemma lacks tool calling
 
 ### data-engineering
 - [Shift Left Architecture](/data-engineering/shift-left-architecture.md) — concept · Three consumer interfaces (Operational/Kafka, Analytical/Iceberg, AI/MCP); Rivian Mega Filter case study; dbt-Flink integration
@@ -1263,6 +1269,9 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [Vibe Engineering](/data-engineering/vibe-engineering.md) — concept · draft · building without theoretical framework (Joe Reis); Spolsky's Law of Leaky Abstractions; 2026 DE context
 - [dbt Summit 2026 — Speakers & Training](/data-engineering/sources/dbt-summit-2026-speakers.md) — source · draft · Tristan Handy (Fivetran+dbt Labs, 100K+ teams), Quigley Malcolm (MetricFlow/OSI), 6 training courses
 - [Databricks Data + AI Summit 2026 — AI Engineering Speakers](/ai-engineering/sources/databricks-summit-2026-speakers-ai.md) — source · stub · bios for Timothy Chen (Essence VC), Callum Adamson (Applied Computing), Denny Lee (Databricks DevRel), Rohan Varma (OpenAI PM), Jai Behl (Anthropic Applied AI)
+- [lakeFS](/data-engineering/lakefs.md) — entity · draft · git-like branching for object storage; zero-copy branches; repository-level branching spanning structured+unstructured data; agentic workload pattern (isolation/reproducibility/governance); GxP/ALCOA mapping; beat DVC+Pachyderm at Lockheed Martin
+- [Polars](/data-engineering/polars.md) — entity · draft · Rust DataFrame library; eager/lazy/streaming execution; pl.Config.set_engine_affinity("streaming") + scan_csv/sink_csv; 27s→6s on 12GB Backblaze; single-node rebellion
+- [Databricks Metric Views (source)](/data-engineering/sources/databricks-metric-views-86659572.md) — source · draft · YAML-over-SQL syntax for Unity Catalog Metric Views; CREATE OR REPLACE VIEW … WITH METRICS LANGUAGE YAML AS $…$; semantic metadata for LLMs
 
 ### software-engineering
 - [terminal-craft-retrospective](/software-engineering/sources/terminal-craft-retrospective-eece.md) — source · stub · A retrospective on Terminal-Craft, a hands-on curriculum for building real tmux and nvim fluency for…
@@ -1414,6 +1423,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [Kan](/software-engineering/kan.md) — entity · stub · open-source Trello alternative (Next.js + tRPC + Drizzle)
 - [Usertour](/software-engineering/usertour.md) — entity · stub · open-source user-onboarding platform (product tours, checklists, NPS)
 - [Source: The Software Engineer's Guidebook](/software-engineering/sources/software-engineers-guidebook.md) — source · draft · Gergely Orosz 359-page career reference (full SWE arc)
+- [Declarative Programming](/software-engineering/declarative-programming.md) — concept · draft · declarative vs imperative; functional programming (unit=function not object); point-free/tacit style; TypeScript BakeCake example; connection to Polars/Spark lazy evaluation
 
 ### mlops
 - [AI Agent Deployment | AY Automate](/mlops/sources/ai-agent-deployment-ay-automate-2e023728.md) — source · stub · This document outlines a process for deploying AI agents in production, focusing on permission scopi…
@@ -1607,6 +1617,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [Confessions of an IT Manager (Phil Factor, 2009)](/productivity/sources/confessions-of-an-it-manager.md) — source · draft · humorous IT management essay collection (306pp, Simple Talk Publishing); workplace intelligence, project failure patterns, vendor adversarialism, boring-tech-ships; all 11 parts ingested
 
 ### ai-business
+- [A Winner in Every Category](/ai-business/sources/a-winner-in-every-category-3e612774.md) — source · stub · The article discusses the impact of AI on SaaS multiples, highlighting companies that have carved ou…
 - ["2026.32: Earnings and Learnings"](/ai-business/sources/2026-32-earnings-and-learnings-ba471028.md) — source · stub · This document discusses the earnings and learnings from Meta, Microsoft, Amazon, and Google, focusin…
 - [AI Agency or In-House AI Hire? How to Pick Your Path in 2025](/ai-business/sources/ai-agency-or-in-house-ai-hire-how-to-pick-your-path-in-2025-80a6e586.md) — source · stub · Choosing between starting an AI agency and becoming an in-house AI specialist, the article discusses…
 - [AI Worming through Word](/ai-business/sources/ai-worming-through-word-f34faab8.md) — source · stub · A new variant of prompt injection attacks against Microsoft Word has been discovered, allowing self-…

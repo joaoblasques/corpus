@@ -60,6 +60,12 @@ sources:
   - path: raw/_inbox/web-databricks-zerobus-streaming-ingestion-for-delta-lake-house-27d12529.md
     channel: web
     ingested_at: 2026-08-11
+  - path: raw/web/web-unity-catalog-and-the-quiet-return-of-vendor-lock-in-fabfd99a.md
+    channel: web
+    ingested_at: 2026-08-12
+  - path: raw/web/web-databricks-metric-views-and-the-reality-of-the-semantic-laye-86659572.md
+    channel: web
+    ingested_at: 2026-08-12
 aliases:
   - Databricks
   - Unity Catalog
@@ -317,6 +323,22 @@ A practitioner review of the 2026 Databricks Data + AI Summit [^src18]:
 
 **LTAP (Lake Transactional/Analytical Processing)**: Databricks' attempt to unify operational and analytical workloads on a single copy of data. Instead of HTAP (one engine for everything, creating resource contention), LTAP keeps specialized engines (Lakebase for PostgreSQL OLTP, Lakehouse for analytics, Lakehouse//RT for real-time serving) on a unified Delta/Iceberg storage layer [^src18]. The provocation: 80% of databases on Lakebase are already being created by agents rather than people — infrastructure built around many data copies "simply doesn't scale when your primary users become software instead of humans" [^src18].
 
+## Unity Catalog lock-in critique
+
+A critical perspective from the lakeFS team (2026, after the Data + AI Summit):[^src19]
+
+- Unity Catalog (UC) has become "an artificial moat, allowing Databricks to determine what you are allowed to do with your own data" — counter to the open-ecosystem brand Databricks built with Spark/Delta/MLflow.
+- **Foreign tables are read-only**: no DML, no DDL, no symmetric interoperability. "Databricks' answer is always the same: 'Just convert it to a Unity Catalog–managed table.' That's not federation — that's absorption."
+- **Iceberg writes require UC management**: Iceberg tables managed in an external catalog get read-only support and degraded UX. "An open table format without open, interchangeable catalogs is only open in name."
+- **Snowflake comparison**: Snowflake (historically more proprietary) supports external Iceberg tables for both reads and writes, multiple catalogs, and doesn't require metadata capture into Snowflake-owned control planes. "Snowflake locks you in through performance and execution, not by withholding functionality."
+- **FUD pattern reported**: Customers say Databricks account managers imply future features will only work with UC and encourage migration of existing catalog data to UC.
+
+> Source caveat: this is a competitor (lakeFS) critique of Databricks, published on the lakefs.io blog. Treat the directional argument as a stakeholder perspective; verify specific interoperability claims against Databricks documentation.
+
+## Metric Views
+
+Databricks Metric Views are first-class Unity Catalog objects (2026+) that define business metrics and dimensions in a YAML-over-SQL structure: `CREATE OR REPLACE VIEW ... WITH METRICS LANGUAGE YAML AS $$ ... $$`.[^src20] They inherit Unity Catalog permissions, lineage tracking, and governance. Semantic metadata (display names, synonyms) makes them queryable by both SQL and LLM-driven interfaces. See [Semantic Layer](/data-engineering/semantic-layer.md) for full treatment.
+
 ## Related
 
 - [Cloud Data Warehouse Internals](/data-engineering/cloud-data-warehouse-internals.md) — Photon vs Dremel/Snowflake/Redshift compared
@@ -348,3 +370,5 @@ A practitioner review of the 2026 Databricks Data + AI Summit [^src18]:
 [^src16]: ../../raw/web/web-databricks-zerobus-event-streams-lake-house-be-gone-kafka-da3d747e.md — dataengineeringcentral.substack.com
 [^src17]: ../../raw/web/web-databricks-zerobus-streaming-ingestion-for-delta-lake-house-27d12529.md — confessionsofadataguy.com
 [^src18]: ../../raw/web/web-review-of-databricks-data-ai-summit-2026-ebe4579d.md — dataengineeringcentral.substack.com
+[^src19]: [Unity Catalog and the Quiet Return of Vendor Lock-In](../../raw/web/web-unity-catalog-and-the-quiet-return-of-vendor-lock-in-fabfd99a.md) — lakefs.io blog
+[^src20]: [Databricks Metric Views and the Reality of the Semantic Layer](../../raw/web/web-databricks-metric-views-and-the-reality-of-the-semantic-laye-86659572.md)

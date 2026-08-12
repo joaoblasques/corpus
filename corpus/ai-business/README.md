@@ -75,7 +75,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [AI and the Job Market](/ai-business/ai-and-the-job-market.md)
 
 <details>
-<summary>Source summaries (199)</summary>
+<summary>Source summaries (200)</summary>
 
 - ["$1,300/Day Automated Bittensor Investing With Claude Code (34 Min Free Masterclass)"](/ai-business/sources/1-300-day-automated-bittensor-investing-with-claude-code-34--SHEs8gNh7sQ.md)
 - ["$100 million for open source: A milestone built by the community"](/ai-business/sources/100-million-for-open-source-a-milestone-built-by-the-communi-580ab93c.md)
@@ -164,6 +164,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [A quote from Tom MacWright](/ai-business/sources/a-quote-from-tom-macwright-634faec0.md)
 - [A Script for Mark Zuckerberg](/ai-business/sources/a-script-for-mark-zuckerberg-87056ab8.md)
 - [A TikTok Competitor Is About to IPO—And It's Deeply Suspicious](/ai-business/sources/a-tiktok-competitor-is-about-to-ipo-and-it-s-deeply-suspicio-79367032.md)
+- [A Winner in Every Category](/ai-business/sources/a-winner-in-every-category-3e612774.md)
 - [a-decade-of-evidence-of-trend-following-investing-in-cryptoc](/ai-business/sources/a-decade-of-evidence-of-trend-following-investing-in-cryptoc-cc.md)
 - [Accounting for Computer Scientists](/ai-business/sources/accounting-for-computer-scientists-ce.md)
 - [Ads in the Age of AI](/ai-business/sources/ads-in-the-age-of-ai-03396ce0.md)

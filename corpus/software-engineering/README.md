@@ -63,6 +63,8 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Naked Objects](/software-engineering/naked-objects.md) — concept · draft · domain objects exposed directly to users via auto-generated generic UI; enforces behavioural completeness; 4:1 code reduction vs. 4-layer; validated at Irish DSFA and Safeway (Pawson, TCD PhD 2004)
 - [Model-View-Controller (MVC)](/software-engineering/model-view-controller.md) — concept · draft · Reenskaug/Xerox PARC 1978/79; three archetypes; Controller distorted into use-case controller; foundation of 4-layer architecture; relationship to naked objects
 
+- [Declarative Programming](/software-engineering/declarative-programming.md) — concept · draft · declarative vs imperative; functional programming; point-free/tacit style; TypeScript BakeCake composition example; lazy evaluation; connection to Polars/Spark pipeline APIs
+
 ### Concepts (continued)
 - See also: [Go](/software-engineering/go-programming-language.md), [JavaScript](/software-engineering/javascript-fundamentals.md) under Languages above; [Terminal/CLI](/software-engineering/terminal-cli-tools.md) and [Vim](/software-engineering/vim.md) under tools
 
@@ -128,7 +130,7 @@ Domain covering software engineering practice from foundational CS through deplo
 
 ## Pages in this domain
 
-### Concepts (42)
+### Concepts (43)
 - [AI Risk Architecture](/software-engineering/ai-risk-architecture.md)
 - [Algorithms (Strategies, Not Tricks)](/software-engineering/algorithms.md)
 - [CAP Theorem](/software-engineering/cap-theorem.md)
@@ -141,6 +143,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Container Patterns (Single-Node)](/software-engineering/container-patterns.md)
 - [CPU Scheduling](/software-engineering/cpu-scheduling.md)
 - [Data Structures and Big O Notation](/software-engineering/data-structures.md)
+- [Declarative Programming](/software-engineering/declarative-programming.md)
 - [Discrete Mathematics](/software-engineering/discrete-mathematics.md)
 - [Discrete Probability](/software-engineering/discrete-probability.md)
 - [Distributed File Systems](/software-engineering/distributed-file-systems.md)

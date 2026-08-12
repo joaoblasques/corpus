@@ -2,6 +2,27 @@
 
 > OKF v0.1 change log. Newest first, grouped by date.
 
+## 2026-08-12
+
+* **Ingest**: Batch ingest — 18 sources from 50-file pre-filtered inbox pass — ingest-auto run; 32 deferred
+  - sources: raw/_inbox/ (web channel — lakefs.io x5, confessionsofadataguy.com x2, dataengineeringcentral.substack.com x3, huyenchip.com x7, lakefs.io AI-sovereignty x1)
+  - domains: data-engineering, ai-engineering, software-engineering, productivity
+  - pages created: [/data-engineering/lakefs.md, /data-engineering/polars.md, /data-engineering/sources/databricks-metric-views-86659572.md, /ai-engineering/generation-configs.md, /ai-engineering/multimodal-models.md, /ai-engineering/ai-sovereignty.md, /ai-engineering/sources/ai-brain-fry-987d6d62.md, /ai-engineering/sources/token-tax-opencode-c0fa1370.md, /software-engineering/declarative-programming.md]
+  - pages updated: [/ai-engineering/chip-huyen.md, /productivity/learning-to-learn.md, /ai-engineering/agent-cost-management.md, /data-engineering/semantic-layer.md, /data-engineering/databricks.md, /data-engineering/README.md, /ai-engineering/README.md, /software-engineering/README.md]
+  - deferred: 32 files (G1: pure-mathematics PDFs x16; G2: constructive-probability-theory PDF x33 parts)
+  - notes: lakeFS entity consolidated from 5 blog posts (agentic/headless/GxP/Lockheed/UC-lock-in); Polars streaming engine 27s→6s benchmark; Chip Huyen updated stub→draft with 7 sources (Bradley-Terry, generation configs, multimodality, 900-repo OSS analysis, empowerment-maximization); AI brain fry HBR term; token tax + OpenCode/Ollama alternative; declarative programming TypeScript/functional patterns; Databricks Metric Views YAML-over-SQL; AI sovereignty 4-dimension framework (Red Hat Field CTO); Unity Catalog lock-in critique (foreign tables read-only, Iceberg writes restricted)
+
+* **Collectors**: gmail=2, blog_promote=0, obsidian=0, book_discover=0, blog_discover=0, book_fetch=0, pdf=0, image=0, books=0, arxiv=0, youtube=0, github_discover=5, github_promote=5, github=0, x=0, links_refetch=0
+* **Ingest**: 18 ingested · 32 deferred · status=ok
+* **YoutubeQuick**: 0 intake · 0 rescued · 0 skipped · status=ok
+* **DocsQuick**: 2 intake · 46 thin · 2 llm_fail · status=ok
+* **YoutubeReap**: 0 removed · status=ok
+* **Gardener**: 4 stubs deepened · status=ok
+* **Heal**: 0 citations repointed · 0 unfixable · 4 hubs reindexed · 34 cross-domain links · status=ok
+* **Depth**: 440 knowledge · 1390 sources · ratio 1:3.2
+* **GapResolver**: 0 gap dispatched · 0 sources queued · status=ok
+* **Lint**: 2 broken wikilinks · 0 broken citations · 0 orphans · 1270 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+* **OKF**: 0 violations
 ## 2026-08-11
 
 * **Ingest**: Batch ingest — 50-file pre-filtered inbox pass — ingest-auto run

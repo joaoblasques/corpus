@@ -94,6 +94,8 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [Amazon Redshift](/data-engineering/redshift.md) — entity · draft · MPP column store from ParAccel/PostgreSQL; share-nothing→RMS; code specialization (compiled C++) vs vectorization
 - [Orchestra](/data-engineering/orchestra.md) — entity · draft · managed declarative Data&AI workflow platform; UI-first; managed integrations, pipelines/tasks/triggers, lineage, env-as-config, Git version control
 - [Perspective](/data-engineering/perspective.md) — entity · stub · WebAssembly/Python/Rust interactive analytics component for large+streaming datasets; DuckDB integration; data grid + 10+ chart types
+- [lakeFS](/data-engineering/lakefs.md) — entity · draft · data version control platform (git-like branching for object storage); agentic AI workloads, GxP compliance, enterprise MLOps; zero-copy branches
+- [Polars](/data-engineering/polars.md) — entity · draft · fast Rust DataFrame library; eager/lazy/streaming execution modes; 4.6× speedup on 12GB dataset; single-node rebellion
 
 ### Syntheses
 - [Query-Engine Routing](/data-engineering/query-engine-routing.md) — synthesis · draft · multi-engine routing over Iceberg; SQL-dialect translation; cost-based routing
@@ -113,6 +115,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - ["You Don't Graduate From Data Engineering: Why We Built aide"](/data-engineering/sources/you-dont-graduate-from-data-engineering-aide.md) — source · draft · product launch for aidataengineer.io; continuous learning platform on DEW archive; Socratic AI tutor, skill tracking, team dashboards
 - [The Missing Interface in Data Platform Engineering](/data-engineering/sources/missing-interface-data-platform-engineering.md) — source · draft · 5-layer operating interface (technical, operational contract, ownership, adoption, communication); 5-level platform maturity model (Reactive→Community)
 - [Databricks Data + AI Summit 2026 — Data Engineering Speakers](/data-engineering/sources/databricks-summit-2026-speakers-de.md) — source · stub · bios for Tim Riddle, Vijay Parmeshwaran, Francisco Cruz, Zhou Sun, Madhu Kudaravalli, Christina Busmalis, Zach Rothstein
+- [Databricks Metric Views and the Semantic Layer](/data-engineering/sources/databricks-metric-views-86659572.md) — source · draft · YAML-over-SQL `WITH METRICS LANGUAGE YAML` syntax; Unity Catalog integration; semantic metadata for LLM-driven analytics; "mindset not just technology" framing
 - [dbt Kimball reference project](/data-engineering/sources/dbt-kimball-project.md) — source · draft · reference dbt Kimball SCD2 project (BigQuery/DuckDB)
 - [DuckDB ETL on ECS Fargate](/data-engineering/sources/aws-duckdb-etl-fargate.md) — source · draft · end-to-end AWS ETL (Terraform, EventBridge, Slack observability)
 - [SQL Sales-Funnel Analysis project](/data-engineering/sources/sql-funnel-analysis-project.md) — source · draft · end-to-end BigQuery funnel/conversion/AOV-vs-CAC SQL walkthrough
@@ -191,7 +194,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [Streaming Algorithms](/data-engineering/streaming-algorithms.md)
 - [Vibe Engineering](/data-engineering/vibe-engineering.md)
 
-### Entities (25)
+### Entities (27)
 - [Amazon Redshift](/data-engineering/redshift.md)
 - [Apache Iceberg](/data-engineering/apache-iceberg.md)
 - [Apache Kafka](/data-engineering/kafka.md)
@@ -208,17 +211,19 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [Google BigQuery](/data-engineering/bigquery.md)
 - [ingestr](/data-engineering/ingestr.md)
 - [Kai Waehner](/data-engineering/kai-waehner.md)
+- [lakeFS](/data-engineering/lakefs.md)
 - [Matthew Housley](/data-engineering/matthew-housley.md)
 - [mondayDB](/data-engineering/mondaydb.md)
 - [Orchestra](/data-engineering/orchestra.md)
 - [Perspective](/data-engineering/perspective.md)
+- [Polars](/data-engineering/polars.md)
 - [PostgreSQL (Postgres)](/data-engineering/postgres.md)
 - [Redis](/data-engineering/redis.md)
 - [Snowflake](/data-engineering/snowflake.md)
 - [Solomon Hykes](/data-engineering/solomon-hykes.md)
 - [Windsor.ai](/data-engineering/windsor-ai.md)
 
-### Syntheses (13)
+### Syntheses (14)
 - [Agentic Data Modeling](/data-engineering/agentic-data-modeling.md)
 - [AI Observability as a Data Pipeline](/data-engineering/ai-observability-data-pipeline.md)
 - [AI's Impact on Data Engineering](/data-engineering/ai-impact-on-data-engineering.md)
@@ -230,11 +235,12 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [Pipeline Optimization at Scale — War Stories from FAANG](/data-engineering/pipeline-optimization-at-scale.md)
 - [Progressive Disclosure for Analytics Agents](/data-engineering/progressive-disclosure-analytics-agents.md)
 - [Query-Engine Routing](/data-engineering/query-engine-routing.md)
+- [Real-Time Data as the Foundation for Agentic AI](/data-engineering/real-time-data-for-agentic-ai.md)
 - [The Data Engineer Role: Value, Impact, and Seniority](/data-engineering/data-engineer-role.md)
 - [The Portfolio Project That Lands a DE Role](/data-engineering/portfolio-project-that-lands-a-de-role.md)
 
 <details>
-<summary>Source summaries (227)</summary>
+<summary>Source summaries (228)</summary>
 
 - ["A dbt \"logic mesh\" with packages: standard model and metrics across 25 autonomous organizations | dbt Summit"](/data-engineering/sources/a-dbt-logic-mesh-with-packages-standard-model-and-metrics-ac-bf162a97.md)
 - ["Academic → CTO: What Actually Matters in Data (Matthew Housley) - Confessions of a Data Guy"](/data-engineering/sources/academic-cto-what-actually-matters-in-data-matthew-housley-c-e9eae58c.md)
@@ -354,8 +360,8 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [Data + AI Summit 2026 — Data Engineering Speaker Profiles (Databricks)](/data-engineering/sources/databricks-summit-2026-speakers-de.md)
 - [Data Analyst | dbt Labs](/data-engineering/sources/data-analyst-dbt-labs-e88f1a35.md)
 - [Data Crash Course · Tinybird](/data-engineering/sources/data-crash-course-tinybird-f.md)
-- [Data Crash Course · Tinybird](/data-engineering/sources/data-crash-course-tinybird-ee.md)
 - [Data Crash Course · Tinybird](/data-engineering/sources/data-crash-course-tinybird-fe.md)
+- [Data Crash Course · Tinybird — Chapter Three](/data-engineering/sources/data-crash-course-tinybird-ee.md)
 - [Data Crash Course · Tinybird — Chapter Two](/data-engineering/sources/data-crash-course-tinybird-doc.md)
 - [Data Crash Course · Tinybird — Chapter Zero](/data-engineering/sources/data-crash-course-tinybird-e.md)
 - [Data Engineering - Core Concepts](/data-engineering/sources/data-engineering-core-concepts-eee.md)
@@ -391,6 +397,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [Databricks - Platform Overview and Hands-On Guide](/data-engineering/sources/databricks-platform-overview-and-hands-on-guide-de.md)
 - [Databricks End-To-End Project 2026 | Zero-To-Hero](/data-engineering/sources/databricks-end-to-end-project-2026-zero-to-hero-gFAnlTM-3Zo.md)
 - [Databricks Full Course for Beginners (2 Hours) - Declarative Pipelines & Lakeflow Designer](/data-engineering/sources/databricks-full-course-for-beginners-2-hours-declarative-pip-nrfP2_frM5k.md)
+- [Databricks Metric Views and the Semantic Layer](/data-engineering/sources/databricks-metric-views-86659572.md)
 - [DataOps  – The Foundation for Your Agile Data Architecture](/data-engineering/sources/dataops-the-foundation-for-your-agile-data-architecture-_fzZnPW-yjM.md)
 - [dbt Kimball reference project (vutrinh274/dbt_kimball)](/data-engineering/sources/dbt-kimball-project.md)
 - [dbt Snapshots for SCD2 — When to Use Them and What They Actually Cost](/data-engineering/sources/dbt-snapshots-for-scd2-when-to-use-them-and-what-they-actual-doc.md)
