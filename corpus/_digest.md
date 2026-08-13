@@ -195,3 +195,9 @@ type: internal
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/data-engineering/sources/data-crash-course-tinybird-ee.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/software-engineering/sources/14-more-lessons-from-14-years-at-google-e.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/gemini-cli-30-tips-for-agentic-coding-in-the-terminal-cd.md", "verdict_ok": true, "gov": "committed"}
+
+## [2026-08-13T03:03] gardener · run
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/databricks-summit-2026-speakers-ai.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/data-engineering/sources/databricks-summit-2026-speakers-de.md", "verdict_ok": false, "gov": "reverted+queued"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/agents-md-what-belongs-there-and-what-wastes-context-ce.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/uv-the-modern-go-to-python-environment-and-package-manager-aae.md", "verdict_ok": true, "gov": "committed"}
