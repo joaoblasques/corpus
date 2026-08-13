@@ -114,7 +114,8 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 ### Source summaries
 - ["You Don't Graduate From Data Engineering: Why We Built aide"](/data-engineering/sources/you-dont-graduate-from-data-engineering-aide.md) — source · draft · product launch for aidataengineer.io; continuous learning platform on DEW archive; Socratic AI tutor, skill tracking, team dashboards
 - [The Missing Interface in Data Platform Engineering](/data-engineering/sources/missing-interface-data-platform-engineering.md) — source · draft · 5-layer operating interface (technical, operational contract, ownership, adoption, communication); 5-level platform maturity model (Reactive→Community)
-- [Databricks Data + AI Summit 2026 — Data Engineering Speakers](/data-engineering/sources/databricks-summit-2026-speakers-de.md) — source · stub · bios for Tim Riddle, Vijay Parmeshwaran, Francisco Cruz, Zhou Sun, Madhu Kudaravalli, Christina Busmalis, Zach Rothstein
+- [Databricks Data + AI Summit 2026 — Data Engineering Speakers](/data-engineering/sources/databricks-summit-2026-speakers-de.md) — source · stub · bios for Tim Riddle, Vijay Parmeshwaran, Francisco Cruz, Zhou Sun, Madhu Kudaravalli, Christina Busmalis, Zach Rothstein, James McNiff, Guy Lupo, Ilya Shestakov, Felix Perez, Nicholas Evangelopoulos, Yared Gudeta, Narendra Pandya, Jacques Reynaud, Harsha Yale, Vineet Parmar, Shashank Nema, Nehmé Tohmé
+- [lakeFS Events and Webinars](/data-engineering/sources/lakefs-events-webinars.md) — source · stub · webinar summaries: agentic AI data isolation, AI project data bottlenecks (83% stat), data lake best practices (isolated ingestion/CI-CD/versioning), Spark ETL zero-copy testing, DVC→lakeFS transition, Hive Metastore future panel
 - [Databricks Metric Views and the Semantic Layer](/data-engineering/sources/databricks-metric-views-86659572.md) — source · draft · YAML-over-SQL `WITH METRICS LANGUAGE YAML` syntax; Unity Catalog integration; semantic metadata for LLM-driven analytics; "mindset not just technology" framing
 - [dbt Kimball reference project](/data-engineering/sources/dbt-kimball-project.md) — source · draft · reference dbt Kimball SCD2 project (BigQuery/DuckDB)
 - [DuckDB ETL on ECS Fargate](/data-engineering/sources/aws-duckdb-etl-fargate.md) — source · draft · end-to-end AWS ETL (Terraform, EventBridge, Slack observability)
@@ -240,7 +241,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [The Portfolio Project That Lands a DE Role](/data-engineering/portfolio-project-that-lands-a-de-role.md)
 
 <details>
-<summary>Source summaries (228)</summary>
+<summary>Source summaries (229)</summary>
 
 - ["A dbt \"logic mesh\" with packages: standard model and metrics across 25 autonomous organizations | dbt Summit"](/data-engineering/sources/a-dbt-logic-mesh-with-packages-standard-model-and-metrics-ac-bf162a97.md)
 - ["Academic → CTO: What Actually Matters in Data (Matthew Housley) - Confessions of a Data Guy"](/data-engineering/sources/academic-cto-what-actually-matters-in-data-matthew-housley-c-e9eae58c.md)
@@ -433,6 +434,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [Joining Fact Tables and SCD2 Dimension Tables](/data-engineering/sources/joining-fact-tables-and-scd2-dimension-tables-abe.md)
 - [Kafka is fast -- I'll use Postgres](/data-engineering/sources/kafka-is-fast-i-ll-use-postgres-beca.md)
 - [lakeflow-a-new-era-of-agentic-data-engineering](/data-engineering/sources/lakeflow-a-new-era-of-agentic-data-engineering-eee.md)
+- [lakeFS Events and Webinars](/data-engineering/sources/lakefs-events-webinars.md)
 - [Learn Databricks in Under 2 Hours](/data-engineering/sources/learn-databricks-in-under-2-hours-CoqZTt528ew.md)
 - [Learn MLOps with MLflow and Databricks – Full Course for Machine Learning Engineers](/data-engineering/sources/learn-mlops-with-mlflow-and-databricks-full-course-for-machi-tVskbekONlw.md)
 - [Learn Snowflake with ONE Project](/data-engineering/sources/learn-snowflake-with-one-project-7QisFjITGlI.md)

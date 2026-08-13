@@ -75,6 +75,18 @@ sources:
   - path: raw/_inbox/web-trusted-agentic-ai-landscape-q3-2026-enterprise-vendor-selec-ce909b19.md
     channel: web
     ingested_at: 2026-08-10
+  - path: raw/_inbox/web-policy-on-the-ai-exponential-359e2bc8.md
+    channel: web
+    ingested_at: 2026-08-13
+  - path: raw/_inbox/web-frontier-safety-roadmap-2601cd75.md
+    channel: web
+    ingested_at: 2026-08-13
+  - path: raw/_inbox/web-paving-the-way-for-ai-agents-in-biology-e2470097.md
+    channel: web
+    ingested_at: 2026-08-13
+  - path: raw/_inbox/web-making-claude-a-chemist-ff153605.md
+    channel: web
+    ingested_at: 2026-08-13
 aliases:
   - Anthropic
   - Anthropic PBC

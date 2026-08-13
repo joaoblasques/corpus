@@ -28,10 +28,37 @@ sources:
   - path: raw/web/web-unity-catalog-and-the-quiet-return-of-vendor-lock-in-fabfd99a.md
     channel: web
     title: Unity Catalog and the Quiet Return of Vendor Lock-In
+  - path: raw/_inbox/web-trust-isolation-and-reproducibility-for-agentic-ai-a8431426.md
+    channel: web
+    ingested_at: 2026-08-13
+  - path: raw/_inbox/web-why-data-is-killing-your-ai-project-and-what-to-do-about-it-4c2deb2c.md
+    channel: web
+    ingested_at: 2026-08-13
+  - path: raw/_inbox/web-scaling-a-data-lake-with-lakefs-best-practices-e0da2b52.md
+    channel: web
+    ingested_at: 2026-08-13
+  - path: raw/_inbox/web-develop-spark-etl-pipelines-without-production-risk-4cb0d278.md
+    channel: web
+    ingested_at: 2026-08-13
+  - path: raw/_inbox/web-optimize-object-storage-for-data-with-lakefs-dataops-poland-8eedb8f4.md
+    channel: web
+    ingested_at: 2026-08-13
+  - path: raw/_inbox/web-a-new-chapter-for-dvc-passing-the-torch-to-lakefs-14e6f69f.md
+    channel: web
+    ingested_at: 2026-08-13
+  - path: raw/_inbox/web-odsc-east-2026-networking-meetup-d01e349e.md
+    channel: web
+    ingested_at: 2026-08-13
+  - path: raw/_inbox/web-subsurface-rethinking-ingestion-ci-cd-for-data-lakes-37f132f1.md
+    channel: web
+    ingested_at: 2026-08-13
+  - path: raw/_inbox/web-what-s-the-future-of-metadata-after-hive-metastore-f6dec2cb.md
+    channel: web
+    ingested_at: 2026-08-13
 confidence: 0.9
-last_confirmed: 2026-08-12
+last_confirmed: 2026-08-13
 created: 2026-08-12
-updated: 2026-08-12
+updated: 2026-08-13
 ---
 
 # lakeFS

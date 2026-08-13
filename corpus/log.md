@@ -2,6 +2,27 @@
 
 > OKF v0.1 change log. Newest first, grouped by date.
 
+## 2026-08-13
+
+* **Ingest**: Batch ingest — 37 sources from 50-file pre-filtered inbox pass — ingest-auto run; 13 deferred
+  - sources: raw/_inbox/ (web channel — databricks-summit speakers x14, lakefs-events x9, chip-huyen x1, eugene-yan x6, philschmid x3, anthropic-policy+safety x2, anthropic-science x2, qwen3 x1)
+  - domains: data-engineering, ai-engineering
+  - pages created: [/data-engineering/sources/lakefs-events-webinars.md, /ai-engineering/eugene-yan.md, /ai-engineering/sources/phil-schmid-mcp-agents-md.md, /ai-engineering/sources/anthropic-policy-and-safety-roadmap.md, /ai-engineering/sources/anthropic-science-ai-in-biology-and-chemistry.md, /ai-engineering/sources/qwen3-aider-polyglot-benchmark.md]
+  - pages updated: [/data-engineering/lakefs.md, /data-engineering/sources/databricks-summit-2026-speakers-de.md, /ai-engineering/sources/databricks-summit-2026-speakers-ai.md, /ai-engineering/chip-huyen.md, /ai-engineering/anthropic.md, /data-engineering/README.md, /ai-engineering/README.md]
+  - deferred: 13 files (UNCERTAIN: confessionsofadataguy.com nav-only scrapes x6, redirect/thin stubs x4; G1: github.com/UNDP-Ghana no-domain-fit x1, cursor RSS feed x1, topic-poll redirect x1)
+  - notes: Databricks Summit 2026 speakers consolidated into existing pages (+12 DE, +2 AI); lakeFS 9-webinar batch consolidated into new source page (97%/5% agentic-AI-readiness stat, DVC→lakeFS handoff); Eugene Yan new entity (Amazon Applied Scientist, 11.8k subscribers, ML systems/evals); Phil Schmid 3 posts consolidated (MCP explicit-vs-subagent patterns + AGENTS.md ETH Zurich research — auto-generated files -3%/+20% cost, tools mentioned 160× more usage); Anthropic Policy on AI Exponential (10²⁵ FLOP threshold, 4 catastrophic risk categories) + Frontier Safety Roadmap (security moonshot Sept 30 2026); VirBench viral-sequence benchmark (gget virus →~100%, eliminates variability) + Claude Opus 4.7 NMR ±0.079 ppm; Qwen3 235B-A22B aider-polyglot best=65.3% (VLLM+bfloat16+no_think+whole)
+
+* **Collectors**: gmail=5, blog_promote=0, obsidian=0, book_discover=0, blog_discover=0, book_fetch=0, pdf=0, image=0, books=0, arxiv=0, youtube=0, github_discover=5, github_promote=5, github=0, x=0, links_refetch=0
+* **Ingest**: 37 ingested · 13 deferred · status=ok
+* **YoutubeQuick**: 0 intake · 0 rescued · 0 skipped · status=ok
+* **DocsQuick**: 2 intake · 46 thin · 2 llm_fail · status=ok
+* **YoutubeReap**: 0 removed · status=ok
+* **Gardener**: 4 stubs deepened · status=ok
+* **Heal**: 0 citations repointed · 0 unfixable · 2 hubs reindexed · 34 cross-domain links · status=ok
+* **Depth**: 441 knowledge · 1397 sources · ratio 1:3.2
+* **GapResolver**: 0 gap dispatched · 0 sources queued · status=ok
+* **Lint**: 2 broken wikilinks · 0 broken citations · 0 orphans · 1275 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+* **OKF**: 0 violations
 ## 2026-08-12
 
 * **Ingest**: Batch ingest — 18 sources from 50-file pre-filtered inbox pass — ingest-auto run; 32 deferred

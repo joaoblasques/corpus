@@ -160,7 +160,8 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Claude for Education](/ai-engineering/claude-for-education.md) — entity · stub · Anthropic's university-wide program (students/faculty/admins); Socratic "learning mode" tutor, Claude Code as scaled apprenticeship, Claude API for research; distinct from the Education plan tier
 - [Claude for Government](/ai-engineering/claude-for-government.md) — entity · draft · FedRAMP High + IL5 deployment surfaces (API/Claude Gov/app); classified national-security mission support on AWS; compliance posture shared with finance vertical
 - [NotebookLM](/ai-engineering/notebooklm.md) — entity · draft · Google's source-specific AI (Gemini-backed); output types (audio overview, mind map, quiz, flashcard, infographic); Claude+NotebookLM automation chains (autopilot brief, auto-refresh loop, competitive radar)
-- [Chip Huyen](/ai-engineering/chip-huyen.md) — entity · draft · author AI Engineering (O'Reilly 2025) + Designing ML Systems (O'Reilly 2022); compute-scale thesis; 900-OSS-repo analysis; Bradley-Terry/predictive human preference; temperature/sampling mechanics; multimodality; empowerment maximization (RL) as personal growth heuristic
+- [Chip Huyen](/ai-engineering/chip-huyen.md) — entity · draft · author AI Engineering (O'Reilly 2025) + Designing ML Systems (O'Reilly 2022); compute-scale thesis; 900-OSS-repo analysis; Bradley-Terry/predictive human preference; temperature/sampling mechanics; multimodality; GenAI strategy framework; empowerment maximization (RL) as personal growth heuristic
+- [Eugene Yan](/ai-engineering/eugene-yan.md) — entity · stub · Applied Scientist at Amazon; writes on ML systems in industry (LLMs, RecSys, RAG, evals, feature stores); 212 posts, 426K+ words; 11,800+ newsletter subscribers
 - [Hamel Husain](/ai-engineering/hamel-husain.md) — entity · draft · independent AI consultant (Parlance Labs); 50+ company eval engagements; Critique Shadowing methodology; evals-skills plugin; co-created CodeSearchNet (GitHub Copilot precursor)
 - [Ollama](/ai-engineering/ollama.md) — entity · draft · local LLM serving + cloud models + web search + `ollama launch` agentic toolchains; Anthropic API compatibility for Claude Code
 - [OpenJarvis](/ai-engineering/openjarvis.md) — entity · draft · Stanford Hazy Research/Scaling Intelligence local-first personal-AI framework; Ollama-backed, agent presets (morning digest, deep research, code assistant)
@@ -227,7 +228,11 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Reinforcement Learning: An Introduction (Sutton & Barto, 2nd ed. 2018)](/ai-engineering/sources/reinforcement-learning-introduction.md) — source · draft · definitive RL textbook (548pp, MIT Press); MDP formalism; Bellman equations; Monte Carlo; TD learning; Q-learning; SARSA; n-step bootstrapping; function approximation; eligibility traces; policy gradient; actor-critic; MCTS; psychology/dopamine correspondence; applications (TD-Gammon, DQN, AlphaGo); all 33 parts ingested (complete)
 - [The LION Way: Machine Learning plus Intelligent Optimization (Battiti & Brunato, 2017)](/ai-engineering/sources/the-lion-way.md) — source · draft · 516pp textbook; supervised learning (k-NN, linear models, SVMs, neural networks, ensembles); unsupervised (k-means, PCA, ICA); optimization (greedy, simulated annealing, gradient descent); Reactive Search Optimization (RSO); LP/QP; cooperative LION; all 28 parts ingested (complete)
 - [Information Retrieval: A Survey (Ed Greengrass, 2000)](/ai-engineering/sources/information-retrieval-a-survey.md) — source · draft · 224pp comprehensive survey of classical IR (2000); Boolean IR, vector space (TF-IDF, BM25/Okapi, LSI/SVD), probabilistic models (BIM, Bayesian inference networks, logistic regression), NLP approaches (phrase ID, sense disambiguation, concept matching, IE), clustering (hierarchical, Buckshot, STC), query expansion (Rocchio, pseudo-relevance feedback, LCA, WordNet), result fusion (CombMNZ), Web IR (crawlers, link analysis, meta-search); all 16 parts ingested
-- [Databricks Data + AI Summit 2026 — AI Engineering Speakers](/ai-engineering/sources/databricks-summit-2026-speakers-ai.md) — source · stub · bios for Timothy Chen (Essence VC), Callum Adamson (Applied Computing), Denny Lee (Databricks DevRel), Rohan Varma (OpenAI PM), Jai Behl (Anthropic Applied AI)
+- [Databricks Data + AI Summit 2026 — AI Engineering Speakers](/ai-engineering/sources/databricks-summit-2026-speakers-ai.md) — source · stub · bios for Timothy Chen (Essence VC), Callum Adamson (Applied Computing), Denny Lee (Databricks DevRel), Rohan Varma (OpenAI PM), Jai Behl (Anthropic Applied AI), Xiaolei Shi (Databricks Genie), Daniel Gole (Block/RAG MCP)
+- [Phil Schmid: MCP Server Patterns and AGENTS.md Best Practices](/ai-engineering/sources/phil-schmid-mcp-agents-md.md) — source · stub · two patterns for MCP server usage (explicit @mention vs subagent-scoped); AGENTS.md research findings: auto-generated files hurt performance, human-written files best under 300 lines, non-obvious tooling gets 160× more usage when mentioned
+- [Anthropic Policy and Frontier Safety Roadmap](/ai-engineering/sources/anthropic-policy-and-safety-roadmap.md) — source · stub · government framework for regulating frontier AI (>10²⁵ FLOPs threshold); Frontier Safety Roadmap: security hardening, alignment assessments, automated R&D risk horizon (~early 2027)
+- [Anthropic Science: AI Agents in Biology and Chemistry](/ai-engineering/sources/anthropic-science-ai-in-biology-and-chemistry.md) — source · stub · VirBench: frontier models 17–91% on NCBI Virus retrieval (gget virus → ~100%); Claude Opus 4.7 competitive with ChemDraw/MestReNova on NMR spectrum prediction + unique 1D inverse structure elucidation
+- [Qwen3 Results on the Aider Polyglot Benchmark](/ai-engineering/sources/qwen3-aider-polyglot-benchmark.md) — source · stub · inference settings matter more than provider; VLLM+bfloat16+no_think → 65.3%; thinking mode hurts; provider heterogeneity costs ~5–15 points
 - [AI Brain Fry: The Cognitive Overload of AI Development](/ai-engineering/sources/ai-brain-fry-987d6d62.md) — source · draft · HBR "AI brain fry" definition; 9 engineering-work impacts; developer burnout mitigations; DataEngineeringCentral Substack
 - [The Agentic Token Tax and OpenCode](/ai-engineering/sources/token-tax-opencode-c0fa1370.md) — source · draft · flat-rate → usage-based billing shift; OpenCode + Ollama + Qwen 2.5 Coder 7B setup; CodeGemma tool-calling limitation; hybrid local/cloud strategy
 
@@ -373,7 +378,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Vibe Coding (and why Spec-Driven Development supersedes it)](/ai-engineering/vibe-coding.md)
 - [Visual Bag of Words](/ai-engineering/visual-bag-of-words.md)
 
-### Entities (73)
+### Entities (74)
 - [Anthropic](/ai-engineering/anthropic.md)
 - [Charles L.A. Clarke](/ai-engineering/charles-clarke.md)
 - [Charles M. Grinstead](/ai-engineering/charles-grinstead.md)
@@ -393,6 +398,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Daniel Jurafsky](/ai-engineering/daniel-jurafsky.md)
 - [Datasette](/ai-engineering/datasette.md)
 - [DiffusionGemma](/ai-engineering/diffusiongemma.md)
+- [Eugene Yan](/ai-engineering/eugene-yan.md)
 - [FFASR Leaderboard](/ai-engineering/ffasr-leaderboard.md)
 - [François Fleuret](/ai-engineering/francois-fleuret.md)
 - [FunctionGemma](/ai-engineering/functiongemma.md)
@@ -460,7 +466,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Tool Calling & Context Engineering: How They Interlock](/ai-engineering/tool-calling-and-context-engineering.md)
 
 <details>
-<summary>Source summaries (735)</summary>
+<summary>Source summaries (741)</summary>
 
 - ["2024 State of Analytics Engineering, crafted by dbt Labs | dbt Labs"](/ai-engineering/sources/2024-state-of-analytics-engineering-crafted-by-dbt-labs-dbt--cb342df0.md)
 - ["6 AI Agent Orchestration Best Practices in 2026 [Explained]"](/ai-engineering/sources/6-ai-agent-orchestration-best-practices-in-2026-explained-8144e2d2.md)
@@ -751,7 +757,9 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [A practical Guide To Becoming An AI Engineer](/ai-engineering/sources/a-practical-guide-to-becoming-an-ai-engineer-uAOIlkr0aVk.md)
 - [A Preview of Production-Scale Kimi K3 Support on vLLM](/ai-engineering/sources/a-preview-of-production-scale-kimi-k3-support-on-vllm-ec01fafe.md)
 - [A quote from Claude Opus 5 system prompt](/ai-engineering/sources/a-quote-from-claude-opus-5-system-prompt-b9793ca1.md)
+- [A quote from Claude Opus 5 system prompt](/ai-engineering/sources/a-quote-from-claude-opus-5-system-prompt-e1acb7eb.md)
 - [A quote from Dean W. Ball](/ai-engineering/sources/a-quote-from-dean-w-ball-89fa7394.md)
+- [A quote from Florian Herrengt](/ai-engineering/sources/a-quote-from-florian-herrengt-4ed9ef2e.md)
 - [A quote from Jon Udell](/ai-engineering/sources/a-quote-from-jon-udell-c1b6e8d9.md)
 - [A quote from Linus Torvalds](/ai-engineering/sources/a-quote-from-linus-torvalds-cf5f6e53.md)
 - [A quote from Nilay Patel](/ai-engineering/sources/a-quote-from-nilay-patel-bc84c97b.md)
@@ -854,6 +862,8 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Anish Roy | Databricks](/ai-engineering/sources/anish-roy-databricks-6e291906.md)
 - [Anthropic Just Dropped a Masterclass on Building Agent Harnesses (for Large Codebases)](/ai-engineering/sources/anthropic-just-dropped-a-masterclass-on-building-agent-harne-efRIrLXoOVA.md)
 - [Anthropic just dropped Claude Design](/ai-engineering/sources/anthropic-just-dropped-claude-design-f7a3fb83.md)
+- [Anthropic Policy on the AI Exponential and Frontier Safety Roadmap](/ai-engineering/sources/anthropic-policy-and-safety-roadmap.md)
+- [Anthropic Science: AI Agents in Biology and Chemistry](/ai-engineering/sources/anthropic-science-ai-in-biology-and-chemistry.md)
 - [Anthropic’s Safety Superpower](/ai-engineering/sources/anthropic-s-safety-superpower-1ec498fc.md)
 - [Anthropic’s Transparency Hub](/ai-engineering/sources/anthropic-s-transparency-hub-1ef8661b.md)
 - [Antigravity AI Automation — 5 Income-Generating Use Cases](/ai-engineering/sources/antigravity-ai-automation-5-income-generating-use-cases-cae.md)
@@ -1124,12 +1134,14 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Pattern Recognition and Machine Learning (Bishop, 2006)](/ai-engineering/sources/pattern-recognition-and-machine-learning.md)
 - [Patterns and Anti-Patterns for Building with LLMs](/ai-engineering/sources/patterns-and-anti-patterns-for-building-with-llms-doc.md)
 - [Patterns, Predictions, and Actions: A Story about Machine Learning](/ai-engineering/sources/patterns-predictions-and-actions.md)
+- [Phil Schmid: MCP Server Patterns and Writing Good AGENTS.md](/ai-engineering/sources/phil-schmid-mcp-agents-md.md)
 - [Physical AI — When AI Gets a Body](/ai-engineering/sources/physical-ai-when-ai-gets-a-body-bd.md)
 - [Power BI Data Modeling Crash Course Learn Fast and Build Smarter Models! Full Course](/ai-engineering/sources/power-bi-data-modeling-crash-course-learn-fast-and-build-sma-air7T8wCYkU.md)
 - [Probabilistic Machine Learning: An Introduction (Murphy, 2022)](/ai-engineering/sources/probabilistic-machine-learning-intro.md)
 - [Production-Ready Code with Claude Code — Agentic AI in the Development Workflow](/ai-engineering/sources/production-ready-code-with-claude-code-agentic-ai-in-the-dev-cde.md)
 - [Python - 10 Essential Built-in Functions to Master](/ai-engineering/sources/python-10-essential-built-in-functions-to-master-ae.md)
 - [Python - 3 Unique Modern Features You Need to Know](/ai-engineering/sources/python-3-unique-modern-features-you-need-to-know-doc.md)
+- [Qwen3 Results on the Aider Polyglot Benchmark](/ai-engineering/sources/qwen3-aider-polyglot-benchmark.md)
 - [Reflective AI — Systems That Learn From Their Mistakes](/ai-engineering/sources/reflective-ai-systems-that-learn-from-their-mistakes-ae.md)
 - [Reinforcement Learning: An Introduction (Sutton & Barto, 2018)](/ai-engineering/sources/reinforcement-learning-introduction.md)
 - [Running - Olympic Endurance Training Principles](/ai-engineering/sources/running-olympic-endurance-training-principles-ce.md)

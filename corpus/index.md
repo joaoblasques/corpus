@@ -10,6 +10,8 @@ This file is auto-maintained by Claude. Do not edit by hand.
 ## Domains
 
 ### ai-engineering
+- [A quote from Florian Herrengt](/ai-engineering/sources/a-quote-from-florian-herrengt-4ed9ef2e.md) — source · stub · ["A team struggles to fix a bug in an AI system, highlighting the complexity and lack of understandi…
+- [A quote from Claude Opus 5 system prompt](/ai-engineering/sources/a-quote-from-claude-opus-5-system-prompt-e1acb7eb.md) — source · stub · ['Claude Opus 5 system prompt explains how Claude handles export controls knowledge.', "Claude's tra…
 - [Agents for Hire](/ai-engineering/sources/agents-for-hire-270347b2.md) — source · stub · The article discusses the emergence of 'agents for hire' in companies, which are AI-powered tools th…
 - [5 useful things you'll learn in my post-training textbook](/ai-engineering/sources/5-useful-things-you-ll-learn-in-my-post-training-textbook-1b72e969.md) — source · stub · The document discusses a new post-training textbook on Reinforcement Learning from Human Feedback, c…
 - ["[AINews] Jeff, Sanjay, Oriol, and Quoc depart DeepMind; Demis to Chair; Koray to SVP — what is going on at GDM???"](/ai-engineering/sources/ainews-jeff-sanjay-oriol-and-quoc-depart-deepmind-demis-to-c-3189f1ce.md) — source · stub · ['Jeff Dean, Sanjay Ghemawat, Oriol Vinyals, and Quoc Le leave DeepMind to cofound Discovery Loop, a…
@@ -2015,3 +2017,14 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - 2026-07-14: [AI History](/ai-engineering/ai-history.md) (new — concept, stub)
 - 2026-07-14: [Nils J. Nilsson](/ai-engineering/nils-nilsson.md) (new — entity, stub)
 - 2026-07-15: [Personal Knowledge Corpus Pipeline](/ai-engineering/personal-knowledge-corpus-pipeline.md) (new — concept, draft; local vs cloud pipeline architecture)
+- 2026-08-13: [lakeFS Events & Webinars](/data-engineering/sources/lakefs-events-webinars.md) (new — source, 9 lakeFS event/webinar stubs consolidated)
+- 2026-08-13: [lakeFS](/data-engineering/lakefs.md) (updated +9 sources — webinar/event batch)
+- 2026-08-13: [Databricks Data+AI Summit 2026 Speakers (DE)](/data-engineering/sources/databricks-summit-2026-speakers-de.md) (updated +12 speakers — James McNiff, Guy Lupo, Ilya Shestakov, Felix Perez, Nicholas Evangelopoulos, Yared Gudeta, Narendra Pandya, Jacques Reynaud, Harsha Yale, Vineet Parmar, Shashank Nema, Nehmé Tohmé)
+- 2026-08-13: [Databricks Data+AI Summit 2026 Speakers (AI)](/ai-engineering/sources/databricks-summit-2026-speakers-ai.md) (updated +2 speakers — Xiaolei Shi, Daniel Gole)
+- 2026-08-13: [Chip Huyen](/ai-engineering/chip-huyen.md) (updated +1 source — Generative AI Strategy talk)
+- 2026-08-13: [Eugene Yan](/ai-engineering/eugene-yan.md) (new — entity, draft; Applied Scientist at Amazon, ML systems/RecSys/RAG/evals)
+- 2026-08-13: [Phil Schmid: MCP Patterns and AGENTS.md](/ai-engineering/sources/phil-schmid-mcp-agents-md.md) (new — source, 3 philschmid.de posts: MCP patterns + AGENTS.md best practices)
+- 2026-08-13: [Anthropic Policy and Safety Roadmap](/ai-engineering/sources/anthropic-policy-and-safety-roadmap.md) (new — source, Policy on AI Exponential + Frontier Safety Roadmap)
+- 2026-08-13: [Anthropic](/ai-engineering/anthropic.md) (updated +4 sources — policy, safety roadmap, VirBench biology agents, NMR chemistry)
+- 2026-08-13: [Anthropic Science: AI in Biology and Chemistry](/ai-engineering/sources/anthropic-science-ai-in-biology-and-chemistry.md) (new — source, VirBench viral-sequence benchmark + Claude Opus 4.7 NMR)
+- 2026-08-13: [Qwen3 235B-A22B on the Aider Polyglot Benchmark](/ai-engineering/sources/qwen3-aider-polyglot-benchmark.md) (new — source, VLLM+bfloat16+no_think=65.3% best setting)

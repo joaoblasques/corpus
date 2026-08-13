@@ -33,10 +33,14 @@ sources:
   - path: raw/web/web-open-challenges-in-llm-research-d184c921.md
     channel: web
     title: Open Challenges in LLM Research
+  - path: raw/_inbox/web-generative-ai-strategy-1cdcf5f8.md
+    channel: web
+    ingested_at: 2026-08-13
+    title: Generative AI Strategy
 confidence: 0.95
-last_confirmed: 2026-08-12
+last_confirmed: 2026-08-13
 created: 2026-08-12
-updated: 2026-08-12
+updated: 2026-08-13
 ---
 
 # Chip Huyen
@@ -117,6 +121,12 @@ Ten directions identified:[^challenges]
 9. **Reasoning** — (not elaborated in excerpt)
 10. **Interpretability** — (not elaborated in excerpt)
 
+### Generative AI Strategy (2023 Fully Connected talk)
+
+Framework for organizations asked to "do GenAI" by leadership, based on conversations with practitioners figuring out strategy.[^genai]
+
+The talk ("Leadership needs us to do generative AI. What do we do?") offers a simple exploration framework for what to do with GenAI — intended as a starting point for conversations, not a definitive answer. Presentation-first; Chip planned to convert to a full post. Key message: understanding what AI can and cannot do for your specific context is the prerequisite for strategy, not the output of it.[^genai]
+
 ### Personal growth philosophy
 
 Three heuristics:[^growth]
@@ -140,3 +150,4 @@ Three heuristics:[^growth]
 [^sampling]: raw/web/web-generation-configurations-temperature-top-k-top-p-and-test-t-1ccdc7f1.md
 [^lmm]: raw/web/web-multimodality-and-large-multimodal-models-lmms-427578c7.md
 [^challenges]: raw/web/web-open-challenges-in-llm-research-d184c921.md
+[^genai]: raw/_inbox/web-generative-ai-strategy-1cdcf5f8.md — huyenchip.com/2023/06/07/generative-ai-strategy.html
