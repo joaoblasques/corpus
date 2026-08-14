@@ -201,3 +201,9 @@ type: internal
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/data-engineering/sources/databricks-summit-2026-speakers-de.md", "verdict_ok": false, "gov": "reverted+queued"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/agents-md-what-belongs-there-and-what-wastes-context-ce.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/uv-the-modern-go-to-python-environment-and-package-manager-aae.md", "verdict_ok": true, "gov": "committed"}
+
+## [2026-08-14T03:13] gardener · run
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/data-engineering/sources/databricks-summit-2026-speakers-de.md", "verdict_ok": false, "gov": "reverted+queued"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/the-semantic-layer-abstraction-for-self-serve-analytics-and--cce.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/unix-philosophy-in-the-ai-age-simplicity-composability-and-t-afe.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/writing-a-good-claude-md-context-engineering-for-coding-agen-eee.md", "verdict_ok": true, "gov": "committed"}
