@@ -9,6 +9,15 @@ sources:
   - path: raw/github/github-cassidoo-brainstorm-buddy-extension.md
     channel: github
     ingested_at: 2026-06-25
+  - path: raw/web/web-evaluating-performance-and-efficiency-of-the-github-copilot-bdecf2cf.md
+    channel: web
+    ingested_at: 2026-08-14
+  - path: raw/web/web-getting-more-from-each-token-how-copilot-improves-context-ha-45a22139.md
+    channel: web
+    ingested_at: 2026-08-14
+  - path: raw/web/web-how-we-built-an-internal-data-analytics-agent-1c1b2656.md
+    channel: web
+    ingested_at: 2026-08-14
 aliases:
   - GitHub Copilot
   - Copilot Agent Mode
@@ -18,7 +27,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-06-19
-updated: 2026-06-21
+updated: 2026-08-14
 ---
 
 # GitHub Copilot (Agent Mode)
@@ -58,6 +67,39 @@ The source is a GitHub community discussion; a practitioner comment tempers the 
 
 > Source caveat: this is a vendor learning-campaign announcement plus user comments, not an independent technical evaluation — treat the capability claims as GitHub's framing and the limitations as anecdotal field reports.
 
+## Agentic harness performance (2026 benchmark data)
+
+GitHub's shared agentic harness — which backs Copilot CLI, the Copilot app, and Copilot code review — achieves task-resolution parity with model-vendor harnesses (Claude Code for Sonnet/Opus, Codex CLI for GPT) while consuming fewer tokens across most benchmark configurations.[^src3]
+
+Key findings from TerminalBench, SWE-bench Verified/Pro, SkillsBench, and Win-Hill:[^src3]
+
+- Differences in task resolution vs. Claude Code / Codex CLI fall within run-to-run variance — "effective parity."[^src3]
+- Token efficiency: Copilot harness never scored below a competitor on completion or to the right on cost per task.[^src3]
+- GPT models (within Copilot) deliver best value; Claude Opus reaches highest resolution at a premium; Copilot exposes both without harness lock-in.[^src3]
+- **Rubber Duck**: cross-model-family critique — one model reviews another's work, improving outcomes beyond any single model.[^src3]
+
+See [source page](/ai-engineering/sources/evaluating-github-copilot-agentic-harness-bdecf2cf.md) for full methodology.
+
+## Context efficiency: prompt caching and tool search
+
+In longer VS Code Copilot sessions, two improvements reduce token waste per turn:[^src4]
+
+- **Prompt caching**: reuses model state for repeated prompt prefixes instead of recomputing on every request.[^src4]
+- **Tool search (deferred tools)**: loads tool schemas on demand rather than sending all tool definitions into context on every turn — especially valuable when MCP tools, terminal commands, file operations, and product-specific tools are all available but only a few are relevant at once.[^src4]
+
+**Auto model selection** (HyDRA): routes to the model that best fits the current task intent and real-time model health (availability, speed, error rates, cost). Avoids switching models mid-session to preserve prompt cache continuity — routes at cache boundaries (first turn, post-compaction).[^src4] Training spanned 16 language families; routing accuracy stayed within four points of English baseline.[^src4]
+
+## Qubot: analytics agent (internal case study)
+
+GitHub's internal **Qubot** agent demonstrates the hub-and-spoke analytics pattern at scale:[^src5]
+
+- Any employee can query the data warehouse in natural language via Slack, VS Code, or Copilot CLI.
+- Three-part architecture: **user interface** (Slack spawns a Copilot Cloud Agent per question) → **context layer** (federated, team-owned, loaded at runtime via GitHub MCP Server) → **query engine** (Kusto for recent events; Trino for complex historical queries; auto-switches).[^src5]
+- Lesson: well-curated context made Qubot 3× faster at returning correct answers than unstructured experiments.[^src5]
+- Eval-before-ship: every context layer change passes an offline eval framework before merging.[^src5]
+
+See [source page](/ai-engineering/sources/qubot-internal-data-analytics-agent-1c1b2656.md) for details.
+
 ## Extensions as vertical Copilot plugins (brainstorm-buddy)
 
 `brainstorm-buddy-extension` (cassidoo, ★30) is a Copilot Chat extension that illustrates the Copilot extension ecosystem [^src2]:
@@ -82,3 +124,6 @@ The key pattern: a Copilot extension is a chat participant with a `@handle` in C
 
 [^src1]: [Agent Evolution: Master GitHub Copilot Agent Mode (GitHub community discussion #158675)](../../raw/web/agent-evolution-master-github-copilot-agent-mode-community-d.md)
 [^src2]: [cassidoo/brainstorm-buddy-extension — Brainstorming extension for GitHub Copilot](../../raw/github/github-cassidoo-brainstorm-buddy-extension.md) — cassidoo, GitHub
+[^src3]: [Evaluating performance and efficiency of the GitHub Copilot agentic harness across models and tasks](../../raw/web/web-evaluating-performance-and-efficiency-of-the-github-copilot-bdecf2cf.md) — GitHub Blog, 2026-06-29
+[^src4]: [Getting more from each token: How Copilot improves context handling and model routing](../../raw/web/web-getting-more-from-each-token-how-copilot-improves-context-ha-45a22139.md) — GitHub Blog, 2026-06-29
+[^src5]: [How we built an internal data analytics agent](../../raw/web/web-how-we-built-an-internal-data-analytics-agent-1c1b2656.md) — GitHub Blog, 2026-06-29

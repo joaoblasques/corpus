@@ -27,6 +27,21 @@ sources:
   - path: raw/web/web-measuring-personal-growth-7ca4a3a8.md
     channel: web
     ingested_at: 2026-08-12
+  - path: raw/web/web-monday-master-class-the-graph-as-question-cal-newport-da5e036d.md
+    channel: web
+    ingested_at: 2026-08-14
+  - path: raw/web/web-monday-master-class-the-activity-filter-cal-newport-834346f9.md
+    channel: web
+    ingested_at: 2026-08-14
+  - path: raw/web/web-monday-master-class-three-unexpected-study-tips-cal-newport-86c0d4f0.md
+    channel: web
+    ingested_at: 2026-08-14
+  - path: raw/web/web-why-reading-matters-cal-newport-d6a4747e.md
+    channel: web
+    ingested_at: 2026-08-14
+  - path: raw/web/web-if-i-could-do-it-again-melissa-adelman-cal-newport-18fba445.md
+    channel: web
+    ingested_at: 2026-08-14
 aliases:
   - growth without a mentor
   - learning workspace
@@ -42,7 +57,7 @@ tags:
   - corpus/productivity
   - concept
 created: 2026-06-12
-updated: 2026-06-25
+updated: 2026-08-14
 ---
 
 # Learning to Learn
@@ -133,6 +148,29 @@ From an ML engineer's perspective on quantifying growth (not net worth or follow
 
 The RL analogy is precise: an agent under uncertainty chooses the switch that opens the *most doors*. As time passes, some options close (black lines) but new ones open (green lines); the goal is to maximize the green lines.[^src9]
 
+## The case for reading in the AI era
+
+Newport's 2026 survey of literacy data[^src_cn_r]:
+- Less than half of all adults read a book of any kind in 2022; only 38% read fiction.
+- Adults reading for pleasure daily: 28% (2004) → 16% (2023).
+- 60%+ of high school seniors struggle with text interpretation; ~30% of adults cannot paraphrase a multipage text (50% increase in a decade).
+
+Newport's argument: literacy is not merely a technology — it is the technology that enabled the cognitive world we take for granted (human rights, logic, progress, independent selfhood — all conceptual children of the written word, per Walter Ong's *Orality and Literacy*). When we spend less time grappling with words, "we're taking a step backward."
+
+Proposed response: treat highly distracting digital content like junk food — largely avoided — and deliberately schedule reading/writing/reflection time, just as we now schedule exercise. The analogy to physical health: society tackled physical decline by embracing specific fitness routines; cognitive decline warrants the same intentional approach.[^src_cn_r]
+
+This reframes ACTOR's "Aim" move: reading *with purpose* against this backdrop is itself a discipline, not just a tactic.
+
+## Cal Newport's study method techniques
+
+Three specific tactics from Newport's early Study Hacks writing (2007), applicable beyond academic context:
+
+**Graph as question**: In technical reading, figures and tables are the shorthand experts use to communicate the core of research. Rather than reading prose alone, photocopy every relevant figure (one per page) and integrate into a study guide. For each figure, practice explaining: (a) exactly what it measures; (b) the implications of what it shows (why are two curves different, why do numbers increase across columns). This forces depth of understanding that surface reading misses — and often covers information encoded in multiple text sections at once. [^src_cn_g]
+
+**Activity filter**: Commit to ≤3 aspirations, then create a one-sentence filter per aspiration ("Will this help distinguish me as one of the top X talents in my class?"). When evaluating a new time commitment, the filter is the test — if it doesn't pass, bypass it. Simple enough to seem trivial, but prevents "mediocrity by a million activities." [^src_cn_af]
+
+**Psychological maintenance as prerequisite**: Three unconventional tips Newport observed working (exercise for energy and resilience, social release for balance, proximity to engaged peers for attention) all share the same root: "If you're not happy, motivated, curious, and emotionally stable, you'll fall far short of your potential." Technique matters far less when psychological conditions are undermined. [^src_cn_3]
+
 ## Related
 
 The judgment-over-execution thesis here is the same one in [Shipping and Scope](/productivity/shipping-and-scope.md) and [AI-Augmented Knowledge Work](/productivity/ai-augmented-knowledge-work.md). See also [Decision Making](/productivity/decision-making.md) for frameworks that complement the Test and Own moves.
@@ -148,6 +186,11 @@ The judgment-over-execution thesis here is the same one in [Shipping and Scope](
 [^src7]: [How To Become Dangerously Self-Educated (with AI)](../../raw/youtube/youtube-VeU6gScy92s-how-to-become-dangerously-self-educated-with-ai.md) — Sandeep Swadia / theMITmonk. Note: the notes-channel file `notes-00-inbox-clippings-youtube-raw-raw-watched-how-to-become-dan-report.md` is a processed report of the same video with identical content; claims attributed to the YouTube source.
 [^src8]: [How To Become Dangerously Self-Educated (with AI) — Report](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-how-to-become-dan-report.md)
 [^src9]: [Measuring personal growth](../../raw/web/web-measuring-personal-growth-7ca4a3a8.md) — Chip Huyen
+[^src_cn_r]: [Why Reading Matters](../../raw/web/web-why-reading-matters-cal-newport-d6a4747e.md) — Cal Newport, 2026-07-14
+[^src_cn_ma]: [If I Could Do It Again: Melissa Adelman](../../raw/web/web-if-i-could-do-it-again-melissa-adelman-cal-newport-18fba445.md) — Cal Newport, Study Hacks (2007)
+[^src_cn_g]: [Monday Master Class: The Graph as Question](../../raw/web/web-monday-master-class-the-graph-as-question-cal-newport-da5e036d.md) — Cal Newport, Study Hacks (2007)
+[^src_cn_af]: [Monday Master Class: The Activity Filter](../../raw/web/web-monday-master-class-the-activity-filter-cal-newport-834346f9.md) — Cal Newport, Study Hacks (2007)
+[^src_cn_3]: [Monday Master Class: Three Unexpected Study Tips](../../raw/web/web-monday-master-class-three-unexpected-study-tips-cal-newport-86c0d4f0.md) — Cal Newport, Study Hacks (2007)
 
 <!-- RELATED:START (generated by bin/corpus_heal.py related — do not edit inside) -->
 

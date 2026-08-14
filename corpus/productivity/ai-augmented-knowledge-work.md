@@ -36,6 +36,42 @@ sources:
   - path: raw/_inbox/youtube-yeFNKgRst9o-ai-founders-claude-notebooklm-automation.md
     channel: youtube
     ingested_at: 2026-06-30
+  - path: raw/web/web-introducing-the-ai-second-brain-forte-labs-59c66c0a.md
+    channel: web
+    ingested_at: 2026-08-14
+  - path: raw/web/web-why-para-is-the-key-to-the-ai-era-forte-labs-34f6877a.md
+    channel: web
+    ingested_at: 2026-08-14
+  - path: raw/web/web-why-isnt-ai-taking-our-jobs-cal-newport-0a460b38.md
+    channel: web
+    ingested_at: 2026-08-14
+  - path: raw/web/web-the-pope-vs-silicon-valley-cal-newport-20abf545.md
+    channel: web
+    ingested_at: 2026-08-14
+  - path: raw/web/web-on-god-and-llms-cal-newport-945b64f5.md
+    channel: web
+    ingested_at: 2026-08-14
+  - path: raw/web/web-the-dark-side-of-the-jevons-paradox-cal-newport-3d1e4b80.md
+    channel: web
+    ingested_at: 2026-08-14
+  - path: raw/web/web-easy-is-overrated-cal-newport-07faba51.md
+    channel: web
+    ingested_at: 2026-08-14
+  - path: raw/web/web-on-bottlenecks-and-productivity-cal-newport-f375fc31.md
+    channel: web
+    ingested_at: 2026-08-14
+  - path: raw/web/web-what-ive-learned-from-selling-500-000-books-7beab94d.md
+    channel: web
+    ingested_at: 2026-08-14
+  - path: raw/web/web-my-2025-annual-review-forte-labs-21c1f1cc.md
+    channel: web
+    ingested_at: 2026-08-14
+  - path: raw/web/web-the-book-i-ve-been-waiting-to-write-for-15-years-forte-labs-23279941.md
+    channel: web
+    ingested_at: 2026-08-14
+  - path: raw/web/web-how-to-create-your-own-luck-5-easy-practices-1c3ebdc3.md
+    channel: web
+    ingested_at: 2026-08-14
 aliases:
   - AI workflow
   - voice file
@@ -53,7 +89,7 @@ tags:
   - corpus/productivity
   - concept
 created: 2026-06-12
-updated: 2026-06-25
+updated: 2026-08-14
 ---
 
 # AI-Augmented Knowledge Work
@@ -227,6 +263,63 @@ The consumer does the first half of each chain manually (asks Claude, reads the 
 
 This connects to the [NotebookLM](/ai-engineering/notebooklm.md) page for source-specific AI and [skills vs sub-agents](/ai-engineering/agent-skills.md) for the technical building blocks.
 
+## 11. Cal Newport's AI critique: bottlenecks, Jevons, and digital ethics
+
+### AI isn't taking jobs — it's transforming them
+
+Newport's 2025–2026 writing pushes back on the "jobs apocalypse" narrative from AI executives (Amodei: "half of entry-level white-collar jobs"; Suleyman: "human-level performance in 12–18 months"). What small-business owners actually do with AI closely resembles Newport's teenage job at a consulting firm — hacking together quick-and-dirty internal tools that don't displace workers, they just make "efforts a little deeper." [^src_cn1]
+
+The emerging term is "freestyle work" — AI assists at the margins without fundamentally restructuring employment. Newport notes a marked shift in executive rhetoric by 2026: Sam Altman "delighted" to be wrong; Jensen Huang calling AI-as-layoff-excuse "lazy." [^src_cn1]
+
+### The Jevons Paradox — and its dark side
+
+The Jevons Paradox (William Stanley Jevons, 1865): making a resource more efficient can *increase* total consumption of it rather than reduce it. Applied to AI: if one programmer can now do the work of five, software becomes cheaper, demand explodes, and more programmers may be hired — not fewer. [^src_cn2]
+
+But Newport focuses on the darker side: sudden efficiency gains create unforeseen negative externalities. Email and Slack made communication so efficient that demand for fast interaction exploded — the average knowledge worker is now interrupted once every two minutes. If AI creates analogous efficiency, the same dynamic could produce analogous downsides. [^src_cn2]
+
+### Bottleneck theory: efficiency ≠ productivity
+
+From Eliyahu Goldratt's "theory of constraints": every system has a limiting factor. Speeding up non-bottleneck steps just creates pile-up at the bottleneck; real productivity gains require identifying and improving the *actual* weakest link. [^src_cn3]
+
+Applied to AI tools: deploying email (or AI-generated slides) to speed communication doesn't automatically improve outcomes. If these steps don't improve the bottleneck — the deep work that produces real value — they create distraction without boosting true productivity. Newport: "Don't seek speed, or efficiency, or the avoidance of hard things. What ultimately matters more than anything else is how well we perform the deep steps that actually move the needle." [^src_cn3]
+
+### Pope vs. Silicon Valley: on digital ethics
+
+Newport documents the Vatican's 2025 encyclical "Magnifica Humanitas" as a counterweight to AI religious fervor. Key exhortation: "abandon the construction of yet another Tower of Babel and to join forces in building up the common good." [^src_cn4]
+
+Newport's read: AI leaders conflating tool-building with religious prophecy ("priest and prophet, frantically trying to appease the digital deity") is hubris. The appropriate stance: tools should be useful and build up the common good. [^src_cn4]
+
+Related: Newport's theological reflection on speech (*ruach memalela* — "speaking spirit" — as uniquely human in Jewish tradition) raises deep questions about AI generating text and speech. He doesn't resolve them, but locates the unease: "digital ethics is in the same place today as bioethics was five decades earlier." [^src_cn5]
+
+### Easy is overrated: AI writing quality data
+
+Organization Science data (2021–2026): after ChatGPT, journal submissions spiked; % using minimal AI fell from ~100% to 30%. Impact on readability: AI writing is harder to read (longer words, complex sentences, jargon, nominalizations) despite appearing "cleaner." Desk-rejection rate: 70% for high-AI papers vs. 44% for low-AI. Acceptance rate: 3.2% high-AI vs. 12% low-AI. [^src_cn6]
+
+Newport's conclusion: making things faster or easier is not the same as making things better. "Sometimes there really is no shortcut to taking your time." [^src_cn6]
+
+## 12. PARA in the AI era (Forte Labs)
+
+### Why PARA is the right organizing system for AI-assisted work
+
+Tiago Forte's 2026 argument: AI tools need access to your files — and the quality of context you can provide is the new bottleneck, not AI capability. PARA (Projects/Areas/Resources/Archives) creates pre-assembled, action-oriented context bundles that LLMs can be pointed at directly. [^src_fl1]
+
+Key claims[^src_fl1]:
+- **Organization isn't about speed** — the act of filing surfaces intent, keeps workspaces clear, and preserves for future reference. These benefits exist independent of AI.
+- **LLMs have limited effective context windows** — you need "minimum viable context," not a dump of your entire digital world. PARA provides pre-chunked, project-aligned bundles.
+- **Search is inadequate** — search finds exact matches; PARA gives pre-assembled context that reflects how you actually work.
+- **PARA is cross-platform and simple** — 4 categories encompassing anything; no granular hierarchy that confuses AI models.
+- **Archives = structured forgetting** — PARA enables LLMs to forget (de-prioritize) completed work without destroying it. Memory has a cost; the Archives category manages it.
+
+What AI *can't* do: notice that a screen recording on your desktop reminds you to send it to your editor; make far-flung connections between a photo folder and an upcoming school event. The human awareness that emerges from filing is irreplaceable. [^src_fl1]
+
+### The AI Second Brain: harness changes everything
+
+Forte's position (2026): the transition from chatting-only AI to agent harnesses (Claude Code, Codex) is the inflection point. Harnesses enable persistent memory, tool access, and real action — the "cognitive exoskeleton" vision from his 2015 writing. [^src_fl2]
+
+Personal Context Management is replacing Personal Knowledge Management as the core discipline: the bottleneck is no longer AI capability, but your ability to give AI the right information at the right time. [^src_fl2]
+
+Forte's counter-narrative against AI panic: "I'm confident we have plenty of time. Social change happens much more slowly than technological change." Estimated 84% of the global population hasn't adopted generative AI. [^src_fl2]
+
 ---
 
 [^src1]: [Reclaim 6 Hours of your Week in 10 mins](../../raw/email/email-2026-05-25-reclaim-6-hours-of-your-week-in-10-mins.md)
@@ -240,6 +333,14 @@ This connects to the [NotebookLM](/ai-engineering/notebooklm.md) page for source
 [^src9]: [How to Build the Ultimate AI Second Brain (Obsidian + Claude Code)](../../raw/youtube/youtube-4l8MXYUqGaA-how-to-build-the-ultimate-ai-second-brain-obsidian-claude-co.md) — KJ Rainey (two-layer brain)
 [^src10]: [Pro AI Dictation Tips for SuperWhisper — Mastering Context Awareness](../../raw/youtube/youtube-py3szwKAZYU-pro-ai-dictation-tips-for-superwhisper-mastering-context-awa.md) — A Fading Thought
 [^src11]: Stop Using ChatGPT — Build This Claude + NotebookLM Automation Instead (AI Founders) [source reaped] — 3 automation chains; consumer vs. founder/engine framing; McKinsey 20% stat
+[^src_cn1]: [Why Isn't AI Taking Our Jobs?](../../raw/web/web-why-isnt-ai-taking-our-jobs-cal-newport-0a460b38.md) — Cal Newport; links to his New Yorker article on "freestyle work"
+[^src_cn2]: [The Dark Side of the Jevons Paradox](../../raw/web/web-the-dark-side-of-the-jevons-paradox-cal-newport-3d1e4b80.md) — Cal Newport
+[^src_cn3]: [On Bottlenecks and Productivity](../../raw/web/web-on-bottlenecks-and-productivity-cal-newport-f375fc31.md) — Cal Newport; Goldratt's theory of constraints applied to digital tools
+[^src_cn4]: [The Pope vs. Silicon Valley](../../raw/web/web-the-pope-vs-silicon-valley-cal-newport-20abf545.md) — Cal Newport; Vatican encyclical "Magnifica Humanitas"
+[^src_cn5]: [On God and LLMs](../../raw/web/web-on-god-and-llms-cal-newport-945b64f5.md) — Cal Newport; speech as ruach memalela, digital ethics
+[^src_cn6]: [Easy is Overrated](../../raw/web/web-easy-is-overrated-cal-newport-07faba51.md) — Cal Newport; Organization Science AI-writing data
+[^src_fl1]: [Why PARA Is the Key to the AI Era](../../raw/web/web-why-para-is-the-key-to-the-ai-era-forte-labs-34f6877a.md) — Tiago Forte, Forte Labs
+[^src_fl2]: [Introducing The AI Second Brain](../../raw/web/web-introducing-the-ai-second-brain-forte-labs-59c66c0a.md) — Tiago Forte, Forte Labs
 
 <!-- RELATED:START (generated by bin/corpus_heal.py related — do not edit inside) -->
 

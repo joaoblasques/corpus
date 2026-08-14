@@ -2,6 +2,27 @@
 
 > OKF v0.1 change log. Newest first, grouped by date.
 
+## 2026-08-14
+
+* **Ingest**: Batch ingest — 31 sources from 50-file pre-filtered inbox pass — ingest-auto run; 17 deferred
+  - sources: raw/_inbox/ + raw/web/ (web channel — GitHub Blog x3, ByteByteGo x2, Cal Newport x14, Forte Labs x8, Every.to x1, Antithesis/Pragmatic Engineer x1)
+  - domains: ai-engineering, software-engineering, productivity
+  - pages created: [/ai-engineering/sources/evaluating-github-copilot-agentic-harness-bdecf2cf.md, /ai-engineering/sources/qubot-internal-data-analytics-agent-1c1b2656.md, /software-engineering/antithesis.md]
+  - pages updated: [/ai-engineering/github-copilot.md, /ai-engineering/rag.md, /ai-engineering/agent-harness.md, /ai-engineering/claude-code.md, /ai-engineering/ai-agent.md, /software-engineering/engineering-craft.md, /productivity/ai-augmented-knowledge-work.md, /productivity/learning-to-learn.md, /productivity/obsidian-pkm.md]
+  - deferred: 17 files (UNCERTAIN: Cal Newport tiny stubs x6, Forte Labs personal annual reviews/announcements x9, Forte Labs goal-setting needs dedup x1, Forte Labs personal essay x1)
+  - notes: GitHub Copilot harness benchmark (SWE-bench parity, Rubber Duck pattern, prompt caching, HyDRA auto-routing); Qubot internal analytics agent (MCP context layer, 3× faster); RAG vs Graph RAG vs Agentic RAG comparison table (ByteByteGo); Cal Newport AI critique cluster (bottleneck theory, Jevons Paradox, digital ethics, AI coding discontents, Pope encyclical); Forte Labs PARA+AI era, AI Second Brain; learning-to-learn updated with reading-matters + study technique posts; obsidian-pkm PARA-for-AI section; antithesis DST-as-a-service new entity page; engineering-craft PR limits + Meta culture sections
+
+* **Collectors**: gmail=5, blog_promote=0, obsidian=0, book_discover=0, blog_discover=2, book_fetch=0, pdf=0, image=0, books=0, arxiv=0, youtube=0, github_discover=5, github_promote=5, github=0, x=0, links_refetch=0
+* **Ingest**: 31 ingested · 17 deferred · status=ok
+* **YoutubeQuick**: 0 intake · 0 rescued · 0 skipped · status=ok
+* **DocsQuick**: 2 intake · 46 thin · 2 llm_fail · status=ok
+* **YoutubeReap**: 0 removed · status=ok
+* **Gardener**: 4 stubs deepened · status=ok
+* **Heal**: 0 citations repointed · 0 unfixable · 2 hubs reindexed · 34 cross-domain links · status=ok
+* **Depth**: 442 knowledge · 1401 sources · ratio 1:3.2
+* **GapResolver**: 0 gap dispatched · 0 sources queued · status=ok
+* **Lint**: 2 broken wikilinks · 0 broken citations · 0 orphans · 1274 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+* **OKF**: 0 violations
 ## 2026-08-13
 
 * **Ingest**: Batch ingest — 37 sources from 50-file pre-filtered inbox pass — ingest-auto run; 13 deferred

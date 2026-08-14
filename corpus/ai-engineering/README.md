@@ -196,6 +196,8 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Generator–Evaluator Separation](/ai-engineering/generator-evaluator-separation.md) — synthesis · draft · a model can't reliably grade its own output; move evaluation into a separate agent/model/rubric/human
 
 ### Sources
+- [Evaluating GitHub Copilot Agentic Harness](/ai-engineering/sources/evaluating-github-copilot-agentic-harness-bdecf2cf.md) — source · draft · benchmark results; task resolution parity with model-vendor harnesses; Rubber Duck pattern; token efficiency
+- [Qubot: GitHub's Internal Data Analytics Agent](/ai-engineering/sources/qubot-internal-data-analytics-agent-1c1b2656.md) — source · draft · GitHub's internal analytics agent; 3-component architecture; MCP context layer; 3× faster with well-curated context
 - [The Little Book of Deep Learning (Fleuret, 2024)](/ai-engineering/sources/the-little-book-of-deep-learning.md) — source · draft · 189pp compact deep learning textbook (CC BY-NC-SA 4.0, fleuret.org); Foundations (ML, GPU, tensors, training, scaling laws, parallel training) → Components (layers, activations, attention, normalization, skip connections) → Architectures (MLP, ResNet-50, GPT, ViT) → Applications (denoising, classification, object detection, segmentation, CLIP, RL, text/image generation) → Compute Schism (prompt engineering, quantization, LoRA, model merging)
 - [Pattern Recognition and Machine Learning (Bishop, 2006)](/ai-engineering/sources/pattern-recognition-and-machine-learning.md) — source · draft · canonical Bayesian ML textbook (758pp, Springer); covers probability distributions, linear models, neural networks, kernel methods/GPs/SVMs, graphical models, EM, variational inference, MCMC, PCA, HMMs, boosting
 - [Probabilistic Machine Learning: An Introduction (Murphy, 2022)](/ai-engineering/sources/probabilistic-machine-learning-intro.md) — source · draft · modern probabilistic ML textbook (860pp, MIT Press, CC-BY-NC-ND); all 43 parts ingested; foundations → linear models → deep learning → nonparametric → clustering → dimensionality reduction → graph embeddings
@@ -466,7 +468,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Tool Calling & Context Engineering: How They Interlock](/ai-engineering/tool-calling-and-context-engineering.md)
 
 <details>
-<summary>Source summaries (741)</summary>
+<summary>Source summaries (745)</summary>
 
 - ["2024 State of Analytics Engineering, crafted by dbt Labs | dbt Labs"](/ai-engineering/sources/2024-state-of-analytics-engineering-crafted-by-dbt-labs-dbt--cb342df0.md)
 - ["6 AI Agent Orchestration Best Practices in 2026 [Explained]"](/ai-engineering/sources/6-ai-agent-orchestration-best-practices-in-2026-explained-8144e2d2.md)
@@ -745,6 +747,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [A Brief Introduction to Machine Learning for Engineers (Simeone, 2018)](/ai-engineering/sources/ml-for-engineers-simeone.md)
 - [A Codex of One’s Own](/ai-engineering/sources/a-codex-of-one-s-own-8755a784.md)
 - [A Course in Machine Learning (Daumé III, 2015)](/ai-engineering/sources/a-course-in-machine-learning.md)
+- [A Detailed Guide to API Composition Techniques](/ai-engineering/sources/a-detailed-guide-to-api-composition-techniques-393bb70f.md)
 - [A Dispatch from the Jagged Frontier of Analytics Engineering](/ai-engineering/sources/a-dispatch-from-the-jagged-frontier-of-analytics-engineering-2bad3d09.md)
 - [A Field Guide to Rapidly Improving AI Products (Hamel Husain)](/ai-engineering/sources/field-guide-improving-ai-products.md)
 - [A Fireside Chat with Cat and Thariq from the Claude Code team](/ai-engineering/sources/a-fireside-chat-with-cat-and-thariq-from-the-claude-code-tea-009d8ac6.md)
@@ -786,6 +789,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Agentic coding in analytics engineering (w/ Mikkel Dengsøe)](/ai-engineering/sources/agentic-coding-in-analytics-engineering-w-mikkel-dengs-e-cf1522dd.md)
 - [Agents](/ai-engineering/sources/agents-adfd540d.md)
 - [Agents Category | Blog | Claude by Anthropic](/ai-engineering/sources/agents-category-blog-claude-by-anthropic-ac.md)
+- [Agents Find a Way](/ai-engineering/sources/agents-find-a-way-67c22233.md)
 - [Agents for Hire](/ai-engineering/sources/agents-for-hire-270347b2.md)
 - [Agents need their own computer. Here's how to give them one safely.](/ai-engineering/sources/agents-need-their-own-computer-here-s-how-to-give-them-one-s-4934c442.md)
 - [AGENTS.md — What Belongs There and What Wastes Context](/ai-engineering/sources/agents-md-what-belongs-there-and-what-wastes-context-ce.md)
@@ -1019,6 +1023,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Edge AI — Running AI On Device](/ai-engineering/sources/edge-ai-running-ai-on-device-dece.md)
 - [Essential AI prompts for developers](/ai-engineering/sources/essential-ai-prompts-for-developers-H3M95i4iS5c.md)
 - [Ethical Hacking - 10 Kali Linux Tools Reference](/ai-engineering/sources/ethical-hacking-10-kali-linux-tools-reference-efeece.md)
+- [Evaluating Performance and Efficiency of the GitHub Copilot Agentic Harness](/ai-engineering/sources/evaluating-github-copilot-agentic-harness-bdecf2cf.md)
 - [Every Claude Code Memory System Compared (So You Don't Have To)](/ai-engineering/sources/every-claude-code-memory-system-compared-so-you-don-t-have-t-UHVFcUzAGlM.md)
 - [Every Claude Cowork Concept Explained for Normal People](/ai-engineering/sources/every-claude-cowork-concept-explained-for-normal-people-NDHWUhGzKg0.md)
 - [Every Claude Cowork Feature Explained Clearly](/ai-engineering/sources/every-claude-cowork-feature-explained-clearly-seLX6SwP2hY.md)
@@ -1050,6 +1055,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [How Anthropic Engineers ACTUALLY Prompt Claude Code](/ai-engineering/sources/how-anthropic-engineers-actually-prompt-claude-code-qOvc9IUKEIc.md)
 - [How Claude Code’s Creator Starts EVERY Project](/ai-engineering/sources/how-claude-code-s-creator-starts-every-project-M5tBN-I8AYo.md)
 - [How DeepSeek Runs a 284B LLM on a Laptop (Run AI Locally)](/ai-engineering/sources/how-deepseek-runs-a-284b-llm-on-a-laptop-run-ai-locally-3gk-9p9DSGs.md)
+- [How GitHub Built Qubot: An Internal Data Analytics Agent](/ai-engineering/sources/qubot-internal-data-analytics-agent-1c1b2656.md)
 - [How Good Is AI at Coding React? The Complexity Cliff](/ai-engineering/sources/how-good-is-ai-at-coding-react-the-complexity-cliff-beca.md)
 - [How I Built a Trading Bot That Trades Automatically (Full Data Platform Overview)](/ai-engineering/sources/how-i-built-a-trading-bot-that-trades-automatically-full-dat-e-oUwZOXVbM.md)
 - [How I Get Fable 5 Level Results with Any Model (Seriously) Using AI Harness Engineering](/ai-engineering/sources/how-i-get-fable-5-level-results-with-any-model-seriously-usi-R_Nf-IDVZEg.md)

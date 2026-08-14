@@ -16,6 +16,7 @@ Domain covering software engineering practice from foundational CS through deplo
 ## Pages
 
 ### Entities
+- [Antithesis](/software-engineering/antithesis.md) — entity · draft · DST-as-a-service; deterministic hypervisor enabling time-travel debugging for any software; $47M seed; founded 2018
 - [Brendan Fong](/software-engineering/brendan-fong.md) — entity · stub · MIT applied category theory researcher; co-author of Seven Sketches in Compositionality (2018)
 - [David I. Spivak](/software-engineering/david-spivak.md) — entity · stub · MIT applied category theory researcher; co-author of Seven Sketches in Compositionality; polynomial functor framework for dynamical systems
 - [Stephen Davies](/software-engineering/stephen-davies.md) — entity · stub · CS professor at UMW; author of A Cool Brisk Walk Through Discrete Mathematics (v2.2.2, CC BY-SA)
@@ -175,7 +176,8 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Virtual Machine Monitors (VMMs / Hypervisors)](/software-engineering/virtual-machine-monitors.md)
 - [Virtual Memory](/software-engineering/virtual-memory.md)
 
-### Entities (17)
+### Entities (18)
+- [Antithesis](/software-engineering/antithesis.md)
 - [Brendan Fong](/software-engineering/brendan-fong.md)
 - [Bun](/software-engineering/bun.md)
 - [David I. Spivak](/software-engineering/david-spivak.md)

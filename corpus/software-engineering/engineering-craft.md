@@ -30,6 +30,12 @@ sources:
   - path: raw/web/web-how-to-create-a-productive-developer-environment-for-saas-b839e28f.md
     channel: web
     ingested_at: 2026-07-06
+  - path: raw/web/web-how-pull-request-limits-are-cutting-down-the-noise-c3d99e0e.md
+    channel: web
+    ingested_at: 2026-08-14
+  - path: raw/web/web-inside-meta-s-engineering-culture-part-1-5c48ecf7.md
+    channel: web
+    ingested_at: 2026-08-14
 aliases:
   - engineering craft
   - resourceful engineer
@@ -192,3 +198,36 @@ Physical + digital environment as a "holistic ecosystem" — both constrain deve
 [^src7]: [How to Create a Software Engineer Portfolio in 2026](../../raw/web/web-how-to-create-a-software-engineer-portfolio-in-2026-3585cdf1.md)
 [^src8]: [Top 7 Tips & Tricks To Improve Your Coding Skills Today](../../raw/web/web-top-7-tips-tricks-to-improve-your-coding-skills-today-5f90fcc2.md)
 [^src9]: [How To Create a Productive Developer Environment For SaaS](../../raw/web/web-how-to-create-a-productive-developer-environment-for-saas-b839e28f.md)
+[^src10]: [How pull request limits are cutting down the noise](../../raw/web/web-how-pull-request-limits-are-cutting-down-the-noise-c3d99e0e.md) — GitHub Blog, 2026-06-29
+[^src11]: [Inside Meta's Engineering Culture: Part 1](../../raw/web/web-inside-meta-s-engineering-culture-part-1-5c48ecf7.md) — Gergely Orosz, The Pragmatic Engineer
+
+## GitHub pull request limits (2026)
+
+As of 2026, GitHub merged ~90 million pull requests/month — a 3.6× increase from January 2023 — driven partly by AI-generated PRs.[^src10] GitHub's response: **pull request limits**, a persistent per-repository cap on open PRs from users without write access.
+
+How it works[^src10]:
+- Set maximum open PRs per non-write-access user.
+- PRs opened by AI agents count toward the limit.
+- Trusted contributors can bypass via allowlist.
+- Draft PRs do not count.
+
+Effect on contributor behavior: "When anyone can open a pull request in seconds, a polished change and a rough draft look the same in the queue. But when only a few pull requests can be open at once, a contributor must be selective and prioritize which contributions they want to be reviewed."[^src10]
+
+On the roadmap: **archived pull requests** (hide spam from view without deletion), **issue limits**, **smarter bypass signals** (auto-bypass on prior merged PR, account age), **cross-repository controls** for spray patterns.[^src10]
+
+## Meta/Facebook engineering culture
+
+Meta's engineering culture is defined by "Move Fast" as core operating philosophy (evolved from "Move Fast and Break Things").[^src11]
+
+Key vocabulary[^src11]:
+- **Diff**: synonym for pull request / code change.
+- **To land**: merge a diff into main.
+- **PSC / Calibration**: Performance Summary Cycle; manager-led calibration determines ratings.
+- **Phab**: internal Phabricator (similar to GitHub).
+- **SEV**: incident level.
+
+Core values (2022): Move Fast · Focus on long-term impact · Build awesome things · Live in the future · Be direct · Meta/metamates/me.[^src11]
+
+Standout practices: high individual autonomy; engineering-centric; bootcamp onboarding (choose your team after bootcamp); hackathons built into culture; E3→E6 leveling with archetypes at E7+. Performance reviews ("PSC") run calibration processes where managers compare employees to arrive at final ratings.[^src11]
+
+Historical context: famous wall slogans (2004–2016) — "Done is Better Than Perfect", "Fail Harder", "What Would You Do If You Weren't Afraid?" — no longer posted but embedded in culture.[^src11]

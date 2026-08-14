@@ -78,6 +78,9 @@ sources:
   - path: raw/_inbox/youtube-MnG0ugK2JAI-build-your-own-ai-agent-full-course-with-openai-langchain-re.md
     channel: youtube
     ingested_at: 2026-06-30
+  - path: raw/web/web-everyone-gets-an-agent-almost-no-one-gets-the-model-92c58072.md
+    channel: web
+    ingested_at: 2026-08-14
 aliases:
   - ai agent
   - agentic AI
@@ -376,3 +379,16 @@ Nick Saraev's pattern for compounding agent improvement over time [^src21]:
 3. Next session, the rule loads automatically — the agent doesn't repeat the mistake
 
 Different platforms read different files: Claude reads `CLAUDE.md`, Gemini reads `GEMINI.md`, Codex reads `AGENTS.md`. In a multi-model setup, each model reads its own file and accumulates its own preference history [^src21]. See [CLAUDE.md Conventions](/ai-engineering/claude-md-conventions.md).
+
+## Token rationing: "everyone gets an agent, almost no one gets the model"
+
+Dan Shipper / Mike Taylor (Every, 2026) argue that the era of measuring AI adoption by raw token consumption is ending — compute will be allocated like a portfolio:[^src22]
+
+- **Rationing dynamic**: GPT-5.6 Sol launched with access limited to ~20 pre-approved companies by U.S. government directive, signaling that frontier access may increasingly be allocated by demonstrated return.[^src22]
+- **Token-as-capital**: "the biggest budgets going to whoever can prove the biggest returns, with frontier access rationed accordingly."[^src22]
+- **Agents reaching everyone**: Codex crossed 5 million weekly active users; Anthropic's Claude Tag landed in Slack — the agents built for engineers are migrating to general knowledge work desks.[^src22]
+- **Compound engineering**: Every's own Compound agent now runs unattended for 6 hours — builds a feature, writes tests, opens a PR.[^src22]
+
+Implication for practitioners: the scarce resource is shifting from model access to the ability to prove ROI from agent usage. Organizations that cannot demonstrate returns will face increasing token cost pressure as frontier models become rationed resources.[^src22]
+
+[^src22]: [Everyone Gets an Agent. Almost No One Gets the Model.](../../raw/web/web-everyone-gets-an-agent-almost-no-one-gets-the-model-92c58072.md) — Every (Dan Shipper, Mike Taylor, Kate Lee), 2026-06-29

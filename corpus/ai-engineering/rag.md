@@ -51,6 +51,12 @@ sources:
   - path: raw/youtube/youtube-2KVkpUGRtnk-build-real-time-knowledge-graph-for-documents-with-llm.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/web/web-ep220-rag-vs-graph-rag-vs-agentic-rag-9d90c44e.md
+    channel: web
+    ingested_at: 2026-08-14
+  - path: raw/web/web-how-to-build-a-smart-chatbot-in-10-mins-with-langchain-99205284.md
+    channel: web
+    ingested_at: 2026-08-14
 aliases:
   - RAG
   - retrieval-augmented generation
@@ -65,7 +71,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-21
-updated: 2026-06-25
+updated: 2026-08-14
 ---
 
 # RAG (Retrieval-Augmented Generation)
@@ -389,3 +395,28 @@ An alternative to vector-only RAG: build a property-graph knowledge base from do
 **LLM extraction guidance** [^src14]: detailed docstrings in the `Relationship` data class ("the subject field must contain a named entity, predicate must be a verb phrase...") significantly improve triple quality. The structured extraction step is the most model-sensitive part of the pipeline.
 
 See also: [RAG](/ai-engineering/rag.md) (vector RAG patterns), [Embeddings](/ai-engineering/embeddings.md) (the vector alternative to graph edges).
+
+## Standard RAG vs Graph RAG vs Agentic RAG — comparison
+
+From ByteByteGo EP220[^src_bbe]:[^src_bbe]
+
+| Mode | Mechanism | When to use |
+|---|---|---|
+| **Standard RAG** | Query → embedding → vector DB → top-K chunks → LLM answer | Fast and cheap; breaks if the wrong chunk is retrieved (no catch) |
+| **Graph RAG** | Specific query → local search (entity → graph traversal → LLM synthesis); broad query → community reports → LLM ranking → answer | Structured knowledge: legal, compliance, biomedical; expensive to build and slow to update |
+| **Agentic RAG** | Reasoning agent breaks query into sub-questions → per-source retrieval → checker agent (re-retrieves if insufficient) → final LLM synthesis | Multi-step reasoning, self-correction; slower, expensive, harder to debug |
+
+Standard RAG: fast but fragile. Graph RAG: structured but costly. Agentic RAG: flexible but complex.[^src_bbe]
+
+## LangChain chatbot pattern (RAG + tools + memory)
+
+LangChain composes RAG into chatbots through three modules[^src_lc]:
+
+1. **Indexing**: load documents → embed into vector store (e.g. Pinecone) → enable semantic search.
+2. **Tools**: give the LLM access to external capabilities (web search, database queries) via tool definitions.
+3. **Memory**: persist conversation history so the chatbot maintains context across turns.
+
+LangChain's six core modules: Prompts (dynamic templates), Document Loaders, Vector Stores, Chains (compose prompts + models + output parsers), Agents (tool-calling loops), Memory.[^src_lc]
+
+[^src_bbe]: [EP220: RAG vs Graph RAG vs Agentic RAG](../../raw/web/web-ep220-rag-vs-graph-rag-vs-agentic-rag-9d90c44e.md) — ByteByteGo, 2026-06-29
+[^src_lc]: [How to Build a Smart Chatbot in 10 mins with LangChain](../../raw/web/web-how-to-build-a-smart-chatbot-in-10-mins-with-langchain-99205284.md) — ByteByteGo / Damien Benveniste, 2026-06-29
