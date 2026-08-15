@@ -42,6 +42,15 @@ sources:
   - path: raw/web/web-if-i-could-do-it-again-melissa-adelman-cal-newport-18fba445.md
     channel: web
     ingested_at: 2026-08-14
+  - path: raw/web/web-why-most-students-don-t-understand-the-real-goal-of-note-tak-d38ac6a5.md
+    channel: web
+    ingested_at: 2026-08-15
+  - path: raw/web/web-monday-master-class-three-trivial-study-habits-that-provide-4dc84945.md
+    channel: web
+    ingested_at: 2026-08-15
+  - path: raw/web/web-the-vital-five-a-crash-course-for-turning-around-poor-academ-b87c4591.md
+    channel: web
+    ingested_at: 2026-08-15
 aliases:
   - growth without a mentor
   - learning workspace
@@ -53,11 +62,14 @@ aliases:
   - self-education
   - deliberate practice
   - learning environment
+  - Three Laws of note-taking
+  - vital five academic habits
+  - trivial study habits
 tags:
   - corpus/productivity
   - concept
 created: 2026-06-12
-updated: 2026-08-14
+updated: 2026-08-15
 ---
 
 # Learning to Learn
@@ -171,6 +183,25 @@ Three specific tactics from Newport's early Study Hacks writing (2007), applicab
 
 **Psychological maintenance as prerequisite**: Three unconventional tips Newport observed working (exercise for energy and resilience, social release for balance, proximity to engaged peers for attention) all share the same root: "If you're not happy, motivated, curious, and emotionally stable, you'll fall far short of your potential." Technique matters far less when psychological conditions are undermined. [^src_cn_3]
 
+**The real goal of note-taking — reduce study time**: Newport's Three Laws of note-taking with the "reduce study time" mindset:[^src_cn_nt]
+1. *Never record raw information.* Do as much thinking and processing in the classroom as possible — record the importance of what the professor says, not what they say. "The only thing that should go into your notebook is processed information."
+2. *Question connections.* Ask questions that probe how ideas connect to each other — not trivial clarification. "The less sure you are of your answer the more important it is for you to ask."
+3. *Adopt an idea-centric format.* Use a fill-in-the-blanks structure (e.g., Question/Evidence/Conclusion) so decisions about how to record are simplified during the fast pace of lecture.
+
+**Three trivial habits with non-trivial impact**: Newport's simplest tactics for study sessions:[^src_cn_th]
+1. Sketch a 30-second plan with time estimates before each session — what, how long, in what order.
+2. Drink 3 glasses of water and 1 healthy snack for every 1 caffeinated beverage — energy levels directly constrain concentration.
+3. Social accountability: tell someone your anti-idiot goal before you sit down, and ask them to check in. The call itself takes 2 minutes; the effect is behavioral.
+
+**Vital five for turning around poor academic performance**: Newport's emergency-recovery protocol:[^src_cn_vf]
+1. Attend every class; take notes on a laptop.
+2. Set a fixed two-hour study block for every weekday and Sunday — in a remote library corner, without exception.
+3. Make a study plan for every test in every class at term start.
+4. Replace rote review with quiz-and-recall.
+5. Attend office hours every single week on the hardest material; inform the professor of your intent to improve.
+
+These five are not general tips — they are the concentrated extract from Newport's full corpus for rapid performance reversal. The specificity is the point: each closes a common failure mode (absences, inconsistent timing, no planning, passive review, no expert contact).
+
 ## Related
 
 The judgment-over-execution thesis here is the same one in [Shipping and Scope](/productivity/shipping-and-scope.md) and [AI-Augmented Knowledge Work](/productivity/ai-augmented-knowledge-work.md). See also [Decision Making](/productivity/decision-making.md) for frameworks that complement the Test and Own moves.
@@ -191,6 +222,9 @@ The judgment-over-execution thesis here is the same one in [Shipping and Scope](
 [^src_cn_g]: [Monday Master Class: The Graph as Question](../../raw/web/web-monday-master-class-the-graph-as-question-cal-newport-da5e036d.md) — Cal Newport, Study Hacks (2007)
 [^src_cn_af]: [Monday Master Class: The Activity Filter](../../raw/web/web-monday-master-class-the-activity-filter-cal-newport-834346f9.md) — Cal Newport, Study Hacks (2007)
 [^src_cn_3]: [Monday Master Class: Three Unexpected Study Tips](../../raw/web/web-monday-master-class-three-unexpected-study-tips-cal-newport-86c0d4f0.md) — Cal Newport, Study Hacks (2007)
+[^src_cn_nt]: [Why Most Students Don't Understand the Real Goal of Note-Taking](../../raw/web/web-why-most-students-don-t-understand-the-real-goal-of-note-tak-d38ac6a5.md) — Cal Newport, Study Hacks
+[^src_cn_th]: [Monday Master Class: Three Trivial Study Habits](../../raw/web/web-monday-master-class-three-trivial-study-habits-that-provide-4dc84945.md) — Cal Newport, Study Hacks
+[^src_cn_vf]: [The Vital Five](../../raw/web/web-the-vital-five-a-crash-course-for-turning-around-poor-academ-b87c4591.md) — Cal Newport, Study Hacks
 
 <!-- RELATED:START (generated by bin/corpus_heal.py related — do not edit inside) -->
 

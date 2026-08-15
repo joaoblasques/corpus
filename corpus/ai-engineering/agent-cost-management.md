@@ -27,6 +27,9 @@ sources:
   - path: raw/web/web-escaping-the-agentic-token-tax-replacing-claude-code-or-copi-c0fa1370.md
     channel: web
     ingested_at: 2026-08-12
+  - path: raw/web/web-what-actually-helps-me-stop-hitting-claude-code-usage-limits-1723373d.md
+    channel: web
+    ingested_at: 2026-08-15
 aliases:
   - agentic AI costs
   - agent cost management
@@ -37,11 +40,15 @@ aliases:
   - prompt caching
   - token conservation
   - usage limits
+  - /compact with instructions
+  - /context command
+  - /usage command
+  - model routing Haiku Sonnet Opus
 tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-16
-updated: 2026-06-25
+updated: 2026-08-15
 ---
 
 # Agent Cost Management
@@ -191,6 +198,26 @@ Near-term mitigations before switching tools:[^src8]
 - Improve prompting discipline
 - Reduce context window usage
 
+## Practitioner habits: /compact with instructions, /context, /usage
+
+From a One Shot Show podcast episode on Claude Code usage limits [^src9]:
+
+**The root mechanic**: every new message carries the weight of the conversation behind it. A fragmented session (old directions, discarded ideas, unrelated files, half-finished experiments) makes even short messages expensive.
+
+**Nine habits** [^src9]:
+
+1. **Clear when the task changes** (`/clear`): "Same task, same session is usually fine. New task, new session is usually better."
+2. **Compact with instructions** at 60–70% of context window (not at the edge): the key is personalizing the compact command — tell Claude to preserve current goal, success criteria, decisions made, files changed/read, source URLs, open tasks, and exact next action; and to drop discarded ideas, repeated explanations, old drafts, verbose logs, and broad background already in files. "Not many people actually do this. They just trust the compacting rules without personalizing them."
+3. **Point Claude at exact files/folders**: "If I know the file, I mention the file. If I know the folder, I mention the folder." This saves tokens AND improves answer quality.
+4. **Keep CLAUDE.md lean**: route to supporting files rather than embedding all context. CLAUDE.md should be a routing map, not a dump of every rule.
+5. **Disable unused MCP connectors**: "Every connected tool should earn its place in the session." Leaving always-on connectors enabled adds hidden token overhead even when not used.
+6. **Use CLI + skills instead of MCP** when lighter: CLI wrapped in a skill only loads the process when called; MCP is always-on.
+7. **Match model to task**: Haiku for classification/extraction/tagging/formatting/short rewrites; Sonnet for most execution; Opus for planning and complex reasoning. "Plan with Opus, then switch to Sonnet for execution."
+8. **Use `/context`** to see what's occupying the current session (messages, files, tools, skills, memory files, available space).
+9. **Use `/usage`** to see where usage is going over time — one practitioner discovered an automated WordPress workflow was consuming most of his quota only after using `/usage`.
+
+"Claude Code gets expensive when the session has to carry too much or guess too much."[^src9]
+
 [^src1]: [Managing Agentic AI Costs at Scale](../../raw/web/managing-agentic-ai-costs-at-scale.md)
 [^src2]: [How to stop hitting Claude usage limits — 23 habits](../../raw/web/web-how-to-stop-hitting-claude-usage-limits.md) — Ruben Hassid
 [^src3]: [mnfst/manifest — GitHub ★7094](../../raw/github/github-mnfst-manifest.md)
@@ -199,3 +226,4 @@ Near-term mitigations before switching tools:[^src8]
 [^src6]: [How to Run Claude Code for Free (Local LLMs)](../../raw/email/email-2026-06-21-how-to-run-claude-code-for-free.md) — email newsletter
 [^src7]: [Claude usage limits explained](../../raw/youtube/youtube-qgAo-5uuO1E-claude-usage-limits-how-to-never-hit-them-again-2026.md) — YouTube
 [^src8]: [Escaping the Agentic Token Tax: Replacing Claude Code or Copilot with OpenCode](../../raw/web/web-escaping-the-agentic-token-tax-replacing-claude-code-or-copi-c0fa1370.md)
+[^src9]: [What Actually Helps Me Stop Hitting Claude Code Usage Limits](../../raw/web/web-what-actually-helps-me-stop-hitting-claude-code-usage-limits-1723373d.md) — One Shot Show Episode 16, 2026-06-29

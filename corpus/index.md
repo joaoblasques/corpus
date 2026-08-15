@@ -3,13 +3,14 @@ okf_version: "0.1"
 ---
 # Corpus Index
 
-> Last updated: 2026-08-12 | Total pages: 534 | Total sources: 2398
+> Last updated: 2026-08-15 | Total pages: 546 | Total sources: 2412
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
 ## Domains
 
 ### ai-engineering
+- ["Adaptive Verification in vLLM: DSpark confidence-scheduled verification"](/ai-engineering/sources/adaptive-verification-in-vllm-dspark-confidence-scheduled-ve-ffc3bba3.md) — source · stub · Adaptive Verification in vLLM: DSpark confidence-scheduled verification improves throughput and inte…
 - [Evaluating GitHub Copilot Agentic Harness](/ai-engineering/sources/evaluating-github-copilot-agentic-harness-bdecf2cf.md) — source · GitHub Copilot harness benchmark (SWE-bench, SkillsBench, TerminalBench, Win-Hill); Rubber Duck pattern; task parity with model-vendor harnesses at fewer tokens
 - [Qubot: GitHub's Internal Data Analytics Agent](/ai-engineering/sources/qubot-internal-data-analytics-agent-1c1b2656.md) — source · GitHub's internal analytics agent (Slack/VS Code/CLI → federated MCP context → Kusto/Trino); 3× faster with well-curated context
 - [Agents Find a Way](/ai-engineering/sources/agents-find-a-way-67c22233.md) — source · stub · An OpenAI agent escaped its test environment and hacked into Hugging Face's systems, highlighting th…
@@ -952,6 +953,15 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [AI Brain Fry (source)](/ai-engineering/sources/ai-brain-fry-987d6d62.md) — source · draft · HBR term for cognitive exhaustion from AI agent oversight; 9 engineering impacts; burnout mitigations
 - [Agentic Token Tax and OpenCode (source)](/ai-engineering/sources/token-tax-opencode-c0fa1370.md) — source · draft · flat-rate → usage-based billing shift; OpenCode + Ollama + Qwen 2.5 Coder 7B as local alternative; CodeGemma lacks tool calling
 
+- [Two Protocols Building the Agentic Internet (source)](/ai-engineering/sources/two-protocols-building-the-agentic-internet-c27065c2.md) — source · draft · MCP (vertical agent↔tool) vs A2A (horizontal agent↔agent); AgentCard discovery; Task lifecycle; Agentic AI Foundation; both protocols donated to open governance
+- [Visual Plan: Scannable Claude Code Plans (source)](/ai-engineering/sources/visual-plan-scannable-claude-code-plans-0689d90a.md) — source · draft · Probabilistic compiler thesis; MDX plan schema enforcement; constraint engineering as the new bottleneck after code generation is solved
+- [AI Agents Follow Your Design System (source)](/ai-engineering/sources/ai-agents-follow-your-design-system-d7698d8e.md) — source · draft · "Your codebase is your prompt"; ESLint as the only rule agents can't skim; .eslintrc.agent.json strategy for design system compliance
+- [Agent-Native Apps Use Less AI (source)](/ai-engineering/sources/agent-native-apps-use-less-ai-7091a959.md) — source · draft · Third execution surface (Actions); crystallization pattern (agent prototype → production actions); 5×–100× cost reduction; economics of restraint
+- [AI Governance Rate (source)](/ai-engineering/sources/ai-governance-rate-do-you-know-7dcfcc93.md) — source · draft · Three gap surfaces: design system drift, review process mismatch, expanded authorship; LinearB: AI PRs sit 4.6× longer; governance as infrastructure work
+- [Developer Drowning in AI PRs (source)](/ai-engineering/sources/developer-drowning-ai-prs-3177eebf.md) — source · draft · Trust questions vs syntax questions; METR: AI tools made devs 19% slower; Sonar 2026: 96% don't fully trust AI code; expanded authorship compounds review debt
+- [Open Artifacts #22: Zyphra, Cohere, Poolside (source)](/ai-engineering/sources/open-artifacts-22-zyphra-cohere-poolside-faa66b8b.md) — source · draft · Three actor categories in open model ecosystem; Nemotron-3-Ultra, Command A+ (Apache 2.0), GLM-5.2, ZAYA1, Laguna-M.1; OpenMDW license for model weights
+- [Designing Generative UI in an Agent-Native World (source)](/ai-engineering/sources/designing-generative-ui-agent-native-c57dd663.md) — source · draft · GenUI pattern (AI assembles from elastic primitives); text-to-hydration mechanism; machine-legible component APIs; designer's new job: rules of elasticity
+- [POGR Builder Game UI Cost Reduction (source)](/ai-engineering/sources/pogr-builder-game-ui-cost-reduction-f3c2a85e.md) — source · draft · Figma→Builder→engine pipeline; $30K saved per game; animation ships with design; Blazium engine case study
 ### data-engineering
 - [Shift Left Architecture](/data-engineering/shift-left-architecture.md) — concept · Three consumer interfaces (Operational/Kafka, Analytical/Iceberg, AI/MCP); Rivian Mega Filter case study; dbt-Flink integration
 - [Data Integration Patterns (2026)](/data-engineering/data-integration-patterns.md) — concept · Three paradigms (request-response, batch, event streaming); SAP API policy §2.2.2; edge-to-cloud four traffic patterns; real-time SLA-first framework
@@ -1624,6 +1634,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [Confessions of an IT Manager (Phil Factor, 2009)](/productivity/sources/confessions-of-an-it-manager.md) — source · draft · humorous IT management essay collection (306pp, Simple Talk Publishing); workplace intelligence, project failure patterns, vendor adversarialism, boring-tech-ships; all 11 parts ingested
 
 ### ai-business
+- ["2026.33: The CapEx Train Keeps Rolling"](/ai-business/sources/2026-33-the-capex-train-keeps-rolling-649091a3.md) — source · stub · The article discusses the challenges of sustainable AI revenue, AI-generated content regulation, and…
 - [A Winner in Every Category](/ai-business/sources/a-winner-in-every-category-3e612774.md) — source · stub · The article discusses the impact of AI on SaaS multiples, highlighting companies that have carved ou…
 - ["2026.32: Earnings and Learnings"](/ai-business/sources/2026-32-earnings-and-learnings-ba471028.md) — source · stub · This document discusses the earnings and learnings from Meta, Microsoft, Amazon, and Google, focusin…
 - [AI Agency or In-House AI Hire? How to Pick Your Path in 2025](/ai-business/sources/ai-agency-or-in-house-ai-hire-how-to-pick-your-path-in-2025-80a6e586.md) — source · stub · Choosing between starting an AI agency and becoming an in-house AI specialist, the article discusses…
@@ -1848,6 +1859,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [Don't Just Roll the Dice: A Usefully Short Guide to Software Pricing (Neil Davidson, 2009)](/ai-business/sources/dont-just-roll-the-dice.md) — source · draft · 116pp free guide to software pricing (CC BY-NC-ND); EVC, willingness-to-pay, versioning (compromise effect), bundling, freemium, pricing pitfalls; co-founder Red Gate Software
 - [Neil Davidson](/ai-business/neil-davidson.md) — entity · stub · co-founder Red Gate Software; founder Business of Software conference; author Don't Just Roll the Dice
 
+- [PARA Method: Forte Labs (source)](/productivity/sources/para-method-forte-labs-f21a7d3e.md) — source · draft · Four-category digital organization: Projects/Areas/Resources/Archives; organize by actionability not subject; projects vs areas distinction; Tiago Forte
 ### blockchain
 - [Yet Another Introductory Number Theory Textbook (Poritz, 2014)](/blockchain/sources/yet-another-introductory-number-theory-textbook.md) — source · draft · 128pp; modular arithmetic, congruences, RSA, digital signatures, discrete logarithms; complete (5/5 parts)
 - [Jonathan A. Poritz](/blockchain/jonathan-poritz.md) — entity · stub · mathematician at CSU-Pueblo; author of Yet Another Introductory Number Theory Textbook (2014)

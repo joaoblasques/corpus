@@ -93,6 +93,9 @@ sources:
   - path: raw/_inbox/web-enterprise-agentic-ai-landscape-2026-trust-flexibility-and-v-d6ce5909.md
     channel: web
     ingested_at: 2026-08-10
+  - path: raw/web/web-two-protocols-building-the-agentic-internet-c27065c2.md
+    channel: web
+    ingested_at: 2026-08-15
 aliases:
   - MCP
   - Model Context Protocol
@@ -100,11 +103,15 @@ aliases:
   - mcp_servers
   - MCPToolset
   - defer_loading
+  - Agent-to-Agent protocol
+  - A2A
+  - AgentCard
+  - agentic internet protocols
 tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-21
-updated: 2026-08-10
+updated: 2026-08-15
 ---
 
 # MCP (Model Context Protocol)
@@ -536,6 +543,18 @@ Cloudflare Workers can now be deployed without creating an account using `npx wr
 
 This pattern fits MCP server deployment: an agent can spin up a temporary HTTP MCP server for a task, use it, and let it expire — no account management required [^src29].
 
+## A2A: the complementary horizontal protocol
+
+MCP (client-server, vertical) solves how an agent accesses a capability. The **Agent-to-Agent (A2A) Protocol** (Google, April 2025) solves how agents coordinate with each other across system/vendor boundaries — horizontal delegation.[^src30]
+
+Key contrast: "In MCP, the calling agent decides exactly which tool to invoke and manages the entire workflow. In A2A, an orchestrator agent hands a task to a sub-agent and trusts it to figure out how to get the job done." [^src30]
+
+**A2A primitives**: AgentCards (JSON discovery at `/.well-known/agent-card.json`); Tasks (lifecycle: submitted→working→completed/failed); streamable HTTP for live progress updates.[^src30]
+
+Both MCP and A2A were donated to the **Agentic AI Foundation** in 2025 for vendor-neutral governance. A2A earns its place at scale: "when an organization runs many agents across different vendors and frameworks, coordinating them through individual MCP connections becomes unmanageable."[^src30]
+
+Full A2A coverage: [Two Protocols Building the Agentic Internet source](/ai-engineering/sources/two-protocols-building-the-agentic-internet-c27065c2.md)
+
 ## See also
 
 - [Multi-Agent Systems](/ai-engineering/multi-agent-systems.md) — MCP is the coordination layer for multi-agent architectures
@@ -580,5 +599,6 @@ This pattern fits MCP server deployment: an agent can spin up a temporary HTTP M
 [^src27]: [Agents in Action #3: Model Context Protocol (MCP) for Data Engineers](../../raw/email/email-2026-06-28-agents-in-action-3-model-context-protocol-mcp-for-data-engin.md) — Pipeline to Insights (Substack), 2026-06-28
 [^src28]: [A quote from Sean Lynch](../../raw/web/web-a-quote-from-sean-lynch-f248e4ad.md) — Simon Willison curating HN comment by Sean Lynch, 2026-06-19
 [^src29]: [Temporary Cloudflare Accounts for AI agents](../../raw/web/web-temporary-cloudflare-accounts-for-ai-agents-9feea510.md) — Simon Willison, 2026-06-21
+[^src30]: [Two protocols building the agentic internet](../../raw/web/web-two-protocols-building-the-agentic-internet-c27065c2.md) — Apify blog, 2026-06-29
 [^src30]: [MCP vs. REST/HTTP API vs. Kafka: The Architect's Guide to Agentic AI Integration](../../raw/web/web-mcp-vs-rest-http-api-vs-kafka-the-architect-s-guide-to-agent-e36f1d1c.md) — Kai Waehner, kai-waehner.de, 2026-04-10
 [^src31]: [Enterprise Agentic AI Landscape 2026: Trust, Flexibility, and Vendor Lock-in](../../raw/web/web-enterprise-agentic-ai-landscape-2026-trust-flexibility-and-v-d6ce5909.md) — Kai Waehner, kai-waehner.de, 2026-04-06

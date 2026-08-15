@@ -2,6 +2,27 @@
 
 > OKF v0.1 change log. Newest first, grouped by date.
 
+## 2026-08-15
+
+* **Ingest**: Batch ingest — 14 sources from 50-file pre-filtered inbox pass — ingest-auto run; 36 deferred
+  - sources: raw/_inbox/ (web channel — Builder.io x4, calnewport.com x3, interconnects.ai x1, fortelabs.com x1, One Shot Show x1, miscellaneous ai-engineering x4)
+  - domains: ai-engineering (10 sources), productivity (4 sources)
+  - pages created: [/ai-engineering/sources/two-protocols-building-the-agentic-internet-c27065c2.md, /ai-engineering/sources/visual-plan-scannable-claude-code-plans-0689d90a.md, /ai-engineering/sources/ai-agents-follow-your-design-system-d7698d8e.md, /ai-engineering/sources/agent-native-apps-use-less-ai-7091a959.md, /ai-engineering/sources/ai-governance-rate-do-you-know-7dcfcc93.md, /ai-engineering/sources/developer-drowning-ai-prs-3177eebf.md, /ai-engineering/sources/open-artifacts-22-zyphra-cohere-poolside-faa66b8b.md, /ai-engineering/sources/designing-generative-ui-agent-native-c57dd663.md, /ai-engineering/sources/pogr-builder-game-ui-cost-reduction-f3c2a85e.md, /productivity/sources/para-method-forte-labs-f21a7d3e.md]
+  - pages updated: [/ai-engineering/mcp.md, /ai-engineering/agent-cost-management.md, /productivity/learning-to-learn.md]
+  - deferred: 36 files (confessionsofadataguy.com empty-scrapes x4, Requesty thin comparison pages x19, Forte Labs personal annual reviews x2, arxiv x3, github x5, other UNCERTAIN x3)
+  - notes: MCP vs A2A agentic internet protocols (AgentCards, Task lifecycle, Agentic AI Foundation); probabilistic compiler/MDX plan schema; design system compliance via ESLint not prose; agent-native crystallization pattern (Actions as 3rd execution surface, 5×–100× cost reduction); AI governance gap surfaces (design drift, review process, expanded authorship); developer AI PR review debt (trust questions vs syntax questions, 4.6× longer queue); open model ecosystem diversity (Nemotron-3-Ultra, Command A+, ZAYA1, Laguna-M.1, OpenMDW license); generative UI elastic primitives + text-to-hydration; POGR/Blazium $30K game UI savings case study; PARA method (organize by actionability, projects vs areas distinction); Cal Newport Three Laws of note-taking + three trivial habits + vital five; practitioner token conservation habits (/compact, /context, /usage, model routing)
+
+* **Collectors**: gmail=4, blog_promote=0, obsidian=0, book_discover=0, blog_discover=0, book_fetch=0, pdf=0, image=0, books=0, arxiv=0, youtube=0, github_discover=5, github_promote=5, github=0, x=0, links_refetch=0
+* **Ingest**: 14 ingested · 36 deferred · status=ok
+* **YoutubeQuick**: 0 intake · 0 rescued · 0 skipped · status=ok
+* **DocsQuick**: 2 intake · 46 thin · 2 llm_fail · status=ok
+* **YoutubeReap**: 0 removed · status=ok
+* **Gardener**: 4 stubs deepened · status=ok
+* **Heal**: 0 citations repointed · 0 unfixable · 3 hubs reindexed · 34 cross-domain links · status=ok
+* **Depth**: 442 knowledge · 1413 sources · ratio 1:3.2
+* **GapResolver**: 0 gap dispatched · 0 sources queued · status=ok
+* **Lint**: 2 broken wikilinks · 0 broken citations · 0 orphans · 1273 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+* **OKF**: 0 violations
 ## 2026-08-14
 
 * **Ingest**: Batch ingest — 31 sources from 50-file pre-filtered inbox pass — ingest-auto run; 17 deferred

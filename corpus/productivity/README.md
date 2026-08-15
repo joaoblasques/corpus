@@ -52,7 +52,7 @@ Personal and professional effectiveness for knowledge workers: mental models, ti
 - [Quartz SSG](/productivity/quartz-ssg.md)
 
 <details>
-<summary>Source summaries (23)</summary>
+<summary>Source summaries (24)</summary>
 
 - [7-Day Live Video Challenge Celebration](/productivity/sources/7-day-live-video-challenge-celebration-0240cd2a.md)
 - [9 Lessons from 2024 + My Goals for 2025 - Noah Kagan](/productivity/sources/9-lessons-from-2024-my-goals-for-2025-noah-kagan-1e3af730.md)
@@ -75,6 +75,7 @@ Personal and professional effectiveness for knowledge workers: mental models, ti
 - [Productivity - Top 8 Ways to Use Raycast](/productivity/sources/productivity-top-8-ways-to-use-raycast-aca.md)
 - [Sports - Wing Foiling in Waves Guide](/productivity/sources/sports-wing-foiling-in-waves-guide-de.md)
 - [The Only 6 Obsidian Plugins You Actually Need in 2026](/productivity/sources/the-only-6-obsidian-plugins-you-actually-need-in-2026-2026.md)
+- [The PARA Method: Simple System for Organizing Digital Information](/productivity/sources/para-method-forte-labs-f21a7d3e.md)
 - [Thinking - 5-Dimensional Thinking on Paper](/productivity/sources/thinking-5-dimensional-thinking-on-paper-ae.md)
 - [What Happens to YOUR BRAIN When You Hum for 60 Seconds?](/productivity/sources/what-happens-to-your-brain-when-you-hum-for-60-seconds-QVoGbaq8xos.md)
 

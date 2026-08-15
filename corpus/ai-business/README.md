@@ -75,7 +75,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [AI and the Job Market](/ai-business/ai-and-the-job-market.md)
 
 <details>
-<summary>Source summaries (200)</summary>
+<summary>Source summaries (201)</summary>
 
 - ["$1,300/Day Automated Bittensor Investing With Claude Code (34 Min Free Masterclass)"](/ai-business/sources/1-300-day-automated-bittensor-investing-with-claude-code-34--SHEs8gNh7sQ.md)
 - ["$100 million for open source: A milestone built by the community"](/ai-business/sources/100-million-for-open-source-a-milestone-built-by-the-communi-580ab93c.md)
@@ -87,6 +87,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - ["2026.29: Mainframes and Main Characters"](/ai-business/sources/2026-29-mainframes-and-main-characters-774b4848.md)
 - ["2026.30: The Copium Wars"](/ai-business/sources/2026-30-the-copium-wars-321c1884.md)
 - ["2026.32: Earnings and Learnings"](/ai-business/sources/2026-32-earnings-and-learnings-ba471028.md)
+- ["2026.33: The CapEx Train Keeps Rolling"](/ai-business/sources/2026-33-the-capex-train-keeps-rolling-649091a3.md)
 - ["3-Year Update: A Financial Analysis of My Book’s Unit Economics"](/ai-business/sources/3-year-update-a-financial-analysis-of-my-book-s-unit-economi-5be171a1.md)
 - ["7 Reasons Media Is a No-Good, Horrible, Rotten Business That I Love Anyways"](/ai-business/sources/7-reasons-media-is-a-no-good-horrible-rotten-business-that-i-9b1bb1df.md)
 - ["[AINews] AI Cybersecurity becomes top of mind"](/ai-business/sources/ainews-ai-cybersecurity-becomes-top-of-mind-0a8336e8.md)
