@@ -2,6 +2,27 @@
 
 > OKF v0.1 change log. Newest first, grouped by date.
 
+## 2026-08-16
+
+* **Ingest**: Batch ingest — 7 sources from 50-file pre-filtered inbox pass — ingest-auto run; 43 deferred
+  - sources: raw/_inbox/ (web channel — Builder.io x5, GitHub Blog x1, Pragmatic Engineer x1)
+  - domains: ai-engineering (5 sources), software-engineering (1 source), productivity (1 source)
+  - pages created: [/ai-engineering/sources/setting-up-a-new-claude-code-project-complete-guide-74888b1b.md, /ai-engineering/sources/the-future-of-saas-is-cloneable-67100b2d.md, /ai-engineering/sources/when-agents-work-for-the-whole-team-8bc93082.md, /ai-engineering/sources/v0-alternatives-for-2026-builder-io-831a021b.md, /ai-engineering/sources/how-to-create-free-on-brand-linkedin-carousels-f0e390bf.md, /software-engineering/sources/github-joins-coalition-california-ai-transparency-act-f9b59480.md, /productivity/sources/templates-as-inspiration-engineering-managers-f67ef8ba.md]
+  - pages updated: []
+  - deferred: 43 files (confessionsofadataguy.com empty-scrapes x4, Stratechery paywalled x9, Requesty thin model-comparison pages x19, Benedict Evans index/homepage x2, no-content stubs x5, G1 no-domain-fit x4)
+  - notes: Claude Code native installer workflow (WHY/WHAT/HOW CLAUDE.md, .claude/rules, CLAUDE.local.md, skills, MCP scopes, release channels); cloneable SaaS pattern (stable primitives + agent customization; slop-fork vs useful-clone distinction; A2A protocol for cross-app workflow); multiplayer AI development (per-role agent access collapses handoff cost; precondition is real codebase context; engineers retain merge authority); AI coding tools comparison (v0/Bolt/Lovable/Replit/Builder/Claude Code/Cursor decision matrix); agent-native slides tool (LinkedIn carousel generator, cloneable template pattern); California AI Transparency Act open source licensing conflict (SB 942/SB 1000; irrevocable license conflict; EU AI Act Code of Practice alternative); Pragmatic Engineer EM/SE templates resource
+
+* **Collectors**: gmail=0, blog_promote=0, obsidian=0, book_discover=0, blog_discover=0, book_fetch=0, pdf=0, image=0, books=0, arxiv=0, youtube=0, github_discover=5, github_promote=5, github=0, x=0, links_refetch=0
+* **Ingest**: 7 ingested · 43 deferred · status=ok
+* **YoutubeQuick**: 0 intake · 0 rescued · 0 skipped · status=ok
+* **DocsQuick**: 1 intake · 47 thin · 2 llm_fail · status=ok
+* **YoutubeReap**: 0 removed · status=ok
+* **Gardener**: 4 stubs deepened · status=ok
+* **Heal**: 7 citations repointed · 0 unfixable · 3 hubs reindexed · 34 cross-domain links · status=ok
+* **Depth**: 442 knowledge · 1421 sources · ratio 1:3.2
+* **GapResolver**: 0 gap dispatched · 0 sources queued · status=ok
+* **Lint**: 2 broken wikilinks · 0 broken citations · 0 orphans · 1273 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+* **OKF**: 0 violations
 ## 2026-08-15
 
 * **Ingest**: Batch ingest — 14 sources from 50-file pre-filtered inbox pass — ingest-auto run; 36 deferred

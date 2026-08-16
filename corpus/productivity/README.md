@@ -52,7 +52,7 @@ Personal and professional effectiveness for knowledge workers: mental models, ti
 - [Quartz SSG](/productivity/quartz-ssg.md)
 
 <details>
-<summary>Source summaries (24)</summary>
+<summary>Source summaries (25)</summary>
 
 - [7-Day Live Video Challenge Celebration](/productivity/sources/7-day-live-video-challenge-celebration-0240cd2a.md)
 - [9 Lessons from 2024 + My Goals for 2025 - Noah Kagan](/productivity/sources/9-lessons-from-2024-my-goals-for-2025-noah-kagan-1e3af730.md)
@@ -74,6 +74,7 @@ Personal and professional effectiveness for knowledge workers: mental models, ti
 - [Productivity - Rewire Your Brain for Discipline Dopamine](/productivity/sources/productivity-rewire-your-brain-for-discipline-dopamine-dae.md)
 - [Productivity - Top 8 Ways to Use Raycast](/productivity/sources/productivity-top-8-ways-to-use-raycast-aca.md)
 - [Sports - Wing Foiling in Waves Guide](/productivity/sources/sports-wing-foiling-in-waves-guide-de.md)
+- [Templates as Inspiration for Engineering Managers and Software Engineers](/productivity/sources/templates-as-inspiration-engineering-managers-f67ef8ba.md)
 - [The Only 6 Obsidian Plugins You Actually Need in 2026](/productivity/sources/the-only-6-obsidian-plugins-you-actually-need-in-2026-2026.md)
 - [The PARA Method: Simple System for Organizing Digital Information](/productivity/sources/para-method-forte-labs-f21a7d3e.md)
 - [Thinking - 5-Dimensional Thinking on Paper](/productivity/sources/thinking-5-dimensional-thinking-on-paper-ae.md)

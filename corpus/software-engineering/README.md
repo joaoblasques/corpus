@@ -119,6 +119,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Practical File System Design: The Be File System (Giampaolo, Morgan Kaufmann, 1999)](/software-engineering/sources/practical-file-system-design.md) — source · draft · 247pp practitioner guide to implementing BFS, the 64-bit journaled FS of BeOS; block_run/inode/data_stream structures, B+tree indexing, attribute queries, write-ahead logging, vnode layer, performance benchmarks, testing methodology
 - [Naked Objects (Pawson, PhD Thesis, Trinity College Dublin, 2004)](/software-engineering/sources/naked-objects.md) — source · draft · 223pp PhD thesis; exposes domain objects directly to users via auto-generated UI; behavioural completeness; DSFA/Safeway/CarServ case studies; 4:1 code reduction vs. 4-layer; seven design guidelines
 - [A Computational Logic (Boyer & Moore, 1979)](/software-engineering/sources/a-computational-logic-1979.md) — source · draft · 440pp ACM monograph; mechanical theorem proving with induction; shell principle; rewrite-rule waterfall; tautology checker, compiler, string search, prime factorization proofs; ancestor of ACL2
+- [GitHub Joins Coalition on California AI Transparency Act](/software-engineering/sources/github-joins-coalition-california-ai-transparency-act-f9b59480.md) — source · stub · GitHub/HuggingFace/Mozilla/Black Forest Labs coalition calling for amendments to SB 942/SB 1000; open source license revocation provisions conflict with irrevocable open source licenses
 
 ## Sources ingested
 - [Disasters I've Seen in a Microservices World](/03_Resources/Articles/Disasters in a Microservices World.md) — article note, João Alves / Hey World, 2025-10-30
@@ -201,7 +202,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Simplicity as an Engineering Constraint in the AI Age](/software-engineering/simplicity-as-engineering-constraint.md)
 
 <details>
-<summary>Source summaries (90)</summary>
+<summary>Source summaries (91)</summary>
 
 - ["2024-05-25-15-54-25 - move-base-up by josephmachado · Pull Request #17 · josephmachado/simple_dbt_project"](/software-engineering/sources/2024-05-25-15-54-25-move-base-up-by-josephmachado-pull-reque-ee.md)
 - ["A Guide to Multi-Tenancy: Benefits and Challenges"](/software-engineering/sources/a-guide-to-multi-tenancy-benefits-and-challenges-e55e9184.md)
@@ -246,6 +247,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Fundamentals of Backend Architecture - How to Design Scalable Software](/software-engineering/sources/fundamentals-of-backend-architecture-how-to-design-scalable--Qa-7iWxDz1A.md)
 - [Git & GitHub Tutorial | Visualized Git Course for Beginner & Professional Developers in 2024](/software-engineering/sources/git-github-tutorial-visualized-git-course-for-beginner-profe-S7XpTAnSDL4.md)
 - [Git - Worktrees in Under 5 Minutes](/software-engineering/sources/git-worktrees-in-under-5-minutes-e.md)
+- [GitHub Joins Coalition Advocating for Fixes to California AI Transparency Act](/software-engineering/sources/github-joins-coalition-california-ai-transparency-act-f9b59480.md)
 - [Give Me 15 Minutes — 80% of Obsidian](/software-engineering/sources/give-me-15-minutes-80-of-obsidian-bda.md)
 - [gtd-second-brain-guide](/software-engineering/sources/gtd-second-brain-guide-de.md)
 - [gtd-vs-para-audit-2026-08-04](/software-engineering/sources/gtd-vs-para-audit-2026-08-04-04.md)

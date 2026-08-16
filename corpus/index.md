@@ -3,13 +3,14 @@ okf_version: "0.1"
 ---
 # Corpus Index
 
-> Last updated: 2026-08-15 | Total pages: 546 | Total sources: 2412
+> Last updated: 2026-08-16 | Total pages: 553 | Total sources: 2419
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
 ## Domains
 
 ### ai-engineering
+- [Agent Skills | Confident AI Docs](/ai-engineering/sources/agent-skills-confident-ai-docs-263c19a1.md) — source · stub · ['Confident AI publishes official Agent Skills to teach coding agents DeepEval and Confident AI work…
 - ["Adaptive Verification in vLLM: DSpark confidence-scheduled verification"](/ai-engineering/sources/adaptive-verification-in-vllm-dspark-confidence-scheduled-ve-ffc3bba3.md) — source · stub · Adaptive Verification in vLLM: DSpark confidence-scheduled verification improves throughput and inte…
 - [Evaluating GitHub Copilot Agentic Harness](/ai-engineering/sources/evaluating-github-copilot-agentic-harness-bdecf2cf.md) — source · GitHub Copilot harness benchmark (SWE-bench, SkillsBench, TerminalBench, Win-Hill); Rubber Duck pattern; task parity with model-vendor harnesses at fewer tokens
 - [Qubot: GitHub's Internal Data Analytics Agent](/ai-engineering/sources/qubot-internal-data-analytics-agent-1c1b2656.md) — source · GitHub's internal analytics agent (Slack/VS Code/CLI → federated MCP context → Kusto/Trino); 3× faster with well-curated context

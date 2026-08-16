@@ -470,7 +470,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Tool Calling & Context Engineering: How They Interlock](/ai-engineering/tool-calling-and-context-engineering.md)
 
 <details>
-<summary>Source summaries (755)</summary>
+<summary>Source summaries (761)</summary>
 
 - ["2024 State of Analytics Engineering, crafted by dbt Labs | dbt Labs"](/ai-engineering/sources/2024-state-of-analytics-engineering-crafted-by-dbt-labs-dbt--cb342df0.md)
 - ["6 AI Agent Orchestration Best Practices in 2026 [Explained]"](/ai-engineering/sources/6-ai-agent-orchestration-best-practices-in-2026-explained-8144e2d2.md)
@@ -788,6 +788,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Aftermarket Harnesses](/ai-engineering/sources/aftermarket-harnesses-7d49adb4.md)
 - [Agent experience is the new developer experience](/ai-engineering/sources/agent-experience-is-the-new-developer-experience-91fcb5f2.md)
 - [Agent Productivity Is Creating a Quality Debt](/ai-engineering/sources/agent-productivity-is-creating-a-quality-debt-ba9ac32d.md)
+- [Agent Skills | Confident AI Docs](/ai-engineering/sources/agent-skills-confident-ai-docs-263c19a1.md)
 - [Agentic Autonomy Levels](/ai-engineering/sources/agentic-autonomy-levels-89f2d572.md)
 - [Agentic coding in analytics engineering (w/ Mikkel Dengsøe)](/ai-engineering/sources/agentic-coding-in-analytics-engineering-w-mikkel-dengs-e-cf1522dd.md)
 - [Agents](/ai-engineering/sources/agents-adfd540d.md)
@@ -1079,6 +1080,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [How to Build Claude Subagents (Nate Herk)](/ai-engineering/sources/nate-herk-claude-subagents.md)
 - [How to Build Websites in 15 minutes Using Claude (no coding)](/ai-engineering/sources/how-to-build-websites-in-15-minutes-using-claude-no-coding-YAiCC9a6QVA.md)
 - [How to Build Your Own AI Operating System (Full Stack Explained)](/ai-engineering/sources/how-to-build-your-own-ai-operating-system-full-stack-explain-e.md)
+- [How to Create Free, On-Brand LinkedIn Carousels](/ai-engineering/sources/how-to-create-free-on-brand-linkedin-carousels-f0e390bf.md)
 - [How to Get Ahead of 99% of People With Claude AI](/ai-engineering/sources/how-to-get-ahead-of-99-of-people-with-claude-ai-fpO91lsO6ek.md)
 - [How to Make AI Agents Follow Your Design System](/ai-engineering/sources/ai-agents-follow-your-design-system-d7698d8e.md)
 - [How to Maximize Claude Code Effectiveness (Towards Data Science)](/ai-engineering/sources/how-to-maximize-claude-code-effectiveness-towards-data-scien-ce.md)
@@ -1164,6 +1166,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [SaaS is Minting Millionaires Again — AI-Era Playbook](/ai-engineering/sources/saas-is-minting-millionaires-again-ai-era-playbook-ab.md)
 - [Scaling Your AI Models with Micro-DDP – Tutorial](/ai-engineering/sources/scaling-your-ai-models-with-micro-ddp-tutorial-7q4D6_3syuE.md)
 - [Set Up Claude Cowork better than 99% of people](/ai-engineering/sources/set-up-claude-cowork-better-than-99-of-people-pl90LATQlHI.md)
+- [Setting Up a New Claude Code Project: The Complete Guide](/ai-engineering/sources/setting-up-a-new-claude-code-project-complete-guide-74888b1b.md)
 - [Source: Build These 4 Claude Projects (Internal Operating System)](/ai-engineering/sources/internal-operating-system-claude-projects.md)
 - [Source: Harvard CS50's AI with Python](/ai-engineering/sources/cs50-ai-with-python.md)
 - [Source: How AI agents & Claude skills work (Clearly Explained)](/ai-engineering/sources/how-ai-agents-and-skills-work.md)
@@ -1187,6 +1190,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [The Complete Data Architecture Explained - Building a Trading Robot Episode 2](/ai-engineering/sources/the-complete-data-architecture-explained-building-a-trading--uDZaz09gKv4.md)
 - [The Factory Model — Engineers as Orchestrators of Autonomous Coding Agents](/ai-engineering/sources/the-factory-model-engineers-as-orchestrators-of-autonomous-c-cea.md)
 - [The Future of AI (Do This Before 2027)](/ai-engineering/sources/the-future-of-ai-do-this-before-2027-9q5JnlCyu4U.md)
+- [The Future of SaaS Is Cloneable](/ai-engineering/sources/the-future-of-saas-is-cloneable-67100b2d.md)
 - [The LION Way: Machine Learning plus Intelligent Optimization (Battiti & Brunato, 2017)](/ai-engineering/sources/the-lion-way.md)
 - [The Little Book of Deep Learning (Fleuret, 2024)](/ai-engineering/sources/the-little-book-of-deep-learning.md)
 - [The most important concept to learn in AI...](/ai-engineering/sources/the-most-important-concept-to-learn-in-ai-C4vwvRMTlvc.md)
@@ -1213,11 +1217,13 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Use Claude Code 100% FREE (2 Ways)](/ai-engineering/sources/use-claude-code-100-free-2-ways-WqHYZh22hVU.md)
 - [Using Local Coding Agents](/ai-engineering/sources/using-local-coding-agents-ae.md)
 - [uv is the best thing to happen to the Python ecosystem in a decade - Blog - Dr. Emily L. Hunt](/ai-engineering/sources/uv-is-the-best-thing-to-happen-to-the-python-ecosystem-in-a--decade.md)
+- [v0 Alternatives for 2026 — Builder.io](/ai-engineering/sources/v0-alternatives-for-2026-builder-io-831a021b.md)
 - [verification-guided-context-optimization-for-tool-calling-vi](/ai-engineering/sources/verification-guided-context-optimization-for-tool-calling-vi-doc.md)
 - [Warp - AI Agent Mode for Codebase Exploration and Rules](/ai-engineering/sources/warp-ai-agent-mode-for-codebase-exploration-and-rules-e.md)
 - [What does if __name__ == '__main__' do in Python?](/ai-engineering/sources/what-does-if-name-main-do-in-python-x5IbdKnvt6k.md)
 - [What I Learned From 100+ Data Engineering Interviews - Interview Tips](/ai-engineering/sources/what-i-learned-from-100-data-engineering-interviews-intervie-bqCXVpRqTpE.md)
 - [What's the Real Deal About SKILLs](/ai-engineering/sources/what-s-the-real-deal-about-skills-doc.md)
+- [When Agents Work for the Whole Team](/ai-engineering/sources/when-agents-work-for-the-whole-team-8bc93082.md)
 - [Why the Best Agent-Native Apps Use Less AI](/ai-engineering/sources/agent-native-apps-use-less-ai-7091a959.md)
 - [Why This Dev Ships 100x Faster Than 99% of Engineers](/ai-engineering/sources/why-this-dev-ships-100x-faster-than-99-of-engineers-PzVV4X37ihg.md)
 - [Will AI Replace Data Jobs? (Data Engineers & Data Analysts)](/ai-engineering/sources/will-ai-replace-data-jobs-data-engineers-data-analysts-e3KQ8ziMp2o.md)
