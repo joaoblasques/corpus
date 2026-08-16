@@ -213,3 +213,9 @@ type: internal
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/data-engineering/sources/databricks-summit-2026-speakers-de.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/how-to-write-a-good-spec-for-ai-agents-five-principles-ce.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/mlops/sources/about-metricflow-dbt-developer-hub-b.md", "verdict_ok": false, "gov": "reverted+queued"}
+
+## [2026-08-16T02:53] gardener · run
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/agent-native-the-next-architecture-for-software-9da21efb.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/mlops/sources/about-metricflow-dbt-developer-hub-b.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/mlops/sources/add-snapshots-to-your-dag-dbt-developer-hub-b.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/hal-daume-iii.md", "verdict_ok": true, "gov": "committed"}
