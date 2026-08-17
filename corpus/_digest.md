@@ -219,3 +219,9 @@ type: internal
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/mlops/sources/about-metricflow-dbt-developer-hub-b.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/mlops/sources/add-snapshots-to-your-dag-dbt-developer-hub-b.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/hal-daume-iii.md", "verdict_ok": true, "gov": "committed"}
+
+## [2026-08-17T03:28] gardener · run
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-business/sources/a-complete-knowledge-base-of-human-3-0-dan-koe-a4cb9cd1.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/csaba-szepesvari.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/stanford-s-method-turns-claude-into-a-phd-level-research-tea-Tj3018n5MVg.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/the-most-important-concept-to-learn-in-ai-C4vwvRMTlvc.md", "verdict_ok": true, "gov": "committed"}
