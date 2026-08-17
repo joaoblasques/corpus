@@ -45,10 +45,19 @@ sources:
   - path: raw/email/email-2026-06-24-how-id-make-a-simple-project-stand-out.md
     channel: email
     ingested_at: 2026-06-26
+  - path: raw/web/web-the-definitive-guide-to-mastering-analytical-thinking-interv-672db784.md
+    channel: web
+    ingested_at: 2026-08-17
+  - path: raw/web/web-the-definitive-guide-to-mastering-product-sense-interviews-b1a43b50.md
+    channel: web
+    ingested_at: 2026-08-17
 aliases:
   - getting noticed
   - coding interview tips
   - developer portfolio
+  - pm interview
+  - product sense interview
+  - analytical thinking interview
   - career growth for engineers
   - getting promoted
   - AI engineering skills

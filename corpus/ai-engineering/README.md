@@ -470,7 +470,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Tool Calling & Context Engineering: How They Interlock](/ai-engineering/tool-calling-and-context-engineering.md)
 
 <details>
-<summary>Source summaries (761)</summary>
+<summary>Source summaries (762)</summary>
 
 - ["2024 State of Analytics Engineering, crafted by dbt Labs | dbt Labs"](/ai-engineering/sources/2024-state-of-analytics-engineering-crafted-by-dbt-labs-dbt--cb342df0.md)
 - ["6 AI Agent Orchestration Best Practices in 2026 [Explained]"](/ai-engineering/sources/6-ai-agent-orchestration-best-practices-in-2026-explained-8144e2d2.md)
@@ -701,6 +701,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - ["“I spent $50,000 self-hosting AI models. You should too.” - 0xSero"](/ai-engineering/sources/i-spent-50-000-self-hosting-ai-models-you-should-too-0xsero-ImPESBftwr8.md)
 - ["🎧 Best of the Pod: Vercel’s Guillermo Rauch on What Comes After Coding"](/ai-engineering/sources/best-of-the-pod-vercel-s-guillermo-rauch-on-what-comes-after-5edc7ba5.md)
 - [1 Billion ChatGPT users](/ai-engineering/sources/1-billion-chatgpt-users-ef4f16ff.md)
+- [10 ChatGPT Work Features That Made Me Use Claude Code Less](/ai-engineering/sources/10-chatgpt-work-features-that-made-me-use-claude-code-less-97e246c1.md)
 - [10 Claude AI Side Hustles That Can Pay A Full-Time Income](/ai-engineering/sources/10-claude-ai-side-hustles-that-can-pay-a-full-time-income-nkf8SP71wo4.md)
 - [10 Money Myths That Keep You Broke](/ai-engineering/sources/10-money-myths-that-keep-you-broke-rTO0GofZJzA.md)
 - [11 best AI agent frameworks](/ai-engineering/sources/11-best-ai-agent-frameworks-01026a4c.md)

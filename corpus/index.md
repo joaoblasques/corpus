@@ -3,13 +3,14 @@ okf_version: "0.1"
 ---
 # Corpus Index
 
-> Last updated: 2026-08-16 | Total pages: 553 | Total sources: 2419
+> Last updated: 2026-08-17 | Total pages: 597 | Total sources: 2460
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
 ## Domains
 
 ### ai-engineering
+- [10 ChatGPT Work Features That Made Me Use Claude Code Less](/ai-engineering/sources/10-chatgpt-work-features-that-made-me-use-claude-code-less-97e246c1.md) — source · stub · The document discusses the author's experience with ChatGPT Work and its features that have made the…
 - [Agent Skills | Confident AI Docs](/ai-engineering/sources/agent-skills-confident-ai-docs-263c19a1.md) — source · stub · ['Confident AI publishes official Agent Skills to teach coding agents DeepEval and Confident AI work…
 - ["Adaptive Verification in vLLM: DSpark confidence-scheduled verification"](/ai-engineering/sources/adaptive-verification-in-vllm-dspark-confidence-scheduled-ve-ffc3bba3.md) — source · stub · Adaptive Verification in vLLM: DSpark confidence-scheduled verification improves throughput and inte…
 - [Evaluating GitHub Copilot Agentic Harness](/ai-engineering/sources/evaluating-github-copilot-agentic-harness-bdecf2cf.md) — source · GitHub Copilot harness benchmark (SWE-bench, SkillsBench, TerminalBench, Win-Hill); Rubber Duck pattern; task parity with model-vendor harnesses at fewer tokens
@@ -1635,6 +1636,10 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [Confessions of an IT Manager (Phil Factor, 2009)](/productivity/sources/confessions-of-an-it-manager.md) — source · draft · humorous IT management essay collection (306pp, Simple Talk Publishing); workplace intelligence, project failure patterns, vendor adversarialism, boring-tech-ships; all 11 parts ingested
 
 ### ai-business
+- [Platform Dynamics](/ai-business/platform-dynamics.md) — concept · draft · network effects as natural monopoly; why big-tech breakups fail; antitrust interventions that work; Amazon's zero-profit flywheel; content moderation as structural problem; newsfeed overload mechanics — Benedict Evans
+- [Bootstrapped SaaS Playbook](/ai-business/bootstrapped-saas-playbook.md) — concept · draft · human-generated data moat; what customers actually care about; validation beyond SaaS competitors; experimental persistence; retention through easy offboarding; AI integration best practices; comprehension debt — Arvid Kahl
+- [Creator Economy Philosophy](/ai-business/creator-economy-philosophy.md) — concept · draft · HUMAN 3.0 framework; point-of-view beats niche; discipline as identity; rapid skill acquisition; reality distortion field; personal brand as traffic source — Dan Koe
+- [A quote from Dario Amodei](/ai-business/sources/a-quote-from-dario-amodei-7b67d005.md) — source · stub · Dario Amodei discusses the public's negative view of AI, attributing it to a crisis of trust rather …
 - ["2026.33: The CapEx Train Keeps Rolling"](/ai-business/sources/2026-33-the-capex-train-keeps-rolling-649091a3.md) — source · stub · The article discusses the challenges of sustainable AI revenue, AI-generated content regulation, and…
 - [A Winner in Every Category](/ai-business/sources/a-winner-in-every-category-3e612774.md) — source · stub · The article discusses the impact of AI on SaaS multiples, highlighting companies that have carved ou…
 - ["2026.32: Earnings and Learnings"](/ai-business/sources/2026-32-earnings-and-learnings-ba471028.md) — source · stub · This document discusses the earnings and learnings from Meta, Microsoft, Amazon, and Google, focusin…
