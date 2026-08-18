@@ -3,13 +3,14 @@ okf_version: "0.1"
 ---
 # Corpus Index
 
-> Last updated: 2026-08-17 | Total pages: 597 | Total sources: 2460
+> Last updated: 2026-08-18 | Total pages: 601 | Total sources: 2471
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
 ## Domains
 
 ### ai-engineering
+- [Coding on VPS with Claude Code (Pieter Levels)](/ai-engineering/sources/coding-on-vps-with-claude-code-pieter-levels-19bb6cbf.md) — source · draft · Pieter Levels codes on VPS using Claude Code for ~1yr; no local setup, 3-second deploy, overnight autonomous runs; solo-only (use staging server for teams); confirms cloud-first AI coding trend
 - [10 ChatGPT Work Features That Made Me Use Claude Code Less](/ai-engineering/sources/10-chatgpt-work-features-that-made-me-use-claude-code-less-97e246c1.md) — source · stub · The document discusses the author's experience with ChatGPT Work and its features that have made the…
 - [Agent Skills | Confident AI Docs](/ai-engineering/sources/agent-skills-confident-ai-docs-263c19a1.md) — source · stub · ['Confident AI publishes official Agent Skills to teach coding agents DeepEval and Confident AI work…
 - ["Adaptive Verification in vLLM: DSpark confidence-scheduled verification"](/ai-engineering/sources/adaptive-verification-in-vllm-dspark-confidence-scheduled-ve-ffc3bba3.md) — source · stub · Adaptive Verification in vLLM: DSpark confidence-scheduled verification improves throughput and inte…
@@ -965,6 +966,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [Designing Generative UI in an Agent-Native World (source)](/ai-engineering/sources/designing-generative-ui-agent-native-c57dd663.md) — source · draft · GenUI pattern (AI assembles from elastic primitives); text-to-hydration mechanism; machine-legible component APIs; designer's new job: rules of elasticity
 - [POGR Builder Game UI Cost Reduction (source)](/ai-engineering/sources/pogr-builder-game-ui-cost-reduction-f3c2a85e.md) — source · draft · Figma→Builder→engine pipeline; $30K saved per game; animation ships with design; Blazium engine case study
 ### data-engineering
+- ["Everybody Talks About AI (And They Are All Wrong)" — Data Gibberish](/data-engineering/sources/ai-adoption-data-engineering-everybody-wrong-datagibberish.md) — source · draft · Yordan Ivanov argues AI adoption creates governance debt; democratized fragmentation + stalled innovation; semantic layers as antidote; the mess is a skilled DE's opportunity
 - [Shift Left Architecture](/data-engineering/shift-left-architecture.md) — concept · Three consumer interfaces (Operational/Kafka, Analytical/Iceberg, AI/MCP); Rivian Mega Filter case study; dbt-Flink integration
 - [Data Integration Patterns (2026)](/data-engineering/data-integration-patterns.md) — concept · Three paradigms (request-response, batch, event streaming); SAP API policy §2.2.2; edge-to-cloud four traffic patterns; real-time SLA-first framework
 - [Adrien Ledoux | dbt Summit](/data-engineering/sources/adrien-ledoux-dbt-summit-c2ff08b4.md) — source · stub · ['Adrien Ledoux discusses his experience as Director of Data Platform at EF, focusing on building an…
@@ -1636,6 +1638,8 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [Confessions of an IT Manager (Phil Factor, 2009)](/productivity/sources/confessions-of-an-it-manager.md) — source · draft · humorous IT management essay collection (306pp, Simple Talk Publishing); workplace intelligence, project failure patterns, vendor adversarialism, boring-tech-ships; all 11 parts ingested
 
 ### ai-business
+- [Pat Flynn — Smart Passive Income Creator Playbook](/ai-business/sources/pat-flynn-content-creator-playbook-spi.md) — source · draft · creator→entrepreneur funnel; validate (Smart From Scratch), build audience (podcast/YouTube/store), monetize; "own your audience" via email list; Kit/ConvertKit; 4 SPI sources combined
+- [Noah Kagan — Entrepreneurship Essays](/ai-business/sources/noah-kagan-entrepreneurship-essays.md) — source · draft · AppSumo founder; 10 Zuckerberg lessons (focus, speed, A+ players, ownership); Ayman CEO scaling playbook ($5M→$70M); "le pause" life-design reflection; personal finance clarity; Sam Parr podcast highlights; 5 noahkagan.com sources combined
 - [Platform Dynamics](/ai-business/platform-dynamics.md) — concept · draft · network effects as natural monopoly; why big-tech breakups fail; antitrust interventions that work; Amazon's zero-profit flywheel; content moderation as structural problem; newsfeed overload mechanics — Benedict Evans
 - [Bootstrapped SaaS Playbook](/ai-business/bootstrapped-saas-playbook.md) — concept · draft · human-generated data moat; what customers actually care about; validation beyond SaaS competitors; experimental persistence; retention through easy offboarding; AI integration best practices; comprehension debt — Arvid Kahl
 - [Creator Economy Philosophy](/ai-business/creator-economy-philosophy.md) — concept · draft · HUMAN 3.0 framework; point-of-view beats niche; discipline as identity; rapid skill acquisition; reality distortion field; personal brand as traffic source — Dan Koe

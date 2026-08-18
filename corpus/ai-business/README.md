@@ -43,6 +43,8 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [Claude Corps](/ai-business/claude-corps.md) — entity · stub · Anthropic + CodePath + Social Finance; trains early-career fellows, embeds them in US nonprofits for 12 months; talent-supply counterpart to the access programs
 
 ### Sources (selected)
+- [Pat Flynn — Smart Passive Income Creator Playbook](/ai-business/sources/pat-flynn-content-creator-playbook-spi.md) — source · draft · creator→entrepreneur funnel; validate idea (Smart From Scratch), build audience (podcast/store/YouTube), monetize; "own your audience" via email list; Kit/ConvertKit; 10-step podcast launch; 5-day Shopify store challenge
+- [Noah Kagan — Entrepreneurship Essays](/ai-business/sources/noah-kagan-entrepreneurship-essays.md) — source · draft · AppSumo founder; 10 Zuckerberg leadership lessons; Ayman Al-Abdullah CEO scaling playbook ($5M→$70M AppSumo); "le pause" life simplification; personal-finance clarity; Sam Parr podcast highlights
 - [Don't Just Roll the Dice: A Usefully Short Guide to Software Pricing (Neil Davidson, 2009)](/ai-business/sources/dont-just-roll-the-dice.md) — source · draft · 73pp; economics of pricing (EVC, willingness to pay), psychology (anchoring, fairness), pitfalls (competitors, pirates, cost-based pricing), versioning/bundling/freemium; practical checklist; all 2 parts ingested
 
 ### Syntheses
@@ -81,7 +83,7 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [AI and the Job Market](/ai-business/ai-and-the-job-market.md)
 
 <details>
-<summary>Source summaries (243)</summary>
+<summary>Source summaries (245)</summary>
 
 - ["$1,300/Day Automated Bittensor Investing With Claude Code (34 Min Free Masterclass)"](/ai-business/sources/1-300-day-automated-bittensor-investing-with-claude-code-34--SHEs8gNh7sQ.md)
 - ["$100 million for open source: A milestone built by the community"](/ai-business/sources/100-million-for-open-source-a-milestone-built-by-the-communi-580ab93c.md)
@@ -291,8 +293,10 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [Maximizing Claude Code: Tips for Effective SaaS Development — Arvid Kahl](/ai-business/sources/maximizing-claude-code-saas-development-e6c93926.md)
 - [Music - Vocal Harmonies How They Work Thirds and Sixths](/ai-business/sources/music-vocal-harmonies-how-they-work-thirds-and-sixths-doc.md)
 - [Navigating the Dead Internet Theory: AI's Impact on Authenticity — Arvid Kahl](/ai-business/sources/navigating-dead-internet-ai-authenticity-d6f04059.md)
+- [Noah Kagan — Entrepreneurship Essays](/ai-business/sources/noah-kagan-entrepreneurship-essays.md)
 - [Office, Messaging and Verbs — Benedict Evans](/ai-business/sources/office-messaging-and-verbs-benedict-evans-0fcadd5c.md)
 - [OpenAI Codex Lead on the New Shape of Product Work — Andrew Ambrosino](/ai-business/sources/openai-codex-lead-new-shape-of-product-work-6208239b.md)
+- [Pat Flynn — Smart Passive Income Creator Playbook](/ai-business/sources/pat-flynn-content-creator-playbook-spi.md)
 - [Piano - Chord Octave Technique for Rhythm Patterns](/ai-business/sources/piano-chord-octave-technique-for-rhythm-patterns-ae.md)
 - [Private video](/ai-business/sources/private-video-Cz9QD6-TYeY.md)
 - [Python web scraper $$$ - Easy step by step guide | How to make money with Python Episode 1](/ai-business/sources/python-web-scraper-easy-step-by-step-guide-how-to-make-money-awoEELnQzVg.md)

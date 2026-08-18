@@ -2,6 +2,27 @@
 
 > OKF v0.1 change log. Newest first, grouped by date.
 
+## 2026-08-18
+
+* **Ingest**: Batch ingest — 11 sources from 50-file pre-filtered inbox pass — ingest-auto run; 39 deferred
+  - sources: raw/_inbox/ (web: levels.io x1, smartpassiveincome.com x4, noahkagan.com x5; email: datagibberish x1)
+  - domains: ai-engineering (1 source), ai-business (9 sources), data-engineering (1 source)
+  - pages created: [/ai-engineering/sources/coding-on-vps-with-claude-code-pieter-levels-19bb6cbf.md, /ai-business/sources/pat-flynn-content-creator-playbook-spi.md, /ai-business/sources/noah-kagan-entrepreneurship-essays.md, /data-engineering/sources/ai-adoption-data-engineering-everybody-wrong-datagibberish.md]
+  - pages updated: [/ai-engineering/README.md, /ai-business/README.md, /data-engineering/README.md]
+  - deferred: 39 files (G1 x3: fintech/accounting/payments sources; UNCERTAIN-digest x1: TLDR data newsletter multi-topic; UNCERTAIN-thin x35: privacy policies, terms of use, course sales pages, webinar promos, lead-magnet confirmations, newsletter landing pages, boilerplate)
+  - notes: VPS+Claude Code workflow (Pieter Levels) routed to ai-engineering agentic-coding; Pat Flynn SPI podcasting/store/entrepreneur-tools combined into one ai-business source page; Noah Kagan essays combined into one ai-business source page; Yordan Ivanov / Data Gibberish AI-adoption governance piece routed to data-engineering
+
+* **Collectors**: gmail=6, blog_promote=0, obsidian=0, book_discover=0, blog_discover=3, book_fetch=0, pdf=0, image=0, books=0, arxiv=0, youtube=0, github_discover=5, github_promote=5, github=0, x=0, links_refetch=0
+* **Ingest**: 11 ingested · 39 deferred · status=ok
+* **YoutubeQuick**: 0 intake · 0 rescued · 0 skipped · status=ok
+* **DocsQuick**: 0 intake · 47 thin · 3 llm_fail · status=ok
+* **YoutubeReap**: 0 removed · status=ok
+* **Gardener**: 4 stubs deepened · status=ok
+* **Heal**: 0 citations repointed · 0 unfixable · 3 hubs reindexed · 34 cross-domain links · status=ok
+* **Depth**: 445 knowledge · 1468 sources · ratio 1:3.3
+* **GapResolver**: 0 gap dispatched · 0 sources queued · status=ok
+* **Lint**: 2 broken wikilinks · 0 broken citations · 0 orphans · 1303 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+* **OKF**: 0 violations
 ## 2026-08-17
 
 * **Ingest**: Batch ingest — 41 sources from 50-file pre-filtered inbox pass — ingest-auto run; 9 deferred

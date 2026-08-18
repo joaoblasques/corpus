@@ -15,6 +15,9 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 
 ## Pages
 
+### Sources (recent)
+- [Coding on VPS with Claude Code (Pieter Levels)](/ai-engineering/sources/coding-on-vps-with-claude-code-pieter-levels-19bb6cbf.md) — source · draft · Pieter Levels' year of VPS+Claude Code: no local setup, 3-sec deploys, overnight autonomous runs; confirms cloud-first AI coding trend
+
 ### Mathematical Foundations for ML
 - [Introduction to Probability (Grinstead & Snell, 2006)](/ai-engineering/sources/introduction-to-probability-grinstead-snell.md) — source · draft · classic undergraduate probability textbook (518pp, GNU FDL); simulation-first; discrete/continuous distributions, Bayes' theorem, CLT, LLN, Markov chains (absorbing/ergodic, fundamental matrix, stationary distribution); all 25 parts ingested (complete)
 - [Lies, Damned Lies, or Statistics (Poritz, 2017)](/ai-engineering/sources/lies-damned-lies-or-statistics.md) — source · draft · free undergraduate statistics textbook (143pp, CC BY-SA 4.0); descriptive stats (histograms, mean/median/IQR, regression, Simpson's paradox), probability theory (Bayes, normal distribution), study design (RCT, sampling bias, confounders, ethics), inferential statistics (CLT, confidence intervals, hypothesis testing); all 6 parts ingested (complete)
@@ -470,7 +473,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Tool Calling & Context Engineering: How They Interlock](/ai-engineering/tool-calling-and-context-engineering.md)
 
 <details>
-<summary>Source summaries (762)</summary>
+<summary>Source summaries (763)</summary>
 
 - ["2024 State of Analytics Engineering, crafted by dbt Labs | dbt Labs"](/ai-engineering/sources/2024-state-of-analytics-engineering-crafted-by-dbt-labs-dbt--cb342df0.md)
 - ["6 AI Agent Orchestration Best Practices in 2026 [Explained]"](/ai-engineering/sources/6-ai-agent-orchestration-best-practices-in-2026-explained-8144e2d2.md)
@@ -991,6 +994,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Cloud sandbox routines — network isolation, MCP capability gaps, and injection false alarms](/ai-engineering/sources/cloud-sandbox-routines-network-isolation-mcp-capability-gaps-a.md)
 - [Codage | Claude](/ai-engineering/sources/codage-claude-69783f33.md)
 - [Codex in Practice](/ai-engineering/sources/codex-in-practice-2d10d6eb.md)
+- [Coding on VPS with Claude Code (Pieter Levels)](/ai-engineering/sources/coding-on-vps-with-claude-code-pieter-levels-19bb6cbf.md)
 - [Coding | Claude by Anthropic](/ai-engineering/sources/coding-claude-by-anthropic-c0617c9c.md)
 - [Coding | Claude by Anthropic](/ai-engineering/sources/coding-claude-by-anthropic-92db9d27.md)
 - [Combine Built-in Tools and Function Calling in the Gemini Interactions API](/ai-engineering/sources/combine-built-in-tools-and-function-calling-in-the-gemini-in-b2fface0.md)

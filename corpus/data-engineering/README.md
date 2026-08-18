@@ -15,6 +15,9 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 
 ## Pages
 
+### Sources (recent)
+- ["Everybody Talks About AI (And They Are All Wrong)" — Data Gibberish](/data-engineering/sources/ai-adoption-data-engineering-everybody-wrong-datagibberish.md) — source · draft · Yordan Ivanov (Data Gibberish): AI adoption = undefined success criterion → cargo-cult behavior; democratized fragmentation; stalled innovation; semantic layers as antidote; skilled DE opportunity in the governance backlog
+
 ### Concepts
 - [Data Observability](/data-engineering/data-observability.md) — concept · draft · 6 patterns (flow interruption, skew, lag, SLA misses, dataset tracker, fine-grained tracker); MTTD/MTTR; 3 implementation paths
 - [Data Platform Status Page](/data-engineering/data-status-page.md) — concept · draft · stakeholder-facing incident communication; lineage→dashboard-tile mapping; transparency builds trust; zero questions per incident
@@ -241,7 +244,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [The Portfolio Project That Lands a DE Role](/data-engineering/portfolio-project-that-lands-a-de-role.md)
 
 <details>
-<summary>Source summaries (229)</summary>
+<summary>Source summaries (230)</summary>
 
 - ["A dbt \"logic mesh\" with packages: standard model and metrics across 25 autonomous organizations | dbt Summit"](/data-engineering/sources/a-dbt-logic-mesh-with-packages-standard-model-and-metrics-ac-bf162a97.md)
 - ["Academic → CTO: What Actually Matters in Data (Matthew Housley) - Confessions of a Data Guy"](/data-engineering/sources/academic-cto-what-actually-matters-in-data-matthew-housley-c-e9eae58c.md)
@@ -303,6 +306,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - ["dbt Labs Open Sources MetricFlow: An Independent Schema for Data Interoperability - The New Stack"](/data-engineering/sources/dbt-labs-open-sources-metricflow-an-independent-schema-for-d-ecf.md)
 - ["DBT Rookie to Guru: End-to-End ELT Pipeline Project with DBT, Snowflake, and Tableau"](/data-engineering/sources/dbt-rookie-to-guru-end-to-end-elt-pipeline-project-with-dbt--KOd_KTgou4A.md)
 - ["Dimensional Data Modeling: Slowly Changing Dimensions and Idempotency — Day 2 Lecture"](/data-engineering/sources/dimensional-data-modeling-slowly-changing-dimensions-and-ide-doc.md)
+- ["Everybody Talks About AI (And They Are All Wrong)" — Data Gibberish](/data-engineering/sources/ai-adoption-data-engineering-everybody-wrong-datagibberish.md)
 - ["Framework Dimensions: The Hidden Lever in Data Science Analysis"](/data-engineering/sources/framework-dimensions-the-hidden-lever-in-data-science-analys-cece.md)
 - ["GitHub Actions (Branch Protection, Automated Testing) - Full Tutorial"](/data-engineering/sources/github-actions-branch-protection-automated-testing-full-tuto-UEOtZvTCmDo.md)
 - ["How to Learn Data Engineering in 2026: Fundamentals + AI Tools"](/data-engineering/sources/how-to-learn-data-engineering-in-2026-fundamentals-ai-tools-2026.md)
