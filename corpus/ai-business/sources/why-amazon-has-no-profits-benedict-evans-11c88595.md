@@ -18,7 +18,7 @@ updated: 2026-08-17
 
 # Why Amazon Has No Profits — Benedict Evans
 
-Source: ben-evans.com, 2014 (with 2021 author's note). Ingested to [/ai-business/platform-dynamics.md].
+Source: ben-evans.com, 2014 (with 2021 author's note). Synthesized into [Platform Dynamics](/ai-business/platform-dynamics.md).
 
 Financial forensics piece on Amazon's zero-profit model. Amazon operates as dozens of semi-autonomous teams, each with their own internal P&L — some mature and profitable, some new startups losing money. "Amazon is a bundle." Prime is the clearest expression: expensive content rights at high fixed cost and no marginal cost per subscriber, to enhance Prime membership, which drives more spending.
 

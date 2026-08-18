@@ -19,7 +19,7 @@ updated: 2026-08-17
 
 # Would Breaking Up 'Big Tech' Work? — Benedict Evans
 
-Source: ben-evans.com, 2020. Ingested to [/ai-business/platform-dynamics.md].
+Source: ben-evans.com, 2020. Synthesized into [Platform Dynamics](/ai-business/platform-dynamics.md).
 
 A structural argument about antitrust remedies for big tech. Network effects behave like natural monopolies: dominance persists not because of anti-competitive behavior but because of product mechanics. Market size determines how many networks can coexist.
 

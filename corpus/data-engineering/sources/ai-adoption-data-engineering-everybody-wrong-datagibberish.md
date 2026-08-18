@@ -9,7 +9,7 @@ aliases:
   - Yordan Ivanov AI data
   - semantic layer governance AI
 sources:
-  - path: raw/_inbox/email-2026-06-29-everybody-talks-about-ai-and-they-are-all-wrong.md
+  - path: raw/email/email-2026-06-29-everybody-talks-about-ai-and-they-are-all-wrong.md
     channel: email
     source_url: https://www.datagibberish.com/p/everybody-is-wrong-about-ai-in-data
     ingested_at: 2026-08-18
@@ -59,6 +59,6 @@ The mess of careless AI adoption *is* the backlog for skilled DE practitioners:
 
 "The more people use AI carelessly, the more stupid shit piles up for someone like you to fix."[^1]
 
-Cross-reference: [AI Impact on Data Engineering](/data-engineering/ai-impact-on-data-engineering.md); [Semantic Layer](/data-engineering/semantic-layer.md); [Data Observability](/data-engineering/data-observability.md).
+Cross-reference: [AI Impact on Data Engineering](/data-engineering/ai-impact-on-data-engineering.md); [Semantic Layer](/data-engineering/semantic-layer.md); [Data Observability](/data-engineering/data-observability.md). The "AI can only reproduce yesterday's patterns → well-executed mediocrity" argument is one leg of the cross-domain [Taste as the Moat](/ai-business/taste-as-the-moat.md) synthesis.
 
-[^1]: raw/_inbox/email-2026-06-29-everybody-talks-about-ai-and-they-are-all-wrong.md
+[^1]: raw/email/email-2026-06-29-everybody-talks-about-ai-and-they-are-all-wrong.md

@@ -10,19 +10,19 @@ aliases:
   - SPI online store challenge
   - lean startup SPI
 sources:
-  - path: raw/_inbox/web-how-to-start-a-podcast-step-by-step-2025-complete-tutorial-812a4718.md
+  - path: raw/web/web-how-to-start-a-podcast-step-by-step-2025-complete-tutorial-812a4718.md
     channel: web
     source_url: https://www.smartpassiveincome.com/guides/how-to-start-a-podcast-tutorial-pat-flynn/
     ingested_at: 2026-08-18
-  - path: raw/_inbox/web-smart-from-scratch-c15a7f51.md
+  - path: raw/web/web-smart-from-scratch-c15a7f51.md
     channel: web
     source_url: https://www.smartpassiveincome.com/courses-accelerators/smart-from-scratch/
     ingested_at: 2026-08-18
-  - path: raw/_inbox/web-launch-your-online-store-in-5-days-55bbdc6d.md
+  - path: raw/web/web-launch-your-online-store-in-5-days-55bbdc6d.md
     channel: web
     source_url: https://www.smartpassiveincome.com/launch-your-online-store/
     ingested_at: 2026-08-18
-  - path: raw/_inbox/web-resources-tools-for-entrepreneurs-smart-passive-income-966b6074.md
+  - path: raw/web/web-resources-tools-for-entrepreneurs-smart-passive-income-966b6074.md
     channel: web
     source_url: https://www.smartpassiveincome.com/resources/
     ingested_at: 2026-08-18
@@ -81,7 +81,7 @@ Social media algorithm changes erode reach; email list is the only audience you 
 
 Cross-reference: [Creator Economy Philosophy](/ai-business/creator-economy-philosophy.md) for related creator economy theory; [Boring Expert Businesses](/ai-business/boring-expert-businesses.md).
 
-[^1]: raw/_inbox/web-smart-from-scratch-c15a7f51.md
-[^2]: raw/_inbox/web-how-to-start-a-podcast-step-by-step-2025-complete-tutorial-812a4718.md
-[^3]: raw/_inbox/web-launch-your-online-store-in-5-days-55bbdc6d.md
-[^4]: raw/_inbox/web-resources-tools-for-entrepreneurs-smart-passive-income-966b6074.md
+[^1]: raw/web/web-smart-from-scratch-c15a7f51.md
+[^2]: raw/web/web-how-to-start-a-podcast-step-by-step-2025-complete-tutorial-812a4718.md
+[^3]: raw/web/web-launch-your-online-store-in-5-days-55bbdc6d.md
+[^4]: raw/web/web-resources-tools-for-entrepreneurs-smart-passive-income-966b6074.md

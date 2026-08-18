@@ -16,7 +16,7 @@ updated: 2026-08-17
 
 # Key Insights for Software Founders: What Really Matters — Arvid Kahl
 
-Source: thebootstrappedfounder.com. Ingested to [/ai-business/bootstrapped-saas-playbook.md].
+Source: thebootstrappedfounder.com. Synthesized into [Bootstrapped SaaS Playbook](/ai-business/bootstrapped-saas-playbook.md).
 
 Founders over-index on things customers don't care about. UI obsession: customers use inconsistent UI without complaint; care about data quality and reliability. API design: only one Podscan API user ever complained about endpoint naming (and never converted); Hyrum's Law means people will depend on whatever observable behavior exists. Documentation: needs to be copy-paste-able for AI systems; Notion pages work fine. Customer support: email with 1–2 day response is fine; higher-paying customers are actually more patient. Bottom line: "Works well enough and is super well documented" beats "beautiful, hyper-maintainable, hyper-scalable."[^1]
 

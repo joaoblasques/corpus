@@ -51,7 +51,7 @@ updated: 2026-08-17
 
 TL;DR: Dan Koe's framework synthesizes psychology, philosophy, and business into a model for individuals to maximize potential in the AI era. Core thesis: authenticity and point-of-view beat niche specialization; discipline is identity, not willpower; the most durable competitive advantage is a perspective that can't be replicated. AI commoditizes creation speed — human advantage lies in taste, meaning, and signal.
 
-> This page synthesizes 13 Dan Koe articles (thedankoe.com). See also corpus page on [HUMAN 3.0](/ai-business/sources/a-complete-knowledge-base-of-human-3-0-dan-koe-a4cb9cd1.md) for the full framework. Cross-links: [/ai-business/ai-business-models.md], [/ai-business/monetizing-code.md].
+> This page synthesizes 13 Dan Koe articles (thedankoe.com). See also corpus page on [HUMAN 3.0](/ai-business/sources/a-complete-knowledge-base-of-human-3-0-dan-koe-a4cb9cd1.md) for the full framework. Related: the one-person-business economics in [AI Business Models](/ai-business/ai-business-models.md) and the technical-skill angle in [Monetizing Code](/ai-business/monetizing-code.md).
 
 ## HUMAN 3.0: The Developmental Framework
 
@@ -127,7 +127,7 @@ You can't compete with machines where speed matters. That leaves humans with dom
 
 **The digital artisan model**: Before industrialization, ~80% of free American workers were self-employed farmers or artisans — expected to pursue their interests and do many things. Today only ~10% are self-employed. The solution: become a modern digital artisan — produce for yourself rather than someone else.[^9]
 
-**Taste as the competitive moat**: When anyone can create anything, discernment and restraint matter more than creation. Taste is a skill that comes with practice and dedication to craft. "When machines can think about everything all at once, our job is to have standards."[^9]
+**Taste as the competitive moat**: When anyone can create anything, discernment and restraint matter more than creation. Taste is a skill that comes with practice and dedication to craft. "When machines can think about everything all at once, our job is to have standards."[^9] This is the creator-economy leg of the cross-domain [Taste as the Moat](/ai-business/taste-as-the-moat.md) synthesis, where the same thesis is reached independently by a SaaS founder, a data engineer, and an OpenAI product lead.
 
 **Six-month commitment pattern**: Set aside at least one hour a day for pure craftsmanship — building a project. A meaningful project shapes who you are, rewires your mind, teaches you how to learn. Then build a personal brand, publish work in public.[^9]
 

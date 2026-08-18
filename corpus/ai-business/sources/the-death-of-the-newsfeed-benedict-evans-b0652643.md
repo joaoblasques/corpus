@@ -18,7 +18,7 @@ updated: 2026-08-17
 
 # The Death of the Newsfeed — Benedict Evans
 
-Source: ben-evans.com, 2018. Ingested to [/ai-business/platform-dynamics.md].
+Source: ben-evans.com, 2018. Synthesized into [Platform Dynamics](/ai-business/platform-dynamics.md).
 
 Facebook's average user is eligible to see 1,500+ items/day — stemming from Dunbar's number (~200–300 genuine contacts) combined with "Zuckerberg's law" (people share more over time). The tragedy of the commons: everyone is "supposed" to post, but by posting they overload everyone else's feeds.
 

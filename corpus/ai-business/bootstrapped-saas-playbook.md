@@ -197,6 +197,8 @@ What stays constant: your judgment determines AI code quality. If you can't dist
 
 Fighting comprehension debt: require comments in system prompts; document choices made; log prompts used. Exit value depends on the understanding of what the code does, not just the code.[^15]
 
+Comprehension debt is the same failure mode the ai-engineering corpus treats as [Intent Debt](/ai-engineering/intent-debt.md) — the artifact-level erosion of *why* a system is the way it is; see also [Agentic Coding](/ai-engineering/agentic-coding.md) for the practitioner-side techniques that mitigate it.
+
 ---
 
 [^1]: [Future of Software: Building on Human-Generated Data](raw/web/web-future-of-software-building-on-human-generated-data-27dc66bd.md) — Arvid Kahl, thebootstrappedfounder.com

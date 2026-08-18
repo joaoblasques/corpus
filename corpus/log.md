@@ -4,6 +4,12 @@
 
 ## 2026-08-18
 
+* **Lint**: Weekly Opus synthesis + lint pass (medium scope, 30 changed pages).
+  - Fixed 26 malformed cross-links (`[/path.md]` bare-target form that renders as literal text, not a link → `[Display](/path.md)` per §6): 7 Dan Koe stubs → creator-economy-philosophy; 9 Arvid Kahl stubs → bootstrapped-saas-playbook; 5 Benedict Evans sources → platform-dynamics; 2 in creator-economy-philosophy body (ai-business-models, monetizing-code).
+  - Fixed 16 stale citation paths (raw/_inbox/ → post-move raw/web/ or raw/email/): pat-flynn-content-creator-playbook-spi (4 fm + 4 fn), noah-kagan-entrepreneurship-essays (5 fm + 5 fn), coding-on-vps (1 fm + 1 fn), ai-adoption-datagibberish (1 fm + 1 fn → raw/email/).
+  - Added typed cross-links: platform-dynamics → bootstrapped-saas-playbook/ai-business-models (was orphan-out); bootstrapped-saas-playbook comprehension-debt → ai-engineering/intent-debt + agentic-coding.
+* **Synthesis**: Created [/ai-business/taste-as-the-moat.md] (type=synthesis) — names the convergent "taste/judgment is the moat once AI commoditizes production" thesis reached independently across creator-economy (Koe), bootstrapped-SaaS (Kahl), data-engineering (Ivanov), and product-management (Ambrosino), and the pro-automation vs. guard-the-human tension (Ambrosino/Levels vs. Kahl/Ivanov). Back-linked from the 4 source pages + creator-economy-philosophy. Not duplicative of intent-debt.md (that page covers the code-debt mechanism; this covers the cross-domain economic thesis).
+
 * **Ingest**: Batch ingest — 11 sources from 50-file pre-filtered inbox pass — ingest-auto run; 39 deferred
   - sources: raw/_inbox/ (web: levels.io x1, smartpassiveincome.com x4, noahkagan.com x5; email: datagibberish x1)
   - domains: ai-engineering (1 source), ai-business (9 sources), data-engineering (1 source)

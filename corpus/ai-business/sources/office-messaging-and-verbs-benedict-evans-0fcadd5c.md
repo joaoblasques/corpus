@@ -17,7 +17,7 @@ updated: 2026-08-17
 
 # Office, Messaging and Verbs — Benedict Evans
 
-Source: ben-evans.com, 2015. Ingested to [/ai-business/platform-dynamics.md].
+Source: ben-evans.com, 2015. Synthesized into [Platform Dynamics](/ai-business/platform-dynamics.md).
 
 The essay argues that productivity tools start by replicating old workflows, but over time workflows reshape to fit tools (McLuhan). The real question is not "what software to use" but what the underlying business *verb* is: analyze, delegate, report, confer, decide, track.
 

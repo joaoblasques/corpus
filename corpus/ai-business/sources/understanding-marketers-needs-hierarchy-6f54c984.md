@@ -16,7 +16,7 @@ updated: 2026-08-17
 
 # Understanding Marketers' Needs: A Hierarchy for Success — Arvid Kahl
 
-Source: thebootstrappedfounder.com. Ingested to [/ai-business/bootstrapped-saas-playbook.md].
+Source: thebootstrappedfounder.com. Synthesized into [Bootstrapped SaaS Playbook](/ai-business/bootstrapped-saas-playbook.md).
 
 Maslow-style hierarchy of marketer data needs discovered while building AI-assisted onboarding for Podscan. Five levels: (1) Self-Awareness — "What are people saying about me?" brand/product name mentions; (2) Competitive Awareness — "What are my competitors doing?" reliably the most-tracked data; (3) Industry Awareness — "What's happening in my field?"; (4) Sentiment Awareness — "How do people feel?" shout-outs, reputation management, PR disaster prevention; (5) Strategic Projection — "What's coming next?" acquisition/investment signals, regulatory compliance, market expansion. Practical: tailor sales outreach and onboarding to where each prospect sits in the hierarchy.[^1]
 

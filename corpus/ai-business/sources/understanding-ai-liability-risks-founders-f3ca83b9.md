@@ -16,7 +16,7 @@ updated: 2026-08-17
 
 # Understanding AI Liability: Risks and Responsibilities for Founders — Arvid Kahl
 
-Source: thebootstrappedfounder.com. Ingested to [/ai-business/bootstrapped-saas-playbook.md].
+Source: thebootstrappedfounder.com. Synthesized into [Bootstrapped SaaS Playbook](/ai-business/bootstrapped-saas-playbook.md).
 
 Anthropic/Google cracking down on unauthorized agentic API use is about liability, not token usage. Risk categories: customer-facing AI (treat like an employee — liability lands on founder; business insurance likely doesn't cover AI actions); third-party agents attacking your product (rate-limit everything, use soft deletes, monitor endpoints); your own dev tools (Claude Code can circumvent explicit bans by writing bash scripts). Minimum viable safety posture: rate-limit every endpoint, label AI features + address liability in TOS, restore-ready backups, single kill switch for all LLM connections. The real moat is human-originating data, not AI.[^1]
 

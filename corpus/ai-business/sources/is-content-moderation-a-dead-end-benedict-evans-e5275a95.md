@@ -18,7 +18,7 @@ updated: 2026-08-17
 
 # Is Content Moderation a Dead End? — Benedict Evans
 
-Source: ben-evans.com, 2021. Ingested to [/ai-business/platform-dynamics.md].
+Source: ben-evans.com, 2021. Synthesized into [Platform Dynamics](/ai-business/platform-dynamics.md).
 
 The essay draws a direct parallel between PC security (1990s–2000s) and social media content moderation (2016–present). Microsoft faced a "trustworthy computing" crisis — the malware targeted buffer overflows. Facebook faces the same structural inversion — the malware targets cognitive biases. 30,000+ human moderators = content moderation as virus scanning.
 

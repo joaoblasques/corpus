@@ -17,7 +17,7 @@ updated: 2026-08-17
 
 # HUMAN 3.0 – A Map To Reach The Top 1% — Dan Koe
 
-Source: thedankoe.com, 2026. Ingested to [/ai-business/creator-economy-philosophy.md].
+Source: thedankoe.com, 2026. Synthesized into [Creator Economy Philosophy](/ai-business/creator-economy-philosophy.md).
 
 Foundational introduction to Dan Koe's HUMAN 3.0 framework. Synthesizes psychology, philosophy, personal development, spirituality, technology, and business into one integrated model.
 

@@ -10,23 +10,23 @@ aliases:
   - le pause Noah Kagan
   - money mindset Noah
 sources:
-  - path: raw/_inbox/web-what-i-learned-working-for-mark-zuckerberg-noah-kagan-23d8ae2a.md
+  - path: raw/web/web-what-i-learned-working-for-mark-zuckerberg-noah-kagan-23d8ae2a.md
     channel: web
     source_url: https://noahkagan.com/what-i-learned-working-for-mark-zuckerberg/
     ingested_at: 2026-08-18
-  - path: raw/_inbox/web-from-employee-to-9-figure-ceo-whisperer-noah-kagan-1cc52838.md
+  - path: raw/web/web-from-employee-to-9-figure-ceo-whisperer-noah-kagan-1cc52838.md
     channel: web
     source_url: https://noahkagan.com/from-employee-to-9-figure-ceo-whisperer/
     ingested_at: 2026-08-18
-  - path: raw/_inbox/web-le-pause-noah-kagan-3c7d8deb.md
+  - path: raw/web/web-le-pause-noah-kagan-3c7d8deb.md
     channel: web
     source_url: https://noahkagan.com/le-pause/
     ingested_at: 2026-08-18
-  - path: raw/_inbox/web-i-bought-crypto-noah-kagan-f56265a8.md
+  - path: raw/web/web-i-bought-crypto-noah-kagan-f56265a8.md
     channel: web
     source_url: https://noahkagan.com/i-bought-crypto/
     ingested_at: 2026-08-18
-  - path: raw/_inbox/web-hey-sam-parr-noah-kagan-70a9d523.md
+  - path: raw/web/web-hey-sam-parr-noah-kagan-70a9d523.md
     channel: web
     source_url: https://noahkagan.com/hey-sam-parr/
     ingested_at: 2026-08-18
@@ -96,8 +96,8 @@ Three key topics from podcast: inside a billionaire retreat (MrBeast dynamics), 
 
 Cross-reference: [Navigating a Technical Career](/ai-business/technical-career.md); [Bootstrapped SaaS Playbook](/ai-business/bootstrapped-saas-playbook.md).
 
-[^1]: raw/_inbox/web-what-i-learned-working-for-mark-zuckerberg-noah-kagan-23d8ae2a.md
-[^2]: raw/_inbox/web-from-employee-to-9-figure-ceo-whisperer-noah-kagan-1cc52838.md
-[^3]: raw/_inbox/web-le-pause-noah-kagan-3c7d8deb.md
-[^4]: raw/_inbox/web-i-bought-crypto-noah-kagan-f56265a8.md
-[^5]: raw/_inbox/web-hey-sam-parr-noah-kagan-70a9d523.md
+[^1]: raw/web/web-what-i-learned-working-for-mark-zuckerberg-noah-kagan-23d8ae2a.md
+[^2]: raw/web/web-from-employee-to-9-figure-ceo-whisperer-noah-kagan-1cc52838.md
+[^3]: raw/web/web-le-pause-noah-kagan-3c7d8deb.md
+[^4]: raw/web/web-i-bought-crypto-noah-kagan-f56265a8.md
+[^5]: raw/web/web-hey-sam-parr-noah-kagan-70a9d523.md

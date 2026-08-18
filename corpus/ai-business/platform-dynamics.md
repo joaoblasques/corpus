@@ -98,6 +98,8 @@ The way those others switch tools is not to a simpler Office clone, but to somet
 
 Hardware assumptions follow: if your task is flagging a few key changes on a dashboard, you may not need a keyboard, mouse, or windowed OS.[^5]
 
+The verb framework connects directly to how software businesses are built today: the [Bootstrapped SaaS Playbook](/ai-business/bootstrapped-saas-playbook.md) makes the same point from the builder's side — a SaaS that merely transforms input→output has no moat once agents can do it natively, so the durable products are the ones serving an underlying *verb* rather than replicating a workflow. See also [AI Business Models](/ai-business/ai-business-models.md) for how these dynamics reshape one-person-business economics.
+
 ---
 
 [^1]: [Would breaking up 'big tech' work?](raw/web/web-would-breaking-up-big-tech-work-what-would-benedict-evans-e5895f6d.md) — Benedict Evans, 2020

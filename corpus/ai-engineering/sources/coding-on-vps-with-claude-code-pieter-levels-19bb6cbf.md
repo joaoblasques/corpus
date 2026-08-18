@@ -8,7 +8,7 @@ aliases:
   - cloud coding workflow
   - coding on remote server
 sources:
-  - path: raw/_inbox/web-i-ve-been-coding-almost-solely-on-my-vps-with-claude-code-fo-19bb6cbf.md
+  - path: raw/web/web-i-ve-been-coding-almost-solely-on-my-vps-with-claude-code-fo-19bb6cbf.md
     channel: web
     source_url: https://levels.io/coding-on-vps-with-claude-code-for-a-year
     ingested_at: 2026-08-18
@@ -46,4 +46,4 @@ Levels cites @theo and Karpathy moving to cloud/Slack-based AI coding as confirm
 
 Cross-reference: [Agentic Coding](/ai-engineering/agentic-coding.md) for the broader agentic workflow context; [Claude Code](/ai-engineering/claude-code.md) for Claude Code feature detail.
 
-[^1]: raw/_inbox/web-i-ve-been-coding-almost-solely-on-my-vps-with-claude-code-fo-19bb6cbf.md
+[^1]: raw/web/web-i-ve-been-coding-almost-solely-on-my-vps-with-claude-code-fo-19bb6cbf.md
