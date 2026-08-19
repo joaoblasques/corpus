@@ -231,3 +231,9 @@ type: internal
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/claude-opus-4-6-vs-deepseek-v4-pro-benchmarks-pricing-contex-47c066fa.md", "verdict_ok": false, "gov": "reverted+queued"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/the-best-ai-automation-stack-to-learn-in-2026-omU3zR3K7-U.md", "verdict_ok": false, "gov": "reverted+queued"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/ai-agent-vs-chatbot-key-differences-and-examples-8bd5654c.md", "verdict_ok": false, "gov": "reverted+queued"}
+
+## [2026-08-19T02:52] gardener · run
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/claude-opus-4-6-vs-deepseek-v4-pro-benchmarks-pricing-contex-47c066fa.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/the-best-ai-automation-stack-to-learn-in-2026-omU3zR3K7-U.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/ai-agent-vs-chatbot-key-differences-and-examples-8bd5654c.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/if-i-started-ai-freelancing-in-2026-i-d-do-this-CRYea6gFWgk.md", "verdict_ok": true, "gov": "committed"}
