@@ -18,6 +18,9 @@ sources:
   - path: raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-full-walkthrough-report.md
     channel: notes
     ingested_at: 2026-06-25
+  - path: raw/_inbox/web-spec-driven-development-for-software-services-firms-524aaca1.md
+    channel: web
+    ingested_at: 2026-08-19
 aliases:
   - spec-driven development
   - spec-first
@@ -39,7 +42,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-20
-updated: 2026-06-24
+updated: 2026-08-19
 ---
 
 # Spec-Driven Development
@@ -155,6 +158,17 @@ A full end-to-end spec-to-agent pipeline [^src5]:
 3. **AFK multi-phase**: phases run in a loop without human kicks
 4. **Ralph**: agent improvises the plan and runs continuously — "if you let the agent improvise, you end up with Ralph"
 
+## SDD for consulting/services firms
+
+A consulting-oriented framing of SDD focuses on specification as both technical documentation and project governance.[^src6] Key additions beyond the product-team framing:
+
+- **Specification as contract**: specs align requirements, scope, timelines, and acceptance criteria before development, and become the ground-truth for whether delivered work is a defect (free fix) vs. a change request (billable scope change)
+- **Change request process**: any client request not in an approved spec is a CR with a formal impact analysis covering dev effort, testing, timeline, and cost
+- **AI integration**: AI coding assistants deliver better results when given detailed specs as context rather than ad-hoc prompts
+- **Scope creep control**: research cited notes 97% of organizations believe PM is critical to success; SDD firms reduce scope creep from ~25% average overrun to 8% in documented case study
+
+A reported 18-month transformation at a 200-consultant firm: revenue +45%, profitability 14%→26%, project success rate 70%→92%.[^src6] These figures are from a Zencoder marketing case study and should be treated as directional rather than audited.
+
 ## See also
 
 - [Agentic Coding](/ai-engineering/agentic-coding.md) — the coding-agent context this sits in
@@ -178,3 +192,4 @@ A full end-to-end spec-to-agent pipeline [^src5]:
 [^src3]: [How Senior Engineers Actually Build With AI (Ghost AI build — six-file system)](../../raw/youtube/youtube-14RP8liACqo-how-senior-engineers-actually-build-with-ai-in-2026-build-a.md) — JavaScript Mastery, YouTube
 [^src4]: [How Senior Engineers Actually Build With AI (Job Pilot build — nine files + five skills)](../../raw/youtube/youtube-9dKA2hq4vf0-how-senior-engineers-actually-build-with-ai-in-2026-build-a.md) — JavaScript Mastery, YouTube
 [^src5]: [Full Walkthrough: Workflow for AI Coding — Matt Pocock](../../raw/notes/notes-00-inbox-clippings-youtube-raw-raw-watched-full-walkthrough-report.md) — Matt Pocock, AI Hero (conference talk notes report)
+[^src6]: Zencoder, "Spec-Driven Development for Software Services Firms," zencoder.ai, 2026. `raw/_inbox/web-spec-driven-development-for-software-services-firms-524aaca1.md`

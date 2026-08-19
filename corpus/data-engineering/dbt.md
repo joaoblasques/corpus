@@ -108,6 +108,15 @@ sources:
   - path: raw/_inbox/web-it-is-time-to-take-agentic-workflows-for-data-work-seriously-b1777c0f.md
     channel: web
     ingested_at: 2026-08-11
+  - path: raw/_inbox/web-the-next-era-of-analytics-with-dbt-scaling-data-ai-workflows-80e66d28.md
+    channel: web
+    ingested_at: 2026-08-19
+  - path: raw/_inbox/web-the-future-is-open-building-a-flexible-ai-ready-data-stack-w-5fbd9b53.md
+    channel: web
+    ingested_at: 2026-08-19
+  - path: raw/_inbox/web-the-next-era-of-data-build-an-open-infrastructure-for-scale-cda74585.md
+    channel: web
+    ingested_at: 2026-08-19
 aliases:
   - dbt
   - data build tool
@@ -132,7 +141,7 @@ tags:
   - corpus/data-engineering
   - entity
 created: 2026-05-21
-updated: 2026-07-01
+updated: 2026-08-19
 last_confirmed: 2026-08-11
 ---
 
@@ -490,6 +499,18 @@ The dbt Roundup newsletter (Tristan Handy, Jason Ganz) covers the direction the 
 - **Change management as the real barrier**: moving up the stack with agents requires a whole-company mindset shift, not just a data-team change — organizational knowledge must be captured in agent-consumable formats; "change management will be the biggest barrier to capturing the value of the agentic era" [^src34]
 - **The computers talk to us now**: the underlying shift is that LLMs have acquired "something close to general comprehension" — the audience for dbt code has expanded from "humans only" to humans + agents; systems built for one are now being rebuilt for both [^src35]
 
+## dbt as open data infrastructure (2025–2026 positioning)
+
+Three complementary dbt Labs + Fivetran webinars (2025–2026) converge on a consistent positioning:[^src36][^src37][^src38]
+
+**"The next era of analytics" launch (May 2025)**: Three sessions covering dbt's biggest 2025 release — resilient pipelines that reduce rework, AI workflow scaling, and data team speed improvements. Positioned dbt Cloud as the governance/orchestration layer for the AI era.
+
+**"Open data infrastructure" (ODI)**: As organizations scale, monolithic vendor-locked solutions create reliability, governance, and flexibility problems. ODI is built on open standards — modular, interoperable, allowing the right tool for the right workload across clouds and platforms. dbt Labs positions itself as the transformation layer in ODI.[^src38]
+
+**Modular stack + Fivetran + Omni webinar**: Leaders from Fivetran (EL), dbt Labs (T), and Omni (BI) describe a decoupled architecture where each layer is independently replaceable. The "context across tools" — metadata and semantic definitions — is what makes decoupled stacks work for AI. Includes ACV Auctions case study: moved from legacy reporting to AI-powered stakeholder workflows using Fivetran + dbt + Omni.[^src37]
+
+Note: these are vendor-produced positioning materials. The ODI framing is marketing language; the modular architecture argument is well-established in the industry but the "right" stack is context-dependent.
+
 ## See also
 
 - [Pipeline Layers](/data-engineering/pipeline-layers.md) — the staging → warehouse → marts architecture pattern
@@ -534,3 +555,6 @@ The dbt Roundup newsletter (Tristan Handy, Jason Ganz) covers the direction the 
 [^src33]: ../../raw/web/web-five-things-i-believe-about-the-future-of-analytics-b2e79f98.md — Tristan Handy, dbt Roundup
 [^src34]: ../../raw/web/web-how-to-actually-move-up-the-stack-5294b47d.md — Jason Ganz, dbt Roundup
 [^src35]: ../../raw/web/web-the-computers-talk-to-us-now-122e67b3.md — Jason Ganz, dbt Roundup — Kai Waehner, kai-waehner.de, 2026-03-26 — SDF acquisition Jan 2025; 8,611 commits first year; ~30× parse speedup; ~40% model reuse, 30% compute savings; 450+ weekly projects; VS Code Extension 104K downloads. See [dbt Fusion Engine](/data-engineering/dbt-fusion.md) for full detail.
+[^src36]: dbt Labs + Fivetran, "The next era of analytics with dbt: Scaling data & AI workflows," getdbt.com, 2025. `raw/_inbox/web-the-next-era-of-analytics-with-dbt-scaling-data-ai-workflows-80e66d28.md`
+[^src37]: dbt Labs + Fivetran + Omni, "The future is open: Building a flexible, AI-ready data stack without lock-in," getdbt.com. `raw/_inbox/web-the-future-is-open-building-a-flexible-ai-ready-data-stack-w-5fbd9b53.md`
+[^src38]: dbt Labs, "The next era of data: Build an open infrastructure for scale and AI," getdbt.com. `raw/_inbox/web-the-next-era-of-data-build-an-open-infrastructure-for-scale-cda74585.md`

@@ -21,6 +21,9 @@ sources:
   - path: raw/_inbox/web-selecting-the-right-ai-evals-tool-hamels-blog-hamel-husain-daa87ecb.md
     channel: web
     ingested_at: 2026-07-06
+  - path: raw/_inbox/web-its-hard-to-eval-is-a-product-smell-hamels-blog-a670f1d4.md
+    channel: web
+    ingested_at: 2026-08-19
 aliases:
   - LLM evals
   - product evals
@@ -41,9 +44,9 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-07-06
-updated: 2026-07-06
+updated: 2026-08-19
 confidence: 0.95
-last_confirmed: 2026-07-06
+last_confirmed: 2026-08-19
 ---
 
 # LLM Evals (Product Evaluation Methodology)
@@ -223,6 +226,26 @@ Error analysis IS data science [^src4]:
 
 "Training models was never most of the job. The bulk of the work is setting up experiments to test how well the AI generalizes to unseen data, debugging stochastic systems, and designing good metrics." [^src4]
 
+## "It's hard to eval" is a product smell
+
+Hamel's 2026 post makes a stronger argument: if an artifact is hard for you to verify, it's often hard for users too.[^src7] The design principle should come before the eval system:
+
+> "Designing your product for ease of verification should come before building evals."
+
+Three product archetypes where this manifests:[^src7]
+
+1. **AI data agent** — if the only output is a number, users must redo the query to verify. Better: surface checkable artifacts (SQL shown, metric definition sourced, distribution breakdown, flagged unverifiable items). Provenance = fastest path to trust.
+2. **Physical education lesson plan builder** — better design shows the vetted plan being adapted, scoping review to "a few edits" rather than judging the whole plan from scratch. Downstream benefit: evals become tractable because the retrieval step and the diff are separately gradeable.
+3. **Workers-comp medical report generator** — a 50-page report is unverifiable as-is. Better: turn it into a research assistant that extracts facts with citations, surfaces disagreements, and lets the doctor build and check before assembling the final report.
+
+Generalizing pattern:[^src7]
+- What does the user actually need to check?
+- What trusted thing can they compare it against?
+- What smaller units can they accept, edit, or reject?
+- Progressive disclosure: show provenance; collapse it once trust is established
+
+This aligns eval thinking with UX/product thinking under the AI paradigm shift: "Before AI, verification happened incidentally during the process of creating work product. With AI, verification is the bottleneck."
+
 ## See also
 
 - [Agent Evaluation](/ai-engineering/agent-evaluation.md) — the broader evaluation concept page (online/offline modes, golden datasets, benchmarks)
@@ -240,3 +263,4 @@ Error analysis IS data science [^src4]:
 [^src4]: [The Revenge of the Data Scientist](../../raw/web/web-the-revenge-of-the-data-scientist-hamels-blog-hamel-husain-28a4d4c3.md) — Hamel Husain, hamel.dev
 [^src5]: [Evals Skills for Coding Agents](../../raw/web/web-evals-skills-for-coding-agents-hamels-blog-hamel-husain-f8a26550.md) — Hamel Husain, hamel.dev
 [^src6]: [Selecting The Right AI Evals Tool](../../raw/web/web-selecting-the-right-ai-evals-tool-hamels-blog-hamel-husain-daa87ecb.md) — Hamel Husain, hamel.dev
+[^src7]: Hamel Husain, "'It's Hard to Eval' Is a Product Smell," hamel.dev, 2026. `raw/_inbox/web-its-hard-to-eval-is-a-product-smell-hamels-blog-a670f1d4.md`

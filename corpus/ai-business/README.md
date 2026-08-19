@@ -79,8 +79,9 @@ Career, monetization, and business in the AI era: navigating a technical career,
 - [Harvey](/ai-business/harvey.md)
 - [Neil Davidson](/ai-business/neil-davidson.md)
 
-### Syntheses (1)
+### Syntheses (2)
 - [AI and the Job Market](/ai-business/ai-and-the-job-market.md)
+- [Taste as the Moat](/ai-business/taste-as-the-moat.md)
 
 <details>
 <summary>Source summaries (245)</summary>

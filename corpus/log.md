@@ -2,6 +2,27 @@
 
 > OKF v0.1 change log. Newest first, grouped by date.
 
+## 2026-08-19
+
+* **Ingest**: Batch ingest — 14 sources from 50-file pre-filtered inbox pass — ingest-auto run; 36 deferred
+  - sources: raw/_inbox/ (web: simonwillison.net x2, strongdm.com x1, 12gramsofcarbon.com x1, arxiv.org x1, github.com x2, huggingface.co x1, zencoder.ai x1, hamel.dev x1, databricks.com x1, getdbt.com x3)
+  - domains: ai-engineering (11 sources), data-engineering (4 sources; 3 dbt + 1 dashboards; dbt.md updated x3)
+  - pages created: [/ai-engineering/software-factory.md, /ai-engineering/strongdm.md, /ai-engineering/ai-model-export-controls.md, /ai-engineering/pi-agent.md, /ai-engineering/north-mini-code.md, /ai-engineering/ornith-1-0.md, /ai-engineering/polar-rl.md, /ai-engineering/sources/local-coding-agent-evals-rasbt-7a2f9c.md, /data-engineering/dashboards.md]
+  - pages updated: [/ai-engineering/spec-driven-development.md, /ai-engineering/llm-evals.md, /ai-engineering/hamel-husain.md, /data-engineering/dbt.md]
+  - deferred: 36 files (G1 x4: card-network/payments, market-microstructure, navy-shipbuilding, game-design — no matching domain; UNCERTAIN x32: dbt Summit speaker bio stubs x10, empty dbt Summit session pages x10, empty dbt landing pages x3, event registration pages x1, thin utility pages x3, Ollama content already in corpus x2, duplicate article x1, Goodreads reviews x1, personal bio x1)
+  - notes: ingest-auto run resumed from context-window interruption; StrongDM Software Factory + Digital Twin Universe + export controls + Polar RL + Pi Agent + North Mini Code + Ornith-1.0 all new to corpus; eval-smell article extends llm-evals and hamel-husain; dbt ODI positioning (3 webinars) added to dbt.md; dashboards new concept page in data-engineering
+
+* **Collectors**: gmail=1, blog_promote=0, obsidian=0, book_discover=0, blog_discover=0, book_fetch=0, pdf=0, image=0, books=0, arxiv=0, youtube=0, github_discover=5, github_promote=5, github=0, x=0, links_refetch=0
+* **Ingest**: 14 ingested · 36 deferred · status=ok
+* **YoutubeQuick**: 0 intake · 0 rescued · 0 skipped · status=ok
+* **DocsQuick**: 0 intake · 47 thin · 3 llm_fail · status=ok
+* **YoutubeReap**: 0 removed · status=ok
+* **Gardener**: 4 stubs deepened · status=ok
+* **Heal**: 0 citations repointed · 0 unfixable · 3 hubs reindexed · 34 cross-domain links · status=ok
+* **Depth**: 453 knowledge · 1469 sources · ratio 1:3.2
+* **GapResolver**: 0 gap dispatched · 0 sources queued · status=ok
+* **Lint**: 2 broken wikilinks · 0 broken citations · 0 orphans · 1304 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+* **OKF**: 0 violations
 ## 2026-08-18
 
 * **Lint**: Weekly Opus synthesis + lint pass (medium scope, 30 changed pages).

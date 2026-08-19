@@ -3,7 +3,7 @@ okf_version: "0.1"
 ---
 # Corpus Index
 
-> Last updated: 2026-08-18 | Total pages: 601 | Total sources: 2471
+> Last updated: 2026-08-19 | Total pages: 610 | Total sources: 2485
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
@@ -824,6 +824,13 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [Datasette](/ai-engineering/datasette.md) — entity · draft · Python tool for exploring/publishing SQLite databases; read-write editing (1.0a34+), create/alter table UI (1.0a35+), datasette-apps sandboxed iframe extensions, datasette-acl, Datasette Lite + OPFS browser exploration
 - [sqlite-utils](/ai-engineering/sqlite-utils.md) — entity · draft · Python library for programmatic SQLite manipulation; 4.0rc1: migrations (`@migrations()` decorator), nested transactions (`db.atomic()` via SQLite savepoints)
 - [Zenflow](/ai-engineering/zenflow.md) — entity · draft · Zencoder AI platform; AI agent connects IDE to enterprise tools (PagerDuty, Snowflake, Slack, ServiceNow, Miro, GitHub, Jira) via natural language; Zenflow Work (business ops automation) + Zenflow Code (dev workflows); Custom Workflows via versioned Markdown; SOC 2 Type II certified
+- [StrongDM](/ai-engineering/strongdm.md) — entity · draft · PAM company; 3-person AI Lab; pioneered Software Factory non-interactive development model; founded AI Lab July 2025
+- [North Mini Code](/ai-engineering/north-mini-code.md) — entity · stub · Cohere's 30B MoE coding model (3B active params); Apache 2.0; Coding Index 33.4
+- [Ornith-1.0](/ai-engineering/ornith-1-0.md) — entity · stub · DeepReinforce self-scaffolding LLM family (MIT); 9B/31B/35B/397B variants; Gemma 4 + Qwen 3.5 base
+- [Software Factory](/ai-engineering/software-factory.md) — concept · draft · StrongDM non-interactive dev model; specs + scenarios drive agents; Digital Twin Universe; $1K/day/engineer token benchmark
+- [AI Model Export Controls](/ai-engineering/ai-model-export-controls.md) — concept · draft · Fable 5/Mythos 5 government ban incident (2026); frontier LLM access restrictions; policy precedent
+- [Polar RL](/ai-engineering/polar-rl.md) — concept · stub · rollout framework for scalable async RL over arbitrary agent harnesses; GRPO results on SWE-Bench Verified
+- [Local Coding Agent Evals (rasbt)](/ai-engineering/sources/local-coding-agent-evals-rasbt-7a2f9c.md) — source · stub · three-tier benchmark: speed-memory, hard-tool-reasoning, agent-problem-pack; isolates LLM vs engine vs harness
 - [vLLM Semantic Router](/ai-engineering/vllm-semantic-router.md) — entity · draft · request-routing control plane (signals→projections→decisions→algorithms→models); Fusion Mixture-of-Models primitive; Session-Aware Agentic Routing (SAAR: router memory, hard locks, prefix-cache economics); Themis v0.3; multimodal routing vision-signal hardening (inverted-embedding bug, cross-language reference parity)
 - [MiniMax M3](/ai-engineering/minimax-m3.md) — entity · draft · 1M-token-context model family; MiniMax Sparse Attention (128-token block scoring/top-k selection); MXFP8 MoE, EAGLE3 speculative decoding
 - [DiffusionGemma](/ai-engineering/diffusiongemma.md) — entity · draft · Google's 26B discrete diffusion LLM (dLLM) on Gemma4; parallel-canvas denoising, entropy-bound acceptance, self-conditioning; first dLLM natively in vLLM
@@ -1230,6 +1237,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [Matthew Housley](/data-engineering/matthew-housley.md) — entity · stub · co-author Data Engineering Fundamentals (O'Reilly); former CTO Ternary Data; "foundations over tools"
 - [Data Orchestration](/data-engineering/data-orchestration.md) — concept · draft · scheduling vs orchestration vs observability; when cron isn't enough
 - [Open Table Formats](/data-engineering/open-table-formats.md) — concept · draft · DB-independent metadata layer (Iceberg/Delta/Hudi); open data infrastructure
+- [Dashboards](/data-engineering/dashboards.md) — concept · draft · four dashboard types (operational/analytical/strategic/tactical); seven design questions; AI/BI governance prerequisite
 - [Medallion Architecture](/data-engineering/medallion-architecture.md) — concept · draft · bronze/silver/gold are lifecycle stages, not a data model
 - [Change Data Capture (CDC)](/data-engineering/change-data-capture.md) — concept · draft · full load vs incremental vs CDC; capturing deletes, latency
 - [Materialized Views](/data-engineering/materialized-views.md) — concept · draft · cross-platform MV synthesis; incremental vs full refresh

@@ -183,12 +183,18 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Datasette](/ai-engineering/datasette.md) — entity · draft · Python tool for exploring and publishing SQLite databases; read-write editing (1.0a34+), table management UI, datasette-apps sandboxed iframe extensions, datasette-acl access control, Datasette Lite + OPFS browser exploration
 - [sqlite-utils](/ai-engineering/sqlite-utils.md) — entity · draft · Python library for programmatic SQLite manipulation; 4.0rc1: migrations (`@migrations()` decorator, ported from sqlite-migrate), nested transactions (`db.atomic()` via SQLite savepoints)
 - [Zenflow](/ai-engineering/zenflow.md) — entity · draft · Zencoder AI platform; AI agent connects coding environment to enterprise tools (PagerDuty, Snowflake, Slack, GitHub, Jira, ServiceNow) via natural language; OAuth 2.0 + Pipedream auth layer
+- [StrongDM](/ai-engineering/strongdm.md) — entity · draft · PAM company; 3-person AI Lab (Justin McCarthy, Jay Taylor, Navan Chauhan); pioneered the Software Factory non-interactive development model; founded AI Lab July 2025
+- [North Mini Code](/ai-engineering/north-mini-code.md) — entity · stub · Cohere's 30B MoE coding model (3B active params); Apache 2.0; Coding Index 33.4; outperforms many larger models
+- [Ornith-1.0](/ai-engineering/ornith-1-0.md) — entity · stub · DeepReinforce self-scaffolding LLM family (MIT); 9B/31B/35B/397B variants; Gemma 4 + Qwen 3.5 base; validated by Simon Willison via LM Studio + Pi
 
 ### Concepts (continued)
 - [Claude Sub-Agents](/ai-engineering/claude-subagents.md) — concept · draft · .claude/agents/ files, isolated context, parallel execution, model routing, progressive disclosure, dynamic workflows (ultracode), security (disallowed_tools)
 - [Generation Configurations](/ai-engineering/generation-configs.md) — concept · draft · temperature (logit÷T→softmax), top-k, top-p/nucleus sampling, test-time compute (N-output selection), structured outputs (prompting/constraint-sampling/fine-tuning)
 - [Multimodal Models (LMMs)](/ai-engineering/multimodal-models.md) — concept · draft · CLIP contrastive pretraining, Flamingo cross-attention LMM, BLIP-2/LLaVA adapters; text-data-scarcity driver; multimodal data taxonomy
 - [AI Sovereignty](/ai-engineering/ai-sovereignty.md) — concept · draft · four-dimension framework (data/technology/operational/assurance); open source as sovereignty enabler; operational resiliency framing for US orgs; Red Hat Field CTO perspective
+- [Software Factory](/ai-engineering/software-factory.md) — concept · draft · non-interactive development model (StrongDM/Dark Factory level); specs + scenarios drive agents that write, test, and converge code without human code review; Digital Twin Universe for scenario validation; $1K/day/engineer token benchmark
+- [AI Model Export Controls](/ai-engineering/ai-model-export-controls.md) — concept · draft · Fable 5/Mythos 5 government ban incident (2026); frontier LLM access restrictions; policy precedent for restricting model APIs to consumers
+- [Polar RL](/ai-engineering/polar-rl.md) — concept · stub · rollout framework for scalable async RL over arbitrary agent harnesses; black-box harness proxying; GRPO results on SWE-Bench Verified with Qwen3.5-4B across 4 coding harnesses
 
 ### Syntheses
 - [Agentic Coding](/ai-engineering/agentic-coding.md) — synthesis · draft · **sub-hub** · coding-agent orchestration; conductor→orchestrator, AX, the verification bottleneck
@@ -199,6 +205,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Generator–Evaluator Separation](/ai-engineering/generator-evaluator-separation.md) — synthesis · draft · a model can't reliably grade its own output; move evaluation into a separate agent/model/rubric/human
 
 ### Sources
+- [Local Coding Agent Evals (rasbt)](/ai-engineering/sources/local-coding-agent-evals-rasbt-7a2f9c.md) — source · stub · three-tier benchmark framework: speed-memory, hard-tool-reasoning, agent-problem-pack; isolates LLM vs engine vs harness variables
 - [Evaluating GitHub Copilot Agentic Harness](/ai-engineering/sources/evaluating-github-copilot-agentic-harness-bdecf2cf.md) — source · draft · benchmark results; task resolution parity with model-vendor harnesses; Rubber Duck pattern; token efficiency
 - [Qubot: GitHub's Internal Data Analytics Agent](/ai-engineering/sources/qubot-internal-data-analytics-agent-1c1b2656.md) — source · draft · GitHub's internal analytics agent; 3-component architecture; MCP context layer; 3× faster with well-curated context
 - [The Little Book of Deep Learning (Fleuret, 2024)](/ai-engineering/sources/the-little-book-of-deep-learning.md) — source · draft · 189pp compact deep learning textbook (CC BY-NC-SA 4.0, fleuret.org); Foundations (ML, GPU, tensors, training, scaling laws, parallel training) → Components (layers, activations, attention, normalization, skip connections) → Architectures (MLP, ResNet-50, GPT, ViT) → Applications (denoising, classification, object detection, segmentation, CLIP, RL, text/image generation) → Compute Schism (prompt engineering, quantization, LoRA, model merging)
@@ -283,7 +290,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 
 ## Pages in this domain
 
-### Concepts (100)
+### Concepts (103)
 - [Agent Cost Management](/ai-engineering/agent-cost-management.md)
 - [Agent Evaluation](/ai-engineering/agent-evaluation.md)
 - [Agent Harness](/ai-engineering/agent-harness.md)
@@ -298,6 +305,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [AI Agent](/ai-engineering/ai-agent.md)
 - [AI Fundamentals (Classical & Modern)](/ai-engineering/ai-fundamentals.md)
 - [AI in Education](/ai-engineering/ai-education.md)
+- [AI Model Export Controls](/ai-engineering/ai-model-export-controls.md)
 - [AI Operating System](/ai-engineering/ai-operating-system.md)
 - [AI Presentation Tools](/ai-engineering/ai-presentation-tools.md)
 - [AI Sovereignty](/ai-engineering/ai-sovereignty.md)
@@ -354,6 +362,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Optimization for Machine Learning](/ai-engineering/optimization-for-ml.md)
 - [PCA and Dimensionality Reduction](/ai-engineering/pca-and-dimensionality-reduction.md)
 - [Personal Knowledge Corpus Pipeline](/ai-engineering/personal-knowledge-corpus-pipeline.md)
+- [Polar: Agentic RL on Any Harness at Scale](/ai-engineering/polar-rl.md)
 - [Probability and Statistics for Machine Learning](/ai-engineering/probability-and-statistics-for-ml.md)
 - [Prompt Caching](/ai-engineering/prompt-caching.md)
 - [Prompt Engineering](/ai-engineering/prompt-engineering.md)
@@ -371,6 +380,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [SINDy — Sparse Identification of Nonlinear Dynamics](/ai-engineering/sindy.md)
 - [Singular Value Decomposition (SVD)](/ai-engineering/singular-value-decomposition.md)
 - [Sleep-Time Compute](/ai-engineering/sleep-time-compute.md)
+- [Software Factory](/ai-engineering/software-factory.md)
 - [Spec-Driven Development](/ai-engineering/spec-driven-development.md)
 - [Speculative Decoding](/ai-engineering/speculative-decoding.md)
 - [statistical learning](/ai-engineering/statistical-learning.md)
@@ -385,7 +395,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Vibe Coding (and why Spec-Driven Development supersedes it)](/ai-engineering/vibe-coding.md)
 - [Visual Bag of Words](/ai-engineering/visual-bag-of-words.md)
 
-### Entities (74)
+### Entities (77)
 - [Anthropic](/ai-engineering/anthropic.md)
 - [Charles L.A. Clarke](/ai-engineering/charles-clarke.md)
 - [Charles M. Grinstead](/ai-engineering/charles-grinstead.md)
@@ -431,6 +441,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [MiniMax M3](/ai-engineering/minimax-m3.md)
 - [Nemotron 3 Ultra](/ai-engineering/nemotron-3-ultra.md)
 - [Nils J. Nilsson](/ai-engineering/nils-nilsson.md)
+- [North Mini Code](/ai-engineering/north-mini-code.md)
 - [NotebookLM](/ai-engineering/notebooklm.md)
 - [Ollama](/ai-engineering/ollama.md)
 - [Olmo](/ai-engineering/olmo.md)
@@ -440,6 +451,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [OpenEnv](/ai-engineering/openenv.md)
 - [OpenJarvis](/ai-engineering/openjarvis.md)
 - [OpenViking](/ai-engineering/openviking.md)
+- [Ornith-1.0](/ai-engineering/ornith-1-0.md)
 - [Paperclip](/ai-engineering/paperclip.md)
 - [Perplexity Computer](/ai-engineering/perplexity-computer.md)
 - [Pi Agent](/ai-engineering/pi-agent.md)
@@ -452,6 +464,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [sqlite-utils](/ai-engineering/sqlite-utils.md)
 - [Stefan Büttcher](/ai-engineering/stefan-buttcher.md)
 - [Strands Robots](/ai-engineering/strands-robots.md)
+- [StrongDM](/ai-engineering/strongdm.md)
 - [Supacode](/ai-engineering/supacode.md)
 - [Tim Dettmers](/ai-engineering/tim-dettmers.md)
 - [Transformers.js](/ai-engineering/transformers-js.md)
@@ -473,7 +486,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Tool Calling & Context Engineering: How They Interlock](/ai-engineering/tool-calling-and-context-engineering.md)
 
 <details>
-<summary>Source summaries (763)</summary>
+<summary>Source summaries (764)</summary>
 
 - ["2024 State of Analytics Engineering, crafted by dbt Labs | dbt Labs"](/ai-engineering/sources/2024-state-of-analytics-engineering-crafted-by-dbt-labs-dbt--cb342df0.md)
 - ["6 AI Agent Orchestration Best Practices in 2026 [Explained]"](/ai-engineering/sources/6-ai-agent-orchestration-best-practices-in-2026-explained-8144e2d2.md)
@@ -608,7 +621,6 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - ["claude-opus-4-6 vs claude-sonnet-4-6: Benchmarks, Pricing & Context Window | Requesty"](/ai-engineering/sources/claude-opus-4-6-vs-claude-sonnet-4-6-benchmarks-pricing-cont-f4ef6a2f.md)
 - ["claude-opus-4-6 vs deepseek-r1: Benchmarks, Pricing & Context Window | Requesty"](/ai-engineering/sources/claude-opus-4-6-vs-deepseek-r1-benchmarks-pricing-context-wi-37679b99.md)
 - ["claude-opus-4-6 vs deepseek-v4-flash: Benchmarks, Pricing & Context Window | Requesty"](/ai-engineering/sources/claude-opus-4-6-vs-deepseek-v4-flash-benchmarks-pricing-cont-75606847.md)
-- ["claude-opus-4-6 vs deepseek-v4-pro: Benchmarks, Pricing & Context Window | Requesty"](/ai-engineering/sources/claude-opus-4-6-vs-deepseek-v4-pro-benchmarks-pricing-contex-47c066fa.md)
 - ["claude-opus-4-6 vs gemini-2.5-flash: Benchmarks, Pricing & Context Window | Requesty"](/ai-engineering/sources/claude-opus-4-6-vs-gemini-2-5-flash-benchmarks-pricing-conte-e66d0326.md)
 - ["claude-opus-4-6 vs gemini-2.5-pro: Benchmarks, Pricing & Context Window | Requesty"](/ai-engineering/sources/claude-opus-4-6-vs-gemini-2-5-pro-benchmarks-pricing-context-861949c1.md)
 - ["claude-opus-4-6 vs glm-5.1: Benchmarks, Pricing & Context Window | Requesty"](/ai-engineering/sources/claude-opus-4-6-vs-glm-5-1-benchmarks-pricing-context-window-7e2dca5b.md)
@@ -989,6 +1001,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Claude Replay — AI Coding Session to Interactive HTML Replay](/ai-engineering/sources/claude-replay-ai-coding-session-to-interactive-html-replay-doc.md)
 - [Claude's 13 Free AI Courses in 12 Minutes](/ai-engineering/sources/claude-s-13-free-ai-courses-in-12-minutes-pG5Zd3sGOrY.md)
 - [Claude's extended thinking](/ai-engineering/sources/claude-s-extended-thinking-90ce207a.md)
+- [claude-opus-4-6 vs deepseek-v4-pro: Benchmarks, Pricing & Context Window](/ai-engineering/sources/claude-opus-4-6-vs-deepseek-v4-pro-benchmarks-pricing-contex-47c066fa.md)
 - [Claude’s New Trading Agent Is Insane! (Tutorial)](/ai-engineering/sources/claude-s-new-trading-agent-is-insane-tutorial-x2pY9kI0zBY.md)
 - [Cloud Engineering - Roadmap From Beginner to Advanced](/ai-engineering/sources/cloud-engineering-roadmap-from-beginner-to-advanced-adaced.md)
 - [Cloud sandbox routines — network isolation, MCP capability gaps, and injection false alarms](/ai-engineering/sources/cloud-sandbox-routines-network-isolation-mcp-capability-gaps-a.md)
@@ -1116,6 +1129,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Lets Build An Agent from Scratch — Kam Lasater](/ai-engineering/sources/lets-build-an-agent-from-scratch-kam-lasater-xzXdLRUyjUg.md)
 - [Lies, Damned Lies, or Statistics: How to Tell the Truth with Statistics (Poritz, 2017)](/ai-engineering/sources/lies-damned-lies-or-statistics.md)
 - [LLM Coding Workflow — Spec-Driven Development and Human Oversight](/ai-engineering/sources/llm-coding-workflow-spec-driven-development-and-human-oversi-e.md)
+- [Local Coding Agent Evals (rasbt)](/ai-engineering/sources/local-coding-agent-evals-rasbt-7a2f9c.md)
 - [Machine Learning - Learning Path AI ML Fast Start](/ai-engineering/sources/machine-learning-learning-path-ai-ml-fast-start-a.md)
 - [Master All 6 Claude Code Dynamic Workflows](/ai-engineering/sources/master-all-6-claude-code-dynamic-workflows-g9b9G8dcS8Y.md)
 - [Mastering Generative AI and Prompt Engineering](/ai-engineering/sources/mastering-generative-ai-prompt-engineering.md)

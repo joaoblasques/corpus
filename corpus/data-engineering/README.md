@@ -32,6 +32,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [SQL Window Functions](/data-engineering/sql-window-functions.md) — concept · draft · ROW_NUMBER, RANK, DENSE_RANK, LAG, LEAD, running aggregates; frame clauses; interview reference
 - [Data Orchestration](/data-engineering/data-orchestration.md) — concept · draft · scheduling vs orchestration vs observability; when cron isn't enough; do you need Airflow
 - [Open Table Formats](/data-engineering/open-table-formats.md) — concept · draft · DB-independent metadata layer (Iceberg/Delta/Hudi); open data infrastructure
+- [Dashboards](/data-engineering/dashboards.md) — concept · draft · four dashboard types (operational/analytical/strategic/tactical); dashboard vs report vs scorecard; seven design questions; AI/BI governance prerequisite; Databricks Genie conversational BI
 - [Medallion Architecture](/data-engineering/medallion-architecture.md) — concept · draft · bronze/silver/gold are lifecycle stages, not a data model; Kimball-vs-Inmon
 - [Change Data Capture (CDC)](/data-engineering/change-data-capture.md) — concept · draft · full load vs incremental vs CDC; capturing deletes, latency
 - [Materialized Views](/data-engineering/materialized-views.md) — concept · draft · cross-platform MV synthesis; incremental vs full refresh; limitations
@@ -141,10 +142,11 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 
 ## Pages in this domain
 
-### Concepts (55)
+### Concepts (56)
 - [BI as Code](/data-engineering/bi-as-code.md)
 - [Change Data Capture (CDC)](/data-engineering/change-data-capture.md)
 - [CI/CD for Data Infrastructure](/data-engineering/cicd-for-data-infrastructure.md)
+- [Dashboards](/data-engineering/dashboards.md)
 - [Data Engineering Best Practices](/data-engineering/data-engineering-best-practices.md)
 - [Data Engineering Interview & Job Search](/data-engineering/data-engineering-interview.md)
 - [Data Engineering Team OS](/data-engineering/data-engineering-team-os.md)

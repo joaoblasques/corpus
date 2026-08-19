@@ -33,6 +33,9 @@ sources:
   - path: raw/web/web-a-field-guide-to-rapidly-improving-ai-products-hamels-blog-h.md
     channel: web
     ingested_at: 2026-06-26
+  - path: raw/_inbox/web-its-hard-to-eval-is-a-product-smell-hamels-blog-a670f1d4.md
+    channel: web
+    ingested_at: 2026-08-19
 aliases:
   - Hamel Husain
   - hamel.dev
@@ -41,7 +44,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-07-06
-updated: 2026-07-06
+updated: 2026-08-19
 ---
 
 # Hamel Husain
