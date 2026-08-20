@@ -2,6 +2,25 @@
 
 > OKF v0.1 change log. Newest first, grouped by date.
 
+## 2026-08-20
+
+* **Ingest**: Batch ingest — 18 sources from 50-file pre-filtered inbox pass — ingest-auto run; 32 deferred
+  - sources: raw/_inbox/ (web: lakefs.io x1, github.blog x2, goodreads.com x2, getdbt.com x9, databricks.com x4)
+  - domains: data-engineering (12 sources: 5 Databricks SA entities, 8 dbt.md updates, 1 lakefs.md update), mlops (1 source: data-provenance new page + lakefs.md update), software-engineering (2 sources: git-basics.md update, github-advisory-database new page), blockchain (1 source: bitcoin.md update)
+  - pages created: [/data-engineering/prashant-upadhyay.md, /data-engineering/prasanna-saraswathi-krishnan.md, /data-engineering/taylor-sewitt.md, /data-engineering/paul-volk.md, /data-engineering/josh-braun.md, /mlops/data-provenance.md, /software-engineering/github-advisory-database.md]
+  - pages updated: [/data-engineering/dbt.md, /data-engineering/lakefs.md, /software-engineering/git-basics.md, /software-engineering/system-design-fundamentals.md, /blockchain/bitcoin.md]
+
+* **Collectors**: gmail=10, blog_promote=0, obsidian=0, book_discover=0, blog_discover=4, book_fetch=0, pdf=0, image=0, books=0, arxiv=0, youtube=0, github_discover=5, github_promote=5, github=0, x=0, links_refetch=0
+* **Ingest**: 18 ingested · 32 deferred · status=ok
+* **YoutubeQuick**: 0 intake · 0 rescued · 0 skipped · status=ok
+* **DocsQuick**: 0 intake · 42 thin · 8 llm_fail · status=ok
+* **YoutubeReap**: 0 removed · status=ok
+* **Gardener**: 4 stubs deepened · status=ok
+* **Heal**: 0 citations repointed · 0 unfixable · 2 hubs reindexed · 34 cross-domain links · status=ok
+* **Depth**: 460 knowledge · 1469 sources · ratio 1:3.2
+* **GapResolver**: 0 gap dispatched · 0 sources queued · status=ok
+* **Lint**: 2 broken wikilinks · 0 broken citations · 0 orphans · 1301 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+* **OKF**: 0 violations
 ## 2026-08-19
 
 * **Ingest**: Batch ingest — 14 sources from 50-file pre-filtered inbox pass — ingest-auto run; 36 deferred

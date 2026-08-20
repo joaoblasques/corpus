@@ -12,6 +12,9 @@ sources:
   - path: raw/notes/notes-satoshi-nakamoto-scrape.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/web/web-mastering-bitcoin-unlocking-digital-cryptocurrencies.md
+    channel: web
+    ingested_at: 2026-08-20
 aliases:
   - BTC
   - Bitcoin network
@@ -20,7 +23,7 @@ tags:
   - corpus/blockchain
   - entity
 created: 2026-06-17
-updated: 2026-06-17
+updated: 2026-08-20
 ---
 
 # Bitcoin
@@ -57,6 +60,15 @@ Bitcoin combines five key technical layers:
 
 The nakamoto.ghost.io course by Haseeb Qureshi (managing partner at Dragonfly Capital) provides a nine-module developer curriculum covering: History of Bitcoin, Cryptography 101, P2P Networking, Consensus, Cryptoeconomics, Decentralized Computation, Smart Contracts, Security, Scaling [^src1].
 
+**Mastering Bitcoin** (Andreas M. Antonopoulos, O'Reilly) is the canonical technical reference for developers. Covers: keys and addresses, wallets, transactions, the scripting language, the blockchain, the Bitcoin network, mining, Bitcoin security. Targets professional developers and systems architects; assumes comfort with cryptography, networking, and distributed systems.[^src4] Widely described as "the best technical guide to bitcoin" — "won't make you a payments expert but puts you in the 90th percentile."[^src4]
+
+Key concepts explained in depth:
+- ECC (secp256k1), public/private keys, wallet addresses
+- ISO 8583-like transaction flow (though Bitcoin uses its own protocol)
+- Proof-of-work: the exact puzzle miners solve
+- 51% attack mechanics
+- Elliptic curves, Merkle trees, alt coins[^src4]
+
 ## Related pages
 
 - [Satoshi Nakamoto](/blockchain/satoshi-nakamoto.md) — creator
@@ -68,3 +80,4 @@ The nakamoto.ghost.io course by Haseeb Qureshi (managing partner at Dragonfly Ca
 [^src1]: [Introduction to Cryptocurrency](../../raw/notes/notes-introduction-to-cryptocurrency-scrape.md)
 [^src2]: [A Brief History of Money](../../raw/notes/notes-a-brief-history-of-money-scrape.md)
 [^src3]: [Satoshi Nakamoto](../../raw/notes/notes-satoshi-nakamoto-scrape.md)
+[^src4]: raw/web/web-mastering-bitcoin-unlocking-digital-cryptocurrencies.md — Goodreads community reviews of *Mastering Bitcoin* by Andreas M. Antonopoulos

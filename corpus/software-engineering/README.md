@@ -132,7 +132,7 @@ Domain covering software engineering practice from foundational CS through deplo
 
 ## Pages in this domain
 
-### Concepts (43)
+### Concepts (44)
 - [AI Risk Architecture](/software-engineering/ai-risk-architecture.md)
 - [Algorithms (Strategies, Not Tricks)](/software-engineering/algorithms.md)
 - [CAP Theorem](/software-engineering/cap-theorem.md)
@@ -154,6 +154,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [File Systems](/software-engineering/file-systems.md)
 - [Formal Verification and Mechanical Theorem Proving](/software-engineering/formal-verification.md)
 - [Functional and Persistent Data Structures](/software-engineering/functional-persistent-data-structures.md)
+- [GitHub Advisory Database](/software-engineering/github-advisory-database.md)
 - [Go Programming Language](/software-engineering/go-programming-language.md)
 - [Graph Theory](/software-engineering/graph-theory.md)
 - [JavaScript Fundamentals](/software-engineering/javascript-fundamentals.md)

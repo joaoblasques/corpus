@@ -3,7 +3,7 @@ okf_version: "0.1"
 ---
 # Corpus Index
 
-> Last updated: 2026-08-19 | Total pages: 610 | Total sources: 2485
+> Last updated: 2026-08-20 | Total pages: 617 | Total sources: 2503
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
@@ -973,6 +973,11 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [Designing Generative UI in an Agent-Native World (source)](/ai-engineering/sources/designing-generative-ui-agent-native-c57dd663.md) — source · draft · GenUI pattern (AI assembles from elastic primitives); text-to-hydration mechanism; machine-legible component APIs; designer's new job: rules of elasticity
 - [POGR Builder Game UI Cost Reduction (source)](/ai-engineering/sources/pogr-builder-game-ui-cost-reduction-f3c2a85e.md) — source · draft · Figma→Builder→engine pipeline; $30K saved per game; animation ships with design; Blazium engine case study
 ### data-engineering
+- [Prashant Upadhyay](/data-engineering/prashant-upadhyay.md) — entity · Sr. Solutions Architect at Databricks; streaming pipelines, OLTP/Lakehouse integration, GenAI
+- [Prasanna Saraswathi Krishnan](/data-engineering/prasanna-saraswathi-krishnan.md) — entity · Solutions Architect at Databricks + Strategic AI Program Advisor at USF; 20+ years, former AWS SA
+- [Taylor Sewitt](/data-engineering/taylor-sewitt.md) — entity · Director GCO Tech & Architecture at Workday; agentic AI strategy for commercial org
+- [Paul Volk](/data-engineering/paul-volk.md) — entity · Marketing Technology SA at Databricks; designed Databricks' agentic Lakehouse-native CDP CustomerLake
+- [Josh Braun](/data-engineering/josh-braun.md) — entity · Staff Product Designer at Databricks; CustomerLake/CDP UX; Data+AI Summit 2026
 - ["Everybody Talks About AI (And They Are All Wrong)" — Data Gibberish](/data-engineering/sources/ai-adoption-data-engineering-everybody-wrong-datagibberish.md) — source · draft · Yordan Ivanov argues AI adoption creates governance debt; democratized fragmentation + stalled innovation; semantic layers as antidote; the mess is a skilled DE's opportunity
 - [Shift Left Architecture](/data-engineering/shift-left-architecture.md) — concept · Three consumer interfaces (Operational/Kafka, Analytical/Iceberg, AI/MCP); Rivian Mega Filter case study; dbt-Flink integration
 - [Data Integration Patterns (2026)](/data-engineering/data-integration-patterns.md) — concept · Three paradigms (request-response, batch, event streaming); SAP API policy §2.2.2; edge-to-cloud four traffic patterns; real-time SLA-first framework
@@ -1302,6 +1307,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [Databricks Metric Views (source)](/data-engineering/sources/databricks-metric-views-86659572.md) — source · draft · YAML-over-SQL syntax for Unity Catalog Metric Views; CREATE OR REPLACE VIEW … WITH METRICS LANGUAGE YAML AS $…$; semantic metadata for LLMs
 
 ### software-engineering
+- [GitHub Advisory Database](/software-engineering/github-advisory-database.md) — concept · Human-validated CVE/GHSA curation; May 2026 spike (1,560 advisories, 5× normal); PVR workflow; community guidance
 - [Antithesis](/software-engineering/antithesis.md) — entity · DST-as-a-service platform; deterministic hypervisor for time-travel debugging; multiverse debugger; bug management philosophy; $47M seed
 - [terminal-craft-retrospective](/software-engineering/sources/terminal-craft-retrospective-eece.md) — source · stub · A retrospective on Terminal-Craft, a hands-on curriculum for building real tmux and nvim fluency for…
 - [gtd-vs-para-audit-2026-08-04](/software-engineering/sources/gtd-vs-para-audit-2026-08-04-04.md) — source · stub · ["This document is a gap map between David Allen's GTD mechanics and the author's vault's actual com…
@@ -1455,6 +1461,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [Declarative Programming](/software-engineering/declarative-programming.md) — concept · draft · declarative vs imperative; functional programming (unit=function not object); point-free/tacit style; TypeScript BakeCake example; connection to Polars/Spark lazy evaluation
 
 ### mlops
+- [Data Provenance](/mlops/data-provenance.md) — concept · Core reproducible-AI discipline; what Git can't track; guardrails pattern (staged branches + quality gates); agentic systems provenance; lakeFS reference impl
 - [AI Agent Deployment | AY Automate](/mlops/sources/ai-agent-deployment-ay-automate-2e023728.md) — source · stub · This document outlines a process for deploying AI agents in production, focusing on permission scopi…
 - ["Agents for production lines: Trusted decisions in real time"](/mlops/sources/agents-for-production-lines-trusted-decisions-in-real-time-a1c3f089.md) — source · stub · The document discusses a production line monitoring assistant built on Databricks, which uses stream…
 - [Agentic media buying cannot scale without the right foundation. See how buyers and sellers get there on Databricks.](/mlops/sources/agentic-media-buying-cannot-scale-without-the-right-foundati-f609ca41.md) — source · stub · The article discusses the challenges of autonomous buyer and seller agents in media buying and how D…

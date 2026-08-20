@@ -55,8 +55,11 @@ sources:
   - path: raw/_inbox/web-what-s-the-future-of-metadata-after-hive-metastore-f6dec2cb.md
     channel: web
     ingested_at: 2026-08-13
+  - path: raw/web/web-reproducible-ai-a-practical-guide-to-data-provenance-16cdecef.md
+    channel: web
+    ingested_at: 2026-08-20
 confidence: 0.9
-last_confirmed: 2026-08-13
+last_confirmed: 2026-08-20
 created: 2026-08-12
 updated: 2026-08-13
 ---

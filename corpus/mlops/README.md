@@ -90,12 +90,13 @@ The engineering substrate for building ML and software systems: how the developm
 
 ## Pages in this domain
 
-### Concepts (23)
+### Concepts (24)
 - [CI/CD for ML (on Databricks)](/mlops/ci-cd-for-ml.md)
 - [CLI Tools](/mlops/cli-tools.md)
 - [Cloud Computing Fundamentals](/mlops/cloud-computing-fundamentals.md)
 - [Cloud GPU Providers](/mlops/cloud-gpu-providers.md)
 - [Cron Scheduling](/mlops/cron-scheduling.md)
+- [Data Provenance and AI Reproducibility](/mlops/data-provenance.md)
 - [Databricks Asset Bundles (DAB)](/mlops/databricks-asset-bundles.md)
 - [Databricks Development (Local-First)](/mlops/databricks-development.md)
 - [Dev Environment Stack](/mlops/dev-environment-stack.md)

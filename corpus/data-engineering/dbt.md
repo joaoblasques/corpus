@@ -117,6 +117,30 @@ sources:
   - path: raw/_inbox/web-the-next-era-of-data-build-an-open-infrastructure-for-scale-cda74585.md
     channel: web
     ingested_at: 2026-08-19
+  - path: raw/web/web-forrester-tei-study-dbts-roi-impact-dbt-labs-a075bb12.md
+    channel: web
+    ingested_at: 2026-08-20
+  - path: raw/web/web-the-next-era-for-dbt-and-our-partners-product-launch-details-825d7a3a.md
+    channel: web
+    ingested_at: 2026-08-20
+  - path: raw/web/web-empowering-public-sector-data-teams-using-dbt-cloud-with-mal-95c8557e.md
+    channel: web
+    ingested_at: 2026-08-20
+  - path: raw/web/web-webinaire-macif-x-dbt-labs-x-infinite-lambda-dbt-labs-8687c2b9.md
+    channel: web
+    ingested_at: 2026-08-20
+  - path: raw/web/web-what-s-shipping-at-fivetran-dbt-labs-faster-pipelines-smarte-50955eab.md
+    channel: web
+    ingested_at: 2026-08-20
+  - path: raw/web/web-when-and-how-to-adopt-dbt-cloud-dbt-labs-b3331b71.md
+    channel: web
+    ingested_at: 2026-08-20
+  - path: raw/web/web-why-and-how-to-adopt-dbt-cloud-data-documentation-dbt-labs-8a0541fe.md
+    channel: web
+    ingested_at: 2026-08-20
+  - path: raw/web/web-unase-a-una-demostracion-en-directo-de-dbt-cloud-dbt-labs-d3c53a89.md
+    channel: web
+    ingested_at: 2026-08-20
 aliases:
   - dbt
   - data build tool
@@ -141,7 +165,7 @@ tags:
   - corpus/data-engineering
   - entity
 created: 2026-05-21
-updated: 2026-08-19
+updated: 2026-08-20
 last_confirmed: 2026-08-11
 ---
 
@@ -511,6 +535,16 @@ Three complementary dbt Labs + Fivetran webinars (2025–2026) converge on a con
 
 Note: these are vendor-produced positioning materials. The ODI framing is marketing language; the modular architecture argument is well-established in the industry but the "right" stack is context-dependent.
 
+## dbt Cloud adoption: ROI and case studies
+
+**Forrester TEI study** (commissioned by dbt Labs): A Total Economic Impact™ study examining the ROI of dbt Cloud found that organizations moving from stored procedures or drag-and-drop tools to dbt Cloud gained faster development, standardized processes, and secure self-service analytics. Key benefits cited: accelerate development to deliver trusted data quickly; standardize processes to improve collaboration; improve self-service data analytics and governance.[^src39]
+
+**When to adopt dbt Cloud** (from a dbt Labs webinar series with Snowflake): the case for adopting dbt Cloud builds once dbt Core usage reaches production scale — specifically when lack of visibility and alerting causes trust problems in pipelines, when coordination across the team becomes a bottleneck, and when operational monitoring is absent. dbt Cloud adds: built-in job scheduler, a managed IDE, native Git integration, continuous monitoring, and alerting.[^src40] Adding data documentation coverage checks before moving models to production is a key practice — catching undocumented models before they reach stakeholders.[^src41]
+
+**MACIF migration case study** (MACIF x dbt Labs x Infinite Lambda, 2025): French insurance group MACIF migrated **400+ Informatica PowerCenter workflows to dbt Cloud on BigQuery** as part of its "Move to Cloud" data modernization project. Outcomes: improved scalability, velocity, and data refresh rates; reduced operational complexity. Key takeaways for large legacy migrations: organizational change management for data teams is as important as the technical migration; a partner with industry expertise (Infinite Lambda) helped accelerate delivery.[^src42]
+
+**Transport for NSW (Australia) case study** (with Maltem): Transport for NSW adopted dbt Cloud as part of their modern data stack, achieving a common workflow for agile data delivery. Good alignment between data engineers, analysts, and business stakeholders optimized delivery efficiency and data quality.[^src43]
+
 ## See also
 
 - [Pipeline Layers](/data-engineering/pipeline-layers.md) — the staging → warehouse → marts architecture pattern
@@ -558,3 +592,8 @@ Note: these are vendor-produced positioning materials. The ODI framing is market
 [^src36]: dbt Labs + Fivetran, "The next era of analytics with dbt: Scaling data & AI workflows," getdbt.com, 2025. `raw/_inbox/web-the-next-era-of-analytics-with-dbt-scaling-data-ai-workflows-80e66d28.md`
 [^src37]: dbt Labs + Fivetran + Omni, "The future is open: Building a flexible, AI-ready data stack without lock-in," getdbt.com. `raw/_inbox/web-the-future-is-open-building-a-flexible-ai-ready-data-stack-w-5fbd9b53.md`
 [^src38]: dbt Labs, "The next era of data: Build an open infrastructure for scale and AI," getdbt.com. `raw/_inbox/web-the-next-era-of-data-build-an-open-infrastructure-for-scale-cda74585.md`
+[^src39]: raw/web/web-forrester-tei-study-dbts-roi-impact-dbt-labs-a075bb12.md — Forrester TEI webinar: The ROI of dbt Cloud (commissioned study)
+[^src40]: raw/web/web-when-and-how-to-adopt-dbt-cloud-dbt-labs-b3331b71.md — dbt Labs webinar: When and how to adopt dbt Cloud (operationalizing data testing with Snowflake)
+[^src41]: raw/web/web-why-and-how-to-adopt-dbt-cloud-data-documentation-dbt-labs-8a0541fe.md — dbt Labs webinar: Why and how to adopt dbt Cloud — Data Documentation
+[^src42]: raw/web/web-webinaire-macif-x-dbt-labs-x-infinite-lambda-dbt-labs-8687c2b9.md — MACIF x dbt Labs x Infinite Lambda webinar (2025): 400+ Informatica→dbt Cloud migration on BigQuery
+[^src43]: raw/web/web-empowering-public-sector-data-teams-using-dbt-cloud-with-mal-95c8557e.md — Transport for NSW + Maltem webinar: dbt Cloud in the public sector
