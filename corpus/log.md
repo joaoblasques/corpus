@@ -2,6 +2,26 @@
 
 > OKF v0.1 change log. Newest first, grouped by date.
 
+## 2026-08-21
+
+* **Ingest**: Batch ingest — 11 sources from 50-file pre-filtered inbox pass — ingest-auto run; 39 deferred
+  - sources: raw/_inbox/ (web: bytebytego.com x1, fortelabs.com x1, langchain.com x2, mindstudio.ai x7)
+  - domain: ai-engineering (all 11 sources)
+  - pages created: [/ai-engineering/ai-sycophancy.md, /ai-engineering/sources/how-ai-agents-manage-memory-and-avoid-forgetfulness-a914ab49.md, /ai-engineering/sources/the-ultimate-guide-to-claude-connectors-fe48cf1b.md, /ai-engineering/sources/introducing-dynamic-subagents-in-deep-agents-65ef79f5.md, /ai-engineering/sources/how-candidly-built-state-aware-agent-harnesses-with-langsmit-83ec6c08.md, /ai-engineering/sources/how-to-build-an-ai-second-brain-knowledge-base-with-claude-c-e0400b95.md, /ai-engineering/sources/how-to-build-a-brand-context-folder-for-ai-agents-voice-visu-5400d6f3.md, /ai-engineering/sources/how-to-prevent-ai-sycophancy-in-your-workflows-the-multi-per-9aa6eed4.md, /ai-engineering/sources/how-to-use-the-goal-command-in-claude-code-for-fully-autonom-6a7b32b1.md, /ai-engineering/sources/speculative-decoding-explained-how-draft-models-make-ai-agen-8df7035c.md, /ai-engineering/sources/what-is-deepspark-how-deepseek-made-every-llm-50400-faster-w-50574fc0.md, /ai-engineering/sources/what-is-hermes-agent-the-open-source-ai-agent-platform-expla-ecfacb58.md]
+  - pages updated: [/ai-engineering/agent-memory.md, /ai-engineering/mcp.md, /ai-engineering/agent-harness.md, /ai-engineering/hermes.md, /ai-engineering/speculative-decoding.md, /ai-engineering/README.md]
+  - notes: ingest-auto run; 11 ingested, 39 deferred (G1×8: fintech×3, defense×1, gaming×1, music×3, fiction×2; UNCERTAIN×31: 14 thin GitHub CLI 2021-22 changelogs, 17 MindStudio/event stubs/marketing pages)
+
+* **Collectors**: gmail=8, blog_promote=0, obsidian=0, book_discover=0, blog_discover=3, book_fetch=0, pdf=0, image=0, books=0, arxiv=0, youtube=0, github_discover=5, github_promote=5, github=0, x=0, links_refetch=0
+* **Ingest**: 11 ingested · 39 deferred · status=ok
+* **YoutubeQuick**: 0 intake · 0 rescued · 0 skipped · status=ok
+* **DocsQuick**: 0 intake · 41 thin · 9 llm_fail · status=ok
+* **YoutubeReap**: 0 removed · status=ok
+* **Gardener**: 4 stubs deepened · status=ok
+* **Heal**: 6 citations repointed · 0 unfixable · 1 hubs reindexed · 34 cross-domain links · status=ok
+* **Depth**: 461 knowledge · 1480 sources · ratio 1:3.2
+* **GapResolver**: 0 gap dispatched · 0 sources queued · status=ok
+* **Lint**: 2 broken wikilinks · 0 broken citations · 0 orphans · 1299 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+* **OKF**: 0 violations
 ## 2026-08-20
 
 * **Ingest**: Batch ingest — 18 sources from 50-file pre-filtered inbox pass — ingest-auto run; 32 deferred

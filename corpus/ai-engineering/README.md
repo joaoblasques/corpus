@@ -195,6 +195,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Software Factory](/ai-engineering/software-factory.md) — concept · draft · non-interactive development model (StrongDM/Dark Factory level); specs + scenarios drive agents that write, test, and converge code without human code review; Digital Twin Universe for scenario validation; $1K/day/engineer token benchmark
 - [AI Model Export Controls](/ai-engineering/ai-model-export-controls.md) — concept · draft · Fable 5/Mythos 5 government ban incident (2026); frontier LLM access restrictions; policy precedent for restricting model APIs to consumers
 - [Polar RL](/ai-engineering/polar-rl.md) — concept · stub · rollout framework for scalable async RL over arbitrary agent harnesses; black-box harness proxying; GRPO results on SWE-Bench Verified with Qwen3.5-4B across 4 coding harnesses
+- [AI Sycophancy](/ai-engineering/ai-sycophancy.md) — concept · draft · LLMs agree with user-asserted positions up to 88% due to RLHF training; multi-persona council method (Contrarian, Skeptical Buyer, Neutral Researcher, Devil's Advocate) counters anchoring, caving, and selective emphasis
 
 ### Syntheses
 - [Agentic Coding](/ai-engineering/agentic-coding.md) — synthesis · draft · **sub-hub** · coding-agent orchestration; conductor→orchestrator, AX, the verification bottleneck
@@ -290,7 +291,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 
 ## Pages in this domain
 
-### Concepts (103)
+### Concepts (104)
 - [Agent Cost Management](/ai-engineering/agent-cost-management.md)
 - [Agent Evaluation](/ai-engineering/agent-evaluation.md)
 - [Agent Harness](/ai-engineering/agent-harness.md)
@@ -309,6 +310,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [AI Operating System](/ai-engineering/ai-operating-system.md)
 - [AI Presentation Tools](/ai-engineering/ai-presentation-tools.md)
 - [AI Sovereignty](/ai-engineering/ai-sovereignty.md)
+- [AI Sycophancy](/ai-engineering/ai-sycophancy.md)
 - [Attention Mechanisms](/ai-engineering/attention-mechanisms.md)
 - [Classical Feature Detection](/ai-engineering/classical-feature-detection.md)
 - [Classical Information Retrieval](/ai-engineering/information-retrieval.md)
@@ -486,7 +488,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Tool Calling & Context Engineering: How They Interlock](/ai-engineering/tool-calling-and-context-engineering.md)
 
 <details>
-<summary>Source summaries (764)</summary>
+<summary>Source summaries (775)</summary>
 
 - ["2024 State of Analytics Engineering, crafted by dbt Labs | dbt Labs"](/ai-engineering/sources/2024-state-of-analytics-engineering-crafted-by-dbt-labs-dbt--cb342df0.md)
 - ["6 AI Agent Orchestration Best Practices in 2026 [Explained]"](/ai-engineering/sources/6-ai-agent-orchestration-best-practices-in-2026-explained-8144e2d2.md)
@@ -1075,7 +1077,9 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [He Turned $400 Into $2.5M Using AI (No Coding)](/ai-engineering/sources/he-turned-400-into-2-5m-using-ai-no-coding-y_ON1Qbb274.md)
 - [Herdr in about 6 minutes](/ai-engineering/sources/herdr-in-about-6-minutes-qnIu-Xu64H0.md)
 - [High-Dimensional Data Analysis with Low-Dimensional Models (Wright & Ma)](/ai-engineering/sources/wright-ma-high-dimensional-data-analysis.md)
+- [How AI Agents Manage Memory and Avoid Forgetfulness](/ai-engineering/sources/how-ai-agents-manage-memory-and-avoid-forgetfulness-a914ab49.md)
 - [How Anthropic Engineers ACTUALLY Prompt Claude Code](/ai-engineering/sources/how-anthropic-engineers-actually-prompt-claude-code-qOvc9IUKEIc.md)
+- [How Candidly Built State-Aware Agent Harnesses with LangSmith](/ai-engineering/sources/how-candidly-built-state-aware-agent-harnesses-with-langsmit-83ec6c08.md)
 - [How Claude Code’s Creator Starts EVERY Project](/ai-engineering/sources/how-claude-code-s-creator-starts-every-project-M5tBN-I8AYo.md)
 - [How DeepSeek Runs a 284B LLM on a Laptop (Run AI Locally)](/ai-engineering/sources/how-deepseek-runs-a-284b-llm-on-a-laptop-run-ai-locally-3gk-9p9DSGs.md)
 - [How GitHub Built Qubot: An Internal Data Analytics Agent](/ai-engineering/sources/qubot-internal-data-analytics-agent-1c1b2656.md)
@@ -1092,8 +1096,10 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [How spec-driven development improves AI coding quality | Red Hat Developer](/ai-engineering/sources/how-spec-driven-development-improves-ai-coding-quality-red-h-a.md)
 - [How to actually force Claude Code to use the right CLI (don't use CLAUDE.md)](/ai-engineering/sources/how-to-actually-force-claude-code-to-use-the-right-cli-don-t-3CSi8QAoN-s.md)
 - [How to Become an AI Engineer Fast](/ai-engineering/sources/how-to-become-an-ai-engineer-fast-Zk9LxO_dB64.md)
+- [How to Build a Brand Context Folder for AI Agents: Voice, Visual Identity, and Positioning](/ai-engineering/sources/how-to-build-a-brand-context-folder-for-ai-agents-voice-visu-5400d6f3.md)
 - [How to Build a Reusable Finance Workflow in Claude 2.0 (Full Tutorial)](/ai-engineering/sources/how-to-build-a-reusable-finance-workflow-in-claude-2-0-full--dTPndJ5VG_I.md)
 - [How to Build A Self-Improving System with Claude Code](/ai-engineering/sources/how-to-build-a-self-improving-system-with-claude-code-2fc0NX9vIJ8.md)
+- [How to Build an AI Second Brain Knowledge Base with Claude Code](/ai-engineering/sources/how-to-build-an-ai-second-brain-knowledge-base-with-claude-c-e0400b95.md)
 - [How to Build an App With Claude Code - Full Tutorial for Beginners](/ai-engineering/sources/how-to-build-an-app-with-claude-code-full-tutorial-for-begin-GUgxx6fMiR8.md)
 - [How to Build Claude Subagents (Nate Herk)](/ai-engineering/sources/nate-herk-claude-subagents.md)
 - [How to Build Websites in 15 minutes Using Claude (no coding)](/ai-engineering/sources/how-to-build-websites-in-15-minutes-using-claude-no-coding-YAiCC9a6QVA.md)
@@ -1103,8 +1109,10 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [How to Make AI Agents Follow Your Design System](/ai-engineering/sources/ai-agents-follow-your-design-system-d7698d8e.md)
 - [How to Maximize Claude Code Effectiveness (Towards Data Science)](/ai-engineering/sources/how-to-maximize-claude-code-effectiveness-towards-data-scien-ce.md)
 - [How to Never Hit Your Claude Session Limit Again](/ai-engineering/sources/how-to-never-hit-your-claude-session-limit-again-_qZvORxGqI0.md)
+- [How to Prevent AI Sycophancy in Your Workflows: The Multi-Persona Council Method](/ai-engineering/sources/how-to-prevent-ai-sycophancy-in-your-workflows-the-multi-per-9aa6eed4.md)
 - [How to Start a $10K/mo AI Agency in 2026 (FULL MASTERCLASS)](/ai-engineering/sources/how-to-start-a-10k-mo-ai-agency-in-2026-full-masterclass-wogx9czrG28.md)
 - [How to Use AI to Help With Planning Engineering Projects](/ai-engineering/sources/how-to-use-ai-to-help-with-planning-engineering-projects-ec.md)
+- [How to Use the /goal Command in Claude Code for Fully Autonomous Workflows](/ai-engineering/sources/how-to-use-the-goal-command-in-claude-code-for-fully-autonom-6a7b32b1.md)
 - [I analyzed 373 AI startups selected by Y Combinator in 2026 (Build these with AI)](/ai-engineering/sources/i-analyzed-373-ai-startups-selected-by-y-combinator-in-2026--_Tb8IP_KRYQ.md)
 - [I asked Claude Code to make me as much money as possible](/ai-engineering/sources/i-asked-claude-code-to-make-me-as-much-money-as-possible-iTY8Q449YNQ.md)
 - [I Built A Business With AI In 24 Hours](/ai-engineering/sources/i-built-a-business-with-ai-in-24-hours-ksRcFGLPoSk.md)
@@ -1119,6 +1127,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [INSANE DeepSeek AI Agent Can Automate ANYTHING For FREE!! (Step by Step Tutorial)](/ai-engineering/sources/insane-deepseek-ai-agent-can-automate-anything-for-free-step-LGiTLMhx_zo.md)
 - [Internet Advertising: An Interplay Among Advertisers, Online Publishers and Web Users](/ai-engineering/sources/internet-advertising-survey.md)
 - [Introducing /visual-plan: Scannable Claude Code Plans](/ai-engineering/sources/visual-plan-scannable-claude-code-plans-0689d90a.md)
+- [Introducing Dynamic Subagents in Deep Agents](/ai-engineering/sources/introducing-dynamic-subagents-in-deep-agents-65ef79f5.md)
 - [Introduction to Probability (Grinstead & Snell, 2006)](/ai-engineering/sources/introduction-to-probability-grinstead-snell.md)
 - [introduction to statistical learning](/ai-engineering/sources/introduction-to-statistical-learning.md)
 - [iPad - Complete Music Production Hub Setup](/ai-engineering/sources/ipad-complete-music-production-hub-setup-e.md)
@@ -1189,6 +1198,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Source: Build These 4 Claude Projects (Internal Operating System)](/ai-engineering/sources/internal-operating-system-claude-projects.md)
 - [Source: Harvard CS50's AI with Python](/ai-engineering/sources/cs50-ai-with-python.md)
 - [Source: How AI agents & Claude skills work (Clearly Explained)](/ai-engineering/sources/how-ai-agents-and-skills-work.md)
+- [Speculative Decoding Explained: How Draft Models Make AI Agents Faster](/ai-engineering/sources/speculative-decoding-explained-how-draft-models-make-ai-agen-8df7035c.md)
 - [Speech and Language Processing, 3rd Edition Draft (Jurafsky & Martin, 2026)](/ai-engineering/sources/speech-and-language-processing.md)
 - [Stanford's Method Turns Claude Into a PHD Level Research Team](/ai-engineering/sources/stanford-s-method-turns-claude-into-a-phd-level-research-tea-Tj3018n5MVg.md)
 - [Start This Business With No Experience](/ai-engineering/sources/start-this-business-with-no-experience-GiGCLwVRoCk.md)
@@ -1224,6 +1234,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [The SIMPLE Way To Make Money From AI Right Now](/ai-engineering/sources/the-simple-way-to-make-money-from-ai-right-now-92XVHHN9KKE.md)
 - [The Skill That 10x’d My Claude Code Projects](/ai-engineering/sources/the-skill-that-10x-d-my-claude-code-projects-c0kaKxM2pHg.md)
 - [The Top 10 Claude Code Plugins to 10x Your Next Project (June '26)](/ai-engineering/sources/the-top-10-claude-code-plugins-to-10x-your-next-project-june-IShdbDP4Jgg.md)
+- [The Ultimate Guide to Claude Connectors](/ai-engineering/sources/the-ultimate-guide-to-claude-connectors-fe48cf1b.md)
 - [This Might Be the Easiest Way to Sell AI to Businesses](/ai-engineering/sources/this-might-be-the-easiest-way-to-sell-ai-to-businesses-g4-3AxelI_Y.md)
 - [Top 10 AI Engineering Questions from 300+ Practitioners](/ai-engineering/sources/top-10-ai-engineering-questions-from-300-practitioners-ace.md)
 - [Top 10 Fastest Growing GitHub Repos — March 2026](/ai-engineering/sources/top-10-fastest-growing-github-repos-march-2026-2026.md)
@@ -1241,6 +1252,8 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Warp - AI Agent Mode for Codebase Exploration and Rules](/ai-engineering/sources/warp-ai-agent-mode-for-codebase-exploration-and-rules-e.md)
 - [What does if __name__ == '__main__' do in Python?](/ai-engineering/sources/what-does-if-name-main-do-in-python-x5IbdKnvt6k.md)
 - [What I Learned From 100+ Data Engineering Interviews - Interview Tips](/ai-engineering/sources/what-i-learned-from-100-data-engineering-interviews-intervie-bqCXVpRqTpE.md)
+- [What Is DeepSpark? How DeepSeek Made Every LLM 50–400% Faster Without Retraining](/ai-engineering/sources/what-is-deepspark-how-deepseek-made-every-llm-50400-faster-w-50574fc0.md)
+- [What Is Hermes Agent? The Open-Source AI Agent Platform Explained](/ai-engineering/sources/what-is-hermes-agent-the-open-source-ai-agent-platform-expla-ecfacb58.md)
 - [What's the Real Deal About SKILLs](/ai-engineering/sources/what-s-the-real-deal-about-skills-doc.md)
 - [When Agents Work for the Whole Team](/ai-engineering/sources/when-agents-work-for-the-whole-team-8bc93082.md)
 - [Why the Best Agent-Native Apps Use Less AI](/ai-engineering/sources/agent-native-apps-use-less-ai-7091a959.md)

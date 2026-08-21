@@ -9,6 +9,12 @@ sources:
   - path: raw/web/web-speculators-v0-5-0-dflash-support-and-online-training-a2b78ff3.md
     channel: web
     ingested_at: 2026-07-02
+  - path: raw/_inbox/web-speculative-decoding-explained-how-draft-models-make-ai-agen-8df7035c.md
+    channel: web
+    ingested_at: 2026-08-21
+  - path: raw/_inbox/web-what-is-deepspark-how-deepseek-made-every-llm-50400-faster-w-50574fc0.md
+    channel: web
+    ingested_at: 2026-08-21
 aliases:
   - speculative decoding
   - draft-and-verify decoding
@@ -17,6 +23,8 @@ aliases:
   - EAGLE
   - DFlash
   - Speculators
+  - DeepSpark
+  - DeepSeek speculative decoding
 tags:
   - corpus/ai-engineering
   - concept
@@ -62,6 +70,20 @@ Speculators v0.5.0 migrated fully onto vLLM's native hidden-states-extraction sy
 - The two modes are interoperable: partial offline generation can be combined with online generation of the missing states, and an online run can skip clearing its generated files so a first epoch generates once and subsequent epochs reuse the cached files [^src2].
 - Training now talks to vLLM over its standard REST API rather than vLLM internals, decoupling the training framework's release cadence from vLLM's internal API changes [^src2].
 
+## DeepSpark: tree-based draft generation
+
+DeepSpark is DeepSeek's speculative decoding implementation, adding two refinements over the baseline draft-and-verify loop [^src3]:
+
+1. **Tree-based draft generation.** Instead of a single linear candidate sequence, the draft model builds a tree of continuations branching at high-uncertainty points. The target model verifies all branches in one pass. Natural language ambiguity means a tree hedges better — higher acceptance rate, fewer wasted forward passes.
+2. **Temperature-aligned sampling.** Earlier implementations struggled with non-greedy sampling (temperature > 0, top-p). DeepSpark implements a corrected sampling procedure that preserves the target model's output distribution under sampling — critical for production systems that don't use greedy decoding.
+3. **Aligned draft model selection.** DeepSpark uses a draft model with aligned token distribution (a smaller variant of the same DeepSeek family, or a purpose-built drafter) to maximize acceptance rate.
+
+**Speedup range**: 50–400%. Low end: modest acceptance rates or short generations. High end: long generations with predictable patterns (code, structured docs), acceptance rates >90%. The 2–4× range (100–300%) is the consistently achievable benchmark on code generation and summarization. [^src3]
+
+**No retraining required.** The verification step is rejection-sampling — the target model's weights are never touched. DeepSpark can be applied as an inference wrapper to any deployed model. [^src3]
+
+**Complements other inference optimizations**: quantization, KV cache compression, and continuous batching are all additive with speculative decoding. [^src3]
+
 ## Related
 
 - [vLLM](/ai-engineering/vllm.md) — serving engine hosting the speculative-decoding data path both Eagle and DFlash models run through
@@ -74,3 +96,5 @@ Speculators v0.5.0 migrated fully onto vLLM's native hidden-states-extraction sy
 
 [^src1]: [EAGLE 3.1: Advancing Speculative Decoding Through Collaboration Between the EAGLE Team, vLLM, and TorchSpec](../../raw/web/web-eagle-3-1-advancing-speculative-decoding-through-collaborati-35e12237.md) — vLLM blog, 2026-05-26
 [^src2]: [Speculators v0.5.0: DFlash Support and Online Training](../../raw/web/web-speculators-v0-5-0-dflash-support-and-online-training-a2b78ff3.md) — vLLM blog, 2026-05-28
+[^src3]: [What Is DeepSpark? How DeepSeek Made Every LLM 50–400% Faster Without Retraining](../../raw/web/web-what-is-deepspark-how-deepseek-made-every-llm-50400-faster-w-50574fc0.md) — MindStudio, 2026-08-21; tree-based draft generation, temperature-aligned sampling, 50–400% speedup range
+[^src4]: [Speculative Decoding Explained: How Draft Models Make AI Agents Faster](../../raw/web/web-speculative-decoding-explained-how-draft-models-make-ai-agen-8df7035c.md) — MindStudio, 2026-08-21; draft-and-verify primer, acceptance rate mechanics, agent compound-latency rationale

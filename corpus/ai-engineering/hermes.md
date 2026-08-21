@@ -48,6 +48,9 @@ sources:
   - path: raw/_inbox/youtube-yzlvDnxvi1I-the-hermes-agent-briefing-what-it-is-why-it-matters-and-how.md
     channel: youtube
     ingested_at: 2026-06-29
+  - path: raw/_inbox/web-what-is-hermes-agent-the-open-source-ai-agent-platform-expla-ecfacb58.md
+    channel: web
+    ingested_at: 2026-08-21
 aliases:
   - Hermes
   - Hermes agent

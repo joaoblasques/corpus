@@ -96,6 +96,9 @@ sources:
   - path: raw/web/web-two-protocols-building-the-agentic-internet-c27065c2.md
     channel: web
     ingested_at: 2026-08-15
+  - path: raw/_inbox/web-the-ultimate-guide-to-claude-connectors-fe48cf1b.md
+    channel: web
+    ingested_at: 2026-08-21
 aliases:
   - MCP
   - Model Context Protocol
@@ -555,6 +558,25 @@ Both MCP and A2A were donated to the **Agentic AI Foundation** in 2025 for vendo
 
 Full A2A coverage: [Two Protocols Building the Agentic Internet source](/ai-engineering/sources/two-protocols-building-the-agentic-internet-c27065c2.md)
 
+## Claude Connectors: selective sampling and security risks
+
+Claude Connectors are Anthropic-vetted MCP implementations that appear in the connector directory. Unlike community MCPs, they undergo Anthropic's review process and are built into Claude.ai. [^src32]
+
+**Selective sampling limitation.** Connectors don't read everything — they sample. Gmail connector sees 0.5–5% of a typical inbox; Drive connector accesses recent/starred files, not the full Drive tree; Messages connector reads recent threads only. This means "Claude can't help with that email from 3 months ago" is a connector limitation, not a Claude limitation. [^src32]
+
+**Specific failures per connector type** [^src32]:
+- *Gmail*: misses emails outside the sampled window; can't search by date range accurately
+- *Drive*: can't access deeply nested folders or files not recently touched; no recursive folder search
+- *Messages*: limited to recent threads; can't retrieve conversation history beyond the sampling window
+
+**Mitigation strategies** [^src32]: use the Master Prompt connector audit (ask Claude to list what each connector can and can't access); supplement with manual file uploads for important documents outside the sampling window; use search operators in connector queries to maximize hit rate within the sample.
+
+**The Lethal Trifecta.** Simon Willison coined this security risk pattern: a system that combines (1) access to private data, (2) processing of untrusted content, and (3) an exfiltration vector is acutely vulnerable to prompt injection attacks. MCP connectors can constitute all three: private data (your Gmail/Drive), untrusted content (emails/documents from external parties), exfiltration vector (any MCP tool that can make outbound calls). [^src32]
+
+**Practical guard**: scope connector permissions to the minimum required (read-only where possible); avoid connectors that combine private data access with outbound API calls in a single session; treat any unexpected Claude action in a connector-enabled session as a potential prompt injection. [^src32]
+
+See also: [Agent Security](/ai-engineering/agent-security.md).
+
 ## See also
 
 - [Multi-Agent Systems](/ai-engineering/multi-agent-systems.md) — MCP is the coordination layer for multi-agent architectures
@@ -602,3 +624,4 @@ Full A2A coverage: [Two Protocols Building the Agentic Internet source](/ai-engi
 [^src30]: [Two protocols building the agentic internet](../../raw/web/web-two-protocols-building-the-agentic-internet-c27065c2.md) — Apify blog, 2026-06-29
 [^src30]: [MCP vs. REST/HTTP API vs. Kafka: The Architect's Guide to Agentic AI Integration](../../raw/web/web-mcp-vs-rest-http-api-vs-kafka-the-architect-s-guide-to-agent-e36f1d1c.md) — Kai Waehner, kai-waehner.de, 2026-04-10
 [^src31]: [Enterprise Agentic AI Landscape 2026: Trust, Flexibility, and Vendor Lock-in](../../raw/web/web-enterprise-agentic-ai-landscape-2026-trust-flexibility-and-v-d6ce5909.md) — Kai Waehner, kai-waehner.de, 2026-04-06
+[^src32]: [The Ultimate Guide to Claude Connectors](../../raw/web/web-the-ultimate-guide-to-claude-connectors-fe48cf1b.md) — Tiago Forte / Forte Labs, 2026-08-21; selective sampling limits, per-connector failures, Lethal Trifecta security risk

@@ -72,6 +72,12 @@ sources:
   - path: raw/web/web-did-openais-new-model-go-rogue-cal-newport-9451a3a7.md
     channel: web
     ingested_at: 2026-08-14
+  - path: raw/_inbox/web-introducing-dynamic-subagents-in-deep-agents-65ef79f5.md
+    channel: web
+    ingested_at: 2026-08-21
+  - path: raw/_inbox/web-how-candidly-built-state-aware-agent-harnesses-with-langsmit-83ec6c08.md
+    channel: web
+    ingested_at: 2026-08-21
 aliases:
   - harness
   - agent harness
@@ -462,4 +468,34 @@ What happened: OpenAI paired a pre-release LLM with a coding harness for Exploit
 
 **Design lesson**: harnesses that execute LLM-generated plans autonomously must implement strict environmental containment. Without it, an unpredictable LLM + powerful tool environment = unpredictable scope of action. "Blindly implementing an LLM-generated plan with a powerful harness is dicey — not because the LLM might develop malicious intent... but because LLMs are unpredictable." [^src21]
 
+## Dynamic subagents (script-generating orchestration)
+
+LangChain's Deep Agents platform introduces a harness pattern where the orchestrating model **writes an orchestration script** (JavaScript, executed via a QuickJS interpreter) rather than making tool calls directly. The subagents then follow the script deterministically. [^src22]
+
+**Why scripts over tool calls**: a model generating direct tool calls is limited to what fits in a single context window. By generating a script, it can define arbitrarily complex orchestration logic — loops, branching, fan-out — and hand execution to the interpreter. The interpreter runs the script to completion, spawning subagents as needed. [^src22]
+
+**Six orchestration patterns** [^src22]:
+- *Classify + act* — a classifier subagent routes inputs to specialized workers
+- *Fanout + synthesize* — multiple parallel subagents explore then merge results
+- *Adversarial verification* — a challenger subagent independently reviews a generator's output
+- *Generate + filter* — generate many candidates, filter to quality threshold
+- *Tournament* — round-robin between candidates; survivor proceeds
+- *Loop-until-done* — retry loop with exit criterion
+
+The `task()` global in the script sends a new subtask to a subagent and awaits its result. The `dcode` terminal agent integrates this natively. The concept connects to the **Recursive Language Model** idea: an LLM calling other LLMs at any depth of the call stack. [^src22]
+
+## State-aware harnesses: IO-HMM conversation modeling (Candidly)
+
+Candidly (Ben Levine, Patrick Hendershott) built a harness that models user conversation engagement as a **hidden Markov model** fitted on LangSmith traces. [^src23]
+
+**IO-HMM (Input-Output Hidden Markov Model).** Extends standard HMM with observed input and output sequences. User-side signals (delay, message length, question/statement, emotional tone) are emissions; agent-side responses are transition inputs. Four latent engagement states (e.g., Engaged, Disengaging, etc.) are inferred, not labeled directly. [^src23]
+
+**Implementation**: model trained on LangSmith production traces; AUC 0.90 on engagement state prediction. State-aware prompt policies are injected into the harness: when the model detects Disengaging state, it switches prompt strategy. Result: halved the Disengaging state from 23% to 11% of turns. [^src23]
+
+**Key lesson**: evaluation as **control signal**, not post-hoc grading. The model's predictions feed directly back into the harness to influence the next response. This is the harness using observability data (LangSmith traces) to close the loop — the feedback ratchet applied to conversation state rather than failure modes. [^src23]
+
+See also: [AI Sycophancy](/ai-engineering/ai-sycophancy.md) — a related harness-level problem where RLHF training overrides honest evaluation.
+
+[^src22]: [Introducing Dynamic Subagents in Deep Agents](../../raw/web/web-introducing-dynamic-subagents-in-deep-agents-65ef79f5.md) — LangChain blog, 2026-08-21; script-generating orchestration, QuickJS, 6 orchestration patterns
+[^src23]: [How Candidly Built State-Aware Agent Harnesses with LangSmith](../../raw/web/web-how-candidly-built-state-aware-agent-harnesses-with-langsmit-83ec6c08.md) — LangChain blog / Candidly, 2026-08-21; IO-HMM, engagement state prediction, evaluation-as-control-signal
 [^src21]: [Did OpenAI's New Model "Go Rogue"?](../../raw/web/web-did-openais-new-model-go-rogue-cal-newport-9451a3a7.md) — Cal Newport, 2026-08-03
