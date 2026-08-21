@@ -243,3 +243,9 @@ type: internal
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/claude-code-best-practices-for-senior-engineers-4NbdeDlnk7Q.md", "verdict_ok": false, "gov": "reverted+queued"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/ai-orchestration-vs-traditional-automation-key-differences-cd8719f6.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/agent-native-vs-single-llm-calls-the-ai-product-ladder-e0b94cc5.md", "verdict_ok": true, "gov": "committed"}
+
+## [2026-08-21T03:21] gardener · run
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/claude-code-best-practices-for-senior-engineers-4NbdeDlnk7Q.md", "verdict_ok": false, "gov": "reverted+queued"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/accelerating-transformers-fine-tuning-with-nvidia-nemo-autom-9662972e.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/claude-opus-4-6-vs-deepseek-r1-benchmarks-pricing-context-wi-37679b99.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/claude-opus-4-8-vs-gpt-5-benchmarks-pricing-context-window-r-20f42447.md", "verdict_ok": false, "gov": "reverted+queued"}
