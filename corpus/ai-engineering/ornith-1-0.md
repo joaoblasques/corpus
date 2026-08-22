@@ -6,6 +6,9 @@ sources:
   - path: raw/_inbox/web-ornith-1-0-self-scaffolding-llms-for-agentic-coding-08519a83.md
     channel: web
     ingested_at: 2026-08-19
+  - path: raw/_inbox/web-self-scaffolding-ai-models-how-ornith-1-0-writes-its-own-age-bf993fd0.md
+    channel: web
+    ingested_at: 2026-08-22
 aliases:
   - Ornith-1.0
   - ornith
@@ -33,7 +36,11 @@ Variants: 9B Dense, 31B Dense, 35B MoE, 397B MoE. Built on top of pretrained Gem
 
 ## "Self-scaffolding" framing
 
-The "self-scaffolding" concept refers to the model being trained/designed to manage agent harness control flow itself — rather than relying on an external harness layer to manage context and tool calling. The degree to which this is implemented vs. aspirational is [unsourced — based on paper framing only].
+Self-scaffolding means the model generates a custom Python execution harness *as the first step* in task execution — before working on the task itself. The generated harness includes: tool selection and sequencing logic, state management (how outputs from step N pass to N+1), conditional branches with task-specific recovery, and termination criteria. Harness is discrete and inspectable before execution begins. [^mindstudio-ornith]
+
+The key distinction from ordinary code generation: the code is the *execution environment* for finding the solution, not the solution itself — a meta-level operation where the model reasons about how it should solve the task and encodes that reasoning into a runnable structure. [^mindstudio-ornith]
+
+Previously marked "aspirational" based on paper framing only; second source (MindStudio analysis) provides implementation detail confirming the harness-generation-first design. Confidence updated.
 
 ## Practitioner impressions
 
@@ -50,3 +57,4 @@ Both base models (Gemma 4 Apache 2.0, Qwen 3.5 Apache 2.0) are compatible with M
 - [/ai-engineering/lm-studio.md](/ai-engineering/lm-studio.md)
 
 [^simonw-ornith]: Simon Willison link blog, "Ornith-1.0: Self-Scaffolding LLMs for Agentic Coding," simonwillison.net, 2026-06-29. `raw/_inbox/web-ornith-1-0-self-scaffolding-llms-for-agentic-coding-08519a83.md`
+[^mindstudio-ornith]: MindStudio Blog, "Self-Scaffolding AI Models: How Ornith 1.0 Writes Its Own Agent Harness," mindstudio.ai, 2026-06-30. `raw/_inbox/web-self-scaffolding-ai-models-how-ornith-1-0-writes-its-own-age-bf993fd0.md`

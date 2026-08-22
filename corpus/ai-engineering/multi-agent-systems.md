@@ -18,6 +18,9 @@ sources:
   - path: raw/notes/notes-clippings-how-and-when-to-use-subagents-in-claude-code.md
     channel: notes
     ingested_at: 2026-06-17
+  - path: raw/_inbox/web-how-to-coordinate-multiple-ai-agents-without-copying-and-pas-761b2e25.md
+    channel: web
+    ingested_at: 2026-08-22
   - path: raw/notes/notes-clippings-multi-agent-coordination-patterns-five-approaches-and-when-t.md
     channel: notes
     ingested_at: 2026-06-17

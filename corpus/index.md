@@ -3,13 +3,21 @@ okf_version: "0.1"
 ---
 # Corpus Index
 
-> Last updated: 2026-08-21 | Total pages: 629 | Total sources: 2514
+> Last updated: 2026-08-22 | Total pages: 638 | Total sources: 2522
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
 ## Domains
 
 ### ai-engineering
+- [Sakana Fugu](/ai-engineering/sakana-fugu.md) — entity · draft · Multi-model orchestrator; classifies prompts and routes to best-fit model upfront (not ensemble); two tiers (Fugu / Fugu Ultra); Sakana AI (Tokyo, 2023)
+- [Seedance 2.5: Volcano Arc IP Licensing](/ai-engineering/sources/seedance-2-5-volcano-arc-ip-licensing-41a7a0cc.md) — source · draft · ByteDance video model (4K, 30s) + Volcano Arc licensed IP marketplace; first commercial AI-video revenue-sharing platform
+- [Seedance 2.5: 50 Multimodal References](/ai-engineering/sources/seedance-2-5-features-explained-992932d0.md) — source · draft · 30s solves clip-stitching; 4K for post-production latitude; 50 simultaneous references anchors generation to a visual brief
+- [Multi-Agent Coordination Without Copy-Paste](/ai-engineering/sources/how-to-coordinate-multiple-ai-agents-without-copying-and-pas-761b2e25.md) — source · draft · Ticket-based queue + shared state; fan-out/fan-in; atomic status transitions; failure modes
+- [Self-Scaffolding AI Models: Ornith 1.0](/ai-engineering/sources/self-scaffolding-ai-models-how-ornith-1-0-writes-its-own-age-bf993fd0.md) — source · draft · Ornith generates Python execution harness first; tool-aware; discrete+inspectable; reduces multi-agent coordination overhead
+- [OpenAI Codex Record-and-Replay](/ai-engineering/sources/openai-codex-record-and-replay-how-to-automate-repetitive-co-81fd81f0.md) — source · draft · Intent-aware Python code from observed workflows; portable; reliable for stable/structured tasks; weaker on dynamic UIs
+- [AI Sycophancy Prevention v2](/ai-engineering/sources/how-to-prevent-ai-sycophancy-in-your-workflows-the-multi-per-8f168b6f.md) — source · draft · Corroborates ai-sycophancy.md; 4-pattern taxonomy (position reversal, hollow validation, confidence inflation, false balance)
+- [Brand Context Folder for AI Agents (v2)](/ai-engineering/sources/how-to-build-a-brand-context-folder-for-ai-agents-voice-visu-7ddf5b12.md) — source · draft · AI-ready doc 800–2,000 words: voice/tone, visual identity tokens, ICP; anti-examples critical; build in 30 min
 - [Coding on VPS with Claude Code (Pieter Levels)](/ai-engineering/sources/coding-on-vps-with-claude-code-pieter-levels-19bb6cbf.md) — source · draft · Pieter Levels codes on VPS using Claude Code for ~1yr; no local setup, 3-second deploy, overnight autonomous runs; solo-only (use staging server for teams); confirms cloud-first AI coding trend
 - [10 ChatGPT Work Features That Made Me Use Claude Code Less](/ai-engineering/sources/10-chatgpt-work-features-that-made-me-use-claude-code-less-97e246c1.md) — source · stub · The document discusses the author's experience with ChatGPT Work and its features that have made the…
 - [AI Sycophancy](/ai-engineering/ai-sycophancy.md) — concept · draft · RLHF training causes LLMs to agree with user-asserted positions up to 88% of the time; multi-persona council (Contrarian, Skeptical Buyer, Neutral Researcher, Devil's Advocate) counters anchoring, caving, and selective emphasis

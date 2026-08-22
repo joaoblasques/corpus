@@ -16,6 +16,14 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 ## Pages
 
 ### Sources (recent)
+- [Sakana Fugu](/ai-engineering/sakana-fugu.md) — entity · draft · Multi-model orchestrator that routes prompts to best-fit model automatically; trained classification + dispatch system; two tiers (Fugu/Fugu Ultra); Sakana AI (Tokyo, 2023, Llion Jones co-founder)
+- [Seedance 2.5: Volcano Arc IP Licensing](/ai-engineering/sources/seedance-2-5-volcano-arc-ip-licensing-41a7a0cc.md) — source · draft · ByteDance video generation model (4K, 30s clips, cinematic camera control) + Volcano Arc licensed IP marketplace (first commercial AI-video IP revenue-sharing platform)
+- [Seedance 2.5: 50 Multimodal References](/ai-engineering/sources/seedance-2-5-features-explained-992932d0.md) — source · draft · Feature breakdown: 30s solves clip-stitching problem; 4K enables post-production latitude; 50 simultaneous multimodal references anchors generation to a defined visual brief
+- [Multi-Agent Coordination Without Copy-Paste](/ai-engineering/sources/how-to-coordinate-multiple-ai-agents-without-copying-and-pas-761b2e25.md) — source · draft · Ticket-based queue + shared state architecture; fan-out/fan-in patterns; atomic status transitions; common failure modes
+- [Self-Scaffolding AI Models: Ornith 1.0 (MindStudio)](/ai-engineering/sources/self-scaffolding-ai-models-how-ornith-1-0-writes-its-own-age-bf993fd0.md) — source · draft · Ornith generates Python execution harness as first step; tool-aware; discrete and inspectable; reduces multi-agent coordination overhead
+- [OpenAI Codex Record-and-Replay](/ai-engineering/sources/openai-codex-record-and-replay-how-to-automate-repetitive-co-81fd81f0.md) — source · draft · Intent-aware Python code from observed workflows; more resilient than macro recorders; weaker than enterprise RPA on governance; portable standard Python output
+- [AI Sycophancy Prevention (MindStudio v2)](/ai-engineering/sources/how-to-prevent-ai-sycophancy-in-your-workflows-the-multi-per-8f168b6f.md) — source · draft · Corroborates ai-sycophancy.md; adds 4-pattern named taxonomy (position reversal, hollow validation, confidence inflation, false balance)
+- [Brand Context Folder for AI Agents (v2)](/ai-engineering/sources/how-to-build-a-brand-context-folder-for-ai-agents-voice-visu-7ddf5b12.md) — source · draft · AI-ready structured doc (800–2,000 words): voice/tone, visual identity tokens, ICP + positioning; anti-examples critical; inject as system prompt
 - [Coding on VPS with Claude Code (Pieter Levels)](/ai-engineering/sources/coding-on-vps-with-claude-code-pieter-levels-19bb6cbf.md) — source · draft · Pieter Levels' year of VPS+Claude Code: no local setup, 3-sec deploys, overnight autonomous runs; confirms cloud-first AI coding trend
 
 ### Mathematical Foundations for ML
@@ -397,7 +405,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Vibe Coding (and why Spec-Driven Development supersedes it)](/ai-engineering/vibe-coding.md)
 - [Visual Bag of Words](/ai-engineering/visual-bag-of-words.md)
 
-### Entities (77)
+### Entities (78)
 - [Anthropic](/ai-engineering/anthropic.md)
 - [Charles L.A. Clarke](/ai-engineering/charles-clarke.md)
 - [Charles M. Grinstead](/ai-engineering/charles-grinstead.md)
@@ -460,6 +468,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [PP-OCRv6](/ai-engineering/pp-ocrv6.md)
 - [Roberto Battiti](/ai-engineering/roberto-battiti.md)
 - [RunLocal](/ai-engineering/runlocal.md)
+- [Sakana Fugu](/ai-engineering/sakana-fugu.md)
 - [Sandcastle](/ai-engineering/sandcastle.md)
 - [Scrapling (Adaptive Web Scraping)](/ai-engineering/web-scraping.md)
 - [Simon Willison](/ai-engineering/simon-willison.md)
@@ -488,7 +497,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Tool Calling & Context Engineering: How They Interlock](/ai-engineering/tool-calling-and-context-engineering.md)
 
 <details>
-<summary>Source summaries (775)</summary>
+<summary>Source summaries (783)</summary>
 
 - ["2024 State of Analytics Engineering, crafted by dbt Labs | dbt Labs"](/ai-engineering/sources/2024-state-of-analytics-engineering-crafted-by-dbt-labs-dbt--cb342df0.md)
 - ["6 AI Agent Orchestration Best Practices in 2026 [Explained]"](/ai-engineering/sources/6-ai-agent-orchestration-best-practices-in-2026-explained-8144e2d2.md)
@@ -1096,6 +1105,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [How spec-driven development improves AI coding quality | Red Hat Developer](/ai-engineering/sources/how-spec-driven-development-improves-ai-coding-quality-red-h-a.md)
 - [How to actually force Claude Code to use the right CLI (don't use CLAUDE.md)](/ai-engineering/sources/how-to-actually-force-claude-code-to-use-the-right-cli-don-t-3CSi8QAoN-s.md)
 - [How to Become an AI Engineer Fast](/ai-engineering/sources/how-to-become-an-ai-engineer-fast-Zk9LxO_dB64.md)
+- [How to Build a Brand Context Folder for AI Agents (v2)](/ai-engineering/sources/how-to-build-a-brand-context-folder-for-ai-agents-voice-visu-7ddf5b12.md)
 - [How to Build a Brand Context Folder for AI Agents: Voice, Visual Identity, and Positioning](/ai-engineering/sources/how-to-build-a-brand-context-folder-for-ai-agents-voice-visu-5400d6f3.md)
 - [How to Build a Reusable Finance Workflow in Claude 2.0 (Full Tutorial)](/ai-engineering/sources/how-to-build-a-reusable-finance-workflow-in-claude-2-0-full--dTPndJ5VG_I.md)
 - [How to Build A Self-Improving System with Claude Code](/ai-engineering/sources/how-to-build-a-self-improving-system-with-claude-code-2fc0NX9vIJ8.md)
@@ -1104,12 +1114,14 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [How to Build Claude Subagents (Nate Herk)](/ai-engineering/sources/nate-herk-claude-subagents.md)
 - [How to Build Websites in 15 minutes Using Claude (no coding)](/ai-engineering/sources/how-to-build-websites-in-15-minutes-using-claude-no-coding-YAiCC9a6QVA.md)
 - [How to Build Your Own AI Operating System (Full Stack Explained)](/ai-engineering/sources/how-to-build-your-own-ai-operating-system-full-stack-explain-e.md)
+- [How to Coordinate Multiple AI Agents Without Copy-Paste](/ai-engineering/sources/how-to-coordinate-multiple-ai-agents-without-copying-and-pas-761b2e25.md)
 - [How to Create Free, On-Brand LinkedIn Carousels](/ai-engineering/sources/how-to-create-free-on-brand-linkedin-carousels-f0e390bf.md)
 - [How to Get Ahead of 99% of People With Claude AI](/ai-engineering/sources/how-to-get-ahead-of-99-of-people-with-claude-ai-fpO91lsO6ek.md)
 - [How to Make AI Agents Follow Your Design System](/ai-engineering/sources/ai-agents-follow-your-design-system-d7698d8e.md)
 - [How to Maximize Claude Code Effectiveness (Towards Data Science)](/ai-engineering/sources/how-to-maximize-claude-code-effectiveness-towards-data-scien-ce.md)
 - [How to Never Hit Your Claude Session Limit Again](/ai-engineering/sources/how-to-never-hit-your-claude-session-limit-again-_qZvORxGqI0.md)
 - [How to Prevent AI Sycophancy in Your Workflows: The Multi-Persona Council Method](/ai-engineering/sources/how-to-prevent-ai-sycophancy-in-your-workflows-the-multi-per-9aa6eed4.md)
+- [How to Prevent AI Sycophancy: The Multi-Persona Council Method (v2)](/ai-engineering/sources/how-to-prevent-ai-sycophancy-in-your-workflows-the-multi-per-8f168b6f.md)
 - [How to Start a $10K/mo AI Agency in 2026 (FULL MASTERCLASS)](/ai-engineering/sources/how-to-start-a-10k-mo-ai-agency-in-2026-full-masterclass-wogx9czrG28.md)
 - [How to Use AI to Help With Planning Engineering Projects](/ai-engineering/sources/how-to-use-ai-to-help-with-planning-engineering-projects-ec.md)
 - [How to Use the /goal Command in Claude Code for Fully Autonomous Workflows](/ai-engineering/sources/how-to-use-the-goal-command-in-claude-code-for-fully-autonom-6a7b32b1.md)
@@ -1170,6 +1182,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Night Shift — Human-Day Agent-Night Agentic Development Workflow](/ai-engineering/sources/night-shift-human-day-agent-night-agentic-development-workfl-doc.md)
 - [NotebookLM In 30 Minutes](/ai-engineering/sources/notebooklm-in-30-minutes-qbt-MFVvQQY.md)
 - [NotebookLM Knowledge Graph — Integrating Research into a Persistent Obsidian Workflow](/ai-engineering/sources/notebooklm-knowledge-graph-integrating-research-into-a-persi-bda.md)
+- [OpenAI Codex Record-and-Replay: AI-Powered Workflow Automation](/ai-engineering/sources/openai-codex-record-and-replay-how-to-automate-repetitive-co-81fd81f0.md)
 - [OpenClaw 2.0 - AI Agent Orchestrator Setup](/ai-engineering/sources/openclaw-2-0-ai-agent-orchestrator-setup-e.md)
 - [OpenClaw-RL — Asynchronous Reinforcement Learning for Personalized AI Agents](/ai-engineering/sources/openclaw-rl-asynchronous-reinforcement-learning-for-personal-ae.md)
 - [Opencode - Senior Engineer Workflow 2026](/ai-engineering/sources/opencode-senior-engineer-workflow-2026-2026.md)
@@ -1192,7 +1205,10 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [Running - Olympic Endurance Training Principles](/ai-engineering/sources/running-olympic-endurance-training-principles-ce.md)
 - [Running - Science-Based Strategy to Run a Faster 5K](/ai-engineering/sources/running-science-based-strategy-to-run-a-faster-5k-5.md)
 - [SaaS is Minting Millionaires Again — AI-Era Playbook](/ai-engineering/sources/saas-is-minting-millionaires-again-ai-era-playbook-ab.md)
+- [Sakana Fugu: The Multi-Model Orchestrator That Routes Prompts Automatically](/ai-engineering/sources/sakana-fugu-multi-model-orchestrator-617e27b3.md)
 - [Scaling Your AI Models with Micro-DDP – Tutorial](/ai-engineering/sources/scaling-your-ai-models-with-micro-ddp-tutorial-7q4D6_3syuE.md)
+- [Seedance 2.5: 30-Second Video, 4K Output, and 50 Multimodal References Explained](/ai-engineering/sources/seedance-2-5-features-explained-992932d0.md)
+- [Self-Scaffolding AI Models: Ornith 1.0 (MindStudio Analysis)](/ai-engineering/sources/self-scaffolding-ai-models-how-ornith-1-0-writes-its-own-age-bf993fd0.md)
 - [Set Up Claude Cowork better than 99% of people](/ai-engineering/sources/set-up-claude-cowork-better-than-99-of-people-pl90LATQlHI.md)
 - [Setting Up a New Claude Code Project: The Complete Guide](/ai-engineering/sources/setting-up-a-new-claude-code-project-complete-guide-74888b1b.md)
 - [Source: Build These 4 Claude Projects (Internal Operating System)](/ai-engineering/sources/internal-operating-system-claude-projects.md)
@@ -1254,6 +1270,7 @@ Domain covering LLM internals, agent design, agentic coding, context & prompt en
 - [What I Learned From 100+ Data Engineering Interviews - Interview Tips](/ai-engineering/sources/what-i-learned-from-100-data-engineering-interviews-intervie-bqCXVpRqTpE.md)
 - [What Is DeepSpark? How DeepSeek Made Every LLM 50–400% Faster Without Retraining](/ai-engineering/sources/what-is-deepspark-how-deepseek-made-every-llm-50400-faster-w-50574fc0.md)
 - [What Is Hermes Agent? The Open-Source AI Agent Platform Explained](/ai-engineering/sources/what-is-hermes-agent-the-open-source-ai-agent-platform-expla-ecfacb58.md)
+- [What Is Seedance 2.5? ByteDance's Volcano Arc IP Licensing Platform Explained](/ai-engineering/sources/seedance-2-5-volcano-arc-ip-licensing-41a7a0cc.md)
 - [What's the Real Deal About SKILLs](/ai-engineering/sources/what-s-the-real-deal-about-skills-doc.md)
 - [When Agents Work for the Whole Team](/ai-engineering/sources/when-agents-work-for-the-whole-team-8bc93082.md)
 - [Why the Best Agent-Native Apps Use Less AI](/ai-engineering/sources/agent-native-apps-use-less-ai-7091a959.md)

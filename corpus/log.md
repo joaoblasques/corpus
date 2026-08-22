@@ -2,6 +2,26 @@
 
 > OKF v0.1 change log. Newest first, grouped by date.
 
+## 2026-08-22
+
+* **Ingest**: Batch ingest — 8 sources from 50-file pre-filtered inbox pass — ingest-auto run; 42 deferred
+  - sources: raw/_inbox/ (web: mindstudio.ai x8)
+  - domain: ai-engineering (all 8 sources)
+  - pages created: [/ai-engineering/sakana-fugu.md, /ai-engineering/sources/how-to-build-a-brand-context-folder-for-ai-agents-voice-visu-7ddf5b12.md, /ai-engineering/sources/how-to-coordinate-multiple-ai-agents-without-copying-and-pas-761b2e25.md, /ai-engineering/sources/openai-codex-record-and-replay-how-to-automate-repetitive-co-81fd81f0.md, /ai-engineering/sources/how-to-prevent-ai-sycophancy-in-your-workflows-the-multi-per-8f168b6f.md, /ai-engineering/sources/self-scaffolding-ai-models-how-ornith-1-0-writes-its-own-age-bf993fd0.md, /ai-engineering/sources/sakana-fugu-multi-model-orchestrator-617e27b3.md, /ai-engineering/sources/seedance-2-5-volcano-arc-ip-licensing-41a7a0cc.md, /ai-engineering/sources/seedance-2-5-features-explained-992932d0.md]
+  - pages updated: [/ai-engineering/ai-sycophancy.md, /ai-engineering/ornith-1-0.md, /ai-engineering/multi-agent-systems.md, /ai-engineering/README.md]
+  - notes: ingest-auto run; 8 ingested, 42 deferred. Deferred breakdown — G1×8: fintech/payments book×1, defense manufacturing×1, gaming/Silksong×1, music posts×3, fiction reviews×2; UNCERTAIN×34: GitHub changelog stubs (too thin, 2021-22)×13, Databricks speaker bios×5, dbt event/marketing pages×4, social post stubs×3, duplicate/already-covered MindStudio articles×4, GPT-5 comparison (topic saturated)×1, Agentics NYC event×1, near-duplicate brand-context article×1, /goal command (topic already 3+ sources covered)×1, logo/install pages×2
+
+* **Collectors**: gmail=3, blog_promote=0, obsidian=1, book_discover=0, blog_discover=15, book_fetch=0, pdf=0, image=0, books=0, arxiv=0, youtube=0, github_discover=5, github_promote=5, github=0, x=0, links_refetch=0
+* **Ingest**: 8 ingested · 42 deferred · status=ok
+* **YoutubeQuick**: 0 intake · 0 rescued · 0 skipped · status=ok
+* **DocsQuick**: 0 intake · 40 thin · 10 llm_fail · status=ok
+* **YoutubeReap**: 0 removed · status=ok
+* **Gardener**: 4 stubs deepened · status=ok
+* **Heal**: 0 citations repointed · 0 unfixable · 1 hubs reindexed · 34 cross-domain links · status=ok
+* **Depth**: 462 knowledge · 1488 sources · ratio 1:3.2
+* **GapResolver**: 0 gap dispatched · 0 sources queued · status=ok
+* **Lint**: 2 broken wikilinks · 0 broken citations · 0 orphans · 1296 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+* **OKF**: 0 violations
 ## 2026-08-21
 
 * **Ingest**: Batch ingest — 11 sources from 50-file pre-filtered inbox pass — ingest-auto run; 39 deferred

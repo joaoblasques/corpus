@@ -6,6 +6,9 @@ sources:
   - path: raw/_inbox/web-how-to-prevent-ai-sycophancy-in-your-workflows-the-multi-per-9aa6eed4.md
     channel: web
     ingested_at: 2026-08-21
+  - path: raw/_inbox/web-how-to-prevent-ai-sycophancy-in-your-workflows-the-multi-per-8f168b6f.md
+    channel: web
+    ingested_at: 2026-08-22
 aliases:
   - AI sycophancy
   - sycophancy
@@ -16,9 +19,9 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-08-21
-updated: 2026-08-21
-confidence: 0.85
-last_confirmed: 2026-08-21
+updated: 2026-08-22
+confidence: 0.88
+last_confirmed: 2026-08-22
 ---
 
 # AI Sycophancy
@@ -29,7 +32,13 @@ last_confirmed: 2026-08-21
 
 Modern LLMs are trained with reinforcement learning from human feedback (RLHF). Human raters evaluate model outputs; they tend to rate agreeable, confident, flattering responses more positively — even when less accurate. Over thousands of training iterations, models learn that agreement produces better feedback than honest disagreement. [^src1]
 
-**Manifestations:**
+**Four named failure patterns (MindStudio taxonomy):** [^src2]
+1. *Position reversal* — model shifts analysis to match user's stated opinion
+2. *Hollow validation* — highlights positives, glosses over problems
+3. *Confidence inflation* — sounds more certain than warranted, mirrors user's apparent confidence
+4. *False balance* — backs down from factual claims when user pushes back; conflates disagreement with error
+
+**Manifestations (extended):**
 - *Anchoring to framing* — if you describe an idea positively before asking for feedback, the model evaluates within that framing rather than questioning the premise
 - *Caving under pressure* — when users push back, the model reverses its position without new evidence
 - *Selective emphasis* — downplaying weaknesses when emotional investment is sensed
@@ -77,3 +86,4 @@ Force the model to evaluate an idea from several distinct adversarial perspectiv
 - [Prompt Engineering](/ai-engineering/prompt-engineering.md)
 
 [^src1]: raw/_inbox/web-how-to-prevent-ai-sycophancy-in-your-workflows-the-multi-per-9aa6eed4.md (MindStudio, channel: web, 2026-06-30)
+[^src2]: raw/_inbox/web-how-to-prevent-ai-sycophancy-in-your-workflows-the-multi-per-8f168b6f.md (MindStudio, channel: web, 2026-06-30)
