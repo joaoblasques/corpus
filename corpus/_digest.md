@@ -249,3 +249,9 @@ type: internal
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/accelerating-transformers-fine-tuning-with-nvidia-nemo-autom-9662972e.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/claude-opus-4-6-vs-deepseek-r1-benchmarks-pricing-context-wi-37679b99.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/claude-opus-4-8-vs-gpt-5-benchmarks-pricing-context-window-r-20f42447.md", "verdict_ok": false, "gov": "reverted+queued"}
+
+## [2026-08-22T02:36] gardener · run
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/ai-video-effects-for-content-creators-runway-seedance-and-ge-82d50e3d.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/claude-code-best-practices-for-senior-engineers-4NbdeDlnk7Q.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/claude-opus-4-8-vs-gpt-5-benchmarks-pricing-context-window-r-20f42447.md", "verdict_ok": false, "gov": "reverted+queued"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/chatgpt-atlas-dud-or-revolution-full-guide-9f17dd61.md", "verdict_ok": true, "gov": "committed"}
