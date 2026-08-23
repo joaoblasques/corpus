@@ -15,15 +15,29 @@ sources:
   - path: raw/web/web-polars-streaming-engine-is-a-bigger-deal-than-people-realize-130f6935.md
     channel: web
     title: "Polars' Streaming Engine Is a Bigger Deal Than People Realize"
-confidence: 0.85
-last_confirmed: 2026-08-12
+  - path: raw/_inbox/email-2026-06-30-polars-at-a-high-level.md
+    channel: email
+    title: "Polars at a high level"
+    author: Vu Trinh
+confidence: 0.88
+last_confirmed: 2026-08-23
 created: 2026-08-12
-updated: 2026-08-12
+updated: 2026-08-23
 ---
 
 # Polars
 
 **TL;DR**: Polars is a fast DataFrame library (written in Rust) that runs on a single node and challenges the default assumption that large data requires a distributed cluster. Its streaming engine is the most significant recent development: `pl.Config.set_engine_affinity("streaming")` switches to a processing model that avoids loading everything into memory, with 4–5× speedups observed on real workloads.
+
+## Origin and history
+
+Polars was created by **Ritchie Vink** in **2020** during the COVID pandemic as a Rust pet project.[^history] Vink observed that Pandas and NumPy were fundamentally single-threaded (constrained by Python's GIL) while modern hardware had many cores; on his own 12-core laptop, Pandas used less than 10% of available compute.[^history]
+
+The design combined three ideas: the familiar DataFrame API, Rust's performance, and techniques from decades of database research — logical plans, cost-based rewriting, predicate pushdown.[^history]
+
+Less than a year after creation, **Polars 0.6.5 beat Spark and Pandas by 4–6× on H2O.ai groupby/join benchmarks**.[^history]
+
+In 2023, Vink and colleague Chiel Peters incorporated Polars and raised $4M. At that point Polars had ~6M total downloads and 20K GitHub stars. As of mid-2026, downloads are nearly **60M per 30 days**.[^history]
 
 ## Execution modes
 
@@ -74,3 +88,4 @@ Practical evidence: Polars was used to replace a Databricks Spark job in product
 ---
 
 [^streaming]: raw/web/web-polars-streaming-engine-is-a-bigger-deal-than-people-realize-130f6935.md
+[^history]: raw/_inbox/email-2026-06-30-polars-at-a-high-level.md — Vu Trinh newsletter, 2026-06-30

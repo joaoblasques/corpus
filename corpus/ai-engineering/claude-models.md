@@ -72,6 +72,12 @@ sources:
   - path: raw/youtube/youtube-6amLO7I9xdg-code-with-claude-london-2026-opening-keynote.md
     channel: youtube
     ingested_at: 2026-06-25
+  - path: raw/_inbox/web-introducing-claude-sonnet-5-0f764e9b.md
+    channel: web
+    ingested_at: 2026-08-23
+  - path: raw/_inbox/web-whats-new-in-claude-sonnet-5-ab37cad9.md
+    channel: web
+    ingested_at: 2026-08-23
 aliases:
   - Claude model lineup
   - Claude models
@@ -80,13 +86,15 @@ aliases:
   - Fable 5
   - Mythos 5
   - Sonnet 4.6
+  - Sonnet 5
+  - Claude Sonnet 5
   - Opus 4.6
   - Haiku
 tags:
   - corpus/ai-engineering
   - entity
 created: 2026-06-12
-updated: 2026-06-25
+updated: 2026-08-23
 ---
 
 # Claude Model Lineup
@@ -135,6 +143,38 @@ Anthropic's **"most capable Sonnet model yet"** as of June 2026 [^src12]. The de
 - **Agentic steering**: Enhanced ability to follow nuanced, multi-step instructions in long-horizon tasks [^src12].
 
 In the Claude Code alias table, `sonnet` resolves to Sonnet 4.6.
+
+## Sonnet 5
+
+Anthropic's successor to Sonnet 4.6, released 2026-06-30. Default model for Free and Pro plans as of launch. "Its performance is close to that of Opus 4.8, but at lower prices." [^src23]
+
+**Pricing**: Introductory $2 / $10 per million input/output tokens (through 2026-08-31), then standard $3 / $15 per million. Introductory pricing intentionally set to be roughly cost-neutral to Sonnet 4.6 due to the tokenizer change. [^src23]
+
+**New tokenizer**: Same input text produces approximately **1.0–1.35x more tokens** than on Sonnet 4.6, depending on content type. Independently measured by Simon Willison [^src24]:
+
+| Content | Multiplier vs Sonnet 4.6 |
+|---|---|
+| English prose | 1.42x |
+| Spanish prose | 1.33x |
+| Python code | 1.27–1.28x |
+| Simplified Mandarin | ~1.01x (effectively unchanged) |
+
+**Context window**: 1M tokens; max output 128K tokens. [^src23]
+
+**Adaptive thinking**: On by default. `temperature`, `top_p`, `top_k` no longer supported (same as Opus 4.7+ behavior). [^src23][^src24]
+
+**API ID**: `claude-sonnet-5` [^src23]
+
+**Agentic improvements** [^src23]:
+- Finishes complex multi-step tasks where previous Sonnet models would stop short
+- Checks its own output unprompted
+- Strict improvement over Sonnet 4.6 on BrowseComp (agentic search) and OSWorld-Verified (computer use)
+
+**Safety** [^src23]:
+- Lower hallucination and sycophancy rates than Sonnet 4.6
+- Better prompt injection resistance
+- Lower cyber capability than Opus 4.8 (explains why no export controls applied, unlike Fable 5/Mythos 5)
+- Cyber safeguards enabled by default (same tier as Opus 4.7/4.8, less strict than Fable 5)
 
 ## Fable 5 (and Mythos 5)
 
@@ -353,3 +393,5 @@ The progression reflects both capability improvements and cost-per-task optimiza
 [^src20]: [Introducing Claude Opus 4.6](../../raw/web/web-claude-opus-4-6.md) — Anthropic official blog
 [^src21]: [Code with Claude London 2026: Opening Keynote](../../raw/youtube/youtube-6amLO7I9xdg-code-with-claude-london-2026-opening-keynote.md) — Anthropic, YouTube
 [^src22]: [Programmierung | Claude](../../raw/web/web-programmierung-claude-bbf1e585.md) — Anthropic marketing page (`claude.com/solutions/coding`); also collected in Japanese ([コーディング](../../raw/web/web-claude-469a16cf.md)) as identical content.
+[^src23]: [Introducing Claude Sonnet 5](../../raw/web/web-introducing-claude-sonnet-5-0f764e9b.md) — Anthropic official blog, 2026-06-30
+[^src24]: [What's new in Claude Sonnet 5](../../raw/web/web-whats-new-in-claude-sonnet-5-ab37cad9.md) — Simon Willison, simonwillison.net, 2026-06-30

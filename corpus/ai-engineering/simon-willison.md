@@ -30,6 +30,21 @@ sources:
   - path: raw/web/web-incident-report-cve-2026-lgtm-61a73fa6.md
     channel: web
     ingested_at: 2026-07-05
+  - path: raw/_inbox/web-tool-html-table-extractor-7be15e2e.md
+    channel: web
+    ingested_at: 2026-08-23
+  - path: raw/_inbox/web-count-the-number-of-safari-tabs-35a54d60.md
+    channel: web
+    ingested_at: 2026-08-23
+  - path: raw/_inbox/web-release-shot-scraper-1-10-347f2684.md
+    channel: web
+    ingested_at: 2026-08-23
+  - path: raw/_inbox/web-whats-new-in-claude-sonnet-5-ab37cad9.md
+    channel: web
+    ingested_at: 2026-08-23
+  - path: raw/_inbox/web-nano-banana-2-lite-96ca38fd.md
+    channel: web
+    ingested_at: 2026-08-23
 aliases:
   - Simon Willison
   - simonwillison.net
@@ -38,7 +53,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-07-05
-updated: 2026-07-05
+updated: 2026-08-23
 ---
 
 # Simon Willison
@@ -51,6 +66,14 @@ updated: 2026-07-05
 - **sqlite-utils** — Python CLI/library for manipulating SQLite databases; 4.0 RC1 added migrations and nested transactions [^src3]
 - **Datasette Lite** — Datasette running in the browser via Pyodide + WebAssembly
 - **simonw/browser-compat-db** — MDN browser compatibility data converted to a ~66MB SQLite database, explorable via Datasette Lite [^src2]
+- **HTML table extractor** — paste-conversion tool accepting rich text with embedded HTML tables; outputs HTML, Markdown, CSV, TSV, or JSON; released June 29, 2026; part of a growing collection of paste-conversion tools alongside a rebuilt "Rich text to markdown" tool [^src10]
+- **shot-scraper 1.10** — CLI for website screenshots, JavaScript scraping, and video demo recording; key new feature: `shot-scraper video storyboard.yml` for agent-recorded video demos; released June 30, 2026 [^src11]
+
+## TILs (Today I Learned)
+
+Willison posts frequent short TIL entries on simonwillison.net/til/:
+
+- **Count Safari tabs via AppleScript** (June 29, 2026): `osascript -e 'tell application "Safari" to count tabs of every window'` — returns a list of tab counts per window [^src12]
 
 ## AI-assisted development practice
 
@@ -73,6 +96,10 @@ Willison's blog functions as a highly-curated link blog on AI engineering. Notab
 
 **On engineering discipline:** Charity Majors' observation that 2025 inverted code economics — "Lines of code went from being treasured… to being disposable and regenerable, practically overnight" — therefore AI demands *more* engineering discipline, not less [^src1].
 
+**On Claude Sonnet 5** (2026-06-30): Willison analyzed the Sonnet 5 API changes, noting that the new tokenizer makes the model "effectively a 30% price increase" for English-heavy workloads despite nominally identical pricing. He measured the tokenizer multiplier across document types: English ~1.42x, Spanish ~1.33x, Python code ~1.27x, Simplified Mandarin ~1.01x. He also noted that the system card's lower cyber capability scores explain why Sonnet 5 did not trigger the same export controls applied to Fable 5 and Mythos 5 [^src13].
+
+**On Nano Banana 2 Lite** (2026-06-30): Brief note on Google's Gemini 3.1 Flash Lite Image model (`gemini-3.1-flash-lite-image`) — Google's fastest/cheapest image generation model. Willison tested it with a "where's Waldo"-style prompt and found quality better than earlier Nano Banana models, with a minor text-rendering defect [^src14].
+
 ## See also
 
 - [Datasette](/ai-engineering/datasette.md) — primary project
@@ -91,3 +118,8 @@ Willison's blog functions as a highly-curated link blog on AI engineering. Notab
 [^src7]: [What happened after 2,000 people tried to hack my AI assistant](../../raw/web/web-what-happened-after-2-000-people-tried-to-hack-my-ai-assista-20e22694.md)
 [^src8]: [Incident Report: CVE-2026-LGTM](../../raw/web/web-incident-report-cve-2026-lgtm-61a73fa6.md)
 [^src9]: [A quote from Sean Lynch](../../raw/web/web-a-quote-from-sean-lynch-f248e4ad.md)
+[^src10]: [HTML table extractor tool](../../raw/web/web-tool-html-table-extractor-7be15e2e.md) — simonwillison.net, June 29, 2026
+[^src11]: [shot-scraper 1.10 release](../../raw/web/web-release-shot-scraper-1-10-347f2684.md) — simonwillison.net, June 30, 2026
+[^src12]: [Count Safari tabs via AppleScript (TIL)](../../raw/web/web-count-the-number-of-safari-tabs-35a54d60.md) — simonwillison.net, June 29, 2026
+[^src13]: [What's new in Claude Sonnet 5](../../raw/web/web-whats-new-in-claude-sonnet-5-ab37cad9.md) — simonwillison.net, June 30, 2026
+[^src14]: [Nano Banana 2 Lite](../../raw/web/web-nano-banana-2-lite-96ca38fd.md) — simonwillison.net, June 30, 2026

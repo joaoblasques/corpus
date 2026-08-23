@@ -33,6 +33,9 @@ sources:
   - path: raw/github/github-dataexpert-io-data-engineer-handbook.md
     channel: github
     ingested_at: 2026-06-25
+  - path: raw/_inbox/web-junior-data-engineers-build-pipelines-seniors-build-trust-f95d3b83.md
+    channel: web
+    ingested_at: 2026-08-23
 aliases:
   - valuable data engineer
   - senior data engineer
@@ -46,7 +49,7 @@ tags:
   - corpus/data-engineering
   - synthesis
 created: 2026-06-11
-updated: 2026-06-25
+updated: 2026-08-23
 last_confirmed: 2026-06-19
 ---
 
@@ -199,6 +202,52 @@ The key finding of the reckoning scenario: **tribal knowledge survived** — "th
 
 The specific advice: understand data modeling, architecture, and business context (not just tool configuration); develop the ability to make genuine tradeoffs; sit with business users and ask "What decision are you trying to make?" — the question AI and junior tool-configurers both struggled with [^src8].
 
+## DE as product owner: trust-building in the AI age
+
+By 2026, the framing has sharpened: DE's job is to be the **product owner for data** — figuring out what data product will find market fit with coworkers (the customers), then building and marketing it.[^src9]
+
+> "In 2026, Data Engineering is no longer about pipelines. When your LLM writes SQL faster and better than you, when it debugs infra errors, when it can even write the logging code — we can't pretend otherwise any longer."[^src9]
+
+AI makes engineering grunt work easier, which means everything else got **more important**: engineering strategy, people/product work.[^src9]
+
+### The product-owner loop
+
+True senior DEs know what to build, for whom, and make sure it's used:[^src9]
+
+1. Understand the data and data system under your purview
+2. Understand the customers (coworkers) of that data
+3. Identify the most important use cases, bottlenecks, and improvements
+4. Prioritize and deliver
+5. **Market, sell, iterate, and showboat** — so that customers are happier, trust the data, and use it to make key decisions
+
+"If the team doesn't use your stuff — that's your fault, not theirs."[^src9]
+
+### Trust is the key deliverable
+
+Trust is not the same as trustworthiness. Data can be technically accurate and still not be trusted:[^src9]
+
+- They need to trust your **priorities** first — obsess about the surface they obsess about (a Google Sheet, a daily email), not your preferred dashboard
+- They need to trust **you** as a person — low-latency, reliable, responsive to questions within minutes, not just a ticket-based pipeline-builder
+- Only once they trust you will they give you the go-ahead for the bigger architectural work
+
+> "If they don't trust you, then they will not trust your data."[^src9]
+
+### Showmanship is good, actually
+
+A story from Sahar (ex-Facebook DE): after building a table tracking per-user/app/device upgrade data, a skip-level manager pointed out that this was useful for the entire company. Sahar renamed it more generally and wrote an internal blog post titled "One Weird Trick for Much Better Growth Statistics." It became a viral hit inside Facebook, referenced by engineers who never met him years later.[^src9]
+
+> "The difference between a table that only three people in my team cared about and the viral hit that materially helped the company was just … pizzazz? (Plus a bit of insight)"[^src9]
+
+### The credibility-spending model
+
+Build credibility in order to spend it:[^src9]
+- Argue for better goal metrics for your team
+- Replace bad numbers with better ones
+- Get buy-in for the data architecture and infrastructure you actually need
+- Do what you do best — without credibility, you can't get support for the right work
+
+This is the same insight as the impact-scoring formula in §Impact-scoring formula above: surface business value first, then earn the right to do the deeper work.
+
 ## See also
 
 - [Dimensional Modeling](/data-engineering/dimensional-modeling.md) — the data-modeling fundamental both sources flag as core
@@ -219,3 +268,4 @@ The specific advice: understand data modeling, architecture, and business contex
 [^src6]: [Where Data Engineering Is Heading in 2026 — 5+ Trends](../../raw/web/web-where-data-engineering-is-heading-in-2026-5-trends-fe513e25.md) — Joe Reis, Practical Data Community survey (1,101 respondents, Feb 2026)
 [^src7]: [The Insanity of Data Education](../../raw/web/web-the-insanity-of-data-education-c2478cdc.md) — Joe Reis, Practical Data Community
 [^src8]: [2028 — THE GREAT DATA RECKONING](../../raw/web/web-2028-the-great-data-reckoning-73fdab45.md) — Joe Reis, satirical/scenario piece (labeled "a scenario, not a prediction")
+[^src9]: [Junior data engineers build pipelines. Seniors build trust](../../raw/web/web-junior-data-engineers-build-pipelines-seniors-build-trust-f95d3b83.md) — Sahar Massachi + Zach Wilson, dataexpert.io blog (Part 3 of "The Data Warehouse Setup No One Taught You")

@@ -78,6 +78,9 @@ sources:
   - path: raw/_inbox/web-how-candidly-built-state-aware-agent-harnesses-with-langsmit-83ec6c08.md
     channel: web
     ingested_at: 2026-08-21
+  - path: raw/_inbox/web-no-figma-no-jira-no-docs-how-gusto-built-a-new-product-line-4770d097.md
+    channel: web
+    ingested_at: 2026-08-23
 aliases:
   - harness
   - agent harness
@@ -496,6 +499,19 @@ Candidly (Ben Levine, Patrick Hendershott) built a harness that models user conv
 
 See also: [AI Sycophancy](/ai-engineering/ai-sycophancy.md) — a related harness-level problem where RLHF training overrides honest evaluation.
 
+## Minimal two-tool harness: the Gusto Cofounder pattern
+
+Gusto CTO Eddie Kim shipped a net-new AI product (Gusto Cofounder) in 10 weeks with 3 engineers + 1 designer using the minimum viable harness: [^src24]
+
+**Stack**: Claude Code (Anthropic) + Cloudflare Workers + Vercel AI SDK. No additional orchestration framework.
+
+Claude Code serves as the agent layer; Cloudflare Workers is the execution runtime; Vercel AI SDK provides streaming/structured output primitives. The pattern demonstrates that a production-quality launch does not require a complex harness — the minimal two-tool stack was sufficient for a product used by 500,000+ Gusto business customers.
+
+**Process companion**: the "trash-can method" (write a full PR → review it as a product decision → delete it) replaces planning documents. Eval-first workflow drives iteration. A designer with no engineering background reached the 94th percentile for code shipping via Claude Code.
+
+See [/ai-engineering/sources/no-figma-no-jira-how-gusto-built-4770d097.md](/ai-engineering/sources/no-figma-no-jira-how-gusto-built-4770d097.md) for full source details.
+
 [^src22]: [Introducing Dynamic Subagents in Deep Agents](../../raw/web/web-introducing-dynamic-subagents-in-deep-agents-65ef79f5.md) — LangChain blog, 2026-08-21; script-generating orchestration, QuickJS, 6 orchestration patterns
 [^src23]: [How Candidly Built State-Aware Agent Harnesses with LangSmith](../../raw/web/web-how-candidly-built-state-aware-agent-harnesses-with-langsmit-83ec6c08.md) — LangChain blog / Candidly, 2026-08-21; IO-HMM, engagement state prediction, evaluation-as-control-signal
+[^src24]: [No Figma. No Jira. No Docs. How Gusto Built a New Product Line — Eddie Kim, Lenny's Newsletter](../../raw/web/web-no-figma-no-jira-no-docs-how-gusto-built-a-new-product-line-4770d097.md) — 2026-06-30; two-tool stack, trash-can method, eval-first workflow
 [^src21]: [Did OpenAI's New Model "Go Rogue"?](../../raw/web/web-did-openais-new-model-go-rogue-cal-newport-9451a3a7.md) — Cal Newport, 2026-08-03

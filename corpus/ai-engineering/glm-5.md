@@ -9,16 +9,22 @@ sources:
   - path: raw/web/web-glm-5-2-is-probably-the-most-powerful-text-only-open-weights-42e4b84f.md
     channel: web
     ingested_at: 2026-07-05
+  - path: raw/_inbox/web-gpt-5-1-vs-glm-5-1-benchmarks-pricing-context-window-request-5312780a.md
+    channel: web
+    ingested_at: 2026-08-23
 aliases:
   - GLM-5
+  - GLM-5.1
   - GLM-5.2
+  - GLM 5.1
   - GLM 5.2
   - ZhipuAI GLM
+  - Z.ai GLM
 tags:
   - corpus/ai-engineering
   - entity
 created: 2026-07-04
-updated: 2026-07-05
+updated: 2026-08-23
 ---
 
 # GLM-5
@@ -69,14 +75,31 @@ These are Artificial Analysis / Code Arena leaderboard figures as reported by Si
 
 Note: Z.ai (source of the Hugging Face blog) and ZhipuAI are the same entity — Z.ai is ZhipuAI's rebranded name.
 
+## GLM-5.1 vs GPT-5.1 (Requesty comparison, 2026-06-30)
+
+GLM-5.1 (the predecessor to GLM-5.2) **outperforms GPT-5.1 on 4 of 6 shared benchmarks** per Requesty's comparison data:[^src3]
+
+| Benchmark | GLM-5.1 | GPT-5.1 | Winner |
+|---|---|---|---|
+| Intelligence Index | 40.2% | 38.9% | GLM-5.1 |
+| Coding Index | 55.8% | N/A | GLM-5.1 |
+| GPQA Diamond | 86.8% | 87.3% | GPT-5.1 |
+| Terminal-Bench Hard | 43.2% | 45.5% | GPT-5.1 |
+| τ²-Bench | ~82% | 81.9% | Tie/GLM |
+| SciCode | — | 43.3% | — |
+
+Pricing: GLM-5.1 at $1.40/$4.40 per 1M input/output vs GPT-5.1 at $1.25/$10.00. GLM-5.1 is cheaper on output per token despite being a higher-output-priced model; the context is smaller (200K vs 400K).[^src3]
+
 ## Related
 
 - [vLLM](/ai-engineering/vllm.md) — high-throughput serving engine; GLM-5.x is vLLM-compatible
 - [Quantization](/ai-engineering/quantization.md) — effort levels affect token budget (not quantization bits directly, but related to inference cost)
 - [Simon Willison](/ai-engineering/simon-willison.md) — independent coverage of GLM-5.2 community benchmarks
+- [LLM Benchmarks 2026](/ai-engineering/llm-benchmarks-2026.md) — frontier model comparison table
 - [AI Engineering hub](/ai-engineering/README.md)
 
 ---
 
 [^src1]: [GLM-5.2: Built for Long-Horizon Tasks](../../raw/_inbox/web-glm-5-2-built-for-long-horizon-tasks-64d6b4cb.md) — Hugging Face blog, ZhipuAI, 2026-06
 [^src2]: [GLM-5.2 is probably the most powerful text-only open weights LLM](../../raw/web/web-glm-5-2-is-probably-the-most-powerful-text-only-open-weights-42e4b84f.md) — Simon Willison, 2026-06-17
+[^src3]: [gpt-5.1 vs glm-5.1: Benchmarks, Pricing & Context Window](../../raw/web/web-gpt-5-1-vs-glm-5-1-benchmarks-pricing-context-window-request-5312780a.md) — Requesty, 2026-06-30

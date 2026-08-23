@@ -2,6 +2,44 @@
 
 > OKF v0.1 change log. Newest first, grouped by date.
 
+## 2026-08-23
+
+* **Ingest**: 11 sources from raw/_inbox/ — ai-engineering domain
+  - sources: web-introducing-claude-sonnet-5-0f764e9b (web), web-whats-new-in-claude-sonnet-5-ab37cad9 (web), web-a-quote-from-anthropic-77069007 (web), web-impressions-from-visiting-openai-anthropic-cursor-cadb0581 (web), web-when-ai-costs-more-than-the-engineer-59fa9175 (web), web-no-figma-no-jira-no-docs-how-gusto-built-a-new-product-line-4770d097 (web), web-forward-deployed-engineers-and-the-future-of-software-engine-a6f88e06 (web), web-micro-agent-beat-frontier-models-with-collaboration-inside-m-22bd7e8d (web), web-discoformer-one-transformer-for-density-and-score-across-dis-91d16542 (web), web-nano-banana-2-lite-96ca38fd (web), email-2026-06-30-gemini-spark-the-most-beginner-friendly-ai-agent (email)
+  - domain: ai-engineering (×11)
+  - pages created: [/ai-engineering/cloud-agents.md, /ai-engineering/ai-cost-economics.md, /ai-engineering/forward-deployed-engineering.md, /ai-engineering/discoformer.md, /ai-engineering/sources/introducing-claude-sonnet-5-0f764e9b.md, /ai-engineering/sources/whats-new-in-claude-sonnet-5-ab37cad9.md, /ai-engineering/sources/a-quote-from-anthropic-77069007.md, /ai-engineering/sources/impressions-from-visiting-openai-anthropic-cursor-cadb0581.md, /ai-engineering/sources/when-ai-costs-more-than-the-engineer-59fa9175.md, /ai-engineering/sources/no-figma-no-jira-how-gusto-built-4770d097.md, /ai-engineering/sources/forward-deployed-engineers-a6f88e06.md, /ai-engineering/sources/micro-agent-22bd7e8d.md, /ai-engineering/sources/discoformer-91d16542.md, /ai-engineering/sources/nano-banana-2-lite-96ca38fd.md, /ai-engineering/sources/gemini-spark-email-19f18a88.md]
+  - pages updated: [/ai-engineering/claude-models.md, /ai-engineering/simon-willison.md, /ai-engineering/ai-model-export-controls.md, /ai-engineering/claude-managed-agents.md, /ai-engineering/agent-harness.md, /ai-engineering/vllm-semantic-router.md]
+
+* **Ingest**: 11 sources from raw/_inbox/ — data-engineering + software-engineering domains
+  - sources: web-from-monolith-to-lakebase-to-ltap-229b688f (web), email-2026-06-30-polars-at-a-high-level (email), web-junior-data-engineers-build-pipelines-seniors-build-trust-f95d3b83 (web), email-2026-06-30-what-companies-really-pay-devs-for-in-2026 (email), web-jeff-malnick-databricks-c00b14c3 (web), web-rajasi-behere-databricks-c4a02578 (web), web-john-obrien-databricks-823065e3 (web), web-amritansh-raghav-databricks-ee76b6cb (web), web-gavi-regunath-databricks-ef3352cc (web), web-elizabeth-dobbs-databricks-732dd258 (web), web-how-github-maintains-compliance-for-open-source-dependencies-99e81580 (web)
+  - domains: data-engineering (×9), ai-engineering (×2), software-engineering (×1)
+  - pages created: [/data-engineering/lakebase.md, /data-engineering/sources/from-monolith-to-lakebase-229b688f.md, /data-engineering/sources/polars-at-a-high-level-email.md, /data-engineering/sources/junior-pipelines-seniors-trust-f95d3b83.md, /data-engineering/sources/what-companies-pay-devs-for-2026.md, /data-engineering/rajasi-behere.md, /data-engineering/john-obrien.md, /data-engineering/gavi-regunath.md, /data-engineering/elizabeth-dobbs.md, /ai-engineering/jeff-malnick.md, /ai-engineering/amritansh-raghav.md, /software-engineering/open-source-license-compliance.md, /software-engineering/sources/github-license-compliance-99e81580.md]
+  - pages updated: [/data-engineering/polars.md, /data-engineering/data-engineer-role.md, /data-engineering/data-work-in-the-ai-transition.md]
+
+* **Ingest**: 14 sources from raw/_inbox/ — Requesty frontier LLM benchmark comparisons
+  - sources: web-gpt-4-1-vs-gpt-5-1-* (web), web-gemini-2-5-pro-vs-gpt-5-1-* (web), web-gemini-2-5-flash-vs-gpt-5-1-* (web), web-gpt-5-1-vs-grok-4-* (web), web-gpt-5-1-vs-grok-4-3-* (web), web-deepseek-v4-pro-vs-gpt-5-1-* (web), web-deepseek-v4-flash-vs-gpt-5-1-* (web), web-qwen3-max-vs-gpt-5-1-* (web), web-qwen3-7-plus-vs-gpt-5-1-* (web), web-gpt-5-1-vs-glm-5-1-* (web), web-minimax-m3-vs-gpt-5-1-* (web), web-gpt-5-1-vs-kimi-k2-* (web), web-kimi-k2-7-code-vs-gpt-5-1-* (web), web-gpt-4-1-vs-gpt-5-* (web)
+  - domain: ai-engineering (×14)
+  - pages created: [/ai-engineering/llm-benchmarks-2026.md, /ai-engineering/gpt-5-1.md, /ai-engineering/gpt-5.md, /ai-engineering/gpt-4-1.md, /ai-engineering/grok-4.md, /ai-engineering/deepseek-v4.md, /ai-engineering/qwen3.md, /ai-engineering/kimi-k2.md, + 14 source stubs in /ai-engineering/sources/]
+  - pages updated: []
+  - notes: ingest-auto run; all 14 are thin benchmark-data tables; synthesized into llm-benchmarks-2026.md synthesis page
+
+* **Ingest**: 4 sources from raw/_inbox/ (web channel) — Simon Willison tools/TILs (×3) + Pieter Levels RTCW web port (×1)
+  - sources: raw/_inbox/web-tool-html-table-extractor-7be15e2e.md, raw/_inbox/web-count-the-number-of-safari-tabs-35a54d60.md, raw/_inbox/web-release-shot-scraper-1-10-347f2684.md, raw/_inbox/web-i-ported-return-to-castle-wolfenstein-to-the-web-with-multip-15912e08.md
+  - domains: ai-engineering (×3), software-engineering (×1)
+  - pages created: [/ai-engineering/sources/tool-html-table-extractor-7be15e2e.md, /ai-engineering/sources/count-safari-tabs-35a54d60.md, /ai-engineering/sources/shot-scraper-1-10-347f2684.md, /software-engineering/sources/rtcw-web-port-15912e08.md, /software-engineering/webassembly.md]
+  - pages updated: [/ai-engineering/simon-willison.md]
+
+* **Collectors**: gmail=3, blog_promote=0, obsidian=0, book_discover=0, blog_discover=15, book_fetch=0, pdf=0, image=0, books=0, arxiv=0, youtube=0, github_discover=5, github_promote=5, github=0, x=0, links_refetch=0
+* **Ingest**: 39 ingested · 11 deferred · status=ok
+* **YoutubeQuick**: 0 intake · 0 rescued · 0 skipped · status=ok
+* **DocsQuick**: 0 intake · 40 thin · 10 llm_fail · status=ok
+* **YoutubeReap**: 0 removed · status=ok
+* **Gardener**: 4 stubs deepened · status=ok
+* **Heal**: 17 citations repointed · 0 unfixable · 3 hubs reindexed · 34 cross-domain links · status=ok
+* **Depth**: 483 knowledge · 1522 sources · ratio 1:3.2
+* **GapResolver**: 0 gap dispatched · 0 sources queued · status=ok
+* **Lint**: 2 broken wikilinks · 0 broken citations · 0 orphans · 1324 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+* **OKF**: 0 violations
 ## 2026-08-22
 
 * **Ingest**: Batch ingest — 8 sources from 50-file pre-filtered inbox pass — ingest-auto run; 42 deferred

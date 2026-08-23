@@ -142,7 +142,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 
 ## Pages in this domain
 
-### Concepts (56)
+### Concepts (57)
 - [BI as Code](/data-engineering/bi-as-code.md)
 - [Change Data Capture (CDC)](/data-engineering/change-data-capture.md)
 - [CI/CD for Data Infrastructure](/data-engineering/cicd-for-data-infrastructure.md)
@@ -170,6 +170,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [Graph Databases (RDF vs Labeled Property Graph)](/data-engineering/graph-databases.md)
 - [Idempotent Pipelines](/data-engineering/idempotent-pipelines.md)
 - [Incremental Pipeline Design](/data-engineering/incremental-pipeline-design.md)
+- [Lakebase and LTAP](/data-engineering/lakebase.md)
 - [Materialized Views](/data-engineering/materialized-views.md)
 - [Meaning in Data Modeling: Semantics, Taxonomy, Ontology](/data-engineering/data-modeling-meaning.md)
 - [Medallion Architecture](/data-engineering/medallion-architecture.md)
@@ -200,7 +201,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [Streaming Algorithms](/data-engineering/streaming-algorithms.md)
 - [Vibe Engineering](/data-engineering/vibe-engineering.md)
 
-### Entities (32)
+### Entities (36)
 - [Amazon Redshift](/data-engineering/redshift.md)
 - [Apache Iceberg](/data-engineering/apache-iceberg.md)
 - [Apache Kafka](/data-engineering/kafka.md)
@@ -214,8 +215,11 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [dbt Fusion Engine](/data-engineering/dbt-fusion.md)
 - [dlt (data load tool)](/data-engineering/dlt.md)
 - [DuckDB](/data-engineering/duckdb.md)
+- [Elizabeth Dobbs](/data-engineering/elizabeth-dobbs.md)
+- [Gavi Regunath](/data-engineering/gavi-regunath.md)
 - [Google BigQuery](/data-engineering/bigquery.md)
 - [ingestr](/data-engineering/ingestr.md)
+- [John Obrien](/data-engineering/john-obrien.md)
 - [Josh Braun](/data-engineering/josh-braun.md)
 - [Kai Waehner](/data-engineering/kai-waehner.md)
 - [lakeFS](/data-engineering/lakefs.md)
@@ -228,6 +232,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [PostgreSQL (Postgres)](/data-engineering/postgres.md)
 - [Prasanna Saraswathi Krishnan](/data-engineering/prasanna-saraswathi-krishnan.md)
 - [Prashant Upadhyay](/data-engineering/prashant-upadhyay.md)
+- [Rajasi Behere](/data-engineering/rajasi-behere.md)
 - [Redis](/data-engineering/redis.md)
 - [Snowflake](/data-engineering/snowflake.md)
 - [Solomon Hykes](/data-engineering/solomon-hykes.md)
@@ -251,7 +256,7 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [The Portfolio Project That Lands a DE Role](/data-engineering/portfolio-project-that-lands-a-de-role.md)
 
 <details>
-<summary>Source summaries (230)</summary>
+<summary>Source summaries (234)</summary>
 
 - ["A dbt \"logic mesh\" with packages: standard model and metrics across 25 autonomous organizations | dbt Summit"](/data-engineering/sources/a-dbt-logic-mesh-with-packages-standard-model-and-metrics-ac-bf162a97.md)
 - ["Academic → CTO: What Actually Matters in Data (Matthew Housley) - Confessions of a Data Guy"](/data-engineering/sources/academic-cto-what-actually-matters-in-data-matthew-housley-c-e9eae58c.md)
@@ -466,6 +471,10 @@ Domain covering ETL/ELT pipelines, data modeling, Spark, Iceberg, dbt, orchestra
 - [Source: Data Engineering Zoomcamp (DataTalksClub)](/data-engineering/sources/data-engineering-zoomcamp.md)
 - [Source: End-to-End DuckDB ETL on AWS ECS Fargate](/data-engineering/sources/aws-duckdb-etl-fargate.md)
 - [Source: End-to-End SQL Sales-Funnel Analysis (Lore So What)](/data-engineering/sources/sql-funnel-analysis-project.md)
+- [Source: From Monolith to Lakebase to LTAP](/data-engineering/sources/from-monolith-to-lakebase-229b688f.md)
+- [Source: Junior Data Engineers Build Pipelines. Seniors Build Trust](/data-engineering/sources/junior-pipelines-seniors-trust-f95d3b83.md)
+- [Source: Polars at a High Level (Vu Trinh, 2026-06-30)](/data-engineering/sources/polars-at-a-high-level-email.md)
+- [Source: What Companies Really Pay Devs For in 2026](/data-engineering/sources/what-companies-pay-devs-for-2026.md)
 - [SQL Full Course for Beginners (30 Hours) – From Zero to Hero](/data-engineering/sources/sql-full-course-for-beginners-30-hours-from-zero-to-hero-SSKVgrwhzus.md)
 - [Start Your Data Portfolio Project RIGHT | Playbook Ep. 2](/data-engineering/sources/start-your-data-portfolio-project-right-playbook-ep-2-HfPPuSGkRK0.md)
 - [Stop Doing Data Analyst Projects (Do This Instead)](/data-engineering/sources/stop-doing-data-analyst-projects-do-this-instead-6Ps7houk6i8.md)

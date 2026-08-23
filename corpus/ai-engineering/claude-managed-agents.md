@@ -90,6 +90,9 @@ sources:
   - path: raw/_inbox/youtube-haMS2-JXL6s-what-is-claude-managed-agents.md
     channel: youtube
     ingested_at: 2026-06-27
+  - path: raw/_inbox/web-impressions-from-visiting-openai-anthropic-cursor-cadb0581.md
+    channel: web
+    ingested_at: 2026-08-23
 aliases:
   - Claude Managed Agents
   - Managed Agents
@@ -98,7 +101,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-06-17
-updated: 2026-06-25
+updated: 2026-08-23
 ---
 
 # Claude Managed Agents
@@ -499,6 +502,14 @@ The Managed Agents toolset (`agent_toolset_20260401`) provides 8 built-in tools,
 
 **100K token overflow** [^src27]: tool outputs exceeding 100,000 tokens are auto-written to a file in the sandbox; the model receives a truncated preview with the file path and reads the full content from there.
 
+## External perspective: Pragmatic Engineer visit (2026-06-29)
+
+The Pragmatic Engineer visited Anthropic's offices and described Claude Managed Agents as a "large, complex project" built over six months by Katelyn Lesse's team. The reporter's framing: the excitement around Claude Tag (the Slack integration that kicks off CMA sessions) is less about Slack specifically and more about the fact that it's easy to kick off an AI that runs on the cloud rather than a local machine — "you can skip the setup entirely." [^src29]
+
+Key differentiators from the Anthropic Applied AI perspective: no additional setup (no MCP server connection, no skill configuration), no tool context-switching (just mention Claude in Slack), and routine work made easier (long-running tasks fire without keeping a developer's machine open). [^src29]
+
+See also [Cloud Agents](/ai-engineering/cloud-agents.md) for the broader industry context (OpenAI, Cursor, OpenClaw).
+
 ## See also
 
 - [MCP](/ai-engineering/mcp.md) — agents connect to external systems via MCP; Vaults handle OAuth credentials per session
@@ -538,3 +549,4 @@ The Managed Agents toolset (`agent_toolset_20260401`) provides 8 built-in tools,
 [^src26]: [Subscribe to webhooks — Claude Managed Agents docs](../../raw/web/web-subscribe-to-webhooks.md) — Anthropic; primary source for webhook setup, signature verification, delivery behavior
 [^src27]: [Tools — Claude Managed Agents docs](../../raw/web/web-tools.md) — Anthropic; primary source for built-in tool table, selective enabling, custom tools, 100K overflow
 [^src28]: [What is Claude Managed Agents](../../raw/youtube/youtube-haMS2-JXL6s-what-is-claude-managed-agents.md) — KodeKloud, YouTube; harnessing framing, $700/year cost calculation, vendor lock-in risk
+[^src29]: [Impressions from visiting OpenAI, Anthropic & Cursor — The Pragmatic Engineer](../../raw/web/web-impressions-from-visiting-openai-anthropic-cursor-cadb0581.md) — Pragmatic Engineer newsletter, 2026-06-29

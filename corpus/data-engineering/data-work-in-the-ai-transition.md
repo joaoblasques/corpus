@@ -18,6 +18,9 @@ sources:
   - path: raw/web/web-notes-from-the-field-ai-energy-shocks-the-end-of-the-old-pla-c8736206.md
     channel: web
     ingested_at: 2026-06-30
+  - path: raw/_inbox/email-2026-06-30-what-companies-really-pay-devs-for-in-2026.md
+    channel: email
+    ingested_at: 2026-08-23
 aliases:
   - Joe Reis AI transition thesis
   - data work in the AI transition
@@ -27,7 +30,7 @@ tags:
   - corpus/data-engineering
   - synthesis
 created: 2026-06-30
-updated: 2026-06-30
+updated: 2026-08-23
 ---
 
 # Data Work in the AI Transition (Joe Reis, 2026)
@@ -70,6 +73,27 @@ The actionable convergence across all five sources [^src1][^src2][^src3][^src4][
 2. **Optimize for decisions, not tokens** — brainmaxx over tokenmaxx; stay the "head" of the centaur [^src2][^src3].
 3. **Bet on context, not wrappers** — semantic layers and context platforms (the rebuilt factory) over thin AI features on a human-analyst-shaped stack [^src4].
 
+## Corroborating voice: "writing code was never the hardest part"
+
+Tech With Tim (Tim, newsletter, 2026-06-30) makes the same judgment-first argument from a software engineering angle:[^src6]
+
+> "Writing code was never the hardest part of software engineering."[^src6]
+
+The real work — understanding problems, breaking them down, thinking through trade-offs, designing the right solution, working with managers, clarifying requirements, reviewing decisions — is what AI cannot automate.[^src6]
+
+Skills that survive AI commoditization of syntax:[^src6]
+- Breaking down vague problems
+- Understanding why one solution is better than another
+- Spotting when AI-generated code looks correct but is actually fragile
+- Explaining a trade-off to another engineer
+- Debugging the issue instead of delegating the fix to AI
+
+The framing: this is "software **engineering**", not "software **writing**."[^src6] The word engineering carries the judgment, design, and systems-thinking that distinguish durable from automatable work.
+
+This corroborates Reis's "vibe engineering" critique at a finer grain: the failure mode is treating code generation as the job, rather than treating problem understanding and system judgment as the job.
+
+Cross-link: [/ai-engineering/learning-ai-engineering.md](/ai-engineering/learning-ai-engineering.md) — may also cover this argument; check before deepening.
+
 ## See also
 
 - [Vibe Engineering](/data-engineering/vibe-engineering.md) — the skills-level failure mode (Spolsky's leaky abstractions)
@@ -86,3 +110,4 @@ The actionable convergence across all five sources [^src1][^src2][^src3][^src4][
 [^src3]: [Surviving the AI Grind: Token Junkies, Hustle Culture, and Stress](../../raw/web/web-surviving-the-ai-grind-token-junkies-hustle-culture-and-stre-d1cf7601.md) — Joe Reis + Eric Weber, 2026
 [^src4]: [We're in 1905 — Why Electricity, Not Dot-Com, Is the Right AI Analogy](../../raw/web/web-we-re-in-1905-why-electricity-not-dot-com-is-the-right-ai-an-0390799e.md) — Joe Reis, 2026
 [^src5]: [Notes from the Field: AI Energy Shocks, the End of the Old Playbook](../../raw/web/web-notes-from-the-field-ai-energy-shocks-the-end-of-the-old-pla-c8736206.md) — Joe Reis, 2026
+[^src6]: [What companies really pay devs for in 2026](../../raw/email/email-2026-06-30-what-companies-really-pay-devs-for-in-2026.md) — Tech With Tim newsletter, 2026-06-30

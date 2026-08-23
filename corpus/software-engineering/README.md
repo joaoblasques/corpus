@@ -132,7 +132,7 @@ Domain covering software engineering practice from foundational CS through deplo
 
 ## Pages in this domain
 
-### Concepts (44)
+### Concepts (46)
 - [AI Risk Architecture](/software-engineering/ai-risk-architecture.md)
 - [Algorithms (Strategies, Not Tricks)](/software-engineering/algorithms.md)
 - [CAP Theorem](/software-engineering/cap-theorem.md)
@@ -164,6 +164,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Model-View-Controller (MVC)](/software-engineering/model-view-controller.md)
 - [Naked Objects](/software-engineering/naked-objects.md)
 - [Number Systems](/software-engineering/number-systems.md)
+- [Open Source License Compliance](/software-engineering/open-source-license-compliance.md)
 - [Operating Systems Fundamentals](/software-engineering/operating-systems.md)
 - [OS Security](/software-engineering/os-security.md)
 - [Propositional Logic](/software-engineering/propositional-logic.md)
@@ -177,6 +178,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Test-Case Reduction](/software-engineering/test-case-reduction.md)
 - [Virtual Machine Monitors (VMMs / Hypervisors)](/software-engineering/virtual-machine-monitors.md)
 - [Virtual Memory](/software-engineering/virtual-memory.md)
+- [WebAssembly (WASM)](/software-engineering/webassembly.md)
 
 ### Entities (18)
 - [Antithesis](/software-engineering/antithesis.md)
@@ -203,7 +205,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Simplicity as an Engineering Constraint in the AI Age](/software-engineering/simplicity-as-engineering-constraint.md)
 
 <details>
-<summary>Source summaries (91)</summary>
+<summary>Source summaries (93)</summary>
 
 - ["2024-05-25-15-54-25 - move-base-up by josephmachado · Pull Request #17 · josephmachado/simple_dbt_project"](/software-engineering/sources/2024-05-25-15-54-25-move-base-up-by-josephmachado-pull-reque-ee.md)
 - ["A Guide to Multi-Tenancy: Benefits and Challenges"](/software-engineering/sources/a-guide-to-multi-tenancy-benefits-and-challenges-e55e9184.md)
@@ -278,6 +280,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [Naked Objects (PhD Thesis, Pawson 2004)](/software-engineering/sources/naked-objects.md)
 - [Obsidian Markdown Made Ridiculously Simple](/software-engineering/sources/obsidian-markdown-made-ridiculously-simple-e.md)
 - [ostep operating systems three easy pieces](/software-engineering/sources/ostep-operating-systems-three-easy-pieces.md)
+- [Porting Return to Castle Wolfenstein to the Web with Multiplayer (Pieter Levels, 2026)](/software-engineering/sources/rtcw-web-port-15912e08.md)
 - [Practical File System Design: The Be File System (Giampaolo, 1999)](/software-engineering/sources/practical-file-system-design.md)
 - [Purely Functional Data Structures (Okasaki, CMU 1996)](/software-engineering/sources/purely-functional-data-structures-okasaki.md)
 - [Python - Complete Beginner Course 5 Hours TechWorld with Nana](/software-engineering/sources/python-complete-beginner-course-5-hours-techworld-with-nana-aa.md)
@@ -289,6 +292,7 @@ Domain covering software engineering practice from foundational CS through deplo
 - [SOLID Principles in Practice](/software-engineering/sources/solid-principles-in-practice-acce.md)
 - [Source: Go Programming — Full Course (Tech With Tim)](/software-engineering/sources/go-full-course-tech-with-tim.md)
 - [Source: Go Programming — Golang Course with Bonus Projects (boot.dev / freeCodeCamp)](/software-engineering/sources/go-course-boot-dev.md)
+- [Source: How GitHub Maintains Compliance for Open Source Dependencies](/software-engineering/sources/github-license-compliance-99e81580.md)
 - [Source: The Software Engineer's Guidebook (Gergely Orosz)](/software-engineering/sources/software-engineers-guidebook.md)
 - [terminal-craft-retrospective](/software-engineering/sources/terminal-craft-retrospective-eece.md)
 - [The best TUIs - powerful terminal apps](/software-engineering/sources/the-best-tuis-powerful-terminal-apps-_fLmA4fjiAE.md)

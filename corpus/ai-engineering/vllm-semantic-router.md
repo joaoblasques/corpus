@@ -15,6 +15,9 @@ sources:
   - path: raw/web/web-from-text-to-multimodal-routing-hardening-vision-signals-in-cf3e11d0.md
     channel: web
     ingested_at: 2026-07-02
+  - path: raw/_inbox/web-micro-agent-beat-frontier-models-with-collaboration-inside-m-22bd7e8d.md
+    channel: web
+    ingested_at: 2026-08-23
 aliases:
   - vLLM Semantic Router
   - vLLM-SR
@@ -27,7 +30,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-07-02
-updated: 2026-07-02
+updated: 2026-08-23
 ---
 
 # vLLM Semantic Router
@@ -131,6 +134,34 @@ The failure spanned four layers of a cross-language serving stack (Go image load
 - **RouterArena #1** — 75.4 weighted Arena Score, 76.0 accuracy, $0.11 cost/1K queries, 73.1 robustness, ahead of Sqwish Router, AgentForge Router, Nadir Router [^src2].
 - **Next release ("Hermes")** — goal is a self-improving router: closed loop of GPU-scale performance research → DSL recipe tuning → codebase/encoder-model fine-tuning, with every change reviewable/replayable/rollback-safe [^src2].
 
+## Micro-Agent: the looper as execution runtime
+
+The June 2026 "Micro-Agent" post framed the looper patterns as a distinct product concept — **micro-agents as a serving runtime** rather than application logic. [^src5]
+
+**Core framing**: routers already own cost routing, safety policy, and cloud/edge coordination. The next job is making the model better — not by changing weights, but by turning one API call into a bounded collaboration inside the serving layer, without requiring applications to build bespoke agent graphs. [^src5]
+
+**The Looper** is the execution runtime for bounded micro-agents. A request enters as an ordinary chat completion; the router may select a looper route instead of a single-model route. Five named looper patterns: [^src5]
+
+| Pattern | What it does | Best for |
+|---|---|---|
+| **Confidence** | Sequential escalation: try cheap model, measure confidence, escalate if too low | Cost-aware routing; most requests don't need frontier |
+| **Ratings** | Bounded fan-out: run multiple models up to `max_concurrent`, aggregate | A/B eval, ensemble strategies |
+| **ReMoM** | Breadth + synthesis: fan out reasoning attempts, wait for quorum, synthesize | High-variance reasoning where output format must survive collaboration |
+| **Fusion** | Disagreement as signal: panel → judge analyzes agreement/contradiction → finalizer | Hard multiple-choice, long-form expert judgment |
+| **Workflows** | Planner + bounded worker steps + output contract | SWE-style tasks needing planner/patcher/verifier/finalizer |
+
+**Auto recipes** (`vllm-sr/auto`): the public surface is one model name; the router selects the right loop based on signals. The key lesson from eval work: "The best loop is task-shaped" — GPQA-Diamond needs ReMoM, LiveCodeBench needs a code-shaped loop, HLE needs Fusion or deeper ReMoM. [^src5]
+
+**Benchmark scorecard** (closed-model recipes as of June 2026): [^src5]
+
+| Benchmark | VSR Closed | Reference frontier |
+|---|---|---|
+| LiveCodeBench (Jan–Apr 2025) | 92.6 | Fugu Ultra 92.0, GPT-5.5 90.7 |
+| GPQA-Diamond | 96.0 | Fugu Ultra 95.5, Gemini 3.1 Pro 94.3 |
+| Humanity's Last Exam | 50.0 | Fugu Ultra 50.0 |
+
+**The distinction**: "agent as app logic" vs. "micro-agent as serving runtime." The router controls budget, policy, topology, trace, and failure mode — not the application. [^src5]
+
 ## Related
 
 - [vLLM](/ai-engineering/vllm.md) — the inference-serving engine vLLM-SR routes requests to
@@ -143,3 +174,4 @@ The failure spanned four layers of a cross-language serving stack (Go image load
 [^src2]: [vLLM Semantic Router v0.3 Themis: From Signals to Stateful Production Routing](../../raw/web/web-vllm-semantic-router-v0-3-themis-from-signals-to-stateful-pr-fd130560.md) — vLLM blog, 2026-06-05
 [^src3]: [Session-Aware Agentic Routing: Continuity-Aware Model Selection for Long-Horizon LLM Agents](../../raw/web/web-session-aware-agentic-routing-continuity-aware-model-selecti-1950138f.md) — vLLM blog, 2026-06-02
 [^src4]: [From Text to Multimodal Routing: Hardening Vision Signals in vLLM Semantic Router](../../raw/web/web-from-text-to-multimodal-routing-hardening-vision-signals-in-cf3e11d0.md) — vLLM blog, 2026-05-28
+[^src5]: [Micro-Agent: Beat Frontier Models with Collaboration inside Model API](../../raw/web/web-micro-agent-beat-frontier-models-with-collaboration-inside-m-22bd7e8d.md) — vLLM blog, 2026-06-29
