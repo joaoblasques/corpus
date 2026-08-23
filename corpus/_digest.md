@@ -255,3 +255,9 @@ type: internal
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/claude-code-best-practices-for-senior-engineers-4NbdeDlnk7Q.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/claude-opus-4-8-vs-gpt-5-benchmarks-pricing-context-window-r-20f42447.md", "verdict_ok": false, "gov": "reverted+queued"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/chatgpt-atlas-dud-or-revolution-full-guide-9f17dd61.md", "verdict_ok": true, "gov": "committed"}
+
+## [2026-08-23T03:01] gardener · run
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/claude-opus-4-8-vs-gpt-5-benchmarks-pricing-context-window-r-20f42447.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/stop-using-agents-md-and-claude-md-do-this-instead-SKEB0DxByqc.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/ai-isn-t-replacing-curious-developers-it-s-changing-who-wins-8ed1577a.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/blog-e59c9119.md", "verdict_ok": false, "gov": "reverted+queued"}
