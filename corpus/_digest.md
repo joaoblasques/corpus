@@ -261,3 +261,9 @@ type: internal
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/stop-using-agents-md-and-claude-md-do-this-instead-SKEB0DxByqc.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/ai-isn-t-replacing-curious-developers-it-s-changing-who-wins-8ed1577a.md", "verdict_ok": true, "gov": "committed"}
 - {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/blog-e59c9119.md", "verdict_ok": false, "gov": "reverted+queued"}
+
+## [2026-08-24T03:04] gardener · run
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/blog-e59c9119.md", "verdict_ok": false, "gov": "reverted+queued"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/claude-708a3ff3.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/claude-sonnet-4-6-vs-gpt-5-1-benchmarks-pricing-context-wind-e802ab8b.md", "verdict_ok": true, "gov": "committed"}
+- {"action": "/Users/jonasblasques/Dev/corpus/corpus/ai-engineering/sources/boundary-intelligence-why-what-you-can-access-matters-more-t-270b143f.md", "verdict_ok": false, "gov": "reverted+queued"}
