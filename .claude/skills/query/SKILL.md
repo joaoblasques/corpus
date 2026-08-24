@@ -64,7 +64,7 @@ gap is the session **WebSearch** tool; `bin/query.py fetch-and-queue` (which wra
 
 ## External / headless origin (e.g. claudesidian / Obsidian vault)
 This op can be delegated from outside the corpus — claudesidian (the user's Obsidian
-vault at `/Users/jonasblasques/Dev/second-brain`) calls it headless via
+vault at `/Users/jonasblasques/Dev/AIOS`) calls it headless via
 `cd /Users/jonasblasques/Dev/corpus && CORPUS_QUERY_ORIGIN=claudesidian claude -p "/query <q>"`.
 
 When `$CORPUS_QUERY_ORIGIN` is set (a non-interactive, vault-delegated run):

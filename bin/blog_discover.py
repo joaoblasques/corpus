@@ -23,7 +23,7 @@ ROOT = BIN.parent
 WEB = ROOT / "raw" / "web"
 CONFIG = BIN / "blog_discover.yaml"
 LEDGER = ROOT / "raw" / ".blogs_discovered.txt"
-_CLIP = Path.home() / "Dev" / "second-brain" / "00_Inbox" / "Clippings"
+_CLIP = Path.home() / "Dev" / "AIOS" / "30_Resources" / "Clippings"
 SCRAPE_LIST = Path(os.environ.get("CORPUS_BLOG_SCRAPE", str(_CLIP / "blogs to scrape.md")))
 REVIEW = Path(os.environ.get("CORPUS_BLOG_REVIEW", str(_CLIP / "Blogs to review.md")))
 

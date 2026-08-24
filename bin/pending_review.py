@@ -21,10 +21,10 @@ LOG_PATH = ROOT / "corpus" / "log.md"
 # Book-review queue lives in the Obsidian vault (phone-tickable); reading it here is fine.
 BOOK_REVIEW_PATH = Path(os.environ.get(
     "CORPUS_BOOK_REVIEW",
-    str(Path.home() / "Dev" / "second-brain" / "00_Inbox" / "Clippings" / "Books to review.md")))
+    str(Path.home() / "Dev" / "AIOS" / "30_Resources" / "Clippings" / "Books to review.md")))
 BLOG_REVIEW_PATH = Path(os.environ.get(
     "CORPUS_BLOG_REVIEW",
-    str(Path.home() / "Dev" / "second-brain" / "00_Inbox" / "Clippings" / "Blogs to review.md")))
+    str(Path.home() / "Dev" / "AIOS" / "30_Resources" / "Clippings" / "Blogs to review.md")))
 BOOK_REMINDER_STAMP = ROOT / "raw" / ".book_review_reminded"
 BOOK_REMINDER_INTERVAL_DAYS = 7
 

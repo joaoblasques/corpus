@@ -5,6 +5,7 @@
 
 # Raw source material (personal ingestion channels — not committed to standalone repo)
 raw/_inbox/*
+raw/_archive/*
 raw/matter/*
 raw/notes/*
 raw/web/*

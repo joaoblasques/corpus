@@ -27,7 +27,7 @@ import github_client as gh  # noqa: E402
 import collect_github as cg  # noqa: E402
 
 LEDGER = ROOT / "raw" / ".github_proposed.txt"
-_CLIP = Path.home() / "Dev" / "second-brain" / "00_Inbox" / "Clippings"
+_CLIP = Path.home() / "Dev" / "AIOS" / "30_Resources" / "Clippings"
 REVIEW = Path(os.environ.get("CORPUS_GITHUB_REVIEW", str(_CLIP / "GitHubs to review.md")))
 
 # `- [ ] owner/repo · …` — a review-queue entry; the checked variant is `[x]`.

@@ -32,7 +32,7 @@ CONFIG = BIN / "book_sources.yaml"
 # from their phone — it syncs via their vault sync. Overridable via env for tests.
 REVIEW = Path(os.environ.get(
     "CORPUS_BOOK_REVIEW",
-    str(Path.home() / "Dev" / "second-brain" / "00_Inbox" / "Clippings" / "Books to review.md")))
+    str(Path.home() / "Dev" / "AIOS" / "30_Resources" / "Clippings" / "Books to review.md")))
 LEDGER = ROOT / "raw" / ".books_fetched.txt"
 # Matches a CHECKED review line: `- [x] [Title](url) · ...`
 _REVIEW_CHECKED_RE = re.compile(r"^- \[[xX]\]\s+\[([^\]]+)\]\((https?://[^)]+)\)")

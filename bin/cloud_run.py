@@ -32,7 +32,7 @@ COLLECTORS = {
 
 def plan_steps() -> list[dict]:
     return [
-        {"step": "clone_repos", "detail": "clone corpus (main) + second-brain (read-only)"},
+        {"step": "clone_repos", "detail": "clone corpus (main) + AIOS (read-only)"},
         {"step": "collect_sources", "detail": "gmail, github(+ledger), x, pdf(Drive API), obsidian(vault clone)"},
         {"step": "drain_youtube_queue", "detail": "move raw/_pending/youtube/* into raw/_inbox/"},
         {"step": "ingest", "detail": "ingest-auto: route to existing domains, write corpus/ pages"},
