@@ -15,6 +15,9 @@ sources:
   - path: raw/_inbox/web-what-is-deepspark-how-deepseek-made-every-llm-50400-faster-w-50574fc0.md
     channel: web
     ingested_at: 2026-08-21
+  - path: raw/_inbox/web-what-is-deepspark-deepseek-s-speculative-decoding-method-tha-2865909b.md
+    channel: web
+    ingested_at: 2026-08-24
 aliases:
   - speculative decoding
   - draft-and-verify decoding

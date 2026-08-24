@@ -3,13 +3,29 @@ okf_version: "0.1"
 ---
 # Corpus Index
 
-> Last updated: 2026-08-22 | Total pages: 638 | Total sources: 2522
+> Last updated: 2026-08-24 | Total pages: 657 | Total sources: 2561
 
 This file is auto-maintained by Claude. Do not edit by hand.
 
 ## Domains
 
 ### ai-engineering
+- [Interaction Model](/ai-engineering/interaction-model.md) — concept · draft · Thinking Machines lab; harness ceiling (helpers simpler than model); TML-Interaction-Small (276B MoE, 12B active); 200ms micro-turns; two-model coordination (fast interaction + slow background); Sutton's Bitter Lesson applied to interactivity
+- [Human-in-the-Loop (HITL)](/ai-engineering/human-in-the-loop.md) — concept · draft · 4 HITL patterns (approval gates, review+correction, exception escalation, periodic audits); error compounding risk; confident wrongness; identify 2-3 checkpoints per workflow; map by consequence (irreversible actions → gates)
+- [STORM: Multi-Perspective AI Research Workflow](/ai-engineering/sources/storm-multi-perspective-research-workflow-2f95a619.md) — source · draft · Stanford NLP STORM; five expert personas (Domain Expert, Skeptic, Practitioner, Journalist, Newcomer); 25% organization quality improvement; persona friction reveals gaps; six-step workflow; common failure modes
+- [OpenAI Codex Record-and-Replay (MindStudio)](/ai-engineering/sources/openai-codex-record-replay-b15ef5fb.md) — source · draft · Semantic encoding vs pixel-coordinates; AI-powered resilience vs brittle RPA; 4-step workflow; best for repetitive predictable non-judgmental tasks; falls short on dynamic UIs
+- [Brand Context Folder for AI Agents](/ai-engineering/sources/brand-context-folder-d82a39c4.md) — source · draft · 3-5 plain-text files for AI consumption (Voice & Tone, Positioning, Visual Identity, Personas, Samples); anti-examples critical; Voice & Tone most important; keep under 700-2000 words
+- [AI Crawlers: Cloudflare Radar 2025](/ai-engineering/sources/ai-crawlers-cloudflare-radar-2025-9abe6d87.md) — source · draft · Cloudflare data: GPTBot 5%→30% (dominant 2025), ClaudeBot 27%→21%, Meta-ExternalAgent new at 19%, Bytespider 42%→7%; robots.txt voluntary; 30% global web traffic is bots
+- [AI Crawl:Referral Ratio (Cloudflare)](/ai-engineering/sources/ai-crawl-referral-ratio-cloudflare-009f8507.md) — source · draft · Anthropic at 70,900:1 (crawls 71K pages per 1 referral); Mistral at 0.1:1 (10x more referrals than crawls); AI drives far less referral traffic than search despite heavy crawling
+- [Pay-Per-Crawl (Cloudflare)](/ai-engineering/sources/pay-per-crawl-cloudflare-8eb15448.md) — source · draft · HTTP 402 as payment mechanism; 3 publisher options (Allow/Charge/Block); Cloudflare as Merchant of Record; third path beyond binary (block or free access); private beta
+- [TokenBudgeting: Enterprise Token Spend](/ai-engineering/sources/tokenbudgeting-enterprise-token-spend-2c43f8d2.md) — source · draft · SemiAnalysis n=50+ enterprises; Tokenmaxxing: Meta 60T/30 days, Uber burned annual budget in 4 months; budgets $250-$40K/month; >70% of Anthropic+OpenAI ARR from coding; next verticals: cyber, then white-collar
+- [Seed Audio 1.0: ByteDance Audio Scene Generation](/ai-engineering/sources/seed-audio-1-0-bytedance-3af2ff8f.md) — source · draft · Visual-conditioned audio generation; $0.18/min; dialogue + ambient + SFX as unified output; context-aware vs text-only; part of ByteDance Seed model family
+- [Seedance 2.5: MindStudio Overview](/ai-engineering/sources/seedance-2-5-mindstudio-overview-2f561530.md) — source · draft · 3rd gen ByteDance video model; 30-second output, 4K, 50 multimodal references; addresses clip-stitching; audio-conditioned; competitive positioning vs Sora/Runway/Kling/Veo 3
+- [Seed Audio → Seedance Workflow](/ai-engineering/sources/seed-audio-seedance-workflow-53f11534.md) — source · draft · Audio-first video generation: generate audio track first → feed as Seedance reference; better lip sync + fewer re-rolls; prosody control before video generation
+- [AI Strategy Bets Framework](/ai-engineering/sources/ai-strategy-bets-framework-7785ab65.md) — source · draft · Dan Pupius / General Partnership; 4-axis bets (token economics, model self-sufficiency, platform lock-in, regulatory); fragile token abundance; wrapper companies bet model won't acquire their feature
+- [Why Specialization Is Inevitable](/ai-engineering/sources/why-specialization-inevitable-d7f8db1c.md) — source · draft · Goldfeder/LeCun/Shwartz-Ziv 2026; No Free Lunch Theorem (Wolpert & Macready 1997); bio/market/ML convergence on specialization; "universal generality is a practical myth"; finite resources make breadth-depth tradeoff concrete
+- [NVIDIA Vera CPU for AI Agents](/ai-engineering/sources/nvidia-vera-cpu-agents-387fc690.md) — source · draft · 88 custom Olympus Arm cores; 1.8 TB/s GPU link (double Grace); agentic workloads broke GPU/CPU balance (loop: think/tool-call/code); Meta/Oracle/ByteDance/CoreWeave; sold only inside NVIDIA racks
+- [CIO AI Choices 2026 (Tunguz)](/ai-engineering/sources/cio-ai-choices-2026-3ac6158c.md) — source · draft · Infrastructure+DevTools +68.5%, Security +17.6% (only 2/5 sectors up); Business Applications -36.2% (seat-based exposed to agents); payment processor vs software business distinction; Agentforce handles 50% of Salesforce customer interactions
 - [Sakana Fugu](/ai-engineering/sakana-fugu.md) — entity · draft · Multi-model orchestrator; classifies prompts and routes to best-fit model upfront (not ensemble); two tiers (Fugu / Fugu Ultra); Sakana AI (Tokyo, 2023)
 - [Seedance 2.5: Volcano Arc IP Licensing](/ai-engineering/sources/seedance-2-5-volcano-arc-ip-licensing-41a7a0cc.md) — source · draft · ByteDance video model (4K, 30s) + Volcano Arc licensed IP marketplace; first commercial AI-video revenue-sharing platform
 - [Seedance 2.5: 50 Multimodal References](/ai-engineering/sources/seedance-2-5-features-explained-992932d0.md) — source · draft · 30s solves clip-stitching; 4K for post-production latitude; 50 simultaneous references anchors generation to a visual brief
@@ -1636,6 +1652,7 @@ This file is auto-maintained by Claude. Do not edit by hand.
 - [Herder](/mlops/herder.md) — entity · draft · modern tmux-style multiplexer; session-vs-process-state snapshots, built-in agent-awareness (working/idle/blocked/done), thin-client remote mode, Herda Plus plugin
 
 ### productivity
+- [PM AI Leverage Ladders](/productivity/sources/pm-ai-leverage-ladders-371da5c2.md) — source · draft · Colin Matthews / Lenny's Newsletter; 3 ladders (personal/product/systems leverage); top of each ladder = AI completes multi-step tasks and checks its own results; domain expertise as multiplier; AI-native PM skill framework
 - [Addyist - EDM Music Artist](/productivity/sources/addyist-edm-music-artist-a623dd39.md) — source · stub · ['Addyist, an EDM artist, shares his journey of self-discovery in music production during the 2020 p…
 - [Actually Structured Journaling (Jan 2025)](/productivity/sources/actually-structured-journaling-jan-2025-c5377690.md) — source · stub · The author critiques Cal Newport's structured journaling approach, advocating for a more structured …
 - [Be Sincere—Not Serious](/productivity/sources/be-sincere-not-serious-7162b644.md) — source · stub · The article discusses the importance of being sincere rather than serious in one's approach to chall…

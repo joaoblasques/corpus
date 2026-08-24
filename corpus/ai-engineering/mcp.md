@@ -99,9 +99,16 @@ sources:
   - path: raw/_inbox/web-the-ultimate-guide-to-claude-connectors-fe48cf1b.md
     channel: web
     ingested_at: 2026-08-21
+  - path: raw/_inbox/web-your-ai-agent-just-got-20-000-new-tools-on-x402-7f602fc7.md
+    channel: web
+    ingested_at: 2026-08-24
 aliases:
   - MCP
   - Model Context Protocol
+  - x402
+  - x402 protocol
+  - agentic payments
+  - agentic wallet
   - MCP connector API
   - mcp_servers
   - MCPToolset
@@ -577,6 +584,31 @@ Claude Connectors are Anthropic-vetted MCP implementations that appear in the co
 
 See also: [Agent Security](/ai-engineering/agent-security.md).
 
+## x402: agentic payments over MCP
+
+The **x402 protocol** (originally built by Coinbase, now open source under the Linux Foundation) enables autonomous agents to pay for tool calls at the HTTP layer — no pre-provisioned API keys or human-in-the-loop billing approval required [^src33].
+
+**How it works**: when a server requires payment, it returns `HTTP 402 Payment Required` with available payment schemes and pricing. The agent's wallet signs a payment authorization and retries the request. The whole exchange happens at the HTTP layer [^src33].
+
+x402 pairs naturally with MCP: a tool-using client can inspect MCP tool metadata, detect a payment requirement, authorize payment, and retry automatically — enabling fully autonomous tool discovery and payment [^src33].
+
+**Apify x402 integration** (20,000+ Actors) [^src33]:
+- Apify brought 20,000+ web automation Actors into the x402 ecosystem — roughly 10× the protocol's prior tool count.
+- Payment: USDC on the Base blockchain (EIP-3009 / Permit2 signatures).
+- Two payment schemes:
+  - **`exact`** — fixed price per request; for Actors with unknown cost, Apify layers a $1.00 prepaid-deposit and refund flow on top (off-chain metering, balance refunded after 60 minutes of inactivity).
+  - **`upto`** (x402 v2) — client authorizes a maximum; server charges only actual usage, from zero up to the ceiling. Preferred for variable-cost batch runs.
+
+**Agentic wallet**: Coinbase's Agentic Wallet CLI (`awal`) handles the payment authorization natively — reads the 402 challenge, signs from an on-chain wallet, and retries — so coding agents (Claude Code, Codex, etc.) can use paid tools without any manual provisioning [^src33].
+
+**Practical upside**: "You don't have to provision each service individually. You simply state the desired outcome to the agent, and it discovers, prices, and assembles the tools to reach it autonomously." [^src33]
+
+The signed payment signature stays valid across multiple calls while the prepaid balance lasts, minimizing on-chain settlement operations. [^src33]
+
+Compare: Cloudflare's **pay-per-crawl** applies HTTP 402 to AI crawler access to web content (publisher side), while x402 applies it to AI agent access to API tools (tool-provider side). Both signal the same architectural direction: HTTP 402 as the standard negotiation mechanism for programmatic content and capability access in the agentic web.
+
+See also: [Selling to AI Agents](/ai-business/selling-to-ai-agents.md) · [Pay-per-Crawl](/ai-engineering/sources/pay-per-crawl-cloudflare-8eb15448.md)
+
 ## See also
 
 - [Multi-Agent Systems](/ai-engineering/multi-agent-systems.md) — MCP is the coordination layer for multi-agent architectures
@@ -625,3 +657,4 @@ See also: [Agent Security](/ai-engineering/agent-security.md).
 [^src30]: [MCP vs. REST/HTTP API vs. Kafka: The Architect's Guide to Agentic AI Integration](../../raw/web/web-mcp-vs-rest-http-api-vs-kafka-the-architect-s-guide-to-agent-e36f1d1c.md) — Kai Waehner, kai-waehner.de, 2026-04-10
 [^src31]: [Enterprise Agentic AI Landscape 2026: Trust, Flexibility, and Vendor Lock-in](../../raw/web/web-enterprise-agentic-ai-landscape-2026-trust-flexibility-and-v-d6ce5909.md) — Kai Waehner, kai-waehner.de, 2026-04-06
 [^src32]: [The Ultimate Guide to Claude Connectors](../../raw/web/web-the-ultimate-guide-to-claude-connectors-fe48cf1b.md) — Tiago Forte / Forte Labs, 2026-08-21; selective sampling limits, per-connector failures, Lethal Trifecta security risk
+[^src33]: [Your AI agent just got 20,000+ new tools on x402](../../raw/web/web-your-ai-agent-just-got-20-000-new-tools-on-x402-7f602fc7.md) — Apify blog, 2026; x402 protocol (Coinbase/Linux Foundation), MCP + x402 integration, upto vs exact payment schemes, Apify 20,000+ Actors, agentic wallet

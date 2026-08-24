@@ -2,6 +2,26 @@
 
 > OKF v0.1 change log. Newest first, grouped by date.
 
+## 2026-08-24
+
+* **Ingest**: 33 sources from raw/_inbox/ — ingest-auto run; 33 processed, 17 deferred
+  - sources: web-wiki-memory-dc2a4a1e, web-inside-thinking-machines-interaction-models-cc471afb, web-how-deep-agents-run-untrusted-code-without-a-sandbox-631cdcf9, web-harbor-x-langchain-a-unified-stack-for-evaluating-agents-6c497653, web-sub-agents-vs-agent-teams-in-claude-code-what-s-the-differen-b8f4eec5, web-how-to-build-a-multi-perspective-ai-research-workflow-using-2f95a619, web-how-to-use-claude-code-s-goal-command-with-routines-for-full-2493b0af, web-human-in-the-loop-checkpoints-for-ai-agents-why-full-autonom-1088ada5, web-openai-codex-record-and-replay-how-to-automate-repetitive-co-b15ef5fb, web-the-ai-context-war-why-siri-claude-tag-and-codex-are-all-sol-cc721441, web-how-to-build-a-brand-context-folder-that-makes-every-ai-outp-d82a39c4, web-from-googlebot-to-gptbot-whos-crawling-your-site-in-2025-9abe6d87, web-the-crawl-before-the-fall-of-referrals-understanding-ais-imp-009f8507, web-introducing-pay-per-crawl-enabling-content-owners-to-charge-8eb15448, web-tokenbudgeting-our-conversations-with-enterprises-on-token-s-2c43f8d2, web-your-ai-agent-just-got-20-000-new-tools-on-x402-7f602fc7, web-what-is-deepspark-deepseek-s-speculative-decoding-method-tha-2865909b, web-qwen3-max-vs-claude-opus-4-7-*, web-qwen3-7-plus-vs-claude-opus-4-7-*, web-qwen3-max-vs-claude-opus-4-6-*, web-qwen3-7-plus-vs-claude-opus-4-6-*, web-the-twilight-of-the-chatbots-28b4d489, web-your-ai-strategy-is-making-bets-do-you-know-which-ones-7785ab65, web-why-specialization-is-inevitable-d7f8db1c, web-scarfbench-benchmarking-ai-agents-for-enterprise-java-framew-86548262, web-what-does-nvidia-s-vera-cpu-actually-do-387fc690, web-sonnet-5-review-i-ran-64-generations-to-find-out-if-it-s-wor-9f5b9a73, web-what-is-retrieval-augmented-generation-d8aec4d8, web-what-is-seed-audio-1-0-bytedance-s-audio-scene-generator-for-3af2ff8f, web-what-is-seedance-2-5-bytedance-s-30-second-ai-video-model-wi-2f561530, web-how-to-use-seed-audio-as-a-reference-for-seedance-video-gene-53f11534, web-how-top-pms-increase-their-leverage-with-ai-371da5c2, web-the-cio-s-choices-are-clear-in-2026-3ac6158c
+  - domains: ai-engineering (×31), productivity (×1), ai-engineering/cio (×1)
+  - pages created: [/ai-engineering/interaction-model.md, /ai-engineering/human-in-the-loop.md, /ai-engineering/sources/storm-multi-perspective-research-workflow-2f95a619.md, /ai-engineering/sources/openai-codex-record-replay-b15ef5fb.md, /ai-engineering/sources/brand-context-folder-d82a39c4.md, /ai-engineering/sources/ai-crawlers-cloudflare-radar-2025-9abe6d87.md, /ai-engineering/sources/ai-crawl-referral-ratio-cloudflare-009f8507.md, /ai-engineering/sources/pay-per-crawl-cloudflare-8eb15448.md, /ai-engineering/sources/tokenbudgeting-enterprise-token-spend-2c43f8d2.md, /ai-engineering/sources/seed-audio-1-0-bytedance-3af2ff8f.md, /ai-engineering/sources/seedance-2-5-mindstudio-overview-2f561530.md, /ai-engineering/sources/seed-audio-seedance-workflow-53f11534.md, /ai-engineering/sources/ai-strategy-bets-framework-7785ab65.md, /ai-engineering/sources/why-specialization-inevitable-d7f8db1c.md, /ai-engineering/sources/nvidia-vera-cpu-agents-387fc690.md, /ai-engineering/sources/cio-ai-choices-2026-3ac6158c.md, /productivity/sources/pm-ai-leverage-ladders-371da5c2.md]
+  - pages updated: [/ai-engineering/agent-memory.md, /ai-engineering/agent-execution-isolation.md, /ai-engineering/agent-evaluation.md, /ai-engineering/multi-agent-systems.md, /ai-engineering/claude-code.md, /ai-engineering/context-engineering.md, /ai-engineering/mcp.md, /ai-engineering/speculative-decoding.md, /ai-engineering/claude-models.md, /ai-engineering/rag.md, /ai-engineering/long-running-agents.md, /ai-engineering/ai-agent.md]
+  - deferred: 17 sources to raw/_inbox/_REVIEW.md (trivial content, outdated articles, no-domain-fit, newsletter digests)
+
+* **Collectors**: gmail=1, blog_promote=0, obsidian=13, book_discover=0, blog_discover=2, book_fetch=0, pdf=0, image=0, books=0, arxiv=0, youtube=0, github_discover=5, github_promote=5, github=0, x=0, links_refetch=0
+* **Ingest**: 33 ingested · 17 deferred · status=ok
+* **YoutubeQuick**: 0 intake · 0 rescued · 0 skipped · status=ok
+* **DocsQuick**: 0 intake · 31 thin · 19 llm_fail · status=ok
+* **YoutubeReap**: 0 removed · status=ok
+* **Gardener**: 4 stubs deepened · status=ok
+* **Heal**: 19 citations repointed · 0 unfixable · 2 hubs reindexed · 34 cross-domain links · status=ok
+* **Depth**: 485 knowledge · 1537 sources · ratio 1:3.2
+* **GapResolver**: 0 gap dispatched · 0 sources queued · status=ok
+* **Lint**: 3 broken wikilinks · 0 broken citations · 0 orphans · 1322 stubs  ⚠ INTEGRITY ISSUES — run bin/corpus_lint.py
+* **OKF**: 0 violations
 ## 2026-08-23
 
 * **Ingest**: 11 sources from raw/_inbox/ — ai-engineering domain

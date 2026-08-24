@@ -207,6 +207,9 @@ sources:
   - path: raw/web/web-on-ai-coding-and-its-discontents-cal-newport-f18f4c7c.md
     channel: web
     ingested_at: 2026-08-14
+  - path: raw/_inbox/web-how-to-use-claude-code-s-goal-command-with-routines-for-full-2493b0af.md
+    channel: web
+    ingested_at: 2026-08-24
 aliases:
   - Claude Code
   - claude-code
@@ -229,7 +232,7 @@ tags:
   - corpus/ai-engineering
   - entity
 created: 2026-06-12
-updated: 2026-07-06
+updated: 2026-08-24
 last_confirmed: 2026-07-06
 confidence: 0.95
 ---
@@ -496,6 +499,56 @@ Production experience with routines surfaces failure modes rarely discussed in l
 - *Permission failures*: routines need permissions pre-granted. "routine-triggered Claude sessions don't inherit your interactive session's approved permissions" [^src20]. Use `--permission-mode auto` only after auditing what it actually allows.
 - *Context contamination*: long-running routines accumulate context rot across many consecutive sessions. Schedule a forced `/compact` or session reset every N runs.
 - *Prompt-injection via issue content*: routines that read GitHub issues and act on them are vulnerable to crafted issue text. Sanitize inputs or scope permissions to read-only + specific repo paths [^src20].
+
+### Custom /goal command + cron: DIY autonomous scheduling
+
+Distinct from the built-in `/goal` (§ Command taxonomy), a **custom slash command file** at `.claude/commands/goal.md` encodes the same "set a finish condition, run until done" pattern for unattended execution via `claude --print` (non-interactive mode) [^src62]. This approach is suited to environments where the built-in `/goal` UI is not the integration point — e.g., cron jobs, CI pipelines, or external scheduling systems.
+
+**How the custom command works** [^src62]:
+
+A file at `.claude/commands/goal.md` becomes `/goal` in any Claude Code session run from that project directory. Minimal structure:
+```
+You are completing a bounded, autonomous task.
+Goal: $ARGUMENTS
+Instructions:
+- Do not ask questions. Make reasonable assumptions.
+- When complete, output exactly: GOAL_COMPLETE: [one-line summary]
+- If you cannot complete it, output exactly: GOAL_FAILED: [reason]
+- Nothing after the completion line.
+```
+
+`$ARGUMENTS` is whatever is passed when invoking: `claude -p "/goal audit all TODO comments and open a GitHub issue for each one"` [^src62].
+
+**Two routine storage locations** [^src62]:
+
+| Location | Behavior | Best for |
+|---|---|---|
+| `CLAUDE.md` | Read at every session start | Standing context: project overview, file restrictions, tool preferences, safety constraints |
+| `.claude/commands/` | Invoked explicitly (manually or via script) | Recurring task definitions with steps, constraints, and output format |
+
+**Running headless** [^src62]: `claude --print` (or `-p`) puts Claude into non-interactive mode — executes the prompt and exits. Combined with `--allowedTools` to pre-authorize specific tools (Bash, Read, Write, Edit, GitHub), this eliminates runtime permission prompts that would hang unattended runs.
+
+**Cron wiring** [^src62]:
+```bash
+# Run at 02:00 every night; cd first so CLAUDE.md is found
+0 2 * * * cd /path/to/project && /usr/local/bin/claude --print "/nightly-quality" >> /var/log/claude-nightly.log 2>&1
+```
+Key discipline: use the full path to `claude` (cron has a minimal `$PATH`; `which claude` reveals the path); always `cd` to the project directory before invoking so `CLAUDE.md` and `.claude/` are discoverable.
+
+**Failure detection** [^src62]: grep for the exit signal markers in the log:
+```bash
+if grep -q "GOAL_FAILED" "$LOG_FILE"; then
+  mail -s "Claude routine failed" admin@example.com < "$LOG_FILE"
+fi
+```
+
+**Multi-step scheduling** [^src62]: a shell script calls `claude --print` multiple times sequentially (one call per routine), checking exit codes or log markers between calls to decide whether to continue. This is the simplest way to build multi-step autonomous workflows without the cloud routines infrastructure.
+
+**Runtime guards** [^src62]:
+- `timeout 300 claude --print "/nightly-quality"` — hard-kills the process after 5 minutes; prevents runaway cost and CI pipeline blocking
+- `--dangerously-skip-permissions` — only for sandboxed/containerized environments; prefer `--allowedTools` for production to minimize prompt surface
+
+Note: this pattern predates and is distinct from Claude Code's native [Routines](/ai-engineering/claude-code.md#routines-scheduled-automations) (cloud-hosted, no cron management required). The cron + `--print` approach is useful when: (a) local file access is required, (b) the cloud routine infrastructure is unavailable, or (c) integrating Claude into an existing shell script pipeline.
 
 ### /loop skill for DevOps monitoring
 
@@ -1366,3 +1419,4 @@ Cal Newport's 2026 field report from 300+ software engineers[^src61]:
 Newport's broader point: even in the best-case-scenario setting for AI (code and math — structured languages + massive training data), "we're still struggling to figure out how to actually use these tools in a way that makes sense in the long run." AI is a normal technology, not an infinity machine.
 
 [^src61]: [On AI Coding and Its Discontents](../../raw/web/web-on-ai-coding-and-its-discontents-cal-newport-f18f4c7c.md) — Cal Newport, 2026-08-11
+[^src62]: [How to Use Claude Code's /goal Command with Routines for Fully Autonomous Scheduled Workflows](../../raw/web/web-how-to-use-claude-code-s-goal-command-with-routines-for-full-2493b0af.md) — MindStudio blog, 2026-07-01

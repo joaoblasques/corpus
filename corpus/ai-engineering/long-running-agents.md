@@ -21,6 +21,9 @@ sources:
   - path: raw/_inbox/web-i-built-a-very-small-long-running-agent-ecfdf958.md
     channel: web
     ingested_at: 2026-08-11
+  - path: raw/_inbox/web-the-twilight-of-the-chatbots-28b4d489.md
+    channel: web
+    ingested_at: 2026-08-24
 aliases:
   - long-running agent
   - long-running agents
@@ -31,7 +34,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-06-16
-updated: 2026-08-11
+updated: 2026-08-24
 ---
 
 # Long-Running Agents
@@ -156,6 +159,35 @@ Result: ~2 hours of agent runtime → a working implementation of 6 spec require
 
 General rule: **any task with an easily verifiable outcome** (known source of truth to compare against, or a metric to optimize) is a good candidate. The direction: toward multi-agent harnesses where multiple agents share a filesystem but maintain separate context windows, with an evaluator agent that dramatically improves performance even on tasks that aren't fully verifiable [^src5].
 
+## Empirical capability benchmarks (2026)
+
+Independent organizations tracking how much human work a single agent prompt can produce document better-than-exponential improvement across the AI stack [^src6]:
+
+- **METR / UK AISI**: estimate human programmer-hours equivalent that frontier AI can execute with one prompt; both report super-exponential growth curves.
+- **Epoch**: Opus 4.7, running autonomously for 14 hours, produced a software package that would take a human team 2–17 weeks ($251 in token costs) [^src6].
+- **Author's experiments (Ethan Mollick)**: Fable worked autonomously for 9 hours on complex software projects "that would have taken a team well over a week" [^src6].
+
+These benchmarks reinforce the METR time-horizon curve from [Agent Evaluation](/ai-engineering/agent-evaluation.md): task-completion time horizons doubling roughly every seven months since 2019.
+
+**Cost floor note**: frontier 10+-hour runs are not cheap. The Epoch result at $251 is representative of current cost; the cost of a comparable run is falling but not negligible. See [Agent Cost Management](/ai-engineering/agent-cost-management.md) for budget/circuit-breaker patterns.
+
+## From co-intelligence to agent management: the chatbot transition
+
+Ethan Mollick's characterization of the usage mode shift [^src6]:
+
+> "We are moving from a world where non-experts use chatbots to fill in gaps to one in which experts use agents to get work done."
+
+The dominant mode until recently was **co-intelligence**: ask the AI, check the result, ask for the next step, guide carefully. This is still common and useful, but increasingly not how agents are used for high-value work. Long-running agents require "a different way of working" — the human role becomes manager, not collaborator [^src6].
+
+**The harness advantage compounds this shift**: agents come with harnesses (tools, environments) and apps (Claude Code, Codex) that amplify model capability further, separate from raw model improvements [^src6]. This is consistent with [Agent Harness](/ai-engineering/agent-harness.md)'s "10% model, 90% harness" framing.
+
+**Organizational uptake (OpenAI internal data, joint study with academic economists)** [^src6]:
+- 25% of OpenAI workers have at least four agents running at one time every week.
+- Legal, HR, and other non-tech functions have adopted agents at nearly the same rate as engineers.
+- Domain expertise, not profession, predicts Claude Code success: "the more domain experience someone had, the more successful they were in using Claude Code in that domain."
+
+**The "canary in the coal mine" framing** [^src6]: OpenAI's internal uptake is treated as an early signal of what will happen more broadly in knowledge-work organizations. At this level of adoption, "work at OpenAI looks like managing AI."
+
 ## See also
 
 - [Agentic Coding](/ai-engineering/agentic-coding.md) — the conductor→orchestrator shift that autonomous agents represent
@@ -168,4 +200,5 @@ General rule: **any task with an easily verifiable outcome** (known source of tr
 [^src3]: [Rakuten — Claude Managed Agents case study](../../raw/web/web-rakuten-claude-managed-agents-case-study-claude-by-anthropic.md) — Yusuke Kaji, Rakuten
 [^src4]: [Assign tasks from anywhere in Claude Cowork (Dispatch)](../../raw/web/web-assign-tasks-from-anywhere-in-claude-cowork-claude-help-cent.md) — Anthropic Help Center
 [^src5]: [I Built a Very Small Long-Running Agent](../../raw/web/web-i-built-a-very-small-long-running-agent-ecfdf958.md) — Jason Ganz, dbt Roundup
+[^src6]: [The Twilight of the Chatbots](../../raw/web/web-the-twilight-of-the-chatbots-28b4d489.md) — Ethan Mollick, One Useful Thing, 2026-07-01; METR/UK AISI benchmarks, Epoch Opus 4.7 result, OpenAI internal uptake data, chatbot→agent transition framing
 </content>

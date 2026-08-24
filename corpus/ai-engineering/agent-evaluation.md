@@ -54,7 +54,22 @@ sources:
   - path: raw/_inbox/web-selecting-the-right-ai-evals-tool-hamels-blog-hamel-husain-daa87ecb.md
     channel: web
     ingested_at: 2026-07-06
+  - path: raw/_inbox/web-harbor-x-langchain-a-unified-stack-for-evaluating-agents-6c497653.md
+    channel: web
+    ingested_at: 2026-08-24
+  - path: raw/_inbox/web-scarfbench-benchmarking-ai-agents-for-enterprise-java-framew-86548262.md
+    channel: web
+    ingested_at: 2026-08-24
+  - path: raw/_inbox/web-sonnet-5-review-i-ran-64-generations-to-find-out-if-it-s-wor-9f5b9a73.md
+    channel: web
+    ingested_at: 2026-08-24
 aliases:
+  - ScarfBench
+  - enterprise Java framework migration benchmark
+  - cross-framework migration evaluation
+  - How I AI Bench
+  - hybrid eval scoring
+  - human-LLM judge hybrid
   - agent evaluation
   - LLM evaluation
   - LLM evals
@@ -79,16 +94,21 @@ aliases:
   - eval-audit
   - SWE-Bench Pro
   - SWE-Bench Pro 2026
+  - Harbor eval harness
   - Harbor benchmark tool
   - regression-style eval
   - model overlap analysis
   - Jaccard overlap
+  - LangSmith Sandboxes
+  - Harbor LangChain integration
+  - agent eval environment
+  - test.sh verifier
 tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-21
-updated: 2026-07-06
-last_confirmed: 2026-07-06
+updated: 2026-08-24
+last_confirmed: 2026-08-24
 ---
 
 # Agent Evaluation
@@ -349,6 +369,110 @@ OpenAI's Harness Engineering result: three engineers, five months, ~1M lines of 
 
 The `evals-skills` open-source plugin (Hamel Husain) provides Claude Code skills that guard against common eval mistakes: `eval-audit` (diagnostic sweep across six areas with prioritized action list), `error-analysis`, `write-judge-prompt`, `validate-evaluator`, `evaluate-rag`, `build-review-interface`, `generate-synthetic-data` [^src12]. All major eval vendors (Braintrust, LangSmith, Phoenix) now ship MCP servers — agents can query traces directly, but methodology is still required to know what to do with them.
 
+## Harbor eval harness + LangChain integration
+
+**TL;DR**: Harbor is an eval harness that runs agents in isolated, reproducible environments for each task — the environment is a first-class part of the task definition, unlike LLM evals [^harbor].
+
+The key difference between agent evals and LLM evals [^harbor]:
+- LLM evals call the model and score the response — no environment needed
+- Agent evals require a real environment the agent can read, write, and act on — environment is part of the task
+
+**Harbor's three inputs** [^harbor]:
+1. **Your agent** (connected via `langgraph.json` registry + `make_graph` factory)
+2. **Your dataset** (tasks, each consisting of an Environment + Instruction + Evaluation script)
+3. **Your sandbox** (LangSmith Sandboxes, Daytona, Docker, Modal, E2B — interchangeable behind `-e` flag)
+
+**Task anatomy** [^harbor]:
+- *Environment* — Dockerfile / Docker Compose YAML defining the starting state
+- *Instruction* — Markdown task description passed to the agent
+- *Evaluation script* — `test.sh`; checks agent artifacts and state, not just the final response
+
+The evaluation script as a verifier is what separates agent evals from LLM evals: agents produce files, modify state, and interact with the environment, so the verifier must examine artifacts, not just the output text [^harbor].
+
+### LangGraph integration
+
+Harbor treats `langgraph.json` as a registry: it lists dependencies and maps a graph name to the factory function that builds the agent [^harbor]. The agent code stays unchanged; `make_graph` is the only entry point Harbor calls. For every trial, Harbor copies the agent into the trial's sandbox, installs dependencies into a fresh virtual environment, and runs the graph in isolation.
+
+```json
+{
+  "dependencies": ["deepagents>=0.6.10,<0.7.0"],
+  "graphs": {
+    "deep_agent": "./agent.py:make_graph"
+  }
+}
+```
+[^harbor]
+
+**Model-agnostic factory**: the `make_graph` function can accept a `config` argument; Harbor passes the model selected via `--model` in `configurable.model` — so the same agent code runs against any model without modification [^harbor].
+
+### LangSmith Sandboxes: horizontal scaling
+
+Each trial gets its own fresh LangSmith sandbox — a clean cloud execution environment [^harbor]. This enables hundreds of trials in parallel instead of churning through them serially on one machine. Parallel isolation means trials never share state.
+
+**Trial definition**: one run of one agent on one task. Because agents are non-deterministic, `n_attempts` repeats each task multiple times and averages scores — a single lucky or unlucky run does not define the result [^harbor].
+
+### Traces as explanations
+
+With the `--plugin langsmith` flag, Harbor records every job to LangSmith: syncs the dataset, creates an experiment, and logs a run per trial with the verifier's reward as feedback [^harbor]. If the agent supports LangSmith tracing, traces attach directly — giving the full step-by-step trajectory alongside the score.
+
+> "The score tells you whether a trial passed; the trace tells you why." [^harbor]
+
+This is the observability property that trace-based monitoring (§Trace-based production monitoring above) identifies as essential for agent debugging — scores alone tell you something went wrong; traces tell you where.
+
+### Full eval stack (LangChain x Harbor)
+
+| Layer | Role |
+|---|---|
+| Harbor | Eval harness — orchestrates trials |
+| Deep Agents / LangGraph | Agent under test |
+| LangSmith Sandboxes | Isolated cloud execution environment per trial |
+| LangSmith | System of record — datasets, experiments, traces, scores |
+
+The surface area you bring: your agent code, your dataset, a LangSmith account, and `--plugin langsmith` [^harbor].
+
+## ScarfBench: framework migration as a benchmark category
+
+ScarfBench (IBM Research) is an open benchmark for evaluating AI agents on cross-framework Java migration tasks — specifically migrations among Spring, Jakarta EE, and Quarkus [^scarfbench].
+
+**Why migration requires a new benchmark category** [^scarfbench]: existing software engineering benchmarks (SWE-bench, BugFix) measure bug-fixing and code generation. Framework migration presents a fundamentally different challenge: success requires not just translating code, but also preserving behavior, adapting build systems, and navigating runtime dependencies. "Framework migration requires translating framework semantics, not just source code."
+
+**Evaluation criteria** [^scarfbench]: unlike traditional benchmarks that compare generated code against reference implementations, ScarfBench evaluates whether migrated applications actually:
+1. **Build successfully**
+2. **Deploy correctly**
+3. **Pass behavioral validation**
+
+Build success alone significantly overestimates migration quality — in practice, compile success consistently exceeds deploy success, which in turn exceeds behavioral success [^scarfbench].
+
+**Key findings from frontier agent evaluation** [^scarfbench]:
+
+- *Agent overconfidence*: Claude Code reported successful builds for 29/30 whole applications; only 22 actually built successfully. The single application classified as failed by the agent ultimately built correctly. "Agent self-assessment should not be treated as a reliable signal of migration completion. Independent build and test validation remains essential."
+
+- *Migration is iterative, not linear*: the most-visited layers were Configuration, Web, Database, and Service. Common transitions were Configuration ↔ Web and Service ↔ Database — migration is a dependency-resolution process rather than source-to-source transformation.
+
+- *Configuration dominates effort*: agents repeatedly returned to configuration-related artifacts while resolving framework differences and dependency issues — not to the code transformation itself.
+
+- *Environment and tooling failures*: agents frequently struggled with Docker cache inconsistencies, port connectivity problems, and Maven wrapper issues — "operational concerns often delayed validation even when the source-code migration itself was largely complete."
+
+- *Jakarta EE is hardest*: migration difficulty depends strongly on the target framework; Jakarta EE proves particularly challenging across frontier models.
+
+**The benchmark gap ScarfBench fills**: framework migration success rates and the iterative dependency-resolution behavior are invisible to benchmarks that measure code generation or bug-fixing in isolation. ScarfBench provides an open leaderboard, dataset, evaluation infrastructure, and GitHub repository for comparing agent architectures on this problem class.
+
+## Hybrid human/LLM scoring (the "How I AI Bench" methodology)
+
+A practitioner eval design pattern for mitigating the biases of both human vibe-checking and pure LLM-as-judge evaluation [^hiaiabench]:
+
+**Problem**: one-off vibe checks are not repeatable or comparable across model releases. Pure LLM-as-judge can be swayed by formatting, option order, or self-preference. Human evaluators introduce inconsistency and anchoring bias.
+
+**How I AI Bench** (Claire Vo, ChatPRD) combines [^hiaiabench]:
+- **70% human vibe scoring**: gut-feel ratings exported as structured JSON via a local HTML scoring page, enabling blind comparative evaluation
+- **30% LLM-as-judge scoring**: automated rubric-based scoring complementing the human signal
+
+The 70/30 split is calibrated to counter both failure modes simultaneously — "instead of trusting either alone" [^hiaiabench]. Human scores anchor on holistic quality that LLM judges miss; LLM scores correct for human inconsistency on criteria that can be articulated as a rubric.
+
+**Benchmark setup used**: 64 total generations across 5 models (Sonnet 5, Sonnet 4.6, Opus 4.8, GPT-5.5, Gemini 3 Pro), tested blind on four task types: PRD quality, prototype generation, agentic task completion, and agent personality [^hiaiabench].
+
+**Alignment with established eval discipline**: this hybrid approach is consistent with Hamel Husain's recommendation to pair binary judgments with detailed critiques (see §Maintaining trust in evals above) and Spotify's finding that LLM judges add a second calibration layer on top of quantitative metrics [^hiaiabench].
+
 ## See also
 
 - [Error Analysis](/ai-engineering/error-analysis.md) — the discovery phase that defines what these evals measure
@@ -376,6 +500,9 @@ The `evals-skills` open-source plugin (Hamel Husain) provides Claude Code skills
 [^src11]: [LLM Evals: Everything You Need to Know](../../raw/web/web-llm-evals-everything-you-need-to-know-hamels-blog-hamel-husa-5bf201ee.md) — Hamel Husain & Shreya Shankar, hamel.dev
 [^src12]: [Evals Skills for Coding Agents](../../raw/web/web-evals-skills-for-coding-agents-hamels-blog-hamel-husain-f8a26550.md) — Hamel Husain, hamel.dev
 [^src13]: [SWE-Bench Pro Results 2026: AI Coding Model Rankings](../../raw/web/web-swe-bench-pro-results-2026-ai-coding-model-rankings-dca3b106.md) — Andrew Filev & Dmitry Krasnov, Zencoder blog, 2026
+[^harbor]: [Harbor x LangChain: A Unified Stack for Evaluating Agents](../../raw/web/web-harbor-x-langchain-a-unified-stack-for-evaluating-agents-6c497653.md) — LangChain blog, collected 2026-07-01; Harbor eval harness, LangSmith Sandboxes, LangGraph integration, traces as explanations, test.sh verifier
+[^scarfbench]: [ScarfBench: Benchmarking AI Agents for Enterprise Java Framework Migration](../../raw/web/web-scarfbench-benchmarking-ai-agents-for-enterprise-java-framew-86548262.md) — IBM Research, Hugging Face Blog, 2026-07-01; cross-framework migration evaluation, agent overconfidence finding, configuration-dominates-effort finding, build+deploy+behavior eval criteria
+[^hiaiabench]: [Sonnet 5 Review: I Ran 64 Generations to Find Out If It's Worth It](../../raw/web/web-sonnet-5-review-i-ran-64-generations-to-find-out-if-it-s-wor-9f5b9a73.md) — Claire Vo (ChatPRD), Lenny's Newsletter / podcast, 2026-07-01; How I AI Bench, 70/30 human/LLM-judge hybrid scoring, 5-model blind eval methodology
 
 <!-- RELATED:START (generated by bin/corpus_heal.py related — do not edit inside) -->
 

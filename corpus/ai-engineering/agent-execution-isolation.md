@@ -15,6 +15,9 @@ sources:
   - path: raw/web/web-self-hosted-sandboxes.md
     channel: web
     ingested_at: 2026-06-25
+  - path: raw/_inbox/web-how-deep-agents-run-untrusted-code-without-a-sandbox-631cdcf9.md
+    channel: web
+    ingested_at: 2026-08-24
 aliases:
   - agent execution isolation
   - agent sandbox
@@ -23,13 +26,22 @@ aliases:
   - microVM isolation
   - agent computer
   - execution isolation
+  - WASM isolation
+  - QuickJS WASM
+  - code interpreter isolation
+  - capability isolation
+  - durable pauses
+  - additive capability model
+  - subtractive capability model
+  - Meta rule of two
+  - rule of two
 tags:
   - corpus/ai-engineering
   - synthesis
 created: 2026-07-21
-updated: 2026-07-21
-confidence: 0.8
-last_confirmed: 2026-07-21
+updated: 2026-08-24
+confidence: 0.82
+last_confirmed: 2026-08-24
 ---
 
 # Agent Execution Isolation
@@ -76,6 +88,55 @@ Recommended mitigations [^langchain] — treat sandbox output as untrusted data;
 
 This *corroborates* the defense-in-depth framing already on [Agent Security](/ai-engineering/agent-security.md): execution isolation is one layer and does not substitute for the others. Isolation contains blast radius; it does not contain persuasion.
 
+## In-process isolation: WASM + QuickJS (additive capability model)
+
+LangChain Deep Agents describes a second isolation model alongside the remote-container/microVM approach: an **in-process interpreter isolated by WebAssembly** [^deepagents]. This is not a sandbox in the traditional sense — it is closer to a capability-constrained runtime, and the security model is fundamentally different.
+
+**The three design requirements** [^deepagents]:
+1. **Execution isolation** — agent-written code cannot compromise the host process
+2. **Capability isolation** — the agent can only touch data and actions deliberately handed to it
+3. **Durable pauses** — execution can stop for human approval and resume without losing state
+
+### Execution isolation via WebAssembly
+
+WASM is a compact binary format executing inside a sandboxed in-process VM with its own separate linear memory. Code inside WASM cannot dereference host process pointers — it cannot read or corrupt memory it was not handed. CPU/memory limits are straightforward to enforce; instrumentation is possible without standing up a separate machine [^deepagents].
+
+Used for untrusted code isolation by: AWS, Shopify, Figma, WebContainers, wasmtime [^deepagents].
+
+### QuickJS as the in-WASM runtime
+
+QuickJS is a small, fast, ECMA-compliant JavaScript engine written in C that compiles cleanly to WASM — so the engine itself sits behind the WASM boundary [^deepagents]. JavaScript is a natural fit for orchestration scripts agents write: expressive enough, no compile step required.
+
+**Key packages** (experimental as of 2026) [^deepagents]:
+- `quickjs-rs` — the runtime and Python bindings for running QuickJS through WASM
+- `langchain-quickjs` — Deep Agents middleware built on quickjs-rs
+
+### Capability isolation: additive vs subtractive
+
+The critical architectural difference between an interpreter and a traditional sandbox [^deepagents]:
+
+| Model | Starting state | Security work |
+|---|---|---|
+| **Sandbox (subtractive)** | Computer-shaped (filesystem, shell, dependencies) | Clawing back capabilities — begins with broad access |
+| **Code interpreter (additive)** | Nothing — no file reads, no network, no package install | Adding only what is deliberately bridged in |
+
+Out of the box the QuickJS interpreter can only use language primitives (variables, functions, loops). Every capability beyond that — calling a subagent, reading a file — must be explicitly bridged in through the harness. The harness sets limits: max concurrent subagents per call, max spawned total [^deepagents].
+
+### Meta's rule of two
+
+The capability isolation design is anchored to Meta's rule of two: until prompt injection is solved, an agent should be able to do no more than **two** of the following simultaneously [^deepagents]:
+- Access sensitive data
+- Be exposed to untrusted content
+- Change state or communicate externally
+
+The wedding-planner scenario illustrates the risk: an agent that reads sensitive budget data AND processes external RSVPs AND emails vendors satisfies all three. A single hostile RSVP can read the private budget and email a vendor "approved" changes [^deepagents]. Capability bridging enforces this constraint mechanically.
+
+### Durable pauses via LangGraph state serialization
+
+Because QuickJS runs inside WASM, the interpreter state can be serialized — the entire linear memory snapshot — and stored in LangGraph state [^deepagents]. On resume, the harness restores the snapshot and feeds the result back into the call that was waiting. From the program's perspective: an async call that took arbitrarily long to return. Human-in-the-loop approval with a multi-day wait time becomes just an async pause.
+
+**Contrast with the remote-container model** (§disagreement above): a container sandbox provides a full OS surface; the WASM/QuickJS interpreter provides only what was explicitly bridged. Neither is strictly stronger — they address different threat surfaces. The container is better for agents that need genuine OS access; the interpreter is better for orchestration scripts that should be constrained to a narrow capability surface.
+
 ## Related pages
 
 - [Agent Security](/ai-engineering/agent-security.md) — the parent security page; self-hosted sandboxes, credential brokering, and the lethal trifecta live there. This page depends-on its threat vocabulary.
@@ -84,8 +145,10 @@ This *corroborates* the defense-in-depth framing already on [Agent Security](/ai
 - [VPS for Agents](/mlops/vps-for-agents.md) — the self-hosted analogue: a dedicated remote machine as the agent's computer (cross-domain → mlops).
 - [Claude Managed Agents](/ai-engineering/claude-managed-agents.md) — Anthropic's self-hosted-sandbox model, where execution stays inside the customer trust boundary [^selfhosted].
 - [Agent Harness](/ai-engineering/agent-harness.md) — where confirmation gates and approval callbacks sit relative to the sandbox boundary.
+- [Multi-Agent Systems](/ai-engineering/multi-agent-systems.md) — dynamic subagents are the capability that the WASM interpreter unlocks at the orchestration level.
 
 [^langchain]: [Agents need their own computer. Here's how to give them one safely.](../../raw/web/web-agents-need-their-own-computer-here-s-how-to-give-them-one-s-4934c442.md) — LangChain blog, collected 2026-07-16
 [^sottiaux]: [A quote from Thibault Sottiaux](../../raw/web/web-a-quote-from-thibault-sottiaux-b62b68c9.md) — via Simon Willison's Weblog, 16 Jul 2026
 [^sandcastle]: [Sandcastle — orchestrate sandboxed coding agents](../../raw/web/github-mattpocock-sandcastle-orchestrate-sandboxed-coding-ag.md) — Matt Pocock
 [^selfhosted]: [Self-hosted sandboxes for Managed Agents](../../raw/web/web-self-hosted-sandboxes.md) — Anthropic
+[^deepagents]: [How Deep Agents Run Untrusted Code Without a Sandbox](../../raw/web/web-how-deep-agents-run-untrusted-code-without-a-sandbox-631cdcf9.md) — LangChain blog, collected 2026-07-01; WASM execution isolation, QuickJS interpreter, additive capability model, Meta's rule of two, durable pauses via LangGraph state serialization

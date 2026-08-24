@@ -120,9 +120,18 @@ sources:
   - path: raw/_inbox/web-how-ai-agents-manage-memory-and-avoid-forgetfulness-a914ab49.md
     channel: web
     ingested_at: 2026-08-21
+  - path: raw/_inbox/web-wiki-memory-dc2a4a1e.md
+    channel: web
+    ingested_at: 2026-08-24
 aliases:
   - agent memory
   - memory
+  - wiki memory
+  - wiki-memory
+  - AutoWiki
+  - DeepWiki
+  - LLM knowledge base
+  - agent-maintained wiki
   - short-term memory
   - long-term memory
   - vector memory
@@ -166,8 +175,8 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-21
-updated: 2026-06-25
-last_confirmed: 2026-06-25
+updated: 2026-08-24
+last_confirmed: 2026-08-24
 confidence: 0.87
 ---
 
@@ -603,6 +612,33 @@ Hermes stores long-term memory as a self-hosted website (static site) and semant
 
 Hermes requires meta-prompting with the `/goal` command to produce useful results — raw instructions without the meta-prompt wrapper produce generic outputs [^src33].
 
+## Wiki memory — precomputed structured knowledge layer
+
+**TL;DR for wiki memory**: instead of retrieving raw chunks at query time (RAG), an agent-maintained wiki precomputes and maintains a higher-level synthesis so agents do not re-derive structure on every query [^src38].
+
+The core pattern: run an agent over raw source material (logs, notes, code, docs, Slack threads, transcripts) and produce a compact set of files that future agents can use to understand the domain faster [^src38]. The result is distinct from a vector store: a wiki is persistent, structured, inspectable, and updated over time — not a heap of semantically-similar chunks.
+
+**Wiki memory vs RAG** [^src38]:
+- RAG retrieves raw source chunks at query time; the agent must rediscover structure on every query.
+- Wiki memory precomputes structure once; future queries work from the pre-built representation.
+- The LLM wiki (Karpathy's framing) "incrementally builds and maintains a persistent markdown wiki that sits between the user and the raw sources" [^src38].
+
+**Notable implementations** [^src38]:
+- **DeepWiki** (Cognition) — AI-generated documentation for GitHub repositories; the first publicly recognized instance of this pattern; intended to give humans and coding agents a higher-level mental map of a codebase.
+- **AutoWiki** (Factory) — analyzes a codebase, generates structured browsable documentation that stays current as the repo changes; similar scope to DeepWiki.
+- **Karpathy's LLM Wiki** — the generalized form: works over arbitrary source files, not just code; agent incrementally builds and maintains persistent markdown pages.
+- **LangMem, Letta, Mem0, Zep** — adjacent memory systems that attack the broader agent-memory problem; wiki memory is notable because it often uses "the simplest possible substrate: files" [^src38].
+
+**Best use case** [^src38]: durable domain knowledge — facts about a codebase, a research domain, a company's operational knowledge. Not suited for short-term conversation state, user preferences, or high-frequency event logs (those are better handled by the typed memory architecture, §above).
+
+**Files as the preferred substrate** [^src38]: files are attractive because they are inspectable, editable, versionable, and easy for agents to read and write. The compression/maintenance loop:
+- *What is the raw data?* → anything an agent can read or access
+- *Best format for compressed data?* → files
+- *How to compress?* → an agent
+- *How to maintain?* → an agent
+
+This wiki memory pattern is the upstream motivation for this corpus's own design and the Karpathy LLM wiki pattern (§LLM wiki pattern above). It is also the pattern DeepWiki and AutoWiki productized.
+
 ## See also
 
 - [Context Window Management](/ai-engineering/context-window-management.md) — strategies for what to keep, compress, or drop from short-term memory
@@ -653,6 +689,7 @@ Hermes requires meta-prompting with the `/goal` command to produce useful result
 [^src35]: [I Built The Best Claude Memory System (Beats Hermes)](../../raw/youtube/youtube-H9BUkgDf5Y4-i-built-the-best-claude-memory-system-beats-hermes.md) — Simon Scrapes, YouTube; full video primary source for MemSearch+Hermes+GBrain composite stack
 [^src36]: [Karpathy's LLM Wiki - Full Beginner Setup Guide](../../raw/youtube/youtube-iXd0t60YmMw-karpathy-s-llm-wiki-full-beginner-setup-guide.md) — Teacher's Tech, YouTube; beginner walkthrough with Obsidian + Claude Code; primary source for Karpathy's "Obsidian=IDE, LLM=programmer, wiki=codebase" framing
 [^src37]: [How AI Agents Manage Memory and Avoid Forgetfulness](../../raw/web/web-how-ai-agents-manage-memory-and-avoid-forgetfulness-a914ab49.md) — ByteByteGo, 2026-08-21; four-tier hierarchy, functional memory types, retrieval as the core hard problem
+[^src38]: [Wiki Memory](../../raw/web/web-wiki-memory-dc2a4a1e.md) — LangChain blog, collected 2026-07-01; agent-maintained structured knowledge layer, DeepWiki/AutoWiki/Karpathy examples, files as preferred substrate
 
 <!-- RELATED:START (generated by bin/corpus_heal.py related — do not edit inside) -->
 

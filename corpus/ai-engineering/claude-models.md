@@ -78,6 +78,18 @@ sources:
   - path: raw/_inbox/web-whats-new-in-claude-sonnet-5-ab37cad9.md
     channel: web
     ingested_at: 2026-08-23
+  - path: raw/_inbox/web-qwen3-max-vs-claude-opus-4-7-benchmarks-pricing-context-wind-625fea33.md
+    channel: web
+    ingested_at: 2026-08-24
+  - path: raw/_inbox/web-qwen3-7-plus-vs-claude-opus-4-7-benchmarks-pricing-context-w-7400ed7c.md
+    channel: web
+    ingested_at: 2026-08-24
+  - path: raw/_inbox/web-qwen3-max-vs-claude-opus-4-6-benchmarks-pricing-context-wind-07733d5f.md
+    channel: web
+    ingested_at: 2026-08-24
+  - path: raw/_inbox/web-qwen3-7-plus-vs-claude-opus-4-6-benchmarks-pricing-context-w-98975d27.md
+    channel: web
+    ingested_at: 2026-08-24
 aliases:
   - Claude model lineup
   - Claude models
@@ -367,6 +379,20 @@ The progression reflects both capability improvements and cost-per-task optimiza
 
 **API volume growth**: 17× API volume increase on the Claude platform year-over-year (cited at the London event). Metrics like this contextualize why Anthropic rate-limits aggressively — growth at this scale strains even large infrastructure [^src21].
 
+## Qwen3 vs Opus: benchmark snapshot (Requesty, mid-2026)
+
+Requesty comparison pages (thin content; benchmark tables only) [^src25][^src26][^src27][^src28]:
+
+**Qwen3-max vs Claude Opus 4.7**: Claude Opus 4.7 outperforms on 6 of 6 shared benchmarks. Pricing: Qwen3-max at $0.86/$3.44 per million input/output tokens; Opus 4.7 at $5/$25. Context: Qwen3-max 262K vs Opus 4.7 1M. [^src25]
+
+**Qwen3.7-plus vs Claude Opus 4.7**: Claude Opus 4.7 outperforms on 6 of 7 shared benchmarks. Pricing: Qwen3.7-plus at $0.32/$1.28 per million; Opus 4.7 at $5/$25. Both offer 1M context. [^src26]
+
+**Qwen3-max vs Claude Opus 4.6**: Claude Opus 4.6 outperforms on 6 of 6 shared benchmarks. [^src27]
+
+**Qwen3.7-plus vs Claude Opus 4.6**: Models trade wins evenly across shared benchmarks. Qwen3.7-plus at ~6× lower cost. [^src28]
+
+**Pattern**: Claude Opus 4.7 holds a consistent lead over both Qwen3 variants on shared benchmarks; Opus 4.6 matches Qwen3-max but trades evenly with the cheaper Qwen3.7-plus — a cost-performance trade-off relevant when evaluating open/proprietary model alternatives at lower price points.
+
 ## See also
 
 - [Anthropic](/ai-engineering/anthropic.md) — the lab behind these models (company, funding, learning resources)
@@ -395,3 +421,7 @@ The progression reflects both capability improvements and cost-per-task optimiza
 [^src22]: [Programmierung | Claude](../../raw/web/web-programmierung-claude-bbf1e585.md) — Anthropic marketing page (`claude.com/solutions/coding`); also collected in Japanese ([コーディング](../../raw/web/web-claude-469a16cf.md)) as identical content.
 [^src23]: [Introducing Claude Sonnet 5](../../raw/web/web-introducing-claude-sonnet-5-0f764e9b.md) — Anthropic official blog, 2026-06-30
 [^src24]: [What's new in Claude Sonnet 5](../../raw/web/web-whats-new-in-claude-sonnet-5-ab37cad9.md) — Simon Willison, simonwillison.net, 2026-06-30
+[^src25]: [qwen3-max vs claude-opus-4-7 — Requesty](../../raw/web/web-qwen3-max-vs-claude-opus-4-7-benchmarks-pricing-context-wind-625fea33.md) — Requesty, benchmark comparison table; Opus 4.7 wins 6/6
+[^src26]: [qwen3.7-plus vs claude-opus-4-7 — Requesty](../../raw/web/web-qwen3-7-plus-vs-claude-opus-4-7-benchmarks-pricing-context-w-7400ed7c.md) — Requesty, benchmark comparison table; Opus 4.7 wins 6/7
+[^src27]: [qwen3-max vs claude-opus-4-6 — Requesty](../../raw/web/web-qwen3-max-vs-claude-opus-4-6-benchmarks-pricing-context-wind-07733d5f.md) — Requesty, benchmark comparison table; Opus 4.6 wins 6/6
+[^src28]: [qwen3.7-plus vs claude-opus-4-6 — Requesty](../../raw/web/web-qwen3-7-plus-vs-claude-opus-4-6-benchmarks-pricing-context-w-98975d27.md) — Requesty, benchmark comparison table; models trade wins evenly

@@ -21,6 +21,9 @@ sources:
   - path: raw/_inbox/web-how-to-coordinate-multiple-ai-agents-without-copying-and-pas-761b2e25.md
     channel: web
     ingested_at: 2026-08-22
+  - path: raw/_inbox/web-sub-agents-vs-agent-teams-in-claude-code-what-s-the-differen-b8f4eec5.md
+    channel: web
+    ingested_at: 2026-08-24
   - path: raw/notes/notes-clippings-multi-agent-coordination-patterns-five-approaches-and-when-t.md
     channel: notes
     ingested_at: 2026-06-17
@@ -87,11 +90,17 @@ aliases:
   - direct communication pattern
   - negotiation pattern
   - broadcast pattern
+  - hub-and-spoke topology
+  - hub and spoke agents
+  - peer-to-peer agents
+  - Task tool Claude Code
+  - fresh context window sub-agent
+  - parallel sub-agents
 tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-07
-updated: 2026-07-06
+updated: 2026-08-24
 ---
 
 # Multi-Agent Systems
@@ -254,6 +263,49 @@ with file:line references and a recommended fix for each.
 ```
 
 The `description` field is what the orchestrator uses to decide when to delegate automatically — "Reviews code for security issues before commits" routes better than "security expert" [^src5]. A too-large custom agent roster reduces automatic delegation reliability; most teams settle on a handful of well-scoped agents [^src5].
+
+## Sub-agents vs Agent Teams: architectural trade-offs
+
+A practitioner comparison clarifies the topological and capability differences [^src20]:
+
+**Sub-agents (hub-and-spoke topology)** [^src20]:
+- Each sub-agent connects only to the central orchestrator, never to peer sub-agents
+- Claude Code implements sub-agents via the **Task tool** — the orchestrator calls `Task`, which launches a sub-agent with a specific prompt, context, and permissions; the sub-agent runs in its own session and returns a result
+- All communication flows through the parent; sibling sub-agents cannot message each other
+- Fresh context per sub-agent is a **feature, not a limitation** — large orchestration tasks exceed a single context window; sub-agents effectively give each piece of the problem its own working memory
+
+**Agent Teams (peer-to-peer)** [^src20]:
+- Multiple agents can communicate with each other, not just with a central orchestrator
+- A critic agent can review a writer agent's draft and send feedback directly
+- A researcher agent can hand findings to a synthesizer who then queries the researcher for clarification
+- Claude Code has no single built-in agent-team primitive; teams are constructed via shared state (files, databases, message queues), explicit routing by the orchestrator, or multi-agent frameworks like LangGraph
+
+**Architectural trade-off table** [^src20]:
+
+| Dimension | Sub-Agents | Agent Teams |
+|---|---|---|
+| Communication topology | Hub-and-spoke (via parent only) | Peer-to-peer possible |
+| Coordination complexity | Lower | Higher |
+| Best for | Parallel independent work | Collaborative, iterative work |
+| Context isolation | Strong (each agent is independent) | Depends on implementation |
+| Speed advantage | High (parallel execution) | Lower (coordination overhead) |
+| Quality advantage | Lower (no peer review) | Higher (agents can critique each other) |
+| Debuggability | Easier (clear handoffs) | Harder (more interaction points) |
+| Claude Code primitive | `Task` tool | Custom orchestration |
+
+**When sub-agents win** [^src20]:
+- Tasks are naturally parallelizable and independent — five topics to research, none depending on each other
+- Specialized tool scoping — one sub-agent browses web, another runs code, another reads files
+- High-volume batch processing — classifying many inputs simultaneously
+- Predictability and debuggability are priorities
+
+**When agent teams win** [^src20]:
+- Quality-critical output where a second agent critique adds a meaningful filter
+- Debate and consensus — a bullish analyst, a bearish analyst, and a synthesizer produce more robust conclusions than any one agent
+- Iterative refinement — writer drafts → editor critiques → writer revises → editor re-checks
+- Complex reasoning chains where partial conclusions must flow between specialists non-linearly
+
+**Combining both** [^src20]: sophisticated workflows typically use both. Pattern: sub-agents parallelize independent data-gathering (fast, efficient); results feed an agent team for collaborative synthesis (thorough, high-quality). The sub-agent phase handles breadth; the team phase handles quality.
 
 ## pi-subagents: open-source async subagent system
 
@@ -490,3 +542,4 @@ This is the organizational analog of the "compounds across sessions" property of
 [^src17]: [What Is AI Agent Orchestration? How It Works & Examples](../../raw/web/web-what-is-ai-agent-orchestration-how-it-works-examples-c4e0c48a.md) — Zencoder, 2026
 [^src18]: [The Orchestrator Is the Product. The Model Is a Commodity.](../../raw/web/web-the-orchestrator-is-the-product-the-model-is-a-commodity-3e693062.md) — Neeraj Khandelwal, Zencoder newsletter, Jun 2026
 [^src19]: [Incident Report: CVE-2026-LGTM](../../raw/web/web-incident-report-cve-2026-lgtm-61a73fa6.md) — Andrew Nesbitt, via Simon Willison, 26 Jun 2026
+[^src20]: [Sub-Agents vs Agent Teams in Claude Code: What's the Difference and When to Use Each](../../raw/web/web-sub-agents-vs-agent-teams-in-claude-code-what-s-the-differen-b8f4eec5.md) — MindStudio blog, collected 2026-07-01; hub-and-spoke topology, fresh context as feature, Task tool, peer-to-peer agent teams, architectural trade-offs

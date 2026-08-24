@@ -57,6 +57,9 @@ sources:
   - path: raw/web/web-how-to-build-a-smart-chatbot-in-10-mins-with-langchain-99205284.md
     channel: web
     ingested_at: 2026-08-14
+  - path: raw/_inbox/web-what-is-retrieval-augmented-generation-d8aec4d8.md
+    channel: web
+    ingested_at: 2026-08-24
 aliases:
   - RAG
   - retrieval-augmented generation
@@ -71,7 +74,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-21
-updated: 2026-08-14
+updated: 2026-08-24
 ---
 
 # RAG (Retrieval-Augmented Generation)
@@ -340,6 +343,22 @@ Target use case: private document collections (legal, medical, financial) where 
 
 Combined with text-extract-api, forms a fully local document-intelligence pipeline: extract → embed → index → query via voice [^src13].
 
+## RAG origins and chatbot flow (Apify overview)
+
+RAG was introduced publicly in 2020 with the research paper "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks." It combines two previously separate approaches: retrieval-based systems (search a database for the best answer) and generative systems (create answers on the fly) [^src_apify].
+
+The five-step chatbot RAG flow [^src_apify]:
+
+| Step | What happens |
+|---|---|
+| 1. Query understanding | Chatbot analyzes user message to identify intent |
+| 2. Information retrieval | Searches knowledge base for relevant information |
+| 3. Context augmentation | Retrieved information added to conversation context |
+| 4. Response generation | LLM uses query + history + retrieved info to generate answer |
+| 5. Delivery | Final response returned to user |
+
+Four documented benefits [^src_apify]: (1) reduced hallucinations — grounding responses in retrieved facts; (2) adaptability — handles queries with no pre-defined answers; (3) natural language — more natural output than purely retrieval-based systems; (4) lower production cost — a RAG pipeline is far cheaper than training or fine-tuning a large model from scratch.
+
 ## See also
 
 - [Embeddings](/ai-engineering/embeddings.md) — the dense vectors RAG retrieves over; their limits (exact-token loss, no time, disconnected facts) drive hybrid search, temporal filters, and GraphRAG
@@ -420,3 +439,4 @@ LangChain's six core modules: Prompts (dynamic templates), Document Loaders, Vec
 
 [^src_bbe]: [EP220: RAG vs Graph RAG vs Agentic RAG](../../raw/web/web-ep220-rag-vs-graph-rag-vs-agentic-rag-9d90c44e.md) — ByteByteGo, 2026-06-29
 [^src_lc]: [How to Build a Smart Chatbot in 10 mins with LangChain](../../raw/web/web-how-to-build-a-smart-chatbot-in-10-mins-with-langchain-99205284.md) — ByteByteGo / Damien Benveniste, 2026-06-29
+[^src_apify]: [What is retrieval-augmented generation?](../../raw/web/web-what-is-retrieval-augmented-generation-d8aec4d8.md) — Apify Blog, 2026-07-01

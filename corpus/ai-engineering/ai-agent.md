@@ -81,6 +81,9 @@ sources:
   - path: raw/web/web-everyone-gets-an-agent-almost-no-one-gets-the-model-92c58072.md
     channel: web
     ingested_at: 2026-08-14
+  - path: raw/_inbox/web-the-twilight-of-the-chatbots-28b4d489.md
+    channel: web
+    ingested_at: 2026-08-24
 aliases:
   - ai agent
   - agentic AI
@@ -92,7 +95,7 @@ tags:
   - corpus/ai-engineering
   - concept
 created: 2026-05-07
-updated: 2026-06-12
+updated: 2026-08-24
 ---
 
 # AI Agent
@@ -380,6 +383,21 @@ Nick Saraev's pattern for compounding agent improvement over time [^src21]:
 
 Different platforms read different files: Claude reads `CLAUDE.md`, Gemini reads `GEMINI.md`, Codex reads `AGENTS.md`. In a multi-model setup, each model reads its own file and accumulates its own preference history [^src21]. See [CLAUDE.md Conventions](/ai-engineering/claude-md-conventions.md).
 
+## Chatbot → agent: the usage mode transition
+
+The dominant AI usage mode until recently was **co-intelligence**: ask, check, ask for the next step, guide carefully with prompting and human attention. This is still common, but increasingly not how AI produces high-value work [^src23]. Long-running, self-correcting agents do not require constant human intervention and demand a different mental model for working with them [^src23].
+
+The shift: "We are moving from a world where non-experts use chatbots to fill in gaps to one in which experts use agents to get work done. And the best way to use agents is to think of yourself as a manager." [^src23]
+
+**What this shift implies for agent design**: agents come with harnesses (tools, environments) and purpose-built apps (Claude Code, Codex) that amplify model capability separately from raw model improvements [^src23]. Domain expertise, not profession, predicts success: more domain experience → higher success rate and higher-quality output per prompt from Claude Code [^src23].
+
+**Organizational data (OpenAI internal, joint study with academic economists)** [^src23]:
+- 25% of OpenAI workers run four or more agents per week simultaneously.
+- Non-technical functions (legal, HR) adopted agents at nearly the same rate as engineers.
+- OpenAI as a "canary in the coal mine" for what will happen in knowledge work more broadly.
+
+This framing is the Level 3→4 transition from the 4-level framework above: agents stop being interactive tools and become managed autonomous workers.
+
 ## Token rationing: "everyone gets an agent, almost no one gets the model"
 
 Dan Shipper / Mike Taylor (Every, 2026) argue that the era of measuring AI adoption by raw token consumption is ending — compute will be allocated like a portfolio:[^src22]
@@ -392,3 +410,4 @@ Dan Shipper / Mike Taylor (Every, 2026) argue that the era of measuring AI adopt
 Implication for practitioners: the scarce resource is shifting from model access to the ability to prove ROI from agent usage. Organizations that cannot demonstrate returns will face increasing token cost pressure as frontier models become rationed resources.[^src22]
 
 [^src22]: [Everyone Gets an Agent. Almost No One Gets the Model.](../../raw/web/web-everyone-gets-an-agent-almost-no-one-gets-the-model-92c58072.md) — Every (Dan Shipper, Mike Taylor, Kate Lee), 2026-06-29
+[^src23]: [The Twilight of the Chatbots](../../raw/web/web-the-twilight-of-the-chatbots-28b4d489.md) — Ethan Mollick, One Useful Thing, 2026-07-01; chatbot→agent transition, OpenAI internal adoption data, domain-expertise success predictor

@@ -52,7 +52,7 @@ Personal and professional effectiveness for knowledge workers: mental models, ti
 - [Quartz SSG](/productivity/quartz-ssg.md)
 
 <details>
-<summary>Source summaries (25)</summary>
+<summary>Source summaries (26)</summary>
 
 - [7-Day Live Video Challenge Celebration](/productivity/sources/7-day-live-video-challenge-celebration-0240cd2a.md)
 - [9 Lessons from 2024 + My Goals for 2025 - Noah Kagan](/productivity/sources/9-lessons-from-2024-my-goals-for-2025-noah-kagan-1e3af730.md)
@@ -69,6 +69,7 @@ Personal and professional effectiveness for knowledge workers: mental models, ti
 - [Gardening - DIY Hydroponic Rooting Box](/productivity/sources/gardening-diy-hydroponic-rooting-box-b.md)
 - [Harmonica - 5-Minute Daily Practice Routine (Big Tone Train)](/productivity/sources/harmonica-5-minute-daily-practice-routine-big-tone-train-a.md)
 - [Health - Preventing Chlorine Irritation for Swimmers](/productivity/sources/health-preventing-chlorine-irritation-for-swimmers-e.md)
+- [How Top PMs Increase Their Leverage with AI: The Three-Ladder Framework](/productivity/sources/pm-ai-leverage-ladders-371da5c2.md)
 - [Productivity - Dan Koe Strategic Thinking Mental Model](/productivity/sources/productivity-dan-koe-strategic-thinking-mental-model-de.md)
 - [Productivity - Raycast AI Extensions and Automation](/productivity/sources/productivity-raycast-ai-extensions-and-automation-aa.md)
 - [Productivity - Rewire Your Brain for Discipline Dopamine](/productivity/sources/productivity-rewire-your-brain-for-discipline-dopamine-dae.md)
